@@ -13,8 +13,8 @@ objectives:
 - Submit raw reads to ENA using the ENA upload Tool
 time_estimation: 2h
 key_points:
-- Quality Control on Sequences
-- Submission to ENA
+- Clean raw ab1 sequences and compare filtered sequences to NCBI nucleotidic database
+- Submit cleaned and unique sequences to European Nucleotide Archive (ENA) resource
 contributions:
     authorship:
         - Najatamk
