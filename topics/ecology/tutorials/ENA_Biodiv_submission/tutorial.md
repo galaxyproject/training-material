@@ -316,7 +316,7 @@ Contains filtered, compressed sequences.
 
 ## Adding ENA "Webin" credentials to your Galaxy user information
 
-***TODO***: *Having an ENA Submission Account: Make sure you have a submission account with the European Nucleotide Archive (ENA). You will need the identifier and the password.*
+***TODO***: *Having an ENA Submission Account: Make sure you have a submission account with the European Nucleotide Archive (ENA). You will need the identifier and the password, available through https://www.ebi.ac.uk/ena/submit/webin/login.*
 
 >  <hands-on-title> Add your "WEBIN" credentials to your Galaxy account </hands-on-title>
 >  **Instructions:**
