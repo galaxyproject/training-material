@@ -19,11 +19,24 @@ key_points:
   - "One can retrieve NGS data from Sequence Read Archive"
   - "Galaxy can analyze massive amounts of data and make them suitable for secondary analysis"
 subtopic: next-steps
-contributors:
+
+contributions:
+  authorship:
+    - nekrut
+    - mvdbeek
+    - tnabtaf
+    - blankenberg
+
+recordings:
+- captioners:
   - nekrut
-  - mvdbeek
-  - tnabtaf
-  - blankenberg
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 15M
+  youtube_id: 9mIL0tIfZ_o
+  speakers:
+  - nekrut
+
 ---
 
 In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with the FASTQ format produced by most sequencing machines and will finish with the SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.
@@ -388,19 +401,19 @@ You can upload data in Galaxy using one of these ways:
 
 This works well for small files because web browser do not like lengthy file transfers:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FFCDx1rMGAQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{% include _includes/youtube.html id="FFCDx1rMGAQ" title="Uploading data from your computer" %}
 
 ## Using FTP
 
 FTP ([file transfer protocol](https://en.wikipedia.org/wiki/File_Transfer_Protocol)) allows transferring large collection of files:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/hC8KSuT_OP8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{% include _includes/youtube.html id="hC8KSuT_OP8" title="Uploading with FTP" %}
 
 ## From NCBI short read archive
 
 Finally, datasets can be uploaded directly from NCBI's short read archive:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Q4t-beYZ-do" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{% include _includes/youtube.html id="Q4t-beYZ-do" title="Uploading from SRA" %}
 
 > <comment-title></comment-title>
 >

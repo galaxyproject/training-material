@@ -40,6 +40,17 @@ edam_ontology:
 - topic_3697 # Microbial ecology
 - topic_0637 # Taxonomy
 - topic_0080 # Sequence analysis
+
+recordings:
+- youtube_id: PJeS06yiJUM
+  speakers:
+  - bebatut
+  captioners:
+  - sophia120199
+  date: '2023-05-10'
+  galaxy_version: '23.01'
+  length: 1H5M
+
 ---
 
 
@@ -567,7 +578,6 @@ The species identified for Chimay beers are (from the most abundant to the least
 - *Saccharomyces cerevisiae*
 - *Saccharomyces mikatea*: a species generally used in winemaking ({% cite bellon2013introducing %})
 - *Kazachstania martiniae*: *Kazachstania* is a genus from the family Saccharomycetaceaethe.
-
 - *Saccharomyces kudriavzevii*
 - *Brettanomyces bruxellensis*
 

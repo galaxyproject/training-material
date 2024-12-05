@@ -41,6 +41,17 @@ subtopic: eukaryote
 priority: 8
 redirect_from:
  - /topics/genome-editing/tutorials/crispr-screen/tutorial
+
+recordings:
+- captioners:
+  - mblue9
+  date: '2022-03-10'
+  galaxy_version: '21.09'
+  length: 45M
+  youtube_id: wavAf_2ytWg
+  speakers:
+  - mblue9
+
 ---
 
 

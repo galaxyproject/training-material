@@ -18,7 +18,32 @@
             "command": "ruby",
             "args": [
                 "bin/lint.rb",
-                "--format", "plain"
+                "--format", "plain", "--short-path"
+            ],
+            "problemMatcher": {
+                "owner": "ruby",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):(\\d+):(\\d+):(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "endLine": 4,
+                    "endColumn": 5,
+                    "message": 6
+                }
+            }
+        },
+        {
+            "label": "GTN: Lint This File",
+            "command": "ruby",
+            "args": [
+                "bin/lint.rb",
+                "--format", "plain",
+                "--path", "${file}", "--short-path"
             ],
             "problemMatcher": {
                 "owner": "ruby",

@@ -14,7 +14,7 @@ module SchemaValidator
   @TOPIC_SCHEMA_UNSAFE = YAML.load_file('bin/schema-topic.yaml')
   begin
     @TUTORIAL_SCHEMA_UNSAFE = YAML.load_file('bin/schema-tutorial.yaml', aliases: true)
-  rescue
+  rescue StandardError
     @TUTORIAL_SCHEMA_UNSAFE = YAML.load_file('bin/schema-tutorial.yaml')
   end
   @SLIDES_SCHEMA_UNSAFE = YAML.load_file('bin/schema-slides.yaml')
@@ -110,8 +110,8 @@ module SchemaValidator
   def self.lintable?(fn)
     begin
       begin
-        data = YAML.load_file(fn, permitted_classes:[Date])
-      rescue
+        data = YAML.load_file(fn, permitted_classes: [Date])
+      rescue StandardError
         data = YAML.load_file(fn)
       end
     rescue StandardError => e
@@ -195,6 +195,14 @@ module SchemaValidator
     errs = []
     data = lintable?(fn)
     return data if data.nil? || data.is_a?(Array)
+
+    if data.key?('cover') 
+      if !data['cover'].start_with?('https://')
+        if !File.exist?(data['cover'])
+          errs.push("Cover image #{data['cover']} does not exist")
+        end
+      end
+    end
 
     errs.push(*validate_document(data, @news_validator))
     errs

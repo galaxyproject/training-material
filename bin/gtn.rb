@@ -2,12 +2,12 @@
 
 CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
 ORGANISATIONS = YAML.load_file('ORGANISATIONS.yaml')
-FUNDERS = YAML.load_file('FUNDERS.yaml')
+GRANTS = YAML.load_file('GRANTS.yaml')
 
 def automagic_loading(f)
   # Remove our documentation
   f.reject! { |k, v| k == 'description' and v.is_a?(String) }
-  f.reject! { |k| k == 'examples' }
+  f.reject! { |k| k == '_examples' }
 
   # Auto-replace CONTRIBUTORS in enums.
   f.each do |k, v|
@@ -18,7 +18,7 @@ def automagic_loading(f)
         repl = []
         # If one of the elements in this array is CONTRIBUTORS, replace it with the same named variable
         repl << CONTRIBUTORS.keys if v.find { |x| x == 'CONTRIBUTORS' }
-        repl << FUNDERS.keys if v.find { |x| x == 'FUNDERS' }
+        repl << GRANTS.keys if v.find { |x| x == 'GRANTS' }
         repl << ORGANISATIONS.keys if v.find { |x| x == 'ORGANISATIONS' }
         v.replace repl.flatten if repl.length.positive?
       end

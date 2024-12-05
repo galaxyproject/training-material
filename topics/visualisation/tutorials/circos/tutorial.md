@@ -13,14 +13,32 @@ time_estimation: "2h"
 key_points:
   - "Circos is an effective tool to make circular visualisation of high-dimensional datasets"
   - "Circos is often used for genomics, but can also be used for other types of data"
-contributors:
+contributions:
+  authorship:
   - shiltemann
   - hexylena
   - gallardoalba
+  funding:
+  - gallantries
+level: Intermediate
+
+recordings:
+- captioners:
+  - beatrizserrano
+  - hexylena
+  - shiltemann
+  - khanteymoori
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 50M
+  youtube_id: tbqeUP67w-Y
+  speakers:
+  - hexylena
+
 ---
 
 
-Circos ({% cite krzywinski2009circos %}) is a software package for visualizing data in a circular layout. This makes Circos ideal for exploring relationships between objects or positions. Circos plots have appeared in thousands of scientific publications. Although originally designed for visualizing genomic data, it can create figures from data in any field.
+Circos ({% cite krzywinski2009circos %}) is a software package for visualizing data in a circular layout. This makes Circos ideal for exploring relationships between objects or positions. Circos plots have appeared in thousands of scientific publications. Although originally designed for visualizing genomic data, it can create figures from data in any field. In this tutorial we discuss the Galactic Circos ({% cite Rasche_2020 %}) tool which enables you to access Circos via the convenient Galaxy interface, and even produce plots as part of your workflows!
 
 ![Panel of example Circos images](../../images/circos-sample-panel.png)
 
