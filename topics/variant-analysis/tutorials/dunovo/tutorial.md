@@ -132,11 +132,12 @@ We then evaluated the quality of the data by running FastQC on both datasets (fo
 
 > ### {% icon hands_on %} Hands-on: Evaluating input read quality
 >
-> Run {% icon tool %} **FastQC** with the following parameters:
->  - {% icon param-file %} *Short read data from your current history*: One of the raw FASTQ datasets (`SRR1799908_forward`)
->  - Leave the rest of the options as their defaults.
+> 1. {% icon tool %} **FastQC** with the following parameters:
+>    - {% icon param-file %} *Short read data from your current history*: One of the raw FASTQ datasets (`SRR1799908_forward`)
+>    - Leave the rest of the options as their defaults.
 >
-> Then repeat with the other FASTQ file (`SRR1799908_reverse`).
+> 2. Repeat with the other FASTQ file (`SRR1799908_reverse`)
+>
 {: .hands_on}
 
 
@@ -388,7 +389,7 @@ Instead of manually re-running all the tools in the variant calling section, you
 
 We've prepared two workflows which split the above analysis into two steps:
 
-1. [Using Du Novo](https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial) to create consensus sequences from raw reads.
+1. [Using Du Novo](./workflows/) to create consensus sequences from raw reads.
   - This will generate trimmed DCS and SSCS files from raw sequencing data.
   - This does not include the FastQC step. You should always run FastQC on your raw reads first, to check the quality of your sequencing run before proceeding with the analysis.
 
@@ -399,7 +400,7 @@ We've prepared two workflows which split the above analysis into two steps:
    > But again, if you'd like to help improve Du Novo, consider turning it on.
    {: .comment}
 
-2. [Calling variants](https://usegalaxy.org/u/nstoler/w/copy-of-du-novo-gtn-tutorial) from consensus sequences.
+2. [Calling variants](./workflows/) from consensus sequences.
   - This takes a pair of FASTQ files and calls variants using them.
   - If you'd like variants from both DCS and SSCS, you'll have to run this twice, once on each.
   - **N.B.** Remember that this workflow is designed for the above *ABL1* analysis. If you want to use it for any other dataset, you'll have to change the relevant options.
@@ -415,4 +416,4 @@ You can use the variant calling workflow to call variants using the SSCS instead
 You should now understand duplex sequencing, rare variants, and be able to process the former to find the latter.
 
 ### If things don't work...
-...you need to complain. Use [Galaxy's Help Channel](https://help.galaxyproject.org/) to do this.
+...you need to complain. Use [Galaxy's Help Forum](https://help.galaxyproject.org/) to do this.
