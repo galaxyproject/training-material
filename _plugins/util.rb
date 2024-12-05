@@ -23,6 +23,7 @@ ALLOWED_SHORT_IDS = [
   'param_value_from_file',
   'random_lines1',
   'sort1',
+  'csv_to_tabular',
   # 'ucsc_table_direct1', # This does not work, surprisingly.
   'upload1',
   'wc_gnu',
@@ -100,6 +101,10 @@ def fix_version(version)
 end
 
 def acceptable_tool?(tool_id)
+  if ! tool_id.is_a?(String)
+    return false
+  end
+
   # Public TS links are fine
   if tool_id.start_with?('toolshed.g2.bx.psu.edu')
     return true
@@ -130,6 +135,19 @@ def acceptable_tool?(tool_id)
 
   # Unacceptable
   return false
+end
+
+
+def tool_id_extractor(wf, path: [])
+  res = []
+  wf['steps'].each do |step_id, step|
+    if step.key?('subworkflow')
+      res += tool_id_extractor(step['subworkflow'], path: path + [step_id])
+    elsif step.key?('tool_id') && ! step['tool_id'].nil?
+      res.push(["#{path.join('/')}/#{step_id}", step['tool_id']])
+    end
+  end
+  res
 end
 
 if __FILE__ == $PROGRAM_NAME

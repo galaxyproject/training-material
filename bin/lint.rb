@@ -1039,6 +1039,28 @@ module GtnLinter
                    ))
     end
 
+    tool_ids = tool_id_extractor(contents)
+
+    # Check if they use TS tools, we do this here because it's easier to look at the plain text.
+    tool_ids.each do |step_id, id|
+      if ! acceptable_tool?(id)
+        results += [
+          ReviewDogEmitter.error(
+            path: @path,
+            idx: 0,
+            match_start: 0,
+            match_end: 0,
+            replacement: nil,
+            message: "A step in your workflow (#{step_id}) uses an invalid tool ID (#{id}) or a tool ID from the testtoolshed. These are not permitted in GTN tutorials. If this is in error, you can add it to the top of _plugins/utils.rb",
+            code: 'GTN:017'
+          )
+        ]
+      end
+    end
+
+
+
+
     if contents.key?('creator')
       contents['creator']
         .select { |c| c['class'] == 'Person' }
@@ -1310,22 +1332,6 @@ module GtnLinter
 
       end
 
-      # Check if they use TS tools, we do this here because it's easier to look at the plain text.
-      contents.split("\n").each.with_index do |text, linenumber|
-        if text.match(/testtoolshed/)
-          results += [
-            ReviewDogEmitter.error(
-              path: @path,
-              idx: linenumber,
-              match_start: 0,
-              match_end: text.length,
-              replacement: nil,
-              message: 'This step uses a tool from the testtoolshed. These are not permitted in GTN tutorials.',
-              code: 'GTN:017'
-            )
-          ]
-        end
-      end
       results += fix_ga_wf(data)
 
       results = filter_results(results, ignores)
