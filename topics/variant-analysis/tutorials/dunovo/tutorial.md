@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "Calling very rare variants"
 subtopic: introduction
-zenodo_link: ""
+zenodo_link: "https://doi.org/10.5281/zenodo.3554549"
 
 questions:
   - "What frequency of variants is so low that it is obscured by sequencing error rate?"
