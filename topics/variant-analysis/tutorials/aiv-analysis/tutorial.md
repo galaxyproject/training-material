@@ -14,6 +14,11 @@ objectives:
 - Construct a sample consensus genome from mapped reads
 - Generate per-segment phylogenetic trees of AIV consensus sequences
 time_estimation: 4H
+input_histories:
+- label: "UseGalaxy.eu"
+  history: https://usegalaxy.eu/published/history?id=0fc6b637aadbc8a2
+- label: "UseGalaxy.org"
+  history: https://usegalaxy.org/published/history?id=31cb33f8e6126823
 key_points:
 - Reassortment of gene segments makes reference-based mapping of influenza sequencing data challenging
 - An alternative to *de-novo* assembly can be mapping to a dynamically chosen reference genome
@@ -75,7 +80,10 @@ Instead, to save some time, you can copy an existing shared history on Galaxy Eu
 
 > <hands-on-title>Prepare the Galaxy history</hands-on-title>
 >
-> 1. Open the [shared history](https://usegalaxy.eu/u/wolfgang-maier/h/influenza-resources) with pre-prepared INSAFlu reference data
+> 1. On Galaxy Europe, open the [shared history](https://usegalaxy.eu/published/history?id=0fc6b637aadbc8a2) with pre-prepared INSAFlu reference data.
+>
+>    On the Galaxy US server, use this [shared history](https://usegalaxy.org/published/history?id=31cb33f8e6126823) instead.
+>
 >
 > 2. Rename the history
 >
@@ -148,7 +156,7 @@ The tool **fastp** lets us perform these tasks and obtain a nice quality report 
 
 > <hands-on-title>QC and read trimming/filtering with fastp</hands-on-title>
 >
-> 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %}
+> 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy1) %}
 >    - *"Single-end or paired reads"*: `Paired Collection`
 >    - *"Select paired collection(s)"*: the uploaded paired collection of sequenced reads
 >    - In *"Filter Options"* under *"Length filtering options"*:
@@ -239,7 +247,7 @@ Now that we have established that things *may* make sense, we can use the output
 
 > <hands-on-title>Obtaining sequences of top hits identified by VAPOR</hands-on-title>
 >
-> 1. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} to extract just the name of the sequence from each line of VAPOR's output
+> 1. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.3+galaxy1) %} to extract just the name of the sequence from each line of VAPOR's output
 >    - {% icon param-collection %} *"File to process"*: collection of score outputs of **VAPOR**
 >    - In {% icon param-repeat %} *"1. Find and Replace"*:
 >      - *"Find pattern"*: `^.+\t>(.+)$`
@@ -250,7 +258,7 @@ Now that we have established that things *may* make sense, we can use the output
 >    - *"Select first"*: `1` lines
 >    - {% icon param-collection %} *"from"*: output of **Replace**
 >
-> 3. {% tool [seqtk_subseq](toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1) %} to extract the reference sequences based on their names reported by VAPOR
+> 3. {% tool [seqtk_subseq](toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.4+galaxy0) %} to extract the reference sequences based on their names reported by VAPOR
 >    - {% icon param-collection %} *"Input FASTA/Q file"*: `References per segment (INSAFlu)`
 >    - *"Select source of sequence choices"*: `FASTA/Q ID list`
 >    - {% icon param-collection %} *"Input ID list"*: the collection output of **Select first**
@@ -268,7 +276,7 @@ If things went well, the hybrid reference we just obtained should be close enoug
 
 > <hands-on-title>Shortening sequence titles</hands-on-title>
 >
-> 1. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %}
+> 1. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.3+galaxy1) %}
 >    - {% icon param-file %} *"File to process"*: the hybrid reference genome; output of **Collapse Collection**
 >    - In {% icon param-repeat %} *"1. Find and Replace"*:
 >      - *"Find pattern"*: `^>([^|]+).+$`
@@ -291,13 +299,13 @@ Having polished the titles of the segments in our hybrid reference genome we are
 
 > <hands-on-title>Read mapping and quality control</hands-on-title>
 >
-> 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %}
+> 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.18) %}
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >    - {% icon param-file %} *"Use the following dataset as the reference sequence"*: hybrid reference genome with shortened names; output of **Replace**
 >    - *"Single or Paired-end reads"*: `Paired Collection`
 >    - *"Select a paired collection"*: quality-trimmed reads; output of **fastp** in QC and Trimming
 >
-> 2. {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0) %}
+> 2. {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.20+galaxy3) %}
 >    - {% icon param-file %} *"SAM/BAM/CRAM data set"*: mapped reads BAM dataset; output of **BWA-MEM**
 >    - *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
 >    - In *"Configure filters"*:
@@ -337,7 +345,7 @@ Unfortunately, the tool we are going to use for this, **ivar consensus**, is not
 
 > <hands-on-title>Splitting mapped reads by genome segment</hands-on-title>
 >
-> 1. {% tool [Split BAM by Reference](toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.2+galaxy1) %}
+> 1. {% tool [Split BAM by Reference](toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.2+galaxy2) %}
 >    - {% icon param-file %} *"BAM dataset to split by reference"*: filtered mapped reads; output of **Samtools view**
 >
 {: .hands_on}
@@ -353,7 +361,7 @@ The output from this step has the desired collection structure, but the names of
 >    - *"that"*: `Matching`
 >    - *"the pattern"*: `^>.+`
 >
-> 2. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %}
+> 2. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.3+galaxy1) %}
 >    - {% icon param-file %} *"File to process"*: output of **Select**
 >    - In {% icon param-repeat %} *"1. Find and Replace"*:
 >      - *"Find pattern"*: `^>(.+)$`
@@ -383,7 +391,7 @@ Now what if we cannot obtain a consensus base for a position with the above crit
 
 > <hands-on-title>Per-segment consensus construction</hands-on-title>
 >
-> 1. {% tool [ivar consensus](toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.4.2+galaxy0) %}
+> 1. {% tool [ivar consensus](toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.4.3+galaxy0) %}
 >    - {% icon param-collection %} *"Bam file"*: the relabeled collection of mapped reads; output of **Relabel identifiers**
 >    - *"Minimum quality score threshold to count base"*: `20`
 >    - *"Minimum frequency threshold"*: `0.7`
@@ -394,7 +402,7 @@ Now what if we cannot obtain a consensus base for a position with the above crit
 >    The output is a consensus sequence in FASTA format, one per segment, with
 >    the names just providing a bit too much detail for our purpose.
 >
-> 2. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %}
+> 2. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.3+galaxy1) %}
 >    - {% icon param-collection %} *"File to process"*: consensus sequences; output of **ivar consensus**
 >    - In {% icon param-repeat %} *"1: Find and Replace"*:
 >      - *"Find pattern"*: `^>Consensus_(.*)_threshold_.*`
@@ -423,7 +431,7 @@ To do so, we are going to combine the reference sequences of all segments with t
 
 > <hands-on-title>Exploring phylogeny</hands-on-title>
 >
-> 1. {% tool [MAFFT](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.520+galaxy0) %}
+> 1. {% tool [MAFFT](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy0) %}
 >    - *"For multiple inputs generate"*: `one or several MSAs depending on input structure`
 >      - In *"Input batch"*:
 >        - {% icon param-repeat %} *"1: Input batch"*
@@ -434,11 +442,19 @@ To do so, we are going to combine the reference sequences of all segments with t
 >
 >    Because both input batches are collections of eight elements each, the result is also a collection of eight MSAs, each aligning all reference sequences of one genome segment plus the consensus sequence we have obtained for that segment against each other.
 >
-> 2. {% tool [IQ-TREE](toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2) %}
+> 2. {% tool [IQ-TREE](toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.3.6+galaxy0) %}
 >    - {% icon param-collection %} *"Specify input alignment file in PHYLIP, FASTA, NEXUS, CLUSTAL or MSF format."*: output of **MAFFT**
 >    - *"Specify sequence type ..."*: `DNA`
 >
 > 3. {% icon galaxy-eye %} Explore each of the final trees produced by IQTree for the different segments
+>
+>    There are two ways to explore the trees in Galaxy:
+>
+>    One option is to open the *Report and Final Tree* datasets produced by IQ-Tree.
+>    When you scroll down through their content, you will find that these feature simple text representations of the trees.
+>
+>    Another option is to expand the *MaxLikelihood Tree* datasets generated by IQ-Tree, then click on {% icon galaxy-barchart %} **Visualize**.
+>    This will let you launch the *Phylogenetic Tree Visualization* in the middle panel, which lets you explore the tree interactively and in different representations.
 >
 >    > <question-title></question-title>
 >    >

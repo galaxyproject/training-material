@@ -13,7 +13,8 @@ time_estimation: "15m"
 key_points:
   - "You can highlight questions, tools and hints with a special syntax"
   - "Self-learning can be done by questions and hidden answers"
-subtopic: writing
+subtopic: getting-started
+priority: 4
 contributions:
   authorship:
   - bebatut
@@ -972,29 +973,29 @@ You can use a dedicated snippet to invite users to run a WorkflowHub workflow:
 
 {% raw %}
 ```markdown
-{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" %}
+{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" version="1" %}
 ```
 {% endraw %}
 
 Rendered:
 
-{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" %}
+{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" version="1" %}
 
 Note that it links to a specific workflow, on any Galaxy server. When this tutorial is opened from within the Tutorial Mode, that link will change to one on the current server, removing the intermediate step.
 
 ### Dockstore
 
-Please note that the dockstore ID should be provided without the `#` character.
+Please note that the dockstore ID should be provided without the `#workflow/` prefix, so starting from `github.com`.
 
 {% raw %}
 ```markdown
-{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="K-mer Profiling HiFi" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" version="v0.1.5" %}
 ```
 {% endraw %}
 
 Rendered:
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="K-mer Profiling HiFi" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" version="v0.1.5" %}
 
 This snippet has the same behaviour, it will use my.galaxy.training links to make them server independent, but in Tutorial Mode it will open on the current server.
 
@@ -1185,23 +1186,25 @@ Sometimes you're writing a large tutorial and at one small step there are multip
 
 Include this markdown where you want your user to choose between the multiple paths:
 
+<!-- GTN:IGNORE:041 we cannot tell code samples from text so we get dupe warnings here. -->
+
 > <code-in-title>Markdown</code-in-title>
 > {% raw %}
 > ```
-> {% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados" default="Avocados"
+> {% include _includes/cyoa-choices.html option1="Ananas of course" option2="Avocados" default="Avocados"
 >        text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}{% endraw %}
 > ```
 {: .code-in}
 
-{% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados" default="Avocados" text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}
+{% include _includes/cyoa-choices.html option1="Ananas of course" option2="Avocados" default="Avocados" text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}
 
-And then they can wrap the relevant sections with a `div` block with the relevant class. You **must** set `markdown="1"` as well to have the inner contents rendered corretly.
+And then they can wrap the relevant sections with a `div` block with the relevant class (if you have space in your option, use `-` in the class). You **must** set `markdown="1"` as well to have the inner contents rendered corretly.
 
 **NB**: If you do not set a default, then on the very first page load, both options will be shown in their entirety. As soon as the user selects one of the options by clicking the relevant button, then the list is filtered. The user's browser generally will remember which button was selected across navigation and page reloads.
 
 > > <code-in-title>Markdown</code-in-title>
 > > ```
-> > <div class="Ananas" markdown="1">
+> > <div class="Ananas-of-course" markdown="1">
 > > - 🍍 are fantastic
 > > - hands on!
 > > - questions!
@@ -1219,7 +1222,7 @@ And then they can wrap the relevant sections with a `div` block with the relevan
 >
 > > <code-out-title></code-out-title>
 > >
-> > <div class="Ananas" markdown="1">
+> > <div class="Ananas-of-course" markdown="1">
 > > - 🍍 are fantastic
 > > - hands on!
 > > - questions!
@@ -1235,7 +1238,19 @@ And then they can wrap the relevant sections with a `div` block with the relevan
 > {: .code-out}
 {: .code-2col}
 
-This can also be used inline: My favourite fruit is an <span class="Ananas">🍍</span><span class="Avocados">🥑</span>.
+> <tip-title>Why ananas-of-course? Name munging</tip-title>
+> CYOAs work by filtering the content based on the class name. Class names cannot contain spaces, so, we need to replace all whitespace with `-`.
+> The exact algorithm we use to create 'safe' IDs is:
+>
+> 1. Remove the following character `"`, `'`, `/`, `;`, `:`, `,`, `.`, `!`, `@`, `#`, `$`, `%`, `^`, `&`, `*`, `(`, `)` from the text.
+> 2. Replace all whitespace with `-`
+> 3. Replace multiple `-`s with a single `-`
+>
+> This results in retaining capitalisation. Hence, `Ananas of course` becomes `Ananas-of-course`.
+> For a more complicated example `(RNA) inhibitors` would become `RNA-inhibitors`.
+{: .tip}
+
+This can also be used inline: My favourite fruit is an <span class="Ananas-of-course">🍍</span><span class="Avocados">🥑</span>.
 
 > <tip-title>Multiple, Disconnected CYOAs</tip-title>
 > If you wish to have multiple CYOAs in a single tutorial, you are free to do that! However you must:
@@ -1255,6 +1270,26 @@ This can also be used inline: My favourite fruit is an <span class="Ananas">🍍
 > ```
 {: .tip}
 
+> <tip-title>Using every branch</tip-title>
+> We, the GTN, don't always know if you *intend* to have not used a specific branch. As such we recommend that if you have a branch that has no steps, you should include a `div` block with the class name of that branch, just so we know for sure you meant it to be empty.
+>
+> E.g. 
+>
+> ```
+> {% raw %}
+> {% include _includes/cyoa-choices.html option1="Yes, they don't pass QC" option2="No" text="Do you think your samples need to be filtered?" %}
+> 
+> <div class="Yes-they-dont-pass-QC" markdown="1">
+> Some content here!
+> </div>
+> 
+> <div class="No" markdown="1">
+> <!-- intentionally empty. This comment itself isn't necessary, but we recommend adding the div. -->
+> </div>
+> 
+> {% endraw %}
+> ```
+{: .tip}
 
 ### URL Parameter
 

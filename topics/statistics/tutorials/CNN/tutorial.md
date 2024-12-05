@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-
 title: Deep Learning (Part 3) - Convolutional neural networks (CNN)
 zenodo_link: https://zenodo.org/record/4697906
 questions:
@@ -10,19 +9,18 @@ objectives:
 - Understand the inspiration behind CNN and learn the CNN architecture
 - Learn the convolution operation and its parameters
 - Learn how to create a CNN using Galaxy's deep learning tools
-- Solve an image classification problem on MNIST digit classification dataset using CNN in Galaxy
+- Solve an image classification problem on MNIST digit classification dataset using
+  CNN in Galaxy
 requirements:
-  -
-    type: internal
-    topic_name: statistics
-    tutorials:
-      - intro_deep_learning
-      - FNN
-      - RNN
+- type: internal
+  topic_name: statistics
+  tutorials:
+  - intro_deep_learning
+  - FNN
+  - RNN
 time_estimation: 2H
 contributors:
 - kxk302
-
 recordings:
 - captioners:
   - FilipposZ
@@ -32,8 +30,19 @@ recordings:
   youtube_id: P1NVYOJrv_4
   speakers:
   - kxk302
+- youtube_id: vp6YF2NRIZk
+  length: 45M
+  galaxy_version: 24.1.3.dev0
+  date: '2024-10-05'
+  speakers:
+  - hujambo-dunia
+  captioners:
+  - hujambo-dunia
+  bot-timestamp: 1728137291
+
 
 ---
+
 
 
 Artificial neural networks are a machine learning discipline that have been successfully applied to problems
@@ -220,7 +229,7 @@ to compare various Machine Learning techniques.
 >    >
 >    > * Click on the title of the history (by default the title is `Unnamed history`)
 >    >
->    >   ![Renaming history](../../../../shared/images/rename_history.png)
+>    >   ![Renaming history]({% link shared/images/rename_history.png %})
 >    >
 >    > * Type `Galaxy Introduction` as the name
 >    > * Press <kbd>Enter</kbd>

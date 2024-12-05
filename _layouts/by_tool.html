@@ -2,24 +2,64 @@
 layout: base
 ---
 
-<h1>Tutorials using {{ page.short_tool }}</h1>
+{% assign tool_id_path = page.observed_tool_ids[0][0] %}
+
+<hgroup>
+	<h1>
+		{{ site.data['tool-meta'][tool_id_path].name }}:
+		{{ site.data['tool-meta'][tool_id_path].desc }}
+	</h1>
+	<pre>{{ page.observed_tool_ids[0] }}</pre>
+</hgroup>
+
 <section>
 	<div class="stats">
 		<div class="row">
 			<div class="col-md-3">
-				<h2>Servers Offering this Tool</h2>
+				<h2>Metadata</h2>
+				<h3>Servers Offering this Tool</h3>
 				<a href="https://usegalaxy.eu/?tool_id={{ page.observed_tool_ids[0][0] }}">UseGalaxy.eu ({{ page.observed_tool_ids[0][1] }})</a>
 				<p class="text-muted">This is a guess, we are not currently checking if that is actually present.</p>
 
-				<h2>Observed Tool Versions</h2>
+				<hgroup>
+					<h3>Observed Tool Versions</h3>
+					<p>Within GTN tutorials</p>
+				</hgroup>
 				<ul>
 					{% for tool in page.observed_tool_ids %}
 					<li>{{ tool[1] }}</li>
 					{% endfor %}
 				</ul>
+
+				{% if site.data['tool-meta'][tool_id_path].edam_operations %}
+				<h3>EDAM Operations</h3>
+				<ul>
+				{% for topic in site.data['tool-meta'][tool_id_path].edam_operations %}
+					<li>
+						<a href="https://www.ebi.ac.uk/ols4/ontologies/edam/classes/http%253A%252F%252Fedamontology.org%252F{{ topic }}">
+						{{ topic }}
+						</a>
+					</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+
+				{% if site.data['tool-meta'][tool_id_path].edam_topics%}
+				<h3>EDAM Topics</h3>
+				<ul>
+				{% for topic in site.data['tool-meta'][tool_id_path].edam_topics %}
+					<li>
+						<a href="https://www.ebi.ac.uk/ols4/ontologies/edam/classes/http%253A%252F%252Fedamontology.org%252F{{ topic }}">
+						{{ topic }}
+						</a>
+					</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
 			</div>
 
 			<div class="col-md-9">
+				<h2>Relevant Tutorials</h2>
 				<ul>
 					{% for tutorial in page.tutorial_list %}
 					<li>

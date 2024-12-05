@@ -27,6 +27,7 @@ We are testing a new search experience. It does not do semantic ranking of resul
 		<option value="Slides">Slides</option>
 		<option value="FAQs">FAQs</option>
 		<option value="News">News</option>
+		<option value="Workflow">Workflows</option>
 	</select>
 	</div>
 	</div>
@@ -74,10 +75,12 @@ We are testing a new search experience. It does not do semantic ranking of resul
 			</tr>
 		{%- endfor -%}
 		{%- for page in site.pages -%}
-			{%- if page.short_id -%}
+			{%- assign layout = page.layout | layout_to_human -%}
+			{%- unless page.symlink %}
+			{%- if layout -%}
 			{%- if page.short_id != 'F00001' -%}
 			<tr id="{{ page.short_id }}">
-				<td><a class="badge badge-info" href="https://gxy.io/GTN:{{ page.short_id }}">{%- icon purl -%} GTN:{{ page.short_id }}</a></td>
+				<td>{% if page.short_id %}<a class="badge badge-info" href="https://gxy.io/GTN:{{ page.short_id }}">{%- icon purl -%} GTN:{{ page.short_id }}</a>{% else %}<abbr title="To Be Assigned">TBA</a>{% endif %}</td>
 				<td>{{ page.layout | layout_to_human }}</td>
 				<td><a href="{{ site.baseurl }}{{ page.url }}">{{ page.title }}</a><br/>
 					{%- for tag in page.tags -%}
@@ -90,6 +93,7 @@ We are testing a new search experience. It does not do semantic ranking of resul
 			</tr>
 			{%- endif -%}
 			{%- endif -%}
+			{%- endunless -%}
 		{%- endfor -%}
 	</tbody>
 </table>
@@ -128,14 +132,17 @@ function search(){
 	// Which should be hidden
 
 	var to_hide = rows.filter(row => {
+		let searchable = row.children[2].innerText.toLowerCase();
 		if (typeFilter != "Any" && row.children[1].innerText != typeFilter) {
 			return true;
 		}
 		if (levelFilter != "Any" && row.children[4].innerText != levelFilter) {
 			return true;
 		}
-		if (textQuery != "" && (row.children[2].innerText.toLowerCase() + " " + row.children[2].innerText.toLowerCase()).indexOf(textQuery.toLowerCase()) == -1) {
-			return true;
+		if (textQuery != "") {
+			if(textQuery.split(" ").every(term => searchable.indexOf(term.toLowerCase()) == -1)) {
+				return true;
+			}
 		}
 		return false;
 	});
@@ -146,6 +153,13 @@ function search(){
 	to_hide.map(r => r.style.display = "none");
 
 	previousSearch = `${textQuery} ${typeFilter} ${levelFilter}`
+
+	if(typeof plausible !== 'undefined'){
+		// Plausible may be undefined (script blocked)
+		// or it may be defined, but opted-out (select box/DNT),
+		// which means `plausible()` will work but not send data, *nor* execute the callback.
+		plausible('Search', {props: {query: textQuery, type: typeFilter, level: levelFilter}})
+	}
 }
 
 // Attribution: https://gist.github.com/beaucharman/1f93fdd7c72860736643d1ab274fee1a

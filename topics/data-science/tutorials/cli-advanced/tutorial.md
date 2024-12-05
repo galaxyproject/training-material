@@ -63,12 +63,14 @@ key_points:
 notebook:
   language: bash
 subtopic: bash
-contributors:
+contributions:
+  authorship:
   - carpentries
   - hexylena
   - bazante1
-  - gallantries
   - avans-atgm
+  funding:
+  - gallantries
 tags:
 - bash
 ---

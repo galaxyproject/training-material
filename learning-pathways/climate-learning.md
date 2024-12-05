@@ -1,9 +1,11 @@
 ---
 layout: learning-pathway
 
-title: Discovering galaxy through climate analysis
+title: Discovering Galaxy through climate analysis
 description: |
   How to have a complete overview of how Galaxy works going from the user welcome page to use batch tools and finishing by conducting interactive analysis. These set of 3 Climate tutorials allow you to understand and see plenty of the multiple features of Galaxy and learning about the cool subject of climate analysis.
+cover-image: assets/images/galaxy_climate.png
+cover-image-alt: Image of the earth surrounded by a bar colors representing Earth's increasing temperatures.
 tags: [Climate, Overview]
 
 editorial_board:
