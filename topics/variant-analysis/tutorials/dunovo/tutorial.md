@@ -103,7 +103,7 @@ The starting point of the analysis is sequencing reads (in [FASTQ](https://en.wi
 
 ## Getting data in and assessing quality
 
-You can obtain the data from [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/) from Zenodo, or just import the [Galaxy history](https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015) that accompanies this tutorial.
+You can obtain the data from [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/) from [Zenodo](https://doi.org/10.5281/zenodo.3554549), or just import the data from the Galaxy Data library under the "GTN Materials" folder.
 
 > ### {% icon hands_on %} Hands-on: Importing the input FASTQ files
 >
