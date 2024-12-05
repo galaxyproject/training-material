@@ -23,12 +23,12 @@ cost: free # Or, e.g. 150 EUR
 audience: This event is intended for PhD students interested in Genomics. A basic knowledge in R is useful but not required.
 contact_email: organisers@example.com
 async: false # if asynchronous, we will not display the time columns on the program
-mode: online # In-person
+mode: online # online, onsite, or hybrid
 
 registration:
   link: https://example.org
   deadline: 2024-01-01
-
+  open: false # set this if registration is not open yet
 
 # Location of the event
 # For online events, just the 'name' is enough

@@ -36,6 +36,7 @@ requirements:
 tags:
 - 10x
 - paper-replication
+- MIGHTS
 
 contributions:
   authorship:
@@ -81,7 +82,7 @@ We’ll provided you with experimental data to analyse from a mouse dataset of f
 ## Get Data onto Galaxy
 To start, let's get our dataset loaded into Galaxy.
 
-{% include _includes/cyoa-choices.html option1='EBI Data Retrieval' option2='Importing from a history' option3='Uploading from Zenodo' default='EBI-Data-Retrieval' text="There are multiple ways in which to collect the data for this tutorial. I find it easiest to do so via the EBI Data Retrieval." %}
+{% include _includes/cyoa-choices.html option1="EBI Data Retrieval" option2="Importing from a history" option3="Uploading from Zenodo" default="EBI-Data-Retrieval" text="There are multiple ways in which to collect the data for this tutorial. I find it easiest to do so via the EBI Data Retrieval." %}
 
 <div class='EBI-Data-Retrieval' markdown='1'>
 > <hands-on-title>EBI Data Retrieval</hands-on-title>

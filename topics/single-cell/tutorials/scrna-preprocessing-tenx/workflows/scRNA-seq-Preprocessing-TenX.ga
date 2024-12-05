@@ -1,6 +1,7 @@
 {
     "a_galaxy_workflow": "true",
     "annotation": "",
+    "comments": [],
     "creator": [
         {
             "class": "Person",
@@ -31,6 +32,9 @@
     "format-version": "0.1",
     "license": "CC-BY-4.0",
     "name": "Preprocessing of 10X scRNA-seq data",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
     "steps": {
         "0": {
             "annotation": "",
@@ -229,7 +233,12 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool RNA STARSolo",
+                    "name": "sc"
+                }
+            ],
             "label": null,
             "name": "RNA STARSolo",
             "outputs": [
@@ -270,7 +279,7 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"outWig\": {\"outWigType\": \"None\", \"__current_case__\": 0, \"outWigStrand\": \"false\"}, \"refGenomeSource\": {\"geneSource\": \"indexed\", \"__current_case__\": 0, \"GTFconditional\": {\"GTFselect\": \"without-gtf-with-gtf\", \"__current_case__\": 1, \"genomeDir\": \"hg19full\", \"sjdbGTFfile\": {\"__class__\": \"ConnectedValue\"}, \"sjdbOverhang\": \"100\"}}, \"sc\": {\"solo_type\": \"CB_UMI_Simple\", \"__current_case__\": 0, \"input_types\": {\"use\": \"repeat\", \"__current_case__\": 0, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}}, \"soloCBwhitelist\": {\"__class__\": \"ConnectedValue\"}, \"params\": {\"chemistry\": \"Cv3\", \"__current_case__\": 1}, \"soloBarcodeReadLength\": true, \"umidedup\": {\"soloUMIdedup\": \"1MM_CR\", \"__current_case__\": 4, \"soloUMIfiltering\": \"-\"}, \"soloCBmatchWLtype\": \"1MM_multi\"}, \"solo\": {\"soloStrand\": \"Forward\", \"soloFeatures\": \"Gene\", \"filter\": {\"filter_type\": \"no_filter\", \"__current_case__\": 3, \"output_raw\": \"true\"}, \"soloOutFormatFeaturesGeneField3\": \"Gene Expression\", \"outSAMattributes\": [\"NH\", \"HI\", \"AS\", \"nM\"], \"quantModeGene\": false, \"outSAMunmapped\": false, \"outSAMmapqUnique\": \"60\", \"junction_limits\": {\"limitOutSJoneRead\": \"1000\", \"limitOutSJcollapsed\": \"1000000\", \"limitSjdbInsertNsj\": \"1000000\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"outWig\": {\"outWigType\": \"None\", \"__current_case__\": 0, \"outWigStrand\": \"false\"}, \"refGenomeSource\": {\"geneSource\": \"indexed\", \"__current_case__\": 0, \"GTFconditional\": {\"GTFselect\": \"without-gtf-with-gtf\", \"__current_case__\": 1, \"genomeDir\": \"hg19\", \"sjdbGTFfile\": {\"__class__\": \"RuntimeValue\"}, \"sjdbOverhang\": \"100\"}}, \"sc\": {\"solo_type\": \"CB_UMI_Simple\", \"__current_case__\": 0, \"input_types\": {\"use\": \"repeat\", \"__current_case__\": 0, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"input2\": {\"__class__\": \"RuntimeValue\"}}, \"soloCBwhitelist\": {\"__class__\": \"RuntimeValue\"}, \"params\": {\"chemistry\": \"Cv3\", \"__current_case__\": 1}, \"soloBarcodeReadLength\": true, \"umidedup\": {\"soloUMIdedup\": \"1MM_CR\", \"__current_case__\": 4, \"soloUMIfiltering\": \"-\"}, \"soloCBmatchWLtype\": \"1MM_multi\"}, \"solo\": {\"soloStrand\": \"Forward\", \"soloFeatures\": \"Gene\", \"filter\": {\"filter_type\": \"no_filter\", \"__current_case__\": 3, \"output_raw\": \"true\"}, \"soloOutFormatFeaturesGeneField3\": \"Gene Expression\", \"outSAMattributes\": [\"NH\", \"HI\", \"AS\", \"nM\"], \"quantModeGene\": false, \"outSAMunmapped\": false, \"outSAMmapqUnique\": \"60\", \"junction_limits\": {\"limitOutSJoneRead\": \"1000\", \"limitOutSJcollapsed\": \"1000000\", \"limitSjdbInsertNsj\": \"1000000\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.7.10b+galaxy3",
             "type": "tool",
             "uuid": "6ee8c4c5-1926-4e1f-af1e-5a17f515b85f",
@@ -296,7 +305,20 @@
                     "output_name": "output_genes"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool DropletUtils",
+                    "name": "tenx_format"
+                },
+                {
+                    "description": "runtime parameter for tool DropletUtils",
+                    "name": "tenx_format"
+                },
+                {
+                    "description": "runtime parameter for tool DropletUtils",
+                    "name": "tenx_format"
+                }
+            ],
             "label": null,
             "name": "DropletUtils",
             "outputs": [
@@ -359,7 +381,20 @@
                     "output_name": "output_genes"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool DropletUtils",
+                    "name": "tenx_format"
+                },
+                {
+                    "description": "runtime parameter for tool DropletUtils",
+                    "name": "tenx_format"
+                },
+                {
+                    "description": "runtime parameter for tool DropletUtils",
+                    "name": "tenx_format"
+                }
+            ],
             "label": null,
             "name": "DropletUtils",
             "outputs": [
@@ -414,7 +449,20 @@
                     "output_name": "output_genes"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool DropletUtils",
+                    "name": "tenx_format"
+                },
+                {
+                    "description": "runtime parameter for tool DropletUtils",
+                    "name": "tenx_format"
+                },
+                {
+                    "description": "runtime parameter for tool DropletUtils",
+                    "name": "tenx_format"
+                }
+            ],
             "label": null,
             "name": "DropletUtils",
             "outputs": [
@@ -447,6 +495,6 @@
         "single-cell",
         "transcriptomics"
     ],
-    "uuid": "99173958-d701-47db-be9c-e23ecfaf4f1c",
-    "version": 6
+    "uuid": "de7e8328-f483-4724-93dc-4526a6332f59",
+    "version": 1
 }

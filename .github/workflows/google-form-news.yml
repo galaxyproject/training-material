@@ -6,6 +6,9 @@ on:
 jobs:
   runner-job:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     # Only run on main repo on and PRs that match the main repo.
     if: |
       github.repository == 'galaxyproject/training-material' &&
@@ -15,6 +18,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          persist-credentials: false
 
       # BEGIN Dependencies
       - uses: ruby/setup-ruby@v1
@@ -45,11 +49,11 @@ jobs:
         if: |
           github.event_name != 'pull_request' &&
           steps.generate.outputs.new_ids != '0'
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v7
         with:
           commit-message: Import news posts from Google Form
-          branch-suffix: timestamp
           title: "[Google Form] New News Post!"
+          branch: google-form/news
           add-paths: news/_posts/
 
       - name: Update recordings from Google Form
@@ -62,12 +66,12 @@ jobs:
         if: |
           github.event_name != 'pull_request' &&
           steps.generate.outputs.new_recordings == 'true'
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v7
         with:
           title: "[Google Form] New Recording Submission!"
-          branch-suffix: timestamp
           commit-message: add new recording from Google Form submission
           add-paths: topics/
+          branch: google-form/recordings
           committer: "Saskia Hiltemann <zazkia@gmail.com>"
           author: "Saskia Hiltemann <zazkia@gmail.com>"
           body: |
