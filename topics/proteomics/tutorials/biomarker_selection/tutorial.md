@@ -29,8 +29,6 @@ tags: [DDA, human]
 ---
 
 
-# Introduction
-{:.no_toc}
 
 A biomarker is a measurable biological component that can be routinely detected in clinical practice and reflects a disease state,
 response to therapeutic treatment, or other relevant biological state.
@@ -40,7 +38,7 @@ In this tutorial we introduce successively the tools of this pipeline, and guide
 pipeline on a concrete example. This strategy is described by {% cite Nguyen2019 %}.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -52,7 +50,7 @@ pipeline on a concrete example. This strategy is described by {% cite Nguyen2019
 
 
 # Global view of the strategy
-{:.no_toc}
+
 
 For this tutorial, no input data are required as the first steps will be to select data from
 public databases with ProteoRE tools.
@@ -76,7 +74,7 @@ We will start by selecting proteins associated with heart muscle tissue based on
 [The Human Protein Atlas](https://www.proteinatlas.org/) (HPA) (Publication: {% cite Uhln2005 %})
 
 
-> ### {% icon hands_on %} Hands-on: Build tissue-specific expression dataset based on ImmunoHistoChemistry
+> <hands-on-title>Build tissue-specific expression dataset based on ImmunoHistoChemistry</hands-on-title>
 >
 > 1. **Create a new history** and give it a name.
 >
@@ -97,7 +95,7 @@ We will start by selecting proteins associated with heart muscle tissue based on
 We will now rerun the same tool but to select transcripts according to their expression profile.
 
 
-> ### {% icon hands_on %} Hands-on: Build tissue-specific expression dataset based on RNAseq
+> <hands-on-title>Build tissue-specific expression dataset based on RNAseq</hands-on-title>
 >
 > 1. **Build tissue-specific expression dataset** {% icon tool %} with the following parameters:
 >    - *"Experimental data source (antibody- or RNAseq-based)"*: `RNA levels based on RNA-seq experiments`
@@ -115,7 +113,7 @@ To do so, a filter is applied on the expression value provided by HPA and measur
 In ProteoRE we'll use the "Filter by keywords and/or numerical value" tool.
 
 
-> ### {% icon hands_on %} Hands-on: Filter on expression value criterion
+> <hands-on-title>Filter on expression value criterion</hands-on-title>
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
 >    - *"Input File"*: `Tissue-specific expression from RNASeq` from the previous step
@@ -128,12 +126,12 @@ In ProteoRE we'll use the "Filter by keywords and/or numerical value" tool.
 >    - *"Sort by column ?"*: `Yes`
 >      - *"Sort result files by"*: `c4`
 >
-> > ### {% icon question %} Questions
+> > <question-title></question-title>
 > >
 > > How many lines are there in the file of heart transcripts
 > > with a TPM value >10 ?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > > 5257 lines.
 > > {: .solution}
 > {: .question}
@@ -146,7 +144,7 @@ We have now 2 datasets of heart-muscle proteins/transcripts, based on IHC (Immon
 We want now to select candidate biomarkers that are expressed in the heart muscle according to **both** IHC and RNA-seq data, using the Jvenn tool.
 
 
-> ### {% icon hands_on %} Hands-on: Venn diagram
+> <hands-on-title>Venn diagram</hands-on-title>
 >
 > 1. **Venn diagram** {% icon tool %} with the following parameters:
 >    - In *"List to compare"*:
@@ -163,9 +161,9 @@ We want now to select candidate biomarkers that are expressed in the heart muscl
 >
 >    ![Venn diagram output](../../images/biomarker-selection/jVenn_chart-tuto2.png)
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    > How many IDs are common to both IHC and RNA-seq data?
->    >   > ### {% icon solution %} Solution
+>    >   > <solution-title></solution-title>
 >    >   > 931 candidate biomarkers are detected by both IHC and RNA-seq data.
 >    >   {: .solution}
 >    {: .question}
@@ -175,7 +173,7 @@ For greater clarity we'll keep only the column with those 931 candidate biomarke
 rest of our pipeline.
 
 
-> ### {% icon hands_on %} Hands-on: Obtain list of candidate biomarkers
+> <hands-on-title>Obtain list of candidate biomarkers</hands-on-title>
 >
 > 1. **Cut** {% icon tool %} with the following parameters:
 >    - *"File to cut"*: `Venn diagram text output`
@@ -206,7 +204,7 @@ The pipeline will then continue based on these 931 candidates, from which we hav
 highly specific to the heart using additional expression data (still from HPA).
 
 
-> ### {% icon hands_on %} Hands-on: Add expression data
+> <hands-on-title>Add expression data</hands-on-title>
 >
 > 1. **Add expression data** {% icon tool %} with the following parameters:
 >    - *"Enter your IDs (Ensembl gene IDs only, e.g. ENSG00000064787)"*: `Input file containing your IDs`
@@ -232,7 +230,7 @@ Let's use **Filter by keywords and/or numerical value** {% icon tool %} to selec
 *"RNA tissue category"* criterion.
 
 
-> ### {% icon hands_on %} Hands-on: Filter by keywords and/or numerical value
+> <hands-on-title>Filter by keywords and/or numerical value</hands-on-title>
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
 >    - *"Input file"*: output from **Add expression data** {% icon tool %}
@@ -271,7 +269,7 @@ Since HPA only considers [Ensemble](https://www.ensembl.org) `ENSG` identifiers 
 candidates to their corresponding UniProt accession number. The tool **ID Converter** is what we need to do so.
 
 
-> ### {% icon hands_on %} Hands-on: ID Converter
+> <hands-on-title>ID Converter</hands-on-title>
 >
 > 1. **ID Converter** {% icon tool %} with the following parameters:
 >    - *"Enter IDs"*: `Input file containing IDs`
@@ -295,7 +293,7 @@ We have now UniProt IDs for the 115 candidate biomarkers: we are able to collect
 For this purpose, we use the **Add protein features** {% icon tool %} ProteoRE tool.
 
 
-> ### {% icon hands_on %} Hands-on: Add protein features
+> <hands-on-title>Add protein features</hands-on-title>
 >
 > 1. **Add protein features** {% icon tool %} with the following parameters:
 >    - *"Enter your IDs (neXtProt or UniProt)"*: `Input file containing your IDs `
@@ -318,7 +316,7 @@ With this dataset, we can select proteins reported as localized in the cytoplasm
 no transmembrane domains by running the Filter by keywords and/or numerical value tool.
 
 
-> ### {% icon hands_on %} Hands-on: Filter by keywords and/or numerical value
+> <hands-on-title>Filter by keywords and/or numerical value</hands-on-title>
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
 >    - *"Input file"*: the output from **Add protein features** {% icon tool %}
@@ -351,7 +349,7 @@ LS MS/MS experiments.
 
 # Check for previous detection by LC-MS/MS experiments
 
-> ### {% icon hands_on %} Hands-on: Get MS/MS observations in tissue/fluid
+> <hands-on-title>Get MS/MS observations in tissue/fluid</hands-on-title>
 >
 > 1. **Get MS/MS observations in tissue/fluid** {% icon tool %} with the following parameters:
 >    - *"Enter your IDs (UniProt Accession number only)"*: `Input file containing your IDs `
@@ -370,7 +368,7 @@ LS MS/MS experiments.
 Let's now keep only proteins that have already been seen by MS/MS in the plasma (last column of the file).
 
 
-> ### {% icon hands_on %} Hands-on: Filter for proteins seen in the plasma
+> <hands-on-title>Filter for proteins seen in the plasma</hands-on-title>
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
 >    - *"Input file"*: the MA/MS observations output from the previous step
@@ -395,7 +393,7 @@ Let's now keep only proteins that have already been seen by MS/MS in the plasma 
 
 
 # Conclusion
-{:.no_toc}
+
 At the end of the process we end up with a list of 22 biomarkers that are **highly enriched in heart muscle**, localized
 **in the cytosol** and **detectable by MS in the plasma**.
 *NB: Please be aware that, due to databases update, number of biomarkers you end up with can be different from 21 that we obtain here.*

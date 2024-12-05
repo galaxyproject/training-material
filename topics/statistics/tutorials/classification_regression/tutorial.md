@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Machine learning: classification and regression'
-zenodo_link: https://zenodo.org/record/2579649#.XHep39F7mL4
+zenodo_link: https://zenodo.org/record/2579649
 questions:
 - what are classification and regression techniques?
 - How they can be used for prediction?
@@ -27,16 +27,14 @@ contributors:
 
 ---
 
-# Introduction
-{:.no_toc}
 
 Machine learning is a subset of artificial intelligence (AI) that provides machines with the ability to automatically learn from data without being explicitly programmed. It is a combined field of computer science, mathematics and statistics to create a predictive model by learning patterns in a dataset. The dataset may have an output field which makes the learning process supervised. The [supervised learning](https://en.wikipedia.org/wiki/Supervised_learning) methods in machine learning have outputs (also called as targets or classes or categories) defined in the datasets in a column. These targets can either be  integers or real (continuous) numbers. When the targets are integers, the learning task is known as classification. Each row in the dataset is a sample and the classification is assigning a class label/target to each sample. The algorithm which is used for this learning task is called a classifier. When the targets are real numbers, the learning task is called regression and the algorithm which is used for this task is called a regressor. We will go through classification first and look at regression later in this tutorial.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What are features and outputs/targets in a dataset?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Features and targets of a breast cancer dataset:
 > > ![Breast_cancer_targets](images/breast_cancer_classification.png "The image shows a breast cancer dataset with 8 rows and 10 columns. Each column is a feature and encodes a specific information about breast cancer or detected tumor. For example, the feature "clump thickness" gives information about whether the cells are mono or multi-layered. Similarly, other columns/features provide different information about the tumor. The last column is the "target" column which identifies whether the tumor is benign (0) or malignant (1) for each row of the dataset. Here, the targets are discrete which makes the learning task classification. In another task, if these targets contain continuous values, the learning task will become regression.")
@@ -46,7 +44,7 @@ Machine learning is a subset of artificial intelligence (AI) that provides machi
 {: .question}
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -59,7 +57,7 @@ Machine learning is a subset of artificial intelligence (AI) that provides machi
 
 A [classification](https://en.wikipedia.org/wiki/Statistical_classification) task assigns a category/class to each sample by learning a decision boundary in a dataset. This dataset is called a training dataset and contains samples and desired class/category for each sample. The training dataset contains "features" as columns and a mapping between these features and the target is learned for each sample. The performance of mapping is evaluated using a test dataset (which is separate from training dataset). The test dataset contains only the feature columns and not the target column. The target column is predicted using the mapping learned on the training dataset. In this tutorial, we will use a classifier to train a model using a training dataset, predict the targets for test dataset and visualize the results using plots.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > The terms like 'targets', 'classes', 'categories' or 'labels' have been used interchangeably for the classification part of this tutorial. They contain identical meaning. For regression, we will just use 'targets'.
 {: .comment}
 
@@ -71,7 +69,7 @@ In figure [2](#figure-2), the line is a boundary which separates a class from an
 
 The datasets to be used for classification contain 9 features. Each feature contains some unique information about breast cancer including the thickness of clump, cell-size, cell-shape and so on. More information about the dataset can be found here - [a](https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+(original)) and [b](https://sites.google.com/a/googlesciencefair.com/science-fair-2012-project-64a91af142a459cfb486ed5cb05f803b2eb41354-1333130785-87/observations). In addition to these features, the training dataset contains one more column as the `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer (benign) and `1` (malignant) indicates breast cancer. The test dataset does not contain the `target` column (which should be predicted by a classifier). The third dataset contains all the samples from the test dataset, this time including the `target` column which is needed to compare between real and predicted targets.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial.
 >
@@ -97,7 +95,7 @@ The datasets to be used for classification contain 9 features. Each feature cont
 
 The training dataset is used for learning the associations between features and the targets. The classifier learns general patterns in a dataset and saves a trained model. This model can be used for classifying a new sample. In this step, we will use `breast-w_train` as the training dataset and apply [SVM](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC) (support vector machine) classifier. It will learn features from the dataset and maps them to the targets. This mapping is called a trained model. The training step produces a model file of type `zip`.
 
-> ### {% icon hands_on %} Hands-on: Train the model
+> <hands-on-title>Train the model</hands-on-title>
 >
 > 1. **Support vector machines (SVMs) for classification** {% icon tool %} with the following parameters to train the classifier on training dataset:
 >    - *"Select a Classification Task"*: `Train a model`
@@ -114,11 +112,11 @@ The training dataset is used for learning the associations between features and 
 > 2. Rename the generated file to `model`
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What is learned by the classifier?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Two attributes **coef_** and **intercept_** are learned by the classifier using the training dataset. The **coef_** contains importance weight for each feature and **intercept_** is just a
 > > constant scalar. However, for different classifiers, these attributes are different. The attributes shown here are specific to the **Linear support vector** classifier.
@@ -132,7 +130,7 @@ The training dataset is used for learning the associations between features and 
 
 After the training process is complete, we can see the trained model file (`zip` file) which contains information about patterns in the form of weights. The trained model is used to predict the classes of the test (`breast-w_test`) dataset. It assigns a class (either tumor or no tumor) to each row in the `breast-w_test` dataset.
 
-> ### {% icon hands_on %} Hands-on: Predict classes using the trained model
+> <hands-on-title>Predict classes using the trained model</hands-on-title>
 >
 > 1. **Support vector machines (SVMs) for classification** {% icon tool %} with the following parameters to predict classes of test dataset using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
@@ -147,7 +145,7 @@ After the training process is complete, we can see the trained model file (`zip`
 
 We should evaluate the quality of predictions by comparing them against the true targets. To do this, we will use another dataset (`breast-w_targets`). This is the same as the test dataset (`breast-w_test`) but contains an extra `target` column containing the true classes of the test dataset. With the predicted and true classes, the learned model is evaluated to verify how correct the predictions are. To visualise these predictions, a plotting tool is used. It creates three plots - confusion matrix, precision, recall and F1 and ROC and AUC. We will mainly analyze the precision and recall plot.
 
-> ### {% icon hands_on %} Hands-on: Check and visualize the predictions
+> <hands-on-title>Check and visualize the predictions</hands-on-title>
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualise the predictions:
 >    - {% icon param-file %} *"Select input data file"*: `breast-w_targets`
 >    - {% icon param-file %} *"Select predicted data file"*: `predicted_labels`
@@ -187,7 +185,7 @@ For classification, the targets are integers. However, when the targets in a dat
 
 The dataset contains information about human [body density](https://rstudio-pubs-static.s3.amazonaws.com/65314_c0d1e5696cdd4e93a3784ea67f9e3d34.html). It includes 14 features like underwater body density, age, weight, height, neck circumference and so on. The target is the percent body fat. The aim of the task is to learn a mapping between several body features and fat content inside the human body. Using this learning, the body fat percentage can be predicted using other features. To carry out this task, we will need training and test datasets. Again, we will also prepare another test dataset with targets included to evaluate the regression performance. `body_fat_train` dataset is used as the training dataset and `body_fat_test` as the test dataset. The dataset `body_fat_test_labels` contains the true targets for the test dataset (`body_fat_test`).
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial.
 > 2. Import the following datasets and choose the type of data as `tabular`.
@@ -212,7 +210,7 @@ The dataset contains information about human [body density](https://rstudio-pubs
 To learn the mapping between several features and the targets, we will apply a regressor which is called
 the [Gradient boosting regressor](http://scikit-learn.org/stable/modules/ensemble.html#regression). It is an ensemble-based regressor because its prediction is the collective performance of multiple weak learners (e.g. decision trees). It learns features from training dataset (`body_fat_train`) and maps all the rows to their respective targets (real numbers). The process of mapping gives a trained model.
 
-> ### {% icon hands_on %} Hands-on: Train a model
+> <hands-on-title>Train a model</hands-on-title>
 >
 > 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters to train the regressor:
 >    - *"Select a Classification Task"*: `Train a model`
@@ -229,11 +227,11 @@ the [Gradient boosting regressor](http://scikit-learn.org/stable/modules/ensembl
 > 2. Rename the generated file to `model`.
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What is learned by the regressor?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Unlike the **Linear support vector** classifier (used for classification in the first part of the tutorial) which learned only two attributes,
 > > the **Gradient boosting** regressor learns multiple attributes such as **feature_importances_** (weight for each feature/column),
@@ -248,7 +246,7 @@ the [Gradient boosting regressor](http://scikit-learn.org/stable/modules/ensembl
 
 After learning on the training dataset, we should evaluate the performance on the test dataset to know whether the algorithm learned general patterns from the training dataset or not. These patterns are used to predict a new sample and a similar accuracy is expected. Similar to the classification task, the trained model is evaluated on `body_fat_test` which predicts a target value for each row. The predicted targets are compared to the expected targets to measure the robustness of learning.
 
-> ### {% icon hands_on %} Hands-on: Predict targets using the model
+> <hands-on-title>Predict targets using the model</hands-on-title>
 >
 > 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
@@ -263,7 +261,7 @@ After learning on the training dataset, we should evaluate the performance on th
 
 We will evaluate the predictions by comparing them to the expected targets.
 
-> ### {% icon hands_on %} Hands-on: Check and visualize the predictions
+> <hands-on-title>Check and visualize the predictions</hands-on-title>
 > 1. **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters to visualise the predictions:
 >    - {% icon param-file %} *"Select input data file"*: `body_fat_test_labels`
 >    - {% icon param-file %} *"Select predicted data file"*: `predicted_data`

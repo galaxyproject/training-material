@@ -34,8 +34,6 @@ contributors:
 
 ---
 
-# Introduction
-{:.no_toc}
 
 Patient samples for pathogen detection are usually "contaminated" with human host DNA.
 Such contamination, if not removed from sequencing data, may pose an issue with certain types of
@@ -45,7 +43,7 @@ For this second reason in particular, researchers will regularly have to remove 
 
 This tutorial will guide you through a typical workflow for clearing human sequences from any kind (ampliconic or not) of viral sequenced sample, which retains non-human reads in a format ready to be submitted to public databases.
 
-> ### {% icon comment %} Nature of the input data
+> <comment-title>Nature of the input data</comment-title>
 > We will use sequencing data of bronchoalveolar lavage fluid (BALF) samples obtained from early COVID-19 patients in China as our input data.
 > Since such samples are expected to be contaminated signficantly with human sequenced reads, the effect of the cleaning steps will be much more apparent than for ampliconic sequencing data from diagnostic patient swabs.
 > Nevertheless the cleaning processs does not rely on any particular sample isolation or preprcocessing method and could be used unaltered on, for example, ARTIC amplified SARS-CoV-2 samples.
@@ -53,7 +51,7 @@ This tutorial will guide you through a typical workflow for clearing human seque
 {: .comment}
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -66,11 +64,12 @@ This tutorial will guide you through a typical workflow for clearing human seque
 
 As always, it is best to give each analysis you are performing with Galaxy its own history, so let's start with preparing this:
 
-> ### {% icon hands_on %} Hands-on: Prepare new history
+> <hands-on-title>Prepare new history</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 {: .hands_on}
@@ -80,7 +79,7 @@ As always, it is best to give each analysis you are performing with Galaxy its o
 The sequenced reads datasets used in this tutorial (4 files representing 2 Illumina paired-end sequenced samples) have been deposited on [Zenodo](https://zenodo.org/record/3732359/) and can be uploaded to Galaxy via their URLs.
 After that, we will arrange the uploaded data into a collection in our Galaxy history to facilitate its handling in the analysis.
 
-> ### {% icon hands_on %} Hands-on: Data upload and rearrangement
+> <hands-on-title>Data upload and rearrangement</hands-on-title>
 >
 > 1. Upload the data from Zenodo via URLs
 >
@@ -116,14 +115,14 @@ After that, we will arrange the uploaded data into a collection in our Galaxy hi
 
 In order to learn which of the reads of each of the input samples are of likely human origin, we need to map the reads to the human reference genome. To improve the quality of this step we will also trim low-quality bases from the ends of all reads before passing them to the read mapping software.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > Do you want to learn more about the principles behind quality control (including trimming) and mapping? Follow our dedicated tutorials:
 > - [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 > - [Mapping]({% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}).
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Trim reads and map them to the human reference genome
+> <hands-on-title>Trim reads and map them to the human reference genome</hands-on-title>
 >
 > 1. {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0) %} with default settings and:
 >    - *"Single-end or paired-end reads?"*: `Paired-end (as collection)`
@@ -153,7 +152,7 @@ The logic of the following steps is:
 
 3. Extract the read identifiers
 
-> ### {% icon hands_on %} Hands-on: Filter for read pairs not mapping to the human genome and extract their identifiers
+> <hands-on-title>Filter for read pairs not mapping to the human genome and extract their identifiers</hands-on-title>
 >
 > 1. {% tool [Samtools fastx](toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1) %} with the following parameter settings:
 >    - {% icon param-collection %} *"BAM or SAM file to convert"*: the output of **Map with BWA-MEM**
@@ -194,7 +193,7 @@ The logic of the following steps is:
 
 We are almost there! We already know the identifiers of all reads we would like to retain, we only need a way to filter the original input datasets for these identifiers.
 
-> ### {% icon comment %} Why not use the unmapped reads directly?
+> <comment-title>Why not use the unmapped reads directly?</comment-title>
 >
 > When you followed the previous steps you may have noticed that **Samtools fastx** offers *fastq* as an output format.
 > Since we used this tool to report the unmapped reads, you may be wondering why we did not simply ask the tool to write the reads in the format we want and be done with it.
@@ -210,7 +209,7 @@ As a slight complication, however, the tool is not prepared to handle paired rea
 For this reason, we need to first unzip our collection into two simple list collections - one with the forward reads, the other one with the reverse reads of all samples.
 Then, after processing both with **seqtk_subseq**, we zip the filtered collections back into one.
 
-> ### {% icon hands_on %} Hands-on: Identifier-based extraction of non-human reads from the input data
+> <hands-on-title>Identifier-based extraction of non-human reads from the input data</hands-on-title>
 >
 > 1. {% tool [Unzip Collection](__UNZIP_COLLECTION__) %} with the following setting:
 >    - *"Input Paired Dataset"*: the collection of original sequenced reads input datasets
@@ -232,7 +231,7 @@ Then, after processing both with **seqtk_subseq**, we zip the filtered collectio
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 Data cleaning is a standard procedure for clinical sequencing datasets and is a rather straightforward process in Galaxy.
 You just learnt how to remove human reads from any number of paired-end sequenced samples in parallel using collections and just a handful of tools.

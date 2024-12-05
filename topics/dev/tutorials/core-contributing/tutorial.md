@@ -30,9 +30,6 @@ requirements:
         - architecture
 ---
 
-# Introduction
-{:.no_toc}
-
 This tutorial walks you through developing an extension to Galaxy, and how to contribute back to the core project.
 
 To setup the proposed extension imagine you're running a specialized Galaxy server and each of your users only use a few of Galaxy datatypes. You'd like to tailor the UI experience by allowing users of Galaxy to select their favorite extensions for additional filtering in downstream applications, UI extensions, etc..
@@ -43,7 +40,7 @@ The proposed extension could be implemented in several different ways on Galaxy'
 
 With simplicity in mind, we will implement our proposed extension to Galaxy by adding a single new table to Galaxy's data model called ``user_favorite_extension``. The concept of a favorite extension will be represented by a one-to-many relationship from the table that stores Galaxy's user records to this new table. The extension itself that will be favorited will be stored as a ``Text`` field in this new table. This table will also need to include an integer primary key named ``id`` to follow the example set by the rest of the Galaxy data model.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -54,12 +51,12 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 
 {% snippet topics/dev/faqs/contributing.md %}
 
-> ### {% icon hands_on %} Hands-on: Setup your local Galaxy instance
+> <hands-on-title>Setup your local Galaxy instance</hands-on-title>
 >
 > 1. Use GitHub UI to fork Galaxy's repository at `galaxyproject/galaxy`.
 > 2. Clone your forked repository to a local path, further referred to as `GALAXY_ROOT` and `cd` into `GALAXY_ROOT`. Note that we specify the tutorial branch with the `-b` option:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git clone https://github.com/<your-username>/galaxy GALAXY_ROOT
 >    > cd GALAXY_ROOT
@@ -69,7 +66,7 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >
 > 3. Before we can use Galaxy, we need to create a virtual environment and install the required dependencies. This is generally done with the `common_startup.sh` script:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > bash scripts/common_startup.sh --dev-wheels
 >    > ```
@@ -79,7 +76,7 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >
 > 4. Activate your new virtual environment:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > . .venv/bin/activate
 >    > ```
@@ -89,7 +86,7 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >
 > 5. Finally, let's create a new branch for your edits:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git checkout -b my-feature
 >    > ```
@@ -97,13 +94,13 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >
 >    Now when you run `git branch` you'll see that your new branch is activated:
 >
->    > > ### {% icon code-in %} Input: Bash
+>    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
 >    > > git branch
 >    > > ```
 >    > {: .code-in}
 >    >
->    > > ### {% icon code-out %} Output
+>    > > <code-out-title></code-out-title>
 >    > > ```bash
 >    > >   dev
 >    > > * my-feature
@@ -118,20 +115,12 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >    Initializing the database is necessary because you will be making changes to the database
 >    schema, which cannot be applied to a database that has not been initialized. 
 >
->    To initialize the database, you can either start Galaxy (might take some time when executing
+>    To initialize the database, you can start Galaxy by executing the following script (might take some time when executing
 >    for the first time):
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > sh run.sh
->    > ```
->    {: .code-in}
->
->    or you may run the following script (faster):
->
->    > ### {% icon code-in %} Input: Bash
->    > ```bash
->    > sh create_db.sh
 >    > ```
 >    {: .code-in}
 >
@@ -158,13 +147,13 @@ value = Column(TEXT)
 
 Associations between objects are usually defined with the `relationship` construct. For example, the `UserAddress` model has an association with the `User` model and is defined with the `relationship` construct as the `user` attribute.
 
-> ### {% icon question %} Questions about Mapping
+> <question-title>about Mapping</question-title>
 >
 > 1. What should be the SQLAlchemy model named corresponding to the table ``user_favorite_extension`` based on [other examples](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/model/__init__.py)?
 > 2. What table stores Galaxy's user records?
 > 3. What is another simple table with a relationship with the Galaxy's user table?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. ``UserFavoriteExtension``
 > > 2. ``galaxy_user``
 > > 3. An example table might be the ``user_preference`` table.
@@ -229,15 +218,15 @@ Galaxy's data model is split into the galaxy model and the install model. These 
 We encourage you to read [Galaxy's documentation on migrations](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/model/migrations), as well as relevant [Alembic documentation](https://alembic.sqlalchemy.org/en/latest/tutorial.html#create-a-migration-script).
 
 For this tutorial, you'll need to do the following:
-1. Create a revision template
+1. Create a revision template.
 2. Edit the revision template, filling in the body of the upgrade and downgrade functions. 
 3. Run the migration.
 
-> ### {% icon question %} Question about generating a revision template
+> <question-title> about generating a revision template</question-title>
 >
 > What command should you run to generate a revision template?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```bash
 > > sh run_alembic.sh revision --head=gxy@head -m "Add user_favorite_extentions table"
 > > ```
@@ -256,11 +245,11 @@ do that here.
 
 {% include topics/dev/tutorials/core-contributing/revisionid_add_user_favorite_extensions.py_diff.md %}
 
-> ### {% icon question %} Question about running the migration
+> <question-title>about running the migration</question-title>
 >
 > What command should you run to upgrade your database to include the new table? 
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```bash
 > > sh manage_db.sh upgrade
 > > ```
@@ -318,7 +307,7 @@ Please review ``test_users.py`` and attempt to write a test case that:
 
 Verify this test fails when running stand-alone.
 
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > ```bash
 > ./run_tests.sh -api lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
 > ```
@@ -350,7 +339,7 @@ Ideally, you'd start at the top of the test case - make sure it fails on the fir
 implement ``get_favorite_extensions`` on the manager and the API code to wire it up, and continue
 with ``add_favorite_extension`` before finishing with ``delete_favorite_extension``.
 
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > ```bash
 > ./run_tests.sh -api lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
 > ```
@@ -380,11 +369,11 @@ render.
 Assume a VueJS component will be available called
 ``FavoriteExtensions`` in the file
 ``components/User/FavoriteExtensions/index.js``.  In
-``client/src/entry/analysis/AnalysisRouter.js`` respond to the route
+``client/src/entry/analysis/router.js`` respond to the route
 added above in ``buildapp.py`` and render the fictitious VueJS component
 ``FavoriteExtensions``.
 
-{% include topics/dev/tutorials/core-contributing/AnalysisRouter.js_diff.md %}
+{% include topics/dev/tutorials/core-contributing/router.js_diff.md %}
 
 There are many ways to perform the next steps, but like the API entry-point lets
 start with a test case describing the UI component we want to write. Below is a

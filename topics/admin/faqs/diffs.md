@@ -11,7 +11,7 @@ If you haven't worked with diffs before, this can be something quite new or diff
 If we have two files, let's say a grocery list, in two files. We'll call them 'a' and 'b'.
 
 
-> > ### {% icon code-in %} Old
+> > <code-in-title>Old</code-in-title>
 > > ```
 > > $ cat old
 > > 🍎
@@ -23,7 +23,7 @@ If we have two files, let's say a grocery list, in two files. We'll call them 'a
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} New
+> > <code-out-title>New</code-out-title>
 > > ```
 > > $ cat new
 > > 🍎

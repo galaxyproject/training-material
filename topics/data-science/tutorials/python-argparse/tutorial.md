@@ -24,17 +24,22 @@ key_points:
 - "It's nice for users of your scripts! They don't have to read the code to know how it behaves if you document it well."
 
 subtopic: python-modular
-contributors:
+contributions:
+  authorship:
   - hexylena
-  - dirowa
+  editing:
   - bazante1
+  testing:
+  - dirowa
+  funding:
+  - avans-atgm
 
 priority: 10
 ---
 
 [`argparse`](https://docs.python.org/3/library/argparse.html) is an argument parsing library for Python that's part of the stdlib. It lets you make command line tools significantly nicer to work with.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -49,14 +54,14 @@ Unlike previous modules, this lesson won't use a Jupyter/CoCalc notebook, and th
 
 In the coding world, whenever you run a Python script on the command line, it has a special variable available to it named `argv`. This is a list of all of the arguments used when you run a command line program.
 
-> ### {% icon hands_on %} Hands-on: Print out argv
+> <hands-on-title>Print out argv</hands-on-title>
 >
 > 1. Create / open the file `run.py` in your text editor of choice
 > 2. There we'll create a simple Python script that:
 >   1. imports `sys`, the system module needed to access argv.
 >   2. Prints out `sys.argv`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > import sys
 > >
@@ -74,9 +79,9 @@ In the coding world, whenever you run a Python script on the command line, it ha
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > What did you notice about the output? There are two main points.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. The name of the script (`run.py`) is included as the first value every time.
 > > 2. All of the arguments are passed as strings, no numbers.
 > {: .solution}
@@ -86,7 +91,7 @@ In the coding world, whenever you run a Python script on the command line, it ha
 
 Let's sum up all of the numbers passed on the command line. We'll do this by hand, and then we'll replace it with `argparse` to see how much effort that saves us.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 > Update your script to sum up every number passed to it on the command line.
 >
 > It should handle:
@@ -97,9 +102,12 @@ Let's sum up all of the numbers passed on the command line. We'll do this by han
 > Hints:
 > - Skip the program name
 > - Use `try` and `except` to try converting the string to a number.
-> > ### {% icon question %} Question
+>
+> > <question-title></question-title>
+> >
 > > How does your updated script look?
-> > > ### {% icon solution %} Solution
+> >
+> > > <solution-title></solution-title>
 > > >
 > > > ```python
 > > > import sys
@@ -149,18 +157,14 @@ And finally we can define some arguments that are available. Just like we have a
 Here we have an argument named 'integers', which validates that all input values are of the type `int`. `nargs` is the number of arguments, `+` means '1 or more'. And we have some help text as well:
 
 ```python
-parser.add_argument('integers', type=int, nargs='+',
-                    help='an integer for the accumulator')
+parser.add_argument('integer', type=int, help='an integer parameter')
+parser.add_argument('many_integers', type=int, nargs='+', help='an integer parameter')
 ```
 
-We can also define an optional flag, here it's called `--sum`. Here it goes to a destination named 'accumulate', the name we'll use to access the value of this argument. It has an action of 'store_const' which just tracks if the flag was supplied or not.
-
-The `const` attribute is set to `sum`, which is actually the function `sum()`, this is what the value will be if we run the command with `--sum`. Otherwise it will `default` to the function `max()`. We again have some help text to tell us how it behaves
+We can also define an optional flag, here it's called `--sum`. We use `store_true` which will set it as true if the flag is used , otherwise false.
 
 ```python
-parser.add_argument('--sum', dest='accumulate', action='store_const',
-                    const=sum, default=max,
-                    help='sum the integers (default: find the max)')
+parser.add_argument('--sum', action='store_true', help='Should we sum up the integers?')
 ```
 
 Finally we parse the arguments, which reads `sys.argv` and processes it according to the above rules. The output is stored in `args`.
@@ -172,15 +176,16 @@ args = parser.parse_args()
 We have two main variables we can use now:
 
 ```
-args.integers # A list of integers.
-args.accumulate # Actually a function!
+args.integer # A single integer
+args.many_integers # A list of ints
+args.sum # A boolean, True or False.
 ```
 
 ## Using argparse
 
 Let's go back to our script, and replace `sys` with argparse.
 
-> ### {% icon hands_on %} Hands-on: Replacing argv.
+> <hands-on-title>Replacing argv.</hands-on-title>
 >
 > 1. Given the following script, replace the use of `argv` with argparse.
 >
@@ -206,21 +211,21 @@ Let's go back to our script, and replace `sys` with argparse.
 >
 >    And print out the sum of those numbers.
 >
-> > ### {% icon question %} Question
-> > How does your final script look?
-> > > ### {% icon solution %} Solution
-> > > ```python
-> > > import argparse
-> > >
-> > > parser = argparse.ArgumentParser(description='Sum some numbers')
-> > > parser.add_argument('integers', type=float, nargs='+',
-> > >                     help='a number to sum up.')
-> > > args = parser.parse_args()
-> > >
-> > > print(sum(args.integers))
-> > > ```
-> > {: .solution}
-> {: .question}
+>    > <question-title></question-title>
+>    > How does your final script look?
+>    > > <solution-title></solution-title>
+>    > > ```python
+>    > > import argparse
+>    > >
+>    > > parser = argparse.ArgumentParser(description='Sum some numbers')
+>    > > parser.add_argument('integers', type=float, nargs='+',
+>    > >                     help='a number to sum up.')
+>    > > args = parser.parse_args()
+>    > >
+>    > > print(sum(args.integers))
+>    > > ```
+>    > {: .solution}
+>    {: .question}
 >
 > 2. Try running the script with various values
 >
@@ -245,3 +250,79 @@ Wow that's a lot simpler! We have to learn how `argparse` is invoked but it hand
 
 There is a lot of documentation in the [`argparse`](https://docs.python.org/3/library/argparse.html) module for all sorts of use cases!
 
+
+## Why Argparse?
+
+Using argparse can be a big change to your tool but there are some benefits to using it!
+
+1. Standardised interface to your tool that's familiar to everyone who uses command line tools
+2. Automatic Help page
+3. Automatic Galaxy Tools?
+
+### Generating Automatic Galaxy Tools (Optional)
+
+With the `argparse2tool` project, and eventually `pyGalGen` which will be merged into `planemo`, you can generate Galaxy tools automatically from `argparse` based Python scripts.
+
+> <hands-on-title>Generate a Galaxy tool wrapper from your script</hands-on-title>
+> 1. Write out the python script to a file named `main.py`
+>
+>    ```python
+>    import argparse
+>
+>    parser = argparse.ArgumentParser(description='Sum some numbers')
+>    parser.add_argument('integers', type=float, nargs='+',
+>                        help='a number to sum up.')
+>    args = parser.parse_args()
+>
+>    print(sum(args.integers))
+>    ```
+>
+> 2. Create a virtual environment, just in case: ``
+>
+>    ```console
+>    python -m venv .venv
+>    . .venv/bin/activate
+>    ```
+>
+> 3. Install `argparse2tool` via pip:
+>
+>    ```console
+>    pip install argparse2tool
+>    ```
+>
+> 4. Generate the tool interface:
+>
+>    > <code-in-title>Command</code-in-title>
+>    > ```
+>    > PYTHONPATH=$(argparse2tool) python main.py --generate_galaxy_xml
+>    > ```
+>    {: .code-in }
+>
+>    > <code-out-title>Galaxy XML</code-out-title>
+>    > ```xml
+>    > <tool name="main.py" id="main.py" version="1.0">
+>    >   <description>Sum some numbers</description>
+>    >   <stdio>
+>    >     <exit_code range="1:" level="fatal"/>
+>    >   </stdio>
+>    >   <version_command><![CDATA[python main.py --version]]></version_command>
+>    >   <command><![CDATA[python main.py
+>    > #set repeat_var_1 = '" "'.join([ str($var.integers) for $var in $repeat_1 ])
+>    > "$repeat_var_1"
+>    >
+>    > > $default]]></command>
+>    >   <inputs>
+>    >     <repeat title="repeat_title" min="1" name="repeat_1">
+>    >       <param label="a number to sum up." value="0" type="float" name="integers"/>
+>    >     </repeat>
+>    >   </inputs>
+>    >   <outputs>
+>    >     <data name="default" format="txt" hidden="false"/>
+>    >   </outputs>
+>    >   <help><![CDATA[TODO: Write help]]></help>
+>    > </tool>
+>    >
+>    > ```
+>    {: .code-out }
+>
+{: .hands_on}

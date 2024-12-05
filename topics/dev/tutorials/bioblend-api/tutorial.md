@@ -30,11 +30,12 @@ contributions:
 
 notebook:
   language: python
+  #pyolite: true # Not possible due to https://pyodide.org/en/stable/project/roadmap.html#write-http-client-in-terms-of-web-apis
 ---
 
+BioBlend ({% cite Sloggett2013 %}) is a Python library to enable simple interaction with Galaxy ({% cite Afgan2018 %}) via the command line or scripts.
 
-
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -165,9 +166,9 @@ print(r.status_code)
 
 **Goal**: Upload a file to a new history, import a workflow and run it on the uploaded dataset.
 
-> ### {% icon question %} Question: Initialise
+> <question-title>Initialise</question-title>
 > First, define the connection parameters. What variables do you need?
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > import json
 > > from pprint import pprint
@@ -189,9 +190,9 @@ print(r.status_code)
 ```
 
 
-> ### {% icon question %} Question: New History
+> <question-title>New History</question-title>
 > Next, create a new Galaxy history via POST to the correct API.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > headers = {"Content-Type": "application/json", "x-api-key": api_key}
 > > data = {"name": "New history"}
@@ -209,8 +210,8 @@ print(r.status_code)
 ```
 
 
-> ### {% icon question %} Question: Upload a dataset
-> **Upload** the local file `1.txt` to the new history. You need to run the special `upload1` tool by making a `POST` request to `/api/tools`. You don't need to pass any inputs to it apart from attaching the file as `files_0|file_data`. Also, note that when attaching a file you need to drop `Content-Type` from the request headers.
+> <question-title>Upload a dataset</question-title>
+> **Upload** the local file `1.txt` to the new history. You need to run the special `upload1` tool by making a `POST` request to `/api/tools`. You don't need to pass any inputs to it apart from attaching the file as `files_0|file_data`. Also, note that when attaching a file the payload should **not** be serialized to a JSON string and you need to drop `Content-Type` from the request headers.
 >
 > You can obtain the `1.txt` file from the following URL, you'll need to download it first.
 >
@@ -218,7 +219,7 @@ print(r.status_code)
 > https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > data = {
 > >     "history_id": new_hist["id"],
@@ -240,9 +241,9 @@ print(r.status_code)
 ```
 
 
-> ### {% icon question %} Question: Find the dataset in your history
+> <question-title>Find the dataset in your history</question-title>
 > Find the new uploaded dataset, either from the dict returned by the POST request above or from the history contents.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > hda = ret['outputs'][0]
 > > pprint(hda)
@@ -256,20 +257,20 @@ print(r.status_code)
 
 ```
 
-> ### {% icon question %} Question: Import a workflow
-> **Import a workflow** from the local file `convert_to_tab.ga` by making a `POST` request to `/api/workflows`. The only needed data is `workflow`, which must be a deserialized JSON representation of the workflow.
+> <question-title>Import a workflow</question-title>
+> **Import a workflow** from the local file `convert_to_tab.ga` by making a `POST` request to `/api/workflows`. The only needed data is `workflow`, which must be a deserialized JSON representation of the workflow `.ga` file.
 >
 > You can obtain the `convert_to_tab.ga` file from the following URL, you'll need to download it first.
 >
 > ```
 > https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/convert_to_tab.ga
 > ```
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```python
 > > with open("convert_to_tab.ga", "r") as f:
-> >     workflow_json = json.load(f)
-> > data = {'workflow': workflow_json}
+> >     workflow_dict = json.load(f)
+> > data = {"workflow": workflow_dict}
 > > r = requests.post(base_url + "/workflows", data=json.dumps(data), headers=headers)
 > > wf = r.json()
 > > pprint(wf)
@@ -282,9 +283,9 @@ print(r.status_code)
 
 ```
 
-> ### {% icon question %} Question: View the workflow details
+> <question-title>View the workflow details</question-title>
 > View the details of the imported workflow by making a GET request to `/api/workflows`.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > r = requests.get(base_url + "/workflows/" + wf["id"], headers=headers)
 > > wf = r.json()
@@ -300,9 +301,9 @@ print(r.status_code)
 ```
 
 
-> ### {% icon question %} Question: Invoke the workflow
+> <question-title>Invoke the workflow</question-title>
 > **Run** the imported workflow on the uploaded dataset **inside the same history** by making a `POST` request to `/api/workflows/WORKFLOW_ID/invocations`. The only needed data are `history` and `inputs`.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```python
 > > inputs = {0: {'id': hda['id'], 'src': 'hda'}}
@@ -320,11 +321,18 @@ print(r.status_code)
 
 ```
 
-> ### {% icon question %} Question: View the results
+> <question-title>View the results</question-title>
 > View the results on the Galaxy server with your web browser. Were you successful? Did it run?
 {: .question}
 
 # Interacting with histories in BioBlend
+
+If you need to install BioBlend into your Jupyter environment, you can execute:
+
+``python
+import sys
+!{sys.executable} -m pip install bioblend
+``
 
 **You need to insert the API key for your Galaxy server in the cell below**:
 1. Open the Galaxy server in another browser tab
@@ -441,9 +449,9 @@ pprint(gi.histories.delete_history(new_hist['id']))
 **Goal**: Upload a file to a new history, import a workflow and run it on the uploaded dataset.
 
 
-> ### {% icon question %} Question: Initialise
+> <question-title>Initialise</question-title>
 > Create a `GalaxyInstance` object.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > from pprint import pprint
 > >
@@ -463,9 +471,9 @@ pprint(gi.histories.delete_history(new_hist['id']))
 ```
 
 
-> ### {% icon question %} Question: New History
+> <question-title>New History</question-title>
 > Create a new Galaxy history.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > new_hist = gi.histories.create_history(name='New history')
 > > pprint(new_hist)
@@ -479,7 +487,7 @@ pprint(gi.histories.delete_history(new_hist['id']))
 ```
 
 
-> ### {% icon question %} Question: Upload a dataset
+> <question-title>Upload a dataset</question-title>
 > **Upload** the local file `1.txt` to the new history using `tools.upload_file()` .
 >
 > You can obtain the `1.txt` file from the following URL, you'll need to download it first.
@@ -487,7 +495,7 @@ pprint(gi.histories.delete_history(new_hist['id']))
 > ```
 > https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
 > ```
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > ret = gi.tools.upload_file("1.txt", new_hist["id"])
 > > pprint(ret)
@@ -501,9 +509,9 @@ pprint(gi.histories.delete_history(new_hist['id']))
 ```
 
 
-> ### {% icon question %} Question: Find the dataset in your history
+> <question-title>Find the dataset in your history</question-title>
 > Find the new uploaded dataset, either from the dict returned by `tools.upload_file()` or from the history contents.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > hda = ret['outputs'][0]
 > > pprint(hda)
@@ -517,7 +525,7 @@ pprint(gi.histories.delete_history(new_hist['id']))
 ```
 
 
-> ### {% icon question %} Question: Import a workflow
+> <question-title>Import a workflow</question-title>
 > **Import a workflow** from the local file `convert_to_tab.ga` using `workflows.import_workflow_from_local_path()` .
 >
 > You can obtain the `convert_to_tab.ga` file from the following URL, you'll need to download it first.
@@ -525,7 +533,7 @@ pprint(gi.histories.delete_history(new_hist['id']))
 > ```
 > https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/convert_to_tab.ga
 > ```
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > wf = gi.workflows.import_workflow_from_local_path("convert_to_tab.ga")
 > > pprint(wf)
@@ -538,9 +546,9 @@ pprint(gi.histories.delete_history(new_hist['id']))
 
 ```
 
-> ### {% icon question %} Question: View the workflow details
+> <question-title>View the workflow details</question-title>
 > View the details of the imported workflow using `workflows.show_workflow()`
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > wf = gi.workflows.show_workflow(wf['id'])
 > > pprint(wf)
@@ -553,9 +561,9 @@ pprint(gi.histories.delete_history(new_hist['id']))
 
 ```
 
-> ### {% icon question %} Question: Invoke the workflow
+> <question-title>Invoke the workflow</question-title>
 > **Run** the imported workflow on the uploaded dataset **inside the same history** using `workflows.invoke_workflow()` .
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > inputs = {0: {'id': hda['id'], 'src': 'hda'}}
 > > ret = gi.workflows.invoke_workflow(wf['id'], inputs=inputs, history_id=new_hist['id'])
@@ -569,7 +577,7 @@ pprint(gi.histories.delete_history(new_hist['id']))
 
 ```
 
-> ### {% icon question %} Question: View the results
+> <question-title>View the results</question-title>
 > View the results on the Galaxy server with your web browser. Were you successful? Did it run?
 {: .question}
 
@@ -608,7 +616,7 @@ pprint(gi.histories.get_previews())
 
 ```python
 new_hist = gi.histories.create(name='BioBlend test')
-new_hist
+pprint(new_hist)
 ```
 
 As you can see, the `create()` methods in BioBlend.objects returns an object, not a dictionary.
@@ -629,7 +637,7 @@ https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.tx
 
 ```python
 hda = new_hist.upload_file("1.txt")
-hda
+pprint(hda)
 ```
 
 Please note that with BioBlend.objects there is no need to find the upload dataset, since `upload_file()` already returns a `HistoryDatasetAssociation` object.
@@ -676,9 +684,9 @@ new_hist.delete()
 
 **Goal**: Upload a file to a new history, import a workflow and run it on the uploaded dataset.
 
-> ### {% icon question %} Question: Initialise
+> <question-title>Initialise</question-title>
 > Create a `GalaxyInstance` object.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > from pprint import pprint
 > >
@@ -697,12 +705,12 @@ new_hist.delete()
 
 ```
 
-> ### {% icon question %} Question: New History
+> <question-title>New History</question-title>
 > Create a new Galaxy history.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > new_hist = gi.histories.create(name='New history')
-> > new_hist
+> > pprint(new_hist)
 > > ```
 > {: .solution}
 {: .question}
@@ -712,7 +720,7 @@ new_hist.delete()
 
 ```
 
-> ### {% icon question %} Question: Upload a dataset
+> <question-title>Upload a dataset</question-title>
 > **Upload** the local file `1.txt` to the new history using the `upload_file()` method of `History` objects.
 >
 > You can obtain the `1.txt` file from the following URL, you'll need to download it first.
@@ -720,10 +728,10 @@ new_hist.delete()
 > ```
 > https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
 > ```
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > hda = new_hist.upload_file("1.txt")
-> > hda
+> > pprint(hda)
 > > ```
 > {: .solution}
 {: .question}
@@ -733,7 +741,7 @@ new_hist.delete()
 
 ```
 
-> ### {% icon question %} Question: Import a workflow
+> <question-title>Import a workflow</question-title>
 > **Import a workflow** from the local file `convert_to_tab.ga` using `workflows.import_new()`
 >
 > You can obtain the `convert_to_tab.ga` file from the following URL, you'll need to download it first.
@@ -741,12 +749,12 @@ new_hist.delete()
 > ```
 > https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/convert_to_tab.ga
 > ```
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > with open("convert_to_tab.ga", "r") as f:
 > >     wf_string = f.read()
 > > wf = gi.workflows.import_new(wf_string)
-> > wf
+> > pprint(wf)
 > > ```
 > {: .solution}
 {: .question}
@@ -756,10 +764,10 @@ new_hist.delete()
 
 ```
 
-> ### {% icon question %} Question: View the workflow inputs
-> > ### {% icon solution %} Solution
+> <question-title>View the workflow inputs</question-title>
+> > <solution-title></solution-title>
 > > ```python
-> > wf.inputs
+> > pprint(wf.inputs)
 > > ```
 > {: .solution}
 {: .question}
@@ -769,9 +777,9 @@ new_hist.delete()
 
 ```
 
-> ### {% icon question %} Question: Invoke the workflow
+> <question-title>Invoke the workflow</question-title>
 > **Run** the imported workflow on the uploaded dataset **inside the same history** using the `invoke()` method of `Workflow` objects.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > inputs = {'0': hda}
 > > wf.invoke(inputs=inputs, history=new_hist)
@@ -784,7 +792,7 @@ new_hist.delete()
 
 ```
 
-> ### {% icon question %} Question: View the results
+> <question-title>View the results</question-title>
 > View the results on the Galaxy server with your web browser. Were you successful? Did it run?
 {: .question}
 
@@ -795,3 +803,5 @@ If you have completed the exercise, you can try to perform these extra tasks wit
 
 1. Download the workflow result to your computer
 2. Publish your history
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="bioblend-api" %}

@@ -27,11 +27,12 @@ contributors:
 priority: 1
 notebook:
   language: python
+  pyolite: true
 ---
 
 Here we'll learn some of the fundamentals of python and how to do basic maths in Python.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -82,7 +83,7 @@ print(y, z)
 You can print out multiple variables if you separate them with a comma `,`.
 
 
-> ### {% icon tip %} Tip: Variable Names
+> <tip-title>Variable Names</tip-title>
 > In Python, variable names:
 >
 > - can include letters, digits, and underscores
@@ -108,7 +109,7 @@ xy
 
 Time to check what we've learned!
 
-> ### {% icon question %} Exercise 0: Simple Equations
+> <question-title>Exercise 0: Simple Equations</question-title>
 > Given the equation:
 >
 > $$y = x * 921 + 534$$
@@ -117,7 +118,7 @@ Time to check what we've learned!
 >
 > You can test out solutions in the box below this question.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > x = 452
 > > y = x * 921 + 534
@@ -157,7 +158,7 @@ datetime.datetime.now()
 ```
 
 
-> ### {% icon tip %} Tip: More complicated importing
+> <tip-title>More complicated importing</tip-title>
 >
 > First, you can use `help` to learn about the contents of a library module. it works just like help for a function.
 >
@@ -204,9 +205,9 @@ And you'll see a list of the functions and properties available. Let's try out o
 math.sqrt(9)
 ```
 
-> ### {% icon solution %} Tip: Why `math.`?
+> <solution-title>Tip: Why `math.`?</solution-title>
 > When we import a module like `import math`, we need to use that as a prefix. Imagine we had two different modules, `math` and `other_math`, and both have a `sqrt` function. How would Python know which `sqrt` function we wanted? So we use `math.sqrt` to be explicit about which function we need.
-{: .tip}
+{: .solution}
 
 You might also have done powers (e.g. 2 cubed, or $$2^3$$) in the past, too:
 
@@ -223,12 +224,12 @@ help(math.pow)
 That would tell us that if we want 2 cubed, we need to write `2` and `3`. So let's do some exercises now and practice some of our maths skills.
 
 
-> ### {% icon question %} Exercise 1: Basics
+> <question-title>Exercise 1: Basics</question-title>
 > Please convert this function from an equation, into python code:
 >
 > $$x = 2^8$$
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > x = math.pow(2, 8)
 > > print(x)
@@ -243,7 +244,7 @@ print(x)
 ```
 
 
-> ### {% icon question %} Exercise 2: Averaging two values
+> <question-title>Exercise 2: Averaging two values</question-title>
 > See if you can find the average of these two values, using the math operations
 >
 > - 23484
@@ -251,7 +252,7 @@ print(x)
 >
 > You can find the average by summing, and dividing by 2:
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > (23484 + 12345) / 2
 > > ```
@@ -262,12 +263,12 @@ print(x)
 # Test solutions here!
 ```
 
-> ### {% icon question %} Exercise 3: Round-trip
+> <question-title>Exercise 3: Round-trip</question-title>
 > Please convert this function from an equation, into python code. Remember, you can assign values to variables, if you want to split this into multiple steps.
 >
 > $$x = \sqrt{9^2}$$
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > y = math.pow(9, 2)
 > > x = math.sqrt(y)
@@ -285,7 +286,7 @@ print(x)
 # Test solutions here!
 ```
 
-> ### {% icon question %} Exercise 4: Pythagorean Theorem
+> <question-title>Exercise 4: Pythagorean Theorem</question-title>
 > The formula for a 90° triangle can be expressed as:
 >
 > $$a^2 + b^2 = c^2$$
@@ -299,7 +300,7 @@ print(x)
 > b = 72
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > c = 97
 > > ```
 > > c = math.sqrt(math.pow(a, 2) + math.pow(b, 2))
@@ -311,7 +312,7 @@ print(x)
 # Test solutions here!
 ```
 
-> ### {% icon question %} Exercise 5: Quadratic Roots
+> <question-title>Exercise 5: Quadratic Roots</question-title>
 > Way back in algebra class, you might have been given a quadratic equation, something like:
 >
 > $$y = 2*x^2 + x - 1$$ and were told to find the roots of this function, using a complicated equation. So challenge time: reproduce this equation in Python:
@@ -330,7 +331,7 @@ print(x)
 >
 > Make sure you save each root as it's own variable, and then print them out.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > root1 = (-b + math.sqrt(math.pow(b, 2) - 4 * a * c))/(2 * a)
 > > root2 = (-b - math.sqrt(math.pow(b, 2) - 4 * a * c))/(2 * a)

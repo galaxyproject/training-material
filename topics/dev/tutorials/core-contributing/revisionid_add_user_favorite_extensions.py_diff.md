@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} ``...alembic/versions_gxy/2ad8047d652e_add_user_favorite_extentions_table.py``
+> <solution-title>``...alembic/versions_gxy/2ad8047d652e_add_user_favorite_extentions_table.py``</solution-title>
 > 
 > Possible changes to revision template:
 > 

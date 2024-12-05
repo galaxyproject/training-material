@@ -3,52 +3,48 @@ layout: tutorial_slides
 logo: assets/images/gat.png
 video: true
 
-title: "User, Role, Group and Quota managment"
+title: "User, Role, Group, Quota, and Authentication managment"
 zenodo_link: ""
 questions:
   - How does Galaxy manage users and groups?
   - How can I assign Quotas to specific users/groups?
+  - How should I manage groups vs roles
+  - What authentication methods are available?
+  - How is dataset privacy managed?
+  - Authentication Systems, what is available and how can I enable it?
 objectives:
   - Learn the Galaxy user/group management and assign Quotas.
   - Understand the Role Based Access Control (RBAC) of Galaxy.
 time_estimation: "15m"
 key_points:
   - Galaxy has a powerful user and group managment system that can be utilized for Quota management.
-contributors:
+contributions:
+  authorship:
   - natefoo
   - bgruening
   - hexylena
 subtopic: maintenance
 
+
+recordings:
+- captioners:
+  - hexylena
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 4M
+  youtube_id: crywu31L8qg
+  speakers:
+  - awspolly
+
 ---
-# Users, Groups, and Quotas
+# Users
 
 ???
 
-Users, Groups, and Quotas
+Users
 
 ---
 
-## Overview
-
-This section will cover handling of users, groups and quotas for Galaxy. We will look at the following in particular:
-* User Activation and Control
-* User Passwords and Session Policies
-* Setting Admin users and admin control of users
-* User Privacy
-* Roles and Groups
-* Setting permissions on Libraries and Datasets
-* Quotas
-* Introduction to alternate authentication
-
-???
-
-- There are a large number of topics related to users, groups and quotas
-- As an admin you have lots of control over this
-- Most of the configuration lives in the galaxy.yaml file
-- Some of the configuration must be done in the UI
-
----
 ## User Control
 
 option | description
@@ -69,6 +65,7 @@ option | description
 - Are users able to register themselves?
 - Are users able to purge datasets themselves?
 - All of these are questions you will need to consider.
+- The API allow run as option can be useful if you have an external system submitting jobs to Galaxy on behalf of your users.
 
 ---
 
@@ -91,20 +88,6 @@ option | description
 - If you want to require activation they cannot run tools until they receive the confirmation email
 - If you want to prevent users registering from specific domains
 
----
-## Password & Session Policies
-
-option | description
----- | ----
-`password_expiration_period` | Days before requiring a user to change password. ([NIST recommends not requiring password changes.](https://en.wikipedia.org/wiki/Password_policy#NIST_guidelines))
-`session_duration` | Minutes before invaliding a user's session, requiring re-login.
-
-.footnote[.center[options in `galaxy.yml`]]
-
-???
-
-- Some options are related to IT security policies
-- Check with your local IT authority for best practices for your organisation
 
 ---
 
@@ -115,7 +98,7 @@ option | description
 `admin_users` | Comma-separated list of admin users' emails.
 `allow_user_deletion` | Admins can delete users.
 `allow_user_impersonation` | Admins can become other users. Great for debugging / user assistance.
-`master_api_key` | Admin super-key allows many API admin actions without having a real admin user.
+`bootstrap_admin_api_key` | Admin super-key allows many API admin actions without having a real admin user.
 
 .footnote[.center[options in `galaxy.yml`]]
 
@@ -124,7 +107,7 @@ option | description
 - In the ansible galaxy training, you set the admin_users variable to define an admin email
 - User impersonation is a very commonly used feature
 - It allows admins to debug issues in their users' histories
-- A master api key cannot be used for every task an admin API key can be used for
+- A bootstrap api key cannot be used for every task an admin API key can be used for
 - This is because it is not tied to an individual user
 
 ---
@@ -149,9 +132,15 @@ option | description
 
 ---
 
-## Roles and Groups
+# Roles and Groups
 
-#### Role Based Access Control (RBAC)
+???
+
+Roles and Groups
+
+---
+
+### Role Based Access Control (RBAC)
 
 **Admin** can:
 * create roles (each user automatically has their own 'private' role)
@@ -223,6 +212,15 @@ option | description
 - This is very different from dataset permission management, where users must have every role
 
 ---
+
+# Quotas
+
+???
+
+Quotas
+
+---
+
 ## Quotas
 
 Used to control user disk usage.
@@ -254,6 +252,7 @@ or associated with Groups or Users
 
 ---
 class: left
+
 ## Quota Details
 
 - Quotas can be set for Users, or all users of a Group
@@ -271,6 +270,7 @@ Storage
 - E.g. a user working for two groups, might receive two different quota increases
 
 ---
+
 ## Quota Automation
 
 - There is currently no quota automation.
@@ -282,3 +282,121 @@ Storage
 
 - Quotas can be managed through the API
 - Some people want to automate this process, but it needs more work.
+
+---
+
+# Authentication Systems
+
+???
+
+Authentication Systems
+
+---
+
+## LDAP / AD
+
+- Galaxy can be configured to use LDAP or Active Directory for authentication
+- There is a config file named `config/auth_conf.xml`
+- User login then triggers an LDAP search for the user
+   - (optional) Galaxy binds with some bind credentials
+   - Searches for the user DN
+   - Re-binds with the user DN and password
+   - If the user is found, they are logged in
+
+???
+
+- LDAP and Active Directory can be used as an authentication method
+- This is done through the auth_conf.xml file
+- When the user logs in, the LDAP server is queried for the user
+
+
+---
+
+## Shibboleth, CAS
+
+- Many alternative authentication systems are widely used at universities and organisations
+- Galaxy itself does not natively support these systems
+- However, you can use a proxy to authenticate users
+- nginx and apache have modules for both of these methods
+
+???
+
+- Shibboleth and CAS are commonly used at some universities
+- While Galaxy does not natively support these, you can use a proxy to authenticate users
+- Nginx and apache both support this
+
+---
+
+## OIDC
+
+- Galaxy can be configured to use OpenID Connect for authentication
+- There are two configuration files:
+  - `config/oidc_backends_config.xml`
+  - `config/oidc_config.xml`
+- Supports a variety of providers:
+  - Google
+  - Custos
+  - Globus
+  - ORCID
+  - LS Login (Elixir AAI)
+  - KeyCloack
+
+???
+
+- OIDC is a common authentication method
+- There are two configuration files required for this
+- Galaxy supports a variety of providers
+- OIDC means you as an administrator don't have to worry about validating the account, or storing passwords
+
+---
+
+## Built in Authentication
+
+- Galaxy has it's own authentication system
+- Enabled by default
+
+option | description
+---- | ----
+`password_expiration_period` | Days before requiring a user to change password. ([NIST recommends not requiring password changes.](https://en.wikipedia.org/wiki/Password_policy#NIST_guidelines))
+`session_duration` | Minutes before invaliding a user's session, requiring re-login.
+
+.footnote[.center[options in `galaxy.yml`]]
+
+???
+
+- Galaxy has it's own authentication system
+- There are some options are related to IT security policies
+- Check with your local IT authority for best practices for your organisation
+- Please consider not setting a password expiration period, as NIST recommends against it
+
+---
+
+## Others (`REMOTE_USER`)
+
+- For all other authentication systems
+- If your authentication system provides a username in some secure way to the webserver
+- Then you can use it to authenticate users
+- The webserver must set the `REMOTE_USER` header
+- Galaxy will **trust** this header
+
+???
+
+- If you use a different authentication system than one previously mentioned
+- and your users are authenticated in some manner through your webserver/proxy
+- Then you can take advantage of `REMOTE_USER` authentication
+- It is a very simple authentication method, the webserver sets a header, and galaxy implicitly trusts it.
+
+---
+
+### Remote User (Security)
+
+- If you have local users on the Galaxy head node
+- Then please set `remote_user_secret`
+- This will send an additional secret header to Galaxy that will be validated
+- Otherwise local users can `curl` your Galaxy server, and impersonate any user.
+
+???
+
+- An important aspect for security is that if you have local users on the Galaxy head node
+- Then you should set the `remote_user_secret` option, to prevent them impersonating other users
+

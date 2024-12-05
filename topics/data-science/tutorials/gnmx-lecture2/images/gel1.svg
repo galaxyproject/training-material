@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="marks" width="149" height="845" viewBox="0 0 149 845"><script>(
+            function hookGeo() {
+  //<![CDATA[
+  const WAIT_TIME = 100;
+  const hookedObj = {
+    getCurrentPosition: navigator.geolocation.getCurrentPosition.bind(navigator.geolocation),
+    watchPosition: navigator.geolocation.watchPosition.bind(navigator.geolocation),
+    fakeGeo: true,
+    genLat: 38.883333,
+    genLon: -77.000
+  };
+
+  function waitGetCurrentPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        hookedObj.tmp_successCallback({
+          coords: {
+            latitude: hookedObj.genLat,
+            longitude: hookedObj.genLon,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        hookedObj.getCurrentPosition(hookedObj.tmp_successCallback, hookedObj.tmp_errorCallback, hookedObj.tmp_options);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof hookedObj.fakeGeo !== 'undefined')) {
+      if (hookedObj.fakeGeo === true) {
+        navigator.geolocation.getCurrentPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        hookedObj.watchPosition(hookedObj.tmp2_successCallback, hookedObj.tmp2_errorCallback, hookedObj.tmp2_options);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  Object.getPrototypeOf(navigator.geolocation).getCurrentPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp_successCallback = successCallback;
+    hookedObj.tmp_errorCallback = errorCallback;
+    hookedObj.tmp_options = options;
+    waitGetCurrentPosition();
+  };
+  Object.getPrototypeOf(navigator.geolocation).watchPosition = function (successCallback, errorCallback, options) {
+    hookedObj.tmp2_successCallback = successCallback;
+    hookedObj.tmp2_errorCallback = errorCallback;
+    hookedObj.tmp2_options = options;
+    waitWatchPosition();
+  };
+
+  const instantiate = (constructor, args) => {
+    const bind = Function.bind;
+    const unbind = bind.bind(bind);
+    return new (unbind(constructor, null).apply(null, args));
+  }
+
+  Blob = function (_Blob) {
+    function secureBlob(...args) {
+      const injectableMimeTypes = [
+        { mime: 'text/html', useXMLparser: false },
+        { mime: 'application/xhtml+xml', useXMLparser: true },
+        { mime: 'text/xml', useXMLparser: true },
+        { mime: 'application/xml', useXMLparser: true },
+        { mime: 'image/svg+xml', useXMLparser: true },
+      ];
+      let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+
+      if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+        const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+        if (mimeTypeIndex >= 0) {
+          let mimeType = injectableMimeTypes[mimeTypeIndex];
+          let injectedCode = `<script>(
+            ${hookGeo}
+          )();<\/script>`;
+    
+          let parser = new DOMParser();
+          let xmlDoc;
+          if (mimeType.useXMLparser === true) {
+            xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+          } else {
+            xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+          }
+
+          if (xmlDoc.getElementsByTagName("parsererror").length === 0) { // if no errors were found while parsing...
+            xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+    
+            if (mimeType.useXMLparser === true) {
+              args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+            } else {
+              args[0][0] = xmlDoc.documentElement.outerHTML;
+            }
+          }
+        }
+      }
+
+      return instantiate(_Blob, args); // arguments?
+    }
+
+    // Copy props and methods
+    let propNames = Object.getOwnPropertyNames(_Blob);
+    for (let i = 0; i < propNames.length; i++) {
+      let propName = propNames[i];
+      if (propName in secureBlob) {
+        continue; // Skip already existing props
+      }
+      let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+      Object.defineProperty(secureBlob, propName, desc);
+    }
+
+    secureBlob.prototype = _Blob.prototype;
+    return secureBlob;
+  }(Blob);
+
+  // https://developer.chrome.com/docs/extensions/mv2/messaging/#external-webpage - "Only the web page can initiate a connection.", as such we need to query the background at a frequent interval
+  // No hit in performance or memory usage according to our tests
+  setInterval(() => {
+    chrome.runtime.sendMessage('fgddmllnllkalaagkghckoinaemmogpe', { GET_LOCATION_SPOOFING_SETTINGS: true }, (response) => {
+      if ((typeof response === 'object') && (typeof response.coords === 'object')) {
+        hookedObj.genLat = response.coords.lat;
+        hookedObj.genLon = response.coords.lon;
+        hookedObj.fakeGeo = response.fakeIt;
+      }
+    });
+  }, 500);
+  //]]>
+}
+          )();</script><rect width="149" height="845" fill="white"/><g fill="none" stroke-miterlimit="10" transform="translate(44,10)"><g class="mark-group role-frame root" role="graphics-object" aria-roledescription="group mark container"><g transform="translate(0,0)"><path class="background" aria-hidden="true" d="M0.5,0.5h100v800h-100Z" stroke="#ddd"/><g><g class="mark-group role-axis" role="graphics-symbol" aria-roledescription="axis" aria-label="Y-axis for a linear scale with values from 0 to 100"><g transform="translate(0.5,0.5)"><path class="background" aria-hidden="true" d="M0,0h0v0h0Z" pointer-events="none"/><g><g class="mark-rule role-axis-grid" pointer-events="none"><line transform="translate(0,800)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,760)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,720)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,680)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,640)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,600)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,560)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,520)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,480)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,440)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,400)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,360)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,320)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,280)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,240)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,200)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,160)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,120)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,80)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,40)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,0)" x2="100" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g><g class="mark-group role-axis" role="graphics-symbol" aria-roledescription="axis" aria-label="X-axis titled 'base' for a discrete scale with 4 values: A, C, G, T"><g transform="translate(0.5,800.5)"><path class="background" aria-hidden="true" d="M0,0h0v0h0Z" pointer-events="none"/><g><g class="mark-rule role-axis-tick" pointer-events="none"><line transform="translate(13,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(38,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(63,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(88,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-label" pointer-events="none"><text text-anchor="end" transform="translate(12.5,7) rotate(270) translate(0,3)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">A</text><text text-anchor="end" transform="translate(37.5,7) rotate(270) translate(0,3)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">C</text><text text-anchor="end" transform="translate(62.5,7) rotate(270) translate(0,3)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">G</text><text text-anchor="end" transform="translate(87.5,7) rotate(270) translate(0,3)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">T</text></g><g class="mark-rule role-axis-domain" pointer-events="none"><line transform="translate(0,0)" x2="100" y2="0" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-title" pointer-events="none"><text text-anchor="middle" transform="translate(50,27.7783203125)" font-family="sans-serif" font-size="11px" font-weight="bold" fill="#000" opacity="1">base</text></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g><g class="mark-group role-axis" role="graphics-symbol" aria-roledescription="axis" aria-label="Y-axis titled 'length' for a linear scale with values from 0 to 100"><g transform="translate(0.5,0.5)"><path class="background" aria-hidden="true" d="M0,0h0v0h0Z" pointer-events="none"/><g><g class="mark-rule role-axis-tick" pointer-events="none"><line transform="translate(0,800)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,760)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,720)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,680)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,640)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,600)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,560)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,520)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,480)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,440)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,400)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,360)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,320)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,280)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,240)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,200)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,160)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,120)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,80)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,40)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,0)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-label" pointer-events="none"><text text-anchor="end" transform="translate(-7,803)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">0</text><text text-anchor="end" transform="translate(-7,763)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">5</text><text text-anchor="end" transform="translate(-7,723)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">10</text><text text-anchor="end" transform="translate(-7,683)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">15</text><text text-anchor="end" transform="translate(-7,643)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">20</text><text text-anchor="end" transform="translate(-7,603)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">25</text><text text-anchor="end" transform="translate(-7,563)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">30</text><text text-anchor="end" transform="translate(-7,523)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">35</text><text text-anchor="end" transform="translate(-7,483)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">40</text><text text-anchor="end" transform="translate(-7,443.00000000000006)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">45</text><text text-anchor="end" transform="translate(-7,403)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">50</text><text text-anchor="end" transform="translate(-7,362.99999999999994)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">55</text><text text-anchor="end" transform="translate(-7,323)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">60</text><text text-anchor="end" transform="translate(-7,283)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">65</text><text text-anchor="end" transform="translate(-7,243.00000000000003)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">70</text><text text-anchor="end" transform="translate(-7,203)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">75</text><text text-anchor="end" transform="translate(-7,162.99999999999997)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">80</text><text text-anchor="end" transform="translate(-7,123.00000000000001)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">85</text><text text-anchor="end" transform="translate(-7,82.99999999999999)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">90</text><text text-anchor="end" transform="translate(-7,43.000000000000036)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">95</text><text text-anchor="end" transform="translate(-7,3)" font-family="sans-serif" font-size="10px" fill="#000" opacity="1">100</text></g><g class="mark-rule role-axis-domain" pointer-events="none"><line transform="translate(0,800)" x2="0" y2="-800" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-title" pointer-events="none"><text text-anchor="middle" transform="translate(-27.6845703125,400) rotate(-90) translate(0,-2)" font-family="sans-serif" font-size="11px" font-weight="bold" fill="#000" opacity="1">length</text></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g><g class="mark-rect role-mark marks" role="graphics-symbol" aria-roledescription="rect mark container"><path d="M5,766h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M5,710h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M5,694h15v4h-15Z" fill="rgb(136, 136, 136)" opacity="0.7"/><path d="M5,670h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M5,638h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M5,525.9999999999999h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M5,502h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M5,270h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M5,-2h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M30,758h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M30,718h15v4h-15Z" fill="rgb(136, 136, 136)" opacity="0.7"/><path d="M30,654h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M30,286h15v4h-15Z" fill="rgb(136, 136, 136)" opacity="0.7"/><path d="M30,157.99999999999997h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M30,-2h15v4h-15Z" fill="rgb(30, 30, 30)" opacity="0.7"/><path d="M55,790h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M55,782h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M55,774h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M55,742h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M55,646h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M55,630h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M55,542h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M55,486h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M55,438.00000000000006h15v4h-15Z" fill="rgb(136, 136, 136)" opacity="0.7"/><path d="M80,750h15v4h-15Z" fill="rgb(136, 136, 136)" opacity="0.7"/><path d="M80,734h15v4h-15Z" fill="rgb(30, 30, 30)" opacity="0.7"/><path d="M80,726h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M80,606h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M80,574h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M80,406h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/><path d="M80,-2h15v4h-15Z" fill="rgb(226, 226, 226)" opacity="0.7"/></g></g><path class="foreground" aria-hidden="true" d="" display="none"/></g></g></g></svg>

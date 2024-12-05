@@ -1,6 +1,8 @@
 ---
 title: "New Feature: GTN Video Library"
-contributors: [shiltemann, hexylena]
+contributions:
+  authorship: [shiltemann, hexylena]
+  infrastructure: [shiltemann, hexylena]
 tags: [gtn infrastructure, new feature]
 cover: news/images/gtn-videolib-stats.png
 coveralt: Screenshot of the GTN Video Library Home page

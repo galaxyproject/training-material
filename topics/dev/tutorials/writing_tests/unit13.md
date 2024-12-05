@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} Solution
+> <solution-title></solution-title>
 > 
 > Group related tests in one class. Note that you need to add `self` as the first
 > argument to each test function. You also need to add `self` to the call to `MockUser()`. Leave

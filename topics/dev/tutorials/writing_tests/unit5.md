@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} Solution
+> <solution-title></solution-title>
 > 
 > Example of parametrizing a test. Replace the previous version of `test_bytesize_to_unit` with the
 > following. Note that the test function takes 2 additional arguments.

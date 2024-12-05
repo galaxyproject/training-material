@@ -45,7 +45,9 @@ tags:
 - R
 ---
 
-> ### {% icon comment %} Comment
+In this tutorial you'll learn to use SQL via R. Some R and SQL experience is a pre-requisite.
+
+> <comment-title></comment-title>
 >
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Databases and SQL](https://github.com/swcarpentry/sql-novice-survey/) lesson, which is licensed CC-BY 4.0.
 >
@@ -56,7 +58,7 @@ tags:
 {: .comment}
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -170,7 +172,7 @@ without checking them carefully first.
 A very [relevant XKCD](https://xkcd.com/327/) that explains the
 dangers of using raw input in queries a little more succinctly:
 
-![A 4 panel comic, in the first panel a person is shown answering the phone, hearing that their son's school has some computer trouble. In panel 2 they apologises asking if their child broke something. In panel 3, the unseen person on the other end of the phone call asks if they really named their son Robert'); Drop table students;--? They respond saying 'oh yes. little bobby tables we call him.' In the 4th panel the caller says 'well we have lost this years student records, I hope you're happy.' They respond 'And I hope you've learned to sanitize your database inputs'.](https://imgs.xkcd.com/comics/exploits_of_a_mom.png)
+![A 4 panel comic, in the first panel a person is shown answering the phone, hearing that their son's school has some computer trouble. In panel 2 they apologises asking if their child broke something. In panel 3, the unseen person on the other end of the phone call asks if they really named their son Robert'); Drop table students;--? They respond saying 'oh yes. little bobby tables we call him.' In the 4th panel the caller says 'well we have lost this years student records, I hope you're happy.' They respond 'And I hope you've learned to sanitize your database inputs'.](../../images/xkcd/exploits_of_a_mom.png)
 
 Since an unscrupulous parent might try to smuggle commands into our queries in many different ways,
 the safest way to deal with this threat is
@@ -205,7 +207,7 @@ and translates any special characters in the values
 into their escaped equivalents
 so that they are safe to use.
 
-> ### {% icon question %} Question: Filling a Table vs. Printing Values
+> <question-title>Filling a Table vs. Printing Values</question-title>
 >
 > Write an R program that creates a new database in a file called
 > `original.db` containing a single table called `Pressure`, with a
@@ -215,7 +217,7 @@ so that they are safe to use.
 > random numbers to a file?
 {: .question}
 
-> ### {% icon question %} Question: Filtering in SQL vs. Filtering in R
+> <question-title>Filtering in SQL vs. Filtering in R</question-title>
 >
 > Write an R program that creates a new database called
 > `backup.db` with the same structure as `original.db` and copies all

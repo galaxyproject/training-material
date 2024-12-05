@@ -20,11 +20,6 @@ contributors:
   - bgruening
 ---
 
-Galaxy Database Schema
-======================
-
-
-# Requirements
 
 For the hands-on examples you need access to a Galaxy server and access to its PostgreSQL database. You can set-up this yourself, or use the Galaxy Docker Image provided by Björn Grüning (https://github.com/bgruening/docker-galaxy-stable). During this tutorial, we will work with the Galaxy Docker Image.
 
@@ -110,7 +105,7 @@ There is nothing in the database that results from direct manipulation of the ta
 
 ## Start Docker and Galaxy
 
-> ### {% icon hands_on %} ***Hands on!***
+> <hands-on-title></hands-on-title>
 >
 >   1. Start the Galaxy Docker Image -  this time as an interactive session
 >
@@ -133,7 +128,7 @@ There is nothing in the database that results from direct manipulation of the ta
 
 ## Important tables
 
-> ### {% icon hands_on %} ***Hands on!***
+> <hands-on-title></hands-on-title>
 >
 >   1. Connect to the PostgreSQL database (change to user galaxy first)
 >
@@ -154,7 +149,7 @@ Enter `q` to exit the view results page, and space to see the next results page.
 
 ### Table “galaxy_user”
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 >    ```sql
 >        select * from galaxy_user;
@@ -163,7 +158,7 @@ Enter `q` to exit the view results page, and space to see the next results page.
 
 As described in Björn’s introduction, an Admin user is already pre-set (email: ‘admin@galaxy.org’, password: ‘admin’). Now let’s add (i.e. register) a new user via the Galaxy website. And check the database:
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 >    ```sql
 >        select * from galaxy_user;
@@ -172,7 +167,7 @@ As described in Björn’s introduction, an Admin user is already pre-set (email
 
 ### Table “job”
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 >    ```sql
 >        select * from job;
@@ -181,7 +176,7 @@ As described in Björn’s introduction, an Admin user is already pre-set (email
 
 Run a few jobs on the galaxy website (e.g _upload file_ a simple table and _add column_ with ‘Iterate’ no and yes) and check the database again:
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 >    ```sql
 >        select * from job \x\g\x
@@ -190,7 +185,7 @@ Run a few jobs on the galaxy website (e.g _upload file_ a simple table and _add 
 
 ### Table “job_parameter”
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 >   ```sql
 >       select * from job_parameter;
@@ -200,7 +195,7 @@ Run a few jobs on the galaxy website (e.g _upload file_ a simple table and _add 
 
 ### Table “history”
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 >   ```sql
 >       select * from history;
@@ -212,7 +207,7 @@ Give your current history a name and check the database again.
 
 ### Table “dataset”
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 >   ```sql
 >       select * from dataset;
@@ -221,7 +216,7 @@ Give your current history a name and check the database again.
 
 ### Table “history_dataset_association”
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 >   ```sql
 >       select * from history_dataset_association;
@@ -241,7 +236,7 @@ Depending on your local needs, some queries are missing, like:
 
 You can add the numbers per month from the reports, or:
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >   ```sql
 >       select j.id, j.create_time from job j limit 5;
 >   ```
@@ -284,7 +279,7 @@ all the users who have used the broken version, without alerting users who never
 
 The following example is from the development server at the FMI
 
-> ### {% icon hands_on %} Hands-on: 
+> <hands-on-title></hands-on-title>
 >   ```sql
 >       select distinct(j.tool_version) from job j
 >           where j.tool_id = 'qAlign';
@@ -307,7 +302,7 @@ The following example is from the development server at the FMI
 
 ## All users running a job using a certain parameter
 
-> ### {% icon hands_on %} ***Hands on!***
+> <hands-on-title></hands-on-title>
 >
 >   ```sql
 >       select jp.name, jp.value  from job_parameter jp
@@ -327,7 +322,7 @@ The following example is from the development server at the FMI
 
 ## Close PostgreSQL client and quit docker
 
-> ### {% icon hands_on %} Hands-on: 
+> <hands-on-title></hands-on-title>
 >   Close the PostgreSQL client
 >
 >   ```sql
@@ -359,7 +354,7 @@ https://docs.google.com/presentation/d/1l4DD0IaJjuvk1zAT1Sjv26bLyrSOg3VUm7rD-TQl
 
 To run SchemaSpy in your container you’ll need to get it, and also install some required software packages.
 
-> ### {% icon hands_on %} Hands-on: Schema Spy
+> <hands-on-title>Schema Spy</hands-on-title>
 >   ```sh
 >   wget https://github.com/schemaspy/schemaspy/releases/download/v6.1.0/schemaspy-6.1.0.jar
 >   apt-get update

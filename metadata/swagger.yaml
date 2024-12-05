@@ -29,7 +29,9 @@ paths:
         200:
           description: successful operation
           content:
-            application/csv
+            application/csv:
+              schema:
+                type: string
   /feedback.json:
     get:
       tags:
@@ -39,7 +41,9 @@ paths:
         200:
           description: successful operation
           content:
-            application/json
+            application/json:
+              schema:
+                type: string
   /contributors.json:
     get:
       tags:
@@ -61,6 +65,7 @@ paths:
       - name: id
         in: path
         description: ID of user to return
+        example: hexylena
         required: true
         schema:
           type: string
@@ -91,6 +96,7 @@ paths:
       - name: topicId
         in: path
         description: ID of the topic
+        example: microbiome
         required: true
         schema:
           type: string
@@ -109,6 +115,7 @@ paths:
       parameters:
       - name: topicId
         in: path
+        example: metagenomics
         description: ID of the topic
         required: true
         schema:
@@ -116,6 +123,7 @@ paths:
       - name: tutorialId
         in: path
         description: ID of the tutorial
+        example: mothur-miseq-sop-short
         required: true
         schema:
           type: string
@@ -123,6 +131,7 @@ paths:
         in: path
         description: "'slides' or 'tutorial', whichever material you want to request."
         required: true
+        example: tutorial
         schema:
           type: string
       summary: Get information about a specific topic
@@ -157,6 +166,102 @@ paths:
             text/plain:
               schema:
                 type: string
+
+  /ga4gh/trs/v2/tools/{topicId}-{tutorialId}/versions/{workflowId}:
+    get:
+      tags:
+      - ga4gh-trs
+      summary: Obtain a workflow's metadata
+      parameters:
+      - name: topicId
+        in: path
+        description: ID of the topic
+        required: true
+        example: metagenomics
+        schema:
+          type: string
+      - name: tutorialId
+        in: path
+        description: ID of the tutorial
+        required: true
+        example: mothur-miseq-sop-short
+        schema:
+          type: string
+      - name: workflowId
+        in: path
+        description: ID of the workflow
+        required: true
+        example: workflow1_quality_control
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+
+  /ga4gh/trs/v2/tools/{topicId}-{tutorialId}/versions/{workflowId}/GALAXY/descriptor:
+    get:
+      tags:
+      - ga4gh-trs
+      summary: Obtain a workflow's information
+      parameters:
+      - name: topicId
+        in: path
+        description: ID of the topic
+        required: true
+        example: metagenomics
+        schema:
+          type: string
+      - name: tutorialId
+        in: path
+        description: ID of the tutorial
+        required: true
+        example: mothur-miseq-sop-short
+        schema:
+          type: string
+      - name: workflowId
+        in: path
+        description: ID of the workflow
+        required: true
+        example: workflow1_quality_control
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+
+  /psl.json:
+    get:
+      tags:
+      - tools
+      summary: Get the GTN's public server tool listing. It lists all known public servers that are reachable at the time of the GTN's deployment, and which tool versions are installed on each of those servers.
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Psl'
+
+  /psl/{toolId}.json:
+    get:
+      tags:
+      - tools
+      parameters:
+      - name: toolId
+        in: path
+        example: toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate
+        description: Tool ID WITHOUT the version component!! Also when you call it properly you do NOT need to encode the /.
+        required: true
+        schema:
+          type: object
+      summary: Get the GTN's public server tool listing for a specific tool ID. It lists all known public servers that are reachable at the time of the GTN's deployment, and which versions of this tool are available. It's very important that you strip the version component!
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PslIndividual'
 
 components:
   schemas:
@@ -277,7 +382,7 @@ components:
         summary:
           type: string
           description: A human readable description of the topic's contents.
-        maintainers:
+        editorial_board:
           $ref: '#/components/schemas/ArrayOfUsers'
     TopicDetail:
       type: object
@@ -316,9 +421,41 @@ components:
               description:
                 type: string
                 description: A helpful subtopic description.
-        maintainers:
+        editorial_board:
           $ref: '#/components/schemas/ArrayOfUsers'
         materials:
           type: array
           items:
             $ref: '#/components/schemas/TrainingMaterial'
+    Psl:
+      type: object
+      properties:
+        servers:
+          $ref: '#/components/schemas/ArrayOfServers'
+        tools:
+          $ref: '#/components/schemas/ArrayOfToolVersions'
+    PslIndividual:
+      $ref: '#/components/schemas/ToolVersionClear'
+    ArrayOfServers:
+      type: array
+      items:
+        $ref: "#/components/schemas/Server"
+    Server:
+      type: object
+      properties:
+        url:
+          type: string
+          description: A url for the server
+        name:
+          type: string
+          description: A human readable description
+    ArrayOfToolVersions:
+      type: array
+      items:
+        $ref: "#/components/schemas/ToolVersionOpaque"
+    ToolVersionOpaque:
+      type: object
+      description: A hash/dict where the top level keys are the known versions of that tool (or '_' for built in tools), and then the servers that have that tool. Note that the servers are actually a list of integers which refer to the Server listing field.
+    ToolVersionClear:
+      type: object
+      description: A hash/dict where the top level keys are the known versions of that tool (or '_' for built in tools), and then the servers that have that tool.

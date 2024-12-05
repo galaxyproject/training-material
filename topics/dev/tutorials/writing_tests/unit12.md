@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} Solution
+> <solution-title></solution-title>
 > 
 > Factor out all common monkeypatching into fixtures. Note the `pytest` import.
 > 

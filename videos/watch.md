@@ -1,5 +1,6 @@
 ---
 layout: base
+title: GTN Videos
 ---
 
 <div class="row">
@@ -45,7 +46,7 @@ layout: base
 
 <script type="text/javascript">
 var params = (new URL(document.location)).searchParams,
-	videoid = params.get('v'),
+	videoid = params.get('v').startsWith('/') ? params.get('v').substring(1) : params.get('v'),
 	seekTo = params.get('t'),
 	videohost = 'https://training.galaxyproject.org',
 	vtt = `${videohost}/videos/topics/${videoid}.en.vtt`,

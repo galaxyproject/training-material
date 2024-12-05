@@ -6,6 +6,6 @@ box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 
-We started to collect some best practices for instructors inside our [Good practices slides]({% link topics/instructors/index.md %})
+We started to collect some best practices for instructors inside our [Good practices slides]({% link topics/teaching/index.md %})
 
 

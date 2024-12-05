@@ -35,11 +35,12 @@ contributors:
 priority: 3
 notebook:
   language: python
+  pyolite: true
 ---
 
 Python is a typed language, data has a type, and different types of data cannot always be connected immediately and might need some conversion step before they can be used together. For instance if you add a number to a number, what should happen? If you add a number to a message, what do you expect will happen?
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -161,12 +162,12 @@ The computer reads the value of `first` when doing the multiplication, creates
 a new value, and assigns it to `second`. After that, `second` does not remember
 where it came from. Every computation happens line-by-line.
 
-> ### {% icon question %} Question: Fractions
+> <question-title>Fractions</question-title>
 >
 > What type of value is 3.14159?
 > How can you find out?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > It is a floating-point number (often abbreviated "float").
 > > It is possible to find out by using the built-in function `type()`.
@@ -183,11 +184,11 @@ where it came from. Every computation happens line-by-line.
 
 ```
 
-> ### {% icon question %} Question: Automatic Type Conversion
+> <question-title>Automatic Type Conversion</question-title>
 >
 > What type of value is the result of (3.25 + 4)?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > It is a float:
 > > integers are automatically converted to floats as necessary.
@@ -208,7 +209,7 @@ where it came from. Every computation happens line-by-line.
 
 ```
 
-> ### {% icon question %} Question: Choose a Type
+> <question-title>Choose a Type</question-title>
 >
 > What type of value (integer, floating point number, or character string)
 > would you use to represent each of the following?  Try to come up with more than one good answer for each problem.  For example, in  # 1, when would counting days with a floating point variable make more sense than using an integer?
@@ -220,7 +221,7 @@ where it came from. Every computation happens line-by-line.
 > 5. Current population of a city.
 > 6. Average population of a city over time.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The answers to the questions are:
 > > 1. Integer, since the number of days would lie between 1 and 365.
@@ -232,7 +233,7 @@ where it came from. Every computation happens line-by-line.
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Question: Division Types
+> <question-title>Division Types</question-title>
 >
 > In Python 3, the `//` operator performs integer (whole-number) floor division, the `/` operator performs floating-point
 > division, and the `%` (or *modulo*) operator calculates and returns the remainder from integer division:
@@ -254,7 +255,7 @@ where it came from. Every computation happens line-by-line.
 > write an expression that calculates the number of surveys needed
 > to reach everyone once.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > We want the minimum number of surveys that reaches everyone once, which is
 > > the rounded up value of `num_subjects/ num_per_survey`. This is
 > > equivalent to performing a floor division with `//` and adding 1. Before
@@ -278,7 +279,7 @@ where it came from. Every computation happens line-by-line.
 # Test out solutions here!
 ```
 
-> ### {% icon question %} Question: Strings to Numbers
+> <question-title>Strings to Numbers</question-title>
 >
 > Where reasonable, `float()` will convert a string to a floating point number,
 > and `int()` will convert a floating point number to an integer:
@@ -295,13 +296,13 @@ where it came from. Every computation happens line-by-line.
 >
 > If the conversion doesn't make sense, however, an error message will occur.
 >
-> > ### {% icon code-in %} Python
+> > <code-in-title>Python</code-in-title>
 > > ```
 > > print("string to float:", float("Hello world!"))
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > Traceback (most recent call last):
 > >   File "<stdin>", line 1, in <module>
@@ -320,7 +321,7 @@ where it came from. Every computation happens line-by-line.
 > print("fractional string to int:", int("3.4"))
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > What do you expect this program to do? It would not be so unreasonable to expect the Python 3 `int` command to
 > > convert the string "3.4" to 3.4 and an additional type conversion to 3. After all, Python 3 performs a lot of other
 > > magic - isn't that part of its charm?
@@ -352,7 +353,7 @@ where it came from. Every computation happens line-by-line.
 # Test out solutions here!
 ```
 
-> ### {% icon question %} Question: Arithmetic with Different Types
+> <question-title>Arithmetic with Different Types</question-title>
 >
 > Which of the following will return the floating point number `2.0`?
 > Note: there may be more than one right answer.
@@ -370,7 +371,7 @@ where it came from. Every computation happens line-by-line.
 > 5. `int(first) + int(float(third))`
 > 6. `2.0 * second`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Answer: 1 and 4 give exactly 2.0.
 > > Answer 5 gives the value `2` which may be considered equivalent, but is not returning a float specifically.

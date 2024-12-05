@@ -1,1 +1,1 @@
-systemctl --no-pager status galaxy
+systemctl --no-pager status galaxy-gunicorn

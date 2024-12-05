@@ -23,6 +23,17 @@ contributors:
   - slugger70
   - hexylena
   - nsoranzo
+
+recordings:
+- captioners:
+  - cat-bro
+  date: '2021-06-28'
+  galaxy_version: '21.05'
+  length: 17M
+  youtube_id: 8Rdho_eUeKc
+  speakers:
+  - cat-bro
+
 ---
 
 ## Galaxy tools
@@ -116,6 +127,7 @@ class: left
     <section id="getext" name="Get Data">
         <tool file="data_source/upload.xml"/>
         <tool file="data_source/ucsc_tablebrowser.xml"/>
+        <tool_dir dir="local-tools/" />
 ...
 ```
 
@@ -775,59 +787,12 @@ Installing samtools_suite will result in all of these samtools repositories bein
 
 ---
 
-## Tool dependency resolution
+## Resolving Galaxy Tool Dependencies
 
-* We aim to make Galaxy resolver-independent, with a preference for [conda](https://conda.io/) and containers
-* What resolver is going to be used for the tool dependencies is determined at runtime
-according to the order specified in `dependency_resolvers_conf.xml`.
-
-```xml
-<dependency_resolvers>
-  <tool_shed_packages />
-  <galaxy_packages />
-  <conda />
-  <galaxy_packages versionless="true" />
-  <conda versionless="true" />
-<!-- other resolvers
-  <lmod />
-  <lmod versionless="true" />
-  <modules modulecmd="/opt/Modules/3.2.9/bin/modulecmd" />
-  <modules modulecmd="/opt/Modules/3.2.9/bin/modulecmd" versionless="true" default_indicator="default" />
-  <tool_shed_tap />
-  <homebrew />
--->
-</dependency_resolvers>
-```
-
-[Full documentation](https://docs.galaxyproject.org/en/master/admin/dependency_resolvers.html)
-
-???
-
-Without going into detail, at run-time Galaxy will look for installed dependencies
-in an order determined by the dependency_resolvers.conf.xml file.
-
-The file shown on this slide is the default configuration.
-
-Given a set of requirements, Galaxy will look first for an installed toolshed package that meets those requirements.
-
-If galaxy finds this it will source the package and look no further.
-
-If galaxy does not find this it will look for
-- a galaxy package with the required version,
-- followed by a conda package with the required version,
-- followed by a galaxy package of any version,
-- followed by a conda package of any version.
-
-Typically the packages to run the tool will be conda packages.
-
----
-
-## Using containers for Tool Dependencies
-
-- Galaxy can also use **Docker** or **Singularity** containers to resolve dependencies
+- The recommended method for resolving tool dependencies is with containers: **Apptainer/Singularity** or **Docker**
+- It is also possible to use **Conda** to resolve dependencies.
 - You can read more about this in the [Tool Dependencies and Containers slides](../../../dev/tutorials/containers/slides.html)
 
 ???
 
-A more recent development in Galaxy is the use of Docker or Singularity containers to resolve dependencies
-and there is some further reading on this.
+The preferred method for resolving tool dependencies is through containers. Apptainer particularly works well in the context of cluster jobs. It is also possible to use non-container dependency resolution methods. There is further reading available on this topic.

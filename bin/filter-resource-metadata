@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'yaml'
 
 key = ARGV[0]
 files = ARGV.drop(1)
 
-for fn in files do
-	data = YAML.load_file(fn)
-	if data.is_a?(Hash) and data.key?(key) && data[key] == true then
-		puts "#{fn}"
-	end
+files.each do |fn|
+  data = YAML.load_file(fn)
+  puts fn if data.is_a?(Hash) && data.key?(key) && data[key] == true
 end

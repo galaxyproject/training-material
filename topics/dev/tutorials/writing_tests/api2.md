@@ -1,15 +1,15 @@
 
-> ### {% icon solution %} Solution
+> <solution-title></solution-title>
 > 
 > API test for creating an object.
 > 
 > ```python
-> class MyTutorialApiTestCase(ApiTestCase):
+> class TestMyTutorialApiTestCase(ApiTestCase):
 > 
 >     def test_create_role(self):
 >         # prepare new role
->         name = self.dataset_populator.get_random_name()
->         description = 'description of this cool role'
+>         name = "cool role"
+>         description = "description of this cool role"
 >         payload = {
 >             "name": name,
 >             "description": description,

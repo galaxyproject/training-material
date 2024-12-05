@@ -1,0 +1,6 @@
+- Introduce yourself
+- Explain and show the use of participant chat
+- Remind learners to use post-it notes to give feedback
+- Answer questions on the participant chat
+- Publish Galaxy history regularly, for the participants who might be left behind
+- Check the instructor - helper chat regularly and adapt the pace in function

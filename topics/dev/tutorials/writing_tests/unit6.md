@@ -1,12 +1,11 @@
 
-> ### {% icon solution %} Solution
+> <solution-title></solution-title>
 > 
 > Example of replacing an object with a test double:
 > 
 > ```python
 > from galaxy.security.validate_user_input import (
 >     extract_domain,
->     validate_domain_resolves,
 >     validate_email,  # we've added this import
 >     validate_email_str,
 >     validate_publicname_str,
