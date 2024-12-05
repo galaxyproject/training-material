@@ -136,8 +136,9 @@ an example of the file that is used to manually filter the tools for a community
 >    1. Change the value in the `Reviewed` column from `FALSE` to `TRUE` (this will be done automatically if an entry of the tool in `tools_status.tsv` exists).
 >    2. Add `TRUE` to the `To keep` column if the tool should be kept, and `FALSE` if not.
 >    3. Add `TRUE` or `FALSE` also to the `Deprecated` column.
-> 4. Copy paste the `Galaxy wrapper id`, `To keep`, `Deprecated` columns in a new table (in that order). This 
-> can also be done using the reference function of your Spreadsheet Software.
+> 4. Copy paste the `Galaxy wrapper id`, `To keep`, `Deprecated` columns in a new table (in that order). 
+>
+>    This can also be done using the reference function of your Spreadsheet Software.
 > 5. Export the new table as TSV (without header).
 > 6. Submit the TSV as `tools_status.tsv` in your community folder.
 > 7. Wait for the Pull Request to be merged
