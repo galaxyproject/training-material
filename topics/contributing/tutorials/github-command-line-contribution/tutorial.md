@@ -26,8 +26,7 @@ contributors:
   - bebatut
 ---
 
-# Introduction
-{:.no_toc}
+
 
 Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on a [GitHub](https://github.com) repository: [{{ site.github_repository }}]({{ site.github_repository }}).
 
@@ -44,7 +43,7 @@ The process of development of new content is open and transparent, using git and
 1. If you receive feedback, make changes in your local clone and push them to your branch on GitHub: the pull request will update automatically
 1. Pull requests will be merged by the training team members after at least one other person has reviewed the Pull request and approved it.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, you will learn how to contribute to the GitHub repository:
 >
@@ -61,14 +60,14 @@ A fork is a copy of a repository. [Forking](https://help.github.com/articles/for
 
 Forking a repository is a simple two-step process:
 
-> ### {% icon hands_on %} Hands-on: Fork the repository
+> <hands-on-title>Fork the repository</hands-on-title>
 >
 > 1. Go on the GitHub repository: [{{ site.github_repository }}]({{ site.github_repository }})
 > 2. Click on **Fork** (top-right corner of the page)
 >
 >    ![Fork](../../images/PR_fork.jpg)
 >
-> > ### {% icon comment %} Comment
+> > <comment-title></comment-title>
 > > When you click the **Fork** button GitHub will show you a list with your user account and any groups where you can create a fork of this repository (starting with `@`). If you see yourself only below "You have existing forks of this repository:", it means you already have a fork and you have nothing to do.
 > {: .comment}
 >
@@ -80,7 +79,7 @@ To modify the content of the repository, you need a copy of it on your computer.
 
 ![Explanation of the cloning](../../images/PR_schema_02.png "Cloning a repository"){: width="900px"}
 
-> ### {% icon hands_on %} Hands-on: Clone the GitHub repository
+> <hands-on-title>Clone the GitHub repository</hands-on-title>
 >
 > 1. Get the URL of your fork. You can find this on the main page of your fork under the green button:
 >    1. Click on **Code** (right)
@@ -106,7 +105,7 @@ To modify the content of the repository, you need a copy of it on your computer.
 >    ```
 {: .hands_on}
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > If you already have a local copy of the GitHub repository, you need to update it before doing any changes. To learn how to do that, please follow the [last section](#stay-up-to-date).
 {: .comment}
 
@@ -118,17 +117,17 @@ In GitHub flow, there is a concept: one new feature or change = one branch.
 
 When you're working on a project, you're going to have a bunch of different features or ideas in progress at any given time – some of which are ready to go, and others which are not. Branching exists to help you manage this workflow. You should develop different features on different branches to help keep the changes you make simple and easy to review.
 
-![Divergence of a branch compared to master](../../images/PR_branches_01.png "When you create a branch in your project, you're creating an environment where you can try out new ideas. Changes you make on a branch don't affect the master branch")
+![Divergence of a branch compared to main](../../images/PR_branches_01.png "When you create a branch in your project, you're creating an environment where you can try out new ideas. Changes you make on a branch don't affect the main branch")
 
 Here for this tutorial, you will create a branch called "my_new_branch" in which you will modify the `CONTRIBUTORS.yaml` file, the file used to generate the [Hall of Fame]({% link hall-of-fame.md %}).
 
-> ### {% icon hands_on %} Hands-on: Create a branch
+> <hands-on-title>Create a branch</hands-on-title>
 >
 > 1. List the existing branch
 >
 >    ```
 >    $ git branch
->      * master
+>      * main
 >    ```
 >
 >    The branch on which you are is shown with the `*`
@@ -149,11 +148,11 @@ This branch is added to your local copy:
 
 # Make your changes on this branch
 
-You have created your first branch! Now you want to make the change in the `CONTRIBUTING.yaml` file. By changing a file in this branch, it will diverge from the `master` branch. It will contain data that is only on this new branch:
+You have created your first branch! Now you want to make the change in the `CONTRIBUTING.yaml` file. By changing a file in this branch, it will diverge from the `main` branch. It will contain data that is only on this new branch:
 
-![Divergence of the branch compared to master](../../images/PR_branches_02.png "The changes on your branch will not be on the master branch")
+![Divergence of the branch compared to main](../../images/PR_branches_02.png "The changes on your branch will not be on the main branch")
 
-> ### {% icon hands_on %} Hands-on: Make changes in a branch
+> <hands-on-title>Make changes in a branch</hands-on-title>
 >
 > 1. Open with your favorite text editor the `CONTRIBUTORS.yaml` file that is on your computer
 > 2. Add yourself in the `CONTRIBUTORS.yaml` file
@@ -190,7 +189,7 @@ You have created your first branch! Now you want to make the change in the `CONT
 
 The changes you made on your branch are only on the local copy of the repository. To propagate them online, you need to push them on your fork on GitHub:
 
-> ### {% icon hands_on %} Hands-on: Push the changes
+> <hands-on-title>Push the changes</hands-on-title>
 >
 > 1. Push the changes to the GitHub repository
 >
@@ -198,13 +197,13 @@ The changes you made on your branch are only on the local copy of the repository
 >    $ git push origin my_new_branch
 >    ```
 >
->    > ### {% icon details %} "push origin"
+>    > <details-title>"push origin"</details-title>
 >    > When you `git push`ed, you specified `origin`. Git repositories can know that forks exist in multiple places. When you clone one, it creates a "remote" (a remote repository) which it names `origin`, set to the URL that you used when you cloned. By having multiple remotes, you can manage more complex workflows.
 >    {: .details}
 >
 > 2. Go to your GitHub repository
 > 3. Change to the "my_new_branch" branch:
->    1. Click on **Branch: master** (left)
+>    1. Click on **Branch: main** (left)
 >
 >       ![Selecting branch on GitHub](../../images/PR_branch_github.png)
 >
@@ -222,14 +221,14 @@ You pushed your changes to GitHub, but currently they are only on your fork. You
 
 ![Pull request](../../images/PR_schema_05.png "Pull Requests provide a way to notify project maintainers about the changes you'd like them to consider")
 
-> ### {% icon hands_on %} Hands-on: Create a pull request
+> <hands-on-title>Create a pull request</hands-on-title>
 >
 > 2. Go to your GitHub repository
 > 1. Click on **Compare & pull request**
 >
 >    !["Opening a pull request"](../../images/PR_button.png)
 >
-> 3. Check that the selected branch are correct: **master** on the left and your branch name on the right
+> 3. Check that the selected branch are correct: **main** on the left and your branch name on the right
 >
 >    ![Branches in PR](../../images/PR_branch_check.png)
 >
@@ -239,20 +238,30 @@ You pushed your changes to GitHub, but currently they are only on your fork. You
 >
 >    1. Add a title for the Pull Request
 >    2. Add a message explaining the changes you made (Be kind <i class="fa fa-smile-o" aria-hidden="true"></i>)
->    3. Click on **Create pull request**
+>    3. Click on **Create pull request** or switch to **Create draft pull request** from the dropdown menu
+>
+>       ![Create pull request dropdown in the GitHub interface is shown, the draft pull request button option is highlighted](../../images/PR_create_menu.png)
+>
+>       >  <details-title>"Draft pull requests"</details-title>
+>       >  [Creating a pull request as a draft](https://github.blog/2019-02-14-introducing-draft-pull-requests/#tag-your-work-in-progress) serves as an indication that you are still working on the content.
+>       >  Reviewers may comment on the current state and give general feedback, but they will know that they are not looking at the final version of your contribution.
+>       >
+>       >  In the Galaxy Training Material repository we have also disabled the computationally most expensive automated tests on draft pull requests, and we encourage you to use the draft stage as a small contribution to sustainable computing.
+>       {: .details}
+>
 > 3. Go to **Pull requests** to check if it is there
 {: .hands_on}
 
 Once the pull is open, it will be reviewed. There are two possible outcomes:
 
-1. Your pull request is accepted. Congratulations! Your changes will be merged into the master branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({% link hall-of-fame.md %})
+1. Your pull request is accepted. Congratulations! Your changes will be merged into the main branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({% link hall-of-fame.md %})
 2. Your pull request needs modifications: the reviewers will ask for some changes, possibly because the automatic tests are failing.
 
 # Make the requested changes
 
 One of the reviewers of your pull request asked you to add your name after your GitHub username in the `CONTRIBUTORS.yaml` file
 
-> ### {% icon hands_on %} Hands-on: Make further changes
+> <hands-on-title>Make further changes</hands-on-title>
 >
 > 1. Make the requested changes in the `CONTRIBUTORS.yaml` file
 >
@@ -327,12 +336,12 @@ On the bottom of your pull request, you can see the status of the tests:
 
 You now want to work on a new tutorial or make some other new changes. However since you get a local copy, some changes have happened to the original GitHub repository. You need then to update your local copy of the repository before changing anything.
 
-> ### {% icon hands_on %} Hands-on: Update the local copy
+> <hands-on-title>Update the local copy</hands-on-title>
 >
-> 1. Move to the `master` branch
+> 1. Move to the `main` branch
 >
 >    ```
->    $ git checkout master
+>    $ git checkout main
 >    ```
 >
 > 2. Add a reference to the original GitHub repository
@@ -341,22 +350,45 @@ You now want to work on a new tutorial or make some other new changes. However s
 >    $ git remote add upstream https://github.com/galaxyproject/training-material.git
 >    ```
 >
->    > ### {% icon comment %}: Error "remote upstream already exists"
+>    > <comment-title>Error "remote upstream already exists"</comment-title>
 >    > If you have done step 2 before and try to `remote add` again, git will tell you that a "remote upstream already exists". In this case you can safely continue to step 4.
 >    {: .comment}
 >
 > 4. Update the local copy of the repository by "pulling" in the content of the original GitHub repository
 >
 >    ```
->    $ git pull upstream master
+>    $ git pull upstream main
 >    ```
 >
 {: .hands_on}
 
 You can now restart the GitHub flow to propose new changes: start by [creating a new branch](#create-a-new-branch).
 
+
+# Close the Pull Request
+
+Great! You now know how to make pull request on GitHub, and how to make changes after a review.
+Reviewers can now approve and merge your pull request.
+
+Because this was just a practice pull request, let's close it again.
+
+
+> <hands-on-title>Close the Pull Request</hands-on-title>
+>
+> Once you have run through all these steps, please close the pull request again.
+>
+> 1. Go to the [list of pull request tab on GitHub](https://github.com/galaxyproject/training-material/pulls)
+> 2. Click on your pull request
+> 3. Scroll to the bottom of the page
+> 3. Click on "Close pull request" button
+>
+> Whenever you add your first real contribution, you can add yourself to the `CONTRIBUTORS.yaml` file in that PR.
+>
+{: .hands_on}
+
+
 # Conclusion
-{:.no_toc}
+
 
 With this tutorial, you have learned some basics `git` commands and principles:
 
@@ -367,14 +399,14 @@ You also learned the GitHub flow and its cycle:
 1. Create a new branch in your local copy
 2. Commit the changes in that branch
 1. Push that branch to your fork on GitHub
-1. Submit a pull request from that branch to the master repository
+1. Submit a pull request from that branch to the main repository
 1. Wait for feedbacks and make requested changes
 1. Update your local copy
 1. Restart the cycle
 
 You can now contribute and help us to improve our tutorials!
 
-> ### {% icon details %} Git in Depth
+> <details-title>Git in Depth</details-title>
 > This tutorial was a quick introduction to explain the basics of contributing to the training material. We recommend that everyone follow a more detailed git tutorials:
 > - [Software Carpentry tutorial](http://swcarpentry.github.io/git-novice/) which explains a bit more in detail some git commands and the concept of remote, local and stagging
 > - [Learn Git Branching](https://learngitbranching.js.org/) by GitHub to test the different git commands

@@ -3,6 +3,7 @@ title: Stop RStudio
 area: interactive tools
 box_type: hands_on
 layout: faq
+contributors: [yvanlebras,shiltemann]
 ---
 
 

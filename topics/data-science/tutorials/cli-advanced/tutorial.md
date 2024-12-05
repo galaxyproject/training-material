@@ -63,22 +63,28 @@ key_points:
 notebook:
   language: bash
 subtopic: bash
-contributors:
+contributions:
+  authorship:
   - carpentries
   - hexylena
   - bazante1
+  - avans-atgm
+  funding:
+  - gallantries
+tags:
+- bash
 ---
 
 This tutorial will walk you through the basics of how to use the Unix command line.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) ["The Unix Shell"](https://swcarpentry.github.io/shell-novice/) lesson, which is licensed CC-BY 4.0. Adaptations have been made to make this work better in a GTN/Galaxy environment.
 >
 {: .comment}
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -132,7 +138,7 @@ wc -l *.pdb
 The `-m` and `-w` options can also be used with the `wc` command, to show
 only the number of characters or the number of words in the files.
 
-> ### {% icon tip %} Why Isn't It Doing Anything?
+> <tip-title>Why Isn't It Doing Anything?</tip-title>
 >
 > What happens if a command is supposed to process a file, but we
 > don't give it a filename? For example, what if we type:
@@ -172,6 +178,15 @@ file `lengths.txt` instead.)  The shell will create
 the file if it doesn't exist. If the file exists, it will be
 silently overwritten, which may lead to data loss and thus requires
 some caution.
+
+> <tip-title>No <code>&gt;</code> on an AZERTY keyboard?</tip-title>
+> You can rewrite this using the tee command which writes out a file, while also showing the output to `stdout`.
+> ```bash
+> wc -l *.pdb | tee lengths.txt
+> ```
+> Or you can use copy and paste to copy the `>` character from the materials.
+{: .tip}
+
 `ls lengths.txt` confirms that the file exists:
 
 ```bash
@@ -188,7 +203,7 @@ so `cat` just shows us what it contains:
 cat lengths.txt
 ```
 
-> ### {% icon tip %} Output Page by Page
+> <tip-title>Output Page by Page</tip-title>
 >
 > We'll continue to use `cat` in this lesson, for convenience and consistency,
 > but it has the disadvantage that it always dumps the whole file onto your screen.
@@ -205,7 +220,7 @@ cat lengths.txt
 Next we'll use the `sort` command to sort the contents of the `lengths.txt` file.
 But first we'll use an exercise to learn a little about the sort command:
 
-> ### {% icon question %} What Does `sort -n` Do?
+> <question-title>What Does `sort -n` Do?</question-title>
 >
 > The file `shell-lesson-data/numbers.txt`
 > contains the following lines:
@@ -240,7 +255,7 @@ But first we'll use an exercise to learn a little about the sort command:
 >
 > Explain why `-n` has this effect.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The `-n` option specifies a numerical rather than an alphanumerical sort.
 > {: .solution}
 {: .question}
@@ -272,7 +287,7 @@ and so on.
 Since `sorted-lengths.txt` contains the lengths of our files ordered from least to greatest,
 the output of `head` must be the file with the fewest lines.
 
-> ### {% icon tip %} Redirecting to the same file
+> <tip-title>Redirecting to the same file</tip-title>
 >
 > It's a very bad idea to try redirecting
 > the output of a command that operates on a file
@@ -287,20 +302,20 @@ the output of `head` must be the file with the fewest lines.
 > the contents of `lengths.txt`.
 {: .tip}
 
-> ### {% icon question %} What Does `>>` Mean?
+> <question-title>What Does `>>` Mean?</question-title>
 >
 > We have seen the use of `>`, but there is a similar operator `>>`
 > which works slightly differently.
 > We'll learn about the differences between these two operators by printing some strings.
 > We can use the `echo` command to print strings e.g.
 >
-> > ### {% icon code-in %} Input: Bash
+> > <code-in-title>Bash</code-in-title>
 > > ```
 > > $ echo The echo command prints text
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > The echo command prints text
 > > ```
@@ -308,7 +323,7 @@ the output of `head` must be the file with the fewest lines.
 >
 > Now test the commands below to reveal the difference between the two operators:
 >
-> > ### {% icon code-in %} Input: Bash
+> > <code-in-title>Bash</code-in-title>
 > > ```
 > > $ echo hello > testfile01.txt
 > > ```
@@ -316,7 +331,7 @@ the output of `head` must be the file with the fewest lines.
 >
 > and:
 >
-> > ### {% icon code-in %} Input: Bash
+> > <code-in-title>Bash</code-in-title>
 > > ```
 > > $ echo hello >> testfile02.txt
 > > ```
@@ -339,7 +354,7 @@ the output of `head` must be the file with the fewest lines.
 # Explore the possible solutions here!
 ```
 
-> ### {% icon question %} Appending Data
+> <question-title>Appending Data</question-title>
 >
 > We have already met the `head` command, which prints lines from the start of a file.
 > `tail` is similar, but prints lines from the end of a file instead.
@@ -358,7 +373,7 @@ the output of `head` must be the file with the fewest lines.
 > 3. The first three lines and the last two lines of `animals.txt`
 > 4. The second and third lines of `animals.txt`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Option 3 is correct.
 > > For option 1 to be correct we would only run the `head` command.
 > > For option 2 to be correct we would only run the `tail` command.
@@ -425,7 +440,7 @@ build a pipeline where the output of the wc command is the input to the sort
 command, the output of the sort command is the input to the head command and
 the output of the head command is directed to the shell
 
-> ### {% icon question %} Piping Commands Together
+> <question-title>Piping Commands Together</question-title>
 >
 > In our current directory, we want to find the 3 files which have the least number of
 > lines. Which command listed below would work?
@@ -435,7 +450,7 @@ the output of the head command is directed to the shell
 > 3. `wc -l * | head -n 3 | sort -n`
 > 4. `wc -l * | sort -n | head -n 3`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Option 4 is the solution.
 > > The pipe character `|` is used to connect the output from one command to
 > > the input of another.
@@ -471,7 +486,7 @@ You can *and should* write your programs this way
 so that you and other people can put those programs into pipes to multiply their power.
 
 
-> ### {% icon question %} Pipe Reading Comprehension
+> <question-title>Pipe Reading Comprehension</question-title>
 >
 > A file called `animals.txt` (in the `shell-lesson-data/data` folder) contains the following data:
 >
@@ -494,7 +509,7 @@ so that you and other people can put those programs into pipes to multiply their
 >
 > Hint: build the pipeline up one command at a time to test your understanding
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The `head` command extracts the first 5 lines from `animals.txt`.
 > > Then, the last 3 lines are extracted from the previous 5 by using the `tail` command.
 > > With the `sort -r` command those 3 lines are sorted in reverse order and finally,
@@ -513,7 +528,7 @@ so that you and other people can put those programs into pipes to multiply their
 # Explore the possible solutions here!
 ```
 
-> ### {% icon question %} Pipe Construction
+> <question-title>Pipe Construction</question-title>
 >
 > For the file `animals.txt` from the previous exercise, consider the following command:
 >
@@ -544,7 +559,7 @@ so that you and other people can put those programs into pipes to multiply their
 > out what animals the file contains (without any duplicates in their
 > names)?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > $ cut -d , -f 2 animals.txt | sort | uniq
 > > ```
@@ -555,7 +570,7 @@ so that you and other people can put those programs into pipes to multiply their
 # Explore the possible solutions here!
 ```
 
-> ### {% icon question %} Which Pipe?
+> <question-title>Which Pipe?</question-title>
 >
 > The file `animals.txt` contains 8 lines of data formatted as follows:
 >
@@ -578,7 +593,7 @@ so that you and other people can put those programs into pipes to multiply their
 > 4.  `cut -d, -f 2 animals.txt | sort | uniq -c`
 > 5.  `cut -d, -f 2 animals.txt | sort | uniq -c | wc -l`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Option 4. is the correct answer.
 > > If you have difficulty understanding why, try running the commands, or sub-sections of
 > > the pipelines (make sure you are in the `shell-lesson-data/data` directory).
@@ -651,7 +666,7 @@ so instead, she'll have to be careful later on to select files using the wildcar
 `NENE*A.txt NENE*B.txt`.
 
 
-> ### {% icon question %} Removing Unneeded Files
+> <question-title>Removing Unneeded Files</question-title>
 >
 > Suppose you want to delete your processed data files, and only keep
 > your raw files and processing script to save storage.
@@ -664,7 +679,7 @@ so instead, she'll have to be careful later on to select files using the wildcar
 > 3. `rm * .txt`
 > 4. `rm *.*`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. This would remove `.txt` files with one-character names
 > > 2. This is correct answer
 > > 3. The shell would expand `*` to match everything in the current directory,
@@ -725,7 +740,7 @@ done
 ```
 
 
-> ### {% icon tip %} Follow the Prompt
+> <tip-title>Follow the Prompt</tip-title>
 >
 > The shell prompt changes from `$` to `>` and back again as we were
 > typing in our loop. The second prompt, `>`, is different to remind
@@ -761,7 +776,7 @@ For the third iteration, `$filename` becomes
 and `tail` on the output of that.
 Since the list was only three items, the shell exits the `for` loop.
 
-> ### {% icon tip %} Same Symbols, Different Meanings
+> <tip-title>Same Symbols, Different Meanings</tip-title>
 >
 > Here we see `>` being used as a shell prompt, whereas `>` is also
 > used to redirect output.
@@ -803,13 +818,13 @@ done
 
 it would work exactly the same way.
 
-**Don't do this.**
+# Don't do this.
 
 Programs are only useful if people can understand them,
 so meaningless names (like `x`) or misleading names (like `temperature`)
 increase the odds that the program won't do what its readers think it does.
 
-> ### {% icon question %} Variables in Loops
+> <question-title>Variables in Loops</question-title>
 >
 > This exercise refers to the `shell-lesson-data/molecules` directory.
 > `ls` gives the following output:
@@ -838,7 +853,7 @@ increase the odds that the program won't do what its readers think it does.
 >
 > Why do these two loops give different outputs?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The first code block gives the same output on each iteration through
 > > the loop.
 > > Bash expands the wildcard `*.pdb` within the loop body (as well as
@@ -880,7 +895,7 @@ increase the odds that the program won't do what its readers think it does.
 # Explore the possible solutions here!
 ```
 
-> ### {% icon question %} Limiting Sets of Files
+> <question-title>Limiting Sets of Files</question-title>
 >
 > What would be the output of running the following loop in thei
 > `shell-lesson-data/molecules` directory?
@@ -897,7 +912,7 @@ increase the odds that the program won't do what its readers think it does.
 > 3.  Only `cubane.pdb`, `octane.pdb` and `pentane.pdb` are listed.
 > 4.  Only `cubane.pdb` is listed.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 4 is the correct answer. `*` matches zero or more characters, so any file name starting with
 > > the letter c, followed by zero or more other characters will be matched.
 > {: .solution}
@@ -917,7 +932,7 @@ increase the odds that the program won't do what its readers think it does.
 > 4.  The files `cubane.pdb` and `octane.pdb` will be listed.
 > 5.  Only the file `octane.pdb` will be listed.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 4 is the correct answer. `*` matches zero or more characters, so a file name with zero or more
 > > characters before a letter c and zero or more characters after the letter c will be matched.
 > {: .solution}
@@ -927,7 +942,7 @@ increase the odds that the program won't do what its readers think it does.
 # Explore the possible solutions here!
 ```
 
-> ### {% icon question %} Saving to a File in a Loop - Part One
+> <question-title>Saving to a File in a Loop - Part One</question-title>
 >
 > In the `shell-lesson-data/molecules` directory, what is the effect of this loop?
 >
@@ -947,7 +962,7 @@ increase the odds that the program won't do what its readers think it does.
 >     and the text from `propane.pdb` will be saved to a file called `alkanes.pdb`.
 > 4.  None of the above.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1 is correct. The text from each file in turn gets written to the `alkanes.pdb` file.
 > > However, the file gets overwritten on each loop iteration, so the final content of `alkanes.pdb`
 > > is the text from the `propane.pdb` file.
@@ -958,7 +973,7 @@ increase the odds that the program won't do what its readers think it does.
 # Explore the possible solutions here!
 ```
 
-> ### {% icon question %} Saving to a File in a Loop - Part Two
+> <question-title>Saving to a File in a Loop - Part Two</question-title>
 >
 > Also in the `shell-lesson-data/molecules` directory,
 > what would be the output of the following loop?
@@ -978,7 +993,7 @@ increase the odds that the program won't do what its readers think it does.
 > 4.  All of the text from `cubane.pdb`, `ethane.pdb`, `methane.pdb`, `octane.pdb`, `pentane.pdb`
 >     and `propane.pdb` would be printed to the screen and saved to a file called `all.pdb`.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 3 is the correct answer. `>>` appends to a file, rather than overwriting it with the redirected
 > > output from a command.
 > > Given the output from the `cat` command has been redirected, nothing is printed to the screen.
@@ -1036,7 +1051,7 @@ the `head` and `tail` combination selects lines 81-100
 from whatever file is being processed
 (assuming the file has at least 100 lines).
 
-> ### {% icon tip %} Spaces in Names
+> <tip-title>Spaces in Names</tip-title>
 >
 > Spaces are used to separate the elements of the list
 > that we are going to loop over. If one of those elements
@@ -1184,7 +1199,7 @@ done
 She hasn't actually run `goostats.sh` yet,
 but now she's sure she can select the right files and generate the right output filenames.
 
-> ### {% icon tip %} Top Terminal Tip: Re-running previous commands
+> <tip-title>Top Terminal Tip: Re-running previous commands</tip-title>
 > Typing in commands over and over again is becoming tedious,
 > though,
 > and Nelle is worried about making mistakes,
@@ -1219,7 +1234,7 @@ and edits it to read:
 for datafile in NENE*A.txt NENE*B.txt; do echo $datafile; bash goostats.sh $datafile stats-$datafile; done
 ```
 
-> ## Beginning and End
+> <tip-title>Beginning and End</tip-title>
 >
 > We can move to the beginning of a line in the shell by typing <kbd>Ctrl</kbd>+<kbd>A</kbd>
 > and to the end using <kbd>Ctrl</kbd>+<kbd>E</kbd>.
@@ -1239,7 +1254,7 @@ to examine one of the output files.
 It looks good,
 so she decides to get some coffee and catch up on her reading.
 
-> ### {% icon tip %} Those Who Know History Can Choose to Repeat It
+> <tip-title>Those Who Know History Can Choose to Repeat It</tip-title>
 >
 > Another way to repeat previous work is to use the `history` command to
 > get a list of the last few hundred commands that have been executed, and
@@ -1262,7 +1277,7 @@ so she decides to get some coffee and catch up on her reading.
 > `!458`. This number will be different for you, you should check your history before running it!
 {: .tip}
 
-> ### {% icon tip %} Other History Commands
+> <tip-title>Other History Commands</tip-title>
 >
 > There are a number of other shortcut commands for getting at the history.
 >
@@ -1280,7 +1295,7 @@ so she decides to get some coffee and catch up on her reading.
 > quicker than doing <kbd>↑</kbd> and editing the command-line.
 {: .tip}
 
-> ### {% icon question %} Doing a Dry Run
+> <question-title>Doing a Dry Run</question-title>
 >
 > A loop is a way to do many things at once --- or to make many mistakes at
 > once if it does the wrong thing. One way to check what a loop *would* do
@@ -1300,7 +1315,7 @@ so she decides to get some coffee and catch up on her reading.
 > What is the difference between the two loops below, and which one would we
 > want to run?
 >
-> > ### {% icon code-in %} Version 1
+> > <code-in-title>Version 1</code-in-title>
 > > ```
 > > for datafile in *.pdb
 > > do
@@ -1309,7 +1324,7 @@ so she decides to get some coffee and catch up on her reading.
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-in %} Version 2
+> > <code-in-title>Version 2</code-in-title>
 > > ```
 > > for datafile in *.pdb
 > > do
@@ -1318,7 +1333,7 @@ so she decides to get some coffee and catch up on her reading.
 > > ```
 > {: .code-in}
 >
-> > ### {% icon tip %} Solution
+> > <solution-title></solution-title>
 > > The second version is the one we want to run.
 > > This prints to screen everything enclosed in the quote marks, expanding the
 > > loop variable name because we have prefixed it with a dollar sign.
@@ -1336,7 +1351,7 @@ so she decides to get some coffee and catch up on her reading.
 # Explore the possible solutions here!
 ```
 
-> ### {% icon question %} Nested Loops
+> <question-title>Nested Loops</question-title>
 >
 > Suppose we want to set up a directory structure to organize
 > some experiments measuring reaction rate constants with different compounds
@@ -1353,7 +1368,7 @@ so she decides to get some coffee and catch up on her reading.
 > done
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > We have a nested loop, i.e. contained within another loop, so for each species
 > > in the outer loop, the inner loop (the nested loop) iterates over the list of
 > > temperatures, and creates a new directory for each combination.
@@ -1389,7 +1404,7 @@ cat haiku.txt
 ```
 
 
-> ### {% icon tip %} Forever, or Five Years
+> <tip-title>Forever, or Five Years</tip-title>
 >
 > We haven't linked to the original haiku because
 > they don't appear to be on *Salon*'s site any longer.
@@ -1497,7 +1512,7 @@ grep -r Yesterday .
 grep --help
 ```
 
-> ### {% icon question %} Using `grep`
+> <question-title>Using `grep`</question-title>
 >
 > Which command would result in the following output:
 >
@@ -1510,7 +1525,7 @@ grep --help
 > 3. `grep -w "of" haiku.txt`
 > 4. `grep -i "of" haiku.txt`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The correct answer is 3, because the `-w` option looks only for whole-word matches.
 > > The other options will also match 'of' when part of another word.
 > {: .solution}
@@ -1520,7 +1535,7 @@ grep --help
 # Explore the possible solutions here!
 ```
 
-> ### {% icon tip %} Wildcards
+> <tip-title>Wildcards</tip-title>
 >
 > `grep`'s real power doesn't come from its options, though; it comes from
 > the fact that patterns can include wildcards. (The technical name for
@@ -1552,7 +1567,7 @@ grep --help
 # Explore the possible solutions here!
 ```
 
-> ### {% icon question %} Tracking a Species
+> <question-title>Tracking a Species</question-title>
 >
 > Leah has several hundred
 > data files saved in one directory, each of which is formatted like this:
@@ -1592,7 +1607,7 @@ grep --help
 >
 > An example of such a file is provided in `shell-lesson-data/data/animal-counts/animals.txt`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > grep -w $1 -r $2 | cut -d : -f 2 | cut -d , -f 1,3 > $1.txt
@@ -1614,7 +1629,7 @@ grep --help
 # Explore the possible solutions here!
 ```
 
-> ### {% icon question %} Little Women
+> <question-title>Little Women</question-title>
 >
 > You and your friend, having just finished reading *Little Women* by
 > Louisa May Alcott, are in an argument.  Of the four sisters in the
@@ -1632,7 +1647,7 @@ grep --help
 > particular solution is usually chosen based on a combination of
 > yielding the correct result, elegance, readability, and speed.
 >
-> > ### {% icon solution %} Solutions
+> > <solution-title></solution-title>
 > > ```
 > > for sis in Jo Meg Beth Amy
 > > do
@@ -1743,7 +1758,7 @@ This way,
 find . -name "*.txt"
 ```
 
-> ### {% icon tip %} Listing vs. Finding
+> <tip-title>Listing vs. Finding</tip-title>
 >
 > `ls` and `find` can be made to do similar things given the right options,
 > but under normal circumstances,
@@ -1789,7 +1804,7 @@ by looking for the string 'FE' in all the `.pdb` files above the current directo
 grep "FE" $(find .. -name "*.pdb")
 ```
 
-> ### {% icon question %} Matching and Subtracting
+> <question-title>Matching and Subtracting</question-title>
 >
 > The `-v` option to `grep` inverts pattern matching, so that only lines
 > which do *not* match the pattern are printed. Given that, which of
@@ -1804,7 +1819,7 @@ grep "FE" $(find .. -name "*.pdb")
 > 3.  `grep -v "net" $(find data -name "*s.txt")`
 > 4.  None of the above.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The correct answer is 1. Putting the match expression in quotes prevents the shell
 > > expanding it, so it gets passed to the `find` command.
 > >
@@ -1820,7 +1835,7 @@ grep "FE" $(find .. -name "*.pdb")
 # Explore the possible solutions here!
 ```
 
-> ### {% icon tip %} Binary Files
+> <tip-title>Binary Files</tip-title>
 >
 > We have focused exclusively on finding patterns in text files. What if
 > your data is stored as images, in databases, or in some other format?
@@ -1852,7 +1867,7 @@ And as Alfred North Whitehead wrote in 1911, 'Civilization advances by
 extending the number of important operations which we can perform
 without thinking about them.'
 
-> ### {% icon question %} `find` Pipeline Reading Comprehension
+> <question-title>`find` Pipeline Reading Comprehension</question-title>
 >
 > Write a short explanatory comment for the following shell script:
 >
@@ -1860,10 +1875,13 @@ without thinking about them.'
 > wc -l $(find . -name "*.dat") | sort -n
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. Find all files with a `.dat` extension recursively from the current directory
 > > 2. Count the number of lines each of these files contains
 > > 3. Sort the output from step 2. numerically
 > {: .solution}
 {: .question}
 
+# Final Notes
+
+All of the commands you have run up until now were ad-hoc, interactive commands.

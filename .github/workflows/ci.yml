@@ -1,4 +1,4 @@
-name: Lint Broken Links
+name: "[CI] GTN Build Testing"
 
 concurrency:
   group: ci-${{ github.head_ref }}
@@ -7,64 +7,74 @@ concurrency:
 # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#example-using-a-list-of-events
 on:
   pull_request:
-    paths:
-      - '**/*.md'
-      - '**/*.html'
-      - '*.yml'
-      - '*.yaml'
-      - 'metadata/*'
-      - 'topics/*/images/*'
-      - '_plugins/*'
-      - '_plugins_dev/*'
-      - '**/*.bib'
+    types: [opened, reopened, synchronize, ready_for_review]
 
 jobs:
   build-site:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || !github.event.pull_request.draft
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          persist-credentials: false
 
       # BEGIN Dependencies
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.7'
+          python-version: '3.11'
           architecture: 'x64'
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "2.5"
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - uses: actions/cache@v2
+          ruby-version: "3.2"
+      - uses: actions/cache@v4
         with:
           path: |
             vendor/bundle
-            ~/.cache/pip
-            ~/.npm
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-${{ hashFiles('**/requirements.txt') }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-
           restore-keys: |
-            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py-${{ hashFiles('**/requirements.txt') }}-node-
-            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-py--node-
             ${{ runner.os }}-gems-
       - name: Install dependencies
         run: |
           gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-          pip install -r requirements.txt
-          npm install
+          bundle pristine ffi
       # END Dependencies
 
-      - run: bundle exec jekyll build --strict_front_matter -d _site/training-material --trace
-      - run: |
+      - name: Ensure that the site builds
+        run: bundle exec jekyll build --strict_front_matter -d _site/training-material --trace --future
+
+      - name: Validate all links, enforce alt text
+        run: |
           bundle exec htmlproofer \
-            --assume-extension \
-            --http-status-ignore 405,429,503,999 \
-            --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/,/#embedded_jbrowse/","/.*videos.*.mp4.png/" \
-            --url-swap "github.com/galaxyproject/training-material/tree/main:github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_HEAD_REF}" \
-            --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//" \
-            --allow-hash-href \
-            --disable-external \
+            --ignore-urls "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/,/#embedded_jbrowse/","/.*videos.*.mp4.png/","/krona_(all|multisample).html/","/workflows\/trs_import/" \
+            --ignore-files "/.*krona.*\.html/","/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//","/.*content.html/","/.*recentrifuge.*\.html/" \
+            --swap-urls "github.com/galaxyproject/training-material/tree/main:github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_HEAD_REF}" \
+            --disable-external=true \
+            --enforce-https=false \
             ./_site
+
+      - name: Ensure no unexpected encoded HTML in output, ask a GTN contributor for help with this one.
+        run: |
+          ! fgrep -R 'lt;blockquote' _site
+
+      - name: Ensure no poorly rendered FAQs, generally this is fixed by removing whitespace/blank lines from the frontmatter
+        run: |
+          ! fgrep -R -A2 -B2 'box_type:' _site/
+
+      - name: Ensure no poorly indented code blocks
+        run: |
+          bundle exec ruby bin/check-indent.rb
+
+      - name: Ensure no unexpected jekyll in output. If this fails, generally it means you should add a page.description to the front matter.
+        run: |
+          ! fgrep -R 'site.pages' _site
+
+      - name: Validate notebooks (If this fails, ask @hexylena to look at your notebook)
+        run: |
+          find _site | grep ipynb | xargs bundle exec ruby bin/check-valid-notebook.rb
+
+      - name: Check URL persistence
+        run: |
+          bash bin/check-url-persistence.sh

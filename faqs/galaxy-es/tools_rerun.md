@@ -3,6 +3,7 @@ title: Para volver a ejecutar una herramienta
 area: tools
 box_type: tip
 layout: faq
+contributors: [nomadscientist]
 ---
 
 

@@ -21,8 +21,6 @@ contributors:
 - anuprulez
 ---
 
-# Introduction
-{:.no_toc}
 
 The goal of [unsupervised learning](https://en.wikipedia.org/wiki/Unsupervised_learning) is to discover hidden patterns in any unlabeled data. One of the approaches to unsupervised learning is [clustering](https://en.wikipedia.org/wiki/Cluster_analysis). In this tutorial, we will discuss clustering, its types and a few algorithms to find clusters in data. Clustering groups data points based on their similarities. Each group is called a cluster and contains data points with high similarity and low similarity with data points in other clusters. In short, data points of a cluster are more similar to each other than they are to the data points of other clusters. The goal of clustering is to divide a set of data points in such a way that similar items fall into the same cluster, whereas dissimilar data points fall in different clusters. Further in this tutorial, we will discuss ideas on how to choose different metrics of similarity  between data points and use them in different clustering algorithms.
 
@@ -43,7 +41,7 @@ Clustering is divided into two subgroups based on the assignment of data points 
 
 - Soft: Each data point is assigned a probability or likelihood of being in a cluster. One example is [expectation-maximization](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm) (EM) algorithm.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -77,12 +75,12 @@ The choice of a distance measure is crucial in clustering. It defines how the si
 ![Distances](images/raceid_distance.svg "Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)")
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Why are there zeroes along the diagonal of the above example distance matrix?
 > 1. Is there any symmetry in this matrix?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The distance between a point to itself is zero.
 > > 1. The distance between point *a* to point *b* is the same as the distance between point *b* to point *a* using the Euclidean distance metric.
@@ -119,13 +117,13 @@ All data points are chosen at the bottom and each one is assigned to a separate 
 
 By looking at the dendrogram, the clusters can be observed showing different groups in the best way. The optimal number of clusters is the number of vertical lines in the dendrogram cut by a horizontal line that can transverse maximum distance vertically without intersecting a cluster.
 
-In the above example, the best choice of the number of clusters will be 4 as the red horizontal line in the dendrogram below covers maximum vertical distance AB. For more details, please read [here](https://www.analyticsvidhya.com/blog/2016/11/an-introduction-to-clustering-and-different-methods-of-clustering/).
+In the above example, the best choice of the number of clusters will be 4 as the red horizontal line in the dendrogram below covers maximum vertical distance AB. For more details, please read [this blogpost entitled *"Clustering | Introduction, Different Methods, and Applications"*](https://www.analyticsvidhya.com/blog/2016/11/an-introduction-to-clustering-and-different-methods-of-clustering/).
 ![data](images/Hierarchical_clustering_2.png "Hierarchical clustering")
 
 
 This algorithm explained above uses the bottom-up approach. It is also possible to follow the top-down approach starting with all data points assigned in the same cluster and recursively performing splits till each data point is assigned a separate cluster. The decision of merging two clusters is taken based on the proximity of these clusters.
 
-> ### {% icon comment %} Background of the iris dataset
+> <comment-title>Background of the iris dataset</comment-title>
 > The iris flower dataset or Fisher’s iris dataset is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper ({% cite Fisher1936 %}).
 > Each row of the table represents an iris flower, including its species and dimensions of its botanical parts, sepal and petal, in centimeters.
 > For more history of this dataset read here [Wikipedia](https://en.wikipedia.org/wiki/Iris_flower_data_set).
@@ -134,7 +132,7 @@ This algorithm explained above uses the bottom-up approach. It is also possible 
 
 At the first step, we should upload the iris dataset and two other datasets which will be used at the end of the tutorial.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. **Import** {% icon galaxy-upload %} the file `iris.csv` from [Zenodo](https://zenodo.org/record/3813447/files/iris.csv) or from the data library
 >
@@ -145,6 +143,7 @@ At the first step, we should upload the iris dataset and two other datasets whic
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
@@ -160,6 +159,7 @@ At the first step, we should upload the iris dataset and two other datasets whic
 >      - Option 2: Datatypes can be **manually set**
 >
 >    {% snippet faqs/galaxy/datasets_detect_datatype.md datatype="datatypes" %}
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="csv" %}
 >
 {: .hands_on}
@@ -179,7 +179,7 @@ Figure 7 shows the dendrogram of these data.
 We will apply hierarchical clustering to the iris dataset to find clusters based on two features (of flowers) - sepal length and width.
 **Hint**: Please find the `Numeric Clustering` tool in the `Statistics` tool section.
 
-> ### {% icon hands_on %} Hands-on: Hierarchical clustering
+> <hands-on-title>Hierarchical clustering</hands-on-title>
 >
 > 1. **Numeric Clustering** {% icon tool %} with the following clustering parameters:
 >    - *"Select the format of input data"*: `Tabular Format (tabular,txt)`
@@ -203,7 +203,7 @@ If you view the result table, you can see the last column is the label for each 
 The resulting candidate clustering can be visualized using the `Scatterplot with ggplot2` tool. Each sample is color-coded based on its clustering for that sample.
 Let's visualize the clustering results to see how groups have been built. **Hint**: Please find the `Scatterplot with ggplot2` tool in the `Graph/Display data` tool section.
 
-> ### {% icon hands_on %} Hands-on: Visualize hierarchical clustering result
+> <hands-on-title>Visualize hierarchical clustering result</hands-on-title>
 >
 > 1. **Scatterplot with ggplot2** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: **Hierarchical clustering**
@@ -248,7 +248,7 @@ K-means is popular because of its speed and scalability. Many variants of the k-
 
 The parameters that minimize the cost function are learned through an iterative process of assigning data points to clusters and then moving the clusters. A restriction for the k-means algorithm is that the dataset should be continuous.
 
-> ### {% icon hands_on %} Hands-on: K-means clustering
+> <hands-on-title>K-means clustering</hands-on-title>
 >
 > 1. **Numeric Clustering** {% icon tool %} with the following clustering parameters:
 >    - *"Select the format of input data"*: `Tabular Format (tabular,txt)`
@@ -265,7 +265,7 @@ The parameters that minimize the cost function are learned through an iterative 
 
 ### Visualize k-means clustering
 
-> ### {% icon hands_on %} Hands-on: Visualize k-means clustering result
+> <hands-on-title>Visualize k-means clustering result</hands-on-title>
 >
 > 1. **Scatterplot with ggplot2** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: **k-means clustering**
@@ -291,12 +291,12 @@ The parameters that minimize the cost function are learned through an iterative 
 ![data](images/k_means_scatter.png "K-means clustering scatter plot")
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How to choose the right number of expected clusters (k)?
 >
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Major difficulty found with k-means is the choice of the number of clusters. Different methods are proposed to solve this problem.
 > > Here, we provide a simple solution. The idea is to compute k-means clustering using different values of clusters k. Next, the within sum of squares is drawn according to the number of clusters. The location of a bend (knee) in the plot is generally considered as an indicator of the appropriate number of clusters.
@@ -307,11 +307,11 @@ The parameters that minimize the cost function are learned through an iterative 
 {: .question}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > What are the differences between k-means and hierarchical clustering techniques
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Hierarchical clustering has difficulties in handling large data well but k-means clustering can. This is because the time complexity (of Lloyd's variant) of k-means is linear (O(nkdi), n = number of data points, k = number clusters, d = data point dimensions and i = number of iterations) while the time-complexity of the optimal hierarchical clustering is quadratic (O(n2)).
 > >
@@ -328,7 +328,7 @@ The parameters that minimize the cost function are learned through an iterative 
 
 DBSCAN (Density-based spatial clustering of applications with noise) is a popular clustering algorithm and finds clusters as regions of high density followed by regions of low density. Clusters found by DBSCAN can be of any shape, as opposed to k-means which works well if the clusters are spherical in shape. The central component of the DBSCAN algorithm are the core samples which are present in the areas of high density. A cluster is, therefore, a set of core samples close to one other (measured by some distance measure) and a set of non-core samples that are close to core samples (but are not core samples themselves). There are two important parameters in DBSCAN algorithm - `min_samples` is the number of samples in a neighborhood for a point to be considered as a core point and `eps` is the maximum distance (between two samples) for a sample to be considered as in the neighborhood of the other. Higher the value of `min_samples` or lower the value of eps indicate higher density necessary to form a cluster. DBSCAN does not require one to specify the number of clusters in the data a priori, as opposed to k-means.
 
-> ### {% icon hands_on %} Hands-on: DBSCAN clustering
+> <hands-on-title>DBSCAN clustering</hands-on-title>
 >
 > 1. **Numeric Clustering** {% icon tool %} with the following clustering parameters:
 >    - *"Select the format of input data"*: `Tabular Format (tabular,txt)`
@@ -343,7 +343,7 @@ DBSCAN (Density-based spatial clustering of applications with noise) is a popula
 
 ### Visualise DBSCAN clustering
 
-> ### {% icon hands_on %} Hands-on: Visualize DBSCAN clustering result
+> <hands-on-title>Visualize DBSCAN clustering result</hands-on-title>
 >
 > 1. **Scatterplot with ggplot2** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: **DBSCAN clustering**
@@ -372,12 +372,12 @@ DBSCAN (Density-based spatial clustering of applications with noise) is a popula
 
 You will also notice that the green points (factor = -1) in the plot are not contained within any cluster. DBSCAN does not necessarily categorize every data point, and is therefore works very well with handling outliers in a dataset.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How can we evaluate the clustering results?
 >
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Clustering is an unsupervised learning algorithm; there are no labels or ground truth to compare with the clusters. However, we can still evaluate the performance of the algorithm using intrinsic measures.
 > > There is a performance measure for clustering evaluation which is called the [silhouette coefficient](https://en.wikipedia.org/wiki/Silhouette_(clustering)). It is a measure of the compactness and separation of the clusters.
@@ -391,7 +391,7 @@ We can apply the same steps on the other datasets such `moon` and `circles` data
 
 ## Visualise datasets
 
-> ### {% icon hands_on %} Hands-on: Visualize scatter plot of data
+> <hands-on-title>Visualize scatter plot of data</hands-on-title>
 >
 > 1. **Scatterplot with ggplot2** {% icon tool %} with the following parameters:
 >
@@ -416,7 +416,7 @@ We can apply the same steps on the other datasets such `moon` and `circles` data
 
 Now you can find clusters in these datasets using the aforementioned algorithms.
 
-> ### {% icon hands_on %} Hands-on: Hierarchical clustering of circles and moon datasets
+> <hands-on-title>Hierarchical clustering of circles and moon datasets</hands-on-title>
 >
 > 1. **Numeric Clustering** {% icon tool %} with the following clustering parameters:
 >
@@ -437,7 +437,7 @@ Now you can find clusters in these datasets using the aforementioned algorithms.
 
 Then, you can visualize the clustering results using the following steps:
 
-> ### {% icon hands_on %} Hands-on: Visualize hierarchical clustering result on circles and moon datasets.
+> <hands-on-title>Visualize hierarchical clustering result on circles and moon datasets.</hands-on-title>
 >
 > 1. **Scatterplot with ggplot2** {% icon tool %} with the following parameters:
 >

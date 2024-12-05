@@ -3,6 +3,7 @@ title: Add genome and annotations to IGV from Galaxy
 box_type: tip
 area: igv
 layout: faq
+contributors: [delphine-l,bebatut,hexylena,shiltemann]
 ---
 
 1. Upload a FASTA file with the reference genome and a GFF3 file with its annotation in the history (if not already there)

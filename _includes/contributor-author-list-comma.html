@@ -1,6 +1,0 @@
-{%- if include.contributors -%}
-{%- capture people -%}
-{% for id in include.contributors %}, {% assign name = site.data['contributors'][id].name | default: id -%}{{ name -}}{%- endfor -%}
-{%- endcapture -%}
-{%- endif -%}
-{{- people | remove_first: ', ' -}}

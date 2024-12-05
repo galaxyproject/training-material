@@ -25,13 +25,41 @@ contributors:
   - davebx
   - bernt-matthias
 
+
+recordings:
+- captioners:
+  - gallardoalba
+  - astrovsky01
+  date: '2023-05-18'
+  galaxy_version: '22.01'
+  length: 50M
+  youtube_id: QRoY1pFUY30
+  speakers:
+  - gallardoalba
+  - astrovsky01
+- captioners:
+  - gallardoalba
+  date: '2022-03-11'
+  galaxy_version: '22.01'
+  length: 40M
+  youtube_id: 33L4B9ir0aQ
+  speakers:
+  - gallardoalba
+- captioners:
+  - davebx
+  - astrovsky01
+  - bernt-matthias
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H40M
+  youtube_id: videoseries?list=PLNFLKDpdM3B9GhA0FryVV2YX3YL35rENK
+  speakers:
+  - davebx
+  - astrovsky01
+  - bernt-matthias
+
 ---
 
-
-# Introduction
-{:.no_toc}
-
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/2wW3yqEclko" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 Tools wrappers allow any command line runnable code or programs to be run inside a galaxy environment.
 Although Galaxy has thousands of tools readily available, new software and packages will always be useful.
@@ -42,7 +70,7 @@ In three parts, it will cover the creation of a bioconda recipe for a new tool, 
 wrapper, and finally the testing and deployment of this tool into both a local and public Galaxy environment.
 Although this will include specific tools, the training is generalizable.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -61,8 +89,6 @@ the creation and deployment of these packages, making them available for Galaxy 
 
 ## Writing a Bioconda Recipe
 
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/UtNErGKw8SI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-
 Bioconda is a repository of conda packages for software and tools relevant to the life sciences. Using conda
 packages ensures better reproducibility, since each conda package is usually immutable, an exception being
 if it is later discovered that the software in the package had always been non-functional and should be replaced.
@@ -75,43 +101,54 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 - test
 - about
 
-> ### {% icon hands_on %} Hands-on: Writing a Bioconda Recipe
+Let's write a Bioconda recipe for the tool we want to package: [bellerophon](https://github.com/davebx/bellerophon)
+
+> <warning-title>Naming collision</warning-title>
+> As this tool is already packaged in Bioconda, to prevent any naming collision, we will slightly modify its name from `bellerophon` to `bellerophon_bis` in the recipe.
+> **This should never be done in real life, we only do it for this exercise!**
+{: .warning}
+
+> <hands-on-title>Writing a Bioconda Recipe</hands-on-title>
 >
-> 1. The first thing we should do is prepare our workspace. We create a branch in git, a conda environment with pip and
+> 1. The first thing we should do is prepare our workspace. [Create a fork](https://help.github.com/articles/fork-a-repo/) of the [Bioconda repository](https://github.com/bioconda/bioconda-recipes/) on GitHub
+>
+> 2. Clone your fork of this repository to create a local copy on your computer
+>
+> 3. We create a branch in git, a conda environment with pip and
 > conda-build preinstalled, and a folder for the meta.yaml file.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git checkout -b bellerophon_bioconda
 >    > conda create -y --name bellerophon_bioconda pip python conda-build
 >    > conda activate bellerophon_bioconda
->    > mkdir recipes/bellerophon
+>    > mkdir recipes/bellerophon_bis
 >    > ```
 >    {: .code-in}
 >
-> 2. Next we determine the SHA-256 checksum of the source tarball.
+> 4. Next we determine the SHA-256 checksum of the source tarball.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > wget -O bellerophon.tar.gz https://github.com/davebx/bellerophon/archive/1.0.tar.gz
->    > sha256sum bellerophon.tar.gz # Copy the 64-character hexadecimal number that this outputs.
+> > sha256sum bellerophon.tar.gz # Copy the 64-character hexadecimal number that this outputs.
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    > ```bash
 >    > 036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf  bellerophon.tar.gz
 >    > ```
 >    {: .code-out}
 >
-> 3. Using the above information, we create the meta.yaml file where we'll then define the
+> 5. Using the above information, we create the meta.yaml file where we'll then define the
 > parameters that tell conda-build how to build this package, starting with variables for the name, version, and checksum.
-> With these definitions, bioconda's automatic version updater should recognize when a new version has been released and
-> create a pull request to update the bioconda package.
+> With these definitions, Bioconda's automatic version updater should recognize when a new version has been released and
+> create a pull request to update the Bioconda package.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
->    > vim recipes/bellerophon/meta.yaml # vim can of course be replaced with any other editor.
+>    > vim recipes/bellerophon_bis/meta.yaml # vim can of course be replaced with any other editor.
 >    > ```
 >    {: .code-in}
 >
@@ -119,40 +156,40 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >
 >    {% raw %}
 >    ```yaml
->    {% set name = "bellerophon" %}
+>    {% set name = "bellerophon_bis" %}
 >    {% set version = "1.0" %}
 >    {% set sha256 = "036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf" %}
 >    ```
 >    {% endraw %}
 >
-> 3. Now we define the conda package metadata. This will be shown as bellerophon-1.0 in anaconda and `conda search`. We
+> 6. Now we define the conda package metadata. This will be shown as bellerophon_bis-1.0 in anaconda and `conda search`. We
 > plug in the relevant variables from the top of the file, lowering the name since conda package names should always be
 > lowercase.
 >
->     {% raw %}
->     ```yaml
->     package:
->       name: {{ name|lower }}
->       version: {{ version }}
->     ```
->     {% endraw %}
+>    {% raw %}
+>    ```yaml
+>    package:
+>      name: {{ name|lower }}
+>      version: {{ version }}
+>    ```
+>    {% endraw %}
 >
-> 4. Of course conda-build needs to know where to get the source code for bellerophon. Since the recipe we are creating is on
+> 7. Of course conda-build needs to know where to get the source code for bellerophon. Since the recipe we are creating is on
 > github, updates can be automated with the variables we defined in the second step, while the SHA-256 checksum ensures
 > that conda-build is getting the right source code every time.
 >
->     {% raw %}
+>    {% raw %}
 >
->     ```yaml
->     source:
->       url: https://github.com/davebx/{{ name }}/archive/{{ version }}.tar.gz
->       sha256: {{ sha256 }}
->     ```
+>    ```yaml
+>    source:
+>      url: https://github.com/davebx/bellerophon/archive/{{ version }}.tar.gz
+>      sha256: {{ sha256 }}
+>    ```
 >
->     {% endraw %}
+>    {% endraw %}
 >
-> 5. Next, we move on to the build metadata. Since this is the first version of the conda recipe, the build number is 0.
-> We use the externally defined `{{ PYTHON }}` variable, which defines which python conda-build is using, to install it
+> 8. Next, we move on to the build metadata. Since this is the first version of the conda recipe, the build number is 0.
+> We use the externally defined `{% raw %}{{ PYTHON }}{% endraw %}` variable, which defines which python conda-build is using, to install it
 > to the build prefix. The --no-deps and --ignore-installed flags are needed to ensure that conda-build only packages
 > bellerophon itself. In this section, if necessary, we can also define patches that should be applied to the source code,
 > with the `patches:` token under `build:`, and specify that the package should not be built for a given architecture with
@@ -162,12 +199,12 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >    build:
 >      noarch: python
 >      number: 0
->      script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv
+>      script: {% raw %}{{ PYTHON }}{% endraw %} -m pip install . --no-deps --ignore-installed -vv
 >      #patches: /dev/null # Not used in this tutorial
 >      #skip: True [osx] # Not used in this tutorial
 >    ```
 >
-> 6. After the build metadata has been defined, we need to specify dependencies for at least building and running, with
+> 9. After the build metadata has been defined, we need to specify dependencies for at least building and running, with
 > build-time dependencies specified in the `host:` section, and runtime dependencies in the `run:` section. With
 > bellerophon, we know that it's a python package that uses pysam to operate on SAM/BAM files, so the only runtime
 > dependencies we need are python and pysam.
@@ -182,7 +219,7 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >        - pysam
 >    ```
 >
-> 7. No recipe is complete without tests, and this recipe is no exception. Normally, it's sufficient to confirm that the
+> 9. No recipe is complete without tests, and this recipe is no exception. Normally, it's sufficient to confirm that the
 > program actually runs, e.g. with a `--version` command. Some software also has a self-test flag or parameter, though
 > bellerophon is not among them, and we could even define a test script that uses test data either from the recipe or from
 > the source archive.
@@ -193,7 +230,7 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >        - bellerophon --version
 >    ```
 >
-> 8. Finally, we add information about the software, such as code's is license type, the program's
+> 9. Finally, we add information about the software, such as code's is license type, the program's
 > homepage, and optionally the github username of the person responsible for maintaining the recipe.
 >
 >    ```yaml
@@ -207,16 +244,16 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 >
 > Putting all these parts together, we end up with a complete conda recipe for version 1.0 of bellerophon.
 >
-> > ### {% icon question %} Question
+> > <question-title></question-title>
 > >
 > > What does your final file look like?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > >
 > > > {% raw %}
 > > >
 > > > ```yaml
-> > > {% set name = "bellerophon" %}
+> > > {% set name = "bellerophon_bis" %}
 > > > {% set version = "1.0" %}
 > > > {% set sha256 = "036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf" %}
 > > >
@@ -225,7 +262,7 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 > > >   version: {{ version }}
 > > >
 > > > source:
-> > >   url: https://github.com/davebx/{{ name }}/archive/{{ version }}.tar.gz
+> > >   url: https://github.com/davebx/bellerophon/archive/{{ version }}.tar.gz
 > > >   sha256: {{ sha256 }}
 > > >
 > > > build:
@@ -258,28 +295,78 @@ Recipes should always define the following 6 sections in the `meta.yaml` file:
 > {: .question}
 {: .hands_on}
 
+> <comment-title>Using build.sh</comment-title>
+>
+> In this recipe, the command to execute for installing the package is very short, that's why we write it directly in the `meta.yaml` file. When you need to run more complex commands (like compilation steps), it is preferable to remove the `build > script` entry in the `meta.yaml` file, and write all the commands in a script named `build.sh` in the same directory.
+>
+{: .comment}
+
+## Building the recipe locally
+
+Now that your recipe is written, you can try to build it locally.
+
+> <hands-on-title>Building the recipe locally</hands-on-title>
+>
+> 1. Run conda-build
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > conda build recipes/bellerophon_bis
+>    > ```
+>    {: .code-in}
+>
+> 2. Conda build will try to build the recipe locally and will run the the test to check if the package was successfully built.
+> At the end, you should see something like this:
+>
+>    > <code-out-title></code-out-title>
+>    >
+>    > ```
+>    > TEST END: /home/abretaud/miniconda3/conda-bld/noarch/bellerophon-1.0-py_0.tar.bz2
+>    > Renaming work directory [...]
+>    > # Automatic uploading is disabled
+>    > # If you want to upload package(s) to anaconda.org later, type:
+>    >
+>    > # To have conda build upload to anaconda.org automatically, use
+>    > # conda config --set anaconda_upload yes
+>    > anaconda upload \
+>    >    /home/xxxxx/miniconda3/conda-bld/noarch/bellerophon_bis-1.0-py_0.tar.bz2
+>    > anaconda_upload is not set.  Not uploading wheels: []
+>    > ```
+>    {: .code-out}
+>
+> 3. In this example, the build was successful, and the resulting package is placed in `/home/xxxxx/miniconda3/conda-bld/noarch/bellerophon_bis-1.0-py_0.tar.bz2`. This is the file that gets uploaded to the bioconda channel when you create a Pull Request on the Bioconda GitHub repository.
+{: .hands_on}
+
+> <comment-title>Note on building locally</comment-title>
+>
+> While building locally is a quick way to check if a recipe is working, it's not the most reliable way.
+> That's because the build is occurring directly on your system, which means you might get interference between the conda requirements in the recipe and your system-wide installed libraries and system configuration.
+> The automatic testing of your recipe on GitHub when you create a Pull Request is more reliable as it is performed in a controlled and isolated environment.
+>
+{: .comment}
+
 ## Creating a Pull Request
 
-After the recipe is complete, we can commit and push to our fork, so that the recipe can eventually be integrated into bioconda.
+After the recipe is complete, and when we have checked that it builds locally, we can commit and push to our fork, so that the recipe can eventually be integrated into Bioconda.
 
-> ### {% icon hands_on %} Hands-on: Creating the PR
+> <hands-on-title>Creating the PR</hands-on-title>
 >
 > 1. We start by making sure we're on a branch, and that `recipes/bellerophon/meta.yaml` is the only modified file.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git status
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    >
 >    > ```
 >    > On branch bellerophon_bioconda
 >    > Untracked files:
 >    >   (use "git add <file>..." to include in what will be committed)
 >    >
->    > 	recipes/bellerophon/
+>    > 	recipes/bellerophon_bis/
 >    >
 >    > no changes added to commit (use "git add" and/or "git commit -a")
 >    > ```
@@ -287,9 +374,9 @@ After the recipe is complete, we can commit and push to our fork, so that the re
 >
 > 2. Add your recipes folder, commit, and push it.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
->    > git add recipes/bellerophon
+>    > git add recipes/bellerophon_bis
 >    > git commit -m 'Add recipe for bellerophon 1.0'
 >    > git push origin -u bellerophon_bioconda
 >    > ```
@@ -297,7 +384,7 @@ After the recipe is complete, we can commit and push to our fork, so that the re
 >
 >    Git will give you a url for creating the pull request, which can be clicked to be taken to github.
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    > ```bash
 >    > $ git push origin -u bellerophon_bioconda
 >    > Total 0 (delta 0), reused 0 (delta 0)
@@ -311,12 +398,18 @@ After the recipe is complete, we can commit and push to our fork, so that the re
 >    > ```
 >    {: .code-out}
 >
-> Once on the github pull request page, we can write a short description of the recipe we want to merge, and click the button.
+> > <warning-title>Don't create the Pull request for real!</warning-title>
+> >
+> > You can click on the link to see the diff of what would be included in the Pull Request, and how the form looks like. But please don't click on the `Create pull request` button! We don't want to get duplicate versions of this recipe integrated in bioconda everytime someone follows this tutorial!
+> >
+> {: .warning}
+>
+> Once on the github pull request page, you see a preview of the changes we propose, and you can write a short description of the recipe we want to merge. Have a look at the guidelines in the text box to understand how to properly fill the form, and get your Pull Request merged in the end. In real life, when creating a real new recipe, you would then click the `Create pull request` button.
 >
 > ![Github PR](../../images/create_pr.png "An open pull request for the bellerophon conda recipe")
 {: .hands_on}
 
-## Deploying a Conda Package
+## Installing a Conda Package
 
 Once our new recipe has been merged, installing the package should be fairly painless. Galaxy, if configured to do so,
 will automatically install any conda dependencies a tool asks for, whereas manual installation can be as easy as using
@@ -336,13 +429,49 @@ user interface, then translate the user's selections back into the command to be
 on writing a wrapper. Although this section will cover the full process and many of the options available to
 anyone wrapping a tool, a more complete list is available in [the Galaxy tool docs](https://docs.galaxyproject.org/en/latest/dev/schema.html).
 
-## Initializing a Tool Wrapper
+## Installing Planemo
 
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/a6XZgEy6hlg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+Planemo is an important tool within the Galaxy development workflow. Although it will be covered in greater detail in the
+next section of this tutorial, one of its functions is necessary for the tool wrapper development. `planemo` is available
+via the python package manager `pip`. To that end, before beginning this section, please install planemo locally by running
+
+> <hands-on-title>Installing `planemo` via pip</hands-on-title>
+>
+> It is advised to install `planemo` in a virtual environment (step 1-2).
+>
+> 1. Create a virtual environment: `virtualenv -p python3 ~/.venv/`. Here `~/.venv/` is the path where the virtual environment should be crated and you may adapt the path to your needs. With `-p python3` we make sure that a `python` intepreter version 3 is used.
+> 2. Activate the virtual environment: `. ~/.venv/bin/activate`
+> 3. Install `planemo` `pip install planemo`
+{: .hands_on}
+
+Note that for using `planemo`from a new shell you will need to activate the python virtual environment again.
+
+> <hands-on-title>Testing `planemo` and getting help</hands-on-title>
+>
+> 1. In order to test if the installation worked execute
+>
+>    > <code-in-title>Input: Bash</code-in-title>
+>    > ```bash
+>    > planemo --version
+>    > ```
+>    {: .code-in}
+>
+>    > <code-in-title>Output</code-in-title>
+>    > This should output the version of `planemo`, e.g.
+>    > ```bash
+>    > planemo, version 0.74.3
+>    > ```
+>    {: .code-in}
+>
+> 2. `planemo --help` will show the available commands with a short desctiption (lint, test, and serve will be part of this tutorial)
+> 3. `planemo SUBCOMMAND --help` will show the usage information for the corresponding subcommand. Try to obtain the information for the `lint` subcommand.
+{: .hands_on}
+
+## Initializing a Tool Wrapper
 
 Initializing a tool wrapper to be run in Galaxy is simple
 
-> ### {% icon hands_on %}  Hands-on: Creating a Tool Wrapper Skeleton
+> <hands-on-title>Creating a Tool Wrapper Skeleton</hands-on-title>
 > 1. Go to the "tools" directory in your Galaxy instance.
 > 2. Make a new directory for tools you will be wrapping.
 > 3. Use `planemo` to initialize a new tool wrapper with basic formatting.
@@ -380,8 +509,6 @@ Initializing a tool wrapper to be run in Galaxy is simple
 
 ## Galaxy Tool Wrappers
 
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/FdtD8vBLK5k" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-
 Galaxy tool wrapper xml files are made up of several sections:
 
 - Tool
@@ -402,7 +529,7 @@ While many of those are present in the wrapper by default, others need to be add
 The tool section at the head of the file defines several key pieces of information for both the user and Galaxy.
 The tool ID and name are defined here as well as which minimum version of Galaxy is required to run it.
 
-> ### {% icon hands_on %} Hands-on: Defining the tool section:
+> <hands-on-title>Defining the tool section:</hands-on-title>
 > For this section, the following is necessary:
 >
 > - Tool ID
@@ -416,7 +543,7 @@ The tool ID and name are defined here as well as which minimum version of Galaxy
 > when complete, the line should appear as follows:
 >
 > ```xml
-> <tool ID="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
+> <tool id="bellerophon" name="bellerophon" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@" profile="20.01">
 > ```
 {: .hands_on}
 
@@ -427,7 +554,7 @@ The @TOOL_VERSION@ and @VERSION_SUFFIX@ are what are referred to as "tokens", an
 This section adds help text to easily identify the tool. It is not intended as in-depth help, which should be in the `help` section.
 The description is simply presented as plaintext between the tags. Bellerophon's would look like this:
 
-> ### {% icon hands_on %} Hands-on: Adding a description
+> <hands-on-title>Adding a description</hands-on-title>
 > Add the following description to your tool
 > ```xml
 > <description>chimeric reads from Arima Genomics</description>
@@ -443,12 +570,12 @@ bellerophon: chimeric reads from Arima Genomics
 ### Macros section
 
 The macros section serves two functions -- to create meta-variables for inside both the xml text and the command text, called
-tokens, and xml sections that can be slotted in repeatedly. Although this tool will only use the tokens, the xml macros are very
-useful for tools which have multiple options/modes that reuse parameters.
+tokens, and xml sections that can be slotted in repeatedly. In this section we will only use tokens, but xml macros are very
+useful for tools which have multiple options/modes that reuse parameters. We will use a simple xml macro in the following section.
 
 The @TOOL_VERSION@ and @VERSION_SUFFIX@ used in the Tool line are defined here. Each need their own 'token' line, resulting in
 
-> ### {% icon hands_on %} Hands-on: Macros
+> <hands-on-title>Macros</hands-on-title>
 > Add the following macros section to your tool:
 > ```xml
 > <macros>
@@ -481,6 +608,49 @@ One would then use that macro at any point in the xml it is relevant using the `
 
 This would add both of the `<param/>` tags at that location. Though inputs are used as an example macro here, any tag or group of tags can be made into a macro.
 
+
+### Bio.tools ID
+
+We will now add a useful macro entry. With the Galaxy ecosystem is becoming more reliant on metadata, a bio.tools ID can help Galaxy to pull standardized metadata for your tool. This enables users to find and use the tool more easily from across the web, so we highly recommend setting a bio.tools identifier. If an entry already exists on [https://bio.tools](https://bio.tools), it's a simple task.
+
+> <hands-on-title>Setting a bio.tools ID:</hands-on-title>
+>
+> If we go to [https://bio.tools](https://bio.tools) and search "Bellerophon", we find that it already has a bio.tools entry:
+>
+> ![Bellerophon bio.tools webpage](../../images/biotools-profile.png)
+>
+> We just have to add the biotools ID as a `<macro>` tag.
+>
+> Let's create a macro xml file next to our tool xml: `bellerophon_macros.xml`
+>
+> ```xml
+> <macros>
+>   <xml name="bio_tools">
+>     <xrefs>
+>         <xref type="bio.tools">Bellerophon</xref>
+>     </xrefs>
+>   </xml>
+> </macros>
+> ```
+>
+> Now we can expand the `bio_tools` macro in our tool XML, beneath the tokens:
+>
+> ```xml
+> <macros>
+>     <token name="@TOOL_VERSION@">1.0</token>
+>     <token name="@VERSION_SUFFIX@">0</token>
+> </macros>
+>
+> <import>bellerophon_macros.xml</import>
+> <expand macro="bio_tools"/>
+>
+> ```
+>
+> If your tool does not yet have an entry in bio.tools, we highly encourage you to create one!
+> It takes just 5 minutes to register with bio.tools to start contributing towards this global registry of computational resources.
+>
+{: .hands_on}
+
 ### Requirements section
 
 The requirement section is where conda packages and docker/singularity containers are set. As this is a very basic tutorial,
@@ -494,7 +664,7 @@ This specifies the
 - Specific Bioconda/Conda Forge package version
   - This does not have to be the most recent version
 
-> ### {% icon hands_on %} Hands-on: Adding requirements
+> <hands-on-title>Adding requirements</hands-on-title>
 > In the case of bellerophon, which requires two dependencies, bellerophon and samtools, the requirements section appears like so. Add them to your tool XML.
 >
 > ```xml
@@ -505,13 +675,13 @@ This specifies the
 > ```
 {: .hands_on}
 
-This uses the macro token for @TOOL_VERSION@ for the bioconda package version to retrieve the version number for bellerophon, while samtools' version is set manually.
+This uses the macro token for @TOOL_VERSION@ for the Bioconda package version to retrieve the version number for bellerophon, while samtools' version is set manually.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > If you wanted to add a requirement for the Seurat package of version 3.2, what would that look like?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```xml
 > >   <requirements>
@@ -624,14 +794,14 @@ of the resources on which the tool will be running, they should not be given acc
 goes to the stderr instead of an output file, this can also be skipped. All three of these flags can be coded in the command,
 but not exposed to the user.
 
-> ### {% icon hands_on %} Hands-on: Adding parameters to your tool
+> <hands-on-title>Adding parameters to your tool</hands-on-title>
 > 1. Using information in the above sections, add parameters for the forward, reverse, and quality flags to your tool xml.
 >
-> > ### {% icon question %} Question
+> > <question-title></question-title>
 > >
 > > What does your `<inputs/>` section look like?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > > To include all of the necessary parameters, then, the inputs section would appear like this
 > > >
 > > > ```xml
@@ -654,12 +824,12 @@ The outputs section defines the files that Galaxy makes available in the history
 `<collection/>` tags. In general, it tells Galaxy to look for a specific file after the job completes, and return it to the user.
 It also defines the format of that file and the name shown to the user in the history.
 
-> ### {% icon hands_on %} Hands-on: Adding your outputs
+> <hands-on-title>Adding your outputs</hands-on-title>
 > As Bellerophon has a single output file, add the following outputs section to your tool:
 >
 > ```xml
 > <outputs>
->     <data name="outfile" label="${tool.name} on ${on_string}" format="bam">
+>     <data name="outfile" label="${tool.name} on ${on_string}" format="bam" />
 > </outputs>
 > ```
 {: .hands_on}
@@ -667,7 +837,7 @@ It also defines the format of that file and the name shown to the user in the hi
 This generates a history item called "bellerophon on `<input file name>`", as the ${tool.name} and ${on_string} are reserved values
 for the tool's label and the input file labels.
 
-As the name is hard-set using the output flag, and is output into the working directoy, the name attribute can be used for the file
+As the name is hard-set using the output flag, and is output into the working directory, the name attribute can be used for the file
 search. Alternatively, the attribute "from_work_dir" allows a lower directory to be specified.
 
 #### *Filtering the output*
@@ -780,9 +950,9 @@ runs the helloworld.py script present in the same folder as the tool xml, then e
 
 #### *In practice*
 
-> ### {% icon hands_on %} Hands-on: Writing the command block
+> <hands-on-title>Writing the command block</hands-on-title>
 >
-> The bellerophon command section would, based on the variables set previously, would be as follows. Add it to your tool XML.
+> The bellerophon command section, based on the variables set previously, would be as follows. Please add it to your tool XML.
 >
 > ```xml
 >     <command detect_errors="exit_code"><![CDATA[
@@ -811,7 +981,7 @@ runs the helloworld.py script present in the same folder as the tool xml, then e
 > ```
 {: .hands_on}
 
-inputs the variables set in the inputs and output sections to generate a full command to be run inside the Galaxy environment. When inside a conditional or
+The variables set in the inputs and output sections generate a full command to be run inside the Galaxy environment. When inside a conditional or
 section, the hierarchy is preserved using a period. For example
 
 ```txt
@@ -829,6 +999,20 @@ bellerophon --forward $forward_input --reverse $reverse_input --quality $quality
 && samtools sort --no-PG -O BAM -o `<outfile name generated by Galaxy>` -@ `<number of threads allocated>` merged_out.bam
 ```
 
+#### Symlinks
+
+The symlinks in the first two parts of this command serve to standardize the naming of files passed to the bellerophon command.
+For tools which require specific naming conventions, such as a standard prefix across all input files, or which require specified
+file extensions, this is necessary. When using non-symlinked files, Galaxy uses metadata for filetypes, but, by default, refers to
+files using a `.dat` etension. For example, had the symlinks not been used here, the command actually given would look like this:
+
+```bash
+bellerophon --forward <Galaxy_internal_reference_string>.dat --reverse <Galaxy_internal_reference_string>.dat ...
+```
+
+By adding the symlinks, the files are specified and will use proper names in the command. Although not strictly necessary for
+bellerophon, it is best practice for command legibility.
+
 ### Test section
 
 The test section is an easy way to ensure your tool wrapper functions as intended. It runs the tool and compares the output Galaxy returns against a
@@ -840,7 +1024,7 @@ for the test. These params can also be placed inside a conditional, simulating t
 
 As all parameters in bellerophon are accessible at once, and do not contradict one another, only one test is necessary.
 
-> ### {% icon hands_on %} Hands-on: Adding a test
+> <hands-on-title>Adding a test</hands-on-title>
 > Add the following test case to your tool:
 > ```xml
 >     <tests>
@@ -915,17 +1099,15 @@ and Bibtex:
 
 Multiple citations can be added by using additional citation tags.
 
-> ### {% icon hands_on %} Hands-on: Adding a citation
+> <hands-on-title>Adding a citation</hands-on-title>
 > Add the citation above using either method (but not both!)
 {: .hands_on}
 
 ## Final wrapper
 
-With all sections complete, the final wrapper for bellerophon can be found [here](https://github.com/galaxyproject/tools-iuc/blob/master/tools/bellerophon/bellerophon.xml).
+With all sections complete, the final wrapper for bellerophon can be found [in the IUC GitHub repository](https://github.com/galaxyproject/tools-iuc/blob/master/tools/bellerophon/bellerophon.xml).
 
 ## Toolshed file
-
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/WFSQE8bq5qI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 The .shed.yml file is placed in the same directory as the tool's xml file and saves metadata for the tool. It enables
 toolshed organization and search by using tags and descriptions.
@@ -966,8 +1148,6 @@ For more information on how to write automatic tool suites, visit the [Galaxy do
 
 # Testing Galaxy tool with `planemo`
 
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/19mKUENz_i0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-
 `planemo` is a command line utility that helps developing Galaxy tools.
 Among many other tasks it can:
 
@@ -977,52 +1157,8 @@ Among many other tasks it can:
 
 For more information on `planemo` see its extensive [documentation](https://planemo.readthedocs.io/).
 
-In this part of the tutorial we will start with installing `planemo` and then
+In this part of the tutorial we will be looking at `planemo` and
 see it in action linting, testing, and serving the tool.
-
-## Installing `planemo`
-
-`planemo` is available via the python package manager `pip` and `conda`.
-If you not have conda installed we suggest to use `pip` for installing `planemo`.
-
-> ### {% icon hands_on %} Hands-on: Installing `planemo` via pip
->
-> It is advised to install `planemo` in a virtual environment (step 1-2).
->
-> 1. Create a virtual environment: `virtualenv -p python3 ~/.venv/`. Here `~/.venv/` is the path where the virtual environment should be crated and you may adapt the path to your needs. With `-p python3` we make sure that a `python` intepreter version 3 is used.
-> 2. Activate the virtual environment: `. ~/.venv/bin/activate`
-> 3. Install `planemo` `pip install planemo`
-{: .hands_on}
-
-> ### {% icon hands_on %} Hands-on: Installing `planemo` via conda
->
-> 1. Install [miniconda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html)
-> 2. Create a conda environment with `planemo` installed `conda create -c conda-forge -c bioconda -n planemo planemo`
-> 3. Activate the conda environment `conda activate planemo`
-{: .hands_on}
-
-Note that for using `planemo`from a new shell you will need to activate the python/conda environment again.
-
-> ### {% icon hands_on %} Hands-on: Testing `planemo` and getting help
->
-> 1. In order to test if the installation worked execute
->
->    > ### {% icon code-in %} Input: Bash
->    > ```bash
->    > planemo --version
->    > ```
->    {: .code-in}
->
->    > ### {% icon code-out %} Output
->    > This should output the version of `planemo`, e.g.
->    > ```bash
->    > planemo, version 0.74.3
->    > ```
->    {: .code-out}
->
-> 2. `planemo --help` will show the available commands with a short desctiption (lint, test, and serve will be part of this tutorial)
-> 3. `planemo SUBCOMMAND --help` will show the usage information for the corresponding subcommand. Try to obtain the information for the `lint` subcommand.
-{: .hands_on}
 
 ## Using `planemo` to lint tools
 
@@ -1035,7 +1171,7 @@ When linting a Galaxy tool `planemo` checks the sources for common errors and vi
 If `planemo` finds a problem it outputs warnings or errors depending on the severity of the problem.
 By default `planemo` will fail if any warning or error is found, i.e. return a non-zero exit code.
 
-> ### {% icon hands_on %} Hands-on: Lint a tool with `planemo`
+> <hands-on-title>Lint a tool with `planemo`</hands-on-title>
 >
 > 1. Change into the directory containing the tool
 > 2. Run `planemo lint`
@@ -1056,7 +1192,7 @@ In order to do so `planemo` will:
 - Run the tool using the datasets and parameters defined in the tests (this also involves the installation of all requirements which is done with conda by default)
 - Check if the test assumptions are met, e.g. non-zero exit code, equivalence of the output files, number of outputs, ...
 
-> ### {% icon hands_on %} Hands-on: Test a tool with `planemo`
+> <hands-on-title>Test a tool with `planemo`</hands-on-title>
 >
 > 1. Change into the directory containing the tool
 > 2. Run `planemo test` (as with `planemo lint` you can also specify a path to a tool explicitly as extra argument)
@@ -1086,7 +1222,7 @@ In order to do so `planemo` will:
 {: .hands_on}
 
 
-> ### {% icon tip %} Useful parameters for `planemo test`
+> <tip-title>Useful parameters for `planemo test`</tip-title>
 >
 > * `--failed` Will make `planemo` rerun only the tests that failed in the previous execution.
 > * `--update_test_data` If there are differences to output files defined in the tests these will be updated (and the tests will run again).
@@ -1094,7 +1230,7 @@ In order to do so `planemo` will:
 {: .tip}
 
 
-> ### {% icon details %} Understanding `planemo`'s output in more detail
+> <details-title>Understanding `planemo`'s output in more detail</details-title>
 >
 > Sometimes it can be helpful to understand the `planemo` output in more detail.
 >
@@ -1124,7 +1260,7 @@ In order to do so `planemo` will:
 
 It can be very useful to check how Galaxy renders a tool and if this meets the expectations of the developer. For instance this is the best way to check if the help section is rendered as expected.
 
-> ### {% icon hands_on %} Hands-on: Serve a tool with `planemo`
+> <hands-on-title>Serve a tool with `planemo`</hands-on-title>
 >
 > 1. Change into the directory containing the tool
 > 2. Run `planemo serve` (as with `lint` and test you can also specify a path to a tool explicitly as extra argument)
@@ -1133,14 +1269,12 @@ It can be very useful to check how Galaxy renders a tool and if this meets the e
 >
 {: .hands_on}
 
-> ### {% icon tip %} Useful parameters for `planemo test`
+> <tip-title>Useful parameters for `planemo test`</tip-title>
 >
 > In order to stop `planemo serve` just press <kbd>Ctrl-C</kbd>
 {: .tip}
 
 # Publishing Galaxy tools
-
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube-nocookie.com/embed/hg0YreA8W1I" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 Galaxy tools are installed from the [Galaxy toolshed](https://toolshed.g2.bx.psu.edu/). With the help of `planemo` tools can be added to the toolshed ([documentation](https://planemo.readthedocs.io/en/latest/publishing.html)). But usually the sources of the tools are maintained in public source code repositories, for instance:
 
@@ -1184,7 +1318,7 @@ For the following we will use a sandbox tool repository and not one of the main 
 But, the steps can be adapted easily by exchanging the repository URLs. Note that for some repositories
 the development branch may have the name `master` instead of `main`.
 
-> ### {% icon hands_on %} Hands-on: Fork and clone the IUC github repository
+> <hands-on-title>Fork and clone the IUC github repository</hands-on-title>
 >
 > 0. If you don't have an account on github you need to sign up at first.
 > 1. Open the [Sandbox tool repository](https://github.com/mvdbeek/galaxy-tools-mvdbeek/) in a browser.
@@ -1197,7 +1331,7 @@ the development branch may have the name `master` instead of `main`.
 >
 > 2. In order to obtain a clone (i.e. a local copy of your fork) click the green button with text "Code" and copy the link. And execute the following commands on your computer
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > cd A_DIR_WHERE_YOU_WANT_TO_CREATE_THE_CLONE
 >    > git clone LINK_TO_YOUR_FORK
@@ -1213,7 +1347,7 @@ the development branch may have the name `master` instead of `main`.
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on: Keeping your fork in sync
+> <hands-on-title>Keeping your fork in sync</hands-on-title>
 >
 > You should execute the following steps always before creating a new branch:
 >
@@ -1224,7 +1358,7 @@ the development branch may have the name `master` instead of `main`.
 
 ## Create a pull request for a new tool
 
-> ### {% icon hands_on %} Hands-on: Create a pull request
+> <hands-on-title>Create a pull request</hands-on-title>
 > 1. `git checkout main`
 > 2. `git checkout -b NAME_OF_THE_BRANCH`: create a new feature branch and change to this branch. The branch name should not contain names and should be short and if possible descriptive, e.g. the tool name.
 > 3. Introduce changes, e.g. created a directory under `tools/`, add the tool XML file, the `.shed.yml` file, and the `test-data` directory with the files needed for the test.
@@ -1236,7 +1370,7 @@ the development branch may have the name `master` instead of `main`.
 
 After you created a PR your changes will be reviewed and improvements will be requested. You can add changes to the PR as follows.
 
-> ### {% icon hands_on %} Hands-on: Adding changes to a PR
+> <hands-on-title>Adding changes to a PR</hands-on-title>
 > 1. `git checkout NAME_OF_THE_BRANCH`
 > 2. Make changes as requested.
 > 3. `git add SPACE_SEPARATED_LIST_OF_CHANGED_FILES`
@@ -1290,4 +1424,4 @@ It is also easy to setup a github tool repository on your own that has the same 
 In order to setup your own tool repository the Galaxy community created a [template repository](https://github.com/bernt-matthias/galaxy-tool-repository-template). By clicking `Use this template` and follow the instructions in the README file you get you own tool repository.
 
 # Conclusion
-{:.no_toc}
+

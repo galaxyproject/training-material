@@ -3,6 +3,7 @@ title: Open a Terminal in Jupyter
 area: interactive tools
 box_type: hands_on
 layout: faq
+contributors: [hexylena]
 ---
 
 {% if required -%}

@@ -21,23 +21,20 @@ key_points:
 contributors:
 - mvdbeek
 level: Intermediate
-subtopic: analyse
+subtopic: workflows
 ---
 
-
-# Introduction
-{:.no_toc}
 
 
 Workflows are a powerful feature in Galaxy that allow you to link multiple steps of complex analysis.
 In this tutorial we will demonstrate how to use the Workflow Editor to construct multiple variants of a simple workflow. Note that these workflows are meant to illustrate different concepts. Not all workflows require using all of the features described below, but we hope this tutorial will inspire you to make your analysis tasks more efficient.
 
-> ### {% icon tip %} Tip: Create workflows from existing histories
->  Workflows can be extracted from existing histories. You can find a tutorial for this [here]({{ site.baseurl }}/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html)
+> <tip-title>Create workflows from existing histories</tip-title>
+>  [Read about extracting workflows from histories in this tutorial]({% link topics/galaxy-interface/tutorials/history-to-workflow/tutorial.md %}).
 >
 {: .tip}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -54,7 +51,7 @@ currently workflow inputs, tools, and workflows.
 
 ## Creating a new workflow
 
-> ### {% icon hands_on %} Hands-on: Create a new workflow
+> <hands-on-title>Create a new workflow</hands-on-title>
 >
 > - Click on **Workflow** in the top panel of the Galaxy page
 > - On the top right you will see 2 buttons: **Create** and **Import**
@@ -77,13 +74,13 @@ the editor.
 We will start by creating a very simple workflow with just 2 tools, and then
 add more advanced features.
 
-> ### {% icon hands_on %} Hands-on: Insert a dataset input
+> <hands-on-title>Insert a dataset input</hands-on-title>
 >
 > 1. Expand the "Inputs" section in the tool panel and click on "Input dataset" to create a new dataset input
 > 2. Click on the new input dataset in the center panel. Set the following parameter on the right side:
 >    - *Label*: `A simple text input dataset`
 >
->   > ### {% icon comment %} Optional Input Datasets & Formats
+>   > <comment-title>Optional Input Datasets & Formats</comment-title>
 >   > Tools may have optional dataset inputs. If your workflow should use
 >   > optional datasets, you can set **Optional** to `Yes`. Doing this allows you
 >   > to connect such an input only to Tool inputs that are optional. You can
@@ -92,7 +89,7 @@ add more advanced features.
 >   {: .comment}
 >
 {: .hands_on}
-> ### {% icon comment %} Comment: Input modules
+> <comment-title>Input modules</comment-title>
 > There are 3 input types, "Input dataset", "Input dataset
 > collection" and "Simple inputs used for workflow logic". Insert an input
 > dataset or dataset collection for each possible input to your workflow.
@@ -104,7 +101,7 @@ add more advanced features.
 
 We're now ready to add a first tool and connect it to our input dataset.
 
-> ### {% icon hands_on %} Hands-on: Add **tac reverse a file (reverse cat)** {% icon tool %} to your workflow
+> <hands-on-title>Add <b>tac reverse a file (reverse cat)</b> to your workflow</hands-on-title>
 >
 > 1. Find **tac reverse a file (reverse cat)** {% icon tool %} in the tool panel and click on it
 > 2. A new box labeled **tac** {% icon tool %} will appear in the center panel
@@ -117,7 +114,7 @@ We're now ready to add a first tool and connect it to our input dataset.
 >
 {: .hands_on}
 
-> ### {% icon comment %} Tip: Workflow connections
+> <comment-title>Tip: Workflow connections</comment-title>
 > Connections can be made by clicking on an output terminal and dragging the
 > cursor to an input terminal. Input terminals that are compatible with the
 > current output are highlighted in green, while input terminals that can't
@@ -133,7 +130,7 @@ We're now ready to add a first tool and connect it to our input dataset.
 > the step must be disconnected. Connections can be removed by hovering over an
 > input terminal and clicking.
 {: .comment}
-> ### {% icon comment %} Comment: Steps can be labeled
+> <comment-title>Steps can be labeled</comment-title>
 > The default label is the tool name, but it is often useful to label a step with
 > what it does, especially if a tool is used multiple times in a workflow. A
 > click on a step will open the step's settings on the right side. Any label
@@ -147,7 +144,7 @@ an authentic workflow experience. From now on we'll contract steps 1 to 4 and
 just mention the tool and parameters to insert, since the procedure is always
 the same.
 
-> ### {% icon hands_on %} Hands-on: Add **Select first lines from a dataset** {% icon tool %} to your workflow
+> <hands-on-title>Add <b>Select first lines from a dataset</b> to your workflow</hands-on-title>
 >
 > 1. **Select first lines from a dataset** {% icon tool %}
 >    - *Label*: `Select first lines`
@@ -160,9 +157,9 @@ We now have a very simple workflow that will reverse the contents of a file and
 then output the first line of the resulting dataset. Now we're ready to upload
 a test dataset and run our workflow.
 
-> ### {% icon hands_on %} Hands-on: Running the workflow
+> <hands-on-title>Running the workflow</hands-on-title>
 >
-> 1. Return to the analysis are by clicking the Home button {% icon galaxy-home %} (or *Analyze Data* on older versions of Galaxy) on the top
+> 1. Return to the analysis page by clicking the Home button {% icon galaxy-home %} (or *Analyze Data* on older versions of Galaxy) on the top
 > 2. Upload a dataset using "Paste/Fetch data" with the contents
 >
 >    ```
@@ -194,7 +191,7 @@ groups of datasets and we can label and rename outputs.
 
 We will now add tags to step outputs and label one of the 2 output datasets.
 
-> ### {% icon comment %} Comment: Configuring Outputs
+> <comment-title>Configuring Outputs</comment-title>
 > Open a step and scroll to the "Configure Output:" section on the right side of
 > the editor. Here you can set a Label. Outputs with a label can be used as
 > outputs in a subworkflow. You will also be able to set an output name for the
@@ -204,10 +201,10 @@ We will now add tags to step outputs and label one of the 2 output datasets.
 > to change a text output to tabular or gff/bed for instance.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Editing our simple workflow
+> <hands-on-title>Editing our simple workflow</hands-on-title>
 >
 > 1. Open our simple workflow in the Workflow Editor
-> 2. Remove the input dataset called `A simple text input dataset` using the `x` icon
+> 2. Remove the input dataset called `A simple text input dataset` using the white {% icon galaxy-cross %} icon
 > 3. Add an input dataset collection and label it
 >    - *Label*: `A text dataset collection`
 > 4. Disconnect the exisiting connections and reconnect
@@ -220,7 +217,7 @@ We will now add tags to step outputs and label one of the 2 output datasets.
 > 7. Save {% icon galaxy-save %} your workflow using the save button on the top right
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Running the workflow
+> <hands-on-title>Running the workflow</hands-on-title>
 >
 > 1. Return to the analysis page by clicking the Home button {% icon galaxy-home %} (or *Analyze Data* on older versions of Galaxy) on the top
 > 2. Create a dataset collection from the first 2 files in your history
@@ -250,7 +247,7 @@ and update closely related workflows.
 Here we will include our workflow twice within a new workflow and then paste the contents
 of each workflow together.
 
-> ### {% icon hands_on %} Hands-on: Embedding a workflow
+> <hands-on-title>Embedding a workflow</hands-on-title>
 >
 > 1. Create a new, empty workflow
 > 2. Insert a dataset collection input
@@ -271,7 +268,7 @@ of each workflow together.
 This is a very contrived example, but this technique can be used to separate
 re-useable steps in real world scenarios.
 
-> ### {%icon comment %} Comment: Workflow versions
+> <comment-title>Workflow versions</comment-title>
 > Every time a workflow is saved a new version is created, so that you can go
 > back and forth between new and old versions of a workflow. Click on the pencil
 > symbol to bring up the workflow attributes. You can freely select different
@@ -279,13 +276,13 @@ re-useable steps in real world scenarios.
 > will become the newest version.
 {: .comment}
 
-> ### {%icon comment %} Comment: Importing workflows
+> <comment-title>Importing workflows</comment-title>
 >
 > Workflows can be imported via URL, through `Shared Data -> Workflows` or
 > from a local file on your computer.
 {: .comment}
 
-> ### {%icon comment %} Comment: Managing tool versions
+> <comment-title>Managing tool versions</comment-title>
 >
 > Versions of a tool in a workflow can be changed by clicking on a tool step in
 > the center panel and on the right side clicking on `Select another tool
@@ -293,7 +290,7 @@ re-useable steps in real world scenarios.
 {: .comment}
 
 # Conclusion
-{:.no_toc}
+
 
 You now know the ins and outs of Workflows in Galaxy and should be able to
 make your analyses more efficient and less manual!

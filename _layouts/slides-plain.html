@@ -6,7 +6,7 @@ layout: base
 	<a href="{{ site.github_repository }}/blob/main/{{ page.url | replace: 'slides-plain','slides' }}">View markdown source on GitHub</a>
 	<h1>{{ page.title }}</h1>
 		<h2>Contributors</h2>
-		{% include _includes/contributor-author-list-comma.html contributors=page.contributors %}
+{% include _includes/contributors-line.html page=page %}
 
 		{% if page.questions %}
 		<h2>Questions</h2>
@@ -34,7 +34,8 @@ layout: base
 		</ul>
 		{% endif %}
 
-		<div><strong> {% icon last_modification %} Last modification:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </div>
+		<div><strong> {% icon last_modification %} Published:</strong> {{ page | gtn_pub_date | date: "%b %-d, %Y"}} </div>
+		<div><strong> {% icon last_modification %} Last Updated:</strong> {{ page | last_modified_at | date: "%b %-d, %Y"}} </div>
 
 	<hr />
 
@@ -68,12 +69,6 @@ Follow one of our recommended follow-up trainings:
 
 This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
 
-{% if tutorial.contributors %}
-<div class="contributors-line">
-{% include _includes/contributor-badge-list.html contributors=tutorial.contributors %}
-</div>
-{% endif %}
-
 {% if page.logo == "GTN" %}
 <img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
 {% else %}
@@ -84,5 +79,24 @@ This material is the result of a collaborative work. Thanks to the <a href="http
 {% endif %}
 {% endif %}
 
-This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+{{ locale['license-framework'] | default: "Tutorial Content is licensed under" }}
+{% if page.license %}
+  <a rel="license" href="https://spdx.org/licenses/{{ page.license }}">{{ page.license }}</a>.
+{% else %}
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+{% endif %}
 </section>
+
+{% if page.cited %}
+<h2 id="bibliography">{{locale['references']| default: "References" }}</h2>
+{% bibliography --cited %}
+{% endif %}
+
+
+{% if page.contributions %}
+{% if page.contributions.funding %}
+<h2 id="funding">{{locale['references']| default: "Funding" }}</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+{% include _includes/funding-statement.md funders=page.contributions.funding %}
+{% endif %}
+{% endif %}

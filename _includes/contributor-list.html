@@ -1,0 +1,12 @@
+{%- if include.contributors -%}
+{%- capture people -%}
+{%- if include.shuffle -%}
+  {%- assign zz_contributors = include.contributors | shuffle -%}
+{%- else -%}
+  {%- assign zz_contributors = include.contributors -%}
+{%- endif -%}
+{% for id in zz_contributors %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+{%- if include.newcontributors -%}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id='newcontributors' %}{% endif %}{% endif %}
+{%- endcapture -%}
+{%- endif -%}
+{{- people | remove_first: include.sep -}}

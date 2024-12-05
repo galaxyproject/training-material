@@ -3,7 +3,9 @@ DIR=/tmp/git-gat
 op="$1"
 
 declare -a tutorials
-tutorials=(ansible-galaxy singularity tool-management cvmfs data-library connect-to-compute-cluster job-destinations pulsar gxadmin monitoring tiaas reports ftp)
+tutorials=(admin/ansible-galaxy admin/backup-cleanup admin/customization admin/tus admin/cvmfs admin/apptainer admin/tool-management admin/data-library admin/connect-to-compute-cluster admin/job-destinations admin/pulsar admin/celery admin/reports admin/monitoring admin/tiaas admin/sentry admin/ftp admin/beacon)
+#tutorials=(admin/wireguard-headscale)
+#tutorials=(admin/wireguard)
 
 #echo "${tutorials[0]}"
 #exit 1;
@@ -42,9 +44,12 @@ if [[ "$op" == "export" ]]; then
 	# Then do the rest
 	for idx in "${!tutorials[@]}"; do
 		echo "Processing ${tutorials[$idx]}"
+		folder=$(echo "${tutorials[$idx]}" | cut -d / -f 1)
+		tuto=$(echo "${tutorials[$idx]}" | cut -d / -f 2)
+
 		python3 bin/knit-frog.py \
-			topics/admin/tutorials/${tutorials[$idx]}/tutorial.md \
-			${DIR}/$(( idx + 10 ))-${tutorials[$idx]};
+			topics/${folder}/tutorials/${tuto}/tutorial.md \
+			${DIR}/$(( idx + 10 ))-${tuto};
 	done
 elif [[ "$op" == "import" ]]; then
 	if [[ ! -d "${DIR}" ]]; then
@@ -65,12 +70,13 @@ elif [[ "$op" == "import" ]]; then
 	cd "${CURRENT_DIR}" || exit
 
 	# Import all of the patches
-	for i in "${tutorials[@]}"; do
-		if [[ "$i" != "tool-management" ]]; then
+	for idx in "${!tutorials[@]}"; do
+		folder=$(echo "${tutorials[$idx]}" | cut -d / -f 1)
+		tuto=$(echo "${tutorials[$idx]}" | cut -d / -f 2)
+
 		python3 bin/knit.py \
-			topics/admin/tutorials/$i/tutorial.md \
-			--patches ${DIR}/*admin-${i}*.patch
-		fi
+			topics/${folder}/tutorials/${tuto}/tutorial.md \
+			--patches ${DIR}/*${folder}-${tuto}*.patch
 	done
 elif [[ "$op" == "deploy" ]]; then
 	if [[ ! -d "${DIR}" ]]; then
@@ -89,12 +95,48 @@ elif [[ "$op" == "roundtrip" ]]; then
 	rm -rf ${DIR}
 	bash $0 export
 	cd ${DIR} || exit
-	git init && \
+	git init && git config --local --add commit.gpgsign false && \
 		git am -3 -C2 -- *.patch
 	cd -
 	bash $0 import
+elif [[ "$op" == "check-offsets" ]]; then
+	for idx in "${!tutorials[@]}"; do
+		folder=$(echo "${tutorials[$idx]}" | cut -d / -f 1)
+		tuto=$(echo "${tutorials[$idx]}" | cut -d / -f 2)
+		n2=$(( idx + 1 ))
+		echo $idx $folder $tuto = $n2 
+		grep "snippet topics/admin/faqs/missed-something.md step=$n2" topics/${folder}/tutorials/${tuto}/tutorial.md -q
+		if (( $? != 0 )); then
+			echo "Error, topics/${folder}/tutorials/${tuto}/tutorial.md is missing a snippet for step $n2"
+			#exit 1
+		fi
+		#vim topics/${folder}/tutorials/${tuto}/tutorial.md
+	done
+elif [[ "$op" == "fix-offsets" ]]; then
+	for idx in "${!tutorials[@]}"; do
+		folder=$(echo "${tutorials[$idx]}" | cut -d / -f 1)
+		tuto=$(echo "${tutorials[$idx]}" | cut -d / -f 2)
+		n2=$(( idx + 1 ))
+		echo -n "$folder/$tuto should be $n2 "
+		grep "snippet topics/admin/faqs/missed-something.md step=$n2" topics/${folder}/tutorials/${tuto}/tutorial.md -q
+		if (( $? != 0 )); then
+			echo "Fixed!"
+			sed -i -r 's|topics/admin/faqs/missed-something.md step=[0-9]+|topics/admin/faqs/missed-something.md step='$n2'|' topics/${folder}/tutorials/${tuto}/tutorial.md
+		else
+			echo "Already correct"
+		fi
+		#vim topics/${folder}/tutorials/${tuto}/tutorial.md
+	done
+elif [[ "$op" == "edit" ]]; then
+	files=""
+	for idx in "${!tutorials[@]}"; do
+		folder=$(echo "${tutorials[$idx]}" | cut -d / -f 1)
+		tuto=$(echo "${tutorials[$idx]}" | cut -d / -f 2)
+		files="$files topics/${folder}/tutorials/${tuto}/tutorial.md"
+	done
+	$EDITOR $files
 else
-	echo "$0 <import|export|deploy|roundtrip>"
+	echo "$0 <import|export|deploy|roundtrip|check-offsets|fix-offsets|edit>"
 	exit 1;
 fi
 

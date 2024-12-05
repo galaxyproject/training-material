@@ -2,6 +2,8 @@
 title: Sustainability of the training-material and metadata
 area: other
 layout: faq
+box_type: tip
+contributors: [bebatut,shiltemann]
 ---
 
 This repository is hosted on [GitHub](https://github.com/) using git as a [DVCS](https://en.wikipedia.org/wiki/Distributed_version_control). Therefore the community is hosting backups of this

@@ -16,18 +16,16 @@ subtopic: property-prediction
 tags: []
 ---
 
-# Introduction
-{:.no_toc}
 
 
- Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches.  Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to compare peptide sequences and libraries.  In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to analyze the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under Galaxy (PDAUG) package to calculate various peptide-based descriptors, and use these descriptors and feature spaces to build informative plots.
+Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches.  Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to compare peptide sequences and libraries.  In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to analyze the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under Galaxy (PDAUG) package to calculate various peptide-based descriptors, and use these descriptors and feature spaces to build informative plots.
 
 
 ### Easy access to tools, workflows and data from the docker image
 
 An easy way to install and use the PDAUG toolset, and follow this tutorial is via a prebuilt docker image equipped with a PDAUG toolset, workflow, and data library. A prebuilds docker image can be downloaded and run by typing a simple command at the terminal after installing docker software on any operating system.
 
-> ### {% icon hands_on %} Hands-on: Easy access of tools, workflows and data from docker image
+> <hands-on-title>Easy access of tools, workflows and data from docker image</hands-on-title>
 >
 > 1. Downloading the docker image from the docker hub using `docker pull jayadevjoshi12/galaxy_pdaug:latest` command.
 > 2. Running the container with latest PDAUG tools `docker run -i -t -p 8080:80 jayadevjoshi12/galaxy_pdaug:latest`.
@@ -37,7 +35,7 @@ An easy way to install and use the PDAUG toolset, and follow this tutorial is vi
 {: .hands_on}
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -51,7 +49,7 @@ An easy way to install and use the PDAUG toolset, and follow this tutorial is vi
 
 Several inbuilt data sets have been provided with the tool`PDAUG Peptide Data Access`. The antimicrobial peptides (AMPs) versus transmembrane peptides (TMPs) dataset was used as an example data set to understand the overall relation between features and biological properties of peptides. AMPs consist of an intersection of all activity annotations of the APD2 and CAMP databases, where gram-positive, gram-negative, and antifungal exact matches were observed. TMPs were extracted from alpha-helical transmembrane regions of proteins for classification.
 
-> ### {% icon hands_on %} Hands-on: Fetching inbuild data
+> <hands-on-title>Fetching inbuild data</hands-on-title>
 >
 > 1. {% tool [PDAUG Peptide Data Access](toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0) %} with the following parameters:
 >    - *"Datasets"*: `AMPvsTMP`
@@ -63,7 +61,7 @@ Several inbuilt data sets have been provided with the tool`PDAUG Peptide Data Ac
 
 `PDAUG Peptide Data Access` tool returns data as a tabular file that contains sequences from both the classes. In order to utilize this data in the next steps, first we need to convert tabular data into fasta format. If data contains sequences from two different classes `PDAUG TSVtoFASTA` tool converts and splits data into two separate files for each of the class,  AMPs, and TMPs.  The reason behind converting and splitting the data is that all the downstream tools require two separate files if we are comparing two different peptide classes or calculating features.
 
-> ### {% icon hands_on %} Hands-on: Converting tabular data into fasta formate
+> <hands-on-title>Converting tabular data into fasta formate</hands-on-title>
 >
 > 1. {% tool [PDAUG TSVtoFASTA](toolshed.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Peptide Data Access - AMPvsTMP (tabular)` (output of **PDAUG Peptide Data Access** {% icon tool %})
@@ -82,7 +80,7 @@ In this step, we utilize `PDAUG Peptide Sequence Analysis` tool to compare pepti
 
 
 
-> ### {% icon hands_on %} Hands-on: Generating a summary plot to assess peptide dataset
+> <hands-on-title>Generating a summary plot to assess peptide dataset</hands-on-title>
 >
 > 1. {% tool [PDAUG Peptide Sequence Analysis](toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0) %} with the following parameters:
 >    - *"Analysis options"*: `Plot Summary`
@@ -91,10 +89,10 @@ In this step, we utilize `PDAUG Peptide Sequence Analysis` tool to compare pepti
 >        - *"first input file"*: `TMPs`
 >        - *"Second input file"*: `AMPs`
 >
->   > ### {% icon question %} Questions
+>   > <question-title></question-title>
 >   > What can be concluded from the summary plot based on different properties?
 >   >
->   >  > ### {% icon solution %} Solution
+>   >  > <solution-title></solution-title>
 >   >  > The summary plot represents differences between two sets of peptides based on an amino acid fraction, global charge, sequence length, global hydrophobicity, glocal hydrophobic movement. Additionally, 3D scattered plot shows the clustering of peptides based on three features.
 >   >  >
 >   >  > 1. Leucine and Valine show relatively higher differences in terms of their fraction within both groups.
@@ -116,7 +114,7 @@ In this step, we utilize `PDAUG Peptide Sequence Analysis` tool to compare pepti
 In this tool, we have used `PDAUG Fisher's Plot` that compares two peptide libraries based on the feature space using the Fisher test.
 
 
-> ### {% icon hands_on %} Hands-on: Generating a Fisher's plot to assess peptide dataset
+> <hands-on-title>Generating a Fisher's plot to assess peptide dataset</hands-on-title>
 >
 > 1. {% tool [PDAUG Fisher's Plot](toolshed.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"First fasta file"*: `PDAUG TSVtoFASTA on data 1 - first (fasta)` (first output of **PDAUG TSVtoFASTA** {% icon tool %})
@@ -124,10 +122,10 @@ In this tool, we have used `PDAUG Fisher's Plot` that compares two peptide libra
 >    - *"Label for first population"*: `TMPs`
 >    - *"Label for second population"*: `AMPs`
 >
->   > ### {% icon question %} Questions
+>   > <question-title></question-title>
 >   > What does Fisher's plot represents?
 >   >
->   >  > ### {% icon solution %} Solution
+>   >  > <solution-title></solution-title>
 >   >  >
 >   >  > Fisher's plot represents the difference between two groups of peptides based on their feature space. Each tiny square in this plot represents the feature space. Based on the sliding window Fisher's test was performed for each feature space to assess the presence of peptides from two different groups on each of the tiny squares.  The AMPs and TMPs in the feature space represented by their mean hydropathy and amino acid volume. Fisher's plot shows that the sequences with larger hydrophobic amino acids are more frequent in TMPs in comparison to AMPs.
 >   >  {: .solution }
@@ -146,7 +144,7 @@ The AMPs and TMPs in the feature space represented by their mean hydropathy and 
 In this step we will calculate Composition, Transition and Distribution (CTD) descriptos. Composition describptors are defined as the number of amino acids of a particular property divided by total number of amino acids.  Transition descriptors are representd as the number of transition from a particular property to different property divided by (total number of amino acids − 1). Distribution descriptors are derived by chain length and the amino acids of a particular property located on this length {% cite Govindan_Nair_2013 %}.
 
 
-> ### {% icon hands_on %} Hands-on: Calculating descriptors for the peptide dataset
+> <hands-on-title>Calculating descriptors for the peptide dataset</hands-on-title>
 >
 > 1. {% tool [PDAUG Sequence Property Based Descriptors](toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input fasta file"*: `PDAUG TSVtoFASTA on data 1 - first (fasta)` (first output of **PDAUG TSVtoFASTA** {% icon tool %})
@@ -167,7 +165,7 @@ Class labels or target labels usually represents the class of peptides. Here in 
 
 - **Adding Class Label (target labels) in AMPs and TMPs data**
 
-> ### {% icon hands_on %} Hands-on: Adding Class Labels (target labels) to the tabular data
+> <hands-on-title>Adding Class Labels (target labels) to the tabular data</hands-on-title>
 >
 > 1. {% tool [PDAUG Add Class Label](toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Sequence Property Based Descriptors on data 2 - CTD (tabular)` (output of **PDAUG Sequence Property Based Descriptors** {% icon tool %})
@@ -186,7 +184,7 @@ Class labels or target labels usually represents the class of peptides. Here in 
 We utilize `PDAUG Merge Dataframes` to merge two tabular data files.
 
 
-> ### {% icon hands_on %} Hands-on: Merging two tabular data files
+> <hands-on-title>Merging two tabular data files</hands-on-title>
 >
 > 1. {% tool [PDAUG Merge Dataframes](toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0) %} with the following parameters:
 >    - {% icon param-files %} *"Input files"*: `PDAUG Add Class Label on data 6 - (tabular)` (output of **PDAUG Add Class Label** {% icon tool %}), `PDAUG Add Class Label on data 7 - (tabular)` (output of **PDAUG Add Class Label** {% icon tool %})
@@ -201,7 +199,7 @@ We utilize `PDAUG Merge Dataframes` to merge two tabular data files.
 Tool `PDAUG Basic Plots` will be used to compare two peptide libraries based on three CTD descriptors `SecondaryStrD1100`, `SolventAccessibilityD2001`, and `NormalizedVDWVD3050` respectively. A 3D scatter plot will be generated.
 
 
-> ### {% icon hands_on %} Hands-on: Generating a scatter plot to assess features
+> <hands-on-title>Generating a scatter plot to assess features</hands-on-title>
 >
 > 1. {% tool [PDAUG Basic Plots](toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0) %} with the following parameters:
 >    - *"Data plotting method"*: `Scatter Plot`
@@ -223,7 +221,7 @@ Tool `PDAUG Basic Plots` will be used to compare two peptide libraries based on 
 In this tutorial, we learned how to utilize inbuild data, calculate features, and utilize descriptors or features to assess biological properties. We also learned how to utilize various utilities of `PDAUG` to generate useful plots to include in our peptide research.
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we learned an example flexible and extensible analysis of peptide data using PDAUG tools. We generated various plots based on the quantitative properties of amino acids and peptide sequences.
 
