@@ -1,5 +1,5 @@
 ---
 layout: faq-page
 redirect_from:
-- /topics/galaxy-interface/processing-many-samples-at-once/faqs/index
+- /topics/galaxy-interface/tutorials/processing-many-samples-at-once/faqs/index
 ---
