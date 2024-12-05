@@ -76,12 +76,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 {: .hands_on}
 
 
-> <hands-on-title> Run "Prepare Data Submission" Workflow </hands-on-title>
-> Workflow is accessible there:
->
-> [https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission](https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission-1).
->
-> {% snippet faqs/galaxy/workflows_run.md %}
+> <hands-on-title> Run "Prepare Data Submission" Workflow steps </hands-on-title>
 >
 > This workflow takes as input ab1 sequences fles and produce filtered FastQ and Fasta files so sequences passing the quality checks are compared to NCBI nucleotidic database using Blastn operation.
 {: .hands_on}
