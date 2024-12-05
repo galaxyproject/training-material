@@ -16,14 +16,26 @@ TRACKING = "?utm_source=matrix&utm_medium=newsbot&utm_campaign=matrix-news"
 PRIO = [
   'news',
   'events',
+  'learning-pathways',
   'tutorials',
   'slides',
+  'recordings',
   'faqs',
   'workflows',
   'contributors',
-  'funders',
+  'grants',
   'organisations'
 ].map.with_index { |x, i| [x, i] }.to_h
+
+def track(url)
+  if url =~ /utm_source/
+    url
+  elsif url.include? '#'
+    url.gsub(/#/, TRACKING + '#')
+  else
+    url + TRACKING
+  end
+end
 
 def objectify(attrs, url, path)
   obj = attrs.clone
@@ -88,7 +100,7 @@ end
 
 ICON_FOR = {
   'contributors' => '🧑‍🏫',
-  'funders' => '💰',
+  'grants' => '💰',
   'organisations' => '🏢',
   'events' => '📅',
   'tutorials' => '📚',
@@ -96,6 +108,8 @@ ICON_FOR = {
   'news' => '📰',
   'faqs' => '❓',
   'workflows' => '🛠️',
+  'learning-pathways' => '🛤️',
+  'recordings' => '🎥',
 }
 
 def generate_opml(site, groups)
@@ -146,7 +160,7 @@ def generate_topic_feeds(site, topic, bucket)
 
       mats.each do |time, group, page, tags|
         xml.entry do
-          xml.title(ICON_FOR[group] + " " +page.data['title'])
+          xml.title(ICON_FOR[group] + " " + page.data['title'])
           link = "#{site.config['url']}#{site.baseurl}#{page.url}"
           xml.link(href: link)
           # Our links are (mostly) stable
@@ -206,6 +220,7 @@ def all_date_sorted_materials(site)
   materials = TopicFilter.list_all_materials(site).reject { |k, _v| k['draft'] }
   news = site.posts.select { |x| x['layout'] == 'news' }
   faqs = site.pages.select { |x| x['layout'] == 'faq' }
+  pathways = site.pages.select { |x| x['layout'] == 'learning-pathway' }
   workflows = Dir.glob('topics/**/*.ga')
 
   bucket = events.map do |e|
@@ -214,12 +229,35 @@ def all_date_sorted_materials(site)
 
   materials.each do |m|
     tags = [m['topic_name']] + (m['tags'] || [])
-    bucket += m.fetch('ref_tutorials', []).map do |t|
-      [Gtn::PublicationTimes.obtain_time(t.path).to_datetime, 'tutorials', t, tags]
+    m.fetch('ref_tutorials', []).map do |t|
+      bucket << [Gtn::PublicationTimes.obtain_time(t.path).to_datetime, 'tutorials', t, tags]
+
+      (t['recordings'] || []).map do |r|
+        url = '/' + t.path.gsub(/tutorial(_[A_Z_]*)?.(html|md)$/, 'recordings/')
+        url += "#tutorial-recording-#{Date.parse(r['date']).strftime('%-d-%B-%Y').downcase}"
+        attr = {'title' => "Recording of " + t['title'], 
+                'contributors' => r['speakers'] + (r['captions'] || []),
+                'content' => "A #{r['length']} long recording is now available."}
+
+        obj = objectify(attr, url, t.path)
+        bucket << [DateTime.parse(r['date'].to_s), 'recordings', obj, tags]
+      end
     end
 
-    bucket += m.fetch('ref_slides', []).reject { |s| s.url =~ /-plain.html/ }.map do |s|
-      [Gtn::PublicationTimes.obtain_time(s.path).to_datetime, 'slides', s, tags]
+
+
+    m.fetch('ref_slides', []).reject { |s| s.url =~ /-plain.html/ }.map do |s|
+      bucket << [Gtn::PublicationTimes.obtain_time(s.path).to_datetime, 'slides', s, tags]
+
+      (s['recordings'] || []).map do |r|
+        url = '/' + s.path.gsub(/slides(_[A_Z_]*)?.(html|md)$/, 'recordings/')
+        url += "#tutorial-recording-#{Date.parse(r['date']).strftime('%-d-%B-%Y').downcase}"
+        attr = {'title' => "Recording of " + s['title'], 
+                'contributors' => r['speakers'] + (r['captions'] || []),
+                'content' => "A #{r['length']} long recording is now available."}
+        obj = objectify(attr, url, s.path)
+        bucket << [DateTime.parse(r['date'].to_s), 'recordings', obj, tags]
+      end
     end
   end
 
@@ -232,6 +270,11 @@ def all_date_sorted_materials(site)
     [Gtn::PublicationTimes.obtain_time(n.path).to_datetime, 'faqs', n, ['faqs', tag]]
   end
 
+  bucket += pathways.map do |n|
+    tags = ['learning-pathway'] + (n['tags'] || [])
+    [Gtn::PublicationTimes.obtain_time(n.path).to_datetime, 'learning-pathways', n, tags]
+  end
+
   bucket += workflows.map do |n|
     tag = Gtn::PublicationTimes.clean_path(n).split('/')[1]
     wf_data = JSON.parse(File.read(n))
@@ -241,7 +284,6 @@ def all_date_sorted_materials(site)
       'description' => wf_data['annotation'],
       'tags' => wf_data['tags'],
       'contributors' => wf_data.fetch('creator', []).map do |c|
-        p ">> #{c}"
         matched = site.data['contributors'].select{|k, v| 
           v.fetch('orcid', "does-not-exist") == c.fetch('identifier', "").gsub('https://orcid.org/', '')
         }.first
@@ -274,14 +316,14 @@ def all_date_sorted_materials(site)
     [DateTime.parse("#{v['joined']}-01T12:00:00", 'content' => "GTN Contributions from #{k}"), 'contributors', obj, ['contributor']]
   end
 
-  bucket += site.data['funders'].map do |k, v|
+  bucket += site.data['grants'].map do |k, v|
     a = {'title' => "@#{k}",
          'content' => "GTN Contributions from #{k}"}
     obj = objectify(a, "/hall-of-fame/#{k}/", k)
 
-    # TODO: backdate funders, organisations
+    # TODO: backdate grants, organisations
     if v['joined']
-      [DateTime.parse("#{v['joined']}-01T12:00:00"), 'funders', obj, ['funder']]
+      [DateTime.parse("#{v['joined']}-01T12:00:00"), 'grants', obj, ['grant']]
     end
   end.compact
 
@@ -297,6 +339,7 @@ def all_date_sorted_materials(site)
 
   bucket
     .reject{|x| x[0] > DateTime.now } # Remove future-dated materials
+    .reject{|x| x[2]['draft'] == true } # Remove drafts
     .sort_by {|x| x[0] } # Date-sorted, not strictly necessary since will be grouped.
     .reverse
 end
@@ -407,7 +450,7 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
                 href = "#{site.config['url']}#{site.config['baseurl']}#{page.url}"
 
                 xml.id(href)
-                xml.link(href: href + TRACKING)
+                xml.link(href: track(href))
 
                 tags.uniq.each do |tag|
                   xml.category(term: tag)
@@ -423,7 +466,7 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
                   xml.summary(text)
                 end
 
-                prefix = type.gsub(/s$/, '').capitalize.gsub(/Faq/, 'FAQ').gsub(/New$/, 'Post')
+                prefix = type.gsub(/s$/, '').gsub(/-/, ' ').capitalize.gsub(/Faq/, 'FAQ').gsub(/New$/, 'Post')
                 title = "#{ICON_FOR[type]} New #{prefix}: #{page.data['title']}"
 
                 xml.title(title)
@@ -479,7 +522,7 @@ end
 # Our old style matrix bot postsx
 def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
   # new materials (tut + sli)
-  # new funders/contributors/orgs
+  # new grants/contributors/orgs
   # new news posts(?)
   filter_title = nil
   if !filter_by.nil?
@@ -527,7 +570,7 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
       xml.id("#{site.config['url']}#{site.baseurl}/#{path}")
       title_parts = [filter_title, "#{lookup[group_by]} Updates"].compact
       xml.title(title_parts.join(' — '))
-      xml.subtitle('The latest events, tutorials, slides, blog posts, FAQs, workflows, and contributors in the GTN.')
+      xml.subtitle('The latest events, tutorials, slides, blog posts, FAQs, workflows, learning paths, recordings, and contributors in the GTN.')
       xml.logo("#{site.config['url']}#{site.baseurl}/assets/images/GTN-60px.png")
 
       bucket.each do |date, parts|
@@ -554,17 +597,17 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
               # xml.h4 title
 
               parts.group_by { |x| x[1] }.sort_by { |x| PRIO[x[0]] }.each do |type, items|
-                xml.h4 "#{ICON_FOR[type]} #{type.capitalize}"
+                xml.h4 "#{ICON_FOR[type]} #{type.gsub(/-/, ' ').capitalize}"
                 if items.length.positive?
                   xml.ul do
                     items.each do |date, _type, page, _tags|
                       xml.li do
                         if page.is_a?(String)
-                          href = "#{site.config['url']}#{site.config['baseurl']}/hall-of-fame/#{page}/#{TRACKING}"
+                          href = track("#{site.config['url']}#{site.config['baseurl']}/hall-of-fame/#{page}/")
                           text = "@#{page}"
                         else
                           text = page.data['title']
-                          href = "#{site.config['url']}#{site.config['baseurl']}#{page.url}#{TRACKING}"
+                          href = track("#{site.config['url']}#{site.config['baseurl']}#{page.url}")
                         end
                         if group_by != 'day'
                           text += " (#{date.strftime('%B %d, %Y')})"

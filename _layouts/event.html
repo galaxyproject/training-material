@@ -38,9 +38,11 @@ layout: base
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">Course Overview</button>
   </li>
+  {% if event.program %}
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="program-tab" data-toggle="tab" data-target="#program" type="button" role="tab" aria-controls="program" aria-selected="false">Program</button>
   </li>
+  {% endif %}
   {% if event.infrastructure %}
   <li class="nav-item" role="presentation">
      <button class="nav-link" id="setup-tab" data-toggle="tab" data-target="#setup" type="button" role="tab" aria-controls="setup" aria-selected="false" >Setup</button>
@@ -61,8 +63,10 @@ layout: base
     <p>{{ event.description | markdownify }}</p>
     <p>{{ content | markdownify }}</p>
 
+    {% if event.audience %}
     <h3>Who is this course for?</h3>
     {{ event.audience }}
+    {% endif %}
 
     {% if event.requirements %}
     <h3 id="requirements">Requirements</h3>
@@ -424,10 +428,12 @@ subsites: [all]
           {% elsif event.registration.open == false %}
           <a href="#" class="btn btn-primary btn-lg btn-block">Registration opens soon!</a>
           {% else %}
-		  <a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Register Now!</a>
-            {% if event.registration.deadline %}
-            <p style="margin-top:1em"><b>Deadline:</b> {{event.registration.deadline | date: "%-d %B %Y" }}</p>
-            {% endif %}
+            {% if event.registration.link %}
+		    <a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Register Now!</a>
+              {% if event.registration.deadline %}
+              <p style="margin-top:1em"><b>Deadline:</b> {{event.registration.deadline | date: "%-d %B %Y" }}</p>
+              {% endif %}
+            {%endif %}
           {% endif %}
 		{% endif %}
         {% endunless %}
@@ -436,19 +442,23 @@ subsites: [all]
 		<b> Event details </b>
 		<table>
 			<tr><td style="min-width: 2rem">{% icon event-date %}</td><td>{{ event | collapse_date_pretty }}</td></tr>
-			<tr><td>{% icon event-location %}</td><td>{% if event.location %}{{ event.location | format_location }}{% else %}Please set a location{% endif %}</td></tr>
+			<tr><td>{% icon event-location %}</td><td>{% if event.location %}{{ event.location | format_location }}{% elsif event.mode == "online" %}Online{% else %}Please set a location{% endif %}</td></tr>
+            {% if event.cost %}
 			<tr><td>{% icon event-cost %}</td><td>{{ event.cost }}</td></tr>
+            {% endif %}
 			{% if event.contact_email %}
 			<tr><td>{% icon email %}</td><td><a href="mailto:{{ event.contact_email }}?subject={{ event.title | uri_escape }}">{{event.contact_email}}</a></td></tr>
 			{% endif %}
 		</table>
 
 		<hr />
+	{% unless page.hide_calendar_buttons %}
         <b> Add this event to your calendar </b>
 
            {% include _includes/calendar-buttons.html %}
 
 		<hr />
+	{% endunless %}
 
 		<b>Organisers</b><br/>
 		{% for org in event.contributions.organisers %}
@@ -488,25 +498,31 @@ subsites: [all]
     }
 
     onDocumentReady(function () {
+        $('#myTab button').click(function(e) {
+          console.log("bla");
+          e.preventDefault();
+          $(this).tab('show');
+        });
 
+        // store the currently selected tab in the hash value
+        $("ul.nav-tabs > li > button").on("click", function(e) {
+            var id = $(e.target).attr('data-target').substr(1);
+            window.history.replaceState(null, null, '#'+id);
+        });
 
-$('#myTab button').click(function(e) {
-  console.log("bla");
-  e.preventDefault();
-  $(this).tab('show');
-});
-
-// store the currently selected tab in the hash value
-$("ul.nav-tabs > li > button").on("shown.bs.tab", function(e) {
-  var id = $(e.target).attr('data-target').substr(1);
-	window.history.replaceState(null, null, '#'+id);
-});
-
-// on load of the page: switch to the currently selected tab
-var hash = window.location.hash;
-$('#myTab button[data-target="' + hash + '"]').tab('show');
-
-});
+        // on load of the page: switch to the currently selected tab
+        var hash = window.location.hash;
+        if (hash){
+        	var potential_tab = $('#myTab button[data-target="' + hash + '"]')
+        	if (potential_tab.length != 0) {
+            	potential_tab.tab('show');
+        	} else {
+            	var target_tab = '#' + $(`${hash}`).closest(".tab-pane").attr("id")
+            	$('#myTab button[data-target="' + target_tab + '"]').tab('show');
+            	$(hash).get(0).scrollIntoView();
+        	}
+        }
+    });
 })(window, document);
 
 

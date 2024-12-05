@@ -38,6 +38,7 @@ contributors:
   - abretaud
   # editing
   - hexylena
+  - Marie59
 
 ---
 
@@ -110,9 +111,7 @@ visualising data, but if it is possible to provide the same
 functionality with a regular tool (e.g. by rendering an HTML file as an output),
 then an Interactive Tool might not be necessary.
 
-If you are sure that a static
-output is not sufficient, then it's time to start building your first
-Interactive Tool!
+If you are sure that a static output is not sufficient, then it's time to start building your first Interactive Tool!
 
 > <comment-title>Interactive tool infrastructure</comment-title>
 > Interactive tools require some rather complex infrastructure in order to work! However, most of the infrastructure requirements are taken care of by Galaxy core. As such, wrapping a new GxIT requires only three components:
@@ -157,6 +156,10 @@ cycle.
 > In short: updating the Docker container is hard, but updating the tool XML is easy!
 {: .comment}
 
+
+{% include _includes/cyoa-choices.html option1="Application" option2="JupyterLab" default="Application" text="Do you want to build a desktop application or a JupyterLab tool ?" %}
+
+<div class="Application" markdown="1">
 
 # The application
 
@@ -203,6 +206,8 @@ In the following sections, we will study how it can be built into a GxIT.
 These are specific to your container; these are required for an R-Shiny container, but won't be for other containers like a Jupyter notebook container.
 
 ## The Dockerfile
+
+If you need some help to start your Dockerfile you can always get some inspiration from the previous interactive tools built in Galaxy. Go check some of the Dockerfiles, for instance the one for the [QGIS](https://github.com/usegalaxy-eu/docker-qgis) application or for [ODV](https://github.com/bgruening/docker-odv/tree/main).
 
 > <tip-title>A brief primer on Docker</tip-title>
 > Docker allows an entire application context to be containerized. A typical web application consists of an operating system, installed dependancies, web server configuration, database configuration and, of course, the codebase of the software itself. A Docker container can encapsulate all of these components in a single "image", which can be run on any machine with Docker installed.
@@ -335,7 +340,7 @@ next to your Dockerfile.
 >    {: .tip}
 {: .hands_on}
 
-If you are lucky, you might find an available Docker image for the application you are trying to wrap. However, existing Docker images often require some "tweaking" before they will work as a GxIT. Some example configuration changes are:
+If you are lucky, you might find an available Docker image for the application you are trying to wrap. Some configuration changes can be needed such as:
 
 1. Expose the correct port. The application, Docker and tool XML ports must be aligned!
 2. Log output to an external file - useful for debugging.
@@ -434,7 +439,7 @@ our new Docker container as a Galaxy tool.
 > > <tip-title>Writing the GxIT tool XML</tip-title>
 > >
 > > * Refer to the [Galaxy tool XML docs](https://docs.galaxyproject.org/en/latest/dev/schema.html).
-> > * You can take inspiration from [Askomics](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_askomics.xml), and other [existing Interactive Tools](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive).
+> > * You can take inspiration from [Askomics](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_askomics.xml), [QGIS](https://github.com/usegalaxy-eu/galaxy/blob/release_24.1_europe/tools/interactive/interactivetool_qgis3_34.xml), [ODV](https://github.com/usegalaxy-eu/galaxy/blob/release_24.1_europe/tools/interactive/interactivetool_odv.xml), and other [existing Interactive Tools](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive).
 > > * Check XML syntax with [xmlvalidation.com](https://www.xmlvalidation.com/) or [w3schools XML validator](https://www.w3schools.com/xml/xml_validator.asp), or use a linter in your code editor.
 > > * [planemo lint](https://planemo.readthedocs.io/en/latest/commands/lint.html) can also be used for XML linting. But be aware that `planemo test` won't work.
 > > * When it comes to testing and debugging your tool XML, it can be easier to update the XML file directly on your Galaxy server between tests.
@@ -525,6 +530,540 @@ our new Docker container as a Galaxy tool.
 > Don't forget to change the image path (see the `$REMOTE` variable above) and the citation to fit your project settings.
 {: .hands_on}
 
+# Additional components
+
+The GxIT that we wrapped in this tutorial was a simple example, and you should now understand what is required to create an Interactive Tool for Galaxy. However, there are a few additional components that can enhance the reliability and user experience of the tool. In addition, more complex applications may require some additional components or workarounds the create the desired experience for the user.
+
+## Run script
+
+In the case of our `Tabulator` application, the run script is simply the R script that renders our Shiny App. It is quite straightforward to call this from our Galaxy tool XML.
+However, some web apps might require more elaborate commands to be run. In this situation, there are several solutions demonstrated in the `<command>` section of [existing GxITs](https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive):
+- [Guacamole Desktop](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_guacamole_desktop.xml): application startup with `startup.sh`
+- [HiCBrowser](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_hicbrowser.xml): application startup with `supervisord`
+- [AskOmics](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_askomics.xml): configuration with Python and Bash scripts, followed by `start_all.sh` to run the application.
+
+## Templated config files
+
+Using the `<configfiles>` section in the tool XML, we can enable complex user configuration for the application by templating a run script or configuration file to be read by the application. In this application, for example, we could use a `<configfiles>` section to template user input into the `app.R` script that runs the application within the Docker container. This could enable the user to customize the layout of the app before launch.
+
+## Reserved environment variables
+
+There are a few environment variables
+that are accessible in the command section of the tool XML - these can be handy when writing your tool script.
+[Check the docs](https://docs.galaxyproject.org/en/latest/dev/schema.html#reserved-variables) for a full reference on the tool XML.
+
+```sh
+$__tool_directory__
+$__root_dir__
+$__user_id__
+$__user_email__
+```
+
+It can also be useful to create and inject environment variables into the tool context. This can be achieved using the `<environment variables>` tag in the tool XML. The [RStudio GxIT](https://github.com/galaxyproject/galaxy/blob/b180b7909dc3fe2750fbc8b90214e201eb276794/tools/interactive/interactivetool_rstudio.xml#L12) again provides an example of this:
+
+```xml
+<environment_variables>
+    <environment_variable name="HISTORY_ID" strip="True">${__app__.security.encode_id($jupyter_notebook.history_id)}</environment_variable>
+    <environment_variable name="REMOTE_HOST">${__app__.config.galaxy_infrastructure_url}</environment_variable>
+    <environment_variable name="GALAXY_WEB_PORT">8080</environment_variable>
+    <environment_variable name="GALAXY_URL">$__galaxy_url__</environment_variable>
+    <environment_variable name="DEBUG">true</environment_variable>
+    <environment_variable name="DISABLE_AUTH">true</environment_variable>
+    <environment_variable name="API_KEY" inject="api_key" />
+</environment_variables>
+```
+
+## Galaxy history interaction
+
+We have demonstrated how to pass an input file to the Docker container. But what if the application needs to interact with the user's Galaxy history? For example, if the user creates a file within the application. That's where the environment variables created in the tool XML become useful.
+
+> <tip-title>Access histories in R</tip-title>
+> From the [R-Studio GxIT](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_rstudio.xml) we can see that there is [an R library](https://github.com/hexylena/rGalaxyConnector) that allows us to interact with Galaxy histories.
+>
+> "The convenience functions `gx_put()` and `gx_get()` are available to you to interact with your current Galaxy history. You can save your workspace with `gx_save()`"
+>
+> Under the hood, this library uses [galaxy_ie_helpers](https://github.com/bgruening/galaxy_ie_helpers) - a Python interface to Galaxy histories written with [BioBlend](https://github.com/galaxyproject/bioblend). You could also use BioBlend directly (or even the Galaxy REST API) if your GxIT requires a more flexible interface than these wrappers provide.
+>
+{: .tip}
+
+
+</div>
+
+<div class="JupyterLab" markdown="1">
+
+# The JupyterLab
+
+The JupyterLab environment that we will wrap in this tutorial is a simple JupyterLab tool which
+allows the user to upload data in a Jupyter environment, manipulate notebooks, and download
+outputs. 
+
+Our example JupyterLab can already be found [online](https://github.com/usegalaxy-eu/docker-copernicus-notebooks) .
+But you can also check another implementation of [JupyterLabs](https://github.com/bgruening/docker-jupyter-notebook/blob/master/Dockerfile).
+In the following sections, we will study how it can be built into a GxIT.
+
+
+> <hands-on-title></hands-on-title>
+>
+> First, let's clone the repository to take a quick look at a basic implementation of a JupyterLab.
+>
+> ```console
+> $ git clone https://github.com/bgruening/docker-jupyter-notebook.git
+> $ cd docker-jupyter-notebook
+>
+> $ tree .
+> ├── Dockerfile
+> ├── LICENSE
+> ├── README.md
+> ├── .
+> ├── .
+> ├── .
+> └── startup.sh
+> ```
+> You'll find a Dockerfile, startup.sh, and a README that will describe how the Dockerfile here for a GxIT works. We encourage you to read this README.
+>
+{: .hands_on}
+
+## The Dockerfile
+
+If you need some help to start your Dockerfile you can always get some inspiration from the previous interactive tools built in Galaxy. Go check some of the Dockerfiles, for instance, the one for the [Copernicus data space ecosystem JupyterLab](https://github.com/usegalaxy-eu/docker-copernicus-notebooks/blob/main/Dockerfile) or for a basic [JupyterLab here](https://github.com/bgruening/docker-jupyter-notebook/blob/master/Dockerfile).
+
+> <tip-title>A brief primer on Docker</tip-title>
+> Docker allows an entire application context to be containerized. A typical web application consists of an operating system, installed dependancies, web server configuration, database configuration and, of course, the codebase of the software itself. A Docker container can encapsulate all of these components in a single "image", which can be run on any machine with Docker installed.
+>
+> **Essentials of Docker:**
+>
+> 1. Write an image recipe as a Dockerfile. This single file selects an OS, installs software, pulls code repositories and copies files from the host machine (your computer).
+> 2. Build the image from your recipe:
+>
+>    `docker build -t <image_name> .`
+> 3. View existing images with
+>
+>    `docker image list`
+> 4. Run a container with a specified command:
+>
+>    `docker run <image_name> <command>`
+> 5. View running containers:
+>
+>    `docker ps`
+> 6. Stop a running container:
+>
+>    `docker stop <container_name>`
+> 7. Remove a stopped container:
+>
+>    `docker container rm <container_name>`
+> 8. Remove an image:
+>
+>    `docker image rm <container_name>`
+{: .tip}
+
+
+Let's check out [the Dockerfile](https://github.com/usegalaxy-eu/docker-copernicus-notebooks/blob/main/Dockerfile) that we'll use to containerize our JupyterLab.
+
+This container recipe can be used to build a Docker image which can be pushed to a
+container registry in the cloud, ready for consumption by our Galaxy instance:
+
+```dockerfile
+# Jupyter container used for Galaxy copernicus notebooks (+other kernels) Integration
+
+# from 5th March 2021
+FROM jupyter/datascience-notebook:python-3.10
+
+MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
+
+ENV DEBIAN_FRONTEND noninteractive
+USER root
+
+RUN apt-get -qq update && \
+    apt-get install -y wget unzip net-tools procps && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Set channels to (defaults) > bioconda > conda-forge
+RUN conda config --add channels conda-forge && \
+    conda config --add channels bioconda
+    #conda config --add channels defaults
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir bioblend galaxy-ie-helpers
+
+ENV JUPYTER /opt/conda/bin/jupyter
+ENV PYTHON /opt/conda/bin/python
+ENV LD_LIBRARY_PATH /opt/conda/lib/
+
+# Python packages
+RUN conda config --add channels conda-forge && \
+    conda config --add channels bioconda && \
+    conda install --yes --quiet \
+    bash_kernel \
+    ansible-kernel \
+    bioblend galaxy-ie-helpers \
+```
+With those packages installed, you have the bases to have a functional environment in your JupyterLab AND be able to link your JupyterLab to the Galaxy history with the package `bioblend galaxy-ie-helpers`.
+
+Then you can add the package specific to the environment you want to have in your JupyterLab for instance 
+
+```
+    # specific sentinel, openeo packages
+    sentinelhub \
+    openeo \
+    # other packages for notebooks
+    geopandas \
+    rasterio \
+    ipyleaflet \
+    netcdf4 \
+    h5netcdf \
+    # Jupyter widgets
+    jupytext && \
+    conda clean -yt && \
+    pip install jupyterlab_hdf \
+    fusets
+
+```
+
+Then, you can add some configurations to have some configuration and a welcome notebook by default (this is generic to all JupyterLab GxITs).
+
+```
+ADD ./startup.sh /startup.sh
+ADD ./get_notebook.py /get_notebook.py
+
+# We can get away with just creating this single file and Jupyter will create the rest of the
+# profile for us.
+RUN mkdir -p /home/$NB_USER/.ipython/profile_default/startup/ && \
+    mkdir -p /home/$NB_USER/.jupyter/custom/
+
+COPY ./ipython-profile.py /home/$NB_USER/.ipython/profile_default/startup/00-load.py
+COPY jupyter_notebook_config.py /home/$NB_USER/.jupyter/
+COPY jupyter_lab_config.py /home/$NB_USER/.jupyter/
+
+ADD ./custom.js /home/$NB_USER/.jupyter/custom/custom.js
+ADD ./custom.css /home/$NB_USER/.jupyter/custom/custom.css
+ADD ./default_notebook.ipynb /home/$NB_USER/notebook.ipynb
+
+```
+
+You can also add your own set of notebooks to guide the user like that:
+
+```
+# Download notebooks
+RUN cd /home/$NB_USER/ &&  \
+    wget -O notebook-samples.zip https://github.com/eu-cdse/notebook-samples/archive/refs/heads/main.zip && \
+    unzip notebook-samples.zip && \
+    rm /home/$NB_USER/notebook-samples.zip && \
+    mv /home/$NB_USER/notebook-samples-main/geo /home/$NB_USER && \
+    mv /home/$NB_USER/notebook-samples-main/sentinelhub /home/$NB_USER && \
+    mv /home/$NB_USER/notebook-samples-main/openeo /home/$NB_USER && \
+    rm -r /home/$NB_USER/notebook-samples-main
+```
+
+Finally, some general variables of environment:
+
+```
+# ENV variables to replace conf file
+ENV DEBUG=false \
+    GALAXY_WEB_PORT=10000 \
+    NOTEBOOK_PASSWORD=none \
+    CORS_ORIGIN=none \
+    DOCKER_PORT=none \
+    API_KEY=none \
+    HISTORY_ID=none \
+    REMOTE_HOST=none \
+    GALAXY_URL=none
+
+# @jupyterlab/google-drive  not yet supported
+
+USER root
+WORKDIR /import
+
+# Start Jupyter Notebook
+CMD /startup.sh
+
+```
+
+And with all this your Dockerfile is ready.
+
+You now need to publish this image on a public repository.
+Anyone can use this Dockerfile to rebuild the image if necessary.
+In any case don't forget to have all the files shown when we cloned this [repository](https://github.com/bgruening/docker-jupyter-notebook/tree/master) next to your Dockerfile.
+
+> <hands-on-title></hands-on-title>
+>
+> Let's start working on this Docker container.
+>
+> 1. Install Docker as described on the [docker website](https://docs.docker.com/engine/install/). Click on your distribution name to get specific information.
+>
+> 2. Now let's use the recipe to build our Docker image.
+>
+>    ```sh
+>    # Build a container image from our Dockerfile
+>    IMAGE_TAG="myimage"
+>    LOG_PATH=`pwd`  # Create log output in current directory
+>    PORT=8765
+>    docker build -t $IMAGE_TAG --build-arg LOG_PATH=$LOG_PATH --build-arg PORT=$PORT .
+>    ```
+>
+>    > <tip-title>Automating the build</tip-title>
+>    > While developing the Docker container you may find yourself tweaking and rebuilding the container image many times.
+>    > In the GitHub repository linked above, you'll notice that the author has used a `Makefile` to accelerate the build and deploy process.
+>    > This allows the developer to simply run `make docker` and `make push_hub` to build and push the container, or `make` to rebuild the container after making changes during development. Check out the `Makefile` to see what commands can be run using `make` in this repository.
+>    >
+>    {: .tip}
+{: .hands_on}
+
+If you are lucky, you might find an available Docker image for the application you are trying to wrap. Some configuration changes can be needed such as:
+
+
+1. Expose the correct port. The application, Docker and tool XML ports must be aligned!
+2. Log output to an external file - useful for debugging.
+3. Make the application callable from tool `<command>` - this sometimes requires a wrapper script to interface the application inside the container (we'll take a look at this later).
+
+
+
+## Test the image
+
+Before we push our container to the cloud, we should give it a local test run to ensure that it's working correctly on our development machine. Have a play and see how our little web app `works!`
+
+> <hands-on-title></hands-on-title>
+> ```sh
+> # Run our application in the container
+> docker run -it -p 127.0.0.1:8765:$PORT $IMAGE_TAG
+>
+> # Or to save time, take advantage of the Makefile
+> make it
+>
+> # Give it a few moments to start up, and the application should be available
+> # in your browser at http://127.0.0.1:8765
+> ```
+{: .hands_on}
+
+## Push the image
+
+If you are happy with the image, we are ready to push it to a container registry
+to make it accessible to our Galaxy server.
+
+During development, we suggest making an account on
+[Docker Hub](https://hub.docker.com/)
+if you don't have one already. This can be used for hosting container images
+during development.
+[Docker Hub](https://hub.docker.com/)
+has great documentation on creating repositories, authenticating with tokens
+and pushing images.
+
+> <hands-on-title></hands-on-title>
+> ```sh
+> # Set remote tag for your container. This should include your username and
+> # repository name for Docker Hub.
+> REMOTE=<DOCKERHUB_USERNAME>/my-first-gxit
+>
+> # Tag your image
+> docker tag $IMAGE_TAG:latest $REMOTE:latest
+>
+> # Authenticate your DockerHub account
+> docker login  # >>> Enter username and token for your account
+>
+> # Push the image
+> docker push $REMOTE:latest
+> ```
+>
+> > <tip-title>Production container hosting</tip-title>
+> > For production deployment, the
+> > [Galaxy standard](https://docs.galaxyproject.org/en/latest/admin/special_topics/mulled_containers.html)
+> > for container image hosting is
+> > [Biocontainers](https://biocontainers.pro).
+> > This requires you to
+> > [make a pull request](https://biocontainers-edu.readthedocs.io/en/latest/contributing.html)
+> > against the Biocontainers GitHub repository, so this should only be done when an
+> > image is considered production-ready. You can also push your image to a
+> > repository on
+> > [hub.docker.com](https://hub.docker.com) or
+> > [quay.io](https://quay.io)
+> > but please ensure that it links to a public code repository
+> > (e.g. GitHub) to enable maintenance of the image by the Galaxy community!
+> {: .tip}
+{: .hands_on}
+
+You should now have a container in the cloud, ready for action.
+Check out your repo on Docker Hub and you should find the container image there.
+Awesome!
+
+Now we just need to write a tool XML that will enable Galaxy to pull and run
+our new Docker container as a Galaxy tool.
+
+## The tool XML
+
+> <hands-on-title></hands-on-title>
+>
+> Create a Galaxy tool XML file named `interactivetool_copernicus.xml`. The file is similar to a regular tool XML, but calls on our remote Docker image as a dependency. The tags that we are most concerned with are:
+> - A `<container>` (under the `<requirements>` tag)
+> - A `<port>` which matches our container
+> - An `<input>` file
+> - The `<command>` section
+>
+> > <comment-title>Writing the tool command</comment-title>
+> >
+> > This step can cause a lot of confusion. Here are a few pointer that you will find critical to understanding the process:
+> > - The `<command>` will be templated by Galaxy
+> > - The templated command will run *inside* the Docker container
+> >
+> {: .comment}
+>
+> > <tip-title>Writing the GxIT tool XML</tip-title>
+> >
+> > * Refer to the [Galaxy tool XML docs](https://docs.galaxyproject.org/en/latest/dev/schema.html).
+> > * You can take inspiration from [Copernicus](https://github.com/usegalaxy-eu/galaxy/blob/release_24.1_europe/tools/interactive/interactivetool_copernicus.xml) or for a more advanced [jupyterlab](https://github.com/usegalaxy-eu/galaxy/blob/release_24.1_europe/tools/interactive/interactivetool_jupyter_notebook_1.0.1.xml) [existing Interactive Tools](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive).
+> > * Check XML syntax with [xmlvalidation.com](https://www.xmlvalidation.com/) or [w3schools XML validator](https://www.w3schools.com/xml/xml_validator.asp), or use a linter in your code editor.
+> > * [planemo lint](https://planemo.readthedocs.io/en/latest/commands/lint.html) can also be used for XML linting. But be aware that `planemo test` won't work.
+> > * When it comes to testing and debugging your tool XML, it can be easier to update the XML file directly on your Galaxy server between tests.
+> {: .tip}
+>
+> > <solution-title></solution-title>
+> >
+> > {% raw  %}
+> >
+> > ```xml
+> > <tool id="interactive_tool_copernicus_notebook" tool_type="interactive" name="Copernicus Data Space Ecosystem" version="@VERSION@">
+> >     <description>sample notebooks to access and discover data</description>
+> >     <macros>
+> >         <token name="@VERSION@">0.0.1</token>
+> >     </macros>
+> >     <requirements>
+> >         <container type="docker">quay.io/galaxy/copernicus-jupyterlab:@VERSION@</container>
+> >     </requirements>
+> >     <entry_points>
+> >         <entry_point name="Jupyter Interactive Tool" requires_domain="True">
+> >             <port>8888</port>
+> >             <url>ipython/lab</url>
+> >         </entry_point>
+> >     </entry_points>
+> >     <environment_variables>
+> >         <environment_variable name="HISTORY_ID">$__history_id__</environment_variable>
+> >         <environment_variable name="REMOTE_HOST">$__galaxy_url__</environment_variable>
+> >         <environment_variable name="GALAXY_WEB_PORT">8080</environment_variable>
+> >         <environment_variable name="GALAXY_URL">$__galaxy_url__</environment_variable>
+> >         <  environment_variable name="API_KEY" inject="api_key" />
+> >     </environment_variables>
+> >     <command detect_errors="aggressive"><![CDATA[
+> >     #import re
+> >     export GALAXY_WORKING_DIR=`pwd` &&
+> >     mkdir -p ./jupyter/outputs/ &&
+> >     mkdir -p ./jupyter/data &&
+> >     mkdir -p ./jupyter/notebooks &&
+> >     mkdir -p ./jupyter/notebooks/geo &&
+> >     mkdir -p ./jupyter/notebooks/openeo &&
+> >     mkdir -p ./jupyter/notebooks/sentinelhub &&
+> >
+> >     #for $count, $file in enumerate($input):
+> >         #set $cleaned_name = str($count + 1) + '_' + re.sub('[^\w\-\.\s]', '_', str($file.element_identifier))
+> >         ln -sf '$file' './jupyter/data/${cleaned_name}' &&
+> >     #end for
+> >
+> >     ## change into the directory where the notebooks are located
+> >     cd ./jupyter/ &&
+> >     export HOME=/home/jovyan/ &&
+> >     export PATH=/home/jovyan/.local/bin:\$PATH &&
+> >
+> >     #if $mode.mode_select == 'scratch'
+> >         ## copy all notebooks, workflows and data
+> >         cp '$__tool_directory__/default_notebook.ipynb' ./ipython_galaxy_notebook.ipynb &&
+> >         jupyter trust ./ipython_galaxy_notebook.ipynb &&
+> >         cp -r /home/\$NB_USER/geo/* ./notebooks/geo/ &&
+> >         cp -r /home/\$NB_USER/openeo/* ./notebooks/openeo/ &&
+> >         cp -r /home/\$NB_USER/sentinelhub/* ./notebooks/sentinelhub/ &&
+> >
+> >
+> >         ## provide all rights to copied files
+> >         jupyter lab --allow-root --no-browser &&
+> >         cp ./*.ipynb '$jupyter_notebook' &&
+> >         
+> >         cd outputs/ &&
+> >         sleep 2 &&
+> >         for file in *; do mv "\$file" "\$file.\${file\#\#*.}"; done
+> >     #else
+> >         #set $noteboook_name = re.sub('[^\w\-\.\s]', '_', str($mode.ipynb.element_identifier))
+> >         cp '$mode.ipynb' './${noteboook_name}.ipynb' &&
+> >         jupyter trust './${noteboook_name}.ipynb' &&
+> >         #if $mode.run_it
+> >             jupyter nbconvert --to notebook --execute --output ./ipython_galaxy_notebook.ipynb --allow-errors  ./*.ipynb &&
+> >             #set $noteboook_name = 'ipython_galaxy_notebook'
+> >         #else
+> >             jupyter lab --allow-root --no-browser --NotebookApp.shutdown_button=True &&
+> >         #end if
+> >         cp './${noteboook_name}.ipynb' '$jupyter_notebook' &&
+> >         
+> >         cd outputs/ &&
+> >         sleep 2 &&
+> >         for file in *; do mv "\$file" "\$file.\${file\#\#*.}"; done
+> >     #end if
+> > ]]>
+> >     </command>
+> >     <inputs>
+> >
+> >         <conditional name="mode">
+> >             <param name="mode_select" type="select" label="Do you already have a notebook?" help="If not, no problem we will provide you with a default one.">
+> >                 <option value="scratch">Start with a fresh notebook</option>
+> >                 <option value="previous">Load a previous notebook</option>
+> >             </param>
+> >             <when value="scratch"/>
+> >             <when value="previous">
+> >                 <param name="ipynb" type="data" format="ipynb" label="Copernicus Notebook"/>
+> >                 <param name="run_it" type="boolean" truevalue="true" falsevalue="false" label="Copernicus notebook and return a new one."
+> >                 help="This option is useful in workflows when you just want to execute a notebook and not dive into the webfrontend."/>
+> >             </when>
+> >         </conditional>
+> >         <param name="input" multiple="true" type="data" optional="true" label="Include data into the environment"/>
+> >     </inputs>
+> >     <outputs>
+> >         <data name="jupyter_notebook" format="ipynb" label="Executed Copernicus notebook"></data>
+> >         <collection name="output_collection" type="list" label="Copernicus outputs collection">
+> >             <discover_datasets pattern="__designation_and_ext__" directory="jupyter/outputs" visible="true"/>
+> >         </collection>
+> >     </outputs>
+> >     <tests>
+> >         <test expect_num_outputs="1">
+> >             <param name="mode" value="previous" />
+> >             <param name="ipynb" value="test.ipynb" />
+> >             <param name="run_it" value="true" />
+> >             <output name="jupyter_notebook" file="test.ipynb" ftype="ipynb"/>
+> >         </test>
+> >     </tests>
+> >     <help>
+> > This tool contains sample Jupyter notebooks for the Copernicus Data Space Ecosystem. Notebooks are grouped per kernel: sentinelhub, openeo and geo. To know more https:/github.com/eu-cdse/notebook-samples
+> > 
+> > To have more example notebooks produced by th OpenEO community that you can use in this jupyterlab go there https://github.com/Open-EO/openeo-community-examples/tree/main
+> > 
+> >     </help>
+> >     <citations>
+> >        <citation type="bibtex">
+> >         @Manual{,
+> >         title = {Copernicus Data Space Ecosystem },
+> >         author = {The eu-cdse community},
+> >         year = {2023},
+> >         note = {https://github.com/eu-cdse}
+> >         </citation>
+> > 	</citations>    
+> > </tool>
+> > ```
+> > {% endraw  %}
+> {: .solution}
+>
+> In order to get your data from your galaxy history into your jupyterlab don't forget to have this kind of line in the executable
+> ```
+> #for $count, $file in enumerate($input):
+>     #set $cleaned_name = str($count + 1) + '_' + re.sub('[^\w\-\.\s]', '_', str($file.element_identifier))
+>     ln -sf '$file' './jupyter/data/${cleaned_name}' &&
+> #end for
+> ```
+> AND to get your output in your history data 
+> 
+> ```
+> <collection name="output_collection" type="list" label="Copernicus outputs collection">
+>     <discover_datasets pattern="__designation_and_ext__" directory="jupyter/outputs" visible="true"/>
+> </collection>
+> ```
+> Don't forget to change the image path and the citation to fit your project settings.
+{: .hands_on}
+
+</div>
+
 # Testing locally
 
 You would like to check your GxIT integration in Galaxy but don't have a development server or don't want to disturb your sysadmin at this point?
@@ -581,6 +1120,7 @@ Let's check this integration on your machine. You can use a VM if you prefer not
 > ```xml
 >   <section id="interactivetools" name="Interactive tools">
 >     <tool file="interactive/interactivetool_tabulator.xml" />
+>     <tool file="interactive/interactivetool_copernicus.xml" />
 >   </section>
 > ```
 > With these lines, Galaxy will create a new section named "Interactive tools" in the tool panel
@@ -617,9 +1157,13 @@ Let's check this integration on your machine. You can use a VM if you prefer not
 >     </destinations>
 > </job_conf>
 > ```
-> Finally, copy your GxIT wrapper to the Interactive Tool directory:
+> Finally, copy your GxIT wrapper to the Interactive Tool directory (depending on if you followed the Application or Jupyterlab part of the tuto):
 > ```sh
 > cp ~/my_filepath/interactivetool_tabulator.xml ~/GxIT/galaxy/tools/interactive/
+> ```
+> OR
+> ```sh
+> cp ~/my_filepath/interactivetool_copernicus.xml ~/GxIT/galaxy/tools/interactive/
 > ```
 {: .hands_on}
 
@@ -685,6 +1229,14 @@ the Galaxy core application directory, and adding the tool to our
 >    >     </section>
 >    > </toolbox>
 >    > ```
+>    > OR
+>    > ```
+>    > <toolbox monitor="true">
+>    >     <section id="interactivetools" name="Interactive Tools">
+>    >         <tool file="interactive/interactivetool_copernicus.xml" />
+>    >     </section>
+>    > </toolbox>
+>    > ```
 >    {: .solution}
 >
 > 5. Now we just need to restart the Galaxy server to refresh the tool registry
@@ -734,6 +1286,20 @@ Have a look in the web interface of your Galaxy instance. You should find the ne
 >    ```
 >    {% endraw %}
 >
+> OR
+>
+>    {% raw %}
+>    ```xml
+>    <?xml version='1.0' encoding='utf-8'?>
+>    <toolbox monitor="true" tool_path="{{ galaxy_local_tools_dir }}">
+>        <section id="interactivetools" name="Interactive tools">
+>            <tool file="interactivetool_copernicus.xml" />
+>        </section>
+>    </toolbox>
+>    ```
+>    {% endraw %}
+>
+>
 > 3. Create variables in the following sections of `group_vars/galaxyservers.yml`
 >
 >    {% raw %}
@@ -767,58 +1333,6 @@ The most obvious way to test a tool is simply to run it in the Galaxy UI, straig
 > Testing and debugging is currently the trickiest part of GxIT development. Ideally, Galaxy core will be developed in the future to better support the process, but for the time being we have to make the most with what is available! In the future, we would like to see GxITs being tested with Planemo, and being installed and tested by Ephemeris from the ToolShed.
 {: .tip}
 
-
-# Additional components
-
-The GxIT that we wrapped in this tutorial was a simple example, and you should now understand what is required to create an Interactive Tool for Galaxy. However, there are a few additional components that can enhance the reliability and user experience of the tool. In addition, more complex applications may require some additional components or workarounds the create the desired experience for the user.
-
-## Run script
-In the case of our `Tabulator` application, the run script is simply the R script that renders our Shiny App. It is quite straightforward to call this from our Galaxy tool XML. However, some web apps might require more elaborate commands to be run. In this situation, there are a number of solutions demonstrated in the `<command>` section of [existing GxITs](https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive):
-- [Guacamole Desktop](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_guacamole_desktop.xml): application startup with `startup.sh`
-- [HiCBrowser](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_hicbrowser.xml): application startup with `supervisord`
-- [AskOmics](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_askomics.xml): configuration with Python and Bash scripts, followed by `start_all.sh` to run the application.
-
-## Templated config files
-Using the `<configfiles>` section in the tool XML, we can enable complex user configuration for the application by templating a run script or configuration file to be read by the application. In this application, for example, we could use a `<configfiles>` section to template user input into the `app.R` script that runs the application within the Docker container. This could enable the user to customize the layout of the app before launch.
-
-## Reserved environment variables
-
-There are a few environment variables
-that are accessible in the command section of the tool XML - these can be handy when writing your tool script.
-[Check the docs](https://docs.galaxyproject.org/en/latest/dev/schema.html#reserved-variables) for a full reference on the tool XML.
-
-```sh
-$__tool_directory__
-$__root_dir__
-$__user_id__
-$__user_email__
-```
-
-It can also be useful to create and inject environment variables into the tool context. This can be acheived using the `<environment variables>` tag in the tool XML. The [RStudio GxIT](https://github.com/galaxyproject/galaxy/blob/b180b7909dc3fe2750fbc8b90214e201eb276794/tools/interactive/interactivetool_rstudio.xml#L12) again provides an example of this:
-
-```xml
-<environment_variables>
-    <environment_variable name="HISTORY_ID" strip="True">${__app__.security.encode_id($jupyter_notebook.history_id)}</environment_variable>
-    <environment_variable name="REMOTE_HOST">${__app__.config.galaxy_infrastructure_url}</environment_variable>
-    <environment_variable name="GALAXY_WEB_PORT">8080</environment_variable>
-    <environment_variable name="GALAXY_URL">$__galaxy_url__</environment_variable>
-    <environment_variable name="DEBUG">true</environment_variable>
-    <environment_variable name="DISABLE_AUTH">true</environment_variable>
-    <environment_variable name="API_KEY" inject="api_key" />
-</environment_variables>
-```
-
-## Galaxy history interaction
-We have demonstrated how to pass an input file to the Docker container. But what if the application needs to interact with the user's Galaxy history? For example, if the user creates a file within the application. That's where the environment variables created in the tool XML become useful.
-
-> <tip-title>Access histories in R</tip-title>
-> From the [R-Studio GxIT](https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_rstudio.xml) we can see that there is [an R library](https://github.com/hexylena/rGalaxyConnector) that allows us to interact with Galaxy histories.
->
-> "The convenience functions `gx_put()` and `gx_get()` are available to you to interact with your current Galaxy history. You can save your workspace with `gx_save()`"
->
-> Under the hood, this library uses [galaxy_ie_helpers](https://github.com/bgruening/galaxy_ie_helpers) - a Python interface to Galaxy histories written with [BioBlend](https://github.com/galaxyproject/bioblend). You could also use BioBlend directly (or even the Galaxy REST API) if your GxIT requires a more flexible interface than these wrappers provide.
->
-{: .tip}
 
 ## Self-destruct script
 

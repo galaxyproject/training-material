@@ -28,6 +28,7 @@ jobs:
           #  3rd Qu.: 94.0
           #  Max.   :282.0
           fetch-depth: 400
+          persist-credentials: false
 
       # BEGIN Dependencies
       - uses: actions/setup-python@v5
@@ -51,11 +52,12 @@ jobs:
             ${{ runner.os }}-gems-
       - name: Install dependencies
         run: |
-          sudo apt-get install -y build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config # for node
+          sudo apt-get install -y build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config graphviz # for node
           gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-          npm install
+          rm -f package.json package-lock.json yarn.lock
+          npm install markdown-yaml-metadata-parser lunr
           bundle pristine ffi
       # END Dependencies
 
@@ -68,7 +70,6 @@ jobs:
           make annotate ACTIVATE_ENV=pwd
           curl -L https://docs.google.com/spreadsheets/d/1NfZhi5Jav7kl9zFCkeb7rIC2F8xW1isruv1TeO4WpNI/export\?format\=tsv | ruby bin/prepare_feedback.rb
           curl -L https://hexylena.github.io/toolshed-version-database/tool-meta.json > metadata/tool-meta.json
-          npm install
           make rebuild-search-index ACTIVATE_ENV=pwd
           cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json
           rdoc bin _plugins/ --output gtn_rdoc

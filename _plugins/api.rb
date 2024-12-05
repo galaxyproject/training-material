@@ -106,7 +106,6 @@ module Jekyll
       page2 = PageWithoutAFile.new(site, '', 'api/', 'data-library.yaml')
       data_libraries = Dir.glob('topics/**/data-library.yaml')
       data_libraries.map! { |x| YAML.load_file(x) }
-      pp data_libraries
       page2.content = JSON.pretty_generate(Gtn::Git.discover)
       page2.data['layout'] = nil
       site.pages << page2
@@ -164,7 +163,7 @@ module Jekyll
 
       # Contributors
       Jekyll.logger.debug '[GTN/API] Contributors, Funders, Organisations'
-      %w[contributors funders organisations].each do |type|
+      %w[contributors grants organisations].each do |type|
         page2 = PageWithoutAFile.new(site, '', 'api/', "#{type}.json")
         page2.content = JSON.pretty_generate(site.data[type].map { |c, _| mapContributor(site, c) })
         page2.data['layout'] = nil

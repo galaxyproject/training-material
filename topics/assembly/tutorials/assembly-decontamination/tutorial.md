@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-
 title: Decontamination of a genome assembly
 zenodo_link: https://zenodo.org/records/13367433
 questions:
@@ -11,12 +10,25 @@ objectives:
 - Remove Mitochondrial DNA from an assembly
 time_estimation: 1H30M
 key_points:
-- Assembly decontamination is important to avoid false identification of genes, blast hits...
+- Assembly decontamination is important to avoid false identification of genes, blast
+  hits...
 contributions:
   authorship:
-    - delphine-l
+  - delphine-l
+recordings:
+- youtube_id: -5oxfNnNwoA
+  length: 29M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-20'
+  speakers:
+  - delphine-l
+  captioners:
+  - delphine-l
+  bot-timestamp: 1726801100
+
 
 ---
+
 
 
 When sequencing a genome, it is common that contamination from a foreign organism get mixed with the genomic material of our species of interest. For instance, if you are processing a whole body sample of an insect then you will sequence not only the insect, but everything on and inside of it. When building a reference genome, it is important to separate these contaminants from the genome of our species. Foreign DNA sequences could cause false positive identification when running BLAST analyses, the misidentification of genes that don't actually belong to the species, or they can be incorporated as 'reference' sequence for that species in the public archives when those sequences did not actually belong to that species.
@@ -207,7 +219,7 @@ To identify our contaminants, we only need the information from the first three 
 >    > <comment-title> Columns definitions </comment-title>
 >    >
 >    > The three columns that we extracted contain:
->    > 1. Wheter the sequence is classified `C` or unclassified `U`
+>    > 1. Whether the sequence is classified `C` or unclassified `U`
 >    > 2. The sequence name
 >    > 3. The sequence classification
 >    >
