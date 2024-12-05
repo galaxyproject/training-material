@@ -132,7 +132,7 @@ We then evaluated the quality of the data by running FastQC on both datasets (fo
 
 > ### {% icon hands_on %} Hands-on: Evaluating input read quality
 >
-> 1. {% icon tool %} **FastQC** with the following parameters:
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *Short read data from your current history*: One of the raw FASTQ datasets (`SRR1799908_forward`)
 >    - Leave the rest of the options as their defaults.
 >
@@ -161,7 +161,7 @@ The {% icon tool %} **Du Novo: Make families** tool will separate the 12bp tags 
 
 > <hands-on-title>Sorting reads into families</hands-on-title>
 >
-> 1. {% icon tool %} **Du Novo: Make families** with the following parameters:
+> 1. {% tool [Du Novo: Make families](toolshed.g2.bx.psu.edu/repos/nick/dunovo/make_families/3.0.2) %} with the following parameters:
 >    - {% icon param-file %} *Sequencing reads, mate 1*: The forward raw reads (`SRR1799908_forward`)
 >    - {% icon param-file %} *Sequencing reads, mate 2*: The reverse raw reads (`SRR1799908_reverse`)
 >    - {% icon param-text %} *Tag length*: `12`
@@ -175,7 +175,7 @@ Du Novo includes a tool which can correct most of these errors and recover the a
 
 > <hands-on-title>Correcting barcodes</hands-on-title>
 >
-> 1. {% icon tool %} **Du Novo: Correct barcodes** with the following parameters:
+> 1. {% tool [Du Novo: Correct barcodes](toolshed.g2.bx.psu.edu/repos/nick/dunovo/correct_barcodes/3.0.2) %} with the following parameters:
 >    - {% icon param-file %} *Input reads*: The output of {% icon tool %} **Make families**
 >    - {% icon param-text %} *Maximum differences*: `3`
 {: .hands_on}
@@ -193,7 +193,7 @@ After grouping reads that came from the same original fragment, we need to align
 
 > <hands-on-title>Aligning families</hands-on-title>
 >
-> 1. {% icon tool %} **Du Novo: Align families** with the following parameters:
+> 1. {%  tool [Du Novo: Align families](toolshed.g2.bx.psu.edu/repos/nick/dunovo/align_families/3.0.2) %} with the following parameters:
 >    - {% icon param-file %} *Input reads*: The output of {% icon tool %} **Correct barcodes**
 >    - {% icon param-select %} *Multiple sequence aligner*: `Kalign2`
 {: .hands_on}
@@ -206,7 +206,7 @@ Normally, the tool only produces the final double-stranded consensus sequences. 
 
 > <hands-on-title>Making consensus sequences</hands-on-title>
 >
-> 1. {% icon tool %} **Du Novo: Make consensus reads** with the following parameters:
+> 1. {% tool [Du Novo: Make consensus reads](toolshed.g2.bx.psu.edu/repos/nick/dunovo/dunovo/3.0.2) %} with the following parameters:
 >    - {% icon param-file %} *Aligned input reads*: The output of {% icon tool %} **Align families**
 >    - {% icon param-text %} *Minimum reads for a consensus sequence*: `3`
 >    - {% icon param-text %} *Consensus % threshold*: `0.7`
@@ -250,7 +250,7 @@ This information could be useful for some analyses, but not for our variant call
 
 > <hands-on-title>Filtering the consensus sequences</hands-on-title>
 >
-> 1. {% icon tool %} **Sequence Content Trimmer** with the following parameters:
+> 1. {% tool [Sequence Content Trimmer](toolshed.g2.bx.psu.edu/repos/nick/sequence_content_trimmer/sequence_content_trimmer/0.2.3) %} with the following parameters:
 >    - {% icon param-select %} *Paired reads?*: `Paired`
 >    - {% icon param-file %} *Input reads (mate 1)*: The double-stranded output of {% icon tool %} **Make consensus reads** (mate 1)
 >    - {% icon param-file %} *Input reads (mate 2)*: The double-stranded output of {% icon tool %} **Make consensus reads** (mate 2)
@@ -276,7 +276,7 @@ Here, we'll use {% icon tool %} **Map with BWA-MEM** to map the DCS reads to the
 
 > <hands-on-title>Align with BWA-MEM</hands-on-title>
 >
-> 1. {% icon tool %} **Map with BWA-MEM** with the following parameters:
+> 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.18) %} with the following parameters:
 >    - {% icon param-select %} *Using reference genome?*: `Human (Homo sapiens) (b38): hg38`
 >    - {% icon param-file %} *Select first set of reads*: The first output from the {% icon tool %} **Sequence Content Trimmer**
 >    - {% icon param-file %} *Select second set of reads*: The second output from the {% icon tool %} **Sequence Content Trimmer**
@@ -288,7 +288,7 @@ To normalize the positional distribution of indels we use the {% icon tool %} **
 
 > <hands-on-title>Left-align indels</hands-on-title>
 >
-> 1. {% icon tool %} **BamLeftAlign** with the following parameters:
+> 1. {% tool [BamLeftAlign](toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.8) %} with the following parameters:
 >    - {% icon param-file %} *Select alignment file in BAM format*: The output of {% icon tool %} **Map with BWA-MEM**
 >    - {% icon param-select %} *Using reference genome*: `Human (Homo sapiens): hg38`
 >      - The same genome we aligned to.
@@ -308,7 +308,7 @@ To identify sites containing variants we use the {% icon tool %} **Naive Variant
 
 > <hands-on-title>Count the variants</hands-on-title>
 >
-> 1. {% icon tool %} **Naive Variant Caller (NVC)** with the following parameters:
+> 1. {%  tool [Naive Variant Caller (NVC)](toolshed.g2.bx.psu.edu/repos/blankenberg/naive_variant_caller/naive_variant_caller/0.0.4) %} with the following parameters:
 >    - {% icon param-file %} *BAM file*: The output of {% icon tool %} **BamLeftAlign**
 >    - {% icon param-select %} *Using reference genome*: `hg38`
 >      - The same genome we aligned to.
@@ -330,7 +330,7 @@ Now we'll want to parse the VCF produced by the NVC, determine what the major an
 
 > <hands-on-title>Read the variants file</hands-on-title>
 >
-> 1. {% icon tool %} **Variant Annotator** with the following parameters:
+> 1. {% tool [Variant Annotator](toolshed.g2.bx.psu.edu/repos/nick/allele_counts/allele_counts_1/1.3.2) %} with the following parameters:
 >    - {% icon param-file %} *Input variants from Naive Variants Detector*: The output of {% icon tool %} **Naive Variant Caller (NVC)**
 >    - {% icon param-text %} *Minor allele frequency threshold*: `0`
 >    - {% icon param-text %} *Coverage threshold*: `10`
@@ -346,7 +346,7 @@ The {% icon tool %} **Variant Annotator** produces a simple tab-delimited file, 
 
 > <hands-on-title>Filter the raw variants list</hands-on-title>
 >
-> 1. {% icon tool %} **Filter** with the following parameters:
+> 1. {% tool [Filter - data on any column using simple expressions](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *Filter*: The output of {% icon tool %} **Variant Annotator**
 >    - {% icon param-text %} *With following condition*: `c16 >= 0.01`
 >    - {% icon param-check %} *Number of header lines to skip*: `1`
