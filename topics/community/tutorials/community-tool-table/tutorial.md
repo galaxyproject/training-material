@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Creation of an interactive Galaxy tools table for your community
 level: Introductory
-subtopic: tooldev
 redirect_from:
 - /topics/dev/tutorials/community-tool-table/tutorial
 
@@ -123,13 +122,13 @@ To generate this file, we recommend you to use the `tools_filtered_by_ts_categor
 >
 > 1. Download the `tools.tsv` file in `results/<your community>`.
 > 2. Open `tools.tsv` with a Spreadsheet Software.
-> 3. Review each line corresponding to a tool. 
->        
+> 3. Review each line corresponding to a tool.
+>
 >    You can also just review some tools. Those tools that are not reviewed will have be set to `FALSE` in the `Reviewed` column of the updated table.
 >    1. Change the value in the `Reviewed` column from `FALSE` to `TRUE` (this will be done automatically if an entry of the tool in `tools_status.tsv` exists).
 >    2. Add `TRUE` to the `To keep` column if the tool should be kept, and `FALSE` if not.
 >    3. Add `TRUE` or `FALSE` also to the `Deprecated` column.
-> 4. Copy paste the `Galaxy wrapper id`, `To keep`, `Deprecated` columns in a new table (in that order). 
+> 4. Copy paste the `Galaxy wrapper id`, `To keep`, `Deprecated` columns in a new table (in that order).
 >
 >    This can also be done using the reference function of your Spreadsheet Software.
 > 5. Export the new table as TSV (without header).
