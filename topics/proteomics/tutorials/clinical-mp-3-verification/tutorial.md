@@ -102,20 +102,11 @@ Interestingly, the PepQuery tool does not rely on searching peptides against a r
 > 6. Users can create a database collection of the MGF files.
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
-> 
+>
 {: .hands_on}
 
-# Import Workflow
-> <hands-on-title>Running the Workflow</hands-on-title>
->
-> 1. **Import the workflow** into Galaxy:
->
->    {% snippet faqs/galaxy/workflows_run_trs.md path="`https://usegalaxy.eu/u/galaxyp/w/wf3verificationworkflow`" title="Pretreatments" %}
-> 2. Import and Run the workflow.
-{: .hands_on}
 
 # Import Workflow
-
 
 > <hands-on-title>Running the Workflow</hands-on-title>
 >
@@ -372,7 +363,7 @@ Again, we will use the Query Tabular tool to retrieve UniProt IDs (accession num
 >                - *"Specify Name for Table"*: `t1`
 >                - *"Use first line as column names"*: `Yes`
 >                - *"Specify Column Names (comma-separated list)"*: `pep,prot`
->    ` *"SQL Query to generate tabular output"*: `SELECT distinct(prot) AS Accession 
+>    ` *"SQL Query to generate tabular output"*: `SELECT distinct(prot) AS Accession
 >       from t1`
 >        - *"include query result column headers"*: `No`
 >
