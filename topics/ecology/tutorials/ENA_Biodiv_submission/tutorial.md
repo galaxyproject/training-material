@@ -18,6 +18,7 @@ key_points:
 contributions:
     authorship:
         - Najatamk
+        - yvanlebras
     testing:
         - PaulineSGN
         - yvanlebras
