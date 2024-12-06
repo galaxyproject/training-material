@@ -19,8 +19,10 @@ key_points:
 contributors:
 - dianichj
 - pavanvidem
-acknowledgments:
-- pcm32
+tags:
+- single-cell
+- transcriptomics
+- pseudobulk
 
 ---
 
