@@ -49,13 +49,15 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. **Import** the files.
+> 2. **Import** the raw sequences files.
 >
 >    ```
 >    https://data.indores.fr/api/access/datafile/3673
 >    https://data.indores.fr/api/access/datafile/3609
 >    ```
 >
+> 
+> 
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. **Rename** {% icon galaxy-pencil %} your datafiles
@@ -111,9 +113,9 @@ We are doing a first Quality control on the raw files using FastQC and MultiQC.
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Quality is quite good looking at the "status checks" section of MultiQC. Only "Per base sequence Content" and "Overrepresented sequences" 
+> > 1. Quality is quite good looking at the "status checks" section of MultiQC. As expected (because here we only have one sequence by file) "Per base sequence Content" and "Overrepresented sequences" Sections are "bad" for both sequences files. "adapter content" section also show a "bad" result for A2_RC_8F2_B.pl_HCOI.ab1 file.
 > >
-> > 2. The related MultiQC section mention: "No samples found with any adapter contamination > 0.1%"
+> > 2. A2_RC_8F2_B.pl_HCOI.ab1 file seems to have adapters in it.
 > >
 > {: .solution}
 {: .question}
@@ -128,8 +130,8 @@ Cutadapt enables the removal of adapters, polyA tails, and other artifacts from 
 > 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.8+galaxy0) %} with the following parameters:
 >
 >     - **"Single-end or Paired-end reads?"**: `Single-end`
->     - In **"Read Modification Options"**:
->         - **"Quality cutoff"**: `30`
+>     - In **"Other Read Trimming Options"**:
+>         - **"Quality cutoff(s) (R1)"**: `30`
 >         - **"Shortening reads to a fixed length"**: `Disabled`
 >
 > > <comment-title> Suggestions </comment-title>
@@ -168,10 +170,14 @@ Cutadapt enables the removal of adapters, polyA tails, and other artifacts from 
 
 > <hands-on-title> Filter empty datasets </hands-on-title>
 >
-> 1. {% tool [Filter empty datasets](__FILTER_EMPTY_DATASETS__) %}
+> 1. {% tool [Filter empty datasets](__FILTER_EMPTY_DATASETS__) %} on the Cutadapt resulting data collection
 >
 >
-> 2. {% tool [Filter FASTQ](toolshed.g2.bx.psu.edu/repos/devteam/fastq_filter/fastq_filter/1.1.5) %} with the following parameters:
+> 2. {% tool [FASTQ Groomer](https://ecology.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.1.5+galaxy2) %} on the Filtered data collection, using default parameters.
+>
+> This step is notably there to produce "standardized" fastqsanger sequences files si we can then use other tools accepting only such data format.
+>
+> 3. {% tool [Filter FASTQ](toolshed.g2.bx.psu.edu/repos/devteam/fastq_filter/fastq_filter/1.1.5) %} with the following parameters:
 >    - *"Minimum size"*: `300`
 >
 >    > <comment-title> Comment </comment-title>
@@ -222,19 +228,6 @@ Cutadapt enables the removal of adapters, polyA tails, and other artifacts from 
 >
 {: .hands_on}
 
-### Compress file(s)
-
-> <hands-on-title> Compress files </hands-on-title>
->
-> 1. {% tool [Compress file(s)](toolshed.g2.bx.psu.edu/repos/iuc/compress_file/compress_file/0.1.0) %} with the following parameters:
->
->    > <comment-title> short description </comment-title>
->    >
->    > The ENA Database only allows compressed files for submission
->    {: .comment}
->
-{: .hands_on}
-
 ## Alignments on NCBI database
 
 
@@ -267,9 +260,9 @@ Cutadapt enables the removal of adapters, polyA tails, and other artifacts from 
 
 3. **Collection of FASTA files**: FASTQ files converted into FASTA format. Used for conducting BLAST alignments.
 
-4. **FastQC Quality Control Results**: Both raw FastQC results and HTML reports are created
+4. **FastQC Quality Control Results** before and after cleaning: Both raw FastQC results and HTML reports are created
 
-5. **MultiQC Quality Control Results**: Both raw MultiQC statistics and HTML report are created
+5. **MultiQC Quality Control Results** before and after cleaning: Both raw MultiQC statistics and HTML report are created
 
 6. **Raw Blast Results**: Results of BLAST alignments conducted on our sequences. Columns names are:
 
@@ -304,8 +297,8 @@ Cutadapt enables the removal of adapters, polyA tails, and other artifacts from 
 7. **Filtered Blast Results**
 Files containing the closest homologous sequences.
 
-8. **Collection of Fastq.gz_files**
-Contains filtered, compressed sequences.
+8. **Collection of Fastq files**
+Contains filtered sequences.
 
 # How to use ENA upload Tool
 
@@ -361,11 +354,11 @@ For this tutorial we will use the ENA default sample checklist.
 >
 >    > <comment-title> Datatype </comment-title>
 >    >
->    > The ENA upload tool only allows .fastq.gz files for submission
+>    > The ENA upload tool will then automatically compress fastq sequences files into .fastq.gz format before submission
 >    {: .comment}
 >
 >    > <warning-title> Danger: Submit to ENA test server! </warning-title>
->    > We suggest you first submit to the test server before making a public submission! The test serveris reachable [here](https://wwwdev.ebi.ac.uk/ena/submit/webin/) and submission can be seen in `Dashboard/Study Report`
+>    > We suggest you first submit to the test server before making a public submission! The test server is reachable [here](https://wwwdev.ebi.ac.uk/ena/submit/webin/) and submission can be seen in `Dashboard/Study Report`
 >    {: .warning}
 >
 > ![ENA Upload tool](./images/image3.png)
