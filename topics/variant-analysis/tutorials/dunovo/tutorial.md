@@ -130,7 +130,7 @@ This creates two datasets in our galaxy history: one for forward reads and one f
 
 We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse):
 
-> ### {% icon hands_on %} Hands-on: Evaluating input read quality
+> <hands-on-title> Evaluating input read quality </hands-on-title>
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *Short read data from your current history*: One of the raw FASTQ datasets (`SRR1799908_forward`)
