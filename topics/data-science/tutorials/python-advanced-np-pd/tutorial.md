@@ -24,10 +24,12 @@ key_points:
 - Python has many libraries offering a variety of capabilities, which makes it popular for beginners, as well as, more experienced users
 - You can use scientific libraries like Numpy and Pandas to perform data analysis.
 subtopic: python
-contributors:
+contributions:
+  authorship:
   - mcmaniou
   - fpsom
   - carpentries
+  funding:
   - gallantries
 
 priority: 2

@@ -88,7 +88,7 @@ pathway:
         topic: admin
       - name: tool-integration
         topic: dev
-      - name: processing-many-samples-at-once
+      - name: collections
         topic: galaxy-interface
       - name: upload-rules
         topic: galaxy-interface

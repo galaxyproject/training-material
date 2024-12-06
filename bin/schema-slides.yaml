@@ -83,7 +83,7 @@ mapping:
               required: true
               enum:
               - CONTRIBUTORS
-              - FUNDERS
+              - GRANTS
               - ORGANISATIONS
         description: |
             List of tutorial contributors. Please use `contributions` instead as it provides more detailed accounting of tutorial history.
@@ -153,7 +153,14 @@ mapping:
                   enum:
                   - CONTRIBUTORS
                   - ORGANISATIONS
-                  - FUNDERS
+                  - GRANTS
+            reviewing:
+                type: seq
+                description: This person reviewed this material for accuracy and correctness
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
             funding:
                 type: seq
                 description: These entities provided funding support for the development of this resource
@@ -161,7 +168,7 @@ mapping:
                 - type: str
                   enum:
                   - ORGANISATIONS
-                  - FUNDERS
+                  - GRANTS
             translation:
                 type: seq
                 description: These entities did translation and localisation work on this resource
@@ -178,7 +185,7 @@ mapping:
                   enum:
                   - CONTRIBUTORS
                   - ORGANISATIONS
-                  - FUNDERS
+                  - GRANTS
     hands_on:
         type: str
         enum:
@@ -214,6 +221,7 @@ mapping:
           - topics/ai4life/images/AI4Life-logo_giraffe-nodes.png
           - assets/images/genomics_intro.png
           - shared/images/biocommons-utas.png
+          - shared/images/dataplant-logo.png
         required: true
         description: |
             A logo identifier (e.g. GTN) should be used by default, but may be swapped out for special logos from the assets folder.

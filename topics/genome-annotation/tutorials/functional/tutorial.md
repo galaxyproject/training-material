@@ -20,6 +20,8 @@ contributions:
   funding:
     - gallantries
     - eurosciencegateway
+    - elixir-europe
+    - ifb
 subtopic: eukaryote
 priority: 6
 ---

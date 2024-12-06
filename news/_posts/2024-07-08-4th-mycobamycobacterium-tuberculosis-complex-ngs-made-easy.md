@@ -1,5 +1,5 @@
 ---
-title: 4th MycobaMycobacterium tuberculosis complex NGS made easy
+title: 4th Mycobacterium tuberculosis complex NGS made easy
 layout: news
 tags:
 - NGS

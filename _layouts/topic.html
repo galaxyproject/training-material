@@ -15,7 +15,13 @@ layout: base
 <section class="tutorials-list {{ topic.name }} topic-type-{{ topic.type }}">
     <h1>{{ topic.title }}</h1>
     <p>{{ topic.summary | markdownify }}</p>
-    <i>You can view the tutorial materials in different languages by clicking the dropdown icon next to the slides ({% icon slides %}) and tutorial ({% icon tutorial %}) buttons below. </i>
+
+    {% if topic.gitter %}
+    <p><em>For any question or discussions related to this topic, or to connect with others in the community, please visit the community chat:</em></p>
+    <p><a class="btn btn-success" href="https://matrix.to/#/#{{topic.gitter}}">{% icon comment %} &nbsp; Community Matrix Chat</a></p>
+    {% endif%}
+
+
 
     {% if topic.requirements %}
     <h2 id="requirements">Requirements</h2>
@@ -39,6 +45,22 @@ layout: base
     {% endif %}
 
     <h2 id="material">Material</h2>
+
+    {% if topic.toc %}
+      <p>
+      <blockquote class="agenda">
+      <div class="box-title agenda-title" id="agenda">Jump to a section!</div>
+      <ul class="markdown-toc">
+      {% for subtopic in topic_material %}
+        <li><a href="#st-{{ subtopic[0] | slugify }}">{{subtopic[1].subtopic.title}}</a></li>
+      {% endfor %}
+      </ul>
+      </blockquote>
+      </p>
+    {% endif %}
+
+    <i>You can view the tutorial materials in different languages by clicking the dropdown icon next to the slides ({% icon slides %}) and tutorial ({% icon tutorial %}) buttons below. </i>
+
     {% if topic.draft %}
     <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}
     {% for subtopic in topic_material %}
@@ -53,17 +75,6 @@ layout: base
     {% endfor %}
 
     {{ content }}
-
-    {% if topic.type == "use" %}
-        <h2 id="docker_image">Galaxy instances</h2>
-        <p>You can use a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
-        {% if topic.docker_image and topic.docker_image != "" %}
-            <p>You can also use the following Docker image for these tutorials:</p>
-            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -p 8080:80 {{ topic.docker_image }}</code></pre></div></div>
-            <p>NOTE: Use the -d flag at the end of the command if you want to automatically download all the data-libraries into the container.</p>
-            <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>. This instance will contain all the tools and workflows to follow the tutorials in this topic. Login as <b>admin</b> with password <b>password</b> to access everything.</p>
-        {% endif %}
-    {% endif %}
 
     {% unless topic.tag_based %}
     <h2 id="topic-faq">Frequently Asked Questions</h2>
@@ -81,9 +92,6 @@ layout: base
     {% include _includes/contributor-list.html contributors=editorial_board badge=true %}
     {% endif %}
 
-    <p>
-        <em>For any question related to this topic and the content, you can contact them or visit our <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter channel</a>.</em>
-    </p>
 
     <h2 id="contributors">Contributors</h2>
     <p>This material was contributed to by:</p>

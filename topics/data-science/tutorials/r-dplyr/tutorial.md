@@ -22,10 +22,12 @@ time_estimation:  1H
 key_points:
 - Dplyr and tidyverse make it a lot easier to process data
 - The functions for selecting data are a lot easier to understand than R's built in alternatives.
-contributors:
-- hexylena
-- gallantries
-- avans-atgm
+contributions:
+  authorship:
+  - hexylena
+  - avans-atgm
+  funding:
+  - gallantries
 subtopic: r
 notebook:
     language: r
