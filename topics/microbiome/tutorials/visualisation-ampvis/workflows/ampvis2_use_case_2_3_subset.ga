@@ -1,0 +1,178 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [],
+    "format-version": "0.1",
+    "name": "ampvis2_use_case_2+3_subset",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "OTU table out of ampvis_load"
+                }
+            ],
+            "label": "OTU table out of ampvis_load",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "1377c0c1-190f-4336-9bd9-299a8ab1f0ec",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "metadata out of ampvis_load 2"
+                }
+            ],
+            "label": "metadata out of ampvis_load 2",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1,
+                "top": 96
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "406b04ab-1738-4500-839c-24bf3ba5cdc2",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "metadata variable (needs to be selected by user)"
+                }
+            ],
+            "label": "metadata variable (needs to be selected by user)",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 13,
+                "top": 246.2682328280075
+            },
+            "tool_id": null,
+            "tool_state": "{\"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "b2cec148-918c-4638-ba6c-8d54439682f6",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "metadata value(s) (needs to be selected by user)"
+                }
+            ],
+            "label": "metadata value(s) (needs to be selected by user)",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 12,
+                "top": 370.2682328280075
+            },
+            "tool_id": null,
+            "tool_state": "{\"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "d26678bc-9bd9-4f2b-a8cd-abd0b4652bba",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "data": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "metadata_list": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "vals": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "var": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ampvis2 subset samples",
+            "outputs": [
+                {
+                    "name": "ampvis",
+                    "type": "ampvis2"
+                },
+                {
+                    "name": "metadata_list_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 331.5,
+                "top": 32.877607828007456
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "c8bfb923d7d4",
+                "name": "ampvis2_subset_samples",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"data\": {\"__class__\": \"ConnectedValue\"}, \"invert\": false, \"metadata_list\": {\"__class__\": \"ConnectedValue\"}, \"minreads\": \"0\", \"normalise\": false, \"rarefy\": null, \"removeAbsents\": true, \"vals\": {\"__class__\": \"ConnectedValue\"}, \"var\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8.6+galaxy1",
+            "type": "tool",
+            "uuid": "7b2dfc51-6974-499f-943c-b306a2e43fdf",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "ff25038a-3574-497f-9acc-edc84be09490",
+    "version": 15
+}
