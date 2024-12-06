@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+# Deploy
+aws s3 sync _site/training-material/ s3://galaxy-training/archive/${SOURCE_TAG}/
+
+INDEX_PAGE_DIR=$(mktemp -d)
+INDEX="${INDEX_PAGE_DIR}/index.html"
+
+# build the index page
+cat > $INDEX <<-EOF
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training Archive</title>
+        <link rel="stylesheet" href="https://training.galaxyproject.org/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="https://training.galaxyproject.org/training-material/assets/css/main.css?v=2">
+    </head>
+    <body>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                Galaxy Training Archive
+            </a>
+        </div>
+    </nav>
+</header>
+<div class="container main-content">
+    <section>
+        <h1>Welcome to Galaxy Training Archive!</h1>
+        <p class="lead">
+            Access specific, historical versions of the Galaxy Training Material
+        </p>
+
+        <div class="row">
+            <div class="col">
+                <h3>Past Versions</h3><ul>
+EOF
+
+for tag in $(git tag -l); do
+	printf '<li><a href="/archive/%s/">%s</a></li>' "${tag}" "${tag}" >> $INDEX
+done
+
+
+echo "</ul></div></div></section></div></body></html>" >> $INDEX
+
+# Upload
+aws s3 sync ${INDEX_PAGE_DIR} s3://galaxy-training/archive/

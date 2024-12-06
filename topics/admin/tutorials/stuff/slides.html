@@ -1,0 +1,93 @@
+---
+layout: tutorial_slides
+logo: assets/images/gat.png
+
+title: "Server: Other"
+draft: true
+zenodo_link: ""
+questions:
+  - How to monitor a Galaxy service?
+objectives:
+  - Learn about different monitoring strategies.
+  - Setup and start the Galaxy reports app.
+time_estimation: "1h"
+key_points:
+  - Galaxy supports pluggable monitoring extensions.
+  - Use grafana or the reports webapp to monitor your service.
+contributors:
+  - natefoo
+  - bgruening
+  - slugger70
+  - hexylena
+---
+
+<!-- move to dev -->
+## Data Types
+
+* Galaxy's method of understanding users' files.
+* Data types and converters are shipped with Galaxy.
+* Admin UI displays all available data types.
+  * Can be configured by modifying `config/datatypes_conf.xml` file.
+* Use class inheritance (`text:json` is a super class of `hivtrace`, `biom1`, `d3_hierarchy`...)
+  * Affects how tools consume datasets.
+
+???
+Some datatypes can be installed from toolshed but this practice is deprecated and discouraged.
+
+
+---
+# Data Providers
+
+Provide efficient access to data for viz & API
+
+Framework provides direct link to read the raw dataset
+or use data providers to adapt it
+
+In config, assert that visualization requires a given type of data providers
+
+Data providers process data before sending to browser - slice, filter, reformat, ...
+
+
+<!-- dnuno what to do with this. -->
+---
+
+## Admin UI
+
+Has a lot of tools and lists that are useful for administrators of the Galaxy server.
+
+  * Data types
+  * Data tables
+  * Display applications
+  * Users, groups, roles, and quotas
+  * Running jobs
+  * Installed Tools
+  * Tool whitelist
+  * Tool errors
+
+
+---
+
+## Tools
+
+  * **Install new tools** - Use to install tools from the configured toolsheds.
+
+  * **Monitor installation** - Shows tools currently being installed.
+
+  * **Manage tools** - To list, manage, repair, upgrade, check status, uninstall or disable currently installed tools.
+
+  * **Manage metadata** - Can help with certain types of tool problems, like incorrect lineage.
+
+  * **Manage whitelist** - Allows admins to selectively prevent tool outputs from being sanitized (allows for interactive javascript pages such as visualizations).
+
+  * **View lineage** - Shows the revision history and default versions of tools.
+
+  * **View error logs** - Will show tool problems during Galaxy startup.
+
+---
+## Other links
+
+  * **Quotas** - Allows for control of user disk space.
+  * **Local Data** - Links to the Reference Data and Data Managers UI.
+  * **Users, Groups, Roles** - Used for quotas, libraries, sharing...
+  * **Impersonate user** - Allows to switch to a user account. Has to be enabled in configuration.
+

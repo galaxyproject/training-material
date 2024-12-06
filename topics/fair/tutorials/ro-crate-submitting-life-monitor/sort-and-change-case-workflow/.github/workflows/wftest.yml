@@ -1,0 +1,23 @@
+name: Periodic workflow test
+on:
+  schedule:
+    - cron: '0 3 * * 0'  # Run every Sunday at 3:00 am
+  workflow_dispatch:
+jobs:
+  test:
+    name: Test workflow
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.7'
+    - name: install Planemo
+      run: |
+        pip install --upgrade pip
+        pip install planemo
+    - name: run planemo test
+      run: |
+        planemo test --biocontainers sort-and-change-case.ga

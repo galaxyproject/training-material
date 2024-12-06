@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Mapping and molecular identification of phenotype-causing mutations"
+subtopic: model-organisms
 zenodo_link: "https://doi.org/10.5281/zenodo.1098033"
 questions:
   - "What is mapping-by-sequencing?"
@@ -18,19 +19,17 @@ contributors:
   - wm75
 ---
 
-# Introduction
-{:.no_toc}
+
 
 In order to map and identify phenotype-causing mutations efficiently from a
-single experiment, modern genetic research aims at combining classical genetic
+single experiment, modern genetic research aims to combine classical genetic
 mapping concepts with the power of next-generation-sequencing.
 
-After having obtained, *e.g.*, from a forward genetic screen, a mutant strain
-of an organism with a particular phenotype, the classical approach towards
-identification of the underlying causative mutation would be to
+For example, after having obtained a mutant strain of an organism with a particular phenotype from a forward genetic screen, the classical approach towards
+identification of the underlying causative mutation would be to:
 
 1. perform mapping crosses to probe for linkage between the unknown mutation
-   and selected markers with known location on the genome in order to determine
+   and selected markers with known location on the genome, in order to determine
    the approximate genomic region that the mutation resides in, then
 2. sequence candidate DNA stretches in this region to identify the precise
    nature of the mutation.
@@ -53,11 +52,11 @@ tools. For Galaxy, the **MiModD** suite of tools offers efficient and flexible
 analysis workflows compatible with a variety of mapping-by-sequencing
 approaches.
 
-> ### {% icon tip %} Further reading
+> <details-title>Further reading</details-title>
 > The MiModD documentation has its own chapter on supported
 > [mapping-by-sequencing schemes](http://mimodd.readthedocs.io/en/latest/nacreousmap.html)
 > not covered here.
-{: .tip}
+{: .details}
 
 In this tutorial we are going to use several of these tools to map and identify
 a point mutation in an *Arabidopsis thaliana* strain from whole-genome
@@ -72,8 +71,10 @@ As illustrated in Figure 1, variant allele frequency mapping analyzes marker
 variant inheritance patterns in pooled F2 recombinants selected for the
 mutation to be mapped.
 
-A mutant line established for any organism - in the figure we assume a diploid
-organism with just two pairs (dark and light grey) of chromosomes - will harbor
+In the figure we assume a diploid
+organism with just two pairs (dark and light grey) of chromosomes.
+
+A mutant line established for any organism will harbor
 two types of variants (diamonds):
 - variants induced during mutagenesis (orange), among them the causative
   variant responsible for the mutant phenotype (yellow)
@@ -92,7 +93,7 @@ which all sequenced reads support variant alleles found in the original mutant
 line, rather than mapping strain variant alleles.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -105,7 +106,7 @@ line, rather than mapping strain variant alleles.
 In this tutorial we are going to (re-)identify the recessive causative mutation
 in a late-flowering mutant line of *Arabidopsis thaliana*.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > **MiModD** was developed as a successor of the older and now unmaintained
 > *CloudMap* suite of tools, but also uses some key concepts first implemented
 > in the command line package *SHOREmap*.
@@ -138,9 +139,9 @@ TAIR10) so the two datasets take the form of BAM files with the mapping results
 [NGS data mapping](../../../sequence-analysis/tutorials/mapping/tutorial.html)
 if you do not know what this means).
 
-> ### {% icon hands_on %} Hands-on: Data upload and preprocessing
+> <hands-on-title>Data upload and preprocessing</hands-on-title>
 >
-> > ### {% icon tip %} Tip
+> > <tip-title></tip-title>
 > > This section assumes that you already know
 > >
 > > - how to upload data to Galaxy via links
@@ -164,10 +165,10 @@ if you do not know what this means).
 >    3. **Save** the edited attributes
 > 3. Import the reference genome
 >
->    > ### {% icon tip %} Tip
+>    > <comment-title>TAIR10 Version</comment-title>
 >    > This step is only necessary if the TAIR10 version of the *A. thaliana*
 >    > genome is not available as a built-in genome on your Galaxy server.
->    {: .tip}
+>    {: .comment}
 >
 >    1. Upload the reference genome using the URL:
 >       `https://www.arabidopsis.org/download_files/Genes/TAIR10_genome_release/TAIR10_chromosome_files/TAIR10_chr_all.fas`
@@ -211,7 +212,7 @@ all sites and all samples in the compact binary BCF format. We can then use
 the **MiModD Extract Variant Sites** tool to extract sites, for which at least
 one sample appears to have a non-wt genotype, and report them in VCF format.
 
-> ### {% icon hands_on %} Hands-on: Variant Calling
+> <hands-on-title>Variant Calling</hands-on-title>
 >
 > 1. Use **MiModD Variant Calling** {% icon tool %} to generate combined
 >    variant call statistics:
@@ -229,16 +230,16 @@ one sample appears to have a non-wt genotype, and report them in VCF format.
 >    - **BCF input file** set to the BCF dataset generated in the previous
 >      step.
 >
-> > ### {% icon question %} Questions
+> > <question-title></question-title>
 > >
-> > 1. Approximately how many variants did get extracted?
+> > 1. Approximately how many variants were extracted?
 > > 2. Does this number surprise you?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > >  1. You can click on the extracted variants dataset in your history to
 > > >     get more details about it. You should see that the file has an
-> > >     estimated 130,000 lines and since, in VCF format, apart from a number
-> > >     of header lines, one variant gets reported per line, this roughly
+> > >     estimated 130,000 lines. Since one variant gets reported per line in VCF format (apart from a number
+> > >     of header lines), this roughly
 > > >     equals the number of variants in the dataset.
 > > >  2. The huge number of variants reflects the fact that the L*er*
 > > >     mapping strain is really quite diverged from the Col reference
@@ -251,8 +252,8 @@ one sample appears to have a non-wt genotype, and report them in VCF format.
 > > >     chromosomes. In addition, we provided really low-coverage data
 > > >     even for those two chromosomes so our analysis will miss many true
 > > >     variants and contain many questionable variant calls that may represent
-> > >     false-positives, but an analysis based on such a large overall number
-> > >     of variants is robust enough to provide useful results regardless.
+> > >     false-positives. Regardless, an analysis based on such a large overall number
+> > >     of variants is robust enough to provide useful results.
 > > {: .solution }
 > >
 > {: .question}
@@ -268,11 +269,11 @@ causative mutation in the F2 pool. We will now analyze the data with the
 identify these markers and look for linkage between them and the causative
 mutation.
 
-> ### {% icon hands_on %} Hands-on: Linkage Analysis with one set of parentally contributed markers
+> <hands-on-title>Linkage Analysis with one set of parentally contributed markers</hands-on-title>
 >
 > In the **MiModD NacreousMap** {% icon tool %} interface, set
 > - **type of mapping analysis to perform** to `Variant Allele Frequency
-    Mapping` and
+>   Mapping` and
 > - **data source to use** to `VCF file of variants`.
 > - As the **input file with variants to analyze** select your extracted
 >   variants VCF dataset obtained in the previous step.
@@ -280,11 +281,11 @@ mutation.
 > - Leave the **name of the related parent sample** input field empty because
 >   in this two-sample there is no such sample.
 > - As the **name of the unrelated parent sample** specify `Ler`.
->    > ### {% icon comment %} Sample roles
+>    > <comment-title>Sample roles</comment-title>
 >    > In `Variant Allele Frequency Mapping` mode the tool requires:
 >    > - a **mapping sample**, which corresponds to the recombinant pool, from
 >    >   which allele frequencies should be calculated
->    > - either a **related** or an **unrelated parent sample** (, or both),
+>    > - either a **related** or an **unrelated parent sample** (or both),
 >    >   from which the marker variant sites to use in the linkage analysis
 >    >   will be determined. A related parent sample is related (or identical)
 >    >   to the original mutant line by descent and provides information about
@@ -306,7 +307,7 @@ mutation.
 > chromosome in the *A. thaliana* genome, one with graphical representations
 > of the data.
 >
-> > ### {% icon question %} Questions
+> > <question-title></question-title>
 > >
 > > 1. Have a look at the linkage plots dataset generated by the tool run. In
 > >    which interval on which chromosome would you expect the causative
@@ -315,7 +316,7 @@ mutation.
 > > 3. What about those `No markers found!` messages (you saw them, right?)
 > >    that the tool printed?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > > 1. The plots suggest that the causative variant is likely to be found
 > > >    in the region from 18,000,000 to 19,000,000 on chr2.
 > > > 2. Look at the y axis labels! The scatter plots show the rates at
@@ -357,7 +358,7 @@ so far:
 * It should reside in the genomic region identified in the previous step.
 
 
-> ### {% icon hands_on %} Hands-on: Variant Filtering
+> <hands-on-title>Variant Filtering</hands-on-title>
 >
 > With the above information, we can run **MiModD VCF Filter** {% icon tool %}
 > to obtain a new VCF dataset with only those variants from the originally
@@ -385,7 +386,7 @@ so far:
 >   to retain only variants falling into the previously determined mapping
 >   interval.
 >
->    > ### {% icon comment %} Sample and chromosome names
+>    > <comment-title>Sample and chromosome names</comment-title>
 >    > This is the second time in this tutorial that we ask you to type sample
 >    > or chromosome names exactly as they appear in a dataset, and so you
 >    > may have started wondering how you are supposed to keep track of which
@@ -402,17 +403,17 @@ so far:
 > Running the job yields a new VCF dataset with variants that passed all
 > filters.
 >
-> > ### {% icon question %} Questions
+> > <question-title></question-title>
 > >
 > > 1. How many variants passed the filters?
 > > 2. How many variants would you have to consider as candidates if you did
 > >    not have any mapping information?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > > 1. If you used the suggested mapping interval of 1Mb on chr2, you
 > > >    should have retained 5 variants. Filtering is a really powerful way to
 > > >    reduce the number of variants to consider!
-> > > 2. Rerunning the job with the region filter removed shows that across
+> > > 2. Re-running the job with the region filter removed shows that across
 > > >    the two chromosomes, for which the input datasets provided sequencing
 > > >    reads, there are 50 variants for which the pool appears homozygous
 > > >    mutant and for which the L*er* strain is homozygous wt.
@@ -428,30 +429,35 @@ Other variants may fall in coding regions, but may be silent on the protein
 level. Hence, we can prioritize our candidate variants after annotating them
 with predicted functional effects.
 
-> ### {% icon hands_on %} Hands-on: Variant Annotation
+> <hands-on-title>Variant Annotation</hands-on-title>
 >
-> To annotate our variants we are going to use **SnpEff** with the
-> `athalianaTair10` genome database as the source of functional genomic
+> To annotate our variants we are going to use **SnpEff** with its
+> `Arabidopsis_thaliana` genome database as the source of functional genomic
 > annotations, then generate a human-friendly variant report with the
 > **MiModD Report Variants** {% icon tool %} tool.
 >
-> 1. Use **SnpEff Download** {% icon tool %} (Galaxy tool version 4.1.0) to
->    download genome database `athalianaTair10`.
+> 1. Use **SnpEff Download** {% icon tool %} to download genome database
+>    `Arabidopsis_thaliana`.
 >
->    > ### {% icon comment %} SnpEff versions
->    > SnpEff genome databases can only be used with the specific version of
->    > SnpEff they were built for. Make sure you are using version `4.1.0` of
->    > **SnpEff Download** {% icon tool %} in this and of **SnpEff Variant
->    > effect and annotation** {% icon tool %} in the next step.
->    > If your Galaxy server offers newer versions of these tools by default,
->    > you may be able to request version `4.1.0` explicitly using the
->    > **Versions** button at the top right of the tool interface.
+>    > <comment-title>SnpEff versions</comment-title>
+>    > SnpEff genome databases can only be used with the specific `major.minor`
+>    > version of SnpEff they were built for.
+>    > Make sure you are using matching versions (e.g., `4.3` - differences
+>    > past the second digit are fine and denote subversions with compatible
+>    > database schemes) of **SnpEff Download** {% icon tool %} in this and of
+>    > **SnpEff Variant effect and annotation** {% icon tool %} in the next
+>    > step.
+>    > 
+>    > Please also note that before SnpEff version 4.3 the TAIR10 version of
+>    > the *A. thaliana* genome database was named `athalianaTair10`.
+>    > If your Galaxy server offers only older versions of the SnpEff tools,
+>    > you will have to use that name instead of `Arabidopsis_thaliana`.
 >    {: .comment}
 > 2. In the **SnpEff Variant effect and annotation** {% icon tool %} interface,
 >    set:
 >    - **Sequence changes (SNPs, MNPs, InDels)** to your filtered VCF dataset
->    - **Genome source** to `Reference genome from your history`
->    - **SnpEff4.1 Genome Data** to your just downloaded genome dataset
+>    - **Genome source** to `Downloaded snpEff database in your history`
+>    - **SnpEff4.3 Genome Data** to your just downloaded genome dataset
 >    - under **Annotation options** check `Use 'EFF' field compatible with
 >      older versions (instead of 'ANN')`
 >
@@ -471,7 +477,7 @@ with predicted functional effects.
 >      The species information can be used by the tool to enrich the output
 >      with species-specific database and genome browser links.
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    > Variant reports in html format are meant to be used on relatively small
 >    > lists of candidate variants like in this example. If the input VCF
 >    > contains > 1000 variants, the relatively large size of the reports and
@@ -481,7 +487,7 @@ with predicted functional effects.
 >    > format although the output will then lack those convenient hyperlinks.
 >    {: .comment}
 >
-> > ### {% icon question %} Questions
+> > <question-title></question-title>
 > >
 > > The published confirmed mutations in the mutant line are *chr2:18,774,111
 > > C→T* and *chr2:18,808,927 C→T*. The latter was shown through follow-up
@@ -492,14 +498,14 @@ with predicted functional effects.
 > > 2. What biological functions are described for the two genes? How do these
 > >    relate to the phenotype of our mutant line?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > > 1. The C→T transition at 18,774,111 results in a premature
 > > >    translational stop for the transcript AT2G45550.1. The C→T transition
 > > >    at 18,808,927 affects a splice donor site and, thus, is likely to
 > > >    interfere with correct splicing of the transcript AT2G45660.1.
 > > > 2. From the linked gene pages at *TAIR* you can learn that the
 > > >    gene AT2G45550 encodes a cytochrome P450, while AT2G45660 encodes a
-> > >    protein called AGL20, which is known to control flowering. Thus, there
+> > >    protein called AGL20/SOC1, which is known to control flowering. Thus, there
 > > >    is a direct connection between the late-flowering phenotype of the
 > > >    mutant line studied here and the known role of the gene affected by
 > > >    chr2:18,808,927 C→T.
@@ -508,17 +514,16 @@ with predicted functional effects.
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 Mapping-by-sequencing can greatly speed up and facilitate the molecular
 identification of mutations recovered from mutagenesis screens. The method
-makes extensive use of cross-sample comparison of variants and profits strongly
+makes extensive use of cross-sample comparison of variants and benefits strongly
 from joint variant calling to generate reliable and manageable variant
 information. A combination of variant linkage analysis and filtering often
 results in very small lists of candidate variants that can then be confirmed
 through further experimental work. Importantly, the selection of biological
 samples for sequencing determines the meaningful variant comparisons that can
-be made in the bioinformatical analysis so it is important to understand the
+be made in the bioinformatics analysis so it is important to understand the
 essence of the analysis method **before** the preparation of any biological
 samples.
-

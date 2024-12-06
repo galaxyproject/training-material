@@ -1,0 +1,124 @@
+---
+layout: tutorial_slides
+logo: assets/images/gat.png
+redirect_from:
+- /topics/admin/tutorials/upstream-auth/slides
+
+title: "External Authentication"
+questions:
+- How can I connect Galaxy with CAS, SAML, etc.
+objectives:
+- be familiar with configuring Galaxy to use an upstream (proxy) authentication provider
+- be able to log in to your Galaxy server with a file-configured user.
+key_points:
+- Remote auth is not complex to set up and can help you meet institutional requirements
+contributors:
+  - martenson
+  - nsoranzo
+
+---
+# Auth Mechanisms supported
+
+* Galaxy-specific account database
+* HTTP remote user provided by a reverse proxy server
+* Galaxy authentication framework (LDAP/AD, PAM)
+
+---
+# Galaxy account
+
+* Stored in the Galaxy DB
+  * Unique in both email and username
+  * Passwords hashed and salted, using PBKDF2 (default)
+  * Table `galaxy_user`
+  * Abstracted as `User` in `lib/galaxy/model/mapping.py`
+* Session cookie expires after 3 months
+  * Configurable with `session_duration`
+* Password reset uses 'visit-link' mechanism
+* `require_login` can be set to disable anonymous access
+
+---
+# Authentication tweaks
+
+In `galaxy.yml`:
+* Activation
+  * `user_activation_on` will prevent accounts from running jobs until they visit activation link
+  * `activation_grace_period` gives users some time before their jobs are ignored
+  * `inactivity_box_content` defines the message shown to inactive users
+* Expiration
+  * `password_expiration_period` forces users to change password
+* Disposable domain blacklist
+  * `blacklist_file` defines domains (e.g. `example.org`) that will be rejected as user emails
+
+???
+https://github.com/martenson/disposable-email-domains
+
+---
+# Reverse proxy
+
+In `galaxy.yml`:
+* Set `use_remote_user: true` to delegate authentication to the upstream proxy server
+  * The proxy server should set the `REMOTE_USER` HTTP header
+  * Disables regular logins
+
+Dedicated Galaxy external auth [documentation](https://docs.galaxyproject.org/en/master/admin/authentication.html#remote-user-authentication).
+
+---
+# General configuration
+
+* If the proxy server returns only usernames, set `remote_user_maildomain` to a default mail domain to be appended
+* If a client can bypass the proxy, it can impersonate any user by forging the `REMOTE_USER` HTTP header:
+    * Configure the proxy server to define a `GX_SECRET` header and set `remote_user_secret` to the same value
+* Set `remote_user_logout_href` to point to your logout URL
+
+---
+# Nginx
+
+* Modules exist for PAM, Kerberos and LDAP.
+* Most likely you'll need to recompile Nginx as none of them are included by default.
+
+---
+# Example PAM stack
+
+* You need to set up your system's PAM stack (very site-specific)
+* A PAM configuration that would be suitable for authentication with Kerberos (placed in `/etc/pam.d/nginx`) might look like:
+  ```
+  auth  [success=1 default=ignore]  pam_krb5.so minimum_uid=1000 ignore_k5login
+  auth  requisite                   pam_deny.so
+  auth  required                    pam_permit.so
+  ```
+
+---
+# Example nginx.conf
+
+```ini
+location / {
+    auth_pam "Basic Auth Realm Name";
+    auth_pam_service_name "nginx";
+    ...
+    proxy_set_header REMOTE_USER $remote_user;
+}
+```
+
+The value of `auth_pam_service_name` must match the filename of the pam configuration you created in `/etc/pam.d/` .
+
+Dedicated Galaxy with Nginx [documentation](https://galaxyproject.org/admin/config/nginx-external-user-auth/).
+
+---
+# Apache httpd
+
+The authentication module (basic authentication, `mod_auth_kerb`, `mod_authnz_ldap`, `mod_auth_cas`, `Cosign`, etc.) is responsible for providing a username, which we will pass through the proxy to Galaxy as `$REMOTE_USER`.
+
+In addition to the modules above, `mod_headers` must be enabled in the Apache config, for some types of authentication.
+
+
+Dedicated Galaxy with Apache [documentation](https://galaxyproject.org/admin/config/apache-external-user-auth/).
+
+---
+# Galaxy Authentication Framework
+
+Authenticate to external services directly in Galaxy
+
+Available [provider modules](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/auth/providers) for:
+- Local Galaxy DB (default)
+- LDAP/Active Directory
+- [System (Linux) PAM](http://www.linux-pam.org/)

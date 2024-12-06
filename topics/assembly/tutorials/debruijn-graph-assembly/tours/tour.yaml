@@ -1,0 +1,242 @@
+---
+id: debruijn-graph-assembly
+name: Optimised de Bruijn Graph assemblies using the Velvet Optimiser and SPAdes
+description: >-
+  In this tutorial we will perform de novo assemblies of a short read set using
+  the Velvet Optimiser and the SPAdes assemblers. We are using the Velvet
+  Optimiser for illustrative purposes. For real assembly work, a more suitable
+  assembler should be chosen - such as SPAdes.
+title_default: debruijn-graph-assembly
+steps:
+  - title: Introduction
+    content: >-
+      In this activity, we will perform de novo assemblies of a short read set
+      using the Velvet Optimiser and the SPAdes assemblers. We are using the
+      Velvet Optimiser for illustrative purposes. For real assembly work, a more
+      suitable assembler should be chosen - such as SPAdes.<br> <br>The Velvet
+      Optimiser is a script written by Simon Gladman to optimise the k-mer size
+      and coverage cutoff parameters for Velvet. More information can be found
+      <a href="https://github.com/slugger70/VelvetOptimiser">here</a>
+      <br><br>SPAdes is a de novo genome assembler written by Pavel Pevzner’s
+      group in St. Petersburg. More details on it can be found <a
+      href="http://cab.spbu.ru/software/spades/">here</a>
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Preparing assembly
+    content: >-
+      Import the sequence read raw data (*.fastq) from <a
+      href="https://zenodo.org/record/582600">Zenodo</a>.
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the link here from <a
+      href="https://zenodo.org/record/582600">zenodo</a>.
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/582600/files/mutant_R1.fastq?download=1
+      https://zenodo.org/record/582600/files/mutant_R2.fastq?download=1
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Uploading the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Once the files have been uploaded, change their names to Mutant_R1.fastq
+      and Mutant_R2.fastq respectively by clicking on the `pencil` icon icon
+      next to the relevant history entry.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What are four key features of a FASTQ file?</li>
+        <li>What is the main difference between a FASTQ and a FASTA file?</li>
+      </ul>
+    backdrop: false
+  - title: Assembly with the Velvet Optimiser
+    content: >-
+      We will perform an assembly with the Velvet Optimiser. It will
+      automatically choose a suitable value for the k-mer size (<b>k</b>). It
+      will then go on to optimise the coverage cutoff (<b>cov_cutoff</b>) which
+      corrects for read errors. It will use the “<i>n50</i>” metric for
+      optimising the k-mer size and the “<i>total number of bases in
+      contigs</i>” for optimising the coverage cutoff.
+    backdrop: false
+  - title: Assemble with the Velvet Optimiser
+    element: '#tool-search-query'
+    content: Search for "VelvetOptimiser" tool
+    placement: right
+    textinsert: VelvetOptimiser
+  - title: Assemble with the Velvet Optimiser
+    element: '#tool-search'
+    content: Click on the "VelvetOptimiser" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fsimon-gladman%2Fvelvetoptimiser%2Fvelvetoptimiser%2F2.2.6"]
+        .tool-old-link
+  - title: Assemble with the Velvet Optimiser
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Start k-mer size" to `45`</li>
+        <li>"End k-mer size": to `73`</li>
+        <li>"Input file type": to `Fastq`</li>
+        <li>"Single or paired end reads": to `Paired`</li>
+        <li>"Select first set of reads": to `mutant_R1.fastq`</li>
+        <li>"Select second set of reads": to `mutant_R2.fastq`</li>
+      </ul>
+    position: left
+  - title: Assemble with the Velvet Optimiser
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      Your history will now contain a number of new files:<ul>
+        <li>Velvet optimiser contigs<ul>
+          <li>A fasta file of the final assembled contigs</li></ul></li>
+        <li>Velvet optimiser contig stats<ul>
+          <li>A table of the lengths (in k-mer length) and coverages (k-mer coverages) for the final contigs.</li></ul></li></ul>
+    position: left
+  - title: Get contig statistics for Velvet Optimiser contigs
+    element: '#tool-search-query'
+    content: Search for "Fasta Statistics" tool
+    placement: right
+    textinsert: Fasta Statistics
+  - title: Get contig statistics for Velvet Optimiser contigs
+    element: '#tool-search'
+    content: Click on the "Fasta Statistics" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffasta_stats%2Ffasta-stats%2F1.0.1"]
+        .tool-old-link
+  - title: Get contig statistics for Velvet Optimiser contigs
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"fasta or multifasta file": to the output from VelvetOptimiser</li>
+      </ul>
+    position: left
+  - title: Questions
+    content: >-
+      Compare the output we got here with the output of the simple assemblies
+      obtained in the introductory tutorial. <ul>
+        <li>What are the main differences between them?</li>
+        <li>Which has a higher “n50”? What does this mean?</li>
+      </ul>
+    backdrop: false
+  - title: Assemble with SPAdes
+    content: >-
+      We will now perform an assembly with the much more modern SPAdes
+      assembler. It goes through a similar process to Velvet in the fact that it
+      uses and simplifies de Bruijn graphs but it uses multiple values for k-mer
+      size and combines the resultant graphs. This combination produces very
+      good assemblies. When using SPAdes it is typical to choose at least 3
+      k-mer sizes. One low, one medium and one high. We will use 33, 55 and 91.
+    backdrop: true
+  - title: Assemble with SPAdes
+    element: '#tool-search-query'
+    content: Search for "SPAdes" tool
+    placement: right
+    textinsert: SPAdes
+  - title: Assemble with SPAdes
+    element: '#tool-search'
+    content: Click on the "SPAdes" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fspades%2Fspades%2F3.12.0%2Bgalaxy1"]
+        .tool-old-link
+  - title: Assemble with SPAdes
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Run only assembly": to `yes`</li>
+        <li>"K-mers to use separated by commas": to `33,55,91`</li>
+        <li>"Coverage cutoff": to `auto`</li>
+        <li>"Files -> forward reads": to `mutant_R1.fastq`</li>
+        <li>"Files -> reverse reads": to `mutant_R2.fastq`</li>
+      </ul>
+    position: left
+  - title: Assemble with SPAdes
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      You will now have 5 new files in your history:<ul>
+        <li>two Fasta files, one for contigs and one for scaffolds</li>
+        <li>two statistics files, one for contigs and one for scaffolds</li>
+        <li>the SPAdes log file.</li>
+      </ul> Examine each file, especially the stats files.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>Why would one of the contigs have much higher coverage than the others?</li>
+        <li>What could this represent?</li>
+      </ul>
+    backdrop: false
+  - title: Get contig statistics for SPAdes contigs
+    element: '#tool-search-query'
+    content: Search for "Fasta Statistics" tool
+    placement: right
+    textinsert: Fasta Statistics
+  - title: Get contig statistics for SPAdes contigs
+    element: '#tool-search'
+    content: Click on the "Fasta Statistics" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Ffasta_stats%2Ffasta-stats%2F1.0.1"]
+        .tool-old-link
+  - title: Get contig statistics for SPAdes contigs
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"fasta or multifasta file": to the output from SPAdes</li>
+      </ul>
+    position: left
+  - title: Questions
+    content: >-
+      Compare the output we got here with the output of the simple assemblies
+      obtained in the introductory tutorial. <ul>
+        <li>What are the main differences between them?</li>
+        <li>Did SPAdes produce a better assembly than the Velvet Optimiser?</li>
+      </ul>
+    backdrop: false
+  - title: Key points
+    content: |-
+      <ul>
+        <li>We learned about how the choice of k-mer size will affect assembly outcomes</li>
+        <li>We learned about the strategies that assemblers use to make reference genomes</li>
+        <li>We performed a number of assemblies with Velvet and SPAdes.</li>
+        <li>You should use SPAdes or another more modern assembler than Velvet for actual assemblies now.</li>
+      </ul>
+    backdrop: true

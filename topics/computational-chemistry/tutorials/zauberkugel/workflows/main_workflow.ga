@@ -1,0 +1,413 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Protein target prediction of a bioactive ligand with Align-it and ePharmaLib",
+    "creator": [
+        {
+            "class": "Person",
+            "email": "mailto:amaf.aurelien@yahoo.com",
+            "identifier": "https://orcid.org/0000-0002-6034-2016",
+            "name": "Aur\u00e9lien F. A. Moumbock"
+        },
+        {
+            "class": "Organization",
+            "name": "Albert-Ludwigs-Universit\u00e4t Freiburg"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Zauberkugel",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Query ligand"
+                }
+            ],
+            "label": "Query ligand",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 747.5521469116211,
+                "height": 62.083335876464844,
+                "left": 559.0104370117188,
+                "right": 759.0104522705078,
+                "top": 685.4688110351562,
+                "width": 200.00001525878906,
+                "x": 559.0104370117188,
+                "y": 685.4688110351562
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"smi\"]}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "63eee683-907c-40a4-b801-d977e0b2cb3e",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Pharmacophore library"
+                }
+            ],
+            "label": "Pharmacophore library",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 1033.8889236450195,
+                "height": 82.46527862548828,
+                "left": 780.9375610351562,
+                "right": 980.9375762939453,
+                "top": 951.4236450195312,
+                "width": 200.00001525878906,
+                "x": 780.9375610351562,
+                "y": 951.4236450195312
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"phar\"]}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "004f025f-dafc-4d26-8aec-88a64d013852",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_addh/openbabel_addh/3.1.1+galaxy1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "infile": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Ligand ionization state generation",
+            "name": "Add hydrogen atoms",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 746.4236679077148,
+                "height": 113.95833587646484,
+                "left": 776.99658203125,
+                "right": 976.9965972900391,
+                "top": 632.46533203125,
+                "width": 200.00001525878906,
+                "x": 776.99658203125,
+                "y": 632.46533203125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_addh/openbabel_addh/3.1.1+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "6e4b7e0c61a6",
+                "name": "openbabel_addh",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"pH_value\": \"7.4\", \"polar\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1.1+galaxy1",
+            "type": "tool",
+            "uuid": "857b1ca0-d39a-463f-9840-cf2c7e6b363f",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "24b52c0f-f6e2-4d14-bd92-2aa620c91d83"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "split_parms|input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Splitting ePharmaLib into individual pharmacophores",
+            "name": "Split file",
+            "outputs": [
+                {
+                    "name": "list_output_generic",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 1036.1979370117188,
+                "height": 154.72222900390625,
+                "left": 1009.982666015625,
+                "right": 1209.982681274414,
+                "top": 881.4757080078125,
+                "width": 200.00001525878906,
+                "x": 1009.982666015625,
+                "y": 881.4757080078125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0",
+            "tool_shed_repository": {
+                "changeset_revision": "6cbe2f30c2d7",
+                "name": "split_file_to_collection",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"split_parms\": {\"select_ftype\": \"generic\", \"__current_case__\": 6, \"input\": {\"__class__\": \"ConnectedValue\"}, \"split_method\": {\"select_split_method\": \"regex\", \"__current_case__\": 0, \"generic_regex\": \"\\\\$\\\\$\\\\$\\\\$\", \"split_after\": \"true\"}, \"select_mode\": {\"mode\": \"chunk\", \"__current_case__\": 0, \"chunksize\": \"1\"}, \"newfilenames\": \"epharmalib\", \"select_allocate\": {\"allocate\": \"batch\", \"__current_case__\": 1}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.5.0",
+            "type": "tool",
+            "uuid": "1baf3f94-2aa7-42e9-968e-959fffcc462b",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "list_output_generic",
+                    "uuid": "6d0c53e6-2607-410f-a529-3fc4cd1d70b4"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/rdconf/rdconf/2020.03.4+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "infile": {
+                    "id": 2,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": " Low-energy ligand conformer search",
+            "name": "RDConf: Low-energy ligand conformer search",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "sdf"
+                }
+            ],
+            "position": {
+                "bottom": 784.18408203125,
+                "height": 154.72222900390625,
+                "left": 1001.0070190429688,
+                "right": 1201.0070343017578,
+                "top": 629.4618530273438,
+                "width": 200.00001525878906,
+                "x": 1001.0070190429688,
+                "y": 629.4618530273438
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/rdconf/rdconf/2020.03.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5c501eb8d56c",
+                "name": "rdconf",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"CNT\": \"100\", \"E\": \"10.0\", \"N\": \"1\", \"R\": \"0.7\", \"etkdg\": \"false\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"mmff\": \"false\", \"nomin\": \"false\", \"s\": \"9162006\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2020.03.4+galaxy0",
+            "type": "tool",
+            "uuid": "0c02c9e1-8579-4370-aa2e-575956b017cc",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "04f08403-a7e1-4350-94e0-17af711f0113"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/align_it/ctb_alignit/1.0.4+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "database": {
+                    "id": 4,
+                    "output_name": "outfile"
+                },
+                "reference": {
+                    "id": 3,
+                    "output_name": "list_output_generic"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Pharmacophore alignment",
+            "outputs": [
+                {
+                    "name": "aligned_pharmacophores",
+                    "type": "phar"
+                },
+                {
+                    "name": "aligned_structures",
+                    "type": "smi"
+                },
+                {
+                    "name": "score_result_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 1037.3438110351562,
+                "height": 408.92364501953125,
+                "left": 1244.010498046875,
+                "right": 1444.010513305664,
+                "top": 628.420166015625,
+                "width": 200.00001525878906,
+                "x": 1244.010498046875,
+                "y": 628.420166015625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/align_it/ctb_alignit/1.0.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "06d9381593a4",
+                "name": "align_it",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"best\": \"1\", \"cutoff\": \"0.5\", \"database\": {\"__class__\": \"ConnectedValue\"}, \"epsilon\": \"0.5\", \"fgroups\": [\"AROM\", \"HDON\", \"HACC\", \"LIPO\", \"CHARGE\"], \"merge\": \"false\", \"noHybrid\": \"true\", \"noNormal\": \"true\", \"oformat\": \"smi\", \"rankBy\": \"TVERSKY_REF\", \"reference\": {\"__class__\": \"ConnectedValue\"}, \"scoreOnly\": \"false\", \"withExclusion\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.4+galaxy0",
+            "type": "tool",
+            "uuid": "5d8f4ad4-8831-405f-8cef-7a9d0c114ddd",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "aligned_pharmacophores",
+                    "uuid": "7a9ad93a-e27c-48f2-a17e-afd5afcc5c47"
+                },
+                {
+                    "label": null,
+                    "output_name": "score_result_file",
+                    "uuid": "ec32ab04-d509-48ac-94c4-145a1547a134"
+                },
+                {
+                    "label": null,
+                    "output_name": "aligned_structures",
+                    "uuid": "d3dd55d0-472a-4d38-b0c0-f5d61ecf167f"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "inputs": {
+                    "id": 5,
+                    "output_name": "score_result_file"
+                }
+            },
+            "inputs": [],
+            "label": "Concatenating the pharmacophore alignment scores",
+            "name": "Concatenate datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 783.1423950195312,
+                "height": 154.72222900390625,
+                "left": 1475.9896240234375,
+                "right": 1675.9896392822266,
+                "top": 628.420166015625,
+                "width": 200.00001525878906,
+                "x": 1475.9896240234375,
+                "y": 628.420166015625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "f46f0e4f75c4",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"inputs\": {\"__class__\": \"ConnectedValue\"}, \"queries\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.1",
+            "type": "tool",
+            "uuid": "c3b7d2a3-b06e-4a4f-aee2-a2b8941ebfdb",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "9cfedc75-e78a-4425-b8dc-2019f1d8479d"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "sort1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Ranking the predicted protein targets according to the Tversky index (10th column)",
+            "name": "Sort",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 782.2048950195312,
+                "height": 154.72222900390625,
+                "left": 1700.0001220703125,
+                "right": 1900.0001373291016,
+                "top": 627.482666015625,
+                "width": 200.00001525878906,
+                "x": 1700.0001220703125,
+                "y": 627.482666015625
+            },
+            "post_job_actions": {
+                "EmailActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "EmailAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "sort1",
+            "tool_state": "{\"column\": \"10\", \"column_set\": [], \"header_lines\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"order\": \"DESC\", \"style\": \"num\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "3bbbee13-46e9-48ad-9ecc-c874da658723",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "f1cb518a-3021-44b3-a03c-2443d7cddc91"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "cheminformatics",
+        "computational-chemistry"
+    ],
+    "uuid": "634ace4f-bbcb-4578-bc68-2e271d765d21",
+    "version": 52
+}

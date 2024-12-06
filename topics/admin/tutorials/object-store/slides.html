@@ -1,0 +1,58 @@
+---
+layout: tutorial_slides
+logo: assets/images/gat.png
+
+title: "Storage Management"
+questions:
+- How does Galaxy locate data?
+- How can I have Galaxy use multiple storage locations?
+objectives:
+- Setup Galaxy with both the Hierarachical and Distributed Object Storages
+key_points:
+- The distributed object store configuration allows you to easily expand that storage that is attached to your Galaxy.
+- You can move data around without affecting users.
+contributors:
+  - natefoo
+  - martenson
+  - hexylena
+subtopic: data
+
+recordings:
+- captioners:
+  - cat-bro
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 18M
+  youtube_id: Hv2bvjk5sjE
+  speakers:
+  - gmauro
+
+---
+
+# Object Store Plugins
+
+Direct:
+- Disk
+- Amazon S3/OpenStack Swift
+- Experimental
+  - Azure
+  - CloudBridge → S3, Swift, Azure, GCE
+
+---
+
+# Object Storage Strategies
+
+.pull-left[
+**Hierarchical**
+
+- Choose between options based on priority
+- Always uses first (unless max_pct_full + too full)
+
+]
+
+.pull-right[
+**Distributed**
+
+- Randomly choose between several storage options
+- Can fill up at same rate, or different (weighting)
+]

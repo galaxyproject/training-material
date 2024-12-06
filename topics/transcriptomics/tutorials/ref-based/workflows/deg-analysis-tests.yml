@@ -1,0 +1,165 @@
+---
+- doc: "Test sample data for Transcriptomics:Refence-based - DEG"
+  job:
+    Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz:
+      class: File
+      # Can be uncommented when https://github.com/galaxyproject/galaxy/pull/16014 is introduced to server
+      # location: https://zenodo.org/record/6457007/files/Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz
+      # decompress: true
+      filetype: gtf
+      path: test-data/Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf
+    Input Dataset Collection:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: GSM461176_untreat_single
+        location: https://zenodo.org/record/6457007/files/GSM461176_untreat_single_featureCounts.counts
+        filetype: tabular
+      - class: File
+        identifier: GSM461177_untreat_paired
+        location: https://zenodo.org/record/6457007/files/GSM461177_untreat_paired_featureCounts.counts
+        filetype: tabular
+      - class: File
+        identifier: GSM461178_untreat_paired
+        location: https://zenodo.org/record/6457007/files/GSM461178_untreat_paired_featureCounts.counts
+        filetype: tabular
+      - class: File
+        identifier: GSM461179_treat_single
+        location: https://zenodo.org/record/6457007/files/GSM461179_treat_single_featureCounts.counts
+        filetype: tabular
+      - class: File
+        identifier: GSM461180_treat_paired
+        location: https://zenodo.org/record/6457007/files/GSM461180_treat_paired_featureCounts.counts
+        filetype: tabular
+      - class: File
+        identifier: GSM461181_treat_paired
+        location: https://zenodo.org/record/6457007/files/GSM461181_treat_paired_featureCounts.counts
+        filetype: tabular
+      - class: File
+        identifier: GSM461182_untreat_single
+        location: https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.counts
+        filetype: tabular
+    header:
+      class: File
+      path: test-data/header.txt
+      filetype: tabular
+    KEGG pathways to plot:
+      class: File
+      path: test-data/KEGG_toplot.txt
+      filetype: tabular
+  outputs:
+    DESeq2_plots:
+      asserts:
+        has_size:
+          value: 3656746
+          delta: 300000
+    DESeq2_normalized_counts:
+      asserts:
+        has_n_lines:
+          n: 23933
+        has_line:
+          line: "FBgn0250732\t1159.72839477312\t1213.33837602726\t1244.55948687904\t1247.50499330866\t874.22856885554\t1090.77053662496\t1051.75746305442"
+    go_terms:
+      asserts:
+        has_n_lines:
+          n: 12215
+        has_line:
+          line: "GO:0005576\t1.64668479430669e-09\t1\t109\t1064\textracellular region\tCC\t2.01126080776619e-05\t1"
+    go_plot:
+      asserts:
+        has_size:
+          value: 7183
+          delta: 700
+    go_genes:
+      asserts:
+        has_n_lines:
+          n: 12215
+        has_line:
+          line: "GO:0005978\tFBGN0003076,FBGN0266064,FBGN0036862,FBGN0020618,FBGN0053138,FBGN0034950,FBGN0011754,FBGN0265191"
+    kegg_pathways:
+      asserts:
+        has_n_lines:
+          n: 128
+        has_line:
+          line: "00010\t2.05063769648692e-05\t0.999996086029403\t14\t47\t0.00260430987453839\t1"
+    kegg_genes:
+      asserts:
+        has_n_lines:
+          n: 128
+        has_line:
+          line: "04512\tFBGN0029167,FBGN0029896,FBGN0000299,FBGN0016075"
+    go_overrepresented:
+      asserts:
+        has_n_lines:
+          n: 60
+        has_line:
+          line: "GO:0005576\t1.64668479430669e-09\t1\t109\t1064\textracellular region\tCC\t2.01126080776619e-05\t1"
+    kegg_overrepresented:
+      asserts:
+        has_n_lines:
+          n: 2
+        has_line:
+          line: "00010\t2.05063769648692e-05\t0.999996086029403\t14\t47\t0.00260430987453839\t1"
+    DESeq2_annotated_results_with_header:
+      asserts:
+        has_n_lines:
+          n: 23933
+        has_line:
+          line: "FBgn0025111\t1508.08707143002\t2.6803835034663\t0.099224531264837\t27.013314845622\t1.0310095197245e-160\t2.22981583878416e-157\tchrX\t10778953\t10786907\t-\tprotein_coding\tAnt2"
+    z_score:
+      asserts:
+        has_n_lines:
+          n: 23933
+        has_line:
+          line: "FBgn0250732\t0.251834\t0.651925\t0.884927\t0.906910\t-1.878847\t-0.262797\t-0.553951"
+    go_underrepresented:
+      asserts:
+        has_n_lines:
+          n: 7
+        has_line:
+          line: "GO:0016071\t0.999997512116942\t7.82099466455627e-06\t12\t444\tmRNA metabolic process\tBP\t1\t0.0136465184046986"
+    kegg_underrepresented:
+      asserts:
+        has_n_lines:
+          n: 0
+    go_underrepresented_categories:
+      asserts:
+        - that: "has_n_lines"
+          n: 2
+        - that: "has_line"
+          line: "BP\t5"
+        - that: "has_line"
+          line: "CC\t2"
+    go_overrepresented_categories:
+      asserts:
+        - that: "has_n_lines"
+          n: 3
+        - that: "has_line"
+          line: "BP\t50"
+        - that: "has_line"
+          line: "CC\t5"
+        - that: "has_line"
+          line: "MF\t5"
+    heatmap_log:
+      asserts:
+        has_size:
+          value: 27113
+          delta: 2000
+    heatmap_zscore:
+      asserts:
+        has_size:
+          value: 27173
+          delta: 2000
+    pathview_plot:
+      element_tests:
+        dme00010:
+          asserts:
+            has_size:
+              value: 31803
+              delta: 3000
+        dme03040:
+          asserts:
+            has_size:
+              value: 61695
+              delta: 6000

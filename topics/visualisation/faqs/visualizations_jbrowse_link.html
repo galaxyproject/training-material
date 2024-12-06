@@ -1,0 +1,9 @@
+---
+area: jbrowse
+---
+
+{% capture jbrowse %}{{ site.baseurl }}/assets/jbrowse/index.html{% endcapture %}
+{% capture jbrowsedatadir %}{{ site.baseurl }}{{ page.url | remove: "tutorial.html" }}{{ include.datadir }}{% endcapture %}
+{% capture jbid %}{% if include.id %}{{ include.id }}{% else %}embedded_jbrowse{% endif %}{% endcapture %}
+
+<a href="#{{ jbid }}" onclick="document.getElementById('{{ jbid }}').src='{{ jbrowse }}?tracklist=0&data={{ jbrowsedatadir }}&loc={{ include.loc }}&tracks={{ include.tracks }}'">{{ include.loc }}</a>

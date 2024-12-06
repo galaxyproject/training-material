@@ -1,1 +1,497 @@
-{"uuid": "31bed17e-ceef-4581-95bf-db05c4234aa9", "tags": [], "format-version": "0.1", "name": "Du Novo GTN tutorial - Make consensus sequences", "steps": {"0": {"tool_id": null, "tool_version": null, "outputs": [], "workflow_outputs": [{"output_name": "output", "uuid": "5eb6af50-33a5-42ae-a34b-a92974ddec3c", "label": null}], "input_connections": {}, "tool_state": "{\"name\": \"SRR1799908_forward\"}", "id": 0, "uuid": "f9817ffe-4cdb-471f-a921-1b20e96e92d6", "errors": null, "name": "Input dataset", "label": "SRR1799908_forward", "inputs": [{"name": "SRR1799908_forward", "description": ""}], "position": {"top": 281, "left": 200}, "annotation": "", "content_id": null, "type": "data_input"}, "1": {"tool_id": null, "tool_version": null, "outputs": [], "workflow_outputs": [{"output_name": "output", "uuid": "9228fb67-0e41-4f3c-96fa-7da93c797649", "label": null}], "input_connections": {}, "tool_state": "{\"name\": \"SRR1799908_reverse\"}", "id": 1, "uuid": "efc0fed6-846f-467f-82a3-45898dc3e0a4", "errors": null, "name": "Input dataset", "label": "SRR1799908_reverse", "inputs": [{"name": "SRR1799908_reverse", "description": ""}], "position": {"top": 385, "left": 202}, "annotation": "", "content_id": null, "type": "data_input"}, "2": {"tool_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/make_families/2.15", "tool_version": "2.15", "outputs": [{"type": "tabular", "name": "output"}], "workflow_outputs": [], "input_connections": {"fastq2": {"output_name": "output", "id": 1}, "fastq1": {"output_name": "output", "id": 0}}, "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"invariant\": \"\\\"5\\\"\", \"fastq2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"fastq1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"taglen\": \"\\\"12\\\"\", \"chromInfo\": \"\\\"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\\\"\"}", "id": 2, "tool_shed_repository": {"owner": "nick", "changeset_revision": "9dc43bf7d1db", "name": "dunovo", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "99dae8c9-68c3-4870-a503-c1f3de75b152", "errors": null, "name": "Du Novo: Make families", "post_job_actions": {"HideDatasetActionoutput": {"output_name": "output", "action_type": "HideDatasetAction", "action_arguments": {}}}, "label": null, "inputs": [{"name": "fastq2", "description": "runtime parameter for tool Du Novo: Make families"}, {"name": "fastq1", "description": "runtime parameter for tool Du Novo: Make families"}], "position": {"top": 281, "left": 430}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/make_families/2.15", "type": "tool"}, "3": {"tool_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/correct_barcodes/2.15", "tool_version": "2.15", "outputs": [{"type": "tabular", "name": "output"}], "workflow_outputs": [], "input_connections": {"input": {"output_name": "output", "id": 2}}, "tool_state": "{\"__page__\": null, \"dist\": \"\\\"3\\\"\", \"__rerun_remap_job_id__\": null, \"pos\": \"\\\"2\\\"\", \"phone\": \"\\\"false\\\"\", \"mapq\": \"\\\"20\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"check_ids\": \"\\\"true\\\"\", \"advanced\": \"{\\\"chunkmbs\\\": \\\"512\\\"}\"}", "id": 3, "tool_shed_repository": {"owner": "nick", "changeset_revision": "9dc43bf7d1db", "name": "dunovo", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "c0f8cf5f-4975-403e-ac3f-c518f0ee293d", "errors": null, "name": "Du Novo: Correct barcodes", "post_job_actions": {"HideDatasetActionoutput": {"output_name": "output", "action_type": "HideDatasetAction", "action_arguments": {}}}, "label": null, "inputs": [{"name": "input", "description": "runtime parameter for tool Du Novo: Correct barcodes"}], "position": {"top": 282, "left": 691}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/correct_barcodes/2.15", "type": "tool"}, "4": {"tool_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/align_families/2.15", "tool_version": "2.15", "outputs": [{"type": "tabular", "name": "output"}], "workflow_outputs": [], "input_connections": {"input": {"output_name": "output", "id": 3}}, "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"aligner\": \"\\\"kalign\\\"\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"phone\": \"\\\"false\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"check_ids\": \"\\\"true\\\"\"}", "id": 4, "tool_shed_repository": {"owner": "nick", "changeset_revision": "9dc43bf7d1db", "name": "dunovo", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "350d6c9d-347a-4cc7-a271-80f08968cd2b", "errors": null, "name": "Du Novo: Align families", "post_job_actions": {"HideDatasetActionoutput": {"output_name": "output", "action_type": "HideDatasetAction", "action_arguments": {}}}, "label": null, "inputs": [{"name": "input", "description": "runtime parameter for tool Du Novo: Align families"}], "position": {"top": 394, "left": 693}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/align_families/2.15", "type": "tool"}, "5": {"tool_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/dunovo/2.15", "tool_version": "2.15", "outputs": [{"type": "data", "name": "dcs1"}, {"type": "data", "name": "dcs2"}, {"type": "data", "name": "sscs1"}, {"type": "data", "name": "sscs2"}], "workflow_outputs": [], "input_connections": {"input": {"output_name": "output", "id": 4}}, "tool_state": "{\"out_format\": \"{\\\"qual\\\": \\\"40\\\", \\\"type\\\": \\\"fastq\\\", \\\"__current_case__\\\": 0}\", \"__page__\": null, \"min_cons_reads\": \"\\\"0\\\"\", \"cons_thres\": \"\\\"0.7\\\"\", \"qual_format\": \"\\\"sanger\\\"\", \"keep_sscs\": \"\\\"true\\\"\", \"phone\": \"\\\"false\\\"\", \"min_reads\": \"\\\"3\\\"\", \"qual_thres\": \"\\\"25\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null}", "id": 5, "tool_shed_repository": {"owner": "nick", "changeset_revision": "9dc43bf7d1db", "name": "dunovo", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "c81cbcb1-d3e0-4044-9c55-9edf699de6e7", "errors": null, "name": "Du Novo: Make consensus reads", "post_job_actions": {"HideDatasetActiondcs1": {"output_name": "dcs1", "action_type": "HideDatasetAction", "action_arguments": {}}, "ChangeDatatypeActionsscs2": {"output_name": "sscs2", "action_type": "ChangeDatatypeAction", "action_arguments": {"newtype": "fastqsanger"}}, "ChangeDatatypeActionsscs1": {"output_name": "sscs1", "action_type": "ChangeDatatypeAction", "action_arguments": {"newtype": "fastqsanger"}}, "HideDatasetActiondcs2": {"output_name": "dcs2", "action_type": "HideDatasetAction", "action_arguments": {}}, "ChangeDatatypeActiondcs1": {"output_name": "dcs1", "action_type": "ChangeDatatypeAction", "action_arguments": {"newtype": "fastqsanger"}}, "ChangeDatatypeActiondcs2": {"output_name": "dcs2", "action_type": "ChangeDatatypeAction", "action_arguments": {"newtype": "fastqsanger"}}, "HideDatasetActionsscs1": {"output_name": "sscs1", "action_type": "HideDatasetAction", "action_arguments": {}}, "HideDatasetActionsscs2": {"output_name": "sscs2", "action_type": "HideDatasetAction", "action_arguments": {}}}, "label": null, "inputs": [{"name": "input", "description": "runtime parameter for tool Du Novo: Make consensus reads"}], "position": {"top": 511, "left": 691}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/dunovo/2.15", "type": "tool"}, "6": {"tool_id": "toolshed.g2.bx.psu.edu/repos/nick/sequence_content_trimmer/sequence_content_trimmer/0.1", "tool_version": "0.1", "outputs": [{"type": "input", "name": "output1"}, {"type": "input", "name": "output2"}], "workflow_outputs": [{"output_name": "output2", "uuid": "0f994723-3603-4a3c-adfe-ae068a079661", "label": null}, {"output_name": "output1", "uuid": "e67c3c59-f6f6-486d-86e2-f68e8d54b863", "label": null}], "input_connections": {"paired|input1": {"output_name": "dcs1", "id": 5}, "paired|input2": {"output_name": "dcs2", "id": 5}}, "tool_state": "{\"__page__\": null, \"win_len\": \"\\\"10\\\"\", \"invert\": \"\\\"true\\\"\", \"min_len\": \"{\\\"value\\\": \\\"50\\\", \\\"__current_case__\\\": 0, \\\"has_min_len\\\": \\\"true\\\"}\", \"paired\": \"{\\\"input2\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"is_paired\\\": \\\"true\\\", \\\"input1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0}\", \"bases\": \"\\\"ACGT\\\"\", \"thres\": \"\\\"0.2\\\"\", \"__rerun_remap_job_id__\": null}", "id": 6, "tool_shed_repository": {"owner": "nick", "changeset_revision": "7f170cb06e2e", "name": "sequence_content_trimmer", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "b214143b-75bf-41f1-9ca6-82e8c64f23ad", "errors": null, "name": "Sequence Content Trimmer", "post_job_actions": {"RenameDatasetActionoutput2": {"output_name": "output2", "action_type": "RenameDatasetAction", "action_arguments": {"newname": "Trimmed DCS (mate 2)"}}, "RenameDatasetActionoutput1": {"output_name": "output1", "action_type": "RenameDatasetAction", "action_arguments": {"newname": "Trimmed DCS (mate 1)"}}}, "label": "DCS: Sequence Content Trimmer", "inputs": [{"name": "paired", "description": "runtime parameter for tool Sequence Content Trimmer"}, {"name": "paired", "description": "runtime parameter for tool Sequence Content Trimmer"}], "position": {"top": 282, "left": 996}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/nick/sequence_content_trimmer/sequence_content_trimmer/0.1", "type": "tool"}, "7": {"tool_id": "toolshed.g2.bx.psu.edu/repos/nick/sequence_content_trimmer/sequence_content_trimmer/0.1", "tool_version": "0.1", "outputs": [{"type": "input", "name": "output1"}, {"type": "input", "name": "output2"}], "workflow_outputs": [{"output_name": "output2", "uuid": "d993247b-3ba4-4427-b711-f48034aa8c2a", "label": null}, {"output_name": "output1", "uuid": "75dfe52d-711e-4826-ba9b-b4feed30f5bf", "label": ""}], "input_connections": {"paired|input1": {"output_name": "sscs1", "id": 5}, "paired|input2": {"output_name": "sscs2", "id": 5}}, "tool_state": "{\"__page__\": null, \"win_len\": \"\\\"10\\\"\", \"invert\": \"\\\"true\\\"\", \"min_len\": \"{\\\"value\\\": \\\"50\\\", \\\"__current_case__\\\": 0, \\\"has_min_len\\\": \\\"true\\\"}\", \"paired\": \"{\\\"input2\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"is_paired\\\": \\\"true\\\", \\\"input1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0}\", \"bases\": \"\\\"ACGT\\\"\", \"thres\": \"\\\"0.2\\\"\", \"__rerun_remap_job_id__\": null}", "id": 7, "tool_shed_repository": {"owner": "nick", "changeset_revision": "7f170cb06e2e", "name": "sequence_content_trimmer", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "f5ef3a57-7d34-4c4c-ba0e-67b2fb56a7b0", "errors": null, "name": "Sequence Content Trimmer", "post_job_actions": {"RenameDatasetActionoutput2": {"output_name": "output2", "action_type": "RenameDatasetAction", "action_arguments": {"newname": "Trimmed SSCS (mate 2)"}}, "RenameDatasetActionoutput1": {"output_name": "output1", "action_type": "RenameDatasetAction", "action_arguments": {"newname": "Trimmed SSCS (mate 1)"}}}, "label": "SSCS: Sequence Content Trimmer", "inputs": [{"name": "paired", "description": "runtime parameter for tool Sequence Content Trimmer"}, {"name": "paired", "description": "runtime parameter for tool Sequence Content Trimmer"}], "position": {"top": 472, "left": 998}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/nick/sequence_content_trimmer/sequence_content_trimmer/0.1", "type": "tool"}}, "annotation": "Run this on raw duplex sequencing reads to produce duplex consensus sequences.\n", "a_galaxy_workflow": "true"}
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Run this on raw duplex sequencing reads to produce duplex consensus sequences.\n",
+  "format-version": "0.1",
+  "name": "Du Novo GTN Tutorial - Make Consensus Sequences",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "SRR1799908_forward"
+        }
+      ],
+      "label": "SRR1799908_forward",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 281
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"SRR1799908_forward\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "f9817ffe-4cdb-471f-a921-1b20e96e92d6",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "5eb6af50-33a5-42ae-a34b-a92974ddec3c"
+        }
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "SRR1799908_reverse"
+        }
+      ],
+      "label": "SRR1799908_reverse",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 202,
+        "top": 385
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"SRR1799908_reverse\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "efc0fed6-846f-467f-82a3-45898dc3e0a4",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "9228fb67-0e41-4f3c-96fa-7da93c797649"
+        }
+      ]
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/make_families/2.15",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "fastq1": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "fastq2": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Du Novo: Make families",
+          "name": "fastq2"
+        },
+        {
+          "description": "runtime parameter for tool Du Novo: Make families",
+          "name": "fastq1"
+        }
+      ],
+      "label": null,
+      "name": "Du Novo: Make families",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 430,
+        "top": 281
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutput": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/make_families/2.15",
+      "tool_shed_repository": {
+        "changeset_revision": "9dc43bf7d1db",
+        "name": "dunovo",
+        "owner": "nick",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"invariant\": \"\\\"5\\\"\", \"fastq2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"fastq1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"taglen\": \"\\\"12\\\"\", \"chromInfo\": \"\\\"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\\\"\"}",
+      "tool_version": "2.15",
+      "type": "tool",
+      "uuid": "99dae8c9-68c3-4870-a503-c1f3de75b152",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/correct_barcodes/2.15",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "input": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Du Novo: Correct barcodes",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Du Novo: Correct barcodes",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 691,
+        "top": 282
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutput": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/correct_barcodes/2.15",
+      "tool_shed_repository": {
+        "changeset_revision": "9dc43bf7d1db",
+        "name": "dunovo",
+        "owner": "nick",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"dist\": \"\\\"3\\\"\", \"__rerun_remap_job_id__\": null, \"pos\": \"\\\"2\\\"\", \"phone\": \"\\\"false\\\"\", \"mapq\": \"\\\"20\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"check_ids\": \"\\\"true\\\"\", \"advanced\": \"{\\\"chunkmbs\\\": \\\"512\\\"}\"}",
+      "tool_version": "2.15",
+      "type": "tool",
+      "uuid": "c0f8cf5f-4975-403e-ac3f-c518f0ee293d",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/align_families/2.15",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "input": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Du Novo: Align families",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Du Novo: Align families",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 693,
+        "top": 394
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutput": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/align_families/2.15",
+      "tool_shed_repository": {
+        "changeset_revision": "9dc43bf7d1db",
+        "name": "dunovo",
+        "owner": "nick",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"aligner\": \"\\\"kalign\\\"\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"phone\": \"\\\"false\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"check_ids\": \"\\\"true\\\"\"}",
+      "tool_version": "2.15",
+      "type": "tool",
+      "uuid": "350d6c9d-347a-4cc7-a271-80f08968cd2b",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/dunovo/2.15",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "input": {
+          "id": 4,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Du Novo: Make consensus reads",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Du Novo: Make consensus reads",
+      "outputs": [
+        {
+          "name": "dcs1",
+          "type": "data"
+        },
+        {
+          "name": "dcs2",
+          "type": "data"
+        },
+        {
+          "name": "sscs1",
+          "type": "data"
+        },
+        {
+          "name": "sscs2",
+          "type": "data"
+        }
+      ],
+      "position": {
+        "left": 691,
+        "top": 511
+      },
+      "post_job_actions": {
+        "ChangeDatatypeActiondcs1": {
+          "action_arguments": {
+            "newtype": "fastqsanger"
+          },
+          "action_type": "ChangeDatatypeAction",
+          "output_name": "dcs1"
+        },
+        "ChangeDatatypeActiondcs2": {
+          "action_arguments": {
+            "newtype": "fastqsanger"
+          },
+          "action_type": "ChangeDatatypeAction",
+          "output_name": "dcs2"
+        },
+        "ChangeDatatypeActionsscs1": {
+          "action_arguments": {
+            "newtype": "fastqsanger"
+          },
+          "action_type": "ChangeDatatypeAction",
+          "output_name": "sscs1"
+        },
+        "ChangeDatatypeActionsscs2": {
+          "action_arguments": {
+            "newtype": "fastqsanger"
+          },
+          "action_type": "ChangeDatatypeAction",
+          "output_name": "sscs2"
+        },
+        "HideDatasetActiondcs1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "dcs1"
+        },
+        "HideDatasetActiondcs2": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "dcs2"
+        },
+        "HideDatasetActionsscs1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "sscs1"
+        },
+        "HideDatasetActionsscs2": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "sscs2"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/nick/dunovo/dunovo/2.15",
+      "tool_shed_repository": {
+        "changeset_revision": "9dc43bf7d1db",
+        "name": "dunovo",
+        "owner": "nick",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"out_format\": \"{\\\"qual\\\": \\\"40\\\", \\\"type\\\": \\\"fastq\\\", \\\"__current_case__\\\": 0}\", \"__page__\": null, \"min_cons_reads\": \"\\\"0\\\"\", \"cons_thres\": \"\\\"0.7\\\"\", \"qual_format\": \"\\\"sanger\\\"\", \"keep_sscs\": \"\\\"true\\\"\", \"phone\": \"\\\"false\\\"\", \"min_reads\": \"\\\"3\\\"\", \"qual_thres\": \"\\\"25\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null}",
+      "tool_version": "2.15",
+      "type": "tool",
+      "uuid": "c81cbcb1-d3e0-4044-9c55-9edf699de6e7",
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/nick/sequence_content_trimmer/sequence_content_trimmer/0.1",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "paired|input1": {
+          "id": 5,
+          "output_name": "dcs1"
+        },
+        "paired|input2": {
+          "id": 5,
+          "output_name": "dcs2"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Sequence Content Trimmer",
+          "name": "paired"
+        },
+        {
+          "description": "runtime parameter for tool Sequence Content Trimmer",
+          "name": "paired"
+        }
+      ],
+      "label": "DCS: Sequence Content Trimmer",
+      "name": "Sequence Content Trimmer",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "input"
+        },
+        {
+          "name": "output2",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 996,
+        "top": 282
+      },
+      "post_job_actions": {
+        "RenameDatasetActionoutput1": {
+          "action_arguments": {
+            "newname": "Trimmed DCS (mate 1)"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output1"
+        },
+        "RenameDatasetActionoutput2": {
+          "action_arguments": {
+            "newname": "Trimmed DCS (mate 2)"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output2"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/nick/sequence_content_trimmer/sequence_content_trimmer/0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "7f170cb06e2e",
+        "name": "sequence_content_trimmer",
+        "owner": "nick",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"win_len\": \"\\\"10\\\"\", \"invert\": \"\\\"true\\\"\", \"min_len\": \"{\\\"value\\\": \\\"50\\\", \\\"__current_case__\\\": 0, \\\"has_min_len\\\": \\\"true\\\"}\", \"paired\": \"{\\\"input2\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"is_paired\\\": \\\"true\\\", \\\"input1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0}\", \"bases\": \"\\\"ACGT\\\"\", \"thres\": \"\\\"0.2\\\"\", \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.1",
+      "type": "tool",
+      "uuid": "b214143b-75bf-41f1-9ca6-82e8c64f23ad",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output2",
+          "uuid": "0f994723-3603-4a3c-adfe-ae068a079661"
+        },
+        {
+          "label": null,
+          "output_name": "output1",
+          "uuid": "e67c3c59-f6f6-486d-86e2-f68e8d54b863"
+        }
+      ]
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/nick/sequence_content_trimmer/sequence_content_trimmer/0.1",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "paired|input1": {
+          "id": 5,
+          "output_name": "sscs1"
+        },
+        "paired|input2": {
+          "id": 5,
+          "output_name": "sscs2"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Sequence Content Trimmer",
+          "name": "paired"
+        },
+        {
+          "description": "runtime parameter for tool Sequence Content Trimmer",
+          "name": "paired"
+        }
+      ],
+      "label": "SSCS: Sequence Content Trimmer",
+      "name": "Sequence Content Trimmer",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "input"
+        },
+        {
+          "name": "output2",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 998,
+        "top": 472
+      },
+      "post_job_actions": {
+        "RenameDatasetActionoutput1": {
+          "action_arguments": {
+            "newname": "Trimmed SSCS (mate 1)"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output1"
+        },
+        "RenameDatasetActionoutput2": {
+          "action_arguments": {
+            "newname": "Trimmed SSCS (mate 2)"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output2"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/nick/sequence_content_trimmer/sequence_content_trimmer/0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "7f170cb06e2e",
+        "name": "sequence_content_trimmer",
+        "owner": "nick",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"win_len\": \"\\\"10\\\"\", \"invert\": \"\\\"true\\\"\", \"min_len\": \"{\\\"value\\\": \\\"50\\\", \\\"__current_case__\\\": 0, \\\"has_min_len\\\": \\\"true\\\"}\", \"paired\": \"{\\\"input2\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"is_paired\\\": \\\"true\\\", \\\"input1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0}\", \"bases\": \"\\\"ACGT\\\"\", \"thres\": \"\\\"0.2\\\"\", \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.1",
+      "type": "tool",
+      "uuid": "f5ef3a57-7d34-4c4c-ba0e-67b2fb56a7b0",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output2",
+          "uuid": "d993247b-3ba4-4427-b711-f48034aa8c2a"
+        },
+        {
+          "label": "",
+          "output_name": "output1",
+          "uuid": "75dfe52d-711e-4826-ba9b-b4feed30f5bf"
+        }
+      ]
+    }
+  },
+  "tags": [
+    "variant-analysis"
+  ],
+  "uuid": "31bed17e-ceef-4581-95bf-db05c4234aa9"
+}

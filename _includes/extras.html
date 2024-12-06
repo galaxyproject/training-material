@@ -1,0 +1,79 @@
+<li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	{% icon galaxy-gear %} Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="{% link user/theme.md %}" class="dropdown-item">
+		{% icon gtn-theme %} Theme
+	</a>
+
+	<a href="{% link user/privacy.md %}" class="dropdown-item">
+		{% icon pref-dataprivate %} Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/{{ page.path }}">
+          {% icon github %} Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="{% link stats.md %}">
+            {% icon galaxy-barchart %} GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page={{site.baseurl}}{{ page.url }}">
+            {% icon galaxy-barchart %} Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        {% if page.layout == 'topic' %}
+            {% assign fdbk_by_topic = site.data['feedback'] | how_many_topic_feedbacks:site.data[page.topic_name].title %}
+            {% if fdbk_by_topic > 0 %}
+                <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#topic-{{ page.topic_name }}">
+                    {% icon galaxy-barchart %} Topic feedback
+                </a>
+            {% else %}
+                <a class="dropdown-item" href="{% link feedback.md %}">
+                    {% icon galaxy-barchart %} GTN feedback
+                </a>
+            {% endif %}
+        {% elsif page.layout == 'tutorial_hands_on' %}
+            {% assign fdbk_by_tutorial = site.data['feedback'] | how_many_tutorial_feedbacks:page.title %}
+            {% if fdbk_by_tutorial > 0}
+                <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#tutorial-{{ page.tutorial_name }}">
+                    {% icon galaxy-barchart %} Tutorial feedback
+                </a>
+            {% else %}
+                <a class="dropdown-item" href="{% link feedback.md %}">
+                    {% icon galaxy-barchart %} GTN feedback
+                </a>
+            {% endif %}
+        {% else %}
+            <a class="dropdown-item" href="{% link feedback.md %}">
+                {% icon galaxy-barchart %} GTN feedback
+            </a>
+        {% endif %}
+
+        <div class="dropdown-item">
+            <div>
+                {% icon galaxy-rulebuilder-history %} Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            {% for tag in site.git_tags_recent %}
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/{{tag}}{{ page.url }}">{{ tag }}</a>
+            {% endfor %}
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>

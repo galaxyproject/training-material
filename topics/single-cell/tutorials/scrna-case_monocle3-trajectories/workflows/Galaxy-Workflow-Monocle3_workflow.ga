@@ -1,0 +1,958 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Trajectory analysis using Monocle3, starting from 3 input files: expression matrix, gene and cell annotations",
+    "format-version": "0.1",
+    "name": "Monocle3 workflow",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Expression matrix input"
+                }
+            ],
+            "label": "Expression matrix input",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 217.8125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "12799b9c-8461-4f0e-b1a2-488549faaf36",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Cell annotations input"
+                }
+            ],
+            "label": "Cell annotations input",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2,
+                "top": 325.125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "44aa523a-de56-42cd-8535-e88739c5a9b0",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Gene annotations input"
+                }
+            ],
+            "label": "Gene annotations input",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 434.8000183105469
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "4e9b54cf-acc0-4117-9348-c757260c52ac",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "Check the data format that you're using.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_create/monocle3_create/0.1.4+galaxy2",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "cell_metadata": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "expression_matrix": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "gene_annotation": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Monocle3 create",
+            "outputs": [
+                {
+                    "name": "output_rds",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 246.32499980926514,
+                "top": 178.5875015258789
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_create/monocle3_create/0.1.4+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "ada68a9d0aec",
+                "name": "monocle3_create",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"cell_metadata\": {\"__class__\": \"ConnectedValue\"}, \"cell_metadata_format\": \"tsv\", \"expression_matrix\": {\"__class__\": \"ConnectedValue\"}, \"expression_matrix_format\": \"tsv\", \"gene_annotation\": {\"__class__\": \"ConnectedValue\"}, \"gene_annotation_format\": \"tsv\", \"introspective\": \"true\", \"output_object_format\": \"cds3\", \"verbose\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.4+galaxy2",
+            "type": "tool",
+            "uuid": "1f5c64e4-c198-44ed-81db-ed3c2b7ef455",
+            "workflow_outputs": [
+                {
+                    "label": "Monocle3 create on input dataset(s): cds3",
+                    "output_name": "output_rds",
+                    "uuid": "30db218d-f9e5-426d-ac9b-7823743ab5fb"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "You might want to change the dimensionality of the reduced space here.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_preprocess/monocle3_preprocess/0.1.4+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_object_file": {
+                    "id": 3,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Monocle3 preprocess",
+            "outputs": [
+                {
+                    "name": "output_rds",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 478.1999969482422,
+                "top": 469.82501220703125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_preprocess/monocle3_preprocess/0.1.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "c150370b514c",
+                "name": "monocle3_preprocess",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_object_file\": {\"__class__\": \"ConnectedValue\"}, \"input_object_format\": \"cds3\", \"introspective\": \"true\", \"method\": \"PCA\", \"no_scaling\": \"false\", \"norm_method\": \"log\", \"num_dim\": \"250\", \"output_object_format\": \"cds3\", \"pseudo_count\": \"1.0\", \"residual_model_formula_str\": \"\", \"use_genes\": \"\", \"verbose\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.4+galaxy0",
+            "type": "tool",
+            "uuid": "8f4413dc-d6e7-4228-afe5-dd04d417b7d0",
+            "workflow_outputs": [
+                {
+                    "label": "Monocle3 preprocess on input dataset(s): cds3",
+                    "output_name": "output_rds",
+                    "uuid": "38996ee0-0c00-4a01-ad18-f2e505eaf780"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "UMAP/tSNE/PCA/LSI.\nHowever for further steps you need to use UMAP.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_reducedim/monocle3_reduceDim/0.1.4+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input_object_file": {
+                    "id": 4,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Monocle3 reduceDim",
+            "outputs": [
+                {
+                    "name": "output_rds",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 712.3875122070312,
+                "top": 472.5500183105469
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_reducedim/monocle3_reduceDim/0.1.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "8900e2a18603",
+                "name": "monocle3_reducedim",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_object_file\": {\"__class__\": \"ConnectedValue\"}, \"input_object_format\": \"cds3\", \"introspective\": \"true\", \"max_components\": \"2\", \"output_object_format\": \"cds3\", \"preprocess_method\": \"PCA\", \"reduction_method\": \"UMAP\", \"verbose\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.4+galaxy0",
+            "type": "tool",
+            "uuid": "9079a42f-1df6-436c-8d63-2e7879704224",
+            "workflow_outputs": [
+                {
+                    "label": "Monocle3 reduceDim on input dataset(s): cds3",
+                    "output_name": "output_rds",
+                    "uuid": "21edf68f-72df-457d-aad7-c5fc5afa2b6b"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "You might want to change resolution  (affects clusters) and/or q-value (affects partitions).",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_partition/monocle3_partition/0.1.4+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input_object_file": {
+                    "id": 5,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Monocle3 partition",
+            "outputs": [
+                {
+                    "name": "output_rds",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 980.0250244140625,
+                "top": 182.1875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_partition/monocle3_partition/0.1.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d98b4705eb4c",
+                "name": "monocle3_partition",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_object_file\": {\"__class__\": \"ConnectedValue\"}, \"input_object_format\": \"cds3\", \"introspective\": \"true\", \"knn\": \"20\", \"louvain_iter\": \"1\", \"output_object_format\": \"cds3\", \"partition_qval\": \"1.0\", \"reduction_method\": \"UMAP\", \"resolution\": \"0.00015\", \"verbose\": \"false\", \"weight\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.4+galaxy0",
+            "type": "tool",
+            "uuid": "a76d9a00-df4e-4be0-bec9-cd2eaac4869f",
+            "workflow_outputs": [
+                {
+                    "label": "Monocle3 partition on input dataset(s): cds3",
+                    "output_name": "output_rds",
+                    "uuid": "fdb0e520-27c4-43a0-8f27-a25832a0816d"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_object_file": {
+                    "id": 5,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [],
+            "label": "Plot cell type",
+            "name": "Monocle3 plotCells",
+            "outputs": [
+                {
+                    "name": "output_tsv",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 979.6500244140625,
+                "top": 333.0500183105469
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_tsv": {
+                    "action_arguments": {
+                        "newname": "Cell type plot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_tsv"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "91980addce5e",
+                "name": "monocle3_plotcells",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alpha\": \"1.0\", \"cell_size\": \"1.5\", \"color_cells_by\": \"cell_type\", \"genes\": \"\", \"input_object_file\": {\"__class__\": \"ConnectedValue\"}, \"input_object_format\": \"cds3\", \"label_branch_points\": \"false\", \"label_cell_groups\": \"false\", \"label_groups_by_cluster\": \"false\", \"label_leaves\": \"false\", \"label_roots\": \"false\", \"no_trajectory_graph\": \"false\", \"norm_method\": \"log\", \"reduction_method\": \"UMAP\", \"verbose\": \"false\", \"xdim\": \"1\", \"ydim\": \"2\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.5+galaxy1",
+            "type": "tool",
+            "uuid": "57a79107-9586-43b9-8bc5-d0de75da5332",
+            "workflow_outputs": [
+                {
+                    "label": "Cell type plot",
+                    "output_name": "output_tsv",
+                    "uuid": "5e309658-e20f-4da1-8841-818f16fa8f01"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input_object_file": {
+                    "id": 5,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [],
+            "label": "Plot genotype",
+            "name": "Monocle3 plotCells",
+            "outputs": [
+                {
+                    "name": "output_tsv",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 984.2125244140625,
+                "top": 458.95001220703125
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_tsv": {
+                    "action_arguments": {
+                        "newname": "Genotype plot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_tsv"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "91980addce5e",
+                "name": "monocle3_plotcells",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alpha\": \"1.0\", \"cell_size\": \"1.5\", \"color_cells_by\": \"genotype\", \"genes\": \"\", \"input_object_file\": {\"__class__\": \"ConnectedValue\"}, \"input_object_format\": \"cds3\", \"label_branch_points\": \"false\", \"label_cell_groups\": \"false\", \"label_groups_by_cluster\": \"false\", \"label_leaves\": \"false\", \"label_roots\": \"false\", \"no_trajectory_graph\": \"false\", \"norm_method\": \"log\", \"reduction_method\": \"UMAP\", \"verbose\": \"false\", \"xdim\": \"1\", \"ydim\": \"2\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.5+galaxy1",
+            "type": "tool",
+            "uuid": "c6585610-4e06-4d55-8078-e4043d1d5f58",
+            "workflow_outputs": [
+                {
+                    "label": "Genotype plot",
+                    "output_name": "output_tsv",
+                    "uuid": "aca3b2c0-2d3b-4a4e-8732-cf6ddc7844a4"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input_object_file": {
+                    "id": 5,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [],
+            "label": "Plot batch",
+            "name": "Monocle3 plotCells",
+            "outputs": [
+                {
+                    "name": "output_tsv",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 981.8375244140625,
+                "top": 586.4625244140625
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_tsv": {
+                    "action_arguments": {
+                        "newname": "Batch plot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_tsv"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "91980addce5e",
+                "name": "monocle3_plotcells",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alpha\": \"1.0\", \"cell_size\": \"1.5\", \"color_cells_by\": \"batch\", \"genes\": \"\", \"input_object_file\": {\"__class__\": \"ConnectedValue\"}, \"input_object_format\": \"cds3\", \"label_branch_points\": \"false\", \"label_cell_groups\": \"false\", \"label_groups_by_cluster\": \"false\", \"label_leaves\": \"false\", \"label_roots\": \"false\", \"no_trajectory_graph\": \"false\", \"norm_method\": \"log\", \"reduction_method\": \"UMAP\", \"verbose\": \"false\", \"xdim\": \"1\", \"ydim\": \"2\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.5+galaxy1",
+            "type": "tool",
+            "uuid": "37669b84-76b3-4a19-800b-e2b132a05ea7",
+            "workflow_outputs": [
+                {
+                    "label": "Batch plot",
+                    "output_name": "output_tsv",
+                    "uuid": "c8eec2e4-1a64-47bb-812b-4002968c57c8"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input_object_file": {
+                    "id": 5,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [],
+            "label": "Plot sex",
+            "name": "Monocle3 plotCells",
+            "outputs": [
+                {
+                    "name": "output_tsv",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 980.5250244140625,
+                "top": 711.1500244140625
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_tsv": {
+                    "action_arguments": {
+                        "newname": "Sex plot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_tsv"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "91980addce5e",
+                "name": "monocle3_plotcells",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alpha\": \"1.0\", \"cell_size\": \"1.5\", \"color_cells_by\": \"sex\", \"genes\": \"\", \"input_object_file\": {\"__class__\": \"ConnectedValue\"}, \"input_object_format\": \"cds3\", \"label_branch_points\": \"false\", \"label_cell_groups\": \"false\", \"label_groups_by_cluster\": \"false\", \"label_leaves\": \"false\", \"label_roots\": \"false\", \"no_trajectory_graph\": \"false\", \"norm_method\": \"log\", \"reduction_method\": \"UMAP\", \"verbose\": \"false\", \"xdim\": \"1\", \"ydim\": \"2\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.5+galaxy1",
+            "type": "tool",
+            "uuid": "355f936d-0ae4-48ee-a02d-224970ff0766",
+            "workflow_outputs": [
+                {
+                    "label": "Sex plot",
+                    "output_name": "output_tsv",
+                    "uuid": "c75954dd-34d5-4a20-bcf3-e5cd92d74885"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_topmarkers/monocle3_topmarkers/0.1.5+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input_object": {
+                    "id": 6,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Monocle3 top markers",
+                    "name": "ref_cells"
+                }
+            ],
+            "label": null,
+            "name": "Monocle3 top markers",
+            "outputs": [
+                {
+                    "name": "top_markers_plot",
+                    "type": "pdf"
+                },
+                {
+                    "name": "top_markers_table",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1242.4625244140625,
+                "top": 0
+            },
+            "post_job_actions": {
+                "RenameDatasetActiontop_markers_plot": {
+                    "action_arguments": {
+                        "newname": "Top markers plot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "top_markers_plot"
+                },
+                "RenameDatasetActiontop_markers_table": {
+                    "action_arguments": {
+                        "newname": "Top markers table"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "top_markers_table"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_topmarkers/monocle3_topmarkers/0.1.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "a4ab4af54b1a",
+                "name": "monocle3_topmarkers",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filter_fraction_expression\": \"0.1\", \"genes_to_test_per_group\": \"25\", \"group_cells_by\": \"cell_type\", \"input_object\": {\"__class__\": \"ConnectedValue\"}, \"marker_sig_test\": \"false\", \"plot_top_markers\": \"true\", \"ref_cells\": {\"source\": \"file\", \"__current_case__\": 0, \"file\": {\"__class__\": \"RuntimeValue\"}}, \"save_full_markers\": \"false\", \"top_n_markers\": \"5\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.5+galaxy0",
+            "type": "tool",
+            "uuid": "94ab5f08-9ca4-4aec-96d6-37c682ec0ce8",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "top_markers_table",
+                    "uuid": "15564ba2-06bf-4c0f-9b13-442ff71beb77"
+                },
+                {
+                    "label": null,
+                    "output_name": "top_markers_plot",
+                    "uuid": "234ab088-cceb-490a-ae86-8f8eb17404b2"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input_object_file": {
+                    "id": 6,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [],
+            "label": "Plot genes",
+            "name": "Monocle3 plotCells",
+            "outputs": [
+                {
+                    "name": "output_tsv",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1241.9625244140625,
+                "top": 269.7375030517578
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_tsv": {
+                    "action_arguments": {
+                        "newname": "Gene expression plot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_tsv"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "91980addce5e",
+                "name": "monocle3_plotcells",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alpha\": \"1.0\", \"cell_size\": \"1.5\", \"color_cells_by\": \"cell_type\", \"genes\": \"Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1\", \"input_object_file\": {\"__class__\": \"ConnectedValue\"}, \"input_object_format\": \"cds3\", \"label_branch_points\": \"false\", \"label_cell_groups\": \"true\", \"label_groups_by_cluster\": \"false\", \"label_leaves\": \"false\", \"label_roots\": \"false\", \"no_trajectory_graph\": \"false\", \"norm_method\": \"log\", \"reduction_method\": \"UMAP\", \"verbose\": \"false\", \"xdim\": \"1\", \"ydim\": \"2\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.5+galaxy1",
+            "type": "tool",
+            "uuid": "cd8e9efe-28ae-467b-955e-0f0a1dd9df12",
+            "workflow_outputs": [
+                {
+                    "label": "Gene expression plot",
+                    "output_name": "output_tsv",
+                    "uuid": "f91c22a3-8c6d-432a-92c5-cb010115fa86"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input_object_file": {
+                    "id": 6,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [],
+            "label": "Plot partition",
+            "name": "Monocle3 plotCells",
+            "outputs": [
+                {
+                    "name": "output_tsv",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1241.7374877929688,
+                "top": 415.82501220703125
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_tsv": {
+                    "action_arguments": {
+                        "newname": "Partition plot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_tsv"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "91980addce5e",
+                "name": "monocle3_plotcells",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alpha\": \"1.0\", \"cell_size\": \"1.5\", \"color_cells_by\": \"partition\", \"genes\": \"\", \"input_object_file\": {\"__class__\": \"ConnectedValue\"}, \"input_object_format\": \"cds3\", \"label_branch_points\": \"false\", \"label_cell_groups\": \"true\", \"label_groups_by_cluster\": \"false\", \"label_leaves\": \"false\", \"label_roots\": \"false\", \"no_trajectory_graph\": \"false\", \"norm_method\": \"log\", \"reduction_method\": \"UMAP\", \"verbose\": \"false\", \"xdim\": \"1\", \"ydim\": \"2\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.5+galaxy1",
+            "type": "tool",
+            "uuid": "80577381-8927-45cd-988d-13f767bde986",
+            "workflow_outputs": [
+                {
+                    "label": "Partition plot",
+                    "output_name": "output_tsv",
+                    "uuid": "f4c5f89b-edd7-489c-b4a2-a7a3e7d6a89d"
+                }
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input_object_file": {
+                    "id": 6,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [],
+            "label": "Plot cluster",
+            "name": "Monocle3 plotCells",
+            "outputs": [
+                {
+                    "name": "output_tsv",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1242.6500244140625,
+                "top": 545.8625183105469
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_tsv": {
+                    "action_arguments": {
+                        "newname": "Cluster plot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_tsv"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "91980addce5e",
+                "name": "monocle3_plotcells",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alpha\": \"1.0\", \"cell_size\": \"1.5\", \"color_cells_by\": \"cluster\", \"genes\": \"\", \"input_object_file\": {\"__class__\": \"ConnectedValue\"}, \"input_object_format\": \"cds3\", \"label_branch_points\": \"false\", \"label_cell_groups\": \"true\", \"label_groups_by_cluster\": \"false\", \"label_leaves\": \"false\", \"label_roots\": \"false\", \"no_trajectory_graph\": \"false\", \"norm_method\": \"log\", \"reduction_method\": \"UMAP\", \"verbose\": \"false\", \"xdim\": \"1\", \"ydim\": \"2\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.5+galaxy1",
+            "type": "tool",
+            "uuid": "3373bac2-0966-4892-9235-ede1d7d78b25",
+            "workflow_outputs": [
+                {
+                    "label": "Cluster plot",
+                    "output_name": "output_tsv",
+                    "uuid": "a2c1a628-d79d-4e37-ad33-de92033021a8"
+                }
+            ]
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_learngraph/monocle3_learnGraph/0.1.4+galaxy0",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "input_object_file": {
+                    "id": 6,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Monocle3 learnGraph",
+            "outputs": [
+                {
+                    "name": "output_rds",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 1243.5250244140625,
+                "top": 674.7374877929688
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_learngraph/monocle3_learnGraph/0.1.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5f877012f7af",
+                "name": "monocle3_learngraph",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"euclidean_distance_ratio\": \"1.0\", \"geodesic_distance_ratio\": \"0.33\", \"input_object_file\": {\"__class__\": \"ConnectedValue\"}, \"input_object_format\": \"cds3\", \"introspective\": \"true\", \"minimal_branch_len\": \"10\", \"no_close_loop\": \"false\", \"no_partition\": \"false\", \"no_prune_graph\": \"false\", \"orthogonal_proj_tip\": \"false\", \"output_object_format\": \"cds3\", \"verbose\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.4+galaxy0",
+            "type": "tool",
+            "uuid": "7702b786-61d1-41eb-9663-923869f634ff",
+            "workflow_outputs": [
+                {
+                    "label": "Monocle3 learnGraph on input dataset(s): cds3",
+                    "output_name": "output_rds",
+                    "uuid": "ed2003aa-4680-409f-8d79-e79b878a786c"
+                }
+            ]
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "input_object_file": {
+                    "id": 15,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [],
+            "label": "Plot learned trajectory",
+            "name": "Monocle3 plotCells",
+            "outputs": [
+                {
+                    "name": "output_tsv",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1493.9625244140625,
+                "top": 524.3875122070312
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_tsv": {
+                    "action_arguments": {
+                        "newname": "Learned trajectory plot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_tsv"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "91980addce5e",
+                "name": "monocle3_plotcells",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alpha\": \"1.0\", \"cell_size\": \"1.5\", \"color_cells_by\": \"cell_type\", \"genes\": \"\", \"input_object_file\": {\"__class__\": \"ConnectedValue\"}, \"input_object_format\": \"cds3\", \"label_branch_points\": \"false\", \"label_cell_groups\": \"true\", \"label_groups_by_cluster\": \"false\", \"label_leaves\": \"false\", \"label_roots\": \"false\", \"no_trajectory_graph\": \"false\", \"norm_method\": \"log\", \"reduction_method\": \"UMAP\", \"verbose\": \"false\", \"xdim\": \"1\", \"ydim\": \"2\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.5+galaxy1",
+            "type": "tool",
+            "uuid": "23372f7d-e1d2-4abc-8ec3-20daa8c7acc8",
+            "workflow_outputs": [
+                {
+                    "label": "Cell types & learned trajectory path plot",
+                    "output_name": "output_tsv",
+                    "uuid": "6fa555f1-b4f2-4e5d-bce1-ed462d8e056d"
+                }
+            ]
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_ordercells/monocle3_orderCells/0.1.4+galaxy0",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "input_object_file": {
+                    "id": 15,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Monocle3 orderCells",
+            "outputs": [
+                {
+                    "name": "output_rds",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 1497.5875244140625,
+                "top": 675.0499877929688
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_ordercells/monocle3_orderCells/0.1.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3e77dc421569",
+                "name": "monocle3_ordercells",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"cell_phenotype\": \"cell_type\", \"input_object_file\": {\"__class__\": \"ConnectedValue\"}, \"input_object_format\": \"cds3\", \"introspective\": \"true\", \"output_object_format\": \"cds3\", \"reduction_method\": \"UMAP\", \"root_cells\": \"\", \"root_pr_nodes\": \"\", \"root_type\": \"DN\", \"verbose\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.4+galaxy0",
+            "type": "tool",
+            "uuid": "cf7fa5f7-8f5c-4b0c-90c0-d3c8f1300a52",
+            "workflow_outputs": [
+                {
+                    "label": "Monocle3 orderCells on input dataset(s): cds3",
+                    "output_name": "output_rds",
+                    "uuid": "96d10412-3d7f-4970-b541-6f4367fa3f37"
+                }
+            ]
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_diffexp/monocle3_diffExp/0.1.4+galaxy1",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "input_object_file": {
+                    "id": 17,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Monocle3 diffExp",
+            "outputs": [
+                {
+                    "name": "output_tsv",
+                    "type": "tsv"
+                }
+            ],
+            "position": {
+                "left": 1742.3375244140625,
+                "top": 549.5500183105469
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_tsv": {
+                    "action_arguments": {
+                        "newname": "Differential expression of genes - table"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_tsv"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_diffexp/monocle3_diffExp/0.1.4+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "d43a608d14ac",
+                "name": "monocle3_diffexp",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alternative\": \"greater\", \"input_object_file\": {\"__class__\": \"ConnectedValue\"}, \"input_object_format\": \"cds3\", \"knn\": \"20\", \"method\": \"Moran_I\", \"neighbor_graph\": \"knn\", \"reduction_method\": \"UMAP\", \"verbose\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.4+galaxy1",
+            "type": "tool",
+            "uuid": "14770294-f992-4a57-9ad8-423ac3227dda",
+            "workflow_outputs": [
+                {
+                    "label": "Differential expression of genes - table",
+                    "output_name": "output_tsv",
+                    "uuid": "db1dc457-2d6e-47cc-b7ce-d0a4d23e9498"
+                }
+            ]
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "input_object_file": {
+                    "id": 17,
+                    "output_name": "output_rds"
+                }
+            },
+            "inputs": [],
+            "label": "Plot pseudotime",
+            "name": "Monocle3 plotCells",
+            "outputs": [
+                {
+                    "name": "output_tsv",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1746.6500244140625,
+                "top": 696.5499877929688
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_tsv": {
+                    "action_arguments": {
+                        "newname": "Pseudotime plot"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_tsv"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "91980addce5e",
+                "name": "monocle3_plotcells",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alpha\": \"1.0\", \"cell_size\": \"1.5\", \"color_cells_by\": \"pseudotime\", \"genes\": \"\", \"input_object_file\": {\"__class__\": \"ConnectedValue\"}, \"input_object_format\": \"cds3\", \"label_branch_points\": \"false\", \"label_cell_groups\": \"true\", \"label_groups_by_cluster\": \"false\", \"label_leaves\": \"false\", \"label_roots\": \"false\", \"no_trajectory_graph\": \"false\", \"norm_method\": \"log\", \"reduction_method\": \"UMAP\", \"verbose\": \"false\", \"xdim\": \"1\", \"ydim\": \"2\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.5+galaxy1",
+            "type": "tool",
+            "uuid": "54ac162c-c68a-402e-85c8-f41b1d8e5a07",
+            "workflow_outputs": [
+                {
+                    "label": "Pseudotime plot",
+                    "output_name": "output_tsv",
+                    "uuid": "d1b3efd2-0a81-4dad-8652-589c2678fbaa"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "name:trajectory_analysis",
+        "name:transcriptomics",
+        "name:scRNA-seq"
+    ],
+    "uuid": "28d686f3-1f02-4b16-b479-b002ae1a0624",
+    "version": 3
+}

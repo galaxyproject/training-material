@@ -1,0 +1,302 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "MaxQuant and MSstats for the analysis of TMT data",
+    "format-version": "0.1",
+    "name": "MaxQuant MSstatsTMT Training",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Dataset Collection"
+                }
+            ],
+            "label": "Input Dataset Collection",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 241.5500030517578,
+                "height": 82.55000305175781,
+                "left": 567,
+                "right": 767,
+                "top": 159,
+                "width": 200,
+                "x": 567,
+                "y": 159
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "75fdd4a0-50ea-4d89-833e-13119df2b7fe",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "2f2012bd-d7fe-43be-86d8-4c6d233ae83d"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Experimental design template"
+                }
+            ],
+            "label": "Experimental design template",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 393.5500030517578,
+                "height": 82.55000305175781,
+                "left": 571,
+                "right": 771,
+                "top": 311,
+                "width": 200,
+                "x": 571,
+                "y": 311
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "1b701c96-82fe-441d-afcc-51e4f7a1b09a",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "1796d087-a179-4174-aec3-a89f45c9a367"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "MSstats annotation file"
+                }
+            ],
+            "label": "MSstats annotation file",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 851.5500030517578,
+                "height": 82.55000305175781,
+                "left": 813,
+                "right": 1013,
+                "top": 769,
+                "width": 200,
+                "x": 813,
+                "y": 769
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "01633bc9-8d2d-4b03-9100-958febc2cbec",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "1ff0fa8b-cf25-420f-acda-ac8a2d18b29e"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.17.0+galaxy2",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_opts|fasta_files": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "search_opts|template": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MaxQuant",
+            "outputs": [
+                {
+                    "name": "proteinGroups",
+                    "type": "tabular"
+                },
+                {
+                    "name": "mqpar",
+                    "type": "xml"
+                },
+                {
+                    "name": "evidence",
+                    "type": "tabular"
+                },
+                {
+                    "name": "log",
+                    "type": "txt"
+                },
+                {
+                    "name": "ptxqc_report",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 677.6666870117188,
+                "height": 459.66668701171875,
+                "left": 855,
+                "right": 1055,
+                "top": 218,
+                "width": 200,
+                "x": 855,
+                "y": 218
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.17.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "e42225f8a659",
+                "name": "maxquant",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"fasta\", \"__workflow_invocation_uuid__\": \"8b08afb0ed1d11eb85dd001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_opts\": {\"ftype\": \".thermo.raw\", \"fasta_files\": {\"__class__\": \"ConnectedValue\"}, \"identifier_parse_rule\": \">([^\\\\s]*)\", \"description_parse_rule\": \">(.*)\"}, \"output_opts\": {\"dry_run\": \"false\", \"output\": [\"proteinGroups\", \"mqpar\", \"evidence\", \"log\"]}, \"paramGroups\": [{\"__index__\": 0, \"files\": null, \"maxMissedCleavages\": \"2\", \"fixedModifications\": [\"Carbamidomethyl (C)\"], \"variableModifications\": [\"Acetyl (Protein N-term)\", \"Oxidation (M)\"], \"enzymes\": [\"Trypsin/P\"], \"digestion_mode\": \"0\", \"quant_method\": {\"select_quant_method\": \"reporter_ion_ms2\", \"__current_case__\": 3, \"iso_labels\": {\"labeling\": \"tmt11plex\", \"__current_case__\": 4}, \"filter_by_pif\": {\"filter_pif\": \"false\", \"__current_case__\": 1}}}], \"protein_quant\": {\"peptides_for_quantification\": \"1\", \"only_unmod_prot\": {\"unmod_prot\": \"True\", \"__current_case__\": 0, \"mods_used_prot_quant\": [\"Acetyl (Protein N-term)\", \"Oxidation (M)\"], \"discard_unmod_cpart_peptides\": \"true\"}, \"lfq_opts\": {\"separateLfq\": \"false\", \"lfqStabilizeLargeRatios\": \"true\", \"lfqRequireMsms\": \"true\", \"do_ibaq\": {\"ibaq\": \"False\", \"__current_case__\": 1}, \"advancedSiteIntensities\": \"true\"}}, \"qc\": {\"do_it\": \"true\", \"__current_case__\": 0, \"parameters\": \"true\", \"summary\": \"true\", \"proteingroups\": \"true\", \"evidence\": \"true\", \"msms\": \"true\", \"msmsscans\": \"true\"}, \"search_opts\": {\"template\": {\"__class__\": \"ConnectedValue\"}, \"min_peptide_len\": \"7\", \"max_peptide_mass\": \"4600\", \"min_unique_pep\": \"0\", \"calc_peak_properties\": \"false\", \"mbr\": {\"match_between_runs\": \"False\", \"__current_case__\": 0}, \"incl_contaminants\": \"true\", \"decoy_mode\": \"revert\", \"psm_fdr\": \"0.01\", \"protein_fdr\": \"0.01\", \"min_pep_length\": \"8\", \"max_pep_length\": \"25\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.6.17.0+galaxy2",
+            "type": "tool",
+            "uuid": "3027c4ed-81fa-4116-961e-7242cf99be29",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "evidence",
+                    "uuid": "16cb3dce-2b9e-47bc-99ee-84ddfa57847c"
+                },
+                {
+                    "label": null,
+                    "output_name": "proteinGroups",
+                    "uuid": "55166a25-0f2d-49dc-91d3-c815fbc12aa0"
+                },
+                {
+                    "label": null,
+                    "output_name": "ptxqc_report",
+                    "uuid": "fcde55d8-f460-4e1e-a49c-d896fab5cf91"
+                },
+                {
+                    "label": null,
+                    "output_name": "log",
+                    "uuid": "83760cea-4e21-42be-b1ae-05408528ed3e"
+                },
+                {
+                    "label": null,
+                    "output_name": "mqpar",
+                    "uuid": "3d492abd-7e61-41c3-8238-4f7532a535a7"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msstatstmt/msstatstmt/2.0.0+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input|annotation": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "input|evidence": {
+                    "id": 3,
+                    "output_name": "evidence"
+                },
+                "input|proteinGroups": {
+                    "id": 3,
+                    "output_name": "proteinGroups"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MSstatsTMT",
+            "outputs": [
+                {
+                    "name": "out_qc_plot",
+                    "type": "pdf"
+                },
+                {
+                    "name": "out_group_comp",
+                    "type": "tabular"
+                },
+                {
+                    "name": "out_group_volcano_plot",
+                    "type": "pdf"
+                },
+                {
+                    "name": "out_group_comp_plot",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 710.6666870117188,
+                "height": 449.66668701171875,
+                "left": 1234,
+                "right": 1434,
+                "top": 261,
+                "width": 200,
+                "x": 1234,
+                "y": 261
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msstatstmt/msstatstmt/2.0.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "8375a0035d79",
+                "name": "msstatstmt",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"group\": {\"group_comparison\": \"true\", \"__current_case__\": 1, \"use_comp_matrix\": {\"select\": \"false\", \"__current_case__\": 0}, \"moderated\": \"false\", \"adj_method\": \"BH\", \"remove_norm_channel\": \"true\", \"remove_empty_channel\": \"true\", \"selected_group_outputs\": [\"comparison_result\", \"VolcanoPlot\", \"ComparisonPlot\"], \"comparison_plots_opt\": {\"sig\": \"0.05\", \"FCcutoff\": null, \"logBase_pvalue\": \"10\", \"ylimUp\": null, \"ylimDown\": null, \"xlimUp\": null, \"axis_size\": \"10\", \"x_axis_size\": \"10\", \"y_axis_size\": \"10\", \"dot_size\": \"3\", \"text_size\": \"4\", \"text_angle\": \"90\", \"legend_size\": \"7\", \"ProteinName\": \"false\", \"colorkey\": \"true\", \"numProtein\": \"100\", \"clustering\": \"protein\", \"width\": \"8\", \"height\": \"5\", \"which_Protein\": {\"select\": \"all\", \"__current_case__\": 0}, \"which_Comparison\": {\"select\": \"all\", \"__current_case__\": 0}}}, \"input\": {\"input_src\": \"MaxQuant\", \"__current_case__\": 1, \"evidence\": {\"__class__\": \"ConnectedValue\"}, \"proteinGroups\": {\"__class__\": \"ConnectedValue\"}, \"annotation\": {\"__class__\": \"ConnectedValue\"}, \"proteinID\": \"Proteins\", \"input_options\": {\"rmProt_Onlyidentifiedbysite\": \"false\", \"useUniquePeptide\": \"true\", \"rmPSM_withMissing_withinRun\": \"false\", \"rmPSM_withfewMea_withinRun\": \"true\", \"rmProtein_with1Feature\": \"false\", \"summaryforMultipleRows\": \"sum\"}}, \"out_plots_opt\": {\"which_Protein\": {\"select\": \"all\", \"__current_case__\": 0}, \"width\": \"10\", \"height\": \"10\", \"adv\": {\"ylimUp\": \"false\", \"ylimDown\": \"false\", \"x_axis_size\": \"10\", \"y_axis_size\": \"10\", \"text_size\": \"4\", \"text_angle\": \"90\", \"legend_size\": \"7\", \"dot_size_profile\": \"2\", \"ncol_guide\": \"5\", \"originalPlot\": \"true\", \"summaryPlot\": \"true\"}}, \"proteinSummarization\": {\"method\": \"msstats\", \"global_norm\": \"true\", \"reference_norm\": \"true\", \"remove_norm_channel\": \"true\", \"remove_empty_channel\": \"true\", \"MBimpute\": \"true\", \"maxQuantileforCensored\": null}, \"selected_outputs\": [\"QCPlot\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.0+galaxy0",
+            "type": "tool",
+            "uuid": "b73daf20-e3e4-4a1d-bfd9-8597e5679cbb",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_group_comp_plot",
+                    "uuid": "64c98726-4129-45b4-85e5-b8417982fff7"
+                },
+                {
+                    "label": null,
+                    "output_name": "out_group_volcano_plot",
+                    "uuid": "d3e07901-b18b-4727-80b8-086cdce12f9b"
+                },
+                {
+                    "label": null,
+                    "output_name": "out_group_comp",
+                    "uuid": "f387d202-696e-435a-adee-9c0f18e72538"
+                },
+                {
+                    "label": null,
+                    "output_name": "out_qc_plot",
+                    "uuid": "6b598ae7-595d-44bf-b677-a83a41724329"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "proteomics"
+    ],
+    "uuid": "cc36c73b-5649-45a9-8a2e-1f3bc04cca09",
+    "version": 1
+}

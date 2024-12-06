@@ -1,0 +1,303 @@
+---
+layout: tutorial_slides
+logo: assets/images/gat.png
+video: true
+
+title: "Ansible"
+questions:
+  - Why Ansible?
+  - How and when to use Ansible?
+  - How to write a role?
+  - How to leverage community build roles?
+objectives:
+  - Learn Ansible basics.
+  - Write a simple role.
+  - Install a role from Ansible Galaxy.
+key_points:
+  - Ansible lets you do system administration at scale
+  - Many system administration, software installation, and software management tasks are already available as Ansible tasks or roles
+contributors:
+  - hexylena
+
+recordings:
+- captioners:
+  - martenson
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 5M
+  youtube_id: KFpbfmN0OTE
+  speakers:
+  - jdavcs
+
+---
+
+## Configuration Management
+
+Manages the configuration of machines.
+
+Specifies what software is installed, how it is configured
+
+
+???
+
+- Configuration management manages the configuration of machines.
+- It specifies what software should be installed, and how it should be configured
+
+---
+
+### Why Configuration Management?
+
+- Are you keeping track of config changes?
+- What if your server dies?
+- ... or your VM is accidentally deleted?
+- Can you recover? How quickly?
+
+???
+
+- So why do you want configuration management?
+- What do you do when things go wrong?
+- What if your server dies?
+- Did you backup your configuration?
+- Did you back up your webserver configuration?
+- Ansible provides an answer.
+
+---
+
+### Configuration Management goals
+
+- Reproducibility
+
+- Ensure 1000s of machines are correctly configured
+
+- Easily recover from bad situations
+
+???
+
+- The goals of using CM are reproducibility, uniformity, and recovery.
+
+---
+
+### Ansible
+
+- [Ansible](https://www.ansible.com/) is an open-source configuration management tool, sponsored by Red Hat
+
+- Several [alternatives](https://en.wikipedia.org/wiki/Comparison_of_open-source_configuration_management_software) are available (Chef, Puppet, Salt, etc)
+
+- It uses an agentless model: SSH into machine and executes commands
+
+- Very popular, especially among Galaxy admins!
+
+- Many modules for common tasks like copying files or managing users or services.
+
+???
+
+- Ansible is a very popular CM tool, sponsored by RedHat.
+- There are several alternatives, but Galaxy Project uses Ansible.
+- It uses an agent-less model. You SSH into machines and execute commands on them.
+- It has many popular pre-existing roles for common tasks.
+
+---
+
+## Important Terms
+
+???
+
+- Some important terms you should know
+
+---
+
+### Inventory File
+
+Defines the systems (called "hosts") against which Ansible will work.
+
+```ini
+[webservers]
+192.168.0.1
+192.168.0.2 ansible_user=ubuntu
+
+[databases]
+db_1.example.org ansible_user=root
+```
+
+???
+
+- First is the Inventory File.
+- This file lists all of your hosts.
+- The group name is in square brackets.
+- Group names are used to select a set of systems, on which Ansible should operate.
+- It is possible to assign variables to hosts and groups.
+- Here we override the ansible user variable on two hosts.
+- This variable controls which user is used in login.
+
+---
+
+### Ansible Module and Tasks
+
+A **module** is a piece of code that Ansible can execute on a host, collecting return values.
+
+A **task** is an invocation of single module with its configuration.
+
+```yaml
+---
+- copy:
+    src: foo.conf
+    dest: /etc/foo.conf
+    owner: foo
+    group: foo
+    mode: 0644
+
+- package:
+    name: ntpdate
+    state: present
+```
+
+???
+
+- Here is an example of invoking the copy module and the package module.
+- Copy copies a file from source, on the local host to destination, on the remote host.
+- Then it sets some attributes about the file like the owner and mode.
+- Next we see an example of the package module. This is a generic OS package manager module.
+- It ensures that for the package named ntpdate, its state is present, i.e. installed.
+
+---
+
+### Role
+
+.pull-left[
+A collection of:
+
+- tasks
+- files
+- templates
+- variables
+- handlers
+
+]
+
+.pull-right[
+with a predefined directory structure:
+```
+.
+├── defaults
+│   └── main.yml
+├── files
+│   └── cvmfs_wipecache.centos_7
+├── handlers
+│   └── main.yml
+├── meta
+│   └── main.yml
+├── README.md
+├── tasks
+│   ├── apache.yml
+│   ├── main.yml
+│   └── stratumN.yml
+├── templates
+│   └── stratum1_squid.conf.j2
+├── tests
+│   ├── inventory
+│   └── test.yml
+└── vars
+    └── main.yml
+
+```
+]
+
+???
+
+- A role is a collection of tasks, files, templates, variables, and handlers.
+- Tasks are things to be executed, like a copy task to add files to a remote machine.
+- Files have static, unchanging files that are used by the tasks.
+- The templates are like files, but they contain variables which will be replaced, when ansible deploys the file.
+- Variables contain definitions of variables for use in templates and tasks.
+- Handlers manage services, restarting them when configuration changes.
+
+---
+
+### Playbook
+
+A YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.
+
+.pull-left[
+- We define a playbook which has a name
+- And applies to some group of hosts
+- We specify some additional variables
+- And then invoke some roles
+]
+
+
+.pull-right[
+```yaml
+- name: CVMFS
+  hosts: all
+  vars:
+    cvmfs_role: client
+    galaxy_cvmfs_repos_enabled: true
+  roles:
+    - geerlingguy.repo-epel
+    - galaxyproject.cvmfs
+```
+]
+
+
+???
+
+- This is an example playbook.
+- We give it a name, in this case CVMFS.
+- Then we select some hosts, i.e. all hosts known to our inventory file.
+- We specify some additional variables.
+- And then we invoke two roles.
+
+---
+
+### Vault
+
+- Ansible playbooks should be kept under **version control** (typically with Git)
+- Playbooks can be safely shared on public Git repositories (e.g. GitHub) by storing secrets like passwords in encrypted files called **vaults**
+
+```
+$ANSIBLE_VAULT;1.1;AES256
+63333238633033313664633437316231323932326531386266636637353037313335613563663934
+6639666536653631363739383639633165633337393334630a353233393938646539306362633738
+61613439366435336230636561663864323765303663666239613430323534333665636665643964
+6537376666323333660a663233343565393166373665366138306661343764623561343634656463
+31636265303430623731643766346434323565663436626466353765393465376533376366356463
+```
+
+???
+
+- If you have secrets like API keys or passwords, you need to use Vault.
+- Vault encrypts your secrets with a password, so you can include them in your playbooks.
+- This lets you collaborate on playbooks and infrastructure publicly with git.
+
+---
+
+## Ansible Philosophies
+
+- Some people write a single playbook that completely manages a machine (installing everything on a brand new machine)
+
+- Other people write playbooks for a single task (e.g. upgrading software / installing nginx)
+
+- Which one depends on your use case.
+
+???
+
+- There are multiple ways of designing playbooks, use one that fits your use case.
+- Some prefer a playbook which does everything, so no step can be forgotten.
+- Others prefer playbooks which do individual steps. These can be faster, and you can only run the ones that change.
+
+---
+
+## Ansible Galaxy
+
+- Public repository of roles
+
+- Many for common software deployment (nginx, apache, postgresql)
+
+- Different "Galaxy" than the bioinformatics tool server (but Ansible can be used to install that too!)
+
+???
+
+- Ansible has a repository for public roles.
+- There are a huge number of available roles for common tasks.
+- It is called Ansible Galaxy, but it is a different Galaxy.
+

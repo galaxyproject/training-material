@@ -1,6 +1,6 @@
 ---
 layout: tutorial_slides
-logo: "GTN"
+logo: assets/images/gat.png
 
 title: "Docker and Galaxy"
 zenodo_link: ""
@@ -13,7 +13,7 @@ objectives:
   - "Galaxy Docker image (usage)"
   - "Galaxy Docker (internals)"
   - "Galaxy flavours"
-time_estimation: "1d/3h/6h"
+time_estimation: "1h"
 key_points:
   - "Use Docker"
   - "Integrate your tools into Galaxy"
@@ -23,12 +23,30 @@ contributors:
   - bgruening
 ---
 
+### Preparing Admin Training VMs
+
+If you're falling along on Galaxy Admin Training VMs, you will need to setup Docker.
+
+You can modify your Ansible setup to configure this as described at [bit.ly/gxadmin-docker-playbook](http://bit.ly/gxadmin-docker-playbook).
+
+You will also need to stop Galaxy running on the VM so that you can run Galaxy in a container.
+
+```
+sudo supervisorctl stop galaxy
+```
+
+???
+
+TODO: Remove this slide after the training, it isn't general.
+
+---
+
+
 ### Preparation
 
 ```
-$ docker pull quay.io/bgruening/galaxy:gcc2016
-$ docker pull quay.io/bgruening/galaxy-docs-slurm:gcc2016
-$ git clone -b gcc2016 https://github.com/bgruening/docker-galaxy-stable.git
+$ docker pull bgruening/galaxy-stable:18.05
+$ git clone https://github.com/bgruening/docker-galaxy-stable.git
 ```
 
 ???
@@ -44,7 +62,7 @@ variety of different tools and visualisations
 
 ## Why Docker? <br>What is it?
 
-![](../../images/docker_whale.png)
+![Image of a blue whale with containers on its back.](../../images/docker_whale.png)
 
 ---
 
@@ -61,7 +79,7 @@ variety of different tools and visualisations
 
 ### Deployment issue
 
-![](../../images/deployment_issue.svg)
+![Galaxy is a box with many dependencies like node, java, nginx, python, uwsgi, anaconda. On the right knime is another box with java and eclipse dependencies. Lines show the multiplicity of tools and dependencies trying to run on multiple environments with windows/osx/linux desktops, servers, and the cloud.](../../images/deployment_issue.svg)
 
 ---
 
@@ -69,13 +87,13 @@ variety of different tools and visualisations
 
 Matrix from Hell
 
-![](../../images/deployment_issue_matrix.svg)
+![Galaxy and knime form the y axis of a table with a lot of question marks about which environments support them.](../../images/deployment_issue_matrix.svg)
 
 ---
 
 ### Transport Pre 1960
 
-![](../../images/cargo_transport_issue.svg)
+![Icons for multiple types of goods shown multiple methods for transport and storing.](../../images/cargo_transport_issue.svg)
 
 ---
 
@@ -83,13 +101,13 @@ Matrix from Hell
 
 Matrix from Hell
 
-![](../../images/cargo_transport_matrix.svg)
+![A similar table full of question marks between goods and shipment methods is shown.](../../images/cargo_transport_matrix.svg)
 
 ---
 
 ### Intermodal shipping container
 
-![](../../images/cargo_transport_solution.svg)
+![A blue shipping container is shown solving the transport problem by being a one size container to fit all sorts of goods, on all sorts of transports.](../../images/cargo_transport_solution.svg)
 
 ???
 
@@ -106,7 +124,7 @@ A standard container
 
 ### Docker
 
-![](../../images/deployment_solution.svg)
+![Docker logo on a blue shipping container solves the galaxy/knime deployment problem across environments.](../../images/deployment_solution.svg)
 
 
 ???
@@ -122,7 +140,7 @@ Docker = An engine that encapsulated any tools as a
 
 ### A Docker container?
 
-![](../../images/WhatIsDocker_1_kernal-2_1.png)
+![A schematic with the kernal below and two containers is shown, each container has different stacks.](../../images/WhatIsDocker_1_kernal-2_1.png)
 
 Lightweight and Open
 
@@ -135,7 +153,7 @@ Lightweight and Open
 
 ### Virtual machines vs Containers
 
-![](../../images/container_vs_vm.svg)
+![A cartoon comparing containers vs VMs. On the left the VMs are presented as a layer of server, host os, and hypervisor (type 2) followed by several tall pillars of guest OS, bin/libs and finally their respective apps. Everything is siloed. On the right is containers where the layers are server, host os, and docker engine. Above those are very short pillars of each different app, and when duplicate apps are run, the bin/libs are shown as shared. Text reads: containers are isolated but share OS and where appropriate, bins/libraries.](../../images/container_vs_vm.svg)
 
 Containers more portable and efficient
 
@@ -155,13 +173,13 @@ Similar resource isolation and allocation benefits
 
 ## How to use Docker?
 
-![](../../images/docker-usage.jpg)
+![A cartoon of a whale with shipping containers atop it.](../../images/docker-usage.jpg)
 
 ---
 
 ### The client
 
-![](../../images/docker_command.png)
+![A command line is explained, docker is the program you're using, run is the subcommand that creates and runs a container, and hello-world is the image you want to load.](../../images/docker_command.png)
 
 ???
 
@@ -175,7 +193,7 @@ Client: to talk with Docker
 
 ### Containers? Images?
 
-![](../../images/docker_concept_image_container.png)
+![A single container labelled galaxy with postgres, nginx, and python inside is shown pointing to three other galaxy containers.](../../images/docker_concept_image_container.png)
 
 ???
 
@@ -192,7 +210,7 @@ Container
 
 ### How to get images?
 
-![](../../images/docker_concept_pull.png)
+![Images are stored in an image registry which are downloaded with docker pull onto a docker host, where you can run multiple instances of galaxy.](../../images/docker_concept_pull.png)
 
 ???
 
@@ -222,7 +240,7 @@ Status: Downloaded newer image for hello-world:latest
 
 ### Creation of containers
 
-![](../../images/docker_concept_run.png)
+![Images are stored in an image registry which are downloaded with docker pull onto a docker host, where you can run multiple instances of galaxy.](../../images/docker_concept_run.png)
 
 ---
 
@@ -364,7 +382,7 @@ $ docker run -i -t
     -e "GALAXY_CONFIG_BRAND='My own Galaxy flavour'"
     -e "GALAXY_LOGGING=full"
 
-    quay.io/bgruening/galaxy
+    bgruening/galaxy-stable:18.05
 ```
 
 ???
@@ -405,7 +423,7 @@ Can we access the `cowsay` file inside the container? <br>And the `cowsay2` file
 
 ### Management of data
 
-![](../../images/docker_volume_closed.png)
+![A container is shown with an arrow pointing to data and a big x over it.](../../images/docker_volume_closed.png)
 
 ???
 
@@ -415,7 +433,7 @@ A container is closed
 
 ### Management of data
 
-![](../../images/docker_volume_open.png)
+![The same as before, but inside the container it wants to create a new file in that same folder but it cannot.](../../images/docker_volume_open.png)
 
 ???
 
@@ -425,7 +443,7 @@ A container is closed
 
 ### Data volume
 
-![](../../images/docker_volume.png)
+![A data volume with two files is shown as a folder, now this is moutned inside two containers.](../../images/docker_volume.png)
 
 ???
 
@@ -444,7 +462,7 @@ Data volumes designed to persist data, independent of the container’s life cyc
 
 ### Data volume
 
-![](../../images/docker_run_volume.png)
+![Another command line explained, now docker run -v host_dir:container_dir ..., where host_dir is the absolute path or data volume name, and container_dir is where it should be mounted.](../../images/docker_run_volume.png)
 
 ???
 
@@ -472,7 +490,7 @@ cowsay_Galaxy   cowsay_Galaxy2
 
 ### Execution of commands <br>inside a running container
 
-![](../../images/docker_concept_exec.png)
+![The schematic of a docker host with three galaxies is running, docker exec points to one of the galaxy containers.](../../images/docker_concept_exec.png)
 
 ???
 
@@ -508,7 +526,7 @@ cowsay Galaxy
 
 ### Stop/Start containers
 
-![](../../images/docker_concept_start_stop.png)
+![Again the same graphic, but now one of the galaxy containers becomes stopped through the docker stop command and turns grey. Docker start brings it back to running.](../../images/docker_concept_start_stop.png)
 
 Note: Sending SIGTERM and then SIGKILL after a grace period
 
@@ -550,7 +568,7 @@ cowsay Galaxy
 
 ### View all containers
 
-![](../../images/docker_concept_ps.png)
+![docker ps shows a box around the previous graphic and shows running and stopped container.](../../images/docker_concept_ps.png)
 
 ---
 
@@ -588,7 +606,7 @@ Note: Name of containers and id
 
 ### Creation of a new image
 
-![](../../images/docker_concept_build.png)
+![A dockerfile built with docker build builds a new container on the local docker host.](../../images/docker_concept_build.png)
 
 ???
 
@@ -598,19 +616,19 @@ Need a Dockerfile. I will describe it later. Here it is just to give you a broad
 
 ### View all images
 
-![](../../images/docker_concept_image.png)
+![Docker image shows a list of all the images on the docker host that can be run.](../../images/docker_concept_image.png)
 
 ---
 
 ### Push your image on a registry
 
-![](../../images/docker_concept_push.png)
+![Docker push is shown pushing the locally built container to the image registry.](../../images/docker_concept_push.png)
 
 ---
 
-### {% icon hands_on %} Hands on! (1)
+<hands-on-title>Hands on! (1)</hands-on-title>
 
-Play with `quay.io/biocontainers/samtools:1.3--1`:
+Play with `quay.io/biocontainers/samtools:1.3--1`
 
 1. Get the image
 2. Launch `samtools` container interactively
@@ -622,12 +640,12 @@ Play with `quay.io/biocontainers/samtools:1.3--1`:
 
 ---
 
-### {% icon hands_on %} Hands on! (2)
+<hands-on-title>Hands on! (2)</hands-on-title>
 
-Play with `quay.io/biocontainers/samtools:1.3--1`:
+Play with `quay.io/biocontainers/samtools:1.3--1`
 
-1. Create locally a `samtool_dir` directory
-2. Launch an interactive container with a volume pointing at `samtool_dir` directory
+1. Create a local `samtool_dir` directory
+2. Launch an interactive container with a volume pointing at the `samtool_dir` directory
   1. Add a [toy sam file](https://raw.githubusercontent.com/samtools/samtools/develop/examples/toy.sam) into the local `samtool_dir` directory
   2. Check if the existence of the file from inside the container
   3. Visualize the content of the toy file with `samtools view` commands
@@ -641,7 +659,7 @@ data volume is the way to make your tool connecting
 
 ## How to containerize your tools?
 
-![](../../images/docker-container.jpg)
+![Cartoon of a docker container](../../images/docker-container.jpg)
 
 ???
 
@@ -651,7 +669,7 @@ Now I am sure all of you want to containerize his tool :)
 
 ### How to create your image?
 
-![](../../images/docker_build.svg)
+![Cartoon showing a dockerfile building a container with docker build.](../../images/docker_build.svg)
 
 ---
 
@@ -664,7 +682,7 @@ A text document that contains all the commands a user could call on the command 
 INSTRUCTION arguments
 ```
 
-.footnote[[Best practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/)]
+.footnote[[Best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)]
 
 ???
 
@@ -676,7 +694,13 @@ Review of the commands
 
 ### Dockerfile & Layers
 
-![](../../images/dockerfile_layers.svg)
+![dockerfile with steps like run and add and set user and command are shown inverted as the layers of an image, each building on the last.](../../images/dockerfile_layers.svg)
+
+---
+
+### But Don't Do it Manually, Use Biocontainers
+
+[Tool Dependencies and Containers]({% link topics/dev/tutorials/containers/slides.html %})
 
 ---
 
@@ -697,14 +721,16 @@ A Docker launching a Galaxy instance and
 
 
 ```
-docker run -i -t -p 8080:80 quay.io/bgruening
+docker run -i -t -p 8080:80 bgruening/galaxy-stable:18.05
 ```
 
-https://bgruening.github.io/docker-galaxy-stable/
+Visit your machine on port 8080 to see Galaxy running.
+
+https://github.com/bgruening/docker-galaxy-stable
 
 ---
 
-### {% icon hands_on %} Hands on!
+<hands-on-title>Hands on!</hands-on-title>
 
 Launch a Galaxy Docker Container and try to
 
@@ -714,7 +740,6 @@ Launch a Galaxy Docker Container and try to
 - Use export mounts (persistent data)
 - Trouble shooting (logging)
 - Install tools
-- Install visualizations (BioJS)
 - ...
 
 ---
@@ -727,7 +752,7 @@ https://github.com/bgruening/docker-galaxy-stable/tree/dev/docs/Running_jobs_out
 
 ### Docker flavours
 
-![](../../images/rna-workbench-chart.png)
+![Schematic of multiple docker containers and how they layer upon one another. ubuntu forms the base, and requirements builds on that, then galaxy-stable on top of that.](../../images/rna-workbench-chart.png)
 
 ---
 
@@ -755,14 +780,11 @@ https://github.com/bgruening/docker-galaxy-stable/tree/dev/docs/Running_jobs_out
 #
 # VERSION       0.1
 
-FROM quay.io/bgruening/galaxy:gcc2016
+FROM bgruening/galaxy-stable:18.05
 
 MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
 
 ENV GALAXY_CONFIG_BRAND deepTools
-
-# Install Visualisation
-# RUN install-biojs msa
 
 # Adding the tool definitions to the container
 ADD my_tool_list.yml $GALAXY_ROOT/my_tool_list.yml
@@ -787,7 +809,7 @@ tools:
 
 ---
 
-### {% icon hands_on %} Hands on!
+<hands-on-title>Hands on!</hands-on-title>
 
 Create a Galaxy Flavour
 
@@ -795,6 +817,6 @@ Create a Galaxy Flavour
 
 ### Galaxy Flavor Generator
 
-![](../../images/galaxy_flavour_generator.png)
+![Website used to build custom flavours of galaxy docker containers](../../images/galaxy_flavour_generator.png)
 
 https://github.com/galaxyFlavorsGenerators/galaxyFlavorGenerator

@@ -1,0 +1,50 @@
+{% if include.material.hands_on == "external" %}
+<div class="btn-group">
+<a class="btn btn-default" href="{{ include.material.hands_on_url }}" title="Link to external materials">
+    {% icon external-link aria=false %}
+</a>
+</div>
+{% elsif include.material.hands_on == "github" %}
+<div class="btn-group">
+<a class="btn btn-default" href="{{ site.github_repository }}/tree/main/topics/{{ include.material.topic_name }}/tutorials/{{ include.material.tutorial_name }}/tutorial.md" title="Materials on github">
+    {% icon github aria=false %}
+</a>
+</div>
+{% elsif include.material.hands_on %}
+    <div class="btn-group">
+        <a href="{{ site.baseurl }}/topics/{{ include.material.topic_name }}/tutorials/{{ include.material.tutorial_name }}/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            {% icon tutorial %}
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        {% assign translations = include.material.translations.tutorial | size %}
+        {% if translations > 0 %}
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
+           {% for lang in include.material.translations.tutorial %}
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="{{ lang }}" href="{{ site.baseurl }}/topics/{{ include.material.topic_name }}/tutorials/{{ include.material.tutorial_name }}/tutorial_{{lang | upcase }}.html" title="{{ lang }}">
+                {{ site.other_languages[lang] }}
+            </a>
+            </li>
+        {% endfor %}
+
+          <hr/>
+        {% endif %}
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        {% for lang in site.other_languages %}{% unless lang[0] == 'en' %}
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="{{ lang[0] }}" href="https://training-galaxyproject-org.translate.goog/training-material/topics/{{ include.material.topic_name }}/tutorials/{{ include.material.tutorial_name }}/tutorial.html?_x_tr_sl=en&_x_tr_tl={{ lang[0] }}&_x_tr_hl=en&_x_tr_pto=wapp" title="{{ inst[0] }}">
+			{{ lang[1] }}
+		</a>
+	</li>
+        {% endunless %}{% endfor %}
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/{{ include.material.topic_name }}/tutorials/{{ include.material.tutorial_name }}/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="{{ inst[0] }}">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+{% endif %}

@@ -1,1 +1,161 @@
-{"uuid": "58bcce73-f061-4298-9d44-5ffac39dc1b8", "tags": [], "format-version": "0.1", "name": "galaxy-intro-short", "version": 0, "steps": {"0": {"tool_id": null, "tool_version": null, "outputs": [], "workflow_outputs": [], "input_connections": {}, "tool_state": "{\"name\": \"https://zenodo.org/record/582600/files/mutant_R1.fastq\"}", "id": 0, "uuid": "e271eee4-bfb8-40b4-b691-a25cb9932327", "errors": null, "name": "Input dataset", "label": null, "inputs": [{"name": "https://zenodo.org/record/582600/files/mutant_R1.fastq", "description": ""}], "position": {"top": 10, "left": 10}, "annotation": "", "content_id": null, "type": "data_input"}, "1": {"tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72", "tool_version": "0.72", "outputs": [{"type": "html", "name": "html_file"}, {"type": "txt", "name": "text_file"}], "workflow_outputs": [], "input_connections": {"input_file": {"output_name": "output", "id": 0}}, "tool_state": "{\"__page__\": null, \"limits\": \"null\", \"input_file\": \"null\", \"__rerun_remap_job_id__\": null, \"contaminants\": \"null\", \"chromInfo\": \"\\\"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\\\"\"}", "id": 1, "tool_shed_repository": {"owner": "devteam", "changeset_revision": "c15237684a01", "name": "fastqc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "c6a231d9-786d-4fdf-bc25-8e3db1c16bfa", "errors": null, "name": "FastQC", "post_job_actions": {}, "label": null, "inputs": [], "position": {"top": 10, "left": 230}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72", "type": "tool"}, "2": {"tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1", "tool_version": "1.0.1", "outputs": [{"type": "input", "name": "output"}], "workflow_outputs": [], "input_connections": {"input": {"output_name": "output", "id": 0}}, "tool_state": "{\"__page__\": null, \"chromInfo\": \"\\\"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"percent\": \"\\\"80\\\"\", \"input\": \"null\", \"quality\": \"\\\"35\\\"\"}", "id": 2, "tool_shed_repository": {"owner": "devteam", "changeset_revision": "43a7370aa010", "name": "fastq_quality_filter", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "3a3ec769-355d-488a-984b-78462a794ef9", "errors": null, "name": "Filter by quality", "post_job_actions": {}, "label": null, "inputs": [], "position": {"top": 130, "left": 230}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1", "type": "tool"}, "3": {"tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1", "tool_version": "1.0.1", "outputs": [{"type": "input", "name": "output"}], "workflow_outputs": [], "input_connections": {"input": {"output_name": "output", "id": 0}}, "tool_state": "{\"__page__\": null, \"chromInfo\": \"\\\"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"percent\": \"\\\"80\\\"\", \"input\": \"null\", \"quality\": \"\\\"36\\\"\"}", "id": 3, "tool_shed_repository": {"owner": "devteam", "changeset_revision": "43a7370aa010", "name": "fastq_quality_filter", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "df2f009c-d3e5-4ccc-bf0f-10b8e44947da", "errors": null, "name": "Filter by quality", "post_job_actions": {}, "label": null, "inputs": [], "position": {"top": 250, "left": 230}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1", "type": "tool"}}, "annotation": "", "a_galaxy_workflow": "true"}
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "A short introduction to Galaxy",
+  "format-version": "0.1",
+  "name": "Galaxy Intro Short",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "mutant_R1"
+        }
+      ],
+      "label": "mutant_R1",
+      "name": "mutant_R1",
+      "outputs": [],
+      "position": {
+        "left": 10,
+        "top": 10
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"mutant_R1\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "e271eee4-bfb8-40b4-b691-a25cb9932327",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72",
+      "errors": null,
+      "id": 1,
+      "input_connections": {
+        "input_file": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "FastQC",
+      "outputs": [
+        {
+          "name": "html_file",
+          "type": "html"
+        },
+        {
+          "name": "text_file",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 230,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72",
+      "tool_shed_repository": {
+        "changeset_revision": "c15237684a01",
+        "name": "fastqc",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"limits\": \"null\", \"input_file\": \"null\", \"__rerun_remap_job_id__\": null, \"contaminants\": \"null\", \"chromInfo\": \"\\\"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\\\"\"}",
+      "tool_version": "0.72",
+      "type": "tool",
+      "uuid": "c6a231d9-786d-4fdf-bc25-8e3db1c16bfa",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "input": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Filter by quality",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 230,
+        "top": 130
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "43a7370aa010",
+        "name": "fastq_quality_filter",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"chromInfo\": \"\\\"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"percent\": \"\\\"80\\\"\", \"input\": \"null\", \"quality\": \"\\\"35\\\"\"}",
+      "tool_version": "1.0.1",
+      "type": "tool",
+      "uuid": "3a3ec769-355d-488a-984b-78462a794ef9",
+      "workflow_outputs": [
+        {"output_name": "output", "label": "filter1"}
+      ]
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "input": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Filter by quality",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 230,
+        "top": 250
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "43a7370aa010",
+        "name": "fastq_quality_filter",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"chromInfo\": \"\\\"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"percent\": \"\\\"80\\\"\", \"input\": \"null\", \"quality\": \"\\\"36\\\"\"}",
+      "tool_version": "1.0.1",
+      "type": "tool",
+      "uuid": "df2f009c-d3e5-4ccc-bf0f-10b8e44947da",
+      "workflow_outputs": [
+        {"output_name": "output", "label": "filter2"}
+      ]
+    }
+  },
+  "tags": [
+    "introduction"
+  ],
+  "uuid": "58bcce73-f061-4298-9d44-5ffac39dc1b8",
+  "version": 0
+}

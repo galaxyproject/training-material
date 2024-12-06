@@ -1,0 +1,9 @@
+---
+area: jbrowse
+---
+
+{% capture jbrowse %}{{ site.baseurl }}/assets/jbrowse/index.html{% endcapture %}
+{% capture jbrowsedatadir %}{{ site.baseurl }}{{ page.url | remove: "tutorial.html" }}{{ include.datadir }}{% endcapture %}
+{% capture jbFinishedUrl %}{{ jbrowse }}?{% if include.loc %}loc={{ include.loc }}&{% endif %}data={{ jbrowsedatadir }}{% endcapture %}
+<iframe id="{% if include.id %}{{ include.id }}{% else %}embedded_jbrowse{% endif %}" src="{{ jbFinishedUrl }}&trackList=0" border="0" width="100%" height="{% if include.height %}{{ include.height }}{% else %}500px{% endif %}"></iframe>
+<a href="{{ jbFinishedUrl }}" target="_blank" style="padding: 0.5rem 1rem; background-color: #dfe5f9;border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">Open JBrowse in a new tab</a>

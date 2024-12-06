@@ -1,0 +1,8 @@
+{% assign locale = site.data.lang[page.lang] %}
+{% assign lvl = include.level | downcase %}
+
+{% if include.textlabel %} {{ locale[lvl] | default: include.level }} <span class="visually-hidden">{{ include.level }}</span>{% endif %}
+<span class="level {{ include.level | downcase }}" title="{{ include.level }} Tutorial">
+  {% icon level aria=false %} {% icon level aria=false %} {% icon level aria=false %}
+</span>
+

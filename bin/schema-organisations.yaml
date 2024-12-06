@@ -1,0 +1,104 @@
+---
+type: map
+_examples: |
+    elixir:
+        name: ELIXIR
+        bio: We contribute as an organisation!
+mapping:
+    "=":
+        type: map
+        description: |
+            This ideally is your GitHub handle. If you do not have, or do not wish to provide a GitHub username, you may make up another identifier here, but then you must set `github: false` as described below.
+        mapping:
+            short_name:
+                type: str
+                description: |
+                    Name of the organisation, as short as possible (e.g. acronyms)
+                _examples:
+                    - EBI
+                    - UFR
+                    - NIH
+
+            name:
+                type: str
+                required: true
+                description: |
+                    Full name of the organisation (e.g. acronyms expanded).
+                _examples:
+                    - European Bioinformatics Institute
+                    - University of Freiburg
+                    - National Institutes of Health
+
+            description:
+                type: str
+                description: |
+                    A couple sentences of description about the organisation
+
+            email:
+                type: str
+                pattern: /@/
+                description: |
+                    Your email address, if you wish to provide it.
+                _examples:
+                    - jane.doe@gmail.com
+            twitter:
+                type: str
+                pattern: /[0-9a-zA-Z]+/
+                description: Your twitter handle, without the `@`
+                _examples:
+                    - gxytraining
+            fediverse:
+                type: str
+                pattern: /^https:\/\/[0-9a-zA-Z.]+/@?[0-9a-zA-Z.]+$/
+                description: The URL to your fediverse profile
+                _examples:
+                  - http://genomic.social/@abretaud
+            fediverse_flavor:
+                type: str
+                enum:
+                  - mastodon
+                  - akkoma
+                description: The flavor of the fediverse server (used in our webfinger endpoint.)
+            bio:
+                type: str
+                description: |
+                    A short biography of yourself, if you wish to add additional details or context.
+                _examples:
+                    - Research at the [South African National Bioinformatics Institute](https://www.sanbi.ac.za/)
+            matrix:
+                type: str
+                pattern: /[0-9a-zA-Z]+:.*/
+                description: Your matrix identifier and home server
+                _examples:
+                    - "hexylena:matrix.org"
+            linkedin:
+                type: str
+                pattern: /[0-9a-zA-Z]+/
+            github:
+                type: bool
+                description: |
+                    If your identifier in this file is **not** a GitHub account (or not your account), then this **must** be set to true, so we do not link to that account.
+            orcid:
+                type: str
+                pattern: /[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{4}/
+                description: Your identifier at orcid.org
+                _examples:
+                    - 0000-0001-9760-8992
+            joined:
+                type: str
+                pattern: /[0-9]{4,}-[0-9]{2}/
+                description: The year and month in which you joined
+                _examples:
+                    - 2020-01
+            avatar:
+                type: str
+            ror:
+                type: str
+                description: ROR ID from https://ror.org/
+                _examples:
+                  - "019w4f821"
+            url:
+                type: str
+                description: associated webpage (NOTE, funders only!)
+                _examples:
+                  - "https://elixir-europe.org"

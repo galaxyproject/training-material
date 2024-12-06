@@ -1,0 +1,270 @@
+{
+  "uuid": "ea543914-dcf5-43e6-b539-24d17d7e02fe",
+  "tags": [
+    "ml",
+    "statistics"
+  ],
+  "format-version": "0.1",
+  "name": "Classification LSVC",
+  "version": 2,
+  "steps": {
+    "0": {
+      "tool_id": null,
+      "tool_version": null,
+      "outputs": [],
+      "workflow_outputs": [
+        {
+          "output_name": "output",
+          "uuid": "196e8588-e089-4b6a-b319-34ad1b73e531",
+          "label": null
+        }
+      ],
+      "input_connections": {},
+      "tool_state": "{}",
+      "id": 0,
+      "uuid": "86076921-8735-478b-b872-5042728124b0",
+      "errors": null,
+      "name": "Input dataset",
+      "label": "breast-w_train",
+      "inputs": [],
+      "position": {
+        "top": 202,
+        "left": 249
+      },
+      "annotation": "",
+      "content_id": null,
+      "type": "data_input"
+    },
+    "1": {
+      "tool_id": null,
+      "tool_version": null,
+      "outputs": [],
+      "workflow_outputs": [
+        {
+          "output_name": "output",
+          "uuid": "1cc8efcb-1cfc-439b-89c6-43ac874d3de7",
+          "label": null
+        }
+      ],
+      "input_connections": {},
+      "tool_state": "{}",
+      "id": 1,
+      "uuid": "6c281658-889f-4313-a7e0-29bc6109c21b",
+      "errors": null,
+      "name": "Input dataset",
+      "label": "breast-w_targets",
+      "inputs": [],
+      "position": {
+        "top": 202,
+        "left": 468
+      },
+      "annotation": "",
+      "content_id": null,
+      "type": "data_input"
+    },
+    "2": {
+      "tool_id": null,
+      "tool_version": null,
+      "outputs": [],
+      "workflow_outputs": [
+        {
+          "output_name": "output",
+          "uuid": "a6c87668-0127-4b79-aef5-8dd725bbb576",
+          "label": null
+        }
+      ],
+      "input_connections": {},
+      "tool_state": "{}",
+      "id": 2,
+      "uuid": "fd467fb3-5476-4975-8ffe-9f0806618059",
+      "errors": null,
+      "name": "Input dataset",
+      "label": "breast-w_test",
+      "inputs": [],
+      "position": {
+        "top": 524,
+        "left": 239
+      },
+      "annotation": "",
+      "content_id": null,
+      "type": "data_input"
+    },
+    "3": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1",
+      "tool_version": null,
+      "outputs": [
+        {
+          "type": "zip",
+          "name": "outfile_fit"
+        }
+      ],
+      "workflow_outputs": [
+        {
+          "output_name": "outfile_fit",
+          "uuid": "367a0a7b-3681-4125-ba0f-fb1b3cba1d54",
+          "label": null
+        }
+      ],
+      "input_connections": {
+        "selected_tasks|selected_algorithms|input_options|infile2": {
+          "output_name": "output",
+          "id": 0
+        },
+        "selected_tasks|selected_algorithms|input_options|infile1": {
+          "output_name": "output",
+          "id": 0
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"selected_tasks\": \"{\\\"__current_case__\\\": 1, \\\"selected_algorithms\\\": {\\\"__current_case__\\\": 2, \\\"input_options\\\": {\\\"__current_case__\\\": 0, \\\"column_selector_options_1\\\": {\\\"__current_case__\\\": 3, \\\"col1\\\": \\\"target\\\", \\\"selected_column_selector_option\\\": \\\"all_but_by_header_name\\\"}, \\\"column_selector_options_2\\\": {\\\"__current_case__\\\": 2, \\\"col2\\\": \\\"target\\\", \\\"selected_column_selector_option2\\\": \\\"by_header_name\\\"}, \\\"header1\\\": \\\"true\\\", \\\"header2\\\": \\\"true\\\", \\\"infile1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"infile2\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"selected_input\\\": \\\"tabular\\\"}, \\\"options\\\": {\\\"C\\\": \\\"1.0\\\", \\\"dual\\\": \\\"true\\\", \\\"fit_intercept\\\": \\\"true\\\", \\\"intercept_scaling\\\": \\\"1.0\\\", \\\"loss\\\": \\\"squared_hinge\\\", \\\"max_iter\\\": \\\"1000\\\", \\\"multi_class\\\": \\\"ovr\\\", \\\"penalty\\\": \\\"l2\\\", \\\"random_state\\\": \\\"\\\", \\\"tol\\\": \\\"0.001\\\"}, \\\"selected_algorithm\\\": \\\"LinearSVC\\\"}, \\\"selected_task\\\": \\\"train\\\"}\", \"__rerun_remap_job_id__\": null}",
+      "id": 3,
+      "tool_shed_repository": {
+        "owner": "bgruening",
+        "changeset_revision": "2df8f5c30edc",
+        "name": "sklearn_svm_classifier",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "a8696fa7-2bf4-41a5-867e-deb896432e3b",
+      "errors": null,
+      "name": "Support vector machines (SVMs)",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 317,
+        "left": 377
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1",
+      "type": "tool"
+    },
+    "4": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1",
+      "tool_version": null,
+      "outputs": [
+        {
+          "type": "tabular",
+          "name": "outfile_predict"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "selected_tasks|infile_data": {
+          "output_name": "output",
+          "id": 2
+        },
+        "selected_tasks|infile_model": {
+          "output_name": "outfile_fit",
+          "id": 3
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"selected_tasks\": \"{\\\"__current_case__\\\": 0, \\\"header\\\": \\\"true\\\", \\\"infile_data\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"infile_model\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"prediction_options\\\": {\\\"__current_case__\\\": 0, \\\"prediction_option\\\": \\\"predict\\\"}, \\\"selected_task\\\": \\\"load\\\"}\", \"__rerun_remap_job_id__\": null}",
+      "id": 4,
+      "tool_shed_repository": {
+        "owner": "bgruening",
+        "changeset_revision": "2df8f5c30edc",
+        "name": "sklearn_svm_classifier",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "8ffd721c-64aa-4b69-90e4-2d3cbfb95425",
+      "errors": null,
+      "name": "Support vector machines (SVMs)",
+      "post_job_actions": {
+        "HideDatasetActionoutfile_predict": {
+          "output_name": "outfile_predict",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        }
+      },
+      "label": null,
+      "inputs": [
+        {
+          "name": "selected_tasks",
+          "description": "runtime parameter for tool Support vector machines (SVMs)"
+        },
+        {
+          "name": "selected_tasks",
+          "description": "runtime parameter for tool Support vector machines (SVMs)"
+        }
+      ],
+      "position": {
+        "top": 532,
+        "left": 507
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1",
+      "type": "tool"
+    },
+    "5": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.1",
+      "tool_version": null,
+      "outputs": [
+        {
+          "type": "html",
+          "name": "output_confusion"
+        },
+        {
+          "type": "html",
+          "name": "output_prf"
+        },
+        {
+          "type": "html",
+          "name": "output_roc"
+        }
+      ],
+      "workflow_outputs": [
+        {
+          "output_name": "output_roc",
+          "uuid": "0fac82f3-c1b2-482f-a31f-30b623a0f223",
+          "label": "output_roc"
+        },
+        {
+          "output_name": "output_confusion",
+          "uuid": "431f3596-7b80-44f0-83ee-dda8c58e1e8c",
+          "label": "output_confusion"
+        },
+        {
+          "output_name": "output_prf",
+          "uuid": "ab62de11-fa69-4d59-9ebe-d5d0562f3c18",
+          "label": "output_prf"
+        }
+      ],
+      "input_connections": {
+        "infile_trained_model": {
+          "output_name": "outfile_fit",
+          "id": 3
+        },
+        "infile_output": {
+          "output_name": "outfile_predict",
+          "id": 4
+        },
+        "infile_input": {
+          "output_name": "output",
+          "id": 1
+        }
+      },
+      "tool_state": "{\"infile_trained_model\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__rerun_remap_job_id__\": null, \"infile_output\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"infile_input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null}",
+      "id": 5,
+      "tool_shed_repository": {
+        "owner": "bgruening",
+        "changeset_revision": "85da91bbdbfb",
+        "name": "plotly_ml_performance_plots",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "f92a43d9-1900-4c66-8e7c-5d3772ab0420",
+      "errors": null,
+      "name": "Plot confusion matrix, precision, recall and ROC and AUC curves",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 242,
+        "left": 921
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.1",
+      "type": "tool"
+    }
+  },
+  "annotation": "Machine learning: classification and regression",
+  "a_galaxy_workflow": "true"
+}

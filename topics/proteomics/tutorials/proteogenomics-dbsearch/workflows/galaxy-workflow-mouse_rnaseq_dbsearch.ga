@@ -1,0 +1,528 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Proteogenomics 2: Database Search",
+    "format-version": "0.1",
+    "name": "GTN Proteogemics2 Database Search",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Uniprot_cRAP_SAV_indel_translatedbed.FASTA"
+                }
+            ],
+            "label": "Uniprot_cRAP_SAV_indel_translatedbed.FASTA",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 290,
+                "height": 105,
+                "left": -277.5,
+                "right": -77.5,
+                "top": 185,
+                "width": 200,
+                "x": -277.5,
+                "y": 185
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "eb7142ae-40cc-4c61-b744-bf7f3c8ed096",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "a125ba5f-316b-4f95-a8f2-978e9a9affda"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "MGF Collection"
+                }
+            ],
+            "label": "MGF Collection",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 433.984375,
+                "height": 84,
+                "left": -277.46875,
+                "right": -77.46875,
+                "top": 349.984375,
+                "width": 200,
+                "x": -277.46875,
+                "y": 349.984375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "d7429ce1-2fc7-4ffa-87dd-4c4c343f8496",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "f0af224e-c8cd-412b-803b-ee636c1b924c"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reference Protein Accessions"
+                }
+            ],
+            "label": "Reference Protein Accessions",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 592.625,
+                "height": 84,
+                "left": -264.5,
+                "right": -64.5,
+                "top": 508.625,
+                "width": 200,
+                "x": -264.5,
+                "y": 508.625
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "99f0374c-ea36-4def-822a-2feb64aee67b",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "4a838c43-d3ba-4037-9ce1-0a47f919ac94"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_database": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "peak_lists": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Search GUI",
+            "outputs": [
+                {
+                    "name": "searchgui_results",
+                    "type": "searchgui_archive"
+                }
+            ],
+            "position": {
+                "bottom": 514,
+                "height": 168,
+                "left": 22.53125,
+                "right": 222.53125,
+                "top": 346,
+                "width": 200,
+                "x": 22.53125,
+                "y": 346
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1",
+            "tool_shed_repository": {
+                "changeset_revision": "7fdd9119cc4f",
+                "name": "peptideshaker",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced_options\": {\"searchgui_advanced\": {\"searchgui_advanced_selector\": \"basic\", \"__current_case__\": 0}, \"xtandem\": {\"xtandem_advanced\": \"no\", \"__current_case__\": 0}, \"omssa\": {\"omssa_advanced\": \"no\", \"__current_case__\": 0}, \"msgf\": {\"msgf_advanced\": \"no\", \"__current_case__\": 0}, \"ms_amanda\": {\"ms_amanda_advanced\": \"no\", \"__current_case__\": 0}, \"tide\": {\"tide_advanced\": \"no\", \"__current_case__\": 0}, \"myrimatch\": {\"myrimatch_advanced\": \"no\", \"__current_case__\": 0}, \"comet\": {\"comet_advanced\": \"no\", \"__current_case__\": 0}, \"directtag\": {\"directtag_advanced\": \"no\", \"__current_case__\": 0}, \"novor\": {\"novor_advanced\": \"no\", \"__current_case__\": 0}}, \"input_database\": {\"__class__\": \"ConnectedValue\"}, \"peak_lists\": {\"__class__\": \"ConnectedValue\"}, \"precursor_options\": {\"precursor_ion_tol_units\": \"1\", \"precursor_ion_tol\": \"10.0\", \"fragment_tol_units\": \"0\", \"fragment_tol\": \"0.5\", \"min_charge\": \"2\", \"max_charge\": \"6\", \"forward_ion\": \"b\", \"reverse_ion\": \"y\", \"min_isotope\": \"0\", \"max_isotope\": \"1\"}, \"protein_database_options\": {\"create_decoy\": \"true\", \"use_gene_mapping\": \"false\", \"update_gene_mapping\": \"false\"}, \"protein_digest_options\": {\"digestion\": {\"cleavage\": \"0\", \"__current_case__\": 0, \"digests\": [{\"__index__\": 0, \"enzyme\": \"Trypsin\", \"missed_cleavages\": \"2\"}]}}, \"protein_modification_options\": {\"fixed_modifications\": [\"Carbamidomethylation of C\", \"iTRAQ 4-plex of K\", \"iTRAQ 4-plex of peptide N-term\"], \"variable_modifications\": [\"Oxidation of M\", \"iTRAQ 4-plex of Y\"]}, \"search_engines_options\": {\"engines\": [\"X!Tandem\"]}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.3.10.1",
+            "type": "tool",
+            "uuid": "41bfe37f-62de-44cd-9a2c-26f007258c61",
+            "workflow_outputs": [
+                {
+                    "label": "Search GUI on input dataset(s)",
+                    "output_name": "searchgui_results",
+                    "uuid": "d14f9481-80db-4c15-8afc-6fa38ef61deb"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "searchgui_input": {
+                    "id": 3,
+                    "output_name": "searchgui_results"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Peptide Shaker",
+            "outputs": [
+                {
+                    "name": "mzidentML",
+                    "type": "mzid"
+                },
+                {
+                    "name": "output_certificate",
+                    "type": "txt"
+                },
+                {
+                    "name": "output_psm",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output_peptides",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output_proteins",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 704.125,
+                "height": 471,
+                "left": 309.53125,
+                "right": 509.53125,
+                "top": 233.125,
+                "width": 200,
+                "x": 309.53125,
+                "y": 233.125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3",
+            "tool_shed_repository": {
+                "changeset_revision": "7fdd9119cc4f",
+                "name": "peptideshaker",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"contact_options\": {\"contact_options_selector\": \"no\", \"__current_case__\": 0}, \"exporting_options\": {\"mzidentml_conditional\": {\"mzidentml_creation\": \"true\", \"__current_case__\": 0, \"include_sequences\": \"false\"}, \"zip_conditional\": {\"zip_output_boolean\": \"false\", \"__current_case__\": 0, \"export_cps\": \"false\"}, \"output_reports\": [\"3\", \"6\", \"9\", \"0\"]}, \"filtering_options\": {\"filtering_options_selector\": \"no\", \"__current_case__\": 0}, \"processing_options\": {\"processing_options_selector\": \"no\", \"__current_case__\": 0}, \"searchgui_input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.16.36.3",
+            "type": "tool",
+            "uuid": "3d435aa3-cc94-4320-94a4-a49503f7e82e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_certificate",
+                    "uuid": "1c33ea40-12f5-4e28-b4da-5b7975f2c13f"
+                },
+                {
+                    "label": null,
+                    "output_name": "output_psm",
+                    "uuid": "6425fbc7-08cf-4633-ac15-74993be5851f"
+                },
+                {
+                    "label": null,
+                    "output_name": "output_proteins",
+                    "uuid": "a52e58b1-de72-4bd6-a434-674f20c5d19d"
+                },
+                {
+                    "label": "Peptide Shaker on input dataset(s): mzidentML file",
+                    "output_name": "mzidentML",
+                    "uuid": "afe0f1a5-28bb-44bd-b32b-c634aa2154f3"
+                },
+                {
+                    "label": null,
+                    "output_name": "output_peptides",
+                    "uuid": "75e03205-eb1a-4cfd-847f-c70dd5c3209a"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "mzinput": {
+                    "id": 4,
+                    "output_name": "mzidentML"
+                },
+                "scanfiles": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "searchdbs": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "mz to sqlite",
+            "outputs": [
+                {
+                    "name": "sqlite_db",
+                    "type": "mz.sqlite"
+                }
+            ],
+            "position": {
+                "bottom": 411.484375,
+                "height": 220,
+                "left": 651.546875,
+                "right": 851.546875,
+                "top": 191.484375,
+                "width": 200,
+                "x": 651.546875,
+                "y": 191.484375
+            },
+            "post_job_actions": {
+                "RenameDatasetActionsqlite_db": {
+                    "action_arguments": {
+                        "newname": "Mz to sqlite"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "sqlite_db"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "f5c632894818",
+                "name": "mz_to_sqlite",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"mzinput\": {\"__class__\": \"ConnectedValue\"}, \"scanfiles\": {\"__class__\": \"ConnectedValue\"}, \"searchdbs\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.4+galaxy1",
+            "type": "tool",
+            "uuid": "1985019a-af9a-4ebc-82c6-448a6ae62166",
+            "workflow_outputs": [
+                {
+                    "label": "mz to sqlite on input dataset(s)",
+                    "output_name": "sqlite_db",
+                    "uuid": "b43a2136-cf59-4fb0-bb2b-0d5b446c8ba9"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "tables_0|table": {
+                    "id": 4,
+                    "output_name": "output_psm"
+                },
+                "tables_1|table": {
+                    "id": 4,
+                    "output_name": "output_psm"
+                },
+                "tables_2|table": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Query Tabular",
+                    "name": "add_to_database"
+                }
+            ],
+            "label": "Removing reference proteins",
+            "name": "Query Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 821.640625,
+                "height": 314,
+                "left": 609.546875,
+                "right": 809.546875,
+                "top": 507.640625,
+                "width": 200,
+                "x": 609.546875,
+                "y": 507.640625
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Removing reference proteins"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "33d61c89fb8d",
+                "name": "query_tabular",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"add_to_database\": {\"withdb\": {\"__class__\": \"RuntimeValue\"}}, \"addqueries\": {\"queries\": []}, \"modify_database\": {\"sql_stmts\": []}, \"query_result\": {\"header\": \"yes\", \"__current_case__\": 0, \"header_prefix\": \"35\"}, \"save_db\": \"false\", \"sqlquery\": \"SELECT psms.*\\nFROM psms\\nWHERE psms.id NOT IN\\n(SELECT distinct prots.id\\nFROM prots JOIN uniprot ON prots.prot = uniprot.prot)\\nORDER BY psms.id\", \"tables\": [{\"__index__\": 0, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": [{\"__index__\": 0, \"filter\": {\"filter_type\": \"skip\", \"__current_case__\": 0, \"skip_lines\": \"1\"}}]}, \"tbl_opts\": {\"table_name\": \"psms\", \"column_names_from_first_line\": \"false\", \"col_names\": \"id,Proteins,Sequence\", \"load_named_columns\": \"true\", \"pkey_autoincr\": \"\", \"indexes\": [{\"__index__\": 0, \"unique\": \"false\", \"index_columns\": \"id\"}]}}, {\"__index__\": 1, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": [{\"__index__\": 0, \"filter\": {\"filter_type\": \"skip\", \"__current_case__\": 0, \"skip_lines\": \"1\"}}, {\"__index__\": 1, \"filter\": {\"filter_type\": \"select_columns\", \"__current_case__\": 7, \"columns\": \"1,2\"}}, {\"__index__\": 2, \"filter\": {\"filter_type\": \"normalize\", \"__current_case__\": 9, \"columns\": \"2\", \"separator\": \",\"}}]}, \"tbl_opts\": {\"table_name\": \"prots\", \"column_names_from_first_line\": \"false\", \"col_names\": \"id,prot\", \"load_named_columns\": \"false\", \"pkey_autoincr\": \"\", \"indexes\": [{\"__index__\": 0, \"unique\": \"false\", \"index_columns\": \"prot,id\"}]}}, {\"__index__\": 2, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": []}, \"tbl_opts\": {\"table_name\": \"Uniprot\", \"column_names_from_first_line\": \"false\", \"col_names\": \"prot\", \"load_named_columns\": \"false\", \"pkey_autoincr\": \"\", \"indexes\": [{\"__index__\": 0, \"unique\": \"false\", \"index_columns\": \"prot\"}]}}], \"workdb\": \"workdb.sqlite\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.0",
+            "type": "tool",
+            "uuid": "90f1b13e-0ba1-4373-92c5-8b31adbdcdbb",
+            "workflow_outputs": [
+                {
+                    "label": "Removing reference proteins",
+                    "output_name": "output",
+                    "uuid": "a06ad5fa-9a00-4867-b976-3745c5e59c80"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "tables_0|table": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Query Tabular",
+                    "name": "add_to_database"
+                }
+            ],
+            "label": "Selecting sequence with length >6 and <30",
+            "name": "Query Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 767.140625,
+                "height": 252,
+                "left": 836.546875,
+                "right": 1036.546875,
+                "top": 515.140625,
+                "width": 200,
+                "x": 836.546875,
+                "y": 515.140625
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Selecting sequence with length >6 and <30"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "33d61c89fb8d",
+                "name": "query_tabular",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"add_to_database\": {\"withdb\": {\"__class__\": \"RuntimeValue\"}}, \"addqueries\": {\"queries\": []}, \"modify_database\": {\"sql_stmts\": []}, \"query_result\": {\"header\": \"yes\", \"__current_case__\": 0, \"header_prefix\": \"35\"}, \"save_db\": \"false\", \"sqlquery\": \"SELECT Sequence || ' PSM=' || group_concat(id,',') || ' length='\\n|| length(Sequence) as \\\"ID\\\",Sequence\\nFROM  psm\\nWHERE length(Sequence) >6\\nAND length(Sequence) <= 30\\nGROUP BY Sequence\\nORDER BY length(Sequence),Sequence\", \"tables\": [{\"__index__\": 0, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": [{\"__index__\": 0, \"filter\": {\"filter_type\": \"skip\", \"__current_case__\": 0, \"skip_lines\": \"1\"}}]}, \"tbl_opts\": {\"table_name\": \"psm\", \"column_names_from_first_line\": \"false\", \"col_names\": \"id,Proteins,Sequence\", \"load_named_columns\": \"true\", \"pkey_autoincr\": \"\", \"indexes\": []}}], \"workdb\": \"workdb.sqlite\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.0",
+            "type": "tool",
+            "uuid": "7a40e039-01e2-4b13-b72f-7bb91061c50a",
+            "workflow_outputs": [
+                {
+                    "label": "Selecting sequence with length >6 and <30",
+                    "output_name": "output",
+                    "uuid": "b71e5417-2864-4712-b5c1-c90725976baf"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Tabular-to-FASTA",
+                    "name": "input"
+                }
+            ],
+            "label": "Peptides for BlastP analysis",
+            "name": "Tabular-to-FASTA",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "bottom": 724.9375,
+                "height": 158,
+                "left": 1066.546875,
+                "right": 1266.546875,
+                "top": 566.9375,
+                "width": 200,
+                "x": 1066.546875,
+                "y": 566.9375
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Peptides for BlastP analysis"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "0a7799698fe5",
+                "name": "tabular_to_fasta",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"seq_col\": \"2\", \"title_col\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "135caaf1-ceda-47b6-9f1a-8b0659d8e6a2",
+            "workflow_outputs": [
+                {
+                    "label": "Peptides_for_BlastP_analysis",
+                    "output_name": "output",
+                    "uuid": "1ac3c776-8095-4db1-8518-3643dc081006"
+                }
+            ]
+        }
+    },
+    "tags": ["proteomics"],
+    "uuid": "636c2e24-be66-4dc9-bd14-3d92d753b66a",
+    "version": 4
+}

@@ -1,1 +1,324 @@
-{"uuid": "73d76159-35a3-4e1a-a229-1953dbc18f12", "tags": [], "format-version": "0.1", "name": "Du Novo GTN tutorial - Variant calling", "steps": {"0": {"tool_id": null, "tool_version": null, "outputs": [], "workflow_outputs": [{"output_name": "output", "uuid": "d9cf4c1c-9b41-49e6-8eed-20f201143897", "label": null}], "input_connections": {}, "tool_state": "{}", "id": 0, "uuid": "f9817ffe-4cdb-471f-a921-1b20e96e92d6", "errors": null, "name": "Input dataset", "label": "Trimmed reads (mate 1)", "inputs": [], "position": {"top": 284, "left": 200}, "annotation": "", "content_id": null, "type": "data_input"}, "1": {"tool_id": null, "tool_version": null, "outputs": [], "workflow_outputs": [{"output_name": "output", "uuid": "347dcece-5ddc-40fb-a5ed-4ff05f2d2d3a", "label": null}], "input_connections": {}, "tool_state": "{}", "id": 1, "uuid": "efc0fed6-846f-467f-82a3-45898dc3e0a4", "errors": null, "name": "Input dataset", "label": "Trimmed reads (mate 2)", "inputs": [], "position": {"top": 383, "left": 201}, "annotation": "", "content_id": null, "type": "data_input"}, "2": {"tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1", "tool_version": "0.7.17.1", "outputs": [{"type": "bam", "name": "bam_output"}], "workflow_outputs": [], "input_connections": {"fastq_input|fastq_input1": {"output_name": "output", "id": 0}, "fastq_input|fastq_input2": {"output_name": "output", "id": 1}}, "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"rg\": \"{\\\"rg_selector\\\": \\\"do_not_set\\\", \\\"__current_case__\\\": 3}\", \"fastq_input\": \"{\\\"iset_stats\\\": \\\"\\\", \\\"fastq_input2\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0, \\\"fastq_input_selector\\\": \\\"paired\\\", \\\"fastq_input1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"analysis_type\": \"{\\\"analysis_type_selector\\\": \\\"illumina\\\", \\\"__current_case__\\\": 0}\", \"reference_source\": \"{\\\"ref_file\\\": \\\"hg38\\\", \\\"reference_source_selector\\\": \\\"cached\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\\\"\"}", "id": 2, "tool_shed_repository": {"owner": "devteam", "changeset_revision": "4f774c1e6049", "name": "bwa", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "a4e278e2-b0b2-41ce-80e7-0823e4e8f4a6", "errors": null, "name": "Map with BWA-MEM", "post_job_actions": {"HideDatasetActionbam_output": {"output_name": "bam_output", "action_type": "HideDatasetAction", "action_arguments": {}}}, "label": null, "inputs": [{"name": "fastq_input", "description": "runtime parameter for tool Map with BWA-MEM"}, {"name": "fastq_input", "description": "runtime parameter for tool Map with BWA-MEM"}], "position": {"top": 283, "left": 457}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1", "type": "tool"}, "3": {"tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.1.0.46-0", "tool_version": "1.1.0.46-0", "outputs": [{"type": "bam", "name": "output_bam"}], "workflow_outputs": [], "input_connections": {"reference_source|input_bam": {"output_name": "bam_output", "id": 2}}, "tool_state": "{\"reference_source\": \"{\\\"ref_file\\\": \\\"hg38\\\", \\\"reference_source_selector\\\": \\\"cached\\\", \\\"input_bam\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/cvmfs/data.galaxyproject.org/managed/len/ucsc/hg38.len\\\"\", \"iterations\": \"\\\"5\\\"\", \"__page__\": null}", "id": 3, "tool_shed_repository": {"owner": "devteam", "changeset_revision": "156b60c1530f", "name": "freebayes", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "36f6b523-9f11-4d6d-9316-dc14bf82e3fe", "errors": null, "name": "BamLeftAlign", "post_job_actions": {"HideDatasetActionoutput_bam": {"output_name": "output_bam", "action_type": "HideDatasetAction", "action_arguments": {}}}, "label": null, "inputs": [{"name": "reference_source", "description": "runtime parameter for tool BamLeftAlign"}], "position": {"top": 283, "left": 712}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.1.0.46-0", "type": "tool"}, "4": {"tool_id": "toolshed.g2.bx.psu.edu/repos/blankenberg/naive_variant_caller/naive_variant_caller/0.0.4", "tool_version": "0.0.4", "outputs": [{"type": "vcf", "name": "output_vcf"}], "workflow_outputs": [], "input_connections": {"reference_source|input_bams_0|input_bam": {"output_name": "output_bam", "id": 3}}, "tool_state": "{\"__page__\": null, \"ploidy\": \"\\\"1\\\"\", \"use_strand\": \"\\\"true\\\"\", \"min_mapping_quality\": \"\\\"20\\\"\", \"region_files\": \"[]\", \"__rerun_remap_job_id__\": null, \"regions\": \"[{\\\"__index__\\\": 0, \\\"end\\\": \\\"\\\", \\\"chromosome\\\": \\\"chr9\\\", \\\"start\\\": \\\"\\\"}]\", \"advanced_options\": \"{\\\"advanced_options_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"min_base_quality\": \"\\\"0\\\"\", \"reference_source\": \"{\\\"ref_file\\\": \\\"hg38\\\", \\\"reference_source_selector\\\": \\\"cached\\\", \\\"input_bams\\\": [{\\\"__index__\\\": 0, \\\"input_bam\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}], \\\"__current_case__\\\": 0}\", \"variants_only\": \"\\\"false\\\"\", \"min_support_depth\": \"\\\"0\\\"\", \"chromInfo\": \"\\\"/cvmfs/data.galaxyproject.org/managed/len/ucsc/hg38.len\\\"\"}", "id": 4, "tool_shed_repository": {"owner": "blankenberg", "changeset_revision": "07e71cf6c8ef", "name": "naive_variant_caller", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "3214b873-94e1-46e5-bbd2-ad52d1ef43b5", "errors": null, "name": "Naive Variant Caller (NVC)", "post_job_actions": {"HideDatasetActionoutput_vcf": {"output_name": "output_vcf", "action_type": "HideDatasetAction", "action_arguments": {}}}, "label": null, "inputs": [], "position": {"top": 503, "left": 200}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/blankenberg/naive_variant_caller/naive_variant_caller/0.0.4", "type": "tool"}, "5": {"tool_id": "toolshed.g2.bx.psu.edu/repos/nick/allele_counts/allele_counts_1/1.2", "tool_version": "1.2", "outputs": [{"type": "tabular", "name": "output"}], "workflow_outputs": [{"output_name": "output", "uuid": "ad99c585-39c1-4888-9726-28c30317ec21", "label": null}], "input_connections": {"input": {"output_name": "output_vcf", "id": 4}}, "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"stranded\": \"\\\"true\\\"\", \"covg\": \"\\\"10\\\"\", \"header\": \"\\\"true\\\"\", \"seed\": \"\\\"\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"freq\": \"\\\"0.0\\\"\", \"nofilt\": \"\\\"false\\\"\"}", "id": 5, "tool_shed_repository": {"owner": "nick", "changeset_revision": "411adeff1eec", "name": "allele_counts", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "b27aa8b9-adb8-43b4-9a70-53025ae1f9f1", "errors": null, "name": "Variant Annotator", "post_job_actions": {"RenameDatasetActionoutput": {"output_name": "output", "action_type": "RenameDatasetAction", "action_arguments": {"newname": "All variants"}}}, "label": null, "inputs": [{"name": "input", "description": "runtime parameter for tool Variant Annotator"}], "position": {"top": 502, "left": 474}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/nick/allele_counts/allele_counts_1/1.2", "type": "tool"}, "6": {"tool_id": "Filter1", "tool_version": "1.1.0", "outputs": [{"type": "input", "name": "out_file1"}], "workflow_outputs": [{"output_name": "out_file1", "uuid": "dcdddac9-bd96-4f27-b585-bd3167fef38d", "label": null}], "input_connections": {"input": {"output_name": "output", "id": 5}}, "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"header_lines\": \"\\\"1\\\"\", \"cond\": \"\\\"c16 >= 0.01\\\"\", \"__page__\": null}", "id": 6, "uuid": "3ada37c0-11f6-4d2c-bf53-cf1e228ee91e", "errors": null, "name": "Filter", "post_job_actions": {"RenameDatasetActionout_file1": {"output_name": "out_file1", "action_type": "RenameDatasetAction", "action_arguments": {"newname": "Filtered variants"}}}, "label": null, "inputs": [{"name": "input", "description": "runtime parameter for tool Filter"}], "position": {"top": 503, "left": 765}, "annotation": "", "content_id": "Filter1", "type": "tool"}}, "annotation": "Run this on the trimmed consensus reads (DCS or SSCS) from Du Novo.\n", "a_galaxy_workflow": "true"}
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Run this on the trimmed consensus reads (DCS or SSCS) from Du Novo.\n",
+  "format-version": "0.1",
+  "name": "Du Novo GTN Tutorial - Variant Calling",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [],
+      "label": "Trimmed reads (mate 1)",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 284
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "f9817ffe-4cdb-471f-a921-1b20e96e92d6",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "d9cf4c1c-9b41-49e6-8eed-20f201143897"
+        }
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [],
+      "label": "Trimmed reads (mate 2)",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 201,
+        "top": 383
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "efc0fed6-846f-467f-82a3-45898dc3e0a4",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "347dcece-5ddc-40fb-a5ed-4ff05f2d2d3a"
+        }
+      ]
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "fastq_input|fastq_input1": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "fastq_input|fastq_input2": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Map with BWA-MEM",
+          "name": "fastq_input"
+        },
+        {
+          "description": "runtime parameter for tool Map with BWA-MEM",
+          "name": "fastq_input"
+        }
+      ],
+      "label": null,
+      "name": "Map with BWA-MEM",
+      "outputs": [
+        {
+          "name": "bam_output",
+          "type": "bam"
+        }
+      ],
+      "position": {
+        "left": 457,
+        "top": 283
+      },
+      "post_job_actions": {
+        "HideDatasetActionbam_output": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "bam_output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+      "tool_shed_repository": {
+        "changeset_revision": "4f774c1e6049",
+        "name": "bwa",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"rg\": \"{\\\"rg_selector\\\": \\\"do_not_set\\\", \\\"__current_case__\\\": 3}\", \"fastq_input\": \"{\\\"iset_stats\\\": \\\"\\\", \\\"fastq_input2\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0, \\\"fastq_input_selector\\\": \\\"paired\\\", \\\"fastq_input1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"analysis_type\": \"{\\\"analysis_type_selector\\\": \\\"illumina\\\", \\\"__current_case__\\\": 0}\", \"reference_source\": \"{\\\"ref_file\\\": \\\"hg38\\\", \\\"reference_source_selector\\\": \\\"cached\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\\\"\"}",
+      "tool_version": "0.7.17.1",
+      "type": "tool",
+      "uuid": "a4e278e2-b0b2-41ce-80e7-0823e4e8f4a6",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.1.0.46-0",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "reference_source|input_bam": {
+          "id": 2,
+          "output_name": "bam_output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool BamLeftAlign",
+          "name": "reference_source"
+        }
+      ],
+      "label": null,
+      "name": "BamLeftAlign",
+      "outputs": [
+        {
+          "name": "output_bam",
+          "type": "bam"
+        }
+      ],
+      "position": {
+        "left": 712,
+        "top": 283
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutput_bam": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_bam"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.1.0.46-0",
+      "tool_shed_repository": {
+        "changeset_revision": "156b60c1530f",
+        "name": "freebayes",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"reference_source\": \"{\\\"ref_file\\\": \\\"hg38\\\", \\\"reference_source_selector\\\": \\\"cached\\\", \\\"input_bam\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/cvmfs/data.galaxyproject.org/managed/len/ucsc/hg38.len\\\"\", \"iterations\": \"\\\"5\\\"\", \"__page__\": null}",
+      "tool_version": "1.1.0.46-0",
+      "type": "tool",
+      "uuid": "36f6b523-9f11-4d6d-9316-dc14bf82e3fe",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/blankenberg/naive_variant_caller/naive_variant_caller/0.0.4",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "reference_source|input_bams_0|input_bam": {
+          "id": 3,
+          "output_name": "output_bam"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Naive Variant Caller (NVC)",
+      "outputs": [
+        {
+          "name": "output_vcf",
+          "type": "vcf"
+        }
+      ],
+      "position": {
+        "left": 200,
+        "top": 503
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutput_vcf": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_vcf"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/blankenberg/naive_variant_caller/naive_variant_caller/0.0.4",
+      "tool_shed_repository": {
+        "changeset_revision": "07e71cf6c8ef",
+        "name": "naive_variant_caller",
+        "owner": "blankenberg",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"ploidy\": \"\\\"1\\\"\", \"use_strand\": \"\\\"true\\\"\", \"min_mapping_quality\": \"\\\"20\\\"\", \"region_files\": \"[]\", \"__rerun_remap_job_id__\": null, \"regions\": \"[{\\\"__index__\\\": 0, \\\"end\\\": \\\"\\\", \\\"chromosome\\\": \\\"chr9\\\", \\\"start\\\": \\\"\\\"}]\", \"advanced_options\": \"{\\\"advanced_options_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"min_base_quality\": \"\\\"0\\\"\", \"reference_source\": \"{\\\"ref_file\\\": \\\"hg38\\\", \\\"reference_source_selector\\\": \\\"cached\\\", \\\"input_bams\\\": [{\\\"__index__\\\": 0, \\\"input_bam\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}], \\\"__current_case__\\\": 0}\", \"variants_only\": \"\\\"false\\\"\", \"min_support_depth\": \"\\\"0\\\"\", \"chromInfo\": \"\\\"/cvmfs/data.galaxyproject.org/managed/len/ucsc/hg38.len\\\"\"}",
+      "tool_version": "0.0.4",
+      "type": "tool",
+      "uuid": "3214b873-94e1-46e5-bbd2-ad52d1ef43b5",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/nick/allele_counts/allele_counts_1/1.2",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "input": {
+          "id": 4,
+          "output_name": "output_vcf"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Variant Annotator",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Variant Annotator",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 474,
+        "top": 502
+      },
+      "post_job_actions": {
+        "RenameDatasetActionoutput": {
+          "action_arguments": {
+            "newname": "All variants"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/nick/allele_counts/allele_counts_1/1.2",
+      "tool_shed_repository": {
+        "changeset_revision": "411adeff1eec",
+        "name": "allele_counts",
+        "owner": "nick",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"stranded\": \"\\\"true\\\"\", \"covg\": \"\\\"10\\\"\", \"header\": \"\\\"true\\\"\", \"seed\": \"\\\"\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"freq\": \"\\\"0.0\\\"\", \"nofilt\": \"\\\"false\\\"\"}",
+      "tool_version": "1.2",
+      "type": "tool",
+      "uuid": "b27aa8b9-adb8-43b4-9a70-53025ae1f9f1",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "ad99c585-39c1-4888-9726-28c30317ec21"
+        }
+      ]
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "Filter1",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "input": {
+          "id": 5,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Filter",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Filter",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 765,
+        "top": 503
+      },
+      "post_job_actions": {
+        "RenameDatasetActionout_file1": {
+          "action_arguments": {
+            "newname": "Filtered variants"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "out_file1"
+        }
+      },
+      "tool_id": "Filter1",
+      "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"header_lines\": \"\\\"1\\\"\", \"cond\": \"\\\"c16 >= 0.01\\\"\", \"__page__\": null}",
+      "tool_version": "1.1.0",
+      "type": "tool",
+      "uuid": "3ada37c0-11f6-4d2c-bf53-cf1e228ee91e",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "out_file1",
+          "uuid": "dcdddac9-bd96-4f27-b585-bd3167fef38d"
+        }
+      ]
+    }
+  },
+  "tags": [
+    "variant-analysis"
+  ],
+  "uuid": "73d76159-35a3-4e1a-a229-1953dbc18f12"
+}

@@ -6,19 +6,16 @@ questions:
   - "How to generate PDF of the different tutorials and slides?"
 objectives:
   - "Generating PDFs"
-time_estimation: "10min"
+time_estimation: "10m"
 key_points:
   - "PDFs can be easily generated for the different tutorials to share with learnees or to keep a fixed version of a tutorial"
 contributors:
   - bebatut
 ---
 
-# Introduction
-{:.no_toc}
-
 The website with the training material can be run locally. Sometimes, it is also interesting to freeze the tutorials or to get PDFs of the tutorials.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, you will learn how to run a local instance of the GTN website:
 >
@@ -35,15 +32,9 @@ To generate the PDFs, a command `make pdf` is given. This command:
 - Generates the PDFs of the tutorials by calling Chrome via command line
 - Generates the PDFs of the slide decks by calling decktape
 
-> ### {% icon hands_on %} Hands-on: Checking the website generation locally
+> <hands-on-title>Checking the website generation locally</hands-on-title>
 >
-> 1. (If not done) Activate the conda environment: `source activate galaxy_training_material`
-> 2. Install Chrome
->    - For OSX, install the [Chrome browser]()
->    - For Ubuntu, follow [these instructions]()
-> 1. Generate the PDFs: `make pdf`
-> 2. Check the generated PDFs in `_pdf` folder
+> 1. Install a browser
+> 2. Generate the PDFs: `make pdf`
+> 3. Check the generated PDFs in `_pdf` folder
 {: .hands_on}
-
-# Conclusion
-{:.no_toc}

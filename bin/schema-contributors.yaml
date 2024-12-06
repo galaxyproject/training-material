@@ -1,0 +1,170 @@
+---
+type: map
+_examples: |
+    hexylena:
+        name: Helena
+        twitter: hexylena
+        bio: I wrote this documentation! I do super cool things.
+mapping:
+    "=":
+        type: map
+        description: |
+            This ideally is your GitHub handle. If you do not have, or do not wish to provide a GitHub username, you may make up another identifier here, but then you must set `github: false` as described below.
+        mapping:
+            name:
+                type: str
+                required: true
+                description: |
+                    Your preferred name. If you prefer an alias or another name, this is welcome, it does not need to be your legal name.
+                _examples:
+                    - 张三
+                    - Alice
+                    - Jane Doe
+                    - Madame Tout-le-Monde
+                    - Γιάννης Παπαδόπουλος
+            email:
+                type: str
+                pattern: /@/
+                description: |
+                    Your email address, if you wish to provide it.
+                _examples:
+                    - jane.doe@gmail.com
+            twitter:
+                type: str
+                pattern: /[0-9a-zA-Z]+/
+                description: Your twitter handle, without the `@`
+                _examples:
+                    - gxytraining
+            bluesky:
+                type: str
+                pattern: /[0-9a-zA-Z.]+/
+                description: Your bluesky handle
+                _examples:
+                    - gtn.bsky.social
+            fediverse:
+                type: str
+                pattern: /^https:\/\/[0-9a-zA-Z.]+/@?[0-9a-zA-Z.]+$/
+                description: The URL to your fediverse profile
+                _examples:
+                  - http://genomic.social/@abretaud
+            fediverse_flavor:
+                type: str
+                enum:
+                  - mastodon
+                  - akkoma
+                description: The flavor of the fediverse server (used in our webfinger endpoint.)
+            bio:
+                type: str
+                description: |
+                    A short biography of yourself, if you wish to add additional details or context.
+                _examples:
+                    - Research at the [South African National Bioinformatics Institute](https://www.sanbi.ac.za/)
+            matrix:
+                type: str
+                pattern: /[0-9a-zA-Z]+:.*/
+                description: Your matrix identifier and home server
+                _examples:
+                    - "hexylena:matrix.org"
+            linkedin:
+                type: str
+                pattern: /[0-9a-zA-Z]+/
+            maintainer_contact:
+                type: str
+                description: Preferred contact method
+            github:
+                type: bool
+                description: |
+                    If your identifier in this file is **not** a GitHub account (or not your account), then this **must** be set to true, so we do not link to that account.
+            orcid:
+                type: str
+                pattern: /[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{4}/
+                description: Your identifier at orcid.org
+                _examples:
+                    - 0000-0001-9760-8992
+            joined:
+                type: str
+                required: true
+                pattern: /[0-9]{4,}-[0-9]{2}/
+                description: The year and month in which you joined
+                _examples:
+                    - 2020-01
+            halloffame:
+                type: str
+                enum:
+                    - "no"
+                description: Set this to `no` if you would like to be excluded from the hall of fame.
+            affiliations:
+                type: seq
+                description: "A set of organisations or grants your are affiliated with"
+                sequence:
+                  - type: str
+                    required: true
+                    enum:
+                    - ORGANISATIONS
+                    - GRANTS
+            former_affiliations:
+                type: seq
+                description: "A set of organisations you were previously affiliated with"
+                sequence:
+                  - type: str
+                    required: true
+                    enum:
+                    - ORGANISATIONS
+                    - GRANTS
+            elixir_node:
+                type: str
+                enum:
+                    - "au" # australia's special
+                    - "be"
+                    - "ch"
+                    - "cz"
+                    - "de"
+                    - "dk"
+                    - "ee"
+                    - "es"
+                    - "fi"
+                    - "fr"
+                    - "gr"
+                    - "hu"
+                    - "ie"
+                    - "il"
+                    - "it"
+                    - "lu"
+                    - "nl"
+                    - "no"
+                    - "pt"
+                    - "se"
+                    - "si"
+                    - "uk"
+                description: The 2 letter code identifying the ELIXIR node to which you are a member or are associated with. If you are from norway, you will need to quote your value, `"no"`, unlike everyone else, due to the [Norway Problem with YAML](https://hitchdev.com/strictyaml/why/implicit-typing-removed/)
+            avatar:
+                type: str
+            in_memoriam:
+                type: str
+                description: |
+                  If this community member is deceased, you can use this field
+                  to write a small in memoriam section that will display in
+                  their Hall of Fame profile.
+            contact_for_training:
+                type: bool
+                description: |
+                    Are you open to being contacted for hosting training, or being involved with local training events? Instructors might use this to contact you, if they are looking for regional trainers who can help with their event.
+            location:
+                type: map
+                mapping:
+                    country:
+                        type: str
+                        description: The country you work in, ISO-3166-2 code.
+                        _examples:
+                            - NL
+                            - DE
+                    lat:
+                        type: float
+                        description: Latitude in decimal numbers
+                        _examples:
+                            - 4.12
+                    lon:
+                        type: float
+                        description: Longitude in decimal numbers
+                        _examples:
+                            - 55.0

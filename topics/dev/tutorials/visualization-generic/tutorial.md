@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Visualizations: generic plugins"
+title: "Generic plugins"
 questions:
   - "How can visualization plugins benefit science?"
 objectives:
@@ -10,21 +10,18 @@ objectives:
 requirements:
   -
     title: "Javascript knowledge"
-    type: "external"
-    link: ""
-time_estimation: "1.5h"
+    type: "none"
+time_estimation: "90m"
 key_points:
   - "Visualizations require a different way of thinking: server and client side; downloading files rather than system level access"
   - "Interactivity is what makes visualizations different from static tools"
   - "Requires understanding of both the Galaxy ecosystem as well as HTML5/JS"
   - "Performance is more important than for static Galaxy tools"
+subtopic: viz
 contributors:
   - shiltemann
   - yhoogstrate
 ---
-
-# Introduction
-{:.no_toc}
 
 Visualizations may be very helpful in understanding data better. There is a whole
 range of visualizations, from rather simple scatter and barplots up to projections
@@ -47,14 +44,10 @@ However, for this tutorial we will keep it basic.
 
 Additional documentation about Galaxy visualizations can be found here:
 
-- [VisualizationsRegistry](https://galaxyproject.org/visualizations-registry)
-- [VisualizationsRegistry/Cookbook](https://galaxyproject.org/visualizations-registry/cookbook)
-- [VisualizationsRegistry/Code](https://galaxyproject.org/visualizations-registry/code)
 - [DataProviders](https://galaxyproject.org/data-providers)
 - [DataProviders/Cookbook](https://galaxyproject.org/data-providers/cookbook)
-- [Develop/Visualizations](https://galaxyproject.org/develop/visualizations)
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -72,7 +65,7 @@ to which we align are named `RNAME` in the BAM/SAM specification.
 
 The development of a Galaxy visualization takes place within the Galaxy codebase.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Clone an instance of Galaxy in a path, further referred to as `$GALAXY_ROOT`
 > 2. Explore the plugin directory as follows:
@@ -102,7 +95,7 @@ The development of a Galaxy visualization takes place within the Galaxy codebase
 To create a bridge between our not-yet-written plugin and Galaxy, we need to write a
 configuration in XML format.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > Create the file  `config/alignment_rname_boxplot.xml` with the following contents:
 >
@@ -241,7 +234,7 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
 
 Let's put this all together.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create the mako file `templates/alignment_rname_boxplot.mako`
 > 2. Fill it with the following code:
@@ -250,25 +243,25 @@ Let's put this all together.
 >    <!DOCTYPE HTML>
 >    <%
 >        import os
->    
+>
 >        ## Generates hash (hdadict['id']) of history item
 >        hdadict = trans.security.encode_dict_ids( hda.to_dict() )
->    
+>
 >        ## Finds the parent directory of galaxy (/, /galaxy, etc.)
 >        root     = h.url_for( '/' )
->    
+>
 >        ## Determines the exposed URL of the ./static directory
 >        app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
->    
+>
 >        ## Actual file URL:
 >        file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
->    
+>
 >        ## Ensure BAI index is symlinked
 >        bai_target = hda.file_name+'.bai'
->    
+>
 >        if not os.path.isfile(bai_target):
 >            os.symlink(hda.metadata.bam_index.file_name, bai_target)
->    
+>
 >        ## Extract idxstats
 >        import pysam
 >        bam_idxstats_data = pysam.idxstats(hda.file_name)
@@ -282,22 +275,22 @@ Let's put this all together.
 >        </body>
 >    </html>
 >    ```
->    
+>
 >    We are now ready to test this very basic visualization, we just need a (small) BAM file for it.
 >
 > 3. Download [the example BAM file](https://zenodo.org/record/248730/files/tutorial.bam)
 > 4. Go the galaxy root directory and start Galaxy:
->    
+>
 >    ```bash
 >    $ cd $GALAXY_ROOT
 >    $ ./run.sh
 >    ```
 >
 > 5. Upload the example BAM file to your history
->    
+>
 >    If everything went well, our plugin has appeared as a visualization option for the dataset
 >
->    > ### {% icon comment %} Comments
+>    > <comment-title></comment-title>
 >    > You must be logged in to be able to use visualizations
 >    {: .comment}
 >
@@ -356,37 +349,37 @@ Converting the data is not the scope of the tutorial, so here we provide such a 
 The great thing about the mako system is that it does not require to restart galaxy in order to make
 functional changes to the mako files.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Change the mako file to the following:
->    
+>
 >    ```html
 >    <!DOCTYPE HTML>
 >    <%
 >        import os
->    
+>
 >        ## Generates hash (hdadict['id']) of history item
 >        hdadict = trans.security.encode_dict_ids( hda.to_dict() )
->    
+>
 >        ## Finds the parent directory of galaxy (/, /galaxy, etc.)
 >        root     = h.url_for( '/' )
->    
+>
 >        ## Determines the exposed URL of the ./static directory
 >        app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
->    
+>
 >        ## Actual file URL:
 >        file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
->    
+>
 >        ## Ensure BAI index is symlinked
 >        bai_target = hda.file_name+'.bai'
->    
+>
 >        if not os.path.isfile(bai_target):
 >            os.symlink(hda.metadata.bam_index.file_name, bai_target)
->    
+>
 >        ## Extract idxstats
 >        import pysam
 >        bam_idxstats_data = pysam.idxstats(hda.file_name)
->    
+>
 >    %>
 >    <html>
 >        <head>
@@ -398,7 +391,7 @@ functional changes to the mako files.
 >                    for(var i = 0; i < data.length ; i++) {
 >                        var line = data[i];
 >                        var chunks = line.split("\t");
->    
+>
 >                        if(chunks[0].split("_").length == 1) { // only if it does not contain underscore
 >                            output[chunks[0]] = parseInt(chunks[2]);
 >                        }
@@ -413,7 +406,7 @@ functional changes to the mako files.
 >    </html>
 >    ```
 >
-> 2. Retrigger the visualization and open the developers console of your browser: In the console, type: `bam_idxstats_data` and press [Enter]
+> 2. Retrigger the visualization and open the developers console of your browser: In the console, type: `bam_idxstats_data` and press <kbd>Enter</kbd>
 >   This should give the parsed contents as a dictionary, which can directly be used in Javascript.
 >
 {: .hands_on}
@@ -427,7 +420,7 @@ chromosome.
 
 ![Example visualization](../../images/vis_plugins_example.png)
 
-The full contents of this plugin are provided in the [GitHub repository related to this material in `tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot`]({{ site.github_repository }}/tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot).
+The full contents of this plugin are provided in the [GitHub repository related to this material in `tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot`]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot).
 To try out this example, simply copy this folder to the `$GALAXY_ROOT/config/plugins/visualizations/` folder
 on your (local) Galaxy and restart Galaxy.
 
@@ -561,14 +554,14 @@ All of those additional settings can be implemented for interactive behaviour,
 contributing to quicker understanding of the data which is generally not so convenient
 using static Galaxy tools.
 
-> ### {% icon tip %} Tip: Static files
+> <comment-title>Static files</comment-title>
 >
 > In the example we included Javascript and CSS into the HTML website.
 > Remember that for every new invocation of the visualization the entire CSS en JS are copied
 > and transferred as well. This is a waste of (redundant) bandwidth as we could save the
 > files in the static directory and refer to them within the HTML. The browser shall check
 > it's cache for the presence of libs and style sheets and only update them if they have changed.
-{: .tip}
+{: .comment}
 
 ### Improvements
 
@@ -594,7 +587,7 @@ For more examples of visualization plugins, you can browse this
 [GitHub repo](https://github.com/bgruening/galaxytools/tree/master/visualisations)
 
 # Conclusion
-{:.no_toc}
+
 
 We have just created a visualization plugin in Galaxy to visualize the number of alignments
 per `RNAME` (chromosome) in a BAM file.

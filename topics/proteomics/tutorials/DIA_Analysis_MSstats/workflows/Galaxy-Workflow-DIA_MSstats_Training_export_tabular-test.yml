@@ -1,0 +1,21 @@
+---
+- doc: "Test for DIA_MSstats_Training_export_tabular workflow"
+  job:
+    "PyProphet export tabular":
+      class: File
+      location: https://zenodo.org/record/4307758/files/PyProphet_export.tabular
+      filetype: tabular
+    "Comparison matrix":
+      class: File
+      location: https://zenodo.org/record/4307758/files/Comp_matrix_HEK_Ecoli.txt
+      filetype: tabular
+    "Sample annot MSstats":
+      class: File
+      location: https://zenodo.org/record/4307758/files/Sample_annot_MSstats.txt
+      filetype: tabular
+  outputs:
+    "Histogram_Ecoli":
+      asserts:
+        has_size: 
+          value: 7000
+          delta: 2000

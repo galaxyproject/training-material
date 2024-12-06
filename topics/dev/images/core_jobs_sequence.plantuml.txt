@@ -1,0 +1,41 @@
+@startuml
+
+!include plantuml_options.txt
+participant "JobHandlerQueue"
+participant "JobWrapper"
+participant "JobRunnerMapper"
+participant "DefaultJobDispatcher"
+participant "JobRunner"
+
+[-> JobHandlerQueue: __monitor()
+activate JobHandlerQueue
+loop while self.monitor_running
+JobHandlerQueue -> JobHandlerQueue: __monitor_step()
+activate JobHandlerQueue
+
+JobHandlerQueue -> JobHandlerQueue: __grab_unhandled_jobs()
+activate JobHandlerQueue
+deactivate JobHandlerQueue
+JobHandlerQueue -> JobHandlerQueue: __handle_waiting_jobs()
+activate JobHandlerQueue
+loop over potentially ready jobs
+rnote over JobHandlerQueue
+  jw = JobWrapper(job)
+endnote
+JobHandlerQueue -> JobWrapper: job_destination()
+JobWrapper -> JobRunnerMapper: get_job_destination()
+JobRunnerMapper --> JobWrapper: JobDestination
+JobWrapper --> JobHandlerQueue
+alt job destination is ready
+JobHandlerQueue -> DefaultJobDispatcher: put(jw)
+DefaultJobDispatcher -> JobRunner: put(jw)
+JobRunner --> DefaultJobDispatcher
+DefaultJobDispatcher --> JobHandlerQueue
+end
+end
+deactivate JobHandlerQueue
+deactivate JobHandlerQueue
+end
+deactivate JobHandlerQueue
+
+@enduml

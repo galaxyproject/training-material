@@ -1,843 +1,1144 @@
 {
-    "a_galaxy_workflow": "true", 
-    "annotation": "", 
-    "format-version": "0.1", 
-    "name": "ProteinQuant_SIL_defaultParams", 
+    "a_galaxy_workflow": "true",
+    "annotation": "Peptide and Protein Quantification via Stable Isotope Labelling (SIL)",
+    "format-version": "0.1",
+    "name": "Proteomics: Peptide and Protein Quantification via stable istobe labeling",
     "steps": {
         "0": {
-            "annotation": "", 
-            "content_id": null, 
-            "errors": null, 
-            "id": 0, 
-            "input_connections": {}, 
-            "inputs": [], 
-            "label": "Input: mzml file", 
-            "name": "Input dataset", 
-            "outputs": [], 
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "mzml raw file"
+                }
+            ],
+            "label": "mzml raw file",
+            "name": "Input dataset",
+            "outputs": [],
             "position": {
-                "left": 254, 
-                "top": 298
-            }, 
-            "tool_id": null, 
-            "tool_state": "{}", 
-            "tool_version": null, 
-            "type": "data_input", 
-            "uuid": "96dd678a-785d-45ba-abdc-2514ad24c6a3", 
-            "workflow_outputs": []
-        }, 
+                "bottom": 307.1999969482422,
+                "height": 82.19999694824219,
+                "left": -1679,
+                "right": -1479,
+                "top": 225,
+                "width": 200,
+                "x": -1679,
+                "y": 225
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a2382c96-bff3-4807-bbb7-20f74d014134",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "da762be8-3c8c-42a9-b749-8a38a004b944"
+                }
+            ]
+        },
         "1": {
-            "annotation": "", 
-            "content_id": null, 
-            "errors": null, 
-            "id": 1, 
-            "input_connections": {}, 
-            "inputs": [], 
-            "label": "Input: protein FASTA database", 
-            "name": "Input dataset", 
-            "outputs": [], 
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "fasta file"
+                }
+            ],
+            "label": "fasta file",
+            "name": "Input dataset",
+            "outputs": [],
             "position": {
-                "left": 268, 
-                "top": 519
-            }, 
-            "tool_id": null, 
-            "tool_state": "{}", 
-            "tool_version": null, 
-            "type": "data_input", 
-            "uuid": "3f7799f0-9ac0-485a-90f5-e424459ce6e8", 
-            "workflow_outputs": []
-        }, 
+                "bottom": 466.8000030517578,
+                "height": 61.80000305175781,
+                "left": -1680,
+                "right": -1480,
+                "top": 405,
+                "width": 200,
+                "x": -1680,
+                "y": 405
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "94c0bbb8-89a2-43a2-980b-65f44c21aa51",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "c9862313-9f50-4042-a35a-7db1f3af9a4d"
+                }
+            ]
+        },
         "2": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_featurefindermultiplex/FeatureFinderMultiplex/2.2.0", 
-            "errors": null, 
-            "id": 2, 
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_featurefindermultiplex/FeatureFinderMultiplex/2.6+galaxy0",
+            "errors": null,
+            "id": 2,
             "input_connections": {
-                "param_in": {
-                    "id": 0, 
+                "in": {
+                    "id": 0,
                     "output_name": "output"
                 }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FeatureFinderMultiplex", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "FeatureFinderMultiplex", 
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FeatureFinderMultiplex",
             "outputs": [
                 {
-                    "name": "param_out", 
+                    "name": "out_multiplets",
                     "type": "consensusxml"
-                }, 
-                {
-                    "name": "param_out_features", 
-                    "type": "featurexml"
-                }, 
-                {
-                    "name": "param_out_mzq", 
-                    "type": "mzq"
                 }
-            ], 
+            ],
             "position": {
-                "left": 477.5, 
-                "top": 363.5
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_featurefindermultiplex/FeatureFinderMultiplex/2.2.0", 
+                "bottom": 587.1999969482422,
+                "height": 195.1999969482422,
+                "left": -1373,
+                "right": -1173,
+                "top": 392,
+                "width": 200,
+                "x": -1373,
+                "y": 392
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_featurefindermultiplex/FeatureFinderMultiplex/2.6+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "774383dbaec9", 
-                "name": "openms_featurefindermultiplex", 
-                "owner": "galaxyp", 
+                "changeset_revision": "5e5771b511a3",
+                "name": "openms_featurefindermultiplex",
+                "owner": "galaxyp",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"param_algorithm_averagine_similarity\": \"\\\"0.4\\\"\", \"param_algorithm_rt_min\": \"\\\"2.0\\\"\", \"param_algorithm_missed_cleavages\": \"\\\"1\\\"\", \"__page__\": null, \"adv_opts\": \"{\\\"param_algorithm_isotopes_per_peptide\\\": \\\"3:6\\\", \\\"param_labels_ICPL10\\\": \\\"115.0667\\\", \\\"param_algorithm_averagine_type\\\": \\\"peptide\\\", \\\"param_algorithm_averagine_similarity_scaling\\\": \\\"0.75\\\", \\\"param_algorithm_knock_out\\\": \\\"false\\\", \\\"param_labels_Dimethyl6\\\": \\\"34.063117\\\", \\\"param_labels_Dimethyl0\\\": \\\"28.0313\\\", \\\"param_labels_Dimethyl8\\\": \\\"36.07567\\\", \\\"param_force\\\": \\\"false\\\", \\\"param_labels_Dimethyl4\\\": \\\"32.056407\\\", \\\"param_labels_Arg10\\\": \\\"10.0082686\\\", \\\"adv_opts_selector\\\": \\\"advanced\\\", \\\"param_labels_ICPL0\\\": \\\"105.021464\\\", \\\"param_labels_ICPL4\\\": \\\"109.046571\\\", \\\"param_labels_ICPL6\\\": \\\"111.041593\\\", \\\"param_labels_Lys8\\\": \\\"8.0141988132\\\", \\\"param_labels_Lys6\\\": \\\"6.0201290268\\\", \\\"param_labels_Lys4\\\": \\\"4.0251069836\\\", \\\"param_labels_Arg6\\\": \\\"6.0201290268\\\", \\\"__current_case__\\\": 1, \\\"param_labels_Leu3\\\": \\\"3.01883\\\", \\\"param_algorithm_spectrum_type\\\": \\\"automatic\\\"}\", \"param_algorithm_mz_tolerance\": \"\\\"10.0\\\"\", \"param_algorithm_charge\": \"\\\"1:4\\\"\", \"param_algorithm_mz_unit\": \"\\\"ppm\\\"\", \"param_algorithm_labels\": \"\\\"[][Lys6,Arg6]\\\"\", \"param_algorithm_intensity_cutoff\": \"\\\"1000.0\\\"\", \"param_algorithm_rt_typical\": \"\\\"40.0\\\"\", \"param_algorithm_peptide_similarity\": \"\\\"0.5\\\"\", \"__rerun_remap_job_id__\": null, \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.2.0", 
-            "type": "tool", 
-            "uuid": "0cca967b-450a-4bf0-ac17-afc4abcf4f60", 
-            "workflow_outputs": []
-        }, 
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": [\"out_multiplets_FLAG\"], \"__input_ext\": \"input\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"algorithm\": {\"labels\": \"[ ][Arg6,Lys6]\", \"charge\": \"1:4\", \"isotopes_per_peptide\": \"3:6\", \"rt_typical\": \"40.0\", \"rt_band\": \"0.0\", \"rt_min\": \"2.0\", \"mz_tolerance\": \"10.0\", \"mz_unit\": \"ppm\", \"intensity_cutoff\": \"1000.0\", \"peptide_similarity\": \"0.5\", \"averagine_similarity\": \"0.4\", \"averagine_similarity_scaling\": \"0.95\", \"missed_cleavages\": \"1\", \"spectrum_type\": \"automatic\", \"averagine_type\": \"peptide\", \"knock_out\": \"false\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"in\": {\"__class__\": \"ConnectedValue\"}, \"labels\": {\"Arg6\": \"6.0201290268\", \"Arg10\": \"10.0082686\", \"Lys4\": \"4.0251069836\", \"Lys6\": \"6.0201290268\", \"Lys8\": \"8.0141988132\", \"Leu3\": \"3.01883\", \"Dimethyl0\": \"28.0313\", \"Dimethyl4\": \"32.056407\", \"Dimethyl6\": \"34.063117\", \"Dimethyl8\": \"36.07567\", \"ICPL0\": \"105.021464\", \"ICPL4\": \"109.046571\", \"ICPL6\": \"111.041593\", \"ICPL10\": \"115.0667\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "eaa992c7-823d-46df-8e6c-161733ed043c",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_multiplets",
+                    "uuid": "c4519437-723f-4033-884e-90686600a9cd"
+                }
+            ]
+        },
         "3": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_highresprecursormasscorrector/HighResPrecursorMassCorrector/2.2.0", 
-            "errors": null, 
-            "id": 3, 
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_xtandemadapter/XTandemAdapter/2.6+galaxy0",
+            "errors": null,
+            "id": 3,
             "input_connections": {
-                "param_feature_in": {
-                    "id": 2, 
-                    "output_name": "param_out_features"
-                }, 
-                "param_in": {
-                    "id": 0, 
+                "database": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "in": {
+                    "id": 0,
                     "output_name": "output"
                 }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool HighResPrecursorMassCorrector", 
-                    "name": "param_in"
-                }, 
-                {
-                    "description": "runtime parameter for tool HighResPrecursorMassCorrector", 
-                    "name": "param_feature_in"
-                }
-            ], 
-            "label": null, 
-            "name": "HighResPrecursorMassCorrector", 
+            },
+            "inputs": [],
+            "label": null,
+            "name": "XTandemAdapter",
             "outputs": [
                 {
-                    "name": "param_out", 
-                    "type": "mzml"
-                }, 
-                {
-                    "name": "param_out_csv", 
-                    "type": "tabular"
+                    "name": "out",
+                    "type": "idxml"
                 }
-            ], 
+            ],
             "position": {
-                "left": 773, 
-                "top": 268
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_highresprecursormasscorrector/HighResPrecursorMassCorrector/2.2.0", 
+                "bottom": 317.1999969482422,
+                "height": 215.1999969482422,
+                "left": -1381,
+                "right": -1181,
+                "top": 102,
+                "width": 200,
+                "x": -1381,
+                "y": 102
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_xtandemadapter/XTandemAdapter/2.6+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "d404d28cd0e1", 
-                "name": "openms_highresprecursormasscorrector", 
-                "owner": "galaxyp", 
+                "changeset_revision": "1add9bacdccd",
+                "name": "openms_xtandemadapter",
+                "owner": "galaxyp",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"param_highest_intensity_peak_mz_tolerance\": \"\\\"0.0\\\"\", \"__page__\": null, \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_nearest_peak_mz_tolerance\": \"\\\"0.0\\\"\", \"__rerun_remap_job_id__\": null, \"param_feature_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_feature_rt_tolerance\": \"\\\"0.0\\\"\", \"param_nearest_peak_mz_tolerance_unit\": \"\\\"ppm\\\"\", \"param_feature_mz_tolerance_unit\": \"\\\"ppm\\\"\", \"param_feature_mz_tolerance\": \"\\\"10.0\\\"\", \"param_feature_keep_original\": \"\\\"false\\\"\", \"param_feature_assign_all_matching\": \"\\\"false\\\"\", \"param_feature_believe_charge\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.2.0", 
-            "type": "tool", 
-            "uuid": "7697c133-0b8c-437f-99de-88e51d231b89", 
-            "workflow_outputs": []
-        }, 
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": [\"out_FLAG\"], \"__input_ext\": \"input\", \"__workflow_invocation_uuid__\": \"9603dea81b7711eb9fdd001b21d75532\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"database\": {\"__class__\": \"ConnectedValue\"}, \"default_config_file\": null, \"enzyme\": \"Trypsin\", \"fixed_modifications\": [\"Carbamidomethyl (C)\"], \"fragment_error_units\": \"ppm\", \"fragment_mass_tolerance\": \"10.0\", \"ignore_adapter_param\": \"false\", \"in\": {\"__class__\": \"ConnectedValue\"}, \"max_precursor_charge\": \"4\", \"max_valid_expect\": \"0.1\", \"minimum_fragment_mz\": \"150.0\", \"missed_cleavages\": \"1\", \"no_isotope_error\": \"false\", \"output_results\": \"all\", \"precursor_error_units\": \"ppm\", \"precursor_mass_tolerance\": \"10.0\", \"semi_cleavage\": \"false\", \"variable_modifications\": [\"Label:13C(6) (K)\", \"Label:13C(6) (R)\", \"Oxidation (M)\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "0118ed37-ce01-4abd-9551-e84807f0b008",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "2c114d65-1bd5-451a-9cd3-eaa334d3000b"
+                }
+            ]
+        },
         "4": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_msgfplusadapter/MSGFPlusAdapter/2.2.0", 
-            "errors": null, 
-            "id": 4, 
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0",
+            "errors": null,
+            "id": 4,
             "input_connections": {
-                "param_database": {
-                    "id": 1, 
-                    "output_name": "output"
-                }, 
-                "param_in": {
-                    "id": 3, 
-                    "output_name": "param_out"
+                "in": {
+                    "id": 3,
+                    "output_name": "out"
                 }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool MSGFPlusAdapter", 
-                    "name": "param_in"
-                }, 
-                {
-                    "description": "runtime parameter for tool MSGFPlusAdapter", 
-                    "name": "param_database"
-                }
-            ], 
-            "label": null, 
-            "name": "MSGFPlusAdapter", 
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FileInfo",
             "outputs": [
                 {
-                    "name": "param_out", 
-                    "type": "idxml"
-                }, 
-                {
-                    "name": "param_mzid_out", 
-                    "type": "mzid"
+                    "name": "out",
+                    "type": "txt"
                 }
-            ], 
+            ],
             "position": {
-                "left": 1060, 
-                "top": 407
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_msgfplusadapter/MSGFPlusAdapter/2.2.0", 
+                "bottom": 385.6000061035156,
+                "height": 113.60000610351562,
+                "left": -1153,
+                "right": -953,
+                "top": 272,
+                "width": 200,
+                "x": -1153,
+                "y": 272
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "708c31c03d4f", 
-                "name": "openms_msgfplusadapter", 
-                "owner": "galaxyp", 
+                "changeset_revision": "e8dce5e07fa5",
+                "name": "openms_fileinfo",
+                "owner": "galaxyp",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"param_max_precursor_charge\": \"\\\"3\\\"\", \"param_min_precursor_charge\": \"\\\"2\\\"\", \"param_min_peptide_length\": \"\\\"6\\\"\", \"param_precursor_error_units\": \"\\\"ppm\\\"\", \"param_protocol\": \"\\\"none\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"ff6c34d5c47d11e7a2affa163e8751e6\\\"\", \"param_tryptic\": \"\\\"fully\\\"\", \"param_max_mods\": \"\\\"2\\\"\", \"rep_param_fixed_modifications\": \"[{\\\"__index__\\\": 0, \\\"param_fixed_modifications\\\": \\\"Carbamidomethyl (C)\\\"}]\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_add_decoys\": \"\\\"false\\\"\", \"param_matches_per_spec\": \"\\\"1\\\"\", \"param_max_peptide_length\": \"\\\"40\\\"\", \"param_instrument\": \"\\\"Q_Exactive\\\"\", \"param_precursor_mass_tolerance\": \"\\\"10.0\\\"\", \"rep_param_variable_modifications\": \"[{\\\"param_variable_modifications\\\": \\\"Oxidation (M)\\\", \\\"__index__\\\": 0}, {\\\"param_variable_modifications\\\": \\\"Label:13C(6) (K)\\\", \\\"__index__\\\": 1}, {\\\"param_variable_modifications\\\": \\\"Label:13C(6) (R)\\\", \\\"__index__\\\": 2}]\", \"param_add_features\": \"\\\"false\\\"\", \"param_enzyme\": \"\\\"trypsin\\\"\", \"param_database\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_fragment_method\": \"\\\"from_spectrum\\\"\", \"adv_opts\": \"{\\\"param_force\\\": \\\"false\\\", \\\"param_legacy_conversion\\\": \\\"false\\\", \\\"adv_opts_selector\\\": \\\"advanced\\\", \\\"__current_case__\\\": 1}\", \"param_isotope_error_range\": \"\\\"0,1\\\"\", \"chromInfo\": \"\\\"/home/ubuntu/stortes_raumhafen/git/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
-            "tool_version": "2.2.0", 
-            "type": "tool", 
-            "uuid": "94437252-b078-4ed4-9dee-6f331f0b0fb8", 
-            "workflow_outputs": []
-        }, 
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"__input_ext\": \"input\", \"__workflow_invocation_uuid__\": \"9603dea81b7711eb9fdd001b21d75532\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"c\": \"false\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"d\": \"false\", \"i\": \"false\", \"in\": {\"__class__\": \"ConnectedValue\"}, \"m\": \"false\", \"p\": \"false\", \"s\": \"false\", \"v\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "a2a5218c-cdd7-4d84-904a-4fe5d9763927",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "4d3e6847-d51d-410f-9bbf-168ab598b108"
+                }
+            ]
+        },
         "5": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.2.0", 
-            "errors": null, 
-            "id": 5, 
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0",
+            "errors": null,
+            "id": 5,
             "input_connections": {
-                "param_fasta": {
-                    "id": 1, 
+                "fasta": {
+                    "id": 1,
                     "output_name": "output"
-                }, 
-                "param_in": {
-                    "id": 4, 
-                    "output_name": "param_out"
+                },
+                "in": {
+                    "id": 3,
+                    "output_name": "out"
                 }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool PeptideIndexer", 
-                    "name": "param_fasta"
-                }, 
-                {
-                    "description": "runtime parameter for tool PeptideIndexer", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "PeptideIndexer", 
+            },
+            "inputs": [],
+            "label": null,
+            "name": "PeptideIndexer",
             "outputs": [
                 {
-                    "name": "param_out", 
+                    "name": "out",
                     "type": "idxml"
                 }
-            ], 
+            ],
             "position": {
-                "left": 1353, 
-                "top": 411
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.2.0", 
+                "bottom": 597.1999969482422,
+                "height": 205.1999969482422,
+                "left": -1153,
+                "right": -953,
+                "top": 392,
+                "width": 200,
+                "x": -1153,
+                "y": 392
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "5bb67ddfb406", 
-                "name": "openms_peptideindexer", 
-                "owner": "galaxyp", 
+                "changeset_revision": "d8ee5700c66b",
+                "name": "openms_peptideindexer",
+                "owner": "galaxyp",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"param_write_protein_sequence\": \"\\\"false\\\"\", \"param_missing_decoy_action\": \"\\\"error\\\"\", \"param_filter_aaa_proteins\": \"\\\"false\\\"\", \"param_keep_unreferenced_proteins\": \"\\\"false\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__page__\": null, \"param_allow_unmatched\": \"\\\"false\\\"\", \"param_write_protein_description\": \"\\\"false\\\"\", \"param_mismatches_max\": \"\\\"0\\\"\", \"__workflow_invocation_uuid__\": \"\\\"ff6c34d5c47d11e7a2affa163e8751e6\\\"\", \"param_enzyme_name\": \"\\\"Trypsin\\\"\", \"param_enzyme_specificity\": \"\\\"none\\\"\", \"param_decoy_string\": \"\\\"DECOY_\\\"\", \"param_decoy_string_position\": \"\\\"prefix\\\"\", \"param_full_tolerant_search\": \"\\\"false\\\"\", \"param_fasta\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_aaa_max\": \"\\\"4\\\"\", \"chromInfo\": \"\\\"/home/ubuntu/stortes_raumhafen/git/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"param_IL_equivalent\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.2.0", 
-            "type": "tool", 
-            "uuid": "18039eb3-f6dd-4716-9795-a6c02735a4ef", 
-            "workflow_outputs": []
-        }, 
+            },
+            "tool_state": "{\"IL_equivalent\": \"false\", \"OPTIONAL_OUTPUTS\": null, \"__input_ext\": \"input\", \"__workflow_invocation_uuid__\": \"9603dea81b7711eb9fdd001b21d75532\", \"aaa_max\": \"3\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"decoy_string\": \"\", \"decoy_string_position\": \"prefix\", \"enzyme\": {\"name\": \"auto\", \"specificity\": \"none\"}, \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"in\": {\"__class__\": \"ConnectedValue\"}, \"keep_unreferenced_proteins\": \"false\", \"mismatches_max\": \"0\", \"missing_decoy_action\": \"error\", \"unmatched_action\": \"error\", \"write_protein_description\": \"true\", \"write_protein_sequence\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "d7e47129-c738-4174-b7e4-4d387a5b24f1",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "dc35fedb-9094-4984-9936-0aeb83d98e72"
+                }
+            ]
+        },
         "6": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idposteriorerrorprobability/IDPosteriorErrorProbability/2.2.0", 
-            "errors": null, 
-            "id": 6, 
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idposteriorerrorprobability/IDPosteriorErrorProbability/2.6+galaxy0",
+            "errors": null,
+            "id": 6,
             "input_connections": {
-                "param_in": {
-                    "id": 5, 
-                    "output_name": "param_out"
+                "in": {
+                    "id": 5,
+                    "output_name": "out"
                 }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool IDPosteriorErrorProbability", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "IDPosteriorErrorProbability", 
+            },
+            "inputs": [],
+            "label": null,
+            "name": "IDPosteriorErrorProbability",
             "outputs": [
                 {
-                    "name": "param_out", 
+                    "name": "out",
                     "type": "idxml"
-                }, 
-                {
-                    "name": "param_out_plot", 
-                    "type": "txt"
                 }
-            ], 
+            ],
             "position": {
-                "left": 1639, 
-                "top": 420
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idposteriorerrorprobability/IDPosteriorErrorProbability/2.2.0", 
+                "bottom": 446.8000030517578,
+                "height": 174.8000030517578,
+                "left": -933,
+                "right": -733,
+                "top": 272,
+                "width": 200,
+                "x": -933,
+                "y": 272
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idposteriorerrorprobability/IDPosteriorErrorProbability/2.6+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "c6d7466c6a8a", 
-                "name": "openms_idposteriorerrorprobability", 
-                "owner": "galaxyp", 
+                "changeset_revision": "711a081d80ba",
+                "name": "openms_idposteriorerrorprobability",
+                "owner": "galaxyp",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": null, \"param_ignore_bad_data\": \"\\\"false\\\"\", \"param_split_charge\": \"\\\"false\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"param_prob_correct\": \"\\\"true\\\"\", \"__workflow_invocation_uuid__\": \"\\\"ff6c34d5c47d11e7a2affa163e8751e6\\\"\", \"param_top_hits_only\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/home/ubuntu/stortes_raumhafen/git/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.2.0", 
-            "type": "tool", 
-            "uuid": "9f968ea2-fbfa-4ee0-9ee8-12a72889a425", 
-            "workflow_outputs": []
-        }, 
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"__input_ext\": \"input\", \"__workflow_invocation_uuid__\": \"9603dea81b7711eb9fdd001b21d75532\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"fit_algorithm\": {\"number_of_bins\": \"100\", \"incorrectly_assigned\": \"Gumbel\", \"max_nr_iterations\": \"1000\", \"neg_log_delta\": \"6\", \"outlier_handling\": \"ignore_iqr_outliers\"}, \"ignore_bad_data\": \"false\", \"in\": {\"__class__\": \"ConnectedValue\"}, \"prob_correct\": \"true\", \"split_charge\": \"false\", \"top_hits_only\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "3d87b974-366d-4ffa-b626-bb0c63bef28e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "c24e8bab-c848-46d1-b469-2537f21d4b69"
+                }
+            ]
+        },
         "7": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.2.0", 
-            "errors": null, 
-            "id": 7, 
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0",
+            "errors": null,
+            "id": 7,
             "input_connections": {
-                "param_in": {
-                    "id": 6, 
-                    "output_name": "param_out"
+                "in": {
+                    "id": 6,
+                    "output_name": "out"
                 }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FalseDiscoveryRate", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "FalseDiscoveryRate", 
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FalseDiscoveryRate",
             "outputs": [
                 {
-                    "name": "param_out", 
+                    "name": "out",
                     "type": "idxml"
                 }
-            ], 
+            ],
             "position": {
-                "left": 1898, 
-                "top": 415
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.2.0", 
+                "bottom": 446.8000030517578,
+                "height": 174.8000030517578,
+                "left": -713,
+                "right": -513,
+                "top": 272,
+                "width": 200,
+                "x": -713,
+                "y": 272
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "572db49a674a", 
-                "name": "openms_falsediscoveryrate", 
-                "owner": "galaxyp", 
+                "changeset_revision": "469690558892",
+                "name": "openms_falsediscoveryrate",
+                "owner": "galaxyp",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": null, \"param_algorithm_use_all_hits\": \"\\\"false\\\"\", \"param_PSM\": \"\\\"true\\\"\", \"param_FDR_PSM\": \"\\\"0.01\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"param_algorithm_split_charge_variants\": \"\\\"false\\\"\", \"__workflow_invocation_uuid__\": \"\\\"ff6c34d5c47d11e7a2affa163e8751e6\\\"\", \"param_algorithm_no_qvalues\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_algorithm_treat_runs_separately\": \"\\\"false\\\"\", \"param_protein\": \"\\\"false\\\"\", \"param_FDR_protein\": \"\\\"1.0\\\"\", \"chromInfo\": \"\\\"/home/ubuntu/stortes_raumhafen/git/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"param_algorithm_add_decoy_peptides\": \"\\\"true\\\"\"}", 
-            "tool_version": "2.2.0", 
-            "type": "tool", 
-            "uuid": "26397b60-903d-4d1b-a848-837102f6299c", 
-            "workflow_outputs": []
-        }, 
+            },
+            "tool_state": "{\"FDR\": {\"PSM\": \"0.01\", \"protein\": \"1.0\", \"cleanup\": {\"remove_proteins_without_psms\": \"true\", \"remove_psms_without_proteins\": \"true\", \"remove_spectra_without_psms\": \"true\"}}, \"OPTIONAL_OUTPUTS\": null, \"PSM\": \"true\", \"__input_ext\": \"input\", \"__workflow_invocation_uuid__\": \"9603dea81b7711eb9fdd001b21d75532\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"algorithm\": {\"no_qvalues\": \"false\", \"use_all_hits\": \"false\", \"split_charge_variants\": \"false\", \"treat_runs_separately\": \"false\", \"add_decoy_peptides\": \"true\", \"add_decoy_proteins\": \"false\", \"conservative\": \"true\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"in\": {\"__class__\": \"ConnectedValue\"}, \"protein\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "b9a62ef4-7758-41ed-a57f-07a761f34ea7",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "13259070-1f50-4f87-84b0-c1d3640db605"
+                }
+            ]
+        },
         "8": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idscoreswitcher/IDScoreSwitcher/2.2.0", 
-            "errors": null, 
-            "id": 8, 
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idscoreswitcher/IDScoreSwitcher/2.6+galaxy0",
+            "errors": null,
+            "id": 8,
             "input_connections": {
-                "param_in": {
-                    "id": 7, 
-                    "output_name": "param_out"
+                "in": {
+                    "id": 7,
+                    "output_name": "out"
                 }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool IDScoreSwitcher", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "IDScoreSwitcher", 
+            },
+            "inputs": [],
+            "label": null,
+            "name": "IDScoreSwitcher",
             "outputs": [
                 {
-                    "name": "param_out", 
+                    "name": "out",
                     "type": "idxml"
                 }
-            ], 
+            ],
             "position": {
-                "left": 2188, 
-                "top": 416
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idscoreswitcher/IDScoreSwitcher/2.2.0", 
+                "bottom": 406,
+                "height": 134,
+                "left": -493,
+                "right": -293,
+                "top": 272,
+                "width": 200,
+                "x": -493,
+                "y": 272
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idscoreswitcher/IDScoreSwitcher/2.6+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "11bdf0899fab", 
-                "name": "openms_idscoreswitcher", 
-                "owner": "galaxyp", 
+                "changeset_revision": "ec0d05b20eed",
+                "name": "openms_idscoreswitcher",
+                "owner": "galaxyp",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": null, \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_proteins\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"param_new_score\": \"\\\"Posterior Probability_score\\\"\", \"__workflow_invocation_uuid__\": \"\\\"ff6c34d5c47d11e7a2affa163e8751e6\\\"\", \"param_old_score\": \"\\\"\\\"\", \"param_new_score_type\": \"\\\"\\\"\", \"param_new_score_orientation\": \"\\\"higher_better\\\"\", \"chromInfo\": \"\\\"/home/ubuntu/stortes_raumhafen/git/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.2.0", 
-            "type": "tool", 
-            "uuid": "a9591940-f301-4d72-b2a2-06f08feded5d", 
-            "workflow_outputs": []
-        }, 
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"__input_ext\": \"input\", \"__workflow_invocation_uuid__\": \"9603dea81b7711eb9fdd001b21d75532\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"in\": {\"__class__\": \"ConnectedValue\"}, \"new_score\": \"Posterior Probability_score\", \"new_score_orientation\": \"higher_better\", \"new_score_type\": \"\", \"old_score\": \"\", \"proteins\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "659bd32d-fbc8-4c81-a48e-6f1c118b9416",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "01759e5a-51ec-4358-89bf-040a35560402"
+                }
+            ]
+        },
         "9": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.2.0.1", 
-            "errors": null, 
-            "id": 9, 
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0",
+            "errors": null,
+            "id": 9,
             "input_connections": {
-                "param_in": {
-                    "id": 8, 
-                    "output_name": "param_out"
+                "in": {
+                    "id": 8,
+                    "output_name": "out"
                 }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FidoAdapter", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "FidoAdapter", 
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FileInfo",
             "outputs": [
                 {
-                    "name": "param_out", 
-                    "type": "idxml"
+                    "name": "out",
+                    "type": "txt"
                 }
-            ], 
+            ],
             "position": {
-                "left": 2387, 
-                "top": 355
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.2.0.1", 
+                "bottom": 385.6000061035156,
+                "height": 113.60000610351562,
+                "left": -273,
+                "right": -73,
+                "top": 272,
+                "width": 200,
+                "x": -273,
+                "y": 272
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "17e115ff19cf", 
-                "name": "openms_fidoadapter", 
-                "owner": "galaxyp", 
+                "changeset_revision": "e8dce5e07fa5",
+                "name": "openms_fileinfo",
+                "owner": "galaxyp",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"param_prob_protein\": \"\\\"0.0\\\"\", \"__page__\": null, \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"advanced\\\", \\\"param_log2_states_precalc\\\": \\\"0\\\", \\\"param_force\\\": \\\"false\\\", \\\"param_accuracy\\\": null, \\\"__current_case__\\\": 1, \\\"param_keep_zero_group\\\": \\\"false\\\"}\", \"__rerun_remap_job_id__\": null, \"param_no_cleanup\": \"\\\"false\\\"\", \"param_prob_spurious\": \"\\\"0.0\\\"\", \"__workflow_invocation_uuid__\": \"\\\"ff6c34d5c47d11e7a2affa163e8751e6\\\"\", \"param_prob_peptide\": \"\\\"0.0\\\"\", \"param_all_PSMs\": \"\\\"false\\\"\", \"param_separate_runs\": \"\\\"false\\\"\", \"param_greedy_group_resolution\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/home/ubuntu/stortes_raumhafen/git/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"param_group_level\": \"\\\"false\\\"\", \"param_log2_states\": \"\\\"0\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.2.0.1", 
-            "type": "tool", 
-            "uuid": "08f3ac1b-dbbb-45ef-b77d-e70d9e2dfe6c", 
-            "workflow_outputs": []
-        }, 
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"__input_ext\": \"input\", \"__workflow_invocation_uuid__\": \"9603dea81b7711eb9fdd001b21d75532\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"c\": \"false\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"d\": \"false\", \"i\": \"false\", \"in\": {\"__class__\": \"ConnectedValue\"}, \"m\": \"false\", \"p\": \"false\", \"s\": \"false\", \"v\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "a871c553-362d-4e80-bbdb-9cb7b866e370",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "21b6c69b-b138-4db8-9950-de68dac93a05"
+                }
+            ]
+        },
         "10": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.2.0", 
-            "errors": null, 
-            "id": 10, 
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0",
+            "errors": null,
+            "id": 10,
             "input_connections": {
-                "param_in": {
-                    "id": 8, 
-                    "output_name": "param_out"
+                "in": {
+                    "id": 8,
+                    "output_name": "out"
                 }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FileInfo", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "FileInfo", 
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FidoAdapter",
             "outputs": [
                 {
-                    "name": "param_out", 
-                    "type": "txt"
-                }, 
-                {
-                    "name": "param_out_tsv", 
-                    "type": "tabular"
+                    "name": "out",
+                    "type": "idxml"
                 }
-            ], 
+            ],
             "position": {
-                "left": 2387, 
-                "top": 502
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.2.0", 
+                "bottom": 505.6000061035156,
+                "height": 113.60000610351562,
+                "left": -273,
+                "right": -73,
+                "top": 392,
+                "width": 200,
+                "x": -273,
+                "y": 392
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "64b528d0eacf", 
-                "name": "openms_fileinfo", 
-                "owner": "galaxyp", 
+                "changeset_revision": "c3a5cd016963",
+                "name": "openms_fidoadapter",
+                "owner": "galaxyp",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": null, \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"param_v\": \"\\\"false\\\"\", \"param_p\": \"\\\"false\\\"\", \"__workflow_invocation_uuid__\": \"\\\"ff6c34d5c47d11e7a2affa163e8751e6\\\"\", \"param_m\": \"\\\"false\\\"\", \"param_i\": \"\\\"false\\\"\", \"param_s\": \"\\\"false\\\"\", \"param_d\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/home/ubuntu/stortes_raumhafen/git/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"param_c\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.2.0", 
-            "type": "tool", 
-            "uuid": "6723acdd-15c9-434a-be4e-e8a55a3c6200", 
-            "workflow_outputs": []
-        }, 
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"__input_ext\": \"input\", \"__workflow_invocation_uuid__\": \"9603dea81b7711eb9fdd001b21d75532\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"all_PSMs\": \"false\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"greedy_group_resolution\": \"true\", \"group_level\": \"false\", \"in\": {\"__class__\": \"ConnectedValue\"}, \"log2_states\": \"0\", \"no_cleanup\": \"false\", \"prob\": {\"protein\": \"0.0\", \"peptide\": \"0.0\", \"spurious\": \"0.0\"}, \"separate_runs\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "404e63ae-e855-4cef-9352-8fcb43de3f13",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "e1a8b9e2-3fe9-4c6d-b8c7-b292ce47374f"
+                }
+            ]
+        },
         "11": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.2.0", 
-            "errors": null, 
-            "id": 11, 
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0",
+            "errors": null,
+            "id": 11,
             "input_connections": {
-                "param_in": {
-                    "id": 9, 
-                    "output_name": "param_out"
+                "in": {
+                    "id": 10,
+                    "output_name": "out"
                 }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FalseDiscoveryRate", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "FalseDiscoveryRate", 
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FalseDiscoveryRate",
             "outputs": [
                 {
-                    "name": "param_out", 
+                    "name": "out",
                     "type": "idxml"
                 }
-            ], 
+            ],
             "position": {
-                "left": 2609, 
-                "top": 357
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.2.0", 
+                "bottom": 446.8000030517578,
+                "height": 174.8000030517578,
+                "left": -53,
+                "right": 147,
+                "top": 272,
+                "width": 200,
+                "x": -53,
+                "y": 272
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "572db49a674a", 
-                "name": "openms_falsediscoveryrate", 
-                "owner": "galaxyp", 
+                "changeset_revision": "469690558892",
+                "name": "openms_falsediscoveryrate",
+                "owner": "galaxyp",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": null, \"param_algorithm_use_all_hits\": \"\\\"false\\\"\", \"param_PSM\": \"\\\"false\\\"\", \"param_FDR_PSM\": \"\\\"1.0\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"param_algorithm_split_charge_variants\": \"\\\"false\\\"\", \"__workflow_invocation_uuid__\": \"\\\"ff6c34d5c47d11e7a2affa163e8751e6\\\"\", \"param_algorithm_no_qvalues\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_algorithm_treat_runs_separately\": \"\\\"false\\\"\", \"param_protein\": \"\\\"true\\\"\", \"param_FDR_protein\": \"\\\"1.0\\\"\", \"chromInfo\": \"\\\"/home/ubuntu/stortes_raumhafen/git/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"param_algorithm_add_decoy_peptides\": \"\\\"false\\\"\"}", 
-            "tool_version": "2.2.0", 
-            "type": "tool", 
-            "uuid": "b7e42326-a7ac-4d53-9785-265b7519c0d7", 
-            "workflow_outputs": []
-        }, 
+            },
+            "tool_state": "{\"FDR\": {\"PSM\": \"1.0\", \"protein\": \"0.01\", \"cleanup\": {\"remove_proteins_without_psms\": \"true\", \"remove_psms_without_proteins\": \"true\", \"remove_spectra_without_psms\": \"true\"}}, \"OPTIONAL_OUTPUTS\": null, \"PSM\": \"false\", \"__input_ext\": \"input\", \"__workflow_invocation_uuid__\": \"9603dea81b7711eb9fdd001b21d75532\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"algorithm\": {\"no_qvalues\": \"false\", \"use_all_hits\": \"false\", \"split_charge_variants\": \"false\", \"treat_runs_separately\": \"false\", \"add_decoy_peptides\": \"false\", \"add_decoy_proteins\": \"false\", \"conservative\": \"true\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"in\": {\"__class__\": \"ConnectedValue\"}, \"protein\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "886f5485-8805-494f-99aa-f50c7c84e156",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "a047eec1-fc49-4adb-a48b-eebfcf86b4ba"
+                }
+            ]
+        },
         "12": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idfilter/IDFilter/2.2.0", 
-            "errors": null, 
-            "id": 12, 
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0",
+            "errors": null,
+            "id": 12,
             "input_connections": {
-                "param_in": {
-                    "id": 11, 
-                    "output_name": "param_out"
+                "in": {
+                    "id": 11,
+                    "output_name": "out"
                 }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool IDFilter", 
-                    "name": "param_whitelist_peptides"
-                }, 
-                {
-                    "description": "runtime parameter for tool IDFilter", 
-                    "name": "param_whitelist_proteins"
-                }, 
-                {
-                    "description": "runtime parameter for tool IDFilter", 
-                    "name": "param_blacklist_proteins"
-                }, 
-                {
-                    "description": "runtime parameter for tool IDFilter", 
-                    "name": "param_in"
-                }, 
-                {
-                    "description": "runtime parameter for tool IDFilter", 
-                    "name": "param_blacklist_peptides"
-                }, 
-                {
-                    "description": "runtime parameter for tool IDFilter", 
-                    "name": "param_digest_fasta"
-                }
-            ], 
-            "label": null, 
-            "name": "IDFilter", 
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FileInfo",
             "outputs": [
                 {
-                    "name": "param_out", 
-                    "type": "idxml"
-                }
-            ], 
-            "position": {
-                "left": 2901, 
-                "top": 372
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idfilter/IDFilter/2.2.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "bf31c2987200", 
-                "name": "openms_idfilter", 
-                "owner": "galaxyp", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"param_whitelist_peptides\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_length\": \"\\\":\\\"\", \"param_keep_unreferenced_protein_hits\": \"\\\"false\\\"\", \"param_unique\": \"\\\"false\\\"\", \"param_whitelist_proteins\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_unique_per_protein\": \"\\\"false\\\"\", \"param_remove_decoys\": \"\\\"true\\\"\", \"param_score_prot\": \"\\\"0.01\\\"\", \"__rerun_remap_job_id__\": null, \"param_precursor_mz\": \"\\\":\\\"\", \"param_mz_error\": \"\\\"-1.0\\\"\", \"rep_param_blacklist_modifications\": \"[]\", \"param_blacklist_proteins\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_delete_unreferenced_peptide_hits\": \"\\\"true\\\"\", \"param_blacklist_ignore_modifications\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": null, \"param_charge\": \"\\\":\\\"\", \"param_var_mods\": \"\\\"false\\\"\", \"param_best_strict\": \"\\\"false\\\"\", \"param_digest_specificity\": \"\\\"full\\\"\", \"param_digest_missed_cleavages\": \"\\\"-1\\\"\", \"rep_param_whitelist_modifications\": \"[]\", \"param_mz_unit\": \"\\\"ppm\\\"\", \"rep_param_whitelist_protein_accessions\": \"[]\", \"param_best_n_peptide_hits\": \"\\\"0\\\"\", \"param_blacklist_peptides\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_score_pep\": \"\\\"0.0\\\"\", \"param_digest_methionine_cleavage\": \"\\\"false\\\"\", \"param_best_n_protein_hits\": \"\\\"0\\\"\", \"param_precursor_rt\": \"\\\":\\\"\", \"param_digest_fasta\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"rep_param_blacklist_protein_accessions\": \"[]\", \"param_whitelist_ignore_modifications\": \"\\\"false\\\"\", \"param_digest_enzyme\": \"\\\"Trypsin\\\"\"}", 
-            "tool_version": "2.2.0", 
-            "type": "tool", 
-            "uuid": "d089fa08-4dec-4a9a-8f80-9878001c0214", 
-            "workflow_outputs": []
-        }, 
-        "13": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idmapper/IDMapper/2.2.0", 
-            "errors": null, 
-            "id": 13, 
-            "input_connections": {
-                "param_id": {
-                    "id": 12, 
-                    "output_name": "param_out"
-                }, 
-                "param_in": {
-                    "id": 2, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool IDMapper", 
-                    "name": "param_spectra_in"
-                }, 
-                {
-                    "description": "runtime parameter for tool IDMapper", 
-                    "name": "param_id"
-                }, 
-                {
-                    "description": "runtime parameter for tool IDMapper", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "IDMapper", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "input"
-                }
-            ], 
-            "position": {
-                "left": 3210, 
-                "top": 377
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idmapper/IDMapper/2.2.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "ee74aa49131b", 
-                "name": "openms_idmapper", 
-                "owner": "galaxyp", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"param_spectra_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_mz_tolerance\": \"\\\"10.0\\\"\", \"param_consensus_use_subelements\": \"\\\"true\\\"\", \"param_feature_use_centroid_rt\": \"\\\"false\\\"\", \"__page__\": null, \"adv_opts\": \"{\\\"param_force\\\": \\\"false\\\", \\\"adv_opts_selector\\\": \\\"advanced\\\", \\\"__current_case__\\\": 1, \\\"param_consensus_annotate_ids_with_subelements\\\": \\\"false\\\"}\", \"__rerun_remap_job_id__\": null, \"param_mz_measure\": \"\\\"ppm\\\"\", \"param_mz_reference\": \"\\\"precursor\\\"\", \"param_id\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_rt_tolerance\": \"\\\"20.0\\\"\", \"param_ignore_charge\": \"\\\"false\\\"\", \"param_feature_use_centroid_mz\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.2.0", 
-            "type": "tool", 
-            "uuid": "1fddddb5-1077-401d-b886-f20e829358c3", 
-            "workflow_outputs": []
-        }, 
-        "14": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.2.0", 
-            "errors": null, 
-            "id": 14, 
-            "input_connections": {
-                "param_in": {
-                    "id": 12, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FileInfo", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "FileInfo", 
-            "outputs": [
-                {
-                    "name": "param_out", 
+                    "name": "out",
                     "type": "txt"
-                }, 
+                }
+            ],
+            "position": {
+                "bottom": 385.6000061035156,
+                "height": 113.60000610351562,
+                "left": 167,
+                "right": 367,
+                "top": 272,
+                "width": 200,
+                "x": 167,
+                "y": 272
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e8dce5e07fa5",
+                "name": "openms_fileinfo",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"__input_ext\": \"input\", \"__workflow_invocation_uuid__\": \"9603dea81b7711eb9fdd001b21d75532\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"c\": \"false\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"d\": \"false\", \"i\": \"false\", \"in\": {\"__class__\": \"ConnectedValue\"}, \"m\": \"false\", \"p\": \"false\", \"s\": \"false\", \"v\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "d13e8538-3432-4a00-9cca-7e8280947bb9",
+            "workflow_outputs": [
                 {
-                    "name": "param_out_tsv", 
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "28b66dcf-19db-4d93-959d-ec6af66ed496"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "in": {
+                    "id": 11,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "TextExporter",
+            "outputs": [
+                {
+                    "name": "out",
                     "type": "tabular"
                 }
-            ], 
+            ],
             "position": {
-                "left": 3222, 
-                "top": 589
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.2.0", 
+                "bottom": 505.6000061035156,
+                "height": 113.60000610351562,
+                "left": 167,
+                "right": 367,
+                "top": 392,
+                "width": 200,
+                "x": 167,
+                "y": 392
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "64b528d0eacf", 
-                "name": "openms_fileinfo", 
-                "owner": "galaxyp", 
+                "changeset_revision": "1c596fdaf34a",
+                "name": "openms_textexporter",
+                "owner": "galaxyp",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": null, \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"param_v\": \"\\\"false\\\"\", \"param_p\": \"\\\"false\\\"\", \"__workflow_invocation_uuid__\": \"\\\"ff6c34d5c47d11e7a2affa163e8751e6\\\"\", \"param_m\": \"\\\"false\\\"\", \"param_i\": \"\\\"false\\\"\", \"param_s\": \"\\\"false\\\"\", \"param_d\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/home/ubuntu/stortes_raumhafen/git/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"param_c\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.2.0", 
-            "type": "tool", 
-            "uuid": "27d0e8de-cc71-4b25-87db-4aadd3cef3f9", 
-            "workflow_outputs": []
-        }, 
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"__input_ext\": \"input\", \"__workflow_invocation_uuid__\": \"9603dea81b7711eb9fdd001b21d75532\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"consensus\": {\"sorting_method\": \"none\", \"sort_by_maps\": \"false\", \"sort_by_size\": \"false\"}, \"feature\": {\"minimal\": \"false\", \"add_metavalues\": \"-1\"}, \"id\": {\"proteins_only\": \"false\", \"peptides_only\": \"false\", \"protein_groups\": \"false\", \"first_dim_rt\": \"false\", \"add_metavalues\": \"-1\", \"add_hit_metavalues\": \"-1\", \"add_protein_hit_metavalues\": \"-1\"}, \"in\": {\"__class__\": \"ConnectedValue\"}, \"no_ids\": \"false\", \"quoting\": \"none\", \"replacement\": \"_\", \"separator\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "e206c716-a374-4810-a560-e57e6761aa2c",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "b9156da0-a6b3-47d9-a352-836aee0451bc"
+                }
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idmapper/IDMapper/2.6+galaxy0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "id": {
+                    "id": 11,
+                    "output_name": "out"
+                },
+                "in": {
+                    "id": 2,
+                    "output_name": "out_multiplets"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "IDMapper",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 788.3999938964844,
+                "height": 276.3999938964844,
+                "left": 167,
+                "right": 367,
+                "top": 512,
+                "width": 200,
+                "x": 167,
+                "y": 512
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idmapper/IDMapper/2.6+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2517c03f5cd3",
+                "name": "openms_idmapper",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"__input_ext\": \"input\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"consensus\": {\"use_subelements\": \"true\", \"annotate_ids_with_subelements\": \"true\"}, \"feature\": {\"use_centroid_rt\": \"false\", \"use_centroid_mz\": \"true\"}, \"id\": {\"__class__\": \"ConnectedValue\"}, \"in\": {\"__class__\": \"ConnectedValue\"}, \"mz_measure\": \"ppm\", \"mz_reference\": \"peptide\", \"mz_tolerance\": \"10.0\", \"rt_tolerance\": \"20.0\", \"spectra\": {\"_in\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "f368bcfb-dcd6-4006-b0fb-54684f73f36c",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "2385a34d-3bf9-4b1e-8c09-ececeec35479"
+                }
+            ]
+        },
         "15": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_filefilter/FileFilter/2.2.0", 
-            "errors": null, 
-            "id": 15, 
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 15,
             "input_connections": {
-                "param_in": {
-                    "id": 13, 
-                    "output_name": "param_out"
+                "input": {
+                    "id": 13,
+                    "output_name": "out"
                 }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FileFilter", 
-                    "name": "param_in"
-                }, 
-                {
-                    "description": "runtime parameter for tool FileFilter", 
-                    "name": "param_id_blacklist"
-                }, 
-                {
-                    "description": "runtime parameter for tool FileFilter", 
-                    "name": "param_consensus_blackorwhitelist_file"
-                }
-            ], 
-            "label": null, 
-            "name": "FileFilter", 
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Select",
             "outputs": [
                 {
-                    "name": "param_out", 
+                    "name": "out_file1",
                     "type": "input"
                 }
-            ], 
+            ],
             "position": {
-                "left": 3511, 
-                "top": 326
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_filefilter/FileFilter/2.2.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "821bdec492a8", 
-                "name": "openms_filefilter", 
-                "owner": "galaxyp", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"rep_param_peak_options_level\": \"[]\", \"rep_param_id_sequences_whitelist\": \"[]\", \"param_algorithm_SignalToNoise_win_len\": \"\\\"200.0\\\"\", \"param_algorithm_SignalToNoise_bin_count\": \"\\\"30\\\"\", \"param_peak_options_sn\": \"\\\"0.0\\\"\", \"param_id_mz\": \"\\\"0.001\\\"\", \"param_spectra_select_polarity\": \"null\", \"param_spectra_remove_collision_energy\": \"\\\":\\\"\", \"param_id_blacklist_imperfect\": \"\\\"false\\\"\", \"param_mz\": \"\\\":\\\"\", \"param_int\": \"\\\":\\\"\", \"param_spectra_select_isolation_window_width\": \"\\\":\\\"\", \"param_peak_options_indexed_file\": \"\\\"false\\\"\", \"param_spectra_select_activation\": \"null\", \"param_id_remove_annotated_features\": \"\\\"false\\\"\", \"__page__\": null, \"param_peak_options_no_chromatograms\": \"\\\"false\\\"\", \"rep_param_peak_options_pc_mz_list\": \"[]\", \"param_peak_options_numpress_masstime\": \"\\\"none\\\"\", \"param_peak_options_remove_chromatograms\": \"\\\"false\\\"\", \"rep_param_consensus_map\": \"[]\", \"param_peak_options_numpress_intensity\": \"\\\"none\\\"\", \"__rerun_remap_job_id__\": null, \"param_spectra_select_mode\": \"null\", \"param_peak_options_zlib_compression\": \"\\\"false\\\"\", \"param_rt\": \"\\\":\\\"\", \"param_algorithm_SignalToNoise_write_log_messages\": \"\\\"true\\\"\", \"param_consensus_blackorwhitelist_use_ppm_tolerance\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_peak_options_numpress_intensity_error\": \"\\\"0.0001\\\"\", \"param_peak_options_int_precision\": \"\\\"32\\\"\", \"rep_param_id_accessions_whitelist\": \"[]\", \"param_peak_options_pc_mz_range\": \"\\\":\\\"\", \"param_out_type\": \"null\", \"param_spectra_remove_mode\": \"null\", \"param_consensus_blackorwhitelist_blacklist\": \"\\\"true\\\"\", \"param_peak_options_sort_peaks\": \"\\\"false\\\"\", \"rep_param_f_and_c_remove_meta\": \"[]\", \"param_id_keep_best_score_id\": \"\\\"false\\\"\", \"param_id_remove_unassigned_ids\": \"\\\"true\\\"\", \"param_spectra_remove_zoom\": \"\\\"false\\\"\", \"param_peak_options_mz_precision\": \"\\\"64\\\"\", \"param_sort\": \"\\\"false\\\"\", \"param_algorithm_SignalToNoise_min_required_elements\": \"\\\"10\\\"\", \"param_consensus_blackorwhitelist_rt\": \"\\\"60.0\\\"\", \"rep_param_peak_options_rm_pc_charge\": \"[]\", \"param_id_remove_unannotated_features\": \"\\\"false\\\"\", \"param_id_rt\": \"\\\"0.1\\\"\", \"param_f_and_c_size\": \"\\\":\\\"\", \"param_id_blacklist\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_spectra_select_collision_energy\": \"\\\":\\\"\", \"param_feature_q\": \"\\\":\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_f_and_c_charge\": \"\\\":\\\"\", \"param_consensus_map_and\": \"\\\"false\\\"\", \"param_spectra_select_zoom\": \"\\\"false\\\"\", \"param_consensus_blackorwhitelist_mz\": \"\\\"0.01\\\"\", \"param_consensus_blackorwhitelist_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"rep_param_consensus_blackorwhitelist_maps\": \"[]\", \"param_spectra_remove_activation\": \"null\", \"param_peak_options_numpress_masstime_error\": \"\\\"0.0001\\\"\", \"param_spectra_remove_isolation_window_width\": \"\\\":\\\"\"}", 
-            "tool_version": "2.2.0", 
-            "type": "tool", 
-            "uuid": "1146b6ba-651f-4b15-90d9-296aa63f5a79", 
-            "workflow_outputs": []
-        }, 
+                "bottom": 365.1999969482422,
+                "height": 93.19999694824219,
+                "left": 387,
+                "right": 587,
+                "top": 272,
+                "width": 200,
+                "x": 387,
+                "y": 272
+            },
+            "post_job_actions": {},
+            "tool_id": "Grep1",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"__workflow_invocation_uuid__\": \"9603dea81b7711eb9fdd001b21d75532\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"false\", \"pattern\": \"CONTAMINANT\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "bd3098ce-6f2f-4c3d-8580-35a559c5a07b",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "57f19087-b67a-40f4-9fcd-ab338a853e59"
+                }
+            ]
+        },
         "16": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idconflictresolver/IDConflictResolver/2.2.0", 
-            "errors": null, 
-            "id": 16, 
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 16,
             "input_connections": {
-                "param_in": {
-                    "id": 15, 
-                    "output_name": "param_out"
+                "input": {
+                    "id": 13,
+                    "output_name": "out"
                 }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool IDConflictResolver", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "IDConflictResolver", 
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Select",
             "outputs": [
                 {
-                    "name": "param_out", 
+                    "name": "out_file1",
                     "type": "input"
                 }
-            ], 
+            ],
             "position": {
-                "left": 3802, 
-                "top": 418
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idconflictresolver/IDConflictResolver/2.2.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "097565cae5e6", 
-                "name": "openms_idconflictresolver", 
-                "owner": "galaxyp", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/home/ubuntu/stortes_raumhafen/git/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.2.0", 
-            "type": "tool", 
-            "uuid": "f05bad34-9778-4f3f-a005-d4e5a92303bd", 
-            "workflow_outputs": []
-        }, 
+                "bottom": 485.1999969482422,
+                "height": 93.19999694824219,
+                "left": 387,
+                "right": 587,
+                "top": 392,
+                "width": 200,
+                "x": 387,
+                "y": 392
+            },
+            "post_job_actions": {},
+            "tool_id": "Grep1",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"__workflow_invocation_uuid__\": \"9603dea81b7711eb9fdd001b21d75532\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"false\", \"pattern\": \"HUMAN\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "24029aca-9eb6-423a-9474-b05961073a01",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "19884cc2-1a3c-4f84-ab1d-192c8238ecd1"
+                }
+            ]
+        },
         "17": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_proteinquantifier/ProteinQuantifier/2.2.0", 
-            "errors": null, 
-            "id": 17, 
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idconflictresolver/IDConflictResolver/2.6+galaxy0",
+            "errors": null,
+            "id": 17,
             "input_connections": {
-                "param_in": {
-                    "id": 16, 
-                    "output_name": "param_out"
-                }, 
-                "param_protein_groups": {
-                    "id": 12, 
-                    "output_name": "param_out"
+                "in": {
+                    "id": 14,
+                    "output_name": "out"
                 }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool ProteinQuantifier", 
-                    "name": "param_protein_groups"
-                }, 
-                {
-                    "description": "runtime parameter for tool ProteinQuantifier", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "ProteinQuantifier", 
+            },
+            "inputs": [],
+            "label": null,
+            "name": "IDConflictResolver",
             "outputs": [
                 {
-                    "name": "param_out", 
-                    "type": "tabular"
-                }, 
+                    "name": "out",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 666.3999938964844,
+                "height": 154.39999389648438,
+                "left": 387,
+                "right": 587,
+                "top": 512,
+                "width": 200,
+                "x": 387,
+                "y": 512
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idconflictresolver/IDConflictResolver/2.6+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "fb0e6f70a1df",
+                "name": "openms_idconflictresolver",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"__input_ext\": \"input\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"in\": {\"__class__\": \"ConnectedValue\"}, \"resolve_between_features\": \"off\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "29e2c398-4df7-40c8-8fa7-b03eaeb86eb7",
+            "workflow_outputs": [
                 {
-                    "name": "param_peptide_out", 
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "b261502d-5f97-4263-b79e-575000d63c07"
+                }
+            ]
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_multiplexresolver/MultiplexResolver/2.5+galaxy0",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "in": {
+                    "id": 17,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MultiplexResolver",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "consensusxml"
+                }
+            ],
+            "position": {
+                "bottom": 538.3999938964844,
+                "height": 266.3999938964844,
+                "left": 607,
+                "right": 807,
+                "top": 272,
+                "width": 200,
+                "x": 607,
+                "y": 272
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_multiplexresolver/MultiplexResolver/2.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "fb647b7cf2c1",
+                "name": "openms_multiplexresolver",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"__input_ext\": \"input\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"algorithm\": {\"labels\": \"[ ][Arg6,Lys6]\", \"missed_cleavages\": \"1\", \"mass_tolerance\": \"0.1\", \"mz_tolerance\": \"10\", \"rt_tolerance\": \"5\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"in\": {\"__class__\": \"ConnectedValue\"}, \"in_blacklist\": null, \"labels\": {\"Arg6\": \"6.0201290268\", \"Arg10\": \"10.0082686\", \"Lys4\": \"4.0251069836\", \"Lys6\": \"6.0201290268\", \"Lys8\": \"8.0141988132\", \"Leu3\": \"3.01883\", \"Dimethyl0\": \"28.0313\", \"Dimethyl4\": \"32.056407\", \"Dimethyl6\": \"34.063117\", \"Dimethyl8\": \"36.07567\", \"ICPL0\": \"105.021464\", \"ICPL4\": \"109.046571\", \"ICPL6\": \"111.041593\", \"ICPL10\": \"115.0667\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.5+galaxy0",
+            "type": "tool",
+            "uuid": "c8cead64-a291-4bbc-b400-df3b0c87cb05",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "2d191fe3-d682-4bc1-ac64-f5a5a2cdc04a"
+                }
+            ]
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_proteinquantifier/ProteinQuantifier/2.6+galaxy0",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "in": {
+                    "id": 18,
+                    "output_name": "out"
+                },
+                "protein_groups": {
+                    "id": 11,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ProteinQuantifier",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "csv"
+                },
+                {
+                    "name": "peptide_out",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "bottom": 619.6000061035156,
+                "height": 347.6000061035156,
+                "left": 827,
+                "right": 1027,
+                "top": 272,
+                "width": 200,
+                "x": 827,
+                "y": 272
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_proteinquantifier/ProteinQuantifier/2.6+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "bb1e75938909",
+                "name": "openms_proteinquantifier",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": [\"out_FLAG\", \"peptide_out_FLAG\"], \"__input_ext\": \"input\", \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"average\": \"sum\", \"best_charge_and_fraction\": \"false\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"consensus\": {\"normalize\": \"false\", \"fix_peptides\": \"false\"}, \"design\": null, \"format\": {\"separator\": \"\", \"quoting\": \"double\", \"replacement\": \"_\"}, \"greedy_group_resolution\": \"false\", \"in\": {\"__class__\": \"ConnectedValue\"}, \"include_all\": \"false\", \"protein_groups\": {\"__class__\": \"ConnectedValue\"}, \"ratios\": \"true\", \"ratiosSILAC\": \"false\", \"top\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "f45eb629-cead-420b-b277-a1d9dd781c70",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "69c464ef-cf41-4bd2-b8ea-e10560b8d6fd"
+                },
+                {
+                    "label": null,
+                    "output_name": "peptide_out",
+                    "uuid": "a9eeea33-4858-402a-a526-4ce950474f6f"
+                }
+            ]
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "Summary_Statistics1",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "input": {
+                    "id": 19,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Summary Statistics",
+            "outputs": [
+                {
+                    "name": "out_file1",
                     "type": "tabular"
                 }
-            ], 
+            ],
             "position": {
-                "left": 4099, 
-                "top": 405
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_proteinquantifier/ProteinQuantifier/2.2.0", 
+                "bottom": 385.6000061035156,
+                "height": 113.60000610351562,
+                "left": 1047,
+                "right": 1247,
+                "top": 272,
+                "width": 200,
+                "x": 1047,
+                "y": 272
+            },
+            "post_job_actions": {},
+            "tool_id": "Summary_Statistics1",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cond\": \"c8\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "2271282e-d599-4d40-9b0c-42adb142874f",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "ed52356c-4179-444a-9761-f7c0edf4c642"
+                }
+            ]
+        },
+        "21": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0",
+            "errors": null,
+            "id": 21,
+            "input_connections": {
+                "infile": {
+                    "id": 19,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Select last",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 485.1999969482422,
+                "height": 93.19999694824219,
+                "left": 1047,
+                "right": 1247,
+                "top": 392,
+                "width": 200,
+                "x": 1047,
+                "y": 392
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0",
             "tool_shed_repository": {
-                "changeset_revision": "a59be3c5e764", 
-                "name": "openms_proteinquantifier", 
-                "owner": "galaxyp", 
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"param_consensus_fix_peptides\": \"\\\"false\\\"\", \"param_format_separator\": \"\\\"\\\"\", \"param_ratios\": \"\\\"true\\\"\", \"param_format_quoting\": \"\\\"double\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"param_ratiosSILAC\": \"\\\"false\\\"\", \"param_consensus_normalize\": \"\\\"false\\\"\", \"param_include_all\": \"\\\"true\\\"\", \"param_format_replacement\": \"\\\"_\\\"\", \"param_top\": \"\\\"0\\\"\", \"param_protein_groups\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_filter_charge\": \"\\\"false\\\"\", \"param_average\": \"\\\"sum\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.2.0", 
-            "type": "tool", 
-            "uuid": "3bd98c3e-9212-4432-9356-b379595212b0", 
-            "workflow_outputs": []
+            },
+            "tool_state": "{\"__input_ext\": \"csv\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"complement\": \"+\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"num_lines\": \"4\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "522bc5dc-d39a-4448-b887-848bb5cf5c55",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "52919249-1fb8-4481-95fc-ba6c40d4399c"
+                }
+            ]
+        },
+        "22": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4",
+            "errors": null,
+            "id": 22,
+            "input_connections": {
+                "input": {
+                    "id": 21,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Histogram",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 365.1999969482422,
+                "height": 93.19999694824219,
+                "left": 1267,
+                "right": 1467,
+                "top": 272,
+                "width": 200,
+                "x": 1267,
+                "y": 272
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4",
+            "tool_shed_repository": {
+                "changeset_revision": "6f134426c2b0",
+                "name": "histogram",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"breaks\": \"20\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"density\": \"true\", \"frequency\": \"false\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"numerical_column\": \"8\", \"title\": \"Histogram\", \"xlab\": \"V1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "67a0985f-236d-4b84-a51e-86c4cbf657b4",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "11f0da6d-4f57-487a-ae21-042b1d8badf6"
+                }
+            ]
         }
-    }, 
-    "uuid": "0e27051e-3840-4c34-a30f-593831d31829"
+    },
+    "tags": ["proteomics"],
+    "uuid": "50b480e9-0b33-45f9-aaac-ffe11cc607ab",
+    "version": 1
 }

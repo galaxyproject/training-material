@@ -12,13 +12,30 @@ DRY_RUN = False
 
 def discover_trainings(topics_dir):
     """Auto-discover all topic metadata files."""
-    for training in glob.glob(os.path.join(topics_dir, '*', 'metadata.yaml')):
-        with open(training, 'r') as handle:
-            training_data = yaml.load(handle)
-            yield training_data['name'], '', training_data['title']
+    for training_dir in glob.glob(os.path.join(topics_dir, '*')):
+        metadata_file = os.path.join(training_dir, 'metadata.yaml')
+        if not os.path.exists(metadata_file):
+            continue
 
-            for material in training_data['material']:
-                yield training.split('/')[-2], material['name'], material['title']
+        with open(metadata_file, 'r') as handle:
+            training_data = yaml.safe_load(handle)
+
+        training = {
+            'title': training_data['title'],
+            'trainings': {},
+        }
+
+        for material in glob.glob(os.path.join(training_dir, 'tutorials', '*', 'tutorial.md')) + glob.glob(os.path.join(training_dir, 'tutorials', '*', 'slides.html')):
+            with open(material, 'r') as handle:
+                material_data = yaml.safe_load_all(handle)
+                material_data = next(material_data)
+
+            name = material.split('/')[-2]
+            training['trainings'][name] = material_data['title']
+
+        training['count'] = len(training['trainings'].keys())
+
+        yield training_data['name'], training
 
 
 def safe_name(server, dashes=True):
@@ -34,8 +51,8 @@ def safe_name(server, dashes=True):
 
 def get_badge_path(label, value, color):
     """Return a string representing the expected badge filename. Returns something like 'Training Name|Supported' or 'Training Name|Unsupported'."""
-    safe_label = label.replace('@', '%40').replace(' ', '%20').replace('-', '--')
-    safe_value = value.replace('@', '%40').replace(' ', '%20').replace('-', '--')
+    safe_label = label.replace('@', '%40').replace(' ', '%20').replace('-', '--').replace('/', '%2F')
+    safe_value = value.replace('@', '%40').replace(' ', '%20').replace('-', '--').replace('/', '%2F')
     return '%s-%s-%s.svg' % (safe_label, safe_value, color)
 
 
@@ -48,7 +65,10 @@ def realise_badge(badge, badge_cache_dir):
             '--quiet', '-O', os.path.join(badge_cache_dir, badge)
         ]
         if not DRY_RUN:
-            subprocess.check_call(cmd)
+            try:
+                subprocess.check_call(cmd)
+            except subprocess.CalledProcessError:
+                print('unable to retrieve badges, please try again later')
             time.sleep(1)
         else:
             print(' '.join(cmd))
@@ -72,7 +92,8 @@ def badge_it(label, value, color, CACHE_DIR, identifier_parts, output_dir):
 
     # Copy the badge to a per-instance named .svg file.
     up = ['..'] * (len(identifier_parts) - 1)
-    symlink_source = os.path.join(*up, real_badge_path[len('badges/'):])
+    total = up + [real_badge_path[len('badges/'):]]
+    symlink_source = os.path.join(*total)
     if not DRY_RUN:
         # Remove it if it exists, since this is easier than testing for
         # equality.
@@ -99,20 +120,7 @@ if __name__ == '__main__':
     # Validate training dir argument
     if not os.path.exists(args.topics_directory) and os.path.is_dir(args.topics_directory):
         raise Exception("Invalid topics directory")
-    all_trainings = list(discover_trainings(args.topics_directory))
-    trainings = {x[0] + '/' + x[1]: x[2] for x in all_trainings}
-
-    topic_counts = defaultdict(int)
-    for (topic, identifier, title) in all_trainings:
-        # Skip the overall one.
-        if not len(identifier):
-            continue
-
-        topic_counts[topic] += 1
-
-    training_keys = sorted(trainings.keys())
-    if len(trainings) == 0:
-        raise Exception("No trainings discovered!")
+    all_trainings = {k: v for (k, v) in discover_trainings(args.topics_directory)}
 
     # Create output directory if not existing.
     if not os.path.exists(args.output):
@@ -125,7 +133,7 @@ if __name__ == '__main__':
 
     # Load the validated list of instances which support trainings
     with open(args.instances, 'r') as handle:
-        data = yaml.load(handle)
+        data = yaml.safe_load(handle)
 
     # Collect a list of instances seen
     instances = []
@@ -134,6 +142,7 @@ if __name__ == '__main__':
             for instance in data[topic]['tutorials'][training]['instances']:
                 data[topic]['tutorials'][training]['instances'][instance]['supported'] = True
                 instances.append(instance)
+    # All of these instances support at least one training.
     instances = sorted(set(instances))
 
     # Mark the unsupported ones as such for easier processing later.
@@ -146,6 +155,7 @@ if __name__ == '__main__':
 
     # Map of instance -> badges
     instance_badges = {}
+
     # Count of tutorials in each topic.
     for topic in data:
         # All trainings, not just those available
@@ -159,19 +169,22 @@ if __name__ == '__main__':
 
                 # If available, green badge
                 is_supported = data[topic]['tutorials'][training]['instances'][instance]['supported']
+
                 # We'll only place the badge in the HTML if the training is
                 # supported (but the unavailable badge will still be available
                 # in case they ever go out of compliance.)
+
+                label = all_trainings[topic]['trainings'][training]
                 if is_supported:
                     output_filename = badge_it(
-                        trainings[topic + '/' + training],
+                        label,
                         'Supported', 'green',
                         CACHE_DIR, (instance, topic, training), args.output
                     )
                     instance_badges[instance][topic].append(output_filename)
                 else:
                     badge_it(
-                        trainings[topic + '/' + training],
+                        label,
                         'Unsupported', 'lightgrey',
                         CACHE_DIR, (instance, topic, training), args.output
                     )
@@ -187,14 +200,14 @@ if __name__ == '__main__':
             # Get the number of badges in this topic.
             count = len(instance_badges[instance][topic])
 
-            if float(count) / topic_counts[topic] > 0.90:
+            if float(count) / all_trainings[topic]['count'] > 0.90:
                 color = 'green'
-            elif float(count) / topic_counts[topic] > 0.25:
+            elif float(count) / all_trainings[topic]['count'] > 0.25:
                 color = 'orange'
             else:
                 color = 'red'
 
             output_filename = badge_it(
-                trainings[topic + '/'], '%s%%2f%s' % (count, topic_counts[topic]), color,
+                all_trainings[topic]['title'], '%s%%2f%s' % (count, all_trainings[topic]['count']), color,
                 CACHE_DIR, (instance, topic), args.output
             )
