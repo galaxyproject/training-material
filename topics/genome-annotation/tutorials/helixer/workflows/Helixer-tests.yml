@@ -1,34 +1,73 @@
-- doc: Test outline for Helixer
+- doc: Test outline for Helixer Workflow
   job:
-    Genome:
+    Input:
       class: File
+      location: https://zenodo.org/records/13890774/files/genome_masked.fa?download=1
       filetype: fasta
-      path: 'test-data/sequence.fasta'
 
   outputs:
-    Helixer:
-      asserts:
-        has_text:
-          text: '##gff-version 3'
-    compleasm full table:
-      asserts:
-        has_text:
-          text: '10251at4827'
-    compleasm full table busco:
-      asserts:
-        has_text:
-          text: '10251at4827'
-    compleasm miniprot:
-      asserts:
-        has_text:
-          text: '10011at4827'
-    compleasm translated protein:
-      asserts:
-        has_text:
-          text: 'CCTCCCTCCCTCCCTCLINRLYRERLFFLGQEVDTEISNQLISLMIYLSIEKDTKDLYLFINSPGGWVISGMAIYDTMQFVRPDVQTICMGLAASIASFILVGGAITKRIAFPHAWVMIHQPASSFYEAQTGEFILEAEELLKLRETITRVYVQRTGKPIWVVSEDMERDVFMSATEAQAHGIVDLVACCTCCCTCC'
-
-    BUSCO sum:
-      asserts:
-        has_text:
-          text: '2449'
-          text: '5.5.0'
+    helixer_output:
+      location: https://zenodo.org/records/13890774/files/Helixer.gff3?download=1
+      compare: sim_size
+      delta: 300000
+    
+    busco_sum_geno:
+      location: https://zenodo.org/records/13890774/files/Busco_short_summary_genome.txt?download=1
+      compare: sim_size
+      delta: 30000   
+    busco_gff_geno:
+      location: https://zenodo.org/records/13890774/files/Busco_GFF_genome.gff3?download=1
+      compare: sim_size
+      delta: 30000   
+    summary_image_geno:
+      location: https://zenodo.org/records/13890774/files/Busco_summary_image_genome.png?download=1
+      compare: sim_size
+      delta: 30000    
+    busco_missing_geno:
+      location: https://zenodo.org/records/13890774/files/Busco_missing_buscos_genome.tabular?download=1
+      compare: sim_size
+      delta: 30000    
+    busco_table_geno:
+      location: https://zenodo.org/records/13890774/files/Busco_full_table_genome.tabular?download=1
+      compare: sim_size
+      delta: 30000    
+    
+    gffread_pep:
+      location: https://zenodo.org/records/13890774/files/gffread_pep.fasta?download=1
+      compare: sim_size
+      delta: 30000    
+    
+    summary:
+      location: https://zenodo.org/records/13890774/files/genome_annotation_statistics_summary.txt?download=1
+      compare: sim_size
+      delta: 30000    
+    graphs:
+      location: https://zenodo.org/records/13890774/files/genome_annotation_statistics_graphs.pdf?download=1
+      compare: sim_size
+      delta: 30000       
+    
+    summary_image_pep:
+      location: https://zenodo.org/records/13902305/files/Busco_pep_summary_image.png?download=1
+      compare: sim_size
+      delta: 30000    
+    busco_table_pep:
+      location: https://zenodo.org/records/13890774/files/Busco_full_table_pep.tabular?download=1
+      compare: sim_size
+      delta: 30000    
+    busco_sum_pep:
+      location: https://zenodo.org/records/13890774/files/Busco_short_summary_pep.txt?download=1
+      compare: sim_size
+      delta: 30000    
+    busco_gff_pep:
+      location: https://zenodo.org/records/13890774/files/Busco_GFF_pep.gff3?download=1
+      compare: sim_size
+      delta: 30000    
+    busco_missing_pep:
+      location: https://zenodo.org/records/13890774/files/Busco_missing_buscos_pep.tabular?download=1
+      compare: sim_size
+      delta: 30000    
+    
+    omark_detail_sum:
+      location: https://zenodo.org/records/13890774/files/OMArk_Detailed_summary.txt?download=1
+      compare: sim_size
+      delta: 30000
