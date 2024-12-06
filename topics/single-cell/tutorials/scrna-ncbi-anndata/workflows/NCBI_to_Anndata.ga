@@ -1,6 +1,99 @@
 {
     "a_galaxy_workflow": "true",
     "annotation": "",
+    "comments": [
+        {
+            "child_steps": [
+                30,
+                29,
+                19,
+                20,
+                10,
+                21,
+                11,
+                22,
+                12,
+                23,
+                13,
+                24,
+                14,
+                25,
+                15,
+                26,
+                16,
+                27,
+                17,
+                28,
+                18
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Creating the AnnData object"
+            },
+            "id": 0,
+            "position": [
+                258.9,
+                0
+            ],
+            "size": [
+                811.1,
+                1584.5
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                45,
+                46,
+                44
+            ],
+            "color": "lime",
+            "data": {
+                "title": "Adding quality control metrics"
+            },
+            "id": 2,
+            "position": [
+                3070,
+                634
+            ],
+            "size": [
+                800,
+                206.5
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                38,
+                31,
+                36,
+                37,
+                39,
+                42,
+                32,
+                33,
+                34,
+                35,
+                40,
+                41,
+                43
+            ],
+            "color": "orange",
+            "data": {
+                "title": "Annotation the data"
+            },
+            "id": 1,
+            "position": [
+                1110,
+                219.4
+            ],
+            "size": [
+                1920,
+                614.5
+            ],
+            "type": "frame"
+        }
+    ],
     "creator": [
         {
             "class": "Person",
@@ -16,6 +109,9 @@
     "format-version": "0.1",
     "license": "CC-BY-4.0",
     "name": "NCBI to Anndata",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
     "steps": {
         "0": {
             "annotation": "",
@@ -34,7 +130,7 @@
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 6
+                "top": 71.39838831245815
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -61,7 +157,7 @@
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 160
+                "top": 225.39838831245814
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -88,7 +184,7 @@
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 314
+                "top": 379.39838831245817
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -115,7 +211,7 @@
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 468
+                "top": 533.3983883124581
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -142,7 +238,7 @@
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 622
+                "top": 687.3983883124581
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -169,7 +265,7 @@
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 776
+                "top": 841.3983883124581
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -196,7 +292,7 @@
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 930
+                "top": 995.3983883124581
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -223,7 +319,7 @@
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 1084
+                "top": 1149.398388312458
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -250,7 +346,7 @@
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 1238
+                "top": 1303.398388312458
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -277,7 +373,7 @@
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 1392
+                "top": 1457.398388312458
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
@@ -289,18 +385,23 @@
         },
         "10": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "errors": null,
             "id": 10,
             "input_connections": {
-                "hd5_format|in|input": {
+                "in|input": {
                     "id": 0,
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Import Anndata",
+                    "name": "in"
+                }
+            ],
             "label": null,
-            "name": "Import Anndata and loom",
+            "name": "Import Anndata",
             "outputs": [
                 {
                     "name": "anndata",
@@ -308,19 +409,19 @@
                 }
             ],
             "position": {
-                "left": 279.9999176480769,
-                "top": 0
+                "left": 279.97219340870714,
+                "top": 40
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "fb9e030ffae4",
+                "changeset_revision": "6f143dfe902a",
                 "name": "anndata_import",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"hd5_format\": {\"filetype\": \"anndata\", \"__current_case__\": 0, \"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "09d068b4-2600-40ca-9d30-216b6568b0aa",
             "when": null,
@@ -328,18 +429,23 @@
         },
         "11": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "errors": null,
             "id": 11,
             "input_connections": {
-                "hd5_format|in|input": {
+                "in|input": {
                     "id": 1,
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Import Anndata",
+                    "name": "in"
+                }
+            ],
             "label": null,
-            "name": "Import Anndata and loom",
+            "name": "Import Anndata",
             "outputs": [
                 {
                     "name": "anndata",
@@ -347,19 +453,19 @@
                 }
             ],
             "position": {
-                "left": 279.9999176480769,
-                "top": 154
+                "left": 279.018522318486,
+                "top": 218.4261525685412
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "fb9e030ffae4",
+                "changeset_revision": "6f143dfe902a",
                 "name": "anndata_import",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"hd5_format\": {\"filetype\": \"anndata\", \"__current_case__\": 0, \"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "b69371fd-59c6-4ea7-ba48-bac55f945bad",
             "when": null,
@@ -367,18 +473,23 @@
         },
         "12": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "errors": null,
             "id": 12,
             "input_connections": {
-                "hd5_format|in|input": {
+                "in|input": {
                     "id": 2,
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Import Anndata",
+                    "name": "in"
+                }
+            ],
             "label": null,
-            "name": "Import Anndata and loom",
+            "name": "Import Anndata",
             "outputs": [
                 {
                     "name": "anndata",
@@ -386,19 +497,19 @@
                 }
             ],
             "position": {
-                "left": 279.9999176480769,
-                "top": 308
+                "left": 278.8572183008857,
+                "top": 372.26958955669994
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "fb9e030ffae4",
+                "changeset_revision": "6f143dfe902a",
                 "name": "anndata_import",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"hd5_format\": {\"filetype\": \"anndata\", \"__current_case__\": 0, \"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "99a950da-eb84-45c4-b4b6-8d0216940828",
             "when": null,
@@ -406,18 +517,23 @@
         },
         "13": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "errors": null,
             "id": 13,
             "input_connections": {
-                "hd5_format|in|input": {
+                "in|input": {
                     "id": 3,
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Import Anndata",
+                    "name": "in"
+                }
+            ],
             "label": null,
-            "name": "Import Anndata and loom",
+            "name": "Import Anndata",
             "outputs": [
                 {
                     "name": "anndata",
@@ -426,18 +542,18 @@
             ],
             "position": {
                 "left": 279.9999176480769,
-                "top": 462
+                "top": 527.3983883124581
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "fb9e030ffae4",
+                "changeset_revision": "6f143dfe902a",
                 "name": "anndata_import",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"hd5_format\": {\"filetype\": \"anndata\", \"__current_case__\": 0, \"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "fc0c681e-1aac-40ae-8298-aabc01e5a87b",
             "when": null,
@@ -445,18 +561,23 @@
         },
         "14": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "errors": null,
             "id": 14,
             "input_connections": {
-                "hd5_format|in|input": {
+                "in|input": {
                     "id": 4,
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Import Anndata",
+                    "name": "in"
+                }
+            ],
             "label": null,
-            "name": "Import Anndata and loom",
+            "name": "Import Anndata",
             "outputs": [
                 {
                     "name": "anndata",
@@ -464,19 +585,19 @@
                 }
             ],
             "position": {
-                "left": 279.9999176480769,
-                "top": 616
+                "left": 278.8572958107027,
+                "top": 681.3983593877771
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "fb9e030ffae4",
+                "changeset_revision": "6f143dfe902a",
                 "name": "anndata_import",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"hd5_format\": {\"filetype\": \"anndata\", \"__current_case__\": 0, \"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "b5c7249c-c358-4a71-a637-12f269e009ab",
             "when": null,
@@ -484,18 +605,23 @@
         },
         "15": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "errors": null,
             "id": 15,
             "input_connections": {
-                "hd5_format|in|input": {
+                "in|input": {
                     "id": 5,
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Import Anndata",
+                    "name": "in"
+                }
+            ],
             "label": null,
-            "name": "Import Anndata and loom",
+            "name": "Import Anndata",
             "outputs": [
                 {
                     "name": "anndata",
@@ -504,18 +630,18 @@
             ],
             "position": {
                 "left": 279.9999176480769,
-                "top": 770
+                "top": 835.3983883124581
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "fb9e030ffae4",
+                "changeset_revision": "6f143dfe902a",
                 "name": "anndata_import",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"hd5_format\": {\"filetype\": \"anndata\", \"__current_case__\": 0, \"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "bbc79158-5e04-49db-8088-37da78a2c83f",
             "when": null,
@@ -523,18 +649,23 @@
         },
         "16": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "errors": null,
             "id": 16,
             "input_connections": {
-                "hd5_format|in|input": {
+                "in|input": {
                     "id": 6,
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Import Anndata",
+                    "name": "in"
+                }
+            ],
             "label": null,
-            "name": "Import Anndata and loom",
+            "name": "Import Anndata",
             "outputs": [
                 {
                     "name": "anndata",
@@ -542,19 +673,19 @@
                 }
             ],
             "position": {
-                "left": 279.9999176480769,
-                "top": 924
+                "left": 279.9861240698978,
+                "top": 988.0815036417088
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "fb9e030ffae4",
+                "changeset_revision": "6f143dfe902a",
                 "name": "anndata_import",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"hd5_format\": {\"filetype\": \"anndata\", \"__current_case__\": 0, \"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "177a94fa-ea39-4e04-9d95-47d84bee200d",
             "when": null,
@@ -562,18 +693,23 @@
         },
         "17": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "errors": null,
             "id": 17,
             "input_connections": {
-                "hd5_format|in|input": {
+                "in|input": {
                     "id": 7,
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Import Anndata",
+                    "name": "in"
+                }
+            ],
             "label": null,
-            "name": "Import Anndata and loom",
+            "name": "Import Anndata",
             "outputs": [
                 {
                     "name": "anndata",
@@ -581,19 +717,19 @@
                 }
             ],
             "position": {
-                "left": 279.9999176480769,
-                "top": 1078
+                "left": 279.9861487853543,
+                "top": 1143.3983751589587
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "fb9e030ffae4",
+                "changeset_revision": "6f143dfe902a",
                 "name": "anndata_import",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"hd5_format\": {\"filetype\": \"anndata\", \"__current_case__\": 0, \"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "3a263cfa-a15c-4565-b2cd-49989db25371",
             "when": null,
@@ -601,18 +737,23 @@
         },
         "18": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "errors": null,
             "id": 18,
             "input_connections": {
-                "hd5_format|in|input": {
+                "in|input": {
                     "id": 8,
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Import Anndata",
+                    "name": "in"
+                }
+            ],
             "label": null,
-            "name": "Import Anndata and loom",
+            "name": "Import Anndata",
             "outputs": [
                 {
                     "name": "anndata",
@@ -621,18 +762,18 @@
             ],
             "position": {
                 "left": 279.9999176480769,
-                "top": 1232
+                "top": 1297.398388312458
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "fb9e030ffae4",
+                "changeset_revision": "6f143dfe902a",
                 "name": "anndata_import",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"hd5_format\": {\"filetype\": \"anndata\", \"__current_case__\": 0, \"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "2a7d63ed-774f-4894-af10-92e06131adcf",
             "when": null,
@@ -640,18 +781,23 @@
         },
         "19": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "errors": null,
             "id": 19,
             "input_connections": {
-                "hd5_format|in|input": {
+                "in|input": {
                     "id": 9,
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Import Anndata",
+                    "name": "in"
+                }
+            ],
             "label": null,
-            "name": "Import Anndata and loom",
+            "name": "Import Anndata",
             "outputs": [
                 {
                     "name": "anndata",
@@ -660,18 +806,18 @@
             ],
             "position": {
                 "left": 279.9999176480769,
-                "top": 1386
+                "top": 1451.398388312458
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "fb9e030ffae4",
+                "changeset_revision": "6f143dfe902a",
                 "name": "anndata_import",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"hd5_format\": {\"filetype\": \"anndata\", \"__current_case__\": 0, \"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"in\": {\"adata_format\": \"tabular\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"first_column_names\": true}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "51f452a2-b1a5-4315-bb26-0093c79a3aa9",
             "when": null,
@@ -679,7 +825,7 @@
         },
         "20": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "errors": null,
             "id": 20,
             "input_connections": {
@@ -698,19 +844,19 @@
                 }
             ],
             "position": {
-                "left": 559.9999540284473,
-                "top": 0
+                "left": 559.986130131553,
+                "top": 64.08156964137
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "3d748954434b",
+                "changeset_revision": "c4209ea387d4",
                 "name": "anndata_manipulate",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"h5ad\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 5}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 7}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "defbd9c2-d44c-48c8-8ed6-b6649dcae1af",
             "when": null,
@@ -718,7 +864,7 @@
         },
         "21": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "errors": null,
             "id": 21,
             "input_connections": {
@@ -738,18 +884,18 @@
             ],
             "position": {
                 "left": 559.9999540284473,
-                "top": 154
+                "top": 219.39838831245814
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "3d748954434b",
+                "changeset_revision": "c4209ea387d4",
                 "name": "anndata_manipulate",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"h5ad\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 5}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 7}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "a6c1c73b-1c2a-421b-ae4c-d79e286614ea",
             "when": null,
@@ -757,7 +903,7 @@
         },
         "22": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "errors": null,
             "id": 22,
             "input_connections": {
@@ -777,18 +923,18 @@
             ],
             "position": {
                 "left": 559.9999540284473,
-                "top": 308
+                "top": 373.39838831245817
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "3d748954434b",
+                "changeset_revision": "c4209ea387d4",
                 "name": "anndata_manipulate",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"h5ad\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 5}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 7}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "fd73dc52-957e-433a-9aab-733efb9df757",
             "when": null,
@@ -796,7 +942,7 @@
         },
         "23": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "errors": null,
             "id": 23,
             "input_connections": {
@@ -816,18 +962,18 @@
             ],
             "position": {
                 "left": 559.9999540284473,
-                "top": 462
+                "top": 527.3983883124581
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "3d748954434b",
+                "changeset_revision": "c4209ea387d4",
                 "name": "anndata_manipulate",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"h5ad\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 5}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 7}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "fe89b9a5-dd11-4750-bdff-998cd62b8c76",
             "when": null,
@@ -835,7 +981,7 @@
         },
         "24": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "errors": null,
             "id": 24,
             "input_connections": {
@@ -855,18 +1001,18 @@
             ],
             "position": {
                 "left": 559.9999540284473,
-                "top": 616
+                "top": 681.3983883124581
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "3d748954434b",
+                "changeset_revision": "c4209ea387d4",
                 "name": "anndata_manipulate",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"h5ad\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 5}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 7}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "75fd4890-4bce-4978-a636-f3ec85e3af63",
             "when": null,
@@ -874,7 +1020,7 @@
         },
         "25": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "errors": null,
             "id": 25,
             "input_connections": {
@@ -894,18 +1040,18 @@
             ],
             "position": {
                 "left": 559.9999540284473,
-                "top": 770
+                "top": 835.3983883124581
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "3d748954434b",
+                "changeset_revision": "c4209ea387d4",
                 "name": "anndata_manipulate",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"h5ad\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 5}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 7}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "6dea19a9-3530-44d2-97c3-338062560911",
             "when": null,
@@ -913,7 +1059,7 @@
         },
         "26": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "errors": null,
             "id": 26,
             "input_connections": {
@@ -933,18 +1079,18 @@
             ],
             "position": {
                 "left": 559.9999540284473,
-                "top": 924
+                "top": 989.3983883124581
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "3d748954434b",
+                "changeset_revision": "c4209ea387d4",
                 "name": "anndata_manipulate",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"h5ad\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 5}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 7}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "7741d5fb-301e-4232-b6ab-29cab4ce1550",
             "when": null,
@@ -952,7 +1098,7 @@
         },
         "27": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "errors": null,
             "id": 27,
             "input_connections": {
@@ -972,18 +1118,18 @@
             ],
             "position": {
                 "left": 559.9999540284473,
-                "top": 1078
+                "top": 1143.398388312458
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "3d748954434b",
+                "changeset_revision": "c4209ea387d4",
                 "name": "anndata_manipulate",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"h5ad\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 5}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 7}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "f8e93ee5-b396-4fff-8501-0c7b96a04732",
             "when": null,
@@ -991,7 +1137,7 @@
         },
         "28": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "errors": null,
             "id": 28,
             "input_connections": {
@@ -1011,18 +1157,18 @@
             ],
             "position": {
                 "left": 559.9999540284473,
-                "top": 1232
+                "top": 1297.398388312458
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "3d748954434b",
+                "changeset_revision": "c4209ea387d4",
                 "name": "anndata_manipulate",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"h5ad\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 5}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 7}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "50c0a7c0-7c5f-4b6e-8313-716947a8077a",
             "when": null,
@@ -1030,7 +1176,7 @@
         },
         "29": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "errors": null,
             "id": 29,
             "input_connections": {
@@ -1050,18 +1196,18 @@
             ],
             "position": {
                 "left": 559.9999540284473,
-                "top": 1386
+                "top": 1451.398388312458
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "3d748954434b",
+                "changeset_revision": "c4209ea387d4",
                 "name": "anndata_manipulate",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"h5ad\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 5}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"transpose\", \"__current_case__\": 7}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "0852a076-be4a-4d40-8456-f602e4d98f41",
             "when": null,
@@ -1069,7 +1215,7 @@
         },
         "30": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "errors": null,
             "id": 30,
             "input_connections": {
@@ -1079,6 +1225,18 @@
                 },
                 "manipulate|other_adatas": [
                     {
+                        "id": 20,
+                        "output_name": "anndata"
+                    },
+                    {
+                        "id": 21,
+                        "output_name": "anndata"
+                    },
+                    {
+                        "id": 22,
+                        "output_name": "anndata"
+                    },
+                    {
                         "id": 23,
                         "output_name": "anndata"
                     },
@@ -1087,15 +1245,11 @@
                         "output_name": "anndata"
                     },
                     {
-                        "id": 21,
-                        "output_name": "anndata"
-                    },
-                    {
                         "id": 25,
                         "output_name": "anndata"
                     },
                     {
-                        "id": 22,
+                        "id": 26,
                         "output_name": "anndata"
                     },
                     {
@@ -1105,18 +1259,15 @@
                     {
                         "id": 28,
                         "output_name": "anndata"
-                    },
-                    {
-                        "id": 26,
-                        "output_name": "anndata"
-                    },
-                    {
-                        "id": 20,
-                        "output_name": "anndata"
                     }
                 ]
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Manipulate AnnData",
+                    "name": "manipulate"
+                }
+            ],
             "label": null,
             "name": "Manipulate AnnData",
             "outputs": [
@@ -1127,7 +1278,7 @@
             ],
             "position": {
                 "left": 849.9998716765242,
-                "top": 622
+                "top": 687.3983883124581
             },
             "post_job_actions": {
                 "RenameDatasetActionanndata": {
@@ -1138,15 +1289,15 @@
                     "output_name": "anndata"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "3d748954434b",
+                "changeset_revision": "c4209ea387d4",
                 "name": "anndata_manipulate",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"h5ad\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"concatenate\", \"__current_case__\": 0, \"other_adatas\": {\"__class__\": \"ConnectedValue\"}, \"join\": \"inner\", \"batch_key\": \"batch\", \"index_unique\": \"-\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"concatenate\", \"__current_case__\": 0, \"other_adatas\": {\"__class__\": \"ConnectedValue\"}, \"join\": \"inner\", \"batch_key\": \"batch\", \"index_unique\": \"-\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "8f439f4f-7495-43fd-a20a-443fb0bb2efa",
             "when": null,
@@ -1154,7 +1305,7 @@
         },
         "31": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy0",
             "errors": null,
             "id": 31,
             "input_connections": {
@@ -1173,8 +1324,8 @@
                 }
             ],
             "position": {
-                "left": 1129.9999080568946,
-                "top": 416
+                "left": 1129.9860682890346,
+                "top": 480.08155353594225
             },
             "post_job_actions": {
                 "RenameDatasetActionobs": {
@@ -1185,15 +1336,15 @@
                     "output_name": "obs"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "ee98d611afc6",
+                "changeset_revision": "14c576ea6148",
                 "name": "anndata_inspect",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"h5ad\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"inspect\": {\"info\": \"obs\", \"__current_case__\": 3}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"inspect\": {\"info\": \"obs\", \"__current_case__\": 3}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "d5d36561-8879-456c-83c8-4f4cb07c387e",
             "when": null,
@@ -1201,7 +1352,7 @@
         },
         "32": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1",
             "errors": null,
             "id": 32,
             "input_connections": {
@@ -1210,12 +1361,7 @@
                     "output_name": "obs"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Replace Text",
-                    "name": "infile"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Replace Text",
             "outputs": [
@@ -1226,18 +1372,18 @@
             ],
             "position": {
                 "left": 1409.999944437265,
-                "top": 416
+                "top": 481.39838831245817
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "ddf54b12c295",
+                "changeset_revision": "86755160afbf",
                 "name": "text_processing",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"infile\": {\"__class__\": \"RuntimeValue\"}, \"replacements\": [{\"__index__\": 0, \"column\": \"2\", \"find_pattern\": \"0|1\", \"replace_pattern\": \"patient1\"}, {\"__index__\": 1, \"column\": \"2\", \"find_pattern\": \"2|3|4|5|6\", \"replace_pattern\": \"patient2\"}, {\"__index__\": 2, \"column\": \"2\", \"find_pattern\": \"7|8|9\", \"replace_pattern\": \"patient3\"}, {\"__index__\": 3, \"column\": \"2\", \"find_pattern\": \"batch\", \"replace_pattern\": \"patient\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.1.3",
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"column\": \"2\", \"find_pattern\": \"0|1\", \"replace_pattern\": \"patient1\"}, {\"__index__\": 1, \"column\": \"2\", \"find_pattern\": \"2|3|4|5|6\", \"replace_pattern\": \"patient2\"}, {\"__index__\": 2, \"column\": \"2\", \"find_pattern\": \"7|8|9\", \"replace_pattern\": \"patient3\"}, {\"__index__\": 3, \"column\": \"2\", \"find_pattern\": \"batch\", \"replace_pattern\": \"patient\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
             "type": "tool",
             "uuid": "6b9db8dd-5475-4d0d-8721-86c1a295f0da",
             "when": null,
@@ -1245,7 +1391,7 @@
         },
         "33": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1",
             "errors": null,
             "id": 33,
             "input_connections": {
@@ -1254,12 +1400,7 @@
                     "output_name": "obs"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Replace Text",
-                    "name": "infile"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Replace Text",
             "outputs": [
@@ -1270,18 +1411,18 @@
             ],
             "position": {
                 "left": 1409.999944437265,
-                "top": 570
+                "top": 635.3983883124581
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "ddf54b12c295",
+                "changeset_revision": "86755160afbf",
                 "name": "text_processing",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"infile\": {\"__class__\": \"RuntimeValue\"}, \"replacements\": [{\"__index__\": 0, \"column\": \"2\", \"find_pattern\": \"2|4|7|8\", \"replace_pattern\": \"poolA\"}, {\"__index__\": 1, \"column\": \"2\", \"find_pattern\": \"3|5|9\", \"replace_pattern\": \"poolB\"}, {\"__index__\": 2, \"column\": \"2\", \"find_pattern\": \"6\", \"replace_pattern\": \"poolC\"}, {\"__index__\": 3, \"column\": \"2\", \"find_pattern\": \"0|1\", \"replace_pattern\": \"NA\"}, {\"__index__\": 4, \"column\": \"2\", \"find_pattern\": \"batch\", \"replace_pattern\": \"replicate\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.1.3",
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"column\": \"2\", \"find_pattern\": \"2|4|7|8\", \"replace_pattern\": \"poolA\"}, {\"__index__\": 1, \"column\": \"2\", \"find_pattern\": \"3|5|9\", \"replace_pattern\": \"poolB\"}, {\"__index__\": 2, \"column\": \"2\", \"find_pattern\": \"6\", \"replace_pattern\": \"poolC\"}, {\"__index__\": 3, \"column\": \"2\", \"find_pattern\": \"0|1\", \"replace_pattern\": \"NA\"}, {\"__index__\": 4, \"column\": \"2\", \"find_pattern\": \"batch\", \"replace_pattern\": \"replicate\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
             "type": "tool",
             "uuid": "e39c581b-79da-4851-b174-cf6b893ba2ee",
             "when": null,
@@ -1289,7 +1430,7 @@
         },
         "34": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1",
             "errors": null,
             "id": 34,
             "input_connections": {
@@ -1309,18 +1450,18 @@
             ],
             "position": {
                 "left": 1689.9999808176353,
-                "top": 272
+                "top": 337.39838831245817
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "ddf54b12c295",
+                "changeset_revision": "86755160afbf",
                 "name": "text_processing",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"column\": \"2\", \"find_pattern\": \"0\", \"replace_pattern\": \"left-mid\"}, {\"__index__\": 1, \"column\": \"2\", \"find_pattern\": \"1|2|3|8|9\", \"replace_pattern\": \"right-mid\"}, {\"__index__\": 2, \"column\": \"2\", \"find_pattern\": \"4|5|6\", \"replace_pattern\": \"right-apex\"}, {\"__index__\": 3, \"column\": \"2\", \"find_pattern\": \"7\", \"replace_pattern\": \"right-anterior\"}, {\"__index__\": 4, \"column\": \"2\", \"find_pattern\": \"batch\", \"replace_pattern\": \"tumorSpecimen\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.1.3",
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"column\": \"2\", \"find_pattern\": \"0\", \"replace_pattern\": \"left-mid\"}, {\"__index__\": 1, \"column\": \"2\", \"find_pattern\": \"1|2|3|8|9\", \"replace_pattern\": \"right-mid\"}, {\"__index__\": 2, \"column\": \"2\", \"find_pattern\": \"4|5|6\", \"replace_pattern\": \"right-apex\"}, {\"__index__\": 3, \"column\": \"2\", \"find_pattern\": \"7\", \"replace_pattern\": \"right-anterior\"}, {\"__index__\": 4, \"column\": \"2\", \"find_pattern\": \"batch\", \"replace_pattern\": \"tumorSpecimen\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
             "type": "tool",
             "uuid": "0efbddb8-8f61-40b6-878e-1080f313ec5e",
             "when": null,
@@ -1328,7 +1469,7 @@
         },
         "35": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1",
             "errors": null,
             "id": 35,
             "input_connections": {
@@ -1347,19 +1488,19 @@
                 }
             ],
             "position": {
-                "left": 1970.0000171980057,
-                "top": 194
+                "left": 1968.6831663579067,
+                "top": 259.39836647901654
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "ddf54b12c295",
+                "changeset_revision": "86755160afbf",
                 "name": "text_processing",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"column\": \"2\", \"find_pattern\": \"0\", \"replace_pattern\": \"AUG_PB1A\"}, {\"__index__\": 1, \"column\": \"2\", \"find_pattern\": \"1$\", \"replace_pattern\": \"AUG_PB1B\"}, {\"__index__\": 2, \"column\": \"2\", \"find_pattern\": \"(2$)|3\", \"replace_pattern\": \"MAY_PB1A\"}, {\"__index__\": 3, \"column\": \"2\", \"find_pattern\": \"4|5|6\", \"replace_pattern\": \"MAY_PB1B\"}, {\"__index__\": 4, \"column\": \"2\", \"find_pattern\": \"7\", \"replace_pattern\": \"MAY_PB2A\"}, {\"__index__\": 5, \"column\": \"2\", \"find_pattern\": \"8|9\", \"replace_pattern\": \"MAY_PB2B\"}, {\"__index__\": 6, \"column\": \"2\", \"find_pattern\": \"batch\", \"replace_pattern\": \"SpecimenID\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.1.3",
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"column\": \"2\", \"find_pattern\": \"0\", \"replace_pattern\": \"AUG_PB1A\"}, {\"__index__\": 1, \"column\": \"2\", \"find_pattern\": \"1$\", \"replace_pattern\": \"AUG_PB1B\"}, {\"__index__\": 2, \"column\": \"2\", \"find_pattern\": \"(2$)|3\", \"replace_pattern\": \"MAY_PB1A\"}, {\"__index__\": 3, \"column\": \"2\", \"find_pattern\": \"4|5|6\", \"replace_pattern\": \"MAY_PB1B\"}, {\"__index__\": 4, \"column\": \"2\", \"find_pattern\": \"7\", \"replace_pattern\": \"MAY_PB2A\"}, {\"__index__\": 5, \"column\": \"2\", \"find_pattern\": \"8|9\", \"replace_pattern\": \"MAY_PB2B\"}, {\"__index__\": 6, \"column\": \"2\", \"find_pattern\": \"batch\", \"replace_pattern\": \"SpecimenID\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
             "type": "tool",
             "uuid": "03794fc2-ffd5-4315-98c3-f7d225465a78",
             "when": null,
@@ -1387,7 +1528,7 @@
             ],
             "position": {
                 "left": 1690.000040183782,
-                "top": 426
+                "top": 491.39838831245817
             },
             "post_job_actions": {
                 "RenameDatasetActionout_file1": {
@@ -1428,7 +1569,7 @@
             ],
             "position": {
                 "left": 1689.9999808176353,
-                "top": 580
+                "top": 645.3983883124581
             },
             "post_job_actions": {
                 "RenameDatasetActionout_file1": {
@@ -1469,7 +1610,7 @@
             ],
             "position": {
                 "left": 1970.0000171980057,
-                "top": 348
+                "top": 413.39838831245817
             },
             "post_job_actions": {
                 "RenameDatasetActionout_file1": {
@@ -1510,7 +1651,7 @@
             ],
             "position": {
                 "left": 2250.000053578376,
-                "top": 216
+                "top": 281.3983883124581
             },
             "post_job_actions": {
                 "RenameDatasetActionout_file1": {
@@ -1555,7 +1696,7 @@
             ],
             "position": {
                 "left": 1970.0000171980057,
-                "top": 482
+                "top": 547.3983883124581
             },
             "post_job_actions": {},
             "tool_id": "Paste1",
@@ -1592,7 +1733,7 @@
             ],
             "position": {
                 "left": 2250.000053578376,
-                "top": 350
+                "top": 415.39838831245817
             },
             "post_job_actions": {},
             "tool_id": "Paste1",
@@ -1629,7 +1770,7 @@
             ],
             "position": {
                 "left": 2530.0000899587462,
-                "top": 323
+                "top": 388.39838831245817
             },
             "post_job_actions": {
                 "RenameDatasetActionout_file1": {
@@ -1650,7 +1791,7 @@
         },
         "43": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "errors": null,
             "id": 43,
             "input_connections": {
@@ -1663,7 +1804,12 @@
                     "output_name": "out_file1"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Manipulate AnnData",
+                    "name": "manipulate"
+                }
+            ],
             "label": null,
             "name": "Manipulate AnnData",
             "outputs": [
@@ -1674,18 +1820,18 @@
             ],
             "position": {
                 "left": 2810.0001263391164,
-                "top": 605
+                "top": 670.3983883124581
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "3d748954434b",
+                "changeset_revision": "c4209ea387d4",
                 "name": "anndata_manipulate",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"h5ad\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"add_annotation\", \"__current_case__\": 6, \"var_obs\": \"obs\", \"new_annot\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"manipulate\": {\"function\": \"add_annotation\", \"__current_case__\": 8, \"var_obs\": \"obs\", \"new_annot\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "bafffb92-883e-4954-bec0-55551545a625",
             "when": null,
@@ -1693,7 +1839,7 @@
         },
         "44": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy9",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.9.3+galaxy0",
             "errors": null,
             "id": 44,
             "input_connections": {
@@ -1712,19 +1858,19 @@
                 }
             ],
             "position": {
-                "left": 3089.9999252549,
-                "top": 610
+                "left": 3090.0002007953785,
+                "top": 673.9778304207833
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy9",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.9.3+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "e9283529cba1",
+                "changeset_revision": "bf1e0bdec1db",
                 "name": "scanpy_filter_cells",
                 "owner": "ebi-gxa",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"categories\": [], \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"export_mtx\": false, \"force_recalc\": false, \"gene_name\": \"_index\", \"input_format\": \"anndata\", \"input_obj_file\": {\"__class__\": \"ConnectedValue\"}, \"output_format\": \"anndata_h5ad\", \"parameters\": [{\"__index__\": 0, \"name\": \"n_genes\", \"min\": \"0.0\", \"max\": \"1000000000.0\"}], \"save_layer\": null, \"save_raw\": false, \"subsets\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.8.1+galaxy9",
+            "tool_state": "{\"categories\": [], \"export_mtx\": false, \"force_recalc\": false, \"gene_name\": \"_index\", \"input_format\": \"anndata\", \"input_obj_file\": {\"__class__\": \"ConnectedValue\"}, \"output_format\": \"anndata_h5ad\", \"parameters\": [{\"__index__\": 0, \"name\": \"n_genes\", \"min\": \"0.0\", \"max\": \"1000000000.0\"}], \"save_layer\": null, \"save_raw\": false, \"subsets\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.9.3+galaxy0",
             "type": "tool",
             "uuid": "2ae0ca16-f58b-4a3a-bdef-bf66a74b73c2",
             "when": null,
@@ -1732,7 +1878,7 @@
         },
         "45": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.9.3+galaxy0",
             "errors": null,
             "id": 45,
             "input_connections": {
@@ -1751,19 +1897,19 @@
                 }
             ],
             "position": {
-                "left": 3369.999842902977,
-                "top": 610
+                "left": 3369.985953746747,
+                "top": 674.0815558059719
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.9.3+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "890fb06a2893",
+                "changeset_revision": "a4774b7b2e85",
                 "name": "anndata_ops",
                 "owner": "ebi-gxa",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"copy_adata_to_raw\": false, \"copy_e\": {\"default\": false, \"__current_case__\": 1}, \"copy_l\": {\"default\": false, \"__current_case__\": 1}, \"copy_o\": {\"default\": false, \"__current_case__\": 1}, \"copy_r\": {\"default\": false, \"__current_case__\": 1}, \"copy_u\": {\"default\": false, \"__current_case__\": 1}, \"copy_x\": {\"default\": false, \"__current_case__\": 1}, \"gene_flags\": [{\"__index__\": 0, \"startswith\": \"MT-\", \"flag\": \"mito\"}], \"gene_symbols_field\": \"index\", \"input_obj_file\": {\"__class__\": \"ConnectedValue\"}, \"modifications\": [], \"output_format\": \"anndata_h5ad\", \"sanitize_varm\": false, \"top_genes\": \"50\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.8.1+galaxy0",
+            "tool_state": "{\"add_cell_metadata\": {\"default\": false, \"__current_case__\": 1}, \"copy_adata_to_raw\": false, \"copy_e\": {\"default\": false, \"__current_case__\": 1}, \"copy_l\": {\"default\": false, \"__current_case__\": 1}, \"copy_o\": {\"default\": false, \"__current_case__\": 1}, \"copy_r\": {\"default\": false, \"__current_case__\": 1}, \"copy_u\": {\"default\": false, \"__current_case__\": 1}, \"copy_x\": {\"default\": false, \"__current_case__\": 1}, \"field_unique\": null, \"gene_flags\": [{\"__index__\": 0, \"startswith\": \"MT-\", \"flag\": \"mito\"}], \"gene_symbols_field\": \"index\", \"input_obj_file\": {\"__class__\": \"ConnectedValue\"}, \"modifications\": [], \"output_format\": \"anndata_h5ad\", \"sanitize_varm\": false, \"split_on_obs\": {\"default\": false, \"__current_case__\": 1}, \"swap_layer_to_x\": {\"default\": false, \"__current_case__\": 1}, \"top_genes\": \"50\", \"var_modifications\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.9.3+galaxy0",
             "type": "tool",
             "uuid": "c53d106a-f45b-477d-ab64-ad266c248411",
             "when": null,
@@ -1777,7 +1923,7 @@
         },
         "46": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy0",
             "errors": null,
             "id": 46,
             "input_connections": {
@@ -1797,18 +1943,18 @@
             ],
             "position": {
                 "left": 3649.9996418187607,
-                "top": 642
+                "top": 707.3983883124581
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "ee98d611afc6",
+                "changeset_revision": "14c576ea6148",
                 "name": "anndata_inspect",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"h5ad\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"inspect\": {\"info\": \"obs\", \"__current_case__\": 3}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.7.5+galaxy1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"inspect\": {\"info\": \"obs\", \"__current_case__\": 3}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy0",
             "type": "tool",
             "uuid": "60a81f95-32e1-47a7-8a95-07586eb9ed6a",
             "when": null,
@@ -1825,6 +1971,6 @@
         "name:single-cell",
         "name:data-management"
     ],
-    "uuid": "5d73dd95-2534-448a-bb8b-2470bfb1db5a",
-    "version": 5
+    "uuid": "da27a6fb-ab9f-4fe7-94b9-1d73e7c0fce7",
+    "version": 4
 }
