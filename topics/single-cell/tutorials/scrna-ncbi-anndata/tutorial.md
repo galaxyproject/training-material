@@ -230,14 +230,13 @@ The next step is to convert all of the raw files into AnnData objects, this can 
 {% snippet faqs/galaxy/datasets_add_tag.md %}
 > <hands-on-title>Convert raw data to AnnData</hands-on-title>
 >
-> 1. {% tool [Import AnnData and loom](toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1) %} with the following parameters:
->    - *"hd5 format to be created"*: `Anndata file`
->         - *"Format for the annotated data matrix?"*: `Tabular, CSV, TSV`
+> 1. {% tool [Import Anndata](toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.10.9+galaxy0) %} with the following parameters:
+>    - *"Create anndata from"*: `Tabular, CSV, TSV`
 >         - *"Annotated data matrix"*
 >           - {% icon param-files %} *Multiple datasets*: `Select all imported files`
 >         - *"Does the first column store the row names?"*: `Yes`
 >
-> 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+> 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `select any one of the AnnData files`
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 >
@@ -251,7 +250,7 @@ Examine {% icon galaxy-eye %} the {% icon param-file %} *"Inspect AnnData"* outp
 
 > <hands-on-title>Transpose AnnData objects</hands-on-title>
 >
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0) %} with the following parameters:
 >
 >    - *"Annotated data matrix"*
 >         - {% icon param-files %} *Multiple datasets*: `Select all AnnData files`
@@ -263,7 +262,7 @@ Now, we have all the AnnData objects with the data in the correct orientation. W
 
 > <hands-on-title>Combine AnnData objects</hands-on-title>
 >
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Select first Manipulate AnnData (transpose) output`
 >    - *"Function to manipulate the object"*: `Concatenate along the observations axis`
 >         - {% icon param-file %} *"Annotated data matrix to add"*: `Select all other Manipulate AnnData (transpose) outputs`
@@ -283,7 +282,7 @@ The next step is to annotate our data using the information gathered from the ex
 
 > <hands-on-title></hands-on-title>
 >
-> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Combined Object`
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 >
@@ -297,7 +296,7 @@ Let's now add the replicate column which tells us which cells are part of pools 
 
 > <hands-on-title>Create replicate metadata</hands-on-title>
 >
-> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} *in a specific column* with the following parameters:
+> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1) %} *in a specific column* with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `Observation data`
 >    - *"1: Replacement"*
 >         - *"in column"*: `Column: 2`
@@ -337,7 +336,7 @@ Next we will add the metadata indicating which patient each row came from.
 
 > <hands-on-title>Create patient data</hands-on-title>
 >
-> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
+> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `Observation data`
 >    - *"1: Replacement"*
 >         - *"in column"*: `Column: 2`
@@ -372,7 +371,7 @@ We will now add a column to indicate which sample each row came from using the s
 
 > <hands-on-title>Create sample ID metadata</hands-on-title>
 >
-> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
+> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `Observation data`
 >    - *"1: Replacement"*
 >         - *"in column"*: `Column: 2`
@@ -428,7 +427,7 @@ Finally we will add the tumor column which indicates which tumor sample each row
 
 > <hands-on-title>Create tumor metadata</hands-on-title>
 >
-> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
+> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `Observation data`
 >    - *"1: Replacement"*
 >         - *"in column"*: `Column: 2`
@@ -495,7 +494,7 @@ With the metadata table ready, we can add it to our original combined object!
 
 > <hands-on-title>Add metadata to AnnData object</hands-on-title>
 >
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Combined Object`
 >    - *"Function to manipulate the object"*: `Add new annotation(s) for observations of variables`
 >         - *"What to annotate?"*: `Observations (obs)`
@@ -513,13 +512,9 @@ With the manual annotations added, we need to do some further processing to add 
 
 First, we will run the ```Scanpy FilterCells``` tool without actually filtering. This tool will add some metadata about the counts and numbers of expressed genes.
 
-> <warning-title>Scanpy FilterCells version issue</warning-title>
-> The {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy9) %} tool (used below) does not work in the latest version (**1.8.1+galaxy93**), switch to version **1.8.1+galaxy9** in order to run the tool without error.
-{: .warning}
-
 > <hands-on-title>Add initial metadata</hands-on-title>
 >
-> 1. {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy9) %} with the following parameters:
+> 1. {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.9.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Annotated Object`
 >    - *"Name of the column in `anndata.var` that contains gene name"*: `_index`
 >
@@ -529,7 +524,7 @@ The final tool, {% icon tool %} **AnnData Operations**, will add the rest of our
 
 > <hands-on-title>Add final metadata</hands-on-title>
 >
-> 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy9) %} with the following parameters:
+> 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.9.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Output of Scanpy FilterCells`
 >    - **+ Insert Flag genes that start with these names**
 >    - *"1: Parameters to select cells to keep"*
@@ -538,7 +533,7 @@ The final tool, {% icon tool %} **AnnData Operations**, will add the rest of our
 >
 > 2. **Rename** {% icon galaxy-pencil %} output `Final Object`
 >
-> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Final Object`
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 >

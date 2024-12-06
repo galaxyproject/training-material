@@ -47,41 +47,25 @@ If you are working on your own training materials and want preview them online w
 
 > <hands-on-title>Setting up GitPod</hands-on-title>
 >
-> 1. **Create a fork** of the GTN GitHub repository
->    - Go on the GitHub repository: [github.com/galaxyproject/training-material](https://github.com/galaxyproject/training-material){: width="50%"}
->    - Click on th Fork button (top-right corner of the page)
->      ![The fork button on GitHub](../../images/PR_fork.jpg)
+> 1. **Create a fork** of the [GTN GitHub repository](https://github.com/galaxyproject/training-material)
 >
->    > <tip-title>Already have a fork of the GTN?</tip-title>
->    > If you already have a fork, fantastic! But a common issue is that the `main` branch gets outdated, or your fork was from before we renamed the `master` branch to `main`.
->    >
->    > - Start by browsing to your fork in GitHub
->    > - Check the default branch that is shown.
->    >   - Does it say `master`? Then you need to update it, following the instructions below
->    >
->    >   > <tip-title> changing your default branch from master to main </tip-title>
->    >   >  1. Go to your fork's settings (Click on the gear icon called "Settings")
->    >   >  2. Find "Branches" on the left
->    >   >  3. If it says master you can click on the ⇆  icon to switch branches.
->    >   >  4. Select `main` (it may not be present).
->    >   >  5. If it isn't present, use the pencil icon to rename `master` to `main`.
->    >   >  6. Now you can update it in the next step
->    >   {: .tip}
->    >
->    > - Click the **Sync Fork** button on your fork to update it to the latest version
->    >
->    >   ![Github with the top bar of a repository shown, including the button for 'Sync Fork'](../../images/github_update_fork.png)
->    {: .tip}
+>    {% snippet topics/contributing/faqs/github-fork-gtn.md %}
 >
-> 2. **Open** your browser and navigate to [gitpod.io/login](https://gitpod.io/login)
+> 2. Already have a fork of the GTN? Make sure it is up to date.
+>
+>    {% snippet topics/contributing/faqs/github-fork-master-main.md %}
+>
+>    {% snippet topics/contributing/faqs/github-fork-sync.md %}
+>
+> 3. **Open** your browser and navigate to [gitpod.io/login](https://gitpod.io/login)
 >    - Note: don't leave the `/login` part of the URL off, it will lead you to a different flavour of GitPod. We are using Gitpod classic
-> 3. **Log in** with GitHub
+> 4. **Log in** with GitHub
 >    ![GitPod sign-in menu with various options, including GitHub](../../images/gitpod/signin.png){: width="25%"}
-> 4. Click on **Configure your own repository** under the Workspaces menu
+> 5. Click on **Configure your own repository** under the Workspaces menu
 >    ![GitPod homepage](images/gitpod-home.png)
-> 5. Under **Select a repository** choose your fork, e.g. `https://github.com/shiltemann/training-material`
+> 6. Under **Select a repository** choose your fork, e.g. `https://github.com/shiltemann/training-material`
 >    ![screenshot of new workspace menu](images/gitpod-workspace.png)
-> 6. Click **continue**
+> 7. Click **continue**
 >    - This will create an enviroment where you can make changes to the GTN and preview them
 >    - **Note:** It can take quite some time to start up the first time (15-30 minutes)
 >    - We can make future starts a lot faster using **prebuilds** (see tip box below), you can configure this now while you wait
