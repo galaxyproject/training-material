@@ -236,7 +236,7 @@ We can identify mitochondrial genes from their gene symbols. Human genes that ar
 
 > <hands-on-title>Calculate the Proportion of Mitochondrial Reads</hands-on-title>
 >
-> 1. {% tool [Seurat Create](toolshed.g2.bx.psu.edu/repos/iuc/seurat_create/seurat_create/5.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Seurat Create](toolshed.g2.bx.psu.edu/repos/iuc/seurat_create/seurat_create/5.0+galaxy1) %} with the following parameters:
 >    - *"Method used"*: `Add QC Metrics`
 >        - {% icon param-file %} *"Input file with the Seurat object"*: `Input 3k PBMC` (output of **Seurat Create** {% icon tool %})
 >        - *"Calculate percentage of reads based on"*: `Pattern in gene names`
@@ -320,7 +320,7 @@ We're setting QC thresholds based on our visual inspections of the data, but we 
 
 > <hands-on-title>Filter Out Low Quality Cells</hands-on-title>
 >
-> 1. {% tool [Seurat Create](toolshed.g2.bx.psu.edu/repos/iuc/seurat_create/seurat_create/5.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Seurat Create](toolshed.g2.bx.psu.edu/repos/iuc/seurat_create/seurat_create/5.0+galaxy1) %} with the following parameters:
 >    - *"Method used"*: `Filter cells by QC metrics`
 >        - {% icon param-file %} *"Input file with the Seurat object"*: `Mitochondrial Annotations` (output of **Seurat Create** {% icon tool %})
 >        - *"Minimum nFeature_RNA"*: `200`
@@ -398,9 +398,9 @@ The usual preprocessing steps for single cell data are normalisation, selection 
     The default scaling method for the separate `ScaleData` tool in Seurat shifts the expression of each gene so that the mean expression across all the cells is 0. It also scales the expression of each gene so that the variance across all cells is 1. Scaling ensures that highly expressed genes don't dominate the analysis too much - we're interested in differences in expression between cells, not in genes that are always highly expressed in all the cells. The results will be stored in the `scale.data` layer.
     SCTransform doesn't scale data in the same way - although it centers the data by default, it won't scale the data unless you select this option. Instead, SCTransform usually stores the pearson residuals in the `scale.data` layer, which don't need to be scaled to the same variance.
     By default, both approaches only center/scale the highly variable genes that we'll use for dimensional reduction, but it is possible to scale more genes if required.
-
-The Seurat pipeline can include another step during preprocessing of our single cell data. We can regress out (or remove) the impact of unwanted sources of variation. We could use this to remove the effects of the cell cycle or the differences associated with the proportion of mitochondrial genes. The goal is to reduce differences that are related to factors we are not interested in as this can help the differences we are interested in (like those between cell types or experimental groups) stand out more.
-It is possible to use the `ScaleData` function to regress out unwanted variation, but the creators of Seurat recommend using `SCTransform` for preprocessing if you want to do any regression. `SCTransform` automatically regresses out variation associated with sequencing depth (unique counts or nFeature_RNA) and can also regress out other variables - here we will also regress out the variation associated with the proportion of mitochondrial content.
+- **Regression**
+  The Seurat pipeline can include another step during preprocessing of our single cell data. We can regress out (or remove) the impact of unwanted sources of variation. We could use this technique to remove the effects of the cell cycle or the differences associated with the proportion of mitochondrial genes. The goal is to reduce differences that are related to factors we are not interested in as this can help the differences we are interested in (like those between cell types or experimental groups) stand out more.
+    It is possible to use the `ScaleData` function to regress out unwanted variation, but the creators of Seurat recommend using `SCTransform` for preprocessing if you want to do any regression. `SCTransform` automatically regresses out variation associated with sequencing depth (unique counts or nFeature_RNA) and can also regress out other variables. If you choose to use SCTransform in this tutorial, then you'll regress out the variation associated with the proportion of mitochondrial content, just like in [Seurat's original version of this tutorial](https://satijalab.org/seurat/articles/sctransform_vignette.html)
 
 {% include _includes/cyoa-choices.html option1='Separate Preprocessing Steps' option2='SCTransform' default='Separate-Preprocessing-Steps' text="You can perform each preprocessing step separately, which might give you a better understanding of the different elements involved in preprocessing, or run them all at once using SCTransform." %}
 
@@ -417,6 +417,7 @@ It is possible to use the `ScaleData` function to regress out unwanted variation
 >    - *"Method used"*: `Identify highly variable genes with 'FindVariableFeatures'`
 >        - *"Method to select variable features"*: `vst`
 >        - *"Output list of most variable features"*: `Yes`
+>        - *"Number to show"*: `10`
 >
 > 3. {% tool [Seurat Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/seurat_preprocessing/seurat_preprocessing/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of previous **Seurat Preprocessing** {% icon tool %})
@@ -438,6 +439,7 @@ It is possible to use the `ScaleData` function to regress out unwanted variation
 >        - *"Genes to calculate residual features for"*: `all genes`
 >            - *"How to set variable features"*: `set number of variable features`
 >        - *"Output list of most variable features"*: `Yes`
+>        - *"Number to show"*: `10`
 >        - *"Variable(s) to regress out"*: `percent.mt`
 >
 > 2. Rename the output as `Preprocessed Data`
@@ -460,6 +462,7 @@ It is possible to use the `ScaleData` function to regress out unwanted variation
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `Preprocessed Data` (output of **Seurat Preprocessing** {% icon tool %})
 >    - *"Method used"*: `Plot Variable Genes with 'VariableFeaturePlot'`
 >        - *"Label the top most variable features"*: `Yes`
+>        - *"Number to show"*: `10`
 >
 {: .hands_on}
 
@@ -486,15 +489,15 @@ It is possible to use the `ScaleData` function to regress out unwanted variation
 > > > |    |         |
 > > > |----|---------|
 > > > | 1  | PPBP    |
-> > > | 2  | S100A9  |
-> > > | 3  | LYZ     |
+> > > | 2  | LYZ     |
+> > > | 3  | S100A9  |
 > > > | 4  | IGLL5   |
 > > > | 5  | GNLY    |
 > > > | 6  | FTL     |
 > > > | 7  | PF4     |
 > > > | 8  | FTH1    |
 > > > | 9  | GNG11   |
-> > > | 10 | FCER1A  |
+> > > | 10 | S100A8  |
 > > {: .matrix}
 > > </span>
 > >
@@ -560,6 +563,8 @@ The standard Seurat pipeline performs the PCA on the Variable Features only, rat
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `Preprocessed Data` (output of **Seurat Preprocessing** {% icon tool %})
 >    - *"Method used"*: `Run a PCA dimensionality reduction using 'RunPCA'`
 >        - *"Output list of top genes"*: `Yes`
+>        - *"Number of PCs to print genes for"*: `5`
+>        - *"Number of top genes to print for each PC"*: `5`
 >
 > 2. Rename the output as `PCA Results`
 >
@@ -888,6 +893,7 @@ Two options are available for non-linear dimensional reduction with Seurat on Ga
 > 1. {% tool [Seurat Run Dimensional Reduction](toolshed.g2.bx.psu.edu/repos/iuc/seurat_reduce_dimension/seurat_reduce_dimension/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Find Clusters** {% icon tool %})
 >    - *"Method used"*: `Run a UMAP dimensional reduction using 'RunUMAP'`
+>        - *"Nem of reduction to use"*: `pca`
 >        - *"UMAP implementation to run"*: `uwot`
 >        - *"Run UMAP on dimensions, features, graph or KNN output"*: `dims`
 >            - *"Number of dimensions from reduction to use as input"*: <span class="Separate-Preprocessing-Steps">`10`</span><span class="SCTransform">`30`</span>
@@ -911,6 +917,7 @@ Now we can visualise the UMAP, just as we did with the PCA. We can also colour i
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize expression with 'FeaturePlot'`
 >        - *"Features to plot"*: Use the top positive and negative genes for PCs 1-3: <span class="Separate-Preprocessing-Steps">`CST3,CD79A,HLA-DQA1, MALAT1,NKG7,PPBP`</span><span class="SCTransform">`MALAT1,NKG7,S100A8,FTL,HLA-DRA,CD74`</span>
+>        - *"Name of reduction to use"*: `umap`
 >        - In *"Plot Formatting Options"*:
 >            - *"Number of columns to display"*: `3`
 >    - *"Change size of plot"*: `Yes`
@@ -993,9 +1000,7 @@ We have now identified and plotted our clusters, groups of cells that share simi
 
 Marker genes are usually detected by their differential expression (DE) between clusters. We're looking for the genes that were expressed much more in one cluster than in the other(s). Seurat provides a number of statistical tests for quantifying these differences, with the Wilcoxon rank sum test as the default.
 
-Seurat also provides different tools for finding markers using these tests so that we can ask various questions about how genes are differentially expressed between clusters or experimental groups. We can use `FindAllMarkers` to identify the markers of each cluster compared to all the other clusters or we can use `FindMarkers` to look for differences between specific clusters or groups.
-
-<span class="Separate-Preprocessing-Steps">Let's try out some of these options on our dataset.</span><span class="SCTransform">We'll discuss the markers found after using the separate preprocessing tools in this section, but you can run the same analyses after using SCTransform - you'll just see some differences in the lists of markers If you've aleady completed the other version of this tutorial, then you might want to move on to the next section [to start identifying the cell types in your clusters.]({% link topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.md %}#Identify-Cell-Types)</span>
+Seurat also provides different tools for finding markers using these tests so that we can ask various questions about how genes are differentially expressed between clusters or experimental groups. We can use `FindAllMarkers` to identify the markers of each cluster compared to all the other clusters or we can use `FindMarkers` to look for differences between specific clusters or groups. Let's try out some of these options on our dataset.
 
 > <comment-title></comment-title>
 > When we find markers using the Seurat tools on Galaxy, we will get two outputs: a CSV file and an RDS file. Both files contain the same content, a table of marker genes and the relevant statistics from the test, but in different formats. We'll be able to read the CSV table, while Seurat tools can interact with the RDS file. Seurat doesn't save the outputs from DE tests into the original SeuratObject by default. This means that we won't be able to use the RDS outputs from finding markers if we want to perform further analysis of our dataset - we'll need to use the output from the previous step instead as that is where all our expression data, metadata, reductions and neighborhood graphs are. However, we can use the RDS markers file for plotting and investigating our marker genes.
@@ -1037,15 +1042,43 @@ The first column is the name of the marker gene. The following columns tell us t
 - **cluster** - which cluster the gene is a marker for
 - (the first column with the gene names is also repeated at the end!)
 
-Although there is a lot of information here, all we need to know for now is that the markers listed for each cluster are the genes that were expressed more by these cells than any of the other clusters. We can search online for these genes to get an idea of what types of cells are in our clusters.
+Although there is a lot of information here, all we need to know for now is that the markers listed for each cluster are the genes that were expressed more by these cells than any of the other clusters. We can search online for these genes to get an idea of what types of cells are in our clusters. We can always search within these results or filter them to include the ones we're interested in - for example, we could look at the markers for cluster 2.
 
 > <question-title></question-title>
 > 1. Are the top genes associated with PCs 1-3 in our list of markers? Which clusters are they markers for?
 > 2. Do these results match your expectations?
+> 3. What were the top 5 markers for cluster 2?
 > > <solution-title></solution-title>
 > > 1. If we search the markers table for our top genes (you can use Ctrl+F to do this but it may take time for the full dataset to load when you view it), we can see that CST3 is a positive marker for clusters 1, 5, and 7 while MALAT1 is a positive marker for clusters 0, 4 and 6. CD79A was a marker for cluster 3 while NKG7 was a marker for clusters 4 and 6. HLA-DQA1 was a marker for clusters 3 and 7 while PPBP was a marker for cluster 8. So, these top genes are differentially expressed by some of our clusters.
 > > 2. The results make sense, as we would expect the top positive and negative genes for each PC to be expressed in different clusters. The results also match up fairly well with what we saw on the UMAP and violin plots - although we might have thought that MALAT1 could be a marker for clusters 2 and 3 too as it seems to be highly expressed by them. The apparent difference in expression we saw in the plot wasn't strong enough to show up in this statistical test.
 > > However, the top genes associated with our PCs aren't necessarily the most significant markers for our clusters (they can appear quite far down the lists) and they are often markers for more than one cluster. Again, this makes sense, because the PCA was looking for the bigger patterns across the whole dataset, while now we're looking for differences between smaller groups of cells - the clusters.
+> > 3. We could scroll down through the markers table to find the results for cluster 2, but it can be easier to filter the table instead. TODO Add in Filter step here...
+> > If you click on the {% icon galaxy-eye %} for the new output in your history, you should see from the `custer` column that we only have markers for cluster 2. The top five markers for this cluster were:
+> > <span class='Separate-Preprocessing-Steps'>
+> >
+> > > |    |      |
+> > > |----|------|
+> > > | 1  | IL32 |
+> > > | 2  | LTB  |
+> > > | 3  | CD3D |
+> > > | 4  | IL7R |
+> > > | 5  | LDHB |
+> > {: .matrix}
+> >
+> > </span>
+> >
+> > <span class='SCTransform'>
+> >
+> > > |    |        |
+> > > |----|--------|
+> > > | 1  | RPS27 |
+> > > | 2  | RPL32 |
+> > > | 3  | RPS6  |
+> > > | 4  | RPS12 |
+> > > | 5  | RPS14 |
+> > {: .matrix}
+> >
+> > </span>
 > {: .solution}
 {: .question}
 
@@ -1083,6 +1116,7 @@ We don't have a cluster column this time as we were only testing one group again
 > 2. Are these the same as the top five markers for cluster 2 when we ran `FindAllMarkers`?
 > > <solution-title></solution-title>
 > > 1. When we look at the marker table, we can see that the first five genes listed as markers of cluster 2 are:
+> >  <span class='Separate-Preprocessing-Steps'>
 > >
 > > > |    |      |
 > > > |----|------|
@@ -1092,8 +1126,23 @@ We don't have a cluster column this time as we were only testing one group again
 > > > | 4  | IL7R |
 > > > | 5  | LDHB |
 > > {: .matrix}
-> > We can look at the third column, avg_log2FC to see if these are positive or negative markers. Although we didn't limit this test to positive markers, we can see that the avg_log2FC for the five top markers is positive, which means these are all positive markers for cluster 2. Expression of these genes was higher in cluster 2 than in the rest of the dataset.
-> > 2. If we go back to the markers table from the `FindAllMarkers` step above and then scroll down to the cluster 2 results (starting on line 2189!) we will see the same top five markers for this cluster. Since we used `FindMarkers` to test cluster 2 against all the rest of the data, we actually performed the same test that `FindAllMarkers` does for each cluster in turn. The only difference is that we previously limited `FindAllMarkers` to positive markers only. We don't see a difference in the top five markers as these all happened to be positive markers for cluster 2, but if we keep looking down the marker tables we'll start to see differences as the negative markers we just found for cluster 2 using `FindMarkers` won't appear in our `FindAllMarkers` table. If we hadn't limited that test to positive markers, then we wouldn't see any differences.
+> >
+> > </span>
+> >
+> > <span class='SCTransform'>
+> >
+> > > |    |        |
+> > > |----|--------|
+> > > | 1  | RPS27  |
+> > > | 2  | RPL32  |
+> > > | 3  | S100A4 |
+> > > | 4  | RPS6   |
+> > > | 5  | RPS12  |
+> > {: .matrix}
+> >
+> > </span>
+> > We can look at the third column, `avg_log2FC` to see if these are positive or negative markers. <span class='Separate-Preprocessing-Steps'>Although we didn't limit this test to positive markers, we can see that the avg_log2FC for the five top markers is positive, which means these are all positive markers for cluster 2. Expression of these genes was higher in cluster 2 than in the rest of the dataset.</span><span class='SCTransform'>We can see that the `avg_log2fc` value for S100A4 is negative, which means this was a negative marker for cluster 2 - it was less likely to be expressed by these cells than in the rest of the dataset. The rest of the top five markers were positive markers.</span>span>
+> > 2. <span class='Separate-Preprocessing-Steps'>If we go back to the filtered list of cluster 2 markers, we will see the same top five markers for this cluster. Since we used `FindMarkers` to test cluster 2 against all the rest of the data, we actually performed the same test that `FindAllMarkers` does for each cluster in turn. The only difference is that we previously limited `FindAllMarkers` to positive markers only. We don't see a difference in the top five markers as these all happened to be positive markers for cluster 2, but if we keep looking down the marker tables we'll start to see differences as the negative markers we just found for cluster 2 using `FindMarkers` won't appear in our `FindAllMarkers` table. If we hadn't limited that test to positive markers, then we wouldn't see any differences.</span><span class='SCTransform'>If we go back to the filtered list of cluster 2 markers, we will see most of the same genes in the top five. The only exception is that one negative marker, S100A4, which didn't appear in the `FindAllMarkers` results because we limited those to positive markers. We should see the same positive markers in both tables because when we used `FindMarkers` to test cluster 2 against all the rest of the data, we actually performed the same test that `FindAllMarkers` does for each cluster in turn. If we hadn't limited those results to positive markers, our marker genes would be identical.</span>
 >>
 > {: .solution}
 {: .question}
@@ -1118,6 +1167,7 @@ We just used `FindMarkers` to run the same test on cluster 2 as `FindAllMarkers`
 > 2. Are these the same as the top five markers for the cluster when we ran FindAllMarkers?
 > > <solution-title></solution-title>
 > > 1. The top five markers in the output table are:
+> > <span class='Separate-Preprocessing-Steps'>
 > >
 > > > |    |               |
 > > > |----|---------------|
@@ -1128,13 +1178,28 @@ We just used `FindMarkers` to run the same test on cluster 2 as `FindAllMarkers`
 > > > | 5  | RP11-290F20.3 |
 > > {: .matrix}
 > >
-> > 2. If we go back to our `FindAllMarkers` table, we'll see that these aren't exactly the same as the top five markers for cluster 5 when we compared it to all of the rest of the dataset. Only two of these markers are in the top five of both lists, although we can find the other genes further down in the table if we look.
+> > </span>
+> >
+> > <span class='SCTransform'>
+> >
+> > > |    |          |
+> > > |----|----------|
+> > > | 1  | GZMB     |
+> > > | 2  | PRF1     |
+> > > | 3  | FGFBP2   |
+> > > | 4  | GNLY     |
+> > > | 5  | GZMA     |
+> > {: .matrix}
+> >
+> > </span>
+> >
+> > 2. If we go back to our `FindAllMarkers` table, we'll see that these aren't exactly the same as the top five markers for cluster 5 when we compared it to all of the rest of the dataset (remember you can filter the results of `FindAllMarkers` again if you get bored of scrolling all the way down to cluster 5!). Only two of these markers are in the top five of both lists, although we can find the other genes further down in the table if we look.
 > > We wouldn't expect to see the same results because we're now looking for differences specifically between cluster 5 and clusters 0 and 3. The genes that `FindAllMarkers` identified as differentiating cluster 5 from all of the other clusters might not be best at differentiating it specifically from clusters 0 and 3 - some of those markers could actually be expressed by all three of these clusters.
 > >
 > {: .solution}
 {: .question}
 
-## Find the cluster 0 markers with the highest 'classification power'
+## Find the cluster <span class='Separate-Preprocessing-Steps'>0</span><span class='SCTransform'>2</span> markers with the highest 'classification power'
 
 We can also use other methods for DE analyis in Seurat. We can use the 'ROC' test to find out the 'classification power' of marker genes for our clusters. A classification power of 1 means that the expression level of this gene can perfectly assign cells to this cluster. A classification power of 0 means that the expression of this gene is useless for identifying cells in this particular cluster - it's completely random!
 
@@ -1146,7 +1211,7 @@ We can also use other methods for DE analyis in Seurat. We can use the 'ROC' tes
 >        - *"Compare markers for two groups of cells"*: `No`
 >        - *"Change cell identities before finding markers"*: `No`
 >        - *"Compare markers between clusters of cells"*: `Yes`
->            - *"Identity class to define markers for"*: `0`
+>            - *"Identity class to define markers for"*: <span class='Separate-Preprocessing-Steps'>`0`</span><span class='SCTransform'>`2`</span>
 >        - *"Minimum log-fold difference to test"*: `0.25`
 >        - *"Select test to run"*: `roc`
 >        - In *"Advanced Options"*:
@@ -1155,10 +1220,11 @@ We can also use other methods for DE analyis in Seurat. We can use the 'ROC' tes
 {: .hands_on}
 
 > <question-title></question-title>
-> 1. What do the names of the top markers for cluster 0 have in common and what does this signify?
+> 1. What do the names of the top markers for cluster <span class='Separate-Preprocessing-Steps'>0</span><span class='SCTransform'>2</span> have in common and what does this signify?
 >
 > > <solution-title></solution-title>
-> > 1. the top five markers in the output table are: 
+> > 1. the top five markers in the output table are:
+> > <span class='Separate-Preprocessing-Steps'>
 > >
 > > > |    |       |
 > > > |----|-------|
@@ -1169,7 +1235,22 @@ We can also use other methods for DE analyis in Seurat. We can use the 'ROC' tes
 > > > | 5  | RPS14 |
 > > {: .matrix}
 > >
-> > Many of the top markers (including all of the top five) have names starting with RP. In humans, this gene naming patterns indicates that they are ribosomal genes (encoding proteins or RNAs that form ribosomes). Cluster 0 might represent a group of cells that are very busy making new proteins using all these ribosomes. If we expect our data to include a cell type that has lots of ribosomes, then this could be a sign that they've formed their own cluster, so we'll be happy with this result (this is actually the case here, as we'll see in the next section). 
+> > </span>
+> >
+> > <span class='SCTransform'>
+> >
+> > > |    |       |
+> > > |----|-------|
+> > > | 1  | RPS27 |
+> > > | 2  | RPL32 |
+> > > | 3  | RPS6  |
+> > > | 4  | RPS12 |
+> > > | 5  | RPS14 |
+> > {: .matrix}
+> >
+> > </span>
+> >
+> > Many of the top markers (including all of the top five) have names starting with RP. In humans, this gene naming patterns indicates that they are ribosomal genes (encoding proteins or RNAs that form ribosomes). Cluster <span class='Separate-Preprocessing-Steps'>0</span><span class='SCTransform'>2</span> might represent a group of cells that are very busy making new proteins using all these ribosomes. If we expect our data to include a cell type that has lots of ribosomes, then this could be a sign that they've formed their own cluster, so we'll be happy with this result (this is actually the case here, as we'll see in the next section). 
 > > However, if we don't expect to see differences in ribosomal content between cells, then we might suspect that we've ended up with a cluster based on ribosomal RNA content rather than on cell type. In this case, we might want to go back to the QC steps. We could score the cells for `percent.ribo` in the same way we did for `percent.mt`. We could then filter out cells with unusually high proportions of ribosomal genes or regress out the variation associated with this characteristic during the scaling step. Just as when we're filtering cells by mitochondrial RNA proportions, we would need to think carefully about this - we wouldn't want to eliminate a cell type just because it has higher proportions of ribosomal genes, which is what we could end up doing if we tried it with this particular dataset.
 > >
 > {:.solution}
@@ -1264,7 +1345,7 @@ To begin, we'll need a list of these canonical markers for PBMCs. Let's use the 
 {: .matrix}
 
 > <comment-title></comment-title>
-If you've already done the other version of this tutorial, using the separate preprocessing tools, you might notice this list includes some additional markers for T cells. SCTransform can reveal more of the biological variation in our dataset - remember that it produced 12 clusters, rather than the nine we would find using the separate preprocessing tools. We can use these extra markers to identify those additional clusters.
+> If you've already done the other version of this tutorial, using the separate preprocessing tools, you might notice this list includes some additional markers for T cells. SCTransform can reveal more of the biological variation in our dataset - remember that it produced 12 clusters, rather than the nine we would find using the separate preprocessing tools. We can use these extra markers to identify those additional clusters.
 {: .comment}
 
 </div>
@@ -1343,6 +1424,7 @@ To continue with the supervised approach, we can check the expression of the cho
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize expression with 'FeaturePlot'`
 >        - *"Features to plot"*: <span class='Separate-Preprocessing-Steps'>`IL7R,CCR7,CD14,LYZ,S100A4,MS4A1,CD8A,FCGR3A,MS4A7,GNLY,NKG7,FCER1A,CST3,PPBP`</span><span class='SCTransform'>`CD14,LYZ,MS4A1,FCGR3A,MS4A7,GNLY,NKG7,FCER1A,CST3,PPBP,IL7R,CCR7,S100A4,CD8A,GZMK,CCL5,IL32,ISG15`</span>
+>        - *"Name of reduction to use"*: `umap`
 >    - *"Change size of plot"*: `Yes`
 >        - *"Width of plot in pixels"*: `4100`
 >        - *"Height of plot in pixels"*: `4100`
@@ -1446,19 +1528,18 @@ Based on our table of marker genes and these plots, we know which clusters were 
 > >
 > > > | Cell Type            | Marker Genes      | Clusters       |
 > > > | ---------------------|-------------------|----------------|
-> > > | CD14+ Mono           | CD14, LYZ         |       1        |
-> > > | B                    | MS4A1             |       3        |
-> > > | CD8+ T               | CD8A              |    8, 7, 4     |
-> > > | FCGR3A+ Mono         | FCGR3A, MS4A7     |       6        |
-> > > | NK                   | GNLY, NKG7        |       5        |
-> > > | DC                   | FCER1A, CST3      |       9        |
-> > > | Platelet             | PPBP              |      11        |
-> > > | Naive CD4+ T         | IL7R, CCR7        |       2        |
 > > > | Memory CD4+ T        | IL7R, S100A4      |       0        |
-> > > | IFN-activated CD4+ T | IL7R, ISG15, IL32 |      10        |
-> > > | Naive CD8+ T         | CD8A, CCR7        |       8        |
-> > > | Memory CD8+ T        | CD8A, CCL5        |       7        |
+> > > | CD14+ Mono           | CD14, LYZ         |       1        |
+> > > | Naive CD4+ T         | IL7R, CCR7        |       2        |
+> > > | B                    | MS4A1             |       3        |
 > > > | Effector CD8+ T      | CD8A, GZMK        |       4        |
+> > > | NK                   | GNLY, NKG7        |       5        |
+> > > | FCGR3A+ Mono         | FCGR3A, MS4A7     |       6        |
+> > > | Memory CD8+ T        | CD8A, CCL5        |       7        |
+> > > | Naive CD8+ T         | CD8A, CCR7        |       8        |
+> > > | DC                   | FCER1A, CST3      |       9        |
+> > > | IFN-activated CD4+ T | IL7R, ISG15, IL32 |      10        |
+> > > | Platelet             | PPBP              |      11        |
 > > {: .matrix}
 > {: .solution}
 {: .question}
@@ -1642,14 +1723,14 @@ Comparing the two plots also shows us why the supervised approach can be faster 
 
 > <question-title></question-title>
 > 1. Which plot type was best for annotating clusters?
-> 2. Are you happy with this clustering? <span class='Separate-Preprocessing-Steps'>What about for for cluster 0, the CD4NaiveT cells, which had a lot of ribosomal genes in its top markers list?</span><span class='SCTransform'></span>
+> 2. Are you happy with this clustering - even for cluster <span class='Separate-Preprocessing-Steps'>0</span><span class='SCTransform'>2</span>0, the CD4NaiveT cells, which had a lot of ribosomal genes in its top markers list?
 > > <solution-title></solution-title>
 > > 1. The best type of plot for identifying cell types can depend on your data as well as your own personal preferences. You might find one plot easier to interpret than another. It can also be helpful to create different types of plots as some patterns may be clearer on one type while others are clearer on another. It's also good to be able to confirm your interpretation on multiple plots! 
 > > UMAP plots are often used to provide a quick and memorable overview of the data, but it can be tricky to match the expression patterns to the clusters, especially given the limitations of these plots - some cells can be hidden, adjacent clusters can blend into each other, and we can't rely on the 2D plot to accurately represent all the relationships between cells and clusters.
 > > Violin plots present each cluster separately, so they can make it easier to differentiate between clusters. Since every cluster is given the same amount of space on the plot, no matter how many cells it contains, violin plots can also make it easier to see what's going on with smaller clusters. We can also get a clearer idea of how much variation there is within and between clusters, although some of the points may still be hidden behind others.
 > > Heatmaps can give us the best overview of the variation between cells as each cell is given its own little section on the plot. We can see how consistently the markers are expressed within the cluster and how common it is for cells outside the cluster to express the same genes. We can also see the overall patterns as blocks of cells with similar expression profiles, including the clusters that share similar patterns. However, heatmaps can be less useful if we want to focus on individual cells or genes, as it can be hard to pick out details.
 > > 2. We should be happy with the results of our clustering as they match up with what we already know about PBMCs. We have been able to annotate each cluster as a different cell type based on a supervised approach - and we could do the same using an unsupervised approach. The decisions we made along the way, such as the number of PCs we used and how many nearest neighbors we looked for have worked well. We even identified some subtypes of T cells, although we were able to separate out more of these when we used SCTransform.
-> > <span class='Separate-Preprocessing-Steps'>On the separate preprocessing route, even though many of the top markers for cluster 0 were from ribosomal genes, we were still able to identify it as a specific cell type. Cluster 0 represents our population of Naive CD4+ T cells. If we search online to learn a bit more about this cell type, we'll quickly find that it is known to have lots of ribosomes, so in this case, we can be confident that the high expression of ribosomal genes in these cells is due to real biological differences between cell types, rather than a problem with our data. If we weren't able to assign a cell type to cluster 0, for example because it expressed a mix of markers for different types, then we would come to a different conclusion!</span><span class='SCTransform'></span>
+> > Even though many of the top markers for cluster <span class='Separate-Preprocessing-Steps'>0</span><span class='SCTransform'>2</span> were from ribosomal genes, we were still able to identify it as a specific cell type. It represents our population of Naive CD4+ T cells. If we search online to learn a bit more about this cell type, we'll quickly find that it is known to have lots of ribosomes, so in this case, we can be confident that the high expression of ribosomal genes in these cells is due to real biological differences between cell types, rather than a problem with our data. If we weren't able to assign a cell type to this cluster, for example because it expressed a mix of markers for different types, then we would come to a different conclusion!
 > > If we couldn't see strong associations between our clusters and the different cell types that we expect to see in the dataset, then this would be very suspicious - did something go wrong with our experiment or analysis? We would need to go back and try to identify the problem to see if we can fix it. If the problem isn't too bad, we might just need to change some of the clustering parameters to get clusters that make biological sense - maybe we would need to use more PCs, look for more/fewer nearest neighbors, or simply change the resolution. If the problem is more serious, we might need to recheck the quality of our data or make bigger changes to the analysis.
 > {: .solution}
 {: .question}
