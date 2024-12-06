@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: CUT&RUN data analysis
-zenodo_link: https://zenodo.org/record/3862793
+zenodo_link: https://zenodo.org/record/6823059
 questions:
 - Which binding motif has the transcription factor GATA1?
 - What kind of quality control do I have to do?
