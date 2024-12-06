@@ -183,7 +183,7 @@ Cutadapt enables the removal of adapters, polyA tails, and other artifacts from 
 
 ### Changing files names
 
-> <hands-on-title>Extract element identifiers </hands-on-title>
+> <hands-on-title>Extract element identifiers and remove extensions</hands-on-title>
 >
 > 1. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %}
 >
@@ -191,7 +191,7 @@ Cutadapt enables the removal of adapters, polyA tails, and other artifacts from 
 >    - In *"Check"*:
 >      - {% icon param-repeat %} *"Insert Check"*
 >        - *"Find Regex"*: `.ab1`
->        - *"Replacement"*: `.fastq.gz`
+>        - *"Replacement"*: ``
 >
 >    > <comment-title> Comment </comment-title>
 >    >
@@ -333,7 +333,7 @@ For this tutorial we will use the ENA default sample checklist.
 >
 > 1. Direct download link of the [ENA default sample checklist]( https://github.com/ELIXIR-Belgium/ENA-metadata-templates/raw/main/templates/ERC000011/metadata_template_ERC000011.xlsx)
 >
-> 2. Direct download link of the [ENA default sample checklist filled with elements fot the training](https://github.com/galaxyproject/training-material/raw/24776cf161e38ac0449755749d23e851400020aa/topics/ecology/tutorials/ENA_Biodiv_submission/metadata_GdBqCOI_ERC000011_Test.xlsx)
+> 2. Direct download link of the [ENA default sample checklist filled with elements for the training](https://github.com/galaxyproject/training-material/raw/24776cf161e38ac0449755749d23e851400020aa/topics/ecology/tutorials/ENA_Biodiv_submission/metadata_GdBqCOI_ERC000011_Test.xlsx)
 >
 > You will need to import this file into your Galaxy history. Then, use the ENA Upload Tool to proceed with the submission.
 >
@@ -355,8 +355,9 @@ For this tutorial we will use the ENA default sample checklist.
 >    - *"Action to execute"*: `Add new (meta)data`
 >    - *"Select the metadata input method"*: `Excel file`
 >    - *"Select the ENA sample checklist"*: `ENA default sample checklist (ERC000011)`
->    - *"Select Excel file based on template"*: `TB.xlsx`
+>    - *"Select Excel file based on template"*: `metadata_GdBqCOI_ERC000011_Test.xlsx`
 >    - *"Select input data"*: `Dataset or dataset collection`
+>    - *"Add .fastq (.gz, .bz2) extension to the Galaxy dataset names to match the ones described in the input tables?"*: `Yes`
 >
 >    > <comment-title> Datatype </comment-title>
 >    >
@@ -364,7 +365,7 @@ For this tutorial we will use the ENA default sample checklist.
 >    {: .comment}
 >
 >    > <warning-title> Danger: Submit to ENA test server! </warning-title>
->    > We suggest you first submit to the test server before making a public submission!
+>    > We suggest you first submit to the test server before making a public submission! The test serveris reachable [here](https://wwwdev.ebi.ac.uk/ena/submit/webin/) and submission can be seen in `Dashboard/Study Report`
 >    {: .warning}
 >
 > ![ENA Upload tool](./images/image3.png)
