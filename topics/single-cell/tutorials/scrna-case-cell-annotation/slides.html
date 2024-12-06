@@ -63,11 +63,22 @@ This process can be done manually or automatically using a wide range of algorit
 
 - To identify novel cell states and study some cell population further
 
+???
+
+The power of single-cell RNA-seq lies in its ability to capture the transcriptome at single-cell resolution. 
+
+However, a significant challenge is accurately classifying cells into distinct types before beginning downstream analysis. 
+
+Once cells are annotated, we can examine the composition of cell types within each sample and compare them across conditions. 
+
+This precise classification enables differential expression analysis within specific cell types, a key objective of single-cell experiments.
+
+
 ---
 
 ### Why Automate Cell Annotation?
 
-- Each single-cell experiments can generate data for thousands of cells
+- Each single-cell experiment can generate data for thousands of cells
 
 - Manual annotation is time consuming and requires domain expertise
 
@@ -121,13 +132,18 @@ There are many different formats for storing this data and metadata, since diffe
 
 ---
 
-### Challenges
+### Challenges in Automated Cell Type Annotation
 
-- Data is often noisy due to amplification techniques, varying sequencing depths, and errors in the reads
+- Noise due to amplification techniques, varying sequencing depths, and sequencing errors
+
+- Difference in QC steps for reference and query dataset may introduce a bias
 
 - Cell type definitions are inherently subjective and may be suboptimal
 
+- Lack of a suitable reference panel for the query dataset can result in inaccurate classification, especially when dealing with unknown cell states
+
 - Dealing with unknown cell types due to undiscovered classifications
+
 
 ???
 
@@ -143,7 +159,7 @@ There are some challenges that need to be faced in order to perform automated ce
 
 ### Manual Cell Annotation
 
-- Generate a cluster map and manually annotate each clusters
+- Generate a cluster map and manually annotate each cluster
 
 - Requires the researchers to find known marker genes in the data
 
