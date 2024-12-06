@@ -10,7 +10,7 @@ coveralt: "swirled cluster dots surround a circle of people all holding hands, l
 
 # First SPOC CoFest
 
-We held our first [SPOC CoFest]({% link events/2024-12-06-spoc-cofest-2024.md %}), in the great tradition of the excellent CoFests organised in the GTN that welcomed @nomadscientist and many others into the community.
+We held our first [SPOC CoFest]({% link events/2024-12-06-spoc-cofest-2024.md %}), in the great tradition of the excellent CoFests organised in the GTN that welcomed @gtn:nomadscientist and many others into the community.
 
 We welcomed a diverse group of participants, from experienced Galaxy trainers to bioinformaticians with little to no Galaxy experience whatsoever. We also were lucky enough to be joined by a 5-strong outpost from Singapore, prompting a Pacific-time-zone kick-off session prior to our day-long event.
 
