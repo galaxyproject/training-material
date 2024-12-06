@@ -1,5 +1,5 @@
 ---
-title: "SPOC CoFest 1: How did it go?"
+title: "SPOC CoFest 2024: How did it go?"
 contributions:
   authorship: [nomadscientist]
 tags: [gtn, single-cell]
