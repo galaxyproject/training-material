@@ -63,10 +63,10 @@ In this tutorial will use the following datasets:
 ## [A] Marker Genes:
 
 We'll start with two input datasets of marker genes (Study sets):
-  * **Marker genes per cell cluster:** This dataset lists the genes that are significantly different in each cell cluster.
-  * **Marker genes per condition (wt and ko):** This dataset lists the genes that are significantly different between the wild-type (wt) and knockout (ko) conditions.
+  * **Marker genes per cell cluster:** This dataset lists the genes that are differentially enriched different in each cell cluster.
+  * **Marker genes per condition (wt and ko):** This dataset lists the genes that are differentially enriched between the wild-type (wt) and knockout (ko) conditions.
 
-*Note:* Marker genes were obtained using Scanpy FindMarkers tool. The top 50 marker genes were included in the downstream GO enrichment analysis. Scanpy FindMarkers tool selects the marker genes based on their log2 fold change and p-values. Focusing on the top-ranked genes helps to filter out less relevant genes, thereby addressing the concern of high false positives that can arise from traditional methods. 
+*Note:* Marker genes were obtained using Scanpy FindMarkers tool. The top 50 marker genes were included in the downstream GO enrichment analysis. More genes can be included in the analysis depending on the requirements. Scanpy FindMarkers tool selects the marker genes based on their log2 fold change and p-values. Focusing on the top-ranked genes helps to filter out less relevant genes, thereby addressing the concern of high false positives that can arise from traditional methods. 
 
 ## [B] GO Enrichment Files:
 
@@ -134,7 +134,7 @@ To perform GO enrichment analysis on each cell cluster individually, we need to 
 > 1. {% tool [Split file](toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.4) %} with the following parameters:
 >    - {% icon param-file %} *"File to select"*: `Markers_cluster` (Input dataset)
 >    - *"on column"*: `c1`
->    - *"Include the header in all splitted files?"*: `Yes`
+>    - *"Include the header in all split files?"*: `Yes`
 >
 >
 >    > <comment-title> Input Dataset </comment-title>
