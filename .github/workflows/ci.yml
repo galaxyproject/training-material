@@ -1,4 +1,4 @@
-name: "[CI] Accessibility Linting"
+name: "[CI] GTN Build Testing"
 
 concurrency:
   group: ci-${{ github.head_ref }}
@@ -8,17 +8,6 @@ concurrency:
 on:
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
-    paths:
-      - 'Gemfile.lock'
-      - '**/*.md'
-      - '**/*.html'
-      - '*.yml'
-      - '*.yaml'
-      - 'metadata/*'
-      - 'topics/*/images/*'
-      - '_plugins/*'
-      - '_plugins_dev/*'
-      - '**/*.bib'
 
 jobs:
   build-site:
@@ -28,6 +17,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          persist-credentials: false
 
       # BEGIN Dependencies
       - uses: actions/setup-python@v5

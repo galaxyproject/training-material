@@ -289,11 +289,14 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                         <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
                         <script>
                         function tutorial_finish() {
-                          if(plausible !== undefined){
-                            plausible('TutorialComplete', {callback: tutorial_finish_finish, props: {path: document.location.pathname}})
-                          } else {
-                            tutorial_finish_finish();
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
                           }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
                         }
                         function tutorial_finish_finish() {
                           document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
@@ -401,7 +404,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
 	title = "{{ page.title }} (Galaxy Training Materials)",
 	year = "{{ page.last_modified_at | date: "%Y"}}",
 	month = "{{ page.last_modified_at | date: "%m"}}",
-	day = "{{ page.last_modified_at | date: "%d" }}"
+	day = "{{ page.last_modified_at | date: "%d" }}",
 	url = "{% raw %}\url{{% endraw %}{{ site.url }}{{ site.baseurl }}{{page.url}}{% raw %}}{% endraw %}",
 	note = "[Online; accessed TODAY]"
 }
@@ -417,18 +420,19 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
 	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
 	editor = {Francis Ouellette},
 	title = {Galaxy Training: A powerful framework for teaching!},
-	journal = {PLoS Comput Biol} Computational Biology}
+	journal = {PLoS Comput Biol}
 }
 </code>
                    </pre></div></div>
                    </p>
                 </blockquote>
 
+        {% if page.contributions and page.contributions.funding %}
 		<h2 id="funding">{{locale['references']| default: "Funding" }}</h2>
 		<p>These individuals or organisations provided funding support for the development of this resource</p>
-                {% if page.contributions %}
+
                 {% include _includes/funding-statement.md funders=page.contributions.funding %}
-                {% endif %}
+        {% endif %}
 
 
 <script>
@@ -525,7 +529,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         {% endif %}
 		</blockquote>
 
-		
+
 
 
 		{% assign upcoming_events = site | get_upcoming_events_for_this: new_material %}

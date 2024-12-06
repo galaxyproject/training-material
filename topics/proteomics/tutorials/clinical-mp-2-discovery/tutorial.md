@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Clinical-MP-2-Discovery
+title: "Clinical Metaproteomics 2: Discovery"
 zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
 questions:
 - How to perform database searching?
@@ -37,6 +37,16 @@ follow_up_training:
 tags: [label-TMT11]
 redirect_from:
 - /topics/proteomics/tutorials/clinical-mp-discovery/tutorial
+
+recordings:
+- captioners:
+  - katherine-d21
+  date: '2024-06-21'
+  galaxy_version: '23.1'
+  length: 16M
+  youtube_id: 5Pg9LLfFGX4
+  speakers:
+  - katherine-d21
 ---
 
 
@@ -48,7 +58,7 @@ This tutorial can be followed with any user-defined database but would work best
 The MSMS data will be searched against the compact database `Human UniProt Microbial Proteins (from MetaNovo) and cRAP` to identify peptide and protein sequences via sequence database searching. For this tutorial, two peptide identification programs will be used: SearchGUI/PeptideShaker and MaxQuant. However, you could use other software too, such as Fragpipe or Scribe. For the purpose of this tutorial, a dataset of the 4 RAW/MGF files will be used as the MS/MS input.
 
 
-![Discovery Workflow](../../images/clinical-mp/clinical-mp-discovery.JPG)
+![Discovery Workflow]({% link topics/proteomics/images/clinical-mp/clinical-mp-discovery.JPG %})
 
 
 > <agenda-title></agenda-title>
@@ -94,6 +104,25 @@ This step is to identify proteins based on mass spectrometry data. The algorithm
 > 6. Create a dataset collection of all the raw files and MGF files.
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
+{: .hands_on}
+
+# Import Workflow
+
+
+> <hands-on-title>Running the Workflow</hands-on-title>
+>
+> 1. **Import the workflow** into Galaxy:
+>
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/clinical-mp-2-discovery/workflows/WF2_Discovery-Workflow.ga" title="Discovery Workflow" %}
+>
+> 2. Run **Workflow** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *" RAW files"*: `RAW dataset collection`
+>    - {% icon param-file %} *" Human UniProt Microbial Proteins (from MetaNovo) and cRAP"*: `Human_UniProt_Microbial_Proteins_(from_MetaNovo)_and_cRAP.fasta`
+>    - {% icon param-file %} *" Experimental Design Discovery MaxQuant"*: `Experimental-Design_Discovery_MaxQuant.tabular`
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
 >
 {: .hands_on}
 
@@ -415,7 +444,7 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 >    - {% icon param-file %} *"Select data"*: `out_file1` (output of **Cut** {% icon tool %})
 >    - *"Group by column"*: `c1`
 >
->    
+>
 {: .hands_on}
 
 
@@ -458,7 +487,7 @@ MaxQuant is an MS-based proteomics platform that is capable of processing raw da
 > <question-title></question-title>
 >
 > 1. What is the Experimental Design file for MaxQuant?
-> >
+> 
 > > <solution-title></solution-title>
 > >
 > > 1. In MaxQuant, the **Experimental Design** file is used to specify the experimental conditions, sample groups, and the relationships between different samples in a proteomics experiment. This file is a crucial component of the MaxQuant analysis process because it helps the software correctly organize and analyze the mass spectrometry data. The **Experimental Design** file typically has a ".txt" extension and is a tab-delimited text file. Here's what you might include in an Experimental Design file for MaxQuant: **Sample Names** (You specify the names of each sample in your experiment. These names should be consistent with the naming conventions used in your raw data files.), **Experimental Conditions** (You define the experimental conditions or treatment groups associated with each sample. For example, you might have control and treated groups, and you would assign the appropriate condition to each sample.), **Replicates** (You indicate the replicates for each sample, which is important for assessing the statistical significance of your results. Replicates are typically denoted by numeric values (e.g., "1," "2," "3") or by unique identifiers (e.g., "Replicate A," "Replicate B")), **Labels** (If you're using isobaric labeling methods like TMT (Tandem Mass Tag) or iTRAQ (Isobaric Tags for Relative and Absolute Quantitation), you specify the labels associated with each sample. This is important for quantification.), **Other Metadata** (You can include additional metadata relevant to your experiment, such as the biological source, time points, or any other information that helps describe the samples and experimental conditions.)
