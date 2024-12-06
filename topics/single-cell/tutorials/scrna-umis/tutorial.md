@@ -44,7 +44,7 @@ recordings:
 Barcodes are small oligonucleotides that are inserted into the captured sequence at a specific point, and provide two pieces of information about the sequence:
 
  1. Which cell the sequence came from
- 2. Which transcript the sequence came from
+ 2. Which transcript the sequence came from?
 
 When the sequence is mapped against a reference genome, we can then see which gene locus it aligns to and qualitatively assert that, together with the two pieces of information above, the sequence depicts a transcript from a specific gene that originated from a specific cell.
 
