@@ -364,7 +364,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    +  - plugin: disk
 >    +  - plugin: kernel
 >    +  - plugin: processes
->    +  - plugin: io
+>    +  - plugin: diskio
 >    +  - plugin: mem
 >    +  - plugin: system
 >    +  - plugin: swap
