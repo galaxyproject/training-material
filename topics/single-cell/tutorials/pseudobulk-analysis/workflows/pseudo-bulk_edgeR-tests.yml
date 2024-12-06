@@ -1,0 +1,50 @@
+- doc: Test outline for pseudo-bulk_edgeR
+  job:
+    Source AnnData file:
+      class: File
+      location: https://zenodo.org/records/13929549/files/Source%20AnnData%20file.h5ad
+      filetype: h5ad
+    'Pseudo-bulk: Fields to merge': null
+    Group by column: cell_type
+    Sample key column: individual
+    Name Your Raw Counts Layer: counts
+    Factor fields: disease
+    Gene symbol column: gene_symbol
+    Formula: '~ 0 + disease'
+  outputs:
+    'Pseudobulk count matrix':
+        has_text_matching:
+          expression: "ACAP2\t9.0\t18.0\t20.0\t68.0\t106.0\t122.0\t14.0\t259.0\t279.0\t184.0\t612.0\t293.0\t297.0\t46.0\t1.0\t0.0\t1.0\t12.0\t229.0\t151.0\t141.0\t309.0\t299.0\t181.0\t2.0\t2.0\t28.0\t15.0\t54.0\t210.0\t1.0\t1.0\t1.0\t11.0"
+          expression: "ACER3\t4.0\t25.0\t21.0\t110.0\t82.0\t91.0\t22.0\t326.0\t297.0\t211.0\t1004.0\t574.0\t370.0\t108.0\t0.0\t0.0\t2.0\t2.0\t188.0\t113.0\t135.0\t322.0\t324.0\t159.0\t7.0\t7.0\t32.0\t5.0\t33.0\t89.0\t2.0\t2.0\t8.0\t48.0"
+    'Pseudobulk Plot':
+      element_test:
+        has_size: 40116
+        delta: 2000 
+    'Filtered by expression':
+      element_test:
+        has_size: 23490
+        delta: 2000 
+    'Report Results: HTML File':
+      element_test:
+        has_size: 531761
+        delta: 25000
+    'Tables: DEG':
+      element_tests:
+        edgeR_normal-COVID_19:
+          has_text_matching:
+            expression: "RALBP1\tENSG00000017797\tFalse\t0.518[0-9]*\t1.609[0-9]*\t0.402[0-9]*\t2\tFalse\t0.286[0-9]*\t0.552[0-9]*\t-1.967[0-9]*\t7.483[0-9]*\t12.0213[0-9]*\t0.001[0-9]*\t0.436[0-9]*"
+            expression: "NAPA\tENSG00000105402\tTrue\t0.342[0-9]\t1.686[0-9]\t0.846[0-9]\t4\tFalse\t0.180[0-9]\t0.440[0-9]\t-1.059[0-9]\t6.833[0-9]\t3.291[0-9]\t0.076[0-9]\t0.619[0-9]"
+          has_n_lines:
+            n: 1430
+            delta: 1
+    'Tables for volcano plot':
+      element_tests:
+        edgeR_normal-COVID_19:
+          has_text_matching:
+            expression: "CPEB4\t-2.402[0-9]\t0.001[0-9]\t0.436[0-9]"
+            expression: "FGFR1OP2\t-2.367[0-9]\t0.004[0-9]\t0.458[0-9]"
+    'Volcano Plot on input dataset(s): PDF':
+      element_tests:
+        edgeR_normal-COVID_19:
+          has_size: 85052
+          delta: 2000
