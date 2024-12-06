@@ -16,4 +16,4 @@ We welcomed a diverse group of participants, from experienced Galaxy trainers to
 
 A big thank you to all the participants for their hard work!
 
-![SPOC CoFest outputs]({% link news/images/2024-12-06-spoc-cofest_outputs.png %} "Chart showing: 14 new participants, 5 experienced SPOC members, 60% attendance rate, 12 PRs made, 5 tutorials tested on different servers, 2 workflows updated, 8 issues raised, 2 new tutorials WIP, 5 slide decks updated, 1 trained trainer")
+![Chart showing: 14 new participants, 5 experienced SPOC members, 60% attendance rate, 12 PRs made, 5 tutorials tested on different servers, 2 workflows updated, 8 issues raised, 2 new tutorials WIP, 5 slide decks updated, 1 trained trainer]({% link news/images/2024-12-06-spoc-cofest_outputs.png %} "SPOC CoFest: By the numbers")
