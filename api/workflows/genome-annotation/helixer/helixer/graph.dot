@@ -1,45 +1,54 @@
 digraph main {
   node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
   edge [fontname="Atkinson Hyperlegible"];
-  0[color=lightblue,label="ℹ️ Input Dataset\nGenome"]
+  0[color=lightblue,label="ℹ️ Input Dataset\nInput"]
   1[label="Helixer"]
   0 -> 1 [label="output"]
-  k9ebeb90d1528494ca88d50f28836d7c7[color=lightseagreen,label="Output\nHelixer"]
-  1 -> k9ebeb90d1528494ca88d50f28836d7c7
-  2[label="compleasm"]
+  kfe43bcd65f994fd3b1842d6bfb340030[color=lightseagreen,label="Output\nhelixer_output"]
+  1 -> kfe43bcd65f994fd3b1842d6bfb340030
+  2[label="Busco on genome"]
   0 -> 2 [label="output"]
-  ke0d3aa0bd18b41afa6fc28a8688fe9a5[color=lightseagreen,label="Output\ncompleasm miniprot"]
-  2 -> ke0d3aa0bd18b41afa6fc28a8688fe9a5
-  k93b908a5e39f4cfb84c3edf4ab8b71cf[color=lightseagreen,label="Output\ncompleasm full table"]
-  2 -> k93b908a5e39f4cfb84c3edf4ab8b71cf
-  k7c9cb7e2dfac4aa1b87df6a2eb7e21a5[color=lightseagreen,label="Output\ncompleasm full table busco"]
-  2 -> k7c9cb7e2dfac4aa1b87df6a2eb7e21a5
-  k9215afe64aad4d43a3a1c2c5ab0ea1e2[color=lightseagreen,label="Output\ncompleasm translated protein"]
-  2 -> k9215afe64aad4d43a3a1c2c5ab0ea1e2
-  3[label="BUSCO"]
+  kd039ef78640f4f7db44969fac1a25130[color=lightseagreen,label="Output\nbusco_missing_geno"]
+  2 -> kd039ef78640f4f7db44969fac1a25130
+  k961890cc7a33422aab09b787e3592dd1[color=lightseagreen,label="Output\nbusco_gff_geno"]
+  2 -> k961890cc7a33422aab09b787e3592dd1
+  kbf09f09ab40345179a1aacece8f36735[color=lightseagreen,label="Output\nbusco_sum_geno"]
+  2 -> kbf09f09ab40345179a1aacece8f36735
+  k3232c3863c314989ac7602722ea2d79b[color=lightseagreen,label="Output\nsummary_image_geno"]
+  2 -> k3232c3863c314989ac7602722ea2d79b
+  k5cbbd77af5214ee6b990a494b7671534[color=lightseagreen,label="Output\nbusco_table_geno"]
+  2 -> k5cbbd77af5214ee6b990a494b7671534
+  3[label="Gffread"]
+  1 -> 3 [label="output"]
   0 -> 3 [label="output"]
-  k703a797f428b4c41984f1283bb8eecaa[color=lightseagreen,label="Output\nBUSCO sum"]
-  3 -> k703a797f428b4c41984f1283bb8eecaa
-  ke3879637613a45cf90a03eecab2e0981[color=lightseagreen,label="Output\nBUSCO miniprot"]
-  3 -> ke3879637613a45cf90a03eecab2e0981
-  kacbfdee0cafd46e881e98a1fd22ee758[color=lightseagreen,label="Output\nBUSCO gff3"]
-  3 -> kacbfdee0cafd46e881e98a1fd22ee758
-  k5574f029f31d4d20a8474d1818f95707[color=lightseagreen,label="Output\nBUSCO summary image"]
-  3 -> k5574f029f31d4d20a8474d1818f95707
-  kb19bfb5f901f4568a46153bfc980bdcc[color=lightseagreen,label="Output\nBUSCO missing"]
-  3 -> kb19bfb5f901f4568a46153bfc980bdcc
-  k0ba757ff6c1b496ba288335369058923[color=lightseagreen,label="Output\nBUSCO table"]
-  3 -> k0ba757ff6c1b496ba288335369058923
-  4[label="Genome annotation statistics Helixer"]
+  kaa178118cd37495b9e81e2e53ebf27fd[color=lightseagreen,label="Output\ngffread_pep"]
+  3 -> kaa178118cd37495b9e81e2e53ebf27fd
+  4[label="Genome annotation statistics"]
   1 -> 4 [label="output"]
   0 -> 4 [label="output"]
-  ka445f12b685d47afb40790fa7ea935b1[color=lightseagreen,label="Output\ngraphs helixer"]
-  4 -> ka445f12b685d47afb40790fa7ea935b1
-  k8eae8a88c73d42dcad0d62d2f1d29c6a[color=lightseagreen,label="Output\nsummary helixer"]
-  4 -> k8eae8a88c73d42dcad0d62d2f1d29c6a
+  kfb8ed4c94b554547880d1916a91f8a6e[color=lightseagreen,label="Output\nsummary"]
+  4 -> kfb8ed4c94b554547880d1916a91f8a6e
+  k4638cc23fdb64e829cdfc9fe38e76bd7[color=lightseagreen,label="Output\ngraphs"]
+  4 -> k4638cc23fdb64e829cdfc9fe38e76bd7
   5[label="JBrowse"]
   0 -> 5 [label="output"]
   1 -> 5 [label="output"]
-  k2bac35a7837942699769e0e0c541f4a3[color=lightseagreen,label="Output\nJBrowse output"]
-  5 -> k2bac35a7837942699769e0e0c541f4a3
+  k199768969df145e49c9689e24ae6e596[color=lightseagreen,label="Output\noutput"]
+  5 -> k199768969df145e49c9689e24ae6e596
+  6[label="Busco on protein"]
+  3 -> 6 [label="output_pep"]
+  k1db166fb10c24823a80c9f22c7c15576[color=lightseagreen,label="Output\nbusco_gff_pep"]
+  6 -> k1db166fb10c24823a80c9f22c7c15576
+  k13c6bee4824c4533bc78c99ddf0b190d[color=lightseagreen,label="Output\nsummary_image_pep"]
+  6 -> k13c6bee4824c4533bc78c99ddf0b190d
+  kf44047d9e71341d9a9f95543f0371d9d[color=lightseagreen,label="Output\nbusco_sum_pep"]
+  6 -> kf44047d9e71341d9a9f95543f0371d9d
+  k1a113d6ca167432b8200dfb3aedc4ba1[color=lightseagreen,label="Output\nbusco_table_pep"]
+  6 -> k1a113d6ca167432b8200dfb3aedc4ba1
+  kdc2d4533d9c24cb0a144184e90fd4e01[color=lightseagreen,label="Output\nbusco_missing_pep"]
+  6 -> kdc2d4533d9c24cb0a144184e90fd4e01
+  7[label="OMArk"]
+  3 -> 7 [label="output_pep"]
+  kde489b9c880847d493847617c33a9d34[color=lightseagreen,label="Output\nomark_detail_sum"]
+  7 -> kde489b9c880847d493847617c33a9d34
 }

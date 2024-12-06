@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@3b91112dc949f5cde1cec1cc9e737dbb0f8110da",
+		release: "galaxy-training-network@e4931cc9823eac7a91f1584c8c92e46cf35d9346",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Genome annotation with Helixer">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-10-18 06:39:15 +0000">
+<meta name="DC.date" content="2024-12-05 13:43:14 +0000">
 <meta name="DC.creator" content="Romane LIBOUBAN">
 <meta name="DC.creator" content="Anthony Bretaudeau"><meta name="description" content="Genome annotation is a multi-level process that includes prediction of protein-coding genes, as well as other functional genome units such as structural RNAs, tRNAs, small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion sequences, transposons and other mobile elements. ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -189,7 +189,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-10-18 06:39:15 +0000",
+  "dateModified": "2024-12-05 13:43:14 +0000",
   "datePublished": "2024-08-21 15:23:33 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -268,7 +268,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Genome annotation with Helixer",
   "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/helixer/tutorial.html",
-  "version": 5,
+  "version": 6,
   "timeRequired": "PT4H",
   "teaches": "- Load genome into Galaxy\n- Annotate genome with Helixer\n- Evaluate annotation quality with BUSCO\n- View annotations in JBrowse",
   "keywords": [
@@ -1246,7 +1246,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Aug 21, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 5, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1264,7 +1264,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 5 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
 
     </blockquote>
     </section>
@@ -1298,6 +1298,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li><a href="#quality-evaluation" id="markdown-toc-quality-evaluation">Quality evaluation</a>    <ol>
       <li><a href="#general-statistics" id="markdown-toc-general-statistics">General statistics</a></li>
       <li><a href="#evaluation-with-busco" id="markdown-toc-evaluation-with-busco">Evaluation with <strong>Busco</strong></a></li>
+      <li><a href="#evaluation-with-omark" id="markdown-toc-evaluation-with-omark">Evaluation with <strong>OMArk</strong></a></li>
     </ol>
   </li>
   <li><a href="#visualisation-with-a-genome-browser" id="markdown-toc-visualisation-with-a-genome-browser">Visualisation with a genome browser</a></li>
@@ -1529,6 +1530,41 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
     <li>So the Helixer annotation looks like a good one, with high completeness and low duplication.</li>
   </ul>
 
+</blockquote>
+
+<h2 id="evaluation-with-omark">Evaluation with <strong>OMArk</strong></h2>
+
+<p><a href="https://github.com/DessimozLab/OMArk">OMArk</a> is proteome quality assessment software. It provides measures of proteome completeness, characterises the consistency of all protein-coding genes with their homologues and identifies the presence of contamination by other species. OMArk is based on the OMA orthology database, from which it exploits orthology relationships, and on the OMAmer software for rapid placement of all proteins in gene families.</p>
+
+<p>OMArk’s analysis is based on HOGs (Hierarchical Orthologous Groups), which play a central role in its assessment of the completeness and coherence of gene sets. HOGs make it possible to compare the genes of a given species with groups of orthologous genes conserved across a taxonomic clade.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-omark-on-extracted-protein-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: OMArk on extracted protein sequences</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/omark/omark/0.3.0+galaxy2" title="OMArk tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>OMArk</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3.0+galaxy2)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein sequences”</em>: <code class="language-plaintext highlighter-rouge">gffread: pep.fa</code></li>
+        <li><em>“OMAmer database</em>: select <code class="language-plaintext highlighter-rouge">LUCA-v2.0.0</code></li>
+        <li>In <em>“Which outputs should be generated”</em>: select <code class="language-plaintext highlighter-rouge">Detailed summary</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The OMArk tool generated an output file in .txt format containing detailed information on the assessment of the completeness, consistency and species composition of the proteome analysed. This report includes statistics on conserved genes, the proportion of duplications, missing genes and the identification of reference lineages.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-what-can-we-deduce-from-these-results-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What can we deduce from these results?</div>
+
+  <ul>
+    <li>Number of conserved HOGs: OMArk has identified a set of 5622 HOGs which are thought to be conserved in the majority of species in the Mucorineae clade.</li>
+    <li>85.52% of genes are complete, so the annotation is of good quality in terms of genomic completeness.</li>
+    <li>Number of proteins in the whole proteome: 19 299. Of which 62.83% are present and 30.94% of the proteome does not share sufficient similarities with known gene families.</li>
+    <li>No contamination detected.</li>
+    <li>The OMArk analysis is based on the Mucorineae lineage, a more recent and specific clade than that used in the BUSCO assessment, which selected the Mucorales as the reference group.</li>
+  </ul>
 </blockquote>
 
 <h1 id="visualisation-with-a-genome-browser">Visualisation with a genome browser</h1>
@@ -1788,9 +1824,9 @@ tools:
   revisions: ea8146ee148f
   tool_panel_section_label: Annotation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: compleasm
+- name: busco
   owner: iuc
-  revisions: 47f9f4d13d2c
+  revisions: 2babe6d5c561
   tool_panel_section_label: Annotation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: jbrowse
@@ -1801,6 +1837,11 @@ tools:
 - name: jcvi_gff_stats
   owner: iuc
   revisions: 8cffbd184762
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: omark
+  owner: iuc
+  revisions: 6f570ba54b41
   tool_panel_section_label: Annotation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 </code></pre></div>
@@ -1906,7 +1947,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/3b91112dc949f5cde1cec1cc9e737dbb0f8110da">3b91112</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e4931cc9823eac7a91f1584c8c92e46cf35d9346">e4931cc</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
