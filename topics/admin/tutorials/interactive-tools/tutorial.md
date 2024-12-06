@@ -25,7 +25,6 @@ contributions:
     - slugger70
     - hexylena
     - abretaud
-  editing:
     - kysrpex
 tags:
   - ansible
@@ -227,7 +226,7 @@ When an Interactive Tool's Docker container starts, it will be assigned a random
 
 ![Galaxy Interactive Tools Proxy Diagram](../../images/interactive-tools/gxit-proxy-diagram.png "Galaxy Interactive Tools Proxy Diagram")
 
-As you can see, the client only ever speaks to nginx on the Galaxy server running on the standard https port (443), never directly to the interactive tool (which may be running on a node that does not even have a public IP address). The mapping of GxIT invocation and its corresponding host/port is kept in a SQLite database known as the *Interactive Tools Session Map*, and the path to this database is important, since both Galaxy and the proxy need access to it.
+As you can see, the client only ever speaks to nginx on the Galaxy server running on the standard https port (443), never directly to the interactive tool (which may be running on a node that does not even have a public IP address). By default, the mapping of GxIT invocation and its corresponding host/port is kept in a SQLite database known as the *Interactive Tools Session Map*, and the path to this database is important, since both Galaxy and the proxy need access to it.
 
 The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. Thankfully there is an Ansible role, [usegalaxy_eu.gie_proxy][usegalaxy_eu-gie_proxy], that can install the proxy and its dependencies, and configure it for you. As usual, have a look through the [README][usegalaxy_eu-gie_proxy-readme] and [defaults][usegalaxy_eu-gie_proxy-defaults] to investigate which variables you might need to set before continuing.
 
@@ -921,3 +920,135 @@ Once the playbook run is complete and your Galaxy server has restarted, run the 
 > {: .solution }
 >
 {: .question }
+
+# High availability setup with PostgresSQL (Optional)
+
+> <comment-title></comment-title>
+> This section is **only relevant if you are running a high-availability** setup, meaning that you have multiple copies of Galaxy running behind a load balancer.
+>
+> If you have installed Galaxy following the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, or are completing this tutorial as part of a [Galaxy Admin Training][gat] course, please skip this section, as you are then _not_ running a high-availability setup.
+{: .comment}
+
+In a _high availability_ setup, multiple redundant copies of Galaxy run simultaneously behind a load balancer to minimize downtime and service interruptions.
+
+As explained in [one of the previous sections](#installing-the-interactive-tools-proxy), the Galaxy Interactive Tools Proxy redirects requests to each Interactive Tool's host and port. By default, the mapping of GxIT invocations to their corresponding host/port is kept in a SQLite database known as the _Interactive Tools Session Map_.
+
+By design, [SQLite is the wrong choice for high availability setups][sqlite_situations_where_a_client_server_rdbms_may_work_better], the showstopper being that the SQLite database file would have to be shared over a network filesystem, which are usually associated with too high latencies for RDBMS use. For this reason, Galaxy and the Interactive Tools Proxy can also store the **Session Map in a PostgreSQL database**. 
+
+[sqlite_situations_where_a_client_server_rdbms_may_work_better]: https://www.sqlite.org/whentouse.html#situations_where_a_client_server_rdbms_may_work_better
+
+> <hands-on-title>Preparing the database</hands-on-title>
+> 
+> First, you need to create a database for the Interactive Tools Proxy. 
+>
+> > <warning-title></warning-title>
+> > Do **not** use the Galaxy database for this purpose. The main Galaxy database is reserved for Galaxy's core functionality, and Interactive Tools have not yet reached this stage. Since Galaxy does not expect to find the Interactive Tools Session Map in this database, storing it there can lead to errors.
+> {: .warning }
+>
+> <br>
+>
+> 1. **On your database server**, access PostgresSQL and create a `gxitproxy` database to store the Interactive Tools Session Map. For simplicity, the same user that operates on the Galaxy main database, typically named `galaxy`, is also going to operate on this one and will own the new database.
+> 
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > # one-liner that connects to Postgres, creates the database and assigns ownership
+>    > sudo -u postgres createdb -O galaxy gxitproxy
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+> 2. Connect to the `gxitproxy` database as `galaxy`.
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > sudo -iu galaxy psql -d gxitproxy
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+>    > <code-out-title>SQL</code-out-title>
+>    > ```
+>    > psql (10.12 (Ubuntu 10.12-0ubuntu0.18.04.1))
+>    > Type "help" for help.
+>    >
+>    > gxitproxy=#
+>    > ```
+>    {: .code-out}
+>
+> 3. Create a `gxitproxy` table in the new database.
+>
+>    > <code-in-title>SQL</code-in-title>
+>    > ```sql
+>    > CREATE TABLE IF NOT EXISTS gxitproxy (key TEXT, key_type TEXT, token TEXT, host TEXT, port INTEGER, info TEXT, PRIMARY KEY (key, key_type));
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+>    > <code-out-title>SQL</code-out-title>
+>    > ```
+>    > CREATE TABLE
+>    > ```
+>    {: .code-out}
+>
+> 4. This is enough to let Galaxy and the Interactive Tool Proxy store the Interactive Tools Session Map in PostgreSQL. But there is a catch: when the Interactive Tool Proxy uses SQLite, it knows the database has changed because it watches the file for changes. When using Postgres, this mechanism is not available. By default, the proxy simply polls the database at regular intervals. To let the user access interactive tools as fast as possible, the proxy can also be notified of updates via [PostgreSQL asynchronous notifications](https://www.postgresql.org/docs/16/libpq-notify.html). To enable them, you have to create a PostgreSQL trigger that sends a NOTIFY message to the channel `gxitproxy` every time the table `gxitproxy` changes.
+>
+>    Run the following commands to create to create a function that sends a NOTIFY message to the channel `gxitproxy` and a trigger that runs the function every time the table `gxitproxy` changes.
+>
+>    > <code-in-title>SQL</code-in-title>
+>    > ```sql
+>    > CREATE OR REPLACE FUNCTION notify_gxitproxy()
+>    > RETURNS trigger AS $$
+>    > BEGIN
+>    >   PERFORM pg_notify('gxitproxy', 'Table "gxitproxy" changed');
+>    >   RETURN NEW;
+>    > END;
+>    > $$ LANGUAGE plpgsql;
+>    >
+>    > CREATE TRIGGER gxitproxy_notify
+>    > AFTER INSERT OR UPDATE OR DELETE ON gxitproxy
+>    > FOR EACH ROW EXECUTE FUNCTION notify_gxitproxy();
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+>    > <code-out-title>SQL</code-out-title>
+>    > ```
+>    > CREATE FUNCTION
+>    > CREATE TRIGGER
+>    > ```
+>    {: .code-out}
+>
+{: .hands_on}
+
+The next step is configuring Galaxy and the Interactive Tool Proxy to use the new database.
+
+> <hands-on-title>Configure Galaxy and the Interactive Tool Proxy</hands-on-title>
+>
+> 1. Adjust your `group_vars/galaxyservers.yml` file as follows.
+>
+>    {% raw %}
+>    ```yaml
+>    # ... existing configuration options ... #
+>
+>    galaxy_config:
+>      galaxy:
+>        # ... existing configuration options in the `galaxy` section ...
+>        # interactivetools_map: "{{ gie_proxy_sessions_path }}"  # comment, remove or leave this line in place (it will be overridden by the option below)
+>        interactivetoolsproxy_map: "{{ gie_proxy_sessions_path }}"
+>        # ... other existing configuration options in the `galaxy` section ...
+>
+>    # ... other existing configurations ... #
+>
+>    gie_proxy_sessions_path: "postgresql:///gxitproxy?host=/var/run/postgresql"
+>    ```
+>    {% endraw %}
+>
+> 2. Run the playbook:
+>
+>    ```
+>    ansible-playbook galaxy.yml
+>    ```
+>
+{: .hands_on}
+
+That's it, once the playbook run is complete, both Galaxy and the Interactive Tools Proxy will be storing the Interactive Tools Session Map in PostgreSQL.
