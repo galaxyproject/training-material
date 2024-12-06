@@ -23,21 +23,22 @@ key_points:
 contributors:
   - nomadscientist
   - MennaGamal
-
+  - GokceOGUZ
 ---
 
 ### scRNA-Seq data analysis roadmap
 
-.image-100[![slide5](../../images/GO-enrichment/slides_images/roadmap_1.png)]
+.image-100[![slide5](../../images/GO-enrichment/slides_images/roadmap_1_v2.png)]
 
+.footnote[Adapted from {% cite Jovic2022 %} ]
 
 ???
 Here is a typical workflow for analyzing single-cell RNA sequencing data.
 We can break this process down into three main sections:
 - Data Preprocessing: This is the initial step, where we focus on quality control, alignment, and quantification of the data. It’s crucial to ensure that our data is clean and reliable.
-- General Analyses: In this phase, we filter out low-quality cells, normalize the data, and select highly variable genes, or HVGs. We then perform dimensionality reduction, cluster the cells, and annotate the different cell types. This step allows us to make sense of the data and identify distinct cell populations.
+- General Analyses: In this phase, we filter out low-quality cells, normalize the data, and select highly variable genes. We then perform dimensionality reduction, cluster the cells, and annotate the different cell types. This step helps us understand the data and identify distinct cell populations.
 - Exploratory Analyses: Finally, we delve into exploratory analyses. This includes differential expression gene (DEG) analysis, functional enrichment studies, gene set variation analysis (GSVA), and transcription factor (TF) prediction. We also investigate cell trajectories, interactions between cells, cell cycles, and even spatial transcriptomics.
-This tutorial will focus on Gene Ontology (GO) Enrichment exploratory analysis.
+This tutorial will focus on Gene Ontology (GO) Enrichment Analysis as part of the exploratory analysis process.
 
 
 ---
@@ -45,17 +46,23 @@ This tutorial will focus on Gene Ontology (GO) Enrichment exploratory analysis.
 ### Ontology
 
 .center[A standardized vocabulary for expressing knowledge within a specific domain.]
-.image-100[![slide6](../../images/GO-enrichment/slides_images/ontology_2.png)]
+.image-100[![slide6](../../images/GO-enrichment/slides_images/ontology_2_v2.png)]
+
+.footnote [Adapted from {% cite ontologies-website %} ]
 
 ???
-- Before we introduce “GO enrichment analysis” let us first understand what it means by Ontology and Gene Ontology (GO).
-- Ontology is a set of terms with their precise definitions and defined relationships between them. For example, imagine you are organizing a library of books. You want to classify and organize these books so that others can easily find what they are looking for. Ontology in this context would be a structured system for categorizing books. 
+- Before we introduce GO enrichment analysis, let's first understand what Ontology and Gene Ontology (GO) mean.
+- Ontology is a set of terms with precise definitions and defined relationships between them. For example, imagine you are organizing a library of books. You want to classify and organize these books so that others can easily find what they are looking for. In this context, ontology refers to a structured system for categorizing books.
 
 ---
 
 ### Gene Ontology (GO): Unifying Biology
 
-.image-100[![slide7](../../images/GO-enrichment/slides_images/go_3.png)]
+.image-80[![slide7](../../images/GO-enrichment/slides_images/go_3.png)]
+
+
+.footnote [Adapted from {% cite Saxena2022 %} ]
+ 
 
 ???
 Gene Ontology has 3 main classifications (Biological process, Molecular function, and Cellular component) this allows scientists to precisely describe what a gene does, how it does it, and where it happens in the cell.
@@ -137,7 +144,7 @@ Each gene can be "tagged" with one or more GO terms, similar to how books are ca
 
 ---
 
-.left[3- Count How Many Times Each GO Term Appears]
+.left[3- Count how many times each GO term appears]
 .image-60[![slide14](../../images/GO-enrichment/slides_images/step3_11.png)]
 
 ???
@@ -168,7 +175,7 @@ We then count the number of times each GO term shows up in your list of genes. F
 
 ???
 - In real-world scenarios where we have hundreds or thousands of genes we need to formally assess whether this difference is statistically significant (i.e., whether GO term A is truly enriched or if this difference is by chance). Fisher's Exact Test and the hypergeometric test are the most commonly used tests in this situation.
-- Fischer’s Exact test substitutes the values of the contingency table in a formula to calculate the probability (P-value) that corresponds to how likely the observed distribution is by chance. A lower P-value suggests that the GO term is truly enriched in the list of marker genes.
+- Fisher’s Exact test substitutes the values of the contingency table in a formula to calculate the probability (P-value) that corresponds to how likely the observed distribution is by chance. A lower P-value suggests that the GO term is truly enriched in the list of marker genes.
 
 ---
 
@@ -176,8 +183,7 @@ We then count the number of times each GO term shows up in your list of genes. F
 .image-60[![slide18](../../images/GO-enrichment/slides_images/step7_15.png)]
 
 ???
-After we have transformed the long list of marker genes into a short list of biological themes in the form of GO terms we can proceed with the interpretation of the results through visualization of the most common themes to identify patterns or relationships between GO terms, we can also analyze the GO hierarchy where higher-level categories (parent terms) provide broader biological contexts, while lower-level categories (child terms) offer more specific insights, in addition to relating the enriched GO terms to existing biological knowledge.
-
+After transforming the long list of marker genes into a shorter list of biological themes in the form of GO terms, we can proceed with the interpretation of the results. This can be done by visualizing the most common themes to identify patterns or relationships between the GO terms. Additionally, we can analyze the GO hierarchy, where higher-level categories (parent terms) provide broader biological contexts, while lower-level categories (child terms) offer more specific insights. We can also relate the enriched GO terms to existing biological knowledge.
 ---
 
 ### Example 1: GO Enrichment Analysis of Platelet Proteins in Early-Stage Cancer
