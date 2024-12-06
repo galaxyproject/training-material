@@ -163,14 +163,25 @@ We first have to check if our data contains adapter sequences that we have to re
 > > {: .solution}
 > >
 >    {: .question}
+>
+>    As it is tedious to inspect all these reports individually we will combine them with {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0) %}.
+>
+> 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0) %} to aggregate the FastQC reports with the following parameters:
+>    - In *"Results"*:
+>        - *"Results"*
+>            - *"Which tool was used generate logs?"*: `FastQC`
+>                - In *"FastQC output"*:
+>                    - {% icon param-repeat %} *"Insert FastQC output"*
+>                        - {% icon param-collection %} *"FastQC output"*: `FastQC on collection N: Raw data` (output of **FastQC** {% icon tool %})
+>
 {: .hands_on}
 
 > <comment-title>FastQC Results</comment-title>
-> This is what you should expect from the **Adapter Content** section:
-> ![FastQC screenshot of the Adapter Content section](../../images/cut_and_run/adapter_content_pre.png "FastQC screenshot on the Adapter Content section")
+> This is what you should expect from the **Adapter Content** section of multiQC:
+> ![MultiQC screenshot of the Adapter Content section](../../images/cut_and_run/fastqc_adapter_content_plot_pre.png "MultiQC screenshot on the Adapter Content section")
 {: .comment}
 
-The FastQC report pointed out that we have in our data some standard Illumina adapter sequences, which we will remove with Trim Galore!.
+The MultiQC report (of FastQC) pointed out that we have in our data some standard Illumina adapter sequences, which we will remove with Trim Galore!.
 
 ## Trimming Reads
 
