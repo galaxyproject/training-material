@@ -19,6 +19,7 @@ follow_up_training:
   - mapping
 time_estimation: 1H30M
 level: Introductory
+subtopic: basics
 key_points:
 - Perform quality control on every dataset before running any other bioinformatics
   analysis
