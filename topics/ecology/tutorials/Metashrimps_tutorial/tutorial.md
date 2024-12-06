@@ -86,7 +86,7 @@ publishable as a real Data Paper giving recognition to all the people that helpe
 >
 > 1. Create a new history for this tutorial
 > 2. Import this metadata file from [Zenodo]({{ page.zenodo_link }}) to test it
->     -> Training Data for "Creating Quality FAIR assessment reports and draft of Data Papers from EML metadata with MetaShRIMPS"):
+>     -> Training Data for "Creating Quality FAIR assessment reports and draft of Data Papers from EML metadata with MetaShRIMPS":
 >    ```
 >    https://zenodo.org/record/8130567/files/Kakila_database_marine_mammal.xml
 >    ```
@@ -109,7 +109,7 @@ you want to use.
 
 ![Interface when file is selected](./Images/upload_1.png){:width="500"}
 
-After uploading the file, or if you have indicate it as input data if the tool, you just have to click on **Execute** to launch the tool with the file.
+After uploading the file, or if you have indicated it as input data in the tool form, you just have to click on **Execute** to launch MetaShRIMPS jobs with the file.
 
 # Outputs
 
