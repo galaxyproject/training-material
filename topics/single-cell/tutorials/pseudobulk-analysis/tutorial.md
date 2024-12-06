@@ -24,13 +24,13 @@ acknowledgments:
 
 ---
 
-Pseudobulk analysis is a powerful technique that bridges the gap between single-cell and bulk RNA-seq data. It involves aggregating gene expression data from groups of cells within the same biological replicate, such as a mouse or patient, typically based on clustering or cell type annotations (citation).
+Pseudobulk analysis is a powerful technique that bridges the gap between single-cell and bulk RNA-seq data. It involves aggregating gene expression data from groups of cells within the same biological replicate, such as a mouse or patient, typically based on clustering or cell type annotations ({% cite Murphy2022 %}).
 
-A key advantage of this approach in differential expression analysis is that it avoids treating individual cells as independent samples, which can underestimate variance and lead to inflated significance or overly optimistic p-values (citation). This occurs because cells from the same biological replicate are inherently more similar to each other than cells from different samples. By grouping data into pseudobulk samples, the analysis aligns with the experimental design, as in bulk RNA-seq, leading to more reliable and robust statistical results.
+A key advantage of this approach in differential expression analysis is that it avoids treating individual cells as independent samples, which can underestimate variance and lead to inflated significance or overly optimistic p-values ({% cite Squair2021 %}). This occurs because cells from the same biological replicate are inherently more similar to each other than cells from different samples. By grouping data into pseudobulk samples, the analysis aligns with the experimental design, as in bulk RNA-seq, leading to more reliable and robust statistical results ({% cite Murphy2022 %}).
 
 Beyond enhancing statistical validity, pseudobulk analysis enables the identification of cell-type-specific gene expression and functional changes across biological conditions. It balances the detailed resolution of single-cell data with the statistical power of bulk RNA-seq, providing insights into the functional transcriptomic landscape relevant to biological questions.
 
-In this tutorial, we will guide you through a pseudobulk analysis workflow using the **Decoupler** and **edgeR** tools available in Galaxy. These tools facilitate functional and differential expression analysis, and their output can be integrated with other Galaxy tools to visualize results, such as creating Volcano Plots, which we will also cover in this tutorial.
+In this tutorial, we will guide you through a pseudobulk analysis workflow using the **Decoupler** and **edgeR** tools available in Galaxy ({% Badia-iMompel2022 %}) ({% Liu2015 %}). These tools facilitate functional and differential expression analysis, and their output can be integrated with other Galaxy tools to visualize results, such as creating Volcano Plots, which we will also cover in this tutorial.
 
 
 > <agenda-title>Pseudobulk Analysis Pipeline Agenda</agenda-title>:
@@ -61,12 +61,12 @@ In this tutorial, we will guide you through a pseudobulk analysis workflow using
 
 ### Overview of the Data
 
-Our data was extracted from the publication titled _"Elevated Calprotectin and Abnormal Myeloid Cell Subsets Discriminate Severe from Mild COVID-19"_ (Silvin A et al., _Cell_, 2020, 182(6):1401-1418.e18. DOI: [10.1016/j.cell.2020.08.002](https://doi.org/10.1016/j.cell.2020.08.002)). This dataset was chosen because it was utilized by the developers of the `decoupler` tool for pseudobulk aggregate analysis (citation of the tool documentation).
+Our data was extracted from the publication titled _"Elevated Calprotectin and Abnormal Myeloid Cell Subsets Discriminate Severe from Mild COVID-19"_ ({% cite Silvin2020 %}). This dataset was chosen because it was utilized by the developers of the `decoupler` tool for pseudobulk aggregate analysis (citation of the tool documentation).
 
 Pseudobulk analysis is an advanced method in single-cell data analysis. For this tutorial, we assume familiarity with common single-cell data formats, such as AnnData or Seurat objects, and experience analyzing single-cell data, including clustering and annotating cell types.
 
 If you're new to these concepts, we recommend exploring our other tutorials before going for pseudobulk:
-- [Clustering 3K PBMCs with Scanpy)](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html): Learn how to cluster and annotate cells in Galaxy using our single-cell tools.
+- [Clustering 3K PBMCs with Scanpy](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html): Learn how to cluster and annotate cells in Galaxy using our single-cell tools.
 - [Combining single cell datasets after pre-processing](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html): Understand how to combine multiple datasets into one AnnData object and add metadata from single-cell experiments.
 
 The data object, which you will import from Zenodo into Galaxy via the provided link, has been preprocessed, analyzed, and annotated. It includes the following key observations:
@@ -115,20 +115,20 @@ Raw counts are crucial for generating accurate pseudobulk aggregates. Since sing
 
 > <hands-on-title> Pseudobulk with Decoupler </hands-on-title>
 >
-> 1. Run the {% tool [Decoupler pseudo-bulk](toolshed.g2.bx.psu.edu/repos/ebi-gxa/decoupler_pseudobulk/decoupler_pseudobulk/1.4.0+galaxy5) %} tool with the following parameters:
->  - {% icon param-file %} **Input AnnData file**: `AnnData for Pseudobulk` (Input dataset obtained > from Zenodo)
->  - **Produce a list of genes to filter out per contrast?**: `No`
->  - **Obs Fields to Merge**: *(Leave empty if not applicable)*
->  - **Groupby column**: `cell_type` (Column containing cell type annotations)
->  - **Sample Key column**: `individual` (Column containing individual sample identifiers)
->  - **Layer**: `counts` (Layer containing raw gene expression counts)
->  - **Factor Fields**: `disease` (Column in `adata.obs` specifying experimental factors. For edgeR, the first field should be the main contrast field, followed by covariates.)
->  - **Use Raw**: `No`
->  - **Minimum Cells**: `10`
->  - **Produce plots**: `Yes`
->  - **Minimum Counts**: `10`
->  - **Minimum Total Counts**: `1000`
->  - **Minimum Counts Per Gene Per Contrast Field**: `20` (Genes with fewer counts in specific contrasts are flagged in a separate file but not excluded from the results.)
+> 1. {% tool [Decoupler pseudo-bulk](toolshed.g2.bx.psu.edu/repos/ebi-gxa/decoupler_pseudobulk/decoupler_pseudobulk/1.4.0+galaxy5) %} tool with the following parameters:
+> - {% icon param-file %} **Input AnnData file**: `AnnData for Pseudobulk` (Input dataset obtained > from Zenodo)
+> - **Produce a list of genes to filter out per contrast?**: `No`
+> - **Obs Fields to Merge**: *(Leave empty if not applicable)*
+> - **Groupby column**: `cell_type` (Column containing cell type annotations)
+> - **Sample Key column**: `individual` (Column containing individual sample identifiers)
+> - **Layer**: `counts` (Layer containing raw gene expression counts)
+> - **Factor Fields**: `disease` (Column in `adata.obs` specifying experimental factors. For edgeR, the first field should be the main contrast field, followed by  covariates.)
+> - **Use Raw**: `No`
+> - **Minimum Cells**: `10`
+> - **Produce plots**: `Yes`
+> - **Minimum Counts**: `10`
+> - **Minimum Total Counts**: `1000`
+> - **Minimum Counts Per Gene Per Contrast Field**: `20` (Genes with fewer counts in specific contrasts are flagged in a separate file but not excluded from the results.)
 >  - **Enable Filtering by Expression**: `Yes`
 >  - **Plot Samples Figsize**: `13 13`
 >  - **Plot Filtering Figsize**: `13 13`
@@ -224,7 +224,7 @@ The next steps will help you refine your data for easier handling. We will use s
 >
 {: .hands_on}
 
-## Generating Contrast File 
+## Generating the Contrast File 
 
 This file will be use as the contrast input file in the edgeR tool. 
 
@@ -271,7 +271,7 @@ This file will be use as the contrast input file in the edgeR tool.
 
 # Differential Gene Expression Analysis (DGE) with **edgeR**
 
-
+Explain edger...
 
 > <hands-on-title> Run a DGE Analysis with edgeR </hands-on-title>
 >
