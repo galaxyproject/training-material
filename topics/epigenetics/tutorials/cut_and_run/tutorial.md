@@ -371,15 +371,22 @@ too much compared to the diversity of the library you generated. Consequently, l
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
 >       - {% icon param-collection %} *"Raw read data from your current history"*: select the output of **MarkDuplicates** BAM.
 >
-> 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0) %} to aggregate the FastQC reports with the following parameters:
+>    - In *"Results"*:
+>        - *"Results"*
+>            - *"Which tool was used generate logs?"*: `FastQC`
+>                - In *"FastQC output"*:
+>                    - {% icon param-repeat %} *"Insert FastQC output"*
+>                        - {% icon param-collection %} *"FastQC output"*: `FastQC on collection N: Raw data` (output of **FastQC** {% icon tool %})
+>
 {: .hands_on}
 
 > <comment-title>FastQC Results</comment-title>
 > Now, you should see under **Overrepresented sequences** that there is no more overrepresented sequences and under **Adapter Content** that the Illumina adapters are no longer present.
-> ![FastQC screenshot on the adapter content section after Trim Galore!](../../images/cut_and_run/adapter_content_post.png "FastQC screenshot on the adapter content section after Trim Galore!")
+> ![MultiQC screenshot on the adapter content section after Trim Galore!](../../images/cut_and_run/fastqc_adapter_content_plot_post.png "MultiQC screenshot on the adapter content section after Trim Galore!")
 > However, you may have noticed that you have a new section with warning: **Sequence Length Distribution**. This is expected as you trimmed part of the reads.
 > Furthermore, you will notice under **Sequence Duplication Levels** that we removed nearly all PCR duplicates.
-> ![FastQC screenshot on the duplication level after MarkDuplicates](../../images/cut_and_run/duplication_level.png "FastQC screenshot on the duplication level after MarkDuplicates")
+> ![MultiQC screenshot on the duplication level after MarkDuplicates](../../images/cut_and_run/fastqc_sequence_duplication_levels_plot.png "MultiQC screenshot on the duplication level after MarkDuplicates")
 {: .comment}
 
 ## Check Insert Sizes
