@@ -1,0 +1,637 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0009-0002-1327-0424",
+            "name": "Camila Goclowski"
+        },
+        {
+            "class": "Person",
+            "identifier": "0009-0001-2017-8805",
+            "name": "Julia Jakiela"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "format-version": "0.1",
+    "name": "Seurat Filter, Plot and Exlore tutorial",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "EBI SCXA Data Retrieval",
+            "outputs": [
+                {
+                    "name": "matrix_mtx",
+                    "type": "txt"
+                },
+                {
+                    "name": "genes_tsv",
+                    "type": "tsv"
+                },
+                {
+                    "name": "barcode_tsv",
+                    "type": "tsv"
+                },
+                {
+                    "name": "design_tsv",
+                    "type": "tsv"
+                }
+            ],
+            "position": {
+                "left": 0,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "72b6e1747e37",
+                "name": "retrieve_scxa",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"data\", \"accession\": \"E-MTAB-6945\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"matrix_type\": \"raw\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "v0.0.2+galaxy2",
+            "type": "tool",
+            "uuid": "08db272c-657f-4c37-a972-ad76319fb5f9",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "matrix_mtx",
+                    "output_name": "matrix_mtx",
+                    "uuid": "a5a4504c-013b-4b87-8ef2-643a3e1804bb"
+                },
+                {
+                    "label": "genes_tsv",
+                    "output_name": "genes_tsv",
+                    "uuid": "b4ce8ebe-421f-4259-b822-3ac79c5f9817"
+                },
+                {
+                    "label": "design_tsv",
+                    "output_name": "design_tsv",
+                    "uuid": "83aed959-6dce-4115-86dd-7b2d2eeceb00"
+                },
+                {
+                    "label": "barcode_tsv",
+                    "output_name": "barcode_tsv",
+                    "uuid": "ca12560b-ca83-4447-8096-acbd51760079"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/4.0.4+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input|barcodes": {
+                    "id": 0,
+                    "output_name": "barcode_tsv"
+                },
+                "input|genes": {
+                    "id": 0,
+                    "output_name": "genes_tsv"
+                },
+                "input|matrix": {
+                    "id": 0,
+                    "output_name": "matrix_mtx"
+                },
+                "metadata": {
+                    "id": 0,
+                    "output_name": "design_tsv"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Seurat Read10x",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool Seurat Read10x",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool Seurat Read10x",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Seurat Read10x",
+            "outputs": [
+                {
+                    "name": "rds_seurat_file",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 220,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/4.0.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "f5db0e853f57",
+                "name": "seurat_read10x",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"format\": \"rds_seurat\", \"input\": {\"format\": \"mtx\", \"__current_case__\": 1, \"matrix\": {\"__class__\": \"ConnectedValue\"}, \"genes\": {\"__class__\": \"ConnectedValue\"}, \"barcodes\": {\"__class__\": \"ConnectedValue\"}}, \"metadata\": {\"__class__\": \"ConnectedValue\"}, \"min_cells\": \"5\", \"min_features\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.4+galaxy0",
+            "type": "tool",
+            "uuid": "d01793f5-e8b6-4478-b11e-5fdaa02703b8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input|rds_seurat_file": {
+                    "id": 1,
+                    "output_name": "rds_seurat_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Plot",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Plot",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 440,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "95d79f1134f0",
+                "name": "seurat_plot",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"bg\": null, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"dpi\": \"300\", \"enable_output_rds_file\": false, \"input\": {\"format\": \"rds_seurat\", \"__current_case__\": 2, \"rds_seurat_file\": {\"__class__\": \"ConnectedValue\"}}, \"limitsize\": true, \"plot_format\": \"png\", \"plot_type\": {\"plot_type_selector\": \"VlnPlot\", \"__current_case__\": 4, \"features\": \"nCount_RNA\", \"cols\": null, \"pt_size\": null, \"idents\": null, \"sort\": false, \"assay\": null, \"group_by\": null, \"split_by\": null, \"adjust\": \"1\", \"same_y_lims\": false, \"log\": true, \"ncol\": null, \"slot\": \"data\", \"split_plot\": false, \"stack\": false, \"fill_by\": \"feature\", \"flip\": false}, \"units\": \"cm\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.4+galaxy0",
+            "type": "tool",
+            "uuid": "12226908-d4f0-44b7-a765-e73b917a3b12",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_filter_cells/seurat_filter_cells/4.0.4+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input|rds_seurat_file": {
+                    "id": 1,
+                    "output_name": "rds_seurat_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Seurat FilterCells",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Seurat FilterCells",
+            "outputs": [
+                {
+                    "name": "rds_seurat_file",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 440,
+                "top": 120
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_filter_cells/seurat_filter_cells/4.0.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "cd9f564bd63f",
+                "name": "seurat_filter_cells",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"cells\": null, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"format\": \"rds_seurat\", \"input\": {\"format\": \"rds_seurat\", \"__current_case__\": 2, \"rds_seurat_file\": {\"__class__\": \"ConnectedValue\"}}, \"subsets\": [{\"__index__\": 0, \"name\": \"nCount_RNA\", \"min\": \"500.0\", \"max\": \"10000.0\"}, {\"__index__\": 1, \"name\": \"nFeature_RNA\", \"min\": \"500.0\", \"max\": \"1000000000.0\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.4+galaxy0",
+            "type": "tool",
+            "uuid": "3c3b2c00-d55f-4b9e-a723-6b393d59a72f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_normalise_data/seurat_normalise_data/4.0.4+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input|rds_seurat_file": {
+                    "id": 3,
+                    "output_name": "rds_seurat_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Seurat NormaliseData",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Seurat NormaliseData",
+            "outputs": [
+                {
+                    "name": "rds_seurat_file",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 660,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_normalise_data/seurat_normalise_data/4.0.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3f49bc9c9213",
+                "name": "seurat_normalise_data",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"assay\": null, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"format\": \"rds_seurat\", \"input\": {\"format\": \"rds_seurat\", \"__current_case__\": 2, \"rds_seurat_file\": {\"__class__\": \"ConnectedValue\"}}, \"norm\": \"LogNormalize\", \"scale\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.4+galaxy0",
+            "type": "tool",
+            "uuid": "7cae423b-0228-42d9-a987-9418f04e620f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_variable_genes/seurat_find_variable_genes/4.0.4+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input|rds_seurat_file": {
+                    "id": 4,
+                    "output_name": "rds_seurat_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Seurat FindVariableGenes",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Seurat FindVariableGenes",
+            "outputs": [
+                {
+                    "name": "rds_seurat_file",
+                    "type": "rdata"
+                },
+                {
+                    "name": "output_tab",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 880,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_variable_genes/seurat_find_variable_genes/4.0.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "948fc0276b4f",
+                "name": "seurat_find_variable_genes",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"disp\": null, \"format\": \"rds_seurat\", \"input\": {\"format\": \"rds_seurat\", \"__current_case__\": 2, \"rds_seurat_file\": {\"__class__\": \"ConnectedValue\"}}, \"mean\": null, \"nfeatures\": null, \"selection_method\": \"vst\", \"xhigh\": null, \"xlow\": null, \"yhigh\": null, \"ylow\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.4+galaxy0",
+            "type": "tool",
+            "uuid": "b9bddcea-105c-47e3-9f83-f513c9e3dc68",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_scale_data/seurat_scale_data/4.0.4+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "genes_use": {
+                    "id": 5,
+                    "output_name": "output_tab"
+                },
+                "input|rds_seurat_file": {
+                    "id": 5,
+                    "output_name": "rds_seurat_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Seurat ScaleData",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Seurat ScaleData",
+            "outputs": [
+                {
+                    "name": "rds_seurat_file",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 1100,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_scale_data/seurat_scale_data/4.0.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5e9ba303f9e1",
+                "name": "seurat_scale_data",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"block_size\": null, \"check_for_norm\": false, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"do_not_center\": false, \"do_not_scale\": false, \"format\": \"rds_seurat\", \"genes_use\": {\"__class__\": \"ConnectedValue\"}, \"input\": {\"format\": \"rds_seurat\", \"__current_case__\": 2, \"rds_seurat_file\": {\"__class__\": \"ConnectedValue\"}}, \"min_cells_to_block\": null, \"model\": \"linear\", \"scale_max\": null, \"use_umi\": false, \"vars\": \"nCount_RNA\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.4+galaxy0",
+            "type": "tool",
+            "uuid": "7e9ddc40-5636-4e38-ab22-4eda2cc484d6",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_pca/seurat_run_pca/4.0.4+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input|rds_seurat_file": {
+                    "id": 6,
+                    "output_name": "rds_seurat_file"
+                },
+                "pc_genes": {
+                    "id": 5,
+                    "output_name": "output_tab"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Seurat RunPCA",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Seurat RunPCA",
+            "outputs": [
+                {
+                    "name": "rds_seurat_file",
+                    "type": "rdata"
+                },
+                {
+                    "name": "output_embed",
+                    "type": "csv"
+                },
+                {
+                    "name": "output_load",
+                    "type": "csv"
+                },
+                {
+                    "name": "output_sdev",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "left": 1320,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_pca/seurat_run_pca/4.0.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "8ded486b0014",
+                "name": "seurat_run_pca",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"format\": \"rds_seurat\", \"input\": {\"format\": \"rds_seurat\", \"__current_case__\": 2, \"rds_seurat_file\": {\"__class__\": \"ConnectedValue\"}}, \"pc_cells\": null, \"pc_genes\": {\"__class__\": \"ConnectedValue\"}, \"pcs_compute\": null, \"reverse_pca\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.4+galaxy0",
+            "type": "tool",
+            "uuid": "e98a8c81-1a01-490f-b887-b65eb831abeb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_neighbours/seurat_find_neighbours/4.0.4+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input|rds_seurat_file": {
+                    "id": 7,
+                    "output_name": "rds_seurat_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Seurat FindNeighbours",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Seurat FindNeighbours",
+            "outputs": [
+                {
+                    "name": "rds_seurat_file",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 1540,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_neighbours/seurat_find_neighbours/4.0.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "ba897c57bdd9",
+                "name": "seurat_find_neighbours",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"annoy_metric\": \"euclidean\", \"assay\": \"RNA\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"compute_snn\": false, \"dims\": \"1,2,3,4,5,6,7,8,9,10,11,12,13,14,15\", \"distance_matrix\": false, \"do_plot\": false, \"features\": null, \"features_file\": null, \"force_recalc\": false, \"format\": \"rds_seurat\", \"graph_name\": null, \"input\": {\"format\": \"rds_seurat\", \"__current_case__\": 2, \"rds_seurat_file\": {\"__class__\": \"ConnectedValue\"}}, \"k_param\": null, \"nn_eps\": null, \"nn_method\": \"rann\", \"prune_snn\": null, \"reduction\": \"pca\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.4+galaxy0",
+            "type": "tool",
+            "uuid": "8c604e31-5f4b-437e-b8da-3c4c5d494911",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_clusters/seurat_find_clusters/4.0.4+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input|rds_seurat_file": {
+                    "id": 8,
+                    "output_name": "rds_seurat_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Seurat FindClusters",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Seurat FindClusters",
+            "outputs": [
+                {
+                    "name": "rds_seurat_file",
+                    "type": "rdata"
+                },
+                {
+                    "name": "output_tab",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "left": 1760,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_find_clusters/seurat_find_clusters/4.0.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d541e9e62beb",
+                "name": "seurat_find_clusters",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adv\": {\"resolution\": \"0.5\", \"algorithm\": \"1\", \"modularity_fxn\": \"1\", \"method\": \"matrix\", \"graph_name\": \"RNA_nn\", \"nrandom_starts\": null, \"group_singletons\": false, \"random_seed\": null}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"format\": \"rds_seurat\", \"input\": {\"format\": \"rds_seurat\", \"__current_case__\": 2, \"rds_seurat_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.4+galaxy0",
+            "type": "tool",
+            "uuid": "6001ccc3-dc17-455f-b733-54caead5f182",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "rds_seurat_clusters",
+                    "output_name": "rds_seurat_file",
+                    "uuid": "ac5e668c-341b-4887-867c-0ba165d2a874"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_umap/seurat_run_umap/4.0.4+galaxy0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input|rds_seurat_file": {
+                    "id": 9,
+                    "output_name": "rds_seurat_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Seurat UMAP",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Seurat UMAP",
+            "outputs": [
+                {
+                    "name": "rds_seurat_file",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 1980,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_run_umap/seurat_run_umap/4.0.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "b9424c715a0d",
+                "name": "seurat_run_umap",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adv\": {\"graph\": null, \"nn_name\": null, \"slot\": \"data\", \"umap_method\": \"uwot\", \"reduction_model\": null, \"return_model\": false, \"metric\": \"cosine\", \"n_epochs\": null, \"learning_rate\": \"1\", \"min_dist\": \"0\", \"spread\": \"1\", \"repulsion_strength\": \"1\", \"negative_sample_rate\": \"5\", \"a\": null, \"b\": null, \"uwot_sgd\": false, \"angular_rp_forest\": false, \"verbose\": true}, \"assay\": null, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"dims\": \"1:15\", \"format\": \"rds_seurat\", \"input\": {\"format\": \"rds_seurat\", \"__current_case__\": 2, \"rds_seurat_file\": {\"__class__\": \"ConnectedValue\"}}, \"local_connectivity\": \"1\", \"n_components\": \"2\", \"n_neighbors\": \"30\", \"reduction\": \"pca\", \"reduction_key\": \"UMAP\", \"reduction_name\": \"umap\", \"seed_use\": \"42\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.4+galaxy0",
+            "type": "tool",
+            "uuid": "e3c8a7f0-b5e4-4d7d-adb1-361a4174fd52",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "rds_seurat_umap",
+                    "output_name": "rds_seurat_file",
+                    "uuid": "831e32ad-773b-417c-8b7e-4b7ca0e12488"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input|rds_seurat_file": {
+                    "id": 10,
+                    "output_name": "rds_seurat_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Plot",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Plot",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 2200,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_plot/seurat_plot/4.0.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "95d79f1134f0",
+                "name": "seurat_plot",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"bg\": null, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"dpi\": \"300\", \"enable_output_rds_file\": false, \"input\": {\"format\": \"rds_seurat\", \"__current_case__\": 2, \"rds_seurat_file\": {\"__class__\": \"ConnectedValue\"}}, \"limitsize\": true, \"plot_format\": \"png\", \"plot_type\": {\"plot_type_selector\": \"DimPlot\", \"__current_case__\": 0, \"dims\": \"1,2\", \"cells\": null, \"cols\": null, \"pt_size\": null, \"reduction\": null, \"group_by\": \"RNA_nn_res.0.5\", \"split_by\": null, \"shape_by\": null, \"order\": null, \"shuffle\": false, \"seed\": \"1\", \"label\": false, \"label_size\": \"4\", \"label_color\": \"black\", \"label_box\": false, \"repel\": false, \"cells_highlight\": null, \"cols_highlight\": \"#DE2D26\", \"sizes_highlight\": \"1\", \"na_value\": \"grey50\", \"ncol\": null}, \"units\": \"cm\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.4+galaxy0",
+            "type": "tool",
+            "uuid": "22647cf6-4feb-45c9-bd04-56328976f48b",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": ["single-cell"],
+    "uuid": "988331f3-6d11-47cc-a5c2-07cbbe46c199",
+    "version": 1
+}

@@ -54,7 +54,7 @@ This practical shows how to create a reusable analysis pipeline, called a *workf
 > 1. An internet-connected computer.  Galaxy can run on your laptop without an internet connection, but this practical requires access to resources on the web.
 > 1. A web browser. [Firefox](https://www.mozilla.org/firefox) and [Google Chrome](https://www.google.com/chrome/) work well, as does [Safari](https://www.apple.com/safari/).  Internet Explorer is known to have issues with Galaxy so avoid using that.
 > 1. Access to a Galaxy instance, and an account on that instance. Galaxy is available in many ways. If you are doing this practical as part of a workshop, the instructor will tell you which instance to use. If you are doing this on your own, you can use [usegalaxy.org](https://usegalaxy.org).
-> 1. A Galaxy *history* from an analysis that you have already run.  If you don't have one handy, you can use [this history](https://usegalaxy.org/u/tnabtaf/h/overlapping-genes-on-opposite-strands). on usegalaxy.org.  Click **Import History** (top right) to bring that history into your workspace on usegalaxy.org. Any history will work with this tutorial, but that's the one used in the examples.
+> 1. A Galaxy *history* from an analysis that you have already run.  If you don't have one handy, you can use [this history](https://usegalaxy.org/u/tnabtaf/h/overlapping-genes-on-opposite-strands-1). on usegalaxy.org.  Click **Import History** (top right) to bring that history into your workspace on usegalaxy.org. Any history will work with this tutorial, but that's the one used in the examples.
 {: .comment}
 
 This tutorial is a good second step after running your first analysis on Galaxy.

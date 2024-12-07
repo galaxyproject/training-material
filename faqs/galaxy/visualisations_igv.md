@@ -4,6 +4,7 @@ area: visualisation
 box_type: tip
 layout: faq
 contributors: [shiltemann]
+redirect_from: [/topics/galaxy-interface/tutorials/processing-many-samples-at-once/faqs/visualisations_igv]
 ---
 
 You can send data from your Galaxy history to IGV for viewing as follows:

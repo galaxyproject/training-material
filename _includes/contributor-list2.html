@@ -80,6 +80,15 @@
 	</tr>
 	{% endif %}
 
+	{% if include.contributors.reviewing %}
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			{% for id in include.contributors.reviewing %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id small=true %}{% else %}{{ contributors[id].name | default: id }}{% endif %}{%- endfor -%}
+		</td>
+	</tr>
+	{% endif %}
+
 	{% if include.contributors.ux %}
 	<tr>
 		<td><abbr title="These people contributed UX or Design improvements to this tutorial or the GTN as a whole">UX/Designer(s)</abbr></td>

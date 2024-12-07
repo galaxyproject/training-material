@@ -2,6 +2,8 @@
 layout: tutorial_hands_on
 redirect_from:
   - /topics/galaxy-data-manipulation/tutorials/collections/tutorial
+  - /topics/galaxy-data-manipulation/tutorials/processing-many-samples-at-once/tutorial
+  - /topics/galaxy-interface/tutorials/processing-many-samples-at-once/tutorial
 
 title: "Using dataset collections"
 zenodo_link: "https://doi.org/10.5281/zenodo.5119008"
@@ -45,6 +47,7 @@ recordings:
 {% snippet faqs/gtn/galaxy_tested_with.md version="22.01" %}
 
 Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
+
 
 # Getting data
 

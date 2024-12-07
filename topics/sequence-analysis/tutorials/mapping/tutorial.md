@@ -15,6 +15,7 @@ key_points:
 - Know your data!
 - Mapping is not trivial
 - There are many mapping algorithms, it depends on your data which one to choose
+subtopic: basics
 requirements:
 - type: internal
   topic_name: sequence-analysis
@@ -49,9 +50,9 @@ recordings:
   length: 24M
   galaxy_version: 24.1.2.dev0
   date: '2024-09-07'
-  speakers: 
+  speakers:
   - DinithiRajapaksha
-  captioners: 
+  captioners:
   - DinithiRajapaksha
   bot-timestamp: 1725707919
 
@@ -142,7 +143,7 @@ Currently, there are over 60 different mappers, and their number is growing. In 
 >
 > 2. Inspect the `mapping stats` file by clicking on the {% icon galaxy-eye %} (eye) icon
 >
->    
+>
 >
 {: .hands_on}
 
