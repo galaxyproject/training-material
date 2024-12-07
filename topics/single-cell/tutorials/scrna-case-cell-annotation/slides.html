@@ -36,11 +36,11 @@ requirements:
 
 ### What is Cell Annotation?
 
-- Categorising cells into cell type categories based on transcriptomic data
+- Classify cells in your data into different cell types based on gene expression data
 
 - Can be done manually or automatically
 
-- Is possible due to single-cell sequencing technology
+- Single-cell sequencing technology provides higher resolution than bulk RNA-seq
 
 ![Basic pipeline for automated cell annotation](../../images/scrna-cell-annotation/cell-annotation.png)
 
@@ -52,9 +52,35 @@ This process can be done manually or automatically using a wide range of algorit
 
 ---
 
-### Why is it Important?
+### Why is Cell Annotation Important?
 
-- Able to process and analyse single cell data much faster than manual analysis
+
+- To understand the composition of cell types in samples (cellular heterogeneity) 
+
+- To compare changes in cell populations or states across different condition and phenotypes
+
+- To perform differential expression within each cell type to avoid signal dilution from mixed cell type population
+
+- To identify novel cell states and study some cell population further
+
+???
+
+The power of single-cell RNA-seq lies in its ability to capture the transcriptome at single-cell resolution. 
+
+However, a significant challenge is accurately classifying cells into distinct types before beginning downstream analysis. 
+
+Once cells are annotated, we can examine the composition of cell types within each sample and compare them across conditions. 
+
+This precise classification enables differential expression analysis within specific cell types, a key objective of single-cell experiments.
+
+
+---
+
+### Why Automate Cell Annotation?
+
+- Each single-cell experiment can generate data for thousands of cells
+
+- Manual annotation is time consuming and requires domain expertise
 
 - Can produce results more consistently allowing for reproducibility of results
 
@@ -84,7 +110,7 @@ What data should we use to classify cells?
 
 - Cell annotation uses sc-RNA seq data
 
-- Gene expressions are stored in a gene expression matrix (X)
+- Gene expressions are stored in a gene expression matrix (X) <br><br>
 
 Common data types:
 
@@ -106,13 +132,18 @@ There are many different formats for storing this data and metadata, since diffe
 
 ---
 
-### Challenges
+### Challenges in Automated Cell Type Annotation
 
-- Data is often noisy due to amplification techniques, varying sequencing depths, and errors in the reads
+- Noise due to amplification techniques, varying sequencing depths, and sequencing errors
+
+- Difference in QC steps for reference and query dataset may introduce a bias
 
 - Cell type definitions are inherently subjective and may be suboptimal
 
+- Lack of a suitable reference panel for the query dataset can result in inaccurate classification, especially when dealing with unknown cell states
+
 - Dealing with unknown cell types due to undiscovered classifications
+
 
 ???
 
@@ -128,9 +159,11 @@ There are some challenges that need to be faced in order to perform automated ce
 
 ### Manual Cell Annotation
 
-- Generate a cluster map and manually annotate each clusters
+- Requires known marker genes for cell types of interest
 
-- Requires the researchers to find known marker genes in the data
+- Generate the UMAP/tSNE (see below) to visualize the expression values
+
+- If you have clustered the cells, you can use dotplots or violin plots to measure the average expression of these genes
 
 ![Various cell cluster diagrams showing the expression values of various marker genes](../../images/scrna-cell-annotation/manual-annotation.png)
 
@@ -154,7 +187,7 @@ The figure shows a graph for each marker gene we are interested in, it can be se
 
 .pull-left[
 
-- The process of identifying unique gene expressions that can be used for identifying cell types
+- The process of identifying genes that are uniquely expressed in certain cell types
 
 - Genes are selected based on how differently they are expressed across different cell types
 
