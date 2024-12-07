@@ -1,0 +1,42 @@
+- doc: Test outline for main_workflow.ga
+  job:
+    Fastq PE inputs:
+      class: Collection
+      collection_type: 'list:paired'
+      elements:
+        - class: Collection
+          type: paired
+          identifier: Rep1
+          elements:
+          - identifier: forward
+            class: File
+            location: https://zenodo.org/record/6823059/files/Rep1_R1.fastq
+            filetype: fastqsanger
+          - identifier: reverse
+            class: File
+            location: https://zenodo.org/record/6823059/files/Rep1_R2.fastq
+            filetype: fastqsanger
+        - class: Collection
+          type: paired
+          identifier: Rep2
+          elements:
+          - identifier: forward
+            class: File
+            location: https://zenodo.org/record/6823059/files/Rep2_R1.fastq
+            filetype: fastqsanger
+          - identifier: reverse
+            class: File
+            location: https://zenodo.org/record/6823059/files/Rep2_R2.fastq
+            filetype: fastqsanger
+    GATA1_ChIP-Seq peaks:
+      class: File
+      location: https://zenodo.org/record/6823059/files/chip_seq_peaks.bed
+      filetype: bed
+    Non-Commercial purposes: true
+  outputs:
+    MEME-ChIP html output:
+      asserts:
+        - that: "has_text"
+          text: '"freqs": [0.2739, 0.2261, 0.2261, 0.2739]'
+        - that: "has_text"
+          text: '"id": "HGATAA"'
