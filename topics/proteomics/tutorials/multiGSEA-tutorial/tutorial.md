@@ -2,6 +2,12 @@
 layout: tutorial_hands_on
 
 title: Using MultiGSEA
+subtopic: multi-omics
+tags: 
+  - multi-omics
+  - transcriptomics
+  - proteomics
+  - metabolomics
 zenodo_link: 'https://zenodo.org/records/14216972'
 questions:
 - How to use MultiGSEA for GSEA-based pathway enrichment for multiple omics layers?
@@ -13,7 +19,7 @@ key_points:
 - MultiGSEA provides an integrated workflow for pathway enrichment analysis across multi-omics data.
 - Supports pathway definitions from several databases and robust ID mapping.
 contributors:
-- stehling
+- tStehling
 
 
 ---
@@ -43,6 +49,7 @@ To perform pathway enrichment with MultiGSEA, you'll need omics datasets in the 
 
 > ### Data Upload
 >
+><hands-on-title> Getting datasets </hands-on-title>
 > 1. Create a new history for this tutorial.
     {% snippet faqs/galaxy/histories_create_new.md %}
 > 2. Import the datasets from [Zenodo]({{ page.zenodo_link }})  into your Galaxy instance:
@@ -50,6 +57,13 @@ To perform pathway enrichment with MultiGSEA, you'll need omics datasets in the 
 >   - **proteomics.tsv**
 >   - **metabolomics.tsv**
 >
+> <comment-title>URLs of the files</comment-title>
+> - **transcriptomics.tsv** https://zenodo.org/api/records/14216972/files/transcriptome.tsv/content
+>   - **proteomics.tsv**    https://zenodo.org/api/records/14216972/files/proteome.tsv/content
+>   - **metabolomics.tsv**  https://zenodo.org/api/records/14216972/files/metabolome.tsv/content
+>  
+{: .comment}
+{: .hands_on}
 
 # Running MultiGSEA
 
@@ -73,10 +87,7 @@ In this step, you'll use the MultiGSEA tool to perform GSEA-based pathway enrich
 > 7. **P-value correction method** (for controlling false discovery rate): Choose `Holm`.
 > 8. Click on `Run Tool`
 >
->    {% snippet faqs/galaxy/tools_run.md %}
 {: .hands_on}
-
----
 
 
 > <question-title></question-title>
