@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6853b1bc36f26630048d6fa1c8f68724c98fb09f",
+		release: "galaxy-training-network@d13f34443afc8a5bf889694645cd86426b973a41",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Calling very rare variants">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-09 08:55:09 +0000">
+<meta name="DC.date" content="2024-12-09 16:48:19 +0000">
 <meta name="DC.creator" content="Anton Nekrutenko">
 <meta name="DC.creator" content="Nick Stoler"><meta name="description" content="Genetic differences (variants) between healthy and diseased tissue, between individuals of a population, or between strains of an organism can provide mechanistic insight into disease processes and the natural function of affected genes.  The tutorials in this section show how to detect evidence for genetic variants in next-generation sequencing data, a process termed variant calling.  Of equal importance, they also demonstrate how you can interpret, for a range of different organisms, the resulting sets of variants by predicting their molecular effects on genes and proteins, by annotating previously observed variants with published knowledge, and by trying to link phenotypes of the sequenced samples to their variant genotypes. ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -188,8 +188,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "workTranslation": [
 
   ],
-  "creativeWorkStatus": "Draft",
-  "dateModified": "2023-11-09 08:55:09 +0000",
+  "creativeWorkStatus": "Active",
+  "dateModified": "2024-12-09 16:48:19 +0000",
   "datePublished": "2017-02-22 11:51:41 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -251,7 +251,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Calling very rare variants",
   "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/dunovo/tutorial.html",
-  "version": 20,
+  "version": 21,
   "timeRequired": "PT3H",
   "teaches": "- Processing raw duplex sequencing data into consensus sequences\n- Find rare variants without relying on diploid assumptions",
   "keywords": [
@@ -1314,6 +1314,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "@type": "Thing",
       "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/dunovo/workflows/",
       "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://doi.org/10.5281/zenodo.3554549",
+      "name": "Associated Training Datasets"
     }
   ]
 }</script></head>
@@ -1481,12 +1486,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <article class="tutorial topic-variant-analysis">
     <h1 data-toc-skip>Calling very rare variants</h1>
-    
-    <div class="alert alert-warning" role="alert">
-        <h4 class="alert-heading">Under Development!</h4>
-        <p>This tutorial is not in its final state. The content may change a lot in the next months.
-        Because of this status, it is also not listed in the topic pages.</p>
-    </div>
     
 
     <section aria-labelledby="overview-box" id="tutorial-metadata">
@@ -1718,6 +1717,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
 
             
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://doi.org/10.5281/zenodo.3554549">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
 
             
                 <li class="btn btn-default supporting_material">
@@ -1789,12 +1797,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</li>
     
     
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
-			UseGalaxy.be <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
-		</a>
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
 	</li>
     
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
+			UseGalaxy.be
+		</a>
+	</li>
     
     
 
@@ -1806,7 +1819,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 22, 2017 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 9, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 9, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1824,7 +1837,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 20 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 21 </div>
 
     </blockquote>
     </section>
@@ -1956,25 +1969,58 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="getting-data-in-and-assessing-quality">Getting data in and assessing quality</h2>
 
-<p>We uploaded the <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/">Schmitt <em>et al.</em> 2015</a> data directly from SRA as shown in <a href="https://vimeo.com/121187220">this screencast</a>.</p>
+<p>You can obtain the data from <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/">Schmitt <em>et al.</em> 2015</a> from <a href="https://doi.org/10.5281/zenodo.3554549">Zenodo</a>, or just import the data from the Galaxy Data library under the “GTN Materials” folder.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-importing-the-raw-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Importing the raw data</div>
 
-  <p>You can obtain the reads from this dataset by copying <a href="https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015">this history</a>.</p>
   <ol>
-    <li>Make sure you’re logged into <a href="https://usegalaxy.org">Galaxy</a>.</li>
-    <li>Go to <a href="https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015">the history</a>.</li>
-    <li>Click on <strong>Import history</strong> in the upper right.</li>
+    <li>
+      <p><strong>Import</strong> the datasets from Zenodo, or from a data library.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3554549/files/SRR1799908_forward.fastq
+https://zenodo.org/record/3554549/files/SRR1799908_reverse.fastq
+</code></pre></div>      </div>
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the datasets to</p>
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">SRR1799908_forward</code></li>
+        <li><code class="language-plaintext highlighter-rouge">SRR1799908_reverse</code></li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
   </ol>
 
-  <p>Or, if you’d like to use a different Galaxy instance, you can import it:</p>
+</blockquote>
+
+<p>This creates two datasets in our galaxy history: one for forward reads and one for reverse.</p>
+
+<p>We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse):</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-evaluating-input-read-quality"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Evaluating input read quality</div>
+
   <ol>
-    <li>Click on the gear icon at the top of the <strong>History</strong> pane.</li>
-    <li>Click on “Import from File” at the bottom of the menu.</li>
-    <li>Enter this link in the box under <strong>Archived History URL</strong>:
-<code class="language-plaintext highlighter-rouge">https://usegalaxy.org/history/export_archive?id=7ac09d1db287dbba</code></li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.74+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Short read data from your current history</em>: One of the raw FASTQ datasets (<code class="language-plaintext highlighter-rouge">SRR1799908_forward</code>)</li>
+        <li>Leave the rest of the options as their defaults.</li>
+      </ul>
+    </li>
+    <li>Repeat with the other FASTQ file (<code class="language-plaintext highlighter-rouge">SRR1799908_reverse</code>)</li>
   </ol>
+
 </blockquote>
 
 <p>This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>FastQC</strong> in the dedicated <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-quality-with-fastqc---short--long-reads">quality-control tutorial</a>.</p>
@@ -1998,28 +2044,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>Now we are ready to collapse the raw reads into duplex consensus sequences.</p>
 
-<blockquote class="comment">
-  <div class="box-title comment-title" id="comment-finding-du-novo"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Finding Du Novo</div>
-  <ul>
-    <li>The tools in this portion of the tutorial can all be found in the <strong>NGS: Du Novo</strong> section.</li>
-  </ul>
-</blockquote>
-
 <h3 id="sorting-reads-into-families">Sorting reads into families</h3>
 
-<p>The <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Du Novo: Make families</strong> tool will separate the 12bp tags from each read pair and concatenate them into a 24bp barcode. Then it will use the barcodes to sort the reads into families that all descend from the same original fragment.</p>
+<p>The <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Du Novo: Make families</strong> tool will separate the 12bp tags from each read pair and concatenate them into a 24bp barcode. Then, it will use the barcodes to sort the reads into families that all descend from the same original fragment.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-sorting-reads-into-families"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Sorting reads into families</div>
 
-  <p>Run <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Du Novo: Make families</strong> with the following parameters:</p>
-  <ul>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Sequencing reads, mate 1</em>: <code class="language-plaintext highlighter-rouge">1: SRR1799908_forward</code></li>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Sequencing reads, mate 2</em>: <code class="language-plaintext highlighter-rouge">2: SRR1799908_reverse</code></li>
-    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Tag length</em>: <code class="language-plaintext highlighter-rouge">12</code></li>
-  </ul>
-
-  <p>Output: <code class="language-plaintext highlighter-rouge">7: Du Novo: Make families on data 2 and data 1</code></p>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nick/dunovo/make_families/3.0.2" title="Du Novo: Make families tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Du Novo: Make families</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.2)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Sequencing reads, mate 1</em>: The forward raw reads (<code class="language-plaintext highlighter-rouge">SRR1799908_forward</code>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Sequencing reads, mate 2</em>: The reverse raw reads (<code class="language-plaintext highlighter-rouge">SRR1799908_reverse</code>)</li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Tag length</em>: <code class="language-plaintext highlighter-rouge">12</code></li>
+      </ul>
+    </li>
+  </ol>
 </blockquote>
 
 <h3 id="correcting-barcodes">Correcting barcodes</h3>
@@ -2031,13 +2071,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-correcting-barcodes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Correcting barcodes</div>
 
-  <p>Run <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Du Novo: Correct barcodes</strong> with the following parameters:</p>
-  <ul>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input reads</em>: <code class="language-plaintext highlighter-rouge">7: Du Novo: Make families on data 2 and data 1</code></li>
-    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Maximum differences</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
-  </ul>
-
-  <p>Output: <code class="language-plaintext highlighter-rouge">8: Du Novo: Correct barcodes on data 7</code></p>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nick/dunovo/correct_barcodes/3.0.2" title="Du Novo: Correct barcodes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Du Novo: Correct barcodes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.2)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input reads</em>: The output of <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Make families</strong></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Maximum differences</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+      </ul>
+    </li>
+  </ol>
 </blockquote>
 
 <h3 id="aligning-families">Aligning families</h3>
@@ -2057,13 +2098,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-aligning-families"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Aligning families</div>
 
-  <p>Run <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Du Novo: Align families</strong> with the following parameters:</p>
-  <ul>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input reads</em>: <code class="language-plaintext highlighter-rouge">8: Du Novo: Correct barcodes on data 7</code></li>
-    <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Multiple sequence aligner</em>: <code class="language-plaintext highlighter-rouge">Kalign2</code></li>
-  </ul>
-
-  <p>Output: <code class="language-plaintext highlighter-rouge">9: Du Novo: Align families on data 8</code></p>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nick/dunovo/align_families/3.0.2" title="Du Novo: Align families tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Du Novo: Align families</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.2)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input reads</em>: The output of <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Correct barcodes</strong></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Multiple sequence aligner</em>: <code class="language-plaintext highlighter-rouge">Kalign2</code></li>
+      </ul>
+    </li>
+  </ol>
 </blockquote>
 
 <h3 id="making-consensus-sequences">Making consensus sequences</h3>
@@ -2075,22 +2117,23 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-making-consensus-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Making consensus sequences</div>
 
-  <p>Run <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Du Novo: Make consensus reads</strong> with the following parameters:</p>
-  <ul>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Aligned input reads</em>: <code class="language-plaintext highlighter-rouge">9: Du Novo: Align families on data 8</code></li>
-    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minimum reads for a consensus sequence</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
-    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Consensus % threshold</em>: <code class="language-plaintext highlighter-rouge">0.7</code></li>
-    <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Output format</em>: <code class="language-plaintext highlighter-rouge">FASTQ</code></li>
-    <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Output single-strand consensus sequences as well</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-  </ul>
-
-  <p>Outputs:</p>
-  <ul>
-    <li><code class="language-plaintext highlighter-rouge">10: Du Novo: Make consensus reads on data 9 (mate 1)</code></li>
-    <li><code class="language-plaintext highlighter-rouge">11: Du Novo: Make consensus reads on data 9 (mate 2)</code></li>
-    <li><code class="language-plaintext highlighter-rouge">12: Du Novo: Make consensus reads on data 9 (SSCS mate 1)</code></li>
-    <li><code class="language-plaintext highlighter-rouge">13: Du Novo: Make consensus reads on data 9 (SSCS mate 2)</code></li>
-  </ul>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nick/dunovo/dunovo/3.0.2" title="Du Novo: Make consensus reads tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Du Novo: Make consensus reads</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.2)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Aligned input reads</em>: The output of <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Align families</strong></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minimum reads for a consensus sequence</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Consensus % threshold</em>: <code class="language-plaintext highlighter-rouge">0.7</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Output format</em>: <code class="language-plaintext highlighter-rouge">FASTQ</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Output single-strand consensus sequences as well</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>This tool will produce 4 output files, in two sets of paired-end FASTQ files:
+      <ul>
+        <li>one pair for the single-stranded consensus sequences (called <code class="language-plaintext highlighter-rouge">SSCS mate 1</code> and <code class="language-plaintext highlighter-rouge">2</code>)</li>
+        <li>one pair for the double-stranded consensus sequences (called <code class="language-plaintext highlighter-rouge">mate 1</code> and <code class="language-plaintext highlighter-rouge">2</code>).</li>
+      </ul>
+    </li>
+  </ol>
 </blockquote>
 
 <blockquote class="comment">
@@ -2131,24 +2174,21 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-filtering-the-consensus-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering the consensus sequences</div>
 
-  <p>Run <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Sequence Content Trimmer</strong> with the following parameters:</p>
-  <ul>
-    <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Paired reads?</em>: <code class="language-plaintext highlighter-rouge">Paired</code></li>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input reads (mate 1)</em>: <code class="language-plaintext highlighter-rouge">10: Du Novo: Make consensus reads on data 9 (mate 1)</code></li>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input reads (mate 2)</em>: <code class="language-plaintext highlighter-rouge">11: Du Novo: Make consensus reads on data 9 (mate 2)</code></li>
-    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Bases to filter on</em>: <code class="language-plaintext highlighter-rouge">ACGT</code></li>
-    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Frequency threshold</em>: <code class="language-plaintext highlighter-rouge">0.2</code></li>
-    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Size of the window</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
-    <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Invert filter bases</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-    <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Set a minimum read length</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minimum read length</em>: <code class="language-plaintext highlighter-rouge">50</code></li>
-  </ul>
-
-  <p>Outputs:</p>
-  <ul>
-    <li><code class="language-plaintext highlighter-rouge">14: Sequence Content Trimmer on data 10 and data 11</code></li>
-    <li><code class="language-plaintext highlighter-rouge">15: Sequence Content Trimmer on data 10 and data 11</code></li>
-  </ul>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nick/sequence_content_trimmer/sequence_content_trimmer/0.2.3" title="Sequence Content Trimmer tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sequence Content Trimmer</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.3)</span> with the following parameters:
+      <ul>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Paired reads?</em>: <code class="language-plaintext highlighter-rouge">Paired</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input reads (mate 1)</em>: The double-stranded output of <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Make consensus reads</strong> (mate 1)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input reads (mate 2)</em>: The double-stranded output of <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Make consensus reads</strong> (mate 2)</li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Bases to filter on</em>: <code class="language-plaintext highlighter-rouge">ACGT</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Frequency threshold</em>: <code class="language-plaintext highlighter-rouge">0.2</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Size of the window</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Invert filter bases</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Set a minimum read length</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minimum read length</em>: <code class="language-plaintext highlighter-rouge">50</code></li>
+      </ul>
+    </li>
+  </ol>
 </blockquote>
 
 <h1 id="calling-variants-with-duplex-consensus-sequences">Calling variants with duplex consensus sequences</h1>
@@ -2166,14 +2206,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-align-with-bwa-mem"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Align with BWA-MEM</div>
 
-  <p>Run <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Map with BWA-MEM</strong> with the following parameters:</p>
-  <ul>
-    <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Using reference genome?</em>: <code class="language-plaintext highlighter-rouge">Human (Homo sapiens) (b38): hg38</code></li>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Select first set of reads</em>: <code class="language-plaintext highlighter-rouge">14: Sequence Content Trimmer on data 10 and data 11</code></li>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Select second set of reads</em>: <code class="language-plaintext highlighter-rouge">15: Sequence Content Trimmer on data 10 and data 11</code></li>
-  </ul>
-
-  <p>Output: <code class="language-plaintext highlighter-rouge">16: Map with BWA-MEM on data 15 and data 14 (mapped reads in BAM format)</code></p>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.18" title="Map with BWA-MEM tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.18)</span> with the following parameters:
+      <ul>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Using reference genome?</em>: <code class="language-plaintext highlighter-rouge">Human (Homo sapiens) (b38): hg38</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Select first set of reads</em>: The first output from the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Sequence Content Trimmer</strong></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Select second set of reads</em>: The second output from the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Sequence Content Trimmer</strong></li>
+      </ul>
+    </li>
+  </ol>
 </blockquote>
 
 <h3 id="left-aligning-indels">Left Aligning indels</h3>
@@ -2183,17 +2224,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-left-align-indels"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Left-align indels</div>
 
-  <p>Run <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>BamLeftAlign</strong> with the following parameters:</p>
-  <ul>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Select alignment file in BAM format</em>: <code class="language-plaintext highlighter-rouge">16: Map with BWA-MEM on data 15 and data 14 (mapped reads in BAM format)</code></li>
-    <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Using reference genome</em>: <code class="language-plaintext highlighter-rouge">Human (Homo sapiens): hg38</code>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.8" title="BamLeftAlign tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BamLeftAlign</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.8)</span> with the following parameters:
       <ul>
-        <li>The same genome we aligned to.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Select alignment file in BAM format</em>: The output of <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Map with BWA-MEM</strong></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Using reference genome</em>: <code class="language-plaintext highlighter-rouge">Human (Homo sapiens): hg38</code>
+          <ul>
+            <li>The same genome we aligned to.</li>
+          </ul>
+        </li>
       </ul>
     </li>
-  </ul>
-
-  <p>Output: <code class="language-plaintext highlighter-rouge">17: BamLeftAlign on data 16 (alignments)</code></p>
+  </ol>
 </blockquote>
 
 <h2 id="calling-the-variants">Calling the variants</h2>
@@ -2211,34 +2253,35 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-count-the-variants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Count the variants</div>
 
-  <p>Run <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Naive Variant Caller (NVC)</strong> with the following parameters:</p>
-  <ul>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>BAM file</em>: <code class="language-plaintext highlighter-rouge">17: BamLeftAlign on data 16 (alignments)</code></li>
-    <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Using reference genome</em>: <code class="language-plaintext highlighter-rouge">hg38</code>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/blankenberg/naive_variant_caller/naive_variant_caller/0.0.4" title="Naive Variant Caller (NVC) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Naive Variant Caller (NVC)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.4)</span> with the following parameters:
       <ul>
-        <li>The same genome we aligned to.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>BAM file</em>: The output of <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>BamLeftAlign</strong></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Using reference genome</em>: <code class="language-plaintext highlighter-rouge">hg38</code>
+          <ul>
+            <li>The same genome we aligned to.</li>
+          </ul>
+        </li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Insert Restrict to regions</em>: Click to add a region.</li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Chromosome</em>: <code class="language-plaintext highlighter-rouge">chr9</code>
+          <ul>
+            <li><em>ABL1</em> is on chr9. Restricting it to this region saves some processing time.</li>
+          </ul>
+        </li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minimum base quality</em>: <code class="language-plaintext highlighter-rouge">0</code>
+          <ul>
+            <li>In our case, base quality <a href="#details-where-do-the-fastq-quality-scores-come-from">isn’t meaningful</a>, so we set the threshold to 0.</li>
+          </ul>
+        </li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minimum mapping quality</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Ploidy</em>: <code class="language-plaintext highlighter-rouge">1</code>
+          <ul>
+            <li>Ploidy is irrelevant here as it is a mixture of multiple genomes.</li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Insert Restrict to regions</em>: Click to add a region.</li>
-    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Chromosome</em>: <code class="language-plaintext highlighter-rouge">chr9</code>
-      <ul>
-        <li><em>ABL1</em> is on chr9. Restricting it to this region saves some processing time.</li>
-      </ul>
-    </li>
-    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minimum base quality</em>: <code class="language-plaintext highlighter-rouge">0</code>
-      <ul>
-        <li>In our case, base quality <a href="#details-where-do-the-fastq-quality-scores-come-from">isn’t meaningful</a>, so we set the threshold to 0.</li>
-      </ul>
-    </li>
-    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minimum mapping quality</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
-    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Ploidy</em>: <code class="language-plaintext highlighter-rouge">1</code>
-      <ul>
-        <li>Ploidy is irrelevant here as it is a mixture of multiple genomes.</li>
-      </ul>
-    </li>
-  </ul>
-
-  <p>Output: <code class="language-plaintext highlighter-rouge">18: Naive Variant Caller (NVC) on data 17</code></p>
+  </ol>
 </blockquote>
 
 <p>The <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Naive Variant Caller (NVC)</strong> generates a <a href="https://en.wikipedia.org/wiki/Variant_Call_Format">VCF</a> file that can be viewed at genome browsers such as <a href="https://www.broadinstitute.org/igv/">IGV</a>. Yet one rarely finds variants by looking at genome browsers. We’ll want to use tools to search for variants that fit our criteria.</p>
@@ -2250,19 +2293,20 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-read-the-variants-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read the variants file</div>
 
-  <p>Run <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Variant Annotator</strong> with the following parameters:</p>
-  <ul>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input variants from Naive Variants Detector</em>: <code class="language-plaintext highlighter-rouge">18: Naive Variant Caller (NVC) on data 17</code></li>
-    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minor allele frequency threshold</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
-    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Coverage threshold</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
-    <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Output stranded base counts</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nick/allele_counts/allele_counts_1/1.3.2" title="Variant Annotator tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Variant Annotator</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.2)</span> with the following parameters:
       <ul>
-        <li>To be able to filter for strand bias.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Input variants from Naive Variants Detector</em>: The output of <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Naive Variant Caller (NVC)</strong></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Minor allele frequency threshold</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Coverage threshold</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Output stranded base counts</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+          <ul>
+            <li>To be able to filter for strand bias.</li>
+          </ul>
+        </li>
       </ul>
     </li>
-  </ul>
-
-  <p>Output: <code class="language-plaintext highlighter-rouge">19: Variant Annotator on data 18</code></p>
+  </ol>
 </blockquote>
 
 <h3 id="filtering-out-the-noise">Filtering out the noise</h3>
@@ -2274,14 +2318,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-filter-the-raw-variants-list"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter the raw variants list</div>
 
-  <p>Run <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Filter</strong> with the following parameters:</p>
-  <ul>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Filter</em>: <code class="language-plaintext highlighter-rouge">19: Variant Annotator on data 18</code></li>
-    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>With following condition</em>: <code class="language-plaintext highlighter-rouge">c16 &gt;= 0.01</code></li>
-    <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Number of header lines to skip</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-  </ul>
-
-  <p>Output: <code class="language-plaintext highlighter-rouge">20: Filter on data 19</code></p>
+  <ol>
+    <li><span class="tool" data-tool="Filter1" title="Filter - data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter - data on any column using simple expressions</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Filter</em>: The output of <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Variant Annotator</strong></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>With following condition</em>: <code class="language-plaintext highlighter-rouge">c16 &gt;= 0.01</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Number of header lines to skip</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      </ul>
+    </li>
+  </ol>
 </blockquote>
 
 <h2 id="results">Results</h2>
@@ -2323,15 +2368,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h1 id="calling-variants-with-single-strand-consensus-sequences">Calling variants with single strand consensus sequences</h1>
 
-<p>Analysis of SSCS data follows the exact same trajectory:</p>
+<p>To analyze the SSCS data, go back to the <a href="#filtering-consensuses">Filtering consensuses</a> step, and replace the input to the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Sequence Content Trimmer</strong> with the single-stranded output of <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Make consensus reads</strong> instead of the double-stranded output. Then continue through the same steps as before, with the same parameters, to the end.</p>
 
-<ul>
-  <li><a href="#filtering-consensuses">Filtering consensuses</a></li>
-  <li><a href="#mapping-the-reads">Mapping the reads</a>
- 	- <a href="#align-against-the-genome-with-bwa-mem">Aligning against genome</a>
- 	- <a href="#left-aligning-indels">Left aligning indels</a></li>
-  <li><a href="#calling-the-variants">Calling the variants</a></li>
-</ul>
+<p>Then you will have a new set of variants, but produced with the SSCS reads, giving you a higher sensitivity (fewer false negatives), but lower specificity (more false positives).</p>
 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-re-running-with-the-same-settings"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-re-running-with-the-same-settings" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Re-running with the same settings</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2352,7 +2391,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <p>We’ve prepared two workflows which split the above analysis into two steps:</p>
 
 <ol>
-  <li><a href="https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial">Using Du Novo</a> to create consensus sequences from raw reads.
+  <li><a href="./workflows/">Using Du Novo</a> to create consensus sequences from raw reads.
     <ul>
       <li>This will generate trimmed DCS and SSCS files from raw sequencing data.</li>
       <li>This does not include the FastQC step. You should always run FastQC on your raw reads first, to check the quality of your sequencing run before proceeding with the analysis.</li>
@@ -2366,7 +2405,7 @@ This is because we want to make sure you only share data knowingly.</p>
       <p>But again, if you’d like to help improve Du Novo, consider turning it on.</p>
     </blockquote>
   </li>
-  <li><a href="https://usegalaxy.org/u/nstoler/w/copy-of-du-novo-gtn-tutorial">Calling variants</a> from consensus sequences.
+  <li><a href="./workflows/">Calling variants</a> from consensus sequences.
     <ul>
       <li>This takes a pair of FASTQ files and calls variants using them.</li>
       <li>If you’d like variants from both DCS and SSCS, you’ll have to run this twice, once on each.</li>
@@ -2377,16 +2416,12 @@ This is because we want to make sure you only share data knowingly.</p>
 
 <p>You can use the variant calling workflow to call variants using the SSCS instead of the DCS.</p>
 
-<figure id="figure-1" style="max-width: 90%;"><img src="../../images/workflow-dunovo.png" alt="Du Novo workflow. " width="1053" height="438" loading="lazy" /><a target="_blank" href="../../images/workflow-dunovo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Workflow 1: Making consensus sequences</figcaption></figure>
-
-<figure id="figure-2" style="max-width: 90%;"><img src="../../images/workflow-dunovo-variant-calling.png" alt="Variant calling workflow. " width="777" height="360" loading="lazy" /><a target="_blank" href="../../images/workflow-dunovo-variant-calling.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Workflow 2: Variant calling</figcaption></figure>
-
 <h1 id="conclusion">Conclusion</h1>
 
 <p>You should now understand duplex sequencing, rare variants, and be able to process the former to find the latter.</p>
 
 <h3 id="if-things-dont-work">If things don’t work…</h3>
-<p>…you need to complain. Use <a href="https://help.galaxyproject.org/">Galaxy’s Help Channel</a> to do this.</p>
+<p>…you need to complain. Use <a href="https://help.galaxyproject.org/">Galaxy’s Help Forum</a> to do this.</p>
 
                 </section>
 
@@ -2553,9 +2588,24 @@ tools:
   revisions: 3fe632431b68
   tool_panel_section_label: Mapping
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bwa
+  owner: devteam
+  revisions: 2477830927ec
+  tool_panel_section_label: Mapping
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: fastqc
+  owner: devteam
+  revisions: 2c64fded1286
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: freebayes
   owner: devteam
   revisions: 156b60c1530f
+  tool_panel_section_label: Variant Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: freebayes
+  owner: devteam
+  revisions: 3e954e7125bf
   tool_panel_section_label: Variant Calling
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: allele_counts
@@ -2563,10 +2613,10 @@ tools:
   revisions: 411adeff1eec
   tool_panel_section_label: Variant Calling
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: dunovo
+- name: allele_counts
   owner: nick
-  revisions: 9dc43bf7d1db
-  tool_panel_section_label: Du Novo
+  revisions: cf2af5c3118c
+  tool_panel_section_label: Variant Calling
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: dunovo
   owner: nick
@@ -2580,12 +2630,37 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: dunovo
   owner: nick
+  revisions: 0f8e0dc73d1d
+  tool_panel_section_label: Du Novo
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: dunovo
+  owner: nick
   revisions: 9dc43bf7d1db
+  tool_panel_section_label: Du Novo
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: dunovo
+  owner: nick
+  revisions: 0f8e0dc73d1d
+  tool_panel_section_label: Du Novo
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: dunovo
+  owner: nick
+  revisions: 9dc43bf7d1db
+  tool_panel_section_label: Du Novo
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: dunovo
+  owner: nick
+  revisions: 0f8e0dc73d1d
   tool_panel_section_label: Du Novo
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: sequence_content_trimmer
   owner: nick
   revisions: 7f170cb06e2e
+  tool_panel_section_label: Du Novo
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: sequence_content_trimmer
+  owner: nick
+  revisions: 464aee13e2df
   tool_panel_section_label: Du Novo
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 </code></pre></div>
@@ -2691,7 +2766,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6853b1bc36f26630048d6fa1c8f68724c98fb09f">6853b1b</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d13f34443afc8a5bf889694645cd86426b973a41">d13f344</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
