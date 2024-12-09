@@ -48,11 +48,17 @@ layout: base
 	<details>
 		<summary>Learning Objectives</summary>
 		<ul>
+		{% if section.learning_objectives %}
+			{% for lo in section.learning_objectives %}
+			<li>{{ lo }}</li>
+			{% endfor %}
+		{% else %}
 		{% for material in material_list %}
 			{% for lo in material.objectives %}
 			<li>{{ lo }}</li>
 			{% endfor %}
 		{% endfor %}
+		{% endif %}
 		</ul>
 	</details>
 	{% include _includes/tutorial_list.html sub=material_list %}
