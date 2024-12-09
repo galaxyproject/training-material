@@ -114,6 +114,19 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
+> 2. Install the docker role as well.
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-galaxy collection install community.docker
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+>    > <tip-title>Why doesn't this use the requirements.yml?</tip-title>
+>    > Ansible over time added the feature of 'collections' in addition to roles. It's a nice and convenient method for grouping roles together. Unfortunately this means we need to update a significant portion of the GAT learning path to use this, which we have not done yet, as it will take a bit of time to do. Collections come with the unpleasant additional aspect that they will be installed into a different path than roles, so we'll need to add a `collections` folder as well, or maybe `deps/collections` and `deps/roles` folders. When this happens we'll have to additionally modify the ansible.cfg to look for collections in this additional path.
+>    {: .tip}
+>
 > 3. Create the vars file
 >
 >    {% raw %}
