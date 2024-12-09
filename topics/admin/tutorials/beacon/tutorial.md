@@ -160,69 +160,11 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    > Here we again use some advanced features of Ansible's inventory system. Ansible knows the name of every hostname in the inventory. Now that we want to point the beacon configuration, either at the database which should be on `beacon_server`, or at Galaxy in `galaxyservers`, we ask the `groups` variable for what the inventory looks like. We use `[0]` to pull out the first hostname we find for both of those groups.
 >    {: .tip}
 >
-> 3. Add the beacon-server playbook
->
->    {% raw %}
->    ```diff
->    --- /dev/null
->    +++ b/beacon-server.yml
->    @@ -0,0 +1,9 @@
->    +---
->    +- name: Beacon Server
->    +  hosts: beacon_server
->    +  become: true
->    +  become_user: root
->    +  vars_files:
->    +    - group_vars/secret.yml
->    +  roles:
->    +    - paprikant.beacon
->    {% endraw %}
->    ```
->    {: data-commit="Add beacon server playbook"}
->
-> 5. Run the playbook
->
->    > <code-in-title>Bash</code-in-title>
->    > ```bash
->    > ansible-playbook beacon-server.yml
->    > ```
->    > {: data-cmd="true"}
->    {: .code-in }
->
->    TODO: Check that it works
->
-{: .hands_on}
-
-## Setting up the Importer
-
-Now that our beacon is running, we need to get data from Galaxy to the Beacon
-
-> <hands-on-title>Setting up the Beacon Importer</hands-on-title>
->
-> 1. Add the beacon-import playbook
->
->    {% raw %}
->    ```diff
->    --- /dev/null
->    +++ b/beacon-import.yml
->    @@ -0,0 +1,9 @@
->    +---
->    +- name: Beacon Importer
->    +  hosts: beacon_import
->    +  become: true
->    +  become_user: root
->    +  vars_files:
->    +    - group_vars/secret.yml
->    +  roles:
->    +    - paprikant.beacon-importer
->    {% endraw %}
->    ```
->    {: data-commit="Add beacon importer playbook"}
->
 > 1. Edit your `group_vars/secret.yml` and define some random passwords:
 >
 >    - The API key for your account, which must be an admin
->    
+>    - A password for the beacon database
+>
 >    {% snippet faqs/galaxy/preferences_admin_api_key.md admin=true %}
 >
 >    > <code-in-title>Bash</code-in-title>
@@ -299,6 +241,66 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >    {: data-commit="Add beacon/galaxy passwords to the vault"}
 >
 >    -->
+>
+>
+> 3. Add the beacon-server playbook
+>
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/beacon-server.yml
+>    @@ -0,0 +1,9 @@
+>    +---
+>    +- name: Beacon Server
+>    +  hosts: beacon_server
+>    +  become: true
+>    +  become_user: root
+>    +  vars_files:
+>    +    - group_vars/secret.yml
+>    +  roles:
+>    +    - paprikant.beacon
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add beacon server playbook"}
+>
+> 5. Run the playbook
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-playbook beacon-server.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in }
+>
+>    TODO: Check that it works
+>
+{: .hands_on}
+
+## Setting up the Importer
+
+Now that our beacon is running, we need to get data from Galaxy to the Beacon
+
+> <hands-on-title>Setting up the Beacon Importer</hands-on-title>
+>
+> 1. Add the beacon-import playbook
+>
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/beacon-import.yml
+>    @@ -0,0 +1,9 @@
+>    +---
+>    +- name: Beacon Importer
+>    +  hosts: beacon_import
+>    +  become: true
+>    +  become_user: root
+>    +  vars_files:
+>    +    - group_vars/secret.yml
+>    +  roles:
+>    +    - paprikant.beacon-importer
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add beacon importer playbook"}
 >
 > 1. Run the playbook
 >
