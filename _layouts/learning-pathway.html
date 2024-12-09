@@ -44,6 +44,23 @@ layout: base
 
 	{% if section.tutorials %}
         {% assign material_list = site | convert_to_material_list: section.tutorials %}
+	<p><strong>{% icon time aria=false %} {{ locale['time-estimation'] | default: "Time estimation"}}:</strong> {{ material_list | sum_duration }}</p>
+	<details>
+		<summary>Learning Objectives</summary>
+		<ul>
+		{% if section.learning_objectives %}
+			{% for lo in section.learning_objectives %}
+			<li>{{ lo }}</li>
+			{% endfor %}
+		{% else %}
+		{% for material in material_list %}
+			{% for lo in material.objectives %}
+			<li>{{ lo }}</li>
+			{% endfor %}
+		{% endfor %}
+		{% endif %}
+		</ul>
+	</details>
 	{% include _includes/tutorial_list.html sub=material_list %}
 	{% endif %}
     {% endfor %}
