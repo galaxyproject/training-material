@@ -2,8 +2,7 @@
 layout: tutorial_hands_on
 
 title: CUT&RUN data analysis
-draft: true
-zenodo_link: https://zenodo.org/record/3862793
+zenodo_link: https://zenodo.org/record/6823059
 questions:
 - Which binding motif has the transcription factor GATA1?
 - What kind of quality control do I have to do?
@@ -131,7 +130,7 @@ We first have to check if our data contains adapter sequences that we have to re
 >     - *"Input Collection"*: `2 PE fastqs`
 >
 > 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->       - *"Short read data from your current history"*: Choose the output of **Flatten collection** {% icon tool %}selected as **Dataset collection**.
+>       - {% icon param-collection %} *"Raw read data from your current history"*: Choose the output of **Flatten collection** {% icon tool %} selected as **Dataset collection**.
 > 3. Inspect the web page output of **FastQC** {% icon tool %} for the `Rep1_forward` sample. Check what adapters are found at the end of the reads.
 >
 > > <question-title></question-title>
@@ -159,19 +158,30 @@ We first have to check if our data contains adapter sequences that we have to re
 > > >
 > > >    4. **Adapter Content**
 > > >
-> > >       Our data contains an adapter that we still have to remove.
+> > >       Our data contains an adapter (Illumina Universal Adapter) that we still have to remove.
 > > >
 > > {: .solution}
 > >
 >    {: .question}
+>
+>    As it is tedious to inspect all these reports individually we will combine them with {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0) %}.
+>
+> 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0) %} to aggregate the FastQC reports with the following parameters:
+>    - In *"Results"*:
+>        - *"Results"*
+>            - *"Which tool was used generate logs?"*: `FastQC`
+>                - In *"FastQC output"*:
+>                    - {% icon param-repeat %} *"Insert FastQC output"*
+>                        - {% icon param-collection %} *"FastQC output"*: `FastQC on collection N: Raw data` (output of **FastQC** {% icon tool %})
+>
 {: .hands_on}
 
 > <comment-title>FastQC Results</comment-title>
-> This is what you should expect from the **Adapter Content** section:
-> ![FastQC screenshot of the Adapter Content section](../../images/cut_and_run/adapter_content_pre.png "FastQC screenshot on the Adapter Content section")
+> This is what you should expect from the **Adapter Content** section of multiQC:
+> ![MultiQC screenshot of the Adapter Content section](../../images/cut_and_run/fastqc_adapter_content_plot_pre.png "MultiQC screenshot on the Adapter Content section")
 {: .comment}
 
-The FastQC report pointed out that we have in our data some standard Illumina adapter sequences, which we will remove with Trim Galore!.
+The MultiQC report (of FastQC) pointed out that we have in our data some standard Illumina adapter sequences, which we will remove with Trim Galore!.
 
 ## Trimming Reads
 
@@ -179,7 +189,7 @@ The FastQC report pointed out that we have in our data some standard Illumina ad
 
 > <hands-on-title>Task description</hands-on-title>
 >
-> 1. {% tool [Trim Galore!]( https://toolshed.g2.bx.psu.edu/view/bgruening/trim_galore/cd7e644cae1d) %} with the following parameters:
+> 1. {% tool [Trim Galore!](toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.7+galaxy0) %} with the following parameters:
 >    - *"Is this library paired- or single-end?"*: `Paired Collection`
 >        - *"Select a paired collection"*: select `2 PE fastqs`
 >    - In *"Adapter sequence to be trimmed"*: `Illumina universal`
@@ -188,7 +198,7 @@ The FastQC report pointed out that we have in our data some standard Illumina ad
 >    - In *"Discard reads that became shorter than length N"*: `15`
 >    - In *"Generate a report file"*:   `Yes`
 >
-> 2. Click on the {% icon galaxy-eye %} (eye) icon of the report for `Rep1` and read the first lines.
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the report for `Rep1` and look for the info.
 {: .hands_on}
 
 > <question-title></question-title>
@@ -198,8 +208,8 @@ The FastQC report pointed out that we have in our data some standard Illumina ad
 >
 > > <solution-title></solution-title>
 > >
-> > 1. ~55% and ~57%
-> > 2. 100%
+> > 1. ~55% for Read 1 and ~57% for Read 2
+> > 2. The last line indicates that 3.5% of pairs have been removed.
 > >
 > {: .solution}
 >
@@ -216,32 +226,13 @@ The hg38 version of the human genome contains [alternate loci](https://www.ncbi.
 are present both in the canonical chromosome and on its alternate loci. The reads that map to these regions would map twice. To be able to filter reads falling into
 repetitive regions but keep reads falling into regions present in alternate loci, we will map on the Canonical version of hg38 (only the chromosome with numbers, chrX, chrY, and chrM).
 
-> <comment-title>Dovetailing</comment-title>
-> We will allow dovetailing of read pairs with Bowtie2. This is because adapters are removed by Cutadapt only when at least 3 bases match the adapter sequence, so it is possible that after trimming a read can contain 1-2 bases of adapter and go beyond it's mate start site. This occurs especially for CUT&RUN because the read length is quite short. Bowtie thus discards reads such as:
-> ```
-> ---------------------Mate 1--------------------------------->
-> <---------------------Mate 2----------------------
-> ```
->
-> or
->
-> ```
-> ---------------------Mate 1--------------------------------->
-> <---------------------Mate 2---------------------------------
-> ```
->
-> This is what we call dovetailing and we want to consider this pair as a valid concordant alignment.
-{: .comment}
-
-
 > <hands-on-title>Mapping reads to reference genome</hands-on-title>
 >
-> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.5+galaxy1) %} with the following parameters:
+> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.3+galaxy1) %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end Dataset Collection`
 >        - *"FASTQ Paired Dataset*: select the output of **Trim Galore!** {% icon tool %} *"paired reads"*
 >        - *"Do you want to set paired-end options?"*: `Yes`
 >            - *"Set the maximum fragment length for valid paired-end alignments"*: `1000`
->            - *"Allow mate dovetailing"*: `Yes`
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
 >        - *"Select reference genome"*: `Human (Homo sapiens): hg38 Canonical`
 >    - *"Set read groups information?"*: `Do not set`
@@ -264,7 +255,7 @@ repetitive regions but keep reads falling into regions present in alternate loci
 >
 > > <solution-title></solution-title>
 > >
-> > 41.46+57.51=98.97%
+> > 36.47+62.39=98.86%
 > >
 > {: .solution}
 >
@@ -280,13 +271,13 @@ so we remove these reads. We also remove reads with low mapping quality and read
 
 > <hands-on-title>Filtering of uninformative reads</hands-on-title>
 >
-> 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.1+galaxy0) %} with the following parameters:
+> 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.2+galaxy2) %} with the following parameters:
 >    - {% icon param-collection %} *"BAM dataset(s) to filter"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
 >    - In *"Condition"*:
->        - {% icon param-repeat %} *"Insert Condition"*
+>        - {% icon param-repeat %} *"Condition"*
 >            - In *"Filter"*:
->                - {% icon param-repeat %} *"Insert Filter"*
->                    - *"Select BAM property to filter on"*: `mapQuality`
+>                - *"Filter"*
+>                    - *"Select BAM property to filter on"*: `Mapping quality`
 >                        - *"Filter on read mapping quality (phred scale)"*: `>=30`
 >                - {% icon param-repeat %} *"Insert Filter"*
 >                    - *"Select BAM property to filter on"*: `Proper Pair`
@@ -294,7 +285,7 @@ so we remove these reads. We also remove reads with low mapping quality and read
 >                - {% icon param-repeat %} *"Insert Filter"*
 >                    - *"Select BAM property to filter on"*: `Reference name of the read`
 >                        - *"Filter on the reference name for the read"*: `!chrM`
->    - *"Would you like to set rules?"*: `No`
+>    - *"Would you like to set rules?"*: `False`
 >
 >
 > 2. Click on the input and the output BAM files of the filtering step. Check the size of the files.
@@ -308,7 +299,7 @@ so we remove these reads. We also remove reads with low mapping quality and read
 >
 > > <solution-title></solution-title>
 > >
-> > 1. The original BAM files are 14-15 MB, the filtered ones are 5.6 and 6.8 MB. Approximately half of the alignments were removed.
+> > 1. The original BAM files are 14-15 MB, the filtered ones are 5.8 and 7.1 MB. Approximately half of the alignments were removed.
 > >
 > > 2. You should modify the mapQuality criteria and decrease the threshold.
 > >
@@ -322,7 +313,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 
 > <hands-on-title>Remove duplicates</hands-on-title>
 >
-> 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3) %} with the following parameters:
+> 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/3.1.1.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Select SAM/BAM dataset or dataset collection"*: Select the output of  **Filter** {% icon tool %} *"BAM"*
 >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
 >
@@ -363,8 +354,8 @@ Because of the PCR amplification, there might be read duplicates (different read
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 81466
-> > 2. 983
+> > 1. 81460
+> > 2. 982
 > >
 > {: .solution}
 >
@@ -378,17 +369,24 @@ too much compared to the diversity of the library you generated. Consequently, l
 > <hands-on-title>Check Adapter Removal with FastQC</hands-on-title>
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->       - {% icon param-collection %} *"Short read data from your current history"*: select the output of **MarkDuplicates** .
+>       - {% icon param-collection %} *"Raw read data from your current history"*: select the output of **MarkDuplicates** BAM.
 >
-> 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0) %} to aggregate the FastQC reports with the following parameters:
+>    - In *"Results"*:
+>        - *"Results"*
+>            - *"Which tool was used generate logs?"*: `FastQC`
+>                - In *"FastQC output"*:
+>                    - {% icon param-repeat %} *"Insert FastQC output"*
+>                        - {% icon param-collection %} *"FastQC output"*: `FastQC on collection N: Raw data` (output of **FastQC** {% icon tool %})
+>
 {: .hands_on}
 
 > <comment-title>FastQC Results</comment-title>
 > Now, you should see under **Overrepresented sequences** that there is no more overrepresented sequences and under **Adapter Content** that the Illumina adapters are no longer present.
-> ![FastQC screenshot on the adapter content section after Trim Galore!](../../images/cut_and_run/adapter_content_post.png "FastQC screenshot on the adapter content section after Trim Galore!")
+> ![MultiQC screenshot on the adapter content section after Trim Galore!](../../images/cut_and_run/fastqc_adapter_content_plot_post.png "MultiQC screenshot on the adapter content section after Trim Galore!")
 > However, you may have noticed that you have a new section with warning: **Sequence Length Distribution**. This is expected as you trimmed part of the reads.
 > Furthermore, you will notice under **Sequence Duplication Levels** that we removed nearly all PCR duplicates.
-> ![FastQC screenshot on the duplication level after MarkDuplicates](../../images/cut_and_run/duplication_level.png "FastQC screenshot on the duplication level after MarkDuplicates")
+> ![MultiQC screenshot on the duplication level after MarkDuplicates](../../images/cut_and_run/fastqc_sequence_duplication_levels_plot.png "MultiQC screenshot on the duplication level after MarkDuplicates")
 {: .comment}
 
 ## Check Insert Sizes
@@ -445,7 +443,7 @@ We convert the BAM file to BED format because when we set the extension size in 
 
 > <hands-on-title>Convert the BAM to BED</hands-on-title>
 >
-> 1. {% tool [bedtools BAM to BED converter](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy2) %} with the following parameters:
+> 1. {% tool [bedtools BAM to BED converter](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.31.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Convert the following BAM file to BED"*: Select the output of **MarkDuplicates** {% icon tool %} BAM output
 >
 {: .hands_on}
@@ -455,7 +453,7 @@ We call peaks with MACS2. To get the coverage centered on the 5' extended 100bp 
 
 > <hands-on-title>Call peaks with MACS2</hands-on-title>
 >
-> 1. {% tool [MACS2 callpeak](toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0) %} with the following parameters:
+> 1. {% tool [MACS2 callpeak](toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0) %} with the following parameters:
 >    - *"Are you pooling Treatment Files?"*: `No`
 >        - {% icon param-collection %} Select the output of **bedtools BAM to BED** converter {% icon tool %}
 >    - *"Do you have a Control File?"*: `No`
@@ -512,7 +510,7 @@ We can remove such peaks if we simply overlap the two peak files and consequentl
 
 > <hands-on-title>Select robust GATA1 peaks:</hands-on-title>
 >
-> 1. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0+galaxy1) %} with the following parameters:
+> 1. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.31.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"File A to intersect with B"*: Select `Rep1`
 >    - *"Combined or separate output files"*: `One output file per 'input B' file`
 >        - {% icon param-file %} *"File B to intersect with A"*:  Select `Rep2`
@@ -533,8 +531,8 @@ We can remove such peaks if we simply overlap the two peak files and consequentl
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. 2,863 peaks
-> > > 2. We started with 6,314 and 7,683 peaks. Thus, we could remove 3,410 and 4765 peaks.
+> > > 1. 2,865 peaks
+> > > 2. We started with 6,314 and 7,678 peaks. Thus, we could remove 3,449 and 4,813 peaks.
 > > > 3. Finding robust peaks is a tricky process and not as simple as you think. Our approach defines a robust peak as an entity that is covered by two similar peaks in either one of the peak files of our two replicates. Our measurement for similarity is simply the amount of bases the peaks overlap. Yet, ask yourself, how much overlap do you need to state that they are similar? Is 1 base enough or maybe 10? The answer is not true or false and like so often needs more investigation. We define the overlap by a 50% fraction of each of the peak files. That means, if our peak in A is 100 bases then A has to overlap with 50 bases with the peak in file B.
 > > > 4. **"Require that the fraction of overlap be reciprocal for A and B"** means that 50% of the peak in file A overlaps with the peak in file B and also 50% of the peak in file B overlaps with the peak in file A. We set this to make our filtering very conservative and filter for peaks that we can be sure are true positives. For example, A has a 10 bp peak that overlaps a peak in B with 100 bp. **Viewpoint of file A:** An overlap-fraction of 0.5 for A means that we accept peak A if it overlaps with 5 bp with the peak in B. This is very likely because the peak in B is 100 bp long. **Viewpoint of file B**: An overlap-fraction of 0.5 for B means that we reject A no matter what, even if A completely overlaps B because 10 bp are not enough to cover 50% of B. That is to say the option **"Require that the fraction of overlap be reciprocal for A and B"** takes care that we trust peaks that have in file A **and** in file B a fair overlap.
 > > {: .solution}
@@ -559,21 +557,22 @@ We can further remove some noise with a positive control, that is why we have do
 >    - *"Calculation based on strandedness?"*: `Overlaps occurring on either strand`
 >    - *"Required overlap"*: `Specify minimum overlap(s)`
 >        - *"Minimum overlap required as a fraction of A"*: `0.5`
+>        - *"Require that the fraction of overlap be reciprocal for A and B"*: `No`
 >    - *"Write the original A entry _once_ if _any_ overlaps found in B.": `Yes`
 >
 > 3. Rename the datasets `True GATA1 CUT and RUN peaks`.
 >
 > > <question-title></question-title>
 > >
-> > How many potential true positives do we gain?
+> > How many potential true positives have we found (common between CUT&RUN and ChIP-seq) ?
 > > How many potential false positives have we removed?
 > > What is the precision of our analysis at this point? (Precision = True Positive / True Positive + False Positive)
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. 2,409 peaks
-> > > 2. 454 peaks
-> > > 3. Our precision is ~ 84%. A high precision is an indicator that we can predict true binding regions with high confidence.
+> > > 1. 2,809 peaks
+> > > 2. 56 peaks
+> > > 3. Our precision is ~ 98%. A high precision is an indicator that we can predict true binding regions with high confidence.
 > > {: .solution}
 > >
 > {: .question}
@@ -600,7 +599,7 @@ Let's find out the sequence motifs of the TF GATA1. Studies have revealed that G
 > <hands-on-title>Motif detection</hands-on-title>
 >
 > 1.  {% tool [MEME-ChIP](toolshed.g2.bx.psu.edu/repos/iuc/meme_chip/meme_chip/4.11.2+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Primary sequences"*: Select the output of **Extract Genomic DNA** using coordinates from assembled/unassembled genomes {% icon tool %})
+>    - {% icon param-file %} *"Primary sequences"*: Select the output of **Extract Genomic DNA** using coordinates from assembled/unassembled genomes {% icon tool %}
 >    - *"Sequence alphabet"*: `DNA`
 >    - *"Options Configuration"*: `Advanced`
 >        - *"Should subsampling be random?"*: `Yes`
@@ -617,13 +616,13 @@ Let's find out the sequence motifs of the TF GATA1. Studies have revealed that G
 >
 > > <question-title></question-title>
 > >
-> > How many peaks support the main motif GATA?
 > > What is the E-value of the main motif?
+> > How many peaks support the main motif GATA?
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. !!!!  Where is this info? !!!
-> > > 2. E-value = 5.0e-383
+> > > 1. 1.1e-411
+> > > 1. You need to click on the DREME link for the GATA motif. Then when you are in the DREME html, click on the arrow pointing down for the first motif (HGATAA) in the More column. Here, it gives you some numbers including how many peaks were positive for the motif. Here 1939.
 > > {: .solution}
 > >
 > {: .question}
