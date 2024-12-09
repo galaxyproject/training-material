@@ -30,40 +30,39 @@ Pseudobulk analysis is a powerful technique that bridges the gap between single-
 
 A key advantage of this approach in differential expression analysis is that it avoids treating individual cells as independent samples, which can underestimate variance and lead to inflated significance or overly optimistic p-values ({% cite Squair2021 %}). This occurs because cells from the same biological replicate are inherently more similar to each other than cells from different samples. By grouping data into pseudobulk samples, the analysis aligns with the experimental design, as in bulk RNA-seq, leading to more reliable and robust statistical results ({% cite Murphy2022 %}).
 
-Beyond enhancing statistical validity, pseudobulk analysis enables the identification of cell-type-specific gene expression and functional changes across biological conditions. It balances the detailed resolution of single-cell data with the statistical power of bulk RNA-seq, providing insights into the functional transcriptomic landscape relevant to biological questions.
+Beyond enhancing statistical validity, pseudobulk analysis enables the identification of cell-type-specific gene expression and functional changes across biological conditions. It balances the detailed resolution of single-cell data with the statistical power of bulk RNA-seq, providing insights into the functional transcriptomic landscape relevant to biological questions. Overall, for differential expression analysis in multi-sample single-cell experiments, pseudo-bulk approaches demonstrate superior performance compared to single-cell-specific DE methods (citation). 
 
 In this tutorial, we will guide you through a pseudobulk analysis workflow using the **Decoupler** and **edgeR** tools available in Galaxy ({% Badia-iMompel2022 %}) ({% Liu2015 %}). These tools facilitate functional and differential expression analysis, and their output can be integrated with other Galaxy tools to visualize results, such as creating Volcano Plots, which we will also cover in this tutorial.
 
-
 > <agenda-title>Pseudobulk Analysis Pipeline Agenda</agenda-title>:
 >
-> 1. **Introduction to Pseudobulk Analysis and Data Preprocessing**
+> 1. Introduction to Pseudobulk Analysis and Data Preprocessing
 >    - Overview of pseudobulk analysis
 >    - Preparing single-cell data for pseudobulk analysis
 >    - Aggregating data into pseudobulk samples
 >    - Inspecting Decoupler outputs
 >
-> 2. **Differential Expression Analysis with edgeR**
+> 2. Differential Expression Analysis with edgeR
 >    - Preparing input files for edgeR
 >    - Performing differential expression analysis
 >    - Understanding and interpreting the results
 >
-> 3. **Visualization and Reporting**
+> 3. Visualization and Reporting
 >    - Generating volcano plots for differentially expressed genes
 >    - Summarizing and presenting functional analysis results
 >
-> 4. **Key Takeaways and Recommendations**
+> 4. Key Takeaways and Recommendations
 >    - Reviewing the pseudobulk analysis pipeline
 >    - Suggestions for additional analyses and further exploration
 >
 {: .agenda}
 
 
-## Let's Get the Data!
+# Let's Get the Data!
 
-### Overview of the Data
+## Overview of the Data
 
-Our data was extracted from the publication titled _"Elevated Calprotectin and Abnormal Myeloid Cell Subsets Discriminate Severe from Mild COVID-19"_ ({% cite Silvin2020 %}). This dataset was chosen because it was utilized by the developers of the `decoupler` tool for pseudobulk aggregate analysis (citation of the tool documentation).
+Our data was extracted from the publication titled _"Elevated Calprotectin and Abnormal Myeloid Cell Subsets Discriminate Severe from Mild COVID-19"_ ({% cite Silvin2020 %}). This dataset was chosen because it was utilized by the developers of the `decoupler` tool for pseudobulk aggregate analysis ({% decoupler-pseudobulk %}).
 
 Pseudobulk analysis is an advanced method in single-cell data analysis. For this tutorial, we assume familiarity with common single-cell data formats, such as AnnData or Seurat objects, and experience analyzing single-cell data, including clustering and annotating cell types.
 
@@ -71,7 +70,7 @@ If you're new to these concepts, we recommend exploring our other tutorials befo
 - [Clustering 3K PBMCs with Scanpy](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html): Learn how to cluster and annotate cells in Galaxy using our single-cell tools.
 - [Combining single cell datasets after pre-processing](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html): Understand how to combine multiple datasets into one AnnData object and add metadata from single-cell experiments.
 
-The data object, which you will import from Zenodo into Galaxy via the provided link, has been preprocessed, analyzed, and annotated. It includes the following key observations:
+The data object, which you will import from Zenodo into Galaxy via the provided link, has been preprocessed, analysed, and annotated. It includes the following key observations:
 - **cell_type**: The type of cell identified.
 - **disease**: Indicates whether the sample is a control or corresponds to a COVID-19 condition.
 - **individual**: The individual donor or sample identifier.
@@ -98,7 +97,7 @@ The data object, which you will import from Zenodo into Galaxy via the provided 
 {: .hands_on}
 
 
-## Generation of the Pseudobulk Count Matrix with Decoupler
+# Generation of the Pseudobulk Count Matrix with Decoupler
 
 In this step, our goal is to perform a "bioinformatic cell sorting" based on the annotated clusters of the single-cell data.
 
@@ -114,32 +113,33 @@ Raw counts are crucial for generating accurate pseudobulk aggregates. Since sing
 >
 {: .tip}
 
-
 > <hands-on-title> Pseudobulk with Decoupler </hands-on-title>
 >
 > 1. {% tool [Decoupler pseudo-bulk](toolshed.g2.bx.psu.edu/repos/ebi-gxa/decoupler_pseudobulk/decoupler_pseudobulk/1.4.0+galaxy5) %} tool with the following parameters:
-> - {% icon param-file %} **Input AnnData file**: `AnnData for Pseudobulk` (Input dataset obtained > from Zenodo)
-> - **Produce a list of genes to filter out per contrast?**: `No`
-> - **Obs Fields to Merge**: *(Leave empty if not applicable)*
-> - **Groupby column**: `cell_type` (Column containing cell type annotations)
-> - **Sample Key column**: `individual` (Column containing individual sample identifiers)
-> - **Layer**: `counts` (Layer containing raw gene expression counts)
-> - **Factor Fields**: `disease` (Column in `adata.obs` specifying experimental factors. For edgeR, the first field should be the main contrast field, followed by  covariates.)
-> - **Use Raw**: `No`
-> - **Minimum Cells**: `10`
-> - **Produce plots**: `Yes`
-> - **Minimum Counts**: `10`
-> - **Minimum Total Counts**: `1000`
-> - **Minimum Counts Per Gene Per Contrast Field**: `20` (Genes with fewer counts in specific contrasts are flagged in a separate file but not excluded from the results.)
->  - **Enable Filtering by Expression**: `Yes`
->  - **Plot Samples Figsize**: `13 13`
->  - **Plot Filtering Figsize**: `13 13`
+>     - {% icon param-file %} **Input AnnData file**: `AnnData for Pseudobulk` (Input dataset obtained > from Zenodo)
+>     - **Produce a list of genes to filter out per contrast?**: `No`
+>     - **Obs Fields to Merge**: *(Leave empty if not applicable)*
+>     - **Groupby column**: `cell_type` (Column containing cell type annotations)
+>     - **Sample Key column**: `individual` (Column containing individual sample identifiers)
+>     - **Layer**: `counts` (Layer containing raw gene expression counts)
+>     - **Factor Fields**: `disease` (Column in `adata.obs` specifying experimental factors. For edgeR, the first field should be the main contrast field, followed by  covariates.)
+>     - **Use Raw**: `No`
+>     - **Produce AnnData with Pseudo-bulk**: *(Optional, if yes, it will generate an h5ad output file with pseudobulks)*
+>     - **Minimum Cells**: `10`
+>     - **Produce plots**: `Yes`
+>     - **Minimum Counts**: `10`
+>     - **Minimum Total Counts**: `1000`
+>     - **Minimum Counts Per Gene Per Contrast Field**: `20` (Genes with fewer counts in specific contrasts are flagged in a separate file but not excluded from the results.)
+>     - **Enable Filtering by Expression**: `Yes`
+>     - **Plot Samples Figsize**: `13 13`
+>     - **Plot Filtering Figsize**: `13 13`
 >
 >    > <comment-title> Performing DEG within Clusters </comment-title>
 >    >
->    > **Important!** The count matrix retrieved from this tool includes all of our samples aggregated by `cell_type`, which can be identified by the column headers. If you want to perform comparisons of conditions within clusters of each individual cell type, you will need to subset the relevant columns of the matrix and use them as your new count matrix. We will demonstrate this in the last section of this tutorial with detailed hands-on steps.
+>    > **Important!** The count matrix retrieved from this tool includes all of our samples `individual` aggregated by `cell_type`, which can be identified by the column headers. If you want to perform comparisons of conditions within clusters of each individual cell type, you will need to subset the relevant columns of the matrix and use them as your new count matrix. We will demonstrate this in the last section of this tutorial with detailed hands-on steps.
 >    {: .comment}
-
+>
+{: .hands_on}
 
 > <question-title> What are the outputs of the Decoupler tool? </question-title>
 >
@@ -158,6 +158,7 @@ Raw counts are crucial for generating accurate pseudobulk aggregates. Since sing
 >    - **Pseudobulk Plot** (PNG format)
 >    - **Filter by Expression Plot** (PNG format)
 >    - **Genes to Ignore by Contrast Field** (tabular file)
+>    - **Pseudobulk AnnData file** (If chosen, h5ad file) 
 >
 > 2. The output files contain the following:
 >    - **Pseudobulk Count Matrix:** Contains the raw count aggregates for each pseudobulk sample. 
@@ -168,10 +169,12 @@ Raw counts are crucial for generating accurate pseudobulk aggregates. Since sing
 >    ![Pseudobulk Plot Example](path_to_image_placeholder)
 >    - **Filter by Expression Plot:** Illustrates the expression filtering applied to the data.
 >    ![Filter by Expression Plot Example](path_to_image_placeholder)
+>      **Pseudobulk AnnData file:**: An AnnData file that contains the aggregated pseudobulks.  
 >
 > 3. The **pseudobulk count matrix** is the primary input required for analysis using **edgeR**, a tool designed for differential expression analysis. The **Samples Metadata** is another file that will serve as an input for the edgeR tool. 
 >
 {: .solution}
+
 
 ## Sanitation Steps - Part 1
 
@@ -273,7 +276,8 @@ This file will be use as the contrast input file in the edgeR tool.
 
 # Differential Gene Expression Analysis (DGE) with **edgeR**
 
-Explain edger...
+
+
 
 > <hands-on-title> Run a DGE Analysis with edgeR </hands-on-title>
 >
@@ -329,19 +333,20 @@ Explain edger...
 >    - The **FDR** is the adjusted p-value, calculated using the Benjamini-Hochberg method, which helps control for false positives when testing many genes. Genes with an FDR below a threshold (e.g., 0.05) are considered statistically significant.
 > 
 > **Plot Interpretations**:
->   - **MDS Plot**: Displays relationships between samples based on gene expression profiles. Samples that cluster closely are more similar in their expression. Use this to identify whether samples separate by biological condition or to detect potential batch effects.
->   - **BCV Plot**: Shows the dispersion for each gene, with higher values indicating greater variability. This is useful for assessing how variability is modeled in the dataset.
->   - **QL Plot**: Highlights the quasi-likelihood dispersions, which represent variability modeled during statistical testing. Proper dispersion modeling ensures robust differential expression analysis.
->   - **MD Plot**: Visualizes the mean expression levels against log fold change for each gene. Genes far from the center indicate stronger differential expression, with points above or below the horizontal line showing upregulated or downregulated genes, respectively.
+>   - **MDS Plot**: Displays relationships between samples based on gene expression profiles. Samples that cluster closely are more similar in their expression. Use this to identify whether samples separate by biological condition or to detect potential batch effects.  ![MDS Plot](path_to_image_placeholder)
+>   - **BCV Plot**: Shows the dispersion for each gene, with higher values indicating greater variability. This is useful for assessing how variability is modeled in the dataset. ![BCV Plot](path_to_image_placeholder)
+>   - **QL Plot**: Highlights the quasi-likelihood dispersions, which represent variability modeled during statistical testing. Proper dispersion modeling ensures robust differential expression analysis. ![QL Plot](path_to_image_placeholder)
+>   - **MD Plot**: Visualizes the mean expression levels against log fold change for each gene. Genes far from the center indicate stronger differential expression, with points above or below the horizontal line showing upregulated or downregulated genes, respectively.  ![MD Plot](path_to_image_placeholder)
 > 
 > {: .solution}
 >
 {: .question}
 
+## Sanitation Steps - Part 2
 
-## **Extract Element Identifiers**
+After performing the differential expression analysis with edgeR, we will clean the data to prepare it for visualization. This involves extracting collection elements, removing unnecessary columns, standardizing text, and splitting the file if needed. We will use the {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %}, [Remove columns](toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0) %}, {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.3+galaxy1) %}, {% tool [Split file](toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.2) %}, and {% tool [Parse parameter value](param_value_from_file) %}
 
-This step processes the **edgeR** output, which is a collection of datasets, to extract individual elements for further analysis. We will use the **Extract Element Identifiers** tool in Galaxy to achieve this.
+**Extract element identifiers** will allow us to processes the **edgeR** output, which is a collection of datasets, to extract individual elements (like the first table from our collection) for further analysis. 
 
 > <hands-on-title> Task Description </hands-on-title>
 >
@@ -350,15 +355,7 @@ This step processes the **edgeR** output, which is a collection of datasets, to 
 >
 {: .hands_on}
 
----
-
-## **Sanitation Steps - Part 2**
-
-After extracting the element identifiers, we will clean the data to prepare it for visualization or downstream analysis. This involves removing unnecessary columns, standardizing text, and splitting the file if needed.
-
-### **Step 1: Remove Columns**
-
-This step filters out unnecessary columns from the **edgeR** output and retains only the essential ones for analysis: Gene ID (`id`), Log Fold Change (`logFC`), P-value (`PValue`), and False Discovery Rate (`FDR`).
+**Remove columns** to filter out unnecessary columns from the **edgeR** output and retain only the essential ones for analysis: Gene ID (`id`), Log Fold Change (`logFC`), P-value (`PValue`), and False Discovery Rate (`FDR`).
 
 > <hands-on-title> Remove Unnecessary Columns </hands-on-title>
 >
@@ -374,14 +371,10 @@ This step filters out unnecessary columns from the **edgeR** output and retains 
 >        - {% icon param-repeat %} *"Insert Select Columns"*
 >            - *"Header name"*: `FDR`
 >    - *"Keep named columns"*: `Yes`
->
+>   
 {: .hands_on}
 
----
-
-### **Step 2: Replace Text**
-
-Standardize and clean column headers or dataset identifiers by replacing unnecessary prefixes (e.g., `edgeR_`) with nothing.
+**Replce text** to standardize and clean column headers or dataset identifiers by replacing unnecessary prefixes (e.g., `edgeR_`) with nothing.
 
 > <hands-on-title> Replace Text </hands-on-title>
 >
@@ -393,11 +386,7 @@ Standardize and clean column headers or dataset identifiers by replacing unneces
 >
 {: .hands_on}
 
----
-
-### **Step 3: Split File**
-
-If the dataset is too large to process in one go, split it into smaller chunks.
+**Split file,** if the dataset is too large to process in one go, split it into smaller chunks.
 
 > <hands-on-title> Split File </hands-on-title>
 >
@@ -409,11 +398,7 @@ If the dataset is too large to process in one go, split it into smaller chunks.
 >
 {: .hands_on}
 
----
-
-### **Step 4: Parse Parameter Value**
-
-Extract specific parameter values (e.g., dataset names) from the split files for further dynamic inputs in downstream analysis.
+**Parse parameter value** to extract specific parameter values (e.g., dataset names) from the split files for further dynamic inputs in downstream analysis.
 
 > <hands-on-title> Parse Parameter Value </hands-on-title>
 >
@@ -421,7 +406,6 @@ Extract specific parameter values (e.g., dataset names) from the split files for
 >    - {% icon param-file %} *"Input file containing parameter to parse out of"*: `list_output_txt` (output of **Split File** {% icon tool %})
 >
 {: .hands_on}
-
 
 # Volcano Plot
 
@@ -444,7 +428,7 @@ In this step, we will use the sanitized output from the previous steps to create
 >
 >    > <tip-title> What does the Volcano Plot show? </tip-title>
 >    >
->    > The Volcano Plot highlights genes with high statistical significance (low P-values) and large fold changes. Genes meeting the significance thresholds are typically colored and labeled for easier identification.
+>    > The Volcano Plot highlights genes with statistical significance (low P-values) and large fold changes. Genes meeting the significance thresholds are typically colored and labeled for easier identification.
 >    {: .tip}
 >
 {: .hands_on}
@@ -477,8 +461,6 @@ In our previous analysis, we found that only one gene, **MTND1P23**, was identif
 But what if we refine our approach? For instance, instead of analyzing all cell types together, what happens if we focus on a specific cluster, such as **T cells**, and perform the same comparison—normal vs. COVID-19? Would the results remain the same, or would this more targeted approach reveal additional insights?
 
 Let's perform this analysis step-by-step
-
-
 
 # Key Takeaways and Recommendations
 
