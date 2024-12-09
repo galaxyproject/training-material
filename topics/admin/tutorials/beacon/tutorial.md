@@ -304,7 +304,7 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
->    > ansible-playbook beacon-importer.yml
+>    > ansible-playbook beacon-import.yml
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in }
