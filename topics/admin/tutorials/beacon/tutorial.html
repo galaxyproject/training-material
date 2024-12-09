@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d13f34443afc8a5bf889694645cd86426b973a41",
+		release: "galaxy-training-network@066679f25030e7855a8739c65b9c688a61009b66",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Deploying a Beacon v1 in Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-21 07:52:02 +0000">
+<meta name="DC.date" content="2024-12-09 16:53:36 +0000">
 <meta name="DC.creator" content="Helena Rasche"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Galaxy Server administration / Deploying a Beacon v1 in Galaxy / Hands-on: Deploying a Beacon v1 in Galaxy">
@@ -188,7 +188,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2023-04-21 07:52:02 +0000",
+  "dateModified": "2024-12-09 16:53:36 +0000",
   "datePublished": "2023-04-16 09:02:56 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -267,7 +267,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Deploying a Beacon v1 in Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/beacon/tutorial.html",
-  "version": 3,
+  "version": 4,
   "timeRequired": "PT30M",
   "teaches": "- Deploy a Beacon",
   "keywords": [
@@ -1376,7 +1376,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 16, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 21, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 9, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1394,7 +1394,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
 
     </blockquote>
     </section>
@@ -1495,6 +1495,20 @@ We declare a host group called ‘beacon’ with no hosts of its own.</p>
       </blockquote>
     </li>
     <li>
+      <p>Install the docker role as well.</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy collection <span class="nb">install </span>community.docker
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-why-doesn-t-this-use-the-requirements-yml"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-doesn-t-this-use-the-requirements-yml" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Why doesn't this use the requirements.yml?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <p>Ansible over time added the feature of ‘collections’ in addition to roles. It’s a nice and convenient method for grouping roles together. Unfortunately this means we need to update a significant portion of the GAT learning path to use this, which we have not done yet, as it will take a bit of time to do. Collections come with the unpleasant additional aspect that they will be installed into a different path than roles, so we’ll need to add a <code class="language-plaintext highlighter-rouge">collections</code> folder as well, or maybe <code class="language-plaintext highlighter-rouge">deps/collections</code> and <code class="language-plaintext highlighter-rouge">deps/roles</code> folders. When this happens we’ll have to additionally modify the ansible.cfg to look for collections in this additional path.</p>
+      </blockquote>
+    </li>
+    <li>
       <p>Create the vars file</p>
 
       <div data-commit="Add relevant group variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
@@ -1540,69 +1554,11 @@ We declare a host group called ‘beacon’ with no hosts of its own.</p>
       </blockquote>
     </li>
     <li>
-      <p>Add the beacon-server playbook</p>
-
-      <div data-commit="Add beacon server playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/beacon-server.yml
-</span><span class="p">@@ -0,0 +1,9 @@</span>
-<span class="gi">+---
-+- name: Beacon Server
-+  hosts: beacon_server
-+  become: true
-+  become_user: root
-+  vars_files:
-+    - group_vars/secret.yml
-+  roles:
-+    - paprikant.beacon
-</span>   
-</code></pre></div>      </div>
-    </li>
-    <li>
-      <p>Run the playbook</p>
-
-      <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
-        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook beacon-server.yml
-</code></pre></div>        </div>
-      </blockquote>
-
-      <p>TODO: Check that it works</p>
-    </li>
-  </ol>
-
-</blockquote>
-
-<h2 id="setting-up-the-importer">Setting up the Importer</h2>
-
-<p>Now that our beacon is running, we need to get data from Galaxy to the Beacon</p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-setting-up-the-beacon-importer"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Setting up the Beacon Importer</div>
-
-  <ol>
-    <li>
-      <p>Add the beacon-import playbook</p>
-
-      <div data-commit="Add beacon importer playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/beacon-import.yml
-</span><span class="p">@@ -0,0 +1,9 @@</span>
-<span class="gi">+---
-+- name: Beacon Importer
-+  hosts: beacon_import
-+  become: true
-+  become_user: root
-+  vars_files:
-+    - group_vars/secret.yml
-+  roles:
-+    - paprikant.beacon-importer
-</span>   
-</code></pre></div>      </div>
-    </li>
-    <li>
       <p>Edit your <code class="language-plaintext highlighter-rouge">group_vars/secret.yml</code> and define some random passwords:</p>
 
       <ul>
         <li>The API key for your account, which must be an admin</li>
+        <li>A password for the beacon database</li>
       </ul>
 
       <!--SNIPPET-->
@@ -1684,11 +1640,70 @@ We declare a host group called ‘beacon’ with no hosts of its own.</p>
 -->
     </li>
     <li>
+      <p>Add the beacon-server playbook</p>
+
+      <div data-commit="Add beacon server playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/beacon-server.yml
+</span><span class="p">@@ -0,0 +1,9 @@</span>
+<span class="gi">+---
++- name: Beacon Server
++  hosts: beacon_server
++  become: true
++  become_user: root
++  vars_files:
++    - group_vars/secret.yml
++  roles:
++    - paprikant.beacon
+</span>   
+</code></pre></div>      </div>
+    </li>
+    <li>
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
-        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook beacon-importer.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook beacon-server.yml
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>TODO: Check that it works</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="setting-up-the-importer">Setting up the Importer</h2>
+
+<p>Now that our beacon is running, we need to get data from Galaxy to the Beacon</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-setting-up-the-beacon-importer"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Setting up the Beacon Importer</div>
+
+  <ol>
+    <li>
+      <p>Add the beacon-import playbook</p>
+
+      <div data-commit="Add beacon importer playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/beacon-import.yml
+</span><span class="p">@@ -0,0 +1,9 @@</span>
+<span class="gi">+---
++- name: Beacon Importer
++  hosts: beacon_import
++  become: true
++  become_user: root
++  vars_files:
++    - group_vars/secret.yml
++  roles:
++    - paprikant.beacon-importer
+</span>   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook beacon-import.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1719,7 +1734,7 @@ We declare a host group called ‘beacon’ with no hosts of its own.</p>
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -2022,7 +2037,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d13f34443afc8a5bf889694645cd86426b973a41">d13f344</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/066679f25030e7855a8739c65b9c688a61009b66">066679f</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

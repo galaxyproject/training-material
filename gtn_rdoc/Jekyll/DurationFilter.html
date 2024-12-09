@@ -67,6 +67,10 @@
 
   <ul class="link-list" role="directory">
     <li ><a href="#method-i-duration_to_human">#duration_to_human</a>
+    <li ><a href="#method-i-fmt_duration">#fmt_duration</a>
+    <li ><a href="#method-i-parse_rfc3339">#parse_rfc3339</a>
+    <li ><a href="#method-i-resolve_hms">#resolve_hms</a>
+    <li ><a href="#method-i-sum_duration">#sum_duration</a>
   </ul>
 </div>
 
@@ -125,14 +129,34 @@
           <div class="method-source-code" id="duration_to_human-source">
             <pre><span class="ruby-comment"># File _plugins/jekyll-duration.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">duration_to_human</span>(<span class="ruby-identifier">duration</span>)
-  <span class="ruby-comment"># Match the different parts of the string, must match entire string or it will fail.</span>
-  <span class="ruby-identifier">match</span> = <span class="ruby-regexp">/^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">duration</span>)
-
-  <span class="ruby-comment"># If it doesn&#39;t match, pass through unedited so we don&#39;t cause unexpected issues.</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">match</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Could not parse time: #{duration}&quot;</span>
+  <span class="ruby-identifier">seconds</span> = <span class="ruby-identifier">parse_rfc3339</span>(<span class="ruby-identifier">duration</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">seconds</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">duration</span>
   <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">fmt_duration</span>(<span class="ruby-identifier">seconds</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-fmt_duration" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">fmt_duration</span><span
+              class="method-args">(seconds)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="fmt_duration-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-duration.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fmt_duration</span>(<span class="ruby-identifier">seconds</span>)
+  <span class="ruby-identifier">d</span> = <span class="ruby-identifier">resolve_hms</span>(<span class="ruby-identifier">seconds</span>)
 
   <span class="ruby-comment"># Otherwise append english terms for the various parts</span>
   <span class="ruby-identifier">duration_parts</span> = []
@@ -148,21 +172,153 @@
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Hours</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">match</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">nil?</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;1&#39;</span>
-      <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{match[1]} &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">hour</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">d</span>[<span class="ruby-value">:hours</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">d</span>[<span class="ruby-value">:hours</span>] <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+      <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{d[:hours]} &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">hour</span>)
     <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{match[1]} &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">hours</span>)
+      <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{d[:hours]} &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">hours</span>)
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Minutes - assuming no one uses `1 minute`</span>
-  <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{match[2]} &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">minutes</span>) <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">match</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{d[:minutes]} &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">minutes</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">d</span>[<span class="ruby-value">:minutes</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
 
   <span class="ruby-comment"># Hopefully no one uses seconds</span>
-  <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{match[3]} seconds&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">match</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;#{d[:seconds]} seconds&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">d</span>[<span class="ruby-value">:seconds</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
 
   <span class="ruby-identifier">duration_parts</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-parse_rfc3339" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">parse_rfc3339</span><span
+              class="method-args">(s)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Sum the durations correctly for multiple RFC3339 formatted durations. Params:</p>
+<dl class="rdoc-list note-list"><dt><code>s</code>
+<dd>
+<p>The RFC3339 formatted duration string</p>
+</dd></dl>
+
+<p>Returns:</p>
+<dl class="rdoc-list note-list"><dt><code>d</code>
+<dd>
+<p>a number of seconds</p>
+</dd></dl>
+
+          <div class="method-source-code" id="parse_rfc3339-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-duration.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_rfc3339</span>(<span class="ruby-identifier">s</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-value">0</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Match the different parts of the string, must match entire string or it</span>
+  <span class="ruby-comment"># will fail.</span>
+  <span class="ruby-identifier">match</span> = <span class="ruby-regexp">/^T?(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">s</span>)
+
+  <span class="ruby-comment"># If it doesn&#39;t match, pass through unedited so we don&#39;t cause unexpected</span>
+  <span class="ruby-comment"># issues.</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">match</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-string">&quot;[GTN/Durations]:&quot;</span>, <span class="ruby-node">&quot;Could not parse time: #{s}&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">*</span> <span class="ruby-value">3600</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">*</span> <span class="ruby-value">60</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">to_i</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-resolve_hms" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">resolve_hms</span><span
+              class="method-args">(seconds)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Turn a count of seconds into hours/minutes/seconds. Params:</p>
+<dl class="rdoc-list note-list"><dt><code>Int</code>
+<dd>
+<p>A number of seconds</p>
+</dd></dl>
+
+<p>Returns:</p>
+<dl class="rdoc-list note-list"><dt><code>Hash</code>
+<dd>
+<p>A hash with keys for hours, minutes, and seconds</p>
+</dd></dl>
+
+<p>Example: <a href="DurationFilter.html#method-i-resolve_hms"><code>resolve_hms</code></a>(5400)</p>
+
+<h1 id="method-i-resolve_hms-label-3E+-7B+hours-3A+1-2C+minutes-3A+30-2C+seconds-3A+0+-7D">&gt; { hours: 1, minutes: 30, seconds: 0 }<span><a href="#method-i-resolve_hms-label-3E+-7B+hours-3A+1-2C+minutes-3A+30-2C+seconds-3A+0+-7D">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+          <div class="method-source-code" id="resolve_hms-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-duration.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">resolve_hms</span>(<span class="ruby-identifier">seconds</span>)
+  <span class="ruby-comment"># Normalize the total</span>
+  <span class="ruby-identifier">minutes</span> = <span class="ruby-identifier">seconds</span> <span class="ruby-operator">/</span> <span class="ruby-value">60</span>
+  <span class="ruby-identifier">seconds</span> = <span class="ruby-identifier">seconds</span> <span class="ruby-operator">%</span> <span class="ruby-value">60</span>
+  <span class="ruby-identifier">hours</span> = <span class="ruby-identifier">minutes</span> <span class="ruby-operator">/</span> <span class="ruby-value">60</span>
+  <span class="ruby-identifier">minutes</span> = <span class="ruby-identifier">minutes</span> <span class="ruby-operator">%</span> <span class="ruby-value">60</span>
+
+  { <span class="ruby-value">hours:</span> <span class="ruby-identifier">hours</span>, <span class="ruby-value">minutes:</span> <span class="ruby-identifier">minutes</span>, <span class="ruby-value">seconds:</span> <span class="ruby-identifier">seconds</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-sum_duration" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">sum_duration</span><span
+              class="method-args">(materials)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Sum the durations correctly for multiple RFC3339 formatted durations. Params:</p>
+<dl class="rdoc-list note-list"><dt><code>materials</code>
+<dd>
+<p>The GTN material objects</p>
+</dd></dl>
+
+<p>Returns:</p>
+<dl class="rdoc-list note-list"><dt><code>String</code>
+<dd>
+<p>The human total duration</p>
+</dd></dl>
+
+          <div class="method-source-code" id="sum_duration-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-duration.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sum_duration</span>(<span class="ruby-identifier">materials</span>)
+  <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;[GTN/Durations]: sum durations with #{materials.length} materials.&quot;</span>
+  <span class="ruby-identifier">total</span> = <span class="ruby-value">0</span>
+  <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">material</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;time_estimation&#39;</span>].<span class="ruby-identifier">nil?</span>
+      <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;    [GTN/Durations]: #{material[&#39;time_estimation&#39;]} #{material[&#39;title&#39;]} -&gt; #{parse_rfc3339(material[&#39;time_estimation&#39;])}&quot;</span>
+      <span class="ruby-identifier">total</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">parse_rfc3339</span>(<span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;time_estimation&#39;</span>])
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">fmt_duration</span>(<span class="ruby-identifier">total</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
