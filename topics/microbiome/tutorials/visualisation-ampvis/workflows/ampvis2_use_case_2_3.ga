@@ -1,0 +1,151 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [],
+    "format-version": "0.1",
+    "name": "ampvis2_use_case_2+3",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "OTU table"
+                }
+            ],
+            "label": "OTU table",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 2.0515721756576766
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ad72480f-eabe-4e3e-8d71-32f6eff08d1a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "metadata"
+                }
+            ],
+            "label": "metadata",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1.59385778283538,
+                "top": 98.00003051757815
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "95d56ef9-2d27-49fa-a8bf-721ededb3983",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "taxonomy table"
+                }
+            ],
+            "label": "taxonomy table",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2.34385778283538,
+                "top": 198.31253051757812
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "67fa359a-86c5-4520-97d3-0b708b4c418d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "metadata": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "otutable": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "taxonomy": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ampvis2 load",
+            "outputs": [
+                {
+                    "name": "ampvis",
+                    "type": "ampvis2"
+                },
+                {
+                    "name": "metadata_list_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "taxonomy_list_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 302.35948278283536,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "3481feabc54e",
+                "name": "ampvis2_load",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"asv_otu_col_empty\": false, \"asv_sequences\": false, \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"guess_column_types\": true, \"metadata\": {\"__class__\": \"ConnectedValue\"}, \"otutable\": {\"__class__\": \"ConnectedValue\"}, \"pruneSingletons\": false, \"taxonomy\": {\"__class__\": \"ConnectedValue\"}, \"tree\": {\"__class__\": \"ConnectedValue\"}, \"write_lists\": [\"tax\", \"metadata\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8.6+galaxy1",
+            "type": "tool",
+            "uuid": "c83006ff-a282-400a-a55b-d577613124ae",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "2e1fa317-b6dd-4d7c-8e11-09b20c09bb04",
+    "version": 1
+}
