@@ -44,7 +44,7 @@ layout: base
 
 	{% if section.tutorials %}
         {% assign material_list = site | convert_to_material_list: section.tutorials %}
-	<p>Estimated duration: {{ material_list | sum_duration }}</p>
+	<p><strong>{% icon time aria=false %} {{ locale['time-estimation'] | default: "Time estimation"}}:</strong> {{ material_list | sum_duration }}</p>
 	<details>
 		<summary>Learning Objectives</summary>
 		<ul>
