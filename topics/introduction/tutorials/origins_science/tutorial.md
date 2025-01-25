@@ -238,7 +238,7 @@ him the recognition of Aristotle himself .[^29]
 It is with Anaximander (610-546 BC), considered to be the most important
 figure among the Milesian physicists, with whom appears the first
 description in purely natural terms of the origin of the world and of
-life, described in terms of organic life in line with the threadzoist
+life, described in terms of organic life in line with the hylozoist
 conception of reality[^30] . The latter considers that the first
 substance, the *ἀρχή* , must not have been a state of tangible matter,
 but a kind of basic common denominator of all sensible things arrived at
