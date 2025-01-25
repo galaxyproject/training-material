@@ -15,7 +15,18 @@ contributions:
 
 # Overview
 
-This training aims to provide a detailed description of initial emergence of natural philosophy, also known as science, understood as the constantly evolving process and complex of knowledge generation based on observation, evidence and criticism. Specifically, this training focuses on the birth of science in the city of Miletus in the 6th century BC, and its subsequent evolution under the influence of the Pythagorean philosophers in the 5th century BC, during which the notion of science re-emerged as the mathematical understanding of nature. The emergence of natural philosophy holds a prominent place in the history of Western thought, as it marks the beginning of philosophy itself.
+This training aims to provide a detailed description of initial emergence of natural philosophy, also known as science, understood as the constantly evolving process and complex of knowledge generation based on observation, evidence and criticism. Specifically, this training focuses on the birth of science in the city of Miletus in the 6th century BC, and its subsequent evolution under the influence of the Pythagorean philosophers in the 5th century BC, during which the notion of science re-emerged as the mathematical understanding of nature. The emergence of natural philosophy holds a prominent place in the history of Western thought, as it marks the beginning of philosophy itself. 
+
+In order to develop the above points, the training will first proceed to introduce
+the defining elements of Ionian and Pythagorean natural philosophy,
+which will require their historical contextualization, as well as the
+description of the cultural prejudices in which they developed. I
+consider it necessary to point out that in the training reject
+the dogmatic postmodern conception of history, according to which
+historical events are presented as a series of discontinuous fragments;
+as opposed to that view, the birth and development of philosophy is
+considered, in line with Guthrie, a product of temperament, experience
+and earlier philosophers .[^1]
 
 > <agenda-title></agenda-title>
 > 1. TOC
