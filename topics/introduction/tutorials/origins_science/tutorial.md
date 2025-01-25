@@ -20,11 +20,10 @@ This training aims to provide a detailed description of initial emergence of nat
 In order to develop the above points, the training will first proceed to introduce
 the defining elements of Ionian and Pythagorean natural philosophy,
 which will require their historical contextualization, as well as the
-description of the cultural prejudices in which they developed. I
-consider it necessary to point out that in the training reject
+description of the cultural prejudices in which they developed. It necessary to point out that the author of this training reject 
 the dogmatic postmodern conception of history, according to which
 historical events are presented as a series of discontinuous fragments;
-as opposed to that view, the birth and development of philosophy is
+as opposed to that view, the birth and development of science is
 considered, in line with Guthrie, a product of temperament, experience
 and earlier philosophers .[^1]
 
