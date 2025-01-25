@@ -15,9 +15,9 @@ contributions:
 
 # Overview
 
-This training aims to provide a detailed description of initial emergence of natural philosophy, also known as science, understood as the constantly evolving process and complex of knowledge generation based on observation, evidence and criticism. Specifically, this training focuses on the birth of science in the city of Miletus in the 6th century BC, and its subsequent evolution under the influence of the Pythagorean philosophers in the 5th century BC, during which the notion of science re-emerged as the mathematical understanding of nature. The emergence of natural philosophy holds a prominent place in the history of Western thought, as it marks the beginning of philosophy itself. 
+This training aims to provide a detailed description of the origin of natural philosophy, also known as science, understood as the constantly evolving process and complex of knowledge generation based on observation, evidence and criticism. Specifically, this training focuses on the birth of science in the city of Miletus in the 6th century BC, and its subsequent evolution under the influence of the Pythagorean philosophers in the 5th century BC, during which the notion of science re-emerged as the mathematical understanding of nature. The emergence of natural philosophy holds a prominent place in the history of Western thought, as it marks the beginning of philosophy itself. 
 
-In order to develop the above points, the training will first proceed to introduce
+In order to develop the above points, we will first proceed to introduce
 the defining elements of Ionian and Pythagorean natural philosophy,
 which will require their historical contextualization, as well as the
 description of the cultural prejudices in which they developed. It necessary to point out that the author of this training reject 
