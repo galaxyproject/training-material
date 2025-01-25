@@ -38,9 +38,9 @@ Etymologically, the word philosophy only expresses curiosity, fondness or desire
 know, without referring to any particular object. The oldest source in
 which it appears corresponds to a fragment of Heraclitus, although
 according to Cicero and Diogenes, it was Pythagoras himself who coined
-the term. The term *σοφια* has a very broad meaning in the Greek
+the term. The term *σοφια* (sofia) has a very broad meaning in the Greek
 literary tradition, being applied indistinctly to all kinds of
-knowledge, both speculative and practical. In Homer, *σοφός* means a man
+knowledge, both speculative and practical. In Homer, *σοφός* (sofos) means a person
 skilled in mechanical arts. For Aristotle, philosophy is identical with
 science , embracing the whole body of human knowledge, distributed in
 conformity with the diverse variety of its objects.[^2]
