@@ -15,7 +15,7 @@ contributions:
 
 # Overview
 
-This training aims to provide a detailed description of initial emergence of natural philosophy, also known as science, understood as the constantly evolving process and complex of knowledge generation based on observation, evidence and criticism.
+This training aims to provide a detailed description of initial emergence of natural philosophy, also known as science, understood as the constantly evolving process and complex of knowledge generation based on observation, evidence and criticism. Specifically, this training focuses on the birth of science in the city of Miletus in the 6th century BC, and its subsequent evolution under the influence of the Pythagorean philosophers in the 5th century BC, during which the notion of science re-emerged as the mathematical understanding of nature.
 
 > <agenda-title></agenda-title>
 > 1. TOC
