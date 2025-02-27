@@ -141,7 +141,7 @@ We then evaluated the quality of the data by running FastQC on both datasets (fo
 {: .hands_on}
 
 
-This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** in the dedicated [quality-control tutorial]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-quality-with-fastqc---short--long-reads).
+This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** in the dedicated [quality-control tutorial]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-quality-with-falcofastqc---short--long-reads).
 
 This gave us the following plots:
 
