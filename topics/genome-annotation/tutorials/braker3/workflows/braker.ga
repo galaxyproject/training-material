@@ -1,0 +1,660 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This workflow uses Braker3 to annotate a genome.",
+    "comments": [
+        {
+            "child_steps": [
+                8
+            ],
+            "color": "pink",
+            "data": {
+                "title": "Visualization"
+            },
+            "id": 4,
+            "position": [
+                1040,
+                780
+            ],
+            "size": [
+                240,
+                244.8
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                1,
+                3,
+                2
+            ],
+            "color": "yellow",
+            "data": {
+                "title": "Inputs"
+            },
+            "id": 0,
+            "position": [
+                0,
+                320
+            ],
+            "size": [
+                240,
+                402.2
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                4,
+                5
+            ],
+            "color": "green",
+            "data": {
+                "title": "Genome quality evaluation"
+            },
+            "id": 1,
+            "position": [
+                470,
+                0
+            ],
+            "size": [
+                470,
+                454
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                6
+            ],
+            "color": "red",
+            "data": {
+                "title": "Annotation with Braker3"
+            },
+            "id": 2,
+            "position": [
+                380,
+                660
+            ],
+            "size": [
+                240,
+                380
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                7,
+                9
+            ],
+            "color": "turquoise",
+            "data": {
+                "title": "Evaluation - Predicted proteins from annotation"
+            },
+            "id": 3,
+            "position": [
+                1010,
+                190
+            ],
+            "size": [
+                490,
+                550
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0009-0001-4920-9951",
+            "name": "Romane Libouban"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "release": "0.1",
+    "name": "Genome annotation with Braker3",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "BUSCO lineage",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "BUSCO lineage",
+                    "name": "BUSCO lineage"
+                }
+            ],
+            "label": "BUSCO lineage",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 130,
+                "top": 130
+            },
+            "tool_id": null,
+            "tool_state": "{\"multiple\": false, \"validators\": [], \"restrictions\": [\"aconoidasida_odb10\", \"acidobacteria_odb10\", \"actinobacteria_class_odb10\", \"alphaproteobacteria_odb10\", \"amoebozoa_odb10\", \"annelida_odb10\", \"apicomplexa_odb10\", \"arthropoda_odb10\", \"ascomycota_odb10\", \"bacillariophyta_odb10\", \"bacilli_odb10\", \"bacteroidia_odb10\", \"bacteroidetes_odb10\", \"bacteroidetes-chlorobi_group_odb10\", \"bacteroidales_odb10\", \"basidiomycota_odb10\", \"betaproteobacteria_odb10\", \"boletales_odb10\", \"bryophyta_odb10\", \"burkholderiales_odb10\", \"campylobacterales_odb10\", \"capnodiales_odb10\", \"carnivora_odb10\", \"cellvibrionales_odb10\", \"cetartiodactyla_odb10\", \"chaetothyriales_odb10\", \"chlamydiae_odb10\", \"chlorobi_odb10\", \"chloroflexi_odb10\", \"chondrichthyes_odb10\", \"chordata_odb10\", \"chromatiales_odb10\", \"chroococcales_odb10\", \"clostridia_odb10\", \"clostridiales_odb10\", \"coccidia_odb10\", \"coriobacteriales_odb10\", \"coriobacteriia_odb10\", \"corynebacteriales_odb10\", \"corynebacteriia_odb10\", \"cyanobacteria_odb10\", \"cytophagia_odb10\", \"cytophagales_odb10\", \"delta-epsilon-subdivisions_odb10\", \"deltaproteobacteria_odb10\", \"desulfobacterales_odb10\", \"desulfurococcales_odb10\", \"desulfuromonadales_odb10\", \"desulfovibrionales_odb10\", \"diptera_odb10\", \"dinoflagellata_odb10\", \"dothideomycetes_odb10\", \"embryophyta_odb10\", \"endopterygota_odb10\", \"enterobacterales_odb10\", \"entomoplasmatales_odb10\", \"epsilonproteobacteria_odb10\", \"euarchontoglires_odb10\", \"eudicots_odb10\", \"eukaryota_odb10\", \"euryarchaeota_odb10\", \"eurotiomycetes_odb10\", \"eurotiales_odb10\", \"eutheria_odb10\", \"fabales_odb10\", \"flavobacteriales_odb10\", \"flavobacteriia_odb10\", \"fungi_odb10\", \"fusobacteria_odb10\", \"fusobacteriales_odb10\", \"gammaproteobacteria_odb10\", \"glomerellales_odb10\", \"glomeromycota_odb10\", \"gnathostomata_odb10\", \"haloferacales_odb10\", \"halobacteriales_odb10\", \"halobacteria_odb10\", \"helotiales_odb10\", \"hemiptera_odb10\", \"hexapoda_odb10\", \"hymenoptera_odb10\", \"hypocreales_odb10\", \"lactobacillales_odb10\", \"laurasiatheria_odb10\", \"legionellales_odb10\", \"leotiomycetes_odb10\", \"liliopsida_odb10\", \"mammalia_odb10\", \"metazoa_odb10\", \"methanobacteria_odb10\", \"methanococcales_odb10\", \"methanomicrobiales_odb10\", \"micrococcales_odb10\", \"microsporidia_odb10\", \"mollicutes_odb10\", \"mucorales_odb10\", \"mucoromycota_odb10\", \"mycoplasmatales_odb10\", \"natrialbales_odb10\", \"neisseriales_odb10\", \"nitrosomonadales_odb10\", \"nostocales_odb10\", \"oceanospirillales_odb10\", \"onygenales_odb10\", \"oscillatoriales_odb10\", \"passeriformes_odb10\", \"pasteurellales_odb10\", \"planctomycetes_odb10\", \"plantae_odb10\", \"plasmodium_odb10\", \"pleosporales_odb10\", \"poales_odb10\", \"polyporales_odb10\", \"primates_odb10\", \"propionibacteriales_odb10\", \"pseudomonadales_odb10\", \"pseudomonadota_odb10\", \"reptilia_odb10\", \"rhodobacterales_odb10\", \"rhizaria_odb10\", \"rhizobiales_odb10\", \"rhizobium-agrobacterium_group_odb10\", \"rhodospirillales_odb10\", \"rickettsiales_odb10\", \"saccharomycetes_odb10\", \"sauropsida_odb10\", \"selenomonadales_odb10\", \"solanales_odb10\", \"sphingobacteriia_odb10\", \"sphingomonadales_odb10\", \"spirochaetes_odb10\", \"spirochaetales_odb10\", \"spirochaetia_odb10\", \"streptomycetales_odb10\", \"streptosporangiales_odb10\", \"stramenopiles_odb10\", \"sulfolobales_odb10\", \"synechococcales_odb10\", \"synergistetes_odb10\", \"tardigrada_odb10\", \"tenericutes_odb10\", \"tetrapoda_odb10\", \"thaumarchaeota_odb10\", \"thermoanaerobacterales_odb10\", \"thermoplasmata_odb10\", \"thermoproteales_odb10\", \"thermoprotei_odb10\", \"thermotogae_odb10\", \"thiotrichales_odb10\", \"tissierellales_odb10\", \"tissierellia_odb10\", \"tremellomycetes_odb10\", \"vertebrata_odb10\", \"verrucomicrobia_odb10\", \"viridiplantae_odb10\", \"xanthomonadales_odb10\"], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "e715ce34-6147-48a4-b784-099d10e698ab",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Genome sequence",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Genome sequence",
+                    "name": "Genome sequence masked"
+                }
+            ],
+            "label": "Genome sequence masked",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 20,
+                "top": 360
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fasta\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "6b8b7209-c3a4-4113-b570-32978b84a5e8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Alignments from RNA-seq",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Alignments from RNA-seq",
+                    "name": "Alignments from RNA-seq"
+                }
+            ],
+            "label": "Alignments from RNA-seq",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 20,
+                "top": 490
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"bam\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "0c3209a5-1a70-4ab5-b2d5-340748d77590",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "Protein sequences",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Protein sequences",
+                    "name": "Protein sequences"
+                }
+            ],
+            "label": "Protein sequences",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 20,
+                "top": 620
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "772fbd62-3182-4fc1-bfa2-5bf1395ae0e4",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "Fasta Statistics on the genome",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "fasta": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": " Fasta Statistics ",
+            "name": "Fasta Statistics",
+            "outputs": [
+                {
+                    "name": "stats_output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 490,
+                "top": 300
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "0dbb995c7d35",
+                "name": "fasta_stats",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"gaps_option\": false, \"genome_size\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0",
+            "type": "tool",
+            "uuid": "1b11b2a5-4085-4bae-8049-7d75f04620cc",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "fasta stats genome",
+                    "output_name": "stats_output",
+                    "uuid": "4c11da0f-57a5-4751-84f9-c6d4e1325602"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "Completeness assessment of the genome using the Busco tool",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.7.1+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "lineage|lineage_dataset": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "lineage"
+                }
+            ],
+            "label": "BUSCO on the genome sequences",
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                },
+                {
+                    "name": "busco_missing",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary_image",
+                    "type": "png"
+                },
+                {
+                    "name": "busco_gff",
+                    "type": "gff3"
+                }
+            ],
+            "position": {
+                "left": 720,
+                "top": 40.02932102857932
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.7.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2babe6d5c561",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"contig_break\": \"10\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"use_augustus\": {\"use_augustus_selector\": \"miniprot\", \"__current_case__\": 1}}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": {\"__class__\": \"ConnectedValue\"}}, \"lineage_conditional\": {\"selector\": \"cached\", \"__current_case__\": 0, \"cached_db\": \"all+2024-03-21-114020\"}, \"outputs\": [\"short_summary\", \"image\", \"gff\", \"missing\"], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.7.1+galaxy0",
+            "type": "tool",
+            "uuid": "b3def683-4967-454a-96c5-e95d609cb83c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "busco table genome",
+                    "output_name": "busco_table",
+                    "uuid": "88d4ce85-b45d-40a2-85a0-ee4af20b70aa"
+                },
+                {
+                    "label": "busco sum genome",
+                    "output_name": "busco_sum",
+                    "uuid": "8d39ad7f-b6c7-4b29-b225-c0c9e842f528"
+                },
+                {
+                    "label": "busco image genome",
+                    "output_name": "summary_image",
+                    "uuid": "c2f275c1-dc94-4914-a3b2-4683f5f742a3"
+                },
+                {
+                    "label": "busco missing genome",
+                    "output_name": "busco_missing",
+                    "uuid": "facba50a-b7d0-426a-9fe5-62871940f5c9"
+                },
+                {
+                    "label": "busco gff genome",
+                    "output_name": "busco_gff",
+                    "uuid": "e44bfb06-31df-434e-bd12-b3ff7aef73ae"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "Genome annotation with Braker3",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/genouest/braker3/braker3/3.0.8+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "evidences|bam": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "evidences|prot_seq": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "genome": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool BRAKER3",
+                    "name": "advanced"
+                },
+                {
+                    "description": "runtime parameter for tool BRAKER3",
+                    "name": "advanced"
+                },
+                {
+                    "description": "runtime parameter for tool BRAKER3",
+                    "name": "evidences"
+                },
+                {
+                    "description": "runtime parameter for tool BRAKER3",
+                    "name": "evidences"
+                },
+                {
+                    "description": "runtime parameter for tool BRAKER3",
+                    "name": "genome"
+                }
+            ],
+            "label": "Braker3",
+            "name": "BRAKER3",
+            "outputs": [
+                {
+                    "name": "output_gff",
+                    "type": "gff3"
+                }
+            ],
+            "position": {
+                "left": 400,
+                "top": 700
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/genouest/braker3/braker3/3.0.8+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "a9b0b926e133",
+                "name": "braker3",
+                "owner": "genouest",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced\": {\"filterOutShort\": false, \"eval\": {\"__class__\": \"RuntimeValue\"}, \"eval_pseudo\": {\"__class__\": \"RuntimeValue\"}, \"alternatives_from_evidence\": true}, \"augustus\": {\"crf\": false, \"rounds\": \"5\", \"AUGUSTUS_ab_initio\": false, \"keepCrf\": false}, \"dev\": {\"splice_sites\": null, \"min_contig\": null, \"gc_probability\": \"0.001\", \"gm_max_intergenic\": null, \"downsampling_lambda\": \"2\"}, \"evidences\": {\"bam\": {\"__class__\": \"RuntimeValue\"}, \"prot_seq\": {\"__class__\": \"RuntimeValue\"}}, \"genemark\": {\"fungus\": true}, \"genome\": {\"__class__\": \"RuntimeValue\"}, \"output_format\": \"gff3\", \"softmasking\": true, \"species\": null, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.8+galaxy0",
+            "type": "tool",
+            "uuid": "e9487f14-10d3-45b6-b40f-b559150606fd",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "braker gff",
+                    "output_name": "output_gff",
+                    "uuid": "4c56d329-a4d3-40e5-b0e7-0062256caf13"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "Converts GFF files to other formats, such as FASTA",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.4+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "output_gff"
+                },
+                "reference_genome|genome_fasta": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool gffread",
+                    "name": "chr_replace"
+                },
+                {
+                    "description": "runtime parameter for tool gffread",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool gffread",
+                    "name": "reference_genome"
+                }
+            ],
+            "label": "GFFRead",
+            "name": "gffread",
+            "outputs": [
+                {
+                    "name": "output_pep",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 1030,
+                "top": 410
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3e436657dcd0",
+                "name": "gffread",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chr_replace\": {\"__class__\": \"RuntimeValue\"}, \"decode_url\": false, \"expose\": false, \"filtering\": null, \"full_gff_attribute_preservation\": false, \"gffs\": {\"gff_fmt\": \"none\", \"__current_case__\": 0}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"maxintron\": null, \"merging\": {\"merge_sel\": \"none\", \"__current_case__\": 0}, \"reference_genome\": {\"source\": \"history\", \"__current_case__\": 2, \"genome_fasta\": {\"__class__\": \"RuntimeValue\"}, \"ref_filtering\": null, \"fa_outputs\": [\"-y pep.fa\"]}, \"region\": {\"region_filter\": \"none\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.1.4+galaxy0",
+            "type": "tool",
+            "uuid": "71e53a4c-8fcd-4965-9959-1667c6e1fb91",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "predicted proteins",
+                    "output_name": "output_pep",
+                    "uuid": "68c2a3eb-d2ce-432e-b1a9-e83680eb22d8"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "reference_genome|genome": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "track_groups_0|data_tracks_0|data_format|annotation": {
+                    "id": 6,
+                    "output_name": "output_gff"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool JBrowse",
+                    "name": "reference_genome"
+                }
+            ],
+            "label": "JBrowse",
+            "name": "JBrowse",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 1060,
+                "top": 820
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "a6e57ff585c0",
+                "name": "jbrowse",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"action\": {\"action_select\": \"create\", \"__current_case__\": 0}, \"gencode\": \"1\", \"jbgen\": {\"defaultLocation\": \"\", \"trackPadding\": \"20\", \"shareLink\": true, \"aboutDescription\": \"\", \"show_tracklist\": true, \"show_nav\": true, \"show_overview\": true, \"show_menu\": true, \"hideGenomeOptions\": false}, \"plugins\": {\"BlastView\": true, \"ComboTrackSelector\": false, \"GCContent\": false}, \"reference_genome\": {\"genome_type_select\": \"history\", \"__current_case__\": 1, \"genome\": {\"__class__\": \"RuntimeValue\"}}, \"standalone\": \"minimal\", \"track_groups\": [{\"__index__\": 0, \"category\": \"Braker3 annotation\", \"data_tracks\": [{\"__index__\": 0, \"data_format\": {\"data_format_select\": \"gene_calls\", \"__current_case__\": 2, \"annotation\": {\"__class__\": \"RuntimeValue\"}, \"match_part\": {\"match_part_select\": false, \"__current_case__\": 1}, \"index\": false, \"track_config\": {\"track_class\": \"NeatHTMLFeatures/View/Track/NeatFeatures\", \"__current_case__\": 3, \"html_options\": {\"topLevelFeatures\": null}}, \"jbstyle\": {\"style_classname\": \"feature\", \"style_label\": \"product,name,id\", \"style_description\": \"note,description\", \"style_height\": \"10px\", \"max_height\": \"600\"}, \"jbcolor_scale\": {\"color_score\": {\"color_score_select\": \"none\", \"__current_case__\": 0, \"color\": {\"color_select\": \"automatic\", \"__current_case__\": 0}}}, \"jb_custom_config\": {\"option\": []}, \"jbmenu\": {\"track_menu\": []}, \"track_visibility\": \"default_off\", \"override_apollo_plugins\": \"False\", \"override_apollo_drag\": \"False\"}}]}], \"uglyTestingHack\": \"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.16.11+galaxy1",
+            "type": "tool",
+            "uuid": "ddb9f594-c5b4-4460-b52e-4ea8fb9777cb",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "jbrowse",
+                    "output_name": "output",
+                    "uuid": "c25c5443-10b5-478f-a04b-26c98383090a"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "Completeness assessment of the genome using the Busco tool",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.7.1+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "output_pep"
+                },
+                "lineage|lineage_dataset": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "lineage"
+                }
+            ],
+            "label": "BUSCO on the predicted protein sequences",
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                },
+                {
+                    "name": "busco_missing",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary_image",
+                    "type": "png"
+                },
+                {
+                    "name": "busco_gff",
+                    "type": "gff3"
+                }
+            ],
+            "position": {
+                "left": 1280,
+                "top": 230
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.7.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2babe6d5c561",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"contig_break\": \"10\"}, \"busco_mode\": {\"mode\": \"tran\", \"__current_case__\": 1}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": {\"__class__\": \"ConnectedValue\"}}, \"lineage_conditional\": {\"selector\": \"cached\", \"__current_case__\": 0, \"cached_db\": \"all+2024-03-21-114020\"}, \"outputs\": [\"short_summary\", \"image\", \"gff\", \"missing\"], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.7.1+galaxy0",
+            "type": "tool",
+            "uuid": "0cf163fb-6f82-468d-8ad0-442a688d0d05",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "busco image predicted proteins",
+                    "output_name": "summary_image",
+                    "uuid": "cb6b286c-ba11-48e9-b4dd-96a0e6da011b"
+                },
+                {
+                    "label": "busco gff predicted proteins",
+                    "output_name": "busco_gff",
+                    "uuid": "7b588cd3-1d62-487d-979a-3da07e2441c7"
+                },
+                {
+                    "label": "busco sum predicted proteins",
+                    "output_name": "busco_sum",
+                    "uuid": "73725e32-7d72-42a6-b298-2e8c18ecc870"
+                },
+                {
+                    "label": "busco missing predicted proteins",
+                    "output_name": "busco_missing",
+                    "uuid": "54997a8e-0555-42d7-938c-fd8a3fd0caf0"
+                },
+                {
+                    "label": "busco table predicted proteins",
+                    "output_name": "busco_table",
+                    "uuid": "aa85c4a1-7d89-48f1-900a-77508af8d600"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "genomeannotation",
+        "busco",
+        "jbrowse",
+        "braker3"
+    ],
+    "uuid": "0618a503-8202-40a2-be02-e601a3104bdb",
+    "version": 1
+}
