@@ -39,6 +39,7 @@ contributions:
   - neoformit
   editing:
   - Swathi266
+  - VerenaMoo
   funding:
   - gallantries
 
