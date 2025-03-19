@@ -355,7 +355,7 @@ Ideally, Illumina sequence data should not have any adapter sequences present. B
 >
 > The two plots appear quite similar, with the greatest difference that Falco includes a second line indicating the presence of a PolyA sequence, which FastQC doesn't search for. Additionally, again the y-axis of the Falco plot is adjusted to display only the relevant range.
 >
->[Here's](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/10%20Adapter%20Content.html) the official documentation of FastQC of this plot.
+>Here's the [official documentation of FastQC of this plot](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/10%20Adapter%20Content.html).
 {: .details}
 
 > <details-title>Other adapter content profiles</details-title>
@@ -390,7 +390,7 @@ This plot will only appear for an Illumina library which retains its original se
 >
 > In these plots, the different colours are immediately noticeable. For FastQC hotter colours indicate worse quality while colder colours represent quality at or above the average. Upon closer insperction, slight differences in the results can be observed, for example the red box on the far left of the FastQC plot has no corresponding box in the Falco plot. However, overall, the results are very similar and effectively highlight the key quality differences between the tiles.
 >
->You can find the official documentation of FastQC [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/12%20Per%20Tile%20Sequence%20Quality.html).
+>Here you can have a look at the [official documentation of FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/12%20Per%20Tile%20Sequence%20Quality.html).
 {: .details}
 
 > <details-title>Other tile quality profiles</details-title>
@@ -407,7 +407,7 @@ It plots the average quality score over the full length of all reads on the x-ax
 
 ![Per sequence quality scores](../../images/quality-control/per_sequence_quality_scores-before.png "Per sequence quality scores")
 
-The distribution of average read quality should form a tight peak in the upper range of the plot. It can also report if a subset of the sequences have universally low quality values: it can happen because some sequences are poorly imaged (on the edge of the field of view etc). However, these should represent only a small percentage of the total sequences. [Here's](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/3%20Per%20Sequence%20Quality%20Scores.html) the official documentation of FastQC for this plot.
+The distribution of average read quality should form a tight peak in the upper range of the plot. It can also report if a subset of the sequences have universally low quality values: it can happen because some sequences are poorly imaged (on the edge of the field of view etc). However, these should represent only a small percentage of the total sequences. Here's the [official documentation of FastQC for this plot](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/3%20Per%20Sequence%20Quality%20Scores.html).
 
 > <details-title>Differences FastQC and Falco</details-title>
 >
@@ -466,7 +466,7 @@ This plot displays the number of reads vs. percentage of bases G and C per read.
 
 An unusually-shaped distribution could indicate a contaminated library or some other kind of biased subset. A shifted normal distribution indicates some systematic bias, which is independent of base position. If there is a systematic bias which creates a shifted normal distribution then this won't be flagged as an error by the module since it doesn't know what your genome's GC content should be.
 
-But there are also other situations in which an unusually-shaped distribution may occur. For example, with RNA sequencing there may be a greater or lesser distribution of mean GC content among transcripts causing the observed plot to be wider or narrower than an ideal normal distribution. [Here's](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/5%20Per%20Sequence%20GC%20Content.html) the official documentation of FastQC regarding this plot.
+But there are also other situations in which an unusually-shaped distribution may occur. For example, with RNA sequencing there may be a greater or lesser distribution of mean GC content among transcripts causing the observed plot to be wider or narrower than an ideal normal distribution. You can find the [official documentation of FastQC regarding this plot](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/5%20Per%20Sequence%20GC%20Content.html) here.
 
 > <question-title></question-title>
 >
@@ -500,7 +500,7 @@ The graph shows in blue the percentage of reads of a given sequence in the file 
 
 > <details-title>Differences FastQC and Falco</details-title>
 >
-> The sequence duplication level plots only differ in minor design choices and the adjusted y-axis in the Falco plot. [Here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/8%20Duplicate%20Sequences.html) you can find more information about the FastQC plot.
+> The sequence duplication level plots only differ in minor design choices and the adjusted y-axis in the Falco plot. You can find more information about the [FastQC plot](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/8%20Duplicate%20Sequences.html) here.
 {: .details}
 
 In a diverse library most sequences will occur only once in the final set. A low level of duplication may indicate a very high level of coverage of the target sequence, but a high level of duplication is more likely to indicate some kind of enrichment bias.
@@ -533,7 +533,7 @@ A normal high-throughput library will contain a diverse set of sequences, with n
 
 Falco lists all of the sequences which make up more than 0.1% of the total. For each over-represented sequence Falco will look for matches in a database of common contaminants and will report the best hit it finds. Hits must be at least 20bp in length and have no more than 1 mismatch. Finding a hit doesn't necessarily mean that this is the source of the contamination, but may point you in the right direction. It's also worth pointing out that many adapter sequences are very similar to each other so you may get a hit reported which isn't technically correct, but which has a very similar sequence to the actual match.
 
-RNA sequencing data may have some transcripts that are so abundant that they register as over-represented sequence. With DNA sequencing data no single sequence should be present at a high enough frequency to be listed, but we can sometimes see a small percentage of adapter reads. [Here's](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/9%20Overrepresented%20Sequences.html) the official documentation of FastQC regarding this output.
+RNA sequencing data may have some transcripts that are so abundant that they register as over-represented sequence. With DNA sequencing data no single sequence should be present at a high enough frequency to be listed, but we can sometimes see a small percentage of adapter reads. Here you can find  the [official documentation of FastQC regarding this output](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/9%20Overrepresented%20Sequences.html).
 
 > <question-title></question-title>
 >
