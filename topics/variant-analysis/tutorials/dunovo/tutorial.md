@@ -408,5 +408,5 @@ You can use the variant calling workflow to call variants using the SSCS instead
 
 You should now understand duplex sequencing, rare variants, and be able to process the former to find the latter.
 
-### If things don't work...
+# If things don't work...
 ...you need to complain. Use [Galaxy's Help Forum](https://help.galaxyproject.org/) to do this.
