@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@41f58f783f34afab5a4a75587b53b69524943ed4",
+		release: "galaxy-training-network@e5c01845f135c0eaf506bd02f9d02b0825b1680c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Primer and primer scheme design for pan-specific detection and sequencing of viral pathogens across genotypes">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-03-20 08:06:12 +0000">
+<meta name="DC.date" content="2025-03-20 14:21:00 +0000">
 <meta name="DC.creator" content="Verena Moosmann">
 <meta name="DC.creator" content="Elischa Berger">
 <meta name="DC.creator" content="Wolfgang Maier"><meta name="description" content="Analyses of sequences">
@@ -188,7 +188,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-03-20 08:06:12 +0000",
+  "dateModified": "2025-03-20 14:21:00 +0000",
   "datePublished": "2025-03-20 08:06:12 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -265,7 +265,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Primer and primer scheme design for pan-specific detection and sequencing of viral pathogens across genotypes",
   "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/viral_primer_design/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT1H",
   "teaches": "- Reproduce published qPCR primers and primer schemes for polio virus using MAFFT and varVAMP\n- Gain the knowledge and confidence to create your own primers and primer schemes",
   "keywords": [
@@ -513,11 +513,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "@type": "Thing",
       "url": "https://bio.tools/tool/varvamp",
       "name": "varVAMP"
-    },
-    {
-      "@type": "Thing",
-      "url": "https://bio.tools/tool/MAFFT",
-      "name": "MAFFT"
     },
     {
       "@type": "Thing",
@@ -932,7 +927,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -1073,7 +1068,7 @@ To generate an MSA, we align the previously unaligned genome datasets with <stro
   <div class="box-title hands-on-title" id="hands-on-generate-multiple-sequence-alignment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generate multiple sequence alignment</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy0" title="MAFFT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MAFFT</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 7.526+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy1" title="MAFFT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MAFFT</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 7.526+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to align”</em>: <code class="language-plaintext highlighter-rouge">Polio 1 unaligned</code> (the output of the <strong>EMBOSS degapseq</strong> tool)</li>
         <li><em>“Type of sequences”</em>: <code class="language-plaintext highlighter-rouge">auto-detect</code> or <code class="language-plaintext highlighter-rouge">Nucleic acids</code></li>
@@ -1111,7 +1106,7 @@ In many situations you will be downloading the starting sequences one by one and
 
         <p>This will create a separate dataset for each of our Polio 1 sequences and put them all into a collection.</p>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy0" title="MAFFT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MAFFT</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 7.526+galaxy0)</span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy1" title="MAFFT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MAFFT</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 7.526+galaxy1)</span> with the following parameters:
         <ul>
           <li><em>“For multiple inputs generate”</em>: <code class="language-plaintext highlighter-rouge">a single MSA of all sequences from all inputs</code>
             <ul>
@@ -1887,11 +1882,6 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: mafft
   owner: rnateam
-  revisions: 8e649f27aa0d
-  tool_panel_section_label: Multiple Alignments
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: mafft
-  owner: rnateam
   revisions: 1233363389c1
   tool_panel_section_label: Multiple Alignments
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
@@ -1996,7 +1986,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/41f58f783f34afab5a4a75587b53b69524943ed4">41f58f7</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e5c01845f135c0eaf506bd02f9d02b0825b1680c">e5c0184</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
