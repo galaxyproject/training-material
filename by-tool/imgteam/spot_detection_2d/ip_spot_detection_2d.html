@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@7124d0ce9650aaf3b6914752e97e3852c86772b2",
+		release: "galaxy-training-network@b4cd66bd1fc2bd8b7ca287722760a92a93819cd1",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -205,10 +205,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <hgroup>
 	<h1>
-		Spot Detection:
-		based on local intensity maxima
+		Perform 2-D spot detection:
+		
 	</h1>
-	<pre>toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.0.1</pre>
+	<pre>toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.1+galaxy0</pre>
 </hgroup>
 
 <section>
@@ -221,8 +221,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				<ul>
 					
 					<li>
-						<a href="https://bio.tools/scikit-image">
-						bio.tools: scikit-image
+						<a href="https://bio.tools/galaxy_image_analysis">
+						bio.tools: Galaxy Image Analysis
 						</a>
 					</li>
 					
@@ -236,29 +236,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				
 					<li>
 						
-						<a href="https://www.ebi.ac.uk/ols4/ontologies/edam/classes/http%253A%252F%252Fedamontology.org%252Foperation_2409">
-							Data handling
-						</a>
-					</li>
-				
-					<li>
-						
-						<a href="https://www.ebi.ac.uk/ols4/ontologies/edam/classes/http%253A%252F%252Fedamontology.org%252Foperation_0337">
-							Visualisation
-						</a>
-					</li>
-				
-					<li>
-						
 						<a href="https://www.ebi.ac.uk/ols4/ontologies/edam/classes/http%253A%252F%252Fedamontology.org%252Foperation_3443">
 							Image analysis
-						</a>
-					</li>
-				
-					<li>
-						
-						<a href="https://www.ebi.ac.uk/ols4/ontologies/edam/classes/http%253A%252F%252Fedamontology.org%252Foperation_3553">
-							Image annotation
 						</a>
 					</li>
 				
@@ -272,8 +251,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				
 					<li>
 						
-						<a href="https://www.ebi.ac.uk/ols4/ontologies/edam/classes/http%253A%252F%252Fedamontology.org%252Ftopic_3068">
-							Literature and language
+						<a href="https://www.ebi.ac.uk/ols4/ontologies/edam/classes/http%253A%252F%252Fedamontology.org%252Ftopic_0091">
+							Bioinformatics
 						</a>
 					</li>
 				
@@ -281,13 +260,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 						
 						<a href="https://www.ebi.ac.uk/ols4/ontologies/edam/classes/http%253A%252F%252Fedamontology.org%252Ftopic_3382">
 							Imaging
-						</a>
-					</li>
-				
-					<li>
-						
-						<a href="https://www.ebi.ac.uk/ols4/ontologies/edam/classes/http%253A%252F%252Fedamontology.org%252Ftopic_3372">
-							Software engineering
 						</a>
 					</li>
 				
@@ -299,6 +271,31 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					<p>Within GTN tutorials</p>
 				</hgroup>
 
+				
+				<details>
+					<summary>0.1+galaxy0</summary>
+					
+					
+					
+					
+
+					<ul>
+						
+						<li>
+							<a href="https://usegalaxy.eu?tool_id=toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.1+galaxy0&version=0.1+galaxy0">
+								UseGalaxy.eu <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+							</a>
+						</li>
+						
+						
+						<li>
+								<a href="https://usegalaxy.cz/?tool_id=toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.1+galaxy0&version=0.1+galaxy0">
+								UseGalaxy.cz
+							</a>
+						</li>
+						
+					</ul>
+				</details>
 				
 				<details>
 					<summary>0.0.1</summary>
@@ -331,6 +328,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<div class="col-md-9">
 				<h2>Relevant Tutorials</h2>
 				<ul>
+					
+					<li>
+						Imaging /
+						<a href="/training-material/topics/imaging/tutorials/2D-spot-detection/tutorial.html">
+						Quantification of single-molecule RNA fluorescence in situ hybridization (smFISH) in yeast cell lines
+						</a>
+					</li>
 					
 					<li>
 						Imaging /
@@ -422,7 +426,7 @@ details:active {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/7124d0ce9650aaf3b6914752e97e3852c86772b2">7124d0c</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b4cd66bd1fc2bd8b7ca287722760a92a93819cd1">b4cd66b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
