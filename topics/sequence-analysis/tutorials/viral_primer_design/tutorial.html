@@ -1,0 +1,2029 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Primer and primer scheme design for pan-specific detection and sequencing of viral pathogens across genotypes / Primer and primer scheme design for pan-specific detection and sequencing of viral pathogens across genotypes / Sequence analysis</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@7124d0ce9650aaf3b6914752e97e3852c86772b2",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/viral_primer_design/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Primer and primer scheme design for pan-specific detection and sequencing of viral pathogens across genotypes">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-03-20 08:06:12 +0000">
+<meta name="DC.creator" content="Verena Moosmann">
+<meta name="DC.creator" content="Elischa Berger">
+<meta name="DC.creator" content="Wolfgang Maier"><meta name="description" content="Analyses of sequences">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Sequence analysis / Primer and primer scheme design for pan-specific detection and sequencing of viral pathogens across genotypes / Hands-on: Primer and primer scheme design for pan-specific detection and sequencing of viral pathogens across genotypes">
+        <meta property="og:description" content="Analyses of sequences">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/sequence-analysis/tutorials/viral_primer_design/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Primer and primer scheme design for pan-specific detection and sequencing of viral pathogens across genotypes",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-03-20 08:06:12 +0000",
+  "datePublished": "2025-03-20 08:06:12 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "101046203",
+      "url": "https://cordis.europa.eu/project/id/101046203",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "BeYond-COVID",
+        "description": "BY-COVID is an EC funded project that tackles the data challenges that can hinder effective pandemic response.\n\nThis project has received funding from the European Union’s Horizon Europe research and innovation programme under grant agreement № 101046203 (BY-COVID)\n",
+        "url": "https://by-covid.org/",
+        "logo": "https://github.com/by-covid.png"
+      }
+    }
+  ],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Sequence analysis",
+    "description": "Analyses of sequences",
+    "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/"
+  },
+  "abstract": "Modern molecular, DNA and RNA-based methods have seen ever increasing use, over the last decades, in the detection and analysis of viral pathogens. Most of these methods rely on PCR for amplification of viral DNA/RNA and are, thus, dependent on primers that recognize viral targets reliably and selectively. Designing such primers can be challenging if the diversity of viral genotypes that need to be recognized by the primers is high.",
+  "learningResourceType": "e-learning",
+  "name": "Primer and primer scheme design for pan-specific detection and sequencing of viral pathogens across genotypes",
+  "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/viral_primer_design/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT1H",
+  "teaches": "- Reproduce published qPCR primers and primer schemes for polio virus using MAFFT and varVAMP\n- Gain the knowledge and confidence to create your own primers and primer schemes",
+  "keywords": [
+    "Sequence analysis",
+    "virology"
+  ],
+  "description": "## Abstract\n\nModern molecular, DNA and RNA-based methods have seen ever increasing use, over the last decades, in the detection and analysis of viral pathogens. Most of these methods rely on PCR for amplification of viral DNA/RNA and are, thus, dependent on primers that recognize viral targets reliably and selectively. Designing such primers can be challenging if the diversity of viral genotypes that need to be recognized by the primers is high.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What are pan-specific primers and primer schemes and why are they important?\n - How to capture viral species diversity in the form of a multiple sequence alignment?\n - How to design primers that will be mostly unaffected by differences between viral genotypes?\n - How to avoid generating primers with off-target binding sites?\n\n\n## Learning Objectives\n\n- Reproduce published qPCR primers and primer schemes for polio virus using MAFFT and varVAMP\n- Gain the knowledge and confidence to create your own primers and primer schemes\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/VerenaMoo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/VerenaMoo/",
+      "name": "Verena Moosmann",
+      "image": "https://avatars.githubusercontent.com/VerenaMoo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/elischberg/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/elischberg/",
+      "name": "Elischa Berger",
+      "image": "https://avatars.githubusercontent.com/elischberg",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/",
+      "name": "Wolfgang Maier",
+      "image": "https://avatars.githubusercontent.com/wm75",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/by-covid/",
+          "name": "BeYond-COVID",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://by-covid.org/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9464-6640",
+      "orcid": "https://orcid.org/0000-0002-9464-6640"
+    }
+  ],
+  "contributor": [],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Sequence analysis",
+      "description": "Analyses of sequences",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0080",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0080",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0080"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/viral_primer_design/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/compute_sequence_length",
+      "name": "compute_sequence_length"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/blast",
+      "name": "BLAST"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/varvamp",
+      "name": "varVAMP"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/MAFFT",
+      "name": "MAFFT"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/MAFFT",
+      "name": "MAFFT"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://doi.org/10.5281/zenodo.14845697",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/sequence-analysis" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Sequence analysis
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/sequence-analysis/faqs/" title="Check our FAQs for the Sequence analysis topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/sequence-analysis/tutorials/viral_primer_design/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/sequence-analysis/tutorials/viral_primer_design/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-sequence-analysis">
+    <h1 data-toc-skip>Primer and primer scheme design for pan-specific detection and sequencing of viral pathogens across genotypes</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/VerenaMoo/" class="contributor-badge contributor-VerenaMoo"><img src="https://avatars.githubusercontent.com/VerenaMoo?s=36" alt="Verena Moosmann avatar" width="36" class="avatar" />
+    Verena Moosmann</a><a href="/training-material/hall-of-fame/elischberg/" class="contributor-badge contributor-elischberg"><img src="https://avatars.githubusercontent.com/elischberg?s=36" alt="Elischa Berger avatar" width="36" class="avatar" />
+    Elischa Berger</a><a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/wm75?s=36" alt="Wolfgang Maier avatar" width="36" class="avatar" />
+    Wolfgang Maier</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are pan-specific primers and primer schemes and why are they important?</p>
+</li>
+        
+        <li><p>How to capture viral species diversity in the form of a multiple sequence alignment?</p>
+</li>
+        
+        <li><p>How to design primers that will be mostly unaffected by differences between viral genotypes?</p>
+</li>
+        
+        <li><p>How to avoid generating primers with off-target binding sites?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Reproduce published qPCR primers and primer schemes for polio virus using MAFFT and varVAMP</p>
+</li>
+        
+        <li><p>Gain the knowledge and confidence to create your own primers and primer schemes</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://doi.org/10.5281/zenodo.14845697">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/sequence-analysis/tutorials/viral_primer_design/workflows/" title="Primer and primer scheme design for pan-specific detection and sequencing of viral pathogens across genotypes workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/sequence-analysis/tutorials/viral_primer_design/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 20, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 20, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Modern molecular, DNA and RNA-based methods have seen ever increasing use, over the last decades, in the detection and analysis of viral pathogens. Most of these methods rely on PCR for amplification of viral DNA/RNA and are, thus, dependent on primers that recognize viral targets reliably and selectively. Designing such primers can be challenging if the diversity of viral genotypes that need to be recognized by the primers is high.</p>
+
+<p>Quantitative real-time PCR (qPCR) is a very well established tool for detection of viral pathogens and for estimating viral load in samples. In its most widely used form in molecular diagnosis, qPCR requires two primers for amplification of a stretch of viral genetic material and an additional oligonucleotide probe that recognizes the amplified sequence and is itself used for fluorescence-based detection. Hence, in this case, three oligonucleotide sequences need to be designed that must recognize all viral genotypes of interest.</p>
+
+<p>More recently, starting with the Zika virus epidemic from 2015 to 2016 and boosted by the 2020-2023 SARS-CoV-2 pandemic, tiled-amplicon sequencing has emerged as a powerful method for reconstructing full viral genomes directly from samples obtained from patients (<span class="citation"><a href="#Quick2017">Quick <i>et al.</i> 2017</a></span>). This method relies on multiplex PCRs to obtain amplification products (amplicons) that together cover (nearly) the complete genome of the viral pathogen. Overlap between amplicons (tiling) is required to achieve gap-free genome reconstruction and overlapping amplicons are generated in separate multiplex PCR reactions (pools) to avoid interaction of products during PCR. In this case each single amplicon is generated from two primers that, ideally, all need to be able to recognize all relevant viral genotypes and should, as far as possible not interact with other primers present in the same amplification pool. To illustrate the complexity involved, consider the example of SARS-CoV-2: <a href="https://github.com/artic-network/primer-schemes/tree/master/nCoV-2019/V5.3.2">version 5.3.2</a> of the <a href="https://artic.network/">ARTIC network</a>’s SARS-CoV-2 primer scheme defines 192 primers that generate 48 amplicons in each of two amplification pools and all these primers should bind efficiently to the genome sequences of all currently (first half of 2024) circulating omicron lineages (see the <a href="https://community.artic.network/t/sars-cov-2-version-5-3-2-scheme-release/462">v5.3.2 primer scheme announcement</a> for the full details).</p>
+
+<p>While SARS-CoV-2 is an extremely well-studied example, many other viral pathogens display a far greater sequence diversity than that of existing SARS-CoV-2 lineages making it even harder to come up with pan-specific primer sets for reliable amplification of arbitrary samples of unknown genotype. The three serotypes of poliovirus (PV-1, PV-2 and PV-3), for example, share only ~70% pairwise sequence identity with one another (compared to still ~ 99% for current SARS-CoV-2 lineages).</p>
+
+<p>In this tutorial we investigate a robust bioinformatics approach that lets you design pan-specific PCR primers or entire primer schemes for viral pathogens with high sequence diversity. The design process starts from known genome sequences of viral isolates, which are supposed to represent the existing sequence diversity of the viral pathogen across its genotypes. From these sequences, we build a multiple sequence alignment, which then serves as input to the primer design tool <strong>varVAMP</strong>. This tool will try to identify possible primer sites that are conserved enough to work across genotypes while considering user-specified constraints like amplicon sizes for tiled-amplicon sequencing or desired qPCR probe characteristics.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#data-and-galaxy-preparation" id="markdown-toc-data-and-galaxy-preparation">Data and Galaxy preparation</a>    <ol>
+      <li><a href="#prepare-a-new-galaxy-history" id="markdown-toc-prepare-a-new-galaxy-history">Prepare a new Galaxy history</a></li>
+      <li><a href="#get-viral-reference-sequences" id="markdown-toc-get-viral-reference-sequences">Get viral reference sequences</a></li>
+      <li><a href="#transform-aligned-sequences-into-unaligned-fasta-format" id="markdown-toc-transform-aligned-sequences-into-unaligned-fasta-format">Transform aligned sequences into unaligned FASTA format</a></li>
+    </ol>
+  </li>
+  <li><a href="#designing-a-pan-specific-primerprobe-combination-for-qpcr" id="markdown-toc-designing-a-pan-specific-primerprobe-combination-for-qpcr">Designing a pan-specific primer/probe combination for qPCR</a>    <ol>
+      <li><a href="#multiple-alignment-of-reference-sequences" id="markdown-toc-multiple-alignment-of-reference-sequences">Multiple alignment of reference sequences</a></li>
+      <li><a href="#one-step-primer-and-probe-design-for-qpcr" id="markdown-toc-one-step-primer-and-probe-design-for-qpcr">One-step primer and probe design for qPCR</a></li>
+      <li><a href="#advanced-approach-considering-potential-off-target-binding-sites-of-primers" id="markdown-toc-advanced-approach-considering-potential-off-target-binding-sites-of-primers">Advanced approach considering potential off-target binding sites of primers</a></li>
+    </ol>
+  </li>
+  <li><a href="#designing-a-complete-pan-specific-primer-scheme-for-tiled-amplicon-sequencing" id="markdown-toc-designing-a-complete-pan-specific-primer-scheme-for-tiled-amplicon-sequencing">Designing a complete pan-specific primer scheme for tiled-amplicon sequencing</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="data-and-galaxy-preparation">Data and Galaxy preparation</h1>
+
+<h2 id="prepare-a-new-galaxy-history">Prepare a new Galaxy history</h2>
+<p>Any analysis should get its own Galaxy history. So let’s start by creating a new one:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Prepare the Galaxy history</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this analysis</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the history</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name: <code class="language-plaintext highlighter-rouge">viral-primer-scheme-design tutorial</code></li>   <li>Click on <strong>Save</strong></li>   <li>To cancel renaming, click the <i class="fas fa-undo" aria-hidden="true"></i><span class="visually-hidden">galaxy-undo</span> “Cancel” button</li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which can be the case if you are using an older version of Galaxy) do the following:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name: <code class="language-plaintext highlighter-rouge">viral-primer-scheme-design tutorial</code></li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="get-viral-reference-sequences">Get viral reference sequences</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-the-polio-1-sequence-alignment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Get the Polio 1 sequence alignment</div>
+
+  <ol>
+    <li>
+      <p>Import the Polio 1 sequence alignment from</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/jonas-fuchs/ViralPrimerSchemes/79db0cc128079d770f2282b68a6e28142fd77473/input_alignments/polio1.aln
+</code></pre></div>      </div>
+      <p>and make sure the dataset format is set to <code class="language-plaintext highlighter-rouge">fasta</code>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fasta</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the dataset</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Polio 1 alignment</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="transform-aligned-sequences-into-unaligned-fasta-format">Transform aligned sequences into unaligned FASTA format</h2>
+
+<p>For the primer design, we need a multiple sequence alignment (MSA), which we can generate with <strong>MAFFT</strong> (<span class="citation"><a href="#Katoh2013">Katoh and Standley 2013</a></span>). The data we just downloaded consists of <em>already</em> aligned sequences, but we want to follow here a complete primer design workflow.
+That’s why, as our very first step, we will undo the alignment to obtain just a simple collection of viral sequences, then use MAFFT to recreate the alignment. To undo the existing alignment we will use one tool from the <strong>EMBOSS</strong> tool suite, a powerful and versatile collection of little tools to manipulate and analyze sequence data.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-degap-the-aligned-polio1-genome-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Degap the aligned Polio1 genome sequences</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS: degapseq20/5.0.0" title="degapseq tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>degapseq</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“On query”</em>: <code class="language-plaintext highlighter-rouge">Polio 1 alignment</code> (Input Polio 1 dataset)</li>
+        <li><em>“Output sequence file format”</em>: <code class="language-plaintext highlighter-rouge">FASTA (m)</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the dataset</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Polio 1 unaligned</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="designing-a-pan-specific-primerprobe-combination-for-qpcr">Designing a pan-specific primer/probe combination for qPCR</h1>
+
+<h2 id="multiple-alignment-of-reference-sequences">Multiple alignment of reference sequences</h2>
+
+<p>Now lets (re)create the multiple sequence alignment. varVAMP, the tool that will then design primers for us, needs the MSA to identify regions that are conserved enough between all the different viral genomes to offer candidate pan-specific primer binding sites.
+To generate an MSA, we align the previously unaligned genome datasets with <strong>MAFFT</strong>. MAFFT is a very popular program for multiple sequence alignment that gives the user the choice between many different alignment algorithms. For our purposes, we can, essentially, just use the default settings of the tool.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-generate-multiple-sequence-alignment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generate multiple sequence alignment</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy0" title="MAFFT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MAFFT</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 7.526+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to align”</em>: <code class="language-plaintext highlighter-rouge">Polio 1 unaligned</code> (the output of the <strong>EMBOSS degapseq</strong> tool)</li>
+        <li><em>“Type of sequences”</em>: <code class="language-plaintext highlighter-rouge">auto-detect</code> or <code class="language-plaintext highlighter-rouge">Nucleic acids</code></li>
+        <li><em>“MAFFT flavour”</em>: <code class="language-plaintext highlighter-rouge">FFT-NS-2 (fast, progressive method)</code></li>
+        <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">FASTA</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the dataset</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Polio 1 MSA</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>That was easy to set up and the tool run should not take very long with the <code class="language-plaintext highlighter-rouge">FFT-NS-2</code> alignment algorithm. MAFFT is a very powerful tool though and it may be worth considering not so simple usage scenarios. If you are mostly interested in using varVAMP, you can safely skip the following detail boxes, but if you want to learn more about using MAFFT, read on.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-mafft-multiple-input-datasets"><button class="gtn-boxify-button details" type="button" aria-controls="details-mafft-multiple-input-datasets" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details:  MAFFT - Multiple input datasets </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>With our Polio 1 data we had all the sequences that we wanted to align in a single multi-sequence FASTA dataset and could simply pass this one dataset to MAFFT.
+In many situations you will be downloading the starting sequences one by one and have them organized as a collection of single-sequence datasets. We can split out all our Polio 1 sequences into a collection to mimick this situation, then tweak the tool interface of MAFFT slightly to align them from that collection.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-create-a-msa-from-a-collection-of-input-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Create a MSA from a collection of input sequences</div>
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.2" title="Split file to dataset collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split file to dataset collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.5.2)</span> with the following parameters:
+        <ul>
+          <li><em>“Select the file type to split”</em>: <code class="language-plaintext highlighter-rouge">FASTA</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file to split”</em>: <code class="language-plaintext highlighter-rouge">Polio 1 unaligned</code> (the output of the <strong>EMBOSS degapseq</strong> tool)</li>
+        </ul>
+
+        <p>This will create a separate dataset for each of our Polio 1 sequences and put them all into a collection.</p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy0" title="MAFFT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MAFFT</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 7.526+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><em>“For multiple inputs generate”</em>: <code class="language-plaintext highlighter-rouge">a single MSA of all sequences from all inputs</code>
+            <ul>
+              <li>In <em>“Input batch”</em>:
+                <ul>
+                  <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> *“1: Input batch”
+                    <ul>
+                      <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sequences to align”</em>: the collection of individual Polio 1 sequences (the output of the <strong>Split file</strong> tool run)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><em>“Type of sequences”</em>: <code class="language-plaintext highlighter-rouge">auto-detect</code> or <code class="language-plaintext highlighter-rouge">Nucleic acids</code></li>
+          <li><em>“MAFFT flavour”</em>: <code class="language-plaintext highlighter-rouge">FFT-NS-2 (fast, progressive method)</code></li>
+          <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">FASTA</code></li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>The above steps should result in the same MSA that you created from the multi-sequence FASTA dataset.
+The tool also supports more complex input scenarios like collections of <em>multi-sequence</em> datasets where you want to create a <em>collection</em> of MSAs, one per input collection element, for which you’d use the <em>“For multiple inputs generate”</em>: <code class="language-plaintext highlighter-rouge">one or several MSAs depending on input structure</code>, and others.</p>
+
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-msa-multiple-sequence-alignment-with-mafft-methods"><button class="gtn-boxify-button details" type="button" aria-controls="details-msa-multiple-sequence-alignment-with-mafft-methods" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details:  MSA: Multiple sequence alignment with MAFFT - Methods </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>MAFFT is a program that offers different methods to align sequences.
+  These methods differ in terms of their speed and accuracy.</p>
+
+  <ol>
+    <li>
+      <p>The progressive methods, including the default setting <code class="language-plaintext highlighter-rouge">FFT-NS-2</code>, can align large numbers of sequences in relatively short time. These methods are the fastest but also have somewhat reduced accuracy (especially the <code class="language-plaintext highlighter-rouge">FFT-NS-1</code> method, which only does a single round of guide tree and alignment construction). The default <code class="language-plaintext highlighter-rouge">FFT-NS-2</code> method (with two rounds of guide tree and alignment construction) is often a good compromise between speed and accuracy.</p>
+    </li>
+    <li>
+      <p>The iterative refinement methods, <code class="language-plaintext highlighter-rouge">FFT-NS-i</code> and <code class="language-plaintext highlighter-rouge">NW-NS-i</code>, first generate a progressive alignment like the fast methods above, but then improve its accuracy over several refinement rounds.</p>
+    </li>
+    <li>
+      <p>The slowest methods are those that also evaluate the consistency of the multiple sequence alignment with pairwise alignments of the sequences during the iterative refinement phase. The three implementations of this approach (<code class="language-plaintext highlighter-rouge">L-INS-i</code>, <code class="language-plaintext highlighter-rouge">E-INS-i</code> and <code class="language-plaintext highlighter-rouge">G-INS-i</code>) differ in the algorithm that they use to generate the pairwise sequence alignments (local alignment with affine gap costs, local alignment with generalized affine gap costs, or global alignment, respectively). These methods are the most accurate ones for difficult alignments with many gaps. However, they are also very slow, which means that, in practice, their use is restricted to alignments of small numbers of sequences (a few hundred maximum).</p>
+    </li>
+  </ol>
+
+  <p>You can find more information about the individual methods in the <a href="https://mafft.cbrc.jp/alignment/software/algorithms/algorithms.html">MAFFT manual</a>.</p>
+
+</blockquote>
+
+<p>Our polio 1 sequence alignment is ready for further use, but let us take a closer look at it before we proceed with the primer design. To explore multiple sequence alignments, Galaxy offers a convenient interactive visualization.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualize-the-multiple-sequence-alignment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Visualize the multiple sequence alignment</div>
+
+  <ol>
+    <li>Click on the MAFFT output to expand this dataset</li>
+    <li>Click on <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> <strong>Visualize</strong></li>
+    <li>Maximize the browser window (the visualization we are about to launch may not rescale properly if you do this later!)</li>
+    <li>Select <strong>Multiple Sequence Alignment</strong> as the visualization</li>
+    <li>Wait for the alignment to finish loading</li>
+    <li>You can now navigate through the alignment with its horizontal and vertical scroll-bars, or by dragging the alignment itself around. Vertical navigation can also be done with the keyboard and you can go to any base position in the alignment directly via <strong>Extras</strong> -&gt; <strong>Jump to a column</strong>.</li>
+  </ol>
+
+</blockquote>
+
+<p>Take your time to familiarize yourself with the navigation options, then use them to compare your alignment to the view in the figure below.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/mafft_varvamp_training/aligned_Polio1_sequence128-142.png" alt="Galaxy-provided view into a small region of the aligned Polio 1 genomes. Blue buttons for configuring the visualization occupy the top row of the image. Below them are yellowish histogram bars the meaning of which will be explained in a questions/solutions box below. The lower part of the image has the view into the actual alignment with sequences color-coded by nucleotide and sequence IDs to the left of the actual sequences." width="1139" height="444" loading="lazy" /><a target="_blank" href="../../images/mafft_varvamp_training/aligned_Polio1_sequence128-142.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Visualization of the aligned Polio 1 genomes. The focused view is of sequences 128-142 in the region 1346-1394 of the alignment.</figcaption></figure>
+
+<p>Finally, before we proceed with the actual  primer design, here are some questions regarding the multiple sequence alignment and its generation.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many sequences were aligned and over what length?</li>
+    <li>In the alignment visualization, what are those vertical bars in the top row above the base positions?</li>
+    <li>Does the alignment give reason to believe that pan-specific primers for detection of all polio 1 sequences can be found?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>
+        <p>In total 241 sequences were aligned.
+You can expand the MSA dataset to get this number directly from Galaxy
+or you can scroll down to the last sequence in the MSA visualization.</p>
+
+        <p>The alignment has a total length of 7498 bases.
+You can scroll horizontally through the visualization, then read off the rightmost position to get this value.</p>
+
+        <p>If you want to know the length of the individual sequences instead of the alignment length (which includes gaps), you can, for example, run:</p>
+
+        <blockquote class="notranslate hands_on">
+          <div class="box-title hands-on-title" id="hands-on-get-sequence-lengths-from-a-fasta-input"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Get sequence lengths from a FASTA input</div>
+          <ol>
+            <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.4" title="Compute sequence length tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute sequence length</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.4)</span>
+              <ul>
+                <li><em>“Compute length for these sequences”</em>: <code class="language-plaintext highlighter-rouge">Polio 1 unaligned</code> (the output of the <strong>EMBOSS degapseq</strong> tool)</li>
+              </ul>
+
+              <p>Note that you need to select the <em>unaligned</em> sequences as input to the tool in order to avoid having gaps counted towards the sequence lengths.</p>
+            </li>
+          </ol>
+
+        </blockquote>
+
+        <p>The output of this extra step will be a tabular dataset with the names of sequences in the first and their lengths in the second column.
+This simple format could then be processed further with various other tools (like <strong>Datamash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) to obtain some descriptive statistics of the lengths.</p>
+      </li>
+      <li>The height of the bars indicates the sequence conservation at that site, with taller bars representing higher conservation.</li>
+      <li>The alignment shows generally good conservation among the different polio 1 virus sequences and it looks like it should be possible to find at least <em>some</em> conserved primer sites.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="one-step-primer-and-probe-design-for-qpcr">One-step primer and probe design for qPCR</h2>
+
+<p><em>Variable VirusAMPlicons</em> (<em>varVAMP</em>) is a tool to design primers for highly diverse viruses. The input required is an alignment of your viral (full-genome) sequences.</p>
+
+<p>As a first step, we want to use the tool to design qPCR primer/probe schemes based on our polio 1 sequence alignment.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-varvamp-modes"><button class="gtn-boxify-button details" type="button" aria-controls="details-varvamp-modes" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: varVAMP modes</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>For many virus genera, it is challenging to design pan-specific primers. varVAMP addresses this issue by introducing ambiguous characters into primers and minimizing mismatches at the 3’ end. While the primers may not work for all sequences in your input alignment, they should recognize the vast majority.</p>
+
+  <p>varVAMP offers three different modes:</p>
+
+  <ol>
+    <li><strong>SINGLE:</strong> varVAMP searches for the best primers and reports non-overlapping amplicons suitable for PCR-based screening approaches.</li>
+    <li><strong>TILED:</strong> Using a graph-based approach, varVAMP designs overlapping (tiled) amplicons that together cover the entire (as much as possible) viral genome. These amplicons are ideal for Oxford Nanopore or Illumina-based full-genome sequencing.</li>
+    <li><strong>QPCR:</strong> varVAMP searches for small amplicons with an optimized internal probe (TaqMan). It minimizes temperature differences between the primers and checks for secondary structures in the amplicons.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-generate-qpcr-primer-probe-set"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generate qPCR primer/probe set</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/varvamp/varvamp/1.2.2+galaxy0" title="varVAMP tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>varVAMP</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Multiple alignment of viral sequences”</em>: <code class="language-plaintext highlighter-rouge">Polio 1 MSA</code> (output of <strong>MAFFT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“What kind of primers would you like to design? (varvamp mode)”</em>: <code class="language-plaintext highlighter-rouge">qPCR primers (qpcr)</code>
+          <ul>
+            <li><em>“How to set the main parameters, threshold for consensus nucleotides and max ambiguous nts per primer?”</em>: <code class="language-plaintext highlighter-rouge">Specify values for both</code></li>
+            <li><em>“Threshold for consensus nucleotides”</em>: <code class="language-plaintext highlighter-rouge">0.93</code></li>
+            <li><em>“Maximum number of ambiguous nucleotides per primer to be tolerated”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+            <li><em>“Maximum number of ambiguous nucleotides per qPCR probe to be tolerated”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Move outputs to a dataset collection</p>
+
+      <p>Oh, that’s a <em>lot</em> of outputs!</p>
+
+      <p>Since, in this tutorial, we are going to run varVAMP several times with different settings it would be easy to get lost in all the output datasets if we are not organizing things a bit.
+So for the purpose of this tutorial, whenever a run of varVAMP has completed, we will move all of that run’s output datasets into a <em>collection</em>.
+Let’s do so for the varVAMP outputs just generated:</p>
+      <ol>
+        <li>Wait for all the varVAMP outputs to turn green</li>
+        <li>
+          <p>Move the outputs to a collection</p>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a dataset collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all outputs of the varVAMP run just finished</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create collection</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+          <p><!--END_SNIPPET--></p>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</blockquote>
+
+<p>As you can see varVAMP offers a wide range of outputs. For example, it is possible to obtain the locations of the designed primers and amplicons in BED file format or an overview plot of all possible amplicons as PDF. These outputs provide detailed information about the regions of interest and other potential primers. The varVAMP <em>“Analysis Log”</em> file contains information about the tool’s settings and procedures and is always included with the outputs. Take some time to review the different types of outputs and get familiar with the results.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-output-control"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Output control</div>
+
+  <p>Check your output files by comparing them with the example files from the <a href="https://github.com/jonas-fuchs/ViralPrimerSchemes/tree/main/varvamp_qpcr/polio1">varVAMP-qPCR-output GitHub page for Polio 1 virus</a>. There you can check if you created the same primers. The primer locations can be found in the BED file “primers.bed”. These primers were designed using varVAMP version 0.7.</p>
+</blockquote>
+
+<p>Here a few additional questions for you to check your results and assess your understanding</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How long are the three different amplicons?</li>
+    <li>Why are there primers for three different amplicons and not just one?</li>
+    <li>Given the penalty scores of the different amplicons, which of them should be used for qPCR?</li>
+    <li>There are so many configuration options for varVAMP. How can you quickly check which exact settings were in use for a given run of varVAMP?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The first amplicon has a length of 93 bases, the second 142 bases and the third is 77 bases long, as you can see in the file <em>“qPCR amplicon details”</em>.</li>
+      <li>varVAMP shows all amplicons it could find (well, up to 50 if you are not changing the <em>“Top n qPCR amplicons to test”</em> parameter) that fulfill the specified conditions like threshold or amplicon length. In our case three amplicons fulfill all conditions.</li>
+      <li>
+        <p>The penalty score of each amplicon is simply the sum of the 3 penalty scores of its oligonucleotides. Lower values are better than higher ones for both the individual scores as well as for their sum. Regarding just the overall penalty score, scheme 0, starting at position 1743 (1-based position), has the best value with 6.7 and would be the prefered scheme to use. However, it is also useful to take a closer look at the file <em>“primer details”</em> to compare the number of ambiguous bases, individual penalty scores and melting temperatures per oligonucleotide, especially for the probe.</p>
+
+        <blockquote class="details">
+          <div class="box-title details-title" id="details-1-based-vs-0-based-reporting-of-positions"><button class="gtn-boxify-button details" type="button" aria-controls="details-1-based-vs-0-based-reporting-of-positions" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: 1-based vs 0-based reporting of positions?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <p>varVAMP uses different formats to report nucleotide positions in its different outputs, which can be a bit confusing if you are not familiar with interval file formats.
+The BED format specification requires 0-based positions (i.e. the first base in a sequence has position 0) and regions are specified with non-inclusive ends. In other words, a sequence region covering everything from the first base through the fifth would be represented as 0 (Start) - 5 (non-inclusive End) in BED format, while you would probably have written it as 1 - 5 in your regular notes.
+As you can see from the above, you can</p>
+          <ul>
+            <li>calculate the length of a region in BED format simply by subtracting Start from End</li>
+            <li>transform BED format to 1-based, end-inclusive form by simply adding 1 to the Start position</li>
+          </ul>
+
+          <p>varVAMP sticks to the format specification for all its BED outputs, but uses standard 1-based, end-inclusive format in all tabular reports.
+That is why qPCR scheme 0 in our case is reported with 1742 (Start) - 1835 (End) in the <em>“Amplicon locations”</em> BED output, for example, but with 1743 (start) - 1835 (stop) in the tabular <em>“qPCR amplicon details”</em> output.</p>
+        </blockquote>
+      </li>
+      <li>The <em>“Analysis Log”</em> output lists all settings of all parameters that varVAMP used during that run.</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<h2 id="advanced-approach-considering-potential-off-target-binding-sites-of-primers">Advanced approach considering potential off-target binding sites of primers</h2>
+<p>Imagine that we want to design our qPCR so that it reliably detects Polio 1 virus, but <em>not</em> non-polio enteroviruses.</p>
+
+<p>With varVAMP, it is possible to use a BLAST database as an off-target background sequence collection. Using the tool <em>NCBI BLAST+ makeblastdb</em> (<span class="citation"><a href="#Cock2015">Cock <i>et al.</i> 2015</a></span>), we can create a BLAST database containing the genome sequences of other enteroviruses. varVAMP can then match primers it identifies against this off-target database, and take predicted off-target binding sites into account when ranking amplicons. For this, varVAMP sorts potential primers first by presence of off-target effects, then by their penalty scores, which makes sure that amplicons containing off-target effect primers are always reported <em>after</em> any other amplicons.</p>
+
+<p>Lets do this step-by-step.
+First, you need to upload some enterovirus genome data into Galaxy.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-the-genome-sequences-of-non-polio-enteroviruses"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Get the genome sequences of non-polio enteroviruses</div>
+  <ol>
+    <li>
+      <p>Import the sequences from <a href="https://zenodo.org/records/14845698">Zenodo</a></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/14845698/files/entero_genomes.fasta
+</code></pre></div>      </div>
+      <p>as a dataset of type <code class="language-plaintext highlighter-rouge">fasta</code>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fasta</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the dataset (optional)</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Enterovirus genome sequences</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Next, build the BLAST database from the uploaded sequences and use it with varVAMP.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-build-blast-enterovirus-database-and-re-design-primers-using-it"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Build BLAST enterovirus database and (re-)design primers using it</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_makeblastdb/2.14.1+galaxy2" title="NCBI BLAST+ makeblastdb tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NCBI BLAST+ makeblastdb</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.14.1+galaxy2)</span> with the following parameters:
+      <ul>
+        <li><em>“Molecule type of input”</em>: <code class="language-plaintext highlighter-rouge">nucleotide</code>
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Select Input</strong>
+              <ul>
+                <li><em>“Input is a”</em>: <code class="language-plaintext highlighter-rouge">Dataset in history</code></li>
+                <li><em>“FASTA input”</em>: <code class="language-plaintext highlighter-rouge">Enterovirus genome sequences</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Title for BLAST database”</em>: <code class="language-plaintext highlighter-rouge">Enterovirus genome db</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the dataset</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Enterovirus genome db</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/varvamp/varvamp/1.2.2+galaxy0" title="varVAMP tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>varVAMP</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Multiple alignment of viral sequences”</em>: <code class="language-plaintext highlighter-rouge">Polio 1 MSA</code></li>
+        <li><em>“What kind of primers would you like to design? (varvamp mode)”</em>: <code class="language-plaintext highlighter-rouge">qPCR primers (qpcr)</code>
+          <ul>
+            <li><em>“How to set the main parameters, threshold for consensus nucleotides and max ambiguous nts per primer?”</em>: <code class="language-plaintext highlighter-rouge">Specify values for both</code>
+              <ul>
+                <li><em>“Threshold for consensus nucleotides”</em>: <code class="language-plaintext highlighter-rouge">0.93</code></li>
+              </ul>
+            </li>
+            <li><em>“Avoid amplicons with off-target primer products?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+              <ul>
+                <li><em>“BLAST database”</em>: the output of <strong>NCBI BLAST+ makeblastdb</strong> <code class="language-plaintext highlighter-rouge">Enterovirus genome db</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Move outputs to a dataset collection</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a dataset collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all outputs of the varVAMP run just finished</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create collection</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>A quick look at the <em>“Amplicon locations”</em> output shows that, again, varVAMP has found three suitable qPCR schemes. Now compare them to the ones from the previous run to see if anything changed.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-comparing-multiple-datasets-side-by-side"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comparing-multiple-datasets-side-by-side" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Comparing multiple datasets side-by-side</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Tip: Galaxy’s <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> Window Manager, which you can enable (and disable again) from the menu bar can be very helpful for comparing multiple datasets.</p>
+
+</blockquote>
+
+<p>You can also inspect the <em>“qPCR amplicon details”</em> output to get more information about the suggested amplicons.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Is there a difference between the primers/amplicons suggested in the first varVAMP run (without a database of enteroviral background sequences) and the new run?</li>
+    <li>Does the output contain amplicons with predicted off-target effects?</li>
+    <li>Why didn’t varVAMP design primers without off-target binding sites?</li>
+    <li>What settings can be modified to generate more possible primers?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>No, the primers generated without consideration of off-target sites are identical to those generated with such consideration.</li>
+      <li>Yes, all amplicons are predicted to have off-target effects (see the <em>“qPCR amplicon details”</em> output).</li>
+      <li>Before varVAMP can account for off-target sites, it must consider settings such as the threshold and the maximum number of ambiguous nucleotides. These settings resulted in only three amplicons, all of which show off-target effects.</li>
+      <li>Our threshold for consensus sequences is set to 0.93, which is quite high. Lowering this threshold would likely generate more potential primer schemes. As an alternative we could increase the maximum number of ambiguous nucleotides allowed per primer.</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<p>Now let’s experiment with a lower consensus nucleotide threshold to try and generate additional primer schemes and see if some of these maybe come without off-target amplification products. Lowering the threshold may lead to primer schemes with less power to amplify all posssible Polio 1 (<em>i.e.</em>, on-target) sequences, but values above 0.7 are typically still acceptable, depending on the specific use case. Since the default threshold value is 0.8, let’s proceed with this setting.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-qpcr-primer-design-with-blast-db-and-lower-threshold"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: qPCR primer design with BLAST db and lower threshold</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/varvamp/varvamp/1.2.2+galaxy0" title="varVAMP tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>varVAMP</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Multiple alignment of viral sequences”</em>: <code class="language-plaintext highlighter-rouge">Polio 1 MSA</code></li>
+        <li><em>“What kind of primers would you like to design? (varvamp mode)”</em>: <code class="language-plaintext highlighter-rouge">qPCR primers (qpcr)</code>
+          <ul>
+            <li><em>“How to set the main parameters, threshold for consensus nucleotides and max ambiguous nts per primer?”</em>: <code class="language-plaintext highlighter-rouge">Specify values for both</code>
+              <ul>
+                <li><em>“Threshold for consensus nucleotides”</em>: <code class="language-plaintext highlighter-rouge">0.8</code></li>
+              </ul>
+            </li>
+            <li><em>“Avoid amplicons with off-target primer products?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+              <ul>
+                <li><em>“BLAST database”</em>: the output of <strong>NCBI BLAST+ makeblastdb</strong> <code class="language-plaintext highlighter-rouge">Enterovirus genome db</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Creating a dataset collection</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a dataset collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection  to varVAMP Polio1 qpcr threshold 0.8 + BLAST</li>   <li>Click <strong>Create collection</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The newly designed primer schemes can be checked again with the files <em>“qPCR amplicon details”</em> and <em>“Primer details”</em>. We have prepared some questions for you to assess your understanding:</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What is the difference with a lower threshold? Did you get a primer scheme with no predicted off-target amplification?</li>
+    <li>Why doesn’t the amplicon collection include the amplicons that we generated with the higher threshold?</li>
+    <li>Consider other use cases for avoiding off-targets using a BLAST database.</li>
+    <li>Can we find a better qPCR scheme if we allow varVAMP to estimate the consensus threshold?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>With the lower threshold, we generated more potential primer schemes, including four with no predicted off-target effects.</li>
+      <li>The lower threshold leads to more potential amplicons that can achieve better scores than those with a higher threshold (but will potentially recognize a lower fraction of the genome sequences in the multiple-sequence alignment). The primers generated with the higher threshold are not considered in the new varVAMP run with the lower threshold because all of them had predicted off-target binding and relatively high scores.</li>
+      <li>You may, for example, want to prepare primers that amplify specific viral genome sequences in the presence of host DNA, in which case you could build an off-target BLAST database from host genome sequences.</li>
+      <li>We can run the following to let varVAMP estimate the optimal consensus threshold for us:
+        <blockquote class="hands-on">
+          <div class="box-title hands-on-title" id="hands-on-qpcr-primer-design-with-blast-db-and-auto-estimated-threshold"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: qPCR primer design with BLAST db and auto-estimated threshold</div>
+
+          <ol>
+            <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/varvamp/varvamp/1.2.2+galaxy0" title="varVAMP tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>varVAMP</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.2+galaxy0)</span> with the following parameters:
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Multiple alignment of viral sequences”</em>: <code class="language-plaintext highlighter-rouge">Polio 1 MSA</code></li>
+                <li><em>“What kind of primers would you like to design? (varvamp mode)”</em>: <code class="language-plaintext highlighter-rouge">qPCR primers (qpcr)</code></li>
+                <li><em>“How to set the main parameters, threshold for consensus nucleotides and max ambiguous nts per primer?”</em>: <code class="language-plaintext highlighter-rouge">Specify max ambiguous nts, estimate suitable threshold</code></li>
+                <li><em>“Avoid amplicons with off-target primer products?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                <li><em>“BLAST database”</em>: the output of <strong>NCBI BLAST+ makeblastdb</strong> <code class="language-plaintext highlighter-rouge">Enterovirus genome db</code></li>
+              </ul>
+            </li>
+          </ol>
+        </blockquote>
+
+        <p>When the tool run is finished you can inspect its <em>“Analysis Log”</em> output to learn that the estimated threshold is 0.92 so just 0.01 lower than our initial choice.
+If you then inspect the <em>“qPCR amplicon details”</em> output, you should find that this small difference enabled varVAMP to find 5 primer schemes instead of three, one of which has no predicted off-target effects.</p>
+
+        <p>Since the auto-estimated threshold of 0.92 is considerably higher than our second attempt of 0.8, the new qPCR scheme will likely recognize more of our polio 1 sequences and, thus, will likely be preferable over the ones found with the lower threshold.</p>
+      </li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="designing-a-complete-pan-specific-primer-scheme-for-tiled-amplicon-sequencing">Designing a complete pan-specific primer scheme for tiled-amplicon sequencing</h1>
+
+<p>To explore additional varVAMP functionality, we will now design primers for another use case using the TILED flavour. This flavour is designed to cover the entire genome of our input data. Therefore, the resulting primers are suitable for Oxford Nanopore or Illumina-based full-genome sequencing.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-online-repositories-of-established-primer-schemes"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Online repositories of established primer schemes</div>
+
+  <p>For many genomes, existing primer schemes are already available online, so you don’t have to generate them by yourself. For example, you can explore various schemes from the <a href="https://github.com/quick-lab/primerschemes/tree/main/primerschemes">Quick lab</a>, <a href="https://github.com/pha4ge/primer-schemes/tree/main/schemes">pha4ge</a>, and <a href="https://github.com/artic-network/primer-schemes">ARTIC-network</a> primer scheme repositories.</p>
+</blockquote>
+
+<p>To focus on designing the primer scheme, we will skip the multiple sequence alignment step this time and begin with the pre-aligned Polio 1-3 sequences available as part of the <a href="https://github.com/jonas-fuchs/ViralPrimerSchemes">ViralPrimerScheme</a> repository.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-polio-1-3-sequence-alignment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Get Polio 1-3 sequence alignment</div>
+
+  <ol>
+    <li>
+      <p>Get the Polio 1-3 sequence alignment from</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/jonas-fuchs/ViralPrimerSchemes/9b54b17246abdff1b39c6cdd362fff67eb2945c3/input_alignments/polio1-3.aln
+</code></pre></div>      </div>
+      <p>and upload it to your history via the link above and make sure the dataset format is set to <code class="language-plaintext highlighter-rouge">fasta</code>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fasta</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the dataset</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-5"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-5" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Polio 1-3 alignment</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>In this varVAMP run, we will use the TILED flavour. Similar to the qPCR primer design, you can determine the number of ambiguous nucleotides and set a threshold for consensus nucleotides. However, this time we will only specify the maximum number of ambiguous nucleotides and allow the threshold to be automatically estimated.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-primer-design-with-the-tiled-flavour-for-whole-genome-amplification"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Primer design with the TILED-flavour for whole genome amplification</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/varvamp/varvamp/1.2.2+galaxy0" title="varVAMP tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>varVAMP</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Multiple alignment of viral sequences”</em>: the <code class="language-plaintext highlighter-rouge">Polio 1-3 alignment</code> just uploaded</li>
+        <li><em>“What kind of primers would you like to design? (varvamp mode)”</em>: <code class="language-plaintext highlighter-rouge">Tiled primer scheme for whole-genome sequencing (tiled)</code>
+          <ul>
+            <li><em>“How to set the main parameters, threshold for consensus nucleotides and max ambiguous nts per primer?”</em>: <code class="language-plaintext highlighter-rouge">Specify max ambiguous nts, estimate suitable threshold</code></li>
+            <li><em>“Maximum number of ambiguous nucleotides per primer to be tolerated (default: 2)”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Creating a dataset collection</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a dataset collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection  to varVAMP Polio1-3 tiled</li>   <li>Click <strong>Create collection</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-dataset-collection"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Dataset collection</div>
+
+        <p>If you create a dataset collection at this point, you cannot include the “per-pool primer sequences”, as this is already a dataset collection containing two files with the primer sequences for each pool.</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Once again, we have prepared some questions for you to verify your results and deepen your understanding of the output:</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many primers are used to cover the whole Polio genome?</li>
+    <li>What is encoded in the column named “score” in the <em>“Amplicon locations”</em> output.</li>
+    <li>How long are the amplicons for the tiled primer scheme and for qPCR and why do they differ in size?</li>
+    <li>What’s the difference of the functionality of the qPCR and TILED modes?</li>
+    <li>If you want to tailor the generated tiling scheme to your experimental needs, which are the main options you would want to tweak?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>varVAMP (at version 1.2.2) suggests 7 primer pairs to amplify nearly the whole Polio virus genome.
+The <em>“Amplicon design overview plot”</em> offers a nice view of the tiled scheme.</li>
+      <li>The score indicates whether the primer pair for an amplicon belongs to pool 1 or 2.</li>
+      <li>For the tiled primer scheme, the amplicons are between 1100 and 1500 bases long, while for qPCR, they covered around 100 bases.
+The difference in length exists because the goal of the tiled primer scheme is to cover the entire genome without using too many primers that might interact.
+In contrast, qPCR focuses on detecting the presence of matching DNA in a sample and the amplicons are kept short to enhance the amplification process.</li>
+      <li>The qPCR mode generates small amplicons with an optimized internal probe, while the TILED mode produces overlapping amplicons designed for whole-genome sequencing.</li>
+      <li>You could increase the length of the amplicons, their minimum required overlap, the consensus threshold, or reduce the maximum number of ambiguous nucleotides per primer.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>The combination of the tools MAFFT and varVAMP offers a way to design primers and entire primer schemes that have a high chance of working across a set of diverse viral genotypes. You may still have to play with varVAMP’s settings a bit to obtain optimal primers, or have to modify a resulting primer scheme a little by hand, and you might have to perform some wetlab-based optimizations (such as adjusting primer concentrations for certain amplicons), but this in-silico tool chain simplifies the task substantially.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Robust pan-specific primers and primer schemes are crucial for preventing false-negatives in diagnostic settings and ensuring adequate coverage of samples in sequencing projects</p>
+</li>
+                        
+                        <li><p>A multiple sequence alignment that accurately captures the underlying sequence diversity of the viral pathogen of interest is essential for designing effective pan-specific primers and primer schemes</p>
+</li>
+                        
+                        <li><p>varVAMP is an excellent tool for automating the design of primers and whole primer schemes based on multiple sequence alignments of representative viral genotypes</p>
+</li>
+                        
+                        <li><p>By providing varVAMP with a BLAST database of off-target sequences, you can minimize the risk of designing primers that bind to these unintended sequences</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/sequence-analysis/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/sequence-analysis#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Katoh2013">Katoh, K., and D. M. Standley, 2013 <b>MAFFT Multiple Sequence Alignment Software Version 7: Improvements in Performance and Usability</b>. Molecular Biology and Evolution 30: 772–780. <a href="https://doi.org/10.1093/molbev/mst010">10.1093/molbev/mst010</a></li>
+<li id="Cock2015">Cock, P. J. A., J. M. Chilton, B. Grüning, J. E. Johnson, and N. Soranzo, 2015 <b>NCBI BLAST+ integrated into Galaxy</b>. GigaScience 4: <a href="https://doi.org/10.1186/s13742-015-0080-7">10.1186/s13742-015-0080-7</a></li>
+<li id="Quick2017">Quick, J., N. D. Grubaugh, S. T. Pullan, I. M. Claro, A. D. Smith <i>et al.</i>, 2017 <b>Multiplex PCR method for MinION and Illumina sequencing of Zika and other virus genomes directly from clinical samples</b>. Nature Protocols 12: 1261–1276. <a href="https://doi.org/10.1038/nprot.2017.066">10.1038/nprot.2017.066</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=sequence-analysis/viral_primer_design"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=sequence-analysis/viral_primer_design">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Verena Moosmann, Elischa Berger, Wolfgang Maier,  <b>Primer and primer scheme design for pan-specific detection and sequencing of viral pathogens across genotypes (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/viral_primer_design/tutorial.html">https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/viral_primer_design/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{sequence-analysis-viral_primer_design,
+author = "Verena Moosmann and Elischa Berger and Wolfgang Maier",
+	title = "Primer and primer scheme design for pan-specific detection and sequencing of viral pathogens across genotypes (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/viral_primer_design/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/by-covid/" class="funder-badge">
+		
+		<div class="avatar">
+			
+				
+				<img class="funder-avatar" src="https://avatars.githubusercontent.com/by-covid" alt="Logo">
+				
+			
+		</div>
+
+		<div class="info">
+			<div class="name">BeYond-COVID</div>
+			<div class="description">
+			BY-COVID is an EC funded project that tackles the data challenges that can hinder effective pandemic response.
+
+This project has received funding from the European Union’s Horizon Europe research and innovation programme under grant agreement № 101046203 (BY-COVID)
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/viral_primer_design/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: split_file_to_collection
+  owner: bgruening
+  revisions: 2dae863c8f42
+  tool_panel_section_label: Collection Operations
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: emboss_5
+  owner: devteam
+  revisions: 63dd26468588
+  tool_panel_section_label: EMBOSS
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: fasta_compute_length
+  owner: devteam
+  revisions: 5cbde03c1103
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: ncbi_blast_plus
+  owner: devteam
+  revisions: cbf3f518b668
+  tool_panel_section_label: NCBI Blast
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: varvamp
+  owner: iuc
+  revisions: c1f08498cd74
+  tool_panel_section_label: Virology
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: mafft
+  owner: rnateam
+  revisions: 8e649f27aa0d
+  tool_panel_section_label: Multiple Alignments
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: mafft
+  owner: rnateam
+  revisions: 1233363389c1
+  tool_panel_section_label: Multiple Alignments
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/sequence-analysis/tutorials/viral_primer_design/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/sequence-analysis/tutorials/viral_primer_design/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/7124d0ce9650aaf3b6914752e97e3852c86772b2">7124d0c</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
