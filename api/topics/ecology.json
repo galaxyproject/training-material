@@ -854,7 +854,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nwolf_tutorial.zip?download=1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Illuminapairedend\"];\n  2[\"Unzip\"];\n  0 -->|output| 2;\n  3[\"FastQC\"];\n  1 -->|output| 3;\n  4[\"FASTQ Groomer\"];\n  1 -->|output| 4;\n  5[\"obigrep\"];\n  4 -->|output_file| 5;\n  6[\"Line/Word/Character count\"];\n  4 -->|output_file| 6;\n  7[\"Line/Word/Character count\"];\n  5 -->|output| 7;\n  8[\"NGSfilter\"];\n  5 -->|output| 8;\n  9[\"obiuniq\"];\n  8 -->|output| 9;\n  10[\"obiannotate\"];\n  9 -->|output| 10;\n  11[\"obistat\"];\n  10 -->|output| 11;\n  12[\"obigrep\"];\n  10 -->|output| 12;\n  13[\"obigrep\"];\n  12 -->|output| 13;\n  14[\"obiclean\"];\n  13 -->|output| 14;\n  15[\"NCBI BLAST+ blastn\"];\n  14 -->|output| 15;\n  16[\"Filter sequences by ID\"];\n  15 -->|output1| 16;\n  17[\"Filter sequences by ID\"];\n  15 -->|output1| 17;\n  14 -->|output| 17;\n  18[\"obitab\"];\n  16 -->|output_pos| 18;\n  19[\"obitab\"];\n  17 -->|output_pos| 19;\n  20[\"Join two Datasets\"];\n  19 -->|output| 20;\n  15 -->|output1| 20;\n  21[\"Join two Datasets\"];\n  20 -->|out_file1| 21;\n  18 -->|output| 21;\n  22[\"Cut\"];\n  21 -->|out_file1| 22;\n  23[\"Filter\"];\n  22 -->|out_file1| 23;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nwolf_tutorial.zip?download=1\"]\n  1[label=\"Illuminapairedend\"]\n  2[label=\"Unzip\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"FastQC\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"FASTQ Groomer\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"obigrep\"]\n  4 -> 5 [label=\"output_file\"]\n  6[label=\"Line/Word/Character count\"]\n  4 -> 6 [label=\"output_file\"]\n  7[label=\"Line/Word/Character count\"]\n  5 -> 7 [label=\"output\"]\n  8[label=\"NGSfilter\"]\n  5 -> 8 [label=\"output\"]\n  9[label=\"obiuniq\"]\n  8 -> 9 [label=\"output\"]\n  10[label=\"obiannotate\"]\n  9 -> 10 [label=\"output\"]\n  11[label=\"obistat\"]\n  10 -> 11 [label=\"output\"]\n  12[label=\"obigrep\"]\n  10 -> 12 [label=\"output\"]\n  13[label=\"obigrep\"]\n  12 -> 13 [label=\"output\"]\n  14[label=\"obiclean\"]\n  13 -> 14 [label=\"output\"]\n  15[label=\"NCBI BLAST+ blastn\"]\n  14 -> 15 [label=\"output\"]\n  16[label=\"Filter sequences by ID\"]\n  15 -> 16 [label=\"output1\"]\n  17[label=\"Filter sequences by ID\"]\n  15 -> 17 [label=\"output1\"]\n  14 -> 17 [label=\"output\"]\n  18[label=\"obitab\"]\n  16 -> 18 [label=\"output_pos\"]\n  19[label=\"obitab\"]\n  17 -> 19 [label=\"output_pos\"]\n  20[label=\"Join two Datasets\"]\n  19 -> 20 [label=\"output\"]\n  15 -> 20 [label=\"output1\"]\n  21[label=\"Join two Datasets\"]\n  20 -> 21 [label=\"out_file1\"]\n  18 -> 21 [label=\"output\"]\n  22[label=\"Cut\"]\n  21 -> 22 [label=\"out_file1\"]\n  23[label=\"Filter\"]\n  22 -> 23 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -1815,10 +1815,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
-                  "0.65",
-                  "0.71"
+                  "0.72",
+                  "0.71",
+                  "0.65"
                 ],
                 "server": "https://palfinder.ls.manchester.ac.uk/"
               },
@@ -1847,10 +1847,10 @@
                   "0.74+galaxy0",
                   "0.69",
                   "0.65",
-                  "0.74+galaxy1",
                   "0.52",
-                  "0.67",
+                  "0.74+galaxy1",
                   "0.68",
+                  "0.67",
                   "0.62",
                   "0.63",
                   "0.64"
@@ -2018,9 +2018,9 @@
                   "0.3.1",
                   "2.14.1+galaxy2",
                   "0.3.3",
+                  "0.3.0",
                   "0.1.07",
-                  "0.0.11",
-                  "0.3.0"
+                  "0.0.11"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -2030,17 +2030,17 @@
                   "2.10.1+galaxy2",
                   "2.14.1+galaxy2",
                   "0.1.07",
-                  "0.0.14",
                   "0.0.20",
-                  "0.1.06",
-                  "0.1.01",
-                  "0.2.01",
+                  "0.2.00",
                   "0.1.00",
-                  "0.1.04",
+                  "0.1.01",
+                  "0.0.14",
                   "0.1.08",
                   "0.0.19",
-                  "0.2.00",
-                  "0.0.22"
+                  "0.2.01",
+                  "0.0.22",
+                  "0.1.06",
+                  "0.1.04"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -4060,6 +4060,9 @@
           "PaulineSGN",
           "yvanlebras"
         ],
+        "editing": [
+          "VerenaMoo"
+        ],
         "funding": [
           "pndb"
         ],
@@ -4082,9 +4085,9 @@
       "id": "ecology/ENA_Biodiv_submission",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-12-13 16:00:52 +0000",
+      "mod_date": "2025-03-20 09:38:47 +0000",
       "pub_date": "2024-12-13 16:00:52 +0000",
-      "version": 1,
+      "version": 2,
       "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/ENA_Biodiv_submission/tutorial.json",
       "tools": [
         "Paste1",
@@ -4093,12 +4096,12 @@
         "toolshed.g2.bx.psu.edu/repos/bgruening/unique/bg_uniq/0.3",
         "toolshed.g2.bx.psu.edu/repos/devteam/fastq_filter/fastq_filter/1.1.5",
         "toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.1.5+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
         "toolshed.g2.bx.psu.edu/repos/devteam/fastqtofasta/fastq_to_fasta_python/1.1.5",
         "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastn_wrapper/2.14.1+galaxy2",
         "toolshed.g2.bx.psu.edu/repos/ecology/ab1_fastq_converter/ab1_fastq_converter/1.20.0",
         "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3",
         "toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0",
         "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1",
         "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.8+galaxy0"
       ],
@@ -4110,13 +4113,7 @@
             "usegalaxy": true
           }
         ],
-        "inexact": [
-          {
-            "url": "https://usegalaxy.cz/",
-            "name": "UseGalaxy.cz",
-            "usegalaxy": false
-          }
-        ]
+        "inexact": []
       },
       "supported_servers_matrix": {
         "servers": [
@@ -5177,189 +5174,6 @@
             "version": "1.1.5+galaxy2"
           },
           {
-            "id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
-            "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://smile.hku.hk/SARGs"
-              },
-              {
-                "state": "missing",
-                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
-              },
-              {
-                "state": "missing",
-                "server": "https://vm-chemflow-francegrille.eu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://hyperbrowser.uio.no/coloc-stats"
-              },
-              {
-                "state": "missing",
-                "server": "http://corgat.cloud.ba.infn.it/galaxy"
-              },
-              {
-                "state": "missing",
-                "server": "https://coralsnp.science.psu.edu/galaxy/"
-              },
-              {
-                "state": "missing",
-                "server": "http://cropgalaxy.excellenceinbreeding.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://igg.cloud.ba.infn.it/galaxy"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "0.73+galaxy0",
-                  "0.72",
-                  "0.72+galaxy1"
-                ],
-                "server": "https://galaxy.mesocentre.uca.fr"
-              },
-              {
-                "state": "exact",
-                "version": "0.74+galaxy0",
-                "server": "https://galaxy.pasteur.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "0.73+galaxy0",
-                  "0.72+galaxy1",
-                  "0.69"
-                ],
-                "server": "https://galaxytrakr.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://hyperbrowser.uio.no/hb/"
-              },
-              {
-                "state": "missing",
-                "server": "http://gigagalaxy.net/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy-web.ipk-gatersleben.de"
-              },
-              {
-                "state": "missing",
-                "server": "https://www.immportgalaxy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.interactomix.com/"
-              },
-              {
-                "state": "exact",
-                "version": "0.74+galaxy0",
-                "server": "https://mississippi.sorbonne-universite.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://neo.engr.uconn.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "0.72",
-                  "0.72+galaxy1",
-                  "0.65",
-                  "0.71"
-                ],
-                "server": "https://palfinder.ls.manchester.ac.uk/"
-              },
-              {
-                "state": "exact",
-                "version": "0.74+galaxy0",
-                "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "exact",
-                "version": "0.74+galaxy0",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "0.73+galaxy0",
-                  "0.72",
-                  "0.72+galaxy1",
-                  "0.69",
-                  "0.65",
-                  "0.71",
-                  "0.74+galaxy1",
-                  "0.52",
-                  "0.67",
-                  "0.68"
-                ],
-                "server": "https://usegalaxy.be/"
-              },
-              {
-                "state": "exact",
-                "version": "0.74+galaxy0",
-                "server": "https://usegalaxy.cz/"
-              },
-              {
-                "state": "exact",
-                "version": "0.74+galaxy0",
-                "server": "https://usegalaxy.eu"
-              },
-              {
-                "state": "exact",
-                "version": "0.74+galaxy0",
-                "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "0.73+galaxy0",
-                  "0.72+galaxy1"
-                ],
-                "server": "https://usegalaxy.no/"
-              },
-              {
-                "state": "exact",
-                "version": "0.74+galaxy0",
-                "server": "https://usegalaxy.org"
-              },
-              {
-                "state": "exact",
-                "version": "0.74+galaxy0",
-                "server": "https://usegalaxy.org.au"
-              },
-              {
-                "state": "missing",
-                "server": "https://viralvariant.anses.fr/"
-              }
-            ],
-            "version": "0.74+galaxy0"
-          },
-          {
             "id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqtofasta/fastq_to_fasta_python/1.1.5",
             "servers": [
               {
@@ -5558,9 +5372,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "2.10.1+galaxy2",
                   "2.10.1+galaxy0",
-                  "0.3.1",
-                  "2.10.1+galaxy2"
+                  "0.3.1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -6128,6 +5942,151 @@
             "version": "0.0.2"
           },
           {
+            "id": "toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
+                "server": "http://cropgalaxy.excellenceinbreeding.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://dintor.eurac.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "1.2.4+galaxy0",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "exact",
+                "version": "1.2.4+galaxy0",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "exact",
+                "version": "1.2.4+galaxy0",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "1.2.4+galaxy0"
+          },
+          {
             "id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1",
             "servers": [
               {
@@ -6241,8 +6200,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.9",
-                  "1.8+galaxy0"
+                  "1.8+galaxy0",
+                  "1.9"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -6267,8 +6226,8 @@
                   "1.11+galaxy0",
                   "1.7",
                   "1.9+galaxy1",
-                  "1.9",
                   "1.8+galaxy0",
+                  "1.9",
                   "1.7.1",
                   "1.8+galaxy1",
                   "1.8+galaxy2"
@@ -6357,8 +6316,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.16.8",
-                  "1.16.9"
+                  "1.16.9",
+                  "1.16.8"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -6421,10 +6380,10 @@
                 "state": "inexact",
                 "versions": [
                   "1.16.8",
-                  "1.16.5",
-                  "1.16.1",
                   "1.6",
-                  "1.16.3"
+                  "1.16.3",
+                  "1.16.5",
+                  "1.16.1"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -6500,13 +6459,6 @@
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "fastqc",
-            "owner": "devteam",
-            "revisions": "5ec9f6bceaee",
-            "tool_panel_section_label": "FASTA/FASTQ",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
             "name": "fastqtofasta",
             "owner": "devteam",
             "revisions": "297962e79f39",
@@ -6542,6 +6494,13 @@
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
+            "name": "falco",
+            "owner": "iuc",
+            "revisions": "959a14c1f2dd",
+            "tool_panel_section_label": "FASTA/FASTQ",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
             "name": "multiqc",
             "owner": "iuc",
             "revisions": "abfd8a6544d7",
@@ -6557,7 +6516,7 @@
           }
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: unique\n  owner: bgruening\n  revisions: 7ce75adb93be\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastq_filter\n  owner: devteam\n  revisions: 81a9090d6df3\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastq_groomer\n  owner: devteam\n  revisions: e9f8633db0a2\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 5ec9f6bceaee\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqtofasta\n  owner: devteam\n  revisions: 297962e79f39\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ncbi_blast_plus\n  owner: devteam\n  revisions: cbf3f518b668\n  tool_panel_section_label: NCBI Blast\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ab1_fastq_converter\n  owner: ecology\n  revisions: 307518fb51af\n  tool_panel_section_label: Convert Formats\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: 503bcd6ebe4b\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collection_element_identifiers\n  owner: iuc\n  revisions: d3c07d270a50\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: abfd8a6544d7\n  tool_panel_section_label: Quality Control\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cutadapt\n  owner: lparsons\n  revisions: b1c926deaa2d\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: unique\n  owner: bgruening\n  revisions: 7ce75adb93be\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastq_filter\n  owner: devteam\n  revisions: 81a9090d6df3\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastq_groomer\n  owner: devteam\n  revisions: e9f8633db0a2\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqtofasta\n  owner: devteam\n  revisions: 297962e79f39\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ncbi_blast_plus\n  owner: devteam\n  revisions: cbf3f518b668\n  tool_panel_section_label: NCBI Blast\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ab1_fastq_converter\n  owner: ecology\n  revisions: 307518fb51af\n  tool_panel_section_label: Convert Formats\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: 503bcd6ebe4b\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collection_element_identifiers\n  owner: iuc\n  revisions: d3c07d270a50\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: falco\n  owner: iuc\n  revisions: 959a14c1f2dd\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: abfd8a6544d7\n  tool_panel_section_label: Quality Control\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cutadapt\n  owner: lparsons\n  revisions: b1c926deaa2d\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "slides_recordings": false,
@@ -6623,6 +6582,13 @@
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
+        },
+        {
+          "name": "Verena Moosmann",
+          "joined": "2024-12",
+          "id": "VerenaMoo",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/VerenaMoo.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/VerenaMoo/"
         },
         {
           "short_name": "PNDB",
@@ -6805,7 +6771,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"Copernicus Data Space Ecosystem\"];\n  1[\"Holoviz\"];\n  0 -->|output_collection| 1;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Copernicus Data Space Ecosystem\"]\n  1[label=\"Holoviz\"]\n  0 -> 1 [label=\"output_collection\"]\n}",
           "workflow_tools": [
@@ -6893,7 +6859,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"Copernicus Data Space Ecosystem\"];\n  1[\"Holoviz\"];\n  0 -->|output_collection| 1;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Copernicus Data Space Ecosystem\"]\n  1[label=\"Holoviz\"]\n  0 -> 1 [label=\"output_collection\"]\n}",
           "workflow_tools": [
@@ -7656,7 +7622,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPopulation_map.txt\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nBarcodes_SRR034310.tabular\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nSRR034310.fastq\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nref_genome_chromFa.tar\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"Stacks: process radtags\"];\n  1 -->|output| 4;\n  2 -->|output| 4;\n  5[\"Stacks: process radtags\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  6[\"Stacks: process radtags\"];\n  1 -->|output| 6;\n  2 -->|output| 6;\n  7[\"FastQC\"];\n  2 -->|output| 7;\n  8[\"Stacks: de novo map\"];\n  4 -->|demultiplexed| 8;\n  0 -->|output| 8;\n  9[\"Stacks: populations\"];\n  8 -->|all_output| 9;\n  0 -->|output| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nPopulation_map.txt\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nBarcodes_SRR034310.tabular\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nSRR034310.fastq\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nref_genome_chromFa.tar\"]\n  4[label=\"Stacks: process radtags\"]\n  1 -> 4 [label=\"output\"]\n  2 -> 4 [label=\"output\"]\n  5[label=\"Stacks: process radtags\"]\n  1 -> 5 [label=\"output\"]\n  2 -> 5 [label=\"output\"]\n  6[label=\"Stacks: process radtags\"]\n  1 -> 6 [label=\"output\"]\n  2 -> 6 [label=\"output\"]\n  7[label=\"FastQC\"]\n  2 -> 7 [label=\"output\"]\n  8[label=\"Stacks: de novo map\"]\n  4 -> 8 [label=\"demultiplexed\"]\n  0 -> 8 [label=\"output\"]\n  9[label=\"Stacks: populations\"]\n  8 -> 9 [label=\"all_output\"]\n  0 -> 9 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -8036,9 +8002,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.73+galaxy0",
+                  "0.72+galaxy1",
                   "0.72",
-                  "0.72+galaxy1"
+                  "0.73+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -8096,10 +8062,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
-                  "0.65",
-                  "0.71"
+                  "0.72",
+                  "0.71",
+                  "0.65"
                 ],
                 "server": "https://palfinder.ls.manchester.ac.uk/"
               },
@@ -8135,9 +8101,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.73+galaxy0",
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
+                  "0.73+galaxy0",
                   "0.74+galaxy0",
                   "0.74+galaxy1"
                 ],
@@ -8146,8 +8112,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.73+galaxy0",
-                  "0.72+galaxy1"
+                  "0.72+galaxy1",
+                  "0.73+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -8794,7 +8760,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nFasta nucelotide file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Prodigal Gene Predictor \"];\n  0 -->|output| 1;\n  351cf550-c05d-4bad-9394-fe9b45ef6298[\"Output\\nProtein fasta file\"];\n  1 --> 351cf550-c05d-4bad-9394-fe9b45ef6298;\n  style 351cf550-c05d-4bad-9394-fe9b45ef6298 stroke:#2c3143,stroke-width:4px;\n  2[\"Sanntis: Build Genbank \"];\n  0 -->|output| 2;\n  1 -->|output_faa| 2;\n  1b9f0275-191a-4e90-b4b4-7b10475f4602[\"Output\\nGenbank file\"];\n  2 --> 1b9f0275-191a-4e90-b4b4-7b10475f4602;\n  style 1b9f0275-191a-4e90-b4b4-7b10475f4602 stroke:#2c3143,stroke-width:4px;\n  3[\"Regex Find And Replace\"];\n  1 -->|output_faa| 3;\n  e41e8fb9-c5f6-425f-a351-f8fa92f7821d[\"Output\\nClean protein fasta file\"];\n  3 --> e41e8fb9-c5f6-425f-a351-f8fa92f7821d;\n  style e41e8fb9-c5f6-425f-a351-f8fa92f7821d stroke:#2c3143,stroke-width:4px;\n  4[\" InterProScan\"];\n  3 -->|out_file1| 4;\n  522b49db-7650-41e7-b888-01bb3cb1b451[\"Output\\nTabular file (.tsv)\"];\n  4 --> 522b49db-7650-41e7-b888-01bb3cb1b451;\n  style 522b49db-7650-41e7-b888-01bb3cb1b451 stroke:#2c3143,stroke-width:4px;\n  5[\"Sanntis: identify biosynthetic gene clusters\"];\n  2 -->|output_sanntis_gb| 5;\n  4 -->|outfile_tsv| 5;\n  c96c8c7e-0a50-4506-a144-9d941f50eb5e[\"Output\\n SMBGC Annotation\"];\n  5 --> c96c8c7e-0a50-4506-a144-9d941f50eb5e;\n  style c96c8c7e-0a50-4506-a144-9d941f50eb5e stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nFasta nucelotide file\"]\n  1[label=\"Prodigal Gene Predictor \"]\n  0 -> 1 [label=\"output\"]\n  k351cf550c05d4bad9394fe9b45ef6298[color=lightseagreen,label=\"Output\\nProtein fasta file\"]\n  1 -> k351cf550c05d4bad9394fe9b45ef6298\n  2[label=\"Sanntis: Build Genbank \"]\n  0 -> 2 [label=\"output\"]\n  1 -> 2 [label=\"output_faa\"]\n  k1b9f0275191a4e90b4b47b10475f4602[color=lightseagreen,label=\"Output\\nGenbank file\"]\n  2 -> k1b9f0275191a4e90b4b47b10475f4602\n  3[label=\"Regex Find And Replace\"]\n  1 -> 3 [label=\"output_faa\"]\n  ke41e8fb9c5f6425fa351f8fa92f7821d[color=lightseagreen,label=\"Output\\nClean protein fasta file\"]\n  3 -> ke41e8fb9c5f6425fa351f8fa92f7821d\n  4[label=\" InterProScan\"]\n  3 -> 4 [label=\"out_file1\"]\n  k522b49db765041e7b88801bb3cb1b451[color=lightseagreen,label=\"Output\\nTabular file (.tsv)\"]\n  4 -> k522b49db765041e7b88801bb3cb1b451\n  5[label=\"Sanntis: identify biosynthetic gene clusters\"]\n  2 -> 5 [label=\"output_sanntis_gb\"]\n  4 -> 5 [label=\"outfile_tsv\"]\n  kc96c8c7e0a504506a1449d941f50eb5e[color=lightseagreen,label=\"Output\\n SMBGC Annotation\"]\n  5 -> kc96c8c7e0a504506a1449d941f50eb5e\n}",
           "workflow_tools": [
@@ -9395,8 +9361,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "5.54-87.0+galaxy2",
-                  "5.52-86.0+galaxy1"
+                  "5.52-86.0+galaxy1",
+                  "5.54-87.0+galaxy2"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -10325,7 +10291,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nEBI SRA: SRR034310 File: ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nhttps://zenodo.org/record/1134547/files/Barcode_SRR034310.txt\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"FastQC\"];\n  5 -->|demultiplexed| 10;\n  11[\"Map with BWA\"];\n  5 -->|demultiplexed| 11;\n  3 -->|output| 11;\n  12[\"Select\"];\n  6 -->|output_log| 12;\n  13[\"Select\"];\n  6 -->|output_log| 13;\n  14[\"Replace Text\"];\n  7 -->|outfile| 14;\n  15[\"Replace Text\"];\n  8 -->|out_file1| 15;\n  16[\"Replace Text\"];\n  9 -->|out_file1| 16;\n  17[\"MultiQC\"];\n  10 -->|text_file| 17;\n  18[\"Replace Text\"];\n  12 -->|out_file1| 18;\n  19[\"Replace Text\"];\n  13 -->|out_file1| 19;\n  2[\"ℹ️ Input Dataset\\nhttps://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  20[\"Add column\"];\n  14 -->|outfile| 20;\n  21[\"Concatenate datasets\"];\n  19 -->|outfile| 21;\n  15 -->|outfile| 21;\n  16 -->|outfile| 21;\n  18 -->|outfile| 21;\n  22[\"Cut\"];\n  20 -->|out_file1| 22;\n  23[\"Convert\"];\n  21 -->|out_file1| 23;\n  24[\"Regex Replace\"];\n  22 -->|out_file1| 24;\n  25[\"Stacks: reference map\"];\n  11 -->|bam_output| 25;\n  24 -->|outfile| 25;\n  26[\"Stacks: populations\"];\n  25 -->|all_output| 26;\n  24 -->|outfile| 26;\n  27[\"Summary Statistics\"];\n  26 -->|out_fstats| 27;\n  28[\"Sort\"];\n  26 -->|out_fstats| 28;\n  29[\"Count\"];\n  26 -->|out_fstats| 29;\n  3[\"ℹ️ Input Dataset\\nhttps://zenodo.org/record/1134547/files/Reference_genome_11_chromosomes.fasta\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  30[\"Filter\"];\n  26 -->|out_fstats| 30;\n  4[\"Stacks: process radtags\"];\n  1 -->|output| 4;\n  0 -->|output| 4;\n  5[\"Stacks: process radtags\"];\n  1 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Stacks: process radtags\"];\n  1 -->|output| 6;\n  0 -->|output| 6;\n  7[\"Replace Text\"];\n  2 -->|output| 7;\n  8[\"Select\"];\n  4 -->|output_log| 8;\n  9[\"Select\"];\n  5 -->|output_log| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nEBI SRA: SRR034310 File: ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nhttps://zenodo.org/record/1134547/files/Barcode_SRR034310.txt\"]\n  10[label=\"FastQC\"]\n  5 -> 10 [label=\"demultiplexed\"]\n  11[label=\"Map with BWA\"]\n  5 -> 11 [label=\"demultiplexed\"]\n  3 -> 11 [label=\"output\"]\n  12[label=\"Select\"]\n  6 -> 12 [label=\"output_log\"]\n  13[label=\"Select\"]\n  6 -> 13 [label=\"output_log\"]\n  14[label=\"Replace Text\"]\n  7 -> 14 [label=\"outfile\"]\n  15[label=\"Replace Text\"]\n  8 -> 15 [label=\"out_file1\"]\n  16[label=\"Replace Text\"]\n  9 -> 16 [label=\"out_file1\"]\n  17[label=\"MultiQC\"]\n  10 -> 17 [label=\"text_file\"]\n  18[label=\"Replace Text\"]\n  12 -> 18 [label=\"out_file1\"]\n  19[label=\"Replace Text\"]\n  13 -> 19 [label=\"out_file1\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nhttps://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt\"]\n  20[label=\"Add column\"]\n  14 -> 20 [label=\"outfile\"]\n  21[label=\"Concatenate datasets\"]\n  19 -> 21 [label=\"outfile\"]\n  15 -> 21 [label=\"outfile\"]\n  16 -> 21 [label=\"outfile\"]\n  18 -> 21 [label=\"outfile\"]\n  22[label=\"Cut\"]\n  20 -> 22 [label=\"out_file1\"]\n  23[label=\"Convert\"]\n  21 -> 23 [label=\"out_file1\"]\n  24[label=\"Regex Replace\"]\n  22 -> 24 [label=\"out_file1\"]\n  25[label=\"Stacks: reference map\"]\n  11 -> 25 [label=\"bam_output\"]\n  24 -> 25 [label=\"outfile\"]\n  26[label=\"Stacks: populations\"]\n  25 -> 26 [label=\"all_output\"]\n  24 -> 26 [label=\"outfile\"]\n  27[label=\"Summary Statistics\"]\n  26 -> 27 [label=\"out_fstats\"]\n  28[label=\"Sort\"]\n  26 -> 28 [label=\"out_fstats\"]\n  29[label=\"Count\"]\n  26 -> 29 [label=\"out_fstats\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nhttps://zenodo.org/record/1134547/files/Reference_genome_11_chromosomes.fasta\"]\n  30[label=\"Filter\"]\n  26 -> 30 [label=\"out_fstats\"]\n  4[label=\"Stacks: process radtags\"]\n  1 -> 4 [label=\"output\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Stacks: process radtags\"]\n  1 -> 5 [label=\"output\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"Stacks: process radtags\"]\n  1 -> 6 [label=\"output\"]\n  0 -> 6 [label=\"output\"]\n  7[label=\"Replace Text\"]\n  2 -> 7 [label=\"output\"]\n  8[label=\"Select\"]\n  4 -> 8 [label=\"output_log\"]\n  9[label=\"Select\"]\n  5 -> 9 [label=\"output_log\"]\n}",
           "workflow_tools": [
@@ -10521,7 +10487,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nref_genome_chromFa.tar\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nPopulation_map.txt\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nBarcodes_SRR034310.tabular\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nSRR034310.fastq\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"Stacks: process radtags\"];\n  2 -->|output| 4;\n  3 -->|output| 4;\n  5[\"Stacks: process radtags\"];\n  2 -->|output| 5;\n  3 -->|output| 5;\n  6[\"Stacks: process radtags\"];\n  2 -->|output| 6;\n  3 -->|output| 6;\n  7[\"Map with BWA for Illumina\"];\n  0 -->|output| 7;\n  4 -->|demultiplexed| 7;\n  8[\"Stacks: reference map\"];\n  7 -->|output| 8;\n  1 -->|output| 8;\n  9[\"Stacks: populations\"];\n  8 -->|all_output| 9;\n  1 -->|output| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nref_genome_chromFa.tar\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nPopulation_map.txt\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nBarcodes_SRR034310.tabular\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nSRR034310.fastq\"]\n  4[label=\"Stacks: process radtags\"]\n  2 -> 4 [label=\"output\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Stacks: process radtags\"]\n  2 -> 5 [label=\"output\"]\n  3 -> 5 [label=\"output\"]\n  6[label=\"Stacks: process radtags\"]\n  2 -> 6 [label=\"output\"]\n  3 -> 6 [label=\"output\"]\n  7[label=\"Map with BWA for Illumina\"]\n  0 -> 7 [label=\"output\"]\n  4 -> 7 [label=\"demultiplexed\"]\n  8[label=\"Stacks: reference map\"]\n  7 -> 8 [label=\"output\"]\n  1 -> 8 [label=\"output\"]\n  9[label=\"Stacks: populations\"]\n  8 -> 9 [label=\"all_output\"]\n  1 -> 9 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -12648,9 +12614,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.73+galaxy0",
+                  "0.72+galaxy1",
                   "0.72",
-                  "0.72+galaxy1"
+                  "0.73+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -12664,8 +12630,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.73+galaxy0",
                   "0.72+galaxy1",
+                  "0.73+galaxy0",
                   "0.69"
                 ],
                 "server": "https://galaxytrakr.org/"
@@ -12739,10 +12705,10 @@
                   "0.74+galaxy0",
                   "0.69",
                   "0.65",
-                  "0.74+galaxy1",
                   "0.52",
-                  "0.67",
+                  "0.74+galaxy1",
                   "0.68",
+                  "0.67",
                   "0.62",
                   "0.63",
                   "0.64"
@@ -12757,9 +12723,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.73+galaxy0",
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
+                  "0.73+galaxy0",
                   "0.74+galaxy0",
                   "0.74+galaxy1"
                 ],
@@ -12768,8 +12734,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.73+galaxy0",
-                  "0.72+galaxy1"
+                  "0.72+galaxy1",
+                  "0.73+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -12850,8 +12816,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.11+galaxy0",
-                  "1.11+galaxy1",
                   "1.7",
+                  "1.11+galaxy1",
                   "1.27+galaxy3",
                   "1.9+galaxy1"
                 ],
@@ -12914,8 +12880,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.9",
-                  "1.8+galaxy0"
+                  "1.8+galaxy0",
+                  "1.9"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -12933,12 +12899,12 @@
                 "state": "inexact",
                 "versions": [
                   "1.11+galaxy0",
-                  "1.11+galaxy1",
                   "1.7",
+                  "1.11+galaxy1",
                   "1.27+galaxy3",
                   "1.9+galaxy1",
-                  "1.9",
                   "1.8+galaxy0",
+                  "1.9",
                   "1.8+galaxy1",
                   "1.24.1+galaxy0",
                   "1.27+galaxy1",
@@ -12952,8 +12918,8 @@
                   "1.11+galaxy0",
                   "1.7",
                   "1.9+galaxy1",
-                  "1.9",
                   "1.8+galaxy0",
+                  "1.9",
                   "1.7.1",
                   "1.8+galaxy1",
                   "1.8+galaxy2"
@@ -13824,7 +13790,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Column Regex Find And Replace\"];\n  0 -->|output| 3;\n  4[\"Column Regex Find And Replace\"];\n  1 -->|output| 4;\n  5[\"Concatenate datasets\"];\n  2 -->|output| 5;\n  1 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Column Regex Find And Replace\"];\n  2 -->|output| 6;\n  7[\"Merge Columns\"];\n  3 -->|out_file1| 7;\n  8[\"Merge Columns\"];\n  4 -->|out_file1| 8;\n  9[\"Count\"];\n  5 -->|out_file1| 9;\n  10[\"Filter\"];\n  5 -->|out_file1| 10;\n  11[\"Merge Columns\"];\n  6 -->|out_file1| 11;\n  12[\"Regex Find And Replace\"];\n  7 -->|out_file1| 12;\n  13[\"Regex Find And Replace\"];\n  8 -->|out_file1| 13;\n  14[\"Column Regex Find And Replace\"];\n  10 -->|out_file1| 14;\n  15[\"Regex Find And Replace\"];\n  11 -->|out_file1| 15;\n  16[\"Calculate presence absence table\"];\n  12 -->|out_file1| 16;\n  17[\"Calculate presence absence table\"];\n  13 -->|out_file1| 17;\n  18[\"Merge Columns\"];\n  14 -->|out_file1| 18;\n  19[\"Calculate presence absence table\"];\n  15 -->|out_file1| 19;\n  20[\"Regex Find And Replace\"];\n  18 -->|out_file1| 20;\n  21[\"Calculate community metrics\"];\n  20 -->|out_file1| 21;\n  22[\"Column Regex Find And Replace\"];\n  20 -->|out_file1| 22;\n  23[\"Merge Columns\"];\n  22 -->|out_file1| 23;\n  24[\"Column Regex Find And Replace\"];\n  23 -->|out_file1| 24;\n  25[\"Advanced Cut\"];\n  24 -->|out_file1| 25;\n  26[\"Sort\"];\n  25 -->|output| 26;\n  27[\"Regex Find And Replace\"];\n  26 -->|outfile| 27;\n  28[\"Compute GLM on community data\"];\n  21 -->|output_community| 28;\n  27 -->|out_file1| 28;\n  29[\"Compute GLM on population data\"];\n  16 -->|output_presabs| 29;\n  27 -->|out_file1| 29;\n  30[\"Compute GLM on population data\"];\n  17 -->|output_presabs| 30;\n  27 -->|out_file1| 30;\n  31[\"Compute GLM on population data\"];\n  19 -->|output_presabs| 31;\n  27 -->|out_file1| 31;\n  32[\"Transpose\"];\n  28 -->|output_summary| 32;\n  33[\"Create a plot from GLM data\"];\n  21 -->|output_community| 33;\n  28 -->|output_summary| 33;\n  27 -->|out_file1| 33;\n  34[\"Transpose\"];\n  29 -->|output_summary| 34;\n  35[\"Create a plot from GLM data\"];\n  16 -->|output_presabs| 35;\n  29 -->|output_summary| 35;\n  27 -->|out_file1| 35;\n  36[\"Transpose\"];\n  30 -->|output_summary| 36;\n  37[\"Create a plot from GLM data\"];\n  17 -->|output_presabs| 37;\n  30 -->|output_summary| 37;\n  27 -->|out_file1| 37;\n  38[\"Transpose\"];\n  31 -->|output_summary| 38;\n  39[\"Create a plot from GLM data\"];\n  19 -->|output_presabs| 39;\n  31 -->|output_summary| 39;\n  27 -->|out_file1| 39;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  3[label=\"Column Regex Find And Replace\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Column Regex Find And Replace\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Concatenate datasets\"]\n  2 -> 5 [label=\"output\"]\n  1 -> 5 [label=\"output\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"Column Regex Find And Replace\"]\n  2 -> 6 [label=\"output\"]\n  7[label=\"Merge Columns\"]\n  3 -> 7 [label=\"out_file1\"]\n  8[label=\"Merge Columns\"]\n  4 -> 8 [label=\"out_file1\"]\n  9[label=\"Count\"]\n  5 -> 9 [label=\"out_file1\"]\n  10[label=\"Filter\"]\n  5 -> 10 [label=\"out_file1\"]\n  11[label=\"Merge Columns\"]\n  6 -> 11 [label=\"out_file1\"]\n  12[label=\"Regex Find And Replace\"]\n  7 -> 12 [label=\"out_file1\"]\n  13[label=\"Regex Find And Replace\"]\n  8 -> 13 [label=\"out_file1\"]\n  14[label=\"Column Regex Find And Replace\"]\n  10 -> 14 [label=\"out_file1\"]\n  15[label=\"Regex Find And Replace\"]\n  11 -> 15 [label=\"out_file1\"]\n  16[label=\"Calculate presence absence table\"]\n  12 -> 16 [label=\"out_file1\"]\n  17[label=\"Calculate presence absence table\"]\n  13 -> 17 [label=\"out_file1\"]\n  18[label=\"Merge Columns\"]\n  14 -> 18 [label=\"out_file1\"]\n  19[label=\"Calculate presence absence table\"]\n  15 -> 19 [label=\"out_file1\"]\n  20[label=\"Regex Find And Replace\"]\n  18 -> 20 [label=\"out_file1\"]\n  21[label=\"Calculate community metrics\"]\n  20 -> 21 [label=\"out_file1\"]\n  22[label=\"Column Regex Find And Replace\"]\n  20 -> 22 [label=\"out_file1\"]\n  23[label=\"Merge Columns\"]\n  22 -> 23 [label=\"out_file1\"]\n  24[label=\"Column Regex Find And Replace\"]\n  23 -> 24 [label=\"out_file1\"]\n  25[label=\"Advanced Cut\"]\n  24 -> 25 [label=\"out_file1\"]\n  26[label=\"Sort\"]\n  25 -> 26 [label=\"output\"]\n  27[label=\"Regex Find And Replace\"]\n  26 -> 27 [label=\"outfile\"]\n  28[label=\"Compute GLM on community data\"]\n  21 -> 28 [label=\"output_community\"]\n  27 -> 28 [label=\"out_file1\"]\n  29[label=\"Compute GLM on population data\"]\n  16 -> 29 [label=\"output_presabs\"]\n  27 -> 29 [label=\"out_file1\"]\n  30[label=\"Compute GLM on population data\"]\n  17 -> 30 [label=\"output_presabs\"]\n  27 -> 30 [label=\"out_file1\"]\n  31[label=\"Compute GLM on population data\"]\n  19 -> 31 [label=\"output_presabs\"]\n  27 -> 31 [label=\"out_file1\"]\n  32[label=\"Transpose\"]\n  28 -> 32 [label=\"output_summary\"]\n  33[label=\"Create a plot from GLM data\"]\n  21 -> 33 [label=\"output_community\"]\n  28 -> 33 [label=\"output_summary\"]\n  27 -> 33 [label=\"out_file1\"]\n  34[label=\"Transpose\"]\n  29 -> 34 [label=\"output_summary\"]\n  35[label=\"Create a plot from GLM data\"]\n  16 -> 35 [label=\"output_presabs\"]\n  29 -> 35 [label=\"output_summary\"]\n  27 -> 35 [label=\"out_file1\"]\n  36[label=\"Transpose\"]\n  30 -> 36 [label=\"output_summary\"]\n  37[label=\"Create a plot from GLM data\"]\n  17 -> 37 [label=\"output_presabs\"]\n  30 -> 37 [label=\"output_summary\"]\n  27 -> 37 [label=\"out_file1\"]\n  38[label=\"Transpose\"]\n  31 -> 38 [label=\"output_summary\"]\n  39[label=\"Create a plot from GLM data\"]\n  19 -> 39 [label=\"output_presabs\"]\n  31 -> 39 [label=\"output_summary\"]\n  27 -> 39 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -14668,8 +14634,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "9.3+galaxy1",
-                  "9.3+galaxy2"
+                  "9.3+galaxy2",
+                  "9.3+galaxy1"
                 ],
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
@@ -16499,8 +16465,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.0+galaxy2",
-                  "1.0.6"
+                  "1.0.6",
+                  "1.1.0+galaxy2"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -17042,7 +17008,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nchampbloc_ivr_val.csv\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nchampbloc_ivr.csv\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nficheterrain_val.csv\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nficheterrain.csv\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nchampbloc_qecb_val.csv\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nchampbloc_qecb.csv\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"IVR\"];\n  3 -->|output| 6;\n  2 -->|output| 6;\n  0 -->|output| 6;\n  1 -->|output| 6;\n  7[\"QECB\"];\n  3 -->|output| 7;\n  2 -->|output| 7;\n  4 -->|output| 7;\n  5 -->|output| 7;\n  8[\"Champs blocs indicators\"];\n  7 -->|output_rds| 8;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nchampbloc_ivr_val.csv\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nchampbloc_ivr.csv\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nficheterrain_val.csv\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nficheterrain.csv\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nchampbloc_qecb_val.csv\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nchampbloc_qecb.csv\"]\n  6[label=\"IVR\"]\n  3 -> 6 [label=\"output\"]\n  2 -> 6 [label=\"output\"]\n  0 -> 6 [label=\"output\"]\n  1 -> 6 [label=\"output\"]\n  7[label=\"QECB\"]\n  3 -> 7 [label=\"output\"]\n  2 -> 7 [label=\"output\"]\n  4 -> 7 [label=\"output\"]\n  5 -> 7 [label=\"output\"]\n  8[label=\"Champs blocs indicators\"]\n  7 -> 8 [label=\"output_rds\"]\n}",
           "workflow_tools": [
@@ -19712,7 +19678,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nReel_life_survey_fish_modif.tabular\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Spatial coordinates anonymization\"];\n  0 -->|output| 1;\n  2[\"Homoscedasticity and normality\"];\n  0 -->|output| 2;\n  3[\"Variables exploration\"];\n  0 -->|output| 3;\n  4[\"Presence-absence and abundance\"];\n  0 -->|output| 4;\n  5[\"Statistics on presence-absence\"];\n  0 -->|output| 5;\n  6[\"Local Contributions to Beta Diversity LCBD\"];\n  0 -->|output| 6;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nReel_life_survey_fish_modif.tabular\"]\n  1[label=\"Spatial coordinates anonymization\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Homoscedasticity and normality\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Variables exploration\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Presence-absence and abundance\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Statistics on presence-absence\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"Local Contributions to Beta Diversity LCBD\"]\n  0 -> 6 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -20620,8 +20586,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "9.3+galaxy1",
-                  "9.3+galaxy2"
+                  "9.3+galaxy2",
+                  "9.3+galaxy1"
                 ],
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
@@ -22174,7 +22140,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nreverse_reads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nforward_reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Kraken2\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  a408a644-58cd-4f5e-af25-15b5ea63aa76[\"Output\\nkraken_report_reads\"];\n  2 --> a408a644-58cd-4f5e-af25-15b5ea63aa76;\n  style a408a644-58cd-4f5e-af25-15b5ea63aa76 stroke:#2c3143,stroke-width:4px;\n  54b85a53-72ee-4b73-b186-7fd55e8aab9b[\"Output\\nkraken_report_tabular\"];\n  2 --> 54b85a53-72ee-4b73-b186-7fd55e8aab9b;\n  style 54b85a53-72ee-4b73-b186-7fd55e8aab9b stroke:#2c3143,stroke-width:4px;\n  3[\"Bracken\"];\n  2 -->|report_output| 3;\n  ae6c6464-f5f5-4e5b-b616-d38166fc0133[\"Output\\nbracken_report_tsv\"];\n  3 --> ae6c6464-f5f5-4e5b-b616-d38166fc0133;\n  style ae6c6464-f5f5-4e5b-b616-d38166fc0133 stroke:#2c3143,stroke-width:4px;\n  8ca52af9-f839-42b6-aa74-f1a6a1dfbbc8[\"Output\\nbracken_kraken_report\"];\n  3 --> 8ca52af9-f839-42b6-aa74-f1a6a1dfbbc8;\n  style 8ca52af9-f839-42b6-aa74-f1a6a1dfbbc8 stroke:#2c3143,stroke-width:4px;\n  4[\"Recentrifuge\"];\n  2 -->|output| 4;\n  b5694f2d-c8cd-4460-bfff-74fd0792ecb3[\"Output\\nrecentrifuge_stats_tabular\"];\n  4 --> b5694f2d-c8cd-4460-bfff-74fd0792ecb3;\n  style b5694f2d-c8cd-4460-bfff-74fd0792ecb3 stroke:#2c3143,stroke-width:4px;\n  bd947a1d-0443-465f-8658-5d76d9ce69f8[\"Output\\nrecentrifuge_report_html\"];\n  4 --> bd947a1d-0443-465f-8658-5d76d9ce69f8;\n  style bd947a1d-0443-465f-8658-5d76d9ce69f8 stroke:#2c3143,stroke-width:4px;\n  c7457acb-41bc-4191-b3fb-6716e15fbe57[\"Output\\nrecentrifuge_data_tabular\"];\n  4 --> c7457acb-41bc-4191-b3fb-6716e15fbe57;\n  style c7457acb-41bc-4191-b3fb-6716e15fbe57 stroke:#2c3143,stroke-width:4px;\n  94f6ff07-0e06-47ad-88f8-a058d0808537[\"Output\\nrecentrifuge_logfile\"];\n  4 --> 94f6ff07-0e06-47ad-88f8-a058d0808537;\n  style 94f6ff07-0e06-47ad-88f8-a058d0808537 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nreverse_reads\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nforward_reads\"]\n  2[label=\"Kraken2\"]\n  1 -> 2 [label=\"output\"]\n  0 -> 2 [label=\"output\"]\n  ka408a64458cd4f5eaf2515b5ea63aa76[color=lightseagreen,label=\"Output\\nkraken_report_reads\"]\n  2 -> ka408a64458cd4f5eaf2515b5ea63aa76\n  k54b85a5372ee4b73b1867fd55e8aab9b[color=lightseagreen,label=\"Output\\nkraken_report_tabular\"]\n  2 -> k54b85a5372ee4b73b1867fd55e8aab9b\n  3[label=\"Bracken\"]\n  2 -> 3 [label=\"report_output\"]\n  kae6c6464f5f54e5bb616d38166fc0133[color=lightseagreen,label=\"Output\\nbracken_report_tsv\"]\n  3 -> kae6c6464f5f54e5bb616d38166fc0133\n  k8ca52af9f83942b6aa74f1a6a1dfbbc8[color=lightseagreen,label=\"Output\\nbracken_kraken_report\"]\n  3 -> k8ca52af9f83942b6aa74f1a6a1dfbbc8\n  4[label=\"Recentrifuge\"]\n  2 -> 4 [label=\"output\"]\n  kb5694f2dc8cd4460bfff74fd0792ecb3[color=lightseagreen,label=\"Output\\nrecentrifuge_stats_tabular\"]\n  4 -> kb5694f2dc8cd4460bfff74fd0792ecb3\n  kbd947a1d0443465f86585d76d9ce69f8[color=lightseagreen,label=\"Output\\nrecentrifuge_report_html\"]\n  4 -> kbd947a1d0443465f86585d76d9ce69f8\n  kc7457acb41bc4191b3fb6716e15fbe57[color=lightseagreen,label=\"Output\\nrecentrifuge_data_tabular\"]\n  4 -> kc7457acb41bc4191b3fb6716e15fbe57\n  k94f6ff070e0647ad88f8a058d0808537[color=lightseagreen,label=\"Output\\nrecentrifuge_logfile\"]\n  4 -> k94f6ff070e0647ad88f8a058d0808537\n}",
           "workflow_tools": [
@@ -22961,8 +22927,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0.7_beta+galaxy0",
-                  "2.0.8_beta+galaxy0"
+                  "2.0.8_beta+galaxy0",
+                  "2.0.7_beta+galaxy0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -23144,8 +23110,8 @@
                 "versions": [
                   "1.14.1+galaxy0",
                   "1.15.1+galaxy0",
-                  "1.14.0+galaxy0",
-                  "1.15.0+galaxy0"
+                  "1.15.0+galaxy0",
+                  "1.14.0+galaxy0"
                 ],
                 "server": "https://usegalaxy.org"
               },
@@ -23567,7 +23533,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nSENTINEL2A_20230214-105638-781_L2A_T31UET_D.zip\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Preprocess sentinel 2 data\"];\n  0 -->|output| 1;\n  2[\"Compute spectral indices\"];\n  1 -->|output_refl| 2;\n  3[\"Compute biodiversity indices\"];\n  1 -->|output_refl| 3;\n  4[\"Map diversity\"];\n  1 -->|output_refl| 4;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nSENTINEL2A_20230214-105638-781_L2A_T31UET_D.zip\"]\n  1[label=\"Preprocess sentinel 2 data\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Compute spectral indices\"]\n  1 -> 2 [label=\"output_refl\"]\n  3[label=\"Compute biodiversity indices\"]\n  1 -> 3 [label=\"output_refl\"]\n  4[label=\"Map diversity\"]\n  1 -> 4 [label=\"output_refl\"]\n}",
           "workflow_tools": [
@@ -25921,7 +25887,7 @@
               "version": "0.1"
             }
           },
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"OBIS occurences\"];\n  1[\"Advanced Cut\"];\n  0 -->|output| 1;\n  2[\"Ocean biodiversity indicators\"];\n  1 -->|output| 2;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"OBIS occurences\"]\n  1[label=\"Advanced Cut\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Ocean biodiversity indicators\"]\n  1 -> 2 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -26209,8 +26175,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "9.3+galaxy1",
-                  "9.3+galaxy2"
+                  "9.3+galaxy2",
+                  "9.3+galaxy1"
                 ],
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
@@ -26368,8 +26334,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "9.3+galaxy1",
-                  "9.3+galaxy2"
+                  "9.3+galaxy2",
+                  "9.3+galaxy1"
                 ],
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
@@ -26434,8 +26400,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.1.0",
-                  "9.3+galaxy1",
                   "9.3+galaxy2",
+                  "9.3+galaxy1",
                   "1.0.0",
                   "9.5+galaxy0"
                 ],
@@ -27308,7 +27274,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 9 stroke:#2c3143,stroke-width:4px;\n  10[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 10 stroke:#2c3143,stroke-width:4px;\n  11[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 11 stroke:#2c3143,stroke-width:4px;\n  12[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 12 stroke:#2c3143,stroke-width:4px;\n  13[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 13 stroke:#2c3143,stroke-width:4px;\n  14[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 14 stroke:#2c3143,stroke-width:4px;\n  15[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 15 stroke:#2c3143,stroke-width:4px;\n  16[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 16 stroke:#2c3143,stroke-width:4px;\n  17[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 17 stroke:#2c3143,stroke-width:4px;\n  18[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 18 stroke:#2c3143,stroke-width:4px;\n  19[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 19 stroke:#2c3143,stroke-width:4px;\n  20[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 20 stroke:#2c3143,stroke-width:4px;\n  21[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 21 stroke:#2c3143,stroke-width:4px;\n  22[\"Stacks: de novo map\"];\n  1 -->|output| 22;\n  0 -->|output| 22;\n  15 -->|output| 22;\n  14 -->|output| 22;\n  13 -->|output| 22;\n  12 -->|output| 22;\n  11 -->|output| 22;\n  10 -->|output| 22;\n  9 -->|output| 22;\n  8 -->|output| 22;\n  7 -->|output| 22;\n  6 -->|output| 22;\n  5 -->|output| 22;\n  4 -->|output| 22;\n  3 -->|output| 22;\n  2 -->|output| 22;\n  17 -->|output| 22;\n  18 -->|output| 22;\n  19 -->|output| 22;\n  20 -->|output| 22;\n  21 -->|output| 22;\n  16 -->|output| 22;\n  23[\"Stacks: genotypes\"];\n  22 -->|all_output| 23;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  9[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  10[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  11[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  12[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  13[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  14[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  15[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  16[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  17[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  18[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  19[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  20[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  21[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  22[label=\"Stacks: de novo map\"]\n  1 -> 22 [label=\"output\"]\n  0 -> 22 [label=\"output\"]\n  15 -> 22 [label=\"output\"]\n  14 -> 22 [label=\"output\"]\n  13 -> 22 [label=\"output\"]\n  12 -> 22 [label=\"output\"]\n  11 -> 22 [label=\"output\"]\n  10 -> 22 [label=\"output\"]\n  9 -> 22 [label=\"output\"]\n  8 -> 22 [label=\"output\"]\n  7 -> 22 [label=\"output\"]\n  6 -> 22 [label=\"output\"]\n  5 -> 22 [label=\"output\"]\n  4 -> 22 [label=\"output\"]\n  3 -> 22 [label=\"output\"]\n  2 -> 22 [label=\"output\"]\n  17 -> 22 [label=\"output\"]\n  18 -> 22 [label=\"output\"]\n  19 -> 22 [label=\"output\"]\n  20 -> 22 [label=\"output\"]\n  21 -> 22 [label=\"output\"]\n  16 -> 22 [label=\"output\"]\n  23[label=\"Stacks: genotypes\"]\n  22 -> 23 [label=\"all_output\"]\n}",
           "workflow_tools": [
@@ -28547,9 +28513,9 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\noccurrence.txt\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\npivot_wider_jupytool_notebook.ipynb\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nceamarc_env.tsv\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Advanced Cut\"];\n  0 -->|output| 3;\n  4[\"Column Regex Find And Replace\"];\n  3 -->|output| 4;\n  5[\"Column Regex Find And Replace\"];\n  4 -->|out_file1| 5;\n  6[\"Column Regex Find And Replace\"];\n  5 -->|out_file1| 6;\n  7[\"Column Regex Find And Replace\"];\n  6 -->|out_file1| 7;\n  8[\"Filter Tabular\"];\n  7 -->|out_file1| 8;\n  9[\"Column Regex Find And Replace\"];\n  8 -->|output| 9;\n  10[\"Column Regex Find And Replace\"];\n  9 -->|out_file1| 10;\n  11[\"Column Regex Find And Replace\"];\n  10 -->|out_file1| 11;\n  12[\"Column Regex Find And Replace\"];\n  11 -->|out_file1| 12;\n  13[\"Column Regex Find And Replace\"];\n  12 -->|out_file1| 13;\n  14[\"Merge Columns\"];\n  13 -->|out_file1| 14;\n  15[\"Advanced Cut\"];\n  14 -->|out_file1| 15;\n  16[\"Interactive JupyTool and notebook\"];\n  1 -->|output| 16;\n  15 -->|output| 16;\n  ba5516ba-589c-4543-bfbc-dd17522955a1[\"Output\\nocc_out\"];\n  16 --> ba5516ba-589c-4543-bfbc-dd17522955a1;\n  style ba5516ba-589c-4543-bfbc-dd17522955a1 stroke:#2c3143,stroke-width:4px;\n  17[\"GeoNearestNeighbor\"];\n  2 -->|output| 17;\n  16 -->|output_dataset| 17;\n  bc04f6d9-5bd1-432a-a492-ab0a49e71b18[\"Output\\nocc_env_out\"];\n  17 --> bc04f6d9-5bd1-432a-a492-ab0a49e71b18;\n  style bc04f6d9-5bd1-432a-a492-ab0a49e71b18 stroke:#2c3143,stroke-width:4px;\n  52711363-0075-4079-97ba-209bc7e5d9ba[\"Output\\ninfo_out\"];\n  17 --> 52711363-0075-4079-97ba-209bc7e5d9ba;\n  style 52711363-0075-4079-97ba-209bc7e5d9ba stroke:#2c3143,stroke-width:4px;\n  18[\"BRT tool prediction\"];\n  2 -->|output| 18;\n  17 -->|occ_env_out| 18;\n  c21354b8-875a-4335-b190-50b23fab335f[\"Output\\ncoll_pred\"];\n  18 --> c21354b8-875a-4335-b190-50b23fab335f;\n  style c21354b8-875a-4335-b190-50b23fab335f stroke:#2c3143,stroke-width:4px;\n  513e6b04-57e6-4bf5-a3c4-f8b596eb1ce5[\"Output\\ncoll_val\"];\n  18 --> 513e6b04-57e6-4bf5-a3c4-f8b596eb1ce5;\n  style 513e6b04-57e6-4bf5-a3c4-f8b596eb1ce5 stroke:#2c3143,stroke-width:4px;\n  b483484d-3cc7-4724-8362-5793b76552f3[\"Output\\ncoll_distri\"];\n  18 --> b483484d-3cc7-4724-8362-5793b76552f3;\n  style b483484d-3cc7-4724-8362-5793b76552f3 stroke:#2c3143,stroke-width:4px;\n  a07d2073-7cba-4b4c-a40f-35d7e602c228[\"Output\\ncoll_plots\"];\n  18 --> a07d2073-7cba-4b4c-a40f-35d7e602c228;\n  style a07d2073-7cba-4b4c-a40f-35d7e602c228 stroke:#2c3143,stroke-width:4px;\n  19[\"TaxaSeeker\"];\n  2 -->|output| 19;\n  17 -->|occ_env_out| 19;\n  18 -->|outputpred| 19;\n  4ed3745e-6dba-4917-bf01-d74d68d0cfa9[\"Output\\nsummary\"];\n  19 --> 4ed3745e-6dba-4917-bf01-d74d68d0cfa9;\n  style 4ed3745e-6dba-4917-bf01-d74d68d0cfa9 stroke:#2c3143,stroke-width:4px;\n  ddf67ba2-56bf-4707-a73f-e8688d4546ef[\"Output\\ntaxa\"];\n  19 --> ddf67ba2-56bf-4707-a73f-e8688d4546ef;\n  style ddf67ba2-56bf-4707-a73f-e8688d4546ef stroke:#2c3143,stroke-width:4px;\n  1ef0a673-a623-4b88-b761-be4d40d12b12[\"Output\\ntaxa_clean\"];\n  19 --> 1ef0a673-a623-4b88-b761-be4d40d12b12;\n  style 1ef0a673-a623-4b88-b761-be4d40d12b12 stroke:#2c3143,stroke-width:4px;\n  20[\"ClusterEstimate\"];\n  2 -->|output| 20;\n  18 -->|outputpred| 20;\n  19 -->|output2| 20;\n  51ce5108-9d4b-483e-847f-aa627020997b[\"Output\\nSIH_index\"];\n  20 --> 51ce5108-9d4b-483e-847f-aa627020997b;\n  style 51ce5108-9d4b-483e-847f-aa627020997b stroke:#2c3143,stroke-width:4px;\n  6bc021b9-20fd-43b4-868a-f4ac33bb63e4[\"Output\\ndata_to_clus\"];\n  20 --> 6bc021b9-20fd-43b4-868a-f4ac33bb63e4;\n  style 6bc021b9-20fd-43b4-868a-f4ac33bb63e4 stroke:#2c3143,stroke-width:4px;\n  994833ab-bf0f-47b1-93d9-7c70dec4953e[\"Output\\ndatabio_table\"];\n  20 --> 994833ab-bf0f-47b1-93d9-7c70dec4953e;\n  style 994833ab-bf0f-47b1-93d9-7c70dec4953e stroke:#2c3143,stroke-width:4px;\n  21[\"ClaraClust\"];\n  2 -->|output| 21;\n  20 -->|output3| 21;\n  20 -->|output2| 21;\n  6f66d998-82e6-4dc7-83aa-946ff39061c1[\"Output\\nSIH_plot\"];\n  21 --> 6f66d998-82e6-4dc7-83aa-946ff39061c1;\n  style 6f66d998-82e6-4dc7-83aa-946ff39061c1 stroke:#2c3143,stroke-width:4px;\n  0f5f3377-ed90-4c5e-9216-39f12cd149b6[\"Output\\ncluster_points\"];\n  21 --> 0f5f3377-ed90-4c5e-9216-39f12cd149b6;\n  style 0f5f3377-ed90-4c5e-9216-39f12cd149b6 stroke:#2c3143,stroke-width:4px;\n  a4ef4036-d515-4a42-8027-6137537f0f88[\"Output\\ncluster_info\"];\n  21 --> a4ef4036-d515-4a42-8027-6137537f0f88;\n  style a4ef4036-d515-4a42-8027-6137537f0f88 stroke:#2c3143,stroke-width:4px;\n  22[\"EcoMap\"];\n  21 -->|output2| 22;\n  f27653bc-9a0a-438a-99f0-2b70cf129475[\"Output\\neco_map\"];\n  22 --> f27653bc-9a0a-438a-99f0-2b70cf129475;\n  style f27653bc-9a0a-438a-99f0-2b70cf129475 stroke:#2c3143,stroke-width:4px;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\noccurrence.txt\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\npivot_wider_jupytool_notebook.ipynb\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nceamarc_env.tsv\"]\n  3[label=\"Advanced Cut\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Column Regex Find And Replace\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Column Regex Find And Replace\"]\n  4 -> 5 [label=\"out_file1\"]\n  6[label=\"Column Regex Find And Replace\"]\n  5 -> 6 [label=\"out_file1\"]\n  7[label=\"Column Regex Find And Replace\"]\n  6 -> 7 [label=\"out_file1\"]\n  8[label=\"Filter Tabular\"]\n  7 -> 8 [label=\"out_file1\"]\n  9[label=\"Column Regex Find And Replace\"]\n  8 -> 9 [label=\"output\"]\n  10[label=\"Column Regex Find And Replace\"]\n  9 -> 10 [label=\"out_file1\"]\n  11[label=\"Column Regex Find And Replace\"]\n  10 -> 11 [label=\"out_file1\"]\n  12[label=\"Column Regex Find And Replace\"]\n  11 -> 12 [label=\"out_file1\"]\n  13[label=\"Column Regex Find And Replace\"]\n  12 -> 13 [label=\"out_file1\"]\n  14[label=\"Merge Columns\"]\n  13 -> 14 [label=\"out_file1\"]\n  15[label=\"Advanced Cut\"]\n  14 -> 15 [label=\"out_file1\"]\n  16[label=\"Interactive JupyTool and notebook\"]\n  1 -> 16 [label=\"output\"]\n  15 -> 16 [label=\"output\"]\n  kba5516ba589c4543bfbcdd17522955a1[color=lightseagreen,label=\"Output\\nocc_out\"]\n  16 -> kba5516ba589c4543bfbcdd17522955a1\n  17[label=\"GeoNearestNeighbor\"]\n  2 -> 17 [label=\"output\"]\n  16 -> 17 [label=\"output_dataset\"]\n  kbc04f6d95bd1432aa492ab0a49e71b18[color=lightseagreen,label=\"Output\\nocc_env_out\"]\n  17 -> kbc04f6d95bd1432aa492ab0a49e71b18\n  k527113630075407997ba209bc7e5d9ba[color=lightseagreen,label=\"Output\\ninfo_out\"]\n  17 -> k527113630075407997ba209bc7e5d9ba\n  18[label=\"BRT tool prediction\"]\n  2 -> 18 [label=\"output\"]\n  17 -> 18 [label=\"occ_env_out\"]\n  kc21354b8875a4335b19050b23fab335f[color=lightseagreen,label=\"Output\\ncoll_pred\"]\n  18 -> kc21354b8875a4335b19050b23fab335f\n  k513e6b0457e64bf5a3c4f8b596eb1ce5[color=lightseagreen,label=\"Output\\ncoll_val\"]\n  18 -> k513e6b0457e64bf5a3c4f8b596eb1ce5\n  kb483484d3cc7472483625793b76552f3[color=lightseagreen,label=\"Output\\ncoll_distri\"]\n  18 -> kb483484d3cc7472483625793b76552f3\n  ka07d20737cba4b4ca40f35d7e602c228[color=lightseagreen,label=\"Output\\ncoll_plots\"]\n  18 -> ka07d20737cba4b4ca40f35d7e602c228\n  19[label=\"TaxaSeeker\"]\n  2 -> 19 [label=\"output\"]\n  17 -> 19 [label=\"occ_env_out\"]\n  18 -> 19 [label=\"outputpred\"]\n  k4ed3745e6dba4917bf01d74d68d0cfa9[color=lightseagreen,label=\"Output\\nsummary\"]\n  19 -> k4ed3745e6dba4917bf01d74d68d0cfa9\n  kddf67ba256bf4707a73fe8688d4546ef[color=lightseagreen,label=\"Output\\ntaxa\"]\n  19 -> kddf67ba256bf4707a73fe8688d4546ef\n  k1ef0a673a6234b88b761be4d40d12b12[color=lightseagreen,label=\"Output\\ntaxa_clean\"]\n  19 -> k1ef0a673a6234b88b761be4d40d12b12\n  20[label=\"ClusterEstimate\"]\n  2 -> 20 [label=\"output\"]\n  18 -> 20 [label=\"outputpred\"]\n  19 -> 20 [label=\"output2\"]\n  k51ce51089d4b483e847faa627020997b[color=lightseagreen,label=\"Output\\nSIH_index\"]\n  20 -> k51ce51089d4b483e847faa627020997b\n  k6bc021b920fd43b4868af4ac33bb63e4[color=lightseagreen,label=\"Output\\ndata_to_clus\"]\n  20 -> k6bc021b920fd43b4868af4ac33bb63e4\n  k994833abbf0f47b193d97c70dec4953e[color=lightseagreen,label=\"Output\\ndatabio_table\"]\n  20 -> k994833abbf0f47b193d97c70dec4953e\n  21[label=\"ClaraClust\"]\n  2 -> 21 [label=\"output\"]\n  20 -> 21 [label=\"output3\"]\n  20 -> 21 [label=\"output2\"]\n  k6f66d99882e64dc783aa946ff39061c1[color=lightseagreen,label=\"Output\\nSIH_plot\"]\n  21 -> k6f66d99882e64dc783aa946ff39061c1\n  k0f5f3377ed904c5e921639f12cd149b6[color=lightseagreen,label=\"Output\\ncluster_points\"]\n  21 -> k0f5f3377ed904c5e921639f12cd149b6\n  ka4ef4036d5154a4280276137537f0f88[color=lightseagreen,label=\"Output\\ncluster_info\"]\n  21 -> ka4ef4036d5154a4280276137537f0f88\n  22[label=\"EcoMap\"]\n  21 -> 22 [label=\"output2\"]\n  kf27653bc9a0a438a99f02b70cf129475[color=lightseagreen,label=\"Output\\neco_map\"]\n  22 -> kf27653bc9a0a438a99f02b70cf129475\n}",
+          "modified": "2025-03-20 09:39:57 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\noccurrence.txt\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\npivot_wider_jupytool_notebook.ipynb\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nceamarc_env.tsv\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Advanced Cut\"];\n  0 -->|output| 3;\n  4[\"Column Regex Find And Replace\"];\n  3 -->|output| 4;\n  5[\"Column Regex Find And Replace\"];\n  4 -->|out_file1| 5;\n  6[\"Column Regex Find And Replace\"];\n  5 -->|out_file1| 6;\n  7[\"Column Regex Find And Replace\"];\n  6 -->|out_file1| 7;\n  8[\"Filter Tabular\"];\n  7 -->|out_file1| 8;\n  9[\"Column Regex Find And Replace\"];\n  8 -->|output| 9;\n  10[\"Column Regex Find And Replace\"];\n  9 -->|out_file1| 10;\n  11[\"Column Regex Find And Replace\"];\n  10 -->|out_file1| 11;\n  12[\"Column Regex Find And Replace\"];\n  11 -->|out_file1| 12;\n  13[\"Column Regex Find And Replace\"];\n  12 -->|out_file1| 13;\n  14[\"Merge Columns\"];\n  13 -->|out_file1| 14;\n  15[\"Advanced Cut\"];\n  14 -->|out_file1| 15;\n  16[\"Interactive JupyTool and notebook\"];\n  1 -->|output| 16;\n  15 -->|output| 16;\n  cb8ad6c2-8280-4ee9-9612-ffaf69240fad[\"Output\\nocc_out\"];\n  16 --> cb8ad6c2-8280-4ee9-9612-ffaf69240fad;\n  style cb8ad6c2-8280-4ee9-9612-ffaf69240fad stroke:#2c3143,stroke-width:4px;\n  17[\"GeoNearestNeighbor\"];\n  2 -->|output| 17;\n  16 -->|output_dataset| 17;\n  66bf2849-eef9-4a2b-b50c-03a43a14da63[\"Output\\nocc_env_out\"];\n  17 --> 66bf2849-eef9-4a2b-b50c-03a43a14da63;\n  style 66bf2849-eef9-4a2b-b50c-03a43a14da63 stroke:#2c3143,stroke-width:4px;\n  0d33713e-4052-4aa1-aedd-9a9fd768a3f7[\"Output\\ninfo_out\"];\n  17 --> 0d33713e-4052-4aa1-aedd-9a9fd768a3f7;\n  style 0d33713e-4052-4aa1-aedd-9a9fd768a3f7 stroke:#2c3143,stroke-width:4px;\n  18[\"BRT tool prediction\"];\n  2 -->|output| 18;\n  17 -->|occ_env_out| 18;\n  949f114b-6f24-4a2d-95a2-7c5a43c9f6a3[\"Output\\ncoll_pred\"];\n  18 --> 949f114b-6f24-4a2d-95a2-7c5a43c9f6a3;\n  style 949f114b-6f24-4a2d-95a2-7c5a43c9f6a3 stroke:#2c3143,stroke-width:4px;\n  495d4738-5cc8-4c3a-8749-3ccb973b3e57[\"Output\\ncoll_val\"];\n  18 --> 495d4738-5cc8-4c3a-8749-3ccb973b3e57;\n  style 495d4738-5cc8-4c3a-8749-3ccb973b3e57 stroke:#2c3143,stroke-width:4px;\n  8733a236-387c-4181-b7c5-d15b6160aeb5[\"Output\\ncoll_distri\"];\n  18 --> 8733a236-387c-4181-b7c5-d15b6160aeb5;\n  style 8733a236-387c-4181-b7c5-d15b6160aeb5 stroke:#2c3143,stroke-width:4px;\n  018ea8da-4df2-450c-aa54-51c1f753a16d[\"Output\\ncoll_plots\"];\n  18 --> 018ea8da-4df2-450c-aa54-51c1f753a16d;\n  style 018ea8da-4df2-450c-aa54-51c1f753a16d stroke:#2c3143,stroke-width:4px;\n  19[\"TaxaSeeker\"];\n  2 -->|output| 19;\n  17 -->|occ_env_out| 19;\n  18 -->|outputpred| 19;\n  895ba808-8580-4dc3-8d22-ef2060b14c8e[\"Output\\nsummary\"];\n  19 --> 895ba808-8580-4dc3-8d22-ef2060b14c8e;\n  style 895ba808-8580-4dc3-8d22-ef2060b14c8e stroke:#2c3143,stroke-width:4px;\n  02f160c6-a4fb-40a3-b965-dee47aa65e5a[\"Output\\ntaxa\"];\n  19 --> 02f160c6-a4fb-40a3-b965-dee47aa65e5a;\n  style 02f160c6-a4fb-40a3-b965-dee47aa65e5a stroke:#2c3143,stroke-width:4px;\n  39075948-d67a-4a24-b696-c90a7a58d959[\"Output\\ntaxa_clean\"];\n  19 --> 39075948-d67a-4a24-b696-c90a7a58d959;\n  style 39075948-d67a-4a24-b696-c90a7a58d959 stroke:#2c3143,stroke-width:4px;\n  20[\"ClusterEstimate\"];\n  2 -->|output| 20;\n  18 -->|outputpred| 20;\n  19 -->|output2| 20;\n  be67fa16-b6ab-4d26-97c4-ccbb98d6c8af[\"Output\\nSIH_index\"];\n  20 --> be67fa16-b6ab-4d26-97c4-ccbb98d6c8af;\n  style be67fa16-b6ab-4d26-97c4-ccbb98d6c8af stroke:#2c3143,stroke-width:4px;\n  53707dcb-68fa-46c5-9151-2dccf849ce29[\"Output\\ndata_to_clus\"];\n  20 --> 53707dcb-68fa-46c5-9151-2dccf849ce29;\n  style 53707dcb-68fa-46c5-9151-2dccf849ce29 stroke:#2c3143,stroke-width:4px;\n  fdac4d5b-1ed7-4bc2-a5e0-9292570437e6[\"Output\\ndatabio_table\"];\n  20 --> fdac4d5b-1ed7-4bc2-a5e0-9292570437e6;\n  style fdac4d5b-1ed7-4bc2-a5e0-9292570437e6 stroke:#2c3143,stroke-width:4px;\n  21[\"ClaraClust\"];\n  2 -->|output| 21;\n  20 -->|output3| 21;\n  20 -->|output2| 21;\n  39027163-0b90-4852-83b1-895370ecec40[\"Output\\nSIH_plot\"];\n  21 --> 39027163-0b90-4852-83b1-895370ecec40;\n  style 39027163-0b90-4852-83b1-895370ecec40 stroke:#2c3143,stroke-width:4px;\n  5a8ce7f0-cc49-4ebe-a0f1-b4bf734746c6[\"Output\\ncluster_points\"];\n  21 --> 5a8ce7f0-cc49-4ebe-a0f1-b4bf734746c6;\n  style 5a8ce7f0-cc49-4ebe-a0f1-b4bf734746c6 stroke:#2c3143,stroke-width:4px;\n  c382d921-e067-4c69-8176-b47c158272b1[\"Output\\ncluster_info\"];\n  21 --> c382d921-e067-4c69-8176-b47c158272b1;\n  style c382d921-e067-4c69-8176-b47c158272b1 stroke:#2c3143,stroke-width:4px;\n  22[\"EcoMap\"];\n  21 -->|output2| 22;\n  e09ff29c-f18f-4cb0-abdd-bd6eb66027cf[\"Output\\neco_map\"];\n  22 --> e09ff29c-f18f-4cb0-abdd-bd6eb66027cf;\n  style e09ff29c-f18f-4cb0-abdd-bd6eb66027cf stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\noccurrence.txt\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\npivot_wider_jupytool_notebook.ipynb\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nceamarc_env.tsv\"]\n  3[label=\"Advanced Cut\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Column Regex Find And Replace\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Column Regex Find And Replace\"]\n  4 -> 5 [label=\"out_file1\"]\n  6[label=\"Column Regex Find And Replace\"]\n  5 -> 6 [label=\"out_file1\"]\n  7[label=\"Column Regex Find And Replace\"]\n  6 -> 7 [label=\"out_file1\"]\n  8[label=\"Filter Tabular\"]\n  7 -> 8 [label=\"out_file1\"]\n  9[label=\"Column Regex Find And Replace\"]\n  8 -> 9 [label=\"output\"]\n  10[label=\"Column Regex Find And Replace\"]\n  9 -> 10 [label=\"out_file1\"]\n  11[label=\"Column Regex Find And Replace\"]\n  10 -> 11 [label=\"out_file1\"]\n  12[label=\"Column Regex Find And Replace\"]\n  11 -> 12 [label=\"out_file1\"]\n  13[label=\"Column Regex Find And Replace\"]\n  12 -> 13 [label=\"out_file1\"]\n  14[label=\"Merge Columns\"]\n  13 -> 14 [label=\"out_file1\"]\n  15[label=\"Advanced Cut\"]\n  14 -> 15 [label=\"out_file1\"]\n  16[label=\"Interactive JupyTool and notebook\"]\n  1 -> 16 [label=\"output\"]\n  15 -> 16 [label=\"output\"]\n  kcb8ad6c282804ee99612ffaf69240fad[color=lightseagreen,label=\"Output\\nocc_out\"]\n  16 -> kcb8ad6c282804ee99612ffaf69240fad\n  17[label=\"GeoNearestNeighbor\"]\n  2 -> 17 [label=\"output\"]\n  16 -> 17 [label=\"output_dataset\"]\n  k66bf2849eef94a2bb50c03a43a14da63[color=lightseagreen,label=\"Output\\nocc_env_out\"]\n  17 -> k66bf2849eef94a2bb50c03a43a14da63\n  k0d33713e40524aa1aedd9a9fd768a3f7[color=lightseagreen,label=\"Output\\ninfo_out\"]\n  17 -> k0d33713e40524aa1aedd9a9fd768a3f7\n  18[label=\"BRT tool prediction\"]\n  2 -> 18 [label=\"output\"]\n  17 -> 18 [label=\"occ_env_out\"]\n  k949f114b6f244a2d95a27c5a43c9f6a3[color=lightseagreen,label=\"Output\\ncoll_pred\"]\n  18 -> k949f114b6f244a2d95a27c5a43c9f6a3\n  k495d47385cc84c3a87493ccb973b3e57[color=lightseagreen,label=\"Output\\ncoll_val\"]\n  18 -> k495d47385cc84c3a87493ccb973b3e57\n  k8733a236387c4181b7c5d15b6160aeb5[color=lightseagreen,label=\"Output\\ncoll_distri\"]\n  18 -> k8733a236387c4181b7c5d15b6160aeb5\n  k018ea8da4df2450caa5451c1f753a16d[color=lightseagreen,label=\"Output\\ncoll_plots\"]\n  18 -> k018ea8da4df2450caa5451c1f753a16d\n  19[label=\"TaxaSeeker\"]\n  2 -> 19 [label=\"output\"]\n  17 -> 19 [label=\"occ_env_out\"]\n  18 -> 19 [label=\"outputpred\"]\n  k895ba80885804dc38d22ef2060b14c8e[color=lightseagreen,label=\"Output\\nsummary\"]\n  19 -> k895ba80885804dc38d22ef2060b14c8e\n  k02f160c6a4fb40a3b965dee47aa65e5a[color=lightseagreen,label=\"Output\\ntaxa\"]\n  19 -> k02f160c6a4fb40a3b965dee47aa65e5a\n  k39075948d67a4a24b696c90a7a58d959[color=lightseagreen,label=\"Output\\ntaxa_clean\"]\n  19 -> k39075948d67a4a24b696c90a7a58d959\n  20[label=\"ClusterEstimate\"]\n  2 -> 20 [label=\"output\"]\n  18 -> 20 [label=\"outputpred\"]\n  19 -> 20 [label=\"output2\"]\n  kbe67fa16b6ab4d2697c4ccbb98d6c8af[color=lightseagreen,label=\"Output\\nSIH_index\"]\n  20 -> kbe67fa16b6ab4d2697c4ccbb98d6c8af\n  k53707dcb68fa46c591512dccf849ce29[color=lightseagreen,label=\"Output\\ndata_to_clus\"]\n  20 -> k53707dcb68fa46c591512dccf849ce29\n  kfdac4d5b1ed74bc2a5e09292570437e6[color=lightseagreen,label=\"Output\\ndatabio_table\"]\n  20 -> kfdac4d5b1ed74bc2a5e09292570437e6\n  21[label=\"ClaraClust\"]\n  2 -> 21 [label=\"output\"]\n  20 -> 21 [label=\"output3\"]\n  20 -> 21 [label=\"output2\"]\n  k390271630b90485283b1895370ecec40[color=lightseagreen,label=\"Output\\nSIH_plot\"]\n  21 -> k390271630b90485283b1895370ecec40\n  k5a8ce7f0cc494ebea0f1b4bf734746c6[color=lightseagreen,label=\"Output\\ncluster_points\"]\n  21 -> k5a8ce7f0cc494ebea0f1b4bf734746c6\n  kc382d921e0674c698176b47c158272b1[color=lightseagreen,label=\"Output\\ncluster_info\"]\n  21 -> kc382d921e0674c698176b47c158272b1\n  22[label=\"EcoMap\"]\n  21 -> 22 [label=\"output2\"]\n  ke09ff29cf18f4cb0abddbd6eb66027cf[color=lightseagreen,label=\"Output\\neco_map\"]\n  22 -> ke09ff29cf18f4cb0abddbd6eb66027cf\n}",
           "workflow_tools": [
             "interactive_tool_jupyter_notebook",
             "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1",
@@ -28707,7 +28673,7 @@
                 {
                   "output_name": "output_dataset",
                   "label": "occ_out",
-                  "uuid": "ba5516ba-589c-4543-bfbc-dd17522955a1"
+                  "uuid": "cb8ad6c2-8280-4ee9-9612-ffaf69240fad"
                 }
               ]
             },
@@ -28769,12 +28735,12 @@
                 {
                   "output_name": "occ_env_out",
                   "label": "occ_env_out",
-                  "uuid": "bc04f6d9-5bd1-432a-a492-ab0a49e71b18"
+                  "uuid": "66bf2849-eef9-4a2b-b50c-03a43a14da63"
                 },
                 {
                   "output_name": "info_out",
                   "label": "info_out",
-                  "uuid": "52711363-0075-4079-97ba-209bc7e5d9ba"
+                  "uuid": "0d33713e-4052-4aa1-aedd-9a9fd768a3f7"
                 }
               ]
             },
@@ -28835,22 +28801,22 @@
                 {
                   "output_name": "outputpred",
                   "label": "coll_pred",
-                  "uuid": "c21354b8-875a-4335-b190-50b23fab335f"
+                  "uuid": "949f114b-6f24-4a2d-95a2-7c5a43c9f6a3"
                 },
                 {
                   "output_name": "outputval",
                   "label": "coll_val",
-                  "uuid": "513e6b04-57e6-4bf5-a3c4-f8b596eb1ce5"
+                  "uuid": "495d4738-5cc8-4c3a-8749-3ccb973b3e57"
                 },
                 {
                   "output_name": "outputspdistri",
                   "label": "coll_distri",
-                  "uuid": "b483484d-3cc7-4724-8362-5793b76552f3"
+                  "uuid": "8733a236-387c-4181-b7c5-d15b6160aeb5"
                 },
                 {
                   "output_name": "outputplots",
                   "label": "coll_plots",
-                  "uuid": "a07d2073-7cba-4b4c-a40f-35d7e602c228"
+                  "uuid": "018ea8da-4df2-450c-aa54-51c1f753a16d"
                 }
               ]
             },
@@ -28911,17 +28877,17 @@
                 {
                   "output_name": "output1",
                   "label": "summary",
-                  "uuid": "4ed3745e-6dba-4917-bf01-d74d68d0cfa9"
+                  "uuid": "895ba808-8580-4dc3-8d22-ef2060b14c8e"
                 },
                 {
                   "output_name": "output2",
                   "label": "taxa",
-                  "uuid": "ddf67ba2-56bf-4707-a73f-e8688d4546ef"
+                  "uuid": "02f160c6-a4fb-40a3-b965-dee47aa65e5a"
                 },
                 {
                   "output_name": "output3",
                   "label": "taxa_clean",
-                  "uuid": "1ef0a673-a623-4b88-b761-be4d40d12b12"
+                  "uuid": "39075948-d67a-4a24-b696-c90a7a58d959"
                 }
               ]
             },
@@ -28982,17 +28948,17 @@
                 {
                   "output_name": "output1",
                   "label": "SIH_index",
-                  "uuid": "51ce5108-9d4b-483e-847f-aa627020997b"
+                  "uuid": "be67fa16-b6ab-4d26-97c4-ccbb98d6c8af"
                 },
                 {
                   "output_name": "output2",
                   "label": "data_to_clus",
-                  "uuid": "6bc021b9-20fd-43b4-868a-f4ac33bb63e4"
+                  "uuid": "53707dcb-68fa-46c5-9151-2dccf849ce29"
                 },
                 {
                   "output_name": "output3",
                   "label": "databio_table",
-                  "uuid": "994833ab-bf0f-47b1-93d9-7c70dec4953e"
+                  "uuid": "fdac4d5b-1ed7-4bc2-a5e0-9292570437e6"
                 }
               ]
             },
@@ -29053,17 +29019,17 @@
                 {
                   "output_name": "output1",
                   "label": "SIH_plot",
-                  "uuid": "6f66d998-82e6-4dc7-83aa-946ff39061c1"
+                  "uuid": "39027163-0b90-4852-83b1-895370ecec40"
                 },
                 {
                   "output_name": "output2",
                   "label": "cluster_points",
-                  "uuid": "0f5f3377-ed90-4c5e-9216-39f12cd149b6"
+                  "uuid": "5a8ce7f0-cc49-4ebe-a0f1-b4bf734746c6"
                 },
                 {
                   "output_name": "output3",
                   "label": "cluster_info",
-                  "uuid": "a4ef4036-d515-4a42-8027-6137537f0f88"
+                  "uuid": "c382d921-e067-4c69-8176-b47c158272b1"
                 }
               ]
             },
@@ -29108,7 +29074,7 @@
                 {
                   "output_name": "output",
                   "label": "eco_map",
-                  "uuid": "f27653bc-9a0a-438a-99f0-2b70cf129475"
+                  "uuid": "e09ff29c-f18f-4cb0-abdd-bd6eb66027cf"
                 }
               ]
             }
@@ -31586,7 +31552,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAbundance index file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Filter\"];\n  0 -->|output| 1;\n  2[\"Filter\"];\n  0 -->|output| 2;\n  3[\"Filter\"];\n  0 -->|output| 3;\n  4[\"Filter\"];\n  0 -->|output| 4;\n  5[\"Filter\"];\n  0 -->|output| 5;\n  6[\"Paste\"];\n  1 -->|out_file1| 6;\n  2 -->|out_file1| 6;\n  7[\"Paste\"];\n  3 -->|out_file1| 7;\n  4 -->|out_file1| 7;\n  8[\"Paste\"];\n  6 -->|out_file1| 8;\n  7 -->|out_file1| 8;\n  9[\"Paste\"];\n  8 -->|out_file1| 9;\n  5 -->|out_file1| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nAbundance index file\"]\n  1[label=\"Filter\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Filter\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Filter\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Filter\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Filter\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"Paste\"]\n  1 -> 6 [label=\"out_file1\"]\n  2 -> 6 [label=\"out_file1\"]\n  7[label=\"Paste\"]\n  3 -> 7 [label=\"out_file1\"]\n  4 -> 7 [label=\"out_file1\"]\n  8[label=\"Paste\"]\n  6 -> 8 [label=\"out_file1\"]\n  7 -> 8 [label=\"out_file1\"]\n  9[label=\"Paste\"]\n  8 -> 9 [label=\"out_file1\"]\n  5 -> 9 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -31677,7 +31643,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nFlight curve dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Filter\"];\n  0 -->|output| 1;\n  2[\"Filter\"];\n  0 -->|output| 2;\n  3[\"Paste\"];\n  1 -->|out_file1| 3;\n  2 -->|out_file1| 3;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nFlight curve dataset\"]\n  1[label=\"Filter\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Filter\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Paste\"]\n  1 -> 3 [label=\"out_file1\"]\n  2 -> 3 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -31768,7 +31734,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"CSV to Tabular\"];\n  0 -->|output| 1;\n  10[\"Count\"];\n  8 -->|output| 10;\n  11[\"Column Regex Find And Replace\"];\n  8 -->|output| 11;\n  12[\"Count\"];\n  9 -->|output| 12;\n  13[\"Column Regex Find And Replace\"];\n  9 -->|output| 13;\n  14[\"Merge Columns\"];\n  11 -->|out_file1| 14;\n  15[\"Merge Columns\"];\n  13 -->|out_file1| 15;\n  16[\"Remove beginning\"];\n  14 -->|out_file1| 16;\n  17[\"Remove beginning\"];\n  15 -->|out_file1| 17;\n  18[\"Paste\"];\n  16 -->|out_file1| 18;\n  17 -->|out_file1| 18;\n  2[\"Column Regex Find And Replace\"];\n  1 -->|output| 2;\n  3[\"Count\"];\n  2 -->|out_file1| 3;\n  4[\"Filter\"];\n  2 -->|out_file1| 4;\n  5[\"Filter\"];\n  2 -->|out_file1| 5;\n  6[\"Tabular to CSV\"];\n  4 -->|out_file1| 6;\n  7[\"Tabular to CSV\"];\n  5 -->|out_file1| 7;\n  8[\"Flight curve\"];\n  6 -->|output| 8;\n  9[\"Flight curve\"];\n  7 -->|output| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[label=\"CSV to Tabular\"]\n  0 -> 1 [label=\"output\"]\n  10[label=\"Count\"]\n  8 -> 10 [label=\"output\"]\n  11[label=\"Column Regex Find And Replace\"]\n  8 -> 11 [label=\"output\"]\n  12[label=\"Count\"]\n  9 -> 12 [label=\"output\"]\n  13[label=\"Column Regex Find And Replace\"]\n  9 -> 13 [label=\"output\"]\n  14[label=\"Merge Columns\"]\n  11 -> 14 [label=\"out_file1\"]\n  15[label=\"Merge Columns\"]\n  13 -> 15 [label=\"out_file1\"]\n  16[label=\"Remove beginning\"]\n  14 -> 16 [label=\"out_file1\"]\n  17[label=\"Remove beginning\"]\n  15 -> 17 [label=\"out_file1\"]\n  18[label=\"Paste\"]\n  16 -> 18 [label=\"out_file1\"]\n  17 -> 18 [label=\"out_file1\"]\n  2[label=\"Column Regex Find And Replace\"]\n  1 -> 2 [label=\"output\"]\n  3[label=\"Count\"]\n  2 -> 3 [label=\"out_file1\"]\n  4[label=\"Filter\"]\n  2 -> 4 [label=\"out_file1\"]\n  5[label=\"Filter\"]\n  2 -> 5 [label=\"out_file1\"]\n  6[label=\"Tabular to CSV\"]\n  4 -> 6 [label=\"out_file1\"]\n  7[label=\"Tabular to CSV\"]\n  5 -> 7 [label=\"out_file1\"]\n  8[label=\"Flight curve\"]\n  6 -> 8 [label=\"output\"]\n  9[label=\"Flight curve\"]\n  7 -> 9 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -31878,7 +31844,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nregionalGAM.csv\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Text reformatting\"];\n  0 -->|output| 1;\n  2[\"Count\"];\n  1 -->|outfile| 2;\n  3[\"Flight curve\"];\n  2 -->|out_file1| 3;\n  4[\"Abundance index\"];\n  2 -->|out_file1| 4;\n  3 -->|output| 4;\n  5[\"Scatterplot w ggplot2\"];\n  3 -->|output| 5;\n  6[\"Expected temporal trend\"];\n  4 -->|output| 6;\n  7[\"Model temporal trend\"];\n  4 -->|output| 7;\n  6 -->|output2| 7;\n  8[\"Autocorrelation test\"];\n  7 -->|output2| 8;\n  9[\"Plot abundance\"];\n  4 -->|output| 9;\n  7 -->|output2| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nregionalGAM.csv\"]\n  1[label=\"Text reformatting\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Count\"]\n  1 -> 2 [label=\"outfile\"]\n  3[label=\"Flight curve\"]\n  2 -> 3 [label=\"out_file1\"]\n  4[label=\"Abundance index\"]\n  2 -> 4 [label=\"out_file1\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Scatterplot w ggplot2\"]\n  3 -> 5 [label=\"output\"]\n  6[label=\"Expected temporal trend\"]\n  4 -> 6 [label=\"output\"]\n  7[label=\"Model temporal trend\"]\n  4 -> 7 [label=\"output\"]\n  6 -> 7 [label=\"output2\"]\n  8[label=\"Autocorrelation test\"]\n  7 -> 8 [label=\"output2\"]\n  9[label=\"Plot abundance\"]\n  4 -> 9 [label=\"output\"]\n  7 -> 9 [label=\"output2\"]\n}",
           "workflow_tools": [
@@ -34539,9 +34505,9 @@
                 "versions": [
                   "2.2.1+galaxy2",
                   "3.4.0+galaxy1",
-                  "3.3.5+galaxy1",
                   "3.3.5+galaxy2",
                   "3.3.5+galaxy0",
+                  "3.3.5+galaxy1",
                   "3.4.0+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -34564,9 +34530,9 @@
                 "versions": [
                   "2.2.1+galaxy2",
                   "3.4.0+galaxy1",
-                  "3.3.5+galaxy1",
                   "3.3.5+galaxy2",
                   "3.3.5+galaxy0",
+                  "3.3.5+galaxy1",
                   "3.4.0+galaxy0"
                 ],
                 "server": "https://usegalaxy.org.au"
@@ -35225,7 +35191,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nair_temperature_at_2_metres.nc\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"NetCDF xarray Coordinate Info\"];\n  0 -->|output| 1;\n  2[\"NetCDF xarray Metadata Info\"];\n  0 -->|output| 2;\n  3[\"CDO Operations\"];\n  0 -->|output| 3;\n  4[\"CDO Operations\"];\n  3 -->|output_files| 4;\n  5[\"NetCDF xarray Metadata Info\"];\n  4 -->|output_files| 5;\n  6[\"NetCDF xarray map plotting\"];\n  4 -->|output_files| 6;\n  5 -->|output| 6;\n  7[\"NetCDF xarray map plotting\"];\n  4 -->|output_files| 7;\n  5 -->|output| 7;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nair_temperature_at_2_metres.nc\"]\n  1[label=\"NetCDF xarray Coordinate Info\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"NetCDF xarray Metadata Info\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"CDO Operations\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"CDO Operations\"]\n  3 -> 4 [label=\"output_files\"]\n  5[label=\"NetCDF xarray Metadata Info\"]\n  4 -> 5 [label=\"output_files\"]\n  6[label=\"NetCDF xarray map plotting\"]\n  4 -> 6 [label=\"output_files\"]\n  5 -> 6 [label=\"output\"]\n  7[label=\"NetCDF xarray map plotting\"]\n  4 -> 7 [label=\"output_files\"]\n  5 -> 7 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -36850,7 +36816,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"Get species occurrences data\"];\n  1[\"Wallace\"];\n  2[\"Cut\"];\n  0 -->|output| 2;\n  3[\"Filter\"];\n  2 -->|output| 3;\n  4[\"Convert tabular to CSV\"];\n  3 -->|out_file1| 4;\n  5[\"Replace\"];\n  4 -->|csv| 5;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Get species occurrences data\"]\n  1[label=\"Wallace\"]\n  2[label=\"Cut\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Filter\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"Convert tabular to CSV\"]\n  3 -> 4 [label=\"out_file1\"]\n  5[label=\"Replace\"]\n  4 -> 5 [label=\"csv\"]\n}",
           "workflow_tools": [
@@ -37607,8 +37573,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "9.3+galaxy1",
-                  "9.3+galaxy2"
+                  "9.3+galaxy2",
+                  "9.3+galaxy1"
                 ],
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
@@ -38148,7 +38114,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"Get species occurrences data\"];\n  1[\"Filter\"];\n  0 -->|output| 1;\n  2[\"Count\"];\n  0 -->|output| 2;\n  3[\"Summary Statistics\"];\n  1 -->|out_file1| 3;\n  4[\"Summary Statistics\"];\n  1 -->|out_file1| 4;\n  5[\"Filter\"];\n  1 -->|out_file1| 5;\n  6[\"Filter\"];\n  5 -->|out_file1| 6;\n  7[\"Count\"];\n  6 -->|out_file1| 7;\n  8[\"Filter\"];\n  6 -->|out_file1| 8;\n  9[\"OGR2ogr\"];\n  8 -->|out_file1| 9;\n  10[\"OGR2ogr\"];\n  8 -->|out_file1| 10;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Get species occurrences data\"]\n  1[label=\"Filter\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Count\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Summary Statistics\"]\n  1 -> 3 [label=\"out_file1\"]\n  4[label=\"Summary Statistics\"]\n  1 -> 4 [label=\"out_file1\"]\n  5[label=\"Filter\"]\n  1 -> 5 [label=\"out_file1\"]\n  6[label=\"Filter\"]\n  5 -> 6 [label=\"out_file1\"]\n  7[label=\"Count\"]\n  6 -> 7 [label=\"out_file1\"]\n  8[label=\"Filter\"]\n  6 -> 8 [label=\"out_file1\"]\n  9[label=\"OGR2ogr\"]\n  8 -> 9 [label=\"out_file1\"]\n  10[label=\"OGR2ogr\"]\n  8 -> 10 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -39381,7 +39347,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-03-20 08:53:38 +0000",
+          "modified": "2025-03-20 09:39:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput genomes as collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Replace Text\"];\n  0 -->|output| 1;\n  6a2d3fcd-b557-4440-910d-b4c537feef20[\"Output\\nheaders_shortened\"];\n  1 --> 6a2d3fcd-b557-4440-910d-b4c537feef20;\n  style 6a2d3fcd-b557-4440-910d-b4c537feef20 stroke:#2c3143,stroke-width:4px;\n  2[\"RepeatMasker\"];\n  1 -->|outfile| 2;\n  1db6607a-343a-4a61-9a3b-43101eb8223b[\"Output\\nrepeat_masked\"];\n  2 --> 1db6607a-343a-4a61-9a3b-43101eb8223b;\n  style 1db6607a-343a-4a61-9a3b-43101eb8223b stroke:#2c3143,stroke-width:4px;\n  3[\"Funannotate predict annotation\"];\n  2 -->|output_masked_genome| 3;\n  642c1c09-82f4-4ef4-bd53-d14a583044e2[\"Output\\nfunannotate_predicted_proteins\"];\n  3 --> 642c1c09-82f4-4ef4-bd53-d14a583044e2;\n  style 642c1c09-82f4-4ef4-bd53-d14a583044e2 stroke:#2c3143,stroke-width:4px;\n  4[\"Extract ORF\"];\n  3 -->|annot_gbk| 4;\n  07fb8c04-990e-4bc7-b607-9c4161b4786d[\"Output\\nextracted_ORFs\"];\n  4 --> 07fb8c04-990e-4bc7-b607-9c4161b4786d;\n  style 07fb8c04-990e-4bc7-b607-9c4161b4786d stroke:#2c3143,stroke-width:4px;\n  5[\"Regex Find And Replace\"];\n  4 -->|aa_output| 5;\n  8dc378a8-d485-42df-8322-6cf8230257a0[\"Output\\nsample_names_to_headers\"];\n  5 --> 8dc378a8-d485-42df-8322-6cf8230257a0;\n  style 8dc378a8-d485-42df-8322-6cf8230257a0 stroke:#2c3143,stroke-width:4px;\n  6[\"Collapse Collection\"];\n  5 -->|out_file1| 6;\n  e9a55459-4a2c-4238-8494-e99ec67307ea[\"Output\\nproteomes_to_one_file\"];\n  6 --> e9a55459-4a2c-4238-8494-e99ec67307ea;\n  style e9a55459-4a2c-4238-8494-e99ec67307ea stroke:#2c3143,stroke-width:4px;\n  7[\"Proteinortho\"];\n  5 -->|out_file1| 7;\n  ee688b7a-2a9e-4480-a27a-db8cf795b635[\"Output\\nProteinortho on input dataset(s): orthology-groups\"];\n  7 --> ee688b7a-2a9e-4480-a27a-db8cf795b635;\n  style ee688b7a-2a9e-4480-a27a-db8cf795b635 stroke:#2c3143,stroke-width:4px;\n  8[\"Busco\"];\n  5 -->|out_file1| 8;\n  9[\"Filter\"];\n  7 -->|proteinortho| 9;\n  10[\"Proteinortho grab proteins\"];\n  6 -->|output| 10;\n  9 -->|out_file1| 10;\n  8625e8b1-e3af-4afa-bf85-1a3258cbbfb2[\"Output\\nProteinortho_extract_by_orthogroup\"];\n  10 --> 8625e8b1-e3af-4afa-bf85-1a3258cbbfb2;\n  style 8625e8b1-e3af-4afa-bf85-1a3258cbbfb2 stroke:#2c3143,stroke-width:4px;\n  11[\"Regex Find And Replace\"];\n  10 -->|listproteinorthograbproteins| 11;\n  b072d32e-f725-4833-af0b-74f4df526d9a[\"Output\\nfasta_header_cleaned\"];\n  11 --> b072d32e-f725-4833-af0b-74f4df526d9a;\n  style b072d32e-f725-4833-af0b-74f4df526d9a stroke:#2c3143,stroke-width:4px;\n  12[\"ClustalW\"];\n  11 -->|out_file1| 12;\n  f704b4b2-5214-4393-8a85-6274bda27c8c[\"Output\\nClustalW on input dataset(s): clustal\"];\n  12 --> f704b4b2-5214-4393-8a85-6274bda27c8c;\n  style f704b4b2-5214-4393-8a85-6274bda27c8c stroke:#2c3143,stroke-width:4px;\n  13[\"ClipKIT. Alignment trimming software for phylogenetics.\"];\n  12 -->|output| 13;\n  37092981-191a-4413-8f60-51802dd95f9c[\"Output\\nTrimmed alignment.\"];\n  13 --> 37092981-191a-4413-8f60-51802dd95f9c;\n  style 37092981-191a-4413-8f60-51802dd95f9c stroke:#2c3143,stroke-width:4px;\n  14[\"PhyKit - Alignment-based functions\"];\n  13 -->|trimmed_output| 14;\n  09ad25e3-cd68-4fb4-9c57-3e79212b8e01[\"Output\\nConcatenated fasta alignment file\"];\n  14 --> 09ad25e3-cd68-4fb4-9c57-3e79212b8e01;\n  style 09ad25e3-cd68-4fb4-9c57-3e79212b8e01 stroke:#2c3143,stroke-width:4px;\n  1d546e4c-7e3c-499d-870c-4846feb7a46d[\"Output\\nA partition file ready for input into RAxML or IQ-tree\"];\n  14 --> 1d546e4c-7e3c-499d-870c-4846feb7a46d;\n  style 1d546e4c-7e3c-499d-870c-4846feb7a46d stroke:#2c3143,stroke-width:4px;\n  26846814-d43a-4ce7-9f26-cfb70f184dce[\"Output\\nAn occupancy file that summarizes the taxon occupancy per sequence\"];\n  14 --> 26846814-d43a-4ce7-9f26-cfb70f184dce;\n  style 26846814-d43a-4ce7-9f26-cfb70f184dce stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput genomes as collection\"]\n  1[label=\"Replace Text\"]\n  0 -> 1 [label=\"output\"]\n  k6a2d3fcdb5574440910db4c537feef20[color=lightseagreen,label=\"Output\\nheaders_shortened\"]\n  1 -> k6a2d3fcdb5574440910db4c537feef20\n  2[label=\"RepeatMasker\"]\n  1 -> 2 [label=\"outfile\"]\n  k1db6607a343a4a619a3b43101eb8223b[color=lightseagreen,label=\"Output\\nrepeat_masked\"]\n  2 -> k1db6607a343a4a619a3b43101eb8223b\n  3[label=\"Funannotate predict annotation\"]\n  2 -> 3 [label=\"output_masked_genome\"]\n  k642c1c0982f44ef4bd53d14a583044e2[color=lightseagreen,label=\"Output\\nfunannotate_predicted_proteins\"]\n  3 -> k642c1c0982f44ef4bd53d14a583044e2\n  4[label=\"Extract ORF\"]\n  3 -> 4 [label=\"annot_gbk\"]\n  k07fb8c04990e4bc7b6079c4161b4786d[color=lightseagreen,label=\"Output\\nextracted_ORFs\"]\n  4 -> k07fb8c04990e4bc7b6079c4161b4786d\n  5[label=\"Regex Find And Replace\"]\n  4 -> 5 [label=\"aa_output\"]\n  k8dc378a8d48542df83226cf8230257a0[color=lightseagreen,label=\"Output\\nsample_names_to_headers\"]\n  5 -> k8dc378a8d48542df83226cf8230257a0\n  6[label=\"Collapse Collection\"]\n  5 -> 6 [label=\"out_file1\"]\n  ke9a554594a2c42388494e99ec67307ea[color=lightseagreen,label=\"Output\\nproteomes_to_one_file\"]\n  6 -> ke9a554594a2c42388494e99ec67307ea\n  7[label=\"Proteinortho\"]\n  5 -> 7 [label=\"out_file1\"]\n  kee688b7a2a9e4480a27adb8cf795b635[color=lightseagreen,label=\"Output\\nProteinortho on input dataset(s): orthology-groups\"]\n  7 -> kee688b7a2a9e4480a27adb8cf795b635\n  8[label=\"Busco\"]\n  5 -> 8 [label=\"out_file1\"]\n  9[label=\"Filter\"]\n  7 -> 9 [label=\"proteinortho\"]\n  10[label=\"Proteinortho grab proteins\"]\n  6 -> 10 [label=\"output\"]\n  9 -> 10 [label=\"out_file1\"]\n  k8625e8b1e3af4afabf851a3258cbbfb2[color=lightseagreen,label=\"Output\\nProteinortho_extract_by_orthogroup\"]\n  10 -> k8625e8b1e3af4afabf851a3258cbbfb2\n  11[label=\"Regex Find And Replace\"]\n  10 -> 11 [label=\"listproteinorthograbproteins\"]\n  kb072d32ef7254833af0b74f4df526d9a[color=lightseagreen,label=\"Output\\nfasta_header_cleaned\"]\n  11 -> kb072d32ef7254833af0b74f4df526d9a\n  12[label=\"ClustalW\"]\n  11 -> 12 [label=\"out_file1\"]\n  kf704b4b2521443938a856274bda27c8c[color=lightseagreen,label=\"Output\\nClustalW on input dataset(s): clustal\"]\n  12 -> kf704b4b2521443938a856274bda27c8c\n  13[label=\"ClipKIT. Alignment trimming software for phylogenetics.\"]\n  12 -> 13 [label=\"output\"]\n  k37092981191a44138f6051802dd95f9c[color=lightseagreen,label=\"Output\\nTrimmed alignment.\"]\n  13 -> k37092981191a44138f6051802dd95f9c\n  14[label=\"PhyKit - Alignment-based functions\"]\n  13 -> 14 [label=\"trimmed_output\"]\n  k09ad25e3cd684fb49c573e79212b8e01[color=lightseagreen,label=\"Output\\nConcatenated fasta alignment file\"]\n  14 -> k09ad25e3cd684fb49c573e79212b8e01\n  k1d546e4c7e3c499d870c4846feb7a46d[color=lightseagreen,label=\"Output\\nA partition file ready for input into RAxML or IQ-tree\"]\n  14 -> k1d546e4c7e3c499d870c4846feb7a46d\n  k26846814d43a4ce79f26cfb70f184dce[color=lightseagreen,label=\"Output\\nAn occupancy file that summarizes the taxon occupancy per sequence\"]\n  14 -> k26846814d43a4ce79f26cfb70f184dce\n}",
           "workflow_tools": [
@@ -41523,9 +41489,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "5.2.2+galaxy2",
                   "5.4.6+galaxy0",
                   "5.0.0+galaxy0",
-                  "5.2.2+galaxy2",
                   "5.4.4+galaxy0"
                 ],
                 "server": "https://galaxytrakr.org/"
@@ -41599,16 +41565,16 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "5.4.6+galaxy0",
                   "5.2.2+galaxy2",
+                  "5.4.6+galaxy0",
                   "5.4.4+galaxy0",
                   "5.8.0+galaxy0",
-                  "5.3.1+galaxy0",
-                  "5.3.2+galaxy0",
-                  "5.7.1+galaxy0",
-                  "5.2.2+galaxy0",
                   "5.4.5+galaxy0",
+                  "5.3.1+galaxy0",
+                  "5.7.1+galaxy0",
+                  "5.3.2+galaxy0",
                   "5.5.0+galaxy0",
+                  "5.2.2+galaxy0",
                   "5.2.2+galaxy1"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -41772,10 +41738,10 @@
                 "state": "inexact",
                 "versions": [
                   "1.8.15+galaxy5",
-                  "1.8.15+galaxy3",
                   "1.8.15+galaxy0",
                   "1.8.15+galaxy4",
-                  "1.8.15+galaxy1"
+                  "1.8.15+galaxy1",
+                  "1.8.15+galaxy3"
                 ],
                 "server": "https://usegalaxy.org"
               },
@@ -41906,8 +41872,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "6.2.3+galaxy1",
-                  "6.3.4+galaxy0"
+                  "6.3.4+galaxy0",
+                  "6.2.3+galaxy1"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -42231,8 +42197,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "5.1.0",
-                  "4.1"
+                  "4.1",
+                  "5.1.0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
