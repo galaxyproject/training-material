@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@abb74b60a2094851b081902b413f1b4dc9d17ea7",
+		release: "galaxy-training-network@3897b4e10e889dbc17115cccbf90c8249eacc911",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -265,7 +265,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffc4b5; --color-darker: #ffa386; --color-dimmed: #ffb49f;">microbiome</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffa182; --color-darker: #ff8145; --color-dimmed: #ff9168;">microbiome</div>
 			
 			</br>
 			
@@ -332,9 +332,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-taxonomic-profiling/versions/main-workflow">Galaxy Australia</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-taxonomic-profiling/versions/main-workflow">Galaxy France</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-taxonomic-profiling/versions/main-workflow">Galaxy Europe</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-taxonomic-profiling/versions/main-workflow">Galaxy France</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-taxonomic-profiling/versions/main-workflow">Galaxy Main</a></li>
 					
@@ -356,20 +356,20 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   0 -->|output| 2;
   3["Kraken2"];
   0 -->|output| 3;
-  f1319285-d319-46e4-8e26-91b5a1cc0cb4["Output\nkraken_report"];
-  3 --> f1319285-d319-46e4-8e26-91b5a1cc0cb4;
-  style f1319285-d319-46e4-8e26-91b5a1cc0cb4 stroke:#2c3143,stroke-width:4px;
+  7c767ca9-0ebd-4e4f-8fb7-19f4e7372269["Output\nkraken_report"];
+  3 --> 7c767ca9-0ebd-4e4f-8fb7-19f4e7372269;
+  style 7c767ca9-0ebd-4e4f-8fb7-19f4e7372269 stroke:#2c3143,stroke-width:4px;
   4["MetaPhlAn"];
   2 -->|forward| 4;
   2 -->|reverse| 4;
-  22d288db-23fc-43fc-9e6f-80355c26d9af["Output\nmetaphlan_output"];
-  4 --> 22d288db-23fc-43fc-9e6f-80355c26d9af;
-  style 22d288db-23fc-43fc-9e6f-80355c26d9af stroke:#2c3143,stroke-width:4px;
+  7a7e8c6e-6301-4b29-b5ef-5d6313d572a8["Output\nmetaphlan_output"];
+  4 --> 7a7e8c6e-6301-4b29-b5ef-5d6313d572a8;
+  style 7a7e8c6e-6301-4b29-b5ef-5d6313d572a8 stroke:#2c3143,stroke-width:4px;
   5["Krakentools: Convert kraken report file"];
   3 -->|report_output| 5;
-  9ed298a9-4ebe-417a-91ac-df7d4cba1b08["Output\nkrakentool_report"];
-  5 --> 9ed298a9-4ebe-417a-91ac-df7d4cba1b08;
-  style 9ed298a9-4ebe-417a-91ac-df7d4cba1b08 stroke:#2c3143,stroke-width:4px;
+  012c1070-7085-4b1b-86dd-1170e181cfb8["Output\nkrakentool_report"];
+  5 --> 012c1070-7085-4b1b-86dd-1170e181cfb8;
+  style 012c1070-7085-4b1b-86dd-1170e181cfb8 stroke:#2c3143,stroke-width:4px;
   6["Kraken-biom"];
   3 -->|report_output| 6;
   1 -->|output| 6;
@@ -654,7 +654,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/abb74b60a2094851b081902b413f1b4dc9d17ea7">abb74b6</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/3897b4e10e889dbc17115cccbf90c8249eacc911">3897b4e</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
