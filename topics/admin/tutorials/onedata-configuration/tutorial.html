@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Configuring the Onedata connectors (remotes, Object Store, BYOS, BYOD) / Configuring the Onedata connectors (remotes, Object Store, BYOS, BYOD) / Galaxy Server administration</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@a33463354f4e0b4d37ed377f73426790acc80daa",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/onedata-configuration/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Configuring the Onedata connectors (remotes, Object Store, BYOS, BYOD)">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-03-24 08:45:40 +0000">
+<meta name="DC.creator" content="Łukasz Opioła">
+<meta name="DC.creator" content="Bartosz Walkowicz"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Galaxy Server administration / Configuring the Onedata connectors (remotes, Object Store, BYOS, BYOD) / Hands-on: Configuring the Onedata connectors (remotes, Object Store, BYOS, BYOD)">
+        <meta property="og:description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/admin/tutorials/onedata-configuration/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Galaxy Administrators"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Configuring the Onedata connectors (remotes, Object Store, BYOS, BYOD)",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-03-24 08:45:40 +0000",
+  "datePublished": "2025-03-24 08:45:40 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+  },
+  "abstract": "> <div class="box-title agenda-title" id="agenda">Agenda</div>",
+  "learningResourceType": "e-learning",
+  "name": "Configuring the Onedata connectors (remotes, Object Store, BYOS, BYOD)",
+  "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/onedata-configuration/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT40M",
+  "teaches": "- Configure predefined Remote File Sources\n- Set up Onedata as an Object Store\n- Enable BYOD and BYOS templates for users",
+  "keywords": [
+    "Galaxy Server administration",
+    "storage"
+  ],
+  "description": "## Abstract\n\n> <div class="box-title agenda-title" id="agenda-1">Agenda</div>\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to configure different types of Onedata connectors in Galaxy?\n - What are the differences between various Onedata connectors?\n - How to enable users to bring their own data and storage from Onedata?\n\n\n## Learning Objectives\n\n- Configure predefined Remote File Sources\n- Set up Onedata as an Object Store\n- Enable BYOD and BYOS templates for users\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/onedata-getting-started/tutorial.html",
+      "name": "Getting started with Onedata distributed storage",
+      "description": "Hands-on for 'Getting started with Onedata distributed storage' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Ansible",
+      "description": "Hands-on for 'Ansible' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lopiola/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lopiola/",
+      "name": "Łukasz Opioła",
+      "image": "https://avatars.githubusercontent.com/lopiola",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1997-932X",
+      "orcid": "https://orcid.org/0000-0003-1997-932X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bwalkowi/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bwalkowi/",
+      "name": "Bartosz Walkowicz",
+      "image": "https://avatars.githubusercontent.com/bwalkowi",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": []
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Galaxy Server administration
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/onedata-configuration/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/onedata-configuration/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-admin">
+    <h1 data-toc-skip>Configuring the Onedata connectors (remotes, Object Store, BYOS, BYOD)</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/lopiola/" class="contributor-badge contributor-lopiola"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/lopiola?s=36" alt="Łukasz Opioła avatar" width="36" class="avatar" />
+    Łukasz Opioła</a><a href="/training-material/hall-of-fame/bwalkowi/" class="contributor-badge contributor-bwalkowi"><img src="https://avatars.githubusercontent.com/bwalkowi?s=36" alt="Bartosz Walkowicz avatar" width="36" class="avatar" />
+    Bartosz Walkowicz</a>
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to configure different types of Onedata connectors in Galaxy?</p>
+</li>
+        
+        <li><p>What are the differences between various Onedata connectors?</p>
+</li>
+        
+        <li><p>How to enable users to bring their own data and storage from Onedata?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Configure predefined Remote File Sources</p>
+</li>
+        
+        <li><p>Set up Onedata as an Object Store</p>
+</li>
+        
+        <li><p>Enable BYOD and BYOS templates for users</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/galaxy-interface/tutorials/onedata-getting-started/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Getting started with Onedata distributed storage</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Ansible</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Ansible</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/admin/tutorials/ansible-galaxy/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Galaxy Installation with Ansible</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Galaxy Installation with Ansible</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 40 minutes</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/admin/tutorials/onedata-configuration/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 24, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 24, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda-2">Agenda</div>
+
+<ol id="markdown-toc">
+  <li><a href="#prerequisites" id="markdown-toc-prerequisites">Prerequisites</a></li>
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#using-ansible" id="markdown-toc-using-ansible">Using Ansible?</a></li>
+  <li><a href="#common-configuration" id="markdown-toc-common-configuration">Common Configuration</a>    <ol>
+      <li><a href="#dependencies" id="markdown-toc-dependencies">Dependencies</a></li>
+      <li><a href="#vault-configuration" id="markdown-toc-vault-configuration">Vault Configuration</a></li>
+    </ol>
+  </li>
+  <li><a href="#predefined-remote-file-source" id="markdown-toc-predefined-remote-file-source">Predefined Remote File Source</a>    <ol>
+      <li><a href="#testing" id="markdown-toc-testing">Testing</a></li>
+    </ol>
+  </li>
+  <li><a href="#byod-remote-file-source-templates" id="markdown-toc-byod-remote-file-source-templates">BYOD (Remote File Source) templates</a>    <ol>
+      <li><a href="#testing-1" id="markdown-toc-testing-1">Testing</a></li>
+    </ol>
+  </li>
+  <li><a href="#object-store---global-storage-location" id="markdown-toc-object-store---global-storage-location">Object Store - global Storage Location</a>    <ol>
+      <li><a href="#testing-2" id="markdown-toc-testing-2">Testing</a></li>
+    </ol>
+  </li>
+  <li><a href="#byos-storage-location-templates" id="markdown-toc-byos-storage-location-templates">BYOS (Storage Location) templates</a>    <ol>
+      <li><a href="#testing-3" id="markdown-toc-testing-3">Testing</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="prerequisites">Prerequisites</h1>
+
+<p>It’s recommended that you have basic knowledge about Onedata and access 
+to a Onedata ecosystem, so that you can test the configuration. If needed, follow 
+<a href="/training-material/topics/galaxy-interface/tutorials/onedata-getting-started/tutorial.html">this tutorial</a>
+first!</p>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>This tutorial will walk you through the configuration of four different types of Onedata 
+connectors:</p>
+
+<ol>
+  <li>
+    <p><a href="#predefined-remote-file-source">Predefined Remote File Source</a> — provides all
+users with access to a predefined Onedata Space (e.g., for shared training
+datasets) without requiring individual configuration.</p>
+  </li>
+  <li>
+    <p><a href="#byod-remote-file-source-templates">BYOD (Remote File Source) templates</a> —
+similar to the Predefined Remote File Source, but uses templates and vault for secure
+credential storage, allowing users to configure multiple Onedata connections
+with their own credentials.</p>
+  </li>
+  <li>
+    <p><a href="#object-store---global-storage-location">Object Store — global Storage Location</a> — 
+configures Onedata as Galaxy’s global storage backend (common for all users),
+where all datasets are stored in a specified Onedata Space.</p>
+  </li>
+  <li>
+    <p><a href="#byos-storage-location-templates">BYOS (Storage Location) templates</a> —
+enables users to configure their own Onedata Spaces as storage locations for
+their Galaxy datasets.</p>
+  </li>
+</ol>
+
+<h1 id="using-ansible">Using Ansible?</h1>
+
+<p>The guides below pertain to files in the 
+<a href="https://github.com/galaxyproject/galaxy">Galaxy project codebase</a>.
+If you are using Ansible to manage your Galaxy deployment (which is the
+recommended way for production instances), you will find tips at the end
+of every subsection, showing how to achieve the same results with Ansible.</p>
+
+<p>In case you are using jinja templates, make sure all of them are listed in
+the <code class="language-plaintext highlighter-rouge">galaxy_config_templates</code> section for group_vars of each of the hosts.</p>
+
+<h1 id="common-configuration">Common Configuration</h1>
+
+<p>Before configuring Onedata connectors, there are a few common elements that need
+to be set up:</p>
+
+<h2 id="dependencies">Dependencies</h2>
+
+<p>For Remote File Sources (predefined and BYOD templates), install the
+<code class="language-plaintext highlighter-rouge">fs.onedatarestfs</code> library (preferably adding it to the Python’s requirements
+file). Take a look at <code class="language-plaintext highlighter-rouge">lib/galaxy/dependencies/conditional-requirements.txt</code> for
+the newest version:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fs.onedatarestfs&gt;=21.2.5.2  # type: onedata, depends on onedatafilerestclient
+</code></pre></div></div>
+
+<p>For Object Store configuration, only <code class="language-plaintext highlighter-rouge">onedatafilerestclient</code> is required. However, 
+if you’re already installing <code class="language-plaintext highlighter-rouge">fs.onedatarestfs</code> for Remote File Sources, you don’t 
+need to add it separately as it’s included as a dependency.</p>
+
+<p>If you’re only using Object Store functionality, you can add just:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>onedatafilerestclient&gt;=21.2.5.2
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-using-ansible"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-ansible" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Using Ansible</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Skip this step — conditional requirements should be collected automatically.</p>
+</blockquote>
+
+<h2 id="vault-configuration">Vault Configuration</h2>
+
+<p>For BYOD and BYOS templates, you need to configure a vault to securely store user credentials:</p>
+
+<ol>
+  <li>Create <code class="language-plaintext highlighter-rouge">config/vault_conf.yml</code>:
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">type</span><span class="pi">:</span> <span class="s">database</span>
+<span class="na">path_prefix</span><span class="pi">:</span> <span class="s">/galaxy</span>
+<span class="c1"># Encryption keys must be valid fernet keys</span>
+<span class="c1"># Generate them using Python:</span>
+<span class="c1"># from cryptography.fernet import Fernet</span>
+<span class="c1"># Fernet.generate_key().decode('utf-8')</span>
+<span class="na">encryption_keys</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">KpVfbD7WfsNMxEnAEasql9aqSc1eCqR-S-tJCDyzcw8=</span>
+  <span class="pi">-</span> <span class="s">s1DDUEjZtFy2xknGIW2AiAE6EiZG5xSD0m_GzXi43G0=</span>
+  <span class="pi">-</span> <span class="s">qyb7f45l4XdkcuC5y06RlWtaENcPtUgHYekoQJBK1zM=</span>
+  <span class="c1"># Do NOT use the keys above! Don't be lazy and generate your own.</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>The first key is used for encryption, while additional keys allow for key rotation.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-using-ansible-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-ansible-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Using Ansible</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Put the config in <code class="language-plaintext highlighter-rouge">templates/galaxy/config/vault_conf.yml.j2</code>, 
+like it has been done 
+<a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/templates/galaxy/config/vault_conf.yml.j2">in this example</a>.</p>
+
+  <p>A <code class="language-plaintext highlighter-rouge">galaxy_vault_encryption_keys</code> var must be defined for the proper host in
+your playbook. For obvious reasons, it cannot be committed to your repository.
+For reference, take a look at <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/pull/1159">this PR</a>.</p>
+</blockquote>
+
+<ol>
+  <li>Enable it in <code class="language-plaintext highlighter-rouge">config/galaxy.yml</code>:
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy</span><span class="pi">:</span>
+  <span class="na">vault_config_file</span><span class="pi">:</span> <span class="s">vault_conf.yml</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-using-ansible-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-ansible-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Using Ansible</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Use the group vars file at <code class="language-plaintext highlighter-rouge">group_vars/gxconfig.yml</code>. 
+See <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/group_vars/gxconfig.yml">an example</a>.</p>
+</blockquote>
+
+<p>For more details about vault configuration, see the <a href="https://docs.galaxyproject.org/en/latest/admin/special_topics/vault.html">Galaxy Vault documentation</a>.</p>
+
+<h1 id="predefined-remote-file-source">Predefined Remote File Source</h1>
+
+<p>While the <a href="#byod-remote-file-source-templates">BYOD (Remote File Source) templates</a> 
+allow users to configure their own Onedata access credentials, you can also set
+up a predefined Onedata File Source that will be available to all users with
+common configuration.</p>
+
+<p>This approach is particularly useful when you want to provide access to shared
+resources, such as public training datasets, without requiring user’s access to
+a Onedata ecosystem.</p>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-note-the-security-of-the-credentials"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Note the security of the credentials!</div>
+  <p>This setup is perfect if you have a public Onedata access token that
+<a href="https://onedata.org/#/home/documentation/topic/stable/tokens-safe-publishing">can safely be shared</a>. If the token is not publicly shareable, use a vault to
+store it. Whatever the setup, always set the file source as <code class="language-plaintext highlighter-rouge">writable: false</code>,
+otherwise the users will be able to write (export) to the remote.</p>
+</blockquote>
+
+<p>Example configuration in <code class="language-plaintext highlighter-rouge">config/file_sources_conf.yml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">onedata</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">gtn_public_onedata</span>
+  <span class="na">label</span><span class="pi">:</span> <span class="s">GTN training data</span>
+  <span class="na">doc</span><span class="pi">:</span> <span class="s">Training data from the Galaxy Training Network (powered by Onedata)</span>
+  <span class="c1"># The access token is public and can be shared</span>
+  <span class="na">access_token</span><span class="pi">:</span> <span class="s2">"</span><span class="s">MDAxY2xvY2F00aW9uIGRhdGFodWIuZWdpLmV1CjAwNmJpZGVudGlmaWVyIDIvbm1kL3Vzci00yNmI4ZTZiMDlkNDdjNGFkN2E3NTU00YzgzOGE3MjgyY2NoNTNhNS9hY3QvMGJiZmY1NWU4NDRiMWJjZGEwNmFlODViM2JmYmRhNjRjaDU00YjYKMDAxNmNpZCBkYXRhLnJlYWRvbmx5CjAwNDljaWQgZGF00YS5wYXRoID00gTHpaa1pUTTROMkl4WmpjMllXVmpOMlU00WWpreU5XWmtNV00ZpT1RKbU1ETXlZMmhoWTJReAowMDJmc2lnbmF00dXJlIIQvnXp01Oey02LnaNwEkFJAyArzhHN8SlXSYFsBbSkqdqCg"</span>
+  <span class="na">onezone_domain</span><span class="pi">:</span> <span class="s2">"</span><span class="s">datahub.egi.eu"</span>
+  <span class="na">writable</span><span class="pi">:</span> <span class="kc">false</span>
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-using-ansible-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-ansible-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Using Ansible</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Put the config in <code class="language-plaintext highlighter-rouge">templates/galaxy/config/file_sources_conf.yml.j2</code>, 
+like it has been done 
+<a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/templates/galaxy/config/file_sources_conf.yml.j2">in this example</a>.</p>
+</blockquote>
+
+<p>Note that you don’t need to configure <code class="language-plaintext highlighter-rouge">user_preferences_extra_conf.yml</code> in this case, as all access parameters are specified directly in the File Sources configuration.</p>
+
+<h2 id="testing">Testing</h2>
+
+<p>Follow the Onedata 
+<a href="/training-material/topics/galaxy-interface/tutorials/onedata-remote-import/tutorial.html">import</a>
+guide.</p>
+
+<h1 id="byod-remote-file-source-templates">BYOD (Remote File Source) templates</h1>
+
+<p>BYOD (Bring Your Own Data) allows users to configure their own Onedata File
+Sources using templates. This feature requires a vault for secure credential
+storage, but users can create multiple File Sources with different
+configurations, possibly connecting to different Onedata ecosystems.</p>
+
+<ol>
+  <li>
+    <p>Configure the vault as described in the <a href="#vault-configuration">Vault Configuration section</a>.</p>
+  </li>
+  <li>
+    <p>Enable the Onedata template by creating or modifying <code class="language-plaintext highlighter-rouge">config/file_source_templates.yml</code>:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">include</span><span class="pi">:</span> <span class="s">./lib/galaxy/files/templates/examples/onedata.yml</span>
+</code></pre></div>    </div>
+
+    <blockquote class="tip">
+      <div class="box-title tip-title" id="tip-using-ansible-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-ansible-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Using Ansible</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>Put the config in <code class="language-plaintext highlighter-rouge">templates/galaxy/config/file_source_templates.yml.j2</code>, 
+like it has been done 
+<a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/templates/galaxy/config/file_source_templates.yml.j2">in this example</a>.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Ensure there is the main Galaxy config file (<code class="language-plaintext highlighter-rouge">config/galaxy.yml</code>) and it includes the
+config file above:</p>
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy</span><span class="pi">:</span>
+  <span class="s">...</span>
+  <span class="s">file_source_templates_config_file</span><span class="err">:</span> <span class="s">file_source_templates.yml</span>
+</code></pre></div>    </div>
+
+    <blockquote class="tip">
+      <div class="box-title tip-title" id="tip-using-ansible-5"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-ansible-5" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Using Ansible</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>Use the group vars file at <code class="language-plaintext highlighter-rouge">group_vars/gxconfig.yml</code>. 
+See 
+<a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/group_vars/gxconfig.yml">an example</a>.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<p>This template defines a form that users will see when creating their own Onedata File Source. 
+It collects the same configuration parameters that administrators specify when setting up 
+a <a href="#predefined-remote-file-source">Predefined Remote File Source</a> (like Onezone domain, access token, 
+etc.), but allows users to provide their own values.</p>
+
+<p>For required dependencies, see the <a href="#dependencies">Dependencies section</a> in Common Configuration.</p>
+
+<h2 id="testing-1">Testing</h2>
+
+<p>Follow the Onedata 
+<a href="/training-material/topics/galaxy-interface/tutorials/onedata-remote-import/tutorial.html">import</a>
+and
+<a href="/training-material/topics/galaxy-interface/tutorials/onedata-remote-export/tutorial.html">export</a>
+guides.</p>
+
+<h1 id="object-store---global-storage-location">Object Store - global Storage Location</h1>
+
+<p>Galaxy supports various object store backends for storing datasets. While the <a href="/training-material/topics/admin/tutorials/object-store/tutorial.html">Object Store tutorial</a> provides a comprehensive overview of the feature, this section focuses specifically on configuring Onedata as a global object store, available to all users.</p>
+
+<p>To use Onedata as an object store:</p>
+
+<ol>
+  <li>
+    <p>Make sure there is a <code class="language-plaintext highlighter-rouge">config/object_store_conf.yml</code> configuration file with Onedata
+section. The relevant snippet can be found in config
+<a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/sample/object_store_conf.sample.yml">samples</a>.
+At the time of writing this tutorial, the config looks like the following:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">type</span><span class="pi">:</span> <span class="s">onedata</span>
+<span class="na">auth</span><span class="pi">:</span>
+  <span class="na">access_token</span><span class="pi">:</span> <span class="s">MDAxY2xvY2F00aW9uIGRhdGFodWIuZWdpLmV1CjAw...</span>
+<span class="na">connection</span><span class="pi">:</span>
+  <span class="na">onezone_domain</span><span class="pi">:</span> <span class="s">datahub.egi.eu</span>
+  <span class="na">disable_tls_certificate_validation</span><span class="pi">:</span> <span class="kc">false</span>
+<span class="na">space</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">my-onedata-space</span>
+  <span class="na">galaxy_root_dir</span><span class="pi">:</span> <span class="s">./galaxy-data</span>
+<span class="na">cache</span><span class="pi">:</span>
+  <span class="na">path</span><span class="pi">:</span> <span class="s">database/object_store_cache_onedata</span>
+  <span class="na">size</span><span class="pi">:</span> <span class="m">1000</span>
+  <span class="na">cache_updated_data</span><span class="pi">:</span> <span class="kc">true</span>
+<span class="na">extra_dirs</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">job_work</span>
+    <span class="na">path</span><span class="pi">:</span> <span class="s">database/job_working_directory_onedata</span>
+</code></pre></div>    </div>
+
+    <p>Overwrite the following parameters with your values:</p>
+    <ul>
+      <li><strong>access_token</strong>: an access token suitable for data access (<strong>write-enabled</strong> and allowing calls to the Oneprovider REST API).</li>
+      <li><strong>onezone_domain</strong>: the domain of the Onezone service (e.g., datahub.egi.eu).</li>
+      <li><strong>name</strong>: the name of the Onedata Space where the Galaxy data will be stored.</li>
+      <li><strong>path</strong>: the relative directory path in the Space under which the Galaxy data will be stored (optional, defaults to Space root).</li>
+    </ul>
+
+    <blockquote class="tip">
+      <div class="box-title tip-title" id="tip-using-ansible-6"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-ansible-6" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Using Ansible</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>Put the config in <code class="language-plaintext highlighter-rouge">templates/galaxy/config/object_store_conf.yml.j2</code>.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Ensure there is the main Galaxy config file (<code class="language-plaintext highlighter-rouge">config/galaxy.yml</code>) and it includes the config:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy</span><span class="pi">:</span>
+  <span class="s">...</span>
+  <span class="s">object_store_config_file</span><span class="err">:</span> <span class="s">object_store_conf.yml</span>
+</code></pre></div>    </div>
+
+    <blockquote class="tip">
+      <div class="box-title tip-title" id="tip-using-ansible-7"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-ansible-7" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Using Ansible</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>Use the group vars file at <code class="language-plaintext highlighter-rouge">group_vars/gxconfig.yml</code>. 
+See 
+<a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/group_vars/gxconfig.yml">an example</a>.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-switching-object-store-types"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Switching object store types</div>
+  <p>If you’re switching from another object store type, you’ll need to handle the migration of existing datasets. This process is not covered in this tutorial and should be carefully planned for production instances.</p>
+</blockquote>
+
+<p>For required dependencies, see the <a href="#dependencies">Dependencies section</a> 
+in Common Configuration.</p>
+
+<p>For more details about object store configuration options and best practices, see the 
+<a href="/training-material/topics/admin/tutorials/object-store/tutorial.html">Object Store tutorial</a>.</p>
+
+<h2 id="testing-2">Testing</h2>
+
+<p>Upload some new data to Galaxy, or run a workflow to produce results. Then
+navigate to your Onedata account (e.g. <a href="https://datahub.egi.eu">https://datahub.egi.eu</a>)
+and open the Space (and the path) that you have put down in the config. You
+should see the Galaxy data:</p>
+
+<p><a href="../../../galaxy-interface/images/onedata-byos/data-in-onedata.png" rel="noopener noreferrer"><img src="../../../galaxy-interface/images/onedata-byos/data-in-onedata.png" alt="Data in Onedata. " width="1914" height="635" loading="lazy" /></a></p>
+
+<h1 id="byos-storage-location-templates">BYOS (Storage Location) templates</h1>
+
+<p>BYOS (Bring Your Own Storage) allows users to configure their own Onedata Storage Locations using templates. Similar to <a href="#byod-remote-file-source-templates">BYOD</a>, this feature requires a vault for secure credential storage.</p>
+
+<ol>
+  <li>
+    <p>Configure the vault as described in the <a href="#vault-configuration">Vault Configuration section</a>.</p>
+  </li>
+  <li>
+    <p>Enable the Onedata template by creating or modifying <code class="language-plaintext highlighter-rouge">config/object_store_templates.yml</code>:</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">include</span><span class="pi">:</span> <span class="s">./lib/galaxy/objectstore/templates/examples/onedata.yml</span>
+</code></pre></div>    </div>
+
+    <blockquote class="tip">
+      <div class="box-title tip-title" id="tip-using-ansible-8"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-ansible-8" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Using Ansible</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>Put the config in <code class="language-plaintext highlighter-rouge">templates/galaxy/config/object_store_templates.yml.j2</code>, 
+like it has been done 
+<a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/templates/galaxy/config/object_store_templates.yml.j2">in this example</a>.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Ensure there is the main Galaxy config file (<code class="language-plaintext highlighter-rouge">config/galaxy.yml</code>) and it includes the
+config file above:</p>
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy</span><span class="pi">:</span>
+  <span class="s">...</span>
+  <span class="s">object_store_templates_config_file</span><span class="err">:</span> <span class="s">object_store_templates.yml</span>
+</code></pre></div>    </div>
+
+    <blockquote class="tip">
+      <div class="box-title tip-title" id="tip-using-ansible-9"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-ansible-9" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Using Ansible</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>Use the group vars file at <code class="language-plaintext highlighter-rouge">group_vars/gxconfig.yml</code>. 
+See 
+<a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/group_vars/gxconfig.yml">an example</a>.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<p>This template provides users with a form to configure their Onedata Storage Location, collecting information such as:</p>
+<ul>
+  <li>Onezone domain and access token</li>
+  <li>Space name and path for storing datasets</li>
+  <li>Cache and performance settings</li>
+</ul>
+
+<p>For required dependencies, see the <a href="#dependencies">Dependencies section</a> 
+in Common Configuration.</p>
+
+<h2 id="testing-3">Testing</h2>
+
+<p>Follow the Onedata 
+<a href="/training-material/topics/galaxy-interface/tutorials/onedata-byos/tutorial.html">user-owned storage</a>
+guide.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Galaxy supports Onedata connectors for Remote File Sources and Object Stores</p>
+</li>
+                        
+                        <li><p>Both connectors can be predefined globally for a Galaxy server</p>
+</li>
+                        
+                        <li><p>BYOD and BYOS templates allow users to configure their own data sources and storage locations</p>
+</li>
+                        
+                        <li><p>Vault configuration is required for user-managed credentials</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/admin/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=admin/onedata-configuration"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=admin/onedata-configuration">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Łukasz Opioła, Bartosz Walkowicz,  <b>Configuring the Onedata connectors (remotes, Object Store, BYOS, BYOD) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/onedata-configuration/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/onedata-configuration/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{admin-onedata-configuration,
+author = "Łukasz Opioła and Bartosz Walkowicz",
+	title = "Configuring the Onedata connectors (remotes, Object Store, BYOS, BYOD) (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/onedata-configuration/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/admin/tutorials/onedata-configuration/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/onedata-configuration/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/admin/tutorials/onedata-configuration/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a33463354f4e0b4d37ed377f73426790acc80daa">a334633</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>

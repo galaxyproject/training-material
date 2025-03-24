@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@923a043a324cf26ed6d0721a3216cf16e9bc996e",
+		release: "galaxy-training-network@a33463354f4e0b4d37ed377f73426790acc80daa",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -519,6 +519,16 @@ var resources = {
       "<a class=\"label label-default\" title=\"Show all tutorials tagged git-gat\" href=\"/training-material/search?query=git-gat\" style=\"--color-primary: #ffc3c5; --color-darker: #ffa0a4; --color-dimmed: #ffb2b5;\">git-gat</a>"
     ],
     "url": "/training-material/topics/admin/tutorials/ftp/tutorial.html"
+  },
+  "/topics/admin/tutorials/onedata-configuration/tutorial.html": {
+    "type": "Tutorial",
+    "topic": "Galaxy Server administration",
+    "title": "Configuring the Onedata connectors (remotes, Object Store, BYOS, BYOD)",
+    "contributors": "Łukasz Opioła, Bartosz Walkowicz",
+    "tags": [
+      "<a class=\"label label-default\" title=\"Show all tutorials tagged storage\" href=\"/training-material/search?query=storage\" style=\"--color-primary: #ffbeea; --color-darker: #ff98e0; --color-dimmed: #fface5;\">storage</a>"
+    ],
+    "url": "/training-material/topics/admin/tutorials/onedata-configuration/tutorial.html"
   },
   "/topics/admin/tutorials/tiaas/tutorial.html": {
     "type": "Tutorial",
@@ -2148,6 +2158,16 @@ var resources = {
     "tags": [],
     "url": "/training-material/topics/dev/tutorials/containers/slides.html"
   },
+  "/topics/dev/tutorials/onedata-dev-instance/tutorial.html": {
+    "type": "Tutorial",
+    "topic": "Development in Galaxy",
+    "title": "Setting up a dev Onedata instance",
+    "contributors": "Łukasz Opioła",
+    "tags": [
+      "<a class=\"label label-default\" title=\"Show all tutorials tagged storage\" href=\"/training-material/search?query=storage\" style=\"--color-primary: #ffbeea; --color-darker: #ff98e0; --color-dimmed: #fface5;\">storage</a>"
+    ],
+    "url": "/training-material/topics/dev/tutorials/onedata-dev-instance/tutorial.html"
+  },
   "/topics/dev/tutorials/debugging/tutorial.html": {
     "type": "Tutorial",
     "topic": "Development in Galaxy",
@@ -3138,6 +3158,16 @@ var resources = {
     "tags": [],
     "url": "/training-material/topics/galaxy-interface/tutorials/get-data/slides.html"
   },
+  "/topics/galaxy-interface/tutorials/onedata-remote-import/tutorial.html": {
+    "type": "Tutorial",
+    "topic": "Using Galaxy and Managing your Data",
+    "title": "Importing (uploading) data from Onedata",
+    "contributors": "Łukasz Opioła, Bartosz Walkowicz",
+    "tags": [
+      "<a class=\"label label-default\" title=\"Show all tutorials tagged storage\" href=\"/training-material/search?query=storage\" style=\"--color-primary: #ffbeea; --color-darker: #ff98e0; --color-dimmed: #fface5;\">storage</a>"
+    ],
+    "url": "/training-material/topics/galaxy-interface/tutorials/onedata-remote-import/tutorial.html"
+  },
   "/topics/galaxy-interface/tutorials/download-delete-data/tutorial.html": {
     "type": "Tutorial",
     "topic": "Using Galaxy and Managing your Data",
@@ -3213,6 +3243,16 @@ var resources = {
     ],
     "url": "/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html"
   },
+  "/topics/galaxy-interface/tutorials/onedata-remote-export/tutorial.html": {
+    "type": "Tutorial",
+    "topic": "Using Galaxy and Managing your Data",
+    "title": "Exporting to Onedata remote",
+    "contributors": "Łukasz Opioła, Bartosz Walkowicz",
+    "tags": [
+      "<a class=\"label label-default\" title=\"Show all tutorials tagged storage\" href=\"/training-material/search?query=storage\" style=\"--color-primary: #ffbeea; --color-darker: #ff98e0; --color-dimmed: #fface5;\">storage</a>"
+    ],
+    "url": "/training-material/topics/galaxy-interface/tutorials/onedata-remote-export/tutorial.html"
+  },
   "/topics/galaxy-interface/tutorials/galaxy-intro-jupyter/tutorial.html": {
     "type": "Tutorial",
     "topic": "Using Galaxy and Managing your Data",
@@ -3238,6 +3278,26 @@ var resources = {
     "contributors": "",
     "tags": [],
     "url": "/training-material/topics/galaxy-interface/tutorials/history/tutorial.html"
+  },
+  "/topics/galaxy-interface/tutorials/onedata-getting-started/tutorial.html": {
+    "type": "Tutorial",
+    "topic": "Using Galaxy and Managing your Data",
+    "title": "Getting started with Onedata distributed storage",
+    "contributors": "Łukasz Opioła, Bartosz Walkowicz",
+    "tags": [
+      "<a class=\"label label-default\" title=\"Show all tutorials tagged storage\" href=\"/training-material/search?query=storage\" style=\"--color-primary: #ffbeea; --color-darker: #ff98e0; --color-dimmed: #fface5;\">storage</a>"
+    ],
+    "url": "/training-material/topics/galaxy-interface/tutorials/onedata-getting-started/tutorial.html"
+  },
+  "/topics/galaxy-interface/tutorials/onedata-byos/tutorial.html": {
+    "type": "Tutorial",
+    "topic": "Using Galaxy and Managing your Data",
+    "title": "Onedata user-owned storage",
+    "contributors": "Łukasz Opioła, Bartosz Walkowicz",
+    "tags": [
+      "<a class=\"label label-default\" title=\"Show all tutorials tagged storage\" href=\"/training-material/search?query=storage\" style=\"--color-primary: #ffbeea; --color-darker: #ff98e0; --color-dimmed: #fface5;\">storage</a>"
+    ],
+    "url": "/training-material/topics/galaxy-interface/tutorials/onedata-byos/tutorial.html"
   },
   "/topics/galaxy-interface/tutorials/name-tags/tutorial.html": {
     "type": "Tutorial",
@@ -9729,7 +9789,7 @@ fetch('/training-material/search.json')
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/923a043a324cf26ed6d0721a3216cf16e9bc996e">923a043</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a33463354f4e0b4d37ed377f73426790acc80daa">a334633</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
