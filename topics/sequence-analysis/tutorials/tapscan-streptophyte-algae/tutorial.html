@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Identification and Evolutionary Analysis of Transcription-Associated Proteins in Streptophyte algae and Land plants / Identification and Evolutionary Analysis of Transcription-Associated Proteins in Streptophyte algae and Land plants / Sequence analysis</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@cc8a41ecb10bead79e36bc2447f24afc7c43568d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Identification and Evolutionary Analysis of Transcription-Associated Proteins in Streptophyte algae and Land plants">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-03-26 11:29:27 +0000">
+<meta name="DC.creator" content="Deepti Varshney">
+<meta name="DC.creator" content="Saskia Hiltemann"><meta name="description" content="Analyses of sequences">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Sequence analysis / Identification and Evolutionary Analysis of Transcription-Associated Proteins in Streptophyte algae and Land plants / Hands-on: Identification and Evolutionary Analysis of Transcription-Associated Proteins in Streptophyte algae and Land plants">
+        <meta property="og:description" content="Analyses of sequences">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Identification and Evolutionary Analysis of Transcription-Associated Proteins in Streptophyte algae and Land plants",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-03-26 11:29:27 +0000",
+  "datePublished": "2025-03-26 11:29:27 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/madland/",
+      "name": "MAdLand - Molecular Adaptation to Land: plant evolution to change",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://madland.science"
+    }
+  ],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Sequence analysis",
+    "description": "Analyses of sequences",
+    "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/"
+  },
+  "abstract": "The regulated expression of genes is essential for defining morphology, functional capacity, and developmental fate of both solitary living cells as well as cells inhabiting the social environment of a multicellular organism. In this regard, the regulation of transcription, that is, the synthesis of messenger RNA from a genomic DNA template, plays a crucial role. It contributes to the control of temporal and spatial RNA and protein levels in a cell and therefore has an essential function in all living organisms. Transcription‐associated proteins (TAPs) are essential players in gene regulatory networks (GRNs) as they involved in transcriptional regulation. TAPs are broadly classified into transcription factors (TFs) and transcriptional regulators (TRs). TFs bind sequence‐specifically to regulatory elements, resulting in enhancing or repressing of transcription;. TRs, on the other hand, are involved in protein–protein interactions, may serve as regulators at the transcriptional core complex, as co‐activators and co‐repressors, chromatin modification or methylation. Additionally, there are proteins referred to as putative TAPs (PTs) that are thought to be involved in the regulation of transcription, but their exact function is undefined.",
+  "learningResourceType": "e-learning",
+  "name": "Identification and Evolutionary Analysis of Transcription-Associated Proteins in Streptophyte algae and Land plants",
+  "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT2H",
+  "teaches": "- Understand the role of TAPs\n- Learn how to identify TAPs from a given proteome using TAPScan\n- Extract FASTA sequences using sequence ID/header\n- Perform sequence alignment using MAFFT\n- Construct phylogenetic tree for TAPs",
+  "keywords": [
+    "Sequence analysis",
+    "plants"
+  ],
+  "description": "## Abstract\n\nThe regulated expression of genes is essential for defining morphology, functional capacity, and developmental fate of both solitary living cells as well as cells inhabiting the social environment of a multicellular organism. In this regard, the regulation of transcription, that is, the synthesis of messenger RNA from a genomic DNA template, plays a crucial role. It contributes to the control of temporal and spatial RNA and protein levels in a cell and therefore has an essential function in all living organisms. Transcription‐associated proteins (TAPs) are essential players in gene regulatory networks (GRNs) as they involved in transcriptional regulation. TAPs are broadly classified into transcription factors (TFs) and transcriptional regulators (TRs). TFs bind sequence‐specifically to regulatory elements, resulting in enhancing or repressing of transcription;. TRs, on the other hand, are involved in protein–protein interactions, may serve as regulators at the transcriptional core complex, as co‐activators and co‐repressors, chromatin modification or methylation. Additionally, there are proteins referred to as putative TAPs (PTs) that are thought to be involved in the regulation of transcription, but their exact function is undefined.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What are transcription-associated proteins (TAPs)?\n - How can we identify TAPs from a given proteome dataset?\n - How do we construct a phylogenetic tree for TAPs?\n\n\n## Learning Objectives\n\n- Understand the role of TAPs\n- Learn how to identify TAPs from a given proteome using TAPScan\n- Extract FASTA sequences using sequence ID/header\n- Perform sequence alignment using MAFFT\n- Construct phylogenetic tree for TAPs\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/deeptivarshney/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/deeptivarshney/",
+      "name": "Deepti Varshney",
+      "image": "https://avatars.githubusercontent.com/deeptivarshney",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0419-6832",
+      "orcid": "https://orcid.org/0000-0003-0419-6832"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
+    }
+  ],
+  "contributor": [],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Sequence analysis",
+      "description": "Analyses of sequences",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0080",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0080",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0080"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/ete",
+      "name": "ete"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/iqtree",
+      "name": "iqtree"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/trimal",
+      "name": "trimAl"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/MAFFT",
+      "name": "MAFFT"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/records/15056031/",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/sequence-analysis" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Sequence analysis
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/sequence-analysis/faqs/" title="Check our FAQs for the Sequence analysis topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-sequence-analysis">
+    <h1 data-toc-skip>Identification and Evolutionary Analysis of Transcription-Associated Proteins in Streptophyte algae and Land plants</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/deeptivarshney/" class="contributor-badge contributor-deeptivarshney"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/deeptivarshney?s=36" alt="Deepti Varshney avatar" width="36" class="avatar" />
+    Deepti Varshney</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are transcription-associated proteins (TAPs)?</p>
+</li>
+        
+        <li><p>How can we identify TAPs from a given proteome dataset?</p>
+</li>
+        
+        <li><p>How do we construct a phylogenetic tree for TAPs?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understand the role of TAPs</p>
+</li>
+        
+        <li><p>Learn how to identify TAPs from a given proteome using TAPScan</p>
+</li>
+        
+        <li><p>Extract FASTA sequences using sequence ID/header</p>
+</li>
+        
+        <li><p>Perform sequence alignment using MAFFT</p>
+</li>
+        
+        <li><p>Construct phylogenetic tree for TAPs</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/15056031/">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/workflows/" title="Identification and Evolutionary Analysis of Transcription-Associated Proteins in Streptophyte algae and Land plants workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 26, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 26, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>The regulated expression of genes is essential for defining morphology, functional capacity, and developmental fate of both solitary living cells as well as cells inhabiting the social environment of a multicellular organism. In this regard, the regulation of transcription, that is, the synthesis of messenger RNA from a genomic DNA template, plays a crucial role. It contributes to the control of temporal and spatial RNA and protein levels in a cell and therefore has an essential function in all living organisms. Transcription‐associated proteins (TAPs) are essential players in gene regulatory networks (GRNs) as they involved in transcriptional regulation. TAPs are broadly classified into transcription factors (TFs) and transcriptional regulators (TRs). TFs bind sequence‐specifically to regulatory elements, resulting in enhancing or repressing of transcription (<span class="citation"><a href="#Richardt2007">Richardt <i>et al.</i> 2007</a></span>; <span class="citation"><a href="#Wilhelmsson2017">Wilhelmsson <i>et al.</i> 2017</a></span>). TRs, on the other hand, are involved in protein–protein interactions, may serve as regulators at the transcriptional core complex, as co‐activators and co‐repressors, chromatin modification or methylation. Additionally, there are proteins referred to as putative TAPs (PTs) that are thought to be involved in the regulation of transcription, but their exact function is undefined (<span class="citation"><a href="#Richardt2007">Richardt <i>et al.</i> 2007</a></span>).</p>
+
+<p>TAPScan v4 (<span class="citation"><a href="#Petroll2024">Petroll <i>et al.</i> 2024</a></span>) is a comprehensive tool for annotating TAPs with a special focus on species belonging to the Archaeplastida. In general, the detection of TAPs is based on the detection of highly conserved protein domains.</p>
+
+<p>In this tutorial, we will illustrate the identification of TAPs in streptophyte algae and land plants using <a href="https://github.com/Rensing-Lab/TAPscan-classify">TAPScan Classify</a>, followed by construction of the phylogenetic tree.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#identification-of-taps" id="markdown-toc-identification-of-taps">Identification of TAPs</a>    <ol>
+      <li><a href="#perform-tapscan-classify" id="markdown-toc-perform-tapscan-classify">Perform TAPScan Classify</a></li>
+      <li><a href="#extract-the-sequences-for-tap-families" id="markdown-toc-extract-the-sequences-for-tap-families">Extract the sequences for TAP families</a></li>
+    </ol>
+  </li>
+  <li><a href="#evolutionary-analysis" id="markdown-toc-evolutionary-analysis">Evolutionary Analysis</a>    <ol>
+      <li><a href="#multiple-sequence-alignment-msa" id="markdown-toc-multiple-sequence-alignment-msa">Multiple Sequence Alignment (MSA)</a></li>
+      <li><a href="#alignment-trimming" id="markdown-toc-alignment-trimming">Alignment trimming</a></li>
+      <li><a href="#tree-generation" id="markdown-toc-tree-generation">Tree Generation</a></li>
+      <li><a href="#tree-visualisation" id="markdown-toc-tree-visualisation">Tree Visualisation</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="get-data">Get data</h1>
+
+<p>In this tutorial, we will use representative protein sequences obtained from the <a href="https://github.com/Rensing-Lab/Genome-Zoo">Genome Zoo database</a>. The selected sequences represent different lineages:</p>
+
+<ul>
+  <li><strong>Streptophyte Algae:</strong>
+    <ul>
+      <li><em>Chara braunii</em> (CHABR)</li>
+      <li><em>Penium margaritaceum</em> (PENMA)</li>
+    </ul>
+  </li>
+  <li><strong>Bryophytes &amp; Land Plants</strong>
+    <ul>
+      <li><em>Marchantia polymorpha</em> (MARPO)</li>
+      <li><em>Physcomitrium patens</em> (PHYPAV6)</li>
+      <li><em>Oryza sativa (spp. japonica)</em> (ORYSAJA)</li>
+      <li><em>Selaginella moellendorffii</em> (SELMO)</li>
+      <li><em>Arabidopsis thaliana</em> (ARATH)</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-prepare-your-analysis-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Prepare your Analysis History</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a proper name</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the history to something descriptive.</p>
+      <ul>
+        <li>for example “TAP analysis in Streptophyte algae and Land plants”</li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li>   <li>To cancel renaming, click the <i class="fas fa-undo" aria-hidden="true"></i><span class="visually-hidden">galaxy-undo</span> “Cancel” button</li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which can be the case if you are using an older version of Galaxy) do the following:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now, we need to import the data</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-import-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Import datasets</div>
+
+  <ol>
+    <li>
+      <p>Import the following from <a href="https://zenodo.org/records/15056031/">Zenodo</a> or from
+the shared data library:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/15056031/files/ARATH.fa
+https://zenodo.org/records/15056031/files/CHABR.fa
+https://zenodo.org/records/15056031/files/MARPO.fa
+https://zenodo.org/records/15056031/files/PENMA.fa
+https://zenodo.org/records/15056031/files/SELMO.fa
+https://zenodo.org/records/15056031/files/PHYPAV6.fa
+https://zenodo.org/records/15056031/files/ORYSAJA.fa
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Libraries</strong> (left panel)</li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Create a dataset collection with all the input files</p>
+      <ul>
+        <li>name your collection <code class="language-plaintext highlighter-rouge">input sequences</code></li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a dataset collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create collection</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>If you were successful, all the input files should now be available as dataset collection in your history.</p>
+
+<h1 id="identification-of-taps">Identification of TAPs</h1>
+
+<p>In order to detect TAPs from the given proteome(s), each sequence out of a species protein set is first scanned for protein domains (stored as profile Hidden Markov Models) using hmmsearch. The domains list consists of 154 profile HMMs and functions as the domain reference during the hmmsearch in background.</p>
+
+<p>Afterwards, <a href="https://github.com/Rensing-Lab/TAPscan-classify">TAPScan Classify</a> applies specialized rules to assign the protein sequences, scanned for 137 different TAP families, ensuring accurate family assignment using GA-thresholds and coverage values.</p>
+
+<h2 id="perform-tapscan-classify">Perform TAPScan Classify</h2>
+
+<p>Now that our dataset collection is ready, we can run <a href="https://github.com/Rensing-Lab/TAPscan-classify">TAPScan Classify</a> to detect TAPs in all species.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-detect-taps"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Detect TAPs</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/tapscan/tapscan_classify/4.76+galaxy0" title="TAPScan Classify tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TAPScan Classify</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.76+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Proteins in FASTA format”</em>: <code class="language-plaintext highlighter-rouge">input sequences</code> (the dataset collection you just made)</li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-selecting-a-dataset-collection-as-input"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-selecting-a-dataset-collection-as-input" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Selecting a dataset collection as input</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-on-parameter"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  on parameter</div>
+
+        <p>If you would like to have Output table from the HMMer Search, Please Check on the box like below:</p>
+        <ul>
+          <li><em>“Output the HMMer domain hits table?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>TAPScan Classify provides the user with three different output files. Each output file is tab-separated.</p>
+
+<ul>
+  <li><strong>Output 1: “Detected TAPs”</strong> - contains the detected domains and finally assigned TAP family for each gene ID. If domains are assigned to a sequence but not all rules are fulfilled, the sequence is assigned to <em>“0_no_family_found”</em>.</li>
+  <li><strong>Output 2: “Family Counts”</strong> - is a summary of the number of members for each TAP family.</li>
+  <li><strong>Output 3: “Detected TAPs Extra”</strong> - is similar to output 1 but contains additional information.</li>
+</ul>
+
+<p>Below is an example of the “Detected TAPs Extra” output. It has 5 columns, the Sequence IDs, followed by the classification into a TAP family, subfamily, the number of classifications, and domains.</p>
+
+<p><a href="./images/tapscan-extra-output.png" rel="noopener noreferrer"><img src="./images/tapscan-extra-output.png" alt="example output. " width="1034" height="397" loading="lazy" /></a></p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What is the output format of TAPScan Classify?</li>
+    <li>How many sequences belong to the “0_no_family_found” in <em>Arabidopsis thaliana</em> (ARATH) ?</li>
+    <li>What extra information does Output 3 include compared to Output 1?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-hints"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-hints" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Hints</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>This is written on the history outputs in Galaxy</li>
+      <li>Output 2, “Counts”, contains this information</li>
+      <li>Open one of the files in output 1 (Detected TAPs) and output 3 (Detected TAPs Extra), and compare the column headers</li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Tabular</li>
+      <li>675, You can find this number by clicking on the eye button for Galaxy dataset output 2 for ARATH.</li>
+      <li>Output 3 contains information about subfamilies with an additional column that provides more details beyond what is included in Output 1.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Now that we have the output from TAPScan Classify, we can filter the results by selecting a TAP family so that we can run phylogenetic analysis on that. To demonstrate, we chose the Aux/IAA TAP family. A brief overview of this TAP family: Aux/IAA proteins function as transcriptional repressors (TRs) in the auxin signaling pathway. They inhibit the expression of auxin-responsive genes by dimerizing with auxin response factor (ARF) transcriptional activators. This repression prevents ARFs from activating their target genes, thereby controlling auxin-regulated processes such as cell division, elongation, and differentiation (<span class="citation"><a href="#Tiwari2004">Tiwari <i>et al.</i> 2004</a></span>)</p>
+
+<p>In order to filter the TAPScan output, we need to first filter either Output 1 or Output 3 by using the Filter tool. This will allow us to select only the entries corresponding to Aux/IAA TAP family.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-filter-the-tapscan-output-based-on-the-column"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Filter the TAPScan output Based on the Column</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Filter1" title="Filter - data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter - data on any column using simple expressions</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Detected TAPs</code> (Output 1 of <strong>TAPScan Classify</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c2=='Aux/IAA'</code></li>
+        <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-what-s-happening-in-this-section"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  What's happening in this section?</div>
+
+        <p>This step filters the TAPScan results to retain only sequences classified as belonging to the our desired (Aux/IAA) TAP family.</p>
+      </blockquote>
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+        <p>How many sequences belong to the ‘Aux/IAA’ TAP family in <em>Arabidopsis thaliana</em> (ARATH), excluding the header line?</p>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <p>29, You can find this number by expanding the Galaxy dataset output for ARATH.</p>
+
+          <p><a href="./images/arath-filtered-expanded.png" rel="noopener noreferrer"><img src="./images/arath-filtered-expanded.png" alt="screenshot of expanded arath output. " width="286" height="351" loading="lazy" /></a></p>
+
+          <p>you can see “30 lines, 4 columns”, but one line is the header line, so 29 sequences in total</p>
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Next, we would like to create FASTA files containing only those sequences belonging to this TAP family. In order to do that, we first need
+to create a list of Sequnce IDs. This information is already in the first column of our output, so we will cut the first column to retain only the sequence IDs. Then, we will remove the header line to ensure a clean list of sequence identifiers for further analysis.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-cut-and-remove-header-from-sequence-ids"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Cut and Remove Header from Sequence IDs</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Cut1" title="Cut - columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut - columns from a table</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“From”</em>: output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li>
+      <p><span class="tool" data-tool="Remove beginning1" title="Remove beginning - of a file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove beginning - of a file</strong></span> with the following parameters:</p>
+
+      <ul>
+        <li><em>“Remove first*“</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“from”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><strong>Examine</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the output
+      <ul>
+        <li>You should have a list of only sequence IDs
+<a href="./images/sequence-ids.png" rel="noopener noreferrer"><img src="./images/sequence-ids.png" alt="screenshot of output file for ARASH. " width="200" height="289" loading="lazy" /></a></li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>How many sequences belonged to our TAP family for <em>Marchantia polymorpha</em> (MARPO)?</li>
+      <li>What is the average number of sequences in the Aux/IAA TAP family for the Streptophyte Algae? [ Chara braunii (CHABR) and Penium margaritaceum (PENMA)]?</li>
+      <li>And for Bryophytes &amp; Land Plants?</li>
+      <li>What does this suggest?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <ol>
+        <li>MARPO output has 3 lines, so that means 3 of the gene sequence in Marchantia polymorpha belonged to the Aux/IAA TAP family.</li>
+        <li>CHABR has 2 sequences, PENMA has 3, so the average is <strong>2.5</strong></li>
+        <li>For the Bryohpytes &amp; Land plants we have ARATH(29) + MARPO(3) + SELMO (10) + PHYPAV6 (5) + ORYSAJA (33)  = 80, divided by 5 is average of <strong>16 genes</strong></li>
+        <li>While our dataset is quite small, we observe a lower number of Aux/IAA proteins in streptophyte algae compared to bryophytes and land plants.
+This suggests that the Aux/IAA protein family expanded as plants transitioned from aquatic to terrestrial environments, where more complex signaling mechanisms were required for growth regulation.</li>
+      </ol>
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<p>Now that we have our list of sequence IDs belonging to the Aux/IAA TAP family, we will now extract the corresponding FASTA sequences from our input dataset. We will use these FASTA sequences to create our evolutionary tree.</p>
+
+<h2 id="extract-the-sequences-for-tap-families">Extract the sequences for TAP families</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-the-fasta-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Extract the FASTA sequences</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.3" title="Filter FASTA - on the headers and/or the sequences tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter FASTA - on the headers and/or the sequences</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTA sequences”</em>: <code class="language-plaintext highlighter-rouge">input sequences</code> (our original input dataset collection)</li>
+        <li><em>“Criteria for filtering on the headers”</em>: <code class="language-plaintext highlighter-rouge">List of IDs</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“List of IDs to extract sequences for”</em>: output of <strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+            <li><em>“Match IDs by”</em>: <code class="language-plaintext highlighter-rouge">Default: ID is expected at the beginning: &gt;ID </code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+        <ol>
+          <li>What if my IDs don’t match?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <ol>
+            <li>If your FASTA file includes additional annotations in the headers, you may need to preprocess your ID list or modify the matching criteria.</li>
+          </ol>
+        </blockquote>
+
+      </blockquote>
+    </li>
+    <li><strong>Examine</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the output files
+      <ul>
+        <li>does everything look as expected?</li>
+        <li>remember, we are expecting 29 sequences for Arabidopsis thaliana (ARATH) and 3 for Marchantia polymorpha (MARPO)</li>
+        <li>it is always a good idea to check the outputs of an analysis step before continuing.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="evolutionary-analysis">Evolutionary Analysis</h1>
+
+<p>We have now identified all sequences belonging to the Aux/IAA TAP family, across multiple species. Let’s perform an evolutionary analysis on this data.</p>
+
+<h2 id="multiple-sequence-alignment-msa">Multiple Sequence Alignment (MSA)</h2>
+
+<p>First, we will perform a multiple sequence alignment in order to determine the similarity between all sequences in our TAP family.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-msa-of-our-protein-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  MSA of our protein sequences</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy1" title="MAFFT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MAFFT</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 7.526+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><em>“For multiple inputs generate”</em>: <code class="language-plaintext highlighter-rouge">a single MSA of all sequences from all inputs</code>
+          <ul>
+            <li>In <em>“Input batch”</em>:
+              <ul>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Input batch”</em>
+                  <ul>
+                    <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sequences to align”</em>: the collection of FASTA files from our TAP families (output of <strong>Filter FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Type of Sequences”</em>: Amino Acids</li>
+        <li><em>“Support unusual characters?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“MAFFT flavour”</em>: <code class="language-plaintext highlighter-rouge">Auto</code></li>
+        <li><em>“Reorder output”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+        <ol>
+          <li>How many sequences do we have in total?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <ol>
+            <li>85 sequences. You can find this number by expanding the Galaxy dataset output from MAFFT.
+<a href="./images/mafft-expanded.png" rel="noopener noreferrer"><img src="./images/mafft-expanded.png" alt="screenshot of MAFFT output expanded. " width="294" height="385" loading="lazy" /></a></li>
+          </ol>
+        </blockquote>
+
+      </blockquote>
+    </li>
+    <li><strong>Examine</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the output file generated by MAFFT
+      <ul>
+        <li>you will see something similar to:
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;3702.ARATH_AT2G46990.1
+-----PAVEDAEYVA---------------------------------------------
+---------------------------------------------------AVEEEE---
+------------------------------------------------------------
+---------------ENECNS--VGSFYVKVNMEGVPIGRKIDLMSLNGYRDLIRTLDFM
+FNA-SILW-AE---------------------EE--------------------------
+DMC---NEKSHVLTYADKEGDW--------------------------------------
+----MMVGDVPWEMFL-------------STVRRLKISRANYHY----------------
+------------------------------------------------------------
+---------------------------------------------------------
+&gt;3702.ARATH_AT3G62100.1
+----------------------MGRG-------------------------RSSSSSSIE
+S-----------------------------------------------------------
+-----DGVGAAEEMM---------------------------------------------
+---------------------------------------------------IMEEEE---
+------------------------------------------------------------
+---------------QNECNS--VGSFYVKVNMEGVPIGRKIDLLSLNGYHDLITTLDYM
+FNA-SILW-AE---------------------EE--------------------------
+DMC---SEKSHVLTYADKEGDW--------------------------------------
+----MMVGDVPWEMFL-------------SSVRRLKISRAYHY-----------------
+</code></pre></div>          </div>
+
+          <blockquote class="question">
+            <div class="box-title question-title" id="question-what-s-in-an-alignment"><i class="far fa-question-circle" aria-hidden="true" ></i> Question:  What's in an alignment?</div>
+
+            <ol>
+              <li>What do you see in this file?</li>
+              <li>What do the dashes signify?</li>
+            </ol>
+
+            <blockquote class="solution">
+              <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+              <ol>
+                <li>This file contains a single alignment of all sequences. This format is similar to a FASTA file, but contains additional characters (e.g. dashes,<code class="language-plaintext highlighter-rouge">-</code>)</li>
+                <li>Dashes indicate a gap in the alignment at that position for the sequence in question</li>
+              </ol>
+            </blockquote>
+
+          </blockquote>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>A nicer way to look at this output, is in the MSA viewer that is built into Galaxy.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualise-our-multiple-sequence-alignment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Visualise our Multiple Sequence Alignment</div>
+
+  <ol>
+    <li>Click on the MAFFT output to <strong>expand</strong> it again in your history</li>
+    <li>Click on the <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-visualise</span> <strong>Visualize</strong> button</li>
+    <li>In the main window, pick the “Multiple Sequence Alignment” option
+<a href="/training-material/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/images/visualize-msa-galaxy.png" rel="noopener noreferrer"><img src="/training-material/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/images/visualize-msa-galaxy.png" alt="button to click to select the MSA visualisation option. " width="699" height="106" loading="lazy" /></a></li>
+    <li>
+      <p>You will see a visual representation of you MSA
+<a href="/training-material/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/images/visualize-msa-screenshot.png" rel="noopener noreferrer"><img src="/training-material/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/images/visualize-msa-screenshot.png" alt="screenshot of the multiple sequence alignment. " width="1044" height="556" loading="lazy" /></a></p>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-alignment-visualisation"><i class="far fa-question-circle" aria-hidden="true" ></i> Question:  Alignment visualisation</div>
+
+        <ol>
+          <li>What do you see?</li>
+          <li>How long is the total alignment?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <ol>
+            <li>
+              <p>You see every sequence in your dataset aligned together. On the left you see the sequence IDs. You can scroll down here to see more. On the top you see the position in the alignment. You can scroll left and right here to view different parts of the alignment.</p>
+
+              <p>Where amino acids align, you will see a colored square and the letter indicating the amino acid. Where there is a gap, you will see a dash (<code class="language-plaintext highlighter-rouge">-</code>). At the top, you will also see a histogram indicating how many sequences align at that position.</p>
+
+              <p>The bottom half of the screen shows a zoomed-out version of the entire alignment.</p>
+            </li>
+            <li>
+              <p>If you scroll all the way right in the aligment viewer, you will see a total length of around 1856 amino acids. This may not be the exact
+number, but gives you a pretty good idea.</p>
+
+              <p><a href="./images/visualize-msa-galaxy-length.png" rel="noopener noreferrer"><img src="./images/visualize-msa-galaxy-length.png" alt="screenshot of alignment when scrolled all the way to the right. " width="224" height="199" loading="lazy" /></a></p>
+            </li>
+          </ol>
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="alignment-trimming">Alignment trimming</h2>
+
+<p>Next, we would like to clean up this alignment by e.g. removing spurious sequences or poorly aligned regions from our multiple sequence alignment. <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>TrimAl</strong> is a tool that can do this</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-clean-up-our-alignment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Clean up our alignment</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/trimal/trimal/1.5.0+galaxy1" title="trimAl tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>trimAl</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.5.0+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Alignment file”</em>: output of <strong>MAFFT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Select trimming mode from the list”</em>: <code class="language-plaintext highlighter-rouge">custom mode</code>
+          <ul>
+            <li><em>“Gap threshold”</em>: 0.5</li>
+            <li><em>“Similarity Threshold”</em> 0.001</li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+        <ol>
+          <li>How many sequences were removed in this trimming step?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <ol>
+            <li>None. We still have all 85 sequences, meaning none of them were removed based on the gap threshold (0.5) or similarity threshold (0.001). However,
+TrimAl may have removed poorly aligned regions where gaps or similarity values did not meet the specified thresholds.</li>
+          </ol>
+        </blockquote>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the <strong>HTML report output from Trimal</strong>
+<a href="/training-material/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/images/trimal-screenshot.png" rel="noopener noreferrer"><img src="/training-material/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/images/trimal-screenshot.png" alt="screenshot of TrimAl output. " width="941" height="874" loading="lazy" /></a></p>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+        <ol>
+          <li>Did trimAl remove any poorly aligned regions from our alignment?</li>
+          <li>How long was the total alignment before and after trimming?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <ol>
+            <li>
+              <p>At the very top of the report, we can see the number of deleted and kept sequences and residues.
+As we already determined, all of the 85 sequences were kept, but 928 residues (columns in the alignment) were removed</p>
+
+              <p><a href="./images/trimal-screenshot-summary.png" rel="noopener noreferrer"><img src="./images/trimal-screenshot-summary.png" alt="screenshot of the table showing summary of trimal trimming. " width="325" height="43" loading="lazy" /></a></p>
+            </li>
+            <li>
+              <p>We kept 929 residues and removed 928, so the total length before trimming was 929+928=1857.</p>
+            </li>
+          </ol>
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="tree-generation">Tree Generation</h2>
+
+<p>We can now analyse this multiple sequence alignment and determine the evolutionary tree.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-tree-generationi-with-quicktree"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Tree Generationi with Quicktree</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quicktree/quicktree/2.5+galaxy0" title="Quicktree tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quicktree</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.5+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><em>“Provide an alignment file or a distance matrix?”</em>: <code class="language-plaintext highlighter-rouge">Alignment File</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Alignment file”</em>: <code class="language-plaintext highlighter-rouge">Trimmed alignment</code> (output of <strong>trimAl</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Calcuate bootstrap values with n iterations”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
+      </ul>
+    </li>
+    <li><strong>Examine</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the output from Quicktree
+      <ul>
+        <li>You will see something like:
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(
+(
+(
+4530.ORYSAJA_LOC_Os09g35870.1:0.24435,
+(
+(
+4530.ORYSAJA_LOC_Os07g08460.1:0.19987,
+4530.ORYSAJA_LOC_Os03g58350.1:0.19093)
+94:0.03760,
+(
+4530.ORYSAJA_LOC_Os12g40900.1:0.15994,
+4530.ORYSAJA_LOC_Os03g43410.1:0.18580)
+97:0.04447)
+67:0.02837)
+19:0.00640,
+</code></pre></div>          </div>
+        </li>
+        <li>This is <em>Newick</em> format, but not very informative to look at like this</li>
+        <li>Newick trees are best viewed with special visualization tools, lets try one now.</li>
+      </ul>
+    </li>
+    <li>Expand the output of Quicktree, and click on the <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-visualize</span> visualise button
+      <ul>
+        <li>Click on “Phylogenetic Tree Visualization”</li>
+        <li>You should see a tree like
+<a href="./images/tree-viz-galaxy.png" rel="noopener noreferrer"><img src="./images/tree-viz-galaxy.png" alt="tree visualized with built-in tree viewer. " width="1016" height="870" loading="lazy" /></a></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-tree-generation-algorithms"><button class="gtn-boxify-button details" type="button" aria-controls="details-tree-generation-algorithms" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details:  Tree Generation Algorithms</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>There are different algorithms to create trees, which will produce different outputs.
+Quicktree uses the Neighbour-joining algorithm.</p>
+
+  <p>Which algorithm is best for you, depends on your data and experiment.</p>
+
+  <p>Another tool that gives you a bit more control over your tree generation is <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.3.6+galaxy0" title="IQ-TREE tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IQ-TREE</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3.6+galaxy0)</span></p>
+
+  <p>If you would like to do that now, you can run IQ-tree as follows, which will generate both a Maximum-likelihood (ML) tree, as a
+Neighbour-joining (NJ) tree. These trees can be visualized with ETE-toolkit in the same way as you did for Quicktree</p>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.3.6+galaxy0" title="IQ-TREE tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IQ-TREE</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3.6+galaxy0)</span> with the following parameters:
+      <ul>
+        <li>In <em>“General options”</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify input alignment file in PHYLIP, FASTA, NEXUS, CLUSTAL or MSF format.”</em>: <code class="language-plaintext highlighter-rouge">trimmed_output</code> (output of <strong>trimAl</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Specify sequence type”</em>: <code class="language-plaintext highlighter-rouge">AA</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Modelling Parameters”</em>:
+          <ul>
+            <li>In <em>“Automatic model selection”</em>:
+              <ul>
+                <li><em>“Do you want to use a custom model”</em>: <code class="language-plaintext highlighter-rouge">Yes, I want to use a custom model</code></li>
+                <li><em>“Model”</em>: <code class="language-plaintext highlighter-rouge">MFP</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Tree Parameters”</em>:
+          <ul>
+            <li>In <em>“Single branch tests”</em>:
+              <ul>
+                <li><em>“Specify number of replicates (&gt;=1000) to perform SH-like approximate likelihood ratio test”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Bootstrap Parameters”</em>:
+          <ul>
+            <li>In <em>“Ultrafast bootstrap parameters”</em>:
+              <ul>
+                <li><em>“Specify number of bootstrap replicates”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="tree-visualisation">Tree Visualisation</h2>
+
+<p>We already had a look at the tree using Galaxy’s built-in tree viewer, but sometimes it is nicer to look at with other tools.
+For example, the <a href="https://etetoolkit.org/treeview/">Phylogenetic Tree Viewer from ETE Toolkit</a>. You could download your tree
+to your machine, and upload it to ETE toolkit, but you can also do this directly within Galaxy!</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Task description</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ete_treeviewer/ete_treeviewer/3.1.3+galaxy0" title="ETE tree viewer tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ETE tree viewer</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.3+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Newick Tree to visualise”</em>: output of <strong>Quicktree</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Add alignment information to image?”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Multiple Alignment FASTA file”</em>: <code class="language-plaintext highlighter-rouge">Trimmed alignment</code> (output form <strong>TrimAl</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> )</li>
+          </ul>
+        </li>
+        <li><em>“Resolve Taxonomic IDs?”</em>: Yes</li>
+        <li><em>“Format of the output image.”</em>: <code class="language-plaintext highlighter-rouge">PNG</code></li>
+      </ul>
+    </li>
+    <li><strong>Examine</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the output image
+      <ul>
+        <li>
+          <p>You should see a tree image like this:</p>
+
+          <p><a href="./images/tree-viz-ete.png" rel="noopener noreferrer"><img src="./images/tree-viz-ete.png" alt="tree visualisation by ETE toolkit. " width="1036" height="576" loading="lazy" /></a></p>
+        </li>
+        <li>
+          <p>As you can see, in addition to the tree itself, this also contains a visualisation of the alignments, and the taxonomy.</p>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+    <p>What do we see in this tree?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>We see that genes from the same group, such as land plants or bryophytes, cluster together, indicating their close evolutionary relationships and the potential for similar roles in auxin signaling.
+The branching patterns suggest that certain Aux/IAA genes from land plants and bryophytes are more closely related to each other, reflecting their shared functions in regulating growth and development under land conditions.</p>
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-where-did-the-taxonomy-information-come-from"><button class="gtn-boxify-button details" type="button" aria-controls="details-where-did-the-taxonomy-information-come-from" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Where did the taxonomy information come from?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Note that ETE toolkit will display this taxonomy based on your FASTA headers.
+If your sequence names start with the NCBI TaxID followed by a period, ETE
+TreeViewer will display them.</p>
+
+  <p>For example, here are the headers in our file:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;88036.SELMO_e_gw1.105.41.1
+-----------MNELLRLMPRDASIIGAIFVKLELLQL-V
+&gt;88036.SELMO_fgenesh2_pg.C_scaffold_136000057
+GPS-KERRRKQMNELLRLMPRDASIIGAIFVKLELLQLSI
+</code></pre></div>  </div>
+  <p>where <code class="language-plaintext highlighter-rouge">88036</code> is the NCBI TaxID for Selaginella moellendortffii</p>
+
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, utilizing the protein sequences of streptophyte algae, bryophytes, and land plants, we detected the TAP families and explored the distribution and evolutionary history of Aux/IAA proteins. Aux/IAA proteins play a critical role in the auxin signaling pathway, regulating plant growth and development, especially in response to environmental changes. Using <a href="https://github.com/Rensing-Lab/TAPscan-classify">TAPScan Classify</a>, we identified the presence of Aux/IAA proteins in these species and results showed lower number of Aux/IAA proteins in streptophyte algae compared to bryophytes and land plants. This suggests that the Aux/IAA protein family expanded as plants transitioned from aquatic to terrestrial environments, where more complex signaling mechanisms were required for growth regulation.</p>
+
+<p>The phylogenetic tree analysis supported this finding, as genes from the same group, such as land plants or bryophytes, clustered together, indicating their close evolutionary relationships and the potential for similar roles in auxin signaling. The branching patterns suggest that certain Aux/IAA genes from land plants and bryophytes are more closely related to each other, reflecting their shared functions in regulating growth and development under land conditions.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>TAPScan v4 is a comprehensive and highly reliable tool for genome-wide TAP annotation via domain profiles</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/sequence-analysis/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/sequence-analysis#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Tiwari2004">Tiwari, S. B., G. Hagen, and T. J. Guilfoyle, 2004 <b>Aux/IAA Proteins Contain a Potent Transcriptional Repression Domain</b>. The Plant Cell 16: <a href="https://doi.org/10.1105/tpc.017384">10.1105/tpc.017384</a></li>
+<li id="Richardt2007">Richardt, S., D. Lang, R. Reski, W. Frank, and S. A. Rensing, 2007 <b>PlanTAPDB,  a Phylogeny-Based Resource of Plant Transcription-Associated Proteins</b>. Plant Physiology 143: 1452–1466. <a href="https://doi.org/10.1104/pp.107.095760">10.1104/pp.107.095760</a></li>
+<li id="Wilhelmsson2017">Wilhelmsson, P. K. I., C. Mühlich, K. K. Ullrich, and S. A. Rensing, 2017 <b>Comprehensive Genome-Wide Classification Reveals That Many Plant-Specific Transcription Factors Evolved in Streptophyte Algae</b>. Genome Biology and Evolution 9: 3384–3397. <a href="https://doi.org/10.1093/gbe/evx258">10.1093/gbe/evx258</a></li>
+<li id="Petroll2024">Petroll, R., D. Varshney, S. Hiltemann, H. Finke, M. Schreiber <i>et al.</i>, 2024 <b>Enhanced sensitivity of <scp>TAPscan</scp> v4 enables comprehensive analysis of streptophyte transcription factor evolution</b>. The Plant Journal 121: <a href="https://doi.org/10.1111/tpj.17184">10.1111/tpj.17184</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=sequence-analysis/tapscan-streptophyte-algae"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=sequence-analysis/tapscan-streptophyte-algae">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Deepti Varshney, Saskia Hiltemann,  <b>Identification and Evolutionary Analysis of Transcription-Associated Proteins in Streptophyte algae and Land plants (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/tutorial.html">https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{sequence-analysis-tapscan-streptophyte-algae,
+author = "Deepti Varshney and Saskia Hiltemann",
+	title = "Identification and Evolutionary Analysis of Transcription-Associated Proteins in Streptophyte algae and Land plants (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/madland/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/logo-madland.jpg" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">MAdLand</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: tapscan
+  owner: bgruening
+  revisions: c4f865bd101a
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: filter_by_fasta_ids
+  owner: galaxyp
+  revisions: dff7df6fcab5
+  tool_panel_section_label: Proteomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: ete_treeviewer
+  owner: iuc
+  revisions: 2d4402c70eed
+  tool_panel_section_label: Phylogenetics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: iqtree
+  owner: iuc
+  revisions: f87ac61981f0
+  tool_panel_section_label: Evolution
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: quicktree
+  owner: iuc
+  revisions: 5c2ac7f640ab
+  tool_panel_section_label: Evolution
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: trimal
+  owner: iuc
+  revisions: e379c0202766
+  tool_panel_section_label: Multiple Alignments
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: mafft
+  owner: rnateam
+  revisions: 1233363389c1
+  tool_panel_section_label: Multiple Alignments
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/sequence-analysis/tutorials/tapscan-streptophyte-algae/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cc8a41ecb10bead79e36bc2447f24afc7c43568d">cc8a41e</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
