@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@f05ec0f74edee9f0c0adf910fe2f648360036251",
+		release: "galaxy-training-network@133a7435229d0d4934844687265b966d756dbd01",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-10-01 09:56:26 +0000">
+<meta name="DC.date" content="2025-03-28 10:21:17 +0000">
 <meta name="DC.creator" content="Wolfgang Maier">
 <meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Genetic differences (variants) between healthy and diseased tissue, between individuals of a population, or between strains of an organism can provide mechanistic insight into disease processes and the natural function of affected genes.  The tutorials in this section show how to detect evidence for genetic variants in next-generation sequencing data, a process termed variant calling.  Of equal importance, they also demonstrate how you can interpret, for a range of different organisms, the resulting sets of variants by predicting their molecular effects on genes and proteins, by annotating previously observed variants with published knowledge, and by trying to link phenotypes of the sequenced samples to their variant genotypes. ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -187,7 +187,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-10-01 09:56:26 +0000",
+  "dateModified": "2025-03-28 10:21:17 +0000",
   "datePublished": "2021-06-30 06:20:05 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -282,7 +282,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data",
   "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html",
-  "version": 17,
+  "version": 18,
   "timeRequired": "PT3H",
   "teaches": "- Discover and obtain recommended Galaxy workflows for SARS-CoV-2 sequence data analysis through public workflow registries\n- Choose and run a workflow to discover mutations in a batch of viral samples from sequencing data obtained through a range of different protocols and platforms\n- Run a workflow to summarize and visualize the mutation discovery results for a batch of samples\n- Run a workflow to construct viral consensus sequences for the samples in a batch\n- Know different SARS-CoV-2 lineage classification systems, and use pangolin and Nextclade to assign samples to predefined lineages\n- Combine information from different analysis steps to be able to draw appropriate conclusions about individual samples and batches of viral data",
   "keywords": [
@@ -2037,7 +2037,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 30, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 1, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 28, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -2057,7 +2057,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.5</a> (0 recent ratings, 13 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 17 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 18 </div>
 
     </blockquote>
     </section>
@@ -2548,8 +2548,8 @@ If in doubt, download the ARTIC v4 files through the URLs provided below, and us
   <p>All workflows developed as part of the Galaxy Covid-19 project can be retrieved via either of the two popular workflow registries <a href="https://dockstore.org/">Dockstore</a> and <a href="https://workflowhub.eu/">WorkflowHub</a>, the choice is up to you, and Galaxy makes this process really easy for you.</p>
 
   <!--SNIPPET-->
-  <ol>   <li>Click on <em>Workflow</em> in the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> icon at the top-right of the screen</li>   <li>On the new page, select the <strong>GA4GH servers</strong> tab, and configure the <strong>GA4GH Tool Registry Server (TRS) Workflow Search</strong> interface as follows:     <ol>       <li><em>“TRS Server”</em>: the TRS Server you want to search on (Dockstore or Workflowhub)</li>       <li>         <p><em>“search query”</em>: <code class="language-plaintext highlighter-rouge">organization:"iwc" name:"sars-cov-2"</code></p>       </li>       <li>Expand the correct workflow by clicking on it</li>       <li>Select the version you would like to <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> import</li>     </ol>   </li> </ol>
-  <p>The workflow will be imported to your list of workflows. Note that it will also carry a little green check mark next to its name, which indicates that this is an original workflow version imported from a TRS server. If you ever modify the workflow with Galaxy’s workflow editor, it will lose this indicator.</p>
+  <ol>   <li>Click on <i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span> <em>Workflows</em> in the Galaxy activity bar (on the left side of the screen, or in the top menu bar of older Galaxy instances). You will see a list of all your workflows</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>On the new page, select the <strong>GA4GH servers</strong> tab, and configure the <strong>GA4GH Tool Registry Server (TRS) Workflow Search</strong> interface as follows:     <ol>       <li><em>“TRS Server”</em>: the TRS Server you want to search on (Dockstore or workflowhub.eu)</li>       <li>         <p><em>“search query”</em>: <code class="language-plaintext highlighter-rouge">organization:"iwc" name:"sars-cov-2"</code></p>       </li>       <li>Expand the correct workflow by clicking on it</li>       <li>Select the version you would like to <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> import</li>     </ol>   </li> </ol>
+  <p>The workflow will be imported to your list of workflows. Note that it will also carry a little blue-white shield icon next to its name, which indicates that this is an original workflow version imported from a TRS server. If you ever modify the workflow with Galaxy’s workflow editor, it will lose this indicator.</p>
   <p><!--END_SNIPPET--></p>
 
   <p><em>IWC</em> (the intergalactic workflow commission) is the organization that the Galaxy Covid-19 project uses to publish its workflows, and the name restriction makes sure we are only getting workflows from that organization that deal with SARS-CoV-2 data analysis.</p>
@@ -2726,7 +2726,8 @@ The <a href="https://artic.network/ncov-2019/ncov2019-bioinformatics-sop.html">A
     <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Running a workflow</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <!--SNIPPET-->
-    <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul>
+    <ol>   <li>Click on <i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span> <em>Workflows</em> in the Galaxy activity bar (on the left side of the screen, or in the top menu bar of older Galaxy instances). At the top of the resulting page you will have the option to switch between the <em>My workflows</em>, <em>Workflows shared with me</em> and <em>Public workflows</em> tabs. Select the tab you want to see all workflows in that category.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <em>Run workflow</em> button of the workflow you would like to use</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li> </ol>
+    <p>You may have to refresh your history to see the queued jobs</p>
     <p><!--END_SNIPPET--></p>
 
     <p>Note: the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon next to <strong>Run Workflow</strong> offers the option to <em>Send results to a new history</em>.
@@ -2777,8 +2778,8 @@ For the other three we may hope for some results, but we should not expect those
   <p>Just like the variation analysis workflows before, also the <em>reporting workflow</em> developed by the Galaxy Covid-19 project can be retrieved from <em>Dockstore</em> or <em>WorkflowHub</em>:</p>
 
   <!--SNIPPET-->
-  <ol>   <li>Click on <em>Workflow</em> in the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> icon at the top-right of the screen</li>   <li>On the new page, select the <strong>GA4GH servers</strong> tab, and configure the <strong>GA4GH Tool Registry Server (TRS) Workflow Search</strong> interface as follows:     <ol>       <li><em>“TRS Server”</em>: the TRS Server you want to search on (Dockstore or Workflowhub)</li>       <li>         <p><em>“search query”</em>: <code class="language-plaintext highlighter-rouge">organization:"iwc" name:"sars-cov-2"</code></p>       </li>       <li>Expand the workflow named <code class="language-plaintext highlighter-rouge">sars-cov-2-variation-reporting/COVID-19-VARIATION-REPORTING</code>  by clicking on it</li>       <li>Select the version you would like to <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> import</li>     </ol>   </li> </ol>
-  <p>The workflow will be imported to your list of workflows. Note that it will also carry a little green check mark next to its name, which indicates that this is an original workflow version imported from a TRS server. If you ever modify the workflow with Galaxy’s workflow editor, it will lose this indicator.</p>
+  <ol>   <li>Click on <i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span> <em>Workflows</em> in the Galaxy activity bar (on the left side of the screen, or in the top menu bar of older Galaxy instances). You will see a list of all your workflows</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>On the new page, select the <strong>GA4GH servers</strong> tab, and configure the <strong>GA4GH Tool Registry Server (TRS) Workflow Search</strong> interface as follows:     <ol>       <li><em>“TRS Server”</em>: the TRS Server you want to search on (Dockstore or workflowhub.eu)</li>       <li>         <p><em>“search query”</em>: <code class="language-plaintext highlighter-rouge">organization:"iwc" name:"sars-cov-2"</code></p>       </li>       <li>Expand the workflow named <code class="language-plaintext highlighter-rouge">sars-cov-2-variation-reporting/COVID-19-VARIATION-REPORTING</code>  by clicking on it</li>       <li>Select the version you would like to <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> import</li>     </ol>   </li> </ol>
+  <p>The workflow will be imported to your list of workflows. Note that it will also carry a little blue-white shield icon next to its name, which indicates that this is an original workflow version imported from a TRS server. If you ever modify the workflow with Galaxy’s workflow editor, it will lose this indicator.</p>
   <p><!--END_SNIPPET--></p>
 
   <p>Again, you can just select the latest version of the workflow, and, once imported, it should appear in your list of workflows under the name: <strong>COVID-19: variation analysis reporting</strong>.</p>
@@ -3198,8 +3199,8 @@ It is relatively obvious then that most of these variants have a AF value betwee
   <p>Just like all workflows before, also the <em>consensus construction workflow</em> developed by the Galaxy Covid-19 project can be retrieved from <em>Dockstore</em> or <em>WorkflowHub</em>:</p>
 
   <!--SNIPPET-->
-  <ol>   <li>Click on <em>Workflow</em> in the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> icon at the top-right of the screen</li>   <li>On the new page, select the <strong>GA4GH servers</strong> tab, and configure the <strong>GA4GH Tool Registry Server (TRS) Workflow Search</strong> interface as follows:     <ol>       <li><em>“TRS Server”</em>: the TRS Server you want to search on (Dockstore or Workflowhub)</li>       <li>         <p><em>“search query”</em>: <code class="language-plaintext highlighter-rouge">organization:"iwc" name:"sars-cov-2"</code></p>       </li>       <li>Expand the workflow named <code class="language-plaintext highlighter-rouge">sars-cov-2-consensus-from-variation/COVID-19-CONSENSUS-CONSTRUCTION</code>  by clicking on it</li>       <li>Select the version you would like to <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> import</li>     </ol>   </li> </ol>
-  <p>The workflow will be imported to your list of workflows. Note that it will also carry a little green check mark next to its name, which indicates that this is an original workflow version imported from a TRS server. If you ever modify the workflow with Galaxy’s workflow editor, it will lose this indicator.</p>
+  <ol>   <li>Click on <i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span> <em>Workflows</em> in the Galaxy activity bar (on the left side of the screen, or in the top menu bar of older Galaxy instances). You will see a list of all your workflows</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>On the new page, select the <strong>GA4GH servers</strong> tab, and configure the <strong>GA4GH Tool Registry Server (TRS) Workflow Search</strong> interface as follows:     <ol>       <li><em>“TRS Server”</em>: the TRS Server you want to search on (Dockstore or workflowhub.eu)</li>       <li>         <p><em>“search query”</em>: <code class="language-plaintext highlighter-rouge">organization:"iwc" name:"sars-cov-2"</code></p>       </li>       <li>Expand the workflow named <code class="language-plaintext highlighter-rouge">sars-cov-2-consensus-from-variation/COVID-19-CONSENSUS-CONSTRUCTION</code>  by clicking on it</li>       <li>Select the version you would like to <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> import</li>     </ol>   </li> </ol>
+  <p>The workflow will be imported to your list of workflows. Note that it will also carry a little blue-white shield icon next to its name, which indicates that this is an original workflow version imported from a TRS server. If you ever modify the workflow with Galaxy’s workflow editor, it will lose this indicator.</p>
   <p><!--END_SNIPPET--></p>
 
   <p>Again, you can just select the latest version of the workflow, and, once imported, it should appear in your list of workflows under the name: <strong>COVID-19: consensus construction</strong>.</p>
@@ -4041,7 +4042,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/f05ec0f74edee9f0c0adf910fe2f648360036251">f05ec0f</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/133a7435229d0d4934844687265b966d756dbd01">133a743</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

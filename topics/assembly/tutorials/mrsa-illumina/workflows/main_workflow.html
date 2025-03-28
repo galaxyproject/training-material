@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@f05ec0f74edee9f0c0adf910fe2f648360036251",
+		release: "galaxy-training-network@133a7435229d0d4934844687265b966d756dbd01",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -267,9 +267,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffd0e9; --color-darker: #ffabda; --color-dimmed: #ffbde1;">assembly</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;">assembly</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ebe200; --color-darker: #d1c900; --color-dimmed: #ded500;">microgalaxy</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #e8df00; --color-darker: #cfc600; --color-dimmed: #dcd300;">microgalaxy</div>
 			
 			</br>
 			
@@ -334,13 +334,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow">Galaxy Australia</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow">Galaxy France</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow">Galaxy Main</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow">Galaxy France</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow">Galaxy Europe</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow">Import to another server (≥23.0+ only!)</a>
@@ -361,29 +361,29 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   3["fastp"];
   1 -->|output| 3;
   0 -->|output| 3;
-  5dba0d40-8e23-4eeb-9a97-9a4a932aaab9["Output\nfastp_json"];
-  3 --> 5dba0d40-8e23-4eeb-9a97-9a4a932aaab9;
-  style 5dba0d40-8e23-4eeb-9a97-9a4a932aaab9 stroke:#2c3143,stroke-width:4px;
+  092ac759-6b27-4a48-876f-490bd7a130c4["Output\nfastp_json"];
+  3 --> 092ac759-6b27-4a48-876f-490bd7a130c4;
+  style 092ac759-6b27-4a48-876f-490bd7a130c4 stroke:#2c3143,stroke-width:4px;
   4["FastQC"];
   1 -->|output| 4;
   5["Shovill"];
   3 -->|out1| 5;
   3 -->|out2| 5;
-  f560a03a-6725-494e-b190-dd74f16fe374["Output\nshovill_log"];
-  5 --> f560a03a-6725-494e-b190-dd74f16fe374;
-  style f560a03a-6725-494e-b190-dd74f16fe374 stroke:#2c3143,stroke-width:4px;
+  7f2bac86-c8f1-47b8-a823-caea65d47290["Output\nshovill_log"];
+  5 --> 7f2bac86-c8f1-47b8-a823-caea65d47290;
+  style 7f2bac86-c8f1-47b8-a823-caea65d47290 stroke:#2c3143,stroke-width:4px;
   6["Quast"];
   5 -->|contigs| 6;
-  4fd5cc14-a292-4e5c-921c-0fea79d3da3a["Output\nquast_output"];
-  6 --> 4fd5cc14-a292-4e5c-921c-0fea79d3da3a;
-  style 4fd5cc14-a292-4e5c-921c-0fea79d3da3a stroke:#2c3143,stroke-width:4px;
+  fc518fab-a8ca-4105-8519-3fd3b18073ee["Output\nquast_output"];
+  6 --> fc518fab-a8ca-4105-8519-3fd3b18073ee;
+  style fc518fab-a8ca-4105-8519-3fd3b18073ee stroke:#2c3143,stroke-width:4px;
   7["Bandage Image"];
   5 -->|contigs_graph| 7;
   8["Bandage Info"];
   5 -->|contigs_graph| 8;
-  36cc88d6-2820-4930-be88-9dfbe1190924["Output\nbandage_info_output"];
-  8 --> 36cc88d6-2820-4930-be88-9dfbe1190924;
-  style 36cc88d6-2820-4930-be88-9dfbe1190924 stroke:#2c3143,stroke-width:4px;</pre>
+  cbf9a91f-b4c4-4053-9bd4-d9f7c15b9d83["Output\nbandage_info_output"];
+  8 --> cbf9a91f-b4c4-4053-9bd4-d9f7c15b9d83;
+  style cbf9a91f-b4c4-4053-9bd4-d9f7c15b9d83 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -538,7 +538,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<h2>Importing into Galaxy</h2>
 			Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
 
-			<!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands On: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
+			<!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands On: Importing a workflow</div>   <ol>   <li>Click on <i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span> <em>Workflows</em> in the Galaxy activity bar (on the left side of the screen, or in the top menu bar of older Galaxy instances). You will see a list of all your workflows</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ol>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/FXlkreylhww" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
 
 			<h2>Version History</h2>
 			<table class="table table-striped">
@@ -682,7 +682,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/f05ec0f74edee9f0c0adf910fe2f648360036251">f05ec0f</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/133a7435229d0d4934844687265b966d756dbd01">133a743</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
