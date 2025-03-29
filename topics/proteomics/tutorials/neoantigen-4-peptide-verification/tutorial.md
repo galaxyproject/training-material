@@ -157,8 +157,8 @@ PepQuery2 is a tool used to validate novel peptides and proteins by searching ma
 >            - {% icon param-file %} *"Spectrum File"*: `output` (output of **msconvert** {% icon tool %})
 >        - *"Report Spectrum Scan as"*: `spectrum title in MGF`
 >    - In *"Modifications"*:
->        - *"Fixed modification(s)"*: ``
->        - *"Variable modification(s)"*: ``
+>        - *"Fixed modification(s)"*: `0: NO Modifications`
+>        - *"Variable modification(s)"*: `2: Oxidation of M [15.99491461956]`
 >    - In *"Digestion"*:
 >        - *"Enzyme"*: `Non enzyme`
 >    - In *"Mass spectrometer"*:
@@ -271,7 +271,7 @@ In this step, the NCBI BLAST+ blastp tool is used for performing protein sequenc
 > 1. {% tool [NCBI BLAST+ blastp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.14.1+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Protein query sequence(s)"*: `output` (output of **Tabular-to-FASTA** {% icon tool %})
 >    - *"Subject database/sequences"*: `Locally installed BLAST database`
->        - *"Protein BLAST database"*: ``
+>        - *"Protein BLAST database"*: `NCBI NR (03 Sep 2023)`
 >    - *"Type of BLAST"*: `blastp-short - BLASTP optimized for queries shorter than 30 residues`
 >    - *"Set expectation value cutoff"*: `200000.0`
 >    - *"Output format"*: `Tabular (extended 25 columns)`

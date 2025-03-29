@@ -517,7 +517,7 @@ In this workflow, converting GffCompare's annotated GTF output to BED format all
 >
 > 1. {% tool [Convert gffCompare annotated GTF to BED](toolshed.g2.bx.psu.edu/repos/galaxyp/gffcompare_to_bed/gffcompare_to_bed/0.2.1) %} with the following parameters:
 >    - {% icon param-file %} *"GTF annotated by gffCompare"*: `transcripts_annotated` (output of **GffCompare** {% icon tool %})
->    - *"filter gffCompare class_codes to convert"*: ``
+>    - *"filter gffCompare class_codes to convert"*: `j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript` `e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible pre-mRNA fragment.` `i : A transfrag falling entirely within a reference intron` `p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)` `u : Unknown, intergenic transcript`
 >
 >
 {: .hands_on}

@@ -1,0 +1,199 @@
+---
+layout: tutorial_slides
+logo: GTN
+title: "Classification in Machine Learning"
+zenodo_link: "https://zenodo.org/record/3738729"
+questions:
+  - What is classification and how we can use classification techniques?
+objectives:
+  - Learn classification background
+  - Learn what a quantitative structure-analysis relationship (QSAR) model is and how it can be constructed in Galaxy
+  - Learn to apply logistic regression, k-nearest neighbors, support verctor machines, random forests and bagging algorithms
+  - Learn how visualizations can be used to analyze the classification results
+key_points:
+- Classification is a supervised approach in machine learning.
+- For classification tasks, data is divided into training and test sets.
+- Using classification, the samples are learned using the training set and predicted using the test set.
+- For each classification algorithm, the parameters should be optimised based on the dataset.
+- Classification algorithms can be applied to, for example, chemical datasets to predict important properties.
+requirements:
+  -
+    type: internal
+    topic_name: statistics
+    tutorials:
+      - machinelearning
+contributors:
+  - anuprulez
+---
+
+# What is classification in machine learning?
+
+???
+
+What is classification in machine learning?
+
+---
+
+# Classification
+
+
+.pull-left[
+- Class is a category
+    - Represented as an integer (0, 1, 2, 3 ...)
+    - Known as categorical variables
+    - "Supervision" of classes
+- Two class (binary) classification
+    - Cancer or no cancer, spam or no spam
+- Multi-class classification
+    - Handwritten digit recognition
+]
+
+.pull-right[ ![Classification boundary and shift in classification boundary due to outliers]({{site.baseurl}}/topics/statistics/tutorials/classification_machinelearning/images/c1.png)] <!-- https://pixy.org/3013900/ CC0 license-->
+
+---
+
+# Linear model
+
+.pull-left[
+- Input data point x (x1, x2)
+- Weights w (w0, w1, w2)
+- w0 is intercept
+- w1, w2 are feature coefficients
+- Function “y” is learned by a linear model
+- Decision boundary: y(x) = 0
+- If y(x) > 0, x is assigned to class C1
+- If y(x) < 0, x is assigned to class C2 
+]
+
+.pull-right[ ![Linear model]({{site.baseurl}}/topics/statistics/tutorials/classification_machinelearning/images/c2.png)]
+
+---
+
+# Support vector machines
+
+.pull-left[
+- Linear and non-linear variants
+- Learn decision boundary with maximum margin
+- Support vectors are data points that lie closest to the decision boundary
+- Need only support vectors for classifying new samples
+- Other data points can be thrown away
+]
+
+.pull-right[ ![Linear model]({{site.baseurl}}/topics/statistics/tutorials/classification_machinelearning/images/c3.png)]
+
+---
+
+# Nearest neighbour
+
+.pull-left[
+- Find a certain number of neighbours
+- Neighbours are closest based on a distance metric
+- Distance metrics - Euclidean distance, Manhattan distance, ...
+- Class of a new sample is the class of the maximum number of its neighbours
+- Example
+    - K-nearest neighbours - K is the predefined number of neighbours
+    - Stores training data
+    - Unsuitable for large datasets
+    - Learn even irregular boundaries
+]
+
+.pull-right[ ![Linear model]({{site.baseurl}}/topics/statistics/tutorials/classification_machinelearning/images/c4.png)]
+
+
+---
+
+# Decision tree
+
+.pull-left[
+- Learn decision rules from features
+- Split at each node (non-leaf) using feature values
+- Contain labels at leaf nodes
+- Advantages:
+    - Easy to understand
+    - Can be used with categorical and numerical data
+    - Prediction is logarithmic in the number of data points
+- Disadvantages
+    - Overfitting
+    - High variance
+]
+
+.pull-right[ ![Linear model]({{site.baseurl}}/topics/statistics/tutorials/classification_machinelearning/images/c5.png)]
+
+
+---
+
+# Ensemble method
+
+.pull-left[
+- Combine multiple tree estimators
+- Approaches - Bagging and boosting
+- Bagging
+    - Average prediction of several estimators trained independent of each other
+    - Parallel execution
+    - Examples - Bagging, Random forest
+- Boosting
+	- Improve estimators sequentially
+	- No parallel execution
+	- Examples - Adaboost, Gradient tree boosting
+]
+
+.pull-right[ ![Linear model]({{site.baseurl}}/topics/statistics/tutorials/classification_machinelearning/images/c6.png)]
+ 
+---
+
+# References
+
+- Book: Pattern Recognition and Machine Learning, Author: Christopher Bishop, 2006, Springer
+- Nearest neighbours - https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm
+- Decision tree - https://scikit-learn.org/stable/modules/tree.html#tree
+- Ensemble - https://scikit-learn.org/stable/modules/ensemble.html
+
+---
+
+# For additional references, please see tutorial's References section
+
+---
+
+- Galaxy Training Materials ([training.galaxyproject.org](https://training.galaxyproject.org))
+
+![Screenshot of the gtn stats page with 21 topics, 170 tutorials, 159 contributors, 16 scientific topics, and a growing community]({{site.baseurl}}/topics/introduction/images/gtn_stats.png)
+
+???
+
+- If you would like to learn more about Galaxy, there are a large number of tutorials available.
+- These tutorials cover a wide range of scientific domains.
+
+---
+
+# Getting Help
+
+- **Help Forum** ([help.galaxyproject.org](https://help.galaxyproject.org))
+
+
+  ![Galaxy Help]({{site.baseurl}}/topics/introduction/images/galaxy_help.png)
+
+
+- **Gitter Chat**
+    - [Main Chat](https://gitter.im/galaxyproject/Lobby)
+    - [Galaxy Training Chat](https://gitter.im/Galaxy-Training-Network/Lobby)
+    - Many more channels (scientific domains, developers, admins)
+
+???
+
+- If you get stuck, there are ways to get help.
+- You can ask your questions on the help forum.
+- Or you can chat with the community on Gitter.
+
+---
+
+# Join an event
+
+- Many Galaxy events across the globe
+- Event Horizon: [galaxyproject.org/events](https://galaxyproject.org/events)
+
+![Event schedule]({{site.baseurl}}/topics/introduction/images/event_horizon.png)
+
+???
+
+- There are frequent Galaxy events all around the world.
+- You can find upcoming events on the Galaxy Event Horizon.

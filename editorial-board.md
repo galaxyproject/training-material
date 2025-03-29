@@ -20,3 +20,25 @@ title: GTN Editorial Board
 {% endfor %}
 
 </section>
+
+<h2> Codeowners</h2>
+
+Automatic CODEOWNERS file (just to make it easier to keep updated)
+
+
+<!-- autogenerate a codeowners file based on this info -->
+
+```
+assets/     @bebatut @shiltemann @hexylena
+bin/        @bebatut @shiltemann @hexylena
+metadata/   @bebatut @shiltemann @hexylena
+badges/     @hexylena
+_layouts/   @bebatut @shiltemann @hexylena
+_includes/  @bebatut @shiltemann @hexylena
+_plugins/   @bebatut @hexylena
+
+{% for t in sorted_topics %}{% assign topic = site.data[t] %}
+topics/{{t}}/               {% for member in topic.editorial_board %} @{{member}} {% endfor %}{% endfor%}
+```
+
+

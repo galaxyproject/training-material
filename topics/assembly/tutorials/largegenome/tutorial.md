@@ -97,8 +97,13 @@ Here is a list of the workflows:
 |Polish assembly | Assembly polishing |
 |Assess quality | Assess genome quality|
 
-
-{% snippet faqs/galaxy/workflows_import_from_workflowhub.md filter="Large-genome-assembly" %}
+> <tip-title>Importing the workflows from WorkflowHub</tip-title>
+>
+> [WorkflowHub](https://workflowhub.eu/) is a workflow management system which allows workflows to be FAIR (Findable, Accessible, Interoperable, and Reusable), citable, have managed metadata profiles, and be openly available for review and analytics.
+>
+> {% snippet faqs/galaxy/workflows_import_search.md box_type="none" trs_server="workflowhub.eu" search_query='"large genome assembly"' %}
+>
+{: .tip}
 
 After importing the workflows into your account:
 

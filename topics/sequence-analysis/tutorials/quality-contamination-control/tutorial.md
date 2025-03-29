@@ -34,6 +34,8 @@ contributions:
   authorship:
   - bebatut
   - clsiguret
+  editing:
+  - VerenaMoo
   funding:
   - abromics
 recordings:
@@ -141,7 +143,7 @@ The datasets are both FASTQ files.
 <div class="Workflow" markdown="1">
 
 In this section we will run a Galaxy workflow that performs the following tasks with the following tools:
-1. Assess the reads quality before preprocessing it using [__FastQC__](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
+1. Assess the reads quality before preprocessing it using [__Falco__](https://falco.readthedocs.io/en/latest/).
 2. Trimming and filtering reads by length and quality using **Fastp** ({% cite Chen2018 %}).
 3. Find witch microorgasnims are present using [__Kraken2__](https://ccb.jhu.edu/software/kraken2/) ({% cite Wood2014 %}).
 4. Extract the species level with **Bracken** (Bayesian Reestimation of Abundance after Classification with Kraken) ({% cite Lu.2017 %}).
@@ -176,9 +178,9 @@ During sequencing, errors are introduced, such as incorrect nucleotides being ca
 
 Assessing the quality by hand would be too much work. That's why tools like
 [NanoPlot](https://github.com/wdecoster/NanoPlot) or
-[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) are made, as they  generate a summary and plots of the data statistics. NanoPlot is
-mainly used for long-read data, like ONT and PACBIO and FastQC for short read,
-like Illumina and Sanger. You can read more in our dedicated [Quality Control
+[Falco](https://falco.readthedocs.io/en/latest/) are made, as they  generate a summary and plots of the data statistics. NanoPlot is
+mainly used for long-read data, like ONT and PACBIO and Falco for short read,
+like Illumina and Sanger. Falco is an efficiency-optimized rewrite of [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/). You can read more in our dedicated [Quality Control
 Tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
 Before doing any analysis, the first questions we should ask about the input
@@ -194,7 +196,7 @@ reads include:
 <div class="Step-by-step" markdown="1">
 > <hands-on-title>Quality Control</hands-on-title>
 >
-> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0) %} with the following parameters:
+> 1. {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0) %} with the following parameters:
 >    - {% icon param-files %} *"Short read data from your current history"*: both `DRR187559_1` and `DRR187559_2`
 >
 >    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %} 
@@ -207,36 +209,35 @@ reads include:
 <div class="Workflow" markdown="1">
 
 > <hands-on-title>Quality Control</hands-on-title>
-> Inspect the webpage outputs of **FastQC**
+> Inspect the webpage outputs of **Falco**
 >
 {: .hands_on}
 
 </div>
 
-**FastQC** combines quality statistics from all separate reads and combines them in plots. An important plot is the Per base sequence quality. 
+**Falco** combines quality statistics from all separate reads and combines them in plots. An important plot is the Per base sequence quality. 
 
 DRR187559_1 | DRR187559_2
 ----------- | -----------
-![FastQC plot showing reads that mostly stay in the green](../../../assembly/images/mrsa/fastqc-1.png) | ![Same as previous plot, but the beginning of the reads are slightly better quality](../../../assembly/images/mrsa/fastqc-2.png)
+![Falco plot showing reads that stay in the green](../../../assembly/images/mrsa/falco-1.png) | ![Same as previous plot, but the beginning of the reads are slightly better quality](../../../assembly/images/mrsa/falco-2.png)
 
-Here you have the reads sequence length on the x-axes against the quality score (Phred-score) on the y-axis. The y-axis is divided in three sections: 
+Here you have the reads sequence length on the x-axes against the quality score (Phred-score) on the y-axis. The colour of the beams indicates three quality levels:
 - Green = good quality, 
-- Orange = mediocre quality, and 
+- Yellow = mediocre quality, and 
 - Red = bad quality.
 
 For each position, a boxplot is drawn with:
 
-- the median value, represented by the central red line
-- the inter-quartile range (25-75%), represented by the yellow box
+- the median value, represented by the central intense coloured line
+- the inter-quartile range (25-75%), represented by the green, yellow or red box
 - the 10% and 90% values in the upper and lower whiskers
-- the mean quality, represented by the blue line
 
 > <question-title></question-title>
 >
-> How does the mean quality score change along the sequence?
+> How does the median quality score change along the sequence?
 >
 > > <solution-title></solution-title>
-> > The mean quality score (blue line) decreases at the sequences end. It is common for the mean quality to drop towards the end of the sequences, as the sequencers are incorporating more incorrect nucleotides at the end. For Illumina data it is normal that the first few bases are of some lower quality and how longer the reads get the worse the quality becomes. This is often due to signal decay or phasing during the sequencing run.
+> > The median quality score (intense coloured line) decreases at the sequences end. It is common for the median quality to drop towards the end of the sequences, as the sequencers are incorporating more incorrect nucleotides at the end. For Illumina data it is normal that the first few bases are of some lower quality and how longer the reads get the worse the quality becomes. This is often due to signal decay or phasing during the sequencing run.
 > >
 > {: .solution }
 {: .question}
@@ -278,7 +279,7 @@ is needed. In this case we are going to trim the data using **fastp** ({% cite C
 {: .hands_on}
 </div>
 
-**fastp** generates also a report, similar to **FastQC**, useful to compare the impact of the trimming and filtering.
+**fastp** generates also a report, similar to **Falco**, useful to compare the impact of the trimming and filtering.
 
 > <question-title></question-title>
 >

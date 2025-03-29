@@ -111,7 +111,7 @@ To generate an MSA, we align the previously unaligned genome datasets with **MAF
 
 > <hands-on-title>Generate multiple sequence alignment</hands-on-title>
 >
-> 1. {% tool [MAFFT](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy0) %} with the following parameters:
+> 1. {% tool [MAFFT](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to align"*: `Polio 1 unaligned` (the output of the **EMBOSS degapseq** tool)
 >    - *"Type of sequences"*: `auto-detect` or `Nucleic acids`
 >    - *"MAFFT flavour"*: `FFT-NS-2 (fast, progressive method)`
@@ -137,7 +137,7 @@ That was easy to set up and the tool run should not take very long with the `FFT
 > >
 > >    This will create a separate dataset for each of our Polio 1 sequences and put them all into a collection.
 > >
-> > 2. {% tool [MAFFT](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy0) %} with the following parameters:
+> > 2. {% tool [MAFFT](toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy1) %} with the following parameters:
 > >    - *"For multiple inputs generate"*: `a single MSA of all sequences from all inputs`
 > >      - In *"Input batch"*:
 > >        - {% icon param-repeat %} *"1: Input batch"

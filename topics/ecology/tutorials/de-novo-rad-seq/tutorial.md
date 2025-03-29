@@ -19,8 +19,11 @@ tags:
   - Species populations EBV class
   - EBV dataset
   - EBV workflow
-contributors:
+contributions:
+  authorship:
   - yvanlebras
+  editing:
+  - VerenaMoo
 
 subtopic: ecologyanalysis
 ---
@@ -163,11 +166,13 @@ We propose to continue the tutorial using the dataset collection containing the 
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
+For quality control, we use similar tools as described in [NGS-QC tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [Falco](https://falco.readthedocs.io/en/latest/).
+
+Falco is an efficiency-optimized rewrite of [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
 > <hands-on-title>Quality control</hands-on-title>
 >
-> 1. **FastQC** {% icon tool %}: Run FastQC on FastQ files to control the quality of the reads. Warning! Don't forget you are working on data collections....
+> 1. **Falco** {% icon tool %}: Run Falco on FastQ files to control the quality of the reads. Warning! Don't forget you are working on data collections....
 >
 >    > <question-title></question-title>
 >    >
@@ -178,7 +183,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({% l
 >    > {: .solution }
 >    {: .question}
 >
-> 2. **MultiQC** {% icon tool %}: Run MultiQC on FastQC results to better see quality information over samples.
+> 2. **MultiQC** {% icon tool %}: Run MultiQC on Falco results to better see quality information over samples. For "Which tool was used generate logs?" choose `FastQC` no matter whether FastQC or Falco was used.
 {: .hands_on}
 
 ![MultiQC output](../../images/RAD4_Population_Genomics/multiqc.PNG)

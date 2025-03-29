@@ -430,7 +430,7 @@ Four flavors of this workflow are available that are optimized for different typ
 >
 > All workflows developed as part of the Galaxy Covid-19 project can be retrieved via either of the two popular workflow registries [Dockstore](https://dockstore.org/) and [WorkflowHub](https://workflowhub.eu/), the choice is up to you, and Galaxy makes this process really easy for you.
 >
-> {% snippet faqs/galaxy/workflows_import_search.md search_query='organization:"iwc" name:"sars-cov-2"' box_type="none" %}
+> {% snippet faqs/galaxy/workflows_import_search.md search_query='organization:"iwc" name:"sars-cov-2"' disable_image="True" disable_video="True" box_type="none" %}
 >
 > *IWC* (the intergalactic workflow commission) is the organization that the Galaxy Covid-19 project uses to publish its workflows, and the name restriction makes sure we are only getting workflows from that organization that deal with SARS-CoV-2 data analysis.
 >
@@ -472,7 +472,7 @@ Four flavors of this workflow are available that are optimized for different typ
 >
 {: .details}
 
-{% include _includes/cyoa-choices.html option1="tiled-amplicon Illumina paired-end" option2="tiled-amplicon ONT" option3="WGS Illumina paired-end" option4="WGS Illumina single-end" default="tiled-amplicon-Illumina-paired-end" text="Now that you have imported the data and the corresponding workflow of your choice, please select the type of your input data so that we can adjust a few parts of this tutorial that are dependent on the nature of your data:" %}
+{% include _includes/cyoa-choices.html option1="tiled-amplicon Illumina paired-end" option2="tiled-amplicon ONT" option3="WGS Illumina paired-end" option4="WGS Illumina single-end" default="tiled-amplicon Illumina paired-end" text="Now that you have imported the data and the corresponding workflow of your choice, please select the type of your input data so that we can adjust a few parts of this tutorial that are dependent on the nature of your data:" %}
 
 > <hands-on-title>From sequencing data to annotated mutations</hands-on-title>
 >
@@ -562,7 +562,7 @@ The main output of the first workflow is a collection with annotated mutation ca
 >
 > Just like the variation analysis workflows before, also the *reporting workflow* developed by the Galaxy Covid-19 project can be retrieved from *Dockstore* or *WorkflowHub*:
 >
-> {% snippet faqs/galaxy/workflows_import_search.md search_query='organization:"iwc" name:"sars-cov-2"' workflow_name="sars-cov-2-variation-reporting/COVID-19-VARIATION-REPORTING" box_type="none" %}
+> {% snippet faqs/galaxy/workflows_import_search.md search_query='organization:"iwc" name:"sars-cov-2"' workflow_name="sars-cov-2-variation-reporting/COVID-19-VARIATION-REPORTING" disable_image="True" disable_video="True" box_type="none" %}
 >
 > Again, you can just select the latest version of the workflow, and, once imported, it should appear in your list of workflows under the name: **COVID-19: variation analysis reporting**.
 >
@@ -760,7 +760,7 @@ We can now run a last workflow which generates reliable consensus sequences acco
 >
 > Just like all workflows before, also the *consensus construction workflow* developed by the Galaxy Covid-19 project can be retrieved from *Dockstore* or *WorkflowHub*:
 >
-> {% snippet faqs/galaxy/workflows_import_search.md search_query='organization:"iwc" name:"sars-cov-2"' workflow_name="sars-cov-2-consensus-from-variation/COVID-19-CONSENSUS-CONSTRUCTION" box_type="none" %}
+> {% snippet faqs/galaxy/workflows_import_search.md search_query='organization:"iwc" name:"sars-cov-2"' workflow_name="sars-cov-2-consensus-from-variation/COVID-19-CONSENSUS-CONSTRUCTION" disable_image="True" disable_video="True" box_type="none" %}
 >
 > Again, you can just select the latest version of the workflow, and, once imported, it should appear in your list of workflows under the name: **COVID-19: consensus construction**.
 >

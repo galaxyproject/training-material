@@ -26,6 +26,8 @@ contributions:
   funding:
     - nfdi4bioimage
     - dfg
+  reviewing:
+    - kostrykin
 tags:
   - RNA
   - smFISH
@@ -33,8 +35,8 @@ tags:
 ---
 
 
-Detect of multiple bright spots in an image using basic computer vision and image processing 
-technique used to identify and localize regions 
+The objective is to detect multiple bright spots in an image using a basic computer vision and image processing 
+technique for identification and localization of regions 
 of high intensity within an image. 
 These spots often correspond to features of interest, such as fluorescent markers 
 in biological imaging.
@@ -88,15 +90,15 @@ and selected the 10th z-stack for analysis.
 
 # Improve image contrast 
 
-Your image should look something like this:
+When inspecting the image visually, we get the impression that the image is entirely black:
 
 ![2025_pre_clahe.png](../../images/2d_spot_detection/2025_pre_clahe.png){: width="75%"}
 
 It's not the best quality for a first visual inspection!
 
+As described in the [Galaxy Imaging Introduction Tutorial]({% link topics/imaging/tutorials/imaging-introduction/tutorial.md %}), the original image is 16-bit and the intensity values are spread
+over a very small fraction of the range of intensity values that can be represented using 16 bits.
 
-As described in [a previous Galaxy Tutorial]{% link topics/imaging/tutorials/imaging-introduction/tutorial.md %}, the original image is 16-bit and the intensity values are spread
-over a larger range than the display can render. 
 Therefore, for improved visibility the intensity histogram of the image can be normalized first.
 
 We will normalize the histogram to improve the contrast. 
@@ -150,10 +152,15 @@ The TSV output will have 1649 lines, meaning 1649 spots detected!
 ![TSV_output.png](../../images/2d_spot_detection/TSV_output.png)
 
 # Convert spots coordinates to labels
- Let's try now to visualize our results! The first step is to create a label map from the TSV file...
+Let's try now to visualize our results! The first step is to create a label map from the TSV file...
 This can be nicely done by converting the point coordinates to a label map and we have a tool for it!
 
-> <hands-on-title>Segment image</hands-on-title>
+Please notice that the width and height of the image are necessary inputs to corretly overlay
+the label map in the next step! 
+You can get these info by running the "Show image info" tool on the original image!
+
+
+> <hands-on-title>Create the label map from the points coordinates</hands-on-title>
 >
 > 1. {% tool [Convert point coordinates to label map](toolshed.g2.bx.psu.edu/repos/imgteam/points2labelimage/ip_points_to_label/0.4+galaxy0) %} with the following parameters to detect the 2D spots:
 >    - {% icon param-file %} *"Tabular list of points"*: `RNA_spot_detected.tsv` file

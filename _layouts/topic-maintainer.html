@@ -55,7 +55,7 @@ This is a new, experimental "Editorial Board Home" for a given topic. It is inte
 		</tr>
 		<tr>
 			<td>Learning Pathway CTA</td>
-			<td>{% if topic.learning_path_cta %} Done ✅ {% else %} Pending ❌ {% endif %}</td>
+			<td>{% if topic.learning_path_cta or topic.learning_path_ctas %} Done ✅ {% else %} Pending ❌ {% endif %}</td>
 			<td>By providing a Learning Pathway CTA, we can help guide learners to the best resources for learning about this topic.</td>
 		</tr>
 	</tbody>
@@ -79,10 +79,10 @@ This is a new, experimental "Editorial Board Home" for a given topic. It is inte
 		<tr>
 			<th scope="row"><a href="{{ site.baseurl }}{{ material.url }}">{{ material.title }}</a></th>
 			<td>{% if material.contributions %} ✅ {% else %} ❌ {% endif %}</td>
-			<td>{% if material.requirements %} ✅ {% else %} ❌ {% endif %}</td>
-			<td>{% if material.follow_up_training %} ✅ {% else %} ❌ {% endif %}</td>
+			<td>{% if material.requirements %} ✅  {% endif %}</td>
+			<td>{% if material.follow_up_training %} ✅ {% endif %}</td>
 			<td>{% if material.zenodo_link != ""%} ✅ {% else %} ❌ {% endif %}</td>
-			<td>{% if material.notebook %} ✅ {% else %} ❌ {% endif %}</td>
+			<td>{% if material.notebook %} ✅ {% endif %}</td>
 			<td>
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{material.id | replace:'/', '-'}}-compat">
 					View

@@ -131,9 +131,7 @@ Your image should look something like this:
 > You can observe that the image content is barely visible. Why?
 >
 > > <solution-title></solution-title>
-> > The original image is 16-bit and the intensity values are spread over a larger range than the
-> > display can render. Therefore, for improved visibility the intensity histogram of the image can
-> > be normalized first.
+> > The original image is 16-bit and the intensity values of the image (33069 to 36863) are spread over a very small fraction (only about 6%) of the intensity values that can be represented using 16 bits (0 to 65535, where 0 corresponds to black and 65535 corresponds to white). Therefore, for improved visibility the intensity histogram of the image should be normalized first.
 > {: .solution }
 {: .question}
 
