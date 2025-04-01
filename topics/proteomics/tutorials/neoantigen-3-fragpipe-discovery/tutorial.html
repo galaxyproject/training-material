@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@9e47ff232a72f524f06c353b76e3707ee7194afc",
+		release: "galaxy-training-network@018ecb390263e59dbc57385a13951e6136324e6e",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Neoantigen 3: Database merge and FragPipe discovery">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-01-14 14:58:39 +0000">
+<meta name="DC.date" content="2025-04-01 15:14:12 +0000">
 <meta name="DC.creator" content="Subina Mehta">
 <meta name="DC.creator" content="Katherine Do">
 <meta name="DC.creator" content="James Johnson"><meta name="description" content="Training material for proteomics workflows in Galaxy">
@@ -188,7 +188,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-01-14 14:58:39 +0000",
+  "dateModified": "2025-04-01 15:14:12 +0000",
   "datePublished": "2025-01-14 14:58:39 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -246,7 +246,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Neoantigen 3: Database merge and FragPipe discovery",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/neoantigen-3-fragpipe-discovery/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT3H",
   "teaches": "- Understand the process of merging neoantigen databases with human protein sequences.\n- Learn to use FragPipe for proteomics data analysis.\n- Gain hands-on experience with bioinformatics tools such as FASTA file processing, database validation, and peptide identification.",
   "keywords": [
@@ -966,7 +966,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 14, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 14, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 1, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -982,7 +982,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -1018,7 +1018,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li><a href="#b-discovery-search" id="markdown-toc-b-discovery-search">B: Discovery search</a>    <ol>
       <li><a href="#running-fragpipe-for-neoantigen-discovery" id="markdown-toc-running-fragpipe-for-neoantigen-discovery">Running FragPipe for Neoantigen Discovery</a></li>
       <li><a href="#collapsing-datasets-and-selecting-relevant-data" id="markdown-toc-collapsing-datasets-and-selecting-relevant-data">Collapsing Datasets and Selecting Relevant Data</a></li>
-      <li><a href="#querying-tabular-results-for-further-analysis" id="markdown-toc-querying-tabular-results-for-further-analysis">Querying Tabular Results for Further Analysis</a></li>
     </ol>
   </li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
@@ -1303,7 +1302,7 @@ The FragPipe tool is executed with the MS data and a validated FASTA sequence da
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">NOT Matching</code></li>
-        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">(HUMAN)|(contam_)|(con_)|(ENSP)</code></li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">(HUMAN)|(contam_)|(con_)</code></li>
         <li><em>“Keep header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
@@ -1311,60 +1310,16 @@ The FragPipe tool is executed with the MS data and a validated FASTA sequence da
 
 </blockquote>
 
-<h2 id="querying-tabular-results-for-further-analysis">Querying Tabular Results for Further Analysis</h2>
-
-<p>The Query Tabular tool is used to query and filter tabular data using SQL-like commands. It allows users to extract specific data from a larger dataset based on defined criteria. This tool is essential for querying complex data and narrowing down results for further analysis. In this step, the Query Tabular tool is applied to the output of the Select tool (a previous step in the workflow). The input is a tabular dataset (out_file1), and a custom SQL query is provided to filter the dataset based on specific conditions. The query provided (SELECT c1 FROM fp WHERE (c16 IS NULL OR c16 = ‘’) AND (c18 IS NULL OR c18 = ‘’)) retrieves a subset of the data, selecting only the rows where columns c16 and c18 are empty or null.</p>
-
-<p>In this workflow, this step filters the tabular data to isolate the rows that meet the specified conditions. By using this query, unnecessary or irrelevant data is excluded from the dataset, and only the relevant results are retained for further analysis. This step ensures that the subsequent analysis is based on clean and focused data.</p>
-
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-query-tabular"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Query Tabular</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-beginning-of-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Remove beginning of file</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2)</span> with the following parameters:
+    <li><span class="tool" data-tool="Remove beginning1" title="Remove beginning tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove beginning</strong></span> with the following parameters:
       <ul>
-        <li>In <em>“Database Table”</em>:
-          <ul>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Database Table”</em>
-              <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-                <li>In <em>“Table Options”</em>:
-                  <ul>
-                    <li><em>“Specify Name for Table”</em>: <code class="language-plaintext highlighter-rouge">fp</code></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><em>“SQL Query to generate tabular output”</em>:
-          <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">c1</span> <span class="k">FROM</span> <span class="n">fp</span> <span class="k">WHERE</span> <span class="p">(</span><span class="n">c16</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">OR</span> <span class="n">c16</span> <span class="o">=</span> <span class="s1">''</span><span class="p">)</span> <span class="k">AND</span> <span class="p">(</span><span class="n">c18</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">OR</span> <span class="n">c18</span> <span class="o">=</span> <span class="s1">''</span><span class="p">)</span>
-</code></pre></div>          </div>
-        </li>
-        <li><em>“include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Select tool</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
   </ol>
-
-</blockquote>
-
-<blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
-
-  <ol>
-    <li>What is the purpose of using an SQL query in the Query Tabular tool in this workflow?</li>
-    <li>How does the SQL query provided (SELECT c1 FROM fp WHERE (c16 IS NULL OR c16 = ‘’) AND (c18 IS NULL OR c18 = ‘’)) filter the dataset, and what does it aim to accomplish?</li>
-  </ol>
-
-  <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-
-    <ol>
-      <li>The purpose of using an SQL query in the Query Tabular tool is to filter and retrieve specific rows from a tabular dataset based on defined conditions, allowing the user to focus on relevant data for further analysis.</li>
-      <li>The SQL query filters the dataset by selecting only the rows where columns c16 and c18 are either null or empty. It aims to exclude any rows where these columns contain data, ensuring that only relevant and clean data is retained for further processing.</li>
-    </ol>
-
-  </blockquote>
 
 </blockquote>
 
@@ -1814,7 +1769,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9e47ff232a72f524f06c353b76e3707ee7194afc">9e47ff2</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/018ecb390263e59dbc57385a13951e6136324e6e">018ecb3</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

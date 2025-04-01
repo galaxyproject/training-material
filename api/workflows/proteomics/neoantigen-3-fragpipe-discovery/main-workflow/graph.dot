@@ -18,22 +18,24 @@ digraph main {
   5 -> 6 [label="goodFastaOut"]
   2 -> 6 [label="output"]
   3 -> 6 [label="output"]
+  k80182cb44a704a50a42f0de196f6e95b[color=lightseagreen,label="Output\nFragpipe_output_peptide"]
+  6 -> k80182cb44a704a50a42f0de196f6e95b
   k6e4e993f8d694008952891ea2699ab02[color=lightseagreen,label="Output\nFragpipe_output_protein"]
   6 -> k6e4e993f8d694008952891ea2699ab02
   kb1ac88a670fb4a0cbc52aa4f37019c8d[color=lightseagreen,label="Output\nFragpipe_output_psm"]
   6 -> kb1ac88a670fb4a0cbc52aa4f37019c8d
-  k80182cb44a704a50a42f0de196f6e95b[color=lightseagreen,label="Output\nFragpipe_output_peptide"]
-  6 -> k80182cb44a704a50a42f0de196f6e95b
   7[label="Extract_Peptides_from_Fragpipe"]
   6 -> 7 [label="output_peptide"]
   ka3548299ee6a4649a7410e934557daf3[color=lightseagreen,label="Output\nFragpipe-Peptide-Report"]
   7 -> ka3548299ee6a4649a7410e934557daf3
   8[label="Removing_known_human_peptides"]
   7 -> 8 [label="output"]
-  k190bb3e533594ac39515055fe73926da[color=lightseagreen,label="Output\nRemoving_known_human_peptides_and_contaminants"]
-  8 -> k190bb3e533594ac39515055fe73926da
-  9[label="Extracting_NeoAntigen_Peptides_for_PepQuery"]
+  k275b4fb5e4c248cea8d892c91b1831fc[color=lightseagreen,label="Output\nRemoving_known_human_peptides"]
+  8 -> k275b4fb5e4c248cea8d892c91b1831fc
+  9[label="Extracting_Peptide-Candidates"]
   8 -> 9 [label="out_file1"]
-  k848d90aa2d7e4a96891857efa8705dc1[color=lightseagreen,label="Output\nNeoantigen_Peptide_Candidates_for_PepQuery"]
-  9 -> k848d90aa2d7e4a96891857efa8705dc1
+  k443d70da5732449a89fbc8fc094dbaee[color=lightseagreen,label="Output\nExtracting_Peptide-Candidates"]
+  9 -> k443d70da5732449a89fbc8fc094dbaee
+  10[label="Neoantigen_Peptide_Candidates_for_PepQuery"]
+  9 -> 10 [label="output"]
 }

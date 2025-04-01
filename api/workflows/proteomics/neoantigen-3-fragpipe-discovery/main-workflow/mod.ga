@@ -336,6 +336,11 @@
       "when": null,
       "workflow_outputs": [
         {
+          "label": "Fragpipe_output_peptide",
+          "output_name": "output_peptide",
+          "uuid": "80182cb4-4a70-4a50-a42f-0de196f6e95b"
+        },
+        {
           "label": "Fragpipe_output_protein",
           "output_name": "output_protein",
           "uuid": "6e4e993f-8d69-4008-9528-91ea2699ab02"
@@ -344,11 +349,6 @@
           "label": "Fragpipe_output_psm",
           "output_name": "output_psm",
           "uuid": "b1ac88a6-70fb-4a0c-bc52-aa4f37019c8d"
-        },
-        {
-          "label": "Fragpipe_output_peptide",
-          "output_name": "output_peptide",
-          "uuid": "80182cb4-4a70-4a50-a42f-0de196f6e95b"
         }
       ]
     },
@@ -426,39 +426,39 @@
         }
       ],
       "position": {
-        "left": 1400.0390625,
-        "top": 203
+        "left": 1399.8862609863281,
+        "top": 203.352294921875
       },
       "post_job_actions": {
         "RenameDatasetActionout_file1": {
           "action_arguments": {
-            "newname": "Removing_known_human_peptides_and_contaminants"
+            "newname": "Removing_known_human_peptides"
           },
           "action_type": "RenameDatasetAction",
           "output_name": "out_file1"
         }
       },
       "tool_id": "Grep1",
-      "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"-v\", \"keep_header\": true, \"pattern\": \"(HUMAN)|(contam_)|(con_)|(ENSP)\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"-v\", \"keep_header\": true, \"pattern\": \"(HUMAN)|(contam_)|(con_)\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
       "tool_version": "1.0.4",
       "type": "tool",
       "uuid": "7724eab3-8d29-4235-a7a0-0a0f56443fef",
       "when": null,
       "workflow_outputs": [
         {
-          "label": "Removing_known_human_peptides_and_contaminants",
+          "label": "Removing_known_human_peptides",
           "output_name": "out_file1",
-          "uuid": "190bb3e5-3359-4ac3-9515-055fe73926da"
+          "uuid": "275b4fb5-e4c2-48ce-a8d8-92c91b1831fc"
         }
       ]
     },
     "9": {
-      "annotation": "extracts those peptides with no gene annotation and mapped genes",
+      "annotation": "",
       "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2",
       "errors": null,
       "id": 9,
       "input_connections": {
-        "tables_0|table": {
+        "add_to_database|withdb": {
           "id": 8,
           "output_name": "out_file1"
         }
@@ -469,7 +469,7 @@
           "name": "add_to_database"
         }
       ],
-      "label": "Extracting_NeoAntigen_Peptides_for_PepQuery",
+      "label": "Extracting_Peptide-Candidates",
       "name": "Query Tabular",
       "outputs": [
         {
@@ -478,13 +478,13 @@
         }
       ],
       "position": {
-        "left": 1680.0390625,
-        "top": 239
+        "left": 1658.7463684082031,
+        "top": 199.19036865234375
       },
       "post_job_actions": {
         "RenameDatasetActionoutput": {
           "action_arguments": {
-            "newname": "Neoantigen_Peptide_Candidates_for_PepQuery"
+            "newname": "Extracting_Peptide-Candidates"
           },
           "action_type": "RenameDatasetAction",
           "output_name": "output"
@@ -497,18 +497,64 @@
         "owner": "iuc",
         "tool_shed": "toolshed.g2.bx.psu.edu"
       },
-      "tool_state": "{\"add_to_database\": {\"withdb\": {\"__class__\": \"RuntimeValue\"}}, \"addqueries\": {\"queries\": []}, \"modify_database\": {\"sql_stmts\": []}, \"query_result\": {\"header\": \"no\", \"__current_case__\": 1}, \"save_db\": false, \"sqlquery\": \"SELECT c1\\nFROM fp\\nWHERE (c16 IS NULL OR c16 = '')\\nAND (c18 IS NULL OR c18 = '')\", \"tables\": [{\"__index__\": 0, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": []}, \"tbl_opts\": {\"table_name\": \"fp\", \"column_names_from_first_line\": false, \"col_names\": \"\", \"load_named_columns\": false, \"pkey_autoincr\": \"\", \"indexes\": []}}], \"workdb\": \"workdb.sqlite\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_state": "{\"add_to_database\": {\"withdb\": {\"__class__\": \"ConnectedValue\"}}, \"addqueries\": {\"queries\": []}, \"modify_database\": {\"sql_stmts\": []}, \"query_result\": {\"header\": \"no\", \"__current_case__\": 1}, \"save_db\": false, \"sqlquery\": \"Select distinct c1 from t1\", \"tables\": [], \"workdb\": \"workdb.sqlite\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
       "tool_version": "3.3.2",
       "type": "tool",
-      "uuid": "6666debc-6080-41ca-9b55-3ad2d7d4b1a7",
+      "uuid": "6213dc3b-f9f9-4221-9746-fb0ba11b7c1d",
       "when": null,
       "workflow_outputs": [
         {
-          "label": "Neoantigen_Peptide_Candidates_for_PepQuery",
+          "label": "Extracting_Peptide-Candidates",
           "output_name": "output",
-          "uuid": "848d90aa-2d7e-4a96-8918-57efa8705dc1"
+          "uuid": "443d70da-5732-449a-89fb-c8fc094dbaee"
         }
       ]
+    },
+    "10": {
+      "annotation": "",
+      "content_id": "Remove beginning1",
+      "errors": null,
+      "id": 10,
+      "input_connections": {
+        "input": {
+          "id": 9,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Remove beginning",
+          "name": "input"
+        }
+      ],
+      "label": "Neoantigen_Peptide_Candidates_for_PepQuery",
+      "name": "Remove beginning",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1934.2684020996094,
+        "top": 220.08160400390625
+      },
+      "post_job_actions": {
+        "RenameDatasetActionout_file1": {
+          "action_arguments": {
+            "newname": "Neoantigen_Peptide_Candidates_for_PepQuery"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "out_file1"
+        }
+      },
+      "tool_id": "Remove beginning1",
+      "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"num_lines\": \"1\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "f13f29b2-b78f-475c-99fd-3c5d9eb08686",
+      "when": null,
+      "workflow_outputs": []
     }
   },
   "tags": [
@@ -516,6 +562,6 @@
     "GTN",
     "Galaxy"
   ],
-  "uuid": "f245bf88-efde-4486-bfc4-1fd48f878b31",
-  "version": 0
+  "uuid": "07c81888-cfbc-44f0-ad9b-7eb83a0903a0",
+  "version": 5
 }
