@@ -116,9 +116,9 @@ This model segments nuclei in fluorescence microscopy images. It predicts bounda
 >    If you are importing the image from the shared data library:
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets appropriately (e.g. `"BioImage.IO model"`, `"Test image"`)
+> 3. Rename the datasets appropriately if needed (e.g. `"BioImage.IO model"`, `"Test image"`)
 >
-> 4. Confirm the datatypes are correct (`zip` for the model, `tiff` or `png` for the image)
+> 4. Confirm the datatypes are correct (`pt` for the model, `tiff` or `png` for the image)
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
@@ -140,8 +140,8 @@ This model segments nuclei in fluorescence microscopy images. It predicts bounda
 > <hands-on-title> Run BioImage.IO model </hands-on-title>
 >
 > 1. {% tool [Process image using a BioImage.IO model](toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"BioImage.IO model"*: `input_imaging_model.zip`
->    - {% icon param-file %} *"Input image"*: `input_image_file.tif`
+>    - {% icon param-file %} *"BioImage.IO model"*: `nucleisegmentationboundarymodel.pt`
+>    - {% icon param-file %} *"Input image"*: `input_nucleisegboundarymodel.png`
 >    - {% icon param-text %} *"Size of the input image"*: `256,256,1,1`
 >    - {% icon param-select %} *"Axes of the input image"*: `bcyx`
 >
