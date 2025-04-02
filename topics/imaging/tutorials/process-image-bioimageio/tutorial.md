@@ -157,7 +157,7 @@ The model will process the input image and generate two outputs:
 - A predicted image (`.tif`)
 - A predicted tensor matrix (`.npy`)
 
-Below is an example output from the NucleiSegmentationBoundaryModel.
+Below is an example output from the **🧬 NucleiSegmentationBoundaryModel:**
 
 ![Example output from nuclei segmentation model](../../images/process-image-bioimageio/output-nucleus-seg-model.png "Predicted output – Nucleus Segmentation")
 
