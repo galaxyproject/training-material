@@ -31,7 +31,7 @@ contributions:
 
 Deep learning models are increasingly used in bioimage analysis to perform processing steps such as segmentation, classification, and restoration tasks (e.g., {% cite Moen2019 %}). The [BioImage.IO](https://bioimage.io/#/) platform ({% cite Wei2021 %}) provides a standardized way to share and discover pre-trained models, making them accessible across tools and platforms.
 
-Each model in BioImage.IO is tailored for a specific biological task — for example, segmenting nuclei, detecting mitochondria, or identifying neuronal structures — and trained on specific imaging modalities such as electron or fluorescence microscopy {% cite vonChamier2021 GomezdeMariscal2021 %}.
+Each model in BioImage.IO is tailored for a specific biological task — for example, segmenting nuclei, detecting mitochondria, or identifying neuronal structures — and trained on specific imaging modalities such as electron or fluorescence microscopy (e.g., {% cite vonChamier2021 %}, {% cite GomezdeMariscal2021 %}).
 
 This tutorial will guide you through the process of applying one of these BioImage.IO models to an input image using Galaxy {% cite Afgan2018 %}. You will learn how to upload and configure the model, set the correct input parameters, and interpret the output files.
 
