@@ -115,6 +115,7 @@ This model segments nuclei in fluorescence microscopy images. It predicts <em>bo
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    If you are importing the image from the shared data library:
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets appropriately if needed (e.g. `"BioImage.IO model"`, `"Test image"`)
