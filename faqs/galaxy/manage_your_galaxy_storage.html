@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>FAQ: How do I manage my Galaxy storage?</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@1fc8b27b57c4e6d48d845e1fe6b4afe89265d3b7",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/faqs/galaxy/manage_your_galaxy_storage.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+	<link rel="alternate" type="application/json+oembed" href="https://oembed.apps.galaxyproject.eu/oembed?format=json&url=https://training.galaxyproject.org/training-material/faqs/galaxy/manage_your_galaxy_storage.html" title="oEmbed Profile" />
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="How do I manage my Galaxy storage?">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-04-02 20:41:34 +0000">
+<meta name="DC.creator" content="Armin Dadras"><meta name="description" content="Now, it is possible to bring your own Storage to Galaxy for computation, storage, and archiving of your results. You can add more storage options to your account by following these steps:  - Click on your Username on top right part of the website and then click on `Preferences`. - From the middle panel, click on the `Manage Your Galaxy Storage` (previously called `Storage location`). - Click on the `+ Create` button on top of the page. Here, you get multiple options to connect various storage options to your account.  For all of the possible storage options, you should fill the following fields:  - In the `Name` section, give a name to your storage. This name will be used to choose the storage on Galaxy when you want to select a Storage using `User preferences > Preferred Galaxy Storage`. - Optionally, you can provide a `Description` for this Storage. This is a note for yourself.   {% include _includes/cyoa-choices.html option1= Onedata Storage  option2= Amazon Web Services S3 Stora...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="FAQ: How do I manage my Galaxy storage?">
+        <meta property="og:description" content="Now, it is possible to bring your own Storage to Galaxy for computation, storage, and archiving of your results. You can add more storage options to your account by following these steps:  - Click on your Username on top right part of the website and then click on `Preferences`. - From the middle panel, click on the `Manage Your Galaxy Storage` (previously called `Storage location`). - Click on the `+ Create` button on top of the page. Here, you get multiple options to connect various storage options to your account.  For all of the possible storage options, you should fill the following fields:  - In the `Name` section, give a name to your storage. This name will be used to choose the storage on Galaxy when you want to select a Storage using `User preferences > Preferred Galaxy Storage`. - Optionally, you can provide a `Description` for this Storage. This is a note for yourself.   {% include _includes/cyoa-choices.html option1= Onedata Storage  option2= Amazon Web Services S3 Stora...">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/faqs/galaxy/manage_your_galaxy_storage.png">
+	</head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/faqs/galaxy/manage_your_galaxy_storage.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/faqs/galaxy/manage_your_galaxy_storage.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <div itemscope itemtype="https://schema.org/FAQPage">
+
+<section class="tutorial" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/training-material/faqs">All FAQs</a></li>
+
+      
+
+      <li class="breadcrumb-item"><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+
+      
+      
+
+      <li class="breadcrumb-item active" aria-current="page">FAQ</li>
+
+    </ol>
+  </nav>
+  <h1 itemprop="name">How do I manage my Galaxy storage?</h1>
+
+    
+    <div class="contributors-line" style="font-size:1rem;">Authors: <a href="/training-material/hall-of-fame/dadrasarmin/" class="contributor-badge contributor-dadrasarmin"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/dadrasarmin?s=36" alt="Armin Dadras avatar" width="36" class="avatar" />
+    Armin Dadras</a><a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a></div>
+    <hr>
+    
+
+    <div class="container">
+      <div class="row" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <div class="col-md-8" itemprop="text">
+           
+
+
+           
+
+<p>Now, it is possible to bring your own Storage to Galaxy for computation, storage, and archiving of your results. You can add more storage options to your account by following these steps:</p>
+
+<ul>
+  <li>Click on your Username on top right part of the website and then click on <code class="language-plaintext highlighter-rouge">Preferences</code>.</li>
+  <li>From the middle panel, click on the <code class="language-plaintext highlighter-rouge">Manage Your Galaxy Storage</code> (previously called <code class="language-plaintext highlighter-rouge">Storage location</code>).</li>
+  <li>Click on the <code class="language-plaintext highlighter-rouge">+ Create</code> button on top of the page. Here, you get multiple options to connect various storage options to your account.</li>
+</ul>
+
+<p>For all of the possible storage options, you should fill the following fields:</p>
+
+<ul>
+  <li>In the <code class="language-plaintext highlighter-rouge">Name</code> section, give a name to your storage. This name will be used to choose the storage on Galaxy when you want to select a Storage using <code class="language-plaintext highlighter-rouge">User preferences &gt; Preferred Galaxy Storage</code>.</li>
+  <li>Optionally, you can provide a <code class="language-plaintext highlighter-rouge">Description</code> for this Storage. This is a note for yourself.</li>
+</ul>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoaBYOS">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	
+	<p>This is a "Choose Your Own Tutorial" (CYOT) section (also known as "Choose Your Own Analysis" (CYOA)), where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	
+	<p>
+		<p>Select the Storage you like to add to your Galaxy account.</p>
+
+	</p>
+	
+	
+		<input id="cyoa-opt1BYOS" type="radio" name="cyoaBYOS" value="Onedata-Storage" onclick="cyoaChoice('Onedata-Storage', 'gtn-cyoaBYOS')" />
+		<label for="cyoa-opt1BYOS" class="select btn btn-secondary">Onedata Storage</label>
+	
+	
+		<input id="cyoa-opt2BYOS" type="radio" name="cyoaBYOS" value="Amazon-Web-Services-S3-Storage" onclick="cyoaChoice('Amazon-Web-Services-S3-Storage', 'gtn-cyoaBYOS')" />
+		<label for="cyoa-opt2BYOS" class="select btn btn-secondary">Amazon Web Services S3 Storage</label>
+	
+	
+		<input id="cyoa-opt3BYOS" type="radio" name="cyoaBYOS" value="Azure-Blob-Storage" onclick="cyoaChoice('Azure-Blob-Storage', 'gtn-cyoaBYOS')" />
+		<label for="cyoa-opt3BYOS" class="select btn btn-secondary">Azure Blob Storage</label>
+	
+	
+		<input id="cyoa-opt4BYOS" type="radio" name="cyoaBYOS" value="Google-Cloud-Storage" onclick="cyoaChoice('Google-Cloud-Storage', 'gtn-cyoaBYOS')" />
+		<label for="cyoa-opt4BYOS" class="select btn btn-secondary">Google Cloud Storage</label>
+	
+	
+		<input id="cyoa-opt5BYOS" type="radio" name="cyoaBYOS" value="Any-S3-Compatible-Storage" onclick="cyoaChoice('Any-S3-Compatible-Storage', 'gtn-cyoaBYOS')" />
+		<label for="cyoa-opt5BYOS" class="select btn btn-secondary">Any S3 Compatible Storage</label>
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Any-S3-Compatible-Storage", "gtn-cyoaBYOS");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Onedata-Storage">
+  <p>If you have an account in <a href="https://onedata.org/">Onedata</a>, you can use such an object store as a Storage for your Galaxy datasets; they will be stored in the Onedata space of your choice. The minimal supported Onezone version is 21.02.4. More information on Onedata can be found on <a href="https://onedata.org/#/home">Onedata’s website</a>.</p>
+
+  <p>There are extensive tutorials for setting up and utilizing of OneData on Galaxy Training Network (GTN). At the moment, we have the following tutorials for Onedata on GTN:</p>
+  <ol>
+    <li><a href="/training-material/topics/galaxy-interface/tutorials/onedata-getting-started/tutorial.html">Getting started with Onedata distributed storage</a></li>
+    <li><a href="/training-material/topics/galaxy-interface/tutorials/onedata-byos/tutorial.html">Onedata user-owned storage</a></li>
+    <li><a href="/training-material/topics/dev/tutorials/onedata-dev-instance/tutorial.html">Setting up a dev Onedata instance</a></li>
+    <li><a href="/training-material/topics/admin/tutorials/onedata-configuration/tutorial.html">Configuring the Onedata connectors (remotes, Object Store, BYOS, BYOD)</a></li>
+  </ol>
+
+  <p>In short, you can connect your Galaxy account to an Onedata Storage as follows:</p>
+
+  <ul>
+    <li>In the <code class="language-plaintext highlighter-rouge">Onezone domain</code> field, please fill in the address to your <code class="language-plaintext highlighter-rouge">Onezone</code> domain. It could be something like “datahub.egi.eu”.</li>
+    <li>In case you want to disable validation of SSL certificates, you can use <code class="language-plaintext highlighter-rouge">Disable tls certificate validation?</code> option. However, we strongly recommend you to not use this option unless you know what your are doing.</li>
+    <li>Provide name of a space that Galaxy data will be stored on Onedata using <code class="language-plaintext highlighter-rouge">Space Name</code>. If there is more than one space with the same name, you can explicitly specify which one to select by using the format <code class="language-plaintext highlighter-rouge">&lt;space_name&gt;@&lt;space_id&gt;</code> (for example <code class="language-plaintext highlighter-rouge">demo@7285220ecc636075ae5759aec7ad65d3cha8f9</code>).</li>
+    <li>If you want to provide a path to store Galaxy data, you can use the <code class="language-plaintext highlighter-rouge">Galaxy root directory</code> field. If this field is empty, the data will be stored in the space’s root directory.</li>
+    <li>You should provide an <code class="language-plaintext highlighter-rouge">Access Token</code> to Galaxy for the Onedata space. Your <a href="https://onedata.org/#/home/documentation/topic/stable/tokens">access token</a>, suitable for REST API access in a Oneprovider service. <strong>Must</strong> allow both read and write data access.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+</div>
+<div class="Amazon-Web-Services-S3-Storage">
+  <p>Amazon’s Simple Storage Service (S3) is Amazon’s primary cloud storage service. More information on S3 can be found in <a href="https://aws.amazon.com/s3/">Amazon’s documentation</a>. You have to create a <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html">bucket</a> to use in your AWS web console before using this feature.</p>
+  <ul>
+    <li>You have to provide an <code class="language-plaintext highlighter-rouge">Access Key ID</code> to be able to use AWS Storage on Galaxy. A security credential for interacting with AWS services can be created from your <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html">AWS web console</a>. Creating an “Access Key” creates a pair of keys used to identify and authenticate access to your AWS account - the first part of the pair is “Access Key ID” and should be entered here. The second part of your key is the secret part called the “Secret Access Key”. Place that in the secure part of this form below.</li>
+    <li>Provide the <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html">AWS S3 Bucket</a> to store your datasets in the <code class="language-plaintext highlighter-rouge">Bucket</code> field.</li>
+    <li>You should enter the second part of the key you created above, <code class="language-plaintext highlighter-rouge">Access Key ID</code>, in the <code class="language-plaintext highlighter-rouge">Secret Access Key</code> section. Read more on access keys on <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html">AWS documentation</a>.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+</div>
+<div class="Azure-Blob-Storage">
+  <p>To setup access to your <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction">Azure Blob Storage</a> within the Galaxy, follow the steps:</p>
+  <ul>
+    <li>Provide the name of your Azure Blob Storage account in the <code class="language-plaintext highlighter-rouge">Container Name</code> field. More information about container’s name could be found on <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#containers">the Microsoft documentation here</a>.</li>
+    <li>Fill the <code class="language-plaintext highlighter-rouge">Storage Account Name</code> based on your account. More information is available <a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview">on Microsoft website</a>.</li>
+    <li>Please provide the account access key to your Azur Blob Storage account, using <code class="language-plaintext highlighter-rouge">Account Key</code> field. This is the documentation on <a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal">Managing storage account access keys</a>.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+</div>
+<div class="Google-Cloud-Storage">
+  <p>For the setup you will need to generate <a href="https://cloud.google.com/storage/docs/authentication/hmackeys">HMAC Keys</a> - these can be linked to your user or a service account. Additionally, you will need to define a <a href="https://cloud.google.com/storage/docs/aws-simple-migration#defaultproj">default Google cloud project</a> to allow Galaxy to access your Google Cloud Storage via the interfaces described in this FAQs.</p>
+
+  <ul>
+    <li>To connect Galaxy to your Google Cloud Storage, you have to generate <a href="https://cloud.google.com/storage/docs/authentication/hmackeys">HMAC Keys</a>. You can use the information after generating the keys to fill the <code class="language-plaintext highlighter-rouge">Access ID</code> field.</li>
+    <li>Use the <code class="language-plaintext highlighter-rouge">Bucket</code> field to specify the name of <a href="https://cloud.google.com/storage/docs/buckets">bucket</a> you have created to store your Galaxy data. Documentation for how to create buckets can be found in<a href="https://cloud.google.com/storage/docs/creating-buckets"> this part of the Google Cloud Storage documentation</a>.</li>
+    <li>You will receive a <code class="language-plaintext highlighter-rouge">Secret Key</code> after you generated <a href="https://cloud.google.com/storage/docs/authentication/hmackeys">HMAC Keys</a>. Secret Key should be 40 characters long and look something like the example used the Google documentation - <code class="language-plaintext highlighter-rouge">bGoa+V7g/yqDXvKRqq+JTFn4uQZbPiQJo4pf9RzJ</code>.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+</div>
+<div class="Any-S3-Compatible-Storage">
+  <p>The APIs used to connect to Amazon’s S3 (Simple Storage Service) have become something of an unofficial standard for cloud storage across a variety of vendors and services. Many vendors offer storage APIs compatible with S3. Here, you can configure such service as a Galaxy storage as long as you are able to find the connection details and have the relevant credentials.</p>
+
+  <ul>
+    <li>Provide the <code class="language-plaintext highlighter-rouge">Access Key ID</code>. This is part of your access tokens or access keys that describe the user that is accessing the data. The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html">Amazon documentation</a> calls these an “access key ID”, the <a href="https://developers.cloudflare.com/r2/examples/aws/boto3/">CloudFlare documentation</a> describes these as “aws_access_key_id”. Internally to Galaxy, we often just call this the “access_key”.</li>
+    <li>Provide the <code class="language-plaintext highlighter-rouge">Bucket</code> name. The <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html">bucket</a> to store your datasets in. How to setup buckets for your storage will vary from service to service but all S3 compatible storage services should have the concept of a bucket to namespace a grouping of your data together with.</li>
+    <li>Using the <code class="language-plaintext highlighter-rouge">S3-Compatible API Endpoint</code>, you should provide the endpoint URL for your storage service. It is also called “endpoint URL” in some services and the format varies based on the providers. For example, <a href="https://developers.cloudflare.com/ruleset-engine/rulesets-api/endpoints/">CloudFlare endpoint URL</a> is something like <code class="language-plaintext highlighter-rouge">john.r2.cloudflarestorage.com</code> and <a href="https://min.io/docs/minio/linux/integrations/aws-cli-with-minio.html">MinIO</a> endpoint URL is similar to <code class="language-plaintext highlighter-rouge">https://play.min.io:9000</code>.</li>
+    <li><code class="language-plaintext highlighter-rouge">Secret Access Key</code> compliment your <code class="language-plaintext highlighter-rouge">Access Key ID</code> to connect to the S3 compatible storage. The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html">Amazon documentation</a> calls these an “secret access key” and the <a href="https://developers.cloudflare.com/r2/examples/aws/boto3/">CloudFlare documentation</a> describes these as “aws_secret_access_key”. Internally to Galaxy, we often just call this the “secret_key”.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+</div>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-what-can-you-do-after-you-connected-a-storage"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-can-you-do-after-you-connected-a-storage" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: What can you do after you connected a Storage</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>You can pick the connected Storage for your analysis as follows:</p>
+  <ol>
+    <li>Click on your username. Click on <code class="language-plaintext highlighter-rouge">Preferences</code>.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Preferred Galaxy Storage</code>. Here, you can pick the Storage of your choice. The default option is Galaxy Storage.</li>
+  </ol>
+
+  <p>Instead of using a default storage location for your account, it is also possible to select it at different levels: per <strong>History</strong>, per <strong>Tool</strong>, and <strong>Workflow</strong>.</p>
+
+  <p>To set a Storage for a specific <strong>History</strong>, you should click on the Galaxy History Storage choice (<i class="fas fa-hard-drive" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-storage-choice</span>) icon on the right panel. Then, select the added external storage as the preferred storage location for the <strong>History</strong>. If you execute a <strong>Workflow</strong> in this history, the all results of the workflow will be stored in the external storage (that you selected).
+To verify it, you can click on the Dataset details icon (<i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span>) of a job on the right panel and you can see that the user’s external storage is used as the “Dataset Storage”.</p>
+
+  <p>Of course, if instead of a <strong>workflow</strong>, you can run just one <strong>tool</strong> using your connected Storage. To do this, you have to set the Galaxy History Storage choice (<i class="fas fa-hard-drive" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-storage-choice</span>) as described above. Then, you can run one (or more) <strong>tool</strong> in this history and the results will be available on your Storage.</p>
+</blockquote>
+
+        </div>
+        <div class="col-md-4">
+	  
+
+          <h5>Still have questions?</h5>
+
+          <!--
+add a button, include configuration options:
+
+ link: "https://example.com"
+ label: this text goes on button
+ size: small/medium/large/extralarge
+ colour:  blue/purple/green/red/yellow/lightblue/white/black
+ square: false , if you want a regular rectangular button
+-->
+
+
+
+
+<a href="https://gitter.im/Galaxy-Training-Network/Lobby" class="btn btn-square-medium btn-yellow"><div>Gitter Chat Support</div></a>
+
+
+          <!--
+add a button, include configuration options:
+
+ link: "https://example.com"
+ label: this text goes on button
+ size: small/medium/large/extralarge
+ colour:  blue/purple/green/red/yellow/lightblue/white/black
+ square: false , if you want a regular rectangular button
+-->
+
+
+
+
+<a href="https://help.galaxyproject.org" class="btn btn-square-medium btn-purple"><div>Galaxy Help Forum</div></a>
+
+
+
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#gtnInfoModal">
+		  Information for GTN Tutorial Authors
+		</button>
+
+        </div>
+      </div>
+    </div>
+
+    
+
+</section>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal" id="gtnInfoModal" tabindex="-1" role="dialog" aria-labelledby="gtnInfoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="gtnInfoModalLabel">Details For GTN Tutorial Authors</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+	   <h5>Want to embed this snippet (FAQ) in your GTN Tutorial?</h5>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% snippet  faqs/galaxy/manage_your_galaxy_storage.md %}
+</code></pre></div></div>
+
+	  
+
+	  
+
+
+
+<h5>See other uses</h5>
+<a href="https://github.com/search?q=repo%3Agalaxyproject%2Ftraining-material+faqs/galaxy/manage_your_galaxy_storage.md&type=code">Search on GitHub (must be logged in)</a>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/faqs/galaxy/manage_your_galaxy_storage.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/faqs/galaxy/manage_your_galaxy_storage.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1fc8b27b57c4e6d48d845e1fe6b4afe89265d3b7">1fc8b27</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>

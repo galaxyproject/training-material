@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>FAQ: How do I manage my repositories on Galaxy?</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@1fc8b27b57c4e6d48d845e1fe6b4afe89265d3b7",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/faqs/galaxy/manage_your_repositories.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+	<link rel="alternate" type="application/json+oembed" href="https://oembed.apps.galaxyproject.eu/oembed?format=json&url=https://training.galaxyproject.org/training-material/faqs/galaxy/manage_your_repositories.html" title="oEmbed Profile" />
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="How do I manage my repositories on Galaxy?">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-04-02 20:41:34 +0000">
+<meta name="DC.creator" content="Armin Dadras"><meta name="description" content="Here, we are going to briefly explain how you can Bring-Your-Own-Data to Galaxy or export your dataset, results, or history to 3rd party repositories. In order to add a new repository to your account follow these steps:  - Click on your Username on top right part of the website and then click on `Preferences`. - From the middle panel, click on the `Manage Your Repositories` (previously called `Manage your remote file sources`). - Click on the `+ Create` button on top of the page. Here, you get multiple options to connect various repositories to your account.  For all of the possible repositories, you should fill the following fields:  - In the `Name` section, give a name to your repository. This name will be used to choose the repository on Galaxy for importing or exporting datasets. - Optionally, you can provide a `Description` for this repository. This is a note for yourself.  {% include _includes/cyoa-choices.html option1= Onedata  option2= Amazon Web Services Private Bucket  opt...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="FAQ: How do I manage my repositories on Galaxy?">
+        <meta property="og:description" content="Here, we are going to briefly explain how you can Bring-Your-Own-Data to Galaxy or export your dataset, results, or history to 3rd party repositories. In order to add a new repository to your account follow these steps:  - Click on your Username on top right part of the website and then click on `Preferences`. - From the middle panel, click on the `Manage Your Repositories` (previously called `Manage your remote file sources`). - Click on the `+ Create` button on top of the page. Here, you get multiple options to connect various repositories to your account.  For all of the possible repositories, you should fill the following fields:  - In the `Name` section, give a name to your repository. This name will be used to choose the repository on Galaxy for importing or exporting datasets. - Optionally, you can provide a `Description` for this repository. This is a note for yourself.  {% include _includes/cyoa-choices.html option1= Onedata  option2= Amazon Web Services Private Bucket  opt...">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/faqs/galaxy/manage_your_repositories.png">
+	</head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/faqs/galaxy/manage_your_repositories.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/faqs/galaxy/manage_your_repositories.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <div itemscope itemtype="https://schema.org/FAQPage">
+
+<section class="tutorial" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/training-material/faqs">All FAQs</a></li>
+
+      
+
+      <li class="breadcrumb-item"><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+
+      
+      
+
+      <li class="breadcrumb-item active" aria-current="page">FAQ</li>
+
+    </ol>
+  </nav>
+  <h1 itemprop="name">How do I manage my repositories on Galaxy?</h1>
+
+    
+    <div class="contributors-line" style="font-size:1rem;">Authors: <a href="/training-material/hall-of-fame/dadrasarmin/" class="contributor-badge contributor-dadrasarmin"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/dadrasarmin?s=36" alt="Armin Dadras avatar" width="36" class="avatar" />
+    Armin Dadras</a><a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a></div>
+    <hr>
+    
+
+    <div class="container">
+      <div class="row" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <div class="col-md-8" itemprop="text">
+           
+
+
+           
+
+<p>Here, we are going to briefly explain how you can Bring-Your-Own-Data to Galaxy or export your dataset, results, or history to 3rd party repositories. In order to add a new repository to your account follow these steps:</p>
+
+<ul>
+  <li>Click on your Username on top right part of the website and then click on <code class="language-plaintext highlighter-rouge">Preferences</code>.</li>
+  <li>From the middle panel, click on the <code class="language-plaintext highlighter-rouge">Manage Your Repositories</code> (previously called <code class="language-plaintext highlighter-rouge">Manage your remote file sources</code>).</li>
+  <li>Click on the <code class="language-plaintext highlighter-rouge">+ Create</code> button on top of the page. Here, you get multiple options to connect various repositories to your account.</li>
+</ul>
+
+<p>For all of the possible repositories, you should fill the following fields:</p>
+
+<ul>
+  <li>In the <code class="language-plaintext highlighter-rouge">Name</code> section, give a name to your repository. This name will be used to choose the repository on Galaxy for importing or exporting datasets.</li>
+  <li>Optionally, you can provide a <code class="language-plaintext highlighter-rouge">Description</code> for this repository. This is a note for yourself.</li>
+</ul>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoaBYOD">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	
+	<p>This is a "Choose Your Own Tutorial" (CYOT) section (also known as "Choose Your Own Analysis" (CYOA)), where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	
+	<p>
+		<p>Select the repository you like to add to your Galaxy account.</p>
+
+	</p>
+	
+	
+		<input id="cyoa-opt1BYOD" type="radio" name="cyoaBYOD" value="Onedata" onclick="cyoaChoice('Onedata', 'gtn-cyoaBYOD')" />
+		<label for="cyoa-opt1BYOD" class="select btn btn-secondary">Onedata</label>
+	
+	
+		<input id="cyoa-opt2BYOD" type="radio" name="cyoaBYOD" value="Amazon-Web-Services-Private-Bucket" onclick="cyoaChoice('Amazon-Web-Services-Private-Bucket', 'gtn-cyoaBYOD')" />
+		<label for="cyoa-opt2BYOD" class="select btn btn-secondary">Amazon Web Services Private Bucket</label>
+	
+	
+		<input id="cyoa-opt3BYOD" type="radio" name="cyoaBYOD" value="Amazon-Web-Services-Public-Bucket" onclick="cyoaChoice('Amazon-Web-Services-Public-Bucket', 'gtn-cyoaBYOD')" />
+		<label for="cyoa-opt3BYOD" class="select btn btn-secondary">Amazon Web Services Public Bucket</label>
+	
+	
+		<input id="cyoa-opt4BYOD" type="radio" name="cyoaBYOD" value="Azure-Blob" onclick="cyoaChoice('Azure-Blob', 'gtn-cyoaBYOD')" />
+		<label for="cyoa-opt4BYOD" class="select btn btn-secondary">Azure Blob</label>
+	
+	
+		<input id="cyoa-opt5BYOD" type="radio" name="cyoaBYOD" value="Dropbox" onclick="cyoaChoice('Dropbox', 'gtn-cyoaBYOD')" />
+		<label for="cyoa-opt5BYOD" class="select btn btn-secondary">Dropbox</label>
+	
+	
+		<input id="cyoa-opt6BYOD" type="radio" name="cyoaBYOD" value="eLabFTW" onclick="cyoaChoice('eLabFTW', 'gtn-cyoaBYOD')" />
+		<label for="cyoa-opt6BYOD" class="select btn btn-secondary">eLabFTW</label>
+	
+	
+		<input id="cyoa-opt7BYOD" type="radio" name="cyoaBYOD" value="An-FTP-Server" onclick="cyoaChoice('An-FTP-Server', 'gtn-cyoaBYOD')" />
+		<label for="cyoa-opt7BYOD" class="select btn btn-secondary">An FTP Server</label>
+	
+	
+		<input id="cyoa-opt8BYOD" type="radio" name="cyoaBYOD" value="Export-to-Google-Drive" onclick="cyoaChoice('Export-to-Google-Drive', 'gtn-cyoaBYOD')" />
+		<label for="cyoa-opt8BYOD" class="select btn btn-secondary">Export to Google Drive</label>
+	
+	
+		<input id="cyoa-opt9BYOD" type="radio" name="cyoaBYOD" value="InvenioRDM" onclick="cyoaChoice('InvenioRDM', 'gtn-cyoaBYOD')" />
+		<label for="cyoa-opt9BYOD" class="select btn btn-secondary">InvenioRDM</label>
+	
+	
+		<input id="cyoa-opt10BYOD" type="radio" name="cyoaBYOD" value="S3-Compatible-Storage-with-Credentials" onclick="cyoaChoice('S3-Compatible-Storage-with-Credentials', 'gtn-cyoaBYOD')" />
+		<label for="cyoa-opt10BYOD" class="select btn btn-secondary">S3 Compatible Storage with Credentials</label>
+	
+	
+		<input id="cyoa-opt11BYOD" type="radio" name="cyoaBYOD" value="WebDAV" onclick="cyoaChoice('WebDAV', 'gtn-cyoaBYOD')" />
+		<label for="cyoa-opt11BYOD" class="select btn btn-secondary">WebDAV</label>
+	
+	
+		<input id="cyoa-opt12BYOD" type="radio" name="cyoaBYOD" value="Zenodo" onclick="cyoaChoice('Zenodo', 'gtn-cyoaBYOD')" />
+		<label for="cyoa-opt12BYOD" class="select btn btn-secondary">Zenodo</label>
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Onedata", "gtn-cyoaBYOD");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Onedata">
+  <p>If you have an <a href="https://onedata.org/">Onedata</a> account, you can use this repository to import and/or export your data directly from and to Onedata. The minimal supported Onezone version is 21.02.4. More information on Onedata can be found on <a href="https://onedata.org/#/home">Onedata’s website</a>.</p>
+
+  <p>There are extensive tutorials for setting up and utilizing of OneData on Galaxy Training Network (GTN). At the moment, we have the following tutorials for Onedata on GTN:</p>
+  <ol>
+    <li><a href="/training-material/topics/galaxy-interface/tutorials/onedata-getting-started/tutorial.html">Getting started with Onedata distributed storage</a></li>
+    <li><a href="/training-material/topics/galaxy-interface/tutorials/onedata-remote-import/tutorial.html">Importing (uploading) data from Onedata</a></li>
+    <li><a href="/training-material/topics/galaxy-interface/tutorials/onedata-remote-export/tutorial.html">Exporting to Onedata remote</a></li>
+    <li><a href="/training-material/topics/dev/tutorials/onedata-dev-instance/tutorial.html">Setting up a dev Onedata instance</a></li>
+    <li><a href="/training-material/topics/admin/tutorials/onedata-configuration/tutorial.html">Configuring the Onedata connectors (remotes, Object Store, BYOS, BYOD)</a></li>
+  </ol>
+
+  <p>In short, you can connect your Galaxy account to an Onedata repository as follows:</p>
+
+  <ul>
+    <li>In the <code class="language-plaintext highlighter-rouge">Onezone domain</code> field, please fill in the address to your <code class="language-plaintext highlighter-rouge">Onezone</code> domain. It could be something like “datahub.egi.eu”.</li>
+    <li>Using the <code class="language-plaintext highlighter-rouge">Writable?</code> option you can decide whether to grant access to Galaxy to export (write) to your Onedata or not.</li>
+    <li>You should provide an <code class="language-plaintext highlighter-rouge">Access Token</code> to Galaxy so it can read (import) and write (export) data to your OneData. Read more on <a href="https://onedata.org/#/home/documentation/21.02/user-guide/tokens.html">access tokens here</a>. You can limit the access to read-only data access, unless you wish to export data to your repository (write permissions are needed then).</li>
+    <li>In case you want to disable validation of SSL certificates, you can use <code class="language-plaintext highlighter-rouge">Disable tls certificate validation?</code> option. However, we strongly recommend you to not use this option unless you know what your are doing.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+</div>
+<div class="Amazon-Web-Services-Private-Bucket">
+  <p>To connect an AWS private bucket to your Galaxy account, you need to submit the following information on the form:</p>
+  <ul>
+    <li>First, read the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html">Manage access keys for IAM (Identity and Access Management) users</a> documentation of AWS. Also, you should be familiar with Buckets (<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html">Buckets overview</a>).</li>
+    <li>Please fill in the <code class="language-plaintext highlighter-rouge">Access Key ID</code> (something like <code class="language-plaintext highlighter-rouge">AKIAIOSFODNN7EXAMPLE</code>) and <code class="language-plaintext highlighter-rouge">Secret Access Key</code> (similar to <code class="language-plaintext highlighter-rouge">wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY</code>) in the corresponding fields on the Galaxy interface.</li>
+    <li>Please enter the URL to your Bucket (for example, <code class="language-plaintext highlighter-rouge">https://amzn-s3-demo-bucket.s3.us-west-2.amazonaws.com</code>) in the <code class="language-plaintext highlighter-rouge">Bucket</code> section.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+</div>
+<div class="Amazon-Web-Services-Public-Bucket">
+  <p>To connect anonymously to an AWS public bucket using your Galaxy account, you need to enter the Bucket address in the <code class="language-plaintext highlighter-rouge">Bucket</code> section. For more information about AWS Bucket, please read <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html">AWS documentaion</a>. Click on <code class="language-plaintext highlighter-rouge">Create</code>.</p>
+</div>
+<div class="Azure-Blob">
+  <p>To setup access to your <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction">Azure Blob Storage</a> within the Galaxy, follow the steps:</p>
+  <ul>
+    <li>Provide the name of your Azure Blob Storage account in the <code class="language-plaintext highlighter-rouge">Container Name</code> field. More information about container’s name could be found on <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#containers">the Microsoft documentation here</a>.</li>
+    <li>Fill the <code class="language-plaintext highlighter-rouge">Storage Account Name</code> based on your account. More information is available <a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview">on the Microsoft website</a>.</li>
+    <li>Using the <code class="language-plaintext highlighter-rouge">Hierarchical?</code> option you can determine whether your storage is hierarchical or not. More information on Data Lake Storage namespaces can be found in the <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-namespace">Azure Blob Storage documentation</a>.</li>
+    <li>Please provide the account access key to your Azur Blob Storage account, using <code class="language-plaintext highlighter-rouge">Account Key</code> field. This is the documentation on <a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal">Managing storage account access keys</a>.</li>
+    <li>If you want to be able to export data to your Azure Blob Storage container, please set <code class="language-plaintext highlighter-rouge">Writable?</code> option to “Yes”.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+</div>
+<div class="Dropbox">
+  <ul>
+    <li>We recommend to first login to your Dropbox account.</li>
+    <li>On the Galaxy website, click on the <code class="language-plaintext highlighter-rouge">Create</code> button of the <code class="language-plaintext highlighter-rouge">Dropbox</code> section. You will be redirected to the Dropbox website for authentication.</li>
+    <li>You have to login there and grant access for the Galaxy.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+</div>
+<div class="eLabFTW">
+  <p><a href="https://www.elabftw.net/">eLabFTW</a> is a free and open source electronic lab notebook from <a href="https://www.deltablot.com/">Deltablot</a>. Each lab can either host their own installation or go for Deltablot’s hosted solution. Using Galaxy, you can connect to an eLabFTW instance of your choice.</p>
+  <ul>
+    <li>Provide a URL with the protocol (http or https) and the domain name in the <code class="language-plaintext highlighter-rouge">eLabFTW instance endpoint (e.g. https://demo.elabftw.net)</code> field.</li>
+    <li>If you want to let Galaxy to export data to your eLabFTW, please set the <code class="language-plaintext highlighter-rouge">Allow Galaxy to export data to eLabFTW?</code> to “Yes” to grant required access to Galaxy. <strong>Keep in mind that your API key must have matching permissions.</strong></li>
+    <li>You should provide an <code class="language-plaintext highlighter-rouge">API Key</code> to your eLabFTW as well. To do so, navigate to the Settings page on your eLabFTW server and go to the API Keys tab to generate a new key. Choose “Read/Write” permissions to enable both importing and exporting data. “Read Only” API keys still work for importing data to Galaxy, but they will cause Galaxy to error out when exporting data to eLabFTW. You will receive a string (similar to <code class="language-plaintext highlighter-rouge">2-50dd721027f56a2e119b3bdbf64f4b8518b3f82b97e7876d56dad74109c8be73d8919b88097d3c9eb8952</code>) and you should enter this in the <code class="language-plaintext highlighter-rouge">API Key</code> field of Galaxy interface.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+</div>
+<div class="An-FTP-Server">
+  <p>You can setup connections to FTP and FTPS servers to import and export files as follows:</p>
+  <ul>
+    <li>Provide the address to your FTP server using the <code class="language-plaintext highlighter-rouge">FTP Host</code> field.</li>
+    <li>If you want to login with a specific user, provide the username in the <code class="language-plaintext highlighter-rouge">FTP User</code> field. Leave this blank to connect to the server anonymously (if allowed by the server).</li>
+    <li>If you want to export data to this FTP, you should set the <code class="language-plaintext highlighter-rouge">Writable?</code> option to “Yes”.</li>
+    <li>Please specify the port that Galaxy should use to connect to your FTP server using the <code class="language-plaintext highlighter-rouge">FTP Port</code> field.</li>
+    <li>In the <code class="language-plaintext highlighter-rouge">FTP Password</code> field provide the password to connect to the FTP server. Leave this blank to connect to the server anonymously (if allowed by the server).</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+</div>
+<div class="Export-to-Google-Drive">
+  <ul>
+    <li>We recommend to login to your Google account first.</li>
+    <li>On the Galaxy website, click on <code class="language-plaintext highlighter-rouge">Select</code> button of <code class="language-plaintext highlighter-rouge">Export to Google Drive</code>. You will be redirected to the Google.</li>
+    <li>Pick the account that you want to connect to Galaxy for import and export. Grant the required permissions.</li>
+    <li>You will be back on the Galaxy portal and you can access your Google Drive for import and export (depending on your how you set up your accuont).</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+</div>
+<div class="InvenioRDM">
+  <p><a href="https://inveniosoftware.org/">InvenioRDM</a> is a research data management platform that allows you to store, share, and publish research data. You can connect to an InvenioRDM instance of your choice by following these steps:</p>
+  <ul>
+    <li>Please fill the address to your InvenioRDM in the following field: <code class="language-plaintext highlighter-rouge">InvenioRDM instance endpoint</code> (for example, https://inveniordm.web.cern.ch/). This should include the protocol (http or https).</li>
+    <li>Use the <code class="language-plaintext highlighter-rouge">Allow Galaxy to export data to InvenioRDM?</code> option to give permission to Galaxy to export data to your repository or not.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+</div>
+<div class="S3-Compatible-Storage-with-Credentials">
+  <ul>
+    <li>You should fill <code class="language-plaintext highlighter-rouge">Publication Name</code> with a name as the “creator” metadata of the records. This could be a person or an organization. You can later modify this. If left blank, an anonymous user will be used as the creator.</li>
+    <li>You should also enter your <code class="language-plaintext highlighter-rouge">Personal Access Token</code>. You can get this information in your InvenioRDM instance. Navigate to Account Settings. Then, go to Applications to generate a new token. This will allow Galaxy to display your draft records and upload files to them.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+</div>
+<div class="WebDAV">
+  <p>Using WebDAV you can connect various services that supports WebDAV protocol such as OwnCloud and NextCloud among others. The configuration of WebDAV is slightly variable from service to service but the general principles apply everywhere.</p>
+
+  <ul>
+    <li>Provide the server address to this repository in the <code class="language-plaintext highlighter-rouge">Server Domain</code> field.</li>
+    <li>In the <code class="language-plaintext highlighter-rouge">WebDAV server Path</code>, you have to provide the path on this server to WebDAV.</li>
+    <li>In the <code class="language-plaintext highlighter-rouge">Username</code> field, you should write the username you use to login to this server.</li>
+    <li>You can grant write access for this repository using the <code class="language-plaintext highlighter-rouge">Writable?</code> (set to <code class="language-plaintext highlighter-rouge">Yes</code>) and therefore make it possible to export datasets, or histories to your connected repository.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+
+  <blockquote>
+    <p>As an example, if I want to connect my nextCloud repository to my Galaxy account, I should login to my nextCloud server and find the information from <code class="language-plaintext highlighter-rouge">File settings</code> (bottom left of the page) under the WebDAV section to fill this template. It could be something like: <code class="language-plaintext highlighter-rouge">https://server_address.com/remote.php/dav/files/username_or_text</code>. Here, the <code class="language-plaintext highlighter-rouge">Server Domain</code> is <code class="language-plaintext highlighter-rouge">https://server_address.com</code> and <code class="language-plaintext highlighter-rouge">WebDAV server Path</code> is <code class="language-plaintext highlighter-rouge">remote.php/dav/files/username_or_text</code>.</p>
+  </blockquote>
+
+  <p>In some cases, you may need to activate some features on your ownCloud or nextCloud to allow this integration. For example, some nextCloud servers require the user to use “App Passwords”. This can be done using the <code class="language-plaintext highlighter-rouge">Settings &gt; Security &gt; Devices &amp; sessions &gt; Create new app password</code>.</p>
+</div>
+<div class="Zenodo">
+  <p><a href="https://zenodo.org/">Zenodo</a> is an open-access repository for research data, software, publications, and other digital artifacts. It is developed and maintained by <a href="https://home.cern/">CERN</a> and funded by the European Commission as part of the <a href="https://www.openaire.eu/">OpenAIRE</a> project. Zenodo provides a free platform for researchers to share and preserve their work, ensuring long-term access and reproducibility. Zenodo is widely used by researchers, institutions, and organizations to share scientific knowledge and comply with open-access mandates from funding agencies.</p>
+  <ul>
+    <li>Using the <code class="language-plaintext highlighter-rouge">Allow Galaxy to export data to Zenodo?</code>, you can decide whether you like to give write access to Galaxy or not. Set it to “Yes” if you want to export data from Galaxy to Zenodo, set it to “No” if you only need to import data from Zenodo to Galaxy.</li>
+    <li>Provide a name for the “creator” metadata of your records on Zenodo using the <code class="language-plaintext highlighter-rouge">Publication Name</code> field.  You can always change this value later by editing the records in Zenodo. If left blank, an anonymous user will be used as the creator.</li>
+    <li>You have to provide a <code class="language-plaintext highlighter-rouge">Personal Access Token</code> from your Zenodo account to Galaxy. To do so, you need to log into your account. Then, visit this site: https://zenodo.org/account/settings/applications/. Alternatively, you can click on your username on top right and then click on “Applications”. Here, you need to create a “Personal Access Token”. This will allow Galaxy to display your draft records and upload files to them. If you enabled the option to export data from Galaxy to Zenodo, make sure to enable the <strong>deposit:write</strong> scope when creating the token.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>
+  </ul>
+</div>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-what-can-you-do-after-you-connected-a-repository"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-can-you-do-after-you-connected-a-repository" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: What can you do after you connected a repository</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <h4 id="importing-data-to-your-galaxy-account">Importing data to your Galaxy account</h4>
+
+  <p>When you connect a repository to your Galaxy account, you can use it to import data to Galaxy. To do so, you can click on the <code class="language-plaintext highlighter-rouge">Upload</code> Icon on the left panel. In the poped up window, you can click on <code class="language-plaintext highlighter-rouge">Choose from repository</code> to select a repository that you have added to your account. Navigate to a file that you want to upload to your Galaxy account, check the box of the file, and click on <code class="language-plaintext highlighter-rouge">Select</code>. You can determine the format of the file, give it a name, and then click on <code class="language-plaintext highlighter-rouge">Start</code> to upload the file to your Galaxy account.</p>
+
+  <h4 id="exporting-histories-datasets-and-results-to-connected-repositories">Exporting histories, datasets, and results to connected repositories</h4>
+
+  <p>If you have given Galaxy the permission to write to your repository, you can export your histories, datasets and reulsts in the history to that repository.</p>
+
+  <h5 id="histories">Histories</h5>
+
+  <p>If you want to export a history, you should click on the History Options icon (<i class="fas fa-bars" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-options</span>) on the right panel. Then, you can click on <code class="language-plaintext highlighter-rouge">Export History to File</code>. Next, you can click on <code class="language-plaintext highlighter-rouge">to repository</code> on the middle panel. If you click on the <code class="language-plaintext highlighter-rouge">Click to select directory</code>, there will be a pop up window. Here, you can pick a repository that you have added to your account and when you are in that repository, click on <code class="language-plaintext highlighter-rouge">Select</code>. You can give a <code class="language-plaintext highlighter-rouge">Name</code> to your exported history, so you can find it easier in your connected repository. Finally, click on <code class="language-plaintext highlighter-rouge">Export</code> to write the history to your repository. Similarly, you can use <code class="language-plaintext highlighter-rouge">to RDM repository</code> or <code class="language-plaintext highlighter-rouge">to Zenodo</code> instead of the <code class="language-plaintext highlighter-rouge">to repository</code> option in the middle panel to export your history to connected RDM repositories or Zenodo.</p>
+
+  <p>To have more options on exporting your history, you can click on <code class="language-plaintext highlighter-rouge">Show advanced export options</code> on top of the middle panel. This provides further control over the format and datasets that will be included in your exported history.</p>
+
+  <h5 id="datasets">Datasets</h5>
+
+  <p>If you are interested to export a single dataset or results to a connected repository, you can use a tool called <span class="tool" data-tool="export_remote" title="Export datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Export datasets</strong></span>.</p>
+  <ol>
+    <li>Select the desired option from <code class="language-plaintext highlighter-rouge">What would you like to export?</code>.</li>
+    <li>Using the <code class="language-plaintext highlighter-rouge">Directory URI</code> option, you can <code class="language-plaintext highlighter-rouge">Select</code> a connected repository. You can also give it a directory name here.</li>
+    <li>We recommend to export the metadata with your datasets and results using the <code class="language-plaintext highlighter-rouge">Include metadata files in export?</code>.</li>
+  </ol>
+</blockquote>
+
+        </div>
+        <div class="col-md-4">
+	  
+
+          <h5>Still have questions?</h5>
+
+          <!--
+add a button, include configuration options:
+
+ link: "https://example.com"
+ label: this text goes on button
+ size: small/medium/large/extralarge
+ colour:  blue/purple/green/red/yellow/lightblue/white/black
+ square: false , if you want a regular rectangular button
+-->
+
+
+
+
+<a href="https://gitter.im/Galaxy-Training-Network/Lobby" class="btn btn-square-medium btn-yellow"><div>Gitter Chat Support</div></a>
+
+
+          <!--
+add a button, include configuration options:
+
+ link: "https://example.com"
+ label: this text goes on button
+ size: small/medium/large/extralarge
+ colour:  blue/purple/green/red/yellow/lightblue/white/black
+ square: false , if you want a regular rectangular button
+-->
+
+
+
+
+<a href="https://help.galaxyproject.org" class="btn btn-square-medium btn-purple"><div>Galaxy Help Forum</div></a>
+
+
+
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#gtnInfoModal">
+		  Information for GTN Tutorial Authors
+		</button>
+
+        </div>
+      </div>
+    </div>
+
+    
+
+</section>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal" id="gtnInfoModal" tabindex="-1" role="dialog" aria-labelledby="gtnInfoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="gtnInfoModalLabel">Details For GTN Tutorial Authors</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+	   <h5>Want to embed this snippet (FAQ) in your GTN Tutorial?</h5>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% snippet  faqs/galaxy/manage_your_repositories.md %}
+</code></pre></div></div>
+
+	  
+
+	  
+
+
+
+<h5>See other uses</h5>
+<a href="https://github.com/search?q=repo%3Agalaxyproject%2Ftraining-material+faqs/galaxy/manage_your_repositories.md&type=code">Search on GitHub (must be logged in)</a>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/faqs/galaxy/manage_your_repositories.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/faqs/galaxy/manage_your_repositories.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1fc8b27b57c4e6d48d845e1fe6b4afe89265d3b7">1fc8b27</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
