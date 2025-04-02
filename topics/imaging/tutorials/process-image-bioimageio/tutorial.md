@@ -72,7 +72,7 @@ This example illustrates the type of information that is both useful for underst
 <details>
 <summary><strong>🧬 NucleiSegmentationBoundaryModel</strong></summary>
 
-This model segments nuclei in fluorescence microscopy images. It predicts boundary maps and foreground probabilities for nucleus segmentation, primarily in images stained with DAPI. The outputs are designed to be post-processed with methods such as Multicut or Watershed to achieve instance-level segmentation.
+This model segments nuclei in fluorescence microscopy images. It predicts <em>boundary maps</em> and <em>foreground probabilities</em> for nucleus segmentation, primarily in images stained with DAPI. The outputs are designed to be post-processed with methods such as Multicut or Watershed to achieve instance-level segmentation (object-based segmentation).
 
 - **Imaging modality**: Fluorescence microscopy  
 - **Task**: Nucleus segmentation (boundary-aware)  
