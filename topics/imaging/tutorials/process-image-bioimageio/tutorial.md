@@ -11,7 +11,7 @@ objectives:
 - Learn how to run a BioImage.IO model using Galaxy
 - Understand how to format image inputs and model axes
 - Interpret and download the model output
-time_estimation: 30min
+time_estimation: 30Mm
 key_points:
 - BioImage.IO models can be run in Galaxy using a dedicated tool
 - Input image and model need to be compatible in size and axes
@@ -28,11 +28,11 @@ contributors:
 
 # Introduction
 
-Deep learning models are increasingly used in bioimage analysis to perform processing steps such as segmentation, classification, and restoration tasks. The [BioImage.IO](https://bioimage.io/#/) platform provides a standardized way to share and discover pre-trained models, making them accessible across tools and platforms.
+Deep learning models are increasingly used in bioimage analysis to perform processing steps such as segmentation, classification, and restoration tasks {% cite Moen2019 %}. The [BioImage.IO](https://bioimage.io/#/) platform {% cite Wei2021 %} provides a standardized way to share and discover pre-trained models, making them accessible across tools and platforms.
 
-Each model in BioImage.IO is tailored for a specific biological task — for example, segmenting nuclei, detecting mitochondria, or identifying neuronal structures — and trained on specific imaging modalities such as electron or fluorescence microscopy.
+Each model in BioImage.IO is tailored for a specific biological task — for example, segmenting nuclei, detecting mitochondria, or identifying neuronal structures — and trained on specific imaging modalities such as electron or fluorescence microscopy {% cite vonChamier2021 GomezdeMariscal2021 %}.
 
-This tutorial will guide you through the process of applying one of these BioImage.IO models to an input image using Galaxy. You will learn how to upload and configure the model, set the correct input parameters, and interpret the output files.
+This tutorial will guide you through the process of applying one of these BioImage.IO models to an input image using Galaxy {% cite Afgan2018 %}. You will learn how to upload and configure the model, set the correct input parameters, and interpret the output files.
 
 ⚠️ Currently, only the following 11 PyTorch-based BioImage.IO models are compatible with the Galaxy tool *“Process image using a BioImage.IO model with PyTorch”*:
 
