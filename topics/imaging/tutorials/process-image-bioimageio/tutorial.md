@@ -19,10 +19,11 @@ key_points:
 tags:
 - bioimaging
 - AI
-
-contributors:
-    authorship:
+contributions:
+  authorship:
     - dianichj
+  reviewing:                                                                                                                                                                   
+    - kostrykin
 ---
 
 
