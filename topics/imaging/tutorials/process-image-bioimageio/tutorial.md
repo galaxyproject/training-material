@@ -33,7 +33,7 @@ Deep learning models are increasingly used in bioimage analysis to perform proce
 
 Each model in BioImage.IO is tailored for a specific biological task — for example, segmenting nuclei, detecting mitochondria, or identifying neuronal structures — and trained on specific imaging modalities such as electron or fluorescence microscopy (e.g., {% cite vonChamier2021 %}, {% cite GomezdeMariscal2021 %}).
 
-This tutorial will guide you through the process of applying one of these BioImage.IO models to an input image using Galaxy {% cite Afgan2018 %}. You will learn how to upload and configure the model, set the correct input parameters, and interpret the output files.
+This tutorial will guide you through the process of applying one of these BioImage.IO models to an input image using Galaxy ({% cite Afgan2018 %}). You will learn how to upload and configure the model, set the correct input parameters, and interpret the output files.
 
 ⚠️ Currently, only the following 11 PyTorch-based BioImage.IO models are compatible with the Galaxy tool *“Process image using a BioImage.IO model with PyTorch”*:
 
