@@ -38,9 +38,19 @@ recordings:
   captioners:
   - anuprulez
   bot-timestamp: 1724930837
+- youtube_id: I61pO-5qHs8
+  length: 1H
+  galaxy_version: '24.1'
+  date: '2025-03-24'
+  speakers:
+  - anuprulez
+  captioners:
+  - anuprulez
+  bot-timestamp: 1742810058
 
 
 ---
+
 
 
 

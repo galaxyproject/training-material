@@ -55,9 +55,19 @@ recordings:
   captioners:
   - DinithiRajapaksha
   bot-timestamp: 1725707919
+- youtube_id: svLawGYeH2E
+  length: 37M
+  galaxy_version: 24.2.3.dev0
+  date: '2025-03-18'
+  speakers: 
+  - tflowers15
+  captioners: 
+  - tflowers15
+  bot-timestamp: 1742268940
 
 
 ---
+
 
 
 Sequencing produces a collection of sequences without genomic context. We do not know to which part of the genome the sequences correspond to. Mapping the reads of an experiment to a reference genome is a key step in modern genomic data analysis. With the mapping the reads are assigned to a specific location in the genome and insights like the expression level of genes can be gained.

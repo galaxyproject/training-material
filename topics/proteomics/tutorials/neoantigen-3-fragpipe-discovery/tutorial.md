@@ -232,49 +232,19 @@ In this workflow, we aim to consolidate the peptide output from FragPipe. In the
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output` (output of **Collapse Collection** {% icon tool %})
 >    - *"that"*: `NOT Matching`
->    - *"the pattern"*: `(HUMAN)|(contam_)|(con_)|(ENSP)`
+>    - *"the pattern"*: `(HUMAN)|(contam_)|(con_)`
 >    - *"Keep header line"*: `Yes`
 >
 >
 {: .hands_on}
 
-## Querying Tabular Results for Further Analysis
-
-The Query Tabular tool is used to query and filter tabular data using SQL-like commands. It allows users to extract specific data from a larger dataset based on defined criteria. This tool is essential for querying complex data and narrowing down results for further analysis. In this step, the Query Tabular tool is applied to the output of the Select tool (a previous step in the workflow). The input is a tabular dataset (out_file1), and a custom SQL query is provided to filter the dataset based on specific conditions. The query provided (SELECT c1 FROM fp WHERE (c16 IS NULL OR c16 = '') AND (c18 IS NULL OR c18 = '')) retrieves a subset of the data, selecting only the rows where columns c16 and c18 are empty or null.
-
-In this workflow, this step filters the tabular data to isolate the rows that meet the specified conditions. By using this query, unnecessary or irrelevant data is excluded from the dataset, and only the relevant results are retained for further analysis. This step ensures that the subsequent analysis is based on clean and focused data.
-
-> <hands-on-title> Query Tabular </hands-on-title>
+> <hands-on-title> Remove beginning of file </hands-on-title>
 >
-> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
->    - In *"Database Table"*:
->        - {% icon param-repeat %} *"Insert Database Table"*
->            - {% icon param-file %} *"Tabular Dataset for Table"*: `out_file1` (output of **Select** {% icon tool %})
->            - In *"Table Options"*:
->                - *"Specify Name for Table"*: `fp`
->    - *"SQL Query to generate tabular output"*:
-> ``` sql
-> SELECT c1 FROM fp WHERE (c16 IS NULL OR c16 = '') AND (c18 IS NULL OR c18 = '')
-> ```
->    - *"include query result column headers"*: `No`
->
+> 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
+>    - {% icon param-file %} *"from"*: `output` (output of **Select tool** {% icon tool %})
 >
 {: .hands_on}
 
-
-> <question-title></question-title>
->
-> 1. What is the purpose of using an SQL query in the Query Tabular tool in this workflow?
-> 2. How does the SQL query provided (SELECT c1 FROM fp WHERE (c16 IS NULL OR c16 = '') AND (c18 IS NULL OR c18 = '')) filter the dataset, and what does it aim to accomplish?
->
-> > <solution-title></solution-title>
-> >
-> > 1. The purpose of using an SQL query in the Query Tabular tool is to filter and retrieve specific rows from a tabular dataset based on defined conditions, allowing the user to focus on relevant data for further analysis.
-> > 2. The SQL query filters the dataset by selecting only the rows where columns c16 and c18 are either null or empty. It aims to exclude any rows where these columns contain data, ensuring that only relevant and clean data is retained for further processing.
-> >
-> {: .solution}
->
-{: .question}
 
 
 # Conclusion
