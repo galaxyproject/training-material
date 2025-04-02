@@ -133,7 +133,9 @@ This model segments nuclei in fluorescence microscopy images. It predicts <em>bo
 >    - Click **Import** to add it to your history
 >
 >    If you are importing the model from the shared data library:
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
 {: .hands_on}
 
 
