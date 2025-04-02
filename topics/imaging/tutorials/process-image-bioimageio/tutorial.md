@@ -173,7 +173,7 @@ Below is an example output from the **🧬 NucleiSegmentationBoundaryModel:**
 > > 1. Because deep learning models are trained on specific image shapes and dimensions; mismatches will cause errors or wrong results.
 > > 2. The model will fail to run or produce invalid output.
 > >
-{: .solution}
+> {: .solution}
 {: .question}
 
 
