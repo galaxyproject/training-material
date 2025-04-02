@@ -22,12 +22,9 @@ tags:
 contributions:
   authorship:
     - dianichj
-  reviewing:                                                                                                                                                                   
+  editing:
     - kostrykin
 ---
-
-
-# Introduction
 
 Deep learning models are increasingly used in bioimage analysis to perform processing steps such as segmentation, classification, and restoration tasks (e.g., {% cite Moen2019 %}). The [BioImage.IO](https://bioimage.io/#/) platform ({% cite Wei2021 %}) provides a standardized way to share and discover pre-trained models, making them accessible across tools and platforms.
 
@@ -35,42 +32,29 @@ Each model in BioImage.IO is tailored for a specific biological task — for exa
 
 This tutorial will guide you through the process of applying one of these BioImage.IO models to an input image using Galaxy ({% cite Afgan2018 %}). You will learn how to upload and configure the model, set the correct input parameters, and interpret the output files.
 
-⚠️ Currently, only the following 11 PyTorch-based BioImage.IO models are compatible with the Galaxy tool *“Process image using a BioImage.IO model with PyTorch”*:
-
-- PlatynereisEMnucleiSegmentationBoundaryModel.pt
-- PlatynereisEMcellsSegmentationBoundaryModel.pt
-- livecellsegmentationboundarymodel.pt
-- HyLFM-Net-stat.pt
-- 3DUNetArabidopsisApicalStemCells.pt
-- CovidIFCellSegmentationBoundaryModel.pt
-- nucleisegmentationboundarymodel.pt
-- HPANucleusSegmentation.pt
-- NeuronSegmentationInEM.pt
-- HPACellSegmentationModel.pt
-- MitochondriaEMSegmentationBoundaryModel.pt
+⚠️ As of the `tool version 2.4.1+galaxy1`, only the following 11 PyTorch-based BioImage.IO models are compatible with the Galaxy tool *“Process image using a BioImage.IO model with PyTorch”*:
 
 ## Available BioImage.IO models in Galaxy
 
 | Model name | Task | Imaging modality | Sample / species | Link |
 |------------|------|------------------|------------------|------|
-| PlatynereisEMnucleiSegmentationBoundaryModel | Nuclei segmentation | Electron microscopy | Platynereis | [View model](https://bioimage.io/#/?id=platynereisemnucleisegmentationboundarymodel) |
-| PlatynereisEMcellsSegmentationBoundaryModel | Cell segmentation | Electron microscopy | Platynereis | [View model](https://bioimage.io/#/?id=platynereisemcellssegmentationboundarymodel) |
-| livecellsegmentationboundarymodel | Live cell segmentation | Phase-contrast Microscopy | Various cell types | [View model](https://bioimage.io/#/?id=livecellsegmentationboundarymodel) |
-| HyLFM-Net-stat | Light field reconstruction | Light field and Fluorescence light microscopy | Zebrafish | [View model](https://bioimage.io/#/?id=hylfm-net-stat) |
-| 3DUNetArabidopsisApicalStemCells | Stem cell segmentation | Confocal / light sheet | Arabidopsis root | [View model](https://bioimage.io/#/?id=3dunetarabidopsisapicalstemcells) |
-| CovidIFCellSegmentationBoundaryModel | Cell segmentation | Fluorescence light microscopy | Infected human cells | [View model](https://bioimage.io/#/?id=covidifcellsegmentationboundarymodel) |
-| nucleisegmentationboundarymodel | Nucleus segmentation | Fluorescence light microscopy| Generic / various | [View model](https://bioimage.io/#/?id=nucleisegmentationboundarymodel) |
-| HPANucleusSegmentation | Nucleus segmentation | Immunofluorescence | Human Protein Atlas | [View model](https://bioimage.io/#/?id=hpanucleussegmentation) |
-| NeuronSegmentationInEM | Neuron segmentation | Electron microscopy | Brain tissue | [View model](https://bioimage.io/#/?id=neuronsegmentationinem) |
-| HPACellSegmentationModel | Cell segmentation | Immunofluorescence | Human Protein Atlas | [View model](https://bioimage.io/#/?id=hpacellsegmentationmodel) |
-| MitochondriaEMSegmentationBoundaryModel | Mitochondria segmentation | Electron microscopy | Human | [View model](https://bioimage.io/#/?id=mitochondriaemsegmentationboundarymodel) |
+| 🪴 PlatynereisEMnucleiSegmentationBoundaryModel | Nuclei segmentation | Electron microscopy | Platynereis | [View model](https://bioimage.io/#/?id=platynereisemnucleisegmentationboundarymodel) |
+| 🪴 PlatynereisEMcellsSegmentationBoundaryModel | Cell segmentation | Electron microscopy | Platynereis | [View model](https://bioimage.io/#/?id=platynereisemcellssegmentationboundarymodel) |
+| 🦠 LiveCellSegmentationBoundaryModel | Live cell segmentation | Phase-contrast Microscopy | Various cell types | [View model](https://bioimage.io/#/?id=livecellsegmentationboundarymodel) |
+| 🔬 HyLFM-Net-stat | Light field reconstruction | Light field and Fluorescence light microscopy | Zebrafish | [View model](https://bioimage.io/#/?id=hylfm-net-stat) |
+| 🪴 3DUNetArabidopsisApicalStemCells | Stem cell segmentation | Confocal / light sheet | Arabidopsis root | [View model](https://bioimage.io/#/?id=3dunetarabidopsisapicalstemcells) |
+| 🧬 CovidIFCellSegmentationBoundaryModel | Cell segmentation | Fluorescence light microscopy | Infected human cells | [View model](https://bioimage.io/#/?id=covidifcellsegmentationboundarymodel) |
+| 🧬 NucleiSegmentationBoundaryModel| Nucleus segmentation | Fluorescence light microscopy| Generic / various | [View model](https://bioimage.io/#/?id=nucleisegmentationboundarymodel) |
+| 🧬 HPANucleusSegmentation | Nucleus segmentation | Immunofluorescence | Human Protein Atlas | [View model](https://bioimage.io/#/?id=hpanucleussegmentation) |
+| 🧠 NeuronSegmentationInEM | Neuron segmentation | Electron microscopy | Brain tissue | [View model](https://bioimage.io/#/?id=neuronsegmentationinem) |
+| 🧫 HPACellSegmentationModel | Cell segmentation | Immunofluorescence | Human Protein Atlas | [View model](https://bioimage.io/#/?id=hpacellsegmentationmodel) |
+| 🧪 MitochondriaEMSegmentationBoundaryModel | Mitochondria segmentation | Electron microscopy | Human | [View model](https://bioimage.io/#/?id=mitochondriaemsegmentationboundarymodel) |
 
 ## Model-specific example
 
 This example illustrates the type of information that is both useful for understanding the model’s biological context and necessary for using the Galaxy tool — specifically, the input axes and input size parameters.
 
-<details>
-<summary><strong>🧬 NucleiSegmentationBoundaryModel</strong></summary>
+🧬 NucleiSegmentationBoundaryModel
 
 This model segments nuclei in fluorescence microscopy images. It predicts <em>boundary maps</em> and <em>foreground probabilities</em> for nucleus segmentation, primarily in images stained with DAPI. The outputs are designed to be post-processed with methods such as Multicut or Watershed to achieve instance-level segmentation (object-based segmentation).
 
@@ -81,7 +65,6 @@ This model segments nuclei in fluorescence microscopy images. It predicts <em>bo
 - **Model link**: [View on BioImage.IO](https://bioimage.io/#/r/ilastik/stardist_dsb_training_data)  
 - **Citation**: [10.5281/zenodo.5764893](https://doi.org/10.5281/zenodo.5764893)
 
-</details>
 
 > <tip-title> Where to find this information on BioImage.IO </tip-title>
 >
@@ -151,7 +134,16 @@ This model segments nuclei in fluorescence microscopy images. It predicts <em>bo
 >
 >    > <comment-title>Axes and size</comment-title>
 >    >
->    > You must enter the input size and axes that match the model. This information is provided in the model's RDF file on BioImage.IO.
+>    > The input **axes** define the order of image dimensions expected by the model:
+>    > - `b`: batch
+>    > - `c`: channel
+>    > - `y`: height
+>    > - `x`: width
+>    >
+>    > The **input size** must match that order.  
+>    > For example: `256,256,1,1` = 256 px height (`y`), 256 px width (`x`), 1 channel (`c`), and 1 image (`b`).
+>    >
+>    > This information is provided in the model’s RDF file on [BioImage.IO](https://bioimage.io).
 >    {: .comment}
 >
 {: .hands_on}
@@ -162,7 +154,7 @@ The model will process the input image and generate two outputs:
 
 Below is an example output from the **🧬 NucleiSegmentationBoundaryModel:**
 
-![Example output from nuclei segmentation model](../../images/process-image-bioimageio/output-nucleus-seg-model.png "Predicted output – Nucleus Segmentation")
+![Example tif output from nuclei segmentation model](../../images/process-image-bioimageio/output-nucleus-seg-model.png "Predicted output – Nucleus Segmentation")
 
 
 > <question-title> Check your understanding </question-title>
@@ -170,7 +162,7 @@ Below is an example output from the **🧬 NucleiSegmentationBoundaryModel:**
 > 1. Why do the image axes matter when using a model?
 > 2. What happens if the image size does not match the model input?
 >
-> > <solution-title>Solutions</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. Because deep learning models are trained on specific image shapes and dimensions; mismatches will cause errors or wrong results.
 > > 2. The model will fail to run or produce invalid output.
