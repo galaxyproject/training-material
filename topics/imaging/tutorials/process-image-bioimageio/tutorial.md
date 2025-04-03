@@ -34,21 +34,30 @@ This tutorial will guide you through the process of applying one of these BioIma
 
 ⚠️ As of the `tool version 2.4.1+galaxy1`, only the following 11 PyTorch-based BioImage.IO models are compatible with the Galaxy tool *“Process image using a BioImage.IO model with PyTorch”*:
 
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
 ## Available BioImage.IO models in Galaxy
 
 | Model name | Task | Imaging modality | Sample / species | Link |
 |------------|------|------------------|------------------|------|
-| 🪴 PlatynereisEMnucleiSegmentationBoundaryModel | Nuclei segmentation | Electron microscopy | Platynereis | [View model](https://bioimage.io/#/?id=platynereisemnucleisegmentationboundarymodel) |
-| 🪴 PlatynereisEMcellsSegmentationBoundaryModel | Cell segmentation | Electron microscopy | Platynereis | [View model](https://bioimage.io/#/?id=platynereisemcellssegmentationboundarymodel) |
-| 🦠 LiveCellSegmentationBoundaryModel | Live cell segmentation | Phase-contrast Microscopy | Various cell types | [View model](https://bioimage.io/#/?id=livecellsegmentationboundarymodel) |
-| 🔬 HyLFM-Net-stat | Light field reconstruction | Light field and Fluorescence light microscopy | Zebrafish | [View model](https://bioimage.io/#/?id=hylfm-net-stat) |
-| 🪴 3DUNetArabidopsisApicalStemCells | Stem cell segmentation | Confocal / light sheet | Arabidopsis root | [View model](https://bioimage.io/#/?id=3dunetarabidopsisapicalstemcells) |
-| 🧬 CovidIFCellSegmentationBoundaryModel | Cell segmentation | Fluorescence light microscopy | Infected human cells | [View model](https://bioimage.io/#/?id=covidifcellsegmentationboundarymodel) |
-| 🧬 NucleiSegmentationBoundaryModel| Nucleus segmentation | Fluorescence light microscopy| Generic / various | [View model](https://bioimage.io/#/?id=nucleisegmentationboundarymodel) |
-| 🧬 HPANucleusSegmentation | Nucleus segmentation | Immunofluorescence | Human Protein Atlas | [View model](https://bioimage.io/#/?id=hpanucleussegmentation) |
-| 🧠 NeuronSegmentationInEM | Neuron segmentation | Electron microscopy | Brain tissue | [View model](https://bioimage.io/#/?id=neuronsegmentationinem) |
-| 🧫 HPACellSegmentationModel | Cell segmentation | Immunofluorescence | Human Protein Atlas | [View model](https://bioimage.io/#/?id=hpacellsegmentationmodel) |
-| 🧪 MitochondriaEMSegmentationBoundaryModel | Mitochondria segmentation | Electron microscopy | Human | [View model](https://bioimage.io/#/?id=mitochondriaemsegmentationboundarymodel) |
+| 🪴 PlatynereisEMnucleiSegmentationBoundaryModel | Nuclei segmentation | Electron microscopy | Platynereis | [View model](https://bioimage.io/#/?id=10.5281%2Fzenodo.6028097) |
+| 🪴 PlatynereisEMcellsSegmentationBoundaryModel | Cell segmentation | Electron microscopy | Platynereis | [View model](https://bioimage.io/#/?id=10.5281%2Fzenodo.6028280) |
+| 🦠 LiveCellSegmentationBoundaryModel | Live cell segmentation | Phase-contrast Microscopy | Various cell types | [View model](https://bioimage.io/#/?id=10.5281%2Fzenodo.5869899) |
+| 🔬 HyLFM-Net-stat | Light field reconstruction | Light field and Fluorescence light microscopy | Zebrafish | [View model](https://bioimage.io/#/?tags=HyLFM-Net-stat&id=ambitious-sloth) |
+| 🪴 3DUNetArabidopsisApicalStemCells | Stem cell segmentation | Confocal / light sheet | Arabidopsis root | [View model](https://bioimage.io/#/?id=emotional-cricket) |
+| 🧬 CovidIFCellSegmentationBoundaryModel | Cell segmentation | Fluorescence light microscopy | Infected human cells | [View model](https://bioimage.io/#/?tags=Covid&id=10.5281%2Fzenodo.5847355) |
+| 🧬 NucleiSegmentationBoundaryModel| Nucleus segmentation | Fluorescence light microscopy| Generic / various | [View model](https://bioimage.io/#/?id=10.5281%2Fzenodo.5764892) |
+| 🧬 HPANucleusSegmentation | Nucleus segmentation | Immunofluorescence | Human Protein Atlas | [View model](https://bioimage.io/#/?tags=HPA&id=10.5281%2Fzenodo.6200999) |
+| 🧠 NeuronSegmentationInEM | Neuron segmentation | Electron microscopy | Brain tissue | [View model](https://bioimage.io/#/?id=10.5281%2Fzenodo.5817052) |
+| 🧫 HPACellSegmentationModel | Cell segmentation | Immunofluorescence | Human Protein Atlas | [View model](https://bioimage.io/#/?tags=hpa&id=10.5281%2Fzenodo.6200635) |
+| 🧪 MitochondriaEMSegmentationBoundaryModel | Mitochondria segmentation | Electron microscopy | Human | [View model](https://bioimage.io/#/?id=10.5281%2Fzenodo.5874841) |
 
 ## Model-specific example
 
@@ -73,16 +82,6 @@ This model segments nuclei in fluorescence microscopy images. It predicts <em>bo
 {: .tip}
 
 
-> <agenda-title></agenda-title>
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
-
-
 ## Get data
 
 > <hands-on-title> Data Upload </hands-on-title>
@@ -95,6 +94,7 @@ This model segments nuclei in fluorescence microscopy images. It predicts <em>bo
 >    - [`test_image_nuclei.tif`](../../images/process-image-bioimageio/input_nucleisegboundarymodel.png)
 >
 >    If you are importing the image via URL:
+>
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    If you are importing the image from the shared data library:
@@ -128,7 +128,7 @@ This model segments nuclei in fluorescence microscopy images. It predicts <em>bo
 >
 > 1. {% tool [Process image using a BioImage.IO model](toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"BioImage.IO model"*: `nucleisegmentationboundarymodel.pt`
->    - {% icon param-file %} *"Input image"*: `input_nucleisegboundarymodel.png`
+>    - {% icon param-file %} *"Input image"*: `test_image_nuclei.png`
 >    - {% icon param-text %} *"Size of the input image"*: `256,256,1,1`
 >    - {% icon param-select %} *"Axes of the input image"*: `bcyx`
 >
@@ -152,23 +152,36 @@ The model will process the input image and generate two outputs:
 - A predicted image (`.tif`)
 - A predicted tensor matrix (`.npy`)
 
-Below is an example output from the **🧬 NucleiSegmentationBoundaryModel:**
+Below is an example of the tiff output from the **🧬 NucleiSegmentationBoundaryModel:**
 
-![Example tif output from nuclei segmentation model](../../images/process-image-bioimageio/output-nucleus-seg-model.png "Predicted output – Nucleus Segmentation")
+![Example of tif output from nuclei segmentation model](../../images/process-image-bioimageio/output-nucleus-seg-model.png "Predicted output – Nucleus Segmentation")
 
 
 > <question-title> Check your understanding </question-title>
 >
 > 1. Why do the image axes matter when using a model?
 > 2. What happens if the image size does not match the model input?
+> 3. What are TIFF and NPY formats?
+> 4. How can you interpret the output of the model, and what does it tell you about your input image?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. Because deep learning models are trained on specific image shapes and dimensions; mismatches will cause errors or wrong results.
 > > 2. The model will fail to run or produce invalid output.
+> > 3. **TIFF (.tif)** is a standard format for storing image data, commonly used in microscopy and bioimaging. It can be easily viewed and interpreted visually.  
+> >    **NPY (.npy)** is a binary format used by NumPy to store arrays. In this case, it contains the raw prediction tensor produced by the model, which can be useful for further analysis or visualization with Python tools.
+> > 4. The model generates a **predicted image** that highlights or segments specific structures (e.g. nuclei, cells, mitochondria) based on what it learned during training. By comparing the output image to the input, users can see which regions were detected or classified, helping to extract biological meaning from the raw data.
 > >
-> {: .solution}
+>{: .solution}
 {: .question}
+
+> <tip-title> Visualising the output images</tip-title>
+>
+> Galaxy provides a basic preview using its `.tif` viewer tool. However, BioImage.IO models often produce **multi-dimensional TIFF stacks** (e.g. 3D volumes, multi-channel images), which are not fully rendered in Galaxy's preview.
+>
+> To properly explore the results, it is recommended to **download the TIFF file** and open it locally using image analysis tools such as **Fiji/ImageJ**, **napari**, or **QuPath**.
+>
+{: .tip}
 
 
 # Conclusion
