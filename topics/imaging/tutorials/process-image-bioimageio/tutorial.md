@@ -137,8 +137,8 @@ This model segments nuclei in fluorescence microscopy images. It predicts <em>bo
 >    > The input **axes** define the order of image dimensions expected by the model:
 >    > - `b`: batch
 >    > - `c`: channel
->    > - `y`: height
->    > - `x`: width
+>    > - `y`: vertical axis
+>    > - `x`: horizontal axis
 >    >
 >    > The **input size** must match that order.  
 >    > For example: `256,256,1,1` = 256 px height (`y`), 256 px width (`x`), 1 channel (`c`), and 1 image (`b`).
