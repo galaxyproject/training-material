@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@4ff387cc06bcc5574ae3a3b7e1fb13ec18d4c096",
+		release: "galaxy-training-network@48e413cda3d0f78e2ab92844bc603e40c088e323",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Collaboration with JupyterGIS">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-04-03 20:02:10 +0000">
+<meta name="DC.date" content="2025-04-04 13:51:09 +0000">
 <meta name="DC.creator" content="Elifsu Filiz">
 <meta name="DC.creator" content="Anne Fouilloux"><meta name="description" content="Learn to analyze climate data through Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -187,7 +187,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-04-03 20:02:10 +0000",
+  "dateModified": "2025-04-04 13:51:09 +0000",
   "datePublished": "2025-04-03 20:02:10 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -245,7 +245,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Collaboration with JupyterGIS",
   "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/jupytergis_collaboration/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT30M",
   "teaches": "- Launch a collaborative session in JupyterGIS.\n- Generate shareable links to invite collaborators.\n- Work together on GIS files and notebooks with live updates.\n- Use follow mode to monitor collaborator activities.\n- Add annotations and comments to provide context, ask questions, or share insights.",
   "keywords": [
@@ -719,7 +719,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 3, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 3, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 4, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -735,7 +735,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -754,10 +754,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 and other experts—to collaborate on spatial projects in a shared environment. This guide will provide the tools and steps needed to collaborate effectively,
 using features like real-time editing, cursor tracking, follow mode, and annotations.</p>
 
-<h3 id="motivation">Motivation</h3>
-<p>Collaboration is at the heart of effective GIS projects. Teams often include members with diverse backgrounds, skills, and areas of expertise. Without robust collaborative tools,
-it can become challenging to share insights, make real-time decisions, and maintain consistency across project workflows. JupyterGIS simplifies collaboration by providing
-real-time editing, annotations, and interactive features that allow teams to seamlessly integrate their work.</p>
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-motivation"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Motivation</div>
+  <p>Collaboration is at the heart of effective GIS projects. Teams often include members with diverse backgrounds, skills, and areas of expertise. 
+Without robust collaborative tools,
+it can become challenging to share insights, make real-time decisions, and maintain consistency across project workflows. JupyterGIS simplifies 
+collaboration by providing real-time editing, annotations, and interactive features that allow teams to seamlessly integrate their work.</p>
+
+</blockquote>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -768,10 +772,7 @@ real-time editing, annotations, and interactive features that allow teams to sea
   <li><a href="#launching-your-collaborative-session" id="markdown-toc-launching-your-collaborative-session">Launching Your Collaborative Session</a></li>
   <li><a href="#real-time-collaboration-on-a-gis-file" id="markdown-toc-real-time-collaboration-on-a-gis-file">Real-Time Collaboration on a GIS File</a></li>
   <li><a href="#tracking-collaborators-with-cursors" id="markdown-toc-tracking-collaborators-with-cursors">Tracking Collaborators with Cursors</a></li>
-  <li><a href="#using-follow-mode" id="markdown-toc-using-follow-mode">Using Follow Mode</a>    <ol>
-      <li><a href="#-hands_on" id="markdown-toc--hands_on">{: .hands_on}</a></li>
-    </ol>
-  </li>
+  <li><a href="#using-follow-mode" id="markdown-toc-using-follow-mode">Using Follow Mode</a></li>
   <li><a href="#adding-annotations-and-comments" id="markdown-toc-adding-annotations-and-comments">Adding Annotations and Comments</a></li>
   <li><a href="#collaborating-on-notebooks-optional" id="markdown-toc-collaborating-on-notebooks-optional">Collaborating on Notebooks (Optional)</a></li>
 </ol>
@@ -813,26 +814,26 @@ another user. This setup allows participants to better understand multi-user int
   </ol>
 </blockquote>
 
-<hr />
-
 <h1 id="real-time-collaboration-on-a-gis-file">Real-Time Collaboration on a GIS File</h1>
 
 <p>In this section, we will explore how to collaborate on a GIS file in real time. The remaining sections of the tutorial are required to be completed by both the lead and the collaborating users in the session.</p>
 
 <p>When you make changes to your GIS file such as adding a new layer, or updating the layer appearance, the changes are reflected for all collaborators in your session in real time.</p>
 
-<blockquote>
+<blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-adding-and-editing-layers"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Adding and Editing Layers</div>
 
   <ol>
     <li>As the lead user, open the layer browser and select <strong>OpenStreetMap.Mapnik</strong>. Notice that all users in the session can see the new layer in real time.</li>
-    <li>Ask one of the collaborators to add the Libraries in France shapefile layer using the add shapefile layer menu by clicking <strong>+</strong> → <strong>New Vector Layer</strong> → <strong>New Shapefile Layer</strong> → pasting the provided URL.
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/osm-france-library/exports/shp
-</code></pre></div>      </div>
-    </li>
+    <li>Ask one of the collaborators to add the Libraries in France shapefile layer using the add shapefile layer menu 
+by clicking <strong>+</strong> -&gt; <strong>New Vector Layer</strong> → <strong>New Shapefile Layer</strong> -&gt; pasting the provided URL.</li>
   </ol>
 
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/osm-france-library/exports/shp
+</code></pre></div>  </div>
+
 </blockquote>
+
 <figure>
 
 <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/3FbvYg3G9Gk" title="JupyterGIS tutorial show how to add layers" frameborder="0" loading="lazy"></iframe>
@@ -840,10 +841,6 @@ another user. This setup allows participants to better understand multi-user int
 <figcaption>
   <span class="figcaption-prefix"><strong>Video</strong>:</span> JupyterGIS tutorial show how to add layers</figcaption>
 </figure>
-
-<blockquote class="notranslate hands_on">
-
-</blockquote>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-adding-a-new-layer"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Adding a New Layer</div>
@@ -869,9 +866,8 @@ another user. This setup allows participants to better understand multi-user int
 </blockquote>
 
 <h1 id="tracking-collaborators-with-cursors">Tracking Collaborators with Cursors</h1>
-<p>Each user’s cursor appears on the document in the same color as their icon. This feature makes it easy to see what your teammates are focused on.</p>
 
-<p><a href="../../images/jupytergis_collaboration/cursor.png" rel="noopener noreferrer"><img src="../../images/jupytergis_collaboration/cursor.png" alt="Cursor. " width="800" height="394" loading="lazy" /></a></p>
+<p>Each user’s cursor appears on the document in the same color as their icon. This feature makes it easy to see what your teammates are focused on.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-tracking-collaborators-with-cursors"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Tracking Collaborators with Cursors</div>
@@ -880,14 +876,15 @@ another user. This setup allows participants to better understand multi-user int
     <li>Ask one of the collaborators to move their cursor around the document.</li>
     <li>Spot their cursor to find out where on the map they are working.</li>
   </ol>
-</blockquote>
 
-<hr />
+  <p><a href="../../images/jupytergis_collaboration/cursor.png" rel="noopener noreferrer"><img src="../../images/jupytergis_collaboration/cursor.png" alt="Cursor. " width="800" height="394" loading="lazy" /></a></p>
+
+</blockquote>
 
 <h1 id="using-follow-mode">Using Follow Mode</h1>
 <p>Follow mode allows you to track another user’s activity in the document in real time. When enabled, you’ll see their actions as they navigate and edit. This feature is ideal for live demonstrations, interactive sessions, and collaborative meetings, as it lets you quickly align your view with a teammate’s actions and provide immediate feedback.</p>
 
-<blockquote>
+<blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-activating-follow-mode"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Activating Follow Mode</div>
 
   <ol>
@@ -897,6 +894,7 @@ another user. This setup allows participants to better understand multi-user int
   </ol>
 
 </blockquote>
+
 <figure>
 
 <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/-WzV1rcPlEw" title="JupyterGIS Collaboration using the follow mode" frameborder="0" loading="lazy"></iframe>
@@ -904,8 +902,6 @@ another user. This setup allows participants to better understand multi-user int
 <figcaption>
   <span class="figcaption-prefix"><strong>Video</strong>:</span> JupyterGIS Collaboration using the follow mode</figcaption>
 </figure>
-
-<h2 id="-hands_on">{: .hands_on}</h2>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-using-follow-mode"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Using Follow Mode</div>
@@ -928,7 +924,7 @@ another user. This setup allows participants to better understand multi-user int
 <h1 id="adding-annotations-and-comments">Adding Annotations and Comments</h1>
 <p>Annotations and comments let you add notes directly on your GIS file, which makes it easier for your team to track important details, provide context, ask questions, or share insights.</p>
 
-<blockquote>
+<blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-adding-annotations-and-comments"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Adding Annotations and Comments</div>
 
   <ol>
@@ -939,6 +935,7 @@ another user. This setup allows participants to better understand multi-user int
   </ol>
 
 </blockquote>
+
 <figure>
 
 <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/QqscEokpWIA" title="JupyterGIS annotations" frameborder="0" loading="lazy"></iframe>
@@ -946,8 +943,6 @@ another user. This setup allows participants to better understand multi-user int
 <figcaption>
   <span class="figcaption-prefix"><strong>Video</strong>:</span> JupyterGIS annotations</figcaption>
 </figure>
-
-<hr class="hands_on" />
 
 <h1 id="collaborating-on-notebooks-optional">Collaborating on Notebooks (Optional)</h1>
 <p>Real-time collaboration in notebooks is a powerful tool for teams working on code together. It enables multiple users to write, edit, and run code simultaneously. This feature is ideal for live coding sessions, debugging, and data analysis projects.</p>
@@ -958,14 +953,14 @@ another user. This setup allows participants to better understand multi-user int
   <p>This section requires basic Python programming knowledge. If you are not familiar with Python, we recommend completing the <a href="/training-material/topics/data-science/tutorials/python-basics/tutorial.html">Introduction to Python</a> tutorial first.</p>
 </blockquote>
 
-<blockquote>
+<blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-real-time-code-collaboration"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Real-Time Code Collaboration</div>
 
   <ol>
     <li>Click on the <strong>+</strong> icon to open the Launcher, then select the Python kernel under <strong>Notebook</strong> to create a notebook. Once a notebook is created, it is automatically accessible to all collaborators—no additional sharing is needed.
- <a href="../../images/jupytergis_collaboration/create_notebook.png" rel="noopener noreferrer"><img src="../../images/jupytergis_collaboration/create_notebook.png" alt="Notebook. " width="800" height="420" loading="lazy" /></a></li>
+<a href="../../images/jupytergis_collaboration/create_notebook.png" rel="noopener noreferrer"><img src="../../images/jupytergis_collaboration/create_notebook.png" alt="Notebook. " width="800" height="420" loading="lazy" /></a></li>
     <li>Ask one of the collaborators to open the newly created notebook by clicking on the explorer button in the left sidebar, then locating and clicking on the notebook. Anyone in the session can open, edit, and run the notebooks.
- <a href="../../images/jupytergis_collaboration/open_notebook.png" rel="noopener noreferrer"><img src="../../images/jupytergis_collaboration/open_notebook.png" alt="Notebook. " width="800" height="421" loading="lazy" /></a></li>
+<a href="../../images/jupytergis_collaboration/open_notebook.png" rel="noopener noreferrer"><img src="../../images/jupytergis_collaboration/open_notebook.png" alt="Notebook. " width="800" height="421" loading="lazy" /></a></li>
     <li>As you write or execute code, every change is visible to your team instantly. Create a new code cell and write the following code. Notice that all collaborators can see the code in real time.
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">jupytergis</span> <span class="kn">import</span> <span class="n">GISDocument</span>
 <span class="n">doc</span> <span class="o">=</span> <span class="nc">GISDocument</span><span class="p">(</span><span class="sh">'</span><span class="s">untitled.jGIS</span><span class="sh">'</span><span class="p">)</span>
@@ -989,6 +984,7 @@ another user. This setup allows participants to better understand multi-user int
   </ol>
 
 </blockquote>
+
 <figure>
 
 <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/H5Pkg5zOSwA" title="JupyterGIS collaboration from the notebook" frameborder="0" loading="lazy"></iframe>
@@ -997,7 +993,7 @@ another user. This setup allows participants to better understand multi-user int
   <span class="figcaption-prefix"><strong>Video</strong>:</span> JupyterGIS collaboration from the notebook</figcaption>
 </figure>
 
-<blockquote class="hands_on question">
+<blockquote class="question">
   <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ul>
@@ -1031,13 +1027,13 @@ another user. This setup allows participants to better understand multi-user int
 
   </blockquote>
 </blockquote>
-<hr />
 
 <p>Congratulations! You have completed the Collaboration Features of JupyerGIS tutorial. You now have the knowledge and tools to collaborate effectively with your team on GIS files and notebooks.</p>
 
 <p>If you’d like to explore more of JupyterGIS’ functionality, please view our
 <a href="https://blog.jupyter.org/real-time-collaboration-and-collaborative-editing-for-gis-workflows-with-jupyter-and-qgis-d25dbe2832a6">JupyterGIS announcement blog post</a>
 for video demos of more features.</p>
+
 
                 </section>
 
@@ -1288,7 +1284,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/4ff387cc06bcc5574ae3a3b7e1fb13ec18d4c096">4ff387c</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/48e413cda3d0f78e2ab92844bc603e40c088e323">48e413c</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
