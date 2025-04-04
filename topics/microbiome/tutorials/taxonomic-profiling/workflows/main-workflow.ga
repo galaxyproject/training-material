@@ -1,16 +1,24 @@
 {
     "a_galaxy_workflow": "true",
-    "annotation": "Taxonomic Profiling and Visualization of Metagenomic Data",
+    "annotation": "This workflow performs taxonomic profiling of metagenomic data and visualizes microbial community composition using Kraken2 and Bracken as well as MetaPhlAn.",
+    "comments": [],
     "creator": [
         {
             "class": "Person",
             "identifier": "0000-0001-9852-1987",
             "name": "B\u00e9r\u00e9nice Batut"
+        },
+        {
+            "class": "Person",
+            "name": "Tarnima Omara"
         }
     ],
     "format-version": "0.1",
     "license": "MIT",
     "name": "Taxonomic Profiling and Visualization of Metagenomic Data",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
     "steps": {
         "0": {
             "annotation": "",
@@ -25,14 +33,14 @@
                 }
             ],
             "label": "raw-reads",
-            "name": "raw-reads",
+            "name": "Input dataset collection",
             "outputs": [],
             "position": {
                 "left": 0,
                 "top": 32
             },
             "tool_id": null,
-            "tool_state": "{\"name\": \"raw-reads\",\"optional\": false, \"tag\": null, \"collection_type\": \"list:paired\"}",
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list:paired\"}",
             "tool_version": null,
             "type": "data_collection_input",
             "uuid": "8ceaae85-1ed7-4488-b839-53d36e642378",
@@ -52,14 +60,14 @@
                 }
             ],
             "label": "metadata",
-            "name": "metadata",
+            "name": "Input dataset",
             "outputs": [],
             "position": {
                 "left": 35.48228574271107,
                 "top": 575.2289046420843
             },
             "tool_id": null,
-            "tool_state": "{\"name\": \"metadata\", \"optional\": false, \"tag\": null}",
+            "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
             "uuid": "715bbeb3-cb9a-49dd-a9c5-1f184f3eb34a",
@@ -105,7 +113,7 @@
         },
         "3": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.3+galaxy1",
             "errors": null,
             "id": 3,
             "input_connections": {
@@ -114,7 +122,12 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Kraken2",
+                    "name": "single_paired"
+                }
+            ],
             "label": null,
             "name": "Kraken2",
             "outputs": [
@@ -128,29 +141,27 @@
                 }
             ],
             "position": {
-                "left": 279.9980390107984,
+                "left": 279.97503662109375,
                 "top": 464
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.3+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "e674066930b2",
+                "changeset_revision": "cdee7158adf3",
                 "name": "kraken2",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"confidence\": \"0.1\", \"kraken2_database\": \"2022-09-04T165121Z_standard_prebuilt_pluspf_2022-06-07\", \"min_base_quality\": \"0\", \"minimum_hit_groups\": \"2\", \"quick\": false, \"report\": {\"create_report\": true, \"use_mpa_style\": false, \"report_zero_counts\": false, \"report_minimizer_data\": false}, \"single_paired\": {\"single_paired_selector\": \"collection\", \"__current_case__\": 0, \"input_pair\": {\"__class__\": \"ConnectedValue\"}}, \"split_reads\": false, \"use_names\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.1.1+galaxy1",
+            "tool_version": "2.1.3+galaxy1",
             "type": "tool",
             "uuid": "ec3d15fe-c551-4986-b56b-6f92fe781a4e",
             "when": null,
-            "workflow_outputs": [
-                {"output_name": "report_output", "label": "kraken_report"}
-            ]
+            "workflow_outputs": []
         },
         "4": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.0.6+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.1.1+galaxy4",
             "errors": null,
             "id": 4,
             "input_connections": {
@@ -198,25 +209,29 @@
                 "top": 0
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.0.6+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.1.1+galaxy4",
             "tool_shed_repository": {
-                "changeset_revision": "1a6cdf55390f",
+                "changeset_revision": "eca2e2e20436",
                 "name": "metaphlan",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"analysis\": {\"analysis_type\": {\"t\": \"rel_ab\", \"__current_case__\": 0, \"tax_lev\": {\"tax_lev\": \"a\", \"__current_case__\": 0, \"split_levels\": false}}, \"min_cu_len\": \"2000\", \"min_alignment_len\": null, \"organism_profiling\": [\"add_viruses\"], \"stat\": \"tavg_g\", \"stat_q\": \"0.2\", \"perc_nonzero\": \"0.33\", \"ignore_markers\": {\"__class__\": \"RuntimeValue\"}, \"avoid_disqm\": true}, \"inputs\": {\"in\": {\"selector\": \"raw\", \"__current_case__\": 0, \"raw_in\": {\"selector\": \"paired\", \"__current_case__\": 2, \"in_f\": {\"__class__\": \"ConnectedValue\"}, \"in_r\": {\"__class__\": \"ConnectedValue\"}}, \"read_min_len\": \"70\", \"mapping\": {\"bt2_ps\": \"very-sensitive\", \"min_mapq_val\": \"5\"}}, \"db\": {\"db_selector\": \"cached\", \"__current_case__\": 0, \"cached_db\": \"mpa_vOct22_CHOCOPhlAnSGB_202212-03042023\"}}, \"out\": {\"sample_id_key\": \"SampleID\", \"sample_id\": \"Metaphlan_Analysis\", \"use_group_representative\": false, \"legacy_output\": false, \"CAMI_format_output\": false, \"unknown_estimation\": false, \"krona_output\": true}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "4.0.6+galaxy1",
+            "tool_state": "{\"analysis\": {\"analysis_type\": {\"t\": \"rel_ab\", \"__current_case__\": 0, \"tax_lev\": {\"tax_lev\": \"a\", \"__current_case__\": 0, \"split_levels\": false}}, \"min_cu_len\": \"2000\", \"min_alignment_len\": null, \"organism_profiling\": [\"add_viruses\"], \"stat\": \"tavg_g\", \"stat_q\": \"0.2\", \"perc_nonzero\": \"0.33\", \"ignore_markers\": {\"__class__\": \"RuntimeValue\"}, \"avoid_disqm\": true}, \"inputs\": {\"in\": {\"selector\": \"raw\", \"__current_case__\": 0, \"raw_in\": {\"selector\": \"paired\", \"__current_case__\": 3, \"in_f\": {\"__class__\": \"ConnectedValue\"}, \"in_r\": {\"__class__\": \"ConnectedValue\"}}, \"read_min_len\": \"70\", \"mapping\": {\"bt2_ps\": \"very-sensitive\", \"min_mapq_val\": \"5\"}}, \"db\": {\"db_selector\": \"cached\", \"__current_case__\": 0, \"cached_db\": \"mpa_vOct22_CHOCOPhlAnSGB_202212-03042023\"}}, \"out\": {\"sample_id_key\": \"SampleID\", \"sample_id\": \"Metaphlan_Analysis\", \"use_group_representative\": false, \"legacy_output\": false, \"CAMI_format_output\": false, \"unclassified_estimation\": false, \"krona_output\": true}, \"subsample\": {\"selector\": \"no\", \"__current_case__\": 0}, \"test\": \"false\", \"viral_analysis\": {\"profile_vsc\": \"\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.1.1+galaxy4",
             "type": "tool",
             "uuid": "12d35121-341e-46da-aa4c-c48d4318bf6d",
             "when": null,
             "workflow_outputs": [
-                {"output_name": "output_file", "label": "metaphlan_output"}
+                {
+                    "label": "metaphlan_output",
+                    "output_name": "output_file",
+                    "uuid": "9affde3b-b159-486e-bb38-c628ac72e7fc"
+                }
             ]
         },
         "5": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/krakentools_kreport2krona/krakentools_kreport2krona/1.2+galaxy0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/krakentools_kreport2krona/krakentools_kreport2krona/1.2+galaxy2",
             "errors": null,
             "id": 5,
             "input_connections": {
@@ -239,20 +254,24 @@
                 "top": 459
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/krakentools_kreport2krona/krakentools_kreport2krona/1.2+galaxy0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/krakentools_kreport2krona/krakentools_kreport2krona/1.2+galaxy2",
             "tool_shed_repository": {
-                "changeset_revision": "88d274322340",
+                "changeset_revision": "02bbace216f2",
                 "name": "krakentools_kreport2krona",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"intermediate_ranks\": false, \"report\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.2+galaxy0",
+            "tool_version": "1.2+galaxy2",
             "type": "tool",
             "uuid": "5de62f93-4e3a-4ea6-92c6-c3afcc088bdc",
             "when": null,
             "workflow_outputs": [
-                {"output_name": "output", "label": "krakentool_report"}
+                {
+                    "label": "krakentool_report",
+                    "output_name": "output",
+                    "uuid": "b14415d5-66e2-4f79-89d6-ae0bcd837796"
+                }
             ]
         },
         "6": {
@@ -286,12 +305,12 @@
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken_biom/kraken_biom/1.2.0+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "65eb9962d272",
+                "changeset_revision": "a6f820992693",
                 "name": "kraken_biom",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"fmt\": \"hdf5\", \"kraken_reports\": {\"__class__\": \"ConnectedValue\"}, \"max\": \"O\", \"metadata\": {\"__class__\": \"ConnectedValue\"}, \"min\": \"S\", \"otu_fp\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"fmt\": \"json\", \"kraken_reports\": {\"__class__\": \"ConnectedValue\"}, \"max\": \"O\", \"metadata\": {\"__class__\": \"ConnectedValue\"}, \"min\": \"S\", \"otu_fp\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.2.0+galaxy1",
             "type": "tool",
             "uuid": "09f1648c-a10b-4804-8978-312dbac46e14",
@@ -333,7 +352,7 @@
         },
         "8": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.7+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/3.1+galaxy0",
             "errors": null,
             "id": 8,
             "input_connections": {
@@ -342,14 +361,9 @@
                     "output_name": "report_output"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Estimate Abundance at Taxonomic Level",
-                    "name": "input"
-                }
-            ],
+            "inputs": [],
             "label": null,
-            "name": "Estimate Abundance at Taxonomic Level",
+            "name": "Bracken",
             "outputs": [
                 {
                     "name": "report",
@@ -365,15 +379,15 @@
                 "top": 1027.5
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.7+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/3.1+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "79450f7fd718",
+                "changeset_revision": "4d350ac5148e",
                 "name": "bracken",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"kmer_distr\": \"681f11a5-d5a8-4589-8e92-35b5da780cfa\", \"level\": \"S\", \"logfile_output\": false, \"out_report\": true, \"threshold\": \"10\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.7+galaxy1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"kmer_distr\": \"681f11a5-d5a8-4589-8e92-35b5da780cfa\", \"level\": \"S\", \"logfile_output\": false, \"out_report\": true, \"threshold\": \"10\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1+galaxy0",
             "type": "tool",
             "uuid": "0ab3c44e-ed66-420f-b091-2581364635bf",
             "when": null,
@@ -390,7 +404,12 @@
                     "output_name": "krona_output_file"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Krona pie chart",
+                    "name": "type_of_data"
+                }
+            ],
             "label": null,
             "name": "Krona pie chart",
             "outputs": [
@@ -429,7 +448,12 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Krona pie chart",
+                    "name": "type_of_data"
+                }
+            ],
             "label": null,
             "name": "Krona pie chart",
             "outputs": [
@@ -494,6 +518,6 @@
     "tags": [
         "microbiome"
     ],
-    "uuid": "db73fdcb-51b9-4830-a45a-acd1697cfa39",
-    "version": 4
+    "uuid": "f48c52c9-2e17-4fc7-9bd4-9cbe97542af5",
+    "version": 8
 }
