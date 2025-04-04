@@ -61,9 +61,9 @@ This tutorial will guide you through the process of applying one of these BioIma
 
 ## Model-specific example
 
-This example illustrates the type of information that is both useful for understanding the model’s biological context and necessary for using the Galaxy tool — specifically, the input axes and input size parameters.
++Here we illustrate the type of information that is both useful for understanding the model's biological context and necessary for using the Galaxy tool — specifically, the input axes and input size parameters.
 
-🧬 NucleiSegmentationBoundaryModel
++As an example, we consider the following model: **🧬 NucleiSegmentationBoundaryModel**
 
 This model segments nuclei in fluorescence microscopy images. It predicts <em>boundary maps</em> and <em>foreground probabilities</em> for nucleus segmentation, primarily in images stained with DAPI. The outputs are designed to be post-processed with methods such as Multicut or Watershed to achieve instance-level segmentation (object-based segmentation).
 
