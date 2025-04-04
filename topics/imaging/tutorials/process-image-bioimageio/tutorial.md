@@ -110,7 +110,7 @@ This model segments nuclei in fluorescence microscopy images. It predicts <em>bo
 > 5. Import the BioImage.IO model from the Galaxy file repository:
 >
 >    - Click on **Upload Data**
->    - Go to the **Choose remote files** tab
+>    - Go to the ** Choose from repository** tab
 >    - Navigate to: `ML models` → `bioimaging-models`
 >    - Select the desired model file (for this tutorial, choose `nucleisegmentationboundarymodel.pt`)
 >    - Click **Import** to add it to your history
