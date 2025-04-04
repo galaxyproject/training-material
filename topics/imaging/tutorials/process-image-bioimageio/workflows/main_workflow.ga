@@ -1,1 +1,161 @@
-{"a_galaxy_workflow": "true", "annotation": "", "comments": [], "format-version": "0.1", "name": "Image prediction with BioImage.IO model", "report": {"markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"}, "steps": {"0": {"annotation": "This PyTorch [.pt] file is located in our Galaxy repository under the ML model/bioimaging-models directory.", "content_id": null, "errors": null, "id": 0, "input_connections": {}, "inputs": [{"description": "This PyTorch [.pt] file is located in our Galaxy repository under the ML model/bioimaging-models directory.", "name": "BioImage.IO Model"}], "label": "BioImage.IO Model", "name": "Input dataset", "outputs": [], "position": {"left": 0, "top": 0}, "tool_id": null, "tool_state": "{\"optional\": false, \"tag\": null}", "tool_version": null, "type": "data_input", "uuid": "e4e2d80d-2b74-4de4-a942-c593fe31a13f", "when": null, "workflow_outputs": []}, "1": {"annotation": "Input image required for inference with the ML model. Ensure that the image is of the same biological type the model was trained on or is designed to process. The tool only accepts image files in TIFF or PNG format.", "content_id": null, "errors": null, "id": 1, "input_connections": {}, "inputs": [{"description": "Input image required for inference with the ML model. Ensure that the image is of the same biological type the model was trained on or is designed to process. The tool only accepts image files in TIFF or PNG format.", "name": "Image for Prediction"}], "label": "Image for Prediction", "name": "Input dataset", "outputs": [], "position": {"left": 0, "top": 140}, "tool_id": null, "tool_state": "{\"optional\": false, \"tag\": null}", "tool_version": null, "type": "data_input", "uuid": "961198c2-7f46-4ddf-aabb-a14b5c68af19", "when": null, "workflow_outputs": []}, "2": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy1", "errors": null, "id": 2, "input_connections": {"input_image_file": {"id": 1, "output_name": "output"}, "input_imaging_model": {"id": 0, "output_name": "output"}}, "inputs": [{"description": "runtime parameter for tool Process image using a BioImage.IO model", "name": "input_image_file"}, {"description": "runtime parameter for tool Process image using a BioImage.IO model", "name": "input_imaging_model"}], "label": "Process image with BioImage.IO model", "name": "Process image using a BioImage.IO model", "outputs": [{"name": "output_predicted_image", "type": "tif"}, {"name": "output_predicted_image_matrix", "type": "npy"}], "position": {"left": 372.52669530916654, "top": 3.7193259514582993}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy1", "tool_shed_repository": {"changeset_revision": "000f171afabb", "name": "bioimage_inference", "owner": "bgruening", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"input_image_file\": {\"__class__\": \"RuntimeValue\"}, \"input_image_input_axes\": \"bczyx\", \"input_image_input_size\": null, \"input_imaging_model\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}", "tool_version": "2.4.1+galaxy1", "type": "tool", "uuid": "ba3c27c5-0ff4-4a90-8c52-b9e117984b8d", "when": null, "workflow_outputs": [{"label": "output_predicted_image", "output_name": "output_predicted_image", "uuid": "1c7526a8-37ad-46f3-b29f-2e0bea765e60"}, {"label": "output_predicted_image_matrix", "output_name": "output_predicted_image_matrix", "uuid": "98d27783-f74d-40d4-95b0-bea7af9fcedf"}]}}, "tags": [], "uuid": "0df9243d-dcba-441a-9484-41b895bd7aab", "version": 2}
+{
+   "a_galaxy_workflow":"true",
+   "annotation":"",
+   "comments":[],
+   "format-version":"0.1",
+   "creator": [
+     {
+       "class": "Person",
+       "identifier": "https://orcid.org/0000-0002-5857-1477",
+       "name": "Diana Chiang Jurado",
+       "url":"https://github.com/dianichj/"
+     }
+   ],
+   "license": "CC-BY-4.0",
+   "name":"Image prediction with BioImage.IO model",
+   "report":{
+      "markdown":"\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+   },
+   "steps":{
+      "0":{
+         "annotation":"This PyTorch [.pt] file is located in our Galaxy repository under the ML model/bioimaging-models directory.",
+         "content_id":null,
+         "errors":null,
+         "id":0,
+         "input_connections":{
+            
+         },
+         "inputs":[
+            {
+               "description":"This PyTorch [.pt] file is located in our Galaxy repository under the ML model/bioimaging-models directory.",
+               "name":"BioImage.IO Model"
+            }
+         ],
+         "label":"BioImage.IO Model",
+         "name":"Input dataset",
+         "outputs":[
+            
+         ],
+         "position":{
+            "left":0,
+            "top":0
+         },
+         "tool_id":null,
+         "tool_state":"{\"optional\": false, \"tag\": null}",
+         "tool_version":null,
+         "type":"data_input",
+         "uuid":"e4e2d80d-2b74-4de4-a942-c593fe31a13f",
+         "when":null,
+         "workflow_outputs":[
+            
+         ]
+      },
+      "1":{
+         "annotation":"Input image required for inference with the ML model. Ensure that the image is of the same biological type the model was trained on or is designed to process. The tool only accepts image files in TIFF or PNG format.",
+         "content_id":null,
+         "errors":null,
+         "id":1,
+         "input_connections":{
+            
+         },
+         "inputs":[
+            {
+               "description":"Input image required for inference with the ML model. Ensure that the image is of the same biological type the model was trained on or is designed to process. The tool only accepts image files in TIFF or PNG format.",
+               "name":"Image for Prediction"
+            }
+         ],
+         "label":"Image for Prediction",
+         "name":"Input dataset",
+         "outputs":[
+            
+         ],
+         "position":{
+            "left":0,
+            "top":140
+         },
+         "tool_id":null,
+         "tool_state":"{\"optional\": false, \"tag\": null}",
+         "tool_version":null,
+         "type":"data_input",
+         "uuid":"961198c2-7f46-4ddf-aabb-a14b5c68af19",
+         "when":null,
+         "workflow_outputs":[
+            
+         ]
+      },
+      "2":{
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy1",
+         "errors":null,
+         "id":2,
+         "input_connections":{
+            "input_image_file":{
+               "id":1,
+               "output_name":"output"
+            },
+            "input_imaging_model":{
+               "id":0,
+               "output_name":"output"
+            }
+         },
+         "inputs":[
+            {
+               "description":"runtime parameter for tool Process image using a BioImage.IO model",
+               "name":"input_image_file"
+            },
+            {
+               "description":"runtime parameter for tool Process image using a BioImage.IO model",
+               "name":"input_imaging_model"
+            }
+         ],
+         "label":"Process image with BioImage.IO model",
+         "name":"Process image using a BioImage.IO model",
+         "outputs":[
+            {
+               "name":"output_predicted_image",
+               "type":"tif"
+            },
+            {
+               "name":"output_predicted_image_matrix",
+               "type":"npy"
+            }
+         ],
+         "position":{
+            "left":372.52669530916654,
+            "top":3.7193259514582993
+         },
+         "post_job_actions":{
+            
+         },
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy1",
+         "tool_shed_repository":{
+            "changeset_revision":"000f171afabb",
+            "name":"bioimage_inference",
+            "owner":"bgruening",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "tool_state":"{\"input_image_file\": {\"__class__\": \"RuntimeValue\"}, \"input_image_input_axes\": \"bczyx\", \"input_image_input_size\": null, \"input_imaging_model\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+         "tool_version":"2.4.1+galaxy1",
+         "type":"tool",
+         "uuid":"ba3c27c5-0ff4-4a90-8c52-b9e117984b8d",
+         "when":null,
+         "workflow_outputs":[
+            {
+               "label":"output_predicted_image",
+               "output_name":"output_predicted_image",
+               "uuid":"1c7526a8-37ad-46f3-b29f-2e0bea765e60"
+            },
+            {
+               "label":"output_predicted_image_matrix",
+               "output_name":"output_predicted_image_matrix",
+               "uuid":"98d27783-f74d-40d4-95b0-bea7af9fcedf"
+            }
+         ]
+      }
+   },
+   "tags":[
+      "imaging"
+   ],
+   "uuid":"0df9243d-dcba-441a-9484-41b895bd7aab",
+   "version":2
+}
