@@ -26,7 +26,7 @@ contributions:
     - kostrykin
 ---
 
-Deep learning models are increasingly used in bioimage analysis to perform processing steps such as segmentation, classification, and restoration tasks (e.g., {% cite Moen2019 %}). The [BioImage.IO](https://bioimage.io/#/) platform ({% cite Wei2021 %}) provides a standardized way to share and discover pre-trained models, making them accessible across tools and platforms.
+Deep learning models are increasingly used in bioimage analysis to perform processing steps such as segmentation, classification, and restoration tasks (e.g., {% cite Moen2019 %}). The [BioImage Model Zoo, (BioImage.IO)](https://bioimage.io/#/)({% cite Wei2021 %}) is a repository that provides access to pre-trained AI models, sharing a common metadata model that allows their reuse in different tools and platforms.
 
 Each model in BioImage.IO is tailored for a specific biological task — for example, segmenting nuclei, detecting mitochondria, or identifying neuronal structures — and trained on specific imaging modalities such as electron or fluorescence microscopy (e.g., {% cite vonChamier2021 %}, {% cite GomezdeMariscal2021 %}).
 
