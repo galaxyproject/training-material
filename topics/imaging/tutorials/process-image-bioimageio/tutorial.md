@@ -86,7 +86,7 @@ This model segments nuclei in fluorescence microscopy images. It predicts <em>bo
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
-> 1. Create a new history for this tutorial
+> 1. Create a new history for this tutorial.
 >
 > 2. Download the following image and import it into your Galaxy history.  
 >    For the purpose of this tutorial, we will use one image to test only one of the 11 available models:
