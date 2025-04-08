@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@8c9b7afb44125230435a39861752067a62396717",
+		release: "galaxy-training-network@60c64be916f5d5736cca561fb28978c60db2370d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Mass spectrometry imaging: Loading and exploring MSI data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-09 08:55:09 +0000">
+<meta name="DC.date" content="2025-04-08 10:30:29 +0000">
 <meta name="DC.creator" content="Melanie Föll">
 <meta name="DC.creator" content="Björn Grüning"><meta name="description" content="Training material for proteomics workflows in Galaxy">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -187,7 +187,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2023-11-09 08:55:09 +0000",
+  "dateModified": "2025-04-08 10:30:29 +0000",
   "datePublished": "2018-11-27 16:18:26 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -215,7 +215,44 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "funder": [],
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+      "name": "ELIXIR Europe",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://elixir-europe.org"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+      "name": "de.NBI",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.denbi.de/"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+      "name": "University of Freiburg",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.uni-freiburg.de/"
+    }
+  ],
   "funding": [],
   "identifier": "https://gxy.io/GTN:T00217",
   "accessMode": [
@@ -245,7 +282,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Mass spectrometry imaging: Loading and exploring MSI data",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html",
-  "version": 17,
+  "version": 18,
   "timeRequired": "PT45M",
   "teaches": "- How to upload an imzML file into Galaxy\n- Getting an overview of the MSI data with the MSI quality control tool\n- How to export MSI data as tabular files",
   "keywords": [
@@ -1520,7 +1557,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 27, 2018 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 9, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 8, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1540,7 +1577,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.0</a> (0 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 17 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 18 </div>
 
     </blockquote>
     </section>
@@ -1575,7 +1612,14 @@ The imzML file format was introduced to ease the exchange of MSI data between di
 
 <ol id="markdown-toc">
   <li><a href="#uploading-an-imzml-file-into-galaxy" id="markdown-toc-uploading-an-imzml-file-into-galaxy">Uploading an imzML file into Galaxy</a></li>
-  <li><a href="#exploring-msi-data-with-the-msi-qualitycontrol-tool" id="markdown-toc-exploring-msi-data-with-the-msi-qualitycontrol-tool">Exploring MSI data with the MSI Qualitycontrol tool</a></li>
+  <li><a href="#exploring-msi-data-with-the-msi-qualitycontrol-tool" id="markdown-toc-exploring-msi-data-with-the-msi-qualitycontrol-tool">Exploring MSI data with the MSI Qualitycontrol tool</a>    <ol>
+      <li><a href="#digestion-efficiency" id="markdown-toc-digestion-efficiency">Digestion efficiency</a></li>
+      <li><a href="#distribution-images-for-calibrants" id="markdown-toc-distribution-images-for-calibrants">Distribution images for Calibrants</a></li>
+      <li><a href="#number-of-peaks-and-total-ion-current-images" id="markdown-toc-number-of-peaks-and-total-ion-current-images">Number of peaks and total ion current images</a></li>
+      <li><a href="#most-abundand-mz-features" id="markdown-toc-most-abundand-mz-features">Most abundand m/z features</a></li>
+      <li><a href="#mz-accuracy" id="markdown-toc-mz-accuracy">m/z accuracy</a></li>
+    </ol>
+  </li>
   <li><a href="#exporting-msi-data-to-tabular-files-for-further-exploration-of-the-data" id="markdown-toc-exporting-msi-data-to-tabular-files-for-further-exploration-of-the-data">Exporting MSI data to tabular files for further exploration of the data</a></li>
 </ol>
 
@@ -1734,7 +1778,7 @@ Internal calibrants or other known, ubiquitous m/z features can be used to obtai
 
 <p>Each plot of the <strong>MSI Qualitycontrol</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is described in the help section at the bottom of the tool, this tutorial will discuss a few selected plots in more detail.</p>
 
-<h4 id="digestion-efficiency">Digestion efficiency</h4>
+<h2 id="digestion-efficiency">Digestion efficiency</h2>
 
 <p>The complete digestion of proteins into peptides is a crucial step when performing mass spectrometry of peptides. In MSI the digestion is further hindered by the fact that digestion has to occur on the tissue. One way to control digestion efficiency was suggested by <a href="https://www.sciencedirect.com/science/article/pii/S1570963916301820?via%3Dihub">Erich et al.</a>. They spotted <em>cytochrome c</em> next to the tissue before and after digestion and compared the protein intensities in the two spots.</p>
 
@@ -1744,7 +1788,7 @@ Internal calibrants or other known, ubiquitous m/z features can be used to obtai
 
 <figure id="figure-4" style="max-width: 90%;"><img src="../../images/MSI1_foldchange.png" alt="Fold Change. " width="1128" height="568" loading="lazy" /><a target="_blank" href="../../images/MSI1_foldchange.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Avererage mass spectra and log2 fold change for Bombesin and its digested peptide</figcaption></figure>
 
-<h4 id="distribution-images-for-calibrants">Distribution images for Calibrants</h4>
+<h2 id="distribution-images-for-calibrants">Distribution images for Calibrants</h2>
 
 <p>Have a look at the calibrant plots from page 6 on, especially regarding the distribution patterns. The colour code shows the intensity of the m/z value that is closest to the input m/z and if the ppm range contains several m/z features their intensities are averaged. The input m/z value and its name are printed on top of the image, the m/z number in the box shows the closest m/z value (that is 1296.68, as the m/z axis consists of mass bins slight differences are expected). Low <em>angiotensin</em> intensities occur at the boarder of the <em>bombesin</em> spot and at the boarder of the kidney tissue and on some spots in the kidney. In general calibrant intensities are higher in the matrix background than on the tissue due to ion suppression effects. <em>Substance P</em> shows also ion suppression in the <em>bombesin</em> spot. The heatmap shows no spatial intensity gradient what indicates that spraying of calibrants and matrix was homogeneous and that the MS performed stable during data acquisition.</p>
 
@@ -1757,7 +1801,7 @@ Internal calibrants or other known, ubiquitous m/z features can be used to obtai
   </ul>
 </blockquote>
 
-<h4 id="number-of-peaks-and-total-ion-current-images">Number of peaks and total ion current images</h4>
+<h2 id="number-of-peaks-and-total-ion-current-images">Number of peaks and total ion current images</h2>
 
 <p>On page 9 the number of peaks per spectrum is plotted and the shape of the kidney can be estimated due to slightly higher number of peaks. The number of peaks is defined as intensity &gt; 0 what means that before peak picking also noise with intensity &gt; 0 is counted in. It is quite common for raw MALDI datasets to have a noise baseline in each spectrum and therefore high amounts of ‘peaks’ before baseline removal is performed. For the mouse kidney dataset baseline removal was already done during acquisition but as also suggested by the median number of peaks per spectrum in the summary table, about half of every m/z value has an intensity &gt; 0. This suggests to check the mass spectra for a baseline and if applicable remove the baseline during preprocessing of the data.</p>
 
@@ -1766,7 +1810,7 @@ Both plots can also serve to check for spraying gradients or reduced machine per
 
 <figure id="figure-6" style="max-width: 90%;"><img src="../../images/MSI1_npeaks_TIC.png" alt="Npeaks and TIC heatmap. " width="958" height="524" loading="lazy" /><a target="_blank" href="../../images/MSI1_npeaks_TIC.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Number of peaks and TIC per spectrum</figcaption></figure>
 
-<h4 id="most-abundand-mz-features">Most abundand m/z features</h4>
+<h2 id="most-abundand-mz-features">Most abundand m/z features</h2>
 
 <p>The plot on page 13 shows for each spectrum the m/z with the highest intensity (‘base peak’). This plot can already reveal some morphological features of the dataset. The plot for the mouse kidney dataset shows that the base peak is the same on the kidney tissue and the matrix background but a different one in the <em>bombesin</em> spot. According to the legend the base peak in most spectra is roughly at m/z 1350, the base peak in the <em>bombesin</em> spot is roughly at 1280 and in a few spectra at 1570. Later, we will export the spectra information, including the base peak of each spectrum, as a tabular file to find the correct m/z values of the most abundant features in the following spectra: x = 40 y = 50; x = 23, y = 70; x = 20, y = 73.</p>
 
@@ -1774,7 +1818,7 @@ Both plots can also serve to check for spraying gradients or reduced machine per
 
 <p>As the feature around m/z 1350 is the highest feature in most of the spectra it is no suprise to find this feature as highest peak in the average spectra plot on page 20. The second highest peak is around 1300 m/z. It is obvious that those features are the calibrants <em>substance P</em> and <em>angiotensin</em> as they occur as high intensity peaks on the tissue as well as on the background. At least the concentration of <em>substance P</em> but also the concentration of <em>angiotensin I</em> could be reduced in further experiments. The concentration of <em>fibrinopeptide B</em> is chosen well as the peak at m/z 1570 is visible in most of the spectra plots but does not dominate the spectra as the other two calibrants do.</p>
 
-<h4 id="mz-accuracy">m/z accuracy</h4>
+<h2 id="mz-accuracy">m/z accuracy</h2>
 
 <p>A MSI dataset has not only deviations in the intensity dimension but also in the m/z dimension. Mass shifts can occur due to sample topography, small length changes in the flight tube or instable high voltage power supply. Mass accuracy is important for two reasons: First, the identification of m/z relies on accurate mass values and second, comparing m/z features across several spectra or even samples requires them to have similar values in order to be considered as the same molecule.</p>
 
@@ -1992,6 +2036,72 @@ author = "Melanie Föll and Björn Grüning",
                 </blockquote>
 
         
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/elixir-europe/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/elixir.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">ELIXIR Europe</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/deNBI/" class="funder-badge">
+		
+		<div class="avatar">
+			
+				
+				<img class="funder-avatar" src="https://avatars.githubusercontent.com/deNBI" alt="Logo">
+				
+			
+		</div>
+
+		<div class="info">
+			<div class="name">de.NBI</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/uni-freiburg/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">UFR</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
 
 
 <script>
@@ -2148,7 +2258,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8c9b7afb44125230435a39861752067a62396717">8c9b7af</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/60c64be916f5d5736cca561fb28978c60db2370d">60c64be</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

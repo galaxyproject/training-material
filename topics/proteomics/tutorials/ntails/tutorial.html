@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@8c9b7afb44125230435a39861752067a62396717",
+		release: "galaxy-training-network@60c64be916f5d5736cca561fb28978c60db2370d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Detection and quantitation of N-termini (degradomics) via N-TAILS">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-16 12:02:41 +0000">
+<meta name="DC.date" content="2025-04-08 10:30:29 +0000">
 <meta name="DC.creator" content="Florian Christoph Sigloch">
 <meta name="DC.creator" content="Björn Grüning"><meta name="description" content="Training material for proteomics workflows in Galaxy">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -187,7 +187,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2023-05-16 12:02:41 +0000",
+  "dateModified": "2025-04-08 10:30:29 +0000",
   "datePublished": "2017-02-14 12:20:30 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -215,7 +215,44 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "socialMedia": "https://mstdn.science/@gtn",
     "type": "project"
   },
-  "funder": [],
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+      "name": "ELIXIR Europe",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://elixir-europe.org"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+      "name": "de.NBI",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.denbi.de/"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+      "name": "University of Freiburg",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.uni-freiburg.de/"
+    }
+  ],
   "funding": [],
   "identifier": "https://gxy.io/GTN:T00226",
   "accessMode": [
@@ -245,7 +282,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Detection and quantitation of N-termini (degradomics) via N-TAILS",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ntails/tutorial.html",
-  "version": 15,
+  "version": 16,
   "timeRequired": "PT1H",
   "teaches": "- Run an N-TAILS data analysis.",
   "keywords": [
@@ -1596,7 +1633,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 14, 2017 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 16, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 8, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1616,7 +1653,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">1.0</a> (0 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 15 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 16 </div>
 
     </blockquote>
     </section>
@@ -1635,11 +1672,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 This is best explained by an example: directly after translation, a protein has exactly one N-terminus. When a protease is cutting the protein in half, each half has its own N-terminus. While the N-terminus of the first half protein is exactly the same as the one of the full protein precursor (“native N-terminus”), the N-terminus of the second half is different (“neo-N-terminus”) and depends on the amino acid sequence where the protein was cut.
 The N-Tails technique includes the use of heavy isotope dimethyl labelling.</p>
 
-<p>The figure below illustrates the mechanism of N-Tails. It was originally published by Stefan Tholen (doctoral thesis, not available online). Further reading on N-Tails and other N-terminal techniques, see <a href="https://doi.org/10.1007/978-3-7091-0885-7_5">Tholen et al., Springer Vienna, 2013</a>.</p>
+<p>The figure below illustrates the mechanism of N-Tails. It was originally published by Stefan Tholen (doctoral thesis, not available online). Further reading on N-Tails and other N-terminal techniques, see <span class="citation"><a href="#Tholen2013">Tholen <i>et al.</i> 2013</a></span>.</p>
 
 <figure id="figure-1" style="max-width: 90%;"><img src="../../images/wf_ntails_technique.png" alt="N-Tails technique. " width="1594" height="880" loading="lazy" /><a target="_blank" href="../../images/wf_ntails_technique.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Overview of the N-Tails technique</figcaption></figure>
 
-<p>The N-Tails technique was originally designed to research protease biology and has most often been used in this field. It was originally published in <a href="https://www.ncbi.nlm.nih.gov/pubmed/20208520">Kleifeld et al., Nat. Biotechnol., 2010</a>.</p>
+<p>The N-Tails technique was originally designed to research protease biology and has most often been used in this field. It was originally published in <span class="citation"><a href="#Kleifeld2010">Kleifeld <i>et al.</i> 2010</a></span>.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-interpretation-of-n-tails-results"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Interpretation of N-Tails results</div>
@@ -1746,6 +1783,10 @@ please cite:</p>
 
 
                 
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Kleifeld2010">Kleifeld, O., A. Doucet, U. auf dem Keller, A. Prudova, O. Schilling <i>et al.</i>, 2010 <b>Isotopic labeling of terminal amines in complex samples identifies protein N-termini and protease cleavage products</b>. Nature Biotechnology 28: 281–288. <a href="https://doi.org/10.1038/nbt.1611">10.1038/nbt.1611</a></li>
+<li id="Tholen2013">Tholen, S., M. M. Koczorowska, Z. W. Lai, J. Dengjel, and O. Schilling, 2013 <b>Limited and Degradative Proteolysis in the Context of Posttranslational Regulatory Networks: Current Technical and Conceptional Advances</b>, pp. 175–216 <span style="font-style: normal">in</span> <i>Proteases: Structure and Function</i>, <i>Springer Vienna</i>. <a href="https://doi.org/10.1007/978-3-7091-0885-7_5">10.1007/978-3-7091-0885-7_5</a> ISBN: 9783709108857</li></ol>
+                
 
                 
 
@@ -1812,6 +1853,72 @@ author = "Florian Christoph Sigloch and Björn Grüning",
                    </pre></div></div>
                    </p>
                 </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/elixir-europe/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/elixir.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">ELIXIR Europe</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/deNBI/" class="funder-badge">
+		
+		<div class="avatar">
+			
+				
+				<img class="funder-avatar" src="https://avatars.githubusercontent.com/deNBI" alt="Logo">
+				
+			
+		</div>
+
+		<div class="info">
+			<div class="name">de.NBI</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/uni-freiburg/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">UFR</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
 
         
 
@@ -1966,7 +2073,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8c9b7afb44125230435a39861752067a62396717">8c9b7af</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/60c64be916f5d5736cca561fb28978c60db2370d">60c64be</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
