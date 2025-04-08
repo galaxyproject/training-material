@@ -303,15 +303,16 @@ kind of text, numbers and dates.
 # API use
 
 Reconciliation matches the information in one of your columns to an outside database. This is particularly helpful when it
-comes to name validation, as it proves the name you have exists somewhere else. This is a really useful service, but can be
-time consuming. In this case we will go through the process with only three records using the API from GBIF.
+comes to name validation, as it proves the name you have exists somewhere else. This is a really useful service but can be
+time-consuming. In this case, we will go through the process with only three records using the API from GBIF.
+To open your dataset again from Galaxy in OpenRefine, follow the earlier steps from this tutorial "Deploy an OpenRefine instance and push your data in".
 
 > <hands-on-title> {% icon hands_on %} Higher taxonomy </hands-on-title>
 >
-> 1. Go to "Collector" column, then make a `Text facet`. Select the collector "Elsa P".
+> 1. In your opened dataset in OpenRefine, go to the "Collector" column, then make a `Text facet`. Select the collector "Elsa P".
 > 2. Under "Full name", click on column menu and then `Edit column > Add column by fetching URLs…`
 >    - call the new column "Api_name"
-> 3. Change the Throttle Delay to 250 and paste the expression `http://api.gbif.org/v1/species/match?verbose=true&name="+escape(value,'url')`
+> 3. Change the Throttle Delay to 250 and paste the expression `"http://api.gbif.org/v1/species/match?verbose=true&name="+escape(value,'url')`
 > 4. Click ok and wait, this might take some time depending on internet connection and the number of taxa.
 > 5. Go to "Api_name", click on column menu and then `Edit column > Add column based on this column...`.
 >    - Call the new column "higherClassification" and paste the expression:
@@ -323,13 +324,14 @@ time consuming. In this case we will go through the process with only three reco
 >    ", "+value.parseJson().get("order")+
 >    ", "+value.parseJson().get("family")
 >    ```
->    You will see the Kingdom, Phylum, Class, Order and family of each taxon.
-> 6. Under "higherClassification" follow the route `Edit column > Split into several columns…`, leave the initial settings.
+>   click `ok`. 
+>   You will see the Kingdom, Phylum, Class, Order and family of each taxon.
+> 6. Under "higherClassification" follow the route `Edit column > Split into several columns…`, leave the initial settings and click `ok`.
 > 7. Now you know how to obtain the taxonomic categories of a given taxon if this is available in the GBIF API. Column names can be edited in `Edit column > Rename this column`.
 > 8. For the purpose of the original GBIF workshop, the columns created in this exercise (Higher taxonomy) must be deleted.
 >    -  Under All, which is the first column, go to `Edit columns > Re-order / remove columns…`.
 >    - Remove columns "Api_name", "higherClassification 1", "higherClassification 2", "higherClassification 3", "higherClassification 4" and "higherClassification 5".
-> 9. No need to export this file as it is normally come back to previous version you already exported.
+> 9. No need to export this file as it normally comes back to the previous version you already exported.
 >
 {: .hands_on}
 
