@@ -162,7 +162,7 @@ The actual output is a **TIFF file**, and both predicted images reside in the sa
 
 > <tip-title> Visualising the output images</tip-title>
 >
-> Galaxy provides a basic preview using its `.tiff` visualization tool. However, BioImage.IO models often produce tiff files with several predicted images residing in the same tiff file.
+> Galaxy provides a basic preview using its `.tiff` visualization tool. However, BioImage.IO models sometimes produce tiff files with several predicted images residing in the same tiff file.
 >
 > To properly explore the results, it is recommended to click on the **visualize** icon in the output file, this will give you the option to display the dataset using the **Avivator tool**. 
 > ![Inspect output with Avivator](../../images/process-image-bioimageio/display-avivator.png "Visualize your Tiff output with Avivator in Galaxy")
