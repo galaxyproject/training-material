@@ -250,7 +250,7 @@ kind of text, numbers and dates.
 
 # Clustering
 
-> <hands-on-title> {% icon hands_on %} Basic clustering </hands-on-title>
+> <hands-on-title> Basic clustering </hands-on-title>
 >
 > 1. Go to "County" and perform a `Text facet`.
 >    - Keep in mind that the correct counties are: "Flores", "La Libertad", "Melchor de Mencos", "San Andres" and "San Jose".
