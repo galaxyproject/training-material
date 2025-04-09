@@ -32,7 +32,7 @@ Each model in BioImage.IO is tailored for a specific biological task — for exa
 
 This tutorial will guide you through the process of applying one of these BioImage.IO models to an input image using Galaxy ({% cite Batut2024 %}). You will learn how to upload and configure the model, set the correct input parameters, and interpret the output files.
 
-+⚠️  As of the version {% tool [Process image using a BioImage.IO model](toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy1) %}, only the PyTorch-based BioImage.IO models listed in the section below are compatible with the Galaxy tool.
++⚠️  As of the version {% tool [Process image using a BioImage.IO model](toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy2) %}, only the PyTorch-based BioImage.IO models listed in the section below are compatible with the Galaxy tool.
 
 > <agenda-title></agenda-title>
 >
