@@ -191,9 +191,9 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-04-09 10:44:01 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPeaks\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nGenes\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Select last\"];\n  0 -->|output| 2;\n  3[\"Replace Text\"];\n  0 -->|output| 3;\n  4[\"Get flanks\"];\n  1 -->|output| 4;\n  5[\"Replace Text\"];\n  3 -->|outfile| 5;\n  6[\"Replace Text\"];\n  5 -->|outfile| 6;\n  7[\"Convert Genomic Intervals To BED\"];\n  6 -->|outfile| 7;\n  8[\"Intersect\"];\n  4 -->|out_file1| 8;\n  7 -->|output1| 8;\n  9[\"Group\"];\n  8 -->|output| 9;\n  99700cf9-0f33-42b5-a6a7-4a1cc4c01c3d[\"Output\\nchr_count\"];\n  9 --> 99700cf9-0f33-42b5-a6a7-4a1cc4c01c3d;\n  style 99700cf9-0f33-42b5-a6a7-4a1cc4c01c3d stroke:#2c3143,stroke-width:4px;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nPeaks\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nGenes\"]\n  2[label=\"Select last\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Replace Text\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Get flanks\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Replace Text\"]\n  3 -> 5 [label=\"outfile\"]\n  6[label=\"Replace Text\"]\n  5 -> 6 [label=\"outfile\"]\n  7[label=\"Convert Genomic Intervals To BED\"]\n  6 -> 7 [label=\"outfile\"]\n  8[label=\"Intersect\"]\n  4 -> 8 [label=\"out_file1\"]\n  7 -> 8 [label=\"output1\"]\n  9[label=\"Group\"]\n  8 -> 9 [label=\"output\"]\n  k99700cf90f3342b5a6a74a1cc4c01c3d[color=lightseagreen,label=\"Output\\nchr_count\"]\n  9 -> k99700cf90f3342b5a6a74a1cc4c01c3d\n}",
+          "modified": "2025-04-09 13:15:57 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPeaks\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nGenes\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Select last\"];\n  0 -->|output| 2;\n  3[\"Replace Text\"];\n  0 -->|output| 3;\n  4[\"Get flanks\"];\n  1 -->|output| 4;\n  5[\"Replace Text\"];\n  3 -->|outfile| 5;\n  6[\"Replace Text\"];\n  5 -->|outfile| 6;\n  7[\"Convert Genomic Intervals To BED\"];\n  6 -->|outfile| 7;\n  8[\"Intersect\"];\n  4 -->|out_file1| 8;\n  7 -->|output1| 8;\n  9[\"Group\"];\n  8 -->|output| 9;\n  5841946f-c584-4b37-8867-cfb1cfe3c40f[\"Output\\nchr_count\"];\n  9 --> 5841946f-c584-4b37-8867-cfb1cfe3c40f;\n  style 5841946f-c584-4b37-8867-cfb1cfe3c40f stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nPeaks\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nGenes\"]\n  2[label=\"Select last\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Replace Text\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Get flanks\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Replace Text\"]\n  3 -> 5 [label=\"outfile\"]\n  6[label=\"Replace Text\"]\n  5 -> 6 [label=\"outfile\"]\n  7[label=\"Convert Genomic Intervals To BED\"]\n  6 -> 7 [label=\"outfile\"]\n  8[label=\"Intersect\"]\n  4 -> 8 [label=\"out_file1\"]\n  7 -> 8 [label=\"output1\"]\n  9[label=\"Group\"]\n  8 -> 9 [label=\"output\"]\n  k5841946fc5844b378867cfb1cfe3c40f[color=lightseagreen,label=\"Output\\nchr_count\"]\n  9 -> k5841946fc5844b378867cfb1cfe3c40f\n}",
           "workflow_tools": [
             "CONVERTER_interval_to_bed_0",
             "Grouping1",
@@ -291,7 +291,7 @@
                 {
                   "output_name": "out_file1",
                   "label": "chr_count",
-                  "uuid": "99700cf9-0f33-42b5-a6a7-4a1cc4c01c3d"
+                  "uuid": "5841946f-c584-4b37-8867-cfb1cfe3c40f"
                 }
               ]
             }
@@ -353,6 +353,11 @@
           {
             "url": "http://smile.hku.hk/SARGs",
             "name": "ARGs-OAP",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://iris.angers.inra.fr/galaxypub-cfbp",
+            "name": "CIRM-CFBP",
             "usegalaxy": false
           },
           {
@@ -471,11 +476,6 @@
             "usegalaxy": false
           },
           {
-            "url": "https://galaxy.bio.di.uminho.pt/",
-            "name": "PhagePromotor",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -525,6 +525,10 @@
               },
               {
                 "state": "local",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "local",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -614,10 +618,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -663,6 +663,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -752,10 +756,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -801,6 +801,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -893,10 +897,6 @@
               },
               {
                 "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
-                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -936,6 +936,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -1033,10 +1037,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -1088,6 +1088,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -1182,10 +1186,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -1237,6 +1237,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -1333,10 +1337,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -1383,6 +1383,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -1482,10 +1486,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "inexact",
@@ -1545,6 +1545,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -1587,8 +1591,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.6",
-                  "1.2.0"
+                  "1.2.0",
+                  "1.6"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -1645,15 +1649,11 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
                   "1.2.0",
-                  "1.5",
                   "1.3.0",
+                  "1.5",
                   "1.1.0"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -1703,6 +1703,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -1792,10 +1796,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -1847,6 +1847,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -1937,10 +1941,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -1992,6 +1992,10 @@
               },
               {
                 "state": "local",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "local",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -2081,10 +2085,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -2979,7 +2979,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-04-09 10:44:01 +0000",
+          "modified": "2025-04-09 13:15:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Gene BED To Exon/Intron/Codon BED\"];\n  0 -->|output| 1;\n  2[\"Filter\"];\n  1 -->|out_file1| 2;\n  3[\"Filter\"];\n  1 -->|out_file1| 3;\n  4[\"Intersect\"];\n  2 -->|out_file1| 4;\n  3 -->|out_file1| 4;\n  5[\"Intersect\"];\n  3 -->|out_file1| 5;\n  2 -->|out_file1| 5;\n  6[\"Concatenate datasets\"];\n  5 -->|output| 6;\n  4 -->|output| 6;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[label=\"Gene BED To Exon/Intron/Codon BED\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Filter\"]\n  1 -> 2 [label=\"out_file1\"]\n  3[label=\"Filter\"]\n  1 -> 3 [label=\"out_file1\"]\n  4[label=\"Intersect\"]\n  2 -> 4 [label=\"out_file1\"]\n  3 -> 4 [label=\"out_file1\"]\n  5[label=\"Intersect\"]\n  3 -> 5 [label=\"out_file1\"]\n  2 -> 5 [label=\"out_file1\"]\n  6[label=\"Concatenate datasets\"]\n  5 -> 6 [label=\"output\"]\n  4 -> 6 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -3077,7 +3077,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-04-09 10:44:01 +0000",
+          "modified": "2025-04-09 13:15:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Filter\"];\n  0 -->|output| 1;\n  2[\"Filter\"];\n  0 -->|output| 2;\n  3[\"Filter\"];\n  0 -->|output| 3;\n  4[\"Intersect\"];\n  2 -->|out_file1| 4;\n  3 -->|out_file1| 4;\n  5[\"Intersect\"];\n  3 -->|out_file1| 5;\n  2 -->|out_file1| 5;\n  6[\"Concatenate datasets\"];\n  5 -->|output| 6;\n  4 -->|output| 6;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[label=\"Filter\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Filter\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Filter\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Intersect\"]\n  2 -> 4 [label=\"out_file1\"]\n  3 -> 4 [label=\"out_file1\"]\n  5[label=\"Intersect\"]\n  3 -> 5 [label=\"out_file1\"]\n  2 -> 5 [label=\"out_file1\"]\n  6[label=\"Concatenate datasets\"]\n  5 -> 6 [label=\"output\"]\n  4 -> 6 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -3175,6 +3175,11 @@
           {
             "url": "http://smile.hku.hk/SARGs",
             "name": "ARGs-OAP",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://iris.angers.inra.fr/galaxypub-cfbp",
+            "name": "CIRM-CFBP",
             "usegalaxy": false
           },
           {
@@ -3293,11 +3298,6 @@
             "usegalaxy": false
           },
           {
-            "url": "https://galaxy.bio.di.uminho.pt/",
-            "name": "PhagePromotor",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -3347,6 +3347,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -3436,10 +3440,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -3485,6 +3485,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -3574,10 +3578,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -3623,6 +3623,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -3715,10 +3719,6 @@
               },
               {
                 "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
-                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -3758,6 +3758,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -3857,10 +3861,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "0.1.0",
                 "server": "https://usegalaxy.be/"
@@ -3907,6 +3907,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -4000,10 +4004,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -4596,9 +4596,9 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-04-09 10:44:01 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\niris\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Convert CSV to tabular\"];\n  0 -->|output| 1;\n  2[\"Datamash\"];\n  1 -->|tabular| 2;\n  e98c514c-905f-464d-945c-c885829f2d0d[\"Output\\ndatamash_output\"];\n  2 --> e98c514c-905f-464d-945c-c885829f2d0d;\n  style e98c514c-905f-464d-945c-c885829f2d0d stroke:#2c3143,stroke-width:4px;\n  3[\"Remove beginning\"];\n  1 -->|tabular| 3;\n  4[\"Cut\"];\n  3 -->|out_file1| 4;\n  5[\"Group\"];\n  3 -->|out_file1| 5;\n  40357308-5c23-49ac-bc94-eea93edd4ef3[\"Output\\ngroup1\"];\n  5 --> 40357308-5c23-49ac-bc94-eea93edd4ef3;\n  style 40357308-5c23-49ac-bc94-eea93edd4ef3 stroke:#2c3143,stroke-width:4px;\n  6[\"Group\"];\n  3 -->|out_file1| 6;\n  4fd8893f-cbdc-422b-8423-96ceedf5d399[\"Output\\ngroup2\"];\n  6 --> 4fd8893f-cbdc-422b-8423-96ceedf5d399;\n  style 4fd8893f-cbdc-422b-8423-96ceedf5d399 stroke:#2c3143,stroke-width:4px;\n  7[\"Scatterplot w ggplot2\"];\n  3 -->|out_file1| 7;\n  8[\"Scatterplot w ggplot2\"];\n  3 -->|out_file1| 8;\n  9[\"Unique\"];\n  4 -->|out_file1| 9;\n  ec39c0ad-eb26-47d6-b9a7-c2e5ffa043c6[\"Output\\nunique_output\"];\n  9 --> ec39c0ad-eb26-47d6-b9a7-c2e5ffa043c6;\n  style ec39c0ad-eb26-47d6-b9a7-c2e5ffa043c6 stroke:#2c3143,stroke-width:4px;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\niris\"]\n  1[label=\"Convert CSV to tabular\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Datamash\"]\n  1 -> 2 [label=\"tabular\"]\n  ke98c514c905f464d945cc885829f2d0d[color=lightseagreen,label=\"Output\\ndatamash_output\"]\n  2 -> ke98c514c905f464d945cc885829f2d0d\n  3[label=\"Remove beginning\"]\n  1 -> 3 [label=\"tabular\"]\n  4[label=\"Cut\"]\n  3 -> 4 [label=\"out_file1\"]\n  5[label=\"Group\"]\n  3 -> 5 [label=\"out_file1\"]\n  k403573085c2349acbc94eea93edd4ef3[color=lightseagreen,label=\"Output\\ngroup1\"]\n  5 -> k403573085c2349acbc94eea93edd4ef3\n  6[label=\"Group\"]\n  3 -> 6 [label=\"out_file1\"]\n  k4fd8893fcbdc422b842396ceedf5d399[color=lightseagreen,label=\"Output\\ngroup2\"]\n  6 -> k4fd8893fcbdc422b842396ceedf5d399\n  7[label=\"Scatterplot w ggplot2\"]\n  3 -> 7 [label=\"out_file1\"]\n  8[label=\"Scatterplot w ggplot2\"]\n  3 -> 8 [label=\"out_file1\"]\n  9[label=\"Unique\"]\n  4 -> 9 [label=\"out_file1\"]\n  kec39c0adeb2647d6b9a7c2e5ffa043c6[color=lightseagreen,label=\"Output\\nunique_output\"]\n  9 -> kec39c0adeb2647d6b9a7c2e5ffa043c6\n}",
+          "modified": "2025-04-09 13:15:57 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\niris\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Convert CSV to tabular\"];\n  0 -->|output| 1;\n  2[\"Datamash\"];\n  1 -->|tabular| 2;\n  c2b54014-e894-4d04-b468-755093da0bf9[\"Output\\ndatamash_output\"];\n  2 --> c2b54014-e894-4d04-b468-755093da0bf9;\n  style c2b54014-e894-4d04-b468-755093da0bf9 stroke:#2c3143,stroke-width:4px;\n  3[\"Remove beginning\"];\n  1 -->|tabular| 3;\n  4[\"Cut\"];\n  3 -->|out_file1| 4;\n  5[\"Group\"];\n  3 -->|out_file1| 5;\n  8716eaab-9450-424a-9d0c-867c6c1b58b5[\"Output\\ngroup1\"];\n  5 --> 8716eaab-9450-424a-9d0c-867c6c1b58b5;\n  style 8716eaab-9450-424a-9d0c-867c6c1b58b5 stroke:#2c3143,stroke-width:4px;\n  6[\"Group\"];\n  3 -->|out_file1| 6;\n  e745b9c4-60dc-4b9b-aa93-4abba76f9af0[\"Output\\ngroup2\"];\n  6 --> e745b9c4-60dc-4b9b-aa93-4abba76f9af0;\n  style e745b9c4-60dc-4b9b-aa93-4abba76f9af0 stroke:#2c3143,stroke-width:4px;\n  7[\"Scatterplot w ggplot2\"];\n  3 -->|out_file1| 7;\n  8[\"Scatterplot w ggplot2\"];\n  3 -->|out_file1| 8;\n  9[\"Unique\"];\n  4 -->|out_file1| 9;\n  ec39c0ad-eb26-47d6-b9a7-c2e5ffa043c6[\"Output\\nunique_output\"];\n  9 --> ec39c0ad-eb26-47d6-b9a7-c2e5ffa043c6;\n  style ec39c0ad-eb26-47d6-b9a7-c2e5ffa043c6 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\niris\"]\n  1[label=\"Convert CSV to tabular\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Datamash\"]\n  1 -> 2 [label=\"tabular\"]\n  kc2b54014e8944d04b468755093da0bf9[color=lightseagreen,label=\"Output\\ndatamash_output\"]\n  2 -> kc2b54014e8944d04b468755093da0bf9\n  3[label=\"Remove beginning\"]\n  1 -> 3 [label=\"tabular\"]\n  4[label=\"Cut\"]\n  3 -> 4 [label=\"out_file1\"]\n  5[label=\"Group\"]\n  3 -> 5 [label=\"out_file1\"]\n  k8716eaab9450424a9d0c867c6c1b58b5[color=lightseagreen,label=\"Output\\ngroup1\"]\n  5 -> k8716eaab9450424a9d0c867c6c1b58b5\n  6[label=\"Group\"]\n  3 -> 6 [label=\"out_file1\"]\n  ke745b9c460dc4b9baa934abba76f9af0[color=lightseagreen,label=\"Output\\ngroup2\"]\n  6 -> ke745b9c460dc4b9baa934abba76f9af0\n  7[label=\"Scatterplot w ggplot2\"]\n  3 -> 7 [label=\"out_file1\"]\n  8[label=\"Scatterplot w ggplot2\"]\n  3 -> 8 [label=\"out_file1\"]\n  9[label=\"Unique\"]\n  4 -> 9 [label=\"out_file1\"]\n  kec39c0adeb2647d6b9a7c2e5ffa043c6[color=lightseagreen,label=\"Output\\nunique_output\"]\n  9 -> kec39c0adeb2647d6b9a7c2e5ffa043c6\n}",
           "workflow_tools": [
             "Cut1",
             "Grouping1",
@@ -4683,7 +4683,7 @@
                 {
                   "output_name": "out_file",
                   "label": "datamash_output",
-                  "uuid": "e98c514c-905f-464d-945c-c885829f2d0d"
+                  "uuid": "c2b54014-e894-4d04-b468-755093da0bf9"
                 }
               ]
             },
@@ -4727,7 +4727,7 @@
                 {
                   "output_name": "out_file1",
                   "label": "group1",
-                  "uuid": "40357308-5c23-49ac-bc94-eea93edd4ef3"
+                  "uuid": "8716eaab-9450-424a-9d0c-867c6c1b58b5"
                 }
               ]
             },
@@ -4771,7 +4771,7 @@
                 {
                   "output_name": "out_file1",
                   "label": "group2",
-                  "uuid": "4fd8893f-cbdc-422b-8423-96ceedf5d399"
+                  "uuid": "e745b9c4-60dc-4b9b-aa93-4abba76f9af0"
                 }
               ]
             },
@@ -5005,6 +5005,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://iris.angers.inra.fr/galaxypub-cfbp",
+            "name": "CIRM-CFBP",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -5120,11 +5125,6 @@
             "usegalaxy": false
           },
           {
-            "url": "https://galaxy.bio.di.uminho.pt/",
-            "name": "PhagePromotor",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -5174,6 +5174,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -5263,10 +5267,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -5312,6 +5312,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -5401,10 +5405,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -5450,6 +5450,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -5539,10 +5543,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -5588,6 +5588,10 @@
               },
               {
                 "state": "local",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "local",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -5680,10 +5684,6 @@
               },
               {
                 "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
-                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -5723,6 +5723,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -5822,10 +5826,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -5872,6 +5872,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -5974,10 +5978,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -6024,6 +6024,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -6125,10 +6129,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "2.2.1+galaxy1",
                 "server": "https://usegalaxy.be/"
@@ -6163,9 +6163,9 @@
                 "versions": [
                   "2.2.1+galaxy2",
                   "3.4.0+galaxy1",
-                  "3.3.5+galaxy0",
                   "3.4.0+galaxy0",
                   "3.3.5+galaxy1",
+                  "3.3.5+galaxy0",
                   "3.3.5+galaxy2"
                 ],
                 "server": "https://usegalaxy.org.au"
@@ -6187,6 +6187,10 @@
               {
                 "state": "local",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "local",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "local",
@@ -6279,10 +6283,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -6705,7 +6705,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-04-09 10:44:01 +0000",
+          "modified": "2025-04-09 13:15:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nolympics.tsv\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\ncountry-information.tsv\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nolympics_2022.tsv\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Line/Word/Character count\"];\n  0 -->|output| 3;\n  4[\"tabular-to-csv\"];\n  0 -->|output| 4;\n  5[\"Sort\"];\n  0 -->|output| 5;\n  6[\"Sort\"];\n  0 -->|output| 6;\n  7[\"Sort\"];\n  0 -->|output| 7;\n  8[\"Sort\"];\n  0 -->|output| 8;\n  9[\"Sort\"];\n  0 -->|output| 9;\n  10[\"Sort\"];\n  0 -->|output| 10;\n  11[\"Filter\"];\n  0 -->|output| 11;\n  12[\"Filter\"];\n  0 -->|output| 12;\n  13[\"Count\"];\n  0 -->|output| 13;\n  14[\"Count\"];\n  0 -->|output| 14;\n  15[\"Count\"];\n  0 -->|output| 15;\n  16[\"Count\"];\n  0 -->|output| 16;\n  17[\"Datamash\"];\n  0 -->|output| 17;\n  18[\"Count\"];\n  0 -->|output| 18;\n  19[\"Datamash\"];\n  0 -->|output| 19;\n  20[\"Filter\"];\n  0 -->|output| 20;\n  21[\"Filter\"];\n  0 -->|output| 21;\n  22[\"Filter\"];\n  0 -->|output| 22;\n  23[\"Filter\"];\n  0 -->|output| 23;\n  24[\"Filter\"];\n  0 -->|output| 24;\n  25[\"Filter\"];\n  0 -->|output| 25;\n  26[\"Filter\"];\n  0 -->|output| 26;\n  27[\"Compute\"];\n  0 -->|output| 27;\n  28[\"Compute\"];\n  0 -->|output| 28;\n  29[\"Cut\"];\n  0 -->|output| 29;\n  30[\"Column Regex Find And Replace\"];\n  0 -->|output| 30;\n  31[\"Column Regex Find And Replace\"];\n  0 -->|output| 31;\n  32[\"Column Regex Find And Replace\"];\n  0 -->|output| 32;\n  33[\"Cut\"];\n  0 -->|output| 33;\n  34[\"Cut\"];\n  0 -->|output| 34;\n  35[\"Datamash\"];\n  0 -->|output| 35;\n  36[\"Datamash\"];\n  0 -->|output| 36;\n  37[\"Datamash\"];\n  0 -->|output| 37;\n  38[\"Datamash\"];\n  0 -->|output| 38;\n  39[\"Datamash\"];\n  0 -->|output| 39;\n  40[\"Count\"];\n  0 -->|output| 40;\n  41[\"Column Regex Find And Replace\"];\n  0 -->|output| 41;\n  42[\"Split file\"];\n  0 -->|output| 42;\n  43[\"Join two Datasets\"];\n  0 -->|output| 43;\n  1 -->|output| 43;\n  44[\"Remove beginning\"];\n  2 -->|output| 44;\n  45[\"Sort\"];\n  11 -->|out_file1| 45;\n  46[\"Filter\"];\n  12 -->|out_file1| 46;\n  47[\"Cut\"];\n  28 -->|out_file1| 47;\n  48[\"Unique\"];\n  29 -->|out_file1| 48;\n  49[\"Count\"];\n  41 -->|out_file1| 49;\n  50[\"Datamash\"];\n  41 -->|out_file1| 50;\n  51[\"Concatenate datasets\"];\n  0 -->|output| 51;\n  44 -->|out_file1| 51;\n  52[\"Filter\"];\n  45 -->|outfile| 52;\n  53[\"Sort\"];\n  46 -->|out_file1| 53;\n  54[\"Remove beginning\"];\n  47 -->|out_file1| 54;\n  55[\"Select first\"];\n  47 -->|out_file1| 55;\n  56[\"Sort\"];\n  48 -->|outfile| 56;\n  57[\"Unique\"];\n  54 -->|out_file1| 57;\n  58[\"Concatenate datasets\"];\n  55 -->|out_file1| 58;\n  57 -->|outfile| 58;\n  59[\"Join two Datasets\"];\n  0 -->|output| 59;\n  58 -->|out_file1| 59;\n  60[\"Cut\"];\n  59 -->|out_file1| 60;\n  61[\"Line/Word/Character count\"];\n  60 -->|out_file1| 61;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nolympics.tsv\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\ncountry-information.tsv\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nolympics_2022.tsv\"]\n  3[label=\"Line/Word/Character count\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"tabular-to-csv\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Sort\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"Sort\"]\n  0 -> 6 [label=\"output\"]\n  7[label=\"Sort\"]\n  0 -> 7 [label=\"output\"]\n  8[label=\"Sort\"]\n  0 -> 8 [label=\"output\"]\n  9[label=\"Sort\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"Sort\"]\n  0 -> 10 [label=\"output\"]\n  11[label=\"Filter\"]\n  0 -> 11 [label=\"output\"]\n  12[label=\"Filter\"]\n  0 -> 12 [label=\"output\"]\n  13[label=\"Count\"]\n  0 -> 13 [label=\"output\"]\n  14[label=\"Count\"]\n  0 -> 14 [label=\"output\"]\n  15[label=\"Count\"]\n  0 -> 15 [label=\"output\"]\n  16[label=\"Count\"]\n  0 -> 16 [label=\"output\"]\n  17[label=\"Datamash\"]\n  0 -> 17 [label=\"output\"]\n  18[label=\"Count\"]\n  0 -> 18 [label=\"output\"]\n  19[label=\"Datamash\"]\n  0 -> 19 [label=\"output\"]\n  20[label=\"Filter\"]\n  0 -> 20 [label=\"output\"]\n  21[label=\"Filter\"]\n  0 -> 21 [label=\"output\"]\n  22[label=\"Filter\"]\n  0 -> 22 [label=\"output\"]\n  23[label=\"Filter\"]\n  0 -> 23 [label=\"output\"]\n  24[label=\"Filter\"]\n  0 -> 24 [label=\"output\"]\n  25[label=\"Filter\"]\n  0 -> 25 [label=\"output\"]\n  26[label=\"Filter\"]\n  0 -> 26 [label=\"output\"]\n  27[label=\"Compute\"]\n  0 -> 27 [label=\"output\"]\n  28[label=\"Compute\"]\n  0 -> 28 [label=\"output\"]\n  29[label=\"Cut\"]\n  0 -> 29 [label=\"output\"]\n  30[label=\"Column Regex Find And Replace\"]\n  0 -> 30 [label=\"output\"]\n  31[label=\"Column Regex Find And Replace\"]\n  0 -> 31 [label=\"output\"]\n  32[label=\"Column Regex Find And Replace\"]\n  0 -> 32 [label=\"output\"]\n  33[label=\"Cut\"]\n  0 -> 33 [label=\"output\"]\n  34[label=\"Cut\"]\n  0 -> 34 [label=\"output\"]\n  35[label=\"Datamash\"]\n  0 -> 35 [label=\"output\"]\n  36[label=\"Datamash\"]\n  0 -> 36 [label=\"output\"]\n  37[label=\"Datamash\"]\n  0 -> 37 [label=\"output\"]\n  38[label=\"Datamash\"]\n  0 -> 38 [label=\"output\"]\n  39[label=\"Datamash\"]\n  0 -> 39 [label=\"output\"]\n  40[label=\"Count\"]\n  0 -> 40 [label=\"output\"]\n  41[label=\"Column Regex Find And Replace\"]\n  0 -> 41 [label=\"output\"]\n  42[label=\"Split file\"]\n  0 -> 42 [label=\"output\"]\n  43[label=\"Join two Datasets\"]\n  0 -> 43 [label=\"output\"]\n  1 -> 43 [label=\"output\"]\n  44[label=\"Remove beginning\"]\n  2 -> 44 [label=\"output\"]\n  45[label=\"Sort\"]\n  11 -> 45 [label=\"out_file1\"]\n  46[label=\"Filter\"]\n  12 -> 46 [label=\"out_file1\"]\n  47[label=\"Cut\"]\n  28 -> 47 [label=\"out_file1\"]\n  48[label=\"Unique\"]\n  29 -> 48 [label=\"out_file1\"]\n  49[label=\"Count\"]\n  41 -> 49 [label=\"out_file1\"]\n  50[label=\"Datamash\"]\n  41 -> 50 [label=\"out_file1\"]\n  51[label=\"Concatenate datasets\"]\n  0 -> 51 [label=\"output\"]\n  44 -> 51 [label=\"out_file1\"]\n  52[label=\"Filter\"]\n  45 -> 52 [label=\"outfile\"]\n  53[label=\"Sort\"]\n  46 -> 53 [label=\"out_file1\"]\n  54[label=\"Remove beginning\"]\n  47 -> 54 [label=\"out_file1\"]\n  55[label=\"Select first\"]\n  47 -> 55 [label=\"out_file1\"]\n  56[label=\"Sort\"]\n  48 -> 56 [label=\"outfile\"]\n  57[label=\"Unique\"]\n  54 -> 57 [label=\"out_file1\"]\n  58[label=\"Concatenate datasets\"]\n  55 -> 58 [label=\"out_file1\"]\n  57 -> 58 [label=\"outfile\"]\n  59[label=\"Join two Datasets\"]\n  0 -> 59 [label=\"output\"]\n  58 -> 59 [label=\"out_file1\"]\n  60[label=\"Cut\"]\n  59 -> 60 [label=\"out_file1\"]\n  61[label=\"Line/Word/Character count\"]\n  60 -> 61 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -6867,6 +6867,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://iris.angers.inra.fr/galaxypub-cfbp",
+            "name": "CIRM-CFBP",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -6982,11 +6987,6 @@
             "usegalaxy": false
           },
           {
-            "url": "https://galaxy.bio.di.uminho.pt/",
-            "name": "PhagePromotor",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -7036,6 +7036,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -7125,10 +7129,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -7174,6 +7174,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -7263,10 +7267,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -7312,6 +7312,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -7401,10 +7405,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -7450,6 +7450,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -7539,10 +7543,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -7588,6 +7588,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -7677,10 +7681,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -7726,6 +7726,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -7815,10 +7819,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -7864,6 +7864,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -7953,10 +7957,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -8002,6 +8002,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -8091,10 +8095,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -8140,6 +8140,10 @@
               },
               {
                 "state": "local",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "local",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -8232,10 +8236,6 @@
               },
               {
                 "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
-                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -8275,6 +8275,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -8370,10 +8374,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -8423,6 +8423,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -8520,10 +8524,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "inexact",
@@ -8577,6 +8577,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -8671,10 +8675,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -8726,6 +8726,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -8822,10 +8826,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -8872,6 +8872,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -8974,15 +8978,11 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
                   "1.2.0",
-                  "1.5",
                   "1.3.0",
+                  "1.5",
                   "1.1.0"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -8990,8 +8990,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0",
                   "1.4",
+                  "2.0",
                   "1.1.0"
                 ],
                 "server": "https://usegalaxy.cz/"
@@ -9033,6 +9033,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -9132,10 +9136,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -9191,6 +9191,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -9290,10 +9294,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -9340,6 +9340,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -9444,10 +9448,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
                   "1.1.0",
@@ -9500,6 +9500,10 @@
               },
               {
                 "state": "local",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "local",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -9589,10 +9593,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -9638,6 +9638,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -9727,10 +9731,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -9776,6 +9776,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -9865,10 +9869,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -9914,6 +9914,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -10003,10 +10007,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -10052,6 +10052,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -10141,10 +10145,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -10190,6 +10190,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -10279,10 +10283,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -10328,6 +10328,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -10417,10 +10421,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -10466,6 +10466,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -10555,10 +10559,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -10604,6 +10604,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -10693,10 +10697,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -10742,6 +10742,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -10831,10 +10835,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -10880,6 +10880,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -10969,10 +10973,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -11018,6 +11018,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -11107,10 +11111,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -11156,6 +11156,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -11245,10 +11249,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -11294,6 +11294,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -11383,10 +11387,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -11432,6 +11432,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -11521,10 +11525,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -11570,6 +11570,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -11659,10 +11663,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -11708,6 +11708,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -11797,10 +11801,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -11846,6 +11846,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -11935,10 +11939,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -11984,6 +11984,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -12073,10 +12077,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -12122,6 +12122,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -12211,10 +12215,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -12659,7 +12659,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-04-09 10:44:01 +0000",
+          "modified": "2025-04-09 13:15:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAccessions\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nGenome\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Faster Download and Extract Reads in FASTQ\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|list_paired| 3;\n  4[\"Map with BWA-MEM\"];\n  3 -->|output_paired_coll| 4;\n  1 -->|output| 4;\n  5[\"Samtools view\"];\n  4 -->|bam_output| 5;\n  6[\"MarkDuplicates\"];\n  5 -->|outputsam| 6;\n  7[\"Samtools stats\"];\n  6 -->|outFile| 7;\n  8[\"Realign reads\"];\n  6 -->|outFile| 8;\n  1 -->|output| 8;\n  9[\"MultiQC\"];\n  3 -->|report_json| 9;\n  6 -->|metrics_file| 9;\n  7 -->|output| 9;\n  10[\"Insert indel qualities\"];\n  8 -->|realigned| 10;\n  1 -->|output| 10;\n  11[\"Call variants\"];\n  10 -->|output| 11;\n  1 -->|output| 11;\n  12[\"SnpEff eff:\"];\n  11 -->|variants| 12;\n  13[\"SnpSift Extract Fields\"];\n  12 -->|snpeff_output| 13;\n  14[\"Collapse Collection\"];\n  13 -->|output| 14;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nAccessions\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nGenome\"]\n  2[label=\"Faster Download and Extract Reads in FASTQ\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"fastp\"]\n  2 -> 3 [label=\"list_paired\"]\n  4[label=\"Map with BWA-MEM\"]\n  3 -> 4 [label=\"output_paired_coll\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Samtools view\"]\n  4 -> 5 [label=\"bam_output\"]\n  6[label=\"MarkDuplicates\"]\n  5 -> 6 [label=\"outputsam\"]\n  7[label=\"Samtools stats\"]\n  6 -> 7 [label=\"outFile\"]\n  8[label=\"Realign reads\"]\n  6 -> 8 [label=\"outFile\"]\n  1 -> 8 [label=\"output\"]\n  9[label=\"MultiQC\"]\n  3 -> 9 [label=\"report_json\"]\n  6 -> 9 [label=\"metrics_file\"]\n  7 -> 9 [label=\"output\"]\n  10[label=\"Insert indel qualities\"]\n  8 -> 10 [label=\"realigned\"]\n  1 -> 10 [label=\"output\"]\n  11[label=\"Call variants\"]\n  10 -> 11 [label=\"output\"]\n  1 -> 11 [label=\"output\"]\n  12[label=\"SnpEff eff:\"]\n  11 -> 12 [label=\"variants\"]\n  13[label=\"SnpSift Extract Fields\"]\n  12 -> 13 [label=\"snpeff_output\"]\n  14[label=\"Collapse Collection\"]\n  13 -> 14 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -13576,6 +13576,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://iris.angers.inra.fr/galaxypub-cfbp",
+            "name": "CIRM-CFBP",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -13691,11 +13696,6 @@
             "usegalaxy": false
           },
           {
-            "url": "https://galaxy.bio.di.uminho.pt/",
-            "name": "PhagePromotor",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -13742,6 +13742,10 @@
               {
                 "state": "local",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -13837,10 +13841,6 @@
               },
               {
                 "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
-                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -13880,6 +13880,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -13954,8 +13958,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "9.3+galaxy2",
-                  "9.3+galaxy1"
+                  "9.3+galaxy1",
+                  "9.3+galaxy2"
                 ],
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
@@ -13978,10 +13982,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -14030,6 +14030,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -14133,10 +14137,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "0.7.17.1",
                 "server": "https://usegalaxy.be/"
@@ -14189,6 +14189,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -14222,8 +14226,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.18.2.1",
-                  "3.1.1.0"
+                  "3.1.1.0",
+                  "2.18.2.1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -14288,10 +14292,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "2.18.2.2",
                 "server": "https://usegalaxy.be/"
@@ -14342,6 +14342,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -14447,10 +14451,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "2.0.2+galaxy2",
                 "server": "https://usegalaxy.be/"
@@ -14458,8 +14458,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0.5",
-                  "2.0.4"
+                  "2.0.4",
+                  "2.0.5"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -14500,6 +14500,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -14602,10 +14606,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "0.20.1+galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -14658,6 +14658,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -14756,16 +14760,12 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
-                  "2.1.3.1+galaxy0",
                   "2.1.5+galaxy0",
-                  "2.1.3.1+galaxy2",
-                  "2.1.3.1+galaxy1"
+                  "2.1.3.1+galaxy0",
+                  "2.1.3.1+galaxy1",
+                  "2.1.3.1+galaxy2"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -14814,6 +14814,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -14909,10 +14913,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -14966,6 +14966,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -15058,10 +15062,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "2.1.5+galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -15111,6 +15111,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -15144,10 +15148,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy1",
+                  "1.11+galaxy0",
                   "1.7",
-                  "1.6",
-                  "1.11+galaxy0"
+                  "1.11+galaxy1",
+                  "1.6"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -15158,9 +15162,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy1",
-                  "1.7",
                   "1.11+galaxy0",
+                  "1.7",
+                  "1.11+galaxy1",
                   "1.27+galaxy3",
                   "1.9+galaxy1"
                 ],
@@ -15220,15 +15224,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy1"
-                ],
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "1.8+galaxy0",
-                  "1.9"
+                  "1.9",
+                  "1.8+galaxy0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -15277,6 +15274,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -15310,8 +15311,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.15.1+galaxy2",
-                  "1.9"
+                  "1.9",
+                  "1.15.1+galaxy2"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -15378,10 +15379,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
                   "1.9",
@@ -15392,8 +15389,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.20+galaxy3",
-                  "1.15.1+galaxy0"
+                  "1.15.1+galaxy0",
+                  "1.20+galaxy3"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -15434,6 +15431,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -15528,10 +15529,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -15583,6 +15580,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -15677,10 +15678,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "4.3+t.galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -15727,6 +15724,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -15827,16 +15828,12 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
-                  "2.11.0+galaxy0",
+                  "2.10.4",
                   "2.10.4+galaxy1",
-                  "2.10.7+galaxy1",
-                  "2.10.4"
+                  "2.11.0+galaxy0",
+                  "2.10.7+galaxy1"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -15884,6 +15881,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -15982,16 +15983,12 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
-                  "2.11.0+galaxy0",
+                  "2.10.4",
                   "2.10.4+galaxy1",
-                  "2.10.7+galaxy1",
-                  "2.10.4"
+                  "2.11.0+galaxy0",
+                  "2.10.7+galaxy1"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -16042,6 +16039,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -16076,8 +16077,8 @@
                 "state": "inexact",
                 "versions": [
                   "4.2",
-                  "5.1.0",
-                  "4.1"
+                  "4.1",
+                  "5.1.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -16144,10 +16145,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "4.0",
                 "server": "https://usegalaxy.be/"
@@ -16169,8 +16166,8 @@
                 "state": "inexact",
                 "versions": [
                   "4.2",
-                  "5.1.0",
-                  "4.1"
+                  "4.1",
+                  "5.1.0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -16204,6 +16201,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -16296,10 +16297,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "inexact",
@@ -17535,9 +17532,9 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-04-09 10:44:01 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nmutant_R1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Filter by quality\"];\n  0 -->|output| 2;\n  603b3661-f5d7-4fd8-8cdd-98b38666bcc7[\"Output\\nfilter1\"];\n  2 --> 603b3661-f5d7-4fd8-8cdd-98b38666bcc7;\n  style 603b3661-f5d7-4fd8-8cdd-98b38666bcc7 stroke:#2c3143,stroke-width:4px;\n  3[\"Filter by quality\"];\n  0 -->|output| 3;\n  fabb8eb8-0ffd-441c-9a0d-3618417a00e4[\"Output\\nfilter2\"];\n  3 --> fabb8eb8-0ffd-441c-9a0d-3618417a00e4;\n  style fabb8eb8-0ffd-441c-9a0d-3618417a00e4 stroke:#2c3143,stroke-width:4px;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nmutant_R1\"]\n  1[label=\"FastQC\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Filter by quality\"]\n  0 -> 2 [label=\"output\"]\n  k603b3661f5d74fd88cdd98b38666bcc7[color=lightseagreen,label=\"Output\\nfilter1\"]\n  2 -> k603b3661f5d74fd88cdd98b38666bcc7\n  3[label=\"Filter by quality\"]\n  0 -> 3 [label=\"output\"]\n  kfabb8eb80ffd441c9a0d3618417a00e4[color=lightseagreen,label=\"Output\\nfilter2\"]\n  3 -> kfabb8eb80ffd441c9a0d3618417a00e4\n}",
+          "modified": "2025-04-09 13:15:57 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nmutant_R1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Filter by quality\"];\n  0 -->|output| 2;\n  2c0f9222-87ca-4e19-bbd2-869cd03443a1[\"Output\\nfilter1\"];\n  2 --> 2c0f9222-87ca-4e19-bbd2-869cd03443a1;\n  style 2c0f9222-87ca-4e19-bbd2-869cd03443a1 stroke:#2c3143,stroke-width:4px;\n  3[\"Filter by quality\"];\n  0 -->|output| 3;\n  e275db4b-0edb-4f97-8949-7eb792cb3c27[\"Output\\nfilter2\"];\n  3 --> e275db4b-0edb-4f97-8949-7eb792cb3c27;\n  style e275db4b-0edb-4f97-8949-7eb792cb3c27 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nmutant_R1\"]\n  1[label=\"FastQC\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Filter by quality\"]\n  0 -> 2 [label=\"output\"]\n  k2c0f922287ca4e19bbd2869cd03443a1[color=lightseagreen,label=\"Output\\nfilter1\"]\n  2 -> k2c0f922287ca4e19bbd2869cd03443a1\n  3[label=\"Filter by quality\"]\n  0 -> 3 [label=\"output\"]\n  ke275db4b0edb4f9789497eb792cb3c27[color=lightseagreen,label=\"Output\\nfilter2\"]\n  3 -> ke275db4b0edb4f9789497eb792cb3c27\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1",
             "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72"
@@ -17611,7 +17608,7 @@
                 {
                   "output_name": "output",
                   "label": "filter1",
-                  "uuid": "603b3661-f5d7-4fd8-8cdd-98b38666bcc7"
+                  "uuid": "2c0f9222-87ca-4e19-bbd2-869cd03443a1"
                 }
               ]
             },
@@ -17655,7 +17652,7 @@
                 {
                   "output_name": "output",
                   "label": "filter2",
-                  "uuid": "fabb8eb8-0ffd-441c-9a0d-3618417a00e4"
+                  "uuid": "e275db4b-0edb-4f97-8949-7eb792cb3c27"
                 }
               ]
             }
@@ -17730,6 +17727,11 @@
           {
             "url": "http://smile.hku.hk/SARGs",
             "name": "ARGs-OAP",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://iris.angers.inra.fr/galaxypub-cfbp",
+            "name": "CIRM-CFBP",
             "usegalaxy": false
           },
           {
@@ -17848,11 +17850,6 @@
             "usegalaxy": false
           },
           {
-            "url": "https://galaxy.bio.di.uminho.pt/",
-            "name": "PhagePromotor",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -17902,6 +17899,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -17946,8 +17947,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.0.2+galaxy0",
-                  "1.0.0"
+                  "1.0.0",
+                  "1.0.2+galaxy0"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -18001,10 +18002,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -18040,8 +18037,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.0.2+galaxy2",
-                  "1.0.2+galaxy0",
                   "1.0.0",
+                  "1.0.2+galaxy0",
                   "1.0.2"
                 ],
                 "server": "https://usegalaxy.org.au"
@@ -18063,6 +18060,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -18108,8 +18109,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.0.2+galaxy0",
-                  "1.0.0"
+                  "1.0.0",
+                  "1.0.2+galaxy0"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -18163,14 +18164,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
-                  "1.0.2+galaxy0",
                   "1.0.0",
+                  "1.0.2+galaxy0",
                   "1.0.1",
                   "1.0.2"
                 ],
@@ -18223,6 +18220,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -18330,13 +18331,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "inexact",
-                "versions": [
-                  "0.74+galaxy0"
-                ],
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "0.72",
                 "server": "https://usegalaxy.be/"
@@ -18347,13 +18341,13 @@
                   "0.74+galaxy0",
                   "0.69",
                   "0.65",
-                  "0.74+galaxy1",
                   "0.52",
-                  "0.67",
                   "0.68",
+                  "0.67",
+                  "0.74+galaxy1",
+                  "0.63",
                   "0.62",
-                  "0.64",
-                  "0.63"
+                  "0.64"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -18400,6 +18394,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -18433,9 +18431,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.72",
                   "0.72+galaxy1",
-                  "0.73+galaxy0",
-                  "0.72"
+                  "0.73+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -18501,10 +18499,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72+galaxy1",
                   "0.72",
-                  "0.65",
-                  "0.71"
+                  "0.72+galaxy1",
+                  "0.71",
+                  "0.65"
                 ],
                 "server": "https://palfinder.ls.manchester.ac.uk/"
               },
@@ -18514,13 +18512,6 @@
                   "0.74+galaxy0"
                 ],
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "0.74+galaxy0"
-                ],
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -20354,7 +20345,7 @@
               "version": "0.1"
             }
           },
-          "modified": "2025-04-09 10:44:01 +0000",
+          "modified": "2025-04-09 13:15:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nExons\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nFeatures\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"bedtools Intersect intervals\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Datamash\"];\n  2 -->|output| 3;\n  4[\"Sort\"];\n  3 -->|out_file| 4;\n  5[\"Select first\"];\n  4 -->|outfile| 5;\n  6[\"Compare two Datasets\"];\n  0 -->|output| 6;\n  5 -->|outfile| 6;\n  565e3d76-0230-4a5e-87c1-9c36ce0b7df8[\"Output\\ntop_5_exons\"];\n  6 --> 565e3d76-0230-4a5e-87c1-9c36ce0b7df8;\n  style 565e3d76-0230-4a5e-87c1-9c36ce0b7df8 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nExons\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nFeatures\"]\n  2[label=\"bedtools Intersect intervals\"]\n  0 -> 2 [label=\"output\"]\n  1 -> 2 [label=\"output\"]\n  3[label=\"Datamash\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"Sort\"]\n  3 -> 4 [label=\"out_file\"]\n  5[label=\"Select first\"]\n  4 -> 5 [label=\"outfile\"]\n  6[label=\"Compare two Datasets\"]\n  0 -> 6 [label=\"output\"]\n  5 -> 6 [label=\"outfile\"]\n  k565e3d7602304a5e87c19c36ce0b7df8[color=lightseagreen,label=\"Output\\ntop_5_exons\"]\n  6 -> k565e3d7602304a5e87c19c36ce0b7df8\n}",
           "workflow_tools": [
@@ -20544,6 +20535,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://iris.angers.inra.fr/galaxypub-cfbp",
+            "name": "CIRM-CFBP",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -20659,11 +20655,6 @@
             "usegalaxy": false
           },
           {
-            "url": "https://galaxy.bio.di.uminho.pt/",
-            "name": "PhagePromotor",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -20710,6 +20701,10 @@
               {
                 "state": "local",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -20805,10 +20800,6 @@
               },
               {
                 "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
-                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -20848,6 +20839,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -20945,10 +20940,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -21000,6 +20991,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -21096,10 +21091,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "1.1.1",
                 "server": "https://usegalaxy.be/"
@@ -21149,6 +21140,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -21182,8 +21177,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.27.0.2",
-                  "2.27.1"
+                  "2.27.1",
+                  "2.27.0.2"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -21194,8 +21189,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.29.2",
-                  "2.30.0"
+                  "2.30.0",
+                  "2.29.2"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -21249,21 +21244,17 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
-                  "2.27.0.2",
                   "2.27.1",
-                  "2.29.2",
+                  "2.27.0.2",
                   "2.30.0",
+                  "2.29.2",
                   "2.31.1+galaxy0",
-                  "2.24.0",
-                  "2.29.0",
                   "2.19.0",
-                  "2.27.1+galaxy1"
+                  "2.24.0",
+                  "2.27.1+galaxy1",
+                  "2.29.0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -21280,8 +21271,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.29.2",
                   "2.30.0",
+                  "2.29.2",
                   "2.19.0"
                 ],
                 "server": "https://usegalaxy.no/"
@@ -21316,6 +21307,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -21413,10 +21408,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -21465,6 +21456,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -21568,10 +21563,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
                   "1.1.0",
@@ -21626,6 +21617,10 @@
               {
                 "state": "local",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "local",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "local",
@@ -21718,10 +21713,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -22649,7 +22640,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-04-09 10:44:01 +0000",
+          "modified": "2025-04-09 13:15:57 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\niris\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Convert CSV to tabular\"];\n  0 -->|output| 1;\n  2[\"Datamash\"];\n  1 -->|tabular| 2;\n  254f1b4b-d466-4f0e-8c46-0e97bbedae4d[\"Output\\ndatamash_output\"];\n  2 --> 254f1b4b-d466-4f0e-8c46-0e97bbedae4d;\n  style 254f1b4b-d466-4f0e-8c46-0e97bbedae4d stroke:#2c3143,stroke-width:4px;\n  3[\"Remove beginning\"];\n  1 -->|tabular| 3;\n  4[\"Cut\"];\n  3 -->|out_file1| 4;\n  5[\"Group\"];\n  3 -->|out_file1| 5;\n  a689bddf-14d0-4a72-b1f9-c34d8f50d2b3[\"Output\\ngroup1\"];\n  5 --> a689bddf-14d0-4a72-b1f9-c34d8f50d2b3;\n  style a689bddf-14d0-4a72-b1f9-c34d8f50d2b3 stroke:#2c3143,stroke-width:4px;\n  6[\"Group\"];\n  3 -->|out_file1| 6;\n  ac7c73b2-58dd-4c6e-85ce-ddf49323b206[\"Output\\ngroup2\"];\n  6 --> ac7c73b2-58dd-4c6e-85ce-ddf49323b206;\n  style ac7c73b2-58dd-4c6e-85ce-ddf49323b206 stroke:#2c3143,stroke-width:4px;\n  7[\"Scatterplot with ggplot2\"];\n  3 -->|out_file1| 7;\n  8[\"Scatterplot with ggplot2\"];\n  3 -->|out_file1| 8;\n  9[\"Unique\"];\n  4 -->|out_file1| 9;\n  8a2b5e30-d42a-4019-9674-4b4af00c820a[\"Output\\nunique_output\"];\n  9 --> 8a2b5e30-d42a-4019-9674-4b4af00c820a;\n  style 8a2b5e30-d42a-4019-9674-4b4af00c820a stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\niris\"]\n  1[label=\"Convert CSV to tabular\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Datamash\"]\n  1 -> 2 [label=\"tabular\"]\n  k254f1b4bd4664f0e8c460e97bbedae4d[color=lightseagreen,label=\"Output\\ndatamash_output\"]\n  2 -> k254f1b4bd4664f0e8c460e97bbedae4d\n  3[label=\"Remove beginning\"]\n  1 -> 3 [label=\"tabular\"]\n  4[label=\"Cut\"]\n  3 -> 4 [label=\"out_file1\"]\n  5[label=\"Group\"]\n  3 -> 5 [label=\"out_file1\"]\n  ka689bddf14d04a72b1f9c34d8f50d2b3[color=lightseagreen,label=\"Output\\ngroup1\"]\n  5 -> ka689bddf14d04a72b1f9c34d8f50d2b3\n  6[label=\"Group\"]\n  3 -> 6 [label=\"out_file1\"]\n  kac7c73b258dd4c6e85ceddf49323b206[color=lightseagreen,label=\"Output\\ngroup2\"]\n  6 -> kac7c73b258dd4c6e85ceddf49323b206\n  7[label=\"Scatterplot with ggplot2\"]\n  3 -> 7 [label=\"out_file1\"]\n  8[label=\"Scatterplot with ggplot2\"]\n  3 -> 8 [label=\"out_file1\"]\n  9[label=\"Unique\"]\n  4 -> 9 [label=\"out_file1\"]\n  k8a2b5e30d42a401996744b4af00c820a[color=lightseagreen,label=\"Output\\nunique_output\"]\n  9 -> k8a2b5e30d42a401996744b4af00c820a\n}",
           "workflow_tools": [
@@ -23072,6 +23063,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://iris.angers.inra.fr/galaxypub-cfbp",
+            "name": "CIRM-CFBP",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -23187,11 +23183,6 @@
             "usegalaxy": false
           },
           {
-            "url": "https://galaxy.bio.di.uminho.pt/",
-            "name": "PhagePromotor",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -23241,6 +23232,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -23330,10 +23325,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -23379,6 +23370,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -23468,10 +23463,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -23517,6 +23508,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -23606,10 +23601,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -23655,6 +23646,10 @@
               },
               {
                 "state": "local",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "local",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -23747,10 +23742,6 @@
               },
               {
                 "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
-                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -23790,6 +23781,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -23889,10 +23884,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -23939,6 +23930,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -24041,10 +24036,6 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "exact",
                 "version": "1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -24091,6 +24082,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -24194,16 +24189,12 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
                   "2.2.1+galaxy1",
                   "2.2.1+galaxy2",
-                  "2.2.1",
-                  "2.2.1+galaxy0"
+                  "2.2.1+galaxy0",
+                  "2.2.1"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -24251,6 +24242,10 @@
               {
                 "state": "local",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "local",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "local",
@@ -24343,10 +24338,6 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "local",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -25019,6 +25010,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://iris.angers.inra.fr/galaxypub-cfbp",
+            "name": "CIRM-CFBP",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -25134,11 +25130,6 @@
             "usegalaxy": false
           },
           {
-            "url": "https://galaxy.bio.di.uminho.pt/",
-            "name": "PhagePromotor",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -25185,6 +25176,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -25285,19 +25280,15 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
-                  "0.19.5+galaxy1",
                   "0.20.1+galaxy0",
-                  "0.12.4.0",
+                  "0.19.5+galaxy1",
                   "0.19.3.2",
                   "0.18.0.0",
                   "0.19.3.3",
-                  "0.19.5"
+                  "0.19.5",
+                  "0.12.4.0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -25344,6 +25335,10 @@
               {
                 "state": "missing",
                 "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
               },
               {
                 "state": "missing",
@@ -25441,15 +25436,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
-                "state": "exact",
-                "version": "1.11+galaxy1",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
-                  "1.8+galaxy0",
-                  "1.9"
+                  "1.9",
+                  "1.8+galaxy0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -25466,14 +25456,14 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.7",
                   "1.11+galaxy0",
+                  "1.7",
                   "1.9+galaxy1",
-                  "1.8+galaxy0",
                   "1.9",
+                  "1.8+galaxy0",
                   "1.7.1",
-                  "1.8+galaxy2",
-                  "1.8+galaxy1"
+                  "1.8+galaxy1",
+                  "1.8+galaxy2"
                 ],
                 "server": "https://usegalaxy.no/"
               },

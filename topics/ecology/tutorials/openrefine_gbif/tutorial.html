@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c50b88d97d9b3f21d67c26ef51aee89ccef560d2",
+		release: "galaxy-training-network@bf9214756a6557619ca5efce24ad6bef12a9602f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Cleaning GBIF data using OpenRefine">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-04-07 14:24:54 +0000">
+<meta name="DC.date" content="2025-04-09 13:11:49 +0000">
 <meta name="DC.creator" content="Yvan Le Bras">
 <meta name="DC.creator" content="Sophie Pamerlon">
 <meta name="DC.creator" content="Laura Russell"><meta name="description" content="Learn to analyse Ecological data through Galaxy.">
@@ -188,7 +188,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-04-07 14:24:54 +0000",
+  "dateModified": "2025-04-09 13:11:49 +0000",
   "datePublished": "2025-01-21 21:32:43 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -271,7 +271,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Cleaning GBIF data using OpenRefine",
   "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/openrefine_gbif/tutorial.html",
-  "version": 2,
+  "version": 3,
   "timeRequired": "PT0H45M",
   "teaches": "- Use OpenRefine faceting functionalities to apply mass editing and manage duplicates\n- Use OpenRefine clustering and filtering functionalities to edit, transform data notably using regular expression\n- Use OpenRefine to apply API services on your data",
   "keywords": [
@@ -1237,7 +1237,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 21, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 7, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 9, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1253,7 +1253,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
 
     </blockquote>
     </section>
@@ -1369,7 +1369,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <li>click the button “run tool”
 You will then be redirected. A notification “Interactive Tools” shows up on the left-hand side, indicating you have an interactive tool running.
 Click on the notification, click on the empty box in front of the text saying “Openrefine”.
-Then, click on the text “Openrefine” to open the tool in a new tab.</li>
+Then, click on the text “Openrefine” to open the tool in a new tab. It might take a moment until your cursor changes and the text becomes a hyperlink.</li>
       </ul>
     </li>
     <li>Open the OpenRefine instance
@@ -1494,9 +1494,10 @@ kind of text, numbers and dates.</p>
         <li>UWP:122470 for Vargas P</li>
         <li>UWP:122471 for Vargas I</li>
         <li>UWP:157351 for Betancur H</li>
-        <li>UWP:157339 for Betancur J
-click <code class="language-plaintext highlighter-rouge">apply</code> after you finished each edit</li>
+        <li>UWP:157339 for Betancur J</li>
       </ul>
+
+      <p>click <code class="language-plaintext highlighter-rouge">apply</code> after you finish each edit</p>
     </li>
   </ol>
 </blockquote>
@@ -1529,8 +1530,8 @@ click <code class="language-plaintext highlighter-rouge">apply</code> after you 
   <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
-    <li>Do you think you can use also <code class="language-plaintext highlighter-rouge">Edit cells &gt; Transform</code> formula to apply the changes you made manually for the 2 first terms searched (“sp1” and “SP2”)?</li>
-    <li>Why you can easily edit directly these 2 first entries and not the third one?</li>
+    <li>Do you think you can use also <code class="language-plaintext highlighter-rouge">Edit cells &gt; Transform</code> formula to apply the changes you made manually for the two first terms searched (“sp1” and “SP2”)?</li>
+    <li>Why can you easily edit these two first entries directly but not the third one?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1538,7 +1539,7 @@ click <code class="language-plaintext highlighter-rouge">apply</code> after you 
 
     <ol>
       <li>Yes, using respectively <code class="language-plaintext highlighter-rouge">value.replace(" sp1", "")</code> and <code class="language-plaintext highlighter-rouge">value.replace(" SP2", "")</code> formulas</li>
-      <li>Because the 2 first searchs only concern one entry for each when the third one return several.</li>
+      <li>Because the first two searches only concern one entry for each when the third one returns several.</li>
     </ol>
 
   </blockquote>
@@ -1576,7 +1577,7 @@ click <code class="language-plaintext highlighter-rouge">apply</code> after you 
   <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
-    <li>Try to find a regular expression to apply the same kind of <code class="language-plaintext highlighter-rouge">Text filter</code> operation than on the previous exercise. Which regular expression can work?</li>
+    <li>Try to find a regular expression to apply the same kind of <code class="language-plaintext highlighter-rouge">Text filter</code> operation as in the previous exercise. Which regular expression can work?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1608,10 +1609,10 @@ click <code class="language-plaintext highlighter-rouge">apply</code> after you 
 <h1 id="clustering">Clustering</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-i-class-quot-fas-fa-pencil-alt-quot-aria-hidden-quot-true-quot-i-span-class-quot-visually-hidden-quot-hands-on-span-basic-clustering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  <i class=&quot;fas fa-pencil-alt&quot; aria-hidden=&quot;true&quot;></i><span class=&quot;visually-hidden&quot;>hands_on</span> Basic clustering</div>
+  <div class="box-title hands-on-title" id="hands-on-basic-clustering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Basic clustering</div>
 
   <ol>
-    <li>Go to County and perform a <code class="language-plaintext highlighter-rouge">Text facet</code>.
+    <li>Go to “County” and perform a <code class="language-plaintext highlighter-rouge">Text facet</code>.
       <ul>
         <li>Keep in mind that the correct counties are: “Flores”, “La Libertad”, “Melchor de Mencos”, “San Andres” and “San Jose”.</li>
       </ul>
@@ -1662,13 +1663,18 @@ click <code class="language-plaintext highlighter-rouge">apply</code> after you 
     <li>On the upper right corner click on <code class="language-plaintext highlighter-rouge">Export</code> and select <code class="language-plaintext highlighter-rouge">Galaxy exporter</code>.
       <ul>
         <li>A notification message as “Dataset has been exported to Galaxy, please close this tab” is displayed.</li>
-        <li>You normally have your resulting data file exported on your Galaxy history as “openrefine-Galaxt file.tsv” dataset.</li>
+        <li>
+          <p>You normally have your resulting data file exported on your Galaxy history as “openrefine-Galaxt file.tsv” dataset.</p>
+        </li>
+        <li>When you want to close OpenRefine, go back to the Galaxy window. Go to the middle window, “Active Interactive Tools”. Below <code class="language-plaintext highlighter-rouge">Openrefine</code> click <code class="language-plaintext highlighter-rouge">stop</code>.</li>
+        <li>The interactive tool is then stopped and the respective task shows red in your history. This does not affect your data, which is safely stored in the “openrefine-Galaxt file.tsv” dataset.</li>
+        <li>You can continue working with it in Galaxy for the following tasks.</li>
       </ul>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
-        <p>You can also download directly file on your computer choosing <code class="language-plaintext highlighter-rouge">Export</code> and <code class="language-plaintext highlighter-rouge">Custom tabular exporter</code>, allowing you to select notably columns and rows you want to download.</p>
+        <p>You can also download the file directly on your computer, choosing <code class="language-plaintext highlighter-rouge">Export</code> and <code class="language-plaintext highlighter-rouge">Custom tabular exporter</code>, allowing you to select notable columns and rows you want to download.</p>
       </blockquote>
     </li>
   </ol>
@@ -1678,20 +1684,21 @@ click <code class="language-plaintext highlighter-rouge">apply</code> after you 
 <h1 id="api-use">API use</h1>
 
 <p>Reconciliation matches the information in one of your columns to an outside database. This is particularly helpful when it
-comes to name validation, as it proves the name you have exists somewhere else. This is a really useful service, but can be
-time consuming. In this case we will go through the process with only three records using the API from GBIF.</p>
+comes to name validation, as it proves the name you have exists somewhere else. This is a really useful service but can be
+time-consuming. In this case, we will go through the process with only three records using the API from GBIF.
+To open your dataset again from Galaxy in OpenRefine, follow the earlier steps from this tutorial “Deploy an OpenRefine instance and push your data in”.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-i-class-quot-fas-fa-pencil-alt-quot-aria-hidden-quot-true-quot-i-span-class-quot-visually-hidden-quot-hands-on-span-higher-taxonomy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  <i class=&quot;fas fa-pencil-alt&quot; aria-hidden=&quot;true&quot;></i><span class=&quot;visually-hidden&quot;>hands_on</span> Higher taxonomy</div>
 
   <ol>
-    <li>Go to “Collector” column, then make a <code class="language-plaintext highlighter-rouge">Text facet</code>. Select the collector “Elsa P”.</li>
+    <li>In your opened dataset in OpenRefine, go to the “Collector” column, then make a <code class="language-plaintext highlighter-rouge">Text facet</code>. Select the collector “Elsa P”.</li>
     <li>Under “Full name”, click on column menu and then <code class="language-plaintext highlighter-rouge">Edit column &gt; Add column by fetching URLs…</code>
       <ul>
         <li>call the new column “Api_name”</li>
       </ul>
     </li>
-    <li>Change the Throttle Delay to 250 and paste the expression <code class="language-plaintext highlighter-rouge">http://api.gbif.org/v1/species/match?verbose=true&amp;name="+escape(value,'url')</code></li>
+    <li>Change the Throttle Delay to 250 and paste the expression <code class="language-plaintext highlighter-rouge">"http://api.gbif.org/v1/species/match?verbose=true&amp;name="+escape(value,'url')</code></li>
     <li>Click ok and wait, this might take some time depending on internet connection and the number of taxa.</li>
     <li>Go to “Api_name”, click on column menu and then <code class="language-plaintext highlighter-rouge">Edit column &gt; Add column based on this column...</code>.
       <ul>
@@ -1704,9 +1711,10 @@ time consuming. In this case we will go through the process with only three reco
 ", "+value.parseJson().get("order")+
 ", "+value.parseJson().get("family")
 </code></pre></div>      </div>
-      <p>You will see the Kingdom, Phylum, Class, Order and family of each taxon.</p>
+      <p>click <code class="language-plaintext highlighter-rouge">ok</code>. 
+  You will see the Kingdom, Phylum, Class, Order and family of each taxon.</p>
     </li>
-    <li>Under “higherClassification” follow the route <code class="language-plaintext highlighter-rouge">Edit column &gt; Split into several columns…</code>, leave the initial settings.</li>
+    <li>Under “higherClassification” follow the route <code class="language-plaintext highlighter-rouge">Edit column &gt; Split into several columns…</code>, leave the initial settings and click <code class="language-plaintext highlighter-rouge">ok</code>.</li>
     <li>Now you know how to obtain the taxonomic categories of a given taxon if this is available in the GBIF API. Column names can be edited in <code class="language-plaintext highlighter-rouge">Edit column &gt; Rename this column</code>.</li>
     <li>For the purpose of the original GBIF workshop, the columns created in this exercise (Higher taxonomy) must be deleted.
       <ul>
@@ -1714,14 +1722,14 @@ time consuming. In this case we will go through the process with only three reco
         <li>Remove columns “Api_name”, “higherClassification 1”, “higherClassification 2”, “higherClassification 3”, “higherClassification 4” and “higherClassification 5”.</li>
       </ul>
     </li>
-    <li>No need to export this file as it is normally come back to previous version you already exported.</li>
+    <li>No need to export this file as it normally comes back to the previous version you already exported.</li>
   </ol>
 
 </blockquote>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>Here you learned how to use OpenRefine tool from Galaxy platform to clean Biodiversity data. This tutorial notably allowed you to apply some basic but powerfull functionnalities of OpenRefine to clean your data.</p>
+<p>Here you learned how to use OpenRefine tool from Galaxy platform to clean Biodiversity data. This tutorial notably allowed you to apply some basic but powerful functionalities of OpenRefine to clean your data.</p>
 
                 </section>
 
@@ -2039,7 +2047,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c50b88d97d9b3f21d67c26ef51aee89ccef560d2">c50b88d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bf9214756a6557619ca5efce24ad6bef12a9602f">bf92147</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
