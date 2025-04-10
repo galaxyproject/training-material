@@ -19,6 +19,8 @@ contributions:
         - yvanlebras
         - sophiepamerlon
         - laurarussell
+    reviewing:
+        - Sch-Da
     funding:
         - gbif
         - pndb
