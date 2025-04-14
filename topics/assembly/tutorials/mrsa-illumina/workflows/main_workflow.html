@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@af3dc551d520a441fbfd89f73dade8c8ccef62b3",
+		release: "galaxy-training-network@9fea14df3ffc693a3a4accf3a43bac32f4d3ee03",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -267,9 +267,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffd4ea; --color-darker: #ffaedb; --color-dimmed: #ffc2e2;">assembly</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;">assembly</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #eee500; --color-darker: #d4cb00; --color-dimmed: #e1d800;">microgalaxy</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #e8df00; --color-darker: #cfc600; --color-dimmed: #dcd300;">microgalaxy</div>
 			
 			</br>
 			
@@ -334,13 +334,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow">Galaxy Main</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow">Galaxy Australia</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow">Galaxy Europe</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow">Galaxy France</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow">Galaxy Main</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow">Import to another server (≥23.0+ only!)</a>
@@ -361,29 +361,29 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   3["fastp"];
   1 -->|output| 3;
   0 -->|output| 3;
-  88913f3f-f8cc-49d1-ab35-62d919ef8f78["Output\nfastp_json"];
-  3 --> 88913f3f-f8cc-49d1-ab35-62d919ef8f78;
-  style 88913f3f-f8cc-49d1-ab35-62d919ef8f78 stroke:#2c3143,stroke-width:4px;
+  1805127f-ba8e-43dc-873c-b11d0b2fc8af["Output\nfastp_json"];
+  3 --> 1805127f-ba8e-43dc-873c-b11d0b2fc8af;
+  style 1805127f-ba8e-43dc-873c-b11d0b2fc8af stroke:#2c3143,stroke-width:4px;
   4["FastQC"];
   1 -->|output| 4;
   5["Shovill"];
   3 -->|out1| 5;
   3 -->|out2| 5;
-  edd11cc7-936e-4862-9534-366df818a023["Output\nshovill_log"];
-  5 --> edd11cc7-936e-4862-9534-366df818a023;
-  style edd11cc7-936e-4862-9534-366df818a023 stroke:#2c3143,stroke-width:4px;
+  50bfdd97-e2e3-4253-9888-02c852b548d5["Output\nshovill_log"];
+  5 --> 50bfdd97-e2e3-4253-9888-02c852b548d5;
+  style 50bfdd97-e2e3-4253-9888-02c852b548d5 stroke:#2c3143,stroke-width:4px;
   6["Quast"];
   5 -->|contigs| 6;
-  900035e6-b98a-4cc2-9c0a-c11cf62674b0["Output\nquast_output"];
-  6 --> 900035e6-b98a-4cc2-9c0a-c11cf62674b0;
-  style 900035e6-b98a-4cc2-9c0a-c11cf62674b0 stroke:#2c3143,stroke-width:4px;
+  e9758c5a-b484-4883-938c-4608fd9a2c7e["Output\nquast_output"];
+  6 --> e9758c5a-b484-4883-938c-4608fd9a2c7e;
+  style e9758c5a-b484-4883-938c-4608fd9a2c7e stroke:#2c3143,stroke-width:4px;
   7["Bandage Image"];
   5 -->|contigs_graph| 7;
   8["Bandage Info"];
   5 -->|contigs_graph| 8;
-  a4210cf4-b208-459e-937f-55acfa820d58["Output\nbandage_info_output"];
-  8 --> a4210cf4-b208-459e-937f-55acfa820d58;
-  style a4210cf4-b208-459e-937f-55acfa820d58 stroke:#2c3143,stroke-width:4px;</pre>
+  82a4a1b8-79e8-45c8-8e46-87e3da975298["Output\nbandage_info_output"];
+  8 --> 82a4a1b8-79e8-45c8-8e46-87e3da975298;
+  style 82a4a1b8-79e8-45c8-8e46-87e3da975298 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -682,7 +682,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/af3dc551d520a441fbfd89f73dade8c8ccef62b3">af3dc55</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9fea14df3ffc693a3a4accf3a43bac32f4d3ee03">9fea14d</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

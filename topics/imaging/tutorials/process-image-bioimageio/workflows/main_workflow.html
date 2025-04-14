@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@af3dc551d520a441fbfd89f73dade8c8ccef62b3",
+		release: "galaxy-training-network@9fea14df3ffc693a3a4accf3a43bac32f4d3ee03",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -231,7 +231,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Author(s)</b>
 			<br/>
 			
-			Diana Chiang Jurado
+			Diana Chiang Jurado, 
+			
+			Leonid Kostrykin
 			
 			
 			<br/>
@@ -239,14 +241,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			1
+			2
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Apr 9, 2025
+			Apr 14, 2025
 
 			<br/>
 
@@ -265,7 +267,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffd3ed; --color-darker: #ffaedf; --color-dimmed: #ffc1e6;">imaging</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffcbea; --color-darker: #ffa6dd; --color-dimmed: #ffb9e3;">imaging</div>
 			
 			</br>
 			
@@ -277,6 +279,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			
 				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
 			
+			
+				<li>Uses <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_comments.html">Galaxy Workflow Comments</a></li>
 			
 			
 			</ul>
@@ -330,13 +334,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-process-image-bioimageio/versions/main-workflow">Galaxy Australia</a></li>
-					
-					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-process-image-bioimageio/versions/main-workflow">Galaxy France</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-process-image-bioimageio/versions/main-workflow">Galaxy Main</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-process-image-bioimageio/versions/main-workflow">Galaxy Europe</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-process-image-bioimageio/versions/main-workflow">Galaxy Main</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-process-image-bioimageio/versions/main-workflow">Galaxy Australia</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-process-image-bioimageio/versions/main-workflow">Galaxy France</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-process-image-bioimageio/versions/main-workflow">Import to another server (≥23.0+ only!)</a>
@@ -355,12 +359,20 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   2["Process image with BioImage.IO model"];
   1 -->|output| 2;
   0 -->|output| 2;
-  1c7526a8-37ad-46f3-b29f-2e0bea765e60["Output\noutput_predicted_image"];
-  2 --> 1c7526a8-37ad-46f3-b29f-2e0bea765e60;
-  style 1c7526a8-37ad-46f3-b29f-2e0bea765e60 stroke:#2c3143,stroke-width:4px;
-  98d27783-f74d-40d4-95b0-bea7af9fcedf["Output\noutput_predicted_image_matrix"];
-  2 --> 98d27783-f74d-40d4-95b0-bea7af9fcedf;
-  style 98d27783-f74d-40d4-95b0-bea7af9fcedf stroke:#2c3143,stroke-width:4px;</pre>
+  3["Split image along axes"];
+  2 -->|output_predicted_image| 3;
+  4["Extract dataset"];
+  3 -->|output| 4;
+  5["Extract dataset"];
+  3 -->|output| 5;
+  6["Process images using arithmetic expressions"];
+  4 -->|output| 6;
+  5 -->|output| 6;
+  7["Threshold image"];
+  6 -->|result| 7;
+  049ccf2f-7737-4a0c-b5b6-aad261f7e9f4["Output\noutput"];
+  7 --> 049ccf2f-7737-4a0c-b5b6-aad261f7e9f4;
+  style 049ccf2f-7737-4a0c-b5b6-aad261f7e9f4 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -396,9 +408,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy2</td>
-					<td>Process image using a BioImage.IO model</td>
-					<td>Process image with BioImage.IO model</td>
+					<td>toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3</td>
+					<td>Threshold image</td>
+					<td></td>
 				</tr>
 				
 				</tbody>
@@ -416,11 +428,54 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 			
 			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=__EXTRACT_DATASET__">__EXTRACT_DATASET__</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
 				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy2</a></td>
 				<td>
 					
 					
 					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/bioimage_inference/4fd6e8b051e9">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3">toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/imgteam/2d_auto_threshold/699a5e9146b3">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/imgteam/image_math/image_math/1.26.4+galaxy2">toolshed.g2.bx.psu.edu/repos/imgteam/image_math/image_math/1.26.4+galaxy2</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/imgteam/image_math/48fa3ac55df2">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.2.3+galaxy1">toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.2.3+galaxy1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/imgteam/split_image/73d7a4ffc03d">
 						View in ToolShed
 					</a>
 					
@@ -450,6 +505,27 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>6</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/653fd407951e23d078d74ed3a6bf7ae9f3934cea">653fd4079</a></td>
+						<td>2025-04-14 13:32:31</td>
+						<td>Fix main_workflow.ga</td>
+					</tr>
+					
+					<tr>
+						<td>5</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/11a74021d8e1e72aede716c2a1338c9dc6ca3173">11a74021d</a></td>
+						<td>2025-04-14 13:09:17</td>
+						<td>Fix main_workflow.ga</td>
+					</tr>
+					
+					<tr>
+						<td>4</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/09d2fc75a40d18d74e3928bc52244a7201274d6c">09d2fc75a</a></td>
+						<td>2025-04-14 11:31:53</td>
+						<td>Update workflow and tests</td>
+					</tr>
 					
 					<tr>
 						<td>3</td>
@@ -553,7 +629,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/af3dc551d520a441fbfd89f73dade8c8ccef62b3">af3dc55</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9fea14df3ffc693a3a4accf3a43bac32f4d3ee03">9fea14d</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

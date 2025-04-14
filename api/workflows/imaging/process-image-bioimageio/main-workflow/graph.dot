@@ -6,8 +6,17 @@ digraph main {
   2[label="Process image with BioImage.IO model"]
   1 -> 2 [label="output"]
   0 -> 2 [label="output"]
-  k1c7526a837ad46f3b29f2e0bea765e60[color=lightseagreen,label="Output\noutput_predicted_image"]
-  2 -> k1c7526a837ad46f3b29f2e0bea765e60
-  k98d27783f74d40d495b0bea7af9fcedf[color=lightseagreen,label="Output\noutput_predicted_image_matrix"]
-  2 -> k98d27783f74d40d495b0bea7af9fcedf
+  3[label="Split image along axes"]
+  2 -> 3 [label="output_predicted_image"]
+  4[label="Extract dataset"]
+  3 -> 4 [label="output"]
+  5[label="Extract dataset"]
+  3 -> 5 [label="output"]
+  6[label="Process images using arithmetic expressions"]
+  4 -> 6 [label="output"]
+  5 -> 6 [label="output"]
+  7[label="Threshold image"]
+  6 -> 7 [label="result"]
+  k049ccf2f77374a0cb5b6aad261f7e9f4[color=lightseagreen,label="Output\noutput"]
+  7 -> k049ccf2f77374a0cb5b6aad261f7e9f4
 }
