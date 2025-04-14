@@ -1515,10 +1515,10 @@ module Gtn
         else
           # Load tests and run some quick checks:
           possible_tests.each do |test_file|
-            if !test_file.match(/-tests.yml/)
+            if !test_file.match(/[_-]tests?.ya?ml/)
               results += [
                 ReviewDogEmitter.file_error(path: path,
-                                            message: 'Please use the extension -tests.yml ' \
+                                            message: 'Please use the extension -tests.yml or _tests.yml' \
                                                      'for this test file.',
                                             code: 'GTN:032')
               ]
