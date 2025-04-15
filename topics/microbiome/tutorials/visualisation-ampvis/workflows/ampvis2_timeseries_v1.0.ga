@@ -1,0 +1,112 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [],
+    "format-version": "0.1",
+    "name": "ampvis2 timeseries v1.0",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "ampvis2 subset dataset"
+                }
+            ],
+            "label": "ampvis2 subset dataset",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.0,
+                "top": 0.0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "c50ba9d5-1508-43af-93e6-d085571fc44a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "ampvis2 subset metadata list"
+                }
+            ],
+            "label": "ampvis2 subset metadata list",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.0,
+                "top": 140.0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "cf185fd0-d8e0-4a69-9a20-ef7d9ee50a95",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_timeseries/ampvis2_timeseries/2.8.6+galaxy1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "data": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "metadata_list": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ampvis2 timeseries plot",
+            "outputs": [
+                {
+                    "name": "plot",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 316.2500118987093,
+                "top": 36.46874980866437
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_timeseries/ampvis2_timeseries/2.8.6+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "9de032723f5b",
+                "name": "ampvis2_timeseries",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"data\": {\"__class__\": \"ConnectedValue\"}, \"group_by\": null, \"metadata_list\": {\"__class__\": \"ConnectedValue\"}, \"normalise\": true, \"output_options\": {\"out_format\": \"pdf\", \"plot_width\": null, \"plot_height\": null}, \"scales\": null, \"split\": false, \"tax_add\": null, \"tax_aggregate\": \"Phylum\", \"tax_empty\": \"best\", \"tax_show_cond\": {\"tax_show_sel\": \"number\", \"__current_case__\": 0, \"tax_show\": \"3\"}, \"time_variable\": \"Date\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8.6+galaxy1",
+            "type": "tool",
+            "uuid": "e147acaf-a067-4472-93c2-74fd944593c8",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "4fadb6c3-26f1-4818-9e3a-0ddb203d7bf6",
+    "version": 9
+}
