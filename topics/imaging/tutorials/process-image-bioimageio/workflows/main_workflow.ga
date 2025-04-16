@@ -4,20 +4,20 @@
     "comments": [
         {
             "child_steps": [
+                3,
                 4,
                 5,
-                7,
-                3,
-                6
+                6,
+                7
             ],
             "color": "turquoise",
             "data": {
                 "title": "Post-processing"
             },
-            "id": 1,
+            "id": 2,
             "position": [
-                0,
-                440
+                550,
+                20
             ],
             "size": [
                 990,
@@ -28,8 +28,8 @@
         {
             "child_steps": [
                 2,
-                1,
-                0
+                0,
+                1
             ],
             "color": "yellow",
             "data": {
@@ -43,6 +43,26 @@
             "size": [
                 510,
                 351
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                9,
+                8
+            ],
+            "color": "pink",
+            "data": {
+                "title": "Visualization"
+            },
+            "id": 1,
+            "position": [
+                290,
+                450
+            ],
+            "size": [
+                240,
+                353.6
             ],
             "type": "frame"
         }
@@ -62,7 +82,7 @@
     ],
     "format-version": "0.1",
     "license": "CC-BY-4.0",
-    "name": "Image prediction with BioImage.IO model",
+    "name": "Image prediction with BioImage.IO model (imported from uploaded file)",
     "report": {
         "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
     },
@@ -123,7 +143,7 @@
         },
         "2": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy2",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy3",
             "errors": null,
             "id": 2,
             "input_connections": {
@@ -136,16 +156,7 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Process image using a BioImage.IO model",
-                    "name": "input_image_file"
-                },
-                {
-                    "description": "runtime parameter for tool Process image using a BioImage.IO model",
-                    "name": "input_imaging_model"
-                }
-            ],
+            "inputs": [],
             "label": "Process image with BioImage.IO model",
             "name": "Process image using a BioImage.IO model",
             "outputs": [
@@ -163,15 +174,15 @@
                 "top": 40
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy2",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy3",
             "tool_shed_repository": {
-                "changeset_revision": "4fd6e8b051e9",
+                "changeset_revision": "d5233b9d32bb",
                 "name": "bioimage_inference",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"input_image_file\": {\"__class__\": \"RuntimeValue\"}, \"input_image_input_axes\": \"bcyx\", \"input_image_input_size\": \"256,256,1,1\", \"input_imaging_model\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.4.1+galaxy2",
+            "tool_state": "{\"input_image_file\": {\"__class__\": \"ConnectedValue\"}, \"input_image_input_axes\": \"bcyx\", \"input_image_input_size\": \"256,256,1,1\", \"input_imaging_model\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.4.1+galaxy3",
             "type": "tool",
             "uuid": "ba3c27c5-0ff4-4a90-8c52-b9e117984b8d",
             "when": null,
@@ -198,8 +209,8 @@
                 }
             ],
             "position": {
-                "left": 20,
-                "top": 490
+                "left": 570,
+                "top": 70
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.2.3+galaxy1",
@@ -237,8 +248,8 @@
                 }
             ],
             "position": {
-                "left": 270,
-                "top": 490
+                "left": 820,
+                "top": 70
             },
             "post_job_actions": {
                 "ChangeDatatypeActionoutput": {
@@ -278,8 +289,8 @@
                 }
             ],
             "position": {
-                "left": 270,
-                "top": 630
+                "left": 820,
+                "top": 210
             },
             "post_job_actions": {
                 "ChangeDatatypeActionoutput": {
@@ -323,8 +334,8 @@
                 }
             ],
             "position": {
-                "left": 520,
-                "top": 490
+                "left": 1070,
+                "top": 70
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_math/image_math/1.26.4+galaxy2",
@@ -362,8 +373,8 @@
                 }
             ],
             "position": {
-                "left": 770,
-                "top": 490
+                "left": 1320,
+                "top": 70
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3",
@@ -378,11 +389,102 @@
             "type": "tool",
             "uuid": "6652a1d0-636c-4c16-b281-2ff8a9ca6224",
             "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert binary image to label map",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 310,
+                "top": 670
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "984358e43242",
+                "name": "binary2labelimage",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"mode\": {\"mode_selector\": \"cca\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.5+galaxy0",
+            "type": "tool",
+            "uuid": "a40995a2-c1a4-46b3-948b-f329ac68a9a0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy4",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "method_option|im1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "method_option|im2": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Overlay images",
+                    "name": "method_option"
+                },
+                {
+                    "description": "runtime parameter for tool Overlay images",
+                    "name": "method_option"
+                }
+            ],
+            "label": null,
+            "name": "Overlay images",
+            "outputs": [
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 310,
+                "top": 490
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "ca362a9bfa20",
+                "name": "overlay_images",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"method_option\": {\"method\": \"seg_contour\", \"__current_case__\": 2, \"im1\": {\"__class__\": \"ConnectedValue\"}, \"im2\": {\"__class__\": \"ConnectedValue\"}, \"thickness\": \"2\", \"color\": \"#ff0000\", \"show_label\": false, \"label_color\": \"#ffff00\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.4+galaxy4",
+            "type": "tool",
+            "uuid": "86fc2e2d-98fc-480a-92eb-61aac5202272",
+            "when": null,
             "workflow_outputs": [
                 {
-                    "label": "output",
-                    "output_name": "output",
-                    "uuid": "049ccf2f-7737-4a0c-b5b6-aad261f7e9f4"
+                    "label": "out_png",
+                    "output_name": "out_png",
+                    "uuid": "beb76f8f-00d4-41dc-9409-8241dbdb1f01"
                 }
             ]
         }
@@ -390,6 +492,6 @@
     "tags": [
         "imaging"
     ],
-    "uuid": "d8daf15d-96d0-4aab-a660-3e84cd574211",
+    "uuid": "def09cf1-bd3b-420b-9b4e-b6d10f8992ce",
     "version": 2
 }

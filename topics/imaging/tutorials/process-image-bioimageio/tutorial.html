@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@bc984ed4b7eb89a4016050bc388c7d7ba902c9e4",
+		release: "galaxy-training-network@29b81e02e1868899dd73de7255e944cff8f47ff2",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Using BioImage.IO models for image analysis in Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-04-15 14:02:45 +0000">
+<meta name="DC.date" content="2025-04-16 07:10:47 +0000">
 <meta name="DC.creator" content="Diana Chiang Jurado">
 <meta name="DC.creator" content="Leonid Kostrykin"><meta name="description" content="Image analysis using Galaxy">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -187,7 +187,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-04-15 14:02:45 +0000",
+  "dateModified": "2025-04-16 07:10:47 +0000",
   "datePublished": "2025-04-09 10:42:37 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -245,7 +245,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Using BioImage.IO models for image analysis in Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/process-image-bioimageio/tutorial.html",
-  "version": 4,
+  "version": 5,
   "timeRequired": "PT30M",
   "teaches": "- Learn how to run a BioImage.IO model using Galaxy\n- Understand how to format image inputs and model axes\n- Interpret and download the model output",
   "keywords": [
@@ -974,18 +974,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
-      "url": "https://bio.tools/tool/pytorch",
-      "name": "PyTorch"
-    },
-    {
-      "@type": "Thing",
-      "url": "https://bio.tools/tool/pytorch",
-      "name": "PyTorch"
-    },
-    {
-      "@type": "Thing",
       "url": "https://bio.tools/tool/scikit-image",
       "name": "scikit-image"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy_image_analysis",
+      "name": "Galaxy Image Analysis"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy_image_analysis",
+      "name": "Galaxy Image Analysis"
     },
     {
       "@type": "Thing",
@@ -1502,7 +1502,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 9, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 15, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 16, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1518,7 +1518,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 5 </div>
 
     </blockquote>
     </section>
@@ -1559,7 +1559,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h1 id="available-bioimageio-models-in-galaxy">Available BioImage.IO models in Galaxy</h1>
 
-<p>As of the version <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy2" title="Process image using a BioImage.IO model tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Process image using a BioImage.IO model</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.4.1+galaxy2)</span>, only the PyTorch-based BioImage.IO models listed in the table below are compatible with the Galaxy tool:</p>
+<p>As of the version <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy3" title="Process image using a BioImage.IO model tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Process image using a BioImage.IO model</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.4.1+galaxy3)</span>, only the PyTorch-based BioImage.IO models listed in the table below are compatible with the Galaxy tool:</p>
 
 <table>
   <thead>
@@ -1663,8 +1663,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <ul>
   <li><strong>Imaging modality</strong>: Fluorescence microscopy</li>
   <li><strong>Task</strong>: Nucleus segmentation (boundary-aware)</li>
-  <li><strong>Input axes</strong>: <code class="language-plaintext highlighter-rouge">bcyx</code></li>
-  <li><strong>Input size</strong>: <code class="language-plaintext highlighter-rouge">256,256,1,1</code></li>
   <li><strong>Model link</strong>: <a href="https://bioimage.io/#/r/ilastik/stardist_dsb_training_data">View on BioImage.IO</a></li>
   <li><strong>Citation</strong>: <a href="https://doi.org/10.5281/zenodo.5764893">10.5281/zenodo.5764893</a></li>
 </ul>
@@ -1742,29 +1740,18 @@ For the purpose of this tutorial, we will use one image to test only one of the 
   <div class="box-title hands-on-title" id="hands-on-run-bioimage-io-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Run BioImage.IO model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy1" title="Process image using a BioImage.IO model tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Process image using a BioImage.IO model</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.4.1+galaxy1)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy3" title="Process image using a BioImage.IO model tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Process image using a BioImage.IO model</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.4.1+galaxy3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BioImage.IO model”</em>: <code class="language-plaintext highlighter-rouge">nucleisegmentationboundarymodel.pt</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input image”</em>: <code class="language-plaintext highlighter-rouge">test_image_nuclei.png</code></li>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Size of the input image”</em>: <code class="language-plaintext highlighter-rouge">256,256,1,1</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Axes of the input image”</em>: <code class="language-plaintext highlighter-rouge">bcyx</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Axes of the input image”</em>: <code class="language-plaintext highlighter-rouge">Four axes (e.g., bcyx, byxc)</code></li>
       </ul>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-axes-and-size"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Axes and size</div>
 
-        <p>The input <strong>axes</strong> define the order of image dimensions expected by the model:</p>
-        <ul>
-          <li><code class="language-plaintext highlighter-rouge">b</code>: batch</li>
-          <li><code class="language-plaintext highlighter-rouge">c</code>: channel</li>
-          <li><code class="language-plaintext highlighter-rouge">y</code>: vertical axis</li>
-          <li><code class="language-plaintext highlighter-rouge">x</code>: horizontal axis</li>
-        </ul>
-
-        <p>The <strong>input size</strong> must match that order.
-For example: <code class="language-plaintext highlighter-rouge">256,256,1,1</code> = 256 px height (<code class="language-plaintext highlighter-rouge">y</code>), 256 px width (<code class="language-plaintext highlighter-rouge">x</code>), 1 channel (<code class="language-plaintext highlighter-rouge">c</code>), and 1 image (<code class="language-plaintext highlighter-rouge">b</code>).</p>
-
-        <p>This information is provided in the model’s RDF file on <a href="https://bioimage.io">BioImage.IO</a>.</p>
+        <p>The <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Size of the input image”</em> and the <i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Axes of the input image”</em> are crucial to transform the input image into the format that the BioImage.IO model requires. The correct values are provided in the RDF file that comes with the chosen model on <a href="https://bioimage.io">BioImage.IO</a>.</p>
       </blockquote>
     </li>
   </ol>
@@ -1901,7 +1888,9 @@ For example: <code class="language-plaintext highlighter-rouge">256,256,1,1</cod
 
 </blockquote>
 
-<p>Finally, you could follow the <a href="/training-material/topics/imaging/tutorials/imaging-introduction/tutorial.html#hands-on-segment-image">“Hands On: Segment image” from the “Introduction to Image Analysis using Galaxy” tutorial</a> to create a segmentation overlay.</p>
+<p>Finally, you could follow the <a href="/training-material/topics/imaging/tutorials/imaging-introduction/tutorial.html#hands-on-segment-image">“Hands On: Segment image” from the “Introduction to Image Analysis using Galaxy” tutorial</a> to create a segmentation overlay (e.g., see <a href="#figure-3">Figure 3</a> below) or to perform cell counting.</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/process-image-bioimageio/segmentation.png" alt="Segmentation overlay. " width="256" height="256" loading="lazy" /><a target="_blank" href="../../images/process-image-bioimageio/segmentation.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Overlay of the original input image and the contours of the segmentation results obtained using the BioImage.IO model and post-processing.</figcaption></figure>
 
 <h1 id="conclusion">Conclusion</h1>
 
@@ -2085,24 +2074,24 @@ install_tool_dependencies: true
 install_repository_dependencies: true
 install_resolver_dependencies: true
 tools:
-- name: bioimage_inference
-  owner: bgruening
-  revisions: 000f171afabb
-  tool_panel_section_label: Imaging
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: bioimage_inference
-  owner: bgruening
-  revisions: 4fd6e8b051e9
-  tool_panel_section_label: Imaging
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: 2d_auto_threshold
   owner: imgteam
   revisions: 699a5e9146b3
   tool_panel_section_label: Imaging
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: binary2labelimage
+  owner: imgteam
+  revisions: 984358e43242
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: image_math
   owner: imgteam
   revisions: 48fa3ac55df2
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: overlay_images
+  owner: imgteam
+  revisions: ca362a9bfa20
   tool_panel_section_label: Imaging
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: split_image
@@ -2211,7 +2200,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bc984ed4b7eb89a4016050bc388c7d7ba902c9e4">bc984ed</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/29b81e02e1868899dd73de7255e944cff8f47ff2">29b81e0</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
