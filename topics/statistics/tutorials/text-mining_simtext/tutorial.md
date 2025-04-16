@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Text-mining with the SimText toolset
-zenodo_link: http://doi.org/10.5281/zenodo.4638516
+zenodo_link: https://doi.org/10.5281/zenodo.4638516
 questions:
 - How can I automatically collect PubMed data for a set of biomedical entities such as genes?
 - How can I analyze similarities among biomedical entities based on PubMed data on large-scale?
@@ -25,8 +25,6 @@ contributors:
 - blankenberg
 
 ---
-
-# Introduction
 
 
 Literature exploration in [PubMed](https://pubmed.ncbi.nlm.nih.gov/) on a large number of biomedical entities (e.g., genes, diseases, or experiments) can be time-consuming and challenging, especially when assessing associations between entities. Here, we use SimText, a toolset for literature research that allows you to collect text from PubMed for any given set of biomedical entities, extract associated terms, and analyze similarities among them and their key characteristics in an interactive tool.
@@ -56,10 +54,10 @@ The input data is a simple table with the genes we want to analyze as well as th
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the input file from [Zenodo](https://zenodo.org/api/files/b7b2b1d8-bb18-423d-9fe4-3bce858265ac/clingen_data)
+> 2. Import the input file from [Zenodo](https://zenodo.org/records/4638516)
 >
 >    ```
->    https://zenodo.org/api/files/b7b2b1d8-bb18-423d-9fe4-3bce858265ac/clingen_data
+>    https://zenodo.org/records/4638516/files/clingen_data
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}

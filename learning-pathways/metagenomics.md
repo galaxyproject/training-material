@@ -7,7 +7,7 @@ cover-image-alt: "microgalaxy logo"
 editorial_board:
 - bebatut
 funding:
-- erasmusplus
+- gallantries
 
 title: Metagenomics data processing and analysis for microbiome
 description: |
@@ -21,7 +21,7 @@ pathway:
     description: Why study the microbiome? What are the different approaches for metagenomics? This module will give you a short introduction to metagenomics.
     tutorials:
       - name: introduction
-        topic: metagenomics
+        topic: microbiome
 
   - section: "Module 2: Introduction to Galaxy"
     description: |
@@ -41,19 +41,7 @@ pathway:
       - name: quality-control
         topic: sequence-analysis
 
-  - section: "Module 4: Assembly"
-    description: |
-        This module covers the following questions:
-        - Why metagenomic data should be assembled?
-        - What is the difference between co-assembly and individual assembly?
-        - What is the difference between reads, contigs and scaffolds?
-        - How tools based on De Bruijn graph work?
-        - How to assess the quality of metagenomic data assembly?
-    tutorials:
-      - name: metagenomics-assembly
-        topic: metagenomics
-
-  - section: "Module 5: Community taxonomic profiling"
+  - section: "Module 4: Community taxonomic profiling"
     description: |
         This module covers the following questions:
         - Which species (or genera, families, ...) are present in my sample?
@@ -63,26 +51,38 @@ pathway:
         This module will cover taxonomic profiling in theory and also with an example tutorial.
     tutorials:
       - name: taxonomic-profiling
-        topic: metagenomics
-        #description: More theoretical tutorial
+        topic: microbiome
       - name: beer-data-analysis
-        topic: metagenomics
-        #description: Application tutorial
+        topic: microbiome
 
-  #- section: "Module 6: Taxonomic binning"
-  #  description:
-  #
-  #  tutorials:
-  #    - name: learner_participation_engagement
-  #      topic: metagenomics
+  - section: "Module 5: Community diversity"
+    description: |
+       This module covers the following questions:
+        - How many different taxons are present in my sample? How do I additionally take their relative abundance into account?
+        - How similar or how dissimilar are my samples in term of taxonomic diversity?
+        - What are the different metrics used to calculate the taxonomic diversity of my samples?
+    tutorials:
+      - name: diversity
+        topic: microbiome
 
+  - section: "Module 6: Assembly"
+    description: |
+        This module covers the following questions:
+        - Why metagenomic data should be assembled?
+        - What is the difference between co-assembly and individual assembly?
+        - What is the difference between reads, contigs and scaffolds?
+        - How tools based on De Bruijn graph work?
+        - How to assess the quality of metagenomic data assembly?
+    tutorials:
+      - name: metagenomics-assembly
+        topic: microbiome
 
-  #- section: "Module 7: Community Biodiversity"
-  #  description:
-  #
-  #  tutorials:
-  #    - name: learner_participation_engagement
-  #      topic: metagenomics
+  - section: "Module 7: Taxonomic binning"
+    description:  |
+      This module covers the process used to classify DNA sequences obtained from metagenomic sequencing into discrete groups, or bins, based on their similarity to each other.
+    tutorials:
+      - name: metagenomics-binning
+        topic: microbiome
 
   - section: "Module 8: Applying concepts to metatranscriptomics data"
     description: |
@@ -92,12 +92,14 @@ pathway:
         - How to assign taxa and function to the identified sequences?
     tutorials:
       - name: metatranscriptomics
-        topic: metagenomics
+        topic: microbiome
 
   - section: "Recommended follow-up tutorials"
     tutorials:
+      - name: metaplasmidome_query
+        topic: microbiome
       - name: pathogen-detection-from-nanopore-foodborne-data
-        topic: metagenomics
+        topic: microbiome
 ---
 
 

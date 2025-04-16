@@ -19,11 +19,17 @@ contributors:
 - ioanagry
 - jfaulon
 
+recordings:
+- captioners:
+  - kenza12
+  date: '2022-09-26'
+  length: 5M
+  youtube_id: 240oxe8unnU
+  speakers:
+  - breakthewall
+  type: Demo
+
 ---
-
-
-# Introduction
-
 
 Progress in synthetic biology is enabled by powerful bioinformatics tools such as those aimed to design metabolic pathways for the production of chemicals. These tools are available in SynBioCAD portal which is the first Galaxy set of tools for synthetic biology and metabolic engineering ({% cite Hrisson2022 %}).
 
@@ -70,16 +76,16 @@ First we need to upload and prepare the following inputs to analyze:
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) :
 >
 >    ```
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_001_0001.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_001_0006.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_001_0011.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_002_0001.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_002_0006.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_002_0011.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_003_0001.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_003_0116.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_003_0231.xml
->    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/SBML_Model_iML1515.xml
+>    https://zenodo.org/record/6628296/files/rp_001_0001.xml
+>    https://zenodo.org/record/6628296/files/rp_001_0006.xml
+>    https://zenodo.org/record/6628296/files/rp_001_0011.xml
+>    https://zenodo.org/record/6628296/files/rp_002_0001.xml
+>    https://zenodo.org/record/6628296/files/rp_002_0006.xml
+>    https://zenodo.org/record/6628296/files/rp_002_0011.xml
+>    https://zenodo.org/record/6628296/files/rp_003_0001.xml
+>    https://zenodo.org/record/6628296/files/rp_003_0116.xml
+>    https://zenodo.org/record/6628296/files/rp_003_0231.xml
+>    https://zenodo.org/record/6628296/files/SBML_Model_iML1515.xml
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -92,9 +98,9 @@ First we need to upload and prepare the following inputs to analyze:
 
 # Compute the target product flux
 
-Notice that the starting compounds (in other words, _the precursors_) of the predicted pathways (also referred as the _heterologous pathways_) are compounds that have been initially extracted from the genome-scale metabolic model (GEM) of the organism we are interested in (also referred as _chassis_). While this step is out of the scope of the present Pathway Analysis tutorial, this means that the precursors of predicted pathways are also present in the chassis model. Hence, predicted pathways and the chassis organism model can be merged to construct "augmented" whole-cell models, enabling flux analysis of these metabolic systems. This is what we'll do here to predict the production flux of a compound of interest. 
+Notice that the starting compounds (in other words, _the precursors_) of the predicted pathways (also referred as the _heterologous pathways_) are compounds that have been initially extracted from the genome-scale metabolic model (GEM) of the organism we are interested in (also referred as _chassis_). While this step is out of the scope of the present Pathway Analysis tutorial, this means that the precursors of predicted pathways are also present in the chassis model. Hence, predicted pathways and the chassis organism model can be merged to construct "augmented" whole-cell models, enabling flux analysis of these metabolic systems. This is what we'll do here to predict the production flux of a compound of interest.
 
-Within the frame of this tutorial, we'll use the _E. coli_ iML1515 GEM (downloaded from the [BiGG database](http://bigg.ucsd.edu/)) to model the chassis metabolism of _E. coli_ and the target compound is the lycopene. The provided _E. coli_ model is in the SBML. The extraction of precursor compounds and the pathway prediction have already been performed during the RetroSynthesis workflow (available in [Galaxy SynbioCAD platform](https://galaxy-synbiocad.org)). 
+Within the frame of this tutorial, we'll use the _E. coli_ iML1515 GEM (downloaded from the [BiGG database](http://bigg.ucsd.edu/)) to model the chassis metabolism of _E. coli_ and the target compound is the lycopene. The provided _E. coli_ model is in the SBML. The extraction of precursor compounds and the pathway prediction have already been performed during the RetroSynthesis workflow (available in [Galaxy SynbioCAD platform](https://galaxy-synbiocad.org)).
 
 The FBA (Flux Balance Analysis) method used to calculate the flux is a mathematical approach (as decribed in section Methods in {% cite Hrisson2022 %}) which uses the COBRApy package ({% cite Ebrahim2013 %}) and proposes 3 different analysis methods (standard FBA, parsimonious FBA, fraction of reaction). The first two methods are specific to the COBRApy package and the last one `Fraction of Reaction` is an in-house analysis method (as decribed in section Methods in {% cite Hrisson2022 %}) to consider the cell needs for its own maintenance while producing the target compound.
 
@@ -259,7 +265,7 @@ In this section, you can run the Pathway Analysis Workflow more easily and fastl
 >
 >    > <comment-title></comment-title>
 >    >
->    > All the outputs will be automatically generated and identical to the previous ones. 
+>    > All the outputs will be automatically generated and identical to the previous ones.
 >    {: .comment}
 {: .hands_on}
 

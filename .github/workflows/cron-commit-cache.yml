@@ -1,0 +1,75 @@
+name: "[Cron] Update Commit Cache, PR Data"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '45 0 * * 1'
+jobs:
+  runner-job:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    # Only run on main repo on and PRs that match the main repo.
+    if: |
+      github.repository == 'galaxyproject/training-material' &&
+      (github.event_name != 'pull_request' ||
+       github.event.pull_request.head.repo.full_name == github.repository)
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1000
+          persist-credentials: false
+
+      # BEGIN Dependencies
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+      - uses: actions/cache@v4
+        with:
+          path: |
+            vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          bundle pristine ffi
+      # END Dependencies
+
+      - name: Update commit cache
+        id: generate
+        run: |
+          # Check if the oldest commit of the commit cache is known in this history
+          last_cached_commit=$(ls metadata/git-mod-*.txt | cut -d- -f 3 | cut -d. -f 1)
+          git show $last_cached_commit
+          ec=$?
+          if (( ec != 0 )); then
+            # Worst case, we need to fetch more. just fetch everything to be safe.
+            git fetch --unshallow
+          fi
+
+          bundle exec ruby bin/commit-cache-update.rb
+
+      - name: Update geocoding of events
+        id: geocode
+        run: |
+          bundle exec ruby bin/geocode.rb
+
+      - name: Update github metadata dataset
+        id: ghmeta
+        run: |
+          bundle exec ruby bin/collect-gh.rb
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Create Pull Request
+        # If it's not a Pull Request then commit any changes as a new PR.
+        uses: peter-evans/create-pull-request@v7
+        with:
+          title: Update Cached Commit Data
+          branch-suffix: timestamp
+          commit-message: Update Cached Commit Data
+          add-paths: metadata/,events/

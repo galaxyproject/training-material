@@ -14,9 +14,14 @@ key_points:
   - "Label-free and labelled methods are not better or worse *per se*."
   - "Different scientific question call for different quantitation methods."
   - "Be wise in choosing the right method before starting your LC-MS/MS runs."
-contributors:
+contributions:
+  authorship:
   - stortebecker
   - bgruening
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 subtopic: id-quant
 tags: [DDA]
 ---

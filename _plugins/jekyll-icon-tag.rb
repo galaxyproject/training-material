@@ -1,80 +1,99 @@
 # frozen_string_literal: true
 
 module Jekyll
-  # Our {% icon X %} tag
-  class IconTag < Liquid::Tag
-    def initialize(tag_name, text, tokens)
-      super
-      parts = text.strip.split
-      @text = parts[0]
-      @aria = true
-      return unless parts[1] == 'aria=false'
+  module Tags
 
-      @aria = false
-    end
+    # Our {% icon X %} tag
+    class IconTag < Liquid::Tag
+      def initialize(tag_name, text, tokens)
+        super
+        parts = text.strip.split
+        @text = parts[0]
+        @aria = true
+        return unless parts[1] == 'aria=false'
 
-    ##
-    # This function renders the icon tag
-    # Params:
-    # +icon+:: The icon to render
-    # +@area+:: Whether to add aria-hidden
-    # +@text+:: The text to add to the icon
-    #
-    # Returns:
-    # The HTML for the icon
-    # Note: The icon text label is wrapped in a span with class
-    #       "visually-hidden" to make it accessible to screen readers.
-    #
-    # Example:
-    #  {% icon fa fa-github %}
-    #  => <i class="fa fa-github" aria-hidden="true"></i>
-    #  {% icon fa fa-github aria=false %}
-    #  => <i class="fa fa-github"></i>
-    def render_for_text(icon)
-      if icon.empty?
-        raise SyntaxError, "No icon defined for: '#{@text}'. Please define it in `_config.yml` (under `icon-tag:`)."
+        @aria = false
       end
 
-      if icon.start_with?('fa')
-        if @aria
-          %(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
-        else
-          %(<i class="#{icon}" aria-hidden="true"></i>)
+      ##
+      # This function renders the icon tag
+      # Params:
+      # +icon+:: The icon to render
+      # +@area+:: Whether to add aria-hidden
+      # +@text+:: The text to add to the icon
+      #
+      # Returns:
+      # The HTML for the icon
+      # Note: The icon text label is wrapped in a span with class
+      #       "visually-hidden" to make it accessible to screen readers.
+      #
+      # Example:
+      #  {% icon fa fa-github %}
+      #  => <i class="fa fa-github" aria-hidden="true"></i>
+      #  {% icon fa fa-github aria=false %}
+      #  => <i class="fa fa-github"></i>
+      def render_for_text(icon)
+        if icon.empty?
+          raise SyntaxError, "No icon defined for: '#{@text}'. Please define it in `_config.yml` (under `icon-tag:`)."
         end
-      elsif icon.start_with?('ai')
-        if @aria
-          %(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
-        else
-          %(<i class="ai #{icon}" aria-hidden="true"></i>)
+
+        if icon.start_with?('fa')
+          if @aria
+            %(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+          else
+            %(<i class="#{icon}" aria-hidden="true"></i>)
+          end
+        elsif icon.start_with?('ai')
+          if @aria
+            %(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+          else
+            %(<i class="ai #{icon}" aria-hidden="true"></i>)
+          end
         end
+      end
+
+      ##
+      # icon - Include an icon from our _config.yml into your tutorial
+      #
+      # Examples:
+      #
+      #   {% icon email %}
+      #   {% icon galaxy-history %}
+      #
+      def render(context)
+        cfg = get_config(context)
+        icon = cfg[@text] || ''
+        render_for_text(icon)
+      end
+
+      def get_config(context)
+        context.registers[:site].config['icon-tag']
       end
     end
 
-    def render(context)
-      cfg = get_config(context)
-      icon = cfg[@text] || ''
-      render_for_text(icon)
-    end
+    # The variable version that can accept a variable name instead of a string
+    class IconTagVar < IconTag
+      def initialize(tag_name, text, tokens)
+        super
+        @text = text.strip
+      end
 
-    def get_config(context)
-      context.registers[:site].config['icon-tag']
-    end
-  end
-
-  # The variable version that can accept a variable name instead of a string
-  class IconTagVar < IconTag
-    def initialize(tag_name, text, tokens)
-      super
-      @text = text.strip
-    end
-
-    def render(context)
-      cfg = get_config(context)
-      icon = cfg[context[@text]] || ''
-      render_for_text(icon)
+      ##
+      # icon_var - Include an icon from our _config.yml into your tutorial, but accessing a variable rather than expecting a string.
+      #
+      # Examples:
+      #
+      #   {% icon_var var1 %}
+      #   {% icon_var var2 %}
+      #
+      def render(context)
+        cfg = get_config(context)
+        icon = cfg[context[@text]] || ''
+        render_for_text(icon)
+      end
     end
   end
 end
 
-Liquid::Template.register_tag('icon_var', Jekyll::IconTagVar)
-Liquid::Template.register_tag('icon', Jekyll::IconTag)
+Liquid::Template.register_tag('icon_var', Jekyll::Tags::IconTagVar)
+Liquid::Template.register_tag('icon', Jekyll::Tags::IconTag)

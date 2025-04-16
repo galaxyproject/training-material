@@ -8,7 +8,7 @@ description: |
   lists all the learning paths, and at the top of the pathway page
 
 type: use  # 'use' for science topics, or admin-dev or instructors
-tags: [some, keywords, here ]
+tags: [some, keywords, here, gtn-topic-id ]
 editorial_board:
 - shiltemann
 

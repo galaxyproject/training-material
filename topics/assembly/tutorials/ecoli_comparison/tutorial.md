@@ -10,7 +10,14 @@ requirements:
     tutorials:
       - unicycler-assembly
 tags:
+  - gmod
   - prokaryote
+  - microgalaxy
+  - jbrowse1
+edam_ontology:
+  - topic_0196 # Sequence Assembly
+  - topic_0622 # Genomics
+  - topic_3301 # Microbiology
 questions:
   - "I just assembled a genome. How does it compare with already sequenced genomes?"
   - "How do I find rearranged, inserted, or deleted regions?"
@@ -164,7 +171,7 @@ This can be done as a two step process where we first copy the end part of the e
 > 2. Switch to the `Rule-based` tab on the right
 >
 >    > <tip-title>Using the Rule-based Uploader</tip-title>
->    > There is a detailed tutorial on using the [Rule based Uploader](../../../galaxy-data-manipulation/tutorials/upload-rules/tutorial.html) if you want to learn about the more advanced features available.
+>    > There is a detailed tutorial on using the [Rule based Uploader]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}) if you want to learn about the more advanced features available.
 >    {: .tip}
 >
 >    - *"Upload data as"*: `Collection(s)`
@@ -815,8 +822,7 @@ Earlier we [downloaded](#hands-on-uploading-sequences-and-annotations) gene anno
 > 19     | product_length: length of the product corresponding to the accession.version in column 11. Protein product lengths are in amino acid units, and do not include the stop codon which is included in column 18. Additionally, product_length may differ from feature_interval_length if the product contains sequence differences vs. the genome, as found for some RefSeq transcript and protein products based on mRNA sequences and also for INSDC proteins that are submitted to correct genome discrepancies.
 > 20     | attributes: semi-colon delimited list of a controlled set of qualifiers. The list currently includes: partial, pseudo, pseudogene, ribosomal_slippage, trans_splicing, anticodon=NNN (for tRNAs), old_locus_tag=XXX
 >
-> *from [ftp.ncbi.nlm.nih.gov/genomes/genbank/README.txt](ftp://ftp.ncbi.nlm.nih.gov/genomes/genbank/README.txt)*
-{: .quote}
+{: .quote cite="https://ftp.ncbi.nlm.nih.gov/genomes/genbank/README.txt"}
 
 
 Our objective is to convert these data into BED. In this analysis we want to initially concentrate on protein coding regions. To do this let's select all lines from the annotation datasets that contain the term `CDS`, then

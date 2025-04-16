@@ -2,8 +2,8 @@
 title: "New Topic: Data Science Survival Kit"
 contributions:
   authorship: [shiltemann, hexylena, bebatut, abretaud, yvanlebras, fpsom, carpentries]
-  funding: [erasmusplus]
-tags: [gtn infrastructure, new topic]
+  funding: [gallantries]
+tags: [gtn infrastructure, new topic, data-science]
 layout: news
 ---
 

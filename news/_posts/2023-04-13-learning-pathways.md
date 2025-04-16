@@ -1,9 +1,9 @@
 ---
 title: "New Feature: Learning Pathways!"
-tags: [new feature]
+tags: [new feature, contributing]
 contributions:
     authorship: [shiltemann, hexylena]
-    funding: [erasmusplus]
+    funding: [gallantries]
 cover: "assets/images/learning-pathway.png"
 coveralt: "a graphic depicting a winding path from a start symbol to a trophy, with tutorials along the way"
 layout: news

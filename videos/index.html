@@ -1,0 +1,84 @@
+---
+title: GTN Video Library
+layout: page
+redirect_from:
+  - /topics/admin/videos/index
+  - /topics/assembly/videos/index
+  - /topics/climate/videos/index
+  - /topics/computational-chemistry/videos/index
+  - /topics/contributing/videos/index
+  - /topics/dev/videos/index
+  - /topics/ecology/videos/index
+  - /topics/epigenetics/videos/index
+  - /topics/galaxy-interface/videos/index
+  - /topics/genome-annotation/videos/index
+  - /topics/imaging/videos/index
+  - /topics/instructors/videos/index
+  - /topics/introduction/videos/index
+  - /topics/metabolomics/videos/index
+  - /topics/metagenomics/videos/index
+  - /topics/microbiome/videos/index
+  - /topics/proteomics/videos/index
+  - /topics/sequence-analysis/videos/index
+  - /topics/statistics/videos/index
+  - /topics/transcriptomics/videos/index
+  - /topics/variant-analysis/videos/index
+  - /topics/visualisation/videos/index
+---
+
+The GTN now automatically generates videos for selected slide decks. Click on a topic below to jump to the video page for that topic!
+Additionally there is a much larger library of human mande recordings also available, as seen below!
+
+{% assign vids = site | get_videos_for_videos_page %}
+
+{% for k in vids %}
+
+	{% assign topic = k[1] %}
+	<h2 id="{{ topic.topic_id }}">{{ topic.topic_name }}</h2>
+
+	{% if topic.automated_videos %}
+	<h3>Automated Videos from Slides</h3>
+	<div class="playlist">
+		{% for video in topic.automated_videos %}
+				<div class="pl-item">
+					<a href="watch.html?v={{ video.vid }}&utm_source=videos_page&utm_medium=automated_video&utm_campaign={{ vid }}">
+						<div class="cover">
+							<img src="{{ video.cover }}" width="200px" alt="cover"/>
+						</div>
+						<div>
+							<div class="title">{{ video.title }}</div>
+							<div class="description">
+								{% for captioner in video.captioners %}
+									{% include _includes/contributor-badge-inline.html id=captioner %}
+								{% endfor %}
+							</div>
+						</div>
+					</a>
+				</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+
+	{% if topic.manual_videos %}
+	<h3>Human Recordings </h3>
+	<div class="playlist">
+		{% for video in topic.manual_videos %}
+				<div class="pl-item">
+					<a href="watch.html?v={{ video.vid }}&utm_source=videos_page&utm_medium=manual_video&utm_campaign={{ vid }}&player=youtube">
+						<div class="cover">
+							<img src="{{ video.cover }}" width="200px" alt="cover"/>
+						</div>
+					</a>
+					<div>
+						<div class="title">{{ video.title }}</div>
+						<div class="description">
+							{% for speaker in video.speakers %}
+								{% include _includes/contributor-badge-inline.html id=speaker %}
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+{% endfor %}

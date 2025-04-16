@@ -2,9 +2,13 @@
 layout: tutorial_hands_on
 
 title: Refining Genome Annotations with Apollo (prokaryotes)
-zenodo_link: https://zenodo.org/record/3270822
+zenodo_link: https://zenodo.org/record/4889110
 tags:
+  - gmod
   - prokaryote
+  - microgalaxy
+  - jbrowse1
+  - apollo2
 questions:
   - How to visualize your genome after automated annotations have been performed?
   - How to manually annotate genome after automated annotations have been performed?
@@ -30,7 +34,8 @@ contributions:
     - nathandunn
     - mboudet
   funding:
-    - erasmusplus
+    - gallantries
+    - eurosciencegateway
 
 requirements:
   - type: "internal"
@@ -43,18 +48,32 @@ requirements:
       - annotation-with-prokka
 
 subtopic: prokaryote
+edam_ontology:
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_0623 # Gene and protein families
+- topic_0080 # Sequence analysis
 abbreviations:
   OGS: Official Gene Set
+
+recordings:
+- captioners:
+  - abretaud
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H
+  youtube_id: ywK1fhM-QFU
+  speakers:
+  - abretaud
+
 ---
+
+
+After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
 > <warning-title>Only works on UseGalaxy.eu</warning-title>
 > Currently this tutorial requires an Apollo server to be deployed by the administrator. This will currently only work on UseGalaxy.eu, hopefully this list will expand in the future.
 {: .warning}
-
-# Introduction
-
-
-After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
 [Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this. It is a web-based, collaborative genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to curate evidences and annotate a genome.
 
@@ -86,11 +105,6 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 
 ## Get data
 
-<!-- Data for E.coli from https://usegalaxy.eu/u/helena-rasche/h/e-coli-k-12-apollo -->
-<!-- other datasets available: -->
-<!-- Apis mellifera: https://zenodo.org/record/3270822 (based on https://hymenoptera.elsiklab.missouri.edu/beebase/download_sequences probably) -->
-<!-- Schizosaccharomyces pombe: https://usegalaxy.eu/u/abretaud/h/apollo-eukaryote-data -->
-
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 0. Create a new history and give it a good name
@@ -106,21 +120,21 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 > 3. Copy & Paste the following table into the Rule-based uploader textbox:
 >
 >    ```
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/augustus.gff3	Augustus	gff3
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/blastp_vs_swissprot_2018-01-22.blastxml	Blastp vs swissprot	blastxml
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_K12_Coverage.bigwig	BWA-MEM K12 Coverage	bigwig
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_K12_Mapping.bam	BWA-MEM K12 Mapping	bam
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_O104_Coverage.bigwig	BWA-MEM O104 Coverage	bigwig
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_O104_Mapping.bam	BWA-MEM O104 Mapping	bam
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/E._coli_str_K-12_substr_MG1655_100kb_subset.fasta	Genome	fasta
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/K12_Variants.vcf	K12 Variants	vcf
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/NCBI_AnnotWriter_Genes.gff3	NCBI AnnotWriter Genes	gff3
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/O104_H4_LASTZ_Alignment.bed	O104 H4 LASTZ Alignment	bed
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/O104_Variants.vcf	O104 Variants	vcf
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927169_rep1.bam	TopHat SRR1927169 rep1	bam
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927169_rep1_Coverage.bigwig	TopHat SRR1927169 rep1 Coverage	bigwig
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927170_rep2.bam	TopHat SRR1927170 rep2	bam
->    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927170_rep2_Coverage.bigwig	TopHat SRR1927170 rep2 Coverage	bigwig
+>    https://zenodo.org/records/4889110/files/augustus.gff3	Augustus	gff3
+>    https://zenodo.org/records/4889110/files/blastp_vs_swissprot_2018-01-22.blastxml	Blastp vs swissprot	blastxml
+>    https://zenodo.org/records/4889110/files/BWA-MEM_K12_Coverage.bigwig	BWA-MEM K12 Coverage	bigwig
+>    https://zenodo.org/records/4889110/files/BWA-MEM_K12_Mapping.bam	BWA-MEM K12 Mapping	bam
+>    https://zenodo.org/records/4889110/files/BWA-MEM_O104_Coverage.bigwig	BWA-MEM O104 Coverage	bigwig
+>    https://zenodo.org/records/4889110/files/BWA-MEM_O104_Mapping.bam	BWA-MEM O104 Mapping	bam
+>    https://zenodo.org/records/4889110/files/E._coli_str_K-12_substr_MG1655_100kb_subset.fasta	Genome	fasta
+>    https://zenodo.org/records/4889110/files/K12_Variants.vcf	K12 Variants	vcf
+>    https://zenodo.org/records/4889110/files/NCBI_AnnotWriter_Genes.gff3	NCBI AnnotWriter Genes	gff3
+>    https://zenodo.org/records/4889110/files/O104_H4_LASTZ_Alignment.bed	O104 H4 LASTZ Alignment	bed
+>    https://zenodo.org/records/4889110/files/O104_Variants.vcf	O104 Variants	vcf
+>    https://zenodo.org/records/4889110/files/TopHat_SRR1927169_rep1.bam	TopHat SRR1927169 rep1	bam
+>    https://zenodo.org/records/4889110/files/TopHat_SRR1927169_rep1_Coverage.bigwig	TopHat SRR1927169 rep1 Coverage	bigwig
+>    https://zenodo.org/records/4889110/files/TopHat_SRR1927170_rep2.bam	TopHat SRR1927170 rep2	bam
+>    https://zenodo.org/records/4889110/files/TopHat_SRR1927170_rep2_Coverage.bigwig	TopHat SRR1927170 rep2 Coverage	bigwig
 >    ```
 > 4. Click **Build**
 >

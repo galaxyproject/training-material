@@ -82,9 +82,9 @@ ruby bin/ari-prep-script.rb "${build_dir}" "${engine}"
 echo "  Extracting slides"
 convert "${slides}" -resize 1920x1080 "${build_dir}/slides.%03d.png"
 
-echo "  Building Video | $(npm bin)/editly --json ${build_dir}/editly.json5"
+echo "  Building Video | ./node_modules/.bin/editly --json ${build_dir}/editly.json5"
 $FFMPEG_PATH/ffmpeg -version
-$(npm bin)/editly --json "${build_dir}/editly.json5"
+./node_modules/.bin/editly --json "${build_dir}/editly.json5"
 
 # Mux it together
 echo "  Muxing"

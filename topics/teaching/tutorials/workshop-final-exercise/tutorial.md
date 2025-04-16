@@ -34,7 +34,10 @@ contributions:
     - ppalagi
     - elixir-goblet-ttt
   funding:
-    - erasmusplus
+    - gallantries
+tags:
+  - elixir
+  - train-the-trainers
 ---
 
 # Running a demo training

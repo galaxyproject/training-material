@@ -7,8 +7,12 @@ priority: 1
 redirect_from:
   - /topics/transcriptomics/tutorials/scrna-scater-qc/tutorial
 zenodo_link: 'https://zenodo.org/record/3386291'
-tags:
-  - single-cell
+answer_histories:
+  - label: "UseGalaxy.eu"
+    history: https://singlecell.usegalaxy.eu/u/videmp/h/single-cell-qc-with-scater
+    date: 2024-12-12
+draft: true
+tags: []
 questions:
 - How to ensure the quality of single-cell RNA-seq data?
 - What are the confounding factors that may affect the interpretation of downstream analyses?
@@ -33,15 +37,14 @@ time_estimation: 1H
 key_points:
 - Single-cell RNA-seq data is often noisy
 - scater can be used to apply the visualise-filter-visualise paradigm of quality control
-contributors:
-- ethering
-- nsoranzo
-
+contributions:
+  authorship:
+    - ethering
+    - nsoranzo
+  testing:
+    - pavanvidem
 gitter: Galaxy-Training-Network/galaxy-single-cell
-
 ---
-
-# Introduction
 
 
 Single-cell RNA-seq (scRNA-seq) is emerging as a promising technology for analysing variability in cell populations. However, the combination of technical noise and intrinsic biological variability makes detecting technical artefacts particularly challenging. Removal of low-quality cells and detection of technical artefacts is critical for accurate downstream analysis.

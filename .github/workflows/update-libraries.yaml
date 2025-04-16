@@ -6,21 +6,25 @@ on:
 jobs:
   runner-job:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     # Only run on main repo on and PRs that match the main repo.
     if: |
       github.repository == 'galaxyproject/training-material' &&
       (github.event_name != 'pull_request' ||
        github.event.pull_request.head.repo.full_name == github.repository)
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          persist-credentials: false
 
       # BEGIN Dependencies
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.0"
-      - uses: actions/cache@v2
+          ruby-version: "3.2"
+      - uses: actions/cache@v4
         with:
           path: |
             vendor/bundle
@@ -35,18 +39,18 @@ jobs:
           bundle pristine ffi
       # END Dependencies
 
-      - name: Update Shortlinks
+      - name: Update data libraries
         id: generate
         run: |
-          grep zenodo_link: -R topics -l | grep '.md$' | xargs -r -n 1 ruby bin/update-data-library update --fragile
+          grep zenodo_link: -R topics -l | grep '.md$' | xargs -r -n 1 bundle exec ruby bin/update-data-library update --fragile
 
       - name: Create Pull Request
         # If it's not a Pull Request then commit any changes as a new PR.
         if: |
           github.event_name != 'pull_request'
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v7
         with:
           title: Add missing data-library.yaml files
           branch-suffix: timestamp
           commit-message: Adds data-library.yaml for tutorials
-
+          add-paths: '**/data-library.yaml'

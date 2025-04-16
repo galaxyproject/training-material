@@ -62,10 +62,18 @@ contributors:
 notebook:
   language: python
   snippet: topics/climate/tutorials/pangeo-notebook/preamble.md
+
+recordings:
+- captioners:
+  - annefou
+  date: '2022-03-03'
+  galaxy_version: '21.09'
+  length: 17M
+  youtube_id: XFF2yRcYGp0
+  speakers:
+  - annefou
+
 ---
-
-
-# Introduction
 
 
 In this tutorial, we will learn about [Xarray](https://xarray.pydata.org/), one of the most used Python library from the [Pangeo](https://pangeo.io/) ecosystem.

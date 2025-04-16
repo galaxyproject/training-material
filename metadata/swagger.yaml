@@ -1,8 +1,17 @@
 openapi: 3.0.1
 info:
   title: Galaxy Training Network API
-  description: A collection of tutorials generated and maintained by Galaxy Community
-    Members across the world
+  description: |
+    A collection of e-learning materials produced and maintained by GTN Members
+    across the world.
+
+    IMPORTANT! IF you build anything based off of this API, you must contact us
+    to let us know. This API is UNSTABLE and subject to CHANGE WITHOUT WARNING.
+    When you contact us, if we are interested in supporting the project, then
+    we can advise you to the best APIs that are useful for your use case, or
+    help build new ones that are more useful to you and do not impose
+    unnecessary load on the GTN. Additionally we will consider providing
+    additional stability guarantees for those specific routes you rely on.
   license:
     name: MIT & CC-BY 4.0
     url: https://github.com/galaxyproject/training-material/blob/main/LICENSE.md
@@ -18,6 +27,10 @@ tags:
   description: GTN Contributor Information
 - name: internal
   description: Internal APIs that aren't much use outside.
+- name: galaxy
+  description: APIs being used inside Galaxy
+- name: stable
+  description: APIs with higher reliability guarantees
 
 paths:
   /feedback.csv:
@@ -29,7 +42,9 @@ paths:
         200:
           description: successful operation
           content:
-            application/csv
+            application/csv:
+              schema:
+                type: string
   /feedback.json:
     get:
       tags:
@@ -39,7 +54,9 @@ paths:
         200:
           description: successful operation
           content:
-            application/json
+            application/json:
+              schema:
+                type: string
   /contributors.json:
     get:
       tags:
@@ -72,6 +89,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+
+  /top-tools.json:
+    get:
+      tags:
+      - galaxy
+      - stable
+      summary: List available tutorials by tool
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
   /topics.json:
     get:
       tags:
@@ -92,7 +124,7 @@ paths:
       - name: topicId
         in: path
         description: ID of the topic
-        example: metagenomics
+        example: microbiome
         required: true
         schema:
           type: string
@@ -224,6 +256,40 @@ paths:
       responses:
         200:
           description: successful operation
+
+  /psl.json:
+    get:
+      tags:
+      - tools
+      summary: Get the GTN's public server tool listing. It lists all known public servers that are reachable at the time of the GTN's deployment, and which tool versions are installed on each of those servers.
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Psl'
+
+  /psl/{toolId}.json:
+    get:
+      tags:
+      - tools
+      parameters:
+      - name: toolId
+        in: path
+        example: toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate
+        description: Tool ID WITHOUT the version component!! Also when you call it properly you do NOT need to encode the /.
+        required: true
+        schema:
+          type: object
+      summary: Get the GTN's public server tool listing for a specific tool ID. It lists all known public servers that are reachable at the time of the GTN's deployment, and which versions of this tool are available. It's very important that you strip the version component!
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PslIndividual'
 
 components:
   schemas:
@@ -389,3 +455,35 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TrainingMaterial'
+    Psl:
+      type: object
+      properties:
+        servers:
+          $ref: '#/components/schemas/ArrayOfServers'
+        tools:
+          $ref: '#/components/schemas/ArrayOfToolVersions'
+    PslIndividual:
+      $ref: '#/components/schemas/ToolVersionClear'
+    ArrayOfServers:
+      type: array
+      items:
+        $ref: "#/components/schemas/Server"
+    Server:
+      type: object
+      properties:
+        url:
+          type: string
+          description: A url for the server
+        name:
+          type: string
+          description: A human readable description
+    ArrayOfToolVersions:
+      type: array
+      items:
+        $ref: "#/components/schemas/ToolVersionOpaque"
+    ToolVersionOpaque:
+      type: object
+      description: A hash/dict where the top level keys are the known versions of that tool (or '_' for built in tools), and then the servers that have that tool. Note that the servers are actually a list of integers which refer to the Server listing field.
+    ToolVersionClear:
+      type: object
+      description: A hash/dict where the top level keys are the known versions of that tool (or '_' for built in tools), and then the servers that have that tool.

@@ -1,7 +1,7 @@
 ---
 layout: news
 title: "GTN Smörgåsbord 2: Tapas Edition"
-tags: [event]
+tags: [event, contributing, teaching]
 link: "https://gallantries.github.io/posts/2021/12/14/smorgasbord2-tapas/?utm_source=gtn&utm_medium=news&utm_campaign=smorgasbord2"
 external: true
 cover: "https://gallantries.github.io/assets/images/smorgasbord2/banner-500.png"

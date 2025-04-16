@@ -1,0 +1,29 @@
+- doc: Test outline for scRNA-Plant-Analysis
+  job:
+    SHR (CSV.gz):
+      class: File
+      location: https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_shr_datamatrix.fixednames.transposed.csv.gz
+      filetype: csv
+    WT (CSV.gz):
+      class: File
+      location: https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix.fixednames.transposed.csv.gz
+      filetype: csv
+    Leiden Resolution: '0.35'
+    Min Genes: '100'
+    Min Cells: '2'
+    Max Features: '12000.0'
+    Max Lib Size: '120000.0'
+  outputs:
+    scRNA with clusters Dataset:
+      asserts:
+        has_h5_keys:
+            keys: "obs/leiden"
+            keys: "obs/batch"
+            keys: "var/n_cells_by_counts"
+            keys: "uns/leiden"
+            keys: "uns/umap"
+    out_png (Step 33):
+      asserts:
+        has_size:
+          value: 210272
+          delta: 4500

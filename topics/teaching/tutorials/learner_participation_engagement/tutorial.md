@@ -16,6 +16,9 @@ key_points:
 - Select teaching practices (learning techniques) that will allow learners to achieve the LOs
 - Always remember that learning occurs BY DOING, which means that learners will be able to DESCRIBE something if and only if they will have the chance to practice it; they will be able to APPLY a rule only after having applied themselves the rule, and that, in order to successfully practice the APPLICATION of the rule, they must remember the rule, they must have understood it and how it can be used for applications, and they must have seen examples of how to apply it.
 - Be aware of other practices and behaviours supporting interactivity, a positive and engaging learning environment, active and collaborative learning, stimulating lessons, frequent feedback
+tags:
+  - elixir
+  - train-the-trainers
 requirements:
 -
     type: "internal"
@@ -31,15 +34,12 @@ contributions:
     - ppalagi
     - elixir-goblet-ttt
   funding:
-    - erasmusplus
+    - gallantries
 ---
 
-<!-- GTN:IGNORE:002 -->
-
-# Introduction
-
-
 Effective training
+
+<!-- GTN:IGNORE:002 -->
 
 > <comment-title>Resources / Reading recommendation</comment-title>
 >
@@ -144,7 +144,7 @@ This matrix is then a **tool for self evaluation**:
 
 We are now going to watch a short video (13 min) from Eric Mazur, professor at the Harvard University,
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Z9orbxoRofI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{% include _includes/youtube.html id="Z9orbxoRofI" title="Effective training practices" %}
 
 In this video, Eric Mazur discusses some of these teaching practices and a **paradigm change: from the traditional lecture to active learning-based approaches**. Can you recognise the main features of this change of paradigm?
 

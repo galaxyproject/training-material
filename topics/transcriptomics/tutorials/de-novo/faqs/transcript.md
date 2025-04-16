@@ -4,6 +4,8 @@ area: De novo transcriptome reconstruction with RNA-Seq
 box_type: tip
 layout: faq
 contributors: [rahmot]
+redirect_from:
+- /topics/transcriptomics/faqs/transcript
 ---
 
 This is okay! Many aspects of the tutorial can potentially affect the exact results you obtain. For example, the reference genome version used and versions of tools. It’s less important to get the exact results shown in the tutorial, and more important to understand the concepts so you can apply them to your own data.

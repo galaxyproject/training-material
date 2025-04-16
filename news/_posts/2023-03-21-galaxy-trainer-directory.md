@@ -1,9 +1,9 @@
 ---
 title: "New Feature: Trainer Directory! (Add yourself today!)"
-tags: [new feature, community building, capacity building]
+tags: [new feature, community building, capacity building, contributing]
 contributions:
     authorship: [hexylena, lldelisle]
-    funding: [erasmusplus]
+    funding: [gallantries]
 layout: news
 ---
 

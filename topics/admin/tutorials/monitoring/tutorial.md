@@ -35,6 +35,17 @@ requirements:
       - gxadmin
 abbreviations:
     TSDB: Time Series Database
+
+recordings:
+- captioners:
+  - shiltemann
+  - hexylena
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 73M
+  youtube_id: drUaYQtMBLY
+  speakers: []
+
 ---
 
 
@@ -353,7 +364,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    +  - plugin: disk
 >    +  - plugin: kernel
 >    +  - plugin: processes
->    +  - plugin: io
+>    +  - plugin: diskio
 >    +  - plugin: mem
 >    +  - plugin: system
 >    +  - plugin: swap
@@ -375,7 +386,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -327,3 +327,12 @@ flower_ui_users:
+>    @@ -330,3 +330,12 @@ flower_ui_users:
 >     
 >     flower_environment_variables:
 >       GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
@@ -402,7 +413,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -113,6 +113,9 @@ galaxy_config:
+>    @@ -116,6 +116,9 @@ galaxy_config:
 >         celery_conf:
 >           result_backend: "redis://localhost:6379/0"
 >         enable_celery_tasks: true
@@ -524,15 +535,15 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -108,4 +108,9 @@ server {
->     		proxy_pass http://{{ galaxy_config.gravity.reports.bind }}:/;
+>    @@ -109,4 +109,9 @@ server {
+>     		proxy_set_header X-Forwarded-Host $host;
+>     		proxy_set_header X-Forwarded-Proto $scheme;
 >     	}
->     
+>    +
 >    +	location /grafana/ {
 >    +		proxy_pass http://127.0.0.1:3000/;
 >    +		proxy_set_header Host $http_host;
 >    +	}
->    +
 >     }
 >    {% endraw %}
 >    ```
@@ -798,7 +809,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -339,3 +339,10 @@ telegraf_plugins_extra:
+>    @@ -342,3 +342,10 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000

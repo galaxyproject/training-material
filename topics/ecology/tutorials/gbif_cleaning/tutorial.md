@@ -19,14 +19,16 @@ tags:
   - gbif
   - data management
   - data cleaning
-contributors:
-- yvanlebras
-- sbenateau
+contributions:
+  authorship:
+  - yvanlebras
+  - sbenateau
+  funding:
+  - pndb
 
+subtopic: ecologypreprocess
 ---
 
-
-# Introduction
 
 
 GBIF (Global Biodiversity Information Facility, www.gbif.org) is for sure THE most remarkable biodiversity data aggregator worldwide giving access to more than 1 billion records across all taxonomic groups. The data provided via these sources are highly valuable for research. However, some issues exist concerning data heterogeneity, as they are obtained from various collection methods and sources.

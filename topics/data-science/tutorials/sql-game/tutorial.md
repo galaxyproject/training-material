@@ -23,21 +23,26 @@ key_points:
 notebook:
   language: python
 subtopic: sql
-contributors:
-- hexylena
-- NUKnightLab
-- erasmusplus
-- avans-atgm
+contributions:
+  authorship:
+    - NUKnightLab
+    - hexylena
+  funding:
+    - gallantries
+    - avans-atgm
 tags:
 - game
 - SQL
+license: MIT
+copyright: Copyright (c) 2018 NUKnightLab
 ---
 
 This is not a tutorial like most GTN content but a fun exercise for you to play around and learn a bit about SQL in a more 'practical', and hopefully re-inforce the skills you covered in Basic and Advanced SQL skills. It makes use of the [NUKnightLab/sql-mysteries](https://github.com/NUKnightLab/sql-mysteries) SQL murder mystery project and released under open licenses:
 
+> <comment-title>Source</comment-title>
 > Original code for NUKnightLab/sql-mysteries is released under the MIT License.
 > Original text and other content is released under Creative Commons CC BY-SA 4.0.
-{: .quote}
+{: .comment}
 
 Download the database and connector:
 

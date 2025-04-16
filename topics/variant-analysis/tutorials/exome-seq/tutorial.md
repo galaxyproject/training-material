@@ -25,15 +25,19 @@ key_points:
     family members is key to identifying candidate disease variants. SnpEff and
     GEMINI, in particular, are powerful tools offered by Galaxy for that
     purpose."
-contributors:
+contributions:
+  authorship:
   - wm75
   - bebatut
   - torhou
   - erxleben
   - bgruening
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 ---
 
-# Introduction
 
 Exome sequencing is a method that enables the selective sequencing of the
 exonic regions of a genome - that is the transcribed parts of the genome present

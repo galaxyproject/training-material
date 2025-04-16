@@ -1,23 +1,27 @@
-{% if include.contributions.funding %}
-<div markdown="1">
-<h2 id="funding">{{locale['references']| default: "Funding" }}</h2>
-<p>These individuals or organisations provided funding support for the development of this resource</p>
-
-<div class="row">
-{% for id in include.contributions.funding %}
+{% if include.funders %}
+<div class="d-flex flex-wrap">
+{% for id in include.funders %}
 	{% assign name = site.data.contributors[id].name | default: id -%}
-	<div class="col-md-3 col-xs-12">
-		{% if site.data.contributors[id].avatar %}
-		<img class="funder-avatar" src="{{ site.data.contributors[id].avatar }}" alt="Logo">
-		{% else %}
-		<img class="funder-avatar" src="https://avatars.githubusercontent.com/{{ id }}" alt="Logo">
-		{% endif %}
-		<a href="{{ site.baseurl }}/hall-of-fame/{{ id }}/" class="btn btn-secondary">See Funder Profile</a>
-	</div>
-	<div class="col-md-9 col-xs-12">
-		{{ site.data.contributors[id].funding_statement | markdownify }}
-	</div>
+	<a href="{{ site.baseurl }}/hall-of-fame/{{ id }}/" class="funder-badge">
+		{% assign pfo = site.data.grants[id] | default: site.data.organisations[id] | default: site.data.contributors[id] | default: nil %}
+		<div class="avatar">
+			{% if pfo.avatar %}
+			<img class="funder-avatar" src="{{ pfo.avatar }}" alt="Logo">
+			{% else %}
+				{% unless pfo.github %}
+				<img class="funder-avatar" src="https://avatars.githubusercontent.com/{{ id }}" alt="Logo">
+				{% endunless %}
+			{% endif %}
+		</div>
+
+		<div class="info">
+			<div class="name">{{ pfo.short_name | default: pfo.name | default: id }}</div>
+			<div class="description">
+			{{ site.data.grants[id].funding_statement | markdownify | strip_html }}
+            {{ pfo.description }}
+			</div>
+		</div>
+	</a>
 {% endfor %}
-</div>
 </div>
 {% endif %}

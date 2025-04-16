@@ -1,12 +1,12 @@
 ---
 layout: learning-pathway
-tags: [beginner]
+tags: [beginner, statistics, data-science]
 type: use
 
 editorial_board:
 - fpsom
 funding:
-- erasmusplus
+- gallantries
 
 title: From R to Machine Learning; an introductory course
 description: |

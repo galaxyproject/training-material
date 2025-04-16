@@ -29,6 +29,7 @@ contributions:
   funding: []
   testing:
     - cat-bro
+    - edmontosaurus
 tags:
   - jobs
   - git-gat
@@ -40,6 +41,17 @@ requirements:
       - connect-to-compute-cluster
 abbreviations:
   TPV: Total Perspective Vortex
+
+recordings:
+- captioners:
+  - shiltemann
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 31M
+  youtube_id: qX8GjTJwnAk
+  speakers:
+  - hexylena
+
 ---
 
 
@@ -106,7 +118,7 @@ To demonstrate a real-life scenario and {TPV}'s role in it, let's plan on settin
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -152,6 +152,9 @@ galaxy_config_templates:
+>    @@ -155,6 +155,9 @@ galaxy_config_templates:
 >     galaxy_extra_dirs:
 >       - /data
 >     
@@ -181,7 +193,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    ```
 >    {: data-commit="Add tpv-auto-lint to requirements"}
 >
-> 1. Install the missing role
+> 2. Install the missing role
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
@@ -190,13 +202,13 @@ And of course, Galaxy has an Ansible Role for that.
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 2. Change your `group_vars/galaxyservers.yml`. We need to create a new directory where the TPV configs will be stored after linting, and add that directory name as variable for the role. The default name is 'TPV_DO_NOT_TOUCH' for extra safety 😉. If you want a different name, you need to change the `tpv_config_dir_name` variable, too. We also need to create a directory, `tpv_mutable_dir` (a role default variable), where TPV configs are copied before linting.
+> 3. Change your `group_vars/galaxyservers.yml`. We need to create a new directory where the TPV configs will be stored after linting, and add that directory name as variable for the role. The default name is 'TPV_DO_NOT_TOUCH' for extra safety 😉. If you want a different name, you need to change the `tpv_config_dir_name` variable, too. We also need to create a directory, `tpv_mutable_dir` (a role default variable), where TPV configs are copied before linting.
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -135,6 +135,8 @@ galaxy_config:
+>    @@ -138,6 +138,8 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
 >     
@@ -205,7 +217,7 @@ And of course, Galaxy has an Ansible Role for that.
 >     galaxy_config_files_public:
 >       - src: files/galaxy/welcome.html
 >         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
->    @@ -151,6 +153,11 @@ galaxy_config_templates:
+>    @@ -154,6 +156,11 @@ galaxy_config_templates:
 >     
 >     galaxy_extra_dirs:
 >       - /data
@@ -220,7 +232,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TPV config dir"}
-> 3. Add the role to your `galaxy.yml` playbook.
+> 4. Add the role to your `galaxy.yml` playbook.
 >    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
@@ -236,14 +248,9 @@ And of course, Galaxy has an Ansible Role for that.
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tpv-auto-lint role"}
-> 4. Run the Galaxy playbook. Because we modified the job configuration, Galaxy will be restarted to reread its config files.
->
->    > <code-in-title>Bash</code-in-title>
->    > ```bash
->    > ansible-playbook galaxy.yml
->    > ```
->    > {: data-cmd="true"}
->    {: .code-in}
+> 5. At this point we won't run the modified playbook just yet. Because TPV itself has not yet been installed,
+>    the tpv_auto_lint role would fail at this point. So first, we'll have to install and configure TPV itself before the
+>    linter can work.
 >
 {: .hands_on}
 ## Configuring TPV
@@ -274,7 +281,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    -        env:
 >    -        - name: LC_ALL
 >    -          value: C
->    -        - name: SINGULARITY_CACHEDIR
+>    -        - name: APPTAINER_CACHEDIR
 >    -          value: /tmp/singularity
 >    -        - name: APPTAINER_TMPDIR
 >    -          value: /tmp
@@ -301,7 +308,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -144,6 +128,8 @@ galaxy_config_files_public:
+>    @@ -147,6 +131,8 @@ galaxy_config_files_public:
 >     galaxy_config_files:
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
@@ -346,7 +353,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    +      # Ensuring a consistent collation environment is good for reproducibility.
 >    +      LC_ALL: C
 >    +      # The cache directory holds the docker containers that get converted
->    +      SINGULARITY_CACHEDIR: /tmp/singularity
+>    +      APPTAINER_CACHEDIR: /tmp/singularity
 >    +      # Singularity uses a temporary directory to build the squashfs filesystem
 >    +      APPTAINER_TMPDIR: /tmp
 >    +  slurm:
@@ -441,7 +448,7 @@ Now that we've configured the resource requirements for a single tool, let's see
 >    {: data-commit="Add TPV default inherits"}
 >
 >    We have defined a `global` section specifying that all tools and destinations should inherit from a specified `default`. We have then defined a tool named `default`, whose properties
->    are implicitly inherited by all tools at runtime. This means that our `testing` tool will also inherit from this default tool, but it explicitly overrides cores
+>    are implicitly inherited by all tools at runtime. This means that our `testing` tool will also inherit from this default tool, but it explicitly overrides cores.
 >    We can also explicitly specify an `inherits` clause if we wish to extend a specific tool or destination, as previously shown in the destinations section.
 >
 > 2. Run the Galaxy playbook. When the new `tpv_rules_local.yml` is copied, TPV will automatically pickup the changes without requiring a restart of Galaxy.
@@ -477,7 +484,7 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >             function: map_tool_to_destination
 >             rules_module: tpv.rules
 >             tpv_config_files:
->    +          - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
+>    +          - https://gxy.io/tpv/db.yml
 >               - "{{ tpv_config_dir }}/tpv_rules_local.yml"
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
@@ -512,8 +519,8 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    {: data-commit="TPV clamp max cores and mem"}
 >
 >    These changes indicate that the destination will accept jobs that are up to `max_accepted_cores: 24` and `max_accepted_mem: 256`. If the tool requests resources that exceed these limits, the tool will be rejected
->    by the destination. However, once accepted, the resources will be forcibly clamped down to 16 and 128 at most because of the `max_cores` and `max_mem` clauses. (E.g. a tool requesting 24 cores would only be submitted with 16 cores at maximum.) Therefore, a trick that can be used here to support
->    job resource requirements in the shared database that are much larger than your destination can actually support, is to combine `max_accepted_cores/mem/gpus with `max_cores/mem/gpus` to accept the job and then
+>    by the destination. However, once accepted, the resources will be forcibly clamped down to 2 and 8 at most because of the `max_cores` and `max_mem` clauses. (E.g. a tool requesting 24 cores would only be submitted with 16 cores at maximum.) Therefore, a trick that can be used here to support
+>    job resource requirements in the shared database that are much larger than your destination can actually support, is to combine `max_accepted_cores/mem/gpus` with `max_cores/mem/gpus` to accept the job and then
 >    clamp it down to a supported range. This allows even the largest resource requirement in the shared database to be accomodated.
 >
 >    > <comment-title>Clamping in practice</comment-title>
@@ -627,7 +634,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -37,9 +37,17 @@ galaxy_job_config:
 >             tpv_config_files:
->               - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
+>               - https://gxy.io/tpv/db.yml
 >               - "{{ tpv_config_dir }}/tpv_rules_local.yml"
 >    +  resources:
 >    +    default: default
@@ -643,7 +650,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >     
 >     galaxy_config:
 >       galaxy:
->    @@ -56,6 +64,7 @@ galaxy_config:
+>    @@ -59,6 +67,7 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
@@ -651,8 +658,8 @@ Such form elements can be added to tools without modifying each tool's configura
 >         # SQL Performance
 >         slow_query_log_threshold: 5
 >         enable_per_request_sql_debugging: true
->    @@ -137,6 +146,8 @@ galaxy_config_templates:
->         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
+>    @@ -140,6 +149,8 @@ galaxy_config_templates:
+>         dest: "{{ galaxy_config.galaxy.container_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2

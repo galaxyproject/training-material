@@ -1,0 +1,147 @@
+- doc: Test outline for deconv-eval-stage-2-deconv
+  job:
+    Pseudobulk - A:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: None 1
+        path: test-data/Pseudobulk - A_None 1.tabular
+      - class: File
+        identifier: None 2
+        path: test-data/Pseudobulk - A_None 2.tabular
+      - class: File
+        identifier: None 3
+        path: test-data/Pseudobulk - A_None 3.tabular
+    Pseudobulk - B:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: None 1
+        path: test-data/Pseudobulk - B_None 1.tabular
+      - class: File
+        identifier: None 2
+        path: test-data/Pseudobulk - B_None 2.tabular
+      - class: File
+        identifier: None 3
+        path: test-data/Pseudobulk - B_None 3.tabular
+    ESet Reference scRNA-seq:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: None 1
+        path: test-data/ESet Reference scRNA-seq_None 1.rdata
+      - class: File
+        identifier: None 2
+        path: test-data/ESet Reference scRNA-seq_None 2.rdata
+      - class: File
+        identifier: None 3
+        path: test-data/ESet Reference scRNA-seq_None 3.rdata
+    Actuals - B:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: None 1
+        path: test-data/Actuals - B_None 1.tabular
+      - class: File
+        identifier: None 2
+        path: test-data/Actuals - B_None 2.tabular
+      - class: File
+        identifier: None 3
+        path: test-data/Actuals - B_None 3.tabular
+    Actuals - A:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: None 1
+        path: test-data/Actuals - A_None 1.tabular
+      - class: File
+        identifier: None 2
+        path: test-data/Actuals - A_None 2.tabular
+      - class: File
+        identifier: None 3
+        path: test-data/Actuals - A_None 3.tabular
+    Cell Types Label from scRNA dataset: cellType
+    Samples Identifer from scRNA dataset: sampleID
+    Cell types to use from scRNA dataset: alpha,beta,ductal,acinar,gamma,delta,unclassified
+      endocrine,co-expression,PSC,endothelial,epsilon,mast,unclassified,MHC class
+      II
+  outputs:
+    out_rds (Step 11):
+      element_tests:
+        None 1:
+          path: test-data/out_rds (Step 11)_None 1.rdata
+        None 2:
+          path: test-data/out_rds (Step 11)_None 2.rdata
+        None 3:
+          path: test-data/out_rds (Step 11)_None 3.rdata
+    'MuSiC Deconvolution on input dataset(s): Proportion Matrices':
+      element_tests:
+        None 1:
+          elements:
+            Music Estimated Proportions of Cell Types:
+              path: 'test-data/MuSiC Deconvolution on input dataset(s): Proportion
+                Matrices_Music Estimated Proportions of Cell Types.tabular'
+            NNLS Estimated Proportions of Cell Types:
+              path: 'test-data/MuSiC Deconvolution on input dataset(s): Proportion
+                Matrices_NNLS Estimated Proportions of Cell Types.tabular'
+        None 2:
+          elements:
+            Music Estimated Proportions of Cell Types:
+              path: 'test-data/MuSiC Deconvolution on input dataset(s): Proportion
+                Matrices_Music Estimated Proportions of Cell Types.tabular'
+            NNLS Estimated Proportions of Cell Types:
+              path: 'test-data/MuSiC Deconvolution on input dataset(s): Proportion
+                Matrices_NNLS Estimated Proportions of Cell Types.tabular'
+        None 3:
+          elements:
+            Music Estimated Proportions of Cell Types:
+              path: 'test-data/MuSiC Deconvolution on input dataset(s): Proportion
+                Matrices_Music Estimated Proportions of Cell Types.tabular'
+            NNLS Estimated Proportions of Cell Types:
+              path: 'test-data/MuSiC Deconvolution on input dataset(s): Proportion
+                Matrices_NNLS Estimated Proportions of Cell Types.tabular'
+    out_pdf (Step 12):
+      element_tests:
+        None 1:
+          path: test-data/out_pdf (Step 12)_None 1.pdf
+        None 2:
+          path: test-data/out_pdf (Step 12)_None 2.pdf
+        None 3:
+          path: test-data/out_pdf (Step 12)_None 3.pdf
+    B - Music Results:
+      element_tests:
+        None 1:
+          path: test-data/B - Music Results_None 1.tabular
+        None 2:
+          path: test-data/B - Music Results_None 2.tabular
+        None 3:
+          path: test-data/B - Music Results_None 3.tabular
+    A - NNLS Results:
+      element_tests:
+        None 1:
+          path: test-data/A - NNLS Results_None 1.tabular
+        None 2:
+          path: test-data/A - NNLS Results_None 2.tabular
+        None 3:
+          path: test-data/A - NNLS Results_None 3.tabular
+    B - NNLS Results:
+      element_tests:
+        None 1:
+          path: test-data/B - NNLS Results_None 1.tabular
+        None 2:
+          path: test-data/B - NNLS Results_None 2.tabular
+        None 3:
+          path: test-data/B - NNLS Results_None 3.tabular
+    A - Music Results:
+      element_tests:
+        None 1:
+          path: test-data/A - Music Results_None 1.tabular
+        None 2:
+          path: test-data/A - Music Results_None 2.tabular
+        None 3:
+          path: test-data/A - Music Results_None 3.tabular

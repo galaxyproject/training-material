@@ -11,16 +11,18 @@ key_points:
   - "Demonstrating a pluggable extension system for JavaScript visualizations"
   - "With three primary files we can integrate any JavaScript visualization into Galaxy"
 subtopic: viz
-contributors:
+contributions:
+  authorship:
   - shiltemann
   - yhoogstrate
   - bgruening
   - guerler
   - dannon
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 ---
-
-## Introduction
-
 
 In this tutorial we are going to demonstrate how to add a third party
 JavaScript-based visualization to Galaxy, and we'll talk about what the benefits
@@ -318,6 +320,18 @@ instance, just make sure to properly refresh your browser.
 {: .hands_on}
 
 Lets test this.
+
+
+> <comment-title>Clearing the Cache</comment-title>
+>
+> "For Developers" or anyone who needs to build multiple times, you may need to clear the cached files in multiple places using any of the following tasks:
+>
+> 1. Within the `client` directory so that the staged files are appropriately cleared out, to build more than once use: `yarn run gulp plugins`
+>
+> 2. If rebuild continues to fail: (1) delete the hidden *cache* directories in the `plugins/your-plugin/` directory, (2) delete the `plugin_build_hash.txt` file in order to force a rebuild, and (3) delete the transpiled `static/script.js` file in the `your-plugin/` directory.
+>
+{: .comment}
+
 
 ### Test the visualization
 

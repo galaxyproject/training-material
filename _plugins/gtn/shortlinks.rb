@@ -1,10 +1,61 @@
 # frozen_string_literal: true
 
 module Gtn
-  # This module is responsible for generating shortlinks for tutorials and FAQs
+  # This module is responsible for generating shortlinks for tutorials and FAQs and any other pages we add.
+  #
+  # Every category gets its own prefix letter.
   module Shortlinks
+    CATEGORY_TUTORIAL = 'T'
+    CATEGORY_SLIDES = 'S'
+    CATEGORY_FAQ = 'F'
+    CATEGORY_NEWS = 'N'
+    CATEGORY_PATHWAYS = 'P'
+    CATEGORY_EVENTS = 'E'
+    CATEGORY_WORKFLOW = 'W'
+
+    REDIRECT_TEMPLATE = <<~REDIR
+      <!DOCTYPE html>
+      <html lang="en-US">
+        <meta charset="utf-8">
+        <title>Redirecting&hellip;</title>
+        <link rel="canonical" href="REDIRECT_URL">
+        <script>location="REDIRECT_URL"</script>
+        <meta http-equiv="refresh" content="0; url=REDIRECT_URL">
+        <meta name="robots" content="noindex">
+        <h1>Redirecting&hellip;</h1>
+        <a href="REDIRECT_URL">Click here if you are not redirected.</a>
+      </html>
+    REDIR
+
     def self.mapped?(tutorial, current_mapping)
       current_mapping['id'].values.include? tutorial
+    end
+
+    ##
+    # Duplicate of the jekyll-redirect-from plugin template.
+    # We can't use that for, reasons.
+    def self.html_redirect(target)
+      REDIRECT_TEMPLATE.gsub('REDIRECT_URL', target)
+    end
+
+    ##
+    # Fix missing symlinks (usually exist because the target file has been
+    # renamed and doesn't exist anymore.) However, a redirect *will* be present
+    # for the original filename so we just fix the missing symlink.
+    #
+    # Params:
+    # +site+:: The Jekyll site object
+    def self.fix_missing_redirs(site)
+      missing_redirs = site.data['shortlinks']['id'].select do |id, target|
+        short_link = "short/#{id}.html"
+        ! File.exist?(site.in_dest_dir(short_link))
+      end
+
+      missing_redirs.each do |id, target|
+        short_link = "short/#{id}.html"
+        Jekyll.logger.warn "[GTN/Shortlink]" "Shortlink target #{target} does not exist for shortlink #{short_link}, fixing."
+        File.write(site.in_dest_dir(short_link), Gtn::Shortlinks.html_redirect(target))
+      end
     end
 
     def self.update(current_mapping)
@@ -18,8 +69,8 @@ module Gtn
         # If it's not already mapped by a key, add it.
         if !mapped?(html_path, current_mapping)
           # Generate a short code
-          short_code_number = current_mapping['id'].select { |x| x[0] == 'T' }.length.to_s.rjust(5, '0')
-          short_code = "T#{short_code_number}"
+          short_code_number = current_mapping['id'].select { |x| x[0] == CATEGORY_TUTORIAL }.length.to_s.rjust(5, '0')
+          short_code = CATEGORY_TUTORIAL + short_code_number
           puts "Discovered tutorial #{short_code}"
           # If the target of this flavour of short code isn't already in here, then add it
           current_mapping['id'][short_code] = html_path
@@ -37,8 +88,8 @@ module Gtn
         # If it's not already mapped by a key, add it.
         if !mapped?(html_path, current_mapping)
           # Generate a short code
-          short_code_number = current_mapping['id'].select { |x| x[0] == 'S' }.length.to_s.rjust(5, '0')
-          short_code = "S#{short_code_number}"
+          short_code_number = current_mapping['id'].select { |x| x[0] == CATEGORY_SLIDES }.length.to_s.rjust(5, '0')
+          short_code = CATEGORY_SLIDES + short_code_number
           puts "Discovered slides #{short_code}"
           # If the target of this flavour of short code isn't already in here, then add it
           current_mapping['id'][short_code] = html_path
@@ -64,8 +115,8 @@ module Gtn
         # If it's not already mapped by a key, add it.
         if !mapped?(html_path, current_mapping)
           # Generate a short code
-          short_code_number = current_mapping['id'].select { |x| x[0] == 'F' }.length.to_s.rjust(5, '0')
-          short_code = "F#{short_code_number}"
+          short_code_number = current_mapping['id'].select { |x| x[0] == CATEGORY_FAQ }.length.to_s.rjust(5, '0')
+          short_code = CATEGORY_FAQ + short_code_number
           puts "Discovered FAQ #{short_code}"
           # If the target of this flavour of short code isn't already in here, then add it
           current_mapping['id'][short_code] = html_path
@@ -79,9 +130,61 @@ module Gtn
         # If it's not already mapped by a key, add it.
         if !mapped?(html_path, current_mapping)
           # Generate a short code
-          short_code_number = current_mapping['id'].select { |x| x[0] == 'N' }.length.to_s.rjust(5, '0')
-          short_code = "N#{short_code_number}"
+          short_code_number = current_mapping['id'].select { |x| x[0] == CATEGORY_NEWS }.length.to_s.rjust(5, '0')
+          short_code = CATEGORY_NEWS + short_code_number
           puts "Discovered news #{short_code}"
+          # If the target of this flavour of short code isn't already in here, then add it
+          current_mapping['id'][short_code] = html_path
+        end
+      end
+
+      # Discover learning pathways
+      lps = Dir.glob('learning-pathways/*.md')
+      lps.reject! { |t| t =~ /index.md/ }
+      lps.reject! { |t| t =~ /pathway-example.md/ }
+
+      lps.each do |tutorial|
+        html_path = "/#{tutorial.gsub(/md$/, 'html')}"
+        # If it's not already mapped by a key, add it.
+        if !mapped?(html_path, current_mapping)
+          # Generate a short code
+          short_code_number = current_mapping['id'].select { |x| x[0] == CATEGORY_PATHWAYS }.length.to_s.rjust(5, '0')
+          short_code = CATEGORY_PATHWAYS + short_code_number
+          puts "Discovered learning pathway #{short_code}"
+          # If the target of this flavour of short code isn't already in here, then add it
+          current_mapping['id'][short_code] = html_path
+        end
+      end
+
+      # Discover events
+      events = Dir.glob('events/*.md')
+      events.reject! { |t| t =~ /index.md/ }
+      events.reject! { |t| t =~ /pathway-example.md/ }
+
+      events.each do |event|
+        html_path = "/#{event.gsub(/md$/, 'html')}"
+        # If it's not already mapped by a key, add it.
+        if !mapped?(html_path, current_mapping)
+          # Generate a short code
+          short_code_number = current_mapping['id'].select { |x| x[0] == CATEGORY_EVENTS }.length.to_s.rjust(5, '0')
+          short_code = CATEGORY_EVENTS + short_code_number
+          puts "Discovered event #{short_code}"
+          # If the target of this flavour of short code isn't already in here, then add it
+          current_mapping['id'][short_code] = html_path
+        end
+      end
+
+      # Discover workflows
+      workflows = Dir.glob('topics/**/workflows/*.ga')
+
+      workflows.each do |workflow|
+        html_path = "/#{workflow.gsub(/ga$/, 'html')}"
+        # If it's not already mapped by a key, add it.
+        if !mapped?(html_path, current_mapping)
+          # Generate a short code
+          short_code_number = current_mapping['id'].select { |x| x[0] == CATEGORY_WORKFLOW }.length.to_s.rjust(5, '0')
+          short_code = CATEGORY_WORKFLOW + short_code_number
+          puts "Discovered workflow #{short_code}"
           # If the target of this flavour of short code isn't already in here, then add it
           current_mapping['id'][short_code] = html_path
         end

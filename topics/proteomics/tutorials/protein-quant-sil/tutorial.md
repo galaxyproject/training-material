@@ -25,15 +25,18 @@ key_points:
   - "Quantitations have to be mapped to PSMs."
   - "PSM quantitations can be used to calculate protein quantitations."
   - "Proper quantitation and mapping needs careful evaluation and optimization."
-contributors:
+contributions:
+  authorship:
   - stortebecker
   - bgruening
   - matthias313
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 subtopic: id-quant
 tags: [DDA, SILAC]
 ---
-
-# Introduction
 
 
 To compare protein amounts in different samples from MS/MS data, two different experiment setups exist. Firstly, unmodified proteins can be measured in separate runs at one sample per MS-run. Secondly, proteins of samples to compare can be labelled with small chemical tags, mixed, and measured side-by-side in a single MS-run.

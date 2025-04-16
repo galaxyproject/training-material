@@ -1,0 +1,17 @@
+- doc: Test outline for NCBI-Foreign-Contamination-Screen
+  job:
+    Input genome:
+      class: File
+      path: test-data/Input genome.fasta
+      filetype: fasta
+  outputs:
+    fcs_gx_action_report:
+      asserts:
+        has_text:
+          text: 'Homo sapiens'
+    fcs_adaptor_report:
+      asserts:
+        has_text:
+          text: 'Illumina'
+    final_clean_fasta:
+      path: test-data/final_clean_fasta.fasta

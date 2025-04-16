@@ -27,8 +27,6 @@ contributors :
 
 --- 
 
-# Introduction
-
 
 A lot of packages are available for the analysis of GC-MS or LC-MS data. Typically, hardware vendors provide software that is optimized for the instrument and allow a direct interaction of the lab scientist with the data. Some other open-source alternatives such as **XCMS** are also able to be integrated easily in web interfaces, allowing large numbers of files to be processed simultaneously. Because of the generality of packages like **XCMS**, several other packages have been developed to use the functionality of **XCMS** for optimal performance in a particular context. Package **metaMS** does so for the field of untargeted metabolomics, focuses on the GC-MS analysis during this tutorial. One of the goals **metaMS** was to set up a simple system with few user-settable parameters, capable of handling the vast majority of untargeted metabolomics experiments. 
 

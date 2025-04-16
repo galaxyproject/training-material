@@ -22,6 +22,25 @@ subtopic: features
 tags:
   - tools
   - git-gat
+
+recordings:
+- captioners:
+  - cat-bro
+  date: '2021-06-28'
+  galaxy_version: '21.05'
+  length: 27M
+  youtube_id: pda0v9b3vO4
+  speakers:
+  - cat-bro
+- captioners:
+  - eancelet
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 47M
+  youtube_id: 7Qqwrzn--YI
+  speakers:
+  - cat-bro
+
 ---
 
 This tutorial will introduce you to one of Galaxy's associated projects - [Ephemeris](https://ephemeris.readthedocs.io/). Ephemeris is a small Python library and set of scripts for managing the bootstrapping of Galaxy plugins - tools, index data, and workflows. It aims to help automate, and limit the quantity of manual actions admins have to do in order to maintain a Galaxy instance.
@@ -238,7 +257,7 @@ For that, you can install from a YAML file:
 >
 > 5. Using the UI import the workflow file that you used, [mapping.ga]({% link topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga %}).
 >    1. Right-click or Ctrl-click on the link above and copy the link address
->    2. On your Galaxy instance click on `Workflow`, then `Import`.  Paste the URL into the `Import Archived URL` field.
+>    2. On your Galaxy instance click on `Workflows`, then `Import`.  Paste the URL into the `Import Archived URL` field.
 {: .hands_on}
 
 Occasionally the tool installation may fail due to network issues; if it does, just re-run the `shed-tools` installation process until it succeeds. This is a known issue the developers are working on.

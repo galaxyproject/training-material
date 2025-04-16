@@ -9,14 +9,14 @@ description: |
   steps of biodiversity data analysis: download, check, filter and explore biodiversity data and analyze abundance data through modeling.
 
 
-tags: [beginner]
+tags: [beginner, ecology]
 cover-image: assets/images/galaxy-e-logo.png
 cover-image-alt: "Drawing of an Ecological System"
 
 editorial_board:
 - yvanlebras
 funding:
-- erasmusplus
+- gallantries
 
 
 pathway:

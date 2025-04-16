@@ -3,6 +3,8 @@ title: Which version of SearchGUI and PeptideShaker shall I use for this tutoria
 box_type: tip
 layout: faq
 contributors: [millen2223]
+redirect_from:
+ - /topics/proteomics/faqs/tools_versions
 ---
 
 We highly recommend the usage of SearchGUI Galaxy version 3.3.10.1 and PeptideShaker version Galaxy Version 1.16.36.3. The newer versions of SearchGUI and PeptideShaker have not yet been tested for this workflow.

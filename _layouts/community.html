@@ -1,0 +1,291 @@
+---
+layout: base
+---
+
+{% assign topic = site.data[page.topic_name] | default: page.topic %}
+{% assign topic_material = site | list_materials_structured:topic.name %}
+{% assign topic_material_flat = site | list_materials_flat:topic.name %}
+
+<h1>{{ topic.title }} — Community Home</h1>
+
+This is a new, experimental "Community Home" for a given topic. It is intended to highlight community contributions over the years to a topic!
+
+{% assign prio = "news events learning-pathways tutorials slides recordings faqs workflows grants organisations contributors" | split:" " %}
+<style>
+:root {
+	{%- for p in prio -%}
+	--stat-box-color-{{ p }}: hsl({{ forloop.index | times: 40 }}, 100%, 85%);
+	{%- endfor -%}
+}
+</style>
+
+{% assign topic_material_by_years = site | list_topic_materials_yearly:topic.name %}
+{% assign cumulative_counts_by_years = site | count_topic_materials_yearly:topic.name %}
+
+<div class="row">
+	<div class="col-md-6">
+		<figure>
+			<canvas id="materials-over-time" height="250"></canvas>
+			<figcaption>Materials Over Time</figcaption>
+		</figure>
+	</div>
+	<div class="col-md-6">
+		<figure>
+			<canvas id="contributors-over-time" height="250"></canvas>
+			<figcaption>Contributors Over Time</figcaption>
+		</figure>
+	</div>
+	<div class="col-md-6">
+		<figure>
+			<canvas id="workflows-over-time" height="250"></canvas>
+			<figcaption>Workflows Over Time</figcaption>
+		</figure>
+	</div>
+	<div class="col-md-6">
+		<figure>
+			<canvas id="other-over-time" height="250"></canvas>
+			<figcaption>Other Contributions Over Time</figcaption>
+		</figure>
+	</div>
+</div>
+
+{% for year in topic_material_by_years %}
+<div class="row">
+	<div class="col-md-12">
+		<hgroup>
+			<h2 class="year">{{ year[0] }} Year in Review</h2>
+			<p>So many new additions to our community!</p>
+		</hgroup>
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+		{% for p in prio %}
+			{% if year[1][p] %}
+			{% assign group = year[1][p] %}
+			<div class="col-sm-3 col-md-6">
+				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-{{ p }});">
+					{% assign group_len = group | size %}
+					<div class="title">{{ group_len }}</div>
+					<div class="subtitle">
+					{{ p | regex_replace: '-', ' ' | titlecase }}
+					</div>
+				</div>
+			</div>
+			{% endif %}
+		{% endfor %}
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-12">
+
+			{% for p in prio %}
+				{% if year[1][p] %}
+				{% assign group = year[1][p] %}
+
+				<h3>{{ p | regex_replace: '-', ' ' | titlecase }}</h3>
+				<ul>
+				{% for resource in group %}
+				<li><a href="{{ site.baseurl }}{{ resource[2].url }}">{{ resource[2].title }}</a></li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+			{% endfor %}
+			</div>
+		</div>
+
+	</div>
+
+</div>
+{% endfor %}
+
+<h2>Cumulative Data as CSV</h2>
+<pre>
+year,{% for point in cumulative_counts_by_years['tutorials'] %}{{ point.x | regex_replace:'-.*', '' }}{%unless forloop.last%},{%endunless%}{% endfor %}
+{% for p in prio %}{{ p }},{% for point in cumulative_counts_by_years[p] %}{{ point.y }}{%unless forloop.last%},{%endunless%}{% endfor %}
+{% endfor %}
+
+</pre>
+
+
+
+
+<style>
+.stat-box {
+	text-align: center;
+	border: 2px solid var(--border);
+	margin: 0.25em;
+	padding: 0.5em;
+	background: var(--stat-box-color);
+}
+.col-md-8 .row .col-md-12 h3:first-child {
+	margin-top: 0;
+}
+
+body[data-brightness="dark"] .stat-box {
+	background: none;
+	border: 2px solid var(--stat-box-color);
+}
+
+figure {
+	margin: 0.25em;
+	padding: 0.25em;
+
+	figcaption {
+		text-align: center;
+	}
+}
+
+.stat-box .title {
+	font-size: 300%;
+	font-weight: 900;
+}
+.year {
+	font-size: 500%;
+	margin: 0;
+	padding: 0;
+}
+</style>
+
+<!-- use chart.js for graphs -->
+<script src="{% link assets/js/Chart.bundle.js %}"></script>
+
+<script>
+const style = getComputedStyle(document.body);
+const totals = {{ cumulative_counts_by_years | jsonify }};
+
+const options = {
+	scales: {
+		yAxes: [{
+			ticks: {
+				beginAtZero: true
+			}
+		}],
+		xAxes: [{
+			type: 'time',
+			time: {
+				displayFormats:{month:'YYYY'},
+				unit: 'year',
+				distribution: 'linear'
+			}
+		}]
+	},
+	legend: {
+		display: true
+	},
+}
+
+function getStyleDarker(type, darker){
+	if (darker) {
+		return style.getPropertyValue(`--stat-box-color-${type}`).replaceAll('85%', '50%');
+	} else {
+		return style.getPropertyValue(`--stat-box-color-${type}`);
+	}
+}
+
+
+new Chart('materials-over-time', {
+	type: 'line',
+	data: {
+		datasets: [
+			{
+				data: totals.slides,
+				label: 'Slides',
+				borderColor: getStyleDarker("slides", true),
+				backgroundColor: getStyleDarker("slides", false),
+			},
+			{
+				data: totals.tutorials,
+				label: 'Tutorials',
+				borderColor: getStyleDarker("tutorials", true),
+				backgroundColor: getStyleDarker("tutorials", false),
+			},
+		]
+	},
+	options: options
+});
+
+new Chart('contributors-over-time', {
+	type: 'line',
+	data: {
+		datasets: [
+			{
+				data: totals.grants,
+				label: 'Grants',
+				borderColor: getStyleDarker("grants", true),
+				backgroundColor: getStyleDarker("grants", false),
+			},
+			{
+				data: totals.organisations,
+				label: 'Organisations',
+				borderColor: getStyleDarker("organisations", true),
+				backgroundColor: getStyleDarker("organisations", false),
+			},
+			{
+				data: totals.contributors,
+				label: 'Contributors',
+				borderColor: getStyleDarker("contributors", true),
+				backgroundColor: getStyleDarker("contributors", false),
+			},
+		]
+	},
+	options: options
+});
+
+new Chart('workflows-over-time', {
+	type: 'line',
+	data: {
+		datasets: [
+			{
+				data: totals.workflows,
+				label: 'Workflows',
+				borderColor: getStyleDarker("workflows", true),
+				backgroundColor: getStyleDarker("workflows", false),
+			},
+		]
+	},
+	options: options
+});
+
+new Chart('other-over-time', {
+	type: 'line',
+	data: {
+		datasets: [
+			{
+				data: totals.news,
+				label: 'News',
+				borderColor: getStyleDarker("news", true, true),
+				backgroundColor: getStyleDarker("news", true, false),
+				backgroundColor: getStyleDarker("news", false),
+			},
+			{
+				data: totals.events,
+				label: 'Events',
+				borderColor: getStyleDarker("events", true),
+				backgroundColor: getStyleDarker("events", false),
+			},
+			{
+				data: totals['learning-pathways'],
+				label: 'Learning Pathways',
+				borderColor: getStyleDarker("learning-pathways", true),
+				backgroundColor: getStyleDarker("learning-pathways", false),
+			},
+			{
+				data: totals.recordings,
+				label: 'Recordings',
+				borderColor: getStyleDarker("recordings", true),
+				backgroundColor: getStyleDarker("recordings", false),
+			},
+			{
+				data: totals.faqs,
+				label: 'Faqs',
+				borderColor: getStyleDarker("faqs", true),
+				backgroundColor: getStyleDarker("faqs", false),
+			},
+		]
+	},
+	options: options
+});
+
+
+</script>

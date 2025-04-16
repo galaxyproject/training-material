@@ -8,7 +8,6 @@ redirect_from:
 
 zenodo_link: "https://zenodo.org/record/2573177"
 tags:
-  - single-cell
 questions:
   - "What are barcodes?"
   - "What is their purpose?"
@@ -22,29 +21,51 @@ key_points:
   - "Relocating barcodes into headers"
   - "Removing unwanted barcodes"
 
-contributors:
-  - mtekman
+contributions:
+    authorship:
+        - mtekman
+    editing:
+        - hexhowells
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
+
+recordings:
+- captioners:
+  - khanteymoori
+  date: '2021-03-18'
+  galaxy_version: '21.01'
+  length: 10M
+  youtube_id: AJ17BicjmYU
+  speakers:
+  - nomadscientist
+
+follow_up_training:
+-
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+        - scrna-plates-batches-barcodes
+
+requirements:
+- type: internal
+  topic_name: single-cell
+  tutorials:
+  - scrna-intro
 ---
 
-
-# Introduction
 
 
 Barcodes are small oligonucleotides that are inserted into the captured sequence at a specific point, and provide two pieces of information about the sequence:
 
- 1. Which cell the sequence came from
+ 1. Which cell the sequence came from.
  2. Which transcript the sequence came from
 
 When the sequence is mapped against a reference genome, we can then see which gene locus it aligns to and qualitatively assert that, together with the two pieces of information above, the sequence depicts a transcript from a specific gene that originated from a specific cell.
 
 Barcodes come in a variety of formats, and in this tutorial we will be looking at the CEL-Seq2 protocol {% cite Hashimshony2016 %} used in droplet-based single-cell RNA-seq.
 
-### The CEL-Seq2 Protocol
-
-<small>[Back to previous](javascript:window.history.back())</small>
+## The CEL-Seq2 Protocol
 
 CEL-Seq2 is a paired-end protocol, meaning that two primers bind to opposite ends of a cDNA strand in order to sequence. Each primer has a specific role.
 
@@ -238,7 +259,7 @@ At this point we now have a history with two items: our paired FASTQ test data, 
 > <hands-on-title>Extracting the Reads</hands-on-title>
 >
 > 1. Extracting our 4 reads
->    * {% tool [Filter sequences by ID](toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7) %} with the following parameters:
+>    * {% tool [Filter sequences by ID](toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.9) %} with the following parameters:
 >      - **Sequence file to be filtered**
 >        - Click the *Dataset Collection* icon
 >        - Select the FastQ collection if not already selected.
@@ -253,12 +274,14 @@ At this point we now have a history with two items: our paired FASTQ test data, 
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
 > 1. Viewing our 4 reads side-by-side
->    - Activate the **Scratchbook** by clicking on the **Enable/Disable Scratchbook** icon on the main top toolbar
+>    - Activate the **Window Manager** by clicking on the **Enable/Disable Window Manager** icon on the main top toolbar
 >    - Click on the newly generated FastQ pair ending in *"with matched ID"* to expand the individual reads
 >      - Click on the {% icon galaxy-eye %} symbol of the forward read
->      - Click somewhere outside the white box to close the **Scratchbook**
+>      - Click somewhere outside the white box to close the **Window Manager**
 >      - Click on the {% icon galaxy-eye %} symbol of the reverse read
 >    - Position/Resize the boxes as desired
+>
+>    {% snippet faqs/galaxy/features_scratchbook.md %}
 {: .hands_on}
 
 <!--
@@ -357,7 +380,7 @@ The encoding of the barcodes on the first read can actually be seen by examining
 
 > <hands-on-title>Confirming the Barcoding</hands-on-title>
 >
-> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1) %} with the following parameters:
 >    - {% icon param-collection %} *"Short read data from your current history"*: `Paired FastQ` (the original paired set) You will need to choose 'Dataset collection' to allow this as an input.
 >
 >    > <comment-title></comment-title>
@@ -443,11 +466,10 @@ For this we need to take the barcode information from the Forward reads, and sti
 
 > <hands-on-title>Barcode Extraction and Annotation of our 4 reads</hands-on-title>
 >
-> 1. {% tool [UMI-tools extract](toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1) %} with the following parameters:
+> 1. {% tool [UMI-tools extract](toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/1.1.6+galaxy0) %} with the following parameters:
 >    - *"Library type"*: `Paired-end Dataset Collection`
 >        - {% icon param-collection %} *"Reads in FASTQ format"*: `output` (Our paired set of 4 sequences)
 >        - *"Barcode on both reads?"*: `Barcode on first read only`
->    - *"Use Known Barcodes?"*: `No`
 >    - *"Barcode pattern for first read"*: `NNNNNNCCCCCC`
 >    - *"Enable quality filter?"*: `No`
 >
@@ -460,7 +482,7 @@ For this we need to take the barcode information from the Forward reads, and sti
 >    >
 >    {: .comment}
 > 1. Click the {% icon galaxy-eye %} symbol on the *Reads1: UMI-tools extract* file
-> 1. Click somewhere outside the white box to close the **Scratchbook**
+> 1. Click somewhere outside the white box to close the **Window Manager**
 > 1. Click the {% icon galaxy-eye %} symbol on the *Reads2: UMI-tools extract* file
 >
 {: .hands_on}

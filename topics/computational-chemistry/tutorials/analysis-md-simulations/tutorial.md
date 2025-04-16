@@ -36,9 +36,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
 Molecular dynamics simulations return highly complex data. The Cartesian positions of each atom of the system (thousands or even millions) are recorded at every time step of the trajectory; this may again be thousands to millions of steps in length. Therefore, some kind of further analysis is needed to extract useful information from the data.
 
 In this tutorial, we illustrate some of the analytical tools able to investigate conformational changes by analysis of a typical short protein simulation, such as for CBH1.

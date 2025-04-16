@@ -1,0 +1,53 @@
+- doc: Test outline for Workflow-for-Identifying-MF-from-ITS2-sequencing-using-LotuS2---tutorial-example-run'
+  job:
+    Mapping tsv:
+      class: File
+      path: https://zenodo.org/records/13710591/files/Colombia_ITS2_Mapping.tsv
+      filetype: tabular
+    sdm Options txt:
+      class: File
+      path: https://zenodo.org/records/13710591/files/sdm_miSeq_ITS.txt
+      filetype: txt
+    Input Dataset Collection:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: C_ITS2_S160_001.fastq
+        elements:
+        - class: File
+          identifier: forward
+          path: https://zenodo.org/records/13710591/files/C_ITS2_S160_R1_001.fastq.gz
+        - class: File
+          identifier: reverse
+          path: https://zenodo.org/records/13710591/files/C_ITS2_S160_R2_001.fastq.gz
+      - class: Collection
+        type: paired
+        identifier: N5_ITS2_S140_001.fastq
+        elements:
+        - class: File
+          identifier: forward
+          path: https://zenodo.org/records/13710591/files/N5_ITS2_S140_R1_001.fastq.gz
+        - class: File
+          identifier: reverse
+          path: https://zenodo.org/records/13710591/files/N5_ITS2_S140_R2_001.fastq.gz
+      - class: Collection
+        type: paired
+        identifier: Pcov3_ITS2_S151_001.fastq
+        elements:
+        - class: File
+          identifier: forward
+          path: https://zenodo.org/records/13710591/files/Pcov3_ITS2_S151_R1_001.fastq.gz
+        - class: File
+          identifier: reverse
+          path: https://zenodo.org/records/13710591/files/Pcov3_ITS2_S151_R2_001.fastq.gz
+  outputs:
+    Complete Output Zip:
+      path: test-data/Complete Output Zip.zip
+    OTU Table:
+      path: test-data/OTU Table.tabular
+    OTU fasta:
+      path: test-data/OTU fasta.fasta
+    OTU Phylogenetic Tree:
+      path: test-data/OTU Phylogenetic Tree.newick

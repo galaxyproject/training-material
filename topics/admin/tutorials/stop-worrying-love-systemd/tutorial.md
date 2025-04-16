@@ -151,9 +151,24 @@ Easily check if any service has failed with:
 systemctl --failed
 ```
 
+## Enabling Units
+
+In order to start at boot time, it must be "enabled", so you can run a service once knowing it won't come back when the machine reboots (or vice versa). But you should be sure that a unit is enabled if you want it available on restart. You can do this in separate commands
+
+```bash
+systemctl enable my.service
+systemctl start my.service
+```
+
+Or simultaneously, [if you're on a systemd v220 or newer](https://unix.stackexchange.com/questions/374280/the-now-switch-of-systemctl):
+
+```bash
+systemctl enable --now my.service
+```
+
 ## Editing Units or Overriding
 
-Sometimes one of the system units provided will have some weird behaviour that you need to override (or your ansible role doesn't expose it), then you can use `systemctl edit unit` to override some settings. 
+Sometimes one of the system units provided will have some weird behaviour that you need to override (or your ansible role doesn't expose it), then you can use `systemctl edit unit` to override some settings.
 
 Additional directives can be supplied, e.g. making your service start after another service is started, if you need to sequence their starts.
 
@@ -167,18 +182,18 @@ I never needed this until one day I did. Masking a unit makes it impossible to s
 This command will prevent the device from reaching or activating any of those targets. Useful for servers when you're in a bind and don't know how to remove power management:
 
 ```console
-systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 ```
 
 ## Unit Security Optimisation
 
-Because systemd uses cgroups, it can also give us a nice overview of any security issues that might be worth looking into. Here we see the Galaxy unit has a lot of 
+Because systemd uses cgroups, it can also give us a nice overview of any security issues that might be worth looking into. Here we see the Galaxy unit has a lot of
 
 ```console
 ubuntu@gat-1:~$ systemd-analyze security galaxy
   NAME                                       DESCRIPTION                                         EXPOSURE
 ✗ PrivateNetwork=                            Service has access to the host's network            0.5
-✓ User=/DynamicUser=                         Service runs under a static non-root user identity  
+✓ User=/DynamicUser=                         Service runs under a static non-root user identity
 ....
 ✗ CapabilityBoundingSet=~CAP_SYS_CHROOT      Service may issue chroot()                          0.1
 ✗ ProtectHostname=                           Service may change system host/domainname           0.1
@@ -357,7 +372,7 @@ OnFailure=failure-notification@%n
 Here it will be templated out with `%n` meaning the unit name, which will replace the `%i` in the notification unit, and be included in the notification to you.
 
 
-## Further Reading 
+## Further Reading
 
 - [The arch page](https://wiki.archlinux.org/title/Systemd/Timers)
 - [man 5 systemd.timer](https://man.archlinux.org/man/systemd.timer.5)
@@ -389,7 +404,7 @@ $ journalctl -u galaxy | head -n1
 
 > > <code-out-title>Pros</code-out-title>
 > > You did not need to know or remember:
-> > 
+> >
 > > - Where the log files were (`/var/log`? `/srv/galaxy/log`? somewhere else?)
 > > - If any of the old logs were compressed (or use `zless`/`zcat`/`zgrep`)
 > {: .code-out}
@@ -427,7 +442,7 @@ If you have multiple similarly named units, the wildcard feature is incredibly h
 > {: .code-out}
 >
 > > <code-in-title>Cons</code-in-title>
-> > ? 
+> > ?
 > {: .code-in}
 {: .code-2col}
 
@@ -500,7 +515,7 @@ $ journalctl --list-boots
   0 490a1609fb5d422cad1e7135db88efe7 Mon 2022-07-04 09:32:12 CEST—Mon 2022-07-04 11:56:09 CEST
 ```
 
-You can then see logs for those specific timeperiods with 
+You can then see logs for those specific timeperiods with
 
 ```
 $ journalctl -b -3 | head
@@ -569,7 +584,7 @@ First we can check how much disk space our logs are using:
 ```
 $ journalctl --disk-usage
 Archived and active journals take up 120.0M in the file system.
-``` 
+```
 
 And then we can clean it!
 

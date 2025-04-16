@@ -2,9 +2,9 @@
 title: "New Feature: Click-to-run Workflows"
 contributions:
   authorship: [hexylena]
-tags: [new feature, gtn]
+tags: [new feature, gtn, contributing]
 layout: news
-tutorial: topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/
+tutorial: topics/microbiome/tutorials/mothur-miseq-sop-short/workflows/
 ---
 
 The GTN has implemented "click to run" workflows! One click, will get you into Galaxy with a workflow imported and ready to run.

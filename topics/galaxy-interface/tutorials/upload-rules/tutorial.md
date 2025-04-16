@@ -4,7 +4,7 @@ redirect_from:
   - /topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial
 
 title: "Rule Based Uploader"
-zenodo_link: ""
+zenodo_link: "https://zenodo.org/records/3263975"
 level: Intermediate
 questions:
   - "How to use the rule based uploader to create complex collections"
@@ -31,9 +31,18 @@ contributors:
   - jmchilton
   - hexylena
 subtopic: upload
----
 
-# Introduction
+recordings:
+- captioners:
+  - assuntad23
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 22M
+  youtube_id: 1MWHVRWXpyA
+  speakers:
+  - assuntad23
+
+---
 
 
 Through a series of examples, this tutorial aims to familiarize the reader with building Galaxy collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc..
@@ -86,12 +95,12 @@ You can select all the data below and copy them to your clipboard.
 
 ```
 study_accession	sample_accession	experiment_accession	fastq_ftp
-PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
-PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
-PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
-PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000773.fastqsanger.gz
-PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000774.fastqsanger.gz
-PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000775.fastqsanger.gz
+PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/records/3263975/files/DRR000770.fastqsanger.gz
+PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/records/3263975/files/DRR000771.fastqsanger.gz
+PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/records/3263975/files/DRR000772.fastqsanger.gz
+PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/records/3263975/files/DRR000773.fastqsanger.gz
+PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/records/3263975/files/DRR000774.fastqsanger.gz
+PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/records/3263975/files/DRR000775.fastqsanger.gz
 ```
 {:#example-1-metadata}
 
@@ -111,12 +120,12 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
 >
 >    ```
 >    study_accession	sample_accession	experiment_accession	fastq_ftp
->    PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
->    PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
->    PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
->    PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000773.fastqsanger.gz
->    PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000774.fastqsanger.gz
->    PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000775.fastqsanger.gz
+>    PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/records/3263975/files/DRR000770.fastqsanger.gz
+>    PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/records/3263975/files/DRR000771.fastqsanger.gz
+>    PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/records/3263975/files/DRR000772.fastqsanger.gz
+>    PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/records/3263975/files/DRR000773.fastqsanger.gz
+>    PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/records/3263975/files/DRR000774.fastqsanger.gz
+>    PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/records/3263975/files/DRR000775.fastqsanger.gz
 >    ```
 >
 >    ![screenshot](../../images/rules/rules_example_1_2_paste.png)
@@ -191,12 +200,12 @@ This example will demonstrate using such history datasets as the source for coll
 >
 >    ```
 >    study_accession	sample_accession	experiment_accession	fastq_ftp
->    PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
->    PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
->    PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
->    PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000773.fastqsanger.gz
->    PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000774.fastqsanger.gz
->    PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000775.fastqsanger.gz
+>    PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/records/3263975/files/DRR000770.fastqsanger.gz
+>    PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/records/3263975/files/DRR000771.fastqsanger.gz
+>    PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/records/3263975/files/DRR000772.fastqsanger.gz
+>    PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/records/3263975/files/DRR000773.fastqsanger.gz
+>    PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/records/3263975/files/DRR000774.fastqsanger.gz
+>    PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/records/3263975/files/DRR000775.fastqsanger.gz
 >    ```
 >
 > 2. **Open** the `Rule-based` upload tab again, but this time:
@@ -248,13 +257,13 @@ For this next example we will again use ENA data, this time corresponding to the
 >
 >      ```
 >      study_accession	sample_accession	experiment_accession	fastq_ftp
->      PRJDB3920	SAMD00034150	DRX036147	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036147_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036147_2.fastq.gz
->      PRJDB3920	SAMD00034150	DRX036148	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036148_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036148_2.fastq.gz
->      PRJDB3920	SAMD00034150	DRX036149	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036149_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036149_2.fastq.gz
->      PRJDB3920	SAMD00034150	DRX036150	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036150_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036150_2.fastq.gz
->      PRJDB3920	SAMD00034150	DRX036151	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036151_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036151_2.fastq.gz
->      PRJDB3920	SAMD00034153	DRX036152	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036152_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036152_2.fastq.gz
->      PRJDB3920	SAMD00034152	DRX036164	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036164_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036164_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036147	https://zenodo.org/records/3263975/files/DRX036147_1.fastq.gz;https://zenodo.org/records/3263975/files/DRX036147_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036148	https://zenodo.org/records/3263975/files/DRX036148_1.fastq.gz;https://zenodo.org/records/3263975/files/DRX036148_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036149	https://zenodo.org/records/3263975/files/DRX036149_1.fastq.gz;https://zenodo.org/records/3263975/files/DRX036149_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036150	https://zenodo.org/records/3263975/files/DRX036150_1.fastq.gz;https://zenodo.org/records/3263975/files/DRX036150_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036151	https://zenodo.org/records/3263975/files/DRX036151_1.fastq.gz;https://zenodo.org/records/3263975/files/DRX036151_2.fastq.gz
+>      PRJDB3920	SAMD00034153	DRX036152	https://zenodo.org/records/3263975/files/DRX036152_1.fastq.gz;https://zenodo.org/records/3263975/files/DRX036152_2.fastq.gz
+>      PRJDB3920	SAMD00034152	DRX036164	https://zenodo.org/records/3263975/files/DRX036164_1.fastq.gz;https://zenodo.org/records/3263975/files/DRX036164_2.fastq.gz
 >      ```
 >
 >

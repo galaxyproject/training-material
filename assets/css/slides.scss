@@ -21,10 +21,10 @@ body.remark-container {
 	h1,
 	h2,
 	h3 {
-		font-family: 'Yanone Kaffeesatz';
-		font-weight: normal;
+		font-family: 'DIN 1451';
 		text-align: center;
 	}
+	h1 { font-weight: 900; }
 
 	h3 {
 		position: absolute;
@@ -83,43 +83,47 @@ body.remark-container {
 	}
 
 	.image-05 img {
-		width: 5%;
+		min-width: 5%;
 	}
 
 	.image-10 img {
-		width: 10%;
+		min-width: 10%;
 	}
 
 	.image-15 img {
-		width: 15%;
+		min-width: 15%;
 	}
 
 	.image-25 img {
-		width: 25%;
+		min-width: 25%;
 	}
 
 	.image-40 img {
-		width: 40%;
+		min-width: 40%;
+	}
+
+	.image-45 img {
+		min-width: 45%;
 	}
 
 	.image-50 img {
-		width: 50%;
+		min-width: 50%;
 	}
 
 	.image-60 img {
-		width: 60%;
+		min-width: 60%;
 	}
 
 	.image-75 img {
-		width: 75%;
+		min-width: 75%;
 	}
 
 	.image-90 img {
-		width: 100%;
+		min-width: 100%;
 	}
 
 	.image-100 img {
-		width: 100%;
+		min-width: 100%;
 	}
 
 	.table-100 table {
@@ -184,7 +188,7 @@ body.remark-container {
 		font-size: 10pt;
 		position: absolute;
 		left: 15px;
-		bottom: 2px;
+		display: flex;
 	}
 
 	.remark-slide-number {
@@ -348,10 +352,15 @@ body.remark-container {
 	}
 
 	.pull-left-large {
-		/* this does not break compatibility with .pull-right */
+		/* this does break compatibility with .pull-right */
 		float: left;
 		margin-left: -3em;
-		width: 60%;
+		width: 66%;
+	}
+	.pull-right-small {
+		float: right;
+		width: 33%;
+
 	}
 
 	.pull-left {
@@ -376,6 +385,11 @@ body.remark-container {
 	.left {
 		text-align: left !important;
 	}
+
+    .pull-bottom {
+        position: fixed;
+        bottom: 3em;
+    }
 
 	.requirements li {
 		list-style-type: none;
@@ -445,6 +459,13 @@ body.remark-container {
 	.contributor-newcontributors i {
 		margin-left: 0.5em;
 		margin-right: 0.5em;
+	}
+
+	.center {
+		// Tables aren't centered by text-align: center
+		* {
+			margin: auto;
+		}
 	}
 
 
@@ -532,6 +553,6 @@ body.remark-container {
 		text-align: center;
 		font-size: 150%;
 		padding: 0.3em;
-		
+
 	}
 }

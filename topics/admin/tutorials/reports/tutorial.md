@@ -11,11 +11,15 @@ time_estimation: "30m"
 key_points:
   - Galaxy supports pluggable monitoring extensions.
   - The Reports webapp is one option to monitor your system.
-contributors:
+contributions:
+  authorship:
   - natefoo
   - bgruening
   - slugger70
   - hexylena
+  funding:
+  - deNBI
+  - uni-freiburg
 subtopic: monitoring
 tags:
   - ansible
@@ -29,17 +33,6 @@ requirements:
       - ansible
       - ansible-galaxy
 ---
-
-> <warning-title>Currently Broken, Requires Separate Domain</warning-title>
-> Reports does not work, under a path prefix (the default setup that most
-> people will use.) It is completely broken and the developers have no plans to fix it in the near term.
-> See
-> [galaxyproject/galaxy#15966](https://github.com/galaxyproject/galaxy/issues/15966) for more details.
->
-> However, it should still function with a separate domain, if that is possible
-> for your setup. Otherwise, it **will not work.** If you wish to follow this
-> tutorial, please be aware of this.
-{: .warning}
 
 The reports application gives some pre-configured analytics screens. These are very easy to setup and can help with debugging issues in Galaxy.
 
@@ -82,7 +75,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -148,6 +148,11 @@ galaxy_config:
+>    @@ -151,6 +151,11 @@ galaxy_config:
 >             pools:
 >               - job-handlers
 >               - workflow-schedulers
@@ -94,7 +87,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >     
 >     galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
 >     
->    @@ -168,6 +173,8 @@ galaxy_config_templates:
+>    @@ -171,6 +176,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >       - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
@@ -114,15 +107,16 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -103,4 +103,9 @@ server {
+>    @@ -103,4 +103,10 @@ server {
 >     		proxy_set_header Upgrade $http_upgrade;
 >     		proxy_set_header Connection "upgrade";
 >     	}
 >    +
 >    +	location /reports/ {
 >    +		proxy_pass http://{{ galaxy_config.gravity.reports.bind }}:/;
+>    +		proxy_set_header X-Forwarded-Host $host;
+>    +		proxy_set_header X-Forwarded-Proto $scheme;
 >    +	}
->    +
 >     }
 >    {% endraw %}
 >    ```

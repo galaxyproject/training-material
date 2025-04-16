@@ -2,7 +2,7 @@
 title: "New Feature: Prometheus Metrics endpoint"
 contributions:
   authorship: [hexylena]
-tags: [new feature, gtn]
+tags: [new feature, gtn, contributing]
 layout: news
 ---
 

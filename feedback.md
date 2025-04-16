@@ -1,8 +1,13 @@
 ---
 layout: base
+title: GTN Feedback
+description: The collected feedback of every tutorial and resource in the GTN
 ---
 
 {% assign fdbk= site.data['feedback'] %}
+{% if fdbk == nil %}
+    {% assign fdbk = "" | split:',' %}
+{% endif %}
 {% assign start = fdbk | first  %}
 {% assign topics = site.data | where_exp: "item", "item.title" %}
 {% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" %}
@@ -193,8 +198,6 @@ layout: base
 
 <div class="container main-content">
     <section>
-        <h1>GTN Feedback</h1>
-
         <p>Aggregation of feedback submitted since {{ start.month }} using the embed feedback form
             at the bottom of tutorials. Thank you everyone who submitted feedback!
         </p>

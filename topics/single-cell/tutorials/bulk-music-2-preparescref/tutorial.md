@@ -1,8 +1,8 @@
 ---
 layout: tutorial_hands_on
-subtopic: deconvo
-priority: 2
-title: Creating the single-cell RNA-seq reference dataset for deconvolution
+subtopic: datamanipulation
+priority: 4
+title: Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution
 questions:
 - Where can I find good quality scRNA-seq reference datasets?
 - How can I reformat and manipulate these downloads to create the right format for MuSiC?
@@ -37,15 +37,9 @@ follow_up_training:
         - bulk-music-3-preparebulk
 
 tags:
-  - single-cell
-  - human
-  - deconvolution
-  - bulk
-  - transcriptomics
+  - data management
 ---
 
-
-# Introduction
 
 
 After completing the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) {% cite wang2019bulk %} deconvolution tutorial, you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw scRNA-seq dataset pulled from a public resource (the EMBL-EBI single cell expression atlas {% cite Moreno2021 %}. Let's get started!
@@ -158,10 +152,10 @@ Now, there might be a better way to do this in Galaxy (or you might consider dow
 >            - *"Replacement"*: `Inferred cell type - author labels`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `""`
->            - *"Replacement"*: 
+>            - *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `"`
->            - *"Replacement"*: 
+>            - *"Replacement"*:
 >
 >    > <comment-title></comment-title>
 >    >
@@ -183,11 +177,11 @@ Great, this file is now ready to go! But, it contains all those extra cells that
 > 1. {% tool [Add line to file](toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0) %} with the following parameters:
 >    - *"text to add"*: `Cell`
 >    - {% icon param-file %} *"input file"*: `barcode_tsv` (output of **EBI SCXA Data Retrieval** {% icon tool %})
-> 
+>
 > 2. Change the datatype to tabular.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
-> 
+>
 >    > <comment-title></comment-title>
 >    >
 >    > This is an annoying step we have to do to get the right format, otherwise future steps won't work.
@@ -208,7 +202,7 @@ Great, this file is now ready to go! But, it contains all those extra cells that
 >    - *"Keep the header lines"*: `Yes`
 >    > <comment-title></comment-title>
 >    >
->    > Make sure that you join the files in the same order as above - put the output of Add line to file in first - otherwise your columns will be in a different order for the next step. Everything will still work, but you would need to change the number of the column you remove using Advanced Cut. 
+>    > Make sure that you join the files in the same order as above - put the output of Add line to file in first - otherwise your columns will be in a different order for the next step. Everything will still work, but you would need to change the number of the column you remove using Advanced Cut.
 >    {: .comment}
 {: .hands_on}
 
@@ -424,3 +418,5 @@ You have successfully performed, essentially, three workflows. You can find the 
 With these workflows, you've created three Expression Set objects, capable of running in the MuSiC Compare tutorial. Now you just need the bulk RNA-seq Expression Set objects!
 
 This tutorial is part of the [https://singlecell.usegalaxy.eu](https://singlecell.usegalaxy.eu) portal ({% cite tekman2020single %}).
+
+{% snippet topics/single-cell/faqs/user_community_join.md %}

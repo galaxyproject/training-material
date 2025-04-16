@@ -6,6 +6,9 @@ subtopic: introduction
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 tags:
   - prokaryote
+  - microgalaxy
+  - gmod
+  - jbrowse1
 questions:
   - "How do we detect differences between a set of reads from a microorganism and a reference genome"
 objectives:
@@ -22,9 +25,15 @@ contributors:
   - annasyme
   - slugger70
   - tseemann
+edam_ontology:
+- topic_0622 # Genomics
+- topic_0196 # Sequence assembly
+- topic_2885 # DNA polymorphism
+- topic_3301 # Microbiology
+- topic_0080 # Sequence analysis
+- topic_0199 # Genetic variation
 ---
 
-# Introduction
 
 Variant calling is the process of identifying differences between two genome samples. Usually differences are limited to single nucleotide polymorphisms (SNPs) and small insertions and deletions (indels). Larger structural variation such as inversions, duplications and large deletions are not typically covered by “variant calling”.
 
@@ -176,7 +185,7 @@ We could go through all of the variants like this and read them out of a text ta
 >
 >       This sequence will be the reference against which annotations are displayed
 >
->    - "Produce Standalone Instance" to `Yes`
+>    - *"Output JBrowse"*: `Minimal for viewing (Documentation removed)`
 >    - "Genetic Code" to `11: The Bacterial, Archaeal and Plant Plastid Code`
 >    - "JBrowse-in-Galaxy Action" to `New JBrowse Instance`
 >    - "Track Group"

@@ -1,6 +1,6 @@
 ---
 title: "New Tutorial: Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data"
-tags: [new tutorial, variant-analysis, covid-19]
+tags: [new tutorial, variant-analysis, covid-19, one-health]
 contributions:
   authorship: [bebatut, wm75]
 tutorial: "topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html"

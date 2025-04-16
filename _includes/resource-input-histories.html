@@ -1,0 +1,21 @@
+{% if include.material.input_histories %}
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Input Histories">
+        {% icon galaxy-history-input %}{% if include.label %}&nbsp;Input Histories{% endif %}
+    </a>
+    <ul class="dropdown-menu">
+      {% for key in include.material.input_histories %}
+        <li>
+            <a class="dropdown-item" href="{{ key.history }}">
+              {{ key.label }}
+              {% if key.date %}
+              <br/><span class="text-muted">{{ key.date }}</span>
+              {% endif %}
+            </a>
+        </li>
+      {% endfor %}
+      <li class="dropdown-divider"></li>
+      <li>
+        <a class="dropdown-item" href="{{ site.baseurl }}/faqs/gtn/gtn_example_histories.html">{% icon help %} How to Use This</a>
+      </li>
+    </ul>
+{% endif %}

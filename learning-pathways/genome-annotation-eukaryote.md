@@ -4,14 +4,15 @@ title: Genome annotation for eukaryotes
 description: |
   Learn how to annotate an eukaryotic genome sequence: identify repeated regions, find the position and function of genes, and even set up a manual curation environment with Apollo.
 type: use
-tags: [genome annotation, eukaryote]
+tags: [genome-annotation, eukaryote]
 
 cover-image: assets/images/gga.png
 cover-image-alt: "Galaxy Genome Annotation logo"
 editorial_board:
 - abretaud
 funding:
-- erasmusplus
+- gallantries
+- eurosciencegateway
 
 
 

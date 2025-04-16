@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="{% if page.lang %}{{ page.lang }}{% else %}en{% endif %}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{{ page.title | default: site.title }}</title>
+        {% if jekyll.environment == 'production' %}
+            {% include _includes/analytics.html %}
+        {% endif %}
+        <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="{{ "/feed.xml" | prepend: site.baseurl }}">
+        <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+        <link rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
+        <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css?v=3">
+        <meta name="theme-color" content="#2c3143"/>
+
+        {{ page | generate_dublin_core: site }}
+
+        {% assign topic = site.data[page.topic_name] %}
+        {% assign og_title = topic.title %}
+        {% if page.title %}
+            {% assign og_title = page.title %}
+        {% endif %}
+        {% assign og_desc = page.description | default:topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
+        <meta name="description" content="{{ og_desc | strip_html | truncate: 120}}">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}">
+        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 120}}">
+
+        <meta property="og:image" content="/assets/images/GTNLogo1000.png">
+    </head>
+    <body data-brightness="auto" data-contrast="auto">
+        {{ content }}
+    </body>
+</html>

@@ -1,12 +1,46 @@
 ---
 name: single-cell
 type: use
+topic_type: technology
 title: Single Cell
+
+learning_path_ctas:
+  For Beginners: intro_single_cell
+  For Intermediate Users: beyond_single_cell
+  For Coding Enthusiasts: reloaded_single_cell
+
+
+# Using the community CTAs feature opts you into managing your own requirements list here a bit manually
+community_ctas:
+  - description: |
+      **Pre-requisites:** If you've never used Galaxy before, first try the:
+    link: https://training.galaxyproject.org/training-material/topics/introduction/
+    link_text: Introduction to Galaxy
+    icon: tutorial
+  - description: |
+      The Single Cell & Galaxy learners are on Slack
+    link: https://gxy.io/gtn-slack
+    link_text: GTN Slack Workspace
+    icon: comment
+  - description: |
+      Come chat Single Cell with us on Matrix
+    link: https://matrix.to/#/#spoc3:matrix.org
+    link_text: Community Matrix Chat
+    icon: comment
+  - description: |
+      What else do you want to see? Let us know!
+    link: https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing
+    link_text: Tool/Tutorial Requests
+    icon: tool
+
+gitter: Galaxy-Training-Network_galaxy-single-cell:gitter.im
+
 summary: |
-  Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!
-  
-  What else do you want to see? You can submit tool and/or tutorial requests, as well as up-vote requests from others at our [Single Cell Community Planning site](https://github.com/orgs/galaxyproject/projects/31/views/1).
-  {: .alert.alert-success}
+  Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!).
+
+# What else do you want to see? You can submit tool or tutorial requests, or upvote other requests, on our <i class="fa fa-wrench" aria-hidden="true"></i> [Single-Cell & Spatial Omics Tool Request Spreadsheet]().
+#  {: .alert.alert-success}
+
 #docker_image: "quay.io/galaxy/transcriptomics-training"
 
 requirements:
@@ -18,23 +52,42 @@ editorial_board:
   - nomadscientist
   - mtekman
   - pavanvidem
+  - hexhowells
+  - MarisaJL
+  - heylf
 
+toc: true  # create table of contents for the subtopics
 subtopics:
   - id: scintroduction
     title: "Introduction"
-    description: "Start here if you are new to single cell analysis in Galaxy"
+    description: "Start here if you are new to single cell analysis and want to learn the concepts."
+  - id: firstsc
+    title: "Your first analysis"
+    description: "Start here if you are new to single cell analysis in Galaxy and want to try analysing data."
   - id: single-cell-CS
     title: "Case study"
-    description: "These tutorials take you from raw scRNA sequencing reads to inferred trajectories to replicate a published analysis. Note you have two different options for trajectory analysis - Scanpy in Python/Jupyter Notebook, or Monocle3 in the Galaxy user interface."
+    description: "These tutorials take you from raw scRNA sequencing reads to inferred trajectories to replicate a published analysis. The data is messy. The decisions are tough. The interpretation is meaningful. Come here to advance your single cell skills! Note that you get two options for inferring trajectories."
+  - id: single-cell-CS-code
+    title: "Case study: Reloaded"
+    description: "These tutorials let you follow the same case study analysis of real, messy data but in a programming environment, hosted on Galaxy. So if you want more flexibility, but the same guided steps as the Case Study, you can skip the Case Study and start here instead. Alternatively, try these after completing the Case Study for an easier jump to a coding environment."
+  - id: end-to-end
+    title: "End-to-end scRNA-seq Analyses"
+    description: "These tutorials use different methods to analyse scRNA-seq samples"
   - id: deconvo
     title: "Deconvolution"
     description: "These tutorials infer cell compositions from bulk RNA-seq data using a scRNA-seq reference"
-  - id: end-to-end
-    title: "End-to-end Analyses"
-    description: "These tutorials use different methods to analyse scRNA-seq samples"
+  - id: scmultiomics
+    title: "Multiomic Analyses"
+    description: "This section lets you build on mere scRNA analyses into a multiomic future!"
   - id: tricks
     title: "Tips, tricks & other hints"
     description: "These tutorials cover helpful skills for scRNA-seq analysis"
+  - id: datamanipulation
+    title: "Changing data formats & preparing objects"
+    description: "These tutorials cover a range of needs for importing data from different sources, to changing data into different formats to move from one analysis to the other."
+  - id: exploratory
+    title: "Exploratory Analyses"
+    description: "You have clusters and you have genes. What can you do now? Come here to explore your results more!"
 
 
 references:

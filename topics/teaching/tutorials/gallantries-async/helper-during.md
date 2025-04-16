@@ -1,0 +1,3 @@
+- Follow the relevant chat channels
+- Answer student questions or help them figure out who they should ask
+- Write up common questions into an FAQ document, or contribute these to the GTN.

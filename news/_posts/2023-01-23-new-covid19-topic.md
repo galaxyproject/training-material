@@ -1,6 +1,6 @@
 ---
 title: "New GTN Feature Tag-based Topics enables new SARS-CoV-2 topic"
-tags: [new topic,new feature]
+tags: [new topic,new feature, one-health]
 contributions:
   authorship: [hexylena,wm75]
 layout: news

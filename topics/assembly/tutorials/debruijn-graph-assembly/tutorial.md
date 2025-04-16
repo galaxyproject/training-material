@@ -27,9 +27,9 @@ contributors:
 
 In this activity, we will perform *de novo* assemblies of a short read set using the Velvet Optimiser and the SPAdes assemblers. We are using the Velvet Optimiser for illustrative purposes. For real assembly work, a more suitable assembler should be chosen - such as SPAdes.
 
-The Velvet Optimiser is a script written by Simon Gladman to optimise the k-mer size and coverage cutoff parameters for Velvet. More information can be found [here](https://github.com/slugger70/VelvetOptimiser)
+The Velvet Optimiser is a script written by @gtn:slugger70 to optimise the k-mer size and coverage cutoff parameters for Velvet. More information can be found [in its repository](https://github.com/slugger70/VelvetOptimiser).
 
-SPAdes is a de novo genome assembler written by Pavel Pevzner's group in St. Petersburg. More details on it can be found [here](http://cab.spbu.ru/software/spades/)
+SPAdes is a de novo genome assembler written by Pavel Pevzner's group in St. Petersburg. More details on it can be found [on Spades' website](http://cab.spbu.ru/software/spades/)>
 
 
 
@@ -225,7 +225,7 @@ The next thing to be aware of is that there can be multiple valid interpretation
 > ![Simple example 4](https://camo.githubusercontent.com/58d0aa7eff4cfd3d36c9210e9f6a2f0265396715/687474703a2f2f72727769636b2e6769746875622e696f2f42616e646167652f696d616765732f77696b692f73696d706c655f6578616d706c655f342e706e67)
 >
 > Additional knowledge, such as information on the approximate size of the bacterial chromosome, can help the researcher to rule out the first alternative. In this way, Bandage has assisted in turning a fragmented assembly of three contigs into a completed genome of one sequence.
-{: .quote}
+{: .quote cite="https://github.com/rrwick/Bandage/wiki/Simple-example"}
 
 # Assemble with SPAdes
 

@@ -5,7 +5,7 @@ title: "De novo transcriptome reconstruction with RNA-Seq"
 subtopic: introduction
 priority: 3
 
-zenodo_link: "https://zenodo.org/record/254485#.WKODmRIrKRu"
+zenodo_link: "https://zenodo.org/records/583140"
 questions:
   - "What genes are differentially expressed between G1E cells and megakaryocytes?"
   - "How can we generate a transcriptome de novo from RNA sequencing data?"
@@ -24,9 +24,19 @@ contributions:
   - moheydarian
   editing:
   - jxtx
+
+recordings:
+- captioners:
+  - malloryfreeberg
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 48M
+  youtube_id: WrOIpCxba78
+  speakers:
+  - malloryfreeberg
+
 ---
 
-# Introduction
 
 
 The data provided here are part of a Galaxy tutorial that analyzes RNA-seq data from a study published by *Wu et al.* in 2014 [DOI:10.1101/gr.164830.113](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4248312/). The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation." To this end, RNA-seq libraries were constructed from multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes. This RNA-seq data was used to determine differential gene expression between G1E and megakaryocytes and later correlated with Tal1 occupancy. This dataset (GEO Accession: GSE51338) consists of biological replicate, paired-end, poly(A) selected RNA-seq libraries. Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by Wu *et al*.
@@ -46,7 +56,7 @@ The goal of this exercise is to identify what transcripts are present in the G1E
 
 ## Data upload
 
-Due to the large size of this dataset, we have downsampled it to only include reads mapping to chromosome 19 and certain loci with relevance to hematopoeisis. This data is available at [`Zenodo`](https://zenodo.org/record/583140#.WSW3NhPyub8), where you can find the forward and reverse reads corresponding to replicate RNA-seq libraries from G1E and megakaryocyte cells and an annotation file of RefSeq transcripts we will use to generate our transcriptome database.
+Due to the large size of this dataset, we have downsampled it to only include reads mapping to chromosome 19 and certain loci with relevance to hematopoeisis. This data is available at [`Zenodo`](https://zenodo.org/record/583140), where you can find the forward and reverse reads corresponding to replicate RNA-seq libraries from G1E and megakaryocyte cells and an annotation file of RefSeq transcripts we will use to generate our transcriptome database.
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -66,7 +76,7 @@ Due to the large size of this dataset, we have downsampled it to only include re
 > 9. Rename the files in your history to retain just the necessary information (*e.g.* "G1E R1 forward reads")
 >
 >
-> 10. Import the data from [Zenodo](https://zenodo.org/record/583140) [![DOI](https://zenodo.org/badge/DOI/10.123/GTNdenovoRNAseq.svg)](https://zenodo.org/record/583140)
+> 10. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
 >     ```
 >     https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29

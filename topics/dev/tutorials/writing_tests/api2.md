@@ -4,7 +4,7 @@
 > API test for creating an object.
 > 
 > ```python
-> class MyTutorialApiTestCase(ApiTestCase):
+> class TestMyTutorialApiTestCase(ApiTestCase):
 > 
 >     def test_create_role(self):
 >         # prepare new role

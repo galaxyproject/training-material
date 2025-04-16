@@ -1,0 +1,1091 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [
+        {
+            "child_steps": [
+                0
+            ],
+            "color": "lime",
+            "data": {
+                "title": "GBIF occurrence dataset"
+            },
+            "id": 0,
+            "position": [
+                0,
+                220
+            ],
+            "size": [
+                240,
+                140
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                17,
+                2,
+                18,
+                19,
+                20,
+                21,
+                22
+            ],
+            "color": "turquoise",
+            "data": {
+                "title": "Ecoregionalization tool suite"
+            },
+            "id": 3,
+            "position": [
+                2830,
+                0
+            ],
+            "size": [
+                1917.8,
+                939.7
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                16,
+                1
+            ],
+            "color": "orange",
+            "data": {
+                "title": "Jupytool data preparation process"
+            },
+            "id": 2,
+            "position": [
+                2270,
+                210
+            ],
+            "size": [
+                500,
+                376.4
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                15,
+                14,
+                13,
+                12,
+                11,
+                10,
+                9,
+                8,
+                7,
+                6,
+                5,
+                4,
+                3
+            ],
+            "color": "yellow",
+            "data": {
+                "title": "Data preparation steps"
+            },
+            "id": 1,
+            "position": [
+                250,
+                220
+            ],
+            "size": [
+                1980,
+                363.6
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0009-0009-5969-8478",
+            "name": "Seguineau Pauline"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Ecoregionalization workflow",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "occurrence.txt"
+                }
+            ],
+            "label": "occurrence.txt",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 20,
+                "top": 260
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "2c6ad1a0-b36d-4fac-a0e3-5d5d89435886",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "pivot_wider_jupytool_notebook.ipynb"
+                }
+            ],
+            "label": "pivot_wider_jupytool_notebook.ipynb",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2290,
+                "top": 250
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "3f8f2445-d193-4cd0-9880-fb61b5e8ab66",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "ceamarc_env.tsv"
+                }
+            ],
+            "label": "ceamarc_env.tsv",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2850.0099833137524,
+                "top": 56.75797316712817
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "c9e7efc5-0fde-4ced-be6b-5d39c36ff72b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Advanced Cut",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 270,
+                "top": 260
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "fbf99087e067",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"complement\": \"\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"delimiter\": \"\", \"colnames_option\": {\"header\": \"Y\", \"__current_case__\": 0, \"list\": [\"27\", \"98\", \"99\", \"158\", \"159\", \"160\", \"162\", \"166\", \"170\"]}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
+            "type": "tool",
+            "uuid": "dcea1ef2-6f57-4aa8-973c-54316d9c9f1d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Column Regex Find And Replace",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 420,
+                "top": 450
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "503bcd6ebe4b",
+                "name": "regex_find_replace",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"checks\": [{\"__index__\": 0, \"pattern\": \"^$\", \"replacement\": \"NA\"}], \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"field\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "4818b476-17a4-44ad-9f79-2eec186fad10",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Column Regex Find And Replace",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 560,
+                "top": 260
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "503bcd6ebe4b",
+                "name": "regex_find_replace",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"checks\": [{\"__index__\": 0, \"pattern\": \"^$\", \"replacement\": \"NA\"}], \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"field\": \"2\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "8c10fc31-8ab6-4a63-941f-bf7dad0e6371",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Column Regex Find And Replace",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 720,
+                "top": 450
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "503bcd6ebe4b",
+                "name": "regex_find_replace",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"checks\": [{\"__index__\": 0, \"pattern\": \"^$\", \"replacement\": \"NA\"}], \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"field\": \"3\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "a7d39c43-39bd-48e3-9b2c-fff55969836e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Column Regex Find And Replace",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 850,
+                "top": 260
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "503bcd6ebe4b",
+                "name": "regex_find_replace",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"checks\": [{\"__index__\": 0, \"pattern\": \"^$\", \"replacement\": \"NA\"}], \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"field\": \"4\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "fda40c12-b750-46b8-b2db-b27044163423",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1010,
+                "top": 450
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.0",
+            "tool_shed_repository": {
+                "changeset_revision": "557ec8d7087d",
+                "name": "filter_tabular",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"comment_char\": true, \"input\": {\"__class__\": \"ConnectedValue\"}, \"linefilters\": [{\"__index__\": 0, \"filter\": {\"filter_type\": \"regex\", \"__current_case__\": 8, \"regex_pattern\": \"NA\", \"regex_action\": \"exclude_find\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.3.0",
+            "type": "tool",
+            "uuid": "6781601c-9dc8-47bc-a07f-e09a77db0eba",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Column Regex Find And Replace",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1140,
+                "top": 260
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "503bcd6ebe4b",
+                "name": "regex_find_replace",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"checks\": [{\"__index__\": 0, \"pattern\": \"(.$)\", \"replacement\": \"\\\\1_\"}], \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"field\": \"4\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "78983ebc-054c-4c72-af90-3bbfde948cef",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 9,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Column Regex Find And Replace",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1300,
+                "top": 450
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "503bcd6ebe4b",
+                "name": "regex_find_replace",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"checks\": [{\"__index__\": 0, \"pattern\": \"(.$)\", \"replacement\": \"\\\\1_\"}], \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"field\": \"5\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "15c97549-0700-4138-99b2-1bf16f153cf4",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input": {
+                    "id": 10,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Column Regex Find And Replace",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1430,
+                "top": 260
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "503bcd6ebe4b",
+                "name": "regex_find_replace",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"checks\": [{\"__index__\": 0, \"pattern\": \"(.$)\", \"replacement\": \"\\\\1_\"}], \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"field\": \"6\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "1f385991-ae7e-4c5d-98be-6fd854cf50b1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input": {
+                    "id": 11,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Column Regex Find And Replace",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1590,
+                "top": 450
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "503bcd6ebe4b",
+                "name": "regex_find_replace",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"checks\": [{\"__index__\": 0, \"pattern\": \"(.$)\", \"replacement\": \"\\\\1_\"}], \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"field\": \"7\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "d71dae4b-8d0e-4d9a-9d8e-a8b7b90ae4d0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input": {
+                    "id": 12,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Column Regex Find And Replace",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1720,
+                "top": 260
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "503bcd6ebe4b",
+                "name": "regex_find_replace",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"checks\": [{\"__index__\": 0, \"pattern\": \"(.$)\", \"replacement\": \"\\\\1_\"}], \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"field\": \"8\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "ac49c90b-7d8a-4a6e-9c57-888ec1bd8055",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input1": {
+                    "id": 13,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Merge Columns",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1880,
+                "top": 450
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2",
+            "tool_shed_repository": {
+                "changeset_revision": "dd40b1e9eebe",
+                "name": "merge_cols",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"col1\": \"4\", \"col2\": \"5\", \"columns\": [{\"__index__\": 0, \"datacol\": \"6\"}, {\"__index__\": 1, \"datacol\": \"7\"}, {\"__index__\": 2, \"datacol\": \"8\"}, {\"__index__\": 3, \"datacol\": \"9\"}], \"input1\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "cbc7d216-df10-4638-99a6-1a6c1bb2fde7",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "input": {
+                    "id": 14,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Advanced Cut",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2010,
+                "top": 260
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "fbf99087e067",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"complement\": \"--complement\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"delimiter\": \"\", \"colnames_option\": {\"header\": \"Y\", \"__current_case__\": 0, \"list\": [\"4\", \"5\", \"6\", \"7\", \"8\", \"9\"]}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
+            "type": "tool",
+            "uuid": "4cf1c296-2589-4375-8bb5-a17334b2592b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "interactive_tool_jupyter_notebook",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "mode|ipynb": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "user_inputs_0|input_type|input_value": {
+                    "id": 15,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Interactive JupyTool and notebook",
+                    "name": "mode"
+                }
+            ],
+            "label": null,
+            "name": "Interactive JupyTool and notebook",
+            "outputs": [
+                {
+                    "name": "output_collection",
+                    "type": "input"
+                },
+                {
+                    "name": "jupyter_notebook",
+                    "type": "ipynb"
+                },
+                {
+                    "name": "output_dataset",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 2550,
+                "top": 280
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput_dataset": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output_dataset"
+                }
+            },
+            "tool_id": "interactive_tool_jupyter_notebook",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"mode\": {\"mode_select\": \"previous\", \"__current_case__\": 1, \"ipynb\": {\"__class__\": \"ConnectedValue\"}, \"run_it\": true}, \"user_inputs\": [{\"__index__\": 0, \"input_name\": \"Input file\", \"description\": null, \"input_type\": {\"input_type_selector\": \"dataset\", \"__current_case__\": 0, \"input_value\": {\"__class__\": \"ConnectedValue\"}}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "13e9ad8f-74ee-44f9-a4c9-efc377fe7c5e",
+            "when": null,
+            "workflow_outputs": [{"output_name": "output_dataset", "label": "occ_out"}]
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_geonearestneighbor/ecoregion_GeoNearestNeighbor/0.1.0+galaxy0",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "env_file|env": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "occ_file|occ": {
+                    "id": 16,
+                    "output_name": "output_dataset"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool GeoNearestNeighbor",
+                    "name": "env_file"
+                },
+                {
+                    "description": "runtime parameter for tool GeoNearestNeighbor",
+                    "name": "occ_file"
+                }
+            ],
+            "label": null,
+            "name": "GeoNearestNeighbor",
+            "outputs": [
+                {
+                    "name": "occ_env_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "info_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2894.5877827929194,
+                "top": 408.1579568910865
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_geonearestneighbor/ecoregion_GeoNearestNeighbor/0.1.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5cde56683579",
+                "name": "ecoregion_geonearestneighbor",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"env_file\": {\"env\": {\"__class__\": \"ConnectedValue\"}, \"envgeolat\": \"2\", \"envgeolong\": \"1\"}, \"occ_file\": {\"occ\": {\"__class__\": \"ConnectedValue\"}, \"occgeolat\": \"1\", \"occgeolong\": \"2\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0+galaxy0",
+            "type": "tool",
+            "uuid": "9a90d520-1415-4e61-b182-bc901419017d",
+            "when": null,
+            "workflow_outputs": [{"output_name": "occ_env_out", "label": "occ_env_out"},{"output_name": "info_out", "label": "info_out"}]
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_brt_analysis/ecoregion_brt_analysis/0.1.0+galaxy0",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "enviro": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "species_files": {
+                    "id": 17,
+                    "output_name": "occ_env_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "BRT tool prediction",
+            "outputs": [
+                {
+                    "name": "outputpred",
+                    "type": "input"
+                },
+                {
+                    "name": "outputval",
+                    "type": "input"
+                },
+                {
+                    "name": "outputspdistri",
+                    "type": "input"
+                },
+                {
+                    "name": "outputplots",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3193.504075252652,
+                "top": 541.7185497919073
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_brt_analysis/ecoregion_brt_analysis/0.1.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "f8962f1c832a",
+                "name": "ecoregion_brt_analysis",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"abioticname\": [\"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"10\", \"11\", \"12\", \"13\", \"14\", \"15\", \"16\", \"17\", \"18\", \"19\"], \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"dec_env\": \".\", \"dec_species\": \".\", \"enviro\": {\"__class__\": \"ConnectedValue\"}, \"species_files\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0+galaxy0",
+            "type": "tool",
+            "uuid": "31b18fc8-1e4d-493c-984e-4258f1a4f2c6",
+            "when": null,
+            "workflow_outputs": [
+            {"output_name": "outputpred", "label": "coll_pred"},
+            {"output_name": "outputval", "label": "coll_val"},
+            {"output_name": "outputspdistri", "label": "coll_distri"},
+            {"output_name": "outputplots", "label": "coll_plots"}]
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_taxa_seeker/ecoregion_taxa_seeker/0.1.0+galaxy0",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "envfile": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "occurencefile": {
+                    "id": 17,
+                    "output_name": "occ_env_out"
+                },
+                "predictionfile": {
+                    "id": 18,
+                    "output_name": "outputpred"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "TaxaSeeker",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output2",
+                    "type": "txt"
+                },
+                {
+                    "name": "output3",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 3433.8698763810016,
+                "top": 237.72007897217372
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_taxa_seeker/ecoregion_taxa_seeker/0.1.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "788b118910a7",
+                "name": "ecoregion_taxa_seeker",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"envfile\": {\"__class__\": \"ConnectedValue\"}, \"occurencefile\": {\"__class__\": \"ConnectedValue\"}, \"predictionfile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0+galaxy0",
+            "type": "tool",
+            "uuid": "5fcebc7f-6c64-4d03-ba84-4698bec4972f",
+            "when": null,
+            "workflow_outputs": [
+            {"output_name": "output1", "label": "summary"},
+            {"output_name": "output2", "label": "taxa"},
+            {"output_name": "output3", "label": "taxa_clean"}]
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_cluster_estimate/ecoregion_cluster_estimate/0.1.0+galaxy0",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "envfile": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "predictionfile": {
+                    "id": 18,
+                    "output_name": "outputpred"
+                },
+                "taxafile": {
+                    "id": 19,
+                    "output_name": "output2"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ClusterEstimate",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "png"
+                },
+                {
+                    "name": "output2",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output3",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 3874.7,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_cluster_estimate/ecoregion_cluster_estimate/0.1.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "1b9522671e90",
+                "name": "ecoregion_cluster_estimate",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"envfile\": {\"__class__\": \"ConnectedValue\"}, \"max_k\": \"10\", \"metric\": \"manhattan\", \"predictionfile\": {\"__class__\": \"ConnectedValue\"}, \"sample\": \"10\", \"taxafile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0+galaxy0",
+            "type": "tool",
+            "uuid": "eb37099c-77b2-4bd2-b1f9-11f0a46ba7ab",
+            "when": null,
+            "workflow_outputs": [
+            {"output_name": "output1", "label": "SIH_index"},
+            {"output_name": "output2", "label": "data_to_clus"},
+            {"output_name": "output3", "label": "databio_table"}]
+        },
+        "21": {
+            "annotation": "Please ensure that the parameter 'Number of Clusters Wanted' reflects your actual desired number. To determine this parameter, refer to your SIH index plot from the ClusterEstimate step.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_clara_cluster/ecoregion_clara_cluster/0.1.0+galaxy0",
+            "errors": null,
+            "id": 21,
+            "input_connections": {
+                "envfile": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "predictionfile": {
+                    "id": 20,
+                    "output_name": "output3"
+                },
+                "predictionmatrix": {
+                    "id": 20,
+                    "output_name": "output2"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ClaraClust",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "png"
+                },
+                {
+                    "name": "output2",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output3",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 4289.178352338062,
+                "top": 39.984930695645005
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_clara_cluster/ecoregion_clara_cluster/0.1.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "24a81631a8b5",
+                "name": "ecoregion_clara_cluster",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"envfile\": {\"__class__\": \"ConnectedValue\"}, \"k\": \"7\", \"metric\": \"manhattan\", \"predictionfile\": {\"__class__\": \"ConnectedValue\"}, \"predictionmatrix\": {\"__class__\": \"ConnectedValue\"}, \"sample\": \"10\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0+galaxy0",
+            "type": "tool",
+            "uuid": "7cd94343-68e1-48d6-8ad1-6bced0b2e78f",
+            "when": null,
+            "workflow_outputs": [
+            {"output_name": "output1", "label": "SIH_plot"},
+            {"output_name": "output2", "label": "cluster_points"},
+            {"output_name": "output3", "label": "cluster_info"}]
+        },
+        "22": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_eco_map/ecoregion_eco_map/0.1.0+galaxy0",
+            "errors": null,
+            "id": 22,
+            "input_connections": {
+                "cluster": {
+                    "id": 21,
+                    "output_name": "output2"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "EcoMap",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 4527.826706775709,
+                "top": 284.3215296781037
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_eco_map/ecoregion_eco_map/0.1.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "374555fc30bd",
+                "name": "ecoregion_eco_map",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cluster\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0+galaxy0",
+            "type": "tool",
+            "uuid": "173e238c-b551-40bf-9ada-302f6a2f8537",
+            "when": null,
+            "workflow_outputs": [
+                {"output_name": "output", "label": "eco_map"}]
+        }
+    },
+    "tags": [],
+    "uuid": "edd16f6e-5feb-4df5-bf62-a7560dcf0216",
+    "version": 7
+}

@@ -7,34 +7,77 @@ layout: faq
 contributors: [jennaj, Melkeb]
 ---
 
-The error and usage help in this FAQ applies to:
+The error and usage help in this FAQ applies to most if not all Bioconductor tools.
 
-- Deseq2
+- DEseq2
 - Limma
 - edgeR
 - goseq
-- DEXSeq
 - Diffbind
 - StringTie
 - Featurecounts
-- HTSeq
+- HTSeq-count
+- HTseq-clip
 - Kalisto
 - Salmon
 - Sailfish
-- DexSeq-count
+- DEXSeq
+- DEXSeq-count
+- IsoformSwitchAnalyzeR
 
-Expect odd errors or content problems if any of the usage requirements below are not met:
+{% icon galaxy-info %}  Review your error messages and you'll find some clues about what may be going wrong and what needs to be adjusted in your rerun. If you are getting a message from `R`, that usually means the underlying tool could not read in or understand your inputs. This can be a labeling problem (what was typed on the form) or a content problem (data within the files).
 
-- Differential expression tools all require count dataset replicates when used in Galaxy. At least two per factor level and the same number per factor level. These must all contain unique content.
-- Factor/Factor level names should only contain alphanumeric characters and optionally underscores. Avoid starting these with a number and do not include spaces.
-- If the tool uses `Conditions`, the same naming requirements apply. `DEXSeq` additionally requires that the first Condition is labeled as `Condition`.
-- Reference annotation should be in GTF format for most of these tools, with no header/comment lines. Remove all GTF header lines with the tool **Remove beginning of a file**. If any are comment lines are internal to the file, those should be removed. The tool **Select** can be used.
-- Make sure that if a GTF dataset is used, and tool form settings are expecting particular attributes, those are actually in your annotation file (example: gene_id).
-- GFF3 data (when accepted by a tool) should have single `#` comment line and any others (at the start or internal) that usually start with a `##` should be removed. The tool **Select** can be used.
-- If a GTF dataset is not available for your genome, a two-column tabular dataset containing `transcript <tab> gene` can be used instead with most of these tools. Some reformatting of a different annotation file type might be needed. Tools in the groups under **GENERAL TEXT TOOLS** can be used.
-- Make sure that if your count inputs have a header, the option **Files have header?** is set to **Yes**. If no header, set to **No**.
-- Custom genomes/transcriptomes/exomes must be formatted correctly before mapping.
-- Any reference annotation should be an exact match for any genome/transcriptome/exome used for mapping. Build and version matter.
-- Avoid using [UCSC's](https://genome.ucsc.edu/) annotation extracted from their Table Browser. All GTF datasets from the UCSC Table Browser have the same content populated for the transcript_id and gene_id values. Both are the "transcript_id", which creates scientific content problems, effectively meaning that the counts will be summarized "by transcript" and not "by gene", even if labeled in a tool's output as being "by gene". It is usually possible to extract gene/transcript in tabular format from other related tables. Review the Table Browser usage at [UCSC](https://genome.ucsc.edu/) for how to link/extract data or ask them for guidance if you need extra help to get this information for a specific data track.
+Expect odd errors or content problems if any of the usage requirements below are not met.
 
-Note: Selected genomes at UCSC do have a reference anotatation GTF pre-computed and available with a Gene Symbol populated into the "gene_id" value. Find these in the UCSC "Downloads" area. When available, the link can be directly copy/pasted into the Upload tool in Galaxy. Allow Galaxy to *autodetect the datatype* to produce an uncompressed GTF dataset in your history ready to use with tools.
+General
+
+- Are your reference genome, reference transcriptome, and reference annotation all based on the same genome assembly?
+    * Check the identifiers in all inputs and adjust as needed.
+    * These all may mean the same thing to a person but not to a computer or tool: chr1, Chr1, 1, chr1.1
+- Differential expression tools all require sample count replicates. [Rationale from two of the DEseq tool authors](https://www.seqanswers.com/forum/bioinformatics/bioinformatics-aa/26388-deseq2-without-biol-replicates).
+    * At least two factor levels/groups/conditions with two samples each.
+    * All must all contain unique content for valid scientific results.
+- Factor/Factor level names should only contain alphanumeric characters and optionally underscores.
+    * Avoid starting these with a number and do not include spaces.
+    * Galaxy *may* be able to normalize these values for you, but if you are getting an error: standardize the format yourself.
+- **DEXSeq** additionally requires that the first Condition is labeled as `Condition`.
+- If your count inputs have a header, the option **Files have header?** is set to **Yes**. If no headers, set to **No**. 
+    * If your files have more than one header line: keep the sample header line, remove all extra line(s).
+- Make sure that tool form settings match your annotation content or the tool cannot match up the inputs!
+    * If you are counting by **gene_id**, your annotation should contain gene_id attributes (9th column)
+    * If you are summarizing by **exon**, your annotation should contain exon features (3rd column)
+- Sometimes these tools do not understand `transcript_id.N` and `gene_id.N` notation (where N is a version number).
+    * This notation could be in fasta or tabular inputs.
+    * Try [removing `.N` from all inputs]({% link search2.html %}?query=olympics), and check for the accidential creation of new duplicates!
+- Errors? [Understanding the job log messages]({% link faqs/galaxy/analysis_troubleshooting.md %}) can be confusing! But are accessible and worth reviewing.
+    * The good news is that usage in Galaxy produces the same error messages as direct usage.
+    * This means that a search at the [Bioconductor Support](https://support.bioconductor.org/) website can provide useful clues! Come back to the [Galaxy Help](https://help.galaxyproject.org/) forum with any remaining questions.
+
+{% icon tip %} Remember, for any value in your inputs that is not a number, using only alphanumeric characters and optionally underscores `_` with no spaces is what the authors recommend. Check your factor names, sample names, gene identifiers, transcript identifiers, and header lines in files.
+
+Reference genome (fasta)
+
+- Can be a server reference genome (hosted index in the pull down menu) or a custom reference genome (fasta from the history).
+- Custom reference genomes must be [formatted correctly]({% link faqs/galaxy/reference_genomes_custom_genomes.md %}).
+- If you are using **Salmon** or **Kalisto**, you probably don't need a reference genome but a reference transcriptome instead!
+- More about understanding and [working with large fasta datasets]({% link faqs/galaxy/datasets_working_with_fasta.md %}).
+
+Reference transcriptome (fasta)
+
+- Fasta file containing assembled transcripts.
+- Unassembled short or long reads will not work as a substitute.
+- The transcript identifiers on the `>seq` fasta lines must exactly match the `transcript_id` values in your annotation or tabular mapping file.
+  
+Reference annotation (tabular, GTF, GFF3)
+
+- Reference annotation [in GTF format]({% link faqs/galaxy/datasets_working_with_reference_annotation.md %}) works best.
+- If a GTF dataset is not available for your genome, a two-column tabular dataset containing `transcript <tab> gene` can be used instead with most of these tools. 
+- **HTseq-count** requires GTF attributes. Featurecounts is an alternative tool choice.
+- Sometimes the tool **gffread** is used to transform GFF3 data to GTF. 
+- DO use UCSC's reference annotation (GTF) and reference transcriptome (fasta) data from their [Downloads](https://hgdownload.soe.ucsc.edu/downloads.html) area.
+    * These are a match for the UCSC genomes indexed at public Galaxy servers.
+    * Links can be directly copy/pasted into the Upload tool.
+    * Allow Galaxy to *autodetect the datatype* to produce an uncompressed dataset in your history ready to use with tools.
+- Avoid GTF data from the UCSC Table Browser: this leads to scientific problems. GTFs will have the same content populated for both the transcript_id and gene_id values. See the note at UCSC for more about why.
+- Still have problems? Try removing all GTF header lines with the tool **Remove beginning of a file**.
+- More about understanding and [working with GTF/GFF/GFF3 reference annotation]({% link faqs/galaxy/datasets_working_with_reference_annotation.md %})

@@ -5,11 +5,94 @@
 {% endif %}
 {% endfor %}
 
-<div markdown="1">
-> <div class="box-title" aria-label="quiz box: {{ quiz.title | replace: '"', '&quot;' }}"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Quiz: {{ quiz.title }}</div>
-> Check your knowledge with a quiz!
->
->  - [Self Study Mode]({% link quiz/quiz.html %}?mode=self&quiz={{ site.baseurl }}/{{ quiz.path }}) - do the quiz at your own pace, to check your understanding.
->  - [Classroom Mode]({% link quiz/quiz.html %}?mode=teacher&quiz={{ site.baseurl }}/{{ quiz.path }}) - do the quiz synchronously with a classroom of students.
-{: .question}
+<blockquote class="comment" id="{{ quiz.id | slugify }}">
+	<div class="box-title comment-title">
+		<i class="far fa-comment-dots" aria-hidden="true"></i>
+		Quiz: {{ quiz.title }}
+	</div>
+
+
+{% for question in quiz.questions %}
+	{% assign qnum = forloop.index %}
+	<form class="quiz-{{ quiz.id | slugify }} question-{{ qnum }}">
+	<b class="question-title"><span class="result"></span> Question {{ qnum }}: {{ question.title }}</b>
+
+	{% if question.image %}
+		<img src="{{ question.image }}" alt="Image for question {{ forloop.index }}" />
+	{% endif %}
+
+		{% unless question.type == "poll" %}
+		<ul>
+		{% for answer in question.answers %}
+
+		{%- capture is_correct -%}
+			{%- if question.type == "choose-1" -%}
+				 {%- if answer == question.correct -%}correct{%- endif -%}
+			{%- elsif question.type == "choose-many" -%}
+				{%- for a in question.correct -%}{%- if answer == a -%}correct{%- endif -%}{%- endfor -%}
+			{%- endif -%}
+		{%- endcapture -%}
+
+		<li class="answer {{is_correct}}">
+			<span class="result"></span>
+			{% if question.type == "choose-1" %}
+			<input type="radio" id="a-{{ qnum }}-{{ forloop.index }}" name="answer" value="{{ answer }}" class="answer-input {{is_correct}}"/>
+			{% elsif question.type == "choose-many" %}
+			<input type="checkbox" id="a-{{ qnum }}-{{ forloop.index }}" name="answer" value="{{ answer }}" class="answer-input  {{is_correct}}" />
+			{% elsif question.type == "free-text" %}
+			<input type="text" id="a-{{ qnum }}-{{ forloop.index }}" name="answer" value="{{ answer }}" class="answer-input {{is_correct}}"/>
+			{% endif %}
+
+			<label for="a-{{ qnum }}-{{ forloop.index }}">{{ answer }}</label>
+		</li>
+		{% endfor %}
+		</ul>
+		{% endunless %}
+	</form>
+{% endfor %}
+
+<div class="quiz-results" aria-live="polite" role="status">
 </div>
+
+<button type="submit" class="btn btn-primary" id="check-answers"  onclick="checkQuiz('{{ quiz.id | slugify}}')">Check Answers</button>
+</blockquote>
+
+<script>
+function checkQuiz(id){
+	var quiz = document.getElementById(id);
+	var correct = 0;
+	var total = document.querySelectorAll(`#${id} form`).length;
+	var questions = document.querySelectorAll(`#${id} form`);
+	for (var i = 0; i < questions.length; i++) {
+		var question = questions[i];
+		var answer = question.querySelectorAll("li.answer");
+		// Only grade completed questions.
+
+		var any_wrong = false;
+		var any_selected = [...answer].map(e => e.querySelector("input").checked).includes(true);
+		// Loop over the inputs for this question
+		if (any_selected) {
+			question.querySelectorAll("input").forEach((input) => {
+				if (input.checked != input.classList.contains('correct')) {
+					any_wrong = true;
+				}
+			});
+
+			answer.forEach((li) => {
+				li.querySelector('.result').innerHTML = li.classList.contains('correct') ? "✅" : "❌";
+			});
+
+			if (any_wrong) {
+				question.querySelector(".result").innerHTML = "❌";
+			} else {
+				question.querySelector(".result").innerHTML = "✅";
+				correct++;
+			}
+		} else {
+			question.querySelector(".result").innerHTML = "❓";
+		}
+	}
+	var result = correct / total * 100;
+	quiz.querySelector('.quiz-results').innerHTML = `<p>You got ${correct} out of ${total} correct (${parseInt(result)}%)</p>`;
+}
+</script>

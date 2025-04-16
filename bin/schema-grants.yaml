@@ -1,0 +1,125 @@
+---
+type: map
+_examples: |
+    erasmusplus:
+        name: Erasmus+
+        bio: We funded some of this work!
+mapping:
+    "=":
+        type: map
+        description: |
+            This ideally is your GitHub handle. If you do not have, or do not wish to provide a GitHub username, you may make up another identifier here, but then you must set `github: false` as described below.
+        mapping:
+            name:
+                type: str
+                required: true
+                description: |
+                    The full name for the grant
+                _examples:
+                    - Gallantries: Bridging Training Communities in Life Science, Environment and Health
+            short_name:
+                type: str
+                description: |
+                    A shorter name, as some grants love to stuff a lot of words into the title
+                _examples:
+                    - Gallantries
+            email:
+                type: str
+                pattern: /@/
+                description: |
+                    Your email address, if you wish to provide it.
+                _examples:
+                    - jane.doe@gmail.com
+            twitter:
+                type: str
+                pattern: /[0-9a-zA-Z]+/
+                description: Your twitter handle, without the `@`
+                _examples:
+                    - gxytraining
+            fediverse:
+                type: str
+                pattern: /^https:\/\/[0-9a-zA-Z.]+/@?[0-9a-zA-Z.]+$/
+                description: The URL to your fediverse profile
+                _examples:
+                  - http://genomic.social/@abretaud
+            fediverse_flavor:
+                type: str
+                enum:
+                  - mastodon
+                  - akkoma
+                description: The flavor of the fediverse server (used in our webfinger endpoint.)
+            bio:
+                type: str
+                description: |
+                    A short biography of yourself, if you wish to add additional details or context.
+                _examples:
+                    - Research at the [South African National Bioinformatics Institute](https://www.sanbi.ac.za/)
+            matrix:
+                type: str
+                pattern: /[0-9a-zA-Z]+:.*/
+                description: Your matrix identifier and home server
+                _examples:
+                    - "hexylena:matrix.org"
+            linkedin:
+                type: str
+                pattern: /[0-9a-zA-Z]+/
+            github:
+                type: bool
+                description: |
+                    If your identifier in this file is **not** a GitHub account (or not your account), then this **must** be set to true, so we do not link to that account.
+            orcid:
+                type: str
+                pattern: /[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{4}-[0-9A-Z]{4}/
+                description: Your identifier at orcid.org
+                _examples:
+                    - 0000-0001-9760-8992
+            joined:
+                type: str
+                pattern: /[0-9]{4,}-[0-9]{2}/
+                description: The year and month in which you joined
+                _examples:
+                    - 2020-01
+            start_date:
+                type: str
+                pattern: /[0-9]{4,}-[0-9]{2}-[0-9]{2}/
+                description: The start date of the grant
+                _examples:
+                    - "2020-01-01"
+            end_date:
+                type: str
+                pattern: /[0-9]{4,}-[0-9]{2}-[0-9]{2}/
+                description: The end date of the grant
+                _examples:
+                    - "2020-01-01"
+            avatar:
+                type: str
+            funding_id:
+                type: str
+                required: true
+                description: The short identifier for your grant.
+                _examples:
+                    - 2020-1-NL01-KA203-064717
+            url:
+                type: str
+                description: associated webpage
+                _examples:
+                  - "https://elixir-europe.org"
+            funding_database:
+                type: str
+                description: Automatically link to the grant's information in the appropriate funding system site.
+                enum:
+                    - cordis
+                    - erasmusplus
+                    - ukri
+                    - highergov
+                    - dfg
+            funder_name:
+                type: str
+                description: A name for the agency providing the funding.
+                _examples:
+                    - Erasmus+ Programme
+            funding_statement:
+                type: str
+                description: A short statement about the funder, markdown is supported.
+                _examples:
+                    - This project ([`2020-1-NL01-KA203-064717`](https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.

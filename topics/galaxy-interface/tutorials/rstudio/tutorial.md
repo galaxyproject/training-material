@@ -20,17 +20,20 @@ tags:
   - interactive-tools
 key_points:
 - Why it's helpful to be able to work with R interactively within Galaxy
-contributors:
+contributions:
+  authorship:
   - bebatut
   - fpsom
   - tobyhodges
-  - erasmusplus
+  editing:
+  - dadrasarmin 
+  funding:
+  - gallantries
 subtopic: analyse
 ---
 
 
-# Introduction
-
+This tutorial will introduce you to how to run RStudio in Galaxy
 
 {% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 
@@ -355,7 +358,6 @@ Here is one last bonus we will mention about RStudio. It's difficult to remember
 {: .hands_on}
 
 
-
 ## Stopping RStudio
 
 RStudio will keep running until you stop it, so you can always come back to your analysis later. However, once you are finished with your analysis,
@@ -364,11 +366,36 @@ Then you can safely shut down RStudio.
 
 {% snippet faqs/galaxy/interactive_tools_rstudio_stop.md  %}
 
-
 # Interaction between RStudio and Galaxy
 
 Getting data in and out from Galaxy
 
+## Import Data from the Galaxy History to RStudio
 
-# Conclusion
+To import a dataset from the history into RStudio, you need to get the path to that file. To do so, you can use `gx_get()` function with the dataset `id` (number in the Galaxy history) . For example, if you want to import a dataset with history ID 7 to their RStudio, you can get the path to the file by:
 
+```
+gx_get(7)
+```
+
+It is important to know that the `gx_get()` function copies the data from the Galaxy history to the RStudio session and returns the path to the copied file. You are supposed to use a proper R function to read the file. For example, you can pass the path to a function that reads tables such as `read_table` or `read_tsv`. Let's assume that dataset 7 in the history is a tab-separated table (TSV) and you want to read it into your RStudio. You can do it as follows:
+
+```
+table_name <- read.table(gx_get(7))
+```
+
+## Export Data from the RStudio
+
+You can export the RHistory and all objects from RStudio to Galaxy as follows (`analysis_17.01.2025` is an arbitrary name):
+
+```
+gx_save(session_name = "analysis_17.01.2025")
+```
+
+This data object can be loaded to R.
+If you want to export just one file from your R environment to your Galaxy history, you should first write the object from the memory to a file and then use the path to that file to export it. For example, if you want to export a table called `results` from RStudio to Galaxy you can do as follows:
+
+```
+write.csv(results, "./result.csv", row.names = FALSE) # Do you want to save the row.names or not?
+gx_put("result.csv")
+```

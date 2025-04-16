@@ -1,0 +1,85 @@
+- doc: Test outline for EncyclopeDIA-GTN
+  job:
+    SPECTRAL OR PROSIT LIBRARY:
+      class: File
+      path: https://zenodo.org/records/13505774/files/SPECTRAL%20OR%20PROSIT%20LIBRARY.dlib
+      filetype: dlib
+    BACKGROUND PROTEIN FASTA FILE:
+      class: File
+      path: test-data/BACKGROUND_PROTEIN_FASTA_FILE.fasta
+      filetype: fasta
+    GPF DIA RAW Files (Dataset collection):
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: GPF_DIA_Dataset_Collection__191023JAT09_P_1ug_895_1005_4_20.raw
+        path: https://zenodo.org/records/13505774/files/191023JAT09_P_1ug_895_1005_4_20.raw
+      - class: File
+        identifier: GPF_DIA_Dataset_Collection__191023JAT08_P_1ug_795_905_4_20.raw
+        path: https://zenodo.org/records/13505774/files/191023JAT08_P_1ug_795_905_4_20.raw
+      - class: File
+        identifier: GPF_DIA_Dataset_Collection__191023JAT07_P_1ug_695_805_4_20.raw
+        path: https://zenodo.org/records/13505774/files/191023JAT07_P_1ug_695_805_4_20.raw
+      - class: File
+        identifier: GPF_DIA_Dataset_Collection__191023JAT06_P_1ug_595_705_4_20.raw
+        path: https://zenodo.org/records/13505774/files/191023JAT06_P_1ug_595_705_4_20.raw
+      - class: File
+        identifier: GPF_DIA_Dataset_Collection__191023JAT05_P_1ug_495_605_4_20.raw
+        path: https://zenodo.org/records/13505774/files/191023JAT05_P_1ug_495_605_4_20.raw
+      - class: File
+        identifier: GPF_DIA_Dataset_Collection__191023JAT04_P_1ug_395_505_4_20.raw
+        path: https://zenodo.org/records/13505774/files/191023JAT04_P_1ug_395_505_4_20.raw
+    EXPERIMENTAL DIA RAW FILES (WIDE):
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: Experimental_DIA_Dataset_Collection__191023JAT03_1_Mix_2_1ug_pOT_30k_390_1010_12_20.raw
+        path: https://zenodo.org/records/13505774/files/191023JAT03_1_Mix_2_1ug_pOT_30k_390_1010_12_20.raw
+      - class: File
+        identifier: Experimental_DIA_Dataset_Collection__191023JAT10_2_Mix_4_1ug_pOT_30k_390_1010_12_20.raw
+        path: https://zenodo.org/records/13505774/files/191023JAT10_2_Mix_4_1ug_pOT_30k_390_1010_12_20.raw
+      - class: File
+        identifier: Experimental_DIA_Dataset_Collection__191023JAT11_3_Mix_1_1ug_pOT_30k_390_1010_12_20.raw
+        path: https://zenodo.org/records/13505774/files/191023JAT11_3_Mix_1_1ug_pOT_30k_390_1010_12_20.raw
+      - class: File
+        identifier: Experimental_DIA_Dataset_Collection__191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12_20.raw
+        path: https://zenodo.org/records/13505774/files/191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12_20.raw
+  outputs:
+    LOG:
+      path: test-data/LOG.txt
+    CHROMATOGRAM LIBRARY:
+      path: https://zenodo.org/records/13505774/files/CHROMATOGRAM%20LIBRARY.elib
+    PEPTIDE QUANTITATION OUTPUT:
+      path: test-data/PEPTIDE_QUANTITATION_OUTPUT.tabular
+    PROTEIN QUANTITATION OUTPUT:
+      path: test-data/PROTEIN_QUANTITATION_OUTPUT.tabular
+    Quant-LOG:
+      path: test-data/Quant-LOG.txt
+    QUANT LIBRARY:
+      path: https://zenodo.org/records/13505774/files/QUANT%20LIBRARY.elib
+    GPF_MZML:
+      element_tests:
+        GPF_DIA_Dataset_Collection__191023JAT09_P_1ug_895_1005_4_20.raw:
+          path: https://zenodo.org/records/13505774/files/191023JAT09_P_1ug_895_1005_4_20.raw.mzml
+        GPF_DIA_Dataset_Collection__191023JAT08_P_1ug_795_905_4_20.raw:
+          path: https://zenodo.org/records/13505774/files/191023JAT08_P_1ug_795_905_4_20.raw.mzml
+        GPF_DIA_Dataset_Collection__191023JAT07_P_1ug_695_805_4_20.raw:
+          path: https://zenodo.org/records/13505774/files/191023JAT07_P_1ug_695_805_4_20.raw.mzml
+        GPF_DIA_Dataset_Collection__191023JAT06_P_1ug_595_705_4_20.raw:
+          path: https://zenodo.org/records/13505774/files/191023JAT06_P_1ug_595_705_4_20.raw.mzml
+        GPF_DIA_Dataset_Collection__191023JAT05_P_1ug_495_605_4_20.raw:
+          path: https://zenodo.org/records/13505774/files/191023JAT05_P_1ug_495_605_4_20.raw.mzml
+        GPF_DIA_Dataset_Collection__191023JAT04_P_1ug_395_505_4_20.raw:
+          path: https://zenodo.org/records/13505774/files/191023JAT04_P_1ug_395_505_4_20.raw.mzml
+    Experimental-dataset-MZML:
+      element_tests:
+        Experimental_DIA_Dataset_Collection__191023JAT03_1_Mix_2_1ug_pOT_30k_390_1010_12_20.raw:
+          path: https://zenodo.org/records/13505774/files/191023JAT03_1_Mix_2_1ug_pOT_30k_390_1010_12_20.raw.mzml
+        Experimental_DIA_Dataset_Collection__191023JAT10_2_Mix_4_1ug_pOT_30k_390_1010_12_20.raw:
+          path: https://zenodo.org/records/13505774/files/191023JAT10_2_Mix_4_1ug_pOT_30k_390_1010_12_20.raw.mzml
+        Experimental_DIA_Dataset_Collection__191023JAT11_3_Mix_1_1ug_pOT_30k_390_1010_12_20.raw:
+          path: https://zenodo.org/records/13505774/files/191023JAT11_3_Mix_1_1ug_pOT_30k_390_1010_12_20.raw.mzml
+        Experimental_DIA_Dataset_Collection__191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12_20.raw:
+          path: https://zenodo.org/records/13505774/files/191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12_20.raw.mzml

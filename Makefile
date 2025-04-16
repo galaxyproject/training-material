@@ -27,9 +27,12 @@ else
 	ENV_FILE=environment.yml
 endif
 
-CONDA=$(shell which conda)
+CONDA=$(shell which mamba)
 ifeq ($(CONDA),)
-	CONDA=${HOME}/miniconda3/bin/conda
+    CONDA=$(shell which conda)
+    ifeq ($(CONDA),)
+    	CONDA=${HOME}/miniconda3/bin/mamba
+    endif
 endif
 
 default: help
@@ -40,7 +43,7 @@ install-conda: ## install Miniconda
 .PHONY: install-conda
 
 create-env: ## create conda environment
-	if ${CONDA} env list | grep '^${CONDA_ENV}'; then \
+	if ${CONDA} env list | grep '^\s*${CONDA_ENV}'; then \
 	    ${CONDA} env update -f ${ENV_FILE}; \
 	else \
 	    ${CONDA} env create -f ${ENV_FILE}; \
@@ -53,7 +56,7 @@ COND_ENV_DIR=$(shell dirname $(dir $(CONDA)))
 install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
 		gem update --no-document --system && \
-		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-redirect-from csl-styles awesome_bot html-proofer pkg-config kwalify bibtex-ruby citeproc-ruby fastimage && \
+		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-redirect-from csl-styles awesome_bot html-proofer pkg-config kwalify bibtex-ruby citeproc-ruby fastimage rubyzip && \
 		pushd ${COND_ENV_DIR}/envs/${CONDA_ENV}/share/rubygems/bin && \
 		ln -sf ../../../bin/ruby ruby
 .PHONY: install
@@ -62,7 +65,11 @@ bundle-install: clean  ## install gems if Ruby is already present (e.g. on gitpo
 	bundle install
 .PHONE: bundle-install
 
-serve: api/swagger.json ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
+bundle-update: bundle-install  ## install gems if Ruby is already present (e.g. on gitpod.io)
+	bundle update
+.PHONE: bundle-update
+
+serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
 	@echo "Tip: Want faster builds? Use 'serve-quick' in place of 'serve'."
 	@echo "Tip: to serve in incremental mode (faster rebuilds), use the command: make serve FLAGS=--incremental" && echo "" && \
 	$(ACTIVATE_ENV) && \
@@ -71,7 +78,7 @@ serve: api/swagger.json ## run a local server (You can specify PORT=, HOST=, and
 		${JEKYLL} serve --trace --strict_front_matter -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve
 
-serve-quick: api/swagger.json ## run a local server (faster, some plugins disabled for speed)
+serve-quick: ## run a local server (faster, some plugins disabled for speed)
 	@echo "This will build the website with citations and other content disabled, and incremental on by default. To run the full preview (slower), use make serve" && echo "" && \
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
@@ -79,15 +86,31 @@ serve-quick: api/swagger.json ## run a local server (faster, some plugins disabl
 		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve-quick
 
+preview: serve-codespaces
+.PHONY: serve-codespaces
+
+serve-codespaces: codespace-clean bundle-install bundle-update
+	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental
+.PHONY: serve-codespaces
+
+codespace-clean:
+	rm -rf /workspaces/.codespaces/shared/editors/jetbrains;
+	rm -f /workspaces/training-material/.git/objects/pack/tmp_pack*
+.PHONY: codespace-clean
+
 serve-gitpod: bundle-install  ## run a server on a gitpod.io environment
 	bundle exec jekyll serve --config _config.yml --incremental
 .PHONY: serve-gitpod
+
+serve-gitpod-quick: bundle-install  ## run a server on a gitpod.io environment
+	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental
+.PHONY: serve-gitpod-quick
 
 build-gitpod: bundle-install  ## run a build on a gitpod.io environment
 	bundle exec jekyll build --config _config.yml
 .PHONY: build-gitpod
 
-build: clean api/swagger.json ## build files but do not run a server (You can specify FLAGS= to pass additional flags to Jekyll)
+build: clean ## build files but do not run a server (You can specify FLAGS= to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
 		mv Gemfile.lock Gemfile.lock.backup || true && \
@@ -214,34 +237,35 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 
 _site/%/slides.pdf: _site/%/slides.html
 	$(ACTIVATE_ENV) && \
-	$(shell npm bin)/http-server _site -p 9876 & \
-	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
+	./node_modules/.bin/http-server _site -p 9876 & \
+	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape:3.9  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 _site/%/slides_ES.pdf: _site/%/slides_ES.html
 	$(ACTIVATE_ENV) && \
-	$(shell npm bin)/http-server _site -p 9876 & \
-	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
+	./node_modules/.bin/http-server _site -p 9876 & \
+	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape:3.9  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 _site/%/slides_CAT_ES.pdf: _site/%/slides_CAT_ES.html
 	$(ACTIVATE_ENV) && \
-	$(shell npm bin)/http-server _site -p 9876 & \
-	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
+	./node_modules/.bin/http-server _site -p 9876 & \
+	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape:3.9  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 video: ## Build all videos
 	bash bin/ari-make.sh
+
+metadata/public-server-tools.json:
+	python ./bin/supported-fetch.py
 
 annotate: ## annotate the tutorials with usable Galaxy instances
 	${ACTIVATE_ENV} && \
 	wget https://github.com/hexylena/toolshed-version-database/raw/main/guid-rev.json -O metadata/toolshed-revisions.json && \
 	python bin/supported-fetch.py
+	bin/workflows-fetch.rb
+	bin/fetch-categories.rb
 .PHONY: annotate
 
 rebuild-search-index: ## Rebuild search index
 	node bin/lunr-index.js > search.json
-
-api/swagger.json: metadata/swagger.yaml
-	$(ACTIVATE_ENV) && \
-	cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json
 
 clean: ## clean up junk files
 	@rm -rf _site
@@ -250,6 +274,7 @@ clean: ## clean up junk files
 	@rm -rf vendor
 	@rm -rf node_modules
 	@rm -rf .jekyll-metadata
+	@rm -rf .jekyll-cache
 	@find . -name .DS_Store -exec rm {} \;
 	@find . -name '*~' -exec rm {} \;
 .PHONY: clean

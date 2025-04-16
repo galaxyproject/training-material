@@ -1,6 +1,6 @@
 ---
 title: "Oh no, it changed! Quick, to the archive menu."
-tags: [new feature]
+tags: [new feature, contributing]
 contributions:
   authorship: [hexylena, shiltemann]
 layout: news

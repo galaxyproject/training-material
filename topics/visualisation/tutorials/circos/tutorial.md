@@ -13,17 +13,32 @@ time_estimation: "2h"
 key_points:
   - "Circos is an effective tool to make circular visualisation of high-dimensional datasets"
   - "Circos is often used for genomics, but can also be used for other types of data"
-contributors:
+contributions:
+  authorship:
   - shiltemann
   - hexylena
   - gallardoalba
+  funding:
+  - gallantries
+level: Intermediate
+
+recordings:
+- captioners:
+  - beatrizserrano
+  - hexylena
+  - shiltemann
+  - khanteymoori
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 50M
+  youtube_id: tbqeUP67w-Y
+  speakers:
+  - hexylena
+
 ---
 
-# Introduction
 
-
-
-Circos ({% cite krzywinski2009circos %}) is a software package for visualizing data in a circular layout. This makes Circos ideal for exploring relationships between objects or positions. Circos plots have appeared in thousands of scientific publications. Although originally designed for visualizing genomic data, it can create figures from data in any field.
+Circos ({% cite krzywinski2009circos %}) is a software package for visualizing data in a circular layout. This makes Circos ideal for exploring relationships between objects or positions. Circos plots have appeared in thousands of scientific publications. Although originally designed for visualizing genomic data, it can create figures from data in any field. In this tutorial we discuss the Galactic Circos ({% cite Rasche_2020 %}) tool which enables you to access Circos via the convenient Galaxy interface, and even produce plots as part of your workflows!
 
 ![Panel of example Circos images](../../images/circos-sample-panel.png)
 
@@ -385,7 +400,7 @@ The first data track we will configure, will be the structural variants (SVs) us
 SVs are usually described in terms of the SV **breakpoints** (or **junctions**); sets of genomic locations which are separated by a large distance on the reference genome, but have become adjacent in the sample through the occurrence of structural variants. Unfortunately, there is no standard file format for SV data, with different SV callers outputting different formats. Therefore, our first step will be to transform our input dataset to the Circos format for link tracks.
 
 
-**SV File Format:**
+### SV File Format
 
 ```
 #ASSEMBLY_ID	GS000008107-ASM
@@ -405,7 +420,7 @@ SVs are usually described in terms of the SV **breakpoints** (or **junctions**);
 ```
 
 
-**Circos Input Format:**
+### Circos Input Format
 
 ```
 chromosome - start - end - chromosome - start - end
@@ -541,8 +556,7 @@ You should see a plot like:
 > > 2. Low **copy number states- alternation between 2 states** (sometimes 3) suggesting that rearrangements occurred in a short period of time.
 > > 3. In chromothriptic areas you get **alternation of regions which retain heterozygosity-two copy (no loss or gain), with regions that have loss of heterozygosity- one copy** (heterozygous deletion). This suggest that the rearrangements took place at a time that both parental copies of the chromosome were present and hence early on the development of the cancer cell.
 > >
-> > *from [https://en.wikipedia.org/wiki/Chromothripsis](https://en.wikipedia.org/wiki/Chromothripsis)*
-> {: .quote}
+> {: .quote cite="https://en.wikipedia.org/wiki/Chromothripsis"}
 >
 {: .comment}
 

@@ -3,9 +3,14 @@ layout: tutorial_slides
 logo: assets/images/gat.png
 
 title: "Galaxy on the Cloud"
-contributors:
+contributions:
+  authorship:
   - slugger70
+  editing:
+  - hexylena
 subtopic: cloud
+
+priority: 0
 ---
 
 # All these Clouds
@@ -84,7 +89,7 @@ On demand, free or paid, transient, NOT meant to be persistent, turn off when yo
   * Education grants
 * Academic:
   * OpenStack: open source community project
-  * NeCTAR in Australia, Jetstream in USA, CLIMB in UK, lots of others
+  * NeCTAR in Australia, Jetstream in USA, CLIMB in UK, SURF in Netherlands, lots of others
   * Some free for researchers (NeCTAR, CLIMB), some with project grants (Jetstream)
 ]
 
@@ -129,7 +134,7 @@ Don't have to purchase + maintain hardware, which is great. Uploading data can b
   * with Galaxy pre-installed
   * with different sets of tools installed
   * with access to reference data
-  * for different clouds (AWS globally, Jetstream, NeCTAR, CLIMB etc.)
+  * for different clouds (AWS globally, Jetstream, NeCTAR, CLIMB, SURF etc.)
 * You just need credentials for the cloud you want to "launch" on.
   * Credentials are generally strings
   * An access key and a secret key or username and password with project details
@@ -282,6 +287,13 @@ Can start NGINX, Galaxy, Pulsar, etc.
         <tool id="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.3.1" destination="slurm_4slots" />
 ...
 ```
+
+---
+
+# CloudMan Galaxy
+
+* Configured for Slurm out of the box
+
 ``` ini
 # COMPUTE NODES
 NodeName=master NodeAddr=45.113.232.91 CPUs=15 RealMemory=64431 Weight=10 State=UNKNOWN

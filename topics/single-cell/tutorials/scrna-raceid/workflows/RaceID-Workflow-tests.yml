@@ -1,0 +1,19 @@
+- doc: Test outline for RaceID-Workflow
+  job:
+    Tabular Matrix:
+      class: File
+      location: https://zenodo.org/record/1511582/files/intestinalData.tsv
+      filetype: tabular
+  outputs:
+    outdiffgenes (Step 8):
+      asserts:
+        has_n_lines:
+          value: 11
+        has_text:
+          text: "Chmp1a"
+          text: "Dgat1"
+    outpdf (Step 9):
+      asserts:
+        has_size:
+          value: 1573003
+          delta: 31460

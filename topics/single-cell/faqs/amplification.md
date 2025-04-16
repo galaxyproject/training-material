@@ -3,7 +3,7 @@ redirect_from:
 - /topics/transcriptomics/faqs/amplification
 
 title: Why is amplification more of an issue in scRNA-seq than RNA-seq?
-area: Single-Cell RNA
+area: Analysis
 box_type: tip
 layout: faq
 contributors: [nomadscientist,mtekman,rahmot]

@@ -1,0 +1,22 @@
+{% unless include.nofigure %}
+<figure>
+{% endunless %}
+<iframe
+    credentialless
+    allowfullscreen
+    referrerpolicy="no-referrer"
+    sandbox="allow-scripts allow-same-origin allow-popups"
+    allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'"
+    csp="sandbox allow-scripts allow-same-origin;"
+    width="{{include.width | default: 560 }}"
+    height="{{include.height| default: 315 }}"
+    src="https://www.youtube{% unless include.cyoa %}-nocookie{% endunless%}.com/embed/{{ include.id }}{% if include.start %}?start={{ include.start }}{% endif %}"
+    title="{{ include.title }}"
+    frameborder="0"
+    loading="lazy"
+></iframe>
+{% unless include.nofigure %}
+<figcaption>
+  <span class="figcaption-prefix"><strong>Video</strong>:</span> {{ include.title }}</figcaption>
+</figure>
+{% endunless %}

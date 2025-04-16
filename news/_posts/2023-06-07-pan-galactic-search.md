@@ -2,7 +2,7 @@
 title: "New Feature: Pan-Galactic Tool Search"
 contributions:
   authorship: [hexylena]
-tags: [new feature, gtn]
+tags: [new feature, gtn, contributing]
 layout: news
 abbreviations:
   SEO: Search Engine Optimisation

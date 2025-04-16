@@ -1,6 +1,6 @@
 ---
 title: "Next GTN CoFest May 20, 2021"
-tags: [cofest]
+tags: [cofest, contributing]
 contributions:
   authorship: [shiltemann, hexylena, bebatut, jennaj, delphine-l, annasyme, mblue9]
 layout: news

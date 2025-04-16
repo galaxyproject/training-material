@@ -31,9 +31,22 @@ contributors:
     - fidelram
     - LeilyR
     - pavanvidem
+contributions:
+    authorship:
+        - friedue
+        - erxleben
+        - bebatut
+        - vivekbhr
+        - fidelram
+        - LeilyR
+        - pavanvidem
+    editing:
+        - hexylena
+    funding:
+        - elixir-europe
+        - deNBI
+        - uni-freiburg
 ---
-
-# Introduction
 
 
 Within a cell nucleus, the DNA is tightly-packed and the chromatin is spatially distributed with different levels and scales of organizations.
@@ -229,7 +242,7 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 
 # Step 2: Mapping of the reads
 
-With ChiP sequencing, we obtain sequences corresponding to a portion of DNA linked to the histone mark of interest, H3K4me3 in this case. As H3K4me3 opens the chromatime, nearby genes are gioing to be more transcribed. It would be interesting to know if there is a difference in the quantity of DNA impacted by H3K4me3 and the impacted genes between active and inactive X chromosome.
+With ChiP sequencing, we obtain sequences corresponding to a portion of DNA linked to the histone mark of interest, H3K4me3 in this case. As H3K4me3 opens the chromatime, nearby genes are going to be more transcribed. It would be interesting to know if there is a difference in the quantity of DNA impacted by H3K4me3 and the impacted genes between active and inactive X chromosome.
 
 {% include topics/sequence-analysis/tutorials/mapping/mapping_explanation.md
     to_identify="binding sites"
@@ -275,6 +288,26 @@ The output of Bowtie2 is a BAM file.
 ## Visualization using a Genome Browser
 
 {% include topics/sequence-analysis/tutorials/mapping/igv.md tool="Bowtie2" region_to_zoom="chr2:91,053,413-91,055,345" %}
+
+### Visualization using JBrowse2
+
+Besides running IGV locally on our computer, we can use Jbrowse2 to look at the genomes and visualize different tracks such as Chip-Seq data using the Galaxy. To do so:
+
+> <hands-on-title>Genome Visualization via Jbrowse2</hands-on-title>
+>
+> 1. {% tool [BAM BED GFF coverage bigWigs](toolshed.g2.bx.psu.edu/repos/iuc/bbgbigwig/bbgtobigwig/0.1) %} with the following parameters:
+>    - *"bam/bed/gff to convert"*: `Output of the bowtie2`
+>    - *"Source Genome Build"*: `Mouse (Mus Musculus): mm10 Full`
+> 2. {% tool [JBrowse2](toolshed.g2.bx.psu.edu/repos/fubar/jbrowse2/jbrowse2/2.17.0+galaxy0) %} with the following parameters:
+>    - *"Select a built in reference genome or custom genome"*: `Mouse (Mus Musculus): mm10 Full`
+>    - *"Insert Track Group"*
+>        - *"Insert Annotation Track"*
+>        - *"Track Type"*: `BigWig Track`
+>        - *"BigWig Track Data"*: `The output from step 1 (The BigWig File made from the BAM file)`
+>
+{: .hands_on}
+
+This takes some time to finish. Again, you can explore the genome. For example, you can look at the following coordinate in the genome: `chr2:91,053,413-91,055,345`. For a comprehensive tutorial on Jbrowse please look at this tutorial: https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html.
 
 # Step 3: ChIP-seq Quality Control
 
@@ -456,7 +489,7 @@ We are using **bamCoverage** {% icon tool %}. Given a BAM file, this tool genera
 >    > {: .solution }
 >    {: .question}
 >
-> 3. Use **IGV** {% icon tool %} to inspect both signal coverages (input and ChIP samples).
+> 3. Use **IGV** {% icon tool %} to inspect both signal coverages (input and ChIP samples). Alternatively, you can use **JBrowse2** as mentioned above to load multiple tracks and look at genome intervals.
 >
 {: .hands_on}
 
@@ -499,7 +532,7 @@ To extract only the information induced by the immunoprecipitation, we normalize
 > 2. {% tool [bamCompare](toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.5.1.0.0) %} with the same parameters but:
 >    - *"Coverage file format"*: `bigWig`
 >
-> 3. Use **IGV** {% icon tool %} to inspect the log2 ratio.
+> 3. Use **IGV** {% icon tool %} to inspect the log2 ratio. Or, as an alternative, you can use **JBrowse2** from the tools on Galaxy.
 >
 {: .hands_on}
 
@@ -547,7 +580,7 @@ We could see in the ChIP data some enriched regions (peaks). We now would like t
 >    > {: .solution }
 >    {: .question}
 >
-> 3. **IGV** {% icon tool %} to inspect with the signal coverage and log2 ratio tracks
+> 3. **IGV** {% icon tool %} (or **JBrowse2**) to inspect with the signal coverage and log2 ratio tracks
 >
 {: .hands_on}
 
@@ -571,7 +604,7 @@ The called peak regions can be filtered by, *e.g.* fold change, FDR and region l
 
 # Step 6: Plot the signal between samples
 
-So far, we have normalized the data and identified peaks. Now, we would like to visualize scores associated with certain genomic regions, for example ChIP enrichment values around the TSS of genes. Moreover, we would like to compare the enrichment of several ChIP samples (e.g. CTCF and H3K4me3 )on the regions of interest.
+So far, we have normalized the data and identified peaks. Now, we would like to visualize scores associated with certain genomic regions, for example ChIP enrichment values around the TSS of genes. Moreover, we would like to compare the enrichment of several ChIP samples (e.g. CTCF and H3K4me3) on the regions of interest.
 
 Since we already generated the required files for the H3K4me3 sample, let's make them only for the CTCF sample:
 
@@ -721,7 +754,7 @@ So far, we have only analyzed 2 samples, but we can do the same for all the 6 sa
 > > 2. As observed with the 2 samples, the peaks for H3K4me3 are wider than for CTCF. We also observe that the peaks found with one replicate are found with the other replicate.
 > > 3. The H3K4me3 sample has clear and large regions in which the read coverage are enriched. H3K4me3 is one of the least abundant histone modifications. It is highly enriched at active promoters near transcription start sites (TSS) and positively correlated with transcription.
 > >
-> >    For H3K27me3, the coverage is more homogeneous. A gene is a broad domain of H3K27me3 enrichment across its body of genes corresponds to a gene with a transcription inhibited by H3K27me3. We can also identified some "bivalent" genes: gene with a peak around the TSS for H3K27me3(e.g. region_208 for gene Gpr173) but also H3K4me3. We also observe some H3K27me3-depleted regions sharply demarcated, with boundaries coinciding with gene borders (e.g. Kdm5c). This is a chromatin signature reminiscent of genes that escape XCI.
+> >    For H3K27me3, the coverage is more homogeneous. A gene is a broad domain of H3K27me3 enrichment across its body of genes corresponds to a gene with a transcription inhibited by H3K27me3. We can also identified some "bivalent" genes: gene with a peak around the TSS for H3K27me3 (e.g. region_208 for gene Gpr173) but also H3K4me3. We also observe some H3K27me3-depleted regions sharply demarcated, with boundaries coinciding with gene borders (e.g. Kdm5c). This is a chromatin signature reminiscent of genes that escape XCI.
 > >
 > >    To reproduce, run **bamCoverage** {% icon tool %}, **IGV** {% icon tool %} and **MACS2 callpeak** {% icon tool %} outputs.
 > {: .solution }

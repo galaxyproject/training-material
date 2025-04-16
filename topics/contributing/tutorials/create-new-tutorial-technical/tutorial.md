@@ -20,11 +20,16 @@ key_points:
   - "Tools, data and workflows can be easily integrated in a Docker flavor to have a useful technical support for a tutorial"
   - "A Galaxy Docker flavor is a great support for training"
   - "A Galaxy Docker flavor can be deployed 'anywhere' and is scalable"
-contributors:
+contributions:
+  authorship:
   - bebatut
   - bgruening
   - shiltemann
   - hexylena
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 ---
 
 # Building a Galaxy instance specifically for your training
@@ -241,6 +246,16 @@ planemo test \
 
 Planemo will autodetect that the `workflow-test.yml` file and load that for the testing.
 
+### Skipping Testing in the GTN
+
+If for some reason you want to skip this workflow being tested in the GTN,
+please add a comment with `GTN_RUN_SKIP_REASON` in the `-test.yml` file stating
+the reason it is skipped.
+
+This will also exempt you from writing output tests.
+
+A good use case for this is you want to provide a working test, but the workflow takes upwards of 6 hours to execute (e.g. large download jobs.)
+
 # Creating the `data-library.yaml` (recommended)
 
 The datasets needed for a tutorial can also be integrated in the Galaxy instance inside of data libraries. These allow the datasets to be easily shared with all users of a Galaxy instance. Additionally it lets trainees avoid each re-downloading the input data.
@@ -264,7 +279,7 @@ items:
       description: latest
       items:
       - info: https://doi.org/10.5281/zenodo....
-        url: https://zenodo.org/api/files/URL/to/the/input/file
+        url: https://zenodo.org/records/URL/files/path/to/input
         ext: galaxy-datatype
         src: url
 ```

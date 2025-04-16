@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Search Tutorials
+title: GTN Tutorial Search
 ---
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous"></script>
@@ -28,6 +28,9 @@ function search(idx, q, includeFaqs, includeTutorials){
         var results_partial = idx.search(`*${q}*`),
             results_exact = idx.search(`${q}`),
             results_fuzzy = idx.search(`${q}~3`);
+
+	// Include search term in page title
+		document.getElementsByTagName("title")[0].innerText = `${q} | GTN Tutorial Search`
 
         thereMap  = Object.assign({}, ...results_partial.map((x) => ({[x.ref]: x.score})));
 

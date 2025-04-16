@@ -2,12 +2,15 @@
 layout: tutorial_hands_on
 title: "Analysis of plant scRNA-Seq Data with Scanpy"
 subtopic: end-to-end
-priority: 5
+priority: 3
 redirect_from:
   - /topics/transcriptomics/tutorials/scrna-plant/tutorial
 zenodo_link: 'https://zenodo.org/record/4597857'
+answer_histories:
+  - label: "UseGalaxy.eu"
+    history: https://singlecell.usegalaxy.eu/u/videmp/h/analysis-of-plant-scrna-seq-data-with-scanpy
+    date: 2024-12-13
 tags:
-  - single-cell
   - plants
   - paper-replication
 questions:
@@ -28,19 +31,35 @@ time_estimation: 2H
 key_points:
   - Filtering parameters are dependent on the dataset, and should be explored using scatter or violin plots
   - A DotPlot is a fantastic way to validate clusters across different analyses
-contributors:
-  - mtekman
-  - beatrizserrano
-  - gallardoalba
-  - pavanvidem
 
+contributions:
+  authorship:
+    - mtekman
+    - beatrizserrano
+    - gallardoalba
+    - pavanvidem
+
+follow_up_training:
+  -
+      type: "internal"
+      topic_name: single-cell
+      tutorials:
+          - EBI-retrieval
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
+recordings:
+- captioners:
+  - mtekman
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 55M
+  youtube_id: yKlJ5ESri7o
+  speakers:
+  - mtekman
 
 ---
 
-# Introduction
 
 Single cell RNA-seq analysis is a cornerstone of developmental research and provides a great level of detail in understanding the underlying dynamic processes within tissues. In the context of plants, this highlights some of the key differentiation pathways that root cells undergo.
 

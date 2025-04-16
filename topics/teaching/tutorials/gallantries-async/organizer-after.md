@@ -1,0 +1,3 @@
+- Collect the participant feedback forms
+- Setup a call with the instructors to discuss feedback.
+- Report the feedback and notes

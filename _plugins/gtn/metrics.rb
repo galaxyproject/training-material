@@ -50,7 +50,7 @@ module Gtn
     end
 
     def self.histogram_dates(values)
-      day_bins = [1, 7, 28, 90, 365, 365 * 2, 365 * 3, 365 * 5]
+      day_bins = [1, 7, 28, 90, 365, 365 * 2, 365 * 3, 365 * 5, Float::INFINITY]
       last_bin = 0
       day_bins.map do |bin, _idx|
         count = values.select { |x| last_bin <= x and x < bin }.length
@@ -87,6 +87,8 @@ module Gtn
 
     def self.collect_metrics(site)
       tutorials = site.pages.select { |x| x.data['layout'] == 'tutorial_hands_on' }
+      # TODO: materials
+      # materials = site.pages.select { |x| x.data['layout'] == 'tutorial_hands_on' }
       first_commit = Date.parse('2015-06-29')
       today = Date.today
 
@@ -95,11 +97,22 @@ module Gtn
           value: segment_page_by_key(site.pages, 'layout'),
           help: 'Total number of Pages',
           type: 'counter'
-        }, 'gtn_contributors_total' => {
-             value: segment(site.data['contributors'].values.reject { |x| x['halloffame'] == 'no' }, 'orcid'),
-             help: 'Total number of Contributors',
-             type: 'counter'
-           },
+        },
+        'gtn_contributors_total' => {
+          value: segment(site.data['contributors'].values.reject { |x| x['halloffame'] == 'no' }, 'orcid'),
+          help: 'Total number of contributors',
+          type: 'counter'
+        },
+        'gtn_organisations_total' => {
+          value: segment(site.data['organisations'].values.reject { |x| x['halloffame'] == 'no' }, 'orcid'),
+          help: 'Total number of organisations',
+          type: 'counter'
+        },
+        'gtn_grants_total' => {
+          value: segment(site.data['grants'].values.reject { |x| x['halloffame'] == 'no' }, 'orcid'),
+          help: 'Total number of grants',
+          type: 'counter'
+        },
         'gtn_tutorials_total' => {
           value: tutorials.length,
           help: 'Total number of Hands-on Tutorials',
@@ -123,6 +136,18 @@ module Gtn
             tutorials
             .map do |page|
               Time.now - Gtn::ModificationTimes.obtain_time(page['path'].gsub(%r{^/}, ''))
+            end
+            .map { |seconds| seconds / 3600.0 / 24.0 }
+          )
+        },
+        'tutorial_published_age_days' => {
+          type: 'histogram',
+          help: 'How recently was every single Hands-on Tutorial published within the GTN, ' \
+                'grouped by days since first published.',
+          value: histogram_dates(
+            tutorials
+            .map do |page|
+              Time.now - Gtn::PublicationTimes.obtain_time(page['path'])
             end
             .map { |seconds| seconds / 3600.0 / 24.0 }
           )

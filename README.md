@@ -8,9 +8,11 @@ This repository collects tutorials, slides, and exercises developed and maintain
 
 The content of the material is developed in Markdown and a templating system ([Jekyll](http://jekyllrb.com/)) is used to format the tutorials and generate a website ([http://training.galaxyproject.org](http://training.galaxyproject.org)).
 
-Do you want to help with this project? Have a question? Please have a look at our [tutorials dedicating to training material development](https://training.galaxyproject.org/training-material/topics/contributing) and our [FAQ](https://training.galaxyproject.org/training-material/faq#contributing).
+Do you want to help with this project? Have a question? Please have a look at our [tutorials dedicating to training material development](https://training.galaxyproject.org/training-material/topics/contributing) and our [Contributing FAQs](https://training.galaxyproject.org/training-material/faqs/gtn/#contributors).
 
-If you want to build the website locally, please have a look at the [tutorial](https://training.galaxyproject.org/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html).
+If you want to build the GTN website yourself, for example to preview your tutorial, please have a look at one of the following tutorials:
+- [Running the GTN website online using GitHub CodeSpaces](https://training.galaxyproject.org/training-material/topics/contributing/tutorials/running-codespaces/tutorial.html) (online, no installation required)
+- [Running the GTN website locally using the command line](https://training.galaxyproject.org/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html) (on your own machine)
 
 ## License
 

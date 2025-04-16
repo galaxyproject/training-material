@@ -1,33 +1,34 @@
 ---
 layout: tutorial_hands_on
-
-title: "Quality Control"
-zenodo_link: "https://doi.org/10.5281/zenodo.61771"
+title: Quality Control
+zenodo_link: https://zenodo.org/records/61771
 questions:
-  - How to perform quality control of NGS raw data?
-  - What are the quality parameters to check for a dataset?
-  - How to improve the quality of a dataset?
+- How to perform quality control of NGS raw data?
+- What are the quality parameters to check for a dataset?
+- How to improve the quality of a dataset?
 objectives:
-  - Assess short reads FASTQ quality using FASTQE 🧬😎 and FastQC
-  - Assess long reads FASTQ quality using Nanoplot and PycoQC
-  - Perform quality correction with Cutadapt (short reads)
-  - Summarise quality metrics MultiQC
-  - Process single-end and paired-end data
+- "Assess short reads FASTQ quality using FASTQE \U0001F9EC\U0001F60E and FastQC"
+- Assess long reads FASTQ quality using Nanoplot and PycoQC
+- Perform quality correction with Cutadapt (short reads)
+- Summarise quality metrics MultiQC
+- Process single-end and paired-end data
 follow_up_training:
-  -
-    type: "internal"
-    topic_name: sequence-analysis
-    tutorials:
-      - mapping
-time_estimation: "1H30M"
+- type: internal
+  topic_name: sequence-analysis
+  tutorials:
+  - mapping
+time_estimation: 1H30M
 level: Introductory
+subtopic: basics
 key_points:
-  - Perform quality control on every dataset before running any other bioinformatics analysis
-  - Assess the quality metrics and improve quality if necessary
-  - Check the impact of the quality control
-  - Different tools are available to provide additional quality metrics
-  - For paired-end reads analyze the forward and reverse reads together
-contributors:
+- Perform quality control on every dataset before running any other bioinformatics
+  analysis
+- Assess the quality metrics and improve quality if necessary
+- Check the impact of the quality control
+- Different tools are available to provide additional quality metrics
+- For paired-end reads analyze the forward and reverse reads together
+contributions:
+  authorship:
   - bebatut
   - mblue9
   - alexcorm
@@ -35,11 +36,43 @@ contributors:
   - lleroi
   - r1corre
   - stephanierobin
-  - erasmusplus
+  - neoformit
+  editing:
+  - Swathi266
+  funding:
+  - gallantries
+
+recordings:
+- youtube_id: coaMGvZazoc
+  length: 50M
+  speakers:
+  - LonsBio
+  captioners:
+  - LonsBio
+  date: '2023-05-19'
+- captioners:
+  - bebatut
+  - nagoue
+  - shiltemann
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H10M
+  youtube_id: QJRlX2hWDKM
+  speakers:
+  - heylf
+- youtube_id: uiWZea53QIA
+  length: 51M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-30'
+  speakers:
+  - dianichj
+  captioners:
+  - dianichj
+  bot-timestamp: 1727710795
+
 
 ---
 
-# Introduction
 
 
 During sequencing, the nucleotide bases in a DNA or RNA sample (library) are determined by the sequencer. For each fragment in the library, a sequence is generated, also called a **read**, which is simply a succession of nucleotides.
@@ -118,12 +151,19 @@ It means that the fragment named `@M00970` corresponds to the DNA sequence `GTGC
 >
 > 1. Which ASCII character corresponds to the worst Phred score for Illumina 1.8+?
 > 2. What is the Phred quality score of the 3rd nucleotide of the 1st sequence?
-> 3. What is the accuracy of this 3rd nucleotide?
+> 3. How to calculate the accuracy of the nucleotide base with the ASCII code `/`?
+> 4. What is the accuracy of this 3rd nucleotide?
 >
 > > <solution-title></solution-title>
 > > 1. The worst Phred score is the smallest one, so 0. For Illumina 1.8+, it corresponds to the `!` character.
 > > 2. The 3rd nucleotide of the 1st sequence has a ASCII character `G`, which correspond to a score of 38.
-> > 3. The corresponding nucleotide `G` has an accuracy of almost 99.99%
+> > 3. This can be calculated as follows:
+> >    - ASCII code for `/` is 47
+> >    - Quality score = 47-33=14
+> >    - Formula to find the probability of error: \\(P = 10^{-Q/10}\\)
+> >    - Probability of error = \\(10^{-14/10}\\) = 0.03981 = 3.981 %
+> >    - Therefore Accuracy = 100 - 3.981 = 96.019%
+> > 4. The corresponding nucleotide `G` has an accuracy of approximately 96%
 > >
 > {: .solution }
 {: .question}
@@ -141,7 +181,7 @@ To take a look at sequence quality along all sequences, we can use [FASTQE](http
 
 > <hands-on-title>Quality check</hands-on-title>
 >
-> 1. {% tool [FASTQE](toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2) %} with the following parameters
+> 1. {% tool [FASTQE](toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.3.1+galaxy0) %} with the following parameters
 >    - {% icon param-files %} *"FastQ data"*: `Reads`
 >    - {% icon param-select %} *"Score types to show"*: `Mean`
 >
@@ -561,22 +601,22 @@ To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/e
 
 > <hands-on-title>Improvement of sequence quality</hands-on-title>
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy2) %} with the following parameters
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.9+galaxy1) %} with the following parameters
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
->       - {% icon param-file %} *"Reads in FASTQ format"*: `Reads` (Input dataset)
+>       - {% icon param-file %} *"FASTQ/A file"*: `Reads` (Input dataset)
 >
 >          > <tip-title>Files not selectable?</tip-title>
 >          > If your FASTQ file cannot be selected, you might check whether the format is FASTQ with Sanger-scaled quality values (`fastqsanger.gz`). You can edit the data type by clicking on the pencil symbol.
 >          {: .tip}
->    - In *"Read 1 Options"*:
->       - *"Insert 3' (End) Adapters"*:
+>    - In *"Read 1 Adapters"*:
+>       - *"1: 3' (End) Adapters"*:
 >          - *"Source"*: `Enter custom sequence`
->          - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCT`
->    - In *"Filter Options"*
->       - *"Minimum length"*: `20`
->    - In *"Read Modification Options"*
->       - *"Quality cutoff"*: `20`
->    - {% icon param-select %} *"Outputs selector"*: `Report`
+>          - *"Custom 3' adapter sequence"*: `CTGTCTCTTATACACATCT`
+>    - In *"Other Read Trimming Options"*
+>       - *"Quality cutoff(s) (R1)"*: `20`
+>    - In *"Read Filtering Options"*
+>       - *"Minimum length (R1)"*: `20`
+>    - {% icon param-select %} *"Additional outputs to generate"*: `Report`
 >
 > 2. Inspect the generated txt file (`Report`)
 >
@@ -650,7 +690,7 @@ We can examine our trimmed data with FASTQE and/or FastQC.
 
 > <hands-on-title>Checking quality after trimming</hands-on-title>
 >
-> 1. {% tool [FASTQE](toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2) %}: Re-run **FASTQE** with the following parameters
+> 1. {% tool [FASTQE](toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.3.1+galaxy0) %}: Re-run **FASTQE** with the following parameters
 >    - {% icon param-files %} *"FastQ data"*: `Cutadapt Read 1 Output`
 >    - {% icon param-select %} *"Score types to show"*: `Mean`
 >
@@ -813,23 +853,22 @@ With paired-end reads the average quality scores for forward reads will almost a
 After trimming, reverse reads will be shorter because of their quality and then will be eliminated during the filtering step. If one of the reverse reads is removed, its corresponding forward read should be removed too. Otherwise we will get different number of reads in both files and in different order, and order is important for the next steps. Therefore **it is important to treat the forward and reverse reads together for trimming and filtering**.
 
 > <hands-on-title>Improving the quality of paired-end data</hands-on-title>
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy2) %} with the following parameters
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.9+galaxy1) %} with the following parameters
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
 >       - {% icon param-file %} *"FASTQ/A file #1"*: `GSM461178_untreat_paired_subset_1.fastq` (Input dataset)
 >       - {% icon param-file %} *"FASTQ/A file #2"*: `GSM461178_untreat_paired_subset_2.fastq` (Input dataset)
 >
 >          The order is important here!
 >
->       - In *Read 1 Options* or *Read 2 Options*
+>       - In *Read 1 Adapters* or *Read 2 Adapters*
 >
 >         No adapters were found in these datasets. When you process your own data and you know which adapter sequences were used during library preparation, you should provide their sequences here.
 >
->    - In *"Filter Options"*
->       - *"Minimum length"*: `20`
->    - In *"Read Modification Options"*
->       - *"Quality cutoff"*: `20`
->    - In *"Output Options"*
->       - *"Report"*: `Yes`
+>    - In *"Other Read Trimming Options"*
+>       - *"Quality cutoff(s) (R1)"*: `20`
+>    - In *"Read Filtering Options"*
+>       - *"Minimum length (R1)"*: `20`
+>    - {%icon param-select%} *"Additional outputs to generate"*: `Report`
 >
 > 2. Inspect the generated txt file (`Report`)
 >
@@ -875,10 +914,10 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 > 2. Import the PacBio HiFi reads `m64011_190830_220126.Q20.subsample.fastq.gz` from [Zenodo](https://zenodo.org/record/5730295)
 >
 >    ```
->    https://zenodo.org/api/files/ff9aa6e3-3d69-451f-9798-7ea69b475989/m64011_190830_220126.Q20.subsample.fastq.gz
+>    https://zenodo.org/records/5730295/files/m64011_190830_220126.Q20.subsample.fastq.gz
 >    ```
 >
-> 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
+> 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0) %} with the following parameters
 >    - {% icon param-files %} *"files"*: `m64011_190830_220126.Q20.subsample.fastq.gz`
 >    - *"Options for customizing the plots created"*
 >        - {% icon param-select %} *"Specify the bivariate format of the plots."*: `dot`, `kde`
@@ -912,7 +951,7 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 
 This plot shows the distribution of fragment sizes in the file that was analyzed.
 Unlike most of Illumina runs, long reads have a variable length and this will show the relative amounts of each different size of sequence fragment.
-In this example, the distribution of read length is centered near 15kbp but the results can be very different depending of your experiment.
+In this example, the distribution of read length is centered near 18kbp but the results can be very different depending of your experiment.
 
 ![Histogram of read lengths](../../images/quality-control/HistogramReadlength.png "Histogram of read length")
 
@@ -951,8 +990,8 @@ One of the strengths of PycoQC is that it is interactive and highly customizable
 > 2. Import the nanopore reads `nanopore_basecalled-guppy.fastq.gz` and `sequencing_summary.txt` from [Zenodo](https://zenodo.org/record/5730295)
 >
 >    ```
->    https://zenodo.org/api/files/ff9aa6e3-3d69-451f-9798-7ea69b475989/nanopore_basecalled-guppy.fastq.gz
->    https://zenodo.org/api/files/ff9aa6e3-3d69-451f-9798-7ea69b475989/sequencing_summary.txt
+>    https://zenodo.org/records/5730295/files/nanopore_basecalled-guppy.fastq.gz
+>    https://zenodo.org/records/5730295/files/sequencing_summary.txt
 >    ```
 >
 > 3. {% tool [PycoQC](toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0) %} with the following parameters
@@ -1085,8 +1124,8 @@ This step is the usual first step for analyses such as RNA-Seq, ChIP-Seq, or any
 Quality control steps are similar for any type of sequencing data:
 
 - Quality assessment with tools like:
-  - *Short Reads*: {% tool [FASTQE](toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2) %}
+  - *Short Reads*: {% tool [FASTQE](toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.3.1+galaxy0) %}
   - *Short+Long*: {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %}
-  - *Long Reads*:  {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %}
+  - *Long Reads*:  {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0) %}
   - *Nanopore only*: {% tool [PycoQC](toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0) %}
 - Trimming and filtering for **short reads** with a tool like **Cutadapt** {% icon tool %}

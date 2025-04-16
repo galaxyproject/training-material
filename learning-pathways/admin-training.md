@@ -14,7 +14,7 @@ editorial_board:
 - natefoo
 - slugger70
 
-tags: [Galaxy administrators, 5-day course]
+tags: [Galaxy administrators, 5-day course, admin]
 
 pathway:
   - section: "Monday: Setting up Galaxy with Ansible"
@@ -88,7 +88,7 @@ pathway:
         topic: admin
       - name: tool-integration
         topic: dev
-      - name: processing-many-samples-at-once
+      - name: collections
         topic: galaxy-interface
       - name: upload-rules
         topic: galaxy-interface

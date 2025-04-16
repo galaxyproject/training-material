@@ -1,0 +1,757 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "End-to-End Tissue Microarray Analysis with Galaxy-ME",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-6942-2469",
+            "name": "Cameron Watson"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "GTN_Exemplar_002_TMA_workflow_Feb2025",
+    "steps": {
+        "0": {
+            "annotation": "CSV file containing marker names",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "CSV file containing marker names",
+                    "name": "markers.csv"
+                }
+            ],
+            "label": "markers.csv",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 661.8984375,
+                "height": 30.8984375,
+                "left": -685,
+                "right": -585,
+                "top": 631,
+                "width": 100,
+                "x": -685,
+                "y": 631
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "25572610-4522-4ff0-abdd-88bb5ca24d78",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Scimap formatted phenotype workflow",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Scimap formatted phenotype workflow",
+                    "name": "PhenotypeWorkflow"
+                }
+            ],
+            "label": "PhenotypeWorkflow",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 790.09765625,
+                "height": 41.09765625,
+                "left": 897,
+                "right": 997,
+                "top": 749,
+                "width": 100,
+                "x": 897,
+                "y": 749
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"csv\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "4054ab54-4ac3-4577-ab70-3d8a17f0df49",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Raw TIFF images (CZI, TIFF) in an round-ordered list",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Raw TIFF images (CZI, TIFF) in an round-ordered list",
+                    "name": "Raw cycle images"
+                }
+            ],
+            "label": "Raw cycle images",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 611.09765625,
+                "height": 41.09765625,
+                "left": -1221,
+                "right": -1121,
+                "top": 570,
+                "width": 100,
+                "x": -1221,
+                "y": 570
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\", \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "319b84a9-8bb4-459d-8808-236bef8c5326",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "Illumination correction",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/perssond/basic_illumination/basic_illumination/1.1.1+galaxy2",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "in_files": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool BaSiC Illumination",
+                    "name": "in_files"
+                }
+            ],
+            "label": "Illumination correction with Basic",
+            "name": "BaSiC Illumination",
+            "outputs": [
+                {
+                    "name": "output_dfp",
+                    "type": "tiff"
+                },
+                {
+                    "name": "output_ffp",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "bottom": 537.99609375,
+                "height": 71.99609375,
+                "left": -941,
+                "right": -841,
+                "top": 466,
+                "width": 100,
+                "x": -941,
+                "y": 466
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/perssond/basic_illumination/basic_illumination/1.1.1+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "7ee5b6f7533e",
+                "name": "basic_illumination",
+                "owner": "perssond",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_files\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1+galaxy2",
+            "type": "tool",
+            "uuid": "be2b9559-acd5-433d-94a3-ab932d8a7be9",
+            "workflow_outputs": [
+                {
+                    "label": "DFP images",
+                    "output_name": "output_dfp",
+                    "uuid": "8a05fb69-9e2b-4fa4-ab8c-77d3241f7a86"
+                },
+                {
+                    "label": "FFP images",
+                    "output_name": "output_ffp",
+                    "uuid": "a5432ed5-980f-4f04-83a2-b5514019b11b"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "Stitching and registration",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/perssond/ashlar/ashlar/1.18.0+galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "ldfp": {
+                    "id": 3,
+                    "output_name": "output_dfp"
+                },
+                "lffp": {
+                    "id": 3,
+                    "output_name": "output_ffp"
+                },
+                "lraw": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "rename|markers_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Stitching and registration with Ashlar",
+            "name": "ASHLAR",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "ome.tiff"
+                }
+            ],
+            "position": {
+                "bottom": 555.39453125,
+                "height": 102.39453125,
+                "left": -443,
+                "right": -343,
+                "top": 453,
+                "width": 100,
+                "x": -443,
+                "y": 453
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/perssond/ashlar/ashlar/1.18.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "0b8423c7ee3e",
+                "name": "ashlar",
+                "owner": "perssond",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"align_channel\": \"0\", \"stitch_alpha\": null, \"filter_sigma\": null, \"tile_size\": null, \"flip_mosaic_x\": \"false\", \"flip_mosaic_y\": \"false\"}, \"flip_x\": \"false\", \"flip_y\": \"false\", \"ldfp\": {\"__class__\": \"ConnectedValue\"}, \"lffp\": {\"__class__\": \"ConnectedValue\"}, \"lraw\": {\"__class__\": \"ConnectedValue\"}, \"max_shift\": \"30\", \"rename\": {\"decide\": \"do_rename\", \"__current_case__\": 0, \"markers_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.18.0+galaxy1",
+            "type": "tool",
+            "uuid": "c107e2b5-7558-4841-a8a0-694398bb4882",
+            "workflow_outputs": [
+                {
+                    "label": "Registered image",
+                    "output_name": "output",
+                    "uuid": "81f2c552-cd84-4d48-af14-eb252550f35a"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "TMA dearray",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/perssond/coreograph/unet_coreograph/2.2.8+galaxy1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "source_image": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "TMA dearray with UNetCoreograph",
+            "name": "UNetCoreograph",
+            "outputs": [
+                {
+                    "name": "tma_sections",
+                    "type": "input"
+                },
+                {
+                    "name": "masks",
+                    "type": "input"
+                },
+                {
+                    "name": "TMA_MAP",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "bottom": 604.1953125,
+                "height": 87.1953125,
+                "left": -165,
+                "right": -65,
+                "top": 517,
+                "width": 100,
+                "x": -165,
+                "y": 517
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/perssond/coreograph/unet_coreograph/2.2.8+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "ee92746d141a",
+                "name": "coreograph",
+                "owner": "perssond",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"buffer\": \"2.0\", \"channel\": \"0\", \"cluster\": \"false\", \"downsamplefactor\": \"5\", \"sensitivity\": \"0.3\", \"source_image\": {\"__class__\": \"ConnectedValue\"}, \"tissue\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.8+galaxy1",
+            "type": "tool",
+            "uuid": "3313c99a-963d-422e-bec4-e3888c443260",
+            "workflow_outputs": [
+                {
+                    "label": "Dearray images",
+                    "output_name": "tma_sections",
+                    "uuid": "d79b4449-f879-42a9-9c79-0e0a6df0fa79"
+                },
+                {
+                    "label": "TMA dearray map",
+                    "output_name": "TMA_MAP",
+                    "uuid": "c3ae2005-725a-487c-a77a-437636f3a296"
+                },
+                {
+                    "label": "Dearray masks",
+                    "output_name": "masks",
+                    "uuid": "0ed3e920-42ce-457d-9ebe-f0cd0baa1dea"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "Nuclear segmentation",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy3",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "image": {
+                    "id": 5,
+                    "output_name": "tma_sections"
+                }
+            },
+            "inputs": [],
+            "label": "Nuclear segmentation",
+            "name": "Perform segmentation of multiplexed tissue data",
+            "outputs": [
+                {
+                    "name": "mask",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "bottom": 501.99609375,
+                "height": 66.99609375,
+                "left": 123,
+                "right": 223,
+                "top": 435,
+                "width": 100,
+                "x": 123,
+                "y": 435
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "2675ff99a53b",
+                "name": "mesmer",
+                "owner": "goeckslab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"compartment_select\": {\"compartment\": \"nuclear\", \"__current_case__\": 0, \"nuclear_options\": {\"pixel_expansion\": null, \"maxima_threshold\": \"0.1\", \"adv_options\": {\"maxima_smooth\": \"0\", \"interior_threshold\": \"0.2\", \"interior_smooth\": \"2\", \"small_objects_threshold\": \"15\", \"fill_holes_threshold\": \"15\", \"radius\": \"1\"}}}, \"image\": {\"__class__\": \"ConnectedValue\"}, \"image_mpp\": \"0.65\", \"nuclear_channels\": \"0\", \"squeeze\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.12.3+galaxy3",
+            "type": "tool",
+            "uuid": "17d89ea7-98f6-4a1f-bc2b-276a0a00f726",
+            "workflow_outputs": [
+                {
+                    "label": "Nuclear mask",
+                    "output_name": "mask",
+                    "uuid": "65c32086-b193-440f-b1a1-e5731bda0820"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "Convert to OME-TIFF",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_file": {
+                    "id": 5,
+                    "output_name": "tma_sections"
+                }
+            },
+            "inputs": [],
+            "label": "Convert dearray images to OME-TIFF",
+            "name": "Convert image",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "bottom": 726.796875,
+                "height": 56.796875,
+                "left": 123,
+                "right": 223,
+                "top": 670,
+                "width": 100,
+                "x": 123,
+                "y": 670
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "f3360fbeda64",
+                "name": "bfconvert",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bigtiff\": \"false\", \"channel_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"compression\": \"False\", \"crop_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"noflat\": \"true\", \"out_format\": \"ome.tiff\", \"pyramid_options\": {\"generate\": \"True\", \"__current_case__\": 0, \"pyramid_resolutions\": \"4\", \"pyramid_scale\": \"2\"}, \"range_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"series_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"tile_options\": {\"extract\": \"True\", \"__current_case__\": 1, \"tile_x\": \"512\", \"tile_y\": \"512\"}, \"timepoint_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"z_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "6.7.0+galaxy0",
+            "type": "tool",
+            "uuid": "48525e3f-e21f-453b-9b3f-5d29ea433c5c",
+            "workflow_outputs": [
+                {
+                    "label": "Converted image",
+                    "output_name": "output",
+                    "uuid": "d1c85ec4-1aea-48ce-88c3-ede346d9b34f"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "Quantify cell features",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.6.0+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "channel_names": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "image": {
+                    "id": 5,
+                    "output_name": "tma_sections"
+                },
+                "primary_mask": {
+                    "id": 6,
+                    "output_name": "mask"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MCQUANT",
+                    "name": "channel_names"
+                },
+                {
+                    "description": "runtime parameter for tool MCQUANT",
+                    "name": "image"
+                },
+                {
+                    "description": "runtime parameter for tool MCQUANT",
+                    "name": "primary_mask"
+                },
+                {
+                    "description": "runtime parameter for tool MCQUANT",
+                    "name": "supp_mask"
+                }
+            ],
+            "label": "Cell feature quantification with MC-Quant",
+            "name": "MCQUANT",
+            "outputs": [
+                {
+                    "name": "cellmask",
+                    "type": "csv"
+                },
+                {
+                    "name": "suppmask",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "bottom": 649.79296875,
+                "height": 127.79296875,
+                "left": 401,
+                "right": 501,
+                "top": 522,
+                "width": 100,
+                "x": 401,
+                "y": 522
+            },
+            "post_job_actions": {
+                "HideDatasetActionsuppmask": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "suppmask"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.6.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e11d5fafd0cc",
+                "name": "quantification",
+                "owner": "perssond",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"channel_names\": {\"__class__\": \"RuntimeValue\"}, \"image\": {\"__class__\": \"RuntimeValue\"}, \"intensity_props\": \"\", \"mask_props\": \"\", \"primary_mask\": {\"__class__\": \"RuntimeValue\"}, \"supp_mask\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.6.0+galaxy0",
+            "type": "tool",
+            "uuid": "82ff3a13-840c-4450-8b4a-43befc0c6f24",
+            "workflow_outputs": [
+                {
+                    "label": "Primary Mask Quantification",
+                    "output_name": "cellmask",
+                    "uuid": "a277be13-b5af-4591-b86b-a8679f561677"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "Rename OME-TIFF channels",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/goeckslab/rename_tiff_channels/rename_tiff_channels/0.0.2+galaxy1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "channel_csv": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "image": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Rename OME-TIFF channels",
+                    "name": "channel_csv"
+                },
+                {
+                    "description": "runtime parameter for tool Rename OME-TIFF channels",
+                    "name": "image"
+                }
+            ],
+            "label": "Rename OME-TIFF channels",
+            "name": "Rename OME-TIFF channels",
+            "outputs": [
+                {
+                    "name": "renamed_image",
+                    "type": "ome.tiff"
+                }
+            ],
+            "position": {
+                "bottom": 952.39453125,
+                "height": 92.39453125,
+                "left": 1213,
+                "right": 1313,
+                "top": 860,
+                "width": 100,
+                "x": 1213,
+                "y": 860
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/goeckslab/rename_tiff_channels/rename_tiff_channels/0.0.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "4763362914f4",
+                "name": "rename_tiff_channels",
+                "owner": "goeckslab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"channel_csv\": {\"__class__\": \"RuntimeValue\"}, \"image\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.2+galaxy1",
+            "type": "tool",
+            "uuid": "a04a5ec4-72c1-4f8f-b0c8-b39d9eb28560",
+            "workflow_outputs": [
+                {
+                    "label": "Renamed image",
+                    "output_name": "renamed_image",
+                    "uuid": "0867cba2-0ac1-413d-b6d0-aba8b2dcbe0c"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "Convert to Anndata",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_mcmicro_to_anndata/scimap_mcmicro_to_anndata/2.1.0+galaxy2",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "image_path": {
+                    "id": 8,
+                    "output_name": "cellmask"
+                }
+            },
+            "inputs": [],
+            "label": "Convert to Anndata",
+            "name": "Convert McMicro Output to Anndata",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "bottom": 650.1953125,
+                "height": 77.1953125,
+                "left": 679,
+                "right": 779,
+                "top": 573,
+                "width": 100,
+                "x": 679,
+                "y": 573
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_mcmicro_to_anndata/scimap_mcmicro_to_anndata/2.1.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "49c178651194",
+                "name": "scimap_mcmicro_to_anndata",
+                "owner": "goeckslab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"drop_markers\": \"\", \"image_path\": {\"__class__\": \"ConnectedValue\"}, \"options\": {\"remove_dna\": \"false\", \"remove_string_from_name\": \"\", \"log\": \"true\", \"random_sample\": null, \"CellId\": \"CellID\", \"unique_CellId\": \"false\", \"split\": \"X_centroid\", \"custom_imageid\": \"\", \"min_cells\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.0+galaxy2",
+            "type": "tool",
+            "uuid": "87db8083-cc54-4583-a6d1-dd80031cbc4f",
+            "workflow_outputs": [
+                {
+                    "label": "Anndata feature table",
+                    "output_name": "outfile",
+                    "uuid": "a10efe57-5e36-4625-8ac8-a4bd27b3ce7e"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "Scimap phenotyping",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_phenotyping/scimap_phenotyping/2.1.0+galaxy2",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "anndata": {
+                    "id": 10,
+                    "output_name": "outfile"
+                },
+                "gating_workflow": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Single Cell Phenotyping",
+                    "name": "anndata"
+                },
+                {
+                    "description": "runtime parameter for tool Single Cell Phenotyping",
+                    "name": "gating_workflow"
+                },
+                {
+                    "description": "runtime parameter for tool Single Cell Phenotyping",
+                    "name": "manual_gates"
+                }
+            ],
+            "label": "Scimap phenotyping",
+            "name": "Single Cell Phenotyping",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "bottom": 633.9921875,
+                "height": 127.9921875,
+                "left": 1113,
+                "right": 1213,
+                "top": 506,
+                "width": 100,
+                "x": 1113,
+                "y": 506
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_phenotyping/scimap_phenotyping/2.1.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "88fca6e905be",
+                "name": "scimap_phenotyping",
+                "owner": "goeckslab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"anndata\": {\"__class__\": \"RuntimeValue\"}, \"gating_workflow\": {\"__class__\": \"RuntimeValue\"}, \"log\": \"true\", \"manual_gates\": {\"__class__\": \"RuntimeValue\"}, \"random_state\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.0+galaxy2",
+            "type": "tool",
+            "uuid": "61a05d40-8d52-4c7d-ab68-29e1484628e5",
+            "workflow_outputs": [
+                {
+                    "label": "Phenotyped feature table",
+                    "output_name": "output",
+                    "uuid": "1711b39d-79db-4012-80b6-abfae28439ae"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "Create a Vitessce dashboard",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/goeckslab/vitessce_spatial/vitessce_spatial/3.5.1+galaxy0",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "do_phenotyping|anndata": {
+                    "id": 11,
+                    "output_name": "output"
+                },
+                "image": {
+                    "id": 9,
+                    "output_name": "renamed_image"
+                },
+                "masks": {
+                    "id": 6,
+                    "output_name": "mask"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Vitessce",
+                    "name": "do_phenotyping"
+                },
+                {
+                    "description": "runtime parameter for tool Vitessce",
+                    "name": "image"
+                },
+                {
+                    "description": "runtime parameter for tool Vitessce",
+                    "name": "masks"
+                }
+            ],
+            "label": "Create a Vitessce dashboard",
+            "name": "Vitessce",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "html"
+                },
+                {
+                    "name": "vitessce_config",
+                    "type": "json"
+                }
+            ],
+            "position": {
+                "bottom": 691.79296875,
+                "height": 122.79296875,
+                "left": 1439,
+                "right": 1539,
+                "top": 569,
+                "width": 100,
+                "x": 1439,
+                "y": 569
+            },
+            "post_job_actions": {
+                "HideDatasetActionvitessce_config": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "vitessce_config"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/goeckslab/vitessce_spatial/vitessce_spatial/3.5.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "068da7f7cd83",
+                "name": "vitessce_spatial",
+                "owner": "goeckslab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"do_phenotyping\": {\"phenotyping_choice\": \"add_h5ad\", \"__current_case__\": 1, \"anndata\": {\"__class__\": \"RuntimeValue\"}, \"scatterplot_embeddings\": {\"embedding\": \"umap\", \"__current_case__\": 0, \"options\": {\"n_neighbors\": \"30\", \"n_pcs\": \"10\", \"knn\": \"true\", \"random_state\": \"0\"}}, \"phenotype_factory\": {\"phenotype_mode\": \"choices\", \"__current_case__\": 0, \"phenotypes\": [\"phenotype\"]}}, \"image\": {\"__class__\": \"RuntimeValue\"}, \"masks\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.5.1+galaxy0",
+            "type": "tool",
+            "uuid": "f3e7aa93-3c92-45ba-aca9-d3a42bc60490",
+            "workflow_outputs": [
+                {
+                    "label": "Vitessce dashboard",
+                    "output_name": "output",
+                    "uuid": "9093603f-8ee1-424b-8520-c5f5d3e9dc3d"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "imaging"
+    ],
+    "uuid": "56ef1d72-0c5f-4e54-b91a-2888e487f25d",
+    "version": 26
+}

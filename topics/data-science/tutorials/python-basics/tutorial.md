@@ -23,11 +23,13 @@ key_points:
 - Python is a fairly easy programming language to learn and use, but be mindful of the indexing.
 - Python has many libraries offering a variety of capabilities, which makes it popular for beginners, as well as, more experienced users
 subtopic: python
-contributors:
+contributions:
+  authorship:
   - mcmaniou
   - fpsom
   - carpentries
-  - erasmusplus
+  funding:
+  - gallantries
 
 priority: 1
 notebook:
@@ -1253,7 +1255,7 @@ display(c=77)
 >
 > def f2k(f):
 >     k = ((f - 32) * (5.0 / 9.0)) + 273.15
-> return k
+>     return k
 >
 > print(f2k(8))
 > print(f2k(41))

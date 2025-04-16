@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis'
-zenodo_link: https://zenodo.org/record/4306639#.X9FJF-lKgZE
+zenodo_link: https://zenodo.org/record/4306639
 questions:
 - How to predict aberrant pathway activity in The Cancer Genome Atlas (TCGA) using
   Machine learning approaches?
@@ -25,8 +25,6 @@ tags:
 - oncogenes and tumor suppressor genes
 
 ---
-
-# Introduction
 
 
 Signaling pathways are among the most commonly altered across different tumor types. Many tumors possess at least one driver alteration and nearly half of such alterations are potentially targeted by currently available drugs. A recent study in TCGA tumors has identified patterns of somatic variations and mechanisms in 10 canonical pathways
@@ -69,44 +67,44 @@ An efficient way to install and run the tutorial using papaa tools is available 
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [PAPAA-Zenodo](https://zenodo.org/record/4306639#.X9FJF-lKgZE) or from the docker galaxy `Shared Data -> Data Libraries -> (GTN - Material -> {{ page.topic_name }} -> {{ page.title }} )`
+> 2. Import the files from [PAPAA-Zenodo](https://zenodo.org/record/4306639) or from the docker galaxy `Shared Data -> Data Libraries -> (GTN - Material -> {{ page.topic_name }} -> {{ page.title }} )`
 >
 >    ```
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/CCLE_DepMap_18Q1_maf_20180207.txt.gz
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/CCLE_MUT_CNA_AMP_DEL_binary_Revealer.tsv.gz
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/ccle_rnaseq_genes_rpkm_20180929_mod.tsv.gz
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/compounds_of_interest.txt
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/copy_number_gain_status.tsv.gz
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/copy_number_loss_status.tsv.gz
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/cosmic_cancer_classification.tsv
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/gdsc1_ccle_pharm_fitted_dose_data.txt.gz
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/gdsc2_ccle_pharm_fitted_dose_data.txt.gz
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GDSC_CCLE_common_mut_cnv_binary.tsv.gz
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GDSC_EXP_CCLE_converted_name.tsv.gz
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE69822_pi3k_sign.txt
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE69822_pi3k_trans.csv
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_rtk_ras_pi3k_genes.txt
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/mc3.v0.2.8.PUBLIC.maf.gz
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/mutation_burden_freeze.tsv
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/pancan_mutation_freeze.tsv.gz
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/pancan_rnaseq_freeze.tsv.gz
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/sample_freeze.tsv
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/tcga_dictionary.tsv
+>    https://zenodo.org/records/4306639/files/CCLE_DepMap_18Q1_maf_20180207.txt.gz
+>    https://zenodo.org/records/4306639/files/CCLE_MUT_CNA_AMP_DEL_binary_Revealer.tsv.gz
+>    https://zenodo.org/records/4306639/files/ccle_rnaseq_genes_rpkm_20180929_mod.tsv.gz
+>    https://zenodo.org/records/4306639/files/compounds_of_interest.txt
+>    https://zenodo.org/records/4306639/files/copy_number_gain_status.tsv.gz
+>    https://zenodo.org/records/4306639/files/copy_number_loss_status.tsv.gz
+>    https://zenodo.org/records/4306639/files/cosmic_cancer_classification.tsv
+>    https://zenodo.org/records/4306639/files/gdsc1_ccle_pharm_fitted_dose_data.txt.gz
+>    https://zenodo.org/records/4306639/files/gdsc2_ccle_pharm_fitted_dose_data.txt.gz
+>    https://zenodo.org/records/4306639/files/GDSC_CCLE_common_mut_cnv_binary.tsv.gz
+>    https://zenodo.org/records/4306639/files/GDSC_EXP_CCLE_converted_name.tsv.gz
+>    https://zenodo.org/records/4306639/files/GSE69822_pi3k_sign.txt
+>    https://zenodo.org/records/4306639/files/GSE69822_pi3k_trans.csv
+>    https://zenodo.org/records/4306639/files/path_rtk_ras_pi3k_genes.txt
+>    https://zenodo.org/records/4306639/files/mc3.v0.2.8.PUBLIC.maf.gz
+>    https://zenodo.org/records/4306639/files/mutation_burden_freeze.tsv
+>    https://zenodo.org/records/4306639/files/pancan_mutation_freeze.tsv.gz
+>    https://zenodo.org/records/4306639/files/pancan_rnaseq_freeze.tsv.gz
+>    https://zenodo.org/records/4306639/files/sample_freeze.tsv
+>    https://zenodo.org/records/4306639/files/tcga_dictionary.tsv
 >    ```
 {: .hands_on}
 
 > <hands-on-title>Some additional files that you can use for alternative analysis</hands-on-title>
 > 1. These files are provided to optionally enable you to perform an additional analysis, using the same methodology
 >    described here, but are not required for the main tutorial.
-> 2. Import the files from [PAPAA-Zenodo](https://zenodo.org/record/4306639#.X9FJF-lKgZE) or from the docker galaxy `Shared Data -> Data Libraries -> (GTN - Material -> {{ page.topic_name }} -> {{ page.title }} )`
+> 2. Import the files from [PAPAA-Zenodo](https://zenodo.org/record/4306639) or from the docker galaxy `Shared Data -> Data Libraries -> (GTN - Material -> {{ page.topic_name }} -> {{ page.title }} )`
 >
 >    ```
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_kras_sign.txt
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_rpkm_kras.csv
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_cell_cycle_genes.txt
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_myc_genes.txt
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_ras_genes.txt
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_wnt_genes.txt
+>    https://zenodo.org/records/4306639/files/GSE94937_kras_sign.txt
+>    https://zenodo.org/records/4306639/files/GSE94937_rpkm_kras.csv
+>    https://zenodo.org/records/4306639/files/path_cell_cycle_genes.txt
+>    https://zenodo.org/records/4306639/files/path_myc_genes.txt
+>    https://zenodo.org/records/4306639/files/path_ras_genes.txt
+>    https://zenodo.org/records/4306639/files/path_wnt_genes.txt
 >    ```
 {: .hands_on}
 

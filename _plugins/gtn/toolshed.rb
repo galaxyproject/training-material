@@ -13,7 +13,7 @@ module Gtn
     # +topic+:: The topic to install the tools under
     # Returns:
     # +supported+:: A string of the admin install, ready for ephemeris
-    def self.format_admin_install(data, tool_list, topic)
+    def self.format_admin_install(data, tool_list, topic, tool_cats)
       # p "Calculating supported servers for this tool list"
       return {} if data.nil? || data.empty?
 
@@ -23,7 +23,7 @@ module Gtn
           'name' => tool_info[1],
           'owner' => tool_info[0],
           'revisions' => tool_info[2],
-          'tool_panel_section_label' => topic,
+          'tool_panel_section_label' => tool_cats["#{tool_info[0]}/#{tool_info[1]}"] || topic,
           'tool_shed_url' => 'https://toolshed.g2.bx.psu.edu/',
         }
       end

@@ -1,0 +1,49 @@
+# This action will create a Bluesky post for every GTN news post (via RSS feed)
+
+name: "[Cron] Bluesky bot"
+on:
+  schedule:
+    # This will run every day at 14:00 UTC. Alter it using https://crontab.guru/.
+    - cron: '0 14 * * *'
+  workflow_dispatch: # This allows manually running the workflow from the GitHub actions page
+concurrency:
+  group: feedbot
+jobs:
+  rss-to-bluesky:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate cache key
+        uses: actions/github-script@v6
+        id: generate-key
+        with:
+          script: |
+            core.setOutput('cache-key', new Date().valueOf())
+      - name: Retrieve cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ github.workspace }}/blueskyfeedbot
+          key: feed-cache-${{ steps.generate-key.outputs.cache-key }}
+          restore-keys: feed-cache-
+      - name: GitHub
+        uses: 'joschi/blueskyfeedbot@v1'
+        with:
+          # This is the RSS feed you want to publish
+          rss-feed: https://training.galaxyproject.org/training-material/feed.xml
+          # Template of status posted to Bluesky (Handlebars)
+          template: |
+            {{item.title}}
+
+            Read more at {{item.link}}
+
+            @galaxyproject.bsky.social
+
+          # This is your service URL (optional)
+          service-url: https://bsky.social
+          # This is the Bluesky username (example: username.bsky.social)
+          username: galaxytraining.bsky.social
+          # This is the app password you created earlier
+          password: ${{ secrets.BLUESKY_TOKEN }}
+          # This is a path to the cache file, using the above cache path
+          cache-file: ${{ github.workspace }}/blueskyfeedbot/cache.json
+          # The maximum number of posts created on the first run
+          initial-post-limit: 2

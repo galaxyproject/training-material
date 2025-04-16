@@ -21,6 +21,7 @@ contributors:
   - shiltemann
   - hexylena
   - nsoranzo
+  - ahmedhamidawan
 ---
 
 # What is Galaxy?
@@ -101,7 +102,8 @@ What is Galaxy?
 
 # Find a Galaxy server
 
-- **The Big Three**: Galaxy Main ([usegalaxy.org](https://usegalaxy.org)), Galaxy Europe ([usegalaxy.eu](https://usegalaxy.eu)), Galaxy Australia ([usegalaxy.org.au](https://usegalaxy.org.au))
+{% assign servers = nil | list_usegalaxy_servers_shuffle %}
+- **UseGalaxy.\***: {% for server in servers %}{{ server.human }} ([{{ server.name }}]({{ server.url }})){% if forloop.last %}{% else %}, {% endif %}{% endfor %}
 
   .image-50[![usegalaxy.* servers]({{site.baseurl}}/shared/images/usegalaxy_servers.png)]
 
@@ -120,20 +122,32 @@ What is Galaxy?
 ---
 
 # The Galaxy Interface
-
-- Three main panels
-  - **Left:** Available Tools
-  - **Middle:** View your data and run tools
-  - **Right:** Full record of your analysis **history**
+- Four main sections (left to right):
+  - <span style="color: #0045e2;">
+    **The Activity Bar on the left:** _To navigate to the resources in Galaxy (Tools, Workflows, Histories etc.)_
+    </span>
+  - <span style="color: #603d30;">
+    Currently active **Activity Panel** next to it: _By default, the {% icon tool %} **Tools** activity_
+    </span>
+  - <span style="color: #ff4e00;">
+    **Viewing panel in the middle:** _The main area for context for your analysis_
+    </span>
+  - <span style="color: #23e600;">
+    Full record of your analysis: **History** at the very right
+    </span>
 
 ![Galaxy user interface]({{site.baseurl}}/topics/introduction/images/galaxy_interface.png)
 
 ???
 
-- The Galaxy user interface consists of three main parts.
-- On the left is the list of available tools.
-- In the middle panel you will run your analysis tools and view your data and results.
-- On the right is a full record of your analysis history.
+- The Galaxy user interface consists of four main parts.
+- On the very left is the Activity Bar that lets you navigate to the different resources in Galaxy;
+  such as Tools, Workflows, Histories and more.
+- Next to it is the Activity Panel which opens for some activities, such as the Tool Panel that is expanded
+  for the Tools activity by default. This panel can easily be toggled in and out via clicking the associated activity.
+- In the middle panel you will run your analysis tools, view your data and results, view and edit workflows etc. It
+  is the main area for context for your analysis.
+- On the right is a full record of your analysis; that is: Your History.
 
 ---
 
@@ -201,7 +215,7 @@ What is Galaxy?
 - There are 3 button on each dataset in your history.
 - The eye icon lets you view the dataset. This will show up in the middle panel of Galaxy.
 - The pencil icon allows you to edit the attributes of the file. For example you can change the file name here.
-- The cross icon lets you delete the dataset from your history.
+- The trash icon lets you delete the dataset from your history.
 - You can also click on the dataset to expand it. This will show more information and more options.
 
 ---
@@ -220,14 +234,14 @@ What is Galaxy?
 
 <br>
 
-- {% icon galaxy-star %} **Star** you favorite tools to make them easier to find
+- {% icon galaxy-star %} **Star** your favorite tools to make them easier to find
 
 ![add a tool to your favorites by clicking on the star icon]({{site.baseurl}}/topics/introduction/images/tool_favorite.png)
 
 ???
 
 - After your data is uploaded, you are ready to run tools.
-- You can find tools by exploring the tool list on the left.
+- You can find tools by exploring the Tool Panel expandable on the left.
 - If you already know the name of the tool you want to use, you can enter this in the search box at the top of the tool panel.
 - If you have found a tool you like, you can add it to your favorites by clicking the star at the top of the tool.
 
@@ -275,6 +289,7 @@ What is Galaxy?
     - {% icon galaxy-info %} **Information** about tool run
     - {% icon galaxy-refresh %} **Reload** tool with the same parameters
     - {% icon galaxy-barchart %} **Visualize** dataset
+    - {% icon dataset-related-datasets %} **Show Related Items** (inputs/outputs) for this dataset
 
 
 
@@ -299,6 +314,7 @@ What is Galaxy?
 - For example, you can download the file to your computer.
 - Or you can reload the tool with the same parameters.
 - There is also an option to visualize your data.
+- And another one to view items related to the dataset; such as files that were inputs to jobs that created it etc.
 - If there was a problem with the tool, it will turn red.
 - You can click on the bug icon to view the error message or submit a error report to the Galaxy administrators.
 
@@ -322,8 +338,8 @@ What is Galaxy?
 
 - Starting a new analysis? Create a new history {% icon new-history %}
 - You can have as many histories as you want
-- Overview of all your histories {% icon galaxy-history %}
-- Good names for your histories help to keep track of your analyses
+- Overview of all your histories: Click on {% icon galaxy-history %} **History Multiview** activity
+- Good names (tags, descriptions) for your histories help to keep track of your analyses
 
 ![multiple history view]({{site.baseurl}}/topics/introduction/images/galaxy_interface_multiple_histories.png)
 
@@ -354,13 +370,14 @@ What is Galaxy?
 - Workflows can be automatically extracted from a history.
 - This means you perform the analysis manually once, and then can easily repeat it on different input data.
 - You can also build workflows by hand using the workflow editor to connect the tools.
-- Or you can import a workflow somebody else has shared with you.
+- Or you can import a workflow somebody else has shared with you or published to the workflows list.
 
 
 ---
 
 # Sharing
 
+.pull-left[
 - You can share everything you do in Galaxy
     - Histories, Workflows, Visualizations
 
@@ -369,9 +386,13 @@ What is Galaxy?
     - Share with specific users
     - Share via link
     - *Publish* to make it visible to everybody
+]
 
+.pull-right[
+![publish history example]({{site.baseurl}}/topics/introduction/images/publish.png)
+]
 
-![shared data menu]({{site.baseurl}}/topics/introduction/images/shared_data.png)
+![shared data in grids]({{site.baseurl}}/topics/introduction/images/shared_data.png)
 
 ???
 
@@ -380,7 +401,8 @@ What is Galaxy?
 - There are different ways to share your work.
 - You can either share it with specific Galaxy users.
 - Or you can get a share link that you can send to anybody.
-- If you publish your work, it will be visible to everybody.
+- If you publish your work, it will be visible to everybody in the appropriate published tab
+  of the resource you are sharing.
 
 ---
 

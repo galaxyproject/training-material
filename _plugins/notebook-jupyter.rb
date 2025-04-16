@@ -35,25 +35,25 @@ def json_boxify(h, page)
   h
 end
 
-Jekyll::Hooks.register :site, :pre_render do |site|
-  puts '[GTN/Notebooks] Rendering'
+def jupyter_pre_render(site)
+  Jekyll.logger.info '[GTN/Notebooks] Rendering'
 
   site.config['__rendered_notebook_cache'] = {}
 
   # For every tutorial with the 'notebook' key in the page data
-  site.pages.select { |page| GTNNotebooks.notebook_filter(page.data) }.each do |page|
+  site.pages.select { |page| Gtn::Notebooks.notebook_filter(page.data) }.each do |page|
     # We get the path to the tutorial source
     dir = File.dirname(File.join('.', page.url))
     fn = File.join('.', page.url).sub(/html$/, 'md')
     notebook_language = page.data['notebook'].fetch('language', 'python')
 
     # Tag our source page
-    page.data['tags'] = [] unless page.data.key? 'tags'
+    page.data['tags'] = page.data['tags'] || []
     page.data['tags'].push('jupyter-notebook')
 
-    puts "[GTN/Notebooks] Rendering #{notebook_language} #{fn}"
+    Jekyll.logger.info "[GTN/Notebooks] Rendering #{notebook_language} #{fn}"
     last_modified = Gtn::ModificationTimes.obtain_time(page.path)
-    notebook = GTNNotebooks.render_jupyter_notebook(page.data, page.content, page.url, last_modified,
+    notebook = Gtn::Notebooks.render_jupyter_notebook(page.data, page.content, page.url, last_modified,
                                                     notebook_language, site, dir)
 
     topic_id = dir.split('/')[-3]
@@ -117,8 +117,7 @@ Jekyll::Hooks.register :site, :pre_render do |site|
   end
 end
 
-# Basically like `PageWithoutAFile`, we just write out the ones we'd created earlier.
-Jekyll::Hooks.register :site, :post_write do |site|
+def jupyter_post_write(site)
   site.config['__rendered_notebook_cache'].each do |_path, info|
     # Create if missing
     FileUtils.mkdir_p(info['dir'])
@@ -126,4 +125,13 @@ Jekyll::Hooks.register :site, :post_write do |site|
     File.write(info['path1'], info['content1'])
     File.write(info['path2'], info['content2'])
   end
+end
+
+Jekyll::Hooks.register :site, :pre_render do |site|
+  jupyter_pre_render(site)
+end
+
+# Basically like `PageWithoutAFile`, we just write out the ones we'd created earlier.
+Jekyll::Hooks.register :site, :post_write do |site|
+  jupyter_post_write(site)
 end

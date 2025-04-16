@@ -28,13 +28,19 @@ tags:
 contributors:
 - annefou
 
+
+recordings:
+- captioners:
+  - annefou
+  date: '2022-03-03'
+  galaxy_version: '21.09'
+  length: 1H20M
+  youtube_id: V43jEJfa6hY
+  speakers:
+  - annefou
+
 ---
 
-
-# Introduction
-
-
-<!-- This is a comment. -->
 
 [Pangeo](https://pangeo.io/) is a project that effectively began in 2016 with a workshop at Columbia University. The mission for Pangeo developed at that workshop is still valid nowadays:
 

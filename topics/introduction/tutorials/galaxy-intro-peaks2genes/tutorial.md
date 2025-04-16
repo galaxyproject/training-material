@@ -21,8 +21,9 @@ key_points:
   - "Workflows enable you to repeat your analysis on different data"
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
-subtopic: core
-contributors:
+subtopic: next-steps
+contributions:
+  authorship:
   - pajanne
   - blankclemens
   - bebatut
@@ -31,10 +32,15 @@ contributors:
   - dyusuf
   - sarah-peter
   - hexylena
+  editing:
+  - teresa-m
+  - dadrasarmin
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
+
 ---
-
-# Introduction
-
 
 We stumbled upon a paper ({% cite Li2012 %}) called *"The histone acetyltransferase MOF is a key regulator of the embryonic stem cell core transcriptional network"*. The paper contains the analysis of possible target genes of an interesting protein called Mof. The targets were obtained by ChIP-seq in mice and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
 However, the list of genes is neither in the supplement of the paper, nor part of the GEO submission.
@@ -90,7 +96,7 @@ Let's start with a fresh history.
 >    >
 >    > * Click on the title of the history (by default the title is `Unnamed history`)
 >    >
->    >   ![Renaming history](../../../../shared/images/rename_history.png)
+>    >   ![Renaming history]({% link shared/images/rename_history.png %})
 >    >
 >    > * Type `Galaxy Introduction` as the name
 >    > * Press <kbd>Enter</kbd>
@@ -278,7 +284,7 @@ As we can see, the peak file lacks `chr` before any chromosome number. But what 
 
 > <hands-on-title>View end of file</hands-on-title>
 >
-> 1. Search for **Select last** {% icon tool %} tool and run **Select last lines from a dataset (tail)** with the following settings:
+> 1. Search for {% tool [Select last lines from a dataset (tail)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.3+galaxy1) %} tool and run with the following settings:
 >     - *"Text file"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
 >     - *"Operation"*: `Keep last lines`
 >     - *"Number of lines"*: Choose a value, e.g. `100`
@@ -395,8 +401,8 @@ You might have noticed that the UCSC file is in `BED` format and has a database 
 > <hands-on-title>Change format and database</hands-on-title>
 >
 > 1. Click on the {% icon galaxy-pencil %} (pencil) icon in the history entry of our peak region file
-> 2. Switch to the **Convert** tab
-> 3. Under *"Target datatype"*: `bed (using 'interval-to-bed')`
+> 2. Switch to the **Datatypes** tab
+> 3. In section **Convert to Datatype** under *"Target datatype"* select: `bed (using 'Convert Genomic Interval To Bed')`
 > 4. Press **Create Dataset**
 > 5. Check that the "Database/Build" is `mm9` (the database build for mice used in the paper)
 > 6. Again rename the file to something more recognizable, e.g. `Peak regions BED`
@@ -439,7 +445,7 @@ We will group the table by chromosome and count the number of genes with peaks o
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 11 with 1992 genes. Note that for reproducibility, you should keep all input data used within the analysis. Rerunning the analysis with the same set of parameters, stored Galaxy, can lead to a different result if the inputs changed e.g. the annotation from UCSC.
+>    > > The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 11 with 2164 genes. Note that for reproducibility, you should keep all input data used within the analysis. Rerunning the analysis with the same set of parameters, stored Galaxy, can lead to a different result if the inputs changed e.g. the annotation from UCSC.
 >    > {: .solution }
 >    {: .question}
 >
@@ -474,7 +480,7 @@ Great, we are ready to plot things!
 
 > <hands-on-title>Draw barchart</hands-on-title>
 >
-> 1. Click on {% icon galaxy-barchart %} (visualize) icon on the output from the **Group** tool
+> 1. Click on {% icon galaxy-barchart %} (visualize) icon on the output from the **Sort** tool
 > 2. Select `Bar diagram (NVD3)`
 > 3. Click on the **<<** in the upper right corner
 > 4. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
@@ -482,7 +488,7 @@ Great, we are ready to plot things!
 > 6. When you are happy, click the {% icon galaxy-save %} **Save** visualization in the top right of the *main panel*
 >
 >    This will store it to your saved visualisations. Later you can view,
->    download, or share it with others from **User -> Visualizations** in the
+>    download, or share it with others from **Data -> Visualizations** in the
 >    top menu of Galaxy.
 >
 {: .hands_on}
@@ -520,7 +526,7 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >
 >    You will get a message that the workflow was created. But where did it go?
 >
-> 6. Click on **Workflow** in the top menu of Galaxy
+> 6. Click on **Workflow** in the left menu of Galaxy
 >
 >    Here you have a list of all your workflows
 >
@@ -538,10 +544,9 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >
 > 8. Connect each input dataset to the **Intersect** {% icon tool %} tool by dragging the arrow pointing outwards on the right of its box (which denotes an output) to an arrow on the left of the **Intersect** box pointing inwards (which denotes an input)
 > 9. Rename the input datasets to `Reference regions` and `Peak regions`
-> 10. Click on the {% icon galaxy-gear %} (gear) icon at the top right
-> 11. Press **Auto Re-layout** to clean up our view
+> 10. Press **Auto Re-layout** to clean up our view
 >     ![Auto re-layouting](../../images/intro_07.png)
-> 12. Click on the {% icon galaxy-save %} **Save** icon (top-right) to save your changes
+> 11. Click on the {% icon galaxy-save %} **Save** icon (top) to save your changes
 >     ![Save workflow button]({% link topics/contributing/images/save_workflow.png %}){: width="50%"}
 >
 >    > <tip-title>Hiding intermediate steps</tip-title>
@@ -570,12 +575,12 @@ We again need our peak file, but we'd like to work in a clean history. Instead o
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Click on the **View all histories** ({% icon galaxy-columns %} icon) at the top right of your history
+> 2. Click on the **History options** at the top right of your history. Click on the **Show Histories Side-by-Side**
 >
 >       You should see both of your histories side-by-side now
 >
 > 3. Drag and drop the edited peak file (`Peak regions`, after the replace steps), which contains the summit information, to your new history.
-> 4. Click on the Home icon {% icon galaxy-home %} (or **Analyze Data** on older Galaxy versions) in the top menu bar to go back to your analysis window
+> 4. Click on the Galaxy name in the top menu bar (top left) to go back to your analysis window
 >
 {: .hands_on}
 
@@ -639,7 +644,7 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md genome="mm9" %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md path='Click on "Training data" and then "Introduction - From peaks to genes"' %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md path='Click on "GTN - Material", "Introduction to Galaxy Analyses", "From peaks to genes", and then "DOI: 10.5281/zenodo.1025586"' %}
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
@@ -657,7 +662,7 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 It's time to reuse the workflow we created earlier.
 
 > <hands-on-title>Run a workflow</hands-on-title>
-> 1. Open the workflow menu (top menu bar)
+> 1. Open the workflow menu (left menu bar)
 > 2. Find the workflow you made in the previous section, and select the option **Run**
 > 3. Choose as inputs our `mm9.RefSeq_genes` (`#genes`) BED file and the result of the **Cut** tool (`#peaks`)
 > 4. Click **Run workflow**
@@ -670,7 +675,7 @@ We used our workflow to rerun our analysis with the peak summits. The **Group** 
 But wouldn't it be more interesting to know the number of peaks in each unique gene? Let's rerun the workflow with different settings!
 
 > <hands-on-title>Run a workflow with changed settings</hands-on-title>
-> 1. Open the workflow menu (top menu bar)
+> 1. Open the workflow menu (left menu bar)
 > 2. Find the workflow you made in the previous section, and select the option **Run**
 > 3. Choose as inputs our `mm9.RefSeq_genes` (`#genes`) BED file and the result of the **Cut** tool (`#peaks`)
 > 4. Click on the title of the {% icon tool %} **Group** tool to expand the options.
@@ -697,22 +702,22 @@ Congratulations! You should have a file with all the unique gene names and a cou
 
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the history pane and select `Share or Publish`. On this page you can do 3 things:
+To share a history, click on the {%  icon galaxy-history-options %} history options and select `Share or Publish`. On this page you can do 3 things:
 
 
 1. **Make accessible via Link**
 
     This generates a link that you can give out to others. Anybody with this link will be able to view your history.
 
-2. **Publish History**
+2. **Make History publicly available in Published Histories**
 
-    This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Published Histories` in the top menu.
+    This will not only create a link, but will also publish your history. This means your history will be listed under `Data → Histories → Published Histories` in the top menu.
 
 3. **Share with Individual Users**
 
     This will share the history only with specific users on the Galaxy instance.
 
-![The menu for sharing histories includes buttons for making the history accessible, publishing it on this Galaxy server, and displays a sharable link to the history. At the bottom is a button for sharing the history with individual users.](../../images/publish.PNG)
+![The menu for sharing histories includes buttons for making the history accessible, publishing it on this Galaxy server, and displays a sharable link to the history. At the bottom is a button for sharing the history with individual users.](../../images/publish.png)
 
 > <hands-on-title>Share history and workflow</hands-on-title>
 >
@@ -720,7 +725,7 @@ To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the his
 > 2. See if you can do the same with your workflow!
 > 3. Find the history and/or workflow shared by your neighbour
 >
->    Histories shared with specific users can be accessed by those users in their history menu ({% icon galaxy-gear %} (gear) icon) under `Histories shared with me`.
+>    Histories shared with specific users can be accessed by those users under `Data → Histories → Histories shared with me`.
 >
 {: .hands_on}
 

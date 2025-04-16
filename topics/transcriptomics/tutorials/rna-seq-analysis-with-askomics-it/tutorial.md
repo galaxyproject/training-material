@@ -33,10 +33,7 @@ contributors:
 ---
 
 
-# Introduction
 
-
-<!-- AskOmics intro -->
 AskOmics is a web application for data integration and querying using the Semantic Web technologies. It helps users to convert multiple data sources (CSV/TSV files, GFF and BED annotation) into "RDF triples" and store them in a specific kind of database: an "RDF triplestore". Under this form, data can then be queried using a specific language: "SPARQL". AskOmics hides the complexity of these technologies and allows to perform complex queries using a user-friendly interface.
 
 <!-- AskOmics for RNA-Seq -->

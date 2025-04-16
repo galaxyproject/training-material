@@ -26,6 +26,7 @@ subtopic: cloud
 tags:
   - wireguard
   - networking
+priority: 20
 ---
 
 In this tutorial we will briefly cover what [Wireguard](https://www.wireguard.com/) is and how you can leverage it for your needs. This will not make you an expert on Wireguard but will give you the tools you need in order to setup a local Wireguard network.

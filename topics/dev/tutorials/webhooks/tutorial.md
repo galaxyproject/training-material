@@ -14,14 +14,17 @@ key_points:
   - "A Galaxy Webhook provides an easy way to customize the Galaxy UI with plugins"
   - "Right now there are 4 entry points: tool, workflow, masthead, history-menu"
   - "With a minimal amount of code you can extend Galaxy's user-interace."
-contributors:
+contributions:
+  authorship:
   - blankclemens
   - martenson
   - bgruening
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 subtopic: advanced
 ---
-
-## Introduction
 
 In this tutorial we are going to demonstrate how to add a webhook to the tool-execution endpoint. This is the web-page that appears
 after you have executed a tool. As a more useful example we are going to ask [phdcomics](http://phdcomics.com) for a random comic that we can

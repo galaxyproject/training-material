@@ -18,14 +18,17 @@ key_points:
   - "Search databases should always include possible contaminants."
   - "For analyzing cell culture or organic samples, search databases should include mycoplasma databases."
   - "Some peptide search engines depend on decoys to calculate the FDR."
-contributors:
+contributions:
+  authorship:
   - stortebecker
   - bgruening
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 subtopic: id-quant
 tags: [DDA]
 ---
-
-# Introduction
 
 
 In mass spectrometry based proteomics experiments, peptides are assigned to experimentally acquired tandem mass spectra (MS2) by a method called peptide-spectral matching. Peptide spectral matching is commonly achieved by using search algorithms to match the acquired MS2 spectra to theoretical spectra. The theoretical spectra are generated from an in silico digestion and fragmentation of proteins in the FASTA database. Ideally, the protein FASTA databases will contain all proteins of the organism under investigation.

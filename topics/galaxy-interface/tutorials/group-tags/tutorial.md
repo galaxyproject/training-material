@@ -20,9 +20,6 @@ subtopic: manage
 ---
 
 
-# Introduction
-
-
 Advanced uses of Galaxy often require the use of dataset collections,
 which can contain between one and tens of thousands of datasets.
 Grouping datasets in this way has numerous advantages:

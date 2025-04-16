@@ -31,6 +31,10 @@ subtopic: cloud
 tags:
   - wireguard
   - networking
+edam_ontology:
+- topic_3263 # data security
+- topic_3372 # software engineering
+priority: 20
 ---
 
 [Tailscale](https://tailscale.com/) makes secure networking easy, it really is like magic. If you've used wireguard before, you know it takes a bit to setup and some configuration if you need to do anything fancy.

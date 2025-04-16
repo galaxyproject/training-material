@@ -1,0 +1,35 @@
+- doc: Test outline for Single-cell-QC-with-scater
+  job:
+    annotation.txt:
+      class: File
+      location: https://zenodo.org/records/3386291/files/annotation.txt
+      filetype: tabular
+    counts.txt:
+      class: File
+      location: https://zenodo.org/records/3386291/files/counts.txt
+      filetype: tabular
+    mt_controls.txt:
+      class: File
+      location: https://zenodo.org/records/3386291/files/mt_controls.txt
+      filetype: txt
+  outputs:
+    lib_qc_plot:
+      asserts:
+        has_size:
+          value: 11291
+          delta: 500
+    output_loom:
+      asserts:
+        has_size:
+          value: 236352
+          delta: 10000
+    filtered_lib_qc_plot:
+      asserts:
+        has_size:
+          value: 10914
+          delta: 500
+    pca_plot:
+      asserts:
+        has_size:
+          value: 7106
+          delta: 350

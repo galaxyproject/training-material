@@ -41,6 +41,9 @@ requirements:
   topic_name: contributing
   tutorials:
   - learning-principles
+tags:
+  - elixir
+  - train-the-trainers
 contributions:
   authorship:
     - bebatut
@@ -49,11 +52,8 @@ contributions:
     - ppalagi
     - elixir-goblet-ttt
   funding:
-    - erasmusplus
+    - gallantries
 ---
-
-# Introduction
-
 
 **Teaching and training**, core elements of academic life, can be enormously
 rewarding but also quite challenging. Instructors are often required to perform
