@@ -1,0 +1,3029 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Generating Artificial Yeast DNA Sequences using a DNA LLM / Generating Artificial Yeast DNA Sequences using a DNA LLM / Statistics and machine learning</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@bf2ed173efee6757a347c2b9fdc10d2f8809cd23",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-sequence-generation/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Generating Artificial Yeast DNA Sequences using a DNA LLM">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-04-17 09:19:54 +0000">
+<meta name="DC.creator" content="Raphael Mourad">
+<meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Statistics and machine learning / Generating Artificial Yeast DNA Sequences using a DNA LLM / Hands-on: Generating Artificial Yeast DNA Sequences using a DNA LLM">
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/statistics/tutorials/genomic-llm-sequence-generation/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Generating Artificial Yeast DNA Sequences using a DNA LLM",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Draft",
+  "dateModified": "2025-04-17 09:19:54 +0000",
+  "datePublished": "2025-04-17 09:19:54 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "abstract": "Generating synthetic DNA sequences using pre-trained language models  bridges the fields of synthetic biology and artificial intelligence, enabling the creation of novel DNA sequences that closely mimic natural genomes. By leveraging the power of advanced language models, we can generate biologically relevant sequences that have the potential to revolutionize genetic engineering, drug discovery, and our understanding of genomic function.",
+  "learningResourceType": "e-learning",
+  "name": "Generating Artificial Yeast DNA Sequences using a DNA LLM",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-sequence-generation/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT3H",
+  "teaches": "- Describe the process of generating synthetic DNA sequences using pre-trained language models and explain the significance of temperature settings in controlling sequence variability.\n- Set up a computational environment (e.g., Google Colab) and configure a pre-trained language model to generate synthetic DNA sequences, ensuring all necessary libraries are installed and configured.\n- Use k-mer counts and Principal Component Analysis (PCA) to compare generated synthetic DNA sequences with real genomic sequences, identifying similarities and differences.\n- Perform BLAST searches to assess the novelty of generated DNA sequences and interpret the results to determine the biological relevance and uniqueness of the synthetic sequences.\n- Develop a pipeline to detect open reading frames (ORFs) within generated DNA sequences and translate them into amino acid sequences, demonstrating the potential for creating novel synthetic genes.",
+  "keywords": [
+    "Statistics and machine learning",
+    "ELIXIR",
+    "AI & ML",
+    "Large Language Model",
+    "work-in-progress",
+    "jupyter-notebook"
+  ],
+  "description": "## Abstract\n\nGenerating synthetic DNA sequences using pre-trained language models  bridges the fields of synthetic biology and artificial intelligence, enabling the creation of novel DNA sequences that closely mimic natural genomes. By leveraging the power of advanced language models, we can generate biologically relevant sequences that have the potential to revolutionize genetic engineering, drug discovery, and our understanding of genomic function.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How do you set up a computational environment for generating synthetic DNA sequences using pre-trained language models?\n - What role does the temperature parameter play in controlling the variability of generated DNA sequences?\n - How can you compare generated synthetic DNA sequences with real genomic sequences using k-mer counts and PCA?\n - What is the significance of performing BLAST searches on generated DNA sequences, and how do you interpret the results?\n - How can you detect open reading frames (ORFs) in generated DNA sequences and translate them into amino acid sequences?\n\n\n## Learning Objectives\n\n- Describe the process of generating synthetic DNA sequences using pre-trained language models and explain the significance of temperature settings in controlling sequence variability.\n- Set up a computational environment (e.g., Google Colab) and configure a pre-trained language model to generate synthetic DNA sequences, ensuring all necessary libraries are installed and configured.\n- Use k-mer counts and Principal Component Analysis (PCA) to compare generated synthetic DNA sequences with real genomic sequences, identifying similarities and differences.\n- Perform BLAST searches to assess the novelty of generated DNA sequences and interpret the results to determine the biological relevance and uniqueness of the synthetic sequences.\n- Develop a pipeline to detect open reading frames (ORFs) within generated DNA sequences and translate them into amino acid sequences, demonstrating the potential for creating novel synthetic genes.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-basics/tutorial.html",
+      "name": "Introduction to Python",
+      "description": "Hands-on for 'Introduction to Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.html",
+      "name": "Python - Warm-up for statistics and machine learning",
+      "description": "Hands-on for 'Python - Warm-up for statistics and machine learning' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/intro-to-ml-with-python/slides.html",
+      "name": "Foundational Aspects of Machine Learning",
+      "description": "Slides for 'Foundational Aspects of Machine Learning' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/intro-to-ml-with-python/tutorial.html",
+      "name": "Foundational Aspects of Machine Learning using Python",
+      "description": "Hands-on for 'Foundational Aspects of Machine Learning using Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/neural-networks-with-python/slides.html",
+      "name": "Neural networks using Python",
+      "description": "Slides for 'Neural networks using Python' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/neural-networks-with-python/tutorial.html",
+      "name": "Neural networks using Python",
+      "description": "Hands-on for 'Neural networks using Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/slides.html",
+      "name": "Deep Learning (without Generative Artificial Intelligence) using Python",
+      "description": "Slides for 'Deep Learning (without Generative Artificial Intelligence) using Python' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/tutorial.html",
+      "name": "Deep Learning (without Generative Artificial Intelligence) using Python",
+      "description": "Hands-on for 'Deep Learning (without Generative Artificial Intelligence) using Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.html",
+      "name": "Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences",
+      "description": "Hands-on for 'Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.html",
+      "name": "Fine-tuning a LLM for DNA Sequence Classification",
+      "description": "Hands-on for 'Fine-tuning a LLM for DNA Sequence Classification' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/tutorial.html",
+      "name": "Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM",
+      "description": "Hands-on for 'Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/raphaelmourad/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/raphaelmourad/",
+      "name": "Raphael Mourad",
+      "image": "https://avatars.githubusercontent.com/raphaelmourad",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    }
+  ],
+  "contributor": [],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-sequence-generation/statistics-genomic-llm-sequence-generation.ipynb",
+      "name": "Jupyter Notebook (with Solutions)"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-sequence-generation/statistics-genomic-llm-sequence-generation-course.ipynb",
+      "name": "Jupyter Notebook (without Solutions)"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Statistics and machine learning
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and machine learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/genomic-llm-sequence-generation/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/genomic-llm-sequence-generation/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-statistics">
+    <h1 data-toc-skip>Generating Artificial Yeast DNA Sequences using a DNA LLM</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/raphaelmourad/" class="contributor-badge contributor-raphaelmourad"><img src="https://avatars.githubusercontent.com/raphaelmourad?s=36" alt="Raphael Mourad avatar" width="36" class="avatar" />
+    Raphael Mourad</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How do you set up a computational environment for generating synthetic DNA sequences using pre-trained language models?</p>
+</li>
+        
+        <li><p>What role does the temperature parameter play in controlling the variability of generated DNA sequences?</p>
+</li>
+        
+        <li><p>How can you compare generated synthetic DNA sequences with real genomic sequences using k-mer counts and PCA?</p>
+</li>
+        
+        <li><p>What is the significance of performing BLAST searches on generated DNA sequences, and how do you interpret the results?</p>
+</li>
+        
+        <li><p>How can you detect open reading frames (ORFs) in generated DNA sequences and translate them into amino acid sequences?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Describe the process of generating synthetic DNA sequences using pre-trained language models and explain the significance of temperature settings in controlling sequence variability.</p>
+</li>
+        
+        <li><p>Set up a computational environment (e.g., Google Colab) and configure a pre-trained language model to generate synthetic DNA sequences, ensuring all necessary libraries are installed and configured.</p>
+</li>
+        
+        <li><p>Use k-mer counts and Principal Component Analysis (PCA) to compare generated synthetic DNA sequences with real genomic sequences, identifying similarities and differences.</p>
+</li>
+        
+        <li><p>Perform BLAST searches to assess the novelty of generated DNA sequences and interpret the results to determine the biological relevance and uniqueness of the synthetic sequences.</p>
+</li>
+        
+        <li><p>Develop a pipeline to detect open reading frames (ORFs) within generated DNA sequences and translate them into amino acid sequences, demonstrating the potential for creating novel synthetic genes.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/data-science/tutorials/python-basics/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Introduction to Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Python - Warm-up for statistics and machine learning</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/statistics/tutorials/intro-to-ml-with-python/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Foundational Aspects of Machine Learning using Python</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/intro-to-ml-with-python/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Foundational Aspects of Machine Learning using Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/statistics/tutorials/neural-networks-with-python/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Neural networks using Python</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/neural-networks-with-python/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Neural networks using Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Deep Learning (without Generative Artificial Intelligence) using Python</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Deep Learning (without Generative Artificial Intelligence) using Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Fine-tuning a LLM for DNA Sequence Classification</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/genomic-llm-sequence-generation/statistics-genomic-llm-sequence-generation.ipynb" title="Jupyter Notebook" alt="Generating Artificial Yeast DNA Sequences using a DNA LLM Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr" title="">
+			UseGalaxy.fr
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 17, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 17, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+                <section aria-label="Tutorial Notebook access information" id="tutorial-notebook">
+                     
+                     
+                     
+                     
+                    
+                        <blockquote class="comment">
+                            <div class="box-title">Best viewed in a Jupyter Notebook</div>
+                            <p>
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <!--
+                            <p><b>Launching on MyBinder</b>
+                                Click here and the notebook will launch on MyBinder.org
+                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fstatistics%2Ftutorials%2Fgenomic-llm-sequence-generation%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                            </p>
+                            -->
+                            
+                            <p><b>Run on the GTN with JupyterLite (in-browser computations)</b>
+                                <ol>
+                                    <li><a href="/training-material/jupyter/lab/index.html?path=statistics-genomic-llm-sequence-generation.ipynb">Click to Launch JupyterLite</a></li>
+                                </ol>
+                            </p>
+                            
+                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                                <ol>
+                                    <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                                    <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-sequence-generation/statistics-genomic-llm-sequence-generation.ipynb</code></li>
+                                    <li>Select the notebook that appears in the list of files on the left.</li>
+                                </ol>
+                            </p>
+                            <p><b>Downloading the notebook</b>
+                                <ol>
+                                    <li>Right click one of these links: <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-sequence-generation/statistics-genomic-llm-sequence-generation.ipynb">Jupyter Notebook (With Solutions)</a>, <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-sequence-generation/statistics-genomic-llm-sequence-generation-course.ipynb">Jupyter Notebook (Without Solutions)</a></li>
+                                    <li>Save Link As..</li>
+                                </ol>
+                            </p>
+                        </blockquote>
+                    
+                </section>
+                
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Generating synthetic DNA sequences using pre-trained language models  bridges the fields of synthetic biology and artificial intelligence, enabling the creation of novel DNA sequences that closely mimic natural genomes. By leveraging the power of advanced language models, we can generate biologically relevant sequences that have the potential to revolutionize genetic engineering, drug discovery, and our understanding of genomic function.</p>
+
+<p>Throughout this tutorial, we will learn how to set up a computational environment tailored for DNA sequence generation, configure pre-trained language models to produce synthetic sequences, and analyze the results to assess their biological significance. Here the aim is to generate DNA sequences similar to yeast, more specifically to <em>Saccharomyces cerevisiae</em>.</p>
+
+<p>For this tutorial, we’ll use a <a href="https://huggingface.co/RaphaelMourad/Mistral-DNA-v1-138M-yeast">pre-trained language model</a> which was trained on 1,011 <em>Saccharomyces cerevisiae</em> isolates from <span class="citation"><a href="#peter2018genome">Peter <i>et al.</i> 2018</a></span>. This model has 138 million parameters and uses a mixture of experts architecture, making it efficient and powerful for generating DNA sequences.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model_name</span> <span class="o">=</span> <span class="sh">"</span><span class="s">RaphaelMourad/Mistral-DNA-v1-138M-yeast</span><span class="sh">"</span>
+</code></pre></div></div>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#prepare-resources" id="markdown-toc-prepare-resources">Prepare resources</a>    <ol>
+      <li><a href="#install-dependencies" id="markdown-toc-install-dependencies">Install dependencies</a></li>
+      <li><a href="#import-python-libraries" id="markdown-toc-import-python-libraries">Import Python libraries</a></li>
+      <li><a href="#check-and-configure-available-resources" id="markdown-toc-check-and-configure-available-resources">Check and configure available resources</a></li>
+    </ol>
+  </li>
+  <li><a href="#generate-synthetic-dna-sequences" id="markdown-toc-generate-synthetic-dna-sequences">Generate Synthetic DNA Sequences</a>    <ol>
+      <li><a href="#build-the-sequence-generator" id="markdown-toc-build-the-sequence-generator">Build the Sequence Generator</a></li>
+      <li><a href="#generate-synthetic-dna-sequences-1" id="markdown-toc-generate-synthetic-dna-sequences-1">Generate Synthetic DNA Sequences</a></li>
+      <li><a href="#compare-with-real-yeast-genome" id="markdown-toc-compare-with-real-yeast-genome">Compare with Real Yeast Genome</a></li>
+      <li><a href="#checking-for-novelty-in-generated-dna-sequences-using-blast" id="markdown-toc-checking-for-novelty-in-generated-dna-sequences-using-blast">Checking for Novelty in Generated DNA Sequences Using BLAST</a></li>
+    </ol>
+  </li>
+  <li><a href="#exploring-synthetic-gene-generation" id="markdown-toc-exploring-synthetic-gene-generation">Exploring Synthetic Gene Generation</a>    <ol>
+      <li><a href="#detecting-open-reading-frames-orfs" id="markdown-toc-detecting-open-reading-frames-orfs">Detecting Open Reading Frames (ORFs)</a></li>
+      <li><a href="#extracting-and-translating-detected-open-reading-frames-orfs" id="markdown-toc-extracting-and-translating-detected-open-reading-frames-orfs">Extracting and Translating Detected Open Reading Frames (ORFs)</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="prepare-resources">Prepare resources</h1>
+
+<h2 id="install-dependencies">Install dependencies</h2>
+
+<p>The first step is to install the required dependencies:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">Bio</span><span class="o">==</span><span class="mf">1.7</span><span class="p">.</span><span class="mi">1</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">orfipy</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">sklearn</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">transformers</span> <span class="o">-</span><span class="n">U</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">torch</span><span class="o">==</span><span class="mf">2.5</span><span class="p">.</span><span class="mi">0</span>
+</code></pre></div></div>
+
+<h2 id="import-python-libraries">Import Python libraries</h2>
+
+<p>Let’s now import them.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
+
+<span class="kn">import</span> <span class="n">itertools</span>
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">orfipy_core</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">from</span> <span class="n">Bio</span> <span class="kn">import</span> <span class="p">(</span><span class="n">SeqIO</span><span class="p">,</span> <span class="n">Seq</span><span class="p">)</span>
+<span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="n">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+</code></pre></div></div>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-versions-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Versions</div>
+
+  <p>This tutorial has been tested with following versions:</p>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">numpy</code> &gt; 1.26.4</li>
+    <li><code class="language-plaintext highlighter-rouge">transformers</code> &gt; 4.47.1</li>
+  </ul>
+
+  <p>You can check the versions with:</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="p">.</span><span class="n">__version__</span>
+<span class="n">transformers</span><span class="p">.</span><span class="n">__version__</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<h2 id="check-and-configure-available-resources">Check and configure available resources</h2>
+
+<p>Let’s check the GPU usage and RAM:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span>
+</code></pre></div></div>
+
+<p>Let’s configure PyTorch and the CUDA environment – software and hardware ecosystem provided by NVIDIA to enable parallel computing on GPU – to optimize GPU memory usage and performance:</p>
+
+<ol>
+  <li>
+    <p>Enables CuDNN benchmarking in PyTorch:</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">torch</span><span class="p">.</span><span class="n">backends</span><span class="p">.</span><span class="n">cudnn</span><span class="p">.</span><span class="n">benchmark</span><span class="o">=</span><span class="bp">True</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Set an environment variable that configures how PyTorch manages CUDA memory allocations</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">"</span><span class="s">PYTORCH_CUDA_ALLOC_CONF</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">max_split_size_mb:32</span><span class="sh">"</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h1 id="generate-synthetic-dna-sequences">Generate Synthetic DNA Sequences</h1>
+
+<p>Using the pre-trained language model which was trained on 1,011 <em>Saccharomyces cerevisiae</em> isolates, we would like to generate 100 synthetic yeast DNA sequences.</p>
+
+<h2 id="build-the-sequence-generator">Build the Sequence Generator</h2>
+
+<p>First, we need to set up the sequence generation pipeline. This pipeline will enable us to generate synthetic DNA sequences that mimic natural genomic sequences. By leveraging the power of language models, we can create novel DNA sequences for various applications in synthetic biology.</p>
+
+<p>We use the <code class="language-plaintext highlighter-rouge">pipeline</code> function from the <code class="language-plaintext highlighter-rouge">transformers</code> library which simplifies the process of setting up a sequence generation pipeline. It abstracts away the complexities of model loading and configuration, allowing us to focus on generating sequences.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">generator</span> <span class="o">=</span> <span class="nf">pipeline</span><span class="p">(</span><span class="sh">"</span><span class="s">text-generation</span><span class="sh">"</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What do the parameters <code class="language-plaintext highlighter-rouge">"text-generation"</code>?</li>
+    <li>What is a pipeline?</li>
+    <li>What are the different types of pipelines?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>
+        <p>It specifies that we are creating a pipeline for text generation, which is suitable for generating DNA sequences.</p>
+      </li>
+      <li>
+        <p>Pipelines are high-level abstractions that simplify the process of applying models to various NLP tasks</p>
+      </li>
+      <li>
+        <p>Besides text-generation, there are several other types of pipelines designed for different applications. Here are some of the most commonly used pipelines:</p>
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">feature-extraction</code>: Extracts features (embeddings) from text using a model. Useful for tasks that require text representation, such as clustering or similarity measurement.</li>
+          <li><code class="language-plaintext highlighter-rouge">sentiment-analysis</code>: Determines the sentiment of a given text, classifying it as positive, negative, or neutral.</li>
+          <li><code class="language-plaintext highlighter-rouge">text-classification</code>: Classifies text into predefined categories or labels, useful for tasks like spam detection, topic classification, etc.</li>
+          <li><code class="language-plaintext highlighter-rouge">token-classification</code>: Assigns a label to each token in the input text, commonly used for Named Entity Recognition (NER) and Part-Of-Speech (POS) tagging.</li>
+          <li><code class="language-plaintext highlighter-rouge">question-answering</code>: Answers questions based on a given context or passage of text. Useful for building Q&amp;A systems.</li>
+          <li><code class="language-plaintext highlighter-rouge">fill-mask</code>: Predicts the missing word(s) in a sentence with a masked token, often used with models like BERT.</li>
+          <li><code class="language-plaintext highlighter-rouge">summarization</code>: Generates a concise summary of a longer text, useful for creating abstracts or condensing information.</li>
+          <li><code class="language-plaintext highlighter-rouge">translation</code>: Translates text from one language to another, supporting various language pairs.</li>
+          <li><code class="language-plaintext highlighter-rouge">conversational</code>: Engages in a conversation by generating responses based on input prompts, useful for building chatbots.</li>
+          <li><code class="language-plaintext highlighter-rouge">zero-shot-classification</code>: Classifies text into categories that were not seen during training, allowing for flexible and dynamic classification tasks.</li>
+          <li><code class="language-plaintext highlighter-rouge">table-question-answering</code>: Answers questions based on structured data, such as tables, combining NLP with data querying capabilities.</li>
+        </ul>
+
+        <p>Each of these pipelines is designed to handle specific NLP tasks efficiently, leveraging pre-trained models to provide accurate and fast results. You can initialize these pipelines using the pipeline function from the transformers library, specifying the task you want to perform.</p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="generate-synthetic-dna-sequences-1">Generate Synthetic DNA Sequences</h2>
+
+<p>Once the pipeline is set up, we can generate synthetic DNA sequences by calling the generator with appropriate parameters. We first need to specify the parameters for sequence generation:</p>
+
+<ul>
+  <li>
+    <p>Maximum length of the generated sequence in term of tokens (i.e. k-mers of 3 to 7 bases)</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">max_length</span> <span class="o">=</span> <span class="mi">30</span> 
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Number of sequences to generate</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">num_sequences</span> <span class="o">=</span> <span class="mi">100</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>The temperature:</p>
+
+    <p>It controls the randomness of the generated sequences. A higher temperature results in more varied outputs, while a lower temperature produces more deterministic sequences.</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.1</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>Let’s now generate the sequences:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">synthetic_dna</span> <span class="o">=</span> <span class="nf">generator</span><span class="p">(</span>
+  <span class="sh">""</span><span class="p">,</span>
+  <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span><span class="p">,</span>
+  <span class="n">do_sample</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+  <span class="n">top_k</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+  <span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">,</span>
+  <span class="n">repetition_penalty</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+  <span class="n">num_return_sequences</span><span class="o">=</span><span class="n">num_sequences</span><span class="p">,</span>
+  <span class="n">eos_token_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What do the parameters?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">""</code></li>
+    <li><code class="language-plaintext highlighter-rouge">do_sample=True</code></li>
+    <li><code class="language-plaintext highlighter-rouge">top_k=50</code></li>
+    <li><code class="language-plaintext highlighter-rouge">repetition_penalty=1.2</code></li>
+    <li><code class="language-plaintext highlighter-rouge">eos_token_id=-0</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>
+        <p>Starting prompt (empty for unconditional generation)</p>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">do_sample=True</code>: When set to <code class="language-plaintext highlighter-rouge">True</code>, the model uses sampling to generate sequences, which introduces randomness and variability in the output.</li>
+      <li><code class="language-plaintext highlighter-rouge">top_k=50</code>: Limits the generated tokens to the top k most probable tokens. This helps in controlling the diversity of the output while ensuring biological relevance.</li>
+      <li><code class="language-plaintext highlighter-rouge">repetition_penalty=1.2</code>: Penalizes the repetition of the same token in the generated sequence. A value greater than 1.0 discourages the model from repeating tokens, promoting diversity.</li>
+      <li><code class="language-plaintext highlighter-rouge">eos_token_id=0</code>: Specifies the end-of-sequence token ID, which signals the model to stop generating further tokens. This is useful for controlling the termination of sequence generation</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Let’s extract the sequences:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">artificial_sequences</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">seq</span> <span class="ow">in</span> <span class="n">synthetic_dna</span><span class="p">:</span>
+    <span class="n">artificial_sequences</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">seq</span><span class="p">[</span><span class="sh">"</span><span class="s">generated_text</span><span class="sh">"</span><span class="p">].</span><span class="nf">replace</span><span class="p">(</span><span class="sh">"</span><span class="s"> </span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">))</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What is the length of the 5 first sequences?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+  <span class="nf">print</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">artificial_sequences</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</code></pre></div>    </div>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-generate-random-sequences-from-a-sequence-seed-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-generate-random-sequences-from-a-sequence-seed-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Generate random sequences from a sequence seed</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>To generate artificial DNA sequence starting by a defined substring, e.g. “TATA”, we replace <code class="language-plaintext highlighter-rouge">""</code> in <code class="language-plaintext highlighter-rouge">generator</code> function by the defined substring:</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">synthetic_dna</span> <span class="o">=</span> <span class="nf">generator</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">TATA</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span><span class="p">,</span>
+    <span class="n">do_sample</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">top_k</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+    <span class="n">repetition_penalty</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+    <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">eos_token_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">artificial_sequences</span> <span class="o">=</span> <span class="p">[</span><span class="n">seq</span><span class="p">[</span><span class="sh">"</span><span class="s">generated_text</span><span class="sh">"</span><span class="p">].</span><span class="nf">replace</span><span class="p">(</span><span class="sh">"</span><span class="s"> </span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">)</span> <span class="k">for</span> <span class="n">seq</span> <span class="ow">in</span> <span class="n">synthetic_dna</span><span class="p">]</span>
+<span class="n">artificial_sequences</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</code></pre></div>  </div>
+
+</blockquote>
+
+<h2 id="compare-with-real-yeast-genome">Compare with Real Yeast Genome</h2>
+
+<p>We would like to compare the generated sequences to real sequences from <em>Saccharomyces cerevisiae</em>.</p>
+
+<p>Let’s download the yeast genome assembly:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">hgdownload</span><span class="p">.</span><span class="n">soe</span><span class="p">.</span><span class="n">ucsc</span><span class="p">.</span><span class="n">edu</span><span class="o">/</span><span class="n">goldenPath</span><span class="o">/</span><span class="n">sacCer3</span><span class="o">/</span><span class="n">bigZips</span><span class="o">/</span><span class="n">sacCer3</span><span class="p">.</span><span class="n">fa</span><span class="p">.</span><span class="n">gz</span>
+<span class="err">!</span><span class="n">gunzip</span> <span class="n">sacCer3</span><span class="p">.</span><span class="n">fa</span><span class="p">.</span><span class="n">gz</span>
+</code></pre></div></div>
+
+<p>We would like now to extract 1,000 random sequences of a length 100 bases from the downloaded genome:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">extract_random_sequences</span><span class="p">(</span>
+    <span class="n">genome_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">seq_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="n">num_seqs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">
+    Extracts random sequences from a genome FASTA file.
+
+    Parameters:
+    - genome_file (str): Path to the genome FASTA file.
+    - seq_length (int): Length of each sequence to extract.
+    - num_seqs (int): Number of sequences to extract.
+
+    Returns:
+    - List[str]: A list of extracted sequences.
+    </span><span class="sh">"""</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Load genome sequences from the FASTA file
+</span>        <span class="n">genome</span> <span class="o">=</span> <span class="p">[</span><span class="nf">str</span><span class="p">(</span><span class="n">record</span><span class="p">.</span><span class="n">seq</span><span class="p">)</span> <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">SeqIO</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">genome_file</span><span class="p">,</span> <span class="sh">"</span><span class="s">fasta</span><span class="sh">"</span><span class="p">)]</span>
+
+        <span class="c1"># Join all chromosomes or scaffolds into one large sequence
+</span>        <span class="n">genome_seq</span> <span class="o">=</span> <span class="sh">""</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">genome</span><span class="p">)</span>
+        <span class="n">genome_size</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">genome_seq</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">genome_size</span> <span class="o">&lt;</span> <span class="n">seq_length</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">Sequence length is larger than the genome size.</span><span class="sh">"</span><span class="p">)</span>
+
+        <span class="c1"># List to store extracted sequences
+</span>        <span class="n">extracted_seqs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Extract random sequences
+</span>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">num_seqs</span><span class="p">):</span>
+            <span class="n">start_pos</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">genome_size</span> <span class="o">-</span> <span class="n">seq_length</span><span class="p">)</span>  <span class="c1"># Random start position
+</span>            <span class="n">sequence</span> <span class="o">=</span> <span class="n">genome_seq</span><span class="p">[</span><span class="n">start_pos</span><span class="p">:</span><span class="n">start_pos</span> <span class="o">+</span> <span class="n">seq_length</span><span class="p">]</span>  <span class="c1"># Extract sequence
+</span>            <span class="n">extracted_seqs</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">extracted_seqs</span>
+
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">An error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+<span class="n">genome_file</span> <span class="o">=</span> <span class="sh">"</span><span class="s">sacCer3.fa</span><span class="sh">"</span>  <span class="c1"># Path to the yeast genome FASTA file
+</span><span class="n">real_sequences</span> <span class="o">=</span> <span class="nf">extract_random_sequences</span><span class="p">(</span><span class="n">genome_file</span><span class="p">,</span> <span class="n">seq_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">num_seqs</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>To compare synthetic and real DNA sequences, we utilize k-mer counts as a method to numerically describe and analyze DNA sequences. K-mers are short, overlapping subsequences of a fixed length \(k\) within a DNA sequence. We can think of k-mers as “words” within the DNA sequence. Just as paragraphs in text share common words, similar DNA sequences will share common k-mers. By counting the occurrences of these k-mers, we can transform DNA sequences into numerical vectors, allowing us to compare them quantitatively. <strong>Sequences that are very similar are expected to have similar k-mer counts</strong>, much like how similar texts share common vocabulary. By comparing the k-mer counts of synthetic and real DNA sequences, we can assess their similarity. If two sequences share many k-mers, it indicates that they are likely to be similar in composition and structure.</p>
+
+<p>This approach leverages the power of k-mer analysis to provide insights into the similarity between synthetic and real DNA sequences, aiding in the validation and evaluation of synthetic biology techniques.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">generate_all_kmers</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">
+    Generate all possible k-mers of a given length.
+
+    Parameters:
+    - k (int): Length of each k-mer.
+
+    Returns:
+    - List[str]: A list of all possible k-mers.
+    </span><span class="sh">"""</span>
+    <span class="k">return</span> <span class="p">[</span><span class="sh">""</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">itertools</span><span class="p">.</span><span class="nf">product</span><span class="p">(</span><span class="sh">"</span><span class="s">ACGT</span><span class="sh">"</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">k</span><span class="p">)]</span>
+
+<span class="k">def</span> <span class="nf">kmer_counts_matrix</span><span class="p">(</span><span class="n">sequences</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="p">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+    <span class="sh">"""</span><span class="s">
+    Compute k-mer counts for a list of sequences and return a count matrix.
+
+    Parameters:
+    - sequences (List[str]): List of DNA sequences.
+    - k (int): Length of each k-mer. Default is 6.
+
+    Returns:
+    - Tuple[np.ndarray, List[str]]: A tuple containing the k-mer count matrix and the list of all possible k-mers.
+    </span><span class="sh">"""</span>
+    <span class="n">all_kmers</span> <span class="o">=</span> <span class="nf">generate_all_kmers</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">kmer_index</span> <span class="o">=</span> <span class="p">{</span><span class="n">kmer</span><span class="p">:</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">kmer</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">all_kmers</span><span class="p">)}</span>  <span class="c1"># Map k-mers to column indices
+</span>    <span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">zeros</span><span class="p">((</span><span class="nf">len</span><span class="p">(</span><span class="n">sequences</span><span class="p">),</span> <span class="nf">len</span><span class="p">(</span><span class="n">all_kmers</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>  <span class="c1"># Initialize count matrix
+</span>
+    <span class="k">for</span> <span class="n">seq_idx</span><span class="p">,</span> <span class="n">seq</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">sequences</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Sequence length is less than </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s"> for sequence </span><span class="si">{</span><span class="n">seq_idx</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">seq</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+        <span class="n">kmer_dict</span> <span class="o">=</span> <span class="nf">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span> <span class="o">-</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">kmer</span> <span class="o">=</span> <span class="n">seq</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="p">]</span>
+            <span class="n">kmer_dict</span><span class="p">[</span><span class="n">kmer</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Fill in the matrix for this sequence
+</span>        <span class="k">for</span> <span class="n">kmer</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">kmer_dict</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">kmer</span> <span class="ow">in</span> <span class="n">kmer_index</span><span class="p">:</span>
+                <span class="n">matrix</span><span class="p">[</span><span class="n">seq_idx</span><span class="p">,</span> <span class="n">kmer_index</span><span class="p">[</span><span class="n">kmer</span><span class="p">]]</span> <span class="o">=</span> <span class="n">count</span>
+
+    <span class="k">return</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">all_kmers</span>
+</code></pre></div></div>
+
+<p>Let’s now count 4-mers for artificial and real sequences.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">k</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">artificial_seq_kmer_counts</span><span class="p">,</span> <span class="n">kmers</span> <span class="o">=</span> <span class="nf">kmer_counts_matrix</span><span class="p">(</span><span class="n">artificial_sequences</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+<span class="n">real_seq_kmer_counts</span><span class="p">,</span> <span class="n">kmers</span> <span class="o">=</span> <span class="nf">kmer_counts_matrix</span><span class="p">(</span><span class="n">real_sequences</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What is the format of <code class="language-plaintext highlighter-rouge">artificial_seq_kmer_counts</code> and <code class="language-plaintext highlighter-rouge">real_seq_kmer_counts</code>?</li>
+    <li>What are the dimensions?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">artificial_seq_kmer_counts</code> and <code class="language-plaintext highlighter-rouge">real_seq_kmer_counts</code> are 2-matrices.</li>
+      <li>100 x 256 (\(256 = 4^{4}\))</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>To visualize and compare real and generated DNA sequences in a continuous space, we can utilize Principal Component Analysis (PCA). PCA is a powerful dimensionality reduction technique that transforms high-dimensional data into a lower-dimensional space while preserving as much variability as possible. This allows us to visualize the similarities and differences between the sequences effectively.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">plot_pca_projection</span><span class="p">(</span><span class="n">set1</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">set2</span><span class="p">:</span> <span class="n">np</span><span class="p">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sh">"</span><span class="s">PCA Projection</span><span class="sh">"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">
+    Fit PCA on set1 and project both set1 and set2 into the PCA space, then plot the results.
+
+    Parameters:
+    - set1 (np.ndarray): K-mer count matrix for the first set of sequences (used to fit PCA).
+    - set2 (np.ndarray): K-mer count matrix for the second set of sequences (projected into PCA space).
+    - title (str): Title of the plot.
+
+    Returns:
+    - None
+    </span><span class="sh">"""</span>
+    <span class="c1"># Fit PCA on set1 only
+</span>    <span class="n">pca</span> <span class="o">=</span> <span class="nc">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">pca</span><span class="p">.</span><span class="nf">fit</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
+
+    <span class="c1"># Project both set1 and set2 into the PCA space
+</span>    <span class="n">pca_set1</span> <span class="o">=</span> <span class="n">pca</span><span class="p">.</span><span class="nf">transform</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>
+    <span class="n">pca_set2</span> <span class="o">=</span> <span class="n">pca</span><span class="p">.</span><span class="nf">transform</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>
+
+    <span class="c1"># Plot the first two principal components
+</span>    <span class="n">plt</span><span class="p">.</span><span class="nf">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">scatter</span><span class="p">(</span>
+        <span class="n">pca_set1</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">pca_set1</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="sh">"</span><span class="s">blue</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="sh">"</span><span class="s">Real sequences</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">scatter</span><span class="p">(</span>
+        <span class="n">pca_set2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">pca_set2</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="sh">"</span><span class="s">red</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="sh">"</span><span class="s">Artificial sequences</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Add labels and legend
+</span>    <span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">"</span><span class="s">Principal Component 1</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">"</span><span class="s">Principal Component 2</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="p">.</span><span class="nf">legend</span><span class="p">()</span>
+
+    <span class="c1"># Show the plot
+</span>    <span class="n">plt</span><span class="p">.</span><span class="nf">show</span><span class="p">()</span>
+
+
+<span class="nf">plot_pca_projection</span><span class="p">(</span><span class="n">real_seq_kmer_counts</span><span class="p">,</span> <span class="n">artificial_seq_kmer_counts</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><a href="./images/pca_k_4_t_0_1.png" rel="noopener noreferrer"><img src="./images/pca_k_4_t_0_1.png" alt="Scatter plot titled 'PCA Projection of Set1 and Set2 (PCA built from Set1)' displaying the first two principal components. Blue dots represent 'Real sequences' and red dots represent 'Artificial sequences.' The x-axis is labeled 'Principal Component 1' and the y-axis is labeled 'Principal Component 2.' The plot shows a dense cluster of points near the origin with some outliers, indicating the distribution and overlap between real and artificial sequences in the PCA space." width="689" height="547" loading="lazy" /></a></p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On</div>
+
+  <p>For different temperature values (\(0.001\), \(0.01\), \(0.1\), \(0.5\), \(1.0\), \(1.5\)):</p>
+  <ol>
+    <li>Generate synthetic DNA sequences</li>
+    <li>Observe the 5 first generated sequences</li>
+    <li>Generate the PCA plots</li>
+    <li>Compute the variance of k-mers counts between artificial sequences</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">def</span> <span class="nf">generate_synthetic_dna</span><span class="p">(</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">max_length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">num_sequences</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">temp</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">top_k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="n">repetition_penalty</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.2</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sh">"""</span><span class="s">
+    Generate synthetic DNA sequences using a pre-trained language model.
+    
+    Parameters:
+    - model_name (str): Name or path of the pre-trained model.
+    - max_length (int): Maximum length of each generated sequence.
+    - num_sequences (int): Number of sequences to generate.
+    - temp (float): Temperature value to control sequence variability.
+    - top_k (int): Number of highest probability vocabulary tokens to consider. Default is 50.
+    - repetition_penalty (float): Penalty for repeating the same token. Default is 1.2.
+    
+    Returns:
+    - List[str]: List of generated DNA sequences.
+    </span><span class="sh">"""</span>
+    <span class="c1"># Initialize the sequence generation pipeline
+</span>    <span class="n">generator</span> <span class="o">=</span> <span class="nf">pipeline</span><span class="p">(</span><span class="sh">"</span><span class="s">text-generation</span><span class="sh">"</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="c1"># Generate synthetic DNA sequences
+</span>    <span class="n">synthetic_dna</span> <span class="o">=</span> <span class="nf">generator</span><span class="p">(</span>
+       <span class="sh">""</span><span class="p">,</span>
+       <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span><span class="p">,</span>
+       <span class="n">do_sample</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+       <span class="n">top_k</span><span class="o">=</span><span class="n">top_k</span><span class="p">,</span>
+       <span class="n">temperature</span><span class="o">=</span><span class="n">temp</span><span class="p">,</span>
+       <span class="n">repetition_penalty</span><span class="o">=</span><span class="n">repetition_penalty</span><span class="p">,</span>
+       <span class="n">num_return_sequences</span><span class="o">=</span><span class="n">num_sequences</span><span class="p">,</span>
+       <span class="n">eos_token_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># Extract and clean the generated sequences
+</span>    <span class="n">artificial_sequences</span> <span class="o">=</span> <span class="p">[</span><span class="n">seq</span><span class="p">[</span><span class="sh">"</span><span class="s">generated_text</span><span class="sh">"</span><span class="p">].</span><span class="nf">replace</span><span class="p">(</span><span class="sh">"</span><span class="s"> </span><span class="sh">"</span><span class="p">,</span> <span class="sh">""</span><span class="p">)</span> <span class="k">for</span> <span class="n">seq</span> <span class="ow">in</span> <span class="n">synthetic_dna</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">artificial_sequences</span>
+
+
+<span class="n">temperatures</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">temperatures</span><span class="p">:</span>
+    <span class="n">art_sequences</span> <span class="o">=</span> <span class="nf">generate_synthetic_dna</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">max_length</span><span class="p">,</span>  <span class="n">num_sequences</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+    <span class="n">art_seq_kmer_counts</span><span class="p">,</span> <span class="n">kmers</span> <span class="o">=</span> <span class="nf">kmer_counts_matrix</span><span class="p">(</span><span class="n">art_sequences</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+    <span class="nf">plot_pca_projection</span><span class="p">(</span><span class="n">real_seq_kmer_counts</span><span class="p">,</span> <span class="n">art_seq_kmer_counts</span><span class="p">)</span>
+    <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">var</span><span class="p">(</span><span class="n">art_seq_kmer_counts</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Variance for temperature of </span><span class="si">{</span> <span class="n">temp</span> <span class="si">}</span><span class="s">: </span><span class="si">{</span> <span class="n">var</span> <span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How similar do the 5 first generated DNA sequences look like given the temperature?</li>
+    <li>What are the different values for the variance?</li>
+    <li>What can we conclude?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Lower the temperature, more similar the sequences.</li>
+      <li>The variance for the different temperatures are:
+        <ul>
+          <li>Variance \(=\) for temperature \(= 0.001\)</li>
+          <li>Variance \(=\) for temperature \(= 0.01\)</li>
+          <li>Variance \(=\) for temperature \(= 0.1\)</li>
+          <li>Variance \(=\) for temperature \(= 0.5\)</li>
+          <li>Variance \(=\) for temperature \(= 1\)</li>
+          <li>Variance \(=\) for temperature \(= 1.5\)</li>
+        </ul>
+      </li>
+      <li>Higher the temperature, higher the variance, higher the variability.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="checking-for-novelty-in-generated-dna-sequences-using-blast">Checking for Novelty in Generated DNA Sequences Using BLAST</h2>
+
+<p>After generating synthetic DNA sequences, it’s crucial to verify whether these sequences are truly novel or if they closely resemble existing sequences in biological databases. One effective method to accomplish this is by performing a BLAST (Basic Local Alignment Search Tool) search (<span class="citation"><a href="#altschul1990basic">Altschul <i>et al.</i> 1990</a></span>). BLAST allows us to compare our generated sequences against a comprehensive database of known DNA sequences, helping us determine their uniqueness and potential biological relevance.</p>
+
+<p>Let’s start with a synthetic DNA sequence generated with a low temperature setting. Low temperature settings reduce variability, making the generated sequences more similar to real sequences. This step helps ensure that the sequence is biologically plausible and likely to have counterparts in existing databases.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On</div>
+
+  <ol>
+    <li>Generate the synthetic DNA sequences with a temperature value of \(0.01\)</li>
+    <li>Get the first sequence</li>
+    <li>Make a <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&amp;PAGE_TYPE=BlastSearch&amp;LINK_LOC=blasthome">Standard Nucleotide BLAST search</a> of the first sequence</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">art_sequences</span> <span class="o">=</span> <span class="nf">generate_synthetic_dna</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">max_length</span><span class="p">,</span>  <span class="n">num_sequences</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">art_sequences</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-14"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many significant similarities have been found?</li>
+    <li>Have we generated new sequence?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The BLAST search do not return any significant match</li>
+      <li>When the BLAST search returns no significant matches, it suggests that the synthetic sequence is novel and does not closely resemble any known sequences. This outcome is particularly interesting because it indicates that the sequence generation process has produced something entirely new.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>When generating sequences with low temperature, we observed limited variability among the sequences. This lack of variability can be useful for ensuring consistency but may limit the exploration of novel sequence spaces. To introduce more variability and potentially discover even more novel sequences, we can increase the temperature setting during sequence generation. Higher temperatures introduce greater randomness, leading to more diverse and potentially unique sequences.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-5"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On</div>
+
+  <ol>
+    <li>Generate the synthetic DNA sequences with a temperature value of \(1\)</li>
+    <li>Get the first sequence</li>
+    <li>Make a <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&amp;PAGE_TYPE=BlastSearch&amp;LINK_LOC=blasthome">Standard Nucleotide BLAST search</a> of the first sequence</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-20"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-20" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">art_sequences</span> <span class="o">=</span> <span class="nf">generate_synthetic_dna</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">max_length</span><span class="p">,</span>  <span class="n">num_sequences</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">art_sequences</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many significant similarities have been found?</li>
+    <li>Have we generated new sequence?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-21"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-21" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The BLAST search do not return any significant match</li>
+      <li>When the BLAST search returns no significant matches, it suggests that the synthetic sequence is novel and does not closely resemble any known sequences. This outcome is particularly interesting because it indicates that the sequence generation process has produced something entirely new.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Even if the generated sequences are novel, novelty alone does not guarantee functionality, so further analysis may be necessary to assess the potential applications of these sequences.</p>
+
+<h1 id="exploring-synthetic-gene-generation">Exploring Synthetic Gene Generation</h1>
+
+<p>Having successfully generated and analyzed synthetic DNA sequences, the next intriguing question is: Can we extend this approach to generate entire synthetic genes? This endeavor requires producing longer sequences that mimic the complexity and functionality of natural genes. The mean length of yeast genes is several hundred bases. To effectively mimic natural genes, our synthetic sequences must match this length while maintaining biological plausibility. Generating longer sequences is not merely about increasing length; it’s about ensuring that these sequences contain the necessary genetic elements, such as promoters, coding regions, and regulatory sequences, that are essential for gene function.</p>
+
+<p>To start, we generate 10 sequences with <code class="language-plaintext highlighter-rouge">max_length = 400</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">synthetic_dna</span> <span class="o">=</span> <span class="nf">generate_synthetic_dna</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-16"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How long are the first 5 sequences?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-22"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-22" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="detecting-open-reading-frames-orfs">Detecting Open Reading Frames (ORFs)</h2>
+
+<p>To determine if the generated sequences could contain genes, we examine them for the presence of key genetic elements, such as Open Reading Frames (ORFs).</p>
+
+<p>An ORF is a portion of a DNA sequence that begins with a start codon (e.g., ATG) and ends with a stop codon (e.g., TAA, TAG, TGA). Identifying ORFs is essential for determining the potential functionality of synthetic DNA sequences, as ORFs can indicate whether a sequence could encode a protein.</p>
+
+<p>To detect ORFs in sequences, we use <code class="language-plaintext highlighter-rouge">orfipy_core</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">detect_orfs</span><span class="p">(</span>
+    <span class="n">sequence</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">minlen</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="n">maxlen</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+    <span class="sh">"""</span><span class="s">
+    Detect ORFs in a given DNA sequence.
+
+    Parameters:
+    - sequence (str): The DNA sequence to analyze.
+    - minlen (int): Minimum length of ORFs to detect. Default is 100.
+    - maxlen (int): Maximum length of ORFs to detect. Default is 1000.
+
+    Returns:
+    - List[Tuple[int, int, str, str]]: List of ORFs with start, stop positions, strand, and description.
+    </span><span class="sh">"""</span>
+    <span class="n">orfs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">strand</span><span class="p">,</span> <span class="n">description</span> <span class="ow">in</span> <span class="n">orfipy_core</span><span class="p">.</span><span class="nf">orfs</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">minlen</span><span class="o">=</span><span class="n">minlen</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="n">maxlen</span><span class="p">):</span>
+        <span class="n">orfs</span><span class="p">.</span><span class="nf">append</span><span class="p">((</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">strand</span><span class="p">,</span> <span class="n">description</span><span class="p">))</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Start: </span><span class="si">{</span><span class="n">start</span><span class="si">}</span><span class="s">, Stop: </span><span class="si">{</span><span class="n">stop</span><span class="si">}</span><span class="s">, Strand: </span><span class="si">{</span><span class="n">strand</span><span class="si">}</span><span class="s">, Description: </span><span class="si">{</span><span class="n">description</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">orfs</span>
+</code></pre></div></div>
+
+<p>Let’s extract the ORFs for the first DNA sequence:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seq</span> <span class="o">=</span> <span class="n">artificial_sequences</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">orfs</span> <span class="o">=</span> <span class="nf">detect_orfs</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-17"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How many ORFs have been detected for the first DNA sequence?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-23"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-23" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="extracting-and-translating-detected-open-reading-frames-orfs">Extracting and Translating Detected Open Reading Frames (ORFs)</h2>
+
+<p>After detecting Open Reading Frames (ORFs) in our synthetic DNA sequences, the next step is to extract these ORFs and translate them into protein sequences. This process allows us to explore the potential protein products encoded by our synthetic genes, providing insights into their possible functions and biological roles.</p>
+
+<p>To extract and translate the ORFs, we need to:</p>
+
+<ol>
+  <li>Extract the ORF Sequence: Using the start and stop positions identified by the <code class="language-plaintext highlighter-rouge">detect_orfs</code> function, we can extract the corresponding DNA sequence for each ORF. This sequence represents the potential protein-coding region within the synthetic DNA.</li>
+  <li>Translate the ORF: We can convert the DNA sequence of the ORF into its corresponding amino acid sequence. This step reveals the potential protein product encoded by the ORF.</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">extract_and_translate_orf</span><span class="p">(</span>
+    <span class="n">sequence</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">orfs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span>
+    <span class="n">orf_index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">
+    Extract an ORF from a DNA sequence and translate it into a protein sequence.
+
+    Parameters:
+    - sequence (str): The DNA sequence containing the ORF.
+    - orfs (List[Tuple[int, int, str, str]]): List of detected ORFs with start, stop positions, strand, and description.
+    - orf_index (int): Index of the ORF to extract and translate. Default is 0.
+
+    Returns:
+    - str: The translated protein sequence.
+    </span><span class="sh">"""</span>
+    <span class="c1"># Extract the ORF sequence using the start and stop positions
+</span>    <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">strand</span><span class="p">,</span> <span class="n">description</span> <span class="o">=</span> <span class="n">orfs</span><span class="p">[</span><span class="n">orf_index</span><span class="p">]</span>
+    <span class="n">orf_sequence</span> <span class="o">=</span> <span class="n">sequence</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">]</span>
+
+    <span class="c1"># Translate the ORF sequence into a protein sequence
+</span>    <span class="n">protein_sequence</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="nc">Seq</span><span class="p">(</span><span class="n">orf_sequence</span><span class="p">).</span><span class="nf">translate</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">protein_sequence</span>
+</code></pre></div></div>
+
+<p>For the first detected ORFs:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">protein_seq</span> <span class="o">=</span> <span class="nf">extract_and_translate_orf</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">orfs</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Translated Protein Sequence: </span><span class="si">{</span><span class="n">protein_seq</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>After translating a synthetic DNA sequence into a protein sequence, the next crucial step is to analyze this sequence to uncover its potential biological function. This involves identifying known protein domains or motifs within the sequence that may indicate specific functions, such as binding sites or active regions. Verifying the biological plausibility of the translated sequence is essential, which can be achieved by comparing it to known protein sequences in databases like UniProt or GenBank using tools like Diamond and InterProScan. Additionally, examining the conservation of the sequence across different species can provide insights into its functional importance. If the sequence shows potential for biological function, it can serve as a starting point for further research, including structural modeling to predict its three-dimensional structure, functional assays to test its activity, and evolutionary studies to understand its origins and adaptations. This comprehensive analysis not only enhances our understanding of the generated sequences but also opens new avenues for scientific exploration and application in synthetic biology and genetic engineering.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>Throughout this tutorial, we have explored the process of generating synthetic DNA sequences using a DNA Language Model (LLM), focusing on creating sequences that mimic the complexity and functionality of natural yeast genomes. We began by building a sequence generator, leveraging pre-trained models to produce synthetic DNA sequences with controlled variability.</p>
+
+<p>We compared of these synthetic sequences to real yeast genomes, utilizing k-mer counts and Principal Component Analysis (PCA) to visualize and assess their similarities and differences. This comparative analysis provided valuable insights into how well our generated sequences aligned with natural counterparts, highlighting both the strengths and areas for improvement in our approach.</p>
+
+<p>To ensure the novelty of our generated sequences, we conducted BLAST searches, confirming that many of our synthetic sequences were indeed unique and did not closely match existing sequences in biological databases. This step was crucial in validating the potential of our model to produce truly innovative DNA sequences.</p>
+
+<p>Expanding our exploration, we delved into the realm of synthetic gene generation. By detecting Open Reading Frames (ORFs) within our synthetic sequences, we identified potential protein-coding regions that could be translated into amino acid sequences. This process allowed us to analyze the biological relevance and potential functions of the proteins encoded by our synthetic genes, opening avenues for further research and application.</p>
+
+<p>In conclusion, this tutorial has demonstrated the power and potential of DNA LLMs in generating synthetic DNA sequences and exploring synthetic gene generation. By combining advanced computational techniques with biological insights, we have shown how to create novel sequences that not only mimic natural genomes but also offer new possibilities for synthetic biology and genetic engineering. As we continue to refine these methods, the future holds exciting prospects for innovation and discovery in the field of genomics.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>DNA Language Models (LLMs) are effective tools for generating synthetic DNA sequences that mimic natural genomes, offering a powerful approach for exploring and innovating in synthetic biology.</p>
+</li>
+                        
+                        <li><p>Adjusting parameters like temperature allows for controlling the variability of generated sequences, enabling the creation of both biologically plausible and novel DNA sequences.</p>
+</li>
+                        
+                        <li><p>Comparing synthetic sequences with real genomes and using tools like BLAST to check for novelty are essential steps in validating the uniqueness and potential biological relevance of generated sequences.</p>
+</li>
+                        
+                        <li><p>Detecting and translating Open Reading Frames (ORFs) in synthetic sequences provides insights into potential protein functions, paving the way for further research in genetic engineering and synthetic biology applications.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                
+                  <li><a href="/training-material/topics/statistics/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="altschul1990basic">Altschul, S. F., W. Gish, W. Miller, E. W. Myers, and D. J. Lipman, 1990 <b>Basic local alignment search tool</b>. Journal of molecular biology 215: 403–410. <a href="https://doi.org/10.1016/S0022-2836(05)80360-2 ">10.1016/S0022-2836(05)80360-2 </a></li>
+<li id="peter2018genome">Peter, J., M. De Chiara, A. Friedrich, J.-X. Yue, D. Pflieger <i>et al.</i>, 2018 <b>Genome evolution across 1,011 Saccharomyces cerevisiae isolates</b>. Nature 556: 339–344. <a href="https://doi.org/10.1038/s41586-018-0030-5">10.1038/s41586-018-0030-5</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/genomic-llm-sequence-generation"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/genomic-llm-sequence-generation">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Raphael Mourad, Bérénice Batut,  <b>Generating Artificial Yeast DNA Sequences using a DNA LLM (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-sequence-generation/tutorial.html">https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-sequence-generation/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{statistics-genomic-llm-sequence-generation,
+author = "Raphael Mourad and Bérénice Batut",
+	title = "Generating Artificial Yeast DNA Sequences using a DNA LLM (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-sequence-generation/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/genomic-llm-sequence-generation/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/genomic-llm-sequence-generation/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/statistics/tutorials/genomic-llm-sequence-generation/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bf2ed173efee6757a347c2b9fdc10d2f8809cd23">bf2ed17</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+	
+
+    </body>
+</html>

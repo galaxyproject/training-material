@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@ccf27f16b3c4ca28d692cab39b93463a939c6fad",
+		release: "galaxy-training-network@bf2ed173efee6757a347c2b9fdc10d2f8809cd23",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Artificial Intelligence and Machine Learning in Life Sciences using Python">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-03-11 17:21:16 +0000"><meta name="description" content="Artificial intelligence (AI) has permeated our lives, transforming how we live and work. Over the past few years, a rapid and disruptive acceleration of progress in AI has occurred, driven by significant advances in widespread data availability, computing power and machine learning. Remarkable strides were made in particular in the development of foundation models - AI models trained on extensive volumes of unlabelled data. Moreover, given the large amounts of omics data that are being generated and made accessible to researchers due to the drop in the cost of high-throughput technologies, analysing these complex high-volume data is not trivial, and the use of classical statistics can not explore their full potential. As such, Machine Learning (ML) and Artificial Intelligence (AI) have been recognized as key opportunity areas for ELIXIR, as evidenced by a number of ongoing activities and efforts throughout the community. However, beyond the technological advances, it is equally impo...">
+<meta name="DC.date" content="2025-04-17 09:19:54 +0000"><meta name="description" content="Artificial intelligence (AI) has permeated our lives, transforming how we live and work. Over the past few years, a rapid and disruptive acceleration of progress in AI has occurred, driven by significant advances in widespread data availability, computing power and machine learning. Remarkable strides were made in particular in the development of foundation models - AI models trained on extensive volumes of unlabelled data. Moreover, given the large amounts of omics data that are being generated and made accessible to researchers due to the drop in the cost of high-throughput technologies, analysing these complex high-volume data is not trivial, and the use of classical statistics can not explore their full potential. As such, Machine Learning (ML) and Artificial Intelligence (AI) have been recognized as key opportunity areas for ELIXIR, as evidenced by a number of ongoing activities and efforts throughout the community. However, beyond the technological advances, it is equally impo...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Learning Pathway: Artificial Intelligence and Machine Learning in Life Sciences using Python">
         <meta property="og:description" content="Artificial intelligence (AI) has permeated our lives, transforming how we live and work. Over the past few years, a rapid and disruptive acceleration of progress in AI has occurred, driven by significant advances in widespread data availability, computing power and machine learning. Remarkable strides were made in particular in the development of foundation models - AI models trained on extensive volumes of unlabelled data. Moreover, given the large amounts of omics data that are being generated and made accessible to researchers due to the drop in the cost of high-throughput technologies, analysing these complex high-volume data is not trivial, and the use of classical statistics can not explore their full potential. As such, Machine Learning (ML) and Artificial Intelligence (AI) have been recognized as key opportunity areas for ELIXIR, as evidenced by a number of ongoing activities and efforts throughout the community. However, beyond the technological advances, it is equally impo...">
@@ -248,6 +248,28 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "Implementation of RNN (code)",
     "Implementation of attention mechanism (code)",
     "Implementation of fine-tuning (code)",
+    "Identify and load a pre-trained language model (LLM) suitable for DNA sequence analysis.",
+    "Explain the role of a tokenizer in converting DNA sequences into numerical tokens for model processing.",
+    "Prepare and tokenize DNA sequence datasets for model training and evaluation.",
+    "Configure and implement data collation to organize tokenized data into batches for efficient training.",
+    "Define and configure hyperparameters for pretraining a model, such as learning rate and batch size.",
+    "Monitor and evaluate the model's performance during training to ensure effective learning.",
+    "Use the trained model to generate embeddings for DNA sequences and interpret these embeddings for downstream bioinformatics applications.",
+    "Develop a complete workflow for training a language model on DNA sequences, from data preparation to model evaluation, and apply it to real-world bioinformatics tasks.",
+    "Load a pre-trained model and modify its architecture to include a classification layer.",
+    "Prepare and preprocess labeled DNA sequences for fine-tuning.",
+    "Define and configure training parameters to optimize the model's performance on the classification task.",
+    "Evaluate the fine-tuned model's accuracy and robustness in distinguishing between different classes of DNA sequences.",
+    "Explain the concept of zero-shot learning and its application in predicting the impact of DNA mutations using pre-trained large language models (LLMs).",
+    "Utilize a pre-trained DNA LLM from Hugging Face to compute embeddings for wild-type and mutated DNA sequences.",
+    "Compare the embeddings of wild-type and mutated sequences to quantify the impact of mutations using L2 distance as a metric.",
+    "Interpret the results of the L2 distance calculations to determine the significance of mutation effects and discuss potential implications in genomics research.",
+    "Develop a script to automate the process of predicting mutation impacts using zero-shot learning, enabling researchers to apply this method to their own datasets efficiently.",
+    "Describe the process of generating synthetic DNA sequences using pre-trained language models and explain the significance of temperature settings in controlling sequence variability.",
+    "Set up a computational environment (e.g., Google Colab) and configure a pre-trained language model to generate synthetic DNA sequences, ensuring all necessary libraries are installed and configured.",
+    "Use k-mer counts and Principal Component Analysis (PCA) to compare generated synthetic DNA sequences with real genomic sequences, identifying similarities and differences.",
+    "Perform BLAST searches to assess the novelty of generated DNA sequences and interpret the results to determine the biological relevance and uniqueness of the synthetic sequences.",
+    "Develop a pipeline to detect open reading frames (ORFs) within generated DNA sequences and translate them into amino acid sequences, demonstrating the potential for creating novel synthetic genes.",
     "pretraining LLM for DNA",
     "finetuning LLM",
     "zeroshot prediction for DNA variants and synthetic DNA sequence generation.",
@@ -358,8 +380,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Syllabus",
-      "name": "Module 4: Generative Artificial Intelligence and Large Langage Model",
-      "description": "Generative Artificial Intelligence and Large Langage Model using Python"
+      "name": "Module 4: Generative Artificial Intelligence and Large Langage Model for Genomics using Python",
+      "description": "This tutorial series provides a comprehensive guide to leveraging large language models for genomics, covering pretraining, fine-tuning, mutation impact prediction, sequence generation, and optimization."
     },
     {
       "@type": "Syllabus",
@@ -367,7 +389,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "description": "Regulations/standards for AI using DOME"
     }
   ],
-  "dateModified": "2025-03-11 17:21:16 +0000",
+  "dateModified": "2025-04-17 09:19:54 +0000",
   "datePublished": "2025-03-11 17:21:16 +0000",
   "isAccessibleForFree": true,
   "offers": [
@@ -956,17 +978,69 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
     
-        <h3 id="st-module-4-generative-artificial-intelligence-and-large-langage-model">Module 4: Generative Artificial Intelligence and Large Langage Model</h3>
-        <p><p>Generative Artificial Intelligence and Large Langage Model using Python</p>
+        <h3 id="st-module-4-generative-artificial-intelligence-and-large-langage-model-for-genomics-using-python">Module 4: Generative Artificial Intelligence and Large Langage Model for Genomics using Python</h3>
+        <p><p>This tutorial series provides a comprehensive guide to leveraging large language models for genomics, covering pretraining, fine-tuning, mutation impact prediction, sequence generation, and optimization.</p>
 </p>
 
 	
         
-	<p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</p>
+	<p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 15 hours</p>
 	<details>
 		<summary>Learning Objectives</summary>
 		<ul>
 		
+		
+			
+			<li>Identify and load a pre-trained language model (LLM) suitable for DNA sequence analysis.</li>
+			
+			<li>Explain the role of a tokenizer in converting DNA sequences into numerical tokens for model processing.</li>
+			
+			<li>Prepare and tokenize DNA sequence datasets for model training and evaluation.</li>
+			
+			<li>Configure and implement data collation to organize tokenized data into batches for efficient training.</li>
+			
+			<li>Define and configure hyperparameters for pretraining a model, such as learning rate and batch size.</li>
+			
+			<li>Monitor and evaluate the model's performance during training to ensure effective learning.</li>
+			
+			<li>Use the trained model to generate embeddings for DNA sequences and interpret these embeddings for downstream bioinformatics applications.</li>
+			
+			<li>Develop a complete workflow for training a language model on DNA sequences, from data preparation to model evaluation, and apply it to real-world bioinformatics tasks.</li>
+			
+		
+			
+			<li>Load a pre-trained model and modify its architecture to include a classification layer.</li>
+			
+			<li>Prepare and preprocess labeled DNA sequences for fine-tuning.</li>
+			
+			<li>Define and configure training parameters to optimize the model's performance on the classification task.</li>
+			
+			<li>Evaluate the fine-tuned model's accuracy and robustness in distinguishing between different classes of DNA sequences.</li>
+			
+		
+			
+			<li>Explain the concept of zero-shot learning and its application in predicting the impact of DNA mutations using pre-trained large language models (LLMs).</li>
+			
+			<li>Utilize a pre-trained DNA LLM from Hugging Face to compute embeddings for wild-type and mutated DNA sequences.</li>
+			
+			<li>Compare the embeddings of wild-type and mutated sequences to quantify the impact of mutations using L2 distance as a metric.</li>
+			
+			<li>Interpret the results of the L2 distance calculations to determine the significance of mutation effects and discuss potential implications in genomics research.</li>
+			
+			<li>Develop a script to automate the process of predicting mutation impacts using zero-shot learning, enabling researchers to apply this method to their own datasets efficiently.</li>
+			
+		
+			
+			<li>Describe the process of generating synthetic DNA sequences using pre-trained language models and explain the significance of temperature settings in controlling sequence variability.</li>
+			
+			<li>Set up a computational environment (e.g., Google Colab) and configure a pre-trained language model to generate synthetic DNA sequences, ensuring all necessary libraries are installed and configured.</li>
+			
+			<li>Use k-mer counts and Principal Component Analysis (PCA) to compare generated synthetic DNA sequences with real genomic sequences, identifying similarities and differences.</li>
+			
+			<li>Perform BLAST searches to assess the novelty of generated DNA sequences and interpret the results to determine the biological relevance and uniqueness of the synthetic sequences.</li>
+			
+			<li>Develop a pipeline to detect open reading frames (ORFs) within generated DNA sequences and translate them into amino acid sequences, demonstrating the potential for creating novel synthetic genes.</li>
+			
 		
 			
 			<li>pretraining LLM for DNA</li>
@@ -1003,7 +1077,19 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   
   
-        <!-- MAT: statistics/gai-llm-with-python -->
+        <!-- MAT: statistics/genomic-llm-pretraining -->
+      
+    
+        <!-- MAT: statistics/genomic-llm-finetuning -->
+      
+    
+        <!-- MAT: statistics/genomic-llm-zeroshot-prediction -->
+      
+    
+        <!-- MAT: statistics/genomic-llm-sequence-generation -->
+      
+    
+        <!-- MAT: statistics/genomic-llm-sequence-optimization -->
       
     
   </tbody>
@@ -1178,7 +1264,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ccf27f16b3c4ca28d692cab39b93463a939c6fad">ccf27f1</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bf2ed173efee6757a347c2b9fdc10d2f8809cd23">bf2ed17</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

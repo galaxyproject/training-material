@@ -1,0 +1,2766 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM / Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM / Statistics and machine learning</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@bf2ed173efee6757a347c2b9fdc10d2f8809cd23",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-04-17 09:19:54 +0000">
+<meta name="DC.creator" content="Raphael Mourad">
+<meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Statistics and machine learning / Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM / Hands-on: Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM">
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Draft",
+  "dateModified": "2025-04-17 09:19:54 +0000",
+  "datePublished": "2025-04-17 09:19:54 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "abstract": "Predicting the impact of mutations is a critical task in genomics, as it provides insights into how genetic variations influence biological functions and contribute to diseases. Traditional methods for assessing mutation impact often rely on extensive experimental data or computationally intensive simulations. However, with the advent of large language models (LLMs) and zero-shot learning, we can now predict mutation impacts more efficiently and effectively.",
+  "learningResourceType": "e-learning",
+  "name": "Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT3H",
+  "teaches": "- Explain the concept of zero-shot learning and its application in predicting the impact of DNA mutations using pre-trained large language models (LLMs).\n- Utilize a pre-trained DNA LLM from Hugging Face to compute embeddings for wild-type and mutated DNA sequences.\n- Compare the embeddings of wild-type and mutated sequences to quantify the impact of mutations using L2 distance as a metric.\n- Interpret the results of the L2 distance calculations to determine the significance of mutation effects and discuss potential implications in genomics research.\n- Develop a script to automate the process of predicting mutation impacts using zero-shot learning, enabling researchers to apply this method to their own datasets efficiently.",
+  "keywords": [
+    "Statistics and machine learning",
+    "ELIXIR",
+    "AI & ML",
+    "Large Language Model",
+    "work-in-progress",
+    "jupyter-notebook"
+  ],
+  "description": "## Abstract\n\nPredicting the impact of mutations is a critical task in genomics, as it provides insights into how genetic variations influence biological functions and contribute to diseases. Traditional methods for assessing mutation impact often rely on extensive experimental data or computationally intensive simulations. However, with the advent of large language models (LLMs) and zero-shot learning, we can now predict mutation impacts more efficiently and effectively.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How does zero-shot learning differ from traditional supervised learning, and what advantages does it offer in the context of predicting DNA mutation impacts?\n - What steps are involved in computing embeddings for DNA sequences using a pre-trained LLM, and how do these embeddings capture the semantic meaning of the sequences?\n - Why is the L2 distance used as a metric to quantify the impact of mutations, and how does a higher L2 distance indicate a more significant mutation effect?\n\n\n## Learning Objectives\n\n- Explain the concept of zero-shot learning and its application in predicting the impact of DNA mutations using pre-trained large language models (LLMs).\n- Utilize a pre-trained DNA LLM from Hugging Face to compute embeddings for wild-type and mutated DNA sequences.\n- Compare the embeddings of wild-type and mutated sequences to quantify the impact of mutations using L2 distance as a metric.\n- Interpret the results of the L2 distance calculations to determine the significance of mutation effects and discuss potential implications in genomics research.\n- Develop a script to automate the process of predicting mutation impacts using zero-shot learning, enabling researchers to apply this method to their own datasets efficiently.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-basics/tutorial.html",
+      "name": "Introduction to Python",
+      "description": "Hands-on for 'Introduction to Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.html",
+      "name": "Python - Warm-up for statistics and machine learning",
+      "description": "Hands-on for 'Python - Warm-up for statistics and machine learning' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/intro-to-ml-with-python/slides.html",
+      "name": "Foundational Aspects of Machine Learning",
+      "description": "Slides for 'Foundational Aspects of Machine Learning' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/intro-to-ml-with-python/tutorial.html",
+      "name": "Foundational Aspects of Machine Learning using Python",
+      "description": "Hands-on for 'Foundational Aspects of Machine Learning using Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/neural-networks-with-python/slides.html",
+      "name": "Neural networks using Python",
+      "description": "Slides for 'Neural networks using Python' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/neural-networks-with-python/tutorial.html",
+      "name": "Neural networks using Python",
+      "description": "Hands-on for 'Neural networks using Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/slides.html",
+      "name": "Deep Learning (without Generative Artificial Intelligence) using Python",
+      "description": "Slides for 'Deep Learning (without Generative Artificial Intelligence) using Python' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/tutorial.html",
+      "name": "Deep Learning (without Generative Artificial Intelligence) using Python",
+      "description": "Hands-on for 'Deep Learning (without Generative Artificial Intelligence) using Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.html",
+      "name": "Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences",
+      "description": "Hands-on for 'Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.html",
+      "name": "Fine-tuning a LLM for DNA Sequence Classification",
+      "description": "Hands-on for 'Fine-tuning a LLM for DNA Sequence Classification' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/raphaelmourad/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/raphaelmourad/",
+      "name": "Raphael Mourad",
+      "image": "https://avatars.githubusercontent.com/raphaelmourad",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    }
+  ],
+  "contributor": [],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/statistics-genomic-llm-zeroshot-prediction.ipynb",
+      "name": "Jupyter Notebook (with Solutions)"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/statistics-genomic-llm-zeroshot-prediction-course.ipynb",
+      "name": "Jupyter Notebook (without Solutions)"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Statistics and machine learning
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and machine learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-statistics">
+    <h1 data-toc-skip>Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/raphaelmourad/" class="contributor-badge contributor-raphaelmourad"><img src="https://avatars.githubusercontent.com/raphaelmourad?s=36" alt="Raphael Mourad avatar" width="36" class="avatar" />
+    Raphael Mourad</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How does zero-shot learning differ from traditional supervised learning, and what advantages does it offer in the context of predicting DNA mutation impacts?</p>
+</li>
+        
+        <li><p>What steps are involved in computing embeddings for DNA sequences using a pre-trained LLM, and how do these embeddings capture the semantic meaning of the sequences?</p>
+</li>
+        
+        <li><p>Why is the L2 distance used as a metric to quantify the impact of mutations, and how does a higher L2 distance indicate a more significant mutation effect?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Explain the concept of zero-shot learning and its application in predicting the impact of DNA mutations using pre-trained large language models (LLMs).</p>
+</li>
+        
+        <li><p>Utilize a pre-trained DNA LLM from Hugging Face to compute embeddings for wild-type and mutated DNA sequences.</p>
+</li>
+        
+        <li><p>Compare the embeddings of wild-type and mutated sequences to quantify the impact of mutations using L2 distance as a metric.</p>
+</li>
+        
+        <li><p>Interpret the results of the L2 distance calculations to determine the significance of mutation effects and discuss potential implications in genomics research.</p>
+</li>
+        
+        <li><p>Develop a script to automate the process of predicting mutation impacts using zero-shot learning, enabling researchers to apply this method to their own datasets efficiently.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/data-science/tutorials/python-basics/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Introduction to Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Python - Warm-up for statistics and machine learning</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/statistics/tutorials/intro-to-ml-with-python/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Foundational Aspects of Machine Learning using Python</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/intro-to-ml-with-python/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Foundational Aspects of Machine Learning using Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/statistics/tutorials/neural-networks-with-python/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Neural networks using Python</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/neural-networks-with-python/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Neural networks using Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Deep Learning (without Generative Artificial Intelligence) using Python</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Deep Learning (without Generative Artificial Intelligence) using Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Fine-tuning a LLM for DNA Sequence Classification</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/statistics-genomic-llm-zeroshot-prediction.ipynb" title="Jupyter Notebook" alt="Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr" title="">
+			UseGalaxy.fr
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 17, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 17, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+                <section aria-label="Tutorial Notebook access information" id="tutorial-notebook">
+                     
+                     
+                     
+                     
+                    
+                        <blockquote class="comment">
+                            <div class="box-title">Best viewed in a Jupyter Notebook</div>
+                            <p>
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <!--
+                            <p><b>Launching on MyBinder</b>
+                                Click here and the notebook will launch on MyBinder.org
+                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fstatistics%2Ftutorials%2Fgenomic-llm-zeroshot-prediction%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                            </p>
+                            -->
+                            
+                            <p><b>Run on the GTN with JupyterLite (in-browser computations)</b>
+                                <ol>
+                                    <li><a href="/training-material/jupyter/lab/index.html?path=statistics-genomic-llm-zeroshot-prediction.ipynb">Click to Launch JupyterLite</a></li>
+                                </ol>
+                            </p>
+                            
+                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                                <ol>
+                                    <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                                    <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/statistics-genomic-llm-zeroshot-prediction.ipynb</code></li>
+                                    <li>Select the notebook that appears in the list of files on the left.</li>
+                                </ol>
+                            </p>
+                            <p><b>Downloading the notebook</b>
+                                <ol>
+                                    <li>Right click one of these links: <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/statistics-genomic-llm-zeroshot-prediction.ipynb">Jupyter Notebook (With Solutions)</a>, <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/statistics-genomic-llm-zeroshot-prediction-course.ipynb">Jupyter Notebook (Without Solutions)</a></li>
+                                    <li>Save Link As..</li>
+                                </ol>
+                            </p>
+                        </blockquote>
+                    
+                </section>
+                
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Predicting the impact of mutations is a critical task in genomics, as it provides insights into how genetic variations influence biological functions and contribute to diseases. Traditional methods for assessing mutation impact often rely on extensive experimental data or computationally intensive simulations. However, with the advent of large language models (LLMs) and zero-shot learning, we can now predict mutation impacts more efficiently and effectively.</p>
+
+<p>Zero-shot learning is a technique that allows a pre-trained model to make predictions on tasks it wasn’t explicitly trained for, leveraging its existing knowledge. This approach is particularly valuable when labeled data is scarce or when rapid predictions are needed. By using a pre-trained DNA LLM, we can compute embeddings for both wild-type and mutated DNA sequences and compare them to quantify the impact of mutations.</p>
+
+<p>This tutorial focuses on this innovative method, utilizing a <a href="https://huggingface.co/RaphaelMourad/Mistral-DNA-v1-17M-hg38">pre-trained DNA LLM available on Hugging Face</a> to assess the impact of mutations. This approach opens new avenues for bioinformatics research, particularly in genomics and personalized medicine, by enabling researchers to gain insights into the functional impact of DNA mutations efficiently.</p>
+
+<p>Building upon this foundation, our new tutorial focuses on predicting the impact of mutations using zero-shot learning with a pre-trained DNA LLM. Zero-shot learning allows us to utilize the pre-trained model directly, without additional training, to make predictions on new, unseen tasks. Specifically, we will use a pre-trained model available on Hugging Face, designed for DNA sequences, to assess the impact of mutations.</p>
+
+<p>We will use <a href="https://huggingface.co/RaphaelMourad/Mistral-DNA-v1-1M-hg38"><code class="language-plaintext highlighter-rouge">Mistral-DNA-v1-17M-hg38</code></a>, a mixed model that was pre-trained on the entire Human Genome. It contains approximately 17 million parameters and was trained using the Human Genome assembly GRCh38 on sequences of 10,000 bases (10K):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model_name</span><span class="o">=</span><span class="sh">"</span><span class="s">RaphaelMourad/Mistral-DNA-v1-17M-hg38</span><span class="sh">"</span>
+</code></pre></div></div>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#prepare-resources" id="markdown-toc-prepare-resources">Prepare resources</a>    <ol>
+      <li><a href="#install-dependencies" id="markdown-toc-install-dependencies">Install dependencies</a></li>
+      <li><a href="#import-python-libraries" id="markdown-toc-import-python-libraries">Import Python libraries</a></li>
+      <li><a href="#check-and-configure-available-resources" id="markdown-toc-check-and-configure-available-resources">Check and configure available resources</a></li>
+    </ol>
+  </li>
+  <li><a href="#tokenizing-dna-sequences" id="markdown-toc-tokenizing-dna-sequences">Tokenizing DNA Sequences</a></li>
+  <li><a href="#load-and-configure-the-pre-trained-model" id="markdown-toc-load-and-configure-the-pre-trained-model">Load and Configure the Pre-trained Model</a></li>
+  <li><a href="#compare-the-effect-of-mutations-with-or-without-amino-acid-modification" id="markdown-toc-compare-the-effect-of-mutations-with-or-without-amino-acid-modification">Compare the effect of mutations with or without amino acid modification</a></li>
+  <li><a href="#compare-effects-of-snps-in-exons-and-introns" id="markdown-toc-compare-effects-of-snps-in-exons-and-introns">Compare effects of SNPs in exons and introns</a>    <ol>
+      <li><a href="#load-sequences" id="markdown-toc-load-sequences">Load sequences</a></li>
+      <li><a href="#compute-effect-of-snps" id="markdown-toc-compute-effect-of-snps">Compute effect of SNPs</a></li>
+      <li><a href="#compare-snps-effects-between-introns-and-exons" id="markdown-toc-compare-snps-effects-between-introns-and-exons">Compare SNPs effects between introns and exons</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="prepare-resources">Prepare resources</h1>
+
+<h2 id="install-dependencies">Install dependencies</h2>
+
+<p>The first step is to install the required dependencies:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">Bio</span><span class="o">==</span><span class="mf">1.7</span><span class="p">.</span><span class="mi">1</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">transformers</span> <span class="o">-</span><span class="n">U</span>
+</code></pre></div></div>
+
+<h2 id="import-python-libraries">Import Python libraries</h2>
+
+<p>Let’s now import them.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
+
+<span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">scipy</span> <span class="k">as</span> <span class="n">sp</span>
+<span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">import</span> <span class="n">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+<span class="kn">import</span> <span class="n">gzip</span>
+<span class="kn">from</span> <span class="n">Bio</span> <span class="kn">import</span> <span class="n">SeqIO</span>
+<span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="p">(</span>
+  <span class="n">AutoConfig</span><span class="p">,</span>
+  <span class="n">AutoModelForCausalLM</span><span class="p">,</span>
+  <span class="n">AutoTokenizer</span><span class="p">,</span>
+  <span class="n">EarlyStoppingCallback</span><span class="p">,</span>
+  <span class="n">Trainer</span><span class="p">,</span>
+  <span class="n">TrainingArguments</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-versions-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Versions</div>
+
+  <p>This tutorial has been tested with following versions:</p>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">transformers</code> = 4.48.3</li>
+  </ul>
+
+  <p>You can check the versions with:</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">transformers</span><span class="p">.</span><span class="n">__version__</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<h2 id="check-and-configure-available-resources">Check and configure available resources</h2>
+
+<p>We select the appropriate device (CUDA-enabled GPU if available) for running PyTorch operations</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">torch</span><span class="p">.</span><span class="nf">device</span><span class="p">(</span><span class="sh">'</span><span class="s">cuda</span><span class="sh">'</span> <span class="k">if</span> <span class="n">torch</span><span class="p">.</span><span class="n">cuda</span><span class="p">.</span><span class="nf">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="sh">'</span><span class="s">cpu</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Let’s check the GPU usage and RAM:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span>
+</code></pre></div></div>
+
+<p>Let’s configure PyTorch and the CUDA environment – software and hardware ecosystem provided by NVIDIA to enable parallel computing on GPU – to optimize GPU memory usage and performance:</p>
+
+<ol>
+  <li>
+    <p>Enables CuDNN benchmarking in PyTorch:</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">torch</span><span class="p">.</span><span class="n">backends</span><span class="p">.</span><span class="n">cudnn</span><span class="p">.</span><span class="n">benchmark</span><span class="o">=</span><span class="bp">True</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Set an environment variable that configures how PyTorch manages CUDA memory allocations</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">"</span><span class="s">PYTORCH_CUDA_ALLOC_CONF</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">max_split_size_mb:32</span><span class="sh">"</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h1 id="tokenizing-dna-sequences">Tokenizing DNA Sequences</h1>
+
+<p>We now set up the tokenizer to convert raw DNA sequences into a format that the model can process, enabling it to understand and analyze the sequences effectively:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">transformers</span><span class="p">.</span><span class="n">AutoTokenizer</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="n">model_name</span><span class="p">,</span>
+    <span class="n">use_fast</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">trust_remote_code</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What do the parameters?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">use_fast=True</code>?</li>
+    <li><code class="language-plaintext highlighter-rouge">trust_remote_code=True</code>?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">use_fast=True</code>: Enables the use of a fast tokenizer implementation, which is optimized for speed and efficiency. This is particularly useful when working with large datasets or when performance is a priority.</li>
+      <li><code class="language-plaintext highlighter-rouge">trust_remote_code=True</code>: Allows the tokenizer to execute custom code from the model repository. This may be necessary for certain architectures or preprocessing steps that require additional functionality.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="load-and-configure-the-pre-trained-model">Load and Configure the Pre-trained Model</h1>
+
+<p>We will now load the pre-trained DNA large language model (LLM) and configure it for our specific task of predicting the impact of DNA mutations.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="o">=</span><span class="n">transformers</span><span class="p">.</span><span class="n">AutoModelForCausalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="n">model_name</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>We would like to ensure that the model correctly handles padding tokens, which are used to standardize the length of sequences within a batch:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">pad_token_id</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">.</span><span class="n">pad_token_id</span>
+</code></pre></div></div>
+
+<p>Aligning the padding token ID between the model and tokenizer is crucial for maintaining consistency during training and inference.</p>
+
+<p>Let’s look at the model:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MixtralForCausalLM(
+  (model): MixtralModel(
+    (embed_tokens): Embedding(4096, 256)
+    (layers): ModuleList(
+      (0-7): 8 x MixtralDecoderLayer(
+        (self_attn): MixtralAttention(
+          (q_proj): Linear(in_features=256, out_features=256, bias=False)
+          (k_proj): Linear(in_features=256, out_features=256, bias=False)
+          (v_proj): Linear(in_features=256, out_features=256, bias=False)
+          (o_proj): Linear(in_features=256, out_features=256, bias=False)
+        )
+        (block_sparse_moe): MixtralSparseMoeBlock(
+          (gate): Linear(in_features=256, out_features=8, bias=False)
+          (experts): ModuleList(
+            (0-7): 8 x MixtralBlockSparseTop2MLP(
+              (w1): Linear(in_features=256, out_features=256, bias=False)
+              (w2): Linear(in_features=256, out_features=256, bias=False)
+              (w3): Linear(in_features=256, out_features=256, bias=False)
+              (act_fn): SiLU()
+            )
+          )
+        )
+        (input_layernorm): MixtralRMSNorm((256,), eps=1e-05)
+        (post_attention_layernorm): MixtralRMSNorm((256,), eps=1e-05)
+      )
+    )
+    (norm): MixtralRMSNorm((256,), eps=1e-05)
+    (rotary_emb): MixtralRotaryEmbedding()
+  )
+  (lm_head): Linear(in_features=256, out_features=4096, bias=False)
+)
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What do the parameters?</p>
+
+  <ol>
+    <li>How does the vocabulary size of 4,096 relate to k-mers in DNA sequences?</li>
+    <li>What is the role of the embedding layer in <code class="language-plaintext highlighter-rouge">MixtralForCausalLM</code>?</li>
+    <li>How many layers does the <code class="language-plaintext highlighter-rouge">MixtralForCausalLM</code> model have, and what is their purpose?</li>
+    <li>What components make up the self-attention mechanism in MixtralAttention?</li>
+    <li>How does the Mixture of Experts (MoE) mechanism reduce computational load?</li>
+    <li>Why is layer normalization important in <code class="language-plaintext highlighter-rouge">MixtralForCausalLM</code>?</li>
+    <li>What advantage do rotary embeddings offer in understanding DNA sequences?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The vocabulary size corresponds to the number of unique “words” or k-mers (subsequences of DNA) the model can recognize, similar to using k-mers of size six, enhanced by byte-pair encoding for more nuanced patterns.</li>
+      <li>The embedding layer converts DNA sequences into numerical vectors, enabling the model to process and analyze them.</li>
+      <li>The model has 8 layers, each containing a <code class="language-plaintext highlighter-rouge">MixtralDecoderLayer</code>. These layers process the embedded input sequences through a series of transformations, including self-attention and mixture of experts, to capture complex patterns in the data.</li>
+      <li>The self-attention mechanism includes query, key, value, and output projections, which weigh the importance of different tokens in the sequence.</li>
+      <li>MoE activates only a subset of parameters during each forward pass, using a routing mechanism to direct sequences to specific experts.</li>
+      <li>Layer normalization stabilizes and accelerates training by ensuring consistent scaling of inputs to the attention mechanism and subsequent layers.</li>
+      <li>Rotary embeddings enhance the model’s understanding of positional information, providing a more nuanced representation of sequence order compared to traditional methods.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>For a DNA sequence “ACGTAGCATCGGATCTATCTATCGACACTTGGTTATCGATCTACGAGCATCTCGTTAGC”</p>
+
+  <ol>
+    <li>How can we get the hidden states?</li>
+    <li>How can we compute mean of the hidden states accross the sequence length dimension?</li>
+    <li>What is the shape of the output?</li>
+    <li>What does the mean of the hidden states accross the sequence length dimension represent?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Let’s start by defining the DNA sequence:</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dna</span> <span class="o">=</span> <span class="sh">"</span><span class="s">ACGTAGCATCGGATCTATCTATCGACACTTGGTTATCGATCTACGAGCATCTCGTTAGC</span><span class="sh">"</span>
+</code></pre></div>    </div>
+
+    <ol>
+      <li>To get the hidden state:
+        <ol>
+          <li>
+            <p>Tokenize the DNA sequence using the tokenizer</p>
+
+            <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">tokenized_dna</span> <span class="o">=</span> <span class="nf">tokenizer</span><span class="p">(</span><span class="n">dna</span><span class="p">,</span> <span class="n">return_tensors</span> <span class="o">=</span> <span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div>            </div>
+          </li>
+          <li>
+            <p>Extract the tensor containing the token IDs from the tokenized output</p>
+
+            <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenized_dna</span><span class="p">[</span><span class="sh">"</span><span class="s">input_ids</span><span class="sh">"</span><span class="p">]</span>
+</code></pre></div>            </div>
+          </li>
+          <li>
+            <p>Pass the tokenized input through the model.</p>
+
+            <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">model_outputs</span> <span class="o">=</span> <span class="nf">model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+</code></pre></div>            </div>
+          </li>
+          <li>
+            <p>Extract the hidden states from the model’s output.</p>
+
+            <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">hidden_states</span> <span class="o">=</span> <span class="n">model_outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">detach</span><span class="p">()</span>
+</code></pre></div>            </div>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <p>To compute mean of the hidden states accross the sequence length dimension:</p>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">embedding_mean</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">hidden_states</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>The shape is 4,096, the number of possible tokens</p>
+      </li>
+      <li>It represents the average embedding of the DNA sequence. This fixed-size representation can be used for various downstream tasks, such as classification, clustering, or similarity comparisons.</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="compare-the-effect-of-mutations-with-or-without-amino-acid-modification">Compare the effect of mutations with or without amino acid modification</h1>
+
+<p>Let’s look at the portion of the Cystic fibrosis transmembrane conductance regulator (CFTR) gene where a mutation responsible of the Cystic fibrosis appears.</p>
+
+<p>In this portion, we can observe several cases:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cases</th>
+      <th>Sequences</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Wild-type without any mutation</td>
+      <td>ATTAAAGAAAATATCATCTTTGGTGTTTCCTAT</td>
+    </tr>
+    <tr>
+      <td>Mutation ATT to ATA</td>
+      <td>ATAAAAGAAAATATCATCTTTGGTGTTTCCTAT</td>
+    </tr>
+    <tr>
+      <td>Deletion of TCT codon</td>
+      <td>ATTAAAGAAAATATCA—TTGGTGTTTCCTAT</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In the second case, the amino acid does not change (silent mutation). In the last case, an amino acid is removed. Let’s look if the mutation and the deletion have the same distance to the wild-type when computing using the DNA embedding.</p>
+
+<p>First, we define the sequences:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dna_wt</span><span class="o">=</span> <span class="sh">"</span><span class="s">ATTAAAGAAAATATCATCTTTGGTGTTTCCTAT</span><span class="sh">"</span>
+<span class="n">dna_mut</span><span class="o">=</span><span class="sh">"</span><span class="s">ATAAAAGAAAATATCATCTTTGGTGTTTCCTAT</span><span class="sh">"</span>
+<span class="n">dna_del</span><span class="o">=</span><span class="sh">"</span><span class="s">ATTAAAGAAAATATCATTGGTGTTTCCTAT</span><span class="sh">"</span>
+</code></pre></div></div>
+
+<p>Let’s compute the hidden states for all DNA sequences:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tokenized_dna</span> <span class="o">=</span> <span class="nf">tokenizer</span><span class="p">(</span>
+  <span class="p">[</span><span class="n">dna_wt</span><span class="p">,</span> <span class="n">dna_mut</span><span class="p">,</span> <span class="n">dna_del</span><span class="p">],</span>
+  <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">,</span>
+  <span class="n">padding</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">inputs_seqs</span> <span class="o">=</span> <span class="n">tokenized_dna</span><span class="p">[</span><span class="sh">"</span><span class="s">input_ids</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">model_outputs</span> <span class="o">=</span> <span class="nf">model</span><span class="p">(</span><span class="n">inputs_seqs</span><span class="p">)</span>
+<span class="n">hidden_states</span> <span class="o">=</span> <span class="n">model_outputs</span><span class="p">.</span><span class="nf">detach</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>We now compute the maximum of the hidden states accross the sequence length dimension:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">embedding_max</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="n">hidden_states</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-14"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  </blockquote>
+
+</blockquote>
+
+<p>To compare the effects of silent mutation and amino acid deletion, we will compute the distance between the wild-type embeddings and the mutation / deletion embedding using the L2 (Euclidian) distance</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-l2-euclidian-distance-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-l2-euclidian-distance-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: L2 (Euclidian) distance</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>The L2 distance, also known as the Euclidean distance, is a measure of the straight-line distance between two points in Euclidean space. It is commonly used to quantify the difference between two vectors, such as embeddings in machine learning.</p>
+
+  <p>For two vectors \(a\) and \(b\) in an \(n\)-dimensional space, where \(a=[a\_{1},a\_{2},...,a\_{n}]\) and \(b=[b\_{1},b\_{2},...,b\_{n}]\), the L2 distance is calculated as:</p>
+
+  <p>\( L2 = \sqrt{\sum_{i} (a_{i}-b_{i})^{2} \)</p>
+
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wt_mut_L2</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">norm</span><span class="p">(</span><span class="n">embedding_max</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">embedding_max</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">wt_mut_L2</span><span class="p">)</span>
+<span class="n">wt_del_L2</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">norm</span><span class="p">(</span><span class="n">embedding_max</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">embedding_max</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">wt_del_L2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tensor(27.4657)
+tensor(145.7797)
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Is it the silent mutation or the amino acid deletion that have the lowest L2 distance to the wild-type?</li>
+    <li>How to interpret the result?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The silent mutation has a lower L2 distance to the wild-type compared to the mutation with amino acid deletion.</li>
+      <li>A smaller L2 distance indicates that the sequences are more similar, while a larger distance suggests greater dissimilarity.</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="compare-effects-of-snps-in-exons-and-introns">Compare effects of SNPs in exons and introns</h1>
+
+<p>Single Nucleotide Polymorphisms (SNPs) are the most common type of genetic variation, involving a change in a single nucleotide within a DNA sequence. These variations can occur in different regions of the genome, including exons (the coding regions of genes) and introns (the non-coding regions within genes). Understanding the impact of SNPs in these regions is crucial for assessing their role in genetic disorders, phenotypic traits, and overall genome function.</p>
+
+<p>We will now leverage the pre-trained DNA language model to compare the effects of SNPs in exons and introns. By utilizing embeddings generated from DNA sequences, we can quantify the impact of these variations and gain insights into their functional consequences.</p>
+
+<h2 id="load-sequences">Load sequences</h2>
+
+<p>To begin our analysis, we need to load the sequence data, which includes sequences with Single Nucleotide Polymorphisms (SNPs) and their corresponding reference sequences (wild-type) without SNPs. These sequences are derived from both introns and exons and are stored in compressed FASTA format on <a href="https://github.com/raphaelmourad/Mistral-DNA/tree/main/data/SNP">GitHub</a>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Wild-type (without SNPs)</th>
+      <th>Mutated (with SNP)</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Intron</td>
+      <td><a href="https://github.com/raphaelmourad/Mistral-DNA/raw/refs/head/master/data/SNP/SNPintron_ref_201b.fasta.gz"><code class="language-plaintext highlighter-rouge">SNPintron_ref_201b.fasta.gz</code></a></td>
+      <td><a href="https://github.com/raphaelmourad/Mistral-DNA/raw/refs/head/master/data/SNP/SNPintron_alt_201b.fasta.gz"><code class="language-plaintext highlighter-rouge">SNPintron_alt_201b.fasta.gz</code></a></td>
+    </tr>
+    <tr>
+      <td>Exon</td>
+      <td><a href="https://github.com/raphaelmourad/Mistral-DNA/raw/refs/head/master/data/SNP/SNPexon_ref_201b.fasta.gz"><code class="language-plaintext highlighter-rouge">SNPexon_ref_201b.fasta.gz</code></a></td>
+      <td><a href="https://github.com/raphaelmourad/Mistral-DNA/raw/refs/head/master/data/SNP/SNPexon_alt_201b.fasta.gz"><code class="language-plaintext highlighter-rouge">SNPexon_alt_201b.fasta.gz</code></a></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">baseurl</span> <span class="o">=</span> <span class="sh">"</span><span class="s">https://github.com/raphaelmourad/Mistral-DNA/raw/refs/head/master/data/SNP/</span><span class="sh">"</span>
+<span class="n">win</span><span class="o">=</span><span class="mi">201</span>
+<span class="n">exon_wt_snp_fp</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span> <span class="n">baseurl</span> <span class="si">}</span><span class="s">/SNPexon_ref_</span><span class="si">{</span> <span class="n">win</span> <span class="si">}</span><span class="s">b.fasta.gz</span><span class="sh">"</span>
+<span class="n">exon_mut_snp_fp</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span> <span class="n">baseurl</span> <span class="si">}</span><span class="s">/SNPexon_alt_ </span><span class="si">{</span> <span class="n">win</span> <span class="si">}</span><span class="s">b.fasta.gz</span><span class="sh">"</span>
+<span class="n">intron_wf_snp_fp</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span> <span class="n">baseurl</span> <span class="si">}</span><span class="s">/SNPintron_ref_ </span><span class="si">{</span> <span class="n">win</span> <span class="si">}</span><span class="s">b.fasta.gz</span><span class="sh">"</span>
+<span class="n">intron_mut_snp_fp</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="si">{</span> <span class="n">baseurl</span> <span class="si">}</span><span class="s">/SNPintron_alt_ </span><span class="si">{</span> <span class="n">win</span> <span class="si">}</span><span class="s">b.fasta.gz</span><span class="sh">"</span>
+</code></pre></div></div>
+
+<p>We need to get files and read the sequences from them:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">downloadReadFastaFile</span><span class="p">(</span><span class="n">fasta_file</span><span class="p">):</span>
+  <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+  <span class="c1"># Check if the request was successful
+</span>  <span class="k">if</span> <span class="n">response</span><span class="p">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+      <span class="c1"># Open a local file in binary write mode and save the content
+</span>      <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">file.gz</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">wb</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+          <span class="nb">file</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">content</span><span class="p">)</span>
+      <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">File downloaded successfully.</span><span class="sh">"</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+      <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Failed to download file. HTTP Status code: </span><span class="si">{</span><span class="n">response</span><span class="p">.</span><span class="n">status_code</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+  <span class="c1"># Read the file
+</span>  <span class="n">seql_list</span><span class="o">=</span><span class="p">[]</span>
+  <span class="k">with</span> <span class="n">gzip</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="n">fasta_file</span><span class="p">,</span> <span class="sh">"</span><span class="s">rt</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+      <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">SeqIO</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="sh">"</span><span class="s">fasta</span><span class="sh">"</span><span class="p">):</span>
+          <span class="n">seqj</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">record</span><span class="p">.</span><span class="n">seq</span><span class="p">)</span>
+          <span class="n">seql_list</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">seqj</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">seql_list</span>
+
+<span class="n">exon_wt_seqs</span> <span class="o">=</span> <span class="nf">readRegularFastaFile</span><span class="p">(</span><span class="n">exon_wt_snp_fp</span><span class="p">)</span>
+<span class="n">exon_mut_seqs</span> <span class="o">=</span> <span class="nf">readRegularFastaFile</span><span class="p">(</span><span class="n">exon_mut_snp_fp</span><span class="p">)</span>
+<span class="n">intron_wt_seqs</span> <span class="o">=</span> <span class="nf">readRegularFastaFile</span><span class="p">(</span><span class="n">intron_wt_snp_fp</span><span class="p">)</span>
+<span class="n">intron_mut_seqs</span> <span class="o">=</span> <span class="nf">readRegularFastaFile</span><span class="p">(</span><span class="n">intron_mut_snp_fp</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-16"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many sequences are in the data?</li>
+    <li>How are the sequences?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li></li>
+      <li></li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<p>We will keep only the 100 first sequences:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kseq</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">exon_wt_seqs</span> <span class="o">=</span> <span class="n">exon_wt_seqs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">kseq</span><span class="p">]</span>
+<span class="n">exon_mut_seqs</span> <span class="o">=</span> <span class="n">exon_mut_seqs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">kseq</span><span class="p">]</span>
+<span class="n">intron_wt_seqs</span> <span class="o">=</span> <span class="n">intron_wt_seqs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">kseq</span><span class="p">]</span>
+<span class="n">intron_mut_seqs</span> <span class="o">=</span> <span class="n">intron_mut_seqs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">kseq</span><span class="p">]</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-17"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How many differences (SNPs) between reference and alternative sequences are there for first exon sequence?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="compute-effect-of-snps">Compute effect of SNPs</h2>
+
+<p>To compute the effect of SNPs, we need :</p>
+
+<ol>
+  <li>Compute the embdedding of DNA sequences</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">def</span> <span class="nf">computeEmbedding</span><span class="p">(</span><span class="n">seqs</span><span class="p">):</span>
+    <span class="n">tokenized_dna</span> <span class="o">=</span> <span class="nf">tokenizer</span><span class="p">(</span>
+      <span class="n">seqs</span><span class="p">,</span>
+      <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">,</span>
+      <span class="n">padding</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">inputs_seqs</span> <span class="o">=</span> <span class="n">tokenized_dna</span><span class="p">[</span><span class="sh">"</span><span class="s">input_ids</span><span class="sh">"</span><span class="p">]</span>
+    <span class="n">hidden_states</span> <span class="o">=</span> <span class="nf">model</span><span class="p">(</span><span class="n">inputs_seqs</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nf">detach</span><span class="p">().</span><span class="nf">cpu</span><span class="p">().</span><span class="nf">numpy</span><span class="p">()</span> 
+    <span class="k">return</span> <span class="n">torch</span><span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="n">hidden_states</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Compute the L2 distance between reference (without SNP) and alternative (with SNP):</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">def</span> <span class="nf">computeMutationEffect</span><span class="p">(</span><span class="n">wt_seqs</span><span class="p">,</span> <span class="n">mut_seqs</span><span class="p">):</span>
+    <span class="n">wt_embedding</span> <span class="o">=</span> <span class="nf">computeEmbedding</span><span class="p">(</span><span class="n">wt_seqs</span><span class="p">)</span>
+    <span class="n">mut_embedding</span> <span class="o">=</span> <span class="nf">computeEmbedding</span><span class="p">(</span><span class="n">mut_seqs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="p">.</span><span class="nf">norm</span><span class="p">(</span><span class="n">mut_embedding</span> <span class="o">-</span> <span class="n">wt_embedding</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">exon_SNP_distL2</span> <span class="o">=</span> <span class="nf">computeMutationEffect</span><span class="p">(</span><span class="n">exon_wt_seqs</span><span class="p">,</span> <span class="n">exon_mut_seqs</span><span class="p">)</span>
+<span class="n">intron_SNP_distL2</span> <span class="o">=</span> <span class="nf">computeMutationEffect</span><span class="p">(</span><span class="n">intron_wt_seqs</span><span class="p">,</span><span class="n">intron_mut_seqs</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-18"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What are the dimensions of <code class="language-plaintext highlighter-rouge">exon_SNP_distL2</code> and <code class="language-plaintext highlighter-rouge">intron_SNP_distL2</code>?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="compare-snps-effects-between-introns-and-exons">Compare SNPs effects between introns and exons</h2>
+
+<p>We can now quantify the impact of SNPs and determine if the differences are statistically significant.</p>
+
+<p>To visualize the predicted effects of SNPs, we can use a boxplot to compare the L2 distances for SNPs in exons and introns. The L2 distance serves as a metric for the impact of mutations, with higher distances indicating a more significant effect.</p>
+
+<p>Boxplot of predicted SNP effects</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SNPs_distL2</span> <span class="o">=</span> <span class="p">{</span><span class="sh">"</span><span class="s">exons</span><span class="sh">"</span><span class="p">:</span> <span class="n">exon_SNP_distL2</span><span class="p">,</span> <span class="sh">"</span><span class="s">introns</span><span class="sh">"</span><span class="p">:</span> <span class="n">intron_SNP_distL2</span><span class="p">}</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">.</span><span class="nf">boxplot</span><span class="p">(</span><span class="n">SNPs_distL2</span><span class="p">.</span><span class="nf">values</span><span class="p">())</span>
+<span class="n">ax</span><span class="p">.</span><span class="nf">set_xticklabels</span><span class="p">(</span><span class="n">SNPs_distL2</span><span class="p">.</span><span class="nf">keys</span><span class="p">())</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-19"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p><a href="./images/boxplot.png" rel="noopener noreferrer"><img src="./images/boxplot.png" alt="Box plot comparing two categories: exonSNPs and intronSNPs. The plot displays the distribution of values for each category, with the median indicated by an orange line within each box. The boxes represent the interquartile range, while the whiskers extend to show the range of the data, excluding outliers, which are depicted as individual points above the whiskers. The exonSNPs category shows a higher median and more variability compared to the intronSNPs category." width="543" height="413" loading="lazy" /></a></p>
+
+  <p>What can we conclude from the boxplot?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>From the plot, we observe that the L2 distance is generally higher for SNPs in exons compared to those in introns. This suggests that SNPs in exons have a stronger predicted effect, which aligns with their role in coding regions of genes.</p>
+  </blockquote>
+
+</blockquote>
+
+<p>To determine if the observed differences in L2 distances are statistically significant, we can perform hypothesis tests to compare the distributions:</p>
+
+<ul>
+  <li>
+    <p>T-test:</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sp</span><span class="p">.</span><span class="n">stats</span><span class="p">.</span><span class="nf">ttest_ind</span><span class="p">(</span><span class="n">exon_SNP_distL2</span><span class="p">,</span> <span class="n">intron_SNP_distL2</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-20"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+      <p>What can we conclude from the t-test?</p>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-20"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-20" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>The t-test yields a p-value of approximately \(7.56 \cdot 10^{−7}\), indicating a statistically significant difference between the L2 distances of SNPs in exons and introns.</p>
+      </blockquote>
+
+    </blockquote>
+  </li>
+  <li>
+    <p>Wilcoxon rank-sum test:</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sp</span><span class="p">.</span><span class="n">stats</span><span class="p">.</span><span class="nf">wilcoxon</span><span class="p">(</span><span class="n">distL2_exonSNPs</span><span class="p">,</span><span class="n">distL2_intronSNPs</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-21"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+      <p>What can we conclude from the Wilcoxon test?</p>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-21"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-21" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>The Wilcoxon rank-sum test also shows a significant p-value of approximately \(2.87 \cdot 10^{−6}\), confirming that the distributions are significantly different.</p>
+      </blockquote>
+
+    </blockquote>
+  </li>
+</ul>
+
+<p>The analysis demonstrates that SNPs in exons have a more substantial impact on the sequence embeddings compared to SNPs in introns, as evidenced by higher L2 distances. This finding is statistically significant, highlighting the importance of exonic SNPs in potentially altering gene function and expression. By understanding these differences, researchers can gain insights into the functional consequences of genetic variations in different genomic regions.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Throughout this tutorial, we explored a comprehensive workflow for analyzing DNA sequences and assessing the impact of mutations using a pre-trained DNA language model. We began by tokenizing DNA sequences, converting them into numerical representations that the model could process and analyze effectively. Following this, we loaded and configured a pre-trained model to handle these sequences, ensuring seamless integration with the tokenizer. We then delved into comparing the effects of mutations, both with and without amino acid modifications, showcasing the model’s ability to discern subtle differences in sequence impacts. Furthermore, we focused on analyzing the effects of Single Nucleotide Polymorphisms (SNPs) in exons and introns. By loading the relevant sequences, computing the L2 distances between embeddings of wild-type and mutated sequences, and visualizing the results, we quantified and compared the impact of SNPs in these regions. Our analysis revealed that SNPs in exons generally have a more significant impact than those in introns, a finding supported by statistical tests. This tutorial underscores the power of pre-trained models in bioinformatics, offering valuable insights into the functional consequences of genetic variations and paving the way for further research in genomics.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Pre-trained DNA language models are powerful tools for analyzing genetic sequences, enabling efficient and accurate assessment of mutation impacts without extensive computational resources.</p>
+</li>
+                        
+                        <li><p>SNPs in exons generally have a more significant impact on gene function compared to those in introns, highlighting the importance of focusing on coding regions for understanding genetic variations.</p>
+</li>
+                        
+                        <li><p>Utilizing embeddings to quantify the effects of mutations provides a robust method for comparing sequence variations, offering insights into the functional consequences of SNPs and other genetic modifications.</p>
+</li>
+                        
+                        <li><p>Employing statistical tests, such as t-tests and Wilcoxon rank-sum tests, is crucial for validating observed differences in genetic data, ensuring that findings are supported by empirical evidence.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                
+                  <li><a href="/training-material/topics/statistics/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/genomic-llm-zeroshot-prediction"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/genomic-llm-zeroshot-prediction">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Raphael Mourad, Bérénice Batut,  <b>Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/tutorial.html">https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{statistics-genomic-llm-zeroshot-prediction,
+author = "Raphael Mourad and Bérénice Batut",
+	title = "Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/statistics/tutorials/genomic-llm-zeroshot-prediction/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bf2ed173efee6757a347c2b9fdc10d2f8809cd23">bf2ed17</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+	
+
+    </body>
+</html>

@@ -1,0 +1,2791 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Fine-tuning a LLM for DNA Sequence Classification / Fine-tuning a LLM for DNA Sequence Classification / Statistics and machine learning</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@bf2ed173efee6757a347c2b9fdc10d2f8809cd23",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Fine-tuning a LLM for DNA Sequence Classification">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-04-17 09:19:54 +0000">
+<meta name="DC.creator" content="Raphael Mourad">
+<meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Statistics and machine learning / Fine-tuning a LLM for DNA Sequence Classification / Hands-on: Fine-tuning a LLM for DNA Sequence Classification">
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Fine-tuning a LLM for DNA Sequence Classification",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Draft",
+  "dateModified": "2025-04-17 09:19:54 +0000",
+  "datePublished": "2025-04-17 09:19:54 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "abstract": "After preparing, training, and utilizing a language model for DNA sequences, we can now fine-tune a pre-trained Large Language Model (LLM) for specific DNA sequence classification tasks. Here, we will use a pre-trained model from Hugging Face, specifically the [Mistral-DNA-v1-17M-hg38](https://huggingface.co/RaphaelMourad/Mistral-DNA-v1-17M-hg38), and adapt it to classify DNA sequences based on their biological functions. Our objective is to classify sequences according to whether they bind to transcription factors.",
+  "learningResourceType": "e-learning",
+  "name": "Fine-tuning a LLM for DNA Sequence Classification",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT3H",
+  "teaches": "- Load a pre-trained model and modify its architecture to include a classification layer.\n- Prepare and preprocess labeled DNA sequences for fine-tuning.\n- Define and configure training parameters to optimize the model's performance on the classification task.\n- Evaluate the fine-tuned model's accuracy and robustness in distinguishing between different classes of DNA sequences.",
+  "keywords": [
+    "Statistics and machine learning",
+    "ELIXIR",
+    "AI & ML",
+    "Large Language Model",
+    "work-in-progress",
+    "jupyter-notebook"
+  ],
+  "description": "## Abstract\n\nAfter preparing, training, and utilizing a language model for DNA sequences, we can now fine-tune a pre-trained Large Language Model (LLM) for specific DNA sequence classification tasks. Here, we will use a pre-trained model from Hugging Face, specifically the [Mistral-DNA-v1-17M-hg38](https://huggingface.co/RaphaelMourad/Mistral-DNA-v1-17M-hg38), and adapt it to classify DNA sequences based on their biological functions. Our objective is to classify sequences according to whether they bind to transcription factors.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to classify a DNA sequence depending on if it binds a protein or not (transcription factor)?\n\n\n## Learning Objectives\n\n- Load a pre-trained model and modify its architecture to include a classification layer.\n- Prepare and preprocess labeled DNA sequences for fine-tuning.\n- Define and configure training parameters to optimize the model's performance on the classification task.\n- Evaluate the fine-tuned model's accuracy and robustness in distinguishing between different classes of DNA sequences.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-basics/tutorial.html",
+      "name": "Introduction to Python",
+      "description": "Hands-on for 'Introduction to Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.html",
+      "name": "Python - Warm-up for statistics and machine learning",
+      "description": "Hands-on for 'Python - Warm-up for statistics and machine learning' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/intro-to-ml-with-python/slides.html",
+      "name": "Foundational Aspects of Machine Learning",
+      "description": "Slides for 'Foundational Aspects of Machine Learning' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/intro-to-ml-with-python/tutorial.html",
+      "name": "Foundational Aspects of Machine Learning using Python",
+      "description": "Hands-on for 'Foundational Aspects of Machine Learning using Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/neural-networks-with-python/slides.html",
+      "name": "Neural networks using Python",
+      "description": "Slides for 'Neural networks using Python' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/neural-networks-with-python/tutorial.html",
+      "name": "Neural networks using Python",
+      "description": "Hands-on for 'Neural networks using Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/slides.html",
+      "name": "Deep Learning (without Generative Artificial Intelligence) using Python",
+      "description": "Slides for 'Deep Learning (without Generative Artificial Intelligence) using Python' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/tutorial.html",
+      "name": "Deep Learning (without Generative Artificial Intelligence) using Python",
+      "description": "Hands-on for 'Deep Learning (without Generative Artificial Intelligence) using Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.html",
+      "name": "Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences",
+      "description": "Hands-on for 'Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/raphaelmourad/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/raphaelmourad/",
+      "name": "Raphael Mourad",
+      "image": "https://avatars.githubusercontent.com/raphaelmourad",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    }
+  ],
+  "contributor": [],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-finetuning/statistics-genomic-llm-finetuning.ipynb",
+      "name": "Jupyter Notebook (with Solutions)"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-finetuning/statistics-genomic-llm-finetuning-course.ipynb",
+      "name": "Jupyter Notebook (without Solutions)"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Statistics and machine learning
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and machine learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-statistics">
+    <h1 data-toc-skip>Fine-tuning a LLM for DNA Sequence Classification</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/raphaelmourad/" class="contributor-badge contributor-raphaelmourad"><img src="https://avatars.githubusercontent.com/raphaelmourad?s=36" alt="Raphael Mourad avatar" width="36" class="avatar" />
+    Raphael Mourad</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to classify a DNA sequence depending on if it binds a protein or not (transcription factor)?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Load a pre-trained model and modify its architecture to include a classification layer.</p>
+</li>
+        
+        <li><p>Prepare and preprocess labeled DNA sequences for fine-tuning.</p>
+</li>
+        
+        <li><p>Define and configure training parameters to optimize the model’s performance on the classification task.</p>
+</li>
+        
+        <li><p>Evaluate the fine-tuned model’s accuracy and robustness in distinguishing between different classes of DNA sequences.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/data-science/tutorials/python-basics/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Introduction to Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Python - Warm-up for statistics and machine learning</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/statistics/tutorials/intro-to-ml-with-python/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Foundational Aspects of Machine Learning using Python</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/intro-to-ml-with-python/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Foundational Aspects of Machine Learning using Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/statistics/tutorials/neural-networks-with-python/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Neural networks using Python</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/neural-networks-with-python/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Neural networks using Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Deep Learning (without Generative Artificial Intelligence) using Python</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Deep Learning (without Generative Artificial Intelligence) using Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/genomic-llm-finetuning/statistics-genomic-llm-finetuning.ipynb" title="Jupyter Notebook" alt="Fine-tuning a LLM for DNA Sequence Classification Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr" title="">
+			UseGalaxy.fr
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 17, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 17, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+                <section aria-label="Tutorial Notebook access information" id="tutorial-notebook">
+                     
+                     
+                     
+                     
+                    
+                        <blockquote class="comment">
+                            <div class="box-title">Best viewed in a Jupyter Notebook</div>
+                            <p>
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <!--
+                            <p><b>Launching on MyBinder</b>
+                                Click here and the notebook will launch on MyBinder.org
+                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fstatistics%2Ftutorials%2Fgenomic-llm-finetuning%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                            </p>
+                            -->
+                            
+                            <p><b>Run on the GTN with JupyterLite (in-browser computations)</b>
+                                <ol>
+                                    <li><a href="/training-material/jupyter/lab/index.html?path=statistics-genomic-llm-finetuning.ipynb">Click to Launch JupyterLite</a></li>
+                                </ol>
+                            </p>
+                            
+                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                                <ol>
+                                    <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                                    <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-finetuning/statistics-genomic-llm-finetuning.ipynb</code></li>
+                                    <li>Select the notebook that appears in the list of files on the left.</li>
+                                </ol>
+                            </p>
+                            <p><b>Downloading the notebook</b>
+                                <ol>
+                                    <li>Right click one of these links: <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-finetuning/statistics-genomic-llm-finetuning.ipynb">Jupyter Notebook (With Solutions)</a>, <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-finetuning/statistics-genomic-llm-finetuning-course.ipynb">Jupyter Notebook (Without Solutions)</a></li>
+                                    <li>Save Link As..</li>
+                                </ol>
+                            </p>
+                        </blockquote>
+                    
+                </section>
+                
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>After preparing, training, and utilizing a language model for DNA sequences, we can now fine-tune a pre-trained Large Language Model (LLM) for specific DNA sequence classification tasks. Here, we will use a pre-trained model from Hugging Face, specifically the <a href="https://huggingface.co/RaphaelMourad/Mistral-DNA-v1-17M-hg38">Mistral-DNA-v1-17M-hg38</a>, and adapt it to classify DNA sequences based on their biological functions. Our objective is to classify sequences according to whether they bind to transcription factors.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-transcription-factors-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Transcription factors</div>
+
+  <p>Transcription factors are proteins that play a crucial role in regulating gene expression by binding to specific DNA sequences, known as enhancers or promoters. These proteins act as molecular switches, turning genes on or off in response to various cellular signals and environmental cues. By binding to DNA, transcription factors either promote or inhibit the recruitment of RNA polymerase, the enzyme responsible for transcribing DNA into RNA, thereby influencing the rate of transcription.</p>
+
+  <figure id="figure-1" style="max-width: 90%;"><img src="images/two_dna_sequences.png" alt="Diagram illustrating DNA binding with CTCF. The left panel, outlined in red, shows a DNA sequence 'CCACCAGGGGGCGC' labeled as 'DNA binding CTCF,' with an oval labeled 'CTCF' above it. The right panel, outlined in blue, shows a different DNA sequence 'GTGGCTAGTAGGTAG' labeled as 'DNA not binding CTCF,' indicating that this sequence does not interact with CTCF." width="2486" height="852" loading="lazy" /><a target="_blank" href="images/two_dna_sequences.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Two types of DNA sequences. On the left, a DNA sequence that binds the transcription factor CTCF. On the right, a DNA sequence that does not bind CTCF.</figcaption></figure>
+
+  <p>Transcription factors are essential for numerous biological processes, including cell differentiation, development, and response to external stimuli. Their ability to recognize and bind specific DNA sequences allows them to orchestrate complex gene expression programs, ensuring that the right genes are expressed at the right time and in the right place within an organism. Understanding the function and regulation of transcription factors is vital for deciphering the molecular mechanisms underlying health and disease, and it opens avenues for developing targeted therapeutic interventions.</p>
+
+</blockquote>
+
+<p>This classification task is crucial for understanding gene regulation, as transcription factors play a vital role in controlling which genes are expressed in a cell. By training a model to predict whether a DNA sequence binds to a transcription factor, we can gain insights into regulatory mechanisms and potentially identify novel binding sites or understand the impact of genetic variations on transcription factor binding.</p>
+
+<p>By fine-tuning the model, we aim to leverage its pre-trained knowledge of DNA sequences to achieve high accuracy in this classification task. This tutorial will guide you through the necessary steps, from data preparation to model evaluation, ensuring you can apply these techniques to your own research or projects.</p>
+
+<p>We will use <a href="https://huggingface.co/RaphaelMourad/Mistral-DNA-v1-1M-hg38"><code class="language-plaintext highlighter-rouge">Mistral-DNA-v1-17M-hg38</code></a>, a mixed model that was pre-trained on the entire Human Genome. It contains approximately 17 million parameters and was trained using the Human Genome assembly GRCh38 on sequences of 10,000 bases (10K):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model_name</span><span class="o">=</span><span class="sh">"</span><span class="s">RaphaelMourad/Mistral-DNA-v1-17M-hg38</span><span class="sh">"</span>
+</code></pre></div></div>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-pretraining-a-llm-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Pretraining a LLM</div>
+
+  <p>To learn how to pretrain a LLM on DNA, please follow the dedicated <a href="/training-material/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.html">“Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences”</a> tutorial</p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#prepare-resources" id="markdown-toc-prepare-resources">Prepare resources</a>    <ol>
+      <li><a href="#install-dependencies" id="markdown-toc-install-dependencies">Install dependencies</a></li>
+      <li><a href="#import-python-libraries" id="markdown-toc-import-python-libraries">Import Python libraries</a></li>
+    </ol>
+  </li>
+  <li><a href="#configure-fine-tuning" id="markdown-toc-configure-fine-tuning">Configure fine-tuning</a>    <ol>
+      <li><a href="#check-and-configure-available-resources" id="markdown-toc-check-and-configure-available-resources">Check and configure available resources</a></li>
+      <li><a href="#specify-settings-for-quantization" id="markdown-toc-specify-settings-for-quantization">Specify settings for quantization</a></li>
+      <li><a href="#configure-accelerate" id="markdown-toc-configure-accelerate">Configure Accelerate</a></li>
+      <li><a href="#configure-lora-for-parameter-efficient-fine-tuning" id="markdown-toc-configure-lora-for-parameter-efficient-fine-tuning">Configure LoRA for Parameter-Efficient Fine-Tuning</a></li>
+      <li><a href="#configure-training-arguments" id="markdown-toc-configure-training-arguments">Configure Training Arguments</a></li>
+    </ol>
+  </li>
+  <li><a href="#prepare-the-tokenizer" id="markdown-toc-prepare-the-tokenizer">Prepare the tokenizer</a></li>
+  <li><a href="#prepare-data" id="markdown-toc-prepare-data">Prepare data</a>    <ol>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+      <li><a href="#prepare-datasets-for-training-and-validation" id="markdown-toc-prepare-datasets-for-training-and-validation">Prepare Datasets for Training and Validation</a></li>
+      <li><a href="#configure-data-collation" id="markdown-toc-configure-data-collation">Configure Data Collation</a></li>
+    </ol>
+  </li>
+  <li><a href="#load-and-configure-the-model-for-sequence-classification" id="markdown-toc-load-and-configure-the-model-for-sequence-classification">Load and Configure the Model for Sequence Classification</a></li>
+  <li><a href="#initialize-the-trainer" id="markdown-toc-initialize-the-trainer">Initialize the Trainer</a></li>
+  <li><a href="#start-the-training" id="markdown-toc-start-the-training">Start the training</a></li>
+  <li><a href="#evaluate-model-performance" id="markdown-toc-evaluate-model-performance">Evaluate Model Performance</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="prepare-resources">Prepare resources</h1>
+
+<h2 id="install-dependencies">Install dependencies</h2>
+
+<p>The first step is to install the required dependencies:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">accelerate</span><span class="o">==</span><span class="mf">1.1</span><span class="p">.</span><span class="mi">0</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">peft</span><span class="o">==</span><span class="mf">0.13</span><span class="p">.</span><span class="mi">2</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">torch</span><span class="o">==</span><span class="mf">2.5</span><span class="p">.</span><span class="mi">0</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">transformers</span> <span class="o">-</span><span class="n">U</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What is <code class="language-plaintext highlighter-rouge">accelerate</code>?</li>
+    <li>What is <code class="language-plaintext highlighter-rouge">peft</code>?</li>
+    <li>What is <code class="language-plaintext highlighter-rouge">torch</code>?</li>
+    <li>What is <code class="language-plaintext highlighter-rouge">transformers</code>?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">accelerate</code> is a library by <a href="https://huggingface.co/">Hugging Face</a> – a platform that provides tools and resources for building, training, and deploying machine learning models – designed to simplify the process of training and deploying machine learning models across different hardware environments. It provides tools to optimize performance on GPUs, TPUs, and other accelerators, making it easier to scale models efficiently.</p>
+      </li>
+      <li>
+        <p>The PEFT (Parameter-Efficient Fine-Tuning) Python library, developed by Hugging Face, is a tool designed to efficiently adapt large pretrained models to various downstream tasks without the need to fine-tune all of the model’s parameters. By focusing on a small subset of parameters, PEFT significantly reduces computational and storage costs, making it feasible to fine-tune large language models (LLMs) on consumer-grade hardware. The library integrates seamlessly with the Hugging Face ecosystem, including Transformers, Diffusers, and Accelerate, enabling streamlined model training and inference. PEFT supports techniques like LoRA (Low-Rank Adaptation) and prompt tuning, and it can be combined with quantization to further optimize resource usage. Its open-source nature fosters collaboration and accessibility, allowing developers to customize models for specific applications quickly and efficiently.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">torch</code>, also known as PyTorch, it is an open-source machine learning library developed by Facebook’s AI Research lab. It provides a flexible platform for building and training neural networks, with a focus on tensor computations and automatic differentiation.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">transformers</code> is a library by Hugging Face that provides implementations of state-of-the-art transformer models for natural language processing (NLP). It includes pre-trained models and tools for fine-tuning, making it easier to apply transformers to various NLP tasks.</p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="import-python-libraries">Import Python libraries</h2>
+
+<p>Let’s now import them.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
+
+<span class="kn">import</span> <span class="n">accelerate</span>
+<span class="kn">import</span> <span class="n">flash_attn</span>
+<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">import</span> <span class="n">transformers</span>
+<span class="kn">from</span> <span class="n">accelerate</span> <span class="kn">import</span> <span class="n">FullyShardedDataParallelPlugin</span><span class="p">,</span> <span class="n">Accelerator</span>
+<span class="kn">from</span> <span class="n">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="n">peft</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">LoraConfig</span><span class="p">,</span>
+    <span class="n">get_peft_model</span><span class="p">,</span>
+    <span class="n">get_peft_model_state_dict</span><span class="p">,</span>
+    <span class="n">prepare_model_for_kbit_training</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="n">progressbar</span> <span class="kn">import</span> <span class="n">ProgressBar</span>
+<span class="kn">from</span> <span class="n">random</span> <span class="kn">import</span> <span class="n">randrange</span>
+<span class="kn">from</span> <span class="n">torch.utils.data</span> <span class="kn">import</span> <span class="n">TensorDataset</span><span class="p">,</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="n">torch.distributed.fsdp.fully_sharded_data_parallel</span> <span class="kn">import</span> <span class="n">FullOptimStateDictConfig</span><span class="p">,</span> <span class="n">FullStateDictConfig</span>
+<span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AutoTokenizer</span><span class="p">,</span>
+    <span class="n">AutoModel</span><span class="p">,</span>
+    <span class="n">BitsAndBytesConfig</span><span class="p">,</span>
+    <span class="n">EarlyStoppingCallback</span><span class="p">,</span>
+    <span class="n">set_seed</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-versions-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Versions</div>
+
+  <p>This tutorial has been tested with following versions:</p>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">numpy</code> = 1.19 (and not 1.2)</li>
+    <li><code class="language-plaintext highlighter-rouge">transformers</code> &gt; 4.47.1</li>
+  </ul>
+
+  <p>You can check the versions with:</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="p">.</span><span class="n">__version__</span>
+<span class="n">transformers</span><span class="p">.</span><span class="n">__version__</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<h1 id="configure-fine-tuning">Configure fine-tuning</h1>
+
+<h2 id="check-and-configure-available-resources">Check and configure available resources</h2>
+
+<p>We select the appropriate device (CUDA-enabled GPU if available) for running PyTorch operations</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">torch</span><span class="p">.</span><span class="nf">device</span><span class="p">(</span><span class="sh">'</span><span class="s">cuda</span><span class="sh">'</span> <span class="k">if</span> <span class="n">torch</span><span class="p">.</span><span class="n">cuda</span><span class="p">.</span><span class="nf">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="sh">'</span><span class="s">cpu</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Let’s check the GPU usage and RAM:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span>
+</code></pre></div></div>
+
+<p>We now set an environment variable that configures how PyTorch manages CUDA memory allocations</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">"</span><span class="s">PYTORCH_CUDA_ALLOC_CONF</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">max_split_size_mb:32</span><span class="sh">"</span>
+</code></pre></div></div>
+
+<h2 id="specify-settings-for-quantization">Specify settings for quantization</h2>
+
+<p>Quantization is a technique used in machine learning and signal processing to reduce the precision of numerical values, typically to decrease memory usage and computational requirements. This process is particularly useful when working with large models as it allows them to be deployed on hardware with limited resources without significantly sacrificing performance.</p>
+
+<p>Here, we use <code class="language-plaintext highlighter-rouge">BitsAndBytesConfig</code> to configure a 4-bit quantization. Using 4-bit precision reduces the memory footprint of the model, which is particularly useful for very large models that might not fit into GPU memory otherwise:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bnb_config</span> <span class="o">=</span> <span class="nc">BitsAndBytesConfig</span><span class="p">(</span>
+    <span class="n">load_in_4bit</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">bnb_4bit_use_double_quant</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">bnb_4bit_compute_dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">bfloat16</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What do the parameters?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">load_in_4bit=True</code></li>
+    <li><code class="language-plaintext highlighter-rouge">bnb_4bit_use_double_quant=True</code></li>
+    <li><code class="language-plaintext highlighter-rouge">bnb_4bit_compute_dtype=torch.bfloat16</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">load_in_4bit=True</code>: Specifies that the model should be loaded with 4-bit quantization. Using 4-bit precision reduces the memory footprint of the model, which is particularly useful for very large models that might not fit into GPU memory otherwise.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">bnb_4bit_use_double_quant=True</code>: enables double quantization, which means that the quantization constants from the first quantization are quantized again. This further reduces the memory footprint, although it may introduce additional computational overhead.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">bnb_4bit_compute_dtype=torch.bfloat16</code>: sets the compute data type to bfloat16 (Brain Floating Point 16-bit format). Using bfloat16 can provide a good balance between computational efficiency and numerical stability, especially on hardware that supports this format, such as certain GPUs and TPUs.</p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="configure-accelerate">Configure Accelerate</h2>
+
+<p>Now, we will configure the <a href="https://huggingface.co/docs/accelerate/en/index">Hugging Face Accelerate library</a> to optimize the training process for large models using Fully Sharded Data Parallel (FSDP). This setup is crucial for efficiently utilizing GPU resources and enabling distributed training across multiple devices.</p>
+
+<p>First, we need to configure the FSDP plugin, which will manage how model parameters and optimizer states are sharded across GPUs. This configuration helps in reducing memory usage and allows for the training of larger models.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fsdp_plugin</span> <span class="o">=</span> <span class="nc">FullyShardedDataParallelPlugin</span><span class="p">(</span>
+    <span class="n">state_dict_config</span><span class="o">=</span><span class="nc">FullStateDictConfig</span><span class="p">(</span><span class="n">offload_to_cpu</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">rank0_only</span><span class="o">=</span><span class="bp">False</span><span class="p">),</span>
+    <span class="n">optim_state_dict_config</span><span class="o">=</span><span class="nc">FullOptimStateDictConfig</span><span class="p">(</span><span class="n">offload_to_cpu</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">rank0_only</span><span class="o">=</span><span class="bp">False</span><span class="p">),</span>
+<span class="p">)</span>
+</code></pre></div></div>
+<blockquote class="question">
+  <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What do the parameters?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">state_dict_config=FullStateDictConfig(offload_to_cpu=True, rank0_only=False)</code>?</li>
+    <li><code class="language-plaintext highlighter-rouge">optim_state_dict_config=FullOptimStateDictConfig(offload_to_cpu=True, rank0_only=False)</code>?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">state_dict_config=FullStateDictConfig(offload_to_cpu=True, rank0_only=False)</code>
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">FullStateDictConfig</code>: Configures how the model’s state dictionary (parameters) is managed.</li>
+          <li><code class="language-plaintext highlighter-rouge">offload_to_cpu=True</code>: Specifies that the model’s parameters should be offloaded to CPU memory when not in use. This helps free up GPU memory, especially useful when working with large models.</li>
+          <li><code class="language-plaintext highlighter-rouge">rank0_only=False</code>: Indicates that the state dictionary operations (like saving and loading) are not restricted to the rank 0 process. This allows all processes to participate in these operations, which can be beneficial for distributed training setups.</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">optim_state_dict_config=FullOptimStateDictConfig(offload_to_cpu=True, rank0_only=False)</code>
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">FullOptimStateDictConfig</code>: Configures how the optimizer’s state dictionary is managed.</li>
+          <li><code class="language-plaintext highlighter-rouge">offload_to_cpu=True</code>: Similar to the model’s state dictionary, this setting offloads the optimizer states to CPU memory when not in use, further reducing GPU memory usage.</li>
+          <li><code class="language-plaintext highlighter-rouge">rank0_only=False</code>: Allows all processes to handle the optimizer state dictionary operations, ensuring that the optimizer states are managed efficiently across the distributed setup.</li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Next, we initialize the Accelerator from the Hugging Face Accelerate library, integrating the FSDP plugin for seamless distributed training:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">accelerator</span> <span class="o">=</span> <span class="nc">Accelerator</span><span class="p">(</span><span class="n">fsdp_plugin</span><span class="o">=</span><span class="n">fsdp_plugin</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>By passing the FSDP plugin to the <code class="language-plaintext highlighter-rouge">Accelerator</code>, we enable sharded data parallelism, which efficiently manages model and optimizer states across multiple GPUs.</p>
+
+<p>With this configuration, the <code class="language-plaintext highlighter-rouge">Accelerator</code> will handle the complexities of distributed training, allowing us to focus on developing and experimenting with our models. This setup is particularly beneficial when working with large-scale models and limited GPU resources, as it optimizes memory usage and enables faster training times.</p>
+
+<h2 id="configure-lora-for-parameter-efficient-fine-tuning">Configure LoRA for Parameter-Efficient Fine-Tuning</h2>
+
+<p>We will configure the LoRA (Low-Rank Adaptation) settings for parameter-efficient fine-tuning of a large language model. LoRA is a technique that allows us to fine-tune only a small number of additional parameters while keeping the original model weights frozen, making it highly efficient for adapting large models to specific tasks.</p>
+
+<p>We use the <code class="language-plaintext highlighter-rouge">LoraConfig</code> class to define the settings for LoRA. This configuration specifies how the low-rank adaptations are applied to the model.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">peft_config</span> <span class="o">=</span> <span class="nc">LoraConfig</span><span class="p">(</span>
+    <span class="n">r</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">lora_alpha</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">lora_dropout</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">bias</span><span class="o">=</span><span class="sh">"</span><span class="s">none</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">task_type</span><span class="o">=</span><span class="sh">"</span><span class="s">SEQ_CLS</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">target_modules</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">q_proj</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">k_proj</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">v_proj</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">o_proj</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">gate_proj</span><span class="sh">"</span><span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-14"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What do the parameters?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">r=16</code>?</li>
+    <li><code class="language-plaintext highlighter-rouge">lora_alpha=16</code>?</li>
+    <li><code class="language-plaintext highlighter-rouge">lora_dropout=0.05</code>?</li>
+    <li><code class="language-plaintext highlighter-rouge">bias="none"</code>?</li>
+    <li><code class="language-plaintext highlighter-rouge">task_type="SEQ_CLS"</code>?</li>
+    <li><code class="language-plaintext highlighter-rouge">target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj"]</code>?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">r=16</code>: This parameter specifies the rank of the low-rank matrices used in the adaptation. A higher rank allows the model to capture more complex patterns but also increases the number of trainable parameters.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">lora_alpha=16</code>: This scaling factor controls the magnitude of the updates applied by the low-rank matrices. It helps balance the influence of the adaptations relative to the original model weights.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">lora_dropout=0.05</code>: Dropout is applied to the low-rank matrices during training to prevent overfitting. A dropout rate of 0.05 means that 5% of the elements are randomly set to zero during each training step.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">bias="none"</code>: This setting specifies that no bias parameters are added to the low-rank adaptations. Other options include “all” to add biases to all layers or “lora_only” to add biases only to the LoRA layers.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">task_type="SEQ_CLS"</code>: This indicates that the model is being fine-tuned for a sequence classification task. Other task types might include “CAUSAL_LM” for causal language modeling or “SEQ_2_SEQ_LM” for sequence-to-sequence tasks.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj"]</code>: This list specifies the modules within the model architecture to which the LoRA adaptations will be applied. These modules are typically the attention layers in transformer models:</p>
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">"q_proj"</code>: query projections</li>
+          <li><code class="language-plaintext highlighter-rouge">"k_proj"</code>: key projections</li>
+          <li><code class="language-plaintext highlighter-rouge">"v_proj"</code>: value projections</li>
+          <li><code class="language-plaintext highlighter-rouge">"o_proj"</code>: output projections</li>
+          <li><code class="language-plaintext highlighter-rouge">"gate_proj"</code>: gating projections in some architectures.</li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>By configuring LoRA in this way, we can efficiently adapt a large pretrained model to a specific task with minimal computational overhead, making it feasible to fine-tune on consumer-grade hardware. This approach is particularly useful for tasks like text classification, sentiment analysis, or any other application where we need to specialize a general-purpose language model.</p>
+
+<h2 id="configure-training-arguments">Configure Training Arguments</h2>
+
+<p>Let’s now set up the training arguments using the <code class="language-plaintext highlighter-rouge">TrainingArguments</code> class from the Hugging Face Transformers library. These arguments define the training configuration, including hyperparameters and settings for saving and evaluating the model.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">training_args</span> <span class="o">=</span> <span class="n">transformers</span><span class="p">.</span><span class="nc">TrainingArguments</span><span class="p">(</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="sh">"</span><span class="s">./results</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">evaluation_strategy</span><span class="o">=</span><span class="sh">"</span><span class="s">epoch</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">save_strategy</span><span class="o">=</span><span class="sh">"</span><span class="s">epoch</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span>
+    <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">per_device_eval_batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+    <span class="n">num_train_epochs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">bf16</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">report_to</span><span class="o">=</span><span class="sh">"</span><span class="s">none</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">load_best_model_at_end</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="n">report_to</span><span class="o">=</span><span class="sh">"</span><span class="s">none</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What do the parameters?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">output_dir="./results"</code></li>
+    <li><code class="language-plaintext highlighter-rouge">evaluation_strategy="epoch"</code></li>
+    <li><code class="language-plaintext highlighter-rouge">save_strategy="epoch"</code></li>
+    <li><code class="language-plaintext highlighter-rouge">learning_rate=1e-5</code></li>
+    <li><code class="language-plaintext highlighter-rouge">per_device_train_batch_size=16</code></li>
+    <li><code class="language-plaintext highlighter-rouge">per_device_eval_batch_size=16</code></li>
+    <li><code class="language-plaintext highlighter-rouge">num_train_epochs=5</code></li>
+    <li><code class="language-plaintext highlighter-rouge">weight_decay=0.01</code></li>
+    <li><code class="language-plaintext highlighter-rouge">bf16=True</code></li>
+    <li><code class="language-plaintext highlighter-rouge">report_to="none"</code></li>
+    <li><code class="language-plaintext highlighter-rouge">load_best_model_at_end=True</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">output_dir="./results"</code>: Specifies the directory where the model predictions and checkpoints will be saved.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">evaluation_strategy="epoch"</code>: The model will be evaluated at the end of each epoch. This allows for monitoring the model’s progress and adjusting the training process as needed.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">save_strategy="epoch"</code>: The model checkpoints will be saved at the end of each epoch.  This ensures that checkpoints are available for each complete pass through the dataset.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">learning_rate=1e-5</code>: Sets the initial learning rate for the optimizer. This rate determines how much the model’s weights are updated during training.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">per_device_train_batch_size=16</code>: The number of samples per device (e.g., GPU) to load for training.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">per_device_eval_batch_size=16</code>: The number of samples per device to load for evaluation.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">num_train_epochs=5</code>: The total number of training epochs. An epoch is one complete pass through the training dataset.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">weight_decay=0.01</code>: Applies L2 regularization to the model weights to prevent overfitting.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">bf16=True</code>: Enables mixed precision training using bfloat16, which can speed up training and reduce memory usage on compatible hardware.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">report_to="none"</code>: Disables reporting to external services like WandB or TensorBoard. If you want to track metrics, you can set this to “wandb”, “tensorboard”, etc.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">load_best_model_at_end=True</code>: Ensures that the best model based on evaluation metrics is loaded at the end of training.</p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>These settings provide a balanced configuration for training a model efficiently while ensuring that the best version of the model is saved and can be used for further evaluation or deployment. Adjust these parameters based on your specific use case and available computational resources.</p>
+
+<h1 id="prepare-the-tokenizer">Prepare the tokenizer</h1>
+
+<p>We will now set up the tokenizer to convert DNA sequences into numerical tokens that the model can process. The tokenizer is a crucial component in preparing the data for model training and inference: it transforms raw text into a format that can be processed by machine learning models.</p>
+
+<p>We use the <code class="language-plaintext highlighter-rouge">AutoTokenizer</code> class from the Hugging Face Transformers library to load a pre-trained tokenizer. We specify the pre-trained model from which to load the tokenizer. This should match the model you plan to use for training or inference. This tokenizer will be configured to handle DNA sequences efficiently.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">transformers</span><span class="p">.</span><span class="n">AutoTokenizer</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="n">model_name</span><span class="p">,</span>
+    <span class="n">model_max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+    <span class="n">padding_side</span><span class="o">=</span><span class="sh">"</span><span class="s">right</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">use_fast</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">trust_remote_code</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-16"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What do the parameters?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">model_max_length=200</code></li>
+    <li><code class="language-plaintext highlighter-rouge">padding_side="right"</code></li>
+    <li><code class="language-plaintext highlighter-rouge">use_fast=True</code></li>
+    <li><code class="language-plaintext highlighter-rouge">trust_remote_code=True</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">model_max_length=200</code>: Sets the maximum length of the tokenized sequences. Sequences longer than this will be truncated, and shorter ones will be padded.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">padding_side="right"</code>: Specifies that padding should be added to the right side of the sequences. This ensures that all sequences in a batch have the same length.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">use_fast=True</code>: Enables the use of the fast tokenizer implementation, which is optimized for speed and is suitable for most use cases.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">trust_remote_code=True</code>: Allows the tokenizer to execute custom code from the model repository, which may be necessary for some models that require specific preprocessing steps.</p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>By configuring the tokenizer in this way, we ensure that our DNA sequences are properly tokenized and formatted for input into the model. This step is essential for preparing our data for efficient and effective model training and evaluation.</p>
+
+<p>Let’s now tailor the tokenizer to better suit our specific use case, ensuring that the model processes sequences accurately and efficiently. Special tokens play a crucial role in defining how sequences are processed and interpreted by the model. Here, we sets:</p>
+<ul>
+  <li>the end-of-sequence (EOS) token, which indicates the end of a sequence. It is essential for tasks where the model needs to generate sequences or understand where a sequence ends.</li>
+  <li>the padding (PAD) token, which is used to pad sequences to a uniform length within a batch. Padding ensures that all sequences in a batch have the same length, which is necessary for efficient processing during training and inference</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tokenizer.eos_token = "[EOS]"
+tokenizer.pad_token = "[PAD]"
+</code></pre></div></div>
+
+<h1 id="prepare-data">Prepare data</h1>
+
+<p>To finetune the model, we must provide a dataset to train the model. We will the data with the 1st transcription factor (<code class="language-plaintext highlighter-rouge">tf0</code>) in mouse from <span class="citation"><a href="#zhou2024dnabert2efficientfoundationmodel">Zhou <i>et al.</i> 2024</a></span>. The data is stored on <a href="https://github.com/raphaelmourad/Mistral-DNA">GitHub</a>.</p>
+
+<h2 id="get-data">Get data</h2>
+
+<p>Let’s get the data for from GitHub:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">raphaelmourad</span><span class="o">/</span><span class="n">Mistral</span><span class="o">-</span><span class="n">DNA</span><span class="p">.</span><span class="n">git</span>
+</code></pre></div></div>
+
+<p>We now need to uncompress the labeled data:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">tar</span> <span class="o">-</span><span class="n">xf</span> <span class="n">Mistral</span><span class="o">-</span><span class="n">DNA</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">GUE</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">xz</span> <span class="o">-</span><span class="n">C</span> <span class="n">Mistral</span><span class="o">-</span><span class="n">DNA</span><span class="o">/</span><span class="n">data</span><span class="o">/</span>
+</code></pre></div></div>
+
+<p>We change the current working directory to the <code class="language-plaintext highlighter-rouge">Mistral-DNA</code> folder.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">os</span><span class="p">.</span><span class="nf">chdir</span><span class="p">(</span><span class="sh">"</span><span class="s">Mistral-DNA/</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="nf">getcwd</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Let’s define experience and path to data variables</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">expe</span> <span class="o">=</span> <span class="sh">"</span><span class="s">tf/0</span><span class="sh">"</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">data/GUE/</span><span class="si">{</span> <span class="n">expe</span> <span class="si">}</span><span class="sh">"</span> 
+</code></pre></div></div>
+
+<h2 id="prepare-datasets-for-training-and-validation">Prepare Datasets for Training and Validation</h2>
+
+<p>We now need to set up the datasets required for training and validating. Properly preparing these datasets is crucial for ensuring that the model finetunes effectively and generalizes well to new data.</p>
+
+<p>We will use the files <code class="language-plaintext highlighter-rouge">data_path</code> folder we just defined:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">train.csv</code> for training</li>
+  <li><code class="language-plaintext highlighter-rouge">dev.csv</code> for validation</li>
+</ul>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-17"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How is the content of each file?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">train.csv</code></li>
+    <li><code class="language-plaintext highlighter-rouge">dev.csv</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>The 2 files are CSV files with 2 columns (<code class="language-plaintext highlighter-rouge">sequence</code> and <code class="language-plaintext highlighter-rouge">label</code>) and different number of rows:</p>
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">train.csv</code>: 32,379 rows.</li>
+      <li><code class="language-plaintext highlighter-rouge">dev.csv</code>: 1,000 rows</li>
+    </ol>
+
+    <p>Values in <code class="language-plaintext highlighter-rouge">label</code> are:</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">0</code>: The DNA sequence in <code class="language-plaintext highlighter-rouge">sequence</code> column does not bind to the 1st transcription factor.</li>
+      <li><code class="language-plaintext highlighter-rouge">1</code>: The DNA sequence in <code class="language-plaintext highlighter-rouge">sequence</code> column binds to the transcription factor.</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<p>We use the <code class="language-plaintext highlighter-rouge">SupervisedDataset</code> class to load and prepare the datasets. This class handles the tokenization and formatting of the data, making it ready for model training and evaluation.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train_dataset</span> <span class="o">=</span> <span class="nc">SupervisedDataset</span><span class="p">(</span>
+    <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+    <span class="n">data_path</span><span class="o">=</span><span class="nc">Path</span><span class="p">(</span><span class="n">data_path</span> <span class="o">/</span> <span class="sh">"</span><span class="s">train.csv</span><span class="sh">"</span><span class="p">),</span>
+    <span class="n">kmer</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">val_dataset</span> <span class="o">=</span> <span class="nc">SupervisedDataset</span><span class="p">(</span>
+    <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+    <span class="n">data_path</span><span class="o">=</span><span class="nc">Path</span><span class="p">(</span><span class="n">data_path</span> <span class="o">/</span> <span class="sh">"</span><span class="s">dev.csv</span><span class="sh">"</span><span class="p">),</span>
+    <span class="n">kmer</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-18"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What does <code class="language-plaintext highlighter-rouge">kmer=-1</code>?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>This parameter is used to specify the length of k-mers (substrings of length k) to be considered in the dataset. A value of -1 typically means that no k-mer splitting is applied, and the sequences are processed as they are.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="configure-data-collation">Configure Data Collation</h2>
+
+<p>A data collator ensures that sequences are properly padded and formatted, which is crucial for optimizing the training process.</p>
+
+<p>We’ll use the <code class="language-plaintext highlighter-rouge">DataCollatorForSupervisedDataset</code> class to handle the collation of tokenized data. This collator will manage padding and ensure that all sequences in a batch are of uniform length.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data_collator</span> <span class="o">=</span> <span class="nc">DataCollatorForSupervisedDataset</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h1 id="load-and-configure-the-model-for-sequence-classification">Load and Configure the Model for Sequence Classification</h1>
+
+<p>Let’s now load the pre-trained model, a model originally trained for large language modeling tasks, not specifically for classification. To adapt it for our binary classification task, we will add a new classification head on top of the existing architecture. This head will consist of a single neuron that connects to the output of the language model, enabling it to classify whether a DNA sequence binds to a transcription factor (label <code class="language-plaintext highlighter-rouge">1</code>) or not (label <code class="language-plaintext highlighter-rouge">0</code>).</p>
+
+<p>This additional layer, or <strong>classification head</strong>, is a simple neural network layer that takes the high-level features extracted by the language model and maps them to our binary classification output. It learns to weigh these features appropriately to make accurate predictions for our specific task.</p>
+
+<p>We use the <code class="language-plaintext highlighter-rouge">AutoModelForSequenceClassification</code> class from the Hugging Face Transformers library to load the pre-trained model and set it up for our specific classification task:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="o">=</span><span class="n">transformers</span><span class="p">.</span><span class="n">AutoModelForSequenceClassification</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span>
+    <span class="n">model_name</span><span class="p">,</span>
+    <span class="n">num_labels</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">output_hidden_states</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">quantization_config</span><span class="o">=</span><span class="n">bnb_config</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="sh">"</span><span class="s">auto</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">trust_remote_code</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-19"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What do the parameters?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">num_labels=2</code></li>
+    <li><code class="language-plaintext highlighter-rouge">output_hidden_states=False</code></li>
+    <li><code class="language-plaintext highlighter-rouge">quantization_config=bnb_config</code></li>
+    <li><code class="language-plaintext highlighter-rouge">device_map="auto"</code></li>
+    <li><code class="language-plaintext highlighter-rouge">trust_remote_code=True</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">num_labels=2</code>: Sets the number of output labels to 2, corresponding to the binary classification task (binding or not binding to transcription factors).</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">output_hidden_states=False</code>: Indicates that the model should not output hidden states. This is typically set to False unless you need access to the intermediate representations for further analysis.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">quantization_config=bnb_config</code>: Applies predefined quantization configuration to the model, which helps reduce memory usage and enables efficient training on consumer-grade hardware.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">device_map="auto"</code>: Automatically determines the best device placement for the model’s layers, optimizing for available hardware (e.g., GPUs). If it finds a GPU, it will use a GPU. If there’s no GPU, it will not use the GPU</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">trust_remote_code=True</code>: Allows the model to execute custom code from the model repository, which may be necessary for certain architectures or preprocessing steps.</p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>To ensure that the model correctly handles padding tokens, we need to align the padding token configuration between the model and the tokenizer. This step is crucial for maintaining consistency during training and inference, especially when dealing with sequences of varying lengths:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">pad_token_id</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">.</span><span class="n">pad_token_id</span>
+</code></pre></div></div>
+
+<h1 id="initialize-the-trainer">Initialize the Trainer</h1>
+
+<p>We can now set up the <code class="language-plaintext highlighter-rouge">Trainer</code> to manage the training and evaluation process of our model. The <code class="language-plaintext highlighter-rouge">Trainer</code> class simplifies the training loop, handling many of the complexities involved in training deep learning models.</p>
+
+<p>Before setting up the <code class="language-plaintext highlighter-rouge">Trainer</code>, we load custom function (<code class="language-plaintext highlighter-rouge">compute_metrics</code>) to compute metrics for <code class="language-plaintext highlighter-rouge">Trainer</code> stored in the a <code class="language-plaintext highlighter-rouge">scriptPython/functions.py</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sys</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">"</span><span class="s">scriptPython/</span><span class="sh">"</span><span class="p">)</span>
+<span class="kn">from</span> <span class="n">functions</span> <span class="kn">import</span> <span class="o">*</span>
+</code></pre></div></div>
+
+<p>Let’s now set up the <code class="language-plaintext highlighter-rouge">Trainer</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">trainer</span> <span class="o">=</span> <span class="n">transformers</span><span class="p">.</span><span class="nc">Trainer</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="n">training_args</span><span class="p">,</span>
+    <span class="n">compute_metrics</span><span class="o">=</span><span class="n">compute_metrics</span><span class="p">,</span>
+    <span class="n">train_dataset</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span>
+    <span class="n">eval_dataset</span><span class="o">=</span><span class="n">val_dataset</span><span class="p">,</span>
+    <span class="n">data_collator</span><span class="o">=</span><span class="n">data_collator</span><span class="p">,</span>
+    <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="nc">EarlyStoppingCallback</span><span class="p">(</span><span class="n">early_stopping_patience</span><span class="o">=</span><span class="mi">3</span><span class="p">)]</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-20"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What do the <code class="language-plaintext highlighter-rouge">callbacks = [EarlyStoppingCallback(early_stopping_patience=3)]</code> parameter?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-20"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-20" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>It adds an early stopping mechanism to the training process. This mechanism is designed to halt training when the model’s performance on the validation set stops improving, helping to prevent overfitting and conserve computational resources.</p>
+
+    <p>How Early Stopping Works?</p>
+
+    <p><strong>Purpose</strong>: The primary goal of early stopping is to capture the model parameters when the loss reaches its minimum value during training. This is crucial because, after a certain point, continued training may lead to overfitting, where the model starts to perform worse on unseen data.</p>
+
+    <p><strong>Patience Parameter</strong>: The <code class="language-plaintext highlighter-rouge">early_stopping_patience=3</code> setting specifies that training should continue for three additional epochs after the model’s performance on the validation set stops improving. This “patience” period helps mitigate the effects of noise in the training process. Noise can cause temporary fluctuations in the loss, making it seem like the model has reached a local minimum when further training might yield better results.</p>
+
+    <p><strong>Process</strong>: During training, the loss is monitored at each epoch. If the loss does not decrease for three consecutive epochs, training is stopped. However, if a better model with a lower loss is found within those three epochs, training continues. This approach ensures that the model has truly reached a robust local minimum, rather than being prematurely halted due to noise.</p>
+
+    <p>By incorporating early stopping with a patience of three epochs, you balance the need to find an optimal model with the risk of overfitting, ultimately leading to more efficient and effective training outcomes.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Ffor distributed training, where multiple GPUs or nodes are used to accelerate the training process, it is essential to do:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">trainer</span><span class="p">.</span><span class="n">local_rank</span><span class="o">=</span><span class="n">training_args</span><span class="p">.</span><span class="n">local_rank</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">local_rank</code> parameter identifies the rank of the current process within its local node, enabling coordinated communication and synchronization between processes. This setup is crucial for managing tasks such as gradient synchronization and data partitioning, ensuring that each process operates on the correct portion of the model or dataset. By assigning the local rank from <code class="language-plaintext highlighter-rouge">training_args</code> to the <code class="language-plaintext highlighter-rouge">Trainer</code>, we facilitate efficient and scalable training, leveraging the full computational power of multi-GPU environments.</p>
+
+<h1 id="start-the-training">Start the training</h1>
+
+<p>Let’s start the training process for our model using the trainer.train() method:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">trainer</span><span class="p">.</span><span class="nf">train</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>After launching <code class="language-plaintext highlighter-rouge">trainer.train()</code>, we can notice that the training process is significantly faster compared to training a model from scratch seen in <a href="/training-material/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.html">”” tutorial</a>. This efficiency is due to the use of a pre-trained model, which has already undergone extensive training on large datasets using powerful computational resources. For example, pre-training a model on even a small portion of the human genome can take dozens of hours, but fine-tuning this model on a specific task, such as classifying DNA sequences, is much quicker. Fine-tuning leverages the pre-trained model’s foundational knowledge, allowing you to adapt it to new tasks with a smaller, labeled dataset. This approach not only saves time but also reduces the need for extensive computational power. By downloading a pre-trained model from platforms like Hugging Face and fine-tuning it on a local machine with a modest GPU, we can achieve high performance with minimal overhead, making advanced modeling techniques accessible for a wide range of applications.</p>
+
+<h1 id="evaluate-model-performance">Evaluate Model Performance</h1>
+
+<p>After successfully training the model, the next essential step is to evaluate its performance on a test dataset. This evaluation process is crucial for understanding how well the model generalizes to new, unseen data and for assessing its readiness for real-world applications.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+  <p>If finetuning is too long, you can stop the training.</p>
+
+</blockquote>
+
+<p>The test data is stored in <code class="language-plaintext highlighter-rouge">data_path/test.csv</code>, we prepare it as for training and validation data.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_dataset</span> <span class="o">=</span> <span class="nc">SupervisedDataset</span><span class="p">(</span>
+    <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+    <span class="n">data_path</span><span class="o">=</span><span class="nc">Path</span><span class="p">(</span><span class="n">data_path</span> <span class="o">/</span> <span class="sh">"</span><span class="s">test.csv</span><span class="sh">"</span><span class="p">),</span>
+    <span class="n">kmer</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>We then use the <code class="language-plaintext highlighter-rouge">trainer.evaluate()</code> method. This methods is designed to assess the model’s performance on a specified dataset, typically the test dataset, which contains data that the model has not encountered during training.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">results</span> <span class="o">=</span> <span class="n">trainer</span><span class="p">.</span><span class="nf">evaluate</span><span class="p">(</span><span class="n">eval_dataset</span><span class="o">=</span><span class="n">test_dataset</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The method computes various evaluation metrics, such as accuracy, precision, recall, and F1 score, depending on the task and the configuration specified in <code class="language-plaintext highlighter-rouge">compute_metrics</code>. These metrics provide a comprehensive view of the model’s performance, highlighting its strengths and weaknesses.</p>
+
+<p>The Trainer uses the <code class="language-plaintext highlighter-rouge">data_collator</code> to ensure that the test data is properly formatted and padded, maintaining consistency with the training process. This consistency is crucial for accurate evaluation.</p>
+
+<p>The evaluation results are stored in the <code class="language-plaintext highlighter-rouge">results</code> variable, which contains the computed metrics. We can analyze these <code class="language-plaintext highlighter-rouge">results</code> to gain insights into the model’s performance and make informed decisions about further improvements or deployment.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">results</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eval_loss                      0.424961
+eval_accuracy                  0.804000
+eval_f1                        0.800838
+eval_matthews_correlation      0.628276
+eval_precision                 0.824614
+eval_recall                    0.804000
+eval_runtime                   6.548800
+eval_samples_per_second      152.699000
+eval_steps_per_second          9.620000
+epoch                          3.000000
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-21"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-21"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-21" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we explored the process of fine-tuning a large language model (LLM) for DNA sequence classification. By following the steps outlined, you have learned how to leverage pre-trained models to achieve efficient and effective classification of DNA sequences, specifically focusing on their binding affinity to transcription factors.</p>
+
+<p>We began by configuring the fine-tuning process, ensuring that available computational resources were optimally utilized. This included specifying settings for quantization, configuring Accelerate for distributed training, and implementing LoRA for parameter-efficient fine-tuning. These steps were crucial for maximizing performance and minimizing computational overhead.</p>
+
+<p>Next, we prepared the tokenizer and data, ensuring that DNA sequences were properly tokenized and formatted for model input. We created datasets for training and validation, and configured data collation to handle batch processing efficiently.</p>
+
+<p>We then loaded and configured the model for sequence classification, adding a classification head to adapt the pre-trained model to our specific task. With the model and data prepared, we initialized the <code class="language-plaintext highlighter-rouge">Trainer</code>, which streamlined the training process by managing the training loop, evaluation, and checkpointing.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Fine-tuning pre-trained LLMs reduces training time and computational needs, making advanced research accessible.</p>
+</li>
+                        
+                        <li><p>Techniques like LoRA enable fine-tuning on modest hardware, broadening access to powerful models.</p>
+</li>
+                        
+                        <li><p>Rigorous testing on unseen data confirms a model’s practical applicability and reliability.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                
+                  <li><a href="/training-material/topics/statistics/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="zhou2024dnabert2efficientfoundationmodel">Zhou, Z., Y. Ji, W. Li, P. Dutta, R. Davuluri <i>et al.</i>, 2024 <b>DNABERT-2: Efficient Foundation Model and Benchmark For Multi-Species Genome</b>. <a href="https://arxiv.org/abs/2306.15006">https://arxiv.org/abs/2306.15006</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/genomic-llm-finetuning"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/genomic-llm-finetuning">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Raphael Mourad, Bérénice Batut,  <b>Fine-tuning a LLM for DNA Sequence Classification (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.html">https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{statistics-genomic-llm-finetuning,
+author = "Raphael Mourad and Bérénice Batut",
+	title = "Fine-tuning a LLM for DNA Sequence Classification (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bf2ed173efee6757a347c2b9fdc10d2f8809cd23">bf2ed17</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>

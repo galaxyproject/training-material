@@ -1,0 +1,3066 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences / Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences / Statistics and machine learning</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@bf2ed173efee6757a347c2b9fdc10d2f8809cd23",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-04-17 09:19:54 +0000">
+<meta name="DC.creator" content="Raphael Mourad">
+<meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Statistics and machine learning / Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences / Hands-on: Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences">
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Draft",
+  "dateModified": "2025-04-17 09:19:54 +0000",
+  "datePublished": "2025-04-17 09:19:54 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "abstract": "**Generative Artificial Intelligence** (AI) represents a cutting-edge domain within machine learning, focused on creating new, synthetic yet realistic data. This includes generating text, images, music, and even biological sequences. At the heart of many generative AI applications are **Large Language Models** (LLMs), which have revolutionized natural language processing and beyond.",
+  "learningResourceType": "e-learning",
+  "name": "Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT3H",
+  "teaches": "- Identify and load a pre-trained language model (LLM) suitable for DNA sequence analysis.\n- Explain the role of a tokenizer in converting DNA sequences into numerical tokens for model processing.\n- Prepare and tokenize DNA sequence datasets for model training and evaluation.\n- Configure and implement data collation to organize tokenized data into batches for efficient training.\n- Define and configure hyperparameters for pretraining a model, such as learning rate and batch size.\n- Monitor and evaluate the model's performance during training to ensure effective learning.\n- Use the trained model to generate embeddings for DNA sequences and interpret these embeddings for downstream bioinformatics applications.\n- Develop a complete workflow for training a language model on DNA sequences, from data preparation to model evaluation, and apply it to real-world bioinformatics tasks.",
+  "keywords": [
+    "Statistics and machine learning",
+    "ELIXIR",
+    "AI & ML",
+    "Large Language Model",
+    "work-in-progress",
+    "jupyter-notebook"
+  ],
+  "description": "## Abstract\n\n**Generative Artificial Intelligence** (AI) represents a cutting-edge domain within machine learning, focused on creating new, synthetic yet realistic data. This includes generating text, images, music, and even biological sequences. At the heart of many generative AI applications are **Large Language Models** (LLMs), which have revolutionized natural language processing and beyond.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to load and configure a pre-trained language model for DNA sequence analysis?\n - What is the process for tokenizing DNA sequences to prepare them for model training?\n - How to split and organize DNA sequence dataset for effective model training and evaluation?\n - What are the key hyperparameters to consider when pretraining a language model on DNA sequences, and how to configure them?\n - How to use a trained language model to generate and interpret embeddings for DNA sequences?\n\n\n## Learning Objectives\n\n- Identify and load a pre-trained language model (LLM) suitable for DNA sequence analysis.\n- Explain the role of a tokenizer in converting DNA sequences into numerical tokens for model processing.\n- Prepare and tokenize DNA sequence datasets for model training and evaluation.\n- Configure and implement data collation to organize tokenized data into batches for efficient training.\n- Define and configure hyperparameters for pretraining a model, such as learning rate and batch size.\n- Monitor and evaluate the model's performance during training to ensure effective learning.\n- Use the trained model to generate embeddings for DNA sequences and interpret these embeddings for downstream bioinformatics applications.\n- Develop a complete workflow for training a language model on DNA sequences, from data preparation to model evaluation, and apply it to real-world bioinformatics tasks.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-basics/tutorial.html",
+      "name": "Introduction to Python",
+      "description": "Hands-on for 'Introduction to Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.html",
+      "name": "Python - Warm-up for statistics and machine learning",
+      "description": "Hands-on for 'Python - Warm-up for statistics and machine learning' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/intro-to-ml-with-python/slides.html",
+      "name": "Foundational Aspects of Machine Learning",
+      "description": "Slides for 'Foundational Aspects of Machine Learning' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/intro-to-ml-with-python/tutorial.html",
+      "name": "Foundational Aspects of Machine Learning using Python",
+      "description": "Hands-on for 'Foundational Aspects of Machine Learning using Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/neural-networks-with-python/slides.html",
+      "name": "Neural networks using Python",
+      "description": "Slides for 'Neural networks using Python' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/neural-networks-with-python/tutorial.html",
+      "name": "Neural networks using Python",
+      "description": "Hands-on for 'Neural networks using Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/slides.html",
+      "name": "Deep Learning (without Generative Artificial Intelligence) using Python",
+      "description": "Slides for 'Deep Learning (without Generative Artificial Intelligence) using Python' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/tutorial.html",
+      "name": "Deep Learning (without Generative Artificial Intelligence) using Python",
+      "description": "Hands-on for 'Deep Learning (without Generative Artificial Intelligence) using Python' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/raphaelmourad/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/raphaelmourad/",
+      "name": "Raphael Mourad",
+      "image": "https://avatars.githubusercontent.com/raphaelmourad",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    }
+  ],
+  "contributor": [],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-pretraining/statistics-genomic-llm-pretraining.ipynb",
+      "name": "Jupyter Notebook (with Solutions)"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-pretraining/statistics-genomic-llm-pretraining-course.ipynb",
+      "name": "Jupyter Notebook (without Solutions)"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Statistics and machine learning
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and machine learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-statistics">
+    <h1 data-toc-skip>Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/raphaelmourad/" class="contributor-badge contributor-raphaelmourad"><img src="https://avatars.githubusercontent.com/raphaelmourad?s=36" alt="Raphael Mourad avatar" width="36" class="avatar" />
+    Raphael Mourad</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to load and configure a pre-trained language model for DNA sequence analysis?</p>
+</li>
+        
+        <li><p>What is the process for tokenizing DNA sequences to prepare them for model training?</p>
+</li>
+        
+        <li><p>How to split and organize DNA sequence dataset for effective model training and evaluation?</p>
+</li>
+        
+        <li><p>What are the key hyperparameters to consider when pretraining a language model on DNA sequences, and how to configure them?</p>
+</li>
+        
+        <li><p>How to use a trained language model to generate and interpret embeddings for DNA sequences?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Identify and load a pre-trained language model (LLM) suitable for DNA sequence analysis.</p>
+</li>
+        
+        <li><p>Explain the role of a tokenizer in converting DNA sequences into numerical tokens for model processing.</p>
+</li>
+        
+        <li><p>Prepare and tokenize DNA sequence datasets for model training and evaluation.</p>
+</li>
+        
+        <li><p>Configure and implement data collation to organize tokenized data into batches for efficient training.</p>
+</li>
+        
+        <li><p>Define and configure hyperparameters for pretraining a model, such as learning rate and batch size.</p>
+</li>
+        
+        <li><p>Monitor and evaluate the model’s performance during training to ensure effective learning.</p>
+</li>
+        
+        <li><p>Use the trained model to generate embeddings for DNA sequences and interpret these embeddings for downstream bioinformatics applications.</p>
+</li>
+        
+        <li><p>Develop a complete workflow for training a language model on DNA sequences, from data preparation to model evaluation, and apply it to real-world bioinformatics tasks.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/data-science/tutorials/python-basics/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Introduction to Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/data-science/tutorials/python-warmup-stat-ml/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Python - Warm-up for statistics and machine learning</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/statistics/tutorials/intro-to-ml-with-python/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Foundational Aspects of Machine Learning using Python</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/intro-to-ml-with-python/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Foundational Aspects of Machine Learning using Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/statistics/tutorials/neural-networks-with-python/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Neural networks using Python</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/neural-networks-with-python/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Neural networks using Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Deep Learning (without Generative Artificial Intelligence) using Python</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/statistics/tutorials/deep-learning-without-gai-with-python/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Deep Learning (without Generative Artificial Intelligence) using Python</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/genomic-llm-pretraining/statistics-genomic-llm-pretraining.ipynb" title="Jupyter Notebook" alt="Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr" title="">
+			UseGalaxy.fr
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 17, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 17, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+                <section aria-label="Tutorial Notebook access information" id="tutorial-notebook">
+                     
+                     
+                     
+                     
+                    
+                        <blockquote class="comment">
+                            <div class="box-title">Best viewed in a Jupyter Notebook</div>
+                            <p>
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <!--
+                            <p><b>Launching on MyBinder</b>
+                                Click here and the notebook will launch on MyBinder.org
+                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fstatistics%2Ftutorials%2Fgenomic-llm-pretraining%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                            </p>
+                            -->
+                            
+                            <p><b>Run on the GTN with JupyterLite (in-browser computations)</b>
+                                <ol>
+                                    <li><a href="/training-material/jupyter/lab/index.html?path=statistics-genomic-llm-pretraining.ipynb">Click to Launch JupyterLite</a></li>
+                                </ol>
+                            </p>
+                            
+                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                                <ol>
+                                    <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                                    <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-pretraining/statistics-genomic-llm-pretraining.ipynb</code></li>
+                                    <li>Select the notebook that appears in the list of files on the left.</li>
+                                </ol>
+                            </p>
+                            <p><b>Downloading the notebook</b>
+                                <ol>
+                                    <li>Right click one of these links: <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-pretraining/statistics-genomic-llm-pretraining.ipynb">Jupyter Notebook (With Solutions)</a>, <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-pretraining/statistics-genomic-llm-pretraining-course.ipynb">Jupyter Notebook (Without Solutions)</a></li>
+                                    <li>Save Link As..</li>
+                                </ol>
+                            </p>
+                        </blockquote>
+                    
+                </section>
+                
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p><strong>Generative Artificial Intelligence</strong> (AI) represents a cutting-edge domain within machine learning, focused on creating new, synthetic yet realistic data. This includes generating text, images, music, and even biological sequences. At the heart of many generative AI applications are <strong>Large Language Models</strong> (LLMs), which have revolutionized natural language processing and beyond.</p>
+
+<p>LLMs are <strong>sophisticated neural networks</strong> trained on vast amounts of text data to understand, generate, and interact with human language. Their architecture, often based on <strong>Transformers</strong>, allows them to capture complex patterns and context within data, making them powerful tools for various applications, from chatbots to creative writing and scientific discovery.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-transformers-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-transformers-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details:  Transformers </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Transformers are a type of neural network model designed to handle sequential data, such as text, by using self-attention mechanisms to weigh the importance of input elements relative to each other, enabling the model to understand and generate coherent and contextually relevant outputs.</p>
+
+</blockquote>
+
+<p>In this tutorial, we will explore the intersection of generative AI and genomics by <strong>pretraining an LLM from scratch on DNA sequences</strong>. This process will equip the model with a foundational understanding of the “grammar” of DNA, enabling it to generate and analyze genetic data with remarkable accuracy.</p>
+
+<p><a href="https://mistral.ai/">Mistral AI</a>, French artificial intelligence (AI) startup, recently launched large language models (LLMs) showing performances superior to Llama2. In particular, Mixtral-8x7B implements:</p>
+
+<ul>
+  <li><strong>Grouped-Query Attention</strong>: Efficiently computes attention by grouping queries, reducing computational load and memory usage.</li>
+  <li><strong>Sliding-Window Attention</strong>: Focuses on a fixed-size window of tokens, sliding over the sequence to manage long texts efficiently.</li>
+  <li><strong>Byte-fallback BPE Tokenizer</strong>: Tokenizes text into subword units, falling back to byte-level tokenization for unknown words, ensuring robust handling of diverse text inputs.</li>
+</ul>
+
+<p>These techniques collectively enhance the performance and efficiency of large language models, enabling them to process and generate text more effectively.</p>
+
+<p>In this tutorial, we will use a simplified Mistral model architecture with fewer layers and hidden units to reduce computational requirements. The model will be trained to predict the next base in the sequence. For instance, for a sequence like <code class="language-plaintext highlighter-rouge">ATTTGTTGGT</code>, the model will be trained to predict the suffix <code class="language-plaintext highlighter-rouge">TTGGT</code> given the prefix <code class="language-plaintext highlighter-rouge">ATTTG</code>. This process is called <strong>causal language modeling</strong>.</p>
+
+<p>To pretrain the model, we will use a file containing 100,000 non-overlapping DNA sequences of 200 bases, corresponding to around 1% of the human genome (hg38 assembly). This involves training the model to predict the end of a DNA sequence.</p>
+
+<p>By the end of this tutorial, we will obtain a Mistral-DNA model with an internal representation of DNA sequence grammar. This pretrained model can then be used for various applications, such as fine-tuning for classification tasks or predicting mutational effects.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#prepare-resources" id="markdown-toc-prepare-resources">Prepare resources</a>    <ol>
+      <li><a href="#install-dependencies" id="markdown-toc-install-dependencies">Install dependencies</a></li>
+      <li><a href="#import-python-libraries" id="markdown-toc-import-python-libraries">Import Python libraries</a></li>
+      <li><a href="#check-and-configure-available-resources" id="markdown-toc-check-and-configure-available-resources">Check and configure available resources</a></li>
+    </ol>
+  </li>
+  <li><a href="#prepare-the-model" id="markdown-toc-prepare-the-model">Prepare the model</a>    <ol>
+      <li><a href="#load-the-model" id="markdown-toc-load-the-model">Load the model</a></li>
+      <li><a href="#choose-the-llm-architecture" id="markdown-toc-choose-the-llm-architecture">Choose the LLM architecture</a></li>
+    </ol>
+  </li>
+  <li><a href="#prepare-the-tokenizer" id="markdown-toc-prepare-the-tokenizer">Prepare the tokenizer</a></li>
+  <li><a href="#prepare-data" id="markdown-toc-prepare-data">Prepare data</a>    <ol>
+      <li><a href="#load-data" id="markdown-toc-load-data">Load data</a></li>
+      <li><a href="#tokenize-data" id="markdown-toc-tokenize-data">Tokenize data</a></li>
+      <li><a href="#split-data" id="markdown-toc-split-data">Split data</a></li>
+      <li><a href="#data-collation" id="markdown-toc-data-collation">Data Collation</a></li>
+    </ol>
+  </li>
+  <li><a href="#train-the-model" id="markdown-toc-train-the-model">Train the model</a>    <ol>
+      <li><a href="#define-parameters-for-pretraining" id="markdown-toc-define-parameters-for-pretraining">Define parameters for pretraining</a></li>
+      <li><a href="#pretrain-the-model" id="markdown-toc-pretrain-the-model">Pretrain the model</a></li>
+    </ol>
+  </li>
+  <li><a href="#compute-the-embedding-of-a-dna-sequence" id="markdown-toc-compute-the-embedding-of-a-dna-sequence">Compute the embedding of a DNA sequence</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="prepare-resources">Prepare resources</h1>
+
+<p>To pretrain the model, let’s open a Notebook or a Python script.</p>
+
+<h2 id="install-dependencies">Install dependencies</h2>
+
+<p>The first step is to install the required dependencies:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">accelerate</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">datasets</span><span class="o">==</span><span class="mf">3.0</span><span class="p">.</span><span class="mi">1</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">transformers</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">torch</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-23"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What are the required dependencies doing?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-24"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-24" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ul>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">accelerate</code>: A library by <a href="https://huggingface.co/">Hugging Face</a> – a platform that provides tools and resources for building, training, and deploying machine learning models – designed to simplify the process of training and deploying machine learning models across different hardware environments. It provides tools to optimize performance on GPUs, TPUs, and other accelerators, making it easier to scale models efficiently.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">datasets</code>: A library by Hugging Face for managing and processing datasets. It provides tools to load, manipulate, and share datasets in a standardized format, making it easier to work with machine learning data.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">numpy</code>: A fundamental package for scientific computing in Python.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">torch</code>: Also known as PyTorch, it is an open-source machine learning library developed by Facebook’s AI Research lab. It provides a flexible platform for building and training neural networks, with a focus on tensor computations and automatic differentiation.</p>
+      </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">transformers</code>: A library by Hugging Face that provides implementations of state-of-the-art transformer models for natural language processing (NLP). It includes pre-trained models and tools for fine-tuning, making it easier to apply transformers to various NLP tasks.</p>
+      </li>
+    </ul>
+
+    <p>These libraries are widely used in the machine learning and data science communities for their efficiency, flexibility, and extensive functionality.</p>
+  </blockquote>
+
+</blockquote>
+
+<h2 id="import-python-libraries">Import Python libraries</h2>
+
+<p>Let’s now import them.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
+
+<span class="kn">import</span> <span class="n">accelerate</span>
+<span class="kn">import</span> <span class="n">flash_attn</span>
+<span class="kn">import</span> <span class="n">torch</span>
+<span class="kn">import</span> <span class="n">transformers</span>
+<span class="kn">from</span> <span class="n">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">from</span> <span class="n">transformers</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AutoConfig</span><span class="p">,</span>
+    <span class="n">AutoModelForCausalLM</span><span class="p">,</span>
+    <span class="n">AutoTokenizer</span><span class="p">,</span>
+    <span class="n">DataCollatorForLanguageModeling</span><span class="p">,</span>
+    <span class="n">EarlyStoppingCallback</span><span class="p">,</span>
+    <span class="n">Trainer</span><span class="p">,</span>
+    <span class="n">TrainingArguments</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-loaded-functions-and-classes-from-datasets-and-transformers-libraries-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-loaded-functions-and-classes-from-datasets-and-transformers-libraries-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Loaded functions and classes from datasets and transformers libraries</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">datasets</code>:
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">load_dataset</code>: function to load datasets from the Hugging Face Hub or local files.</li>
+      </ul>
+    </li>
+    <li><code class="language-plaintext highlighter-rouge">transformers</code>:
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">AutoConfig</code>: Automatically loads the configuration for a pre-trained model. It defines the architecture and hyperparameters of the model.</li>
+        <li><code class="language-plaintext highlighter-rouge">AutoModelForCausalLM</code>: Loads a pre-trained causal language model for tasks like text generation, where the model predicts the next token in a sequence.</li>
+        <li><code class="language-plaintext highlighter-rouge">AutoTokenizer</code>: Loads the tokenizer associated with a pre-trained model. It converts text into tokens that the model can process.</li>
+        <li><code class="language-plaintext highlighter-rouge">DataCollatorForLanguageModeling</code>: A data collator specifically designed for language modeling tasks. It prepares batches of data for training by handling padding and masking.</li>
+        <li><code class="language-plaintext highlighter-rouge">EarlyStoppingCallback</code>: A callback used during training to stop the process early if the model’s performance on the validation set stops &gt; improving, saving time and resources.</li>
+        <li><code class="language-plaintext highlighter-rouge">Trainer</code>: A high-level API for training and evaluating transformer &gt; models. It simplifies the training loop and handles tasks like gradient accumulation and evaluation.</li>
+        <li><code class="language-plaintext highlighter-rouge">TrainingArguments</code>: A class to define the training configuration, including hyperparameters like learning rate, batch size, and number &gt; of epochs. It is used to configure the <code class="language-plaintext highlighter-rouge">Trainer</code>.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>These components work together to streamline the process of training and fine-tuning transformer models for various NLP tasks.</p>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-versions-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Versions</div>
+
+  <p>This tutorial has been tested with following versions:</p>
+  <ul>
+    <li><code class="language-plaintext highlighter-rouge">accelerate</code> &gt; 0.32.1</li>
+    <li><code class="language-plaintext highlighter-rouge">flash_attn</code> &gt; 2.6.0.post1 and 2.7.0.post2</li>
+    <li><code class="language-plaintext highlighter-rouge">transformers</code> &gt; 4.47.1</li>
+  </ul>
+
+  <p>You can check the versions with:</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">accelerate</span><span class="p">.</span><span class="n">__version__</span>
+<span class="n">flash_attn</span><span class="p">.</span><span class="n">__version__</span>
+<span class="n">transformers</span><span class="p">.</span><span class="n">__version__</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<h2 id="check-and-configure-available-resources">Check and configure available resources</h2>
+
+<p>To pretrain the model, we need to specific resources:</p>
+<ul>
+  <li><strong>Graphics Processing Unit</strong> (GPU): a specialized processor designed to handle complex graphical computations, often used for rendering images, videos, and accelerating machine learning tasks</li>
+  <li><strong>Video Random Access Memory</strong> (VRAM): dedicated memory used by a GPU to store and process graphical data, enabling smooth rendering of images and videos</li>
+</ul>
+
+<p>Let’s check the resources:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">nvidia</span><span class="o">-</span><span class="n">smi</span>
+</code></pre></div></div>
+
+<p>The command <code class="language-plaintext highlighter-rouge">nvidia-smi</code> (NVIDIA System Management Interface) is used to monitor and manage NVIDIA GPU devices. It provides information about the GPU’s utilization, memory usage, temperature, and running processes. This tool is essential for developers and researchers to track the performance and health of GPUs, especially when running computationally intensive tasks like machine learning training.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-24"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How do you interpret the following output?</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tue Mar 25 13:49:35 2025       
++-----------------------------------------------------------------------------&gt; ------------+
+| NVIDIA-SMI 550.54.15              Driver Version: 550.54.15      CUDA &gt; Version: 12.4     |
+|-----------------------------------------+------------------------&gt; +----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile &gt; Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | &gt; GPU-Util  Compute M. |
+|                                         |                        |          &gt;      MIG M. |
+|=========================================+========================&gt; +======================|
+|   0  Tesla T4                       Off |   00000000:00:04.0 &gt; Off |                    0 |
+| N/A   40C    P8              9W /   70W |       2MiB /  15360MiB |      &gt; 0%      Default |
+|                                         |                        |          &gt;         N/A |
++-----------------------------------------+------------------------&gt; +----------------------+
+                                                                              &gt;            
++-----------------------------------------------------------------------------&gt; ------------+
+| &gt; Processes:                                                                    &gt;           |
+|  GPU   GI   CI        PID   Type   Process &gt; name                              GPU Memory |
+|        ID   &gt; ID                                                               Usage      |
+|&gt; ==============================================================================&gt; ===========|
+|  No running processes &gt; found                                                             |
++-----------------------------------------------------------------------------&gt; ------------+
+</code></pre></div>  </div>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-25"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-25" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">Driver Version</code>: The version of the NVIDIA driver installed on the system (<code class="language-plaintext highlighter-rouge">550.54.15</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">CUDA Version</code>: The version of CUDA installed, which is a parallel computing platform and API model created by NVIDIA (<code class="language-plaintext highlighter-rouge">12.4</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">GPU Name</code>: The model of the GPU, in this case, a <code class="language-plaintext highlighter-rouge">Tesla T4</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">Persistence-M</code>: Indicates whether Persistence Mode is enabled (<code class="language-plaintext highlighter-rouge">Off</code> in this case), which can improve performance for certain applications.</li>
+      <li><code class="language-plaintext highlighter-rouge">Bus-Id</code>: The PCI bus ID of the GPU (<code class="language-plaintext highlighter-rouge">00000000:00:04.0</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">Fan</code>: The speed of the GPU fan (<code class="language-plaintext highlighter-rouge">N/A</code> means not available or not reporting).</li>
+      <li><code class="language-plaintext highlighter-rouge">Temp</code>: The current temperature of the GPU (<code class="language-plaintext highlighter-rouge">40°C</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">Perf</code>: The performance state of the GPU (P8 indicates a low-power state).</li>
+      <li><code class="language-plaintext highlighter-rouge">Pwr:Usage/Cap</code>: The current power usage (9W) and the power cap (70W).</li>
+      <li><code class="language-plaintext highlighter-rouge">Memory-Usage</code>: The amount of GPU memory currently in use (2MiB) out of the total available (15360MiB).</li>
+      <li><code class="language-plaintext highlighter-rouge">GPU-Util</code>: The percentage of GPU utilization (0% indicates the GPU is idle).</li>
+      <li><code class="language-plaintext highlighter-rouge">Compute M.</code>: The compute mode of the GPU (Default).</li>
+      <li><code class="language-plaintext highlighter-rouge">Processes</code>: Lists any processes currently using the GPU. In this case, there are no running processes.</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Let’s configure PyTorch and the CUDA environment – software and hardware ecosystem provided by NVIDIA to enable parallel computing on GPU – to optimize GPU memory usage and performance:</p>
+
+<ol>
+  <li>
+    <p>Enables CuDNN benchmarking in PyTorch:</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">torch</span><span class="p">.</span><span class="n">backends</span><span class="p">.</span><span class="n">cudnn</span><span class="p">.</span><span class="n">benchmark</span><span class="o">=</span><span class="bp">True</span>
+</code></pre></div>    </div>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-25"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+      <ol>
+        <li>What is CuDNN?</li>
+        <li>Why enabling benchmarking?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-26"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-26" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <ol>
+          <li>CuDNN is a GPU-accelerated library for deep neural networks.</li>
+          <li>Enabling benchmarking allows CuDNN to select the fastest algorithms for the specific GPU and input size. This can improve the performance of the model, especially for fixed-size inputs.</li>
+        </ol>
+
+      </blockquote>
+
+    </blockquote>
+  </li>
+  <li>
+    <p>Set an environment variable that configures how PyTorch manages CUDA memory allocations</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="sh">"</span><span class="s">PYTORCH_CUDA_ALLOC_CONF</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">max_split_size_mb:32</span><span class="sh">"</span>
+</code></pre></div>    </div>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-26"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+      <p>What is this command doing?</p>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-27"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-27" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>It sets the maximum split size for memory allocations to 32 megabytes. This can help reduce memory fragmentation and improve memory utilization, which is particularly useful when working with large models or limited GPU memory.</p>
+
+      </blockquote>
+
+    </blockquote>
+  </li>
+</ol>
+
+<h1 id="prepare-the-model">Prepare the model</h1>
+
+<h2 id="load-the-model">Load the model</h2>
+
+<p>Let’s load now the model, <code class="language-plaintext highlighter-rouge">Mistral-DNA</code>. The Mixtral model (<a href="https://huggingface.co/mistralai/Mixtral-8x7B-v0.1">Mixtral-8x7B-v0.1</a>) – <a href="https://mistral.ai/news/mixtral-of-experts">a pretrained generative Sparse Mixture of Experts outperforming Llama 2 70B</a> – was modified to significantly reduce the number of parameters mostly by removing layers, such that it could be trained on a GPU such as an RTX3090.</p>
+
+<p>We will get the model from GitHub:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">raphaelmourad</span><span class="o">/</span><span class="n">Mistral</span><span class="o">-</span><span class="n">DNA</span><span class="p">.</span><span class="n">git</span>
+</code></pre></div></div>
+
+<p>Let’s check if we have the model now:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!</span><span class="n">ls</span>
+</code></pre></div></div>
+
+<p>We should get two folders: <code class="language-plaintext highlighter-rouge">Mistral-DNA</code> and <code class="language-plaintext highlighter-rouge">sample_data</code>. Let’s change the current working directory to <code class="language-plaintext highlighter-rouge">Mistral-DNA/</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">os</span><span class="p">.</span><span class="nf">chdir</span><span class="p">(</span><span class="sh">"</span><span class="s">Mistral-DNA/</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="choose-the-llm-architecture">Choose the LLM architecture</h2>
+
+<p>Let’s look at the original archicture of <code class="language-plaintext highlighter-rouge">Mixtral-8x7B-v0.1</code> which is stored in the <code class="language-plaintext highlighter-rouge">data/models/Mixtral-8x7B-v0.1</code> folder (<a href="https://github.com/raphaelmourad/Mistral-DNA/tree/main/data/models/Mixtral-8x7B-v0.1">GitHub</a>).</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-27"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Which file is essential for the configuring the language model?</li>
+    <li>What are the key parameters of the simplified architecture used here?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-28"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-28" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The <a href="https://github.com/raphaelmourad/Mistral-DNA/blob/main/data/models/Mixtral-8x7B-v0.1/config.json"><code class="language-plaintext highlighter-rouge">config.json</code> file</a> is essential for configuring the language model as a Mistral model. It specifies the architecture for causal language modeling (<code class="language-plaintext highlighter-rouge">MixtralForCausalLM</code>) and details the size of the neural network components. The original Mistral model has a larger hidden size, but it is reduced here to make pre-training feasible.</li>
+      <li>The key parameters are:
+        <ul>
+          <li><strong>Intermediate Size</strong> (<code class="language-plaintext highlighter-rouge">intermediate_size</code>): Size of the intermediate (or hidden) layers within the model. It determines the number of neurons in these layers, influencing the model’s capacity to capture complex patterns in the data. A larger intermediate size can capture more nuanced details but also requires more computational resources. Set to 256, which is relatively small compared to the original model.</li>
+          <li><strong>Number of Attention Heads</strong> (<code class="language-plaintext highlighter-rouge">num_attention_heads</code>): Number of attention heads in the multi-head attention mechanism. Each head allows the model to focus on different parts of the input sequence simultaneously, capturing diverse aspects of the data. More attention heads can provide a richer representation but also increase computational complexity. Reduced to 8 for efficiency.</li>
+          <li><strong>Number of Experts per token</strong> (<code class="language-plaintext highlighter-rouge">num_experts_per_tok</code>): Specific to models that use a Mixture of Experts (MoE) architecture. It indicates the number of expert networks that are activated for each token in the input sequence. Experts are specialized sub-networks that handle different parts of the data, improving efficiency and performance, especially for large models. Set to 1 expert per token.</li>
+          <li><strong>Number of Local Experts</strong> (<code class="language-plaintext highlighter-rouge">num_local_experts</code>): Number of local experts available in the model. Local experts are a subset of the total experts and are used to process specific parts of the input data. This localization can help in managing computational resources more effectively, especially when dealing with large-scale data. Set to 64.</li>
+          <li><strong>Vocabulary Size</strong> (<code class="language-plaintext highlighter-rouge">vocab_size</code>): Specifically designed for DNA sequences, with a size of \(4,096 = 4^6\), as DNA consists of four possible letters (A, T, C, and G) and the words are  6-mers (sequences of six nucleotides). By modeling DNA using 6-mers, we capture meaningful patterns within the genetic sequence, enabling the model to understand and generate DNA data effectively.</li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Let’s load the configuration of the pre-trained model:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">config</span> <span class="o">=</span> <span class="n">AutoConfig</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="sh">"</span><span class="s">data/models/Mixtral-8x7B-v0.1</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>By loading the configuration, we can inspect or modify the model’s architecture without loading the actual model weights. Let’s now initialize a causal language model from the loaded configuration object, with a specific attention implementation:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="p">.</span><span class="nf">from_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">attn_implementation</span><span class="o">=</span><span class="sh">"</span><span class="s">eager</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-28"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What does <code class="language-plaintext highlighter-rouge">attn_implementation="eager"</code>?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-29"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-29" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p><code class="language-plaintext highlighter-rouge">attn_implementation="eager"</code> specifies the attention implementation to use. Setting it to “eager” means that the attention mechanism will be executed eagerly, which can be useful for debugging or when working with dynamic computation graphs. Eager execution runs operations immediately as they are called in Python, rather than adding them to a graph for later execution.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>How does the model look like?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MixtralForCausalLM(
+  (model): MixtralModel(
+    (embed_tokens): Embedding(4096, 256)
+    (layers): ModuleList(
+      (0-7): 8 x MixtralDecoderLayer(
+        (self_attn): MixtralAttention(
+          (q_proj): Linear(in_features=256, out_features=256, bias=False)
+          (k_proj): Linear(in_features=256, out_features=256, bias=False)
+          (v_proj): Linear(in_features=256, out_features=256, bias=False)
+          (o_proj): Linear(in_features=256, out_features=256, bias=False)
+          (rotary_emb): MixtralRotaryEmbedding()
+        )
+        (block_sparse_moe): MixtralSparseMoeBlock(
+          (gate): Linear(in_features=256, out_features=64, bias=False)
+          (experts): ModuleList(
+            (0-63): 64 x MixtralBlockSparseTop2MLP(
+              (w1): Linear(in_features=256, out_features=256, bias=False)
+              (w2): Linear(in_features=256, out_features=256, bias=False)
+              (w3): Linear(in_features=256, out_features=256, bias=False)
+              (act_fn): SiLU()
+            )
+          )
+        )
+        (input_layernorm): MixtralRMSNorm((256,), eps=1e-05)
+        (post_attention_layernorm): MixtralRMSNorm((256,), eps=1e-05)
+      )
+    )
+    (norm): MixtralRMSNorm((256,), eps=1e-05)
+  )
+  (lm_head): Linear(in_features=256, out_features=4096, bias=False)
+)
+</code></pre></div></div>
+
+<p>As expected, the model is a <code class="language-plaintext highlighter-rouge">MixtralForCausalLM</code> model with several key components:</p>
+
+<ol>
+  <li>
+    <p><strong>Embedding Layer (<code class="language-plaintext highlighter-rouge">embed_tokens</code>)</strong>: Converts input DNA sequences into dense vectors of fixed size. It maps each of the 4,096 (\(4^{6}\)) possible DNA tokens (representing 6-mers) to a 256-dimensional vector space. This embedding layer is crucial for transforming discrete DNA sequences into a format suitable for neural network processing.</p>
+  </li>
+  <li><strong>Decoder Layers (<code class="language-plaintext highlighter-rouge">layers</code>)</strong>: Consists of eight <code class="language-plaintext highlighter-rouge">MixtralDecoderLayer</code> modules, each containing several sub-components:
+    <ul>
+      <li>
+        <p><strong>Self-Attention Mechanism (<code class="language-plaintext highlighter-rouge">self_attn</code>)</strong></p>
+
+        <blockquote class="question">
+          <div class="box-title question-title" id="question-29"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+          <ol>
+            <li>What are the components?</li>
+            <li>How is the purpose?</li>
+          </ol>
+
+          <blockquote class="solution">
+            <div class="box-title solution-title" id="solution-30"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-30" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+            <ol>
+              <li>The components are linear projections (<code class="language-plaintext highlighter-rouge">q_proj</code>, <code class="language-plaintext highlighter-rouge">k_proj</code>,<code class="language-plaintext highlighter-rouge">v_proj</code>, <code class="language-plaintext highlighter-rouge">o_proj</code>) for queries, keys, values, and outputs, along witha rotary embedding (<code class="language-plaintext highlighter-rouge">rotary_emb</code>) to incorporate positiona linformation.</li>
+              <li>This allows the model to weigh the importance of differenttokens in the sequence relative to each other, capturing dependenciesand context.</li>
+            </ol>
+
+          </blockquote>
+
+        </blockquote>
+      </li>
+      <li>
+        <p><strong>Sparse Mixture of Experts (<code class="language-plaintext highlighter-rouge">block_sparse_moe</code>)</strong>:</p>
+
+        <blockquote class="question">
+          <div class="box-title question-title" id="question-30"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+          <ol>
+            <li>What are the components?</li>
+            <li>How is the purpose?</li>
+          </ol>
+
+          <blockquote class="solution">
+            <div class="box-title solution-title" id="solution-31"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-31" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+            <ol>
+              <li>The components are gating mechanism (<code class="language-plaintext highlighter-rouge">gate</code>) and list of 64 expert networks (<code class="language-plaintext highlighter-rouge">experts</code>), each with multiple linear layers (<code class="language-plaintext highlighter-rouge">w1</code>, <code class="language-plaintext highlighter-rouge">w2</code>, <code class="language-plaintext highlighter-rouge">w3</code>) and an activation function (<code class="language-plaintext highlighter-rouge">act_fn</code>).</li>
+              <li>This efficiently processes input data by activating only a subset of expert networks, reducing computational load while maintaining model capacity.</li>
+            </ol>
+
+          </blockquote>
+
+        </blockquote>
+      </li>
+      <li>
+        <p><strong>Layer Normalization (<code class="language-plaintext highlighter-rouge">input_layernorm</code>, <code class="language-plaintext highlighter-rouge">post_attention_layernorm</code>)</strong>: Stabilizes and accelerates the training process by normalizing the inputs and outputs of the attention mechanism.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Final Layer Normalization (<code class="language-plaintext highlighter-rouge">norm</code>)</strong>: Applies normalization to the output of the final decoder layer, ensuring stable and consistent outputs.</p>
+  </li>
+  <li><strong>Language Model Head (<code class="language-plaintext highlighter-rouge">lm_head</code>)</strong>: Projects the 256-dimensional output of the final decoder layer back into the 4,096-dimensional vocabulary space of DNA tokens. This linear layer (<code class="language-plaintext highlighter-rouge">Linear</code>) maps the hidden states to the original token space, enabling the model to predict the next DNA token accurately.</li>
+</ol>
+
+<p>This architecture ensures that the model can capture complex patterns in DNA sequences while maintaining computational efficiency, making it suitable for tasks like DNA sequence generation and analysis. The model’s design culminates in the output of 4,096 tokens, aligning with the input dimension. This consistency is crucial for accurately predicting the next token in a given DNA sequence, ensuring that the model’s predictions are coherent and reliable.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-31"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How many parameters are this model?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-32"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-32" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pytorch_total_params</span> <span class="o">=</span> <span class="nf">sum</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="nf">numel</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="p">.</span><span class="nf">parameters</span><span class="p">())</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Model size: </span><span class="si">{</span><span class="n">pytorch_total_params</span><span class="o">/</span><span class="mi">1000</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s">M parameters</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <p>There are 105 millions parameters. It is a big model.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="prepare-the-tokenizer">Prepare the tokenizer</h1>
+
+<p>A tokenizer is a crucial component in natural language processing (NLP) that transforms raw text into a format that can be processed by machine learning models. In this section, we will load and configure the <strong>Byte-Pair Encoding (BPE) letter tokenizer</strong>. The BPE tokenizer efficiently handles rare and unknown words by breaking them down into frequent subword units, ensuring that the model can generalize better to unseen data. This process involves initializing the tokenizer with a predefined vocabulary and settings, enabling it to convert text into a format suitable for neural network processing. By doing so, we prepare the tokenizer to effectively manage DNA sequences, facilitating accurate and reliable model predictions.</p>
+
+<p>Let’s loads a pre-trained tokenizer from the Hugging Face Model Hub. The tokenizer is associated with the model <code class="language-plaintext highlighter-rouge">DNABERT-2-117M</code>, which is designed for processing DNA sequences.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="sh">"</span><span class="s">zhihan1996/DNABERT-2-117M</span><span class="sh">"</span><span class="p">,</span> <span class="n">trust_remote_code</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-32"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What does the above command?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-33"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-33" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">AutoTokenizer.from_pretrained</code> automatically identifies and loads the appropriate tokenizer for the specified model. There are 1876 sequences.</li>
+      <li><code class="language-plaintext highlighter-rouge">trust_remote_code=True</code> allows the loading of custom tokenizers that may include remote code execution. It is necessary when the tokenizer requires additional custom code to function correctly.</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Let’s look at the created tokenizer now:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PreTrainedTokenizerFast(name_or_path='zhihan1996/DNABERT-2-117M',vocab_size=4096, model_max_length=1000000000000000019884624838656,is_fast=True, padding_side='right', truncation_side='right',special_tokens={'unk_token': '[UNK]', 'sep_token': '[SEP]', 'pad_token': [PAD]', 'cls_token': '[CLS]', 'mask_token': '[MASK]'},clean_up_tokenization_spaces=False, added_tokens_decoder={
+	0: AddedToken("[UNK]", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	1: AddedToken("[CLS]", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	2: AddedToken("[SEP]", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	3: AddedToken("[PAD]", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+	4: AddedToken("[MASK]", rstrip=False, lstrip=False, single_word=False, normalized=False, special=True),
+}
+)
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">PreTrainedTokenizerFast</code> is a fast and efficient tokenizer used to process text data for the <code class="language-plaintext highlighter-rouge">DNABERT-2-117M</code> model. Here’s a breakdown of its configuration:</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">name_or_path='zhihan1996/DNABERT-2-117M'</code>: Specifies the name or path of the pre-trained tokenizer, indicating that it is associated with the <code class="language-plaintext highlighter-rouge">DNABERT-2-117M</code> model, which is designed for processing DNA sequences.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">vocab_size=4096</code>: Defines the size of the tokenizer’s vocabulary.</p>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-33"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+      <p>Why is the size of the tokenizer’s vocabulary set to 4,096?</p>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-34"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-34" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>It corresponds to the number of unique tokens (6-mers) that the model can recognize in DNA sequences.</p>
+
+      </blockquote>
+
+    </blockquote>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">special_tokens</code>: Defines a set of special tokens used by the tokenizer:</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">unk_token: '[UNK]'</code> - Represents unknown or out-of-vocabulary tokens.</li>
+      <li><code class="language-plaintext highlighter-rouge">sep_token: '[SEP]'</code> - Used to separate segments within a sequence.</li>
+      <li><code class="language-plaintext highlighter-rouge">pad_token: '[PAD]'</code> - Used for padding sequences to a uniform length.</li>
+      <li><code class="language-plaintext highlighter-rouge">cls_token: '[CLS]'</code> - Typically used as the first token in a sequence to represent the classification token.</li>
+      <li><code class="language-plaintext highlighter-rouge">mask_token: '[MASK]'</code> - Used in masked language modeling to hide tokens that the model must predict.</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-34"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What do the other configuration parameters mean?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">model_max_length=1000000000000000019884624838656</code></li>
+    <li><code class="language-plaintext highlighter-rouge">is_fast=True</code></li>
+    <li><code class="language-plaintext highlighter-rouge">padding_side='right'</code></li>
+    <li><code class="language-plaintext highlighter-rouge">truncation_side='right'</code></li>
+    <li><code class="language-plaintext highlighter-rouge">clean_up_tokenization_spaces=False</code></li>
+    <li><code class="language-plaintext highlighter-rouge">added_tokens_decoder</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-35"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-35" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">model_max_length=1000000000000000019884624838656</code>: Represents the maximum length of sequences that the model can handle.</p>
+
+        <p>This extremely large value suggests that the model is designed to process very long sequences, although in practice, the actual limit will be constrained by available computational resources.</p>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">is_fast=True</code>: Indicates that this tokenizer is optimized for speed, leveraging Rust-based implementations to accelerate tokenization processes.</li>
+      <li><code class="language-plaintext highlighter-rouge">padding_side='right'</code>: Configures the tokenizer to pad sequences on the right side, ensuring that all sequences in a batch have the same length by adding padding tokens to the end of shorter sequences.</li>
+      <li><code class="language-plaintext highlighter-rouge">truncation_side='right'</code>: Specifies that sequences will be truncated from the right side if they exceed the maximum length, preserving the beginning of the sequence.</li>
+      <li><code class="language-plaintext highlighter-rouge">clean_up_tokenization_spaces=False</code>: Indicates that the tokenizer will not remove spaces after tokenization, preserving the original spacing in the text.</li>
+      <li><code class="language-plaintext highlighter-rouge">added_tokens_decoder</code>: Maps token IDs to their corresponding <code class="language-plaintext highlighter-rouge">AddedToken</code> objects, which include metadata such as whether the token is a special token and how it should be processed (e.g., stripping whitespace).</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>This configuration ensures that the tokenizer is tailored to efficiently process DNA sequences, handling both the tokenization and padding/truncation of sequences in a manner that aligns with the model’s requirements.</p>
+
+<p>By default, tokenizers may pad sequences on the right side (<code class="language-plaintext highlighter-rouge">padding_side='right'</code>). Let’s set the padding direction for the tokenizer.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tokenizer</span><span class="p">.</span><span class="n">padding_side</span>  <span class="o">=</span> <span class="sh">"</span><span class="s">left</span><span class="sh">"</span>
+</code></pre></div></div>
+
+<p>When tokenizing a batch of sequences, shorter sequences will be padded with special tokens on the left to match the length of the longest sequence in the batch. This can be useful for ensuring consistent input sizes, especially in models that expect fixed-size inputs.</p>
+
+<p>Let’s look at how some DNA sequences are encoded by the tokenizer. We start with a simple sequence “ATT”:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">encoding</span> <span class="o">=</span> <span class="nf">tokenizer</span><span class="p">(</span><span class="sh">"</span><span class="s">ATT</span><span class="sh">"</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="sh">"</span><span class="s">longest</span><span class="sh">"</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">encoding</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The code tokenizes the DNA sequence “ATT”, pads it to the longest sequence in the batch (<code class="language-plaintext highlighter-rouge">padding="longest"</code>), and returns the result as PyTorch tensors (<code class="language-plaintext highlighter-rouge">return_tensors="pt"</code>).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'input_ids': tensor([[   1, 2061,    2]]), 'token_type_ids': tensor([[0, 0, 0]]), 'attention_mask': tensor([[1, 1, 1]])}
+</code></pre></div></div>
+
+<p>Here’s a breakdown of each output component:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">input_ids</code>: A tensor containing the token IDs for the sequence. Each number corresponds to a specific token in the tokenizer’s vocabulary. In this case, <code class="language-plaintext highlighter-rouge">[1, 2061, 2]</code> represents the tokens for the sequence:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">1</code>: the beginning of the sentence (<code class="language-plaintext highlighter-rouge">[CLS]</code>)</li>
+      <li><code class="language-plaintext highlighter-rouge">2061</code>: the sentence itself (<code class="language-plaintext highlighter-rouge">ATT</code>)</li>
+      <li><code class="language-plaintext highlighter-rouge">2</code>: the end of the sentence, a separator between sentence (<code class="language-plaintext highlighter-rouge">[SEP]</code>).</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">token_type_ids</code>: A tensor indicating the type of each token, often used in models that process multiple segments (e.g., question-answering). Here, all tokens are of type <code class="language-plaintext highlighter-rouge">0</code>, suggesting a single segment.</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">attention_mask</code>: A tensor that specifies which tokens should be attended to by the model (<code class="language-plaintext highlighter-rouge">1</code> for real tokens, <code class="language-plaintext highlighter-rouge">0</code> for padding). In this case, all tokens are valid, so the mask is <code class="language-plaintext highlighter-rouge">[1, 1, 1]</code>.</li>
+</ul>
+
+<p>This encoded format is ready for input into a transformer model, ensuring that the sequence is correctly processed and understood by the model.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-35"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What is the encoding for “ATTGTGGGTCCCCGTAGATGATAGGGGCCCCCC”? Specify that the tokenized sequence should have a maximum length of 5 tokens and ensure that the sequence is padded to the specified <code class="language-plaintext highlighter-rouge">max_length</code> of 5 tokens.</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-36"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-36" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ul>
+      <li>To specify that the tokenized sequence should have a maximum length of 5 tokens, you need to put <code class="language-plaintext highlighter-rouge">max_length=5</code> – if the sequence is longer, it will be truncated –</li>
+      <li>To ensure that the sequence is padded to the specified <code class="language-plaintext highlighter-rouge">max_length</code> of 5 tokens, you need to add <code class="language-plaintext highlighter-rouge">padding='max_length'</code> – if the sequence is shorter, padding tokens will be added</li>
+    </ul>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">encoding</span> <span class="o">=</span> <span class="nf">tokenizer</span><span class="p">(</span><span class="sh">"</span><span class="s">ATTGTGGGTCCCCGTAGATGATAGGGGCCCCCC</span><span class="sh">"</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="sh">'</span><span class="s">max_length</span><span class="sh">'</span><span class="p">,</span> <span class="n">truncation</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">encoding</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'input_ids': tensor([[   1, 2061,  281,  485,    2]]), 'token_type_ids': tensor([[0, 0, 0, 0, 0]]), 'attention_mask': tensor([[1, 1, 1, 1, 1]])}
+</code></pre></div>    </div>
+    <p>In this case, <code class="language-plaintext highlighter-rouge">[1, 2061, 281, 485, 2]</code> represents the tokens for the sequence, likely including special tokens like [CLS] and [SEP]. As before, all tokens are of type <code class="language-plaintext highlighter-rouge">0</code>, suggesting a single segment, and are valid, so the mask is <code class="language-plaintext highlighter-rouge">[1, 1, 1, 1, 1]</code>.</p>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="prepare-data">Prepare data</h1>
+
+<p>We will now prepare the data.</p>
+
+<h2 id="load-data">Load data</h2>
+
+<p>First we load the data. We will not use here the whole human genome because it comprises too many sequences. Instead, we use a small subset of the data, which is less than 1% of the sequences from the human genome.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-pre-trained-model-on-the-whole-human-genome-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Pre-trained model on the whole human genome</div>
+
+  <p>A compact DNA model with approximately 1 million parameters that has been trained on the entire human genome can be found on <a href="https://huggingface.co/RaphaelMourad/Mistral-DNA-v1-1M-hg38">Hugging Face</a></p>
+</blockquote>
+
+<p>We use the <code class="language-plaintext highlighter-rouge">load_dataset</code> function from the <code class="language-plaintext highlighter-rouge">datasets</code> library. This function is commonly used for loading data for Hugging Face Transformers.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dataset_text</span> <span class="o">=</span> <span class="nf">load_dataset</span><span class="p">(</span><span class="sh">"</span><span class="s">csv</span><span class="sh">"</span><span class="p">,</span> <span class="n">data_files</span><span class="o">=</span><span class="sh">"</span><span class="s">data/genome_sequences/hg38/sequences_hg38_200b_verysmall.csv.gz</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-36"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How is <code class="language-plaintext highlighter-rouge">dataset_text</code> structured?</li>
+    <li>What are the first 5 train dataset in the data?</li>
+    <li>How long are the sequences?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-37"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-37" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">dataset_text</code> is a <code class="language-plaintext highlighter-rouge">DatasetDict</code> with a <code class="language-plaintext highlighter-rouge">train</code> <code class="language-plaintext highlighter-rouge">Dataset</code> containing 1 feature (<code class="language-plaintext highlighter-rouge">'text'</code>) of 99,999 rows (obtained with <code class="language-plaintext highlighter-rouge">dataset_text</code>)</li>
+      <li>
+        <p>To get the 5 train dataset in the data:</p>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dataset_text</span><span class="p">[</span><span class="sh">'</span><span class="s">train</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">text</span><span class="sh">'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</code></pre></div>        </div>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['TAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCCTAACCCTAACCCTAACCCTAACCCTAACCTAACCCTAACCCTAACCCTAA',
+'CCCTAACCCTAACCCTAACCCTAACCCTAACCCCTAACCCTAACCCTAAACCCTAAACCCTAACCCTAACCCTAACCCTAACCCTAACCCCAACCCCAACCCCAACCCCAACCCCAACCCCAACCCTAACCCCTAACCCTAACCCTAACCCTACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCCTAACCCC',
+'TAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCCTAACCCTAACCCTAACCCTAACCCTCGCGGTACCCTCAGCCGGCCCGCCCGCCCGGGTCTGACCTGAGGAGAACTGTGCTCCGCCTTCAGAGTACCACCGAAATCTGTGCAGAGGACAACGCAGCTCCGCCCTCGCGGTGCTCTCCGGGTCTGTGCT',
+'GAGGAGAACGCAACTCCGCCGTTGCAAAGGCGCGCCGCGCCGGCGCAGGCGCAGAGAGGCGCGCCGCGCCGGCGCAGGCGCAGAGAGGCGCGCCGCGCCGGCGCAGGCGCAGAGAGGCGCGCCGCGCCGGCGCAGGCGCAGAGAGGCGCGCCGCGCCGGCGCAGGCGCAGAGAGGCGCGCCGCGCCGGCGCAGGCGCAGA',
+'CACATGCTAGCGCGTCGGGGTGGAGGCGTGGCGCAGGCGCAGAGAGGCGCGCCGCGCCGGCGCAGGCGCAGAGACACATGCTACCGCGTCCAGGGGTGGAGGCGTGGCGCAGGCGCAGAGAGGCGCACCGCGCCGGCGCAGGCGCAGAGACACATGCTAGCGCGTCCAGGGGTGGAGGCGTGGCGCAGGCGCAGAGACGC']
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>The sequences are 200 base pair long:</p>
+
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">len</span><span class="p">(</span><span class="n">dataset_text</span><span class="p">[</span><span class="sh">'</span><span class="s">train</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">text</span><span class="sh">'</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div>        </div>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>200
+</code></pre></div>        </div>
+      </li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<h2 id="tokenize-data">Tokenize data</h2>
+
+<p>Let’s tokenize the data. First, we create a function that tokenizes a text using the BPE letter tokenizer:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">tokenize_function</span><span class="p">(</span><span class="n">examples</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nf">tokenizer</span><span class="p">(</span><span class="n">examples</span><span class="p">[</span><span class="sh">'</span><span class="s">text</span><span class="sh">'</span><span class="p">],</span> <span class="n">padding</span><span class="o">=</span><span class="sh">"</span><span class="s">longest</span><span class="sh">"</span><span class="p">,</span> <span class="n">truncation</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="sh">"</span><span class="s">pt</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-37"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What do the following parameters?</p>
+
+  <ol>
+    <li><code class="language-plaintext highlighter-rouge">padding="longest"</code></li>
+    <li><code class="language-plaintext highlighter-rouge">truncation=True</code></li>
+    <li><code class="language-plaintext highlighter-rouge">return_tensors="pt"</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-38"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-38" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">padding="longest"</code> ensures that all sequences in the batch are padded to the length of the longest sequence, adding padding tokens as needed.</li>
+      <li><code class="language-plaintext highlighter-rouge">truncation=True</code> specifies that sequences exceeding the model’s maximum length will be truncated to fit.</li>
+      <li><code class="language-plaintext highlighter-rouge">return_tensors="pt"</code> indicates that the output should be in the form of PyTorch tensors, suitable for use with PyTorch-based models.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>We can now apply this function to the load dataset:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset_text</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="n">tokenize_function</span><span class="p">,</span> <span class="n">batched</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>It is quite fast for the almsot 100,000 sequence of length 200 bp.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-38"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How is <code class="language-plaintext highlighter-rouge">dataset</code> structured?</li>
+    <li>What is in the first tokenized sequence of <code class="language-plaintext highlighter-rouge">train</code> <code class="language-plaintext highlighter-rouge">Dataset</code>?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-39"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-39" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">dataset</code> is
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DatasetDict({
+    train: Dataset({
+        features: ['text', 'input_ids', 'token_type_ids', 'attention_mask'],
+        num_rows: 99999
+    })
+})
+</code></pre></div>        </div>
+
+        <p><code class="language-plaintext highlighter-rouge">dataset</code> is a <code class="language-plaintext highlighter-rouge">DatasetDict</code> with 1 <code class="language-plaintext highlighter-rouge">train</code> <code class="language-plaintext highlighter-rouge">Dataset</code> made of 99,999 rows and 4 features:</p>
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">text</code>: The original text data before tokenization.</li>
+          <li><code class="language-plaintext highlighter-rouge">input_ids</code>: The tokenized input data, represented as numerical IDs.</li>
+          <li><code class="language-plaintext highlighter-rouge">token_type_ids</code>: Indicates the type of each token, useful for models that handle multiple segments.</li>
+          <li><code class="language-plaintext highlighter-rouge">attention_mask</code>: Specifies which tokens should be attended to by the model (<code class="language-plaintext highlighter-rouge">1</code> for real tokens, <code class="language-plaintext highlighter-rouge">0</code> for padding).</li>
+        </ul>
+      </li>
+      <li>The first tokenized sequence of <code class="language-plaintext highlighter-rouge">train</code> <code class="language-plaintext highlighter-rouge">Dataset</code> (<code class="language-plaintext highlighter-rouge">dataset["train"][1]</code>) is a dictionary with:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">text</code>: 200 base pair sequence</li>
+          <li><code class="language-plaintext highlighter-rouge">input_ids</code>: list of 49 numerical values, the token IDs.</li>
+          <li><code class="language-plaintext highlighter-rouge">token_type_ids</code>: list 49 <code class="language-plaintext highlighter-rouge">0</code></li>
+          <li><code class="language-plaintext highlighter-rouge">attention_mask</code>: list of 7 <code class="language-plaintext highlighter-rouge">0</code> (padding) and 42 <code class="language-plaintext highlighter-rouge">1</code> (real tokens)</li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="split-data">Split data</h2>
+
+<p>We will now split data between training and validation sets randomly. This is a crucial step in machine learning to ensure the model can generalize to unseen data.</p>
+
+<p>For that, 80% of the entire data will be used for the training set and the remaining 20% will go into the validation set. We first compute the size of training and validation sets:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train_size</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="nf">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="sh">"</span><span class="s">train</span><span class="sh">"</span><span class="p">]))</span>
+<span class="n">val_size</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="sh">"</span><span class="s">train</span><span class="sh">"</span><span class="p">])</span> <span class="o">-</span> <span class="n">training_size</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-39"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How big are training and validation sets?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-40"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-40" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Training set has 79,999 sequences and the validation set 20,000.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>To perform the actual splitting of the training dataset into two subsets, we use the <code class="language-plaintext highlighter-rouge">torch.utils.data.random_split</code> function from the PyTorch library that randomly splits a dataset into subsets.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train_set</span><span class="p">,</span> <span class="n">val_set</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="nf">random_split</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="sh">"</span><span class="s">train</span><span class="sh">"</span><span class="p">],</span> <span class="p">[</span><span class="n">train_size</span><span class="p">,</span> <span class="n">val_size</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h2 id="data-collation">Data Collation</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">DataCollatorForLanguageModeling</code> is a utility class, designed to prepare and format batches of data for language modeling tasks. It handles the dynamic padding and masking of input sequences, ensuring that each batch fed into the model is correctly formatted and optimized for training.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data_collator</span> <span class="o">=</span> <span class="nc">DataCollatorForLanguageModeling</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">mlm</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-40"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What are the different parameters?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-41"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-41" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">tokenizer=tokenizer</code> specifies the tokenizer to be used for processing the input data. The tokenizer converts raw text into numerical tokens that the model can understand.</li>
+      <li><code class="language-plaintext highlighter-rouge">mlm=False</code>: Indicates that the data collator is set up for causal language modeling (CLM) rather than masked language modeling (MLM).</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<p>This will:</p>
+
+<ol>
+  <li>Automatically pads sequences within a batch to ensure they are of equal length, which is necessary for efficient batch processing in neural networks.</li>
+  <li>Generates attention masks that indicate which tokens should be attended to by the model, ignoring padding tokens.</li>
+  <li>Collates individual examples into batches, handling the necessary formatting and ensuring compatibility with the model’s input requirements.</li>
+</ol>
+
+<p>The <code class="language-plaintext highlighter-rouge">DataCollatorForLanguageModeling</code> is typically used in conjunction with a <code class="language-plaintext highlighter-rouge">Trainer</code> from the Hugging Face library. It simplifies the data preparation process, allowing you to focus on model training and evaluation without worrying about the intricacies of batch formatting.</p>
+
+<h1 id="train-the-model">Train the model</h1>
+
+<h2 id="define-parameters-for-pretraining">Define parameters for pretraining</h2>
+
+<p>We are now going to defines the hyperparameters and configurations for training the language model using the Hugging Face <code class="language-plaintext highlighter-rouge">transformers</code>.</p>
+
+<p>Before, we specify the batch size for training and evaluation. A batch size of 32 means that 32 samples will be processed before the model updates its weights. This size is chosen to balance computational efficiency and memory usage.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">batchsize</span><span class="o">=</span><span class="mi">32</span>
+<span class="n">training_args</span> <span class="o">=</span> <span class="nc">TrainingArguments</span><span class="p">(</span>
+  <span class="n">output_dir</span><span class="o">=</span><span class="sh">"</span><span class="s">./results/models</span><span class="sh">"</span><span class="p">,</span>
+  <span class="n">evaluation_strategy</span><span class="o">=</span><span class="sh">"</span><span class="s">epoch</span><span class="sh">"</span><span class="p">,</span>
+  <span class="n">save_strategy</span><span class="o">=</span><span class="sh">"</span><span class="s">epoch</span><span class="sh">"</span><span class="p">,</span>
+  <span class="n">num_train_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+  <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="n">batchsize</span><span class="p">,</span>
+  <span class="n">per_device_eval_batch_size</span><span class="o">=</span><span class="n">batchsize</span><span class="p">,</span>
+  <span class="n">learning_rate</span><span class="o">=</span><span class="mf">5e-4</span><span class="p">,</span>
+  <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+  <span class="n">logging_dir</span><span class="o">=</span><span class="sh">"</span><span class="s">./logs</span><span class="sh">"</span><span class="p">,</span>
+  <span class="n">load_best_model_at_end</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+  <span class="n">fp16</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+  <span class="n">gradient_accumulation_steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+  <span class="n">report_to</span><span class="o">=</span><span class="sh">"</span><span class="s">none</span><span class="sh">"</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">output_dir="./results/models"</code>: directory where the training outputs, including model checkpoints and results, will be saved.</li>
+  <li><code class="language-plaintext highlighter-rouge">evaluation_strategy="epoch"</code> indicates that the model’s performance will be evaluated at the end of each epoch, a complete pass through the entire training dataset. This allows for monitoring the model’s progress and adjusting the training process as needed.</li>
+  <li><code class="language-plaintext highlighter-rouge">save_strategy="epoch"</code> specifies that the model will be saved at the end of each epoch. This ensures that checkpoints are available for each complete pass through the dataset.</li>
+  <li><code class="language-plaintext highlighter-rouge">num_train_epochs=50</code> sets the total number of training epochs to 50. This means the model will iterate over the entire dataset 50 times, allowing it to learn and optimize over multiple passes.</li>
+  <li><code class="language-plaintext highlighter-rouge">per_device_train_batch_size=batchsize</code> and <code class="language-plaintext highlighter-rouge">per_device_eval_batch_size=batchsize</code> set the batch size for training and evaluation on each device (e.g., GPU) to 32. This ensures consistency in batch processing across different stages of training and evaluation.</li>
+  <li><code class="language-plaintext highlighter-rouge">learning_rate=5e-4</code> defines the learning rate for the optimizer, set to \(5 \times 10^{-4}\). This rate controls the step size during gradient descent and is a common choice for pre-training models.</li>
+  <li><code class="language-plaintext highlighter-rouge">weight_decay=0.01</code> applies L2 regularization to the model weights with a standard decay rate of 0.01. This helps prevent overfitting by penalizing large weights.</li>
+  <li><code class="language-plaintext highlighter-rouge">logging_dir="./logs"</code> specifies the directory where training logs will be stored, allowing for monitoring and analysis of the training process.</li>
+  <li><code class="language-plaintext highlighter-rouge">load_best_model_at_end=True</code> ensures that the best model, based on the lowest evaluation loss, is loaded at the end of training. This helps in selecting the model with the best performance across all epochs. During gradient descent, the model will be optimized, and at some point, the loss will start to increase again. We want to pick the model with the lowest loss, not when it starts increasing. So, “load best model at the end” means selecting the model with the best loss across all epochs.</li>
+  <li><code class="language-plaintext highlighter-rouge">fp16=True</code> enables mixed-precision training using 16-bit floating-point numbers. This reduces memory usage and can speed up training on compatible hardware.</li>
+  <li><code class="language-plaintext highlighter-rouge">gradient_accumulation_steps=50</code> accumulates gradients over 50 steps before performing a backward pass. This effectively increases the batch size without requiring additional memory, helping to stabilize training.</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">report_to="none"</code> disables <a href="https://wandb.ai/">Weights &amp; Biases (WandB)</a>, a popular platform used for experiment tracking, dataset versioning, and model management in machine learning</p>
+
+    <blockquote class="comment">
+      <div class="box-title comment-title" id="comment-why-disable-wandb-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Why Disable WandB?</div>
+
+      <p>Disabling WandB is often done in specific scenarios:</p>
+      <ul>
+        <li>Avoiding Unwanted Logging: If we do not intend to use WandB for tracking our experiments or if we want to avoid potential conflicts with other logging mechanisms, we would disable it.</li>
+        <li>Reducing Overhead: WandB logging can introduce some overhead,   particularly when dealing with large datasets or complex models. Disabling it can slightly improve performance if tracking is not essential.</li>
+        <li>Testing/Debugging: During testing or debugging, we might prefer to have more control over logging or we might want to avoid cluttering our WandB workspace with intermediate results.</li>
+      </ul>
+
+    </blockquote>
+  </li>
+</ul>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-41"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What is stored in <code class="language-plaintext highlighter-rouge">training_args</code>: the parameters to the model, the parameter of the LLM or the parameters of the trainer function?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-42"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-42" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>The parameters of the trainer function</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="pretrain-the-model">Pretrain the model</h2>
+
+<p>Here is the most important part: the pre-training process. For this, we will use a <code class="language-plaintext highlighter-rouge">Trainer</code> function. This function takes as input the model that we built previously, which has an architecture but no initialized weights.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">trainer</span> <span class="o">=</span> <span class="nc">Trainer</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="n">training_args</span><span class="p">,</span>
+    <span class="n">data_collator</span><span class="o">=</span><span class="n">data_collator</span><span class="p">,</span>
+    <span class="n">train_dataset</span><span class="o">=</span><span class="n">train_set</span><span class="p">,</span>
+    <span class="n">eval_dataset</span><span class="o">=</span><span class="n">val_set</span><span class="p">,</span>
+    <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="nc">EarlyStoppingCallback</span><span class="p">(</span><span class="n">early_stopping_patience</span><span class="o">=</span><span class="mi">3</span><span class="p">)]</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>The Trainer function also takes:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">args</code>: the training arguments we configured earlier</li>
+  <li><code class="language-plaintext highlighter-rouge">data_collator</code>: the data collator function feeding the tokenized data sequences to the model.</li>
+  <li><code class="language-plaintext highlighter-rouge">train_dataset</code>: the training set, i.e. the data used for computing the gradients</li>
+  <li><code class="language-plaintext highlighter-rouge">eval_dataset</code>: the validation set, i.e. the data used to assess the prediction accuracy at each epoch. It’s important to use a validation set that is independent of the training set to ensure unbiased evaluation.</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">callbacks</code>: <code class="language-plaintext highlighter-rouge">EarlyStoppingCallback</code> with a patience of three is used to monitor the training process.</p>
+
+    <p>During training, we minimize the loss at each step. However, at some point, the loss may start to increase again. We want to capture the model parameters when the loss reaches its minimum. By using a patience of three, we aim to mitigate the effects of noise during training. Noise can cause fluctuations in the loss, making it seem like we’ve reached a local minimum when a better one might be found with further training.</p>
+
+    <p>With a patience of three, even if we find a good minimum, we wait for three more epochs to ensure that the loss does not improve further. If the loss does not decrease for three consecutive epochs, we stop training. However, if a better model with a lower loss is found within those three epochs, training continues. This approach helps in finding a more robust local minimum by reducing the impact of noise in the training data.</p>
+  </li>
+</ul>
+
+<p>Let’s launch the training with <code class="language-plaintext highlighter-rouge">trainer.train()</code> method</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">trainer</span><span class="p">.</span><span class="nf">train</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Here, the trainer is set to run for 50 epochs. After the initiation, we get an estimation of the time it takes per epoch to get an idea of the total training duration. Let’s run it for a bit to see how long it takes.</p>
+
+<p>With this small model and dataset, the estimated time to run 50 epochs is 20 hours – this value changes depending on the infrastructure –.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-42"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Will the model be trained to 50 epochs?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-43"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-43" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Setting the number of epochs to 50 doesn’t mean the model will train for all 50 epochs. It’s likely to stop earlier</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>The 50 epochs serve as a maximum limit. The model will stop training earlier if it reaches the minimum loss and then starts to increase again, thanks to the early stopping callback. This means the model might only require half the epochs, perhaps 25 epochs or 10 hours, to achieve optimal performance.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-don-t-train-until-the-end-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Don't train until the end</div>
+
+  <p>The idea here is not to train the model until completion, as it would take too much time.</p>
+
+</blockquote>
+
+<p>Let’s stop the actual training and cheat a bit by loading a previously <a href="https://huggingface.co/RaphaelMourad/Mistral-DNA-v1-1M-hg38">trained Mistral model</a>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="p">.</span><span class="nf">from_pretrained</span><span class="p">(</span><span class="sh">"</span><span class="s">RaphaelMourad/Mistral-DNA-v1-17M-hg38</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This is a mixed model that was pre-trained on the entire Human Genome. It contains approximately 17 million parameters and was trained using the Human Genome assembly GRCh38. Unlike models pre-trained on sequences of 200 bases, this model was pre-trained on sequences of 10,000 bases (10K). The advantage of this model is its ability to process larger DNA contexts or sequences. This capability allows it to capture more extensive patterns and dependencies within the genomic data.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-43"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>By looking at the output of:</p>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span>
+</code></pre></div>  </div>
+
+  <ol>
+    <li>How many transformer layers does this model have?</li>
+    <li>Is it similar to previous model?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-44"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-44" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>8 transformer layers</li>
+      <li>Yes</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="compute-the-embedding-of-a-dna-sequence">Compute the embedding of a DNA sequence</h1>
+
+<p>With this kind of model something, we can convert the DNA sequence to a vector.</p>
+
+<p>Let’s:</p>
+<ol>
+  <li>Take a DNA sequence</li>
+  <li>Tokenizes the DNA sequence using the tokenizer created before</li>
+  <li>Extracts the tensor containing the token IDs from the tokenized output</li>
+  <li>Passes the tokenized input through the model.</li>
+  <li>Extracts the hidden states from the model’s output.</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dna</span> <span class="o">=</span> <span class="sh">"</span><span class="s">ACGTAGCATCGGATCTATCTATCGACACTTGGTTATCGATCTACGAGCATCTCGTTAGC</span><span class="sh">"</span>
+<span class="n">tokenized_dna</span> <span class="o">=</span> <span class="nf">tokenizer</span><span class="p">(</span><span class="n">dna</span><span class="p">,</span> <span class="n">return_tensors</span> <span class="o">=</span> <span class="sh">'</span><span class="s">pt</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenized_dna</span><span class="p">[</span><span class="sh">"</span><span class="s">input_ids</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">model_outputs</span> <span class="o">=</span> <span class="nf">model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">hidden_states</span> <span class="o">=</span> <span class="n">model_outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>The generated hidden states are the internal representations of the input sequence at different layers of the model. Here we look at the hidden neurons of the last layer. They capture contextual information about the sequence and provide a richer representation of the sequence compared to the raw nucleotide string, capturing contextual information that can be used for tasks such as sequence similarity analysis, functional prediction, variant impact analysis, and more.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-44"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What is the shape of <code class="language-plaintext highlighter-rouge">hidden_states</code>?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-45"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-45" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p><code class="language-plaintext highlighter-rouge">[1, 17, 4096]</code>:</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">1</code>: number of sequences, here 1 DNA sequence</li>
+      <li><code class="language-plaintext highlighter-rouge">17</code>: number of words, here the DNA sequence has been converted to 17 words larger that 1</li>
+      <li><code class="language-plaintext highlighter-rouge">4096</code>: size of the vocabulary, the number of possible tokens</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<p>We would like now to calculate the mean of the hidden states across a specific dimension, here the first layer of the model (<code class="language-plaintext highlighter-rouge">hidden_states[0]</code>):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">embedding_mean</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">mean</span><span class="p">(</span><span class="n">hidden_states</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">dim=0</code> indicates that the mean is calculated across the sequence length dimension. This effectively averages the hidden states for each token position in the sequence, resulting in a single vector that represents the entire sequence.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-45"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What is the shape of <code class="language-plaintext highlighter-rouge">embedding_mean</code>?</li>
+    <li>Which type of data is in <code class="language-plaintext highlighter-rouge">embedding_mean</code>?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-46"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-46" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">4096</code>, the number of possible tokens.</li>
+      <li><code class="language-plaintext highlighter-rouge">embedding_mean</code> is a vector of numerical values.</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">embedding_mean</code> is a numerical vector of size 4,096 that represents the average embedding of the DNA sequence. This fixed-size representation can be used for various downstream tasks, such as classification, clustering, or similarity comparisons.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On</div>
+
+  <p>Apply a max pooling instead of a mean pooling to summarize information along the DNA sequence.</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-47"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-47" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">embedding_max</span> <span class="o">=</span> <span class="n">torch</span><span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="n">hidden_states</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-similar-process-to-chatgpt-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Similar process to ChatGPT</div>
+
+  <p>When you use a system like ChatGPT, the process involves converting your textual input, or “prompt,” into a numerical vector. This conversion is similar to the process we just did. Here’s how it works:</p>
+
+  <ul>
+    <li><strong>Input Prompt</strong>: You write a prompt, which is a textual query or statement.</li>
+    <li><strong>Tokenization</strong>: The prompt is tokenized, meaning it is broken down into smaller units, such as words or subwords, using a tokenizer.</li>
+    <li><strong>Vector Representation</strong>: These tokens are then converted into numerical vectors, or embeddings. These vectors capture the semantic meaning and context of the words in the prompt.</li>
+    <li><strong>Model Processing</strong>: The model processes these vectors to generate a response. The embeddings allow the model to understand the context and nuances of your input, enabling it to produce coherent and relevant responses.</li>
+  </ul>
+
+  <p>This process of converting text into numerical vectors is fundamental to how language models like ChatGPT operate, enabling them to interpret and generate human-like text based on the input they receive.</p>
+
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>This tutorial provides a comprehensive guide to preparing, training, and utilizing a pre-trained language model for DNA sequence analysis. It begins by setting up the necessary resources, including installing dependencies, importing Python libraries, and configuring computational resources. The tutorial then walks through loading and choosing an appropriate model architecture for DNA sequences, followed by setting up a tokenizer to convert DNA sequences into numerical tokens. Data preparation involves loading, tokenizing, splitting, and collating DNA sequences to ensure efficient model training. The training process is detailed with parameter definitions and pretraining steps, culminating in the calculation of DNA sequence embeddings.</p>
+
+<p>We can now leverage the pre-trained model in various bioinformatics applications, such as sequence similarity analysis and functional prediction, offering a robust foundation for integrative biological research.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Efficient Model Training: By leveraging parameter-efficient fine-tuning techniques and distributed training strategies, it is possible to train large language models on DNA sequences using consumer-grade hardware, making advanced bioinformatics research more accessible.</p>
+</li>
+                        
+                        <li><p>Importance of Data Preparation: Properly tokenizing and organizing DNA sequence data is crucial for effective model training and evaluation, as it directly impacts the model’s ability to learn and generalize from the data.</p>
+</li>
+                        
+                        <li><p>Practical Applications of Embeddings: The embeddings generated by a trained language model capture rich contextual information about DNA sequences, enabling a wide range of downstream applications, from sequence classification to functional prediction in genomics research.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                
+                  <li><a href="/training-material/topics/statistics/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/genomic-llm-pretraining"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/genomic-llm-pretraining">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Raphael Mourad, Bérénice Batut,  <b>Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.html">https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{statistics-genomic-llm-pretraining,
+author = "Raphael Mourad and Bérénice Batut",
+	title = "Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bf2ed173efee6757a347c2b9fdc10d2f8809cd23">bf2ed17</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+	
+
+    </body>
+</html>
