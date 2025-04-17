@@ -20,30 +20,29 @@ key_points:
 - The taxonomic classification tool to use depends on the data
 time_estimation: 2H
 contributions:
-   authorship:
-    - sophia120199
-    - bebatut
-    - paulzierep
-   editing:
-    - Tarnima-Omara
-   funding:
-    - gallantries
+  authorship:
+  - sophia120199
+  - bebatut
+  - paulzierep
+  editing:
+  - Tarnima-Omara
+  funding:
+  - gallantries
 answer_histories:
-  - label: "GTA2025"
-    history: https://usegalaxy.eu/u/tarnima/h/taxonomic-profiling-and-visualization-of-metagenomic-data-answer-key-history
+- label: GTA2025
+  history: https://usegalaxy.eu/u/tarnima/h/taxonomic-profiling-and-visualization-of-metagenomic-data-answer-key-history
 subtopic: metagenomics
 tags:
 - metagenomics
 - taxonomic profiling
 - microgalaxy
 redirect_from:
-- /topics/metagenomics/tutorials/taxonomic-profiling/tutorial
+- "/topics/metagenomics/tutorials/taxonomic-profiling/tutorial"
 edam_ontology:
-- topic_3174 # Metagenomics
-- topic_3697 # Microbial ecology
-- topic_0637 # Taxonomy
-- topic_0080 # Sequence analysis
-
+- topic_3174
+- topic_3697
+- topic_0637
+- topic_0080
 recordings:
 - youtube_id: jszMnBKm6ig
   speakers:
@@ -53,8 +52,19 @@ recordings:
   date: '2023-05-16'
   length: 1H15M
   galaxy_version: '23.01'
+- youtube_id: TODO
+  length: 2H4M
+  galaxy_version: 24.2.4.dev0
+  date: '2025-04-16'
+  speakers:
+  - Tarnima-Omara
+  captioners:
+  - Tarnima-Omara
+  bot-timestamp: 1744833733
+
 
 ---
+
 
 
 The term **"microbiome"** describes "a characteristic microbial community occupying a reasonably well-defined habitat which has distinct physio-chemical properties. The term thus not only refers to the microorganisms involved but also encompasses their theatre of activity" ({% cite whipps1988mycoparasitism %}).
