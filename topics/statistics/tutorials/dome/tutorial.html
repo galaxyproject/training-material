@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@29b81e02e1868899dd73de7255e944cff8f47ff2",
+		release: "galaxy-training-network@ccf27f16b3c4ca28d692cab39b93463a939c6fad",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -56,6 +56,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
         <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
 <link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
@@ -68,8 +70,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Regulations/standards for AI using DOME">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-03-11 17:21:16 +0000">
-<meta name="DC.creator" content="Fotis E. Psomopoulos"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+<meta name="DC.date" content="2025-04-17 09:04:44 +0000">
+<meta name="DC.creator" content="Fotis E. Psomopoulos">
+<meta name="DC.creator" content="Stella Fragkouli"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Statistics and machine learning / Regulations/standards for AI using DOME / Hands-on: Regulations/standards for AI using DOME">
         <meta property="og:description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
@@ -186,7 +189,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Draft",
-  "dateModified": "2025-03-11 17:21:16 +0000",
+  "dateModified": "2025-04-17 09:04:44 +0000",
   "datePublished": "2025-03-11 17:21:16 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -240,21 +243,20 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
     "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
   },
-  "abstract": null,
+  "abstract": "With the significant drop in the cost of many high-throughput technologies, vast amounts of biological data are being generated and made available to researchers. Machine learning (ML) has emerged as a **powerful tool for analyzing data** related to cellular processes, genomics, proteomics, post-translational modifications, metabolism, and drug discovery, offering the potential for transformative medical advancements. ",
   "learningResourceType": "e-learning",
   "name": "Regulations/standards for AI using DOME",
   "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/dome/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT3H",
-  "teaches": "- to do",
+  "teaches": "- Explain the importance of data provenance and dataset splits in ensuring the integrity and reproducibility of AI research.\n- Develop a comprehensive plan for documenting and sharing AI model configurations, datasets, and evaluation results to enhance transparency and reproducibility in their research.",
   "keywords": [
     "Statistics and machine learning",
     "elixir",
     "ai-ml",
-    "work-in-progress",
-    "jupyter-notebook"
+    "work-in-progress"
   ],
-  "description": "## Abstract\n\n\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - to do\n\n\n## Learning Objectives\n\n- to do\n\n",
+  "description": "## Abstract\n\nWith the significant drop in the cost of many high-throughput technologies, vast amounts of biological data are being generated and made available to researchers. Machine learning (ML) has emerged as a **powerful tool for analyzing data** related to cellular processes, genomics, proteomics, post-translational modifications, metabolism, and drug discovery, offering the potential for transformative medical advancements. \n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How should data provenance be documented to ensure transparency in AI research?\n - What strategies can be employed to manage redundancy between training and test datasets in biological research?\n - Why is it important to make datasets and model configurations publicly available, and how can this be achieved?\n - What are the key considerations in selecting and documenting optimization algorithms and parameters for AI models?\n - How can the interpretability of AI models be enhanced, and why is this crucial in fields like drug design and diagnostics?\n\n\n## Learning Objectives\n\n- Explain the importance of data provenance and dataset splits in ensuring the integrity and reproducibility of AI research.\n- Develop a comprehensive plan for documenting and sharing AI model configurations, datasets, and evaluation results to enhance transparency and reproducibility in their research.\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -362,9 +364,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       ],
       "identifier": "https://orcid.org/0000-0002-0222-4273",
       "orcid": "https://orcid.org/0000-0002-0222-4273"
-    }
-  ],
-  "contributor": [
+    },
     {
       "@context": "https://schema.org",
       "@type": "Person",
@@ -372,11 +372,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
         "@type": "CreativeWork"
       },
-      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
-      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
-      "name": "Saskia Hiltemann",
-      "image": "https://avatars.githubusercontent.com/shiltemann",
-      "description": "Researcher at Erasmus Medical Center",
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/sfragkoul/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/sfragkoul/",
+      "name": "Stella Fragkouli",
+      "image": "https://avatars.githubusercontent.com/sfragkoul",
+      "description": "A contributor to the GTN project.",
       "memberOf": [
         {
           "@type": "Organization",
@@ -411,39 +411,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
             "@type": "CreativeWork"
           },
-          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
-          "name": "University of Freiburg",
-          "description": "An organization supporting the Galaxy Training Network",
-          "url": "https://www.uni-freiburg.de/"
-        },
-        {
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "http://purl.org/dc/terms/conformsTo": {
-            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
-            "@type": "CreativeWork"
-          },
-          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
-          "name": "DataPLANT (NFDI4Plants)",
-          "description": "An organization supporting the Galaxy Training Network",
-          "url": "https://nfdi4plants.org"
-        },
-        {
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "http://purl.org/dc/terms/conformsTo": {
-            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
-            "@type": "CreativeWork"
-          },
           "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
           "name": "ELIXIR Europe",
           "description": "An organization supporting the Galaxy Training Network",
           "url": "https://elixir-europe.org"
         }
       ],
-      "identifier": "https://orcid.org/0000-0003-3803-468X",
-      "orcid": "https://orcid.org/0000-0003-3803-468X"
-    },
+      "identifier": "https://orcid.org/0000-0003-4067-7123",
+      "orcid": "https://orcid.org/0000-0003-4067-7123"
+    }
+  ],
+  "contributor": [
     {
       "@context": "https://schema.org",
       "@type": "Person",
@@ -522,6 +500,85 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       ],
       "identifier": "https://orcid.org/0000-0001-9852-1987",
       "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
     }
   ],
   "about": [
@@ -540,18 +597,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     }
   ],
   "educationalLevel": "Intermediate",
-  "mentions": [
-    {
-      "@type": "Thing",
-      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/dome/statistics-dome.ipynb",
-      "name": "Jupyter Notebook (with Solutions)"
-    },
-    {
-      "@type": "Thing",
-      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/dome/statistics-dome-course.ipynb",
-      "name": "Jupyter Notebook (without Solutions)"
-    }
-  ]
+  "mentions": []
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -736,7 +782,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
 		<td>
 			<a href="/training-material/hall-of-fame/fpsom/" class="contributor-badge contributor-fpsom"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/fpsom?s=36" alt="Fotis E. Psomopoulos avatar" width="36" class="avatar" />
-    Fotis E. Psomopoulos</a>
+    Fotis E. Psomopoulos</a><a href="/training-material/hall-of-fame/sfragkoul/" class="contributor-badge contributor-sfragkoul"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/sfragkoul?s=36" alt="Stella Fragkouli avatar" width="36" class="avatar" />
+    Stella Fragkouli</a>
 		</td>
 	</tr>
 	
@@ -749,6 +796,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a></td>
+	</tr>
 	
 
 	
@@ -781,7 +835,19 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
         
-        <li><p>to do</p>
+        <li><p>How should data provenance be documented to ensure transparency in AI research?</p>
+</li>
+        
+        <li><p>What strategies can be employed to manage redundancy between training and test datasets in biological research?</p>
+</li>
+        
+        <li><p>Why is it important to make datasets and model configurations publicly available, and how can this be achieved?</p>
+</li>
+        
+        <li><p>What are the key considerations in selecting and documenting optimization algorithms and parameters for AI models?</p>
+</li>
+        
+        <li><p>How can the interpretability of AI models be enhanced, and why is this crucial in fields like drug design and diagnostics?</p>
 </li>
         
         </ul>
@@ -789,7 +855,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
         <ul>
         
-        <li><p>to do</p>
+        <li><p>Explain the importance of data provenance and dataset splits in ensuring the integrity and reproducibility of AI research.</p>
+</li>
+        
+        <li><p>Develop a comprehensive plan for documenting and sharing AI model configurations, datasets, and evaluation results to enhance transparency and reproducibility in their research.</p>
 </li>
         
         </ul>
@@ -853,16 +922,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
             
 
-            
-                <li class="btn btn-default supporting_material">
-
-
-    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/dome/statistics-dome.ipynb" title="Jupyter Notebook" alt="Regulations/standards for AI using DOME Notebook">
-        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
-    </a>
-    
-
-</li>
             
 
             
@@ -936,7 +995,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 11, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 11, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 17, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -952,7 +1011,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -965,51 +1024,814 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             </div>
             <div class="col-sm-10">
                  
-                <section aria-label="Tutorial Notebook access information" id="tutorial-notebook">
-                     
-                     
-                     
-                     
-                    
-                        <blockquote class="comment">
-                            <div class="box-title">Best viewed in a Jupyter Notebook</div>
-                            <p>
-                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
-                            </p>
-                            <!--
-                            <p><b>Launching on MyBinder</b>
-                                Click here and the notebook will launch on MyBinder.org
-                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fstatistics%2Ftutorials%2Fdome%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
-                            </p>
-                            -->
-                            
-                            <p><b>Run on the GTN with JupyterLite (in-browser computations)</b>
-                                <ol>
-                                    <li><a href="/training-material/jupyter/lab/index.html?path=statistics-dome.ipynb">Click to Launch JupyterLite</a></li>
-                                </ol>
-                            </p>
-                            
-                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
-                                <ol>
-                                    <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
-                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
-                                    <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/statistics/tutorials/dome/statistics-dome.ipynb</code></li>
-                                    <li>Select the notebook that appears in the list of files on the left.</li>
-                                </ol>
-                            </p>
-                            <p><b>Downloading the notebook</b>
-                                <ol>
-                                    <li>Right click one of these links: <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/dome/statistics-dome.ipynb">Jupyter Notebook (With Solutions)</a>, <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/dome/statistics-dome-course.ipynb">Jupyter Notebook (Without Solutions)</a></li>
-                                    <li>Save Link As..</li>
-                                </ol>
-                            </p>
-                        </blockquote>
-                    
-                </section>
-                
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                
+                <p>With the significant drop in the cost of many high-throughput technologies, vast amounts of biological data are being generated and made available to researchers. Machine learning (ML) has emerged as a <strong>powerful tool for analyzing data</strong> related to cellular processes, genomics, proteomics, post-translational modifications, metabolism, and drug discovery, offering the potential for transformative medical advancements.</p>
+
+<p>This trend is evident in the growing number of ML publications:</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="./images/ML_Biology.png" alt="Bar plots showing the trend of usage of ML in Biology." width="1358" height="976" loading="lazy" /><a target="_blank" href="./images/ML_Biology.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The number of ML publications per year is based on Web of Science from 1996 onwards using the topic category for 'machine learning' in combination with each of the following terms: 'biolog*', 'medicine', 'genom*', 'prote*', 'cell*', 'post translational', 'metabolic', and 'clinical'. Source: <span class="citation"><a href="#walsh2021dome">Walsh <i>et al.</i> 2021</a></span></figcaption></figure>
+
+<p>However, although ML methods should ideally be experimentally validated, this occurs in only a small portion of the studies. 
+The time is right for the ML community to <strong>establish standards for reporting ML-based analyses to facilitate critical evaluation and enhance reproducibility</strong> (<span class="citation"><a href="#walsh2021dome">Walsh <i>et al.</i> 2021</a></span>).</p>
+
+<p>Guidelines or recommendations on the proper construction of machine learning (ML) algorithms can help ensure accurate results and predictions. 
+In biomedical research, various communities have established standard guidelines and best practices for managing scientific data (<span class="citation"><a href="#wilkinson2016fair">Wilkinson <i>et al.</i> 2016</a></span>) and ensuring the reproducibility of computational tools (<span class="citation"><a href="#sandve2013ten">Sandve <i>et al.</i> 2013</a></span>, <span class="citation"><a href="#gruning2018practical">Grüning <i>et al.</i> 2018</a></span>). 
+Similarly, within the ML community, there is a growing need for a unified set of recommendations that address data handling, optimization techniques, model development, and evaluation protocols comprehensively.</p>
+
+<p>A recent commentary (<span class="citation"><a href="#jones2019setting">Jones 2019</a></span>) emphasized the need for standards in ML, suggesting that introducing submission checklists (<span class="citation"><a href="#walsh2016correct">Walsh <i>et al.</i> 2016</a></span>) could be a first step toward improving publication practices. 
+In response, a <strong>community-driven consensus list of minimal requirements</strong> was proposed, framed as questions for ML implementers (<span class="citation"><a href="#walsh2021dome">Walsh <i>et al.</i> 2021</a></span>). By adhering to these guidelines, the quality and reliability of reported methods can be more accurately assessed.</p>
+
+<p>The <strong>focus is on Data, Optimization, Model, and Evaluation (DOME)</strong>, as these four components encompass the <strong>core aspects of most ML implementations</strong>. These recommendations are primarily aimed at supervised learning in biological applications where direct experimental validation is absent, as this is the most commonly used ML approach.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-ml-in-clinical-settings"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: ML in clinical settings</div>
+
+  <p>The use of ML in clinical settings is not addressed, and it remains to be seen whether the DOME recommendations can be applied to other areas of ML, such as unsupervised, semi-supervised, or reinforcement learning.</p>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-who-is-behind-the-dome-recommendations"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Who is behind the DOME recommendations?</div>
+
+  <p>The recommendations mentioned above were initially developed by the <a href="https://elixir-europe.org/focus-groups/machine-learning">ELIXIR Machine Learning Focus Group</a> in response to a <span class="citation"><a href="#jones2019setting">Jones 2019</a></span> comment advocating for the establishment of standards in ML for biology. 
+This focus group, comprising over 50 experts in the field of ML, held meetings to collaboratively develop and refine the recommendations through broad consensus.</p>
+
+</blockquote>
+
+<p>In this tutorial, we will go through the DOME recommendations by addressing a series of key questions that authors should consider when describing supervised machine learning (ML) approaches in their manuscripts. Our goal is to ensure that ML analyses are conducted and reported at a high standard, promoting transparency and reproducibility in research.</p>
+
+<p>To illustrate these recommendations, we will use MobiDB-lite (<span class="citation"><a href="#necci2020mobidb">Necci <i>et al.</i> 2020</a></span>) as an example. MobiDB-lite is a specialized tool designed for the rapid and precise prediction of intrinsically disordered regions within proteins. It operates by integrating multiple disorder prediction methods, which allows it to achieve high specificity and minimize false positives, particularly for long disordered regions. This tool is seamlessly integrated into the broader MobiDB database, enhancing the annotation of protein disorder and supporting large-scale studies in structural bioinformatics.</p>
+
+<p>By following the DOME recommendations and using MobiDB-lite as a case study, we aim to provide clear guidelines on how to effectively report ML methodologies, ensuring that our research is both robust and accessible to the scientific community.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#data" id="markdown-toc-data">Data</a>    <ol>
+      <li><a href="#provenance" id="markdown-toc-provenance">Provenance</a></li>
+      <li><a href="#dataset-splits" id="markdown-toc-dataset-splits">Dataset Splits</a></li>
+      <li><a href="#redundancy-between-data-splits" id="markdown-toc-redundancy-between-data-splits">Redundancy between data splits</a></li>
+      <li><a href="#availability-of-data" id="markdown-toc-availability-of-data">Availability of data</a></li>
+    </ol>
+  </li>
+  <li><a href="#optimization" id="markdown-toc-optimization">Optimization</a>    <ol>
+      <li><a href="#algorithm" id="markdown-toc-algorithm">Algorithm</a></li>
+      <li><a href="#meta-predictions" id="markdown-toc-meta-predictions">Meta-predictions</a></li>
+      <li><a href="#data-encoding" id="markdown-toc-data-encoding">Data encoding</a></li>
+      <li><a href="#parameters" id="markdown-toc-parameters">Parameters</a></li>
+      <li><a href="#features" id="markdown-toc-features">Features</a></li>
+      <li><a href="#fitting" id="markdown-toc-fitting">Fitting</a></li>
+      <li><a href="#regularization" id="markdown-toc-regularization">Regularization</a></li>
+      <li><a href="#availability-of-configuration" id="markdown-toc-availability-of-configuration">Availability of configuration</a></li>
+    </ol>
+  </li>
+  <li><a href="#model" id="markdown-toc-model">Model</a>    <ol>
+      <li><a href="#interpretability" id="markdown-toc-interpretability">Interpretability</a></li>
+      <li><a href="#output" id="markdown-toc-output">Output</a></li>
+      <li><a href="#execution-time" id="markdown-toc-execution-time">Execution time</a></li>
+      <li><a href="#availability-of-software" id="markdown-toc-availability-of-software">Availability of software</a></li>
+    </ol>
+  </li>
+  <li><a href="#evaluation" id="markdown-toc-evaluation">Evaluation</a>    <ol>
+      <li><a href="#evaluation-method" id="markdown-toc-evaluation-method">Evaluation method</a></li>
+      <li><a href="#performance-measures" id="markdown-toc-performance-measures">Performance measures</a></li>
+      <li><a href="#comparison" id="markdown-toc-comparison">Comparison</a></li>
+      <li><a href="#confidence" id="markdown-toc-confidence">Confidence</a></li>
+      <li><a href="#availability-of-evaluation" id="markdown-toc-availability-of-evaluation">Availability of evaluation</a></li>
+    </ol>
+  </li>
+  <li><a href="#evaluate-your-model-or-publication" id="markdown-toc-evaluate-your-model-or-publication">Evaluate your model or publication</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="data">Data</h1>
+
+<p>ML models analyze experimental biological data by <strong>identifying patterns</strong>, which can then be used to <strong>generate biological insights</strong> from similar, previously unseen data. 
+The ability of a model to maintain its performance on new data is referred to as its <strong>generalization power</strong>. 
+Achieving strong generalization is a key challenge in developing ML models; without it, trained models cannot be effectively reused. 
+Properly preprocessing data and using it in an informed way are essential steps to ensure good generalization.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-further-reading"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-reading" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Further Reading</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>State-of-the-art <strong>ML models</strong> are often capable of <strong>memorizing</strong> all variations within the <strong>training data</strong>. As a result, when evaluated on data from the training set, they may give the false impression of excelling at the given task. However, their performance tends to diminish when tested on <strong>independent data</strong> (called the <strong>test</strong> or <strong>validation set</strong>), revealing a lower <strong>generalization power</strong>. To address this issue, the original dataset should be randomly split into <strong>non-overlapping parts</strong>. The simplest method involves creating separate <strong>training</strong> and <strong>test sets</strong> (with a possible third <strong>validation set</strong>). Alternatively, more robust techniques like <strong>cross-validation</strong> or <strong>bootstrapping</strong>, which repeatedly create different training/testing splits from the available data, are often preferred.</p>
+
+  <p>Handling overlap between training and test data can be especially challenging in <strong>biology</strong>. For instance, in predicting entire <strong>gene</strong> or <strong>protein sequences</strong>, ensuring <strong>data independence</strong> might require reducing <strong>homologs</strong> in the dataset. In modeling <strong>enhancer–promoter contacts</strong>, a different criterion may be needed, such as ensuring that no endpoint is shared between training and test sets. Similarly, modeling <strong>protein domains</strong> may require splitting <strong>multidomain sequences</strong> into their individual domains before applying <strong>homology reduction</strong>. Each biological field has its own methods for managing overlapping data, making it crucial to consult prior literature when developing an approach.</p>
+
+  <p>Providing details on the <strong>size of the dataset</strong> and the <strong>distribution of data types</strong> helps demonstrate whether the data is well-represented across different sets. Simple <strong>visualizations</strong>, such as <strong>plots</strong> or <strong>tables</strong>, showing the <strong>number of classes</strong> (for classification), a <strong>histogram of binned values</strong> (for regression), and the various types of biological molecules included in the data, are essential for understanding each set. Additionally, for <strong>classification tasks</strong>, methods that account for <strong>imbalanced classes</strong> should be used if the class frequencies suggest a significant imbalance.</p>
+
+  <p>It’s also important to note that models trained on one dataset may not perform well on closely related, but distinct, datasets—a phenomenon known as <strong>“covariance shift.”</strong> This issue has been observed in several recent studies, such as those predicting <strong>disease risk</strong> from <strong>exome sequencing data</strong>. While covariance shift remains an open problem, potential solutions have been proposed, particularly in the field of <strong>transfer learning</strong>.</p>
+
+  <p>Furthermore, building <strong>ML models</strong> that generalize well on <strong>small training datasets</strong> often requires <strong>specialized models and algorithms</strong>. Finally, making <strong>experimental data publicly available</strong> is crucial. <strong>Open access</strong> to datasets, including precise <strong>data splits</strong>, enhances the <strong>reproducibility</strong> of research and improves the overall quality of ML publications. If public repositories are not available, authors should be encouraged to use platforms like <strong>ELIXIR deposition databases</strong> or <strong>Zenodo</strong> to ensure long-term data accessibility.</p>
+
+</blockquote>
+
+<p><strong>Be on the lookout for</strong>:</p>
+<ul>
+  <li>Inadequate data size &amp; quality</li>
+  <li>Inappropriate partitioning, dependence between train and test data</li>
+  <li>Class imbalance</li>
+  <li>No access to data</li>
+</ul>
+
+<p><strong>Consequences</strong>:</p>
+<ul>
+  <li>Data not representative of domain application</li>
+  <li>Unreliable or biased performance evaluation</li>
+  <li>Cannot check data credibility</li>
+</ul>
+
+<p><strong>Recommendation(s)</strong>:</p>
+<ul>
+  <li><strong>Use independent optimization (training) and evaluation (testing) sets</strong>. This is especially important for meta algorithms, where independence of multiple training sets must be shown to be independent of the evaluation (testing) sets</li>
+  <li><strong>Release data, preferably using appropriate long-term repositories, and include exact splits.</strong></li>
+  <li>Offer sufficient evidence of data size &amp; distribution being representative of the domain.</li>
+</ul>
+
+<h2 id="provenance">Provenance</h2>
+
+<p>Provenance of data refers to the <strong>origin, history, and lineage of data</strong>—essentially, tracking where the data came from, how it has been processed, and how it has moved through various systems. It’s like a detailed record that traces the data’s life cycle from creation to its current state. Understanding data provenance helps ensure <strong>transparency, trustworthiness, and reliability</strong> in data usage.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What is the <strong>source</strong> of the data (database, publication, direct experiment)?</li>
+    <li>If data are in <strong>classes</strong>, how many data points are available in each class—for example, total for the positive (<em>Npos</em>) and negative (<em>Nneg</em>) cases?</li>
+    <li>If <strong>regression</strong>, how many real value points are there?</li>
+    <li>Has the dataset been <strong>previously used</strong> by other papers and/or is it recognized by the community?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Protein Data Bank (PDB). X-ray structures missing residues.</li>
+      <li><em>Npos</em> = 339,603 residues.</li>
+      <li><em>Nneg</em> = 6,168,717 residues.</li>
+      <li>Previously used in <span class="citation"><a href="#walsh2015comprehensive">Walsh <i>et al.</i> 2015</a></span> as an independent benchmark set.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="dataset-splits">Dataset Splits</h2>
+
+<p>Dataset splits refer to the process of dividing a dataset into distinct subsets for different purposes, mainly in machine learning or data science tasks. The most common splits are:</p>
+
+<ul>
+  <li>
+    <p><strong>Training Set</strong>: This is the largest subset, used to train the machine learning model. The model “learns” from this data by adjusting its internal parameters to minimize prediction errors.</p>
+  </li>
+  <li>
+    <p><strong>Validation Set</strong>: A separate subset used to fine-tune the model’s hyperparameters. The model doesn’t learn directly from this data, but it helps monitor the model’s performance and avoid overfitting, which is when a model becomes too tailored to the training data and doesn’t generalize well.</p>
+  </li>
+  <li>
+    <p><strong>Test Set</strong>: This is the final subset, used to evaluate the model’s performance. The test set remains unseen by the model until after training and validation are complete, providing an unbiased estimate of how well the model generalizes to new, unseen data.</p>
+  </li>
+</ul>
+
+<p>In addition to these, there are some variations in dataset splitting strategies:</p>
+
+<ul>
+  <li>
+    <p><strong>Holdout Split</strong>: A simple division where a fixed percentage of data is reserved for testing (e.g., 80% training, 20% test).</p>
+  </li>
+  <li>
+    <p><strong>Cross-validation</strong>: In this technique, the dataset is split multiple times into training and validation sets, ensuring each data point is used for validation at least once (e.g., 5-fold cross-validation). This provides a more robust evaluation of the model’s performance.</p>
+  </li>
+</ul>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How <strong>many data points</strong> are in the training and test sets?</li>
+    <li>Was a <strong>separate validation</strong> set used, and if yes, how large was it?</li>
+    <li>Are the <strong>distributions</strong> of data types (<em>Npos</em> and <em>Nneg</em>) in the training and test sets different? Are the distributions of data types in both training and test sets plotted?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p><strong>From Example Publication</strong></p>
+    <ol>
+      <li>Training set: N/A. <em>Npos,test</em> = 339,603 residues. <em>Nneg,test</em> = 6,168,717 residues</li>
+      <li>No validation set.</li>
+      <li>5.22% positives on the test set.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="redundancy-between-data-splits">Redundancy between data splits</h2>
+
+<p>Redundancy between data splits occurs when the <strong>same data points are present in more than one</strong> of the training, validation, or test sets. This is <strong>undesirable</strong> because it can distort model evaluation and lead to <strong>overoptimistic performance metrics</strong> (e.g. eliminating data points more similar than X%). 
+This may impact the model by introducing the risk of overfitting and poor generalization rendering the performance metrics as unreliable.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How were the sets <strong>split</strong>?</li>
+    <li>Are the training and test sets <strong>independent</strong>?</li>
+    <li>How was this <strong>enforced</strong> (for example, redundancy reduction to less than X% pairwise identity)?</li>
+    <li>How does the distribution compare to <strong>previously published</strong> ML datasets?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Not applicable.</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="availability-of-data">Availability of data</h2>
+
+<p>Availability of data refers to the <strong>accessibility</strong> and <strong>readiness</strong> of data for use in various applications, such as analysis, machine learning, decision-making, or reporting. It ensures that data can be retrieved and utilized when needed by users or systems.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>re the data, including the data splits used, <strong>released</strong> in a public forum?</li>
+    <li>If yes, <strong>where</strong> (for example, supporting material, URL) and <strong>how</strong> (license)?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Yes</li>
+      <li>URL http://protein.bio.unipd.it/mobidblite/. Free use license.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h1 id="optimization">Optimization</h1>
+
+<p>Optimization, or model training, refers to the <strong>process of adjusting the values</strong> that make up the model (including both parameters and hyperparameters) to <strong>enhance the model’s performance</strong> in solving a given problem. In this section, we will focus on challenges that arise from selecting suboptimal optimization strategies.</p>
+
+<p><strong>Be on the lookout for</strong>:</p>
+<ul>
+  <li>Overfitting, underfitting, and illegal parameter tuning</li>
+  <li>Imprecise parameters and protocols given</li>
+</ul>
+
+<p><strong>Consequences</strong>:</p>
+<ul>
+  <li>Reported performance is too optimistic or too pessimistic</li>
+  <li>The model models noise or misses relevant relationships</li>
+  <li>Results are not reproducible</li>
+</ul>
+
+<p><strong>Recommendation(s)</strong>:</p>
+<ul>
+  <li><strong>Clarify that evaluation sets were not used for feature selection.</strong></li>
+  <li><strong>Report indicators on training and testing data that can aid in assessing the possibility of under- or overfitting for example, train vs. test error.</strong></li>
+  <li><strong>Release definitions of all algorithmic hyperparameters, regularization protocols, parameters and optimization protocol.</strong></li>
+  <li>For neural networks, release definitions of training and learning curves</li>
+  <li>Include explicit model validation techniques like <em>N</em>-fold cross-validation.</li>
+</ul>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-further-reading-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-reading-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Further Reading</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p><strong>Optimization</strong>, or <strong>training</strong>, involves adjusting the values that define a model (such as <strong>parameters</strong> and <strong>hyperparameters</strong>), as well as <strong>preprocessing steps</strong>, to enhance the model’s ability to solve a given problem. Choosing an inappropriate <strong>optimization strategy</strong> can lead to issues like <strong>overfitting</strong> or <strong>underfitting</strong>. <strong>Overfitting</strong> occurs when a model performs exceptionally well on <strong>training data</strong> but fails on <strong>unseen data</strong>, making it ineffective in real-world scenarios. <strong>Underfitting</strong>, on the other hand, happens when overly simplistic models, capable of capturing only basic relationships between features, are applied to more complex data.</p>
+
+  <p><strong>Feature selection</strong> algorithms can help reduce the risk of overfitting, but they come with their own set of guidelines. A key recommendation is to avoid using <strong>non-training data</strong> for <strong>feature selection</strong> and <strong>preprocessing</strong>. This is especially problematic for <strong>meta-predictors</strong>, as it can lead to an overestimation of the model’s performance. Finally, making files that detail the exact <strong>optimization protocol</strong>, including <strong>parameters</strong> and <strong>hyperparameters</strong>, publicly available is crucial. A lack of proper <strong>documentation</strong> and limited access to these records can hinder the understanding and evaluation of the model’s overall performance.</p>
+
+</blockquote>
+
+<h2 id="algorithm">Algorithm</h2>
+
+<p>Since algorithms take input data and produce output, typically solving a particular problem or achieving a specific objective, it is essential to know which one is implemented in a study. In this way we can have better insights for the results of learning patterns, relationships, or rules that can then be applied to new, unseen data.</p>
+
+<p>There are three major categories of ML classes:</p>
+
+<ul>
+  <li><strong>Supervised</strong> (i.e. Linear Regression, Logistic Regression, Decision Trees, Support Vector Machines (SVM) and others),</li>
+  <li><strong>Unsupervised Learning</strong> (i.e. K-Means Clustering, Principal Component Analysis (PCA) and Hierarchical Clustering and others),</li>
+  <li><strong>Reinforcement Learning</strong> (i.e. Q-Learning, Deep Q-Networks (DQN) and others).</li>
+</ul>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li><strong>What</strong> is the ML algorithm class used?</li>
+    <li>Is the ML algorithm <strong>new</strong>?</li>
+    <li>If yes, why was it <strong>chosen</strong> over better known alternatives?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Majority-based consensus classification based on 8 primary ML methods and post-processing.</li>
+      <li></li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="meta-predictions">Meta-predictions</h2>
+
+<p>Meta-predictions refer to <strong>predictions made by models that aggregate or utilize the outputs (predictions) of other models</strong>. Essentially, meta-prediction systems combine predictions from multiple models to produce a more robust or accurate final prediction. Meta-predictions are often used in ensemble learning techniques, where the goal is to leverage the strengths of several models to enhance overall performance.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Does the model use data from <strong>other</strong> ML algorithms as input?</li>
+    <li>If yes, which ones?</li>
+    <li>Is it clear that training data of initial predictors and meta-predictor are <strong>independent</strong> of test data for the meta-predictor?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p><strong>From Example Publication</strong></p>
+    <ol>
+      <li>Yes</li>
+      <li>Predictor output is a binary prediction computed from the consensus of other methods</li>
+      <li>Independence of training sets of other methods with test set of meta-predictor was not tested since datasets from other methods were not available.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="data-encoding">Data encoding</h2>
+
+<p>Data encoding is the process of <strong>transforming data from one format or structure into another</strong>, often to make it easier for ML models or computational systems to process. 
+In ML, data often needs to be encoded to ensure that it can be effectively interpreted by algorithms, especially for algorithms that require numerical input (e.g., neural networks, SVMs).</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <p>How were the data <strong>encoded</strong> and <strong>preprocessed</strong> for the ML algorithm?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>Label-wise average of 8 binary predictions.</p>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="parameters">Parameters</h2>
+
+<p>Model parameters are the <strong>internal configurations or variables</strong> that a model learns from the training data. 
+These parameters <strong>determine how the model makes predictions and how well</strong> it fits the training data. 
+The values of these parameters are adjusted during the training process through algorithms like gradient descent or optimization procedures.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many <strong>parameters</strong> (\(p\)) are used in the model?</li>
+    <li>How were \(p\) selected?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p><strong>From Example Publication</strong></p>
+    <ol>
+      <li>\(p = 3\): Consensus score threshold, expansion-erosion window, length threshold</li>
+      <li>No optimization.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="features">Features</h2>
+
+<p>In the context of ML, features refer to the <strong>individual measurable properties or characteristics</strong> of the data being used for training a model. 
+They play a crucial role in determining the performance of ML models, as they provide the information that the model needs to make predictions or classifications.
+Feature Engineering is the process of creating, modifying, or selecting the most relevant features from the raw data to improve model performance by reducing model complexity, improving training time and avoiding overfitting.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many <strong>features</strong> (<em>f</em>) are used as input?</li>
+    <li>Was <strong>feature selection</strong> performed?</li>
+    <li>If yes, was it performed using the <strong>training set only</strong>?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Not applicable.</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="fitting">Fitting</h2>
+
+<p>Fitting refers to the process of <strong>training a ML model on a dataset by adjusting its parameters to minimize prediction error</strong>. 
+The goal is to find a <strong>balance between underfitting and overfitting</strong>, ensuring that the model captures the underlying patterns in the data while still generalizing well to unseen data. 
+Proper evaluation, regularization, and tuning of the model during the fitting process are crucial to achieving a good fit.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Is <em>p</em> much larger than the number of training points and/or is <em>f</em> large (for example, in classification is <em>p » (Npos + Nneg)</em> and/or <em>f &gt; 100</em>)?</li>
+    <li>If yes, how was <strong>overfitting</strong> ruled out?</li>
+    <li>Conversely, if the number of training points is much larger than <em>p</em> and/or <em>f</em> is small (for example, <em>(Npos + Nneg) » p</em>  and/or <em>f &lt; 5</em>), how was <strong>underfitting</strong> ruled out?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Single input ML methods are used with default parameters.</li>
+      <li>Optimization is a simple majority.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="regularization">Regularization</h2>
+
+<p>Regularization is a <strong>technique used to prevent overfitting</strong> by adding a penalty to the loss function, which discourages the model from becoming too complex. Common regularization techniques include:</p>
+
+<ul>
+  <li><strong>L1 Regularization (Lasso)</strong>: Adds a penalty proportional to the absolute value of the coefficients. It encourages sparsity, setting some coefficients to zero.</li>
+  <li><strong>L2 Regularization (Ridge)</strong>: Adds a penalty proportional to the square of the coefficients, discouraging large coefficients and thus reducing model complexity.</li>
+  <li><strong>Dropout (in neural networks)</strong>: Randomly drops a percentage of neurons during training, which helps prevent overfitting by forcing the network to generalize.</li>
+</ul>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Were any <strong>overfitting prevention techniques</strong> used (for example, early stopping using a validation set)?</li>
+    <li>If yes, <strong>which</strong> ones?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>No.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="availability-of-configuration">Availability of configuration</h2>
+
+<p>Availability of configuration refers to the <strong>accessibility and transparency of the settings, parameters, and options</strong> that can be adjusted or customized in a ML model or system. 
+These configurations control how the model is trained, how it makes predictions, and how it operates in different environments. 
+Ensuring that the configuration is available, flexible, and easy to modify is important for reproducibility, fine-tuning, and deployment of models.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Are the hyperparameter configurations, optimization schedule, model files and optimization parameters <strong>reported</strong>?</li>
+    <li>If yes, <strong>where</strong> (for example, URL) and <strong>how</strong> (license)?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Not applicable.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h1 id="model">Model</h1>
+
+<p>Good overall performance and the model’s ability to generalize well to unseen data are crucial factors that significantly impact the applicability of any proposed ML research. However, several other important aspects related to ML models must also be considered.</p>
+
+<p><strong>Be on the lookout for</strong>:</p>
+<ul>
+  <li>Unclear if black box or interpretable model</li>
+  <li>No access to resulting source code, trained models &amp; data</li>
+  <li>Execution time impractical</li>
+</ul>
+
+<p><strong>Consequences</strong>:</p>
+<ul>
+  <li>An interpretable model shows no explainable behavior</li>
+  <li>Cannot cross compare methods &amp; reproducibility, or check data credibility</li>
+  <li>Model takes too much time to produce results</li>
+</ul>
+
+<p><strong>Recommendation(s)</strong>:</p>
+<ul>
+  <li><strong>Describe the choice of black box or interpretable model. If interpretable, show examples of interpretable output.</strong></li>
+  <li>Release documented source code + models + software containers</li>
+  <li>Report execution time averaged across repeats. If computationally tough, compare to similar methods.</li>
+</ul>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-further-reading-2"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-reading-2" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Further Reading</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Equally important aspects of <strong>ML models</strong> include their <strong>interpretability</strong> and <strong>reproducibility</strong>. <strong>Interpretable models</strong> can identify <strong>causal relationships</strong> in the data and provide logical explanations for their <strong>predictions</strong>, which is especially valuable in fields like <strong>drug design</strong> and <strong>diagnostics</strong>. In contrast, <strong>black box models</strong>, while often accurate, may not offer understandable insights into the reasons behind their predictions. Both types of models are discussed in more detail elsewhere, and choosing between them involves weighing their respective benefits. The key recommendation is to clearly state whether the model is a <strong>black box</strong> or <strong>interpretable</strong>, and if it is interpretable, to provide clear examples of its <strong>outputs</strong>.</p>
+
+  <p><strong>Reproducibility</strong> is crucial for ensuring that research outcomes can be effectively utilized and validated by the broader community. Challenges with model reproducibility go beyond merely documenting <strong>parameters</strong>, <strong>hyperparameters</strong>, and <strong>optimization protocols</strong>. Limited access to essential model components (such as <strong>source code</strong>, <strong>model files</strong>, <strong>parameter configurations</strong>, and <strong>executables</strong>) and high <strong>computational demands</strong> for running trained models on new data can severely restrict or even prevent reproducibility.</p>
+</blockquote>
+
+<h2 id="interpretability">Interpretability</h2>
+
+<p>Model interpretability refers to the <strong>extent to which a human can understand the decisions and predictions made by a ML model</strong>. 
+Interpretability is crucial for building trust in model outcomes, especially in high-stakes domains such as healthcare and finance, where understanding the rationale behind a model’s predictions can have significant implications.
+For example neural networks are often criticized for being “black boxes,” as their internal workings (like hidden layers) are less transparent, making them more difficult to trust.</p>
+
+<p>There are generally two types of interpretability:</p>
+
+<ul>
+  <li>
+    <p><strong>Global Interpretability</strong> refers to the ability to understand the overall behavior of the model across all predictions. It involves explaining how the model works as a whole and what features are important in determining predictions.</p>
+  </li>
+  <li>
+    <p><strong>Local interpretability</strong> focuses on understanding individual predictions made by the model. It aims to explain why a specific input led to a particular output.</p>
+  </li>
+</ul>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Is the model <strong>black box</strong> or <strong>interpretable</strong>?</li>
+    <li>If the model is interpretable, can you give clear <strong>examples</strong> of this?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p><strong>From Example Publication</strong></p>
+    <ol>
+      <li>Transparent, in so far as meta-prediction is concerned.</li>
+      <li>Consensus and post processing over other methods predictions (which are mostly black boxes). No attempt was made to make the meta-prediction a black box.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="output">Output</h2>
+
+<p>The output of a machine learning model refers to the <strong>predictions or classifications made by the model</strong> after processing input data. 
+Depending on the type of model and the nature of the problem, the output can vary widely.</p>
+
+<p>Here’s a breakdown of some different types of outputs:</p>
+
+<ul>
+  <li><strong>Regression</strong> includes continuous values that estimates a quantity based on the input features</li>
+  <li>In <strong>classification</strong> tasks the output is a category or class label that indicates which class the input belongs to.</li>
+  <li>In <strong>multi-class classification</strong> the model predicts one class from multiple possible classes.</li>
+  <li><strong>Multi-label classification</strong> includes the assignment of multiple classes to a single input.</li>
+</ul>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Is the model <strong>classification</strong> or <strong>regression</strong>?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>Classification, i.e. residues thought to be disordered.</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="execution-time">Execution time</h2>
+
+<p>Execution time in the context of ML refers to the <strong>duration it takes for a model to perform a specific task</strong>, such as training, predicting, or evaluating performance. 
+Understanding and measuring execution time is crucial for various reasons, including optimizing model performance, resource management, and user experience.</p>
+
+<p>CPU time of single representative execution on standard hardware (e.g. seconds on desktop PC).</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-14"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How much <strong>time</strong> does a single representative prediction require on a standard machine (for example, seconds on a desktop PC or high-performance computing cluster)?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>Approximately 1 second per representative on a desktop PC.</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="availability-of-software">Availability of software</h2>
+
+<p>Availability of software refers to the <strong>accessibility, reliability, and usability of various software tools and libraries that facilitate the development, training, deployment, and evaluation of ML models</strong>. 
+This includes both open-source and proprietary software, and it is critical for researchers and practitioners to have the right tools at their disposal to effectively work on tasks.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Is the <strong>source code</strong> released?</li>
+    <li>Is a <strong>method to run</strong> the algorithm (executable, web server, virtual machine or container instance) released?</li>
+    <li>If yes, <strong>where</strong> (for example github, zenodo or other repository URL) and <strong>how</strong> (for example MIT license)?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Yes</li>
+      <li>Yes</li>
+      <li>URL: http://protein.bio.unipd.it/mobidblite/. Bespoke license free for academic use</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h1 id="evaluation">Evaluation</h1>
+
+<p>In implementing a robust and trustworthy ML method, providing a comprehensive data description, adhering to a correct optimization protocol, and ensuring that the model is clearly defined and openly accessible are critical first steps. Equally important is employing a valid assessment methodology to evaluate the final model.</p>
+
+<p><strong>Be on the lookout for</strong>:</p>
+<ul>
+  <li>Performance measures inadequate</li>
+  <li>No comparisons to baselines or other methods</li>
+  <li>Highly variable performance</li>
+</ul>
+
+<p><strong>Consequences</strong>:</p>
+
+<ul>
+  <li>Biased performance measures reported</li>
+  <li>The method is falsely claimed as state-of-the-art</li>
+  <li>Unpredictable performance in production</li>
+</ul>
+
+<p><strong>Recommendation(s)</strong>:</p>
+
+<ul>
+  <li><strong>Compare with public methods &amp; simple models (baselines).</strong></li>
+  <li><strong>Adopt community-validated measures and benchmark datasets for evaluation.</strong></li>
+  <li>Compare related methods and alternatives on the same dataset</li>
+  <li>Evaluate performance on a final independent held-out set</li>
+  <li><strong>Use confidence intervals/error intervals and statistical tests to gauge robustness.</strong></li>
+</ul>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-further-reading-3"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-reading-3" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Further Reading</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>In biological research, there are two main types of evaluation scenarios for <strong>ML models</strong>:</p>
+
+  <ol>
+    <li>
+      <p><strong>Experimental Validation</strong>: This involves validating the <strong>predictions</strong> made by the ML model through laboratory experiments. Although highly desirable, this approach is often beyond the scope of many ML studies.</p>
+    </li>
+    <li>
+      <p><strong>Computational Assessment</strong>: This involves evaluating the model’s <strong>performance</strong> using established <strong>metrics</strong>. This section focuses on computational assessment and highlights a few potential risks.</p>
+    </li>
+  </ol>
+
+  <p>When it comes to <strong>performance metrics</strong>, which are quantifiable indicators of a model’s ability to address a specific task, there are numerous metrics available for various ML <strong>classification</strong> and <strong>regression</strong> problems. The wide range of options, along with the <strong>domain-specific knowledge</strong> needed to choose the right metrics, can result in the selection of inappropriate performance measures. It is advisable to use metrics recommended by critical assessment communities relevant to biological ML models, such as the <strong>Critical Assessment of Protein Function Annotation (CAFA)</strong> and the <strong>Critical Assessment of Genome Interpretation (CAGI)</strong>. Once appropriate performance metrics are selected, methods published in the same biological domain should be compared using suitable <strong>statistical tests</strong> (e.g., <strong>Student’s t-test</strong>) and <strong>confidence intervals</strong>. Additionally, to avoid releasing ML methods that seem advanced but do not outperform simpler algorithms, it is important to compare these methods against <strong>baseline models</strong> and demonstrate their <strong>statistical superiority</strong> (e.g., comparing <strong>shallow versus deep neural networks</strong>).</p>
+
+</blockquote>
+
+<h2 id="evaluation-method">Evaluation method</h2>
+
+<p>Evaluation of a ML model is the process of assessing its <strong>performance and effectiveness</strong> in making predictions or classifications based on new, unseen data. 
+Proper evaluation is crucial to ensure that the model generalizes well and performs as expected in real-world applications.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-16"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How was the method <strong>evaluated</strong> (for example cross-validation, independent dataset, novel experiments)?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>Independent dataset</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="performance-measures">Performance measures</h2>
+
+<p>The choice of evaluation metrics depends on the type of problem (regression or classification) and the specific goals of the analysis:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Regression Metrics</th>
+      <th>Classification Metrics</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mean Absolute Error (MAE)</td>
+      <td>Accuracy</td>
+    </tr>
+    <tr>
+      <td>Mean Squared Error (MSE)</td>
+      <td>Precision</td>
+    </tr>
+    <tr>
+      <td>Root Mean Squared Error (RMSE)</td>
+      <td>Recall (Sensitivity)</td>
+    </tr>
+    <tr>
+      <td>R-squared (R2)</td>
+      <td>F1 Score</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-17"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Which <strong>performance metrics</strong> are reported (Accuracy, sensitivity, specificity, etc.)?</li>
+    <li>Is this set <strong>representative</strong> (for example, compared to the literature)?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Balanced Accuracy, Precision, Sensitivity, Specificity, F1, MCC.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="comparison">Comparison</h2>
+
+<p>Comparison typically refers to the <strong>evaluation of different</strong> models, algorithms, or configurations to <strong>identify which one performs best</strong> for a specific task. 
+This process is essential for selecting the most suitable approach for a given problem, optimizing performance, and understanding the strengths and weaknesses of various methods.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-18"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Was a comparison to <strong>publicly available</strong> methods performed on benchmark datasets?</li>
+    <li>Was a comparison to <strong>simpler baselines</strong> performed?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>DisEmbl-465, DisEmbl-HL, ESpritz Disprot, ESpritz NMR, ESpritz Xray, Globplot, IUPred long, IUPred short, VSL2b. Chosen methods are the methods from which the meta prediction is obtained.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="confidence">Confidence</h2>
+
+<p>Confidence in the context of ML refers to the <strong>measure of certainty or belief</strong> that a model’s prediction is <strong>accurate</strong>. 
+It quantifies the model’s certainty regarding its output, which is particularly important in classification tasks, where decisions need to be made based on predicted class probabilities.
+This can be supported by methods such as confidence intervals and statistical significance.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-key-questions"><i class="far fa-question-circle" aria-hidden="true" ></i> Question:  Key Questions</div>
+
+  <ol>
+    <li>Do the performance metrics have <strong>confidence intervals</strong>?</li>
+    <li>Are the results <strong>statistically significant</strong> to claim that the method is superior to others and baselines?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Not calculated.</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="availability-of-evaluation">Availability of evaluation</h2>
+
+<p>Availability of evaluation in ML refers to the <strong>accessibility and readiness of tools, frameworks, datasets, and methodologies used to assess the performance of ML models</strong>. 
+This encompasses various aspects, from the datasets used for evaluation to the metrics and software tools that facilitate the evaluation process.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-key-questions-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question:  Key Questions</div>
+
+  <ol>
+    <li>Are the <strong>raw evaluation files</strong> (for example, assignments for comparison and baselines, statistical code, confusion matrices) available?</li>
+    <li>If yes, <strong>where</strong> (for example, URL) and <strong>how</strong> (license)?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-20"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-20" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Not.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h1 id="evaluate-your-model-or-publication">Evaluate your model or publication</h1>
+
+<p>Time to practice on your work or a publication of your choice!</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-key-questions"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Key Questions</div>
+
+  <ol>
+    <li>Select a publication</li>
+    <li>Read the publication you have chosen.</li>
+    <li>Locate/highlight the areas of interest according to the DOME sections. (how many are covered? which are missing?)</li>
+    <li>Fill in this (<em>some kind of ready table template to be given</em>) with the information.</li>
+    <li>Discuss your results with the rest of the group. (do you see any common trends?)</li>
+    <li>Grab a beverage ☕ or a snack 🍩 to celebrate!</li>
+  </ol>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we have explored the essential regulations and standards for AI using the DOME framework, focusing on key aspects of data management, optimization, model development, and evaluation. By adhering to these guidelines, researchers can ensure that their AI models are robust, transparent, and reproducible, thereby enhancing the credibility and impact of their work.</p>
+
+<p><strong>Data</strong>: We emphasized the importance of data <strong>provenance</strong>, ensuring that the origins and transformations of datasets are well-documented. Proper <strong>dataset splits</strong> and managing <strong>redundancy</strong> between these splits are crucial for maintaining the integrity of training and testing processes. Additionally, making data <strong>available</strong> to the scientific community fosters collaboration and reproducibility.</p>
+
+<p><strong>Optimization</strong>: We delved into the intricacies of <strong>algorithm</strong> selection and the challenges associated with <strong>meta-predictions</strong>. Proper <strong>data encoding</strong>, careful selection of <strong>parameters</strong>, and thoughtful <strong>feature</strong> engineering are essential for effective model training. <strong>Fitting</strong> the model while employing appropriate <strong>regularization</strong> techniques helps prevent overfitting and ensures generalization. Ensuring the <strong>availability of configuration</strong> details is vital for transparency and reproducibility.</p>
+
+<p><strong>Model</strong>: The tutorial highlighted the significance of <strong>interpretability</strong> in AI models, allowing for clearer insights into model decisions. Providing meaningful <strong>output</strong> and documenting <strong>execution time</strong> are important for practical applications. Ensuring the <strong>availability of software</strong> enables others to build upon and validate the model.</p>
+
+<p><strong>Evaluation</strong>: We discussed the importance of choosing appropriate <strong>evaluation methods</strong> and <strong>performance measures</strong> to accurately assess model effectiveness. <strong>Comparison</strong> with baseline models and ensuring <strong>confidence</strong> in the results through statistical methods are critical steps. Making the <strong>evaluation</strong> process and results available supports transparency and facilitates further advancements in the field.</p>
+
+<p>By following these DOME recommendations, we can develop AI models that are not only technically sound but also ethically robust and scientifically rigorous. This framework encourages a culture of openness and collaboration, ultimately advancing the field of AI and its applications in various domains. As you implement these standards in your model or publication, you contribute to a more reliable and trustworthy AI ecosystem.</p>
+
 
                 </section>
 
@@ -1041,7 +1863,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                     <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
-                        <li><p>To be added</p>
+                        <li><p>Ensuring data provenance, proper dataset splits, and managing redundancy are crucial for maintaining data integrity and enabling reproducibility in AI research.</p>
+</li>
+                        
+                        <li><p>Clear documentation of optimization strategies, including algorithm selection, parameter tuning, and regularization techniques, is essential for transparency and replicability of AI models.</p>
+</li>
+                        
+                        <li><p>Developing interpretable models and making software and configurations publicly available fosters trust and collaboration within the scientific community.</p>
+</li>
+                        
+                        <li><p>Employing rigorous evaluation methods, appropriate performance measures, and statistical comparisons ensures the reliability and validity of AI model outcomes, driving advancements in the field.</p>
 </li>
                         
                     </ul>
@@ -1068,6 +1899,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
                 
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="sandve2013ten">Sandve, G. K., A. Nekrutenko, J. Taylor, and E. Hovig, 2013 <b>Ten simple rules for reproducible computational research</b>. PLoS computational biology 9: e1003285. <a href="https://doi.org/10.1371/journal.pcbi.1003285">10.1371/journal.pcbi.1003285</a></li>
+<li id="walsh2015comprehensive">Walsh, I., M. Giollo, T. Di Domenico, C. Ferrari, O. Zimmermann <i>et al.</i>, 2015 <b>Comprehensive large-scale assessment of intrinsic protein disorder</b>. Bioinformatics 31: 201–208. <a href="https://doi.org/10.1093/bioinformatics/btu625">10.1093/bioinformatics/btu625</a></li>
+<li id="walsh2016correct">Walsh, I., G. Pollastri, and S. C. E. Tosatto, 2016 <b>Correct machine learning on protein sequences: a peer-reviewing perspective</b>. Briefings in bioinformatics 17: 831–840. <a href="https://doi.org/10.1093/bib/bbv082">10.1093/bib/bbv082</a></li>
+<li id="wilkinson2016fair">Wilkinson, M. D., M. Dumontier, I. J. J. Aalbersberg, G. Appleton, M. Axton <i>et al.</i>, 2016 <b>The FAIR Guiding Principles for scientific data management and stewardship</b>. Scientific data 3: 1–9. <a href="https://doi.org/10.1038/sdata.2016.18">10.1038/sdata.2016.18</a></li>
+<li id="gruning2018practical">Grüning, B., J. Chilton, J. Köster, R. Dale, N. Soranzo <i>et al.</i>, 2018 <b>Practical computational reproducibility in the life sciences</b>. Cell systems 6: 631–635. <a href="https://doi.org/10.1016/j.cels.2018.03.014">10.1016/j.cels.2018.03.014</a></li>
+<li id="jones2019setting">Jones, D. T., 2019 <b>Setting the standards for machine learning in biology</b>. Nature Reviews Molecular Cell Biology 20: 659–660. <a href="https://doi.org/10.1038/s41580-019-0176-5">10.1038/s41580-019-0176-5</a></li>
+<li id="necci2020mobidb">Necci, M., D. Piovesan, D. Clementel, Z. Dosztányi, and S. C. E. Tosatto, 2020 <b>MobiDB-lite 3.0: fast consensus annotation of intrinsic disorder flavors in proteins</b>. Bioinformatics 36: 5533–5534. <a href="https://doi.org/10.1093/bioinformatics/btaa1045">10.1093/bioinformatics/btaa1045</a></li>
+<li id="walsh2021dome">Walsh, I., D. Fishman, D. Garcia-Gasulla, T. Titma, G. Pollastri <i>et al.</i>, 2021 <b>DOME: recommendations for supervised machine learning validation in biology</b>. Nature methods 18: 1122–1127. <a href="https://doi.org/10.1038/s41592-021-01205-4">10.1038/s41592-021-01205-4</a></li></ol>
+                
 
                 
 
@@ -1082,7 +1923,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <p>
                     <ol>
                         <li id="citation-text">
-                            Fotis E. Psomopoulos,  <b>Regulations/standards for AI using DOME (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/dome/tutorial.html">https://training.galaxyproject.org/training-material/topics/statistics/tutorials/dome/tutorial.html</a> Online; accessed TODAY
+                            Fotis E. Psomopoulos, Stella Fragkouli,  <b>Regulations/standards for AI using DOME (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/dome/tutorial.html">https://training.galaxyproject.org/training-material/topics/statistics/tutorials/dome/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
@@ -1108,7 +1949,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 <code id="citation-code">@misc{statistics-dome,
-author = "Fotis E. Psomopoulos",
+author = "Fotis E. Psomopoulos and Stella Fragkouli",
 	title = "Regulations/standards for AI using DOME (Galaxy Training Materials)",
 	year = "",
 	month = "",
@@ -1270,7 +2111,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/29b81e02e1868899dd73de7255e944cff8f47ff2">29b81e0</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ccf27f16b3c4ca28d692cab39b93463a939c6fad">ccf27f1</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
@@ -1296,6 +2137,8 @@ tools: []
 
         <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
 
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 	
 	
 
