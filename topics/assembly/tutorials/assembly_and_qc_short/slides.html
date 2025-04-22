@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Genome assembly and assembly QC - Introduction short version</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@0799a6e4018b06bd8e41e61433f83395f176727c",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly_and_qc_short/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Genome assembly and assembly QC - Introduction short version">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-04-22 12:37:09 +0000">
+<meta name="DC.creator" content="Solenne Correard">
+<meta name="DC.creator" content="Alexandre Cormier">
+<meta name="DC.creator" content="Laura Leroi">
+
+        
+        
+        
+        
+        <meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Slide Deck: Genome assembly and assembly QC - Introduction short version">
+        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/assembly/tutorials/assembly_and_qc_short/slides.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Genome assembly and assembly QC - Introduction short version",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-04-22 12:37:09 +0000",
+  "datePublished": "2025-04-22 12:37:09 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "2020-1-NL01-KA203-064717",
+      "url": "https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+        "description": "This project ([`2020-1-NL01-KA203-064717`](https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n![eu flag with the text: with the support of the erasmus programme of the european union](https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg)\n![erasmus plus logo](https://www.erasmusplus.nl/assets/images/logo.png)\n",
+        "url": "https://www.erasmusplus.nl",
+        "logo": "https://gallantries.github.io/assets/images/gallantries-logo.png"
+      },
+      "startDate": "2020-09-01",
+      "endDate": "2023-09-30"
+    }
+  ],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Assembly",
+    "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+    "url": "https://training.galaxyproject.org/training-material/topics/assembly/"
+  },
+  "abstract": "### Steps before starting a genome project",
+  "learningResourceType": "slides",
+  "name": "Genome assembly and assembly QC - Introduction short version",
+  "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly_and_qc_short/slides.html",
+  "version": 1,
+  "timeRequired": "PT1H",
+  "keywords": [
+    "Assembly"
+  ],
+  "description": "## Abstract\n\n### Steps before starting a genome project\n\n\n## Questions this  will address\n\n - What do I need to do before starting a genome assembly project?\n - Quick overview of the steps before the bioinformatic\n - Definitions of bioinformatics terms for assembly\n - Definitions of tools used to assess the quality of an assembly\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/scorreard/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/scorreard/",
+      "name": "Solenne Correard",
+      "image": "https://avatars.githubusercontent.com/scorreard",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-0554-5443",
+      "orcid": "https://orcid.org/0000-0002-0554-5443"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/alexcorm/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/alexcorm/",
+      "name": "Alexandre Cormier",
+      "image": "https://avatars.githubusercontent.com/alexcorm",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7775-8413",
+      "orcid": "https://orcid.org/0000-0002-7775-8413"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lleroi/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lleroi/",
+      "name": "Laura Leroi",
+      "image": "https://avatars.githubusercontent.com/lleroi",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3748-4179",
+      "orcid": "https://orcid.org/0000-0003-3748-4179"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "name": "Anthony Bretaudeau",
+      "image": "https://avatars.githubusercontent.com/abretaud",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/eurosciencegateway/",
+          "name": "EuroScienceGateway",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/projects/esg/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0914-2470",
+      "orcid": "https://orcid.org/0000-0003-0914-2470"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/stephanierobin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/stephanierobin/",
+      "name": "Stéphanie Robin",
+      "image": "https://avatars.githubusercontent.com/stephanierobin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-7379-9173",
+      "orcid": "https://orcid.org/0000-0001-7379-9173"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/r1corre/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/r1corre/",
+      "name": "Erwan Corre",
+      "image": "https://avatars.githubusercontent.com/r1corre",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-6354-2278",
+      "orcid": "https://orcid.org/0000-0001-6354-2278"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Assembly",
+      "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0196",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0196",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0196"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": []
+}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+
+
+    <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/assembly" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics/assembly/tutorials/assembly_and_qc_short/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+<br/>
+<br/>
+
+# Genome assembly and assembly QC - Introduction short version
+
+<br/>
+<br/>
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+	
+<ul class="text-list">
+			
+			<li>
+				<a href="/training-material/hall-of-fame/scorreard/" class="contributor-badge contributor-scorreard"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/scorreard?s=36" alt="Solenne Correard avatar" width="36" class="avatar" />
+    Solenne Correard</a>
+			<li>
+				<a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/alexcorm?s=36" alt="Alexandre Cormier avatar" width="36" class="avatar" />
+    Alexandre Cormier</a>
+			<li>
+				<a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/lleroi?s=36" alt="Laura Leroi avatar" width="36" class="avatar" />
+    Laura Leroi</a></li>
+</ul>
+	
+
+
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 5em;">
+
+
+<i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a> |
+
+
+
+
+
+
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+    
+        
+        
+            
+        
+- [Sequence analysis](/training-material/topics/sequence-analysis)
+    - Quality Control: [<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html) - [<i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html)
+    
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- What do I need to do before starting a genome assembly project?
+
+- Quick overview of the steps before the bioinformatic
+
+- Definitions of bioinformatics terms for assembly
+
+- Definitions of tools used to assess the quality of an assembly
+
+
+---
+
+
+
+
+### Steps before starting a genome project
+
+.left[
+&lt;br&gt;
+- **Step 1**: Gather information about the target species : location, overlap with Indigenous People or local communities territories, expected genome size, ploidy, micro-chromosomes, organelles, etc.
+What type of data is already available (reference gneomes, raw data, etc) : INSDC
+&lt;br&gt;
+- **Step 2**: If appropriate (depending on species and sampling location), engage with local communities, Indigenous people and/or local scientists who may have Traditional Ecological Knowledge (TEK) associated to the species.
+Obtain appropriate consent and permits (Nagoya protocol) before sampling.
+&lt;br&gt;
+- **Step 3**: Build a broad community of collaborators for the project, if possible.
+&lt;br&gt;
+- **Step 4**: Select the best possible DNA source and an optimal extraction procedure - **Sampling is THE key step**
+&lt;br&gt;
+- **Step 5**: Choose an appropriate sequencing technology
+&lt;br&gt;
+- **Step 6**: Sequence and assemble!
+]
+
+---
+
+### Steps before starting a genome project - ERGA model
+
+.image-1[
+  ![ERGA process](../../images/ERGA_process.jpg)
+]
+
+.footnote[https://www.nature.com/articles/s44185-024-00054-6]
+
+---
+
+### Genome information: Genome availability, expected genome size, ploidy, etc
+
+.pull-left[
+**How to collect informations?**
+
+- [GoaT](https://goat.genomehubs.org/) (Genome on a Tree)
+- Bibliography
+
+.image-1[
+  ![GOAT logo](../../images/goat_logo.png)
+]
+]
+
+.pull-right[
+.image-100[
+  ![variation in estimated genome sizes in base pairs](../../images/genome_assembly_introduction/genomes-size.png)
+]]
+
+.footnote[https://commons.wikimedia.org/w/index.php?curid=19537795]
+
+
+---
+
+### Genome information: Ploidy level
+
+.pull-right[
+.image-55[
+  ![Heterozigous genotype](../../images/genome_assembly_introduction/ploidy.png)
+]]
+
+.pull-left[
+
+**Ploidy (N):**
+
+Number of sets of chromosomes in a cell
+
+
+| Organism                  | Ploidy    |
+|:--------------------------|:---------:|
+| Bacteria                  | 1N        |
+| Human, mouse, rat         | 2N        |
+| Amphibians (*Xenopus*)    | 2N to 12N |
+| Plants (wheat)            | 6N        |
+| **Autopolyploid**         | .         |
+| **Hybrids**               | .         |
+
+]
+
+**Higher ploidy -&gt; harder to assemble =&gt; Increase of sequencing depth**
+
+.footnote[Daniel Hartl. Essential Genetics: A Genomics Perspective. Jones &amp; Bartlett Learning. p. 177. ISBN 978-0-7637-7364-9. (2011).]
+
+---
+
+### Genome information: Heterozygosity level
+
+.pull-left[
+.left[
+**Heterozygous:** Locus-specific,  diploid (2N) organism has two different alleles of a particular gene at the same locus
+
+&lt;br&gt;
+**Heterozygosity** is a metric used to indicate the probability that an individual is heterozygous for a particular allele
+
+]]
+
+.pull-right[
+.image-100[
+  ![Heterozigous genotype](../../images/genome_assembly_introduction/heterozygous.jpg)
+]]
+
+**Higher heterozygosity -&gt; harder to assemble =&gt; Increase of sequencing depth**
+
+.footnote[https://www.genome.gov/genetics-glossary/heterozygous]
+
+---
+
+### Genome information: Others
+
+- **Karyotype:** chromosome number
+&lt;br&gt;
+- **Sex chromosome system:** None, XY, ZW, UV,…
+&lt;br&gt;
+- **Purity:** possible presence of contaminants and/or symbionts?
+&lt;br&gt;
+- Is there any other **useful data (NCBI, SRA, ENA, etc)** that could improve my assembly?
+
+---
+
+### DNA extraction tips
+
+.left[
+- Many **DNA extraction protocol** are available for a wide range of species/taxa (VGP, Darwin Tree of Life, Nanopore, PacBio, etc)
+&lt;br&gt;
+- **Keep DNA samples** from the same individual in case of library preparation or sequencing failure, need more coverage, new sequencing technology, etc
+&lt;br&gt;
+- Use a **single individual** and sequence a **haploid, a highly inbred diploid** organism, or an **isogenic** individual
+
+]
+
+---
+
+### Sequencing steps - The options
+
+.left[
+This mainly **depends on the quantity and quality of DNA as well as the cost of the experiment** but many parameters need to be considered before performing an NGS experiment:
+
+- Short **versus** long reads or **both**
+- Read length
+- Read quality/error rate
+- Genome read coverage/depth : Number of unique reads that include a given nucleotide in the reconstructed sequence.
+    -30X coverage mean that, on average, each nucleotide in the genome is covered bu 30 reads.
+    - Coverage = (read count * read length ) / total genome size
+- Library preparation
+- Available technology
+- Downstream applications
+]
+
+---
+
+### Sequencing steps - The technologies
+
+.left[
+Sequencing technology for **assembly**:
+- **PacBio Hifi**: long reads (up to 20kb)
+- **Nanopore**: long reads and ultra-long read (up to 100kb)
+- **Illumina or MGI**: short reads (up to 2x250bp) with high quality reads. Sequencing bias with AT/GC rich regions
+
+------
+
+Sequencing technology for **scaffolding**:
+- **Hi-C:** **restriction enzyme fragmentation** (single, multiples sites or DNAse). Need huge amount of coverage.
+Providers : Arima Genomics, Phase Genomics, Dovetail Genomics
+- Optical mapping: technique to physically locate specific enzymes restriction sites or sequence motifs to produce DNA sequence fingerprints.
+
+Providers : BioNano, BGI
+- Mate pair (deprecated)
+- BAC/YAC/Fosmids (deprecated)
+
+------
+
+Typical sequencing strategies - EBP (Earth Biogenome Project) recommendation -
+- Long-reads (PacBio HiFi or ONT) : 15x per haplotype
+- Hi-C data (Arima / Illumina)
+Polishing is no longer necessary or recommended
+
+]
+
+
+---
+
+### Bioinformatics steps - Defintions
+
+.image-60[
+  ![Illustration of the working principle of scaffolding](../../images/Schematic-representation-of-the-method-used-to-assemble-Illumina-reads-into-contigs-and.png)
+]
+
+.left[
+**Contig**: a contiguous sequence in an assembly. A contig does not contain long stretches of unknown sequences (aka assembly **gaps**).
+The contig is usually generated using the long-reads data.
+&lt;br&gt;
+**Scaffold**: a sequence consists of one or multiple contigs connected by assembly gaps of typically inexact sizes. A scaffold is also called a **supercontig**, though this terminology is rarely used nowadays.
+Usually, scaffolds are generated using the Hi-C data
+&lt;br&gt;
+**Assembly**: a set of contigs or scaffolds.
+]
+
+.footnote[Johnson, Marc &amp; Carpenter, Eric &amp; Zhijian et al. (2012). Evaluating Methods for Isolating Total RNA and Predicting the Success of Sequencing Phylogenetically Diverse Plant Transcriptomes. PloS one. 7. e50226. 10.1371/journal.pone.0050226.]
+
+---
+
+### Bioinformatics steps - Assembly quality
+
+.left[
+Different level of assembly exist today :
+&lt;br&gt;
+- **Contig Assembly**
+&lt;br&gt;
+- **Scaffold assembly**
+&lt;br&gt;
+- **Chromosome-level assembly** : When the number of scaffolds is the number of expected chromosomes, it means that 1 chromosome = 1 scaffold, and no large string of sequence is unlocated.
+
+It can still contain gaps in between the scaffolds (shown as &quot;NNNNNNNN&quot; in the assembly)
+&lt;br&gt;
+- **T2T (Telomere-to-Telomere)** : Assembly without any gap (a chromosome level assembly without &quot;NNNNN&quot; sequences) 
+]
+
+---
+
+### Bioinformatics steps - Defintions
+
+.left[
+**Haplotig**: a contig that comes from the same haplotype. In an unphased assembly, a contig may join alleles from different parental haplotypes in a diploid or polyploid genome.
+&lt;br&gt;
+**Primary assembly**: a complete assembly with long stretches of phased blocks.
+&lt;br&gt;
+**Alternate assembly**: an incomplete assembly consisting of haplotigs in heterozygous regions. An alternate assembly always accompanies a primary assembly. It is not useful by itself as it is fragmented and incomplete.
+&lt;br&gt;
+**Haplotype-resolved assembly**: sets of complete assemblies consisting of haplotigs, representing an entire diploid/polyploid genome.
+]
+
+.image-60[
+  ![Illustration of the assembly types](../../images/genome_assembly_introduction/assemblies_definitions.png)
+]
+
+---
+
+### Computational resources and requirements
+
+.left[
+To be successful, you must have **sufficient computing resources (CPUS, RAM, walltime and storage)**.
+- The resources needed are **different** for each step:
+  - Assembly
+  - Annotation
+  - Other analysis tools
+  &lt;br&gt;
+- For genome **assembly:**
+  - Running times and RAM increase with data **type** and **amount**
+  - More data for large genomes, increase **runtime/RAM/Storage**
+  - Most of tools **run** on a **single node**: they are parallelized but not distributed
+  &lt;br&gt;
+- For genome **annotation:**
+  - Mapping/alignment of external data (RNA-seq, proteins) can be parallelized and distributed
+  - Annotation process can be parallelized and distributed
+]
+
+
+---
+
+### Bioinformatics data formats
+
+.left[
+**FASTA**: a text-based format for representing either nucleotide sequences or amino acid (protein) sequences, in which nucleotides or amino acids are represented using single-letter codes.
+]
+
+.image-100[
+  ![Fasta format description](../../images/genome_assembly_introduction/fasta_format.png)
+]
+Image licensed CC-BY 4.0 &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.3390/info7040056&quot;&gt;Hosseini &lt;i&gt;et al.&lt;/i&gt; 2016&lt;/a&gt;&lt;/span&gt;
+
+.footnote[Hosseini, M., Pratas, D. &amp; Pinho, A. J. A Survey on Data Compression Methods for Biological Sequences. Information 7, 56 (2016).]
+
+---
+
+### Bioinformatics data formats
+
+.left[
+**FASTQ**: a text-based format for storing both a biological sequence (usually nucleotide sequence) and its corresponding quality scores (Phred). Both the sequence letter and quality score are each encoded with a single ASCII character for brevity. It&apos;s the standard sequencing output for Illumina and MGI sequencers.
+]
+
+.image-100[
+  ![Fastq format description](../../images/genome_assembly_introduction/fastq_format.png)
+]
+Image licensed CC-BY 4.0 &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.3390/info7040056&quot;&gt;Hosseini &lt;i&gt;et al.&lt;/i&gt; 2016&lt;/a&gt;&lt;/span&gt;
+
+.footnote[Hosseini, M., Pratas, D. &amp; Pinho, A. J. A Survey on Data Compression Methods for Biological Sequences. Information 7, 56 (2016).]
+
+---
+
+### Bioinformatics data formats
+
+**SAM (Sequence Alignment Map)**: a text-based format originally for storing biological sequences aligned to a reference sequence developed by Heng Li and Bob Handsaker et al.
+&lt;br&gt;
+**BAM (Binary Alignment Map)**: the comprehensive raw data of genome sequencing; it consists of the lossless, compressed binary representation of the SAM format. It&apos;s the standard sequencing output for PacBio sequencers.
+&lt;br&gt;
+**CRAM (Compressed Reference-oriented Alignment Map)**: a compressed columnar file format for storing biological sequences aligned to a reference sequence.
+
+.pull-left[
+.image[
+  ![SAM format description](../../images/genome_assembly_introduction/sam_format.png)
+]]
+
+.pull-right[
+Image licensed CC-BY 4.0 &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.3390/info7040056&quot;&gt;Hosseini &lt;i&gt;et al.&lt;/i&gt; 2016&lt;/a&gt;&lt;/span&gt;
+]
+
+.footnote[Hosseini, M., Pratas, D. &amp; Pinho, A. J. A Survey on Data Compression Methods for Biological Sequences. Information 7, 56 (2016).]
+
+---
+
+### After the assembly, how do we assess its quality?
+
+.image-100[
+  ![The 3C for genome assembly quality control](../../images/genome-qc/3C.png)
+]
+
+---
+
+### Continuity : N50
+
+.left[
+**N50**: given a set of sequences of varying lengths, the N50 is defined as **the length L of the shortest contig** for which **longer and equal length contigs cover at least 50% of the assembly**.
+&lt;br&gt;
+**L50**: given a set of sequences of varying lengths, the L50 is defined as **count of smallest number of sequences** whose **length sum makes up 50% of the assembly**.
+&lt;br&gt;
+**N50 describes a sequence length whereas L50 describes a number of sequences.**
+
+Example:
+- Genome size = 100
+- Sequence sorted by size list L = (25, 10, 10, 8 , 7, 7 , 6 , 5, 5, 5, 5, 3, 2, 2 ) = 100
+- 50% of the total length is contained within sequences of at least 8bp: 25 + 10 + 10 + 8 ≥ 50
+]
+
+.image-100[
+  ![Schematic explanation of N50](../../images/genome-qc/N50.png)
+]
+
+**N50 = 8** and **L50 = 4**
+
+.footnote[Alhakami, H., Mirebrahim, H., &amp; Lonardi, S. (2017). A comparative evaluation of genome assembly reconciliation tools. Genome biology, 18(1), 1-14.]
+
+---
+
+.pull-right[
+.image-55[
+  ![Quast report](../../images/genome-qc/Quast_report.jpg)
+]]
+
+.pull-left[
+### Tool to evaluate continuity : QUAST
+
+- **QUAST**: for genome assemblies.
+- **MetaQUAST**: for metagenomic datasets.
+- **QUAST-LG**: for large genomes (e.g., mammalians).
+- **rnaQUAST**: for RNAseq.
+- **Icarus**: an interactive visualizer for these tools.
+]
+
+---
+
+### Completeness : BUSCO score
+
+.pull-left[
+**BUSCO**: Assessing genome assembly and annotation completeness with **B**enchmarking **U**niversal **S**ingle-**C**opy **O**rthologs
+&lt;br&gt;
+Quantitative assessment of genome assembly based on evolutionarily informed expectations of gene content from near-universal single-copy orthologs.
+.image-70[
+![Formula to estimate assembly completeness for core genes](../../images/genome-qc/busco-formula.png)
+]
+]
+.pull-right[
+.image-70[
+![Example of BUSCO plot for Nosema species (Microsporidia) ](../../images/genome-qc/BUSCO-scores.png)
+]]
+
+.footnote[Tips: Reference databases are constructed using known genomes. Species with few/no close genomes available can have very bad scores.]
+
+---
+
+### Correctness
+
+** Proportion of the assembly that is free from mistakes**
+&lt;br&gt;
+&lt;br&gt;
+- Indels / SNPs
+- Mis-joins
+- Repeat compressions
+- Unnecessary duplications
+- Rearrangements
+&lt;br&gt;
+&lt;br&gt;
+**→ Align back reads to the assembly and check for inconsistencies**
+
+---
+
+### Evaluation against reference genome (or second haplotype)
+
+.image-30[
+![Example of a dot plot between 2 genomes.](../../images/genome-qc/dotplot-dgenies.png)
+]
+
+---
+
+### Assembly QC Tips
+
+- The quality of an assembly is often validated by using other data from the same individual or from other individuals (RNA-Seq alignment, Hi-C alignment, DNA-Seq alignment,...).
+
+- The positions of the telomeric repeats in the chromosome assemblies are also of interesting to evaluate the correctness.
+
+- The identification of organelles (mitochondria, chloroplast,...) can also inform us about the quality of the assembly in terms of completness. However, the structure of the organelles may lead the assembler to think that they are repeats and he discards them.
+
+- In the case of diploid organisms, one of the classical problems of assemblies is the conservation of the two haplotypes. We obtains particular BUSCO / kmer / assembly size metrics that can be corrected by removing, &quot;purging&quot;, the haplotigs.
+
+
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- We learned the importance of preparing the project to ensure its success
+
+- We learned the importance of surrounding ourselves with all the people who have knowledge of the different parts of the project (wet lab, sequencing, bioinformatics,...)
+
+- We learned the definitions of bioinformatics terms used in genomes assembly
+
+- We have seen the bioinformatics file formats used for these analyses
+
+- To go further : [Deeper look into Genome Assembly algorithms](https://training.galaxyproject.org/training-material/topics/assembly/tutorials/algorithms-introduction/slides.html#1)
+
+- We have seen the bioinformatics tools to assess the quality of an assembly
+
+- To go further : [Genome assembly quality control](https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-quality-control/slides.html#1)
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/scorreard/" class="contributor-badge contributor-scorreard"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/scorreard?s=36" alt="Solenne Correard avatar" width="36" class="avatar" />
+    Solenne Correard</a><a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/alexcorm?s=36" alt="Alexandre Cormier avatar" width="36" class="avatar" />
+    Alexandre Cormier</a><a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/lleroi?s=36" alt="Laura Leroi avatar" width="36" class="avatar" />
+    Laura Leroi</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" />
+    Anthony Bretaudeau</a><a href="/training-material/hall-of-fame/stephanierobin/" class="contributor-badge contributor-stephanierobin"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/stephanierobin?s=36" alt="Stéphanie Robin avatar" width="36" class="avatar" />
+    Stéphanie Robin</a><a href="/training-material/hall-of-fame/r1corre/" class="contributor-badge contributor-r1corre"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/r1corre?s=36" alt="Erwan Corre avatar" width="36" class="avatar" />
+    Erwan Corre</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+	
+
+	<div>
+		<div>
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/gallantries" alt="Logo">
+		
+		</div>
+		<div>
+		
+		</div>
+	</div>
+
+
+
+
+</div>
+
+Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br/>
+
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+        
+    </body>
+</html>
