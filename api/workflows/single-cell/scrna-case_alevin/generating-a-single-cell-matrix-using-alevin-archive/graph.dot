@@ -1,0 +1,66 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nGTF file"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nReference FASTA"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nRead 1 - containing cell barcode & UMI"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nRead 2 - containing transcript"]
+  4[label="GTF2GeneList"]
+  0 -> 4 [label="output"]
+  5[label="Transcript-gene mapping"]
+  1 -> 5 [label="output"]
+  0 -> 5 [label="output"]
+  k773cb4ae56c349c0b582ee69d620def3[color=lightseagreen,label="Output\nfasta_output"]
+  5 -> k773cb4ae56c349c0b582ee69d620def3
+  ka30424b51ddc43249ff6dc5883adcce0[color=lightseagreen,label="Output\nfeature_annotation"]
+  5 -> ka30424b51ddc43249ff6dc5883adcce0
+  6[label="Alevin Processed"]
+  2 -> 6 [label="output"]
+  3 -> 6 [label="output"]
+  5 -> 6 [label="fasta_output"]
+  1 -> 6 [label="output"]
+  5 -> 6 [label="feature_annotation"]
+  ka87beb551baf458ebd09bb5ac6ea6e9a[color=lightseagreen,label="Output\nraw_cb_frequency_txt"]
+  6 -> ka87beb551baf458ebd09bb5ac6ea6e9a
+  kc9390a50775c4f0f88e50984d570902c[color=lightseagreen,label="Output\nsalmon_quant_log"]
+  6 -> kc9390a50775c4f0f88e50984d570902c
+  k2cebc438ddc041e089ba49b4bd3e2160[color=lightseagreen,label="Output\nquants_mat_mtx"]
+  6 -> k2cebc438ddc041e089ba49b4bd3e2160
+  k89fa1aad9ec6435197d5f05cac09e08e[color=lightseagreen,label="Output\nquants_mat_cols_txt"]
+  6 -> k89fa1aad9ec6435197d5f05cac09e08e
+  k3b3dda805d354c519ca090a2f909755f[color=lightseagreen,label="Output\nquants_mat_rows_txt"]
+  6 -> k3b3dda805d354c519ca090a2f909755f
+  7[label="Alevin - no processing"]
+  2 -> 7 [label="output"]
+  3 -> 7 [label="output"]
+  5 -> 7 [label="fasta_output"]
+  1 -> 7 [label="output"]
+  5 -> 7 [label="feature_annotation"]
+  k25d4d8f6d166447080fed0fdb0702371[color=lightseagreen,label="Output\nquants_mat_rows_txt_1"]
+  7 -> k25d4d8f6d166447080fed0fdb0702371
+  kd9ed1457792b4eafa9fc2407bcd90da7[color=lightseagreen,label="Output\nquants_mat_mtx_1"]
+  7 -> kd9ed1457792b4eafa9fc2407bcd90da7
+  k40df6aa83dfa4946bbc8cacf4ca2a20e[color=lightseagreen,label="Output\nquants_mat_cols_txt_1"]
+  7 -> k40df6aa83dfa4946bbc8cacf4ca2a20e
+  8[label="Droplet rank plot - raw barcodes"]
+  6 -> 8 [label="raw_cb_frequency_txt"]
+  9[label="Droplet rank plot - Alevin barcodes"]
+  6 -> 9 [label="quants_mat_mtx"]
+  10[label="salmonKallistoMtxTo10x"]
+  7 -> 10 [label="quants_mat_rows_txt"]
+  7 -> 10 [label="quants_mat_cols_txt"]
+  7 -> 10 [label="quants_mat_mtx"]
+  11[label="Join two Datasets"]
+  10 -> 11 [label="genes_out"]
+  4 -> 11 [label="feature_annotation"]
+  12[label="Cut"]
+  11 -> 12 [label="out_file1"]
+  13[label="DropletUtils Read10x"]
+  10 -> 13 [label="barcodes_out"]
+  12 -> 13 [label="out_file1"]
+  10 -> 13 [label="matrix_out"]
+  14[label="DropletUtils emptyDrops"]
+  13 -> 14 [label="output_rds"]
+  15[label="SCEasy Converter"]
+  14 -> 15 [label="output_rdata"]
+}

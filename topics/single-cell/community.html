@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@0799a6e4018b06bd8e41e61433f83395f176727c",
+		release: "galaxy-training-network@0b6bad30c13ab27d9193a252b0535d7b1ddbbe79",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -326,7 +326,7 @@ This is a new, experimental "Community Home" for a given topic. It is intended t
 			<div class="col-sm-3 col-md-6">
 				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
 					
-					<div class="title">10</div>
+					<div class="title">12</div>
 					<div class="subtitle">
 					Workflows
 					</div>
@@ -423,6 +423,10 @@ This is a new, experimental "Community Home" for a given topic. It is intended t
 
 				<h3>Workflows</h3>
 				<ul>
+				
+				<li><a href="/training-material">LOCKED | Combining single cell datasets after pre-processing</a></li>
+				
+				<li><a href="/training-material">LOCKED | Generating a single cell matrix using Alevin</a></li>
 				
 				<li><a href="/training-material">Multisample Batch Correction with SnapATAC2 and Harmony</a></li>
 				
@@ -1127,7 +1131,7 @@ This is a new, experimental "Community Home" for a given topic. It is intended t
 			<div class="col-sm-3 col-md-6">
 				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
 					
-					<div class="title">4</div>
+					<div class="title">3</div>
 					<div class="subtitle">
 					Tutorials
 					</div>
@@ -1235,8 +1239,6 @@ This is a new, experimental "Community Home" for a given topic. It is intended t
 				<ul>
 				
 				<li><a href="/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html">Inferring single cell trajectories with Monocle3</a></li>
-				
-				<li><a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial_ES.html">Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin</a></li>
 				
 				<li><a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">Combining single cell datasets after pre-processing</a></li>
 				
@@ -1369,7 +1371,7 @@ This is a new, experimental "Community Home" for a given topic. It is intended t
 			<div class="col-sm-3 col-md-6">
 				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
 					
-					<div class="title">6</div>
+					<div class="title">5</div>
 					<div class="subtitle">
 					Tutorials
 					</div>
@@ -1475,8 +1477,6 @@ This is a new, experimental "Community Home" for a given topic. It is intended t
 				<ul>
 				
 				<li><a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial_ES.html">Filtrado, representación y exploración de secuenciación de ARN de células únicas</a></li>
-				
-				<li><a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial_ES.html">Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin</a></li>
 				
 				<li><a href="/training-material/topics/single-cell/tutorials/scrna-plant/tutorial.html">Analysis of plant scRNA-Seq Data with Scanpy</a></li>
 				
@@ -2134,11 +2134,11 @@ year,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025
 news,0,0,0,0,0,0,1,3,5,11,13
 events,0,0,0,0,0,0,0,0,0,6,8
 learning-pathways,0,0,0,0,0,0,0,0,1,3,4
-tutorials,0,0,0,0,3,3,9,13,26,30,34
+tutorials,0,0,0,0,3,3,8,11,24,28,32
 slides,0,0,0,0,1,2,5,6,7,9,9
 recordings,0,0,0,0,0,1,11,11,14,19,19
 faqs,0,0,0,0,0,0,6,15,18,20,20
-workflows,0,0,0,0,4,4,8,11,26,33,43
+workflows,0,0,0,0,4,4,8,11,26,33,45
 grants,0,0,0,0,0,0,0,1,4,4,4
 organisations,0,0,1,1,1,1,1,1,1,1,1
 contributors,0,0,14,19,24,27,31,35,37,42,44
@@ -2191,7 +2191,7 @@ figure {
 
 <script>
 const style = getComputedStyle(document.body);
-const totals = {"events":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":0,"x":"2023-01-01"},{"y":6,"x":"2024-01-01"},{"y":8,"x":"2025-01-01"}],"learning-pathways":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":3,"x":"2024-01-01"},{"y":4,"x":"2025-01-01"}],"news":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":1,"x":"2021-01-01"},{"y":3,"x":"2022-01-01"},{"y":5,"x":"2023-01-01"},{"y":11,"x":"2024-01-01"},{"y":13,"x":"2025-01-01"}],"workflows":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":4,"x":"2019-01-01"},{"y":4,"x":"2020-01-01"},{"y":8,"x":"2021-01-01"},{"y":11,"x":"2022-01-01"},{"y":26,"x":"2023-01-01"},{"y":33,"x":"2024-01-01"},{"y":43,"x":"2025-01-01"}],"tutorials":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":3,"x":"2019-01-01"},{"y":3,"x":"2020-01-01"},{"y":9,"x":"2021-01-01"},{"y":13,"x":"2022-01-01"},{"y":26,"x":"2023-01-01"},{"y":30,"x":"2024-01-01"},{"y":34,"x":"2025-01-01"}],"contributors":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":14,"x":"2017-01-01"},{"y":19,"x":"2018-01-01"},{"y":24,"x":"2019-01-01"},{"y":27,"x":"2020-01-01"},{"y":31,"x":"2021-01-01"},{"y":35,"x":"2022-01-01"},{"y":37,"x":"2023-01-01"},{"y":42,"x":"2024-01-01"},{"y":44,"x":"2025-01-01"}],"recordings":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":1,"x":"2020-01-01"},{"y":11,"x":"2021-01-01"},{"y":11,"x":"2022-01-01"},{"y":14,"x":"2023-01-01"},{"y":19,"x":"2024-01-01"},{"y":19,"x":"2025-01-01"}],"faqs":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":6,"x":"2021-01-01"},{"y":15,"x":"2022-01-01"},{"y":18,"x":"2023-01-01"},{"y":20,"x":"2024-01-01"},{"y":20,"x":"2025-01-01"}],"slides":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":1,"x":"2019-01-01"},{"y":2,"x":"2020-01-01"},{"y":5,"x":"2021-01-01"},{"y":6,"x":"2022-01-01"},{"y":7,"x":"2023-01-01"},{"y":9,"x":"2024-01-01"},{"y":9,"x":"2025-01-01"}],"grants":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":1,"x":"2022-01-01"},{"y":4,"x":"2023-01-01"},{"y":4,"x":"2024-01-01"},{"y":4,"x":"2025-01-01"}],"organisations":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":1,"x":"2017-01-01"},{"y":1,"x":"2018-01-01"},{"y":1,"x":"2019-01-01"},{"y":1,"x":"2020-01-01"},{"y":1,"x":"2021-01-01"},{"y":1,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":1,"x":"2024-01-01"},{"y":1,"x":"2025-01-01"}]};
+const totals = {"workflows":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":4,"x":"2019-01-01"},{"y":4,"x":"2020-01-01"},{"y":8,"x":"2021-01-01"},{"y":11,"x":"2022-01-01"},{"y":26,"x":"2023-01-01"},{"y":33,"x":"2024-01-01"},{"y":45,"x":"2025-01-01"}],"events":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":0,"x":"2023-01-01"},{"y":6,"x":"2024-01-01"},{"y":8,"x":"2025-01-01"}],"learning-pathways":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":3,"x":"2024-01-01"},{"y":4,"x":"2025-01-01"}],"news":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":1,"x":"2021-01-01"},{"y":3,"x":"2022-01-01"},{"y":5,"x":"2023-01-01"},{"y":11,"x":"2024-01-01"},{"y":13,"x":"2025-01-01"}],"tutorials":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":3,"x":"2019-01-01"},{"y":3,"x":"2020-01-01"},{"y":8,"x":"2021-01-01"},{"y":11,"x":"2022-01-01"},{"y":24,"x":"2023-01-01"},{"y":28,"x":"2024-01-01"},{"y":32,"x":"2025-01-01"}],"contributors":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":14,"x":"2017-01-01"},{"y":19,"x":"2018-01-01"},{"y":24,"x":"2019-01-01"},{"y":27,"x":"2020-01-01"},{"y":31,"x":"2021-01-01"},{"y":35,"x":"2022-01-01"},{"y":37,"x":"2023-01-01"},{"y":42,"x":"2024-01-01"},{"y":44,"x":"2025-01-01"}],"recordings":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":1,"x":"2020-01-01"},{"y":11,"x":"2021-01-01"},{"y":11,"x":"2022-01-01"},{"y":14,"x":"2023-01-01"},{"y":19,"x":"2024-01-01"},{"y":19,"x":"2025-01-01"}],"faqs":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":6,"x":"2021-01-01"},{"y":15,"x":"2022-01-01"},{"y":18,"x":"2023-01-01"},{"y":20,"x":"2024-01-01"},{"y":20,"x":"2025-01-01"}],"slides":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":1,"x":"2019-01-01"},{"y":2,"x":"2020-01-01"},{"y":5,"x":"2021-01-01"},{"y":6,"x":"2022-01-01"},{"y":7,"x":"2023-01-01"},{"y":9,"x":"2024-01-01"},{"y":9,"x":"2025-01-01"}],"grants":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":1,"x":"2022-01-01"},{"y":4,"x":"2023-01-01"},{"y":4,"x":"2024-01-01"},{"y":4,"x":"2025-01-01"}],"organisations":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":1,"x":"2017-01-01"},{"y":1,"x":"2018-01-01"},{"y":1,"x":"2019-01-01"},{"y":1,"x":"2020-01-01"},{"y":1,"x":"2021-01-01"},{"y":1,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":1,"x":"2024-01-01"},{"y":1,"x":"2025-01-01"}]};
 
 const options = {
 	scales: {
@@ -2388,7 +2388,7 @@ new Chart('other-over-time', {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0799a6e4018b06bd8e41e61433f83395f176727c">0799a6e</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0b6bad30c13ab27d9193a252b0535d7b1ddbbe79">0b6bad3</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

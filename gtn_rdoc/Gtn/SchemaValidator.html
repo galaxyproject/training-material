@@ -393,6 +393,7 @@
 
   <span class="ruby-comment"># Generic error handling:</span>
   <span class="ruby-comment">## Check requirements</span>
+  <span class="ruby-identifier">data</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;extra&#39;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;extra&#39;</span>) <span class="ruby-comment">## let people stick anything under the &#39;extra&#39; metadata key</span>
   <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">validate_requirements</span>(<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;requirements&#39;</span>])) <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;requirements&#39;</span>)
 
   <span class="ruby-comment">## Check follow ups</span>
@@ -433,13 +434,13 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="lint_news_file-source">
-                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 195</span>
+                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 196</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lint_news_file</span>(<span class="ruby-identifier">fn</span>)
   <span class="ruby-identifier">errs</span> = []
   <span class="ruby-identifier">data</span> = <span class="ruby-identifier">lintable?</span>(<span class="ruby-identifier">fn</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">data</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;cover&#39;</span>) 
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;cover&#39;</span>)
     <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;cover&#39;</span>].<span class="ruby-identifier">start_with?</span>(<span class="ruby-string">&#39;https://&#39;</span>)
       <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;cover&#39;</span>])
         <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-node">&quot;Cover image #{data[&#39;cover&#39;]} does not exist&quot;</span>)
@@ -470,7 +471,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="lint_quiz_file-source">
-                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 212</span>
+                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 213</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lint_quiz_file</span>(<span class="ruby-identifier">fn</span>)
   <span class="ruby-identifier">errs</span> = []
   <span class="ruby-identifier">data</span> = <span class="ruby-identifier">lintable?</span>(<span class="ruby-identifier">fn</span>)
@@ -588,7 +589,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="run-source">
-                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 241</span>
+                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 242</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">run</span>
   <span class="ruby-identifier">errors</span> = []
   <span class="ruby-comment"># Topics</span>

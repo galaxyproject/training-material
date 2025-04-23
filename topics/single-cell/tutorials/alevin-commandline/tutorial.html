@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@0799a6e4018b06bd8e41e61433f83395f176727c",
+		release: "galaxy-training-network@0b6bad30c13ab27d9193a252b0535d7b1ddbbe79",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Generating a single cell matrix using Alevin and combining datasets (bash + R)">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-10-28 12:59:16 +0000">
+<meta name="DC.date" content="2025-04-22 14:30:06 +0000">
 <meta name="DC.creator" content="Julia Jakiela">
 <meta name="DC.creator" content="Wendi Bacon"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -187,7 +187,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-10-28 12:59:16 +0000",
+  "dateModified": "2025-04-22 14:30:06 +0000",
   "datePublished": "2023-12-08 14:46:22 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -264,7 +264,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Generating a single cell matrix using Alevin and combining datasets (bash + R)",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/alevin-commandline/tutorial.html",
-  "version": 4,
+  "version": 5,
   "timeRequired": "PT2H",
   "teaches": "- Generate a cellxgene matrix for droplet-based single cell sequencing data\n- Interpret quality control (QC) plots to make informed decisions on cell thresholds\n- Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata",
   "keywords": [
@@ -1657,7 +1657,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Dec 8, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 28, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 22, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1677,7 +1677,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">1.0</a> (1 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 5 </div>
 
     </blockquote>
     </section>
@@ -1968,7 +1968,7 @@ alevin_se &lt;- tximeta<span class="o">(</span>coldata, <span class="nb">type</s
 
 <h1 id="identify-barcodes-that-correspond-to-non-empty-droplets">Identify barcodes that correspond to non-empty droplets</h1>
 
-<p>Some sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ (see the <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html#basic-qc">Alevin Galaxy tutorial</a> for multiple sub-populations. The <code class="language-plaintext highlighter-rouge">emptyDrops</code> method (<span class="citation"><a href="#Lun2019">Lun <i>et al.</i> 2019</a></span>) has become a popular way of dealing with this. <code class="language-plaintext highlighter-rouge">emptyDrops</code> still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar.</p>
+<p>Some sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ (see the <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html#interpreting-the-qc-plots">Alevin Galaxy tutorial</a> for multiple sub-populations. The <code class="language-plaintext highlighter-rouge">emptyDrops</code> method (<span class="citation"><a href="#Lun2019">Lun <i>et al.</i> 2019</a></span>) has become a popular way of dealing with this. <code class="language-plaintext highlighter-rouge">emptyDrops</code> still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar.</p>
 
 <p>EmptyDrops takes multiple arguments that you can read about in the <a href="https://rdrr.io/github/MarioniLab/DropletUtils/man/emptyDrops.html">documentation</a>. However, in this case, we will only specify the following arguments:</p>
 
@@ -1997,7 +1997,7 @@ out
 
 <p>We also correct for multiple testing by controlling the false discovery rate (FDR) using the Benjamini-Hochberg (BH) method (<span class="citation"><a href="#Benjamini1995">Benjamini and Hochberg 1995</a></span>). Putative cells are defined as those barcodes that have significantly poor fits to the ambient model at a specified FDR threshold. Here, we will use an FDR threshold of 0.01. This means that the expected proportion of empty droplets in the set of retained barcodes is no greater than 1%, which we consider to be acceptably low for downstream analyses.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>is.cell &lt;- out<span class="nv">$FDR</span> &lt;<span class="o">=</span> 0.01                           
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>is.cell &lt;- out<span class="nv">$FDR</span> &lt;<span class="o">=</span> 0.01
 <span class="nb">sum</span><span class="o">(</span>is.cell, na.rm<span class="o">=</span>TRUE<span class="o">)</span>                              <span class="c"># check how many cells left after filtering</span>
 </code></pre></div></div>
 
@@ -2141,7 +2141,7 @@ colData<span class="o">(</span>alevin_se<span class="o">)</span><span class="nv"
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># get relevant gene names</span>
 library<span class="o">(</span><span class="s2">"biomaRt"</span><span class="o">)</span>                                      <span class="c"># load the BioMart library</span>
-ensembl.ids &lt;- gene_ID                               
+ensembl.ids &lt;- gene_ID
 mart &lt;- useEnsembl<span class="o">(</span>biomart <span class="o">=</span> <span class="s2">"ENSEMBL_MART_ENSEMBL"</span><span class="o">)</span>    <span class="c"># connect to a specified BioMart database and dataset hosted by Ensembl</span>
 ensembl_m <span class="o">=</span> useMart<span class="o">(</span><span class="s2">"ensembl"</span>, <span class="nv">dataset</span><span class="o">=</span><span class="s2">"mmusculus_gene_ensembl"</span><span class="o">)</span>
 
@@ -2167,11 +2167,11 @@ ensembl_m <span class="o">=</span> useMart<span class="o">(</span><span class="s
 <span class="c"># 'external_gene_name' are the genes symbols that we want to get for our values stored in ‘ensembl.ids’.</span>
 </code></pre></div></div>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># see the resulting data</span>
-<span class="nb">head</span><span class="o">(</span>genes<span class="o">)</span>                          
+<span class="nb">head</span><span class="o">(</span>genes<span class="o">)</span>
 </code></pre></div></div>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># replace IDs for gene names</span>
-gene_names &lt;- ensembl.ids	 
-count <span class="o">=</span> 1 	 
+gene_names &lt;- ensembl.ids
+count <span class="o">=</span> 1
 <span class="k">for</span> <span class="o">(</span>geneID <span class="k">in </span>gene_names<span class="o">)</span>
 <span class="o">{</span>
  index &lt;- which<span class="o">(</span><span class="nv">genes</span><span class="o">==</span>geneID<span class="o">)</span>    <span class="c"># finds an index of geneID in the genes object created by getBM()</span>
@@ -2190,7 +2190,7 @@ count <span class="o">=</span> 1
 rowData<span class="o">(</span>alevin_se<span class="o">)</span><span class="nv">$gene_name</span> &lt;- gene_names
 </code></pre></div></div>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># see the changes</span>
-rowData<span class="o">(</span>alevin_se<span class="o">)</span>                  
+rowData<span class="o">(</span>alevin_se<span class="o">)</span>
 </code></pre></div></div>
 
 <p>If you are working on your own data and it’s not mouse data, you can check available datasets for other species and just use relevant dataset in <code class="language-plaintext highlighter-rouge">useMart()</code> function.</p>
@@ -2298,9 +2298,9 @@ gene_ID2 &lt;- rownames<span class="o">(</span>alevin2<span class="o">)</span>
 rowData<span class="o">(</span>alevin2<span class="o">)</span><span class="nv">$gene_ID</span> &lt;- gene_ID2
 
 <span class="c"># get relevant gene names</span>
-ensembl.ids2 &lt;- gene_ID2               
+ensembl.ids2 &lt;- gene_ID2
 mart &lt;- useEnsembl<span class="o">(</span>biomart <span class="o">=</span> <span class="s2">"ENSEMBL_MART_ENSEMBL"</span><span class="o">)</span>    <span class="c"># connect to a specified BioMart database and dataset hosted by Ensembl</span>
-ensembl_m2 <span class="o">=</span> useMart<span class="o">(</span><span class="s2">"ensembl"</span>, <span class="nv">dataset</span><span class="o">=</span><span class="s2">"mmusculus_gene_ensembl"</span><span class="o">)</span> 	
+ensembl_m2 <span class="o">=</span> useMart<span class="o">(</span><span class="s2">"ensembl"</span>, <span class="nv">dataset</span><span class="o">=</span><span class="s2">"mmusculus_gene_ensembl"</span><span class="o">)</span>
 
 genes2 &lt;- getBM<span class="o">(</span><span class="nv">attributes</span><span class="o">=</span>c<span class="o">(</span><span class="s1">'ensembl_gene_id'</span>,<span class="s1">'external_gene_name'</span><span class="o">)</span>,
                filters <span class="o">=</span> <span class="s1">'ensembl_gene_id'</span>,
@@ -2309,7 +2309,7 @@ genes2 &lt;- getBM<span class="o">(</span><span class="nv">attributes</span><spa
 
 <span class="c"># replace IDs for gene names</span>
 gene_names2 &lt;- ensembl.ids2
-count <span class="o">=</span> 1 	 
+count <span class="o">=</span> 1
 <span class="k">for</span> <span class="o">(</span>geneID <span class="k">in </span>gene_names2<span class="o">)</span>
 <span class="o">{</span>
  index &lt;- which<span class="o">(</span><span class="nv">genes2</span><span class="o">==</span>geneID<span class="o">)</span>    <span class="c"># finds an index of geneID in the genes object created by getBM()</span>
@@ -2822,7 +2822,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0799a6e4018b06bd8e41e61433f83395f176727c">0799a6e</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0b6bad30c13ab27d9193a252b0535d7b1ddbbe79">0b6bad3</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

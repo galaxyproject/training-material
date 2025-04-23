@@ -1,66 +1,81 @@
 digraph main {
   node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
   edge [fontname="Atkinson Hyperlegible"];
-  0[color=lightblue,label="ℹ️ Input Dataset\nGTF file"]
-  1[color=lightblue,label="ℹ️ Input Dataset\nReference FASTA"]
-  2[color=lightblue,label="ℹ️ Input Dataset\nRead 1 - containing cell barcode & UMI"]
-  3[color=lightblue,label="ℹ️ Input Dataset\nRead 2 - containing transcript"]
-  4[label="GTF2GeneList"]
-  0 -> 4 [label="output"]
-  5[label="Transcript-gene mapping"]
-  1 -> 5 [label="output"]
-  0 -> 5 [label="output"]
-  k773cb4ae56c349c0b582ee69d620def3[color=lightseagreen,label="Output\nfasta_output"]
-  5 -> k773cb4ae56c349c0b582ee69d620def3
+  0[color=lightblue,label="ℹ️ Input Dataset\nRead 1 - containing cell barcode & UMI"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nRead 2 - containing transcript"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nReference FASTA"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nGTF file"]
+  4[label="Transcript-gene mapping"]
+  2 -> 4 [label="output"]
+  3 -> 4 [label="output"]
   ka30424b51ddc43249ff6dc5883adcce0[color=lightseagreen,label="Output\nfeature_annotation"]
-  5 -> ka30424b51ddc43249ff6dc5883adcce0
-  6[label="Alevin Processed"]
-  2 -> 6 [label="output"]
-  3 -> 6 [label="output"]
-  5 -> 6 [label="fasta_output"]
+  4 -> ka30424b51ddc43249ff6dc5883adcce0
+  k773cb4ae56c349c0b582ee69d620def3[color=lightseagreen,label="Output\nfasta_output"]
+  4 -> k773cb4ae56c349c0b582ee69d620def3
+  5[label="Gene Information Extraction"]
+  3 -> 5 [label="output"]
+  kb0a930ede61e4f81ac7133454156535d[color=lightseagreen,label="Output\nfasta_output2"]
+  5 -> kb0a930ede61e4f81ac7133454156535d
+  k2d37017a4de84bfbb55dbd68e84dbca9[color=lightseagreen,label="Output\nGene_Information"]
+  5 -> k2d37017a4de84bfbb55dbd68e84dbca9
+  6[label="Alevin - no processing"]
+  0 -> 6 [label="output"]
   1 -> 6 [label="output"]
-  5 -> 6 [label="feature_annotation"]
-  ka87beb551baf458ebd09bb5ac6ea6e9a[color=lightseagreen,label="Output\nraw_cb_frequency_txt"]
-  6 -> ka87beb551baf458ebd09bb5ac6ea6e9a
-  kc9390a50775c4f0f88e50984d570902c[color=lightseagreen,label="Output\nsalmon_quant_log"]
-  6 -> kc9390a50775c4f0f88e50984d570902c
-  k2cebc438ddc041e089ba49b4bd3e2160[color=lightseagreen,label="Output\nquants_mat_mtx"]
-  6 -> k2cebc438ddc041e089ba49b4bd3e2160
-  k89fa1aad9ec6435197d5f05cac09e08e[color=lightseagreen,label="Output\nquants_mat_cols_txt"]
-  6 -> k89fa1aad9ec6435197d5f05cac09e08e
-  k3b3dda805d354c519ca090a2f909755f[color=lightseagreen,label="Output\nquants_mat_rows_txt"]
-  6 -> k3b3dda805d354c519ca090a2f909755f
-  7[label="Alevin - no processing"]
-  2 -> 7 [label="output"]
-  3 -> 7 [label="output"]
-  5 -> 7 [label="fasta_output"]
-  1 -> 7 [label="output"]
-  5 -> 7 [label="feature_annotation"]
-  k25d4d8f6d166447080fed0fdb0702371[color=lightseagreen,label="Output\nquants_mat_rows_txt_1"]
-  7 -> k25d4d8f6d166447080fed0fdb0702371
+  4 -> 6 [label="fasta_output"]
+  4 -> 6 [label="feature_annotation"]
   kd9ed1457792b4eafa9fc2407bcd90da7[color=lightseagreen,label="Output\nquants_mat_mtx_1"]
-  7 -> kd9ed1457792b4eafa9fc2407bcd90da7
+  6 -> kd9ed1457792b4eafa9fc2407bcd90da7
   k40df6aa83dfa4946bbc8cacf4ca2a20e[color=lightseagreen,label="Output\nquants_mat_cols_txt_1"]
-  7 -> k40df6aa83dfa4946bbc8cacf4ca2a20e
+  6 -> k40df6aa83dfa4946bbc8cacf4ca2a20e
+  k25d4d8f6d166447080fed0fdb0702371[color=lightseagreen,label="Output\nquants_mat_rows_txt_1"]
+  6 -> k25d4d8f6d166447080fed0fdb0702371
+  k50a32d87f9a64725b9d68f120be54f12[color=lightseagreen,label="Output\nraw_cb_frequency_txt"]
+  6 -> k50a32d87f9a64725b9d68f120be54f12
+  k0250f882c681408d9b85ee2f0db9f943[color=lightseagreen,label="Output\nsalmon_quant_log"]
+  6 -> k0250f882c681408d9b85ee2f0db9f943
+  7[label="salmonKallistoMtxTo10x"]
+  6 -> 7 [label="quants_mat_rows_txt"]
+  6 -> 7 [label="quants_mat_cols_txt"]
+  6 -> 7 [label="quants_mat_mtx"]
+  ka5933f5d71324778b0714402cc7149c5[color=lightseagreen,label="Output\nbarcodes_out"]
+  7 -> ka5933f5d71324778b0714402cc7149c5
+  k701ae85be70a4600a61c060c604e490f[color=lightseagreen,label="Output\nmatrix_out"]
+  7 -> k701ae85be70a4600a61c060c604e490f
+  k7e1c350b4ca843b8b9e873c0b157bd70[color=lightseagreen,label="Output\ngenes_out"]
+  7 -> k7e1c350b4ca843b8b9e873c0b157bd70
   8[label="Droplet rank plot - raw barcodes"]
   6 -> 8 [label="raw_cb_frequency_txt"]
-  9[label="Droplet rank plot - Alevin barcodes"]
-  6 -> 9 [label="quants_mat_mtx"]
-  10[label="salmonKallistoMtxTo10x"]
-  7 -> 10 [label="quants_mat_rows_txt"]
-  7 -> 10 [label="quants_mat_cols_txt"]
-  7 -> 10 [label="quants_mat_mtx"]
-  11[label="Join two Datasets"]
-  10 -> 11 [label="genes_out"]
-  4 -> 11 [label="feature_annotation"]
-  12[label="Cut"]
-  11 -> 12 [label="out_file1"]
-  13[label="DropletUtils Read10x"]
-  10 -> 13 [label="barcodes_out"]
-  12 -> 13 [label="out_file1"]
-  10 -> 13 [label="matrix_out"]
-  14[label="DropletUtils emptyDrops"]
-  13 -> 14 [label="output_rds"]
-  15[label="SCEasy Converter"]
-  14 -> 15 [label="output_rdata"]
+  kf8f35d85c947406ea81516d7d9b5fce1[color=lightseagreen,label="Output\nplot_file-raw"]
+  8 -> kf8f35d85c947406ea81516d7d9b5fce1
+  9[label="Join two Datasets"]
+  7 -> 9 [label="genes_out"]
+  5 -> 9 [label="feature_annotation"]
+  k84810b7feaef4157a9521917bddab9f2[color=lightseagreen,label="Output\nout_file1"]
+  9 -> k84810b7feaef4157a9521917bddab9f2
+  10[label="Cut"]
+  9 -> 10 [label="out_file1"]
+  kbeb4d20531a14d698c33c787b3400d15[color=lightseagreen,label="Output\nAnnotated_Gene_Table"]
+  10 -> kbeb4d20531a14d698c33c787b3400d15
+  11[label="DropletUtils Read10x"]
+  7 -> 11 [label="barcodes_out"]
+  10 -> 11 [label="out_file1"]
+  7 -> 11 [label="matrix_out"]
+  k81418e5189644648aa004fdf3694ee29[color=lightseagreen,label="Output\noutput_rds"]
+  11 -> k81418e5189644648aa004fdf3694ee29
+  12[label="DropletUtils emptyDrops"]
+  11 -> 12 [label="output_rds"]
+  kd50c0da53028493eb63e762f3c15d233[color=lightseagreen,label="Output\noutput_rdata"]
+  12 -> kd50c0da53028493eb63e762f3c15d233
+  13[label="SCEasy Converter"]
+  12 -> 13 [label="output_rdata"]
+  ke3f0a5c6979145f6a8ce7780bcc2db4a[color=lightseagreen,label="Output\noutput_anndata"]
+  13 -> ke3f0a5c6979145f6a8ce7780bcc2db4a
+  14[label="Inspect AnnData"]
+  13 -> 14 [label="output_anndata"]
+  ke5ee7a2f55f44a0183e531c0c388c281[color=lightseagreen,label="Output\nvar"]
+  14 -> ke5ee7a2f55f44a0183e531c0c388c281
+  15[label="Manipulate AnnData"]
+  13 -> 15 [label="output_anndata"]
+  kca3447c7207641a38e9b0c2d7367386c[color=lightseagreen,label="Output\nanndata"]
+  15 -> kca3447c7207641a38e9b0c2d7367386c
 }
