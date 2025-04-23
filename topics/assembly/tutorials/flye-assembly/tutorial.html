@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@4bf8e9b741bbab394f5c1b1d2e0135595b552bc2",
+		release: "galaxy-training-network@aa8105c1bcf755620ad609177262b1cfc0562152",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Genome assembly using PacBio data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-04-23 09:26:35 +0000">
+<meta name="DC.date" content="2025-04-23 16:22:59 +0000">
 <meta name="DC.creator" content="Anthony Bretaudeau">
 <meta name="DC.creator" content="Alexandre Cormier">
 <meta name="DC.creator" content="Erwan Corre">
@@ -191,7 +191,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-04-23 09:26:35 +0000",
+  "dateModified": "2025-04-23 16:22:59 +0000",
   "datePublished": "2021-11-29 14:55:42 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -270,7 +270,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Genome assembly using PacBio data",
   "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/flye-assembly/tutorial.html",
-  "version": 10,
+  "version": 11,
   "timeRequired": "PT6H",
   "teaches": "- Assemble a Genome with PacBio data\n- Assess assembly quality",
   "keywords": [
@@ -1075,6 +1075,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
+      "url": "https://bio.tools/tool/Flye",
+      "name": "Flye"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/busco",
+      "name": "BUSCO"
+    },
+    {
+      "@type": "Thing",
       "url": "https://bio.tools/tool/busco",
       "name": "BUSCO"
     },
@@ -1562,7 +1572,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (1 recent ratings, 3 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 10 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 11 </div>
 
     </blockquote>
     </section>
@@ -1641,8 +1651,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   <ol>
     <li>Reference genome is available here: <a href="https://www.ebi.ac.uk/ena/browser/view/GCA_047651775.1">ASM4765177v1 assembly for Aspergillus niger</a></li>
-    <li>Download the <code class="language-plaintext highlighter-rouge">WGS Set FASTA (JBKZXA01.fasta.gz)</code> on your computer</li>
-    <li>Upload this file on Galaxy</li>
+    <li>Download the <code class="language-plaintext highlighter-rouge">WGS Set FASTA (JBKZXA01.fasta.gz)</code> on your computer
+Make sure you download <code class="language-plaintext highlighter-rouge">WGS Set FASTA (JBKZXA01.fasta.gz)</code> and <em>NOT</em>  <code class="language-plaintext highlighter-rouge">ALL Set FASTA</code></li>
+    <li>Upload this file on Galaxy (Upload –&gt; Choose local file –&gt; Select the file –&gt; Start –&gt; Close)</li>
     <li>
       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">fasta.gz</code></p>
 
@@ -1759,12 +1770,13 @@ Hifiasm produces arguably the best single-sample telomere-to-telomere assemblies
     <div class="box-title hands-on-title" id="hands-on-assembly-with-flye"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Assembly with Flye</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0" title="Flye tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flye</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.9+galaxy0)</span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9.5+galaxy1" title="Flye tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flye</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.9.5+galaxy1)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input reads”</em>: the raw data (fastq.gz)</li>
           <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">PacBio HiFi</code></li>
           <li><em>“Number of polishing iterations”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
           <li><em>“Reduced contig assembly coverage”</em>: <code class="language-plaintext highlighter-rouge">Disable reduced coverage for initial disjointing assembly</code></li>
+          <li><em>“Generate a log file”</em>: Set to yes</li>
         </ul>
 
         <p>The tool produces four datasets: consensus, assembly graph, graphical fragment assembly and assembly info</p>
@@ -1796,21 +1808,45 @@ Hifiasm produces arguably the best single-sample telomere-to-telomere assemblies
 
 <h2 id="genome-assemblies-comparison-with-quast">Genome assemblies comparison with <strong>Quast</strong></h2>
 
-<p>A way to calculate metrics assembly is to use <strong><em>QUAST = QUality ASsessment Tool</em></strong>. Quast is a tool to evaluate genome assemblies by computing various metrics. The manual of Quast is here: <a href="http://quast.sourceforge.net/docs/manual.html#sec3">Quast</a></p>
+<p>A way to calculate metrics assembly is to use <strong><em>QUAST = QUality ASsessment Tool</em></strong>. Quast is a tool to evaluate genome assemblies by computing various metrics. The manual of Quast is here: <a href="http://quast.sourceforge.net/docs/manual.html#sec3">Quast</a>
+Quast allows to compare the assembly carried out with the reference genome and produces statistics such as the genome fraction.
+However, when comparing to a reference genome, Quast results do not display the assembly N50, therefore, in this tutorial, you will generate two quast reports : One specifying a reference genome and one not specifying a reference genome.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-quast"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Quast</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy3" title="Quast tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.2+galaxy3)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy3" title="Quast tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.2+galaxy3)</span> specifying a reference genome with the following parameters:
       <ul>
+        <li><em>“Assembly mode?”</em>: <code class="language-plaintext highlighter-rouge">Individual assembly (1 contig file per sample)</code></li>
         <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use dataset names</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">JBKZXA01.fasta.gz</code> (reference assembly), <code class="language-plaintext highlighter-rouge">fasta file</code> (output of <strong>GFA to FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) and/or <code class="language-plaintext highlighter-rouge">consensus</code> (output of <strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">JBKZXA01.fasta.gz</code> (reference assembly), <code class="language-plaintext highlighter-rouge">fasta file</code> (output of <strong>GFA to FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) and/or <code class="language-plaintext highlighter-rouge">consensus</code> (output of <strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           </ul>
         </li>
         <li><em>“Type of assembly”</em>: <code class="language-plaintext highlighter-rouge">Genome</code>
           <ul>
+            <li><em>“Use a reference genome?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+              <ul>
+                <li><em>“Reference genome”</em>: <code class="language-plaintext highlighter-rouge">JBKZXA01.fasta.gz</code> (reference assembly)</li>
+              </ul>
+            </li>
+            <li><em>“Type of organism”</em>: <code class="language-plaintext highlighter-rouge">Fungus: use of GeneMark-ES for gene finding, ...</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy3" title="Quast tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.2+galaxy3)</span> without specifying a reference genome with the following parameters:
+      <ul>
+        <li><em>“Assembly mode?”</em>: <code class="language-plaintext highlighter-rouge">Individual assembly (1 contig file per sample)</code></li>
+        <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use dataset names</code>
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">JBKZXA01.fasta.gz</code> (reference assembly), <code class="language-plaintext highlighter-rouge">fasta file</code> (output of <strong>GFA to FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) and/or <code class="language-plaintext highlighter-rouge">consensus</code> (output of <strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Type of assembly”</em>: <code class="language-plaintext highlighter-rouge">Genome</code>
+          <ul>
+            <li><em>“Use a reference genome?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
             <li><em>“Type of organism”</em>: <code class="language-plaintext highlighter-rouge">Fungus: use of GeneMark-ES for gene finding, ...</code></li>
           </ul>
         </li>
@@ -1847,12 +1883,12 @@ Hifiasm produces arguably the best single-sample telomere-to-telomere assemblies
   <div class="box-title hands-on-title" id="hands-on-busco-on-assembly"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: BUSCO on assembly</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0" title="Busco tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.2.2+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy0" title="Busco tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.8.0+galaxy0)</span> with the following parameters:
       <ul>
         <li><em>“Tool version”</em>: <code class="language-plaintext highlighter-rouge">Galaxy Version 5.8.0+galaxy0</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: Multiple datasets</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">JBKZXA01.fasta.gz</code> (reference assembly), <code class="language-plaintext highlighter-rouge">fasta file</code> (output of <strong>GFA to FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) and/or <code class="language-plaintext highlighter-rouge">consensus</code> (output of <strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Auto-detect or select lineage”</em>: <code class="language-plaintext highlighter-rouge">Select lineage</code> - Not working on April 16 2025
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">JBKZXA01.fasta.gz</code> (reference assembly), <code class="language-plaintext highlighter-rouge">fasta file</code> (output of <strong>GFA to FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) and/or <code class="language-plaintext highlighter-rouge">consensus</code> (output of <strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Auto-detect or select lineage”</em>: <code class="language-plaintext highlighter-rouge">Select lineage</code>
           <ul>
             <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">Fungi</code></li>
             <li><em>“Which outputs should be generated”</em>: <code class="language-plaintext highlighter-rouge">short summary text; summary image</code></li>
@@ -2176,6 +2212,11 @@ tools:
   revisions: 276f5d8712d5
   tool_panel_section_label: Assembly
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: flye
+  owner: bgruening
+  revisions: 13e27b9094e8
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: hifiasm
   owner: bgruening
   revisions: 5d365d5cbe9d
@@ -2183,12 +2224,12 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: busco
   owner: iuc
-  revisions: 0d243f458b53
+  revisions: 46ae58b1d792
   tool_panel_section_label: Annotation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: busco
   owner: iuc
-  revisions: 46ae58b1d792
+  revisions: e5c372c91e46
   tool_panel_section_label: Annotation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: fasta_stats
@@ -2352,7 +2393,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/4bf8e9b741bbab394f5c1b1d2e0135595b552bc2">4bf8e9b</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/aa8105c1bcf755620ad609177262b1cfc0562152">aa8105c</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
