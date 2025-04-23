@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@0b6bad30c13ab27d9193a252b0535d7b1ddbbe79",
+		release: "galaxy-training-network@3574fa7abafaa1b01b291336a57d0178689c3f33",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Inferring single cell trajectories with Monocle3">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-03-11 21:15:35 +0000">
+<meta name="DC.date" content="2025-04-23 08:54:05 +0000">
 <meta name="DC.creator" content="Julia Jakiela"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Single Cell / Inferring single cell trajectories with Monocle3 / Hands-on: Inferring single cell trajectories with Monocle3">
@@ -186,7 +186,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-03-11 21:15:35 +0000",
+  "dateModified": "2025-04-23 08:54:05 +0000",
   "datePublished": "2022-09-30 20:06:34 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -263,7 +263,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Inferring single cell trajectories with Monocle3",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html",
-  "version": 23,
+  "version": 24,
   "timeRequired": "PT2H",
   "teaches": "- Identify which operations to perform on an AnnData object to obtain the files needed for Monocle\n- Follow the Monocle3 workflow and choose the right parameter values\n- Compare the outputs from Scanpy and Monocle\n- Interpet trajectory analysis results",
   "keywords": [
@@ -1828,7 +1828,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Sep 30, 2022 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 11, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 23, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1848,7 +1848,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (1 recent ratings, 3 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 23 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 24 </div>
 
     </blockquote>
     </section>
@@ -2317,7 +2317,7 @@ Below is the table that we used in the previous tutorial to identify the cell ty
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>By looking at the table, you might give the 5 top gene IDs expressed in DP-M1. To save you some time and make the analysis more readable, we converted the gene IDs to gene names and they are as follows: Rps17, Rpl41, Rps26, Rps29, Rps28. They are all ribosomal! [You can do this yourself if you want by following this section of a previous tutorial that <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html#findmarkers">uses the gene names in one object to add to a table of Ensembl IDs</a>. These ribosomal differences might be due to housekeeping background, cell cycling, or even something more bioligically interesting…or all three!
+    <p>By looking at the table, you might give the 5 top gene IDs expressed in DP-M1. To save you some time and make the analysis more readable, we converted the gene IDs to gene names and they are as follows: Rps17, Rpl41, Rps26, Rps29, Rps28. They are all ribosomal! [You can do this yourself if you want by following this section of a previous tutorial that <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html#find-gene-markers">uses the gene names in one object to add to a table of Ensembl IDs</a>. These ribosomal differences might be due to housekeeping background, cell cycling, or even something more bioligically interesting…or all three!
 The plot also indicates other specifically expressed genes, such as Hmgb2, Pclaf, Rpl13, Rps19, Ybx1, Ncl, Hsp90ab1, Npm1.</p>
 
     <p>Whenever you want to explore what might be the function of a particular cluster or why it branches out from the trajectory, check the top markers for that cluster to draw biological conclusions. Thank you Maths!</p>
@@ -3041,7 +3041,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0b6bad30c13ab27d9193a252b0535d7b1ddbbe79">0b6bad3</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/3574fa7abafaa1b01b291336a57d0178689c3f33">3574fa7</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

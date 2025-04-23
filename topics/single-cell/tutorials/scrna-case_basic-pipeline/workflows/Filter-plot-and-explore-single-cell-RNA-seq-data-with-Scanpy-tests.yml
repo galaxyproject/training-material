@@ -1,0 +1,53 @@
+- doc: Test outline for Filter-plot-and-explore-single-cell-RNA-seq-data-with-Scanpy-(imported-from-uploaded-file)
+  job:
+    Batched_AnnData:
+      class: File
+      location: https://zenodo.org/records/15092468/files/Batched_Object.h5ad
+      filetype: h5ad
+  outputs:
+    obs:
+      has_n_lines:
+        value: 31671
+    var:
+      has_n_lines:
+        value: 35735
+    Ranked_Genes-Cluster:
+      has_text_matching:
+        expression: "group\tnames\tscores\tlogfoldchanges\tpvals\tpvals_adj\tSymbol"
+        expression: "0\tENSMUSG00000020914\t47.984283\t3.070437\t0.0\t0.0\tTop2a"
+        expression: "0\tENSMUSG00000054717\t41.39745\t2.245514\t5.17[0-9]*e-[0-9]*\t1.37[0-9]*e-[0-9]*\tHmgb2"
+        expression: "1\tENSMUSG00000057113\t18.841383\t1.3139672\t2.46[0-9]*e-[0-9]*\t7.87[0-9]*e-[0-9]*\tNpm1"
+        expression: "3\tENSMUSG00000057113\t9.590677\t0.8623196\t2.05[0-9]*e-[0-9]*\t2.66[0-9]*e-[0-9]*\tNpm1"
+        expression: "5\tENSMUSG00000042207\t6.358911\t1.7461212\t3.16[0-9]*e-[0-9]*\t1.01[0-9]*e-[0-9]*\tKdm5b"
+        expression: "6\tENSMUSG00000013974\t2.6486444\t10.623755\t0.0125[0-9]*\t0.9777[0-9]*\tMcemp1"
+    Annotated_Object:
+      asserts:
+        has_h5_keys:
+            keys: "obs/louvain"
+            keys: "obs/cell_type"
+            keys: "var/highly_variable"
+            keys: "var/dispersions_norm"
+            keys: "uns/umap"
+            keys: "uns/tsne"
+            keys: "uns/rank_genes_groups"
+            keys: "obsm/X_pca"
+            keys: "obsm/X_tsne"
+            keys: "obsm/X_umap"
+    Ranked_Genes-by_Genotype:
+      has_text_matching:
+        expression: "group\tnames\tscores\tlogfoldchanges\tpvals\tpvals_adj\tSymbol"
+        expression: "knockout\tENSMUSG00000048583\t14.931247\t5.810112\t1.80[0-9]*e-[0-9]*\t3.42[0-9]*e-[0-9]\tIgf2"
+        expression: "knockout\tENSMUSG00000004455\t5.615425\t0.5243466\t2.06[0-9]*e-[0-9]*\t7.55[0-9]*e-[0-9]*\tPpp1cc"
+        expression: "wildtype\tENSMUSG00000090733\t54.93965\t2.348668\t0.0\t0.0\tRps27"
+        expression: "wildtype\tENSMUSG00000041841\t38.618492\t1.7755865\t1.00[0-9]*e-[0-9]*\t1.46[0-9]*e-[0-9]*\tRpl37"
+        expression: "wildtype\tENSMUSG00000022890\t21.12543\t1.0238636\t2.55[0-9]*e-[0-9]*\t3.95[0-9]*e-[0-9]*\tAtp5j"
+    Annotated_Plots:
+      has_size:
+        size: 2.441
+        delta: 200
+      has_image_width:
+        width: 2388
+        delta: 25
+      has_image_height:
+        height: 1264
+        delta: 25
