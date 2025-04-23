@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@3574fa7abafaa1b01b291336a57d0178689c3f33",
+		release: "galaxy-training-network@32ba140a2ec4e3fa77d0d91d8be540e4d41bef98",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,13 +68,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Genome assembly and assembly QC - Introduction short version">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-04-22 12:37:09 +0000">
+<meta name="DC.date" content="2025-04-23 12:05:55 +0000">
 <meta name="DC.creator" content="Solenne Correard">
-<meta name="DC.creator" content="Alexandre Cormier">
-<meta name="DC.creator" content="Laura Leroi"><meta name="description" content="### Steps before starting a genome project  .left[  - **Step 1**: Gather information about the target species : location, overlap with Indigenous People or local communities territories, expected genome size, ploidy, micro-chromosomes, organelles, etc. What type of data is already available (reference gneomes, raw data, etc) : INSDC  - **Step 2**: If appropriate (depending on species and sampling location), engage with local communities, Indigenous people and/or local scientists who may have Traditional Ecological Knowledge (TEK) associated to the species. Obtain appropriate consent and permits (Nagoya protocol) before sampling.  - **Step 3**: Build a broad community of collaborators for the project, if possible.  - **Step 4**: Select the best possible DNA source and an optimal extraction procedure - **Sampling is THE key step**  - **Step 5**: Choose an appropriate sequencing technology  - **Step 6**: Sequence and assemble! ]  ---  ### Steps before starting a genome project - ERGA m...">
+<meta name="DC.creator" content="Stéphanie Robin"><meta name="description" content="### Genome assembly   .left[ Goal: Reconstruct the sequences of a complete genome, or as close as possible to the complete genome, from sequences of DNA fragments (the  reads ).  Genome assembly consists of aligning and reconstructing these fragments to form a continuous sequence (that of the chromosomes) or a set of contiguous sequences (called contigs or scaffolds). ]  .image-1[   ![Assembly overview](../../images/assembly_overview.png) ]  .footnote[https://www.hudsonalpha.org/sequencing-from-scratch-reference-genomes-and-de-novo-sequence-assembly/]  ---  ### Genome assembly vs alignment   .image-1[   ![Alignment vs assembly](../../images/assembly_vs_align.png) ]  .footnote[https://www.hudsonalpha.org/sequencing-from-scratch-reference-genomes-and-de-novo-sequence-assembly/]  ---  ### Steps before starting a genome project  .left[ - **Step 1**: Gather information about the target species : location, overlap with Indigenous People or local communities territories, expected genome si...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Assembly / Genome assembly and assembly QC - Introduction short version / Slides: Genome assembly and assembly QC - Introduction short version">
-        <meta property="og:description" content="### Steps before starting a genome project  .left[  - **Step 1**: Gather information about the target species : location, overlap with Indigenous People or local communities territories, expected genome size, ploidy, micro-chromosomes, organelles, etc. What type of data is already available (reference gneomes, raw data, etc) : INSDC  - **Step 2**: If appropriate (depending on species and sampling location), engage with local communities, Indigenous people and/or local scientists who may have Traditional Ecological Knowledge (TEK) associated to the species. Obtain appropriate consent and permits (Nagoya protocol) before sampling.  - **Step 3**: Build a broad community of collaborators for the project, if possible.  - **Step 4**: Select the best possible DNA source and an optimal extraction procedure - **Sampling is THE key step**  - **Step 5**: Choose an appropriate sequencing technology  - **Step 6**: Sequence and assemble! ]  ---  ### Steps before starting a genome project - ERGA m...">
+        <meta property="og:description" content="### Genome assembly   .left[ Goal: Reconstruct the sequences of a complete genome, or as close as possible to the complete genome, from sequences of DNA fragments (the  reads ).  Genome assembly consists of aligning and reconstructing these fragments to form a continuous sequence (that of the chromosomes) or a set of contiguous sequences (called contigs or scaffolds). ]  .image-1[   ![Assembly overview](../../images/assembly_overview.png) ]  .footnote[https://www.hudsonalpha.org/sequencing-from-scratch-reference-genomes-and-de-novo-sequence-assembly/]  ---  ### Genome assembly vs alignment   .image-1[   ![Alignment vs assembly](../../images/assembly_vs_align.png) ]  .footnote[https://www.hudsonalpha.org/sequencing-from-scratch-reference-genomes-and-de-novo-sequence-assembly/]  ---  ### Steps before starting a genome project  .left[ - **Step 1**: Gather information about the target species : location, overlap with Indigenous People or local communities territories, expected genome si...">
         <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -218,9 +217,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
 		<td>
 			<a href="/training-material/hall-of-fame/scorreard/" class="contributor-badge contributor-scorreard"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/scorreard?s=36" alt="Solenne Correard avatar" width="36" class="avatar" />
-    Solenne Correard</a><a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/alexcorm?s=36" alt="Alexandre Cormier avatar" width="36" class="avatar" />
-    Alexandre Cormier</a><a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/lleroi?s=36" alt="Laura Leroi avatar" width="36" class="avatar" />
-    Laura Leroi</a>
+    Solenne Correard</a><a href="/training-material/hall-of-fame/stephanierobin/" class="contributor-badge contributor-stephanierobin"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/stephanierobin?s=36" alt="Stéphanie Robin avatar" width="36" class="avatar" />
+    Stéphanie Robin</a>
 		</td>
 	</tr>
 	
@@ -238,9 +236,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
 		<td>
 			<a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" />
-    Anthony Bretaudeau</a><a href="/training-material/hall-of-fame/stephanierobin/" class="contributor-badge contributor-stephanierobin"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/stephanierobin?s=36" alt="Stéphanie Robin avatar" width="36" class="avatar" />
-    Stéphanie Robin</a><a href="/training-material/hall-of-fame/r1corre/" class="contributor-badge contributor-r1corre"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/r1corre?s=36" alt="Erwan Corre avatar" width="36" class="avatar" />
-    Erwan Corre</a></td>
+    Anthony Bretaudeau</a><a href="/training-material/hall-of-fame/r1corre/" class="contributor-badge contributor-r1corre"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/r1corre?s=36" alt="Erwan Corre avatar" width="36" class="avatar" />
+    Erwan Corre</a><a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/alexcorm?s=36" alt="Alexandre Cormier avatar" width="36" class="avatar" />
+    Alexandre Cormier</a><a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/lleroi?s=36" alt="Laura Leroi avatar" width="36" class="avatar" />
+    Laura Leroi</a></td>
 	</tr>
 	
 
@@ -284,28 +283,53 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		
 
 		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Apr 22, 2025 </div>
-		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Apr 22, 2025 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Apr 23, 2025 </div>
 
 	<hr />
 
 
-	<h3 id="steps-before-starting-a-genome-project">Steps before starting a genome project</h3>
+	<h3 id="genome-assembly">Genome assembly</h3>
 
 <p>.left[
-<br /></p>
+Goal: Reconstruct the sequences of a complete genome, or as close as possible to the complete genome, from sequences of DNA fragments (the “reads”).
+<br /><br />
+Genome assembly consists of aligning and reconstructing these fragments to form a continuous sequence (that of the chromosomes) or a set of contiguous sequences (called contigs or scaffolds).
+]</p>
+
+<p>.image-1[
+  <img src="../../images/assembly_overview.png" alt="Assembly overview" />
+]</p>
+
+<p>.footnote[https://www.hudsonalpha.org/sequencing-from-scratch-reference-genomes-and-de-novo-sequence-assembly/]</p>
+
+<hr />
+
+<h3 id="genome-assembly-vs-alignment">Genome assembly vs alignment</h3>
+
+<p>.image-1[
+  <img src="../../images/assembly_vs_align.png" alt="Alignment vs assembly" />
+]</p>
+
+<p>.footnote[https://www.hudsonalpha.org/sequencing-from-scratch-reference-genomes-and-de-novo-sequence-assembly/]</p>
+
+<hr />
+
+<h3 id="steps-before-starting-a-genome-project">Steps before starting a genome project</h3>
+
+<p>.left[</p>
 <ul>
   <li><strong>Step 1</strong>: Gather information about the target species : location, overlap with Indigenous People or local communities territories, expected genome size, ploidy, micro-chromosomes, organelles, etc.
-What type of data is already available (reference gneomes, raw data, etc) : INSDC
-<br /></li>
+What type of data is already available (reference gneomes, raw data, etc) : INSDC (ENA, NCBI, DBNJ)
+<br /><br /></li>
   <li><strong>Step 2</strong>: If appropriate (depending on species and sampling location), engage with local communities, Indigenous people and/or local scientists who may have Traditional Ecological Knowledge (TEK) associated to the species.
 Obtain appropriate consent and permits (Nagoya protocol) before sampling.
-<br /></li>
+<br /><br /></li>
   <li><strong>Step 3</strong>: Build a broad community of collaborators for the project, if possible.
-<br /></li>
+<br /><br /></li>
   <li><strong>Step 4</strong>: Select the best possible DNA source and an optimal extraction procedure - <strong>Sampling is THE key step</strong>
-<br /></li>
+<br /><br /></li>
   <li><strong>Step 5</strong>: Choose an appropriate sequencing technology
-<br /></li>
+<br /><br /></li>
   <li><strong>Step 6</strong>: Sequence and assemble!
 ]</li>
 </ul>
@@ -314,7 +338,7 @@ Obtain appropriate consent and permits (Nagoya protocol) before sampling.
 
 <h3 id="steps-before-starting-a-genome-project---erga-model">Steps before starting a genome project - ERGA model</h3>
 
-<p>.image-1[
+<p>.image-20[
   <img src="../../images/ERGA_process.jpg" alt="ERGA process" />
 ]</p>
 
@@ -332,77 +356,27 @@ Obtain appropriate consent and permits (Nagoya protocol) before sampling.
   <li>Bibliography</li>
 </ul>
 
-<p>.image-1[
-  <img src="../../images/goat_logo.png" alt="GOAT logo" />
+<p>.image-5[
+  <img src="../../images/genome_assembly_introduction/ploidy.png" alt="Heterozigous genotype" />
+  <img src="../../images/goat_logo_lq.jpg" alt="GOAT logo" />
 ]
 ]</p>
 
 <p>.pull-right[
-.image-100[
+.image-50[
   <img src="../../images/genome_assembly_introduction/genomes-size.png" alt="variation in estimated genome sizes in base pairs" />
-]]</p>
-
-<p>.footnote[https://commons.wikimedia.org/w/index.php?curid=19537795]</p>
-
-<hr />
-
-<h3 id="genome-information-ploidy-level">Genome information: Ploidy level</h3>
-
-<p>.pull-right[
-.image-55[
-  <img src="../../images/genome_assembly_introduction/ploidy.png" alt="Heterozigous genotype" />
-]]</p>
-
-<p>.pull-left[</p>
-
-<p><strong>Ploidy (N):</strong></p>
-
-<p>Number of sets of chromosomes in a cell</p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Organism</th>
-      <th style="text-align: center">Ploidy</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">Bacteria</td>
-      <td style="text-align: center">1N</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Human, mouse, rat</td>
-      <td style="text-align: center">2N</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Amphibians (<em>Xenopus</em>)</td>
-      <td style="text-align: center">2N to 12N</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Plants (wheat)</td>
-      <td style="text-align: center">6N</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><strong>Autopolyploid</strong></td>
-      <td style="text-align: center">.</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><strong>Hybrids</strong></td>
-      <td style="text-align: center">.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>]</p>
+  ]]</p>
 
 <p><strong>Higher ploidy -&gt; harder to assemble =&gt; Increase of sequencing depth</strong></p>
 
-<p>.footnote[Daniel Hartl. Essential Genetics: A Genomics Perspective. Jones &amp; Bartlett Learning. p. 177. ISBN 978-0-7637-7364-9. (2011).]</p>
+<p>.footnote[https://commons.wikimedia.org/w/index.php?curid=19537795
+<br /><br />
+Daniel Hartl. Essential Genetics: A Genomics Perspective. Jones &amp; Bartlett Learning. p. 177. ISBN 978-0-7637-7364-9. (2011).
+]</p>
 
 <hr />
 
-<h3 id="genome-information-heterozygosity-level">Genome information: Heterozygosity level</h3>
+<h3 id="genome-information-heterozygosity-level--others">Genome information: Heterozygosity level &amp; Others</h3>
 
 <p>.pull-left[
 .left[
@@ -418,14 +392,8 @@ Obtain appropriate consent and permits (Nagoya protocol) before sampling.
   <img src="../../images/genome_assembly_introduction/heterozygous.jpg" alt="Heterozigous genotype" />
 ]]</p>
 
-<p><strong>Higher heterozygosity -&gt; harder to assemble =&gt; Increase of sequencing depth</strong></p>
-
-<p>.footnote[https://www.genome.gov/genetics-glossary/heterozygous]</p>
-
-<hr />
-
-<h3 id="genome-information-others">Genome information: Others</h3>
-
+<p><strong>Higher heterozygosity -&gt; harder to assemble =&gt; Increase of sequencing depth</strong>
+<br /><br /></p>
 <ul>
   <li><strong>Karyotype:</strong> chromosome number
 <br /></li>
@@ -436,6 +404,8 @@ Obtain appropriate consent and permits (Nagoya protocol) before sampling.
   <li>Is there any other <strong>useful data (NCBI, SRA, ENA, etc)</strong> that could improve my assembly?</li>
 </ul>
 
+<p>.footnote[https://www.genome.gov/genetics-glossary/heterozygous]</p>
+
 <hr />
 
 <h3 id="dna-extraction-tips">DNA extraction tips</h3>
@@ -443,15 +413,109 @@ Obtain appropriate consent and permits (Nagoya protocol) before sampling.
 <p>.left[</p>
 <ul>
   <li>Many <strong>DNA extraction protocol</strong> are available for a wide range of species/taxa (VGP, Darwin Tree of Life, Nanopore, PacBio, etc)
-<br /></li>
+<br /><br /></li>
   <li><strong>Keep DNA samples</strong> from the same individual in case of library preparation or sequencing failure, need more coverage, new sequencing technology, etc
-<br /></li>
+<br /><br /></li>
   <li>Use a <strong>single individual</strong> and sequence a <strong>haploid, a highly inbred diploid</strong> organism, or an <strong>isogenic</strong> individual</li>
 </ul>
 
-<p>]</p>
+<h2>]</h2>
+
+<h3 id="sequencing--bioinformatics">Sequencing / Bioinformatics</h3>
 
 <hr />
+
+<h3 id="bioinformatics-steps---definitions">Bioinformatics steps - Definitions</h3>
+
+<p>.image-5[
+  <img src="../../images/genome_assembly_introduction/scaffolding.png" alt="Illustration of the working principle of scaffolding" />
+]</p>
+
+<p>.left[
+<strong>Contig</strong>: a contiguous sequence in an assembly. A contig does not contain long stretches of unknown sequences (aka assembly <strong>gaps</strong>).
+The contig is usually generated using the long-reads data.
+<br />
+<strong>Scaffold</strong>: a sequence consists of one or multiple contigs connected by assembly gaps of typically inexact sizes. A scaffold is also called a <strong>supercontig</strong>, though this terminology is rarely used nowadays.
+Usually, scaffolds are generated using the Hi-C data
+<br />
+<strong>Assembly</strong>: a set of contigs or scaffolds.
+]</p>
+
+<hr />
+
+<h3 id="assembly-algorithms---overlap-layout-consensus-olc">Assembly algorithms - Overlap-Layout-Consensus (OLC)</h3>
+
+<p>.pull-left[
+.left[
+1 node = 1 read
+<br /><br />
+1 bridge = 1 overlap
+<br /><br />
+Determine the best path through the graph
+<br /><br />
+Remove redundant information
+<br /><br />
+Process repeated many times
+<br /><br />
+Sequences combined to form the final sequence
+]]</p>
+
+<p>.pull-right[
+.image-100[
+  <img src="../../images/olc_pic.png" alt="Heterozigous genotype" />
+]]</p>
+
+<p>.footnote[https://www.researchgate.net/figure/Overlap-layout-consensus-genome-assembly-algorithm-Reads-are-provided-to-the-algorithm_fig2_26266221
+]</p>
+
+<hr />
+
+<h3 id="assembly-algorithms---de-bruijn-graphs">Assembly algorithms - De Bruijn Graphs</h3>
+
+<p>.pull-left[
+.left[
+1 node = 1 k-mer
+<br /><br />
+1 edge = 1 overlap
+<br /><br />
+Find the path that consistently traverses the graph
+]]</p>
+
+<p>.pull-right[
+.image-100[
+  <img src="../../images/debruijn_4.png" alt="Heterozigous genotype" />
+]]</p>
+
+<p>.footnote[https://www.researchgate.net/figure/Illustration-of-de-Bruijn-graph-based-assembly_fig1_229437536
+]</p>
+
+<hr />
+
+<h3 id="assembly---scaffolding-and-manual-curation">Assembly - Scaffolding (and manual curation)</h3>
+
+<p>.left[
+Hi-C: Capturing interactions between different parts of a genome by measuring the physical proximity of DNA segments in the nucleus:
+<br />
+Binding of closely interacting DNA regions.
+<br />
+DNA is digested, labeled, and joined using ligations to create hybrid fragments.
+<br />
+These fragments are sequenced to reveal which parts of the genome were spatially close, even if they are distant in terms of linear sequence.
+<br /><br />
+Hi-C allows for the transition from the assembly of fragmented contigs to:</p>
+<ul>
+  <li>a high-quality assembly, with scaffolds</li>
+  <li>a whole chromosome assembly
+]</li>
+</ul>
+
+<p>.image-50[
+  <img src="../../images/arima.png" alt="Arima" />
+]</p>
+
+<p>.footnote[https://arimagenomics.com/applications/genome-assembly/
+]
+—</p>
 
 <h3 id="sequencing-steps---the-options">Sequencing steps - The options</h3>
 
@@ -492,11 +556,10 @@ Sequencing technology for <strong>assembly</strong>:</p>
 <ul>
   <li><strong>Hi-C:</strong> <strong>restriction enzyme fragmentation</strong> (single, multiples sites or DNAse). Need huge amount of coverage.
 Providers : Arima Genomics, Phase Genomics, Dovetail Genomics</li>
-  <li>Optical mapping: technique to physically locate specific enzymes restriction sites or sequence motifs to produce DNA sequence fingerprints.</li>
-</ul>
-
-<p>Providers : BioNano, BGI</p>
-<ul>
+  <li>
+    <p>Optical mapping: technique to physically locate specific enzymes restriction sites or sequence motifs to produce DNA sequence fingerprints.
+Providers : BioNano, BGI</p>
+  </li>
   <li>Mate pair (deprecated)</li>
   <li>BAC/YAC/Fosmids (deprecated)</li>
 </ul>
@@ -511,26 +574,6 @@ Polishing is no longer necessary or recommended</li>
 </ul>
 
 <p>]</p>
-
-<hr />
-
-<h3 id="bioinformatics-steps---defintions">Bioinformatics steps - Defintions</h3>
-
-<p>.image-60[
-  <img src="../../images/Schematic-representation-of-the-method-used-to-assemble-Illumina-reads-into-contigs-and.png" alt="Illustration of the working principle of scaffolding" />
-]</p>
-
-<p>.left[
-<strong>Contig</strong>: a contiguous sequence in an assembly. A contig does not contain long stretches of unknown sequences (aka assembly <strong>gaps</strong>).
-The contig is usually generated using the long-reads data.
-<br />
-<strong>Scaffold</strong>: a sequence consists of one or multiple contigs connected by assembly gaps of typically inexact sizes. A scaffold is also called a <strong>supercontig</strong>, though this terminology is rarely used nowadays.
-Usually, scaffolds are generated using the Hi-C data
-<br />
-<strong>Assembly</strong>: a set of contigs or scaffolds.
-]</p>
-
-<p>.footnote[Johnson, Marc &amp; Carpenter, Eric &amp; Zhijian et al. (2012). Evaluating Methods for Isolating Total RNA and Predicting the Success of Sequencing Phylogenetically Diverse Plant Transcriptomes. PloS one. 7. e50226. 10.1371/journal.pone.0050226.]</p>
 
 <hr />
 
@@ -556,7 +599,7 @@ Different level of assembly exist today :
 
 <hr />
 
-<h3 id="bioinformatics-steps---defintions-1">Bioinformatics steps - Defintions</h3>
+<h3 id="bioinformatics-steps---definitions-1">Bioinformatics steps - Definitions</h3>
 
 <p>.left[
 <strong>Haplotig</strong>: a contig that comes from the same haplotype. In an unphased assembly, a contig may join alleles from different parental haplotypes in a diploid or polyploid genome.
@@ -916,7 +959,7 @@ Tutorial Content is licensed under
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/3574fa7abafaa1b01b291336a57d0178689c3f33">3574fa7</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/32ba140a2ec4e3fa77d0d91d8be540e4d41bef98">32ba140</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
