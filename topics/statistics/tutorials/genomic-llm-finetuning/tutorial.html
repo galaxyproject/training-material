@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@537219121fa3c8974bf2db08e2f02fc565b8c04c",
+		release: "galaxy-training-network@8ded47166aa181db16a3e59262d4ab307ee55827",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Fine-tuning a LLM for DNA Sequence Classification">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-04-17 09:19:54 +0000">
+<meta name="DC.date" content="2025-04-25 12:24:28 +0000">
 <meta name="DC.creator" content="Raphael Mourad">
 <meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -187,7 +187,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Draft",
-  "dateModified": "2025-04-17 09:19:54 +0000",
+  "dateModified": "2025-04-25 12:24:28 +0000",
   "datePublished": "2025-04-17 09:19:54 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -245,7 +245,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Fine-tuning a LLM for DNA Sequence Classification",
   "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-finetuning/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT3H",
   "teaches": "- Load a pre-trained model and modify its architecture to include a classification layer.\n- Prepare and preprocess labeled DNA sequences for fine-tuning.\n- Define and configure training parameters to optimize the model's performance on the classification task.\n- Evaluate the fine-tuned model's accuracy and robustness in distinguishing between different classes of DNA sequences.",
   "keywords": [
@@ -1981,7 +1981,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 17, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 17, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 25, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1999,7 +1999,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -2130,6 +2130,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">peft</span><span class="o">==</span><span class="mf">0.13</span><span class="p">.</span><span class="mi">2</span>
 <span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">torch</span><span class="o">==</span><span class="mf">2.5</span><span class="p">.</span><span class="mi">0</span>
 <span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">transformers</span> <span class="o">-</span><span class="n">U</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">progressbar</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">bitsandbytes</span>
 </code></pre></div></div>
 
 <blockquote class="question">
@@ -2412,7 +2414,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <span class="n">bf16</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
     <span class="n">report_to</span><span class="o">=</span><span class="sh">"</span><span class="s">none</span><span class="sh">"</span><span class="p">,</span>
     <span class="n">load_best_model_at_end</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
-    <span class="n">report_to</span><span class="o">=</span><span class="sh">"</span><span class="s">none</span><span class="sh">"</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div></div>
 
@@ -2608,16 +2609,24 @@ tokenizer.pad_token = "[PAD]"
 
 </blockquote>
 
+<p>Before we proceed we import some classes and functions from <code class="language-plaintext highlighter-rouge">scriptPython/function.py</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### LOAD FUNCTIONS MODULE
+</span><span class="kn">import</span> <span class="n">sys</span>
+<span class="n">sys</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">"</span><span class="s">scriptPython/</span><span class="sh">"</span><span class="p">)</span>
+<span class="kn">from</span> <span class="n">functions</span> <span class="kn">import</span> <span class="o">*</span>
+</code></pre></div></div>
+
 <p>We use the <code class="language-plaintext highlighter-rouge">SupervisedDataset</code> class to load and prepare the datasets. This class handles the tokenization and formatting of the data, making it ready for model training and evaluation.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train_dataset</span> <span class="o">=</span> <span class="nc">SupervisedDataset</span><span class="p">(</span>
     <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
-    <span class="n">data_path</span><span class="o">=</span><span class="nc">Path</span><span class="p">(</span><span class="n">data_path</span> <span class="o">/</span> <span class="sh">"</span><span class="s">train.csv</span><span class="sh">"</span><span class="p">),</span>
+    <span class="n">data_path</span><span class="o">=</span><span class="nc">Path</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span> <span class="o">/</span> <span class="sh">"</span><span class="s">train.csv</span><span class="sh">"</span><span class="p">,</span>
     <span class="n">kmer</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">val_dataset</span> <span class="o">=</span> <span class="nc">SupervisedDataset</span><span class="p">(</span>
     <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
-    <span class="n">data_path</span><span class="o">=</span><span class="nc">Path</span><span class="p">(</span><span class="n">data_path</span> <span class="o">/</span> <span class="sh">"</span><span class="s">dev.csv</span><span class="sh">"</span><span class="p">),</span>
+    <span class="n">data_path</span><span class="o">=</span><span class="nc">Path</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span> <span class="o">/</span> <span class="sh">"</span><span class="s">dev.csv</span><span class="sh">"</span><span class="p">,</span>
     <span class="n">kmer</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div></div>
@@ -2710,10 +2719,9 @@ tokenizer.pad_token = "[PAD]"
 
 <p>We can now set up the <code class="language-plaintext highlighter-rouge">Trainer</code> to manage the training and evaluation process of our model. The <code class="language-plaintext highlighter-rouge">Trainer</code> class simplifies the training loop, handling many of the complexities involved in training deep learning models.</p>
 
-<p>Before setting up the <code class="language-plaintext highlighter-rouge">Trainer</code>, we load custom function (<code class="language-plaintext highlighter-rouge">compute_metrics</code>) to compute metrics for <code class="language-plaintext highlighter-rouge">Trainer</code> stored in the a <code class="language-plaintext highlighter-rouge">scriptPython/functions.py</code>:</p>
+<p>We first need to attach the LoRA adapter to the model:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sys</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="sh">"</span><span class="s">scriptPython/</span><span class="sh">"</span><span class="p">)</span>
-<span class="kn">from</span> <span class="n">functions</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="p">.</span><span class="nf">add_adapter</span><span class="p">(</span><span class="n">peft_config</span><span class="p">,</span> <span class="n">adapter_name</span><span class="o">=</span><span class="sh">"</span><span class="s">lora_1</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Let’s now set up the <code class="language-plaintext highlighter-rouge">Trainer</code>:</p>
@@ -2784,7 +2792,7 @@ tokenizer.pad_token = "[PAD]"
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test_dataset</span> <span class="o">=</span> <span class="nc">SupervisedDataset</span><span class="p">(</span>
     <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
-    <span class="n">data_path</span><span class="o">=</span><span class="nc">Path</span><span class="p">(</span><span class="n">data_path</span> <span class="o">/</span> <span class="sh">"</span><span class="s">test.csv</span><span class="sh">"</span><span class="p">),</span>
+    <span class="n">data_path</span><span class="o">=</span><span class="nc">Path</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span> <span class="o">/</span> <span class="sh">"</span><span class="s">test.csv</span><span class="sh">"</span><span class="p">,</span>
     <span class="n">kmer</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div></div>
@@ -2800,26 +2808,67 @@ tokenizer.pad_token = "[PAD]"
 
 <p>The evaluation results are stored in the <code class="language-plaintext highlighter-rouge">results</code> variable, which contains the computed metrics. We can analyze these <code class="language-plaintext highlighter-rouge">results</code> to gain insights into the model’s performance and make informed decisions about further improvements or deployment.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">results</span>
-</code></pre></div></div>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eval_loss                      0.424961
-eval_accuracy                  0.804000
-eval_f1                        0.800838
-eval_matthews_correlation      0.628276
-eval_precision                 0.824614
-eval_recall                    0.804000
-eval_runtime                   6.548800
-eval_samples_per_second      152.699000
-eval_steps_per_second          9.620000
-epoch                          3.000000
-</code></pre></div></div>
-
 <blockquote class="question">
   <div class="box-title question-title" id="question-21"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
+  <p>What is stored in <code class="language-plaintext highlighter-rouge">results</code>? How do you interpret this information?</p>
+
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-21"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-21" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p><code class="language-plaintext highlighter-rouge">results</code> provides a comprehensive overview of the model’s performance on the evaluation dataset with:</p>
+    <ol>
+      <li>
+        <p><strong>eval_loss (0.424961)</strong>: This metric represents the loss value calculated on the evaluation dataset. Lower values indicate better model performance.</p>
+
+        <p>A loss of 0.425 suggests that the model is reasonably well-fitted to the data, though the specific interpretation depends on the context and the loss function used (e.g., cross-entropy for classification tasks).</p>
+      </li>
+      <li>
+        <p><strong>eval_accuracy (0.804000)</strong>: Accuracy measures the proportion of correctly predicted instances out of the total instances.</p>
+
+        <p>An accuracy of 80.4% indicates that the model correctly predicted the class for 80.4% of the samples in the evaluation dataset.</p>
+      </li>
+      <li>
+        <p><strong>eval_f1 (0.800838)</strong>: The F1 score is the harmonic mean of precision and recall, providing a single metric that balances both concerns.</p>
+
+        <p>An F1 score of 0.801 suggests a good balance between precision and recall, indicating that the model performs well in both identifying positive cases and minimizing false positives and negatives.</p>
+      </li>
+      <li>
+        <p><strong>eval_matthews_correlation (0.628276)</strong>: The Matthews Correlation Coefficient (MCC) is a measure of the quality of binary classifications, taking into account true and false positives and negatives.</p>
+
+        <p>An MCC of 0.628 indicates a moderate to strong correlation between the predicted and actual classes, suggesting the model is performing better than random guessing.</p>
+      </li>
+      <li>
+        <p><strong>eval_precision (0.824614)</strong>: Precision is the ratio of correctly predicted positive observations to the total predicted positives.</p>
+
+        <p>A precision of 82.5% means that out of all the instances predicted as positive, 82.5% were actually positive.</p>
+      </li>
+      <li>
+        <p><strong>eval_recall (0.804000)</strong>: Recall (or sensitivity) is the ratio of correctly predicted positive observations to all observations in the actual class.</p>
+
+        <p>A recall of 80.4% indicates that the model correctly identified 80.4% of all actual positive cases.</p>
+      </li>
+      <li>
+        <p><strong>eval_runtime (6.548800)</strong>: The total time taken to evaluate the model on the dataset.</p>
+
+        <p>A runtime of 6.55 seconds provides insight into the computational efficiency of the evaluation process.</p>
+      </li>
+      <li>
+        <p><strong>eval_samples_per_second (152.699000)</strong>: The number of samples processed per second during evaluation.</p>
+
+        <p>Processing 152.7 samples per second indicates the efficiency of the evaluation pipeline.</p>
+      </li>
+      <li>
+        <p><strong>eval_steps_per_second (9.620000)</strong>: The number of evaluation steps completed per second.</p>
+
+        <p>Completing 9.62 steps per second reflects the speed of the evaluation process.</p>
+      </li>
+      <li>
+        <p><strong>epoch (3.000000)</strong>: The number of training epochs completed before this evaluation.</p>
+      </li>
+    </ol>
+
+    <p>The evaluation was conducted after 3 epochs of training, providing context for the model’s learning progress.</p>
 
   </blockquote>
 
@@ -3105,7 +3154,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/537219121fa3c8974bf2db08e2f02fc565b8c04c">5372191</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8ded47166aa181db16a3e59262d4ab307ee55827">8ded471</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@537219121fa3c8974bf2db08e2f02fc565b8c04c",
+		release: "galaxy-training-network@8ded47166aa181db16a3e59262d4ab307ee55827",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-04-17 09:19:54 +0000">
+<meta name="DC.date" content="2025-04-25 12:24:28 +0000">
 <meta name="DC.creator" content="Raphael Mourad">
 <meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -189,7 +189,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Draft",
-  "dateModified": "2025-04-17 09:19:54 +0000",
+  "dateModified": "2025-04-25 12:24:28 +0000",
   "datePublished": "2025-04-17 09:19:54 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -247,7 +247,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences",
   "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-pretraining/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT3H",
   "teaches": "- Identify and load a pre-trained language model (LLM) suitable for DNA sequence analysis.\n- Explain the role of a tokenizer in converting DNA sequences into numerical tokens for model processing.\n- Prepare and tokenize DNA sequence datasets for model training and evaluation.\n- Configure and implement data collation to organize tokenized data into batches for efficient training.\n- Define and configure hyperparameters for pretraining a model, such as learning rate and batch size.\n- Monitor and evaluate the model's performance during training to ensure effective learning.\n- Use the trained model to generate embeddings for DNA sequences and interpret these embeddings for downstream bioinformatics applications.\n- Develop a complete workflow for training a language model on DNA sequences, from data preparation to model evaluation, and apply it to real-world bioinformatics tasks.",
   "keywords": [
@@ -1901,7 +1901,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 17, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 17, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 25, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1919,7 +1919,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -2052,6 +2052,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">datasets</span><span class="o">==</span><span class="mf">3.0</span><span class="p">.</span><span class="mi">1</span>
 <span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">transformers</span>
 <span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">torch</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">flash</span><span class="o">-</span><span class="n">attn</span>
 </code></pre></div></div>
 
 <blockquote class="question">
@@ -2078,9 +2079,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <li>
         <p><code class="language-plaintext highlighter-rouge">transformers</code>: A library by Hugging Face that provides implementations of state-of-the-art transformer models for natural language processing (NLP). It includes pre-trained models and tools for fine-tuning, making it easier to apply transformers to various NLP tasks.</p>
       </li>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">flash-attn</code>: Implementation of FlashAttention, a Fast and Memory-Efficient Exact Attention with IO-Awareness
+These libraries are widely used in the machine learning and data science communities for their efficiency, flexibility, and extensive functionality.</p>
+      </li>
     </ul>
-
-    <p>These libraries are widely used in the machine learning and data science communities for their efficiency, flexibility, and extensive functionality.</p>
   </blockquote>
 
 </blockquote>
@@ -2333,7 +2336,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <blockquote class="question">
   <div class="box-title question-title" id="question-28"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
-  <p>What does <code class="language-plaintext highlighter-rouge">attn_implementation="eager"</code>?</p>
+  <p>What does <code class="language-plaintext highlighter-rouge">attn_implementation="eager"</code> do?</p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-29"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-29" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2452,7 +2455,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <blockquote class="question">
   <div class="box-title question-title" id="question-31"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
-  <p>How many parameters are this model?</p>
+  <p>How many parameters are in this model?</p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-32"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-32" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2479,7 +2482,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <blockquote class="question">
   <div class="box-title question-title" id="question-32"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
-  <p>What does the above command?</p>
+  <p>What does the above command do?</p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-33"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-33" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2788,7 +2791,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <p>For that, 80% of the entire data will be used for the training set and the remaining 20% will go into the validation set. We first compute the size of training and validation sets:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">train_size</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="nf">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="sh">"</span><span class="s">train</span><span class="sh">"</span><span class="p">]))</span>
-<span class="n">val_size</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="sh">"</span><span class="s">train</span><span class="sh">"</span><span class="p">])</span> <span class="o">-</span> <span class="n">training_size</span>
+<span class="n">val_size</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="sh">"</span><span class="s">train</span><span class="sh">"</span><span class="p">])</span> <span class="o">-</span> <span class="n">train_size</span>
 </code></pre></div></div>
 
 <blockquote class="question">
@@ -2855,7 +2858,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">batchsize</span><span class="o">=</span><span class="mi">32</span>
 <span class="n">training_args</span> <span class="o">=</span> <span class="nc">TrainingArguments</span><span class="p">(</span>
   <span class="n">output_dir</span><span class="o">=</span><span class="sh">"</span><span class="s">./results/models</span><span class="sh">"</span><span class="p">,</span>
-  <span class="n">evaluation_strategy</span><span class="o">=</span><span class="sh">"</span><span class="s">epoch</span><span class="sh">"</span><span class="p">,</span>
+  <span class="n">eval_strategy</span><span class="o">=</span><span class="sh">"</span><span class="s">epoch</span><span class="sh">"</span><span class="p">,</span>
   <span class="n">save_strategy</span><span class="o">=</span><span class="sh">"</span><span class="s">epoch</span><span class="sh">"</span><span class="p">,</span>
   <span class="n">num_train_epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
   <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="n">batchsize</span><span class="p">,</span>
@@ -2864,7 +2867,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
   <span class="n">logging_dir</span><span class="o">=</span><span class="sh">"</span><span class="s">./logs</span><span class="sh">"</span><span class="p">,</span>
   <span class="n">load_best_model_at_end</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-  <span class="n">fp16</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+  <span class="n">bf16</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
   <span class="n">gradient_accumulation_steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
   <span class="n">report_to</span><span class="o">=</span><span class="sh">"</span><span class="s">none</span><span class="sh">"</span><span class="p">,</span>
 <span class="p">)</span>
@@ -2872,7 +2875,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">output_dir="./results/models"</code>: directory where the training outputs, including model checkpoints and results, will be saved.</li>
-  <li><code class="language-plaintext highlighter-rouge">evaluation_strategy="epoch"</code> indicates that the model’s performance will be evaluated at the end of each epoch, a complete pass through the entire training dataset. This allows for monitoring the model’s progress and adjusting the training process as needed.</li>
+  <li><code class="language-plaintext highlighter-rouge">eval_strategy="epoch"</code> indicates that the model’s performance will be evaluated at the end of each epoch, a complete pass through the entire training dataset. This allows for monitoring the model’s progress and adjusting the training process as needed.</li>
   <li><code class="language-plaintext highlighter-rouge">save_strategy="epoch"</code> specifies that the model will be saved at the end of each epoch. This ensures that checkpoints are available for each complete pass through the dataset.</li>
   <li><code class="language-plaintext highlighter-rouge">num_train_epochs=50</code> sets the total number of training epochs to 50. This means the model will iterate over the entire dataset 50 times, allowing it to learn and optimize over multiple passes.</li>
   <li><code class="language-plaintext highlighter-rouge">per_device_train_batch_size=batchsize</code> and <code class="language-plaintext highlighter-rouge">per_device_eval_batch_size=batchsize</code> set the batch size for training and evaluation on each device (e.g., GPU) to 32. This ensures consistency in batch processing across different stages of training and evaluation.</li>
@@ -3378,7 +3381,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/537219121fa3c8974bf2db08e2f02fc565b8c04c">5372191</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8ded47166aa181db16a3e59262d4ab307ee55827">8ded471</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
