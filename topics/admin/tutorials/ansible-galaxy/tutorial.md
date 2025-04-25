@@ -312,15 +312,15 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    @@ -0,0 +1,13 @@
 >    +# Galaxy, Postgres, Nginx
 >    +- src: galaxyproject.galaxy
->    +  version: 0.10.14
+>    +  version: 0.11.2
 >    +- src: galaxyproject.nginx
->    +  version: 0.7.1
+>    +  version: 1.0.0
 >    +- src: galaxyproject.postgresql
->    +  version: 1.1.2
+>    +  version: 1.1.8
 >    +- src: galaxyproject.postgresql_objects
->    +  version: 1.2.0
+>    +  version: 1.2.1
 >    +- src: galaxyproject.miniconda
->    +  version: 0.3.1
+>    +  version: 0.3.2
 >    +- src: usegalaxy_eu.certbot
 >    +  version: 0.1.11
 >    {% endraw %}
@@ -892,17 +892,18 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    - Create a new play that will run on the `galaxyservers` group, as the root user (you will need `become`/`become_user`)
 >    - Add a pre-task to install the necessary dependencies for the Galaxy server: `acl`, `bzip2`, `git`, `make`, `tar`, `python3-venv`, and `python3-setuptools`
+>    - Perform a Python and Ubuntu version check to detect if the system uses Python 3.11 or 3.12, as the `lib2to3` module is [deprecated](https://docs.python.org/3.11/library/2to3.html) from Python 3.11 and will be removed in 3.13. On systems like Ubuntu 24.04 LTS (which uses Python 3.12), `lib2to3` must be installed via `apt` as `python3-lib2to3`.
 >    - Use the roles `galaxyproject.galaxy` and `galaxyproject.miniconda` (in this order), with `galaxyproject.miniconda` run as the `galaxy` user.
 >
 >    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -11,3 +11,16 @@
->         - role: galaxyproject.postgresql_objects
->           become: true
->           become_user: postgres
->    +
+>    @@ -11,3 +11,27 @@
+>     - role: galaxyproject.postgresql_objects
+>       become: true
+>       become_user: postgres
+>
 >    +- hosts: galaxyservers
 >    +  become: true
 >    +  become_user: root
@@ -910,6 +911,17 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    - name: Install Dependencies
 >    +      package:
 >    +        name: ['acl', 'bzip2', 'git', 'make', 'tar', 'python3-venv', 'python3-setuptools']
+>    +    - name: Extract python major.minor version on Ubuntu platforms
+>    +      set_fact:
+>    +        python_major_minor: "{{ ansible_python_version.split('.')[0:2] | join('.') }}"
+>    +      when: ansible_distribution == "Ubuntu"
+>    +    - name: Install python3-lib2to3 only for Python 3.11 or 3.12 on Ubuntu platforms
+>    +      apt:
+>    +        name: python3-lib2to3
+>    +        state: present
+>    +      when:
+>    +        - ansible_distribution == "Ubuntu"
+>    +        - python_major_minor is version('3.11', '>=') and python_major_minor is version('3.13', '<')
 >    +  roles:
 >    +    - galaxyproject.galaxy
 >    +    - role: galaxyproject.miniconda
@@ -957,10 +969,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +galaxy_layout: root-dir
 >    +galaxy_root: /srv/galaxy
 >    +galaxy_user: {name: "{{ galaxy_user_name }}", shell: /bin/bash}
->    +galaxy_commit_id: release_23.0
+>    +galaxy_commit_id: release_24.2
 >    +galaxy_force_checkout: true
 >    +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->    +miniconda_version: 23.9
+>    +miniconda_version: 25.1
 >    +miniconda_channels: ['conda-forge', 'defaults']
 >    {% endraw %}
 >    ```
@@ -1874,7 +1886,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -26,3 +26,4 @@
+>    @@ -37,3 +37,4 @@
 >         - role: galaxyproject.miniconda
 >           become: true
 >           become_user: "{{ galaxy_user_name }}"
