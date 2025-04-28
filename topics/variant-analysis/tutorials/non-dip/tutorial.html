@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6fe72e04c3e570e9111c2cb0d7c5a356e70e6093",
+		release: "galaxy-training-network@b1249a9f4150c780016fc9d8c5f936c935cb87e5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1392,13 +1392,23 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
+      "url": "https://bio.tools/tool/bamtools",
+      "name": "BamTools"
+    },
+    {
+      "@type": "Thing",
       "url": "https://bio.tools/tool/bwa",
       "name": "BWA"
     },
     {
       "@type": "Thing",
-      "url": "https://bio.tools/tool/freebayes",
-      "name": "FreeBayes"
+      "url": "https://bio.tools/tool/bwa",
+      "name": "BWA"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/fastqc",
+      "name": "FastQC"
     },
     {
       "@type": "Thing",
@@ -1414,6 +1424,21 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "@type": "Thing",
       "url": "https://bio.tools/tool/freebayes",
       "name": "FreeBayes"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/freebayes",
+      "name": "FreeBayes"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/vcflib",
+      "name": "Vcflib"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/vcflib",
+      "name": "Vcflib"
     },
     {
       "@type": "Thing",
@@ -1878,18 +1903,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</li>
     
     
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
-			UseGalaxy.be <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
-		</a>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.no/" title="">
-			UseGalaxy.no <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
-		</a>
-	</li>
-    
     
     
 	<li class="dropdown-header">
@@ -1897,8 +1910,20 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</li>
     
 	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
+			UseGalaxy.be
+		</a>
+	</li>
+    
+	<li>
 		<a class="dropdown-item" href="https://usegalaxy.cz/" title="">
 			UseGalaxy.cz
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.no/" title="">
+			UseGalaxy.no
 		</a>
 	</li>
     
@@ -2826,9 +2851,19 @@ tools:
   revisions: cb20f99fd45b
   tool_panel_section_label: SAM/BAM
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bamtools_filter
+  owner: devteam
+  revisions: 993b19f20c76
+  tool_panel_section_label: SAM/BAM
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: bwa
   owner: devteam
   revisions: 3fe632431b68
+  tool_panel_section_label: Mapping
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bwa
+  owner: devteam
+  revisions: 1dfc975b48d5
   tool_panel_section_label: Mapping
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: fastqc
@@ -2836,10 +2871,10 @@ tools:
   revisions: e7b2202befea
   tool_panel_section_label: FASTA/FASTQ
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: freebayes
+- name: fastqc
   owner: devteam
-  revisions: 156b60c1530f
-  tool_panel_section_label: Variant Calling
+  revisions: 2c64fded1286
+  tool_panel_section_label: FASTA/FASTQ
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: freebayes
   owner: devteam
@@ -2848,12 +2883,17 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: freebayes
   owner: devteam
-  revisions: 156b60c1530f
+  revisions: 1e1291983bc7
   tool_panel_section_label: Variant Calling
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: freebayes
   owner: devteam
   revisions: ef2c525bd8cd
+  tool_panel_section_label: Variant Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: freebayes
+  owner: devteam
+  revisions: 1e1291983bc7
   tool_panel_section_label: Variant Calling
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: picard
@@ -2863,7 +2903,17 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: picard
   owner: devteam
+  revisions: 3f254c5ced1d
+  tool_panel_section_label: Picard
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: picard
+  owner: devteam
   revisions: f9242e01365a
+  tool_panel_section_label: Picard
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: picard
+  owner: devteam
+  revisions: 3f254c5ced1d
   tool_panel_section_label: Picard
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: vcf2tsv
@@ -2871,9 +2921,19 @@ tools:
   revisions: e92b3c0f9224
   tool_panel_section_label: Variant Calling
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: vcf2tsv
+  owner: devteam
+  revisions: 285060661b45
+  tool_panel_section_label: Variant Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: vcffilter
   owner: devteam
   revisions: 81972652519c
+  tool_panel_section_label: Variant Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: vcffilter
+  owner: devteam
+  revisions: 4bdc111b2470
   tool_panel_section_label: Variant Calling
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 </code></pre></div>
@@ -3010,7 +3070,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6fe72e04c3e570e9111c2cb0d7c5a356e70e6093">6fe72e0</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b1249a9f4150c780016fc9d8c5f936c935cb87e5">b1249a9</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
