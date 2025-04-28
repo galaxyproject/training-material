@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@2e15c7a7004c14fc632f399c72d20c0e589d301f",
+		release: "galaxy-training-network@d1e3145a5455692f319d820d55f29de25303361f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Dataset colors">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-07-02 18:53:56 +0000">
+<meta name="DC.date" content="2025-04-28 12:40:54 +0000">
 <meta name="DC.creator" content="Anton Nekrutenko"><meta name="description" content="Explains meaning of dataset colors in Galaxy's history">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="FAQ: Dataset colors">
@@ -246,16 +246,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <ul>
   <li><strong>ok</strong>: everything is fine, life is good;</li>
-  <li><strong>new</strong>: the dataset was just created. Galaxy does not yet know when it is;</li>
+  <li><strong>new</strong>: the dataset was just created. Galaxy does not yet know when it is available;</li>
   <li><strong>queued</strong>: indicates that the job generating this dataset is scheduled for execution but not running yet;</li>
   <li><strong>running</strong>: job generating this dataset is running;</li>
   <li><strong>setting metadata</strong>: when a new dataset is uploaded Galaxy examines it to understand what kind of data it is (e.g., BAM, FASTQ, fasta, BED, etc.). This is called “setting metadata”;</li>
-  <li><strong>deferred</strong>: sometimes it does not make sense to upload the dataset until it is needed for an analysis. Galaxy will download <strong>deferred</strong> datasets later during the job execution. Those datasets do not count toward your quota;</li>
-  <li><strong>paused</strong>: in some cases as, for example, workflow executions, upstream errors prevent subsequent jobs from starting creating datasets in “paused” state;</li>
-  <li><strong>discarded</strong>: something went wrong such as, for example, a job producing this dataset might have been cancelled;</li>
-  <li><strong>error</strong>: everything is not fine; life is bad!</li>
-  <li><strong>placeholder</strong>: similar to “new”; we know something will be there but are not yet sure what;</li>
-  <li><strong>failed populated state</strong>: this refers to collections (not individual datasets). Here a collection has failed to be populated with datasets;</li>
+  <li><strong>deferred</strong>: sometimes it does not make sense to upload the dataset until it is needed for an analysis. Galaxy will download deferred datasets later during the job execution. Those datasets do not count toward your quota;</li>
+  <li><strong>paused</strong>: in some cases, workflow executions or upstream errors can prevent subsequent jobs from starting to create datasets in “paused” state. Rerun the errored tool with the option <strong><em>Resume dependencies from this job?</em></strong> to resume paused jobs;</li>
+  <li><strong>discarded</strong>: something went wrong. For example, a job producing this dataset might have been cancelled;</li>
+  <li><strong>error</strong>: everything is not fine; life is bad! Click on the information <strong>i</strong> button to know more about what happened;</li>
+  <li><strong>placeholder</strong>: similar to “new”; we know something will be there, but are not yet sure what;</li>
+  <li><strong>failed populated state</strong>: this refers to collections (not individual datasets). Here, a collection has failed to be populated with datasets;</li>
   <li><strong>new populated state</strong>: this refers to collections (not individual datasets). A collection was created but not populated yet.</li>
 </ul>
 
@@ -419,7 +419,7 @@ add a button, include configuration options:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2e15c7a7004c14fc632f399c72d20c0e589d301f">2e15c7a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d1e3145a5455692f319d820d55f29de25303361f">d1e3145</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
