@@ -2098,7 +2098,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    +	# automatically copied around. The welcome page is one of them. In
 >    +	# production, this step is skipped, so we will manually alias that.
 >    +	location /static/welcome.html {
->    +		alias {{ galaxy_server_dir }}/static/welcome.html.sample;
+>    +		alias {{ galaxy_server_dir }}/static/welcome.sample.html;
 >    +		expires 24h;
 >    +	}
 >    +
