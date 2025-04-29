@@ -40,7 +40,7 @@ Expanded dataset view adds a preview element and many additional controls.
 In addition to the elements described above for the collapsed dataset, its expanded view contains:
 
 - **Add tags** {% icon galaxy-tags %}: click on this to tag this dateset;
-- **Dataset size**: ("2 variants, 18 comments") lists the size of the dataset. When datasets are small (like in this example) the exact size is shown. For large datasets, Galaxy gives an approximate estimate.
+- **Dataset size**: ("2 lines, 18 comments") lists the size of the dataset. When datasets are small (like in this example) the exact size is shown. For large datasets, Galaxy gives an approximate estimate.
 - **format**: ("VCF") lists the datatype;
 - **database**: ("?") lists which genome built this dataset corresponds to. This usually lists "?" unless the genome build is set explicitly or the dataset is derived from another dataset with defined genome build information;
 - **info field**: ("INFO [2024-03-26 12:08:53,435]...") displays information provided by the tool that generated this dataset. This varies widely and depends on the type of job that generated this dataset.

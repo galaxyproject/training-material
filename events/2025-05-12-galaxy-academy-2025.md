@@ -74,7 +74,7 @@ contributions:
         - jdavcs
         - j34ni
         - jhahnfeld
-        - Jochen_Blom
+        - jochenblom
         - bernt-matthias
         - lfenske-93
         - PfisterMaxJLU
