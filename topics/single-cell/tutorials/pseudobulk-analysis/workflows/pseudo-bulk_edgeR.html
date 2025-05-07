@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Differential gene expression for single-cell data using pseudo-bulk counts with edgeR / Pseudobulk Analysis with Decoupler and EdgeR / Single Cell</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Pseudobulk with decoupler and edgeR tutorial workflow / Pseudobulk Analysis with Decoupler and EdgeR / Single Cell</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@f32579d064bec5d0d765c6e534c4d443436605d2",
+		release: "galaxy-training-network@662be535456a0cdd279f338419edd4958a039b54",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -66,11 +66,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="Differential gene expression for single-cell data using pseudo-bulk counts with edgeR">
+<meta name="DC.title" content="Pseudobulk with decoupler and edgeR tutorial workflow">
 <meta name="DC.publisher" content="Galaxy Training Network">
 <meta name="DC.date" content="1970-01-01 00:00:00 +0000"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). ">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Single Cell / Pseudobulk Analysis with Decoupler and EdgeR / Differential gene expression for single-cell data using pseudo-bulk counts with edgeR">
+	<meta property="og:title" content="Single Cell / Pseudobulk Analysis with Decoupler and EdgeR / Pseudobulk with decoupler and edgeR tutorial workflow">
         <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). ">
         <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/single-cell/tutorials/pseudobulk-analysis/workflows/pseudo-bulk_edgeR.png">
 	</head>
@@ -221,7 +221,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 
 <section>
 	<hgroup>
-		<h1 data-toc-skip>Differential gene expression for single-cell data using pseudo-bulk counts with edgeR</h1>
+		<h1 data-toc-skip>Pseudobulk with decoupler and edgeR tutorial workflow</h1>
 		<p>single-cell-pseudobulk-analysis/pseudo-bulk-edger</p>
 	</hgroup>
 	
@@ -233,9 +233,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			
 			Diana Chiang Jurado, 
 			
-			Pavankumar Videm, 
-			
-			Pablo Moreno
+			Pavankumar Videm
 			
 			
 			<br/>
@@ -243,14 +241,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			1
+			2
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Feb 12, 2025
+			May 7, 2025
 
 			<br/>
 
@@ -269,9 +267,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #00f1de; --color-darker: #00d6c5; --color-dimmed: #00e3d1;">single-cell</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #00dbca; --color-darker: #00c3b4; --color-dimmed: #00cfbe;">single-cell</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #70e7ff; --color-darker: #00d2ed; --color-dimmed: #00dffb;">pseudobulk</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #00d7f2; --color-darker: #00bfd8; --color-dimmed: #00cbe5;">pseudobulk</div>
 			
 			</br>
 			
@@ -340,11 +338,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-pseudobulk-analysis/versions/pseudo-bulk-edger">Galaxy Australia</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-pseudobulk-analysis/versions/pseudo-bulk-edger">Galaxy Main</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-pseudobulk-analysis/versions/pseudo-bulk-edger">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-pseudobulk-analysis/versions/pseudo-bulk-edger">Galaxy France</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-pseudobulk-analysis/versions/pseudo-bulk-edger">Galaxy Europe</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-pseudobulk-analysis/versions/pseudo-bulk-edger">Galaxy Main</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-pseudobulk-analysis/versions/pseudo-bulk-edger">Import to another server (≥23.0+ only!)</a>
@@ -356,80 +354,74 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				Download
 			</a>
 			<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nSource AnnData file"];
+  0["ℹ️ Input Dataset\nncm_pdcs_subset.h5ad"];
   style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Parameter\nPseudo-bulk: Fields to merge"];
-  style 1 fill:#ded,stroke:#393,stroke-width:4px;
-  2["ℹ️ Input Parameter\nGroup by column"];
-  style 2 fill:#ded,stroke:#393,stroke-width:4px;
-  3["ℹ️ Input Parameter\nSample key column"];
-  style 3 fill:#ded,stroke:#393,stroke-width:4px;
-  4["ℹ️ Input Parameter\nName Your Raw Counts Layer"];
-  style 4 fill:#ded,stroke:#393,stroke-width:4px;
-  5["ℹ️ Input Parameter\nFactor fields"];
-  style 5 fill:#ded,stroke:#393,stroke-width:4px;
-  6["ℹ️ Input Parameter\nFormula"];
-  style 6 fill:#ded,stroke:#393,stroke-width:4px;
-  7["ℹ️ Input Parameter\nGene symbol column"];
-  style 7 fill:#ded,stroke:#393,stroke-width:4px;
-  8["Decoupler pseudo-bulk"];
-  1 -->|output| 8;
-  5 -->|output| 8;
-  2 -->|output| 8;
-  0 -->|output| 8;
-  4 -->|output| 8;
-  3 -->|output| 8;
-  b28fbf89-5621-459e-9321-6cd0a72261ea["Output\nPseudobulk count matrix"];
-  8 --> b28fbf89-5621-459e-9321-6cd0a72261ea;
-  style b28fbf89-5621-459e-9321-6cd0a72261ea stroke:#2c3143,stroke-width:4px;
-  6e8b4090-3ab7-4158-805a-2d757fd5e0fb["Output\nPseudobulk Plot"];
-  8 --> 6e8b4090-3ab7-4158-805a-2d757fd5e0fb;
-  style 6e8b4090-3ab7-4158-805a-2d757fd5e0fb stroke:#2c3143,stroke-width:4px;
-  93e42181-49b2-47cf-ab73-98373376caf9["Output\nFiltered by expression"];
-  8 --> 93e42181-49b2-47cf-ab73-98373376caf9;
-  style 93e42181-49b2-47cf-ab73-98373376caf9 stroke:#2c3143,stroke-width:4px;
-  9["Sanitize matrix"];
-  8 -->|count_matrix| 9;
-  10["Sanitize factors"];
-  8 -->|samples_metadata| 10;
-  11["Remove start, end, width"];
-  8 -->|genes_metadata| 11;
-  12["Sanitize first factor for leading digits"];
-  10 -->|outfile| 12;
-  13["Text reformatting"];
-  12 -->|outfile| 13;
-  14["edgeR"];
-  11 -->|output_tabular| 14;
-  13 -->|outfile| 14;
-  6 -->|output| 14;
-  9 -->|outfile| 14;
-  12 -->|outfile| 14;
-  851ac5bc-9c57-4f36-b469-33a2e8dde894["Output\nTables: DEG"];
-  14 --> 851ac5bc-9c57-4f36-b469-33a2e8dde894;
-  style 851ac5bc-9c57-4f36-b469-33a2e8dde894 stroke:#2c3143,stroke-width:4px;
-  5ad48faa-d0a7-4bb1-b307-7861f540ec29["Output\nReport Results: HTML File"];
-  14 --> 5ad48faa-d0a7-4bb1-b307-7861f540ec29;
-  style 5ad48faa-d0a7-4bb1-b307-7861f540ec29 stroke:#2c3143,stroke-width:4px;
-  15["Get contrast labels"];
-  14 -->|outTables| 15;
-  16["Select gene symbols, logFC, PValue and FDR"];
-  7 -->|output| 16;
-  14 -->|outTables| 16;
-  647df402-93cb-4f9e-9bde-7afcbcffad5b["Output\nTables for volcano plot"];
-  16 --> 647df402-93cb-4f9e-9bde-7afcbcffad5b;
-  style 647df402-93cb-4f9e-9bde-7afcbcffad5b stroke:#2c3143,stroke-width:4px;
-  17["Replace Text"];
-  15 -->|output| 17;
-  18["Split contrasts"];
-  17 -->|outfile| 18;
-  19["Contrast as parameters"];
-  18 -->|list_output_txt| 19;
-  20["Volcano Plot"];
-  16 -->|output_tabular| 20;
-  19 -->|text_param| 20;
-  02cc64ea-d34d-4081-8a2b-2dc59e102c66["Output\nVolcano Plot on input dataset(s): PDF"];
-  20 --> 02cc64ea-d34d-4081-8a2b-2dc59e102c66;
-  style 02cc64ea-d34d-4081-8a2b-2dc59e102c66 stroke:#2c3143,stroke-width:4px;</pre>
+  1["Inspect AnnData Object"];
+  0 -->|output| 1;
+  e76ac983-3089-4a4f-be16-49de8d491ba4["Output\nGeneral AnnData Information"];
+  1 --> e76ac983-3089-4a4f-be16-49de8d491ba4;
+  style e76ac983-3089-4a4f-be16-49de8d491ba4 stroke:#2c3143,stroke-width:4px;
+  2["Filter Cell-Type"];
+  0 -->|output| 2;
+  41908539-a944-457b-b02f-cf3464971b8e["Output\nanndata_out"];
+  2 --> 41908539-a944-457b-b02f-cf3464971b8e;
+  style 41908539-a944-457b-b02f-cf3464971b8e stroke:#2c3143,stroke-width:4px;
+  3["Pseudobulk with decoupler"];
+  0 -->|output| 3;
+  90c68071-01bf-471a-958a-9f391556debd["Output\ngenes_metadata"];
+  3 --> 90c68071-01bf-471a-958a-9f391556debd;
+  style 90c68071-01bf-471a-958a-9f391556debd stroke:#2c3143,stroke-width:4px;
+  0de9d115-6e5a-446b-abc1-15c11dcaefb1["Output\nsamples_metadata"];
+  3 --> 0de9d115-6e5a-446b-abc1-15c11dcaefb1;
+  style 0de9d115-6e5a-446b-abc1-15c11dcaefb1 stroke:#2c3143,stroke-width:4px;
+  7ff680d1-cd92-43fe-a9cf-9eb53a76996a["Output\ncount_matrix"];
+  3 --> 7ff680d1-cd92-43fe-a9cf-9eb53a76996a;
+  style 7ff680d1-cd92-43fe-a9cf-9eb53a76996a stroke:#2c3143,stroke-width:4px;
+  c23b46c6-de2f-4c4d-886d-2f83ad61017a["Output\nplot_output"];
+  3 --> c23b46c6-de2f-4c4d-886d-2f83ad61017a;
+  style c23b46c6-de2f-4c4d-886d-2f83ad61017a stroke:#2c3143,stroke-width:4px;
+  6f8d0a60-352e-49bd-82e2-68f4c64d529f["Output\nfilter_by_expr_plot"];
+  3 --> 6f8d0a60-352e-49bd-82e2-68f4c64d529f;
+  style 6f8d0a60-352e-49bd-82e2-68f4c64d529f stroke:#2c3143,stroke-width:4px;
+  4["Replace Text"];
+  3 -->|samples_metadata| 4;
+  5["Replace Text"];
+  3 -->|count_matrix| 5;
+  6["Remove columns"];
+  3 -->|genes_metadata| 6;
+  7["Replace Text"];
+  4 -->|outfile| 7;
+  06fde552-a874-4272-81e7-b9ca26987826["Output\nSamples Metadata"];
+  7 --> 06fde552-a874-4272-81e7-b9ca26987826;
+  style 06fde552-a874-4272-81e7-b9ca26987826 stroke:#2c3143,stroke-width:4px;
+  8["Generating Contrast File"];
+  7 -->|outfile| 8;
+  abbea492-6106-4370-a968-e5e1a3142033["Output\nContrast File"];
+  8 --> abbea492-6106-4370-a968-e5e1a3142033;
+  style abbea492-6106-4370-a968-e5e1a3142033 stroke:#2c3143,stroke-width:4px;
+  9["edgeR"];
+  6 -->|output_tabular| 9;
+  8 -->|outfile| 9;
+  5 -->|outfile| 9;
+  7 -->|outfile| 9;
+  14e63c6b-511c-468d-954e-cb115be9ac95["Output\noutTables"];
+  9 --> 14e63c6b-511c-468d-954e-cb115be9ac95;
+  style 14e63c6b-511c-468d-954e-cb115be9ac95 stroke:#2c3143,stroke-width:4px;
+  10["Extract dataset"];
+  9 -->|outTables| 10;
+  2f1d41da-719c-4226-9de0-856c6a086091["Output\noutput"];
+  10 --> 2f1d41da-719c-4226-9de0-856c6a086091;
+  style 2f1d41da-719c-4226-9de0-856c6a086091 stroke:#2c3143,stroke-width:4px;
+  11["Remove columns"];
+  10 -->|output| 11;
+  352ef726-9dff-4fb8-81af-006dd9c7126d["Output\nDEG Table"];
+  11 --> 352ef726-9dff-4fb8-81af-006dd9c7126d;
+  style 352ef726-9dff-4fb8-81af-006dd9c7126d stroke:#2c3143,stroke-width:4px;
+  12["Volcano Plot"];
+  11 -->|output_tabular| 12;
+  5e9faae5-8b4f-4a6c-8098-69937c9e5b80["Output\nVolcano Plot DEG"];
+  12 --> 5e9faae5-8b4f-4a6c-8098-69937c9e5b80;
+  style 5e9faae5-8b4f-4a6c-8098-69937c9e5b80 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -442,42 +434,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				
 				<tr>
 					<td>Input dataset</td>
-					<td>Source AnnData file</td>
-				</tr>
-				
-				<tr>
-					<td>Input parameter</td>
-					<td>Pseudo-bulk: Fields to merge</td>
-				</tr>
-				
-				<tr>
-					<td>Input parameter</td>
-					<td>Group by column</td>
-				</tr>
-				
-				<tr>
-					<td>Input parameter</td>
-					<td>Sample key column</td>
-				</tr>
-				
-				<tr>
-					<td>Input parameter</td>
-					<td>Name Your Raw Counts Layer</td>
-				</tr>
-				
-				<tr>
-					<td>Input parameter</td>
-					<td>Factor fields</td>
-				</tr>
-				
-				<tr>
-					<td>Input parameter</td>
-					<td>Formula</td>
-				</tr>
-				
-				<tr>
-					<td>Input parameter</td>
-					<td>Gene symbol column</td>
+					<td>ncm_pdcs_subset.h5ad</td>
 				</tr>
 				
 				</tbody>
@@ -495,51 +452,33 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
-					<td></td>
-					<td>Input parameter</td>
-					<td>Pseudo-bulk: Fields to merge</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1</td>
+					<td>Inspect AnnData</td>
+					<td>Inspect AnnData Object</td>
 				</tr>
 				
 				<tr>
-					<td></td>
-					<td>Input parameter</td>
-					<td>Group by column</td>
-				</tr>
-				
-				<tr>
-					<td></td>
-					<td>Input parameter</td>
-					<td>Sample key column</td>
-				</tr>
-				
-				<tr>
-					<td></td>
-					<td>Input parameter</td>
-					<td>Name Your Raw Counts Layer</td>
-				</tr>
-				
-				<tr>
-					<td></td>
-					<td>Input parameter</td>
-					<td>Factor fields</td>
-				</tr>
-				
-				<tr>
-					<td></td>
-					<td>Input parameter</td>
-					<td>Formula</td>
-				</tr>
-				
-				<tr>
-					<td></td>
-					<td>Input parameter</td>
-					<td>Gene symbol column</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.10.2+galaxy3</td>
+					<td>Scanpy filter</td>
+					<td>Filter Cell-Type</td>
 				</tr>
 				
 				<tr>
 					<td>toolshed.g2.bx.psu.edu/repos/ebi-gxa/decoupler_pseudobulk/decoupler_pseudobulk/1.4.0+galaxy8</td>
 					<td>Decoupler pseudo-bulk</td>
+					<td>Pseudobulk with decoupler</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1</td>
+					<td>Replace Text</td>
 					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1</td>
+					<td>Text reformatting</td>
+					<td>Generating Contrast File</td>
 				</tr>
 				
 				<tr>
@@ -549,9 +488,15 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				</tr>
 				
 				<tr>
+					<td>__EXTRACT_DATASET__</td>
+					<td>Extract dataset</td>
+					<td></td>
+				</tr>
+				
+				<tr>
 					<td>toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0</td>
 					<td>Remove columns</td>
-					<td>Select gene symbols, logFC, PValue and FDR</td>
+					<td></td>
 				</tr>
 				
 				<tr>
@@ -575,20 +520,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=param_value_from_file">param_value_from_file</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=__EXTRACT_DATASET__">__EXTRACT_DATASET__</a></td>
 				<td>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.2">toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.2</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/split_file_to_collection/2dae863c8f42">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
@@ -642,11 +575,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2">toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/collection_element_identifiers/d3c07d270a50">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/anndata_inspect/afe044e6bc93">
 						View in ToolShed
 					</a>
 					
@@ -671,6 +604,18 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					
 					
 					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/edger/ae2aad0a6d50">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.10.2+galaxy3">toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.10.2+galaxy3</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/scanpy_filter/5813f9920877">
 						View in ToolShed
 					</a>
 					
@@ -712,6 +657,27 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>6</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/2568b8bc794f05660220c08139684654010e536f">2568b8bc7</a></td>
+						<td>2025-05-06 12:52:18</td>
+						<td>Update pseudo-bulk_edgeR.ga</td>
+					</tr>
+					
+					<tr>
+						<td>5</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/1013fd8386f43f22968f33b7bf9987af5f2c7d74">1013fd838</a></td>
+						<td>2025-05-06 12:49:22</td>
+						<td>Pseudobtutorial final gta fixes (#6)</td>
+					</tr>
+					
+					<tr>
+						<td>4</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/a4799836ad9052ffdfae62f6ec99865379d56147">a4799836a</a></td>
+						<td>2025-05-06 12:39:32</td>
+						<td>Update pseudo-bulk_edgeR.ga file</td>
+					</tr>
 					
 					<tr>
 						<td>3</td>
@@ -815,7 +781,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/f32579d064bec5d0d765c6e534c4d443436605d2">f32579d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/662be535456a0cdd279f338419edd4958a039b54">662be53</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

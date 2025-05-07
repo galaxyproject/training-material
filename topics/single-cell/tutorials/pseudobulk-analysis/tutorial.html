@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@f32579d064bec5d0d765c6e534c4d443436605d2",
+		release: "galaxy-training-network@662be535456a0cdd279f338419edd4958a039b54",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Pseudobulk Analysis with Decoupler and EdgeR">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-05-05 20:38:31 +0000">
+<meta name="DC.date" content="2025-05-07 13:15:15 +0000">
 <meta name="DC.creator" content="Diana Chiang Jurado"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Single Cell / Pseudobulk Analysis with Decoupler and EdgeR / Hands-on: Pseudobulk Analysis with Decoupler and EdgeR">
@@ -186,7 +186,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-05-05 20:38:31 +0000",
+  "dateModified": "2025-05-07 13:15:15 +0000",
   "datePublished": "2025-02-12 16:29:15 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -244,7 +244,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Pseudobulk Analysis with Decoupler and EdgeR",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/pseudobulk-analysis/tutorial.html",
-  "version": 6,
+  "version": 7,
   "timeRequired": "PT4H",
   "teaches": "- Understand the principles of pseudobulk analysis in single-cell data\n- Understand and generate the pseudobulk expression matrix with Decoupler\n- Perform differential expression analysis using edgeR",
   "keywords": [
@@ -1244,7 +1244,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <ul class="dropdown-menu">
       
         <li>
-            <a class="dropdown-item" href="https://usegalaxy.eu/u/dianitachj24/h/pseudo-bulk-edger-11-04-2025">
+            <a class="dropdown-item" href="https://usegalaxy.eu/u/dianitachj24/h/pseudobulk-tutorial-workflow">
               UseGalaxy.eu
               
               <br/><span class="text-muted">2025-04-11</span>
@@ -1395,7 +1395,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 12, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 5, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 7, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1413,7 +1413,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
 
     </blockquote>
     </section>
@@ -1776,13 +1776,12 @@ The <strong>Samples Metadata</strong> is another file that will serve as an inpu
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Samples Metadata</code> (output generated from the <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step).</li>
         <li><em>“AWK Program”</em>:
-          <div class="language-awk highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">BEGIN</span> <span class="p">{</span> <span class="k">print</span> <span class="nx">header</span> <span class="p">}</span>
-<span class="kc">NR</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">seen</span><span class="p">[</span><span class="nv">$2</span><span class="p">]</span><span class="o">++</span><span class="p">)</span> <span class="nx">words</span><span class="p">[</span><span class="o">++</span><span class="nx">count</span><span class="p">]</span><span class="o">=</span><span class="nv">$2</span> <span class="p">}</span>
-<span class="kr">END</span> <span class="p">{</span> <span class="k">for</span> <span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;=</span><span class="nx">count</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
-         <span class="k">for</span> <span class="p">(</span><span class="nx">j</span><span class="o">=</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="nx">j</span><span class="o">&lt;=</span><span class="nx">count</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span>
-            <span class="k">print</span> <span class="nx">words</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="o">-</span><span class="nx">words</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="p">}</span>
-</code></pre></div>          </div>
-        </li>
+<code class="language-plaintext highlighter-rouge">BEGIN { print "header" }
+   NR &gt; 1 { if (!seen[$2]++) words[++count]=$2 }
+   END { for (i=1; i&lt;=count; i++)
+       for (j=i+1; j&lt;=count; j++)
+         print words[i]"-"words[j] }
+</code></li>
       </ul>
     </li>
   </ol>
@@ -1798,6 +1797,7 @@ The <strong>Samples Metadata</strong> is another file that will serve as an inpu
       <li>Processes the input file (<code class="language-plaintext highlighter-rouge">NR &gt; 1</code> skips the header line).</li>
       <li>Tracks unique elements in column 2 (<code class="language-plaintext highlighter-rouge">seen[$2]++</code>) to avoid duplicates.</li>
       <li>Creates pairs of unique elements and calculates their difference, outputting the contrast for downstream edgeR analysis.</li>
+      <li><strong>Important!</strong> When using the <em>“Text reformatting with awk”</em> tool, make sure the code is written all in one line, without any line breaks. Otherwise, it won’t work as expected.</li>
     </ul>
   </blockquote>
 
@@ -2085,11 +2085,12 @@ The <strong>Samples Metadata</strong> is another file that will serve as an inpu
         <p>In addition to performing the filtering yourself, the <code class="language-plaintext highlighter-rouge">pDCs</code> and <code class="language-plaintext highlighter-rouge">Monocytes_NC</code> clusters have also been pre-extracted and are available for direct download.<br />
 This allows you to jump ahead and run the downstream workflows independently for each cluster, as described later in this tutorial.</p>
 
-        <p>Download the pre-filtered datasets from Zenodo:</p>
-        <ul>
-          <li><strong>Monocytes_NC_subset</strong>: <a href="https://zenodo.org/records/15275834/files/Monocytes_NC_subset.h5ad?download=1">Download</a></li>
-          <li><strong>pDCs_subset</strong>: <a href="https://zenodo.org/records/15275834/files/pDCs_subset.h5ad?download=1">Download</a></li>
-        </ul>
+        <p>Import the pre-filtered datasets from Zenodo:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/15275834/files/Monocytes_NC_subset.h5ad
+https://zenodo.org/records/15275834/files/pDCs_subset.h5ad
+</code></pre></div>        </div>
+
       </blockquote>
     </li>
   </ol>
@@ -2552,11 +2553,6 @@ install_tool_dependencies: true
 install_repository_dependencies: true
 install_resolver_dependencies: true
 tools:
-- name: split_file_to_collection
-  owner: bgruening
-  revisions: 2dae863c8f42
-  tool_panel_section_label: Collection Operations
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: text_processing
   owner: bgruening
   revisions: 86755160afbf
@@ -2586,11 +2582,6 @@ tools:
   owner: iuc
   revisions: be1fdce914c6
   tool_panel_section_label: Single-cell
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: collection_element_identifiers
-  owner: iuc
-  revisions: d3c07d270a50
-  tool_panel_section_label: Collection Operations
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: column_remove_by_header
   owner: iuc
@@ -2715,7 +2706,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/f32579d064bec5d0d765c6e534c4d443436605d2">f32579d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/662be535456a0cdd279f338419edd4958a039b54">662be53</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

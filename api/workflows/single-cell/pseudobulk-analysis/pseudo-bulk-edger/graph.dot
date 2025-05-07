@@ -1,63 +1,58 @@
 digraph main {
   node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
   edge [fontname="Atkinson Hyperlegible"];
-  0[color=lightblue,label="ℹ️ Input Dataset\nSource AnnData file"]
-  1[color=lightgreen,label="ℹ️ Input Parameter\nPseudo-bulk: Fields to merge"]
-  2[color=lightgreen,label="ℹ️ Input Parameter\nGroup by column"]
-  3[color=lightgreen,label="ℹ️ Input Parameter\nSample key column"]
-  4[color=lightgreen,label="ℹ️ Input Parameter\nName Your Raw Counts Layer"]
-  5[color=lightgreen,label="ℹ️ Input Parameter\nFactor fields"]
-  6[color=lightgreen,label="ℹ️ Input Parameter\nFormula"]
-  7[color=lightgreen,label="ℹ️ Input Parameter\nGene symbol column"]
-  8[label="Decoupler pseudo-bulk"]
-  1 -> 8 [label="output"]
-  5 -> 8 [label="output"]
-  2 -> 8 [label="output"]
-  0 -> 8 [label="output"]
-  4 -> 8 [label="output"]
-  3 -> 8 [label="output"]
-  kb28fbf895621459e93216cd0a72261ea[color=lightseagreen,label="Output\nPseudobulk count matrix"]
-  8 -> kb28fbf895621459e93216cd0a72261ea
-  k6e8b40903ab74158805a2d757fd5e0fb[color=lightseagreen,label="Output\nPseudobulk Plot"]
-  8 -> k6e8b40903ab74158805a2d757fd5e0fb
-  k93e4218149b247cfab7398373376caf9[color=lightseagreen,label="Output\nFiltered by expression"]
-  8 -> k93e4218149b247cfab7398373376caf9
-  9[label="Sanitize matrix"]
-  8 -> 9 [label="count_matrix"]
-  10[label="Sanitize factors"]
-  8 -> 10 [label="samples_metadata"]
-  11[label="Remove start, end, width"]
-  8 -> 11 [label="genes_metadata"]
-  12[label="Sanitize first factor for leading digits"]
-  10 -> 12 [label="outfile"]
-  13[label="Text reformatting"]
-  12 -> 13 [label="outfile"]
-  14[label="edgeR"]
-  11 -> 14 [label="output_tabular"]
-  13 -> 14 [label="outfile"]
-  6 -> 14 [label="output"]
-  9 -> 14 [label="outfile"]
-  12 -> 14 [label="outfile"]
-  k851ac5bc9c574f36b46933a2e8dde894[color=lightseagreen,label="Output\nTables: DEG"]
-  14 -> k851ac5bc9c574f36b46933a2e8dde894
-  k5ad48faad0a74bb1b3077861f540ec29[color=lightseagreen,label="Output\nReport Results: HTML File"]
-  14 -> k5ad48faad0a74bb1b3077861f540ec29
-  15[label="Get contrast labels"]
-  14 -> 15 [label="outTables"]
-  16[label="Select gene symbols, logFC, PValue and FDR"]
-  7 -> 16 [label="output"]
-  14 -> 16 [label="outTables"]
-  k647df40293cb4f9e9bde7afcbcffad5b[color=lightseagreen,label="Output\nTables for volcano plot"]
-  16 -> k647df40293cb4f9e9bde7afcbcffad5b
-  17[label="Replace Text"]
-  15 -> 17 [label="output"]
-  18[label="Split contrasts"]
-  17 -> 18 [label="outfile"]
-  19[label="Contrast as parameters"]
-  18 -> 19 [label="list_output_txt"]
-  20[label="Volcano Plot"]
-  16 -> 20 [label="output_tabular"]
-  19 -> 20 [label="text_param"]
-  k02cc64ead34d40818a2b2dc59e102c66[color=lightseagreen,label="Output\nVolcano Plot on input dataset(s): PDF"]
-  20 -> k02cc64ead34d40818a2b2dc59e102c66
+  0[color=lightblue,label="ℹ️ Input Dataset\nncm_pdcs_subset.h5ad"]
+  1[label="Inspect AnnData Object"]
+  0 -> 1 [label="output"]
+  ke76ac98330894a4fbe1649de8d491ba4[color=lightseagreen,label="Output\nGeneral AnnData Information"]
+  1 -> ke76ac98330894a4fbe1649de8d491ba4
+  2[label="Filter Cell-Type"]
+  0 -> 2 [label="output"]
+  k41908539a944457bb02fcf3464971b8e[color=lightseagreen,label="Output\nanndata_out"]
+  2 -> k41908539a944457bb02fcf3464971b8e
+  3[label="Pseudobulk with decoupler"]
+  0 -> 3 [label="output"]
+  k90c6807101bf471a958a9f391556debd[color=lightseagreen,label="Output\ngenes_metadata"]
+  3 -> k90c6807101bf471a958a9f391556debd
+  k0de9d1156e5a446babc115c11dcaefb1[color=lightseagreen,label="Output\nsamples_metadata"]
+  3 -> k0de9d1156e5a446babc115c11dcaefb1
+  k7ff680d1cd9243fea9cf9eb53a76996a[color=lightseagreen,label="Output\ncount_matrix"]
+  3 -> k7ff680d1cd9243fea9cf9eb53a76996a
+  kc23b46c6de2f4c4d886d2f83ad61017a[color=lightseagreen,label="Output\nplot_output"]
+  3 -> kc23b46c6de2f4c4d886d2f83ad61017a
+  k6f8d0a60352e49bd82e268f4c64d529f[color=lightseagreen,label="Output\nfilter_by_expr_plot"]
+  3 -> k6f8d0a60352e49bd82e268f4c64d529f
+  4[label="Replace Text"]
+  3 -> 4 [label="samples_metadata"]
+  5[label="Replace Text"]
+  3 -> 5 [label="count_matrix"]
+  6[label="Remove columns"]
+  3 -> 6 [label="genes_metadata"]
+  7[label="Replace Text"]
+  4 -> 7 [label="outfile"]
+  k06fde552a874427281e7b9ca26987826[color=lightseagreen,label="Output\nSamples Metadata"]
+  7 -> k06fde552a874427281e7b9ca26987826
+  8[label="Generating Contrast File"]
+  7 -> 8 [label="outfile"]
+  kabbea49261064370a968e5e1a3142033[color=lightseagreen,label="Output\nContrast File"]
+  8 -> kabbea49261064370a968e5e1a3142033
+  9[label="edgeR"]
+  6 -> 9 [label="output_tabular"]
+  8 -> 9 [label="outfile"]
+  5 -> 9 [label="outfile"]
+  7 -> 9 [label="outfile"]
+  k14e63c6b511c468d954ecb115be9ac95[color=lightseagreen,label="Output\noutTables"]
+  9 -> k14e63c6b511c468d954ecb115be9ac95
+  10[label="Extract dataset"]
+  9 -> 10 [label="outTables"]
+  k2f1d41da719c42269de0856c6a086091[color=lightseagreen,label="Output\noutput"]
+  10 -> k2f1d41da719c42269de0856c6a086091
+  11[label="Remove columns"]
+  10 -> 11 [label="output"]
+  k352ef7269dff4fb881af006dd9c7126d[color=lightseagreen,label="Output\nDEG Table"]
+  11 -> k352ef7269dff4fb881af006dd9c7126d
+  12[label="Volcano Plot"]
+  11 -> 12 [label="output_tabular"]
+  k5e9faae58b4f4a6c809869937c9e5b80[color=lightseagreen,label="Output\nVolcano Plot DEG"]
+  12 -> k5e9faae58b4f4a6c809869937c9e5b80
 }
