@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@563871025dc816774e7987b9be317bda91fedae4",
+		release: "galaxy-training-network@f32579d064bec5d0d765c6e534c4d443436605d2",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Proteogenomics 1: Database Creation">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-08-09 15:41:38 +0000">
+<meta name="DC.date" content="2025-05-07 12:52:40 +0000">
 <meta name="DC.creator" content="Subina Mehta">
 <meta name="DC.creator" content="Timothy J. Griffin">
 <meta name="DC.creator" content="Pratik Jagtap">
@@ -191,7 +191,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-08-09 15:41:38 +0000",
+  "dateModified": "2025-05-07 12:52:40 +0000",
   "datePublished": "2018-11-20 19:05:23 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -249,7 +249,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Proteogenomics 1: Database Creation",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html",
-  "version": 27,
+  "version": 28,
   "timeRequired": "PT30M",
   "teaches": "- Generating a customized Protein sequence database with variants, indels, splice junctions and known sequences.",
   "keywords": [
@@ -1232,13 +1232,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
-      "url": "https://bio.tools/tool/bedtools",
-      "name": "BEDTools"
+      "url": "https://bio.tools/tool/gffcompare",
+      "name": "gffcompare"
     },
     {
       "@type": "Thing",
       "url": "https://bio.tools/tool/hisat2",
       "name": "HISAT2"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/stringtie",
+      "name": "StringTie"
     },
     {
       "@type": "Thing",
@@ -1646,23 +1651,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     
 	<li>
-		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
-			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
-		</a>
-	</li>
-    
-	<li>
 		<a class="dropdown-item" href="https://usegalaxy.org" title="">
 			UseGalaxy.org (Main) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
 		</a>
 	</li>
     
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
-			UseGalaxy.be <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
-		</a>
-	</li>
     
     
     
@@ -1677,8 +1670,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</li>
     
 	<li>
-		<a class="dropdown-item" href="https://usegalaxy.no/" title="">
-			UseGalaxy.no
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu
 		</a>
 	</li>
     
@@ -1698,7 +1691,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 20, 2018 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 9, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 7, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1718,7 +1711,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.0</a> (1 recent ratings, 7 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 27 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 28 </div>
 
     </blockquote>
     </section>
@@ -1838,27 +1831,30 @@ has Title Column labeled as “1” and Sequence Column as “2”.</li>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-replace-text-in-a-specific-column"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Replace Text in a specific column</div>
   <ol>
-    <li><strong>Replace Text in a specific column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</li>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Mus_musculus.GRCm38.86.gtf</code></li>
-    <li>Change numbered chromosome names
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy0" title="Replace Text in a specific column tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in a specific column</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy0)</span> with the following parameters:
       <ul>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“in column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^([1-9][0-9]*)$</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Replace with</em>: <code class="language-plaintext highlighter-rouge">chr\\1</code></li>
-      </ul>
-    </li>
-    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>Insert Replacement</em> to add another replacement option to change XY chromosomes
-      <ul>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“in column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^([XY])$</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Replace with</em>: <code class="language-plaintext highlighter-rouge">chr\\1</code></li>
-      </ul>
-    </li>
-    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>Insert Replacement</em> to add another replacement option to change mitochondrial chromosome
-      <ul>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“in column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^MT$</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Replace with</em>: <code class="language-plaintext highlighter-rouge">chrM</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Mus_musculus.GRCm38.86.gtf</code></li>
+        <li>Change numbered chromosome names
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^([1-9][0-9]*)$</code></li>
+            <li><em>“Replace with</em>: <code class="language-plaintext highlighter-rouge">chr\\1</code></li>
+          </ul>
+        </li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>Insert Replacement</em> to add another replacement option to change XY chromosomes
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^([XY])$</code></li>
+            <li><em>“Replace with</em>: <code class="language-plaintext highlighter-rouge">chr\\1</code></li>
+          </ul>
+        </li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>Insert Replacement</em> to add another replacement option to change mitochondrial chromosome
+          <ul>
+            <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^MT$</code></li>
+            <li><em>“Replace with</em>: <code class="language-plaintext highlighter-rouge">chrM</code></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li>Rename the output to <code class="language-plaintext highlighter-rouge">Mus_musculus.GRCm38.86.fixed.gtf</code></li>
@@ -1878,13 +1874,13 @@ has Title Column labeled as “1” and Sequence Column as “2”.</li>
   <div class="box-title hands-on-title" id="hands-on-alignment-with-hisat2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Alignment with HISAT2</div>
 
   <ol>
-    <li><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1" title="HISAT2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>HISAT2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1+galaxy1)</span> with the following parameters:
       <ul>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">mm10</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Single-end or paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Single end</code></li>
+        <li><em>“Source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome</code></li>
+        <li><em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">Mouse (Mus Musculus): mm10</code></li>
+        <li><em>“Single-end or paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Single end</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ files”</em>: <code class="language-plaintext highlighter-rouge">FASTQ_ProB_22LIST.fastqsanger</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Specify strand information”</em>: <code class="language-plaintext highlighter-rouge">Unstranded</code></li>
+        <li><em>“Specify strand information”</em>: <code class="language-plaintext highlighter-rouge">Unstranded</code></li>
       </ul>
     </li>
     <li>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the resulting files</li>
@@ -1925,17 +1921,17 @@ where fr - first strand corresponds to R and RF; fr - second strand corresponds 
   <div class="box-title hands-on-title" id="hands-on-variant-calling-with-freebayes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Variant Calling with FreeBayes</div>
 
   <ol>
-    <li><strong>FreeBayes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.9+galaxy0" title="FreeBayes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FreeBayes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.9+galaxy0)</span> with the following parameters:
       <ul>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Locally cached file</code>
+        <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Locally cached file</code>
           <ul>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Run in batch mode?”</em>: <code class="language-plaintext highlighter-rouge">Run Individually</code></li>
+            <li><em>“Run in batch mode?”</em>: <code class="language-plaintext highlighter-rouge">Run Individually</code></li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span>  <em>“BAM dataset:</em>: <code class="language-plaintext highlighter-rouge">HISAT_Output.BAM</code></li>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span>  <em>“Using reference genome”</em>: <code class="language-plaintext highlighter-rouge">mm10</code></li>
+            <li><em>“Using reference genome”</em>: <code class="language-plaintext highlighter-rouge">Mouse (Mus Musculus): mm10</code></li>
           </ul>
         </li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Limit variant calling to a set of regions?”</em>: <code class="language-plaintext highlighter-rouge">Do not Limit</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose parameter selection level”</em>: <code class="language-plaintext highlighter-rouge">Simple diploid calling</code></li>
+        <li><em>“Limit variant calling to a set of regions?”</em>: <code class="language-plaintext highlighter-rouge">Do not Limit</code></li>
+        <li><em>“Choose parameter selection level”</em>: <code class="language-plaintext highlighter-rouge">Simple diploid calling</code></li>
       </ul>
     </li>
     <li>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the resulting files.</li>
@@ -1989,21 +1985,18 @@ data manager to create these annotations to make them available for users.</p>
   <div class="box-title hands-on-title" id="hands-on-generate-protein-fastas-from-exosome-or-transcriptome-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generate protein FASTAs from exosome or transcriptome data</div>
 
   <ol>
-    <li><strong>CustomProDB</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/custom_pro_db/custom_pro_db/1.22.0" title="CustomProDB tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>CustomProDB</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.22.0)</span> with the following parameters:
       <ul>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span>  <em>“Will you select a genome annotation from your history or use a built-in annotation?”</em>: <code class="language-plaintext highlighter-rouge">Use built in genome annotation</code>
+        <li><em>“Will you select a genome annotation from your history or use a built-in annotation?”</em>: <code class="language-plaintext highlighter-rouge">Use built in genome annotation</code>
           <ul>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span>  <em>“Using reference genome”</em>: <code class="language-plaintext highlighter-rouge">Ensemble 89 mmusculus (GRm38.p5) (dbsnp142)</code></li>
+            <li><em>“Using reference genome”</em>: <code class="language-plaintext highlighter-rouge">Ensemble 89 mmusculus (GRm38.p5) (dbsnp142)</code></li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM file”</em>: <code class="language-plaintext highlighter-rouge">HISAT_Output.BAM</code></li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“VCF file”</em>: <code class="language-plaintext highlighter-rouge">Freebayes.vcf</code></li>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Annotate SNPs with rsid from dbSNP”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Annotate somatic SNPs from COSMIC (human only)”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
           </ul>
         </li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Transcript Expression Cutoff (RPKM)”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Create a variant FASTA for short insertions and deletions”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Create SQLite files for mapping proteins to genome and summarizing variant proteins”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Create RData file of variant protein coding sequences”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Create a variant FASTA for short insertions and deletions”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Create SQLite files for mapping proteins to genome and summarizing variant proteins”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Create RData file of variant protein coding sequences”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
     <li>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the resulting files</li>
@@ -2036,17 +2029,14 @@ variant annotation file will be used to visualize the variants in the Multi-omic
   <div class="box-title hands-on-title" id="hands-on-transcript-assembly-with-stringtie"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Transcript assembly with StringTie</div>
 
   <ol>
-    <li><strong>StringTie</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.3+galaxy0" title="StringTie tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>StringTie</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input mapped reads”</em>: <code class="language-plaintext highlighter-rouge">HISAT_Output.BAM</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Specify strand information”</em>: <code class="language-plaintext highlighter-rouge">Unstranded</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Use a reference file to guide assembly?”</em>: <code class="language-plaintext highlighter-rouge">Use Reference GTF/GFF3</code>
+        <li><em>“Specify strand information”</em>: <code class="language-plaintext highlighter-rouge">Unstranded</code></li>
+        <li><em>“Use a reference file to guide assembly?”</em>: <code class="language-plaintext highlighter-rouge">Use Reference GTF/GFF3</code>
           <ul>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Reference file”</em>: <code class="language-plaintext highlighter-rouge">Use file from History</code></li>
+            <li><em>“Reference file”</em>: <code class="language-plaintext highlighter-rouge">Use file from History</code></li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF/GFF3 dataset to guide assembly”</em>: <code class="language-plaintext highlighter-rouge">Mus_musculus.GRCm38.86.fixed.gtf</code></li>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Use Reference transcripts only?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output files for differential expression?”</em>: <code class="language-plaintext highlighter-rouge">No additional output</code></li>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output coverage file?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
           </ul>
         </li>
       </ul>
@@ -2109,25 +2099,19 @@ annotated, such as human, mouse, or other model organisms.</p>
   <div class="box-title hands-on-title" id="hands-on-compare-assembled-transcripts-against-a-reference-annotation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: compare assembled transcripts against a reference annotation</div>
 
   <ol>
-    <li><strong>GffCompare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.6+galaxy0" title="GffCompare tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GffCompare</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.12.6+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF inputs for comparison”</em><code class="language-plaintext highlighter-rouge">Stringtie_output.gtf</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Use Reference Annotation”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
+        <li><em>“Use Reference Annotation”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose the source for the reference annotation”</em>: <code class="language-plaintext highlighter-rouge">History</code>
+            <li><em>“Choose the source for the reference annotation”</em>: <code class="language-plaintext highlighter-rouge">History</code>
               <ul>
                 <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference Annotation”</em>: <code class="language-plaintext highlighter-rouge">Mus_musculus.GRCm38.86.gtf</code></li>
               </ul>
             </li>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Ignore reference transcripts that are not overlapped by any input transfrags”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Ignore input transcripts that are not overlapped by any reference transcripts”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
           </ul>
         </li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Use Sequence Data”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Discard (ignore) single-exon transcripts”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Max. Distance for assessing exon accuracy”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Max distance for transcript grouping”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“discard intron-redundant transfrags sharing 5’“</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Strict match”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
       </ul>
     </li>
   </ol>
@@ -2160,35 +2144,35 @@ no longer needed and is simply ignored when given).</p>
   <p>First, we must convert the GffCompare annotated GTF file to BED format.</p>
 
   <ol>
-    <li><strong>Convert gffCompare annotated GTF to BED</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/gffcompare_to_bed/gffcompare_to_bed/0.2.1" title="Convert gffCompare annotated GTF to BED tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert gffCompare annotated GTF to BED</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF annotated by gffCompare”</em>: <code class="language-plaintext highlighter-rouge">output from gff compare</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“filter GffCompare class_codes to convert”</em>:</li>
+        <li><em>“filter GffCompare class_codes to convert”</em>:</li>
       </ul>
       <ul>
-        <li><code class="language-plaintext highlighter-rouge">j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript</code></li>
-        <li><code class="language-plaintext highlighter-rouge">e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible   pre-mRNA fragment.</code></li>
-        <li><code class="language-plaintext highlighter-rouge">i : A transfrag falling entirely within a reference intron</code></li>
-        <li><code class="language-plaintext highlighter-rouge">p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)</code></li>
-        <li><code class="language-plaintext highlighter-rouge">u : Unknown, intergenic transcript</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible   pre-mRNA fragment.</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">i : A transfrag falling entirely within a reference intron</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">u : Unknown, intergenic transcript</code></li>
       </ul>
 
       <p>Next, we translate transcripts from the input BED file into protein sequences.</p>
     </li>
-    <li><strong>Translate BED transcripts cDNA in 3frames or CDS</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/translate_bed/translate_bed/0.1.0" title="Translate BED transcripts cDNA in 3frames or CDS tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Translate BED transcripts cDNA in 3frames or CDS</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“A BED file with 12 columns”</em>: <code class="language-plaintext highlighter-rouge">Convert GffCompare-annotated GTF to BED</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Source for Genomic Sequence Data”</em>: <code class="language-plaintext highlighter-rouge">Locally cached File</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select reference 2bit file”</em>: <code class="language-plaintext highlighter-rouge">mm10</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Fasta ID Options”</em></li>
+        <li><em>“Source for Genomic Sequence Data”</em>: <code class="language-plaintext highlighter-rouge">Locally cached twobit</code></li>
+        <li><em>“Select reference 2bit file”</em>: <code class="language-plaintext highlighter-rouge">mm10</code></li>
+        <li><em>“Fasta ID Options”</em></li>
       </ul>
       <ul>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“fasta ID source, e.g. generic”</em>: <code class="language-plaintext highlighter-rouge">generic</code></li>
+        <li><em>“fasta ID source, e.g. generic”</em>: <code class="language-plaintext highlighter-rouge">generic</code></li>
       </ul>
 
       <p>Finally, we convert a BED format file of the proteins from a proteomics search database into a tabular format for the Multiomics Visualization Platform (MVP).</p>
     </li>
-    <li><strong>bed to protein map</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/bed_to_protein_map/bed_to_protein_map/0.2.0" title="bed to protein map tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bed to protein map</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“A BED file with 12 columns, thickStart and thickEnd define protein coding region”</em>: <code class="language-plaintext highlighter-rouge">Translate cDNA_minus_CDS</code></li>
       </ul>
@@ -2222,23 +2206,24 @@ along with the UniProt and cRAP databases.</li>
   <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On</div>
 
   <ol>
-    <li><strong>FASTA Merge Files and Filter Unique Sequences</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0" title="FASTA Merge Files and Filter Unique Sequences tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTA Merge Files and Filter Unique Sequences</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.0)</span> with the following parameters:
       <ul>
-        <li>Click <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Input FASTA File(s)”</em> twice so that there are a total of three <em>“Input FASTA File(s)”</em> blocks.</li>
+        <li><em>“Run in batch mode?”</em>: <code class="language-plaintext highlighter-rouge">Merge individual FASTAs (output collection if input is collection)</code></li>
+        <li>Click <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Input FASTA File(s)”</em> three times so that there are a total of three <em>“Input FASTA File(s)”</em> blocks.</li>
         <li>Use the following parameters:</li>
       </ul>
       <ul>
-        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Run in batch mode?”</em>: <code class="language-plaintext highlighter-rouge">Merge individual FASTAs (output collection if input is collection)</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTA File(s)”</em> : <code class="language-plaintext highlighter-rouge">Input Custom ProDB Fasta File output</code>
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.HISAT_Output.rpkm
-2.HISAT_Output.snv
-3.HISAT_Output.indel
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTA File(s)”</em> :
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.HISAT2_Output.rpkm
+2.HISAT2_Output.snv
+3.HISAT2_Output.indel
 </code></pre></div>          </div>
         </li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“How are sequences judged to be unique?”</em>: <code class="language-plaintext highlighter-rouge">Accession and Sequence</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Accession Parsing Regular Expression”</em>: <code class="language-plaintext highlighter-rouge">^&gt;([^ |]+).*$</code></li>
+        <li><em>“How are sequences judged to be unique?”</em>: <code class="language-plaintext highlighter-rouge">Accession and Sequence</code></li>
+        <li><em>“Accession Parsing Regular Expression”</em>: <code class="language-plaintext highlighter-rouge">^&gt;([^ |]+).*$</code></li>
       </ul>
     </li>
+    <li>Rename the output <code class="language-plaintext highlighter-rouge">Merged and Filtered FASTA from CustomProDB</code></li>
   </ol>
 
 </blockquote>
@@ -2261,40 +2246,41 @@ We will also need to similarily modify the accessions in the genomic mapping and
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-fasta-to-tabular"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: FASTA to Tabular</div>
   <ol>
-    <li><strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the default parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1" title="FASTA-to-Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTA-to-Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the default parameters
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert these sequences”</em>: <code class="language-plaintext highlighter-rouge">Merged and Filtered FASTA from (fasta)</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert these sequences”</em>: <code class="language-plaintext highlighter-rouge">Merged and Filtered FASTA from CustomProDB</code></li>
       </ul>
     </li>
-    <li><strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">FASTA-to-Tabular output</code> from previous step</li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Using”</em>: <code class="language-plaintext highlighter-rouge">column 1</code></li>
+        <li><em>“Using”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Check</strong>
           <ul>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em> : <code class="language-plaintext highlighter-rouge">^(ENS[^_]+_\d+:)([ACGTacgt]+)&gt;([ACGTacgt]+)\s*</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1\2_\3</code></li>
+            <li><em>“Find Regex”</em> : <code class="language-plaintext highlighter-rouge">^(ENS[^_]+_\d+:)([ACGTacgt]+)&gt;([ACGTacgt]+)\s*</code></li>
+            <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1\2_\3</code></li>
           </ul>
         </li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Check</strong>
           <ul>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>:  <code class="language-plaintext highlighter-rouge">,([A-Y]\d+[A-Y]?)\s*</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">.\1</code></li>
+            <li><em>“Find Regex”</em>:  <code class="language-plaintext highlighter-rouge">,([A-Y]\d+[A-Y]?)\s*</code></li>
+            <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">.\1</code></li>
           </ul>
         </li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Check</strong>
           <ul>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">^(ENS[^ |]*)\s*</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">generic|\1</code></li>
+            <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">^(ENS[^ |]*)\s*</code></li>
+            <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">generic|\1</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><strong>Tabular-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1" title="Tabular-to-FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular-to-FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
       <ul>
-        <li><em>“Title column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-        <li><em>“Sequence Column”</em>:<code class="language-plaintext highlighter-rouge">2</code>
-     - Rename it as <strong>CustomProDB Merged Fasta</strong></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited file”</em>: <code class="language-plaintext highlighter-rouge">Column Regex Find And Replace Output</code></li>
+        <li><em>“Title column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><em>“Sequence Column”</em>:<code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+        <li>Rename it as <code class="language-plaintext highlighter-rouge">CustomProDB Merged Fasta</code></li>
       </ul>
     </li>
   </ol>
@@ -2321,7 +2307,7 @@ Also, while running the workflow, the Title column for <strong>Tabular-to-FASTA<
   <div class="box-title hands-on-title" id="hands-on-create-database-for-genomic-mapping"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Create Database for genomic mapping</div>
 
   <ol>
-    <li><strong>SQLite to tabular for SQL query</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/3.2.1" title="SQLite to tabular for SQL query tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SQLite to tabular for SQL query</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.2.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SQLite Database”</em>: <code class="language-plaintext highlighter-rouge">genomic_mapping.sqlite</code> from CustomProDB</li>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Query”</em>:
@@ -2334,7 +2320,7 @@ Also, while running the workflow, the Title column for <strong>Tabular-to-FASTA<
       </ul>
     </li>
     <li>
-      <p>Rename output to <code class="language-plaintext highlighter-rouge">genomic_mapping_sqlite</code></p>
+      <p>Rename the output as <code class="language-plaintext highlighter-rouge">genomic_mapping_sqlite</code></p>
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
@@ -2343,63 +2329,61 @@ Also, while running the workflow, the Title column for <strong>Tabular-to-FASTA<
       <p>The output is further processed so that the results are compatible with the Multiomics Visualization Platform.
 We need to modify the CustomProDB protein accessions the same as was done for the FASTA database.</p>
     </li>
-    <li><strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">genomic_mapping_sqlite' (tabular)</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Using”</em>: <code class="language-plaintext highlighter-rouge">column 1</code></li>
+        <li><em>“Using”</em>: <code class="language-plaintext highlighter-rouge">column 1</code></li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Check</strong>
           <ul>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em> : <code class="language-plaintext highlighter-rouge">^(ENS[^_]+_\d+:)([ACGTacgt]+)&gt;([ACGTacgt]+)\s*</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1\2_\3</code></li>
+            <li><em>“Find Regex”</em> : <code class="language-plaintext highlighter-rouge">^(ENS[^_]+_\d+:)([ACGTacgt]+)&gt;([ACGTacgt]+)\s*</code></li>
+            <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1\2_\3</code></li>
           </ul>
         </li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Check</strong>
           <ul>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>:  <code class="language-plaintext highlighter-rouge">,([A-Y]\d+[A-Y]?)\s*</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">.\1</code></li>
+            <li><em>“Find Regex”</em>:  <code class="language-plaintext highlighter-rouge">,([A-Y]\d+[A-Y]?)\s*</code></li>
+            <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">.\1</code></li>
           </ul>
         </li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Check</strong>
           <ul>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">^(ENS[^ |]*)\s*</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1</code></li>
+            <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">^(ENS[^ |]*)\s*</code></li>
+            <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1</code></li>
           </ul>
         </li>
       </ul>
     </li>
     <li>
-      <p>Rename the output to <code class="language-plaintext highlighter-rouge">SAV_INDEL</code></p>
+      <p>Rename the output as <code class="language-plaintext highlighter-rouge">SAV_INDEL</code></p>
 
       <p>This tool goes line by line through the specified input file and if the text in the selected column matches a specified regular expression pattern, it replaces the text with the specified replacement.</p>
 
       <p>Next, we will concatenate the output from this tool with the “Bed to protein map” output.</p>
     </li>
-    <li><strong>Concatenate multiple datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/artbio/concatenate_multiple_datasets/cat_multi_datasets/1.4.3" title="Concatenate multiple datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate multiple datasets</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.4.3)</span> with the following parameters:
       <ul>
-        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Concatenate Datasets”</em>: Select the output from the previous tool named as <code class="language-plaintext highlighter-rouge">SAV_INDEL</code> and the output from the “bed to protein map” tool and concatenate the tool.</li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Concatenate Datasets”</em>: Select the output from the previous tool named as <code class="language-plaintext highlighter-rouge">SAV_INDEL</code> and the output from the <code class="language-plaintext highlighter-rouge">bed to protein map</code> tool and run the tool.</li>
+        <li>Rename the output as <code class="language-plaintext highlighter-rouge">Genomic_Protein_map</code></li>
       </ul>
-
-      <p>Output will be the “Genomic_Protein_map” rename it as that</p>
 
       <p>Now, we load this tabular datasets into an SQLite database.</p>
     </li>
-    <li><strong>Query Tabular using SQLite</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2" title="Query Tabular using SQLite tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular using SQLite</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Database Table</strong>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">Genomic_Protein_map</code></li>
             <li>Section <strong>Table Options</strong>:
               <ul>
-                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Specify Name for Table”</em>: <code class="language-plaintext highlighter-rouge">feature_cds_map</code></li>
-                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Specify Column Names (comma-separated list)”</em>: <code class="language-plaintext highlighter-rouge">name,chrom,start,end,strand,cds_start,cds_end</code></li>
-                <li><em>“Only load the columns you have named into database”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                <li><em>“Specify Name for Table”</em>: <code class="language-plaintext highlighter-rouge">feature_cds_map</code></li>
+                <li><em>“Specify Column Names (comma-separated list)”</em>: <code class="language-plaintext highlighter-rouge">name,chrom,start,end,strand,cds_start,cds_end</code></li>
                 <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Table Index</strong>:
                   <ul>
-                    <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“This is a unique index”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-                    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Index on columns”</em>: <code class="language-plaintext highlighter-rouge">name,cds_start,cds_end</code></li>
+                    <li><em>“This is a unique index”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                    <li><em>“Index on columns”</em>: <code class="language-plaintext highlighter-rouge">name,cds_start,cds_end</code></li>
                   </ul>
                 </li>
-                <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Save the sqlite database in your history”</em>:<code class="language-plaintext highlighter-rouge">Yes</code></li>
+                <li><em>“Save the sqlite database in your history”</em>:<code class="language-plaintext highlighter-rouge">Yes</code></li>
               </ul>
             </li>
           </ul>
@@ -2407,7 +2391,7 @@ We need to modify the CustomProDB protein accessions the same as was done for th
       </ul>
     </li>
     <li>
-      <p>Rename the output as <strong>“genomic_mapping_sqlite”</strong></p>
+      <p>Rename the output as <code class="language-plaintext highlighter-rouge">genomic_mapping_sqlitedb</code></p>
 
       <p><a href="../../images/genomic_mapping_file.png" rel="noopener noreferrer"><img src="../../images/genomic_mapping_file.png" alt="genomic mapping. " width="1737" height="427" loading="lazy" /></a></p>
     </li>
@@ -2423,68 +2407,73 @@ We need to modify the CustomProDB protein accessions the same as was done for th
   <div class="box-title hands-on-title" id="hands-on-create-database-for-variant-annotations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Create database for variant annotations</div>
 
   <ol>
-    <li><strong>SQLite to tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/3.2.1" title="SQLite to tabular for SQL query tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SQLite to tabular for SQL query</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.2.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SQLite Database”</em>: <code class="language-plaintext highlighter-rouge">variant_annotations.sqlite</code> from CustomProDB</li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Query”</em>:
+        <li><em>“Query”</em>:
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT var_pro_name,pro_name,cigar,annotation
 FROM variant_annotation
 </code></pre></div>          </div>
         </li>
       </ul>
+    </li>
+    <li>
+      <p>Rename the output as <code class="language-plaintext highlighter-rouge">variant_annotation_sqlite</code></p>
 
       <p>We will subject the output to text manipulation so that the results are compatible with the Multiomics Visualization Platform.</p>
     </li>
-    <li><strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">variant_annotations_sqlite' (tabular)</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Using:”</em> <code class="language-plaintext highlighter-rouge">column 1</code></li>
+        <li><em>“Using:”</em> <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Check</strong>
           <ul>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">^(ENS[^_]+_\d+:)([ACGTacgt]+)&gt;([ACGTacgt]+)\s*</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1\2_\3</code></li>
+            <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">^(ENS[^_]+_\d+:)([ACGTacgt]+)&gt;([ACGTacgt]+)\s*</code></li>
+            <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1\2_\3</code></li>
           </ul>
         </li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Check</strong>:
           <ul>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">,([A-Y]\d+[A-Y]?)\s*</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">.\1</code></li>
+            <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">,([A-Y]\d+[A-Y]?)\s*</code></li>
+            <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">.\1</code></li>
           </ul>
         </li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Check</strong>:
           <ul>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">^(ENS[^ |]*)\s*</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>:  <code class="language-plaintext highlighter-rouge">\1</code></li>
+            <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">^(ENS[^ |]*)\s*</code></li>
+            <li><em>“Replacement”</em>:  <code class="language-plaintext highlighter-rouge">\1</code></li>
           </ul>
         </li>
       </ul>
+    </li>
+    <li>
+      <p>Rename the output as <code class="language-plaintext highlighter-rouge">variant_annotation</code></p>
 
       <p>Next, we will load this tabular dataset into an SQLite database.</p>
     </li>
-    <li><strong>Query Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2" title="Query Tabular using SQLite tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular using SQLite</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Database Table</strong>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">variant_annotation</code></li>
             <li>Section <strong>Table Options</strong>:
               <ul>
-                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Specify Name for Table”</em>: <code class="language-plaintext highlighter-rouge">variant_annotation</code></li>
-                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Specify Column Names (comma-separated list)”</em>: <code class="language-plaintext highlighter-rouge">name,reference,cigar,annotation</code></li>
-                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Only load the columns you have named into database”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                <li><em>“Specify Name for Table”</em>: <code class="language-plaintext highlighter-rouge">variant_annotation</code></li>
+                <li><em>“Specify Column Names (comma-separated list)”</em>: <code class="language-plaintext highlighter-rouge">name,reference,cigar,annotation</code></li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Table Index</strong>
+                  <ul>
+                    <li><em>“This is a unique index”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                    <li><em>“Index on columns”</em>: <code class="language-plaintext highlighter-rouge">name,cigar</code></li>
+                  </ul>
+                </li>
               </ul>
             </li>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Table Index</strong>
-              <ul>
-                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“This is a unique index”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Index on columns”</em>: <code class="language-plaintext highlighter-rouge">name,cigar</code></li>
-              </ul>
-            </li>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Save the sqlite database in your history”</em>:<code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Save the sqlite database in your history”</em>:<code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Rename the output as <strong>“Variant_annotation_sqlitedb”</strong></li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">Variant_annotation_sqlitedb</code></li>
   </ol>
 
 </blockquote>
@@ -2503,14 +2492,15 @@ by MVP to visualize the genomic loci of any variant peptides.</p>
   <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On</div>
 
   <ol>
-    <li><strong>FASTA Merge Files and Filter Unique Sequences</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0" title="FASTA Merge Files and Filter Unique Sequences tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTA Merge Files and Filter Unique Sequences</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.0)</span> with the following parameters:
       <ul>
-        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Run in batch mode?”</em>: <code class="language-plaintext highlighter-rouge">Merge individual FASTAs (output collection if input is collection)</code></li>
-        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA File(s)”</em> : <code class="language-plaintext highlighter-rouge">Input Custom ProDB Merged Fasta File output</code></li>
-        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA File(s)”</em> : <code class="language-plaintext highlighter-rouge">Input Translate BED transcripts Fasta output</code></li>
-        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA File(s)”</em> : <code class="language-plaintext highlighter-rouge">Input Reference_5000_uniprot_cRAP.fasta</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“How are sequences judged to be unique?”</em>: <code class="language-plaintext highlighter-rouge">Accession and Sequence</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Accession Parsing Regular Expression”</em>: <code class="language-plaintext highlighter-rouge">^&gt;([^ |]+).*$</code></li>
+        <li><em>“Run in batch mode?”</em>: <code class="language-plaintext highlighter-rouge">Merge individual FASTAs (output collection if input is collection)</code></li>
+        <li>Click <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Input FASTA File(s)”</em> three times so that there are a total of three <em>“Input FASTA File(s)”</em> blocks.</li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA File(s)”</em> : <code class="language-plaintext highlighter-rouge">Custom ProDB Merged Fasta File output</code></li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA File(s)”</em> : <code class="language-plaintext highlighter-rouge">Translate BED transcripts Fasta output</code></li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA File(s)”</em> : <code class="language-plaintext highlighter-rouge">Reference_5000_uniprot_cRAP.fasta</code></li>
+        <li><em>“How are sequences judged to be unique?”</em>: <code class="language-plaintext highlighter-rouge">Accession and Sequence</code></li>
+        <li><em>“Accession Parsing Regular Expression”</em>: <code class="language-plaintext highlighter-rouge">^&gt;([^ |]+).*$</code></li>
       </ul>
     </li>
   </ol>
@@ -2533,43 +2523,55 @@ by MVP to visualize the genomic loci of any variant peptides.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-fasta-to-tabular-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: FASTA to Tabular</div>
   <ol>
-    <li><strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the default parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1" title="FASTA-to-Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTA-to-Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the default parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert these sequences”</em>: <code class="language-plaintext highlighter-rouge">HISAT_Output.rpkm (fasta)</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert these sequences”</em>: <code class="language-plaintext highlighter-rouge">HISAT_Output.rpkm</code></li>
       </ul>
     </li>
-    <li><strong>Filter Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with these filters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1" title="Filter Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.1)</span> with these filters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset to filter”</em>: <code class="language-plaintext highlighter-rouge">HISAT_Output.rpkm (tabular)</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Filter by”</em>: <code class="language-plaintext highlighter-rouge">select columns</code></li>
-      </ul>
-      <ul>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“enter column numbers to keep”</em>: <code class="language-plaintext highlighter-rouge">1</code>
-      - <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Filter by”</em>: <code class="language-plaintext highlighter-rouge">regex replace value in column</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“enter column number to replace”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“regex pattern”</em>: <code class="language-plaintext highlighter-rouge">^([^ |]+).*$</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“replacement expression”</em>: <code class="language-plaintext highlighter-rouge">\1</code></li>
-      </ul>
-    </li>
-    <li><strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the default parameters
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert these sequences”</em>: <code class="language-plaintext highlighter-rouge">Trimmed_ref_5000_uniprot_cRAP.fasta (fasta)</code></li>
-      </ul>
-    </li>
-    <li><strong>Filter Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with these filters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset to filter”</em>: <code class="language-plaintext highlighter-rouge">Trimmed_ref_5000_uniprot_cRAP.fasta (tabular)</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Filter by”</em>: <code class="language-plaintext highlighter-rouge">select columns</code></li>
-      </ul>
-      <ul>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“enter column numbers to keep”</em>: <code class="language-plaintext highlighter-rouge">1</code>
-      - <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Filter by”</em>: <code class="language-plaintext highlighter-rouge">regex replace value in column</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“enter column number to replace”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“regex pattern”</em>: <code class="language-plaintext highlighter-rouge">^[^|]+[|]([^| ]+).*$</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“replacement expression”</em>: <code class="language-plaintext highlighter-rouge">\1</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset to filter”</em>: output of <code class="language-plaintext highlighter-rouge">FASTA-to-Tabular</code> on HISAT_Output.rpkm</li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Insert Filter Tabular Input Lines
+          <ul>
+            <li><em>“Filter by”</em>: <code class="language-plaintext highlighter-rouge">select columns</code></li>
+            <li><em>“enter column numbers to keep”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          </ul>
+        </li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Insert Filter Tabular Input Lines
+          <ul>
+            <li><em>“Filter by”</em>: <code class="language-plaintext highlighter-rouge">regex replace value in column</code></li>
+            <li><em>“enter column number to replace”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+            <li><em>“regex pattern”</em>: <code class="language-plaintext highlighter-rouge">^([^ |]+).*$</code></li>
+            <li><em>“replacement expression”</em>: <code class="language-plaintext highlighter-rouge">\1</code></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li><strong>Concatenate multiple datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1" title="FASTA-to-Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTA-to-Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the default parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert these sequences”</em>: <code class="language-plaintext highlighter-rouge">Trimmed_ref_5000_uniprot_cRAP.fasta</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1" title="Filter Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.1)</span> with these filters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset to filter”</em>: output of <code class="language-plaintext highlighter-rouge">FASTA-to-Tabular</code> on Trimmed_ref_5000_uniprot_cRAP.fasta</li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Insert Filter Tabular Input Lines
+          <ul>
+            <li><em>“Filter by”</em>: <code class="language-plaintext highlighter-rouge">select columns</code></li>
+            <li><em>“enter column numbers to keep”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          </ul>
+        </li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Insert Filter Tabular Input Lines
+          <ul>
+            <li><em>“Filter by”</em>: <code class="language-plaintext highlighter-rouge">regex replace value in column</code></li>
+            <li><em>“enter column number to replace”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+            <li><em>“regex pattern”</em>: <code class="language-plaintext highlighter-rouge">^[^|]+[|]([^| ]+).*$</code></li>
+            <li><em>“replacement expression”</em>: <code class="language-plaintext highlighter-rouge">\1</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/artbio/concatenate_multiple_datasets/cat_multi_datasets/1.4.3" title="Concatenate multiple datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate multiple datasets</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.4.3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Concatenate Datasets”</em>: Select the output from the previous 2 “Filter Tabular” outputs.</li>
       </ul>
@@ -2824,6 +2826,8 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                     
                 
                     
+                
+                    
                         
                         
                             
@@ -2848,17 +2852,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
                     
                 
-                    
-                
             
-                
-                    
-                
-                    
-                
-                    
-                
-                    
                 
                     
                 
@@ -2871,6 +2865,14 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                                 </li>
                             
                         
+                    
+                
+                    
+                
+                    
+                
+                    
+                
                     
                 
                     
@@ -2970,14 +2972,14 @@ install_tool_dependencies: true
 install_repository_dependencies: true
 install_resolver_dependencies: true
 tools:
-- name: text_processing
-  owner: bgruening
-  revisions: ddf54b12c295
+- name: concatenate_multiple_datasets
+  owner: artbio
+  revisions: 5b1b635232ed
   tool_panel_section_label: Text Manipulation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: text_processing
   owner: bgruening
-  revisions: d698c222f354
+  revisions: 6073bb457ec0
   tool_panel_section_label: Text Manipulation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: fasta_to_tabular
@@ -2987,7 +2989,7 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: freebayes
   owner: devteam
-  revisions: ef2c525bd8cd
+  revisions: 1e1291983bc7
   tool_panel_section_label: Variant Calling
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: tabular_to_fasta
@@ -3017,7 +3019,7 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: regex_find_replace
   owner: galaxyp
-  revisions: 209b7c5ee9d7
+  revisions: 503bcd6ebe4b
   tool_panel_section_label: Text Manipulation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: translate_bed
@@ -3027,32 +3029,32 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: filter_tabular
   owner: iuc
-  revisions: 34d29339abab
+  revisions: 90f657745fea
   tool_panel_section_label: Text Manipulation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: gffcompare
   owner: iuc
-  revisions: 0f710191a66d
+  revisions: 3c5e024a18cf
   tool_panel_section_label: Filter and Sort
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: hisat2
   owner: iuc
-  revisions: a86e80d3c09c
+  revisions: f4af63aaf57a
   tool_panel_section_label: Mapping
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: query_tabular
   owner: iuc
-  revisions: 33d61c89fb8d
+  revisions: cf4397560712
   tool_panel_section_label: Text Manipulation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: sqlite_to_tabular
   owner: iuc
-  revisions: b722161a845a
+  revisions: c4d18aa4ec4a
   tool_panel_section_label: Text Manipulation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: stringtie
   owner: iuc
-  revisions: 1ebd14235b92
+  revisions: cbf488da3b2c
   tool_panel_section_label: RNA Analysis
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 </code></pre></div>
@@ -3223,7 +3225,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/563871025dc816774e7987b9be317bda91fedae4">5638710</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/f32579d064bec5d0d765c6e534c4d443436605d2">f32579d</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
