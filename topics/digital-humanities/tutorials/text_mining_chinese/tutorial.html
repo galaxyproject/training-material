@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@a1f0281b1186dfe4a6e9b33b703ac7111108b940",
+		release: "galaxy-training-network@e5725d80a1ec77416fad5338db574e594d38e3e2",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Text-Mining Differences in Chinese Newspaper Articles">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-05-07 13:42:30 +0000">
+<meta name="DC.date" content="2025-05-07 14:54:04 +0000">
 <meta name="DC.creator" content="Daniela Schneider"><meta name="description" content=" Contemporary research in the humanities has expanded beyond anything that could be considered traditional. Historians are building interactive  digital maps, literary scholars are using computers to look for patterns across millions of books, and scholars in all disciplines are taking  advantage of the internet to make their work more dynamic and visually engaging. Digital humanities (DH) is the umbrella term that describes much of  this work. It is neither a field, a discipline, nor a methodology. It is not simply the humanities done with computers, nor is it computer science  performed on topics of interest to the humanities. DH is the result of a dynamic dialogue between emerging technology and humanistic inquiry.  -- Taken from [Stewart Varner's Special Report](https://americanlibrariesmagazine.org/2016/01/04/special-report-digital-humanities-libraries/) ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Digital Humanities / Text-Mining Differences in Chinese Newspaper Articles / Hands-on: Text-Mining Differences in Chinese Newspaper Articles">
@@ -186,7 +186,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-05-07 13:42:30 +0000",
+  "dateModified": "2025-05-07 14:54:04 +0000",
   "datePublished": "2025-02-28 12:12:48 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -244,15 +244,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Text-Mining Differences in Chinese Newspaper Articles",
   "url": "https://training.galaxyproject.org/training-material/topics/digital-humanities/tutorials/text_mining_chinese/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT1H",
-  "teaches": "- Learn to clean and compare two texts.\n- Extract specific information out of texts.\n- Visualise your results in a word cloud.",
+  "teaches": "- Learn to clean and compare two texts.\n- Extract specific information from texts.\n- Visualise your results in a word cloud.",
   "keywords": [
     "Digital Humanities",
-    "Humanities",
-    "Text_mining"
+    "text mining"
   ],
-  "description": "## Abstract\n\nThe British Hong Kong Government censored Chinese newspapers before their publication in the colony in the 1930s.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How can I automatically compare two Chinese newspaper articles?\n - What characters were censored in a Chinese newspaper published in Hong Kong in the 1930s?\n\n\n## Learning Objectives\n\n- Learn to clean and compare two texts.\n- Extract specific information out of texts.\n- Visualise your results in a word cloud.\n\n",
+  "description": "## Abstract\n\nThe British Hong Kong Government censored Chinese newspapers before their publication in the colony in the 1930s.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How can I automatically compare two Chinese newspaper articles?\n - What characters were censored in a Chinese newspaper published in Hong Kong in the 1930s?\n\n\n## Learning Objectives\n\n- Learn to clean and compare two texts.\n- Extract specific information from texts.\n- Visualise your results in a word cloud.\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -877,7 +876,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <li><p>Learn to clean and compare two texts.</p>
 </li>
         
-        <li><p>Extract specific information out of texts.</p>
+        <li><p>Extract specific information from texts.</p>
 </li>
         
         <li><p>Visualise your results in a word cloud.</p>
@@ -1020,7 +1019,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -1055,7 +1054,11 @@ Replacement characters like × visibly marked those redactions, making them visi
   <li><a href="#uploading-the-texts" id="markdown-toc-uploading-the-texts">Uploading the texts</a></li>
   <li><a href="#pre-processing" id="markdown-toc-pre-processing">Pre-processing</a>    <ol>
       <li><a href="#clean-up-both-texts" id="markdown-toc-clean-up-both-texts">Clean up both texts</a></li>
-      <li><a href="#comparing-the-censored-and-uncensored-text" id="markdown-toc-comparing-the-censored-and-uncensored-text">Comparing the censored and uncensored text</a></li>
+    </ol>
+  </li>
+  <li><a href="#comparing-the-censored-and-uncensored-text" id="markdown-toc-comparing-the-censored-and-uncensored-text">Comparing the censored and uncensored text</a>    <ol>
+      <li><a href="#create-a-diff-file-for-researchers" id="markdown-toc-create-a-diff-file-for-researchers">Create a <em>diff</em> file for researchers</a></li>
+      <li><a href="#create-a-diff-file-for-further-processing" id="markdown-toc-create-a-diff-file-for-further-processing">Create a <em>diff</em> file for further processing</a></li>
     </ol>
   </li>
   <li><a href="#select-only-censored-lines" id="markdown-toc-select-only-censored-lines">Select only censored lines</a></li>
@@ -1095,7 +1098,7 @@ https://zenodo.org/records/14899614/files/Example_Chinese_newspaper_uncensored.t
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li>Rename the datasets</li>
+    <li>Rename the datasets, if necessary</li>
     <li>
       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">txt</code>.</p>
 
@@ -1146,7 +1149,7 @@ You can check what your input matches in <a href="https://regex101.com">Regex 10
 
 <h2 id="clean-up-both-texts">Clean up both texts</h2>
 
-<p>We will use Regular Expressions in a tool called “Replace text”. It contains four different sub-steps. Those will vary if you upload different texts. Apply this step first to the censored and then to the uncensored text to get two cleaned ones.</p>
+<p>We will use Regular Expressions in a tool called “Replace text”. It contains four different sub-steps. Those will vary if you upload different texts. Apply this step first to the censored and then to the uncensored text to get two cleaned texts.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-cleaning-the-text-with-regular-expressions"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Cleaning the Text with Regular Expressions</div>
@@ -1154,7 +1157,7 @@ You can check what your input matches in <a href="https://regex101.com">Regex 10
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy0" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy0)</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Example_Chinese_newspaper_censored.txt</code> (uncensored text you uploaded)</li>
         <li>In <em>“Replacement”</em>:
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Replacement”</em>
@@ -1181,6 +1184,8 @@ You can check what your input matches in <a href="https://regex101.com">Regex 10
             </li>
           </ul>
         </li>
+        <li>Click <em>“Run Tool”</em>
+Now repeat those steps with the censored text.</li>
       </ul>
 
       <blockquote class="comment">
@@ -1188,7 +1193,7 @@ You can check what your input matches in <a href="https://regex101.com">Regex 10
         <p>Regular expressions can not only find particular words, as you might be familiar with from regular text editors.
 It is more powerful and can find particular patterns, for example, only capitalised words or all numbers.
 In this step, we mostly delete unnecessary placeholders.
-The first pattern we want to find is <code class="language-plaintext highlighter-rouge">\r</code>. It catches a specific form of invisible linebreaks that would create unwanted gaps in the comparison later.
+The first pattern we want to find is <code class="language-plaintext highlighter-rouge">\r</code>. It catches a specific form of invisible line breaks that would create unwanted gaps in the comparison later.
 We delete those by leaving the optional “Replace with” field blank.
 The additional sed commands before replacement <code class="language-plaintext highlighter-rouge">:a;N;$!ba;</code> catch all blank spaces with this tool.
 It is necessary only once to ensure that particular end-of-line characters are removed consistently.
@@ -1227,11 +1232,11 @@ The result is a clean and reformatted text.</p>
 
 </blockquote>
 
-<h2 id="comparing-the-censored-and-uncensored-text">Comparing the censored and uncensored text</h2>
+<h1 id="comparing-the-censored-and-uncensored-text">Comparing the censored and uncensored text</h1>
 
 <p>We can now compare the two cleaned texts. This will visualise the differences between the two texts and mark them by colour. Make sure to upload the cleaned censored text with the replacement characters like ‘×’ first. As text two, upload the cleaned uncensored text without the replacement characters.  This version (HTML version) creates an HTML file, which colour codes differences as additions (green) or extractions (red) when comparing the texts.</p>
 
-<h3 id="create-a-diff-file-for-researchers">Create a <em>diff</em> file for researchers</h3>
+<h2 id="create-a-diff-file-for-researchers">Create a <em>diff</em> file for researchers</h2>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-comparing-the-texts-using-em-diff-em-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Comparing the texts using <em>diff</em> tool</div>
@@ -1239,27 +1244,29 @@ The result is a clean and reformatted text.</p>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/diff/diff/3.10+galaxy1" title="diff tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>diff</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.10+galaxy1)</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First input file”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second input file”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Cleaned Censored Text”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Cleaned Uncensored Text”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Choose a report format”</em>: <code class="language-plaintext highlighter-rouge">Generates an HTML report to visualize the differences</code></li>
+        <li>Click <em>“Run Tool”</em></li>
       </ul>
     </li>
   </ol>
-
 </blockquote>
 
+<p>The result is two files: an HTML file and a raw output as a by-product.</p>
+
 <blockquote class="question">
-  <div class="box-title question-title" id="question-take-a-look-at-the-html-file"><i class="far fa-question-circle" aria-hidden="true" ></i> Question:  Take a look at the HTML file</div>
+  <div class="box-title question-title" id="question-take-a-look-at-the-html-report"><i class="far fa-question-circle" aria-hidden="true" ></i> Question:  Take a look at the HTML report</div>
 
   <ol>
-    <li>What can you see in line 20 / 23?</li>
+    <li>What can you see in lines 19 / 21?</li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>Line 20  on the left shows a red comma on the left side of the table. It corresponds with line 23 on the right, which contains a colon in green. This means the punctuation in the file differs. The censored version contains a comma, while the uncensored one includes a colon.</li>
+      <li>Line 19  on the left shows a red comma on the left side of the table. It corresponds with line 21 on the right, which contains a colon in green. This means the punctuation in the file differs. The censored version contains a comma, while the uncensored one includes a colon.</li>
     </ol>
 
   </blockquote>
@@ -1270,11 +1277,11 @@ The result is a clean and reformatted text.</p>
 
 <figure id="figure-2" style="max-width: 90%;"><img src="/training-material/topics/digital-humanities/tutorials/text_mining_chinese/images/Diff_WF_HTML.jpg" alt="Screenshot of the diff tool comparing the censored and uncensored text. " width="1414" height="420" loading="lazy" /><a target="_blank" href="/training-material/topics/digital-humanities/tutorials/text_mining_chinese/images/Diff_WF_HTML.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Example of the HTML file comparing the censored and uncensored text</figcaption></figure>
 
-<p>It shows what passages differ in the two texts. Red parts show deletions and green-coloured areas are additions.
+<p>It shows what passages differ in the two texts. Red parts show deletions, and green-coloured areas are additions.
 This output is very convenient for researchers, as it shows differences quickly. However, it is not helpful for further processing with Galaxy. For this, we run this tool a second time with slightly changed parameters. The output is the basis for our further analysis.</p>
 
-<h3 id="create-a-diff-file-for-further-processing">Create a <em>diff</em> file for further processing</h3>
-<p>This step runs the text comparison line by line again to create a raw file that the computer can work with.
+<h2 id="create-a-diff-file-for-further-processing">Create a <em>diff</em> file for further processing</h2>
+<p>This step runs the text comparison line by line again to create another raw file that the computer can work with.
 It is less intuitive to understand at first glance. Again, clean the censored text with the replacement characters like ‘×’ first and the uncensored text second.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1283,9 +1290,10 @@ It is less intuitive to understand at first glance. Again, clean the censored te
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/diff/diff/3.10+galaxy1" title="diff tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>diff</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.10+galaxy1)</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First input file”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second input file”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Cleaned Censored Text”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Cleaned Uncensored Text”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Choose a report format”</em>: <code class="language-plaintext highlighter-rouge">Text file, side-by-side (-y)</code></li>
+        <li>Click <em>“Run Tool”</em></li>
       </ul>
 
       <blockquote class="comment">
@@ -1308,13 +1316,33 @@ It is less intuitive to understand at first glance. Again, clean the censored te
     <div class="box-title solution-title" id="solution-answer"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Answer</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>This output is a raw file and shows several columns. Changes between the two texts are not coloured.
-Instead, they are marked by various symbols in column 8.</li>
+      <li>This output is a text file. Changes between the two texts are not coloured.
+Instead, they are marked by additional symbols like ‘&gt;’ or ‘&lt;’.</li>
     </ol>
 
   </blockquote>
 
 </blockquote>
+
+<p>The tools we use in the next steps need tabular files. Therefore, we will change the datatype of this last text file to a tabular file to enable the next steps:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-change-datatype"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Change Datatype</div>
+
+  <ol>
+    <li>
+      <p><strong>Set the datatype</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> to <code class="language-plaintext highlighter-rouge">tabular</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You have successfully changed the file’s format to tabular, which helps for the next steps.
+Now you can see that the additional symbols like ‘&gt;’ or ‘&lt;’ all appear in Column 8.</p>
 
 <h1 id="select-only-censored-lines">Select only censored lines</h1>
 <p>In the next step, we want to extract specific lines only. To determine what content was redacted in the first text, we filter the last step’s raw output for lines containing the censorship symbol ×.</p>
@@ -1327,6 +1355,7 @@ Instead, they are marked by various symbols in column 8.</li>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">diff_file</code> (output of <strong>diff</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">ord(c1) == 215</code></li>
+        <li>Click <em>“Run Tool”</em></li>
       </ul>
 
       <blockquote class="details">
@@ -1334,15 +1363,18 @@ Instead, they are marked by various symbols in column 8.</li>
 
         <p>The condition “ord(c1) == 215” means that column c1’s lines, which contain the censored text, are selected if they match ×. The symbol × is unspecific. Therefore, the Unicode identifier of the character (215) is used for clarity in this condition.</p>
       </blockquote>
-
-      <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-filter-for-other-characters"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Filter for other characters</div>
-        <p>Add another Unicode here if you want to select a different character, for example, ‘□’ or ‘△’.
-For example, you can get the respective code on <a href="https://www.mauvecloud.net/charsets/CharCodeFinder.html">Character Code Finder</a>.
-Copy the character you want to filter for in the “input” window and select “Decimal Character Codes” as an output. If you do this for symbol ×, you get 215.</p>
-      </blockquote>
     </li>
   </ol>
+
+  <p>Remember to rename your file “Censored lines”.</p>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-filter-for-other-characters"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Filter for other characters</div>
+    <p>Add another Unicode here if you want to select a different character, for example, ‘□’ or ‘△’.
+For example, you can get the respective code on <a href="https://www.mauvecloud.net/charsets/CharCodeFinder.html">Character Code Finder</a>.
+Copy the character you want to filter for in the “input” window and select “Decimal Character Codes” as an output. If you do this for symbol ×, you get 215.</p>
+  </blockquote>
+
 </blockquote>
 
 <blockquote class="question">
@@ -1377,19 +1409,9 @@ Copy the character you want to filter for in the “input” window and select �
         <li><em>“Input has a header line with column names?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
           <ul>
             <li>In <em>“Expressions”</em>:
-              <ul>
-                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Expressions”</em>
-                  <ul>
-                    <li><em>“Add expression”</em>: <code class="language-plaintext highlighter-rouge">c9</code></li>
-                    <li><em>“Mode of the operation”</em>: <code class="language-plaintext highlighter-rouge">Replace</code>
-                      <ul>
-                        <li><em>“Use new column to replace column number”</em>: <code class="language-plaintext highlighter-rouge">9</code></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
+      - <em>“Add expression”</em>: <code class="language-plaintext highlighter-rouge">c9</code>
+      - <em>“Mode of the operation”</em>: <code class="language-plaintext highlighter-rouge">Replace</code>
+          - <em>“Use new column to replace column number”</em>: <code class="language-plaintext highlighter-rouge">9</code></li>
           </ul>
         </li>
         <li>In <em>“Error handling”</em>:
@@ -1397,11 +1419,13 @@ Copy the character you want to filter for in the “input” window and select �
             <li><em>“If an expression cannot be computed for a row”</em>: <code class="language-plaintext highlighter-rouge">Produce an empty column value for the row</code></li>
           </ul>
         </li>
+        <li>Click <em>“Run Tool”</em></li>
       </ul>
     </li>
   </ol>
-
 </blockquote>
+
+<p>Rename the result to “Censored lines final”.</p>
 
 <h1 id="summarise-your-findings">Summarise your findings</h1>
 
@@ -1420,7 +1444,9 @@ Copy the character you want to filter for in the “input” window and select �
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
               <ul>
-                <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">c9</code></li>
+                <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">count</code></li>
+                <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">column 9</code></li>
+                <li>Click <em>“Run Tool”</em></li>
               </ul>
             </li>
           </ul>
@@ -1428,7 +1454,6 @@ Copy the character you want to filter for in the “input” window and select �
       </ul>
     </li>
   </ol>
-
 </blockquote>
 
 <blockquote class="question">
@@ -1461,6 +1486,7 @@ If you are only interested in the quantitative results, this can be your final o
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: <code class="language-plaintext highlighter-rouge">out_file</code> (output of <strong>Datamash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+        <li>Click <em>“Run Tool”</em></li>
       </ul>
 
       <blockquote class="comment">
@@ -1495,7 +1521,9 @@ If you are only interested in the quantitative results, this can be your final o
 
 <h1 id="cut-out-the-censored-characters-only">Cut out the censored characters only</h1>
 
-<p>If you want to visualise your results, this step gets you there. We select only the uncensored characters from text two. The result is only one column with different rows of Chinese characters.
+<p>If you want to visualise your results, this step gets you there. We use the file “Censored lines final”, which we created in the step “Ensure consistent file format”.
+Unlike the last step, this tabular file contains all 13 lines in 9 columns.
+From this file, we cut out all uncensored characters. The result is only one column with different rows of Chinese characters.
 It allows scaling words by frequency in the word cloud in the next step. As a result, characters that appear more often appear bigger, making the results evident at first sight.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1506,6 +1534,7 @@ It allows scaling words by frequency in the word cloud in the next step. As a re
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c9</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li>Click <em>“Run Tool”</em></li>
       </ul>
 
       <blockquote class="details">
@@ -1520,7 +1549,7 @@ It allows scaling words by frequency in the word cloud in the next step. As a re
 
 <h1 id="generate-a-word-cloud">Generate a word cloud</h1>
 
-<p>The last step is to visualise the results within a word cloud. It shows, which characters were censored in the first text. The bigger the word, the more often it appeared in the text.</p>
+<p>The last step is to visualise the results within a word cloud. It shows which characters were censored in the first text. The bigger the word, the more often it appeared in the text.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Task description</div>
@@ -1540,7 +1569,7 @@ It allows scaling words by frequency in the word cloud in the next step. As a re
         <div class="box-title details-title" id="details-optimise-your-word-cloud-optional"><button class="gtn-boxify-button details" type="button" aria-controls="details-optimise-your-word-cloud-optional" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details:  Optimise your word cloud (optional) </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>You can choose different colours to suit your needs. The higher the “Ratio of times to try horizontal fitting as opposed to vertical” is towards “1”, the more likely the character or word will appear horizontally.
-“Scaling of words by frequency (0 - 1)” allows you to scale the words according to their amount. The smaller this number, the more equal-sized the characters in your word cloud will be, no matter their amount.</p>
+“Scaling of words by frequency (0 - 1)” allows you to scale the words according to their frequency. The smaller this number, the more equal-sized the characters in your word cloud will be, no matter their amount.</p>
       </blockquote>
     </li>
   </ol>
@@ -1561,7 +1590,7 @@ It allows scaling words by frequency in the word cloud in the next step. As a re
 
 <p>Within this workflow, we first unified the layout of both texts, showing one character per line for an easier comparison with <em>diff</em> tool. The tool marked the differences between both texts in colour. Afterwards, we extracted only lines censored with ×. The extraction of the results ran in two strands: One was counting and sorting the results. This will answer what characters the British Hong Kong Government censored in their Chinese newspapers in the 1930s: Based on the (simplified) dummy texts, the characters were 敵 (enemy), 寇 (brave) and 日 (Japan). The character for <em>enemy</em> dominates and was censored five times more often than the character for <em>brave</em>.</p>
 
-<p>What do those findings tell us? The British Hong Kong Government avoided publishing newspapers with a strong stand against Japan. Why? Because the British colony Hong Kong, with a large Chinese population, is located very close to the Chinese mainland. Especially after the Japanese army invaded China in the summer of 1937, the British had to walk a tightrope. They tried to support the Chinese efforts without offending Japan. As a British outpost, Hong Kong had little military power and would not withstand a Japanese attack for long. Therefore, the British tried to appease the Japanese Government and avoid an attack. Calling them brave or enemy openly would have been dangerous. The one redaction of 日 (Japan) is very uncommon. This shows that the censorship practices were adaptable and not always unified. Censoring Hong Kong’s newspapers to avoid anti-Japanese content is, therefore, a practical example of how appeasement policies from the British Government were implemented locally. This newspaper comparison is consistent with the findings in archival sources that I also researched for my dissertation (<span class="citation"><a href="#Schneider2024">Schneider 2024</a></span>) and lays the censored characters open for the first time.</p>
+<p>What do those findings tell us? The British Hong Kong Government avoided publishing newspapers with a strong stand against Japan. Why? Because the British colony of Hong Kong, with a large Chinese population, is located very close to the Chinese mainland. Especially after the Japanese army invaded China in the summer of 1937, the British had to walk a tightrope. They tried to support the Chinese efforts without offending Japan. As a British outpost, Hong Kong had little military power and would not withstand a Japanese attack for long. Therefore, the British tried to appease the Japanese Government and avoid an attack. Calling them brave or enemies openly would have been dangerous. The one redaction of 日 (Japan) is very uncommon. This shows that the censorship practices were adaptable and not always unified. Censoring Hong Kong’s newspapers to avoid anti-Japanese content is, therefore, a practical example of how appeasement policies from the British Government were implemented locally. This newspaper comparison is consistent with the findings in archival sources that I also researched for my dissertation (<span class="citation"><a href="#Schneider2024">Schneider 2024</a></span>) and lays the censored characters open for the first time.</p>
 
                 </section>
 
@@ -1596,7 +1625,7 @@ It allows scaling words by frequency in the word cloud in the next step. As a re
                         <li><p>The <em>diff</em> tool allows comparing two similar texts automatically</p>
 </li>
                         
-                        <li><p>The word cloud shows redactions from the texts at one glance</p>
+                        <li><p>The word cloud shows redactions from the texts at a glance</p>
 </li>
                         
                     </ul>
@@ -1858,7 +1887,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a1f0281b1186dfe4a6e9b33b703ac7111108b940">a1f0281</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e5725d80a1ec77416fad5338db574e594d38e3e2">e5725d8</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
