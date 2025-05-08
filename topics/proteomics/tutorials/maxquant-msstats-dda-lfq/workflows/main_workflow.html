@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Proteomics: MaxQuant and MSstats LFQ workflow / MaxQuant and MSstats for the analysis of label-free data / Proteomics</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Proteomics: MaxQuant and MSstats for the analysis of label-free data / MaxQuant and MSstats for the analysis of label-free data / Proteomics</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6197541c7629245b97daf3e7f8eb31d2a6e83d5a",
+		release: "galaxy-training-network@a8ef69ebb565528dcef5f22d1ad9103eeda2d31d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -66,11 +66,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="Proteomics: MaxQuant and MSstats LFQ workflow">
+<meta name="DC.title" content="Proteomics: MaxQuant and MSstats for the analysis of label-free data">
 <meta name="DC.publisher" content="Galaxy Training Network">
 <meta name="DC.date" content="1970-01-01 00:00:00 +0000"><meta name="description" content="Training material for proteomics workflows in Galaxy">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Proteomics / MaxQuant and MSstats for the analysis of label-free data / Proteomics: MaxQuant and MSstats LFQ workflow">
+	<meta property="og:title" content="Proteomics / MaxQuant and MSstats for the analysis of label-free data / Proteomics: MaxQuant and MSstats for the analysis of label-free data">
         <meta property="og:description" content="Training material for proteomics workflows in Galaxy">
         <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/workflows/main_workflow.png">
 	</head>
@@ -221,7 +221,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 
 <section>
 	<hgroup>
-		<h1 data-toc-skip>Proteomics: MaxQuant and MSstats LFQ workflow</h1>
+		<h1 data-toc-skip>Proteomics: MaxQuant and MSstats for the analysis of label-free data</h1>
 		<p>proteomics-maxquant-msstats-dda-lfq/main-workflow</p>
 	</hgroup>
 	
@@ -237,14 +237,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			3
+			4
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Jun 4, 2021
+			May 8, 2025
 
 			<br/>
 
@@ -264,8 +264,6 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #d2c8ff; --color-darker: #beacff; --color-dimmed: #c8baff;">proteomics</div>
-			
 			</br>
 			
 
@@ -273,6 +271,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Features</b>
 			<ul>
 			
+			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
 			
 			
 			
@@ -329,11 +329,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-maxquant-msstats-dda-lfq/versions/main-workflow">Galaxy Europe</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-maxquant-msstats-dda-lfq/versions/main-workflow">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-maxquant-msstats-dda-lfq/versions/main-workflow">Galaxy France</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-maxquant-msstats-dda-lfq/versions/main-workflow">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-maxquant-msstats-dda-lfq/versions/main-workflow">Galaxy Main</a></li>
 					
@@ -347,70 +347,124 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				Download
 			</a>
 			<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nannotation file"];
+  0["ℹ️ Input Dataset\nProtein Groups"];
   style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\ncomparison matrix"];
+  1["ℹ️ Input Dataset\nEvidence"];
   style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Dataset\nfasta protein database"];
+  2["ℹ️ Input Dataset\nannotation file"];
   style 2 stroke:#2c3143,stroke-width:4px;
-  3["ℹ️ Input Collection\nraw files"];
+  3["ℹ️ Input Dataset\ncomparison matrix"];
   style 3 stroke:#2c3143,stroke-width:4px;
-  4["MaxQuant"];
-  2 -->|output| 4;
-  3 -->|output| 4;
+  4["Select"];
+  0 -->|output| 4;
+  58469745-c560-4082-9cc4-2a457386b772["Output\nselect protein groups"];
+  4 --> 58469745-c560-4082-9cc4-2a457386b772;
+  style 58469745-c560-4082-9cc4-2a457386b772 stroke:#2c3143,stroke-width:4px;
   5["Select"];
-  4 -->|proteinGroups| 5;
-  6["Select"];
-  4 -->|evidence| 6;
+  1 -->|output| 5;
+  cfff2740-c583-4e2d-bf6d-2dc5ecbb69f5["Output\nselect protein evidence"];
+  5 --> cfff2740-c583-4e2d-bf6d-2dc5ecbb69f5;
+  style cfff2740-c583-4e2d-bf6d-2dc5ecbb69f5 stroke:#2c3143,stroke-width:4px;
+  6["Replace Text"];
+  4 -->|out_file1| 6;
+  aa963300-6a11-4455-a0e2-17cb68483426["Output\nprotein groups input for MSstats"];
+  6 --> aa963300-6a11-4455-a0e2-17cb68483426;
+  style aa963300-6a11-4455-a0e2-17cb68483426 stroke:#2c3143,stroke-width:4px;
   7["Replace Text"];
   5 -->|out_file1| 7;
-  8["Replace Text"];
-  6 -->|out_file1| 8;
-  9["MSstats"];
-  1 -->|output| 9;
-  0 -->|output| 9;
-  8 -->|outfile| 9;
-  7 -->|outfile| 9;
-  10["Datamash"];
-  9 -->|runlevel_data| 10;
-  11["Summary Statistics"];
-  9 -->|runlevel_data| 11;
-  12["Replace Text"];
-  9 -->|comparison_result| 12;
-  13["Replace Text"];
-  9 -->|quant_sample_matrix| 13;
+  b746188c-8a93-4d78-9379-2ed054a136d2["Output\nevidence input for MSstats"];
+  7 --> b746188c-8a93-4d78-9379-2ed054a136d2;
+  style b746188c-8a93-4d78-9379-2ed054a136d2 stroke:#2c3143,stroke-width:4px;
+  8["MSstats"];
+  3 -->|output| 8;
+  2 -->|output| 8;
+  7 -->|outfile| 8;
+  6 -->|outfile| 8;
+  9["Summary Statistics"];
+  8 -->|proteinlevel_data| 9;
+  10["Replace Text"];
+  8 -->|quant_sample_matrix| 10;
+  9dff3f51-ec15-4737-ac31-4af0bbce163e["Output\nreplaced sample quantification matrix"];
+  10 --> 9dff3f51-ec15-4737-ac31-4af0bbce163e;
+  style 9dff3f51-ec15-4737-ac31-4af0bbce163e stroke:#2c3143,stroke-width:4px;
+  11["Replace Text"];
+  8 -->|comparison_result| 11;
+  c69337e8-a296-4b01-b439-e41d7a397099["Output\nreplaced comparison result"];
+  11 --> c69337e8-a296-4b01-b439-e41d7a397099;
+  style c69337e8-a296-4b01-b439-e41d7a397099 stroke:#2c3143,stroke-width:4px;
+  12["Datamash"];
+  8 -->|proteinlevel_data| 12;
+  13["Filter"];
+  11 -->|outfile| 13;
+  ef566712-0057-4d2e-8b66-fca422b71031["Output\nsignificant proteins"];
+  13 --> ef566712-0057-4d2e-8b66-fca422b71031;
+  style ef566712-0057-4d2e-8b66-fca422b71031 stroke:#2c3143,stroke-width:4px;
   14["Filter"];
-  12 -->|outfile| 14;
+  13 -->|out_file1| 14;
+  81583c93-be46-4b0a-8b8f-43f1c700c900["Output\nmetastasized filtered"];
+  14 --> 81583c93-be46-4b0a-8b8f-43f1c700c900;
+  style 81583c93-be46-4b0a-8b8f-43f1c700c900 stroke:#2c3143,stroke-width:4px;
   15["Filter"];
-  14 -->|out_file1| 15;
+  13 -->|out_file1| 15;
+  dfe7380c-7b63-4381-84d4-08f225a165c6["Output\nrdeb filtered"];
+  15 --> dfe7380c-7b63-4381-84d4-08f225a165c6;
+  style dfe7380c-7b63-4381-84d4-08f225a165c6 stroke:#2c3143,stroke-width:4px;
   16["Filter"];
   14 -->|out_file1| 16;
+  a83ef0a1-d7b6-43b2-be66-394e6b5af4b0["Output\nsignificant metastasized"];
+  16 --> a83ef0a1-d7b6-43b2-be66-394e6b5af4b0;
+  style a83ef0a1-d7b6-43b2-be66-394e6b5af4b0 stroke:#2c3143,stroke-width:4px;
   17["Filter"];
   15 -->|out_file1| 17;
-  18["Filter"];
+  bbafbb4f-7d4a-43aa-9a47-078f5c946ff5["Output\nsignificant rdeb"];
+  17 --> bbafbb4f-7d4a-43aa-9a47-078f5c946ff5;
+  style bbafbb4f-7d4a-43aa-9a47-078f5c946ff5 stroke:#2c3143,stroke-width:4px;
+  18["Cut"];
   16 -->|out_file1| 18;
+  4b9eed6a-3316-41e8-ad1a-f6252bca9888["Output\nmetastasized cut"];
+  18 --> 4b9eed6a-3316-41e8-ad1a-f6252bca9888;
+  style 4b9eed6a-3316-41e8-ad1a-f6252bca9888 stroke:#2c3143,stroke-width:4px;
   19["Cut"];
   17 -->|out_file1| 19;
-  20["Cut"];
+  4a99a360-9afc-4358-bed1-ed3a10aa1310["Output\nrdeb cut"];
+  19 --> 4a99a360-9afc-4358-bed1-ed3a10aa1310;
+  style 4a99a360-9afc-4358-bed1-ed3a10aa1310 stroke:#2c3143,stroke-width:4px;
+  20["Join"];
+  10 -->|outfile| 20;
   18 -->|out_file1| 20;
+  f5759e17-57b3-4ca7-b09a-172fdcc0aa21["Output\nmetastasized join"];
+  20 --> f5759e17-57b3-4ca7-b09a-172fdcc0aa21;
+  style f5759e17-57b3-4ca7-b09a-172fdcc0aa21 stroke:#2c3143,stroke-width:4px;
   21["Join"];
-  13 -->|outfile| 21;
+  10 -->|outfile| 21;
   19 -->|out_file1| 21;
-  22["Join"];
-  13 -->|outfile| 22;
-  20 -->|out_file1| 22;
+  f8de348d-f22c-47e9-8899-40e525c51966["Output\nrdeb join"];
+  21 --> f8de348d-f22c-47e9-8899-40e525c51966;
+  style f8de348d-f22c-47e9-8899-40e525c51966 stroke:#2c3143,stroke-width:4px;
+  22["UniProt"];
+  20 -->|output| 22;
+  0a40e034-7710-4a02-9950-98baa4b4a7cf["Output\nmetastasized uniprot"];
+  22 --> 0a40e034-7710-4a02-9950-98baa4b4a7cf;
+  style 0a40e034-7710-4a02-9950-98baa4b4a7cf stroke:#2c3143,stroke-width:4px;
   23["heatmap2"];
-  21 -->|output| 23;
-  24["UniProt"];
+  20 -->|output| 23;
+  02709f6c-fffe-416e-a76d-ff03c1eb5bc4["Output\nUpregulated proteins in metastasized cSCC"];
+  23 --> 02709f6c-fffe-416e-a76d-ff03c1eb5bc4;
+  style 02709f6c-fffe-416e-a76d-ff03c1eb5bc4 stroke:#2c3143,stroke-width:4px;
+  24["heatmap2"];
   21 -->|output| 24;
-  25["heatmap2"];
-  22 -->|output| 25;
-  26["UniProt"];
-  22 -->|output| 26;
+  690b708f-52d6-4caf-b20f-2a464fbd798e["Output\nUpregulated proteins in RDEB cSCC"];
+  24 --> 690b708f-52d6-4caf-b20f-2a464fbd798e;
+  style 690b708f-52d6-4caf-b20f-2a464fbd798e stroke:#2c3143,stroke-width:4px;
+  25["UniProt"];
+  21 -->|output| 25;
+  33419abf-0efa-4a28-8cab-d28f645ea2c3["Output\nrdeb uniprot"];
+  25 --> 33419abf-0efa-4a28-8cab-d28f645ea2c3;
+  style 33419abf-0efa-4a28-8cab-d28f645ea2c3 stroke:#2c3143,stroke-width:4px;
+  26["FASTA-to-Tabular"];
+  22 -->|outfile_retrieve_fasta| 26;
   27["FASTA-to-Tabular"];
-  24 -->|outfile_retrieve_fasta| 27;
-  28["FASTA-to-Tabular"];
-  26 -->|outfile_retrieve_fasta| 28;</pre>
+  25 -->|outfile_retrieve_fasta| 27;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -423,22 +477,22 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				
 				<tr>
 					<td>Input dataset</td>
+					<td>Protein Groups</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>Evidence</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
 					<td>annotation file</td>
 				</tr>
 				
 				<tr>
 					<td>Input dataset</td>
 					<td>comparison matrix</td>
-				</tr>
-				
-				<tr>
-					<td>Input dataset</td>
-					<td>fasta protein database</td>
-				</tr>
-				
-				<tr>
-					<td>Input dataset collection</td>
-					<td>raw files</td>
 				</tr>
 				
 				</tbody>
@@ -456,12 +510,6 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy4</td>
-					<td>MaxQuant</td>
-					<td></td>
-				</tr>
-				
-				<tr>
 					<td>Grep1</td>
 					<td>Select</td>
 					<td></td>
@@ -474,43 +522,25 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</td>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy0</td>
 					<td>Replace Text</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</td>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy0</td>
 					<td>Replace Text</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.22.0.1</td>
-					<td>MSstats</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/datamash_ops/1.0.6</td>
-					<td>Datamash</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>Summary_Statistics1</td>
-					<td>Summary Statistics</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</td>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy0</td>
 					<td>Replace Text</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</td>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy0</td>
 					<td>Replace Text</td>
 					<td></td>
 				</tr>
@@ -558,50 +588,38 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2</td>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy0</td>
 					<td>Join</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2</td>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy0</td>
 					<td>Join</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1</td>
-					<td>heatmap2</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2</td>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.5</td>
 					<td>UniProt</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.2.0+galaxy1</td>
 					<td>heatmap2</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.2.0+galaxy1</td>
+					<td>heatmap2</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.5</td>
 					<td>UniProt</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1</td>
-					<td>FASTA-to-Tabular</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1</td>
-					<td>FASTA-to-Tabular</td>
 					<td></td>
 				</tr>
 				
@@ -648,11 +666,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy0">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/d698c222f354">
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/6073bb457ec0">
 						View in ToolShed
 					</a>
 					
@@ -660,11 +678,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy0">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/d698c222f354">
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/6073bb457ec0">
 						View in ToolShed
 					</a>
 					
@@ -672,11 +690,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2">toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.5">toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.5</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/uniprot_rest_interface/054483e27a35">
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/uniprot_rest_interface/468c71dac78a">
 						View in ToolShed
 					</a>
 					
@@ -696,11 +714,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy4">toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy4</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/4.0.0+galaxy1">toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/4.0.0+galaxy1</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/maxquant/f522c08e900c">
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/msstats/de7593c29499">
 						View in ToolShed
 					</a>
 					
@@ -708,11 +726,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.22.0.1">toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.22.0.1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/msstats/593839e1f2c3">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/datamash_ops/4c07ddedc198">
 						View in ToolShed
 					</a>
 					
@@ -720,18 +738,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/datamash_ops/1.0.6">toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/datamash_ops/1.0.6</a></td>
-				<td>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1">toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.0.1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.2.0+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.2.0+galaxy1</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/ggplot2_heatmap2/ca7cb0eaad62">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/ggplot2_heatmap2/48b42ee61bc5">
 						View in ToolShed
 					</a>
 					
@@ -761,6 +772,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>4</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/f0f3aee9db75392a0f9b163e87566a67f089f272">f0f3aee9d</a></td>
+						<td>2025-05-05 18:02:26</td>
+						<td>Update tutorial</td>
+					</tr>
 					
 					<tr>
 						<td>3</td>
@@ -864,7 +882,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6197541c7629245b97daf3e7f8eb31d2a6e83d5a">6197541</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a8ef69ebb565528dcef5f22d1ad9103eeda2d31d">a8ef69e</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
