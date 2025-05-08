@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b4945df7031ccc83c42e40f16fe619d02d4f72e4",
+		release: "galaxy-training-network@c26d24d5e270a7b4491e7cb1e0cf8fe59f3c805e",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -237,14 +237,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			9
+			10
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			May 7, 2025
+			May 8, 2025
 
 			<br/>
 
@@ -263,8 +263,6 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Tags</b>
 			<br/>
 
-			
-			<div class="label label-default tutorial_tag" style="--color-primary: #dad2ff; --color-darker: #c5b5ff; --color-dimmed: #cfc3ff;">proteomics</div>
 			
 			</br>
 			
@@ -335,9 +333,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-dbcreation/versions/galaxy-workflow-mouse-rnaseq-dbcreation">Galaxy Australia</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-dbcreation/versions/galaxy-workflow-mouse-rnaseq-dbcreation">Galaxy Europe</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-dbcreation/versions/galaxy-workflow-mouse-rnaseq-dbcreation">Galaxy France</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-dbcreation/versions/galaxy-workflow-mouse-rnaseq-dbcreation">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-dbcreation/versions/galaxy-workflow-mouse-rnaseq-dbcreation">Import to another server (≥23.0+ only!)</a>
@@ -458,6 +456,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   26 -->|output| 28;
   21 -->|translation_fasta| 28;
   0 -->|output| 28;
+  ce87fe82-008d-404d-b512-034116326e1e["Output\nUniprot_cRAP_SAV_indel_translatedbed"];
+  28 --> ce87fe82-008d-404d-b512-034116326e1e;
+  style ce87fe82-008d-404d-b512-034116326e1e stroke:#2c3143,stroke-width:4px;
   29["Query Tabular"];
   27 -->|out_file1| 29;
   d470b980-5ccc-4217-91fb-ced35304e854["Output\ngenomic_mapping_sqlitedb"];
@@ -587,6 +588,12 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tr>
 					<td>toolshed.g2.bx.psu.edu/repos/artbio/concatenate_multiple_datasets/cat_multi_datasets/1.4.3</td>
 					<td>Concatenate multiple datasets</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0</td>
+					<td>FASTA Merge Files and Filter Unique Sequences</td>
 					<td></td>
 				</tr>
 				
@@ -839,6 +846,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 					
 					<tr>
+						<td>15</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/2da1f4758c7ca66e2d2a2adbfcbe598e3155bf07">2da1f4758</a></td>
+						<td>2025-05-07 16:18:34</td>
+						<td>fix regex for merging fasta files</td>
+					</tr>
+					
+					<tr>
 						<td>14</td>
 						<td><a href="https://github.com/galaxyproject/training-material/commit/2b884c8b57e046b63bd9e8eeb6ed37e0d119c923">2b884c8b5</a></td>
 						<td>2025-05-06 09:18:08</td>
@@ -1017,7 +1031,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b4945df7031ccc83c42e40f16fe619d02d4f72e4">b4945df</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c26d24d5e270a7b4491e7cb1e0cf8fe59f3c805e">c26d24d</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

@@ -620,7 +620,7 @@
                 "owner": "galaxyp",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"fasta\", \"accession_parser\": \"^>([^ |]+).*$\", \"batchmode\": {\"processmode\": \"individual\", \"__current_case__\": 0, \"input_fastas\": [{\"__index__\": 0, \"input_fasta\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"input_fasta\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 2, \"input_fasta\": {\"__class__\": \"ConnectedValue\"}}]}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/mm10.len\", \"uniqueness_criterion\": \"sequence\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"accession_parser\": \"^>([^ ]+).*$\", \"batchmode\": {\"processmode\": \"individual\", \"__current_case__\": 0, \"input_fastas\": [{\"__index__\": 0, \"input_fasta\": {\"__class__\": \"RuntimeValue\"}}, {\"__index__\": 1, \"input_fasta\": {\"__class__\": \"RuntimeValue\"}}, {\"__index__\": 2, \"input_fasta\": {\"__class__\": \"RuntimeValue\"}}]}, \"uniqueness_criterion\": \"sequence\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.2.0",
             "type": "tool",
             "uuid": "8018cb77-2d94-4dbc-a211-6f2cf6550b28",
@@ -1388,7 +1388,15 @@
                 "left": 2890.629987352946,
                 "top": 664.8293578413962
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Uniprot_cRAP_SAV_indel_translatedbed"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0",
             "tool_shed_repository": {
                 "changeset_revision": "f546e7278f04",
@@ -1396,12 +1404,18 @@
                 "owner": "galaxyp",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"fasta\", \"accession_parser\": \"^>([^ |]+).*$\", \"batchmode\": {\"processmode\": \"individual\", \"__current_case__\": 0, \"input_fastas\": [{\"__index__\": 0, \"input_fasta\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"input_fasta\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 2, \"input_fasta\": {\"__class__\": \"ConnectedValue\"}}]}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/mm10.len\", \"uniqueness_criterion\": \"sequence\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"accession_parser\": \"^>([^ ]+).*$\", \"batchmode\": {\"processmode\": \"individual\", \"__current_case__\": 0, \"input_fastas\": [{\"__index__\": 0, \"input_fasta\": {\"__class__\": \"RuntimeValue\"}}, {\"__index__\": 1, \"input_fasta\": {\"__class__\": \"RuntimeValue\"}}, {\"__index__\": 2, \"input_fasta\": {\"__class__\": \"RuntimeValue\"}}]}, \"uniqueness_criterion\": \"sequence\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.2.0",
             "type": "tool",
             "uuid": "f125be2b-b7b4-46f3-9678-3e06536e8d42",
             "when": null,
-            "workflow_outputs": []
+            "workflow_outputs": [
+                {
+                    "label": "Uniprot_cRAP_SAV_indel_translatedbed",
+                    "output_name": "output",
+                    "uuid": "ce87fe82-008d-404d-b512-034116326e1e"
+                }
+            ]
         },
         "29": {
             "annotation": "",
@@ -1462,7 +1476,7 @@
             ]
         }
     },
-    "tags": ["proteomics"],
-    "uuid": "aa9a1087-989c-4f5e-8651-937b668f3f3f",
-    "version": 8
+    "tags": [],
+    "uuid": "30e05498-f3cb-4fdd-a3dd-6d0b7614a59f",
+    "version": 11
 }
