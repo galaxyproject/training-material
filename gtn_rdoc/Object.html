@@ -1317,6 +1317,9 @@
           <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">category</span>(<span class="ruby-value">term:</span> <span class="ruby-node">&quot;starts:#{page.data[&#39;date_start&#39;].to_datetime.rfc3339}&quot;</span>)
           <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">category</span>(<span class="ruby-value">term:</span> <span class="ruby-node">&quot;ends:#{(page.data[&#39;date_end&#39;] || page.data[&#39;date_start&#39;]).to_datetime.rfc3339}&quot;</span>)
           <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">category</span>(<span class="ruby-value">term:</span> <span class="ruby-node">&quot;days:#{page.data[&#39;duration&#39;]}&quot;</span>)
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;external&#39;</span>]
+            <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">link</span>(<span class="ruby-value">href:</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;external&#39;</span>])
+          <span class="ruby-keyword">end</span>
 
           <span class="ruby-comment"># xml.path(page.path)</span>
           <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">category</span>(<span class="ruby-value">term:</span> <span class="ruby-node">&quot;new #{page[&#39;layout&#39;]}&quot;</span>)
