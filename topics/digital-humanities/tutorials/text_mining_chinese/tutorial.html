@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@290d4b9e006a297e15516f80687d2b26f359f5c9",
+		release: "galaxy-training-network@fc95a5f4e00a6975cef39700178fa50fea552eb6",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Text-Mining Differences in Chinese Newspaper Articles">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-05-07 14:54:04 +0000">
+<meta name="DC.date" content="2025-05-12 14:19:18 +0000">
 <meta name="DC.creator" content="Daniela Schneider"><meta name="description" content=" Contemporary research in the humanities has expanded beyond anything that could be considered traditional. Historians are building interactive  digital maps, literary scholars are using computers to look for patterns across millions of books, and scholars in all disciplines are taking  advantage of the internet to make their work more dynamic and visually engaging. Digital humanities (DH) is the umbrella term that describes much of  this work. It is neither a field, a discipline, nor a methodology. It is not simply the humanities done with computers, nor is it computer science  performed on topics of interest to the humanities. DH is the result of a dynamic dialogue between emerging technology and humanistic inquiry.  -- Taken from [Stewart Varner's Special Report](https://americanlibrariesmagazine.org/2016/01/04/special-report-digital-humanities-libraries/) ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Digital Humanities / Text-Mining Differences in Chinese Newspaper Articles / Hands-on: Text-Mining Differences in Chinese Newspaper Articles">
@@ -186,7 +186,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-05-07 14:54:04 +0000",
+  "dateModified": "2025-05-12 14:19:18 +0000",
   "datePublished": "2025-02-28 12:12:48 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -244,7 +244,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Text-Mining Differences in Chinese Newspaper Articles",
   "url": "https://training.galaxyproject.org/training-material/topics/digital-humanities/tutorials/text_mining_chinese/tutorial.html",
-  "version": 2,
+  "version": 3,
   "timeRequired": "PT1H",
   "teaches": "- Learn to clean and compare two texts.\n- Extract specific information from texts.\n- Visualise your results in a word cloud.",
   "keywords": [
@@ -979,7 +979,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 28, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 7, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 12, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -997,7 +997,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 1 all time)</div>
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
 
     </blockquote>
     </section>
@@ -1135,7 +1137,7 @@ You can check what your input matches in <a href="https://regex101.com">Regex 10
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy0" title="Replace Text tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy0)</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Example_Chinese_newspaper_censored.txt</code> (uncensored text you uploaded)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Example_Chinese_newspaper_censored.txt</code> (censored text you uploaded)</li>
         <li>In <em>“Replacement”</em>:
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Replacement”</em>
@@ -1162,9 +1164,10 @@ You can check what your input matches in <a href="https://regex101.com">Regex 10
             </li>
           </ul>
         </li>
-        <li>Click <em>“Run Tool”</em>
-Now repeat those steps with the censored text.</li>
+        <li>Click <em>“Run Tool”</em>.</li>
       </ul>
+
+      <p>Now repeat those steps with the uncensored text.</p>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-explaining-the-above-regular-expressions"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Explaining the above Regular Expressions</div>
@@ -1541,6 +1544,7 @@ It allows scaling words by frequency in the word cloud in the next step. As a re
         <li><em>“Color option”</em>: <code class="language-plaintext highlighter-rouge">Color</code></li>
         <li><em>“Ratio of times to try horizontal fitting as opposed to vertical”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
         <li><em>“Scaling of words by frequency (0 - 1)”</em>: <code class="language-plaintext highlighter-rouge">0.9</code></li>
+        <li>Click <em>“Run Tool”</em></li>
       </ul>
 
       <blockquote class="details">
@@ -1780,6 +1784,11 @@ tools:
 		   
 		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
 		   
+			<tr>
+				<th scope="row">t{ hist[0] | to_stars }}</th>
+				<td style="--size: 1.0">1</td>
+			</tr>
+		   
 		   </table>
 		   </p>
 		
@@ -1867,7 +1876,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/290d4b9e006a297e15516f80687d2b26f359f5c9">290d4b9</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/fc95a5f4e00a6975cef39700178fa50fea552eb6">fc95a5f</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
