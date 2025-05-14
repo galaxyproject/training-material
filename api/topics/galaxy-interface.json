@@ -225,7 +225,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-05-13 12:41:58 +0000",
+          "modified": "2025-05-14 00:07:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Select first\"];\n  0 -->|output| 1;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[label=\"Select first\"]\n  0 -> 1 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -362,6 +362,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -440,11 +445,6 @@
           {
             "url": "http://dintor.eurac.edu/",
             "name": "Dintor",
-            "usegalaxy": false
-          },
-          {
-            "url": "http://www.freebioinfo.org/",
-            "name": "FreeBioinfo",
             "usegalaxy": false
           },
           {
@@ -538,6 +538,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -607,10 +612,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -689,6 +690,11 @@
                 "state": "exact",
                 "version": "1.1.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -886,7 +892,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-05-13 12:41:58 +0000",
+          "modified": "2025-05-14 00:07:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nVariant calls\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Parameter\\nmin-AF for consensus variant\"];\n  style 1 fill:#ded,stroke:#393,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nReference genome\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Compose text parameter value\"];\n  1 -->|output| 3;\n  4[\"SnpSift Filter\"];\n  3 -->|out1| 4;\n  0 -->|output| 4;\n  ee67c5ed-ff7c-404b-ad20-19259edbc671[\"Output\\nconsensus_variants\"];\n  4 --> ee67c5ed-ff7c-404b-ad20-19259edbc671;\n  style ee67c5ed-ff7c-404b-ad20-19259edbc671 stroke:#2c3143,stroke-width:4px;\n  5[\"bcftools consensus\"];\n  4 -->|output| 5;\n  2 -->|output| 5;\n  9028f80e-4112-40d8-9a49-f671677d304f[\"Output\\nconsensus\"];\n  5 --> 9028f80e-4112-40d8-9a49-f671677d304f;\n  style 9028f80e-4112-40d8-9a49-f671677d304f stroke:#2c3143,stroke-width:4px;\n  6[\"Collapse Collection\"];\n  5 -->|output_file| 6;\n  1dd7978e-b907-42d6-8fc4-f6fadeefcad1[\"Output\\nmultisample_consensus_fasta\"];\n  6 --> 1dd7978e-b907-42d6-8fc4-f6fadeefcad1;\n  style 1dd7978e-b907-42d6-8fc4-f6fadeefcad1 stroke:#2c3143,stroke-width:4px;\n  7[\"Pangolin\"];\n  6 -->|output| 7;\n  e02d2cfb-9842-4069-957c-6cf4ec197056[\"Output\\npangolin_results\"];\n  7 --> e02d2cfb-9842-4069-957c-6cf4ec197056;\n  style e02d2cfb-9842-4069-957c-6cf4ec197056 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nVariant calls\"]\n  1[color=lightgreen,label=\"ℹ️ Input Parameter\\nmin-AF for consensus variant\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nReference genome\"]\n  3[label=\"Compose text parameter value\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"SnpSift Filter\"]\n  3 -> 4 [label=\"out1\"]\n  0 -> 4 [label=\"output\"]\n  kee67c5edff7c404bad2019259edbc671[color=lightseagreen,label=\"Output\\nconsensus_variants\"]\n  4 -> kee67c5edff7c404bad2019259edbc671\n  5[label=\"bcftools consensus\"]\n  4 -> 5 [label=\"output\"]\n  2 -> 5 [label=\"output\"]\n  k9028f80e411240d89a49f671677d304f[color=lightseagreen,label=\"Output\\nconsensus\"]\n  5 -> k9028f80e411240d89a49f671677d304f\n  6[label=\"Collapse Collection\"]\n  5 -> 6 [label=\"output_file\"]\n  k1dd7978eb90742d68fc4f6fadeefcad1[color=lightseagreen,label=\"Output\\nmultisample_consensus_fasta\"]\n  6 -> k1dd7978eb90742d68fc4f6fadeefcad1\n  7[label=\"Pangolin\"]\n  6 -> 7 [label=\"output\"]\n  ke02d2cfb98424069957c6cf4ec197056[color=lightseagreen,label=\"Output\\npangolin_results\"]\n  7 -> ke02d2cfb98424069957c6cf4ec197056\n}",
           "workflow_tools": [
@@ -1338,6 +1344,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
             "usegalaxy": true
@@ -1389,11 +1400,6 @@
           {
             "url": "http://dintor.eurac.edu/",
             "name": "Dintor",
-            "usegalaxy": false
-          },
-          {
-            "url": "http://www.freebioinfo.org/",
-            "name": "FreeBioinfo",
             "usegalaxy": false
           },
           {
@@ -1487,6 +1493,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -1556,10 +1567,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -1645,6 +1652,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "1.15.1+galaxy3",
+                  "1.15.1+galaxy4"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "1.10",
                 "server": "https://usegalaxy.eu"
@@ -1714,10 +1729,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -1792,6 +1803,11 @@
                 "state": "exact",
                 "version": "0.1.1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "0.1.1",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -1865,10 +1881,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
@@ -1882,11 +1894,11 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "4.1.1+galaxy0",
-                  "4.1.2+galaxy0",
-                  "4.0.5+galaxy0",
+                  "3.0.3+galaxy0",
                   "3.1.16+galaxy0",
-                  "3.0.3+galaxy0"
+                  "4.0.5+galaxy0",
+                  "4.1.2+galaxy0",
+                  "4.1.1+galaxy0"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -1951,6 +1963,15 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "4.3+galaxy2",
+                  "4.3+galaxy1",
+                  "4.2+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "2.3.8",
                 "server": "https://usegalaxy.eu"
@@ -1958,20 +1979,20 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "4.1.1+galaxy0",
-                  "4.1.2+galaxy0",
-                  "4.0.5+galaxy0",
                   "3.1.16+galaxy0",
+                  "4.0.5+galaxy0",
+                  "4.1.2+galaxy0",
+                  "4.1.1+galaxy0",
                   "4.3+galaxy2",
-                  "3.1.19+galaxy0",
-                  "3.1.20+galaxy0",
-                  "3.1.17+galaxy1",
-                  "3.1.14+galaxy0",
                   "4.3+galaxy1",
+                  "4.2+galaxy0",
                   "3.1.4+galaxy1",
+                  "3.1.20+galaxy0",
+                  "3.1.19+galaxy0",
                   "3.1.11+galaxy0",
                   "4.0.5+galaxy2",
-                  "4.2+galaxy0"
+                  "3.1.17+galaxy1",
+                  "3.1.14+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -2040,10 +2061,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
@@ -2116,6 +2133,11 @@
                 "state": "exact",
                 "version": "4.3+t.galaxy1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "4.3+t.galaxy1",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -2190,10 +2212,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
@@ -2273,6 +2291,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "5.1.0",
+                  "1.0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "4.2",
                 "server": "https://usegalaxy.eu"
@@ -2280,8 +2306,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "4.1",
-                  "5.1.0"
+                  "5.1.0",
+                  "4.1"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -2932,7 +2958,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-05-13 12:41:58 +0000",
+          "modified": "2025-05-14 00:07:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ENA Upload tool\"];\n  1[\"ENA Upload tool\"];",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"ENA Upload tool\"]\n  1[label=\"ENA Upload tool\"]\n}",
           "workflow_tools": [
@@ -3088,11 +3114,6 @@
             "usegalaxy": false
           },
           {
-            "url": "http://www.freebioinfo.org/",
-            "name": "FreeBioinfo",
-            "usegalaxy": false
-          },
-          {
             "url": "http://igg.cloud.ba.infn.it/galaxy",
             "name": "GASLINI",
             "usegalaxy": false
@@ -3183,6 +3204,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -3252,10 +3278,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -3332,6 +3354,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "missing",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -3398,10 +3424,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
@@ -3474,14 +3496,22 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.3.1",
                   "0.8.0+galaxy0",
                   "0.7.5+galaxy1",
-                  "0.7.1+galaxy1",
                   "0.3",
-                  "0.3.1",
+                  "0.7.1+galaxy1",
                   "0.5.3"
                 ],
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "0.8.0+galaxy0",
+                  "0.6.1"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -3492,17 +3522,17 @@
                 "state": "inexact",
                 "versions": [
                   "0.7.3+galaxy1",
+                  "0.3.1",
                   "0.8.0+galaxy0",
                   "0.7.5+galaxy1",
                   "0.7.1+galaxy1",
-                  "0.3.1",
                   "0.5.3",
-                  "0.4.3",
-                  "0.3.3",
                   "0.6.1",
+                  "0.4.1",
                   "0.6.0",
                   "0.6.3+galaxy0",
-                  "0.4.1",
+                  "0.4.3",
+                  "0.3.3",
                   "0.7.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -3523,11 +3553,11 @@
                   "0.7.5+galaxy1",
                   "0.7.1+galaxy1",
                   "0.5.3",
-                  "0.4.3",
-                  "0.3.3",
                   "0.6.1",
                   "0.6.0",
-                  "0.6.3+galaxy0"
+                  "0.6.3+galaxy0",
+                  "0.4.3",
+                  "0.3.3"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -3579,10 +3609,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
@@ -3655,11 +3681,11 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.3.1",
                   "0.8.0+galaxy0",
                   "0.7.5+galaxy1",
-                  "0.7.1+galaxy1",
                   "0.3",
-                  "0.3.1",
+                  "0.7.1+galaxy1",
                   "0.5.3"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -3667,20 +3693,28 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.8.0+galaxy0",
+                  "0.6.1"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
                   "0.7.3+galaxy1",
+                  "0.3.1",
                   "0.8.0+galaxy0",
                   "0.7.5+galaxy1",
-                  "0.7.1+galaxy1",
                   "0.3",
-                  "0.3.1",
+                  "0.7.1+galaxy1",
                   "0.5.3",
-                  "0.4.3",
-                  "0.3.2",
-                  "0.3.3",
                   "0.6.1",
+                  "0.4.1",
                   "0.6.0",
                   "0.6.3+galaxy0",
-                  "0.4.1"
+                  "0.3.2",
+                  "0.4.3",
+                  "0.3.3"
                 ],
                 "server": "https://usegalaxy.eu"
               },
@@ -3688,17 +3722,17 @@
                 "state": "inexact",
                 "versions": [
                   "0.7.3+galaxy1",
+                  "0.3.1",
                   "0.8.0+galaxy0",
                   "0.7.5+galaxy1",
                   "0.7.1+galaxy1",
-                  "0.3.1",
                   "0.5.3",
-                  "0.4.3",
-                  "0.3.3",
                   "0.6.1",
+                  "0.4.1",
                   "0.6.0",
                   "0.6.3+galaxy0",
-                  "0.4.1",
+                  "0.4.3",
+                  "0.3.3",
                   "0.7.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -3719,11 +3753,11 @@
                   "0.7.5+galaxy1",
                   "0.7.1+galaxy1",
                   "0.5.3",
-                  "0.4.3",
-                  "0.3.3",
                   "0.6.1",
                   "0.6.0",
-                  "0.6.3+galaxy0"
+                  "0.6.3+galaxy0",
+                  "0.4.3",
+                  "0.3.3"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -3877,7 +3911,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-05-13 12:41:58 +0000",
+          "modified": "2025-05-14 00:07:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput dataset collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Reverse dataset\"];\n  0 -->|output| 1;\n  2[\"Select first lines\"];\n  1 -->|outfile| 2;\n  daf1abd9-a5c8-4b25-add1-5475e594f187[\"Output\\nFirst lines\"];\n  2 --> daf1abd9-a5c8-4b25-add1-5475e594f187;\n  style daf1abd9-a5c8-4b25-add1-5475e594f187 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput dataset collection\"]\n  1[label=\"Reverse dataset\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Select first lines\"]\n  1 -> 2 [label=\"outfile\"]\n  kdaf1abd9a5c84b25add15475e594f187[color=lightseagreen,label=\"Output\\nFirst lines\"]\n  2 -> kdaf1abd9a5c84b25add15475e594f187\n}",
           "workflow_tools": [
@@ -4059,7 +4093,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-05-13 12:41:58 +0000",
+          "modified": "2025-05-14 00:07:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput dataset collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"🛠️ Subworkflow\\nworkflow 1\"];\n  style 1 fill:#edd,stroke:#900,stroke-width:4px;\n  0 -->|output| 1;\n  88160926-01a6-4903-8737-1f3d65449e12[\"Output\\nFirst lines\"];\n  1 --> 88160926-01a6-4903-8737-1f3d65449e12;\n  style 88160926-01a6-4903-8737-1f3d65449e12 stroke:#2c3143,stroke-width:4px;\n  2[\"🛠️ Subworkflow\\nworkflow 2\"];\n  style 2 fill:#edd,stroke:#900,stroke-width:4px;\n  0 -->|output| 2;\n  f18ca9d2-a8bb-4317-86cb-bad2ef3d2fba[\"Output\\nFirst lines\"];\n  2 --> f18ca9d2-a8bb-4317-86cb-bad2ef3d2fba;\n  style f18ca9d2-a8bb-4317-86cb-bad2ef3d2fba stroke:#2c3143,stroke-width:4px;\n  3[\"Paste\"];\n  1 -->|First lines| 3;\n  2 -->|First lines| 3;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput dataset collection\"]\n  1[color=lightcoral,label=\"🛠️ Subworkflow\\nworkflow 1\"]\n  0 -> 1 [label=\"output\"]\n  k8816092601a6490387371f3d65449e12[color=lightseagreen,label=\"Output\\nFirst lines\"]\n  1 -> k8816092601a6490387371f3d65449e12\n  2[color=lightcoral,label=\"🛠️ Subworkflow\\nworkflow 2\"]\n  0 -> 2 [label=\"output\"]\n  kf18ca9d2a8bb431786cbbad2ef3d2fba[color=lightseagreen,label=\"Output\\nFirst lines\"]\n  2 -> kf18ca9d2a8bb431786cbbad2ef3d2fba\n  3[label=\"Paste\"]\n  1 -> 3 [label=\"First lines\"]\n  2 -> 3 [label=\"First lines\"]\n}",
           "workflow_tools": [
@@ -4604,6 +4638,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -4682,11 +4721,6 @@
           {
             "url": "http://dintor.eurac.edu/",
             "name": "Dintor",
-            "usegalaxy": false
-          },
-          {
-            "url": "http://www.freebioinfo.org/",
-            "name": "FreeBioinfo",
             "usegalaxy": false
           },
           {
@@ -4780,6 +4814,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -4851,10 +4890,6 @@
                 "server": "http://dintor.eurac.edu/"
               },
               {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
                 "state": "local",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
@@ -4925,6 +4960,10 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "local",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "local",
@@ -4993,10 +5032,6 @@
                 "server": "http://dintor.eurac.edu/"
               },
               {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
                 "state": "local",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
@@ -5070,6 +5105,10 @@
               },
               {
                 "state": "local",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -5133,10 +5172,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -5215,6 +5250,11 @@
                 "state": "exact",
                 "version": "1.1.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -5374,7 +5414,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-05-13 12:41:58 +0000",
+          "modified": "2025-05-14 00:07:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Create InterMine Interchange\"];\n  0 -->|output| 1;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[label=\"Create InterMine Interchange\"]\n  0 -> 1 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -5502,6 +5542,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -5569,11 +5614,6 @@
           {
             "url": "http://dintor.eurac.edu/",
             "name": "Dintor",
-            "usegalaxy": false
-          },
-          {
-            "url": "http://www.freebioinfo.org/",
-            "name": "FreeBioinfo",
             "usegalaxy": false
           },
           {
@@ -5667,6 +5707,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -5736,10 +5781,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "local",
@@ -5815,6 +5856,10 @@
               },
               {
                 "state": "local",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -5878,10 +5923,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -5955,6 +5996,11 @@
                 "state": "exact",
                 "version": "0.0.1",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "0.0.1",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -6285,7 +6331,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-05-13 12:41:58 +0000",
+          "modified": "2025-05-14 00:07:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nIris Dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Convert CSV to tabular\"];\n  0 -->|output| 1;\n  2[\"Datamash\"];\n  1 -->|tabular| 2;\n  5fc8c705-b9e2-4008-aa85-e84504b8395f[\"Output\\ndatamash_output\"];\n  2 --> 5fc8c705-b9e2-4008-aa85-e84504b8395f;\n  style 5fc8c705-b9e2-4008-aa85-e84504b8395f stroke:#2c3143,stroke-width:4px;\n  3[\"Remove beginning\"];\n  1 -->|tabular| 3;\n  4[\"Cut\"];\n  3 -->|out_file1| 4;\n  5[\"Group\"];\n  3 -->|out_file1| 5;\n  7e07839c-e8ca-4692-8b8e-6eb3607066de[\"Output\\ngroup1\"];\n  5 --> 7e07839c-e8ca-4692-8b8e-6eb3607066de;\n  style 7e07839c-e8ca-4692-8b8e-6eb3607066de stroke:#2c3143,stroke-width:4px;\n  6[\"Group\"];\n  3 -->|out_file1| 6;\n  9cb98227-aa5b-4b77-933c-ffba1e98566e[\"Output\\ngroup2\"];\n  6 --> 9cb98227-aa5b-4b77-933c-ffba1e98566e;\n  style 9cb98227-aa5b-4b77-933c-ffba1e98566e stroke:#2c3143,stroke-width:4px;\n  7[\"Scatterplot with ggplot2\"];\n  3 -->|out_file1| 7;\n  8[\"Scatterplot with ggplot2\"];\n  3 -->|out_file1| 8;\n  9[\"Unique\"];\n  4 -->|out_file1| 9;\n  fc73409c-7878-4391-bc91-f99a5be0ba06[\"Output\\nunique_output\"];\n  9 --> fc73409c-7878-4391-bc91-f99a5be0ba06;\n  style fc73409c-7878-4391-bc91-f99a5be0ba06 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nIris Dataset\"]\n  1[label=\"Convert CSV to tabular\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Datamash\"]\n  1 -> 2 [label=\"tabular\"]\n  k5fc8c705b9e24008aa85e84504b8395f[color=lightseagreen,label=\"Output\\ndatamash_output\"]\n  2 -> k5fc8c705b9e24008aa85e84504b8395f\n  3[label=\"Remove beginning\"]\n  1 -> 3 [label=\"tabular\"]\n  4[label=\"Cut\"]\n  3 -> 4 [label=\"out_file1\"]\n  5[label=\"Group\"]\n  3 -> 5 [label=\"out_file1\"]\n  k7e07839ce8ca46928b8e6eb3607066de[color=lightseagreen,label=\"Output\\ngroup1\"]\n  5 -> k7e07839ce8ca46928b8e6eb3607066de\n  6[label=\"Group\"]\n  3 -> 6 [label=\"out_file1\"]\n  k9cb98227aa5b4b77933cffba1e98566e[color=lightseagreen,label=\"Output\\ngroup2\"]\n  6 -> k9cb98227aa5b4b77933cffba1e98566e\n  7[label=\"Scatterplot with ggplot2\"]\n  3 -> 7 [label=\"out_file1\"]\n  8[label=\"Scatterplot with ggplot2\"]\n  3 -> 8 [label=\"out_file1\"]\n  9[label=\"Unique\"]\n  4 -> 9 [label=\"out_file1\"]\n  kfc73409c78784391bc91f99a5be0ba06[color=lightseagreen,label=\"Output\\nunique_output\"]\n  9 -> kfc73409c78784391bc91f99a5be0ba06\n}",
           "workflow_tools": [
@@ -6692,7 +6738,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-05-13 12:41:58 +0000",
+          "modified": "2025-05-14 00:07:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nIris Dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Convert CSV to tabular\"];\n  0 -->|output| 1;\n  2[\"Datamash\"];\n  1 -->|tabular| 2;\n  5381f9b0-5170-484c-828e-4469ec27ab3e[\"Output\\ndatamash_output\"];\n  2 --> 5381f9b0-5170-484c-828e-4469ec27ab3e;\n  style 5381f9b0-5170-484c-828e-4469ec27ab3e stroke:#2c3143,stroke-width:4px;\n  3[\"Remove beginning\"];\n  1 -->|tabular| 3;\n  4[\"Cut\"];\n  3 -->|out_file1| 4;\n  5[\"Group\"];\n  3 -->|out_file1| 5;\n  836a57b3-3657-435b-b396-869af7e2f35e[\"Output\\ngroup1\"];\n  5 --> 836a57b3-3657-435b-b396-869af7e2f35e;\n  style 836a57b3-3657-435b-b396-869af7e2f35e stroke:#2c3143,stroke-width:4px;\n  6[\"Group\"];\n  3 -->|out_file1| 6;\n  82e163a4-8fc5-4b8e-8186-9fc66cd75b1d[\"Output\\ngroup2\"];\n  6 --> 82e163a4-8fc5-4b8e-8186-9fc66cd75b1d;\n  style 82e163a4-8fc5-4b8e-8186-9fc66cd75b1d stroke:#2c3143,stroke-width:4px;\n  7[\"Scatterplot with ggplot2\"];\n  3 -->|out_file1| 7;\n  bbbac6ca-64fb-46ad-8798-6c7c5369ccaf[\"Output\\nSepal Plot (PNG)\"];\n  7 --> bbbac6ca-64fb-46ad-8798-6c7c5369ccaf;\n  style bbbac6ca-64fb-46ad-8798-6c7c5369ccaf stroke:#2c3143,stroke-width:4px;\n  8[\"Scatterplot with ggplot2\"];\n  3 -->|out_file1| 8;\n  74ee0c3c-53c2-44cf-b0e8-2a10c24166c9[\"Output\\nPetal Plot (PNG)\"];\n  8 --> 74ee0c3c-53c2-44cf-b0e8-2a10c24166c9;\n  style 74ee0c3c-53c2-44cf-b0e8-2a10c24166c9 stroke:#2c3143,stroke-width:4px;\n  9[\"Unique\"];\n  4 -->|out_file1| 9;\n  6bcc2f96-255e-48f5-a37b-7d6a2c123493[\"Output\\nIris Species\"];\n  9 --> 6bcc2f96-255e-48f5-a37b-7d6a2c123493;\n  style 6bcc2f96-255e-48f5-a37b-7d6a2c123493 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nIris Dataset\"]\n  1[label=\"Convert CSV to tabular\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Datamash\"]\n  1 -> 2 [label=\"tabular\"]\n  k5381f9b05170484c828e4469ec27ab3e[color=lightseagreen,label=\"Output\\ndatamash_output\"]\n  2 -> k5381f9b05170484c828e4469ec27ab3e\n  3[label=\"Remove beginning\"]\n  1 -> 3 [label=\"tabular\"]\n  4[label=\"Cut\"]\n  3 -> 4 [label=\"out_file1\"]\n  5[label=\"Group\"]\n  3 -> 5 [label=\"out_file1\"]\n  k836a57b33657435bb396869af7e2f35e[color=lightseagreen,label=\"Output\\ngroup1\"]\n  5 -> k836a57b33657435bb396869af7e2f35e\n  6[label=\"Group\"]\n  3 -> 6 [label=\"out_file1\"]\n  k82e163a48fc54b8e81869fc66cd75b1d[color=lightseagreen,label=\"Output\\ngroup2\"]\n  6 -> k82e163a48fc54b8e81869fc66cd75b1d\n  7[label=\"Scatterplot with ggplot2\"]\n  3 -> 7 [label=\"out_file1\"]\n  kbbbac6ca64fb46ad87986c7c5369ccaf[color=lightseagreen,label=\"Output\\nSepal Plot (PNG)\"]\n  7 -> kbbbac6ca64fb46ad87986c7c5369ccaf\n  8[label=\"Scatterplot with ggplot2\"]\n  3 -> 8 [label=\"out_file1\"]\n  k74ee0c3c53c244cfb0e82a10c24166c9[color=lightseagreen,label=\"Output\\nPetal Plot (PNG)\"]\n  8 -> k74ee0c3c53c244cfb0e82a10c24166c9\n  9[label=\"Unique\"]\n  4 -> 9 [label=\"out_file1\"]\n  k6bcc2f96255e48f5a37b7d6a2c123493[color=lightseagreen,label=\"Output\\nIris Species\"]\n  9 -> k6bcc2f96255e48f5a37b7d6a2c123493\n}",
           "workflow_tools": [
@@ -7092,6 +7138,11 @@
             "url": "https://mississippi.sorbonne-universite.fr",
             "name": "MISSISSIPPI",
             "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
           }
         ]
       },
@@ -7140,11 +7191,6 @@
           {
             "url": "http://dintor.eurac.edu/",
             "name": "Dintor",
-            "usegalaxy": false
-          },
-          {
-            "url": "http://www.freebioinfo.org/",
-            "name": "FreeBioinfo",
             "usegalaxy": false
           },
           {
@@ -7238,6 +7284,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -7309,10 +7360,6 @@
                 "server": "http://dintor.eurac.edu/"
               },
               {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
                 "state": "local",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
@@ -7383,6 +7430,10 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "local",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "local",
@@ -7451,10 +7502,6 @@
                 "server": "http://dintor.eurac.edu/"
               },
               {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
                 "state": "local",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
@@ -7525,6 +7572,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "local",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "local",
@@ -7593,10 +7644,6 @@
                 "server": "http://dintor.eurac.edu/"
               },
               {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
                 "state": "local",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
@@ -7667,6 +7714,10 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "local",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "local",
@@ -7735,10 +7786,6 @@
                 "server": "http://dintor.eurac.edu/"
               },
               {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
                 "state": "local",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
@@ -7812,6 +7859,10 @@
               },
               {
                 "state": "local",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -7875,10 +7926,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -7961,6 +8008,11 @@
               {
                 "state": "exact",
                 "version": "1.1.0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -8028,10 +8080,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -8117,6 +8165,11 @@
               {
                 "state": "exact",
                 "version": "1.1.0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -8184,10 +8237,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -8267,14 +8316,16 @@
                 "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
+                "state": "exact",
+                "version": "3.3.5+galaxy0",
+                "server": "https://usegalaxy.be/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
-                  "2.2.1+galaxy1",
-                  "2.2.1+galaxy2",
-                  "2.2.1+galaxy0",
-                  "2.2.1"
+                  "3.4.0+galaxy1"
                 ],
-                "server": "https://usegalaxy.be/"
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -8349,10 +8400,6 @@
               },
               {
                 "state": "local",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
-                "state": "local",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
@@ -8422,6 +8469,10 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "local",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "local",
@@ -8907,6 +8958,11 @@
         ],
         "inexact": [
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -8963,11 +9019,6 @@
           {
             "url": "http://dintor.eurac.edu/",
             "name": "Dintor",
-            "usegalaxy": false
-          },
-          {
-            "url": "http://www.freebioinfo.org/",
-            "name": "FreeBioinfo",
             "usegalaxy": false
           },
           {
@@ -9061,6 +9112,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -9130,10 +9186,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -9216,6 +9268,11 @@
               {
                 "state": "exact",
                 "version": "0.1.0",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "0.1.0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -9283,10 +9340,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -9361,6 +9414,11 @@
                 "state": "exact",
                 "version": "1.1.5",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.5",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -9434,10 +9492,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
@@ -9508,6 +9562,11 @@
                 "state": "exact",
                 "version": "1.0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "1.0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -9582,10 +9641,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
@@ -9664,6 +9719,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.3.1",
+                  "3.3.0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "3.0.0",
                 "server": "https://usegalaxy.eu"
@@ -9672,11 +9735,11 @@
                 "state": "inexact",
                 "versions": [
                   "3.3.1",
-                  "3.3.2",
                   "3.3.0",
+                  "3.3.2",
                   "3.0.1",
-                  "3.2.0",
-                  "3.1.1"
+                  "3.1.1",
+                  "3.2.0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -9743,10 +9806,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
@@ -9819,6 +9878,11 @@
                 "state": "exact",
                 "version": "4.5covid19",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "4.5covid19",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -9890,10 +9954,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -9975,6 +10035,23 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "2.10.9+galaxy0",
+                  "2.10.7+galaxy1",
+                  "2.10.4+galaxy1",
+                  "2.10.4",
+                  "2.10.7+galaxy2",
+                  "3.0.5+galaxy3",
+                  "2.10.4+galaxy2",
+                  "2.10.8+galaxy0",
+                  "3.0.3+galaxy0",
+                  "3.0.5+galaxy0",
+                  "2.10.7+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "2.11.0+galaxy0",
                 "server": "https://usegalaxy.eu"
@@ -10046,10 +10123,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -10136,16 +10209,35 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.1+galaxy0",
+                  "2.9.1.3",
+                  "2.10.9+galaxy0",
+                  "2.8.0",
+                  "2.10.4",
+                  "2.10.7+galaxy1",
+                  "2.10.4+galaxy1",
+                  "2.10.8+galaxy0",
+                  "2.10.7+galaxy0",
+                  "2.10.7+galaxy2",
+                  "3.0.3+galaxy0",
                   "3.0.5+galaxy3",
                   "3.0.5+galaxy0",
-                  "3.0.10+galaxy0",
-                  "3.0.8+galaxy1",
-                  "3.1.0+galaxy1",
-                  "3.1.0+galaxy0",
-                  "3.0.3+galaxy0",
+                  "1.2.5"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "3.1.1+galaxy0",
                   "3.1.1+galaxy1",
-                  "3.0.8+galaxy0"
+                  "3.0.3+galaxy0",
+                  "3.0.5+galaxy3",
+                  "3.0.5+galaxy0",
+                  "3.1.0+galaxy1",
+                  "3.0.8+galaxy0",
+                  "3.1.0+galaxy0",
+                  "3.0.8+galaxy1",
+                  "3.0.10+galaxy0"
                 ],
                 "server": "https://usegalaxy.eu"
               },
@@ -11791,11 +11883,6 @@
             "usegalaxy": false
           },
           {
-            "url": "http://www.freebioinfo.org/",
-            "name": "FreeBioinfo",
-            "usegalaxy": false
-          },
-          {
             "url": "http://igg.cloud.ba.infn.it/galaxy",
             "name": "GASLINI",
             "usegalaxy": false
@@ -11886,6 +11973,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -11958,10 +12050,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
@@ -12031,6 +12119,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "local",
@@ -13988,11 +14080,6 @@
             "usegalaxy": false
           },
           {
-            "url": "http://www.freebioinfo.org/",
-            "name": "FreeBioinfo",
-            "usegalaxy": false
-          },
-          {
             "url": "http://igg.cloud.ba.infn.it/galaxy",
             "name": "GASLINI",
             "usegalaxy": false
@@ -14083,6 +14170,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -14155,10 +14247,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
@@ -14228,6 +14316,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "local",
@@ -14657,11 +14749,6 @@
             "usegalaxy": false
           },
           {
-            "url": "http://www.freebioinfo.org/",
-            "name": "FreeBioinfo",
-            "usegalaxy": false
-          },
-          {
             "url": "http://igg.cloud.ba.infn.it/galaxy",
             "name": "GASLINI",
             "usegalaxy": false
@@ -14752,6 +14839,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -14824,10 +14916,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
@@ -14897,6 +14985,10 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "local",
@@ -15280,6 +15372,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.no/",
             "name": "UseGalaxy.no",
             "usegalaxy": false
@@ -15331,11 +15428,6 @@
           {
             "url": "http://dintor.eurac.edu/",
             "name": "Dintor",
-            "usegalaxy": false
-          },
-          {
-            "url": "http://www.freebioinfo.org/",
-            "name": "FreeBioinfo",
             "usegalaxy": false
           },
           {
@@ -15429,6 +15521,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -15498,10 +15595,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -15579,6 +15672,16 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "1.3.31",
+                  "1.3.26",
+                  "1.3.31+galaxy1",
+                  "1.3.44+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "1.3.40+galaxy0",
                 "server": "https://usegalaxy.eu"
@@ -15591,8 +15694,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.3.31",
-                  "1.3.43+galaxy0",
-                  "1.3.31+galaxy1"
+                  "1.3.31+galaxy1",
+                  "1.3.43+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -16142,6 +16245,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
             "usegalaxy": true
@@ -16198,11 +16306,6 @@
           {
             "url": "http://dintor.eurac.edu/",
             "name": "Dintor",
-            "usegalaxy": false
-          },
-          {
-            "url": "http://www.freebioinfo.org/",
-            "name": "FreeBioinfo",
             "usegalaxy": false
           },
           {
@@ -16296,6 +16399,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
@@ -16365,10 +16473,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -16455,6 +16559,11 @@
               {
                 "state": "exact",
                 "version": "0.7.17.1",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "0.7.17.1",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -16525,10 +16634,6 @@
               {
                 "state": "missing",
                 "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://www.freebioinfo.org/"
               },
               {
                 "state": "missing",
@@ -16606,11 +16711,19 @@
                 "state": "inexact",
                 "versions": [
                   "2.1.3.1+galaxy2",
+                  "2.1.3.1+galaxy0",
                   "2.1.3.1+galaxy1",
-                  "2.1.5+galaxy0",
-                  "2.1.3.1+galaxy0"
+                  "2.1.5+galaxy0"
                 ],
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "2.1.5+galaxy2",
+                  "2.1.5+galaxy3"
+                ],
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -16686,10 +16799,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
@@ -16762,6 +16871,11 @@
                 "state": "exact",
                 "version": "4.3+t.galaxy0",
                 "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "exact",
+                "version": "4.3+t.galaxy0",
+                "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
@@ -16836,18 +16950,14 @@
               },
               {
                 "state": "missing",
-                "server": "http://www.freebioinfo.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "inexact",
                 "versions": [
                   "4.2",
-                  "4.1",
-                  "5.1.0"
+                  "5.1.0",
+                  "4.1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -16923,6 +17033,14 @@
                 "server": "https://usegalaxy.be/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "5.1.0",
+                  "1.0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
                 "state": "exact",
                 "version": "4.0",
                 "server": "https://usegalaxy.eu"
@@ -16930,8 +17048,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "4.1",
-                  "5.1.0"
+                  "5.1.0",
+                  "4.1"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -16939,8 +17057,8 @@
                 "state": "inexact",
                 "versions": [
                   "4.2",
-                  "4.1",
-                  "5.1.0"
+                  "5.1.0",
+                  "4.1"
                 ],
                 "server": "https://usegalaxy.no/"
               },
