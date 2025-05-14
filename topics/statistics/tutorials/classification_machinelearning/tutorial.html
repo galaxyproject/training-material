@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@ae108b9a6712729b3382aaa94166e315fd94e455",
+		release: "galaxy-training-network@0db97e725c8057ba39b9ed02ca83af1988d4a6d8",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Classification in Machine Learning">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-04-08 10:30:29 +0000">
+<meta name="DC.date" content="2025-05-14 11:58:14 +0000">
 <meta name="DC.creator" content="Alireza Khanteymoori">
 <meta name="DC.creator" content="Anup Kumar">
 <meta name="DC.creator" content="Simon Bray"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
@@ -188,7 +188,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-04-08 10:30:29 +0000",
+  "dateModified": "2025-05-14 11:58:14 +0000",
   "datePublished": "2020-04-30 14:15:23 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -283,7 +283,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Classification in Machine Learning",
   "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/classification_machinelearning/tutorial.html",
-  "version": 17,
+  "version": 18,
   "timeRequired": "PT2H",
   "teaches": "- Learn classification background\n- Learn what a quantitative structure-analysis relationship (QSAR) model is and how it can be constructed in Galaxy\n- Learn to apply logistic regression, k-nearest neighbors, support verctor machines, random forests and bagging algorithms\n- Learn how visualizations can be used to analyze the classification results",
   "keywords": [
@@ -1667,7 +1667,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 30, 2020 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 8, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 14, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1685,9 +1685,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.0</a> (1 recent ratings, 12 all time)</div>
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">3.5</a> (2 recent ratings, 13 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 17 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 18 </div>
 
     </blockquote>
     </section>
@@ -2303,7 +2303,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 
 <h1 id="create-data-processing-pipeline">Create data processing pipeline</h1>
 
-<p>At the last step, we will create a bagging classifier by using  the <strong>Pipeline builder</strong> tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The <strong>Pipeline builder</strong> tool builds the classifier and returns a <code class="language-plaintext highlighter-rouge">h5mlm</code> file. This tool creates another file which is tabular and contains a list of all the different hyperparameters of the preprocessors and estimators. This tabular file will be used in the <strong>Hyperparameter search</strong> tool to populate the list of hyperparameters with their respective (default) values.</p>
+<p>At the last step, we will create a bagging classifier by using  the <strong>Pipeline builder</strong> tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The <strong>Pipeline builder</strong> tool builds the classifier and returns a <code class="language-plaintext highlighter-rouge">h5mlm</code> file. This file also contains a list of all the different hyperparameters of the preprocessors and estimators which will be used in the <strong>Hyperparameter search</strong> tool to populate the list of hyperparameters with their respective (default) values.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-create-pipeline"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Create pipeline</div>
@@ -2314,11 +2314,12 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
       <ul>
         <li><em>“Choose the module that contains target estimator”</em>: <code class="language-plaintext highlighter-rouge">sklearn.ensemble</code>
           <ul>
-            <li><em>“Choose estimator class”</em>: <code class="language-plaintext highlighter-rouge">BaggingClassifier</code>
-We choose <code class="language-plaintext highlighter-rouge">Final Estimator</code> as we have only the estimator and no preprocessor and need the parameters of only the estimator.</li>
+            <li><em>“Choose estimator class”</em>: <code class="language-plaintext highlighter-rouge">BaggingClassifier</code></li>
           </ul>
         </li>
       </ul>
+
+      <p>We choose <code class="language-plaintext highlighter-rouge">Final Estimator</code> as we have only the estimator and no preprocessor and need the parameters of only the estimator.</p>
     </li>
   </ul>
 
@@ -2339,7 +2340,6 @@ We choose <code class="language-plaintext highlighter-rouge">Final Estimator</co
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Is the estimator a deep learning model?”</em>: <code class="language-plaintext highlighter-rouge">NO</code> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Search parameters Builder”</em>:
           <ul>
-            <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing parameter names”</em>: <code class="language-plaintext highlighter-rouge">tabular</code> file (output of <strong>Estimator attributes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
             <li>In <em>“Parameter settings for search”</em>:
               <ul>
                 <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1: Parameter settings for search”</em>
@@ -2731,7 +2731,7 @@ tools:
 		   
 			<tr>
 				<th scope="row">t{ hist[0] | to_stars }}</th>
-				<td style="--size: 0.1111111111111111">1</td>
+				<td style="--size: 0.2222222222222222">2</td>
 			</tr>
 		   
 		   </table>
@@ -2739,6 +2739,17 @@ tools:
 		
         
         
+		    
+		    <b>May 2025</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					
+					<b>Disliked</b>: It went smooth up to the last step, the pipeline building where the hyperparameter search said to fill a field that ws not present "Choose the dataset containing parameter names" and this stalled a bit my work
+				</li>
+				
+		    </ul>
 		    
 		    <b>February 2025</b>
 		    <ul>
@@ -2916,7 +2927,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ae108b9a6712729b3382aaa94166e315fd94e455">ae108b9</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0db97e725c8057ba39b9ed02ca83af1988d4a6d8">0db97e7</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
