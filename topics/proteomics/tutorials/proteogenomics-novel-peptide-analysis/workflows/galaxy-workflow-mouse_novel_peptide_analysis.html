@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@2c0d714c84cc7d096c5e8ae49706c097e22668c6",
+		release: "galaxy-training-network@592b09e63fb2e700f9f109fe6836b267782b7ea9",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -237,14 +237,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			6
+			7
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Jan 28, 2021
+			May 15, 2025
 
 			<br/>
 
@@ -264,7 +264,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #c1b1ff; --color-darker: #af97ff; --color-dimmed: #b8a4ff;">proteomics</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ddd5ff; --color-darker: #c7b8ff; --color-dimmed: #d2c7ff;">proteomics</div>
 			
 			</br>
 			
@@ -273,6 +273,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Features</b>
 			<ul>
 			
+			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
 			
 			
 			
@@ -329,13 +331,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-novel-peptide-analysis/versions/galaxy-workflow-mouse-novel-peptide-analysis">Galaxy Main</a></li>
-					
-					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-novel-peptide-analysis/versions/galaxy-workflow-mouse-novel-peptide-analysis">Galaxy Europe</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-novel-peptide-analysis/versions/galaxy-workflow-mouse-novel-peptide-analysis">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-novel-peptide-analysis/versions/galaxy-workflow-mouse-novel-peptide-analysis">Galaxy France</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-novel-peptide-analysis/versions/galaxy-workflow-mouse-novel-peptide-analysis">Galaxy Europe</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-novel-peptide-analysis/versions/galaxy-workflow-mouse-novel-peptide-analysis">Galaxy Main</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-novel-peptide-analysis/versions/galaxy-workflow-mouse-novel-peptide-analysis">Import to another server (≥23.0+ only!)</a>
@@ -373,7 +375,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   56954668-7aac-423a-89af-aecf2b405b94["Output\nNovel_Peptides"];
   7 --> 56954668-7aac-423a-89af-aecf2b405b94;
   style 56954668-7aac-423a-89af-aecf2b405b94 stroke:#2c3143,stroke-width:4px;
-  8["Peptide Genomic Coodinate"];
+  8["Peptide Genomic Coordinate"];
   4 -->|output| 8;
   3 -->|output| 8;
   7 -->|output| 8;
@@ -442,67 +444,37 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
-					<td></td>
-					<td>Input dataset</td>
-					<td>Edited_Mus_Musculus.GRCm38.86</td>
-				</tr>
-				
-				<tr>
-					<td></td>
-					<td>Input dataset</td>
-					<td>peptides for blast</td>
-				</tr>
-				
-				<tr>
-					<td></td>
-					<td>Input dataset</td>
-					<td>PSM Report</td>
-				</tr>
-				
-				<tr>
-					<td></td>
-					<td>Input dataset</td>
-					<td>mz_sqlite</td>
-				</tr>
-				
-				<tr>
-					<td></td>
-					<td>Input dataset</td>
-					<td>genomic mapping sqlite db</td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/0.3.3</td>
+					<td>toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.16.0+galaxy0</td>
 					<td>NCBI BLAST+ blastp</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2</td>
 					<td>Query Tabular</td>
 					<td>PSM_Novel_Peptides</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2</td>
 					<td>Query Tabular</td>
 					<td>Novel_Peptides</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/0.1.1</td>
-					<td>Peptide Genomic Coodinate</td>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/1.0.0</td>
+					<td>Peptide Genomic Coordinate</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3</td>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3+galaxy1</td>
 					<td>PepPointer</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2</td>
 					<td>Query Tabular</td>
 					<td>Final_Summary_Novel_Peptides</td>
 				</tr>
@@ -522,11 +494,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/0.3.3">toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/0.3.3</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.16.0+galaxy0">toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.16.0+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/2889433c7ae1">
+					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/fc35ffc8c548">
 						View in ToolShed
 					</a>
 					
@@ -534,11 +506,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3">toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3+galaxy1">toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3+galaxy1</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/pep_pointer/073a2965e3b2">
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/pep_pointer/a6282baa8c6f">
 						View in ToolShed
 					</a>
 					
@@ -546,11 +518,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/0.1.1">toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/0.1.1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/1.0.0">toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/1.0.0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/peptide_genomic_coordinate/5f49ffce52cb">
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/peptide_genomic_coordinate/cb0378d2d487">
 						View in ToolShed
 					</a>
 					
@@ -558,11 +530,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0">toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2">toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/query_tabular/33d61c89fb8d">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/query_tabular/cf4397560712">
 						View in ToolShed
 					</a>
 					
@@ -592,6 +564,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>8</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/88c16fcfcda2f4cc9014bc361b345a54cf142055">88c16fcfc</a></td>
+						<td>2025-05-12 20:36:18</td>
+						<td>fix and update</td>
+					</tr>
 					
 					<tr>
 						<td>7</td>
@@ -723,7 +702,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2c0d714c84cc7d096c5e8ae49706c097e22668c6">2c0d714</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/592b09e63fb2e700f9f109fe6836b267782b7ea9">592b09e</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

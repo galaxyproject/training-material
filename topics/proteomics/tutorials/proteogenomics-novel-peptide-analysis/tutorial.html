@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@2c0d714c84cc7d096c5e8ae49706c097e22668c6",
+		release: "galaxy-training-network@592b09e63fb2e700f9f109fe6836b267782b7ea9",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Proteogenomics 3: Novel peptide analysis">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-08-09 15:41:38 +0000">
+<meta name="DC.date" content="2025-05-15 10:06:27 +0000">
 <meta name="DC.creator" content="Subina Mehta">
 <meta name="DC.creator" content="Timothy J. Griffin">
 <meta name="DC.creator" content="Pratik Jagtap">
@@ -191,7 +191,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-08-09 15:41:38 +0000",
+  "dateModified": "2025-05-15 10:06:27 +0000",
   "datePublished": "2018-11-20 19:05:23 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -249,7 +249,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Proteogenomics 3: Novel peptide analysis",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.html",
-  "version": 19,
+  "version": 20,
   "timeRequired": "PT30M",
   "teaches": "- How to assign and visualize the genomic localization of these identified novel proteoforms?",
   "keywords": [
@@ -1517,12 +1517,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</li>
     
     
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
-			UseGalaxy.be <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
-		</a>
-	</li>
-    
     
     
 	<li class="dropdown-header">
@@ -1551,7 +1545,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 20, 2018 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 9, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 15, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1571,7 +1565,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.2</a> (0 recent ratings, 5 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 19 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 20 </div>
 
     </blockquote>
     </section>
@@ -1602,8 +1596,8 @@ Please look at the following tutorials in this proteogenomics series before star
 <ol id="markdown-toc">
   <li><a href="#pretreatments" id="markdown-toc-pretreatments">Pretreatments</a></li>
   <li><a href="#peptide-selection" id="markdown-toc-peptide-selection">Peptide Selection</a></li>
-  <li><a href="#multiomics-visualization-platform-mvp" id="markdown-toc-multiomics-visualization-platform-mvp">Multiomics Visualization Platform (MVP)</a></li>
   <li><a href="#obtain-peptide-genomic-coordinates" id="markdown-toc-obtain-peptide-genomic-coordinates">Obtain Peptide genomic Coordinates</a></li>
+  <li><a href="#multiomics-visualization-platform-mvp" id="markdown-toc-multiomics-visualization-platform-mvp">Multiomics Visualization Platform (MVP)</a></li>
   <li><a href="#classify-peptides" id="markdown-toc-classify-peptides">Classify Peptides</a></li>
   <li><a href="#final-summary-output" id="markdown-toc-final-summary-output">Final Summary Output</a>    <ol>
       <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
@@ -1623,20 +1617,30 @@ Please look at the following tutorials in this proteogenomics series before star
   <ol>
     <li>The inputs for this workflow are:
       <ul>
-        <li><strong>Tabular file</strong> – “<strong>Peptides for BlastP analysis</strong>”</li>
-        <li><strong>Tabular file</strong> – “<strong>PeptideShaker_PSM</strong>”</li>
-        <li><strong>Mz to sqlite</strong></li>
-        <li><strong>Genomic mapping sqlite</strong></li>
+        <li><strong>Fasta file</strong> – “<strong>Peptides for BlastP analysis</strong>” From (Proteogenomics 2: Database Search)</li>
+        <li><strong>Tabular file</strong> – “<strong>PeptideShaker_PSM</strong>” From (Proteogenomics 2: Database Search)</li>
+        <li><strong>Mz to sqlite</strong> From (Proteogenomics 2: Database Search)</li>
+        <li><strong>Genomic mapping sqlite</strong> From (Proteogenomics 1: Database Creation)</li>
+        <li><strong>Reference Annotation File</strong>  From (Proteogenomics 1: Database Creation)</li>
       </ul>
+
+      <p>If you do not have these files from the previous tutorials in this series, you can import them from <a href="https://doi.org/10.5281/zenodo.13270741">Zenodo</a></p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/15391695/files/Peptides_for_Blast-P_analysis.fasta
+https://zenodo.org/records/15390920/files/PeptideShaker_PSM.tabular
+https://zenodo.org/record/1489208/files/mz_to_sqlite.mz.sqlite
+https://zenodo.org/record/1489208/files/genomic_mapping_sqlite.sqlite
+https://zenodo.org/records/1489208/files/Mus_musculus.GRCm38.86.gtf
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Verify that the mz_to_sqlite file has the format <code class="language-plaintext highlighter-rouge">mz.sqlite</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">mz.sqlite</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
     </li>
   </ol>
 
-  <p>If you do not have these files from the previous tutorials in this series, you can import them from <a href="https://doi.org/10.5281/zenodo.13270741">Zenodo</a></p>
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1489208/files/Peptides_for_Blast-P_analysis.tabular
-https://zenodo.org/record/1489208/files/PeptideShaker_PSM.tabular
-https://zenodo.org/record/1489208/files/mz_to_sqlite.mz.sqlite
-https://zenodo.org/record/1489208/files/genomic_mapping_sqlite.sqlite
-</code></pre></div>  </div>
 </blockquote>
 
 <h1 id="peptide-selection">Peptide Selection</h1>
@@ -1649,35 +1653,30 @@ https://zenodo.org/record/1489208/files/genomic_mapping_sqlite.sqlite
   <div class="box-title hands-on-title" id="hands-on-ncbi-blast-blastp"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: NCBI BLAST+ blastp</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/0.3.3" title="NCBI BLAST+ blastp tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NCBI BLAST+ blastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3.3)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.16.0+galaxy0" title="NCBI BLAST+ blastp tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NCBI BLAST+ blastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.16.0+galaxy0)</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <strong>Protein query sequence(s)</strong> - <code class="language-plaintext highlighter-rouge">Peptides for Blast-P analysis.tabular</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <strong>Subject database/sequences</strong> - <code class="language-plaintext highlighter-rouge">Locally installed BLAST database</code>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <strong>Protein query sequence(s)</strong> - <code class="language-plaintext highlighter-rouge">Peptides for Blast-P analysis.fasta</code></li>
+        <li><strong>Subject database/sequences</strong> - <code class="language-plaintext highlighter-rouge">Locally installed BLAST database</code>
           <ul>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <strong>Protein BLAST database</strong> - <code class="language-plaintext highlighter-rouge">NCBI-NR(dated)</code></li>
+            <li><strong>Protein BLAST database</strong> - <code class="language-plaintext highlighter-rouge">NCBI-NR(dated)</code></li>
           </ul>
         </li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <strong>Type of BLAST</strong> - <code class="language-plaintext highlighter-rouge">blast-p short</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <strong>Set expectation value cutoff</strong> - <code class="language-plaintext highlighter-rouge">200000.0</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <strong>Output format</strong> - <code class="language-plaintext highlighter-rouge">Tabular format (25 columns)</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <strong>Advanced Options</strong> - <code class="language-plaintext highlighter-rouge">show advanced options</code>
+        <li><strong>Type of BLAST</strong> - <code class="language-plaintext highlighter-rouge">blast-p short</code></li>
+        <li><strong>Set expectation value cutoff</strong> - <code class="language-plaintext highlighter-rouge">200000.0</code></li>
+        <li><strong>Output format</strong> - <code class="language-plaintext highlighter-rouge">Tabular (extended 25 columns)</code></li>
+        <li><strong>Advanced Options</strong> - <code class="language-plaintext highlighter-rouge">show advanced options</code>
           <ul>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <strong>Filter out low complexity regions (with SEG)</strong> - <code class="language-plaintext highlighter-rouge">No</code></li>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <strong>Scoring matrix and gap costs</strong> - <code class="language-plaintext highlighter-rouge">PAM30</code>
+            <li><strong>Scoring matrix and gap costs</strong> - <code class="language-plaintext highlighter-rouge">PAM30</code>
               <ul>
-                <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <strong>Gap Costs</strong> - <code class="language-plaintext highlighter-rouge">Extension:9 Extension:1</code></li>
+                <li><strong>Gap Costs</strong> - <code class="language-plaintext highlighter-rouge">Existence:9 Extension:1</code></li>
               </ul>
             </li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <strong>Maximum hits to consider/show</strong> - <code class="language-plaintext highlighter-rouge">1</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <strong>Maximum number of HSPs (alignments) to keep for any single query-subject pair</strong> - <code class="language-plaintext highlighter-rouge">1</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <strong>Word size for wordfinder algorithm</strong> - <code class="language-plaintext highlighter-rouge">2</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <strong>Multiple hits window size: use 0 to specify 1-hit algorithm, leave blank for default</strong> - <code class="language-plaintext highlighter-rouge">40</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <strong>Minimum score to add a word to the BLAST lookup table</strong> - <code class="language-plaintext highlighter-rouge">11</code></li>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <strong>Composition-based statistics</strong> - <code class="language-plaintext highlighter-rouge">0: no composition-based statistics</code></li>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <strong>Should the query and subject defline(s) be parsed?</strong> - <code class="language-plaintext highlighter-rouge">No</code></li>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <strong>Restrict search of database to a given set of ID’s</strong> - <code class="language-plaintext highlighter-rouge">No restriction, search the entire database</code></li>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <strong>Minimum query coverage per hsp (percentage, 0 to 100)?</strong> - <code class="language-plaintext highlighter-rouge">0</code></li>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <strong>Compute locally optimal Smith-Waterman alignments</strong> - <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li><strong>Maximum hits to consider/show</strong> - <code class="language-plaintext highlighter-rouge">1</code></li>
+            <li><strong>Maximum number of HSPs (alignments) to keep for any single query-subject pair</strong> - <code class="language-plaintext highlighter-rouge">1</code></li>
+            <li><strong>Word size for wordfinder algorithm</strong> - <code class="language-plaintext highlighter-rouge">2</code></li>
+            <li><strong>Multiple hits window size: use 0 to specify 1-hit algorithm, leave blank for default</strong> - <code class="language-plaintext highlighter-rouge">40</code></li>
+            <li><strong>Minimum score to add a word to the BLAST lookup table</strong> - <code class="language-plaintext highlighter-rouge">11</code></li>
+            <li><strong>Composition-based statistics</strong> - <code class="language-plaintext highlighter-rouge">0: no composition-based statistics</code></li>
           </ul>
         </li>
       </ul>
@@ -1693,10 +1692,11 @@ https://zenodo.org/record/1489208/files/genomic_mapping_sqlite.sqlite
   <div class="box-title hands-on-title" id="hands-on-query-tabular"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Query Tabular</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Database Table</strong>
           <ul>
+            <li><em>“Tabular Dataset for Table”</em> : Result of <code class="language-plaintext highlighter-rouge">blastp</code></li>
             <li>Section <strong>Table Options</strong>
               <ul>
                 <li><em>“Specify Name for Table”</em>: <code class="language-plaintext highlighter-rouge">blast</code></li>
@@ -1706,7 +1706,7 @@ https://zenodo.org/record/1489208/files/genomic_mapping_sqlite.sqlite
                 <li><em>“Only load the columns you have named into database”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                 <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Table Index</strong>
                   <ul>
-                    <li><em>“Table Index”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                    <li><em>“This is a unique index”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
                     <li><em>“Index on Columns”</em>: <code class="language-plaintext highlighter-rouge">qseqid</code></li>
                   </ul>
                 </li>
@@ -1716,6 +1716,7 @@ https://zenodo.org/record/1489208/files/genomic_mapping_sqlite.sqlite
         </li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Database Table</strong>
           <ul>
+            <li><em>“Tabular Dataset for Table”</em> : <code class="language-plaintext highlighter-rouge">PeptideShaker_PSM</code></li>
             <li>Section <strong>Filter Dataset Input</strong>
               <ul>
                 <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Filter Tabular Input Lines</strong>
@@ -1764,7 +1765,10 @@ ORDER BY psm.Sequence, psm.ID
         <li><em>“Include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Click <strong>Run Tool</strong> and inspect the query results file after it turned green.</li>
+    <li>
+      <p>Click <strong>Run Tool</strong> and inspect the query results file after it turned green.</p>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">PSM_Novel_Peptides</code></li>
   </ol>
 
 </blockquote>
@@ -1775,10 +1779,11 @@ ORDER BY psm.Sequence, psm.ID
   <div class="box-title hands-on-title" id="hands-on-query-tabular-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Query Tabular</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.0)</span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2)</span>
       <ul>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Database Table</strong>
           <ul>
+            <li><em>“Tabular Dataset for Table”</em> : Result of <code class="language-plaintext highlighter-rouge">Query Tabular</code></li>
             <li>Section <strong>Filter Dataset Input</strong>
               <ul>
                 <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Filter Tabular Input Lines</strong>
@@ -1806,92 +1811,11 @@ ORDER BY psm.Sequence, psm.ID
         <li><em>“include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Click <strong>Run Tool</strong> and inspect the query results file after it turned green.</li>
+    <li>
+      <p>Click <strong>Run Tool</strong> and inspect the query results file after it turned green.</p>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">Novel Peptides</code></li>
   </ol>
-
-</blockquote>
-
-<h1 id="multiomics-visualization-platform-mvp">Multiomics Visualization Platform (MVP)</h1>
-
-<p>The Multiomics Visualization Platform is a Galaxy visualization plugin that allows the user to browse the selected proteomics data. It uses the SQlite database which allows the data to be filtered and aggregated in a user-defined manner. It allows various features such as; the PSM can be displayed with a lorikeet spectral view, the selected peptide can be displayed in a protein view and an IGV browser is also available for the selected protein. The step-by-step guide shown below will provide a walkthrough on how to use this plugin (NOTE: the example shown below is a representative peptide that is subjected to change, so while you are running this tool please take a look at the “Novel Peptide” output from the previous steps).</p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-guide-to-mvp"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Guide to MVP</div>
-
-  <p>The spectra belonging to these “Novel peptides” can be viewed using MVP, this can be achieved by selecting the output from the <code class="language-plaintext highlighter-rouge">mz to sqlite tool</code> (Generated in the second workflow).
-Here is a step-by-step guide to obtain the proteogenomic view of the “Novel peptides”.</p>
-
-  <p>1) Click on the <strong>Visualize in MVP application</strong>, it will open up options for visualization application in the center pane, Select <strong>MVP Application</strong> from the options (or Right-click to open in a new window).</p>
-
-  <p><a href="../../images/Visualize.png" rel="noopener noreferrer"><img src="../../images/Visualize.png" alt="mz to sqlite. " width="570" height="634" loading="lazy" /></a></p>
-
-  <p>This will open in the Center Pane. Select the MVP application.</p>
-
-  <p><a href="../../images/Open_MVP.png" rel="noopener noreferrer"><img src="../../images/Open_MVP.png" alt="MVP. " width="614" height="625" loading="lazy" /></a></p>
-
-  <p>This is how it will look.</p>
-
-  <p><a href="../../images/Peptide_overview.png" rel="noopener noreferrer"><img src="../../images/Peptide_overview.png" alt="Overview. " width="2208" height="1772" loading="lazy" /></a></p>
-
-  <p>2) Click on <strong>Load from Galaxy</strong> to open the list of peptides you would like to view.</p>
-
-  <p><a href="../../images/load_from_Galaxy.png" rel="noopener noreferrer"><img src="../../images/load_from_Galaxy.png" alt="load from galaxy. " width="1476" height="1032" loading="lazy" /></a></p>
-
-  <p>This will open a dropdown list. Select the novel peptides from there.</p>
-
-  <p><a href="../../images/DropDown_novel.png" rel="noopener noreferrer"><img src="../../images/DropDown_novel.png" alt="dropdown. " width="908" height="743" loading="lazy" /></a></p>
-
-  <p>3) Select <strong>Novel Peptides</strong> from the right hand side.</p>
-
-  <p><a href="../../images/novel_peptides_view.png" rel="noopener noreferrer"><img src="../../images/novel_peptides_view.png" alt="novel peptides view. " width="1316" height="904" loading="lazy" /></a></p>
-
-  <p>4) Select any peptide, For eg: <code class="language-plaintext highlighter-rouge">DGDLENPVLYSGAV</code>, and then click on <strong>Selected Peptide PSMs</strong>.</p>
-
-  <p><a href="../../images/Filtering_novelpeptides.png" rel="noopener noreferrer"><img src="../../images/Filtering_novelpeptides.png" alt="select_pep. " width="989" height="802" loading="lazy" /></a></p>
-
-  <p>5) If you scroll down, the PSM associated with the peptide will be displayed. By clicking on the PSM, the <em>Lorikeet</em>
-values will be shown. The Lorikeet visualization is interactive, i.e the user can change the values or select any
-parameter and click on Update button to view these changes.</p>
-
-  <p><a href="../../images/Peptide-Protein_Viewer.png" rel="noopener noreferrer"><img src="../../images/Peptide-Protein_Viewer.png" alt="PSM. " width="1906" height="876" loading="lazy" /></a></p>
-
-  <p><a href="../../images/Lorikeet_Viewer.png" rel="noopener noreferrer"><img src="../../images/Lorikeet_Viewer.png" alt="lorikeet. " width="1890" height="1816" loading="lazy" /></a></p>
-
-  <p>6) For a Protein centric view, click on <strong>View in Protein</strong> , it will open up all the proteins associate with the
-peptides. For eg: Select the <code class="language-plaintext highlighter-rouge">DGDLENPVLYSGAV</code> peptide and click on the first protein. The chromosome location
-of the peptide will be displayed.</p>
-
-  <p><a href="../../images/Selecting_peptide.png" rel="noopener noreferrer"><img src="../../images/Selecting_peptide.png" alt="view in protein. " width="887" height="835" loading="lazy" /></a></p>
-
-  <p>Once you click on protein it will show the list of proteins the belongs to the peptides.</p>
-
-  <p><a href="../../images/opening_IGV.png" rel="noopener noreferrer"><img src="../../images/opening_IGV.png" alt="select protein. " width="987" height="677" loading="lazy" /></a></p>
-
-  <p>Once you select the protein that you want to visualize you can click on the protein view.</p>
-
-  <p><a href="../../images/ProteinViewer.png" rel="noopener noreferrer"><img src="../../images/ProteinViewer.png" alt="protein view. " width="1768" height="581" loading="lazy" /></a></p>
-
-  <p>7) Clicking on the arrow marks will open up the IGV(js) visualization tool, where-in the genomic localization of the
-peptide will be displayed.</p>
-
-  <p><a href="../../images/IGV_1.png" rel="noopener noreferrer"><img src="../../images/IGV_1.png" alt="IGV. " width="2044" height="824" loading="lazy" /></a></p>
-
-  <p>8) To add tracks to your IGV viewer, click on <strong>Add Track</strong>. This will open up a list of tracks that are compatible
-to view in your IGV viewer. For eg. Select the <code class="language-plaintext highlighter-rouge">Pep_gen_coordinate.bed</code> file and then click on <strong>Load Track</strong>.
-This will open up the bed will below the nucleotide sequence.</p>
-
-  <p><a href="../../images/Options_for_Track.png" rel="noopener noreferrer"><img src="../../images/Options_for_Track.png" alt="tracks align. " width="1160" height="764" loading="lazy" /></a></p>
-
-  <p>9) By clicking the wheel, you can select the <strong>three frame translate</strong> which will show the three frame translated
-region of your sequence.</p>
-
-  <p><a href="../../images/IGV_viewer.png" rel="noopener noreferrer"><img src="../../images/IGV_viewer.png" alt="IGV viewer. " width="1254" height="220" loading="lazy" /></a></p>
-
-  <p>10) The IGV is inbuilt in the MVP viewer and is very interactive, you could also load more tracks such as the aligned
-proBAM file (from HISAT) or the identified probam file (one of the input file).
-MVP has many useful features beyond those covered in this workshop and is under active development.</p>
-
-  <p><a href="../../images/IGV_2.png" rel="noopener noreferrer"><img src="../../images/IGV_2.png" alt="IGV2. " width="1378" height="546" loading="lazy" /></a></p>
 
 </blockquote>
 
@@ -1907,17 +1831,113 @@ peptides provided as input. This outputs bed file for peptides.</p>
   <div class="box-title hands-on-title" id="hands-on-peptide-genomic-coordinate"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Peptide genomic Coordinate</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/0.1.1" title="Peptide genomic Coordinate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Peptide genomic Coordinate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.1)</span> with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/1.0.0" title="Peptide genomic Coordinate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Peptide genomic Coordinate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span> with the following parameters:
       <ul>
-        <li><em>“Input”</em>: <code class="language-plaintext highlighter-rouge">Peptide list file</code>, <code class="language-plaintext highlighter-rouge">mzsqlite sqlite DB file</code>, and <code class="language-plaintext highlighter-rouge">genomic mapping sqlite DB file</code></li>
         <li>
-          <p><em>“Output”</em>: <code class="language-plaintext highlighter-rouge">Tabular BED file with all the columns</code></p>
+          <p><em>“Input”</em>: <code class="language-plaintext highlighter-rouge">Novel Peptides</code>, <code class="language-plaintext highlighter-rouge">mzsqlite sqlite DB file</code>, and <code class="language-plaintext highlighter-rouge">genomic mapping sqlite DB file</code></p>
 
           <p><a href="../../images/Output_PGC.png" rel="noopener noreferrer"><img src="../../images/Output_PGC.png" alt="Output PGC. " width="1710" height="358" loading="lazy" /></a></p>
         </li>
       </ul>
     </li>
     <li>Click <strong>Run Tool</strong> and inspect the resulting files</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="multiomics-visualization-platform-mvp">Multiomics Visualization Platform (MVP)</h1>
+
+<p>The Multiomics Visualization Platform is a Galaxy visualization plugin that allows the user to browse the selected proteomics data. It uses the SQlite database which allows the data to be filtered and aggregated in a user-defined manner. It allows various features such as; the PSM can be displayed with a lorikeet spectral view, the selected peptide can be displayed in a protein view and an IGV browser is also available for the selected protein. The step-by-step guide shown below will provide a walkthrough on how to use this plugin (NOTE: the example shown below is a representative peptide that is subjected to change, so while you are running this tool please take a look at the “Novel Peptide” output from the previous steps).</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-guide-to-mvp"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Guide to MVP</div>
+
+  <p>The spectra belonging to these “Novel peptides” can be viewed using MVP, this can be achieved by selecting the output from the <code class="language-plaintext highlighter-rouge">mz to sqlite tool</code> (Generated in the second workflow). <strong>Make sure the database associated with the dataset is <code class="language-plaintext highlighter-rouge">mm10</code></strong></p>
+
+  <p>Here is a step-by-step guide to obtain the proteogenomic view of the “Novel peptides”.</p>
+
+  <ol>
+    <li>
+      <p>Click on the <strong>Visualize in MVP application</strong>, it will open up options for visualization application in the center pane, Select <strong>MVP Application</strong> from the options (or Right-click to open in a new window).</p>
+
+      <p><a href="../../images/Visualize.png" rel="noopener noreferrer"><img src="../../images/Visualize.png" alt="mz to sqlite. " width="570" height="634" loading="lazy" /></a>
+This will open in the Center Pane. Select the MVP application.</p>
+
+      <p><a href="../../images/Open_MVP.png" rel="noopener noreferrer"><img src="../../images/Open_MVP.png" alt="MVP. " width="614" height="625" loading="lazy" /></a></p>
+
+      <p>This is how it will look.</p>
+
+      <p><a href="../../images/Peptide_overview.png" rel="noopener noreferrer"><img src="../../images/Peptide_overview.png" alt="Overview. " width="2208" height="1772" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Click on <strong>Load from Galaxy</strong> to open the list of peptides you would like to view.</p>
+
+      <p><a href="../../images/load_from_Galaxy.png" rel="noopener noreferrer"><img src="../../images/load_from_Galaxy.png" alt="load from galaxy. " width="1476" height="1032" loading="lazy" /></a></p>
+
+      <p>This will open a dropdown list. Select the novel peptides from there.</p>
+
+      <p><a href="../../images/DropDown_novel.png" rel="noopener noreferrer"><img src="../../images/DropDown_novel.png" alt="dropdown. " width="908" height="743" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Select <strong>Novel Peptides</strong> from the right hand side.</p>
+
+      <p><a href="../../images/novel_peptides_view.png" rel="noopener noreferrer"><img src="../../images/novel_peptides_view.png" alt="novel peptides view. " width="1316" height="904" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Select any peptide, For eg: <code class="language-plaintext highlighter-rouge">DGDLENPVLYSGAV</code>, and then click on <strong>PSMs for Selected Peptide</strong>.</p>
+
+      <p><a href="../../images/Filtering_novelpeptides.png" rel="noopener noreferrer"><img src="../../images/Filtering_novelpeptides.png" alt="select_pep. " width="989" height="802" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>If you scroll down, the PSM associated with the peptide will be displayed. By clicking on the PSM, the <em>Lorikeet</em>
+values will be shown. The Lorikeet visualization is interactive, i.e the user can change the values or select any
+parameter and click on Update button to view these changes.</p>
+
+      <p><a href="../../images/Peptide-Protein_Viewer.png" rel="noopener noreferrer"><img src="../../images/Peptide-Protein_Viewer.png" alt="PSM. " width="1906" height="876" loading="lazy" /></a></p>
+
+      <p><a href="../../images/Lorikeet_Viewer.png" rel="noopener noreferrer"><img src="../../images/Lorikeet_Viewer.png" alt="lorikeet. " width="1890" height="1816" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>For a Protein centric view, click on <strong>View in Protein</strong> , it will open up all the proteins associate with the
+peptides. For eg: Select the <code class="language-plaintext highlighter-rouge">DGDLENPVLYSGAV</code> peptide and click on the first protein. The chromosome location
+of the peptide will be displayed.</p>
+
+      <p><a href="../../images/Selecting_peptide.png" rel="noopener noreferrer"><img src="../../images/Selecting_peptide.png" alt="view in protein. " width="887" height="835" loading="lazy" /></a></p>
+
+      <p>Once you click on protein it will show the list of proteins the belongs to the peptides.</p>
+
+      <p><a href="../../images/opening_IGV.png" rel="noopener noreferrer"><img src="../../images/opening_IGV.png" alt="select protein. " width="987" height="677" loading="lazy" /></a></p>
+
+      <p>Once you select the protein that you want to visualize you can click on the protein view.</p>
+
+      <p><a href="../../images/ProteinViewer.png" rel="noopener noreferrer"><img src="../../images/ProteinViewer.png" alt="protein view. " width="1768" height="581" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Clicking on the arrow marks will open up the IGV(js) visualization tool, where-in the genomic localization of the
+peptide will be displayed.</p>
+
+      <p><a href="../../images/IGV_1.png" rel="noopener noreferrer"><img src="../../images/IGV_1.png" alt="IGV. " width="2044" height="824" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>To add tracks to your IGV viewer, click on <strong>Add Track</strong>. This will open up a list of tracks that are compatible
+to view in your IGV viewer. For eg. Select the <code class="language-plaintext highlighter-rouge">Pep_gen_coordinate.bed</code> file and then click on <strong>Load Track</strong>.
+This will open up the bed will below the nucleotide sequence.</p>
+
+      <p><a href="../../images/Options_for_Track.png" rel="noopener noreferrer"><img src="../../images/Options_for_Track.png" alt="tracks align. " width="1160" height="764" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>By clicking the wheel, you can select the <strong>three frame translate</strong> which will show the three frame translated
+region of your sequence.</p>
+
+      <p><a href="../../images/IGV_viewer.png" rel="noopener noreferrer"><img src="../../images/IGV_viewer.png" alt="IGV viewer. " width="1254" height="220" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>The IGV is inbuilt in the MVP viewer and is very interactive, you could also load more tracks such as the aligned
+proBAM file (from HISAT) or the identified probam file (one of the input file).
+MVP has many useful features beyond those covered in this workshop and is under active development.</p>
+
+      <p><a href="../../images/IGV_2.png" rel="noopener noreferrer"><img src="../../images/IGV_2.png" alt="IGV2. " width="1378" height="546" loading="lazy" /></a></p>
+    </li>
   </ol>
 
 </blockquote>
@@ -1933,7 +1953,7 @@ peptides provided as input. This outputs bed file for peptides.</p>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3" title="Peppointer tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Peppointer</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.3)</span> with the following parameters:
       <ul>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose the source of the GTF file”</em> - <code class="language-plaintext highlighter-rouge">From History</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF file with the genome of interest”</em> - <code class="language-plaintext highlighter-rouge">edited_Mus_Musculus_GRCm38.90_Ensembl_GTF</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF file with the genome of interest”</em> - <code class="language-plaintext highlighter-rouge">Mus_musculus.GRCm38.86.gtf</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BED file with chromosomal coordinates of peptides”</em>: <code class="language-plaintext highlighter-rouge">Bed file from Peptide genomic coordinate tool</code></li>
       </ul>
     </li>
@@ -1954,7 +1974,7 @@ peptides provided as input. This outputs bed file for peptides.</p>
   <div class="box-title hands-on-title" id="hands-on-query-tabular-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Query Tabular</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.0)</span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2)</span>
       <ul>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span>  <strong>Insert Database Table</strong>
           <ul>
@@ -2011,6 +2031,9 @@ GROUP BY psm.Sequence
     </li>
     <li>
       <p>Click <strong>Run Tool</strong> and inspect the query results file after it turns green. If everything goes well, it should look similar:</p>
+    </li>
+    <li>
+      <p>Rename output as <code class="language-plaintext highlighter-rouge">Final_Summary_Novel_Peptides</code></p>
 
       <p><a href="../../images/final_summary.png" rel="noopener noreferrer"><img src="../../images/final_summary.png" alt="Final Summary. " width="1784" height="290" loading="lazy" /></a></p>
     </li>
@@ -2395,7 +2418,7 @@ install_resolver_dependencies: true
 tools:
 - name: ncbi_blast_plus
   owner: devteam
-  revisions: 2889433c7ae1
+  revisions: fc35ffc8c548
   tool_panel_section_label: NCBI Blast
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: pep_pointer
@@ -2403,14 +2426,19 @@ tools:
   revisions: 073a2965e3b2
   tool_panel_section_label: Proteomics
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: pep_pointer
+  owner: galaxyp
+  revisions: a6282baa8c6f
+  tool_panel_section_label: Proteomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: peptide_genomic_coordinate
   owner: galaxyp
-  revisions: 5f49ffce52cb
+  revisions: cb0378d2d487
   tool_panel_section_label: Proteomics
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: query_tabular
   owner: iuc
-  revisions: 33d61c89fb8d
+  revisions: cf4397560712
   tool_panel_section_label: Text Manipulation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 </code></pre></div>
@@ -2537,7 +2565,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2c0d714c84cc7d096c5e8ae49706c097e22668c6">2c0d714</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/592b09e63fb2e700f9f109fe6836b267782b7ea9">592b09e</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
