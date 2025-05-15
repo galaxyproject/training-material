@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@32a0c09f352a7ed51463d0dadc2c645ce1f0605d",
+		release: "galaxy-training-network@d6bca083222d1984cbf9531aba0ff211a8d871cc",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Refining Genome Annotations with Apollo (eukaryotes)">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-02-26 13:56:33 +0000">
+<meta name="DC.date" content="2025-05-15 12:28:51 +0000">
 <meta name="DC.creator" content="Anthony Bretaudeau"><meta name="description" content="Genome annotation is a multi-level process that includes prediction of protein-coding genes, as well as other functional genome units such as structural RNAs, tRNAs, small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion sequences, transposons and other mobile elements. ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Genome Annotation / Refining Genome Annotations with Apollo (eukaryotes) / Hands-on: Refining Genome Annotations with Apollo (eukaryotes)">
@@ -186,7 +186,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-02-26 13:56:33 +0000",
+  "dateModified": "2025-05-15 12:28:51 +0000",
   "datePublished": "2022-08-22 19:31:27 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -283,7 +283,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Refining Genome Annotations with Apollo (eukaryotes)",
   "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo-euk/tutorial.html",
-  "version": 14,
+  "version": 15,
   "timeRequired": "PT3H",
   "teaches": "- Load a genome into Galaxy\n- View annotations in JBrowse\n- Learn how to load JBrowse data into Apollo\n- Learn how to manually refine genome annotations within Apollo\n- Export refined genome annotations",
   "keywords": [
@@ -292,7 +292,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "eukaryote",
     "cyoa",
     "jbrowse1",
-    "apollo2"
+    "apollo2",
+    "biodiversity"
   ],
   "description": "## Abstract\n\nAfter automatically annotating your genome using [Funannotate](../funannotate/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to visualize your genome after automated annotations have been performed?\n - How to manually annotate genome after automated annotations have been performed?\n - How to evaluate and visualize annotated genomic features?\n - How do I collaborate when doing genome annotation?\n\n\n## Learning Objectives\n\n- Load a genome into Galaxy\n- View annotations in JBrowse\n- Learn how to load JBrowse data into Apollo\n- Learn how to manually refine genome annotations within Apollo\n- Export refined genome annotations\n\n",
   "inLanguage": {
@@ -1603,7 +1604,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Aug 22, 2022 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 26, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 15, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1623,7 +1624,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (1 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 14 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 15 </div>
 
     </blockquote>
     </section>
@@ -1662,13 +1663,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<p>This is a "Choose Your Own Tutorial" (CYOT) section (also known as "Choose Your Own Analysis" (CYOA)), where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
 	
 	
+	<p>
+		<p>You can decide to create an organism or use a pre-created one.</p>
+
+	</p>
+	
 	
 		<input id="cyoa-opt1" type="radio" name="cyoa" value="Create-your-own-organism" onclick="cyoaChoice('Create-your-own-organism', 'gtn-cyoa')" />
-		<label for="cyoa-opt1" class="select btn btn-secondary">Create-your-own-organism</label>
+		<label for="cyoa-opt1" class="select btn btn-secondary">Create your own organism</label>
 	
 	
-		<input id="cyoa-opt2" type="radio" name="cyoa" value="Use-a-pre-created-organism" onclick="cyoaChoice('Use-a-pre-created-organism', 'gtn-cyoa')" />
-		<label for="cyoa-opt2" class="select btn btn-secondary">Use a pre-created organism</label>
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Use-a-precreated-organism" onclick="cyoaChoice('Use-a-precreated-organism', 'gtn-cyoa')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Use a precreated organism</label>
 	
 	
 	
@@ -1913,7 +1919,7 @@ Therefore, it is necessary to both visually inspect the results and manually fix
   <p>Viewing the output will open a view into Apollo in the main panel. Here you can interact with your genome and make annotations. This “Annotate” output is a quick link to that specific genome, and while Apollo allows you to manage and annotate multiple genomes, this dataset will always take you back to that specific genome. You can additionally access the Apollo server outside of Galaxy. While the URL will be different for each Galaxy server that supports Apollo, UseGalaxy.eu’s Apollo server is available at <a href="https://usegalaxy.eu/apollo">https://usegalaxy.eu/apollo</a>.</p>
 
 </div>
-<div class="Use-a-pre-created-organism">
+<div class="Use-a-precreated-organism">
 
   <p>While the URL will be different for each Galaxy server that supports Apollo, to access UseGalaxy.eu’s Apollo server:</p>
 
@@ -1932,7 +1938,7 @@ Therefore, it is necessary to both visually inspect the results and manually fix
   <figure id="figure-1" style="max-width: 90%;"><img src="../../images/apollo/ui.png" alt="Screenshot of Apollo in Galaxy, apollo takes up most of the space in the center iframe with the history shown on the right." width="1713" height="1035" loading="lazy" /><a target="_blank" href="../../images/apollo/ui.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> This is the Apollo interface, when viewed from inside Galaxy. The Annotate tool produces a special output which acts like a link to the Apollo server. It is <b>not</b> sufficient to download this file to save a copy of your annotations, unlike other datasets in Galaxy. In the main panel Apollo is displayed, with two panels of its own: the Annotation Window (left), and the Annotator Panel (right). The annotation window is the main view into our genome and here we will see evidence, reconcile it, and make our annotations. The right panel allows us to show or hide individual evidence tracks, switch between organisms, and navigate around the genome.</figcaption></figure>
 
 </div>
-<div class="Use-a-pre-created-organism">
+<div class="Use-a-precreated-organism">
 
   <figure id="figure-2" style="max-width: 90%;"><img src="../../images/apollo/ui_apollo.png" alt="Screenshot of Apollo." width="1367" height="829" loading="lazy" /><a target="_blank" href="../../images/apollo/ui_apollo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> This is the Apollo interface, with two panels of its own: the Annotation Window (left), and the Annotator Panel (right). The annotation window is the main view into our genome and here we will see evidence, reconcile it, and make our annotations. The right panel allows us to show or hide individual evidence tracks, switch between organisms, and navigate around the genome.</figcaption></figure>
 
@@ -2038,7 +2044,7 @@ Therefore, it is necessary to both visually inspect the results and manually fix
 
 <p>Let’s suppose you want to improve the annotation of one of the gene. To do it, you can either click on one of its intron and drag and drop it to the User-created Annotations track (yellow background, at the top), or if you prefer, right click on one of its intron and select <strong>Create new annotation</strong> &gt; <strong>gene</strong>. It should appear shortly in the <strong>User-created Annotation</strong> track.</p>
 
-<div class="Use-a-pre-created-organism">
+<div class="Use-a-precreated-organism">
   <blockquote class="warning">
     <div class="box-title warning-title" id="warning-working-with-others"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Working with others</div>
     <p>Maybe you’re not doing this tutorial alone, if you see that other people have started working on this region of the genome, it is best to move to a different region to avoid disturbing them by modifying the same genes at the same time.</p>
@@ -2261,7 +2267,7 @@ Usually, big annotation consortiums have naming guidelines that you are supposed
   <p>Now the other user should be able to access your organism, and make any modifications to the annotation (creating genes, structural changes, functional annotation, …). In each gene history, Apollo keeps track of which user performed which operation, so you will always be able to know who did what on the annotation, and blame or credit them. Of course, using the same <strong>Sharing</strong> tab, you can stop at any time sharing an organism to a whole group or a specific users in a few clicks.</p>
 
 </div>
-<div class="Use-a-pre-created-organism">
+<div class="Use-a-precreated-organism">
   <p>It is of course possible to export all your annotation from Apollo in standard formats, directly from its interface (<code class="language-plaintext highlighter-rouge">Ref Sequence</code> tab), or from Galaxy. If you create your own organism in Apollo, you can choose to make it open to the public, or to restrict it to only your collaborators.</p>
 
   <p>Click on <strong>Create your own organism</strong> at the beginning to learn more.</p>
@@ -2645,7 +2651,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/32a0c09f352a7ed51463d0dadc2c645ce1f0605d">32a0c09</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d6bca083222d1984cbf9531aba0ff211a8d871cc">d6bca08</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

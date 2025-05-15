@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@32a0c09f352a7ed51463d0dadc2c645ce1f0605d",
+		release: "galaxy-training-network@d6bca083222d1984cbf9531aba0ff211a8d871cc",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Assembly of the mitochondrial genome from PacBio HiFi reads">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-09-26 07:29:58 +0000">
+<meta name="DC.date" content="2025-05-15 12:28:51 +0000">
 <meta name="DC.creator" content="Delphine Lariviere"><meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Assembly / Assembly of the mitochondrial genome from PacBio HiFi reads / Hands-on: Assembly of the mitochondrial genome from PacBio HiFi reads">
@@ -186,7 +186,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-09-26 07:29:58 +0000",
+  "dateModified": "2025-05-15 12:28:51 +0000",
   "datePublished": "2024-09-03 07:08:55 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -240,17 +240,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
     "url": "https://training.galaxyproject.org/training-material/topics/assembly/"
   },
-  "abstract": "# Introduction",
+  "abstract": "This tutorial will show you how to assemble a mitochondrial genome from PacBio HiFi data using MitoHiFi. ",
   "learningResourceType": "e-learning",
   "name": "Assembly of the mitochondrial genome from PacBio HiFi reads",
   "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/mitochondrion-assembly/tutorial.html",
-  "version": 2,
+  "version": 3,
   "timeRequired": "PT1H",
   "teaches": "- Generate Mitochondrial assembly\n- Understand the outputs of MitoHifi",
   "keywords": [
-    "Assembly"
+    "Assembly",
+    "biodiversity"
   ],
-  "description": "## Abstract\n\n# Introduction\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to assemble the mitochondrial genome from PacBio Hifi Reads\n\n\n## Learning Objectives\n\n- Generate Mitochondrial assembly\n- Understand the outputs of MitoHifi\n\n",
+  "description": "## Abstract\n\nThis tutorial will show you how to assemble a mitochondrial genome from PacBio HiFi data using MitoHiFi. \n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to assemble the mitochondrial genome from PacBio Hifi Reads\n\n\n## Learning Objectives\n\n- Generate Mitochondrial assembly\n- Understand the outputs of MitoHifi\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -1119,7 +1120,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Sep 3, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 26, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 15, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1139,7 +1140,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">3.0</a> (1 recent ratings, 3 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
 
     </blockquote>
     </section>
@@ -1154,9 +1155,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <h1 id="introduction">Introduction</h1>
-
-<p>This tutorial will show you how to assemble a mitochondrial genome from PacBio HiFi data using MitoHiFi <span class="citation"><a href="#uliano2023">Uliano-Silva <i>et al.</i> 2023</a></span>. 
+                <p>This tutorial will show you how to assemble a mitochondrial genome from PacBio HiFi data using MitoHiFi <span class="citation"><a href="#uliano2023">Uliano-Silva <i>et al.</i> 2023</a></span>. 
 Combined with the tutorials “Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C data” and “Decontamination of a genome assembly”, this allows you to produce a reference assembly for both the nuclear and the mitochondrial DNA of a vertebrate species.</p>
 
 <p>This tutorial uses data from the Zebra Finch (<em>Taeniopygia guttata</em>) generated by the <a href="https://vertebrategenomesproject.org/">Vertebrate Genome Project</a>. We downsampled the reads that didn’t align with the mitochondrial genome so that the tutorial can run faster.</p>
@@ -1187,10 +1186,7 @@ MitoHiFi:</p>
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
-      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
-    </ol>
-  </li>
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
   <li><a href="#download-the-mitogenome-for-a-related-species" id="markdown-toc-download-the-mitogenome-for-a-related-species">Download the mitogenome for a related species</a>    <ol>
       <li><a href="#assemble-the-mitochondrial-genome-with-mitohifi" id="markdown-toc-assemble-the-mitochondrial-genome-with-mitohifi">Assemble the mitochondrial genome with <strong>MitoHiFi</strong></a></li>
     </ol>
@@ -1610,7 +1606,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/32a0c09f352a7ed51463d0dadc2c645ce1f0605d">32a0c09</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d6bca083222d1984cbf9531aba0ff211a8d871cc">d6bca08</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
