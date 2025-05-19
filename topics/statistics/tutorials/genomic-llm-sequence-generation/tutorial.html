@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@a82653244ce96920f0b49dfb7cffe0a9d28a8056",
+		release: "galaxy-training-network@26fe21397124a8e44a9b7affd06366028edd2a76",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Generating Artificial Yeast DNA Sequences using a DNA LLM">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-04-25 12:24:28 +0000">
+<meta name="DC.date" content="2025-05-19 16:11:00 +0000">
 <meta name="DC.creator" content="Raphael Mourad">
 <meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -188,8 +188,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "type": "project"
   },
   "workTranslation": [],
-  "creativeWorkStatus": "Draft",
-  "dateModified": "2025-04-25 12:24:28 +0000",
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-05-19 16:11:00 +0000",
   "datePublished": "2025-04-17 09:19:54 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -247,7 +247,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Generating Artificial Yeast DNA Sequences using a DNA LLM",
   "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/genomic-llm-sequence-generation/tutorial.html",
-  "version": 2,
+  "version": 3,
   "timeRequired": "PT3H",
   "teaches": "- Describe the process of generating synthetic DNA sequences using pre-trained language models and explain the significance of temperature settings in controlling sequence variability.\n- Set up a computational environment (e.g., Google Colab) and configure a pre-trained language model to generate synthetic DNA sequences, ensuring all necessary libraries are installed and configured.\n- Use k-mer counts and Principal Component Analysis (PCA) to compare generated synthetic DNA sequences with real genomic sequences, identifying similarities and differences.\n- Perform BLAST searches to assess the novelty of generated DNA sequences and interpret the results to determine the biological relevance and uniqueness of the synthetic sequences.\n- Develop a pipeline to detect open reading frames (ORFs) within generated DNA sequences and translate them into amino acid sequences, demonstrating the potential for creating novel synthetic genes.",
   "keywords": [
@@ -255,7 +255,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "ELIXIR",
     "AI & ML",
     "Large Language Model",
-    "work-in-progress",
     "jupyter-notebook"
   ],
   "description": "## Abstract\n\nGenerating synthetic DNA sequences using pre-trained language models  bridges the fields of synthetic biology and artificial intelligence, enabling the creation of novel DNA sequences that closely mimic natural genomes. By leveraging the power of advanced language models, we can generate biologically relevant sequences that have the potential to revolutionize genetic engineering, drug discovery, and our understanding of genomic function.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How do you set up a computational environment for generating synthetic DNA sequences using pre-trained language models?\n - What role does the temperature parameter play in controlling the variability of generated DNA sequences?\n - How can you compare generated synthetic DNA sequences with real genomic sequences using k-mer counts and PCA?\n - What is the significance of performing BLAST searches on generated DNA sequences, and how do you interpret the results?\n - How can you detect open reading frames (ORFs) in generated DNA sequences and translate them into amino acid sequences?\n\n\n## Learning Objectives\n\n- Describe the process of generating synthetic DNA sequences using pre-trained language models and explain the significance of temperature settings in controlling sequence variability.\n- Set up a computational environment (e.g., Google Colab) and configure a pre-trained language model to generate synthetic DNA sequences, ensuring all necessary libraries are installed and configured.\n- Use k-mer counts and Principal Component Analysis (PCA) to compare generated synthetic DNA sequences with real genomic sequences, identifying similarities and differences.\n- Perform BLAST searches to assess the novelty of generated DNA sequences and interpret the results to determine the biological relevance and uniqueness of the synthetic sequences.\n- Develop a pipeline to detect open reading frames (ORFs) within generated DNA sequences and translate them into amino acid sequences, demonstrating the potential for creating novel synthetic genes.\n\n",
@@ -1311,12 +1310,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <article class="tutorial topic-statistics">
     <h1 data-toc-skip>Generating Artificial Yeast DNA Sequences using a DNA LLM</h1>
     
-    <div class="alert alert-warning" role="alert">
-        <h4 class="alert-heading">Under Development!</h4>
-        <p>This tutorial is not in its final state. The content may change a lot in the next months.
-        Because of this status, it is also not listed in the topic pages.</p>
-    </div>
-    
 
     <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
@@ -1693,12 +1686,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                     
                 
                     
-                
-                    
-                
-                    
-                
-                    
                         
                         
                             
@@ -1707,6 +1694,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                                 </li>
                             
                         
+                    
+                
+                    
+                
+                    
+                
                     
                 
                     
@@ -1908,6 +1901,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                     
                 
                     
+                
+                    
                         
                         
                             
@@ -1916,8 +1911,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                                 </li>
                             
                         
-                    
-                
                     
                 
                     
@@ -1981,6 +1974,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                     
                 
                     
+                
+                    
                         
                         
                             
@@ -1989,8 +1984,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                                 </li>
                             
                         
-                    
-                
                     
                 
                     
@@ -2200,7 +2193,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 17, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 25, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 19, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -2218,7 +2211,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
 
     </blockquote>
     </section>
@@ -3336,7 +3329,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a82653244ce96920f0b49dfb7cffe0a9d28a8056">a826532</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/26fe21397124a8e44a9b7affd06366028edd2a76">26fe213</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
