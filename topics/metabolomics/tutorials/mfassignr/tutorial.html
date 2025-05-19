@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Molecular formula assignment and mass recalibration with MFAssignR package / Molecular formula assignment and mass recalibration with MFAssignR package / Metabolomics</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@463c6440e19dd31a663fe7219132e9d722935d58",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/mfassignr/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Molecular formula assignment and mass recalibration with MFAssignR package">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-05-19 08:39:34 +0000">
+<meta name="DC.creator" content="Kristina Gomoryova">
+<meta name="DC.creator" content="Helge Hecht">
+<meta name="DC.creator" content="Simeon Schum"><meta name="description" content="Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Metabolomics / Molecular formula assignment and mass recalibration with MFAssignR package / Hands-on: Molecular formula assignment and mass recalibration with MFAssignR package">
+        <meta property="og:description" content="Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/metabolomics/tutorials/mfassignr/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Molecular formula assignment and mass recalibration with MFAssignR package",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-05-19 08:39:34 +0000",
+  "datePublished": "2025-05-19 08:39:34 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Metabolomics",
+    "description": "Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.",
+    "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/"
+  },
+  "abstract": "This training covers the multi-element molecular formula (MF) assignment using the MFAssignR tool. It was originally developed by for the analysis of untargeted mass spectrometry data coming from complex environmental mixtures. The package contains several functions including noise assessment, isotope filtering, internal mass recalibration, and formula assignment. ",
+  "learningResourceType": "e-learning",
+  "name": "Molecular formula assignment and mass recalibration with MFAssignR package",
+  "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/mfassignr/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT2H",
+  "teaches": "- To learn about the main steps in the pre-processing of untargeted metabolomics LC-MS data.\n- To try hands-on analysis using the real data.",
+  "keywords": [
+    "Metabolomics"
+  ],
+  "description": "## Abstract\n\nThis training covers the multi-element molecular formula (MF) assignment using the MFAssignR tool. It was originally developed by for the analysis of untargeted mass spectrometry data coming from complex environmental mixtures. The package contains several functions including noise assessment, isotope filtering, internal mass recalibration, and formula assignment. \n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What are the main steps of untargeted metabolomics LC-MS data pre-processing?\n - How to annotate small molecules contained in mass spectrometry analyses of complex mixtures using the MFAssignR package?\n\n\n## Learning Objectives\n\n- To learn about the main steps in the pre-processing of untargeted metabolomics LC-MS data.\n- To try hands-on analysis using the real data.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/introduction/slides.html",
+      "name": "Introduction to Metabolomics",
+      "description": "Slides for 'Introduction to Metabolomics' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.html",
+      "name": "Mass spectrometry: LC-MS data processing",
+      "description": "Hands-on for 'Mass spectrometry: LC-MS data processing' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/KristinaGomoryova/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/KristinaGomoryova/",
+      "name": "Kristina Gomoryova",
+      "image": "https://avatars.githubusercontent.com/KristinaGomoryova",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-4407-3917",
+      "orcid": "https://orcid.org/0000-0003-4407-3917"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hechth/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hechth/",
+      "name": "Helge Hecht",
+      "image": "https://avatars.githubusercontent.com/hechth",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-6744-996X",
+      "orcid": "https://orcid.org/0000-0001-6744-996X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/skschum/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/skschum/",
+      "name": "Simeon Schum",
+      "image": "https://avatars.githubusercontent.com/skschum",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "contributor": [],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Metabolomics",
+      "description": "Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.",
+      "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3172",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3172",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3172"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/mfassignr/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/mfassignr",
+      "name": "MFAssignR"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/mfassignr",
+      "name": "MFAssignR"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/records/13768009",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/metabolomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Metabolomics
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/metabolomics/faqs/" title="Check our FAQs for the Metabolomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/metabolomics/tutorials/mfassignr/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/metabolomics/tutorials/mfassignr/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-metabolomics">
+    <h1 data-toc-skip>Molecular formula assignment and mass recalibration with MFAssignR package</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/KristinaGomoryova/" class="contributor-badge contributor-KristinaGomoryova"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/KristinaGomoryova?s=36" alt="Kristina Gomoryova avatar" width="36" class="avatar" />
+    Kristina Gomoryova</a><a href="/training-material/hall-of-fame/hechth/" class="contributor-badge contributor-hechth"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hechth?s=36" alt="Helge Hecht avatar" width="36" class="avatar" />
+    Helge Hecht</a><a href="/training-material/hall-of-fame/skschum/" class="contributor-badge contributor-skschum"><img src="https://avatars.githubusercontent.com/skschum?s=36" alt="Simeon Schum avatar" width="36" class="avatar" />
+    Simeon Schum</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are the main steps of untargeted metabolomics LC-MS data pre-processing?</p>
+</li>
+        
+        <li><p>How to annotate small molecules contained in mass spectrometry analyses of complex mixtures using the MFAssignR package?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>To learn about the main steps in the pre-processing of untargeted metabolomics LC-MS data.</p>
+</li>
+        
+        <li><p>To try hands-on analysis using the real data.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/metabolomics/tutorials/introduction/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Introduction to Metabolomics</a>
+                            </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Mass spectrometry: LC-MS data processing</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/13768009">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/metabolomics/tutorials/mfassignr/workflows/" title="Molecular formula assignment and mass recalibration with MFAssignR package workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/metabolomics/tutorials/mfassignr/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> May 19, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 19, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>This training covers the multi-element molecular formula (MF) assignment using the MFAssignR tool. It was originally developed by <span class="citation"><a href="#Schum2020">Schum <i>et al.</i> 2020</a></span> for the analysis of untargeted mass spectrometry data coming from complex environmental mixtures. The package contains several functions including noise assessment, isotope filtering, internal mass recalibration, and formula assignment.</p>
+
+<p>The <strong>MFAssignR workflow</strong> is composed of several steps:</p>
+
+<ol>
+  <li>Run <strong>KMDNoise</strong> to determine the noise level for the data.</li>
+  <li>Check the effectiveness of the S/N threshold using <strong>SNplot</strong>.</li>
+  <li>Use <strong>IsoFiltR</strong> to identify potential 13C and 34S isotope masses.</li>
+  <li>Using the signal-to-noise (S/N) threshold, and the two data frames output from IsoFiltR(), run <strong>MFAssignCHO</strong> to assign MF with C, H, and O to assess the mass accuracy.</li>
+  <li>Use <strong>RecalList</strong> to generate a list of the potential recalibrant series.</li>
+  <li>Use <strong>FindRecalSeries</strong> to find the most suitable recalibrant series.</li>
+  <li>After choosing recalibrant series, use <strong>Recal</strong> to recalibrate the mass lists.</li>
+  <li>Assign MF to the recalibrated mass list using <strong>MFAssign</strong>.</li>
+  <li>Check the output plots from MFAssign() to evaluate the quality of the assignments.</li>
+</ol>
+
+<p>We can illustrate the workflow also on the following scheme:
+<a href="images/mfassignr_scheme.png" rel="noopener noreferrer"><img src="images/mfassignr_scheme.png" alt="workflow_graphical. " width="1512" height="720" loading="lazy" /></a></p>
+
+<p>Let’s dive now into the individual steps and explain all the inputs, parameter settings, and outputs.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#data-import" id="markdown-toc-data-import">Data import</a></li>
+  <li><a href="#noise-assessment" id="markdown-toc-noise-assessment">Noise assessment</a>    <ol>
+      <li><a href="#kmdnoise" id="markdown-toc-kmdnoise">KMDNoise</a></li>
+      <li><a href="#snplot" id="markdown-toc-snplot">SNplot</a></li>
+    </ol>
+  </li>
+  <li><a href="#isotope-filtering" id="markdown-toc-isotope-filtering">Isotope filtering</a></li>
+  <li><a href="#preliminary-molecular-formula-assignment" id="markdown-toc-preliminary-molecular-formula-assignment">Preliminary molecular formula assignment</a></li>
+  <li><a href="#recalibration" id="markdown-toc-recalibration">Recalibration</a>    <ol>
+      <li><a href="#recallist" id="markdown-toc-recallist">RecalList</a></li>
+      <li><a href="#findrecalseries" id="markdown-toc-findrecalseries">FindRecalSeries</a></li>
+      <li><a href="#recal" id="markdown-toc-recal">Recal</a></li>
+    </ol>
+  </li>
+  <li><a href="#molecular-formula-assignment" id="markdown-toc-molecular-formula-assignment">Molecular formula assignment</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="data-import">Data import</h1>
+
+<p>At the very beginning, we need to import the dataset we will be using. MFAssignR requires on input a table in a <strong>tabular format</strong>, where:</p>
+
+<ul>
+  <li>the first column is the mass to charge ratio (m/z),</li>
+  <li>the second column is intensity,</li>
+  <li>the optional third column is retention time.</li>
+</ul>
+
+<p>In our case, we will use the model data from the MFAssignR package, which contains the negative ions from acetonitrile extract of wildfire-influenced atmospheric organic aerosol, collected at the Pacific Northwest National Laboratory (PNNL). The detection m/z range of the instrument was 100-800 and the ions were analyzed by electrospray ionization (ESI) on Orbitrap Elite MS and recorded as Xcalibur.raw files. In the MFAssignR package, this dataset is named Raw_Neg_ML in .rds format, which we saved as a tabular file and we will use this file as our input.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-upload-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Upload data</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a name.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/records/13768009">Zenodo</a>:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/13768009/files/mfassignr_input.txt
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Libraries</strong> (left panel)</li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Set the format of the dataset to ‘tabular’.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>We can now view our dataset, and ensure, that it has a correct input format.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="noise-assessment">Noise assessment</h1>
+
+<p>Having our input data in the workspace, we can now start with the analysis!</p>
+
+<p>The first step is the noise assessment, which allows us to avoid both false positives (if noise is underestimated) and false negatives (if noise is overestimated). For this purpose, we will be using the <strong>KMDNoise</strong> function, and visualize the result using <strong>SNplot</strong> function. MFAssignR provides an additional function, <strong>HistNoise</strong>, but often the data distribution prerequisites are not fulfilled and especially when the analyte signal tapers into the noise, HistNoise fails to separate the distributions. Therefore, using KMDNoise is strongly preferred.</p>
+
+<h2 id="kmdnoise">KMDNoise</h2>
+
+<p>KMDNoise function takes advantage of the calculation of <strong>Kendrick Mass Defect (KMD)</strong>.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-kendrick-mass-defect"><button class="gtn-boxify-button details" type="button" aria-controls="details-kendrick-mass-defect" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Kendrick Mass Defect</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>The <strong>Kendrick mass (KM)</strong> serves to simplify classification and
+identification of repeating units in molecules, typically 
+homologous CH2 series, which differ only by the number of base 
+units (-CH2 groups in this case). It sets the mass of the molecular fragment to 
+integer value in atomic mass units (amu).</p>
+
+  <p>The KM of a compound can be therefore calculated as the known m/z (given the ionization) of the compound multiplied by a ratio (rounded
+(CH2_mass)/exact(CH2_mass)), which is (14/14.01565) = 0.9988834.</p>
+
+\[\text{KM} = \text{m/z} \times \frac{\text{14.00000}}{\text{14.01565}}\]
+
+  <p>The <strong>Kendrick Mass Defect (KMD)</strong> is then defined as the difference 
+between rounded KM values and KM.
+\(\text{KMD} = \text{nominal KM} - {\text{KM}}\)</p>
+
+  <p>Homologous series, meaning compounds differing only in the number of 
+repeating units (e.g. alkylation series), will always have the same KMD.</p>
+
+  <p><span class="citation"><a href="#kendrickmass_mzmine">mzmine 2024</a></span> <span class="citation"><a href="#kendrickmass_wiki">wikipedia 2024</a></span></p>
+</blockquote>
+
+<p>When the KMD is calculated for all peaks in the mass spectrum, there will be a clear separation of more intense analyte peaks and low-intense noise peaks. To isolate the noise region, we can use the KMD limits of chemically feasible molecular formulas in conjunction with the calculation of the slope of a KMD plot using a linear equation \(y = 0.1132x + b\), where <em>y</em> is the KMD value, <em>0,1132</em> was an empirically derived integer, <em>x</em> the measured ion mass and <em>b</em> an y-intercept. To provide a more accurate assessment, two lines with different y-intercepts are selected (we will set this lower and upper y-limit below). Once the noise region is isolated, a noise level will be estimated as the average intensity of peaks within that region.</p>
+
+<p><a href="images/KMDplot_explained.png" rel="noopener noreferrer"><img src="images/KMDplot_explained.png" alt="KMD plot. " width="2208" height="2223" loading="lazy" /></a></p>
+
+<p>When running the function, we can stick with the default values: the upper limit for the y-intercept is set to 0.2, so that it does not interact with any potentially double-charged peaks, the lower limit of the y-intercept value is set to 0.05 to ensure no analyte peaks are incorporated into the noise estimation. Both upper and lower x-intercept limits are optional and will be set to minimum and maximum mass in the data if not specified.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-noise-assessment-using-kmdnoise"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Noise assessment using KMDNoise</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_histnoise/mfassignr_kmdnoise/1.1.2+galaxy0" title="MFAssignR KMDNoise tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MFAssignR KMDNoise</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input data”</em>: <code class="language-plaintext highlighter-rouge">mfassignr_input.txt</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“upper limit for the y intercept”</em>: <code class="language-plaintext highlighter-rouge">0.2</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“lower limit for the y intercept”</em>: <code class="language-plaintext highlighter-rouge">0.05</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The function outputs a <strong>KMD plot</strong>, where the noise area is separated between red lines and a <strong>noise estimate</strong>. The noise estimate we can then multiply with a multiplier, typically a value between 3 and 10 in order to remove low-intensity m/z values. Multiplication with 10 means we will be very stringent, the signal-to-noise ratio will be high and close to the limit of quantitation (LOQ), whereas multiplication with 3 means the signal-to-noise ratio will be low and we are close to the limit of detection (LOD). The optimal is therefore to start with e.g. 6 and check the results using SNplot, as we will do further.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What is the noise level estimated by KMDNoise function?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Using our model data, the estimated noise is <strong>346.0706</strong>.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="snplot">SNplot</h2>
+
+<p>We can now check the effectiveness of the S/N threshold using <strong>SNplot</strong>, which plots the mass spectrum with the masses below and above the chosen threshold, where the noise is indicated by red.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">cut</code> parameter can be computed as an estimated noise level * multiplier, so if we get 346.0706 as a noise level from KMDnoise, we can multiply it by 6, which gives us 2076.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Mass</code> - parameter defines a centerpoint to look at the mass spectrum.</li>
+  <li><code class="language-plaintext highlighter-rouge">Parameter window.x</code> - sets the +/- range around the mass centerpoint, default is 0.5.</li>
+  <li><code class="language-plaintext highlighter-rouge">Parameter window.y</code> - is used for setting the limit of the y-axis in the plot. Parameter window.y multiplied the <code class="language-plaintext highlighter-rouge">cut</code> parameter value, and the multiplication result is used as the y-axis limit. The default is 10.</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-the-snplot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Plot the SNplot</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_snplot/mfassignr_snplot/1.1.2+galaxy0" title="MFAssignR SNplot tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MFAssignR SNplot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input data”</em>: <code class="language-plaintext highlighter-rouge">mfassignr_input.txt</code> (Input dataset)</li>
+        <li><em>“SN ratio”</em>: <code class="language-plaintext highlighter-rouge">6.0</code></li>
+        <li><em>“Estimated noise”</em> <code class="language-plaintext highlighter-rouge">346.0706</code></li>
+        <li><em>“mass”</em>: <code class="language-plaintext highlighter-rouge">301.0</code></li>
+        <li><em>“window.x”</em>: <code class="language-plaintext highlighter-rouge">50.0</code></li>
+        <li><em>“window.y”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p><a href="images/SNplot.png" rel="noopener noreferrer"><img src="images/SNplot.png" alt="SNplot. " width="2099" height="2099" loading="lazy" /></a></p>
+
+<p>Based on the SNplot, we can see that the noise - indicated in red - forms a uniform background and is effectively separated by the horizontal line (indicating the S/N threshold), meaning we can further use the multiplication of 346 and 6. If the noise was higher than the S/N threshold, it would mean we need to increase the value of the multiplier.</p>
+
+<h1 id="isotope-filtering">Isotope filtering</h1>
+
+<p>The next step is the identification of probable isotopic ion masses containing 1-2 13C or 34S from monoisotopic masses in order to prevent incorrect interpretation of the molecular composition. For this, we will use the <strong>IsoFiltR</strong> function.</p>
+
+<p>Isotope filtering has 4 steps:</p>
+
+<ol>
+  <li>Firstly, the mass list is transformed to pairs of ions, which have a mass difference of 1.003355 Da for 13C and 1.995797 Da for 34S with some flexibility for a user-defined error tolerance (by default 5 ppm).</li>
+  <li>For specific isotopes, KMD values are calculated using the mass difference between 12C and 13C (1.003355 Da) and the mass difference between 32S and 34S (1.995797 Da).</li>
+  <li>Isotope pairs are further refined using <em>Resolution Enhanced KMD</em> adapted from <span class="citation"><a href="#Zheng2019">Zheng <i>et al.</i> 2019</a></span>, in which the Kendrick base is adjusted by an experimentally derived integer (For 34S, the integer is 12 (determined by trial and error) and for 13C the integer is 21 based on <span class="citation"><a href="#Zheng2019">Zheng <i>et al.</i> 2019</a></span>) in order to obtain a desired separation.</li>
+  <li>Finally, abundance ratios are evaluated, where the abundance ratio for 13C should be &lt; 0.6 and the abundance ratio for 34S should be &lt; 0.3.</li>
+</ol>
+
+<p>After performing isotopic filtering, two tables are outputted, one containing the isotopic masses and one containing the monoisotopic masses and all masses that did not have a matching isotopic mass. In complex mixtures, a mass can be classified as both monoisotopic and isotopic; in those cases, it is included in both output tables and classified after the MF assignment.</p>
+
+<p>We will change only the S/N ratio parameter and estimated noise (based on the KMDNoise function), otherwise, we can follow with the default settings.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-isotope-filtering-using-isofiltr"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Isotope filtering using IsoFiltR</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_isofiltr/mfassignr_isofiltr/1.1.2+galaxy0" title="MFAssignR IsoFiltR tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MFAssignR IsoFiltR</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Peak Data”</em>: <code class="language-plaintext highlighter-rouge">mfassignr-input.txt</code> (Input dataset)</li>
+        <li><em>“SN ratio”</em>: <code class="language-plaintext highlighter-rouge">6.0</code></li>
+        <li><em>“Estimated noise”</em> <code class="language-plaintext highlighter-rouge">346.0706</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="preliminary-molecular-formula-assignment">Preliminary molecular formula assignment</h1>
+
+<p>Once we have denoised the data and have identified the potential 13C and 34S masses, we can start with the preliminary MF assignment, using the <strong>MFAssignCHO</strong> function. This function assigns MF only with C, H, and O elements to assess the mass accuracy, and therefore it’s much quicker than the main MFAssign function. It is based on the CHOFIT algorithm developed by <span class="citation"><a href="#Green2015">Green and Perdue 2015</a></span>.</p>
+
+<p>Firstly, the initial formula assignment with the CHOFIT algorithm is performed along with the quality checks. Then, KMD and z* values are calculated for all masses with the CH2 Kendrick base, and masses are sorted into CH2 homologous series. Subsequently, 1-3 members of each CH2 homologous series below the user-defined threshold are selected and assigned a MF. The ambiguous MFs are returned within the <em>Unassigned</em> list, whereas the unambiguous MF are further re-assigned using CH2, O, H2, H2O, and CH2O extensions.</p>
+
+<p>Let’s use the MFAssignCHO function. On the input, we will need the output of the IsoFiltR function, a data frame of monoisotopic masses, and also (optionally) the data frame containing isotopic masses. Furthermore, we select in which ion mode we measured the data (positive or negative) and we set the signal-to-noise threshold - based on the noise estimate we obtained from the <strong>KMDNoise</strong> or <strong>HistNoise</strong> functions multiplied by the multiplier. Finally, based on the acquisition range, we set the lowMW and highMW, and also the allowed ppm error. Other parameters we can leave in default settings, although in the ‘Advanced’ tab, many additional parameters can be set by user, including amounts of elements, ratios (e.g. minimum allowed O/C ratio) and many others.</p>
+
+<p>On the output, there are two dataframes, <code class="language-plaintext highlighter-rouge">Ambiguous</code> and <code class="language-plaintext highlighter-rouge">Unambigous</code> provided.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-preliminary-mf-assignment-with-mfassigncho"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Preliminary MF assignment with MFAssignCHO</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_mfassigncho/mfassignr_mfassignCHO/1.1.2+galaxy0" title="MFAssignR MFAssignCHO tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MFAssignR MFAssignCHO</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data frame of monoisotopic masses”</em>: <code class="language-plaintext highlighter-rouge">mono_out</code> (output of <strong>MFAssignR IsoFiltR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data frame of isotopic masses”</em>: <code class="language-plaintext highlighter-rouge">iso_out</code> (output of <strong>MFAssignR IsoFiltR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“ppm_err”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+        <li><em>“Ion mode”</em>: <code class="language-plaintext highlighter-rouge">negative</code></li>
+        <li><em>“SN ratio”</em>: <code class="language-plaintext highlighter-rouge">6</code></li>
+        <li><em>“Estimated noise”</em>: <code class="language-plaintext highlighter-rouge">346.0706</code></li>
+        <li><em>“Lower limit of molecular mass to be assigned”</em>: <code class="language-plaintext highlighter-rouge">50.0</code></li>
+        <li><em>“Upper limit of molecular mass to be assigned”</em>: <code class="language-plaintext highlighter-rouge">1000.0</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>On the output, we get several data frames: unambiguous assignments, ambiguous assignments, and a data frame containing unassigned masses. Additionally, several plots are available, such as MSAssign showing a mass spectrum highlighting assigned and unassigned masses, errorMZ showing the relationship between absolute error (in ppm) and ion mass, van Krevelen plot, and a mass spectrum colored by molecular group.</p>
+
+<p><a href="images/errorMZ.png" rel="noopener noreferrer"><img src="images/errorMZ.png" alt="errorMZ. " width="2100" height="2100" loading="lazy" /></a>
+This plot shows us the absolute error, which increases with the increasing mass as expected. Actually, it is good to see a trend here, meaning there is a systematic error that will be corrected during recalibration, a problem would be if there was a random error that we can’t correct.</p>
+
+<p><a href="images/vankrevelen.png" rel="noopener noreferrer"><img src="images/vankrevelen.png" alt="Van Krevelen plot. " width="2100" height="2100" loading="lazy" /></a></p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-van-krevelen-plot"><button class="gtn-boxify-button details" type="button" aria-controls="details-van-krevelen-plot" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Van Krevelen plot</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>The Van Krevelen plot was originally introduced in 1950 <span class="citation"><a href="#krevelen1950graphical">KREVELEN 1950</a></span> to illustrate 
+the coal formation processes. It typically depicts the atomic ratios of hydrogen-to-carbon (H/C) 
+ratio on the y-axis and oxygen-to-carbon (O/C) on the x-axis. Certain molecules occupy different regions of
+the van Krevelen plot, e.g. alkanes usually have high H/C and low O/C ratios, aromatic compounds have
+lower H/C ratios and carbohydrates usually have high O/C and moderate H/C ratios.</p>
+
+</blockquote>
+
+<p>Van Krevelen plot visualizes the chemical composition of complex chemical mixtures and it characterizes the data quality and how the data is distributed. Compounds with similar structures and functional groups will cluster together on the plot.</p>
+
+<p><a href="images/MSgroups.png" rel="noopener noreferrer"><img src="images/MSgroups.png" alt="MS groups. " width="2100" height="2100" loading="lazy" /></a>
+The MSgroups plot shows the abundance distribution of unambiguous molecular formula assignments.</p>
+
+<p><a href="images/msassign.png" rel="noopener noreferrer"><img src="images/msassign.png" alt="msassign. " width="2100" height="2100" loading="lazy" /></a>
+Assignment mass spectrum then shows what was assigned: green are the assigned compounds, red are unassigned ones (eventually, if applicable, isotopes are in blue). It is useful to check whether there are any gaps around a particular m/z, which would mean there is a problem with the assignment.</p>
+
+<h1 id="recalibration">Recalibration</h1>
+<p>The next step is recalibration, which ensures that we will have an accurate mass list before formula assignment and any systemic bias is removed. In MFAssignR, recalibration was adapted from <span class="citation"><a href="#Savory2011">Savory <i>et al.</i> 2011</a></span> and <span class="citation"><a href="#Kozhinov2013">Kozhinov <i>et al.</i> 2013</a></span>.</p>
+
+<p>There are three consecutive functions, <strong>RecalList</strong>, <strong>FindRecalSeries</strong> and <strong>Recal</strong>, which we will use.</p>
+
+<h2 id="recallist">RecalList</h2>
+
+<p>Firstly, we will generate a table containing potential recalibrant CH2 homologous series using the RecalList function. 
+As in input, we will use the <code class="language-plaintext highlighter-rouge">Unambig</code> data frame which we generated in the MFAssignCHO function:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-finding-recalibrant-series"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Finding recalibrant series</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_recallist/mfassignr_recallist/1.1.2+galaxy0" title="MFAssignR RecalList tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MFAssignR RecalList</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input data”</em>: <code class="language-plaintext highlighter-rouge">Unambig</code> (output of <strong>MFAssignR MFAssignCHO</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many series were returned?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>When we click on the results (‘Recalibration series by MFAssignR RecalList on data 10’), we can
+see there are 226 lines (1 being the column names), meaning 225 series which we can select from for the recalibration.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>On the output, we get a data frame containing CH2 homologous series that contain more than 3 members. Let’s dive more into what metrics are available:</p>
+
+<ul>
+  <li><strong>Series</strong> - reports the homologous series according to class, adduct, and DBE. The format is “class_adduct_DBE”, for example, a homologous series with class = “O6, adduct of Na+, and DBE = 4” would be “O6_Na_4”.</li>
+  <li><strong>Number Observed</strong> - reports the number of members of each homologous series.</li>
+  <li><strong>Series Index</strong> - represents the order of the series when ordered by length of homologous series.</li>
+  <li><strong>Mass Range</strong> - reports the minimum and maximum mass for the compounds within a homologous series.</li>
+  <li><strong>Tall Peak</strong> - reports the mass of the most abundant peak in each series.</li>
+  <li><strong>Abundance Score</strong> - reports the percentage difference between the mean abundance of a homologous series and the median abundance within the mass range the “Tall Peak” falls in (for example m/z 200-300). A higher score is generally better.</li>
+  <li><strong>Peak Score</strong> - This column compares the intensity of the tallest peak in a given series to the second tallest peak. This comparison is calculated by \(\text{log10} \times \frac{\text{Max Peak Intensity}}{\text{Second Peak Intensity}}\) The closer to 0 this value is the better, in general.</li>
+  <li><strong>Peak Distance</strong> - This column shows the number of CH2 units between the tallest and second tallest peak in each series. In general, the value should be as close to 1 as possible.</li>
+  <li><strong>Series Score</strong> - This column compares the number of actual observations in each series to the theoretical maximum number based on the CH2 homologous series. The closer to one this value is, the better.</li>
+</ul>
+
+<h2 id="findrecalseries">FindRecalSeries</h2>
+
+<p>Which are the best series for recalibration? Combined, these series should cover the full mass spectral range to provide the best overall recalibration. The best series to choose are generally long and combined have a “Tall Peak” at least every 100 m/z.</p>
+
+<p>Currently, it is up to the user to choose the most suitable recalibrant series that will be used for the recalibration in the Recal step. It is possible to choose up to 10 series and they should indeed span over the whole range of m/z - often an error is thrown to add more series in case there are gaps, or the chosen series would have a good score but would be way too alike. Therefore, we provide the <strong>FindRecalSeries</strong> function, which attempts to select the best series which fulfill the abovementioned criteria.</p>
+
+<p>We will only provide the <code class="language-plaintext highlighter-rouge">Recalibration series</code> dataframe from RecalList function, and the best series will be chosen automatically. Although a list of more than 10 series might be provided on the output, only first 10 best series will be used by the Recal function in the next step.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-selecting-most-suitable-series"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Selecting most suitable series</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_findrecalseries/mfassignr_findRecalSeries/1.1.2+galaxy1" title="MFAssignR FindRecalSeries tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MFAssignR FindRecalSeries</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input data”</em>: <code class="language-plaintext highlighter-rouge">recal_series</code> (output of <strong>MFAssignR RecalList</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="recal">Recal</h2>
+
+<p>The Recal function is used for the internal mass recalibration. It takes the output from MFAssignCHO and outputs from IsoFiltrR, the <code class="language-plaintext highlighter-rouge">Mono</code> and <code class="language-plaintext highlighter-rouge">Iso</code> data frames. Finally, it takes the series for recalibration, either chosen by the user or selected by the FindRecalSeries function.</p>
+
+<p>A common error points to increasing the <code class="language-plaintext highlighter-rouge">MzRange</code> parameter, which sets the recalibration segment length and has a default value of 30 - sometimes it is needed to increase it to even values as 80. Other parameters can be left to their defaults.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-internal-mass-recalibration"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Internal mass recalibration</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_recal/mfassignr_recal/1.1.2+galaxy0" title="MFAssignR Recal tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MFAssignR Recal</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input data (Output from MFAssign)”</em>: <code class="language-plaintext highlighter-rouge">Unambig</code> (output of <strong>MFAssignR MFAssignCHO</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Calibration series (Output from RecalList)”</em>: <code class="language-plaintext highlighter-rouge">Final recalibration series</code> (output of <strong>MFAssignR FindRecalSeries</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Peaks dataframe (Mono from IsoFiltR)”</em>: <code class="language-plaintext highlighter-rouge">Monoisotopic masses</code> (output of <strong>MFAssignR IsoFiltR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Isopeaks dataframe (Iso from IsoFiltR)”</em>: <code class="language-plaintext highlighter-rouge">iso_out</code> (output of <strong>MFAssignR IsoFiltR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Ion mode”</em>: <code class="language-plaintext highlighter-rouge">negative</code></li>
+        <li><em>“SN ratio”</em>: <code class="language-plaintext highlighter-rouge">6</code></li>
+        <li><em>“Estimated noise”</em>: <code class="language-plaintext highlighter-rouge">346.0706</code></li>
+        <li><em>“Mass windows used for the segmented recalibration”</em>: <code class="language-plaintext highlighter-rouge">50.0</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="molecular-formula-assignment">Molecular formula assignment</h1>
+
+<p>The last step of the workflow is the actual assignment of molecular formulas with 12C, 1H, and 16O and a variety of heteroatoms and isotopes, including 2H, 13C, 14N, 15N, 31P, 32S, 34S, 35Cl, 37Cl, 19F, 79Br, 81Br, and 126I. It can also assign Na+ adducts, common in positive ion mode. We have already described the principles of the MFAssignCHO function, which works the very same way as MFAssign (only being limited to C, H, and O elements), so let’s directly use the MFAssign function for the formula assignment.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-mf-assignment-using-mfassign"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  MF assignment using MFAssign</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/mfassignr_mfassign/mfassignr_mfassign/1.1.2+galaxy0" title="MFAssignR MFAssign tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MFAssignR MFAssign</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data frame of monoisotopic masses”</em>: <code class="language-plaintext highlighter-rouge">Mono</code> (output of <strong>MFAssignR Recal</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data frame of isotopic masses”</em>: <code class="language-plaintext highlighter-rouge">Iso</code> (output of <strong>MFAssignR Recal</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“ppm_err</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+        <li><em>“Ion mode”</em>: <code class="language-plaintext highlighter-rouge">negative</code></li>
+        <li><em>“SN ratio”</em>: <code class="language-plaintext highlighter-rouge">6</code></li>
+        <li><em>“Estimated noise”</em>: <code class="language-plaintext highlighter-rouge">346.0706</code></li>
+        <li><em>“Lower limit of molecular mass to be assigned”</em>: <code class="language-plaintext highlighter-rouge">50.0</code></li>
+        <li><em>“Upper limit of molecular mass to be assigned”</em>: <code class="language-plaintext highlighter-rouge">1000.0</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Finally, we obtain assigned formulas on rearranged data. Similarly to the MFAssignCHO function, data frames of unassigned masses, ambiguous assignments and unambiguous assignments are provided, as well as quality check plots.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we showed how can we assign molecular formulas using the MFAssignR package. We learned  several key steps, including noise estimation, isotope filtering, recalibration, and finally the formula assignment. We described how parameters of individual functions are used and how they should be adjusted if needed.</p>
+
+<p><a href="images/workflow_overview.png" rel="noopener noreferrer"><img src="images/workflow_overview.png" alt="workflow overview. " width="1152" height="552" loading="lazy" /></a></p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>MFAssignR can be used to process the untargeted LC-MS metabolomics data, including complex environmental mixture samples</p>
+</li>
+                        
+                        <li><p>MFAssignR can be used to annotate data obtained from LC-MS experiments with molecular formulas using <em>in silico</em> calculations</p>
+</li>
+                        
+                        <li><p>MFAssignR can be used to find a recalibration series and to recalibrate mass spectrometry data to increase the accuracy</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/metabolomics/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="krevelen1950graphical">KREVELEN, V. A. N., 1950 <b>Graphical-statistical method for the study of structure and reaction processes of coal.</b> Fuel 29: 269–284. <a href="https://api.semanticscholar.org/CorpusID:208705483">https://api.semanticscholar.org/CorpusID:208705483</a></li>
+<li id="Savory2011">Savory, J. J., N. K. Kaiser, A. M. McKenna, F. Xian, G. T. Blakney <i>et al.</i>, 2011 <b>Parts-Per-Billion Fourier Transform Ion Cyclotron Resonance Mass Measurement Accuracy with a “Walking” Calibration Equation</b>. Analytical Chemistry 83: 1732–1736. <a href="https://doi.org/10.1021/ac102943z">10.1021/ac102943z</a></li>
+<li id="Kozhinov2013">Kozhinov, A. N., K. O. Zhurov, and Y. O. Tsybin, 2013 <b>Iterative Method for Mass Spectra Recalibration via Empirical Estimation of the Mass Calibration Function for Fourier Transform Mass Spectrometry-Based Petroleomics</b>. Analytical Chemistry 85: 6437–6445. <a href="https://doi.org/10.1021/ac400972y">10.1021/ac400972y</a></li>
+<li id="Green2015">Green, N. W., and E. M. Perdue, 2015 <b>Fast Graphically Inspired Algorithm for Assignment of Molecular Formulae in Ultrahigh Resolution Mass Spectrometry</b>. Analytical Chemistry 87: 5086–5094. <a href="https://doi.org/10.1021/ac504166t">10.1021/ac504166t</a></li>
+<li id="Zheng2019">Zheng, Q., M. Morimoto, H. Sato, and T. Fouquet, 2019 <b>Resolution-enhanced Kendrick mass defect plots for the data processing of mass spectra from wood and coal hydrothermal extracts</b>. Fuel 235: 944–953. <a href="https://doi.org/10.1016/j.fuel.2018.08.085">10.1016/j.fuel.2018.08.085</a></li>
+<li id="Schum2020">Schum, S. K., L. E. Brown, and L. R. Mazzoleni, 2020 <b>MFAssignR: Molecular formula assignment software for ultrahigh resolution mass spectrometry analysis of environmental complex mixtures</b>. Environmental Research 191: 110114. <a href="https://doi.org/10.1016/j.envres.2020.110114">10.1016/j.envres.2020.110114</a></li>
+<li id="kendrickmass_mzmine">mzmine, 2024 <b>4D features plot (Kendrick mass plot)</b>. Accessed on September 30, 2024. <a href="https://mzmine.github.io/mzmine_documentation/visualization_modules/kendrickmass/kendrick_mass_plot.html">https://mzmine.github.io/mzmine_documentation/visualization_modules/kendrickmass/kendrick_mass_plot.html</a></li>
+<li id="kendrickmass_wiki">wikipedia, 2024 <b>Kendrick mass</b>. Accessed on September 30, 2024. <a href="https://en.wikipedia.org/wiki/Kendrick_mass">https://en.wikipedia.org/wiki/Kendrick_mass</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=metabolomics/mfassignr"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=metabolomics/mfassignr">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Kristina Gomoryova, Helge Hecht, Simeon Schum,  <b>Molecular formula assignment and mass recalibration with MFAssignR package (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/mfassignr/tutorial.html">https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/mfassignr/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{metabolomics-mfassignr,
+author = "Kristina Gomoryova and Helge Hecht and Simeon Schum",
+	title = "Molecular formula assignment and mass recalibration with MFAssignR package (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/mfassignr/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/mfassignr/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: mfassignr_findrecalseries
+  owner: recetox
+  revisions: 1b4881c150cc
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: mfassignr_histnoise
+  owner: recetox
+  revisions: 5dd25cf1ac0a
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: mfassignr_isofiltr
+  owner: recetox
+  revisions: ef0388b42f7a
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: mfassignr_kmdnoise
+  owner: recetox
+  revisions: 634ae07958a2
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: mfassignr_mfassign
+  owner: recetox
+  revisions: 4422c60a4b71
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: mfassignr_mfassigncho
+  owner: recetox
+  revisions: 5ea9dd423109
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: mfassignr_recal
+  owner: recetox
+  revisions: 861917f1a211
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: mfassignr_recal
+  owner: recetox
+  revisions: cfcf45ba58be
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: mfassignr_recallist
+  owner: recetox
+  revisions: 4f671baab2fd
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: mfassignr_recallist
+  owner: recetox
+  revisions: 6c7b17d38a1d
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: mfassignr_snplot
+  owner: recetox
+  revisions: ccd9b0c1aee6
+  tool_panel_section_label: Metabolomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/metabolomics/tutorials/mfassignr/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/metabolomics/tutorials/mfassignr/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/463c6440e19dd31a663fe7219132e9d722935d58">463c644</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+	
+
+    </body>
+</html>
