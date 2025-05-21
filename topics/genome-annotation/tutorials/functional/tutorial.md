@@ -5,6 +5,7 @@ title: Functional annotation of protein sequences
 zenodo_link: https://zenodo.org/record/6861851
 tags:
   - eukaryote
+  - biodiversity
 questions:
   - How to perform functional annotation on protein sequences?
 objectives:

@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Generating Artificial Yeast DNA Sequences using a DNA LLM
 level: Intermediate
-draft: true
 requirements:
 -
   type: "internal"

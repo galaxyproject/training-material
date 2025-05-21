@@ -24,7 +24,7 @@ contributions:
 program:
   - section: "Introduction"
     description: |
-      In this section, we will introduce what is a genome assembly, how it works, and the metrics to evaluate the quality of an assembly.
+      In this section, we will introduce what a genome assembly is, how it works, and the metrics to evaluate the quality of an assembly. **Warning: The QC training uses large data. For a lighter, faster version, follow the video and only use the sponge data**
     tutorials:
       - type: custom
         name: "[Introduction To Genome Assembly](https://youtu.be/9WZe7VGtr-k)"

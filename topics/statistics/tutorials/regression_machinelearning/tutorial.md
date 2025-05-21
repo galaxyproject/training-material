@@ -315,7 +315,7 @@ R2 score is 0.93, the same as the linear model, but the RMSE is smaller (3.85), 
 
 ## Create data processing pipeline
 
-In the final step, we will create a pipeline learner with the **Pipeline builder** tool but this time, we just specify the regressor. The **Pipeline builder** tool will wrap this regressor and return a zip file. By choosing `Yes` from the boolean option, tunable hyperparameters will be output in a separate file.
+In the final step, we will create a pipeline learner with the **Pipeline builder** tool but this time, we just specify the regressor. The **Pipeline builder** tool will wrap this regressor and return a `h5mlm` file. This file also contains a list of tunable hyperparameters.
 
 > <hands-on-title>Create pipeline</hands-on-title>
 >

@@ -7,6 +7,7 @@ tags:
   - gmod
   - eukaryote
   - jbrowse1
+  - biodiversity
 questions:
   - How to annotate an eukaryotic genome with Funannotate?
   - How to perform functional annotation?

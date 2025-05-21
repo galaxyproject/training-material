@@ -747,12 +747,12 @@ For example, if we want to find athletes with three-part names by counting space
 >    > 1. How would you filter rows where the 2nd column contains **three spaces** (i.e., four-part names)?
 >    > 2. How many medals were won by athletes with five-part names **or more**?
 >    > 3. How many parts does the longest name have? Give an example of such a name.
->    > 4. Bonus: **How many** athletes have 6-part names?
+>    > 4. Bonus: **How many** athletes have 6-part names won a medal?
 >    >
 >    > > <solution-title>Hints</solution-title>
 >    > >
 >    > > 1. None ;)
->    > > 2. You can also use greater than or less than symbols in your expression
+>    > > 2. You can also use greater than or less than symbols in your expression. You can filter on two lines using  logical operators like `and`.
 >    > > 3. Keep increasing the count until no results are returned
 >    > > 4. The number of lines returned indicates the number of medals won by long-named athletes, to
 >    > >    find out how many different athletes have such a name, we can use the {% tool [Count - occurrences of each record](Count1) %}
@@ -762,12 +762,12 @@ For example, if we want to find athletes with three-part names by counting space
 >    > > <solution-title>Answers</solution-title>
 >    > >
 >    > > 1. `c2.count(' ') == 3`
->    > > 2. `c2.count(' ') >= 4` returns 252 lines, meaning 251 medals won accounting for the header line excluding the header line.
+>    > > 2. `c17 != 'NA' and c2.count(' ') >= 4` returns 27 lines, meaning 26 medals won accounting for the header line excluding the header line. Appart from the name you need to additionally filter out athletes that did not won a medal.
 >    > > 3. `c2.count(' ') == 5` is the maximum value to still return results.
 >    > >    Five spaces means a 6-part name. For example Patricia Galvin de la Tour d'Auvergne
->    > > 4. `c2.count(' ') == 5` returns 48 records. So 48 medals were won by these long-named athletes.
+>    > > 4. `c17 != 'NA' and c2.count(' ') == 5` returns 5 records. So 5 medals were won by these long-named athletes.
 >    > >     Using the {% tool [Count - occurrences of each record](Count1) %} to count occurrences in column 2, we
->    > >     discover that there are **20 different athletes with 6-part names**.
+>    > >     discover that there are **3 different athletes with 6-part names**.
 >    > >
 >    > {: .solution}
 >    {: .question}

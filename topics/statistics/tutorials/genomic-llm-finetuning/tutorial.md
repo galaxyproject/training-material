@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Fine-tuning a LLM for DNA Sequence Classification
 level: Intermediate
-draft: true
 requirements:
 -
   type: "internal"

@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Foundational Aspects of Machine Learning using Python
 level: Intermediate
-draft: true
 requirements:
 -
   type: "internal"
@@ -37,7 +36,7 @@ contributions:
 tags:
 - elixir
 - ai-ml
-priority: 2
+subtopic: machine-learning
 notebook:
   language: python
   pyolite: true

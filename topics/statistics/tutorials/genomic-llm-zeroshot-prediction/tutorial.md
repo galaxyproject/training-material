@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM
 level: Intermediate
-draft: true
 requirements:
 -
   type: "internal"

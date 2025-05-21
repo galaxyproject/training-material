@@ -8,6 +8,7 @@ tags:
   - polishing
   - nanopore
   - plants
+  - biodiversity
 questions:
   - "How can we assemble a large plant or animal genome?"
 objectives:

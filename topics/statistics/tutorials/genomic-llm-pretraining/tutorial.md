@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences
 level: Intermediate
-draft: true
 requirements:
 -
   type: "internal"

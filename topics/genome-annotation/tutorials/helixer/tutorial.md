@@ -7,6 +7,7 @@ tags:
   - eukaryota
   - helixer
   - jbrowse1
+  - biodiversity
 
 edam_ontology:
 - topic_0362 # Genome annotation

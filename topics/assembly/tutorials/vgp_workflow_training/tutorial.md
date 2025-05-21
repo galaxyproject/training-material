@@ -8,6 +8,7 @@ tags:
 - pacbio
 - eukaryote
 - VGP
+- biodiversity
 questions:
 - What combination of tools can produce the highest quality assembly of vertebrate
   genomes?

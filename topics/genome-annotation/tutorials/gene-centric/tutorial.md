@@ -21,6 +21,7 @@ tags:
 - eukaryote
 - prokaryote
 - microgalaxy
+- biodiversity
 requirements:
   -
     type: "internal"
@@ -315,7 +316,7 @@ Another workflow output will represent a single file summarizing genomic locatio
 
 ### Starting notebook
 
-{% include _includes/cyoa-choices.html option1="UseGalaxy.org" option2="Galaxy Europe, Australia, and Others" default="UseGalaxyorg"
+{% include _includes/cyoa-choices.html option1="UseGalaxy.org" option2="Galaxy Europe, Australia, and Others" default="UseGalaxy.org"
        text="If you are on a server with Interactive Tool support (e.g. Galaxy Europe, Australia, and many others), you can choose that option for a more integrated Jupyter Notebook experience." %}
 
 

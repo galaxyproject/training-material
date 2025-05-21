@@ -26,6 +26,7 @@ tags:
 - genome
 - assembly
 - QC
+- biodiversity
 recordings:
 - youtube_id: n4PNTTa2d6U
   length: 44M

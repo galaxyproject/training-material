@@ -98,7 +98,7 @@ In this step, we will use the [SVM (support vector machine)](https://scikit-lear
 
 > <hands-on-title>Train a classifier</hands-on-title>
 >
-> {% tool [Support vector machines (SVMs) for classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1) %} with the following parameters to train:
+> {% tool [Support vector machines (SVMs) for classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.11.0) %} with the following parameters to train:
 >    - *"Select a Classification Task"*: `Train a model`
 >        - *"Classifier type"*: `Linear Support Vector Classification`
 >        - *"Select input type"*: `tabular data`
@@ -119,9 +119,9 @@ The previous step produced a trained model (a zip archive) which we will now use
 
 > <hands-on-title>Predict using a trained model</hands-on-title>
 >
-> {% tool [Support vector machines (SVMs) for classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1) %} with the following parameters:
+> {% tool [Support vector machines (SVMs) for classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.11.0) %} with the following parameters:
 >    - *"Select a Classification Task"*: `Load a model and predict`
->        - {% icon param-file %} *"Models"*: the zip dataset produced by **Support vector machines (SVMs) for classification** {% icon tool %}
+>        - {% icon param-file %} *"Models"*: the `h5mlm` dataset produced by **Support vector machines (SVMs) for classification** {% icon tool %}
 >        - {% icon param-file %} *"Data (tabular)"*: `breast-w_test` file
 >        - *"Does the dataset contain header"*: `Yes`
 >        - *"Select the type of prediction"*: `Predict class labels`

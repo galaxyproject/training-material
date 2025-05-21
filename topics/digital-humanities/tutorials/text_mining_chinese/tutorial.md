@@ -21,7 +21,9 @@ tags:
 - text mining
 contributions:
   authorship:
-  - Sch-Da
+    - Sch-Da
+  funding:
+    - deKCD
 ---
 
 
@@ -111,7 +113,7 @@ We will use Regular Expressions in a tool called "Replace text". It contains fou
 > <hands-on-title> Cleaning the Text with Regular Expressions </hands-on-title>
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `Example_Chinese_newspaper_censored.txt` (uncensored text you uploaded)
+>    - {% icon param-file %} *"File to process"*: `Example_Chinese_newspaper_censored.txt` (censored text you uploaded)
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >            - *"Find pattern"*: `\r`
@@ -123,8 +125,9 @@ We will use Regular Expressions in a tool called "Replace text". It contains fou
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >            - *"Find pattern"*: `(.)`
 >            - *"Replace with:"*: `\1\n`
->    - Click *"Run Tool"*
->    Now repeat those steps with the censored text.
+>    - Click *"Run Tool"*.
+>    
+>    Now repeat those steps with the uncensored text.
 >
 >    > <comment-title>Explaining the above Regular Expressions</comment-title>
 >    > Regular expressions can not only find particular words, as you might be familiar with from regular text editors.
@@ -399,6 +402,7 @@ The last step is to visualise the results within a word cloud. It shows which ch
 >    - *"Color option"*: `Color`
 >    - *"Ratio of times to try horizontal fitting as opposed to vertical"*: `1.0`
 >    - *"Scaling of words by frequency (0 - 1)"*: `0.9`
+>    - Click *"Run Tool"*
 >
 >    > <details-title> Optimise your word cloud (optional) </details-title>
 >    >

@@ -5,6 +5,7 @@ title: Masking repeats with RepeatMasker
 zenodo_link: https://zenodo.org/record/7085837
 tags:
   - eukaryote
+  - biodiversity
 questions:
   - How to mask repeats in a genome?
   - What is the difference between hard and soft-masking?

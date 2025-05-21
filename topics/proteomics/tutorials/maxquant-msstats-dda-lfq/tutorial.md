@@ -411,11 +411,11 @@ For each condition we select only the significant proteins, which are proteins w
 >    - {% icon param-file %} *"Filter"*: `rdeb filtered` (output of **Filter** {% icon tool %})
 >    - *"With following condition"*: `c8>0`
 >    - *"Number of header lines to skip"*: `1`
->    - Rename the file into `rdeb rdeb`
+>    - Rename the file into `significant rdeb`
 > 4. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1`
 >    - {% icon param-file %} *"From"*: `significant rdeb` (output of last **Filter** {% icon tool %})
->    - Rename the file into `metastasized cut`
+>    - Rename the file into `rdeb cut`
 > 5. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `Sample Quantification Matrix` (output of **MSstats** {% icon tool %})
 >    - In *"Replacement"*:

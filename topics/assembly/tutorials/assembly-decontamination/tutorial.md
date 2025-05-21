@@ -15,6 +15,8 @@ key_points:
 contributions:
   authorship:
   - delphine-l
+tags:
+  - biodiversity
 recordings:
 - youtube_id: -5oxfNnNwoA
   length: 29M

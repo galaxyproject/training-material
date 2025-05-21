@@ -35,6 +35,7 @@ requirements:
       - collections
 tags:
   - covid19
+  - biodiversity
 contributors:
   - wm75
 

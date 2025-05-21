@@ -7,6 +7,7 @@ tags:
   - eukaryota
   - Braker3
   - jbrowse1
+  - biodiversity
 
 edam_ontology:
 - topic_0196 # Sequence Assembly
