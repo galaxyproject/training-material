@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@266309982ee18b7da744f727a7f7cbb484dcd509",
+		release: "galaxy-training-network@2bc6518c56d1330a418b95d3c7c01e4bb61c04b5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Label-free data analysis using MaxQuant">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-05-20 13:44:36 +0000">
+<meta name="DC.date" content="2025-05-21 13:10:27 +0000">
 <meta name="DC.creator" content="Melanie Föll">
 <meta name="DC.creator" content="Matthias Fahrner"><meta name="description" content="Training material for proteomics workflows in Galaxy">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -187,7 +187,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-05-20 13:44:36 +0000",
+  "dateModified": "2025-05-21 13:10:27 +0000",
   "datePublished": "2020-04-29 19:12:37 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -241,11 +241,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Training material for proteomics workflows in Galaxy",
     "url": "https://training.galaxyproject.org/training-material/topics/proteomics/"
   },
-  "abstract": "The proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry that enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are *in silico* reassembled into the corresponding proteins. Inside the mass spectrometer, not only the peptides are measured (MS1 level), but the peptides are also fragmented into smaller peptides which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT (Tandem Mass Tag) allow to quantify peptides on MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins.",
+  "abstract": "The proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry which enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are *in silico* reassembled into the corresponding proteins. Inside the mass spectrometer, not only are the peptides measured (MS1 level), but the peptides are also fragmented into smaller peptides, which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT (Tandem Mass Tag) allow for the quantification of peptides on the MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins.",
   "learningResourceType": "e-learning",
   "name": "Label-free data analysis using MaxQuant",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-label-free/tutorial.html",
-  "version": 13,
+  "version": 14,
   "timeRequired": "PT1H",
   "teaches": "- Analysis of human serum proteome samples with label-free quantification in MaxQuant",
   "keywords": [
@@ -253,7 +253,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "DDA",
     "label-free"
   ],
-  "description": "## Abstract\n\nThe proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry that enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are *in silico* reassembled into the corresponding proteins. Inside the mass spectrometer, not only the peptides are measured (MS1 level), but the peptides are also fragmented into smaller peptides which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT (Tandem Mass Tag) allow to quantify peptides on MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to perform label-free analysis in Maxquant?\n - Which are the most abundant proteins in serum?\n - How successful was the depletion of those in our experiment?\n\n\n## Learning Objectives\n\n- Analysis of human serum proteome samples with label-free quantification in MaxQuant\n\n",
+  "description": "## Abstract\n\nThe proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry which enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are *in silico* reassembled into the corresponding proteins. Inside the mass spectrometer, not only are the peptides measured (MS1 level), but the peptides are also fragmented into smaller peptides, which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT (Tandem Mass Tag) allow for the quantification of peptides on the MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to perform label-free analysis in MaxQuant?\n - Which are the most abundant proteins in serum?\n - How successful was the depletion of those in our experiment?\n\n\n## Learning Objectives\n\n- Analysis of human serum proteome samples with label-free quantification in MaxQuant\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -1092,7 +1092,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
         
-        <li><p>How to perform label-free analysis in Maxquant?</p>
+        <li><p>How to perform label-free analysis in MaxQuant?</p>
 </li>
         
         <li><p>Which are the most abundant proteins in serum?</p>
@@ -1277,7 +1277,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 29, 2020 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 20, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 21, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1297,7 +1297,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (1 recent ratings, 5 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 13 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 14 </div>
 
     </blockquote>
     </section>
@@ -1312,17 +1312,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <p>The proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry that enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are <em>in silico</em> reassembled into the corresponding proteins. Inside the mass spectrometer, not only the peptides are measured (MS1 level), but the peptides are also fragmented into smaller peptides which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT (Tandem Mass Tag) allow to quantify peptides on MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins.</p>
+                <p>The proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry which enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are <em>in silico</em> reassembled into the corresponding proteins. Inside the mass spectrometer, not only are the peptides measured (MS1 level), but the peptides are also fragmented into smaller peptides, which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT (Tandem Mass Tag) allow for the quantification of peptides on the MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins.</p>
 
 <figure id="figure-1" style="max-width: 90%;"><img src="../../images/maxquant_lfq_lcmsms.png" alt="MQ_lcmsms. " width="624" height="242" loading="lazy" /><a target="_blank" href="../../images/maxquant_lfq_lcmsms.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Proteomics using liquid chromatography tandem-mass spectrometry (LC-MS/MS). Adapted from <a href="https://en.wikipedia.org/wiki/Tandem_mass_spectrometry#/media/File:MS_MS.png">wikipedia</a>.</figcaption></figure>
 
-<p>A plethora of software solutions were developed for the analysis of proteomics data. MaxQuant is one of the most popular proteomics softwares because it is an easy to use and free software that offers functionalities for nearly all kinds of proteomics data analysis challenges <span class="citation"><a href="#Cox2008">Cox and Mann 2008</a></span>. Mass spectrometry raw data is normally obtained in a vendor specific, proprietary file format. MaxQuant can directly take those raw files as input. For peptide identification MaxQuant uses a search engine called “Andromeda”. MaxQuant offers highly accurate functionalities for many different proteomics quantification strategies, e.g. label-free, SILAC, TMT.</p>
+<p>A plethora of software solutions were developed for the analysis of proteomics data. MaxQuant is one of the most popular proteomics software because it is an easy-to-use and free software that offers functionalities for nearly all kinds of proteomics data analysis challenges <span class="citation"><a href="#Cox2008">Cox and Mann 2008</a></span>. Mass spectrometry raw data is normally obtained in a vendor-specific, proprietary file format. MaxQuant can directly take those raw files as input. For peptide identification,n MaxQuant uses a search engine called “Andromeda”. MaxQuant offers highly accurate functionalities for many different proteomics quantification strategies, e.g., label-free, SILAC,and  TMT.</p>
 
-<p>Blood is a commonly used biofluid for diagnostic procedures. The cell-free liquid blood portion is called plasma and after coagulation serum. Plasma and serum proteomics are frequently performed to find new biomarkers e.g. for diagnostic purposes and personalized medicine (<span class="citation"><a href="#Geyer2017">Geyer <i>et al.</i> 2017</a></span>). Serum and Plasma proteomics are particularily challenging due to protein concentration differences in the orders of ten magnitudes. Therefore, most sample preparation protocols include a depletion step in which the most abundant proteins are (partially) depleted from the sample e.g. via columns with immobilized antibodies.</p>
+<p>Blood is a commonly used biofluid for diagnostic procedures. The cell-free liquid blood portion is called plasma, and after coagulation serum. Plasma and serum proteomics are frequently performed to find new biomarkers, e.g., for diagnostic purposes and personalized medicine (<span class="citation"><a href="#Geyer2017">Geyer <i>et al.</i> 2017</a></span>). Serum and Plasma proteomics are particularly challenging due to protein concentration differences in the order of ten magnitudes. Therefore, most sample preparation protocols include a depletion step in which the most abundant proteins are (partially) depleted from the sample,e e.g., via columns with immobilized antibodies.</p>
 
-<p>This stand-alone tutorial introduces the data analysis from raw data files to protein identification and quantification of two label-free human serum samples with the MaxQuant software. One sample is a pure serum sample, while the other sample has been depleted for several abundant blood proteins. One of the questions in this tutorial is to find out which sample was depleted and which not.</p>
+<p>This stand-alone tutorial introduces the data analysis from raw data files to protein identification and quantification of two label-free human serum samples with the MaxQuant software. One sample is a pure serum sample, while the other sample has been depleted of several abundant blood proteins. One of the questions in this tutorial is to find out which sample was depleted and which was not.</p>
 
-<p>For more advanced proteomics workflows, please consult the OpenMS <a href="/training-material/topics/proteomics/tutorials/protein-id-oms/tutorial.html">identification</a>, <a href="/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">quantification</a> as well as <a href="/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">SearchGUI/PeptideShaker</a> tutorials.</p>
+<p>For more advanced proteomics workflows, please consult the OpenMS <a href="/training-material/topics/proteomics/tutorials/protein-id-oms/tutorial.html">identification</a>, <a href="/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">quantification</a>, as well as <a href="/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">SearchGUI/PeptideShaker</a> tutorials.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -1344,7 +1344,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h1 id="get-data">Get data</h1>
 
-<p>The serum proteomic samples and the fasta file for this training were deposited at <a href="https://zenodo.org/record/3774452">Zenodo</a>. It is of course possible to use other fasta files that contain human proteome sequences, but to ensure that the results are compatible we recommend to use the provided fasta file. MaxQuant not only adds known contaminants to the fasta file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the fasta file is not allowed to have decoy entries. To learn more about fasta files, have a look at <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Protein FASTA Database Handling</a>.</p>
+<p>The serum proteomic samples and the fasta file for this training were deposited at <a href="https://zenodo.org/record/3774452">Zenodo</a>. It is of course, possible to use other fasta files that contain human proteome sequences, but to ensure that the results are compatible, we recommend using the provided fasta file. MaxQuant not only adds known contaminants to the fasta file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore, the fasta file is not allowed to have decoy entries. To learn more about fasta files, have a look at <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Protein FASTA Database Handling</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Data upload</div>
@@ -1427,7 +1427,7 @@ https://zenodo.org/record/4274987/files/Sample2.raw
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-protein-groups"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Protein Groups</div>
-        <p>Proteins that share all their peptides with other proteins cannot be unambiguously identified. Therefore, MaxQuant groups such proteins into one protein group and only one common quantification will be calculated. The different protein properties are separated by semicolon.</p>
+        <p>Proteins that share all their peptides with other proteins cannot be unambiguously identified. Therefore, MaxQuant groups such proteins into one protein group and only one common quantification will be calculated. The different protein properties are separated by a semicolon.</p>
       </blockquote>
     </li>
   </ol>
@@ -1435,20 +1435,18 @@ https://zenodo.org/record/4274987/files/Sample2.raw
 
 <h2 id="more-details-on-maxquant-parameters">More details on MaxQuant Parameters</h2>
 
-<p>The <em>“parse rules”</em> in the input section are applied to the fasta sequence headers. Regular expressions can be adjusted to keep different information from the fasta file header. Examples are given in the MaxQuant help section at the bottom of the tool. The fasta file for this training comes from Uniprot, therefore the parse rules are adjusted accordingly.
+<p>The <em>“parse rules”</em> in the input section are applied to the fasta sequence headers. Regular expressions can be adjusted to keep different information from the fasta file header. Examples are given in the MaxQuant help section at the bottom of the tool. The fasta file for this training comes from Uniprot, therefore, the parse rules are adjusted accordingly.
 Consider the FASTA header like this :</p>
 
-<blockquote>
-  <table>
-    <tbody>
-      <tr>
-        <td>sp</td>
-        <td>P02768</td>
-        <td>ALBU_HUMAN Serum albumin OS=Homo sapiens GN=ALB PE=1 SV=1</td>
-      </tr>
-    </tbody>
-  </table>
-</blockquote>
+<table>
+  <tbody>
+    <tr>
+      <td>```&gt;sp</td>
+      <td>P02768</td>
+      <td>ALBU_HUMAN Serum albumin OS=Homo sapiens GN=ALB PE=1 SV=1</td>
+    </tr>
+  </tbody>
+</table>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1) Identifier parse rule  &gt;.*\|(.*)\| 
   &gt; FASTA headers always start with this symbol. Matches with the initial &gt;
@@ -1460,42 +1458,42 @@ Consider the FASTA header like this :</p>
 2) Description parse rule &gt;(.*) OS
    &gt; matches with the initial &gt;
    (.*) matches everything it can. It matches  sp|P02768|ALBU_HUMAN Serum albumin
-   OS matches OS
+   OS matches OS ```
 </code></pre></div></div>
 
 <p>The <em>“minimum peptide length”</em> defines the minimum number of amino acids a peptide should have to be included for protein identification and quantification. Below 7 amino acids a peptide cannot be unique and is therefore not informative, thus typical values are in the range 7-9.</p>
 
-<p>Several, even longer peptides are not unique, meaning that they are shared by several proteins e.g. when they are part of a common protein domain. During protein inference the peptides are statistically assembled into the corresponding proteins and the decision should be mainly based on the unique peptides. Therefore, we set <em>“min unique peptides”</em> to <code class="language-plaintext highlighter-rouge">1</code> - only proteins that have at least one unique peptide are reported in the output table.</p>
+<p>Several, even longer peptides are not unique, meaning that they are shared by several proteins e.g. when they are part of a common protein domain. During protein inference, the peptides are statistically assembled into the corresponding proteins and the decision should be mainly based on the unique peptides. Therefore, we set <em>“min unique peptides”</em> to <code class="language-plaintext highlighter-rouge">1</code> - only proteins that have at least one unique peptide are reported in the output table.</p>
 
-<p>In most bottom-up proteomics experiments Trypsin is used as a protease because it has many advantages such as it’s accurate cleavage specificity. Trypsin cleaves peptides c-terminal of Arginine (R) and Lysine (K), except when those are followed by Proline (P). Therefore, in MaxQuant the default <em>“enzyme”</em> is set to <code class="language-plaintext highlighter-rouge">Trypsin/P</code>. This trypsin specific cleavage rule is used by MaxQuant to perform an <em>in silico</em> digestion of the protein database that was provided in the fasta file.</p>
+<p>In most bottom-up proteomics experiments, Trypsin is used as a protease because it has many advantages, such as its accurate cleavage specificity. Trypsin cleaves peptides C-terminal of Arginine (R) and Lysine (K), except when those are followed by Proline (P). Therefore, in MaxQuant, the default <em>“enzyme”</em> is set to <code class="language-plaintext highlighter-rouge">Trypsin/P</code>. This trypsin-specific cleavage rule is used by MaxQuant to perform an <em>in silico</em> digestion of the protein database that was provided in the fasta file.</p>
 
-<p>Protease digestion is not always complete, therefore we set the <em>“number of missed cleavages”</em> to <code class="language-plaintext highlighter-rouge">1</code>, meaning that the <em>in silico</em> digestion also includes peptides that have an additional Arginine or Lysine in their sequence.</p>
+<p>Protease digestion is not always complete, therefore, we set the <em>“number of missed cleavages”</em> to <code class="language-plaintext highlighter-rouge">1</code>, meaning that the <em>in silico</em> digestion also includes peptides that have an additional Arginine or Lysine in their sequence.</p>
 
 <figure id="figure-2" style="max-width: 90%;"><img src="../../images/maxquant_param_missedcl.png" alt="MQ_param_missed. " width="1571" height="603" loading="lazy" /><a target="_blank" href="../../images/maxquant_param_missedcl.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Trypsin specificity and missed cleavages. With one missed cleavage all three peptides will be part of the *in silico* peptide database</figcaption></figure>
 
-<p>From the <em>in silico</em> generated peptide database the masses of the peptides are calculated and matched to the measured masses in order to identify them. A peptide’s mass will change due to peptide modifications such as chemical labelling for example applied in different quantitation strategies or biological post translational modifications. Therefore, it is important to also include possible peptide modifications in the <em>in silico</em> generated peptide mass list. <em>“Fixed modifications”</em> are modifications that occur on every occurence of the specific amino acid. Those are often artificially introduced modifications such as Carbamidomethylation of cysteins (C) to prevent re-formation of the disulfid bridges. This is a common procedure in proteomics sample preparation and therefore also the default option in MaxQuant: <code class="language-plaintext highlighter-rouge">Carbamidomethyl (C)</code>. <em>“Variable modifications”</em> are modifications that do not occur on every amino acid such as Oxidation of Methionine might only occur on some Methionines and not all, but only a few peptide N-termini are acetylated. Variable modifications increase the <em>in silico</em> peptide database because each peptide’s mass is calculated once with and once without the additional modification. To keep computation times as short as possible we did not use any variable modification this training, despite the MaxQuant defaults Oxidation of Methionine and Acetylation of N-termini would have been completely valid to use.</p>
+<p>From the <em>in silico</em> generated peptide database the masses of the peptides are calculated and matched to the measured masses in order to identify them. A peptide’s mass will change due to peptide modifications such as chemical labelling, for example, applied in different quantitation strategies or biological post-translational modifications. Therefore, it is also important to include possible peptide modifications in the <em>in silico</em> generated peptide mass list. <em>“Fixed modifications”</em> are modifications that occur on every occurrence of the specific amino acid. Those are often artificially introduced modifications such as Carbamidomethylation of cysteins (C) to prevent re-formation of the disulfide bridges. This is a common procedure in proteomics sample preparation and, therefore also the default option in MaxQuant: <code class="language-plaintext highlighter-rouge">Carbamidomethyl (C)</code>. <em>“Variable modifications”</em> are modifications that do not occur on every amino acid, such as the  Oxidation of Methionine might only occur on some Methionines and not all, but only a few peptide N-termini are acetylated. Variable modifications increase the <em>in silico</em> peptide database because each peptide’s mass is calculated once with and once without the additional modification. To keep computation times as short as possible, we did not use any variable modification in this training, despite the MaxQuant default, the Oxidation of Methionine and Acetylation of N-termini would have been completely valid to use.</p>
 
-<p>MaxQuant supports different <em>“Quantitation Methods”</em>. The three main categories are <code class="language-plaintext highlighter-rouge">label-free quantification</code>, <code class="language-plaintext highlighter-rouge">label-based quantification</code> and <code class="language-plaintext highlighter-rouge">reporter ion MS2</code> quantification. In this tutorial we have chosen <code class="language-plaintext highlighter-rouge">label-free</code> because we did not apply any specific labeling/quantitation strategy to the samples.</p>
+<p>MaxQuant supports different <em>“Quantitation Methods”</em>. The three main categories are <code class="language-plaintext highlighter-rouge">label-free quantification</code>, <code class="language-plaintext highlighter-rouge">label-based quantification</code> and <code class="language-plaintext highlighter-rouge">reporter ion MS2</code> quantification. In this tutorial, we have chosen <code class="language-plaintext highlighter-rouge">label-free</code> because we did not apply any specific labeling/quantitation strategy to the samples.</p>
 
 <figure id="figure-3" style="max-width: 90%;"><img src="../../images/maxquant_lfq_quant_methods.png" alt="MQ_quant_methods. " width="1848" height="617" loading="lazy" /><a target="_blank" href="../../images/maxquant_lfq_quant_methods.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Overview of MaxQuant quantification methods</figcaption></figure>
 
-<p>The PTXQC software (<span class="citation"><a href="#Bielow2015">Bielow <i>et al.</i> 2015</a></span>) was built to enable direct proteomcs quality control from MaxQuant result files. This quality control can be directly used in the Galaxy MaxQuant wrapper by setting <em>“Generate PTXQC”</em> to <code class="language-plaintext highlighter-rouge">yes</code>. This will generate a pdf file with multiple quality control plots. Be aware that the cutoffs set in PTXQC might not be applicable to your experiment and mass spectrometer type and therefore “under performing” and “fail” do not necessarily mean that the quality is poor.</p>
+<p>The PTXQC software was built to enable direct proteomics quality control from MaxQuant result files. This quality control can be directly used in the Galaxy MaxQuant wrapper by setting <em>“Generate PTXQC”</em> to <code class="language-plaintext highlighter-rouge">yes</code>. This will generate a pdf file with multiple quality control plots. Be aware that the cutoffs set in PTXQC might not apply to your experiment and mass spectrometer type, and therefore, “underperforming” and “fail” do not necessarily mean that the quality is poor.</p>
 
 <figure id="figure-4" style="max-width: 90%;"><img src="../../images/maxquant_ptxqc_overview.png" alt="PTXQC_overview. " width="822" height="813" loading="lazy" /><a target="_blank" href="../../images/maxquant_ptxqc_overview.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Overview of PTXQC quality measures for sample1 and sample2</figcaption></figure>
 
-<p>MaxQuant automatically generates several output files. In the <em>“Output Options”</em> all or some of the output files can be selected. The protein information can be obtained by selecting <code class="language-plaintext highlighter-rouge">Protein Groups</code>, while the peptide information is obtained by choosing <code class="language-plaintext highlighter-rouge">Peptides</code>. The applied MaxQuant parameters are stored in the <code class="language-plaintext highlighter-rouge">mqpar.xml</code> This file can be re-used as an input file in the <strong>MaxQuant (using mqpar.xml)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+<p>MaxQuant automatically generates several output files. In the <em>“Output Options”</em> all or some of the output files can be selected. The protein information can be obtained by selecting <code class="language-plaintext highlighter-rouge">Protein Groups</code>, while the peptide information is obtained by choosing <code class="language-plaintext highlighter-rouge">Peptides</code>. The applied MaxQuant parameters are stored in the <code class="language-plaintext highlighter-rouge">mqpar.xml</code>. This file can be reused as an input file in the <strong>MaxQuant (using mqpar.xml)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-more-maxquant-parameters"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-maxquant-parameters" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: More MaxQuant parameters</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>
-      <p>For pre-fractionated data an <em>“experimental design template”</em> has to be used. This has to be a tab-separated text file with a column for the fractions (e.g. 1-10) and a column for the experiment (sample1, sample2, sample3) and a column for post translational modifications (PTM). Examples are given in the help section of the MaxQuant tool.</p>
+      <p>For pre-fractionated data an <em>“experimental design template”</em> has to be used. This has to be a tab-separated text file with a column for the fractions (e.g., 1-10) and a column for the experiment (sample1, sample2, sample3) and a column for post-translational modifications (PTM). Examples are given in the help section of the MaxQuant tool.</p>
     </li>
     <li>
-      <p><em>“Match between run”</em> allows to transfer identifications (peptide sequences) from one run to another. If the MS1 (full length peptide) signal is present in both runs, but was only selected for fragmentation in one of them, MaxQuant can transfer the resulting peptide sequence to the run where the MS1 peptide was not fragmented. The Information if a peptides was identified via fragmentation (MS/MS) or match between run (matching) can be found in the evidence output.</p>
+      <p><em>“Match between runs”</em> allows to transfer of identifications (peptide sequences) from one run to another. If the MS1 (full-length peptide) signal is present in both runs, but was only selected for fragmentation in one of them, MaxQuant can transfer the resulting peptide sequence to the run where the MS1 peptide was not fragmented. The Information if a peptide was identified via fragmentation (MS/MS) or match between runs (matching) can be found in the evidence output.</p>
     </li>
     <li>
-      <p>MaxQuant allows to process different raw files with different parameters. In this tutorial we have loaded both files into the same <em>“parameter group”</em> in order to process them with the same parameters. To apply different parameters, new parameter groups can be added by clicking on the <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“insert parameter group”</em> button. In each <em>“parameter group”</em> one or several raw files can be specified and for them only the parameter specified within this parameter group section are applied.</p>
+      <p>MaxQuant allows processing different raw files with different parameters. In this tutorial, we have loaded both files into the same <em>“parameter group”</em> in order to process them with the same parameters. To apply different parameters, new parameter groups can be added by clicking on the <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“insert parameter group”</em> button. In each <em>“parameter group”</em> one or several raw files can be specified, and for them only the parameters specified within this parameter group section are applied.</p>
     </li>
   </ul>
 </blockquote>
@@ -1523,16 +1521,16 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
   <ol>
     <li>How many proteins were found in total?</li>
     <li>How many peptides were found in total?</li>
-    <li>How many proteins identified and quantified? (Tipp: There is a tool called “filter data on any column”, select the LFQ column for both files and remove rows containing “0”)</li>
+    <li>How many proteins identified and quantified? (Tip: There is a tool called “filter data on any column”, select the LFQ (Label free quantification) column for both files and remove rows containing “0”)</li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>271 protein (groups) were found in total.</li>
-      <li>2387 peptides were found in total.</li>
-      <li>Sample1: 237, Sample2: 123 (<strong>filter data on any column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the <code class="language-plaintext highlighter-rouge">protein groups</code> file <em>“with following condition”</em> <code class="language-plaintext highlighter-rouge">c32!=0</code> or <code class="language-plaintext highlighter-rouge">c33!=0</code> and *“Number of header lines” <code class="language-plaintext highlighter-rouge">1</code>)</li>
+      <li>271 proteins (groups) were found in total.</li>
+      <li>2410 peptides were found in total.</li>
+      <li>Sample1: 237, Sample2: 123 (<strong>filter data on any column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the <code class="language-plaintext highlighter-rouge">protein groups</code> file <em>“with following condition”</em> <code class="language-plaintext highlighter-rouge">c32!=0</code> or <code class="language-plaintext highlighter-rouge">c33!=0</code> and *“Number of header lines to skip” <code class="language-plaintext highlighter-rouge">1</code>)</li>
     </ol>
 
   </blockquote>
@@ -1558,9 +1556,9 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
 
     <ol>
       <li>Sample 2 has more contaminants, especially serum albumin is high abundant. <a href="../../images/maxquant_lfq_contaminants.png" rel="noopener noreferrer"><img src="../../images/maxquant_lfq_contaminants.png" alt="PTXQC_contaminants. " width="646" height="660" loading="lazy" /></a></li>
-      <li>The digestion was not ideal but good enough to work with. The proportion of zero missed cleavages was 75% for sample1 and around 85% for sample2. <a href="../../images/maxquant_lfq_missedcleavages.png" rel="noopener noreferrer"><img src="../../images/maxquant_lfq_missedcleavages.png" alt="PTXQC_missed. " width="620" height="625" loading="lazy" /></a></li>
+      <li>The digestion was not ideal, but good enough to work with. The proportion of zero missed cleavages was 75% for sample1 and around 85% for sample2. <a href="../../images/maxquant_lfq_missedcleavages.png" rel="noopener noreferrer"><img src="../../images/maxquant_lfq_missedcleavages.png" alt="PTXQC_missed. " width="620" height="625" loading="lazy" /></a></li>
       <li>Sample 1 yielded more protein identifications <a href="../../images/maxquant_lfq_proteinid.png" rel="noopener noreferrer"><img src="../../images/maxquant_lfq_proteinid.png" alt="PTXQC_ids. " width="654" height="661" loading="lazy" /></a></li>
-      <li>Sample1, more information can be found in the next section.</li>
+      <li>Sample 1, more information can be found in the next section.</li>
     </ol>
 
   </blockquote>
@@ -1568,7 +1566,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
 
 <h1 id="serum-composition">Serum composition</h1>
 
-<p>To explore the proteomic composition of the two serum samples some postprocessing steps on the Protein Groups file are necessary. The Protein Groups file contains all relevant information on the protein level. The best way to explore this vast table is by clicking on the  scratch book <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> on the top menu. Clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> eye icon opens the Protein Groups file. Galaxy does not work with the names of the columns but instead with their number. Find the column numbers for: Fasta headers (includes protein ID + name + species), LFQ intensities for each sample and reverse proteins. First we remove “decoy” proteins, which are named “reverse” in MaxQuant. Next, we remove contaminants. For non-human samples, we could just remove all proteins, that are marked with a “+” in the “potential contaminant” column. We have seen before that many human proteins were marked as contaminant and as we study a human sample we don’t want to remove them. Therefore, we only remove non-human contaminant proteins. Then, we shrink the file to keep only columns that are interesting in the next steps: the fasta header and the columns with LFQ intensities for both files. To find the most abundant proteins per sample, the LFQ intensities can be sorted. On this sorted dataset we will explore the composition of the serum proteins within both samples using an interactive pie charts diagram.</p>
+<p>To explore the proteomic composition of the two serum samples, some postprocessing steps on the Protein Groups file are necessary. The Protein Groups file contains all relevant information on the protein level. The best way to explore this vast table is by clicking on the  scratch book <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> on the top menu. Clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> eye icon opens the Protein Groups file. Galaxy does not work with the names of the columns but instead with their number. Find the column numbers for: Fasta headers (includes protein ID + name + species), LFQ intensities for each sample and reverse proteins. First we remove “decoy” proteins, which are named “reverse” in MaxQuant. Next, we remove contaminants. For non-human samples, we could just remove all proteins that are marked with a “+” in the “potential contaminant” column. We have seen before that many human proteins were marked as contaminant and as we study a human sample we don’t want to remove them. Therefore, we only remove non-human contaminant proteins. Then, we shrink the file to keep only columns that are interesting in the next steps: the fasta header and the columns with LFQ intensities for both files. To find the most abundant proteins per sample, the LFQ intensities can be sorted. On this sorted dataset, we will explore the composition of the serum proteins within both samples using an interactive pie charts diagram.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-exploring-serum-composition"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Exploring serum composition</div>
@@ -1749,7 +1747,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
     <ol>
       <li>The log2 transformation leads to a close to normal intensity distribution for both samples. Intensities in the depleted sample are shifted towards higher values compared to the non-depleted samples. The big difference comes from artificially depleting (changing) protein intensities. <a href="../../images/maxquant_lfq_boxplots.png" rel="noopener noreferrer"><img src="../../images/maxquant_lfq_boxplots.png" alt="boxplots. " width="703" height="595" loading="lazy" /></a></li>
       <li>The log2 fold change (depleted vs. not depleted samples) is about -2.91. This means that the abundance in the not depleted sample is about 2^2.91 = 7.52 times higher than in the depleted sample, showing again that a large proportion of serum albumin was successfully removed by the antibody columns.</li>
-      <li>Most of the log2 fold changes are larger than zero. This means that many proteins have higher intensities in the depleted sample compared to the not-depleted sample. These are the proteins that benefitted from the depletion of serum albumin and other high abundand serum proteins. There is also a maximum around zero meaning that a substantial amount of proteins had a similar abundance in both samples. The negative log2 fold changes derive from the proteins that were depleted, e.g. serum albumin. <a href="../../images/maxquant_lfq_fc_histogram.png" rel="noopener noreferrer"><img src="../../images/maxquant_lfq_fc_histogram.png" alt="histogram. " width="524" height="511" loading="lazy" /></a></li>
+      <li>Most of the log2 fold changes are larger than zero. This means that many proteins have higher intensities in the depleted sample compared to the non-depleted sample. These are the proteins that benefited from the depletion of serum albumin and other highly abundant serum proteins. There is also a maximum around zero, meaning that a substantial amount of proteins had a similar abundance in both samples. The negative log2 fold changes derive from the proteins that were depleted, e.g., serum albumin. <a href="../../images/maxquant_lfq_fc_histogram.png" rel="noopener noreferrer"><img src="../../images/maxquant_lfq_fc_histogram.png" alt="histogram. " width="524" height="511" loading="lazy" /></a></li>
     </ol>
 
   </blockquote>
@@ -1759,12 +1757,12 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-analyzing-your-own-data"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-analyzing-your-own-data" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Analyzing your own data</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>For this training we have chosen two small example files to keep analysis time minimal. Real proteomic projects comprise more samples leading to longer MaxQuant run times from many hours to several days (depending on input file size, number of input files and parameters). Real projects also require different follow up analysis. Here are some things to consider for your proteomic project:</p>
+  <p>For this training, we have chosen two small example files to keep analysis time minimal. Real proteomic projects comprise more samples, leading to longer MaxQuant run times from many hours to several days (depending on input file size, number of input files, and parameters). Real projects also require different follow-up analyses. Here are some things to consider for your proteomic project:</p>
   <ol>
     <li>The columns in the MaxQuant output file change with the number of input files. Before using the cut tool, open the output file and check which columns contain the LFQ intensities - then adjust the cut tool to cut all those columns from the file.</li>
     <li>A necessary first step is to log2-transform the LFQ intensities.</li>
-    <li>Even though LFQ intensities are already normalized, before statistical analysis it is recommended to median normalize the LFQ intensities for each sample. Control the intensity distribution with histograms or boxplots. Even before normalization the boxplots should already be more similar in their intensity range if a normal biological replicate was analyzed (and not a different sample preparation protocol as in the training dataset). After normalization box plot medians should be very similar.</li>
-    <li>Often the aim of proteomic projects is finding differentially regulated proteins across conditions. Classical statistical methods like t-test and ANOVA are not ideal options but ok when multiple testing correction (e.g. benjamini-hochberg) is performed afterwards. The better option are algorithms tailored for the analysis of omics intensity data such as LIMMA (<span class="citation"><a href="#Ritchie2015">Ritchie <i>et al.</i> 2015</a></span>), SAM (<span class="citation"><a href="#Tusher2001">Tusher <i>et al.</i> 2001</a></span>) and MSstats (<span class="citation"><a href="#Choi2014">Choi <i>et al.</i> 2014</a></span>) <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0" title="MSstats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MSstats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.20.1.0)</span>. Do not apply statistical methods designed for count data (e.g. RNA-seq) such as Limma-voom or DESq2 - those are not applicable for proteomics intensity data.</li>
+    <li>Even though LFQ intensities are already normalized, before statistical analysis, it is recommended to median normalize the LFQ intensities for each sample. Control the intensity distribution with histograms or boxplots. Even before normalization, the boxplots should already be more similar in their intensity range if a normal biological replicate was analyzed (and not a different sample preparation protocol as in the training dataset). After normalization, box plot medians should be very similar.</li>
+    <li>Often, proteomic projects aim to find differentially regulated proteins across conditions. Classical statistical methods like t-test and ANOVA are not ideal options but ok when multiple testing correction (e.g. Benjamini-Hochberg) is performed afterwards. The better options are algorithms tailored for the analysis of omics intensity data such as LIMMA (<span class="citation"><a href="#Ritchie2015">Ritchie <i>et al.</i> 2015</a></span>), SAM (<span class="citation"><a href="#Tusher2001">Tusher <i>et al.</i> 2001</a></span>) and MSstats (<span class="citation"><a href="#Choi2014">Choi <i>et al.</i> 2014</a></span>) <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0" title="MSstats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MSstats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.20.1.0)</span>. Do not apply statistical methods designed for count data (e.g. RNA-seq) such as Limma-voom or DESq2 - those are not applicable for proteomics intensity data.</li>
   </ol>
 
 </blockquote>
@@ -1839,7 +1837,6 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
                 <ol class="bibliography"><li id="Tusher2001">Tusher, V. G., R. Tibshirani, and G. Chu, 2001 <b>Significance analysis of microarrays applied to the ionizing radiation response</b>. Proceedings of the National Academy of Sciences 98: 5116–5121. <a href="https://doi.org/10.1073/pnas.091062498">10.1073/pnas.091062498</a></li>
 <li id="Cox2008">Cox, J., and M. Mann, 2008 <b>MaxQuant enables high peptide identification rates,  individualized p.p.b.-range mass accuracies and proteome-wide protein quantification</b>. Nature Biotechnology 26: 1367–1372. <a href="https://doi.org/10.1038/nbt.1511">10.1038/nbt.1511</a></li>
 <li id="Choi2014">Choi, M., C.-Y. Chang, T. Clough, D. Broudy, T. Killeen <i>et al.</i>, 2014 <b>MSstats: an R package for statistical analysis of quantitative mass spectrometry-based proteomic experiments</b>. Bioinformatics 30: 2524–2526. <a href="https://doi.org/10.1093/bioinformatics/btu305">10.1093/bioinformatics/btu305</a> <a href="https://academic.oup.com/bioinformatics/bioinformatics/article/2748156/MSstats:">https://academic.oup.com/bioinformatics/bioinformatics/article/2748156/MSstats:</a> ISBN: 1367-4811 (Electronic) 1367-4803 (Linking)</li>
-<li id="Bielow2015">Bielow, C., G. Mastrobuoni, and S. Kempa, 2015 <b>Proteomics Quality Control: Quality Control Software for MaxQuant Results</b>. Journal of Proteome Research 15: 777–787. <a href="https://doi.org/10.1021/acs.jproteome.5b00780">10.1021/acs.jproteome.5b00780</a></li>
 <li id="Ritchie2015">Ritchie, M. E., B. Phipson, D. Wu, Y. Hu, C. W. Law <i>et al.</i>, 2015 <b>limma powers differential expression analyses for RNA-sequencing and microarray studies</b>. Nucleic Acids Research 43: e47–e47. <a href="https://doi.org/10.1093/nar/gkv007">10.1093/nar/gkv007</a></li>
 <li id="Geyer2017">Geyer, P. E., L. M. Holdt, D. Teupser, and M. Mann, 2017 <b>Revisiting biomarker discovery by plasma proteomics</b>. Molecular Systems Biology 13: 942. <a href="https://doi.org/10.15252/msb.20156297">10.15252/msb.20156297</a></li></ol>
                 
@@ -2126,7 +2123,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/266309982ee18b7da744f727a7f7cbb484dcd509">2663099</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2bc6518c56d1330a418b95d3c7c01e4bb61c04b5">2bc6518</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
