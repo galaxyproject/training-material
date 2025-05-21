@@ -2,6 +2,8 @@
 title: "SPOC HDR UK ELIXIR-UK CoFest 2025: How did it go?"
 contributions:
   authorship: [nomadscientist, hexhowells]
+  funding:
+    - deKCD
 tags: [gtn, single-cell]
 layout: news
 cover: "news/images/2023_dec_sc.png"
