@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@cb5bc03c562ff965c36b96622adf87f87d9d2ecf",
+		release: "galaxy-training-network@a009e74e4f6eeca29b81a3e15cd19b97ac1a312f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Identifying tuberculosis transmission links: from SNPs to transmission clusters">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-07-12 09:36:52 +0000">
+<meta name="DC.date" content="2025-05-26 11:18:27 +0000">
 <meta name="DC.creator" content="Galo A. Goig">
 <meta name="DC.creator" content="Daniela Brites">
 <meta name="DC.creator" content="Christoph Stritt"><meta name="description" content="phylogenetics">
@@ -188,7 +188,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-07-12 09:36:52 +0000",
+  "dateModified": "2025-05-26 11:18:27 +0000",
   "datePublished": "2022-03-16 08:35:43 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -246,7 +246,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Identifying tuberculosis transmission links: from SNPs to transmission clusters",
   "url": "https://training.galaxyproject.org/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html",
-  "version": 12,
+  "version": 13,
   "timeRequired": "PT2H",
   "teaches": "- Create a SNP alignment\n- Calculate pairwise SNP distances between MTB samples\n- Identify transmission clusters based on SNP distances\n- Study the emergence and spread of drug resistance based on transmission analysis.",
   "keywords": [
@@ -1701,29 +1701,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     
     
     
-	<li class="dropdown-header">
-		<b>Possibly Working</b>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.cz/" title="">
-			UseGalaxy.cz
-		</a>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.no/" title="">
-			UseGalaxy.no
-		</a>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.org" title="">
-			UseGalaxy.org (Main)
-		</a>
-	</li>
-    
-    
 
     </ul>
 
@@ -1733,7 +1710,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 16, 2022 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 12, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 26, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1753,7 +1730,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (1 recent ratings, 10 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 12 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 13 </div>
 
     </blockquote>
     </section>
@@ -2270,99 +2247,29 @@ same SNP distances, another possible (yet still oversimplified) scenario could b
   </blockquote>
 </blockquote>
 
-<h3 id="determine-transmission-clusters-using-rscript">Determine transmission clusters using Rscript</h3>
+<h3 id="determine-transmission-clusters">Determine transmission clusters</h3>
+<p>The Galaxy team has implemented a tool that reads a SNP distance matrix like the one we just calculated and 
+assigns clusters based on a distance threshold. We will use this tool to perform a clustering with a threshold
+of 12 SNPs.</p>
 
-<p>Currently there is not tool in Galaxy to perform the exact task that we need (although we plan to
-include it!).  So far, we can use <strong>R</strong> and the <strong>cluster</strong> library through an <strong>interactive tool</strong> from within Galaxy to achieve what we want.
-Again, don’t worry about this, programming in <strong>R</strong> is beyond the scope of this tutorial, but if you
-have some <strong>R</strong> or other programming language knowledge, you could also use the code shown in the following as a starting point for your own analyses.</p>
-
-<p>First you will need to open Rstudio within Galaxy.
-To do this look for Rstudio in the tool panel, click on it and run the interactive tool.
-An Rstudio dataset will appear in your history, representing an interactive tool run that, once started, will stay in the running state indefinitely.
-This is the normal behaviour because, indeed, Rstudio is getting executed until we finish using it.</p>
-
-<blockquote class="hands-on">
-  <div class="box-title hands-on-title" id="hands-on-interactive-tool-session-to-generate-a-cluster-report"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Interactive tool session to generate a cluster report</div>
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-distance-matrix-from-snp-alignment-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Distance matrix from SNP alignment.</div>
 
   <ol>
-    <li>Note the dataset number (the number in front of and separated with a <strong>:</strong> from the dataset name) of the SNP distance matrix generated by the last tool run in your history</li>
-    <li>Once the Rstudio dataset is in running state, click on its <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon and wait for Rstudio to open</li>
-    <li>
-      <p>Load the SNP distance matrix dataset generated before as an R object</p>
-
-      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get the SNP distance matrix object from Galaxy</span><span class="w">
-</span><span class="n">distance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gx_get</span><span class="p">(</span><span class="m">109</span><span class="p">)</span><span class="w">
-</span></code></pre></div>      </div>
-
-      <ol>
-        <li>Copy the above code into the Rstudio session</li>
-        <li>Replace the <code class="language-plaintext highlighter-rouge">109</code> in parentheses with the dataset number of your SNP distance matrix.</li>
-        <li>Press <strong>Enter</strong> on your keyboard to execute the code in Rstudio</li>
-      </ol>
-
-      <p>When the data import finishes, the content of the dataset from your Galaxy history will be available in the R object <code class="language-plaintext highlighter-rouge">distance</code>.</p>
-    </li>
-    <li>
-      <p>Run the following R commands</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>library(cluster)
-
-# Read the SNP distance matrix
-distance &lt;- read.table(distance, header=T, sep="\t", row.names = 1)
-distance &lt;- as.dist(distance)
-
-# Perform clustering based on SNP distances and a SNP threshold of 10 (h=10)
-clusters &lt;- agnes(distance, diss = TRUE, method = "average")
-clusters &lt;- as.data.frame(cutree(as.hclust(clusters), h = 10))
-colnames(clusters) &lt;- "cluster_id"
-
-## Discard groups of only one patient by picking clusters with more than one entry
-# Get cluster_ids that are "duplicated" (meaning they have more than one patient)
-clusterIDs &lt;- unique(subset(clusters, duplicated(clusters$cluster_id))$cluster_id)
-# Get samples within these "duplicated" clusters
-clusters &lt;- subset(clusters, cluster_id %in% clusterIDs)
-# Add proper Sample name column
-clusters &lt;- cbind(Sample = rownames(clusters), clusters)
-write.table(clusters, file = "Transmission_clusters.tsv", sep="\t", quote = F, row.names = F)
-</code></pre></div>      </div>
-
-      <ol>
-        <li>Again, copy the code into Rstudio</li>
-        <li>Press <strong>Enter</strong> on your keyboard to excute it in Rstudio</li>
-      </ol>
-
-      <p>This code will write the results of a cluster analysis into a file called <em>Transmission_clusters.tsv</em>
-(the file should appear in the <strong>Files</strong> tab of the lower-right panel of Rstudio).</p>
-    </li>
-    <li>
-      <p>Export the new file back to the Galaxy history as a dataset of format tabular</p>
-
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gx_put("Transmission_clusters.tsv", file_type="tabular")
-</code></pre></div>      </div>
-
-      <ol>
-        <li>Copy the code into Rstudio</li>
-        <li>Press <strong>Enter</strong> on your keyboard to execute it</li>
-        <li>Wait for the export to finish</li>
-      </ol>
-    </li>
-    <li>Stop Rstudio
-      <ol>
-        <li>Close the Rstudio tab in your browser and go back to Galaxy</li>
-        <li>Either
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/clustering_from_distmat/clustering_from_distmat/1.1.1" title="Distance matrix-based hierarchical clustering tool metadata tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Distance matrix-based hierarchical clustering tool metadata</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Distance matrix”</em>: SNP distance matrix; output of <strong>SNP distance matrix</strong></li>
+        <li><em>“Clustering method”</em>: UPGMA (scipy ‘average’ method)</li>
+        <li><em>“Generate cluster assignments?”</em>: Yes, and use distance threshold to divide into clusters
           <ul>
-            <li>delete the Rstudio data (still shown in running state) from your history, or</li>
-            <li>in Galaxy’s top menu, go to <em>“User”</em> -&gt; <em>“Active Interactive Tools”</em>, select the Rstudio instance and click on the <strong>Stop</strong> button at the bottom</li>
+            <li><em>“Distance threshold for sample clustering”</em>: <strong>12</strong></li>
           </ul>
         </li>
-      </ol>
+      </ul>
     </li>
   </ol>
 
 </blockquote>
-
-<p>The output of the R script, which is now available as a dataset in your history is a table listing only samples that were found to belong to a cluster together with the (arbitrary) ID of their cluster.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -2371,8 +2278,8 @@ write.table(clusters, file = "Transmission_clusters.tsv", sep="\t", quote = F, r
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-answer"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Answer</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <p>We have found two transmission clusters with respective IDs 10 and 12. Transmission cluster 10
-is composed of two samples, <em>ERR6362484</em> and <em>ERR5987352</em>, linked by recent transmission and transmission cluster 12 of three samples, <em>ERR6362138</em>, <em>ERR6362156</em> and <em>ERR6362253</em>.</p>
+    <p>We have found two transmission clusters with respective IDs 1 and 2. Transmission cluster 1
+is composed of two samples,<em>ERR5987352</em> and <em>ERR6362484</em> , linked by recent transmission and transmission cluster 2 of three samples, <em>ERR6362138</em>, <em>ERR6362156</em> and <em>ERR6362253</em>.</p>
   </blockquote>
 </blockquote>
 
@@ -2502,7 +2409,7 @@ https://zenodo.org/record/6010176/files/SRR998584.TBprof.txt
 
 <p>TB-profiler reports are very useful and comprehensive, and we will use them to better investigate
 drug resistance in our dataset. However, it is always useful to summarize the data on a per-sample basis,
-on a table, so we can quickly check which strains are, for example, MDR, an which are pan-susceptible.
+on a table, so we can quickly check which strains are, for example, MDR, an which are susceptible to antibiotics.
 We would like to generate a table like the following:</p>
 
 <table>
@@ -2680,16 +2587,11 @@ If we have a look at the respective TB-profiler reports, we can see that these t
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Join two files tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two files</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: transmission clusters report; output of <strong>Rstudio</strong> session</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: transmission clusters report; output of <em>Distance matrix-based hierarchial clustering</em></li>
         <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd File”</em>: final drug-resistance report; output of <strong>Replace Text</strong> above</li>
         <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
-        <li>
-          <p><em>“Output lines appearing in”</em>: <code class="language-plaintext highlighter-rouge">Both 1st &amp; 2nd file, plus unpairable lines from 2st file. (-a 2)</code></p>
-
-          <p>The <em>transmission clusters</em> report only lists the subset of samples that were assigned to a cluster, while the drug-resistance table has a line for every sample. We want to keep all samples from the second table and indicate missing information from the first with <code class="language-plaintext highlighter-rouge">-</code> values (see next parameter).</p>
-        </li>
-        <li><em>“Value to put in unpaired (empty) fields”</em>: <code class="language-plaintext highlighter-rouge">-</code></li>
+        <li><em>“Output lines appearing in”</em>: <code class="language-plaintext highlighter-rouge">Both 1st &amp; 2nd file</code></li>
       </ul>
     </li>
   </ol>
@@ -2790,27 +2692,27 @@ population.</p>
     </tr>
     <tr>
       <td>ERR5987352</td>
-      <td>10</td>
+      <td>1</td>
       <td>Pre-MDR</td>
     </tr>
     <tr>
       <td>ERR6362484</td>
-      <td>10</td>
+      <td>1</td>
       <td>Pre-MDR</td>
     </tr>
     <tr>
       <td>ERR6362138</td>
-      <td>12</td>
+      <td>2</td>
       <td>MDR</td>
     </tr>
     <tr>
       <td>ERR6362156</td>
-      <td>12</td>
+      <td>2</td>
       <td>Pre-XDR</td>
     </tr>
     <tr>
       <td>ERR6362253</td>
-      <td>12</td>
+      <td>2</td>
       <td>MDR</td>
     </tr>
   </tbody>
@@ -2828,10 +2730,10 @@ Remember that you can look at the TB-profiler reports of independent samples for
     <p>In a simplistic scenario, we could consider clustered strains as instances of transmission and
 unclustered strains as instances of de novo evolution of DR. Thus, we see that for example there
 are three MDR strains (ERR551620, ERR6362078, ERR6362653) that are unclustered and therefore may
-represent cases in which drug resistance evolved independently as response to treatment within the respective
+represent cases in which drug resistance evolved independently as a consequence of treatment within the respective
 patients. However you need to always bear in mind that, although <strong>within our population</strong> those MDR
 strains do not seem to be linked to transmission, this does NOT rule out the possibility that
-some of these patients were infected with an MDR strain somewhere else.</p>
+some of these patients were infected with an MDR strain somewhere else, or that other cases from the cluster where simply not sampled.</p>
 
     <p>When looking at clustered strains, distinguishing between transmitted and <em>de-novo</em> may be tricky. Note
 that, for example, for the two RIF-monoresistant strains linked within the same transmission
@@ -2858,7 +2760,7 @@ evidence of <em>de-novo</em> evolution of DR. Do you know which strain and why?<
     <ol>
       <li>Within this cluster of MDR strains, there is one tagged as Pre-XDR by TB-profiler. If we have
 a look at the TB profiler report, we can see that this strain carries an additional mutation in
-<em>gyrA</em> that confers resistance to fluorioquinolones. This is compatible with an scenario in which
+<em>gyrA</em> that confers resistance to fluoroquinolones. This is compatible with an scenario in which
 fluoroquinolone resistance evolved independently within this patient after being infected with
 the MDR strain.</li>
     </ol>
@@ -2876,7 +2778,7 @@ most likely evolved <em>de-novo</em> in this patient due to antibiotic treatment
     <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>The strain is indeed PZA-resistant. And indeed this is strain is NOT linked to transmission
 within our population. However, if we have a look at the TB-profiler report, we observe that this
-is a <em>M. bovis</em> strain, which are known to be intrinsically resistant to PZA.</p>
+is a <em>M. bovis</em> strain, many of which are known to be intrinsically resistant to PZA.</p>
   </blockquote>
 </blockquote>
 
@@ -3128,6 +3030,11 @@ tools:
   revisions: a87ae767b01d
   tool_panel_section_label: Variant Calling
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: clustering_from_distmat
+  owner: iuc
+  revisions: f8ee933de3ca
+  tool_panel_section_label: Statistics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: samtools_view
   owner: iuc
   revisions: 0dbf49c414ae
@@ -3361,7 +3268,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cb5bc03c562ff965c36b96622adf87f87d9d2ecf">cb5bc03</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a009e74e4f6eeca29b81a3e15cd19b97ac1a312f">a009e74</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
