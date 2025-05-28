@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@9f9a443cfb0742a6056be62b96a4b83e0feea43b",
+		release: "galaxy-training-network@cb162b4682f15e6a1bd108d794d664d4d83caa89",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Library Generation for DIA Analysis">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-09 08:55:09 +0000">
+<meta name="DC.date" content="2025-05-28 13:55:00 +0000">
 <meta name="DC.creator" content="Matthias Fahrner">
 <meta name="DC.creator" content="Melanie Föll"><meta name="description" content="Training material for proteomics workflows in Galaxy">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -187,7 +187,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2023-11-09 08:55:09 +0000",
+  "dateModified": "2025-05-28 13:55:00 +0000",
   "datePublished": "2020-12-02 18:41:23 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -245,7 +245,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Library Generation for DIA Analysis",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html",
-  "version": 10,
+  "version": 11,
   "timeRequired": "PT1H",
   "teaches": "- Generating a spectral library from data dependent acquisition (DDA) MS data\n- Understanding DIA data principles and characteristics\n- Optimizing and refining a spectral library for the analysis of DIA data",
   "keywords": [
@@ -1220,7 +1220,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Dec 2, 2020 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 9, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 28, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1240,7 +1240,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 2 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 10 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 11 </div>
 
     </blockquote>
     </section>
@@ -1259,17 +1259,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>To enable the identification and quantification of such high numbers of proteins in a time-wise limited measurement there has been a lot of MS method and data acquisition optimization. The most commonly used technique is the data dependent acquisition (DDA). Here only the most abundant (top N) peptides from each MS1 scan are selected for subsequent fragmentation, with the most promising chance for successful identifications due to high intensity signals. Afterwards the respective mass over charge (m/z) values are set on an exclusion list enabling the selection of less abundant peptides from the following MS1 scan for the next cycle of top N fragmentation (MS2) scans. However, since this acquisition method is highly dependent on the abundance of the respective peptides at a given retention time this method is referred to as data dependent acquisition (DDA). This dependency on both time as well as intensity leads to measurement specific identifications between multiple measurements.</p>
 
-<p>Another more recently developed method is the so called data independent acquisition (DIA). However due to some unique characteristics of this acquisition method it requieres spectral libraries, which contain the peptide sequences as well as their respective fragment spectrum (MS2) information.
-Here we will use DDA data from the same samples to build a spectral library which can than be used for the identification of peptides in data independent acquisition (DIA) data from the same samples using e.g. OpenSwathWorkflow <a href="/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html">OpenSwathworkflow tutorial</a>.</p>
+<p>Another more recently developed method is the so called data independent acquisition (DIA). However due to some unique characteristics of this acquisition method it requires spectral libraries, which contain the peptide sequences as well as their respective fragment spectrum (MS2) information.
+Here we will use DDA data from the same samples to build a spectral library which can then be used for the identification of peptides in data independent acquisition (DIA) data from the same samples using e.g. OpenSwathWorkflow <a href="/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html">OpenSwathworkflow tutorial</a>.</p>
 
 <figure id="figure-1" style="max-width: 90%;"><img src="../../images/DIA_lib_gen_basic.png" alt="DDA_lib_gen. " width="1436" height="628" loading="lazy" /><a target="_blank" href="../../images/DIA_lib_gen_basic.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Labelfree proteomics using liquid chromatography tandem-mass spectrometry (LC-MS/MS). Principles of data dependent acquisition (DDA).</figcaption></figure>
 
-<p>High quality spectral libraries can be generated by fractionation and separate measurment of a representative sample or mixture for a cohort. During the analysis the peptide and protein identifications of all fractions can than be combined into comprehensive spectral libraries. Here the spectral libraries tend to be relativly large offering great sensitivity (even to low abundant peptides), but also contain peptides which are only observable due to the prior fractionation.
-Another way of generating spectral libraries is by measuring the same samples using DDA as well as using DIA. Here the DDA results will be analyzed and sample specific spectral library is generated which can than be used for the analysis of the DIA data. The resulting spectral libraries are often smaller and contain only peptides which are observable in complex and non-fractionated samples.</p>
+<p>High quality spectral libraries can be generated by fractionation and separate measurement of a representative sample or mixture for a cohort. During the analysis the peptide and protein identifications of all fractions can than be combined into comprehensive spectral libraries. Here the spectral libraries tend to be relatively large offering great sensitivity (even to low abundant peptides), but also contain peptides which are only observable due to the prior fractionation.
+Another way of generating spectral libraries is by measuring the same samples using DDA as well as using DIA. Here the DDA results will be analyzed and sample specific spectral library is generated which can then be used for the analysis of the DIA data. The resulting spectral libraries are often smaller and contain only peptides which are observable in complex and non-fractionated samples.</p>
 
-<p>A plethora of software solutions were developed for the analysis of DDA proteomics data. MaxQuant is one of the most popular proteomics softwares because it is an easy to use and free software that offers functionalities for nearly all kinds of proteomics data analysis challenges <span class="citation"><a href="#Cox2008">Cox and Mann 2008</a></span>. Mass spectrometry raw data is normally obtained in a vendor specific, proprietary file format. MaxQuant can directly take those raw files as input. For peptide identification MaxQuant uses a search engine called “Andromeda”.</p>
+<p>A plethora of software solutions were developed for the analysis of DDA proteomics data. MaxQuant is one of the most popular proteomics softwares because it is easy to use and a free software that offers functionalities for nearly all kinds of proteomics data analysis challenges <span class="citation"><a href="#Cox2008">Cox and Mann 2008</a></span>. Mass spectrometry raw data is normally obtained in a vendor specific, proprietary file format. MaxQuant can directly take those raw files as input. For peptide identification MaxQuant uses a search engine called “Andromeda”.</p>
 
-<p>The dataset in this training consists of different Spike-in mixtures of stable amounts of human peptides and different amounts of Ecoli peptides. Each sample reflects a non-fractionated MS measurement (DDA) of different Spike-in ratios. To faciliate the analysis and directly combine the identifications of all measurements, we will define the different measurements as fractions of one sample, as it would be the case for e.g. high pH, SCX or HILIC fractionated samples.</p>
+<p>The dataset in this training consists of different Spike-in mixtures of stable amounts of human peptides and different amounts of <em>E.coli</em> peptides. Each sample reflects a non-fractionated MS measurement (DDA) of different Spike-in ratios. To facilitate the analysis and directly combine the identifications of all measurements, we will define the different measurements as fractions of one sample, as it would be the case for e.g. high pH, SCX or HILIC fractionated samples.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -1283,7 +1283,7 @@ Another way of generating spectral libraries is by measuring the same samples us
       <li><a href="#filter-for-unique-peptides-in-the-evidence-and-msms-output" id="markdown-toc-filter-for-unique-peptides-in-the-evidence-and-msms-output"><strong>Filter</strong> for unique peptides in the <em>evidence</em> and <em>msms</em> output</a></li>
     </ol>
   </li>
-  <li><a href="#diapysef-library-generation" id="markdown-toc-diapysef-library-generation"><strong>diapysef library generation</strong></a></li>
+  <li><a href="#diapysef-library-generation" id="markdown-toc-diapysef-library-generation">diapysef library generation</a></li>
   <li><a href="#spectral-library-refinement-with-openswathassaygenerator" id="markdown-toc-spectral-library-refinement-with-openswathassaygenerator">Spectral library refinement with <strong>OpenSwathAssayGenerator</strong></a></li>
   <li><a href="#adding-decoy-sequences-with-openswathdecoygenerator" id="markdown-toc-adding-decoy-sequences-with-openswathdecoygenerator">Adding decoy sequences with <strong>OpenSwathDecoyGenerator</strong></a></li>
   <li><a href="#converting-the-spectral-library-with-targetedfileconverter" id="markdown-toc-converting-the-spectral-library-with-targetedfileconverter">Converting the spectral library with <strong>TargetedFileConverter</strong></a></li>
@@ -1487,7 +1487,7 @@ https://zenodo.org/record/4293493/files/MaxQuant_mqpar.xml
 
 </blockquote>
 
-<h1 id="diapysef-library-generation"><strong>diapysef library generation</strong></h1>
+<h1 id="diapysef-library-generation">diapysef library generation</h1>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-generation-of-a-spectral-library-using-the-unique-b-maxquant-b-search-results-and-indexed-retention-time-i-irt-i-peptides"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generation of a spectral library using the unique <b>MaxQuant</b> search results and indexed retention time <i>iRT</i> peptides</div>
@@ -2015,7 +2015,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9f9a443cfb0742a6056be62b96a4b83e0feea43b">9f9a443</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cb162b4682f15e6a1bd108d794d664d4d83caa89">cb162b4</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
