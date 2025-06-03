@@ -135,7 +135,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-06-03 00:07:35 +0000",
+          "modified": "2025-06-03 07:56:11 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput censored text\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput uncensored text \"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Preprocessing of censored text\"];\n  0 -->|output| 2;\n  3[\"Preprocessing of uncensored text\"];\n  1 -->|output| 3;\n  4[\"Comparison with diff - user version\"];\n  2 -->|outfile| 4;\n  3 -->|outfile| 4;\n  5[\"Comparison with diff - computer version\"];\n  2 -->|outfile| 5;\n  3 -->|outfile| 5;\n  6[\"Extracting only censored passages\"];\n  5 -->|diff_file| 6;\n  7[\"Compute\"];\n  6 -->|out_file1| 7;\n  8[\"Cut\"];\n  7 -->|out_file1| 8;\n  9[\"Datamash\"];\n  7 -->|out_file1| 9;\n  10[\"Generate a word cloud\"];\n  8 -->|out_file1| 10;\n  0e468eb9-b68c-4840-b5e7-12cbf29e0c9c[\"Output\\noutput_graphic\"];\n  10 --> 0e468eb9-b68c-4840-b5e7-12cbf29e0c9c;\n  style 0e468eb9-b68c-4840-b5e7-12cbf29e0c9c stroke:#2c3143,stroke-width:4px;\n  11[\"Sort\"];\n  9 -->|out_file| 11;\n  9dfd8862-e7d7-46ae-bbe2-3e333a017764[\"Output\\noutput_csv\"];\n  11 --> 9dfd8862-e7d7-46ae-bbe2-3e333a017764;\n  style 9dfd8862-e7d7-46ae-bbe2-3e333a017764 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput censored text\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput uncensored text \"]\n  2[label=\"Preprocessing of censored text\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Preprocessing of uncensored text\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"Comparison with diff - user version\"]\n  2 -> 4 [label=\"outfile\"]\n  3 -> 4 [label=\"outfile\"]\n  5[label=\"Comparison with diff - computer version\"]\n  2 -> 5 [label=\"outfile\"]\n  3 -> 5 [label=\"outfile\"]\n  6[label=\"Extracting only censored passages\"]\n  5 -> 6 [label=\"diff_file\"]\n  7[label=\"Compute\"]\n  6 -> 7 [label=\"out_file1\"]\n  8[label=\"Cut\"]\n  7 -> 8 [label=\"out_file1\"]\n  9[label=\"Datamash\"]\n  7 -> 9 [label=\"out_file1\"]\n  10[label=\"Generate a word cloud\"]\n  8 -> 10 [label=\"out_file1\"]\n  k0e468eb9b68c4840b5e712cbf29e0c9c[color=lightseagreen,label=\"Output\\noutput_graphic\"]\n  10 -> k0e468eb9b68c4840b5e712cbf29e0c9c\n  11[label=\"Sort\"]\n  9 -> 11 [label=\"out_file\"]\n  k9dfd8862e7d746aebbe23e333a017764[color=lightseagreen,label=\"Output\\noutput_csv\"]\n  11 -> k9dfd8862e7d746aebbe23e333a017764\n}",
           "workflow_tools": [
@@ -335,11 +335,6 @@
       "supported_servers_matrix": {
         "servers": [
           {
-            "url": "http://apostl.moffitt.org/",
-            "name": "APOSTL",
-            "usegalaxy": false
-          },
-          {
             "url": "http://galaxy.ugent.be/",
             "name": "BioBix",
             "usegalaxy": false
@@ -435,11 +430,6 @@
             "usegalaxy": false
           },
           {
-            "url": "https://mississippi.sorbonne-universite.fr",
-            "name": "MISSISSIPPI",
-            "usegalaxy": false
-          },
-          {
             "url": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/",
             "name": "MiModD NacreousMap",
             "usegalaxy": false
@@ -511,10 +501,6 @@
             "servers": [
               {
                 "state": "local",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "local",
                 "server": "http://galaxy.ugent.be/"
               },
               {
@@ -588,10 +574,6 @@
               {
                 "state": "local",
                 "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "local",
-                "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
                 "state": "missing",
@@ -653,10 +635,6 @@
             "servers": [
               {
                 "state": "local",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "local",
                 "server": "http://galaxy.ugent.be/"
               },
               {
@@ -730,10 +708,6 @@
               {
                 "state": "local",
                 "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "local",
-                "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
                 "state": "missing",
@@ -795,10 +769,6 @@
             "servers": [
               {
                 "state": "local",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "local",
                 "server": "http://galaxy.ugent.be/"
               },
               {
@@ -872,10 +842,6 @@
               {
                 "state": "local",
                 "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "local",
-                "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
                 "state": "missing",
@@ -937,10 +903,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://galaxy.ugent.be/"
               },
               {
@@ -1014,10 +976,6 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
-                "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
                 "state": "missing",
@@ -1064,8 +1022,8 @@
                 "state": "inexact",
                 "versions": [
                   "3.6+galaxy1",
-                  "3.7+galaxy0",
-                  "3.6+galaxy2"
+                  "3.6+galaxy2",
+                  "3.7+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -1089,10 +1047,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://galaxy.ugent.be/"
@@ -1176,13 +1130,6 @@
                 "server": "http://galaxy.ul.edu.lb/"
               },
               {
-                "state": "inexact",
-                "versions": [
-                  "9.3+galaxy1"
-                ],
-                "server": "https://mississippi.sorbonne-universite.fr"
-              },
-              {
                 "state": "missing",
                 "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
               },
@@ -1206,8 +1153,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.1.2",
-                  "1.1.1",
                   "1.0.0",
+                  "1.1.1",
                   "1.1.0"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -1258,10 +1205,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://galaxy.ugent.be/"
               },
               {
@@ -1335,10 +1278,6 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
-                "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
                 "state": "missing",
@@ -1402,10 +1341,6 @@
             "servers": [
               {
                 "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
                 "server": "http://galaxy.ugent.be/"
               },
               {
@@ -1447,12 +1382,12 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.5",
                   "2.0",
                   "1.4",
-                  "1.3.0",
+                  "1.2.0",
                   "1.6",
-                  "1.2.0"
+                  "1.5",
+                  "1.3.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -1463,8 +1398,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.6",
-                  "1.2.0"
+                  "1.2.0",
+                  "1.6"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -1494,13 +1429,6 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "2.0"
-                ],
-                "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
                 "state": "missing",
@@ -1549,11 +1477,11 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.5",
                   "2.0",
                   "1.4",
-                  "1.3.0",
                   "1.6",
+                  "1.5",
+                  "1.3.0",
                   "1.3.1"
                 ],
                 "server": "https://usegalaxy.no/"
@@ -1578,10 +1506,6 @@
           {
             "id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0",
             "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
               {
                 "state": "missing",
                 "server": "http://galaxy.ugent.be/"
@@ -1665,11 +1589,6 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "exact",
-                "version": "1.8+galaxy0",
-                "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
                 "state": "missing",
