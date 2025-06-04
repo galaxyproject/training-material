@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@dca1195b6910428d1976a023b69695d74e03d65f",
+		release: "galaxy-training-network@3039c89b8bd186e2c072d57dae7e41e09787c082",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Tree thinking for tuberculosis evolution and epidemiology">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-03-12 16:38:55 +0000">
+<meta name="DC.date" content="2025-06-04 12:40:21 +0000">
 <meta name="DC.creator" content="Christoph Stritt">
 <meta name="DC.creator" content="Daniela Brites">
 <meta name="DC.creator" content="Galo A. Goig"><meta name="description" content="phylogenetics">
@@ -188,7 +188,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-03-12 16:38:55 +0000",
+  "dateModified": "2025-06-04 12:40:21 +0000",
   "datePublished": "2022-03-16 10:37:17 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -246,7 +246,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Tree thinking for tuberculosis evolution and epidemiology",
   "url": "https://training.galaxyproject.org/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html",
-  "version": 11,
+  "version": 12,
   "timeRequired": "PT1H",
   "teaches": "- Understand the basic concepts behind phylogenetic trees, as applied to *Mycobacterium tuberculosis*\n- Be able to read and interrogate a phylogeny encountered in the literature",
   "keywords": [
@@ -1126,11 +1126,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
-      "url": "https://bio.tools/tool/raxml",
-      "name": "RAxML"
-    },
-    {
-      "@type": "Thing",
       "url": "https://bio.tools/tool/galaxy",
       "name": "Galaxy"
     },
@@ -1628,7 +1623,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 16, 2022 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 12, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 4, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1648,7 +1643,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (1 recent ratings, 7 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 11 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 12 </div>
 
     </blockquote>
     </section>
@@ -1778,15 +1773,14 @@ Each row in the alignment represents a different strain, each column a position 
   <li><a href="#infering-phylogeny-from-snp-alignments" id="markdown-toc-infering-phylogeny-from-snp-alignments">Infering phylogeny from SNP alignments</a></li>
   <li><a href="#phylogenetic-analysis-of-mtbc-strains-with-galaxy-and-rstudio" id="markdown-toc-phylogenetic-analysis-of-mtbc-strains-with-galaxy-and-rstudio">Phylogenetic analysis of MTBC strains with Galaxy and Rstudio</a>    <ol>
       <li><a href="#get-the-data" id="markdown-toc-get-the-data">Get the data</a></li>
-      <li><a href="#estimate-a-phylogeny" id="markdown-toc-estimate-a-phylogeny">Estimate a phylogeny</a></li>
-      <li><a href="#visualize-and-manipulate-the-tree" id="markdown-toc-visualize-and-manipulate-the-tree">Visualize and manipulate the tree</a></li>
-      <li><a href="#plot-the-raxml-output" id="markdown-toc-plot-the-raxml-output">Plot the RAxML output</a></li>
+      <li><a href="#set-up-the-coding-environment" id="markdown-toc-set-up-the-coding-environment">Set up the coding environment</a></li>
+      <li><a href="#estimate-the-tree" id="markdown-toc-estimate-the-tree">Estimate the tree</a></li>
       <li><a href="#root-the-tree" id="markdown-toc-root-the-tree">Root the tree</a></li>
       <li><a href="#create-tree-with-lineage-as-tip-label-instead-of-strain-name" id="markdown-toc-create-tree-with-lineage-as-tip-label-instead-of-strain-name">Create tree with lineage as tip label instead of strain name</a></li>
       <li><a href="#first-round-of-exercises" id="markdown-toc-first-round-of-exercises">First round of exercises</a></li>
       <li><a href="#map-a-trait-onto-the-tree" id="markdown-toc-map-a-trait-onto-the-tree">Map a trait onto the tree</a></li>
       <li><a href="#exercises-continued" id="markdown-toc-exercises-continued">Exercises continued</a></li>
-      <li><a href="#date-the-phylogeny-advanced" id="markdown-toc-date-the-phylogeny-advanced">Date the phylogeny (advanced)</a></li>
+      <li><a href="#bootstrapping" id="markdown-toc-bootstrapping">Bootstrapping</a></li>
       <li><a href="#final-exercise" id="markdown-toc-final-exercise">Final exercise</a></li>
     </ol>
   </li>
@@ -1878,46 +1872,14 @@ The above replacement operation, drops these unnecessary endings, which we would
 
 </blockquote>
 
-<h2 id="estimate-a-phylogeny">Estimate a phylogeny</h2>
+<h2 id="set-up-the-coding-environment">Set up the coding environment</h2>
 
-<p>There are numerous methods to infer phylogenetic trees, but the most frequently used with large-scale molecular data are based on maximum likelihood and Bayesian inference. The details of how these methods construct trees from an alignment are beyond the scope of this introductory course. To be able to read trees, it is not necessary to know the statistical and computational details of how the trees are estimated. The books listed in the <a href="#resources">Resources</a> section provide in-depth introductions into the different principles of phylogenetic inference, in particular Baum &amp; Smith 2013 and Yang 2014.</p>
-
-<p>In this tutorial, we will use the maximum likelihood method <a href="https://cme.h-its.org/exelixis/web/software/raxml/">RAxML</a> to estimate a phylogenetic tree for the 20 strains.</p>
-
-<p>An aspect we ignore in this tutorial is the uncertainty involved in phylogenetic inference. While RAxML will deliver a single tree, not all aspects of this tree are equally well supported by the data. This uncertainty can be quantified through <strong>bootstrapping</strong>, a procedure where a large number of trees are estimated from random samples of the original data. If a certain split in the original tree is present in all the bootstrapped trees, then we can be confident about this split. Published phylogenies should always include a measure of uncertainty, while for this tutorial you will have to believe me that we are looking at a solid phylogeny…</p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-estimate-a-phylogeny-for-20-mtbc-strains"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Estimate a phylogeny for 20 MTBC strains</div>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/raxml/raxml/8.2.12+galaxy0" title="Phyogenetic reconstruction with RAxML tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Phyogenetic reconstruction with RAxML</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 8.2.12+galaxy0)</span> with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file with aligned sequences”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
-        <li><em>“Model type”</em>: <code class="language-plaintext highlighter-rouge">Nucleotide</code></li>
-        <li><em>“RAxML options to use”</em>: <code class="language-plaintext highlighter-rouge">Required options only</code></li>
-      </ul>
-    </li>
-    <li>
-      <p>The RAxML output we are interested in is the <em>“Best-scoring ML tree”</em>.</p>
-
-      <p>Select it in you Galaxy history and take a look at it with the different <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> visualization options offered by Galaxy.</p>
-
-      <figure id="figure-4" style="max-width: 90%;"><img src="./images/tree_unrooted_galaxy_vis.png" alt="Unrooted tree Galaxy visualization. " width="500" height="746" loading="lazy" /><a target="_blank" href="./images/tree_unrooted_galaxy_vis.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> (Unrooted) RAxML tree in Galaxy's Phylogenetic Tree Visualization</figcaption></figure>
-    </li>
-  </ol>
-
-</blockquote>
-
-<h2 id="visualize-and-manipulate-the-tree">Visualize and manipulate the tree</h2>
-
-<p>Phylogenetic trees are great tools because they are at the same time quantitative (we can do calculations on branch lengths, estimate uncertainty of a tree topology etc.) and visually appealing, allowing to actually “see” biologically interesting patterns. Often this requires some tweaking of the tree, for example by coloring parts of the tree according to some background information we have about the samples.</p>
-
-<p>We will use R to plot and manipulate the phylogeny obtained from RAxML. We will provide you with the exact code to produce the figures we need, and, conveniently, you can run this code from an RStudio session that you can start as an interactive tool inside Galaxy.</p>
+<p>We will use R to estimate a tree from a nucleotide alignment and to plot and manipulate the tree. We will provide you with the exact code to produce the figures we need, and, conveniently, you can run this code from an RStudio session that you can start as an interactive tool inside Galaxy.</p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-can-i-use-my-own-coding-environment"><button class="gtn-boxify-button details" type="button" aria-controls="details-can-i-use-my-own-coding-environment" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Can I use my own coding environment?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>If you have worked with R or RStudio previously, feel free to use any kind of coding environment for exploring and manipulating the RAxML tree we have produced - just download it from your history and import it into any R session you have access to.</p>
+  <p>If you have worked with R or RStudio previously, feel free to use any kind of coding environment for exploring and manipulating the tree - just download it from your history and import it into any R session you have access to.</p>
 
 </blockquote>
 
@@ -1926,7 +1888,7 @@ The above replacement operation, drops these unnecessary endings, which we would
 
   <ol>
     <li>
-      <p>Note the dataset number (the number in front of and separated with a <strong>:</strong> from the dataset name) of the <em>“Best-scoring ML tree”</em> output of RAxML</p>
+      <p>Note the dataset number (the number in front of and separated with a <strong>:</strong> from the dataset name) of the  file called <em>“SNP_alignment.fasta”</em></p>
     </li>
     <li>
       <p>Run <span class="tool" data-tool="interactive_tool_rstudio" title="RStudio tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RStudio</strong></span></p>
@@ -1954,22 +1916,22 @@ The above replacement operation, drops these unnecessary endings, which we would
       </ol>
     </li>
     <li>
-      <p>Import the RAxML *“Best-scoring ML tree into the Rstudio session</p>
+      <p>Import the SNP alignment into the Rstudio session</p>
 
-      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">treefile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gx_get</span><span class="p">(</span><span class="c1">###)</span><span class="w">
+      <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">alignment_file</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gx_get</span><span class="p">(</span><span class="c1">###)</span><span class="w">
 </span></code></pre></div>      </div>
 
-      <p>where you have to replace <code class="language-plaintext highlighter-rouge">###</code> with the dataset number of the RAxML output in your history.</p>
+      <p>where you have to replace <code class="language-plaintext highlighter-rouge">###</code> with the dataset number of the alignment file in your history.</p>
     </li>
   </ol>
 
 </blockquote>
 
-<h2 id="plot-the-raxml-output">Plot the RAxML output</h2>
+<h2 id="estimate-the-tree">Estimate the tree</h2>
 
-<p>We have now set up our R session and are ready to start exploring the tree interactively.</p>
+<p>We have now set up our R session and are ready to start. As a first step we would like to load the alignment into R and infer a tree from it.</p>
 
-<p>As a first step we would like to parse the tree information from the imported dataset and plot the tree.</p>
+<p>In this tutorial, we’ll use the <a href="https://academic.oup.com/mbe/article/4/4/406/1029664">neighbor-joining algorithm</a> to estimate a phylogenetic tree for the 20 strains. The details of how these methods construct trees from an alignment are beyond the scope of this introductory course. To be able to read trees, it is not necessary to know the statistical and computational details of how the trees are estimated. The books listed in the <a href="#resources">Resources</a> section provide in-depth introductions into the different principles of phylogenetic inference, in particular Baum &amp; Smith 2013 and Yang 2014.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
@@ -1979,11 +1941,22 @@ The above replacement operation, drops these unnecessary endings, which we would
 </blockquote>
 
 <blockquote class="hands-on">
-  <div class="box-title hands-on-title" id="hands-on-parse-the-tree-and-plot-it"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Parse the tree and plot it</div>
+  <div class="box-title hands-on-title" id="hands-on-estimate-a-phylogeny-and-plot-it"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Estimate a phylogeny and plot it</div>
 
-  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Parse the tree</span><span class="w">
-</span><span class="n">tree</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.tree</span><span class="p">(</span><span class="n">treefile</span><span class="p">)</span><span class="w">
-</span><span class="c1"># Plot it</span><span class="w">
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Load the alignment</span><span class="w">
+</span><span class="n">aln</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.dna</span><span class="p">(</span><span class="n">alignment_file</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="o">=</span><span class="s2">"fasta"</span><span class="p">)</span><span class="w"> 
+
+</span><span class="c1"># Remove the ugly file extensions from the sample names</span><span class="w">
+</span><span class="n">rownames</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s1">'.fastq.vcf'</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">,</span><span class="w"> </span><span class="n">rownames</span><span class="p">(</span><span class="n">aln</span><span class="p">))</span><span class="w">
+</span><span class="n">rownames</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s1">'.fastq.gz.vcf'</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">,</span><span class="w"> </span><span class="n">rownames</span><span class="p">(</span><span class="n">aln</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># Estimate a distance matrix, showing how many nucleotide differences there are between any two samples</span><span class="w">
+</span><span class="n">dmat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dist.dna</span><span class="p">(</span><span class="n">aln</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="o">=</span><span class="s1">'N'</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Infer the tree from the matrix using neighbor-joining</span><span class="w">
+</span><span class="n">tree</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">nj</span><span class="p">(</span><span class="n">dmat</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Plot the tree</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span><span class="w">
 </span></code></pre></div>  </div>
 
@@ -1991,7 +1964,7 @@ The above replacement operation, drops these unnecessary endings, which we would
     <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
-      <li>Take a look at the tree generated by RAxML. Is it rooted or unrooted? What is the strain far apart from all other strains?</li>
+      <li>Take a look at the tree. Is it rooted or unrooted? What is the strain far apart from all other strains?</li>
     </ol>
 
     <blockquote class="solution">
@@ -2008,6 +1981,8 @@ The above replacement operation, drops these unnecessary endings, which we would
 </blockquote>
 
 <h2 id="root-the-tree">Root the tree</h2>
+
+<p>Phylogenetic trees are great tools because they are at the same time quantitative (we can do calculations on branch lengths, estimate uncertainty of a tree topology etc.) and visually appealing, allowing to actually “see” biologically interesting patterns. Often this requires some tweaking of the tree, for example by coloring parts of the tree according to some background information we have about the samples.</p>
 
 <p>To make the phylogeny more interpretable, we will now root the tree using the <em>M. canettii</em> strain as the outgroup, then exclude that strain, such that patterns <em>within</em> the MTBC become clearer.</p>
 
@@ -2246,102 +2221,64 @@ The above replacement operation, drops these unnecessary endings, which we would
 
 </blockquote>
 
-<h2 id="date-the-phylogeny-advanced">Date the phylogeny (advanced)</h2>
+<h2 id="bootstrapping">Bootstrapping</h2>
 
-<p>As a last exercise, we are going to put a timescale on our phylogeny, assuming that mutations accumulate in a regular, clock-wise manner. In the tree, phylogenetic distance = time*rate. As we know the phylogenetic distance, we can get an estimate of time by assuming a mutation rate. This sounds simple in theory, but will require some big assumptions:</p>
+<p>Before drawing big conclusions from our tree, let us get an idea of how robust it actually is.</p>
 
-<ul>
-  <li>
-    <p>As noted above, the starting alignment only contains variable positions, phylogenetic distances in the trees are thus overestimated. To correct for this, we assume that all other sites in the genome are invariant, and rescale branch lengths according to <code class="language-plaintext highlighter-rouge">rescaled branch lengths = (branch lengths * alignment length) / genome size</code>, as in <span class="citation"><a href="#Menardo2019">Menardo <i>et al.</i> 2019</a></span>.</p>
-  </li>
-  <li>
-    <p>We assume that all strains were sampled at time point 0, in the present.</p>
-  </li>
-  <li>
-    <p>We assume a mutation rate of 2.01e-10 mutations per site per generation (<span class="citation"><a href="#Ford2013">Ford <i>et al.</i> 2013</a></span>)</p>
-  </li>
-  <li>
-    <p>To translate generations into years, we assume 200 generations per year.</p>
-  </li>
-</ul>
+<p>Bootstrapping is a resampling approach that allows us to do that. The basic idea is that we draw sites randomly from our original alignment, and from this “artifical alignment” we estimate a tree. We repeat this procedure 100 times and then ask how many times the same nodes occur in the bootstrap trees. All these steps are conveniently implemented in ape’s boot.phylo() function.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-rescale-branches"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Rescale branches</div>
+  <div class="box-title hands-on-title" id="hands-on-get-bootstrap-support"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Get bootstrap support</div>
 
-  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Rescale branch lengths (here called edge lenghts)</span><span class="w">
-</span><span class="n">genome_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4411532</span><span class="w">
-</span><span class="n">alignment_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18077</span><span class="w">
-</span><span class="n">invariant_sites</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genome_size</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">alignment_length</span><span class="w">
-
-</span><span class="n">tree_rescaled</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tree_rooted</span><span class="w">
-</span><span class="n">tree_rescaled</span><span class="o">$</span><span class="n">edge.length</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">((</span><span class="n">tree_rescaled</span><span class="o">$</span><span class="n">edge.length</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alignment_length</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">genome_size</span><span class="w"> </span><span class="p">)</span><span class="w">
-</span><span class="n">tree_rescaled</span><span class="o">$</span><span class="n">root.edge</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">((</span><span class="n">tree_rescaled</span><span class="o">$</span><span class="n">root.edge</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alignment_length</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">genome_size</span><span class="w"> </span><span class="p">)</span><span class="w">
-
-</span><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">tree_rooted</span><span class="p">,</span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="n">root.edge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"original"</span><span class="p">)</span><span class="w">
-</span><span class="n">axisPhylo</span><span class="p">()</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">tree_rescaled</span><span class="p">,</span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="n">root.edge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"rescaled"</span><span class="p">)</span><span class="w">
-</span><span class="n">axisPhylo</span><span class="p">()</span><span class="w">
+  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Reset graphical device</span><span class="w">
 </span><span class="n">dev.off</span><span class="p">()</span><span class="w">
+
+</span><span class="c1"># Define nr of bootstrap replicates</span><span class="w">
+</span><span class="n">n_replicates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="w">
+
+</span><span class="c1"># Remove the ougroup from the alignment </span><span class="w">
+</span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'ERR313115'</span><span class="w">
+</span><span class="n">aln_rooted</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">aln</span><span class="p">[</span><span class="o">-</span><span class="n">which</span><span class="p">(</span><span class="n">rownames</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">root</span><span class="p">),]</span><span class="w">
+
+</span><span class="c1"># Pack the tree estimation into a single function  </span><span class="w">
+</span><span class="n">f</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">nj</span><span class="p">(</span><span class="n">dist.dna</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="o">=</span><span class="s1">'N'</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># Do the bootstrapping and add the values to the tree</span><span class="w">
+</span><span class="n">tree_rooted</span><span class="o">$</span><span class="n">bootstrap</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">boot.phylo</span><span class="p">(</span><span class="n">tree_rooted</span><span class="p">,</span><span class="w"> </span><span class="n">aln_rooted</span><span class="p">,</span><span class="w"> </span><span class="n">FUN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_replicates</span><span class="p">,</span><span class="w"> </span><span class="n">jumble</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Plot tree with bootstrap values</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">tree_rooted</span><span class="p">,</span><span class="w"> </span><span class="n">root.edge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">add.scale.bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">1.5</span><span class="p">)</span><span class="w">
+</span><span class="n">nodelabels</span><span class="p">(</span><span class="n">tree_rooted</span><span class="o">$</span><span class="n">bootstrap</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="o">=</span><span class="m">2</span><span class="p">)</span><span class="w">
 </span></code></pre></div>  </div>
 
 </blockquote>
-
-<p>Look at the scale bars of the two trees. Accounting for invariable sites has a huge effect on phylogenetic distances!</p>
-
-<p><a href="./images/tree_rescaled.svg" rel="noopener noreferrer"><img src="./images/tree_rescaled.svg" alt="Rescaled phylogeny. " width="436" height="300" loading="lazy" /></a></p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-remove-outliers-perform-dates-estimation-and-plot-with-time-scale"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Remove outliers, perform dates estimation and plot with time-scale</div>
-
-  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Let's also remove the two outlier strains, they would cause troubles and are anyway useless</span><span class="w">
-</span><span class="n">tree_rescaled</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">drop.tip</span><span class="p">(</span><span class="n">tree_rescaled</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"ERR1203059"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ERR5987300"</span><span class="p">))</span><span class="w">
-
-</span><span class="c1"># Estimate dates: translate phylogenetic distance into years by assuming a mutation rate and the number of generations per year</span><span class="w">
-</span><span class="n">mutation_rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.01e-10</span><span class="w">
-</span><span class="n">generations_per_year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span><span class="w">
-
-</span><span class="c1">## Ape has a function, estimate.dates(), to date a tree by assuming a specific mutation rate</span><span class="w">
-</span><span class="n">node.date</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">estimate.dates</span><span class="p">(</span><span class="w">
-  </span><span class="n">tree_rescaled</span><span class="p">,</span><span class="w">
-  </span><span class="n">node.dates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">tree_rescaled</span><span class="o">$</span><span class="n">tip.label</span><span class="p">)),</span><span class="w"> </span><span class="c1"># set sampling dates to 0</span><span class="w">
-  </span><span class="n">mu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">mutation_rate</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">generations_per_year</span><span class="p">)</span><span class="w"> </span><span class="c1"># mutation rate per year</span><span class="w">
-</span><span class="p">)</span><span class="w">
-
-</span><span class="n">tree_rescaled</span><span class="o">$</span><span class="n">edge.length</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">node.date</span><span class="p">[</span><span class="n">tree_rescaled</span><span class="o">$</span><span class="n">edge</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">]]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">node.date</span><span class="p">[</span><span class="n">tree_rescaled</span><span class="o">$</span><span class="n">edge</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]]</span><span class="w">
-</span><span class="n">tree_rescaled</span><span class="o">$</span><span class="n">tip.label</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">mtbc_lineages</span><span class="p">[</span><span class="n">tree_rescaled</span><span class="o">$</span><span class="n">tip.label</span><span class="p">])</span><span class="w">
-
-</span><span class="n">plot</span><span class="p">(</span><span class="n">tree_rescaled</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Dated phylogeny (years)"</span><span class="p">)</span><span class="w">
-</span><span class="n">axisPhylo</span><span class="p">()</span><span class="w">
-</span></code></pre></div>  </div>
-
-</blockquote>
-
-<p><a href="./images/tree_dated.svg" rel="noopener noreferrer"><img src="./images/tree_dated.svg" alt="Dated phylogeny. " width="406" height="333" loading="lazy" /></a></p>
 
 <h2 id="final-exercise">Final exercise</h2>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-exercise-4-advanced"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Exercise 4 (advanced)</div>
+  <div class="box-title question-title" id="question-exercise-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Exercise 4</div>
 
   <ol>
     <li>
-      <p>What could be the problem with the assumption that all sites in the reference genome which do not appear in our SNP alignment are invariable?</p>
+      <p>Is our tree robust?</p>
     </li>
     <li>
-      <p>Imagine that a recent breakthrough study has found that the mutation rate in MTB is 10 times higher than we assumed. How would this change the estimated dates?</p>
+      <p>In what context would you expect phylogenetic trees with poor bootstrap support?</p>
     </li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
+    <p><a href="./images/tree_bootstrap.svg" rel="noopener noreferrer"><img src="./images/tree_bootstrap.svg" alt="Bootstrap support. " width="1041" height="762" loading="lazy" /></a></p>
+
     <ol>
       <li>
-        <p>About 5 % of the MTB reference genome consists of repetitive or otherwise complicated regions where mapping and SNP calling cannot be done reliably. Most SNP calling pipelines exclude such regions, also the one used in this course. Rather than to assume that these regions are invariant, we should ignore them in our calculations. By not doing this, genomes seem more similar than they are; we underestimate phylogenetic distances.</p>
+        <p>Yes, bootstrap values are generally high: a value of 99, for example, means that in 99 out of 100 bootstrap replicates the same split was observed. Only among the highly similar L2 strains there is some uncertainty.</p>
       </li>
       <li>
-        <p>A rate 10 times higher implies that there will be 10 times more mutations observed in the same time span, or, the other way around, that it will take a time span 10 times shorter to observe the same number of mutations. The timescale of the phylogeny would thus shift one order of magnitude, to hundreds rather than thousands of years. As this example shows, there are considerable uncertainties associated with molecular dating. This is also true for more sophisticated methods (see <span class="citation"><a href="#Menardo2019">Menardo <i>et al.</i> 2019</a></span> for a recent discussion of molecular dating with MTB).</p>
+        <p>When analyzing a set of highly similar strains, for example in the context of a TB outbreak, bootstrap values can be low and patterns should be interpreted with care. Imagine, for example, that our dataset consisted of 20 L2 strains that differ from each other only by few or single SNPs.</p>
       </li>
     </ol>
 
@@ -2419,10 +2356,8 @@ The above replacement operation, drops these unnecessary endings, which we would
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li id="Ford2013">Ford, C. B., R. R. Shah, M. K. Maeda, S. Gagneux, M. B. Murray <i>et al.</i>, 2013 <b>Mycobacterium tuberculosis mutation rate estimates from different lineages predict substantial differences in the emergence of drug-resistant tuberculosis</b>. Nature Genetics 45: 784–790. <a href="https://doi.org/10.1038/ng.2656">10.1038/ng.2656</a></li>
-<li id="Eldholm2016">Eldholm, V., J. H.-O. Pettersson, O. B. Brynildsrud, A. Kitchen, E. M. Rasmussen <i>et al.</i>, 2016 <b>Armed conflict and population displacement as drivers of the evolution and dispersal of \lessi\greaterMycobacterium tuberculosis\less/i\greater</b>. Proceedings of the National Academy of Sciences 113: 13881–13886. <a href="https://doi.org/10.1073/pnas.1611283113">10.1073/pnas.1611283113</a></li>
+                <ol class="bibliography"><li id="Eldholm2016">Eldholm, V., J. H.-O. Pettersson, O. B. Brynildsrud, A. Kitchen, E. M. Rasmussen <i>et al.</i>, 2016 <b>Armed conflict and population displacement as drivers of the evolution and dispersal of \lessi\greaterMycobacterium tuberculosis\less/i\greater</b>. Proceedings of the National Academy of Sciences 113: 13881–13886. <a href="https://doi.org/10.1073/pnas.1611283113">10.1073/pnas.1611283113</a></li>
 <li id="Goig2018">Goig, G. A., S. Blanco, A. L. Garcia-Basteiro, and I. Comas, 2018 <b>Contaminant DNA in bacterial sequencing experiments is a major source of false genetic variability</b>. <a href="https://doi.org/10.1101/403824">10.1101/403824</a></li>
-<li id="Menardo2019">Menardo, F., S. Duchêne, D. Brites, and S. Gagneux, 2019 <b>The molecular clock of Mycobacterium tuberculosis</b> (R. Biek, Ed.). PLOS Pathogens 15: e1008067. <a href="https://doi.org/10.1371/journal.ppat.1008067">10.1371/journal.ppat.1008067</a></li>
 <li id="Zhou2021">Zhou, Z., J. Charlesworth, and M. Achtman, 2021 <b>HierCC: a multi-level clustering scheme for population assignments based on core genome MLST</b> (J. Kelso, Ed.). Bioinformatics 37: 3645–3646. <a href="https://doi.org/10.1093/bioinformatics/btab234">10.1093/bioinformatics/btab234</a></li></ol>
                 
 
@@ -2526,11 +2461,6 @@ install_tool_dependencies: true
 install_repository_dependencies: true
 install_resolver_dependencies: true
 tools:
-- name: raxml
-  owner: iuc
-  revisions: ea30d3089354
-  tool_panel_section_label: Phylogenetics
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: raxml
   owner: iuc
   revisions: 73a469f7dc96
@@ -2682,7 +2612,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/dca1195b6910428d1976a023b69695d74e03d65f">dca1195</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/3039c89b8bd186e2c072d57dae7e41e09787c082">3039c89</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
