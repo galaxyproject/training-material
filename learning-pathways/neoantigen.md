@@ -5,7 +5,7 @@ type: use
 
 
 
-title: Prediction of potential neoantigens
+title: Neoantigen discovery using the iPepGen pipeline
 description: |
   This learning path introduces a comprehensive immunopeptidogenomics workflow for neoantigen discovery using label-free mass spectrometry data. The modules guide you through fusion and variant database generation, peptide identification with FragPipe, peptide validation using PepQuery2, and immunogenicity assessment through HLA binding predictions and IEDB screening.
 
@@ -16,49 +16,49 @@ editorial_board:
 - subinamehta
 
 pathway:
-  - section: "Module 1: Fusion-Database Generation"
+  - section: "Module 1a: Fusion-Database Generation"
     description: |
       Learn how to generate a personalized fusion peptide database using RNA-seq data. This step sets the foundation for identifying tumor-specific fusion peptides in downstream analyses.
     tutorials:
       - name: neoantigen-1-fusion-database-generation
         topic: proteomics
 
-  - section: "Module 2: Non-Reference Database Generation"
+  - section: "Module 1b: Non-Reference Database Generation"
     description: |
       Construct a non-reference proteogenomic database incorporating somatic mutations, indels, and other genomic alterations from VCF data.
     tutorials:
       - name: neoantigen-2-non-reference-database-generation
         topic: proteomics
 
-  - section: "Module 3: Database Merge and FragPipe Discovery"
+  - section: "Module 2: Discover candidate neoantigen peptide sequences and tumor-associated antigens"
     description: |
       Merge the fusion and non-reference databases, then use FragPipe for mass spectrometry-based discovery of putative neopeptides.
     tutorials:
       - name: neoantigen-3-fragpipe-discovery
         topic: proteomics
 
-  - section: "Module 4: PepQuery2 Verification"
+  - section: "Module 3: Verify PSMs for neoantigen candidates"
     description: |
       Perform targeted verification of neoantigen candidates using PepQuery2 for peptide-spectrum match validation.
     tutorials:
       - name: neoantigen-4-peptide-verification
         topic: proteomics
 
-  - section: "Module 5: Variant Annotation"
+  - section: "Module 4: Visualize and classify verified neoantigen sequences"
     description: |
       Annotate validated neopeptides with their corresponding genomic variants and protein context.
     tutorials:
       - name: neoantigen-5-variant-annotation
         topic: proteomics
 
-  - section: "Module 6: Predicting HLA Binding"
+  - section: "Module 5a: Predicting HLA Binding"
     description: |
       Predict MHC binding affinity of validated neopeptides using tools such as NetMHCpan or similar.
     tutorials:
       - name: neoantigen-6-predicting-hla-binding
         topic: proteomics
 
-  - section: "Module 7: IEDB Binding of PepQuery Validated Neopeptides"
+  - section: "Module 5b: IEDB Binding of PepQuery Validated Neopeptides"
     description: |
       Assess the immunogenic potential of neopeptides by checking their binding predictions against immune epitope databases such as IEDB.
     tutorials:
