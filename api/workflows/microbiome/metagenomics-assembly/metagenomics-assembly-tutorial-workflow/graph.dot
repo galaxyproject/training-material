@@ -1,31 +1,42 @@
 digraph main {
   node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
   edge [fontname="Atkinson Hyperlegible"];
-  0[color=lightblue,label="ℹ️ Input Collection\nInput Dataset Collection"]
+  0[color=lightblue,label="ℹ️ Input Collection\nQC controlled reads"]
   1[label="metaSPAdes"]
   0 -> 1 [label="output"]
-  k833d79ffe16f414c9c41db8dbfa8ed6b[color=lightseagreen,label="Output\nmetaSPAdes on input dataset(s): Scaffolds"]
-  1 -> k833d79ffe16f414c9c41db8dbfa8ed6b
-  k10319152d2f947d8be41f956a57e86d3[color=lightseagreen,label="Output\nmetaSPAdes on input dataset(s): Assembly graph"]
-  1 -> k10319152d2f947d8be41f956a57e86d3
-  kb1ffc3a48e394255ac57fd7cfb9c1633[color=lightseagreen,label="Output\nmetaSPAdes on input dataset(s): Assembly graph with scaffolds"]
-  1 -> kb1ffc3a48e394255ac57fd7cfb9c1633
-  kb6b74c9d5a164725a1d111c1f05ee909[color=lightseagreen,label="Output\nmetaSPAdes on input dataset(s): Contigs"]
-  1 -> kb6b74c9d5a164725a1d111c1f05ee909
+  kba8ef041cea5479a8aab38b3d6f0af60[color=lightseagreen,label="Output\nout_ag"]
+  1 -> kba8ef041cea5479a8aab38b3d6f0af60
+  kc3b9a23494d245798eba895e7e49e129[color=lightseagreen,label="Output\nout_ags"]
+  1 -> kc3b9a23494d245798eba895e7e49e129
   2[label="MEGAHIT"]
   0 -> 2 [label="output"]
+  k759ce084a80b4a04b74e6e387357e25a[color=lightseagreen,label="Output\noutput"]
+  2 -> k759ce084a80b4a04b74e6e387357e25a
   3[label="Bowtie2"]
   0 -> 3 [label="output"]
   2 -> 3 [label="output"]
-  4[label="megahit contig2fastg"]
+  k95b806c753ee4a788e24a5794c9c220a[color=lightseagreen,label="Output\nmapping_stats"]
+  3 -> k95b806c753ee4a788e24a5794c9c220a
+  4[label="CoverM contig"]
+  0 -> 4 [label="output"]
   2 -> 4 [label="output"]
+  k51a8a5a9b3bb43b980e57ec7b84a6cd5[color=lightseagreen,label="Output\noutput"]
+  4 -> k51a8a5a9b3bb43b980e57ec7b84a6cd5
   5[label="Quast"]
   2 -> 5 [label="output"]
   0 -> 5 [label="output"]
-  6[label="Bandage Image"]
-  4 -> 6 [label="fastg"]
-  7[label="Bandage Info"]
-  4 -> 7 [label="fastg"]
-  8[label="Column join"]
-  7 -> 8 [label="outfile"]
+  k5553b6a6863d4846944f7ed609a3734a[color=lightseagreen,label="Output\nreport_html_meta"]
+  5 -> k5553b6a6863d4846944f7ed609a3734a
+  6[label="megahit contig2fastg"]
+  2 -> 6 [label="output"]
+  7[label="Bandage Image"]
+  6 -> 7 [label="fastg"]
+  k63861d0be0a64604bd091b0f7ee9d54b[color=lightseagreen,label="Output\noutfile"]
+  7 -> k63861d0be0a64604bd091b0f7ee9d54b
+  8[label="Bandage Info"]
+  6 -> 8 [label="fastg"]
+  9[label="Column join"]
+  8 -> 9 [label="outfile"]
+  kc882d313508440d48c979552fb7b35ad[color=lightseagreen,label="Output\ntabular_output"]
+  9 -> kc882d313508440d48c979552fb7b35ad
 }

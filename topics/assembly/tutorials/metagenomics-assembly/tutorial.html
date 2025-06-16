@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@5322fb17df56ef0b9c93bf3683b6c170f378b6d3",
+		release: "galaxy-training-network@9d0cdc42ec41f6893b027bea752a5a42d419e8cf",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Assembly of metagenomic sequencing data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-06-16 06:56:38 +0000">
+<meta name="DC.date" content="2025-06-16 07:13:52 +0000">
 <meta name="DC.creator" content="Polina Polunina">
 <meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -189,8 +189,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-06-16 06:56:38 +0000",
-  "datePublished": "2025-06-16 06:56:38 +0000",
+  "dateModified": "2025-06-16 07:13:52 +0000",
+  "datePublished": "2025-06-16 07:13:52 +0000",
   "copyrightHolder": {
     "@type": "Organization",
     "http://purl.org/dc/terms/conformsTo": {
@@ -270,14 +270,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/metagenomics-assembly/tutorial.html",
   "version": 0,
   "timeRequired": "PT2H",
-  "teaches": "- Describe what an assembly is\n- Describe what de-replication is\n- Explain the difference between co-assembly and individual assembly\n- Explain the difference between reads, contigs and scaffolds\n- Explain how tools based on De Bruijn graph work\n- Apply appropriate tools for analyzing the quality of metagenomic data\n- Construct and apply simple assembly pipelines on short read data\n- Apply appropriate tools for analyzing the quality of metagenomic assembly\n- Evaluate the Quality of the Assembly with Quast, Bowtie2, and CoverM-Genome",
+  "teaches": "- Describe what an assembly is\n- Describe what de-replication is\n- Explain the difference between co-assembly and individual assembly\n- Explain the difference between reads, contigs and scaffolds\n- Explain how tools based on De Bruijn graph work\n- Apply appropriate tools for analyzing the quality of metagenomic data\n- Construct and apply simple assembly pipelines on short read data\n- Apply appropriate tools for analyzing the quality of metagenomic assembly\n- Evaluate the Quality of the Assembly with Quast, Bowtie2, and CoverM-Contig",
   "keywords": [
     "Assembly",
     "assembly",
     "metagenomics",
     "microgalaxy"
   ],
-  "description": "## Abstract\n\nMetagenomics involves the extraction, sequencing and analysis of combined genomic DNA from **entire microbiome** samples. It includes then DNA from **many different organisms**, with different taxonomic background.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - Why metagenomic data should be assembled?\n - What is the difference between co-assembly and individual assembly?\n - What is the difference between reads, contigs and scaffolds?\n - How tools based on De Bruijn graph work?\n - How to assess the quality of metagenomic data assembly?\n\n\n## Learning Objectives\n\n- Describe what an assembly is\n- Describe what de-replication is\n- Explain the difference between co-assembly and individual assembly\n- Explain the difference between reads, contigs and scaffolds\n- Explain how tools based on De Bruijn graph work\n- Apply appropriate tools for analyzing the quality of metagenomic data\n- Construct and apply simple assembly pipelines on short read data\n- Apply appropriate tools for analyzing the quality of metagenomic assembly\n- Evaluate the Quality of the Assembly with Quast, Bowtie2, and CoverM-Genome\n\n",
+  "description": "## Abstract\n\nMetagenomics involves the extraction, sequencing and analysis of combined genomic DNA from **entire microbiome** samples. It includes then DNA from **many different organisms**, with different taxonomic background.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - Why metagenomic data should be assembled?\n - What is the difference between co-assembly and individual assembly?\n - What is the difference between reads, contigs and scaffolds?\n - How tools based on De Bruijn graph work?\n - How to assess the quality of metagenomic data assembly?\n\n\n## Learning Objectives\n\n- Describe what an assembly is\n- Describe what de-replication is\n- Explain the difference between co-assembly and individual assembly\n- Explain the difference between reads, contigs and scaffolds\n- Explain how tools based on De Bruijn graph work\n- Apply appropriate tools for analyzing the quality of metagenomic data\n- Construct and apply simple assembly pipelines on short read data\n- Apply appropriate tools for analyzing the quality of metagenomic assembly\n- Evaluate the Quality of the Assembly with Quast, Bowtie2, and CoverM-Contig\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -583,6 +583,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "@type": "Thing",
       "url": "https://bio.tools/tool/bandage",
       "name": "Bandage"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/coverm",
+      "name": "CoverM"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/megahit",
+      "name": "MEGAHIT"
     },
     {
       "@type": "Thing",
@@ -897,7 +907,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <li><p>Apply appropriate tools for analyzing the quality of metagenomic assembly</p>
 </li>
         
-        <li><p>Evaluate the Quality of the Assembly with Quast, Bowtie2, and CoverM-Genome</p>
+        <li><p>Evaluate the Quality of the Assembly with Quast, Bowtie2, and CoverM-Contig</p>
 </li>
         
         </ul>
@@ -1369,7 +1379,7 @@ https://zenodo.org/record/7818827/files/ERR2231572_2.fastqsanger.gz
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-individual-assembly-of-short-reads-with-megahit"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Individual assembly of short-reads with MEGAHIT</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0" title="MEGAHIT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MEGAHIT</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.9+galaxy0)</span> with parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy2" title="MEGAHIT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MEGAHIT</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.9+galaxy2)</span> with parameters:
       <ul>
         <li><em>“Select your input option”</em>: <code class="language-plaintext highlighter-rouge">Paired-end collection</code>
           <ul>
@@ -1464,7 +1474,7 @@ https://zenodo.org/record/7818827/files/contigs_ERR2231572.fasta
     <div class="box-title hands-on-title" id="hands-on-assembly-with-metaspades"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Assembly with MetaSPAdes</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+galaxy2" title="MetaSPAdes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MetaSPAdes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.15.4+galaxy2)</span> with following parameters
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/4.2.0+galaxy0" title="MetaSPAdes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MetaSPAdes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.2.0+galaxy0)</span> with following parameters
         <ul>
           <li><em>“Pair-end reads input format”</em>: <code class="language-plaintext highlighter-rouge">Paired-end: list of dataset pairs</code>
             <ul>
@@ -1577,8 +1587,8 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
             <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
-              <li>The genome fraction is 30.22% for ERR2231568 and 58.73% for ERR2231572</li>
-              <li>The highest genome fraction was found for <em>Leuconostoc pseudomesenteroides</em> for ERR2231568 (84.4%) and for <em>Lactobacillus</em> for ERR2231572 (91%). The genomes of <em>Leuconostoc pseudomesenteroides</em> and <em>Lactobacillus</em> could be then almost completely recovered from the assemblies of ERR2231568 and ERR2231572 respectively.</li>
+              <li>The genome fraction is 29.429% for ERR2231568 and 60.463% for ERR2231572</li>
+              <li>The highest genome fraction was found for <em>Leuconostoc pseudomesenteroides</em> for ERR2231568 (84.2%) and for <em>Lactobacillus vaccinostercus</em> for ERR2231572 (92.2%). The genomes of <em>Leuconostoc pseudomesenteroides</em> and <em>Lactobacillus vaccinostercus</em> could be then almost completely recovered from the assemblies of ERR2231568 and ERR2231572 respectively.</li>
             </ol>
 
           </blockquote>
@@ -1602,8 +1612,8 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
             <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
-              <li>The duplication ratio is 1.068 for ERR2231568 and 1.1 for ERR2231572 (column ERR2231572 in ERR2231572 report)</li>
-              <li>The highest duplication ratio was found for <em>Gluconobacter kondonii</em> for ERR2231568 (1.156) and for <em>Lactobacillus brevis KB290</em> for ERR2231572 (1.178).</li>
+              <li>The duplication ratio is 1.062 for ERR2231568 and 1.112 for ERR2231572 (column ERR2231572 in ERR2231572 report)</li>
+              <li>The highest duplication ratio was found for <em>Gluconobacter oxydans</em> for ERR2231568 (1.156) and for <em>Lactobacillus pseudomesenteroides</em> for ERR2231572 (1.204).</li>
             </ol>
 
           </blockquote>
@@ -1628,7 +1638,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
 
         <ol>
           <li>79.47% of ERR2231568 raw reads were mapped to ERR2231568 assembly and 86.98% of ERR2231572 raw reads to ERR2231572 assembly.</li>
-          <li>79.47% of reads were used to the assemblies for ERR2231568 and  86.97% for ERR2231572.</li>
+          <li>79.47% of reads were used to the assemblies for ERR2231568 and  86.98% for ERR2231572.</li>
         </ol>
       </blockquote>
 
@@ -1646,18 +1656,49 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
             <div class="box-title hands-on-title" id="hands-on-calculate-coverage-using-coverm"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Calculate coverage using CoverM</div>
 
             <ol>
-              <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.2.1" title="CoverM-CONTIG tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>CoverM-CONTIG</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.1)</span> with parameters:
+              <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.7.0+galaxy0" title="CoverM contig tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>CoverM contig</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.0+galaxy0)</span> with parameters:
                 <ul>
-                  <li><em>“Read type”</em>: <code class="language-plaintext highlighter-rouge">Paired collection</code>
+                  <li><em>“Have the reads already been mapped to contigs?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
                     <ul>
-                      <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“One or more pairs of forward and reverse possibly gzipped FASTA/Q files for mapping in order”</em>: <code class="language-plaintext highlighter-rouge">Raw reads</code></li>
+                      <li><em>“Assembly mode?”</em>: <code class="language-plaintext highlighter-rouge">Individual assembly (1 contig file per sample)</code>
+                        <ul>
+                          <li><em>“Read type”</em>: <code class="language-plaintext highlighter-rouge">Paired collection</code>
+                            <ul>
+                              <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of paired-end FASTA/Q files(s) for mapping”</em>: <code class="language-plaintext highlighter-rouge">Raw reads</code></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
                     </ul>
                   </li>
-                  <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span>  <em>“FASTA file(s) of contigs”</em>: output of MEGAGIT</li>
+                  <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Contigs”</em>: output of MEGAGIT</li>
                 </ul>
               </li>
-              <li>Inspect the HTML report for ERR2231568</li>
+              <li>Open the <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">dataset-info</span> “Dataset details” for ERR2231568</li>
+              <li>Expand the <code class="language-plaintext highlighter-rouge">Tool Standard Error</code></li>
             </ol>
+          </blockquote>
+
+          <blockquote class="question">
+            <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+            <ol>
+              <li>What is the overall alignment rate for ERR2231568</li>
+              <li>What is the percentage of reads used in assemblies for ERR2231568?</li>
+              <li>Are the results similar to the ones in QUAST report?</li>
+            </ol>
+
+            <blockquote class="solution">
+              <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+              <ol>
+                <li>The overall alignment rate for ERR2231567 is 75.48%</li>
+                <li>75.48% of the reads were used in assemblies for ERR2231567 and 73.67% for ERR2231571.</li>
+                <li>Slighlty lower results that the ones found by QUAST (79.47% for ERR2231568)</li>
+              </ol>
+
+            </blockquote>
+
           </blockquote>
         </li>
         <li>
@@ -1667,7 +1708,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
             <div class="box-title hands-on-title" id="hands-on-computation-of-the-reads-used-in-assemblies"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Computation of the % reads used in assemblies</div>
 
             <ol>
-              <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0" title="Bowtie2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bowtie2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.5.0+galaxy0)</span> with the following parameters:
+              <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.3+galaxy1" title="Bowtie2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bowtie2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.5.3+galaxy1)</span> with the following parameters:
                 <ul>
                   <li><em>“Is this single or paired library”</em>: <code class="language-plaintext highlighter-rouge">Paired-end Dataset Collection</code>
                     <ul>
@@ -1687,19 +1728,21 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </blockquote>
 
           <blockquote class="question">
-            <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+            <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
             <ol>
-              <li>What is the overall alignment rate for ERR2231567? and ERR2231571?</li>
-              <li>What is the percentage of reads used in assemblies for ERR2231567? and ERR2231571?</li>
+              <li>What is the overall alignment rate for ERR2231568? and ERR2231572?</li>
+              <li>What is the percentage of reads used in assemblies for ERR2231568? and ERR2231571?</li>
+              <li>Are the results similar to the ones in QUAST report?</li>
             </ol>
 
             <blockquote class="solution">
-              <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+              <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
               <ol>
-                <li>The overall alignment rate for ERR2231567 is 65.97% and 73.67% for ERR2231571</li>
-                <li>65.97% of the reads were used in assemblies for ERR2231567 and 73.67% for ERR2231571.</li>
+                <li>The overall alignment rate for ERR2231568 is 65.67% and 78.42% for ERR2231572.</li>
+                <li>65.97% of the reads were used in assemblies for ERR2231568 and 78.42% for ERR2231572.</li>
+                <li>Lower results that the ones found by QUAST (79.47% for ERR2231568, 86.98%  for ERR2231572)</li>
               </ol>
 
             </blockquote>
@@ -1726,7 +1769,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         <figure id="figure-6" style="max-width: 90%;"><div style="overflow-x: auto"><object data="./images/relocation.svg" width="80%" type="image/svg+xml" alt="Image shows on the top a contig with a blue and a gren parts with white arrows (pointing on the right) on them and below a reference with 2 chromosomes. The 3 types of misassemblies are after schematized. Relocation: the blue and gren parts of the contig are on chr 1 but separated. Inversion: the blue and gren parts of the contig are on chr 1 but separated and with the arrows facing each other. Translocation: the blue part is on chr 1 and gren part on chr 2.">Image shows on the top a contig with a blue and a gren parts with white arrows (pointing on the right) on them and below a reference with 2 chromosomes. The 3 types of misassemblies are after schematized. Relocation: the blue and gren parts of the contig are on chr 1 but separated. Inversion: the blue and gren parts of the contig are on chr 1 but separated and with the arrows facing each other. Translocation: the blue part is on chr 1 and gren part on chr 2.</object></div><a target="_blank" href="./images/relocation.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Source: <a href="https://blog.pierre.marijon.fr/misassemblies-in-noisy-assemblies/">Yet Another Bioinformatic blog by Pierre Marijon</a></figcaption></figure>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+          <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>How many relocations has been found for ERR2231568? And for ERR2231572?</li>
@@ -1734,11 +1777,11 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
-              <li>78 for ERR2231568 and 151 for ERR2231572</li>
-              <li><em>Leuconostoc pseudomesenteroides</em> and <em>Tatumella morbirosei</em> for ERR2231568 and <em>Lactobacillus plantarum argentoratensis</em> for ERR2231572</li>
+              <li>83 for ERR2231568 and 159 for ERR2231572</li>
+              <li><em>Leuconostoc pseudomesenteroides</em> and <em>Tatumella morbirosei</em> for ERR2231568 and <em>Lactobacillus hordei</em> for ERR2231572</li>
             </ol>
           </blockquote>
 
@@ -1748,7 +1791,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         <p><strong>Translocation</strong> occur when a contig has mapped on more than one reference chromosomes</p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+          <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>How many translocations has been found for ERR2231568? And for ERR2231572?</li>
@@ -1758,13 +1801,13 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
-              <li>25 for ERR2231568 and 55 for ERR2231572.</li>
+              <li>30 for ERR2231568 and 90 for ERR2231572.</li>
               <li><em>Leuconostoc pseudomesenteroides</em> for ERR2231568 and <em>Lactobacillus vaccinostercus</em> for ERR2231572.</li>
               <li>Interspecies translocations are translocations where a contig has mapped on different reference genomes.</li>
-              <li>80 for ERR2231568 and 144 for ERR2231572.</li>
+              <li>114 for ERR2231568 and 85 for ERR2231572.</li>
             </ol>
           </blockquote>
 
@@ -1774,7 +1817,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         <p><strong>Inversion</strong> occurs when a contig has two consecutive mappings on the same chromosome but in different strands</p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+          <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>How many inversion has been found for ERR2231568? And for ERR2231572?</li>
@@ -1782,11 +1825,11 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
-              <li>4 for ERR2231568 and 6 for ERR2231572.</li>
-              <li><em>Tatumella morbirosei</em> for ERR2231568 and <em>Lactobacillus sp</em> for ERR2231572.</li>
+              <li>4 for ERR2231568 and 9 for ERR2231572.</li>
+              <li><em>Tatumella morbirosei</em> for ERR2231568 and <em>Lactobacillus plantarum</em> for ERR2231572.</li>
             </ol>
           </blockquote>
 
@@ -1798,7 +1841,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
     <p><strong>Mismatches</strong> or mismatched bases in the contig-reference alignment</p>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+      <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
       <ol>
         <li>How many mismatches have been identified for ERR2231568? And for ERR2231572?</li>
@@ -1806,11 +1849,11 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
-          <li>503,352 for ERR2231568 and 287,270 for ERR2231572.</li>
-          <li><em>Pantoea rwandensis</em> for ERR2231568 and <em>Leuconostoc brevis KB290</em> for ERR2231572.</li>
+          <li>469,292 for ERR2231568 and 279,694 for ERR2231572.</li>
+          <li><em>Pantoea rwandensis</em> for ERR2231568 and <em>Leuconostoc pseudomesenteroides</em> for ERR2231572.</li>
         </ol>
       </blockquote>
 
@@ -1824,7 +1867,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         <p><strong># contigs</strong>: total number of contigs</p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+          <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>How many contigs are for ERR2231568? And for ERR2231572?</li>
@@ -1835,14 +1878,14 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>66,434 contigs for ERR2231568 and 36,112 for ERR2231572.</li>
               <li>In the outputs of MEGAHIT, there are 228,719 contigs for ERR2231568 and 122,526 contigs.</li>
               <li>The numbers are lower in the metaQUAST results because metaQUAST reports there only the contigs longer than 500bp.</li>
               <li>The <strong># contigs (&gt;= 0 bp)</strong></li>
-              <li>Except the non aligned contigs, <em>Tatumella morbirosei</em> for ERR2231568 and <em>Leuconostoc brevis KB290</em> for ERR2231572.</li>
+              <li>Except the non aligned contigs, <em>Tatumella morbirosei</em> for ERR2231568 and <em>Leuconostoc brevis</em> for ERR2231572.</li>
             </ol>
           </blockquote>
 
@@ -1852,7 +1895,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         <p><strong>Largest contig</strong>: length of the longest contig in the assembly</p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+          <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>What is the length of the longest contig in ERR2231568? And in ERR2231572?</li>
@@ -1860,11 +1903,11 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>63,871 bp in ERR2231568 and 65,608 for ERR2231572.</li>
-              <li>It is assigned to <em>Leuconostoc pseudomesenteroides KCTC 3652</em> in ERR2231568 and not assigned in ERR2231572.</li>
+              <li>It is assigned to <em>Leuconostoc pseudomesenteroides KCTC 3652</em> in ERR2231568 and not assigned (<code class="language-plaintext highlighter-rouge">not_aligned</code>) in ERR2231572.</li>
             </ol>
           </blockquote>
 
@@ -1884,7 +1927,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         </ul>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+          <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>What is N50 for ERR2231568? And for ERR2231572?</li>
@@ -1892,7 +1935,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>921 for ERR2231568 and 1,233 for ERR2231572.</li>
@@ -1920,14 +1963,14 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         <p>If we take the previous example in N50, L50 = 3.</p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+          <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>What is the L50 for ERR2231568? And for ERR2231572?</li>
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>17,280 for ERR2231568 and 7,496 for ERR2231572.</li>
@@ -1949,7 +1992,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
 <p>This viewer draws contigs ordered from longest to shortest. Let’s inspect this viewer for ERR2231568.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-14"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Open the Contig size viewer for ERR2231568 and define start as <code class="language-plaintext highlighter-rouge">0</code> and end as <code class="language-plaintext highlighter-rouge">500000</code></p>
 
@@ -1961,7 +2004,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The first contig is white because &gt;50% of the contigs is unaligned. By clicking on the contig, we see that only a small block is aligned: 223.41 – 223.65 kbp to Leuconostoc_pseudomesenteroides_KCTC_3652_NZ_BMBP01000002.1.</li>
@@ -2015,7 +2058,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
 <p>When clicking on the genome name, the contigs are displayed according to their mapping to the reference genome. The viewer can additionally visualize genes, operons, and read coverage distribution along the genome, if any of those were fed to QUAST.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-14"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Open the Contig alignment viewer for ERR2231568 and <em>Leuconostoc pseudomesenteroides</em> KCTC 3652, the most covered by contigs</p>
 
@@ -2029,12 +2072,12 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The contigs are displayed based on their mapping on the reference genome of <em>Leuconostoc pseudomesenteroides</em> KCTC 3652</li>
       <li>The different colors represent the different status for the contig: correct contigs, correct contigs but with &gt;50% of the contig unaligned, misassembled blocks. unchecked misassembled blocks, ambiguously mapped contigs, alternative blocks of misassembled contigs, etc.</li>
-      <li>The big red block on the right is contig k91_88833 with a misassembly on the left side, and overlap with 2 other contigs</li>
+      <li>The big red block on the right is contig k91_183138 with a misassembly on the left side, and overlap with 2 other contigs</li>
       <li>The graph on the bottom represents the GC percentage and coverage by contigs along the reference genome</li>
     </ol>
   </blockquote>
@@ -2082,7 +2125,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
     </ol>
   </blockquote>
 
-  <figure id="figure-7" style="max-width: 90%;"><img src="./images/ERR2231571_graph.jpg" alt="Image shows the assembly graphs, with longer stretch on the top and many small contigs on the bottom. " width="1292" height="1000" loading="lazy" /><a target="_blank" href="./images/ERR2231571_graph.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Assembly graph for ERR2231571 sample</figcaption></figure>
+  <figure id="figure-7" style="max-width: 90%;"><img src="./images/ERR2231571_graph.jpg" alt="Image shows the assembly graphs, with longer stretch on the top and many small contigs on the bottom. " width="1294" height="1000" loading="lazy" /><a target="_blank" href="./images/ERR2231571_graph.jpg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Assembly graph for ERR2231571 sample</figcaption></figure>
 
   <p>The graph is quite disconnected. On the top, we can see the longer stretches, that includes multiples contigs (each contig having a different color). On the bottom are the shortest stretches or single contigs.</p>
 
@@ -2107,7 +2150,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
   </blockquote>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+    <div class="box-title question-title" id="question-16"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>How many nodes are in the graph for ERR2231568? And for ERR2231572? What does they correspond to?</li>
@@ -2120,7 +2163,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>There are 228,719 nodes for ERR2231568 and 122,526 for ERR2231572. They correspond to the number of contigs</li>
@@ -2417,7 +2460,7 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: bowtie2
   owner: devteam
-  revisions: 03e9b2fbc005
+  revisions: d5ceb9f3c25b
   tool_panel_section_label: Mapping
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: fastqc
@@ -2442,7 +2485,7 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: coverm_contig
   owner: iuc
-  revisions: 6941d0d453ba
+  revisions: 28d740f2c0b0
   tool_panel_section_label: Metagenomic Analysis
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: filter_tabular
@@ -2453,6 +2496,11 @@ tools:
 - name: megahit
   owner: iuc
   revisions: 14ddfc8ffb93
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: megahit
+  owner: iuc
+  revisions: ab208c87d973
   tool_panel_section_label: Assembly
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: megahit_contig2fastg
@@ -2467,12 +2515,12 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: quast
   owner: iuc
-  revisions: 3061c8b029e5
+  revisions: 72472698a2df
   tool_panel_section_label: Assembly
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: quast
   owner: iuc
-  revisions: 72472698a2df
+  revisions: a3b35edea53a
   tool_panel_section_label: Assembly
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: seqtk
@@ -2487,7 +2535,7 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: metaspades
   owner: nml
-  revisions: fd128c111ab0
+  revisions: f192c2fbe13f
   tool_panel_section_label: Assembly
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 </code></pre></div>
@@ -2636,7 +2684,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/5322fb17df56ef0b9c93bf3683b6c170f378b6d3">5322fb1</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9d0cdc42ec41f6893b027bea752a5a42d419e8cf">9d0cdc4</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
