@@ -155,7 +155,7 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 
 > <hands-on-title>Quality control</hands-on-title>
 >
-> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1) %} with the following parameters:
 >       - {% icon param-files %} *"Short read data from your current history"*: both `T1A_forward` and `T1A_reverse` datasets selected with **Multiple datasets**
 >
 >    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
@@ -174,7 +174,7 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 >    >
 >    {: .question}
 >
-> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters to aggregate the FastQC reports:
+> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy3) %} with the following parameters to aggregate the FastQC reports:
 >      - In *"Results"*
 >        - *"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
@@ -269,25 +269,36 @@ Even though our data is already of pretty high quality, we can improve it even m
 
 There are several tools out there that can perform these steps, but in this analysis we use **Cutadapt** ({% cite martin2011cutadapt %}).
 
-**Cutadapt** also helps find and remove adapter sequences, primers, poly-A tails and/or other unwanted sequences from the input FASTQ files. It trims the input reads by finding the adapter or primer sequences in an error-tolerant way. Additional features include modifying and filtering reads.
+**Cutadapt** also helps find and remove adapter sequences, primers, poly-A tails and/or other unwanted sequences from the input FASTQ files. It trims the input reads by finding the adapter or primer sequences in an error-tolerant way. Additional features include modifying and filtering reads. We also add custom 3' (end) adapter sequence cutting as [suggested by Illumina](https://support-docs.illumina.com/SHARE/AdapterSequences/Content/SHARE/AdapterSeq/TruSeq/UDIndexes.htm).
 
 {% unless include.short %}
 
 > <hands-on-title>Read trimming and filtering</hands-on-title>
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1) %} with the following parameters to trim low quality sequences:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/5.0+galaxy0) %} with the following parameters to trim low quality sequences:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
 >       - {% icon param-files %} *"FASTQ/A file #1"*: `T1A_forward`
 >       - {% icon param-files %} *"FASTQ/A file #2"*: `T1A_reverse`
 >
 >      The order is important here!
 >
->    - In *"Filter Options"*
->       - *"Minimum length"*: `150`
->    - In *"Read Modification Options"*
->       - *"Quality cutoff"*: `20`
->    - In *"Output Options"*
->       - *"Report"*: `Yes`
+>       - In *Read 1 Adapters*
+>          - *3' (End) Adapters*
+>             - Click on {% icon param-repeat %} *"3' (End) Adapters"*
+>                - In *1: 3' (End) Adapters*
+>                   - *Source*: `Enter custom sequence`
+>                   - *Custom 3' adapter sequence*: `AGATCGGAAGAGCACACGTCTGAACTCCAGTCA`
+>       - In *Read 2 Adapters*
+>          - *3' (End) Adapters*
+>             - Click on {% icon param-repeat %} *"3' (End) Adapters"*
+>                - In *1: 3' (End) Adapters*
+>                   - *Source*: `Enter custom sequence`
+>                   - *Custom 3' adapter sequence*: `AGATCGGAAGAGCACACGTCTGAACTCCAGTCA`
+>    - In *"Other Read Trimming Options"*
+>       - *"Quality cutoff(s) (R1)"*: `20`
+>    - In *"Read Filtering Options"*
+>       - *"Minimum length (R1)"*: `150`
+>    - *"Additional outputs to generate"*: `Report`
 >
 >      {% include topics/sequence-analysis/tutorials/quality-control/trimming_question.md %}
 >
@@ -327,12 +338,12 @@ These rRNAs are useful for the taxonomic assignment (i.e. which organisms are fo
 
 > <hands-on-title>Ribosomal RNA fragments filtering</hands-on-title>
 >
-> 1. {% tool [Filter with SortMeRNA](toolshed.g2.bx.psu.edu/repos/rnateam/sortmerna/bg_sortmerna/2.1b.6) %} with the following parameters:
->    - *"Sequencing type"*: `Reads are paired`
+> 1. {% tool [Filter with SortMeRNA](toolshed.g2.bx.psu.edu/repos/rnateam/sortmerna/bg_sortmerna/4.3.6+galaxy0) %} with the following parameters:
+>    - *"Sequencing type"*: `Paired-end reads`
 >       - {% icon param-file %} *"Forward reads"*: `QC controlled forward reads` (output of **Cutadapt** {% icon tool %})
 >       - {% icon param-file %} *"Reverse reads"*: `QC controlled reverse reads` (output of **Cutadapt** {% icon tool %})
 >       - *"If one of the paired-end reads aligns and the other one does not"*: `Output both reads to rejected file (--paired_out)`
->    - *"Databases to query"*: `Public pre-indexed ribosomal databases`
+>    - *"Databases to query"*: `Public ribosomal databases`
 >       - *"rRNA databases"*: {% icon param-check %} Select all
 >          - {% icon param-check %} `rfam-5s-database-id98`
 >          - {% icon param-check %} `silva-arc-23s-id98`
@@ -344,7 +355,6 @@ These rRNAs are useful for the taxonomic assignment (i.e. which organisms are fo
 >          - {% icon param-check %} `silva-arc-16s-id95`
 >    - *"Include aligned reads in FASTA/FASTQ format?"*: `Yes (--fastx)`
 >       - *"Include rejected reads file?"*: `Yes`
->    - *"Generate statistics file"*: `Yes`
 >
 > 2. Expand the aligned and unaligned forward reads datasets in the history
 >
@@ -457,14 +467,14 @@ As rRNAs reads are good marker genes, we will use directly the quality controlle
 
 > <hands-on-title>Extract the community structure</hands-on-title>
 >
-> 1. {% tool [MetaPhlAn](toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.0.6+galaxy0) %} with the following parameters:
+> 1. {% tool [MetaPhlAn](toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.1.1+galaxy4) %} with the following parameters:
 >    - In *"Input(s)"*
->       - *"Input(s)"*: `Fasta/FastQ file(s) with metagenomic reads`
->          - *"Fasta/FastQ file(s) with metagenomic reads"*: `Paired-end files`
->             - {% icon param-file %} *"Forward paired-end Fasta/FastQ file with metagenomic reads"*: `QC controlled forward reads` (output of **Cutadapt** {% icon tool %})
->             - {% icon param-file %} *"Reverse paired-end Fasta/FastQ file with metagenomic reads"*: `QC controlled reverse reads` (outputs of **Cutadapt** {% icon tool %})
+>       - *"Input(s)"*: `Fasta/FastQ file(s) with microbiota reads`
+>          - *"Fasta/FastQ file(s) with microbiota reads"*: `Paired-end files`
+>             - {% icon param-file %} *"Forward paired-end Fasta/FastQ file with microbiota reads"*: `Unaligned forward reads` (output of **SortMeRNA** {% icon tool %})
+>             - {% icon param-file %} *"Reverse paired-end Fasta/FastQ file with microbiota reads"*: `Unaligned reverse reads` (output of **SortMeRNA** {% icon tool %})
 >       - *"Database with clade-specific marker genes"*: `Locally cached`
->         - *"Cached database with clade-specific marker genes"*: `MetaPhlAn clade-specific marker genes (mpa_v30_CHOCOPhlAn_201901)`
+>         - *"Cached database with clade-specific marker genes"*: `MetaPhlAn clade-specific marker genes (mpa_vJune23_CHOCOPhlAn_202403)`
 >    - In *"Analysis"*
 >       - *"Type of analysis to perform"*: `rel_ab: Profiling a metagenomes in terms of relative abundances`
 >          - *"Taxonomic level for the relative abundance output"*: `All taxonomic levels`
@@ -485,17 +495,20 @@ This step may take a couple of minutes as each sequence is compare to the full d
 - The main output: A **tabular file** called `Predicted taxon relative abundances` with the **community profile*
 
     ```
-    #mpa_vOct22_CHOCOPhlAnSGB_202212
+    #mpa_vJun23_CHOCOPhlAnSGB_202403
     # ...
-    #465754 reads processed
-    #SampleID	Metaphlan_Analysis
-    #clade_name	NCBI_tax_id	relative_abundance	additional_species
-    k__Bacteria	2	100.0	
-    k__Bacteria|p__Firmicutes	2|1239	68.23371	
-    k__Bacteria|p__Coprothermobacterota	2|2138240	31.76629	
-    k__Bacteria|p__Firmicutes|c__Clostridia	2|1239|186801	68.23371	
-    k__Bacteria|p__Coprothermobacterota|c__Coprothermobacteria	2|2138240|2138243	31.76629	
-    k__Bacteria|p__Firmicutes|c__Clostridia|o__Eubacteriales	2|1239|186801|186802	68.23371	
+  #465754 reads processed
+    #SampleID 	Metaphlan_Analysis 		
+    #clade_name 	NCBI_tax_id 	relative_abundance 	additional_species
+    k__Bacteria 	2 	100.0 	
+    k__Bacteria|p__Firmicutes 	2|1239 	71.87781 	
+    k__Bacteria|p__Coprothermobacterota 	2|2138240 	28.12219 	
+    k__Bacteria|p__Firmicutes|c__Clostridia 	2|1239|186801 	71.87781 	
+    k__Bacteria|p__Coprothermobacterota|c__Coprothermobacteria 	2|2138240|2138243 	28.12219 	
+    k__Bacteria|p__Firmicutes|c__Clostridia|o__Eubacteriales 	2|1239|186801|186802 	71.87781 	
+    k__Bacteria|p__Coprothermobacterota|c__Coprothermobacteria|o__Coprothermobacterales 	2|2138240|2138243|2138246 	28.12219 	
+    k__Bacteria|p__Firmicutes|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae 	2|1239|186801|186802|216572 	71.87781 	
+    k__Bacteria|p__Coprothermobacterota|c__Coprothermobacteria|o__Coprothermobacterales|f__Coprothermobacteraceae 	2|2138240|2138243|2138246|2138247 
     ```
 
     Each line contains 4 columns:
@@ -516,11 +529,11 @@ This step may take a couple of minutes as each sequence is compare to the full d
     > 4. Has only bacteria been identified in our sample?
     >
     > > <solution-title></solution-title>
-    > > 1. The file has 20 lines, including an header. Therefore, 14 taxons of different levels have been identified
+    > > 1. The file has 15 lines. Therefore, 15 taxons of different levels have been identified
     > > 2. We have access: kingdom (`k__`), phylum (`p__`), class (`c__`), order (`o__`), family (`f__`), genus (`g__`), species (`s__`), strain (`t__`)
     > > 3. In our sample, we identified:
-    > >     - 3 genera: Coprothermobacter, Acetivibrio
-    > >     - 3 species: Coprothermobacter proteolyticus, Acetivibrio thermocellus
+    > >     - 2 genera: Coprothermobacter, Acetivibrio
+    > >     - 2 species: Coprothermobacter proteolyticus, Acetivibrio thermocellus
     > > 4. The analysis shows indeed, that only bacteria can be found in our sample.
     > {: .solution }
     {: .question}
@@ -590,11 +603,11 @@ Even if the output of **MetaPhlAn** can be easy to parse, we want to visualize a
 >
 > > <solution-title></solution-title>
 > >
-> > 1. *Acetivibrio thermocellus* represents 68% and *Coprothermobacter proteolyticus* 32% of the bacteria identified in our sample
+> > 1. *Acetivibrio thermocellus* represents 72% and *Coprothermobacter proteolyticus* 28% of the bacteria identified in our sample
 > >
 > >    ![Krona](images/krona.png){: width="75%"}
 > >
-> > 2. 34% of bacteria are from the strian SGB8476.
+> > 2. 50% of bacteria are from the strian SGB8476.
 > >
 > >    ![Krona at bacteria level](images/krona_bacteria.png){: width="75%"}
 > >
@@ -614,7 +627,7 @@ It takes a taxonomic tree file as the input. We first need to convert the **Meta
 >    - *"List which levels should use the external legend for the annotation"*: `3,4,5`
 >    - *"List which levels should be highlight with a shaded background"*: `1`
 >
-> 3. {% tool [Generation, personalization and annotation of tree](toolshed.g2.bx.psu.edu/repos/iuc/graphlan_annotate/graphlan_annotate/1.0.0.0) %} with the following parameters:
+> 3. {% tool [Generation, personalization and annotation of tree](toolshed.g2.bx.psu.edu/repos/iuc/graphlan_annotate/graphlan_annotate/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"Input tree"*: `Tree` (output of **Export to GraPhlAn**)
 >    - {% icon param-file %} *"Annotation file"*: `Annotation` (output of **Export to GraPhlAn**)
 >
@@ -688,7 +701,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 
 > <hands-on-title>Extract the functional information</hands-on-title>
 >
-> 1. {% tool [HUMAnN](toolshed.g2.bx.psu.edu/repos/iuc/humann/humann/3.7+galaxy0) %} with the following parameters:
+> 1. {% tool [HUMAnN](toolshed.g2.bx.psu.edu/repos/iuc/humann/humann/3.9+galaxy0) %} with the following parameters:
 >    - *"Input(s)"*: `Quality-controlled shotgun sequencing reads (metagenome (DNA reads) or metatranscriptome (RNA reads))`
 >       - {% icon param-file %} *"Quality-controlled shotgun sequencing reads (metagenome (DNA reads) or metatranscriptome (RNA reads))"*: `Interlaced non rRNA reads`
 >    - *"Steps"*: `Bypass the taxonomic profiling step and creates a custom ChocoPhlAn database of the species provided afterwards`
@@ -720,15 +733,15 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 1. A tabular file with the **gene families and their abundance**:
 
     ```
-    # Gene Family	humann_Abundance-RPKs
-    UNMAPPED	94157.0000000000
-    UniRef90_A3DCI4	42213.2758828385
-    UniRef90_A3DCI4|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	42205.5707425926
-    UniRef90_A3DCI4|unclassified	7.7051402458
-    UniRef90_A3DCB9	39287.6314397701
-    UniRef90_A3DCB9|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	39273.2031556915
-    UniRef90_A3DCB9|unclassified	14.4282840786
-    UniRef90_A3DC67	33187.2752874343
+    # Gene Family 	humann_Abundance-RPKs
+    UNMAPPED 	93840.0000000000
+    UniRef90_A3DCI4 	42213.2661898446
+    UniRef90_A3DCI4|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum 	42205.5707425926
+    UniRef90_A3DCI4|unclassified 	7.6954472520
+    UniRef90_A3DCB9 	39287.6314397701
+    UniRef90_A3DCB9|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum 	39273.2031556915
+    UniRef90_A3DCB9|unclassified 	14.4282840786
+    UniRef90_A3DC67 	33183.8388613174
     ```
 
     This file details the abundance of each gene family in the community. Gene families are groups of evolutionarily-related protein-coding sequences that often perform similar functions. Here we used [UniRef90 gene families](https://www.uniprot.org/help/uniref): sequences in a gene families have at least 90% sequence identity.
@@ -748,35 +761,35 @@ To identify the functions made by the community, we do not need the rRNA sequenc
     > 3. How many gene families have been identified?
     >
     > > <solution-title></solution-title>
-    > > 1. The most abundant family is the first one in the family: UniRef90_A3DCI4. We can use the tool {% tool [Rename features of a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.7+galaxy0) %} to add extra information about the gene family.
+    > > 1. The most abundant family is the first one in the family: UniRef90_A3DCI4. We can use the tool {% tool [Rename features of a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.9+galaxy0) %} to add extra information about the gene family.
     > >      - *"Type of feature renaming"*: `Advanced feature renaming` 
     > >      - *"Features to be renamed"*: `Mapping (full) between UniRef90 ids and names`
     > >
-    > > 2. Unfortunaly the most abundant family cannot be mapped (common for many UniRef90/50 families). It can be found however using [UniRef90 gene families](https://www.uniprot.org/help/uniref) directly. The (2Fe-2S) ferredoxin domain-containing protein seems to be produced mostly by *Hungateiclostridium thermocellum*.
-    > > 3. There is 6,392 lines in gene family file. But some of the gene families have multiple lines when the involved species are known.
+    > > 2. This family is mapped to *Hungateiclostridium thermocellum*, which is consistent with information from [UniRef90 gene families](https://www.uniprot.org/help/uniref): the (2Fe-2S) ferredoxin domain-containing protein seems to be produced mostly by *Hungateiclostridium thermocellum*.
+    > > 3. There is 6,401 lines in gene family file. But some of the gene families have multiple lines when the involved species are known.
     > >
-    > >      To know the number of gene families, we need to remove all lines with the species information, i.e. lines with `|` in them using the tool {% tool [Split a HUMAnN table](toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.7+galaxy0) %}
+    > >      To know the number of gene families, we need to remove all lines with the species information, i.e. lines with `|` in them using the tool {% tool [Split a HUMAnN table](toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.9+galaxy0) %}
     > >
     > >      The tool generates 2 output file:
     > >      - a stratified table with all lines with `|` in them
     > >      - a unstratied table with all lines without `|` in them
     > >
-    > >      In the unstratified table, there are 3,184 lines, so 3,183 gene families.
+    > >      In the unstratified table, there are 3,189 lines, so 3,188 gene families.
     > {: .solution }
     {: .question}
 
 2. A tabular file with the **pathways and their abundance**:
 
     ```
-     # Pathway	humann_Abundance
-    UNMAPPED	21383.0328532606
-    UNINTEGRATED	123278.2617863865
-    UNINTEGRATED|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	114029.8324087679
-    UNINTEGRATED|unclassified	6301.1699240597
-    UNINTEGRATED|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	5407.2826151090
-    PWY-6609: adenine and adenosine salvage III	285.7955913866
-    PWY-6609: adenine and adenosine salvage III|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	66.3688569288
-    PWY-1042: glycolysis IV	194.7465938041
+    # Pathway 	humann_Abundance
+    UNMAPPED 	8327.1254237651
+    UNINTEGRATED 	48674.2486093581
+    UNINTEGRATED|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum 	29349.2544670158
+    UNINTEGRATED|unclassified 	3154.6737904970
+    PWY-6609: adenine and adenosine salvage III 	274.2550568127
+    PWY-6609: adenine and adenosine salvage III|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum 	66.3688569288
+    PWY-6609: adenine and adenosine salvage III|unclassified 	8.0057395198
+    PWY-1042: glycolysis IV 	194.2215953218 
     ```
 
     This file shows each pathway and their abundance. Here, we used  the [MetaCyc Metabolic Pathway Database](https://metacyc.org/), a curated database of experimentally elucidated metabolic pathways from all domains of life.
@@ -797,8 +810,8 @@ To identify the functions made by the community, we do not need the rRNA sequenc
     > > <solution-title></solution-title>
     > > 1. The most abundant pathway is PWY-6609. It produces the adenine and adenosine salvage III.
     > > 2. Like the gene family, this pathway is mostly achieved by *Hungateiclostridium thermocellum*.
-    > > 3. There are 115 lines in the pathway file, including the lines with species information. To compute the number of pathways, we need to apply a similar approach as for the gene families by removing the lines with `|` in them using the tool {% tool [Split a HUMAnN table](toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.7+galaxy0) %}.
-    > >      The unstratified output file has 62 lines, including the header, UNMAPPED and UNINTEGRATED. Therefore, 59 MetaCyc pathways have been identified for our sample.
+    > > 3. There are 117 lines in the pathway file, including the lines with species information. To compute the number of pathways, we need to apply a similar approach as for the gene families by removing the lines with `|` in them using the tool {% tool [Split a HUMAnN table](toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.9+galaxy0) %}.
+    > >      The unstratified output file has 63 lines, including the header, UNMAPPED and UNINTEGRATED. Therefore, 60 MetaCyc pathways have been identified for our sample.
     > >
     > > 4. The "UNINTEGRATED" abundance corresponds to the total abundance of genes in the different levels that do not contribute to any pathways.
     > {: .solution }
@@ -832,7 +845,7 @@ Gene family and pathway abundances are in RPKs (reads per kilobase), accounting 
 
 > <hands-on-title>Normalize the gene family abundances</hands-on-title>
 >
-> 1. {% tool [Renormalize a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.6.0+galaxy0) %} with
+> 1. {% tool [Renormalize a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.9+galaxy0) %} with
 >    - *"Gene/pathway table"*: `Gene families and their abundance` (output of **HUMAnN**)
 >    - *"Normalization scheme"*: `Relative abundance`
 >    - *"Normalization level"*: `Normalization of all levels by community total`
@@ -851,8 +864,8 @@ Gene family and pathway abundances are in RPKs (reads per kilobase), accounting 
 > 2. What is the relative abundance of the most abundant gene family?
 >
 > > <solution-title></solution-title>
-> > 1. 13.9% (`0.139005 x 100`) of the sequences have not be assigned to a gene family.
-> > 2. The UniRef90_A3DCI4 family represents 6% of the reads.
+> > 1. 13.9% ($$0.138318 x 100$$) of the sequences have not be assigned to a gene family.
+> > 2. The UniRef90_A3DCI4 family represents 6.22% of the reads.
 > {: .solution }
 {: .question}
 
@@ -886,7 +899,7 @@ Let's do the same for the pathway abundances.
 > > 1. UNMAPPED, here 13.9% of the reads, corresponds to the percentage of reads not assigned to gene families. It is the same value as in the normalized gene family file.
 > > 2. 81% (UNINTEGRATED) of reads assigned to a gene family have not be assigned to a pathway
 > > 3. The PWY-6609 pathway represents 0.46% of the reads.
-> {: .solution }
+> {: .solution}
 {: .question}
 
 
@@ -899,7 +912,7 @@ For this, we use the tool **Unpack pathway abundances to show genes included** {
 
 > <hands-on-title>Normalize the gene family abundances</hands-on-title>
 >
-> 1. {% tool [Unpack pathway abundances to show genes included](toolshed.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.6.0+galaxy0) %} with
+> 1. {% tool [Unpack pathway abundances to show genes included](toolshed.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.9+galaxy0) %} with
 >    - *"Gene family or EC abundance file"*: `Normalized gene families`
 >    - *"Pathway abundance file"*: `Normalized pathways`
 >
@@ -910,16 +923,13 @@ For this, we use the tool **Unpack pathway abundances to show genes included** {
 This tool unpacks the pathways to show the genes for each. It adds another level of stratification to the pathway abundance table by including the gene family abundances:
 
 ```
-# Pathway	humann_Abundance-RELAB
-ANAGLYCOLYSIS-PWY: glycolysis III (from glucose)	0.000312308
-BRANCHED-CHAIN-AA-SYN-PWY: superpathway of branched chain amino acid biosynthesis	0.00045009
-BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	0.00045009
-BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DIY4	9.67756e-06
-BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DIE1	0.000123259
-BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DID9	9.73261e-05
-BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DDR1	7.97357e-05
-BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DF94	1.4837e-05
-BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DIY3	0.000117313
+# Pathway 	humann_Abundance-RELAB
+ANAGLYCOLYSIS-PWY: glycolysis III (from glucose) 	0.000887968
+ARO-PWY: chorismate biosynthesis I 	0.000703087
+ARO-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum 	0.000703087
+ARO-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DDJ2 	4.73896e-05
+ARO-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A0A1E3C026 	8.27656e-05
+ARO-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DDD8 
 ```
 
 > <question-title></question-title>
@@ -932,14 +942,17 @@ BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermoce
 > > If we search the generated file for (using <kbd>CTR</kbd><kbd>F</kbd> or <kbd>CMD</kbd><kbd>F</kbd>):
 > >
 > > ````
-> > PWY-6609: adenine and adenosine salvage III	0.00192972
-> > PWY-6609|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	0.000448128
-> > PWY-6609|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DD28	4.47176e-05
-> > PWY-6609|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DHM7	0.000235689
-> > PWY-6609|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DEQ4	3.68298e-05
+> > PWY-6609: adenine and adenosine salvage III 	0.00455552
+> > PWY-6609|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum 	0.00110242
+> > PWY-6609|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DHM7 	0.00023651
+> > PWY-6609|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DD28 	4.48733e-05
+> > PWY-6609|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DEQ4 	3.69581e-05
+> > PWY-6609|unclassified 	0.000132979
+> > PWY-6609|unclassified|UniRef90_A0A140L1V2 	5.93149e-06
+> > PWY-6609|unclassified|UniRef90_B5Y8G4 	0.001116 
 > > ```
 > >
-> > The gene families UniRef90_A3DD28, UniRef90_A3DHM7 and UniRef90_A3DEQ4 are identified, for *Hungateiclostridium thermocellum*.
+> > The gene families UniRef90_A3DD28, UniRef90_A3DHM7 and UniRef90_A3DEQ4 are identified, for *Hungateiclostridium thermocellum*, and UniRef90_A0A140L1V2 and UniRef90_B5Y8G4 for no species.
 > {: .solution }
 {: .question}
 
@@ -953,7 +966,7 @@ The gene families can be a long list of ids and going through the gene families 
 
 > <hands-on-title>Group abundances into GO terms</hands-on-title>
 >
-> 1. {% tool [Regroup HUMAnN table features](toolshed.g2.bx.psu.edu/repos/iuc/humann_regroup_table/humann_regroup_table/3.6.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Regroup HUMAnN table features](toolshed.g2.bx.psu.edu/repos/iuc/humann_regroup_table/humann_regroup_table/3.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Gene families table"*: `Gene families and their abundance` (output of **HUMAnN**)
 >    - *"How to combine grouped features?"*: `Sum`
 >    - *"Grouping"*: `Grouping with larger mapping`
@@ -966,15 +979,16 @@ The gene families can be a long list of ids and going through the gene families 
 The output is a table with the GO terms, their abundance and the involved species:
 
 ```
-# Gene Family	humann_Abundance-RPKs
-UNMAPPED	94157.0
-UNGROUPED	175499.715
-UNGROUPED|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	4855.381
-UNGROUPED|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	152089.121
-UNGROUPED|unclassified	18555.213
-GO:0000015	250.882
-GO:0000015|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	11.313
-GO:0000015|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	239.568
+# Gene Family 	humann_Abundance-RPKs
+UNMAPPED 	93840.0
+UNGROUPED 	176772.794
+UNGROUPED|g__Coprothermobacter.s__Coprothermobacter_proteolyticus 	4855.381
+UNGROUPED|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum 	152085.853
+UNGROUPED|unclassified 	19831.56
+GO:0000015 	250.882
+GO:0000015|g__Coprothermobacter.s__Coprothermobacter_proteolyticus 	11.313
+GO:0000015|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum 	239.568
+GO:0000027 	228.928
 ```
 
 > <question-title></question-title>
@@ -982,18 +996,18 @@ GO:0000015|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	239.568
 > How many GO term have been identified?
 >
 > > <solution-title></solution-title>
-> > Using the tool {% tool [Split a HUMAnN table](toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.6.0+galaxy0) %}, we see that the unstratified table has 1,174 lines (including the UNMAPPED, UNGROUPED and the header). So 1,171 GO terms have been identified.
+> > Using the tool {% tool [Split a HUMAnN table](toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.9+galaxy0) %}, we see that the unstratified table has 1,175 lines (including the UNMAPPED, UNGROUPED and the header). So 1,172 GO terms have been identified.
 > {: .solution }
 {: .question}
 
 
 {% unless include.short %}
 
-The GO term with their id are quite cryptic. We can rename them and then split them in 3 groups  (molecular functions [MF], biological processes [BP] and cellular components [CC])
+The GO term with their id are quite cryptic. We can rename them and then split them in 3 groups (molecular functions [MF], biological processes [BP] and cellular components [CC])
 
 > <hands-on-title>Rename GO terms</hands-on-title>
 >
-> 1. {% tool [Rename features of a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.7+galaxy0) %} with the following parameters:
+> 1. {% tool [Rename features of a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Gene families table"*: output of **Regroup HUMAnN table features**
 >    - *"Type of feature renaming"*: `Advanced feature renaming`
 >       - *"Features to be renamed"*: `Mapping (full) between Gene Ontology (GO) ids and names`
@@ -1031,31 +1045,30 @@ The GO term with their id are quite cryptic. We can rename them and then split t
 >
 > > <solution-title></solution-title>
 > >
-> > 1. After running {% tool [Split a HUMAnN table](toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.6.0+galaxy0) %} on the 3 outputs, we found:
-> >   - 411 BP GO terms
+> > 1. After running {% tool [Split a HUMAnN table](toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.9+galaxy0) %} on the 3 outputs, we found:
+> >   - 412 BP GO terms
 > >   - 696 MF GO terms
 > >   - 58 CC GO terms
 > >
 > > 2. The GO terms in the `[MF] GO terms and their abundance` file are not sorted by abundance:
 > >
 > >    ```
-> >    GO:0000030: [MF] mannosyltransferase activity	16.321
-> >    GO:0000030: [MF] mannosyltransferase activity|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	16.321
-> >    GO:0000036: [MF] acyl carrier activity	726.249
-> >    GO:0000036: [MF] acyl carrier activity|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	10.101
-> >    GO:0000036: [MF] acyl carrier activity|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	572.281
-> >    GO:0000036: [MF] acyl carrier activity|unclassified	143.868
-> >    GO:0000049: [MF] tRNA binding	4818.299
+> >    GO:0000030: [MF] mannosyltransferase activity 	16.321
+> >    GO:0000030: [MF] mannosyltransferase activity|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum 	16.321
+> >    GO:0000036: [MF] acyl carrier activity 	726.24
+> >    GO:0000036: [MF] acyl carrier activity|g__Coprothermobacter.s__Coprothermobacter_proteolyticus 	10.101
+> >    GO:0000036: [MF] acyl carrier activity|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum 	572.281 
 > >    ```
 > >
-> >    So to identify the most abundant GO terms, we first need to sort the file using the {% tool [Sort data in ascending or descending order](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} tool (on column 2, in descending order):
+> >    So to identify the most abundant GO terms, we first need to sort the file using the {% tool [Sort data in ascending or descending order](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} tool (on column 2, in descending order):
 > >
 > >    ```
-> >    GO:0015035: [MF] protein disulfide oxidoreductase activity	42908.123
-> >    GO:0003735: [MF] structural constituent of ribosome	42815.337
-> >    GO:0015035: [MF] protein disulfide oxidoreductase activity|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	40533.997
-> >    GO:0005524: [MF] ATP binding	37028.271
-> >    GO:0046872: [MF] metal ion binding	31068.144
+> >    GO:0015035: [MF] protein disulfide oxidoreductase activity 	42923.275
+> >    GO:0015035: [MF] protein disulfide oxidoreductase activity|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum 	40534.721
+> >    GO:0005524: [MF] ATP binding 	36370.768
+> >    GO:0003735: [MF] structural constituent of ribosome 	34810.272
+> >    GO:0046872: [MF] metal ion binding 	31185.883
+> >    GO:0005524: [MF] ATP binding|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum 	30477.686 
 > >    ```
 > >
 > >    The most abundant GO terms related to molecular functions seem to be linked to protein disulfide oxidoreductase activity, but also to structural constituent of ribosome and ATP and metal ion binding.
@@ -1070,7 +1083,7 @@ Although gene families and pathways, and their abundance may be related to a spe
 
 > <comment-title>Disagreemnet between MetaPhlAn and HUMAnN database</comment-title>
 > When updating this tutorial we found, that in the combined table we can only find 
-> the specis `Coprothermobacter_proteolyticus`, although 
+> the species `Coprothermobacter_proteolyticus`, although 
 > we know from the **HUMAnN** output that most gene families are associated to the species
 > of `Hungateiclostridium_thermocellum`. An inspection of the [uniprot](https://www.uniprot.org/taxonomy/1515) 
 > entry showed, that the scientific name 
@@ -1094,8 +1107,8 @@ Although gene families and pathways, and their abundance may be related to a spe
 
 > <hands-on-title>Combine taxonomic and functional information</hands-on-title>
 >
-> 1. {% tool [Combine MetaPhlAn2 and HUMAnN2 outputs](toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.2.0) %}  with the following parameters:
->   - {% icon param-file %} *"Input file corresponding to MetaPhlAN output"*: `Cut predicted taxon relative abundances table`
+> 1. {% tool [Combine MetaPhlAn2 and HUMAnN2 outputs](toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan_humann/0.3.0) %}  with the following parameters:
+>   - {% icon param-file %} *"Input file corresponding to MetaPhlAN output"*: `Predicted taxon relative abundances` (output of **MetaPhlAn** {% icon tool %})
 >   - {% icon param-file %} *"Input file corresponding HUMAnN output"*: `Normalized gene families adapted taxon`
 >   - *"Type of characteristics in HUMAnN file"*: `Gene families`
 >
@@ -1112,15 +1125,15 @@ The generated file is a table with 7 columns:
 7. gene family abundance (percentage)
 
 ```
-genus	genus_abundance	species	species_abundance		gene_families_id	gene_families_name	gene_families_abundance
-Acetivibrio	68.23371	Acetivibrio_thermocellus	68.23371	UniRef90_A3DCI4		6.230825634035571
-Acetivibrio	68.23371	Acetivibrio_thermocellus	68.23371	UniRef90_A3DCB9		5.797925937370119
-Acetivibrio	68.23371	Acetivibrio_thermocellus	68.23371	UniRef90_A3DC67		4.897416568360634
-Acetivibrio	68.23371	Acetivibrio_thermocellus	68.23371	UniRef90_A3DBR3		3.410207610453895
-Acetivibrio	68.23371	Acetivibrio_thermocellus	68.23371	UniRef90_A3DI60		2.939107940555317
-Acetivibrio	68.23371	Acetivibrio_thermocellus	68.23371	UniRef90_G2JC59		2.652548141348914
-Acetivibrio	68.23371	Acetivibrio_thermocellus	68.23371	UniRef90_A3DEF8		1.2968890912646296
-Coprothermobacter	31.76629	Coprothermobacter_proteolyticus	31.76629	UniRef90_B5Y8J9		0.9513533333829162
+genus 	genus_abundance 	species 	species_abundance 		gene_families_id 	gene_families_name 	gene_families_abundance
+Acetivibrio 	71.87781 	Acetivibrio_thermocellus 	71.87781 	UniRef90_A3DCI4 		6.220988184186852 	
+Acetivibrio 	71.87781 	Acetivibrio_thermocellus 	71.87781 	UniRef90_A3DCB9 		5.78876831034535 	
+Acetivibrio 	71.87781 	Acetivibrio_thermocellus 	71.87781 	UniRef90_A3DC67 		4.889688572773241 	
+Acetivibrio 	71.87781 	Acetivibrio_thermocellus 	71.87781 	UniRef90_A3DBR3 		3.4048190061843977 	
+Acetivibrio 	71.87781 	Acetivibrio_thermocellus 	71.87781 	UniRef90_A3DI60 		2.9344691434724686 	
+Acetivibrio 	71.87781 	Acetivibrio_thermocellus 	71.87781 	UniRef90_G2JC59 		2.6483592269836618 	
+Acetivibrio 	71.87781 	Acetivibrio_thermocellus 	71.87781 	UniRef90_A3DEF8 		1.2948396220557343 	
+Coprothermobacter 	28.12219 	Coprothermobacter_proteolyticus 	28.12219 	UniRef90_B5Y8J9 		0.949851722752528 	
 ```
 
 > <question-title></question-title>
@@ -1132,11 +1145,11 @@ Coprothermobacter	31.76629	Coprothermobacter_proteolyticus	31.76629	UniRef90_B5Y
 >
 > > <solution-title></solution-title>
 > >
-> > 1. To answer the questions, we need to group the contents of the output of **Combine MetaPhlAn2 and HUMAnN2 outputs** by 1st column and count the number of occurrences of gene families. We do that using **Group data by a column** {% icon tool %}:
+> > 1. To answer the questions, we need to group the contents of the output of **Combine MetaPhlAn and HUMAnN2 output** by 1st column and count the number of occurrences of gene families. We do that using **Group data by a column** {% icon tool %}:
 > >
 > >    > <hands-on-title>Group by genus and count gene families</hands-on-title>
 > >    > 1. {% tool [Group data by a column](Grouping1) %}
-> >    >    - *"Select data"*: output of **Combine MetaPhlAn2 and HUMAnN2 outputs**
+> >    >    - *"Select data"*: output of **Combine MetaPhlAn and HUMAnN outputs**
 > >    >    - *"Group by column"*: `Column:1`
 > >    >    - *"Operation"*:
 > >    >      - Click on {% icon param-repeat %} *"Insert Operation"*
@@ -1160,9 +1173,9 @@ Coprothermobacter	31.76629	Coprothermobacter_proteolyticus	31.76629	UniRef90_B5Y
 > >    >        - *"On column"*: `Column:5`
 > >    {: .hands_on}
 > >
-> >    Similarely to the genus, 2 species (Coprothermobacter_proteolyticus and Hungateiclostridium_thermocellum) identified by **MetaPhlAn** are associated to gene families.
+> >    Similarely to the genus, 2 species (*Coprothermobacter proteolyticus* and *Hungateiclostridium thermocellum*) identified by **MetaPhlAn** are associated to gene families.
 > >
-> > 4. As the species found derived directly from the genus (not 2 species for the same genus here), the number of gene families identified are the sames: 351 for Coprothermobacter proteolyticus and 1,890 for Hungateiclostridium thermocellum.
+> > 4. As the species found derived directly from the genus (not 2 species for the same genus here), the number of gene families identified are the sames: 351 for *Coprothermobacter proteolyticus* and 1,890 for *Hungateiclostridium thermocellum*.
 > >
 > {: .solution}
 {: .question}

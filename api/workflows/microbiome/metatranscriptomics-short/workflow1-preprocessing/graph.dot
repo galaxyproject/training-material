@@ -1,38 +1,34 @@
 digraph main {
   node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
   edge [fontname="Atkinson Hyperlegible"];
-  0[color=lightblue,label="ℹ️ Input Dataset\nT1A_forward"]
-  1[color=lightblue,label="ℹ️ Input Dataset\nT1A_reverse"]
-  2[label="Quality control Forward"]
+  0[color=lightblue,label="ℹ️ Input Dataset\nReverse raw reads"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nForward raw reads"]
+  2[label="FastQC"]
   0 -> 2 [label="output"]
-  k025f27660802461eafbda716e6f81ba8[color=lightseagreen,label="Output\nFastQC on input dataset(s): RawData"]
-  2 -> k025f27660802461eafbda716e6f81ba8
-  ka54ee2fd7bce439a9f1ff9ec9bf00efd[color=lightseagreen,label="Output\nFastQC on input dataset(s): Webpage"]
-  2 -> ka54ee2fd7bce439a9f1ff9ec9bf00efd
-  3[label="Quality control Reverse"]
+  k676cd11f047947c4a23bc6c8ed5a7790[color=lightseagreen,label="Output\nfastqc_reverse_html_file"]
+  2 -> k676cd11f047947c4a23bc6c8ed5a7790
+  3[label="FastQC"]
   1 -> 3 [label="output"]
+  k1fb52b78c90543c7a295d628c996d35a[color=lightseagreen,label="Output\nfastqc_forward_html_file"]
+  3 -> k1fb52b78c90543c7a295d628c996d35a
   4[label="Cutadapt"]
-  0 -> 4 [label="output"]
   1 -> 4 [label="output"]
-  k4bc7c8a4b98541ddb67fa3dfecd38a67[color=lightseagreen,label="Output\nCutadapt on input dataset(s): Read 1 Output"]
-  4 -> k4bc7c8a4b98541ddb67fa3dfecd38a67
-  k36ec0bbae49a47e2b916afec9b35cc3e[color=lightseagreen,label="Output\nCutadapt on input dataset(s): Read 2 Output"]
-  4 -> k36ec0bbae49a47e2b916afec9b35cc3e
+  0 -> 4 [label="output"]
+  k0e7406ed9eca486eb19a4cbbf04b5138[color=lightseagreen,label="Output\ncutadapt_report"]
+  4 -> k0e7406ed9eca486eb19a4cbbf04b5138
   5[label="MultiQC"]
-  2 -> 5 [label="text_file"]
   3 -> 5 [label="text_file"]
-  kb9ca21230ee040a0b2eccfc94fa35849[color=lightseagreen,label="Output\nMultiQC on input dataset(s): Stats"]
-  5 -> kb9ca21230ee040a0b2eccfc94fa35849
-  ke94ceb7a0d6b41c8b79d035b315e0a06[color=lightseagreen,label="Output\nMultiQC on input dataset(s): Webpage"]
-  5 -> ke94ceb7a0d6b41c8b79d035b315e0a06
-  6[label="rRNA/rDNA selection"]
+  2 -> 5 [label="text_file"]
+  kd9f371ddaa6c4540b62b0e34c0b71afa[color=lightseagreen,label="Output\nmultiqc_html_report"]
+  5 -> kd9f371ddaa6c4540b62b0e34c0b71afa
+  6[label="Filter with SortMeRNA"]
   4 -> 6 [label="out1"]
   4 -> 6 [label="out2"]
+  k3092eb62d7fc4d66bf574c6cf491d0e3[color=lightseagreen,label="Output\nsortmerna_unaligned_reverse"]
+  6 -> k3092eb62d7fc4d66bf574c6cf491d0e3
+  kdb3bb8ee8af74528be4bf3ea6d381856[color=lightseagreen,label="Output\nsortmerna_unaligned_forward"]
+  6 -> kdb3bb8ee8af74528be4bf3ea6d381856
   7[label="FASTQ interlacer"]
   6 -> 7 [label="unaligned_forward"]
   6 -> 7 [label="unaligned_reverse"]
-  kb060eebccd14486e806eaae983bdf52d[color=lightseagreen,label="Output\nFASTQ interlacer singles from input dataset(s)"]
-  7 -> kb060eebccd14486e806eaae983bdf52d
-  k70b738db54514eaa91c0eb445be297fb[color=lightseagreen,label="Output\nFASTQ interlacer pairs from input dataset(s)"]
-  7 -> k70b738db54514eaa91c0eb445be297fb
 }

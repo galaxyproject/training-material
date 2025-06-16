@@ -1,49 +1,60 @@
 digraph main {
   node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
   edge [fontname="Atkinson Hyperlegible"];
-  0[color=lightblue,label="ℹ️ Input Dataset\nInterlaced non-rRNA reads"]
-  1[color=lightblue,label="ℹ️ Input Dataset\nPredicted taxon relative abundances"]
-  2[label="Cut"]
+  0[color=lightblue,label="ℹ️ Input Dataset\nInterleaced reads"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nTaxonomic profile"]
+  2[label="HUMAnN"]
+  0 -> 2 [label="output"]
   1 -> 2 [label="output"]
-  3[label="Metabolic assignation"]
-  0 -> 3 [label="output"]
-  1 -> 3 [label="output"]
-  k657973036f124ae895111af40f52e71d[color=lightseagreen,label="Output\nHUMAnN on input dataset(s): Pathways and their abundance"]
-  3 -> k657973036f124ae895111af40f52e71d
-  k5cae6935448b4af9ad787b17490e4d4a[color=lightseagreen,label="Output\nHUMAnN on input dataset(s): Pathways and their coverage"]
-  3 -> k5cae6935448b4af9ad787b17490e4d4a
-  k60492d727b3c45c9b32bb6374ab08228[color=lightseagreen,label="Output\nHUMAnN on input dataset(s): Log"]
-  3 -> k60492d727b3c45c9b32bb6374ab08228
-  kba124b0fcbd54b65b87a84cfa578a927[color=lightseagreen,label="Output\nHUMAnN on input dataset(s): Gene families and their abundance"]
-  3 -> kba124b0fcbd54b65b87a84cfa578a927
-  4[label="Renormalize"]
-  3 -> 4 [label="gene_families_tsv"]
+  k53259a0607834db8828e328e7337f5b3[color=lightseagreen,label="Output\nhumann_gene_families"]
+  2 -> k53259a0607834db8828e328e7337f5b3
+  k5aec39b6317a4fd0b90622d5a965e957[color=lightseagreen,label="Output\nhumann_pathabundance"]
+  2 -> k5aec39b6317a4fd0b90622d5a965e957
+  3[label="Split a HUMAnN table"]
+  2 -> 3 [label="gene_families_tsv"]
+  4[label="Regroup"]
+  2 -> 4 [label="gene_families_tsv"]
   5[label="Renormalize"]
-  3 -> 5 [label="pathabundance_tsv"]
-  6[label="Regroup"]
-  3 -> 6 [label="gene_families_tsv"]
-  7[label="Replace"]
-  4 -> 7 [label="output"]
-  8[label="Unpack pathway abundances"]
-  4 -> 8 [label="output"]
-  5 -> 8 [label="output"]
-  9[label="Rename features"]
-  6 -> 9 [label="output"]
-  10[label="Split a HUMAnN table"]
-  6 -> 10 [label="output"]
-  k1ff60d0a4a6444c08b6fbbdfa8566a0c[color=lightseagreen,label="Output\nSplit a HUMAnN table on input dataset(s): Unstratified table"]
-  10 -> k1ff60d0a4a6444c08b6fbbdfa8566a0c
-  k6a65ee933a2e4a8194ff35917396bdfa[color=lightseagreen,label="Output\nSplit a HUMAnN table on input dataset(s): Stratified table"]
-  10 -> k6a65ee933a2e4a8194ff35917396bdfa
-  11[label="Combination of taxonomic and metabolic assignations for gene families"]
-  7 -> 11 [label="outfile"]
-  2 -> 11 [label="out_file1"]
-  kb34cf972ec0c4eccab77bd0e61d8a0e2[color=lightseagreen,label="Output\nCombine MetaPhlAn2 and HUMAnN2 outputs on input dataset(s): Gene family abundances related to genus/species abundances"]
-  11 -> kb34cf972ec0c4eccab77bd0e61d8a0e2
-  12[label="Select"]
-  9 -> 12 [label="output"]
+  2 -> 5 [label="gene_families_tsv"]
+  k4bd1c47e66ac41ffbce951d0d86d2252[color=lightseagreen,label="Output\nrenormalize_gene_families"]
+  5 -> k4bd1c47e66ac41ffbce951d0d86d2252
+  6[label="Rename features"]
+  2 -> 6 [label="gene_families_tsv"]
+  7[label="Renormalize"]
+  2 -> 7 [label="pathabundance_tsv"]
+  k1715a5f63ac34ad2a0309307721e2b49[color=lightseagreen,label="Output\nrenormalize_pathabundance"]
+  7 -> k1715a5f63ac34ad2a0309307721e2b49
+  8[label="Split a HUMAnN table"]
+  2 -> 8 [label="pathabundance_tsv"]
+  9[label="Split a HUMAnN table"]
+  4 -> 9 [label="output"]
+  10[label="Rename features"]
+  4 -> 10 [label="output"]
+  11[label="Replace"]
+  5 -> 11 [label="output"]
+  12[label="Unpack pathway abundances"]
+  5 -> 12 [label="output"]
+  7 -> 12 [label="output"]
+  kb24357e8b6d34893af63ac4cf7494b33[color=lightseagreen,label="Output\nunpack_pathway_abundance"]
+  12 -> kb24357e8b6d34893af63ac4cf7494b33
   13[label="Select"]
-  9 -> 13 [label="output"]
+  10 -> 13 [label="output"]
+  k946a04fd18544f088df11a3165651bae[color=lightseagreen,label="Output\ncc_go"]
+  13 -> k946a04fd18544f088df11a3165651bae
   14[label="Select"]
-  9 -> 14 [label="output"]
+  10 -> 14 [label="output"]
+  k4f5f059739eb42ce8dd8d920b52231c3[color=lightseagreen,label="Output\nbp_go"]
+  14 -> k4f5f059739eb42ce8dd8d920b52231c3
+  15[label="Select"]
+  10 -> 15 [label="output"]
+  16[label="Split a HUMAnN table"]
+  13 -> 16 [label="out_file1"]
+  17[label="Split a HUMAnN table"]
+  14 -> 17 [label="out_file1"]
+  18[label="Sort"]
+  15 -> 18 [label="out_file1"]
+  k71abb759b51f4383a79127d8b1325e81[color=lightseagreen,label="Output\nsorted_mf_go"]
+  18 -> k71abb759b51f4383a79127d8b1325e81
+  19[label="Split a HUMAnN table"]
+  15 -> 19 [label="out_file1"]
 }

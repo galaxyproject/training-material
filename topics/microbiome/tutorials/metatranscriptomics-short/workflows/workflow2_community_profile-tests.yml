@@ -1,0 +1,18 @@
+---
+- doc: Test the workflow
+  job:
+      QC controlled forward reads:
+        class: File
+        location: https://zenodo.org/record/7940872/files/T1A_QC_controlled_forward_reads.fastq
+        filetype: fastqsanger
+      QC controlled reverse reads:
+        class: File
+        location: https://zenodo.org/record/7940872/files/T1A_QC_controlled_reverse_reads.fastq
+        filetype: fastqsanger
+  outputs:
+    metaphlan_predicted_taxons:
+      asserts:
+        has_text:
+          text: "Acetivibrio_thermocellus"
+        has_text:
+          text: "Coprothermobacter_proteolyticus"

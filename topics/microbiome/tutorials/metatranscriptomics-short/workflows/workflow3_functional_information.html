@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Workflow 3: Functional Information / Metatranscriptomics analysis using microbiome RNA-seq data (short) / Microbiome</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Metatranscriptomics analysis using microbiome RNA-seq data - Workflow 3: Functional Information / Metatranscriptomics analysis using microbiome RNA-seq data (short) / Microbiome</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@e3d8e1d9d653407eee1e3044822c2ad748516704",
+		release: "galaxy-training-network@6fedf2e5247a5cc39cba24c4a327310515619a16",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -66,11 +66,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="Workflow 3: Functional Information">
+<meta name="DC.title" content="Metatranscriptomics analysis using microbiome RNA-seq data - Workflow 3: Functional Information">
 <meta name="DC.publisher" content="Galaxy Training Network">
 <meta name="DC.date" content="1970-01-01 00:00:00 +0000"><meta name="description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Microbiome / Metatranscriptomics analysis using microbiome RNA-seq data (short) / Workflow 3: Functional Information">
+	<meta property="og:title" content="Microbiome / Metatranscriptomics analysis using microbiome RNA-seq data (short) / Metatranscriptomics analysis using microbiome RNA-seq data - Workflow 3: Functional Information">
         <meta property="og:description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
         <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/microbiome/tutorials/metatranscriptomics-short/workflows/workflow3_functional_information.png">
 	</head>
@@ -221,7 +221,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 
 <section>
 	<hgroup>
-		<h1 data-toc-skip>Workflow 3: Functional Information</h1>
+		<h1 data-toc-skip>Metatranscriptomics analysis using microbiome RNA-seq data - Workflow 3: Functional Information</h1>
 		<p>microbiome-metatranscriptomics-short/workflow3-functional-information</p>
 	</hgroup>
 	
@@ -237,12 +237,6 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			
 			Subina Mehta, 
 			
-			Ray Sajulga, 
-			
-			Emma Leith, 
-			
-			Praveen Kumar, 
-			
 			Saskia Hiltemann, 
 			
 			Paul Zierep
@@ -253,14 +247,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			1
+			2
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Jan 15, 2024
+			Jun 16, 2025
 
 			<br/>
 
@@ -279,6 +273,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffad94; --color-darker: #ff8d5f; --color-dimmed: #ff9d7c;">microbiome</div>
+			
 			</br>
 			
 
@@ -287,6 +283,10 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<ul>
 			
 			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
+			
+			
+				<li>Uses <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_comments.html">Galaxy Workflow Comments</a></li>
 			
 			
 			</ul>
@@ -362,60 +362,72 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				Download
 			</a>
 			<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nInterlaced non-rRNA reads"];
+  0["ℹ️ Input Dataset\nInterleaced reads"];
   style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nPredicted taxon relative abundances"];
+  1["ℹ️ Input Dataset\nTaxonomic profile"];
   style 1 stroke:#2c3143,stroke-width:4px;
-  2["Cut"];
+  2["HUMAnN"];
+  0 -->|output| 2;
   1 -->|output| 2;
-  3["Metabolic assignation"];
-  0 -->|output| 3;
-  1 -->|output| 3;
-  65797303-6f12-4ae8-9511-1af40f52e71d["Output\nHUMAnN on input dataset(s): Pathways and their abundance"];
-  3 --> 65797303-6f12-4ae8-9511-1af40f52e71d;
-  style 65797303-6f12-4ae8-9511-1af40f52e71d stroke:#2c3143,stroke-width:4px;
-  5cae6935-448b-4af9-ad78-7b17490e4d4a["Output\nHUMAnN on input dataset(s): Pathways and their coverage"];
-  3 --> 5cae6935-448b-4af9-ad78-7b17490e4d4a;
-  style 5cae6935-448b-4af9-ad78-7b17490e4d4a stroke:#2c3143,stroke-width:4px;
-  60492d72-7b3c-45c9-b32b-b6374ab08228["Output\nHUMAnN on input dataset(s): Log"];
-  3 --> 60492d72-7b3c-45c9-b32b-b6374ab08228;
-  style 60492d72-7b3c-45c9-b32b-b6374ab08228 stroke:#2c3143,stroke-width:4px;
-  ba124b0f-cbd5-4b65-b87a-84cfa578a927["Output\nHUMAnN on input dataset(s): Gene families and their abundance"];
-  3 --> ba124b0f-cbd5-4b65-b87a-84cfa578a927;
-  style ba124b0f-cbd5-4b65-b87a-84cfa578a927 stroke:#2c3143,stroke-width:4px;
-  4["Renormalize"];
-  3 -->|gene_families_tsv| 4;
+  53259a06-0783-4db8-828e-328e7337f5b3["Output\nhumann_gene_families"];
+  2 --> 53259a06-0783-4db8-828e-328e7337f5b3;
+  style 53259a06-0783-4db8-828e-328e7337f5b3 stroke:#2c3143,stroke-width:4px;
+  5aec39b6-317a-4fd0-b906-22d5a965e957["Output\nhumann_pathabundance"];
+  2 --> 5aec39b6-317a-4fd0-b906-22d5a965e957;
+  style 5aec39b6-317a-4fd0-b906-22d5a965e957 stroke:#2c3143,stroke-width:4px;
+  3["Split a HUMAnN table"];
+  2 -->|gene_families_tsv| 3;
+  4["Regroup"];
+  2 -->|gene_families_tsv| 4;
   5["Renormalize"];
-  3 -->|pathabundance_tsv| 5;
-  6["Regroup"];
-  3 -->|gene_families_tsv| 6;
-  7["Replace"];
-  4 -->|output| 7;
-  8["Unpack pathway abundances"];
-  4 -->|output| 8;
-  5 -->|output| 8;
-  9["Rename features"];
-  6 -->|output| 9;
-  10["Split a HUMAnN table"];
-  6 -->|output| 10;
-  1ff60d0a-4a64-44c0-8b6f-bbdfa8566a0c["Output\nSplit a HUMAnN table on input dataset(s): Unstratified table"];
-  10 --> 1ff60d0a-4a64-44c0-8b6f-bbdfa8566a0c;
-  style 1ff60d0a-4a64-44c0-8b6f-bbdfa8566a0c stroke:#2c3143,stroke-width:4px;
-  6a65ee93-3a2e-4a81-94ff-35917396bdfa["Output\nSplit a HUMAnN table on input dataset(s): Stratified table"];
-  10 --> 6a65ee93-3a2e-4a81-94ff-35917396bdfa;
-  style 6a65ee93-3a2e-4a81-94ff-35917396bdfa stroke:#2c3143,stroke-width:4px;
-  11["Combination of taxonomic and metabolic assignations for gene families"];
-  7 -->|outfile| 11;
-  2 -->|out_file1| 11;
-  b34cf972-ec0c-4ecc-ab77-bd0e61d8a0e2["Output\nCombine MetaPhlAn2 and HUMAnN2 outputs on input dataset(s): Gene family abundances related to genus/species abundances"];
-  11 --> b34cf972-ec0c-4ecc-ab77-bd0e61d8a0e2;
-  style b34cf972-ec0c-4ecc-ab77-bd0e61d8a0e2 stroke:#2c3143,stroke-width:4px;
-  12["Select"];
-  9 -->|output| 12;
+  2 -->|gene_families_tsv| 5;
+  4bd1c47e-66ac-41ff-bce9-51d0d86d2252["Output\nrenormalize_gene_families"];
+  5 --> 4bd1c47e-66ac-41ff-bce9-51d0d86d2252;
+  style 4bd1c47e-66ac-41ff-bce9-51d0d86d2252 stroke:#2c3143,stroke-width:4px;
+  6["Rename features"];
+  2 -->|gene_families_tsv| 6;
+  7["Renormalize"];
+  2 -->|pathabundance_tsv| 7;
+  1715a5f6-3ac3-4ad2-a030-9307721e2b49["Output\nrenormalize_pathabundance"];
+  7 --> 1715a5f6-3ac3-4ad2-a030-9307721e2b49;
+  style 1715a5f6-3ac3-4ad2-a030-9307721e2b49 stroke:#2c3143,stroke-width:4px;
+  8["Split a HUMAnN table"];
+  2 -->|pathabundance_tsv| 8;
+  9["Split a HUMAnN table"];
+  4 -->|output| 9;
+  10["Rename features"];
+  4 -->|output| 10;
+  11["Replace"];
+  5 -->|output| 11;
+  12["Unpack pathway abundances"];
+  5 -->|output| 12;
+  7 -->|output| 12;
+  b24357e8-b6d3-4893-af63-ac4cf7494b33["Output\nunpack_pathway_abundance"];
+  12 --> b24357e8-b6d3-4893-af63-ac4cf7494b33;
+  style b24357e8-b6d3-4893-af63-ac4cf7494b33 stroke:#2c3143,stroke-width:4px;
   13["Select"];
-  9 -->|output| 13;
+  10 -->|output| 13;
+  946a04fd-1854-4f08-8df1-1a3165651bae["Output\ncc_go"];
+  13 --> 946a04fd-1854-4f08-8df1-1a3165651bae;
+  style 946a04fd-1854-4f08-8df1-1a3165651bae stroke:#2c3143,stroke-width:4px;
   14["Select"];
-  9 -->|output| 14;</pre>
+  10 -->|output| 14;
+  4f5f0597-39eb-42ce-8dd8-d920b52231c3["Output\nbp_go"];
+  14 --> 4f5f0597-39eb-42ce-8dd8-d920b52231c3;
+  style 4f5f0597-39eb-42ce-8dd8-d920b52231c3 stroke:#2c3143,stroke-width:4px;
+  15["Select"];
+  10 -->|output| 15;
+  16["Split a HUMAnN table"];
+  13 -->|out_file1| 16;
+  17["Split a HUMAnN table"];
+  14 -->|out_file1| 17;
+  18["Sort"];
+  15 -->|out_file1| 18;
+  71abb759-b51f-4383-a791-27d8b1325e81["Output\nsorted_mf_go"];
+  18 --> 71abb759-b51f-4383-a791-27d8b1325e81;
+  style 71abb759-b51f-4383-a791-27d8b1325e81 stroke:#2c3143,stroke-width:4px;
+  19["Split a HUMAnN table"];
+  15 -->|out_file1| 19;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -428,12 +440,12 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				
 				<tr>
 					<td>Input dataset</td>
-					<td>Interlaced non-rRNA reads</td>
+					<td>Interleaced reads</td>
 				</tr>
 				
 				<tr>
 					<td>Input dataset</td>
-					<td>Predicted taxon relative abundances</td>
+					<td>Taxonomic profile</td>
 				</tr>
 				
 				</tbody>
@@ -451,60 +463,30 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
-					<td>Cut1</td>
-					<td>Cut</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/humann/humann/3.7+galaxy0</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/humann/humann/3.9+galaxy0</td>
 					<td>HUMAnN</td>
-					<td>Metabolic assignation</td>
+					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.6.0+galaxy0</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.9+galaxy0</td>
 					<td>Renormalize</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.6.0+galaxy0</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.9+galaxy0</td>
 					<td>Renormalize</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/humann_regroup_table/humann_regroup_table/3.6.0+galaxy0</td>
-					<td>Regroup</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.6.0+galaxy0</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.9+galaxy0</td>
 					<td>Unpack pathway abundances</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.6.0+galaxy0</td>
-					<td>Rename features</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.6.0+galaxy0</td>
-					<td>Split a HUMAnN table</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.2.0</td>
-					<td>Combine MetaPhlAn2 and HUMAnN2 outputs</td>
-					<td>Combination of taxonomic and metabolic assignations for gene families</td>
-				</tr>
-				
-				<tr>
 					<td>Grep1</td>
 					<td>Select</td>
 					<td></td>
@@ -517,8 +499,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				</tr>
 				
 				<tr>
-					<td>Grep1</td>
-					<td>Select</td>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2</td>
+					<td>Sort</td>
 					<td></td>
 				</tr>
 				
@@ -537,13 +519,6 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=Cut1">Cut1</a></td>
-				<td>
-					
-				</td>
-			</tr>
-			
-			<tr>
 				<td><a href="https://my.galaxy.training/?path=?tool_id=Grep1">Grep1</a></td>
 				<td>
 					
@@ -551,11 +526,25 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.2.0">toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.2.0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/humann/humann/3.9+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/humann/humann/3.9+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bebatut/combine_metaphlan2_humann2/fdfb35745104">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/humann/c2803012bbb3">
 						View in ToolShed
 					</a>
 					
@@ -563,11 +552,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/humann_regroup_table/humann_regroup_table/3.9+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/humann_regroup_table/humann_regroup_table/3.9+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/d698c222f354">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/humann_regroup_table/8237a0f225db">
 						View in ToolShed
 					</a>
 					
@@ -575,11 +564,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/humann/humann/3.7+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/humann/humann/3.7+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.9+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.9+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/humann/95bf7479d53c">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/humann_rename_table/aabf8cfb8fef">
 						View in ToolShed
 					</a>
 					
@@ -587,11 +576,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/humann_regroup_table/humann_regroup_table/3.6.0+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/humann_regroup_table/humann_regroup_table/3.6.0+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.9+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.9+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/humann_regroup_table/79706f10d680">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/humann_renorm_table/2bdd84912a2b">
 						View in ToolShed
 					</a>
 					
@@ -599,11 +588,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.6.0+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.6.0+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.9+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.9+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/humann_rename_table/172920f67a84">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/humann_split_stratified_table/a92c06a3afa7">
 						View in ToolShed
 					</a>
 					
@@ -611,35 +600,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.6.0+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.6.0+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.9+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.9+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/humann_renorm_table/d7e9a3c41657">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.6.0+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.6.0+galaxy0</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/humann_split_stratified_table/64bc7acc22a9">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.6.0+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.6.0+galaxy0</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/humann_unpack_pathways/080ea153677c">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/humann_unpack_pathways/4e5e73d03f0d">
 						View in ToolShed
 					</a>
 					
@@ -669,6 +634,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>2</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/604d1261ba4f89d6650304d72c7b6d8e4166b3a6">604d1261b</a></td>
+						<td>2025-06-16 13:56:44</td>
+						<td>Update metatranscriptomics tutorials:</td>
+					</tr>
 					
 					<tr>
 						<td>1</td>
@@ -758,7 +730,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e3d8e1d9d653407eee1e3044822c2ad748516704">e3d8e1d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6fedf2e5247a5cc39cba24c4a327310515619a16">6fedf2e</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
