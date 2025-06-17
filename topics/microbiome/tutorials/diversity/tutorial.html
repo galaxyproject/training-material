@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6fedf2e5247a5cc39cba24c4a327310515619a16",
+		release: "galaxy-training-network@544d0d400cc05ab66fe0a43bd589396a4ccfaf3c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Calculating α and β diversity from microbiome taxonomic data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-05-08 12:37:47 +0000">
+<meta name="DC.date" content="2025-06-17 07:26:05 +0000">
 <meta name="DC.creator" content="Sophia Hampe">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Paul Zierep"><meta name="description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
@@ -190,7 +190,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-05-08 12:37:47 +0000",
+  "dateModified": "2025-06-17 07:26:05 +0000",
   "datePublished": "2024-08-01 10:44:27 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -248,7 +248,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Calculating α and β diversity from microbiome taxonomic data",
   "url": "https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/diversity/tutorial.html",
-  "version": 6,
+  "version": 7,
   "timeRequired": "PT20M",
   "teaches": "- Explain what taxonomic diversity is\n- Explain different metrics to calculate α and β diversity\n- Apply Krakentools to calculate α and β diversity and understand the output",
   "keywords": [
@@ -1414,7 +1414,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Aug 1, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 8, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 17, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1434,7 +1434,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (2 recent ratings, 5 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
 
     </blockquote>
     </section>
@@ -1457,23 +1457,23 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>Once we know which taxons are present in a metagenomic sample (<a href="/training-material/topics/microbiome/tutorials/taxonomic-profiling/tutorial.html">Tutorial on Taxonomic Profiling and Visualization of Metagenomic Data</a>), we can do diversity analyses.</p>
 
-<p>Related to ecology, the term <strong>diversity</strong> describes the number of different species present in one particular area and their relative abundance. More specifically, several different metrics of diversity can be calculated. The most common ones are α, β and γ diversity:</p>
+<p>Related to ecology, the term <strong>diversity</strong> describes the number of different species present in one particular area and their relative abundance. More specifically, several different metrics of diversity can be calculated. The most common ones are \(\alpha\), \(\beta\) and \(\gamma\) diversity:</p>
 
 <ul>
   <li>
-    <p><strong>α diversity</strong> describes the diversity within a community</p>
+    <p><strong>\(\alpha\) diversity</strong> describes the diversity within a community</p>
 
     <p>It considers the number of different species in an environment (also referred to as species <strong>richness</strong>). Additionally, it can take the abundance of each species into account to measure how evenly individuals are distributed across the sample (also referred to as species <strong>evenness</strong>).</p>
   </li>
   <li>
-    <p><strong>β diversity</strong> compare the diversity between different communities by measuring their distance</p>
+    <p><strong>\(\beta\) diversity</strong> compare the diversity between different communities by measuring their distance</p>
   </li>
   <li>
-    <p><strong>γ diversity</strong> is a measure of the overall diversity for the different ecosystems within a region.</p>
+    <p><strong>\(\gamma\) diversity</strong> is a measure of the overall diversity for the different ecosystems within a region.</p>
   </li>
 </ul>
 
-<p><a href="./images/diversity_differences.png" rel="noopener noreferrer"><img src="./images/diversity_differences.png" alt="α, β and γ diversity. " width="1232" height="585" loading="lazy" /></a></p>
+<p><a href="./images/diversity_differences.png" rel="noopener noreferrer"><img src="./images/diversity_differences.png" alt="The image illustrates the concepts of alpha (α), beta (β), and gamma (γ) diversity using two landscapes, each containing different sites populated with various colored fish. Landscape AB includes Site A and Site B, while Landscape CD includes Site C and Site D. Alpha diversity refers to the variety of species within a single site, as indicated by the different colored fish within each site. Beta diversity measures the difference in species composition between sites within a landscape, shown by comparing the fish species between Site A and Site B, or Site C and Site D. Gamma diversity encompasses the overall diversity across all sites within a landscape, highlighting the total variety of species present in Landscape AB or Landscape CD. The image visually explains how these three levels of diversity are interconnected, emphasizing the importance of considering different scales when studying biodiversity." width="1232" height="585" loading="lazy" /></a></p>
 
 <p>In this analysis we will use Galaxy for calculating different alpha diversity indexes and the Bray-Curtis dissimilarity index for β diversity.</p>
 
@@ -1531,7 +1531,7 @@ Paracoccus aminovorans	34004	S	86	26	112	0.00186
 <blockquote class="details">
   <div class="box-title details-title" id="details-more-details-on-using-input-other-than-bracken"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-on-using-input-other-than-bracken" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: More details on using input other than Bracken</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>It is possible to use Krakentools to calculate a and b diversity also on other datasets than the Bracken output. Any tool that outputs taxonomy abundances can be used prior to the diversity analysis. Importantly, the respective output file needs to be converted into the correct table format and filtered for the taxonomic rank “species”. This step is not necessary when using Bracken output as already only the species level is listed.</p>
+  <p>It is possible to calculate \(\alpha\) and \(\beta\) diversity also on other datasets than the Bracken output. Any tool that outputs taxonomy abundances can be used prior to the diversity analysis. To use <strong>Krakentools</strong> (as described here), the respective output file needs to be converted into the correct table format and filtered for the taxonomic rank “species”. This step is not necessary when using Bracken output as already only the species level is listed.</p>
 
 </blockquote>
 
@@ -1543,22 +1543,17 @@ Paracoccus aminovorans	34004	S	86	26	112	0.00186
 <ol id="markdown-toc">
   <li><a href="#background-on-data" id="markdown-toc-background-on-data">Background on data</a></li>
   <li><a href="#prepare-galaxy-and-data" id="markdown-toc-prepare-galaxy-and-data">Prepare Galaxy and data</a></li>
-  <li><a href="#calculating-α-diversity" id="markdown-toc-calculating-α-diversity">Calculating α diversity</a>    <ol>
-      <li><a href="#theory-of-α-diversity" id="markdown-toc-theory-of-α-diversity">Theory of α diversity</a></li>
+  <li><a href="#calculating-alpha-diversity" id="markdown-toc-calculating-alpha-diversity">Calculating \(\alpha\) diversity</a>    <ol>
+      <li><a href="#theory-of-alpha-diversity" id="markdown-toc-theory-of-alpha-diversity">Theory of \(\alpha\) diversity</a></li>
       <li><a href="#computing-α-diversity-using-galaxy" id="markdown-toc-computing-α-diversity-using-galaxy">Computing α diversity using Galaxy</a></li>
     </ol>
   </li>
-  <li><a href="#calculating-β-diversity" id="markdown-toc-calculating-β-diversity">Calculating β diversity</a>    <ol>
-      <li><a href="#theory-of-β-diversity" id="markdown-toc-theory-of-β-diversity">Theory of β diversity</a></li>
-      <li><a href="#computing-β-diversity-using-galaxy" id="markdown-toc-computing-β-diversity-using-galaxy">Computing β diversity using Galaxy</a></li>
+  <li><a href="#calculating-beta-diversity" id="markdown-toc-calculating-beta-diversity">Calculating \(\beta\) diversity</a>    <ol>
+      <li><a href="#theory-of-beta-diversity" id="markdown-toc-theory-of-beta-diversity">Theory of \(\beta\) diversity</a></li>
+      <li><a href="#computing-beta-diversity-using-galaxy" id="markdown-toc-computing-beta-diversity-using-galaxy">Computing \(\beta\) diversity using Galaxy</a></li>
     </ol>
   </li>
-  <li><a href="#evaluation-of-different-diversity-metrics" id="markdown-toc-evaluation-of-different-diversity-metrics">Evaluation of different diversity metrics</a>    <ol>
-      <li><a href="#multidimensional-diversity-metrics-and-parameter-q" id="markdown-toc-multidimensional-diversity-metrics-and-parameter-q">Multidimensional diversity metrics and Parameter q</a></li>
-    </ol>
-  </li>
-  <li><a href="#hill-numbers" id="markdown-toc-hill-numbers">Hill numbers</a></li>
-  <li><a href="#rényi-entropy" id="markdown-toc-rényi-entropy">Rényi entropy</a></li>
+  <li><a href="#evaluation-of-different-diversity-metrics" id="markdown-toc-evaluation-of-different-diversity-metrics">Evaluation of different diversity metrics</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
@@ -1612,7 +1607,7 @@ https://zenodo.org/records/13150694/files/JP4D_Estimate_Abundance_at_Species_Lev
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p>Create a paired collection.</p>
+      <p>Create a collection.</p>
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a dataset collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create list</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
@@ -1622,125 +1617,136 @@ https://zenodo.org/records/13150694/files/JP4D_Estimate_Abundance_at_Species_Lev
 
 </blockquote>
 
-<h1 id="calculating-α-diversity">Calculating α diversity</h1>
+<h1 id="calculating-alpha-diversity">Calculating \(\alpha\) diversity</h1>
 
-<h2 id="theory-of-α-diversity">Theory of α diversity</h2>
+<h2 id="theory-of-alpha-diversity">Theory of \(\alpha\) diversity</h2>
 
-<p><strong>α diversity</strong> describes the diversity within a community. There are several different indexes used to calculate α diversity because different indexes capture different aspects of diversity and have varying sensitivities to different factors. These indexes have been developed to address specific research questions, account for different ecological or population characteristics, or highlight certain aspects of diversity.</p>
+<p><strong>\(\alpha\) diversity</strong> describes the diversity within a community. There are several different indexes used to calculate \(\alpha\) diversity because different indexes capture different aspects of diversity and have varying sensitivities to different factors. These indexes have been developed to address specific research questions, account for different ecological or population characteristics, or highlight certain aspects of diversity.</p>
 
-<p><a href="./images/alphadiversity_metrics.png" rel="noopener noreferrer"><img src="./images/alphadiversity_metrics.png" alt="α diversity. " width="1400" height="1090" loading="lazy" /></a>(Source: <a href="https://medium.com/pjtorres-high-gut-alpha-diversity-and-health/high-alpha-diversity-and-health-65e5eca7fa36">Pedro J Torres</a>)</p>
+<p><a href="./images/alphadiversity_metrics.png" rel="noopener noreferrer"><img src="./images/alphadiversity_metrics.png" alt="The image explains the concept of alpha diversity, which refers to the variety of species within a specific community or ecosystem. It compares three communities: Community A, Community B, and Community C. Both Community A and Community B contain five different shapes, each representing a different microbial species, indicating that they have the same level of alpha diversity. Community C, however, consists of only three different shapes, suggesting it has lower alpha diversity compared to Communities A and B. The image uses arrows and labels to highlight that Communities A and B have higher alpha diversity than Community C, with a note clarifying that each shape symbolizes a distinct microbial species." width="1400" height="1090" loading="lazy" /></a>(Source: <a href="https://medium.com/pjtorres-high-gut-alpha-diversity-and-health/high-alpha-diversity-and-health-65e5eca7fa36">Pedro J Torres</a>)</p>
 
-<p>Metrics of alpha diversity can be grouped into different classes:</p>
+<p>Metrics of \(\alpha\) diversity can be grouped into different classes:</p>
 
-<p><strong>richness</strong>: estimate the quantity of distinct species within a sample</p>
+<p><a href="./images/alpha_diversity_richness_evenness.png" rel="noopener noreferrer"><img src="./images/alpha_diversity_richness_evenness.png" alt="The image is a conceptual diagram illustrating the concepts of richness and evenness in ecological communities using colored dots within four quadrants. The vertical axis represents richness, increasing upwards, while the horizontal axis represents evenness, increasing to the right. The top left quadrant shows moderate richness and evenness with a mix of colored dots. The top right quadrant, with a high number of evenly distributed colored dots, indicates high richness and evenness. The bottom left quadrant, having fewer and unevenly distributed dots, suggests lower richness and evenness. The bottom right quadrant displays moderate richness but lower evenness, with a somewhat uneven distribution of dots. This diagram visually explains how different communities can vary in species diversity and abundance." width="710" height="578" loading="lazy" /></a></p>
 
 <ul>
   <li>
-    <p><strong>Margalef’s richness</strong>, which indicates the estimated species richness, accounting for the community size. This metric takes into account that a larger community size can support a greater number of species (<span class="citation"><a href="#Margalef.1969">Margalef 1969</a></span>)</p>
+    <p><strong>Richness</strong> estimates the quantity of distinct species within a sample</p>
+
+    <ul>
+      <li>
+        <p><strong>Margalef’s richness</strong> indicates the estimated species richness, accounting for the community size. This metric takes into account that a larger community size can support a greater number of species (<span class="citation"><a href="#Margalef.1969">Margalef 1969</a></span>)</p>
 
 \[D = \frac{(S - 1)}{\log(n)}\]
 
-    <p>With</p>
-    <ul>
-      <li>\(S\) the total number of species,</li>
-      <li>\(n\) the total number of individuals in the sample</li>
-    </ul>
-  </li>
-  <li>
-    <p><strong>Chao1</strong>, which estimates the true species richness or diversity of a community, particularly when there might be rare or unobserved species. Chao1 estimates the number of unobserved species based on the number of singletons and doubletons. It assumes that there are additional rare species that are likely to exist but have not been observed. The estimation considers the number of unobserved singletons and doubletons and incorporates them into the observed species richness to provide an estimate of the true species richness (<span class="citation"><a href="#Chao.1992">Chao and Lee 1992</a></span>).</p>
+        <p>With</p>
+        <ul>
+          <li>\(S\) the total number of species,</li>
+          <li>\(n\) the total number of individuals in the sample</li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Chao1</strong> estimates the true species richness or diversity of a community, particularly when there might be rare or unobserved species. Chao1 estimates the number of unobserved species based on the number of singletons and doubletons. It assumes that there are additional rare species that are likely to exist but have not been observed. The estimation considers the number of unobserved singletons and doubletons and incorporates them into the observed species richness to provide an estimate of the true species richness (<span class="citation"><a href="#Chao.1992">Chao and Lee 1992</a></span>).</p>
 
 \[S_{chao1} = S_{obs} + \frac{n_{1}(n_{1} - 1)}{2(n_2 + 1)}\]
 
-    <p>With:</p>
-    <ul>
-      <li>\(S_{obs}\) the observed species richness,</li>
-      <li>\(n_{1}\) the number of species represented by a single individual (singletons),</li>
-      <li>\(n_{2}\) the number of species represented by two individuals (doubletons).</li>
+        <p>With:</p>
+        <ul>
+          <li>\(S_{obs}\) the observed species richness,</li>
+          <li>\(n_{1}\) the number of species represented by a single individual (singletons),</li>
+          <li>\(n_{2}\) the number of species represented by two individuals (doubletons).</li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>ACE</strong> (Abundance-based Coverage Estimator) takes into account the abundance distribution of observed species and incorporates the presence of rare or unobserved species. ACE estimates the number of unobserved species based on the abundance distribution and incorporates it into the observed species richness. It takes into account the relative rarity of observed species and uses this information to estimate the true species richness.</p>
+      </li>
     </ul>
   </li>
   <li>
-    <p><strong>ACE</strong> (Abundance-based Coverage Estimator), which takes into account the abundance distribution of observed species and incorporates the presence of rare or unobserved species. ACE estimates the number of unobserved species based on the abundance distribution and incorporates it into the observed species richness. It takes into account the relative rarity of observed species and uses this information to estimate the true species richness.</p>
-  </li>
-</ul>
+    <p><strong>Evenness</strong> evaluates the relative abundances of species rather than their total count</p>
 
-<p><strong>evenness</strong>: evaluate the relative abundances of species rather than their total count</p>
-
-<ul>
-  <li>
-    <p><strong>Pielou’s evenness</strong>, which quantifies how close the community’s diversity is to the maximum possible diversity. This index is calculated by taking the Shannon Diversity Index (which measures the overall diversity of the community) and dividing it by the maximum possible diversity given the observed species richness (<span class="citation"><a href="#Pielou.1966">Pielou 1966</a></span>).</p>
+    <ul>
+      <li>
+        <p><strong>Pielou’s evenness</strong> quantifies how close the community’s diversity is to the maximum possible diversity. This index is calculated by taking the Shannon Diversity Index (which measures the overall diversity of the community) and dividing it by the maximum possible diversity given the observed species richness (<span class="citation"><a href="#Pielou.1966">Pielou 1966</a></span>).</p>
 
 \[J = \frac{H'}{ln(S)}\]
 
-    <p>With:</p>
-    <ul>
-      <li>\(H'\) Shannon Weiner diversity</li>
-      <li>\(S\) the total number of species in a sample, across all samples in dataset.</li>
-    </ul>
-  </li>
-</ul>
-
-<p><strong>diversity</strong>: incorporate both the relative abundances and total count of distinct species</p>
-
-<ul>
-  <li>
-    <p><strong>Shannons</strong> index, which calculates the uncertainty in predicting the species identity of an individual that is selected from a community (<span class="citation"><a href="#Shannon.1948">Shannon 1948</a></span>).</p>
-
-\[H' = - \sum_{i=1}^{S} p_i \cdot ln(p_i)\]
-
-    <p>With:</p>
-    <ul>
-      <li>\(p_i\) the proportion of individuals of species i</li>
-      <li>and ln the natural logarithm</li>
+        <p>With:</p>
+        <ul>
+          <li>\(H'\) the Shannon Weiner diversity Index</li>
+          <li>\(S\) the total number of species in a sample, across all samples in dataset.</li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li>
-    <p><strong>Berger-Parker</strong> index, which expresses the proportional importance of the most abundant type. Highly biased by sample size and richness (<span class="citation"><a href="#Berger.1970">Berger and Parker 1970</a></span> ).</p>
+    <p><strong>Diversity</strong> incorporates both the relative abundances and total count of distinct species</p>
+
+    <ul>
+      <li>
+        <p><strong>Shannons</strong> index calculates the uncertainty in predicting the species identity of an individual that is selected from a community (<span class="citation"><a href="#Shannon.1948">Shannon 1948</a></span>).</p>
+
+\[H' = - \sum_{i=1}^{S} p_i \ln (p_i)\]
+
+        <p>With \(p_i\) the proportion of individuals of species \(i\)</p>
+
+        <p>The index ranges from 0 to a maximum value that depends on the number of species and their relative abundances. The higher the Shannon index value, the greater the diversity within the community.</p>
+      </li>
+      <li>
+        <p><strong>Berger-Parker</strong> index expresses the proportional importance of the most abundant type. This index is highly biased by sample size and richness (<span class="citation"><a href="#Berger.1970">Berger and Parker 1970</a></span> ).</p>
 
 \[D = \frac{n_{max}}{N}\]
 
-    <p>With:</p>
-    <ul>
-      <li>\(n_{max}\) the abundance of the most dominant species</li>
-      <li>N the total number of individuals (sum of all abundances)</li>
-    </ul>
-  </li>
-  <li>
-    <p><strong>Simpsons</strong> index, which calculates the probability that two individuals selected from a community will be of the same species. Obtains small values in datasets of high diversity and large values in datasets of low diversity (<span class="citation"><a href="#SIMPSON.1949">SIMPSON 1949</a></span>).</p>
+        <p>With:</p>
+        <ul>
+          <li>\(n_{max}\) the abundance of the most dominant species</li>
+          <li>\(N\) the total number of individuals (sum of all abundances)</li>
+        </ul>
 
-\[D = \sum_{i=1}^{S} \frac{n_i}{N}^2\]
+        <p>In contrast to the Shannon index, which considers both species richness and evenness, the Berger-Parker index emphasizes the dominance of a particular species.</p>
+      </li>
+      <li>
+        <p><strong>Simpsons</strong> index calculates the probability that two individuals selected from a community will be of the same species. Small values are observed in datasets of high diversity and large values in datasets of low diversity (<span class="citation"><a href="#SIMPSON.1949">SIMPSON 1949</a></span>).</p>
 
-    <p>With:</p>
-    <ul>
-      <li>\(n_i\) is the number of individuals in species i</li>
-      <li>N = total number of individuals of all species</li>
-      <li>and \(\frac{n_i}{N} = pi\) (proportion of individuals of species i), and S = species richness.</li>
-    </ul>
-  </li>
-  <li>
-    <p><strong>Inverse Simpons</strong> index, which is the transformation of Simpsons index that increases with increasing diversity.</p>
-  </li>
-  <li>
-    <p><strong>Fishers alpha</strong> index, which describes the relationship between the number of species and the number of individuals in those species. Parametric index of diversity that assumes that the abundance of species follows a log series distribution (<span class="citation"><a href="#Fisher.1943">Fisher <i>et al.</i> 1943</a></span>).</p>
+\[D = \sum_{i=1}^{S} \left( \frac{n_i}{N} \right)^2\]
 
-\[S=a \cdot ln(1+\frac{n}{a})\]
+        <p>With:</p>
+        <ul>
+          <li>\(n_i\) the number of individuals in species \(i\)</li>
+          <li>\(N\) total number of individuals of all species</li>
+          <li>\(\frac{n_i}{N} = p_i\) the proportion of individuals of species \(i\)</li>
+          <li>\(S\) the species richness.</li>
+        </ul>
 
-    <p>With:</p>
-    <ul>
-      <li>S the number of taxa</li>
-      <li>n the number of individuals</li>
-      <li>a the the Fisher’s alpha.</li>
+        <p>The index ranges from 0 to 1, with 1 representing maximum diversity. A value of 0.6 indicates that two randomly selected individuals from the community have 60% probability to belong to different species.</p>
+      </li>
+      <li>
+        <p><strong>Inverse Simpons</strong> index is the transformation of Simpsons index that increases with increasing diversity. A higher Inverse Simpson’s index value signifies a community with a greater number of species and a more even distribution of individuals among those species. The index ranges from 1 to the total number of species in the community, with higher values indicating higher diversity.</p>
+      </li>
+      <li>
+        <p><strong>Fishers alpha</strong> index describes the relationship between the number of species and the number of individuals in those species. Parametric index of diversity that assumes that the abundance of species follows a logarithmic series distribution (<span class="citation"><a href="#Fisher.1943">Fisher <i>et al.</i> 1943</a></span>).</p>
+
+\[S = a \cdot \ln \left(1+\frac{n}{a}\right)\]
+
+        <p>With:</p>
+        <ul>
+          <li>\(S\) the number of taxa</li>
+          <li>\(n\) the number of individuals</li>
+          <li>\(a\) the the Fisher’s alpha.</li>
+        </ul>
+
+        <p>A higher Fisher’s alpha value indicates greater species diversity within the sampled area.</p>
+      </li>
     </ul>
   </li>
 </ul>
 
-<p><a href="./images/alpha_diversity_richness_evenness.png" rel="noopener noreferrer"><img src="./images/alpha_diversity_richness_evenness.png" alt="richness and evenness. " width="710" height="578" loading="lazy" /></a></p>
-
 <h2 id="computing-α-diversity-using-galaxy">Computing α diversity using Galaxy</h2>
 
-<p><strong>KrakenTools</strong> is a suite of scripts designed to help Kraken users with downstream analysis of Kraken results. The Krakentool <strong>Calculate alpha diversity</strong> offers the possibility to calculate five different alpha diversity indexes:</p>
+<p><strong>KrakenTools</strong> is a suite of scripts designed to help Kraken users with downstream analysis of Kraken results. The Krakentool <strong>Calculate alpha diversity</strong> offers the possibility to calculate five different \(\alpha\) diversity indexes:</p>
 <ol>
-  <li>Shannon’s alpha diversity</li>
-  <li>Berger Parker’s alpha</li>
+  <li>Shannon’s \(\alpha\) diversity</li>
+  <li>Berger Parker’s \(\alpha\)</li>
   <li>Simpson’s diversity</li>
   <li>Inverse Simpson’s diversity</li>
   <li>Fisher’s index</li>
@@ -1751,21 +1757,22 @@ https://zenodo.org/records/13150694/files/JP4D_Estimate_Abundance_at_Species_Lev
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/krakentools_alpha_diversity/krakentools_alpha_diversity/1.2+galaxy1" title="Krakentools: Calculate alpha diversity tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Krakentools: Calculate alpha diversity</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2+galaxy1)</span> with the following parameters:
       <ul>
-        <li><em>“Abundance file”</em>: <code class="language-plaintext highlighter-rouge">Dataset Collection</code>: uploaded Bracken output file</li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Abundance file”</em>: uploaded Bracken output files</li>
         <li><em>“Specify alpha diversity type”</em>: <code class="language-plaintext highlighter-rouge">Shannon's alpha diversity</code></li>
       </ul>
     </li>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/krakentools_alpha_diversity/krakentools_alpha_diversity/1.2+galaxy1" title="Krakentools: Calculate alpha diversity tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Krakentools: Calculate alpha diversity</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2+galaxy1)</span> with the 4 other indexes</li>
   </ol>
-
 </blockquote>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
-    <li>Calculate the 5 different alpha indexes available in Krakentools and compare the results. What do these numbers tell you?</li>
+    <li>What are the values of 5 different \(\alpha\) indexes?</li>
+    <li>How should we interpret the different \(\alpha\) indexes?</li>
     <li>Are the results consistent among the different indexes?</li>
-    <li>What is the dominant species in the samples. What problem do you see.</li>
+    <li>What is the dominant species in the samples? What is the problem we can see?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1773,7 +1780,7 @@ https://zenodo.org/records/13150694/files/JP4D_Estimate_Abundance_at_Species_Lev
 
     <ol>
       <li>
-        <p>The five alpha indexes available in Krakentools are: Shannon’s alpha diversity, Berger Parker’s alpha, Simpson’s diversity, Inverse Simpson’s diversity, Fisher’s index. Below you can find a table comparing the different results for both the JC1A and JP4D sample as well as an explanation of the meaning of these values.</p>
+        <p>The results of five \(\alpha\) indexes for both the JC1A and JP4D sample as well as an explanation of the meaning of these values.</p>
 
         <table>
           <thead>
@@ -1811,17 +1818,59 @@ https://zenodo.org/records/13150694/files/JP4D_Estimate_Abundance_at_Species_Lev
             </tr>
           </tbody>
         </table>
+      </li>
+      <li>Intepretation of the different indexes:
+        <ul>
+          <li><strong>Shannon index</strong>: the index ranges from 0 to a maximum value that depends on the number of species and their relative abundances. The higher the Shannon index value, the greater the diversity within the community. A value of ~4 indicates a <strong>relatively high level of diversity</strong> within the community.</li>
+          <li><strong>Berger-Parker index</strong>: In contrast to the Shannon index, which considers both species richness and evenness, the Berger-Parker index emphasizes the dominance of a particular species.
+            <ul>
+              <li>For JC1A, a value of 0.46 suggests that <strong>a single species dominates the community</strong>, as it represents <strong>46%</strong> of the total individuals in the community. This indicates a relatively low level of species evenness, meaning that the abundance of individuals is heavily skewed towards one dominant species. A value of 0.46 indicates that the community is heavily influenced by one species, while the other species in the community are less abundant.</li>
+              <li>In the case of JP4D, the dominant species accounts for only <strong>8 %</strong> of the total individuals, which implies a <strong>more balanced distribution of individuals</strong> among different species compared to a higher Berger-Parker index value.</li>
+            </ul>
+          </li>
+          <li><strong>Simpson’s index</strong>: The index ranges from 0 to 1, with 1 representing maximum diversity. Therefore, value of 0.97 indicates a <strong>high level of species diversity and evenness</strong> within the community: community is highly diverse, with a relatively even distribution of individuals among different species. In other words, the value of 0.97 indicates that two randomly selected individuals from the community have 97% probability to belong to different species. This implies a rich and balanced community where multiple species coexist in relatively equal abundance.</li>
+          <li><strong>Inverse Simpson’s index</strong>: The Inverse Simpson’s index is the reciprocal of the Simpson’s index, which quantifies species diversity and evenness within a community. A higher Inverse Simpson’s index value signifies a community with a greater number of species and a more even distribution of individuals among those species. The index ranges from 1 to the total number of species in the community, with higher values indicating higher diversity. A value of <strong>3.92</strong> suggests a <strong>relatively low level of species diversity</strong> within the community and a value of 28.84 suggests a relatively high level of species diversity within the community.</li>
+        </ul>
 
-        <p>When the <strong>Shannon index</strong> is given as a value of ~4, it indicates a <strong>relatively high level of diversity</strong> within the community. The index ranges from 0 to a maximum value that depends on the number of species and their relative abundances. The higher the Shannon index value, the greater the diversity within the community.</p>
-
-        <p>When the <strong>Berger-Parker index</strong> is given as a value of 0.46, it suggests that <strong>a single species dominates the community</strong>, as it represents <strong>46 %</strong> of the total individuals in the community. This indicates a relatively low level of species evenness, meaning that the abundance of individuals is heavily skewed towards one dominant species. In contrast to the Shannon index, which considers both species richness and evenness, the Berger-Parker index emphasizes the dominance of a particular species. A value of 0.46 indicates that the community is heavily influenced by one species, while the other species in the community are less abundant. In the case of JP4D, the dominant species accounts for only <strong>8 %</strong> of the total individuals, which implies a <strong>more balanced distribution of individuals</strong> among different species compared to a higher Berger-Parker index value.</p>
-
-        <p>When the <strong>Simpson’s index</strong> is given as a value of 0.97, it indicates a <strong>high level of species diversity and evenness</strong> within the community. The index ranges from 0 to 1, with 1 representing maximum diversity. Therefore, a Simpson’s index of 0.97 suggests that the community is highly diverse, with a relatively even distribution of individuals among different species. In other words, the value of 0.97 indicates that if you were to randomly select two individuals from the community, there is a 97% probability that they would belong to different species. This implies a rich and balanced community where multiple species coexist in relatively equal abundance.</p>
-
-        <p>When the <strong>Inverse Simpson’s index</strong> is given as a value of <strong>3.92</strong>, it suggests a <strong>relatively low level of species diversity</strong> within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating higher diversity. Therefore, a value of 3.92 indicates a lower diversity compared to a higher index value. An Inverse Simpson’s index of 28.84 suggests a relatively high level of species diversity within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating greater diversity. Therefore, a value of <strong>28.84 indicates a higher diversity compared to a lower index value</strong>. The Inverse Simpson’s index is the reciprocal of the Simpson’s index, which quantifies species diversity and evenness within a community. A higher Inverse Simpson’s index value signifies a community with a greater number of species and a more even distribution of individuals among those species.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th>JC1A</th>
+              <th>JP4D</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Shannon</td>
+              <td>Less diversity as in JP4D</td>
+              <td>Relatively high level of diversity</td>
+            </tr>
+            <tr>
+              <td>Berger-Parker</td>
+              <td>A single species dominates the community</td>
+              <td>mMre balanced distribution of individuals among different species</td>
+            </tr>
+            <tr>
+              <td>Simpson</td>
+              <td>Lower level of species diversity and evenness</td>
+              <td>High level of species diversity and evenness</td>
+            </tr>
+            <tr>
+              <td>Inverse Simpson</td>
+              <td>Relatively low level of species diversity</td>
+              <td>Relatively high level of species diversity</td>
+            </tr>
+            <tr>
+              <td>Fisher</td>
+              <td>Lower species diversity</td>
+              <td>Greater species diversity</td>
+            </tr>
+          </tbody>
+        </table>
       </li>
       <li>The results are consistent as all indexes show JP4D to be the more diverse sample compared to JC1A.</li>
-      <li>If you look at the bracken files, you will see, that the dominant species in this samples is <code class="language-plaintext highlighter-rouge">Homo sapiens</code> - so us! This should not be part of the samples and is probably due to contamination. This finding should be used to reanalyze the samples and remove the human contamination. For the sake of simplicity we will continue with the samples as is and assume the <code class="language-plaintext highlighter-rouge">Homo sapiens</code> to be a species in out samples.</li>
+      <li>When looking at the Bracken files, we see that the dominant species in this samples is <code class="language-plaintext highlighter-rouge">Homo sapiens</code> - so us! This should not be part of the samples and is probably due to contamination. This finding should be used to reanalyze the samples and remove the human contamination. For the sake of simplicity we will continue with the samples as is and assume the <code class="language-plaintext highlighter-rouge">Homo sapiens</code> to be a species in out samples.</li>
     </ol>
   </blockquote>
 
@@ -1830,108 +1879,119 @@ https://zenodo.org/records/13150694/files/JP4D_Estimate_Abundance_at_Species_Lev
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
-  <p>Apart from Krakentools, there are at least two more tools available in Galaxy that can be used to calculate diversity indexes, QIIME2 (<span class="citation"><a href="#Bolyen.2019">Bolyen <i>et al.</i> 2019</a></span>) and <a href="https://github.com/vegandevs/vegan">Vegan</a>.</p>
+  <p>Apart from Krakentools, there are at least two more tools available in Galaxy that can be used to calculate diversity indexes,</p>
 
-  <p>QIIME 2 (Quantitative Insights Into Microbial Ecology 2) is a powerful open-source bioinformatics software package that provides a comprehensive suite of tools and methods for processing, analyzing, and visualizing microbiome data. It offers a modular approach to microbiome analysis, allowing researchers to build flexible analysis pipelines tailored to their specific research goals. The software supports a wide range of data types, including 16S rRNA gene sequencing, metagenomics, metatranscriptomics, and others.</p>
+  <ul>
+    <li>
+      <p><strong>QIIME 2</strong> (<span class="citation"><a href="#Bolyen.2019">Bolyen <i>et al.</i> 2019</a></span>)</p>
 
-  <p>Some of the key features and functionalities of QIIME 2 include:</p>
-  <ol>
-    <li>Diversity Analysis: QIIME 2 allows users to explore and quantify microbial diversity within and between samples. It provides metrics for alpha diversity (within-sample diversity) and beta diversity (between-sample diversity).</li>
-    <li>Data Import and Preprocessing</li>
-    <li>Taxonomic Assignments</li>
-    <li>Community Analysis</li>
-    <li>Phylogenetic Analysis</li>
-    <li>Statistical Analysiss.</li>
-    <li>Visualization</li>
-  </ol>
+      <p>QIIME 2 (Quantitative Insights Into Microbial Ecology 2) is a powerful open-source bioinformatics software package that provides a comprehensive suite of tools and methods for processing, analyzing, and visualizing microbiome data. It offers a modular approach to microbiome analysis, allowing researchers to build flexible analysis pipelines tailored to their specific research goals. The software supports a wide range of data types, including 16S rRNA gene sequencing, metagenomics, metatranscriptomics, and others.</p>
 
-  <p>The vegan package is a community ecology package in the R programming language. It provides a wide range of tools and methods for analyzing and interpreting ecological data, particularly in the context of community ecology. The package is designed to handle multivariate data and offers various statistical techniques for studying species composition, diversity, and community dynamics.</p>
+      <p>Some of the key features and functionalities of QIIME 2 include:</p>
+      <ol>
+        <li>Diversity Analysis: QIIME 2 allows users to explore and quantify microbial diversity within and between samples. It provides metrics for alpha diversity (within-sample diversity) and beta diversity (between-sample diversity).</li>
+        <li>Data Import and Preprocessing</li>
+        <li>Taxonomic Assignments</li>
+        <li>Community Analysis</li>
+        <li>Phylogenetic Analysis</li>
+        <li>Statistical Analysiss.</li>
+        <li>Visualization</li>
+      </ol>
+    </li>
+    <li>
+      <p><strong><a href="https://github.com/vegandevs/vegan">Vegan</a></strong></p>
 
-  <p>The vegan package encompasses several functionalities, including:</p>
+      <p>The vegan package is a community ecology package in the R programming language. It provides a wide range of tools and methods for analyzing and interpreting ecological data, particularly in the context of community ecology. The package is designed to handle multivariate data and offers various statistical techniques for studying species composition, diversity, and community dynamics.</p>
 
-  <ol>
-    <li>Diversity Analysis: vegan offers numerous diversity indices, such as species richness, Shannon diversity index, Simpson index, and many others. These indices allow researchers to quantify the diversity of species within a community and compare diversity between different samples or groups.</li>
-    <li>Ordination Techniques</li>
-    <li>Community Classification:</li>
-    <li>Ecological Network Analysis</li>
-    <li>Ecological Indices</li>
-    <li>Plotting and Visualization</li>
-  </ol>
+      <p>The vegan package encompasses several functionalities, including:</p>
+
+      <ol>
+        <li>Diversity Analysis: vegan offers numerous diversity indices, such as species richness, Shannon diversity index, Simpson index, and many others. These indices allow researchers to quantify the diversity of species within a community and compare diversity between different samples or groups.</li>
+        <li>Ordination Techniques</li>
+        <li>Community Classification:</li>
+        <li>Ecological Network Analysis</li>
+        <li>Ecological Indices</li>
+        <li>Plotting and Visualization</li>
+      </ol>
+    </li>
+  </ul>
 
 </blockquote>
 
-<h1 id="calculating-β-diversity">Calculating β diversity</h1>
+<h1 id="calculating-beta-diversity">Calculating \(\beta\) diversity</h1>
 
-<h2 id="theory-of-β-diversity">Theory of β diversity</h2>
+<h2 id="theory-of-beta-diversity">Theory of \(\beta\) diversity</h2>
 
-<p><strong>β diversity</strong> measures the distance between two or more separate entities. It therefore describes the difference between two communities or ecosystems.</p>
+<p><strong>\(\beta\) diversity</strong> measures the distance between two or more separate entities. It therefore describes the difference between two communities or ecosystems.</p>
 
-<p>There are <strong>multiple indexes</strong> used to calculate β diversity because different indexes emphasize different aspects of compositional dissimilarity between communities or sites.</p>
+<p>There are <strong>multiple indexes</strong> used to calculate \(\beta\) diversity because different indexes emphasize different aspects of compositional dissimilarity between communities or sites.</p>
 
-<p>These indexes have been developed to address specific research questions, accommodate different data types, or provide insights into different dimensions of β diversity. Below, you can find a list of commonly used indexes to calculate β diversity and their description.</p>
+<p>These indexes have been developed to address specific research questions, accommodate different data types, or provide insights into different dimensions of \(\beta\) diversity.</p>
 
 <ul>
   <li>
-    <p><strong>Jaccard Index</strong>, which measures the proportion of shared species between two samples (<span class="citation"><a href="#Jaccard.1912">Jaccard 1912</a></span>).</p>
+    <p><strong>Jaccard Index</strong> measures the proportion of shared species between two samples (<span class="citation"><a href="#Jaccard.1912">Jaccard 1912</a></span>).</p>
 
-\[J(X, Y) =  \frac{\|  X ∩ Y\|}{\| X ∪ Y\|}\]
+\[J(X, Y) =  \frac{\| X ∩ Y\|}{\| X ∪ Y\|}\]
 
     <p>With:</p>
     <ul>
-      <li>\(X ∩ Y\) the intersection of sets X and Y (elements common to both sets)</li>
-      <li>\(X ∪ Y\) the union of sets X and Y (all unique elements from both sets combined)</li>
+      <li>\(X ∩ Y\) the intersection of sets \(X\) and \(Y\), i.e. elements common to both sets</li>
+      <li>\(X ∪ Y\) the union of sets \(X\) and \(Y\), i.e. all unique elements from both sets combined</li>
     </ul>
   </li>
   <li>
-    <p><strong>Sørensen Index</strong>, which is similar to Jaccard Index, but accounts for species abundance (<span class="citation"><a href="#Srensen.1948">Sørensen 1948</a></span>).</p>
+    <p><strong>Sørensen Index</strong> is similar to Jaccard Index, but accounts for species abundance (<span class="citation"><a href="#Srensen.1948">Sørensen 1948</a></span>).</p>
 
 \[DSC = \frac{2\| X ∩ Y\|}{\| X\|} + \| Y\|\]
 
     <p>With:</p>
     <ul>
-      <li>\(X ∩ Y\) the intersection of sets X and Y (elements common to both sets)</li>
-      <li>\(\| X\|\) and \(\| Y \|\)  the cardinalities of the two sets (i.e. the number of elements in each set)</li>
+      <li>\(X ∩ Y\) the intersection of sets \(X\) and \(Y\), i.e.elements common to both sets</li>
+      <li>\(\| X\|\) and \(\| Y \|\) the cardinalities of the two sets, i.e. the number of elements in each set.</li>
     </ul>
   </li>
   <li>
-    <p><strong>Bray-Curtis Dissimilarity</strong>, which measures the dissimilarity of species abundances between two samples (<span class="citation"><a href="#Bray.1957">Bray and Curtis 1957</a></span>).</p>
+    <p><strong>Bray-Curtis Dissimilarity</strong> measures the dissimilarity of species abundances between two samples (<span class="citation"><a href="#Bray.1957">Bray and Curtis 1957</a></span>).</p>
 
 \[BC_{ij} = 1 - \frac{2C_{ij}}{S_{i} + S_{j}}\]
 
     <p>With:</p>
     <ul>
-      <li>\(C_{ij}\) the sum of the absolute differences in abundances between corresponding species in samples i and j</li>
-      <li>\(S_{i}\) the total abundance or sum of species abundances in sample i</li>
-      <li>\(S_{j}\) the total abundance or sum of species abundances in sample j</li>
+      <li>\(C_{ij}\) the sum of the absolute differences in abundances between corresponding species in samples \(i\) and \(j\)</li>
+      <li>\(S_{i}\) the total abundance or sum of species abundances in sample \(i\)</li>
+      <li>\(S_{j}\) the total abundance or sum of species abundances in sample \(j\)</li>
     </ul>
+
+    <p>The higher the dissimilarity value, the greater the difference in species composition or abundances.</p>
   </li>
   <li>
-    <p><strong>Kulczynski Dissimilarity</strong>, which masures the dissimilarity in the proportional abundances of shared species.</p>
+    <p><strong>Kulczynski Dissimilarity</strong> masures the dissimilarity in the proportional abundances of shared species.</p>
 
 \[D = 1 - \frac{S_{AB}}{S_{A} + S_{B} - 2S_{AB}}\]
 
     <p>With:</p>
     <ul>
-      <li>\(S_{AB}\) the number of shared OTUs between communities A and B</li>
-      <li>\(S_{A}\) the number of OTUs in community A</li>
-      <li>\(S_{B}\) the number of OTUs in community B</li>
+      <li>\(S_{AB}\) the number of shared species between communities \(A\) and \(B\)</li>
+      <li>\(S_{A}\) the number of species in community \(A\)</li>
+      <li>\(S_{B}\) the number of species in community \(B\)</li>
     </ul>
   </li>
   <li>
-    <p><strong>UniFrac</strong>, which incorporates information on phylogenetic distances between observed species in the computation. Can be calculated either weighted (accounts for abundances) or unweighted (accounts only for richness).</p>
+    <p><strong>UniFrac</strong> incorporates information on phylogenetic distances between observed species in the computation. Can be calculated either weighted (accounts for abundances) or unweighted (accounts only for richness).</p>
 
-    <p><a href="./images/unifrac.png" rel="noopener noreferrer"><img src="./images/unifrac.png" alt="UniFrac. " width="532" height="200" loading="lazy" /></a></p>
+    <p><a href="./images/unifrac.png" rel="noopener noreferrer"><img src="./images/unifrac.png" alt="The image consists of three phylogenetic trees, each representing different levels of community relatedness based on a parameter denoted as DD. The first tree on the left illustrates &quot;Identical communities&quot; with D=0.0D=0.0, showing branches that are closely related and color-coded similarly, indicating high similarity or identical species composition among the communities. The middle tree represents &quot;Related communities&quot; with D=0.5D=0.5, displaying a mix of colors on the branches, which suggests some degree of divergence and shared ancestry, indicating that these communities are related but not identical. The tree on the right depicts &quot;Unrelated communities&quot; with D=1.0D=1.0, characterized by distinctly different colors on separate branches, signifying a high level of dissimilarity and no shared recent ancestry among the communities. This visual representation highlights how community composition and relatedness can vary from being identical to completely unrelated." width="532" height="200" loading="lazy" /></a></p>
   </li>
 </ul>
 
-<h2 id="computing-β-diversity-using-galaxy">Computing β diversity using Galaxy</h2>
+<h2 id="computing-beta-diversity-using-galaxy">Computing \(\beta\) diversity using Galaxy</h2>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-calculate-β-diversity-with-krakentools"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Calculate β diversity with Krakentools</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/krakentools_beta_diversity/krakentools_beta_diversity/1.2+galaxy1" title="Krakentools: Calculate beta diversity (Bray-Curtis dissimilarity) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Krakentools: Calculate beta diversity (Bray-Curtis dissimilarity)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2+galaxy1)</span> with the following parameters:
       <ul>
-        <li><em>“Taxonomy file”</em>: <code class="language-plaintext highlighter-rouge">Dataset Collection</code>: uploaded Bracken output file</li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Taxonomy file”</em>: uploaded Bracken output files</li>
         <li><em>“Specify type of input file”</em>: <code class="language-plaintext highlighter-rouge">Bracken species abundance file</code></li>
       </ul>
     </li>
@@ -1944,7 +2004,7 @@ https://zenodo.org/records/13150694/files/JP4D_Estimate_Abundance_at_Species_Lev
 
   <ol>
     <li>What is the Bray-Curtis dissimilarity calculated for the two samples?</li>
-    <li>What does this number tell you?</li>
+    <li>How can we interpret Bray-Curtis dissimilarity between the two samples?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1952,7 +2012,7 @@ https://zenodo.org/records/13150694/files/JP4D_Estimate_Abundance_at_Species_Lev
 
     <ol>
       <li>The output file gives you a table comparing sample 0 and 1, respectively. Consequently, comparing 0 to 0 and 1 to 1 results in a dissimilarity of 0, as those are exactly the same. Comparing sample 0 to sample 1 shows a Bray-Curtis dissimilarity of 0.701.</li>
-      <li>The Bray-Curtis dissimilarity  measures the dissimiliraty of two samples. Consequently, an output of 0 represents two samples that are exactly the same, while an output of 1 means they are maximally divergent. In our case, a Bray-Curtis dissimilarity of 0.7 suggests that there is a substantial difference in the species composition or abundances between the two communities being compared. The higher the dissimilarity value, the greater the difference in species composition or abundances.</li>
+      <li>The Bray-Curtis dissimilarity measures the dissimiliraty of two samples. Consequently, an output of 0 represents two samples that are exactly the same, while an output of 1 means they are maximally divergent. In our case, a Bray-Curtis dissimilarity of 0.7 suggests that there is a substantial difference in the species composition or abundances between the two communities being compared. The higher the dissimilarity value, the greater the difference in species composition or abundances.</li>
     </ol>
   </blockquote>
 
@@ -1960,7 +2020,7 @@ https://zenodo.org/records/13150694/files/JP4D_Estimate_Abundance_at_Species_Lev
 
 <h1 id="evaluation-of-different-diversity-metrics">Evaluation of different diversity metrics</h1>
 
-<p>Bonilla-Rosso et al. did <strong>performance evaluation</strong> of different diversity metrics using simulated data sets <span class="citation"><a href="#BonillaRosso.2012">Bonilla-Rosso <i>et al.</i> 2012</a></span>. For details on the individual metrics, please check their <a href="https://pubmed.ncbi.nlm.nih.gov/22554028/">publication</a>. However, it is important to note that none of the estimated metrics showed statistical similarity to their corresponding parameters in the source communities. Moreover, the results obtained were inconsistent across the samples.</p>
+<p>Bonilla-Rosso et al. did <strong>performance evaluation</strong> of different diversity metrics using simulated data sets <span class="citation"><a href="#BonillaRosso.2012">Bonilla-Rosso <i>et al.</i> 2012</a></span>. However, it is important to note that none of the estimated metrics showed statistical similarity to their corresponding parameters in the source communities. Moreover, the results obtained were inconsistent across the samples.</p>
 
 <p>This <strong>inconsistency</strong> can be attributed to the fact that individual metrics only provide a <strong>specific</strong> perspective on diversity and are prone to bias in their estimation, leading to incorrect ranking of the samples.</p>
 
@@ -1982,54 +2042,56 @@ https://zenodo.org/records/13150694/files/JP4D_Estimate_Abundance_at_Species_Lev
 <blockquote class="details">
   <div class="box-title details-title" id="details-more-details-on-multidimensional-diversity-metrics-and-parameter-q"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-on-multidimensional-diversity-metrics-and-parameter-q" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: More details on Multidimensional diversity metrics and Parameter q</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <h2 id="multidimensional-diversity-metrics-and-parameter-q">Multidimensional diversity metrics and Parameter q</h2>
+  <p>Expressing the compositional complexity of an assemblage cannot be accomplished with a single numerical value. Traditional measures like diversities (Hill numbers) and entropies (Rényi entropies) vary in their <strong>order \(q\)</strong>, which determines <strong>the extent to which rare or common species are emphasized</strong>. The ranking and comparison of assemblages rely on the chosen value of \(q\).</p>
 
-  <p>Expressing the compositional complexity of an assemblage cannot be accomplished with a single numerical value. Traditional measures like diversities (Hill numbers) and entropies (Rényi entropies) vary in their <strong>order q</strong>, which determines <strong>the extent to which rare or common species are emphasized</strong>. The ranking and comparison of assemblages rely on the chosen value of q.</p>
+  <p>Instead of selecting a few measures to describe an assemblage, it is preferable to <strong>present a continuous profile</strong> that depicts diversity or entropy as a function of \(q\) (where \(q \sep 0\)). This approach enables a visual comparison of the compositional complexities among multiple assemblages and facilitates the assessment of the evenness in the relative abundance distributions of the assemblages. In practice, the profile is typically plotted for values of \(q\) ranging from 0 to \(q =\) 3 or 4, beyond which there is usually little change.</p>
 
-  <p>Instead of selecting a few measures to describe an assemblage, it is preferable to <strong>present a continuous profile</strong> that depicts diversity or entropy as a function of q (where q ≥ 0). This approach enables a visual comparison of the compositional complexities among multiple assemblages and facilitates the assessment of the evenness in the relative abundance distributions of the assemblages. In practice, the profile is typically plotted for values of q ranging from 0 to q = 3 or 4, beyond which there is usually little change.</p>
+  <ul>
+    <li>
+      <p><strong>Hill numbers</strong></p>
 
-  <p><a href="./images/hill_numbers.png" rel="noopener noreferrer"><img src="./images/hill_numbers.png" alt="Parameter q. " width="1261" height="695" loading="lazy" /></a>
-https://www.redalyc.org/journal/5117/511766773011/html/</p>
+      <figure id="figure-1" style="max-width: 90%;"><img src="./images/hill_numbers.png" alt="The image presents a graph and accompanying text that illustrate the diversity profiles of two ecological communities, labeled A and B, each containing the same number of species (100 species) and individuals (1,000 individuals), but differing in evenness. The graph plots Hill numbers, which represent the effective number of species, against a parameter qq, which determines the sensitivity of the measure to species relative abundance. Profile A, depicted by a blue curve, shows a steep decline as qq increases, indicating a few dominant species and many rare species, reflecting lower evenness. Profile B, represented by a red horizontal line, maintains a constant Hill number across all values of qq, indicating that all species have a similar number of individuals, reflecting higher evenness. The text explains that Hill numbers provide a way to compare diversity profiles graphically and quantitatively, with differences in the distribution of individuals among species affecting the diversity measures. Community A, with greater imbalance and less evenness, exhibits lower order 1 and order 2 diversity compared to the more even Community B." width="1261" height="695" loading="lazy" /><a target="_blank" href="./images/hill_numbers.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> <a href="https://www.redalyc.org/journal/5117/511766773011/html/">Source</a></figcaption></figure>
 
-  <h1 id="hill-numbers">Hill numbers</h1>
+      <p>Hill numbers, also known as diversity indices or diversity measures, are mathematical metrics used to quantify the diversity or richness of a biological community. They were developed by ecologist Robert H. Whittaker and are widely used in ecology and biodiversity studies.</p>
 
-  <p>Hill numbers, also known as diversity indices or diversity measures, are mathematical metrics used to quantify the diversity or richness of a biological community. They were developed by ecologist Robert H. Whittaker and are widely used in ecology and biodiversity studies.</p>
+      <p>Hill numbers provide a way to summarize and compare the diversity of different communities based on the abundance or occurrence of different species within those communities. These numbers take into account both the number of species present and their relative abundances. The higher the Hill number, the greater the diversity or richness of the community.</p>
 
-  <p>Hill numbers provide a way to summarize and compare the diversity of different communities based on the abundance or occurrence of different species within those communities. These numbers take into account both the number of species present and their relative abundances. The higher the Hill number, the greater the diversity or richness of the community.</p>
+      <p>Hill numbers are often represented by the symbol \(D\), followed by a subscript that indicates the order of diversity. The order of diversity determines the weight given to rare versus common species. Commonly used Hill numbers include:</p>
 
-  <p>Hill numbers are often represented by the symbol “D”, followed by a subscript that indicates the order of diversity. The order of diversity determines the weight given to rare versus common species. Commonly used Hill numbers include:</p>
+      <ol>
+        <li>Species richness (\(D\_0\)): This is the simplest Hill number and represents the total number of species in a community, without considering their abundances. It provides a basic measure of biodiversity based on species count.</li>
+        <li>Shannon diversity index (\(D\_1\)): This index incorporates both species richness and evenness. It takes into account both the number of species and their relative abundances, providing a more comprehensive measure of diversity.</li>
+        <li>Simpson diversity index (\(D\_2\)): This index focuses on the dominance or concentration of species within a community. It considers both species richness and the probability that two individuals randomly selected from the community belong to the same species.</li>
+      </ol>
+    </li>
+    <li>
+      <p><strong>Rényi entropy</strong></p>
 
-  <ol>
-    <li>Species richness (D₀): This is the simplest Hill number and represents the total number of species in a community, without considering their abundances. It provides a basic measure of biodiversity based on species count.</li>
-    <li>Shannon diversity index (D₁): This index incorporates both species richness and evenness. It takes into account both the number of species and their relative abundances, providing a more comprehensive measure of diversity.</li>
-    <li>Simpson diversity index (D₂): This index focuses on the dominance or concentration of species within a community. It considers both species richness and the probability that two individuals randomly selected from the community belong to the same species.</li>
-  </ol>
+      <p>Rényi entropy is a concept in information theory and statistical physics introduced by Alfréd Rényi, a Hungarian mathematician. It is a generalization of the Shannon entropy, which measures the uncertainty or information content of a random variable or probability distribution.
+ The Rényi entropy of a discrete probability distribution is defined by the parameter \(\alpha\), which determines the order of the entropy. The formula for calculating Rényi entropy is:</p>
 
-  <h1 id="rényi-entropy">Rényi entropy</h1>
+\[H \alpha (P) = \frac{1}{1 - α} \dot log_{2}(\sum{i=1}^{N} pi^{\alpha})\]
 
-  <p>Rényi entropy is a concept in information theory and statistical physics introduced by Alfréd Rényi, a Hungarian mathematician. It is a generalization of the Shannon entropy, which measures the uncertainty or information content of a random variable or probability distribution.
-The Rényi entropy of a discrete probability distribution is defined by the parameter α, which determines the order of the entropy. The formula for calculating Rényi entropy is:</p>
+      <p>where \(P = {p\_1, p\_2, ..., p\_N}\) is the probability distribution of \(N\) discrete events or states, and \(p\_i\) represents the probability of the ith event.</p>
 
-\[Hα(P) = \frac{1}{1 - α} \dot log_{2}(\sum{i=1}^{N} pi^α)\]
+      <p>The value of \(\alpha\) determines the properties of Rényi entropy. When \(\alpha = 1\), Rényi entropy reduces to Shannon entropy, providing a measure of average uncertainty or information content. As \(\alpha\) approaches 0, Rényi entropy converges to the minimum value, representing the most certain or least diverse distribution. Conversely, as \(\alpha\) approaches infinity, Rényi entropy approaches the maximum value, indicating a uniform or maximally diverse distribution.</p>
 
-  <p>where P = {p₁, p₂, …, pN} is the probability distribution of N discrete events or states, and pi represents the probability of the ith event.</p>
-
-  <p>The value of α determines the properties of Rényi entropy. When α = 1, Rényi entropy reduces to Shannon entropy, providing a measure of average uncertainty or information content. As α approaches 0, Rényi entropy converges to the minimum value, representing the most certain or least diverse distribution. Conversely, as α approaches infinity, Rényi entropy approaches the maximum value, indicating a uniform or maximally diverse distribution.</p>
-
-  <p>Rényi entropy has applications in various fields, including information theory, statistical physics, and data analysis. It offers a way to quantify the diversity or randomness of a system beyond the traditional Shannon entropy, allowing for a more nuanced understanding of information content and structure.</p>
+      <p>Rényi entropy has applications in various fields, including information theory, statistical physics, and data analysis. It offers a way to quantify the diversity or randomness of a system beyond the traditional Shannon entropy, allowing for a more nuanced understanding of information content and structure.</p>
+    </li>
+  </ul>
 
 </blockquote>
 
-<p>For further information on how to choose the best diversity metric also check</p>
+<p>For further information on how to choose the best diversity metric also check:</p>
 
 <ol>
-  <li><a href="https://academic.oup.com/bib/article/19/4/679/2871295?utm_source=pocket_reader">Measuring the diversity of the human microbiota with targeted next-generation sequencing</a> <span class="citation"><a href="#BonillaRosso.2012">Bonilla-Rosso <i>et al.</i> 2012</a></span></li>
-  <li><a href="https://academic.oup.com/femsec/article/82/1/37/567182?utm_source=pocket_reader">Understanding microbial community diversity metrics derived from metagenomes: performance evaluation using simulated data sets</a> <span class="citation"><a href="#Finotello.2018">Finotello <i>et al.</i> 2018</a></span></li>
+  <li><a href="https://academic.oup.com/bib/article/19/4/679/2871295">Measuring the diversity of the human microbiota with targeted next-generation sequencing</a> <span class="citation"><a href="#BonillaRosso.2012">Bonilla-Rosso <i>et al.</i> 2012</a></span></li>
+  <li><a href="https://academic.oup.com/femsec/article/82/1/37/567182">Understanding microbial community diversity metrics derived from metagenomes: performance evaluation using simulated data sets</a> <span class="citation"><a href="#Finotello.2018">Finotello <i>et al.</i> 2018</a></span></li>
 </ol>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>In this tutorial, we look how to calculate α and β  diversity from microbiome data. We apply <strong>Krakentools</strong> to calculate the α and β  diversity of two microbiome sample datasets.</p>
+<p>In this tutorial, we look how to calculate \(\alpha\) and \(\beta\) diversity from microbiome data. We apply <strong>Krakentools</strong> to calculate the \(\alpha\) and \(\beta\) diversity of two microbiome sample datasets.</p>
 
 
                 </section>
@@ -2352,7 +2414,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6fedf2e5247a5cc39cba24c4a327310515619a16">6fedf2e</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/544d0d400cc05ab66fe0a43bd589396a4ccfaf3c">544d0d4</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
