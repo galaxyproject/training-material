@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@faabb915ea3f6ff86c59c2979947a34613f65f9c",
+		release: "galaxy-training-network@3d83d545e4d7d759d0c763ff62c2410b85d6686d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Genome annotation with Braker3">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-06-03 15:14:55 +0000">
+<meta name="DC.date" content="2025-06-20 14:13:33 +0000">
 <meta name="DC.creator" content="Romane LIBOUBAN">
 <meta name="DC.creator" content="Anthony Bretaudeau"><meta name="description" content="Genome annotation is a multi-level process that includes prediction of protein-coding genes, as well as other functional genome units such as structural RNAs, tRNAs, small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion sequences, transposons and other mobile elements. ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -187,7 +187,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-06-03 15:14:55 +0000",
+  "dateModified": "2025-06-20 14:13:33 +0000",
   "datePublished": "2025-03-17 10:24:07 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -264,7 +264,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Genome annotation with Braker3",
   "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/braker3/tutorial.html",
-  "version": 3,
+  "version": 4,
   "timeRequired": "PT8H",
   "teaches": "- Load genome into Galaxy\n- Annotate genome with Braker3\n- Evaluate annotation quality with BUSCO\n- View annotations in JBrowse",
   "keywords": [
@@ -1106,6 +1106,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                     
                 
                     
+                
+                    
                         
                         
                             
@@ -1247,7 +1249,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 17, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 3, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 20, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1267,7 +1269,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
 
     </blockquote>
     </section>
@@ -1415,7 +1417,7 @@ Without this parameter, Braker3 may not function correctly or may produce incomp
   <div class="box-title hands-on-title" id="hands-on-genome-annotation-with-braker3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Genome annotation with Braker3</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/braker3/braker3/3.0.8+galaxy1" title="Braker3 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Braker3</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.8+galaxy1)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/braker3/braker3/3.0.8+galaxy0" title="Braker3 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Braker3</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.8+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly to annotate”</em>: <code class="language-plaintext highlighter-rouge">genome_masked.fasta</code> (Input dataset)</li>
         <li><em>“Species name”</em>: <code class="language-plaintext highlighter-rouge">Mucor mucedo</code></li>
@@ -1467,7 +1469,7 @@ Most of these genes are essential for the organism to live, and are expected to 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.4+galaxy0" title="GFFread tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GFFread</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1.4+galaxy0)</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input GFF3 or GTF feature file”</em>: output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/braker3/braker3/3.0.8+galaxy1" title="Braker tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Braker</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.8+galaxy1)</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input GFF3 or GTF feature file”</em>: output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/braker3/braker3/3.0.8+galaxy0" title="Braker tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Braker</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.8+galaxy0)</span></li>
         <li>In <em>“Reference Genome”</em> select: <code class="language-plaintext highlighter-rouge">From your history</code> (Input dataset)</li>
         <li><em>“Genome Reference Fasta”</em>: <code class="language-plaintext highlighter-rouge">masked genome</code> (Input dataset)</li>
         <li>In <em>“Select fasta outputs”</em> select: <code class="language-plaintext highlighter-rouge">fasta file with spliced exons for each GFF transcript (-y)</code></li>
@@ -1992,7 +1994,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/faabb915ea3f6ff86c59c2979947a34613f65f9c">faabb91</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/3d83d545e4d7d759d0c763ff62c2410b85d6686d">3d83d54</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

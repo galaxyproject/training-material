@@ -1,0 +1,85 @@
+- doc: Test outline for Galaxy-Workflow-Comparison_of_two_annotation_tools__Helixer_and_Braker3.ga
+  job:
+    Genome sequence:
+      class: File
+      location: https://zenodo.org/records/15051665/files/genome_masked.fasta
+      filetype: fasta
+    Alignments from RNA-seq:
+      class: File
+      location: https://zenodo.org/records/14770765/files/RNASeq_braker.bam
+      filetype: fasta
+    Protein sequences:
+      class: File
+      location: https://zenodo.org/records/14770765/files/swissprot_subset.fasta
+      filetype: fasta
+
+  outputs:
+    helixer output:
+      asserts:
+    
+    predicted proteins Helixer annotation:
+      asserts:
+        - has_n_lines:
+            n: "140918"
+
+    busco gff predicted proteins Helixer:
+      asserts:
+        - has_text:
+            text: "# BUSCO version is: 5.8.0"
+            text: "mucorales_odb10"
+    busco missing predicted proteins Helixer:
+      asserts:
+        - has_text:
+            text: "# BUSCO version is: 5.8.0"
+            text: "mucorales_odb10"
+    busco table predicted proteins Helixer:
+      asserts:
+        - has_text:
+            text: "# BUSCO version is: 5.8.0"
+            text: "mucorales_odb10"
+    busco sum predicted proteins Helixer:
+      asserts:
+        - has_text:
+            text: "# BUSCO version is: 5.8.0"
+            text: "mucorales_odb10"
+    
+    omark detail sum Helixer annotation:
+      asserts:
+        - has_text:
+            text: "Mucorineae"
+
+    predicted proteins Braker3 annotation:
+      asserts:
+        - has_n_lines:
+            n: "110730"
+
+    omark detail sum Braker3 annotation:
+      asserts:
+        - has_text:
+            text: "# BUSCO version is: 5.8.0"
+    
+    busco image predicted proteins Braker3:
+      asserts:
+        - has_text:
+            text: "# BUSCO version is: 5.8.0"
+            text: "mucorales_odb10"
+    busco gff predicted proteins Braker3:
+      asserts:
+        - has_text:
+            text: "# BUSCO version is: 5.8.0"
+            text: "mucorales_odb10"
+    busco sum predicted proteins Braker3:
+      asserts:
+        - has_text:
+            text: "# BUSCO version is: 5.8.0"
+            text: "mucorales_odb10"
+    busco table predicted proteins Braker3:
+      asserts:
+        - has_text:
+            text: "# BUSCO version is: 5.8.0"
+            text: "mucorales_odb10"
+    busco missing predicted proteins Braker3:
+      asserts:
+        - has_text:
+            text: "# BUSCO version is: 5.8.0"
+            text: "mucorales_odb10"
