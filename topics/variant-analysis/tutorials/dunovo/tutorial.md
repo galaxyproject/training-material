@@ -141,7 +141,7 @@ We then evaluated the quality of the data by running FastQC on both datasets (fo
 {: .hands_on}
 
 
-This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** in the dedicated [quality-control tutorial]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-quality-with-fastqc---short--long-reads).
+This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** in the dedicated [quality-control tutorial]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-quality-with-falcofastqc---short--long-reads).
 
 This gave us the following plots:
 
@@ -408,5 +408,5 @@ You can use the variant calling workflow to call variants using the SSCS instead
 
 You should now understand duplex sequencing, rare variants, and be able to process the former to find the latter.
 
-### If things don't work...
+# If things don't work...
 ...you need to complain. Use [Galaxy's Help Forum](https://help.galaxyproject.org/) to do this.
