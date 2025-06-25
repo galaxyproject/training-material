@@ -13,26 +13,38 @@ funding:
 tags: [jupyter, teaching]
 
 pathway:
-  - section: "Part One: Introduction"
-    description: Advantages and limitations of Jupyter-based teaching
+  - section: "Learn the basics about Jupyter-based teaching"
+    description: "Advantages and limitations of Jupyter-based teaching"
     tutorials:
       - topic: teaching
         name: jbt-intro
 
-  - section: "Part Two: Customization"
-    description: Tweak jupyter to your specific needs
+  - section: "Customize Jupyter to your needs"
+    description: "Adapt Jupyter to your course or workshop specific needs"
     tutorials:
       - topic: teaching
         name: jbt-customization-1
       - topic: teaching
         name: jbt-customization-2
 
-  - section: "Part Three: Featured customizations"
-    description: Battle-tested and recommended customizations for teaching 
+  - section: "Featured customizations"
+    description: "Battle-tested and recommended Jupyter extensions for teaching "
     tutorials:
       - topic: teaching
         name: jbt-featured
 
+  - section: "For teachers: Use custom Jupyter Images with JHaaS"
+    description: "Learn how to teach a course or workshop with your Jupyter customizations on JHaaS"
+    tutorials:
+      - topic: teaching
+        name: jbt-jhaas
+
+  - section: "For admins: Provide your Jupyter Images with Galaxy"
+    description: "Learn how to provide your custom Jupyter customizations on your Galaxy instance"
+    tutorials:
+      - topic: teaching
+        name: jbt-galaxy
+
 ---
 
-You'll learn about the advantages of using jupyter for teaching and how you can adapt jupyter to the very specific needs of your course or workshop.
+You'll learn about the advantages of using Jupyter for teaching and how you can adapt Jupyter to the very specific needs of your course or workshop. As a teacher, you'll learn how to teach a course or workshop using your Jupyter customizations. As a Galaxy admin, you'll learn how to provide your users with a customized Jupyter.

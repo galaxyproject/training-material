@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Featured jupyter customizations
+title: Featured Jupyter customizations
 subtopic: practises
 draft: true
 time_estimation: 1h
@@ -16,5 +16,31 @@ contributors:
 ---
 
 # Introduction
+
+We present adaptions that the JLU Physics Department has been successfully using in its courses for over a year and consider to be a great addition to the default Jupyter notebook server.
+
+# nbgitpuller
+
+## Install
+
+## Configuration
+
+## Usage
+
+# nbgrader
+
+## Install
+
+## Configuration
+
+## Usage
+
+# Config customizations
+
+## Dos and Don'ts
+
+# Setup Scripts
+
+## Where to place them what to do with them
 
 (WIP)
