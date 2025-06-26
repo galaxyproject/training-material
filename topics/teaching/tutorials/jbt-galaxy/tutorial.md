@@ -19,6 +19,33 @@ contributors:
 
 (WIP)
 
+# Make your Image available
+
+E.g. on Docker Hub, Quay, GitLab or any other public accessible Registry
+
 # Create a new interactive tool definition (xml)
 
+--> You may take the available Jupyter Notebook tool definition as starting point: https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_jupyter_notebook.xml
+
+--> Tweak it to your needs
+
+--> Adjust the container image to point to your container image on the registry.
+
 # Include your new interactive tool definition into your galaxy installation
+
+Official docs: https://docs.galaxyproject.org/en/master/admin/special_topics/interactivetools.html
+
+--> Include your newly created definition in your `config/tool_conf.xml` like described in the docs:
+
+```xml
+...
+<toolbox monitor="true">
+    ...
+    <section id="interactivetools" name="Interactive tools">
+      ...
+      <tool file="PATH_TO_YOUR_NEWLY_CREATED_TOOL_DEFINITION" />
+      ...
+    </section>
+    ...
+</toolbox>
+```
