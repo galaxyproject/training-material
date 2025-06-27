@@ -1,10 +1,10 @@
 ---
 layout: tutorial_hands_on
 
-title: Teaching a course with custom Jupyter via JHaaS
+title: Provide your custom JupyterLab via JHaaS
 subtopic: practises
 draft: true
-time_estimation: 1h
+time_estimation: 15m
 questions:
   - How can I use my Jupyter customizations in a course relevant matter?
 objectives:

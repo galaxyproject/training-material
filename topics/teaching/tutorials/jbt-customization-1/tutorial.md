@@ -30,7 +30,7 @@ contributors:
 * WIP
 
 ```bash
-sudo docker run --rm -p 127.0.0.1:8888:8888 quay.io/jupyter/minimal-notebook:2025-06-23
+sudo docker run --rm -it -p 127.0.0.1:8888:8888 quay.io/jupyter/minimal-notebook:2025-06-23
 ```
 
 * Will print out a link to `http://localhost:8888/lab?token=<token>`

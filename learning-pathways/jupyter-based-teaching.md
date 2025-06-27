@@ -33,15 +33,11 @@ pathway:
       - topic: teaching
         name: jbt-featured
 
-  - section: "For teachers: Use custom Jupyter Images with JHaaS"
-    description: "Learn how to teach a course or workshop with your Jupyter customizations on JHaaS"
+  - section: "Use your customized JupyterLab for Courses"
+    description: "Learn how to teach a course or workshop with your custom JupyterLab"
     tutorials:
       - topic: teaching
         name: jbt-jhaas
-
-  - section: "For admins: Provide your Jupyter Images with Galaxy"
-    description: "Learn how to provide your custom Jupyter customizations on your Galaxy instance"
-    tutorials:
       - topic: teaching
         name: jbt-galaxy
 

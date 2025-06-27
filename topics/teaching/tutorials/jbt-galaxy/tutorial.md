@@ -1,10 +1,10 @@
 ---
 layout: tutorial_hands_on
 
-title: Provide your custom Jupyter Image via Galaxy
+title: Provide your custom JupyterLab via Galaxy
 subtopic: practises
 draft: true
-time_estimation: 1h
+time_estimation: 15m
 questions:
   - As a Galaxy admin, how can I provide my users with a custom Notebook Server?
 objectives:

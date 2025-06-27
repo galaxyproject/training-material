@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Advanced Jupyter customization
 subtopic: practises
 draft: true
-time_estimation: 1h
+time_estimation: 90m
 questions:
   - How can I tailor Jupyter to my specific teaching needs?
 objectives:
@@ -170,7 +170,7 @@ RUN pip install jupyter_server_proxy
 
 You may install any other arbitrary server applications this way too, e.g. RStudio.
 
-# Exercise
+# Exercise 1: Persistent Data
 
 Why is the rust installation in step 1 of this tutorial problematic in case this notebook is served via JupyterHub?
 
@@ -178,4 +178,97 @@ Why is the rust installation in step 1 of this tutorial problematic in case this
 
 Build a Customized JupyterLab with an available rust kernel even in JupyterHub szenario.
 
---> Dockerfile here
+```dockerfile
+FROM quay.io/jupyter/minimal-notebook:2025-06-23
+
+USER root
+RUN apt update \
+    && apt install -y build-essential \
+    && apt clean
+
+ARG RUSTUP_URL=https://sh.rustup.rs
+ARG RUSTUP_INIT=/tmp/rustup.sh
+
+ENV RUSTUP_HOME=/opt/rustup
+ENV CARGO_HOME=/opt/cargo
+ENV JUPYTER_PATH=/usr/local/share/jupyter
+ENV PATH="${PATH}:${CARGO_HOME}/bin"
+
+ADD --chmod=755 "${RUSTUP_URL}" "${RUSTUP_INIT}"
+RUN "${RUSTUP_INIT}" -v -y
+RUN cargo install --locked evcxr_jupyter
+RUN evcxr_jupyter --install
+
+RUN rm "${RUSTUP_INIT}"
+
+USER ${NB_UID}
+```
+
+# Exercise 2: Proxy Application
+
+Create a simple html page like this:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hello World</title>
+  <meta charset="UTF-8" />
+</head>
+<body>
+  <h1>Hello World!</h1>
+  <p>I am served by your python server application!</p>
+</body>
+</html>
+```
+
+Include it as `index.html` in a separate folder in your container image.
+
+Create a proxy application serving this index.html file with the simple python builtin `http.server` package.
+
+Tip:
+
+```bash
+python3 -m http.server -d {path_to_dir_containing_the_html_file} {PORT}
+```
+
+
+
+Serve it via simple python 
+
+Solution:
+
+Create the index.html as explained above.
+
+Create a JupyterLab config `jupyter_lab_config.py` like this:
+
+```python
+c.ServerProxy.servers = {
+    "hello-world-server": {
+        "command": [
+          "python3",
+          "-m", "http.server",
+          "-d", "/srv/html",
+          "{port}"
+        ],
+        "launcher_entry": {
+          "enabled": True,
+          "title": "Hello World Server"
+        }
+    }
+}
+```
+
+Create a Dockerfile like this:
+
+```dockerfile
+FROM quay.io/jupyter/minimal-notebook:2025-06-23
+
+USER root
+
+COPY --chown=root:root jupyter_lab_config.py /etc/jupyter/jupyter_lab_config.py
+COPY --chown=root:root index.html /srv/html/index.html
+
+USER ${NB_UID}
+RUN pip install jupyter_server_proxy
+```
