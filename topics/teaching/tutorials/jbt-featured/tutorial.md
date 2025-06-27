@@ -83,6 +83,8 @@ It should pull the repo and opens the example automatically. You should be able 
 
 https://github.com/jupyter/nbgrader
 
+More: https://nbgrader.readthedocs.io/en/stable/
+
 ## Install
 
 ## Configuration

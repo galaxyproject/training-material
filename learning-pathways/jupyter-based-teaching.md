@@ -3,7 +3,7 @@ layout: learning-pathway
 title: Jupyter-based teaching
 type: use
 description: |
-  An introduction to Jupyter-based teaching and Jupyter customization.
+  An introduction to Jupyter-based teaching and JupyterLab customization.
 
 editorial_board:
 - mittler-works
@@ -14,13 +14,13 @@ tags: [jupyter, teaching]
 
 pathway:
   - section: "Learn the basics about Jupyter-based teaching"
-    description: "Advantages and limitations of Jupyter-based teaching"
+    description: "An Overview on the Jupyter project components as well as advantages and limitations of Jupyter-based teaching and learning."
     tutorials:
       - topic: teaching
         name: jbt-intro
 
-  - section: "Customize Jupyter to your needs"
-    description: "Adapt Jupyter to your course or workshop specific needs"
+  - section: "Customize JupyterLab to your needs"
+    description: "Adapt JupyterLab to your course or workshop specific needs by installing custom packages, kernels and proxy applications."
     tutorials:
       - topic: teaching
         name: jbt-customization-1
@@ -28,13 +28,13 @@ pathway:
         name: jbt-customization-2
 
   - section: "Featured customizations"
-    description: "Battle-tested and recommended Jupyter extensions for teaching "
+    description: "Battle-tested and recommended JupyterLab extensions for frustration-free teaching and learning."
     tutorials:
       - topic: teaching
         name: jbt-featured
 
-  - section: "Use your customized JupyterLab for Courses"
-    description: "Learn how to teach a course or workshop with your custom JupyterLab"
+  - section: "Productive use of your customized JupyterLab"
+    description: "Learn how to teach a course or workshop, providing you students with your customized JupyterLab."
     tutorials:
       - topic: teaching
         name: jbt-jhaas
@@ -43,4 +43,4 @@ pathway:
 
 ---
 
-You'll learn about the advantages of using Jupyter for teaching and how you can adapt Jupyter to the very specific needs of your course or workshop. As a teacher, you'll learn how to teach a course or workshop using your Jupyter customizations. As a Galaxy admin, you'll learn how to provide your users with a customized Jupyter.
+You'll learn about the advantages of using Jupyter for teaching and how you can adapt JupyterLab to the very specific needs of your courses or workshops. As a teacher, you'll learn how to provide your students with your customized JupyterLab for individual courses or workshops. As a Galaxy admin, you'll learn how to provide your users with a customized JupyterLab each as new interactive tool.
