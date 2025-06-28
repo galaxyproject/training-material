@@ -1,98 +1,162 @@
 ---
 layout: tutorial_hands_on
 
-title: Advanced Jupyter customization
+title: Advanced JupyterLab customizations
 subtopic: practises
 draft: true
 time_estimation: 90m
 questions:
-  - How can I tailor Jupyter to my specific teaching needs?
+  - How can I tailor JupyterLab to my specific teaching needs?
 objectives:
-  - A guide to advanced Jupyter customization is provided, e.g. how to install proxy applications.
+  - A guide to advanced JupyterLab customization is provided, e.g. how to install kernels and proxy applications.
 key_points:
-  - Advanced customitzations may be time-consuming, but offer great potential and reusability value.
+  - Advanced customitzations may be time-consuming, but offer many possibilities and reusability value.
 contributors:
   - mittler-works
 ---
 
-# Introduction
+# Prerequisites
 
-Now we know how to include changes, we will build something more complex and look at some pitfalls.
+It is assumed that you either completed the previous tutorial "Basic JupyterLab customizations" or that you already have basic knowledge of containerization and JupyterLab customizing.
 
-# Install an additional Kernel
+With this knowledge, we'll add some more advanced customizations to JupyterLab and look at some pitfalls.
 
-https://github.com/jupyter/jupyter/wiki/Jupyter-kernels
+# Installing an additional Kernel
 
-Rust: https://github.com/evcxr/evcxr/tree/main/evcxr_jupyter
+One common szenario for customization is the need for an additional kernel, e.g. for Julia or R. This tutorial guides you through installing a rust kernel on top of `minimal-notebook` as an example.
 
+> <comment-title>Jupyter Kernels</comment-title>
+> 
+> A list of availible Jupyter Kernels can be found at [https://github.com/jupyter/jupyter/wiki/Jupyter-kernels](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels)
+{: .comment}
 
-```
-FROM quay.io/jupyter/minimal-notebook:2025-06-23
+If you look for `Rust` you'll find the `Evcxr` Jupyter Kernel which is the one we are going to add.
 
-USER root
-RUN apt update \
-    && apt install -y build-essential \
-    && apt clean
+> <comment-title>Evcxr Kernel</comment-title>
+> 
+> All relevant information for the Evcxr Kernel can be found at [https://github.com/evcxr/evcxr/tree/main/evcxr_jupyter](https://github.com/evcxr/evcxr/tree/main/evcxr_jupyter)
+{: .comment}
 
-USER ${NB_USER}
-ADD --chmod=755 https://sh.rustup.rs /tmp/rustup.sh
-RUN /tmp/rustup.sh -v -y
-RUN . "$HOME/.cargo/env" && cargo install --locked evcxr_jupyter
-RUN . "$HOME/.cargo/env" && evcxr_jupyter --install
-```
+> <hands-on-title></hands-on-title>
+> 
+> Create a new directory. Inside, create a `Dockerfile` with the following content:
+> 
+> ```
+> FROM quay.io/jupyter/minimal-notebook:2025-06-23
+> 
+> USER root
+> RUN apt update \
+>     && apt install -y build-essential \
+>     && apt clean
+> 
+> USER ${NB_UID}
+> ADD --chmod=755 https://sh.rustup.rs /tmp/rustup.sh
+> RUN /tmp/rustup.sh -v -y
+> 
+> ENV PATH="${PATH}:${HOME}/.cargo/bin"
+> RUN cargo install --locked evcxr_jupyter
+> RUN evcxr_jupyter --install
+> ```
+{: .hands_on}
 
-Build It.
+> <comment-title>Breakdown</comment-title>
+> 
+> Again, we are using `minimal-notebook` as base image. But this time we need to do more than just installing a python package:
+> 1. we need to install system packages to meet requirements for Rust
+> 2. we need to install Rust itself
+> 3. we need to install and register the Evcxr kernel
+> 
+> In order to install system packages, we need a privileged user inside the docker build, which is why we are changing to the root user using the `USER` keyword. When installing packages, keep in mind that docker builds are non-interactive, thus you need to use the `-y` flag to bypass the confirmation prompt.
+> 
+> After installing system files, we can return to the JupyterLab default user, who is usually called `jovyan`. The variable `NB_UID` is inherited from the base image.
+> 
+> Next, the rustup utility will be downloaded and executed. Note, with the `--chmod` portion you can tell `ADD` in which filemod to save the downloaded file, thus you do not need to make the file executable in a separate step.
+> The rustup script installs the binaries for rust in `${HOME}/.cargo/bin` which is why we need to add it to the path. We can do that simply by using the `ENV` keyword.
+> 
+> At least, we install and register the Evcxr as explained on the projects github page.
+{: .question}
 
-Run it.
+> <hands-on-title>Build your JupyterLab</hands-on-title>
+> 
+> ```bash
+> sudo docker build -t my-rust-jupyterlab .
+> ```
+{: .hands_on}
 
-Try it out:
+> <hands-on-title>Run your JupyterLab</hands-on-title>
+> 
+> ```bash
+> sudo docker run --rm -p 127.0.0.1:8888:8888 my-rust-jupyterlab .
+> ```
+{: .hands_on}
 
-```rust
-println!("Hello World!");
-```
+> <hands-on-title>Try your JupyterLab</hands-on-title>
+> 
+> Again, you'll be provided with a link to open your JupyterLab.
+> 
+> Open it, click on the Rust kernel and run following snippet:
+> ```rust
+> println!("Hello World!");
+> ```
+{: .hands_on}
 
-HINT:
+Congratulations, you have successfully installed a custom kernel to your JupyterLab!
 
-This method installs all the kernel related resources inside the default homedir.
+# Configuration Changes
 
-Therefore this will not work inside deployments where an empty volume is mounted as homedir, e.g. in default z2jh JupyterHub Deployments.
+There are a few files for configuring JupyterLab. One important one is the `jupyter_lab_config.py` file, where you can configure various different settings, e.g. the log level of the server application and much more.
 
-# Config Changes
+> <comment-title></comment-title>
+> 
+> All relevant configuration options for `jupyter_lab_config.py` can be found at [https://jupyter-server.readthedocs.io/en/latest/other/full-config.html](https://jupyter-server.readthedocs.io/en/latest/other/full-config.html)
+{: .comment}
 
-* Where to put them
-You may put it in `~/.jupyter/jupyter_lab_config.py`
+You might include this file either as a user configuration in the user's home directory like this: `${HOME}/.jupyter/jupyter_lab_config.py`. But you better include it as a system-wide configuration by including it as `/etc/jupyter/jupyter_lab_config.py`. You can find out why this is the better solution in the [persistent data](#persistent-data) section.
 
-But you should put it in `/etc/jupyter/jupyter_lab_config.py` because homedir will be overriden in some infrastructures.
+> <hands-on-title>Include your custom configuration</hands-on-title>
+> 
+> First, create a snippet of custom config, e.g. let's edit the default name for Notebooks from "Untitled" to "HelloWorld". Save it as `jupyter_lab_config.py`:
+>
+> ```python
+> c.ContentsManager.untitled_notebook = 'HelloWorld'
+> ```
+> 
+> Then, add it as system wide config to your Dockerfile. Again, we're using the `minimal-notebook` as our base image:
+> 
+> ```dockerfile
+> FROM quay.io/jupyter/minimal-notebook:2025-06-23
+> 
+> COPY --chown=root:root jupyter_lab_config.py /etc/jupyter/jupyter_lab_config.py
+> ```
+> 
+> You may now build it as usual...
+> 
+> ```bash
+> sudo docker build -t my-configured-jupyterlab .
+> ```
+>
+> ...run it as usual...
+> 
+> ```bash
+> sudo docker run --rm -p 127.0.0.1:8888:8888 my-configured-jupyterlab .
+> ```
+> 
+> ...and access it with the printed URL. Now, open a new Notebook Document and you'll see it is now called `HelloWorld.ipynb` instead of `Untitled.ipynb`.
+{: .hands_on}
 
-
-* What to put there
-https://docs.jupyter.org/en/latest/use/config.html
-
-You find all configuration options here: https://jupyter-server.readthedocs.io/en/latest/other/full-config.html
-
-* How to put there
-Create a new local file `jupyter_lab_config.py` and fill it with content.
-
-Then, in your Dockerfile add it either as system wide config (/etc) or user config (~/)
-
-```dockerfile
-FROM quay.io/jupyter/minimal-notebook:2025-06-23
-
-COPY --chown=root:root jupyter_lab_config.py /etc/jupyter/jupyter_lab_config.py
-
-```
+Congratulations, you have successfully configured your JupyterLab with a custom configuration! While this example handles a very low impact customization, please review the available configuration options! You may also configure plugins that way, as you will learn later in the [Application Proxies](#application-proxies) section.
 
 # Persistent Data
 
-* HomeDir will be overlayed with a mounted Volume
+Even though persistent data is not strictly a topic of customization, it is a relevant topic that you have to keep in mind when customizing your JupyterLab.
 
-* WIP
+Running JupyterLab in a container, means that your data may be lost when the container is removed. To avoid data loss, volumes can be used.
 
-## External persistent Data
+--> On local machine, mount it wherever you want
 
-* Depends on your environment
+--> Bind mount vs actual volume
 
-* WIP
+--> With JupyterHub it's common to overlay homedir
 
 ## Large Data
 
@@ -103,6 +167,8 @@ COPY --chown=root:root jupyter_lab_config.py /etc/jupyter/jupyter_lab_config.py
 * WIP
 
 ## Sensitive Data (?)
+
+* Just avoid at all cost
 
 * Maybe WIP, but maybe put that into `jbt-intro`
 
@@ -175,6 +241,14 @@ You may install any other arbitrary server applications this way too, e.g. RStud
 Why is the rust installation in step 1 of this tutorial problematic in case this notebook is served via JupyterHub?
 
 --> it installs rust in homedir
+
+
+HINT:
+
+This method installs all the kernel related resources inside the default homedir.
+
+Therefore this will not work inside deployments where an empty volume is mounted as homedir, e.g. in default z2jh JupyterHub Deployments.
+
 
 Build a Customized JupyterLab with an available rust kernel even in JupyterHub szenario.
 

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Basics of JupyterLab customization
+title: Basic JupyterLab customizations
 subtopic: practises
 draft: true
 time_estimation: 1h
