@@ -150,199 +150,283 @@ Congratulations, you have successfully configured your JupyterLab with a custom 
 
 Even though persistent data is not strictly a topic of customization, it is a relevant topic that you have to keep in mind when customizing your JupyterLab.
 
+## Volumes
+
 Running JupyterLab in a container, means that your data may be lost when the container is removed. To avoid data loss, volumes can be used.
 
---> On local machine, mount it wherever you want
+Volumes are only loosly coupled with containers at runtime and thus they are not tailored to a containers lifecycle. Volumes can be mounted into a container on an arbitrary path and multiple Volumes may by mounted.
 
---> Bind mount vs actual volume
+Please note that data in the directory to which a volume is being mounted will be overlaid by the data in the volume in will wherefore not be easy accessible. That means, if you install user packages or configuration in your home directory when building the image and if you are mounting a volume as your home directory for persistence, all prebuild data in this home directory will not be available in the running container.
 
---> With JupyterHub it's common to overlay homedir
+This is especially an issue if you are using a container-based JupyterHub Provider, as it is very likely that an empty volume will be mounted as users homedirectory by default. On your local machine you have the free choice on which directory a volume should be mounted. You could use `/mnt/data` or `/home/jovyan/data` in order not to override your complete home directory.
+
+For your local machine, you have two basic options for using volumes with your containers: Named Volumes and Bind Mounts.
+
+### Named Volumes
+
+Named Volumes are managed by docker and will be automatically created on demand as soon as it is requested. The created Volume will be just empty. You may reference a named volume with it's name or id.
+
+```bash
+# This mounts the named volume my-data-volume to /data. If it does not exist, it will be created in first place.
+sudo docker run --rm -v "my-data-volume:/data" -p 127.0.0.1:8888:8888 my-configured-jupyterlab
+```
+
+### Bind Mounts
+
+Instead of having a volume managed by docker, you may also bind mount an existing directory into the container. This is useful when you have data to be shared on your local drive, e.g. for live coding or for analysis.
+
+Please note, bind mounting data into the container may lead to problems with uid and gid numbers for the mounted directory, as the user inside docker not neccessarly has the same uid and gid numbers as your local machine user.
+
+```bash
+# This bind mounts the current directory to /data
+sudo docker run --rm -v "$(pwd):/data" -p 127.0.0.1:8888:8888 my-configured-jupyterlab
+```
 
 ## Large Data
 
-* Don't include it into your Image!
+Large Data must not be added to a container image, but should be mounted from a (shared) volume into the container.
 
-* S3
+Having big images wastes time and storage. It increases bulid, pull and push times and replicates the data on each host using this image.
 
-* WIP
+On your local machine, you may use a bind mount for sharing. On a JupyterHub Provider your better use shared volumes or s3 in order to provide your JupyterLabs with data.
 
-## Sensitive Data (?)
+## Sensitive Data
 
-* Just avoid at all cost
+As well as large data, sensitive data must not be added to a container image.
 
-* Maybe WIP, but maybe put that into `jbt-intro`
+When it comes to sensitive data, it is not about resource consumption, but about data protection rules. It is very hard to use sensitive data inside a container image without violating GDPR, and especially in JupyterHub Provider szenarios it is hardly possible at all.
 
 # Application Proxies
 
-Install the pip `jupyter_server_proxy`
+Sometimes it might be useful to start a server software with a web interface from within your JupyterLab. Great examples are RStudio or a Code Server. To access this web interface in a containerized setup, a proxy can and should be used. The proxy runs in your JupyterLab and hands all relevant traffic to your server application.
 
-Download code-server from Github https://github.com/coder/code-server/releases
+> <comment-title>Jupyter Server Proxy</comment-title>
+> 
+> All relevant info for Jupyter Server Proxy can be found at [https://github.com/jupyterhub/jupyter-server-proxy](https://github.com/jupyterhub/jupyter-server-proxy).
+> 
+{: .comment}
 
-```
-wget -qO- 'https://github.com/coder/code-server/releases/download/v4.101.2/code-server-4.101.2-linux-amd64.tar.gz' | tar xzvf - -C code-server --strip-components 1
-```
+In this tutorial we'll install `code-server` and register it as a proxy application to be accessed directly from your JupyterLab's home screen. The roadmap for implementation is straight forward:
+1. Install `code-server`
+2. Install `jupyter_server_proxy`
+3. Add Application Proxy to your JupyterLab configuration
 
-Configure the proxy server application in `/etc/jupyter/jupyter_lab_config.py`:
+> <comment-title>code server</comment-title>
+> 
+> All relevant info for code-server can be found at [https://github.com/coder/code-server](https://github.com/coder/code-server).
+> 
+{: .comment}
 
-```python
-c.ServerProxy.servers = {
-    "code-server": {
-        "command": [
-          "/opt/code-server/bin/code-server",
-          "--auth=none",
-          "--socket={unix_socket}",
-          "--disable-telemetry",
-          "--disable-update-check"
-        ],
-        "unix_socket": True,
-        "timeout": 30,
-        "absolute_url": False,
-        "raw_socket_proxy": False,
-        "launcher_entry": {
-          "enabled": True,
-          "title": "Code",
-          "icon_path": "/opt/code-server/src/browser/media/favicon.svg"
-        }
-    }
-}
-```
+> <hands-on-title>Installing code server with application proxy</hands-on-title>
+> 
+> Create a new directory, inside create a `Dockerfile` with following content:
+> 
+> ```dockerfile
+> FROM quay.io/jupyter/minimal-notebook:2025-06-23
+> 
+> USER root
+> ARG CS_URL=https://github.com/coder/code-server/releases/download/v4.101.2/code-server-4.101.2-linux-amd64.tar.gz
+> ARG CS_PATH=/opt/code-server
+> RUN mkdir "${CS_PATH}"
+> RUN wget -qO- "${CS_URL}" | tar xzvf - -C "${CS_PATH}" --strip-components 1
+> COPY --chown=root:root jupyter_lab_config.py /etc/jupyter/jupyter_lab_config.py
+> 
+> USER ${NB_UID}
+> RUN pip install jupyter_server_proxy
+> ```
+> 
+> Next to the Dockerfile, create a configuration file `jupyter_lab_config.py` with following content:
+> 
+> ```python
+> c.ServerProxy.servers = {
+>     "code-server": {
+>         "command": [
+>           "/opt/code-server/bin/code-server",
+>           "--auth=none",
+>           "--socket={unix_socket}",
+>           "--disable-telemetry",
+>           "--disable-update-check"
+>         ],
+>         "unix_socket": True,
+>         "timeout": 30,
+>         "absolute_url": False,
+>         "raw_socket_proxy": False,
+>         "launcher_entry": {
+>           "enabled": True,
+>           "title": "Code",
+>           "icon_path": "/opt/code-server/src/browser/media/favicon.svg"
+>         }
+>     }
+> }
+> ```
+> 
+> Now, build it...
+> 
+> ```bash
+> sudo docker build -t my-code-jupyterlab .
+> ```
+>
+> ...and run it...
+> 
+> ```bash
+> sudo docker run --rm -p 127.0.0.1:8888:8888 my-code-jupyterlab .
+> ```
+> 
+> ...and access it with the printed URL. You can now see a new Launcher "Code". Try it out and you'll be provided with a web-based IDE.
+{: .hands_on}
 
-Extend your Dockerfile:
-
-```dockerfile
-FROM quay.io/jupyter/minimal-notebook:2025-06-23
-
-USER root
-RUN apt update \
-    && apt install -y build-essential \
-    && apt clean
-
-USER ${NB_USER}
-ADD --chmod=755 https://sh.rustup.rs /tmp/rustup.sh
-RUN /tmp/rustup.sh -v -y
-RUN . "$HOME/.cargo/env" && cargo install --locked evcxr_jupyter
-RUN . "$HOME/.cargo/env" && evcxr_jupyter --install
-
-USER root
-ARG CS_URL=https://github.com/coder/code-server/releases/download/v4.101.2/code-server-4.101.2-linux-amd64.tar.gz
-ARG CS_PATH=/opt/code-server
-RUN mkdir "${CS_PATH}"
-RUN wget -qO- "${CS_URL}" | tar xzvf - -C "${CS_PATH}" --strip-components 1
-COPY --chown=root:root jupyter_lab_config.py /etc/jupyter/jupyter_lab_config.py
-
-USER ${NB_UID}
-RUN pip install jupyter_server_proxy
-```
-
-You may install any other arbitrary server applications this way too, e.g. RStudio.
+Congratulations, you have successfully installed a `code-server` applications proxy into your JupyterLab. You may install any other arbitrary server applications this way too, e.g. Shiny Server or RStudio.
 
 # Exercise 1: Persistent Data
 
-Why is the rust installation in step 1 of this tutorial problematic in case this notebook is served via JupyterHub?
+> <question-title></question-title>
+> 
+> Why might be the rust installation above, in section 1 of this tutorial, problematic?
+> 
+> > <solution-title></solution-title>
+> > 
+> > With the installation above, all rust related tools will be installed and configured in the users homedir and thus might be overriden when using volumes. Try it out:
+> > 
+> > ```bash
+> > sudo docker run --rm -v "jovyan-home:/home/jovyan" -p 127.0.0.1:8888:8888 my-rust-jupyterlab .
+> > ```
+> > 
+> > Access the notebook and see that your kernel and all rust related packages are missing.
+> {: .solution}
+> 
+{: .question}
 
---> it installs rust in homedir
-
-
-HINT:
-
-This method installs all the kernel related resources inside the default homedir.
-
-Therefore this will not work inside deployments where an empty volume is mounted as homedir, e.g. in default z2jh JupyterHub Deployments.
-
-
-Build a Customized JupyterLab with an available rust kernel even in JupyterHub szenario.
-
-```dockerfile
-FROM quay.io/jupyter/minimal-notebook:2025-06-23
-
-USER root
-RUN apt update \
-    && apt install -y build-essential \
-    && apt clean
-
-ARG RUSTUP_URL=https://sh.rustup.rs
-ARG RUSTUP_INIT=/tmp/rustup.sh
-
-ENV RUSTUP_HOME=/opt/rustup
-ENV CARGO_HOME=/opt/cargo
-ENV JUPYTER_PATH=/usr/local/share/jupyter
-ENV PATH="${PATH}:${CARGO_HOME}/bin"
-
-ADD --chmod=755 "${RUSTUP_URL}" "${RUSTUP_INIT}"
-RUN "${RUSTUP_INIT}" -v -y
-RUN cargo install --locked evcxr_jupyter
-RUN evcxr_jupyter --install
-
-RUN rm "${RUSTUP_INIT}"
-
-USER ${NB_UID}
-```
+> <question-title></question-title>
+>
+> Build a customized JupyterLab container that solves this problem.
+> 
+> > <solution-title></solution-title>
+> > 
+> > Keep in mind, that the proposed solution is only one possible way of solving the problem. You might find other solutions as well.
+> > 
+> > First, create a Dockerfile with following content:
+> > 
+> > ```dockerfile
+> > FROM quay.io/jupyter/minimal-notebook:2025-06-23
+> > 
+> > USER root
+> > RUN apt update \
+> >     && apt install -y build-essential \
+> >     && apt clean
+> > 
+> > ARG RUSTUP_URL=https://sh.rustup.rs
+> > ARG RUSTUP_INIT=/tmp/rustup.sh
+> > 
+> > ENV RUSTUP_HOME=/opt/rustup
+> > ENV CARGO_HOME=/opt/cargo
+> > ENV JUPYTER_PATH=/usr/local/share/jupyter
+> > ENV PATH="${PATH}:${CARGO_HOME}/bin"
+> > 
+> > ADD --chmod=755 "${RUSTUP_URL}" "${RUSTUP_INIT}"
+> > RUN "${RUSTUP_INIT}" -v -y
+> > RUN cargo install --locked evcxr_jupyter
+> > RUN evcxr_jupyter --install
+> > 
+> > RUN rm "${RUSTUP_INIT}"
+> > 
+> > USER ${NB_UID}
+> > ```
+> >
+> > Build it, run it with volume mounted on homedir...
+> > 
+> > ```bash
+> > sudo docker build -t my-rust-jupyterlab .
+> > sudo docker run --rm -v "jovyan-home:/home/jovyan" -p 127.0.0.1:8888:8888 my-rust-jupyterlab .
+> > ```
+> > 
+> > Access it and verify that it's working.
+> {: .solution}
+> 
+{: .question}
 
 # Exercise 2: Proxy Application
 
-Create a simple html page like this:
+In this exercise, you will configure your own Proxy Application in order to access a static web page served from within your JupyterLab.
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Hello World</title>
-  <meta charset="UTF-8" />
-</head>
-<body>
-  <h1>Hello World!</h1>
-  <p>I am served by your python server application!</p>
-</body>
-</html>
-```
+> <hands-on-title></hands-on-title>
+> 
+> Create a simple html page like this:
+> 
+> ```html
+> <!DOCTYPE html>
+> <html>
+> <head>
+>   <title>Hello World</title>
+>   <meta charset="UTF-8" />
+> </head>
+> <body>
+>   <h1>Hello World!</h1>
+>   <p>I am served by your python server application!</p>
+> </body>
+> </html>
+> ```
+{: .hands_on}
 
-Include it as `index.html` in a separate folder in your container image.
+> <question-title></question-title>
+> 
+> Include the above html snippet as `index.html` in a custom folder in your container image.
+> 
+> Create a proxy application serving this index.html file with the simple python builtin `http.server` package.
+> 
+> > <comment-title>http.server</comment-title>
+> > 
+> > All relevant information about the http-server package can be found at [https://docs.python.org/3/library/http.server.html](https://docs.python.org/3/library/http.server.html).
+> {: .comment}
+> 
+> > <tip-title></tip-title>
+> > 
+> > ```bash
+> > python3 -m http.server -d {path_to_dir_containing_the_html_file} {PORT}
+> > ```
+> {: .tip}
+> 
+{: .question}
 
-Create a proxy application serving this index.html file with the simple python builtin `http.server` package.
-
-Tip:
-
-```bash
-python3 -m http.server -d {path_to_dir_containing_the_html_file} {PORT}
-```
-
-
-
-Serve it via simple python 
-
-Solution:
-
-Create the index.html as explained above.
-
-Create a JupyterLab config `jupyter_lab_config.py` like this:
-
-```python
-c.ServerProxy.servers = {
-    "hello-world-server": {
-        "command": [
-          "python3",
-          "-m", "http.server",
-          "-d", "/srv/html",
-          "{port}"
-        ],
-        "launcher_entry": {
-          "enabled": True,
-          "title": "Hello World Server"
-        }
-    }
-}
-```
-
-Create a Dockerfile like this:
-
-```dockerfile
-FROM quay.io/jupyter/minimal-notebook:2025-06-23
-
-USER root
-
-COPY --chown=root:root jupyter_lab_config.py /etc/jupyter/jupyter_lab_config.py
-COPY --chown=root:root index.html /srv/html/index.html
-
-USER ${NB_UID}
-RUN pip install jupyter_server_proxy
-```
+> <solution-title></solution-title>
+> 
+> Create an index.html file according to example above.
+> 
+> Create a JupyterLab config `jupyter_lab_config.py` like this:
+> 
+> ```python
+> c.ServerProxy.servers = {
+>     "hello-world-server": {
+>         "command": [
+>           "python3",
+>           "-m", "http.server",
+>           "-d", "/srv/html",
+>           "{port}"
+>         ],
+>         "launcher_entry": {
+>           "enabled": True,
+>           "title": "Hello World Server"
+>         }
+>     }
+> }
+> ```
+> 
+> Create a Dockerfile like this:
+> 
+> ```dockerfile
+> FROM quay.io/jupyter/minimal-notebook:2025-06-23
+> 
+> COPY --chown=root:root jupyter_lab_config.py /etc/jupyter/jupyter_lab_config.py
+> COPY --chown=root:root index.html /srv/html/index.html
+> 
+> RUN pip install jupyter_server_proxy
+> ```
+> 
+> Build and run it:
+> 
+> ```bash
+> sudo docker build -t my-rust-jupyterlab .
+> sudo docker run --rm -v "jovyan-home:/home/jovyan" -p 127.0.0.1:8888:8888 my-rust-jupyterlab .
+> ```
+> 
+> Access it and verify that it's working.
+{: .solution}
