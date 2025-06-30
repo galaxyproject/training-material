@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Neoantigen 1: Fusion-Database-Generation"
+title: "Neoantigen 1a: Fusion-Database-Generation"
 zenodo_link: "https://zenodo.org/records/14365542"
 questions:
 - Why must we generate a customized fusion database for proteogenomics research?
@@ -30,7 +30,7 @@ follow_up_training:
         type: "internal"
         topic_name: proteomics
         tutorials:
-            - neoantigen-2-non-reference-database-generation
+            - neoantigen-1b-non-reference-database-generation
 tags: [label-free]
 
 ---
