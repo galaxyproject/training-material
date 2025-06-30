@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Neoantigen 4: PepQuery2 Verification"
+title: "Neoantigen 3: PepQuery2 Verification"
 zenodo_link: 'https://zenodo.org/records/15090517'
 questions:
 - How can neoantigens be verified using bioinformatics tools?
@@ -34,7 +34,7 @@ follow_up_training:
         type: "internal"
         topic_name: proteomics
         tutorials:
-            - neoantigen-5-variant-annotation
+            - neoantigen-4-variant-annotation
 tags: [label-free]
 
 ---
@@ -376,7 +376,7 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 >
 > 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-4-peptide-verification/workflows/main_workflow.ga" title="PepQuery2 Verification" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-3-peptide-verification/workflows/main_workflow.ga" title="PepQuery2 Verification" %}
 >
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
