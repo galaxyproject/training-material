@@ -1,9 +1,9 @@
 ---
 layout: tutorial_hands_on
 redirect_from:
-- /topics/proteomics/tutorials/neoantigen-2-non-normal-database-generation/tutorial
+- /topics/proteomics/tutorials/neoantigen-1b-non-normal-database-generation/tutorial
 
-title: "Neoantigen 2: Non-Reference-Database-Generation"
+title: "Neoantigen 1b: Non-Reference-Database-Generation"
 zenodo_link: "https://zenodo.org/records/14372521"
 questions:
 - Why must we generate a customized fusion database for Proteogenomics research?
@@ -32,7 +32,7 @@ follow_up_training:
         type: "internal"
         topic_name: proteomics
         tutorials:
-            - neoantigen-3-fragpipe-discovery
+            - neoantigen-2-fragpipe-discovery
 tags: [label-free]
 
 ---
@@ -637,7 +637,7 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 >
 > 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-2-non-reference-database-generation/workflows/main_workflow.ga" title="Neoantigen non-reference Database Generation" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-1b-non-reference-database-generation/workflows/main_workflow.ga" title="Neoantigen non-reference Database Generation" %}
 >
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
