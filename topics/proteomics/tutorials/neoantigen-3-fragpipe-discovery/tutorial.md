@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Neoantigen 3: Database merge and FragPipe discovery"
+title: "Neoantigen 2: Database merge and FragPipe discovery"
 zenodo_link: 'https://zenodo.org/records/14374118'
 questions:
 - What are the key features and unique sequences in protein datasets that contribute to neoantigen discovery?
@@ -34,7 +34,7 @@ follow_up_training:
         type: "internal"
         topic_name: proteomics
         tutorials:
-            - neoantigen-4-peptide-verification
+            - neoantigen-3-peptide-verification
 tags: [label-free]
 
 ---
@@ -277,7 +277,7 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 >
 > 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-3-fragpipe-discovery/workflows/main_workflow.ga" title="Fragpipe Discovery" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-2-fragpipe-discovery/workflows/main_workflow.ga" title="Fragpipe Discovery" %}
 >
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
