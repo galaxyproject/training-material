@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+- /topics/proteomics/tutorials/neoantigen-1a-fusion-database-generation/tutorial
 
 title: "Neoantigen 1a: Fusion-Database-Generation"
 zenodo_link: "https://zenodo.org/records/14365542"
