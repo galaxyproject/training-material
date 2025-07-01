@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+- /topics/proteomics/tutorials/neoantigen-4-variant-annotation/tutorial
 
 title: "Neoantigen 4: Variant Annotation"
 zenodo_link: 'https://zenodo.org/records/14375693'
