@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+- /topics/proteomics/tutorials/neoantigen-5b-hla-binding-novel-peptides/tutorial
 
 title: "Neoantigen 5b: IEDB binding PepQuery Validated Neopeptides"
 zenodo_link: 'https://zenodo.org/records/14377365'
