@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Neoantigen 1: Fusion-Database-Generation"
+title: "Neoantigen 1a: Fusion-Database-Generation"
 zenodo_link: "https://zenodo.org/records/14365542"
 questions:
 - Why do we need to generate a customized fusion database for proteogenomics research?
@@ -30,7 +30,7 @@ follow_up_training:
         type: "internal"
         topic_name: proteomics
         tutorials:
-            - neoantigen-2-non-normal-database-generation
+            - neoantigen-1b-non-normal-database-generation
 tags: [label-free]
 
 ---
@@ -358,7 +358,7 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 >
 > 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-1-fusion-database-generation/workflows/main_workflow.ga" title="Neoantigen Fusion Database Generation" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-1a-fusion-database-generation/workflows/main_workflow.ga" title="Neoantigen Fusion Database Generation" %}
 >
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Neoantigen 5: Variant Annotation"
+title: "Neoantigen 4: Variant Annotation"
 zenodo_link: 'https://zenodo.org/records/14375693'
 questions:
 - How can neoantigens be identified in cancer genomes?
@@ -36,7 +36,7 @@ follow_up_training:
         type: "internal"
         topic_name: proteomics
         tutorials:
-            - neoantigen-6-predicting-hla-binding
+            - neoantigen-5a-predicting-hla-binding
 tags: [label-free]
 
 ---
@@ -438,7 +438,7 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 >
 > 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-5-variant-annotation/workflows/main_workflow.ga" title="peppointer Annotation" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-4-variant-annotation/workflows/main_workflow.ga" title="peppointer Annotation" %}
 >
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:

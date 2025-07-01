@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Neoantigen 6: Predicting HLA Binding"
+title: "Neoantigen 5a: Predicting HLA Binding"
 zenodo_link: 'https://zenodo.org/records/14375917'
 questions:
 - How can we predict the neoantigens presented by tumor cells?
@@ -34,7 +34,7 @@ follow_up_training:
         type: "internal"
         topic_name: proteomics
         tutorials:
-            - neoantigen-7-hla-binding-novel-peptides
+            - neoantigen-5b-hla-binding-novel-peptides
 tags: [label-free]
 
 ---
@@ -309,7 +309,7 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 >
 > 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-6-predicting-hla-binding/workflows/main_workflow.ga" title="HLA Binding Prediction of Verified Candidates" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-5a-predicting-hla-binding/workflows/main_workflow.ga" title="HLA Binding Prediction of Verified Candidates" %}
 >
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
