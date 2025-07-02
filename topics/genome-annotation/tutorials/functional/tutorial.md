@@ -5,6 +5,7 @@ title: Functional annotation of protein sequences
 zenodo_link: https://zenodo.org/record/6861851
 tags:
   - eukaryote
+  - biodiversity
 questions:
   - How to perform functional annotation on protein sequences?
 objectives:
@@ -14,6 +15,9 @@ level: Introductory
 key_points:
   - EggNOG Mapper compares sequences to a database of annotated orthologous sequences
   - InterProScan detects known motifs in protein sequences
+edam_ontology:
+  - topic_1775 # Function analysis
+  - topic_3510 # Protein sites, features and motifs
 contributions:
   authorship:
     - abretaud

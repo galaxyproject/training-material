@@ -16,7 +16,7 @@ mode: onsite
 
 registration:
   link: https://forms.gle/AQ7n7zi1rUd995Me9
-  deadline: 2025-05-11
+  deadline: 2025-05-18
 
 contributions:
   organisers: [Sch-Da, teresa-m]

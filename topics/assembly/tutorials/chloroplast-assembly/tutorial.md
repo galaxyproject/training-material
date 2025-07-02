@@ -6,6 +6,7 @@ tags:
 - plants
 - nanopore
 - jbrowse1
+- biodiversity
 questions:
 - How can we assemble a chloroplast genome?
 objectives:
@@ -43,9 +44,6 @@ recordings:
 
 
 ---
-
-
-# Introduction
 
 
 ## What is genome assembly?

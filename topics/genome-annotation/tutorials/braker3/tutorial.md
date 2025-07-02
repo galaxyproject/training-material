@@ -7,12 +7,15 @@ tags:
   - eukaryota
   - Braker3
   - jbrowse1
+  - biodiversity
 
 edam_ontology:
 - topic_0196 # Sequence Assembly
 - topic_0622 # Genomics
 - topic_0362 # Genome annotation
-
+- topic_3050 # Biodiversity
+- topic_3500 # Zoology
+- topic_0780 # Plant Biology
 
 questions:
     - How to annotate an eukaryotic genome with Braker3?
@@ -138,7 +141,7 @@ With these files, We can run [**Braker3**](https://github.com/Gaius-Augustus/BRA
 
 > <hands-on-title>Genome annotation with Braker3</hands-on-title>
 >
-> 1. {% tool [Braker3](toolshed.g2.bx.psu.edu/repos/iuc/braker3/braker3/3.0.8+galaxy1) %} with the following parameters:
+> 1. {% tool [Braker3](toolshed.g2.bx.psu.edu/repos/iuc/braker3/braker3/3.0.8+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Assembly to annotate"*: `genome_masked.fasta` (Input dataset)
 >    - *"Species name"*: `Mucor mucedo`
 >    - {% icon param-file %} *"RNA-seq mapped to genome to train Augustus/GeneMark"*: `rnaseq.bam` (Input dataset)
@@ -177,7 +180,7 @@ So first generate these sequences:
 > <hands-on-title>Extract protein sequences</hands-on-title>
 >
 > 1. {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: output of {% tool [Braker](toolshed.g2.bx.psu.edu/repos/iuc/braker3/braker3/3.0.8+galaxy1) %}
+>    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: output of {% tool [Braker](toolshed.g2.bx.psu.edu/repos/iuc/braker3/braker3/3.0.8+galaxy0) %}
 >    - In *"Reference Genome"* select: `From your history` (Input dataset)
 >    - *"Genome Reference Fasta"*: `masked genome` (Input dataset)
 >    - In *"Select fasta outputs"* select: `fasta file with spliced exons for each GFF transcript (-y)`

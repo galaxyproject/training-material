@@ -477,7 +477,7 @@ The visualization tool creates the following ROC plot:
 
 # Create data processing pipeline
 
-At the last step, we will create a bagging classifier by using  the **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The **Pipeline builder** tool builds the classifier and returns a `h5mlm` file. This tool creates another file which is tabular and contains a list of all the different hyperparameters of the preprocessors and estimators. This tabular file will be used in the **Hyperparameter search** tool to populate the list of hyperparameters with their respective (default) values.
+At the last step, we will create a bagging classifier by using  the **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The **Pipeline builder** tool builds the classifier and returns a `h5mlm` file. This file also contains a list of all the different hyperparameters of the preprocessors and estimators which will be used in the **Hyperparameter search** tool to populate the list of hyperparameters with their respective (default) values.
 
 > <hands-on-title>Create pipeline</hands-on-title>
 >
@@ -485,6 +485,7 @@ At the last step, we will create a bagging classifier by using  the **Pipeline b
 >    - In *"Final Estimator"*:
 >        - *"Choose the module that contains target estimator"*: `sklearn.ensemble`
 >            - *"Choose estimator class"*: `BaggingClassifier`
+> 
 >      We choose `Final Estimator` as we have only the estimator and no preprocessor and need the parameters of only the estimator.
 >
 {: .hands_on}
@@ -501,7 +502,6 @@ After extracting the parameter names from the **Pipeline builder** file, we will
 >        - {% icon param-files %} *"Choose the dataset containing pipeline/estimator object"*: `h5mlm` file (output of **Pipeline builder** {% icon tool %})
 >        - {% icon param-files %} *"Is the estimator a deep learning model?"*: `NO` {% icon tool %})
 >        - In *"Search parameters Builder"*:
->             - {% icon param-files %} *"Choose the dataset containing parameter names"*: `tabular` file (output of **Estimator attributes** {% icon tool %})
 >             - In *"Parameter settings for search"*:
 >                 - {% icon param-repeat %} *"1: Parameter settings for search"*
 >                    - *"Choose a parameter name (with current value)"*: `n_estimators: 10`

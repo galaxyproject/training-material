@@ -234,7 +234,7 @@ This tool will take a while to run. Alevin produces many file outputs, not all o
 {: .question}
 
 > <warning-title>Process stopping</warning-title>
->  
+>
 > The command above will display the log of the process and will say "Analyzed X cells (Y% of all)". For some reason, running Alevin may sometimes cause problems in Jupyter Notebook and this process will stop and not go to completion. This is the reason why we use hugely subsampled dataset here - bigger ones couldn't be fully analysed (they worked fine locally though). The dataset used in this tutorial shouldn't make any issues when you're using Jupyter notebook through galaxy.eu, however might not work properly on galaxy.org. If you're accessing Jupyter notebook via galaxy.eu and alevin process stopped, just restart the kernel (in the upper left corner: *Kernel* -> *Restart kernel...*) and that should help. However, if it doesn't, here are the alternatives:
 > - We prepared a Jupyter notebook with the same workflow as shown here, compatible with Google Collab. So if you have troubles with running the above step, you can use the [notebook provided](https://colab.research.google.com/drive/1nRidlpiU-_qUG1zLgpc8mJZewr_EQL0N?usp=sharing), upload it to your [Google Collab](https://colab.research.google.com/) and run the code there, following the tutorial on GTN.
 > - You can download the output folder that you would get as a result of running the code above. Simply run the code below.
@@ -317,7 +317,7 @@ As you can see, *rowData names* and *colData names* are still empty. Before we a
 
 # Identify barcodes that correspond to non-empty droplets
 
-Some sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ (see the [Alevin Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}#basic-qc) for multiple sub-populations. The `emptyDrops` method ({% cite Lun2019 %}) has become a popular way of dealing with this. `emptyDrops` still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar.
+Some sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ (see the [Alevin Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}#interpreting-the-qc-plots) for multiple sub-populations. The `emptyDrops` method ({% cite Lun2019 %}) has become a popular way of dealing with this. `emptyDrops` still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar.
 
 EmptyDrops takes multiple arguments that you can read about in the [documentation](https://rdrr.io/github/MarioniLab/DropletUtils/man/emptyDrops.html). However, in this case, we will only specify the following arguments:
 
@@ -346,7 +346,7 @@ out
 We also correct for multiple testing by controlling the false discovery rate (FDR) using the Benjamini-Hochberg (BH) method ({% cite Benjamini1995 %}). Putative cells are defined as those barcodes that have significantly poor fits to the ambient model at a specified FDR threshold. Here, we will use an FDR threshold of 0.01. This means that the expected proportion of empty droplets in the set of retained barcodes is no greater than 1%, which we consider to be acceptably low for downstream analyses.
 
 ```bash
-is.cell <- out$FDR <= 0.01                           
+is.cell <- out$FDR <= 0.01
 sum(is.cell, na.rm=TRUE)                              # check how many cells left after filtering
 ```
 
@@ -459,7 +459,7 @@ Since gene symbols are much more informative than only gene IDs, we will add the
 ```bash
 # get relevant gene names
 library("biomaRt")                                      # load the BioMart library
-ensembl.ids <- gene_ID                               
+ensembl.ids <- gene_ID
 mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL")    # connect to a specified BioMart database and dataset hosted by Ensembl
 ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl")
 
@@ -486,12 +486,12 @@ genes <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
 ```
 ```bash
 # see the resulting data
-head(genes)                          
+head(genes)
 ```
 ```bash
 # replace IDs for gene names
-gene_names <- ensembl.ids	 
-count = 1 	 
+gene_names <- ensembl.ids
+count = 1
 for (geneID in gene_names)
 {
  index <- which(genes==geneID)    # finds an index of geneID in the genes object created by getBM()
@@ -512,7 +512,7 @@ rowData(alevin_se)$gene_name <- gene_names
 ```
 ```bash
 # see the changes
-rowData(alevin_se)                  
+rowData(alevin_se)
 ```
 
 If you are working on your own data and it’s not mouse data, you can check available datasets for other species and just use relevant dataset in `useMart()` function.
@@ -588,7 +588,7 @@ You will see the new file in the panel on the left.
 Normally, at this point you would switch kernel to bash to run alevin, and then back to R to complete the analysis of another sample. Here, we are providing you with the alevin output for the next sample, which you have already downloaded and unzipped at the beginning of the tutorial when we were using bash.
 
 > <warning-title>Switching kernels & losing variables</warning-title>
->  
+>
 > Be aware that every time when you switch kernel, you will lose variables you store in the objects that you've created, unless you save them. Therefore, if you want to switch from R to bash, make sure you save your R objects! You can then load them anytime.
 >
 {: .warning}
@@ -631,9 +631,9 @@ gene_ID2 <- rownames(alevin2)
 rowData(alevin2)$gene_ID <- gene_ID2
 
 # get relevant gene names
-ensembl.ids2 <- gene_ID2               
+ensembl.ids2 <- gene_ID2
 mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL")    # connect to a specified BioMart database and dataset hosted by Ensembl
-ensembl_m2 = useMart("ensembl", dataset="mmusculus_gene_ensembl") 	
+ensembl_m2 = useMart("ensembl", dataset="mmusculus_gene_ensembl")
 
 genes2 <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
                filters = 'ensembl_gene_id',
@@ -642,7 +642,7 @@ genes2 <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
 
 # replace IDs for gene names
 gene_names2 <- ensembl.ids2
-count = 1 	 
+count = 1
 for (geneID in gene_names2)
 {
  index <- which(genes2==geneID)    # finds an index of geneID in the genes object created by getBM()

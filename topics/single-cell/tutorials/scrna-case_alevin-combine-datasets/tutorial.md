@@ -5,7 +5,7 @@ title: "Combining single cell datasets after pre-processing"
 subtopic: single-cell-CS
 priority: 2
 
-zenodo_link: 'https://zenodo.org/records/10852529'
+zenodo_link: 'https://zenodo.org/records/15090813'
 
 questions:
   - I have some AnnData files from different samples that I want to combine into a single file. How can I combine these and label them within the object?
@@ -15,9 +15,12 @@ redirect_from:
 
 answer_histories:
   - label: "UseGalaxy.eu"
+    history: https://singlecell.usegalaxy.eu/u/wendi.bacon.training/h/locked-combining-single-cell-datasets-after-pre-processing-answer-key
+    date: 2025-03-20
+  - label: "UseGalaxy.eu-ARCHIVE2"
     history: https://usegalaxy.eu/u/j.jakiela/h/combining-datasets-key-history
     date: 2024-03-26
-  - label: "UseGalaxy.eu - ARCHIVED"
+  - label: "UseGalaxy.eu-ARCHIVE1"
     history: https://usegalaxy.eu/u/wendi.bacon.training/h/combining-datasets-400k-key-history
     date: 2024-12-10
   - label: "All total samples - processed after Alevin into single object (UseGalaxy.eu)"
@@ -26,12 +29,24 @@ answer_histories:
 
 input_histories:
   - label: "UseGalaxy.eu"
+    history: https://singlecell.usegalaxy.eu/u/wendi.bacon.training/h/locked-combining-single-cell-datasets-after-pre-processing-input
+    date: 2025-03-20
+  - label: "UseGalaxy.eu-ARCHIVE2"
     history: https://usegalaxy.eu/u/j.jakiela/h/combining-datasets-input
-  - label: "UseGalaxy.eu - ARCHIVED"
+  - label: "UseGalaxy.eu-ARCHIVE1"
     history: https://usegalaxy.eu/u/wendi.bacon.training/h/combining-datasets-input
     date: 2024-12-10
   - label: "UseGalaxy.org"
     history: https://usegalaxy.org/u/juliajot/h/combining-datasets-input
+
+extra:
+  example_histories:
+    - label: "UseGalaxy.eu_Whole_Separate-AnnData"
+      history: https://singlecell.usegalaxy.eu/u/wendi.bacon.training/h/locked-combining-single-cell-datasets-after-pre-processing-input-history-whole-samples
+      date: 2025-03-26
+    - label: "UseGalaxy.eu_Whole_Combined-AnnData"
+      history: https://singlecell.usegalaxy.eu/u/wendi.bacon.training/h/locked-whole-samples-combining-single-cell-datasets-after-pre-processing-answer-key
+      date: 2025-03-26
 
 objectives:
   - Combine data matrices from different samples in the same experiment
@@ -50,10 +65,11 @@ tags:
 contributions:
   authorship:
     - nomadscientist
-    - pinin4fjords
+
 
   editing:
     - hexylena
+    - pinin4fjords
 
   testing:
     - wee-snufkin
@@ -98,6 +114,14 @@ recordings:
 
 This tutorial will take you from the multiple AnnData outputs of the [previous tutorial](https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html) to a single, combined  AnnData object, ready for all the fun downstream processing. We will also look at how to add in metadata (for instance, SEX or GENOTYPE) for analysis later on.
 
+> <details-title>Where am I?</details-title>
+>
+> You are in one of the four tutorials associated with a Case Study, which replicates and expands on the analysis performed in a manuscript {% cite Bacon2018 %}.
+>
+> ![case study overview](../../images/scrna-casestudy/CS2-case_study_overview_2.png "Overview of the four parts of the case study, represented by boxes connected with noodles. There is a signpost specifying that you are currently in the second part.")
+>
+{: .details}
+
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -109,26 +133,40 @@ This tutorial will take you from the multiple AnnData outputs of the [previous t
 
 
 ## Get Data
-The sample data is a subset of the reads in a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). Each of the 7 samples (N701 --> N707) has been run through the workflow from the [Alevin tutorial](https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html).
+The sample data is a subset of the reads from each of the seven samples in a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)).
 
-You can access the data for this tutorial in multiple ways:
+> <details-title>Fun facts about the dataset</details-title>
+>
+> We are particularly keen for learners to be able to go from raw FASTQ files all the way through analysis. We aren't handing you a curated dataset that we specially modified in order for this tutorial to work.
+> - This tutorial's input dataset is the full dataset generated from the {% icon level %} [previous tutorial in this case study]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}).
+> - The only difference is that in that previous tutorial, we only analysed one dataset. Our input data, however, is the result of applying that workflow to all seven datasets.
+> - You can find this dataset in the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/).
+>
+{: .details}
 
-1. **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://usegalaxy.eu/u/j.jakiela/h/combining-datasets-input)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
+{% include _includes/cyoa-choices.html option1="Import History" option2="Zenodo" default="Import-History"
+       text="If you're on the EU or ORG/USA server, then the quickest way to Get the Data for this tutorial is via importing a history. Otherwise, you can also import from Zenodo - it just might take a moment longer if you're in a live course and everyone is importing the same dataset at the same time!" %}
+<div class="Import-History" markdown="1">
 
-   {% snippet faqs/galaxy/histories_copy_dataset.md %}
+> <hands-on-title>Import History</hands-on-title>
+>
+> 1. Import the {% icon galaxy-history-input %} *Input history* by following the link below
+>
+>    {% for h in page.input_histories %}
+>      [ {{h.label}} Input History]( {{h.history}} )
+>    {% endfor %}
+>
+>    {% snippet faqs/galaxy/histories_import.md %}
+>
+> If you want to import the history to another Galaxy server, check how to do it below!
+>
+> {% snippet faqs/galaxy/histories_transfer_entire_histories_from_one_galaxy_server_to_another.md %}
+>
+{: .hands_on}
 
-2. **Importing from a history**
-    - You can import [this history for usegalaxy.eu](https://usegalaxy.eu/u/j.jakiela/h/combining-datasets-input)
-    - You can import [this history for usegalaxy.org](https://usegalaxy.org/u/juliajot/h/combining-datasets-input)
+</div>
 
-   {% snippet faqs/galaxy/histories_import.md %}
-
-   - If you want to import the history to another Galaxy server, check how to do it below!
-
-   {% snippet faqs/galaxy/histories_transfer_entire_histories_from_one_galaxy_server_to_another.md %}
-
-
-3. **Uploading from Zenodo** (see below)
+<div class="Zenodo" markdown="1">
 
 > <hands-on-title>Data upload for 7 files</hands-on-title>
 >
@@ -136,7 +174,6 @@ You can access the data for this tutorial in multiple ways:
 > 2. Import the different AnnData files and the experimental design table from [Zenodo](https://zenodo.org/records/10852529).
 >
 >    ```
->    {{ page.zenodo_link }}/files/Experimental_Design.tabular.tabular
 >    {{ page.zenodo_link }}/files/N701-400k-AnnData.h5ad
 >    {{ page.zenodo_link }}/files/N702-400k-AnnData.h5ad
 >    {{ page.zenodo_link }}/files/N703-400k-AnnData.h5ad
@@ -144,6 +181,7 @@ You can access the data for this tutorial in multiple ways:
 >    {{ page.zenodo_link }}/files/N705-400k-AnnData.h5ad
 >    {{ page.zenodo_link }}/files/N706-400k-AnnData.h5ad
 >    {{ page.zenodo_link }}/files/N707-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/Experimental_Design.tabular
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -155,6 +193,7 @@ You can access the data for this tutorial in multiple ways:
 >
 {: .hands_on}
 
+</div>
 
 {% icon galaxy-eye %} Inspect the {% icon param-file %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata previously!
 
@@ -166,11 +205,13 @@ You can access the data for this tutorial in multiple ways:
 
 {% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
 
-## Concatenating objects
+{% snippet faqs/gtn/gtn_example_histories.md %}
+
+# Concatenating objects
 
 > <hands-on-title>Concatenating AnnData objects</hands-on-title>
 >
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.3+galaxy0) %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `N701-400k`
 >    - *"Function to manipulate the object"*: `Concatenate along the observations axis`
 >    - {% icon param-file %} *"Annotated data matrix to add"*: `Select all the other matrix files from bottom to top, N702 to N707`
@@ -186,21 +227,21 @@ You can access the data for this tutorial in multiple ways:
 >    - *"Join method"*: `Intersection of variables`
 >    - *"Key to add the batch annotation to obs"*: `batch`
 >    - *"Separator to join the existing index names with the batch category"*: `-`
-> 2. Rename {% icon galaxy-pencil %} output `Combined Object`
+> 2. Rename {% icon galaxy-pencil %} output `Combined_Object`
 {: .hands_on}
 
-Now let's look at what we've done! Unfortunately, AnnData objects are quite complicated, so the {% icon galaxy-eye %} won't help us too much here. Instead, we're going to use a tool to look into our object from now on.
+Now let's look at what we've done! You can *peek* at the AnnData object in your {% icon galaxy-history %} history. You can also inspect the dataset for further details using a tool.
 
 > <hands-on-title>Inspecting AnnData Objects</hands-on-title>
 >
-> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Combined object`
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Combined_object`
 >    - *"What to inspect?"*: `General information about the object`
-> 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Combined object`
+> 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Combined_object`
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
-> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Combined object`
+> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Combined_object`
 >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 {: .hands_on}
 
@@ -213,17 +254,17 @@ Now have a look at the three {% icon tool %} **Inspect AnnData** outputs.
 >
 > > <solution-title></solution-title>
 > >
-> > 1. If you look at the **General information** {% icon tool %} output, you can see there are now `331 cells`, as the matrix is now 331 cells x 35734 genes. You can see this as well in the **obs** {% icon tool %} (cells) and **var** {% icon tool %} (genes) file sizes.
-> > 2. Under **Key-indexed observations annotation (obs)**. Different versions of the Manipulate tool might put the `batch` columns in different locations. The tool version in this course puts `batch` in the `8th` column. Batch refers to the order in which the matrices were added. The files are added from the bottom of the history upwards, so be careful how you set up your histories when running this (i.e. if your first dataset is N703 and the second is N701, the `batch` will call N703 `0` and N701 `1`!)
+> > 1. If you peek at your dataset, or look at the **General information** {% icon tool %} output, you will find there are `316 cells`, as the matrix is now 316 cells (n_obs) x 35734 genes (n_var). You will also find these numbers in the **obs** {% icon tool %} (cells) and **var** {% icon tool %} (genes) file sizes.
+> > 2. Batch information is stored under **Key-indexed observations annotation (obs)**. Different versions of the Manipulate tool might put the `batch` columns in different locations. The tool version in this tutorial puts `batch` in the `8th` column. Batch refers to the order in which the matrices were added. The files are added from the bottom of the history upwards, so be careful how you set up your histories when running this (i.e. if your first dataset is N703 and the second is N701, the `batch` will call N703 `0` and N701 `1`!)
 > {: .solution}
 >
 {: .question}
 
-# Adding batch metadata
+# Adding cell metadata
 
 I set up the example history with the earliest indices at the bottom.
 
-![The files are numbered such that dataset #1 is N701, dataset #2 is N702, etc., up through #7 as N707. This puts N707 at the top and N701 at the bottom in the Galaxy history.](../../images/scrna-casestudy/wab-history-files-ascending.png "Correct history ordering for combining datasets in order")
+![The files are numbered such that dataset #1 is N701, dataset #2 is N702, etc., up through #7 as N707. This puts N707 at the top and N701 at the bottom in the Galaxy history.](../../images/scrna-casestudy/CS2-history-files-ascending.png "Correct history ordering for combining datasets in order"){ width=400px }
 
 Therefore, when it is all concatenated together, the `batch` appears as follows:
 
@@ -241,45 +282,45 @@ If you used Zenodo to import files, they may not have imported in order (i.e. N7
 
 The two critical pieces of metadata in this experiment are **sex** and **genotype**. I will later want to color my cell plots by these parameters, so I want to add them in now!
 
+## Sex & Genotype metadata
+
 > <hands-on-title>Labelling sex</hands-on-title>
 >
-> 1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy0) %} with the following parameters:
+> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: output of **Inspect AnnData: Key-indexed observations annotation (obs)** {% icon tool %})
 >    - *"1. Replacement"*
 >
 >         - *"in column"*: `Column: 8` - or whichever column `batch` is in
 >         - *"Find pattern"*: `0|1|3|4|5|6`
 >         - *"Replace with"*: `male`
->    - **+ Insert Replacement**
+>    - **+  Insert Replacement**
 >    - *"2. Replacement"*
 >
 >         - *"in column"*: `Column: 8`
 >         - *"Find pattern"*: `2`
 >         - *"Replace with"*: `female`
->    - **+ Insert Replacement**
+>    - **+  Insert Replacement**
 >    - *"3. Replacement"*
 >
 >         - *"in column"*: `Column: 8`
 >         - *"Find pattern"*: `batch`
 >         - *"Replace with"*: `sex`
 >
->    Run this tool - we will use the output in Step 2.
->
->    From the output of Step 1 we want only the single column containing the sex information - we will ultimately add this into the cell annotation in the AnnData object.
+>    The output of the {% icon param-file %} **Replace Text** {% icon tool %} tool has many columns. However, we want only the column containing the **sex** information, in order by cell barcode, to add to our AnnData later.
 >
 > 2. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c8`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: output of **Replace text** {% icon tool %}
 >
-> 3. Rename {% icon galaxy-pencil %} output `Sex metadata`
+> 3. Rename {% icon galaxy-pencil %} output `Sex_metadata`
 {: .hands_on}
 
 That was so fun, let's do it all again but for genotype!
 
 > <hands-on-title>Labelling genotype</hands-on-title>
 >
-> 1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy0) %} with the following parameters:
+> 1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: output of **Inspect AnnData: Key-indexed observations annotation (obs)** {% icon tool %}
 >    - *"1. Replacement"*
 >
@@ -306,93 +347,68 @@ That was so fun, let's do it all again but for genotype!
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: output of **Replace text** {% icon tool %}
 >
-> 3. Rename {% icon galaxy-pencil %} output `Genotype metadata`
+> 3. Rename {% icon galaxy-pencil %} output `Genotype_metadata`
 {: .hands_on}
 
-You might want to do this with all sorts of different metadata - which labs handled the samples, which days they were run, etc. Once you've added all your metadata columns, we can add them together before plugging them into the AnnData object itself.
+You might want to do this with all sorts of different metadata - which labs handled the samples, which days they were run, etc. Once you've created and cut all your metadata columns, we can paste them together before adding them into the AnnData object itself.
 
 > <hands-on-title>Combining metadata columns</hands-on-title>
 >
 > 1. {% tool [Paste two files side by side](Paste1) %} with the following parameters:
->    - {% icon param-file %} *"Paste"*: `Genotype metadata`
->    - {% icon param-file %} *"and"*: `Sex metadata`
+>    - {% icon param-file %} *"Paste"*: `Genotype_metadata`
+>    - {% icon param-file %} *"and"*: `Sex_metadata`
 >    - *"Delimit by"*: `Tab`
-> 2. Rename {% icon galaxy-pencil %} output `Cell Metadata`
+> 2. Rename {% icon galaxy-pencil %} output `Cell_Metadata`
 {: .hands_on}
 
-Let's add it to the AnnData object!
+Let's add this metadata to the AnnData object!
 
 > <hands-on-title>Adding metadata to AnnData object</hands-on-title>
 >
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Combined object`
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Combined_object`
 >    - *"Function to manipulate the object"*: `Add new annotation(s) for observations or variables`
 >    - *"What to annotate?"*: `Observations (obs)``
->    - {% icon param-file %} *"Table with new annotations"*: `Cell Metadata`
+>    - {% icon param-file %} *"Table with new annotations"*: `Cell_Metadata`
 {: .hands_on}
 
-Woohoo! We're there! You can run an {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0) %} to check now, but I want to clean up this AnnData object just a bit more first. It would be a lot nicer if 'batch' meant something, rather than 'the order in which the Manipulate AnnData tool added my datasets'.
+Woohoo! We're there! You can *peek* at your new AnnData object in your history {% icon galaxy-history %} to see the additional **Obs** categories to make sure this worked. You should now find a `sex` and `genotype` in the **Obs** listing.
+
+## Add batch metadata
+
+I want to clean up this AnnData object just a bit more first. It would be a lot nicer if 'batch' meant something, rather than 'the order in which the Manipulate AnnData tool added my datasets'.
 
 > <hands-on-title>Labelling batches</hands-on-title>
 >
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.3+galaxy0) %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData - Add new annotations** {% icon tool %}
 >    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >    - *"Key for observations or variables annotation"*: `batch`
 >    - *"Comma-separated list of new categories"*: `N701,N702,N703,N704,N705,N706,N707`
-> 2. Rename {% icon galaxy-pencil %} output `Batched Object`
+>
+> 2. Rename {% icon galaxy-pencil %} output `Batched_Object`
+>
 {: .hands_on}
 
-
-Huzzah! We are JUST about there. However, while we've been focussing on our cell metadata (sample, batch, genotype, etc.) to relabel the 'observations' in our object...
-
-# Mitochondrial reads
-
-Do you remember when we mentioned mitochondria early on in this tutorial? And how often in single cell samples, mitochondrial RNA is often an indicator of stress during dissociation? We should probably do something with our column of true/false in the gene annotation that tells us information about the cells. You will need to do this whether you have combined FASTQ files or are analysing just one.
-
-> <hands-on-title>Calculating mitochondrial RNA in cells</hands-on-title>
->
-> 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.9.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Batched Object`
->    - *"Format of output object"*: `AnnData format`
->    - *"Gene symbols field in AnnData"*: `NA.`
->    - *"Flag genes that start with these names"*: `Insert Flag genes that start with these names`
->    - *"Starts with"*: `True`
->    - *"Var name"*: `mito`
-> 2. Rename {% icon galaxy-pencil %} output `Annotated Object`
-{: .hands_on}
-
-{% icon congratulations %}Well done!  I strongly suggest have a play with the **Inspect AnnData** {% icon tool %} on your final `Pre-processed object` to see the wealth of information that has been added. You are now ready to move along to further filtering! There is a cheat that may save you time in the future though...
-
-# Pulling single cell data from public resources
-
-If you happen to be interested in analysing publicly available data, particularly from the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home), you may be interested in the following tool {% cite Moreno2020.04.08.032698 %} which combines all these steps into one! For this tutorial, the dataset can be seen [at the EBI](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment id of `E-MTAB-6945`. It's important to note that this matrix is processed somewhat through the SCXA pipeline, which is quite similar to this tutorial, and it contains any and all metadata provided by their pipeline as well as the authors (for instance, more cell or gene annotations).
-
-If you wish, you can have a closer look how to pull this dataset from the Single Cell Expression Atlas by following another tutorial: [Importing files from public atlases]({% link topics/single-cell/tutorials/EBI-retrieval/tutorial.md %}).
-
-
-<!---
-> <hands-on-title>Retrieving data from Single Cell Expression Atlas</hands-on-title>
->
-> 1. {% tool [EBI SCXA Data Retrieval](toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters:
->      - *"SC-Atlas experiment accession"*: `E-MTAB-6945`
->      - *"Choose the type of matrix to download"*: `Raw filtered counts`
->
->    Now we need to transform this into an AnnData objects
->
-> 2. {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy9) %} with the following parameters:
->    - *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
->    - *"Gene table"*:  `EBI SCXA Data Retrieval on E-MTAB-6945 genes.tsv (Raw filtered counts)`
->    - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)`
->    - *"Cell metadata table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
-{: .hands_on}
--->
+{% icon congratulations %} Well done! *Peek* at your final {% icon param-file %} `Batched_Object` to see the wealth of information that has been added. You are now ready to move along to further filtering!
 
 # Conclusion
 
-![Combining data files](../../images/scrna-casestudy/wab-combining_datasets_alevin.png "Workflow  - Combining datasets")
+You might find the {% icon galaxy-history-answer %} *Answer Key Histories* helpful to check or compare with:
+  - {% for h in page.answer_histories %}
+      [ {{h.label}} ]( {{h.history}} )
+    {% endfor %}
+<!-- Only currently want to iterate through the first history, but might want others in the future (different servers!) -->
 
-You've reached the end of this session!
-You may be interested in seeing an [example history](https://usegalaxy.eu/u/j.jakiela/h/combining-datasets-key-history) and [workflow](https://usegalaxy.eu/u/j.jakiela/w/combining-datasets-after-pre-processing). Note that the workflow might require changing of the `column` containing the batch metadata depending on how you are running it and checking the order of the combined datasets. The final object containing the total the reads can be found in [this Galaxy History on UseGalaxy EU](https://usegalaxy.eu/u/j.jakiela/h/all-total-samples-processed-after-alevin-into-single-object).
+You can also run this entire tutorial via a {% icon galaxy-workflows-activity %} *Workflow*, after performing the **Get data** step initially.
+ - [Tutorial Workflow]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/workflows/index.md %})
+
+<iframe title="Galaxy Workflow Embed" style="width: 100%; height: 700px; border: none;" src="https://singlecell.usegalaxy.eu/published/workflow?id=d1a1e6070c0a36ca&embed=true&buttons=true&about=false&heading=false&minimap=true&zoom_controls=true&initialX=0&initialY=-20&zoom=0.5"></iframe>
+
+Finally, you may remember that the datasets you analysed in this tutorial were downsampled. The idential analysis can be performed on whole samples, which you can find in the example histories below.
+- {% icon warning %} Remember that *if* you are in a course, time for exploring these histories will not be factored into the schedule. Explore these outside of course time!
+- {% for h in page.example_histories %}
+    [ {{h.label}} ]( {{h.history}} )
+  {% endfor %}
 
 {% snippet topics/single-cell/faqs/user_community_join.md %}

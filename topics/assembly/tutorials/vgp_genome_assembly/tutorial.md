@@ -7,6 +7,7 @@ tags:
  - pacbio
  - eukaryote
  - VGP
+ - biodiversity
 questions:
 - "What combination of tools can produce the highest quality assembly of vertebrate genomes?"
 - "How can we evaluate the quality of the assembly in a reference-free way?"
@@ -53,7 +54,10 @@ recordings:
   youtube_id: 0EoBDiyd-84
   speakers:
   - delphine-l
-
+edam_ontology:
+- topic_0622 # Genomics
+- topic_0196 # Assembly
+- topic_3050 # Biodiversity
 
 ---
 

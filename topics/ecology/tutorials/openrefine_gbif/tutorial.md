@@ -24,7 +24,8 @@ contributions:
     funding:
         - gbif
         - pndb
-
+tags:
+  - biodiversity
 subtopic: ecologymetadatamgt
 ---
 

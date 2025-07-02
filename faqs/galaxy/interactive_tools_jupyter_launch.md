@@ -17,8 +17,8 @@ contributors: [annefou,shiltemann,nomadscientist]
 > >
 > >     This may take a moment, but once the `Executed notebook` in your history is **orange**, you are up and running!
 > >
-> > 4. Click on the **User** menu at the top and go to **Active Interactive Tools** and locate the JupyterLab instance you started.
-> > 5. Click on your JupyterLab instance
+> > 4. On the left menu bar you should see the **Interactive Tools** Icon now. Click on it to open the  **Active Interactive Tools** and locate the JupyterLab instance you started.
+> > 5. Click on your JupyterLab instance (**JupyTool interactive tool**)
 > >
 > {: .hands_on}
 {: .tip}

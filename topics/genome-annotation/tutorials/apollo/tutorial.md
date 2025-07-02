@@ -8,6 +8,7 @@ tags:
   - prokaryote
   - microgalaxy
   - jbrowse1
+  - biodiversity
   - apollo2
 questions:
   - How to visualize your genome after automated annotations have been performed?

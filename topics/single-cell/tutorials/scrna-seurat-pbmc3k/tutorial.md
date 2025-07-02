@@ -1,18 +1,29 @@
 ---
 layout: tutorial_hands_on
-
-title: "Clustering 3K PBMCs with Seurat"
+title: Clustering 3K PBMCs with Seurat
 level: Introductory
 subtopic: firstsc
 priority: 3
-zenodo_link: 'https://zenodo.org/record/3581213'
+zenodo_link: https://zenodo.org/record/3581213
 answer_histories:
-  - label: "Using Separate Preprocessing Tools"
-    history: https://usegalaxy.eu/u/marisa_jl/h/clustering-3k-pbmcs-with-seurat---separate-preprocessing---answer-key
-    date: 2023-10-28
-  - label: "Using SCTransform"
-    history: https://usegalaxy.eu/u/marisa_jl/h/clustering-3k-pbmcs-with-seurat---sctransform---answer-ke
-    date: 2023-10-28
+- label: UseGalaxy.org - Using Separate Preprocessing Tools
+  history: https://usegalaxy.org/u/videmp/h/gtn-clustering-3k-pbmcs-with-seurat-separate-preprocessing-may-2025
+  date: 2025-05-09
+- label: UseGalaxy.org - Using SCTransform
+  history: https://usegalaxy.org/u/videmp/h/gtn-cluster-3k-pbmcs-with-seurat-sctransform-may-2025
+  date: 2025-05-09
+- label: UseGalaxy.eu - Using Separate Preprocessing Tools
+  history: https://usegalaxy.eu/u/marisa_jl/h/clustering-3k-pbmcs-with-seurat---separate-preprocessing---answer-key
+  date: 2023-10-28
+- label: UseGalaxy.eu - Using SCTransform
+  history: https://usegalaxy.eu/u/marisa_jl/h/clustering-3k-pbmcs-with-seurat---sctransform---answer-ke
+  date: 2023-10-28
+- label: UseGalaxy.org.au - Using Separate Preprocessing Tools
+  history: https://usegalaxy.org.au/u/videmp/h/gtn-clustering-3k-pbmcs-with-seurat-separate-preprocessing-may-2025
+  date: 2025-05-02
+- label: UseGalaxy.org.au - Using SCTransform
+  history: https://usegalaxy.org.au/u/videmp/h/gtn-cluster-3k-pbmcs-with-seurat-sctransform-may-2025
+  date: 2025-05-02
 questions:
 - How can we identify cell types in single cell RNA-Seq data?
 - What are the steps for clustering single cell data with Seurat?
@@ -28,30 +39,38 @@ key_points:
 - Clustering makes single cell datasets easier for us to understand
 - Different tools and parameters should be considered when analysing different datasets
 requirements:
--
-    type: "internal"
-    topic_name: single-cell
-    tutorials:
-        - scrna-preprocessing
-        - scrna-preprocessing-tenx
-
+- type: internal
+  topic_name: single-cell
+  tutorials:
+  - scrna-preprocessing
+  - scrna-preprocessing-tenx
 follow_up_training:
--
-    type: "internal"
-    topic_name: single-cell
-    tutorials:
-        - EBI-retrieval
-
+- type: internal
+  topic_name: single-cell
+  tutorials:
+  - EBI-retrieval
 tags:
 - 10x
 contributions:
   authorship:
-    - MarisaJL
+  - MarisaJL
   editing:
-   - pavanvidem
-   - shiltemann
+  - pavanvidem
+  - shiltemann
+recordings:
+- youtube_id: -tIOSBXeXPs
+  length: 2H11M
+  galaxy_version: 24.2.4.dev0
+  date: '2025-04-15'
+  speakers:
+  - MarisaJL
+  captioners:
+  - MarisaJL
+  bot-timestamp: 1744754154
+
 
 ---
+
 
 Single cell RNA-seq analysis enables us to explore differences in gene expression between cells. It can reveal the heterogenity within cell populations and help us to identify cell types that could play roles in development, disease, or other processes. Single cell omics is a relatively young field, but there are a few commonly-used analysis pipelines that you will often see in the literature. In this tutorial, we will use one of these pipelines, Seurat, to cluster single cell data from a 10X Genomics experiment ({% cite seurat2023v5 %}). You can follow the same analysis using the Scanpy pipeline in the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial.
 

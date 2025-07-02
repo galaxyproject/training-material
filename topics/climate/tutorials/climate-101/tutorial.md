@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Getting your hands-on climate data
+subtopic: introduction
 zenodo_link: 'https://zenodo.org/record/3776500'
 questions:
 - What is climate?
@@ -45,10 +46,12 @@ anyone interested in learning about climate.
 > at our planet and its environment for the ultimate benefit of all European citizens.
 > The C3S [Climate Data Store (CDS)](https://cds.climate.copernicus.eu/#!/home) provides a single point of access to a wide range of
 > quality-assured climate datasets distributed in the cloud.
-> Access to the CDS data is open, free and unrestricted.
+> Access to data from the CDS is open and unrestricted. While registration is required, it is free of charge.
 > We will be using freely available datasets from the CDS, including
 > observations, historical climate data records, estimates of Essential Climate Variables (ECVs) derived from Earth observations,
-> global and regional climate reanalyses of past observations, seasonal forecasts and climate projections.
+> global and regional climate reanalyses of past observations, seasonal forecasts and climate projections. To make access easier and faster,
+> the datasets have been prepared and deposited on Zenodo. At the end of the tutorial, feel free to visit the CDS to download alternative
+> datasets.
 {:  .comment}
 
 For the purpose of this tutorial, sample datasets have been created from data downloaded from [C3S](https://climate.copernicus.eu/) through
@@ -360,7 +363,7 @@ The [Global Climate Observing System](https://gcos.wmo.int/) (GCOS) and its GCOS
 
 GCOS is co-sponsored by the [World Meteorological Organization](https://public.wmo.int/en) (WMO), the [Intergovernmental Oceanographic Commission of the United Nations Educational, Scientific and Cultural Organization](http://www.ioc-unesco.org/) (IOC-UNESCO), the [United Nations Environment Programme](https://www.unenvironment.org/) (UN Environment), and the [International Science Council](https://council.science/) (ISC). It regularly assesses the status of global climate observations of the atmosphere, land and ocean and produces guidance for its improvement.
 
-At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-variables).
+At the moment, there are [55 ECVs](https://gcos.wmo.int/en/essential-climate-variables).
 
 *Source: [https://gcos.wmo.int/en/essential-climate-variables](https://gcos.wmo.int/en/essential-climate-variables)*
 
@@ -369,22 +372,42 @@ At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-var
 > We will look at the [Water Vapor Essential Climate Variable ](https://gcos.wmo.int/en/essential-climate-variables/surface-vapour/):
 > *The humidity of air near the surface of the Earth affects the comfort and health of humans, livestock and wildlife, the swarming behaviour of insects and the occurrence of plant disease. The humidity of air near the surface affects evaporation and the strength of the hydrological and energy cycles. Evaporation from the surface of the earth is the source of water in the atmosphere and so is responsible for important feedbacks in the climate system due to clouds and radiation.*
 >
->    1. **Copernicus Essential Climate Variables** {% icon tool %} with the following parameters:
->        - *"Variable(s)"*: surface_air_relative_humidity
->        - *"Select type of data"*: Monthly mean
->        - *"Select year(s)"*: `1980` and `2018`
->        - *"Select month"*: `July`
->        Rename the resulting file to `rh_mean_july_1980_2018.nc`
->    2. **map plot gridded (lat/lon) netCDF data** {% icon tool %} with the following parameters:
->        - *"input with geographical coordinates (netCDF format)"*: `rh_mean_july_1980_2018.nc`
->        - *"variable name as given in the netCDF file"*: `R`
->        - And finally in `Advanced Options` change:
->            - *"multiple times"*: `Yes`
->            - *"comma separated list of indexes for fields to plot"*: 0,1
->            - *"number of rows for subplot grid"*: 2
->            - *"subplot title (repeated on each subplot)"*: relative humidity in percentage
->            - *"colormap"*: PiYG
->    3. **View** {% icon galaxy-eye%} the resulting plot:
+> 1. Import the file from [Zenodo](https://zenodo.org/record/15349982/rh_mean_july_1980_2018.nc) or from the shared data library
+>
+>    ```
+>    https://zenodo.org/record/15349982/rh_mean_july_1980_2018.nc
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+> 2. Ensure the data type is set to **netcdf**; if not, change it accordingly.
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>
+>    If it is not `netcdf` make sure to convert it using the Galaxy built-in format converters.
+>
+> 3. Start Panoply interactive tool to generate (lat/lon) geographical maps
+>    - *"Tool Parameters netCDF format"*: `rh_mean_july_1980_2018.nc`
+>
+>    > <tip-title>Launch Panoply in Galaxy</tip-title>
+>    > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or, as all interactive tools, from the dedicated usGalaxy.eu subdomain: [Live.useGalaxy.eu](https://live.usegalaxy.eu)
+>    >
+>    > 1. Open the {% tool [Panoply](interactive_tool_panoply) %} [on UseGalaxy.eu](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply)
+>    > 2. Check **ecv_1979.nc** dataset selected in the netcdf input field
+>    > 3. Click Run Tool
+>    > 4. The tool will start running and will stay running permanently
+>    > 5. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the Panoply instance you started.
+>    > 6. Click on your Panoply instance
+>    >    ![Panoply dataset selection](../../images/select_dataset.png "Select dataset")
+>    > 7. Click on **ecv_1979.nc** dataset
+>    {: .tip}
+>
+> 4. **Create** a georeferenced Longitude-Latitude plot:
+>    - Change the Color Table (Scale Tab) to "tokyo.cpt", and
+>    - Change the Projection (Map Tab) to "Equirectangular (Regional) and the center latitude to "45" North to zoom over France.
+>    - Switch between 1980 and 2018 in the 'Array(s)' tab to observe the changes between these two years.
 >
 >    ![Resulting plot showing Relative humidity in July 1980 and July 2018](../../images/rh_ecv_july_1980_2018.png)
 >

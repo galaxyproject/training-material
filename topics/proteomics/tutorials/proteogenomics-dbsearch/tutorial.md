@@ -24,13 +24,16 @@ follow_up_training:
     tutorials:
       - proteogenomics-novel-peptide-analysis
 
-contributors:
+contributions:
+  authorship:
   - subinamehta
   - timothygriffin
   - pratikdjagtap
   - jraysajulga
   - jj-umn
   - pravs3683
+  - delphine-l
+
 subtopic: multi-omics
 tags: [proteogenomics]
 
@@ -73,7 +76,7 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 >    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f5.mgf
 >    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f8.mgf
 >    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f9.mgf
->    https://zenodo.org/records/13270741/files/Uniprot_cRAP_SAV_indel_translatedbed.FASTA
+>    https://zenodo.org/records/15359565/files/Uniprot_cRAP_SAV_indel_translatedbed.fasta
 >    https://zenodo.org/records/13270741/files/Reference_Protein_Accessions.tabular
 >
 >    ```
@@ -81,7 +84,11 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the datasets to something more recognizable (strip the URL prefix)
-> 4. Build a **Dataset list** for the three MGF files, name it as "**Mo_Tai_MGFs**"
+> 4. Verify that the `Reference_Protein_Accessions.tabular` format is `tabular`.
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>
+> 5. Build a **Dataset list** for the four MGF files, name it as `Mo_Tai_MGFs`
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
@@ -95,27 +102,37 @@ will be used to match MS/MS to peptide sequences via a sequence database search.
 
 For this, the sequence database-searching program called [SearchGUI](https://compomics.github.io/projects/searchgui.html) will be used.The generated dataset collection of the three *MGF files* in the history is used as the MS/MS input. We will walk through a number of these settings in order to utilize SearchGUI on these example MGF files.
 
-> <comment-title>Tool Versions</comment-title>
->
-> The tools are subjected to changes while being upgraded. Here we have used an older version of SearchGUI (v3.3.10.1)-Peptide Shaker (v1.16.36.3).
-> The new versions are available in Galaxy.
->
-{: .comment}
 
 
 ## SearchGUI
 
 > <hands-on-title>SearchGUI</hands-on-title>
 >
-> 1. {% tool [Search GUI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1) %} with the following parameters:
+> 1. {% tool [Identification Parameters](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/ident_params/4.0.41+galaxy1) %} with the following parameters:
+>    - *"Fixed Modifications"*: `Carbamidomethylation of C, ITRAQ-4Plex of K, ITRAQ-4Plex of peptide N-term`
+>    - *"Variable modifications"*: `Oxidation of M, ITRAQ-4Plex of Y`
+>    - *"Fragment Tolerance (Daltons)"*: `0.05` (this is high resolution MS/MS data)
+>    - *"Minimum charge"*:`2`
+>    - *"Maximum charge"*:`6`
+>    - Section **Search Engine Options**:
+>      - *"X!Tandem Options"*: `Advanced`
+>      - *"X!Tandem: Advanced Search Related"*: `Set Advanced Search Parameters`
+>        - *"X!Tandem: Quick Acetyl"*: `No`
+>        - *"X!Tandem: Quick Pyrolidone"*: `No`
+>      - Section **X!Tandem peptide model refinement**
+>        - *"X!Tandem: Maximum Valid Expectation Value, refinement"* : `100`
+>
+>
+> 1. {% tool [Search GUI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/4.0.41+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Identification Parameters file"*: `Identification Parameters: PAR file`
 >    - {% icon param-file %} *"Protein Database"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA` (Or however you named the `FASTA` file)
 >
 >        > <comment-title></comment-title>
->        >    The "Uniprot_cRAP_SAV_indel_translatedbed" FASTA database is obtained when you run the first proteogenomics workflow.
+>        >    The "Uniprot_cRAP_SAV_indel_translatedbed" FASTA database is obtained when you run the first proteogenomics workflow *"Proteogenomics 1: Database Creation"*.
 >        >    Please make sure to run the 1st workflow.
 >        {: .comment}
 >
->    - {% icon param-files %} *"Input Peak lists (mgf)"*: `MGF files` dataset collection.
+>    - {% icon param-collection %} *"Input Peak lists (mgf)"*: `Mo_Tai_MGFs` dataset collection.
 >
 >      > <tip-title>Select dataset collections as input</tip-title>
 >      >
@@ -134,36 +151,6 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 >        >    used.
 >        {: .comment}
 >
->    -  Section **Protein Digestion Options**:
->       - {% icon param-select %} *"Enzyme"*: `Trypsin`
->       - {% icon param-text %} *"Maximum Missed Cleavages"*: `2`
->
->    - Section **Precursor options**:
->       - {% icon param-select %} *"Precursor Ion Tolerance Units"*: `Parts per million (ppm)`
->       - {% icon param-text %} *"Precursor Ion Tolerance"*:` 10`
->       - {% icon param-text %} *"Fragment Tolerance (Daltons)"*: `0.05` (this is high resolution MS/MS data)
->       - {% icon param-text %} *"Minimum charge"*:`2`
->       - {% icon param-text %} *"Maximum charge"*:`6`
->       - {% icon param-select %} *"Forward Ion"*: `b`
->       - {% icon param-select %} *"Reverse Ion"*:` y`
->       - {% icon param-text %} *"Minimum Precursor Isotope"* :`0`
->       - {% icon param-text %} *"Maximum Precursor Isotope"* :`1`
->
->    - Section **Protein Modification Options**:
->      - {% icon param-select %} *"Fixed Modifications"*: `Carbamidomethylation of C, ITRAQ-4Plex of K, ITRAQ-4Plex of Ntermini`
->      - {% icon param-select %} *"Variable modifications"*: `Oxidation of M, ITRAQ-4Plex of Y`
->
->        > <tip-title>Search for options</tip-title>
->        > For selection lists, typing the first few letters in the window will filter the
->        > available options.
->        {: .tip}
->
->    - Section **Advanced Options**:
->      - {% icon param-select %} *"X!Tandem Options"*: `Advanced`
->        - {% icon param-check %} *"X!Tandem: Quick Acetyl"*: `No`
->        - {% icon param-check %} *"X!Tandem: Quick Pyrolidone"*: `No`
->        - {% icon param-check %} *"X!Tandem: Protein stP Bias"*: `No`
->        - {% icon param-text %} *"X!Tandem: Maximum Valid Expectation Value"*: `100`
 >
 > Once the database search is completed, the SearchGUI tool will output a file (called a
 > SearchGUI archive file) that will serve as an input for the next section, PeptideShaker.
@@ -204,12 +191,12 @@ outputs.
 
 > <hands-on-title>PeptideShaker</hands-on-title>
 >
-> 1. {% tool [Peptide Shaker](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3) %} with the following parameters:
->   - {% icon param-file %} *"Compressed SearchGUI results"*: The SearchGUI archive file
->   - {% icon param-select %} *"Specify Advanced PeptideShaker Processing Options"*: `Default Processing Options`
->   - {% icon param-select %} *"Specify Advanced Filtering Options"*: `Default Filtering Options`
->   - {% icon param-check %} *"Include the protein sequences in mzIdentML"*: `No`
->   - {% icon param-check %} *"Output options"*: Select the `PSM Report` (Peptide-Spectral Match) and the `Certificate of Analysis`
+> 1. {% tool [Peptide Shaker](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/2.0.33+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Compressed SearchGUI results"*: The `Search GUI` archive file
+>    - *"Include the protein sequences in mzIdentML"*: `No`
+>    - *"Contact Information"*: `Specify Contact Information`
+>      - Enter your own informations
+>    - *"Output options"*: Select the `PSM Report` (Peptide-Spectral Match) and the `Certificate of Analysis`
 >
 >     > <comment-title>Certificate of Analysis</comment-title>
 >     >
@@ -227,16 +214,16 @@ A number of new items will appear in your History, each corresponding to the out
 
 # Create a SQLite database for peptide, protein and genomic annotation visualization
 
-The mzidentml output from the Peptide shaker is converted into an sqlite database file by using the mz to sqlite tool. This sqlite output is used to open the Multi-omics visualization platform, wherein you can view the spectra of the peptides using Lorikeet parameters. To open the MVP viewer, click on the “Visualize in MVP Application” icon ( this will pop-open the interactive multi-omics viewer in a new window/tab)
+The mzidentml output from the Peptide shaker is converted into an sqlite database file by using the mz to sqlite tool. This sqlite output is used to open the Multi-omics visualization platform, wherein you can view the spectra of the peptides using Lorikeet parameters. To open the MVP viewer, click on the “Visualize" {% icon galaxy-visualise %}  icon and select "MVP Application" ( this will open the interactive multi-omics viewer)
 
 
 > <hands-on-title>mz to sqlite</hands-on-title>
 >
 > This tool extracts mzidentml and its associated proteomics datasets into a sqlite db
 >
-> 1. {% tool [mz to sqlite](toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1) %} with the following parameters:
+> 1. {% tool [mz to sqlite](toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.1.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Proteomics identification files"*: `PeptideShaker_mzidentml`
->    - {% icon param-file %} *"Proteomics Spectrum files"*: `Mo_Tai_MGFs`
+>    - {% icon param-collection %} *"Proteomics Spectrum files"*: `Mo_Tai_MGFs`
 >    - {% icon param-file %} *"Proteomics Search Database Fasta"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA`
 >
 >    ![mz2sqlite](../../images/mz2sqlite.png){:width="20%"}
@@ -250,87 +237,88 @@ The next step is to remove known peptides from the list of PSMs that we acquired
 
 > <hands-on-title>Remove Reference proteins</hands-on-title>
 >
->  1. **Query Tabular** {% icon tool %} with the following parameters:
+>  1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
 >
->  - {% icon param-repeat %} **Insert Database Table** (b): `PSM report`
->    - Section **Filter Dataset Input**:
->      - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
->        - *"Filter by"*:  `skip leading lines`
->        - *"Skip lines"*: `1`
+>     - {% icon param-repeat %} **Insert Database Table** (b): `PSM report`
+>       - Section **Filter Dataset Input**:
+>         - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
+>         - *"Filter by"*:  `skip leading lines`
+>         - *"Skip lines"*: `1`
 >
->    - Section **Table Options**:
->      - *"Specify Name for Table"*: `psms`
->      - *"Use first line as column names"* : `No`
->      - *"Specify Column Names (comma-separated list)"*:`id,Proteins,Sequence`
->      - *"Only load the columns you have named into database"*: `Yes`
->      - {% icon param-repeat %} **Table Index**
->        - *"Table Index"*: `No`
->        - *"Index on Columns"*: `id`
+>     - Section **Table Options**:
+>       - *"Specify Name for Table"*: `psms`
+>       - *"Use first line as column names"* : `No`
+>       - *"Specify Column Names (comma-separated list)"*:`id,Proteins,Sequence`
+>       - *"Only load the columns you have named into database"*: `Yes`
+>       - {% icon param-repeat %} **Table Index**
+>         - *"This is a unique index"*: `No`
+>         - *"Index on Columns"*: `id`
 >
-> - {% icon param-repeat %} **Insert Database Table** (c):`PSM report`
+>     - {% icon param-repeat %} **Insert Database Table** (c):`PSM report`
 >
->    - Section **Filter Dataset Input**
->      - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
->        - *"Filter by"*:  `skip leading lines`
->        - *"Skip lines"*: `1`
->      - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
->        - *"Filter by"*:  `select columns`
->        - *"Enter column numbers to keep"*: `1,2`
->      - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
->        - *"Filter by"*:  `normalize list columns,replicate rows for each item in the list`
->        - *"Enter column numbers to normalize"*: `2`
->        - *"List item delimiter in column"*: `,`
+>     - Section **Filter Dataset Input**
+>       - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
+>         - *"Filter by"*:  `skip leading lines`
+>         - *"Skip lines"*: `1`
+>       - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
+>         - *"Filter by"*:  `select columns`
+>         - *"Enter column numbers to keep"*: `1,2`
+>       - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
+>         - *"Filter by"*:  `normalize list columns,replicate rows for each item in the list`
+>         - *"Enter column numbers to normalize"*: `2`
+>         - *"List item delimiter in column"*: `,`
 >
->    - Section **Table Options**:
->      - *"Specify Name for Table"*: `prots`
->      - *"Use first line as column names"* : `No`
->      - *"Specify Column Names (comma-separated list)"*:`id,prot`
->      - *"Only load the columns you have named into database"*: `Yes`
->      - {% icon param-repeat %} **Insert Table Index**:
->        - *"Table Index"*: `No`
->        - *"Index on Columns"*: `prot,id`
+>     - Section **Table Options**:
+>       - *"Specify Name for Table"*: `prots`
+>       - *"Use first line as column names"* : `No`
+>       - *"Specify Column Names (comma-separated list)"*:`id,prot`
+>       - *"Only load the columns you have named into database"*: `Yes`
+>       - {% icon param-repeat %} **Insert Table Index**:
+>         - *"This is a unique index"*: `No`
+>         - *"Index on Columns"*: `prot,id`
 >
->  - {% icon param-repeat %} **Insert Database Table** (a): `Reference_Protein_Acessions`
->    - Section **Table Options**:
->      - *"Tabular Dataset for Table"*: `Uniprot`
->      - *"Use first line as column names"* : `No`
->      - *"Specify Column Names (comma-separated list)"*:`prot`
->      - {% icon param-repeat %} **Insert Table Index**:
->        - *"Table Index"*: `No`
->        - *"Index on Columns"*: `prot`
->
->
->      > <comment-title></comment-title>
->      >
->      > By default, table columns will be named: c1,c2,c3,...,cn (column names for a table must be unique).
->      > You can override the default names by entering a comma separated list of names, e.g. `,name1,,,name2`
->      > would rename the second and fifth columns.
->      > Check your input file to find the settings which best fits your needs.
->      >
->      {: .comment}
+>     - {% icon param-repeat %} **Insert Database Table** (a): `Reference_Protein_Accessions`
+>     - Section **Table Options**:
+>       - *"Tabular Dataset for Table"*: `Uniprot`
+>       - *"Use first line as column names"* : `No`
+>       - *"Specify Column Names (comma-separated list)"*:`prot`
+>       - {% icon param-repeat %} **Insert Table Index**:
+>         - *"This is a unique index"*: `No`
+>         - *"Index on Columns"*: `prot`
 >
 >
->    - *"Save the sqlite database in your history"*: `No`
+>       > <comment-title></comment-title>
+>       >
+>       > By default, table columns will be named: c1,c2,c3,...,cn (column names for a table must be unique).
+>       > You can override the default names by entering a comma separated list of names, e.g. `,name1,,,name2`
+>       > would rename the second and fifth columns.
+>       > Check your input file to find the settings which best fits your needs.
+>       >
+>       {: .comment}
 >
->      > <comment-title>Querying an SQLite Database</comment-title>
->      > **Query Tabular** can also use an existing SQLite database.
->      > Activating `Save the sqlite database in your history`
->      > will store the generated database in the history, allowing to reuse it directly.
->      {: .comment}
 >
->    - *"SQL Query to generate tabular output"*:
->      ```
->      SELECT psms.*
->      FROM psms
->      WHERE psms.id NOT IN
->      (SELECT distinct prots.id
->      FROM prots JOIN uniprot ON prots.prot = uniprot.prot)
->      ORDER BY psms.id
->      ```
+>     - *"Save the sqlite database in your history"*: `No`
 >
->    - *"include query result column headers"*: `Yes`
+>       > <comment-title>Querying an SQLite Database</comment-title>
+>       > **Query Tabular** can also use an existing SQLite database.
+>       > Activating `Save the sqlite database in your history`
+>       > will store the generated database in the history, allowing to reuse it directly.
+>       {: .comment}
+>
+>     - *"SQL Query to generate tabular output"*:
+>       ```
+>       SELECT psms.*
+>       FROM psms
+>       WHERE psms.id NOT IN
+>       (SELECT distinct prots.id
+>       FROM prots JOIN uniprot ON prots.prot = uniprot.prot)
+>       ORDER BY psms.id
+>       ```
+>
+>     - *"include query result column headers"*: `Yes`
 >
 >  - Click **Run Tool** and inspect the query results file after it turns green.
+>
 >
 {: .hands_on}
 
@@ -339,32 +327,36 @@ The output from this step is that the resultant peptides would be those which do
 
 > <hands-on-title>Query Tabular</hands-on-title>
 >
->  **Query Tabular** {% icon tool %}: with the following parameters:
+>  1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
 >
->  - Section **Filter Dataset Input**
->    - {% icon param-repeat %} *"Insert Filter Tabular Input Lines"*
->        - *"Filter by"*:  `skip leading lines`
->        - *"Skip lines"*: `1`
+>     - {% icon param-repeat %} **Insert Database Table** (b): `Query results`
+>     - Section **Filter Dataset Input**:
+>       - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
+>         - *"Filter by"*:  `skip leading lines`
+>         - *"Skip lines"*: `1`
 >
->  - Section **Table Options**:
->    - *"Specify Name for Table"*: `psm`
->    - *"Use first line as column names"* : `No`
->    - *"Specify Column Names (comma-separated list)"*:`id,Proteins,Sequence`
->    - *"Only load the columns you have named into database"*: `Yes`
 >
->  - *"SQL Query to generate tabular output"*:
->    ```
->    SELECT Sequence || ' PSM=' || group_concat(id,',') || ' length='
->    || length(Sequence) as "ID",Sequence
->    FROM  psm
->    WHERE length(Sequence) >6
->    AND length(Sequence) <= 30
->    GROUP BY Sequence
->    ORDER BY length(Sequence),Sequence
->    ```
->  - *"include query result column headers"*: `Yes`
+>     - Section **Table Options**:
+>       - *"Specify Name for Table"*: `psm`
+>       - *"Use first line as column names"* : `No`
+>       - *"Specify Column Names (comma-separated list)"*:`id,Proteins,Sequence`
+>       - *"Only load the columns you have named into database"*: `Yes`
 >
->  - Click **Run Tool** and inspect the query results file after it turns green.
+>     - *"SQL Query to generate tabular output"*:
+>       ```
+>       SELECT Sequence || ' PSM=' || group_concat(id,',') || ' length='
+>       || length(Sequence) as "ID",Sequence
+>       FROM  psm
+>       WHERE length(Sequence) >6
+>       AND length(Sequence) <= 30
+>       GROUP BY Sequence
+>       ORDER BY length(Sequence),Sequence
+>       ```
+>     - *"include query result column headers"*: `Yes`
+>
+>     - Click **Run Tool** and inspect the query results file after it turns green.
+>
+> 2. Rename {% icon galaxy-pencil %} the output as `Peptides_for_Blast-P_analysis`
 >
 > ![QT](../../images/QT_output.png)
 >
@@ -378,11 +370,14 @@ BlastP search is carried out with the PSM report (output from PeptideShaker). Be
 The short BlastP uses parameters for short peptide sequences (8-30 aas). Please use the rerun option to look at the parameters used.
 
 > <hands-on-title>Tabular to FASTA (version 1.1.1)</hands-on-title>
-> 1. **Tabular-to-FASTA** {% icon tool %}: with the following parameters:
+> 1. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} with the following parameters:
+>    - *"Tab-delimited file"*: `Peptides_for_Blast-P_analysis`
 >    - *"Title column"*: `1`
 >    - *"Sequence Column"*:`2`
 >
 {: .hands_on}
+
+
 
 The output FASTA file is going to be subjected to BLAST-P analysis.
 

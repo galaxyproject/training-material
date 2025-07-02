@@ -1,15 +1,15 @@
-- doc: Test outline for Image-prediction-with-BioImage.IO-model
+- doc: Test outline for Image prediction with BioImage.IO model
   job:
     BioImage.IO Model:
       class: File
-      path: test-data/BioImage.IO Model.zip
+      path: input_imaging_model.zip
+      location: https://zenodo.org/api/records/6647674/files/weights-torchscript.pt/content
       filetype: zip
     Image for Prediction:
       class: File
       path: test-data/input-test.png
       filetype: png
   outputs:
-    output_predicted_image:
-      path: test-data/output_predicted_image.tiff
-    output_predicted_image_matrix:
-      path: test-data/output_predicted_image_matrix.npy
+    out_png:
+      path: test-data/segmentation.png
+      compare: image_diff

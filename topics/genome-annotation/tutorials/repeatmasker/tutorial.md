@@ -5,6 +5,7 @@ title: Masking repeats with RepeatMasker
 zenodo_link: https://zenodo.org/record/7085837
 tags:
   - eukaryote
+  - biodiversity
 questions:
   - How to mask repeats in a genome?
   - What is the difference between hard and soft-masking?
@@ -26,6 +27,9 @@ contributions:
   funding:
     - gallantries
     - eurosciencegateway
+edam_ontology:
+  - topic_0157 # Sequence composition, complexity and repeats
+  - topic_0622 # Genomics
 
 abbreviations:
   SINEs: Short Interspersed Nuclear Elements

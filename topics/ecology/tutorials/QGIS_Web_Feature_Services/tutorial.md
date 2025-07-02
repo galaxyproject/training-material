@@ -17,6 +17,7 @@ tags:
   - Spatial data
   - Maps
   - OGC
+  - biodiversity
 contributions:
   authorship:
   - colineroyaux

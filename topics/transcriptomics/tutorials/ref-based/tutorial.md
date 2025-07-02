@@ -1524,8 +1524,8 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >      - {% icon param-file %} *"File to process"*: output of **Extract element identifiers** {% icon tool %}
 >      - In *"Replacement"*:
 >         - In *"1: Replacement"*
->            - *"Find pattern"*: `(.*)_(.*)_(.*)`
->            - *"Replace with"*: `\1_\2_\3\tgroup:\2\tgroup:\3`
+>            - *"Find pattern"*: `(.*)_(.*)_(.*)_(.*)`
+>            - *"Replace with"*: `\1_\2_\3_\4\tgroup:\2\tgroup:\3`
 >
 >     This step creates 2 additional columns with the type of treatment and sequencing that can be used with the {% tool [Tag elements](__TAG_FROM_FILE__) %} tool
 >

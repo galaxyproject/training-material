@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Getting your hands-on earth data
+subtopic: introduction
 questions:
 - What is the Earth System?
 - What type of data is available?

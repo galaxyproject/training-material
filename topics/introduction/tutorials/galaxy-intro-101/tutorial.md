@@ -33,6 +33,8 @@ contributions:
     - bgruening
     - pajanne
     - hexylena
+  editing:
+    - dadrasarmin
   funding:
     - psu
     - erasmusmc
@@ -58,7 +60,19 @@ recordings:
   - natalie-wa
   bot-timestamp: 1726511277
 
-
+answer_histories:
+- label: "usegalaxy.org"
+  history: https://usegalaxy.org/u/dadrasarmin/h/update-the-workflow-of-the-galaxy-basics-for-genomics
+  date: 2025-02-04
+- label: "usegalaxy.eu"
+  history: https://usegalaxy.eu/u/armin.dadras/h/galaxy-basics-for-genomics
+  date: 2025-02-04
+- label: "usegalaxy.fr"
+  history: https://usegalaxy.fr/u/armin.dadras/h/galaxy-basics-for-genomics
+  date: 2025-02-04
+- label: "usegalaxy.org.au"
+  history: https://usegalaxy.org.au/u/armin.dadras/h/update-the-workflow-of-the-galaxy-basics-for-genomics
+  date: 2025-02-04
 ---
 
 
@@ -110,7 +124,7 @@ The Galaxy interface consists of three main parts:
 3. Your analysis **History** is recorded on the right
 
 
-![Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center](../../images/galaxy_interface.svg "<b>Galactic triptych</b>: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>. Here you also see the 'Activity bar' that can be turned on and off (Don't see the Activity Bar? See a Tip below).")
+![Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center](../../images/galaxy_interface.png "<b>Galactic triptych</b>: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>. Here you also see the 'Activity bar' that can be turned on and off (Don't see the Activity Bar? See a Tip below).")
 {: .comment}
 
 
@@ -181,7 +195,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 > >
 > >     ![`UCSC Main table browser` menu entry](../../images/101_01.png)
 > >
-> >     You will be taken to the **UCSC table browser**, which looks something like this:
+> >     When you click on this tool, you will be taken to the **UCSC table browser**, which looks something like this:
 > >
 > >     ![`UCSC table browser` tool, first screen for exons](../../images/101_02.png)
 > >
@@ -191,7 +205,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 > >     - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
 > >     - *"group"*: `Genes and Gene Predictions`
 > >     - *"track"*: `GENCODE v36` (or a more recent version)
-> >     - *"table"*: `knownGene`
+> >     - *"table"*: `knownGeneV36`
 > >     - {% icon param-text %} *"region"* should be changed to `position` with value `chr22`
 > >     - *"output format"* should be changed to `BED - browser extensible data`
 > >     - {% icon param-check %} *"Send output to"* should have the option `Galaxy` checked
@@ -200,7 +214,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 > >     > If the *"table"* drop down menu does not show the `knownGene` option. Set *"group"* to `All tables` and scroll down.
 > >     {: .comment}
 > >
-> > 2. Click on the **get output** button and you will see the next screen:
+> > 2. Click on the **Get output** button and you will see the next screen:
 > >
 > >    ![`UCSC table browser` tool, second screen for exons](../../images/101_03.png)
 > >
@@ -234,7 +248,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 > We now have information about the exon locations, but our original question was which exon contains the largest number of SNPs, so let's get some information about SNP locations from UCSC as well:
 >
 > > <hands-on-title>Obtaining SNPs from UCSC</hands-on-title>
-> > Again open the `UCSC Main table browser` tool and set the following parameters
+> > Again, search for **UCSC Main table browser** Browser on the tools search bar {% icon tool %} and set the following parameters
 > >
 > > 1. **UCSC Main** {% icon tool %} table browser:
 > >    - *"group"* should be changed to `Variation`
@@ -245,7 +259,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 > >
 > >    The *"track"* setting shows the version of the SNP database to get. In this example it is version 151, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
 > >
-> > 2. Click on the **get output** button to find a form similar to this:
+> > 2. Click on the **Get output** button to find a form similar to this:
 > >
 > >    ![`UCSC table browser` tool, second screen for SNPs](../../images/101_07.png)
 > >
@@ -271,11 +285,11 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 
 > <hands-on-title>Finding Exons</hands-on-title>
 >
-> To find intersection we will be using `intersect intervals` tool from [BEDTools](https://bedtools.readthedocs.io/en/latest/content/overview.html) package.
+> To find intersection we will be using `intersect intervals` {% tool [bedtools intersect intervals](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.31.1+galaxy0) %} from [BEDTools](https://bedtools.readthedocs.io/en/latest/content/overview.html) package.
 >
-> 1. {% tool [bedtools intersect intervals](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0+galaxy1) %} the intervals of two datasets side-by-side:
+> 1. {% tool [bedtools intersect intervals](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.31.1+galaxy0) %} find overlapping the intervals in various ways:
 >
->    Enter the word `intersect` in the search bar of the tool panel, and select the
+>    If you opened the tutorial on any usegalaxy.* instance, you can click on the tool name and will open the correct tool with correct version. Or, you can search for this tool yourself. Enter the word `intersect` in the search bar of the tool panel, and select the
 >    tool named `bedtools Intersect intervals`
 >
 >    - *"File A to intersect with B"*: Select `Exons`
@@ -286,13 +300,13 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >    The interface of the tool should look like this:
 >    ![Bedtool intersect interval interface](../../images/101_bed_intersect_interface.png)
 >
-> 2. Click **Run Tool**
-> 3. Wait for the job to finish
+> 2. Click **Run Tool**.
+> 3. Wait for the job to finish.
 > 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon). If everything went okay, you should see a file that looks similar to this:
 >
 >    ![Contents of the `Join` output dataset](../../images/101_joined.png)
 >
->    Here column 4 contains exon IDs (e.g., `ENST00000252835.5_cds_0_0_chr22_15528159_f`) and column 10 lists SNP IDs (e.g., `rs9617249`) Remember that variations are possible due to using different versions of UCSC databases: as long as you have similar looking columns you did everything right!
+>    Here column 4 contains exon IDs (e.g., `ENST00000252835.5_cds_0_0_chr22_15528159_f`) and column 10 lists SNP IDs (e.g., `rs9617249`). Remember that variations are possible due to using different versions of UCSC databases: as long as you have similar looking columns you did everything right!
 >    > <tip-title>Where do I find tool documentation?</tip-title>
 >    > All Galaxy tools include documentation. If you scroll down on this page, you will find the help of the tool.
 >    {: .tip}
@@ -301,9 +315,9 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >    >
 >    > Did the Intersect tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
 >    >
->    >  * For both SNP and EXON: *"region"* is actually changed to `position` with value `chr22`
->    >  * For EXON: *"Create one BED record per"* `Coding Exons` is selected (*not* `Whole Gene` as for the SNP data)
->    >  * Carefully inspect the remaining Table Browser settings if these two most common reasons for problems were correct in your tool executions
+>    >  * For both SNP and EXON: *"region"* is actually changed to `position` with value `chr22`.
+>    >  * For EXON: *"Create one BED record per"* `Coding Exons` is selected (*not* `Whole Gene` as for the SNP data).
+>    >  * Carefully inspect the remaining Table Browser settings if these two most common reasons for problems were correct in your tool executions.
 >    {: .comment}
 >
 {: .hands_on}
@@ -314,7 +328,7 @@ Let's take a look at this dataset. The first six columns correspond to the exons
 > For the first 3 exons in your file, what is the number of SNPs that fall into that exon?
 >
 > > <solution-title></solution-title>
-> > At the time of writing, for hg38/GENCODE v29, joined with "Common dbSNPs(153)", using <kbd>ctrl-f</kbd> (<kbd>cmd-f</kbd> on Mac OS) to look for how many times each is used:
+> > At the time of writing, for hg38/GENCODE v29, joined with "Common dbSNPs(153)", using <kbd>ctrl+f</kbd> (<kbd>cmd+f</kbd> on Mac OS) to look for how many times each is used:
 > >
 > > Gene | Occurences
 > > ---- | ----------
@@ -400,13 +414,13 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 
 > <hands-on-title>Select first</hands-on-title>
 >
-> 1. {% tool [Select first](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0) %} lines from a dataset (head):
+> 1. {% tool [Select first](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/9.5+galaxy0) %} lines from a dataset (head):
 >
 >    - *"File to select"*: The output from **Sort** {% icon tool %} (previous step of the analysis)
 >    - "*Operation*": `Keep first lines`
 >    - *"Number of lines"*: `5`
 >
-> 2. Click **Run Tool**
+> 2. Click **Run Tool**.
 >
 > 3. Examine the output file, this should contain only the first 5 lines of the previous dataset.
 >
@@ -478,7 +492,7 @@ You can create as many histories as you want. If you create a new history, your 
 
 ![Overview of histories with their datasets](../../images/histories_side_by_side_view.png "Histories side-by-side view: in this view you drag datasets between histories, switch between histories, create new histories etc.")
 
-You can always return to your analysis view by clicking on Home icon {% icon galaxy-home %} (**Analyze Data** on older versions of Galaxy) in the top menu bar.
+You can always return to your analysis view by clicking on Galaxy Icon in the top menu bar.
 
 ## Convert your analysis history into a workflow
 
@@ -510,9 +524,9 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 >    You will get a message that the workflow was created. But where did it go?
 >
-> 6. Click on **Workflow** in the top menu of Galaxy. Here you have a list of all your workflows. Your newly created workflow should be listed at the top:
+> 6. Click on **Workflows** in the left menu of Galaxy (Activity Bar). Here you have a list of all your workflows. Your newly created workflow should be listed at the top:
 >
->    ![`Your workflows` list](../../images/workflow_cards.png "Workflow are listed in  the center pane of the Galaxy interface as cards.")
+>    ![`Your workflows` list](../../images/workflow_cards.png "Workflow are listed in the center pane of the Galaxy interface as cards.")
 {: .hands_on}
 
 ## The workflow editor
@@ -554,7 +568,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 > 8. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
 >
-> 9. **Return** to the analysis view by clicking on the Home icon {% icon galaxy-home %} (or **Analyze Data** on older versions of Galaxy) at the top menu bar.
+> 9. **Return** to the analysis view by clicking on the Galaxy Icon at the top left of the menu bar.
 >
 {: .hands_on}
 
@@ -583,7 +597,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    - Drag and drop `Exons` dataset into the empty history created at step 1
 >    ![Drag and drop of `Exons` dataset in the history overview](../../images/drag_n_drop_dataset.gif)
-> 3. Click the Home icon {% icon galaxy-home %} (or **Analyze Data** on older Galaxy versions) at the top to return to the main analysis window
+> 3. Click on Galaxy at the left to return to the main analysis window
 >
 > 4. {% tool [Upload Data](upload1) %} the Repeats file from [Zenodo](https://doi.org/10.5281/zenodo.4104428)
 >
@@ -639,13 +653,13 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    >  * If you see an "Invalid column choice" error, you need to specify which column you want to use. If you have to type the column number, you need to type just the number e.g. `4` (not `Column 4` or anything else).
 >    {: .comment}
 >
-> 8. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
+> 8. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates may disappear after they complete successfully (based on the workflow settings):
 >
 >    ![Datasets appearing in the history](../../images/workflow_running.png)
 {: .hands_on}
 
 > <comment-title>Unhiding hidden datasets</comment-title>
-> Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, you can click the "## hidden" just below the history's name.
+> Because most intermediate steps of the workflow could be hidden, once it is finished you may only see the final two datasets. If we want to view the intermediate files after all, you can click the "## hidden" just below the history's name.
 {: .comment}
 
 > <question-title></question-title>

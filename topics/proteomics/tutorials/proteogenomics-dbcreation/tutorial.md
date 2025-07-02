@@ -111,23 +111,22 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 UCSC prefaces chromosome names with chr while Ensembl does not. To perform this action, we use the Replace Text in a specific column - a [regular expression](https://docs.python.org/3/library/re.html) tool.
 
 > <hands-on-title>Replace Text in a specific column</hands-on-title>
->  1. **Replace Text in a specific column** {% icon tool %} with the following parameters:
->  2. {% icon param-file %} *"File to process"*: `Mus_musculus.GRCm38.86.gtf`
->  3. Change numbered chromosome names
->    - {% icon param-select %} *"in column"*: `1`
->    - {% icon param-select %} *"Find pattern"*: `^([1-9][0-9]*)$`
->    - {% icon param-select %} *"Replace with*: `chr\\1`
->  4. {% icon param-repeat %} *Insert Replacement* to add another replacement option to change XY chromosomes
->    - {% icon param-select %} *"in column"*: `1`
->    - {% icon param-select %} *"Find pattern"*: `^([XY])$`
->    - {% icon param-select %} *"Replace with*: `chr\\1`
->  5. {% icon param-repeat %} *Insert Replacement* to add another replacement option to change mitochondrial chromosome
->    - {% icon param-select %} *"in column"*: `1`
->    - {% icon param-select %} *"Find pattern"*: `^MT$`
->    - {% icon param-select %} *"Replace with*: `chrM`
+>  1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy0) %} with the following parameters:
+>      - {% icon param-file %} *"File to process"*: `Mus_musculus.GRCm38.86.gtf`
+>      - Change numbered chromosome names
+>          - *"in column"*: `Column: 1`
+>          - *"Find pattern"*: `^([1-9][0-9]*)$`
+>          - *"Replace with*: `chr\\1`
+>      - {% icon param-repeat %} *Insert Replacement* to add another replacement option to change XY chromosomes
+>          - *"in column"*: `Column: 1`
+>          - *"Find pattern"*: `^([XY])$`
+>          - *"Replace with*: `chr\\1`
+>      - {% icon param-repeat %} *Insert Replacement* to add another replacement option to change mitochondrial chromosome
+>          - *"in column"*: `Column: 1`
+>          - *"Find pattern"*: `^MT$`
+>          - *"Replace with*: `chrM`
 >
->  6. Rename the output to `Mus_musculus.GRCm38.86.fixed.gtf`
->
+>  2. Rename the output to `Mus_musculus.GRCm38.86.fixed.gtf`
 >
 > > <comment-title>Note on chromosome name changes</comment-title>
 > >  This step is necessary to help identify and correct errors due to inputs having non-identical chromosome identifiers and/or different chromosome sequence content. [Galaxy Support](https://galaxyproject.org/support/chrom-identifiers/)
@@ -141,12 +140,12 @@ The first tool in the workflow is the [**HISAT2**](http://ccb.jhu.edu/software/h
 
 > <hands-on-title>Alignment with HISAT2</hands-on-title>
 >
->  1. **HISAT2** {% icon tool %} with the following parameters:
->    - {% icon param-select %} *"Source for the reference genome"*: `Use a built-in genome`
->    - {% icon param-select %} *"Select a reference genome"*: `mm10`
->    - {% icon param-select %} *"Single-end or paired-end reads"*: `Single end`
+>  1. {% tool [HISAT2](toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1) %} with the following parameters:
+>    - *"Source for the reference genome"*: `Use a built-in genome`
+>    - *"Select a reference genome"*: `Mouse (Mus Musculus): mm10`
+>    - *"Single-end or paired-end reads"*: `Single end`
 >    - {% icon param-file %} *"Input FASTQ files"*: `FASTQ_ProB_22LIST.fastqsanger`
->    - {% icon param-select %} *"Specify strand information"*: `Unstranded`
+>    - *"Specify strand information"*: `Unstranded`
 > 2. Inspect {% icon galaxy-eye %} the resulting files
 > 3. Rename the output to `HISAT_Output.BAM`
 >
@@ -183,13 +182,13 @@ FreeBayes can act as a frequency-based pooled caller and can describe variants a
 
 > <hands-on-title>Variant Calling with FreeBayes</hands-on-title>
 >
-> 1. **FreeBayes** {% icon tool %} with the following parameters:
->    - {% icon param-select %} *"Choose the source for the reference genome"*: `Locally cached file`
->      - {% icon param-check %} *"Run in batch mode?"*: `Run Individually`
+> 1. {% tool [FreeBayes](toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.9+galaxy0) %} with the following parameters:
+>    - *"Choose the source for the reference genome"*: `Locally cached file`
+>      - *"Run in batch mode?"*: `Run Individually`
 >      - {% icon param-file %}  *"BAM dataset:*: `HISAT_Output.BAM`
->      - {% icon param-select %}  *"Using reference genome"*: `mm10`
->    - {% icon param-select %} *"Limit variant calling to a set of regions?"*: `Do not Limit`
->    - {% icon param-select %} *"Choose parameter selection level"*: `Simple diploid calling`
+>      - *"Using reference genome"*: `Mouse (Mus Musculus): mm10`
+>    - *"Limit variant calling to a set of regions?"*: `Do not Limit`
+>    - *"Choose parameter selection level"*: `Simple diploid calling`
 >
 > 2. Inspect {% icon galaxy-eye %} the resulting files.
 >
@@ -232,17 +231,14 @@ data manager to create these annotations to make them available for users.
 
 > <hands-on-title>Generate protein FASTAs from exosome or transcriptome data</hands-on-title>
 >
-> 1. **CustomProDB** {% icon tool %} with the following parameters:
->    - {% icon param-select %}  *"Will you select a genome annotation from your history or use a built-in annotation?"*: `Use built in genome annotation`
->      - {% icon param-select %}  *"Using reference genome"*: `Ensemble 89 mmusculus (GRm38.p5) (dbsnp142)`
+> 1. {% tool [CustomProDB](toolshed.g2.bx.psu.edu/repos/galaxyp/custom_pro_db/custom_pro_db/1.22.0) %} with the following parameters:
+>    - *"Will you select a genome annotation from your history or use a built-in annotation?"*: `Use built in genome annotation`
+>      - *"Using reference genome"*: `Ensemble 89 mmusculus (GRm38.p5) (dbsnp142)`
 >      - {% icon param-file %} *"BAM file"*: `HISAT_Output.BAM`
 >      - {% icon param-file %} *"VCF file"*: `Freebayes.vcf`
->      - {% icon param-check %} *"Annotate SNPs with rsid from dbSNP"*: `No`
->      - {% icon param-check %} *"Annotate somatic SNPs from COSMIC (human only)"*: `No`
->    - {% icon param-text %} *"Transcript Expression Cutoff (RPKM)"*: `1`
->    - {% icon param-check %} *"Create a variant FASTA for short insertions and deletions"*: `Yes`
->    - {% icon param-check %} *"Create SQLite files for mapping proteins to genome and summarizing variant proteins"*: `Yes`
->    - {% icon param-check %} *"Create RData file of variant protein coding sequences"*: `Yes`
+>    - *"Create a variant FASTA for short insertions and deletions"*: `Yes`
+>    - *"Create SQLite files for mapping proteins to genome and summarizing variant proteins"*: `Yes`
+>    - *"Create RData file of variant protein coding sequences"*: `Yes`
 >
 > 2. Inspect {% icon galaxy-eye %} the resulting files
 {: .hands_on}
@@ -271,15 +267,12 @@ Its input can include not only the alignments of raw reads used by other transcr
 
 > <hands-on-title>Transcript assembly with StringTie</hands-on-title>
 >
-> 1. **StringTie** {% icon tool %} with the following parameters:
+> 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input mapped reads"*: `HISAT_Output.BAM`
->    - {% icon param-select %} *"Specify strand information"*: `Unstranded`
->    - {% icon param-select %} *"Use a reference file to guide assembly?"*: `Use Reference GTF/GFF3`
->      - {% icon param-select %} *"Reference file"*: `Use file from History`
+>    - *"Specify strand information"*: `Unstranded`
+>    - *"Use a reference file to guide assembly?"*: `Use Reference GTF/GFF3`
+>      - *"Reference file"*: `Use file from History`
 >      - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `Mus_musculus.GRCm38.86.fixed.gtf`
->      - {% icon param-select %} *"Use Reference transcripts only?"*: `No`
->      - {% icon param-select %} *"Output files for differential expression?"*: `No additional output`
->      - {% icon param-select %} *"Output coverage file?"*: `No`
 > 2. Inspect {% icon galaxy-eye %} the resulting files.
 > 3. Rename the output to `Stringtie_output.gtf`
 >
@@ -327,18 +320,12 @@ The original form of this program is also distributed as part of the Cufflinks s
 
 > <hands-on-title>compare assembled transcripts against a reference annotation</hands-on-title>
 >
-> 1. **GffCompare** {% icon tool %} with the following parameters:
+> 1. {% tool [GffCompare](toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.6+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"GTF inputs for comparison"*`Stringtie_output.gtf`
->    - {% icon param-select %} *"Use Reference Annotation"*: `yes`
->      - {% icon param-select %} *"Choose the source for the reference annotation"*: `History`
+>    - *"Use Reference Annotation"*: `yes`
+>      - *"Choose the source for the reference annotation"*: `History`
 >        - {% icon param-file %} *"Reference Annotation"*: `Mus_musculus.GRCm38.86.gtf`
->      - {% icon param-select %} *"Ignore reference transcripts that are not overlapped by any input transfrags"*: `No`
->      - {% icon param-select %} *"Ignore input transcripts that are not overlapped by any reference transcripts"*: `No`
->    - {% icon param-select %} *"Use Sequence Data"*: `No`
->    - {% icon param-select %} *"Discard (ignore) single-exon transcripts"*: `No`
->    - {% icon param-text %} *"Max. Distance for assessing exon accuracy"*: `100`
->    - {% icon param-text %} *"Max distance for transcript grouping"*: `100`
->    - {% icon param-select %} *"discard intron-redundant transfrags sharing 5'"*: `No`
+>    - *"Strict match"*: `yes`
 >
 {: .hands_on}
 
@@ -365,27 +352,27 @@ The original form of this program is also distributed as part of the Cufflinks s
 >
 > First, we must convert the GffCompare annotated GTF file to BED format.
 >
-> 1. **Convert gffCompare annotated GTF to BED** {% icon tool %} with the following parameters:
+> 1. {% tool [Convert gffCompare annotated GTF to BED](toolshed.g2.bx.psu.edu/repos/galaxyp/gffcompare_to_bed/gffcompare_to_bed/0.2.1) %} with the following parameters:
 >  - {% icon param-file %} *"GTF annotated by gffCompare"*: `output from gff compare`
->  - {% icon param-select %} *"filter GffCompare class_codes to convert"*:
->    - `j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript`
->    - `e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible   pre-mRNA fragment.`
->    - `i : A transfrag falling entirely within a reference intron`
->    - `p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)`
->    - `u : Unknown, intergenic transcript`
+>  - *"filter GffCompare class_codes to convert"*:
+>    - {% icon param-check %} `j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript`
+>    - {% icon param-check %} `e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible   pre-mRNA fragment.`
+>    - {% icon param-check %} `i : A transfrag falling entirely within a reference intron`
+>    - {% icon param-check %} `p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)`
+>    - {% icon param-check %} `u : Unknown, intergenic transcript`
 >
 >    Next, we translate transcripts from the input BED file into protein sequences.
 >
-> 2. **Translate BED transcripts cDNA in 3frames or CDS** {% icon tool %} with the following parameters:
+> 2. {% tool [Translate BED transcripts cDNA in 3frames or CDS](toolshed.g2.bx.psu.edu/repos/galaxyp/translate_bed/translate_bed/0.1.0) %} with the following parameters:
 >   - {% icon param-file %} *"A BED file with 12 columns"*: `Convert GffCompare-annotated GTF to BED`
->   - {% icon param-select %} *"Source for Genomic Sequence Data"*: `Locally cached File`
->   - {% icon param-select %} *"Select reference 2bit file"*: `mm10`
->   - {% icon param-select %} *"Fasta ID Options"*
->     - {% icon param-select %} *"fasta ID source, e.g. generic"*: `generic`
+>   - *"Source for Genomic Sequence Data"*: `Locally cached twobit`
+>   - *"Select reference 2bit file"*: `mm10`
+>   - *"Fasta ID Options"*
+>     - *"fasta ID source, e.g. generic"*: `generic`
 >
 >    Finally, we convert a BED format file of the proteins from a proteomics search database into a tabular format for the Multiomics Visualization Platform (MVP).
 >
-> 3. **bed to protein map** {% icon tool %} with the following parameters:
+> 3. {% tool [bed to protein map](toolshed.g2.bx.psu.edu/repos/galaxyp/bed_to_protein_map/bed_to_protein_map/0.2.0) %} with the following parameters:
 >   - {% icon param-file %} *"A BED file with 12 columns, thickStart and thickEnd define protein coding region"*: `Translate cDNA_minus_CDS`
 >
 {: .hands_on}
@@ -408,18 +395,20 @@ along with the UniProt and cRAP databases.
 
 > <hands-on-title></hands-on-title>
 >
-> 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %}
->   - Click {% icon param-repeat %} *"Insert Input FASTA File(s)"* twice so that there are a total of three *"Input FASTA File(s)"* blocks.
+> 1. {% tool [FASTA Merge Files and Filter Unique Sequences](toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0) %} with the following parameters:
+>   - *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
+>   - Click {% icon param-repeat %} *"Insert Input FASTA File(s)"* three times so that there are a total of three *"Input FASTA File(s)"* blocks.
 >   - Use the following parameters:
->     - {% icon param-check %} *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
->     - {% icon param-file %} *"Input FASTA File(s)"* : `Input Custom ProDB Fasta File output`
+>     - {% icon param-file %} *"Input FASTA File(s)"* : 
 >       ```
->       1.HISAT_Output.rpkm
->       2.HISAT_Output.snv
->       3.HISAT_Output.indel
+>       1.HISAT2_Output.rpkm
+>       2.HISAT2_Output.snv
+>       3.HISAT2_Output.indel
 >       ```
->     - {% icon param-select %} *"How are sequences judged to be unique?"*: `Accession and Sequence`
->     - {% icon param-text %} *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
+>     - *"How are sequences judged to be unique?"*: `Accession and Sequence`
+>     - *"Accession Parsing Regular Expression"*: `^>([^ ]+).*$`
+>
+> 2. Rename the output `Merged and Filtered FASTA from CustomProDB`
 >
 {: .hands_on}
 > <comment-title>Tool parameters explained</comment-title>
@@ -435,26 +424,27 @@ along with the UniProt and cRAP databases.
 {: .comment}
 
 > <hands-on-title>FASTA to Tabular</hands-on-title>
-> 1. **FASTA-to-Tabular** {% icon tool %}: with the default parameters
->    - {% icon param-file %} *"Convert these sequences"*: `Merged and Filtered FASTA from (fasta)`
+> 1. {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1) %} with the default parameters
+>    - {% icon param-file %} *"Convert these sequences"*: `Merged and Filtered FASTA from CustomProDB`
 >
-> 2. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
+> 2. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `FASTA-to-Tabular output` from previous step
->    - {% icon param-select %} *"Using"*: `column 1`
+>    - *"Using"*: `Column: 1`
 >    - {% icon param-repeat %} **Insert Check**
->      - {% icon param-text %} *"Find Regex"* : `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
->      - {% icon param-text %} *"Replacement"*: `\1\2_\3`
+>      - *"Find Regex"* : `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
+>      - *"Replacement"*: `\1\2_\3`
 >    - {% icon param-repeat %} **Insert Check**
->      - {% icon param-text %} *"Find Regex"*:  `,([A-Y]\d+[A-Y]?)\s*`
->      - {% icon param-text %} *"Replacement"*: `.\1`
+>      - *"Find Regex"*:  `,([A-Y]\d+[A-Y]?)\s*`
+>      - *"Replacement"*: `.\1`
 >    - {% icon param-repeat %} **Insert Check**
->      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
->      - {% icon param-text %} *"Replacement"*: `generic|\1`
+>      - *"Find Regex"*: `^(ENS[^ |]*)\s*`
+>      - *"Replacement"*: `generic|\1`
 >
-> 2. **Tabular-to-FASTA** {% icon tool %} with the following parameters:
->    - *"Title column"*: `1`
->    - *"Sequence Column"*:`2`
-> - Rename it as **CustomProDB Merged Fasta**
+> 2. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} with the following parameters:
+>    - {% icon param-file %} *"Tab-delimited file"*: `Column Regex Find And Replace Output`
+>    - *"Title column"*: `Column: 1`
+>    - *"Sequence Column"*:`Column: 2`
+>    - Rename it as `CustomProDB Merged Fasta`
 >
 {: .hands_on}
 
@@ -476,7 +466,7 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 
 > <hands-on-title>Create Database for genomic mapping</hands-on-title>
 >
-> 1. **SQLite to tabular for SQL query** {% icon hands_on %} with the following parameters:
+> 1. {% tool [SQLite to tabular for SQL query](toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/3.2.1) %} with the following parameters:
 >   - {% icon param-file %} *"SQLite Database"*: `genomic_mapping.sqlite` from CustomProDB
 >   - {% icon param-text %} *"Query"*:
 >      ```
@@ -486,52 +476,50 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >      ```
 >   - {% icon param-file %} *"Omit column headers from tabular output"*: `No`
 >
-> 2. Rename output to `genomic_mapping_sqlite`
+> 2. Rename the output as `genomic_mapping_sqlite`
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 >    The output is further processed so that the results are compatible with the Multiomics Visualization Platform.
 >    We need to modify the CustomProDB protein accessions the same as was done for the FASTA database.
 >
-> 3. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
+> 3. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `genomic_mapping_sqlite' (tabular)`
->    - {% icon param-select %} *"Using"*: `column 1`
+>    - *"Using"*: `column 1`
 >    - {% icon param-repeat %} **Insert Check**
->      - {% icon param-text %} *"Find Regex"* : `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
->      - {% icon param-text %} *"Replacement"*: `\1\2_\3`
+>      - *"Find Regex"* : `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
+>      - *"Replacement"*: `\1\2_\3`
 >    - {% icon param-repeat %} **Insert Check**
->      - {% icon param-text %} *"Find Regex"*:  `,([A-Y]\d+[A-Y]?)\s*`
->      - {% icon param-text %} *"Replacement"*: `.\1`
+>      - *"Find Regex"*:  `,([A-Y]\d+[A-Y]?)\s*`
+>      - *"Replacement"*: `.\1`
 >    - {% icon param-repeat %} **Insert Check**
->      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
->      - {% icon param-text %} *"Replacement"*: `\1`
+>      - *"Find Regex"*: `^(ENS[^ |]*)\s*`
+>      - *"Replacement"*: `\1`
 >
-> 4. Rename the output to `SAV_INDEL`
+> 4. Rename the output as `SAV_INDEL`
 >
 >     This tool goes line by line through the specified input file and if the text in the selected column matches a specified regular expression pattern, it replaces the text with the specified replacement.
 >
 >     Next, we will concatenate the output from this tool with the "Bed to protein map" output.
 >
-> 5. **Concatenate multiple datasets** {% icon tool %} with the following parameters:
->   - {% icon param-files %} *"Concatenate Datasets"*: Select the output from the previous tool named as `SAV_INDEL` and the output from the "bed to protein map" tool and concatenate the tool.
->
->     Output will be the "Genomic_Protein_map" rename it as that
+> 5. {% tool [Concatenate multiple datasets](toolshed.g2.bx.psu.edu/repos/artbio/concatenate_multiple_datasets/cat_multi_datasets/1.4.3) %} with the following parameters:
+>   - {% icon param-files %} *"Concatenate Datasets"*: Select the output from the previous tool named as `SAV_INDEL` and the output from the `bed to protein map` tool and run the tool.
+>   - Rename the output as `Genomic_Protein_map`
 >
 >     Now, we load this tabular datasets into an SQLite database.
 >
-> 6. **Query Tabular using SQLite** {% icon tool %} with the following parameters:
+> 6. {% tool [Query Tabular using SQLite](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
 >    - {% icon param-repeat %} **Insert Database Table**
 >      - {% icon param-file%} *"Tabular Dataset for Table"*: `Genomic_Protein_map`
 >      - Section **Table Options**:
->        - {% icon param-text %} *"Specify Name for Table"*: `feature_cds_map`
->        - {% icon param-text %} *"Specify Column Names (comma-separated list)"*: `name,chrom,start,end,strand,cds_start,cds_end`
->        - *"Only load the columns you have named into database"*: `No`
+>        - *"Specify Name for Table"*: `feature_cds_map`
+>        - *"Specify Column Names (comma-separated list)"*: `name,chrom,start,end,strand,cds_start,cds_end`
 >        - {% icon param-repeat %} **Insert Table Index**:
->          - {% icon param-check %} *"This is a unique index"*: `No`
->          - {% icon param-text %} *"Index on columns"*: `name,cds_start,cds_end`
->        - {% icon param-select %} *"Save the sqlite database in your history"*:`Yes`
+>          - *"This is a unique index"*: `No`
+>          - *"Index on columns"*: `name,cds_start,cds_end`
+>        - *"Save the sqlite database in your history"*:`Yes`
 >
-> 7. Rename the output as **"genomic_mapping_sqlite"**
+> 7. Rename the output as `genomic_mapping_sqlitedb`
 >
 >    ![genomic mapping](../../images/genomic_mapping_file.png)
 >
@@ -544,43 +532,45 @@ We will repeat the process for the variant annotations (this file will be used a
 
 > <hands-on-title>Create database for variant annotations</hands-on-title>
 >
-> 1. **SQLite to tabular** {% icon tool%} with the following parameters:
+> 1. {% tool [SQLite to tabular for SQL query](toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/3.2.1) %} with the following parameters:
 >  - {% icon param-file %} *"SQLite Database"*: `variant_annotations.sqlite` from CustomProDB
->  - {% icon param-text %} *"Query"*:
+>  -  *"Query"*:
 >    ```
 >    SELECT var_pro_name,pro_name,cigar,annotation
 >    FROM variant_annotation
 >    ```
->
+> 2. Rename the output as `variant_annotation_sqlite`
+> 
 >    We will subject the output to text manipulation so that the results are compatible with the Multiomics Visualization Platform.
 >
-> 1. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
+> 3. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `variant_annotations_sqlite' (tabular)`
->    - {% icon param-select %} *"Using:"* `column 1`
+>    -  *"Using:"* `Column: 1`
 >    - {% icon param-repeat %} **Insert Check**
->      - {% icon param-text %} *"Find Regex"*: `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
->      - {% icon param-text %} *"Replacement"*: `\1\2_\3`
+>      -  *"Find Regex"*: `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
+>      -  *"Replacement"*: `\1\2_\3`
 >    - {% icon param-repeat %} **Insert Check**:
->      - {% icon param-text %} *"Find Regex"*: `,([A-Y]\d+[A-Y]?)\s*`
->      - {% icon param-text %} *"Replacement"*: `.\1`
+>      -  *"Find Regex"*: `,([A-Y]\d+[A-Y]?)\s*`
+>      -  *"Replacement"*: `.\1`
 >    - {% icon param-repeat %} **Insert Check**:
->      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
->      - {% icon param-text %} *"Replacement"*:  `\1`
->
+>      -  *"Find Regex"*: `^(ENS[^ |]*)\s*`
+>      -  *"Replacement"*:  `\1`
+> 
+> 4. Rename the output as `variant_annotation`
+> 
 >    Next, we will load this tabular dataset into an SQLite database.
 >
-> 1. **Query Tabular** {% icon tool%} with the following parameters:
+> 5. {% tool [Query Tabular using SQLite](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
 >    - {% icon param-repeat %} **Insert Database Table**
 >      - {% icon param-file %} *"Tabular Dataset for Table"*: `variant_annotation`
 >      - Section **Table Options**:
->        - {% icon param-text %} *"Specify Name for Table"*: `variant_annotation`
->        - {% icon param-text %} *"Specify Column Names (comma-separated list)"*: `name,reference,cigar,annotation`
->        - {% icon param-check %} *"Only load the columns you have named into database"*: `No`
->      - {% icon param-repeat %} **Insert Table Index**
->        - {% icon param-check %} *"This is a unique index"*: `No`
->        - {% icon param-text %} *"Index on columns"*: `name,cigar`
->      - {% icon param-select %} *"Save the sqlite database in your history"*:`Yes`
-> 1. Rename the output as **"Variant_annotation_sqlitedb"**
+>        -  *"Specify Name for Table"*: `variant_annotation`
+>        -  *"Specify Column Names (comma-separated list)"*: `name,reference,cigar,annotation`
+>        - {% icon param-repeat %} **Insert Table Index**
+>          -  *"This is a unique index"*: `No`
+>          -  *"Index on columns"*: `name,cigar`
+>      -  *"Save the sqlite database in your history"*:`Yes`
+> 6. Rename the output as `Variant_annotation_sqlitedb`
 >
 {: .hands_on}
 
@@ -597,13 +587,14 @@ To do so:
 
 > <hands-on-title></hands-on-title>
 >
-> 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %} with the following parameters:
->   - {% icon param-check %} *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
->   - {% icon param-files %} *"Input FASTA File(s)"* : `Input Custom ProDB Merged Fasta File output`
->   - {% icon param-files %} *"Input FASTA File(s)"* : `Input Translate BED transcripts Fasta output`
->   - {% icon param-files %} *"Input FASTA File(s)"* : `Input Reference_5000_uniprot_cRAP.fasta`
->   - {% icon param-select %} *"How are sequences judged to be unique?"*: `Accession and Sequence`
->   - {% icon param-text %} *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
+> 1. {% tool [FASTA Merge Files and Filter Unique Sequences](toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0) %} with the following parameters:
+>    - *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
+>    - Click {% icon param-repeat %} *"Insert Input FASTA File(s)"* three times so that there are a total of three *"Input FASTA File(s)"* blocks.
+>    - {% icon param-files %} *"Input FASTA File(s)"* : `Custom ProDB Merged Fasta File output`
+>    - {% icon param-files %} *"Input FASTA File(s)"* : `Translate BED transcripts Fasta output`
+>    - {% icon param-files %} *"Input FASTA File(s)"* : `Reference_5000_uniprot_cRAP.fasta`
+>    - *"How are sequences judged to be unique?"*: `Accession and Sequence`
+>    - *"Accession Parsing Regular Expression"*: `^>([^ ]+).*$`
 >
 {: .hands_on}
 
@@ -618,32 +609,36 @@ To do so:
 Generate a list of Reference Proteins. Identify peptides that are contained in the reference proteins will be filtered out in the next tutorial.
 
 > <hands-on-title>FASTA to Tabular</hands-on-title>
-> 1. **FASTA-to-Tabular** {% icon tool %}: with the default parameters
->    - {% icon param-file %} *"Convert these sequences"*: `HISAT_Output.rpkm (fasta)`
+> 1. {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1) %} with the default parameters:
+>    - {% icon param-file %} *"Convert these sequences"*: `HISAT_Output.rpkm`
 >
-> 2. **Filter Tabular** {% icon tool %}: with these filters:
->   - {% icon param-file %} *"Tabular Dataset to filter"*: `HISAT_Output.rpkm (tabular)`
->   - {% icon param-text %} *"Filter by"*: `select columns`
->     - {% icon param-text %} *"enter column numbers to keep"*: `1`
->   - {% icon param-text %} *"Filter by"*: `regex replace value in column`
->     - {% icon param-text %} *"enter column number to replace"*: `1`
->     - {% icon param-text %} *"regex pattern"*: `^([^ |]+).*$`
->     - {% icon param-text %} *"replacement expression"*: `\1`
+> 2. {% tool [Filter Tabular](toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1) %} with these filters:
+>    - {% icon param-file %} *"Tabular Dataset to filter"*: output of `FASTA-to-Tabular` on HISAT_Output.rpkm
+>    - {% icon param-repeat %} Insert Filter Tabular Input Lines
+>      - *"Filter by"*: `select columns`
+>      - *"enter column numbers to keep"*: `1`
+>    - {% icon param-repeat %} Insert Filter Tabular Input Lines
+>      - *"Filter by"*: `regex replace value in column`
+>      - *"enter column number to replace"*: `1`
+>      - *"regex pattern"*: `^([^ |]+).*$`
+>      - *"replacement expression"*: `\1`
 >
-> 3. **FASTA-to-Tabular** {% icon tool %}: with the default parameters
->    - {% icon param-file %} *"Convert these sequences"*: `Trimmed_ref_5000_uniprot_cRAP.fasta (fasta)`
+> 3. {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1) %} with the default parameters:
+>    - {% icon param-file %} *"Convert these sequences"*: `Trimmed_ref_5000_uniprot_cRAP.fasta`
 >
-> 4. **Filter Tabular** {% icon tool %}: with these filters:
->   - {% icon param-file %} *"Tabular Dataset to filter"*: `Trimmed_ref_5000_uniprot_cRAP.fasta (tabular)`
->   - {% icon param-text %} *"Filter by"*: `select columns`
->     - {% icon param-text %} *"enter column numbers to keep"*: `1`
->   - {% icon param-text %} *"Filter by"*: `regex replace value in column`
->     - {% icon param-text %} *"enter column number to replace"*: `1`
->     - {% icon param-text %} *"regex pattern"*: `^[^|]+[|]([^| ]+).*$`
->     - {% icon param-text %} *"replacement expression"*: `\1`
+> 4. {% tool [Filter Tabular](toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1) %} with these filters:
+>    - {% icon param-file %} *"Tabular Dataset to filter"*: output of `FASTA-to-Tabular` on Trimmed_ref_5000_uniprot_cRAP.fasta
+>    - {% icon param-repeat %} Insert Filter Tabular Input Lines
+>      - *"Filter by"*: `select columns`
+>      - *"enter column numbers to keep"*: `1`
+>    - {% icon param-repeat %} Insert Filter Tabular Input Lines
+>      - *"Filter by"*: `regex replace value in column`
+>      - *"enter column number to replace"*: `1`
+>      - *"regex pattern"*: `^[^|]+[|]([^| ]+).*$`
+>      - *"replacement expression"*: `\1`
 >
-> 5. **Concatenate multiple datasets** {% icon tool %} with the following parameters:
->   - {% icon param-files %} *"Concatenate Datasets"*: Select the output from the previous 2 "Filter Tabular" outputs.
+> 5. {% tool [Concatenate multiple datasets](toolshed.g2.bx.psu.edu/repos/artbio/concatenate_multiple_datasets/cat_multi_datasets/1.4.3) %} with the following parameters:
+>    - {% icon param-files %} *"Concatenate Datasets"*: Select the output from the previous 2 "Filter Tabular" outputs.
 >
 {: .hands_on}
 

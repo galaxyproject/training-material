@@ -11,6 +11,7 @@ tags:
   - Species population EBV class
   - EBV dataset
   - EBV workflow
+  - biodiversity
 questions:
   - "How to analyze RAD sequencing data using a reference genome for a population genomics study?"
 objectives:

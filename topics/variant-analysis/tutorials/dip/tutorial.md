@@ -18,6 +18,7 @@ key_points:
 contributors:
   - nekrut
   - nsoranzo
+  - khaled196
 ---
 
 Today we hear a lot about personalized medicine. Yet the *personalization* is defined by the genetic make up of the individual. In this tutorial we will discuss how this information can be uncovered from the genomic sequencing data.
@@ -174,7 +175,7 @@ Yet for a quick tutorial these datasets are way too big, so we created a [downsa
 
 > <hands-on-title>Generating FreeBayes calls</hands-on-title>
 >
-> 1. **FreeBayes** {% icon tool %} with the following parameters:
+> 1. {% tool [FreeBayes](toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.9+galaxy0) %} with the following parameters:
 >    - *"Choose the source for the reference genome"*: `locally cached`
 >    - *"BAM dataset"*: the uploaded `GIAB-Ashkenazim-Trio-hg19` BAM dataset
 >    - *"Using reference genome"*: `Human (Homo sapiens): hg19`
@@ -187,13 +188,13 @@ This will produce a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/va
 
 > <hands-on-title>Simplify variant representation</hands-on-title>
 >
-> 1. **VcfAllelicPrimitives** {% icon tool %} with:
+> 1. {% tool [VcfAllelicPrimitives](toolshed.g2.bx.psu.edu/repos/devteam/vcfallelicprimitives/vcfallelicprimitives/1.0.0_rc3+galaxy0) %} with:
 >    - *"Select VCF dataset"*: the VCF output of **FreeBayes** {% icon tool %}
 >    - *"Maintain site and allele-level annotations when decomposing"*: `Yes`
 >    - *"Maintain genotype-level annotations when decomposing"*: `Yes`
 {: .hands_on}
 
-**VCFAllelicPrimitives** generates a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism (`TAGG|CAGA`) at position 618851 have been converted to two:
+{% tool [VcfAllelicPrimitives](toolshed.g2.bx.psu.edu/repos/devteam/vcfallelicprimitives/vcfallelicprimitives/1.0.0_rc3+galaxy0) %} generates a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism (`TAGG|CAGA`) at position 618851 have been converted to two:
 
 | Before | After |
 |--------|---------|
@@ -204,10 +205,10 @@ This will produce a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/va
 At this point we are ready to begin annotating variants using [**SnpEff**](http://snpeff.sourceforge.net/SnpEff.html). SnpEff "*...annotates and predicts the effects of variants on genes (such as amino acid changes)...*" and so is critical for functional interpretation of variation data.
 
 > <hands-on-title>Annotating variants</hands-on-title>
-> 1. **SnpEff** (Variant effect and annotation) {% icon tool %} with:
+> 1. {% tool [SnpEff eff](toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/5.2+galaxy0) %} with:
 >    - *"Sequence changes (SNPs, MNPs, InDels)"*: the VCF output of **VcfAllelicPrimitives** {% icon tool %}
->    - *"Genome source"*: `Locally installed reference genome`
->    - *"Genome"*: `Homo sapiens: hg19`
+>    - *"Genome source"*: `Download on demand`
+>    - *"Snpff Genome Version Name"*: `GRCh37.75`
 {: .hands_on}
 
 SnpEff will generate two outputs:
@@ -240,13 +241,13 @@ The first step is to convert a VCF file we would like to analyze into a GEMINI d
 
 > <hands-on-title>Loading data into GEMINI</hands-on-title>
 >
-> 1. **GEMINI load** {% icon tool %} with:
+> 1. {% tool [GEMINI load](toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2) %} with:
 >    - *"VCF file to be loaded in the GEMINI database"*: the VCF output of **SnpEff** {% icon tool %}
 >    - *"Sample information file in PED+ format"*: the uploaded `GIAB-Ashkenazim-Trio.txt` tabular
 >    - *"Choose a gemini annotation database"*: the most recent available release
 >
 >    This will create an SQLite database in your history.
-> 2. Run **GEMINI db_info** {% icon tool %} to see the content of the database:
+> 2. Run {% tool [GEMINI database info](toolshed.g2.bx.psu.edu/repos/iuc/gemini_db_info/gemini_db_info/0.20.1) %} to see the content of the database:
 >    - *"GEMINI database"*: the output of **GEMINI load** {% icon tool %}
 >
 >    This produces a list of all database tables and their columns according to the [latest version of the GEMINI database schema](https://gemini.readthedocs.org/en/latest/content/database_schema.html).
@@ -263,8 +264,9 @@ The GEMINI database can be queried using the versatile [SQL language](https://sw
 
 > <hands-on-title>Selecting "novel" variants that are not annotated in dbSNP database</hands-on-title>
 >
-> 1. **GEMINI query** {% icon tool %} with:
->    - *"GEMINI database"*: the output of **GEMINI load** {% icon tool %}
+> 1. {% tool [GEMINI query](toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy2) %} with:
+>    - *"GEMINI database"*: the output of {% tool [GEMINI load](toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2) %}
+>    - *"Build GEMINI query using"*: Advanced query constructor
 >    - *"The query to be issued to the database"*: `SELECT count(*) FROM variants WHERE in_dbsnp == 0`
 >
 >    As we can see in the output dataset, there are 21 variants that are not annotated in dbSNP.
@@ -272,8 +274,9 @@ The GEMINI database can be queried using the versatile [SQL language](https://sw
 
 > <hands-on-title>Find variants within the POLRMT gene</hands-on-title>
 >
-> 1. **GEMINI query** {% icon tool %} with:
+> 1. {% tool [GEMINI query](toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy2) %} with:
 >    - *"GEMINI database"*: the output of **GEMINI load** {% icon tool %}
+>    - *"Build GEMINI query using"*: Advanced query constructor
 >    - *"The query to be issued to the database"*: `SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'`
 >
 >    Since the `variants` table has a large number of columns, in the query above we had to select only the most interesting columns. The output shows the variants found within the *POLRMT* gene.
@@ -324,7 +327,7 @@ Let's look at some examples.
 >
 > > <solution-title></solution-title>
 > >
-> > To answer this question you can run the **GEMINI query** {% icon tool %} tool with:
+> > To answer this question you can run the {% tool [GEMINI query](toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy2) %} tool with:
 > > - *"The query to be issued to the database"*: `SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants`
 > > - *"Restrictions to apply to genotype values"*: `(gt_types).(*).(==HET).(all)`
 > >
@@ -360,7 +363,7 @@ This short tutorial should give you an overall idea on how generate variant data
 
   ![GEMINI query command](../../images/gemini_command.png)
 
-  use Galaxy's **GEMINI query** tool as below:
+  use Galaxy's {% tool [GEMINI query](toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy2) %} tool as below:
 
   ![GEMINI_query tool interface](../../images/galaxy_command.png)
 

@@ -2,9 +2,9 @@
 layout: event-track
 
 title: Machine Learning
-description: This module will introduce you to the world of machine learning using Galaxy. Start with the tutorial at your own pace. If you need support during the event contact us via the gta_machine-learning Slack Channel. # [#gta_machine-learning](https://gtnsmrgsbord.slack.com/archives/C07NKBAU05A).
+description: This module will introduce you to the world of machine learning using Galaxy. Start with the tutorial at your own pace. If you need support contact us via the Slack Channel [gta_machine-learning](https://gtnsmrgsbord.slack.com/channels/{{page.slack_channel}}). 🚨 **Unfortunately, the French Galaxy server is not supporting the Galaxy machine learning tools at the moment. Please choose one of the other Galaxy instances (US, EU, AU) to follow this training. The tutorial 'Fine tune large protein model (ProtTrans) using HuggingFace' currently works on the Galaxy EU server and the tutorial 'Building the LORIS LLR6 PanCancer Model Using PyCaret' currently works only on the US Galaxy server**.
 
-# slack_channel: gta_machine-learning
+slack_channel: gta_machine-learning
 
 
 contributions:
@@ -14,35 +14,34 @@ contributions:
         - annasyme
         - anuprulez
         - emmaustin20
+        - igormakunin
+        - jennaj
+        - meltemktn
         - hujambo-dunia
+        - paulocilasjr
+        - reytakop
 
 
 program:
-  - section: "Machine Learning" 
+  - section: "Machine Learning"
     description: |
-      If you encounter any issue please ask us in this Slack channel. 
+      If you encounter any issue please ask us in the above Slack channel.
     tutorials:
-      - type: custom
-        name: "[Introduction to machine learning](https://docs.google.com/presentation/d/15vK-uwHKd-sFia_jwYGEYjkHkLl70VKh_fIZUatjG0E/edit?usp=sharing)"
-        description: |
-          [Lecture Slides](https://docs.google.com/presentation/d/15vK-uwHKd-sFia_jwYGEYjkHkLl70VKh_fIZUatjG0E/edit?usp=sharing); [Lecture Video](https://youtu.be/F2lt48es4gg)
+      - name: machinelearning
+        topic: statistics
       - name: regression_machinelearning
         topic: statistics
-      - type: custom
-        name: "[Classification in Machine learning lecture](https://docs.google.com/presentation/d/1lAYCZ-g6y8cC1aH68FWL6gkRRI2srXSHuJwaaYAQZaU/edit?usp=sharing)"
-        description: |
-          [Lecture Slides](https://docs.google.com/presentation/d/1lAYCZ-g6y8cC1aH68FWL6gkRRI2srXSHuJwaaYAQZaU/edit?usp=sharing); [Lecture Video](https://youtu.be/3hK2lllhY94)
       - name: classification_machinelearning
         topic: statistics
-      - name: CNN
+      - name: FNN
         topic: statistics
       - name: RNN
         topic: statistics
-      - type: custom
-        name: "[Fine tuning: Protein large language model lecture](https://docs.google.com/presentation/d/1Gui5-tKu25aVT3_HvMuW1_-If_Ub53RqHQaelrRkQqE/edit?usp=sharing)"
-        description: |
-          [Lecture Slides](https://docs.google.com/presentation/d/1Gui5-tKu25aVT3_HvMuW1_-If_Ub53RqHQaelrRkQqE/edit?usp=sharing); [Lecture Video](https://youtu.be/5gZYfBhCt5U)
+      - name: CNN
+        topic: statistics
       - name: fine_tuning_protTrans
+        topic: statistics
+      - name: loris_model
         topic: statistics
 
 ---

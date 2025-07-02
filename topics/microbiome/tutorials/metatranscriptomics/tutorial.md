@@ -37,6 +37,7 @@ contributions:
   editing:
   - paulzierep
   - EngyNasr
+  - ogerdfx
 redirect_from:
 - /topics/metagenomics/tutorials/metatranscriptomics/tutorial
 edam_ontology:

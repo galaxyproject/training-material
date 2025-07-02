@@ -24,7 +24,12 @@ cat /tmp/20*.txt | sort -u | \
 	grep --extended-regexp -v 'krona_?[a-z]*.html' | \
 	grep -v '/transcriptomics/tutorials/ref-based/faqs/rnaseq_data.html' | \
 	grep -v '/topics/data-management/' | \
+	grep -v '/topics/statistics/tutorials/intro-to-ml-with-python/slides.html' | \
+	grep -v '/topics/statistics/tutorials/intro-to-ml-with-python/slides-plain.html' | \
 	grep -v 'training-material/tags/' | grep -v 'data-library'| grep -v '/recordings/index.html' |\
+	grep -v '/topics/statistics/tutorials/gai-llm-with-python/slides.html' | \
+	grep -v '/topics/statistics/tutorials/gai-llm-with-python/slides-plain.html' | \
+	grep -v '/topics/statistics/tutorials/gai-llm-with-python/tutorial.html' | \
 	sed 's|/$|/index.html|'  | grep '.html$' | sort -u | sed 's|https://training.galaxyproject.org|_site|' > /tmp/gtn-files.txt
 
 count=0

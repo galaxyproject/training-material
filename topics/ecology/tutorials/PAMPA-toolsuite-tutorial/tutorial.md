@@ -28,6 +28,7 @@ tags:
   - EBV dataset
   - EBV workflow
   - modeling
+  - biodiversity
 contributions:
   authorship:
   - colineroyaux

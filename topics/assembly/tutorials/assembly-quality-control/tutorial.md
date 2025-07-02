@@ -6,6 +6,7 @@ zenodo_link: 'https://zenodo.org/record/6947782'
 tags:
   - assembly
   - quality control
+  - biodiversity
 questions:
 - Is my genome assembly ready for annotation and/or scaffolding?
 objectives:
@@ -27,7 +28,10 @@ follow_up_training:
    topic_name: genome-annotation
    tutorials:
      - repeatmasker
-
+edam_ontology:
+  - topic_3050 #biodiversity
+  - topic_0196 #assembly
+  - topic_3572 #data quality management
 ---
 
 

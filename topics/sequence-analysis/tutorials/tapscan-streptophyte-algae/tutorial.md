@@ -1,9 +1,8 @@
 ---
 layout: tutorial_hands_on
-
 title: Identification and Evolutionary Analysis of Transcription-Associated Proteins
   in Streptophyte algae and Land plants
-zenodo_link: 'https://zenodo.org/records/15056031/'
+zenodo_link: https://zenodo.org/records/15056031/
 questions:
 - What are transcription-associated proteins (TAPs)?
 - How can we identify TAPs from a given proteome dataset?
@@ -16,19 +15,30 @@ objectives:
 - Construct phylogenetic tree for TAPs
 time_estimation: 2H
 key_points:
-- TAPScan v4 is a comprehensive and highly reliable tool for genome-wide TAP annotation via domain profiles
+- TAPScan v4 is a comprehensive and highly reliable tool for genome-wide TAP annotation
+  via domain profiles
 contributions:
   authorship:
-    - deeptivarshney
-    - shiltemann
-
+  - deeptivarshney
+  - shiltemann
   funding:
-    - madland
-
+  - madland
 tags:
-  - plants
+- plants
+recordings:
+- youtube_id: 5jw2B6XU03c
+  length: 37M
+  galaxy_version: 24.2.4.dev0
+  date: '2025-04-23'
+  speakers:
+  - deeptivarshney
+  captioners:
+  - deeptivarshney
+  bot-timestamp: 1745430548
+
 
 ---
+
 
 
 The regulated expression of genes is essential for defining morphology, functional capacity, and developmental fate of both solitary living cells as well as cells inhabiting the social environment of a multicellular organism. In this regard, the regulation of transcription, that is, the synthesis of messenger RNA from a genomic DNA template, plays a crucial role. It contributes to the control of temporal and spatial RNA and protein levels in a cell and therefore has an essential function in all living organisms. Transcription‐associated proteins (TAPs) are essential players in gene regulatory networks (GRNs) as they involved in transcriptional regulation. TAPs are broadly classified into transcription factors (TFs) and transcriptional regulators (TRs). TFs bind sequence‐specifically to regulatory elements, resulting in enhancing or repressing of transcription ({% cite Richardt2007 %}; {% cite Wilhelmsson2017 %}). TRs, on the other hand, are involved in protein–protein interactions, may serve as regulators at the transcriptional core complex, as co‐activators and co‐repressors, chromatin modification or methylation. Additionally, there are proteins referred to as putative TAPs (PTs) that are thought to be involved in the regulation of transcription, but their exact function is undefined ({% cite Richardt2007 %}).

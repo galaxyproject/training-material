@@ -13,6 +13,6 @@ contributors: [shiltemann, hexylena]
   ![build list collection menu item]({% link topics/galaxy-interface/images/buildList.png %}){:width="15%"}
 
 * Enter a name for your collection {% if include.name %} to {{ include.name }} {% endif %}
-* Click **Create collection** to build your collection
+* Click **Create list** to build your collection
 * Click on the checkmark icon at the top of your history again
 

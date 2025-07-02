@@ -1,4 +1,4 @@
-name: "[Cron] Upload workflows to (DEV)WorkflowHub"
+name: "[Cron] Upload workflows to WorkflowHub"
 
 concurrency:
   group: wfh-${{ github.head_ref }}
@@ -31,7 +31,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.1"
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: |
             vendor/bundle
@@ -57,9 +57,9 @@ jobs:
 
       - name: Upload workflows
         run: |
-          python bin/wfh-upload.py
+          python bin/wfh-upload.py --prod
         env:
-          WFH_TOKEN: ${{ secrets.DEV_WFH_TOKEN }}
+          WFH_TOKEN: ${{ secrets.PROD_WFH_TOKEN }}
 
       - name: Any changes?
         run: |
@@ -72,3 +72,5 @@ jobs:
           branch-suffix: timestamp
           commit-message: Update WorkflowHub IDs
           add-paths: metadata/
+          author: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
+          committer: github-actions[bot] <github-actions[bot]@users.noreply.github.com>

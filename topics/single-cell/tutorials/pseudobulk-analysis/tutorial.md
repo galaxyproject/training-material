@@ -2,23 +2,32 @@
 layout: tutorial_hands_on
 title: Pseudobulk Analysis with Decoupler and EdgeR
 subtopic: exploratory
-zenodo_link: https://zenodo.org/records/14917999
+zenodo_link: https://zenodo.org/records/15275834
 questions:
-- How does pseudobulk analysis help in understanding cell-type-specific gene expression changes?
-- What steps are required to prepare single-cell data (e.g., clustering, annotation, and metadata addition) for pseudobulk analysis?
-- How can we use pseudobulk data prepared with Decoupler to perform differential expression analysis using edgeR in Galaxy?
+- How does pseudobulk analysis help in understanding cell-type-specific gene expression
+  changes?
+- What steps are required to prepare single-cell data (e.g., clustering, annotation,
+  and metadata addition) for pseudobulk analysis?
+- How can we use pseudobulk data prepared with Decoupler to perform differential expression
+  analysis using edgeR in Galaxy?
 objectives:
 - Understand the principles of pseudobulk analysis in single-cell data
 - Understand and generate the pseudobulk expression matrix with Decoupler
 - Perform differential expression analysis using edgeR
-time_estimation: 3H
+time_estimation: 4H
 key_points:
-- The advantage of pseudobulk analysis is that it bridges single-cell and bulk RNA-seq approaches, combining high resolution with statistical robustness.
-- Metadata is important because proper annotation and metadata, such as cell types and conditions, are crucial for generating pseudobulk matrices.
-- Decoupler plays a key role by generating pseudobulk matrices with flexibility in filtering and visualization.
-- edgeR provides robust differential expression analysis, taking into account biological and technical variability.
-- Visualization and interpretation are essential, with tools like Volcano Plots highlighting significant genes and trends in differential expression.
-- Before starting this tutorial, prior knowledge of PBMC analysis and combining single-cell datasets is recommended.
+- The advantage of pseudobulk analysis is that it bridges single-cell and bulk RNA-seq
+  approaches, combining high resolution with statistical robustness.
+- Metadata is important because proper annotation and metadata, such as cell types
+  and conditions, are needed for generating pseudobulk matrices.
+- Decoupler plays a key role by generating pseudobulk matrices with flexibility in
+  filtering and visualization.
+- edgeR provides robust differential expression analysis, taking into account biological
+  and technical variability.
+- Visualization and interpretation are essential, with tools like Volcano Plots highlighting
+  significant genes and trends in differential expression.
+- Before starting this tutorial, prior knowledge of PBMC analysis and combining single-cell
+  datasets is recommended.
 requirements:
 - type: internal
   topic_name: single-cell
@@ -26,28 +35,59 @@ requirements:
   - scrna-scanpy-pbmc3k
 contributions:
   authorship:
-    - dianichj
+  - dianichj
   editing:
-    - pavanvidem
+  - pavanvidem
 tags:
 - transcriptomics
 - pseudobulk
-
 answer_histories:
-  - label: "UseGalaxy.eu"
-    history: https://usegalaxy.eu/u/dianitachj24/h/pseudo-bulk-edger
-    date: 2025-02-10
-  - label: "UseGalaxy.eu"
-    history: https://usegalaxy.eu/u/dianitachj24/h/pseudo-bulk-edger-tcells
-    date: 2025-02-10
+- label: UseGalaxy.org-ncm_pdcs_subset
+  history: https://usegalaxy.org/u/videmp/h/gtn-pseudobulk-with-decoupler-and-edger-ncm-pdcs-subset-may-2025
+  date: 2025-05-08
+- label: UseGalaxy.eu-ncm_pdcs_subset
+  history: https://usegalaxy.eu/u/dianitachj24/h/pseudobulk-tutorial-workflow
+  date: 2025-04-11
+- label: UseGalaxy.org.au-ncm_pdcs_subset
+  history: https://usegalaxy.org.au/u/videmp/h/gtn-pseudobulk-with-decoupler-and-edger-ncm-pdcs-subset-may-2025
+  date: 2025-05-08
+- label: UseGalaxy.org-Monocytes_NC_subset
+  history: https://usegalaxy.org/u/videmp/h/gtn-pseudobulk-with-decoupler-and-edger-monocytes-nc-subset-may-2025
+  date: 2025-05-08
+- label: UseGalaxy.eu-Monocytes_NC_subset
+  history: https://usegalaxy.eu/u/dianitachj24/h/pseudo-bulk-edger-pdcs-11-04-2025
+  date: 2025-04-11
+- label: UseGalaxy.org.au-Monocytes_NC_subset
+  history: https://usegalaxy.org.au/u/videmp/h/gtn-pseudobulk-with-decoupler-and-edger-monocytes-nc-subset-may-2025
+  date: 2025-05-08
+- label: UseGalaxy.org-pDCs_subset
+  history: https://usegalaxy.org/u/videmp/h/gtn-pseudobulk-with-decoupler-and-edger-pdcs-subset-may-2025
+  date: 2025-05-08
+- label: UseGalaxy.eu-pDCs_subset
+  history: https://usegalaxy.eu/u/dianitachj24/h/pseudo-bulk-edger-ncms-11-04-2025
+  date: 2025-04-11
+- label: UseGalaxy.org.au-pDCs_subset
+  history: https://usegalaxy.org.au/u/videmp/h/gtn-pseudobulk-with-decoupler-and-edger-pdcs-subset-may-2025
+  date: 2025-05-08
 follow_up_training:
--
-    type: "internal"
-    topic_name: single-cell
-    tutorials:
-        - EBI-retrieval
-        - GO-enrichment
+- type: internal
+  topic_name: single-cell
+  tutorials:
+  - EBI-retrieval
+  - GO-enrichment
+recordings:
+- youtube_id: h76T5ZLfVgw
+  length: 50M
+  galaxy_version: 24.2.4.dev0
+  date: '2025-05-02'
+  speakers:
+  - dianichj
+  captioners:
+  - dianichj
+  bot-timestamp: 1746186506
+
 ---
+
 
 Pseudobulk analysis is a powerful technique that bridges the gap between single-cell and bulk RNA-seq data. It involves aggregating gene expression data from groups of cells within the same biological replicate, such as a mouse or patient, typically based on clustering or cell type annotations ({% cite Murphy2022 %}).
 
@@ -66,23 +106,29 @@ In this tutorial, we will guide you through a pseudobulk analysis workflow using
 >
 {: .agenda}
 
-# Let's Get the Data!
+# Get the Data!
 
 ## Overview of the Data
 
-Our data was extracted from the publication titled _"Elevated Calprotectin and Abnormal Myeloid Cell Subsets Discriminate Severe from Mild COVID-19"_ ({% cite Silvin2020 %}). This dataset was chosen because it was utilized by the developers of the `decoupler` tool for pseudobulk aggregate analysis ({% cite decoupler-pseudobulk %}).
+The dataset used in this tutorial is an `AnnData` object containing a subset of single-cell RNA-seq data, specifically including non-classical monocytes (NCMs) and plasmacytoid dendritic cells (pDCs) from bone marrow and peripheral blood samples. This subset was selected to illustrate differential gene expression between two immune cell types across two biologically distinct tissues. A portion of the data corresponding to bone marrow was derived from a published study {% cite rettkowski2025modulation %}.
 
-Pseudobulk analysis is an advanced method in single-cell data analysis. For this tutorial, we assume familiarity with common single-cell data formats, such as AnnData or Seurat objects, and experience analysing single-cell data, including clustering and annotating cell types.
+In this tutorial, we will focus on these two cell populations and explore how their expression profiles differ between bone marrow and blood using pseudobulk analysis. The dataset includes three bone marrow samples and seven blood samples.
 
-If you're new to these concepts, we recommend exploring our other tutorials before performing pseudobulk analysis:
-- [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}): Learn how to cluster and annotate cells in Galaxy using our single-cell tools.
-- [Combining single cell datasets after pre-processing]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}): Understand how to combine multiple datasets into one AnnData object and add metadata from single-cell experiments.
+Pseudobulk analysis is an advanced approach in single-cell data analysis. It involves aggregating single-cell expression data by group (e.g., by cell type and condition) to perform bulk-style analyses while preserving single-cell resolution through metadata.
+
+For this tutorial, we assume familiarity with standard single-cell data formats, such as `AnnData` or `Seurat` objects, and prior experience with single-cell workflows, particularly clustering and cell type annotation. We will use the `decoupler` tool to perform the pseudobulk aggregation and downstream differential analysis {% cite decoupler-pseudobulk %}.
+
+If you're new to these concepts, we recommend exploring the following tutorials before performing pseudobulk analysis:
+
+- [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}): Learn how to perform clustering and cell type annotation using Galaxy's Scanpy and Anndata tool suites.
+- [Clustering 3K PBMCs with Seurat]({% link topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.md %}): Explore an alternative approach to clustering and annotation using Seurat within Galaxy.
+- [Combining single-cell datasets after pre-processing]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}): Learn how to merge multiple single-cell datasets into one AnnData object and enrich it with experimental metadata.
 
 The data object, which you will import from Zenodo into Galaxy via the provided link, has been preprocessed, analysed, and annotated. It includes the following key observation metadata:
-- **cell_type**: The type of cell identified.
-- **disease**: Indicates whether the sample is a control or corresponds to a COVID-19 condition.
-- **individual**: The individual donor or sample identifier.
-- **sex**: The sex of the individual.
+- **annotated**: The assigned cell type.
+- **condition**: The experimental condition or sample group.
+- **batch**: The sample identifier.
+- **tissue**: Indicates the tissue of origin (bone marrow or peripheral blood).
 
 ## Data Upload
 
@@ -92,7 +138,7 @@ The data object, which you will import from Zenodo into Galaxy via the provided 
 > 2. Import the AnnData file from [Zenodo]({{page.zenodo_link}}):
 >
 >    ```
->    {{ page.zenodo_link }}/files/Source_AnnData_file.h5ad
+>    {{ page.zenodo_link }}/files/ncm_pdcs_subset.h5ad
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -106,14 +152,40 @@ The data object, which you will import from Zenodo into Galaxy via the provided 
 >
 {: .hands_on}
 
+Before we dive into the analysis, lets inspect our `AnnData file` with tools in galaxy to get familiar with the structure of the data.
+
+> <hands-on-title> Inspect AnnData Object </hands-on-title>
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1) %} tool with the following parameters:
+>     - {% icon param-file %} **Annotated data matrix**: `AnnData for Pseudobulk` (Input dataset obtained > from Zenodo)`
+>     - *"What to inspect?"*: `General information about the object`
+>       
+>    > <question-title></question-title>
+>    > 1. How many cells and genes are there in the `AnnData`? 
+>    > 2. What other information can be retrive by the `Inspect AnnData` tool? 
+>    >
+>    > > <solution-title></solution-title>
+>    > > 1.  
+>    > > ```
+>    > > [n_obs x n_vars]
+>    > > 9118 × 18926
+>    > > ```
+>    > > There are 9,118 observations, representing cells, and 18,926 variables, representing genes expressed in total.
+>    > > 2. When selecting **General Inspection**, you can view the labels for all entries in `[obs]`, `[var]`, `[obsm]`, `[varm]`, and `[uns]`. This includes the labels described above within the observation field, such as `annotated`, `condition`, `batch`, and `tissue`, which will be needed as inputs for the pseudobulk tool.
+>    > > To view more specific details in the AnnData object, select a different parameter under *"What to inspect?"*.
+>    > {: .solution}
+>    > 
+>    {: .question}
+>
+{: .hands_on}
 
 # Generation of the Pseudobulk Count Matrix with Decoupler
 
 In this step, our goal is to perform a "bioinformatic cell sorting" based on the annotated clusters of the single-cell data.
 
-To start a pseudobulk analysis, ensure that the AnnData object you will use contains all the necessary metadata for ***"pseudobulking"***. For example, key annotations, such as cell_type, condition, disease, and batch, should be present. Most importantly, the AnnData object has to include a layer with the raw counts of gene expression.
+To start a pseudobulk analysis, ensure that the `AnnData` object contains all the necessary metadata for ***pseudobulking***. This includes key annotations such as `annotated` or `cell_type`, `condition`, `disease`, and `batch`. These labels may vary depending on how the dataset was originally annotated.
 
-Raw counts are crucial for generating accurate pseudobulk aggregates. Since single-cell data is typically normalized after annotation, it’s important to preserve the raw counts in the AnnData object before normalization steps if you would like to perform a pseudobulk analysis later on. These raw counts are directly used by tools like **Decoupler** to generate the pseudobulk count matrix. Note that normalized count matrices should not be used with Decoupler, even if the tool appears to process them successfully.
+Most importantly, the `AnnData` object must include a layer containing the raw gene expression counts. This layer is essential for accurate aggregation and downstream differential expression analysis. Raw counts are allows to generate accurate pseudobulk aggregates. Since single-cell data is typically normalized after annotation, it’s important to preserve the raw counts in the AnnData object before normalization steps if you would like to perform a pseudobulk analysis later on. These raw counts are directly used by tools like **Decoupler** to generate the pseudobulk count matrix. Note that normalized count matrices should not be used with **Decoupler**, even if the tool appears to process them successfully.
 
 > <tip-title> Missing Raw Counts? </tip-title>
 >
@@ -129,10 +201,10 @@ Raw counts are crucial for generating accurate pseudobulk aggregates. Since sing
 >     - {% icon param-file %} **Input AnnData file**: `AnnData for Pseudobulk` (Input dataset obtained > from Zenodo)
 >     - *"Produce a list of genes to filter out per contrast?"*: `No`
 >     - *"Obs Fields to Merge"*: *(Leave empty if not applicable)*
->     - *"Groupby column"*: `cell_type` (Column containing cell type annotations)
->     - *"Sample Key column"*: `individual` (Column containing individual sample identifiers)
->     - *"Layer"*: `counts` (Layer containing raw gene expression counts)
->     - *"Factor Fields"*: `disease` (Column in `adata.obs` specifying experimental factors. For edgeR, the first field should be the main contrast field, followed by  covariates.)
+>     - *"Groupby column"*: `annotated` (Column containing cell type annotations)
+>     - *"Sample Key column"*: `batch` (Column containing individual sample identifiers)
+>     - *"Layer"*: `raw_counts` (Layer containing raw gene expression counts)
+>     - *"Factor Fields"*: `tissue` (Column in `adata.obs` specifying experimental factors. For edgeR, the first field should be the main contrast field, followed by  covariates.)
 >     - *"Use Raw"*: `No`
 >     - *"Produce AnnData with Pseudo-bulk"*: *(Optional, if yes, it will generate an h5ad output file with pseudobulks)*
 >     - *"Minimum Cells:*: `10`
@@ -146,7 +218,7 @@ Raw counts are crucial for generating accurate pseudobulk aggregates. Since sing
 >
 >    > <comment-title> Performing DEG within Clusters </comment-title>
 >    >
->    > **Important!** The count matrix retrieved from this tool includes all of our samples `individual` aggregated by `cell_type`, which can be identified by the column headers. If you want to perform comparisons of conditions within clusters of each individual cell type, you will need to subset the relevant columns of the matrix and use them as your new count matrix. We will demonstrate this in the last section of this tutorial with detailed hands-on steps.
+>    > **Important!** The count matrix retrieved from this tool includes all of our samples `batch` aggregated by `annotated`, which can be identified by the column headers. If you want to perform comparisons of conditions within clusters of each individual cell type, you will need to subset the relevant columns of the matrix and use them as your new count matrix. We will demonstrate this in the last section of this tutorial with detailed hands-on steps.
 >    {: .comment}
 >
 {: .hands_on}
@@ -227,14 +299,15 @@ The next steps will help you refine your data for easier handling. We will use s
 >
 > In the previous steps, the following modifications were made to the files:
 >
-> 1. **Replace Text**: Replaces special characters (`[ --+*^]+`) with underscores (`_`) in the `count_matrix` file.
-> 2. **Remove Columns**: Removes the `start`, `end`, and `width` columns from the `genes_metadata` file.
+> 1. **Replace Text**: Replaces special characters (`[ --+*^]+`) with underscores (`_`) in the `count_matrix` file. Rename output to **Count matrix**.
+> 2. **Remove Columns**: Removes the `start`, `end`, and `width` columns from the `genes_metadata` file. Rename output to **Genes Metadata**.
 > 3. **Replace Text**: Replaces special characters (`[ --+*^]+`) with underscores (`_`) in the `samples_metadata` file.
-> 4. **Replace Text in Column**: Modifies values in column `c2` of `outfile from step 3` by prefixing `GG_` to numbers at the beginning of the string.
+> 4. **Replace Text in Column**: Modifies values in column `c2` of `outfile from step 3` by prefixing `GG_` to numbers at the beginning of the string. Rename output to **Samples Metadata**
 >
 >    {% snippet faqs/galaxy/analysis_regular_expressions.md %}
 >
 {: .hands_on}
+
 
 ## Generating the Contrast File
 
@@ -243,15 +316,16 @@ This file will be used as the contrast input file in the edgeR tool.
 > <hands-on-title> Creating a Contrast File for edgeR </hands-on-title>
 >
 > 1. {% tool [Text Reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `outfile` (output generated from the **Replace Text** {% icon tool %} step).
+>    - {% icon param-file %} *"File to process"*: `Samples Metadata` (output generated from the **Replace Text** {% icon tool %} step).
 >    - *"AWK Program"*:
->      ```awk
->      BEGIN { print header }
->      NR > 1 { if (!seen[$2]++) words[++count]=$2 }
->      END { for (i=1; i<=count; i++)
->               for (j=i+1; j<=count; j++)
->                  print words[i]-words[j] }
+>      ```BEGIN { print "header" }
+>         NR > 1 { if (!seen[$2]++) words[++count]=$2 }
+>         END { for (i=1; i<=count; i++)
+>             for (j=i+1; j<=count; j++)
+>               print words[i]"-"words[j] }
 >      ```
+>
+> Rename to **Contrast File** 
 >
 >    > <comment-title> Explanation of the AWK Program </comment-title>
 >    >
@@ -260,6 +334,7 @@ This file will be used as the contrast input file in the edgeR tool.
 >    > - Processes the input file (`NR > 1` skips the header line).
 >    > - Tracks unique elements in column 2 (`seen[$2]++`) to avoid duplicates.
 >    > - Creates pairs of unique elements and calculates their difference, outputting the contrast for downstream edgeR analysis.
+>    > - **Important!** When using the *"Text reformatting with awk"* tool, make sure the code is written all in one line, without any line breaks. Otherwise, it won’t work as expected.
 >    {: .comment}
 >
 {: .hands_on}
@@ -272,7 +347,7 @@ This file will be used as the contrast input file in the edgeR tool.
 > >
 > > 1. The contrast file is a simple tab-delimited text file. It contains:
 > >    - A **header** in the first row that labels the column.
-> >    - The contrast, such as `normal-COVID_19`, written in the second row.
+> >    - The contrast, such as `bonemarrow-pbmcs`, written in the second row.
 > >
 > > When working with your own data, the contrast file will look different, as it will reflect the specific contrasts in your dataset but the **header** should be the same
 > >
@@ -293,15 +368,15 @@ Several plots can be generated to assist in understanding the data and the resul
 >
 > 1. {% tool [edgeR](toolshed.g2.bx.psu.edu/repos/iuc/edger/edger/3.36.0+galaxy5) %} with the following parameters:
 >    - *"Count Files or Matrix?"*: `Single Count Matrix`
->        - {% icon param-file %} *"Count Matrix"*: `outfile` (output of **Replace Text: Count Matrix** {% icon tool %})
+>        - {% icon param-file %} *"Count Matrix"*: `Count Matrix` (output of **Replace Text: Count Matrix** {% icon tool %})
 >        - *"Input factor information from file?"*: `Yes`
->            - {% icon param-file %} *"Factor File"*: `outfile` (output of **Replace Text: Creating Factor File** {% icon tool %})
+>            - {% icon param-file %} *"Factor File"*: `Samples Metadata` (output of **Replace Text: Creating Factor File** {% icon tool %})
 >    - *"Use Gene Annotations?"*: `Yes`
->        - {% icon param-file %} *"Gene Annotations"*: `output_tabular` (output of **Remove Columns: Gene Metadata** {% icon tool %})
->    - *"Formula for linear model"*: `~ 0 + factor_A` or `~ 0 + factor_A + factor_B:factor_C`
->        *(Customize this formula based on your data's contrast names and factor file. Ensure the formula matches EdgeR's syntax and uses only elements from the factor file.)*
+>        - {% icon param-file %} *"Gene Annotations"*: `Genes Metadata` (output of **Remove Columns: Gene Metadata** {% icon tool %})
+>    - *"Formula for linear model"*: `~ 0 + tissue`
+>        *(Customize this formula based on your data's contrast names and factor file. Ensure the formula matches EdgeR's syntax and uses only elements from the factor file.~ 0 + factor_A` or `~ 0 + factor_A + factor_B:factor_C)*
 >    - *"Input contrasts manually or through a file?"*: `file`
->        - {% icon param-file %} *"Contrasts File"*: `outfile` (output of **Text Reformatting: Creating a Contrast File for edgeR** {% icon tool %})
+>        - {% icon param-file %} *"Contrasts File"*: `Contrast File` (output of **Text Reformatting: Creating a Contrast File for edgeR** {% icon tool %})
 >    - In *"Filter Low Counts"*:
 >        - *"Filter lowly expressed genes?"*: `No`
 >
@@ -336,16 +411,16 @@ Several plots can be generated to assist in understanding the data and the resul
 > >    - The table contains the results of the differential expression analysis.
 > >    - The **first column** typically lists the gene symbols from the dataset.
 > >    - The **logFC** indicates the direction and magnitude of differential expression:
-> >    - **Upregulated genes**: Genes with higher expression in the first group of the contrast (e.g., 'normal' group in a "normal-COVID_19" contrast).
-> >    - **Downregulated genes**: Genes with lower expression in the first group of the contrast (e.g., 'normal' group in a "normal-COVID_19" contrast).
+> >    - **Upregulated genes**: Genes with higher expression in the first group of the contrast (e.g., 'bone marrow' group in a "bonemarrow-pbmcs" contrast).
+> >    - **Downregulated genes**: Genes with lower expression in the first group of the contrast (e.g., 'pbmcs' group in a "bonemarrow-pbmcs" contrast).
 > >    - The **raw p-value** represents the statistical significance of the result for each gene before adjustment for multiple comparisons. Lower values indicate stronger evidence against the null hypothesis.
 > >    - The **FDR** is the adjusted p-value, calculated using the Benjamini-Hochberg method, which helps control for false positives when testing many genes. Genes with an FDR below a threshold (e.g., 0.05) are considered statistically significant.
 > >
 > > **Plot Interpretations**:
-> >   - **MDS Plot**: Displays relationships between samples based on gene expression profiles. Samples that cluster closely are more similar in their expression. Use this to identify whether samples separate by biological condition or to detect potential batch effects.  ![MDS Plot](../../images/pseudobulk-analysis/mdsplot_disease.png)
+> >   - **MDS Plot**: Displays relationships between samples based on gene expression profiles. Samples that cluster closely are more similar in their expression. Use this to identify whether samples separate by biological condition or to detect potential batch effects.  ![MDS Plot](../../images/pseudobulk-analysis/mdsplot_tissue.png)
 > >   - **BCV Plot**: Shows the dispersion for each gene, with higher values indicating greater variability. This is useful for assessing how variability is modeled in the dataset. ![BCV Plot](../../images/pseudobulk-analysis/bcvplot.png)
 > >   - **QL Plot**: Highlights the quasi-likelihood dispersions, which represent variability modeled during statistical testing. Proper dispersion modeling ensures robust differential expression analysis. ![QL Plot](../../images/pseudobulk-analysis/qlplot.png)
-> >   - **MD Plot**: Visualizes the mean expression levels against log fold change for each gene. Genes far from the center indicate stronger differential expression, with points above or below the horizontal line showing upregulated or downregulated genes, respectively.  ![MD Plot](../../images/pseudobulk-analysis/mdplot_normal-COVID_19.png)
+> >   - **MD Plot**: Visualizes the mean expression levels against log fold change for each gene. Genes far from the center indicate stronger differential expression, with points above or below the horizontal line showing upregulated or downregulated genes, respectively.  ![MD Plot](../../images/pseudobulk-analysis/mdplot_bonemarrow-pbmcs.png)
 > >
 > {: .solution}
 >
@@ -353,21 +428,21 @@ Several plots can be generated to assist in understanding the data and the resul
 
 ## Sanitation Steps - Part 2
 
-After performing the differential expression analysis with edgeR, we will clean the data to prepare it for visualization. This involves extracting collection elements, removing unnecessary columns, standardizing text, and splitting the file if needed. We will use the [Extract element identifiers](https://toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2), [Remove columns](https://toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0).
+After performing the differential expression analysis with edgeR, we will clean the data to prepare it for visualization. This involves extracting dataset from a collection, removing unnecessary columns, standardizing text, and splitting the file if needed. We will use the {% tool [Extract dataset](__EXTRACT_DATASET__) %}, {% tool [Remove columns](toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0) %}.
 
 > <hands-on-title></hands-on-title>
 >
 >
-> 1. Use the {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} tool with the following parameters:
->    - {% icon param-file %} *"Dataset collection"*: `outTables` (output from the **edgeR** tool {% icon tool %})
+> 1. {% tool [Extract dataset](__EXTRACT_DATASET__) %} with the following parameters:
+>    - {% icon param-file %} *"Input list"*: `Tables from edgeR data` (output from the **edgeR** tool {% icon tool %})
 >
->    **Extract element identifiers** will allow us to processes the **edgeR** output, which is a collection of datasets, to extract individual elements (like the first table from our collection) for further analysis.
+>    **Extract dataset** will allow us extract the table output from **edgeR** which was retrived as a collection.  
 >
-> 2. Use the {% tool [Remove columns](toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0) %} tool with the following parameters:
+> 2. {% tool [Remove columns](toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Tabular file"*: `outTables` (output of **edgeR** {% icon tool %})
 >    - In *"Select Columns"*:
 >        - {% icon param-repeat %} *"Insert Select Columns"*
->            - *"Header name"*: `{'id': 7, 'output_name': 'output'}`
+>            - *"Header name"*: `X` (In other datasets, the header of the _GeneID_ columns may look different)
 >        - {% icon param-repeat %} *"Insert Select Columns"*
 >            - *"Header name"*: `logFC`
 >        - {% icon param-repeat %} *"Insert Select Columns"*
@@ -387,7 +462,7 @@ In this step, we will use the sanitized output from the previous steps to genera
 
 > <hands-on-title> Create a Volcano Plot of the DEG </hands-on-title>
 >
-> 1. Use the {% tool [Volcano Plot](toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.6) %} tool with the following parameters:
+> 1. {% tool [Volcano Plot](toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.6) %} with the following parameters:
 >    - {% icon param-file %} *"Specify an input file"*: `edgeR_DEG_summary` (tabular file output from **Remove Columns** {% icon tool %})
 >    - *"File has header?"*: `Yes`
 >    - *"FDR (adjusted P value) column number"*: `c4`
@@ -416,11 +491,13 @@ Let's take a moment to interpret the Volcano Plot:
 >
 > 1. What is the significance of genes located at the extremes of the plot (e.g., high LogFC and low P-value)?
 > 2. How many genes meet the significance threshold in this analysis?
->
+> 3. What do the differentially expressed genes reveal about immune cells in bone marrow versus peripheral blood?
+> 
 > > <solution-title></solution-title>
 > >
-> > 1. Genes at the extremes of the Volcano plot are highly significant and exhibit strong differential expression. Consider exploring the biological significance of these genes to gain deeper insights into their roles.
-> > 2. In our current analysis, we identified only one downregulated gene, MTND1P23, with a logFC of -3.1956, in normal conditions compared to COVID-19 patients.
+> > 1. Genes at the extremes of the volcano plot are highly significant and show strong differential expression. Investigating their biological roles may provide valuable insights into the underlying mechanisms.
+> > 2. This analysis identified a substantial number of differentially expressed genes (DEGs), highlighting distinct expression profiles between immune cells from bone marrow and peripheral blood. Specifically, 188 genes were upregulated in bone marrow and 136 in PBMCs.
+> > 3. These findings reveal tissue-specific immune cell behaviour, pointing to transcriptional specialization between bone marrow and peripheral blood compartments.
 > >
 > {: .solution}
 >
@@ -428,43 +505,74 @@ Let's take a moment to interpret the Volcano Plot:
 
 # Subsetting Samples from the Original AnnData Object
 
-In our previous analysis, we found that only one gene, **MTND1P23**, was identified as downregulated in our contrast. This result was obtained by "bulking" **all** cell types from our dataset and performing a differential expression analysis comparing normal vs. COVID-19 samples.
+In our initial analysis, we observed transcriptional differences between bone marrow and peripheral blood samples. However, since the dataset includes more than one immune cell type (pDCs and NCMs), it's not immediately clear which population is primarily driving these differences.
 
-Now, what if we refine our approach? For instance, instead of analysing all cell types together, what happens if we focus on a specific cluster, such as **T cells**, and perform the same comparison: normal vs. COVID-19? Would the results remain the same, or would this approach reveal additional insights?
+To gain further insight, it's helpful to perform pseudobulk analysis on each cell type separately. By subsetting the data by cluster and repeating the differential analysis (as we did with the full dataset at the start of this tutorial), we can better assess the individual contribution of each cell type.
+
+In the following step, we’ll demonstrate how to subset the AnnData object by cell type before reapplying the pseudobulk workflow. In the hands-on example, we will filter for pDCs. To extract NCMs instead, you can follow the exact same steps, but set the *"Value"* parameter to `Non_Classical_Monocyte`, which corresponds to the annotation of that cell type.
+
+If you would like to extract all annotated clusters at once, for example to analyse each of them independently, refer to the tip box below titled **“Split AnnData object by cluster or other observation key into a collection”**.
 
 ## Extracting observations of interest as AnnData object
 
-> <hands-on-title> Use Manipulate AnnData Tools to extract observations </hands-on-title>
+> <hands-on-title>Use Manipulate AnnData Tools to extract observations</hands-on-title>
 >
-> 1. Use the {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.10.2+galaxy3) %} tool with the following parameters:
->    - *"Annotated data matrix"*: `AnnData for Pseudobulk` (Your preprocessed, analysed, and annotated AnnData object)
+> 1. {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.10.2+galaxy3) %} with the following parameters:
+>    - *"Annotated data matrix"*: `AnnData for Pseudobulk` (your preprocessed, analysed, and annotated AnnData object)
 >    - *"Method used for filtering"*: `Filter on any column of observations or variables`
->    - *"What to filter?"*: `Observations (obs)` (For filtering cells, select Observations (obs))
+>    - *"What to filter?"*: `Observations (obs)` (select this to filter cells)
 >    - *"Type of filtering?"*: `By key (column) values`
->    - *"Key to filter"*: `cell_type` (the label that identifies cell annotations in our AnnData)
+>    - *"Key to filter"*: `annotated` (the column that contains the cell type annotations)
 >    - *"Type of value to filter"*: `Text`
 >    - *"Filter"*: `equal to`
->    - *"Value"*: `T cell` (the name of the cluster of interest for subset analysis)
+>    - *"Value"*: `pDC` (the cluster name for the cell type you want to extract)
+>
+>    > <comment-title>Pre-extracted clusters also available</comment-title>
+>    >
+>    > In addition to performing the filtering yourself, the `pDCs` and `Monocytes_NC` clusters have also been pre-extracted and are available for direct download.  
+>    > This allows you to jump ahead and run the downstream workflows independently for each cluster, as described later in this tutorial.  
+>    >
+>    > Import the pre-filtered datasets from Zenodo:
+>    >
+>    > ```
+>    > {{ page.zenodo_link }}/files/Monocytes_NC_subset.h5ad
+>    > {{ page.zenodo_link }}/files/pDCs_subset.h5ad
+>    > ```
+>    >
+>    {: .comment}
+>
 {: .hands_on}
 
-After using the {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.10.2+galaxy3) %} tool to subset the cell type of interest, go back to the top of this tutorial to the hands-on **Pseudobulk with Decoupler** step, and you may perform once again the same steps in this smaller AnnData object that now should only include your T cells. Results from this analysis will correspond to differential expression between conditions only for T cells.
+After using the {% tool [Scanpy filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.10.2+galaxy3) %} to extract the cell type of interest, return to the **Pseudobulk with Decoupler** step at the beginning of this tutorial. You can now repeat the same steps using this smaller AnnData object, which contains only the selected cell type (e.g., pDCs). The resulting analysis will reveal differential gene expression between conditions (e.g., COVID-19 vs. healthy) for that specific cell type only.
 
 > <question-title></question-title>
 >
-> 1. What data is included in the new pseudobulk count matrix. How is the matrix structured, and what do the column labels represent?
-> 2. How many samples are included in the current dataset? Are all of them derived exclusively from T cells?
-> 3. After performing pseudobulk analysis of T cells only, how does the volcano plot look like? Does it show differentially expressed genes between diseases?
+> 1. What data is included in the new pseudobulk count matrix for the pDCs only? How is this matrix structured, and what do the column labels represent?
+> 2. How many samples are included in the pDCs AnnData? How many of these are from bone marrow and how many from peripheral blood?
+> 3. After performing pseudobulk analysis on pDCs and NCMs independently, how do the volcano plots compare? Do they reveal differentially expressed genes between tissues? If so, which cell type appears to drive the tissue-specific differences?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. The new count matrix consists of the original 2,815 rows, representing all genes with their gene labels in the first column. Additionally, it includes seven other columns corresponding to individual samples, like _Control#1Tcell_ or _SARSCoV2posSevere#1Tcell_.
-> > 2. Our dataset now includes a total of seven samples: three controls and four COVID-19 positive samples.
-> > 3. The volcano plot for T cells, comparing differentially expressed genes between conditions, is shown here: ![Volcano Plot T Cells](../../images/pseudobulk-analysis/Volcano_plot_tcells.png) No differentially expressed genes (DEGs) were detected when analyzing T cells alone between healthy and COVID-19 conditions.
+> > 1. The new count matrix includes the original 1,373 rows, each representing a gene, with gene identifiers listed in the first column. The remaining columns correspond to individual samples, such as *bmacute_pDC* and *pbmcsacuteone_pDC*.
+> > 2. This dataset includes a total of eleven samples: three from bone marrow and eight from peripheral blood.
+> > 3. The analysis of pDCs and NCMs reveals distinct patterns of differentially expressed genes (DEGs) between tissues. Based on the results, NCMs show stronger transcriptional differences and appear to be the main contributors to the tissue-specific expression patterns observed in the full dataset.
+> > ![Volcano Plot pDCs](../../images/pseudobulk-analysis/Volcano_plot_pDCs.png)  
+> > ![Volcano Plot NCMs](../../images/pseudobulk-analysis/Volcano_plot_NCMs.png)
 > >
 > {: .solution}
 >
 {: .question}
 
+
+> <tip-title>Split AnnData object by cluster or other observation key into a collection</tip-title>
+>
+> You can split an `AnnData` object into multiple objects **at once** based on the values of a given `obs` key using the: {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.9+galaxy1) %}.
+>
+> This tool automatically creates a collection containing one `AnnData` object for each unique value in the selected observation key.
+>
+> For example, to split the dataset by cluster annotation, you can use the key `louvain`, or in the case of this tutorial, `annotated`. Each resulting element in the collection will correspond to a different cluster or cell type, which can then be analysed independently.
+>
+{: .tip}
 
 ## Recommendations
 1. **Data Preprocessing:**

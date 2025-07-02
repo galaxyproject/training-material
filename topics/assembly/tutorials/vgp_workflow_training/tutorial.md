@@ -8,6 +8,7 @@ tags:
 - pacbio
 - eukaryote
 - VGP
+- biodiversity
 questions:
 - What combination of tools can produce the highest quality assembly of vertebrate
   genomes?
@@ -58,7 +59,10 @@ recordings:
   captioners:
   - abueg
   bot-timestamp: 1726177737
-
+edam_ontology:
+  - topic_0196 #sequence assembly
+  - topic_3940 #chromosome conformation capture
+    
 
 ---
 

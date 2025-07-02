@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools
+subtopic: analysing
 zenodo_link: https://doi.org/10.5281/zenodo.5805953
 questions:
 - What Xarray Galaxy Tools can I use in Galaxy and what for?
@@ -58,7 +59,7 @@ In this tutorial, we will be using data from [Copernicus Atmosphere Monitoring S
 CAMS produces daily [European air quality forecasts](https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-europe-air-quality-forecasts?tab=overview) over Europe at a resolution of 0.1 degrees (which corresponds approximately to 10km). 
 It is produced from an ensemble of nine air quality forecasting models across Europe: the nine models can be combined together and the spread between these models are used to provide an extimate of the forecast uncertainty. The analysis combines model data with observations provided by the [European Environment Agency](https://www.eea.europa.eu/) (EEA).
 
-Several variables are generated and we will be using PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/wiki/Particulates#Size,_shape_and_solubility_matter)) 4 days forecast from December, 22 2021. Particle Matter < 2.5 μm (PM2.5) are fine particules that remain suspended for a long time and exposure to high concentration of PM2.5 (yearly mean values greater than 25 µg/m3) can have multiple short term and long term health impacts such as eye irritation, asthma and chronic bronchitis. Information on air quality standards in Europe can be found [here](https://ec.europa.eu/environment/air/quality/standards.htm).
+Several variables are generated and we will be using PM2.5 ([Particle Matter < 2.5 μm](https://en.wikipedia.org/wiki/Particulates#Size,_shape_and_solubility_matter)) 4 days forecast from December, 22 2021. Particle Matter < 2.5 μm (PM2.5) are fine particules that remain suspended for a long time and exposure to high concentration of PM2.5 (yearly mean values greater than 25 µg/m3) can have multiple short term and long term health impacts such as eye irritation, asthma and chronic bronchitis. Information on air quality standards in Europe can be found at the [European Commission's air quality standards webpage](https://ec.europa.eu/environment/air/quality/standards.htm).
 The dataset we will be using in this tutorial is very small and there is no need to parallelize our data analysis. Parallel data analysis with Pangeo is not covered in this tutorial. 
 
  

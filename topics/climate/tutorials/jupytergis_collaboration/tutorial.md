@@ -1,9 +1,10 @@
 ---
 layout: tutorial_hands_on
-
 title: Collaboration with JupyterGIS
+subtopic: analysing
 questions:
-- What features does JupyterGIS have to help me collaborate with others on GIS projects in real time?
+- What features does JupyterGIS have to help me collaborate with others on GIS projects
+  in real time?
 objectives:
 - Launch a collaborative session in JupyterGIS.
 - Generate shareable links to invite collaborators.
@@ -14,7 +15,20 @@ time_estimation: 30M
 contributors:
 - elifsu-simula
 - annefou
+recordings:
+- youtube_id: l3U6c_VOgnU
+  length: 7M
+  galaxy_version: 24.2.4.dev0
+  date: '2025-05-05'
+  speakers: 
+  - annefou
+  captioners: 
+  - annefou
+  bot-timestamp: 1746442257
+
+
 ---
+
 
 Welcome to the JupyterGIS collaborative features tutorial. JupyterGIS enables the seamless sharing of notebooks and GIS files, allowing teams—including GIS specialists, data analysts,
 and other experts—to collaborate on spatial projects in a shared environment. This guide will provide the tools and steps needed to collaborate effectively,

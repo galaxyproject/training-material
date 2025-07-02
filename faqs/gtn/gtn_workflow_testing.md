@@ -10,14 +10,14 @@ contributors: [hexylena]
 
 1. Find a tutorial that you're interested in, that **doesn't currently have tests.**
 
-   This tutorial has a workflow (`.ga`) and a test, notice the `-test.yml` that has the same name as the workflow `.ga` file.
+   This tutorial has a workflow (`.ga`) and a test, notice the `-tests.yml` that has the same name as the workflow `.ga` file.
 
    ```
    machinelearning/workflows/machine_learning.ga
-   machinelearning/workflows/machine_learning-test.yml
+   machinelearning/workflows/machine_learning-tests.yml
    ```
 
-   You want to find tutorials without the `-test.yml` file. The workflow file might also be missing.
+   You want to find tutorials without the `-tests.yml` file. The workflow file might also be missing.
 
 2. Check if it has a workflow (if it does, skip to step 5.)
 3. Follow the tutorial

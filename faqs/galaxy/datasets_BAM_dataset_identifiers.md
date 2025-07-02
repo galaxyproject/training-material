@@ -1,17 +1,18 @@
 ---
 title: Finding BAM dataset identifiers
 area: datasets
-description: Quickly learn what the identifiers are in any **BAM** dataset that is the result from mapping
+description: How to find the reference sequence identifiers inside of a BAM file
 box_type: tip
 layout: faq
 contributors: [jennaj, Melkeb]
 ---
 
+Explore the content of your BAM.
+1. Run **Samtools: IdxStats** on your `bam` dataset.
+2. The reference sequence identifiers inside the "BAM header" will be listed in the result report. 
+3. The report is a summary of the BAM content that includes: reference sequence identifiers (chromosome names), their lengths, and a count of the reads mapping to that reference sequence within the BAM file.
+4. Compare the sequence identifiers in your BAM file to the the sequence identifiers (aka "chrom" field) field in all other inputs: VCF, GTF, GFF3, BED, Interval, Tabular.
+5. It is usually important to use the same reference assembly for all steps within the same analysis. If you discover differences, you may need to choose different reference data.
 
-1. Run **Samtools: IdxStats** on the aligned data (`bam` dataset).
-2. The "index header" chromosome names and lengths will be listed in the output (along with read counts).
-3. Compare the chromosome identifiers to the chromosome (aka "chrom") field in all other inputs: VCF, GTF, GFF(3), BED, Interval, etc.
-
-**Note:**
-- The original mapping target may have been a built-in genome index, custom genome (transcriptome, exome, other) -- the same `bam` data will still be summarized.
-- This method will *not* work for "sequence-only" `bam` datasets, as these usually have no header.
+{% icon tip %} Notes
+* This method will *not* work for "sequence-only" `bam` datasets, as these usually have no header and are not associated with a reference assembly yet.

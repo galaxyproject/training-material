@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: Ocean's variables study
+subtopic: analysing
 questions:
 - How to process extract ocean's variables?
 - How to use ODV collections?
@@ -25,9 +26,6 @@ contributions:
     - fairease
     - eurosciencegateway
 ---
-
-
-# Introduction
 
 
 Through this tutorial, you will learn in the first part how to import, visualise, and extract data from an ODV collection by using the ODV Galaxy interactive tool.

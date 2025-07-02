@@ -42,6 +42,9 @@ pathway:
         external: true
         link: "https://example.com"
         type: hands_on  # or 'slides'
+      - name: FAQ example  # you can also includes FAQs in your pathway
+        type: faq
+        link: faqs/gtn/contributors_getting_started
 
 
 # you can make as many sections as you want, with as many tutorials as you want

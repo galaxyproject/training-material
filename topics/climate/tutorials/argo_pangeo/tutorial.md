@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: Analyse Argo data
+subtopic: analysing
 questions:
 - How to use the Pangeo ecosystem to analyse ocean data?
 - How to process Argo data to visualise ocean temperature variations?

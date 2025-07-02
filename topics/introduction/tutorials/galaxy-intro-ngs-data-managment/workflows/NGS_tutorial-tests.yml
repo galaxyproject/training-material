@@ -1,0 +1,291 @@
+- doc: Test outline for NGS_tutorial
+  job:
+    Accessions:
+      class: File
+      path: test-data/Accessions.tabular
+      filetype: tabular
+    Genome:
+      class: File
+      location: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz
+      filetype: fasta.gz
+  outputs:
+    MultiQC HTML report:
+      asserts:
+        has_text:
+          - "Tools for manipulating high-throughput sequencing data"
+          - "Toolkit for interacting with BAM/CRAM files"
+          - "Alignment metrics from <code>samtools stats</code>"
+          - "Fastp goes through fastq files in a folder and perform a series of quality control and filtering."
+          - "<p>Insert size estimation of sampled reads.</p>"
+          - "<p>Average sequencing quality over each base of all reads.</p></div>"
+          - "<p>Average GC content over each base of all reads.</p></div>"
+          - "<p>Average N content over each base of all reads.</p></div>"
+        has_line_matching:
+          - expression: "<tr><td>fastp</td><td><samp>0.24.0</samp></td></tr>"
+          - expression: "<tr><td>Samtools</td><td><samp>1.20</samp></td></tr>"
+        not_has_text:
+          - "Traceback"
+    MultiQC Stat table:
+      asserts:
+        has_text:
+          - "Sample"
+          - "SRR11954102"
+          - "SRR12733957"
+        has_n_columns:
+          n: 17
+    Summarized variant analysis result dataset:
+      asserts:
+        has_text:
+          - "NON_SYNONYMOUS_CODING"
+          - "SRR11954102"
+          - "SRR12733957"
+          - "SRR11954102"
+        has_n_columns:
+          n: 16
+    Log file:
+      asserts:
+        has_text:
+          - "reads written"
+          - "874,684"
+        has_line_matching:
+          - expression: "spots read      : 1,461,510"
+          - expression: "reads written   : 2,923,020"
+    Paired-end datasets:
+      element_tests:
+        SRR11954102:
+          elements:
+            forward:
+              asserts:
+                has_text:
+                  - "@SRR11954102.1/1"
+                  - "ACGGGGGGGCTTACCATCTGGCCCCAGTGCTGCAATGATACCGCGAGACCCACGCTCACCGGCTCCAGATTTATCAGCAATAAACCAGCCAGCCGGAAGGG"
+            reverse:
+              asserts:
+                has_text:
+                  - "@SRR11954102.1/2"
+                  - "AACTCGCCTTGATCGTTGGGAACCGGAGCTGAATGAAGCCATACCAAACGACGAGCGTGACACCACGATGCCTGTAGCAATGGCAACAACGTTGCGCAAAC"
+        SRR12733957:
+          elements:
+            forward:
+              asserts:
+                has_text:
+                  - "@SRR12733957.1/1"
+                  - "GGATAAGGCGCAGCGGTCGGGCTGAACGGGGGGTTCGTGCACACAGCCCAGCTTGGAGCGAACGACCTACACCGAACTGAGATACCTACAGCGTGAGCTAT"
+            reverse:
+              asserts:
+                has_text:
+                  - "@SRR12733957.1/2"
+                  - "GCTTCCAGGGGGAAACGCCTGGTATCTTTATAGTCCTGTCGGGTTTCGCCACCTCTGACTTGAGCGTCGATTTTTGTGATGCTAGTCAGGGGGGCGGCACC"
+    Single-end datasets:
+      element_tests: {}
+    Unpaired datasets:
+      element_tests: {}
+    Mapping BAM output:
+      element_tests:
+        SRR11954102:
+          asserts:
+            has_size:
+              min: 70M
+        SRR12733957:
+          asserts:
+            has_size:
+              min: 20M
+    Mapping SAM output:
+      element_tests:
+        SRR11954102:
+          asserts:
+            has_size:
+              min: 300k
+        SRR12733957:
+          asserts:
+            has_size:
+              min: 700K
+    Realigned reads BAM file:
+      element_tests:
+        SRR11954102:
+          asserts:
+            has_size:
+              min: 300K
+        SRR12733957:
+          asserts:
+            has_size:
+              min: 400K
+    Realigned BAM dataset with indel qualities:
+      element_tests:
+        SRR11954102:
+          asserts:
+            has_size:
+              min: 400K
+        SRR12733957:
+          asserts:
+            has_size:
+              min: 700K
+    'HTML summary of results ':
+      element_tests:
+        SRR11954102:
+          asserts:
+            has_text:
+              - "<td> <pre>SnpEff 4.5covid19 (build 2020-04-15 22:26), by Pablo Cingolani</pre> </td>"
+              - "<td> 29,903 </td>"
+              - "<td valign=top> <b> Genome effective length </b> </td>"
+            has_line_matching:
+              - expression: "Missense / Silent ratio: 3.7727"
+              - expression: "Transitions ,23,23"
+        SRR12733957:
+          asserts:
+            has_text:
+              - "<td> <pre>SnpEff 4.5covid19 (build 2020-04-15 22:26), by Pablo Cingolani</pre> </td>"
+              - "<td> 29,903 </td>"
+              - "<td> 87 </td>"
+              - "<td valign=top> <b> Genome effective length </b> </td>"
+            has_line_matching:
+              - expression: "Missense / Silent ratio: 2.5"
+              - expression: "Transitions ,18,18"
+    Variant dataset with added variant effects:
+      element_tests:
+        SRR11954102:
+          asserts:
+            has_text:
+              - "##fileformat=VCFv4.0"
+              - "NON_SYNONYMOUS_CODING(MODERATE|MISSENSE|aCc/aTc|T265I|7096|ORF1ab|protein_coding|CODING|GU280_gp01|1|T),NON_SYNONYMOUS_CODING(MODERATE|MISSENSE|aCc/aTc|T265I|4405|ORF1ab|protein_coding|CODING|GU280_gp01.2|1|T),NON_SYNONYMOUS_CODING(MODERATE|MISSENSE|aCc/aTc|T85I|637|ORF1ab|protein_coding|CODING|YP_009725298.1|1|T|WARNING_TRANSCRIPT_NO_START_CODON),NON_SYNONYMOUS_CODING(MODERATE|MISSENSE|aCc/aTc|T85I|637|ORF1ab|protein_coding|CODING|YP_009742609.1|1|T|WARNING_TRANSCRIPT_NO_START_CODON)"
+              - "DP=55;AF=0.127273;SB=14;DP4=25,23,7,0;EFF=NON_SYNONYMOUS_CODING(MODERATE|MISSENSE|Aaa/Caa|K456Q|7096|ORF1ab|protein_coding|CODING|GU280_gp01|1|C),NON_SYNONYMOUS_CODING(MODERATE|MISSENSE|Aaa/Caa|K456Q|4405|ORF1ab|protein_coding|CODING|GU280_gp01.2|1|C),NON_SYNONYMOUS_CODING(MODERATE|MISSENSE|Aaa/Caa|K276Q|637|ORF1ab|protein_coding|CODING|YP_009725298.1|1|C|WARNING_TRANSCRIPT_NO_START_CODON),NON_SYNONYMOUS_CODING(MODERATE|MISSENSE|Aaa/Caa|K276Q|637|ORF1ab|protein_coding|CODING|YP_009742609.1|1|C|WARNING_TRANSCRIPT_NO_START_CODON)"
+              - "NC_045512.2"
+        SRR12733957:
+          asserts:
+            has_text:
+              - "##fileformat=VCFv4.0"
+              - "DP=50;AF=0.760000;SB=3;DP4=5,6,13,26;EFF=SYNONYMOUS_CODING(LOW|SILENT|gtC/gtT|V186|7096|ORF1ab|protein_coding|CODING|GU280_gp01|1|T),SYNONYMOUS_CODING(LOW|SILENT|gtC/gtT|V186|4405|ORF1ab|protein_coding|CODING|GU280_gp01.2|1|T),SYNONYMOUS_CODING(LOW|SILENT|gtC/gtT|V6|637|ORF1ab|protein_coding|CODING|YP_009725298.1|1|T|WARNING_TRANSCRIPT_NO_START_CODON),SYNONYMOUS_CODING(LOW|SILENT|gtC/gtT|V6|637|ORF1ab|protein_coding|CODING|YP_009742609.1|1|T|WARNING_TRANSCRIPT_NO_START_CODON)"
+              - "1022.0"
+              - "NC_045512.2"
+    Report in HTML format:
+      element_tests:
+        SRR11954102:
+          asserts:
+            has_line_matching:
+              - expression: "<tr><td class='col1'>duplication rate:</td><td class='col2'>0.014095%</td></tr>"
+              - expression: "<tr><td class='col1'>Q20 bases:</td><td class='col2'>271.123037 M (91.836064%)</td></tr>"
+              - expression: "<tr><td class='adapter_col'>CTGTCTCTTATACACATCTCCGAGCCCACGAGAC</td><td class='col2'>3989</td></tr>"
+        SRR12733957:
+          asserts:
+            has_line_matching:
+              - expression: "<tr><td class='col1'>Q20 bases:</td><td class='col2'>74.224393 M (84.018340%)</td></tr>"
+              - expression: "<tr><td class='col1'>reads passed filters:</td><td class='col2'>594.676000 K (67.987525%)</td></tr>"
+              - expression: "<tr><td class='adapter_col'>CTGTCTCTT</td><td class='col2'>82</td></tr>"
+    Report in JSON format:
+      element_tests:
+        SRR11954102:
+          asserts:
+            has_text:
+              - "read1_before_filtering"
+              - "fastp_version"
+              - "0.24.0"
+              - "235504062"
+        SRR12733957:
+          asserts:
+            has_text:
+              - "read1_before_filtering"
+              - "fastp_version"
+              - "0.24.0"
+              - "74224393"
+    Paired-end Collection:
+      element_tests:
+        #SRR11954102:
+        #  elements:
+        #    forward:
+        #      asserts:
+        #        has_line_matching:
+        #          - expression: ""
+        #    reverse:
+        #      asserts:
+        #        has_line_matching:
+        #          - expression: ""
+        SRR12733957:
+          elements:
+            forward:
+              asserts:
+                has_line_matching:
+                  - expression: "@SRR12733957.1/1"
+                  - expression: "GGATAAGGCGCAGCGGTCGGGCTGAACGGGGGGTTCGTGCACACAGCCCAGCTTGGAGCGAACGACCTACACCGAACTGAGATACCTACAGCGTGAGCTAT"
+            reverse:
+              asserts:
+                has_line_matching:
+                  - expression: "@SRR12733957.1/2"
+                  - expression: "GCTTCCAGGGGGAAACGCCTGGTATCTTTATAGTCCTGTCGGGTTTCGCCACCTCTGACTTGAGCGTCGATTTTTGTGATGCTAGTCAGGGGGGCGGCACC"
+    MarkDuplicates Metrics:
+      element_tests:
+        SRR11954102:
+          asserts:
+            has_text:
+              - "3.915367"
+              - "12.775152"
+              - "31.776092"
+              - "429842"
+        SRR12733957:
+          asserts:
+            has_text:
+              - "CoverageMult"
+              - "3.68078"
+              - "3.671942"
+              - "28015"
+    MarkDuplicates BAM:
+      element_tests:
+        SRR11954102:
+          asserts:
+            has_size:
+              min: 400K
+        SRR12733957:
+          asserts:
+            has_size:
+              min: 700K
+    Statistics for BAM dataset:
+      element_tests:
+        SRR11954102:
+          asserts:
+            has_text:
+              - "# This file was produced by samtools stats (1.20+htslib-1.20) and can be plotted using plot-bamstats"
+              - "12243"
+              - "5917"
+              - "5944"
+              - "4908"
+              - "1144907"
+        SRR12733957:
+          asserts:
+            has_text:
+              - "# This file was produced by samtools stats (1.20+htslib-1.20) and can be plotted using plot-bamstats"
+              - "15223"
+              - "7615"
+              - "1023"
+              - "6520"
+              - "6890"
+    All called variants:
+      element_tests:
+        SRR11954102:
+          asserts:
+            has_text:
+              - "DP=28;AF=1.000000;SB=0;DP4=0,0,15,13"
+              - "DP=69;AF=0.043478;SB=2;DP4=32,34,2,1"
+              - "DP=73;AF=0.054795;SB=2;DP4=50,18,4,0"
+        SRR12733957:
+          asserts:
+            has_text:
+              - "DP=63;AF=0.888889;SB=0;DP4=0,0,42,21"
+              - "DP=60;AF=0.050000;SB=17;DP4=13,44,3,0"
+              - "DP=43;AF=0.093023;SB=15;DP4=15,24,4,0"
+    Variant dataset with added variant effects in tabular format:
+      element_tests:
+        SRR11954102:
+          asserts:
+            has_text:
+              - "0.971014"
+              - "17,24,4,0"
+              - "0.951219"
+            has_n_columns:
+              n: 15
+        SRR12733957:
+          asserts:
+            has_text:
+              - "0.0,0,10,21"
+              - "0.166667"
+              - "17,42,4,0"
+            has_n_columns:
+              n: 15

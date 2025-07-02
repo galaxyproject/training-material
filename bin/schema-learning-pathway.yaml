@@ -33,6 +33,16 @@ mapping:
         type: str
         description: cover image alt text
 
+    redirect_from:
+        type: seq
+        sequence:
+            - type: str
+        description: |
+            If a tutorial is renamed to a new location, use this field to list prior locations from which this tutorial was accessible.
+        _examples:
+        - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
+
+
     priority:
         type: int
         description: priority within learning path list
@@ -173,3 +183,7 @@ mapping:
                           enum:
                             - hands_on
                             - slides
+                            - faq
+                            - custom
+                        description:
+                          type: str

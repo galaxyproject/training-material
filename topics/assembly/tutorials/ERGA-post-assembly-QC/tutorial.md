@@ -26,6 +26,7 @@ tags:
 - genome
 - assembly
 - QC
+- biodiversity
 recordings:
 - youtube_id: n4PNTTa2d6U
   length: 44M
@@ -36,7 +37,10 @@ recordings:
   captioners:
   - delphine-l
   bot-timestamp: 1728229662
-
+edam_ontology:
+- topic_0622 # Genomics
+- topic_0196 # Assembly
+- topic_3050 # Biodiversity
 
 ---
 

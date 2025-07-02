@@ -2,7 +2,7 @@ GalaxyP Training material
 =================
 <details>
 <summary>
- 
+
 # List of proteomics tutorials
 
 topic | features
@@ -19,13 +19,13 @@ topic | features
 [metaQuantome-Taxonomy](tutorials/metaquantome-taxonomy/tutorial.md) | [:book:](tutorials/metaquantome-taxonomy/tutorial.md)
 [metaQuantome-Function](tutorials/metaquantome-function/tutorial.md) | [:book:](tutorials/metaquantome-function/tutorial.md)
 [EncyclopeDIA](tutorials/encyclopedia/tutorial.md) | [:book:](tutorials/encyclopedia/tutorial.md)
-[Neoantigen-1-Fusion-Database-generation](tutorials/neoantigen-1-fusion-database-generation/tutorial.md) | [:book:](tutorials/neoantigen-1-fusion-database-generation/tutorial.md)
-[Neoantigen-2-Non-Reference-Database-generation](tutorials/neoantigen-2-non-reference-database-generation/tutorial.md) | [:book:](tutorials/neoantigen-2-non-reference-database-generation/tutorial.md)
-[Neoantigen-3-Discovery-Peptidomics](tutorials/neoantigen-3-fragpipe-discovery/tutorial.md) | [:book:](tutorials/neoantigen-3-fragpipe-discovery/tutorial.md)
-[Neoantigen-4-Peptidomics-verification](tutorials/neoantigen-4-peptide-verification/tutorial.md) | [:book:](tutorials/neoantigen-4-peptide-verification/tutorial.md)
-[Neoantigen-5-Annotation-and-characterization](tutorials/neoantigen-5-variant-annotation/tutorial.md) | [:book:](tutorials/neoantigen-5-variant-annotation/tutorial.md)
-[Neoantigen-6-HLA-Binding-Prediction](tutorials/neoantigen-6-predicting-hla-binding/tutorial.md) | [:book:](tutorials/neoantigen-6-predicting-hla-binding/tutorial.md)
-[Neoantigen-7-Novel-neoantigen-HLA-Binders](tutorials/neoantigen-7-hla-binding-novel-peptides/tutorial.md) | [:book:](tutorials/neoantigen-7-hla-binding-novel-peptides/tutorial.md)
+[Neoantigen-1a-Fusion-Database-generation](tutorials/neoantigen-fusion-database-generation/tutorial.md) | [:book:](tutorials/neoantigen-fusion-database-generation/tutorial.md)
+[Neoantigen-1b-Non-Reference-Database-generation](tutorials/neoantigen-non-reference-database-generation/tutorial.md) | [:book:](tutorials/neoantigen-non-reference-database-generation/tutorial.md)
+[Neoantigen-2-Discovery-Peptidomics](tutorials/neoantigen-fragpipe-discovery/tutorial.md) | [:book:](tutorials/neoantigen-fragpipe-discovery/tutorial.md)
+[Neoantigen-3-Peptidomics-verification](tutorials/neoantigen-peptide-verification/tutorial.md) | [:book:](tutorials/neoantigen-peptide-verification/tutorial.md)
+[Neoantigen-4-Annotation-and-characterization](tutorials/neoantigen-variant-annotation/tutorial.md) | [:book:](tutorials/neoantigen-variant-annotation/tutorial.md)
+[Neoantigen-5a-HLA-Binding-Prediction](tutorials/neoantigen-predicting-hla-binding/tutorial.md) | [:book:](tutorials/neoantigen-predicting-hla-binding/tutorial.md)
+[Neoantigen-5b-Novel-neoantigen-HLA-Binders](tutorials/neoantigen-hla-binding-novel-peptides/tutorial.md) | [:book:](tutorials/neoantigen-hla-binding-novel-peptides/tutorial.md)
 [Clinical-Metaproteomics-Database-generation](tutorials/clinical-mp-1-database-generation/tutorial.md) | [:book:](tutorials/clinical-mp-1-database-generation/tutorial.md)
 [Clinical-Metaproteomics-Discovery](tutorials/clinical-mp-2-discovery/tutorial.md) | [:book:](tutorials/clinical-mp-2-discovery/tutorial.md)
 [Clinical-Metaproteomics-Data-Verification](tutorials/clinical-mp-3-verification/tutorial.md) | [:book:](tutorials/clinical-mp-3-verification/tutorial.md)
@@ -36,7 +36,7 @@ topic | features
 [N-Tails](./tutorials/ntails/workflows/) | [:page_facing_up:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/ntails/workflows) [:book:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/ntails/workflows)
 [Secretome Prediction](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/workflows) | [:page_facing_up:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/workflows) [:book:](https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/secretome-prediction/workflows)
 
-</summary> 
+</summary>
 
 The Galaxy community offers many different ways of training. The table above lists all available training features of a specific topic to give you a fast and comprehensive overview.
 

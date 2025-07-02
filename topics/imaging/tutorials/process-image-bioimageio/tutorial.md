@@ -22,6 +22,7 @@ tags:
 contributions:
   authorship:
     - dianichj
+    - kostrykin
   editing:
     - kostrykin
 ---
@@ -32,8 +33,6 @@ Each model in BioImage.IO is tailored for a specific biological task — for exa
 
 This tutorial will guide you through the process of applying one of these BioImage.IO models to an input image using Galaxy ({% cite Batut2024 %}). You will learn how to upload and configure the model, set the correct input parameters, and interpret the output files.
 
-+⚠️  As of the version {% tool [Process image using a BioImage.IO model](toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy2) %}, only the PyTorch-based BioImage.IO models listed in the section below are compatible with the Galaxy tool.
-
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -43,7 +42,9 @@ This tutorial will guide you through the process of applying one of these BioIma
 >
 {: .agenda}
 
-## Available BioImage.IO models in Galaxy
+# Available BioImage.IO models in Galaxy
+
+As of the version {% tool [Process image using a BioImage.IO model](toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy3) %}, only the PyTorch-based BioImage.IO models listed in the table below are compatible with the Galaxy tool:
 
 | Model name | Task | Imaging modality | Sample / species | Link |
 |------------|------|------------------|------------------|------|
@@ -55,34 +56,32 @@ This tutorial will guide you through the process of applying one of these BioIma
 | 🧬 CovidIFCellSegmentationBoundaryModel | Cell segmentation | Fluorescence light microscopy | Infected human cells | [View model](https://bioimage.io/#/?tags=Covid&id=10.5281%2Fzenodo.5847355) |
 | 🧬 NucleiSegmentationBoundaryModel| Nucleus segmentation | Fluorescence light microscopy| Generic / various | [View model](https://bioimage.io/#/?id=10.5281%2Fzenodo.5764892) |
 | 🧬 HPANucleusSegmentation | Nucleus segmentation | Immunofluorescence | Human Protein Atlas | [View model](https://bioimage.io/#/?tags=HPA&id=10.5281%2Fzenodo.6200999) |
-| 🧠 NeuronSegmentationInEM | Neuron segmentation | Electron microscopy | Brain tissue | [View model](https://bioimage.io/#/?id=10.5281%2Fzenodo.5817052) |
+| 🧠 NeuronSegmentationInEM (Membrane prediction) | Neuron segmentation | Electron microscopy | Brain tissue | [View model](https://bioimage.io/#/?id=10.5281%2Fzenodo.5874741) |
 | 🧫 HPACellSegmentationModel | Cell segmentation | Immunofluorescence | Human Protein Atlas | [View model](https://bioimage.io/#/?tags=hpa&id=10.5281%2Fzenodo.6200635) |
 | 🧪 MitochondriaEMSegmentationBoundaryModel | Mitochondria segmentation | Electron microscopy | Human | [View model](https://bioimage.io/#/?id=10.5281%2Fzenodo.5874841) |
 
-## Model-specific example
+# Example: Segmentation
 
 Here we illustrate the type of information that is both useful for understanding the model's biological context and necessary for using the Galaxy tool — specifically, the input axes and input size parameters.
 
 As an example, we consider the following model: **🧬 NucleiSegmentationBoundaryModel**
 
-This model segments nuclei in fluorescence microscopy images. It predicts <em>boundary maps</em> and <em>foreground probabilities</em> for nucleus segmentation, primarily in images stained with DAPI. The outputs are designed to be post-processed with methods such as Multicut or Watershed to achieve instance-level segmentation (object-based segmentation).
+This model segments nuclei in fluorescence microscopy images. It predicts *boundary maps* and *foreground probabilities* for nucleus segmentation, primarily in images stained with DAPI. The outputs are designed to be post-processed with methods such as Multicut or Watershed to achieve instance-level segmentation (object-based segmentation).
 
 - **Imaging modality**: Fluorescence microscopy
 - **Task**: Nucleus segmentation (boundary-aware)
-- **Input axes**: `bcyx`
-- **Input size**: `256,256,1,1`
 - **Model link**: [View on BioImage.IO](https://bioimage.io/#/r/ilastik/stardist_dsb_training_data)
 - **Citation**: [10.5281/zenodo.5764893](https://doi.org/10.5281/zenodo.5764893)
 
 
 > <tip-title> Where to find this information on BioImage.IO </tip-title>
 >
-> You can find similar details for other models directly on [BioImage.IO](https://bioimage.io) by viewing each model’s card. Look under the “inputs” section of the RDF file to find the required `axes` and `input size` values. These parameters are essential for running the model correctly in Galaxy.
+> You can find similar details for other models directly on [BioImage.IO](https://bioimage.io) by viewing each model's card. Look under the “inputs” section of the RDF file to find the required `axes` and `input size` values. These parameters are essential for running the model correctly in Galaxy.
 >
 {: .tip}
 
 
-## Get data
+## Get the data
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
@@ -91,7 +90,7 @@ This model segments nuclei in fluorescence microscopy images. It predicts <em>bo
 > 2. Download the following image and import it into your Galaxy history.
 >    For the purpose of this tutorial, we will use one image to test only one of the 11 available models:
 >
->    - [`test_image_nuclei.tiff`](../../images/process-image-bioimageio/input_nucleisegboundarymodel.png)
+>    - [`test_image_nuclei.png`](../../images/process-image-bioimageio/input_nucleisegboundarymodel.png)
 >
 >    If you are importing the image via URL:
 >
@@ -110,7 +109,7 @@ This model segments nuclei in fluorescence microscopy images. It predicts <em>bo
 > 5. Import the BioImage.IO model from the Galaxy file repository:
 >
 >    - Click on **Upload Data**
->    - Go to the ** Choose from repository** tab
+>    - Go to the **Choose from repository** tab
 >    - Navigate to: `ML models` → `bioimaging-models`
 >    - Select the desired model file (for this tutorial, choose `nucleisegmentationboundarymodel.pt`)
 >    - Click **Import** to add it to your history
@@ -126,24 +125,15 @@ This model segments nuclei in fluorescence microscopy images. It predicts <em>bo
 
 > <hands-on-title> Run BioImage.IO model </hands-on-title>
 >
-> 1. {% tool [Process image using a BioImage.IO model](toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy1) %} with the following parameters:
+> 1. {% tool [Process image using a BioImage.IO model](toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"BioImage.IO model"*: `nucleisegmentationboundarymodel.pt`
 >    - {% icon param-file %} *"Input image"*: `test_image_nuclei.png`
 >    - {% icon param-text %} *"Size of the input image"*: `256,256,1,1`
->    - {% icon param-select %} *"Axes of the input image"*: `bcyx`
+>    - {% icon param-select %} *"Axes of the input image"*: `Four axes (e.g., bcyx, byxc)`
 >
 >    > <comment-title>Axes and size</comment-title>
 >    >
->    > The input **axes** define the order of image dimensions expected by the model:
->    > - `b`: batch
->    > - `c`: channel
->    > - `y`: vertical axis
->    > - `x`: horizontal axis
->    >
->    > The **input size** must match that order.
->    > For example: `256,256,1,1` = 256 px height (`y`), 256 px width (`x`), 1 channel (`c`), and 1 image (`b`).
->    >
->    > This information is provided in the model’s RDF file on [BioImage.IO](https://bioimage.io).
+>    > The {% icon param-text %} *"Size of the input image"* and the {% icon param-select %} *"Axes of the input image"* are crucial to transform the input image into the format that the BioImage.IO model requires. The correct values are provided in the RDF file that comes with the chosen model on [BioImage.IO](https://bioimage.io).
 >    {: .comment}
 >
 {: .hands_on}
@@ -152,10 +142,9 @@ The model will process the input image and generate two outputs:
 - Two predicted images (written in one TIFF file)
 - A predicted tensor matrix (`.npy`)
 
-Below is a visualization of the two predicted images generated by the **🧬 NucleiSegmentationBoundaryModel**.
-👉 **See tip below** for how to properly visualize the output.
+[Figure 1](#figure-1) below is a visualization of the two predicted images generated by the **🧬 NucleiSegmentationBoundaryModel**. Predicted Image 1 are the *foreground probabilities* and Predicted Image 2 are the *boundary map*.
 
-![Example of tiff output from nuclei segmentation model](../../images/process-image-bioimageio/output-nucleus-seg-model.png "Predicted output – Nucleus Segmentation")
+![Example tiff output of the nuclei segmentation model](../../images/process-image-bioimageio/output-nucleus-seg-model.png "The output generated by the nuclei segmentation model for the example data. The intensity values in all three images are ranging from 0 (black) to 1 (white) with gray values in between.")
 
 > <tip-title> Visualising the output images</tip-title>
 >
@@ -185,6 +174,73 @@ Below is a visualization of the two predicted images generated by the **🧬 Nuc
 > >
 >{: .solution}
 {: .question}
+
+
+## Post-processing of the model output
+
+There are two challenges when it comes to using the model output for subsequent analysis. First, the model produces a single output file with two images (boundary maps and foreground probabilities), so for subsequent analysis we need to extract the corresponding information from that file. Second, neither of the two images produced by the model directly corresponds to segmentation results. Albeit the extracted image (Predicted Image 1) looks like a binary image with intensity 0 for the image background and intensity 1 for the image foreground, it is not. For example, there are fine contours of intensity values subtly below 1 between closely clustered cell nuclei. Thus, to obtain segmentation results, we first need to threshold the foreground probabilities (values ranging between 0 and 1) to determine the image foreground (as a binary image without any values between 0 and 1).
+
+However, directly thresholding the foreground probabilities is going to lose information when it comes to closely clustered cell nuclei, where the crucial information is stored in the boundary map. To cope with that, we will extract both images (the *foreground probabilities* and the *boundary map*) from the output file, combine their information into a single image, and then perform thresholding.
+
+> <hands-on-title>Extract the segmentation results from the model output</hands-on-title>
+>
+> 1. {% tool [Split image along axes](toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.2.3+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Input Image"*: the output from "Run BioImage.IO model"
+>    - {% icon param-select %} *"Axis to split along"*: `Q-axis (other or unknown axis)`
+>    - {% icon param-check %} *"Squeeze result images"*
+>
+>    This produces a dataset collection with two items (the two images). Next, we need to extract the first dataset (Predicted Image 1) from this collection.
+>
+> 2. {% tool [Extract dataset](__EXTRACT_DATASET__) %} with the following parameters:
+>    - {% icon param-file %} *"Input List"*: the output from the previous step
+>    - {% icon param-select %} *"How should a dataset be selected"*: `Select by index`
+>    - {% icon param-select %} *"Element index"*: `0`
+>
+>    This will yield the file `1.tiff` in your history (Predicted Image 1).
+>
+> 2. {% tool [Extract dataset](__EXTRACT_DATASET__) %} with the following parameters:
+>    - {% icon param-file %} *"Input List"*: the output from the previous step
+>    - {% icon param-select %} *"How should a dataset be selected"*: `Select by index`
+>    - {% icon param-select %} *"Element index"*: `1`
+>
+>    This will yield the file `2.tiff` in your history (Predicted Image 2).
+>
+>    Next, we will combine the information from the two images into a single image.
+>
+> 3. {% tool [Process images using arithmetic expressions](toolshed.g2.bx.psu.edu/repos/imgteam/image_math/image_math/1.26.4+galaxy2) %}
+>    - {% icon param-text %} *"Expression"*: `foreground - boundaries`
+>    - {% icon param-repeat %} *"Input images"*:
+>      - {% icon param-file %} *"Image"*: `1.tiff`
+>      - {% icon param-text %} *"Variable for representation of the image within the expression"*: `foreground`
+>    - {% icon param-repeat %} *"Input images"*:
+>      - {% icon param-file %} *"Image"*: `2.tiff`
+>      - {% icon param-text %} *"Variable for representation of the image within the expression"*: `boundaries`
+>
+>    > <question-title></question-title>
+>    >
+>    > What is the motivation for combining the information from the two images with this arithmetic expression?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > Each pixel of the `foreground` image (Predicted Image 1) corresponds to the probability of that pixel being part of a foreground object. We have also seen that the `boundaries` image (Predicted Image 2) uses white (intensity value 1) to encode pixels which likely correspond to boundaries of cell nuclei, and lower intensity values for others. Thus, we can interpret the `boundaries` image as *boundary probabilities*, in the sense that each pixel of that image corresponds to the probability of that pixel being part of an object boundary (i.e. the boundary of a nucleus). By considering the expression `foreground - boundaries`, we essentially consider the probability of each pixel being part of the image foreground, *plus* the probability of that point being *not* part of an object boundary.
+>    > >
+>    > > Thus, in the resulting image, the intensity of each pixel pixel can be interpreted as the probability of that pixel being part of the *interior* of a foreground object. This better preserves information about the individual cell nuclei in the image, which is especially crucial for closely clustered cell nuclei, as opposed to considering the *foregorund probabilities* solely.
+>    > >
+>    > > This interpretation also gives rise to the choice of `0.6` as the threshold value for in the next step (see below). Naturally, we would choose `0.5` to determine the image regions for which the probability is higher than 50% that the image pixels correspond to the interior of foreground objects (cell nuclei), but to improve the separation of closely clustered cell nuclei, it is a good practice to choose a threshold that is somewhat higher.
+>    > >
+>    > {: .solution }
+>    {: .question}
+>
+> 4. {% tool [Threshold image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3) %}
+>    - {% icon param-file %} *"Input image"*: the output of the {% tool [Process images using arithmetic expressions](toolshed.g2.bx.psu.edu/repos/imgteam/image_math/image_math/1.26.4+galaxy2) %} tool
+>    - {% icon param-select %} *"Thresholding method"*: `Manual`
+>    - {% icon param-text %} *"Threshold value"*: `0.6`
+>
+{: .hands_on}
+
+Finally, you could follow the ["Hands On: Segment image" from the "Introduction to Image Analysis using Galaxy" tutorial]({% link topics/imaging/tutorials/imaging-introduction/tutorial.md#hands-on-segment-image %}) to create a segmentation overlay (e.g., see [Figure 3](#figure-3) below) or to perform cell counting.
+
+![Segmentation overlay](../../images/process-image-bioimageio/segmentation.png "Overlay of the original input image and the contours of the segmentation results obtained using the BioImage.IO model and post-processing.")
 
 
 # Conclusion

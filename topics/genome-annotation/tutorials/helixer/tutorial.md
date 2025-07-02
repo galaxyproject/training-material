@@ -7,10 +7,14 @@ tags:
   - eukaryota
   - helixer
   - jbrowse1
+  - biodiversity
 
 edam_ontology:
 - topic_0362 # Genome annotation
-
+- topic_3050 # Biodiversity
+- topic_0622 # Genomics
+- topic_3500 # Zoology
+- topic_0780 # Plant Biology
 questions:
     - How to annotate an eukaryotic genome with Helixer?
     - How to evaluate and visualize annotated genomic features?

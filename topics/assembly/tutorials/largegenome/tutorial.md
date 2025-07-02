@@ -8,6 +8,11 @@ tags:
   - polishing
   - nanopore
   - plants
+  - biodiversity
+edam_ontology:
+- topic_0622 # Genomics
+- topic_0196 # Assembly
+- topic_3050 # Biodiversity
 questions:
   - "How can we assemble a large plant or animal genome?"
 objectives:
