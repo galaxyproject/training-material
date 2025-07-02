@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Gigascience_Indels_SAV_non-reference_demonstration_STS26T-Gent_Workflow / Neoantigen 1b: Non-Reference-Database-Generation / Proteomics</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@92f18099601384b5be5ff1f7d341176d8d600975",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/neoantigen-non-reference-database-generation/workflows/main_workflow.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Gigascience_Indels_SAV_non-reference_demonstration_STS26T-Gent_Workflow">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="1970-01-01 00:00:00 +0000"><meta name="description" content="Training material for proteomics workflows in Galaxy">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Proteomics / Neoantigen 1b: Non-Reference-Database-Generation / Gigascience_Indels_SAV_non-reference_demonstration_STS26T-Gent_Workflow">
+        <meta property="og:description" content="Training material for proteomics workflows in Galaxy">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/proteomics/tutorials/neoantigen-non-reference-database-generation/workflows/main_workflow.png">
+	</head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/proteomics/faqs/" title="Check our FAQs for the Proteomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/proteomics/tutorials/neoantigen-non-reference-database-generation/workflows/main_workflow.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/proteomics/tutorials/neoantigen-non-reference-database-generation/workflows/main_workflow.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+<style>
+hgroup {margin-bottom: 2rem; border-bottom: 1px solid var(--border-light);}
+hgroup p { font-family: monospace; font-size: 0.8rem;}
+.meta ul { padding-left: 1em;}
+</style>
+
+<section>
+	<hgroup>
+		<h1 data-toc-skip>Gigascience_Indels_SAV_non-reference_demonstration_STS26T-Gent_Workflow</h1>
+		<p>proteomics-neoantigen-non-reference-database-generation/main-workflow</p>
+	</hgroup>
+	
+	<div class="row">
+		<div class="col-md-3 meta">
+			
+			<b>Author(s)</b>
+			<br/>
+			
+			GalaxyP
+			
+			
+			<br/>
+
+			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
+			<b>Version</b>
+			<br/>
+			1
+
+			<br/>
+
+			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
+			<b>Last updated</b>
+			<br/>
+			Jul 2, 2025
+
+			<br/>
+
+			<i class="fas fa-balance-scale" aria-hidden="true"></i><span class="visually-hidden">license</span>
+			<b>License</b>
+			<br/>
+
+			
+			<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
+			
+			<br/>
+
+			
+			<i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span>
+			<b>Tags</b>
+			<br/>
+
+			
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffcff3; --color-darker: #ffa8eb; --color-dimmed: #ffbcef;">name:neoantigen</div>
+			
+			</br>
+			
+
+
+			<b>Features</b>
+			<ul>
+			
+			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
+			
+			
+			
+			</ul>
+
+			<hr/>
+
+
+			<b>Tutorial</b>
+			<br/>
+			<i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> <a href="../tutorial.html">Neoantigen 1b: Non-Reference-Database-Generation</a>
+			</br>
+
+			
+			
+
+
+			<hr/>
+			<b>Workflow Testing</b>
+			<br/>
+
+			Tests: ❌ <br/>
+			Results: Not yet automated
+
+			<hr/>
+
+			<b>FAIRness</b>
+
+			<i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span>
+			<b><abbr title="Persistent URL">PURL</abbr></b>
+			<br/>
+			<a href="https://gxy.io/GTN:">https://gxy.io/GTN:</a>
+			<br/>
+
+			
+			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows/proteomics/neoantigen-non-reference-database-generation/main-workflow/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
+			
+
+			
+
+		</div>
+		<div class="col-md-9">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-neoantigen-non-reference-database-generation/versions/main-workflow">Launch in Tutorial Mode</span>
+			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="show-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
+			<br/>
+
+			<span class="dropdown">
+				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+					<img src="/training-material/assets/images/galaxylogo.png" style="height: 16px" alt="galaxy logo"/>
+					Run Workflow in Galaxy
+				</button>
+				<ul class="dropdown-menu">
+					
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-neoantigen-non-reference-database-generation/versions/main-workflow">Galaxy Europe</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-neoantigen-non-reference-database-generation/versions/main-workflow">Galaxy France</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-neoantigen-non-reference-database-generation/versions/main-workflow">Galaxy Australia</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-neoantigen-non-reference-database-generation/versions/main-workflow">Galaxy Main</a></li>
+					
+					<li class="dropdown-item hide-when-galaxy-proxy-active">
+						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-neoantigen-non-reference-database-generation/versions/main-workflow">Import to another server (≥23.0+ only!)</a>
+					</li>
+				</ul>
+			</span>
+			<a class="btn btn-primary" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/neoantigen-non-reference-database-generation/workflows/main_workflow.ga">
+				<i class="fas fa-download" aria-hidden="true"></i><span class="visually-hidden">galaxy-download</span>
+				Download
+			</a>
+			<pre class="mermaid">flowchart TD
+  0["ℹ️ Input Dataset\nHomo_sapiens.GRCh38_canon.106.gtf"];
+  style 0 stroke:#2c3143,stroke-width:4px;
+  1["ℹ️ Input Dataset\nRNA-Seq_Reads_2.fastq"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Dataset\nRNA-Seq_Reads_1.fastq"];
+  style 2 stroke:#2c3143,stroke-width:4px;
+  3["ℹ️ Input Dataset\nHUMAN-Uniprot-and-isoforms_and_cRAP-FASTA-Database"];
+  style 3 stroke:#2c3143,stroke-width:4px;
+  4["Uncompressed_RNA_Seq_Reads_2"];
+  1 -->|output| 4;
+  5983317a-db25-4f0f-8a0b-290d15aafd14["Output\nUncompressed_RNA_Seq_Reads_2"];
+  4 --> 5983317a-db25-4f0f-8a0b-290d15aafd14;
+  style 5983317a-db25-4f0f-8a0b-290d15aafd14 stroke:#2c3143,stroke-width:4px;
+  5["Uncompressed_RNA_Seq_Reads_1"];
+  2 -->|output| 5;
+  d6f2044c-cd3b-4fde-901a-2c6c7db5db4f["Output\nUncompressed_RNA_Seq_Reads_1"];
+  5 --> d6f2044c-cd3b-4fde-901a-2c6c7db5db4f;
+  style d6f2044c-cd3b-4fde-901a-2c6c7db5db4f stroke:#2c3143,stroke-width:4px;
+  6["Convert_HUMAN_Uniprot_and_CRAP_FASTA_to_tabular"];
+  3 -->|output| 6;
+  067e8f48-59d2-4f9c-bce9-13d1dca9d74e["Output\nHUMAN_Uniprot_and_CRAP.tabular"];
+  6 --> 067e8f48-59d2-4f9c-bce9-13d1dca9d74e;
+  style 067e8f48-59d2-4f9c-bce9-13d1dca9d74e stroke:#2c3143,stroke-width:4px;
+  7["HISAT2_Alignment_BAM"];
+  5 -->|output1| 7;
+  4 -->|output1| 7;
+  0137dcb5-9d02-427f-82da-995723a93c85["Output\nHISAT2_Alignment_BAM"];
+  7 --> 0137dcb5-9d02-427f-82da-995723a93c85;
+  style 0137dcb5-9d02-427f-82da-995723a93c85 stroke:#2c3143,stroke-width:4px;
+  8["Filtering_HUMAN_Uniprot_and_cRAP_Accessions_tabular"];
+  6 -->|output| 8;
+  4a2dbdd0-8e12-418c-a8f9-38256a760be8["Output\nFiltering_HUMAN_Uniprot_and_cRAP_Accessions_tabular"];
+  8 --> 4a2dbdd0-8e12-418c-a8f9-38256a760be8;
+  style 4a2dbdd0-8e12-418c-a8f9-38256a760be8 stroke:#2c3143,stroke-width:4px;
+  9["StringTie_Alignment_GTF"];
+  0 -->|output| 9;
+  7 -->|output_alignments| 9;
+  a4ff5eba-c73a-424b-8a9e-cfe76a0fe77f["Output\nStringTie_Alignment_GTF"];
+  9 --> a4ff5eba-c73a-424b-8a9e-cfe76a0fe77f;
+  style a4ff5eba-c73a-424b-8a9e-cfe76a0fe77f stroke:#2c3143,stroke-width:4px;
+  10["FreeBayes_variants_VCF"];
+  7 -->|output_alignments| 10;
+  b4ebb058-327d-4284-b96e-f7491262912e["Output\nFreeBayes_variants_VCF"];
+  10 --> b4ebb058-327d-4284-b96e-f7491262912e;
+  style b4ebb058-327d-4284-b96e-f7491262912e stroke:#2c3143,stroke-width:4px;
+  11["GffCompare_Annotated_Transcripts_GTF"];
+  0 -->|output| 11;
+  9 -->|output_gtf| 11;
+  72c73a0b-6677-4701-ab52-4d296c553df9["Output\nGffCompare_Annotated_Transcripts_GTF"];
+  11 --> 72c73a0b-6677-4701-ab52-4d296c553df9;
+  style 72c73a0b-6677-4701-ab52-4d296c553df9 stroke:#2c3143,stroke-width:4px;
+  12["CustomProDB_protein_FASTAs_from_BAM_and_VCF"];
+  7 -->|output_alignments| 12;
+  10 -->|output_vcf| 12;
+  8ce883fd-1961-47f6-b7b0-8153b7d1b4be["Output\nCustomProDB_INDEL_FASTA"];
+  12 --> 8ce883fd-1961-47f6-b7b0-8153b7d1b4be;
+  style 8ce883fd-1961-47f6-b7b0-8153b7d1b4be stroke:#2c3143,stroke-width:4px;
+  b31fbd26-fec0-42d9-a079-a28ae64ec009["Output\nCustomProDB_VARIANT_ANNOTATION_RDATA"];
+  12 --> b31fbd26-fec0-42d9-a079-a28ae64ec009;
+  style b31fbd26-fec0-42d9-a079-a28ae64ec009 stroke:#2c3143,stroke-width:4px;
+  b7944440-cbca-4fb5-96fd-03e952854728["Output\nCustomProDB_Genomic_SQLlite"];
+  12 --> b7944440-cbca-4fb5-96fd-03e952854728;
+  style b7944440-cbca-4fb5-96fd-03e952854728 stroke:#2c3143,stroke-width:4px;
+  9cee39b1-2766-43b0-b002-697e496a11d7["Output\nCustomProDB_VARIANT_ANNOTATION_SQLite"];
+  12 --> 9cee39b1-2766-43b0-b002-697e496a11d7;
+  style 9cee39b1-2766-43b0-b002-697e496a11d7 stroke:#2c3143,stroke-width:4px;
+  8258d64c-c755-4b49-b417-32ea722773bd["Output\nCustomProDB_RPKM_FASTA"];
+  12 --> 8258d64c-c755-4b49-b417-32ea722773bd;
+  style 8258d64c-c755-4b49-b417-32ea722773bd stroke:#2c3143,stroke-width:4px;
+  9ce1b014-b001-4ed8-9144-5890bb8cdbd5["Output\nCustomProDB_SNV_FASTA"];
+  12 --> 9ce1b014-b001-4ed8-9144-5890bb8cdbd5;
+  style 9ce1b014-b001-4ed8-9144-5890bb8cdbd5 stroke:#2c3143,stroke-width:4px;
+  13["GffCompare_Annotated_GTF_to_BED"];
+  11 -->|transcripts_annotated| 13;
+  751c3898-45a0-4836-bd33-44affbe9748a["Output\nGffCompare_Annotated_GTF_to_BED"];
+  13 --> 751c3898-45a0-4836-bd33-44affbe9748a;
+  style 751c3898-45a0-4836-bd33-44affbe9748a stroke:#2c3143,stroke-width:4px;
+  14["Convert_INDEL_FASTA_to_tabular"];
+  12 -->|output_indel| 14;
+  dc1bb9c3-0f77-4f30-a0ea-d164563269d8["Output\nCustomProDB_INDEL.tabular"];
+  14 --> dc1bb9c3-0f77-4f30-a0ea-d164563269d8;
+  style dc1bb9c3-0f77-4f30-a0ea-d164563269d8 stroke:#2c3143,stroke-width:4px;
+  15["Convert-SNV_FASTA_to_tabular"];
+  12 -->|output_snv| 15;
+  0d8682f5-66fa-40db-b280-d6f1bb4a5717["Output\nCustomProDB_SNV.tabular"];
+  15 --> 0d8682f5-66fa-40db-b280-d6f1bb4a5717;
+  style 0d8682f5-66fa-40db-b280-d6f1bb4a5717 stroke:#2c3143,stroke-width:4px;
+  16["Convert-RPKM_FASTA_to_tabular"];
+  12 -->|output_rpkm| 16;
+  88cfd137-3b8e-4c69-b38a-0b9ea8fea7fc["Output\nCustomProDB_RPKM.tabular"];
+  16 --> 88cfd137-3b8e-4c69-b38a-0b9ea8fea7fc;
+  style 88cfd137-3b8e-4c69-b38a-0b9ea8fea7fc stroke:#2c3143,stroke-width:4px;
+  17["Converting_Genomic_SQLite_to_database_mode"];
+  12 -->|output_genomic_mapping_sqlite| 17;
+  91eaaad0-e93e-434b-b87c-2de0f9c232ef["Output\nConvert_Genomic_SQLite_to_tabular"];
+  17 --> 91eaaad0-e93e-434b-b87c-2de0f9c232ef;
+  style 91eaaad0-e93e-434b-b87c-2de0f9c232ef stroke:#2c3143,stroke-width:4px;
+  18["Converting_CustomProDB_FASTA_to_tabular"];
+  12 -->|output_rpkm| 18;
+  6bcf6e52-85a8-439e-83cc-50de2cc8749d["Output\nCustomProDB_FASTA_to_tabular"];
+  18 --> 6bcf6e52-85a8-439e-83cc-50de2cc8749d;
+  style 6bcf6e52-85a8-439e-83cc-50de2cc8749d stroke:#2c3143,stroke-width:4px;
+  19["Converting_Variant_SQLite_to_database_mode"];
+  12 -->|output_variant_annotation_sqlite| 19;
+  7698d1f1-7979-4deb-9ac2-0f1541d905ce["Output\nConvert_Variant_SQLite_to_tabular"];
+  19 --> 7698d1f1-7979-4deb-9ac2-0f1541d905ce;
+  style 7698d1f1-7979-4deb-9ac2-0f1541d905ce stroke:#2c3143,stroke-width:4px;
+  20["Translate_BED_Transcripts"];
+  13 -->|output| 20;
+  9510c804-d13e-4cd6-b08e-1c670623e296["Output\nTranslation_FASTA"];
+  20 --> 9510c804-d13e-4cd6-b08e-1c670623e296;
+  style 9510c804-d13e-4cd6-b08e-1c670623e296 stroke:#2c3143,stroke-width:4px;
+  4ebcd87a-1526-4c05-914d-6051b996201d["Output\nTranslate_BED_Transcripts"];
+  20 --> 4ebcd87a-1526-4c05-914d-6051b996201d;
+  style 4ebcd87a-1526-4c05-914d-6051b996201d stroke:#2c3143,stroke-width:4px;
+  21["Annotating-INDEL"];
+  14 -->|output| 21;
+  aff83bc0-c7af-4257-a51c-93dfe90ae6c0["Output\nAnnotating-INDEL"];
+  21 --> aff83bc0-c7af-4257-a51c-93dfe90ae6c0;
+  style aff83bc0-c7af-4257-a51c-93dfe90ae6c0 stroke:#2c3143,stroke-width:4px;
+  22["Annotating-SNV"];
+  15 -->|output| 22;
+  960e7c54-1a91-4b92-b75c-0da23fe1650a["Output\nAnnotating-SNV"];
+  22 --> 960e7c54-1a91-4b92-b75c-0da23fe1650a;
+  style 960e7c54-1a91-4b92-b75c-0da23fe1650a stroke:#2c3143,stroke-width:4px;
+  23["Annotating-RPKM"];
+  16 -->|output| 23;
+  ef203c53-9e5b-4120-a508-a0dcbbfaec3b["Output\nAnnotating-RPKM"];
+  23 --> ef203c53-9e5b-4120-a508-a0dcbbfaec3b;
+  style ef203c53-9e5b-4120-a508-a0dcbbfaec3b stroke:#2c3143,stroke-width:4px;
+  24["Annotating_Genomic_SQLite"];
+  17 -->|query_results| 24;
+  045776fe-4fc9-4da1-b808-4ab674dcced4["Output\nAnnotating_Genomic_SQLite"];
+  24 --> 045776fe-4fc9-4da1-b808-4ab674dcced4;
+  style 045776fe-4fc9-4da1-b808-4ab674dcced4 stroke:#2c3143,stroke-width:4px;
+  25["Filtering_RPKM_accessions"];
+  18 -->|output| 25;
+  d23ae9b0-374f-4668-831c-c08217161834["Output\nFiltering_RPKM_accessions"];
+  25 --> d23ae9b0-374f-4668-831c-c08217161834;
+  style d23ae9b0-374f-4668-831c-c08217161834 stroke:#2c3143,stroke-width:4px;
+  26["Annotating_Variant_SQLite"];
+  19 -->|query_results| 26;
+  0238c405-dbcb-40a0-b9ce-6bc091cc01c5["Output\nAnnotating_Variant_SQLite"];
+  26 --> 0238c405-dbcb-40a0-b9ce-6bc091cc01c5;
+  style 0238c405-dbcb-40a0-b9ce-6bc091cc01c5 stroke:#2c3143,stroke-width:4px;
+  27["Convert_Translation_BED_to_tabular_for_protein_map"];
+  20 -->|translation_bed| 27;
+  873fc597-ac53-4dfa-8f5a-d5532af8886c["Output\nTranslation_tabular_for_protein_map"];
+  27 --> 873fc597-ac53-4dfa-8f5a-d5532af8886c;
+  style 873fc597-ac53-4dfa-8f5a-d5532af8886c stroke:#2c3143,stroke-width:4px;
+  28["Converting_Annotated_Indel_to_FASTA"];
+  21 -->|out_file1| 28;
+  ae642819-14c2-46d9-a31f-0b142c074a8c["Output\nConverting_Annotated_Indel_to_FASTA"];
+  28 --> ae642819-14c2-46d9-a31f-0b142c074a8c;
+  style ae642819-14c2-46d9-a31f-0b142c074a8c stroke:#2c3143,stroke-width:4px;
+  29["Converting_Annotated_SNV_to_FASTA"];
+  22 -->|out_file1| 29;
+  49e24e6a-ae3e-463c-915b-65f895a471e4["Output\nConverting_Annotated_SNV_to_FASTA"];
+  29 --> 49e24e6a-ae3e-463c-915b-65f895a471e4;
+  style 49e24e6a-ae3e-463c-915b-65f895a471e4 stroke:#2c3143,stroke-width:4px;
+  30["Converting_Annotated_RPKM_to_FASTA"];
+  23 -->|out_file1| 30;
+  0969ba6f-4bd8-4464-94cc-c990cf395507["Output\nConverting_Annotated_RPKM_to_FASTA"];
+  30 --> 0969ba6f-4bd8-4464-94cc-c990cf395507;
+  style 0969ba6f-4bd8-4464-94cc-c990cf395507 stroke:#2c3143,stroke-width:4px;
+  31["Concatenate_HUMAN_Crap_protein-accessions"];
+  8 -->|output| 31;
+  25 -->|output| 31;
+  e3f2a023-888a-4d80-b16c-ea87adbc6588["Output\nConcatenate_HUMAN_Crap_protein-accessions"];
+  31 --> e3f2a023-888a-4d80-b16c-ea87adbc6588;
+  style e3f2a023-888a-4d80-b16c-ea87adbc6588 stroke:#2c3143,stroke-width:4px;
+  32["Variant_input_for_MVP"];
+  26 -->|out_file1| 32;
+  ef638bf1-2cd7-4c4f-acc7-0fc5ce771756["Output\nVariant_input_for_MVP"];
+  32 --> ef638bf1-2cd7-4c4f-acc7-0fc5ce771756;
+  style ef638bf1-2cd7-4c4f-acc7-0fc5ce771756 stroke:#2c3143,stroke-width:4px;
+  33["Concatenate_databases_from_Genomic_SQlite_and_translation_BED_file"];
+  24 -->|out_file1| 33;
+  27 -->|output| 33;
+  77671f49-26c7-4eeb-b38c-62f09933e99b["Output\nConcatenate_databases_from_Genomic_SQlite_and_translation_BED_file"];
+  33 --> 77671f49-26c7-4eeb-b38c-62f09933e99b;
+  style 77671f49-26c7-4eeb-b38c-62f09933e99b stroke:#2c3143,stroke-width:4px;
+  34["Merge_Indel_SNV_RPKM_to_make_Non_normal_CustomProDB_FASTA"];
+  30 -->|output| 34;
+  29 -->|output| 34;
+  28 -->|output| 34;
+  81e3ae85-7111-4517-a9fe-64f245654ad4["Output\nnon-reference_CustomProDB_FASTA"];
+  34 --> 81e3ae85-7111-4517-a9fe-64f245654ad4;
+  style 81e3ae85-7111-4517-a9fe-64f245654ad4 stroke:#2c3143,stroke-width:4px;
+  35["Genomic_input_for_MVP"];
+  33 -->|out_file1| 35;
+  d72ce75b-6ee3-4bcb-b829-f3c85b3c5a65["Output\nGenomic_input_for_MVP"];
+  35 --> d72ce75b-6ee3-4bcb-b829-f3c85b3c5a65;
+  style d72ce75b-6ee3-4bcb-b829-f3c85b3c5a65 stroke:#2c3143,stroke-width:4px;
+  36["Human_cRAP_Non_normal_transcripts_dB generation"];
+  3 -->|output| 36;
+  34 -->|output| 36;
+  20 -->|translation_fasta| 36;
+  400380de-2047-4c30-a9e4-320a19489be4["Output\nHuman_cRAP_Non_normal_transcripts_dB generation"];
+  36 --> 400380de-2047-4c30-a9e4-320a19489be4;
+  style 400380de-2047-4c30-a9e4-320a19489be4 stroke:#2c3143,stroke-width:4px;</pre>
+			<h2>Inputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Input</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>Homo_sapiens.GRCh38_canon.106.gtf</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>RNA-Seq_Reads_2.fastq</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>RNA-Seq_Reads_1.fastq</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>HUMAN-Uniprot-and-isoforms_and_cRAP-FASTA-Database</td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+			<h2>Outputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>From</th>
+						<th>Output</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td>CONVERTER_gz_to_uncompressed</td>
+					<td>Convert compressed file to uncompressed.</td>
+					<td>Uncompressed_RNA_Seq_Reads_2</td>
+				</tr>
+				
+				<tr>
+					<td>CONVERTER_gz_to_uncompressed</td>
+					<td>Convert compressed file to uncompressed.</td>
+					<td>Uncompressed_RNA_Seq_Reads_1</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1</td>
+					<td>FASTA-to-Tabular</td>
+					<td>Convert_HUMAN_Uniprot_and_CRAP_FASTA_to_tabular</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1</td>
+					<td>HISAT2</td>
+					<td>HISAT2_Alignment_BAM</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1</td>
+					<td>Filter Tabular</td>
+					<td>Filtering_HUMAN_Uniprot_and_cRAP_Accessions_tabular</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.3+galaxy0</td>
+					<td>StringTie</td>
+					<td>StringTie_Alignment_GTF</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.6+galaxy0</td>
+					<td>FreeBayes</td>
+					<td>FreeBayes_variants_VCF</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.6+galaxy0</td>
+					<td>GffCompare</td>
+					<td>GffCompare_Annotated_Transcripts_GTF</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/custom_pro_db/custom_pro_db/1.22.0</td>
+					<td>CustomProDB</td>
+					<td>CustomProDB_protein_FASTAs_from_BAM_and_VCF</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/gffcompare_to_bed/gffcompare_to_bed/0.2.1</td>
+					<td>Convert gffCompare annotated GTF to BED</td>
+					<td>GffCompare_Annotated_GTF_to_BED</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1</td>
+					<td>FASTA-to-Tabular</td>
+					<td>Convert_INDEL_FASTA_to_tabular</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1</td>
+					<td>FASTA-to-Tabular</td>
+					<td>Convert-SNV_FASTA_to_tabular</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1</td>
+					<td>FASTA-to-Tabular</td>
+					<td>Convert-RPKM_FASTA_to_tabular</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/2.0.0</td>
+					<td>SQLite to tabular</td>
+					<td>Converting_Genomic_SQLite_to_database_mode</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1</td>
+					<td>FASTA-to-Tabular</td>
+					<td>Converting_CustomProDB_FASTA_to_tabular</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/2.0.0</td>
+					<td>SQLite to tabular</td>
+					<td>Converting_Variant_SQLite_to_database_mode</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/translate_bed/translate_bed/0.1.0</td>
+					<td>Translate BED transcripts</td>
+					<td>Translate_BED_Transcripts</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3</td>
+					<td>Column Regex Find And Replace</td>
+					<td>Annotating-INDEL</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3</td>
+					<td>Column Regex Find And Replace</td>
+					<td>Annotating-SNV</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3</td>
+					<td>Column Regex Find And Replace</td>
+					<td>Annotating-RPKM</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3</td>
+					<td>Column Regex Find And Replace</td>
+					<td>Annotating_Genomic_SQLite</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1</td>
+					<td>Filter Tabular</td>
+					<td>Filtering_RPKM_accessions</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3</td>
+					<td>Column Regex Find And Replace</td>
+					<td>Annotating_Variant_SQLite</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/bed_to_protein_map/bed_to_protein_map/0.2.0</td>
+					<td>bed to protein map</td>
+					<td>Convert_Translation_BED_to_tabular_for_protein_map</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1</td>
+					<td>Tabular-to-FASTA</td>
+					<td>Converting_Annotated_Indel_to_FASTA</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1</td>
+					<td>Tabular-to-FASTA</td>
+					<td>Converting_Annotated_SNV_to_FASTA</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1</td>
+					<td>Tabular-to-FASTA</td>
+					<td>Converting_Annotated_RPKM_to_FASTA</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1</td>
+					<td>Concatenate datasets</td>
+					<td>Concatenate_HUMAN_Crap_protein-accessions</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2</td>
+					<td>Query Tabular</td>
+					<td>Variant_input_for_MVP</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1</td>
+					<td>Concatenate datasets</td>
+					<td>Concatenate_databases_from_Genomic_SQlite_and_translation_BED_file</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0</td>
+					<td>FASTA Merge Files and Filter Unique Sequences</td>
+					<td>Merge_Indel_SNV_RPKM_to_make_Non_normal_CustomProDB_FASTA</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2</td>
+					<td>Query Tabular</td>
+					<td>Genomic_input_for_MVP</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0</td>
+					<td>FASTA Merge Files and Filter Unique Sequences</td>
+					<td>Human_cRAP_Non_normal_transcripts_dB generation</td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+
+			<h2>Tools</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Tool</th>
+						<th>Links</th>
+					</tr>
+				</thead>
+				<tbody>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=CONVERTER_gz_to_uncompressed">CONVERTER_gz_to_uncompressed</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/86755160afbf">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1">toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/fasta_to_tabular/e7ed3c310b74">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.6+galaxy0">toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.6+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/freebayes/a5937157062f">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1">toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/tabular_to_fasta/0a7799698fe5">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/bed_to_protein_map/bed_to_protein_map/0.2.0">toolshed.g2.bx.psu.edu/repos/galaxyp/bed_to_protein_map/bed_to_protein_map/0.2.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/bed_to_protein_map/a7c58b43cbaa">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/custom_pro_db/custom_pro_db/1.22.0">toolshed.g2.bx.psu.edu/repos/galaxyp/custom_pro_db/custom_pro_db/1.22.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/custom_pro_db/2c7df0077d28">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0">toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/fasta_merge_files_and_filter_unique_sequences/f546e7278f04">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/gffcompare_to_bed/gffcompare_to_bed/0.2.1">toolshed.g2.bx.psu.edu/repos/galaxyp/gffcompare_to_bed/gffcompare_to_bed/0.2.1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/gffcompare_to_bed/ba5368c19dbd">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3">toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/regex_find_replace/503bcd6ebe4b">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/translate_bed/translate_bed/0.1.0">toolshed.g2.bx.psu.edu/repos/galaxyp/translate_bed/translate_bed/0.1.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/translate_bed/038ecf54cbec">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1">toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/filter_tabular/90f657745fea">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.6+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.6+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/gffcompare/3c5e024a18cf">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/hisat2/f4af63aaf57a">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2">toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/query_tabular/cf4397560712">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/2.0.0">toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/2.0.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/sqlite_to_tabular/b722161a845a">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.3+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.3+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/stringtie/cbf488da3b2c">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+				</tbody>
+			</table>
+
+
+			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+
+
+			<h2>Importing into Galaxy</h2>
+			Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
+
+			<!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands On: Importing a workflow</div>   <ol>   <li>Click on <i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span> <em>Workflows</em> in the Galaxy activity bar (on the left side of the screen, or in the top menu bar of older Galaxy instances). You will see a list of all your workflows</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ol>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/FXlkreylhww" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
+
+			<h2>Version History</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Version</th>
+						<th>Commit</th>
+						<th>Time</th>
+						<th>Comments</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+					<tr>
+						<td>1</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/23219d5e3abcdbf71ce206f9bd8aa2cd0c6434c5">23219d5e3</a></td>
+						<td>2025-07-02 06:06:19</td>
+						<td>rename folders</td>
+					</tr>
+					
+				</tbody>
+			</table>
+
+
+			<h2>For Admins</h2>
+			<h3>Installing the workflow tools</h3>
+
+			<pre>
+wget https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/neoantigen-non-reference-database-generation/workflows/main_workflow.ga -O workflow.ga
+workflow-to-tools -w workflow.ga -o tools.yaml
+shed-tools install -g GALAXY -a API_KEY -t tools.yaml
+workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
+			</pre>
+		</div>
+	</div>
+</section>
+
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/proteomics/tutorials/neoantigen-non-reference-database-generation/workflows/main_workflow.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/proteomics/tutorials/neoantigen-non-reference-database-generation/workflows/main_workflow.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/92f18099601384b5be5ff1f7d341176d8d600975">92f1809</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+	<script src="/training-material/assets/js/mermaid@10.6.1.js" async></script>
+	<link rel="preload" href="/training-material/assets/js/mermaid@10.6.1.js" as="script" crossorigin>
+	
+
+    </body>
+</html>
