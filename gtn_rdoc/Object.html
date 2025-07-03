@@ -449,7 +449,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="acceptable_tool-3F-source">
-                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 109</span>
+                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 342</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">acceptable_tool?</span>(<span class="ruby-identifier">tool_id</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">tool_id</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
     <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
@@ -728,7 +728,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="collapse_event_date_pretty-source">
-                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 47</span>
+                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 280</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">collapse_event_date_pretty</span>(<span class="ruby-identifier">event</span>)
   <span class="ruby-identifier">s</span> = <span class="ruby-identifier">event</span>[<span class="ruby-string">&#39;date_start&#39;</span>]
   <span class="ruby-identifier">e</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">event</span>[<span class="ruby-string">&#39;date_end&#39;</span>].<span class="ruby-identifier">nil?</span>
@@ -1116,7 +1116,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="fix_version-source">
-                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 98</span>
+                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 331</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fix_version</span>(<span class="ruby-identifier">version</span>)
   <span class="ruby-identifier">version</span>
   .<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;_beta+galaxy&#39;</span>, <span class="ruby-string">&#39;+galaxy&#39;</span>)
@@ -2315,7 +2315,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="objectify-source">
-                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 159</span>
+                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 392</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">objectify</span>(<span class="ruby-identifier">attrs</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">clone</span>
   <span class="ruby-identifier">obj</span>[<span class="ruby-string">&#39;__path&#39;</span>] = <span class="ruby-identifier">path</span>
@@ -2629,7 +2629,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="safe_load_yaml-source">
-                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 41</span>
+                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 274</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">safe_load_yaml</span>(<span class="ruby-identifier">file</span>)
   <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">file</span>)
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span>
@@ -2655,7 +2655,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="safe_site_config-source">
-                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 71</span>
+                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 304</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">safe_site_config</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>)
     <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-identifier">key</span>]
@@ -3077,7 +3077,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="tool_id_extractor-source">
-                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 147</span>
+                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 380</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tool_id_extractor</span>(<span class="ruby-identifier">wf</span>, <span class="ruby-value">path:</span> [])
   <span class="ruby-identifier">res</span> = []
   <span class="ruby-identifier">wf</span>[<span class="ruby-string">&#39;steps&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">step_id</span>, <span class="ruby-identifier">step</span><span class="ruby-operator">|</span>
@@ -3183,7 +3183,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="unsafe_slugify-source">
-                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 94</span>
+                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 327</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unsafe_slugify</span>(<span class="ruby-identifier">text</span>)
   <span class="ruby-identifier">text</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{[&quot;&#39;\\/;:,.!@#$%^&amp;*()]}</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\s/</span>, <span class="ruby-string">&#39;-&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/-+/</span>, <span class="ruby-string">&#39;-&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -3308,7 +3308,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="url_prefix-source">
-                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 80</span>
+                            <pre><span class="ruby-comment"># File _plugins/util.rb, line 313</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">url_prefix</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;url&#39;</span>)
     <span class="ruby-node">&quot;#{site.config[&#39;url&#39;]}#{site.config[&#39;baseurl&#39;]}&quot;</span>
