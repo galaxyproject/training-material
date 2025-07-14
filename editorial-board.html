@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@a99362e2640d5195d86c117f85b4a8df6731f250",
+		release: "galaxy-training-network@2a4e79aab188da909acdab56e55f4d322dbfa89d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,10 +68,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="GTN Editorial Board">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-03-28 09:19:36 +0000"><meta name="description" content="{% assign contributors = site.data['contributors'] %} {% assign sorted_topics = site | list_topics_ids %}   GTN Editorial Board       A big Thank You! to the GTN Editorial Board members who ensure the quality of the tutotials in their respective topics.    {% for t in sorted_topics %}  {% assign topic = site.data[t] %}   {{ topic.title }}  {% include _includes/contributor-list.html contributors=topic.editorial_board badge=true %}  {% endfor %}     Codeowners  Automatic CODEOWNERS file (just to make it easier to keep updated)     ``` assets/     @bebatut @shiltemann @hexylena bin/        @bebatut @shiltemann @hexylena metadata/   @bebatut @shiltemann @hexylena badges/     @hexylena _layouts/   @bebatut @shiltemann @hexylena _includes/  @bebatut @shiltemann @hexylena _plugins/   @bebatut @hexylena  {% for t in sorted_topics %}{% assign topic = site.data[t] %} topics/{{t}}/               {% for member in topic.editorial_board %} @{{member}} {% endfor %}{% endfor%} ```   ">
+<meta name="DC.date" content="2025-07-14 08:18:02 +0000"><meta name="description" content="{% assign contributors = site.data['contributors'] %} {% assign sorted_topics = site | list_topics_ids %}   GTN Editorial Board       A big Thank You! to the GTN Editorial Board members who ensure the quality of the tutotials in their respective topics.    {% for t in sorted_topics %}  {% assign topic = site.data[t] %}   {{ topic.title }}   {% include _includes/contributor-list.html contributors=topic.editorial_board badge=true %}  {% unless topic.tag_based %}  View the Topic maintainer page for this topic.  {% endunless %} {% endfor %}     Codeowners  Automatic CODEOWNERS file (just to make it easier to keep updated)     ``` assets/     @bebatut @shiltemann @hexylena bin/        @bebatut @shiltemann @hexylena metadata/   @bebatut @shiltemann @hexylena badges/     @hexylena _layouts/   @bebatut @shiltemann @hexylena _includes/  @bebatut @shiltemann @hexylena _plugins/   @bebatut @hexylena  {% for t in sorted_topics %}{% assign topic = site.data[t] %} topics/{{t}}/               {% f...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="GTN Editorial Board">
-        <meta property="og:description" content="{% assign contributors = site.data['contributors'] %} {% assign sorted_topics = site | list_topics_ids %}   GTN Editorial Board       A big Thank You! to the GTN Editorial Board members who ensure the quality of the tutotials in their respective topics.    {% for t in sorted_topics %}  {% assign topic = site.data[t] %}   {{ topic.title }}  {% include _includes/contributor-list.html contributors=topic.editorial_board badge=true %}  {% endfor %}     Codeowners  Automatic CODEOWNERS file (just to make it easier to keep updated)     ``` assets/     @bebatut @shiltemann @hexylena bin/        @bebatut @shiltemann @hexylena metadata/   @bebatut @shiltemann @hexylena badges/     @hexylena _layouts/   @bebatut @shiltemann @hexylena _includes/  @bebatut @shiltemann @hexylena _plugins/   @bebatut @hexylena  {% for t in sorted_topics %}{% assign topic = site.data[t] %} topics/{{t}}/               {% for member in topic.editorial_board %} @{{member}} {% endfor %}{% endfor%} ```   ">
+        <meta property="og:description" content="{% assign contributors = site.data['contributors'] %} {% assign sorted_topics = site | list_topics_ids %}   GTN Editorial Board       A big Thank You! to the GTN Editorial Board members who ensure the quality of the tutotials in their respective topics.    {% for t in sorted_topics %}  {% assign topic = site.data[t] %}   {{ topic.title }}   {% include _includes/contributor-list.html contributors=topic.editorial_board badge=true %}  {% unless topic.tag_based %}  View the Topic maintainer page for this topic.  {% endunless %} {% endfor %}     Codeowners  Automatic CODEOWNERS file (just to make it easier to keep updated)     ``` assets/     @bebatut @shiltemann @hexylena bin/        @bebatut @shiltemann @hexylena metadata/   @bebatut @shiltemann @hexylena badges/     @hexylena _layouts/   @bebatut @shiltemann @hexylena _includes/  @bebatut @shiltemann @hexylena _plugins/   @bebatut @hexylena  {% for t in sorted_topics %}{% assign topic = site.data[t] %} topics/{{t}}/               {% f...">
         <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -211,123 +211,168 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
  
  <h3> Introduction to Galaxy Analyses</h3>
+
  <a href="/training-material/hall-of-fame/jennaj/" class="contributor-badge contributor-jennaj"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/jennaj?s=36" alt="Jennifer Hillman-Jackson avatar" width="36" class="avatar" />
     Jennifer Hillman-Jackson</a><a href="/training-material/hall-of-fame/delphine-l/" class="contributor-badge contributor-delphine-l"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/delphine-l?s=36" alt="Delphine Lariviere avatar" width="36" class="avatar" />
     Delphine Lariviere</a><a href="/training-material/hall-of-fame/teresa-m/" class="contributor-badge contributor-teresa-m"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/teresa-m?s=36" alt="Teresa Müller avatar" width="36" class="avatar" />
     Teresa Müller</a>
-
+ 
+ <p>View the <a href="/training-material/topics/introduction/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Galaxy Server administration</h3>
+
  <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
     Helena Rasche</a><a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/natefoo?s=36" alt="Nate Coraor avatar" width="36" class="avatar" />
     Nate Coraor</a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" />
     Björn Grüning</a><a href="/training-material/hall-of-fame/martenson/" class="contributor-badge contributor-martenson"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/martenson?s=36" alt="Martin Čech avatar" width="36" class="avatar" />
     Martin Čech</a><a href="/training-material/hall-of-fame/mira-miracoli/" class="contributor-badge contributor-mira-miracoli"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/mira-miracoli?s=36" alt="Mira Kuntz avatar" width="36" class="avatar" />
     Mira Kuntz</a>
-
+ 
+ <p>View the <a href="/training-material/topics/admin/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Image analysis using Deep Learning</h3>
+
  <a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge contributor-beatrizserrano"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/beatrizserrano?s=36" alt="Beatriz Serrano-Solano avatar" width="36" class="avatar" />
     Beatriz Serrano-Solano</a>
-
+ 
+ <p>View the <a href="/training-material/topics/ai4life/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Assembly</h3>
+
  <a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge contributor-nekrut"><img src="https://avatars.githubusercontent.com/nekrut?s=36" alt="Anton Nekrutenko avatar" width="36" class="avatar" />
     Anton Nekrutenko</a><a href="/training-material/hall-of-fame/delphine-l/" class="contributor-badge contributor-delphine-l"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/delphine-l?s=36" alt="Delphine Lariviere avatar" width="36" class="avatar" />
     Delphine Lariviere</a>
-
+ 
+ <p>View the <a href="/training-material/topics/assembly/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Climate</h3>
+
  <a href="/training-material/hall-of-fame/annefou/" class="contributor-badge contributor-annefou"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/annefou?s=36" alt="Anne Fouilloux avatar" width="36" class="avatar" />
     Anne Fouilloux</a><a href="/training-material/hall-of-fame/Marie59/" class="contributor-badge contributor-Marie59"><img src="https://avatars.githubusercontent.com/Marie59?s=36" alt="Marie Josse avatar" width="36" class="avatar" />
     Marie Josse</a>
-
+ 
+ <p>View the <a href="/training-material/topics/climate/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Galaxy Community Building</h3>
+
  <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
     Wendi Bacon</a>
-
+ 
+ <p>View the <a href="/training-material/topics/community/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Computational chemistry</h3>
+
  <a href="/training-material/hall-of-fame/chrisbarnettster/" class="contributor-badge contributor-chrisbarnettster"><img src="https://avatars.githubusercontent.com/chrisbarnettster?s=36" alt="Christopher Barnett avatar" width="36" class="avatar" />
     Christopher Barnett</a><a href="/training-material/hall-of-fame/tsenapathi/" class="contributor-badge contributor-tsenapathi"><img src="https://avatars.githubusercontent.com/tsenapathi?s=36" alt="Tharindu Senapathi avatar" width="36" class="avatar" />
     Tharindu Senapathi</a><a href="/training-material/hall-of-fame/simonbray/" class="contributor-badge contributor-simonbray"><img src="https://avatars.githubusercontent.com/simonbray?s=36" alt="Simon Bray avatar" width="36" class="avatar" />
     Simon Bray</a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" />
     Björn Grüning</a>
-
+ 
+ <p>View the <a href="/training-material/topics/computational-chemistry/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Contributing to the Galaxy Training Material</h3>
+
  <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
     Bérénice Batut</a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" />
     Björn Grüning</a>
-
+ 
+ <p>View the <a href="/training-material/topics/contributing/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> SARS-CoV-2</h3>
+
  <a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/wm75?s=36" alt="Wolfgang Maier avatar" width="36" class="avatar" />
     Wolfgang Maier</a>
-
+ 
 
  
  <h3> Foundations of Data Science</h3>
+
  <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
     Helena Rasche</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
     Saskia Hiltemann</a><a href="/training-material/hall-of-fame/fpsom/" class="contributor-badge contributor-fpsom"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/fpsom?s=36" alt="Fotis E. Psomopoulos avatar" width="36" class="avatar" />
     Fotis E. Psomopoulos</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
     Bérénice Batut</a><a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge contributor-yvanlebras"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/yvanlebras?s=36" alt="Yvan Le Bras avatar" width="36" class="avatar" />
     Yvan Le Bras</a>
-
+ 
+ <p>View the <a href="/training-material/topics/data-science/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Development in Galaxy</h3>
+
  <a href="/training-material/hall-of-fame/lecorguille/" class="contributor-badge contributor-lecorguille"><img src="https://avatars.githubusercontent.com/lecorguille?s=36" alt="Gildas Le Corguillé avatar" width="36" class="avatar" />
     Gildas Le Corguillé</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
     Bérénice Batut</a>
-
+ 
+ <p>View the <a href="/training-material/topics/dev/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Digital Humanities</h3>
+
  <a href="/training-material/hall-of-fame/Sch-Da/" class="contributor-badge contributor-Sch-Da"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/Sch-Da?s=36" alt="Daniela Schneider avatar" width="36" class="avatar" />
     Daniela Schneider</a>
-
+ 
+ <p>View the <a href="/training-material/topics/digital-humanities/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Ecology</h3>
+
  <a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge contributor-yvanlebras"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/yvanlebras?s=36" alt="Yvan Le Bras avatar" width="36" class="avatar" />
     Yvan Le Bras</a>
-
+ 
+ <p>View the <a href="/training-material/topics/ecology/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> ELIXIR</h3>
+
  <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
     Bérénice Batut</a><a href="/training-material/hall-of-fame/fpsom/" class="contributor-badge contributor-fpsom"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/fpsom?s=36" alt="Fotis E. Psomopoulos avatar" width="36" class="avatar" />
     Fotis E. Psomopoulos</a>
-
+ 
 
  
  <h3> Epigenetics</h3>
+
  <a href="/training-material/hall-of-fame/lldelisle/" class="contributor-badge contributor-lldelisle"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/lldelisle?s=36" alt="Lucille Delisle avatar" width="36" class="avatar" />
     Lucille Delisle</a><a href="/training-material/hall-of-fame/heylf/" class="contributor-badge contributor-heylf"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/heylf?s=36" alt="Florian Heyl avatar" width="36" class="avatar" />
     Florian Heyl</a><a href="/training-material/hall-of-fame/joachimwolff/" class="contributor-badge contributor-joachimwolff"><img src="https://avatars.githubusercontent.com/joachimwolff?s=36" alt="Joachim Wolff avatar" width="36" class="avatar" />
     Joachim Wolff</a>
-
+ 
+ <p>View the <a href="/training-material/topics/epigenetics/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Evolution</h3>
+
  <a href="/training-material/hall-of-fame/cstritt/" class="contributor-badge contributor-cstritt"><img src="https://avatars.githubusercontent.com/cstritt?s=36" alt="Christoph Stritt avatar" width="36" class="avatar" />
     Christoph Stritt</a><a href="/training-material/hall-of-fame/pvanheus/" class="contributor-badge contributor-pvanheus"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/pvanheus?s=36" alt="Peter van Heusden avatar" width="36" class="avatar" />
     Peter van Heusden</a>
-
+ 
+ <p>View the <a href="/training-material/topics/evolution/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> FAIR Data, Workflows, and Research</h3>
+
  <a href="/training-material/hall-of-fame/simleo/" class="contributor-badge contributor-simleo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/simleo?s=36" alt="Simone Leo avatar" width="36" class="avatar" />
     Simone Leo</a><a href="/training-material/hall-of-fame/ilveroluca/" class="contributor-badge contributor-ilveroluca"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/ilveroluca?s=36" alt="Luca Pireddu avatar" width="36" class="avatar" />
     Luca Pireddu</a><a href="/training-material/hall-of-fame/stain/" class="contributor-badge contributor-stain"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/stain?s=36" alt="Stian Soiland-Reyes avatar" width="36" class="avatar" />
@@ -335,94 +380,124 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     Paul De Geest</a><a href="/training-material/hall-of-fame/kkamieniecka/" class="contributor-badge contributor-kkamieniecka"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/kkamieniecka?s=36" alt="Katarzyna Kamieniecka avatar" width="36" class="avatar" />
     Katarzyna Kamieniecka</a><a href="/training-material/hall-of-fame/poterlowicz-lab/" class="contributor-badge contributor-poterlowicz-lab"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/poterlowicz-lab?s=36" alt="Krzysztof Poterlowicz avatar" width="36" class="avatar" />
     Krzysztof Poterlowicz</a>
-
+ 
+ <p>View the <a href="/training-material/topics/fair/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Using Galaxy and Managing your Data</h3>
+
  <a href="/training-material/hall-of-fame/jennaj/" class="contributor-badge contributor-jennaj"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/jennaj?s=36" alt="Jennifer Hillman-Jackson avatar" width="36" class="avatar" />
     Jennifer Hillman-Jackson</a><a href="/training-material/hall-of-fame/delphine-l/" class="contributor-badge contributor-delphine-l"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/delphine-l?s=36" alt="Delphine Lariviere avatar" width="36" class="avatar" />
     Delphine Lariviere</a><a href="/training-material/hall-of-fame/teresa-m/" class="contributor-badge contributor-teresa-m"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/teresa-m?s=36" alt="Teresa Müller avatar" width="36" class="avatar" />
     Teresa Müller</a>
-
+ 
+ <p>View the <a href="/training-material/topics/galaxy-interface/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Genome Annotation</h3>
+
  <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
     Helena Rasche</a><a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" />
     Anthony Bretaudeau</a>
-
+ 
+ <p>View the <a href="/training-material/topics/genome-annotation/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> GMOD</h3>
+
  <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
     Helena Rasche</a><a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" />
     Anthony Bretaudeau</a>
-
+ 
 
  
  <h3> Imaging</h3>
+
  <a href="/training-material/hall-of-fame/kostrykin/" class="contributor-badge contributor-kostrykin"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/kostrykin?s=36" alt="Leonid Kostrykin avatar" width="36" class="avatar" />
     Leonid Kostrykin</a><a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge contributor-beatrizserrano"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/beatrizserrano?s=36" alt="Beatriz Serrano-Solano avatar" width="36" class="avatar" />
     Beatriz Serrano-Solano</a>
-
+ 
+ <p>View the <a href="/training-material/topics/imaging/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Materials Science</h3>
+
  <a href="/training-material/hall-of-fame/patrick-austin/" class="contributor-badge contributor-patrick-austin"><img src="https://avatars.githubusercontent.com/patrick-austin?s=36" alt="Patrick Austin avatar" width="36" class="avatar" />
     Patrick Austin</a><a href="/training-material/hall-of-fame/leandro-liborio/" class="contributor-badge contributor-leandro-liborio"><img src="https://avatars.githubusercontent.com/leandro-liborio?s=36" alt="Leandro Liborio avatar" width="36" class="avatar" />
     Leandro Liborio</a>
-
+ 
+ <p>View the <a href="/training-material/topics/materials-science/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Metabolomics</h3>
+
  <a href="/training-material/hall-of-fame/lecorguille/" class="contributor-badge contributor-lecorguille"><img src="https://avatars.githubusercontent.com/lecorguille?s=36" alt="Gildas Le Corguillé avatar" width="36" class="avatar" />
     Gildas Le Corguillé</a><a href="/training-material/hall-of-fame/melpetera/" class="contributor-badge contributor-melpetera"><img src="https://avatars.githubusercontent.com/melpetera?s=36" alt="Mélanie Petera avatar" width="36" class="avatar" />
     Mélanie Petera</a><a href="/training-material/hall-of-fame/foellmelanie/" class="contributor-badge contributor-foellmelanie"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/foellmelanie?s=36" alt="Melanie Föll avatar" width="36" class="avatar" />
     Melanie Föll</a>
-
+ 
+ <p>View the <a href="/training-material/topics/metabolomics/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Microbiome</h3>
+
  <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
     Bérénice Batut</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
     Saskia Hiltemann</a><a href="/training-material/hall-of-fame/paulzierep/" class="contributor-badge contributor-paulzierep"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/paulzierep?s=36" alt="Paul Zierep avatar" width="36" class="avatar" />
     Paul Zierep</a>
-
+ 
+ <p>View the <a href="/training-material/topics/microbiome/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> One Health</h3>
+
  <a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/wm75?s=36" alt="Wolfgang Maier avatar" width="36" class="avatar" />
     Wolfgang Maier</a><a href="/training-material/hall-of-fame/pvanheus/" class="contributor-badge contributor-pvanheus"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/pvanheus?s=36" alt="Peter van Heusden avatar" width="36" class="avatar" />
     Peter van Heusden</a><a href="/training-material/hall-of-fame/TKlingstrom/" class="contributor-badge contributor-TKlingstrom"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/TKlingstrom?s=36" alt="Tomas Klingström avatar" width="36" class="avatar" />
     Tomas Klingström</a>
-
+ 
 
  
  <h3> Plants</h3>
+
  <a href="/training-material/hall-of-fame/deeptivarshney/" class="contributor-badge contributor-deeptivarshney"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/deeptivarshney?s=36" alt="Deepti Varshney avatar" width="36" class="avatar" />
     Deepti Varshney</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
     Saskia Hiltemann</a>
-
+ 
 
  
  <h3> Proteomics</h3>
+
  <a href="/training-material/hall-of-fame/foellmelanie/" class="contributor-badge contributor-foellmelanie"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/foellmelanie?s=36" alt="Melanie Föll avatar" width="36" class="avatar" />
     Melanie Föll</a><a href="/training-material/hall-of-fame/subinamehta/" class="contributor-badge contributor-subinamehta"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/subinamehta?s=36" alt="Subina Mehta avatar" width="36" class="avatar" />
     Subina Mehta</a><a href="/training-material/hall-of-fame/pratikdjagtap/" class="contributor-badge contributor-pratikdjagtap"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/pratikdjagtap?s=36" alt="Pratik Jagtap avatar" width="36" class="avatar" />
     Pratik Jagtap</a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" />
     Björn Grüning</a>
-
+ 
+ <p>View the <a href="/training-material/topics/proteomics/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Sequence analysis</h3>
+
  <a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge contributor-yvanlebras"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/yvanlebras?s=36" alt="Yvan Le Bras avatar" width="36" class="avatar" />
     Yvan Le Bras</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
     Bérénice Batut</a><a href="/training-material/hall-of-fame/joachimwolff/" class="contributor-badge contributor-joachimwolff"><img src="https://avatars.githubusercontent.com/joachimwolff?s=36" alt="Joachim Wolff avatar" width="36" class="avatar" />
     Joachim Wolff</a>
-
+ 
+ <p>View the <a href="/training-material/topics/sequence-analysis/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Single Cell</h3>
+
  <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
     Wendi Bacon</a><a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=36" alt="Mehmet Tekman avatar" width="36" class="avatar" />
     Mehmet Tekman</a><a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-pavanvidem"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" />
@@ -430,54 +505,74 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     Morgan Howells</a><a href="/training-material/hall-of-fame/MarisaJL/" class="contributor-badge contributor-MarisaJL"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/MarisaJL?s=36" alt="Marisa Loach avatar" width="36" class="avatar" />
     Marisa Loach</a><a href="/training-material/hall-of-fame/heylf/" class="contributor-badge contributor-heylf"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/heylf?s=36" alt="Florian Heyl avatar" width="36" class="avatar" />
     Florian Heyl</a>
-
+ 
+ <p>View the <a href="/training-material/topics/single-cell/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Statistics and machine learning</h3>
+
  <a href="/training-material/hall-of-fame/marziacremona/" class="contributor-badge contributor-marziacremona"><img src="https://avatars.githubusercontent.com/marziacremona?s=36" alt="Marzia A Cremona avatar" width="36" class="avatar" />
     Marzia A Cremona</a><a href="/training-material/hall-of-fame/cumbof/" class="contributor-badge contributor-cumbof"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/cumbof?s=36" alt="Fabio Cumbo avatar" width="36" class="avatar" />
     Fabio Cumbo</a><a href="/training-material/hall-of-fame/anuprulez/" class="contributor-badge contributor-anuprulez"><img src="https://avatars.githubusercontent.com/anuprulez?s=36" alt="Anup Kumar avatar" width="36" class="avatar" />
     Anup Kumar</a>
-
+ 
+ <p>View the <a href="/training-material/topics/statistics/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Synthetic Biology</h3>
+
  <a href="/training-material/hall-of-fame/kenza12/" class="contributor-badge contributor-kenza12"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/kenza12?s=36" alt="Kenza Bazi-Kabbaj avatar" width="36" class="avatar" />
     Kenza Bazi-Kabbaj</a><a href="/training-material/hall-of-fame/tduigou/" class="contributor-badge contributor-tduigou"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/tduigou?s=36" alt="Thomas Duigou avatar" width="36" class="avatar" />
     Thomas Duigou</a><a href="/training-material/hall-of-fame/breakthewall/" class="contributor-badge contributor-breakthewall"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/breakthewall?s=36" alt="Joan Hérisson avatar" width="36" class="avatar" />
     Joan Hérisson</a><a href="/training-material/hall-of-fame/guillaume-gricourt/" class="contributor-badge contributor-guillaume-gricourt"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/guillaume-gricourt?s=36" alt="Guillaume Gricourt avatar" width="36" class="avatar" />
     Guillaume Gricourt</a>
-
+ 
+ <p>View the <a href="/training-material/topics/synthetic-biology/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Teaching and Hosting Galaxy training</h3>
+
  <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
     Bérénice Batut</a>
-
+ 
+ <p>View the <a href="/training-material/topics/teaching/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Transcriptomics</h3>
+
  <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
     Bérénice Batut</a><a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge contributor-mblue9"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/mblue9?s=36" alt="Maria Doyle avatar" width="36" class="avatar" />
     Maria Doyle</a><a href="/training-material/hall-of-fame/heylf/" class="contributor-badge contributor-heylf"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/heylf?s=36" alt="Florian Heyl avatar" width="36" class="avatar" />
     Florian Heyl</a>
-
+ 
+ <p>View the <a href="/training-material/topics/transcriptomics/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Variant Analysis</h3>
+
  <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
     Bérénice Batut</a><a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/wm75?s=36" alt="Wolfgang Maier avatar" width="36" class="avatar" />
     Wolfgang Maier</a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" />
     Björn Grüning</a><a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge contributor-nekrut"><img src="https://avatars.githubusercontent.com/nekrut?s=36" alt="Anton Nekrutenko avatar" width="36" class="avatar" />
     Anton Nekrutenko</a>
-
+ 
+ <p>View the <a href="/training-material/topics/variant-analysis/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
  
  <h3> Visualisation</h3>
+
  <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
     Saskia Hiltemann</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36" /><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
     Helena Rasche</a>
-
+ 
+ <p>View the <a href="/training-material/topics/visualisation/maintainer.html">Topic maintainer page</a> for this topic.</p>
+ 
 
 
 </section>
@@ -594,7 +689,7 @@ topics/visualisation/                @shiltemann  @hexylena
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a99362e2640d5195d86c117f85b4a8df6731f250">a99362e</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2a4e79aab188da909acdab56e55f4d322dbfa89d">2a4e79a</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
