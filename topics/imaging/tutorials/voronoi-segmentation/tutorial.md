@@ -24,15 +24,21 @@ requirements:
     topic_name: imaging
     tutorials:
       - imaging-introduction
-contributors:
-- evenmm
-- rmassei
-- kostrykin
-- annefou
+
+contributions:
+  authorship:
+    - evenmm
+    - rmassei
+    - kostrykin
+    - annefou
+  funding:
+    - fiesta
+    - oscars
 tags:
 - imageanalysis
 - segmentation
 - voronoi
+
 ---
 
 

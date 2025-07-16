@@ -642,7 +642,7 @@ It takes a taxonomic tree file as the input. We first need to convert the **Meta
 >    - {% icon param-file %} *"Input tree"*: `Tree` (output of **Export to GraPhlAn**)
 >    - {% icon param-file %} *"Annotation file"*: `Annotation` (output of **Export to GraPhlAn**)
 >
-> 4. {% tool [GraPhlAn](toolshed.g2.bx.psu.edu/repos/iuc/graphlan/graphlan/1.0.0.0) %} with the following parameters:
+> 4. {% tool [GraPhlAn](toolshed.g2.bx.psu.edu/repos/iuc/graphlan/graphlan/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"Input tree"*: `Tree in PhyloXML`
 >    - *"Output format"*: `PNG`
 >
@@ -887,7 +887,7 @@ Let's do the same for the pathway abundances.
 
 > <hands-on-title>Normalize the pathway abundances</hands-on-title>
 >
-> 1. {% tool [Renormalize a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.6.0+galaxy0) %} with
+> 1. {% tool [Renormalize a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.9+galaxy0) %} with
 >    - *"Gene/pathway table"*: `Pathways and their abundance` (output of **HUMAnN**)
 >    - *"Normalization scheme"*: `Relative abundance`
 >    - *"Normalization level"*: `Normalization of all levels by community total`
