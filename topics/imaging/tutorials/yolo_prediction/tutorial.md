@@ -106,7 +106,7 @@ This dataset provides two pretrained YOLOv8 detection models tailored for the ma
 
   To perform object detection in Galaxy, use the tool "**Perform YOLO image labeling** with ultralytics (Galaxy Version 8.3.0+galaxy2)". Here’s how to set it up:
 
-- `Input images:` Select the .jpg underwater images you downloaded from the SEANOE dataset.
+- `Input images:` Select the "DeepSeaSpy images" data collection you just created with 100 .jpg underwater images.
 
 - `Class names file:` This is a plain text file (.txt) that lists the names of the classes the model can detect.
 For example, for detecting Bythograeidae species, the file should look like this:
