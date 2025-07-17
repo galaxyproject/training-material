@@ -96,7 +96,7 @@ This dataset provides two pretrained YOLOv8 detection models tailored for the ma
 >
 > 6. Unhide images files and create a dedicated data collection
 >
->    History search `extension:jpg deleted:false visible:any` then click on "select all" and "build dataset list", select all files and give a name of the data collection, "DeepSeaSpy images" for example.
+>    History search `extension:jpg deleted:false visible:any` then click on "select all" and "build dataset list", select 100 files and give a name of the data collection, "DeepSeaSpy images" for example. Tips: To select only last 100 files, you can use the history search function and specify `extension:jpg deleted:false hid>XXXX visible:any` in the serach bar where XXXX is the id of the last image dataset minus 100 (for example `extension:jpg deleted:false hid>47659 visible:any` if you have images until the history dataset ID 47759.
 >
 >
 {: .hands_on}
