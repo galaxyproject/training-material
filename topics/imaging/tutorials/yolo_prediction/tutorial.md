@@ -63,6 +63,44 @@ The SEANOE #101899 collection features real underwater images captured by deep�
 
 This dataset provides two pretrained YOLOv8 detection models tailored for the marine species found in SEANOE #101899. One model detects Buccinidae (a family of sea snails), and the other targets Bythograeidae (a family of deep-sea crabs). These models were trained on cleaned annotation sets that contain thousands of examples—for instance, the Buccinidae set includes over 14,900 annotations in total. For this tutorial, you’ll find two model files—`*.pt` files—each accompanied by the appropriate class_names.txt file. You can upload either or both to Galaxy to run detection experiments on your underwater images.
 
+## Get data
+
+> <hands-on-title> Data Upload </hands-on-title>
+>
+> 1. Create a new history for this tutorial and give it a name (example: “Ecoregionalization workflow”) for you to find it again later if needed.
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
+>
+> 2. Import images data files and models from [SEANOE marine ,datawarehouse](https://www.seanoe.org/data/00907/101899/)
+>
+>    DeepSeaSpy images data files and models as a zip file
+>    ```
+>    https://www.seanoe.org/data/00907/101899/data/115473.zip
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+
+>
+> 3. Use  {% tool [Unzip a file](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} to create a data collection in your history where all archive files will be unzipped
+>
+> 5. Unhide the models data files
+>
+>    History search `name:detection deleted:false visible:any` then unhidde the 2 model files "dataset_seanoe_101899_YOLOv8-weights-for-Bythograeidae-detection" and "dataset_seanoe_101899_YOLOv8-weights-for-Buccinidae-detection".
+>
+>
+>    {% snippet faqs/galaxy/datasets_unhidden.md %}
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>
+> 6. Unhide images files and create a dedicated data collection
+>
+>    History search `extension:jpg deleted:false visible:any` then click on "select all" and "build dataset list", select all files and give a name of the data collection, "DeepSeaSpy images" for example.
+>
+>
+{: .hands_on}
+
 ## ⚙️ Run YOLOv8 in detect mode
   
 
@@ -78,7 +116,7 @@ Bythograeid crab
 Buccinid snail
 
 ```
-and for Buccinide spicies, class fil names could be like:
+and for Buccinide species, class fil names could be like:
 
 ```
 Autre poisson
