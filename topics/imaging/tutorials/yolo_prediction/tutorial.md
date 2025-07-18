@@ -141,7 +141,7 @@ which means:
 
 These are your original images with colored boxes drawn around detected species. Each box also includes:
 The class name and the confidence score. For example, you might see a box labeled:
-Crabe bythograeid 0.54
+`Crabe bythograeid 0.54`
 
 ![buccinid](../../images/yolo/buccinid.jpeg)
 ![bythog](../../images/yolo/bythog2.jpeg)
