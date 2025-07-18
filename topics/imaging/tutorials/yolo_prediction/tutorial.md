@@ -38,7 +38,7 @@ follow_up_training:
 
 # Introduction
 
-YOLO (You Only Look Once) is a fast, deep learning-based algorithm for real-time object detection. It predicts object classes and bounding boxes in a single pass over the image. YOLOv8 is one of its version, offering improved accuracy and speed.
+YOLO (You Only Look Once) is a fast, deep learning-based algorithm for real-time object detection. It predicts object classes and bounding boxes in a single pass over the image. YOLOv8 is a specific version, offering improved accuracy and speed.
 
 In this tutorial, you will use Galaxy to run two types of YOLOv8 models:
 
