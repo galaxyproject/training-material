@@ -134,10 +134,10 @@ This dataset provides two pretrained YOLOv8 detection models tailored for the ma
 > >
 > >    Concerning the class names file: Each class name must be on its own line, in the same order used during model training. So the class ID 0 corresponds to Buccinidae, and 1 to Bythograeidae.
 > >    Concerning tool parameters:
-> >    - `Image size`: Use 1000 (or a smaller number like 640 if processing speed is important). This controls how much the image is resized before prediction. Smaller values = faster but possibly less accurate.
-> >    - `Confidence threshold`: Set to 0.25 (25%). This controls how confident the model must be to report a detection. If you increase this value (e.g., 0.5), you’ll get fewer detections, but they’ll be more confident. If you lower it (e.g., 0.1), you may get more results, but possibly more false positives.
-> >    - `IoU threshold`: Set to 0.45. This is used for Non-Maximum Suppression (NMS), which removes overlapping detections. A higher IoU value (e.g., 0.7) keeps more overlapping boxes. A lower IoU (e.g., 0.3) removes more overlaps, which may help clean up crowded images.
-> >    - `Max detections`: Set a reasonable cap like 300. This limits the number of objects detected per image.
+> >    - *"Image size"*: Use 1000 (or a smaller number like 640 if processing speed is important). This controls how much the image is resized before prediction. Smaller values = faster but possibly less accurate.
+> >    - *"Confidence"*: Set to 0.25 (25%). This controls how confident the model must be to report a detection. If you increase this value (e.g., 0.5), you’ll get fewer detections, but they’ll be more confident. If you lower it (e.g., 0.1), you may get more results, but possibly more false positives.
+> >    - *"IoU"*: Set to 0.45. This is used for Non-Maximum Suppression (NMS), which removes overlapping detections. A higher IoU value (e.g., 0.7) keeps more overlapping boxes. A lower IoU (e.g., 0.3) removes more overlaps, which may help clean up crowded images.
+> >    - *"Max detections"*: Set a reasonable cap like 300. This limits the number of objects detected per image.
 > > 
 > {: .comment}
 > 
