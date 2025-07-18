@@ -209,7 +209,7 @@ This output contains class IDs, bounding box coordinates, confidence scores, and
 |------------------|--------------------------|----------------------------------|
 | Mode             | `detect`                 | `segment`                        |
 | Output overlays  | Bounding boxes only      | Boxes + masks                    |
-| `.tiff` masks    | ❌                        | ✅                               |
+| .tiff masks      | ❌                        | ✅                               |
 | Use case         | Objects presence/count   | Object shape, size, morphology   |
 | Performance      | Faster                   | Slightly slower, more detailed   |
 
