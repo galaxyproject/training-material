@@ -66,7 +66,7 @@ This dataset provides two pretrained YOLOv8 detection models tailored for the ma
 ## ⚙️ Run YOLOv8 in detect mode
   
 
-  To perform object detection in Galaxy, use the tool "**Perform YOLO image labeling** with ultralytics (Galaxy Version 8.3.0+galaxy2)". Here’s how to set it up:
+To perform object detection in Galaxy, use the tool {% tool [Perform YOLO image labeling](toolshed.g2.bx.psu.edu/repos/bgruening/yolo_predict/yolo_predict/8.3.0+galaxy2) %}. Here’s how to set it up:
 
 - `Input images:` Select the .jpg underwater images you downloaded from the SEANOE dataset.
 
