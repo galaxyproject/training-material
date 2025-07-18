@@ -68,7 +68,7 @@ This dataset provides two pretrained YOLOv8 detection models tailored for the ma
 
 To perform object detection in Galaxy, use the tool {% tool [Perform YOLO image labeling](toolshed.g2.bx.psu.edu/repos/bgruening/yolo_predict/yolo_predict/8.3.0+galaxy2) %}. Here’s how to set it up:
 
-- `Input images:` Select the .jpg underwater images you downloaded from the SEANOE dataset.
+- {% icon param-file %} *"Input images"*: Select the .jpg underwater images you downloaded from the SEANOE dataset.
 
 - `Class names file:` This is a plain text file (.txt) that lists the names of the classes the model can detect.
 For example, for detecting Bythograeidae species, the file should look like this:
