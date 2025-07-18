@@ -150,8 +150,7 @@ The class name and the confidence score. For example, you might see a box labele
 
 These images are useful for visually checking whether detections are correct or if something was missed.
 
-⚠️ No masks or segmentation files
-Since we used detect mode, this tool will not generate segmentation masks (like .tiff or polygon files). Those are only available in segment mode, which we'll cover next.
+⚠️ **No masks or segmentation files:** Since we used detect mode, this tool will not generate segmentation masks (like .tiff or polygon files). Those are only available in segment mode, which we'll cover next.
 
 
 
