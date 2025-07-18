@@ -64,7 +64,7 @@ The SEANOE #101899 collection features real underwater images captured by deep�
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
-> 1. Create a new history for this tutorial and give it a name (example: “Ecoregionalization workflow”) for you to find it again later if needed.
+> 1. Create a new history for this tutorial and give it a name (example: “DeepSeaSpy Yolo tutorial”) for you to find it again later if needed.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
@@ -78,7 +78,6 @@ The SEANOE #101899 collection features real underwater images captured by deep�
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
-
 >
 > 3. Use  {% tool [Unzip a file](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} to create a data collection in your history where all archive files will be unzipped
 >
@@ -91,11 +90,29 @@ The SEANOE #101899 collection features real underwater images captured by deep�
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 6. Unhide images files and create a dedicated data collection
+> 6. Select a sample of 100 images files and create a dedicated data collection
 >
->    History search `extension:jpg deleted:false visible:any` then click on "select all" and "build dataset list", select 100 files and give a name of the data collection, "DeepSeaSpy 100 images sample" for example. Tips: To select only last 100 files, you can use the history search function and specify `extension:jpg deleted:false hid>XXXX visible:any` in the serach bar where XXXX is the id of the last image dataset minus 100 (for example `extension:jpg deleted:false hid>47659 visible:any` if you have images until the history dataset ID 47759.
+>    History search `extension:jpg deleted:false visible:any` then click on "select all" and "autobuild list", select 100 files and give a name of the data collection, "DeepSeaSpy 100 images sample" for example. Tips: To select only last 100 files, you can use the history search function and specify `extension:jpg deleted:false hid>XXXX visible:any` in the search bar where XXXX is the id of the last image dataset minus 100 (for example `extension:jpg deleted:false hid>3886 visible:any` if you have images until the history dataset ID 3986.
 >
+> 7. Create class name file "Buccinide", copy/pasting this content in the upload space:
 >
+> ```
+> Autre poisson
+> Couverture de moules
+> Couverture microbienne
+> Couverture vers tubicole
+> Crabe araignée
+> Crabe bythograeidé
+> Crevette alvinocarididae
+> Escargot buccinidé
+> Ophiure
+> Poisson Cataetyx
+> Poisson chimère
+> Poisson zoarcidé
+> Pycnogonide
+> Ver polynoidé
+> Vers polynoidés 
+> ```
 {: .hands_on}
 
 ## 📦 Model
