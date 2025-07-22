@@ -14,7 +14,7 @@ objectives:
 - Compare results between detection and segmentation modes
 - Understand the requirements and output types of each model
 
-time_estimation: "15m"
+time_estimation: "45m"
 
 tags:
 - object-detection
@@ -56,7 +56,7 @@ We'll compare both modes and discuss what kind of output they generate and why i
 
 We will use selected images from the SEANOE dataset:
 
-👉 [SEANOE 101899 - Deep-sea marine species observations](https://www.seanoe.org/data/00907/101899)
+👉 [SEANOE 101899 - Deep-sea marine species observations](https://www.seanoe.org/data/00907/101899) (Lebeaud *et al.*, 2024 [https://doi.org/10.17882/101899](https://doi.org/10.17882/101899))
 
 The SEANOE #101899 collection features real underwater images captured by deep‑sea observatories as part of a citizen science initiative called Deep Sea Spy. These non‑destructive imaging stations continuously monitor marine ecosystems and provide snapshots of various fauna. In this dataset, multiple annotators—including trained scientists and enthusiastic citizen scientists—have manually labeled images with polygons, lines, or points highlighting marine organisms. These annotations were then cleaned and converted into bounding boxes to create a training-ready dataset for object detection with YOLOv8. Though the exact species vary, images often include deep-sea fish, species, making this dataset well-suited for practicing detection tasks.
 
@@ -70,7 +70,7 @@ The SEANOE #101899 collection features real underwater images captured by deep�
 >
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
-> 2. Import images data files and models from [SEANOE marine ,datawarehouse](https://www.seanoe.org/data/00907/101899/)
+> 2. Import images data files and models from [SEANOE marine datawarehouse](https://www.seanoe.org/data/00907/101899/).
 >
 >    DeepSeaSpy images data files and models as a zip file
 >    ```
@@ -79,9 +79,9 @@ The SEANOE #101899 collection features real underwater images captured by deep�
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. Use  {% tool [Unzip a file](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} to create a data collection in your history where all archive files will be unzipped
+> 3. Use  {% tool [Unzip a file](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} to create a data collection in your history where all archive files will be unzipped.
 >
-> 5. Unhide the models data files
+> 4. Unhide the models data files.
 >
 >    History search `name:detection deleted:false visible:any` then unhidde the 2 model files "dataset_seanoe_101899_YOLOv8-weights-for-Bythograeidae-detection" and "dataset_seanoe_101899_YOLOv8-weights-for-Buccinidae-detection".
 >
@@ -90,11 +90,11 @@ The SEANOE #101899 collection features real underwater images captured by deep�
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 6. Select a sample of 100 images files and create a dedicated data collection
+> 5. Select a sample of 100 images files and create a dedicated data collection
 >
 >    History search `extension:jpg deleted:false visible:any` then click on "select all" and "autobuild list", select 100 files and give a name of the data collection, "DeepSeaSpy 100 images sample" for example. Tips: To select only last 100 files, you can use the history search function and specify `extension:jpg deleted:false hid>XXXX visible:any` in the search bar where XXXX is the id of the last image dataset minus 100 (for example `extension:jpg deleted:false hid>3886 visible:any` if you have images until the history dataset ID 3986.
 >
-> 7. Create class name file "Buccinide", copy/pasting this content in the upload space:
+> 6. Create class name file "Buccinide", copy/pasting this content in the upload space:
 >
 > ```
 > Autre poisson
