@@ -60,6 +60,11 @@ We will use selected images from the SEANOE dataset:
 
 The SEANOE #101899 collection features real underwater images captured by deep‑sea observatories as part of a citizen science initiative called Deep Sea Spy. These non‑destructive imaging stations continuously monitor marine ecosystems and provide snapshots of various fauna. In this dataset, multiple annotators—including trained scientists and enthusiastic citizen scientists—have manually labeled images with polygons, lines, or points highlighting marine organisms. These annotations were then cleaned and converted into bounding boxes to create a training-ready dataset for object detection with YOLOv8. Though the exact species vary, images often include deep-sea fish, species, making this dataset well-suited for practicing detection tasks.
 
+<img src="../../images/yolo/CAM-TEMPO.jpg" style="width:40%; display:inline-block;" alt="sample buccinid data">
+<img src="../../images/yolo/MOMAR.jpg" style="width:40%; display:inline-block;" alt="sample bythongraede data">
+<img src="../../images/yolo/CAM-TEMPO2.jpg" style="width:40%; display:inline-block;" alt="sample buccinid2 data">
+<img src="../../images/yolo/CAM-TEMPO3.jpg" style="width:40%; display:inline-block;" alt="sample buccinid3 data">
+
 ## Get data
 
 > <hands-on-title> Data Upload </hands-on-title>
@@ -231,14 +236,14 @@ YOLOv8 in segment mode produces a more detailed output than detection:
 🖼️ **Segmented overlay (*.jpg):**
 This image shows both bounding boxes and colored masks indicating the exact shape of each object.
 
-<img src="../../images/yolo/bus.jpg" style="width:40%;">
+<img src="../../images/yolo/bus.jpg" style="width:40%;" alt="Input image of a bus used in segmentation example">
 
 
 🗺️ **Mask file (*_mask.tiff):**
 A grayscale image where each object appears as a white/black blob against a black background. Ideal for pixel-level analysis or downstream processing.
 
 
-<img src="../../images/yolo/bus_mask.png" style="width:40%;">
+<img src="../../images/yolo/bus_mask.png" style="width:40%;" alt="YOLOv8 predicted mask on the bus image">
 
 📄 **Annotation file (*.txt):**
 This output contains class IDs, bounding box coordinates, confidence scores, and detailed segmentation polygons—providing both the approximate location and the precise shape of each object in plain text format.
