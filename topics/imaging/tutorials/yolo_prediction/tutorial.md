@@ -22,6 +22,8 @@ tags:
 - deep-learning
 - ecology
 
+bibtex: tutorial.bib
+
 priority: 5
 
 contributions:
@@ -54,9 +56,7 @@ We'll compare both modes and discuss what kind of output they generate and why i
 
 ## 🔗 Dataset
 
-We will use selected images from the SEANOE dataset:
-
-👉 [SEANOE 101899 - Deep-sea marine species observations](https://www.seanoe.org/data/00907/101899) (Lebeaud *et al.*, 2024 [https://doi.org/10.17882/101899](https://doi.org/10.17882/101899))
+👉 We will use selected images from the SEANOE dataset {% cite lebeaud2024deepsea %}.
 
 The SEANOE #101899 collection features real underwater images captured by deep‑sea observatories as part of a citizen science initiative called Deep Sea Spy. These non‑destructive imaging stations continuously monitor marine ecosystems and provide snapshots of various fauna. In this dataset, multiple annotators—including trained scientists and enthusiastic citizen scientists—have manually labeled images with polygons, lines, or points highlighting marine organisms. These annotations were then cleaned and converted into bounding boxes to create a training-ready dataset for object detection with YOLOv8. Though the exact species vary, images often include deep-sea fish, species, making this dataset well-suited for practicing detection tasks.
 
