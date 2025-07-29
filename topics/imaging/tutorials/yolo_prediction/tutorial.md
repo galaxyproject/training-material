@@ -75,9 +75,9 @@ The [SEANOE](https://www.seanoe.org/data/00907/101899) collection features real 
 >
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
-> 2. Import images data files and models from [SEANOE marine datawarehouse](https://www.seanoe.org/data/00907/101899/).
+> 2. Import image data files and models from [SEANOE marine datawarehouse](https://www.seanoe.org/data/00907/101899/).
 >
->    DeepSeaSpy images data files and models as a zip file
+>    DeepSeaSpy image data files and models as a zip file:
 >    ```
 >    https://www.seanoe.org/data/00907/101899/data/115473.zip
 >    ```

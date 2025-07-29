@@ -351,7 +351,7 @@ Now we can map the reads against the uploaded genome:
 
 > <hands-on-title>Map sequencing reads with <b>bwa-mem</b></hands-on-title>
 >
-> Run {% tool [Map with BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy4) %} with the parameters shown in the image below:
+> Run {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy4) %} with the parameters shown in the image below:
 >
 >    - "*Will you select a reference genome from your history or use a built-in index?*": `Use a reference genome from history and build index if necessary` (<font color="red">red outline</font>).
 >    - "*Use the following dataset as the reference*": Choose the reference we uploaded at the previous step (<font color="red">red arrow</font>).
@@ -623,7 +623,7 @@ We will now annotate the variants we called in the previous step with the effect
 > ```
 > https://zenodo.org/records/15354240/files/GCF_000002765.6_GCA_000002765.ncbiRefSeq.gtf.gz
 > ```
-> Set datatype (<font color="green">green</font> box) to `gft.gz`:
+> Set datatype (<font color="green">green</font> box) to `gtf.gz`:
 >
 > ![Genome upload](../../images/gtf_upload.svg)
 >
