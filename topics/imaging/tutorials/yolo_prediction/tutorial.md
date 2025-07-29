@@ -58,7 +58,7 @@ We'll compare both modes and discuss what kind of output they generate and why i
 
 👉 We will use selected images from the SEANOE dataset {% cite lebeaud2024deepsea %}.
 
-The SEANOE #101899 collection features real underwater images captured by deep‑sea observatories as part of a citizen science initiative called Deep Sea Spy. These non‑destructive imaging stations continuously monitor marine ecosystems and provide snapshots of various fauna. In this dataset, multiple annotators—including trained scientists and enthusiastic citizen scientists—have manually labeled images with polygons, lines, or points highlighting marine organisms. These annotations were then cleaned and converted into bounding boxes to create a training-ready dataset for object detection with YOLOv8. Though the exact species vary, images often include deep-sea fish, species, making this dataset well-suited for practicing detection tasks.
+The [SEANOE](https://www.seanoe.org/data/00907/101899) collection features real underwater images captured by deep‑sea observatories as part of a citizen science initiative called Deep Sea Spy. These non‑destructive imaging stations continuously monitor marine ecosystems and provide snapshots of various fauna. In this dataset, multiple annotators—including trained scientists and enthusiastic citizen scientists—have manually labeled images with polygons, lines, or points highlighting marine organisms. These annotations were then cleaned and converted into bounding boxes to create a training-ready dataset for object detection with YOLOv8. Though the exact species vary, images often include deep-sea fish, species, making this dataset well-suited for practicing detection tasks.
 
 <img src="../../images/yolo/CAM-TEMPO.jpg" style="width:40%; display:inline-block;" alt="sample buccinid data">
 <img src="../../images/yolo/MOMAR.jpg" style="width:40%; display:inline-block;" alt="sample bythongraede data">
@@ -84,7 +84,7 @@ The SEANOE #101899 collection features real underwater images captured by deep�
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. Use  {% tool [Unzip a file](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} to create a data collection in your history where all archive files will be unzipped.
+> 3. Use  {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} to create a data collection in your history where all archive files will be unzipped.
 >
 > 4. Unhide the models data files.
 >
@@ -95,7 +95,7 @@ The SEANOE #101899 collection features real underwater images captured by deep�
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 5. Select a sample of 100 images files and create a dedicated data collection
+> 5. Select a sample of 100 image files and create a dedicated data collection
 >
 >    History search `extension:jpg deleted:false visible:any` then click on "select all" and "autobuild list", select 100 files and give a name of the data collection, "DeepSeaSpy 100 images sample" for example. Tips: To select only last 100 files, you can use the history search function and specify `extension:jpg deleted:false hid>XXXX visible:any` in the search bar where XXXX is the id of the last image dataset minus 100 (for example `extension:jpg deleted:false hid>3886 visible:any` if you have images until the history dataset ID 3986.
 >
@@ -141,7 +141,7 @@ This dataset provides two pretrained YOLOv8 detection models tailored for the ma
 >
 >    > <warning-title> Models type </warning-title>
 >    >
->    > The model is trained only for detection, not segmentation
+>    > The model is trained only for detection, not segmentation.
 >    >
 >    {: .warning}
 > 
@@ -220,7 +220,7 @@ Since the marine models only support detection, we’ll now demonstrate segmenta
 
 The YOLOv8n-seg model is a lightweight instance segmentation model trained on the COCO dataset (Common Objects in Context), which contains 80 everyday object classes such as person, bus, bicycle, car, dog, and more. These categories cover common scenes, making the model suitable for general-purpose detection and segmentation tasks. It’s ideal for quick testing, tutorials, or deployment on resource-limited systems.
 
-The class names file for this segmentation model is like:
+The proper class names file for this segmentation model is:
 ```
 person
 bus
