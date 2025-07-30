@@ -1,0 +1,31 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nOTU tables"]
+  1[color=lightgreen,label="ℹ️ Input Parameter\nTaxonomic abundance summary table name"]
+  2[color=lightgreen,label="ℹ️ Input Parameter\nPhylum level taxonomic abundance summary table name"]
+  3[label="Query Tabular"]
+  0 -> 3 [label="output"]
+  4[label="Text reformatting"]
+  0 -> 4 [label="output"]
+  5[label="Text reformatting"]
+  3 -> 5 [label="output"]
+  6[label="Group"]
+  4 -> 6 [label="outfile"]
+  7[label="Column join"]
+  5 -> 7 [label="outfile"]
+  8[label="Filter Tabular"]
+  6 -> 8 [label="out_file1"]
+  9[label="Text reformatting"]
+  7 -> 9 [label="tabular_output"]
+  k3a506fefa399494c98daeef7f481c495[color=lightseagreen,label="Output\nTaxonomic abundance summary table"]
+  9 -> k3a506fefa399494c98daeef7f481c495
+  10[label="Text reformatting"]
+  8 -> 10 [label="output"]
+  11[label="Column join"]
+  10 -> 11 [label="outfile"]
+  12[label="Text reformatting"]
+  11 -> 12 [label="tabular_output"]
+  k59063507c356409bb08706fc1e55f7aa[color=lightseagreen,label="Output\nphylum level taxonomic abundance summary table"]
+  12 -> k59063507c356409bb08706fc1e55f7aa
+}
