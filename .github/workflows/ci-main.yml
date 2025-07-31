@@ -70,7 +70,9 @@ jobs:
         run: |
           mkdir -p ./pr
           git status
+          git fetch origin main --depth 1
           git branch -a
+          git diff main
           env | grep GITHUB | grep -v TOKEN
           find topics/ -name tutorial.md | xargs -n 1 python bin/check-broken-boxes.py | reviewdog -efm="%f:%l: %m" -filter-mode=file -reporter=github-pr-review  -fail-level=error  > ./pr/reviewdog.txt
           set -e
