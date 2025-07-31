@@ -122,7 +122,7 @@ The [SEANOE](https://www.seanoe.org/data/00907/101899) collection features real 
 
 ## 📦 Model
 
-This dataset provides two pretrained YOLOv8 detection models tailored for the marine species found in SEANOE #101899. One model detects Buccinidae (a family of sea snails), and the other targets Bythograeidae (a family of deep-sea crabs). These models were trained on cleaned annotation sets that contain thousands of examples—for instance, the Buccinidae set includes over 14,900 annotations in total. For this tutorial, you’ll find two model files—`*.pt` files—each accompanied by the appropriate class_names.txt file. You can upload either or both to Galaxy to run detection experiments on your underwater images.
+This dataset provides two pretrained YOLOv8 detection models tailored for the marine species found in [SEANOE](https://www.seanoe.org/data/00907/101899). One model detects Buccinidae (a family of sea snails), and the other targets Bythograeidae (a family of deep-sea crabs). These models were trained on cleaned annotation sets that contain thousands of examples—for instance, the Buccinidae set includes over 14,900 annotations in total. For this tutorial, you’ll find two model files—`*.pt` files—each accompanied by the appropriate class_names.txt file. You can upload either or both to Galaxy to run detection experiments on your underwater images.
 
 ## ⚙️ Run YOLOv8 in detect mode
   
