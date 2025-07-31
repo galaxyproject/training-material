@@ -51,7 +51,10 @@ jobs:
         run: |
           . env.sh
           env | grep CI_ | sort
+          # We are overriding the logic within reviewdog, to trick it into thinking it's running outside
+          # https://github.com/reviewdog/reviewdog/issues/706
           unset GITHUB_EVENT_PATH
+          unset GITHUB_ACTIONS
           env | grep GITHUB_ | grep -v TOKEN | sort
 
           cat reviewdog.txt | reviewdog -efm="%f:%l: %m" -reporter=github-pr-review
