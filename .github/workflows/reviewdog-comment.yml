@@ -51,6 +51,8 @@ jobs:
         run: |
           . env.sh
           env | grep CI_ | sort
+          unset GITHUB_EVENT_PATH
+          env | grep GITHUB_ | grep -v TOKEN | sort
 
           cat reviewdog.txt | reviewdog -efm="%f:%l: %m" -reporter=github-pr-review
 
