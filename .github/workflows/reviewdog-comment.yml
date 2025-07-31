@@ -45,7 +45,7 @@ jobs:
             fs.writeFileSync(path.join(temp, 'reviewdog.zip'), Buffer.from(download.data));
 
       - name: 'Unzip artifact'
-        run: unzip reviewdog.zip -d "${{ runner.temp }}/artifacts"
+        run: ls "${{ runner.temp }}/artifacts"; unzip reviewdog.zip -d "${{ runner.temp }}/artifacts"
 
       - name: Add review comments
         run: |
