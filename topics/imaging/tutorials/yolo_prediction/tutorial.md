@@ -99,7 +99,7 @@ The [SEANOE](https://www.seanoe.org/data/00907/101899) collection features real 
 >
 >    History search `extension:jpg deleted:false visible:any` then click on "select all" and "autobuild list", select 100 files and give a name of the data collection, "DeepSeaSpy 100 images sample" for example. Tips: To select only last 100 files, you can use the history search function and specify `extension:jpg deleted:false hid>XXXX visible:any` in the search bar where XXXX is the id of the last image dataset minus 100 (for example `extension:jpg deleted:false hid>3886 visible:any` if you have images until the history dataset ID 3986.
 >
-> 6. Create class name file "Buccinide", copy/pasting this content in the upload space:
+> 6. Create class name file "Buccinide", copying and pasting this content in the file uploader:
 >
 > ```
 > Autre poisson
