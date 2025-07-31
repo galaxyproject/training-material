@@ -2,7 +2,7 @@ name: "Review comments"
 
 on:
   workflow_run:
-    workflows: ["[CI] GTN Tutorial Linting"]
+    workflows: [GTN Tutorial Linting]
     types: [completed]
 
 jobs:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 1000
           persist-credentials: false
 
       - uses: reviewdog/action-setup@v1
