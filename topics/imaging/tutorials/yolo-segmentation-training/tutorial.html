@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Training Custom YOLO Models for Object Detection and Segmentation in Bioimages / Training Custom YOLO Models for Object Detection and Segmentation in Bioimages / Imaging</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Training Custom YOLO Models for Segmentation of Bioimages / Training Custom YOLO Models for Segmentation of Bioimages / Imaging</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@ed091be9ef90fadcf4e4b4c76cb012baeef46311",
+		release: "galaxy-training-network@8e137a4655019c718e6b819faffbc24d1738d1f6",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -66,13 +66,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="Training Custom YOLO Models for Object Detection and Segmentation in Bioimages">
+<meta name="DC.title" content="Training Custom YOLO Models for Segmentation of Bioimages">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-07-25 12:52:43 +0000">
+<meta name="DC.date" content="2025-07-31 15:29:39 +0000">
 <meta name="DC.creator" content="Yi Sun">
-<meta name="DC.creator" content="Arif UI Maula Khan"><meta name="description" content="Image analysis using Galaxy">
+<meta name="DC.creator" content="Arif ul Maula Khan"><meta name="description" content="Image analysis using Galaxy">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Imaging / Training Custom YOLO Models for Object Detection and Segmentation in Bioimages / Hands-on: Training Custom YOLO Models for Object Detection and Segmentation in Bioimages">
+	<meta property="og:title" content="Imaging / Training Custom YOLO Models for Segmentation of Bioimages / Hands-on: Training Custom YOLO Models for Segmentation of Bioimages">
         <meta property="og:description" content="Image analysis using Galaxy">
         <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/imaging/tutorials/yolo-segmentation-training/tutorial.png">
 	<script type="application/ld+json">
@@ -102,7 +102,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     }
   ],
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Training Custom YOLO Models for Object Detection and Segmentation in Bioimages",
+  "headline": "Training Custom YOLO Models for Segmentation of Bioimages",
   "interactivityType": "mixed",
   "isAccessibleForFree": true,
   "isFamilyFriendly": true,
@@ -187,7 +187,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-07-25 12:52:43 +0000",
+  "dateModified": "2025-07-31 15:29:39 +0000",
   "datePublished": "2025-07-25 12:52:43 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -241,17 +241,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Image analysis using Galaxy",
     "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
   },
-  "abstract": "Image annotations and model training are essential in bioimage analysis tasks.  In biology and related fields, researchers often deal with large volumes of microscopy images that require accurate annotation to train machine learning models.  Automate this process can save time and improve reproducibility, but high-quality training data remains critical. Human-in-the-loop workflows have emerged as a solution to bridge the gap between manual annotation and automated model training, enabling iterative improvements through user interaction.",
+  "abstract": "In bioimages, challenging morphologies are often quite hard to segment using traditional computer vision/image analysis methods. Therefore, using semi-supervised machine learning methods like deep learning for such tasks is getting more popular. ",
   "learningResourceType": "e-learning",
-  "name": "Training Custom YOLO Models for Object Detection and Segmentation in Bioimages",
+  "name": "Training Custom YOLO Models for Segmentation of Bioimages",
   "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/yolo-segmentation-training/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT2H",
-  "teaches": "- Preprocess images (e.g., histogram equalization, format conversion) to prepare data for annotation and training\n- Perform human-in-the-loop object annotation using AnyLabeling interactive tool.\n- Convert AnyLabeling annotation files into YOLO compatible format for training.\n- Train a custom YOLO model.",
+  "teaches": "- Preprocess images (e.g., contrast enhancement, format conversion) to prepare data for annotation and training\n- Perform manual/human-in-the-loop semi-automated object annotation.\n- Convert AnyLabeling annotation files into YOLO compatible format for training.\n- Train a custom YOLO model for segmentation.",
   "keywords": [
     "Imaging"
   ],
-  "description": "## Abstract\n\nImage annotations and model training are essential in bioimage analysis tasks.  In biology and related fields, researchers often deal with large volumes of microscopy images that require accurate annotation to train machine learning models.  Automate this process can save time and improve reproducibility, but high-quality training data remains critical. Human-in-the-loop workflows have emerged as a solution to bridge the gap between manual annotation and automated model training, enabling iterative improvements through user interaction.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - Why use YOLO for object detection and segmentation in bioimage analysis?\n - How can I train and use a custom YOLO model for detection or segmentation tasks using Galaxy?\n\n\n## Learning Objectives\n\n- Preprocess images (e.g., histogram equalization, format conversion) to prepare data for annotation and training\n- Perform human-in-the-loop object annotation using AnyLabeling interactive tool.\n- Convert AnyLabeling annotation files into YOLO compatible format for training.\n- Train a custom YOLO model.\n\n",
+  "description": "## Abstract\n\nIn bioimages, challenging morphologies are often quite hard to segment using traditional computer vision/image analysis methods. Therefore, using semi-supervised machine learning methods like deep learning for such tasks is getting more popular. \n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - Why use YOLO for segmentation in bioimage analysis?\n - How can I train and use a custom YOLO model for segmentation tasks using Galaxy?\n\n\n## Learning Objectives\n\n- Preprocess images (e.g., contrast enhancement, format conversion) to prepare data for annotation and training\n- Perform manual/human-in-the-loop semi-automated object annotation.\n- Convert AnyLabeling annotation files into YOLO compatible format for training.\n- Train a custom YOLO model for segmentation.\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -413,7 +413,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       },
       "url": "https://training.galaxyproject.org/training-material/hall-of-fame/maulakhan/",
       "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/maulakhan/",
-      "name": "Arif UI Maula Khan",
+      "name": "Arif ul Maula Khan",
       "image": "https://avatars.githubusercontent.com/maulakhan",
       "description": "A contributor to the GTN project.",
       "memberOf": [
@@ -758,7 +758,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 <article class="tutorial topic-imaging">
-    <h1 data-toc-skip>Training Custom YOLO Models for Object Detection and Segmentation in Bioimages</h1>
+    <h1 data-toc-skip>Training Custom YOLO Models for Segmentation of Bioimages</h1>
     
 
     <section aria-labelledby="overview-box" id="tutorial-metadata">
@@ -772,8 +772,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
 		<td>
 			<a href="/training-material/hall-of-fame/sunyi000/" class="contributor-badge contributor-sunyi000"><img src="https://avatars.githubusercontent.com/sunyi000?s=36" alt="Yi Sun avatar" width="36" class="avatar" />
-    Yi Sun</a><a href="/training-material/hall-of-fame/maulakhan/" class="contributor-badge contributor-maulakhan"><img src="https://avatars.githubusercontent.com/maulakhan?s=36" alt="Arif UI Maula Khan avatar" width="36" class="avatar" />
-    Arif UI Maula Khan</a>
+    Yi Sun</a><a href="/training-material/hall-of-fame/maulakhan/" class="contributor-badge contributor-maulakhan"><img src="https://avatars.githubusercontent.com/maulakhan?s=36" alt="Arif ul Maula Khan avatar" width="36" class="avatar" />
+    Arif ul Maula Khan</a>
 		</td>
 	</tr>
 	
@@ -818,10 +818,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
         <ul>
         
-        <li><p>Why use YOLO for object detection and segmentation in bioimage analysis?</p>
+        <li><p>Why use YOLO for segmentation in bioimage analysis?</p>
 </li>
         
-        <li><p>How can I train and use a custom YOLO model for detection or segmentation tasks using Galaxy?</p>
+        <li><p>How can I train and use a custom YOLO model for segmentation tasks using Galaxy?</p>
 </li>
         
         </ul>
@@ -829,16 +829,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
         <ul>
         
-        <li><p>Preprocess images (e.g., histogram equalization, format conversion) to prepare data for annotation and training</p>
+        <li><p>Preprocess images (e.g., contrast enhancement, format conversion) to prepare data for annotation and training</p>
 </li>
         
-        <li><p>Perform human-in-the-loop object annotation using AnyLabeling interactive tool.</p>
+        <li><p>Perform manual/human-in-the-loop semi-automated object annotation.</p>
 </li>
         
         <li><p>Convert AnyLabeling annotation files into YOLO compatible format for training.</p>
 </li>
         
-        <li><p>Train a custom YOLO model.</p>
+        <li><p>Train a custom YOLO model for segmentation.</p>
 </li>
         
         </ul>
@@ -1014,7 +1014,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="btn btn-default topic-icon" href="/training-material/topics/imaging/tutorials/yolo-segmentation-training/workflows/" title="Training Custom YOLO Models for Object Detection and Segmentation in Bioimages workflows">
+    <a class="btn btn-default topic-icon" href="/training-material/topics/imaging/tutorials/yolo-segmentation-training/workflows/" title="Training Custom YOLO Models for Segmentation of Bioimages workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
     </a>
 
@@ -1091,7 +1091,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jul 25, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 25, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 31, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1107,7 +1107,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -1122,9 +1122,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <p>Image annotations and model training are essential in bioimage analysis tasks.  In biology and related fields, researchers often deal with large volumes of microscopy images that require accurate annotation to train machine learning models.  Automate this process can save time and improve reproducibility, but high-quality training data remains critical. Human-in-the-loop workflows have emerged as a solution to bridge the gap between manual annotation and automated model training, enabling iterative improvements through user interaction.</p>
+                <p>In bioimages, challenging morphologies are often quite hard to segment using traditional computer vision/image analysis methods. Therefore, using semi-supervised machine learning methods like deep learning for such tasks is getting more popular.</p>
 
-<p>This tutorial introduces a reusable human-in-the-loop image segmentation and training workflow implemented in Galaxy, designed to streamline the creation of custom segmentation models using YOLO (You Only Look Once). The workflow integrates both interactive and headless tools. We demonstrate the workflow here with tail analysis images from growing embryo samples. The workflow can also be adapted to other datasets with minimal adjustments.</p>
+<p>This tutorial shows an easy-to-use and efficient workflow of training YOLO models in Galaxy. The workflow integrates both interactive and headless tools. We demonstrate the workflow here with bright field microscopy images from growing embryo samples. The workflow can also be adapted to other datasets with minimal adjustments.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -1134,7 +1134,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <ol id="markdown-toc">
   <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
   <li><a href="#preprocessing-the-images" id="markdown-toc-preprocessing-the-images">Preprocessing the images</a>    <ol>
-      <li><a href="#perform-histogram-equalization" id="markdown-toc-perform-histogram-equalization">Perform histogram equalization</a></li>
+      <li><a href="#perform-contrast-enhancement" id="markdown-toc-perform-contrast-enhancement">Perform contrast enhancement</a></li>
       <li><a href="#convert-image-format" id="markdown-toc-convert-image-format">Convert image format</a></li>
     </ol>
   </li>
@@ -1222,11 +1222,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h1 id="preprocessing-the-images">Preprocessing the images</h1>
 
-<p>The example dataset used in this tutorial consists of images in TIFF format. However, the YOLO training tool in Galaxy currently supports only JPEG (JPG) images. Therefore, as a necessary preprocessing step, the input images must be converted to the appropriate format. In this workflow, we first apply histogram equalization to the images and then convert them from TIFF to JPG.</p>
+<p>The example dataset used in this tutorial consists of images in TIFF format. However, the YOLO training tool in Galaxy currently supports only JPEG (JPG) images. Therefore, as a necessary preprocessing step, the input images must be converted to the appropriate format. In this workflow, we first do contrast enhancement using adaptive histogram equalization of the images and then convert them from TIFF to JPG.</p>
 
 <p>It’s important to note that these preprocessing steps are tailored to the example data. When applying this workflow to other images, the specific preprocessing steps may vary. Format conversion is mandatory if the images are not already in JPG, but contrast enhancement or other adjustments may or may not be needed depending on images. Users should adapt this part of the workflow to best suit their own data.</p>
 
-<h2 id="perform-histogram-equalization">Perform histogram equalization</h2>
+<h2 id="perform-contrast-enhancement">Perform contrast enhancement</h2>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-normalize-histogram"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Normalize Histogram</div>
@@ -1262,9 +1262,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </blockquote>
 
 <h1 id="annotating-the-images">Annotating the images</h1>
-<p>Once the input images are preprocessed and converted to JPG format, we will need to manually annotate the images using AnyLabeling. AnyLabeling is an interactive labeling tool integrated into Galaxy that allows users to draw bounding boxes or other shapes around objects of interest.</p>
+<p>Once the input images are preprocessed and converted to JPG format, we need to annotate the images. AnyLabeling is an interactive labeling tool integrated into Galaxy that allows users to draw bounding boxes or other shapes around objects of interest.</p>
 
-<p>In this tutorial, we annotate all 22 example images using the tool’s <code class="language-plaintext highlighter-rouge">Auto labeling</code> function, which helps accelerate the annotation process. The labels will later be used to train the YOLO model. The annotation process is entirely human-in-the-loop, so the quality and relevance of the labels directly influence the performance of the resulting model.</p>
+<p>In this tutorial, we annotate all 22 example images using the tool’s <code class="language-plaintext highlighter-rouge">Auto labeling</code> function, which helps accelerate the annotation process. The label files generated from AnyLabeling will later be used to train a YOLO model. The annotation process is entirely human-in-the-loop, so the quality and relevance of the labels directly influence the performance of the resulting model.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-interactive-annotation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Interactive Annotation</div>
@@ -1303,13 +1303,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   <p><a href="../../images/yolo-train/al_label.png" rel="noopener noreferrer"><img src="../../images/yolo-train/al_label.png" alt="al open dir. " width="1819" height="1021" loading="lazy" /></a></p>
 
+  <p><strong>Note:</strong> If the selected auto labeling model falsely detects image background or objects that are not part of the object of interest, we can refine it by adding a <em>“negative point”</em> to indicate image background. Vice versa, if the model does not completely detect the boundaries of the objects, one can add a <em>“positive point”</em> to the area inside the object that was missed by the model.</p>
   <ul>
-    <li>If the inferred polygon is not accurate, click <code class="language-plaintext highlighter-rouge">-Point</code>, then click on a background (non-object) area to refine the results. The model will re-run the inference.</li>
+    <li>In the previous step, the results included some background, as shown in the picture. To refine them, click <code class="language-plaintext highlighter-rouge">-Point</code>, then click on the background area. The model will re-run the inference.</li>
   </ul>
 
   <p><a href="../../images/yolo-train/al_label_1.png" rel="noopener noreferrer"><img src="../../images/yolo-train/al_label_1.png" alt="al open dir. " width="1586" height="889" loading="lazy" /></a></p>
   <ul>
-    <li>After the inference is complete, click <code class="language-plaintext highlighter-rouge">Finish Object</code>. In the <code class="language-plaintext highlighter-rouge">Enter object label</code> box, type <code class="language-plaintext highlighter-rouge">tail</code> then click <code class="language-plaintext highlighter-rouge">OK</code> to save the annotation.</li>
+    <li>After the inference is complete, click <code class="language-plaintext highlighter-rouge">Finish Object</code>. In the <code class="language-plaintext highlighter-rouge">Enter object label</code> box, type <code class="language-plaintext highlighter-rouge">tail</code> then click <code class="language-plaintext highlighter-rouge">OK</code>. This will automatically create a label file in JSON format that contains the coordinates of the polygon.</li>
   </ul>
 
   <p><a href="../../images/yolo-train/al_finish.png" rel="noopener noreferrer"><img src="../../images/yolo-train/al_finish.png" alt="al open dir. " width="190" height="201" loading="lazy" /></a></p>
@@ -1322,7 +1323,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </blockquote>
 
 <h1 id="prepare-training-data">Prepare training data</h1>
-<p>In this step, we will convert the annotation file generated by AnyLabeling (in JSON format) into YOLO compatible TXT files. This conversion is necessary because the YOLO training tool expects annotations in its specific text format, where each object is described by a class ID and corresponding bounding box coordinates.</p>
+<p>In this step, we will convert the annotation file generated by AnyLabeling (in JSON format) into YOLO compatible TXT files. This conversion is necessary because the YOLO training tool expects annotations in its specific text format, where each object is described by a class ID and corresponding bounding box coordinates. The YOLO TXT file must be formatted according to the described <a href="https://roboflow.com/formats/yolo">specifications</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On</div>
@@ -1342,7 +1343,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:</div>
-  <p>In this step, we will train a custom YOLO model using the prepared images and annotation files.</p>
+  <p>In this step, we will train a custom YOLO model for segmentation using the prepared images and annotation files.</p>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/yolo_training/yolo_training/8.3.0+galaxy2" title="Perform YOLO training tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Perform YOLO training</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 8.3.0+galaxy2)</span> with the following parameters:
       <ul>
@@ -1391,17 +1392,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <p><strong>Image size</strong>: Determines the resolution used during training. Larger sizes can improve accuracy but require more memory and time.</p>
 
-        <p><strong>Image scale augmentation</strong>: Applies random resizing of images during training to improve robustness. Values between 0.5 and 1.0 are commonly used.</p>
+        <p><strong>Image scale augmentation</strong>: Resizes images by a random factor within the specified range. The scale hyperparameter defines the scaling factor, with the final adjustment randomly chosen within the range of [1–scale; 1+scale]. For example, with scale=0.5, the scaling is randomly selected within 0.5 to 1.5.</p>
 
-        <p><strong>Image rotation augmentation</strong>: Helps the model generalize to rotated objects. Keep small (e.g., 5–15°) for biological images to avoid distortion.</p>
+        <p><strong>Image rotation augmentation</strong>: Rotates images randomly within the specified range. The degrees hyperparameter defines the rotation angle, with the final adjustment randomly chosen between –degrees and +degrees. For example, with degrees=10.0, the rotation is randomly selected within –10.0 to +10.0.</p>
 
-        <p><strong>Image HSV-Value</strong>: Randomly adjusts image brightness and color during training. Can help with generalization, especially when image lighting varies.</p>
+        <p><strong>Image HSV-Value</strong>: Changes the brightness of the image. The hsv_v hyperparameter defines the shift magnitude, with the final adjustment randomly chosen between –hsv_v and +hsv_v. For example, with hsv_v=0.4, the intensity is randomly selected within –0.4 to +0.4.</p>
 
         <p><strong>Learning rate</strong>: Controls how fast the model learns. If training is unstable or not improving, try lowering this (e.g., to 0.01 or 0.005).</p>
 
         <p><strong>Weight decay</strong>: Helps prevent overfitting by penalizing large weights. Usually works well between 0.0001 and 0.01.</p>
       </li>
-      <li>Increasing the confidence threshold results in fewer, more reliable segmentations, while decreasing it may produce more segments, including uncertain or noisy ones.</li>
+      <li>This value governs the minimum confidence threshold for detections. Objects detected with a confidence below this threshold will be disregarded. Adjusting this value can help reduce false positive detections.</li>
     </ol>
 
   </blockquote>
@@ -1420,7 +1421,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>This tutorial demonstrated how to train a custom YOLO model for object detection and segmentation in bioimages using Galaxy. By combining image preprocessing, human-in-the-loop annotation, format conversion, and model training, we have built a complete workflow. We can apply the trained model to new image data and further refine our workflow as needed.</p>
+<p>This tutorial demonstrated how to train a custom YOLO model for segmentation of bioimages using Galaxy. By combining image preprocessing, human-in-the-loop annotation, format conversion, and model training, we have built a complete workflow. We can apply the trained model to new image data and further refine our workflow as needed.</p>
 
                 </section>
 
@@ -1504,7 +1505,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <p>
                     <ol>
                         <li id="citation-text">
-                            Yi Sun, Arif UI Maula Khan,  <b>Training Custom YOLO Models for Object Detection and Segmentation in Bioimages (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/yolo-segmentation-training/tutorial.html">https://training.galaxyproject.org/training-material/topics/imaging/tutorials/yolo-segmentation-training/tutorial.html</a> Online; accessed TODAY
+                            Yi Sun, Arif ul Maula Khan,  <b>Training Custom YOLO Models for Segmentation of Bioimages (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/yolo-segmentation-training/tutorial.html">https://training.galaxyproject.org/training-material/topics/imaging/tutorials/yolo-segmentation-training/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
@@ -1530,8 +1531,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 <code id="citation-code">@misc{imaging-yolo-segmentation-training,
-author = "Yi Sun and Arif UI Maula Khan",
-	title = "Training Custom YOLO Models for Object Detection and Segmentation in Bioimages (Galaxy Training Materials)",
+author = "Yi Sun and Arif ul Maula Khan",
+	title = "Training Custom YOLO Models for Segmentation of Bioimages (Galaxy Training Materials)",
 	year = "",
 	month = "",
 	day = "",
@@ -1707,7 +1708,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ed091be9ef90fadcf4e4b4c76cb012baeef46311">ed091be</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8e137a4655019c718e6b819faffbc24d1738d1f6">8e137a4</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
