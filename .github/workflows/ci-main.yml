@@ -75,7 +75,12 @@ jobs:
           pr_num=$(echo "$GITHUB_REF_NAME" | sed 's|/.*||g')
           echo "export CI_PULL_REQUEST=${pr_num}" >> pr/env.sh
           echo "export CI_COMMIT=${GITHUB_SHA}" >> pr/env.sh
-          cat $GITHUB_ACTIONS
+          echo 'log parents'
+          git log -n 3
+          echo 'log parents first'
+          git log -n 3 --first-parent
+
+          cat $GITHUB_EVENT_PATH
 
           find topics/ -name tutorial.md | xargs -n 1 python bin/check-broken-boxes.py | reviewdog -efm="%f:%l: %m" -filter-mode=file -reporter=github-pr-review  -fail-level=error  | tee ./pr/reviewdog.txt
           set -o pipefail
