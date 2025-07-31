@@ -57,8 +57,8 @@ jobs:
           unset GITHUB_ACTIONS
           env | grep GITHUB_ | grep -v TOKEN | sort
 
-          cat reviewdog.txt | reviewdog -efm="%f:%l: %m" -reporter=github-pr-review -log-level debug -tee
+          cat reviewdog.txt | reviewdog -efm="%f:%l: %m" -reporter=github-pr-review -log-level debug -tee -filter-mode nofilter -name 'GTN Lint'
 
-          cat reviewdog.json | reviewdog -reporter=github-pr-review -f=rdjsonl -log-level debug -tee
+          cat reviewdog.json | reviewdog -reporter=github-pr-review -f=rdjsonl -log-level debug -tee -filter-mode nofilter -name 'GTN Lint'
         env:
             REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
