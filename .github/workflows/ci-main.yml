@@ -69,6 +69,13 @@ jobs:
         if: always()
         run: |
           mkdir -p ./pr
+
+          echo "export CI_REPO_OWNER=galaxyproject" > pr/env.sh
+          echo "export CI_REPO_NAME=training-material" >> pr/env.sh
+          pr_num=$(echo "$GITHUB_REF_NAME" | sed 's|/.*||g')
+          echo "export CI_PULL_REQUEST=${pr_num}" >> pr/env.sh
+          echo "export CI_COMMIT=${GITHUB_SHA}" >> pr/env.sh
+
           find topics/ -name tutorial.md | xargs -n 1 python bin/check-broken-boxes.py | reviewdog -efm="%f:%l: %m" -filter-mode=file -reporter=github-pr-review  -fail-level=error  > ./pr/reviewdog.txt
           set -e
           set -o pipefail

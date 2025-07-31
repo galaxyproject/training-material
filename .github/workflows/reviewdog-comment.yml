@@ -49,6 +49,9 @@ jobs:
 
       - name: Add review comments
         run: |
+          . env.sh
+          env | grep CI_ | sort
+
           cat reviewdog.txt | reviewdog -efm="%f:%l: %m" -reporter=github-pr-review
 
           cat reviewdog.json | reviewdog -reporter=github-pr-review -f=rdjsonl
