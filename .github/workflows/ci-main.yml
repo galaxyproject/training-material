@@ -71,10 +71,10 @@ jobs:
           mkdir -p ./pr
           git status
           git branch -a
-          find topics/ -name tutorial.md | xargs -n 1 python bin/check-broken-boxes.py | reviewdog -efm="%f:%l: %m" -filter-mode=file -reporter=local  -fail-level=error -diff='git diff' > ./pr/reviewdog.txt
+          find topics/ -name tutorial.md | xargs -n 1 python bin/check-broken-boxes.py | reviewdog -efm="%f:%l: %m" -filter-mode=file -reporter=local  -fail-level=any -diff='git diff' > ./pr/reviewdog.txt
           set -e
           set -o pipefail
-          bundle exec ruby bin/lint.rb --format rdjson | reviewdog -filter-mode=file -f=rdjsonl -reporter=local -fail-level=error -diff='git diff' > ./pr/reviewdog.json
+          bundle exec ruby bin/lint.rb --format rdjson | reviewdog -filter-mode=file -f=rdjsonl -reporter=local -fail-level=any -diff='git diff' > ./pr/reviewdog.json
 
       - uses: actions/upload-artifact@v4
         if: always()
