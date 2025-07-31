@@ -1,16 +1,16 @@
 ---
 layout: tutorial_hands_on
 
-title: Training Custom YOLO Models for Object Detection and Segmentation in Bioimages
+title: Training Custom YOLO Models for Segmentation of Bioimages
 zenodo_link: https://zenodo.org/records/15674585
 questions:
-- Why use YOLO for object detection and segmentation in bioimage analysis?
-- How can I train and use a custom YOLO model for detection or segmentation tasks using Galaxy?
+- Why use YOLO for segmentation in bioimage analysis?
+- How can I train and use a custom YOLO model for segmentation tasks using Galaxy?
 objectives:
-- Preprocess images (e.g., histogram equalization, format conversion) to prepare data for annotation and training
-- Perform human-in-the-loop object annotation using AnyLabeling interactive tool.
+- Preprocess images (e.g., contrast enhancement, format conversion) to prepare data for annotation and training
+- Perform manual/human-in-the-loop semi-automated object annotation.
 - Convert AnyLabeling annotation files into YOLO compatible format for training.
-- Train a custom YOLO model.
+- Train a custom YOLO model for segmentation.
 time_estimation: 2H
 key_points:
 - Image preprocessing (e.g., histogram equalization) can enhance model performance but may not be necessary for all datasets
@@ -23,9 +23,9 @@ contributors:
 ---
 
 
-Image annotations and model training are essential in bioimage analysis tasks.  In biology and related fields, researchers often deal with large volumes of microscopy images that require accurate annotation to train machine learning models.  Automate this process can save time and improve reproducibility, but high-quality training data remains critical. Human-in-the-loop workflows have emerged as a solution to bridge the gap between manual annotation and automated model training, enabling iterative improvements through user interaction.
+In bioimages, challenging morphologies are often quite hard to segment using traditional computer vision/image analysis methods. Therefore, using semi-supervised machine learning methods like deep learning for such tasks is getting more popular. 
 
-This tutorial introduces a reusable human-in-the-loop image segmentation and training workflow implemented in Galaxy, designed to streamline the creation of custom segmentation models using YOLO (You Only Look Once). The workflow integrates both interactive and headless tools. We demonstrate the workflow here with tail analysis images from growing embryo samples. The workflow can also be adapted to other datasets with minimal adjustments.
+This tutorial shows an easy-to-use and efficient workflow of training YOLO models in Galaxy. The workflow integrates both interactive and headless tools. We demonstrate the workflow here with bright field microscopy images from growing embryo samples. The workflow can also be adapted to other datasets with minimal adjustments.
 
 > <agenda-title></agenda-title>
 >
@@ -89,11 +89,11 @@ This tutorial introduces a reusable human-in-the-loop image segmentation and tra
 
 # Preprocessing the images 
 
-The example dataset used in this tutorial consists of images in TIFF format. However, the YOLO training tool in Galaxy currently supports only JPEG (JPG) images. Therefore, as a necessary preprocessing step, the input images must be converted to the appropriate format. In this workflow, we first apply histogram equalization to the images and then convert them from TIFF to JPG.
+The example dataset used in this tutorial consists of images in TIFF format. However, the YOLO training tool in Galaxy currently supports only JPEG (JPG) images. Therefore, as a necessary preprocessing step, the input images must be converted to the appropriate format. In this workflow, we first do contrast enhancement using adaptive histogram equalization of the images and then convert them from TIFF to JPG.
 
 It's important to note that these preprocessing steps are tailored to the example data. When applying this workflow to other images, the specific preprocessing steps may vary. Format conversion is mandatory if the images are not already in JPG, but contrast enhancement or other adjustments may or may not be needed depending on images. Users should adapt this part of the workflow to best suit their own data.
 
-## Perform histogram equalization
+## Perform contrast enhancement
 
 > <hands-on-title> Normalize Histogram </hands-on-title>
 >
@@ -119,9 +119,9 @@ It's important to note that these preprocessing steps are tailored to the exampl
 
 
 # Annotating the images
-Once the input images are preprocessed and converted to JPG format, we will need to manually annotate the images using AnyLabeling. AnyLabeling is an interactive labeling tool integrated into Galaxy that allows users to draw bounding boxes or other shapes around objects of interest. 
+Once the input images are preprocessed and converted to JPG format, we need to annotate the images. AnyLabeling is an interactive labeling tool integrated into Galaxy that allows users to draw bounding boxes or other shapes around objects of interest. 
 
-In this tutorial, we annotate all 22 example images using the tool's `Auto labeling` function, which helps accelerate the annotation process. The labels will later be used to train the YOLO model. The annotation process is entirely human-in-the-loop, so the quality and relevance of the labels directly influence the performance of the resulting model. 
+In this tutorial, we annotate all 22 example images using the tool's `Auto labeling` function, which helps accelerate the annotation process. The label files generated from AnyLabeling will later be used to train a YOLO model. The annotation process is entirely human-in-the-loop, so the quality and relevance of the labels directly influence the performance of the resulting model. 
 
 > <hands-on-title> Interactive Annotation </hands-on-title>
 >
@@ -145,10 +145,11 @@ In this tutorial, we annotate all 22 example images using the tool's `Auto label
 >
 > ![al open dir](../../images/yolo-train/al_label.png){: width="75%"}
 >
->    - If the inferred polygon is not accurate, click `-Point`, then click on a background (non-object) area to refine the results. The model will re-run the inference.
+>    **Note:** If the selected auto labeling model falsely detects image background or objects that are not part of the object of interest, we can refine it by adding a *"negative point"* to indicate image background. Vice versa, if the model does not completely detect the boundaries of the objects, one can add a *"positive point"* to the area inside the object that was missed by the model. 
+>    - In the previous step, the results included some background, as shown in the picture. To refine them, click `-Point`, then click on the background area. The model will re-run the inference.
 >
 > ![al open dir](../../images/yolo-train/al_label_1.png){: width="75%"}
->    - After the inference is complete, click `Finish Object`. In the `Enter object label` box, type `tail` then click `OK` to save the annotation.
+>    - After the inference is complete, click `Finish Object`. In the `Enter object label` box, type `tail` then click `OK`. This will automatically create a label file in JSON format that contains the coordinates of the polygon.
 >
 > ![al open dir](../../images/yolo-train/al_finish.png){: width="75%"}
 >
@@ -159,7 +160,7 @@ In this tutorial, we annotate all 22 example images using the tool's `Auto label
 
 
 # Prepare training data
-In this step, we will convert the annotation file generated by AnyLabeling (in JSON format) into YOLO compatible TXT files. This conversion is necessary because the YOLO training tool expects annotations in its specific text format, where each object is described by a class ID and corresponding bounding box coordinates.
+In this step, we will convert the annotation file generated by AnyLabeling (in JSON format) into YOLO compatible TXT files. This conversion is necessary because the YOLO training tool expects annotations in its specific text format, where each object is described by a class ID and corresponding bounding box coordinates. The YOLO TXT file must be formatted according to the described [specifications](https://roboflow.com/formats/yolo).
 
 > <hands-on-title></hands-on-title>
 > 
@@ -174,7 +175,7 @@ In this step, we will convert the annotation file generated by AnyLabeling (in J
 # Train a YOLO model
 
 > <hands-on-title> </hands-on-title>
-> In this step, we will train a custom YOLO model using the prepared images and annotation files.
+> In this step, we will train a custom YOLO model for segmentation using the prepared images and annotation files.
 > 1. {% tool [Perform YOLO training](toolshed.g2.bx.psu.edu/repos/bgruening/yolo_training/yolo_training/8.3.0+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Input images"*: `input-converted` (output of **Convert image format** {% icon tool %})
 >    - {% icon param-file %} *"Input YOLO txt files"*: `yolo-files` (output of **Convert AnyLabeling JSON to YOLO text** {% icon tool %})
@@ -210,17 +211,16 @@ In this step, we will convert the annotation file generated by AnyLabeling (in J
 > >
 > >    **Image size**: Determines the resolution used during training. Larger sizes can improve accuracy but require more memory and time.
 > >
+> >    **Image scale augmentation**: Resizes images by a random factor within the specified range. The scale hyperparameter defines the scaling factor, with the final adjustment randomly chosen within the range of [1–scale; 1+scale]. For example, with scale=0.5, the scaling is randomly selected within 0.5 to 1.5.
 > >
-> >    **Image scale augmentation**: Applies random resizing of images during training to improve robustness. Values between 0.5 and 1.0 are commonly used.
+> >    **Image rotation augmentation**: Rotates images randomly within the specified range. The degrees hyperparameter defines the rotation angle, with the final adjustment randomly chosen between –degrees and +degrees. For example, with degrees=10.0, the rotation is randomly selected within –10.0 to +10.0.
 > >
-> >    **Image rotation augmentation**: Helps the model generalize to rotated objects. Keep small (e.g., 5–15°) for biological images to avoid distortion.
-> >
-> >    **Image HSV-Value**: Randomly adjusts image brightness and color during training. Can help with generalization, especially when image lighting varies.
+> >    **Image HSV-Value**: Changes the brightness of the image. The hsv_v hyperparameter defines the shift magnitude, with the final adjustment randomly chosen between –hsv_v and +hsv_v. For example, with hsv_v=0.4, the intensity is randomly selected within –0.4 to +0.4.
 > >
 > >    **Learning rate**: Controls how fast the model learns. If training is unstable or not improving, try lowering this (e.g., to 0.01 or 0.005).
 > >
 > >    **Weight decay**: Helps prevent overfitting by penalizing large weights. Usually works well between 0.0001 and 0.01.
-> > 3. Increasing the confidence threshold results in fewer, more reliable segmentations, while decreasing it may produce more segments, including uncertain or noisy ones.
+> > 3. This value governs the minimum confidence threshold for detections. Objects detected with a confidence below this threshold will be disregarded. Adjusting this value can help reduce false positive detections.
 > >
 > {: .solution}
 >
@@ -237,4 +237,4 @@ Once training is complete, the resulting model can be used to label new images. 
 
 # Conclusion
 
-This tutorial demonstrated how to train a custom YOLO model for object detection and segmentation in bioimages using Galaxy. By combining image preprocessing, human-in-the-loop annotation, format conversion, and model training, we have built a complete workflow. We can apply the trained model to new image data and further refine our workflow as needed.
+This tutorial demonstrated how to train a custom YOLO model for segmentation of bioimages using Galaxy. By combining image preprocessing, human-in-the-loop annotation, format conversion, and model training, we have built a complete workflow. We can apply the trained model to new image data and further refine our workflow as needed.
