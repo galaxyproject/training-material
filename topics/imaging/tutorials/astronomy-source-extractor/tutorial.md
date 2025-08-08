@@ -164,7 +164,7 @@ kernel = np.loadtxt("filter.txt")
 ## Running the Source-Extractor Tool
 
 Once you’ve selected the source-extractor tool, choose the input file named: ``` DESI Legacy Survey -> Image fits ```. After the tool has finished running, several output images and data products will be available:
-- The background subtracted image with detected sources highlighted by red ellipses,
+- The background subtracted image with detected sources highlighted by red ellipses
 - The estiamted background
 - The background RMS (root mean square)
 - The segmentation map
