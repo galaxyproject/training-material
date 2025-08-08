@@ -94,7 +94,7 @@ thresh = 1.5 # default
 
 The interpretation of ```err[j,i]``` depends on the ```err_option``` parameter:
 ``` python
-err_option = 'float_globalrms'  # Use global RMS of the background (default)
+err_option = 'float_globalrms'  # Use global RMS (i.e. root mean square) of the background (default)
 err_option = 'array_rms'        # Use a pixel-wise RMS array of the background
 err_option = 'none'             # Use 'thresh' as an absolute threshold
 ```
@@ -166,7 +166,7 @@ kernel = np.loadtxt("filter.txt")
 Once you’ve selected the source-extractor tool, choose the input file named: ``` DESI Legacy Survey -> Image fits ```. After the tool has finished running, several output images and data products will be available:
 - The background subtracted image with detected sources highlighted by red ellipses
 - The estiamted background
-- The background RMS (root mean square)
+- The background RMS
 - The segmentation map
 - A catalog table listing the detected sources along with measured parameters such as flux (i.e. sum of member pixels) , position, size, and shape
 
