@@ -61,7 +61,56 @@ For more in-depth documentation, you can refer to:
 {: .agenda}
 
 
-## Background Estimation and Thresholding
+## Input Requirements 
+
+The source-extractor tool accepts a single image file as input, with the option to provide a mask and/or a filter. Typically, for astronomy, a sky image contains luminous sources. 
+
+**Image:** 
+- Preferrably: light sources on a dark background.
+- Format: a single-channel 2D array stored as ```.tiff``` or ```.fits``` ([FITS](https://fits.gsfc.nasa.gov/) is a widely used format in the astronomy community). 
+
+**Mask (Optional):** 
+- Masks regions affected by bright sources (e.g. stars) to improve background estimation. 
+- Pixels with
+``` python
+value > maskthresh
+```
+or boolean ```True``` are masked.
+- Format: a single-channel 2D array stored as ```.tiff``` or ```.fits```.  
+
+**Filter Kernel (Optional):** 
+The filter kernel is used to smooth the input image, which can enhance the detection of faint and extended sources. However, in crowded fields, filtering may reduce performance by blending nearby objects.
+
+- If ```Filter Case``` is set to ```none```, no filtering is applied.
+- If ```Filter Case``` is ```default```, a built-in smoothing kernel is used:
+```markdown
+1 2 1
+2 4 2
+1 2 1
+```
+- If ```Filter Case``` is ```file```, you must provide a custom 2D array stored as plain text ```.txt``` file. The file should contain whitespace-separated values and must be readable with:
+```python
+import numpy as np
+kernel = np.loadtxt("filter.txt")
+```
+
+
+> <comment-title> Checking the metadata of an image </comment-title>
+>
+> Tip 1: Use {% tool [Show image info](toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1) %} to inspect ```.tiff``` metadata. Required:
+>
+> ``` RGB = false (1) ```
+> ``` Interleaved = false ```
+> ``` SizeZ = 1 ```
+> ``` SizeT = 1 ```
+> ``` SizeC = 1 ```
+>
+> Tip 2: Use {% tool [astropy fitsinfo](toolshed.g2.bx.psu.edu/repos/astroteam/astropy_fitsinfo/astropy_fitsinfo/0.2.0+galaxy2) %} to check ```.fits``` metadata. Required:
+> ```Dimensions (N, M) ```, where ```N``` and ```M``` are pixel dimensions in 2D. 
+{: .comment}
+
+
+### Parameters for Background Estimation and Thresholding
 
 Before source detection, the tool estimates the image background. This is done by dividing the image into a grid of boxes, each with a default size of:
 ``` python
@@ -99,52 +148,6 @@ err_option = 'array_rms'        # Use a pixel-wise RMS array of the background
 err_option = 'none'             # Use 'thresh' as an absolute threshold
 ```
 
-## Data Requirements 
-
-The source-extractor tool accepts a single image file as input, with the option to provide a mask and/or a filter. Typically, for astronomy, a sky image contains luminous sources. 
-
-**Image:** 
-- Preferrably: light sources on a dark background.
-- Format: a single-channel 2D array stored as ```.tiff``` or ```.fits``` ([FITS](https://fits.gsfc.nasa.gov/) is a widely used format in the astronomy community). 
-
-**Mask (Optional):** 
-- Masks regions affected by bright sources (e.g. stars) to improve background estimation. 
-- Pixels with
-``` python
-value > maskthresh
-```
-or boolean ```True``` are masked.
-- Format: a single-channel 2D array stored as ```.tiff``` or ```.fits```.  
-
-**Filter Kernel (Optional):** 
-The filter kernel is used to smooth the input image, which can enhance the detection of faint and extended sources. However, in crowded fields, filtering may reduce performance by blending nearby objects.
-
-- If ```Filter Case``` is set to ```none```, no filtering is applied.
-- If ```Filter Case``` is ```default```, a built-in smoothing kernel is used:
-```markdown
-1 2 1
-2 4 2
-1 2 1
-```
-- If ```Filter Case``` is ```file```, you must provide a custom 2D array stored as plain text ```.txt``` file. The file should contain whitespace-separated values and must be readable with:
-```python
-import numpy as np
-kernel = np.loadtxt("filter.txt")
-```
-
-
-> <comment-title> Checking the metadata of an image </comment-title>
-> Tip 1: Use {% tool [Show image info](toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1) %} to inspect ```.tiff``` metadata. Required:
->
-> ``` RGB = false (1) ```
-> ``` Interleaved = false ```
-> ``` SizeZ = 1 ```
-> ``` SizeT = 1 ```
-> ``` SizeC = 1 ```
->
-> Tip 2: Use {% tool [astropy fitsinfo](toolshed.g2.bx.psu.edu/repos/astroteam/astropy_fitsinfo/astropy_fitsinfo/0.2.0+galaxy2) %} to check ```.fits``` metadata. Required:
-> ```Dimensions (N, M) ```, where ```N``` and ```M``` are pixel dimensions in 2D. 
-{: .comment}
 
 ## Getting data from DESI Legacy Surveys
 > <hands-on-title> Data Acquisition </hands-on-title>
@@ -165,7 +168,7 @@ kernel = np.loadtxt("filter.txt")
 
 Once you’ve selected the source-extractor tool, choose the input file named: ``` DESI Legacy Survey -> Image fits ```. After the tool has finished running, several output images and data products will be available:
 - The background subtracted image with detected sources highlighted by red ellipses
-- The estiamted background
+- The estimated background
 - The background RMS
 - The segmentation map
 - A catalog table listing the detected sources along with measured parameters such as flux (i.e. sum of member pixels) , position, size, and shape
@@ -178,7 +181,8 @@ The original image is published by [Legacy Surveys / D. Lang (Perimeter Institut
 ![Background image](../../images/astronomy-source-extractor/source-extractor_background_no_mask.png "Background image.")
 
 > <hands-on-title> Ellipse drawing </hands-on-title>
-> The ellipses shown on the previous figure can be built using:
+>
+> The tool already provides as output an image with ellipses around detected objects. Nevertheless, if you want to create a figure by yourself you can use the table of detected sources returned by the tool ```objects``` in the following way:
 >    ``` python
 >    from matplotlib.patches import Ellipse
 >    import matplotlib.pyplot as plt
@@ -193,7 +197,7 @@ The original image is published by [Legacy Surveys / D. Lang (Perimeter Institut
 >        e.set_edgecolor('red')
 >        ax.add_artist(e)
 >    ```
-> Here, ```objects``` is the table of detected sources returned by the tool
+>    
 {: .hands_on}
 
 ## Using a Mask to Improve Source Detection
