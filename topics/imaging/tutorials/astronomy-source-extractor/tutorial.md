@@ -13,7 +13,7 @@ objectives:
   - How to perform luminous source extraction in Galaxy.
   - How to analyse sky images in Galaxy. 
   - How to create a simple segmentation mask. 
-  - How to draw ellipses for the detected sources. 
+  - How to visualize the detected sources. 
 time_estimation: 1H
 key_points:
 - Source Extractor is a well known astronomy library to detect luminous sources from sky images. 
