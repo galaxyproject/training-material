@@ -12,7 +12,7 @@ questions:
 objectives:
   - How to perform luminous source extraction in Galaxy.
   - How to analyse sky images in Galaxy. 
-  - How to create a simple mask. 
+  - How to create a simple segmentation mask. 
   - How to draw ellipses for the detected sources. 
 time_estimation: 1H
 key_points:
