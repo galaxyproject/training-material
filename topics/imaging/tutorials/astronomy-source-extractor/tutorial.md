@@ -80,7 +80,7 @@ Detection Criteria:
 minarea = 5 # default
 ```
 
-- Threshold: Flux at pixel (j, i) must exceed:
+- Threshold: The value of the pixel (j, i) must exceed:
 
 ``` python
 thresh * err[j,i]
@@ -168,7 +168,7 @@ Once you’ve selected the source-extractor tool, choose the input file named: `
 - The estiamted background
 - The background RMS (root mean square)
 - The segmentation map
-- A catalog table listing the detected sources along with measured parameters such as flux, position, size, and shape
+- A catalog table listing the detected sources along with measured parameters such as flux (i.e. sum of member pixels) , position, size, and shape
 
 **Example Outputs:**
 ![Data and sources image](../../images/astronomy-source-extractor/source-extractor_data_sources_no_mask.png "Data and detected sources image.")
