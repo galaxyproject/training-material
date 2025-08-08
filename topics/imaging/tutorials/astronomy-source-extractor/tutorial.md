@@ -44,7 +44,7 @@ One key objective in astronomy and large-scale sky surveys is to identify indivi
 
 [SExtractor (Source Extractor)](https://www.astromatic.net/software/sextractor/) is a widely used tool in astronomy for detecting and measuring sources in astronomical images. The Galaxy source-extractor tool is built on top of [SEP](https://sep.readthedocs.io/en/stable/index.html), a Python library derived from the core routines of SExtractor.
 
-For more in-depth documentation, refer to:
+For more in-depth documentation, you can refer to:
 -  [SEP documentation](https://sep.readthedocs.io/en/v1.0.x/index.html)
 -  [SEP paper](https://joss.theoj.org/papers/10.21105/joss.00058)
 -  [Source Extractor for Dummies](https://arxiv.org/abs/astro-ph/0512139)
