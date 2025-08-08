@@ -36,6 +36,7 @@ contributions:
 tags:
 - imageanalysis
 - astronomy
+- object detection
 
 ---
 
