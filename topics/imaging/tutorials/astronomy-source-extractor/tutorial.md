@@ -101,7 +101,7 @@ err_option = 'none'             # Use 'thresh' as an absolute threshold
 
 ## Data Requirements 
 
-The source-extractor tool accepts a single image file as input, with the option for users to provide a mask and/or a filter. Typically, for astronomy, a sky image contains luminous sources. 
+The source-extractor tool accepts a single image file as input, with the option to provide a mask and/or a filter. Typically, for astronomy, a sky image contains luminous sources. 
 
 **Image:** 
 - Preferrably: light sources on a dark background.
@@ -221,9 +221,9 @@ Upload the mask to Galaxy, select it in the source-extractor tool, and re-run.
 
 ![Background image with mask](../../images/astronomy-source-extractor/source-extractor_background_with_mask.png "Background image.")
 
-One can observe that the central sources are now detected and also the background dynamic range has decreased, due to the mask.
+You can observe that the central sources are now detected and also the background dynamic range has decreased, due to the mask.
 
 An important output of this tool is the segmentation map of the detected sources:
 ![Segmentation map with mask](../../images/astronomy-source-extractor/segmentation-map-with-mask.png "Segmentation map.")
 
-This map can be used as the seed image required by [Voronoi segmentation tutorial]({% link topics/imaging/tutorials/voronoi-segmentation/tutorial.md %}). In this case, one can observe that the two bright stars still have an important effect on the source detection, therefore better masking, using the array RMS as a relative error in thresholding or different background mesh sizes could be attempted to improve the results.
+This map can be used as the seed image required by [Voronoi segmentation tutorial]({% link topics/imaging/tutorials/voronoi-segmentation/tutorial.md %}). In this case, you can observe that the two bright stars still have an important effect on the source detection. Therefore, to improve the results, you can try: better masking, using the array RMS as a relative error in thresholding or different background mesh sizes.
