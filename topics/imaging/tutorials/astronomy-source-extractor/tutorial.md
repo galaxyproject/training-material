@@ -226,4 +226,4 @@ One can observe that the central sources are now detected and also the backgroun
 An important output of this tool is the segmentation map of the detected sources:
 ![Segmentation map with mask](../../images/astronomy-source-extractor/segmentation-map-with-mask.png "Segmentation map.")
 
-This map can be used as the seed image required by Voronoi segmentation (TODO put a link to this). In this case, one can observe that the two bright stars still have an important effect on the source detection, therefore better masking, using the array RMS as a relative error in thresholding or different background mesh sizes could be attempted to improve the results.
+This map can be used as the seed image required by [Voronoi segmentation tutorial]({% link topics/imaging/tutorials/voronoi-segmentation/tutorial.md %}). In this case, one can observe that the two bright stars still have an important effect on the source detection, therefore better masking, using the array RMS as a relative error in thresholding or different background mesh sizes could be attempted to improve the results.
