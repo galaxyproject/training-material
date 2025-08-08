@@ -68,7 +68,7 @@ Before source detection, the tool estimates the image background. This is done b
 bw = 64  # box width in pixels
 bh = 64  # box height in pixels
 ```
-Within each box, the pixel histogram is clipped to remove outliers, and the background level is estimated using a mode approximation based on the median and mean of the clipped pixel values. 
+Within each box, the pixel histogram is filtered to remove outliers, and the background level is estimated using a mode approximation based on the median and mean of the remaining pixel values. 
 
 After background estimation, the tool identifies groups of pixels that exceed a defined brightness threshold.
 
