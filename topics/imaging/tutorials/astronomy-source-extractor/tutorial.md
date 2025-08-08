@@ -31,6 +31,7 @@ contributions:
     - Andrei-EPFL
   funding:
     - oscars
+    - fiesta
     - eurosciencegateway
 tags:
 - imageanalysis
