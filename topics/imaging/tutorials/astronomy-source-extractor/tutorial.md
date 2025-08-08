@@ -170,7 +170,7 @@ Once you’ve selected the source-extractor tool, choose the input file named: `
 - The segmentation map
 - A catalog table listing the detected sources along with measured parameters such as flux (i.e. sum of member pixels) , position, size, and shape
 
-**Example Outputs:**
+### Example Outputs:
 ![Data and sources image](../../images/astronomy-source-extractor/source-extractor_data_sources_no_mask.png "Data and detected sources image.")
 
 The original image is published by [Legacy Surveys / D. Lang (Perimeter Institute)](https://www.legacysurvey.org/acknowledgment/). The Legacy Surveys are described in {% cite legacy-survey-astronomy %}.
@@ -216,7 +216,7 @@ tifffile.imwrite("mask.tiff", mask)
 ```
 Upload the mask to Galaxy, select it in the source-extractor tool, and re-run.
 
-**Improved Outputs:**
+### Improved Outputs:
 ![Data and sources image with mask](../../images/astronomy-source-extractor/source-extractor_data_sources_with_mask.png "Data and detected sources image.")
 
 ![Background image with mask](../../images/astronomy-source-extractor/source-extractor_background_with_mask.png "Background image.")
