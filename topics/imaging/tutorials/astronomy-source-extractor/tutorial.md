@@ -101,7 +101,7 @@ err_option = 'none'             # Use 'thresh' as an absolute threshold
 
 ## Data Requirements 
 
-The source-extractor tool operates on a single image file, typically for astronomy, a sky image containing luminous sources. Optionally, users can supply a mask and/or a filter. 
+The source-extractor tool accepts a single image file as input, with the option for users to provide a mask and/or a filter. Typically, for astronomy, a sky image contains luminous sources. 
 
 **Image:** 
 - Preferrably: light sources on a dark background.
