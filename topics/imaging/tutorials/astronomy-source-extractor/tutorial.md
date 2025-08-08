@@ -105,7 +105,7 @@ The source-extractor tool accepts a single image file as input, with the option 
 
 **Image:** 
 - Preferrably: light sources on a dark background.
-- Format: a single-channel 2D array stored as ```.tiff``` or ```.fits```. 
+- Format: a single-channel 2D array stored as ```.tiff``` or ```.fits``` ([FITS](https://fits.gsfc.nasa.gov/) is a widely used format in the astronomy community). 
 
 **Mask (Optional):** 
 - Masks regions affected by bright sources (e.g. stars) to improve background estimation. 
