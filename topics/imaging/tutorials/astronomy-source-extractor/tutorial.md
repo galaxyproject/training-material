@@ -11,7 +11,7 @@ questions:
   - How can I get the seed image for the [Voronoi segmentation tutorial]({% link topics/imaging/tutorials/voronoi-segmentation/tutorial.md %})?
 objectives:
   - How to perform luminous source extraction in Galaxy.
-  - How to acquire sky images in Galaxy. 
+  - How to analyse sky images in Galaxy. 
   - How to create a simple mask. 
   - How to draw ellipses for the detected sources. 
 time_estimation: 1H
