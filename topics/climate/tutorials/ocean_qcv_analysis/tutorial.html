@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Ocean's variables study / Ocean's variables study / Climate</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@0f5bcd7f130bb0d0b28276cc96aa7658e5012f9f",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean_qcv_analysis/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Ocean's variables study">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-08-08 09:07:24 +0000">
+<meta name="DC.creator" content="Marie Josse"><meta name="description" content="Learn to access, analyze, and visualize Earth System and climate data using Galaxy.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Climate / Ocean's variables study / Hands-on: Ocean's variables study">
+        <meta property="og:description" content="Learn to access, analyze, and visualize Earth System and climate data using Galaxy.">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/climate/tutorials/ocean_qcv_analysis/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Ocean's variables study",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Draft",
+  "dateModified": "2025-08-08 09:07:24 +0000",
+  "datePublished": "2025-08-08 09:07:24 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "101058785",
+      "url": "https://cordis.europa.eu/project/id/101058785",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "Fair-Ease",
+        "description": "FAIR-EASE is a RIA project funded under HORIZON-INFRA-2021-EOSC-01-04, and it involves a consortium of 25 partners from all over Europe.\n",
+        "url": "https://fairease.eu/",
+        "logo": "/training-material/assets/images/fair_ease_colour.png"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "101057388",
+      "url": "https://cordis.europa.eu/project/id/101057388",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "EuroScienceGateway",
+        "description": "EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.\n",
+        "url": "https://galaxyproject.org/projects/esg/",
+        "logo": "/training-material/assets/images/eurosciencegateway.png"
+      }
+    }
+  ],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Climate",
+    "description": "Learn to access, analyze, and visualize Earth System and climate data using Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/climate/"
+  },
+  "abstract": "This tutorial explains how to qualify and calibrate the nitrate sensor mounted on the argo float 4903881 by building its own Galaxy workflow. This tutorial is accompanied by screenshots to help guide you. If you have any difficulties, or suggestions for improvement, please contact us (link to the contact page). For your information, timing for running tools depends on the number of files, their size and/or the number of people working on Galaxy.\r",
+  "learningResourceType": "e-learning",
+  "name": "Ocean's variables study",
+  "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean_qcv_analysis/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT1H",
+  "teaches": "- Learn how to do a QCV analysis on the nitrate variable of the ocean ?",
+  "keywords": [
+    "Climate",
+    "earth-system",
+    "ocean",
+    "biogeochemical",
+    "work-in-progress"
+  ],
+  "description": "## Abstract\n\nThis tutorial explains how to qualify and calibrate the nitrate sensor mounted on the argo float 4903881 by building its own Galaxy workflow. This tutorial is accompanied by screenshots to help guide you. If you have any difficulties, or suggestions for improvement, please contact us (link to the contact page). For your information, timing for running tools depends on the number of files, their size and/or the number of people working on Galaxy.\r\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to access Argo data?\n - What is a QCV analysis?\n - How to qualify and calibrate nitrate in the ocean?\n\n\n## Learning Objectives\n\n- Learn how to do a QCV analysis on the nitrate variable of the ocean ?\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "name": "Marie Josse",
+      "image": "https://avatars.githubusercontent.com/Marie59",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/pndb/",
+          "name": "Pôle National de Données de Biodiversité",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.pndb.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/fairease/",
+          "name": "Fair-Ease",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://fairease.eu/"
+        }
+      ]
+    }
+  ],
+  "contributor": [],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Climate",
+      "description": "Learn to access, analyze, and visualize Earth System and climate data using Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/climate/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/climate" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Climate
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/climate/faqs/" title="Check our FAQs for the Climate topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/climate/tutorials/ocean_qcv_analysis/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/climate/tutorials/ocean_qcv_analysis/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-climate">
+    <h1 data-toc-skip>Ocean's variables study</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/Marie59/" class="contributor-badge contributor-Marie59"><img src="https://avatars.githubusercontent.com/Marie59?s=36" alt="Marie Josse avatar" width="36" class="avatar" />
+    Marie Josse</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to access Argo data?</p>
+</li>
+        
+        <li><p>What is a QCV analysis?</p>
+</li>
+        
+        <li><p>How to qualify and calibrate nitrate in the ocean?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Learn how to do a QCV analysis on the nitrate variable of the ocean ?</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/climate/tutorials/ocean_qcv_analysis/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Aug 8, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 8, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>This tutorial explains how to qualify and calibrate the nitrate sensor mounted on the argo float 4903881 by building its own Galaxy workflow. This tutorial is accompanied by screenshots to help guide you. If you have any difficulties, or suggestions for improvement, please contact us (link to the contact page). For your information, timing for running tools depends on the number of files, their size and/or the number of people working on Galaxy.</p>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-do-not-change-file-name"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Do not change file name</div>
+  <p>DO NOT change file names to ensure that any changes you make with ODV will be carried over. However, it is possible to change the name of galaxy collections to make them easier to find.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#manage-your-data" id="markdown-toc-manage-your-data">Manage your data</a></li>
+  <li><a href="#workflow-human-in-the-loop" id="markdown-toc-workflow-human-in-the-loop">Workflow human in the loop</a></li>
+  <li><a href="#follow-the-steps-one-by-one" id="markdown-toc-follow-the-steps-one-by-one">Follow the steps one by one</a>    <ol>
+      <li><a href="#harmonize-aggregate-and-convert-the-data" id="markdown-toc-harmonize-aggregate-and-convert-the-data">Harmonize, aggregate, and convert the data</a></li>
+      <li><a href="#qualification-and-calibration" id="markdown-toc-qualification-and-calibration">Qualification and calibration</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+  <li><a href="#extra-information" id="markdown-toc-extra-information">Extra information</a></li>
+</ol>
+
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-short-introduction-on-how-galaxy-works"><button class="gtn-boxify-button details" type="button" aria-controls="details-short-introduction-on-how-galaxy-works" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Short introduction on how Galaxy works</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>You can come back to where you left off the tutorial anytime by clicking <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-log-in-to-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Log in to Galaxy</div>
+    <ol>
+      <li>Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)</li>
+      <li>Browse to your <a href="https://earth-system.usegalaxy.eu/">Galaxy instance</a></li>
+      <li>On the top panel go to <strong>Login or Register</strong></li>
+    </ol>
+
+  </blockquote>
+
+  <p>The Galaxy homepage is divided into three panels:</p>
+  <ul>
+    <li>Tools on the left</li>
+    <li>Viewing panel in the middle</li>
+    <li>History of analysis and files on the right</li>
+  </ul>
+
+  <figure id="figure-1" style="max-width: 90%;"><img src="/training-material/shared/images/galaxy_interface.png" alt="Screenshot of the Galaxy interface, the tools panel is on the left, the main panel is in the center, and the history is on the right." width="2009" height="969" loading="lazy" /><a target="_blank" href="/training-material/shared/images/galaxy_interface.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Galaxy interface explanation</figcaption></figure>
+
+  <p>The first time you use Galaxy, there will be no files in your history panel.</p>
+</blockquote>
+
+<h1 id="manage-your-data">Manage your data</h1>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-get-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Get data</div>
+  <p>Upload the argo data files (meta, core and BGC) of the float 4903881 from the S3 service.</p>
+  <ul>
+    <li>2a. Click on “Upload” on the vertical panel on the left. A pop-up is launched</li>
+    <li>2b. Click on “Choose from repository” at the bottom of the popup</li>
+  </ul>
+
+  <p><a href="../../images/bgc_calib/bgc_2a.png" rel="noopener noreferrer"><img src="../../images/bgc_calib/bgc_2a.png" alt="Image of how to uploade remote data files. " width="1714" height="540" loading="lazy" /></a></p>
+
+  <ul>
+    <li>2c. Search “argo” in the top search bar. “Argo marine floats data and metadata from Global Data Assembly Centre (Argo GDAC)” appears in the label column just below</li>
+    <li>2d. Select it then “pub/dac/coriolis/4903881” then tick “4903881_meta.nc” + “profiles/”</li>
+    <li>2e. Click on “Select” on the bottom right of the pop-up. the list of the file to download is displayed</li>
+    <li>2f. Remove the Synthetic files (not useful for qualification &amp; calibration actions)  by clicking on the corresponding garbage can on the right</li>
+    <li>2g. Click on “start” on the bottom of the pop-up. Once the download is complete (green color), files are stored in your history on the right.</li>
+  </ul>
+
+  <p><a href="../../images/bgc_calib/bgc_2f.png" rel="noopener noreferrer"><img src="../../images/bgc_calib/bgc_2f.png" alt="Image of the loading of the data files. " width="1712" height="584" loading="lazy" /></a></p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-organize-your-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Organize your data</div>
+  <p>Create a dataset list/collection of the argo float 4903881 by clicking on</p>
+  <ul>
+    <li>3a. “Select item”</li>
+    <li>3b.  “Select all” (appears just after 3a and at the same level on the right)</li>
+    <li>3c.  “All ## selected”</li>
+    <li>3d.  “Auto build list” » a pop-up is launched</li>
+    <li>3e.  Enter the name of the data collection : 4903881</li>
+    <li>3f.   turn off “Remove the file extension”</li>
+    <li>3g.  Click on “Build” on the bottom right of the pop-up</li>
+  </ul>
+
+  <p><a href="../../images/bgc_calib/bgc_3a.png" rel="noopener noreferrer"><img src="../../images/bgc_calib/bgc_3a.png" alt="Image of how to build a collection from multiple netcdf files. " width="1719" height="624" loading="lazy" /></a></p>
+
+  <p>Once the collection is ready, everything is green in the history panel. It is possible to limit the history to useful files or collections by clicking on the eyes above the files list in the history.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoatutorialstyle">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	
+	<p>This is a "Choose Your Own Tutorial" (CYOT) section (also known as "Choose Your Own Analysis" (CYOA)), where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	
+	<p>
+		<p>Do you want to run the workflow or to discover the tools one by one ?</p>
+
+	</p>
+	
+	
+		<input id="cyoa-opt1tutorialstyle" type="radio" name="cyoatutorialstyle" value="Tools" onclick="cyoaChoice('Tools', 'gtn-cyoatutorialstyle')" />
+		<label for="cyoa-opt1tutorialstyle" class="select btn btn-secondary">Tools</label>
+	
+	
+		<input id="cyoa-opt2tutorialstyle" type="radio" name="cyoatutorialstyle" value="Workflow" onclick="cyoaChoice('Workflow', 'gtn-cyoatutorialstyle')" />
+		<label for="cyoa-opt2tutorialstyle" class="select btn btn-secondary">Workflow</label>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Tools", "gtn-cyoatutorialstyle");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Workflow">
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-run-a-predefined-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Run a predefined workflow</div>
+    <p>4a. Click on “Workflows” on the vertical panel on the left. A pop-up is launched
+4b. Search “Argo-Glider Nitrate QCV” in the top search bar for run the workflow of one float</p>
+
+    <p><a href="../../images/bgc_calib/bgc_workflow.png" rel="noopener noreferrer"><img src="../../images/bgc_calib/bgc_workflow.png" alt="Image on how to get the right workflow. " width="1714" height="417" loading="lazy" /></a></p>
+
+    <h1 id="workflow-human-in-the-loop">Workflow human in the loop</h1>
+
+    <p>Now you’ve got your workflow running, however this workflow is composed of both interactive and non interactive tools. Thus, for the interactive tools we need you !</p>
+
+    <blockquote class="tip">
+      <div class="box-title tip-title" id="tip-copy-pasting-between-computer-and-odv"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-pasting-between-computer-and-odv" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Copy pasting between computer and ODV</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>You can expand the ODV left panel (where there are 3 dots, vertically) to access the “clipboard” menu and paste the content you want to paste on an ODV form. From there you can copy-paste everything from one side to the other. Then, click outside of this panel to collapse it.</p>
+
+      <p><a href="../../images/coastal_water_dyn/clipboard.png" rel="noopener noreferrer"><img src="../../images/coastal_water_dyn/clipboard.png" alt="Image showing in transparent on the left of the ODV interface the clipboard. " width="1918" height="1029" loading="lazy" /></a></p>
+    </blockquote>
+
+    <blockquote class="tip">
+      <div class="box-title tip-title" id="tip-odv-disconnected"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-odv-disconnected" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: ODV - Disconnected</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>If at one point your ODV interface becomes grey with a red panel on the top “X ODV - Disconnected”, do NOT panic ;) you just need to reload your tab (circular arrow top left)</p>
+    </blockquote>
+  </blockquote>
+</div>
+
+<div class="Tools">
+
+  <h1 id="follow-the-steps-one-by-one">Follow the steps one by one</h1>
+
+  <h2 id="harmonize-aggregate-and-convert-the-data">Harmonize, aggregate, and convert the data</h2>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-harmonize-and-aggregate-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Harmonize and aggregate the data</div>
+    <p>Running “QCV harmonizer” (link toward tool explanation) for creating the working file</p>
+    <ul>
+      <li>4a. Click on “Tool” just below “Upload” on the vertical panel on the left. A new vertical panel appears.</li>
+      <li>4b. Search “QCV harmonizer” in the top search bar</li>
+      <li>4c. Select the tool. Its configuration page appears on the center</li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/harmonize_insitu_to_netcdf/harmonize_insitu_to_netcdf/3.0+galaxy1" title="QCV harmonizer tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>QCV harmonizer</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0+galaxy1)</span> with the following parameters:
+        <ul>
+          <li><em>“Input the NetCDF data files”</em>:</li>
+          <li>4d. Select “Dataset collection”</li>
+          <li>4e. Select “Switch to column select” then the <code class="language-plaintext highlighter-rouge">4903881</code> dataset collection (the collection move from the left to the the right column) OR click on “Selected value” above and add 4903881 dataset collection</li>
+        </ul>
+      </li>
+      <li>4f. Run the tool by clicking on the corresponding button below. At the end of the process, tool delivers an harmonized file, ###_harm.nc (since version 3.0 of the tool), ready for analysis.</li>
+    </ul>
+
+    <p><a href="../../images/bgc_calib/bgc_4d.png" rel="noopener noreferrer"><img src="../../images/bgc_calib/bgc_4d.png" alt="Image of specific options when building the collection to keep the extension of the files. " width="1703" height="496" loading="lazy" /></a></p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-convert-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Convert the data</div>
+    <p>Running “ODV collection manager” for creating Ocean Data View (ODV) spreadsheet collection and qualifying the dataset.</p>
+    <ul>
+      <li>5a. Click on “Tool” just below “Upload” on the vertical panel on the left. A new vertical panel appears.</li>
+      <li>5b. Search “ODV collection manager” in the top search bar</li>
+      <li>5c. Select the tool. Its configuration page appears on the center</li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/tool_odv/tool_odv/1.3+galaxy2" title="ODV collection manager tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ODV collection manager</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input raw data”</em>:</li>
+          <li>5d. Select “Multiple Datasets”</li>
+          <li>5e. If the dataset is not yet selected, select “Switch to column select” then the <code class="language-plaintext highlighter-rouge">4903881</code> dataset collection (the collection move from the left to the the right column) OR click on “Selected value” above and add <code class="language-plaintext highlighter-rouge">4903881</code> dataset harmonized collection.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <blockquote>
+      <details-tilte>Multiple datasets<details-title />
+Multiple datasets could be selected for merging them in a unique ODV collection and working on multiple platforms at the same time.
+.{: .details}
+</details-tilte>
+    </blockquote>
+
+    <ul>
+      <li>5f. (optional) : It is possible to change the default configuration by selecting to do so:
+        <ul>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select if you want to write your own configuration file or not.”</em>: <code class="language-plaintext highlighter-rouge">Yes, I to write my own configuration file</code>
+            <ul>
+              <li><em>“Enter operator name”</em>: <code class="language-plaintext highlighter-rouge">operator name</code> (optional)</li>
+              <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Enter QC convention for the ODV collection output (default: ARGO)”</em>: <code class="language-plaintext highlighter-rouge">QC convention  for the output file</code> (default : ARGO QC flag scale, https://archimer.ifremer.fr/doc/00228/33951/32470.pdf - reference table 2)</li>
+              <li><em>“Enter subsetting (default: 1)”</em>: <code class="language-plaintext highlighter-rouge">1</code> (optionnal)</li>
+            </ul>
+          </li>
+          <li><em>“Enter plt (default: 0 for QV, 1 for demo)”</em>: <code class="language-plaintext highlighter-rouge">0</code> (optionnal)
+  These last 2 configuration inputs are here in case a reference file is added to the collection such as WOA for comparison. WOA should be harmonized with the “QCV harmonizer” tool beforehand.</li>
+        </ul>
+      </li>
+      <li>5g. Run the tool by clicking on the corresponding button below. At the end of the process, the tool delivers an ODV spreadsheet collection, named “odv_collection.txt” and an ODV view, named “qualification_startingPoint_nitrate.xview”, ready for launching the ODV interactive tool. Both files are available in the history panel under the galaxy collection “ODV tool collection”. The odv_collection.txt is available more quickly in history with the name “ODV tool output” as well. “ODV tool collection” also includes YYYY-MM-DDTHHMM_galaxy_odv-coll-manager_QV.log explaining all actions performed by this one.</li>
+    </ul>
+
+    <p><a href="../../images/bgc_calib/bgc_5d.png" rel="noopener noreferrer"><img src="../../images/bgc_calib/bgc_5d.png" alt="Image on how to properly fill in the inputs of the QCV harmonizer tool. " width="1701" height="582" loading="lazy" /></a></p>
+
+  </blockquote>
+
+  <h2 id="qualification-and-calibration">Qualification and calibration</h2>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-qualify-the-dataset-with-the-odv-interactive-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Qualify the dataset with the ODV interactive tool.</div>
+    <p>For more information on using ODV, please refer to the ODV user <code class="language-plaintext highlighter-rouge">&lt;guide https://odv.awi.de/fileadmin/user_upload/odv/docs/ODV_guide.pdf&gt;</code></p>
+
+    <ul>
+      <li>6a. Click on “Tools” just below “Upload” on the vertical panel on the left. A new vertical panel appears.</li>
+      <li>6b. Search “ODV”interactive tool in the top search bar</li>
+      <li>6c. Select the <span class="tool" data-tool="interactive_tool_odv" title="Ocean Data View tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Ocean Data View</strong></span> . Its configuration page appears on the center</li>
+      <li>6d. Before selecting the ODV collection, change the version of tool by selecting v5.8_1 with the 3 cubes available on the left in the first grey headband on the top of the central panel</li>
+    </ul>
+
+    <p><a href="../../images/bgc_calib/bgc_6d.png" rel="noopener noreferrer"><img src="../../images/bgc_calib/bgc_6d.png" alt="Image on how to properly fill in the inputs of the ODV collection manager tool. " width="1705" height="347" loading="lazy" /></a></p>
+
+    <ul>
+      <li><span class="tool" data-tool="interactive_tool_odv" title="Ocean Data View tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Ocean Data View</strong></span> with the following parameters:
+        <ul>
+          <li>6e. <i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Do you want your data to be automatically load when ODV is launched ?”</em>: <code class="language-plaintext highlighter-rouge">Yes, I want my data to be loaded directly</code> (This is useful to open directly the collection and with a specific xview if this last one is available.)</li>
+          <li>6f. <i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select if you are using a ODV collection in a zip folder or if you have your own raw data”</em>: <code class="language-plaintext highlighter-rouge">The data you are using are Netcdf or tabular text file</code>
+ 	- <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf or tabular text file. For text file, odv format is recommanded.”</em>:  <code class="language-plaintext highlighter-rouge">ODV tool output</code></li>
+          <li>6g. <i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Do you have a view ?”</em>: <code class="language-plaintext highlighter-rouge">Yes, I have my own view”</code></li>
+          <li>6h. <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data view for ODV”</em>: <code class="language-plaintext highlighter-rouge">qualification_startingPoint_nitrate.xview</code> 
+For that, click on “ODV tool collection” in the history panel and “drag and drop” the xview in the Data view selected area.</li>
+          <li>6i. Run the tool</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p><a href="../../images/bgc_calib/bgc_6ebis.png" rel="noopener noreferrer"><img src="../../images/bgc_calib/bgc_6ebis.png" alt="Image on how switch version. " width="1578" height="724" loading="lazy" /></a></p>
+
+    <ul>
+      <li>6j. When the ODV interactive tool is ready, a red dot with the number “1” appears on the “Interactive tool” button in the vertical panel on the left. Click it. A new vertical panel appears.</li>
+      <li>6k. Launch the ODV interactive tool by clicking the “expended” symbol (when it appears) close to the ODV name. ODV opens in a new window automatically with the selected view (lien vers une explication de la vue).</li>
+    </ul>
+
+    <p><a href="../../images/bgc_calib/bgc_6k.png" rel="noopener noreferrer"><img src="../../images/bgc_calib/bgc_6k.png" alt="Image of how to access the interactive tool. " width="1663" height="320" loading="lazy" /></a></p>
+
+    <p><a href="../../images/bgc_calib/odv_view.png" rel="noopener noreferrer"><img src="../../images/bgc_calib/odv_view.png" alt="Image of what is int the ODV interactive tool when you open it. " width="1425" height="733" loading="lazy" /></a></p>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the ODV to be running (Job Info)</li>   <li>Click on ODV</li> </ol> </blockquote>
+    <p><!--END_SNIPPET--></p>
+
+    <blockquote class="tip">
+      <div class="box-title tip-title" id="tip-odv-disconnected-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-odv-disconnected-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: ODV - Disconnected</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>If at one point your ODV interface becomes grey with a red panel on the top “X ODV - Disconnected”, do NOT panic ;) you just need to reload your tab (circular arrow top left)</p>
+    </blockquote>
+
+    <blockquote class="tip">
+      <div class="box-title tip-title" id="tip-copy-pasting-between-computer-and-odv-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-pasting-between-computer-and-odv-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Copy pasting between computer and ODV</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>You can expand the ODV left panel (where there are 3 dots, vertically) to access the “clipboard” menu and paste the content you want to paste on an ODV form. From there you can copy-paste everything from one side to the other. Then, click outside of this panel to collapse it.</p>
+
+      <p><a href="../../images/coastal_water_dyn/clipboard.png" rel="noopener noreferrer"><img src="../../images/coastal_water_dyn/clipboard.png" alt="Image showing in transparent on the left of the ODV interface the clipboard. " width="1918" height="1029" loading="lazy" /></a></p>
+    </blockquote>
+
+    <p>If you missed “step 6e”, ODV opens with its home page. To import data set, click on the top left :</p>
+    <ul>
+      <li>file &gt; New</li>
+      <li>The “Create New collection” popup window opens;  Give a name to your collection &gt; OK</li>
+      <li>The “Creating collection” popup window opens; Select “Use .txt, .odv, .var or other file as template” &gt; OK</li>
+      <li>The “Select template file” popup window opens; Change “Files of Types” by selected “All Files(*)”.</li>
+      <li>Select “working/Documents/ODV/galaxy/data/ODV tool output” &gt; open</li>
+      <li>The “Meta variables” popup window opens. Select all meta variable (ctrl a) &gt; OK</li>
+      <li>The “Data variables” popup window opens. Select all data variable (ctrl a) &gt; OK</li>
+      <li>The “collection properties” popup window opens; Change, if you want, “Data Field”, and “Data type”. Be sure that “Primary Variable” is “pressure [decibar] &gt; Ok</li>
+      <li>ODV collection is created with the right template and opens on an empty global map.</li>
+      <li>Click on the top left  : Import&gt; ODV spreadsheet</li>
+      <li>The “Select spreadsheet file(s)” popup window opens; Change “Files of Types” by selected “All Files(*)” and Select working “/Documents/ODV/galaxy/data/ODV tool output”</li>
+      <li>The “Meta variable association” popup window opens. all meta variable are already selected &gt; OK</li>
+      <li>The “Data variable association” popup window opens. all data variable are already selected &gt; OK</li>
+      <li>
+        <p>Data set is now imported into the new collection</p>
+      </li>
+      <li>6l. Qualify the dataset if necessary. Go to the <code class="language-plaintext highlighter-rouge">&lt;ODV user guide https://odv.awi.de/fileadmin/user_upload/odv/docs/ODV_guide.pdf&gt;</code> for ODV description or follow the link to video.</li>
+    </ul>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-export-history-once-qualification-is-finished"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Export history once qualification is finished</div>
+    <p>WARNING : Be sure that all filters or zoom windows are relaxed.</p>
+
+    <p>7a. To export history information, click on the top left :</p>
+    <ul>
+      <li>Export &gt; History</li>
+      <li>the “Export station history” opens; Select “working/Documents/ODV/galaxy/outputs</li>
+      <li>Change the name of the history if you want &gt; Save &gt; OK &gt; OK</li>
+      <li>close ODV : File &gt; exit</li>
+    </ul>
+
+    <p>7b. Once the ODV interactive tool closed, 2 useful outputs are available (green) in the history panel</p>
+    <ul>
+      <li>“ODV history extracted” with the history txt files.</li>
+      <li>“ODV all outputs” (including ODV collection and history if you want working locally, i.e. on your computer,  or again on this collection)</li>
+    </ul>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-optional-running-odv-history-manager"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: (optional) Running “ODV history manager”</div>
+    <p>For reporting you QC flags changes into harmonized dataset before calibrating the nitrate sensor</p>
+    <ul>
+      <li>8a. Click on “Tools” just below “Upload” on the vertical panel on the left. A new vertical panel appears.</li>
+      <li>8b. Search “ODV history manager” in the top search bar</li>
+      <li>8c. Select the tool. Its configuration page appears on the center</li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/tool_odv_history/tool_odv_history/1.2+galaxy2" title="ODV history manager tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ODV history manager</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2+galaxy2)</span> with the following parameters:</li>
+      <li>8d. In “Tool Parameters” section, select for each input “Multiple Datasets” :
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input netcdf data</em>” : Select the harmonized NetCDF file(s) created by step 4.</li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input history text file”</em> : history txt file extracted from ODV after changes</li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input odv file”</em> : the ODV spreadsheet txt collection created by step 5</li>
+        </ul>
+      </li>
+      <li>8f. (optional) : It is possible to change the default configuration:
+        <ul>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select if you want to write your own configuration file or not.”</em>: <code class="language-plaintext highlighter-rouge">Yes, I to write my own configuration file</code>
+ 	- <i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Enter QC convention for the ODV collection output (default: ARGO)”</em>: <code class="language-plaintext highlighter-rouge">QC convention  for the output file</code> (default : ARGO QC flag scale, https://archimer.ifremer.fr/doc/00228/33951/32470.pdf - reference table 2)
+ 	- <i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Enter the ODV convention regarding the changes performed on the odv collection.”</em>: <code class="language-plaintext highlighter-rouge">ODV convention to be reported “EDITFLAGS” (QC changes) “EDITDATA” (Data changes)</code>, both are selected by default.</li>
+        </ul>
+      </li>
+      <li>8g. Run the tool by clicking on the corresponding button below. At the end of the process, the tool delivers an extended NetCDF files, names “###_qced.nc”  and a csv file summaring reporting in the NetCDF file, names “###_history”, ready for running “Biogechemical Calibration” tool. Both files are available in the history panel under the galaxy collection “ODV history manager netcdf collection” and “ODV history manager csv collection” respectively. “ODV history manager log files collection” includes YYYY-MM-DDTHHMM_galaxy_odv-history-manager_history.log detailing the status of each QC reports and action performed by this one.</li>
+    </ul>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-optional-choose-reference-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: (optional) Choose Reference dataset</div>
+    <p>The nitrate calibration needs a potential reference data set such as the nitrate WOA annual climatology. For that, upload the nitrate WOA annual climatology with NetCDF format (https://www.ncei.noaa.gov/thredds-ocean/catalog/woa23/DATA/nitrate/netcdf/all/1.00/catalog.html?dataset=woa23/DATA/nitrate/netcdf/all/1.00/woa23_all_n00_01.nc) directly from your computer.</p>
+    <ul>
+      <li>9a. Click on “Upload” on the vertical panel on the left. A pop-up is launched</li>
+      <li>9b. Click on “Choose local file” at the bottom of the popup</li>
+      <li>9c. Select the dataset and click on “start”</li>
+      <li>9d. Once the dataset ready, repeat step 4 for getting the harmonized dataset ready for calibration</li>
+    </ul>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-run-biogeochemical-calibration"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run “Biogeochemical calibration”</div>
+    <p>Run “Biogeochemical calibration” for calibrating the nitrate sensor</p>
+    <ul>
+      <li>10a. Click on “Tools” just below “Upload” on the vertical panel on the left. A new vertical panel appears.</li>
+      <li>10b. Search “Biogeochemical calibration” in the top search bar</li>
+      <li>10c. Select the tool. Its configuration page appears on the center</li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/tool_biogeochemical_calibration/tool_biogeochemical_calibration/2.1+galaxy2" title="BioGeoChemical calibration tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BioGeoChemical calibration</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1+galaxy2)</span> with the following parameters:</li>
+      <li>10d. In “Tool Parameters” section, select for each input “Multiple Datasets” : 
+    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input  harmonized netcdf data”</em>: <code class="language-plaintext highlighter-rouge">4903881 harmonized NetCDF file(s)</code> with QC report created by step 8, named ###_qced.nc. The selection is easier by clicking on the 3 dots “Browse or Upload datasets”
+    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input reference data”</em> (optional): <code class="language-plaintext highlighter-rouge">WOA harmonized data</code> created by step 9 if you want to estimate the reference nitrate from climatology</li>
+      <li>10e. (optional) - Change the QC configuration if : 
+    - you work with platforms that do not follow the argo flag scale convention
+    - you want to fix adjusted value at QC flag 2 (potentially good)</li>
+    </ul>
+
+    <p><a href="../../images/bgc_calib/bgc_10d.png" rel="noopener noreferrer"><img src="../../images/bgc_calib/bgc_10d.png" alt="Image on how to fill in the input of the Biogechemical calibration tool. " width="1509" height="690" loading="lazy" /></a></p>
+
+    <ul>
+      <li>10f. (optional) By default, the tool estimates Nitrate from canyonB by estimating reference pressure automatically and the correction as a linear regression. BUT, you can add many calibration methods to be tested as you want by changing <code class="language-plaintext highlighter-rouge">No, I don’t want to, I’ll use the default one</code> below the 2nd grey headband on the central panel by <i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <code class="language-plaintext highlighter-rouge">Yes, I want to write my own configuration file</code>. Then:
+        <ul>
+          <li>Click on the “Insert Configurations” button to add calibration methods as many time as needed
+            <ul>
+              <li>for reproducing the default one change the following item <code class="language-plaintext highlighter-rouge">Enter multiple linear regression</code> by <code class="language-plaintext highlighter-rouge">Single linear regression</code></li>
+              <li>for adding a new method fully automatics with canyon B - don’t change default item value</li>
+              <li>for adding a new method using your own choices, changes each item by your selection :
+                <ul>
+                  <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Bypass”</em>: <code class="language-plaintext highlighter-rouge">The user defines P</code></li>
+                  <li><em>“Enter P_value”</em>: <code class="language-plaintext highlighter-rouge">1000</code> dbar
+                    <ul>
+                      <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Enter multiple linear regression”</em>: <code class="language-plaintext highlighter-rouge">N</code> corresponds to the number of breakpoints.</li>
+                      <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Reference method”</em> :  <code class="language-plaintext highlighter-rouge">Climatology</code></li>
+                    </ul>
+                  </li>
+                  <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Reference”</em>: <code class="language-plaintext highlighter-rouge">WOA</code>
+                    <ul>
+                      <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Resolution”</em>: <code class="language-plaintext highlighter-rouge">Annual</code>
+(be sure you have added WOA harmonized climatology in “Tool parameters/input reference data” section)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <p>Now more than one calibration method are ready to be tested.</p>
+
+    <p><a href="../../images/bgc_calib/bgc_calibtool_config.png" rel="noopener noreferrer"><img src="../../images/bgc_calib/bgc_calibtool_config.png" alt="Image on how to fill in the input to add a configuration to the Biogechemical calibration tool. " width="858" height="702" loading="lazy" /></a></p>
+
+    <ul>
+      <li>10g. (optional for argo floats) The tool gives the possibility to fill directly original argo nc files with DM information (coefficient, equation, comment, dm operator …) using DM filler tools from C. Schmechtig. For that, do the following:
+        <ul>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Do you want to use DMfiller option”</em>: <code class="language-plaintext highlighter-rouge">Yes, I want to use it</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input original raw netcdf data”</em>: <code class="language-plaintext highlighter-rouge">dataset collection 4903881</code> built at the beginning of the work (step 3). This collection includes indeed all original argo nc files useful to report DM information</li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input csv files”</em>: <code class="language-plaintext highlighter-rouge">csv file</code> created by step 8 and the “odv history manager” tool.</li>
+          <li>for the next sections, report all information that are mandatories regarding the:
+            <ul>
+              <li>institution managing your argo data set</li>
+              <li>BGC contact point</li>
+              <li>BGC DM operator for this action
+If one of the last information are missing or not compatible with the information already available in the nc files (as contact point), the tool does not add DM information in the original files.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>10h. Click on Run tool
+For each calibration method, tool delivers :
+        <ul>
+          <li>BGC calibration netcdf collection</li>
+          <li>BGC calibration figure collection</li>
+          <li>(optional if DM filler is used) BGC calibration tar.gz collection
+with the following label : 
+“input harmonized netcdf data file name”_C”number of calibration”-nitrate
+For each calibration, tool delivers the following figures :</li>
+          <li>##_Zvar_ref_detailed.png and ##_Zvar_ref_results.png showing the referenced level estimated by the tool and why. Both figures are done even if the user bypass this section.</li>
+          <li>##_Raw-Ref_Analysis_ref#01_LinearModel.png an ##_Raw-Ref_Analysis_ref#01_Rsquared.png (if necessary) showing the multi linear regression results
+If DM filler option is tick, tar.gz includes all BDfiles to be sent back to DAC after choosing the best calibration coefficients.</li>
+        </ul>
+      </li>
+    </ul>
+
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-calibration-validation-with-odv-visualization"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Calibration validation with ODV visualization</div>
+    <p>For the validation step, run again :</p>
+    <ul>
+      <li>step 5 by adding all the netcdf files available in “BGC calibration netcdf collection”for creating the odv collection</li>
+      <li>step 6 for the visualization</li>
+    </ul>
+  </blockquote>
+
+  <h1 id="conclusion">Conclusion</h1>
+
+  <h1 id="extra-information">Extra information</h1>
+
+  <p>Coming up soon even more tutorials on and other Earth-System related trainings. Keep an <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> open if you are interested!</p>
+
+</div>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Manage Argo data</p>
+</li>
+                        
+                        <li><p>Do Biogeochemical analysis</p>
+</li>
+                        
+                        <li><p>Learn to calibrate nitrate</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/climate/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=climate/ocean_qcv_analysis"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=climate/ocean_qcv_analysis">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Marie Josse,  <b>Ocean's variables study (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean_qcv_analysis/tutorial.html">https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean_qcv_analysis/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{climate-ocean_qcv_analysis,
+author = "Marie Josse",
+	title = "Ocean's variables study (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean_qcv_analysis/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/fairease/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/assets/images/fair_ease_colour.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Fair-Ease</div>
+			<div class="description">
+			FAIR-EASE is a RIA project funded under HORIZON-INFRA-2021-EOSC-01-04, and it involves a consortium of 25 partners from all over Europe.
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/eurosciencegateway/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/assets/images/eurosciencegateway.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">EuroScienceGateway</div>
+			<div class="description">
+			EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/ocean_qcv_analysis/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/climate/tutorials/ocean_qcv_analysis/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/climate/tutorials/ocean_qcv_analysis/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0f5bcd7f130bb0d0b28276cc96aa7658e5012f9f">0f5bcd7</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
