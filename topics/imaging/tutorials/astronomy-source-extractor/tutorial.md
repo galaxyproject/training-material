@@ -40,7 +40,7 @@ tags:
 
 ---
 
-In astronomy and large-scale sky surveys, one key objective is to identify individual celestial sources—such as stars and galaxies—in wide-field sky images to enable further detailed scientific analyses. For instance, the DESI Legacy Surveys have imaged approximately one-third of the sky, resulting in the detection of billions of luminous sources. As a follow-up, the DESI project is measuring the spectra of individual galaxies from a subsample of about 50 million targets, selected based on their photometric properties.
+One key objective in astronomy and large-scale sky surveys is to identify individual celestial sources, such as stars and galaxies, in wide-field sky images to enable further detailed scientific analyses. For instance, the DESI Legacy Surveys have imaged approximately one-third of the sky, detecting billions of luminous sources. As a follow-up, the DESI project measures individual galaxies' spectra from a subsample of about 50 million targets, selected based on their photometric properties.
 
 [SExtractor (Source Extractor)](https://www.astromatic.net/software/sextractor/) is a widely used tool in astronomy for detecting and measuring sources in astronomical images. The Galaxy source-extractor tool is built on top of [SEP](https://sep.readthedocs.io/en/stable/index.html), a Python library derived from the core routines of SExtractor.
 
