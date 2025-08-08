@@ -18,7 +18,7 @@ objectives:
 time_estimation: 1H
 key_points:
 - Source Extractor is a well known astronomy library to detect luminous sources from sky images. 
-- This tutorial exemplifies how an astronomy software tool can be applied to data from several different domains. 
+- This tutorial shows how to analyse image data for object detection and showcases how an astronomy software tool can be applied to data from several different domains. 
 requirements:
   -
     type: "internal"
