@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Plant bulk RNA-Seq workflow / Whole transcriptome analysis of Arabidopsis thaliana / Transcriptomics</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Whole transcriptome analysis of Arabidopsis thaliana / Whole transcriptome analysis of Arabidopsis thaliana / Transcriptomics</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@5d10c18d4c242d248cad53a0bd7ce8274a7494d6",
+		release: "galaxy-training-network@33b70cd7b788e565f9ae3815e11bec1d1b284610",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -66,11 +66,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="Plant bulk RNA-Seq workflow">
+<meta name="DC.title" content="Whole transcriptome analysis of Arabidopsis thaliana">
 <meta name="DC.publisher" content="Galaxy Training Network">
 <meta name="DC.date" content="1970-01-01 00:00:00 +0000"><meta name="description" content="Training material for all kinds of transcriptomics analysis.">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Transcriptomics / Whole transcriptome analysis of Arabidopsis thaliana / Plant bulk RNA-Seq workflow">
+	<meta property="og:title" content="Transcriptomics / Whole transcriptome analysis of Arabidopsis thaliana / Whole transcriptome analysis of Arabidopsis thaliana">
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis.">
         <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/transcriptomics/tutorials/mirna-target-finder/workflows/main_workflow.png">
 	</head>
@@ -221,7 +221,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 
 <section>
 	<hgroup>
-		<h1 data-toc-skip>Plant bulk RNA-Seq workflow</h1>
+		<h1 data-toc-skip>Whole transcriptome analysis of Arabidopsis thaliana</h1>
 		<p>transcriptomics-mirna-target-finder/main-workflow</p>
 	</hgroup>
 	
@@ -231,20 +231,22 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Author(s)</b>
 			<br/>
 			
+			Pavankumar Videm
+			
 			
 			<br/>
 
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			3
+			4
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Jan 20, 2023
+			Aug 10, 2025
 
 			<br/>
 
@@ -253,7 +255,6 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			None Specified, defaults to
 			<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
 			
 			<br/>
@@ -264,11 +265,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #d4c300; --color-darker: #bdae00; --color-dimmed: #c8b900;">transcriptomics</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #f3e000; --color-darker: #d8c700; --color-dimmed: #e5d300;">transcriptomics</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffa4de; --color-darker: #ff7ed4; --color-dimmed: #ff92d9;">mirna</div>
-			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffb06a; --color-darker: #f49600; --color-dimmed: #ffa130;">arabidopsis</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #e4d6ff; --color-darker: #d2b8ff; --color-dimmed: #dbc7ff;">plant</div>
 			
 			</br>
 			
@@ -277,6 +276,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Features</b>
 			<ul>
 			
+			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
 			
 			
 			
@@ -298,7 +299,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Workflow Testing</b>
 			<br/>
 
-			Tests: ❌ <br/>
+			Tests: ✅ <br/>
 			Results: Not yet automated
 
 			<hr/>
@@ -333,13 +334,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-mirna-target-finder/versions/main-workflow">Galaxy France</a></li>
-					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-mirna-target-finder/versions/main-workflow">Galaxy Main</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-mirna-target-finder/versions/main-workflow">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-mirna-target-finder/versions/main-workflow">Galaxy Europe</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-mirna-target-finder/versions/main-workflow">Galaxy France</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-mirna-target-finder/versions/main-workflow">Galaxy Main</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-mirna-target-finder/versions/main-workflow">Import to another server (≥23.0+ only!)</a>
@@ -351,119 +352,134 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				Download
 			</a>
 			<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Collection\nControl miRNA FASTQ collection"];
+  0["ℹ️ Input Collection\nControl miRNA"];
   style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Collection\nTreated miRNA FASTQ collection"];
+  1["ℹ️ Input Collection\nBR treated miRNA"];
   style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Collection\nTreated mRNA FASTQ collection"];
+  2["ℹ️ Input Dataset\nmiRNA_stem-loop_seq.fasta"];
   style 2 stroke:#2c3143,stroke-width:4px;
-  3["ℹ️ Input Dataset\nPrecursor miRNA sequences"];
+  3["ℹ️ Input Dataset\nmiRNA_DESeq2_results_complete_dataset"];
   style 3 stroke:#2c3143,stroke-width:4px;
-  4["ℹ️ Input Collection\nControl mRNA FASTQ collection"];
+  4["ℹ️ Input Dataset\nmature_miRNA_AT.fasta"];
   style 4 stroke:#2c3143,stroke-width:4px;
-  5["ℹ️ Input Dataset\nTranscriptome FASTA"];
+  5["ℹ️ Input Dataset\nstar_miRNA_seq.fasta"];
   style 5 stroke:#2c3143,stroke-width:4px;
-  6["ℹ️ Input Dataset\nAnnotation GTF"];
+  6["ℹ️ Input Dataset\nmRNA_DESeq2_results_complete_dataset.tabular"];
   style 6 stroke:#2c3143,stroke-width:4px;
-  7["ℹ️ Input Dataset\nMature miRNA sequences"];
+  7["ℹ️ Input Dataset\ntranscriptome.fasta"];
   style 7 stroke:#2c3143,stroke-width:4px;
-  8["ℹ️ Input Dataset\nStar miRNA sequenes"];
+  8["ℹ️ Input Collection\nBR treated mRNA"];
   style 8 stroke:#2c3143,stroke-width:4px;
-  9["FastQC"];
-  0 -->|output| 9;
-  10["Trim Galore!"];
-  0 -->|output| 10;
-  11["FastQC"];
-  1 -->|output| 11;
+  9["ℹ️ Input Collection\nControl mRNA"];
+  style 9 stroke:#2c3143,stroke-width:4px;
+  10["ℹ️ Input Dataset\nannotation_AtRTD2.gtf"];
+  style 10 stroke:#2c3143,stroke-width:4px;
+  11["Falco"];
+  0 -->|output| 11;
   12["Trim Galore!"];
-  1 -->|output| 12;
-  13["FastQC"];
-  2 -->|output| 13;
-  14["FastQC"];
-  4 -->|output| 14;
-  15["Salmon quant"];
-  6 -->|output| 15;
-  2 -->|output| 15;
-  5 -->|output| 15;
-  16["Salmon quant"];
+  0 -->|output| 12;
+  13["Falco"];
+  1 -->|output| 13;
+  14["Trim Galore!"];
+  1 -->|output| 14;
+  15["Filter"];
+  3 -->|output| 15;
+  16["Filter"];
   6 -->|output| 16;
-  4 -->|output| 16;
-  5 -->|output| 16;
-  17["FastQC"];
-  10 -->|trimmed_reads_single| 17;
-  18["MiRDeep2 Mapper"];
-  10 -->|trimmed_reads_single| 18;
-  19["Merge collections"];
-  11 -->|text_file| 19;
-  9 -->|text_file| 19;
-  20["FastQC"];
-  12 -->|trimmed_reads_single| 20;
-  21["MiRDeep2 Mapper"];
+  17["Falco"];
+  8 -->|output| 17;
+  18["Falco"];
+  9 -->|output| 18;
+  19["Salmon quant"];
+  10 -->|output| 19;
+  8 -->|output| 19;
+  7 -->|output| 19;
+  20["Salmon quant"];
+  10 -->|output| 20;
+  9 -->|output| 20;
+  7 -->|output| 20;
+  21["Falco"];
   12 -->|trimmed_reads_single| 21;
-  22["Merge collections"];
-  13 -->|text_file| 22;
-  14 -->|text_file| 22;
-  23["DESeq2"];
-  15 -->|output_gene_quant| 23;
-  16 -->|output_gene_quant| 23;
-  6 -->|output| 23;
-  24["MiRDeep2 Quantifier"];
-  7 -->|output| 24;
-  3 -->|output| 24;
-  18 -->|output_reads_collapsed| 24;
-  8 -->|output| 24;
-  25["MultiQC"];
-  19 -->|output| 25;
-  26["Merge collections"];
-  20 -->|text_file| 26;
-  17 -->|text_file| 26;
-  27["MiRDeep2 Quantifier"];
-  7 -->|output| 27;
-  3 -->|output| 27;
-  21 -->|output_reads_collapsed| 27;
-  8 -->|output| 27;
-  28["MultiQC"];
-  22 -->|output| 28;
-  29["Filter"];
-  23 -->|deseq_out| 29;
-  30["Cut"];
-  24 -->|miRNAsExpressed| 30;
-  31["MultiQC"];
-  26 -->|output| 31;
-  32["Cut"];
-  27 -->|miRNAsExpressed| 32;
-  33["Filter"];
-  29 -->|out_file1| 33;
-  34["Filter"];
-  29 -->|out_file1| 34;
-  35["DESeq2"];
-  32 -->|out_file1| 35;
-  30 -->|out_file1| 35;
+  22["MiRDeep2 Mapper"];
+  12 -->|trimmed_reads_single| 22;
+  23["Merge collections"];
+  11 -->|text_file| 23;
+  13 -->|text_file| 23;
+  24["Falco"];
+  14 -->|trimmed_reads_single| 24;
+  25["MiRDeep2 Mapper"];
+  14 -->|trimmed_reads_single| 25;
+  26["Filter"];
+  15 -->|out_file1| 26;
+  27["Filter"];
+  16 -->|out_file1| 27;
+  28["Filter"];
+  16 -->|out_file1| 28;
+  29["Merge collections"];
+  18 -->|text_file| 29;
+  17 -->|text_file| 29;
+  30["DESeq2"];
+  19 -->|output_gene_quant| 30;
+  20 -->|output_gene_quant| 30;
+  10 -->|output| 30;
+  fa5917e8-0ccd-4918-aa4f-6a5ce0ef59c2["Output\nDESeq2 results subsample mRNA"];
+  30 --> fa5917e8-0ccd-4918-aa4f-6a5ce0ef59c2;
+  style fa5917e8-0ccd-4918-aa4f-6a5ce0ef59c2 stroke:#2c3143,stroke-width:4px;
+  31["MiRDeep2 Quantifier"];
+  4 -->|output| 31;
+  2 -->|output| 31;
+  22 -->|output_reads_collapsed| 31;
+  5 -->|output| 31;
+  32["MultiQC"];
+  23 -->|output| 32;
+  33["Merge collections"];
+  21 -->|text_file| 33;
+  24 -->|text_file| 33;
+  34["MiRDeep2 Quantifier"];
+  4 -->|output| 34;
+  2 -->|output| 34;
+  25 -->|output_reads_collapsed| 34;
+  5 -->|output| 34;
+  35["Sort"];
+  26 -->|out_file1| 35;
   36["Cut"];
-  34 -->|out_file1| 36;
-  37["Filter"];
-  35 -->|deseq_out| 37;
-  38["Filter FASTA"];
-  36 -->|out_file1| 38;
-  5 -->|output| 38;
-  39["Filter"];
-  37 -->|out_file1| 39;
-  40["Filter"];
-  37 -->|out_file1| 40;
+  26 -->|out_file1| 36;
+  37["Cut"];
+  28 -->|out_file1| 37;
+  38["MultiQC"];
+  29 -->|output| 38;
+  39["Cut"];
+  31 -->|miRNAsExpressed| 39;
+  40["MultiQC"];
+  33 -->|output| 40;
   41["Cut"];
-  40 -->|out_file1| 41;
+  34 -->|miRNAsExpressed| 41;
   42["Filter FASTA"];
-  41 -->|out_file1| 42;
-  8 -->|output| 42;
+  36 -->|out_file1| 42;
+  4 -->|output| 42;
   43["Filter FASTA"];
-  41 -->|out_file1| 43;
-  7 -->|output| 43;
-  44["Concatenate datasets"];
-  43 -->|output| 44;
-  42 -->|output| 44;
-  45["TargetFinder"];
-  38 -->|output| 45;
-  44 -->|out_file1| 45;</pre>
+  36 -->|out_file1| 43;
+  5 -->|output| 43;
+  44["Filter FASTA"];
+  37 -->|out_file1| 44;
+  7 -->|output| 44;
+  45["DESeq2"];
+  41 -->|out_file1| 45;
+  39 -->|out_file1| 45;
+  73bf0109-9ccd-4718-bea0-9f66a05882fb["Output\nDESeq2 results subsample miRNA"];
+  45 --> 73bf0109-9ccd-4718-bea0-9f66a05882fb;
+  style 73bf0109-9ccd-4718-bea0-9f66a05882fb stroke:#2c3143,stroke-width:4px;
+  46["Concatenate datasets"];
+  42 -->|output| 46;
+  43 -->|output| 46;
+  47["Filter"];
+  45 -->|deseq_out| 47;
+  48["TargetFinder"];
+  44 -->|output| 48;
+  46 -->|out_file1| 48;
+  35422953-279c-488a-a82c-cfbf4951aed5["Output\nTargetFinder output"];
+  48 --> 35422953-279c-488a-a82c-cfbf4951aed5;
+  style 35422953-279c-488a-a82c-cfbf4951aed5 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -476,47 +492,57 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				
 				<tr>
 					<td>Input dataset collection</td>
-					<td>Control miRNA FASTQ collection</td>
+					<td>Control miRNA</td>
 				</tr>
 				
 				<tr>
 					<td>Input dataset collection</td>
-					<td>Treated miRNA FASTQ collection</td>
+					<td>BR treated miRNA</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>miRNA_stem-loop_seq.fasta</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>miRNA_DESeq2_results_complete_dataset</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>mature_miRNA_AT.fasta</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>star_miRNA_seq.fasta</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>mRNA_DESeq2_results_complete_dataset.tabular</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>transcriptome.fasta</td>
 				</tr>
 				
 				<tr>
 					<td>Input dataset collection</td>
-					<td>Treated mRNA FASTQ collection</td>
-				</tr>
-				
-				<tr>
-					<td>Input dataset</td>
-					<td>Precursor miRNA sequences</td>
+					<td>BR treated mRNA</td>
 				</tr>
 				
 				<tr>
 					<td>Input dataset collection</td>
-					<td>Control mRNA FASTQ collection</td>
+					<td>Control mRNA</td>
 				</tr>
 				
 				<tr>
 					<td>Input dataset</td>
-					<td>Transcriptome FASTA</td>
-				</tr>
-				
-				<tr>
-					<td>Input dataset</td>
-					<td>Annotation GTF</td>
-				</tr>
-				
-				<tr>
-					<td>Input dataset</td>
-					<td>Mature miRNA sequences</td>
-				</tr>
-				
-				<tr>
-					<td>Input dataset</td>
-					<td>Star miRNA sequenes</td>
+					<td>annotation_AtRTD2.gtf</td>
 				</tr>
 				
 				</tbody>
@@ -534,44 +560,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.8+galaxy0</td>
 					<td>DESeq2</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7</td>
-					<td>MultiQC</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7</td>
-					<td>MultiQC</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7</td>
-					<td>MultiQC</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.8+galaxy0</td>
 					<td>DESeq2</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1</td>
-					<td>Filter FASTA</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>cat1</td>
-					<td>Concatenate datasets</td>
 					<td></td>
 				</tr>
 				
@@ -624,11 +620,18 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.14.1.2+galaxy1">toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.14.1.2+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=sort1">sort1</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/1.10.1+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/1.10.1+galaxy2</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/salmon/e3d32471da11">
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/salmon/f4d5237a84f6">
 						View in ToolShed
 					</a>
 					
@@ -636,11 +639,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.1">toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.10+galaxy0">toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.10+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/trim_galore/949f01671246">
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/trim_galore/b94789823aad">
 						View in ToolShed
 					</a>
 					
@@ -648,11 +651,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1">toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.3">toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.3</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/fastqc/e7b2202befea">
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/filter_by_fasta_ids/dff7df6fcab5">
 						View in ToolShed
 					</a>
 					
@@ -660,11 +663,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1">toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.8+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.8+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/filter_by_fasta_ids/3c623e81be77">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/deseq2/9a882d108833">
 						View in ToolShed
 					</a>
 					
@@ -672,11 +675,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/deseq2/6a3a025714d3">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/falco/959a14c1f2dd">
 						View in ToolShed
 					</a>
 					
@@ -684,11 +687,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7">toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy3">toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy3</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/multiqc/b2f1f75d49c4">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/multiqc/31c42a2c02d3">
 						View in ToolShed
 					</a>
 					
@@ -696,11 +699,23 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_mapper/rbc_mirdeep2_mapper/2.0.0">toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_mapper/rbc_mirdeep2_mapper/2.0.0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/rnateam/mirdeep2_mapper/a8d24f4b6d95">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/multiqc/5e33b465d8d5">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_mapper/rbc_mirdeep2_mapper/2.0.0.8.1">toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_mapper/rbc_mirdeep2_mapper/2.0.0.8.1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/rnateam/mirdeep2_mapper/dbbe92348c7a">
 						View in ToolShed
 					</a>
 					
@@ -754,6 +769,20 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>9</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/badb99b15b664e9a2c13d63c8c519d99fbac82c1">badb99b15</a></td>
+						<td>2025-07-16 13:58:37</td>
+						<td>fix linting</td>
+					</tr>
+					
+					<tr>
+						<td>8</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/82a601efc55e67c2d265023638b7c3c8d297eef1">82a601efc</a></td>
+						<td>2025-07-15 16:45:53</td>
+						<td>update the workflow and add link to history</td>
+					</tr>
 					
 					<tr>
 						<td>7</td>
@@ -885,7 +914,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/5d10c18d4c242d248cad53a0bd7ce8274a7494d6">5d10c18</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/33b70cd7b788e565f9ae3815e11bec1d1b284610">33b70cd</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
