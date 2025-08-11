@@ -264,7 +264,7 @@ This output contains class IDs, bounding box coordinates, confidence scores, and
 
 ---
 
-### 💡 Final Notes
+## 💡 Final Notes
 
 Galaxy simplifies running YOLO models in a user-friendly, reproducible way.
 
