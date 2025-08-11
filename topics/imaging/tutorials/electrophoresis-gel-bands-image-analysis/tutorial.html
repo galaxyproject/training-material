@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Quantification of electrophoresis gel bands using QuPath and Galaxy imaging tools / Quantification of electrophoresis gel bands using QuPath and Galaxy imaging tools / Imaging</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@7ef3e7d111a15d802995cac4bf1adfd87bda29a4",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/electrophoresis-gel-bands-image-analysis/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Quantification of electrophoresis gel bands using QuPath and Galaxy imaging tools">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-08-11 11:29:47 +0000">
+<meta name="DC.creator" content="Reyhaneh Tavakoli">
+<meta name="DC.creator" content="Diana Chiang Jurado"><meta name="description" content="Image analysis using Galaxy">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Imaging / Quantification of electrophoresis gel bands using QuPath and Galaxy imaging tools / Hands-on: Quantification of electrophoresis gel bands using QuPath and Galaxy imaging tools">
+        <meta property="og:description" content="Image analysis using Galaxy">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/imaging/tutorials/electrophoresis-gel-bands-image-analysis/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Quantification of electrophoresis gel bands using QuPath and Galaxy imaging tools",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-08-11 11:29:47 +0000",
+  "datePublished": "2025-08-11 11:29:47 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Imaging",
+    "description": "Image analysis using Galaxy",
+    "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+  },
+  "abstract": "Electrophoresis gel images are fundamental tools in molecular biology and biochemistry for separating DNA, RNA, or protein fragments by size or charge. Quantification of these bands allow for estimating product yield, comparing amplification efficiency, verifying PCR products, calculating molecular weights, and assessing enzyme activity or protein purity.",
+  "learningResourceType": "e-learning",
+  "name": "Quantification of electrophoresis gel bands using QuPath and Galaxy imaging tools",
+  "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/electrophoresis-gel-bands-image-analysis/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT1H",
+  "teaches": "- Learn how to select bands on an electrophoresis gel image\n- Generate ROI files in QuPath and process them in Galaxy\n- Quantify band intensity and extract tabular results",
+  "keywords": [
+    "Imaging",
+    "RNA",
+    "DNA",
+    "Protein",
+    "bioimaging"
+  ],
+  "description": "## Abstract\n\nElectrophoresis gel images are fundamental tools in molecular biology and biochemistry for separating DNA, RNA, or protein fragments by size or charge. Quantification of these bands allow for estimating product yield, comparing amplification efficiency, verifying PCR products, calculating molecular weights, and assessing enzyme activity or protein purity.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How can specific bands on an electrophoresis gel image be selected using QuPath?\n - How is a region of interest (ROI) GeoJSON file prepared?\n - How are bands labeled and quantified using Galaxy tools?\n - What outputs are generated during the analysis?\n\n\n## Learning Objectives\n\n- Learn how to select bands on an electrophoresis gel image\n- Generate ROI files in QuPath and process them in Galaxy\n- Quantify band intensity and extract tabular results\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html",
+      "name": "FAIR Bioimage Metadata",
+      "description": "Hands-on for 'FAIR Bioimage Metadata' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html",
+      "name": "REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data",
+      "description": "Hands-on for 'REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/imaging-introduction/tutorial.html",
+      "name": "Introduction to Image Analysis using Galaxy",
+      "description": "Hands-on for 'Introduction to Image Analysis using Galaxy' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/reytakop/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/reytakop/",
+      "name": "Reyhaneh Tavakoli",
+      "image": "https://avatars.githubusercontent.com/reytakop",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dianichj/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dianichj/",
+      "name": "Diana Chiang Jurado",
+      "image": "https://avatars.githubusercontent.com/dianichj",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/spoc/",
+          "name": "🖖🏾Single-cell & sPatial Omics Community of practice",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/community/sig/singlecell/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5857-1477",
+      "orcid": "https://orcid.org/0000-0002-5857-1477"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/",
+      "name": "Leonid Kostrykin",
+      "image": "https://avatars.githubusercontent.com/kostrykin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1323-3762",
+      "orcid": "https://orcid.org/0000-0003-1323-3762"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Imaging",
+      "description": "Image analysis using Galaxy",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3382",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3382",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3382"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/electrophoresis-gel-bands-image-analysis/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/scikit-image",
+      "name": "scikit-image"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy_image_analysis",
+      "name": "Galaxy Image Analysis"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/imaging" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Imaging
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/imaging/faqs/" title="Check our FAQs for the Imaging topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/electrophoresis-gel-bands-image-analysis/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/imaging/tutorials/electrophoresis-gel-bands-image-analysis/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-imaging">
+    <h1 data-toc-skip>Quantification of electrophoresis gel bands using QuPath and Galaxy imaging tools</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/reytakop/" class="contributor-badge contributor-reytakop"><img src="https://avatars.githubusercontent.com/reytakop?s=36" alt="Reyhaneh Tavakoli avatar" width="36" class="avatar" />
+    Reyhaneh Tavakoli</a><a href="/training-material/hall-of-fame/dianichj/" class="contributor-badge contributor-dianichj"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/dianichj?s=36" alt="Diana Chiang Jurado avatar" width="36" class="avatar" />
+    Diana Chiang Jurado</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/kostrykin/" class="contributor-badge contributor-badge-small contributor-kostrykin"><img src="https://avatars.githubusercontent.com/kostrykin?s=36" alt="Leonid Kostrykin avatar" width="36" class="avatar" /></a></td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can specific bands on an electrophoresis gel image be selected using QuPath?</p>
+</li>
+        
+        <li><p>How is a region of interest (ROI) GeoJSON file prepared?</p>
+</li>
+        
+        <li><p>How are bands labeled and quantified using Galaxy tools?</p>
+</li>
+        
+        <li><p>What outputs are generated during the analysis?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Learn how to select bands on an electrophoresis gel image</p>
+</li>
+        
+        <li><p>Generate ROI files in QuPath and process them in Galaxy</p>
+</li>
+        
+        <li><p>Quantify band intensity and extract tabular results</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: FAIR Bioimage Metadata</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/imaging/tutorials/imaging-introduction/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Introduction to Image Analysis using Galaxy</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/imaging/tutorials/electrophoresis-gel-bands-image-analysis/workflows/" title="Quantification of electrophoresis gel bands using QuPath and Galaxy imaging tools workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/imaging/tutorials/electrophoresis-gel-bands-image-analysis/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Aug 11, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 11, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Electrophoresis gel images are fundamental tools in molecular biology and biochemistry for separating DNA, RNA, or protein fragments by size or charge (<span class="citation"><a href="#Green2019">Green and Sambrook 2019</a></span>). Quantification of these bands allow for estimating product yield, comparing amplification efficiency, verifying PCR products, calculating molecular weights, and assessing enzyme activity or protein purity (<span class="citation"><a href="#Gallagher2017">Gallagher 2017</a></span>).</p>
+
+<p>Reliable measurement of band intensity provides quantitative insights into gene expression and other biochemical properties (<span class="citation"><a href="#Gassmann2009">Gassmann <i>et al.</i> 2009</a></span>). However, manual quantification can be labor-intensive and prone to user bias.</p>
+
+<p>Modern image analysis software suites such as <strong>QuPath</strong> (<span class="citation"><a href="#Bankhead2017">Bankhead <i>et al.</i> 2017</a></span>) provide interactive tools for defining <strong>regions of interest (ROIs)</strong> directly on gel images. These ROIs can be exported as <strong>GeoJSON</strong> files, which encode the spatial coordinates of the selected bands in a standardized, machine-readable format.</p>
+
+<p>Once the ROI file is generated, bioinformatics platforms like <strong>Galaxy</strong> (<span class="citation"><a href="#Galaxy2024">The Galaxy Community 2024</a></span>) enable automated processing of these coordinates, measurement of pixel intensities for each band, and generation of transparent, reproducible quantification results.</p>
+
+<p>Recent advances such as <strong>GelGenie</strong> (<span class="citation"><a href="#Aquilina2025">Aquilina <i>et al.</i> 2025</a></span>) further highlight the trend towards AI-powered, automated analysis pipelines for electrophoresis gels, reinforcing the need for accessible, reproducible workflows that integrate modern image processing tools.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#data-preparation" id="markdown-toc-data-preparation">Data preparation</a>    <ol>
+      <li><a href="#convert-the-image-format" id="markdown-toc-convert-the-image-format">Convert the image format</a></li>
+      <li><a href="#obtain-image-metadata" id="markdown-toc-obtain-image-metadata">Obtain image metadata</a></li>
+      <li><a href="#split-image-into-separate-channels" id="markdown-toc-split-image-into-separate-channels">Split image into separate channels</a></li>
+    </ol>
+  </li>
+  <li><a href="#annotate-and-process-regions-of-interest-rois" id="markdown-toc-annotate-and-process-regions-of-interest-rois">Annotate and process regions of interest (ROIs)</a>    <ol>
+      <li><a href="#prepare-the-roi-file-with-qupath" id="markdown-toc-prepare-the-roi-file-with-qupath">Prepare the ROI file with QuPath</a></li>
+      <li><a href="#extract-the-geojson-file" id="markdown-toc-extract-the-geojson-file">Extract the GeoJSON file</a></li>
+      <li><a href="#convert-rois-to-label-map" id="markdown-toc-convert-rois-to-label-map">Convert ROIs to label map</a></li>
+    </ol>
+  </li>
+  <li><a href="#extract-band-intensity-features" id="markdown-toc-extract-band-intensity-features">Extract band intensity features</a>    <ol>
+      <li><a href="#inspecting-results" id="markdown-toc-inspecting-results">Inspecting results</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="data-preparation">Data preparation</h1>
+
+<p>The example dataset can be downloaded from here <a href="https://github.com/galaxyproject/training-material/tree/main/topics/imaging/images/electrophoresis-gel-bands-image-analysis/Image.jpg">Electrophoresis gel dataset</a>.</p>
+
+<p><a href="../../images/electrophoresis-gel-bands-image-analysis/Image.jpg" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/Image.jpg" alt="Electrophoresis Gel. " width="1278" height="250" loading="lazy" /></a></p>
+
+<p>This image is from <span class="citation"><a href="#Ohgane2019">Ohgane and Yoshioka 2019</a></span>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-download-and-upload-the-image"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Download and upload the image</div>
+
+  <ol>
+    <li>Create a new history in Galaxy.</li>
+    <li>Download the test image using the link above.</li>
+    <li>
+      <p>Click the <strong><i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> Upload</strong> to add the image file into your galaxy history.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Libraries</strong> (left panel)</li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">Electrophoresis-Gel.jpg</code>.</li>
+  </ol>
+
+</blockquote>
+
+<p>Before we dive into the quantification steps let’s convert our JPG image file into the TIFF image format. This format is preferred for analysis and quantification as it preserves the image data and metadata.</p>
+
+<p><strong>Note:</strong> Skip this step if the image is already in TIFF format.</p>
+
+<h2 id="convert-the-image-format">Convert the image format</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-convert-jpg-to-tiff"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Convert JPG to TIFF</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_convert/graphicsmagick_image_convert/1.3.45+galaxy0" title="Convert image format tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image format</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.45+galaxy0)</span>
+      <ul>
+        <li><em>“Image to convert”</em>: <code class="language-plaintext highlighter-rouge">Electrophoresis-Gel.jpg</code></li>
+        <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">TIFF</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-why-tiff"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-tiff" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  Why TIFF? </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>TIFF files preserve full image quality, avoid compression artifacts, and are compatible with downstream tools that require uncompressed data.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="obtain-image-metadata">Obtain image metadata</h2>
+
+<p>To convert coordinates into a label map, we first need the image dimensions (width and height). In this step, we’ll retrieve that information.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-identify-image-dimensions"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Identify image dimensions</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1" title="Show image info tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Show image info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.7.1+galaxy1)</span>
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Image Input”</em>: Select your uploaded <code class="language-plaintext highlighter-rouge">Electrophoresis-Gel.tiff</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The output of the tool can be visualize by clicking the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon (<strong>View</strong>). See below:</p>
+
+<div style="text-align: center;">
+  <pre style="display: inline-block; text-align: left; background: #f4f4f4; padding: 1em; border-radius: 8px; font-size: 14px; line-height: 1.4;">
+Checking file format [Tagged Image File Format]
+Initializing reader
+TiffDelegateReader initializing /data/dnb11/galaxy_db/files/0/6/6/dataset_06685fae-ac3e-48b9-a460-d0ad39ea07a6.dat
+Reading IFDs
+Populating metadata
+Checking comment style
+Populating OME metadata
+Initialization took 0.569s
+
+Reading core metadata
+filename = /data/dnb11/galaxy_db/files/0/6/6/dataset_06685fae-ac3e-48b9-a460-d0ad39ea07a6.dat
+Series count = 1
+Series #0 :
+	Image count = 1
+	RGB = true (3) 
+	Interleaved = false
+	Indexed = false (false color)
+	Width = 1278
+	Height = 250
+	SizeZ = 1
+	SizeT = 1
+	SizeC = 3 (effectively 1)
+	Thumbnail size = 128 x 25
+	Endianness = intel (little)
+	Dimension order = XYCZT (certain)
+	Pixel type = uint8
+	Valid bits per pixel = 8
+	Metadata complete = true
+	Thumbnail series = false
+	-----
+	Plane #0 &lt;=&gt; Z 0, C 0, T 0
+
+Reading global metadata
+BitsPerSample: 8
+Compression: JPEG
+Document Name: temp.tiff
+ImageLength: 250
+ImageWidth: 1278
+MetaDataPhotometricInterpretation: RGB
+MetaMorph: no
+NumberOfChannels: 3
+PageNumber: 0 1
+PhotometricInterpretation: YCbCr
+PlanarConfiguration: Chunky
+ReferenceBlackWhite: 0
+SampleFormat: unsigned integer
+SamplesPerPixel: 3
+Software: GraphicsMagick 1.3.45 2024-08-27 Q8 http://www.GraphicsMagick.org/
+
+Reading metadata
+  </pre>
+</div>
+
+<h2 id="split-image-into-separate-channels">Split image into separate channels</h2>
+
+<p>TIFF images can store multiple channels—such as different colors or fluorescence signals—in a single file. In this step, we will separate these channels by splitting the image along the channel axis (C-axis). This results in a list of single-channel images, which are required for the next processing steps.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-split-image-into-single-channels"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Split image into single channels</div>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.2.3+galaxy1" title="Split image along axes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split image along axes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.3+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Image to split”</em>: Select your uploaded <code class="language-plaintext highlighter-rouge">Electrophoresis-Gel.tiff</code> file</li>
+        <li><em>“Axis to split along”</em>: Select <code class="language-plaintext highlighter-rouge">C-axis (split the channels of an image or image sequence)</code> from the dropdown menu</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-use-a-single-channel-image-for-downstream-compatibility-and-annotation"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Use a single-channel image for downstream compatibility and annotation</div>
+  <p>While QuPath can handle multi-channel images, our other tools cannot. Therefore, after splitting the image, we will use the <span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract Dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract Dataset</strong></span> tool to select one of the single-channel images. This image should represent the intensity channel we want to measure, and will be used for QuPath regions of interest (ROI) annotation.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-the-tiff-file-from-collection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Extract the TIFF file from collection</div>
+
+  <ol>
+    <li><span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract Dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract Dataset</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Collection”</em>: Select the collection output from the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.2.3+galaxy1" title="Split image along axes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split image along axes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.3+galaxy1)</span> tool</li>
+        <li><em>“Which part of the Collection?”</em>: Choose the TIFF file that represent the channel of your interest. In our dataset example, we extract 1.tiff</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="annotate-and-process-regions-of-interest-rois">Annotate and process regions of interest (ROIs)</h1>
+
+<p>To identify and quantify specific regions in the image, such as electrophoresis bands, we need to define them manually. This is done using the interactive tool <strong>QuPath</strong>, which allows you to draw rectangles over each band of interest and assign them a unique label to annotate the ROIs. The result is a <strong>GeoJSON</strong> file containing the coordinates of these regions.</p>
+
+<p>This GeoJSON file can then be processed in Galaxy to generate a label map for image quantification.</p>
+
+<h2 id="prepare-the-roi-file-with-qupath">Prepare the ROI file with QuPath</h2>
+
+<p>In this step, you will open the image in QuPath, annotate the ROIs using rectangles, and export the annotations as a GeoJSON file. Each band should be marked with a rectangle and given a unique name (e.g., “1”, “2”, etc.).</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-select-rois-and-export-geojson-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Select ROIs and export GeoJSON file</div>
+
+  <ol>
+    <li>Open the image in <strong>QuPath</strong> using our interactive tool <span class="tool" data-tool="interactive_tool_qupath" title="QuPath tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>QuPath</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input file in TIFF format”</em>: Select the <code class="language-plaintext highlighter-rouge">Electrophoresis-Gel.tiff</code> dataset after channel splitting.</li>
+      </ul>
+
+      <p>When the image opens in QuPath, set the image type to <code class="language-plaintext highlighter-rouge">Other</code>:<br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-1.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-1.png" alt="Select image type. " width="1469" height="906" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Select the <strong>Rectangle tool</strong> from the toolbar:<br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-2.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-2.png" alt="Rectangle tool selection. " width="1469" height="906" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Draw a rectangle around the first band of interest:<br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-3.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-3.png" alt="First band selection. " width="1469" height="906" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Open the <strong>Annotations</strong> panel:<br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-4.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-4.png" alt="Annotations panel. " width="1469" height="906" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Double-click the rectangle and set its type to <code class="language-plaintext highlighter-rouge">Other</code>:<br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-5.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-5.png" alt="Set annotation type. " width="1469" height="906" loading="lazy" /></a></p>
+    </li>
+    <li>Duplicate the annotation to create additional rectangles:
+      <ul>
+        <li>Go to <strong>Object → Annotations</strong></li>
+        <li>Select <strong>Duplicate selected annotations</strong><br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-6.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-6.png" alt="Duplicate annotation. " width="1469" height="906" loading="lazy" /></a></li>
+      </ul>
+    </li>
+    <li>
+      <p>Verify the new rectangle appears in the Annotations panel:<br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-7.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-7.png" alt="Second annotation. " width="1469" height="906" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Select the new rectangle and reposition it over the next band:<br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-8.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-8.png" alt="Select second annotation. " width="1469" height="906" loading="lazy" /></a><br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-9.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-9.png" alt="Position second annotation. " width="1469" height="906" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Repeat steps 6–8 for all bands you want to annotate.</p>
+    </li>
+    <li>Set a unique label for each annotation:
+      <ul>
+        <li>Right-click each rectangle, choose <strong>Set parameters</strong>, and enter a label (e.g., <code class="language-plaintext highlighter-rouge">"1"</code>, <code class="language-plaintext highlighter-rouge">"2"</code>)<br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-10.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-10.png" alt="Name first annotation. " width="1469" height="906" loading="lazy" /></a>
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-11.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-11.png" alt="Name first annotation. " width="1469" height="906" loading="lazy" /></a>
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-12.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-12.png" alt="Name first annotation. " width="1469" height="906" loading="lazy" /></a>
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-13.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-13.png" alt="Name second annotation. " width="1469" height="906" loading="lazy" /></a></li>
+      </ul>
+    </li>
+    <li>
+      <p>Confirm that all rectangles are labeled:<br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-14.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-14.png" alt="Labeled annotations. " width="1469" height="906" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Select all labeled annotations:<br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-15.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-15.png" alt="Select all annotations. " width="1469" height="906" loading="lazy" /></a></p>
+    </li>
+    <li>Export the annotations as a GeoJSON file:
+      <ul>
+        <li>Click <strong>File → Export objects as GeoJSON</strong></li>
+        <li>Choose <strong>Export as FeatureCollection</strong></li>
+        <li>Click <strong>Save</strong><br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-16.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-16.png" alt="Export process. " width="1469" height="906" loading="lazy" /></a><br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-17.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-17.png" alt="Export process. " width="1469" height="906" loading="lazy" /></a><br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-18.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-18.png" alt="Export process. " width="1469" height="906" loading="lazy" /></a></li>
+      </ul>
+    </li>
+    <li>Exit QuPath:
+      <ul>
+        <li>Click <strong>File → Quit</strong></li>
+        <li>Save changes if prompted<br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-19.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-19.png" alt="Quit QuPath. " width="1469" height="906" loading="lazy" /></a><br />
+<a href="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-20.png" rel="noopener noreferrer"><img src="../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-20.png" alt="Quit QuPath. " width="1469" height="906" loading="lazy" /></a></li>
+      </ul>
+    </li>
+    <li>The exported file will appear in your Galaxy history as part of a collection within 2–3 minutes.</li>
+  </ol>
+
+</blockquote>
+
+<h2 id="extract-the-geojson-file">Extract the GeoJSON file</h2>
+
+<p>QuPath exports the annotations as a Galaxy collection. In this step, we extract the GeoJSON file to use it in the next stage of the analysis.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-the-geojson-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Extract the GeoJSON file</div>
+
+  <ol>
+    <li><span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract Dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract Dataset</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Collection”</em>: Select the <code class="language-plaintext highlighter-rouge">QuPath outputs</code> collection</li>
+        <li><em>“Which part of the Collection?”</em>: Choose the GeoJSON file</li>
+      </ul>
+    </li>
+    <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>Rename</strong> the extracted file to <code class="language-plaintext highlighter-rouge">Bands.geojson</code>.</li>
+  </ol>
+
+</blockquote>
+
+<h2 id="convert-rois-to-label-map">Convert ROIs to label map</h2>
+
+<p>Now that we have the coordinate information in GeoJSON format, we can convert it into a label map. This label map is an image where each ROI is assigned a unique label, allowing it to be quantified or visualized in downstream steps. In this step, you will also need the information obtained earlier with the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1" title="Show image info tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Show image info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.7.1+galaxy1)</span> tool about the width and height of the image.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-convert-coordinates-to-label-map"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Convert coordinates to label map</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/points2labelimage/ip_points_to_label/0.4.1+galaxy1" title="Convert coordinates to label map tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert coordinates to label map</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4.1+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“List of points in tabular or GeoJSON format”</em>: Select your <code class="language-plaintext highlighter-rouge">Bands.geojson</code> file</li>
+        <li><em>“Width of output image”</em>: <code class="language-plaintext highlighter-rouge">1278</code> (Use the width from the <strong>Show image info</strong> result)</li>
+        <li><em>“Height of output image”</em>: <code class="language-plaintext highlighter-rouge">250</code> (Use the height from the <strong>Show image info</strong> result)</li>
+        <li><em>“Tabular list of points has header?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="extract-band-intensity-features">Extract band intensity features</h1>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-measure-band-intensity"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Measure band intensity</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0" title="Extract image features tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract image features</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.18.1+galaxy0)</span>
+      <ul>
+        <li><em>“Label map”</em>: Output from previous step</li>
+        <li><em>“Use the intensity image”</em>: <code class="language-plaintext highlighter-rouge">Use intensity image</code></li>
+        <li><em>“Intensity image”</em>: <code class="language-plaintext highlighter-rouge">Electrophoresis-Gel.tiff</code></li>
+        <li><em>“Features to compute”</em>:
+          <ul>
+            <li>Select: “Label from label map”</li>
+            <li>Select: “Mean Intensity”</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="inspecting-results">Inspecting results</h2>
+
+<p>The table result can be inspected by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon (<strong>View</strong>) of the tool output and used for further analysis.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we explored a complete workflow for quantifying electrophoresis gel bands by:</p>
+
+<ul>
+  <li>Uploading and converting the gel image into a suitable format</li>
+  <li>Interactively selecting bands as regions of interest (ROIs) using QuPath</li>
+  <li>Exporting ROI coordinates and converting them into a label map in Galaxy</li>
+  <li>Measuring the intensity of each band and extracting the results in tabular format</li>
+</ul>
+
+<p>By combining <strong>QuPath</strong> for annotation and <strong>Galaxy</strong> for analysis, this approach offers a transparent, reproducible, and user-friendly method for gel band quantification, suitable for a variety of molecular biology applications.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>ROIs can be selected in QuPath and processed with Galaxy tools</p>
+</li>
+                        
+                        <li><p>Gel bands are quantified automatically and intensity values can be visualized</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/imaging/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/imaging#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Gassmann2009">Gassmann, M., B. Grenacher, B. Rohde, and J. Vogel, 2009 <b>Quantifying Western blots: pitfalls of densitometry</b>. Electrophoresis 30: 1845–1855. <a href="https://doi.org/10.1002/elps.200800720">10.1002/elps.200800720</a></li>
+<li id="Bankhead2017">Bankhead, P., M. B. Loughrey, J. A. Fernández, Y. Dombrowski, D. G. McArt <i>et al.</i>, 2017 <b>QuPath: Open source software for digital pathology image analysis</b>. Scientific Reports 7: 16878. <a href="https://doi.org/10.1038/s41598-017-17204-5">10.1038/s41598-017-17204-5</a></li>
+<li id="Gallagher2017">Gallagher, S. R., 2017 <b>Quantitation of DNA and RNA with Absorption and Fluorescence Spectroscopy</b>. Current Protocols in Immunology 116: A.3L.1–A.3L.14. <a href="https://doi.org/10.1002/cpim.20">10.1002/cpim.20</a></li>
+<li id="Green2019">Green, M. R., and J. Sambrook, 2019 <b>Analysis of DNA by Agarose Gel Electrophoresis</b>. Cold Spring Harbor Protocols 2019: <a href="https://doi.org/10.1101/pdb.top100388">10.1101/pdb.top100388</a></li>
+<li id="Ohgane2019">Ohgane, K., and H. Yoshioka, 2019 <b>Quantification of Gel Bands by an Image J Macro, Band/Peak Quantification Tool v1</b>. <a href="https://doi.org/10.17504/protocols.io.7vghn3w">10.17504/protocols.io.7vghn3w</a></li>
+<li id="Galaxy2024">The Galaxy Community, 2024 <b>The Galaxy platform for accessible, reproducible, and collaborative data analyses: 2024 update</b>. Nucleic Acids Research 52: W83–W94. <a href="https://doi.org/10.1093/nar/gkae410">10.1093/nar/gkae410</a></li>
+<li id="Aquilina2025">Aquilina, M., N. J. W. Wu, K. C. Kwan, and et al., 2025 <b>GelGenie: an AI-powered framework for gel electrophoresis image analysis</b>. Nature Communications 16: 4087. <a href="https://doi.org/10.1038/s41467-025-59189-0">10.1038/s41467-025-59189-0</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/electrophoresis-gel-bands-image-analysis"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/electrophoresis-gel-bands-image-analysis">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Reyhaneh Tavakoli, Diana Chiang Jurado,  <b>Quantification of electrophoresis gel bands using QuPath and Galaxy imaging tools (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/electrophoresis-gel-bands-image-analysis/tutorial.html">https://training.galaxyproject.org/training-material/topics/imaging/tutorials/electrophoresis-gel-bands-image-analysis/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{imaging-electrophoresis-gel-bands-image-analysis,
+author = "Reyhaneh Tavakoli and Diana Chiang Jurado",
+	title = "Quantification of electrophoresis gel bands using QuPath and Galaxy imaging tools (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/imaging/tutorials/electrophoresis-gel-bands-image-analysis/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/electrophoresis-gel-bands-image-analysis/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: graphicsmagick_image_convert
+  owner: bgruening
+  revisions: 8f46605c84ec
+  tool_panel_section_label: Convert Formats
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: 2d_feature_extraction
+  owner: imgteam
+  revisions: 5bc8cdc17fd0
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: image_info
+  owner: imgteam
+  revisions: f8b4eada923c
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: points2labelimage
+  owner: imgteam
+  revisions: 4a49f74a3c14
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: split_image
+  owner: imgteam
+  revisions: 73d7a4ffc03d
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/electrophoresis-gel-bands-image-analysis/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/imaging/tutorials/electrophoresis-gel-bands-image-analysis/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/7ef3e7d111a15d802995cac4bf1adfd87bda29a4">7ef3e7d</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
