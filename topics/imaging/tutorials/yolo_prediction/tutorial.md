@@ -215,7 +215,7 @@ These images are useful for visually checking whether detections are correct or 
 
 Since the marine models only support detection, we’ll now demonstrate segmentation using a pretrained YOLOv8 model from Ultralytics.
 
-### 📦 Model & Input Image
+## 📦 Model & Input Image
 
 The YOLOv8n-seg model is a lightweight instance segmentation model trained on the COCO dataset (Common Objects in Context), which contains 80 everyday object classes such as person, bus, bicycle, car, dog, and more. These categories cover common scenes, making the model suitable for general-purpose detection and segmentation tasks. It’s ideal for quick testing, tutorials, or deployment on resource-limited systems.
 
