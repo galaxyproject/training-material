@@ -274,7 +274,7 @@ Galaxy simplifies running YOLO models in a user-friendly, reproducible way.
 
 ---
 
-### ✅ Next Steps
+## ✅ Next Steps
 
 Want to go further?
 
