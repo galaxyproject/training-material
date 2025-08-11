@@ -251,7 +251,7 @@ This output contains class IDs, bounding box coordinates, confidence scores, and
 
 ---
 
-### 🔍 Compare Detection vs Segmentation
+## 🔍 Compare Detection vs Segmentation
 
 | Feature           | Detection                | Segmentation                     |
 |------------------|--------------------------|----------------------------------|
