@@ -1,0 +1,608 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This workflow creates taxonomic summary tables out of the amplicon pipeline results. ",
+    "comments": [
+        {
+            "color": "green",
+            "data": {
+                "text": "taxonomic summary table"
+            },
+            "id": 0,
+            "position": [
+                272.3406915224165,
+                120.13702205366614
+            ],
+            "size": [
+                909,
+                241
+            ],
+            "type": "markdown"
+        },
+        {
+            "color": "turquoise",
+            "data": {
+                "text": "phylum summary table"
+            },
+            "id": 1,
+            "position": [
+                270.9406915224165,
+                380.7370220536662
+            ],
+            "size": [
+                1353,
+                243
+            ],
+            "type": "markdown"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0009-0000-2501-8053",
+            "name": "Rand Zoabi",
+            "url": "https://github.com/RZ9082"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "MGnify amplicon summary tables",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "OTU tables.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "OTU tables.",
+                    "name": "OTU tables"
+                }
+            ],
+            "label": "OTU tables",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 337.4772484997172
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "3706d653-ad9f-44cc-b63b-59fff0d0cd72",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "specifies the name of taxonomic summary file.",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "specifies the name of taxonomic summary file.",
+                    "name": "Taxonomic abundance summary table name"
+                }
+            ],
+            "label": "Taxonomic abundance summary table name",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 968.63330078125,
+                "top": 0
+            },
+            "tool_id": null,
+            "tool_state": "{\"validators\": [], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "e95e12fa-1215-4b6e-a1e3-f0a8edf04d26",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "specifies the name of taxonomic summary file, for phylum level.",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "specifies the name of taxonomic summary file, for phylum level.",
+                    "name": "Phylum level taxonomic abundance summary table name"
+                }
+            ],
+            "label": "Phylum level taxonomic abundance summary table name",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 1415.5626469798628,
+                "top": 643.2277124832184
+            },
+            "tool_id": null,
+            "tool_state": "{\"validators\": [], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "10a29415-840e-413b-aebe-ddfe6defd497",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "tables_0|table": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Query Tabular",
+                    "name": "add_to_database"
+                }
+            ],
+            "label": null,
+            "name": "Query Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 298.42962390165496,
+                "top": 166.45843163713073
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2",
+            "tool_shed_repository": {
+                "changeset_revision": "cf4397560712",
+                "name": "query_tabular",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"add_to_database\": {\"withdb\": {\"__class__\": \"RuntimeValue\"}}, \"addqueries\": {\"queries\": []}, \"modify_database\": {\"sql_stmts\": []}, \"query_result\": {\"header\": \"no\", \"__current_case__\": 1}, \"save_db\": false, \"sqlquery\": \"SELECT \\n    c1,\\n    c4,\\n    c3\\nFROM \\n    t1;\\n\", \"tables\": [{\"__index__\": 0, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": [{\"__index__\": 0, \"filter\": {\"filter_type\": \"comment\", \"__current_case__\": 1, \"comment_char\": \"35\"}}, {\"__index__\": 1, \"filter\": {\"filter_type\": \"prepend_dataset_name\", \"__current_case__\": 4}}]}, \"tbl_opts\": {\"table_name\": \"\", \"column_names_from_first_line\": false, \"col_names\": \"\", \"load_named_columns\": false, \"pkey_autoincr\": \"\", \"indexes\": []}}], \"workdb\": \"workdb.sqlite\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.3.2",
+            "type": "tool",
+            "uuid": "05953dd3-c89b-435b-acc1-1d491ac900fb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "infile": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 292.7278335508603,
+                "top": 426.34269221571736
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutfile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "6073bb457ec0",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"code\": \"NR > 2 { \\n        split($3, taxa, \\\";\\\");\\n        merged = \\\"\\\";\\n        levels = 3; # We need sk__, k__, and p__ levels\\n        for (i = 1; i <= levels; i++) {\\n            if (i <= length(taxa) && taxa[i] ~ /__/) {\\n                split(taxa[i], parts, \\\"__\\\");\\n                if (parts[2] != \\\"\\\") {\\n                    value = parts[2];\\n                } else {\\n                    value = \\\"unassigned\\\";\\n                }\\n            } else {\\n                value = \\\"unassigned\\\";\\n            }\\n            merged = merged (merged ? \\\";\\\" : \\\"\\\") value;\\n        }\\n        print merged \\\"\\\\t\\\" $2;\\n    }\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.5+galaxy0",
+            "type": "tool",
+            "uuid": "fd77d2ac-0e68-40f9-9d5d-38a6bd348b98",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "infile": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 523.9070991902965,
+                "top": 167.47348284368692
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutfile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "6073bb457ec0",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"code\": \"NR==1 {\\n    OFS=\\\"\\\\t\\\";\\n    print \\\"#SampleID\\\", $1;\\n}\\nNR>0 {\\n    print $2, $3;\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.5+galaxy0",
+            "type": "tool",
+            "uuid": "bd938e1d-1667-4239-bf59-c93429c622e7",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "Grouping1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Group",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 513.5768930139466,
+                "top": 427.71442550430794
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Grouping1",
+            "tool_state": "{\"groupcol\": \"1\", \"ignorecase\": false, \"ignorelines\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"operations\": [{\"__index__\": 0, \"optype\": \"sum\", \"opcol\": \"2\", \"opround\": \"no\", \"opdefault\": null}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4",
+            "type": "tool",
+            "uuid": "2b58b3eb-41cb-4f29-b94c-5c60a948f0cd",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_tabular": {
+                    "id": 5,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Column join",
+            "outputs": [
+                {
+                    "name": "tabular_output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 743.2357210275393,
+                "top": 166.08754960449474
+            },
+            "post_job_actions": {
+                "HideDatasetActiontabular_output": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "tabular_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "3ddd99c7efee",
+                "name": "collection_column_join",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fill_char\": \"0\", \"has_header\": \"1\", \"identifier_column\": \"1\", \"include_outputs\": null, \"input_tabular\": {\"__class__\": \"ConnectedValue\"}, \"old_col_in_header\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.3",
+            "type": "tool",
+            "uuid": "2b4bc287-4520-4a72-a6cc-8b8be8898cce",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 738.5411523428047,
+                "top": 427.71442550430794
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1",
+            "tool_shed_repository": {
+                "changeset_revision": "90f657745fea",
+                "name": "filter_tabular",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"comment_char\": true, \"input\": {\"__class__\": \"ConnectedValue\"}, \"linefilters\": [{\"__index__\": 0, \"filter\": {\"filter_type\": \"prepend_dataset_name\", \"__current_case__\": 4}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.3.1",
+            "type": "tool",
+            "uuid": "29d88b8e-e503-4be9-a8a2-3808953079eb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "infile": {
+                    "id": 7,
+                    "output_name": "tabular_output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 966.0499877929688,
+                "top": 166.12169075483803
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "${Taxonomic abundance summary table name}"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "6073bb457ec0",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"code\": \"BEGIN {\\n  FS=OFS=\\\"\\\\t\\\"\\n}\\nNR == 1 {\\n  # Print the first header as it is\\n  printf \\\"%s\\\", $1\\n  # Adjust the remaining original headers to only include the part before the first underscore\\n  for (i = 2; i <= NF; i++) {\\n    split($i, header_parts, \\\"_\\\")\\n    printf \\\"\\\\t%s\\\", header_parts[1]\\n  }\\n  printf \\\"\\\\n\\\"\\n}\\nNR > 1 {\\n  # Print the rest of the lines as they are\\n  for (i = 1; i <= NF; i++) {\\n    printf \\\"%s%s\\\", $i, (i < NF ? OFS : ORS)\\n  }\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.5+galaxy0",
+            "type": "tool",
+            "uuid": "973950c9-68c2-406c-85df-4a9757427bea",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Taxonomic abundance summary table",
+                    "output_name": "outfile",
+                    "uuid": "3a506fef-a399-494c-98da-eef7f481c495"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "infile": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 959.3902118058909,
+                "top": 426.34269221571736
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutfile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "6073bb457ec0",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"code\": \"BEGIN {\\n  FS = OFS = \\\"\\\\t\\\"\\n}\\nNR == 1 {\\n  print \\\"taxa\\\", $1\\n}\\nNR > 0 {\\n  print $2, $3\\n}\\n\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.5+galaxy0",
+            "type": "tool",
+            "uuid": "f1bee2b5-fd99-433a-93be-17dc1dda05d5",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input_tabular": {
+                    "id": 10,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Column join",
+            "outputs": [
+                {
+                    "name": "tabular_output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1180.2392712689773,
+                "top": 424.9709589271268
+            },
+            "post_job_actions": {
+                "HideDatasetActiontabular_output": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "tabular_output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "3ddd99c7efee",
+                "name": "collection_column_join",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fill_char\": \"0\", \"has_header\": \"1\", \"identifier_column\": \"1\", \"include_outputs\": null, \"input_tabular\": {\"__class__\": \"ConnectedValue\"}, \"old_col_in_header\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.3",
+            "type": "tool",
+            "uuid": "3f4e3fda-b618-454b-8ca1-611f8ee4fe85",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy0",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "infile": {
+                    "id": 11,
+                    "output_name": "tabular_output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1407.949951171875,
+                "top": 423.5999755859375
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "${Phylum level taxonomic abundance summary table name}"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "6073bb457ec0",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"code\": \"BEGIN {\\n  FS=OFS=\\\"\\\\t\\\"\\n}\\nNR == 1 {\\n  # Print the renamed headers for the new columns\\n  printf \\\"superkingdom\\\\tkingdom\\\\tphylum\\\"\\n  # Adjust the remaining original headers to only include the part before the first underscore\\n  for (i = 2; i <= NF; i++) {\\n    split($i, header_parts, \\\"_\\\")\\n    printf \\\"\\\\t%s\\\", header_parts[1]\\n  }\\n  printf \\\"\\\\n\\\"\\n}\\nNR > 1 {\\n  # Split the first column by ';' into three parts\\n  split($1, taxa_parts, \\\";\\\")\\n  superkingdom = (taxa_parts[1] != \\\"\\\" ? taxa_parts[1] : \\\"unassigned\\\")\\n  kingdom = (length(taxa_parts[2]) ? taxa_parts[2] : \\\"unassigned\\\")\\n  phylum = (length(taxa_parts[3]) ? taxa_parts[3] : \\\"unassigned\\\")\\n  printf \\\"%s\\\\t%s\\\\t%s\\\", superkingdom, kingdom, phylum\\n  # Process the remaining columns\\n  for (i = 2; i <= NF; i++) {\\n    if ($i != \\\"\\\") {\\n      split($i, part, \\\"_\\\")\\n      printf \\\"\\\\t%s\\\", part[1]\\n    } else {\\n      printf \\\"\\\\tunassigned\\\"\\n    }\\n  }\\n  printf \\\"\\\\n\\\"\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.5+galaxy0",
+            "type": "tool",
+            "uuid": "a8d3c07d-d6c3-40d1-a878-b00de152826e",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "phylum level taxonomic abundance summary table",
+                    "output_name": "outfile",
+                    "uuid": "59063507-c356-409b-b087-06fc1e55f7aa"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "MGnify_Amplicon",
+        "amplicon",
+        "metagenomics",
+        "name:microgalaxy"
+    ],
+    "uuid": "39a8331e-881d-4ef3-9035-4677efb20d25",
+    "version": 2
+}

@@ -275,9 +275,9 @@ The compact MetaNovo-generated database (~1.9K sequences) will be merged with Hu
 >    - *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
 >        - In *"Input FASTA File(s)"*:
 >            - {% icon param-repeat %} *"Insert Input FASTA File(s)"*
->                - {% icon param-file %} *"FASTA File"*: `MetaNovo Compact Database` (output of **MetaNovo** {% icon tool %})
 >                - {% icon param-file %} *"FASTA File"*: `Protein Database Human SwissProt` (output of **Protein Database Downloader** {% icon tool %})
 >                - {% icon param-file %} *"FASTA File"*: `Protein Database Contaminants (cRAP)` (output of **Protein Database Downloader** {% icon tool %})
+>                - {% icon param-file %} *"FASTA File"*: `MetaNovo Compact Database` (output of **MetaNovo** {% icon tool %})
 >
 >
 {: .hands_on}

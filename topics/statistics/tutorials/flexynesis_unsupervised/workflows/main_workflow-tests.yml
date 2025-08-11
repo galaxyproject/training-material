@@ -1,0 +1,122 @@
+- doc: Test outline for Final---Unsupervised-Analysis-of-Bone-Marrow-Cells
+  job:
+    train clinincal data:
+      class: File
+      location: https://zenodo.org/records/16287482/files/train-clin_BMscRNAseq.tabular
+      filetype: tabular
+    test clinincal data:
+      class: File
+      location: https://zenodo.org/records/16287482/files/test-clin_BMscRNAseq.tabular
+      filetype: tabular
+    train omics 1:
+      class: File
+      location: https://zenodo.org/records/16287482/files/train-RNA_BMscRNAseq.tabular
+      filetype: tabular
+    test omics 1:
+      class: File
+      location: https://zenodo.org/records/16287482/files/test-RNA_BMscRNAseq.tabular
+      filetype: tabular
+    train omics 2:
+      class: File
+      location: https://zenodo.org/records/16287482/files/train-ADT_BMscRNAseq.tabular
+      filetype: tabular
+    test omics 2:
+      class: File
+      location: https://zenodo.org/records/16287482/files/test-ADT_BMscRNAseq.tabular
+      filetype: tabular
+  outputs:
+    louvain clustering:
+      asserts:
+        - that: "has_text_matching"
+          expression: "louvain_cluster"
+        - that: "has_n_lines"
+          n: "1001"
+    k-means clustering:
+      asserts:
+        - that: "has_text_matching"
+          expression: "louvain_cluster\toptimal_kmeans_cluster"
+        - that: "has_n_lines"
+          n: "1001"
+    amir_ari true vs louvain:
+      asserts:
+        - that: "has_text_matching"
+          expression: "AMI"
+        - that: "has_n_lines"
+          n: "2"
+    amir_ari true vs k-means:
+      asserts:
+        - that: "has_text_matching"
+          expression: "AMI"
+        - that: "has_n_lines"
+          n: "2"
+    umap - true_value:
+      element_tests:
+        embeddings_umap_celltype_l2:
+          asserts:
+            - that: "has_image_center_of_mass"
+              center_of_mass: "970,730"
+              eps: "30"
+            - that: "has_image_channels"
+              channels: "3"
+            - that: "has_image_height"
+              height: "1460"
+              delta: "20"
+            - that: "has_image_width"
+              width: "1940"
+              delta: "20"
+    concordance plot:
+      element_tests:
+        labels_concordance:
+          asserts:
+            - that: "has_image_center_of_mass"
+              center_of_mass: "1470,1300"
+              eps: "60"
+            - that: "has_image_channels"
+              channels: "3"
+            - that: "has_image_height"
+              height: "2550"
+              delta: "50"
+            - that: "has_image_width"
+              width: "3050"
+              delta: "50"
+    umap - louvain:
+      element_tests:
+        embeddings_umap_louvain_cluster:
+          asserts:
+            - that: "has_image_center_of_mass"
+              center_of_mass: "970,730"
+              eps: "30"
+            - that: "has_image_channels"
+              channels: "3"
+            - that: "has_image_height"
+              height: "1460"
+              delta: "20"
+            - that: "has_image_width"
+              width: "1940"
+              delta: "20"
+    flexynesis output:
+      element_tests:
+        job.embeddings_test:
+          asserts:
+            - that: "has_text_matching"
+              expression: "ID\tE0\tE1"
+            - that: "has_text_matching"
+              expression: "b_CTCTAATGTTTAGGAA-1"
+        job.embeddings_train:
+          asserts:
+            - that: "has_text_matching"
+              expression: "ID\tE0\tE1"
+            - that: "has_text_matching"
+              expression: "b_TCGTACCGTCTTGTCC-1"
+        job.feature_logs.ADT:
+          asserts:
+            - that: "has_text_matching"
+              expression: "feature\tna_percent\tvariance\tselected\tlaplacian_score"
+            - that: "has_text_matching"
+              expression: "CD11a"
+        job.feature_logs.RNA:
+          asserts:
+            - that: "has_text_matching"
+              expression: "feature\tna_percent\tvariance\tselected_cleanup\tlaplacian_score\tselected_laplacian"
+            - that: "has_text_matching"
+              expression: "A1BG"

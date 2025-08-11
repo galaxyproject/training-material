@@ -1219,7 +1219,7 @@ module Gtn
     end
 
     ##
-    # GTN:015, GTN:016, GTN:025, GTN:026, others.
+    # GTN:015, GTN:016, GTN:025, GTN:026, GTN:027 others.
     # These error messages indicate something is amiss with your workflow. Please consult the error message to correct it.
     def self.fix_ga_wf(contents)
       results = []
@@ -1229,7 +1229,8 @@ module Gtn
 
         results.push(ReviewDogEmitter.file_error(
                        path: @path, message: "This workflow is missing required tags. Please add `\"tags\": [\"#{topic}\"]`",
-                       code: 'GTN:015'
+                       code: 'GTN:015',
+                       fn: __method__.to_s,
                      ))
       end
 
@@ -1237,7 +1238,8 @@ module Gtn
         results.push(ReviewDogEmitter.file_error(
                        path: @path,
                        message: 'This workflow is missing an annotation. Please add `"annotation": "title of tutorial"`',
-                       code: 'GTN:016'
+                       code: 'GTN:016',
+                       fn: __method__.to_s,
                      ))
       end
 
@@ -1246,7 +1248,8 @@ module Gtn
                        path: @path,
                        message: 'This workflow is missing a license. Please select a valid OSI license. ' \
                                 'You can correct this in the Galaxy workflow editor.',
-                       code: 'GTN:026'
+                       code: 'GTN:026',
+                       fn: __method__.to_s,
                      ))
       end
 
@@ -1263,7 +1266,8 @@ module Gtn
               match_end: 0,
               replacement: nil,
               message: "A step in your workflow (#{step_id}) uses an invalid tool ID (#{id}) or a tool ID from the testtoolshed. These are not permitted in GTN tutorials. If this is in error, you can add it to the top of _plugins/utils.rb",
-              code: 'GTN:017'
+              code: 'GTN:017',
+              fn: __method__.to_s,
             )
           ]
         end
@@ -1602,19 +1606,25 @@ module Gtn
       enumerate_type(/:/).each do |path|
         format_reviewdog_output(
           ReviewDogEmitter.file_error(path: path,
-                                      message: 'There are colons in this filename, that is forbidden.', code: 'GTN:014')
+                                      message: 'There are colons in this filename, that is forbidden.', 
+                                      code: 'GTN:014',
+                                      fn: __method__.to_s,
+                                     )
         )
       end
 
       enumerate_symlinks.each do |path|
         if !File.exist?(Pathname.new(path).realpath)
           format_reviewdog_output(
-            ReviewDogEmitter.file_error(path: path, message: 'This is a BAD symlink', code: 'GTN:013')
+            ReviewDogEmitter.file_error(path: path, message: 'This is a BAD symlink', 
+                                        code: 'GTN:013',
+                                        fn: __method__.to_s)
           )
         end
       rescue StandardError
         format_reviewdog_output(
-          ReviewDogEmitter.file_error(path: path, message: 'This is a BAD symlink', code: 'GTN:013')
+          ReviewDogEmitter.file_error(path: path, message: 'This is a BAD symlink', code: 'GTN:013',
+                                      fn: __method__.to_s)
         )
       end
       enumerate_type(/data[_-]library.ya?ml/).each do |path|

@@ -249,7 +249,7 @@ The SearchGUI tool will perform a database search based on the parameters we've 
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output_peptides` (output of **Peptide Shaker** {% icon tool %})
 >    - *"that"*: `NOT Matching`
->    - *"the pattern"*: `(_HUMAN)|(_REVERSED)|(CON)|(con)`
+>    - *"the pattern"*: `(_HUMAN)|(_REVERSED)|(REV_)|(CON)|(con)`
 >    - *"Keep header line"*: `Yes`
 >
 >
@@ -273,7 +273,7 @@ The SearchGUI tool will perform a database search based on the parameters we've 
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output_psm` (output of **Peptide Shaker** {% icon tool %})
 >    - *"that"*: `NOT Matching`
->    - *"the pattern"*: `(_HUMAN)|(_REVERSED)|(CON)|(con)`
+>    - *"the pattern"*: `(_HUMAN)|(_REVERSED)|(REV_)|(CON)|(con)`
 >    - *"Keep header line"*: `Yes`
 >
 >
@@ -504,7 +504,7 @@ MaxQuant is an MS-based proteomics platform that is capable of processing raw da
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `peptides` (output of **MaxQuant** {% icon tool %})
 >    - *"that"*: `NOT Matching`
->    - *"the pattern"*: `(_HUMAN)|(_REVERSED)|(CON)|(con)`
+>    - *"the pattern"*: `(_HUMAN)|(_REVERSED)|(REV_)|(CON)|(con)`
 >    - *"Keep header line"*: `Yes`
 >
 >
