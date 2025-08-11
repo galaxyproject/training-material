@@ -229,7 +229,7 @@ car
 ```
 
 
-### 🧾 Explore the Segmentation Outputs
+## 🧾 Explore the Segmentation Outputs
 YOLOv8 in segment mode produces a more detailed output than detection:
 
 🖼️ **Segmented overlay (*.jpg):**
