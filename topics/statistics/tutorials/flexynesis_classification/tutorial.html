@@ -1,0 +1,2580 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Modeling Breast Cancer Subtypes using Flexynesis / Modeling Breast Cancer Subtypes using Flexynesis / Statistics and machine learning</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@3aca13065fdf60c96e8919a22841b79dd37411ee",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/flexynesis_classification/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Modeling Breast Cancer Subtypes using Flexynesis">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-08-13 10:24:48 +0000">
+<meta name="DC.creator" content="Amirhossein Naghsh Nilchi">
+<meta name="DC.creator" content="Björn Grüning"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Statistics and machine learning / Modeling Breast Cancer Subtypes using Flexynesis / Hands-on: Modeling Breast Cancer Subtypes using Flexynesis">
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/statistics/tutorials/flexynesis_classification/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Modeling Breast Cancer Subtypes using Flexynesis",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-08-13 10:24:48 +0000",
+  "datePublished": "2025-08-13 10:24:48 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "abstract": "Flexynesis represents a state-of-the-art deep learning framework specifically designed for multi-modal data integration in biological research. What sets Flexynesis apart is its comprehensive suite of deep learning architectures that can handle various data integration scenarios while providing robust feature selection and hyperparameter optimization.",
+  "learningResourceType": "e-learning",
+  "name": "Modeling Breast Cancer Subtypes using Flexynesis",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/flexynesis_classification/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT2H",
+  "teaches": "- Apply Flexynesis to model and visualize BRCA subtypes\n- Interpret the learned representations from the DirectPred model\n- Use UMAP and clustering to explore learned features",
+  "keywords": [
+    "Statistics and machine learning"
+  ],
+  "description": "## Abstract\n\nFlexynesis represents a state-of-the-art deep learning framework specifically designed for multi-modal data integration in biological research. What sets Flexynesis apart is its comprehensive suite of deep learning architectures that can handle various data integration scenarios while providing robust feature selection and hyperparameter optimization.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How can we model breast cancer subtypes using transcriptomics and genomic data?\n - What are the key expression patterns that distinguish different BRCA subtypes?\n - How can we interpret the learned features from a deep neural network classifier?\n\n\n## Learning Objectives\n\n- Apply Flexynesis to model and visualize BRCA subtypes\n- Interpret the learned representations from the DirectPred model\n- Use UMAP and clustering to explore learned features\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Nilchia/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Nilchia/",
+      "name": "Amirhossein Naghsh Nilchi",
+      "image": "https://avatars.githubusercontent.com/Nilchia",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/spoc/",
+          "name": "🖖🏾Single-cell & sPatial Omics Community of practice",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/community/sig/singlecell/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1329-3044",
+      "orcid": "https://orcid.org/0000-0003-1329-3044"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/",
+      "name": "Björn Grüning",
+      "image": "https://avatars.githubusercontent.com/bgruening",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/eurosciencegateway/",
+          "name": "EuroScienceGateway",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/projects/esg/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/eosc-life/",
+          "name": "EOSC-Life",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.eosc-life.eu"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/by-covid/",
+          "name": "BeYond-COVID",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://by-covid.org/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/sfb992/",
+          "name": "Collaborative Research Centre 992",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.sfb992.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-converge/",
+          "name": "ELIXIR-CONVERGE",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org/about-us/how-funded/eu-projects/converge"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-3079-6586",
+      "orcid": "https://orcid.org/0000-0002-3079-6586"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/flexynesis_classification/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/records/16287482",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Statistics and machine learning
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and machine learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/flexynesis_classification/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/flexynesis_classification/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-statistics">
+    <h1 data-toc-skip>Modeling Breast Cancer Subtypes using Flexynesis</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/Nilchia/" class="contributor-badge contributor-Nilchia"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Nilchia?s=36" alt="Amirhossein Naghsh Nilchi avatar" width="36" class="avatar" />
+    Amirhossein Naghsh Nilchi</a><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bgruening?s=36" alt="Björn Grüning avatar" width="36" class="avatar" />
+    Björn Grüning</a>
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can we model breast cancer subtypes using transcriptomics and genomic data?</p>
+</li>
+        
+        <li><p>What are the key expression patterns that distinguish different BRCA subtypes?</p>
+</li>
+        
+        <li><p>How can we interpret the learned features from a deep neural network classifier?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Apply Flexynesis to model and visualize BRCA subtypes</p>
+</li>
+        
+        <li><p>Interpret the learned representations from the DirectPred model</p>
+</li>
+        
+        <li><p>Use UMAP and clustering to explore learned features</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/16287482">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/statistics/tutorials/flexynesis_classification/workflows/" title="Modeling Breast Cancer Subtypes using Flexynesis workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Answer Histories">
+        <i class="fas fa-sign-out-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-answer</span>&nbsp;Answer Histories
+    </a>
+    <ul class="dropdown-menu">
+      
+        <li>
+            <a class="dropdown-item" href="https://usegalaxy.eu/u/nilchia/h/final-modeling-breast-cancer-subtypes-tabpfn-3">
+              usegalaxy.eu
+              
+              <br/><span class="text-muted">2025-08-01</span>
+              
+            </a>
+        </li>
+      
+      <li class="dropdown-divider"></li>
+      <li>
+        <a class="dropdown-item" href="/training-material/faqs/gtn/gtn_example_histories.html"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> How to Use This</a>
+      </li>
+    </ul>
+
+</li>
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/flexynesis_classification/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Aug 13, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 13, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Flexynesis represents a state-of-the-art deep learning framework specifically designed for multi-modal data integration in biological research (<span class="citation"><a href="#Uyar2024">Uyar <i>et al.</i> 2024</a></span>). What sets Flexynesis apart is its comprehensive suite of deep learning architectures that can handle various data integration scenarios while providing robust feature selection and hyperparameter optimization.</p>
+
+<p>Here, we use Flexynesis tool suite on a multi-omics dataset of Breast Cancer samples from the METABRIC consortium (<span class="citation"><a href="#metabric-website">metabric community</a></span>), one of the landmark breast cancer genomics studies available through cBioPortal (<span class="citation"><a href="#cbioportal-website">cbioPortal community</a></span>). This dataset contains comprehensive molecular and clinical data from over 2,000 breast cancer patients, including gene expression profiles, copy number alterations, mutation data, and clinical outcomes. The data was downloaded from Cbioportal and randomly split into train (70% of the samples) and test (30% of the samples) data folders. The data files were processed to follow the same nomenclature.</p>
+
+<p>This training is inspired from the original Flexynesis analysis notebook: <a href="https://github.com/BIMSBbioinfo/flexynesis/blob/main/examples/tutorials/brca_subtypes.ipynb">brca_subtypes.ipynb</a>.</p>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-license"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: LICENSE</div>
+
+  <p>Flexynesis is only available for NON-COMMERCIAL use. Permission is only granted for academic, research, and educational purposes. Before using, be sure to review, agree, and comply with the license.
+For commercial use, please review the Flexynesis license on GitHub and contact the <a href="https://github.com/BIMSBbioinfo/flexynesis">copyright holders</a></p>
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#classification-task-with-flexynesis-1-iteration" id="markdown-toc-classification-task-with-flexynesis-1-iteration">Classification task with Flexynesis (1 iteration)</a>    <ol>
+      <li><a href="#generate-umap-plot-of-the-embeddings" id="markdown-toc-generate-umap-plot-of-the-embeddings">Generate UMAP plot of the embeddings</a></li>
+    </ol>
+  </li>
+  <li><a href="#longer-training" id="markdown-toc-longer-training">Longer training</a>    <ol>
+      <li><a href="#generate-umap-plot-of-the-embeddings-1" id="markdown-toc-generate-umap-plot-of-the-embeddings-1">Generate UMAP plot of the embeddings</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+  <li><a href="#prepare-data-for-tabpfn" id="markdown-toc-prepare-data-for-tabpfn">Prepare data for TabPFN</a>    <ol>
+      <li><a href="#cna-data" id="markdown-toc-cna-data">CNA data</a></li>
+      <li><a href="#gex-data" id="markdown-toc-gex-data">GEX data</a></li>
+    </ol>
+  </li>
+  <li><a href="#tabpfn" id="markdown-toc-tabpfn">TabPFN</a></li>
+  <li><a href="#conclusion-1" id="markdown-toc-conclusion-1">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="get-data">Get data</h1>
+
+<p>In this training we will use a multi-omics dataset from the METABRIC database downloaded through cBioPortal and split to 70% train and 30% test samples.</p>
+
+<p>The multi-omics data consists of three data types:</p>
+
+<ul>
+  <li>
+    <p><strong>Gene Expression (GEX)</strong>: Measures the activity levels of genes by quantifying mRNA abundance. This data captures which genes are being actively transcribed in each sample.</p>
+  </li>
+  <li>
+    <p><strong>Copy Number Alterations (CNA)</strong>: Detects genomic regions that have been duplicated or deleted compared to the normal genome. Cancer cells often have chromosomal instabilities leading to gene amplifications (gains) or deletions (losses), which can drive tumor development and progression.</p>
+  </li>
+  <li>
+    <p><strong>Clinical data (CLIN)</strong>: Contains patient metadata including demographics, treatment history, tumor characteristics, and importantly for this tutorial, the breast cancer molecular subtypes (such as Luminal A, Luminal B, HER2-enriched, and Basal-like) subtypes based on the expression patterns of key biomarkers including claudin proteins, which are important for cell adhesion and tumor behavior.</p>
+  </li>
+</ul>
+
+<p>These three data modalities provide complementary views of the same tumor samples - the clinical data provides the biological context and classification labels, while the molecular data (GEX and CNA) capture the underlying genomic alterations that drive these clinical phenotypes.</p>
+
+<p>Flexynesis tries to learn the patterns in these molecular alterations and connect them to the phenotype to predict cancer subtypes based on the genomic and transcriptomic profiles.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Data Upload</div>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/records/16287482">Zenodo</a> or from
+the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">statistics</code>
+ -&gt; <code class="language-plaintext highlighter-rouge">Modeling Breast Cancer Subtypes using Flexynesis</code>):</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/16287482/files/train_cna_brca.tabular
+https://zenodo.org/records/16287482/files/train_gex_brca.tabular
+https://zenodo.org/records/16287482/files/train_clin_brca.tabular
+https://zenodo.org/records/16287482/files/test_cna_brca.tabular
+https://zenodo.org/records/16287482/files/test_gex_brca.tabular
+https://zenodo.org/records/16287482/files/test_clin_brca.tabular
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Libraries</strong> (left panel)</li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>Rename the datasets</li>
+    <li>
+      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">tabular</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Add to each database a tag corresponding to the modality (#gex, #cna, #clin)</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Adding a tag</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Datasets can be tagged. This simplifies the tracking of datasets across the Galaxy interface. Tags can contain any combination of letters or numbers but cannot contain spaces.</p>   <p><strong>To tag a dataset</strong>:</p>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add  tag text. Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset (see below).</li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol>   <p><strong>Tags beginning with <code class="language-plaintext highlighter-rouge">#</code> are special!</strong></p>   <p>They are called <strong>Name tags</strong>. The unique feature of these tags is that they <em>propagate</em>: if a dataset is labelled with a name tag, all derivatives (children) of this dataset will automatically inherit this tag (see below). The figure below explains why this is so useful. Consider the following analysis (numbers in parenthesis correspond to dataset numbers in the figure below):</p>   <ol>   <li>a set of forward and reverse reads (datasets 1 and 2) is mapped against a reference using <span><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> generating dataset 3;</li>   <li>dataset 3 is used to calculate read coverage using <span><strong>BedTools Genome Coverage</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> <em>separately</em> for <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">-</code> strands. This generates two datasets (4 and 5 for plus and minus, respectively);</li>   <li>datasets 4 and 5 are used as inputs to <span><strong>Macs2 broadCall</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> datasets generating datasets 6 and 8;</li>   <li>datasets 6 and 8 are intersected with coordinates of genes (dataset 9) using <span><strong>BedTools Intersect</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> generating datasets 10 and 11.</li> </ol>   <p><img src="/training-material/shared/images/histories_why_nametags.svg" alt="A history without name tags versus history with name tags" /></p>   <p>Now consider that this analysis is done without name tags. This is shown on the left side of the figure. It is hard to trace which datasets contain “plus” data versus “minus” data. For example, does dataset 10 contain “plus” data or “minus” data? Probably “minus” but are you sure? In the case of a small history like the one shown here, it is possible to trace this manually but as the size of a history grows it will become very challenging.</p>   <p>The right side of the figure shows exactly the same analysis, but using name tags. When the analysis was conducted datasets 4 and 5 were tagged with <code class="language-plaintext highlighter-rouge">#plus</code> and <code class="language-plaintext highlighter-rouge">#minus</code>, respectively. When they were used as inputs to Macs2 resulting datasets 6 and 8 automatically inherited them and so on… As a result it is straightforward to trace both branches (plus and minus) of this analysis.</p>   <p>More information is in a <a href="/training-material/topics/galaxy-interface/tutorials/name-tags/tutorial.html">dedicated #nametag tutorial</a>.</p>   <!-- Image is here = https://docs.google.com/drawings/d/1iiNsau6ddiE2MV9qMyekUq2mrpDHHcc02bXtcFEAnhY/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="classification-task-with-flexynesis-1-iteration">Classification task with Flexynesis (1 iteration)</h1>
+
+<p>Flexynesis automatically handles key preprocessing steps such as:</p>
+
+<ul>
+  <li>Data processing:
+    <ul>
+      <li>removing uninformative features (e.g. features with near-zero-variation)</li>
+      <li>removing samples with too many NA values</li>
+      <li>removing features with too many NA values and impute remaining NA values using median imputation (replacing missing values with the median of each feature)</li>
+    </ul>
+  </li>
+  <li>Feature selection <strong>only on training data</strong> for each omics layer separately:
+    <ul>
+      <li>Features are sorted by Laplacian score</li>
+      <li>Features that make it in the <code class="language-plaintext highlighter-rouge">top_percentile</code></li>
+      <li>Highly redundant features are further removed (for a pair of highly correlated features, keep the one with the higher laplacian score).</li>
+    </ul>
+  </li>
+  <li>
+    <p>Harmonize the training data with the test data</p>
+  </li>
+  <li>
+    <p>Normalize the datasets (Subset the test data features to those that are kept for training data)</p>
+  </li>
+  <li>
+    <p>Normalize training data (standard scaling) and apply the same scaling factors to the test data.</p>
+  </li>
+  <li>
+    <p>Log transform the final matrices (Optional)</p>
+  </li>
+  <li>Distinguish numerical and categorical variables in the clinical data file. For categorical variables, create a numerical encoding of the labels for training data. Use the same encoders to map the test samples to the same numerical encodings.</li>
+</ul>
+
+<blockquote>
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-no-manual-preprocessing-is-required"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  No manual preprocessing is required</div>
+
+    <p>Flexynesis performs all data cleaning internally as part of its pipeline.</p>
+  </blockquote>
+</blockquote>
+
+<p>Now it’s time to train model using Flexynesis:</p>
+<ul>
+  <li>We choose whether we want to concatenate the data matrices (early integration) or not (intermediate integration) before running them through the neural networks.</li>
+  <li>We want to apply feature selection and keep only top 10% of the features. In the end, we want to keep at least 1000 features per omics layer.</li>
+  <li>We apply a variance threshold (for simplicity of demonstration, we want to keep a few most variable features). Setting this to 80, will remove 80% of the features with the lowest variation from each modality.</li>
+  <li>We choose which model architecture to use:
+    <ul>
+      <li>DirectPred: a fully connected network (standard multilayer perceptron) with supervisor heads (one MLP for each target variable)</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">target_variables</code>: Column headers in clinical data.</li>
+  <li><code class="language-plaintext highlighter-rouge">hpo_iter</code>: How many hyperparameter search steps to implement:
+    <ul>
+      <li>This example runs 1 hyperparameter search step using DirectPred architecture and a hyperparameter configuration space defined for “DirectPred” with a supervisor head for “CLAUDIN_SUBTYPE” variable. At the end of the parameter optimization, the best model will be selected and returned.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Training a model longer than needed causes the model to overfit, yield worse validation performance, and also it takes a longer time to train the models, considering if we have to run a long hyperparameter optimization routine, not just for 1 step, but say more than 100 steps.</p>
+
+<p>It is possible to set early stopping criteria in Flexynesis, which is basically a simple callback that is handled by <code class="language-plaintext highlighter-rouge">Pytorch Lightning</code>. This is regulated using the <code class="language-plaintext highlighter-rouge">early_stop_patience</code>. When set to e.g. 10, the training will stop if the validation loss has not been improved in the last 10 epochs.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-flexynesis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Flexynesis</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3" title="Flexynesis tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flexynesis</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.20+galaxy3)</span> with the following parameters:
+      <ul>
+        <li><em>“I certify that I am not using this tool for commercial purposes.”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Type of Analysis”</em>: <code class="language-plaintext highlighter-rouge">Supervised training</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training clinical data”</em>: <code class="language-plaintext highlighter-rouge">train_clin_brca.tabular</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Test clinical data”</em>: <code class="language-plaintext highlighter-rouge">test_clin_brca.tabular</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training omics data”</em>: <code class="language-plaintext highlighter-rouge">train_gex_brca.tabular</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Test omics data”</em>: <code class="language-plaintext highlighter-rouge">test_gex_brca.tabular</code></li>
+            <li><em>“What type of assay is your input?”</em>: <code class="language-plaintext highlighter-rouge">gex</code></li>
+            <li>In <em>“Multiple omics layers?”</em>:
+              <ul>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Multiple omics layers?”</em>
+                  <ul>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training omics data”</em>: <code class="language-plaintext highlighter-rouge">train_cna_brca.tabular</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Test clinical data”</em>: <code class="language-plaintext highlighter-rouge">test_cna_brca.tabular</code>
+      - <em>“What type of assay is your input?”</em>: <code class="language-plaintext highlighter-rouge">cna</code></li>
+            <li><em>“Model class”</em>: <code class="language-plaintext highlighter-rouge">DirectPred</code></li>
+            <li><em>“Column name in the train clinical data to use for predictions, multiple targets are allowed”</em>: <code class="language-plaintext highlighter-rouge">Column: 16</code> (CLAUDIN_SUBTYPE)</li>
+            <li>In <em>“Advanced Options”</em>:
+              <ul>
+                <li><em>“Variance threshold (as percentile) to drop low variance features.”</em>: <code class="language-plaintext highlighter-rouge">0.8</code></li>
+                <li><em>“Minimum number of features to retain after feature selection.”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
+                <li><em>“Top percentile features (among the features remaining after variance filtering and data cleanup) to retain after feature selection.”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
+                <li><em>“Number of iterations for hyperparameter optimization.”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+              </ul>
+            </li>
+            <li>In <em>“Visualization”</em>:
+              <ul>
+                <li><em>“Generate embeddings plot?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                <li><em>“Generate precision-recall curves plot?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What are main outputs of Flexynesis?</li>
+    <li>What does the generated plots show?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The results collection contains the following data:
+        <ul>
+          <li>job.embeddings_test (latent space of test data)</li>
+          <li>job.embeddings_train (latent space of train data)</li>
+          <li>job.feature_importance.GradientShap (feature importance calculated by GradientShap method)</li>
+          <li>job.feature_importance.IntegratedGradients (feature importance calculated by IntegratedGradients method)</li>
+          <li>job.feature_logs.cna</li>
+          <li>job.feature_logs.gex</li>
+          <li>job.predicted_labels (Prediction of the created model)</li>
+          <li>job.stats</li>
+        </ul>
+      </li>
+      <li>There are three figures in plot collection:
+        <ul>
+          <li>A PCA plot of the Embeddings colored by known, true subtypes</li>
+        </ul>
+      </li>
+    </ol>
+    <figure id="figure-1" style="max-width: 90%;"><img src="../../images/flexynesis_classification/niter1_pca_known.jpeg" alt="PCA plot - colored by known subtypes. " width="1941" height="1461" loading="lazy" /><a target="_blank" href="../../images/flexynesis_classification/niter1_pca_known.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> PCA plot - colored by known subtypes</figcaption></figure>
+    <ul>
+      <li>A PCA plot of the Embeddings colored by predicted subtypes</li>
+    </ul>
+    <figure id="figure-2" style="max-width: 90%;"><img src="../../images/flexynesis_classification/niter1_pca_predicted.jpeg" alt="PCA plot - colored by predicted subtypes. " width="1941" height="1461" loading="lazy" /><a target="_blank" href="../../images/flexynesis_classification/niter1_pca_predicted.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> PCA plot - colored by predicted subtypes</figcaption></figure>
+    <p>We can see that the subtypes were predicted by the model with a good approximation.</p>
+    <ul>
+      <li>A precision-recall curves plot, showing the accuracy of the prediction</li>
+    </ul>
+    <figure id="figure-3" style="max-width: 90%;"><img src="../../images/flexynesis_classification/niter1_pr_curve.jpeg" alt="PR-curve plot - showing prediction accuracy. " width="1941" height="1461" loading="lazy" /><a target="_blank" href="../../images/flexynesis_classification/niter1_pr_curve.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> PR-curve plot - showing prediction accuracy</figcaption></figure>
+    <p>This plot also conforms that most of the subtypes were classified with a good precision (except Class 4 (LumB), in the PCA plot you can see some Her2 samples were classified as LumB for example)</p>
+  </blockquote>
+
+</blockquote>
+
+<h2 id="generate-umap-plot-of-the-embeddings">Generate UMAP plot of the embeddings</h2>
+
+<p>To generate a UMAP plot, we need to extract the embeddings and predicted table.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-embeddings-and-prediction"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Extract embeddings and prediction</div>
+
+  <ol>
+    <li><span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract dataset</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input List”</em>: <code class="language-plaintext highlighter-rouge">results</code> (output of <strong>Flexynesis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“How should a dataset be selected?”</em>: <code class="language-plaintext highlighter-rouge">Select by element identifier</code>
+          <ul>
+            <li><em>“Element identifier:”</em>: <code class="language-plaintext highlighter-rouge">job.embeddings_test</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract dataset</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input List”</em>: <code class="language-plaintext highlighter-rouge">results</code> (output of <strong>Flexynesis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“How should a dataset be selected?”</em>: <code class="language-plaintext highlighter-rouge">Select by element identifier</code>
+          <ul>
+            <li><em>“Element identifier:”</em>: <code class="language-plaintext highlighter-rouge">job.predicted_labels</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What information do we have in predicted labels?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>It is a tabular file which contains the probability of each subtype for each sample and a final predicted label based on the probability.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>As you have seen in predicted labels, each sample has a prediction value for each subtype. For UMAP plot we only need the final predicted label.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-remove-probabilities-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Remove probabilities (duplicates)</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+      <ul>
+        <li><em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">job.predicted_labels</code> (output of <strong>Extract dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li>In <em>“Column selections”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Column selections”</em>
+              <ul>
+                <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+                <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Alphabetical sort </code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Output unique values”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>And finally the UMAP plot.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-umap-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  UMAP plot</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3" title="Flexynesis plot tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flexynesis plot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.20+galaxy3)</span> with the following parameters:
+      <ul>
+        <li><em>“I certify that I am not using this tool for commercial purposes.”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Flexynesis plot”</em>: <code class="language-plaintext highlighter-rouge">Dimensionality reduction</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Predicted labels”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Embeddings”</em>: <code class="language-plaintext highlighter-rouge">job.embeddings_test</code> (output of <strong>Extract dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Column in the labels file to use for coloring the points in the plot”</em>: <code class="language-plaintext highlighter-rouge">Column: 5</code> (known_label)</li>
+            <li><em>“Transformation method”</em>: <code class="language-plaintext highlighter-rouge">UMAP</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What does the generated plot show?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <figure id="figure-4" style="max-width: 90%;"><img src="../../images/flexynesis_classification/niter1_umap_known.jpeg" alt="UMAP plot - colored by known subtypes. " width="1941" height="1461" loading="lazy" /><a target="_blank" href="../../images/flexynesis_classification/niter1_umap_known.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> UMAP plot - colored by known subtypes</figcaption></figure>
+
+    <p>This is a UMAP representation of the embeddings which shows a better speration between subtypes</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="longer-training">Longer training</h1>
+
+<p>In reality, hyperparameter optimization should run for multiple steps so that the parameter search space is large enough to find a good set. However, for demonstration purposes, we only run it for 5 steps here:</p>
+<ul>
+  <li><em>“Number of iterations for hyperparameter optimization.”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-flexynesis-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Flexynesis</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3" title="Flexynesis tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flexynesis</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.20+galaxy3)</span> with the following parameters:
+      <ul>
+        <li><em>“I certify that I am not using this tool for commercial purposes.”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Type of Analysis”</em>: <code class="language-plaintext highlighter-rouge">Supervised training</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training clinical data”</em>: <code class="language-plaintext highlighter-rouge">train_clin_brca.tabular</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Test clinical data”</em>: <code class="language-plaintext highlighter-rouge">test_clin_brca.tabular</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training omics data”</em>: <code class="language-plaintext highlighter-rouge">train_gex_brca.tabular</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Test omics data”</em>: <code class="language-plaintext highlighter-rouge">test_gex_brca.tabular</code></li>
+            <li><em>“What type of assay is your input?”</em>: <code class="language-plaintext highlighter-rouge">gex</code></li>
+            <li>In <em>“Multiple omics layers?”</em>:
+              <ul>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Multiple omics layers?”</em>
+                  <ul>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training omics data”</em>: <code class="language-plaintext highlighter-rouge">train_cna_brca.tabular</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Test clinical data”</em>: <code class="language-plaintext highlighter-rouge">test_cna_brca.tabular</code>
+      - <em>“What type of assay is your input?”</em>: <code class="language-plaintext highlighter-rouge">cna</code></li>
+            <li><em>“Model class”</em>: <code class="language-plaintext highlighter-rouge">DirectPred</code></li>
+            <li><em>“Column name in the train clinical data to use for predictions, multiple targets are allowed”</em>: <code class="language-plaintext highlighter-rouge">Column: 16</code> (CLAUDIN_SUBTYPE)</li>
+            <li>In <em>“Advanced Options”</em>:
+              <ul>
+                <li><em>“Variance threshold (as percentile) to drop low variance features.”</em>: <code class="language-plaintext highlighter-rouge">0.8</code></li>
+                <li><em>“Minimum number of features to retain after feature selection.”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
+                <li><em>“Top percentile features (among the features remaining after variance filtering and data cleanup) to retain after feature selection.”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
+                <li><em>“Number of iterations for hyperparameter optimization.”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+              </ul>
+            </li>
+            <li>In <em>“Visualization”</em>:
+              <ul>
+                <li><em>“Generate embeddings plot?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                <li><em>“Generate precision-recall curves plot?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What does the generated plots show?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>There are three figures in plot collection:
+        <ul>
+          <li>A PCA plot of the Embeddings colored by known, true subtypes</li>
+        </ul>
+      </li>
+    </ol>
+    <figure id="figure-5" style="max-width: 90%;"><img src="../../images/flexynesis_classification/niter5_pca_known.jpeg" alt="PCA plot - colored by known subtypes. " width="1941" height="1461" loading="lazy" /><a target="_blank" href="../../images/flexynesis_classification/niter5_pca_known.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> PCA plot - colored by known subtypes</figcaption></figure>
+    <ul>
+      <li>A PCA plot of the Embeddings colored by predicted subtypes</li>
+    </ul>
+    <figure id="figure-6" style="max-width: 90%;"><img src="../../images/flexynesis_classification/niter5_pca_predicted.jpeg" alt="PCA plot - colored by predicted subtypes. " width="1941" height="1461" loading="lazy" /><a target="_blank" href="../../images/flexynesis_classification/niter5_pca_predicted.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> PCA plot - colored by predicted subtypes</figcaption></figure>
+    <p>We can see that the subtypes were predicted by the model with a good approximation.</p>
+    <ul>
+      <li>A precision-recall curves plot, showing the accuracy of the prediction</li>
+    </ul>
+    <figure id="figure-7" style="max-width: 90%;"><img src="../../images/flexynesis_classification/niter5_pr_curve.jpeg" alt="PR-curve plot - showing prediction accuracy. " width="1941" height="1461" loading="lazy" /><a target="_blank" href="../../images/flexynesis_classification/niter5_pr_curve.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> PR-curve plot - showing prediction accuracy</figcaption></figure>
+    <p>This plot also conforms that most of the subtypes were classified with a good precision. Also the precision has incresed (compare Class4 = 0.23 with 1 iteration to Class4 = 0.41 with 5 iterations)</p>
+  </blockquote>
+
+</blockquote>
+
+<h2 id="generate-umap-plot-of-the-embeddings-1">Generate UMAP plot of the embeddings</h2>
+
+<p>To generate a UMAP plot, we need to extract the embeddings and predicted table.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-embeddings-and-prediction-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Extract embeddings and prediction</div>
+
+  <ol>
+    <li><span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract dataset</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input List”</em>: <code class="language-plaintext highlighter-rouge">results</code> (output of <strong>Flexynesis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“How should a dataset be selected?”</em>: <code class="language-plaintext highlighter-rouge">Select by element identifier</code>
+          <ul>
+            <li><em>“Element identifier:”</em>: <code class="language-plaintext highlighter-rouge">job.embeddings_test</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract dataset</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input List”</em>: <code class="language-plaintext highlighter-rouge">results</code> (output of <strong>Flexynesis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“How should a dataset be selected?”</em>: <code class="language-plaintext highlighter-rouge">Select by element identifier</code>
+          <ul>
+            <li><em>“Element identifier:”</em>: <code class="language-plaintext highlighter-rouge">job.predicted_labels</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-remove-probabilities-duplicates-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Remove probabilities (duplicates)</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+      <ul>
+        <li><em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">job.predicted_labels</code> (output of <strong>Extract dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li>In <em>“Column selections”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Column selections”</em>
+              <ul>
+                <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+                <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Alphabetical sort </code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Output unique values”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>And finally the UMAP plot.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-umap-plot-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  UMAP plot</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3" title="Flexynesis plot tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flexynesis plot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.20+galaxy3)</span> with the following parameters:
+      <ul>
+        <li><em>“I certify that I am not using this tool for commercial purposes.”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Flexynesis plot”</em>: <code class="language-plaintext highlighter-rouge">Dimensionality reduction</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Predicted labels”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Embeddings”</em>: <code class="language-plaintext highlighter-rouge">job.embeddings_test</code> (output of <strong>Extract dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Column in the labels file to use for coloring the points in the plot”</em>: <code class="language-plaintext highlighter-rouge">Column: 5</code> (known_label)</li>
+            <li><em>“Transformation method”</em>: <code class="language-plaintext highlighter-rouge">UMAP</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What does the generated plot show?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <figure id="figure-8" style="max-width: 90%;"><img src="../../images/flexynesis_classification/niter5_umap_known.jpeg" alt="UMAP plot - colored by known subtypes. " width="1941" height="1461" loading="lazy" /><a target="_blank" href="../../images/flexynesis_classification/niter5_umap_known.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> UMAP plot - colored by known subtypes</figcaption></figure>
+
+    <p>This is a UMAP representation of the embeddings which shows a better speration between subtypes</p>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoatool">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	
+	<p>This is a "Choose Your Own Tutorial" (CYOT) section (also known as "Choose Your Own Analysis" (CYOA)), where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	
+	<p>
+		<p>We have another tool for the classification task called <strong>TabPFN</strong> which is a foundation model for tabular data. We can repeat the classification task using TabPFN and compare it with Flexynesis. Please note that TabPFN is slow on CPU and <strong>it will take a lot of time to finish on this dataset</strong>. What do you say? Should we continue with TabPFN?</p>
+
+	</p>
+	
+	
+		<input id="cyoa-opt1tool" type="radio" name="cyoatool" value="Lets-try-TabPFN" onclick="cyoaChoice('Lets-try-TabPFN', 'gtn-cyoatool')" />
+		<label for="cyoa-opt1tool" class="select btn btn-secondary">Let's try TabPFN!</label>
+	
+	
+		<input id="cyoa-opt2tool" type="radio" name="cyoatool" value="Ill-try-later" onclick="cyoaChoice('Ill-try-later', 'gtn-cyoatool')" />
+		<label for="cyoa-opt2tool" class="select btn btn-secondary">I'll try later!</label>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Ill-try-later", "gtn-cyoatool");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Ill-try-later">
+
+  <h1 id="conclusion">Conclusion</h1>
+
+  <p>In this tutorial, we demonstrated how Flexynesis can model breast cancer subtypes from multi omics data using a deep generative framework. The tool handles preprocessing, feature selection, and latent space learning automatically, making it efficient and robust.</p>
+
+  <p>By training on TCGA BRCA data, we:</p>
+
+  <ul>
+    <li>
+      <p>Visualized meaningful subtype separation in the latent space</p>
+    </li>
+    <li>
+      <p>Identified subtype-specific genes</p>
+    </li>
+    <li>
+      <p>Showed how learned features relate to known clinical labels</p>
+    </li>
+  </ul>
+
+  <p>Flexynesis provides an accessible way to explore complex omics datasets and uncover biological structure without extensive manual tuning.</p>
+</div>
+
+<div class="Lets-try-TabPFN">
+
+  <p>Alright, Let’s see how TabPFN can predict the subtypes</p>
+
+  <h1 id="prepare-data-for-tabpfn">Prepare data for TabPFN</h1>
+
+  <p>Currently, TabPFN supports up to <strong>10,000</strong> samples and <strong>500</strong> features (genes) in a tabular data.
+We will filter our data by gene variance and will use top 500 variable genes as input for TabPFN.</p>
+
+  <p>The train and test tabular data for TabPFN should be transposed so the samples are in rows and genes in columns, the last column should contain the labels and train and test data should have <strong>same</strong> set of features in <strong>same</strong> order.</p>
+
+  <p>Since TabPFN does not support data integration, we should try gene expression and copy number alteration data separately.</p>
+
+  <h2 id="cna-data">CNA data</h2>
+
+  <p>First, let’s filter the cna data by variance.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-prepare-cna-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Prepare CNA data</div>
+
+    <blockquote class="comment">
+      <div class="box-title comment-title" id="comment-short-explanation-of-steps"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
+      <p>Here we will:</p>
+      <ul>
+        <li>Calculate the variance of each gene in train matrix</li>
+        <li>Add the variance back to the matrix</li>
+        <li>Sort the matrix by variance in descending order</li>
+        <li>Filter the matrix by top 500 genes</li>
+        <li>Sort the matrix by gene name</li>
+      </ul>
+    </blockquote>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy2" title="Table Compute tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Table Compute</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.4+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><em>“Input Single or Multiple Tables”</em>: <code class="language-plaintext highlighter-rouge">Single Table</code>
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table”</em>: <code class="language-plaintext highlighter-rouge">train_cna_brca.tabular</code></li>
+              <li><em>“Type of table operation”</em>: <code class="language-plaintext highlighter-rouge">Compute expression across rows or columns</code>
+                <ul>
+                  <li><em>“Calculate”</em>: <code class="language-plaintext highlighter-rouge">Variance</code></li>
+                  <li><em>“For each”</em>: <code class="language-plaintext highlighter-rouge">Row</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="join1" title="Join two Datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Table Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em>: <code class="language-plaintext highlighter-rouge">train_cna_brca.tabular</code></li>
+          <li><em>“and column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><em>“Fill empty columns”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+          <li><em>“Keep the header lines”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          <li>In <em>“Column selections”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Column selections”</em>
+                <ul>
+                  <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+                  <li><em>“in”</em>: <code class="language-plaintext highlighter-rouge">Descending order</code></li>
+                  <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Fast numeric sort (-n) </code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="Show beginning1" title="Select first tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select first</strong></span> with the following parameters:
+        <ul>
+          <li><em>“Select first”</em>: <code class="language-plaintext highlighter-rouge">500</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Dataset has a header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Select first</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Discard</code></li>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                <ul>
+                  <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code>, <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          <li>In <em>“Column selections”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Column selections”</em>
+                <ul>
+                  <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+                  <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Alphabetical sort </code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Rename the output file to <code class="language-plaintext highlighter-rouge">train_cna_brca_500gene.tabular</code></li>
+    </ol>
+
+    <blockquote class="comment">
+      <div class="box-title comment-title" id="comment-short-explanation-of-steps-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
+      <p>Here we will:</p>
+      <ul>
+        <li>Extract the list of genes from the train matrix</li>
+        <li>Filter the test data by extracted genes</li>
+        <li>Sort the matrix by gene name</li>
+        <li>Transpose both train and test data</li>
+      </ul>
+    </blockquote>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">train_cna_brca_500gene.tabular</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep</code></li>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                <ul>
+                  <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2" title="Join tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd File”</em>: <code class="language-plaintext highlighter-rouge">test_cna_brca.tabular</code></li>
+          <li><em>“Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          <li>In <em>“Column selections”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Column selections”</em>
+                <ul>
+                  <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+                  <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Alphabetical sort </code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output file to <code class="language-plaintext highlighter-rouge">test_cna_brca_500gene.tabular</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0" title="Transpose tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">train_cna_brca_500gene.tabular</code> (output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output file to <code class="language-plaintext highlighter-rouge">train_cna_brca_500gene_transposed.tabular</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0" title="Transpose tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">test_cna_brca_500gene.tabular</code> (output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        </ul>
+      </li>
+      <li>Rename the output file to <code class="language-plaintext highlighter-rouge">test_cna_brca_500gene_transposed.tabular</code></li>
+    </ol>
+
+    <blockquote class="comment">
+      <div class="box-title comment-title" id="comment-short-explanation-of-steps-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
+      <p>Here we will:</p>
+      <ul>
+        <li>Extract <code class="language-plaintext highlighter-rouge">sample_id</code> and <code class="language-plaintext highlighter-rouge">CLAUDIN_SUBTYPE</code> from the train and clinical data</li>
+        <li>Add the subtype to the train and test matrix</li>
+        <li>And finally remove the <code class="language-plaintext highlighter-rouge">sample_id</code> from the matrices.</li>
+      </ul>
+    </blockquote>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">train_clin_brca.tabular</code> (Input dataset)</li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep</code></li>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                <ul>
+                  <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code>, <code class="language-plaintext highlighter-rouge">Column: 16</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output to <code class="language-plaintext highlighter-rouge">Train annotation</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">test_clin_brca.tabular</code> (Input dataset)</li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep</code></li>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                <ul>
+                  <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code>, <code class="language-plaintext highlighter-rouge">Column: 16</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output to <code class="language-plaintext highlighter-rouge">Test annotation</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2" title="Join tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: <code class="language-plaintext highlighter-rouge">train_cna_brca_500gene_transposed.tabular</code> (output of <strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd File”</em>: <code class="language-plaintext highlighter-rouge">Train annotation</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output to <code class="language-plaintext highlighter-rouge">Annotated train matrix cna</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2" title="Join tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: <code class="language-plaintext highlighter-rouge">test_cna_brca_500gene_transposed.tabular</code> (output of <strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd File”</em>: <code class="language-plaintext highlighter-rouge">Test annotation</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output to <code class="language-plaintext highlighter-rouge">Annotated test matrix</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">Annotated train matrix</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Discard</code></li>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                <ul>
+                  <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output to <code class="language-plaintext highlighter-rouge">TabPFN ready train data - CNA</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">Annotated test matrix</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Discard</code></li>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                <ul>
+                  <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Rename the output to <code class="language-plaintext highlighter-rouge">TabPFN ready test data - CNA</code></li>
+    </ol>
+  </blockquote>
+
+  <p>Now the CNA data is ready for TabPFN. Let’s do the same for GEX!</p>
+
+  <h2 id="gex-data">GEX data</h2>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-prepare-gex-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Prepare GEX data</div>
+
+    <blockquote class="comment">
+      <div class="box-title comment-title" id="comment-short-explanation-of-steps-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
+      <p>Here we will:</p>
+      <ul>
+        <li>Calculate the variance of each gene in train matrix</li>
+        <li>Add the variance back to the matrix</li>
+        <li>Sort the matrix by variance in descending order</li>
+        <li>Filter the matrix by top 500 genes</li>
+        <li>Sort the matrix by gene name</li>
+      </ul>
+    </blockquote>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy2" title="Table Compute tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Table Compute</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.4+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><em>“Input Single or Multiple Tables”</em>: <code class="language-plaintext highlighter-rouge">Single Table</code>
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table”</em>: <code class="language-plaintext highlighter-rouge">train_gex_brca.tabular</code></li>
+              <li><em>“Type of table operation”</em>: <code class="language-plaintext highlighter-rouge">Compute expression across rows or columns</code>
+                <ul>
+                  <li><em>“Calculate”</em>: <code class="language-plaintext highlighter-rouge">Variance</code></li>
+                  <li><em>“For each”</em>: <code class="language-plaintext highlighter-rouge">Row</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="join1" title="Join two Datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets</strong></span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Table Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em>: <code class="language-plaintext highlighter-rouge">train_gex_brca.tabular</code></li>
+          <li><em>“and column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><em>“Fill empty columns”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+          <li><em>“Keep the header lines”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          <li>In <em>“Column selections”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Column selections”</em>
+                <ul>
+                  <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+                  <li><em>“in”</em>: <code class="language-plaintext highlighter-rouge">Descending order</code></li>
+                  <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Fast numeric sort (-n) </code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="Show beginning1" title="Select first tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select first</strong></span> with the following parameters:
+        <ul>
+          <li><em>“Select first”</em>: <code class="language-plaintext highlighter-rouge">500</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Dataset has a header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Select first</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Discard</code></li>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                <ul>
+                  <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code>, <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          <li>In <em>“Column selections”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Column selections”</em>
+                <ul>
+                  <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+                  <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Alphabetical sort </code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Rename the output file to <code class="language-plaintext highlighter-rouge">train_gex_brca_500gene.tabular</code></li>
+    </ol>
+
+    <blockquote class="comment">
+      <div class="box-title comment-title" id="comment-short-explanation-of-steps-4"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
+      <p>Here we will:</p>
+      <ul>
+        <li>Extract the list of genes from the train matrix</li>
+        <li>Filter the test data by extracted genes</li>
+        <li>Sort the matrix by gene name</li>
+        <li>Transpose both train and test data</li>
+      </ul>
+    </blockquote>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">train_gex_brca_500gene.tabular</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep</code></li>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                <ul>
+                  <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2" title="Join tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd File”</em>: <code class="language-plaintext highlighter-rouge">test_gex_brca.tabular</code></li>
+          <li><em>“Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          <li>In <em>“Column selections”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Column selections”</em>
+                <ul>
+                  <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+                  <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Alphabetical sort </code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output file to <code class="language-plaintext highlighter-rouge">test_gex_brca_500gene.tabular</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0" title="Transpose tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">train_gex_brca_500gene.tabular</code> (output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output file to <code class="language-plaintext highlighter-rouge">train_gex_brca_500gene_transposed.tabular</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0" title="Transpose tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">test_gex_brca_500gene.tabular</code> (output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        </ul>
+      </li>
+      <li>Rename the output file to <code class="language-plaintext highlighter-rouge">test_gex_brca_500gene_transposed.tabular</code></li>
+    </ol>
+
+    <blockquote class="comment">
+      <div class="box-title comment-title" id="comment-short-explanation-of-steps-5"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
+      <p>Here we will:</p>
+      <ul>
+        <li>Extract <code class="language-plaintext highlighter-rouge">sample_id</code> and <code class="language-plaintext highlighter-rouge">CLAUDIN_SUBTYPE</code> from the train and clinical data</li>
+        <li>Add the subtype to the train and test matrix</li>
+        <li>And finally remove the <code class="language-plaintext highlighter-rouge">sample_id</code> from the matrices.</li>
+      </ul>
+    </blockquote>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">train_clin_brca.tabular</code> (Input dataset)</li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep</code></li>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                <ul>
+                  <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code>, <code class="language-plaintext highlighter-rouge">Column: 16</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output to <code class="language-plaintext highlighter-rouge">Train annotation</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">test_clin_brca.tabular</code> (Input dataset)</li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep</code></li>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                <ul>
+                  <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code>, <code class="language-plaintext highlighter-rouge">Column: 16</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output to <code class="language-plaintext highlighter-rouge">Test annotation</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2" title="Join tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: <code class="language-plaintext highlighter-rouge">train_gex_brca_500gene_transposed.tabular</code> (output of <strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd File”</em>: <code class="language-plaintext highlighter-rouge">Train annotation</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output to <code class="language-plaintext highlighter-rouge">Annotated train matrix - gex</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2" title="Join tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: <code class="language-plaintext highlighter-rouge">test_gex_brca_500gene_transposed.tabular</code> (output of <strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd File”</em>: <code class="language-plaintext highlighter-rouge">Test annotation</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output to <code class="language-plaintext highlighter-rouge">Annotated test matrix - gex</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">Annotated train matrix</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Discard</code></li>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                <ul>
+                  <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output to <code class="language-plaintext highlighter-rouge">TabPFN ready train data - GEX</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">Annotated test matrix</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Discard</code></li>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+            <ul>
+              <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                <ul>
+                  <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Rename the output to <code class="language-plaintext highlighter-rouge">TabPFN ready test data - GEX</code></li>
+    </ol>
+  </blockquote>
+
+  <p>Now it is time to run TabPFN for CNA and GEX data.</p>
+
+  <h1 id="tabpfn">TabPFN</h1>
+
+  <blockquote class="warning">
+    <div class="box-title warning-title" id="warning-high-computation-time"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: High computation time</div>
+
+    <p>TabPFN takes a lot of time to do the classification task on CPU (With our data it takes about 7 hours)
+You can instead import the output (data 55,56,59, and 60) from this <a href="https://usegalaxy.eu/u/nilchia/h/final-modeling-breast-cancer-subtypes-tabpfn-3">archived history</a>.</p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-tabpfn-on-cna"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  TabPFN on CNA</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/tabpfn/tabpfn/2.0.9+galaxy0" title="Tabular data prediction using TabPFN tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular data prediction using TabPFN</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><em>“Select a machine learning task”</em>: <code class="language-plaintext highlighter-rouge">Classification</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Train data”</em>: <code class="language-plaintext highlighter-rouge">TabPFN ready train data - CNA</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“test data”</em>: <code class="language-plaintext highlighter-rouge">TabPFN ready test data - CNA</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Does test data contain labels?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-tabpfn-on-gex"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  TabPFN on GEX</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/tabpfn/tabpfn/2.0.9+galaxy0" title="Tabular data prediction using TabPFN tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular data prediction using TabPFN</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.9+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><em>“Select a machine learning task”</em>: <code class="language-plaintext highlighter-rouge">Classification</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Train data”</em>: <code class="language-plaintext highlighter-rouge">TabPFN ready train data - GEX</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“test data”</em>: <code class="language-plaintext highlighter-rouge">TabPFN ready test data - GEX</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          <li><em>“Does test data contain labels?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>To make comparison of TabPFN and Flexynesis fair, we should apply Flexynesis on the GEX and CNA with 500 features separately.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-flexynesis-on-cna"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Flexynesis on CNA</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3" title="Flexynesis tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flexynesis</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.20+galaxy3)</span> with the following parameters:
+        <ul>
+          <li><em>“I certify that I am not using this tool for commercial purposes.”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          <li><em>“Type of Analysis”</em>: <code class="language-plaintext highlighter-rouge">Supervised training</code>
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training clinical data”</em>: <code class="language-plaintext highlighter-rouge">train_clin_brca.tabular</code></li>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Test clinical data”</em>: <code class="language-plaintext highlighter-rouge">test_clin_brca.tabular</code></li>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training omics data”</em>: <code class="language-plaintext highlighter-rouge">train_cna_brca_500gene.tabular</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Test omics data”</em>: <code class="language-plaintext highlighter-rouge">test_cna_brca_500gene.tabular</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              <li><em>“What type of assay is your input?”</em>: <code class="language-plaintext highlighter-rouge">cna</code></li>
+              <li><em>“Model class”</em>: <code class="language-plaintext highlighter-rouge">DirectPred</code></li>
+              <li><em>“Column name in the train clinical data to use for predictions, multiple targets are allowed”</em>: <code class="language-plaintext highlighter-rouge">Column: 16</code> (CLAUDIN_SUBTYPE)</li>
+              <li>In <em>“Advanced Options”</em>:
+                <ul>
+                  <li><em>“Variance threshold (as percentile) to drop low variance features.”</em>: <code class="language-plaintext highlighter-rouge">0.8</code></li>
+                  <li><em>“Minimum number of features to retain after feature selection.”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
+                  <li><em>“Top percentile features (among the features remaining after variance filtering and data cleanup) to retain after feature selection.”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
+                  <li><em>“Number of iterations for hyperparameter optimization.”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+                </ul>
+              </li>
+              <li>In <em>“Visualization”</em>:
+                <ul>
+                  <li><em>“Generate embeddings plot?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                  <li><em>“Generate precision-recall curves plot?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-flexynesis-on-gex"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Flexynesis on GEX</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3" title="Flexynesis tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flexynesis</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.20+galaxy3)</span> with the following parameters:
+        <ul>
+          <li><em>“I certify that I am not using this tool for commercial purposes.”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          <li><em>“Type of Analysis”</em>: <code class="language-plaintext highlighter-rouge">Supervised training</code>
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training clinical data”</em>: <code class="language-plaintext highlighter-rouge">train_clin_brca.tabular</code></li>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Test clinical data”</em>: <code class="language-plaintext highlighter-rouge">test_clin_brca.tabular</code></li>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training omics data”</em>: <code class="language-plaintext highlighter-rouge">train_gex_brca_500gene.tabular</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Test omics data”</em>: <code class="language-plaintext highlighter-rouge">test_gex_brca_500gene.tabular</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              <li><em>“What type of assay is your input?”</em>: <code class="language-plaintext highlighter-rouge">gex</code></li>
+              <li><em>“Model class”</em>: <code class="language-plaintext highlighter-rouge">DirectPred</code></li>
+              <li><em>“Column name in the train clinical data to use for predictions, multiple targets are allowed”</em>: <code class="language-plaintext highlighter-rouge">Column: 16</code> (CLAUDIN_SUBTYPE)</li>
+              <li>In <em>“Advanced Options”</em>:
+                <ul>
+                  <li><em>“Variance threshold (as percentile) to drop low variance features.”</em>: <code class="language-plaintext highlighter-rouge">0.8</code></li>
+                  <li><em>“Minimum number of features to retain after feature selection.”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
+                  <li><em>“Top percentile features (among the features remaining after variance filtering and data cleanup) to retain after feature selection.”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
+                  <li><em>“Number of iterations for hyperparameter optimization.”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+                </ul>
+              </li>
+              <li>In <em>“Visualization”</em>:
+                <ul>
+                  <li><em>“Generate embeddings plot?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                  <li><em>“Generate precision-recall curves plot?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>Compare the PR-curve plots of both Flexynesis and TabPFN predictions, which one is more accurate?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>You can see that the prediction of TabPFN was better with the CNA data, however we have got better prediction with Flexynesis on GEX, and with the power of data integration using both CNA and GEX, the prediction is further improved!!</li>
+      </ol>
+      <figure id="figure-9" style="max-width: 90%;"><img src="../../images/flexynesis_classification/pr_curve-tabpfn_cna.png" alt="Precision-Recall curve plot of TabPFN on CNA. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/flexynesis_classification/pr_curve-tabpfn_cna.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Precision-Recall curve plot of TabPFN on CNA</figcaption></figure>
+      <figure id="figure-10" style="max-width: 90%;"><img src="../../images/flexynesis_classification/pr_curve-flexynesis_cna.jpeg" alt="Precision-Recall curve plot of Flexynesis on CNA. " width="1941" height="1461" loading="lazy" /><a target="_blank" href="../../images/flexynesis_classification/pr_curve-flexynesis_cna.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Precision-Recall curve plot of Flexynesis on CNA</figcaption></figure>
+      <figure id="figure-11" style="max-width: 90%;"><img src="../../images/flexynesis_classification/pr_curve-tabpfn_gex.png" alt="Precision-Recall curve plot of TabPFN on GEX. " width="800" height="600" loading="lazy" /><a target="_blank" href="../../images/flexynesis_classification/pr_curve-tabpfn_gex.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Precision-Recall curve plot of TabPFN on GEX</figcaption></figure>
+      <figure id="figure-12" style="max-width: 90%;"><img src="../../images/flexynesis_classification/pr_curve-flexynesis_gex.jpeg" alt="Precision-Recall curve plot of Flexynesis on GEX. " width="1941" height="1461" loading="lazy" /><a target="_blank" href="../../images/flexynesis_classification/pr_curve-flexynesis_gex.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Precision-Recall curve plot of Flexynesis on GEX</figcaption></figure>
+      <figure id="figure-13" style="max-width: 90%;"><img src="../../images/flexynesis_classification/pr_curve-flexynesis.jpeg" alt="Precision-Recall curve plot of Flexynesis. " width="1941" height="1461" loading="lazy" /><a target="_blank" href="../../images/flexynesis_classification/pr_curve-flexynesis.jpeg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Precision-Recall curve plot of Flexynesis</figcaption></figure>
+    </blockquote>
+
+  </blockquote>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-try-flexynesis-with-more-iteration"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Try Flexynesis with more iteration</div>
+
+    <p>In this training we only used 5 iterations to train our model. You can rerun the tool with higher number of iterations and see how the prediction improves.</p>
+
+  </blockquote>
+
+  <h1 id="conclusion-1">Conclusion</h1>
+
+  <p>In this tutorial, we demonstrated how Flexynesis can model breast cancer subtypes from multi omics data using a deep generative framework. The tool handles preprocessing, feature selection, and latent space learning automatically, making it efficient and robust.</p>
+
+  <p>By training on TCGA BRCA data, we:</p>
+
+  <ul>
+    <li>
+      <p>Visualized meaningful subtype separation in the latent space</p>
+    </li>
+    <li>
+      <p>Identified subtype-specific genes</p>
+    </li>
+    <li>
+      <p>Showed how learned features relate to known clinical labels</p>
+    </li>
+  </ul>
+
+  <p>Flexynesis provides a fast and accessible way to explore complex omics datasets and uncover biological structure without extensive manual tuning.</p>
+
+  <p>We also compared Flexynesis with TabPFN and we saw although TabPFN predicted the subtypes with CNA data better, but it was not as good as Flexynesis on GEX data. It also provides fewer outputs compared to Flexynesis for example the integrated latent space embeddings, feature importance and a full information about the predictions.</p>
+
+</div>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Flexynesis learns biologically meaningful latent spaces</p>
+</li>
+                        
+                        <li><p>BRCA subtypes can be distinguished using learned features</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/statistics/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Uyar2024">Uyar, B., T. Savchyn, R. Wurmus, A. Sarigun, M. M. Shaik <i>et al.</i>, 2024 <b>Flexynesis: A deep learning framework for bulk multi-omics data integration for precision oncology and beyond</b>. <a href="https://doi.org/10.1101/2024.07.16.603606">10.1101/2024.07.16.603606</a></li>
+<li id="cbioportal-website">community, cbioPortal <b>GcBioPortal for cancer genomics</b>. <a href="https://www.cbioportal.org/">https://www.cbioportal.org/</a></li>
+<li id="metabric-website">community, metabric <b>METABRIC</b>. <a href="https://ega-archive.org/studies/EGAS00000000083">https://ega-archive.org/studies/EGAS00000000083</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/flexynesis_classification"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/flexynesis_classification">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Amirhossein Naghsh Nilchi, Björn Grüning,  <b>Modeling Breast Cancer Subtypes using Flexynesis (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/flexynesis_classification/tutorial.html">https://training.galaxyproject.org/training-material/topics/statistics/tutorials/flexynesis_classification/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{statistics-flexynesis_classification,
+author = "Amirhossein Naghsh Nilchi and Björn Grüning",
+	title = "Modeling Breast Cancer Subtypes using Flexynesis (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/flexynesis_classification/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/flexynesis_classification/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: pick_value
+  owner: iuc
+  revisions: b19e21af9c52
+  tool_panel_section_label: Collection Operations
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/flexynesis_classification/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/statistics/tutorials/flexynesis_classification/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/3aca13065fdf60c96e8919a22841b79dd37411ee">3aca130</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
