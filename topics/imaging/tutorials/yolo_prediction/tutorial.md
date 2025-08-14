@@ -128,10 +128,10 @@ This dataset provides two pretrained YOLOv8 detection models tailored for the ma
 > <hands-on-title> Detect Buccinid snails on images </hands-on-title>
 >
 > 1. {% tool [Perform YOLO image labeling](toolshed.g2.bx.psu.edu/repos/bgruening/yolo_predict/yolo_predict/8.3.0+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Input images"*: `DeepSeaSpy 100 images sample` (Input images dataset collection)
->    - {% icon param-file %} *"Class names file"*: `Buccinide` (Input plain text file (.txt) that lists the names of the classes the model can detect)
->    - *"Model"*: `dataset_seanoe_101899_YOLOv8-weights-for-Buccinidae-detection` (Input pt file)
->    - *"Prediction mode"*: `Detect`
+>    - {% icon param-file %} *"Input images"*: `DeepSeaSpy 100 images sample` (click the {% icon param-collection %} button, then select "DeepSeaSpy 100 images sample" from the list)
+>    - {% icon param-file %} *"YOLO class name file"*: `Buccinide` (input plain text file that lists the names of the classes the model can detect)
+>    - {% icon param-file %} *"Model file"*: `dataset_seanoe_101899_YOLOv8-weights-for-Buccinidae-detection` (click the "…" button, then search for the name of the file)
+>    - *"Prediction mode"*: `detect`
 >    - *"Image size"*: `1000`
 >    - *"Confidence"*: `0.25`
 >    - *"IoU"*: `0.45`
