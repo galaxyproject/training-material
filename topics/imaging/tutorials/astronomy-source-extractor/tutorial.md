@@ -93,6 +93,7 @@ The filter kernel is used to smooth the input image, which can enhance the detec
 import numpy as np
 kernel = np.loadtxt("filter.txt")
 ```
+since this is the way the tool's back-end implementation loads the file.
 
 
 > <comment-title> Checking the metadata of an image </comment-title>
