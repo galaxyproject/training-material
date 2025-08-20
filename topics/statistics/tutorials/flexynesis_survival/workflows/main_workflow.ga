@@ -1,0 +1,537 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This workflow shows Flexynesis usage for predicting survival markers from a multi-omics dataset",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0003-1329-3044",
+            "name": "Amirhossein Naghsh Nilchi"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Final - Survival Markers of Lower Grade ",
+    "readme": "This Workflow is inspired from the original flexynesis analysis notebook: [survival_subtypes_LGG_GBM.ipynb](https://github.com/BIMSBbioinfo/flexynesis/blob/main/examples/tutorials/survival_subtypes_LGG_GBM.ipynb).",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "clinical training file",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "clinical training file",
+                    "name": "clinical_train"
+                }
+            ],
+            "label": "clinical_train",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 3,
+                "top": 0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "fbedfe58-516d-459c-9ce6-0144a5577331",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "clinical test file",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "clinical test file",
+                    "name": "clinical_test"
+                }
+            ],
+            "label": "clinical_test",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2,
+                "top": 98.61666870117188
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "70908678-bb72-4cca-8d48-57e2595acfce",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "omics 1 training file",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "omics 1 training file",
+                    "name": "omics1_train"
+                }
+            ],
+            "label": "omics1_train",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 4,
+                "top": 203.61666870117188
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "1ba4016e-6cb0-4abb-b1c5-53b2facb7c79",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "omics 1 test file",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "omics 1 test file",
+                    "name": "omics1_test"
+                }
+            ],
+            "label": "omics1_test",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 4,
+                "top": 302.6166687011719
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "bbe1e79c-34c4-43ff-8d5b-a4b6cb9784e0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "omics 2 training file",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "omics 2 training file",
+                    "name": "omics2_train"
+                }
+            ],
+            "label": "omics2_train",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 400.60933129882847
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "3f34ee17-382c-4110-be41-ec5e9b291433",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "omics 2 test file",
+            "content_id": null,
+            "errors": null,
+            "id": 5,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "omics 2 test file",
+                    "name": "omics2_test"
+                }
+            ],
+            "label": "omics2_test",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 3,
+                "top": 504.60933129882847
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "9031afad-f6f6-47a5-bc08-6b95dcac3268",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "training_type|omics_0|test_omics": {
+                    "id": 5,
+                    "output_name": "output"
+                },
+                "training_type|omics_0|train_omics": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "training_type|test_clin": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "training_type|test_omics_main": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "training_type|train_clin": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "training_type|train_omics_main": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                }
+            ],
+            "label": null,
+            "name": "Flexynesis",
+            "outputs": [
+                {
+                    "name": "results",
+                    "type": "input"
+                },
+                {
+                    "name": "plots",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 431,
+                "top": 210.61000000000035
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "9c91d13827ef",
+                "name": "flexynesis",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"training_type\": {\"model\": \"s_train\", \"__current_case__\": 0, \"train_clin\": {\"__class__\": \"ConnectedValue\"}, \"test_clin\": {\"__class__\": \"ConnectedValue\"}, \"train_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"test_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"assay_main\": \"mut\", \"omics\": [{\"__index__\": 0, \"train_omics\": {\"__class__\": \"ConnectedValue\"}, \"test_omics\": {\"__class__\": \"ConnectedValue\"}, \"assay\": \"cna\"}], \"model_class\": {\"model_class\": \"DirectPred\", \"__current_case__\": 0}, \"target_variables\": null, \"surv_event_var\": \"8\", \"surv_time_var\": \"7\", \"advanced\": {\"fusion_type\": \"intermediate\", \"finetuning_samples\": \"0\", \"variance_threshold\": \"0.5\", \"correlation_threshold\": \"0.8\", \"subsample\": \"0\", \"features_min\": \"1000\", \"features_top_percentile\": \"10.0\", \"log_transform\": false, \"early_stop_patience\": \"10\", \"hpo_iter\": \"5\", \"val_size\": \"0.2\", \"hpo_patience\": \"10\", \"use_cv\": false, \"use_loss_weighting\": true, \"evaluate_baseline_performance\": false, \"feature_importance_method\": \"Both\"}, \"plot\": {\"plot_embeddings_conditional\": {\"plot_embeddings\": \"no\", \"__current_case__\": 0}, \"plot_km_conditional\": {\"plot_km\": \"yes\", \"__current_case__\": 1, \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_cox_conditional\": {\"plot_cox\": \"yes\", \"__current_case__\": 1, \"omics_name\": \"mut\", \"clinical_variables\": null, \"top_features\": \"20\", \"crossval_conditional\": {\"crossval\": \"no\", \"__current_case__\": 1}, \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_scatter_conditional\": {\"plot_scatter\": \"no\", \"__current_case__\": 0}, \"plot_concordance_conditional\": {\"plot_concordance\": \"no\", \"__current_case__\": 0}, \"plot_pr_curves_conditional\": {\"plot_pr_curves\": \"no\", \"__current_case__\": 0}, \"plot_roc_curves_conditional\": {\"plot_roc_curves\": \"no\", \"__current_case__\": 0}, \"plot_boxplot_conditional\": {\"plot_boxplot\": \"no\", \"__current_case__\": 0}}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.20+galaxy3",
+            "type": "tool",
+            "uuid": "31c96be6-53c2-4050-860b-03cbc709ae26",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Cox and KM plots",
+                    "output_name": "plots",
+                    "uuid": "5e712e2e-3831-48d6-95b7-3426c86fa2c5"
+                },
+                {
+                    "label": "flexynesis output",
+                    "output_name": "results",
+                    "uuid": "37e6485d-a16d-4191-973f-deb5301d6949"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "results"
+                }
+            },
+            "inputs": [],
+            "label": "Extract prediction file",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 701.5,
+                "top": 400.5
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_identifier\", \"__current_case__\": 1, \"identifier\": \"job.predicted_labels\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "fdc2166d-90c9-4016-a6e8-8d5085f7b6e7",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "results"
+                }
+            },
+            "inputs": [],
+            "label": "Extract test Embeddings",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 702.944383115289,
+                "top": 703.6612638228564
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_identifier\", \"__current_case__\": 1, \"identifier\": \"job.embeddings_test\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "09297b54-52a1-4a9a-9151-6583b27b1ded",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.9+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "in_file": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Calculate median of predicted value",
+            "name": "Datamash",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1002.1291541420144,
+                "top": 300.3553460206089
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.9+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "61e2aa6bb55d",
+                "name": "datamash_ops",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"grouping\": null, \"header_in\": true, \"header_out\": false, \"ignore_case\": false, \"in_file\": {\"__class__\": \"ConnectedValue\"}, \"narm\": false, \"need_sort\": false, \"operations\": [{\"__index__\": 0, \"op_name\": \"median\", \"op_column\": \"6\"}], \"print_full_line\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.9+galaxy0",
+            "type": "tool",
+            "uuid": "7ab36003-90a4-486e-92b5-f59adf07f8cb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "add boolean column for high and low risk",
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1001.5792472378172,
+                "top": 497.8271305863283
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1",
+            "tool_shed_repository": {
+                "changeset_revision": "aff5135563c6",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"avoid_scientific_notation\": false, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"error_handling\": {\"auto_col_types\": false, \"fail_on_non_existent_columns\": true, \"non_computable\": {\"action\": \"--fail-on-non-computable\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"ops\": {\"header_lines_select\": \"yes\", \"__current_case__\": 1, \"expressions\": [{\"__index__\": 0, \"cond\": \"float(c6)>=-0.66496020555496\", \"add_column\": {\"mode\": \"\", \"__current_case__\": 0, \"pos\": \"\"}, \"new_column_name\": \"risk_groups\"}]}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1",
+            "type": "tool",
+            "uuid": "25ded351-4db9-458e-829b-82db92546cbb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy2",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "infile": {
+                    "id": 10,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "rename boolean to high and low",
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1302.830873814047,
+                "top": 500.97487714698053
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"column\": \"9\", \"find_pattern\": \"True\", \"replace_pattern\": \"High_risk\"}, {\"__index__\": 1, \"column\": \"9\", \"find_pattern\": \"False\", \"replace_pattern\": \"Low_risk\"}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "ca094aff-ac6d-497e-bf29-c475fe5c5d8e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "plot_conditional|embeddings": {
+                    "id": 8,
+                    "output_name": "output"
+                },
+                "plot_conditional|labels": {
+                    "id": 11,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis plot",
+                    "name": "plot_conditional"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis plot",
+                    "name": "plot_conditional"
+                }
+            ],
+            "label": "High-Low risk groups embedding plot",
+            "name": "Flexynesis plot",
+            "outputs": [
+                {
+                    "name": "plot_out",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1600.6124413033167,
+                "top": 500.0078006851417
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "07f595f34f29",
+                "name": "flexynesis_plot",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"plot_conditional\": {\"plot_type\": \"dimred\", \"__current_case__\": 0, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"embeddings\": {\"__class__\": \"ConnectedValue\"}, \"color\": \"9\", \"method\": \"pca\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.20+galaxy3",
+            "type": "tool",
+            "uuid": "6bac0afb-e498-4ea4-9e56-b1dd5ed2f41b",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "High-Low_risk_groups_embedding_pca_plot",
+                    "output_name": "plot_out",
+                    "uuid": "22e93b7f-787c-4d58-9b25-f159bc3688b4"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "flexynesis",
+        "machine_learning"
+    ],
+    "uuid": "a55a758e-5ab4-4f91-b97b-9c0451dcc933",
+    "version": 8
+}
