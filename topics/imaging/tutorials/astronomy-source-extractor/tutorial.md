@@ -64,7 +64,7 @@ For more in-depth documentation, you can refer to:
 
 ## Input Requirements 
 
-The source-extractor tool accepts a single image file as input, with the option to provide a mask and/or a filter. Typically, for astronomy, a sky image contains luminous sources. 
+The source-extractor tool accepts a single image file as input, with the option to provide a mask and/or a filter. Typically, for astronomy, a sky image contains luminous sources. In addition, the tool accepts several parameters related to the background estimation and source detectionm, which are set to the suggested default values. A subset of them is described in the subsection below.
 
 **Image:** 
 - Preferrably: light sources on a dark background.
@@ -78,24 +78,6 @@ value > maskthresh
 ```
 or boolean ```True``` are masked.
 - Format: a single-channel 2D array stored as ```.tiff``` or ```.fits```.  
-
-**Filter Kernel (Optional):** 
-The filter kernel is used to smooth the input image, which can enhance the detection of faint and extended sources. However, in crowded fields, filtering may reduce performance by blending nearby objects.
-
-- If ```Filter Case``` is set to ```none```, no filtering is applied.
-- If ```Filter Case``` is ```default```, a built-in smoothing kernel is used:
-```markdown
-1 2 1
-2 4 2
-1 2 1
-```
-- If ```Filter Case``` is ```file```, you must provide a custom 2D array stored as plain text ```.txt``` file. The file should contain whitespace-separated values and must be readable with:
-```python
-import numpy as np
-kernel = np.loadtxt("filter.txt")
-```
-since this is the way the tool's back-end implementation loads the file.
-
 
 > <comment-title> Checking the metadata of an image </comment-title>
 >
@@ -112,7 +94,28 @@ since this is the way the tool's back-end implementation loads the file.
 {: .comment}
 
 
+**Filter Kernel (Optional):** 
+The filter kernel is used to smooth the input image, which can enhance the detection of faint and extended sources. However, in crowded fields, filtering may reduce performance by blending nearby objects.
+
+- If ```Filter Case``` is set to ```none```, no filtering is applied.
+- If ```Filter Case``` is ```default```, a built-in smoothing kernel is used:
+```markdown
+1 2 1
+2 4 2
+1 2 1
+```
+- If ```Filter Case``` is ```file```, you must provide a custom 2D array stored as plain text file, that contains whitespace-separated values.
+> <comment-title> Checking the metadata of an image </comment-title>
+> You can check on your computer whether the filter file has the correct format by reading it with:
+> ``` import numpy as np ```
+> ``` kernel = np.loadtxt("filter.txt")```
+> since this is the way the tool's back-end implementation loads the file.
+{: .comment}
+
+
 ### Parameters for Background Estimation and Thresholding
+
+In this subsection, we describe a subset of tool's parameters that you can change.
 
 Before source detection, the tool estimates the image background. This is done by dividing the image into a grid of boxes, each with a default size of:
 ``` python
