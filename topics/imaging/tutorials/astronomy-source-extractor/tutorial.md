@@ -25,6 +25,7 @@ requirements:
     topic_name: imaging
     tutorials:
       - imaging-introduction
+      - voronoi-segmentation
 
 contributions:
   authorship:
