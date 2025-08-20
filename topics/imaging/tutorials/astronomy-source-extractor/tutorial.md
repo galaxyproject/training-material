@@ -122,9 +122,9 @@ Before source detection, the tool estimates the image background. This is done b
 bw = 64  # box width in pixels
 bh = 64  # box height in pixels
 ```
-Within each box, the pixel histogram is filtered to remove outliers, and the background level is estimated using a mode approximation based on the median and mean of the remaining pixel values. 
+Within each box, the pixel histogram is filtered to remove outliers, and the background level is estimated using a mode approximation based on the median and mean of the remaining pixel values. While 64 is the default value in the [SEP](https://sep.readthedocs.io/en/stable/index.html) package, the original [paper](https://ui.adsabs.harvard.edu/abs/1996A%26AS..117..393B/abstract) suggests that on most images, a value between 32 to 128 pixels should work fine.
 
-After background estimation, the tool identifies groups of pixels that exceed a defined brightness threshold.
+After background estimation, the tool identifies groups of pixels that exceed a defined brightness threshold. These parameters should help distinguish between real luminous sources and random fluctuations that can appear in the background.
 
 Detection Criteria:
 
@@ -152,6 +152,7 @@ err_option = 'float_globalrms'  # Use global RMS (i.e. root mean square) of the 
 err_option = 'array_rms'        # Use a pixel-wise RMS array of the background
 err_option = 'none'             # Use 'thresh' as an absolute threshold
 ```
+It is advisable to adapt the error estimation to the studied image: e.g. if the background is reasonably uniform, using a global value should be sufficient. In contrast, if the background changes drastically in different regions of the image, a pixel-wise RMS would be preferred.
 
 
 ## Getting data from DESI Legacy Surveys
