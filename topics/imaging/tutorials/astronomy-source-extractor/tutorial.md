@@ -8,7 +8,7 @@ questions:
   - How can I easily get sky images?
   - How can detections be improved?
   - How can I use the extracted source properties?
-  - How can I get the seed image for the [Voronoi segmentation tutorial]({% link topics/imaging/tutorials/voronoi-segmentation/tutorial.md %})?
+  - How can I get the seed image for the Voronoi segmentation tutorial?
 objectives:
   - How to perform luminous source extraction in Galaxy.
   - How to identify objects.
@@ -25,7 +25,6 @@ requirements:
     topic_name: imaging
     tutorials:
       - imaging-introduction
-      - voronoi-segmentation
 
 contributions:
   authorship:
