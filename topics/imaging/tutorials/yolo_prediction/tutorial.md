@@ -86,7 +86,7 @@ The [SEANOE](https://www.seanoe.org/data/00907/101899) collection features real 
 >
 > 4. Unhide the models data files.
 >
->    History search `name:detection deleted:false visible:any` then unhidde the 2 model files "dataset_seanoe_101899_YOLOv8-weights-for-Bythograeidae-detection" and "dataset_seanoe_101899_YOLOv8-weights-for-Buccinidae-detection".
+>    History search `name:detection deleted:false visible:any` then unhide the 2 model files "dataset_seanoe_101899_YOLOv8-weights-for-Bythograeidae-detection" and "dataset_seanoe_101899_YOLOv8-weights-for-Buccinidae-detection".
 >
 >
 >    {% snippet faqs/galaxy/datasets_unhidden.md %}
