@@ -167,7 +167,7 @@ Our first step is to build a small, custom database using our reference viruses.
 > >
 > > 1. What does the k-mer size parameter represent?
 > > 2. Why did we compress the output database tarball?
-> > 3. There are three genomes missing in my database. Why?
+> > 3. There are three genomes missing in the database. Why?
 > >
 > > > <solution-title></solution-title>
 > > >
