@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Indexing and profiling microbes with MetaSBT / Indexing and profiling microbes with MetaSBT / Microbiome</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@a21094d84d83f09846ed764bcd64375384ef804a",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metasbt/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Indexing and profiling microbes with MetaSBT">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-08-25 21:21:36 +0000">
+<meta name="DC.creator" content="Fabio Cumbo"><meta name="description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Microbiome / Indexing and profiling microbes with MetaSBT / Hands-on: Indexing and profiling microbes with MetaSBT">
+        <meta property="og:description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/microbiome/tutorials/metasbt/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Indexing and profiling microbes with MetaSBT",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-08-25 21:21:36 +0000",
+  "datePublished": "2025-08-25 21:21:36 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Microbiome",
+    "description": "A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ",
+    "url": "https://training.galaxyproject.org/training-material/topics/microbiome/"
+  },
+  "abstract": "## Introduction",
+  "learningResourceType": "e-learning",
+  "name": "Indexing and profiling microbes with MetaSBT",
+  "url": "https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metasbt/tutorial.html",
+  "version": 7,
+  "timeRequired": "PT30M",
+  "teaches": "- Understand the fundamental concepts of MetaSBT for efficient genomic indexing.\n- Learn to use the `metasbt_index` tool to create a custom viral database.\n- Learn to use the `metasbt_index` tool to update an existing database.\n- Learn to use the `metasbt_profile` tool to identify and characterize a query viral genome.\n- Be able to interpret the similarity reports generated by the profiling tool.",
+  "keywords": [
+    "Microbiome",
+    "metagenomics",
+    "diversity",
+    "taxonomic profiling"
+  ],
+  "description": "## Abstract\n\n## Introduction\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What are Sequence Bloom Trees and how does MetaSBT use them for genomics?\n - How do you build a custom viral database from a set of reference genomes?\n - How can an existing MetaSBT database be updated with new viruses?\n - How do you profile a query viral genome against a database to determine its identity and novelty?\n - How can we interpret the viral genome profiling results?\n\n\n## Learning Objectives\n\n- Understand the fundamental concepts of MetaSBT for efficient genomic indexing.\n- Learn to use the `metasbt_index` tool to create a custom viral database.\n- Learn to use the `metasbt_index` tool to update an existing database.\n- Learn to use the `metasbt_profile` tool to identify and characterize a query viral genome.\n- Be able to interpret the similarity reports generated by the profiling tool.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html",
+      "name": "Galaxy Basics for everyone",
+      "description": "Hands-on for 'Galaxy Basics for everyone' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/cumbof/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/cumbof/",
+      "name": "Fabio Cumbo",
+      "image": "https://avatars.githubusercontent.com/cumbof",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2920-5838",
+      "orcid": "https://orcid.org/0000-0003-2920-5838"
+    }
+  ],
+  "contributor": [],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Microbiome",
+      "description": "A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ",
+      "url": "https://training.galaxyproject.org/training-material/topics/microbiome/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3174",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3174",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3174"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3697",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3697",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3697"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0637",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0637",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0637"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/records/15882806",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/microbiome" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Microbiome
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/microbiome/faqs/" title="Check our FAQs for the Microbiome topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/microbiome/tutorials/metasbt/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/microbiome/tutorials/metasbt/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-microbiome">
+    <h1 data-toc-skip>Indexing and profiling microbes with MetaSBT</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/cumbof/" class="contributor-badge contributor-cumbof"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/cumbof?s=36" alt="Fabio Cumbo avatar" width="36" class="avatar" />
+    Fabio Cumbo</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are Sequence Bloom Trees and how does MetaSBT use them for genomics?</p>
+</li>
+        
+        <li><p>How do you build a custom viral database from a set of reference genomes?</p>
+</li>
+        
+        <li><p>How can an existing MetaSBT database be updated with new viruses?</p>
+</li>
+        
+        <li><p>How do you profile a query viral genome against a database to determine its identity and novelty?</p>
+</li>
+        
+        <li><p>How can we interpret the viral genome profiling results?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understand the fundamental concepts of MetaSBT for efficient genomic indexing.</p>
+</li>
+        
+        <li><p>Learn to use the <code class="language-plaintext highlighter-rouge">metasbt_index</code> tool to create a custom viral database.</p>
+</li>
+        
+        <li><p>Learn to use the <code class="language-plaintext highlighter-rouge">metasbt_index</code> tool to update an existing database.</p>
+</li>
+        
+        <li><p>Learn to use the <code class="language-plaintext highlighter-rouge">metasbt_profile</code> tool to identify and characterize a query viral genome.</p>
+</li>
+        
+        <li><p>Be able to interpret the similarity reports generated by the profiling tool.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Galaxy Basics for everyone</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/15882806">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr" title="">
+			UseGalaxy.fr
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Aug 25, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 25, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <h2 id="introduction">Introduction</h2>
+
+<p>The ever-increasing volume of sequenced viral genomes, from global surveillance efforts and metagenomic studies, presents a significant computational challenge. How can we efficiently catalog all known viral genomes and then quickly determine the identity of a newly sequenced one?</p>
+
+<p><strong>MetaSBT</strong> is a powerful computational method designed to address this challenge. It uses a data structure called a <strong>Sequence Bloom Tree (SBT)</strong>, which is a tree-like index where each leaf contains a <strong>Bloom filter</strong>. A Bloom filter is a space-efficient probabilistic data structure that allows for rapid checking of whether an element (in this case, a k-mer from a genome) is part of a set. By organizing these filters into a tree, MetaSBT can quickly search across thousands of genomes at once.</p>
+
+<p>This approach gives MetaSBT several key advantages:</p>
+<ul>
+  <li><strong>Speed:</strong> It can query massive databases much faster than traditional alignment-based methods.</li>
+  <li><strong>Low Memory Footprint:</strong> It uses significantly less RAM than other methods, making it accessible on standard hardware.</li>
+  <li><strong>Novelty Detection:</strong> It can distinguish k-mers from a query genome that are present in the database from those that are new or unknown.</li>
+</ul>
+
+<p>In this tutorial, we will learn how to use the MetaSBT suite in Galaxy to perform three key tasks with viral genomes:</p>
+
+<ol>
+  <li><strong>Create</strong> a new MetaSBT database from a small set of reference viruses.</li>
+  <li><strong>Update</strong> this database with new viruses.</li>
+  <li><strong>Profile</strong> a query virus against our database to determine its identity and assess its novelty.</li>
+</ol>
+
+<p>Let’s get started!</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Prepare the History</div>
+
+  <ol>
+    <li>Create a new history for this tutorial and give it a name like “MetaSBT Viral Profiling”.</li>
+    <li>
+      <p>Import the 29 viral reference genomes for this tutorial belonging to 5 different viral species. Open the Galaxy <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Manager</strong> and choose <strong>Paste/Fetch data</strong>. Paste the following URLs into the text box:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/882/815/GCA_000882815.1_ViralProj36615/GCA_000882815.1_ViralProj36615_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/366/285/GCA_002366285.1_ViralProj411812/GCA_002366285.1_ViralProj411812_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/004/787/195/GCA_004787195.1_ASM478719v1/GCA_004787195.1_ASM478719v1_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/004/787/735/GCA_004787735.1_ASM478773v1/GCA_004787735.1_ASM478773v1_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/004/788/155/GCA_004788155.1_ASM478815v1/GCA_004788155.1_ASM478815v1_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/864/885/GCA_000864885.1_ViralProj15500/GCA_000864885.1_ViralProj15500_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/009/858/895/GCA_009858895.3_ASM985889v3/GCA_009858895.3_ASM985889v3_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/009/937/885/GCA_009937885.1_ASM993788v1/GCA_009937885.1_ASM993788v1_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/009/937/895/GCA_009937895.1_ASM993789v1/GCA_009937895.1_ASM993789v1_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/009/937/905/GCA_009937905.1_ASM993790v1/GCA_009937905.1_ASM993790v1_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/857/045/GCA_000857045.1_ViralProj15142/GCA_000857045.1_ViralProj15142_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/006/458/325/GCA_006458325.1_ASM645832v1/GCA_006458325.1_ASM645832v1_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/006/458/385/GCA_006458385.1_ASM645838v1/GCA_006458385.1_ASM645838v1_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/006/458/425/GCA_006458425.1_ASM645842v1/GCA_006458425.1_ASM645842v1_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/006/458/665/GCA_006458665.1_ASM645866v1/GCA_006458665.1_ASM645866v1_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/851/145/GCA_000851145.1_ViralMultiSegProj14892/GCA_000851145.1_ViralMultiSegProj14892_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/864/105/GCA_000864105.1_ViralMultiSegProj15617/GCA_000864105.1_ViralMultiSegProj15617_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/865/085/GCA_000865085.1_ViralMultiSegProj15622/GCA_000865085.1_ViralMultiSegProj15622_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/865/725/GCA_000865725.1_ViralMultiSegProj15521/GCA_000865725.1_ViralMultiSegProj15521_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/866/645/GCA_000866645.1_ViralMultiSegProj15620/GCA_000866645.1_ViralMultiSegProj15620_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/862/125/GCA_000862125.1_ViralProj15306/GCA_000862125.1_ViralProj15306_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/865/065/GCA_000865065.1_ViralProj15599/GCA_000865065.1_ViralProj15599_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/866/625/GCA_000866625.1_ViralProj15598/GCA_000866625.1_ViralProj15598_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/871/845/GCA_000871845.1_ViralProj20183/GCA_000871845.1_ViralProj20183_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/004/786/575/GCA_004786575.1_ASM478657v1/GCA_004786575.1_ASM478657v1_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/029/745/045/GCA_029745045.1_ASM2974504v1/GCA_029745045.1_ASM2974504v1_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/029/745/055/GCA_029745055.1_ASM2974505v1/GCA_029745055.1_ASM2974505v1_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/029/745/065/GCA_029745065.1_ASM2974506v1/GCA_029745065.1_ASM2974506v1_genomic.fna.gz
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/029/744/035/GCA_029744035.1_ASM2974403v1/GCA_029744035.1_ASM2974403v1_genomic.fna.gz
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Also import the table from the <a href="https://zenodo.org/records/15882806">Zenodo record</a>:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/15882806/files/taxonomies.tsv
+</code></pre></div>      </div>
+    </li>
+    <li>Click <strong>Start</strong> and then <strong>Close</strong> the upload manager.</li>
+    <li>Once uploaded, you will have 30 items in your history. The table retrieved at the previous step contains a mapping between the name of the genomes and their complete taxonomic labels. Note that four genomes are missing from this table. Don’t worry, we are going to use them later for updating our database and demonstrate how to profile new genomes:
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">GCA_000882815.1_ViralProj36615_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Kitrinoviricota|c__Flasuviricetes|o__Amarillovirales|f__Flaviviridae|g__Flavivirus|s__Zika_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_002366285.1_ViralProj411812_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Kitrinoviricota|c__Flasuviricetes|o__Amarillovirales|f__Flaviviridae|g__Flavivirus|s__Zika_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_004787195.1_ASM478719v1_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Kitrinoviricota|c__Flasuviricetes|o__Amarillovirales|f__Flaviviridae|g__Flavivirus|s__Zika_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_004787735.1_ASM478773v1_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Kitrinoviricota|c__Flasuviricetes|o__Amarillovirales|f__Flaviviridae|g__Flavivirus|s__Zika_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_004788155.1_ASM478815v1_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Kitrinoviricota|c__Flasuviricetes|o__Amarillovirales|f__Flaviviridae|g__Flavivirus|s__Zika_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_000864885.1_ViralProj15500_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Pisuviricota|c__Pisoniviricetes|o__Nidovirales|f__Coronaviridae|g__Betacoronavirus|s__Severe_acute_respiratory_syndrome_related_coronavirus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_009858895.3_ASM985889v3_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Pisuviricota|c__Pisoniviricetes|o__Nidovirales|f__Coronaviridae|g__Betacoronavirus|s__Severe_acute_respiratory_syndrome_related_coronavirus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_009937885.1_ASM993788v1_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Pisuviricota|c__Pisoniviricetes|o__Nidovirales|f__Coronaviridae|g__Betacoronavirus|s__Severe_acute_respiratory_syndrome_related_coronavirus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_009937895.1_ASM993789v1_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Pisuviricota|c__Pisoniviricetes|o__Nidovirales|f__Coronaviridae|g__Betacoronavirus|s__Severe_acute_respiratory_syndrome_related_coronavirus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_009937905.1_ASM993790v1_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Pisuviricota|c__Pisoniviricetes|o__Nidovirales|f__Coronaviridae|g__Betacoronavirus|s__Severe_acute_respiratory_syndrome_related_coronavirus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_000857045.1_ViralProj15142_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Nucleocytoviricota|c__Pokkesviricetes|o__Chitovirales|f__Poxviridae|g__Orthopoxvirus|s__Monkeypox_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_006458325.1_ASM645832v1_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Nucleocytoviricota|c__Pokkesviricetes|o__Chitovirales|f__Poxviridae|g__Orthopoxvirus|s__Monkeypox_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_006458385.1_ASM645838v1_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Nucleocytoviricota|c__Pokkesviricetes|o__Chitovirales|f__Poxviridae|g__Orthopoxvirus|s__Monkeypox_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_006458425.1_ASM645842v1_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Nucleocytoviricota|c__Pokkesviricetes|o__Chitovirales|f__Poxviridae|g__Orthopoxvirus|s__Monkeypox_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_006458665.1_ASM645866v1_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Nucleocytoviricota|c__Pokkesviricetes|o__Chitovirales|f__Poxviridae|g__Orthopoxvirus|s__Monkeypox_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_000851145.1_ViralMultiSegProj14892_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Negarnaviricota|c__Insthoviricetes|o__Articulavirales|f__Orthomyxoviridae|g__Alphainfluenzavirus|s__Influenza_A_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_000864105.1_ViralMultiSegProj15617_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Negarnaviricota|c__Insthoviricetes|o__Articulavirales|f__Orthomyxoviridae|g__Alphainfluenzavirus|s__Influenza_A_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_000865085.1_ViralMultiSegProj15622_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Negarnaviricota|c__Insthoviricetes|o__Articulavirales|f__Orthomyxoviridae|g__Alphainfluenzavirus|s__Influenza_A_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_000865725.1_ViralMultiSegProj15521_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Negarnaviricota|c__Insthoviricetes|o__Articulavirales|f__Orthomyxoviridae|g__Alphainfluenzavirus|s__Influenza_A_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_000866645.1_ViralMultiSegProj15620_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Negarnaviricota|c__Insthoviricetes|o__Articulavirales|f__Orthomyxoviridae|g__Alphainfluenzavirus|s__Influenza_A_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_000862125.1_ViralProj15306_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Kitrinoviricota|c__Flasuviricetes|o__Amarillovirales|f__Flaviviridae|g__Flavivirus|s__Dengue_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_000865065.1_ViralProj15599_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Kitrinoviricota|c__Flasuviricetes|o__Amarillovirales|f__Flaviviridae|g__Flavivirus|s__Dengue_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_000866625.1_ViralProj15598_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Kitrinoviricota|c__Flasuviricetes|o__Amarillovirales|f__Flaviviridae|g__Flavivirus|s__Dengue_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_000871845.1_ViralProj20183_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Kitrinoviricota|c__Flasuviricetes|o__Amarillovirales|f__Flaviviridae|g__Flavivirus|s__Dengue_virus</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GCA_004786575.1_ASM478657v1_genomic</code> -&gt; <code class="language-plaintext highlighter-rouge">k__Viruses|p__Kitrinoviricota|c__Flasuviricetes|o__Amarillovirales|f__Flaviviridae|g__Flavivirus|s__Dengue_virus</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-using-pre-built-databases"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-pre-built-databases" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Using Pre-built Databases</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Building a comprehensive database from all NCBI viral reference genomes can be time-consuming. For many applications, you can directly use a pre-built database. Many Galaxy servers provide access to these via a <strong>CVMFS (CernVM File System) data directory</strong>.</p>
+
+    <p>For example, you might find pre-built MetaSBT databases at a path like:
+<code class="language-plaintext highlighter-rouge">/cvmfs/data.galaxyproject.org/byhand/MetaSBT/</code></p>
+
+    <p>You can find more information about <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">how Galaxy uses CVMFS for reference data</a>.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<hr />
+
+<h2 id="part-1-creating-a-metasbt-database-from-scratch">Part 1: Creating a MetaSBT Database from Scratch</h2>
+
+<p>Our first step is to build a small, custom database using our reference viruses.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-build-the-initial-index"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Build the Initial Index</div>
+
+  <ol>
+    <li>Run the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>metasbt_index</strong> tool with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input genomes”</em>: Select all the reference genomes previously imported into the history <code class="language-plaintext highlighter-rouge">*.fna.gz</code>.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table with taxonomic labels”</em>: Select the table with the mapping between the name of the genomes and their complete taxonomic labels.</li>
+        <li>Under the <em>“Advanced options”</em> section, <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MetaSBT database”</em> is automatically set to <em>“Build your own MetaSBT database from scratch”</em>. This gives us access to a set of advanced options for the estimation of the best k-mer length and the estimation of a proper Bloom filter size according to our specific set of input genomes, and a quality control filter to get rid of genomes that do not satisfy certain quality criteria based on a completeness and contamination threshold. For the specific purpose of this tutorial, we should set the following options:
+          <ul>
+            <li><em>“K-mer length”</em> &gt; <em>“Set a k-mer length”</em>: <code class="language-plaintext highlighter-rouge">9</code></li>
+            <li><em>“Bloom filter size”</em> &gt; <em>“Set a bloom filter size”</em>: <code class="language-plaintext highlighter-rouge">10000</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Click <strong>Execute</strong>. The tool will produce three output files:
+      <ul>
+        <li>A <code class="language-plaintext highlighter-rouge">clusters</code> table with the list of clusters defined by MetaSBT according to the taxonomic organization of the input genomes, together with the number of genomes in each cluster and the density of the bloom filters.</li>
+        <li>A <code class="language-plaintext highlighter-rouge">genomes</code> table with the list of genomes in the MetaSBT clusters and their assigned taxonomic labels.</li>
+        <li>A <code class="language-plaintext highlighter-rouge">database</code> compressed tarball representing the actual MetaSBT database.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>What does the k-mer size parameter represent?</li>
+      <li>Why did we compress the output database tarball?</li>
+      <li>There are three genomes missing in the database. Why?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>The k-mer size is the length of the short DNA/RNA sequences (k-mers) that are extracted from the genomes and stored in the Bloom filters.</li>
+        <li>The MetaSBT database is actually a directory containing multiple files. Compressing it into a single <code class="language-plaintext highlighter-rouge">.tar.gz</code> file makes it much easier to manage and pass to other tools or share it with other users within Galaxy.</li>
+        <li>Although we selected the whole set of genomes in our history <code class="language-plaintext highlighter-rouge">*.fna.gz</code>, the input table with the mapping between the name of the genomes and their complete taxonomic labels does not report any information about four genomes. Thus, they are automatically excluded. This has been done on purpose specifically for this tutorial. We are now going to use these three of these missing genomes for updating the database!</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<p>We now have a database containing the genomic information for a specific selection of viral species.</p>
+
+<hr />
+
+<h2 id="part-2-updating-an-existing-metasbt-database">Part 2: Updating an Existing MetaSBT Database</h2>
+
+<p>Viral databases are rarely static. New strains and species are constantly being discovered. Instead of rebuilding our index from scratch every time, we can simply update it.</p>
+
+<p>We will now add three more <em>Monkeypox virus</em> genomes to the database we just created.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-update-the-database"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Update the Database</div>
+
+  <ol>
+    <li>Run the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>metasbt_index</strong> tool again with these parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input genomes”</em>: Select <code class="language-plaintext highlighter-rouge">GCA_029745045.1_ASM2974504v1_genomic.fna.gz</code>, <code class="language-plaintext highlighter-rouge">GCA_029745055.1_ASM2974505v1_genomic.fna.gz</code>, and <code class="language-plaintext highlighter-rouge">GCA_029745065.1_ASM2974506v1_genomic.fna.gz</code>.</li>
+        <li>Under the <em>“Advanced options”</em> section, <em>“MetaSBT database”</em>: <em>“Update a MetaSBT database”</em>.</li>
+        <li><em>“Will you use a MetaSBT database from your history or a public database?”</em>: <em>“Use a database from the history”</em>.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a MetaSBT database”</em>: <code class="language-plaintext highlighter-rouge">database</code>.</li>
+      </ul>
+    </li>
+    <li>Click <strong>Execute</strong>. This will produce a <em>new</em> MetaSBT database, thus, three new <code class="language-plaintext highlighter-rouge">clusters</code>, <code class="language-plaintext highlighter-rouge">genomes</code>, and <code class="language-plaintext highlighter-rouge">database</code> files will appear in your history. These three new genomes have been profiled against our database and assigned to the closest species cluster, i.e., <em>Monkeypox virus</em> in this specific case.</li>
+  </ol>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>Why is updating faster?</li>
+      <li>Why didn’t we specify the k-mer length nor the Bloom filter size?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <ol>
+        <li>When updating, MetaSBT only needs to process the new genomes and insert them into the existing tree structure. It doesn’t need to re-process the genomes that are already in the index. For very large databases, this can save hours or even days of computation time.</li>
+        <li>In case of an update, the way we build the Bloom filter representation of the new genomes must be consistent with how we previously built our database. Thus, this information is implicitly inherited from the selected MetaSBT database.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<hr />
+
+<h2 id="part-3-profiling-a-query-virus-against-the-database">Part 3: Profiling a Query Virus Against the Database</h2>
+
+<p>Now we have a database containing five known viral species, and we have a new “query” genome whose identity we want to determine. Let’s use MetaSBT to find out what our query virus is and how it relates to the viruses in our database.</p>
+
+<p>Our query genome is <code class="language-plaintext highlighter-rouge">GCA_029744035.1_ASM2974403v1_genomic.fna.gz</code>. We will profile it against our database.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-profile-the-query-virus"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Profile the Query Virus</div>
+
+  <ol>
+    <li>Run the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>metasbt_profile</strong> tool with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input genomes”</em>: Select <code class="language-plaintext highlighter-rouge">GCA_029744035.1_ASM2974403v1_genomic.fna.gz</code>.</li>
+        <li><em>“Database source”</em>: <em>“Use a database from the history”</em>.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a MetaSBT database tarball”</em>: Select the <strong>second</strong> <code class="language-plaintext highlighter-rouge">database</code> file (the one from the update step).</li>
+      </ul>
+    </li>
+    <li>
+      <p>Click <strong>Execute</strong>. The tool will generate a collection containing a profiling report for each of the input query genomes in tabular format.</p>
+    </li>
+    <li>Click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon on the generated report to view its contents.</li>
+  </ol>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>The output report has different rows. Why there are multiple matches under the same taxonomic level?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p>MetaSBT may report multiple taxonomic units under the same taxonomic level if their distance from the input query genome is below a specific threshold which is established considering the distance to the closest taxonomic unit minus its 20% (by default). This last percentage is called <em>uncertainty percentage</em> and can be changed under the <em>“Advanced options”</em> section.</p>
+
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<h3 id="analyzing-the-results">Analyzing the Results</h3>
+
+<p>When you view one of the profiles in the output collection, you should see a report where each row represents a taxonomic level and its corresponding Average Nucleotide Identity (ANI) value. ANI is a measure of genomic similarity between two genomes. Here, the ANI is expressed as a distance measure, so the lower it is, the closer a specific taxonomic unit is to the input genome.</p>
+
+<p>The report is structured into three columns:</p>
+<ul>
+  <li><em>level</em>: This column indicates the taxonomic rank (i.e., <em>kingdom</em>, <em>phylum</em>, <em>class</em>, <em>order</em>, <em>family</em>, <em>genus</em>, and <em>species</em>).</li>
+  <li><em>closest</em>: This column displays the lineage of the closest match found in the database at that specific taxonomic level.</li>
+  <li><em>ani</em>: This column shows the ANI distance for the best match found. A lower ANI distance suggests a closer relationship with the input query genome.</li>
+</ul>
+
+<p>This output helps you understand the genomic relatedness of your query to the genomes present in the database at various taxonomic resolutions. You can observe how the ANI changes as you move down the taxonomic hierarchy, providing insights into the closest classification of your genome.</p>
+
+<hr />
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In this tutorial, you have learned the complete workflow for using MetaSBT in Galaxy. You have successfully:</p>
+<ol>
+  <li>Built a custom database from a selection of viral reference genomes;</li>
+  <li>Efficiently updated that database with new viruses;</li>
+  <li>Profiled an unknown virus against the database to determine its identity (or lack thereof);</li>
+  <li>Interpreted the similarity reports to identify a query virus.</li>
+</ol>
+
+<p>You are now equipped to use MetaSBT for your own research. You can create custom databases for curated sets of genomes, or leverage large, pre-built databases to rapidly identify and characterize newly sequenced genomes from clinical or environmental samples.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>MetaSBT allows for the efficient indexing and querying of massive collections of viral genomes.</p>
+</li>
+                        
+                        <li><p>The Galaxy tools for MetaSBT provide a user-friendly interface for database creation, updates, and genome profiling.</p>
+</li>
+                        
+                        <li><p>For comprehensive searches, pre-built databases like the NCBI Viral Genomes database on CVMFS can be used directly.</p>
+</li>
+                        
+                        <li><p>Profiling a query genome allows for rapid virus identification and an estimation of genomic novelty, which is key for tracking viral evolution.</p>
+</li>
+                        
+                        <li><p>The ANI distance in the profiling report quantifies the similarity of a query genome to the closest match in the database.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                
+                  <li><a href="/training-material/topics/microbiome/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/microbiome#references">here</a>.</p>
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=microbiome/metasbt"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=microbiome/metasbt">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Fabio Cumbo,  <b>Indexing and profiling microbes with MetaSBT (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metasbt/tutorial.html">https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metasbt/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{microbiome-metasbt,
+author = "Fabio Cumbo",
+	title = "Indexing and profiling microbes with MetaSBT (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metasbt/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/microbiome/tutorials/metasbt/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/microbiome/tutorials/metasbt/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/microbiome/tutorials/metasbt/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a21094d84d83f09846ed764bcd64375384ef804a">a21094d</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
