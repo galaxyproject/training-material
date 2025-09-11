@@ -1,0 +1,43 @@
+- doc: Test outline for Introduction-to-DH-in-Galaxy-(imported-from-uploaded-file)
+  job:
+    Input Text one:
+      class: File
+      location: https://zenodo.org/records/17053220/files/SoY_Univ_Mag_Source.txt
+      filetype: txt
+    Input Text two:
+      class: File
+      location: https://zenodo.org/records/17053220/files/SoY_Cheap_Repo_Source.txt
+      filetype: txt
+  outputs:
+    WordCloud01:
+      asserts:
+        - that: has_size
+          size: 75166
+    output01:
+      path: test-data/output01.txt
+    WordCloud02:
+      asserts:
+        - that: has_size
+          size: 63087
+    output02:
+      path: test-data/output02.txt
+    html_file:
+      asserts: 
+        - that: has_text
+          text: "@@ -3,6 +3,41 @@"
+        - that: has_text
+          text: "@@ -11,7 +46,7 @@"
+        - that: has_text
+          text: "@@ -25,29 +60,9 @@"
+        - that: has_text
+          text: "@@ -62,8 +77,8 @@"
+        - that: has_text
+          text: "@@ -71,7 +86,7 @@"
+        - that: has_text
+          text: "@@ -95,7 +110,7 @@"
+        - that: has_text
+          text: "@@ -108,7 +123,6 @@"
+        - that: has_text
+          text: "@@ -120,7 +134,7 @@"
+        - that: has_text
+          text: "@@ -435,28 +495,456 @@"

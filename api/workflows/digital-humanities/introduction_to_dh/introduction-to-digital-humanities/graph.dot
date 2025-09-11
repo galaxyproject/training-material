@@ -1,0 +1,47 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nInput Text one"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nInput Text two"]
+  2[label="Remove beginning"]
+  0 -> 2 [label="output"]
+  3[label="Remove beginning"]
+  1 -> 3 [label="output"]
+  4[label="Replace Text"]
+  2 -> 4 [label="out_file1"]
+  5[label="Replace"]
+  2 -> 5 [label="out_file1"]
+  6[label="Replace Text"]
+  3 -> 6 [label="out_file1"]
+  7[label="Replace"]
+  3 -> 7 [label="out_file1"]
+  8[label="Line/Word/Character count"]
+  4 -> 8 [label="outfile"]
+  9[label="Generate the first WordCloud"]
+  4 -> 9 [label="outfile"]
+  k56f52608c40a468abfd2e6718cc436db[color=lightseagreen,label="Output\nWordCloud01"]
+  9 -> k56f52608c40a468abfd2e6718cc436db
+  10[label="Replace Text"]
+  4 -> 10 [label="outfile"]
+  11[label="Search in textfiles"]
+  5 -> 11 [label="outfile"]
+  k0d463da6de824130a1139cf527acdca1[color=lightseagreen,label="Output\noutput01"]
+  11 -> k0d463da6de824130a1139cf527acdca1
+  12[label="Line/Word/Character count"]
+  6 -> 12 [label="outfile"]
+  13[label="Generate a second WordCloud"]
+  6 -> 13 [label="outfile"]
+  k70815cdda4604d5e8923e9842b618393[color=lightseagreen,label="Output\nWordCloud02"]
+  13 -> k70815cdda4604d5e8923e9842b618393
+  14[label="Replace Text"]
+  6 -> 14 [label="outfile"]
+  15[label="Search in textfiles"]
+  7 -> 15 [label="outfile"]
+  k8cad2dd7d6b64320860cf9125cf77bef[color=lightseagreen,label="Output\noutput02"]
+  15 -> k8cad2dd7d6b64320860cf9125cf77bef
+  16[label="diff"]
+  10 -> 16 [label="outfile"]
+  14 -> 16 [label="outfile"]
+  k22682b826f2943e3a649b411e42d5cd2[color=lightseagreen,label="Output\nhtml_file"]
+  16 -> k22682b826f2943e3a649b411e42d5cd2
+}
