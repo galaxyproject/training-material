@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@0c443308e8dc716482191d172bdb318ea2f2b238",
+		release: "galaxy-training-network@cf053255e62a8110606dd950f11d95bfb71aa1b0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="MaxQuant and MSstats for the analysis of label-free data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-09-21 13:04:43 +0000">
+<meta name="DC.date" content="2025-09-22 15:28:46 +0000">
 <meta name="DC.creator" content="Melanie Föll">
 <meta name="DC.creator" content="Matthias Fahrner"><meta name="description" content="Training material for proteomics workflows in Galaxy">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -178,7 +178,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-09-21 13:04:43 +0000",
+  "dateModified": "2025-09-22 15:28:46 +0000",
   "datePublished": "2021-02-17 12:39:38 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -233,7 +233,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "MaxQuant and MSstats for the analysis of label-free data",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html",
-  "version": 17,
+  "version": 18,
   "timeRequired": "PT2H",
   "teaches": "- Learn how to use MaxQuant and MSstats for the analysis of label-free shotgun (DDA) data",
   "keywords": [
@@ -1418,7 +1418,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 17, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 21, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 22, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1438,7 +1438,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (1 recent ratings, 8 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 17 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 18 </div>
 
     </blockquote>
     </section>
@@ -1480,7 +1480,7 @@ The training dataset consists of a skin cancer cohort of 19 patients, which is a
 
 <h1 id="get-data">Get data</h1>
 
-<p>The annotation file, group comparison file and FASTA file for this training is deposited at <a href="https://zenodo.org/record/4896554">Zenodo</a>. It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible we recommend to use the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Protein FASTA Database Handling tutorial</a>. The raw data is available via the <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD006914">PRIDE repository</a>. As this is a real life study, the raw data sizes are large and computation time in MaxQuant is long. To save time and storage capacity, you can skip downloading the raw data and the MaxQuant run and instead continue with the MaxQuant outputs which we provide later on. In this case skip the data upload steps 5-8 which are only necessary for the MaxQuant run.</p>
+<p>The annotation file, group comparison file and FASTA file for this training is deposited at <a href="https://zenodo.org/records/17177151">Zenodo</a>. It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible we recommend to use the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Protein FASTA Database Handling tutorial</a>. The raw data is available via the <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD006914">PRIDE repository</a>. As this is a real life study, the raw data sizes are large and computation time in MaxQuant is long. To save time and storage capacity, you can skip downloading the raw data and the MaxQuant run and instead continue with the MaxQuant outputs which we provide later on. In this case skip the data upload steps 5-8 which are only necessary for the MaxQuant run.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Data upload</div>
@@ -1494,11 +1494,11 @@ The training dataset consists of a skin cancer cohort of 19 patients, which is a
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p>Import the FASTA database, annotation file and comparison matrix from <a href="https://zenodo.org/record/4896554">Zenodo</a></p>
+      <p>Import the FASTA database, annotation file and comparison matrix from <a href="https://zenodo.org/records/17177151">Zenodo</a></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4896554/files/input_protein_database.fasta
-https://zenodo.org/record/4896554/files/input_annotation_file.tabular
-https://zenodo.org/record/4896554/files/input_comparison_matrix.tabular
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/17177151/files/input_protein_database.fasta
+https://zenodo.org/records/17177151/files/input_annotation_file.tabular
+https://zenodo.org/records/17177151/files/input_comparison_matrix.tabular
 </code></pre></div>      </div>
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
@@ -1594,11 +1594,11 @@ https://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment115_RDEB_c
 
   <ol>
     <li>
-      <p>Import the files from <a href="https://zenodo.org/record/4896554">Zenodo</a></p>
+      <p>Import the files from <a href="https://zenodo.org/records/17177151">Zenodo</a></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4896554/files/MaxQuant_Evidence.tabular
-https://zenodo.org/record/4896554/files/MaxQuant_proteingroups.tabular
-https://zenodo.org/record/4896554/files/PTXQC_report.pdf
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/17177151/files/MaxQuant_Evidence.tabular
+https://zenodo.org/records/17177151/files/MaxQuant_proteingroups.tabular
+https://zenodo.org/records/17177151/files/PTXQC_report.pdf
 </code></pre></div>      </div>
     </li>
     <li>
@@ -2498,7 +2498,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0c443308e8dc716482191d172bdb318ea2f2b238">0c44330</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cf053255e62a8110606dd950f11d95bfb71aa1b0">cf05325</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
