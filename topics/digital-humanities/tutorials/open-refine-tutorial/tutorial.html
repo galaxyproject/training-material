@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: OpenRefine Tutorial for researching cultural data / OpenRefine Tutorial for researching cultural data / Digital Humanities</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@16754af2671214c2d8d3d31732b8036fd8941c51",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/digital-humanities/tutorials/open-refine-tutorial/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="OpenRefine Tutorial for researching cultural data">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-09-24 13:32:07 +0000">
+<meta name="DC.creator" content="Diana Chiang Jurado">
+<meta name="DC.creator" content="Armin Dadras">
+<meta name="DC.creator" content="Daniela Schneider"><meta name="description" content=" Contemporary research in the humanities has expanded beyond anything that could be considered traditional. Historians are building interactive  digital maps, literary scholars are using computers to look for patterns across millions of books, and scholars in all disciplines are taking  advantage of the internet to make their work more dynamic and visually engaging. Digital humanities (DH) is the umbrella term that describes much of  this work. It is neither a field, a discipline, nor a methodology. It is not simply the humanities done with computers, nor is it computer science  performed on topics of interest to the humanities. DH is the result of a dynamic dialogue between emerging technology and humanistic inquiry.  -- Taken from [Stewart Varner's Special Report](https://americanlibrariesmagazine.org/2016/01/04/special-report-digital-humanities-libraries/) ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Digital Humanities / OpenRefine Tutorial for researching cultural data / Hands-on: OpenRefine Tutorial for researching cultural data">
+        <meta property="og:description" content=" Contemporary research in the humanities has expanded beyond anything that could be considered traditional. Historians are building interactive  digital maps, literary scholars are using computers to look for patterns across millions of books, and scholars in all disciplines are taking  advantage of the internet to make their work more dynamic and visually engaging. Digital humanities (DH) is the umbrella term that describes much of  this work. It is neither a field, a discipline, nor a methodology. It is not simply the humanities done with computers, nor is it computer science  performed on topics of interest to the humanities. DH is the result of a dynamic dialogue between emerging technology and humanistic inquiry.  -- Taken from [Stewart Varner's Special Report](https://americanlibrariesmagazine.org/2016/01/04/special-report-digital-humanities-libraries/) ">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/digital-humanities/tutorials/open-refine-tutorial/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "OpenRefine Tutorial for researching cultural data",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-09-24 13:32:07 +0000",
+  "datePublished": "2025-09-24 13:32:07 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "441958017",
+      "url": "https://gepris-extern.dfg.de/gepris/projekt/441958017?language=en",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "NFDI4Culture – Consortium for Research Data on Material and Immaterial Cultural Heritage",
+        "description": "An organization supporting the Galaxy Training Network",
+        "url": "https://nfdi4culture.de/",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/5/5d/NFDI4Culture_Logo.png"
+      }
+    }
+  ],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Digital Humanities",
+    "description": "\"Contemporary research in the humanities has expanded beyond anything that could be considered traditional. Historians are building interactive\n digital maps, literary scholars are using computers to look for patterns across millions of books, and scholars in all disciplines are taking\n advantage of the internet to make their work more dynamic and visually engaging. Digital humanities (DH) is the umbrella term that describes much of\n this work. It is neither a field, a discipline, nor a methodology. It is not simply the humanities done with computers, nor is it computer science\n performed on topics of interest to the humanities. DH is the result of a dynamic dialogue between emerging technology and humanistic inquiry.\" -- Taken from [Stewart Varner's Special Report](https://americanlibrariesmagazine.org/2016/01/04/special-report-digital-humanities-libraries/)\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/digital-humanities/"
+  },
+  "abstract": "This tutorial shows how to use **OpenRefine** in Galaxy to clean and visualize data from the **humanities and social sciences**. It has two parts:",
+  "learningResourceType": "e-learning",
+  "name": "OpenRefine Tutorial for researching cultural data",
+  "url": "https://training.galaxyproject.org/training-material/topics/digital-humanities/tutorials/open-refine-tutorial/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT2H",
+  "teaches": "- Start OpenRefine as an Interactive Tool in Galaxy\n- Use OpenRefine to clean your data (remove duplicates, separate multiple values from the same field, etc.)\n- Export your cleaned data from OpenRefine to Galaxy\n- Use a pre-existing workflow in Galaxy to extract specific information and visualise your findings",
+  "keywords": [
+    "Digital Humanities"
+  ],
+  "description": "## Abstract\n\nThis tutorial shows how to use **OpenRefine** in Galaxy to clean and visualize data from the **humanities and social sciences**. It has two parts:\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to use OpenRefine in Galaxy to clean your data?\n - How to use a workflow in Galaxy to extract and visualise information from your data?\n\n\n## Learning Objectives\n\n- Start OpenRefine as an Interactive Tool in Galaxy\n- Use OpenRefine to clean your data (remove duplicates, separate multiple values from the same field, etc.)\n- Export your cleaned data from OpenRefine to Galaxy\n- Use a pre-existing workflow in Galaxy to extract specific information and visualise your findings\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/digital-humanities/tutorials/introduction_to_dh/tutorial.html",
+      "name": "Introduction to Digital Humanities in Galaxy",
+      "description": "Hands-on for 'Introduction to Digital Humanities in Galaxy' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dianichj/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dianichj/",
+      "name": "Diana Chiang Jurado",
+      "image": "https://avatars.githubusercontent.com/dianichj",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/spoc/",
+          "name": "🖖🏾Single-cell & sPatial Omics Community of practice",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/community/sig/singlecell/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5857-1477"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dadrasarmin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dadrasarmin/",
+      "name": "Armin Dadras",
+      "image": "https://avatars.githubusercontent.com/dadrasarmin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/eurosciencegateway/",
+          "name": "EuroScienceGateway",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/projects/esg/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-7649-2388"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Sch-Da/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Sch-Da/",
+      "name": "Daniela Schneider",
+      "image": "https://avatars.githubusercontent.com/Sch-Da",
+      "description": "Researcher at Galaxy Europe",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deKCD/",
+          "name": "German Competence Center Cloud Technologies for Data Management and Processing (de.KCD)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://datenkompetenz.cloud/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4culture/",
+          "name": "NFDI4Culture – Consortium for Research Data on Material and Immaterial Cultural Heritage",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4culture.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9536-5587"
+    }
+  ],
+  "contributor": [],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Digital Humanities",
+      "description": "\"Contemporary research in the humanities has expanded beyond anything that could be considered traditional. Historians are building interactive\n digital maps, literary scholars are using computers to look for patterns across millions of books, and scholars in all disciplines are taking\n advantage of the internet to make their work more dynamic and visually engaging. Digital humanities (DH) is the umbrella term that describes much of\n this work. It is neither a field, a discipline, nor a methodology. It is not simply the humanities done with computers, nor is it computer science\n performed on topics of interest to the humanities. DH is the result of a dynamic dialogue between emerging technology and humanistic inquiry.\" -- Taken from [Stewart Varner's Special Report](https://americanlibrariesmagazine.org/2016/01/04/special-report-digital-humanities-libraries/)\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/digital-humanities/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/digital-humanities/tutorials/open-refine-tutorial/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://doi.org/10.5281/zenodo.17047254",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/digital-humanities" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Digital Humanities
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/digital-humanities/faqs/" title="Check our FAQs for the Digital Humanities topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/digital-humanities/tutorials/open-refine-tutorial/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/digital-humanities/tutorials/open-refine-tutorial/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-digital-humanities">
+    <h1 data-toc-skip>OpenRefine Tutorial for researching cultural data</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/dianichj/" class="contributor-badge contributor-dianichj"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/dianichj?s=36" alt="Diana Chiang Jurado avatar" width="36" class="avatar" />
+    Diana Chiang Jurado</a><a href="/training-material/hall-of-fame/dadrasarmin/" class="contributor-badge contributor-dadrasarmin"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/dadrasarmin?s=36" alt="Armin Dadras avatar" width="36" class="avatar" />
+    Armin Dadras</a><a href="/training-material/hall-of-fame/Sch-Da/" class="contributor-badge contributor-Sch-Da"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Sch-Da?s=36" alt="Daniela Schneider avatar" width="36" class="avatar" />
+    Daniela Schneider</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to use OpenRefine in Galaxy to clean your data?</p>
+</li>
+        
+        <li><p>How to use a workflow in Galaxy to extract and visualise information from your data?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Start OpenRefine as an Interactive Tool in Galaxy</p>
+</li>
+        
+        <li><p>Use OpenRefine to clean your data (remove duplicates, separate multiple values from the same field, etc.)</p>
+</li>
+        
+        <li><p>Export your cleaned data from OpenRefine to Galaxy</p>
+</li>
+        
+        <li><p>Use a pre-existing workflow in Galaxy to extract specific information and visualise your findings</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/digital-humanities/tutorials/introduction_to_dh/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Introduction to Digital Humanities in Galaxy</a>
+                                </li>
+                            
+                        
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://doi.org/10.5281/zenodo.17047254">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/digital-humanities/tutorials/open-refine-tutorial/workflows/" title="OpenRefine Tutorial for researching cultural data workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Answer Histories">
+        <i class="fas fa-sign-out-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-answer</span>&nbsp;Answer Histories
+    </a>
+    <ul class="dropdown-menu">
+      
+        <li>
+            <a class="dropdown-item" href="https://usegalaxy.eu/u/armin.dadras/h/visualise-amount-of-objects-in-museum-collection">
+              UseGalaxy.eu
+              
+              <br/><span class="text-muted">2025-09-19</span>
+              
+            </a>
+        </li>
+      
+      <li class="dropdown-divider"></li>
+      <li>
+        <a class="dropdown-item" href="/training-material/faqs/gtn/gtn_example_histories.html"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> How to Use This</a>
+      </li>
+    </ul>
+
+</li>
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/digital-humanities/tutorials/open-refine-tutorial/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Sep 24, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 24, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>This tutorial shows how to use <strong>OpenRefine</strong> in Galaxy to clean and visualize data from the <strong>humanities and social sciences</strong>. It has two parts:</p>
+<ul>
+  <li><strong>Introduction to OpenRefine</strong>, based on <span class="citation"><a href="#Hooland_2013">Hooland <i>et al.</i> 2013</a></span> and adapted for Galaxy.</li>
+  <li><strong>Introduction to running Galaxy workflows</strong> to visualize cleaned data and extract specific information.</li>
+</ul>
+
+<h2 id="what-is-openrefine">What is OpenRefine?</h2>
+
+<p><strong>OpenRefine</strong> is a free, open-source “data wrangler” built for messy, heterogeneous, evolving datasets. It imports common formats (CSV/TSV, Excel, JSON, XML) and domain-specific ones used across GLAM (Galleries, Libraries, Archives and Museums) and official statistics (MARC, RDF serializations, PC-Axis).</p>
+
+<p>It is <strong>non-destructive</strong> — OpenRefine does not alter your source files, but works on copies and saves projects locally. Facets and filters let you audit categories, surface outliers, and triage inconsistencies without code. Its <strong>clustering</strong> tools consolidate near-duplicates using both key-collision methods (fingerprint, n-gram, phonetic) and edit-distance/nearest-neighbour methods (Levenshtein, PPM) so you can standardize names and places at scale while keeping human oversight.</p>
+
+<p>For enrichment, OpenRefine speaks the <strong>Reconciliation API</strong> to match local values to external authorities (e.g. <strong>Wikidata</strong>, <strong>ROR</strong>) and optionally pull back richer metadata. Transformations—both point-and-click and <strong>GREL</strong> formulas—are recorded as a stepwise, undoable history that you can export as JSON and re-apply to other datasets, enabling reproducible cleaning and easy peer review. Finished tables export cleanly to <strong>CSV/TSV</strong>, ODS/XLS(X), SQL statements, templated JSON, Google Sheets, or can be exported back to Galaxy.</p>
+
+<h2 id="from-cleaning-to-analysis-in-galaxy">From Cleaning to Analysis in Galaxy</h2>
+
+<p>Once your dataset has been cleaned with OpenRefine, you often want to analyze it further or visualize specific aspects. This is where <strong>Galaxy Workflows</strong> become essential: they let you build reproducible pipelines that operate on your curated data, moving from one-off cleaning to structured analysis.</p>
+
+<h2 id="what-are-galaxy-workflows">What are Galaxy Workflows?</h2>
+
+<p><strong>Galaxy Workflows</strong> are structured, stepwise pipelines you build and run entirely in the browser—either extracted from a recorded analysis <em>history</em> or assembled in the visual editor. They can be annotated, shared, published, imported, and rerun, making them ideal for teaching, collaboration, and reproducible research.</p>
+
+<p>A captured analysis is easy to share: export the workflow as JSON (<strong><code class="language-plaintext highlighter-rouge">.ga</code></strong>: tools, parameters, and Input/Output) or export a provenance-rich run as a <strong><a href="https://www.researchobject.org/workflow-run-crate/">Workflow Run RO-Crate</a></strong> bundling the definition with inputs, outputs, and invocation metadata. This lowers the barrier to entry (no local installs; web UI with pre-installed tools and substantial compute) while preserving best practices (histories track tool versions and parameters; workflows are easily re-applied to new data).</p>
+
+<p>For findability and credit, the community uses <strong><a href="https://workflowhub.eu/">WorkflowHub</a></strong>—a curated registry that supports multiple workflow technologies (including Galaxy) and promotes <strong>FAIR</strong> principles; it offers Spaces/Teams, permissions, versioning, and <strong>DOIs via DataCite</strong>, with metadata linking to identifiers like <strong><a href="https://orcid.org/">ORCID</a></strong> so contributions enter scholarly knowledge graphs and are properly acknowledged.</p>
+
+<p>In practice, you can iterate on a workflow in a familiar GUI, export the exact definition or a run package, and deposit it where peers can discover, reuse, review, and cite it—closing the loop between simple authoring and robust scholarly dissemination.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#what-is-openrefine" id="markdown-toc-what-is-openrefine">What is OpenRefine?</a></li>
+  <li><a href="#from-cleaning-to-analysis-in-galaxy" id="markdown-toc-from-cleaning-to-analysis-in-galaxy">From Cleaning to Analysis in Galaxy</a></li>
+  <li><a href="#what-are-galaxy-workflows" id="markdown-toc-what-are-galaxy-workflows">What are Galaxy Workflows?</a></li>
+  <li><a href="#hands-on-get-the-data" id="markdown-toc-hands-on-get-the-data">Hands on: Get the data</a></li>
+  <li><a href="#use-openrefine-to-explore-and-clean-your-dataset" id="markdown-toc-use-openrefine-to-explore-and-clean-your-dataset">Use OpenRefine to explore and clean your dataset</a>    <ol>
+      <li><a href="#start-openrefine" id="markdown-toc-start-openrefine">Start OpenRefine</a></li>
+      <li><a href="#remove-blank-rows" id="markdown-toc-remove-blank-rows">Remove blank rows</a></li>
+      <li><a href="#use-grel" id="markdown-toc-use-grel">Use GREL</a></li>
+      <li><a href="#atomization" id="markdown-toc-atomization">Atomization</a></li>
+      <li><a href="#faceting" id="markdown-toc-faceting">Faceting</a></li>
+      <li><a href="#clustering" id="markdown-toc-clustering">Clustering</a></li>
+      <li><a href="#exporting-your-data-back-to-galaxy" id="markdown-toc-exporting-your-data-back-to-galaxy">Exporting your data back to Galaxy</a></li>
+    </ol>
+  </li>
+  <li><a href="#run-a-galaxy-workflow-on-your-cleaned-data" id="markdown-toc-run-a-galaxy-workflow-on-your-cleaned-data">Run a Galaxy Workflow on your cleaned data</a>    <ol>
+      <li><a href="#how-to-find-and-run-existing-workflows" id="markdown-toc-how-to-find-and-run-existing-workflows">How to find and run existing workflows</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="hands-on-get-the-data">Hands on: Get the data</h1>
+
+<p>We will work with a slightly adapted dataset from the <strong><a href="https://powerhouse.com.au/">Powerhouse Museum</a></strong> (Australia’s largest museum group) containing collection metadata. The museum shared the dataset online before giving API access to its collection. We slightly adapted the dataset and put it on Zenodo for long-term reusability. The tabular file (<strong>36.4 MB</strong>) includes <strong>14 columns</strong> for <strong>75,811</strong> objects, released under a <strong><a href="http://creativecommons.org/licenses/by-nc/2.5/au/">Creative Commons Attribution Share Alike (CCASA) license</a></strong>. We will answer two questions: <em>From what year does the museum have the most objects?</em> And <em>what objects does the museum have from that year?</em></p>
+
+<p><strong>Why this dataset?</strong> It is credible, openly published, and realistically messy—ideal for practising problems scholars encounter at scale. Records include a <strong>Categories</strong> field populated from the <strong>Powerhouse Museum Object Names Thesaurus (PONT)</strong>, a controlled vocabulary reflecting Australian usage. The tutorial deliberately surfaces common quality issues—blank values that are actually stray whitespace, duplicate rows, and multi-valued cells separated by the pipe character <code class="language-plaintext highlighter-rouge">|</code> (including edge cases where <strong>double pipes</strong> <code class="language-plaintext highlighter-rouge">||</code> inflate row counts)—so we can practice systematic inspection before any analysis. During cleaning, you will compute sanity checks (after de-duplication, the dataset drops to <strong>XXXX</strong> unique records; a facet reveals <strong>XXXX</strong> distinct categories and <strong>XXXX</strong> items with no category). Without careful atomization and clustering, these irregularities would bias statistics, visualizations, and downstream reconciliation.</p>
+
+<p>We suggest that you download the data from the Zenodo record as explained below. This helps us with the reproducibility of the results.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-upload-your-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Upload your data</div>
+
+  <ol>
+    <li>Create a new history for this tutorial and name it “Powerhouse Museum — OpenRefine”</li>
+    <li>
+      <p>Import the file from <a href="https://doi.org/10.5281/zenodo.17047254">Zenodo</a>:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/17047254
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Libraries</strong> (left panel)</li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset: “<strong>Powerhouse Museum metadata</strong>.”</li>
+    <li>
+      <p>Ensure that the datatype is “tsv”. Otherwise, use convert datatype.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="use-openrefine-to-explore-and-clean-your-dataset">Use OpenRefine to explore and clean your dataset</h1>
+
+<p>The users will familiarize themselves with the museum’s metadata. In the next step, they will clean the metadata using various steps to enhance its quality and accessibility.</p>
+
+<h2 id="start-openrefine">Start OpenRefine</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-opening-the-dataset-with-openrefine"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Opening the dataset with OpenRefine</div>
+
+  <ol>
+    <li>Open the <span class="tool" data-tool="interactive_tool_openrefine" title="OpenRefine tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>OpenRefine</strong></span>: Working with messy data
+      <ul>
+        <li><em>“Input file in tabular format”</em>:  <code class="language-plaintext highlighter-rouge">openrefine-phm-collection.tsv</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Click on “Run Tool”.</p>
+
+      <p><a href="images/openrefine.png" rel="noopener noreferrer"><img src="images/openrefine.png" alt="OpenRefine tool interface in Galaxy. " width="690" height="555" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>After around 30 seconds, using the interactive tools section on the left panel, you can open OpenRefine by clicking on its name. Make sure to wait until you see the symbol with an arrow &gt; pointing outside the box that allows you to start OpenRefine in a new tab.</p>
+
+      <p><a href="images/interactive_tools.png" rel="noopener noreferrer"><img src="images/interactive_tools.png" alt="Open OpenRefine tool as an Interactive tool. " width="1175" height="614" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Here, you can see the OpenRefine GUI. Click on <code class="language-plaintext highlighter-rouge">Open Project</code>.</p>
+
+      <p><a href="images/openrefine_interface.png" rel="noopener noreferrer"><img src="images/openrefine_interface.png" alt="Open OpenRefine interface. " width="1457" height="657" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Click on <code class="language-plaintext highlighter-rouge">Galaxy file</code>. If the file does not appear, you may have started OpenRefine before it was fully loaded. Retry steps 3 and 4, and the file should be visible.</p>
+
+      <p><a href="images/openrefine_open_project.png" rel="noopener noreferrer"><img src="images/openrefine_open_project.png" alt="Open OpenRefine Open Project as an input. " width="1457" height="657" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>You can see the data loaded for you.</p>
+
+      <p><a href="images/openrefine_gui.png" rel="noopener noreferrer"><img src="images/openrefine_gui.png" alt="Open OpenRefine GUI. " width="1457" height="657" loading="lazy" /></a></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many rows does this table have?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>75809</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<p>Great, now that the dataset is in OpenRefine, we can start cleaning it.</p>
+
+<h2 id="remove-blank-rows">Remove blank rows</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-removing-the-blank-rows"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Removing the blank rows</div>
+
+  <ol>
+    <li>
+      <p>Click on the triangle on the left of <code class="language-plaintext highlighter-rouge">Record ID</code>.</p>
+
+      <p><a href="images/sort.png" rel="noopener noreferrer"><img src="images/sort.png" alt="Sort Record ID. " width="299" height="408" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Click on <code class="language-plaintext highlighter-rouge">Sort...</code>.</p>
+    </li>
+    <li>
+      <p>Select <code class="language-plaintext highlighter-rouge">numbers</code> and click on <code class="language-plaintext highlighter-rouge">OK</code>.</p>
+
+      <p><a href="images/sort2.png" rel="noopener noreferrer"><img src="images/sort2.png" alt="Sort Record ID options. " width="572" height="426" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Above the table, click on <code class="language-plaintext highlighter-rouge">Sort</code> and select <code class="language-plaintext highlighter-rouge">Reorder rows permanently</code>.</p>
+
+      <p><a href="images/sort3.png" rel="noopener noreferrer"><img src="images/sort3.png" alt="Sort Record ID reorder permanently. " width="952" height="220" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Click on the triangle left of the <code class="language-plaintext highlighter-rouge">Record ID</code> column. Hover over <code class="language-plaintext highlighter-rouge">Edit cells</code> and select <code class="language-plaintext highlighter-rouge">Blank down</code>.</p>
+
+      <p><a href="images/sort4.png" rel="noopener noreferrer"><img src="images/sort4.png" alt="Blank down Record ID. " width="498" height="485" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Click on the triangle left of the <code class="language-plaintext highlighter-rouge">Record ID</code> column. Hover over <code class="language-plaintext highlighter-rouge">Facet</code>, then move your mouse to <code class="language-plaintext highlighter-rouge">Customized facets</code> and select <code class="language-plaintext highlighter-rouge">Facet by blank (null or empty string)</code>.</p>
+
+      <p><a href="images/sort5.png" rel="noopener noreferrer"><img src="images/sort5.png" alt="Facet by blank Record ID. " width="795" height="680" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>On the left, a new option appears under <code class="language-plaintext highlighter-rouge">Facet/Filter</code> with the title <code class="language-plaintext highlighter-rouge">Record ID</code>. Click on <code class="language-plaintext highlighter-rouge">true</code>.</p>
+
+      <p><a href="images/sort6.png" rel="noopener noreferrer"><img src="images/sort6.png" alt="Facet by blank true Record ID. " width="414" height="252" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Click on the triangle to the left of the column called <code class="language-plaintext highlighter-rouge">All</code>. Hover over <code class="language-plaintext highlighter-rouge">Edit rows</code>, and select <code class="language-plaintext highlighter-rouge">remove matching rows</code>.</p>
+
+      <p><a href="images/deduplicate.png" rel="noopener noreferrer"><img src="images/deduplicate.png" alt="Remove matching rows Record ID. " width="806" height="386" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Close the <code class="language-plaintext highlighter-rouge">Facet</code> by clicking on the cross (x) to see all rows.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many rows have been removed?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>84</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<p>The dataset does not contain any more blank rows now. But we need to do more cleaning to improve the dataset.</p>
+
+<h2 id="use-grel">Use GREL</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-find-and-replace-typos-using-grel"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Find and replace typos using GREL</div>
+
+  <p>To remove the occurance of double pipe || from the file we can do the following:</p>
+  <ol>
+    <li>Click on the triangle on the left of <code class="language-plaintext highlighter-rouge">Categories</code> and select <code class="language-plaintext highlighter-rouge">Text filter</code>.</li>
+    <li>On the left, using the <code class="language-plaintext highlighter-rouge">Facet/Filter</code> section, search for the occurrence of | and ||. There are 71061 rows with | and 9 rows with ||. We want to remove these 9 lines as they are there by mistake.</li>
+    <li>Click on the triangle on the left of <code class="language-plaintext highlighter-rouge">Categories</code>, hover over <code class="language-plaintext highlighter-rouge">edit cells</code>, and click on <code class="language-plaintext highlighter-rouge">Transform...</code>.</li>
+    <li>
+      <p>In the new window, use the following text <code class="language-plaintext highlighter-rouge">value.replace('||', '|')</code> as “Expression” and click on <code class="language-plaintext highlighter-rouge">OK</code>.</p>
+
+      <p><a href="images/filter_grel3.png" rel="noopener noreferrer"><img src="images/filter_grel3.png" alt="Custom text transform on column Categories. " width="804" height="643" loading="lazy" /></a></p>
+
+      <p>We can also remove the double occurrence of the same for different entries as follows:</p>
+    </li>
+    <li>
+      <p>Click on the triangle on the left of <code class="language-plaintext highlighter-rouge">Categories</code>, hover over <code class="language-plaintext highlighter-rouge">edit cells</code>, and click on <code class="language-plaintext highlighter-rouge">Transform...</code>.</p>
+
+      <p><a href="images/filter_grel.png" rel="noopener noreferrer"><img src="images/filter_grel.png" alt="Edit cells Categories. " width="250" height="308" loading="lazy" /></a></p>
+
+      <p><a href="images/filter_grel2.png" rel="noopener noreferrer"><img src="images/filter_grel2.png" alt="Transform Categories. " width="388" height="366" loading="lazy" /></a></p>
+    </li>
+    <li>In the new window, use the following text <code class="language-plaintext highlighter-rouge">split('|').uniques().join('|')</code> as “Expression” and click on <code class="language-plaintext highlighter-rouge">OK</code>.value.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many cells had duplicated categories?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>1,668</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="atomization">Atomization</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-atomization"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Atomization</div>
+
+  <p>Once the duplicate records have been removed, we can have a closer look at the Categories column. Different categories are separated from each other by pipe (|). Each entry can have more
+than one category. In order to analyze in detail the use of the keywords, the values of the Categories column need to be split up into individual cells on the basis of the pipe character.</p>
+  <ol>
+    <li>
+      <p>Click on the triangle on the left of <code class="language-plaintext highlighter-rouge">Categories</code>, hover over <code class="language-plaintext highlighter-rouge">edit cells</code>, and click on <code class="language-plaintext highlighter-rouge">Split multi-valued cells...</code>.</p>
+
+      <p><a href="images/split_multi_valued_cells.png" rel="noopener noreferrer"><img src="images/split_multi_valued_cells.png" alt="Atomization of Categories. " width="755" height="454" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Define the <code class="language-plaintext highlighter-rouge">Separator</code> as <code class="language-plaintext highlighter-rouge">\|</code> (pipe). Click on <code class="language-plaintext highlighter-rouge">OK</code>.</p>
+
+      <p><a href="images/facet_categories_blank.png" rel="noopener noreferrer"><img src="images/facet_categories_blank.png" alt="Facet Blank of atomized Categories. " width="544" height="585" loading="lazy" /></a></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Are you ready for a little challenge? Let’s investigate the categories column of the museum items.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many rows do you have after atomizing the categories column?</li>
+    <li>How many entries do not have any category?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>168,476</li>
+      <li>Click on the triangle on the left of <code class="language-plaintext highlighter-rouge">Categories</code> and hover over <code class="language-plaintext highlighter-rouge">facet</code> and move your mouse over <code class="language-plaintext highlighter-rouge">Customized facets</code>, and click on <code class="language-plaintext highlighter-rouge">Facet by blank (null or empty string)</code>. The <code class="language-plaintext highlighter-rouge">true</code> value for blank entries is 447.</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<p>Now, let’s use faceting based on text.</p>
+
+<h2 id="faceting">Faceting</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-atomization-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Atomization</div>
+
+  <ol>
+    <li>Click on the triangle on the left of <code class="language-plaintext highlighter-rouge">Categories</code>, hover over <code class="language-plaintext highlighter-rouge">facet</code>, and click on<code class="language-plaintext highlighter-rouge">Text facet</code>.</li>
+    <li>
+      <p>On the left panel, it mentions the total number of choices. The default value of <code class="language-plaintext highlighter-rouge">count limit</code> is low for this dataset, and we should increase it. Click on <code class="language-plaintext highlighter-rouge">Set choice count limit</code>.</p>
+
+      <p><a href="images/text_facet.png" rel="noopener noreferrer"><img src="images/text_facet.png" alt="Text faceting of atomized Categories. " width="367" height="147" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Enter <code class="language-plaintext highlighter-rouge">5000</code> as the new limit and click on <code class="language-plaintext highlighter-rouge">Ok</code>.</p>
+
+      <p><a href="images/text_facet2.png" rel="noopener noreferrer"><img src="images/text_facet2.png" alt="Increasing the limit of text facetring. " width="555" height="264" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Now, you see all categories. Click on <code class="language-plaintext highlighter-rouge">count</code> to see the categories sorted in descending order.</p>
+
+      <p><a href="images/text_facet3.png" rel="noopener noreferrer"><img src="images/text_facet3.png" alt="Text faceting of atomized Categories sorted by count. " width="370" height="368" loading="lazy" /></a></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What are the top 3 categories? How many items are associated with each of them?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Numismatics (8011), Ceramics (7389), and Clothing and Dress (7279)</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="clustering">Clustering</h2>
+
+<p>The clustering allows you to solve issues regarding case inconsistencies, incoherent use of either the singular or plural form, and simple spelling mistakes.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-clustering-of-similar-categories"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Clustering of similar categories</div>
+
+  <ol>
+    <li>Click on the <code class="language-plaintext highlighter-rouge">Cluster</code> button on the left in the <code class="language-plaintext highlighter-rouge">Facet/Filter</code> tab.</li>
+    <li>
+      <p>Use <code class="language-plaintext highlighter-rouge">Key collision</code> as clustering method. Change the Keying function to <code class="language-plaintext highlighter-rouge">n-Gram fingerprint</code> and change the n-Gram size to <code class="language-plaintext highlighter-rouge">3</code>.</p>
+
+      <p><a href="images/cluster.png" rel="noopener noreferrer"><img src="images/cluster.png" alt="Cluster and edit column Categories. " width="1262" height="821" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Click on the <code class="language-plaintext highlighter-rouge">cluster</code> button in the middle window.</p>
+
+      <p><a href="images/cluster2.png" rel="noopener noreferrer"><img src="images/cluster2.png" alt="Clustered and merged similar Categories. " width="1262" height="821" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Here, you can see different suggestions from OpenRefine to cluster different categories and merge them into one. In our tutorial, we merge all of the suggestions by clicking on <code class="language-plaintext highlighter-rouge">select &gt; all</code> and then clicking on <code class="language-plaintext highlighter-rouge">Merge selected and re-cluster</code>.</p>
+
+      <p><a href="images/join.png" rel="noopener noreferrer"><img src="images/join.png" alt="Join multi-valued cells on Categories. " width="652" height="598" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Now, you can close the clustering window by clicking on <code class="language-plaintext highlighter-rouge">close</code>.</p>
+
+      <p>Be careful! Some methods are too aggressive, so you might end up clustering values that do not belong together. Now that the values have been clustered individually, we can put them back together in a single cell.</p>
+    </li>
+    <li>Click the Categories triangle and hover over the <code class="language-plaintext highlighter-rouge">Edit cells</code> and click on <code class="language-plaintext highlighter-rouge">Join multi-valued cells</code>.</li>
+    <li>Choose the pipe character (<code class="language-plaintext highlighter-rouge">\|</code>) as a separator and click on <code class="language-plaintext highlighter-rouge">OK</code>.
+The rows now look like before, with a multi-valued Categories field.</li>
+  </ol>
+
+</blockquote>
+
+<p>When you’re happy with your analysis results, choose whether to export the dataset into your Galaxy history or download it directly onto your computer.</p>
+
+<h2 id="exporting-your-data-back-to-galaxy">Exporting your data back to Galaxy</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-exporting-the-results-and-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Exporting the results and history</div>
+
+  <ol>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Export</code> at the top of the table.</li>
+    <li>
+      <p>Select <code class="language-plaintext highlighter-rouge">Galaxy exporter</code>. Wait a few seconds. In a new page, you will see a text as follows: “Dataset has been exported to Galaxy, please close this tab”. When you see this, you can close that tab. Alternatively, you can download your cleaned dataset in various formats such as CSV, TSV, and Excel. You can also close the extra tab that contains OpenRefine and click on the orange item <code class="language-plaintext highlighter-rouge">OpenRefine on data [and a number]</code>. You do not need it for your next steps</p>
+
+      <p><a href="images/export_results3.png" rel="noopener noreferrer"><img src="images/export_results3.png" alt="Export results of OpenRefine. " width="382" height="555" loading="lazy" /></a></p>
+    </li>
+    <li>You can find a new dataset in your Galaxy History (with a green background) that contains your cleaned dataset for further analysis.</li>
+    <li>
+      <p>You can click on the eye icon (<i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span>) and investigate the table.</p>
+
+      <p><a href="images/dataset_cleaned.png" rel="noopener noreferrer"><img src="images/dataset_cleaned.png" alt="Cleaned dataset. " width="1292" height="723" loading="lazy" /></a></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-exporting-the-results-and-history-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Exporting the results and history</div>
+  <p>Additionally, you can download the tasks you performed using OpenRefine in JSON format. This way, you can import it later and reproduce the exact same analysis. To do so:</p>
+  <ol>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Undo/Redo</code> on the left panel.</li>
+    <li>
+      <p>Click on <code class="language-plaintext highlighter-rouge">Extract...</code>.</p>
+
+      <p><a href="images/extract_tasks.png" rel="noopener noreferrer"><img src="images/extract_tasks.png" alt="Extract OpenRefine. " width="372" height="525" loading="lazy" /></a></p>
+    </li>
+    <li>Click on the steps that you want to extract. Here, we selected everything.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Export</code>. Give your file a name to save it on your computer.</li>
+  </ol>
+
+  <p><a href="images/extract_tasks2.png" rel="noopener noreferrer"><img src="images/extract_tasks2.png" alt="Extract OpenRefine GUI. " width="1378" height="737" loading="lazy" /></a></p>
+
+</blockquote>
+
+<h1 id="run-a-galaxy-workflow-on-your-cleaned-data">Run a Galaxy Workflow on your cleaned data</h1>
+
+<p>Congratulations, you have successfully cleaned your data and improved its quality!
+But what can you do with it now?
+This depends on your aims as a researcher. For us, it is interesting to extract further information from the data.
+To make it easy for you, we created a so-called workflow, which links all the tools needed to do this analysis.
+We wanted to know, from what year the museum had the most objects and what they were.
+You can follow along and answer those questions with us, or explore the Galaxy tools on your own, to adapt the analysis to your needs.
+In this case, be sure to check out our other tutorials, particularly the introductory ones.</p>
+
+<h2 id="how-to-find-and-run-existing-workflows">How to find and run existing workflows</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-a-galaxy-workflow-on-your-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run a Galaxy workflow on your dataset</div>
+
+  <p>There are different ways to import or create a workflow to Galaxy. For example, you can import a workflow from the registered workflows on <a href="https://workflowhub.eu/">WorkflowHub</a> which is a registry for describing, sharing, and publishing scientific computational workflows. To do that, you have to navigate to the <a href="https://workflowhub.eu/">WorkflowHub</a> and find the workflow of interest. In this tutorial, we are working <a href="https://workflowhub.eu/workflows/1884?version=1">with this workflow</a>. When you open the link to this workflow on WorkflowHub, you see the following page:</p>
+
+  <p><a href="images/workflowhub.png" rel="noopener noreferrer"><img src="images/workflowhub.png" alt="Workflowhub page. " width="1904" height="819" loading="lazy" /></a></p>
+
+  <p>Please click on the <code class="language-plaintext highlighter-rouge">Run on Galaxy</code> button on top right. After doing this, you will be redirected to your Galaxy account and see the workflow automatically in your middle panel as follows:</p>
+
+  <p><a href="images/workflow.png" rel="noopener noreferrer"><img src="images/workflow.png" alt="Workflow imported to Galaxy. " width="1556" height="660" loading="lazy" /></a></p>
+
+  <p>Let’s assume that you have imported a workflow to your Galaxy account.</p>
+  <ol>
+    <li>
+      <p>You can find all workflows available to you by clicking on the Workflows Icon (<i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span>) on the left panel.</p>
+
+      <p><a href="images/workflows.png" rel="noopener noreferrer"><img src="images/workflows.png" alt="Workflows button. " width="124" height="567" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Then, you can select and run different workflows (if you have any workflows in your account). Here, let’s click on the Run button (<i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span>) of the workflow we provided to you in this tutorial.</p>
+
+      <p><a href="images/select_workflow.png" rel="noopener noreferrer"><img src="images/select_workflow.png" alt="Select this workflow. " width="662" height="193" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Determine the inputs as follows:
+Input: <code class="language-plaintext highlighter-rouge">openrefine-Galaxy file.tsv</code>
+stop_words_english: <code class="language-plaintext highlighter-rouge">stop_words_english.txt</code>, which is the file we provided to you in this tutorial.</p>
+
+      <p><a href="images/workflow_inputs.png" rel="noopener noreferrer"><img src="images/workflow_inputs.png" alt="Determine the inputs of the workflow. " width="905" height="615" loading="lazy" /></a></p>
+    </li>
+    <li>Click on the <code class="language-plaintext highlighter-rouge">Run Workflow</code> button at the top.</li>
+    <li>
+      <p>You can follow the stages of different jobs (computational tasks). They will be created, scheduled, executed, and completed. When everything is green, your workflow has run fully and the results are ready.</p>
+
+      <p><a href="images/workflow_overview.png" rel="noopener noreferrer"><img src="images/workflow_overview.png" alt="Overview of the workflow. " width="894" height="676" loading="lazy" /></a></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>What can you see here? To follow along, we made all substeps of the task available as outputs. To answer our question of what year most elements in the museum derive from, we first cut the column of production time from the table and filter only dates from the table that derive from specific years, not year ranges. Regular expressions help clean remaining inconsistencies in the dataset. Sorting the production date in descending order reveals that one faulty dataset that is supposed to be created in 2041 is part of the table. We remove it. Datamash allows for summing up how many elements came to the museum in what year.  The ascending order, we visualise in a bar chart. To find out from what year most objects derive, we use another sorting order. We parse the input as a conditional statement to search for object descriptions from the objects of that year. In our case, this is 1969. From all object descriptions from 1969, we create a word cloud using the offered stop word list.
+As a result, we get that most objects from the museum are negatives from Davis Mist, which he created in that year and gave to the museum.</p>
+
+<p><a href="images/display_1969.png" rel="noopener noreferrer"><img src="images/display_1969.png" alt="Word cloud of objects' descriptions. " width="400" height="200" loading="lazy" /></a></p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Congratulations! You used OpenRefine to clean your data and ran a workflow from Galaxy with your results! You now know how to do basic steps in Galaxy, run OpenRefine as an interactive tool and get your data from Galaxy to OpenRefine and back. On the way, you have learned basic data cleaning, like facetting, to enhance the quality of your data. To extract further information from the cleaned data, running a pre-designed workflow showed you a glimpse into Galaxy. Of course, you can always do your own analysis with the tools most useful for you, instead.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>You can use OpenRefine online through Galaxy.</p>
+</li>
+                        
+                        <li><p>OpenRefine allows you to work interactively with messy data.</p>
+</li>
+                        
+                        <li><p>Galaxy allows you to run workflows with your data.</p>
+</li>
+                        
+                        <li><p>With Galaxy, you can visualise your data in various ways.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/digital-humanities/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Hooland_2013">Hooland, S. van, R. Verborgh, and M. D. Wilde, 2013 <b>Cleaning Data with OpenRefine</b> (A. Crymble, Ed.). Programming Historian. <a href="https://doi.org/10.46430/phen0023">10.46430/phen0023</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=digital-humanities/open-refine-tutorial"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=digital-humanities/open-refine-tutorial">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Diana Chiang Jurado, Armin Dadras, Daniela Schneider,  <b>OpenRefine Tutorial for researching cultural data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/digital-humanities/tutorials/open-refine-tutorial/tutorial.html">https://training.galaxyproject.org/training-material/topics/digital-humanities/tutorials/open-refine-tutorial/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{digital-humanities-open-refine-tutorial,
+author = "Diana Chiang Jurado and Armin Dadras and Daniela Schneider",
+	title = "OpenRefine Tutorial for researching cultural data (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/digital-humanities/tutorials/open-refine-tutorial/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/nfdi4culture/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="https://upload.wikimedia.org/wikipedia/commons/5/5d/NFDI4Culture_Logo.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">NFDI4Culture</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/digital-humanities/tutorials/open-refine-tutorial/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: regex_find_replace
+  owner: galaxyp
+  revisions: 503bcd6ebe4b
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: compose_text_param
+  owner: iuc
+  revisions: e188c9826e0f
+  tool_panel_section_label: Expression Tools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: filter_tabular
+  owner: iuc
+  revisions: 90f657745fea
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/digital-humanities/tutorials/open-refine-tutorial/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/digital-humanities/tutorials/open-refine-tutorial/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/16754af2671214c2d8d3d31732b8036fd8941c51">16754af</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
