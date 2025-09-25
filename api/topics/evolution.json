@@ -158,7 +158,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-09-24 13:33:46 +0000",
+          "modified": "2025-09-25 00:07:19 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput FASTA Sequence File\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"MAFFT\"];\n  0 -->|output| 1;\n  e5d56101-daff-420b-82e9-dc6cc923f7ab[\"Output\\noutputAlignment\"];\n  1 --> e5d56101-daff-420b-82e9-dc6cc923f7ab;\n  style e5d56101-daff-420b-82e9-dc6cc923f7ab stroke:#2c3143,stroke-width:4px;\n  2[\"FASTTREE\"];\n  1 -->|outputAlignment| 2;\n  632ce28d-3086-490e-bd97-949eb2cb385a[\"Output\\noutput\"];\n  2 --> 632ce28d-3086-490e-bd97-949eb2cb385a;\n  style 632ce28d-3086-490e-bd97-949eb2cb385a stroke:#2c3143,stroke-width:4px;\n  3[\"IQ-TREE\"];\n  1 -->|outputAlignment| 3;\n  b8434b2b-2001-4b1a-bd06-faeab18519a4[\"Output\\ntreefile\"];\n  3 --> b8434b2b-2001-4b1a-bd06-faeab18519a4;\n  style b8434b2b-2001-4b1a-bd06-faeab18519a4 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput FASTA Sequence File\"]\n  1[label=\"MAFFT\"]\n  0 -> 1 [label=\"output\"]\n  ke5d56101daff420b82e9dc6cc923f7ab[color=lightseagreen,label=\"Output\\noutputAlignment\"]\n  1 -> ke5d56101daff420b82e9dc6cc923f7ab\n  2[label=\"FASTTREE\"]\n  1 -> 2 [label=\"outputAlignment\"]\n  k632ce28d3086490ebd97949eb2cb385a[color=lightseagreen,label=\"Output\\noutput\"]\n  2 -> k632ce28d3086490ebd97949eb2cb385a\n  3[label=\"IQ-TREE\"]\n  1 -> 3 [label=\"outputAlignment\"]\n  kb8434b2b20014b1abd06faeab18519a4[color=lightseagreen,label=\"Output\\ntreefile\"]\n  3 -> kb8434b2b20014b1abd06faeab18519a4\n}",
           "workflow_tools": [
@@ -509,11 +509,6 @@
             "usegalaxy": false
           },
           {
-            "url": "http://galaxy.ul.edu.lb/",
-            "name": "Lebanese University Galaxy",
-            "usegalaxy": false
-          },
-          {
             "url": "https://mississippi.sorbonne-universite.fr",
             "name": "MISSISSIPPI",
             "usegalaxy": false
@@ -531,6 +526,11 @@
           {
             "url": "http://pepsimili.e-nios.com:8080/",
             "name": "PepSimili",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
             "usegalaxy": false
           },
           {
@@ -646,10 +646,6 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
                 "state": "exact",
                 "version": "2.1.10+galaxy1",
                 "server": "https://mississippi.sorbonne-universite.fr"
@@ -665,6 +661,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -782,10 +782,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -799,6 +795,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -818,8 +818,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.4.0+galaxy1",
                   "2.3.6+galaxy0",
+                  "2.4.0+galaxy1",
                   "2.4.0+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -916,10 +916,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -933,6 +929,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -1020,8 +1020,8 @@
                 "versions": [
                   "7.526+galaxy0",
                   "7.221.3",
-                  "7.526+galaxy2",
-                  "7.526+galaxy1"
+                  "7.526+galaxy1",
+                  "7.526+galaxy2"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -1033,8 +1033,8 @@
                 "state": "inexact",
                 "versions": [
                   "7.221.3",
-                  "7.475+galaxy0",
-                  "7.508+galaxy0"
+                  "7.508+galaxy0",
+                  "7.475+galaxy0"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -1053,10 +1053,6 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "inexact",
@@ -1078,6 +1074,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "7.221.3",
@@ -1088,12 +1088,12 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "7.526+galaxy2",
                   "7.526+galaxy1",
+                  "7.526+galaxy2",
                   "7.508+galaxy0",
                   "7.487+galaxy0",
-                  "7.505+galaxy0",
-                  "7.489+galaxy0"
+                  "7.489+galaxy0",
+                  "7.505+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -1347,7 +1347,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-09-24 13:33:46 +0000",
+          "modified": "2025-09-25 00:07:19 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput alignment\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"RStudio\"];\n  2[\"Estimate phylogeny with RAxML\"];\n  0 -->|output| 2;\n  9f8ae577-c583-4a2d-b64d-14c25fb859d9[\"Output\\nBest-scoring ML Tree\"];\n  2 --> 9f8ae577-c583-4a2d-b64d-14c25fb859d9;\n  style 9f8ae577-c583-4a2d-b64d-14c25fb859d9 stroke:#2c3143,stroke-width:4px;\n  bdb8cf2f-b553-4a96-8b55-38b4b499ab88[\"Output\\nInfo\"];\n  2 --> bdb8cf2f-b553-4a96-8b55-38b4b499ab88;\n  style bdb8cf2f-b553-4a96-8b55-38b4b499ab88 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput alignment\"]\n  1[label=\"RStudio\"]\n  2[label=\"Estimate phylogeny with RAxML\"]\n  0 -> 2 [label=\"output\"]\n  k9f8ae577c5834a2db64d14c25fb859d9[color=lightseagreen,label=\"Output\\nBest-scoring ML Tree\"]\n  2 -> k9f8ae577c5834a2db64d14c25fb859d9\n  kbdb8cf2fb5534a968b5538b4b499ab88[color=lightseagreen,label=\"Output\\nInfo\"]\n  2 -> kbdb8cf2fb5534a968b5538b4b499ab88\n}",
           "workflow_tools": [
@@ -1593,11 +1593,6 @@
             "usegalaxy": false
           },
           {
-            "url": "http://galaxy.ul.edu.lb/",
-            "name": "Lebanese University Galaxy",
-            "usegalaxy": false
-          },
-          {
             "url": "https://mississippi.sorbonne-universite.fr",
             "name": "MISSISSIPPI",
             "usegalaxy": false
@@ -1615,6 +1610,11 @@
           {
             "url": "http://pepsimili.e-nios.com:8080/",
             "name": "PepSimili",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
             "usegalaxy": false
           },
           {
@@ -1727,10 +1727,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -1744,6 +1740,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -1851,10 +1851,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -1868,6 +1864,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -1986,10 +1986,6 @@
               },
               {
                 "state": "local",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "local",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -2003,6 +1999,10 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -2391,7 +2391,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-09-24 13:33:46 +0000",
+          "modified": "2025-09-25 00:07:19 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nMTB single-end BAMs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nMTB paired-end BAMs\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Merge collections\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Samtools view BAM > SAM\"];\n  2 -->|output| 3;\n  aa220027-9d10-4328-b2c2-e4d139d5d5bd[\"Output\\nSamtools view on input dataset(s): filtered alignments\"];\n  3 --> aa220027-9d10-4328-b2c2-e4d139d5d5bd;\n  style aa220027-9d10-4328-b2c2-e4d139d5d5bd stroke:#2c3143,stroke-width:4px;\n  4[\"Sed MTB_anc to Chromosome\"];\n  3 -->|outputsam| 4;\n  5[\"Samtools view SAM > BAM\"];\n  4 -->|output| 5;\n  6[\"TB-profiler\"];\n  5 -->|outputsam| 6;\n  7[\"Get drug resistance profile\"];\n  6 -->|output_txt| 7;\n  8[\"Add Sample Name\"];\n  7 -->|output| 8;\n  9[\"Concatenate DR profiles in a single table\"];\n  8 -->|output| 9;\n  10[\"Cleanup the table\"];\n  9 -->|out_file1| 10;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nMTB single-end BAMs\"]\n  1[color=lightblue,label=\"ℹ️ Input Collection\\nMTB paired-end BAMs\"]\n  2[label=\"Merge collections\"]\n  0 -> 2 [label=\"output\"]\n  1 -> 2 [label=\"output\"]\n  3[label=\"Samtools view BAM > SAM\"]\n  2 -> 3 [label=\"output\"]\n  kaa2200279d104328b2c2e4d139d5d5bd[color=lightseagreen,label=\"Output\\nSamtools view on input dataset(s): filtered alignments\"]\n  3 -> kaa2200279d104328b2c2e4d139d5d5bd\n  4[label=\"Sed MTB_anc to Chromosome\"]\n  3 -> 4 [label=\"outputsam\"]\n  5[label=\"Samtools view SAM > BAM\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"TB-profiler\"]\n  5 -> 6 [label=\"outputsam\"]\n  7[label=\"Get drug resistance profile\"]\n  6 -> 7 [label=\"output_txt\"]\n  8[label=\"Add Sample Name\"]\n  7 -> 8 [label=\"output\"]\n  9[label=\"Concatenate DR profiles in a single table\"]\n  8 -> 9 [label=\"output\"]\n  10[label=\"Cleanup the table\"]\n  9 -> 10 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -2994,7 +2994,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-09-24 13:33:46 +0000",
+          "modified": "2025-09-25 00:07:19 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nSingle-End FASTQs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nPaired-End FASTQs\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nMycobacterium_tuberculosis_ancestral_reference.gbk\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Trimmomatic\"];\n  0 -->|output| 3;\n  4[\"Trimmomatic\"];\n  1 -->|output| 4;\n  5[\"Mapping and variant calling of SINGLE END FASTQs with snippy\"];\n  3 -->|fastq_out| 5;\n  2 -->|output| 5;\n  6[\"Mapping and variant calling of PAIRED END FASTQs with snippy\"];\n  4 -->|fastq_out_paired| 6;\n  2 -->|output| 6;\n  7[\"Merge PE/SE VCFs in a single collection with all samples\"];\n  5 -->|snpvcf| 7;\n  6 -->|snpvcf| 7;\n  8[\"Merge PE/SE BAMs in a single collection with all samples Part the workflow ”Identifying DR with TB-profiler\"];\n  5 -->|snpsbam| 8;\n  6 -->|snpsbam| 8;\n  9[\"TB Variant Filter\"];\n  7 -->|output| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nSingle-End FASTQs\"]\n  1[color=lightblue,label=\"ℹ️ Input Collection\\nPaired-End FASTQs\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nMycobacterium_tuberculosis_ancestral_reference.gbk\"]\n  3[label=\"Trimmomatic\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Trimmomatic\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Mapping and variant calling of SINGLE END FASTQs with snippy\"]\n  3 -> 5 [label=\"fastq_out\"]\n  2 -> 5 [label=\"output\"]\n  6[label=\"Mapping and variant calling of PAIRED END FASTQs with snippy\"]\n  4 -> 6 [label=\"fastq_out_paired\"]\n  2 -> 6 [label=\"output\"]\n  7[label=\"Merge PE/SE VCFs in a single collection with all samples\"]\n  5 -> 7 [label=\"snpvcf\"]\n  6 -> 7 [label=\"snpvcf\"]\n  8[label=\"Merge PE/SE BAMs in a single collection with all samples Part the workflow ”Identifying DR with TB-profiler\"]\n  5 -> 8 [label=\"snpsbam\"]\n  6 -> 8 [label=\"snpsbam\"]\n  9[label=\"TB Variant Filter\"]\n  7 -> 9 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -3506,7 +3506,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-09-24 13:33:46 +0000",
+          "modified": "2025-09-25 00:07:19 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nCollection of VCFs to analyze\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference genome of the MTBC ancestor\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Filter TB variants\"];\n  0 -->|output| 2;\n  3[\"Generate the complete genome of each of the samples\"];\n  2 -->|output1| 3;\n  1 -->|output| 3;\n  ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a[\"Output\\n#{input_file}\"];\n  3 --> ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a;\n  style ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a stroke:#2c3143,stroke-width:4px;\n  4[\"Concatenate genomes to build a MSA\"];\n  3 -->|output_file| 4;\n  5[\"Keep only variable positions\"];\n  4 -->|out_file1| 5;\n  6[\"Calculate SNP distances\"];\n  5 -->|output_fasta| 6;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nCollection of VCFs to analyze\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nReference genome of the MTBC ancestor\"]\n  2[label=\"Filter TB variants\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Generate the complete genome of each of the samples\"]\n  2 -> 3 [label=\"output1\"]\n  1 -> 3 [label=\"output\"]\n  kce5dd7a2c33d46b49f0268c2bdfcf31a[color=lightseagreen,label=\"Output\\n#{input_file}\"]\n  3 -> kce5dd7a2c33d46b49f0268c2bdfcf31a\n  4[label=\"Concatenate genomes to build a MSA\"]\n  3 -> 4 [label=\"output_file\"]\n  5[label=\"Keep only variable positions\"]\n  4 -> 5 [label=\"out_file1\"]\n  6[label=\"Calculate SNP distances\"]\n  5 -> 6 [label=\"output_fasta\"]\n}",
           "workflow_tools": [
@@ -4009,11 +4009,6 @@
             "usegalaxy": false
           },
           {
-            "url": "http://galaxy.ul.edu.lb/",
-            "name": "Lebanese University Galaxy",
-            "usegalaxy": false
-          },
-          {
             "url": "https://mississippi.sorbonne-universite.fr",
             "name": "MISSISSIPPI",
             "usegalaxy": false
@@ -4031,6 +4026,11 @@
           {
             "url": "http://pepsimili.e-nios.com:8080/",
             "name": "PepSimili",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
             "usegalaxy": false
           },
           {
@@ -4143,10 +4143,6 @@
               },
               {
                 "state": "local",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "local",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -4160,6 +4156,10 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -4265,10 +4265,6 @@
               },
               {
                 "state": "local",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "local",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -4282,6 +4278,10 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -4388,10 +4388,6 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
                   "9.3+galaxy1"
@@ -4409,6 +4405,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "inexact",
@@ -4524,10 +4524,6 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
                   "9.3+galaxy1"
@@ -4545,6 +4541,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -4658,10 +4658,6 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
                   "9.3+galaxy1"
@@ -4679,6 +4675,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -4792,10 +4792,6 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
                   "9.3+galaxy1"
@@ -4813,6 +4809,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -4926,10 +4926,6 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
                   "9.3+galaxy1"
@@ -4947,6 +4943,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -5062,10 +5062,6 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
                 "state": "exact",
                 "version": "1.15.1+galaxy3",
                 "server": "https://mississippi.sorbonne-universite.fr"
@@ -5081,6 +5077,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -5106,8 +5106,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.10+galaxy1",
-                  "1.10",
-                  "1.9+galaxy1"
+                  "1.9+galaxy1",
+                  "1.10"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -5202,10 +5202,6 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
                   "1.15.1+galaxy3",
@@ -5224,6 +5220,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -5248,9 +5248,9 @@
                 "versions": [
                   "1.15.1+galaxy3",
                   "1.10+galaxy1",
-                  "1.10",
-                  "1.15.1+galaxy4",
                   "1.9+galaxy1",
+                  "1.15.1+galaxy4",
+                  "1.10",
                   "1.15.1+galaxy2",
                   "1.15.1+galaxy0",
                   "1.15.1+galaxy1"
@@ -5261,8 +5261,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.10+galaxy1",
-                  "1.10",
-                  "1.9+galaxy1"
+                  "1.9+galaxy1",
+                  "1.10"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -5276,10 +5276,10 @@
                 "versions": [
                   "1.15.1+galaxy3",
                   "1.10+galaxy1",
-                  "1.10",
-                  "1.9",
-                  "1.4.0",
                   "1.15.1+galaxy4",
+                  "1.9",
+                  "1.10",
+                  "1.4.0",
                   "1.15.1+galaxy2",
                   "1.15.1+galaxy0"
                 ],
@@ -5361,10 +5361,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -5378,6 +5374,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -5457,10 +5457,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.20+galaxy3",
-                  "1.21+galaxy0",
                   "1.15.1+galaxy2",
-                  "1.9"
+                  "1.9",
+                  "1.20+galaxy3",
+                  "1.21+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -5492,10 +5492,6 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
                   "1.15.1+galaxy2"
@@ -5515,11 +5511,15 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
-                  "1.20+galaxy3",
                   "1.15.1+galaxy2",
                   "1.9",
+                  "1.20+galaxy3",
                   "1.15.1+galaxy0",
                   "1.9+galaxy1"
                 ],
@@ -5616,8 +5616,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "4.6.0+galaxy0",
                   "4.5.0+galaxy1",
+                  "4.6.0+galaxy0",
                   "4.5.0"
                 ],
                 "server": "https://galaxytrakr.org/"
@@ -5640,10 +5640,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -5657,6 +5653,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -5697,8 +5697,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "4.6.0+galaxy0",
                   "4.5.0+galaxy1",
+                  "4.6.0+galaxy0",
                   "4.5.0"
                 ],
                 "server": "https://usegalaxy.org.au"
@@ -5780,10 +5780,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -5797,6 +5793,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -5910,10 +5910,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -5927,6 +5923,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -6043,10 +6043,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -6060,6 +6056,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -6172,10 +6172,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -6189,6 +6185,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -6300,10 +6300,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -6317,6 +6313,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -6434,10 +6434,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -6451,6 +6447,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -6568,10 +6568,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -6587,11 +6583,15 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
+                  "0.4.0+galaxy0",
                   "0.1.3+galaxy0",
-                  "0.3.5+galaxy2",
-                  "0.4.0+galaxy0"
+                  "0.3.5+galaxy2"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -6707,10 +6707,6 @@
               },
               {
                 "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -6726,18 +6722,22 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
+                  "2.6+galaxy0",
+                  "2.6.1+galaxy0",
+                  "2.4",
+                  "2.8.14+galaxy1",
+                  "6.4.0+galaxy0",
+                  "2.8.3+galaxy0",
+                  "2.1.0",
                   "6.2.1+galaxy1",
                   "2.8.4+galaxy1",
-                  "2.6.1+galaxy0",
-                  "2.8.14+galaxy1",
-                  "2.8.3+galaxy0",
-                  "4.1.1+galaxy0",
-                  "6.4.0+galaxy0",
-                  "2.6+galaxy0",
-                  "2.1.0",
-                  "2.4"
+                  "4.1.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -6745,8 +6745,8 @@
                 "state": "inexact",
                 "versions": [
                   "6.4.0+galaxy0",
-                  "6.6.4+galaxy0",
-                  "4.4.1+galaxy0"
+                  "4.4.1+galaxy0",
+                  "6.6.4+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -6854,10 +6854,6 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
                 "state": "exact",
                 "version": "0.2.0",
                 "server": "https://mississippi.sorbonne-universite.fr"
@@ -6873,6 +6869,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -6985,10 +6985,6 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
                 "state": "exact",
                 "version": "5.1.0",
                 "server": "https://mississippi.sorbonne-universite.fr"
@@ -7004,6 +7000,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "inexact",
@@ -7123,10 +7123,6 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
                 "state": "inexact",
                 "versions": [
                   "0.39+galaxy2"
@@ -7150,11 +7146,15 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
-                  "0.38.0",
                   "0.36.6",
                   "0.39+galaxy2",
+                  "0.38.0",
                   "0.32.3",
                   "0.36.5"
                 ],
@@ -7269,10 +7269,6 @@
               },
               {
                 "state": "local",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "local",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -7286,6 +7282,10 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -7985,11 +7985,6 @@
             "usegalaxy": false
           },
           {
-            "url": "http://galaxy.ul.edu.lb/",
-            "name": "Lebanese University Galaxy",
-            "usegalaxy": false
-          },
-          {
             "url": "https://mississippi.sorbonne-universite.fr",
             "name": "MISSISSIPPI",
             "usegalaxy": false
@@ -8007,6 +8002,11 @@
           {
             "url": "http://pepsimili.e-nios.com:8080/",
             "name": "PepSimili",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
             "usegalaxy": false
           },
           {
@@ -8122,10 +8122,6 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
                 "state": "exact",
                 "version": "2.1.10+galaxy1",
                 "server": "https://mississippi.sorbonne-universite.fr"
@@ -8141,6 +8137,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -8253,10 +8253,6 @@
               },
               {
                 "state": "local",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "local",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -8270,6 +8266,10 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
