@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@aaea1a6904806b3f337f0fc17ba3bb50652c0a25",
+		release: "galaxy-training-network@e0b11612e2c5a441841ccb15b1016765c15c91bd",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Creation of resources listing all the tools and their metadata relevant to your community">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-09-17 10:10:23 +0000">
+<meta name="DC.date" content="2025-10-04 17:50:22 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Paul Zierep">
 <meta name="DC.creator" content="Solenne Correard">
@@ -180,7 +180,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-09-17 10:10:23 +0000",
+  "dateModified": "2025-10-04 17:50:22 +0000",
   "datePublished": "2024-03-13 15:41:48 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -235,7 +235,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Creation of resources listing all the tools and their metadata relevant to your community",
   "url": "https://training.galaxyproject.org/training-material/topics/community/tutorials/community-tool-table/tutorial.html",
-  "version": 3,
+  "version": 4,
   "timeRequired": "PT1H",
   "teaches": "- Create community reviewed resources for Galaxy tools within a specific scientific domain",
   "keywords": [
@@ -1335,7 +1335,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 13, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 17, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 4, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1353,7 +1353,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
 
     </blockquote>
     </section>
@@ -1378,9 +1378,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <figure id="figure-1" style="max-width: 90%;"><img src="./images/galaxy_tool_metadata_extractor_pipeline.png" alt="A diagram illustrating the Galaxy Codex pipeline, showcasing the various steps involved in creating a community Galaxy tool table." width="834" height="544" loading="lazy" /><a target="_blank" href="./images/galaxy_tool_metadata_extractor_pipeline.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Workflow of the Galaxy Codex pipeline. Tool wrappers are parsed from different repositories and additional metadata is retrieved from bio.tools, BioConda, and the main public Galaxy servers. Upon filtering and manual curation of the data for specific scientific communities, the data is transformed into interactive web tables and a tool usage statistic-base word cloud, that can be integrated into any website.</figcaption></figure>
 
-<p>The pipeline creates a <a href="https://galaxyproject.github.io/galaxy_codex/">table with all tools and their metadata</a>. This table can be <strong>filtered to only include tools that are relevant to a specific research community</strong>. Here is an example for the microbial related tools:</p>
+<p>The pipeline creates a <a href="https://galaxyproject.github.io/galaxy_codex/communities/">table with all tools and their metadata</a>. This table can be <strong>filtered to only include tools that are relevant to a specific research community</strong>. Here is an example for the microbial related tools:</p>
 
-<iframe id="edam" src="https://galaxyproject.github.io/galaxy_codex/microgalaxy/" frameborder="0" width="100%" height="600px"> <a href="./images/microgalaxy_tools.png" rel="noopener noreferrer"><img src="./images/microgalaxy_tools.png" alt="Interactive table for microgalaxy tools. " width="2056" height="1142" loading="lazy" /></a> </iframe>
+<iframe id="edam" src="https://galaxyproject.github.io/galaxy_codex/communities/microgalaxy/resources/" frameborder="0" width="100%" height="600px"> <a href="./images/microgalaxy_tools.png" rel="noopener noreferrer"><img src="./images/microgalaxy_tools.png" alt="Interactive table for microgalaxy tools. " width="2056" height="1142" loading="lazy" /></a> </iframe>
 
 <p>The generated community-specific table can be used as is (e.g. downloadable tsv file) and/or embedded (e.g. into a Galaxy Hub page or Galaxy subdomain). This table allows further filtering and searching for fine-grained tool selection.</p>
 
@@ -1624,7 +1624,7 @@ abritamr	TRUE	FALSE
   width="100%"
   height="600"
   frameBorder="0"
-  src="https://galaxyproject.github.io/galaxy_codex/&lt;your_community&gt;/"&gt;
+  src="https://galaxyproject.github.io/galaxy_codex/communities/&lt;your_community&gt;/resources/"&gt;
 &lt;/iframe&gt;
 </code></pre></div>      </div>
     </li>
@@ -1906,7 +1906,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/aaea1a6904806b3f337f0fc17ba3bb50652c0a25">aaea1a6</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e0b11612e2c5a441841ccb15b1016765c15c91bd">e0b1161</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

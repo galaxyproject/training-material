@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@aaea1a6904806b3f337f0fc17ba3bb50652c0a25",
+		release: "galaxy-training-network@e0b11612e2c5a441841ccb15b1016765c15c91bd",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -296,7 +296,7 @@ This is a new, experimental "Community Home" for a given topic. It is intended t
 			<div class="col-sm-3 col-md-6">
 				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
 					
-					<div class="title">2</div>
+					<div class="title">3</div>
 					<div class="subtitle">
 					Tutorials
 					</div>
@@ -378,6 +378,8 @@ This is a new, experimental "Community Home" for a given topic. It is intended t
 
 				<h3>Tutorials</h3>
 				<ul>
+				
+				<li><a href="/training-material/topics/community/tutorials/community-lab/tutorial.html">Creation of the labs in the different Galaxy instances for your community</a></li>
 				
 				<li><a href="/training-material/topics/community/tutorials/community-tutorial-table/tutorial.html">Creation of a Galaxy tutorial table for your community</a></li>
 				
@@ -1086,7 +1088,7 @@ year,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025
 news,0,0,0,0,0,0,0,0,2,10,12
 events,
 learning-pathways,0,0,0,0,0,0,0,0,1,2,3
-tutorials,0,0,0,0,0,0,0,0,0,6,8
+tutorials,0,0,0,0,0,0,0,0,0,6,9
 slides,
 recordings,
 faqs,0,0,0,0,0,0,0,0,0,9,10
@@ -1143,7 +1145,7 @@ figure {
 
 <script>
 const style = getComputedStyle(document.body);
-const totals = {"learning-pathways":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":2,"x":"2024-01-01"},{"y":3,"x":"2025-01-01"}],"faqs":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":0,"x":"2023-01-01"},{"y":9,"x":"2024-01-01"},{"y":10,"x":"2025-01-01"}],"tutorials":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":0,"x":"2023-01-01"},{"y":6,"x":"2024-01-01"},{"y":8,"x":"2025-01-01"}],"news":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":2,"x":"2023-01-01"},{"y":10,"x":"2024-01-01"},{"y":12,"x":"2025-01-01"}],"contributors":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":5,"x":"2017-01-01"},{"y":5,"x":"2018-01-01"},{"y":5,"x":"2019-01-01"},{"y":6,"x":"2020-01-01"},{"y":6,"x":"2021-01-01"},{"y":7,"x":"2022-01-01"},{"y":8,"x":"2023-01-01"},{"y":9,"x":"2024-01-01"},{"y":11,"x":"2025-01-01"}],"grants":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":1,"x":"2020-01-01"},{"y":1,"x":"2021-01-01"},{"y":1,"x":"2022-01-01"},{"y":3,"x":"2023-01-01"},{"y":3,"x":"2024-01-01"},{"y":3,"x":"2025-01-01"}]};
+const totals = {"tutorials":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":0,"x":"2023-01-01"},{"y":6,"x":"2024-01-01"},{"y":9,"x":"2025-01-01"}],"learning-pathways":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":2,"x":"2024-01-01"},{"y":3,"x":"2025-01-01"}],"faqs":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":0,"x":"2023-01-01"},{"y":9,"x":"2024-01-01"},{"y":10,"x":"2025-01-01"}],"news":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":2,"x":"2023-01-01"},{"y":10,"x":"2024-01-01"},{"y":12,"x":"2025-01-01"}],"contributors":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":5,"x":"2017-01-01"},{"y":5,"x":"2018-01-01"},{"y":5,"x":"2019-01-01"},{"y":6,"x":"2020-01-01"},{"y":6,"x":"2021-01-01"},{"y":7,"x":"2022-01-01"},{"y":8,"x":"2023-01-01"},{"y":9,"x":"2024-01-01"},{"y":11,"x":"2025-01-01"}],"grants":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":1,"x":"2020-01-01"},{"y":1,"x":"2021-01-01"},{"y":1,"x":"2022-01-01"},{"y":3,"x":"2023-01-01"},{"y":3,"x":"2024-01-01"},{"y":3,"x":"2025-01-01"}]};
 
 const options = {
 	scales: {
@@ -1340,7 +1342,7 @@ new Chart('other-over-time', {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/aaea1a6904806b3f337f0fc17ba3bb50652c0a25">aaea1a6</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e0b11612e2c5a441841ccb15b1016765c15c91bd">e0b1161</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
