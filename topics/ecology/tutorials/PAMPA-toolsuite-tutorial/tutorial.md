@@ -52,12 +52,12 @@ recordings:
 subtopic: ecologyanalysis
 ---
 
-
 This tutorial aims to present the PAMPA Galaxy workflow, how to use it to compute common
 biodiversity metrics from species abundance data and analyse it through generalized
 linear (mixed) models (GLM and GLMM). This workflow made up of 5 tools will allow you to process
 temporal series data that include at least year, location and species sampled along with
 abundance value and, finally, generate article-ready data products.
+![PAMPA logo](../../images/PAMPA-toolsuite-tutorial/PAMPA.jpg){: style="float: right"}
 
 The PAMPA workflow is an ecological analysis workflow, like so, it is divided as to do a Community
 analysis and a Population analysis separately in accordance with the biodiversity level described.

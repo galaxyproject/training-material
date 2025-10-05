@@ -3,12 +3,18 @@ title: Running a workflow
 area: workflows
 box_type: tip
 layout: faq
-contributors: [shiltemann,hexylena,wm75]
+contributors: [shiltemann,hexylena,wm75, Marie59]
 ---
 
-1. Click on {% icon galaxy-workflows-activity %} *Workflows* in the Galaxy activity bar (on the left side of the screen, or in the top menu bar of older Galaxy instances). At the top of the resulting page you will have the option to switch between the *My workflows*, *Workflows shared with me* and *Public workflows* tabs. Select the tab you want to see all workflows in that category.
-2. Click on the {% icon workflow-run %} *Run workflow* button of the workflow you would like to use
-3. Configure the workflow as needed
-4. Click the **Run Workflow** button at the top-right of the screen
+1. Click on **Workflows** on the vertical panel on the left of the **Galaxy action list**  
+2. At the top of the resulting page you will have the option to switch between the *My workflows*, *Workflows shared with me* and *Public workflows* tabs. Select the tab {% if include.tab %}`{{ include.tab }}`{% else %} you want to see all workflows in that category.{% endif %}. 
+3. Search for {% if include.name %}`{{ include.name }}`{% else %} your desired workflow {% endif %}.
+
+![Select workflow]({% link topics/climate/images/bgc_calib/bgc_workflow.png %}){:width="15%"}
+
+4. Click on the workflow name: a pop-up window opens with a preview of the workflow  
+5. To run it directly: click **Run** (top-right)  
+
+6. **Recommended**: click **Import** (left of Run) to make your own local copy under *Workflows / My Workflows*    
 
 You may have to refresh your history to see the queued jobs

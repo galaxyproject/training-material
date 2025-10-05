@@ -24,14 +24,9 @@ module Jekyll
         alternateName: 'GTN',
         url: 'https://training.galaxyproject.org',
         logo: 'https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png',
-        fundingModel: "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. " \
-                      'There are no full time paid staff members of the GTN. Individuals are occasionally funded on ' \
-                      'GTN-adjacent projects.',
         keywords: %w[galaxy bioinformatics training fair accessible],
         status: 'active',
         foundingDate: Gtn::Git.discover['founding_date'].to_s,
-        socialMedia: 'https://mstdn.science/@gtn',
-        type: 'project',
       }.freeze
 
       A11Y = {
@@ -142,7 +137,6 @@ module Jekyll
         }
         if !contributor.nil? && contributor.key?('orcid') && contributor['orcid']
           person['identifier'] = "https://orcid.org/#{contributor['orcid']}"
-          person['orcid'] = "https://orcid.org/#{contributor['orcid']}"
         end
 
         person

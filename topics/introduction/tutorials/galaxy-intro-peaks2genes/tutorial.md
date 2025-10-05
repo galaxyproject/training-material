@@ -40,6 +40,13 @@ contributions:
   - deNBI
   - uni-freiburg
 
+answer_histories:
+- label: "usegalaxy.eu"
+  history: https://usegalaxy.eu/u/teresa-m/h/gtn-peaks-to-genes-introduction-part-1
+  date: 2025-08-19
+- label: "usegalaxy.eu"
+  history: https://usegalaxy.eu/u/teresa-m/h/gtn-peaks-to-genes-introduction-part-2
+  date: 2025-08-19
 ---
 
 We stumbled upon a paper ({% cite Li2012 %}) called *"The histone acetyltransferase MOF is a key regulator of the embryonic stem cell core transcriptional network"*. The paper contains the analysis of possible target genes of an interesting protein called Mof. The targets were obtained by ChIP-seq in mice and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
@@ -168,7 +175,7 @@ Let's start with a fresh history.
 >
 >    ![The database/build version can be selected from a dropdown menu. Users can start typing the database name to filter the list](../../images/Search-for-mm9.PNG)
 >
-> 5. Click on **Save** on the top
+> 5. Click on **Save** at the bottom
 > 6. Add a tag called `#peaks` to the dataset to make it easier to track in the history
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
@@ -195,24 +202,24 @@ we also need a list of genes in mice, which we can obtain from UCSC.
 >     ![UCSC table browser interface](../../images/intro_02.png)
 >
 > 3. Set the following options:
->     - *"clade"*: `Mammal`
->     - *"genome"*: `Mouse`
->     - *"assembly"*: `July 2007 (NCBI37/mm9)`
->     - *"group"*: `Genes and Gene Predictions`
->     - *"track"*: `RefSeq Genes`
->     - *"table"*: `refGene`
->     - *"region"*: `genome`
->     - *"output format"*: `BED - browser extensible data`
+>     - *"Clade"*: `Mammal`
+>     - *"Genome"*: `Mouse`
+>     - *"Assembly"*: `July 2007 (NCBI37/mm9)`
+>     - *"Group"*: `Genes and Gene Predictions`
+>     - *"Track"*: `RefSeq Genes`
+>     - *"Table"*: `refGene`
+>     - *"Region"*: `Genome`
+>     - *"Output format"*: `BED - browser extensible data`
 >     - *"Send output to"*: `Galaxy` (only)
 >
-> 4. Click on the **get output** button
+> 4. Click on the **Get output** button
 >
 >    You will see the next screen:
 >
 >    ![Output settings](../../images/intro_03.png)
 >
 > 5. Make sure that *"Create one BED record per"* is set to `Whole Gene`
-> 6. Click on the **Send Query to Galaxy** button
+> 6. Click on the **Send query to Galaxy** button
 > 7. Wait for the upload to finish
 > 8. Rename our dataset to something more recognizable like `Genes`
 >
@@ -284,7 +291,7 @@ As we can see, the peak file lacks `chr` before any chromosome number. But what 
 
 > <hands-on-title>View end of file</hands-on-title>
 >
-> 1. Search for {% tool [Select last lines from a dataset (tail)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.3+galaxy1) %} tool and run with the following settings:
+> 1. Search for {% tool [Select last lines from a dataset (tail)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.5+galaxy2) %} tool and run with the following settings:
 >     - *"Text file"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
 >     - *"Operation"*: `Keep last lines`
 >     - *"Number of lines"*: Choose a value, e.g. `100`
@@ -311,9 +318,9 @@ In order to convert the chromosome names we have therefore two things to do:
 
 > <hands-on-title>Adjust chromosome names</hands-on-title>
 >
-> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} in a specific column with the following settings:
+> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy2) %} in a specific column with the following settings:
 >     - *"File to process"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
->     - *"in column"*: `1`
+>     - *"in column"*: `Column: 1`
 >     - *"Find pattern"*: `[0-9]+`
 >
 >         This will look for numerical digits
@@ -324,9 +331,9 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 > 2. Rename your output file `chr prefix added`.
 >
-> 3. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}  : Let's rerun the tool with two more replacements
+> 3. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy2) %}  : Let's rerun the tool with two more replacements
 >    - *"File to process"*: the output from the last run, `chr prefix added`
->    - *"in column"*: `1`
+>    - *"in column"*: `Column: 1`
 >    - {% icon param-repeat %} Replacement
 >      - *"Find pattern"*: `chr20`
 >      - *"Replace with"*: `chrX`
@@ -433,10 +440,10 @@ We will group the table by chromosome and count the number of genes with peaks o
 >
 > 1. {% tool [Group](Grouping1) %} data by a column and perform aggregate operation on other columns, with the following settings:
 >     - *"Select data"* to the result of the intersection
->     - *"Group by column"*:`Column 1`
+>     - *"Group by column"*:`Column: 1`
 >     - Press **Insert Operation** and choose:
 >         - *"Type"*: `Count`
->         - *"On column"*: `Column 1`
+>         - *"On column"*: `Column: 1`
 >         - *"Round result to nearest integer?"*: `No`
 >
 >    > <question-title></question-title>
@@ -465,10 +472,10 @@ We can fix this by running a dedicated tool for sorting on our data.
 
 > <hands-on-title>Fix sort order of gene counts table</hands-on-title>
 >
-> 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} data in ascending or descending order, with the following settings:
+> 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} data in ascending or descending order, with the following settings:
 >     - *"Sort Query"*: result of running the Group tool
 >     - in {% icon param-repeat %} *"Column selections"*
->       - *"on column"*: `Column 1`
+>       - *"on column"*: `Column: 1`
 >       - *"in"*: `Ascending order`
 >       - *"Flavor"*: `Natural/Version sort (-V)`
 >
@@ -481,15 +488,15 @@ Great, we are ready to plot things!
 > <hands-on-title>Draw barchart</hands-on-title>
 >
 > 1. Click on {% icon galaxy-barchart %} (visualize) icon on the output from the **Sort** tool
-> 2. Select `Bar diagram (NVD3)`
+> 2. Select `Bar, Line and Scatter` from the main panel
 > 3. Click on the **<<** in the upper right corner
-> 4. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
-> 5. Switch to the {% icon galaxy-chart-select-data %} **Select data** tab and play around with the settings
-> 6. When you are happy, click the {% icon galaxy-save %} **Save** visualization in the top right of the *main panel*
+> 4. Choose a title below **Title**, e.g. `Gene counts per chromosome`
+> 5. Switch to the **Settings** tab and change the axis labels
+> 6. Play around with the settings in the **Tracks** tab
+> 7. When you are happy, click the {% icon cloud-upload %} icon to **Save** visualization in the top right of the *main panel*
 >
 >    This will store it to your saved visualisations. Later you can view,
->    download, or share it with others from **Data -> Visualizations** in the
->    top menu of Galaxy.
+>    download, or share it with others by clicking again on **Visualization** on the left menu bar. In the opened menu bar click on the blue **Saved Visualizations** button on top. In the main panel you can find your saved plot.
 >
 {: .hands_on}
 
@@ -498,7 +505,7 @@ Great, we are ready to plot things!
 When you look carefully at your history, you can see that it contains all the steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step.
 Wouldn't it be nice to just convert this history into a workflow that we'll be able to execute again and again?
 
-Galaxy makes this very simple with the `Extract workflow` option. This means that any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis. It also allows you to easily share or publish your analysis.
+Galaxy makes this very simple with the `Extract Workflow` option. This means that any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis. It also allows you to easily share or publish your analysis.
 
 > <hands-on-title>Extract workflow</hands-on-title>
 >
@@ -506,7 +513,7 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 >
 >    This will make the creation of the workflow easier.
 >
-> 2. Click on {% icon galaxy-gear %} (**History options**) at the top of your history panel and select **Extract workflow**.
+> 2. Click on {% icon galaxy-history-options %} (**History options**) at the top of your history panel and select **Extract Workflow**.
 >
 >    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
 >
@@ -575,7 +582,7 @@ We again need our peak file, but we'd like to work in a clean history. Instead o
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Click on the **History options** at the top right of your history. Click on the **Show Histories Side-by-Side**
+> 2. Click on the **History options** {% icon galaxy-history-options %} at the top right of your history. Click on the **Show Histories Side-by-Side**
 >
 >       You should see both of your histories side-by-side now
 >
@@ -590,7 +597,7 @@ We need to generate a new BED file from the original peak file that contains the
 
 > <hands-on-title>Create peak summit file</hands-on-title>
 >
-> 1. {% tool [Compute on rows](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0) %} with the following parameters:
+> 1. {% tool [Compute on rows](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1) %} with the following parameters:
 >   - *"Input file"*: our peak file `Peak regions` (the interval format file)
 >   - *"Input has a header line with column names?": `No`
 >   - In *"Expressions"*:
@@ -663,7 +670,7 @@ It's time to reuse the workflow we created earlier.
 
 > <hands-on-title>Run a workflow</hands-on-title>
 > 1. Open the workflow menu (left menu bar)
-> 2. Find the workflow you made in the previous section, and select the option **Run**
+> 2. Find the workflow you made in the previous section, and select the option **Run** {% icon workflow-run %}
 > 3. Choose as inputs our `mm9.RefSeq_genes` (`#genes`) BED file and the result of the **Cut** tool (`#peaks`)
 > 4. Click **Run workflow**
 >
@@ -677,23 +684,24 @@ But wouldn't it be more interesting to know the number of peaks in each unique g
 > <hands-on-title>Run a workflow with changed settings</hands-on-title>
 > 1. Open the workflow menu (left menu bar)
 > 2. Find the workflow you made in the previous section, and select the option **Run**
-> 3. Choose as inputs our `mm9.RefSeq_genes` (`#genes`) BED file and the result of the **Cut** tool (`#peaks`)
-> 4. Click on the title of the {% icon tool %} **Group** tool to expand the options.
-> 5. Change the following settings by clicking on the {% icon galaxy-pencil %} (pencil) icon on the left:
+> 3. Click on **Workflow run settings** {% icon galaxy-wf-options %} and then on **Expanded workflow form**
+> 4. Choose as inputs our `mm9.RefSeq_genes` (`#genes`) BED file and the result of the **Cut** tool (`#peaks`)
+> 5. Click on the title of the {% icon tool %} **Group** tool to expand the options
+> 6. Change the following settings by clicking on the {% icon galaxy-pencil %} (pencil) icon on the left:
 >     - *"Group by column"*: `7`
 >     - In *"Operation"*:
 >       - *"On column"*: `7`
-> 6. Click **Run workflow**
+> 7. Click **Run workflow**
 {: .hands_on}
 
 Congratulations! You should have a file with all the unique gene names and a count on how many peaks they contained.
 
 > <question-title></question-title>
 >
-> The list of unique genes is not sorted. Try to sort it on your own!
+> The list of unique genes is not sorted or you workflow included a sorting step but for the gene names. Try to sort it on your own!
 >
 > > <solution-title></solution-title>
-> > You can use the tool "Sort data in ascending or descending order" on column 2 and "fast numeric sort".
+> > You can use the tool "{% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} data in ascending or descending order" or rerun to sort tool of your workflow. Sort on column 2 and "fast numeric sort".
 > {: .solution }
 {: .question}
 
@@ -702,16 +710,16 @@ Congratulations! You should have a file with all the unique gene names and a cou
 
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-To share a history, click on the {%  icon galaxy-history-options %} history options and select `Share or Publish`. On this page you can do 3 things:
+To share a history, click on the {%  icon galaxy-history-options %} history options and select `Share & Manage Access`. On this tab (**Share or Publish**) you can **Make History accessible** or **Share History with Individual Users**:
 
 
-1. **Make accessible via Link**
+1. **Make History accessible**
 
     This generates a link that you can give out to others. Anybody with this link will be able to view your history.
 
-2. **Make History publicly available in Published Histories**
+2. **Make History publicly available**
 
-    This will not only create a link, but will also publish your history. This means your history will be listed under `Data → Histories → Published Histories` in the top menu.
+    This will not only create a link, but will also publish your history. This means your history will be listed under `Histories → Published Histories` in the left menu and other users can access the history there.
 
 3. **Share with Individual Users**
 
@@ -725,7 +733,7 @@ To share a history, click on the {%  icon galaxy-history-options %} history opti
 > 2. See if you can do the same with your workflow!
 > 3. Find the history and/or workflow shared by your neighbour
 >
->    Histories shared with specific users can be accessed by those users under `Data → Histories → Histories shared with me`.
+>    Histories shared with specific users can be accessed by those users under `Histories → Shared with Me`.
 >
 {: .hands_on}
 

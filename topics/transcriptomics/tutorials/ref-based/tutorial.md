@@ -366,7 +366,7 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >    ```
 >
 >    1. Rename the dataset if necessary
->    2. Verify that the datatype is `gtf` and not `gff`, and that the database is `dm6`
+>    2. Verify that the datatype is `gtf` (or `gtf.gz`) and not `gff`, and that the database is `dm6`
 >
 >    > <comment-title>How to get annotation file?</comment-title>
 >    >
@@ -1174,7 +1174,7 @@ To be able to identify differential gene expression induced by PS depletion, all
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library:
+> 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (as Datasets):
 >
 >    - `GSM461176_untreat_single_featureCounts.counts`
 >    - `GSM461177_untreat_paired_featureCounts.counts`

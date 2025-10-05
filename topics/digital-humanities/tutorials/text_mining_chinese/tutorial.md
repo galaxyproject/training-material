@@ -4,7 +4,7 @@ redirect_from:
   - /topics/statistics/tutorials/text_mining_chinese/tutorial
 
 title: Text-Mining Differences in Chinese Newspaper Articles
-level: Introductory
+level: Intermediate
 zenodo_link: https://doi.org/10.5281/zenodo.14899614
 questions:
   - How can I automatically compare two Chinese newspaper articles?

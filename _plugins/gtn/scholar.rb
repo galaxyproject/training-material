@@ -38,7 +38,7 @@ module Gtn
     def self.discover_bib
       Jekyll.logger.info '[GTN/scholar] Creating global bib cache'
       global_bib = BibTeX::Bibliography.new
-      bib_paths = [Find.find('./topics'), Find.find('./faqs'), Find.find('./news')].lazy.flat_map(&:lazy).grep(/bib$/)
+      bib_paths = [Find.find('./topics'), Find.find('./faqs'), Find.find('./learning-pathways'), Find.find('./news')].lazy.flat_map(&:lazy).grep(/bib$/)
       bib_paths.each do |path|
         BibTeX.open(path).each do |x|
           x = x.convert_latex

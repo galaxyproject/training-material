@@ -1,5 +1,5 @@
 ---
-title: "Galaxy Training Academy 2025: round two of out GTN education party!"
+title: "Galaxy Training Academy 2025: round two of our GTN education party!"
 contributions:
   authorship: [teresa-m, delphine-l]
 tags: [gtn, event, teaching, learning, community]

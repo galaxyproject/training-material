@@ -24,7 +24,7 @@ jobs:
        github.event.pull_request.head.repo.full_name == github.repository)
     steps:
       - name: Checkout Branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
 
@@ -34,7 +34,8 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           # For non-Pull Requests, run in compressOnly mode and we'll PR after.
-          compressOnly: ${{ github.event_name != 'pull_request' }}
+          ##compressOnly: ${{ github.event_name != 'pull_request' }}
+          minPctChange: '10'
       - name: Create Pull Request
         # If it's not a Pull Request then commit any changes as a new PR.
         if: |
@@ -43,8 +44,9 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           title: Auto Compress Images
-          branch-suffix: timestamp
+          branch: action_compress_images
           commit-message: Compress Images
           author: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
           committer: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
           body: ${{ steps.calibre.outputs.markdown }}
+          draft: always-true

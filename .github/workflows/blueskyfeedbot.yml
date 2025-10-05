@@ -13,13 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Generate cache key
-        uses: actions/github-script@v6
+        uses: actions/github-script@v8
         id: generate-key
         with:
           script: |
             core.setOutput('cache-key', new Date().valueOf())
       - name: Retrieve cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ github.workspace }}/blueskyfeedbot
           key: feed-cache-${{ steps.generate-key.outputs.cache-key }}

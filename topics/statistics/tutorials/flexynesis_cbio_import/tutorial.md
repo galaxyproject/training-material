@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Prepare data from CbioPortal for Flexynesis integration
+title: Prepare Data from CbioPortal for Flexynesis Integration
 zenodo_link: https://zenodo.org/records/16287482
 questions:
 - How to download data from cBioPortal?
@@ -18,6 +18,7 @@ contributors:
 - Nilchia
 - plushz
 - bgruening
+subtopic: flexynesis
 answer_histories:
     - label: "usegalaxy.eu"
       history: https://usegalaxy.eu/u/nilchia/h/final-flexynesis-get-data-from-cbioportal-test-wf

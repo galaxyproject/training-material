@@ -9,6 +9,10 @@ tags:
 - eukaryote
 - VGP
 - biodiversity
+input_histories:
+- label: "usegalaxy.eu"
+  history: https://usegalaxy.eu/u/saim_12/h/input-datasets-vgp-assembly-tutorial
+  date: 2025-09-09
 questions:
 - What combination of tools can produce the highest quality assembly of vertebrate
   genomes?

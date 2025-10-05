@@ -21,6 +21,7 @@ key_points:
 contributors:
 - Nilchia
 - bgruening
+subtopic: flexynesis
 answer_histories:
     - label: "usegalaxy.eu"
       history: https://usegalaxy.eu/u/nilchia/h/final-unsupervised-analysis-of-bone-marrow-cells-test-wf

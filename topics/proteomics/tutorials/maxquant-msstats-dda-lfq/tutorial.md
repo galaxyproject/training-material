@@ -24,6 +24,10 @@ requirements:
       - maxquant-label-free
 subtopic: id-quant
 tags: [label-free]
+answer_histories:
+- label: UseGalaxy.eu - MaxQuant and MSstats
+  history: https://usegalaxy.eu/u/nilchia/h/maxquant-and-msstats-for-the-analysis-of-label-free-data-1
+  date: 2025-09-21
 
 recordings:
 - captioners:
@@ -57,7 +61,7 @@ The training dataset consists of a skin cancer cohort of 19 patients, which is a
 # Get data
 
 
-The annotation file, group comparison file and FASTA file for this training is deposited at [Zenodo](https://zenodo.org/record/4896554). It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible we recommend to use the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at [Protein FASTA Database Handling tutorial]({{site.baseurl}}/topics/proteomics/tutorials/database-handling/tutorial.html). The raw data is available via the [PRIDE repository](https://www.ebi.ac.uk/pride/archive/projects/PXD006914). As this is a real life study, the raw data sizes are large and computation time in MaxQuant is long. To save time and storage capacity, you can skip downloading the raw data and the MaxQuant run and instead continue with the MaxQuant outputs which we provide later on. In this case skip the data upload steps 5-8 which are only necessary for the MaxQuant run.
+The annotation file, group comparison file and FASTA file for this training is deposited at [Zenodo](https://zenodo.org/records/17177151). It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible we recommend to use the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at [Protein FASTA Database Handling tutorial]({{site.baseurl}}/topics/proteomics/tutorials/database-handling/tutorial.html). The raw data is available via the [PRIDE repository](https://www.ebi.ac.uk/pride/archive/projects/PXD006914). As this is a real life study, the raw data sizes are large and computation time in MaxQuant is long. To save time and storage capacity, you can skip downloading the raw data and the MaxQuant run and instead continue with the MaxQuant outputs which we provide later on. In this case skip the data upload steps 5-8 which are only necessary for the MaxQuant run.
 
 
 > <hands-on-title>Data upload</hands-on-title>
@@ -66,12 +70,12 @@ The annotation file, group comparison file and FASTA file for this training is d
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the FASTA database, annotation file and comparison matrix from [Zenodo](https://zenodo.org/record/4896554)
+> 2. Import the FASTA database, annotation file and comparison matrix from [Zenodo](https://zenodo.org/records/17177151)
 >
 >    ```
->    https://zenodo.org/record/4896554/files/input_protein_database.fasta
->    https://zenodo.org/record/4896554/files/input_annotation_file.tabular
->    https://zenodo.org/record/4896554/files/input_comparison_matrix.tabular
+>    https://zenodo.org/records/17177151/files/input_protein_database.fasta
+>    https://zenodo.org/records/17177151/files/input_annotation_file.tabular
+>    https://zenodo.org/records/17177151/files/input_comparison_matrix.tabular
 >    ```
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -105,12 +109,13 @@ The annotation file, group comparison file and FASTA file for this training is d
 >        ```
 >    3. Upload Type `Collections`
 >    4. Click on `Build`
->    5. We need our datasets to be named 'metast_cSCC1.raw', 'metast_cSCC2.raw', etc.. The naming for the raw files have to be exactly this way to later match the file names provided in the MSstats annotation file.
->    6. Select Add column from regular expression then "Create columns matching expression groups". Use the expression `Experiment[0-9]+_(.+).raw`. This will extract the file names from the url.
+>    5. We need our datasets to be named '**metast_cSCC1.raw**', '**metast_cSCC2.raw**', etc.. The naming for the raw files have to be exactly this way to later match the file names provided in the MSstats annotation file.
+>    6. Select `+ Column`, `using a Regular Expression`, then "Create columns matching expression groups". Use the expression `Experiment[0-9]+_(.+)` and Click `Apply` at the end. This will extract the file names from the url.
 >    7. Add column with the fixed value `thermo.raw` to specify the format of the files
 >    8. Add column with the fixed value `raw_files`. This will be the collection name.
->    9. We will now  add columns definitions: Select "Add rules", then "Add/Modify Column definitions". Set the URL as column `A`, List Identifiers as column `B`, Collection Name as column `D`, and Type as column `C`. Apply.
->    10. Click on Upload to start the upload.
+>    9. We will now  add columns definitions: Select `+ Rules`, then `Add/Modify Column definitions`. Select `+ Add Defenitions` and Set the URL as column `A`, List Identifiers as column `B`, Collection Name as column `D`, and Type as column `C`. Then `Apply`.
+>    10. Click on `Upload` to start the upload.
+>    ![upload](../../images/maxquant-msstats-lfq/upload.png "Rule Based Upload")
 >
 {: .hands_on}
 
@@ -128,7 +133,7 @@ The run time of **MaxQuant** {% icon tool %} depends on the number and size of t
 >    - *"Match between runs"*: `yes`
 >    - In *"Parameter Group"*:
 >        - {% icon param-collection %} *"Infiles"*: `raw_files`
->    - *"Generate PTXQC (proteomics quality control pipeline) report?"*: `True`
+>    - *"Generate PTXQC (proteomics quality control pipeline) report? (experimental setting)"*: `True`
 >    - In *"Output Options"*:
 >        - *"Select the desired outputs."*: `Protein Groups` `Evidence`
 >
@@ -138,12 +143,12 @@ Because the MaxQuant run takes really long, we recommend to download the MaxQuan
 
 > <hands-on-title>Load MaxQuant results from Zenodo</hands-on-title>
 >
-> 1. Import the files from [Zenodo](https://zenodo.org/record/4896554)
+> 1. Import the files from [Zenodo](https://zenodo.org/records/17177151)
 >
 >    ```
->    https://zenodo.org/record/4896554/files/MaxQuant_Evidence.tabular
->    https://zenodo.org/record/4896554/files/MaxQuant_proteingroups.tabular
->    https://zenodo.org/record/4896554/files/PTXQC_report.pdf
+>    https://zenodo.org/records/17177151/files/MaxQuant%20Evidence.tabular
+>    https://zenodo.org/records/17177151/files/MaxQuant%20Protein%20Groups.tabular
+>    https://zenodo.org/records/17177151/files/PTXQC%20report.pdf
 >    ```
 > 2. Rename the files `Evidence`, `Protein Groups`, and `PTXQC report` respectively.
 >
@@ -158,9 +163,9 @@ Because the MaxQuant run takes really long, we recommend to download the MaxQuan
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 2622 protein groups and ~240000 features were found in total (number of lines of protein group and evidence files)
-> > 2. They are in column 118 (protein groups) and 54 (evidence)
-> > 3. Up to 60% of the samples intensities derive from potential contaminants (PTXQC plots page 7)
+> > 1. 2512 protein groups and ~240000 features were found in total (number of lines of protein group and evidence files)
+> > 2. They are in column 138 (protein groups) and 50 (evidence)
+> > 3. Up to ~60% of the samples intensities derive from potential contaminants (PTXQC plots page 6)
 > >
 > {: .solution}
 >
@@ -183,16 +188,16 @@ We use the modified MaxQuant protein groups and evidence files as input in MSsta
 >    - {% icon param-file %} *"Select lines from"*: `Evidence` (output of **MaxQuant** {% icon tool %})
 >    - *"the pattern"*: `(HUMAN)|(Sequence)`
 >    - Once finished, rename the output `select evidence`
-> 3. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy0) %} with the following parameters:
+> 3. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `select protein groups` (output of **Select** {% icon tool %})
 >    - In *"Replacement"*:
->            - *"in column"*: `Column: 118`
+>            - *"in column"*: `Column: 138`
 >            - *"Find pattern"*: `+`
 >    - Once finished, rename the file into `protein groups input for MSstats`
-> 4. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy0) %} with the following parameters:
+> 4. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `select evidence` (output of **Select** {% icon tool %})
 >    - In *"Replacement"*:
->            - *"in column"*: `Column: 54`
+>            - *"in column"*: `Column: 50`
 >            - *"Find pattern"*: `+`
 >    - Once finished, rename the file into `evidence input for MSstats`
 > 5. {% tool [MSstats](toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/4.0.0+galaxy1) %}  with the following parameters:
@@ -217,8 +222,8 @@ We use the modified MaxQuant protein groups and evidence files as input in MSsta
 >            - *"Select visualization outputs"*: `MSstats VolcanoPlot`
 >    	     - In *"Advanced visualization parameters"*:
 >                - *"Involve fold change cutoff or not for volcano plot or heatmap"*: `1.5`
->                - *"Display protein names in Volcano Plot"*: `No`
 >                - *"For volcano plot or heatmap, logarithm transformation of adjusted p-valuewith base 2 or 10"*: `2`
+>                - *"Display protein names in Volcano Plot"*: `No`
 >
 {: .hands_on}
 
@@ -230,8 +235,8 @@ We use the modified MaxQuant protein groups and evidence files as input in MSsta
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 28 (2622 lines in protein group file minus 2594 lines after select)
-> > 2. 1764 (MSstats log)
+> > 1. 27 (2518 lines in protein group file minus 2491 lines after select)
+> > 2. 1693 (MSstats log)
 > >
 > {: .solution}
 >
@@ -300,7 +305,7 @@ We’ll count and visualize the number of features per run and calculate the dis
 > 1. {% tool [Summary Statistics](Summary_Statistics1) %} with the following parameters:
 >    - {% icon param-file %} *"Summary statistics on"*: `ProteinLevelData` (output of **MSstats** {% icon tool %})
 >    - *"Column or expression"*: `c8`
-> 2. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/datamash_ops/1.8+galaxy0) %} with the following parameters:
+> 2. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/datamash_ops/1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: `ProteinLevelData` (output of **MSstats** {% icon tool %})
 >    - *"Group by fields"*: `4`
 >    - *"Sort input"*: `Yes`
@@ -310,12 +315,11 @@ We’ll count and visualize the number of features per run and calculate the dis
 >        - *"Type"* : `count`
 >        - *"On column"*: `Column: 1`
 > 3. Click on {% icon galaxy-barchart %} “Visualize this data” on the **Datamash** {% icon tool %} result.
->   - Select `Bar diagram (NVD3)`
->   - Click  `Show` {% icon galaxy-vis-config %} at the top right of the chart.
+>   - Select `Bar, Line and Scatter`
+>   - Click  `Expand` {% icon galaxy-vis-config %} at the top right of the chart.
 >   - *"Provide a title"*: `Number of features per sample`
->   - Click `Select data` {% icon galaxy-chart-select-data %}
->   - *"Data point labels"*: `Column: 1`
->   - Save {% icon galaxy-save %} (file is saved under "User" --> "Visualizations")
+>   - *"Column of x-axis values"*: `Column: 1`
+>   - Save {% icon galaxy-save %} (file is saved under "Visualization" --> "Saved Visualizations")
 >
 {: .hands_on}
 
@@ -347,7 +351,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
 
 > <hands-on-title>Filtering MSstats results</hands-on-title>
 >
-> 1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy0) %} with the following parameters:
+> 1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `Comparison Result` (output of **MSstats** {% icon tool %})
 >    - In *"Replacement"*:
 >        - *"in column"*: `Column: 1`
@@ -386,7 +390,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
 > > <solution-title></solution-title>
 > >
 > > 1. Adjusted p-values control for the multiplicity of testing. Since we fit a separate model, and conduct a separate comparison for each protein, the number of tests equals the number of comparisons. A 0.05 cutoff of an adjusted p-value controls the False Discovery Rate in the collection of tests over all the proteins at 5%. Since they account for the multiplicity, adjusted p-values are more conservative (i.e. it is more difficult to detect a change).
-> > 2. 148 in total (first filtering step); 133 are upregulated in metastasized cSCC (metastasized filtered) and 13 are upregulated in RDEB cSCC (rdeb filtered).
+> > 2. 198 in total (first filtering step); 178 are upregulated in metastasized cSCC (metastasized filtered) and 15 are upregulated in RDEB cSCC (rdeb filtered).
 > >
 > {: .solution}
 >
@@ -416,7 +420,7 @@ For each condition we select only the significant proteins, which are proteins w
 >    - *"Cut columns"*: `c1`
 >    - {% icon param-file %} *"From"*: `significant rdeb` (output of last **Filter** {% icon tool %})
 >    - Rename the file into `rdeb cut`
-> 5. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
+> 5. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `Sample Quantification Matrix` (output of **MSstats** {% icon tool %})
 >    - In *"Replacement"*:
 >        - *"in column"*: `Column: 1`
@@ -425,14 +429,14 @@ For each condition we select only the significant proteins, which are proteins w
 >        - *"in column"*: `Column: 1`
 >        - *"Find pattern"*: `\|.*`
 >    - Rename the file into `replaced sample quantification matrix`
-> 6. {% tool [Join two files](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy0) %} with the following parameters:
+> 6. {% tool [Join two files](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"1st file"*: `replaced sample quantification matrix` (output of **Replace text** {% icon tool %})
 >    - *"Column to use from 1st file"*: `Column: 1`
 >    - {% icon param-file %} *"2nd File"*: `metastasized cut` (output of **Cut** {% icon tool %})
 >    - *"Column to use from 2nd file"*: `Column: 1`
 >    - *"First line is a header line"*: `Yes`
 >    - Rename the file into `metastasized join`
-> 7. {% tool [Join two files](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy0) %} with the following parameters:
+> 7. {% tool [Join two files](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"1st file"*: `replaced sample quantification matrix` (output of **Replace Text** {% icon tool %})
 >    - *"Column to use from 1st file"*: `Column: 1`
 >    - {% icon param-file %} *"2nd File"*: `rdeb cut` (output of **Cut** {% icon tool %})
@@ -445,7 +449,7 @@ For each condition we select only the significant proteins, which are proteins w
 >    - *"Scale data on the plot (after clustering)"*: `Scale my data by row`
 >    - *"Enable data clustering"*: `No`
 >    - *"Output format "*: `PNG`
-> 9. {% tool [heatmap2](ttoolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.2.0+galaxy1) %} with the following parameters:
+> 9. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.2.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input should have column headers - these will be the columns that are plotted"*: `rdeb join` (output of **Join** {% icon tool %})
 >    - *"Plot title"*: `Upregulated proteins in RDEB cSCC`
 >    - *"Scale data on the plot (after clustering)"*: `Scale my data by row`
@@ -460,7 +464,7 @@ For each condition we select only the significant proteins, which are proteins w
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 85 are upregulated in metastasized cSCC and 12 are upregulated in RDEB cSCC (number of lines minus 1 in the first filtering step per condition).
+> > 1. 125 are upregulated in metastasized cSCC and 14 are upregulated in RDEB cSCC (number of lines minus 1 in the first filtering step per condition).
 > >
 > {: .solution}
 >
@@ -472,12 +476,12 @@ In addition we retrieve for each Uniprot ID the corresponding protein names from
 
 > <hands-on-title>MSstats visualizations</hands-on-title>
 >
-> 1. {% tool [UniProt ID mapping and retrieval](toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.5) %} (Do not use 0.6, you may need to change the version on some instances) with the following parameters:
+> 1. {% tool [UniProt ID mapping and retrieval](toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.7) %} (Do not use 0.6, you may need to change the version on some instances) with the following parameters:
 >    - {% icon param-file %} *"Input file with IDs"*: `metastasized join` (output of **Join** {% icon tool %})
 >    - *"ID column"*: `Column: 1`
 >    - *"Do you want to map IDs or retrieve data from UniProt"*: `Retrieve: request entries by uniprot accession using batch retrieval`
 >    - Rename the file into `metastasized uniprot`
-> 2. {% tool [UniProt ID mapping and retrieval](toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.5) %} (Do not use 0.6, you may need to change the version on some instances) with the following parameters:
+> 2. {% tool [UniProt ID mapping and retrieval](toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.7) %} (Do not use 0.6, you may need to change the version on some instances) with the following parameters:
 >    - {% icon param-file %} *"Input file with IDs"*: `rdeb join` (output of **Join** {% icon tool %})
 >    - *"ID column"*: `Column: 1`
 >    - *"Do you want to map IDs or retrieve data from UniProt"*: `Retrieve: request entries by uniprot accession using batch retrieval`
