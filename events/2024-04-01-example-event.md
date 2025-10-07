@@ -7,57 +7,55 @@ status: wip  # add a banner that warns that the contents of the page are still s
 
 
 # Description of your event
-title: My Training Event Title
+title: Galaxy Ecology training and collabroation fest
 description: |
-  Short description of the event (one or two sentences).
-  A longer description can be placed at the bottom of this document.
+  As colleagues from CCAMLR / Antarctica conservation from Belgium are coming to Concarneau marine station to work on Galaxy Ecology use in their projects, we propose to create an open event, where colleagues from CCAMLR / Antarctica conservation from UK, New Zealand and others are interested to participate remotely, so people wanted to learn how to use and contribute to Galaxy Ecology European Platform during these 3 days.
 cover-image:         # image for your corse, put in 'events/images' folder
 cover-image-alt:     # supply alt text describing your image
 
 # Tags to help users find your event. Tag with a topic id to have it show op on the topic community page
 tags:
-- single-cell
+- ecology
 
 # Practical Information
-date_start: 1970-04-01
-date_end: 1970-04-02 # optional, if event is more than one day
+date_start: 2025-04-11
+date_end: 2025-11-13 # 
 
-cost: free # Or, e.g. 150 EUR
-audience: This event is intended for PhD students interested in Genomics. A basic knowledge in R is useful but not required.
-contact_email: organisers@example.com
-async: false # if asynchronous, we will not display the time columns on the program
-mode: online # online, onsite, or hybrid
+cost: free # 
+audience: This event is intended for any scientist interesting in ecology data analysis and notably biodiversity indicator production.
+contact_email: yvan.le-bras@mnhn.fr
+async: false
+mode: hybrid
 
 registration:
-  link: https://example.org
-  deadline: 2024-01-01
-  open: false # set this if registration is not open yet
+  link: contact Yvan
+  # deadline: 2024-01-01
+  # open: false # set this if registration is not open yet
 
 # Location of the event
 # For online events, just the 'name' is enough
 location:
-  name: Erasmus Medical Center    # can be e.g. "Online" for online
-  address: Dr. Molewaterplein 40
-  city: Rotterdam
-  country: The Netherlands
+  name: Concarneau marine station and online   # can be e.g. "Online" for online
+  address: quai de la croix
+  city: Concarneau
+  country: France
   #region: # optional
-  postcode: 3015 GD
+  postcode: 29900
   geo:
-    lat: 51.9109324
-    lon: 4.4680514
+    lat: 47.86846
+    lon: -3.91699
 
 
 # People involved, organisers, speakers, funders, etc
 # Must be defined in CONTRIBUTORS.yaml file
 contributions:
   organisers:
-  - shiltemann
-  - hexylena
+  - yvanlebras
   instructors:
-  - bebatut
-  - fpsom
+  - PaulineSGN
+  - TuturBabar
   funding:
-  - gallantries
+  - pndb
 
 
 # Galaxy and other infrastructure that will be used for your event.
@@ -69,95 +67,48 @@ infrastructure:
     - server: https://usegalaxy.eu
       name: Galaxy EU
       tiaas_link: https://usegalaxy.eu/join-training/smorgasbord3
-    - server: https://usegalaxy.org
-      name: Galaxy Main
-      tiaas_link:
-
-  support: # optional, remove if not using online support
-     platform: Slack
-     join_link:    # invite link; GTN Slack by default
-     channel: my-event  # instructors can create channels on the GTN slack themselves.
-     link: "https://gtnsmrgsbord.slack.com/archives/C032C2MRHAS" # will use the #general channel on GTN slack by default.
 
   custom:  # optional, any other setup instructions you want to add to the "Setup" tab
     description: |
       Before joining the course, please make sure to:
-        - Bring a laptop with at least 8GB of RAM.
         - Do the [Intro to Galaxy](http://training.galaxyproject.org/topics/introduction/tutorials/galaxy-intro-short/tutorial.html) tutorial if you are not yet familiar with Galaxy
 
 # Program of your course
 # Add GTN tutorials by supplying the topic and tutorial name
 # For non-GTN sessions, add a "type:custom" session and description
 program:
-  - section: "Monday: Introduction"  # section title is optional
+  - section: "Tuesday: Introduction"  # section title is optional
     description: |
-      Short description of the program in this section.
+      Galaxy platform and Galaxy Ecology introduction
       Markdown formatted
     tutorials:
-      - name: galaxy-intro-short
-        topic: introduction
-        time: "09:00 - 10:00"
-      - name: data-manipulation-olympics
-        topic: introduction
-        time: "10:00"
       - type: custom
-        name: Coffee Break
-        time: "10:30"
-      - name: data-manipulation-olympics
-        topic: introduction
-        time: "10:45 - 12:00"
-      - name: ansible-galaxy
-        topic: admin
-        time: "13:00"
+        name: Galaxy & Galaxy Ecology introduction
+        time: "10:30 - 12:30"
       - type: custom
-        name: Custom Session
-        time: "16:00 - 17:00"
+        name: Lunch
+        time: "12:30 - 14h:00"
+      - type: custom
+        name: How we can contribute code to Galaxy
+        time: "14:00 - 15:00"
         description: |
-          Description of the custom session here, in markdown, can add
-          [links](https://example.com) if needed
+          the "classical" way" (Pauline) & the "Jupyter notebook way" (Arthur)
       - type: custom
-        name: Wrap-up & Drinks
-        time: "17:00 - 18:00"
-        description: |
-          Time for some well-deserved drinks and socializing!
-
-  - section: "Tuesday: An advanced look at .."
-    description: |
-      Short description of the program for this section.
-
-  - section: "Track 1"
-    subsection: true  # will treat this section as a subsection of the previous (i.e. smaller heading), useful to split day into tracks
-    description: "you can further subdivide into multiple subsections/tracks as well"
-    tutorials:
-      - name: galaxy-intro-short
-        topic: introduction
-        time: "09:00 - 10:00"
+        name: Coffee break
+        time: "15:00 - 15h:30"
       - type: custom
-        name: "Wrap-up"
+        name: collaboration fest / hackathon
+        time: "15:30 - 18:00"
 
-  - section: "Track 2"
-    subsection: true  # will treat this section as a subsection of the previous (i.e. smaller heading), useful to split day into tracks
-    description: "blabla"
-    tutorials:
-      - name: mothur-miseq-sop-short
-        topic: microbiome
+  - section: "Wednesday: Hack!"
+      - type: custom
+        name: collaboration fest / hackathon
+        time: "9:30 - 18:00"
 
-  - section: "Wednesday: Track buttons example"
-    description: Today we have two different tracks, click on one of the buttons below to view the track program.
-    tracks:  # instead of tutorials, you can also define tracks, this will create a button per tracks that will lead to a different page
-      - title: Track 1
-        link: events/tracks/example-track1.md
-      - title: Track 2
-        link: events/tracks/example-track2.md
-      - title: Ecology
-        link: learning-pathways/intro-to-galaxy-and-ecology.md # can also link to learning pathways (or any other GTN page)
-      - title: Climate
-        link: https://usegalaxy.eu # external links also possible
-      - title: Plants
-        link: http://example.com
-      - title: CYOA
-      - title: Track 7
-
+  - section: "thursday: Hack again!"
+      - type: custom
+        name: collaboration fest / hackathon
+        time: "9:30 - 12:30"
 ---
 
 Longer description of the course. This will be added to the overview page of your course.
