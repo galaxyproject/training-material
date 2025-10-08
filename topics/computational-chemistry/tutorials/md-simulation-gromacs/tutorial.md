@@ -207,13 +207,15 @@ Firstly, we perform equilibration using classical NVT dynamics.
 > {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
->    - *"Use a checkpoint (CPT) file"*: `No CPT input`
->    - *"Produce a checkpoint (CPT) file"*: `Produce CPT output`
->    - *"Apply position restraints"*: `Apply position restraints`
->    - {% icon param-file %} *"Position restraint file"*: Position restraint file produced by 'Setup' tool.
->    - *"Ensemble"*: `Isothermal-isochoric ensemble (NVT).`
+>    - *"Inputs"*
+>    - *"Checkpoint (CPT) file"*: `Nothing selected`
+>    -  {% icon param-file %} *"Position restraint file"*: Position restraint file produced by 'Setup' tool.
+>    -  *"Outputs"*
 >    - *"Trajectory output"*: `Return no trajectory output` (we are not interested in how the system evolves to the equilibrated state, merely the final structure)
 >    - *"Structure output"*: `Return .gro file`
+>    - *"Produce a checkpoint (CPT) file"*: `Produce CPT output`
+>    - *"Settings"*
+>    - *"Ensemble"*: `Isothermal-isochoric ensemble (NVT).`
 >    - *"Parameter input"*: `Use default (partially customisable) setting`
 >    - *"Choice of integrator"*: `A leap-frog algorithm for integrating Newton’s equations of motion` (A basic leap-frog integrator)
 >    - *"Bond constraints"*: `Bonds with H-atoms` (bonds involving H are constrained)
