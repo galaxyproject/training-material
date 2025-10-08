@@ -81,6 +81,7 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 >    - *"Select lines from"*: uploaded PDB file
 >    - *"that"*: `Don't Match`
 >    - *"Regular Expression"*: `HETATM`
+>    - *"Rename the dataset"*: `1AKI_clean.pdb`
 >
 {: .hands_on}
 
