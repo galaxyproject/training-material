@@ -236,7 +236,7 @@ Note that we can continue where the last simulation left off (with new parameter
 
 > <hands-on-title>NPT dynamics</hands-on-title>
 >
-> {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
+> {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2022+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
 >    - *"Use a checkpoint (CPT) file"*: `Continue simulation from a CPT file.`
