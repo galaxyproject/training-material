@@ -241,14 +241,15 @@ Note that we can continue where the last simulation left off (with new parameter
 > {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2022+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
->    - *"Use a checkpoint (CPT) file"*: `Continue simulation from a CPT file.`
+>    - *"Inputs"*
 >    - {% icon param-file %} *"Checkpoint (CPT) file"*: Checkpoint file produced by NVT equilibration
->    - *"Produce a checkpoint (CPT) file"*: `Produce CPT output`
->    - *"Apply position restraints"*: `No position restraints`
->    - {% icon param-file %} *"Position restraint file"*: None
->    - *"Ensemble"*: `Isothermal-isobaric ensemble (NPT).`
+>    - {% icon param-file %} *"Position restraint (ITP) file"*: None
+>    - *"Outputs"*
 >    - *"Trajectory output"*: `Return no trajectory output`
 >    - *"Structure output"*: `Return .gro file`
+>    - *"Produce a checkpoint (CPT) file"*: `Produce CPT output`
+>    - *"Settings"*
+>    - *"Ensemble"*: `Isothermal-isobaric ensemble (NPT).`
 >    - *"Parameter input"*: `Use default (partially customisable) setting`
 >    - *"Choice of integrator"*: `A leap-frog algorithm for integrating Newton’s equations of motion` (A basic leap-frog integrator)
 >    - *"Bond constraints"*: `Bonds with H-atoms` (bonds involving H are constrained)
