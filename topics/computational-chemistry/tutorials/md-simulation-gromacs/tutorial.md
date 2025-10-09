@@ -204,7 +204,7 @@ Firstly, we perform equilibration using classical NVT dynamics.
 
 > <hands-on-title>NVT dynamics</hands-on-title>
 >
-> {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
+> {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2022+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
 >    - *"Inputs"*
@@ -280,7 +280,7 @@ Now that equilibration is complete, we can release the position restraints. We a
 
 > <hands-on-title>Production simulation</hands-on-title>
 >
-> 1. {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1) %} with the following parameters:
+> 1. {% tool [GROMACS simulation](toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2022+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
 >    - *"Use a checkpoint (CPT) file"*: `Continue simulation from a CPT file.`
