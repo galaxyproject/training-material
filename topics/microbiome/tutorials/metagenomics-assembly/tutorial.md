@@ -155,6 +155,149 @@ In case of a not very large dataset it's more convenient to upload data directly
 >
 {: .hands_on}
 
+# Preprocessing for Group Assignment and Co-Assembly
+
+A primary objective of the initial group assignment phase is to organize the trimmed sequencing data into sample-specific pairs based on a user-defined metadata table. This process involves using the metadata which includes sample names, conditions (i.e timepoint), or other experimental factors to instruct the workflow on how to correctly group the forward and reverse reads for each individual sample. Automating this grouping is fundamental, as it ensures that all downstream processes, from quality control to co-assembly, are performed on accurately matched read pairs, maintaining the integrity of each biological replicate throughout the entire analysis.
+
+It is essential that the group assignment begins with post-trimming paired-end reads. Utilizing data that has already undergone quality trimming and adapter removal is a critical pre-requisite, as it prevents artifacts and low-quality sequences from introducing errors and fragmentation into the final assembly. While these processed reads are organized within a Galaxy collection for management, the fundamental requirement is that the data itself is the cleaned, paired-end output from tools like Trimmomatic or fastp. This ensures the assembler receives high-quality input where the biological fidelity of the forward-reverse read pairs is preserved, which is indispensable for resolving complex genomic regions and producing robust, contiguous scaffolds for the entire team to analyze
+
+## prepare metadata
+In order to get these files into Galaxy, we will want to do:
+
+* Strip the *header* out of the sample information.
+
+> <hands-on-title>metadata</hands-on-title>
+> 1. At the top of the **Tools** panel (on the left), click {% icon galaxy-upload %} **Upload Data**
+>
+>    ![upload data button](./images/upload-data.png)
+>
+>    This brings up the upload interface:
+>
+>    ![filebox](./images/upload-box.png)
+>
+> 2. Click **Paste/Fetch data** and paste in the following lines in the box that appears.
+>
+>    ```
+>    ERR2231567      timepoint:0h
+>    ERR2231568      timepoint:8h
+>    ERR2231569      timepoint:16h
+>    ERR2231570      timepoint:24h
+>    ERR2231571      timepoint:36h
+>    ERR2231572      timepoint:64h
+>    ````
+>
+> 3. Click **Start**, and then **Close**
+>
+> 4. When they are ready, **rename** {% icon galaxy-pencil %} the datasets to `metadata`.
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
+{: .hands_on}
+
+
+## create a paired collection
+Build a list for paired-end dataset.
+
+> <hands-on-title>Create paired collection</hands-on-title>
+> 1. Click on {% icon galaxy-selector %} **Select Items** at the top of the history panel ![Select Items button](./images/historyItemControls.png)
+>
+> 2. Check {% if include.datasets_description %}{{ include.datasets_description }}{% else %}all the datasets in your history you would like to include{% endif %}
+>
+> 3. Click **{% if include.n %}{{ include.n }}{% else %}n{% endif %} of N selected** and choose **Auto Build List**
+> 
+>    ![build paired collection menu item](./images/buildList.png){:width="15%"}
+>
+> 4. Check and configure auto-pairing. Commonly matepairs have suffix `_1 ` and `_2` or `_R1` and `_R2`. Click on 'Next' at the bottom.
+>
+>    ![edit and build a paired list collection](./images/paired_list_edit.png ){:width="15%"}
+>
+> 5. Enter a name for your collection
+>
+> 6. Click **Build** to build your collection
+>
+> 7.  Click on the checkmark icon at the top of your history again
+{: .hands_on}
+
+## Create two simple collection for forward and reverse reads
+Takes a paired collection and "unzips" it into two simple dataset collections (lists of datasets).
+
+> <hands-on-title>Unzip Collection</hands-on-title>
+>
+> 1. {% tool [Unzip collection](__UNZIP_COLLECTION__) %} with the following input collection and convert it to two simple dataset collections:
+>     - *"Paired input to unzip"*: `Paired-end collection`
+>
+{: .hands_on}
+
+## Add tag to each sample in the forward and reverse collection.
+This step is to add the tag (i.e timepoint) defined in the metadata to each sample
+
+> <hands-on-title>Add Tag</hands-on-title>
+>
+> 1. {% tool [Tag elements](__TAG_FROM_FILE__) %} with parameters:
+>     - *"Input Collection"*: `select the collection (forward)`
+>
+>     - *"Tag collection elements according to this file"*: `select the metadata`
+>
+>     - *"How should the tags be updated"*: `New tags will be added, existing tags will be kept`
+>
+> 2. Rerun {% tool [Tag elements](__TAG_FROM_FILE__) %} with parameters for the reverse collection:
+>     - *"Input Collection"*: `select the collection (reverse)`
+>
+>     - *"Tag collection elements according to this file"*: `select the metadata`
+>
+>     - *"How should the tags be updated"*: `New tags will be added, existing tags will be kept`
+{: .hands_on}
+
+
+## Create zip collection using the forward and reverse collection.
+Create a zip colletion using the tagged forward and reverse collection.
+> <hands-on-title>Zip Collection</hands-on-title>
+>
+> 1. {% tool [Zip collections](__ZIP_COLLECTION__) %} with parameters:
+>     - *"Input 1"*: `select forward collection (Tagged)`
+>
+>     - *"Input 2"*: `select reverse collection (Tagged)`
+>
+{: .hands_on}
+
+
+## Apply rules to dataset collection.
+Create a zip colletion using the tagged forward and reverse collection. This step will reorganize the collection based on the group information (i.e timepoint) defined in the metadata table.
+
+> <hands-on-title>Apply Rules</hands-on-title>
+>
+> 1. {% tool [Apply rules](__APPLY_RULES__) %} with parameters:
+>     - *"Input Collection"*: `Output collection from zip collection`
+>
+> 2. In Rules, Click on the "edit" button:  
+>	- *"1"*: `Add column for identifier0`
+>	- *"2"*: `Add column for identifier1`
+>	- *"3"*: `Add column for tags.`
+>	- *"4"*: `Set columns C and A as List Identifier(s)`
+>	- *"5"*: `Set column B as Paired-end Indicator`
+>	- Click `Save`
+>
+>	![APPLY RULE](./images/apply_rules.png "Apply Rules")
+>
+{: .hands_on}
+
+
+
+## Concatenate paired-end by strand.
+This step is to concatenate the paired-end collections by strand.
+
+> <hands-on-title>Concatenate paired-end collection</hands-on-title>
+>
+> 1. {% tool [Concatenate multiple datasets]( toolshed.g2.bx.psu.edu/repos/artbio/concatenate_multiple_datasets/cat_multi_datasets/1.4.3) %} with parameters:
+>     - *"What type of data do you wish to concatenate?"*: `Paired collection`
+>
+>     - *"Input paired collection to concatenate"*: `Output collection from Apply Rules`
+>
+>     - *"What type of concatenation do you wish to perform?"*: `Concatenate all datasets of same strand (outputs aa single of datasets`
+>
+{: .hands_on}
+
+
 # Assembly
 
 As explained before, there are many challenges to metagenomics assembly, including:
