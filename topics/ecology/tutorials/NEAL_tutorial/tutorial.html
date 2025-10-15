@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@7a11bc50d59c8fe99a1d50718bfcfa0b049c26ad",
+		release: "galaxy-training-network@5ad8e1845c20eb92542f9177a24deca4c7587be4",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Audio data annotation with NEAL (Nature + Energy Audio labeler).">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-10-14 14:43:07 +0000">
+<meta name="DC.date" content="2025-10-15 10:02:59 +0000">
 <meta name="DC.creator" content="Pauline Seguineau">
 <meta name="DC.creator" content="Haswane Chei">
 <meta name="DC.creator" content="Yvan Le Bras"><meta name="description" content="Learn to access, manage and analyse Ecological data through Galaxy.">
@@ -179,7 +179,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-10-14 14:43:07 +0000",
+  "dateModified": "2025-10-15 10:02:59 +0000",
   "datePublished": "2025-10-14 14:43:07 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -234,7 +234,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Audio data annotation with NEAL (Nature + Energy Audio labeler).",
   "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/NEAL_tutorial/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT1H",
   "teaches": "- Learning the use of a Galaxy interactive tool\n- Learning the use of NEAL interactive tool\n- Introduction to Audio annotation",
   "keywords": [
@@ -826,7 +826,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Oct 14, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 14, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 15, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -842,7 +842,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -911,9 +911,8 @@ In this tutorial, we will use the recording mentioned earlier, but feel free to 
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p>Import the example audio file from <a href="https://xeno-canto.org/1008421/download">xeno-canto</a></p>
-
-      <p>Audio file :</p>
+      <p>Import the example audio file from <a href="https://xeno-canto.org/1008421/download">xeno-canto</a>
+Audio file :</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://xeno-canto.org/1008421/download
 </code></pre></div>      </div>
@@ -936,7 +935,7 @@ In this tutorial, we will use the recording mentioned earlier, but feel free to 
   </ol>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-provide-a-dataset-name-during-import"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-provide-a-dataset-name-during-import" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: PRovide a dataset name during import</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-provide-a-dataset-name-during-import"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-provide-a-dataset-name-during-import" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Provide a dataset name during import</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Note that you also can provide the <strong>1008421.wav</strong> filename on the “Paste/Fetch data” upload module to avoid renaming after importing the file.</p>
 
@@ -1134,12 +1133,16 @@ You can pause, stop, or replay as needed. And, adjust playback speed if necessar
         <li>This will link the time–frequency selection to a label.</li>
         <li>You can now annotate the <em>Turdus merula</em> sound…</li>
       </ul>
+
+      <figure id="figure-11" style="max-width: 90%;"><img src="./images/merula_noise.png" alt="Merula noise. " width="1854" height="367" loading="lazy" /><a target="_blank" href="./images/merula_noise.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Merula Noise</figcaption></figure>
+
+      <ul>
+        <li>… and the insect noise we selected in the previous step.</li>
+      </ul>
+
+      <figure id="figure-12" style="max-width: 90%;"><img src="./images/insect_noise.png" alt="Insect noise. " width="1854" height="367" loading="lazy" /><a target="_blank" href="./images/insect_noise.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Insect Noise</figcaption></figure>
     </li>
   </ol>
-  <figure id="figure-11" style="max-width: 90%;"><img src="./images/merula_noise.png" alt="Merula noise. " width="1854" height="367" loading="lazy" /><a target="_blank" href="./images/merula_noise.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Merula Noise</figcaption></figure>
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  - ... and the insect noise we selected in the previous step. 
-</code></pre></div>  </div>
-  <figure id="figure-12" style="max-width: 90%;"><img src="./images/insect_noise.png" alt="Insect noise. " width="1854" height="367" loading="lazy" /><a target="_blank" href="./images/insect_noise.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Insect Noise</figcaption></figure>
 
 </blockquote>
 
@@ -1559,7 +1562,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/7a11bc50d59c8fe99a1d50718bfcfa0b049c26ad">7a11bc5</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/5ad8e1845c20eb92542f9177a24deca4c7587be4">5ad8e18</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
