@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@5ad8e1845c20eb92542f9177a24deca4c7587be4",
+		release: "galaxy-training-network@cbaf43e86170a4c558a2aa0884e935817c16f88e",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Pre-processing of 10X Single-Cell ATAC-seq Datasets">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-02-13 09:44:22 +0000">
+<meta name="DC.date" content="2025-10-16 09:35:04 +0000">
 <meta name="DC.creator" content="Pavankumar Videm"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Single Cell / Pre-processing of 10X Single-Cell ATAC-seq Datasets / Hands-on: Pre-processing of 10X Single-Cell ATAC-seq Datasets">
@@ -177,7 +177,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-02-13 09:44:22 +0000",
+  "dateModified": "2025-10-16 09:35:04 +0000",
   "datePublished": "2023-04-24 18:23:20 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -232,7 +232,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Pre-processing of 10X Single-Cell ATAC-seq Datasets",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html",
-  "version": 9,
+  "version": 10,
   "timeRequired": "PT1H",
   "teaches": "- Demultiplex single-cell FASTQ data from 10X Genomics\n- Learn about transparent matrix formats\n- Create a high-quality count matrix starting from scATAC-seq FASTQ files",
   "keywords": [
@@ -935,8 +935,23 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
+      "url": "https://bio.tools/tool/bwa",
+      "name": "BWA"
+    },
+    {
+      "@type": "Thing",
       "url": "https://bio.tools/tool/fastqc",
       "name": "FastQC"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/anndata",
+      "name": "anndata"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/bedtools",
+      "name": "BEDTools"
     },
     {
       "@type": "Thing",
@@ -952,6 +967,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "@type": "Thing",
       "url": "https://bio.tools/tool/episcanpy",
       "name": "epiScanpy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/falco",
+      "name": "Falco"
     },
     {
       "@type": "Thing",
@@ -1380,6 +1400,38 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
 
             
+                <li class="btn btn-default supporting_material">
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Answer Histories">
+        <i class="fas fa-sign-out-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-answer</span>&nbsp;Answer Histories
+    </a>
+    <ul class="dropdown-menu">
+      
+        <li>
+            <a class="dropdown-item" href="https://usegalaxy.eu/u/videmp/h/scatac-seq-fastq-to-count-matrix">
+              UseGalaxy.eu - scATAC-seq FASTQ to Count Matrix
+              
+              <br/><span class="text-muted">2025-10-15</span>
+              
+            </a>
+        </li>
+      
+        <li>
+            <a class="dropdown-item" href="https://usegalaxy.eu/u/videmp/h/scatac-seq-count-matrix-filtering">
+              UseGalaxy.eu - scATAC-seq Count Matrix Filtering
+              
+              <br/><span class="text-muted">2025-10-15</span>
+              
+            </a>
+        </li>
+      
+      <li class="dropdown-divider"></li>
+      <li>
+        <a class="dropdown-item" href="/training-material/faqs/gtn/gtn_example_histories.html"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> How to Use This</a>
+      </li>
+    </ul>
+
+</li>
+            
 
             
 
@@ -1462,7 +1514,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 24, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 13, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 16, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1480,7 +1532,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 9 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 10 </div>
 
     </blockquote>
     </section>
@@ -1773,6 +1825,7 @@ simply by the PCR itself. We will remove these duplicates later on.</p>
         <li><em>“Regular expression used to extract cell barcode from read name”</em>: <code class="language-plaintext highlighter-rouge">[^:]*</code> (matches all characters up to the first colon)</li>
         <li><em>“Number of bases to shift Tn5 insertion position by on the forward strand”</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
         <li><em>“Number of bases to shift Tn5 insertion position by on the reverse strand”</em>: <code class="language-plaintext highlighter-rouge">-5</code></li>
+        <li><em>“Take cell barcode into account when collapsing duplicate fragments”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.30.0+galaxy2" title="bedtools SortBED tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bedtools SortBED</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.30.0+galaxy2)</span> with the following parameters:
@@ -1884,7 +1937,7 @@ At this step, two approaches exist:</p>
       <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
-        <li>There were initially 1064 regions in the <code class="language-plaintext highlighter-rouge">narrow Peaks</code> file. Now there are 891 regions after deduplication. More than 15% (173) of regions have the same peak boundaries.</li>
+        <li>There were initially 1229 regions in the <code class="language-plaintext highlighter-rouge">narrow Peaks</code> file. Now there are 1046 regions after deduplication. Around 15% (184) of regions have the same peak boundaries.</li>
       </ol>
 
     </blockquote>
@@ -1947,7 +2000,7 @@ At this step, two approaches exist:</p>
       <blockquote class="question">
         <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AnnData object with n_obs × n_vars = 18426 × 891
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AnnData object with n_obs × n_vars = 27388 × 1046
 </code></pre></div>        </div>
 
         <ol>
@@ -1959,8 +2012,8 @@ At this step, two approaches exist:</p>
           <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
-            <li>There are 18,426 observations, representing the cells.</li>
-            <li>There are 891 variables, representing the peaks.</li>
+            <li>There are 27,388 observations, representing the cells.</li>
+            <li>There are 1046 variables, representing the peaks.</li>
           </ol>
 
         </blockquote>
@@ -1980,7 +2033,7 @@ At this step, two approaches exist:</p>
                 <p>e.g.</p>
 
                 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs x n_vars]
--    18426 x 891
+-    27388 x 1046
 </code></pre></div>                </div>
               </li>
             </ul>
@@ -2014,7 +2067,7 @@ AAAACCTCACCCAACA	0.0	0.0	0.0	0.0
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-          <p>The file is a table with 18,426 lines (observations or cells) and 891 columns (variables or peaks): the count matrix for each of the 891 peaks and 18,426 cells. The 1st row contains the peak location as an annotation of the columns and the 1st column the barcodes of the cells as an annotation of the rows.</p>
+          <p>The file is a table with 27,388 lines (observations or cells) and 1046 columns (variables or peaks): the count matrix for each of the 1046 peaks and 27,388 cells. The 1st row contains the peak location as an annotation of the columns and the 1st column the barcodes of the cells as an annotation of the rows.</p>
 
         </blockquote>
 
@@ -2783,10 +2836,20 @@ tools:
   revisions: e188dc7a68e6
   tool_panel_section_label: Mapping
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bwa
+  owner: devteam
+  revisions: 1dfc975b48d5
+  tool_panel_section_label: Mapping
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: fastqc
   owner: devteam
   revisions: 3d0c7bdf12f5
   tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: anndata_inspect
+  owner: iuc
+  revisions: afe044e6bc93
+  tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: anndata_inspect
   owner: iuc
@@ -2796,6 +2859,11 @@ tools:
 - name: bedtools
   owner: iuc
   revisions: a1a923cd89e8
+  tool_panel_section_label: BED
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bedtools
+  owner: iuc
+  revisions: 2892111d91f8
   tool_panel_section_label: BED
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: episcanpy_build_matrix
@@ -2808,6 +2876,11 @@ tools:
   revisions: 29f5f25b9935
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: falco
+  owner: iuc
+  revisions: 959a14c1f2dd
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: macs2
   owner: iuc
   revisions: 424aefbd7777
@@ -2815,22 +2888,32 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: macs2
   owner: iuc
-  revisions: 640d3af5d833
+  revisions: 86e2413cf3f8
   tool_panel_section_label: Peak Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: scanpy_plot
+  owner: iuc
+  revisions: 5a5468c0d26f
+  tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: scanpy_plot
   owner: iuc
   revisions: 6adf98e782f3
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: scanpy_plot
+- name: sinto_barcode
   owner: iuc
-  revisions: aa0c474463c2
+  revisions: fb61eb03e313
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: sinto_barcode
   owner: iuc
   revisions: d1b34ac42b8f
+  tool_panel_section_label: Single-cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: sinto_fragments
+  owner: iuc
+  revisions: 6f66f523a9b7
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: sinto_fragments
@@ -2941,7 +3024,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/5ad8e1845c20eb92542f9177a24deca4c7587be4">5ad8e18</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cbaf43e86170a4c558a2aa0884e935817c16f88e">cbaf43e</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

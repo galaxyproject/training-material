@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@5ad8e1845c20eb92542f9177a24deca4c7587be4",
+		release: "galaxy-training-network@cbaf43e86170a4c558a2aa0884e935817c16f88e",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -239,14 +239,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			1
+			2
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Apr 24, 2023
+			Oct 16, 2025
 
 			<br/>
 
@@ -265,6 +265,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
+			<div class="label label-default tutorial_tag" style="--color-primary: #00fd81; --color-darker: #00e171; --color-dimmed: #00ef79;">name:single-cell</div>
+			
 			</br>
 			
 
@@ -272,6 +274,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Features</b>
 			<ul>
 			
+			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
 			
 			
 			
@@ -330,13 +334,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-fastq-to-count-matrix">Galaxy France</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-fastq-to-count-matrix">Galaxy Australia</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-fastq-to-count-matrix">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-fastq-to-count-matrix">Galaxy Main</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-fastq-to-count-matrix">Galaxy Europe</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-fastq-to-count-matrix">Galaxy France</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-fastq-to-count-matrix">Import to another server (≥23.0+ only!)</a>
@@ -348,25 +352,31 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				Download
 			</a>
 			<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nForward reads FASTQ R1"];
+  0["ℹ️ Input Dataset\nBarcodes FASTQ R2"];
   style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nBarcodes FASTQ R2"];
+  1["ℹ️ Input Dataset\nForward reads FASTQ R1"];
   style 1 stroke:#2c3143,stroke-width:4px;
   2["ℹ️ Input Dataset\nReverse reads FASTQ R3"];
   style 2 stroke:#2c3143,stroke-width:4px;
   3["Sinto barcode"];
-  1 -->|output| 3;
   0 -->|output| 3;
+  1 -->|output| 3;
   2 -->|output| 3;
-  4["FastQC"];
+  4["Falco"];
   3 -->|read1_out| 4;
-  5["FastQC"];
+  ee430f86-5aa2-4fbf-a7bc-8deb4aeb8c0f["Output\nFalco on R1"];
+  4 --> ee430f86-5aa2-4fbf-a7bc-8deb4aeb8c0f;
+  style ee430f86-5aa2-4fbf-a7bc-8deb4aeb8c0f stroke:#2c3143,stroke-width:4px;
+  5["Map with BWA-MEM"];
+  3 -->|read1_out| 5;
   3 -->|read2_out| 5;
-  6["Map with BWA-MEM"];
-  3 -->|read1_out| 6;
+  6["Falco"];
   3 -->|read2_out| 6;
+  aa7c6e89-2fac-4b38-943a-4717bc678b19["Output\nFalco on R2"];
+  6 --> aa7c6e89-2fac-4b38-943a-4717bc678b19;
+  style aa7c6e89-2fac-4b38-943a-4717bc678b19 stroke:#2c3143,stroke-width:4px;
   7["Sinto fragments"];
-  6 -->|bam_output| 7;
+  5 -->|bam_output| 7;
   8["bedtools SortBED"];
   7 -->|fragments| 8;
   9["MACS2 callpeak"];
@@ -376,14 +386,18 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   11["Build count matrix"];
   8 -->|output| 11;
   10 -->|outfile| 11;
+  adcce063-b4d3-4d8e-9d1e-5bb15247ac11["Output\nAnndata object"];
+  11 --> adcce063-b4d3-4d8e-9d1e-5bb15247ac11;
+  style adcce063-b4d3-4d8e-9d1e-5bb15247ac11 stroke:#2c3143,stroke-width:4px;
   12["Inspect AnnData"];
   11 -->|anndata_out| 12;
   13["Inspect AnnData"];
   11 -->|anndata_out| 13;
   14["Inspect AnnData"];
   11 -->|anndata_out| 14;
-  15["Inspect AnnData"];
-  11 -->|anndata_out| 15;</pre>
+  420096ff-010d-46cd-abd8-5b34dd54c364["Output\nAnndata info"];
+  14 --> 420096ff-010d-46cd-abd8-5b34dd54c364;
+  style 420096ff-010d-46cd-abd8-5b34dd54c364 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -396,12 +410,12 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				
 				<tr>
 					<td>Input dataset</td>
-					<td>Forward reads FASTQ (R1)</td>
+					<td>Barcodes FASTQ (R2)</td>
 				</tr>
 				
 				<tr>
 					<td>Input dataset</td>
-					<td>Barcodes FASTQ (R2)</td>
+					<td>Forward reads FASTQ (R1)</td>
 				</tr>
 				
 				<tr>
@@ -423,6 +437,30 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				</thead>
 				<tbody>
 				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0</td>
+					<td>Falco</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0</td>
+					<td>Falco</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_build_matrix/episcanpy_build_matrix/0.3.2+galaxy1</td>
+					<td>Build count matrix</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1</td>
+					<td>Inspect AnnData</td>
+					<td></td>
+				</tr>
+				
 				</tbody>
 			</table>
 
@@ -438,11 +476,18 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/9.5+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/9.5+galaxy2</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.19">toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.19</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/d698c222f354">
+					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/bwa/1dfc975b48d5">
 						View in ToolShed
 					</a>
 					
@@ -450,11 +495,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2">toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/bwa/e188dc7a68e6">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/anndata_inspect/afe044e6bc93">
 						View in ToolShed
 					</a>
 					
@@ -462,35 +507,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0">toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.31.1+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.31.1+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/fastqc/3d0c7bdf12f5">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/anndata_inspect/ee98d611afc6">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.30.0+galaxy2">toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.30.0+galaxy2</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/bedtools/a1a923cd89e8">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/bedtools/2892111d91f8">
 						View in ToolShed
 					</a>
 					
@@ -510,11 +531,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/macs2/640d3af5d833">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/falco/959a14c1f2dd">
 						View in ToolShed
 					</a>
 					
@@ -522,11 +543,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/sinto_barcode/sinto_barcode/0.9.0+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/sinto_barcode/sinto_barcode/0.9.0+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.9.1+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/sinto_barcode/d1b34ac42b8f">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/macs2/86e2413cf3f8">
 						View in ToolShed
 					</a>
 					
@@ -534,11 +555,23 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/sinto_fragments/sinto_fragments/0.9.0+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/sinto_fragments/sinto_fragments/0.9.0+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/sinto_barcode/sinto_barcode/0.10.1+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/sinto_barcode/sinto_barcode/0.10.1+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/sinto_fragments/29e6bfb2cf49">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/sinto_barcode/fb61eb03e313">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/sinto_fragments/sinto_fragments/0.10.1+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/sinto_fragments/sinto_fragments/0.10.1+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/sinto_fragments/6f66f523a9b7">
 						View in ToolShed
 					</a>
 					
@@ -568,6 +601,20 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>3</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/4811c9bc7b4b9e697c08de257cc24abeae24cd25">4811c9bc7</a></td>
+						<td>2025-10-15 13:42:54</td>
+						<td>add tests for the 1st workflow</td>
+					</tr>
+					
+					<tr>
+						<td>2</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/e2833c26501966517b7428349e805f3c2ce98507">e2833c265</a></td>
+						<td>2025-10-15 07:44:34</td>
+						<td>Fix a param in scATAC-seq preprocessing tutorial and update the tools</td>
+					</tr>
 					
 					<tr>
 						<td>1</td>
@@ -657,7 +704,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/5ad8e1845c20eb92542f9177a24deca4c7587be4">5ad8e18</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cbaf43e86170a4c558a2aa0884e935817c16f88e">cbaf43e</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

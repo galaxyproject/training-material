@@ -8,7 +8,7 @@ digraph main {
   1 -> 2 [label="anndata_out"]
   3[label="scATAC-seq Preprocessing"]
   2 -> 3 [label="anndata_out"]
-  4[label="Plot"]
+  4[label="Scanpy plot"]
   3 -> 4 [label="anndata_out"]
   5[label="scATAC-seq Preprocessing"]
   3 -> 5 [label="anndata_out"]
@@ -24,6 +24,14 @@ digraph main {
   9 -> 10 [label="anndata_out"]
   11[label="scATAC-seq Preprocessing"]
   10 -> 11 [label="anndata_out"]
-  12[label="Plot"]
+  k019f2426d1444143a7f260e51385623e[color=lightseagreen,label="Output\nFiltered Anndata"]
+  11 -> k019f2426d1444143a7f260e51385623e
+  12[label="Inspect AnnData"]
   11 -> 12 [label="anndata_out"]
+  kc16d5f08eb754332bfbe701af27395b4[color=lightseagreen,label="Output\nAnndata info"]
+  12 -> kc16d5f08eb754332bfbe701af27395b4
+  13[label="Scanpy plot"]
+  11 -> 13 [label="anndata_out"]
+  kfc369121d4a34309bf6a7780767f52f6[color=lightseagreen,label="Output\nout_png"]
+  13 -> kfc369121d4a34309bf6a7780767f52f6
 }

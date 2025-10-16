@@ -1,22 +1,26 @@
 digraph main {
   node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
   edge [fontname="Atkinson Hyperlegible"];
-  0[color=lightblue,label="ℹ️ Input Dataset\nForward reads FASTQ R1"]
-  1[color=lightblue,label="ℹ️ Input Dataset\nBarcodes FASTQ R2"]
+  0[color=lightblue,label="ℹ️ Input Dataset\nBarcodes FASTQ R2"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nForward reads FASTQ R1"]
   2[color=lightblue,label="ℹ️ Input Dataset\nReverse reads FASTQ R3"]
   3[label="Sinto barcode"]
-  1 -> 3 [label="output"]
   0 -> 3 [label="output"]
+  1 -> 3 [label="output"]
   2 -> 3 [label="output"]
-  4[label="FastQC"]
+  4[label="Falco"]
   3 -> 4 [label="read1_out"]
-  5[label="FastQC"]
+  kee430f865aa24fbfa7bc8deb4aeb8c0f[color=lightseagreen,label="Output\nFalco on R1"]
+  4 -> kee430f865aa24fbfa7bc8deb4aeb8c0f
+  5[label="Map with BWA-MEM"]
+  3 -> 5 [label="read1_out"]
   3 -> 5 [label="read2_out"]
-  6[label="Map with BWA-MEM"]
-  3 -> 6 [label="read1_out"]
+  6[label="Falco"]
   3 -> 6 [label="read2_out"]
+  kaa7c6e892fac4b38943a4717bc678b19[color=lightseagreen,label="Output\nFalco on R2"]
+  6 -> kaa7c6e892fac4b38943a4717bc678b19
   7[label="Sinto fragments"]
-  6 -> 7 [label="bam_output"]
+  5 -> 7 [label="bam_output"]
   8[label="bedtools SortBED"]
   7 -> 8 [label="fragments"]
   9[label="MACS2 callpeak"]
@@ -26,12 +30,14 @@ digraph main {
   11[label="Build count matrix"]
   8 -> 11 [label="output"]
   10 -> 11 [label="outfile"]
+  kadcce063b4d34d8e9d1e5bb15247ac11[color=lightseagreen,label="Output\nAnndata object"]
+  11 -> kadcce063b4d34d8e9d1e5bb15247ac11
   12[label="Inspect AnnData"]
   11 -> 12 [label="anndata_out"]
   13[label="Inspect AnnData"]
   11 -> 13 [label="anndata_out"]
   14[label="Inspect AnnData"]
   11 -> 14 [label="anndata_out"]
-  15[label="Inspect AnnData"]
-  11 -> 15 [label="anndata_out"]
+  k420096ff010d46cdabd85b34dd54c364[color=lightseagreen,label="Output\nAnndata info"]
+  14 -> k420096ff010d46cdabd85b34dd54c364
 }

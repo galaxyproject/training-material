@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@5ad8e1845c20eb92542f9177a24deca4c7587be4",
+		release: "galaxy-training-network@cbaf43e86170a4c558a2aa0884e935817c16f88e",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -239,14 +239,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			1
+			2
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Apr 24, 2023
+			Oct 16, 2025
 
 			<br/>
 
@@ -265,6 +265,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
+			<div class="label label-default tutorial_tag" style="--color-primary: #00fd81; --color-darker: #00e171; --color-dimmed: #00ef79;">name:single-cell</div>
+			
 			</br>
 			
 
@@ -272,6 +274,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Features</b>
 			<ul>
 			
+			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
 			
 			
 			
@@ -330,11 +334,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-count-matrix-filtering">Galaxy Europe</a></li>
+					
 					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-count-matrix-filtering">Galaxy Main</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-count-matrix-filtering">Galaxy Australia</a></li>
-					
-					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-count-matrix-filtering">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scatac-preprocessing-tenx/versions/scatac-seq-count-matrix-filtering">Galaxy France</a></li>
 					
@@ -356,7 +360,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   1 -->|anndata_out| 2;
   3["scATAC-seq Preprocessing"];
   2 -->|anndata_out| 3;
-  4["Plot"];
+  4["Scanpy plot"];
   3 -->|anndata_out| 4;
   5["scATAC-seq Preprocessing"];
   3 -->|anndata_out| 5;
@@ -372,8 +376,19 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   9 -->|anndata_out| 10;
   11["scATAC-seq Preprocessing"];
   10 -->|anndata_out| 11;
-  12["Plot"];
-  11 -->|anndata_out| 12;</pre>
+  019f2426-d144-4143-a7f2-60e51385623e["Output\nFiltered Anndata"];
+  11 --> 019f2426-d144-4143-a7f2-60e51385623e;
+  style 019f2426-d144-4143-a7f2-60e51385623e stroke:#2c3143,stroke-width:4px;
+  12["Inspect AnnData"];
+  11 -->|anndata_out| 12;
+  c16d5f08-eb75-4332-bfbe-701af27395b4["Output\nAnndata info"];
+  12 --> c16d5f08-eb75-4332-bfbe-701af27395b4;
+  style c16d5f08-eb75-4332-bfbe-701af27395b4 stroke:#2c3143,stroke-width:4px;
+  13["Scanpy plot"];
+  11 -->|anndata_out| 13;
+  fc369121-d4a3-4309-bf6a-7780767f52f6["Output\nout_png"];
+  13 --> fc369121-d4a3-4309-bf6a-7780767f52f6;
+  style fc369121-d4a3-4309-bf6a-7780767f52f6 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -403,6 +418,24 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				</thead>
 				<tbody>
 				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1</td>
+					<td>scATAC-seq Preprocessing</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1</td>
+					<td>Inspect AnnData</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.10.2+galaxy2</td>
+					<td>Scanpy plot</td>
+					<td></td>
+				</tr>
+				
 				</tbody>
 			</table>
 
@@ -418,6 +451,18 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 			
 			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/anndata_inspect/afe044e6bc93">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
 				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1</a></td>
 				<td>
 					
@@ -430,11 +475,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.10.2+galaxy2">toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.10.2+galaxy2</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/scanpy_plot/aa0c474463c2">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/scanpy_plot/5a5468c0d26f">
 						View in ToolShed
 					</a>
 					
@@ -464,6 +509,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>2</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/cdc14914d74de2c5d40fb1f503f3652ec8bf6fa2">cdc14914d</a></td>
+						<td>2025-10-15 13:47:18</td>
+						<td>update the second workflow of filtering</td>
+					</tr>
 					
 					<tr>
 						<td>1</td>
@@ -553,7 +605,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/5ad8e1845c20eb92542f9177a24deca4c7587be4">5ad8e18</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cbaf43e86170a4c558a2aa0884e935817c16f88e">cbaf43e</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
