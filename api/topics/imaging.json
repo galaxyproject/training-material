@@ -221,7 +221,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-10-22 00:08:01 +0000",
+          "modified": "2025-10-27 14:12:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nBioImage.IO Model\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nImage for Prediction\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Process image with BioImage.IO model\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  3[\"Split image along axes\"];\n  2 -->|output_predicted_image| 3;\n  4[\"Extract dataset\"];\n  3 -->|output| 4;\n  5[\"Extract dataset\"];\n  3 -->|output| 5;\n  6[\"Process images using arithmetic expressions\"];\n  4 -->|output| 6;\n  5 -->|output| 6;\n  7[\"Threshold image\"];\n  6 -->|result| 7;\n  8[\"Convert binary image to label map\"];\n  7 -->|output| 8;\n  9[\"Overlay images\"];\n  1 -->|output| 9;\n  8 -->|output| 9;\n  beb76f8f-00d4-41dc-9409-8241dbdb1f01[\"Output\\nout_png\"];\n  9 --> beb76f8f-00d4-41dc-9409-8241dbdb1f01;\n  style beb76f8f-00d4-41dc-9409-8241dbdb1f01 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nBioImage.IO Model\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nImage for Prediction\"]\n  2[label=\"Process image with BioImage.IO model\"]\n  1 -> 2 [label=\"output\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Split image along axes\"]\n  2 -> 3 [label=\"output_predicted_image\"]\n  4[label=\"Extract dataset\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Extract dataset\"]\n  3 -> 5 [label=\"output\"]\n  6[label=\"Process images using arithmetic expressions\"]\n  4 -> 6 [label=\"output\"]\n  5 -> 6 [label=\"output\"]\n  7[label=\"Threshold image\"]\n  6 -> 7 [label=\"result\"]\n  8[label=\"Convert binary image to label map\"]\n  7 -> 8 [label=\"output\"]\n  9[label=\"Overlay images\"]\n  1 -> 9 [label=\"output\"]\n  8 -> 9 [label=\"output\"]\n  kbeb76f8f00d441dc94098241dbdb1f01[color=lightseagreen,label=\"Output\\nout_png\"]\n  9 -> kbeb76f8f00d441dc94098241dbdb1f01\n}",
           "workflow_tools": [
@@ -3250,7 +3250,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-10-22 00:08:01 +0000",
+          "modified": "2025-10-27 14:12:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nImage to segment\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSigma Values\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nGround Truth Image\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Split by group\"];\n  1 -->|output| 3;\n  4[\"Parse parameter value\"];\n  3 -->|split_output| 4;\n  5[\"Filter 2-D image\"];\n  4 -->|float_param| 5;\n  0 -->|output| 5;\n  6[\"Perform histogram equalization\"];\n  5 -->|output| 6;\n  7[\"Threshold image\"];\n  6 -->|output| 7;\n  8[\"Compute image segmentation and object detection performance measures\"];\n  2 -->|output| 8;\n  7 -->|output| 8;\n  9[\"Collapse Collection\"];\n  8 -->|results| 9;\n  54631b7f-9caa-476a-a194-1b8a862e12b6[\"Output\\noutput\"];\n  9 --> 54631b7f-9caa-476a-a194-1b8a862e12b6;\n  style 54631b7f-9caa-476a-a194-1b8a862e12b6 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nImage to segment\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nSigma Values\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nGround Truth Image\"]\n  3[label=\"Split by group\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"Parse parameter value\"]\n  3 -> 4 [label=\"split_output\"]\n  5[label=\"Filter 2-D image\"]\n  4 -> 5 [label=\"float_param\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"Perform histogram equalization\"]\n  5 -> 6 [label=\"output\"]\n  7[label=\"Threshold image\"]\n  6 -> 7 [label=\"output\"]\n  8[label=\"Compute image segmentation and object detection performance measures\"]\n  2 -> 8 [label=\"output\"]\n  7 -> 8 [label=\"output\"]\n  9[label=\"Collapse Collection\"]\n  8 -> 9 [label=\"results\"]\n  k54631b7f9caa476aa1941b8a862e12b6[color=lightseagreen,label=\"Output\\noutput\"]\n  9 -> k54631b7f9caa476aa1941b8a862e12b6\n}",
           "workflow_tools": [
@@ -4549,11 +4549,8 @@
                 "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
-                "state": "inexact",
-                "versions": [
-                  "4.2",
-                  "4.0"
-                ],
+                "state": "exact",
+                "version": "5.1.0",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -4876,7 +4873,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-10-22 00:08:01 +0000",
+          "modified": "2025-10-27 14:12:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Parameter\\nIDR IDs\"];\n  style 0 fill:#ded,stroke:#393,stroke-width:4px;\n  1[\"ℹ️ Input Parameter\\nChannel to analyze\"];\n  style 1 fill:#ded,stroke:#393,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nz-stack\"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"Download IDR/OMERO\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  2 -->|output| 3;\n  4[\"Unzip\"];\n  3 -->|output_tar| 4;\n  5[\"IDR Image IDs\"];\n  4 -->|unzipped| 5;\n  6[\"Perform 2-D spot detection\"];\n  5 -->|output| 6;\n  7[\"Convert point coordinates to label map\"];\n  6 -->|fn_out| 7;\n  8[\"Overlay images\"];\n  5 -->|output| 8;\n  7 -->|output| 8;\n  f3538bf0-0dc6-4237-a2ad-bdf539b01c70[\"Output\\nout_png\"];\n  8 --> f3538bf0-0dc6-4237-a2ad-bdf539b01c70;\n  style f3538bf0-0dc6-4237-a2ad-bdf539b01c70 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightgreen,label=\"ℹ️ Input Parameter\\nIDR IDs\"]\n  1[color=lightgreen,label=\"ℹ️ Input Parameter\\nChannel to analyze\"]\n  2[color=lightgreen,label=\"ℹ️ Input Parameter\\nz-stack\"]\n  3[label=\"Download IDR/OMERO\"]\n  0 -> 3 [label=\"output\"]\n  1 -> 3 [label=\"output\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"Unzip\"]\n  3 -> 4 [label=\"output_tar\"]\n  5[label=\"IDR Image IDs\"]\n  4 -> 5 [label=\"unzipped\"]\n  6[label=\"Perform 2-D spot detection\"]\n  5 -> 6 [label=\"output\"]\n  7[label=\"Convert point coordinates to label map\"]\n  6 -> 7 [label=\"fn_out\"]\n  8[label=\"Overlay images\"]\n  5 -> 8 [label=\"output\"]\n  7 -> 8 [label=\"output\"]\n  kf3538bf00dc64237a2adbdf539b01c70[color=lightseagreen,label=\"Output\\nout_png\"]\n  8 -> kf3538bf00dc64237a2adbdf539b01c70\n}",
           "workflow_tools": [
@@ -6505,7 +6502,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-10-22 00:08:01 +0000",
+          "modified": "2025-10-27 14:12:36 +0000",
           "mermaid": "flowchart TD\n  0[\"Starting Modules\"];\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ColorToGray\"];\n  0 -->|output_pipeline| 2;\n  3[\"Unzip\"];\n  1 -->|output| 3;\n  4[\"IdentifyPrimaryObjects\"];\n  2 -->|output_pipeline| 4;\n  5[\"MeasureObjectSizeShape\"];\n  4 -->|output_pipeline| 5;\n  6[\"MeasureObjectIntensity\"];\n  5 -->|output_pipeline| 6;\n  7[\"TrackObjects\"];\n  6 -->|output_pipeline| 7;\n  8[\"OverlayOutlines\"];\n  7 -->|output_pipeline| 8;\n  9[\"Tile\"];\n  8 -->|output_pipeline| 9;\n  10[\"SaveImages\"];\n  9 -->|output_pipeline| 10;\n  11[\"ExportToSpreadsheet\"];\n  10 -->|output_pipeline| 11;\n  12[\"CellProfiler\"];\n  3 -->|unzipped| 12;\n  11 -->|output_pipeline| 12;\n  dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e[\"Output\\nCellProfiler pipeline output files\"];\n  12 --> dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e;\n  style dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Starting Modules\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[label=\"ColorToGray\"]\n  0 -> 2 [label=\"output_pipeline\"]\n  3[label=\"Unzip\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"IdentifyPrimaryObjects\"]\n  2 -> 4 [label=\"output_pipeline\"]\n  5[label=\"MeasureObjectSizeShape\"]\n  4 -> 5 [label=\"output_pipeline\"]\n  6[label=\"MeasureObjectIntensity\"]\n  5 -> 6 [label=\"output_pipeline\"]\n  7[label=\"TrackObjects\"]\n  6 -> 7 [label=\"output_pipeline\"]\n  8[label=\"OverlayOutlines\"]\n  7 -> 8 [label=\"output_pipeline\"]\n  9[label=\"Tile\"]\n  8 -> 9 [label=\"output_pipeline\"]\n  10[label=\"SaveImages\"]\n  9 -> 10 [label=\"output_pipeline\"]\n  11[label=\"ExportToSpreadsheet\"]\n  10 -> 11 [label=\"output_pipeline\"]\n  12[label=\"CellProfiler\"]\n  3 -> 12 [label=\"unzipped\"]\n  11 -> 12 [label=\"output_pipeline\"]\n  kdab4a9eefb534c7493f58a0c7f7eb13e[color=lightseagreen,label=\"Output\\nCellProfiler pipeline output files\"]\n  12 -> kdab4a9eefb534c7493f58a0c7f7eb13e\n}",
           "workflow_tools": [
@@ -9465,7 +9462,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-10-22 00:08:01 +0000",
+          "modified": "2025-10-27 14:12:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nElectropheresis-Gel.jpg\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Convert coordinates to label map\"];\n  2[\"Convert image format\"];\n  0 -->|output| 2;\n  3[\"Extract image features\"];\n  1 -->|output| 3;\n  4[\"Show image info\"];\n  2 -->|output| 4;\n  5[\"Split image along axes\"];\n  2 -->|output| 5;\n  6[\"QuPath\"];\n  2 -->|output| 6;\n  ecf5b534-95d3-40d0-af1d-28480b447188[\"Output\\noutputs\"];\n  6 --> ecf5b534-95d3-40d0-af1d-28480b447188;\n  style ecf5b534-95d3-40d0-af1d-28480b447188 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nElectropheresis-Gel.jpg\"]\n  1[label=\"Convert coordinates to label map\"]\n  2[label=\"Convert image format\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Extract image features\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"Show image info\"]\n  2 -> 4 [label=\"output\"]\n  5[label=\"Split image along axes\"]\n  2 -> 5 [label=\"output\"]\n  6[label=\"QuPath\"]\n  2 -> 6 [label=\"output\"]\n  kecf5b53495d340d0af1d28480b447188[color=lightseagreen,label=\"Output\\noutputs\"]\n  6 -> kecf5b53495d340d0af1d28480b447188\n}",
           "workflow_tools": [
@@ -10106,8 +10103,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.3.45+galaxy1",
-                  "1.3.31"
+                  "1.3.31",
+                  "1.3.45+galaxy1"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -11003,7 +11000,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-10-22 00:08:01 +0000",
+          "modified": "2025-10-27 14:12:36 +0000",
           "mermaid": "flowchart TD\n  0[\"Starting modules\"];\n  1[\"Download images\"];\n  2[\"Segment complete nuclei\"];\n  0 -->|output_pipeline| 2;\n  3[\"Segmentation mask complete nuclei\"];\n  2 -->|output_pipeline| 3;\n  4[\"Label nuclei\"];\n  3 -->|output_pipeline| 4;\n  5[\"Save labelled nuclei\"];\n  4 -->|output_pipeline| 5;\n  6[\"Detect dark holes in nuclei\"];\n  5 -->|output_pipeline| 6;\n  7[\"Segment nucleoli that fall inside nuclei\"];\n  6 -->|output_pipeline| 7;\n  8[\"Segment nucleoli\"];\n  7 -->|output_pipeline| 8;\n  9[\"Convert the segmented nucleoli into an image\"];\n  8 -->|output_pipeline| 9;\n  10[\"Combine masks nuclei + nucleoli\"];\n  9 -->|output_pipeline| 10;\n  11[\"Save combined segmentation masks\"];\n  10 -->|output_pipeline| 11;\n  12[\"Segment all nuclei\"];\n  11 -->|output_pipeline| 12;\n  13[\"Segmentation mask nucleoli including cells touching borders\"];\n  12 -->|output_pipeline| 13;\n  14[\"Extract background\"];\n  13 -->|output_pipeline| 14;\n  15[\"Measure the image granularity\"];\n  14 -->|output_pipeline| 15;\n  16[\"Measure the nuclei texture\"];\n  15 -->|output_pipeline| 16;\n  17[\"Measure the nuclei intensity\"];\n  16 -->|output_pipeline| 17;\n  18[\"Measure size and shape of nuclei and nucleoli\"];\n  17 -->|output_pipeline| 18;\n  19[\"Relate nucleoli with their parent nuclei\"];\n  18 -->|output_pipeline| 19;\n  20[\"Measure the image quality\"];\n  19 -->|output_pipeline| 20;\n  21[\"Measure the area occupied by nuclei and nucleoli\"];\n  20 -->|output_pipeline| 21;\n  22[\"Measure the image intensity\"];\n  21 -->|output_pipeline| 22;\n  23[\"Export measurements\"];\n  22 -->|output_pipeline| 23;\n  24[\"Run CellProfiler\"];\n  1 -->|output_tar| 24;\n  23 -->|output_pipeline| 24;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Starting modules\"]\n  1[label=\"Download images\"]\n  2[label=\"Segment complete nuclei\"]\n  0 -> 2 [label=\"output_pipeline\"]\n  3[label=\"Segmentation mask complete nuclei\"]\n  2 -> 3 [label=\"output_pipeline\"]\n  4[label=\"Label nuclei\"]\n  3 -> 4 [label=\"output_pipeline\"]\n  5[label=\"Save labelled nuclei\"]\n  4 -> 5 [label=\"output_pipeline\"]\n  6[label=\"Detect dark holes in nuclei\"]\n  5 -> 6 [label=\"output_pipeline\"]\n  7[label=\"Segment nucleoli that fall inside nuclei\"]\n  6 -> 7 [label=\"output_pipeline\"]\n  8[label=\"Segment nucleoli\"]\n  7 -> 8 [label=\"output_pipeline\"]\n  9[label=\"Convert the segmented nucleoli into an image\"]\n  8 -> 9 [label=\"output_pipeline\"]\n  10[label=\"Combine masks nuclei + nucleoli\"]\n  9 -> 10 [label=\"output_pipeline\"]\n  11[label=\"Save combined segmentation masks\"]\n  10 -> 11 [label=\"output_pipeline\"]\n  12[label=\"Segment all nuclei\"]\n  11 -> 12 [label=\"output_pipeline\"]\n  13[label=\"Segmentation mask nucleoli including cells touching borders\"]\n  12 -> 13 [label=\"output_pipeline\"]\n  14[label=\"Extract background\"]\n  13 -> 14 [label=\"output_pipeline\"]\n  15[label=\"Measure the image granularity\"]\n  14 -> 15 [label=\"output_pipeline\"]\n  16[label=\"Measure the nuclei texture\"]\n  15 -> 16 [label=\"output_pipeline\"]\n  17[label=\"Measure the nuclei intensity\"]\n  16 -> 17 [label=\"output_pipeline\"]\n  18[label=\"Measure size and shape of nuclei and nucleoli\"]\n  17 -> 18 [label=\"output_pipeline\"]\n  19[label=\"Relate nucleoli with their parent nuclei\"]\n  18 -> 19 [label=\"output_pipeline\"]\n  20[label=\"Measure the image quality\"]\n  19 -> 20 [label=\"output_pipeline\"]\n  21[label=\"Measure the area occupied by nuclei and nucleoli\"]\n  20 -> 21 [label=\"output_pipeline\"]\n  22[label=\"Measure the image intensity\"]\n  21 -> 22 [label=\"output_pipeline\"]\n  23[label=\"Export measurements\"]\n  22 -> 23 [label=\"output_pipeline\"]\n  24[label=\"Run CellProfiler\"]\n  1 -> 24 [label=\"output_tar\"]\n  23 -> 24 [label=\"output_pipeline\"]\n}",
           "workflow_tools": [
@@ -12427,8 +12424,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -12496,8 +12493,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -12576,8 +12573,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy2",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy2"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -12645,8 +12642,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy2",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy2"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -13023,8 +13020,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -13092,8 +13089,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -13321,8 +13318,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -13390,8 +13387,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -13470,8 +13467,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy2"
+                  "3.1.9+galaxy2",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -13539,8 +13536,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy2"
+                  "3.1.9+galaxy2",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -13619,8 +13616,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -13688,8 +13685,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -14215,8 +14212,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -14284,8 +14281,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -14364,8 +14361,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -14433,8 +14430,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -14662,8 +14659,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -14731,8 +14728,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -14811,8 +14808,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -14880,8 +14877,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy0",
-                  "3.1.9+galaxy1"
+                  "3.1.9+galaxy1",
+                  "3.1.9+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -14960,8 +14957,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -15029,8 +15026,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy0"
+                  "3.1.9+galaxy0",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -15109,8 +15106,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy2"
+                  "3.1.9+galaxy2",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -15178,8 +15175,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.9+galaxy1",
-                  "3.1.9+galaxy2"
+                  "3.1.9+galaxy2",
+                  "3.1.9+galaxy1"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -15258,8 +15255,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.45",
-                  "0.43"
+                  "0.43",
+                  "0.45"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -15800,7 +15797,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-10-22 00:08:01 +0000",
+          "modified": "2025-10-27 14:12:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nImage\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSeeds\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Convert image format\"];\n  0 -->|output| 2;\n  09e98f2a-17b3-429b-877d-93de63ca7e1a[\"Output\\nSingle channel image\"];\n  2 --> 09e98f2a-17b3-429b-877d-93de63ca7e1a;\n  style 09e98f2a-17b3-429b-877d-93de63ca7e1a stroke:#2c3143,stroke-width:4px;\n  3[\"Convert binary image to label map\"];\n  1 -->|output| 3;\n  4d2a861c-3746-4c24-9b81-96d8f7a710d4[\"Output\\nlabel map\"];\n  3 --> 4d2a861c-3746-4c24-9b81-96d8f7a710d4;\n  style 4d2a861c-3746-4c24-9b81-96d8f7a710d4 stroke:#2c3143,stroke-width:4px;\n  4[\"Convert single-channel to multi-channel image\"];\n  2 -->|output| 4;\n  66990d3d-7b19-43f6-ac5a-ecd5557bff35[\"Output\\nmulti-channel image\"];\n  4 --> 66990d3d-7b19-43f6-ac5a-ecd5557bff35;\n  style 66990d3d-7b19-43f6-ac5a-ecd5557bff35 stroke:#2c3143,stroke-width:4px;\n  5[\"Filter 2-D image\"];\n  2 -->|output| 5;\n  e030c644-5cb4-4c1e-8287-8fc6d2950490[\"Output\\nSmoothed image\"];\n  5 --> e030c644-5cb4-4c1e-8287-8fc6d2950490;\n  style e030c644-5cb4-4c1e-8287-8fc6d2950490 stroke:#2c3143,stroke-width:4px;\n  6[\"Compute Voronoi tessellation\"];\n  3 -->|output| 6;\n  af96320e-5fa7-49d2-831b-bb438f8b2d73[\"Output\\ntesselation\"];\n  6 --> af96320e-5fa7-49d2-831b-bb438f8b2d73;\n  style af96320e-5fa7-49d2-831b-bb438f8b2d73 stroke:#2c3143,stroke-width:4px;\n  7[\"Threshold image\"];\n  5 -->|output| 7;\n  633e495b-ca86-451b-836c-bfceeb8d25ee[\"Output\\nmask\"];\n  7 --> 633e495b-ca86-451b-836c-bfceeb8d25ee;\n  style 633e495b-ca86-451b-836c-bfceeb8d25ee stroke:#2c3143,stroke-width:4px;\n  8[\"Count objects in label map\"];\n  6 -->|result| 8;\n  b977eb0c-e874-439f-b42b-756d6a864112[\"Output\\nobject count\"];\n  8 --> b977eb0c-e874-439f-b42b-756d6a864112;\n  style b977eb0c-e874-439f-b42b-756d6a864112 stroke:#2c3143,stroke-width:4px;\n  9[\"Extract image features\"];\n  6 -->|result| 9;\n  2 -->|output| 9;\n  5a94a425-9000-4083-aae7-232ea01ae215[\"Output\\nimage features\"];\n  9 --> 5a94a425-9000-4083-aae7-232ea01ae215;\n  style 5a94a425-9000-4083-aae7-232ea01ae215 stroke:#2c3143,stroke-width:4px;\n  10[\"Process images using arithmetic expressions\"];\n  6 -->|result| 10;\n  1 -->|output| 10;\n  7 -->|output| 10;\n  45f919dd-298f-4e94-a390-e73537b5fedb[\"Output\\nsegmentation\"];\n  10 --> 45f919dd-298f-4e94-a390-e73537b5fedb;\n  style 45f919dd-298f-4e94-a390-e73537b5fedb stroke:#2c3143,stroke-width:4px;\n  11[\"Colorize label map\"];\n  10 -->|result| 11;\n  6903fd1b-304a-4e4a-a529-8f3643bcd445[\"Output\\ncolorized label map\"];\n  11 --> 6903fd1b-304a-4e4a-a529-8f3643bcd445;\n  style 6903fd1b-304a-4e4a-a529-8f3643bcd445 stroke:#2c3143,stroke-width:4px;\n  12[\"Overlay images\"];\n  4 -->|output| 12;\n  11 -->|output| 12;\n  2adb0afd-923f-4641-bafb-10eaca09a4e0[\"Output\\nsegmented image\"];\n  12 --> 2adb0afd-923f-4641-bafb-10eaca09a4e0;\n  style 2adb0afd-923f-4641-bafb-10eaca09a4e0 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nImage\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nSeeds\"]\n  2[label=\"Convert image format\"]\n  0 -> 2 [label=\"output\"]\n  k09e98f2a17b3429b877d93de63ca7e1a[color=lightseagreen,label=\"Output\\nSingle channel image\"]\n  2 -> k09e98f2a17b3429b877d93de63ca7e1a\n  3[label=\"Convert binary image to label map\"]\n  1 -> 3 [label=\"output\"]\n  k4d2a861c37464c249b8196d8f7a710d4[color=lightseagreen,label=\"Output\\nlabel map\"]\n  3 -> k4d2a861c37464c249b8196d8f7a710d4\n  4[label=\"Convert single-channel to multi-channel image\"]\n  2 -> 4 [label=\"output\"]\n  k66990d3d7b1943f6ac5aecd5557bff35[color=lightseagreen,label=\"Output\\nmulti-channel image\"]\n  4 -> k66990d3d7b1943f6ac5aecd5557bff35\n  5[label=\"Filter 2-D image\"]\n  2 -> 5 [label=\"output\"]\n  ke030c6445cb44c1e82878fc6d2950490[color=lightseagreen,label=\"Output\\nSmoothed image\"]\n  5 -> ke030c6445cb44c1e82878fc6d2950490\n  6[label=\"Compute Voronoi tessellation\"]\n  3 -> 6 [label=\"output\"]\n  kaf96320e5fa749d2831bbb438f8b2d73[color=lightseagreen,label=\"Output\\ntesselation\"]\n  6 -> kaf96320e5fa749d2831bbb438f8b2d73\n  7[label=\"Threshold image\"]\n  5 -> 7 [label=\"output\"]\n  k633e495bca86451b836cbfceeb8d25ee[color=lightseagreen,label=\"Output\\nmask\"]\n  7 -> k633e495bca86451b836cbfceeb8d25ee\n  8[label=\"Count objects in label map\"]\n  6 -> 8 [label=\"result\"]\n  kb977eb0ce874439fb42b756d6a864112[color=lightseagreen,label=\"Output\\nobject count\"]\n  8 -> kb977eb0ce874439fb42b756d6a864112\n  9[label=\"Extract image features\"]\n  6 -> 9 [label=\"result\"]\n  2 -> 9 [label=\"output\"]\n  k5a94a42590004083aae7232ea01ae215[color=lightseagreen,label=\"Output\\nimage features\"]\n  9 -> k5a94a42590004083aae7232ea01ae215\n  10[label=\"Process images using arithmetic expressions\"]\n  6 -> 10 [label=\"result\"]\n  1 -> 10 [label=\"output\"]\n  7 -> 10 [label=\"output\"]\n  k45f919dd298f4e94a390e73537b5fedb[color=lightseagreen,label=\"Output\\nsegmentation\"]\n  10 -> k45f919dd298f4e94a390e73537b5fedb\n  11[label=\"Colorize label map\"]\n  10 -> 11 [label=\"result\"]\n  k6903fd1b304a4e4aa5298f3643bcd445[color=lightseagreen,label=\"Output\\ncolorized label map\"]\n  11 -> k6903fd1b304a4e4aa5298f3643bcd445\n  12[label=\"Overlay images\"]\n  4 -> 12 [label=\"output\"]\n  11 -> 12 [label=\"output\"]\n  k2adb0afd923f4641bafb10eaca09a4e0[color=lightseagreen,label=\"Output\\nsegmented image\"]\n  12 -> k2adb0afd923f4641bafb10eaca09a4e0\n}",
           "workflow_tools": [
@@ -18825,7 +18822,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-10-22 00:08:01 +0000",
+          "modified": "2025-10-27 14:12:36 +0000",
           "mermaid": "flowchart TD\n  0[\"Mitochondrion detection\"];\n  b84bfb33-15eb-4984-b109-fab32f3813df[\"Output\\nSpot Detection of Mitoflashes\"];\n  0 --> b84bfb33-15eb-4984-b109-fab32f3813df;\n  style b84bfb33-15eb-4984-b109-fab32f3813df stroke:#2c3143,stroke-width:4px;\n  1[\"Mitochondrion tracking\"];\n  0 -->|fn_out| 1;\n  a25e8913-0019-4dd3-aed4-8138e7dd8da3[\"Output\\nSpot Detection Across Frames\"];\n  1 --> a25e8913-0019-4dd3-aed4-8138e7dd8da3;\n  style a25e8913-0019-4dd3-aed4-8138e7dd8da3 stroke:#2c3143,stroke-width:4px;\n  2[\"Curve fitting to measured intensities\"];\n  1 -->|fn_out| 2;\n  a978b043-f089-4d41-8f5d-0df99915dd45[\"Output\\nCurve Fitting for Mitoflash Detection\"];\n  2 --> a978b043-f089-4d41-8f5d-0df99915dd45;\n  style a978b043-f089-4d41-8f5d-0df99915dd45 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Mitochondrion detection\"]\n  kb84bfb3315eb4984b109fab32f3813df[color=lightseagreen,label=\"Output\\nSpot Detection of Mitoflashes\"]\n  0 -> kb84bfb3315eb4984b109fab32f3813df\n  1[label=\"Mitochondrion tracking\"]\n  0 -> 1 [label=\"fn_out\"]\n  ka25e891300194dd3aed48138e7dd8da3[color=lightseagreen,label=\"Output\\nSpot Detection Across Frames\"]\n  1 -> ka25e891300194dd3aed48138e7dd8da3\n  2[label=\"Curve fitting to measured intensities\"]\n  1 -> 2 [label=\"fn_out\"]\n  ka978b043f0894d418f5d0df99915dd45[color=lightseagreen,label=\"Output\\nCurve Fitting for Mitoflash Detection\"]\n  2 -> ka978b043f0894d418f5d0df99915dd45\n}",
           "workflow_tools": [
@@ -19930,7 +19927,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-10-22 00:08:01 +0000",
+          "modified": "2025-10-27 14:12:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput_image\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Show image info\"];\n  0 -->|output| 1;\n  2[\"Filter 2-D image\"];\n  0 -->|output| 2;\n  3[\"Perform histogram equalization\"];\n  2 -->|output| 3;\n  4[\"Threshold image\"];\n  2 -->|output| 4;\n  5[\"Convert binary image to label map\"];\n  4 -->|output| 5;\n  6[\"Overlay images\"];\n  3 -->|output| 6;\n  5 -->|output| 6;\n  d362c206-756d-4f04-82f0-bd6f24907e04[\"Output\\nout_png\"];\n  6 --> d362c206-756d-4f04-82f0-bd6f24907e04;\n  style d362c206-756d-4f04-82f0-bd6f24907e04 stroke:#2c3143,stroke-width:4px;\n  7[\"Count objects in label map\"];\n  5 -->|output| 7;\n  9c56017b-20c7-4ad3-8340-d36dd6b2e7b4[\"Output\\noutput\"];\n  7 --> 9c56017b-20c7-4ad3-8340-d36dd6b2e7b4;\n  style 9c56017b-20c7-4ad3-8340-d36dd6b2e7b4 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\ninput_image\"]\n  1[label=\"Show image info\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Filter 2-D image\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Perform histogram equalization\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"Threshold image\"]\n  2 -> 4 [label=\"output\"]\n  5[label=\"Convert binary image to label map\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"Overlay images\"]\n  3 -> 6 [label=\"output\"]\n  5 -> 6 [label=\"output\"]\n  kd362c206756d4f0482f0bd6f24907e04[color=lightseagreen,label=\"Output\\nout_png\"]\n  6 -> kd362c206756d4f0482f0bd6f24907e04\n  7[label=\"Count objects in label map\"]\n  5 -> 7 [label=\"output\"]\n  k9c56017b20c74ad38340d36dd6b2e7b4[color=lightseagreen,label=\"Output\\noutput\"]\n  7 -> k9c56017b20c74ad38340d36dd6b2e7b4\n}",
           "workflow_tools": [
@@ -21914,7 +21911,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-10-22 00:08:01 +0000",
+          "modified": "2025-10-27 14:12:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput Images\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nYOLO Class File\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Perform histogram equalization\"];\n  0 -->|output| 2;\n  3[\"Convert image format\"];\n  2 -->|output| 3;\n  4[\"AnyLabeling Interactive\"];\n  3 -->|output| 4;\n  5[\"Convert AnyLabeling JSON to YOLO text\"];\n  1 -->|output| 5;\n  4 -->|al_output| 5;\n  6[\"Perform YOLO training\"];\n  3 -->|output| 6;\n  5 -->|output_yolo| 6;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput Images\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nYOLO Class File\"]\n  2[label=\"Perform histogram equalization\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Convert image format\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"AnyLabeling Interactive\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Convert AnyLabeling JSON to YOLO text\"]\n  1 -> 5 [label=\"output\"]\n  4 -> 5 [label=\"al_output\"]\n  6[label=\"Perform YOLO training\"]\n  3 -> 6 [label=\"output\"]\n  5 -> 6 [label=\"output_yolo\"]\n}",
           "workflow_tools": [
@@ -22402,8 +22399,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.3.45+galaxy1",
-                  "1.3.31"
+                  "1.3.31",
+                  "1.3.45+galaxy1"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -23171,7 +23168,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-10-22 00:08:01 +0000",
+          "modified": "2025-10-27 14:12:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nmarkers.csv\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nPhenotypeWorkflow\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Collection\\nRaw cycle images\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Illumination correction with Basic\"];\n  2 -->|output| 3;\n  8a05fb69-9e2b-4fa4-ab8c-77d3241f7a86[\"Output\\nDFP images\"];\n  3 --> 8a05fb69-9e2b-4fa4-ab8c-77d3241f7a86;\n  style 8a05fb69-9e2b-4fa4-ab8c-77d3241f7a86 stroke:#2c3143,stroke-width:4px;\n  a5432ed5-980f-4f04-83a2-b5514019b11b[\"Output\\nFFP images\"];\n  3 --> a5432ed5-980f-4f04-83a2-b5514019b11b;\n  style a5432ed5-980f-4f04-83a2-b5514019b11b stroke:#2c3143,stroke-width:4px;\n  4[\"Stitching and registration with Ashlar\"];\n  3 -->|output_dfp| 4;\n  3 -->|output_ffp| 4;\n  2 -->|output| 4;\n  0 -->|output| 4;\n  81f2c552-cd84-4d48-af14-eb252550f35a[\"Output\\nRegistered image\"];\n  4 --> 81f2c552-cd84-4d48-af14-eb252550f35a;\n  style 81f2c552-cd84-4d48-af14-eb252550f35a stroke:#2c3143,stroke-width:4px;\n  5[\"TMA dearray with UNetCoreograph\"];\n  4 -->|output| 5;\n  d79b4449-f879-42a9-9c79-0e0a6df0fa79[\"Output\\nDearray images\"];\n  5 --> d79b4449-f879-42a9-9c79-0e0a6df0fa79;\n  style d79b4449-f879-42a9-9c79-0e0a6df0fa79 stroke:#2c3143,stroke-width:4px;\n  c3ae2005-725a-487c-a77a-437636f3a296[\"Output\\nTMA dearray map\"];\n  5 --> c3ae2005-725a-487c-a77a-437636f3a296;\n  style c3ae2005-725a-487c-a77a-437636f3a296 stroke:#2c3143,stroke-width:4px;\n  0ed3e920-42ce-457d-9ebe-f0cd0baa1dea[\"Output\\nDearray masks\"];\n  5 --> 0ed3e920-42ce-457d-9ebe-f0cd0baa1dea;\n  style 0ed3e920-42ce-457d-9ebe-f0cd0baa1dea stroke:#2c3143,stroke-width:4px;\n  6[\"Nuclear segmentation\"];\n  5 -->|tma_sections| 6;\n  65c32086-b193-440f-b1a1-e5731bda0820[\"Output\\nNuclear mask\"];\n  6 --> 65c32086-b193-440f-b1a1-e5731bda0820;\n  style 65c32086-b193-440f-b1a1-e5731bda0820 stroke:#2c3143,stroke-width:4px;\n  7[\"Convert dearray images to OME-TIFF\"];\n  5 -->|tma_sections| 7;\n  d1c85ec4-1aea-48ce-88c3-ede346d9b34f[\"Output\\nConverted image\"];\n  7 --> d1c85ec4-1aea-48ce-88c3-ede346d9b34f;\n  style d1c85ec4-1aea-48ce-88c3-ede346d9b34f stroke:#2c3143,stroke-width:4px;\n  8[\"Cell feature quantification with MC-Quant\"];\n  0 -->|output| 8;\n  5 -->|tma_sections| 8;\n  6 -->|mask| 8;\n  a277be13-b5af-4591-b86b-a8679f561677[\"Output\\nPrimary Mask Quantification\"];\n  8 --> a277be13-b5af-4591-b86b-a8679f561677;\n  style a277be13-b5af-4591-b86b-a8679f561677 stroke:#2c3143,stroke-width:4px;\n  9[\"Rename OME-TIFF channels\"];\n  0 -->|output| 9;\n  7 -->|output| 9;\n  0867cba2-0ac1-413d-b6d0-aba8b2dcbe0c[\"Output\\nRenamed image\"];\n  9 --> 0867cba2-0ac1-413d-b6d0-aba8b2dcbe0c;\n  style 0867cba2-0ac1-413d-b6d0-aba8b2dcbe0c stroke:#2c3143,stroke-width:4px;\n  10[\"Convert to Anndata\"];\n  8 -->|cellmask| 10;\n  a10efe57-5e36-4625-8ac8-a4bd27b3ce7e[\"Output\\nAnndata feature table\"];\n  10 --> a10efe57-5e36-4625-8ac8-a4bd27b3ce7e;\n  style a10efe57-5e36-4625-8ac8-a4bd27b3ce7e stroke:#2c3143,stroke-width:4px;\n  11[\"Scimap phenotyping\"];\n  10 -->|outfile| 11;\n  1 -->|output| 11;\n  1711b39d-79db-4012-80b6-abfae28439ae[\"Output\\nPhenotyped feature table\"];\n  11 --> 1711b39d-79db-4012-80b6-abfae28439ae;\n  style 1711b39d-79db-4012-80b6-abfae28439ae stroke:#2c3143,stroke-width:4px;\n  12[\"Create a Vitessce dashboard\"];\n  11 -->|output| 12;\n  9 -->|renamed_image| 12;\n  6 -->|mask| 12;\n  9093603f-8ee1-424b-8520-c5f5d3e9dc3d[\"Output\\nVitessce dashboard\"];\n  12 --> 9093603f-8ee1-424b-8520-c5f5d3e9dc3d;\n  style 9093603f-8ee1-424b-8520-c5f5d3e9dc3d stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nmarkers.csv\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nPhenotypeWorkflow\"]\n  2[color=lightblue,label=\"ℹ️ Input Collection\\nRaw cycle images\"]\n  3[label=\"Illumination correction with Basic\"]\n  2 -> 3 [label=\"output\"]\n  k8a05fb699e2b4fa4ab8c77d3241f7a86[color=lightseagreen,label=\"Output\\nDFP images\"]\n  3 -> k8a05fb699e2b4fa4ab8c77d3241f7a86\n  ka5432ed5980f4f0483a2b5514019b11b[color=lightseagreen,label=\"Output\\nFFP images\"]\n  3 -> ka5432ed5980f4f0483a2b5514019b11b\n  4[label=\"Stitching and registration with Ashlar\"]\n  3 -> 4 [label=\"output_dfp\"]\n  3 -> 4 [label=\"output_ffp\"]\n  2 -> 4 [label=\"output\"]\n  0 -> 4 [label=\"output\"]\n  k81f2c552cd844d48af14eb252550f35a[color=lightseagreen,label=\"Output\\nRegistered image\"]\n  4 -> k81f2c552cd844d48af14eb252550f35a\n  5[label=\"TMA dearray with UNetCoreograph\"]\n  4 -> 5 [label=\"output\"]\n  kd79b4449f87942a99c790e0a6df0fa79[color=lightseagreen,label=\"Output\\nDearray images\"]\n  5 -> kd79b4449f87942a99c790e0a6df0fa79\n  kc3ae2005725a487ca77a437636f3a296[color=lightseagreen,label=\"Output\\nTMA dearray map\"]\n  5 -> kc3ae2005725a487ca77a437636f3a296\n  k0ed3e92042ce457d9ebef0cd0baa1dea[color=lightseagreen,label=\"Output\\nDearray masks\"]\n  5 -> k0ed3e92042ce457d9ebef0cd0baa1dea\n  6[label=\"Nuclear segmentation\"]\n  5 -> 6 [label=\"tma_sections\"]\n  k65c32086b193440fb1a1e5731bda0820[color=lightseagreen,label=\"Output\\nNuclear mask\"]\n  6 -> k65c32086b193440fb1a1e5731bda0820\n  7[label=\"Convert dearray images to OME-TIFF\"]\n  5 -> 7 [label=\"tma_sections\"]\n  kd1c85ec41aea48ce88c3ede346d9b34f[color=lightseagreen,label=\"Output\\nConverted image\"]\n  7 -> kd1c85ec41aea48ce88c3ede346d9b34f\n  8[label=\"Cell feature quantification with MC-Quant\"]\n  0 -> 8 [label=\"output\"]\n  5 -> 8 [label=\"tma_sections\"]\n  6 -> 8 [label=\"mask\"]\n  ka277be13b5af4591b86ba8679f561677[color=lightseagreen,label=\"Output\\nPrimary Mask Quantification\"]\n  8 -> ka277be13b5af4591b86ba8679f561677\n  9[label=\"Rename OME-TIFF channels\"]\n  0 -> 9 [label=\"output\"]\n  7 -> 9 [label=\"output\"]\n  k0867cba20ac1413db6d0aba8b2dcbe0c[color=lightseagreen,label=\"Output\\nRenamed image\"]\n  9 -> k0867cba20ac1413db6d0aba8b2dcbe0c\n  10[label=\"Convert to Anndata\"]\n  8 -> 10 [label=\"cellmask\"]\n  ka10efe575e3646258ac8a4bd27b3ce7e[color=lightseagreen,label=\"Output\\nAnndata feature table\"]\n  10 -> ka10efe575e3646258ac8a4bd27b3ce7e\n  11[label=\"Scimap phenotyping\"]\n  10 -> 11 [label=\"outfile\"]\n  1 -> 11 [label=\"output\"]\n  k1711b39d79db401280b6abfae28439ae[color=lightseagreen,label=\"Output\\nPhenotyped feature table\"]\n  11 -> k1711b39d79db401280b6abfae28439ae\n  12[label=\"Create a Vitessce dashboard\"]\n  11 -> 12 [label=\"output\"]\n  9 -> 12 [label=\"renamed_image\"]\n  6 -> 12 [label=\"mask\"]\n  k9093603f8ee1424b8520c5f5d3e9dc3d[color=lightseagreen,label=\"Output\\nVitessce dashboard\"]\n  12 -> k9093603f8ee1424b8520c5f5d3e9dc3d\n}",
           "workflow_tools": [
@@ -25331,8 +25328,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.0.4+galaxy5",
                   "1.0.4+galaxy0",
+                  "1.0.4+galaxy5",
                   "1.0.4+galaxy3"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -25419,8 +25416,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.4",
-                  "6.7.0+galaxy3"
+                  "6.7.0+galaxy3",
+                  "0.4"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -26673,7 +26670,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-10-22 00:08:01 +0000",
+          "modified": "2025-10-27 14:12:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\ninput images\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nrules\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"🛠️ Subworkflow\\nfeature_extraction\"];\n  style 2 fill:#edd,stroke:#900,stroke-width:4px;\n  1 -->|output| 2;\n  0 -->|output| 2;\n  3[\"Collapse Collection\"];\n  2 -->|output| 3;\n  189572e7-e0e6-4818-91b1-441beced67a4[\"Output\\noutput\"];\n  3 --> 189572e7-e0e6-4818-91b1-441beced67a4;\n  style 189572e7-e0e6-4818-91b1-441beced67a4 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\ninput images\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nrules\"]\n  2[color=lightcoral,label=\"🛠️ Subworkflow\\nfeature_extraction\"]\n  1 -> 2 [label=\"output\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Collapse Collection\"]\n  2 -> 3 [label=\"output\"]\n  k189572e7e0e6481891b1441beced67a4[color=lightseagreen,label=\"Output\\noutput\"]\n  3 -> k189572e7e0e6481891b1441beced67a4\n}",
           "workflow_tools": [
@@ -26893,7 +26890,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-10-22 00:08:01 +0000",
+          "modified": "2025-10-27 14:12:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput image\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nfilter rules\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Filter 2-D image\"];\n  0 -->|output| 2;\n  3[\"Threshold image\"];\n  2 -->|output| 3;\n  4[\"Convert binary image to label map\"];\n  3 -->|output| 4;\n  5[\"Extract image features\"];\n  4 -->|output| 5;\n  6[\"Filter label map by rules\"];\n  5 -->|output| 6;\n  4 -->|output| 6;\n  1 -->|output| 6;\n  f6f7f638-0f3c-404e-ab2e-5281a0393060[\"Output\\noutput\"];\n  6 --> f6f7f638-0f3c-404e-ab2e-5281a0393060;\n  style f6f7f638-0f3c-404e-ab2e-5281a0393060 stroke:#2c3143,stroke-width:4px;\n  7[\"Extract image features\"];\n  6 -->|output| 7;\n  0 -->|output| 7;\n  31da5e27-19fe-465e-95f0-96d3f6dcaba4[\"Output\\noutput\"];\n  7 --> 31da5e27-19fe-465e-95f0-96d3f6dcaba4;\n  style 31da5e27-19fe-465e-95f0-96d3f6dcaba4 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\ninput image\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nfilter rules\"]\n  2[label=\"Filter 2-D image\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Threshold image\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"Convert binary image to label map\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Extract image features\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"Filter label map by rules\"]\n  5 -> 6 [label=\"output\"]\n  4 -> 6 [label=\"output\"]\n  1 -> 6 [label=\"output\"]\n  kf6f7f6380f3c404eab2e5281a0393060[color=lightseagreen,label=\"Output\\noutput\"]\n  6 -> kf6f7f6380f3c404eab2e5281a0393060\n  7[label=\"Extract image features\"]\n  6 -> 7 [label=\"output\"]\n  0 -> 7 [label=\"output\"]\n  k31da5e2719fe465e95f096d3f6dcaba4[color=lightseagreen,label=\"Output\\noutput\"]\n  7 -> k31da5e2719fe465e95f096d3f6dcaba4\n}",
           "workflow_tools": [
@@ -28247,11 +28244,8 @@
                 "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
-                "state": "inexact",
-                "versions": [
-                  "4.2",
-                  "4.0"
-                ],
+                "state": "exact",
+                "version": "5.1.0",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -28695,8 +28689,8 @@
       "id": "imaging/bioimage-metadata",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2025-10-22 00:08:01 +0000",
-      "pub_date": "2025-10-22 00:08:01 +0000",
+      "mod_date": "2025-10-27 14:12:35 +0000",
+      "pub_date": "2025-10-27 14:12:35 +0000",
       "version": 0,
       "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/bioimage-metadata/tutorial.json",
       "tools": [],
@@ -28999,8 +28993,8 @@
       "id": "imaging/bioimage-REMBI",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2025-10-22 00:08:01 +0000",
-      "pub_date": "2025-10-22 00:08:01 +0000",
+      "mod_date": "2025-10-27 14:12:35 +0000",
+      "pub_date": "2025-10-27 14:12:35 +0000",
       "version": 0,
       "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/bioimage-REMBI/tutorial.json",
       "tools": [],
