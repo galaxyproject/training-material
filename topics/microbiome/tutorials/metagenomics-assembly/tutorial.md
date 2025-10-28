@@ -288,7 +288,7 @@ This step is to concatenate the paired-end collections by strand.
 
 > <hands-on-title>Concatenate paired-end collection</hands-on-title>
 >
-> 1. {% tool [Concatenate multiple datasets]( toolshed.g2.bx.psu.edu/repos/artbio/concatenate_multiple_datasets/cat_multi_datasets/1.4.3) %} with parameters:
+> 1. {% tool [Concatenate multiple datasets](toolshed.g2.bx.psu.edu/repos/artbio/concatenate_multiple_datasets/cat_multi_datasets/1.4.3) %} with parameters:
 >     - *"What type of data do you wish to concatenate?"*: `Paired collection`
 >
 >     - *"Input paired collection to concatenate"*: `Output collection from Apply Rules`
