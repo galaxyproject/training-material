@@ -10,6 +10,7 @@ concurrency:
   group: feedbot
 jobs:
   rss-to-bluesky:
+    if: (github.event_name == 'schedule' && github.repository == 'galaxyproject/training-material') || (github.event_name != 'schedule')
     runs-on: ubuntu-latest
     steps:
       - name: Generate cache key

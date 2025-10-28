@@ -30,7 +30,7 @@ The **Community lab**, a centralised webpage that enables communities to rapidly
   *For example, [the microgalaxy lab (Europe)](https://microbiology.usegalaxy.eu).*
 
 
-The aim is this tutorial is to create the files necessary to display the labs in each Galaxy instance.
+The aim of this tutorial is to create the files necessary to display the labs in each Galaxy instance.
 
 You can also use the [Galaxy Labs engine](https://labs.usegalaxy.org.au).
 
@@ -76,7 +76,7 @@ communities/<your community>/lab/sections_templates/
 >
 > 1. Go to the [Galaxy Codex repo](https://github.com/galaxyproject/galaxy_codex)
 > 2. Go to the file `.github/workflows/populate_labs.yaml`
-> 3. On the right, click on the pen to "dit this file"
+> 3. On the right, click on the pen to "Edit this file"
 > 4. Duplicate section called "Populate biodiversity Lab"
 >
 >    For example:
@@ -105,7 +105,7 @@ communities/<your community>/lab/sections_templates/
 >
 > 1. Fork and clone the [Galaxy Codex repo](https://github.com/galaxyproject/galaxy_codex)
 > 2. Set the `COMMUNITY` variable : `export $COMMUNITY=<your community>`
-> 3. Lauch `sources/bin/populate_labs.sh`
+> 3. Launch `sources/bin/populate_labs.sh`
 >
 > This will create a bunch of the new files in the appropriate community folder (communities/<your community>/lab/).
 {: .hands_on}

@@ -154,8 +154,14 @@ In this tutorial, we annotate all 22 example images using the tool's `Auto label
 > ![al open dir](../../images/yolo-train/al_finish.png){: width="75%"}
 >
 >    - **Important:** The object label must match the content of `class_names.txt`.
->    - Repeat these steps for each image in the dataset to complete the interactive annotation process. 
+>    - Repeat these steps for each image in the dataset to complete the interactive annotation process.
 >
+> 3. Close the tool.
+> 
+> Once you have finished annotating all your images, you can safely close the interactive environment.  
+> Click on the small cross at the top-right corner of the AnyLabeling window.  
+> ![Closing AnyLabeling](../../images/yolo-train/al_close.png){: width="50%"}  
+> Wait a few moments for the interface to close completely and return to the Galaxy workspace.
 {: .hands_on}
 
 

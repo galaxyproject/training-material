@@ -26,6 +26,9 @@ contributions:
   instructors: [wm75, EngyNasr, santinofaack]
 
 location:
+  geo:
+    lat: 47.5348573
+    lon: 7.6419454
   name: FHNW University of Applied Sciences and Arts Northwestern Switzerland
   address:  Hofackerstrasse 30
   postcode: 4132

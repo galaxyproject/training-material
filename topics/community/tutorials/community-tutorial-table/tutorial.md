@@ -33,9 +33,9 @@ The pipeline creates a table with all the tutorials. This table can be **filtere
 
 The generated community-specific table can be used as is (e.g. downloadable tsv file) and/or embedded (e.g. into a Galaxy Hub page or Galaxy subdomain). 
 
-The pipeline is **fully automated** and executes on a **weekly** basis. Any research community can apply the pipeline to create a table specific to their community.
+The pipeline is **fully automated** and executed on a **weekly** basis. Any research community can apply the pipeline to create a table specific to their community.
 
-The aim is this tutorial is to create a tutorial table for a community.
+The aim of this tutorial is to create a tutorial table for a community.
 
 > <agenda-title></agenda-title>
 >
@@ -86,7 +86,7 @@ You will then be able to remove tutorials that are not relevant to your communit
 # Add the list relevant tags for your community in the `tutorial_tags` file
 
 > <hands-on-title>Add the relevant tags to the tutorial_tags file</hands-on-title>
-> 1. Open or create a file named `tutorial_tags` in your comunity metadata folder (`communities/<your community>/metadata/tutorial_tags`)
+> 1. Open or create a file named `tutorial_tags` in your community metadata folder (`communities/<your community>/metadata/tutorial_tags`)
 > 2. Add the name of the tags relevant to your community in the `tutorial_tags` file, with 1 tag per row
 > (See above for how to identify the appropriate tags)
 >

@@ -12,4 +12,13 @@
       class: File
       location: https://zenodo.org/api/files/d554c6c9-a28d-47bc-96be-5e34bd58266d/atac_pbmc_1k_nextgem_S1_R3_001_chr21.fastq.gz
       filetype: fastqsanger.gz
-  outputs: {}
+  outputs:
+    Anndata object:
+      asserts:
+        has_h5_keys:
+          keys: "obs"
+          keys: "var"
+    Anndata Info:
+      asserts:
+        has_line:
+          line: "AnnData object with n_obs × n_vars = 27388 × 1046"
