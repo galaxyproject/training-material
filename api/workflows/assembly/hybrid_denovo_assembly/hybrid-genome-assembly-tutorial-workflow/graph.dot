@@ -1,0 +1,62 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nreference_genome.fasta"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nillumina_reads_1.fastq"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nillumina_reads_2.fastq"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nnanopore_reads.fastq"]
+  4[label="Busco"]
+  0 -> 4 [label="output"]
+  k3f8fa313700f4224b91a5a633df32e14[color=lightseagreen,label="Output\nbusco_sum_ref"]
+  4 -> k3f8fa313700f4224b91a5a633df32e14
+  5[label="Flye"]
+  3 -> 5 [label="output"]
+  6[label="Create assemblies with Unicycler"]
+  3 -> 6 [label="output"]
+  1 -> 6 [label="output"]
+  2 -> 6 [label="output"]
+  7[label="Quast"]
+  0 -> 7 [label="output"]
+  5 -> 7 [label="consensus"]
+  k17f4e14398c84888b77d86d64e6fa21e[color=lightseagreen,label="Output\nreport_html_raw_assembly"]
+  7 -> k17f4e14398c84888b77d86d64e6fa21e
+  8[label="Busco"]
+  5 -> 8 [label="consensus"]
+  kbafa6bef63fb43a4b9671b7323278939[color=lightseagreen,label="Output\nbusco_sum_raw_assembly"]
+  8 -> kbafa6bef63fb43a4b9671b7323278939
+  9[label="Map with BWA-MEM"]
+  1 -> 9 [label="output"]
+  2 -> 9 [label="output"]
+  5 -> 9 [label="consensus"]
+  10[label="Quast"]
+  0 -> 10 [label="output"]
+  6 -> 10 [label="assembly"]
+  k76bb1ad98ad0459ebccbaf440b7eb614[color=lightseagreen,label="Output\nreport_html_unicy_assembly"]
+  10 -> k76bb1ad98ad0459ebccbaf440b7eb614
+  11[label="Busco"]
+  6 -> 11 [label="assembly"]
+  kc26bd17f6fb24a74b4fe091c05a90806[color=lightseagreen,label="Output\nbusco_sum_unicy_assembly"]
+  11 -> kc26bd17f6fb24a74b4fe091c05a90806
+  12[label="pilon"]
+  9 -> 12 [label="bam_output"]
+  5 -> 12 [label="consensus"]
+  13[label="Quast"]
+  0 -> 13 [label="output"]
+  12 -> 13 [label="output_fasta"]
+  k04f75a82c9354cdebeb8b45451f087b8[color=lightseagreen,label="Output\nreport_html_polish_assembly"]
+  13 -> k04f75a82c9354cdebeb8b45451f087b8
+  14[label="Busco"]
+  12 -> 14 [label="output_fasta"]
+  k318563f3b5a547bd9a5dc1d54ce3231c[color=lightseagreen,label="Output\nbusco_sum_polish_assembly"]
+  14 -> k318563f3b5a547bd9a5dc1d54ce3231c
+  15[label="MultiQC"]
+  4 -> 15 [label="busco_sum"]
+  8 -> 15 [label="busco_sum"]
+  11 -> 15 [label="busco_sum"]
+  14 -> 15 [label="busco_sum"]
+  7 -> 15 [label="report_tabular"]
+  10 -> 15 [label="report_tabular"]
+  13 -> 15 [label="report_tabular"]
+  kaeb424b539b742daa4fcb04b9bac8091[color=lightseagreen,label="Output\nmultiqc_html_report"]
+  15 -> kaeb424b539b742daa4fcb04b9bac8091
+}

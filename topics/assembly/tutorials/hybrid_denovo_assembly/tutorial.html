@@ -1,0 +1,2305 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Hybrid genome assembly - Nanopore and Illumina / Hybrid genome assembly - Nanopore and Illumina / Assembly</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@e22de9b7c802085af0dd363c95fd67407ab45ed1",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/hybrid_denovo_assembly/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Hybrid genome assembly - Nanopore and Illumina">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-11-03 09:40:11 +0000">
+<meta name="DC.creator" content="Grace Hall">
+<meta name="DC.creator" content="Tristan Reynolds"><meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Assembly / Hybrid genome assembly - Nanopore and Illumina / Hands-on: Hybrid genome assembly - Nanopore and Illumina">
+        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/assembly/tutorials/hybrid_denovo_assembly/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Hybrid genome assembly - Nanopore and Illumina",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-11-03 09:40:11 +0000",
+  "datePublished": "2025-11-03 09:40:11 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/unimelb/",
+      "name": "The University of Melbourne",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.unimelb.edu.au"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/melbournebioinformatics/",
+      "name": "Melbourne Bioinformatics",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://mdhs.unimelb.edu.au/melbournebioinformatics"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/AustralianBioCommons/",
+      "name": "Australian BioCommons",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.biocommons.org.au/"
+    }
+  ],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Assembly",
+    "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+    "url": "https://training.galaxyproject.org/training-material/topics/assembly/"
+  },
+  "abstract": "*Assemble a genome! Learn how to create and assess genome assemblies using the powerful combination of Nanopore and Illumina reads.*",
+  "learningResourceType": "e-learning",
+  "name": "Hybrid genome assembly - Nanopore and Illumina",
+  "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/hybrid_denovo_assembly/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT2H",
+  "teaches": "- Understand how Nanopore and Illumina reads can be used together to produce a high-quality assembly\n- Become familiar with genome assembly and polishing programs\n- Learn how to assess the quality of a genome assembly, regardless of whether a reference genome is present or absent\n- Be able to assemble an unknown, previously undocumented genome to high-quality using Nanopore and Illumina reads!",
+  "keywords": [
+    "Assembly",
+    "assembly",
+    "nanopore",
+    "illumina",
+    "denovo",
+    "genomics"
+  ],
+  "description": "## Abstract\n\n*Assemble a genome! Learn how to create and assess genome assemblies using the powerful combination of Nanopore and Illumina reads.*\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How do long- and short-read assembly methods differ?\n\n\n## Learning Objectives\n\n- Understand how Nanopore and Illumina reads can be used together to produce a high-quality assembly\n- Become familiar with genome assembly and polishing programs\n- Learn how to assess the quality of a genome assembly, regardless of whether a reference genome is present or absent\n- Be able to assemble an unknown, previously undocumented genome to high-quality using Nanopore and Illumina reads!\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/GraceAHall/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/GraceAHall/",
+      "name": "Grace Hall",
+      "image": "https://avatars.githubusercontent.com/GraceAHall",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/unimelb/",
+          "name": "The University of Melbourne",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.unimelb.edu.au"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/melbournebioinformatics/",
+          "name": "Melbourne Bioinformatics",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mdhs.unimelb.edu.au/melbournebioinformatics"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tflowers15/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tflowers15/",
+      "name": "Tristan Reynolds",
+      "image": "https://avatars.githubusercontent.com/tflowers15",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/AustralianBioCommons/",
+          "name": "Australian BioCommons",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.biocommons.org.au/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/unimelb/",
+          "name": "The University of Melbourne",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.unimelb.edu.au"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/melbournebioinformatics/",
+          "name": "Melbourne Bioinformatics",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mdhs.unimelb.edu.au/melbournebioinformatics"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6606-5953"
+    }
+  ],
+  "contributor": [],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Assembly",
+      "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0196",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0196",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0196"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/hybrid_denovo_assembly/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/Flye",
+      "name": "Flye"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/bwa",
+      "name": "BWA"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/busco",
+      "name": "BUSCO"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/pilon",
+      "name": "pilon"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/quast",
+      "name": "QUAST"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/unicycler",
+      "name": "Unicycler"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://doi.org/10.5281/zenodo.15756327",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/assembly" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Assembly
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/assembly/faqs/" title="Check our FAQs for the Assembly topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/assembly/tutorials/hybrid_denovo_assembly/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/assembly/tutorials/hybrid_denovo_assembly/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-assembly">
+    <h1 data-toc-skip>Hybrid genome assembly - Nanopore and Illumina</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/GraceAHall/" class="contributor-badge contributor-GraceAHall"><img src="https://avatars.githubusercontent.com/GraceAHall?s=36" alt="Grace Hall avatar" width="36" class="avatar" />
+    Grace Hall</a><a href="/training-material/hall-of-fame/tflowers15/" class="contributor-badge contributor-tflowers15"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/tflowers15?s=36" alt="Tristan Reynolds avatar" width="36" class="avatar" />
+    Tristan Reynolds</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How do long- and short-read assembly methods differ?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understand how Nanopore and Illumina reads can be used together to produce a high-quality assembly</p>
+</li>
+        
+        <li><p>Become familiar with genome assembly and polishing programs</p>
+</li>
+        
+        <li><p>Learn how to assess the quality of a genome assembly, regardless of whether a reference genome is present or absent</p>
+</li>
+        
+        <li><p>Be able to assemble an unknown, previously undocumented genome to high-quality using Nanopore and Illumina reads!</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Quality Control</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Quality Control</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://doi.org/10.5281/zenodo.15756327">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/assembly/tutorials/hybrid_denovo_assembly/workflows/" title="Hybrid genome assembly - Nanopore and Illumina workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/assembly/tutorials/hybrid_denovo_assembly/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr/" title="">
+			UseGalaxy.fr <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org (Main) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.cz/" title="">
+			UseGalaxy.cz <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://galaxytrakr.org/" title="">
+			GalaxyTrakr
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
+			UseGalaxy.be
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.no/" title="">
+			UseGalaxy.no
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 3, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p><em>Assemble a genome! Learn how to create and assess genome assemblies using the powerful combination of Nanopore and Illumina reads.</em></p>
+
+<p>This tutorial explores how long and short read data can be combined to produce a high-quality ‘finished’ bacterial genome sequence. Termed ‘hybrid assembly’, we will use read data produced from two different sequencing platforms, Illumina (short read) and Oxford Nanopore Technologies (long read), to reconstruct a bacterial genome sequence.</p>
+
+<p>In this tutorial, we will perform ‘de novo assembly’. De novo assembly is the process of assembling a genome from scratch using only the sequenced reads as input - no reference genome is used.  This approach is common practise when working with microorganisms, and has seen increasing use for eukaryotes (including humans) in recent times.</p>
+
+<p>Using short read data (Illumina) alone for de novo assembly will produce a complete genome, but in pieces (commonly called a ‘draft genome’). For the genome to be assembled into a single chromosome (plus a sequence for each plasmid), reads would need to be longer than the longest repeated element on the genome (usually ~7,000 base pairs, Note: Illumina reads are 350 base maximum). Draft bacterial genome sequences are cheap to produce (less than AUD$60) and useful (&gt;300,000 draft <em>Salmonella enterica</em> genome sequences published at NCBI <a href="https://www.ncbi.nlm.nih.gov/pathogens/organisms/">https://www.ncbi.nlm.nih.gov/pathogens/organisms/</a>), but sometimes you need a high-quality ‘finished’ bacterial genome sequence.  There are &lt;1,000 ‘finished’ or ‘closed’ <em>Salmonella enterica</em> genome sequences.</p>
+
+<p>In these cases, long reads can be used together with short reads to produce a high-quality assembly. Nanopore long reads (commonly &gt;40,000 bases) can fully span repeats, and reveal how all of the genome fragments should be arranged. Long reads currently have higher error rates than short reads, so the combination of technologies is particularly powerful. Long reads provide information on the genome structure, and short reads provide high base-level accuracy.</p>
+
+<p>Combining read data from the long and short read sequencing platforms allows the production of a complete genome sequence with very few sequence errors, but the cost of the read data is about AUD$1,000 to produce the sequence. Understandably, we usually produce a draft genome sequence with very few sequence errors using the Illumina sequencing platform.</p>
+
+<p>Nanopore sequencing technology is rapidly improving, expect the cost difference to reduce!!</p>
+
+<ul>
+  <li><strong>Data:</strong> Nanopore reads, Illumina reads, bacterial organism (<em>Bacillus subtilis</em>) reference genome</li>
+  <li><strong>Tools:</strong> Flye, Pilon, Unicycler, Quast, Busco</li>
+  <li><strong>Pipeline:</strong> Hybrid de novo genome assembly - Nanopore draft Illumina polishing</li>
+  <li><strong>Pipeline:</strong> Hybrid de novo genome assembly - Unicycler</li>
+</ul>
+
+<p>This Galaxy tutorial based on material from the <a href="https://www.melbournebioinformatics.org.au/tutorials/tutorials/hybrid_assembly/nanopore_assembly/">Hybrid genome assembly - Nanopore and Illumina</a> tutorial and workshop created by <a href="https://mdhs.unimelb.edu.au/melbournebioinformatics">Melbourne Bioinformatics</a> at the University of Melbourne.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial we will deal with:</p>
+
+  <ol>
+    <li>TOC</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="background">Background</h1>
+
+<h2 id="how-do-we-produce-the-genomic-dna-for-a-bacterial-isolate">How do we produce the genomic DNA for a bacterial isolate?</h2>
+
+<p>Traditional <em>in vitro</em> culture techniques are important. Take a sample (e.g. a swab specimen from an infected sore) and streak a ‘loopful’ on to solid growth medium that suppoprts the growth of the bacteria. <strong>Technology from the time of Louis Pasteur!</strong></p>
+
+<p>Mixtures of bacterial types can be sequenced e.g. prepare genomic DNA from environmental samples containing bacteria - water, soil, faecal samples etc. (Whole Metagenome Sequencing)</p>
+
+<p><a href="../../images/denovo_assembly/sample_bacterial_growth.png" rel="noopener noreferrer"><img src="../../images/denovo_assembly/sample_bacterial_growth.png" alt="image of bacterial growth of a sample. " width="600" height="450" loading="lazy" /></a></p>
+
+<p>One colony contains \(10^7 – 10^8\) cells. The genomic DNA extracted from one colony is enough for Illumina sequencing. Larger amounts of genomic DNA are required for Nanopore sequencing.</p>
+
+<h2 id="shotgun-sequencing---illumina-sequencing-library">Shotgun sequencing - Illumina Sequencing Library</h2>
+
+<p>Genomic DNA is prepared for sequencing by fragmenting/shearing: multiple copies of Chromosome + plasmid  –&gt; ~500 bp fragments</p>
+
+<p>Note: Nanopore sequencing - there is usually no need to shear the genomic DNA as specialist methods are used to minimise shearing during DNA preparation. For Nanopore sequencing, the longer the DNA fragments, the better!</p>
+
+<h1 id="nanopore-draft-assembly-illumina-polishing">Nanopore draft assembly, Illumina polishing</h1>
+
+<p>In this section, you will use <code class="language-plaintext highlighter-rouge">Flye</code> to create a draft genome assembly from Nanopore reads. We will perform assembly, then assess the quality of our assembly using two tools: <code class="language-plaintext highlighter-rouge">Quast</code> and <code class="language-plaintext highlighter-rouge">Busco</code>.</p>
+
+<p><a href="../../images/denovo_assembly/nanopore_illumina_hybrid_assembly.png" rel="noopener noreferrer"><img src="../../images/denovo_assembly/nanopore_illumina_hybrid_assembly.png" alt="workflow diagram for hybrid assembly starting with nanopore read. " width="2888" height="1466" loading="lazy" /></a></p>
+
+<h2 id="upload-data">Upload data</h2>
+
+<p>Let’s start with uploading the data.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-import-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Import the data</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a proper name</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li>   <li>To cancel renaming, click the <i class="fas fa-undo" aria-hidden="true"></i><span class="visually-hidden">galaxy-undo</span> “Cancel” button</li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which can be the case if you are using an older version of Galaxy) do the following:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import from <a href="https://zenodo.org/uploads/15756328">Zenodo</a>:</p>
+
+      <ul>
+        <li>FASTQ file with illumina forward reads: <code class="language-plaintext highlighter-rouge">illumina_reads_1.fastq</code></li>
+        <li>FASTQ file with illumina reverse reads: <code class="language-plaintext highlighter-rouge">illumina_reads_2.fastq</code></li>
+        <li>FASTQ file with nanopore reads: <code class="language-plaintext highlighter-rouge">nanopore_reads.fastq</code></li>
+        <li>FASTA file with reference genome: <code class="language-plaintext highlighter-rouge">reference_genome.fasta</code></li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/15756328/files/illumina_reads_1.fastq
+https://zenodo.org/records/15756328/files/illumina_reads_2.fastq
+https://zenodo.org/records/15756328/files/nanopore_reads.fastq
+https://zenodo.org/records/15756328/files/reference_genome.fasta
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Libraries</strong> (left panel)</li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="a-baseline-for-high-quality-assemblies">A baseline for “high-quality” assemblies</h2>
+
+<p>To begin, we will identify what a high-quality assembly looks like.</p>
+
+<p>When running assembly tools, we want to check the quality of assemblies we produce.
+It is paramount that genome assemblies are high-quality for them to be useful. To get a baseline for what is considered a “high-quality” assembly, we will first run a common assembly QC tool - <code class="language-plaintext highlighter-rouge">Busco</code> - on a published genome similar to the organism we are working with today.</p>
+
+<p>In your imported files, you should see a <code class="language-plaintext highlighter-rouge">reference_genome.fasta</code> item.
+This is the published genome we will compare against.</p>
+
+<h3 id="qc-with-busco">QC with Busco</h3>
+
+<p>BUSCO analysis uses the presence, absence, or fragmentation of key genes in an assembly to determine its quality.</p>
+
+<p>BUSCO genes are specifically selected for each taxonomic clade, and represent a group of genes that each organism in the clade is expected to possess. At higher clades, ‘housekeeping genes’ are the only members, while at more refined taxa such as order or family, lineage-specific genes can also be used.</p>
+
+<p>We expect the reference genome to have all of these genes. When running <code class="language-plaintext highlighter-rouge">Busco</code>, we expect it to find most (if not all) of these in the assembly.</p>
+
+<p>Find and select the <code class="language-plaintext highlighter-rouge">Busco</code> tool in the tools panel using the search bar.
+In this tutorial, we know our organism is within the ‘Bacillales’ order.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-busco"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run Busco</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy1" title="Busco tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.8.0+galaxy1)</span>:
+      <ul>
+        <li><em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">reference_genome.fasta</code></li>
+        <li><em>“Mode”</em>:
+          <ul>
+            <li><em>“Select a gene predictor”</em>: <code class="language-plaintext highlighter-rouge">Augustus</code></li>
+          </ul>
+        </li>
+        <li><em>“Auto-detect or select lineage?”</em>: <code class="language-plaintext highlighter-rouge">Select lineage</code>
+          <ul>
+            <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">Bacillales</code></li>
+          </ul>
+        </li>
+        <li><em>“Which outputs should be generated”</em>: <code class="language-plaintext highlighter-rouge">Short summary text</code></li>
+      </ul>
+    </li>
+    <li>
+      <p><strong><em>Rename</em></strong> the <code class="language-plaintext highlighter-rouge">short summary</code> output to <code class="language-plaintext highlighter-rouge">Busco on Reference</code>.</p>
+    </li>
+    <li>View the <code class="language-plaintext highlighter-rouge">Busco on Reference</code> output:
+      <ul>
+        <li>It may look something like this:
+<a href="../../images/denovo_assembly/busco_reference_assembly.png" rel="noopener noreferrer"><img src="../../images/denovo_assembly/busco_reference_assembly.png" alt="output busco report for reference assembly. " width="772" height="346" loading="lazy" /></a></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What can you conclude from the BUSCO report?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ul>
+      <li>It seems that <code class="language-plaintext highlighter-rouge">Busco</code> could find almost all expected genes in the reference genome assembly.</li>
+      <li>By looking at the results, we see that we have 449 / 450 Complete BUSCOs, and one Fragmented BUSCO.</li>
+      <li>This will form the baseline for the <code class="language-plaintext highlighter-rouge">Busco</code> QC results expected of a high-quality genome assembly.</li>
+      <li>From here, we will use our input DNA sequence data to assemble the genome of the sequenced organism, and will compare the QC results to that of the published <code class="language-plaintext highlighter-rouge">reference_genome.fasta</code> assembly.</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="draft-assembly-with-flye--nanopore-reads">Draft assembly with Flye + Nanopore reads</h2>
+
+<p>Our first assembly will use the long-read data to create a draft genome, then the short-read data to “polish” (improve) the draft into a better assembly.</p>
+
+<p>We will start by using a long-read assembly tool called <code class="language-plaintext highlighter-rouge">Flye</code> to create an assembly using the Nanopore long-read data.</p>
+
+<p>Search for <code class="language-plaintext highlighter-rouge">Flye</code> in the tools panel search bar and select the tool.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-flye"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run Flye</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9.6+galaxy0" title="Flye tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flye</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.9.6+galaxy0)</span>:
+      <ul>
+        <li><em>“Input reads”</em>: <code class="language-plaintext highlighter-rouge">nanopore_reads.fastq</code></li>
+        <li>Leave all other parameters as default</li>
+        <li>Scroll down and run Flye by clicking the blue <code class="language-plaintext highlighter-rouge">Run tool</code> button at the bottom of the page.</li>
+      </ul>
+    </li>
+    <li>View output:
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">Flye</code> produces a number of outputs. We only need the ‘consensus’ fasta file. You can delete the other outputs.</li>
+      </ul>
+    </li>
+    <li><strong><em>Rename</em></strong> the <code class="language-plaintext highlighter-rouge">Flye on data XX: consensus</code> output to <code class="language-plaintext highlighter-rouge">Flye: Assembly</code></li>
+  </ol>
+
+</blockquote>
+
+<h2 id="assessing-the-flye-draft-assembly-quality">Assessing the Flye draft assembly quality</h2>
+
+<h3 id="busco">Busco</h3>
+
+<p>We need to check if our assembly is good quality or not. It is paramount that genome assemblies are high-quality for them to be useful.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-busco-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run Busco</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.8.0+galaxy1" title="Busco tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Busco</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.8.0+galaxy1)</span>:
+      <ul>
+        <li><em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">Flye: Assembly</code></li>
+        <li><em>“Mode”</em>:
+          <ul>
+            <li><em>“Select a gene predictor”</em>: <code class="language-plaintext highlighter-rouge">Augustus</code></li>
+          </ul>
+        </li>
+        <li><em>“Auto-detect or select lineage?”</em>: <code class="language-plaintext highlighter-rouge">Select lineage</code>
+          <ul>
+            <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">Bacillales</code></li>
+          </ul>
+        </li>
+        <li><em>“Which outputs should be generated”</em>: <code class="language-plaintext highlighter-rouge">Short summary text</code></li>
+      </ul>
+    </li>
+    <li>
+      <p><strong><em>Rename</em></strong> the <code class="language-plaintext highlighter-rouge">short summary</code> output to <code class="language-plaintext highlighter-rouge">Busco on Flye: Assembly</code>.</p>
+    </li>
+    <li>View the <code class="language-plaintext highlighter-rouge">Busco on Flye: Assembly</code> output:
+      <ul>
+        <li>It may look something like this:
+<a href="../../images/denovo_assembly/busco_draft_assembly.png" rel="noopener noreferrer"><img src="../../images/denovo_assembly/busco_draft_assembly.png" alt="output busco report for draft assembly. " width="1047" height="301" loading="lazy" /></a></li>
+        <li>The <code class="language-plaintext highlighter-rouge">full table</code> is also useful. It gives a detailed list of the genes we are searching for, and information about whether they were missing, fragmented, or complete in our assembly.
+<a href="../../images/denovo_assembly/busco_table_draft_assembly.png" rel="noopener noreferrer"><img src="../../images/denovo_assembly/busco_table_draft_assembly.png" alt="output busco table for draft assembly. " width="2068" height="995" loading="lazy" /></a></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How does this compare with the reference genome BUSCO report?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>We see that many genes are fragmented or missing. Our draft genome assembly isn’t as good as the reference genome <strong><em>yet</em></strong>. This is because we have so far only used the Nanopore long-read sequences, which have higher base-level error rates than short reads. In the next steps we will use Illumina short reads to correct for errors in the assembled Nanopore reads.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h3 id="quast">Quast</h3>
+
+<p>Aside from <code class="language-plaintext highlighter-rouge">Busco</code>, we can use another method to perform assembly QC. <code class="language-plaintext highlighter-rouge">Quast</code> allows us to compare two assemblies to determine their similarity.</p>
+
+<p>Although the organism we sequenced may be different, we can use <code class="language-plaintext highlighter-rouge">Quast</code> to compare our assembly with the provided reference genome to see how similar they are on the individual base level.</p>
+
+<p>Search for the <code class="language-plaintext highlighter-rouge">Quast</code> tool in the tools panel.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-quast"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run Quast</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.3.0+galaxy0" title="Quast tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.3.0+galaxy0)</span>:
+      <ul>
+        <li><em>“Assembly mode”</em>: <code class="language-plaintext highlighter-rouge">Individual assembly</code></li>
+        <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use dataset names</code></li>
+        <li><em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">Flye: Assembly</code></li>
+        <li><em>“Type of assembly?”</em>: <code class="language-plaintext highlighter-rouge">Genome</code></li>
+        <li><em>“Use a reference genome?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Reference genome”</em>: <code class="language-plaintext highlighter-rouge">reference_genome.fasta</code></li>
+          </ul>
+        </li>
+        <li><em>“Output files”</em>: Select <code class="language-plaintext highlighter-rouge">HTML reports</code>, <code class="language-plaintext highlighter-rouge">Tabular reports</code></li>
+      </ul>
+    </li>
+    <li>
+      <p><strong><em>Rename</em></strong> the <code class="language-plaintext highlighter-rouge">tabular report</code> output to <code class="language-plaintext highlighter-rouge">Quast on Flye: Assembly</code>.</p>
+    </li>
+    <li>View output:
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">Quast</code> will produce a HTML report summarising it’s results.</li>
+        <li>Open the report. It may look something like this:
+<a href="../../images/denovo_assembly/quast_draft_assembly.png" rel="noopener noreferrer"><img src="../../images/denovo_assembly/quast_draft_assembly.png" alt="output quast report for reference assembly. " width="536" height="468" loading="lazy" /></a></li>
+        <li>Note the:
+          <ul>
+            <li>Genome fraction (%)</li>
+            <li># mismatches per 100 kbp</li>
+            <li># indels per 100 kbp</li>
+            <li># contigs information</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What can you conclude about our draft assembly?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ul>
+      <li>From the output of <code class="language-plaintext highlighter-rouge">Quast</code>, our draft assembly seems to have good coverage and not too many contigs.</li>
+      <li>Unfortunately, the mismatch / indel rate is quite high.</li>
+      <li>Although we don’t expect our organism to be <strong><em>identical</em></strong> to the supplied reference, we would expect fewer mismatches and indels, as the provided reference genome is <strong><em>very</em></strong> similar to organism which was sequenced.</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="assembly-polishing-with-pilon">Assembly Polishing with Pilon</h2>
+
+<p>We should be able improve our draft assembly with the Illumina reads available and correct some of these errors.</p>
+
+<p>This process involves two steps. We will first align the Illumina reads to our draft assembly, then supply the mapping information to <code class="language-plaintext highlighter-rouge">Pilon</code>, which will use this alignment information to error-correct our assembly.</p>
+
+<p>Illumina reads have much higher per-base accuracy than Nanopore reads. We will map the Illumina reads to our draft assembly using a short-read aligner called <code class="language-plaintext highlighter-rouge">BWA-MEM</code>. Then we can give <code class="language-plaintext highlighter-rouge">Pilon</code> this alignment file to polish our draft assembly.</p>
+
+<h3 id="map-illumina-reads-to-draft-assembly">Map Illumina reads to draft assembly</h3>
+
+<p>Search for <code class="language-plaintext highlighter-rouge">Map with BWA-MEM</code> in the tools panel.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-map-with-bwa-mem"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Map with BWA-MEM</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.19" title="Map with BWA-MEM tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Map with BWA-MEM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.19)</span>:
+      <ul>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code></li>
+        <li><em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">Flye: Assembly</code></li>
+        <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired </code></li>
+        <li><em>“Select first set of reads”</em>: <code class="language-plaintext highlighter-rouge">illumina_reads_1.fastq</code></li>
+        <li><em>“Select second set of reads”</em>: <code class="language-plaintext highlighter-rouge">illumina_reads_2.fastq</code></li>
+      </ul>
+    </li>
+    <li>View output:
+      <ul>
+        <li>The output will be a BAM file (Binary Alignment Map). This is tabular data recording information about how reads were aligned to the draft assembly.</li>
+        <li>We can now use this output BAM file as an input to <code class="language-plaintext highlighter-rouge">Pilon</code>.</li>
+      </ul>
+    </li>
+    <li><strong><em>Rename</em></strong> the output to <code class="language-plaintext highlighter-rouge">Flye: Short read alignments</code></li>
+  </ol>
+
+</blockquote>
+
+<h3 id="polish-assembly-with-pilon">Polish assembly with Pilon</h3>
+
+<p>Search for <code class="language-plaintext highlighter-rouge">Pilon</code> in the tools panel.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-pilon"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run Pilon</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pilon/pilon/1.20.1" title="Pilon tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Pilon</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.20.1)</span>:
+      <ul>
+        <li><em>“Source for reference genome used for BAM alignments”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from History</code>
+          <ul>
+            <li><em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">Flye: Assembly</code></li>
+          </ul>
+        </li>
+        <li><em>“Type automatically determined by pilon”</em>:
+          <ul>
+            <li><em>“Input BAM file”</em>: <code class="language-plaintext highlighter-rouge">Flye: Short read alignments</code></li>
+          </ul>
+        </li>
+        <li><em>“Variant calling mode”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+    <li>View output:
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">Pilon</code> gives a single output file - the polished assembly.</li>
+      </ul>
+    </li>
+    <li><strong><em>Rename</em></strong> the output to <code class="language-plaintext highlighter-rouge">Flye: Polished assembly</code></li>
+  </ol>
+
+</blockquote>
+
+<h3 id="compare-draft-and-polished-assemblies">Compare draft and polished assemblies</h3>
+
+<p>We are now interested to see how much <code class="language-plaintext highlighter-rouge">Pilon</code> improved our draft assembly.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-quast-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run Quast</div>
+
+  <p>Run <code class="language-plaintext highlighter-rouge">Quast</code> as before with the new <code class="language-plaintext highlighter-rouge">Flye: Polished assembly</code> data</p>
+
+  <ol>
+    <li>
+      <p>Select the history item for our initial <code class="language-plaintext highlighter-rouge">Quast</code> job, then click the rerun <i class="fas fa-arrow-rotate-right" aria-hidden="true"></i><span class="visually-hidden">dataset-rerun</span> button. This will load the settings used for the previous <code class="language-plaintext highlighter-rouge">Quast</code> job.</p>
+    </li>
+    <li>
+      <p>Change the <em>“Contigs/scaffolds file”</em> input to <code class="language-plaintext highlighter-rouge">Flye: Polished assembly</code>.</p>
+    </li>
+    <li>
+      <p>Click the <code class="language-plaintext highlighter-rouge">Run Tool</code> button to submit the job.</p>
+    </li>
+    <li>
+      <p><strong><em>Rename</em></strong> the <code class="language-plaintext highlighter-rouge">tabular report</code> output to <code class="language-plaintext highlighter-rouge">Quast on Flye: Polished assembly</code>.</p>
+    </li>
+    <li>
+      <p>After <code class="language-plaintext highlighter-rouge">Quast</code> has finished, open the HTML report.</p>
+      <ul>
+        <li>Make note of <code class="language-plaintext highlighter-rouge"># mismatches per 100 kbp</code> and <code class="language-plaintext highlighter-rouge"># indels per 100 kbp</code>.</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Has our assembly improved?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Yes, we now have lower mismatches and indels per 100kbp.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-busco-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run Busco</div>
+
+  <p>Run <code class="language-plaintext highlighter-rouge">Busco</code> as before with the new <code class="language-plaintext highlighter-rouge">Flye: Polished assembly</code> data</p>
+
+  <ol>
+    <li>
+      <p>Select the history item for our initial <code class="language-plaintext highlighter-rouge">Busco</code> job, then click the rerun <i class="fas fa-arrow-rotate-right" aria-hidden="true"></i><span class="visually-hidden">dataset-rerun</span> button. This will load the settings used for the previous <code class="language-plaintext highlighter-rouge">Busco</code> job.</p>
+    </li>
+    <li>
+      <p>Change the <em>“Sequences to analyse”</em> input to <code class="language-plaintext highlighter-rouge">Flye: Polished assembly</code>.</p>
+    </li>
+    <li>
+      <p>Click the <code class="language-plaintext highlighter-rouge">Run Tool</code> button to submit the job.</p>
+    </li>
+    <li>
+      <p><strong><em>Rename</em></strong> the <code class="language-plaintext highlighter-rouge">short summary</code> output to <code class="language-plaintext highlighter-rouge">Busco on Flye: Polished assembly</code>.</p>
+    </li>
+    <li>
+      <p>After <code class="language-plaintext highlighter-rouge">Busco</code> has finished, open the <code class="language-plaintext highlighter-rouge">Busco on Flye: Polished assembly</code> output.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Have we identified more expected genes?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Yes, we now identified 423 complete BUSCO genes.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="section-summary">Section Summary</h2>
+
+<p>All going well, the polished assembly should be much higher quality than our draft.</p>
+
+<p>The per-base accuracy of our assembly contigs should have markedly improved. This is reflected in the lower mismatches and indels per 100kbp reported by <code class="language-plaintext highlighter-rouge">Quast</code>, and the higher number of complete BUSCO genes. Our contiguity and coverage (as measured by the genome fraction (%) statistic reported by <code class="language-plaintext highlighter-rouge">Quast</code>) may not show the same level of improvement, as the polishing step is mainly aimed at improving per-base contig accuracy.</p>
+
+<p>Our next step is to use a purpose-built hybrid de novo assembly tool, and compare its performance with our sequential draft + polishing approach.</p>
+
+<h2 id="section-questions">Section Questions</h2>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Which read set - short or long - was used to create our draft?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Long reads (Nanopore) were used to create the draft. Long reads allow excellent re-creation of the proper structure of the genome, and adequately handle repeat regions. The drawback of long reads is a higher error rate of the technology compared to short reads. This results in more mismatches and indels.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How was the draft polished?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Illumina reads have higher per-base accuracy than Nanopore. Illumina reads were aligned to the draft assembly, then <code class="language-plaintext highlighter-rouge">Pilon</code> used this alignment information to improve locations with errors in the assembly.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How does <code class="language-plaintext highlighter-rouge">Quast</code> inform on assembly quality?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p><code class="language-plaintext highlighter-rouge">Quast</code> shows summary information about the assembly contigs. If a reference genome is given, it informs the genome fraction (how much of the reference is covered by the assembly), if any genomic regions appear duplicated, and error information including the rate of mismatches and indels.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How does <code class="language-plaintext highlighter-rouge">Busco</code> inform on assembly quality?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p><code class="language-plaintext highlighter-rouge">Busco</code> does not use a reference genome to compare. It attempts to locate key genes which should be present in the assembly, and reports whether it could/could not find those genes. If a key gene is found, it reports whether the gene was fragmented (errors) or complete.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="purpose-built-hybrid-assembly-tool---unicycler">Purpose-built hybrid assembly tool - Unicycler</h2>
+
+<p>In this section, we will use a purpose-built tool called <code class="language-plaintext highlighter-rouge">Unicycler</code> to perform hybrid assembly.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Unicycler</code> uses our Nanopore and Illumina read sets together as input, and returns an assembly. Once we have created the assembly, we will assess its quality using <code class="language-plaintext highlighter-rouge">Quast</code> and <code class="language-plaintext highlighter-rouge">Busco</code> and compare with our previous polished assembly. We will also perform BUSCO analysis on the supplied reference genome itself, to record a baseline for our theoretical best <code class="language-plaintext highlighter-rouge">Busco</code> report.</p>
+
+<p><a href="../../images/denovo_assembly/unicycler_hybrid_assembly.png" rel="noopener noreferrer"><img src="../../images/denovo_assembly/unicycler_hybrid_assembly.png" alt="workflow diagram for hybrid assembly using unicycler. " width="2025" height="983" loading="lazy" /></a></p>
+
+<h3 id="hybrid-de-novo-assembly-with-unicycler">Hybrid de novo assembly with Unicycler</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Unicycler</code> performs assembly in the opposite manner to our previous approach. Illumina reads are used to create an assembly graph, then Nanopore reads are used to disentangle problems in the graph. The Nanopore reads serve to bridge Illumina contigs, and to reveal how the contigs are arranged sequentially in the genome.</p>
+
+<h3 id="run-unicycler">Run Unicycler</h3>
+
+<p>Find <code class="language-plaintext highlighter-rouge">Unicycler</code> in the tools panel. It is listed as <code class="language-plaintext highlighter-rouge">Create assemblies with Unicycler</code></p>
+
+<p>Run <code class="language-plaintext highlighter-rouge">Unicycler</code> using the Nanopore and Illumina read sets.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-unicycler"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run Unicycler</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.5.1+galaxy0" title="Unicycler tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unicycler</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.5.1+galaxy0)</span>:
+      <ul>
+        <li><em>“Paired or Single end data?”</em>: <code class="language-plaintext highlighter-rouge">Paired </code></li>
+        <li><em>“Select first set of reads”</em>: <code class="language-plaintext highlighter-rouge">illumina_reads_1.fastq</code></li>
+        <li><em>“Select second set of reads”</em>: <code class="language-plaintext highlighter-rouge">illumina_reads_2.fastq</code></li>
+        <li><em>“Select long reads. If there are no long reads, leave this empty”</em>: <code class="language-plaintext highlighter-rouge">nanopore_reads.fastq</code></li>
+      </ul>
+    </li>
+    <li>View Output
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">Unicycler</code> will output three files
+          <ul>
+            <li>The assembly</li>
+            <li>An assembly graph</li>
+            <li>SPAdes graphs</li>
+          </ul>
+        </li>
+        <li>We are interested in the <code class="language-plaintext highlighter-rouge">Final Assembly</code> output, which is the assembly as a <code class="language-plaintext highlighter-rouge">fasta</code> file.</li>
+      </ul>
+    </li>
+    <li><strong><em>Rename</em></strong> the <code class="language-plaintext highlighter-rouge">Final Assembly</code> output to <code class="language-plaintext highlighter-rouge">Unicycler: Assembly</code>.</li>
+  </ol>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+    <p>If <code class="language-plaintext highlighter-rouge">nanopore_reads.fastq</code> does not appear in the dropdown list, its datatype needs to be changed.</p>
+
+    <ul>
+      <li>Click the pencil <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> icon next to <code class="language-plaintext highlighter-rouge">nanopore_reads.fastq</code> in the history panel.</li>
+      <li>Then select the <code class="language-plaintext highlighter-rouge">Datatypes</code> tab.</li>
+      <li>For the parameter <code class="language-plaintext highlighter-rouge">New Type</code>: <code class="language-plaintext highlighter-rouge">fastqsanger</code></li>
+      <li>Leave all else default and execute the program.</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<h3 id="comparing-unicycler-assembly-to-nanopore--illumina-polished-assembly">Comparing Unicycler assembly to Nanopore + Illumina polished assembly</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Busco</code> and <code class="language-plaintext highlighter-rouge">Quast</code> can be used again to assess our <code class="language-plaintext highlighter-rouge">Unicycler</code> assembly. As a purpose-built tool, it generally produces much better assemblies than our sequential approach. This is reflected as (<code class="language-plaintext highlighter-rouge">Quast</code>) a lower number of contigs, lower mismatches and indels per 100kb, and (<code class="language-plaintext highlighter-rouge">Busco</code>) greater number of BUSCO genes complete.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-quast-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run Quast</div>
+
+  <p>Run <code class="language-plaintext highlighter-rouge">Quast</code> as before with the new <code class="language-plaintext highlighter-rouge">Unicycler: Assembly</code> data</p>
+
+  <ol>
+    <li>
+      <p>Select the history item for our initial <code class="language-plaintext highlighter-rouge">Quast</code> job, then click the rerun <i class="fas fa-arrow-rotate-right" aria-hidden="true"></i><span class="visually-hidden">dataset-rerun</span> button. This will load the settings used for the previous <code class="language-plaintext highlighter-rouge">Quast</code> job.</p>
+    </li>
+    <li>
+      <p>Change the <em>“Contigs/scaffolds file”</em> input to <code class="language-plaintext highlighter-rouge">Unicycler: Assembly</code>.</p>
+    </li>
+    <li>
+      <p>Click the <code class="language-plaintext highlighter-rouge">Run Tool</code> button to submit the job.</p>
+    </li>
+    <li>
+      <p><strong><em>Rename</em></strong> the <code class="language-plaintext highlighter-rouge">tabular report</code> output to <code class="language-plaintext highlighter-rouge">Quast on Unicycler: Assembly</code>.</p>
+    </li>
+    <li>
+      <p>At time of writing, these were the <code class="language-plaintext highlighter-rouge">Quast</code> results:</p>
+    </li>
+  </ol>
+
+  <p><a href="../../images/denovo_assembly/quast_unicycler_assembly.png" rel="noopener noreferrer"><img src="../../images/denovo_assembly/quast_unicycler_assembly.png" alt="output quast report for unicycler assembly. " width="494" height="430" loading="lazy" /></a></p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-busco-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run Busco</div>
+
+  <p>Run <code class="language-plaintext highlighter-rouge">Busco</code> as before with the new <code class="language-plaintext highlighter-rouge">Unicycler: Assembly</code> data</p>
+
+  <ol>
+    <li>
+      <p>Select the history item for our initial <code class="language-plaintext highlighter-rouge">Busco</code> job, then click the rerun <i class="fas fa-arrow-rotate-right" aria-hidden="true"></i><span class="visually-hidden">dataset-rerun</span> button. This will load the settings used for the previous <code class="language-plaintext highlighter-rouge">Busco</code> job.</p>
+    </li>
+    <li>
+      <p>Change the <em>“Sequences to analyse”</em> input to <code class="language-plaintext highlighter-rouge">Unicycler: Assembly</code>.</p>
+    </li>
+    <li>
+      <p>Click the <code class="language-plaintext highlighter-rouge">Run Tool</code> button to submit the job.</p>
+    </li>
+    <li>
+      <p><strong><em>Rename</em></strong> the <code class="language-plaintext highlighter-rouge">short summary</code> output to <code class="language-plaintext highlighter-rouge">Busco on Unicycler: Assembly</code>.</p>
+    </li>
+    <li>
+      <p>At time of writing, these were the <code class="language-plaintext highlighter-rouge">Busco</code> results:</p>
+    </li>
+  </ol>
+
+  <p><a href="../../images/denovo_assembly/busco_unicycler_assembly.png" rel="noopener noreferrer"><img src="../../images/denovo_assembly/busco_unicycler_assembly.png" alt="output busco report for unicycler assembly. " width="774" height="350" loading="lazy" /></a></p>
+
+</blockquote>
+
+<p>We can now create an aggregate summary report from all of our <code class="language-plaintext highlighter-rouge">Quast</code> and <code class="language-plaintext highlighter-rouge">Busco</code> outputs using <code class="language-plaintext highlighter-rouge">MultiQC</code>, which enables us to easily compare the quality of our genome assemblies.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-multiqc"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run MultiQC</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy4" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.27+galaxy4)</span>:
+      <ul>
+        <li><em>“1: Results”</em>:
+          <ul>
+            <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">BUSCO</code></li>
+            <li><em>“Output of BUSCO”</em>: <code class="language-plaintext highlighter-rouge">Busco on Reference</code>, <code class="language-plaintext highlighter-rouge">Busco on Fly: Assembly</code>, <code class="language-plaintext highlighter-rouge">Busco on Fly: Polished assembly</code>, <code class="language-plaintext highlighter-rouge">Busco on Unicycler: Assembly</code>,</li>
+          </ul>
+        </li>
+        <li>Click <code class="language-plaintext highlighter-rouge">+ Insert Results</code> to add a second results field</li>
+        <li><em>“2: Results”</em>:
+          <ul>
+            <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">QUAST</code></li>
+            <li><em>“Output of Quast”</em>: <code class="language-plaintext highlighter-rouge">Quast on Fly: Assembly</code>, <code class="language-plaintext highlighter-rouge">Quast on Fly: Polished assembly</code>, <code class="language-plaintext highlighter-rouge">Quast on Unicycler: Assembly</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>View the <code class="language-plaintext highlighter-rouge">Webpage</code> output from <code class="language-plaintext highlighter-rouge">MultiQC</code>:
+      <ul>
+        <li>At time of writing, these were the results.
+          <ul>
+            <li>The number of BUSCOs identified in each assembly by <code class="language-plaintext highlighter-rouge">Busco</code>:
+<a href="../../images/denovo_assembly/busco_plot_bacillales_odb10.png" rel="noopener noreferrer"><img src="../../images/denovo_assembly/busco_plot_bacillales_odb10.png" alt="buscos identified in each assembly. " width="1200" height="800" loading="lazy" /></a></li>
+            <li>A table of <code class="language-plaintext highlighter-rouge">Quast</code> statistics for each assembly:
+<a href="../../images/denovo_assembly/quast_table_statistics.png" rel="noopener noreferrer"><img src="../../images/denovo_assembly/quast_table_statistics.png" alt="table of quast statistics. " width="2262" height="424" loading="lazy" /></a></li>
+            <li>The number of contigs identified in each assembly by <code class="language-plaintext highlighter-rouge">Quast</code>:
+<a href="../../images/denovo_assembly/quast_num_contigs.png" rel="noopener noreferrer"><img src="../../images/denovo_assembly/quast_num_contigs.png" alt="number of contigs in each assembly. " width="1200" height="800" loading="lazy" /></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How does the <code class="language-plaintext highlighter-rouge">Unicycler</code> assembly compare with the previous assembly produced using <code class="language-plaintext highlighter-rouge">Flye</code> + <code class="language-plaintext highlighter-rouge">Pilon</code>?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>It seems that the <code class="language-plaintext highlighter-rouge">Unicycler</code> assembly is much better than the <code class="language-plaintext highlighter-rouge">Flye</code> + <code class="language-plaintext highlighter-rouge">Pilon</code> polishing assembly, and produces the same report as the reference genome. Awesome! Looks like this is pretty good.</p>
+
+    <p>The <code class="language-plaintext highlighter-rouge">Unicycler</code> assembly has:</p>
+
+    <ul>
+      <li>A very high Genome fraction (coverage of the reference genome)</li>
+      <li>Very few mismatches and indels per 100 kbp</li>
+      <li>15 contigs (compared with the reference genome only having 1 contig)</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<p>These results indicate that our <code class="language-plaintext highlighter-rouge">Unicycler</code> assembly is high quality, and the organism is extremely similar to the organism of the reference genome.</p>
+
+<p>To improve our assembly further to be publishable “complete” quality, we would want to reduce the number of contigs (ideally to a single contig). If the organism has plasmids, we would expect a handfull of contigs, likely below 10.</p>
+
+<p>To do this, the best course of action would be to generate more long-read data.</p>
+
+<h3 id="section-questions-1">Section Questions</h3>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Why did we select <code class="language-plaintext highlighter-rouge">Paired</code> for our Illumina reads in the <code class="language-plaintext highlighter-rouge">Unicycler</code> tool?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Our short read set was <code class="language-plaintext highlighter-rouge">paired-end</code>. Short read technology can only sequence a few hundred base-pairs in a single read. To provide better structural information, paired-end sequencing was created, where longer fragments (fixed length) are used. A few hundred bp is sequenced at both ends of the fragment, leaving the middle section unsequenced. The reads produced (the mate-pair) from a single fragment are separated by a fixed length, so we know they are nearby in the genome.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>Does <code class="language-plaintext highlighter-rouge">Unicycler</code> begin by using the long or short reads?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Unicycler uses short reads first. It creates an assembly graph from short reads, then uses the long reads to provide better structural information of the genome.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>How does <code class="language-plaintext highlighter-rouge">Unicycler</code> use long reads to improve its assembly graph?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>The assembly graph produced by short reads has tangled regions. When we don’t know how sections of the genome are arranged, tangled regions appear in the graph. <code class="language-plaintext highlighter-rouge">Unicycler</code> uses Nanopore reads which overlap these tangled regions to resolve the proper structure of the genome.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>We have covered two methods for hybrid de novo assembly. The combination of long- and short-read technology is clearly powerful, represented by our ability to create a good assembly with only 25x coverage (100Mb) of Nanopore and 50x coverage (200Mb) of Illumina reads.</p>
+
+<p>To further improve our assembly, extra Nanopore read data may provide the most benefit. At 50x coverage (200Mb), we may achieve a single, or few contig assembly with high per-base accuracy.</p>
+
+<p>In this tutorial, we had a reference genome for a closely related organism, which we could use when assessing the quality of our draft genome assemblies. Without access to a reference genome, <code class="language-plaintext highlighter-rouge">Quast</code> will produce fewer metrics for assessing the assembled genome quality. In this situation, you can look at the number of contigs in the assembled genome, the minimum number of contigs that produce 50\% and 90\% of the bases in the assembly and the GC\% content. For good quality assemblies, the total and minimum number (50\% and 90\%) of contigs should be small and the GC\% content should be near 50\%.</p>
+
+<p>The development of new purpose-built tools for hybrid de novo assembly like <code class="language-plaintext highlighter-rouge">Unicycler</code> have improved the quality of assemblies we can produce. These tools are of great importance and while they already produce great results, they will continue to improve over time.</p>
+
+<hr />
+<h2 id="additional-reading">Additional reading</h2>
+<p>Links to additional recommended reading and suggestions for related tutorials.</p>
+
+<ul>
+  <li>Flye: <a href="https://github.com/fenderglass/Flye/blob/flye/docs/USAGE.md#algorithm">https://github.com/fenderglass/Flye/blob/flye/docs/USAGE.md#algorithm</a></li>
+  <li>Pilon: <a href="https://github.com/broadinstitute/pilon/wiki/Methods-of-Operation">https://github.com/broadinstitute/pilon/wiki/Methods-of-Operation</a></li>
+  <li>Unicycler: <a href="https://github.com/rrwick/Unicycler">https://github.com/rrwick/Unicycler</a></li>
+  <li>Quast: <a href="https://academic.oup.com/bioinformatics/article/29/8/1072/228832">https://academic.oup.com/bioinformatics/article/29/8/1072/228832</a></li>
+  <li>BUSCO analysis: <a href="https://academic.oup.com/bioinformatics/article/31/19/3210/211866">https://academic.oup.com/bioinformatics/article/31/19/3210/211866</a></li>
+</ul>
+
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Performing de novo genome assembly with a combination of long and short reads results in a high quality genome</p>
+</li>
+                        
+                        <li><p>There are multiple methods for performing hybrid de novo assembly</p>
+</li>
+                        
+                        <li><p>One option is to assemble the long reads using <code class="language-plaintext highlighter-rouge">Flye</code> and then polish with the short reads using <code class="language-plaintext highlighter-rouge">Pilon</code></p>
+</li>
+                        
+                        <li><p>Alternatively, <code class="language-plaintext highlighter-rouge">Unicycler</code> creates an assembly graph from the short reads and then untangles the graph with the long reads</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/assembly/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=assembly/hybrid_denovo_assembly"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=assembly/hybrid_denovo_assembly">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Grace Hall, Tristan Reynolds,  <b>Hybrid genome assembly - Nanopore and Illumina (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/hybrid_denovo_assembly/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/hybrid_denovo_assembly/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{assembly-hybrid_denovo_assembly,
+author = "Grace Hall and Tristan Reynolds",
+	title = "Hybrid genome assembly - Nanopore and Illumina (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/hybrid_denovo_assembly/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/unimelb/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/unimelb_Logo_RGB.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">The University of Melbourne</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/melbournebioinformatics/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/Melbourne-Bioinformatics-logo.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Melbourne Bioinformatics</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/AustralianBioCommons/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/Australian-Biocommons-Favicon-RGB.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Australian BioCommons</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/assembly/tutorials/hybrid_denovo_assembly/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: flye
+  owner: bgruening
+  revisions: 643e0ff70be5
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bwa
+  owner: devteam
+  revisions: 1dfc975b48d5
+  tool_panel_section_label: Mapping
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: busco
+  owner: iuc
+  revisions: 4e70d88adf2f
+  tool_panel_section_label: Annotation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: pilon
+  owner: iuc
+  revisions: 11e5408fd238
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: quast
+  owner: iuc
+  revisions: a3b35edea53a
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: unicycler
+  owner: iuc
+  revisions: e022dff952df
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/assembly/tutorials/hybrid_denovo_assembly/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/assembly/tutorials/hybrid_denovo_assembly/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e22de9b7c802085af0dd363c95fd67407ab45ed1">e22de9b</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+	
+
+    </body>
+</html>
