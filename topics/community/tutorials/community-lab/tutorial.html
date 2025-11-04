@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@8b2e19747fb33e77dad742d49c09e94996945daa",
+		release: "galaxy-training-network@11cb8189056937b7d818822a15da679a75acaf0f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Creation of the labs in the different Galaxy instances for your community">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-10-28 14:14:42 +0000">
+<meta name="DC.date" content="2025-11-04 14:42:47 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Paul Zierep">
 <meta name="DC.creator" content="Solenne Correard">
@@ -180,7 +180,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-10-28 14:14:42 +0000",
+  "dateModified": "2025-11-04 14:42:47 +0000",
   "datePublished": "2025-10-04 17:50:22 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -235,7 +235,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Creation of the labs in the different Galaxy instances for your community",
   "url": "https://training.galaxyproject.org/training-material/topics/community/tutorials/community-lab/tutorial.html",
-  "version": 2,
+  "version": 3,
   "timeRequired": "PT1H",
   "teaches": "- Create labs for Galaxy communities",
   "keywords": [
@@ -1116,7 +1116,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Oct 4, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 28, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 4, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1134,7 +1134,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
 
     </blockquote>
     </section>
@@ -1195,113 +1195,45 @@ communities/<your community="">/lab/
         5_support_and_help.yml
         6_community.yml</your></p>
 
-<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
-	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
-	
-	<p>This is a "Choose Your Own Tutorial" (CYOT) section (also known as "Choose Your Own Analysis" (CYOA)), where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
-	
-	
-	<p>
-		<p>The files can be created in two wyas, using GitHub actions (on the GitHub interface) or using the command line to launch a script.</p>
+<p>The files are created and updated automatically using GitHub actions, you just need to add a bit of code to point to your community folder.</p>
 
-	</p>
-	
-	
-		<input id="cyoa-opt1" type="radio" name="cyoa" value="GitHub_Actions" onclick="cyoaChoice('GitHub_Actions', 'gtn-cyoa')" />
-		<label for="cyoa-opt1" class="select btn btn-secondary">GitHub_Actions</label>
-	
-	
-		<input id="cyoa-opt2" type="radio" name="cyoa" value="Command-line" onclick="cyoaChoice('Command-line', 'gtn-cyoa')" />
-		<label for="cyoa-opt2" class="select btn btn-secondary">Command-line</label>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-generate-the-files-using-github-actions"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generate the files using Github Actions</div>
 
-	
-	<script>
-		function ready(fn) {
-			if (document.readyState != 'loading'){
-				fn();
-			} else {
-				document.addEventListener('DOMContentLoaded', fn);
-			}
-		}
-		ready(function() {
-			cyoaDefault("GitHub_Actions", "gtn-cyoa");
-		})
-	</script>
-	
+  <ol>
+    <li>Go to the <a href="https://github.com/galaxyproject/galaxy_codex">Galaxy Codex repo</a></li>
+    <li>Go to the file <code class="language-plaintext highlighter-rouge">.github/workflows/fetch_filter_resources.yaml</code></li>
+    <li>On the right, click on the pen to “Edit this file”</li>
+    <li>Scroll down</li>
+    <li>
+      <p>Duplicate the section called “Populate <community-name> Lab"</community-name></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  - name: Populate &lt;community-name&gt; Lab
+    run: |
+      bash sources/bin/populate_labs.sh
+    env: 
+      COMMUNITY: &lt;community-name&gt;
+</code></pre></div>      </div>
+    </li>
+    <li>Replace <code class="language-plaintext highlighter-rouge">&lt;community-name&gt;</code> by the name of your community</li>
+    <li>Commit changes the changes to a new branch that you name “new lab for [Community-name]”</li>
+  </ol>
+
 </blockquote>
 
-<div class="GitHub_Actions">
-
-  <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-generate-the-files-using-github-actions"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generate the files using Github Actions</div>
-
-    <ol>
-      <li>Go to the <a href="https://github.com/galaxyproject/galaxy_codex">Galaxy Codex repo</a></li>
-      <li>Go to the file <code class="language-plaintext highlighter-rouge">.github/workflows/populate_labs.yaml</code></li>
-      <li>On the right, click on the pen to “Edit this file”</li>
-      <li>
-        <p>Duplicate section called “Populate biodiversity Lab”</p>
-
-        <p>For example:</p>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- name: Populate biodiversity Lab
-  run: | 
-    bash sources/bin/populate_labs.sh
-  env: 
-    COMMUNITY: biodiversity
-</code></pre></div>        </div>
-      </li>
-      <li>Change the name and community name for your community</li>
-      <li>Commit changes the changes to a new branch that you name “new lab for <Community-name>"</Community-name></li>
-      <li>On the top panel of the Galaxy codex repository, click on “Actions”</li>
-      <li>On the left panel, click on “Populate labs”</li>
-      <li>In the table, click on “Run workflow” and select the branch you just created “new lab for <Community-name>"</Community-name></li>
-      <li>Click on “Run workflow”</li>
-    </ol>
-
-    <p>This will create a Pull Request with the new files in the appropriate community folder. To find the Pull Request, on the top panel of the Galaxy codex repository, click on “Pull requests”.</p>
-  </blockquote>
-
-</div>
-
-<div class="Command-line">
-
-  <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-generate-the-files-using-the-command-line"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generate the files using the command line</div>
-
-    <ol>
-      <li>Fork and clone the <a href="https://github.com/galaxyproject/galaxy_codex">Galaxy Codex repo</a></li>
-      <li>Set the <code class="language-plaintext highlighter-rouge">COMMUNITY</code> variable : <code class="language-plaintext highlighter-rouge">export $COMMUNITY=&lt;your community&gt;</code></li>
-      <li>Launch <code class="language-plaintext highlighter-rouge">sources/bin/populate_labs.sh</code></li>
-    </ol>
-
-    <p>This will create a bunch of the new files in the appropriate community folder (communities/<your community="">/lab/).</your></p>
-  </blockquote>
-
-</div>
+<p>After that, your commit will be reviewed (and approved) by admins.
+On the following Sunday (or upon request), this action will be launched and will create the new files in the appropriate community folder (<code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/</code>).</p>
 
 <h1 id="modify-the-generated-files-to-personalize-your-community-lab">Modify the generated files to personalize your community lab</h1>
 
-<p>Depending on how you generated the files (GitHub actions or command-line), you should be able to find your community specific lab files.
-If you generated the files using the GitHub Actions, this will be in the automatically generated pull request.
-If you generated the files using the command line, this will be in the local folder that were generated.</p>
+<p>Once the files are created, you should update them as some contain template text that are not community specific.</p>
 
 <p>Files to update :</p>
 <ul>
-  <li>“communities/<your community="">/lab/CONTRIBUTORS" --&gt; Add the handles of everyone who contributed in the lab</your></li>
-  <li>“communities/<your community="">/lab/README.md" --&gt; Change all &gt;your-community&gt; by your community name</your></li>
-  <li>“communities/<your community="">/lab/base.yml" --&gt; Change all &gt;your-community&gt; by your community name</your></li>
-  <li>“communities/<your community="">/lab/intro.html" --&gt; Include a description of your community.</your></li>
+  <li><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/CONTRIBUTORS</code> –&gt; Add the handles of everyone who contributed in the lab</li>
+  <li><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/README.md</code> –&gt; Change all <code class="language-plaintext highlighter-rouge">&lt;your-community&gt;</code> by your community name</li>
+  <li><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/base.yml</code> –&gt; Change all <code class="language-plaintext highlighter-rouge">&lt;your-community&gt;</code> by your community name</li>
+  <li><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/intro.html</code> –&gt; Include a description of your community.</li>
 </ul>
 
 <p>Files that do not require a manual update :</p>
@@ -1643,7 +1575,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8b2e19747fb33e77dad742d49c09e94996945daa">8b2e197</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/11cb8189056937b7d818822a15da679a75acaf0f">11cb818</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
