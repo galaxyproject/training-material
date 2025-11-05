@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@ec6af4c44521e0fece1e471ec78953d788402f01",
+		release: "galaxy-training-network@ba2e9670d26c3501f17fef48080cf523ba258bdf",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,7 +58,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
         <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.91a7a89f.js' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -270,21 +270,21 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h4 class="faq-area"> Is it possible to replace the existing alignment tools such as HISAT and Freebayes with other tools? <a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/alignment_tools.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-is-it-possible-to-replace-the-existing-alignment-tools-such-as-hisat-and-freebayes-with-other-tools"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Is it possible to replace the existing alignment tools such as HISAT and Freebayes with other tools?</div>   <p>The tools in this workflow are customizable, however, the user has to ensure that the inputs are in the correct format, while using the same reference genome database.</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-is-it-possible-to-replace-the-existing-alignment-tools-such-as-hisat-and-freebayes-with-other-tools"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-is-it-possible-to-replace-the-existing-alignment-tools-such-as-hisat-and-freebayes-with-other-tools" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Is it possible to replace the existing alignment tools such as HISAT and Freebayes with other tools?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>The tools in this workflow are customizable, however, the user has to ensure that the inputs are in the correct format, while using the same reference genome database.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
 
 <h4 class="faq-area"> Why do we change the chromosome names in the Ensembl GTF to match the UCSC genome reference? <a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/chromosome_names.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-why-do-we-change-the-chromosome-names-in-the-ensembl-gtf-to-match-the-ucsc-genome-reference"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Why do we change the chromosome names in the Ensembl GTF to match the UCSC genome reference?</div>   <p>UCSC chromosome names begin with the prefix <code class="language-plaintext highlighter-rouge">chr</code>, but Ensembl chromosome names do not. For example, chromosome 19 would be denoted as <code class="language-plaintext highlighter-rouge">chr19</code> in UCSC, and as <code class="language-plaintext highlighter-rouge">19</code> in Ensemble. Most tools would view those as different when looking for matches/overlaps. Therefore it is always a good idea to make sure these match before you perform any downstream analysis.</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-why-do-we-change-the-chromosome-names-in-the-ensembl-gtf-to-match-the-ucsc-genome-reference"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-do-we-change-the-chromosome-names-in-the-ensembl-gtf-to-match-the-ucsc-genome-reference" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Why do we change the chromosome names in the Ensembl GTF to match the UCSC genome reference?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>UCSC chromosome names begin with the prefix <code class="language-plaintext highlighter-rouge">chr</code>, but Ensembl chromosome names do not. For example, chromosome 19 would be denoted as <code class="language-plaintext highlighter-rouge">chr19</code> in UCSC, and as <code class="language-plaintext highlighter-rouge">19</code> in Ensemble. Most tools would view those as different when looking for matches/overlaps. Therefore it is always a good idea to make sure these match before you perform any downstream analysis.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
 
 <h4 class="faq-area"> Why do we have a variant mapping file when it is not being used in the workflow? <a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/variant_mapping_file.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-why-do-we-have-a-variant-mapping-file-when-it-is-not-being-used-in-the-workflow"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Why do we have a variant mapping file when it is not being used in the workflow?</div>   <p>We are working on updating the existing annotation tool to include the variant mapping file. Once that is done, the variant mapping file will also be an input for those tools.</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-why-do-we-have-a-variant-mapping-file-when-it-is-not-being-used-in-the-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-do-we-have-a-variant-mapping-file-when-it-is-not-being-used-in-the-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Why do we have a variant mapping file when it is not being used in the workflow?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>We are working on updating the existing annotation tool to include the variant mapping file. Once that is done, the variant mapping file will also be an input for those tools.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
@@ -298,7 +298,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h4 class="faq-area"> Can I use these workflows on datasets generated from our laboratory? <a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_own_data.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-can-i-use-these-workflows-on-datasets-generated-from-our-laboratory"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Can I use these workflows on datasets generated from our laboratory?</div>   <p>Yes, the workflows can be used on other datasets as well. However, you will need to consider data acquisition and sample preparation methods so that the tool parameters can be adjusted accordingly.</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-can-i-use-these-workflows-on-datasets-generated-from-our-laboratory"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-i-use-these-workflows-on-datasets-generated-from-our-laboratory" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Can I use these workflows on datasets generated from our laboratory?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Yes, the workflows can be used on other datasets as well. However, you will need to consider data acquisition and sample preparation methods so that the tool parameters can be adjusted accordingly.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
@@ -312,14 +312,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h4 class="faq-area"> The workflows contain several Query tabular for text manipulation, is there a tutorial for that? <a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_querytabular.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-the-workflows-contain-several-query-tabular-for-text-manipulation-is-there-a-tutorial-for-that"><i class="far fa-question-circle" aria-hidden="true"></i> Question: The workflows contain several Query tabular for text manipulation, is there a tutorial for that?</div>   <p>Query tabular loads a tabular database and creates a sqlite database and tabular file. To learn more about SQL Queries - please look at <a href="https://www.sqlite.org/docs.html">this documentation</a>.</p>   <p>The help section on the Query Tabular tool provides simple examples of both filtering the input tabular datasets, as well as examples of SQL queries.  Query Tabular also incorporates regex functions that can be used queries.  The PSM report datasets in these tutorials have fields that are lists of protein IDs.</p>   <p>Query Tabular help shows how to normalize those protein list fields so that we can perform operations by protein ID.  See section:  <em>Normalizing by Line Filtering into 2 Tables</em> in the tool help (below the tool in Galaxy).</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-the-workflows-contain-several-query-tabular-for-text-manipulation-is-there-a-tutorial-for-that"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-the-workflows-contain-several-query-tabular-for-text-manipulation-is-there-a-tutorial-for-that" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: The workflows contain several Query tabular for text manipulation, is there a tutorial for that?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Query tabular loads a tabular database and creates a sqlite database and tabular file. To learn more about SQL Queries - please look at <a href="https://www.sqlite.org/docs.html">this documentation</a>.</p>   <p>The help section on the Query Tabular tool provides simple examples of both filtering the input tabular datasets, as well as examples of SQL queries.  Query Tabular also incorporates regex functions that can be used queries.  The PSM report datasets in these tutorials have fields that are lists of protein IDs.</p>   <p>Query Tabular help shows how to normalize those protein list fields so that we can perform operations by protein ID.  See section:  <em>Normalizing by Line Filtering into 2 Tables</em> in the tool help (below the tool in Galaxy).</p> </blockquote> <!--END_SNIPPET-->
 
 
 
 
 <h4 class="faq-area"> What kind of variants are seen in the output? <a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_variants.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-what-kind-of-variants-are-seen-in-the-output"><i class="far fa-question-circle" aria-hidden="true"></i> Question: What kind of variants are seen in the output?</div>   <p>From this workflow we can see insertions, deletions, SNVs, or we will know whether it’s an intron, exon, splice junction etc.</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-what-kind-of-variants-are-seen-in-the-output"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-kind-of-variants-are-seen-in-the-output" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: What kind of variants are seen in the output?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>From this workflow we can see insertions, deletions, SNVs, or we will know whether it’s an intron, exon, splice junction etc.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
@@ -455,7 +455,7 @@ add a button, include configuration options:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ec6af4c44521e0fece1e471ec78953d788402f01">ec6af4c</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ba2e9670d26c3501f17fef48080cf523ba258bdf">ba2e967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
@@ -479,7 +479,7 @@ add a button, include configuration options:
 </footer>
 
 
-        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+        <script  async defer src='/training-material/assets/js/bundle.main.91a7a89f.js'></script>
 
 	
 	

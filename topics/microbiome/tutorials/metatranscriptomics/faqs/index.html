@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@ec6af4c44521e0fece1e471ec78953d788402f01",
+		release: "galaxy-training-network@ba2e9670d26c3501f17fef48080cf523ba258bdf",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,7 +58,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
         <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.91a7a89f.js' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -270,28 +270,28 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h4 class="faq-area"> Can this ASaiM workflow be used for single-end data? <a href="/training-material/topics/microbiome/tutorials/metatranscriptomics/faqs/single_end.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-can-this-asaim-workflow-be-used-for-single-end-data"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Can this ASaiM workflow be used for single-end data?</div>   <p>Yes, the inputs have to be changed to a single-end file rather than a paired-end.</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-can-this-asaim-workflow-be-used-for-single-end-data"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-this-asaim-workflow-be-used-for-single-end-data" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Can this ASaiM workflow be used for single-end data?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Yes, the inputs have to be changed to a single-end file rather than a paired-end.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
 
 <h4 class="faq-area"> Can we use the ASaiM-MT workflow on multiple input files at the same time? <a href="/training-material/topics/microbiome/tutorials/metatranscriptomics/faqs/multiple_inputs.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-can-we-use-the-asaim-mt-workflow-on-multiple-input-files-at-the-same-time"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Can we use the ASaiM-MT workflow on multiple input files at the same time?</div>   <p>Currently, that is one of its limitations. However, Galaxy offers a workflow within workflow feature which can help process multiple files at the same time and this output can be combined into one using the <code class="language-plaintext highlighter-rouge">MT2MQ</code> tool.</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-can-we-use-the-asaim-mt-workflow-on-multiple-input-files-at-the-same-time"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-we-use-the-asaim-mt-workflow-on-multiple-input-files-at-the-same-time" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Can we use the ASaiM-MT workflow on multiple input files at the same time?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Currently, that is one of its limitations. However, Galaxy offers a workflow within workflow feature which can help process multiple files at the same time and this output can be combined into one using the <code class="language-plaintext highlighter-rouge">MT2MQ</code> tool.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
 
 <h4 class="faq-area"> Why do we use FASTQ interlacer and not the FASTQ joiner? <a href="/training-material/topics/microbiome/tutorials/metatranscriptomics/faqs/fastq_interlacer_vs_joiner.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-why-do-we-use-fastq-interlacer-and-not-the-fastq-joiner"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Why do we use FASTQ interlacer and not the FASTQ joiner?</div>   <p>The reason ASaiM-MT uses FASTQ-interlacer than FASTQ-joiner for combining forward and reverse reads is because the joiner tool combines the forward and reverse read sequence together while the interlacer puts the forward and reverse read sequences in the same file while retaining the entity of each read along with an additional file with unpaired sequences and it maintains the integrity of the reads while helping us distinguish between the forward and reverse reads.</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-why-do-we-use-fastq-interlacer-and-not-the-fastq-joiner"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-do-we-use-fastq-interlacer-and-not-the-fastq-joiner" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Why do we use FASTQ interlacer and not the FASTQ joiner?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>The reason ASaiM-MT uses FASTQ-interlacer than FASTQ-joiner for combining forward and reverse reads is because the joiner tool combines the forward and reverse read sequence together while the interlacer puts the forward and reverse read sequences in the same file while retaining the entity of each read along with an additional file with unpaired sequences and it maintains the integrity of the reads while helping us distinguish between the forward and reverse reads.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
 
 <h4 class="faq-area"> Why don't we perform the V-Search dereplication step of ASaiM for metatrascriptomic data? <a href="/training-material/topics/microbiome/tutorials/metatranscriptomics/faqs/vsearch.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-why-don-t-we-perform-the-v-search-dereplication-step-of-asaim-for-metatrascriptomic-data"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Why don't we perform the V-Search dereplication step of ASaiM for metatrascriptomic data?</div>   <p>In the metatranscriptomics data, duplicated reads are expected. And to keep the integrity of the sample, we would like to retain the reverse reads.</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-why-don-t-we-perform-the-v-search-dereplication-step-of-asaim-for-metatrascriptomic-data"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-don-t-we-perform-the-v-search-dereplication-step-of-asaim-for-metatrascriptomic-data" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Why don't we perform the V-Search dereplication step of ASaiM for metatrascriptomic data?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>In the metatranscriptomics data, duplicated reads are expected. And to keep the integrity of the sample, we would like to retain the reverse reads.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
@@ -413,7 +413,7 @@ add a button, include configuration options:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ec6af4c44521e0fece1e471ec78953d788402f01">ec6af4c</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ba2e9670d26c3501f17fef48080cf523ba258bdf">ba2e967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
@@ -437,7 +437,7 @@ add a button, include configuration options:
 </footer>
 
 
-        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+        <script  async defer src='/training-material/assets/js/bundle.main.91a7a89f.js'></script>
 
 	
 	

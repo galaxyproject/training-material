@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@ec6af4c44521e0fece1e471ec78953d788402f01",
+		release: "galaxy-training-network@ba2e9670d26c3501f17fef48080cf523ba258bdf",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,7 +58,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
         <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.91a7a89f.js' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -270,63 +270,63 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h4 class="faq-area"> After sequencing with MinKNOW software, we get many fastq files, do these files need to be combined into one file before uploading or is it possible to upload them all at once? <a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/compining_fastq_files_of_one_sample.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-after-sequencing-with-minknow-software-we-get-many-fastq-files-do-these-files-need-to-be-combined-into-one-file-before-uploading-or-is-it-possible-to-upload-them-all-at-once"><i class="far fa-question-circle" aria-hidden="true"></i> Question: After sequencing with MinKNOW software, we get many fastq files, do these files need to be combined into one file before uploading or is it possible to upload them all at once?</div>   <p>After sequencing with MinKNOW software, it is a good approach to combine the files from the same run before processing them. You could create a collection per run with all fastq files and then use the collection operation to concatenate all files in a collection.</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-after-sequencing-with-minknow-software-we-get-many-fastq-files-do-these-files-need-to-be-combined-into-one-file-before-uploading-or-is-it-possible-to-upload-them-all-at-once"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-after-sequencing-with-minknow-software-we-get-many-fastq-files-do-these-files-need-to-be-combined-into-one-file-before-uploading-or-is-it-possible-to-upload-them-all-at-once" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: After sequencing with MinKNOW software, we get many fastq files, do these files need to be combined into one file before uploading or is it possible to upload them all at once?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>After sequencing with MinKNOW software, it is a good approach to combine the files from the same run before processing them. You could create a collection per run with all fastq files and then use the collection operation to concatenate all files in a collection.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
 
 <h4 class="faq-area"> Can we also use this workflow on Illumina raw reads? <a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/worflow_and_sequencing_techniques.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-can-we-also-use-this-workflow-on-illumina-raw-reads"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Can we also use this workflow on Illumina raw reads?</div>   <p>Yes, some tools would need to be changed or removed:</p>   <ul>   <li>For the Preprocessing workflow, plotting with Nanoplot shall be removed and keep only FastQC, MultiQC and Fastp.</li>   <li>For the mapping in the SNP based pathogen detection workflow, instead of Minimap2, Bowtie can be used.</li> </ul> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-can-we-also-use-this-workflow-on-illumina-raw-reads"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-we-also-use-this-workflow-on-illumina-raw-reads" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Can we also use this workflow on Illumina raw reads?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Yes, some tools would need to be changed or removed:</p>   <ul>   <li>For the Preprocessing workflow, plotting with Nanoplot shall be removed and keep only FastQC, MultiQC and Fastp.</li>   <li>For the mapping in the SNP based pathogen detection workflow, instead of Minimap2, Bowtie can be used.</li> </ul> </blockquote> <!--END_SNIPPET-->
 
 
 
 
 <h4 class="faq-area"> Can we use snippy pipeline instead for the phylogenetic analysis? <a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/variant_calling_quality.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-can-we-use-snippy-pipeline-instead-for-the-phylogenetic-analysis"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Can we use snippy pipeline instead for the phylogenetic analysis?</div>   <p>On principle yes. We did not try yet. Snippy is available in Galaxy</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-can-we-use-snippy-pipeline-instead-for-the-phylogenetic-analysis"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-we-use-snippy-pipeline-instead-for-the-phylogenetic-analysis" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Can we use snippy pipeline instead for the phylogenetic analysis?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>On principle yes. We did not try yet. Snippy is available in Galaxy</p> </blockquote> <!--END_SNIPPET-->
 
 
 
 
 <h4 class="faq-area"> Do the pipelines work with both isolates and direct from raw meat? or only isolate? <a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/workflow_and_isolations.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-do-the-pipelines-work-with-both-isolates-and-direct-from-raw-meat-or-only-isolate"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Do the pipelines work with both isolates and direct from raw meat? or only isolate?</div>   <p>The workflow can work with both isolates and raw meat. The workflow is designed to remove hosts before detecting any pathogen, so both isolates and raw meat samples are pre-processed equaliy before the analysis starts.</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-do-the-pipelines-work-with-both-isolates-and-direct-from-raw-meat-or-only-isolate"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-do-the-pipelines-work-with-both-isolates-and-direct-from-raw-meat-or-only-isolate" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Do the pipelines work with both isolates and direct from raw meat? or only isolate?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>The workflow can work with both isolates and raw meat. The workflow is designed to remove hosts before detecting any pathogen, so both isolates and raw meat samples are pre-processed equaliy before the analysis starts.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
 
 <h4 class="faq-area"> For preprocessing part with host removal: Where do you find the abbreviations for each host species available (e.g. bos is cow, homo is human..)? <a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/host_removal.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-for-preprocessing-part-with-host-removal-where-do-you-find-the-abbreviations-for-each-host-species-available-e-g-bos-is-cow-homo-is-human"><i class="far fa-question-circle" aria-hidden="true"></i> Question: For preprocessing part with host removal: Where do you find the abbreviations for each host species available (e.g. bos is cow, homo is human..)?</div>   <p>The abbreviation (i.e. the genus) is the first word in the <a href="https://github.com/lskatz/Kalamari/blob/master/src/Kalamari_v3.9.1.tsv">list of possible hosts</a>. The names are the scientific names for species, which would be shown on the taxonomy tree if you would look up the common name (i.e. bovine) on Wikipedia.</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-for-preprocessing-part-with-host-removal-where-do-you-find-the-abbreviations-for-each-host-species-available-e-g-bos-is-cow-homo-is-human"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-for-preprocessing-part-with-host-removal-where-do-you-find-the-abbreviations-for-each-host-species-available-e-g-bos-is-cow-homo-is-human" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: For preprocessing part with host removal: Where do you find the abbreviations for each host species available (e.g. bos is cow, homo is human..)?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>The abbreviation (i.e. the genus) is the first word in the <a href="https://github.com/lskatz/Kalamari/blob/master/src/Kalamari_v3.9.1.tsv">list of possible hosts</a>. The names are the scientific names for species, which would be shown on the taxonomy tree if you would look up the common name (i.e. bovine) on Wikipedia.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
 
 <h4 class="faq-area"> From where can I import other genomes? <a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/importing_genomes.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-from-where-can-i-import-other-genomes"><i class="far fa-question-circle" aria-hidden="true"></i> Question: From where can I import other genomes?</div>   <p>In this tutorial, we used kalamari DB with the <a href="https://github.com/lskatz/Kalamari/blob/master/src/Kalamari_v3.9.1.tsv">full list of possible host sequences</a> that can be removed. Reads are either tagged to map one of those species or are left unassigned. If the task at hand in the real world cannot be covered by those, you can also try another DB for Kraken2 that includes your species (or maybe retain unmapped reads from a read aligner such as Bowtie2, Minimap2…).</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-from-where-can-i-import-other-genomes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-from-where-can-i-import-other-genomes" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: From where can I import other genomes?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>In this tutorial, we used kalamari DB with the <a href="https://github.com/lskatz/Kalamari/blob/master/src/Kalamari_v3.9.1.tsv">full list of possible host sequences</a> that can be removed. Reads are either tagged to map one of those species or are left unassigned. If the task at hand in the real world cannot be covered by those, you can also try another DB for Kraken2 that includes your species (or maybe retain unmapped reads from a read aligner such as Bowtie2, Minimap2…).</p> </blockquote> <!--END_SNIPPET-->
 
 
 
 
 <h4 class="faq-area"> Is there a way to filter on the Kalimari database? <a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/kalamri_database_filtering.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-is-there-a-way-to-filter-on-the-kalimari-database"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Is there a way to filter on the Kalimari database?</div>   <p>To filter the Kalamari database, e.g. leaving out milk bacteria only to detect spoilers or contaminants, but the Kalimera list contains a lot more than that, you can:</p>   <ol>   <li>Look at a publication etc. to find a list of bacteria to remove.</li>   <li>Change the regex <code class="language-plaintext highlighter-rouge">^.*Gallus|Homo|Bos.*$</code>  to <code class="language-plaintext highlighter-rouge">^.*Gallus|Homo|Bos|Bacterium1|Bacterium2...|BacteriumN.*$</code></li> </ol>   <p>Milk pathogens are somewhat known, <em>Salmonella</em>, <em>Escherichia</em>… It might be easier to retain reads only mapping to pathogens instead</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-is-there-a-way-to-filter-on-the-kalimari-database"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-is-there-a-way-to-filter-on-the-kalimari-database" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Is there a way to filter on the Kalimari database?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To filter the Kalamari database, e.g. leaving out milk bacteria only to detect spoilers or contaminants, but the Kalimera list contains a lot more than that, you can:</p>   <ol>   <li>Look at a publication etc. to find a list of bacteria to remove.</li>   <li>Change the regex <code class="language-plaintext highlighter-rouge">^.*Gallus|Homo|Bos.*$</code>  to <code class="language-plaintext highlighter-rouge">^.*Gallus|Homo|Bos|Bacterium1|Bacterium2...|BacteriumN.*$</code></li> </ol>   <p>Milk pathogens are somewhat known, <em>Salmonella</em>, <em>Escherichia</em>… It might be easier to retain reads only mapping to pathogens instead</p> </blockquote> <!--END_SNIPPET-->
 
 
 
 
 <h4 class="faq-area"> Isn't it awkward to find so many humans sequences there, since we filter for them before? <a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/remaining_human_sequences.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-isn-t-it-awkward-to-find-so-many-humans-sequences-there-since-we-filter-for-them-before"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Isn't it awkward to find so many humans sequences there, since we filter for them before?</div>   <p>We see a lot that Kraken tends to assign many reads to human, despite they do not map to human genome. Due to resemblance between organisms and the limited species coverage of Kraken databases sometimes does happen that reads corresponding to higher organisms get mapped to humans. It was a very severe problem for the standard databases, because yeast genes were mis-assigned to human.</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-isn-t-it-awkward-to-find-so-many-humans-sequences-there-since-we-filter-for-them-before"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-isn-t-it-awkward-to-find-so-many-humans-sequences-there-since-we-filter-for-them-before" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Isn't it awkward to find so many humans sequences there, since we filter for them before?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>We see a lot that Kraken tends to assign many reads to human, despite they do not map to human genome. Due to resemblance between organisms and the limited species coverage of Kraken databases sometimes does happen that reads corresponding to higher organisms get mapped to humans. It was a very severe problem for the standard databases, because yeast genes were mis-assigned to human.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
 
 <h4 class="faq-area"> What does `^.*Gallus|Homo|Bos.*$` mean? <a href="/training-material/topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/host_filtering_filter.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-what-does-gallus-homo-bos-mean"><i class="far fa-question-circle" aria-hidden="true"></i> Question: What does `^.*Gallus|Homo|Bos.*$` mean?</div>   <p><code class="language-plaintext highlighter-rouge">^.*Gallus|Homo|Bos.*$</code> is a <a href="https://www.regular-expressions.info/">regular expression</a> that matches a string containing the words Gallus <strong>OR</strong> Homo <strong>OR</strong> Bos.</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-what-does-gallus-homo-bos-mean"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-does-gallus-homo-bos-mean" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: What does `^.*Gallus|Homo|Bos.*$` mean?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p><code class="language-plaintext highlighter-rouge">^.*Gallus|Homo|Bos.*$</code> is a <a href="https://www.regular-expressions.info/">regular expression</a> that matches a string containing the words Gallus <strong>OR</strong> Homo <strong>OR</strong> Bos.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
@@ -448,7 +448,7 @@ add a button, include configuration options:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ec6af4c44521e0fece1e471ec78953d788402f01">ec6af4c</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ba2e9670d26c3501f17fef48080cf523ba258bdf">ba2e967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
@@ -472,7 +472,7 @@ add a button, include configuration options:
 </footer>
 
 
-        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+        <script  async defer src='/training-material/assets/js/bundle.main.91a7a89f.js'></script>
 
 	
 	
