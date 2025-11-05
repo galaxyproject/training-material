@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@fb102cfee9bfa829f71ba7a73da2280f2301ca6a",
+		release: "galaxy-training-network@74c4beb665c1edbeddbb021609123ad015c27b30",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -73,7 +73,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<meta property="og:title" content="Genome Annotation / Identification of AMR genes in an assembled bacterial genome / mrsa AMR gene detection">
         <meta property="og:description" content="Genome annotation is a multi-level process that includes prediction of protein-coding genes, as well as other functional genome units such as structural RNAs, tRNAs, small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion sequences, transposons and other mobile elements. ">
         <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/genome-annotation/tutorials/amr-gene-detection/workflows/main-workflow.png">
-	</head>
+	<!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
         <header>
@@ -267,9 +272,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #b1e600; --color-darker: #9dcd00; --color-dimmed: #a7d900;">genome-annotation</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #afe300; --color-darker: #9bca00; --color-dimmed: #a5d600;">genome-annotation</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #e2d900; --color-darker: #c9c100; --color-dimmed: #d6cd00;">microgalaxy</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #dfd600; --color-darker: #c7bf00; --color-dimmed: #d3ca00;">microgalaxy</div>
 			
 			</br>
 			
@@ -334,13 +339,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Galaxy France</a></li>
+					
 					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Galaxy Main</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Galaxy Europe</a></li>
-					
-					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Galaxy France</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Import to another server (≥23.0+ only!)</a>
@@ -360,21 +365,21 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   style 2 stroke:#2c3143,stroke-width:4px;
   3["staramr"];
   0 -->|output| 3;
-  a81f810e-ac4d-4ef6-812d-f89730a078c4["Output\nstararm_detailed_summary"];
-  3 --> a81f810e-ac4d-4ef6-812d-f89730a078c4;
-  style a81f810e-ac4d-4ef6-812d-f89730a078c4 stroke:#2c3143,stroke-width:4px;
+  e8dd28e8-3666-4376-a5b7-bf884acb8b78["Output\nstararm_detailed_summary"];
+  3 --> e8dd28e8-3666-4376-a5b7-bf884acb8b78;
+  style e8dd28e8-3666-4376-a5b7-bf884acb8b78 stroke:#2c3143,stroke-width:4px;
   4["Bakta"];
   0 -->|output| 4;
-  88ecdef3-ed88-4889-a5cc-25604e40ba3c["Output\nbakta_annotation_summary"];
-  4 --> 88ecdef3-ed88-4889-a5cc-25604e40ba3c;
-  style 88ecdef3-ed88-4889-a5cc-25604e40ba3c stroke:#2c3143,stroke-width:4px;
+  795afd51-2de4-4d8c-b00a-f100d75548d8["Output\nbakta_annotation_summary"];
+  4 --> 795afd51-2de4-4d8c-b00a-f100d75548d8;
+  style 795afd51-2de4-4d8c-b00a-f100d75548d8 stroke:#2c3143,stroke-width:4px;
   5["Bowtie2"];
   1 -->|output| 5;
   2 -->|output| 5;
   0 -->|output| 5;
-  fe312eda-8811-4616-a057-f101711d0b66["Output\nbowtie_mapping_stats"];
-  5 --> fe312eda-8811-4616-a057-f101711d0b66;
-  style fe312eda-8811-4616-a057-f101711d0b66 stroke:#2c3143,stroke-width:4px;
+  fc2d66a8-2ad3-48aa-a70c-3b2eff193024["Output\nbowtie_mapping_stats"];
+  5 --> fc2d66a8-2ad3-48aa-a70c-3b2eff193024;
+  style fc2d66a8-2ad3-48aa-a70c-3b2eff193024 stroke:#2c3143,stroke-width:4px;
   6["Select"];
   3 -->|detailed_summary| 6;
   7["Table to GFF3"];
@@ -383,9 +388,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   4 -->|annotation_gff3| 8;
   7 -->|output| 8;
   5 -->|output| 8;
-  3967bf1d-4424-4183-8e6d-4caf7098fbb3["Output\njbrowse_output"];
-  8 --> 3967bf1d-4424-4183-8e6d-4caf7098fbb3;
-  style 3967bf1d-4424-4183-8e6d-4caf7098fbb3 stroke:#2c3143,stroke-width:4px;</pre>
+  b9811028-625f-4cc8-a36b-e6d18ac548a6["Output\njbrowse_output"];
+  8 --> b9811028-625f-4cc8-a36b-e6d18ac548a6;
+  style b9811028-625f-4cc8-a36b-e6d18ac548a6 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -663,7 +668,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/fb102cfee9bfa829f71ba7a73da2280f2301ca6a">fb102cf</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/74c4beb665c1edbeddbb021609123ad015c27b30">74c4beb</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@fb102cfee9bfa829f71ba7a73da2280f2301ca6a",
+		release: "galaxy-training-network@74c4beb665c1edbeddbb021609123ad015c27b30",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -73,7 +73,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<meta property="og:title" content="Tutorial List">
         <meta property="og:description" content="Collection of tutorials developed and maintained by the worldwide Galaxy community">
         
-	<meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/tags/denovo/index.png"></head>
+	<meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/tags/denovo/index.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
         <header>
@@ -295,15 +300,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffc3e3; --color-darker: #ff9fd5; --color-dimmed: #ffb1dc;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search2.html?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search2.html?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #b0d9ff; --color-darker: #76c4ff; --color-dimmed: #95cfff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
+              <a href="/training-material/search2.html?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #aad6ff; --color-darker: #6ec2ff; --color-dimmed: #8fccff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
               
-              <a href="/training-material/search2.html?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffcb8b; --color-darker: #f8af00; --color-dimmed: #ffbc52;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search2.html?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffc880; --color-darker: #f5ad00; --color-dimmed: #ffb93e;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search2.html?query=denovo" class="label label-default tutorial_tag" style="--color-primary: #ffc5d9; --color-darker: #ffa1c4; --color-dimmed: #ffb3ce;" title="Click to show all tutorials tagged denovo">denovo</a>
+              <a href="/training-material/search2.html?query=denovo" class="label label-default tutorial_tag" style="--color-primary: #ffc1d6; --color-darker: #ff9dc2; --color-dimmed: #ffafcc;" title="Click to show all tutorials tagged denovo">denovo</a>
               
-              <a href="/training-material/search2.html?query=genomics" class="label label-default tutorial_tag" style="--color-primary: #ffc0fe; --color-darker: #ff97fe; --color-dimmed: #ffacfe;" title="Click to show all tutorials tagged genomics">genomics</a>
+              <a href="/training-material/search2.html?query=genomics" class="label label-default tutorial_tag" style="--color-primary: #ffbbfe; --color-darker: #ff93fe; --color-dimmed: #ffa8fe;" title="Click to show all tutorials tagged genomics">genomics</a>
               
             
             </div>
@@ -571,24 +576,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     
 <div class="d-flex flex-wrap">
 
-	<a href="/training-material/hall-of-fame/melbournebioinformatics/" class="funder-badge">
-		
-		<div class="avatar">
-			
-			<img class="funder-avatar" src="/training-material/shared/images/Melbourne-Bioinformatics-logo.png" alt="Logo">
-			
-		</div>
-
-		<div class="info">
-			<div class="name">Melbourne Bioinformatics</div>
-			<div class="description">
-			
-
-            
-			</div>
-		</div>
-	</a>
-
 	<a href="/training-material/hall-of-fame/unimelb/" class="funder-badge">
 		
 		<div class="avatar">
@@ -617,6 +604,24 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 		<div class="info">
 			<div class="name">Australian BioCommons</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/melbournebioinformatics/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/Melbourne-Bioinformatics-logo.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Melbourne Bioinformatics</div>
 			<div class="description">
 			
 
@@ -691,7 +696,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/fb102cfee9bfa829f71ba7a73da2280f2301ca6a">fb102cf</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/74c4beb665c1edbeddbb021609123ad015c27b30">74c4beb</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

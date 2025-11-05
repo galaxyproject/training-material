@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@fb102cfee9bfa829f71ba7a73da2280f2301ca6a",
+		release: "galaxy-training-network@74c4beb665c1edbeddbb021609123ad015c27b30",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -73,7 +73,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<meta property="og:title" content="Single Cell / Clustering 3K PBMCs with Seurat / Clustering 3k PBMCs with Seurat - Workflow">
         <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). ">
         <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/single-cell/tutorials/scrna-seurat-pbmc3k/workflows/Seurat_PBMC_Workflow.png">
-	</head>
+	<!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
         <header>
@@ -265,9 +270,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffc5d5; --color-darker: #ffa2be; --color-dimmed: #ffb4c9;">name:singlecell</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffc1d2; --color-darker: #ff9ebc; --color-dimmed: #ffb0c7;">name:singlecell</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #00ede5; --color-darker: #00d3cc; --color-dimmed: #00dfd8;">name:seurat</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #00eae2; --color-darker: #00d0c9; --color-dimmed: #00ddd6;">name:seurat</div>
 			
 			</br>
 			
@@ -368,9 +373,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   2 -->|output| 4;
   1 -->|output| 4;
   0 -->|output| 4;
-  a59ddc3e-1b9c-4999-8261-92de725bff1e["Output\nInput 3k PBMC"];
-  4 --> a59ddc3e-1b9c-4999-8261-92de725bff1e;
-  style a59ddc3e-1b9c-4999-8261-92de725bff1e stroke:#2c3143,stroke-width:4px;
+  004ad7f6-c0f1-44fc-a114-82f8e696fc84["Output\nInput 3k PBMC"];
+  4 --> 004ad7f6-c0f1-44fc-a114-82f8e696fc84;
+  style 004ad7f6-c0f1-44fc-a114-82f8e696fc84 stroke:#2c3143,stroke-width:4px;
   5["Seurat Data Management"];
   4 -->|rds_out| 5;
   6["Mitochondrial Annotations"];
@@ -395,9 +400,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   14 -->|rds_out| 15;
   16["Preprocessed Data"];
   15 -->|rds_out| 16;
-  3ae5ddfe-e13c-4700-aa71-acb37720457d["Output\nPreprocessed Data"];
-  16 --> 3ae5ddfe-e13c-4700-aa71-acb37720457d;
-  style 3ae5ddfe-e13c-4700-aa71-acb37720457d stroke:#2c3143,stroke-width:4px;
+  c12b3b3f-32e8-4016-aeb4-4fe2e3e96dfd["Output\nPreprocessed Data"];
+  16 --> c12b3b3f-32e8-4016-aeb4-4fe2e3e96dfd;
+  style c12b3b3f-32e8-4016-aeb4-4fe2e3e96dfd stroke:#2c3143,stroke-width:4px;
   17["Seurat Visualize"];
   16 -->|rds_out| 17;
   18["PCA Results"];
@@ -440,9 +445,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   28 -->|rds_out| 36;
   37["Annotated Clusters"];
   28 -->|rds_out| 37;
-  07ea1a91-cbf8-4a4d-bdf0-22424b834cea["Output\nAnnotated Clusters"];
-  37 --> 07ea1a91-cbf8-4a4d-bdf0-22424b834cea;
-  style 07ea1a91-cbf8-4a4d-bdf0-22424b834cea stroke:#2c3143,stroke-width:4px;
+  31dd48d4-65ad-4fa6-9f12-aec0c68faefe["Output\nAnnotated Clusters"];
+  37 --> 31dd48d4-65ad-4fa6-9f12-aec0c68faefe;
+  style 31dd48d4-65ad-4fa6-9f12-aec0c68faefe stroke:#2c3143,stroke-width:4px;
   38["DE Markers Tabular"];
   32 -->|markers_tabular| 38;
   39["Seurat Visualize"];
@@ -452,9 +457,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   37 -->|rds_out| 40;
   41["Input DE Markers"];
   38 -->|tabular| 41;
-  d425aac9-f03d-4b8e-ab68-c7cacebb30d7["Output\nInput DE Markers"];
-  41 --> d425aac9-f03d-4b8e-ab68-c7cacebb30d7;
-  style d425aac9-f03d-4b8e-ab68-c7cacebb30d7 stroke:#2c3143,stroke-width:4px;
+  1819ea1d-55d5-470b-9258-69d8c9aa2aac["Output\nInput DE Markers"];
+  41 --> 1819ea1d-55d5-470b-9258-69d8c9aa2aac;
+  style 1819ea1d-55d5-470b-9258-69d8c9aa2aac stroke:#2c3143,stroke-width:4px;
   42["Seurat Visualize"];
   41 -->|out_file1| 42;
   37 -->|rds_out| 42;</pre>
@@ -773,7 +778,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/fb102cfee9bfa829f71ba7a73da2280f2301ca6a">fb102cf</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/74c4beb665c1edbeddbb021609123ad015c27b30">74c4beb</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
