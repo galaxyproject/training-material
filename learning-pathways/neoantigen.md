@@ -9,8 +9,8 @@ title: Neoantigen discovery using the iPepGen pipeline
 description: |
   This learning path introduces a comprehensive immunopeptidogenomics (iPepGen) workflow for neoantigen discovery using label-free mass spectrometry data. The modules guide you through fusion and variant database generation, peptide identification with FragPipe, peptide validation using PepQuery2, and immunogenicity assessment through HLA binding predictions and IEDB screening.
 
-cover-image: shared/images/proteomics.png
-cover-image-alt: image of a 3D protein folding structure
+cover-image: shared/images/neoantigen_lp.png
+cover-image-alt: image of a neoantigen
 
 editorial_board:
 - subinamehta
