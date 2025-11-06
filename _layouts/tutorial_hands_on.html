@@ -377,7 +377,35 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 <br>{{ locale['feedback-text-learner'] | default: "Did you use this material as a learner or student? Click the form below to leave feedback." }}<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833={{ own_material_id }}"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833={{ own_material_id }}">Feedback Form</a></iframe>
+                <div id="feedback-button">
+                    <img src="{{ site.baseurl }}/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833={{ own_material_id }}"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833={{ own_material_id }}">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
 
                 <h1>{{locale['citing-tutorial'] | default: "Citing this Tutorial"}}</h1>
                 <p>

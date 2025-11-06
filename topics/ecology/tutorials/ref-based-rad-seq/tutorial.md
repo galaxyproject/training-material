@@ -256,7 +256,7 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 
 > <comment-title></comment-title>
 >
-> Information on ref_map.pl and its parameters can be found online: https://creskolab.uoregon.edu/stacks/comp/ref_map.php.
+> Information on ref_map.pl and its parameters can be found online: https://catchenlab.life.illinois.edu/stacks/comp/ref_map.php.
 {: .comment}
 
 > <hands-on-title>Stacks: Reference map</hands-on-title>
