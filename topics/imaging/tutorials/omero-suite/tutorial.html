@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@ca9f4e7f36b297c192e2cfa2531430e8f3d4a35a",
+		release: "galaxy-training-network@444d7e15868a1076cba93e4eabae3069209e22e1",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Overview of the Galaxy OMERO-suite - Upload images and metadata in OMERO using Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-04-08 10:30:29 +0000">
+<meta name="DC.date" content="2025-11-06 15:50:39 +0000">
 <meta name="DC.creator" content="Riccardo Massei"><meta name="description" content="Image analysis using Galaxy">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Imaging / Overview of the Galaxy OMERO-suite - Upload images and metadata in OMERO using Galaxy / Hands-on: Overview of the Galaxy OMERO-suite - Upload images and metadata in OMERO using Galaxy">
@@ -180,7 +180,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-04-08 10:30:29 +0000",
+  "dateModified": "2025-11-06 15:50:39 +0000",
   "datePublished": "2024-12-04 11:35:17 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -292,7 +292,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Overview of the Galaxy OMERO-suite - Upload images and metadata in OMERO using Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/omero-suite/tutorial.html",
-  "version": 3,
+  "version": 4,
   "timeRequired": "PT1H",
   "teaches": "- Understand how the different tools of the Galaxy OMERO-suite works\n- Build a complete pipeline for image and metadata upload into OMERO",
   "keywords": [
@@ -1383,7 +1383,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Dec 4, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 8, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 6, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1403,7 +1403,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.0</a> (0 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
 
     </blockquote>
     </section>
@@ -1489,7 +1489,7 @@ To this end, we have prepared an integrative dataset with images, metadata and r
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li>Import the nuclei imaging data from <a href="https://zenodo.org/records/14196675">Zenodo</a> or 
+    <li>Import the nuclei imaging data from <a href="https://zenodo.org/records/14205500">Zenodo</a> or 
 from the shared data library:
       <ul>
         <li><strong>Important:</strong> Choose the correct data type if prompted.</li>
@@ -1541,7 +1541,7 @@ This is done by using the <strong>OMERO Image Import</strong> and <strong>OMERO 
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ufz/omero_import/omero_import/5.18.0+galaxy3" title="OMERO Image Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>OMERO Image Import</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.18.0+galaxy3)</span> with the following recommended parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Images to import into OMERO</em>: You can select here different files to import into OMERO.
-Select the datasets <code class="language-plaintext highlighter-rouge">image85-H-01-00.tif</code>, <code class="language-plaintext highlighter-rouge">image86-H-02-00.tif</code> and <code class="language-plaintext highlighter-rouge">image87-H-03-00.tif</code></li>
+Select the datasets <code class="language-plaintext highlighter-rouge">image85-H-01-00.tiff</code>, <code class="language-plaintext highlighter-rouge">image86-H-02-00.tiff</code> and <code class="language-plaintext highlighter-rouge">image87-H-03-00.tiff</code></li>
         <li><strong>OMERO host URL</strong>: Input the URL of your OMERO instance.</li>
         <li><strong>OMERO port</strong>: Input the OMERO port (pre-defined value, <em>4064</em>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <strong>Target Dataset Name</strong>: Type “My_OMERO_Test”</li>
@@ -2302,7 +2302,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ca9f4e7f36b297c192e2cfa2531430e8f3d4a35a">ca9f4e7</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/444d7e15868a1076cba93e4eabae3069209e22e1">444d7e1</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
