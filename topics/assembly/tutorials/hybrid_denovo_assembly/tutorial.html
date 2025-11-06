@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@ba2e9670d26c3501f17fef48080cf523ba258bdf",
+		release: "galaxy-training-network@85109532728ce2aff7ef4a533c7160bfedc91eb6",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Hybrid genome assembly - Nanopore and Illumina">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-11-03 09:40:11 +0000">
+<meta name="DC.date" content="2025-11-06 07:46:12 +0000">
 <meta name="DC.creator" content="Grace Hall">
 <meta name="DC.creator" content="Tristan Reynolds"><meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -180,7 +180,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-11-03 09:40:11 +0000",
+  "dateModified": "2025-11-06 07:46:12 +0000",
   "datePublished": "2025-11-03 09:40:11 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -272,7 +272,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Hybrid genome assembly - Nanopore and Illumina",
   "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/hybrid_denovo_assembly/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT2H",
   "teaches": "- Understand how Nanopore and Illumina reads can be used together to produce a high-quality assembly\n- Become familiar with genome assembly and polishing programs\n- Learn how to assess the quality of a genome assembly, regardless of whether a reference genome is present or absent\n- Be able to assemble an unknown, previously undocumented genome to high-quality using Nanopore and Illumina reads!",
   "keywords": [
@@ -1050,7 +1050,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 3, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 6, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1066,7 +1066,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -1109,9 +1109,28 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   <p>In this tutorial we will deal with:</p>
 
-  <ol>
-    <li>TOC</li>
-  </ol>
+<ol id="markdown-toc">
+  <li><a href="#background" id="markdown-toc-background">Background</a>    <ol>
+      <li><a href="#how-do-we-produce-the-genomic-dna-for-a-bacterial-isolate" id="markdown-toc-how-do-we-produce-the-genomic-dna-for-a-bacterial-isolate">How do we produce the genomic DNA for a bacterial isolate?</a></li>
+      <li><a href="#shotgun-sequencing---illumina-sequencing-library" id="markdown-toc-shotgun-sequencing---illumina-sequencing-library">Shotgun sequencing - Illumina Sequencing Library</a></li>
+    </ol>
+  </li>
+  <li><a href="#nanopore-draft-assembly-illumina-polishing" id="markdown-toc-nanopore-draft-assembly-illumina-polishing">Nanopore draft assembly, Illumina polishing</a>    <ol>
+      <li><a href="#upload-data" id="markdown-toc-upload-data">Upload data</a></li>
+      <li><a href="#a-baseline-for-high-quality-assemblies" id="markdown-toc-a-baseline-for-high-quality-assemblies">A baseline for “high-quality” assemblies</a></li>
+      <li><a href="#draft-assembly-with-flye--nanopore-reads" id="markdown-toc-draft-assembly-with-flye--nanopore-reads">Draft assembly with Flye + Nanopore reads</a></li>
+      <li><a href="#assessing-the-flye-draft-assembly-quality" id="markdown-toc-assessing-the-flye-draft-assembly-quality">Assessing the Flye draft assembly quality</a></li>
+      <li><a href="#assembly-polishing-with-pilon" id="markdown-toc-assembly-polishing-with-pilon">Assembly Polishing with Pilon</a></li>
+      <li><a href="#section-summary" id="markdown-toc-section-summary">Section Summary</a></li>
+      <li><a href="#section-questions" id="markdown-toc-section-questions">Section Questions</a></li>
+      <li><a href="#purpose-built-hybrid-assembly-tool---unicycler" id="markdown-toc-purpose-built-hybrid-assembly-tool---unicycler">Purpose-built hybrid assembly tool - Unicycler</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a>    <ol>
+      <li><a href="#additional-reading" id="markdown-toc-additional-reading">Additional reading</a></li>
+    </ol>
+  </li>
+</ol>
 
 </blockquote>
 
@@ -2276,7 +2295,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ba2e9670d26c3501f17fef48080cf523ba258bdf">ba2e967</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/85109532728ce2aff7ef4a533c7160bfedc91eb6">8510953</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
