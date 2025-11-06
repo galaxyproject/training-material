@@ -98,7 +98,9 @@ The [SEANOE](https://www.seanoe.org/data/00907/101899) collection features real 
 >
 > 4. Unhide the models data files.
 >
->    History search `name:detection deleted:false visible:any` then unhide the 2 model files "dataset_seanoe_101899_YOLOv8-weights-for-Bythograeidae-detection" and "dataset_seanoe_101899_YOLOv8-weights-for-Buccinidae-detection".
+>    History search `name:detection deleted:false visible:any` then unhide the 2 model files
+>    - "dataset_seanoe_101899_YOLOv8-weights-for-Bythograeidae-detection" and
+>    - "dataset_seanoe_101899_YOLOv8-weights-for-Buccinidae-detection".
 >
 >
 >    {% snippet faqs/galaxy/datasets_unhidden.md %}
@@ -106,28 +108,32 @@ The [SEANOE](https://www.seanoe.org/data/00907/101899) collection features real 
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 > 5. Select a sample of 100 image files and create a dedicated data collection
+>    - History search `extension:jpg deleted:false visible:any` then
+>    - click on "Select" and "Select All".
+>    - click on "All 3979 selected" and "Build Dataset List",
+>    - select 100 files and give a name of the data collection, "DeepSeaSpy 100 images sample" for example.
 >
->    History search `extension:jpg deleted:false visible:any` then click on "Select" and "Select All". Then, click on "All 3979 selected" and "Build Dataset List", select 100 files and give a name of the data collection, "DeepSeaSpy 100 images sample" for example. Tips: To select only last 100 files, you can use the history search function and specify `extension:jpg deleted:false hid>XXXX visible:any` in the search bar where XXXX is the id of the last image dataset minus 100 (for example `extension:jpg deleted:false hid>3886 visible:any` if you have images until the history dataset ID 3986.
+>    Tips: To select only last 100 files, you can use the history search function and specify `extension:jpg deleted:false hid>XXXX visible:any` in the search bar where XXXX is the id of the last image dataset minus 100 (for example `extension:jpg deleted:false hid>3886 visible:any` if you have images until the history dataset ID 3986.
 >
 > 6. Create class name file "Buccinide", copying and pasting this content in the file uploader:
 >
-> ```
-> Autre poisson
-> Couverture de moules
-> Couverture microbienne
-> Couverture vers tubicole
-> Crabe araignée
-> Crabe bythograeidé
-> Crevette alvinocarididae
-> Escargot buccinidé
-> Ophiure
-> Poisson Cataetyx
-> Poisson chimère
-> Poisson zoarcidé
-> Pycnogonide
-> Ver polynoidé
-> Vers polynoidés
-> ```
+>    ```
+>    Autre poisson
+>    Couverture de moules
+>    Couverture microbienne
+>    Couverture vers tubicole
+>    Crabe araignée
+>    Crabe bythograeidé
+>    Crevette alvinocarididae
+>    Escargot buccinidé
+>    Ophiure
+>    Poisson Cataetyx
+>    Poisson chimère
+>    Poisson zoarcidé
+>    Pycnogonide
+>    Ver polynoidé
+>    Vers polynoidés
+>    ```
 {: .hands_on}
 
 ## Model
@@ -179,7 +185,7 @@ This dataset provides two pretrained YOLOv8 detection models tailored for the ma
 
 After running the tool, Galaxy will give you several output files for each image. Let’s go through what each one means and how to use them:
 
-**Text files (*.txt):**
+### Text files (*.txt)
 
 These are plain text files containing the detection results. Each line in a file shows:
 
@@ -196,7 +202,7 @@ which means:
 
  - The bounding box is centered at (350, 200) and has a width of 100 and height of 120 (in pixels, relative to the image. You can use this file to do further analysis, like counting species or tracking locations over time.
 
-**Overlay images (*.jpg):**
+### Overlay images (*.jpg)
 
 These are your original images with colored boxes drawn around detected species. Each box also includes:
 The class name and the confidence score. For example, you might see a box labeled:
@@ -210,7 +216,8 @@ These images are useful for visually checking whether detections are correct or 
 
 The `?` character you see in the annotation is due to an incompatibility between the class names in the pre-trained model and the character encoding used on the system where the model was originally trained. This typically happens when non-UTF-8 characters are not properly handled during training or export.
 
-**No masks or segmentation files:** Since we used detect mode, this tool will not generate segmentation masks (like .tiff or polygon files). Those are only available in segment mode, which we'll cover next.
+### No masks or segmentation files
+Since we used detect mode, this tool will not generate segmentation masks (like .tiff or polygon files). Those are only available in segment mode, which we'll cover next.
 
 
 ## What to Look For
