@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Uploading Data to Zenodo from Galaxy / Uploading Data to Zenodo from Galaxy / FAIR Data, Workflows, and Research</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@ca9f4e7f36b297c192e2cfa2531430e8f3d4a35a",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/zenodo-in-galaxy/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.91a7a89f.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Uploading Data to Zenodo from Galaxy">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2025-11-06 14:24:17 +0000">
+<meta name="DC.creator" content="Tristan Reynolds">
+<meta name="DC.creator" content="David López"><meta name="description" content="These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="FAIR Data, Workflows, and Research / Uploading Data to Zenodo from Galaxy / Hands-on: Uploading Data to Zenodo from Galaxy">
+        <meta property="og:description" content="These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/fair/tutorials/zenodo-in-galaxy/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Uploading Data to Zenodo from Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2025-11-06 14:24:17 +0000",
+  "datePublished": "2025-11-06 14:24:17 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/unimelb/",
+      "name": "The University of Melbourne",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.unimelb.edu.au"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/melbournebioinformatics/",
+      "name": "Melbourne Bioinformatics",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://mdhs.unimelb.edu.au/melbournebioinformatics"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/AustralianBioCommons/",
+      "name": "Australian BioCommons",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.biocommons.org.au/"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+      "name": "University of Freiburg",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.uni-freiburg.de/"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+      "name": "Ministerium für Wissenschaft, Forschung und Kunst Baden-Württemberg",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://mwk.baden-wuerttemberg.de/de/startseite"
+    }
+  ],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "101057388",
+      "url": "https://cordis.europa.eu/project/id/101057388",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "EuroScienceGateway",
+        "description": "EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.\n",
+        "url": "https://galaxyproject.org/projects/esg/",
+        "logo": "/training-material/assets/images/eurosciencegateway.png"
+      }
+    }
+  ],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "FAIR Data, Workflows, and Research",
+    "description": "These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.",
+    "url": "https://training.galaxyproject.org/training-material/topics/fair/"
+  },
+  "abstract": "Discover a more streamlined approach to research data management with Galaxy's integration with Zenodo.",
+  "learningResourceType": "e-learning",
+  "name": "Uploading Data to Zenodo from Galaxy",
+  "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/zenodo-in-galaxy/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT30M",
+  "teaches": "- Apply the integration of Zenodo in Galaxy\n- Learn how to import records and files into Galaxy\n- Apply the integration to export Galaxy Histories to Zenodo\n- Generate a DOI that can be cited by others.",
+  "keywords": [
+    "FAIR Data, Workflows, and Research",
+    "fair",
+    "zenodo"
+  ],
+  "description": "## Abstract\n\nDiscover a more streamlined approach to research data management with Galaxy's integration with Zenodo.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to connect Zenodo to Galaxy?\n - How to upload data from Galaxy to Zenodo\n\n\n## Learning Objectives\n\n- Apply the integration of Zenodo in Galaxy\n- Learn how to import records and files into Galaxy\n- Apply the integration to export Galaxy Histories to Zenodo\n- Generate a DOI that can be cited by others.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tflowers15/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tflowers15/",
+      "name": "Tristan Reynolds",
+      "image": "https://avatars.githubusercontent.com/tflowers15",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/AustralianBioCommons/",
+          "name": "Australian BioCommons",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.biocommons.org.au/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/unimelb/",
+          "name": "The University of Melbourne",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.unimelb.edu.au"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/melbournebioinformatics/",
+          "name": "Melbourne Bioinformatics",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mdhs.unimelb.edu.au/melbournebioinformatics"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6606-5953",
+      "@id": "https://orcid.org/0000-0002-6606-5953"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/davelopez/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/davelopez/",
+      "name": "David López",
+      "image": "https://avatars.githubusercontent.com/davelopez",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/eurosciencegateway/",
+          "name": "EuroScienceGateway",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/projects/esg/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        }
+      ]
+    }
+  ],
+  "contributor": [],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "FAIR Data, Workflows, and Research",
+      "description": "These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": []
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/fair" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> FAIR Data, Workflows, and Research
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/fair/faqs/" title="Check our FAQs for the FAIR Data, Workflows, and Research topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/fair/tutorials/zenodo-in-galaxy/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/fair/tutorials/zenodo-in-galaxy/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-fair">
+    <h1 data-toc-skip>Uploading Data to Zenodo from Galaxy</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/tflowers15/" class="contributor-badge contributor-tflowers15"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/tflowers15?s=36" alt="Tristan Reynolds avatar" width="36" class="avatar" />
+    Tristan Reynolds</a><a href="/training-material/hall-of-fame/davelopez/" class="contributor-badge contributor-davelopez"><img src="https://avatars.githubusercontent.com/davelopez?s=36" alt="David López avatar" width="36" class="avatar" />
+    David López</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to connect Zenodo to Galaxy?</p>
+</li>
+        
+        <li><p>How to upload data from Galaxy to Zenodo</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Apply the integration of Zenodo in Galaxy</p>
+</li>
+        
+        <li><p>Learn how to import records and files into Galaxy</p>
+</li>
+        
+        <li><p>Apply the integration to export Galaxy Histories to Zenodo</p>
+</li>
+        
+        <li><p>Generate a DOI that can be cited by others.</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/fair/tutorials/zenodo-in-galaxy/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr" title="">
+			UseGalaxy.fr
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 6, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 6, 2025 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Discover a more streamlined approach to research data management with Galaxy’s integration with Zenodo.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+  <p>In this tutorial we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
+      <li><a href="#zenodo" id="markdown-toc-zenodo">Zenodo</a></li>
+    </ol>
+  </li>
+  <li><a href="#getting-started" id="markdown-toc-getting-started">Getting started</a>    <ol>
+      <li><a href="#setting-up-your-pat-personal-access-token" id="markdown-toc-setting-up-your-pat-personal-access-token">Setting up your PAT (Personal Access Token)</a></li>
+      <li><a href="#how-to-connect-zenodo-to-galaxy-250" id="markdown-toc-how-to-connect-zenodo-to-galaxy-250">How to connect Zenodo to Galaxy 25.0</a></li>
+    </ol>
+  </li>
+  <li><a href="#importing-records-and-files-into-galaxy" id="markdown-toc-importing-records-and-files-into-galaxy">Importing records and files into Galaxy</a></li>
+  <li><a href="#exporting-your-galaxy-history" id="markdown-toc-exporting-your-galaxy-history">Exporting your Galaxy history</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+  <li><a href="#references" id="markdown-toc-references">References</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Zenodo can be connected to Galaxy, offering a streamlined experience in managing and analyzing your research data. With this integration, you can export research results directly from Galaxy to Zenodo, and import files from Zenodo into Galaxy for reproducible analysis workflows.</p>
+
+<h2 id="zenodo">Zenodo</h2>
+
+<p><img style="float: right; margin-left: 1rem;" alt="Zenodo Logo" src="../../images/zenodo-gradient-logo.svg" /></p>
+
+<p><a href="https://zenodo.org/">Zenodo</a> is an open repository for all scholarship, enabling researchers from all disciplines to share and preserve their research outputs, regardless of size or format. Free to upload and free to access, Zenodo makes scientific outputs of all kinds citable, shareable and discoverable for the long term.</p>
+
+<p>It’s worth noting that <a href="https://blog.zenodo.org/2023/10/13/2023-10-13-zenodo-rdm/">Zenodo, in October 2023, migrated to InvenioRDM as its underlying technical platform</a>. This move signals a commitment to enhanced features and scalability, further bolstering the integration’s potential benefits for researchers.</p>
+
+<h1 id="getting-started">Getting started</h1>
+
+<h2 id="setting-up-your-pat-personal-access-token">Setting up your PAT (Personal Access Token)</h2>
+
+<p>To be able to upload files and browse protected records, you need to create an account and set up your PAT (Personal Access Token). To create a new token:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-your-personal-access-token"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Create Your Personal Access Token</div>
+
+  <ol>
+    <li>
+      <p>Open <a href="https://zenodo.org">Zenodo</a> and <code class="language-plaintext highlighter-rouge">Log in</code> or create an account.</p>
+    </li>
+    <li>
+      <p>Go to your <code class="language-plaintext highlighter-rouge">user settings</code> in the top right corner and select the <code class="language-plaintext highlighter-rouge">Applications</code> tab.</p>
+    </li>
+    <li>
+      <p>Then, click on <code class="language-plaintext highlighter-rouge">New token</code> and give it a name and the necessary permissions.</p>
+
+      <p><a href="../../images/production-zenodo-pat.png" rel="noopener noreferrer"><img src="../../images/production-zenodo-pat.png" alt="Zenodo PAT. " width="2516" height="1298" loading="lazy" /></a></p>
+    </li>
+  </ol>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+    <p>You will only be able to view and copy the access token when it is first created, so you should copy and securely store the token at this time. If you lose your copy of the access token, then you will need to generate a new one.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="how-to-connect-zenodo-to-galaxy-250">How to connect Zenodo to Galaxy 25.0</h2>
+
+<p>The new <code class="language-plaintext highlighter-rouge">Manage Your Repositories</code> section is available under <code class="language-plaintext highlighter-rouge">User → Preferences</code>. Here’s how it works:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-connecting-to-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Connecting to Galaxy</div>
+
+  <ol>
+    <li>
+      <p>Navigate to <code class="language-plaintext highlighter-rouge">User → Preferences → Manage Your Repositories</code>. If you haven’t set up any integrations yet, you’ll see an empty list.
+<a href="../../images/1-empty-file-sources-list.png" rel="noopener noreferrer"><img src="../../images/1-empty-file-sources-list.png" alt="Manage Your Remote File Sources. " width="1816" height="470" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Click <code class="language-plaintext highlighter-rouge">+ Create</code> to configure a new integration. You’ll see a list of available integrations, including <code class="language-plaintext highlighter-rouge">S3, Dropbox, InvenioRDM, Zenodo</code>, and more (depending on your Galaxy server).
+<a href="../../images/2-create-new.png" rel="noopener noreferrer"><img src="../../images/2-create-new.png" alt="Create New Integration. " width="1994" height="1274" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Select <code class="language-plaintext highlighter-rouge">Zenodo</code> to configure it and enter your <strong>credentials or relevant connection details</strong>. (This will be the access token created in the previous section if using the Zenodo sandbox.)
+<a href="../../images/3-zenodo-template-filled.png" rel="noopener noreferrer"><img src="../../images/3-zenodo-template-filled.png" alt="Configure Zenodo. " width="1884" height="1250" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Once set up, the Zenodo integration, in this case named <code class="language-plaintext highlighter-rouge">My Zenodo</code>, will appear in the list where you can manage or delete it.
+<a href="../../images/4-instance-created-zenodo.png" rel="noopener noreferrer"><img src="../../images/4-instance-created-zenodo.png" alt="Zenodo Integration. " width="1884" height="412" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>The Zenodo integration, along with any other integrations that you have set up, will appear first when browsing import/export locations. You can find them by clicking on the <code class="language-plaintext highlighter-rouge">Upload</code> button in the activity bar.
+<a href="../../images/5-upload-import-zenodo.png" rel="noopener noreferrer"><img src="../../images/5-upload-import-zenodo.png" alt="Browse Remote Files. " width="2590" height="1236" loading="lazy" /></a></p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-do-you-want-to-add-a-different-repository-to-galaxy"><button class="gtn-boxify-button details" type="button" aria-controls="details-do-you-want-to-add-a-different-repository-to-galaxy" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Do you want to add a different repository to Galaxy?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>There are a number of additional repository types that you can connect to Galaxy and use to import and export data.</p>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-how-do-i-manage-my-repositories-on-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-do-i-manage-my-repositories-on-galaxy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: How do I manage my repositories on Galaxy?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Here, we are going to briefly explain how you can Bring-Your-Own-Data to Galaxy or export your dataset, results, or history to 3rd party repositories. In order to add a new repository to your account follow these steps:</p>   <ul>   <li>Click on your Username on top right part of the website and then click on <code class="language-plaintext highlighter-rouge">Preferences</code>.</li>   <li>From the middle panel, click on the <code class="language-plaintext highlighter-rouge">Manage Your Repositories</code> (previously called <code class="language-plaintext highlighter-rouge">Manage your remote file sources</code>).</li>   <li>Click on the <code class="language-plaintext highlighter-rouge">+ Create</code> button on top of the page. Here, you get multiple options to connect various repositories to your account.</li> </ul>   <p>For all of the possible repositories, you should fill the following fields:</p>   <ul>   <li>In the <code class="language-plaintext highlighter-rouge">Name</code> section, give a name to your repository. This name will be used to choose the repository on Galaxy for importing or exporting datasets.</li>   <li>Optionally, you can provide a <code class="language-plaintext highlighter-rouge">Description</code> for this repository. This is a note for yourself.</li> </ul>   <blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoaBYOD"> 	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div> 	 	<p>This is a "Choose Your Own Tutorial" (CYOT) section (also known as "Choose Your Own Analysis" (CYOA)), where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p> 	 	 	<p> 		<p>Select the repository you like to add to your Galaxy account.</p> 	</p> 	 	 		<input id="cyoa-opt1BYOD" type="radio" name="cyoaBYOD" value="Onedata" onclick="cyoaChoice('Onedata', 'gtn-cyoaBYOD')" /> 		<label for="cyoa-opt1BYOD" class="select btn btn-secondary">Onedata</label> 	 	 		<input id="cyoa-opt2BYOD" type="radio" name="cyoaBYOD" value="Amazon-Web-Services-Private-Bucket" onclick="cyoaChoice('Amazon-Web-Services-Private-Bucket', 'gtn-cyoaBYOD')" /> 		<label for="cyoa-opt2BYOD" class="select btn btn-secondary">Amazon Web Services Private Bucket</label> 	 	 		<input id="cyoa-opt3BYOD" type="radio" name="cyoaBYOD" value="Amazon-Web-Services-Public-Bucket" onclick="cyoaChoice('Amazon-Web-Services-Public-Bucket', 'gtn-cyoaBYOD')" /> 		<label for="cyoa-opt3BYOD" class="select btn btn-secondary">Amazon Web Services Public Bucket</label> 	 	 		<input id="cyoa-opt4BYOD" type="radio" name="cyoaBYOD" value="Azure-Blob" onclick="cyoaChoice('Azure-Blob', 'gtn-cyoaBYOD')" /> 		<label for="cyoa-opt4BYOD" class="select btn btn-secondary">Azure Blob</label> 	 	 		<input id="cyoa-opt5BYOD" type="radio" name="cyoaBYOD" value="Dropbox" onclick="cyoaChoice('Dropbox', 'gtn-cyoaBYOD')" /> 		<label for="cyoa-opt5BYOD" class="select btn btn-secondary">Dropbox</label> 	 	 		<input id="cyoa-opt6BYOD" type="radio" name="cyoaBYOD" value="eLabFTW" onclick="cyoaChoice('eLabFTW', 'gtn-cyoaBYOD')" /> 		<label for="cyoa-opt6BYOD" class="select btn btn-secondary">eLabFTW</label> 	 	 		<input id="cyoa-opt7BYOD" type="radio" name="cyoaBYOD" value="An-FTP-Server" onclick="cyoaChoice('An-FTP-Server', 'gtn-cyoaBYOD')" /> 		<label for="cyoa-opt7BYOD" class="select btn btn-secondary">An FTP Server</label> 	 	 		<input id="cyoa-opt8BYOD" type="radio" name="cyoaBYOD" value="Export-to-Google-Drive" onclick="cyoaChoice('Export-to-Google-Drive', 'gtn-cyoaBYOD')" /> 		<label for="cyoa-opt8BYOD" class="select btn btn-secondary">Export to Google Drive</label> 	 	 		<input id="cyoa-opt9BYOD" type="radio" name="cyoaBYOD" value="InvenioRDM" onclick="cyoaChoice('InvenioRDM', 'gtn-cyoaBYOD')" /> 		<label for="cyoa-opt9BYOD" class="select btn btn-secondary">InvenioRDM</label> 	 	 		<input id="cyoa-opt10BYOD" type="radio" name="cyoaBYOD" value="S3-Compatible-Storage-with-Credentials" onclick="cyoaChoice('S3-Compatible-Storage-with-Credentials', 'gtn-cyoaBYOD')" /> 		<label for="cyoa-opt10BYOD" class="select btn btn-secondary">S3 Compatible Storage with Credentials</label> 	 	 		<input id="cyoa-opt11BYOD" type="radio" name="cyoaBYOD" value="WebDAV" onclick="cyoaChoice('WebDAV', 'gtn-cyoaBYOD')" /> 		<label for="cyoa-opt11BYOD" class="select btn btn-secondary">WebDAV</label> 	 	 		<input id="cyoa-opt12BYOD" type="radio" name="cyoaBYOD" value="Zenodo" onclick="cyoaChoice('Zenodo', 'gtn-cyoaBYOD')" /> 		<label for="cyoa-opt12BYOD" class="select btn btn-secondary">Zenodo</label> 	 	 	<script> 		function ready(fn) { 			if (document.readyState != 'loading'){ 				fn(); 			} else { 				document.addEventListener('DOMContentLoaded', fn); 			} 		} 		ready(function() { 			cyoaDefault("Onedata", "gtn-cyoaBYOD"); 		}) 	</script> 	 </blockquote>   <div class="Onedata">   <p>If you have an <a href="https://onedata.org/">Onedata</a> account, you can use this repository to import and/or export your data directly from and to Onedata. The minimal supported Onezone version is 21.02.4. More information on Onedata can be found on <a href="https://onedata.org/#/home">Onedata’s website</a>.</p>   <p>There are extensive tutorials for setting up and utilizing of OneData on Galaxy Training Network (GTN). At the moment, we have the following tutorials for Onedata on GTN:</p>   <ol>     <li><a href="/training-material/topics/galaxy-interface/tutorials/onedata-getting-started/tutorial.html">Getting started with Onedata distributed storage</a></li>     <li><a href="/training-material/topics/galaxy-interface/tutorials/onedata-remote-import/tutorial.html">Importing (uploading) data from Onedata</a></li>     <li><a href="/training-material/topics/galaxy-interface/tutorials/onedata-remote-export/tutorial.html">Exporting to Onedata remote</a></li>     <li><a href="/training-material/topics/dev/tutorials/onedata-dev-instance/tutorial.html">Setting up a dev Onedata instance</a></li>     <li><a href="/training-material/topics/admin/tutorials/onedata-configuration/tutorial.html">Configuring the Onedata connectors (remotes, Object Store, BYOS, BYOD)</a></li>   </ol>   <p>In short, you can connect your Galaxy account to an Onedata repository as follows:</p>   <ul>     <li>In the <code class="language-plaintext highlighter-rouge">Onezone domain</code> field, please fill in the address to your <code class="language-plaintext highlighter-rouge">Onezone</code> domain. It could be something like “datahub.egi.eu”.</li>     <li>Using the <code class="language-plaintext highlighter-rouge">Writable?</code> option you can decide whether to grant access to Galaxy to export (write) to your Onedata or not.</li>     <li>You should provide an <code class="language-plaintext highlighter-rouge">Access Token</code> to Galaxy so it can read (import) and write (export) data to your OneData. Read more on <a href="https://onedata.org/#/home/documentation/21.02/user-guide/tokens.html">access tokens here</a>. You can limit the access to read-only data access, unless you wish to export data to your repository (write permissions are needed then).</li>     <li>In case you want to disable validation of SSL certificates, you can use <code class="language-plaintext highlighter-rouge">Disable tls certificate validation?</code> option. However, we strongly recommend you to not use this option unless you know what your are doing.</li>     <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>   </ul> </div>   <div class="Amazon-Web-Services-Private-Bucket">   <p>To connect an AWS private bucket to your Galaxy account, you need to submit the following information on the form:</p>   <ul>     <li>First, read the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html">Manage access keys for IAM (Identity and Access Management) users</a> documentation of AWS. Also, you should be familiar with Buckets (<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html">Buckets overview</a>).</li>     <li>Please fill in the <code class="language-plaintext highlighter-rouge">Access Key ID</code> (something like <code class="language-plaintext highlighter-rouge">AKIAIOSFODNN7EXAMPLE</code>) and <code class="language-plaintext highlighter-rouge">Secret Access Key</code> (similar to <code class="language-plaintext highlighter-rouge">wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY</code>) in the corresponding fields on the Galaxy interface.</li>     <li>Please enter the URL to your Bucket (for example, <code class="language-plaintext highlighter-rouge">https://amzn-s3-demo-bucket.s3.us-west-2.amazonaws.com</code>) in the <code class="language-plaintext highlighter-rouge">Bucket</code> section.</li>     <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>   </ul> </div>   <div class="Amazon-Web-Services-Public-Bucket">   <p>To connect anonymously to an AWS public bucket using your Galaxy account, you need to enter the Bucket address in the <code class="language-plaintext highlighter-rouge">Bucket</code> section. For more information about AWS Bucket, please read <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html">AWS documentaion</a>. Click on <code class="language-plaintext highlighter-rouge">Create</code>.</p> </div>   <div class="Azure-Blob">   <p>To setup access to your <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction">Azure Blob Storage</a> within the Galaxy, follow the steps:</p>   <ul>     <li>Provide the name of your Azure Blob Storage account in the <code class="language-plaintext highlighter-rouge">Container Name</code> field. More information about container’s name could be found on <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#containers">the Microsoft documentation here</a>.</li>     <li>Fill the <code class="language-plaintext highlighter-rouge">Storage Account Name</code> based on your account. More information is available <a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview">on the Microsoft website</a>.</li>     <li>Using the <code class="language-plaintext highlighter-rouge">Hierarchical?</code> option you can determine whether your storage is hierarchical or not. More information on Data Lake Storage namespaces can be found in the <a href="https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-namespace">Azure Blob Storage documentation</a>.</li>     <li>Please provide the account access key to your Azur Blob Storage account, using <code class="language-plaintext highlighter-rouge">Account Key</code> field. This is the documentation on <a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal">Managing storage account access keys</a>.</li>     <li>If you want to be able to export data to your Azure Blob Storage container, please set <code class="language-plaintext highlighter-rouge">Writable?</code> option to “Yes”.</li>     <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>   </ul> </div>   <div class="Dropbox">   <ul>     <li>We recommend to first login to your Dropbox account.</li>     <li>On the Galaxy website, click on the <code class="language-plaintext highlighter-rouge">Create</code> button of the <code class="language-plaintext highlighter-rouge">Dropbox</code> section. You will be redirected to the Dropbox website for authentication.</li>     <li>You have to login there and grant access for the Galaxy.</li>     <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>   </ul> </div>   <div class="eLabFTW">   <p><a href="https://www.elabftw.net/">eLabFTW</a> is a free and open source electronic lab notebook from <a href="https://www.deltablot.com/">Deltablot</a>. Each lab can either host their own installation or go for Deltablot’s hosted solution. Using Galaxy, you can connect to an eLabFTW instance of your choice.</p>   <ul>     <li>Provide a URL with the protocol (http or https) and the domain name in the <code class="language-plaintext highlighter-rouge">eLabFTW instance endpoint (e.g. https://demo.elabftw.net)</code> field.</li>     <li>If you want to let Galaxy to export data to your eLabFTW, please set the <code class="language-plaintext highlighter-rouge">Allow Galaxy to export data to eLabFTW?</code> to “Yes” to grant required access to Galaxy. <strong>Keep in mind that your API key must have matching permissions.</strong></li>     <li>You should provide an <code class="language-plaintext highlighter-rouge">API Key</code> to your eLabFTW as well. To do so, navigate to the Settings page on your eLabFTW server and go to the API Keys tab to generate a new key. Choose “Read/Write” permissions to enable both importing and exporting data. “Read Only” API keys still work for importing data to Galaxy, but they will cause Galaxy to error out when exporting data to eLabFTW. You will receive a string (similar to <code class="language-plaintext highlighter-rouge">2-50dd721027f56a2e119b3bdbf64f4b8518b3f82b97e7876d56dad74109c8be73d8919b88097d3c9eb8952</code>) and you should enter this in the <code class="language-plaintext highlighter-rouge">API Key</code> field of Galaxy interface.</li>     <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>   </ul> </div>   <div class="An-FTP-Server">   <p>You can setup connections to FTP and FTPS servers to import and export files as follows:</p>   <ul>     <li>Provide the address to your FTP server using the <code class="language-plaintext highlighter-rouge">FTP Host</code> field.</li>     <li>If you want to login with a specific user, provide the username in the <code class="language-plaintext highlighter-rouge">FTP User</code> field. Leave this blank to connect to the server anonymously (if allowed by the server).</li>     <li>If you want to export data to this FTP, you should set the <code class="language-plaintext highlighter-rouge">Writable?</code> option to “Yes”.</li>     <li>Please specify the port that Galaxy should use to connect to your FTP server using the <code class="language-plaintext highlighter-rouge">FTP Port</code> field.</li>     <li>In the <code class="language-plaintext highlighter-rouge">FTP Password</code> field provide the password to connect to the FTP server. Leave this blank to connect to the server anonymously (if allowed by the server).</li>     <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>   </ul> </div>   <div class="Export-to-Google-Drive">   <ul>     <li>We recommend to login to your Google account first.</li>     <li>On the Galaxy website, click on <code class="language-plaintext highlighter-rouge">Select</code> button of <code class="language-plaintext highlighter-rouge">Export to Google Drive</code>. You will be redirected to the Google.</li>     <li>Pick the account that you want to connect to Galaxy for import and export. Grant the required permissions.</li>     <li>You will be back on the Galaxy portal and you can access your Google Drive for import and export (depending on your how you set up your accuont).</li>     <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>   </ul> </div>   <div class="InvenioRDM">   <p><a href="https://inveniosoftware.org/">InvenioRDM</a> is a research data management platform that allows you to store, share, and publish research data. You can connect to an InvenioRDM instance of your choice by following these steps:</p>   <ul>     <li>Please fill the address to your InvenioRDM in the following field: <code class="language-plaintext highlighter-rouge">InvenioRDM instance endpoint</code> (for example, https://inveniordm.web.cern.ch/). This should include the protocol (http or https).</li>     <li>Use the <code class="language-plaintext highlighter-rouge">Allow Galaxy to export data to InvenioRDM?</code> option to give permission to Galaxy to export data to your repository or not.</li>     <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>   </ul> </div>   <div class="S3-Compatible-Storage-with-Credentials">   <ul>     <li>You should fill <code class="language-plaintext highlighter-rouge">Publication Name</code> with a name as the “creator” metadata of the records. This could be a person or an organization. You can later modify this. If left blank, an anonymous user will be used as the creator.</li>     <li>You should also enter your <code class="language-plaintext highlighter-rouge">Personal Access Token</code>. You can get this information in your InvenioRDM instance. Navigate to Account Settings. Then, go to Applications to generate a new token. This will allow Galaxy to display your draft records and upload files to them.</li>     <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>   </ul> </div>   <div class="WebDAV">   <p>Using WebDAV you can connect various services that supports WebDAV protocol such as OwnCloud and NextCloud among others. The configuration of WebDAV is slightly variable from service to service but the general principles apply everywhere.</p>   <ul>     <li>Provide the server address to this repository in the <code class="language-plaintext highlighter-rouge">Server Domain</code> field.</li>     <li>In the <code class="language-plaintext highlighter-rouge">WebDAV server Path</code>, you have to provide the path on this server to WebDAV.</li>     <li>In the <code class="language-plaintext highlighter-rouge">Username</code> field, you should write the username you use to login to this server.</li>     <li>You can grant write access for this repository using the <code class="language-plaintext highlighter-rouge">Writable?</code> (set to <code class="language-plaintext highlighter-rouge">Yes</code>) and therefore make it possible to export datasets, or histories to your connected repository.</li>     <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>   </ul>   <blockquote>     <p>As an example, if I want to connect my nextCloud repository to my Galaxy account, I should login to my nextCloud server and find the information from <code class="language-plaintext highlighter-rouge">File settings</code> (bottom left of the page) under the WebDAV section to fill this template. It could be something like: <code class="language-plaintext highlighter-rouge">https://server_address.com/remote.php/dav/files/username_or_text</code>. Here, the <code class="language-plaintext highlighter-rouge">Server Domain</code> is <code class="language-plaintext highlighter-rouge">https://server_address.com</code> and <code class="language-plaintext highlighter-rouge">WebDAV server Path</code> is <code class="language-plaintext highlighter-rouge">remote.php/dav/files/username_or_text</code>.</p>   </blockquote>   <p>In some cases, you may need to activate some features on your ownCloud or nextCloud to allow this integration. For example, some nextCloud servers require the user to use “App Passwords”. This can be done using the <code class="language-plaintext highlighter-rouge">Settings &gt; Security &gt; Devices &amp; sessions &gt; Create new app password</code>.</p> </div>   <div class="Zenodo">   <p><a href="https://zenodo.org/">Zenodo</a> is an open-access repository for research data, software, publications, and other digital artifacts. It is developed and maintained by <a href="https://home.cern/">CERN</a> and funded by the European Commission as part of the <a href="https://www.openaire.eu/">OpenAIRE</a> project. Zenodo provides a free platform for researchers to share and preserve their work, ensuring long-term access and reproducibility. Zenodo is widely used by researchers, institutions, and organizations to share scientific knowledge and comply with open-access mandates from funding agencies.</p>   <ul>     <li>Using the <code class="language-plaintext highlighter-rouge">Allow Galaxy to export data to Zenodo?</code>, you can decide whether you like to give write access to Galaxy or not. Set it to “Yes” if you want to export data from Galaxy to Zenodo, set it to “No” if you only need to import data from Zenodo to Galaxy.</li>     <li>Provide a name for the “creator” metadata of your records on Zenodo using the <code class="language-plaintext highlighter-rouge">Publication Name</code> field.  You can always change this value later by editing the records in Zenodo. If left blank, an anonymous user will be used as the creator.</li>     <li>You have to provide a <code class="language-plaintext highlighter-rouge">Personal Access Token</code> from your Zenodo account to Galaxy. To do so, you need to log into your account. Then, visit this site: https://zenodo.org/account/settings/applications/. Alternatively, you can click on your username on top right and then click on “Applications”. Here, you need to create a “Personal Access Token”. This will allow Galaxy to display your draft records and upload files to them. If you enabled the option to export data from Galaxy to Zenodo, make sure to enable the <strong>deposit:write</strong> scope when creating the token.</li>     <li>Click on <code class="language-plaintext highlighter-rouge">Create</code>.</li>   </ul> </div>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-what-can-you-do-after-you-connected-a-repository"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-can-you-do-after-you-connected-a-repository" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: What can you do after you connected a repository</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <h4 id="importing-data-to-your-galaxy-account">Importing data to your Galaxy account</h4>   <p>When you connect a repository to your Galaxy account, you can use it to import data to Galaxy. To do so, you can click on the <code class="language-plaintext highlighter-rouge">Upload</code> Icon on the left panel. In the poped up window, you can click on <code class="language-plaintext highlighter-rouge">Choose from repository</code> to select a repository that you have added to your account. Navigate to a file that you want to upload to your Galaxy account, check the box of the file, and click on <code class="language-plaintext highlighter-rouge">Select</code>. You can determine the format of the file, give it a name, and then click on <code class="language-plaintext highlighter-rouge">Start</code> to upload the file to your Galaxy account.</p>   <h4 id="exporting-histories-datasets-and-results-to-connected-repositories">Exporting histories, datasets, and results to connected repositories</h4>   <p>If you have given Galaxy the permission to write to your repository, you can export your histories, datasets and reulsts in the history to that repository.</p>   <h5 id="histories">Histories</h5>   <p>If you want to export a history, you should click on the History Options icon (<i class="fas fa-bars" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-options</span>) on the right panel. Then, you can click on <code class="language-plaintext highlighter-rouge">Export History to File</code>. Next, you can click on <code class="language-plaintext highlighter-rouge">to repository</code> on the middle panel. If you click on the <code class="language-plaintext highlighter-rouge">Click to select directory</code>, there will be a pop up window. Here, you can pick a repository that you have added to your account and when you are in that repository, click on <code class="language-plaintext highlighter-rouge">Select</code>. You can give a <code class="language-plaintext highlighter-rouge">Name</code> to your exported history, so you can find it easier in your connected repository. Finally, click on <code class="language-plaintext highlighter-rouge">Export</code> to write the history to your repository. Similarly, you can use <code class="language-plaintext highlighter-rouge">to RDM repository</code> or <code class="language-plaintext highlighter-rouge">to Zenodo</code> instead of the <code class="language-plaintext highlighter-rouge">to repository</code> option in the middle panel to export your history to connected RDM repositories or Zenodo.</p>   <p>To have more options on exporting your history, you can click on <code class="language-plaintext highlighter-rouge">Show advanced export options</code> on top of the middle panel. This provides further control over the format and datasets that will be included in your exported history.</p>   <h5 id="datasets">Datasets</h5>   <p>If you are interested to export a single dataset or results to a connected repository, you can use a tool called <span class="tool" data-tool="export_remote" title="Export datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Export datasets</strong></span>.</p>   <ol>     <li>Select the desired option from <code class="language-plaintext highlighter-rouge">What would you like to export?</code>.</li>     <li>Using the <code class="language-plaintext highlighter-rouge">Directory URI</code> option, you can <code class="language-plaintext highlighter-rouge">Select</code> a connected repository. You can also give it a directory name here.</li>     <li>We recommend to export the metadata with your datasets and results using the <code class="language-plaintext highlighter-rouge">Include metadata files in export?</code>.</li>   </ol> </blockquote> </blockquote>
+  <p><!--END_SNIPPET--></p>
+
+</blockquote>
+
+<h1 id="importing-records-and-files-into-galaxy">Importing records and files into Galaxy</h1>
+
+<p>Once you have connect Zenodo to Galaxy, you will be able to import records and files stored in Zenodo into Galaxy.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-importing-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Importing Files</div>
+
+  <ol>
+    <li>
+      <p>Open the Upload tool, and select <code class="language-plaintext highlighter-rouge">Choose remote files</code>
+<a href="../../images/upload-tool.png" rel="noopener noreferrer"><img src="../../images/upload-tool.png" alt="Upload Tool. " width="913" height="559" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Search for the Zenodo instance. Remember that this will only appear if the Zenodo plugin is configured to connect to Zenodo in your Galaxy instance.
+<a href="../../images/choose-remote-files-zenodo.png" rel="noopener noreferrer"><img src="../../images/choose-remote-files-zenodo.png" alt="Choose Remote Files. " width="1382" height="1040" loading="lazy" /></a></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Once you have selected Zenodo, you can browse public records and import them into your Galaxy history. You can choose to import the full record or individual files in the same way you would import files from any other remote source.</p>
+
+<h1 id="exporting-your-galaxy-history">Exporting your Galaxy history</h1>
+
+<p>You can export your history directly to Zenodo. A benefit of publishing your history on Zenodo is that Zenodo will generate a DOI for your history. You can then include this DOI in your publication and it can be used by other researchers to cite your work.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-exporting-a-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Exporting a History</div>
+
+  <ol>
+    <li>
+      <p>From the history menu <i class="fas fa-bars" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-options</span>
+, you can select <code class="language-plaintext highlighter-rouge">Export History to File</code></p>
+    </li>
+    <li>
+      <p>Then choose <code class="language-plaintext highlighter-rouge">to My Zenodo</code>.</p>
+    </li>
+    <li>
+      <p>You can decide whether to create a new record or upload the history to an existing draft record.
+<a href="../../images/export-history-zenodo.png" rel="noopener noreferrer"><img src="../../images/export-history-zenodo.png" alt="Export History to Zenodo. " width="2590" height="1494" loading="lazy" /></a></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You can always edit the record metadata directly from the Zenodo web interface. Once you are satisfied with the record, you can publish it, generating a DOI that others can use to cite your research.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we have connected Zenodo to a Galaxy instance. We have also imported files and records from Zenodo into Galaxy and exported a Galaxy History to Zenodo.</p>
+
+<p>To see how to connect any InvenioRDM-compatible respository to Galaxy, see the tutorial, <a href="/training-material/topics/fair/tutorials/inveniordm-integration/tutorial.html">Integrating InvenioRDM-compatible Repositories with Galaxy</a>.</p>
+
+<h1 id="references">References</h1>
+
+<ol>
+  <li><a href="https://galaxyproject.org/news/2024-05-03-inveniordm-integration/">InvenioRDM and Zenodo integration in Galaxy</a></li>
+  <li><a href="https://galaxyproject.org/news/2025-03-10-inveniordm-integration-update/">Updates to your InvenioRDM and Zenodo integration in Galaxy
+</a></li>
+</ol>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Zenodo can be connected to Galaxy</p>
+</li>
+                        
+                        <li><p>Records and files can be imported into Galaxy</p>
+</li>
+                        
+                        <li><p>Galaxy Histories are directly exportable to Zenodo</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/fair/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=fair/zenodo-in-galaxy"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=fair/zenodo-in-galaxy">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Tristan Reynolds, David López,  <b>Uploading Data to Zenodo from Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/zenodo-in-galaxy/tutorial.html">https://training.galaxyproject.org/training-material/topics/fair/tutorials/zenodo-in-galaxy/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{fair-zenodo-in-galaxy,
+author = "Tristan Reynolds and David López",
+	title = "Uploading Data to Zenodo from Galaxy (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/fair/tutorials/zenodo-in-galaxy/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/unimelb/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/unimelb_Logo_RGB.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">The University of Melbourne</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/melbournebioinformatics/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/Melbourne-Bioinformatics-logo.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Melbourne Bioinformatics</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/AustralianBioCommons/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/Australian-Biocommons-Favicon-RGB.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Australian BioCommons</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/uni-freiburg/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">UFR</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/eurosciencegateway/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/assets/images/eurosciencegateway.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">EuroScienceGateway</div>
+			<div class="description">
+			EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/mwk/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/assets/images/MWK.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">MWK</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/zenodo-in-galaxy/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/fair/tutorials/zenodo-in-galaxy/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/fair/tutorials/zenodo-in-galaxy/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ca9f4e7f36b297c192e2cfa2531430e8f3d4a35a">ca9f4e7</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.91a7a89f.js'></script>
+
+	
+	
+
+    </body>
+</html>
