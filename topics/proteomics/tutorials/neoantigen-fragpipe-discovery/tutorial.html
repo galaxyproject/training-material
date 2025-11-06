@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@85c9a928d59c63219e74fd3a37e2a0da256e3eb2",
+		release: "galaxy-training-network@17ae88e387b85546fcb8b6bac4558732075652a7",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Neoantigen 2: Database merge and FragPipe discovery">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-07-02 08:11:27 +0000">
+<meta name="DC.date" content="2025-11-06 18:45:37 +0000">
 <meta name="DC.creator" content="Subina Mehta">
 <meta name="DC.creator" content="Katherine Do">
 <meta name="DC.creator" content="James Johnson"><meta name="description" content="Training material for proteomics workflows in Galaxy">
@@ -182,7 +182,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-07-02 08:11:27 +0000",
+  "dateModified": "2025-11-06 18:45:37 +0000",
   "datePublished": "2025-01-14 14:58:39 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -238,7 +238,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Neoantigen 2: Database merge and FragPipe discovery",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/neoantigen-fragpipe-discovery/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT3H",
   "teaches": "- Understand the process of merging neoantigen databases with human protein sequences.\n- Learn to use FragPipe for proteomics data analysis.\n- Gain hands-on experience with bioinformatics tools such as FASTA file processing, database validation, and peptide identification.",
   "keywords": [
@@ -1094,12 +1094,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		</a>
 	</li>
     
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.org" title="">
-			UseGalaxy.org (Main) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
-		</a>
-	</li>
-    
     
     
     
@@ -1123,7 +1117,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 14, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 2, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 6, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1141,7 +1135,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -1176,11 +1170,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </li>
   <li><a href="#b-discovery-search" id="markdown-toc-b-discovery-search">B: Discovery search</a>    <ol>
       <li><a href="#running-fragpipe-for-neoantigen-discovery" id="markdown-toc-running-fragpipe-for-neoantigen-discovery">Running FragPipe for Neoantigen Discovery</a></li>
+      <li><a href="#creating-a-fragpipe-manifest-experimental-design-file" id="markdown-toc-creating-a-fragpipe-manifest-experimental-design-file">Creating a FragPipe Manifest (Experimental Design) File</a></li>
       <li><a href="#collapsing-datasets-and-selecting-relevant-data" id="markdown-toc-collapsing-datasets-and-selecting-relevant-data">Collapsing Datasets and Selecting Relevant Data</a></li>
     </ol>
   </li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
   <li><a href="#rerunning-on-your-own-data" id="markdown-toc-rerunning-on-your-own-data">Rerunning on your own data</a></li>
+  <li><a href="#are-you-feeling-adventurous-" id="markdown-toc-are-you-feeling-adventurous-">Are you feeling adventurous? ✨</a>    <ol>
+      <li><a href="#one-click-neoantigen-workflow" id="markdown-toc-one-click-neoantigen-workflow">One-Click Neoantigen Workflow</a></li>
+    </ol>
+  </li>
   <li><a href="#disclaimer" id="markdown-toc-disclaimer">Disclaimer</a></li>
 </ol>
 
@@ -1338,11 +1337,70 @@ The FragPipe tool is executed with the MS data and a validated FASTA sequence da
 
 <p><a href="/training-material/topics/proteomics/images/neoantigen/FragPipe_Discovery_3.PNG" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/FragPipe_Discovery_3.PNG" alt="Fragpipe-discovery. " width="4000" height="1917" loading="lazy" /></a></p>
 
+<h2 id="creating-a-fragpipe-manifest-experimental-design-file">Creating a FragPipe Manifest (Experimental Design) File</h2>
+
+<p>The <strong>FragPipe Manifest Generator</strong> creates the experimental design file required by FragPipe, mapping each raw LC–MS/MS file to its experimental factors (e.g., experiment and bioreplicate). This manifest ensures consistent labeling of runs for downstream identification and quantification. In this workflow, we generate a simple design with a single experiment and a single bioreplicate, and we explicitly set the scan data type to <strong>DDA</strong> to match acquisition.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-fragpipe-manifest-generator"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  FragPipe Manifest Generator</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/fragpipe/fragpipe_manifest_generator/23.0+galaxy0" title="FragPipe Manifest Generator tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FragPipe Manifest Generator</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 23.0+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “Proteomics spectrum files” (mzML, mzXML, or Thermo .raw): select the MS file for this run.</li>
+        <li>In <em>“Assign experiments”</em>: <code class="language-plaintext highlighter-rouge">Enter column values</code>
+          <ul>
+            <li>In <em>“Comma-separated experiment numbers”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Assign bioreplicates”</em>: <code class="language-plaintext highlighter-rouge">Enter column values</code>
+          <ul>
+            <li>In <em>“Comma-separated bioreplicate numbers”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Assign scan_data_types”</em>: <code class="language-plaintext highlighter-rouge">Assign to all scan files</code>
+          <ul>
+            <li>In <em>“Data Type”</em>: <code class="language-plaintext highlighter-rouge">DDA</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What does the FragPipe manifest control in downstream analysis?</li>
+    <li>How should experiments vs. bioreplicates be assigned for multi-condition studies?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The manifest defines how runs are grouped and compared (e.g., by experiment/condition and bioreplicate), ensuring FragPipe/Philosopher interpret files consistently for identification and quantification.</li>
+      <li>Use distinct <strong>experiment numbers</strong> for biological conditions (e.g., 1,1,2,2 for Control vs. Treatment) and distinct <strong>bioreplicate numbers</strong> to label independent replicates within each condition (e.g., 1,2 within each experiment). This preserves replicate structure for proper statistics and reporting.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-mixed-data-types"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-mixed-data-types" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Mixed Data Types</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>If your acquisition includes mixed data types (e.g., DIA or IMS-DDA), set the Data Type per file accordingly. Ensure raw file names are stable and meaningful—renaming files after manifest creation can break downstream steps.</p>
+
+</blockquote>
+
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-fragpipe"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Fragpipe</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/fragpipe/fragpipe/20.0+galaxy2" title="FragPipe -  Academic Research and Education User License (Non-Commercial) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FragPipe -  Academic Research and Education User License (Non-Commercial)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 20.0+galaxy2)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/fragpipe/fragpipe/23.0+galaxy0" title="FragPipe -  Academic Research and Education User License (Non-Commercial) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FragPipe -  Academic Research and Education User License (Non-Commercial)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 23.0+galaxy0)</span> with the following parameters:
       <ul>
         <li><em>“I understand that these tools, including MSFragger, IonQuant, Bruker, and Thermo Raw File Reader, are available freely for academic research and educational purposes only, and agree to the following terms.”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Proteomics Spectrum files”</em>: <code class="language-plaintext highlighter-rouge">STS_26T_2_Eclipse_02102024.raw</code> (Input dataset)</li>
@@ -1384,7 +1442,7 @@ The FragPipe tool is executed with the MS data and a validated FASTA sequence da
               <ul>
                 <li><em>“Run Validation”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
                   <ul>
-                    <li><em>“PSM Validation”</em>: <code class="language-plaintext highlighter-rouge">Run Percolator</code></li>
+                    <li><em>“PSM Validation”</em>: <code class="language-plaintext highlighter-rouge">Run MSBooster and Percolator</code></li>
                     <li><em>“Run Protein Prophet”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                     <li><em>“Generate Philosopher Reports”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                   </ul>
@@ -1415,7 +1473,7 @@ The FragPipe tool is executed with the MS data and a validated FASTA sequence da
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Why do we need to use a validated FASTA database with FragPipe?</li>
@@ -1423,7 +1481,7 @@ The FragPipe tool is executed with the MS data and a validated FASTA sequence da
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>A validated FASTA database ensures that the protein sequences used in the analysis are correctly formatted and free from errors. This improves the accuracy of peptide identification and ensures reliable downstream analysis for neoantigen discovery.</li>
@@ -1545,6 +1603,12 @@ The FragPipe tool is executed with the MS data and a validated FASTA sequence da
   </ol>
 
 </blockquote>
+
+<h1 id="are-you-feeling-adventurous-">Are you feeling adventurous? ✨</h1>
+
+<h2 id="one-click-neoantigen-workflow">One-Click Neoantigen Workflow</h2>
+
+<p>This new <a href="https://usegalaxy.eu/u/galaxyp/w/ipepgen-one-click-workflow">One-Click Neoantigen Workflow</a> brings together all key modules of the neoantigen discovery process into a single, streamlined analysis within Galaxy. Instead of launching each tutorial separately, users can now execute the entire end-to-end pipeline—from database creation to HLA binding prediction—with just one click —without ever leaving Galaxy.</p>
 
 <h1 id="disclaimer">Disclaimer</h1>
 
@@ -1985,7 +2049,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/85c9a928d59c63219e74fd3a37e2a0da256e3eb2">85c9a92</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/17ae88e387b85546fcb8b6bac4558732075652a7">17ae88e</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
