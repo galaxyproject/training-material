@@ -14,6 +14,12 @@ objectives:
 - Compare results between detection and segmentation modes
 - Understand the requirements and output types of each model
 
+key_points:
+- Galaxy simplifies running YOLO models in a user-friendly, reproducible way
+- Choose your **prediction mode** according to your model and task
+- Always check that the **model type matches the mode** (`detect` vs `segment`)
+- Use overlays and annotation files for further analysis or visualization
+
 time_estimation: "45m"
 
 tags:
@@ -48,22 +54,30 @@ In this tutorial, you will use Galaxy to run two types of YOLOv8 models:
 
 We'll compare both modes and discuss what kind of output they generate and why it matters in bioimage analysis.
 
----
+> <agenda-title></agenda-title>
+>
+> In this tutotial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
-# Part 1: Detection of marine species
 
-## 🔗 Dataset
+# Detection of marine species
 
-👉 We will use selected images from the SEANOE dataset {% cite lebeaud2024deepsea %}.
+## Input Dataset
 
-The [SEANOE](https://www.seanoe.org/data/00907/101899) collection features real underwater images captured by deep‑sea observatories as part of a citizen science initiative called Deep Sea Spy. These non‑destructive imaging stations continuously monitor marine ecosystems and provide snapshots of various fauna. In this dataset, multiple annotators—including trained scientists and enthusiastic citizen scientists—have manually labeled images with polygons, lines, or points highlighting marine organisms. These annotations were then cleaned and converted into bounding boxes to create a training-ready dataset for object detection with YOLOv8. Though the exact species vary, images often include deep-sea fish, species, making this dataset well-suited for practicing detection tasks.
+We will use selected images from the SEANOE dataset {% cite lebeaud2024deepsea %}.
+
+The [SEANOE](https://www.seanoe.org/data/00907/101899) collection features real underwater images captured by deep‑sea observatories as part of a citizen science initiative called Deep Sea Spy. These non‑destructive imaging stations continuously monitor marine ecosystems and provide snapshots of various fauna. In this dataset, multiple annotators, including trained scientists and enthusiastic citizen scientists, have manually labeled images with polygons, lines, or points highlighting marine organisms. These annotations were then cleaned and converted into bounding boxes to create a training-ready dataset for object detection with YOLOv8. Though the exact species vary, images often include deep-sea fish, species, making this dataset well-suited for practicing detection tasks.
 
 <img src="../../images/yolo/CAM-TEMPO.jpg" style="width:40%; display:inline-block;" alt="sample buccinid data">
 <img src="../../images/yolo/MOMAR.jpg" style="width:40%; display:inline-block;" alt="sample bythongraede data">
 <img src="../../images/yolo/CAM-TEMPO2.jpg" style="width:40%; display:inline-block;" alt="sample buccinid2 data">
 <img src="../../images/yolo/CAM-TEMPO3.jpg" style="width:40%; display:inline-block;" alt="sample buccinid3 data">
 
-## Get data
+### Get data
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
@@ -114,16 +128,16 @@ The [SEANOE](https://www.seanoe.org/data/00907/101899) collection features real 
 > Poisson zoarcidé
 > Pycnogonide
 > Ver polynoidé
-> Vers polynoidés 
+> Vers polynoidés
 > ```
 {: .hands_on}
 
-## 📦 Model
+## Model
 
 This dataset provides two pretrained YOLOv8 detection models tailored for the marine species found in [SEANOE](https://www.seanoe.org/data/00907/101899). One model detects Buccinidae (a family of sea snails), and the other targets Bythograeidae (a family of deep-sea crabs). These models were trained on cleaned annotation sets that contain thousands of examples—for instance, the Buccinidae set includes over 14,900 annotations in total. For this tutorial, you’ll find two model files—`*.pt` files—each accompanied by the appropriate class_names.txt file. You can upload either or both to Galaxy to run detection experiments on your underwater images.
 
-## ⚙️ Run YOLOv8 in detect mode
-  
+##  Run YOLOv8 in detect mode
+
 
 > <hands-on-title> Detect Buccinid snails on images </hands-on-title>
 >
@@ -142,7 +156,7 @@ This dataset provides two pretrained YOLOv8 detection models tailored for the ma
 >    > The model is trained only for detection, not segmentation.
 >    >
 >    {: .warning}
-> 
+>
 > > <tip-title>IoU threshold parameter</tip-title>
 > >
 > >   Try changing the confidence and IoU thresholds to see how detection results vary. It helps you find a good balance between sensitivity and accuracy.
@@ -158,16 +172,16 @@ This dataset provides two pretrained YOLOv8 detection models tailored for the ma
 > >    - *"Confidence"*: Set to 0.25 (25%). This controls how confident the model must be to report a detection. If you increase this value (e.g., 0.5), you’ll get fewer detections, but they’ll be more confident. If you lower it (e.g., 0.1), you may get more results, but possibly more false positives.
 > >    - *"IoU"*: Set to 0.45. This is used for Non-Maximum Suppression (NMS), which removes overlapping detections. A higher IoU value (e.g., 0.7) keeps more overlapping boxes. A lower IoU (e.g., 0.3) removes more overlaps, which may help clean up crowded images.
 > >    - *"Max detections"*: Set a reasonable cap like 300. This limits the number of objects detected per image.
-> > 
+> >
 > {: .comment}
-> 
+>
 {: .hands_on}
 
-## 🧾 Explore the Outputs
+##  Explore the Outputs
 
 After running the tool, Galaxy will give you several output files for each image. Let’s go through what each one means and how to use them:
 
-📄 **Text files (*.txt):**
+**Text files (*.txt):**
 
 These are plain text files containing the detection results. Each line in a file shows:
 
@@ -184,7 +198,7 @@ which means:
 
  - The bounding box is centered at (350, 200) and has a width of 100 and height of 120 (in pixels, relative to the image. You can use this file to do further analysis, like counting species or tracking locations over time.
 
-🖼️ **Overlay images (*.jpg):**
+**Overlay images (*.jpg):**
 
 These are your original images with colored boxes drawn around detected species. Each box also includes:
 The class name and the confidence score. For example, you might see a box labeled:
@@ -196,26 +210,24 @@ The class name and the confidence score. For example, you might see a box labele
 
 These images are useful for visually checking whether detections are correct or if something was missed.
 
-⚠️ The `?` character you see in the annotation is due to an incompatibility between the class names in the pre-trained model and the character encoding used on the system where the model was originally trained. This typically happens when non-UTF-8 characters are not properly handled during training or export.
+The `?` character you see in the annotation is due to an incompatibility between the class names in the pre-trained model and the character encoding used on the system where the model was originally trained. This typically happens when non-UTF-8 characters are not properly handled during training or export.
 
-⚠️ **No masks or segmentation files:** Since we used detect mode, this tool will not generate segmentation masks (like .tiff or polygon files). Those are only available in segment mode, which we'll cover next.
+**No masks or segmentation files:** Since we used detect mode, this tool will not generate segmentation masks (like .tiff or polygon files). Those are only available in segment mode, which we'll cover next.
 
 
-
-## 💬 What to Look For
+## What to Look For
 
 - Are species detected correctly?
 - Any false positives or missed detections?
 - What confidence levels do you observe?
 - How many objects per image?
 
----
 
-# 🧩 Part 2: Segmentation with an Ultralytics example
+# Segmentation with an Ultralytics example
 
 Since the marine models only support detection, we’ll now demonstrate segmentation using a pretrained YOLOv8 model from Ultralytics.
 
-## 📦 Model & Input Image
+## Model & Input Image
 
 The YOLOv8n-seg model is a lightweight instance segmentation model trained on the COCO dataset (Common Objects in Context), which contains 80 everyday object classes such as person, bus, bicycle, car, dog, and more. These categories cover common scenes, making the model suitable for general-purpose detection and segmentation tasks. It’s ideal for quick testing, tutorials, or deployment on resource-limited systems.
 
@@ -229,29 +241,27 @@ car
 ```
 
 
-## 🧾 Explore the Segmentation Outputs
+## Explore the Segmentation Outputs
+
 YOLOv8 in segment mode produces a more detailed output than detection:
 
-🖼️ **Segmented overlay (*.jpg):**
+**Segmented overlay (*.jpg):**
 This image shows both bounding boxes and colored masks indicating the exact shape of each object.
 
 <img src="../../images/yolo/bus.jpg" style="width:40%;" alt="Input image of a bus used in segmentation example">
 
 
-🗺️ **Mask file (*_mask.tiff):**
+**Mask file (*_mask.tiff):**
 A grayscale image where each object appears as a white/black blob against a black background. Ideal for pixel-level analysis or downstream processing.
 
 
 <img src="../../images/yolo/bus_mask.png" style="width:40%;" alt="YOLOv8 predicted mask on the bus image">
 
-📄 **Annotation file (*.txt):**
+**Annotation file (*.txt):**
 This output contains class IDs, bounding box coordinates, confidence scores, and detailed segmentation polygons—providing both the approximate location and the precise shape of each object in plain text format.
 
 
-
----
-
-## 🔍 Compare Detection vs Segmentation
+## Compare Detection vs Segmentation
 
 | Feature           | Detection                | Segmentation                     |
 |------------------|--------------------------|----------------------------------|
@@ -262,25 +272,12 @@ This output contains class IDs, bounding box coordinates, confidence scores, and
 | Performance      | Faster                   | Slightly slower, more detailed   |
 
 
----
-
-## 💡 Final Notes
-
-Galaxy simplifies running YOLO models in a user-friendly, reproducible way.
-
-- Choose your **prediction mode** according to your model and task
-- Always check that the **model type matches the mode** (`detect` vs `segment`)
-- Use overlays and annotation files for further analysis or visualization
-
----
-
-## ✅ Next Steps
+# Next Steps
 
 Want to go further?
 
 - Train your own model on SEANOE annotations using [YOLO training tool in Galaxy](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/yolo_training/yolo_training/8.3.0+galaxy2)
-- Get more information from [YOLOv8 training notebook](https://docs.ultralytics.com) 
+- Get more information from [YOLOv8 training notebook](https://docs.ultralytics.com)
 
----
 
 
