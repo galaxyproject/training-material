@@ -28,8 +28,6 @@ tags:
 - deep-learning
 - ecology
 
-bibtex: tutorial.bib
-
 priority: 5
 
 contributions:
