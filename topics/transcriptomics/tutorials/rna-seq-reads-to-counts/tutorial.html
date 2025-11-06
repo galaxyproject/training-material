@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@ea034ac1ba4531bde49eb835adc5d903539e6967",
+		release: "galaxy-training-network@376a228b75c9d3077fa73c32bf43c1317bbfd07d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1985,21 +1985,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     </a>
     <ul class="dropdown-menu">
         
-	<li class="dropdown-header">
-		<b>Known Working</b>
-	</li>
-	
-	
-
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
-			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
-		</a>
-	</li>
-    
-    
-    
     
 	<li class="dropdown-header">
 		<b>Possibly Working</b>
@@ -2150,7 +2135,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="import-data-from-urls">Import data from URLs</h2>
 
-<p>Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential expression analysis can proceed, these reads must be aligned to the reference genome and counted into annotated genes. Mapping reads to the genome is a very important task, and many different aligners are available, such as HISAT2 (<span class="citation"><a href="#kim2015hisat">Kim <i>et al.</i> 2015</a></span>), STAR (<span class="citation"><a href="#dobin2013star">Dobin <i>et al.</i> 2013</a></span>) and Subread (<span class="citation"><a href="#Liao2013">Liao <i>et al.</i> 2013</a></span>). Most mapping tasks require larger computers than an average laptop, so usually read mapping is done on a server in a linux-like environment, requiring some programming knowledge. However, Galaxy enables you to do this mapping without needing to know programming and if you don’t have access to a server you can try to use one of the publically available Galaxies e.g. <a href="https://usegalaxy.eu">UseGalaxy.eu</a>, <a href="https://usegalaxy.fr">UseGalaxy.fr</a>, <a href="https://usegalaxy.org.au">UseGalaxy.org.au</a>, <a href="https://usegalaxy.org">UseGalaxy.org</a>.</p>
+<p>Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential expression analysis can proceed, these reads must be aligned to the reference genome and counted into annotated genes. Mapping reads to the genome is a very important task, and many different aligners are available, such as HISAT2 (<span class="citation"><a href="#kim2015hisat">Kim <i>et al.</i> 2015</a></span>), STAR (<span class="citation"><a href="#dobin2013star">Dobin <i>et al.</i> 2013</a></span>) and Subread (<span class="citation"><a href="#Liao2013">Liao <i>et al.</i> 2013</a></span>). Most mapping tasks require larger computers than an average laptop, so usually read mapping is done on a server in a linux-like environment, requiring some programming knowledge. However, Galaxy enables you to do this mapping without needing to know programming and if you don’t have access to a server you can try to use one of the publically available Galaxies e.g. <a href="https://usegalaxy.org.au">UseGalaxy.org.au</a>, <a href="https://usegalaxy.eu">UseGalaxy.eu</a>, <a href="https://usegalaxy.fr">UseGalaxy.fr</a>, <a href="https://usegalaxy.org">UseGalaxy.org</a>.</p>
 
 <p>The raw reads used in this tutorial were obtained from SRA from the link in GEO for the the mouse mammary gland dataset (e.g <code class="language-plaintext highlighter-rouge">ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534</code>). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in <a href="https://zenodo.org/record/4249555">Zenodo</a> and the links to the FASTQ files are provided below.</p>
 
@@ -2884,7 +2869,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download
 </code></pre></div>      </div>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
     <li>Run <strong>Workflow QC Report</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
@@ -3888,7 +3873,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ea034ac1ba4531bde49eb835adc5d903539e6967">ea034ac</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/376a228b75c9d3077fa73c32bf43c1317bbfd07d">376a228</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

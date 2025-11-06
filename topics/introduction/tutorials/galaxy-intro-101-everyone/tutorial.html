@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@ea034ac1ba4531bde49eb835adc5d903539e6967",
+		release: "galaxy-training-network@376a228b75c9d3077fa73c32bf43c1317bbfd07d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Basics for everyone">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-12-02 16:41:30 +0000">
+<meta name="DC.date" content="2025-11-06 14:00:55 +0000">
 <meta name="DC.creator" content="Anne Fouilloux">
 <meta name="DC.creator" content="Nadia Goué">
 <meta name="DC.creator" content="Christopher Barnett">
@@ -186,7 +186,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-12-02 16:41:30 +0000",
+  "dateModified": "2025-11-06 14:00:55 +0000",
   "datePublished": "2019-11-14 09:26:37 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -255,7 +255,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Galaxy Basics for everyone",
   "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html",
-  "version": 34,
+  "version": 35,
   "timeRequired": "PT1H30M",
   "teaches": "- Familiarize yourself with the basics of Galaxy\n- Learn how to obtain data from external sources\n- Learn how to tag datasets\n- Learn how to run tools\n- Learn how histories work\n- Learn how to create a workflow\n- Learn how to share your work",
   "keywords": [
@@ -2101,12 +2101,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     
 	<li>
-		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
-			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
-		</a>
-	</li>
-    
-	<li>
 		<a class="dropdown-item" href="https://usegalaxy.fr/" title="">
 			UseGalaxy.fr <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
 		</a>
@@ -2159,7 +2153,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 14, 2019 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 2, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 6, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -2179,7 +2173,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.7</a> (20 recent ratings, 107 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 34 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 35 </div>
 
     </blockquote>
     </section>
@@ -2271,15 +2265,17 @@ The basic functionality will be rather similar across instances, so don’t worr
 
 </blockquote>
 
-<p>The Galaxy interface consists of three main parts:</p>
+<p>The Galaxy interface is divided into four sections (panels):</p>
+<ul>
+  <li>The Activity Bar on the left: <em>This is where you will navigate to the resources in Galaxy (Tools, Workflows, Histories etc.)</em></li>
+  <li>Currently active “Activity Panel” on the left: <em>By default, the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Tools</strong> activity will be active and its panel will be expanded</em></li>
+  <li>Viewing panel in the middle: <em>The main area for context for your analysis</em></li>
+  <li>History of analysis and files on the right: <em>Shows your “current” history; i.e.: Where any new files for your analysis will be stored</em></li>
+</ul>
 
-<ol>
-  <li>The available tools are listed on the left</li>
-  <li>Your analysis history is recorded on the right</li>
-  <li>The central panel will let you run analyses and view outputs</li>
-</ol>
+<p><a href="../../images/galaxy_interface.png" rel="noopener noreferrer"><img src="../../images/galaxy_interface.png" alt="Screenshot of the Galaxy interface with aforementioned structure. " width="1918" height="1025" loading="lazy" /></a></p>
 
-<p><a href="/training-material/shared/images/galaxy_interface.png" rel="noopener noreferrer"><img src="/training-material/shared/images/galaxy_interface.png" alt="Galaxy interface screenshot showing history panel on the right, tools panel on the left, and main panel at the center. " width="2009" height="969" loading="lazy" /></a></p>
+<p>The first time you use Galaxy, there will be no files in your history panel.</p>
 
 <h1 id="create-a-history">Create a history</h1>
 
@@ -2299,7 +2295,7 @@ In other words, using a workflow makes it possible to apply the same procedure t
 
   <ol>
     <li>
-      <p>Make sure you start from an empty analysis history.</p>
+      <p>Make sure you start from an empty history.</p>
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
@@ -2329,7 +2325,7 @@ In other words, using a workflow makes it possible to apply the same procedure t
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
 
       <!--SNIPPET-->
@@ -2458,7 +2454,7 @@ In our case, the tools we will use require tab-separated input data and assume t
         <p>Use the <strong>tools search box</strong> at the top of the tool panel to find <strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
       </blockquote>
 
-      <p><a href="../../images/101_foreveryone_remove_beginning.png" rel="noopener noreferrer"><img src="../../images/101_foreveryone_remove_beginning.png" alt="Settings for the `Remove beginning` tool. " width="2077" height="851" loading="lazy" /></a></p>
+      <p><a href="../../images/101_foreveryone_remove_beginning.png" rel="noopener noreferrer"><img src="../../images/101_foreveryone_remove_beginning.png" alt="Settings for the `Remove beginning` tool. " width="5214" height="2365" loading="lazy" /></a></p>
     </li>
     <li>
       <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">iris clean</code></p>
@@ -2584,9 +2580,9 @@ In our case, the tools we will use require tab-separated input data and assume t
       </ul>
     </li>
     <li>
-      <p>Did you get the same answer as before?</p>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">iris species group</code></p>
     </li>
-    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">iris species group</code></li>
+    <li>Did you get the same answer as before?</li>
   </ol>
 
   <blockquote class="solution">
@@ -2947,7 +2943,7 @@ to differentiate <em>Iris versicolor</em> from <em>Iris virginica</em>. And as b
       <p>This will make the creation of the workflow easier.</p>
     </li>
     <li>
-      <p>Click on <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> (<strong>History options</strong>) at the top of your history panel and select <strong>Extract workflow</strong>.</p>
+      <p>Click on <i class="fas fa-bars" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-options</span> (<strong>History options</strong>) at the top of your history panel and select <strong>Extract workflow</strong>.</p>
 
       <p><a href="../../images/history_menu_extract_workflow.png" rel="noopener noreferrer"><img src="../../images/history_menu_extract_workflow.png" alt="`Extract Workflow` entry in the history options menu. " width="361" height="514" loading="lazy" /></a></p>
 
@@ -2966,16 +2962,16 @@ to differentiate <em>Iris versicolor</em> from <em>Iris virginica</em>. And as b
 
       <p>You will get a message that the workflow was created. But where did it go?</p>
 
-      <p><a href="../../images/101_foreveryone_workflow.png" rel="noopener noreferrer"><img src="../../images/101_foreveryone_workflow.png" alt="`Where workflows go` list. " width="1106" height="142" loading="lazy" /></a></p>
+      <p><a href="../../images/101_foreveryone_workflow.png" rel="noopener noreferrer"><img src="../../images/101_foreveryone_workflow.png" alt="`Where workflows go` list. " width="1453" height="148" loading="lazy" /></a></p>
     </li>
     <li>
-      <p>Click on <strong>Workflow</strong> in the top menu of Galaxy.</p>
+      <p>Click on <strong>Workflow</strong> in the activity bar on the left side.</p>
       <ul>
         <li>Here you have a list of all your workflows.</li>
         <li>Your newly created workflow should be listed at the top:</li>
       </ul>
 
-      <p><a href="../../images/101_foreveryone_workflow_list.png" rel="noopener noreferrer"><img src="../../images/101_foreveryone_workflow_list.png" alt="`Your workflows` list. " width="825" height="208" loading="lazy" /></a></p>
+      <p><a href="../../images/101_foreveryone_workflow_list.png" rel="noopener noreferrer"><img src="../../images/101_foreveryone_workflow_list.png" alt="`Your workflows` list. " width="1404" height="451" loading="lazy" /></a></p>
     </li>
   </ol>
 </blockquote>
@@ -3001,10 +2997,10 @@ which you can import to Galaxy and use for the next sections (see below how to i
   <ol>
     <li>Open the <strong>workflow editor</strong>
       <ul>
-        <li>Click on the dropdown menu <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> (triangle icon) to the right of your workflow name.</li>
+        <li>Click on <strong>Workflows</strong> <i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span> at the interactive bar and locate your freshly created or imported workflow.</li>
       </ul>
     </li>
-    <li>Select <strong>Edit</strong> to launch the workflow editor.
+    <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Edit</strong> to launch the workflow editor.
       <ul>
         <li>You should see something like this:</li>
       </ul>
@@ -3020,7 +3016,7 @@ which you can import to Galaxy and use for the next sections (see below how to i
       <ul>
         <li>We can tell Galaxy which outputs of a workflow are important and should be shown in our history when we run it, and which can be hidden.</li>
         <li>By default, all outputs will be shown</li>
-        <li>Click the <strong>checkbox</strong> next to the outputs to mark them as important:
+        <li>Click the <strong>checkbox</strong> <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> next to the outputs to mark them as important:
           <ul>
             <li><code class="language-plaintext highlighter-rouge">outfile</code> in  <strong>Unique</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
             <li><code class="language-plaintext highlighter-rouge">out_file1</code> in <strong>Group</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step
@@ -3031,6 +3027,7 @@ which you can import to Galaxy and use for the next sections (see below how to i
             <li><code class="language-plaintext highlighter-rouge">png</code> in both <strong>Scatterplot w ggplot2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> steps</li>
           </ul>
         </li>
+        <li>To hide all other datasets in your history you will need to unselect the <strong>eye</strong> icon <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> in each tool box where you did not select the <strong>checkbox</strong> <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span></li>
         <li>Now, when we run the workflow, we will only see these final outputs
           <ul>
             <li>i.e. the two dataset with species, the dataset with number of samples by species and the two scatterplots.</li>
@@ -3039,7 +3036,7 @@ which you can import to Galaxy and use for the next sections (see below how to i
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-hiding-intermediate-steps"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-hiding-intermediate-steps" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Hiding intermediate steps</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by the little checkbox in front of every output dataset:</p>   <p><img src="/training-material/shared/images/workflow_editor_mark_output.png" alt="Asterisk for `out_file1` in the `Select First` tool" /></p> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-hiding-intermediate-steps"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-hiding-intermediate-steps" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Hiding intermediate steps</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by clicking on the eye icon on for all dataset that should be hidden:</p>   <p><img src="/training-material/shared/images/workflow_editor_hide_output.png" alt="Asterisk for `out_file1` in the `Cut` tool" /></p> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
     <li><strong>Renaming output datasets</strong>
@@ -3062,7 +3059,7 @@ which you can import to Galaxy and use for the next sections (see below how to i
     <li>
       <p><strong>Save your workflow</strong> (important!) by clicking on the <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> icon at the top right of the screen.</p>
     </li>
-    <li><strong>Return</strong> to the analysis view by clicking on the Home icon <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden">galaxy-home</span> (or <strong>Analyze Data</strong> on older Galaxy versions) at the top menu bar.</li>
+    <li><strong>Return</strong> to the analysis view by clicking on <strong>Galaxy</strong> (or the Home icon <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden">galaxy-home</span> or <strong>Analyze Data</strong> on older Galaxy versions) at the top menu bar.</li>
   </ol>
 
 </blockquote>
@@ -3094,7 +3091,7 @@ which you can import to Galaxy and use for the next sections (see below how to i
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
 
       <!--SNIPPET-->
@@ -3142,11 +3139,12 @@ With this adjustment, we can reuse our workflow on the data, and analyze and vis
   <p>To analyze the diamonds price/4 Cs dataset by reusing our workflow:</p>
 
   <ol>
-    <li>Open the <strong>workflow menu</strong> (top menu bar).
+    <li>Open the <strong>workflow menu</strong> (from activity bar, left side).
       <ul>
         <li>Find the workflow you made in the previous section,</li>
-        <li>Select the option <code class="language-plaintext highlighter-rouge">Run</code>.</li>
+        <li>Select the option <code class="language-plaintext highlighter-rouge">Run</code> <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span>.</li>
         <li>The central panel will change to allow you to configure and launch the workflow.</li>
+        <li>Click on <strong>Expanded workflow form</strong></li>
       </ul>
     </li>
     <li>
@@ -3156,7 +3154,7 @@ With this adjustment, we can reuse our workflow on the data, and analyze and vis
       <p>Customize the first scatter plot:</p>
 
       <p>This step is preconfigured to plot column 1 along the x and column 2 along the y axis, while grouping by column 5.
-This is fine and will result in <em>price</em> getting plotted against <em>carat</em> with grouping by <em>cut</em>, but you would want to adjust the plot title and axis labels accordingly:</p>
+This is fine and will result in <em>price</em> getting plotted against <em>carat</em> with grouping by <em>cut</em>, but you would want to adjust the plot title and axis labels accordingly. To change any parameter click on the pencil icon <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span>:</p>
 
       <ul>
         <li>Change <em>“Plot title”</em> to <code class="language-plaintext highlighter-rouge">Diamond price as a function of carat with cut as a factor</code></li>
@@ -3268,7 +3266,7 @@ This is fine and will result in <em>price</em> getting plotted against <em>carat
   <div class="box-title hands-on-title" id="hands-on-share-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Share history</div>
   <ol>
     <li>Share your history with your neighbour.</li>
-    <li>Find the history shared by your neighbour. Histories shared with specific users can be accessed by those users under their top masthead “User” menu under <code class="language-plaintext highlighter-rouge">Histories shared with me</code>.</li>
+    <li>Find the history shared by your neighbour. Histories shared with specific users can be accessed by opening the history menu for the activity bar and selecting in the History menu the <strong>Shared with Me</strong> tab.</li>
   </ol>
 </blockquote>
 
@@ -3801,7 +3799,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ea034ac1ba4531bde49eb835adc5d903539e6967">ea034ac</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/376a228b75c9d3077fa73c32bf43c1317bbfd07d">376a228</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
