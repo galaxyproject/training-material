@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c737766e4f15d1a82daae63d93edfbb3710e1c9a",
+		release: "galaxy-training-network@208a7d443a0b2e963ebeec0d349f6d2f53732e33",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Mapping Jobs to Destinations using TPV">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-14 09:56:50 +0000">
+<meta name="DC.date" content="2025-11-13 10:41:31 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Nuwan Goonasekera">
@@ -183,7 +183,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-14 09:56:50 +0000",
+  "dateModified": "2025-11-13 10:41:31 +0000",
   "datePublished": "2021-01-17 11:37:17 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -239,7 +239,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Mapping Jobs to Destinations using TPV",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html",
-  "version": 36,
+  "version": 37,
   "timeRequired": "PT2H",
   "teaches": "- Know how to map tools to job destinations\n- Be able to use the dynamic job runner to make arbitrary destination mappings\n- Understand the job resource selector config and dynamic rule creation\n- The various ways in which tools can be mapped to destinations, both statically and dynamically\n- How to write a dynamic tool destination (DTD)\n- How to write a dynamic python function destination\n- How to use the job resource parameter selection feature",
   "keywords": [
@@ -2136,7 +2136,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 17, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 13, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -2156,7 +2156,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.6</a> (0 recent ratings, 11 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 36 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 37 </div>
 
     </blockquote>
     </section>
@@ -2254,7 +2254,7 @@ separately.</p>
 
       <div data-commit="Deploy testing tool" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -155,6 +155,9 @@</span> galaxy_config_templates:
+</span><span class="p">@@ -157,6 +157,9 @@</span> galaxy_config_templates:
  galaxy_extra_dirs:
    - /data
     
@@ -2348,7 +2348,7 @@ And of course, Galaxy has an Ansible Role for that.</p>
 
       <div data-commit="Add TPV config dir" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -138,6 +138,8 @@</span> galaxy_config:
+</span><span class="p">@@ -140,6 +140,8 @@</span> galaxy_config:
            - job-handlers
            - workflow-schedulers
     
@@ -2357,7 +2357,7 @@ And of course, Galaxy has an Ansible Role for that.</p>
 </span> galaxy_config_files_public:
    - src: files/galaxy/welcome.html
      dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
-<span class="p">@@ -154,6 +156,11 @@</span> galaxy_config_templates:
+<span class="p">@@ -156,6 +158,11 @@</span> galaxy_config_templates:
     
  galaxy_extra_dirs:
    - /data
@@ -2409,7 +2409,7 @@ linter can work.</p>
 
       <div data-commit="Add TPV to job config" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -24,34 +24,18 @@</span> galaxy_job_config:
+</span><span class="p">@@ -26,34 +26,18 @@</span> galaxy_job_config:
    handling:
      assign: ['db-skip-locked']
    execution:
@@ -2452,7 +2452,7 @@ linter can work.</p>
 </span>   tools:
      - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
        environment: local_env
-<span class="p">@@ -147,6 +131,8 @@</span> galaxy_config_files_public:
+<span class="p">@@ -149,6 +133,8 @@</span> galaxy_config_files_public:
  galaxy_config_files:
    - src: files/galaxy/themes.yml
      dest: "{{ galaxy_config.galaxy.themes_config_file }}"
@@ -2627,7 +2627,7 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 
       <div data-commit="Importing TPV shared database via job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -35,6 +35,7 @@</span> galaxy_job_config:
+</span><span class="p">@@ -37,6 +37,7 @@</span> galaxy_job_config:
          function: map_tool_to_destination
          rules_module: tpv.rules
          tpv_config_files:
@@ -2785,7 +2785,7 @@ This of course assumes that your users are well behaved enough not to choose the
 
       <div data-commit="Configure resources in job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -37,9 +37,17 @@</span> galaxy_job_config:
+</span><span class="p">@@ -39,9 +39,17 @@</span> galaxy_job_config:
          tpv_config_files:
            - https://gxy.io/tpv/db.yml
            - "{{ tpv_config_dir }}/tpv_rules_local.yml"
@@ -2803,7 +2803,7 @@ This of course assumes that your users are well behaved enough not to choose the
 </span>    
  galaxy_config:
    galaxy:
-<span class="p">@@ -59,6 +67,7 @@</span> galaxy_config:
+<span class="p">@@ -61,6 +69,7 @@</span> galaxy_config:
      object_store_store_by: uuid
      id_secret: "{{ vault_id_secret }}"
      job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
@@ -2811,7 +2811,7 @@ This of course assumes that your users are well behaved enough not to choose the
 </span>     # SQL Performance
      slow_query_log_threshold: 5
      enable_per_request_sql_debugging: true
-<span class="p">@@ -140,6 +149,8 @@</span> galaxy_config_templates:
+<span class="p">@@ -142,6 +151,8 @@</span> galaxy_config_templates:
      dest: "{{ galaxy_config.galaxy.container_resolvers_config_file }}"
    - src: templates/galaxy/config/dependency_resolvers_conf.xml
      dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
@@ -3375,7 +3375,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c737766e4f15d1a82daae63d93edfbb3710e1c9a">c737766</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/208a7d443a0b2e963ebeec0d349f6d2f53732e33">208a7d4</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c737766e4f15d1a82daae63d93edfbb3710e1c9a",
+		release: "galaxy-training-network@208a7d443a0b2e963ebeec0d349f6d2f53732e33",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Enable upload via FTP">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-02-20 14:56:35 +0000">
+<meta name="DC.date" content="2025-11-13 10:41:31 +0000">
 <meta name="DC.creator" content="Lucille Delisle"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Galaxy Server administration / Enable upload via FTP / Hands-on: Enable upload via FTP">
@@ -180,7 +180,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-02-20 14:56:35 +0000",
+  "dateModified": "2025-11-13 10:41:31 +0000",
   "datePublished": "2021-06-18 13:52:44 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -236,7 +236,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Enable upload via FTP",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ftp/tutorial.html",
-  "version": 23,
+  "version": 24,
   "timeRequired": "PT1H",
   "teaches": "- Configure galaxy and install a FTP server.\n- Use an Ansible playbook for this.",
   "keywords": [
@@ -1592,7 +1592,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 18, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 20, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 13, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1612,7 +1612,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.0</a> (0 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 23 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 24 </div>
 
     </blockquote>
     </section>
@@ -1723,7 +1723,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
       <div data-commit="Add proftpd in certbot" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -210,11 +210,13 @@</span> certbot_environment: staging
+</span><span class="p">@@ -212,11 +212,13 @@</span> certbot_environment: staging
  certbot_well_known_root: /srv/nginx/_well-known_root
  certbot_share_key_users:
    - www-data
@@ -1747,7 +1747,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
       <div data-commit="Add ftp vars in galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -122,6 +122,9 @@</span> galaxy_config:
+</span><span class="p">@@ -124,6 +124,9 @@</span> galaxy_config:
      sentry_dsn: "{{ vault_galaxy_sentry_dsn }}"
      sentry_traces_sample_rate: 0.5
      error_report_file: "{{ galaxy_config_dir }}/error_reports_file.yml"
@@ -1770,7 +1770,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
       <div data-commit="Add proftpd variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -366,3 +366,24 @@</span> telegraf_plugins_extra:
+</span><span class="p">@@ -368,3 +368,24 @@</span> telegraf_plugins_extra:
  tiaas_dir: /srv/tiaas
  tiaas_admin_user: admin
  tiaas_admin_pass: changeme
@@ -2432,7 +2432,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c737766e4f15d1a82daae63d93edfbb3710e1c9a">c737766</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/208a7d443a0b2e963ebeec0d349f6d2f53732e33">208a7d4</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

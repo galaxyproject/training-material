@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c737766e4f15d1a82daae63d93edfbb3710e1c9a",
+		release: "galaxy-training-network@208a7d443a0b2e963ebeec0d349f6d2f53732e33",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Monitoring with Telegraf and Grafana">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-12-18 12:57:04 +0000">
+<meta name="DC.date" content="2025-11-13 10:41:31 +0000">
 <meta name="DC.creator" content="Helena Rasche"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Galaxy Server administration / Galaxy Monitoring with Telegraf and Grafana / Hands-on: Galaxy Monitoring with Telegraf and Grafana">
@@ -180,7 +180,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-12-18 12:57:04 +0000",
+  "dateModified": "2025-11-13 10:41:31 +0000",
   "datePublished": "2019-01-31 15:17:51 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -236,7 +236,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Galaxy Monitoring with Telegraf and Grafana",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html",
-  "version": 47,
+  "version": 48,
   "timeRequired": "PT2H",
   "teaches": "- Setup InfluxDB\n- Setup Telegraf\n- Setup Grafana\n- Create several charts",
   "keywords": [
@@ -2149,7 +2149,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 31, 2019 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 18, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 13, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -2169,7 +2169,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">3.0</a> (1 recent ratings, 5 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 47 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 48 </div>
 
     </blockquote>
     </section>
@@ -2526,7 +2526,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -330,3 +330,12 @@</span> flower_ui_users:
+</span><span class="p">@@ -332,3 +332,12 @@</span> flower_ui_users:
     
  flower_environment_variables:
    GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
@@ -2551,7 +2551,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -116,6 +116,9 @@</span> galaxy_config:
+</span><span class="p">@@ -118,6 +118,9 @@</span> galaxy_config:
      celery_conf:
        result_backend: "redis://localhost:6379/0"
      enable_celery_tasks: true
@@ -3032,7 +3032,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
       <div data-commit="Add extra monitoring for Galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -342,3 +342,10 @@</span> telegraf_plugins_extra:
+</span><span class="p">@@ -344,3 +344,10 @@</span> telegraf_plugins_extra:
        - service_address = ":8125"
        - metric_separator = "."
        - allowed_pending_messages = 10000
@@ -3544,7 +3544,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c737766e4f15d1a82daae63d93edfbb3710e1c9a">c737766</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/208a7d443a0b2e963ebeec0d349f6d2f53732e33">208a7d4</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

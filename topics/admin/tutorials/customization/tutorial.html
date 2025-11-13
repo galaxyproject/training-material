@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c737766e4f15d1a82daae63d93edfbb3710e1c9a",
+		release: "galaxy-training-network@208a7d443a0b2e963ebeec0d349f6d2f53732e33",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Customizing the look of Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-04-08 10:30:29 +0000">
+<meta name="DC.date" content="2025-11-13 10:41:31 +0000">
 <meta name="DC.creator" content="Laila Los"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Galaxy Server administration / Customizing the look of Galaxy / Hands-on: Customizing the look of Galaxy">
@@ -180,7 +180,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-04-08 10:30:29 +0000",
+  "dateModified": "2025-11-13 10:41:31 +0000",
   "datePublished": "2023-04-16 09:02:56 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -292,7 +292,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Customizing the look of Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/tutorial.html",
-  "version": 5,
+  "version": 6,
   "timeRequired": "PT45M",
   "teaches": "- Set a brand text for your Galaxy instance\n- Add a custom welcome page to Galaxy\n- Activate and customize themes",
   "keywords": [
@@ -1202,7 +1202,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 16, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 8, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 13, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1222,7 +1222,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 2 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 5 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
 
     </blockquote>
     </section>
@@ -1279,7 +1279,7 @@ It is an easy way to set your instance apart, and make it more identifiable.</p>
 
       <div data-commit="Add brand" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -32,6 +32,9 @@</span> galaxy_job_config:
+</span><span class="p">@@ -34,6 +34,9 @@</span> galaxy_job_config:
     
  galaxy_config:
    galaxy:
@@ -1319,7 +1319,7 @@ It is an easy way to set your instance apart, and make it more identifiable.</p>
 
       <div data-commit="Add support information" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -35,6 +35,9 @@</span> galaxy_config:
+</span><span class="p">@@ -37,6 +37,9 @@</span> galaxy_config:
      # Branding
      brand: Mars 🚀
      logo_src: "https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/images/logo.png"
@@ -1354,7 +1354,7 @@ This page can be used to communicate what your instance is about, and share news
 
       <div data-commit="Add welcome url to the config" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -96,6 +96,10 @@</span> galaxy_config:
+</span><span class="p">@@ -98,6 +98,10 @@</span> galaxy_config:
            - job-handlers
            - workflow-schedulers
     
@@ -1402,7 +1402,7 @@ This will act as the heading for your start-page, which can help assistive techn
  	# automatically copied around. The welcome page is one of them. In
  	# production, this step is skipped, so we will manually alias that.
  	location /static/welcome.html {
-<span class="gd">-		alias {{ galaxy_server_dir }}/static/welcome.html.sample;
+<span class="gd">-		alias {{ galaxy_server_dir }}/static/welcome.sample.html;
 </span><span class="gi">+		alias {{ galaxy_mutable_config_dir }}/welcome.html;
 </span> 		expires 24h;
  	}
@@ -1456,7 +1456,7 @@ You can even offer several options, to allow users to switch to the default if t
 
       <div data-commit="Add brand" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -35,6 +35,7 @@</span> galaxy_config:
+</span><span class="p">@@ -37,6 +37,7 @@</span> galaxy_config:
      # Branding
      brand: Mars 🚀
      logo_src: "https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/images/logo.png"
@@ -1464,7 +1464,7 @@ You can even offer several options, to allow users to switch to the default if t
 </span>     # Support
      support_url: "https://example.org/support"
      terms_url: "https://example.org/terms-of-service"
-<span class="p">@@ -100,6 +101,10 @@</span> galaxy_config_files_public:
+<span class="p">@@ -102,6 +103,10 @@</span> galaxy_config_files_public:
    - src: files/galaxy/welcome.html
      dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
     
@@ -2013,7 +2013,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c737766e4f15d1a82daae63d93edfbb3710e1c9a">c737766</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/208a7d443a0b2e963ebeec0d349f6d2f53732e33">208a7d4</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

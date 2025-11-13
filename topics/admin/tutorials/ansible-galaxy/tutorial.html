@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c737766e4f15d1a82daae63d93edfbb3710e1c9a",
+		release: "galaxy-training-network@208a7d443a0b2e963ebeec0d349f6d2f53732e33",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Installation with Ansible">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-04-08 10:30:29 +0000">
+<meta name="DC.date" content="2025-11-13 10:41:31 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Simon Gladman"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
@@ -182,7 +182,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-04-08 10:30:29 +0000",
+  "dateModified": "2025-11-13 10:41:31 +0000",
   "datePublished": "2019-01-28 10:40:06 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -270,7 +270,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Galaxy Installation with Ansible",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
-  "version": 102,
+  "version": 103,
   "timeRequired": "PT2H30M",
   "teaches": "- Have an understanding of how Galaxy's Ansible roles are structured and interact with one another\n- Be able to use an Ansible playbook to install different flavors of Galaxy for different purposes",
   "keywords": [
@@ -2517,7 +2517,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 28, 2019 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 8, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 13, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -2537,7 +2537,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.1</a> (0 recent ratings, 35 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 102 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 103 </div>
 
     </blockquote>
     </section>
@@ -2734,7 +2734,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>Galaxy is a modern web application that includes both a server (written in Python) and a client (written in Javascript). After the server is installed and its database prepared, the next step is to build the client application. This means fetching its dependencies, bundling components, creating minified copies of static content, etc. This process ensures that the smallest possible amount of data is transferred to the user when accessing Galaxy over the web, which is important for the performance of the website.</p>
 
-<p>This process can be lengthy and resource intensive. Future plans for Galaxy include pre-building the client so that the build process is not necessary as long as you run “release” versions of Galaxy.</p>
+<p>This process can be lengthy and resource intensive. If you want to speed up your deployment, set <code class="language-plaintext highlighter-rouge">galaxy_client_use_prebuilt: true</code> and Ansible will download a prebuilt client using <a href="https://classic.yarnpkg.com/en/docs/getting-started">yarn</a>.</p>
 
 <p>The client lives in the Galaxy code under the <a href="https://github.com/galaxyproject/galaxy/blob/dev/client/">client/</a> directory, and the build process deploys it to the <a href="https://github.com/galaxyproject/galaxy/tree/dev/static/">static/</a> directory, which we will configure a webserver to serve in this tutorial.</p>
 
@@ -2756,7 +2756,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li>Configuration files are installed</li>
   <li>Any missing dependencies are installed</li>
   <li>Any database updates are applied</li>
-  <li>The client application is built and deployed</li>
+  <li>The client application is built and deployed (to save time set <code class="language-plaintext highlighter-rouge">galaxy_client_use_prebuilt: true</code>)</li>
 </ul>
 
 <p>It would not be difficult to write a role that does this yourself, but by using
@@ -2836,7 +2836,7 @@ best practices and knowledge from previous admins codified for you.</p>
 </span><span class="p">@@ -0,0 +1,13 @@</span>
 <span class="gi">+# Galaxy, Postgres, Nginx
 +- src: galaxyproject.galaxy
-+  version: 0.10.14
++  version: 0.12.0
 +- src: galaxyproject.nginx
 +  version: 0.7.1
 +- src: galaxyproject.postgresql
@@ -2844,7 +2844,7 @@ best practices and knowledge from previous admins codified for you.</p>
 +- src: galaxyproject.postgresql_objects
 +  version: 1.2.0
 +- src: galaxyproject.miniconda
-+  version: 0.3.1
++  version: 0.3.4
 +- src: usegalaxy_eu.certbot
 +  version: 0.1.11
 </span>   
@@ -3541,7 +3541,7 @@ A: They are correlated (because generally new Galaxy versions could introduce e.
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">galaxy_commit_id</code></td>
-            <td><code class="language-plaintext highlighter-rouge">release_23.0</code></td>
+            <td><code class="language-plaintext highlighter-rouge">release_25.0</code></td>
             <td>The git reference to check out, which in this case is the branch for Galaxy Release 23.0</td>
           </tr>
           <tr>
@@ -3550,19 +3550,29 @@ A: They are correlated (because generally new Galaxy versions could introduce e.
             <td>If we make any modifications to the Galaxy codebase, they will be removed. This way we know we’re getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.</td>
           </tr>
           <tr>
+            <td><code class="language-plaintext highlighter-rouge">galaxy_client_use_prebuilt</code></td>
+            <td><code class="language-plaintext highlighter-rouge">true</code></td>
+            <td>We are going to use a prebuilt client to save some time during this tutorial, if you want you can set it to false later and see how galaxy starts building the client itself.</td>
+          </tr>
+          <tr>
             <td><code class="language-plaintext highlighter-rouge">miniconda_prefix</code></td>
             <td><code class="language-plaintext highlighter-rouge">"{{ galaxy_tool_dependency_dir }}/_conda"</code></td>
             <td>We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can become deadlocked.</td>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">miniconda_version</code></td>
-            <td><code class="language-plaintext highlighter-rouge">23.9</code></td>
+            <td><code class="language-plaintext highlighter-rouge">25.3</code></td>
             <td>Install a specific miniconda version, the latest one at the time of writing that was tested and working.</td>
           </tr>
           <tr>
+            <td><code class="language-plaintext highlighter-rouge">miniconda_distribution</code></td>
+            <td><code class="language-plaintext highlighter-rouge">miniconda</code></td>
+            <td>Install a specific distribution of miniconda, such as <code class="language-plaintext highlighter-rouge">miniforge</code> (default), <code class="language-plaintext highlighter-rouge">micromamba</code>, <code class="language-plaintext highlighter-rouge">miniconda</code> or <code class="language-plaintext highlighter-rouge">anaconda</code>. This determines the default value for the <code class="language-plaintext highlighter-rouge">miniconda_executable</code> (<code class="language-plaintext highlighter-rouge">mamba</code> for <code class="language-plaintext highlighter-rouge">miniforge</code>)</td>
+          </tr>
+          <tr>
             <td><code class="language-plaintext highlighter-rouge">miniconda_channels</code>          `</td>
-            <td><code class="language-plaintext highlighter-rouge">['conda-forge', 'defaults']</code></td>
-            <td>Use the community-maintained conda-forge channel in addition to the standard defaults channel of Conda.</td>
+            <td><code class="language-plaintext highlighter-rouge">['conda-forge']</code></td>
+            <td>Use the free and community-maintained <code class="language-plaintext highlighter-rouge">conda-forge</code> channel.</td>
           </tr>
         </tbody>
       </table>
@@ -3578,7 +3588,7 @@ A: They are correlated (because generally new Galaxy versions could introduce e.
 
       <div data-commit="Configure miniconda and galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -0,0 +1,12 @@</span>
+</span><span class="p">@@ -0,0 +1,14 @@</span>
 <span class="gi">+# Galaxy
 +galaxy_create_user: true # False by default, as e.g. you might have a 'galaxy' user provided by LDAP or AD.
 +galaxy_separate_privileges: true # Best practices for security, configuration is owned by 'root' (or a different user) than the processes
@@ -3586,11 +3596,13 @@ A: They are correlated (because generally new Galaxy versions could introduce e.
 +galaxy_layout: root-dir
 +galaxy_root: /srv/galaxy
 +galaxy_user: {name: "{{ galaxy_user_name }}", shell: /bin/bash}
-+galaxy_commit_id: release_23.0
++galaxy_commit_id: release_25.0
++galaxy_client_use_prebuilt: true
 +galaxy_force_checkout: true
 +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
-+miniconda_version: 23.9
-+miniconda_channels: ['conda-forge', 'defaults']
++miniconda_version: 25.3
++miniconda_distribution: miniconda
++miniconda_channels: ['conda-forge']
 </span>   
 </code></pre></div>      </div>
 
@@ -3620,10 +3632,10 @@ A: They are correlated (because generally new Galaxy versions could introduce e.
 
       <div data-commit="Configure galaxy config" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -10,3 +10,17 @@</span> galaxy_force_checkout: true
- miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
- miniconda_version: 23.9
- miniconda_channels: ['conda-forge', 'defaults']
+</span><span class="p">@@ -12,3 +12,17 @@</span> miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
+ miniconda_version: 25.3
+ miniconda_distribution: miniconda
+ miniconda_channels: ['conda-forge']
 <span class="gi">+
 +galaxy_config:
 +  galaxy:
@@ -3692,7 +3704,7 @@ So it is not always easy to tell what variables will be set, or what their final
 
       <div data-commit="Configure gravity" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -21,6 +21,32 @@</span> galaxy_config:
+</span><span class="p">@@ -23,6 +23,32 @@</span> galaxy_config:
      job_working_directory: /data/jobs
      object_store_store_by: uuid
      id_secret: "{{ vault_id_secret }}"
@@ -4537,7 +4549,7 @@ Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Consumed 3.381s CPU tim
 
       <div data-commit="Configure nginx, certbot" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -50,3 +50,55 @@</span> galaxy_config:
+</span><span class="p">@@ -52,3 +52,55 @@</span> galaxy_config:
     
  galaxy_extra_dirs:
    - /data
@@ -4748,7 +4760,7 @@ Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Consumed 3.381s CPU tim
 +	# automatically copied around. The welcome page is one of them. In
 +	# production, this step is skipped, so we will manually alias that.
 +	location /static/welcome.html {
-+		alias {{ galaxy_server_dir }}/static/welcome.html.sample;
++		alias {{ galaxy_server_dir }}/static/welcome.sample.html;
 +		expires 24h;
 +	}
 +
@@ -4897,7 +4909,7 @@ In a training setting there is no need to request certificates that will be trus
 
 <h2 id="job-configuration">Job Configuration</h2>
 
-<p>One of the most important configuration files for a large Galaxy server is the job configuration. This tells Galaxy where to run all of the jobs that users execute. If Galaxy can’t find a job conf file or no job configuration has been specified inline in the <code class="language-plaintext highlighter-rouge">galaxy.yml</code> file, it will use a simple default configuration where all jobs are run on the Galaxy server and are handled by the web serving process, rather than the job handler(s). Galaxy’s job running system is highly configurable, the full range of configuration can be found in the sample job configuration file, <a href="https://github.com/galaxyproject/galaxy/blob/release_23.0/lib/galaxy/config/sample/job_conf.sample.yml"><code class="language-plaintext highlighter-rouge">job_conf.sample.yml</code></a>.</p>
+<p>One of the most important configuration files for a large Galaxy server is the job configuration. This tells Galaxy where to run all of the jobs that users execute. If Galaxy can’t find a job conf file or no job configuration has been specified inline in the <code class="language-plaintext highlighter-rouge">galaxy.yml</code> file, it will use a simple default configuration where all jobs are run on the Galaxy server and are handled by the web serving process, rather than the job handler(s). Galaxy’s job running system is highly configurable, the full range of configuration can be found in the sample job configuration file, <a href="https://github.com/galaxyproject/galaxy/blob/release_25.0/lib/galaxy/config/sample/job_conf.sample.yml"><code class="language-plaintext highlighter-rouge">job_conf.sample.yml</code></a>.</p>
 
 <p>The job configuration allows Galaxy to run jobs in multiple locations using a variety of different mechanisms. Some of these mechanisms include:</p>
 
@@ -4956,9 +4968,9 @@ In a training setting there is no need to request certificates that will be trus
 
       <div data-commit="Add job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -11,6 +11,24 @@</span> miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
- miniconda_version: 23.9
- miniconda_channels: ['conda-forge', 'defaults']
+</span><span class="p">@@ -13,6 +13,24 @@</span> miniconda_version: 25.3
+ miniconda_distribution: miniconda
+ miniconda_channels: ['conda-forge']
     
 <span class="gi">+# Galaxy Job Configuration
 +galaxy_job_config:
@@ -4981,7 +4993,7 @@ In a training setting there is no need to request certificates that will be trus
 </span> galaxy_config:
    galaxy:
      # Main Configuration
-<span class="p">@@ -21,6 +39,7 @@</span> galaxy_config:
+<span class="p">@@ -23,6 +41,7 @@</span> galaxy_config:
      job_working_directory: /data/jobs
      object_store_store_by: uuid
      id_secret: "{{ vault_id_secret }}"
@@ -5041,7 +5053,7 @@ changed: [gat-0.eu.galaxy.training]
 
       <div data-commit="Add production facing vars" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -40,6 +40,28 @@</span> galaxy_config:
+</span><span class="p">@@ -42,6 +42,28 @@</span> galaxy_config:
      object_store_store_by: uuid
      id_secret: "{{ vault_id_secret }}"
      job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
@@ -5210,7 +5222,7 @@ changed: [gat-0.eu.galaxy.training]
 
 <h2 id="keeping-galaxy-updated">Keeping Galaxy Updated</h2>
 
-<p>If you have set your <code class="language-plaintext highlighter-rouge">galaxy_commit_id</code> group variable to a branch name like <code class="language-plaintext highlighter-rouge">release_23.0</code>, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The <code class="language-plaintext highlighter-rouge">git</code> module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.</p>
+<p>If you have set your <code class="language-plaintext highlighter-rouge">galaxy_commit_id</code> group variable to a branch name like <code class="language-plaintext highlighter-rouge">release_25.0</code>, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The <code class="language-plaintext highlighter-rouge">git</code> module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.</p>
 
 <h2 id="upgrading-galaxy-optional">Upgrading Galaxy (Optional)</h2>
 
@@ -5917,7 +5929,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c737766e4f15d1a82daae63d93edfbb3710e1c9a">c737766</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/208a7d443a0b2e963ebeec0d349f6d2f53732e33">208a7d4</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
