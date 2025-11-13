@@ -1610,6 +1610,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.0</a> (0 recent ratings, 1 all time)</div>
+	
 	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 23 </div>
 
     </blockquote>
@@ -2327,12 +2329,28 @@ tools: []
 		   
 		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
 		   
+			<tr>
+				<th scope="row">t{ hist[0] | to_stars }}</th>
+				<td style="--size: 1.0">1</td>
+			</tr>
+		   
 		   </table>
 		   </p>
 		
         
         
-            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+		    
+		    <b>January 2022</b>
+		    <ul>
+				
+				<li>
+					<span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>:
+					<b>Liked</b>: In-depth explanations and side bars of what the various commands are doing so you can easily troubleshoot and customize.
+					<b>Disliked</b>: There is an "error" in the example code for the Galaxy/FTP portion of galaxyservers.yml.  if you intend to use separate upload directories (with email addresses as the folder name) for each user - as the tutorial indicates will happen - then the current code (below) will result in the uploads going into the parent directory "/uploads" instead of "uploads/user_email" .    # FTP     ftp_upload_dir: /data/uploads     ftp_upload_site: "{{ inventory_hostname }}"  Instead the code should be (add a "/"):  # FTP     ftp_upload_dir: /data/uploads/     ftp_upload_site: "{{ inventory_hostname }}"  Took me a while to work out why it was going into the wrong directory.  Also - it should be stated that there may be a newer version of the playbook that could solve errors/conflicts with newer operating system versions than those used in the tutorial.    Also suggest highlighting parts in the code examples which should be customized to your server environment if you are using this as a guide to setup your own installation (primarily directories where stuff is located).   
+				</li>
+				
+		    </ul>
+		    
         
 		</blockquote>
 
