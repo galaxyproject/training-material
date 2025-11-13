@@ -21,7 +21,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@208a7d443a0b2e963ebeec0d349f6d2f53732e33",
+		release: "galaxy-training-network@4438a2c5294dacef50f42523abc91601872b3c35",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Monitoring with gxadmin">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-08-08 16:03:22 +0000">
+<meta name="DC.date" content="2025-11-13 10:42:44 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Simon Gladman">
@@ -192,7 +192,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-08-08 16:03:22 +0000",
+  "dateModified": "2025-11-13 10:42:44 +0000",
   "datePublished": "2019-04-26 16:41:13 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -248,7 +248,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "slides",
   "name": "Galaxy Monitoring with gxadmin",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/slides.html",
-  "version": 6,
+  "version": 7,
   "teaches": "- Learn gxadmin basics\n- See some queries and learn how they help debug production issues",
   "keywords": [
     "Galaxy Server administration"
@@ -1236,11 +1236,12 @@ Useful when presenting.
 Sometimes it&apos;s the best way to get the exact data you need
 
 Can be very useful for:
+
 - Debugging
 - Reporting
 - Analytics
 
-But consider: [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing your SQL
+But consider using [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing your SQL
 
 ???
 
@@ -1252,7 +1253,7 @@ But consider: [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing y
 ---
 # Database Queries
 
-&quot;Can you send me the number of jobs per day/state from Main in September and October?&quot;
+&quot;Can you send me the number of jobs per day/state from our Galaxy in September and October?&quot;
 
 ```sql
 SELECT
@@ -1308,20 +1309,20 @@ ORDER BY month, j.state;
 # gxadmin
 
 - It&apos;s unpleasant to write queries every time you need them.
-- So the community collects SQL in `gxadmin`.
-- It&apos;s a giant bash script full of SQL and some magic ✨
-- [github.com/usegalaxy-eu/gxadmin](https://github.com/usegalaxy-eu/gxadmin)
+- So the community collects SQL in the `gxadmin` project.
+- It&apos;s a fancy bash script full of SQL and some magic ✨
+- [github.com/galaxyproject/gxadmin](https://github.com/galaxyproject/gxadmin)
 
 ???
 
 - We often re-run the same queries.
 - gxadmin makes it easier by storing the useful queries.
-- everyone is welcome to contribute to it.
+- Everyonede is welcome to contribute to it.
 
 ---
 # Database Queries
 
-&quot;I need a list of current main toolshed users and a number of their repos&quot;
+&quot;I need a list of owners for all installed tools and the number of their repos&quot;
 
 ```console
 $ gxadmin query ts-repos
@@ -1499,7 +1500,7 @@ $ gxadmin csvquery ...
 
 # Monitoring
 
-Telegraf can consume Influx formatted output, which `gxadmin` can produce:
+`gxadmin` can also produce Influx-formatted output, which Telegraf can consume:
 
 ```console
 $ gxadmin iquery queue
@@ -1526,7 +1527,11 @@ queue,tool_id=hisat2/2.1.0+galaxy4,state=running count=9
 
 - gxadmin is a tool to run common database queries useful for Galaxy admins
 
-- new queries are welcome and easy to contribute
+- new queries are welcome, easy to contribute and share
+
+- explore queries at https://galaxyproject.github.io/gxadmin
+
+- contribute queries at https://github.com/usegalaxy-eu/gxadmin
 
 
 

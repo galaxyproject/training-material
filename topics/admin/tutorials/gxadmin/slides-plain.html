@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@208a7d443a0b2e963ebeec0d349f6d2f53732e33",
+		release: "galaxy-training-network@4438a2c5294dacef50f42523abc91601872b3c35",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,14 +68,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Monitoring with gxadmin">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-08-08 16:03:22 +0000">
+<meta name="DC.date" content="2025-11-13 10:42:44 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Simon Gladman">
-<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="# Database Queries  Sometimes it's the best way to get the exact data you need  Can be very useful for: - Debugging - Reporting - Analytics  But consider: [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing your SQL  ???  - Admins often need to run database queries. - Debugging the live application in production is difficult, but running queries is easy. - Additionally running SQL queries is commonly used for debuggin and reporting and analytics. - The community collects queries we commonly use in a program called gxadmin.  --- # Database Queries   Can you send me the number of jobs per day/state from Main in September and October?   ```sql SELECT   date_trunc('month', j.create_time) AS month,   j.state,   COUNT(j.state) AS job_count FROM job j LEFT OUTER JOIN galaxy_user u   ON j.user_id = u.id WHERE u.email != 'monitor@bx.psu.edu' GROUP BY month,          j.state HAVING date_trunc('month', j.create_time) >= '2016-09-01' AND date_trunc('month', j.create_time) `  ```con...">
+<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="# Database Queries  Sometimes it's the best way to get the exact data you need  Can be very useful for:  - Debugging - Reporting - Analytics  But consider using [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing your SQL  ???  - Admins often need to run database queries. - Debugging the live application in production is difficult, but running queries is easy. - Additionally running SQL queries is commonly used for debuggin and reporting and analytics. - The community collects queries we commonly use in a program called gxadmin.  --- # Database Queries   Can you send me the number of jobs per day/state from our Galaxy in September and October?   ```sql SELECT   date_trunc('month', j.create_time) AS month,   j.state,   COUNT(j.state) AS job_count FROM job j LEFT OUTER JOIN galaxy_user u   ON j.user_id = u.id WHERE u.email != 'monitor@bx.psu.edu' GROUP BY month,          j.state HAVING date_trunc('month', j.create_time) >= '2016-09-01' AND date_trunc('month', j.create_tim...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Galaxy Server administration / Galaxy Monitoring with gxadmin / Slides: Galaxy Monitoring with gxadmin">
-        <meta property="og:description" content="# Database Queries  Sometimes it's the best way to get the exact data you need  Can be very useful for: - Debugging - Reporting - Analytics  But consider: [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing your SQL  ???  - Admins often need to run database queries. - Debugging the live application in production is difficult, but running queries is easy. - Additionally running SQL queries is commonly used for debuggin and reporting and analytics. - The community collects queries we commonly use in a program called gxadmin.  --- # Database Queries   Can you send me the number of jobs per day/state from Main in September and October?   ```sql SELECT   date_trunc('month', j.create_time) AS month,   j.state,   COUNT(j.state) AS job_count FROM job j LEFT OUTER JOIN galaxy_user u   ON j.user_id = u.id WHERE u.email != 'monitor@bx.psu.edu' GROUP BY month,          j.state HAVING date_trunc('month', j.create_time) >= '2016-09-01' AND date_trunc('month', j.create_time) `  ```con...">
+        <meta property="og:description" content="# Database Queries  Sometimes it's the best way to get the exact data you need  Can be very useful for:  - Debugging - Reporting - Analytics  But consider using [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing your SQL  ???  - Admins often need to run database queries. - Debugging the live application in production is difficult, but running queries is easy. - Additionally running SQL queries is commonly used for debuggin and reporting and analytics. - The community collects queries we commonly use in a program called gxadmin.  --- # Database Queries   Can you send me the number of jobs per day/state from our Galaxy in September and October?   ```sql SELECT   date_trunc('month', j.create_time) AS month,   j.state,   COUNT(j.state) AS job_count FROM job j LEFT OUTER JOIN galaxy_user u   ON j.user_id = u.id WHERE u.email != 'monitor@bx.psu.edu' GROUP BY month,          j.state HAVING date_trunc('month', j.create_time) >= '2016-09-01' AND date_trunc('month', j.create_tim...">
         <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
         <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
         <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
@@ -259,7 +259,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		
 
 		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Apr 26, 2019 </div>
-		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Aug 8, 2024 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Nov 13, 2025 </div>
 
 	<hr />
 
@@ -269,13 +269,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <p>Sometimes it’s the best way to get the exact data you need</p>
 
 <p>Can be very useful for:</p>
+
 <ul>
   <li>Debugging</li>
   <li>Reporting</li>
   <li>Analytics</li>
 </ul>
 
-<p>But consider: <a href="https://github.com/usegalaxy-eu/gxadmin"><code class="language-plaintext highlighter-rouge">gxadmin</code></a> and sharing your SQL</p>
+<p>But consider using <a href="https://github.com/usegalaxy-eu/gxadmin"><code class="language-plaintext highlighter-rouge">gxadmin</code></a> and sharing your SQL</p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -289,7 +290,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <hr />
 <h1 id="database-queries-1">Database Queries</h1>
 
-<p>“Can you send me the number of jobs per day/state from Main in September and October?”</p>
+<p>“Can you send me the number of jobs per day/state from our Galaxy in September and October?”</p>
 
 <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
   <span class="n">date_trunc</span><span class="p">(</span><span class="s1">'month'</span><span class="p">,</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span><span class="p">)</span> <span class="k">AS</span> <span class="k">month</span><span class="p">,</span>
@@ -348,9 +349,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <ul>
   <li>It’s unpleasant to write queries every time you need them.</li>
-  <li>So the community collects SQL in <code class="language-plaintext highlighter-rouge">gxadmin</code>.</li>
-  <li>It’s a giant bash script full of SQL and some magic ✨</li>
-  <li><a href="https://github.com/usegalaxy-eu/gxadmin">github.com/usegalaxy-eu/gxadmin</a></li>
+  <li>So the community collects SQL in the <code class="language-plaintext highlighter-rouge">gxadmin</code> project.</li>
+  <li>It’s a fancy bash script full of SQL and some magic ✨</li>
+  <li><a href="https://github.com/galaxyproject/gxadmin">github.com/galaxyproject/gxadmin</a></li>
 </ul>
 
 <p><span>Speaker Notes</span></p>
@@ -358,13 +359,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <ul>
   <li>We often re-run the same queries.</li>
   <li>gxadmin makes it easier by storing the useful queries.</li>
-  <li>everyone is welcome to contribute to it.</li>
+  <li>Everyonede is welcome to contribute to it.</li>
 </ul>
 
 <hr />
 <h1 id="database-queries-3">Database Queries</h1>
 
-<p>“I need a list of current main toolshed users and a number of their repos”</p>
+<p>“I need a list of owners for all installed tools and the number of their repos”</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>gxadmin query ts-repos
 </code></pre></div></div>
@@ -545,7 +546,7 @@ request_memory          |   `64G`
 
 <h1 id="monitoring">Monitoring</h1>
 
-<p>Telegraf can consume Influx formatted output, which <code class="language-plaintext highlighter-rouge">gxadmin</code> can produce:</p>
+<p><code class="language-plaintext highlighter-rouge">gxadmin</code> can also produce Influx-formatted output, which Telegraf can consume:</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>gxadmin iquery queue
 <span class="go">queue,tool_id=ncbi_blastx_wrapper/0.3.1,state=running count=76
@@ -574,7 +575,11 @@ queue,tool_id=hisat2/2.1.0+galaxy4,state=running count=9
 
 <li>gxadmin is a tool to run common database queries useful for Galaxy admins</li>
 
-<li>new queries are welcome and easy to contribute</li>
+<li>new queries are welcome, easy to contribute and share</li>
+
+<li>explore queries at https://galaxyproject.github.io/gxadmin</li>
+
+<li>contribute queries at https://github.com/usegalaxy-eu/gxadmin</li>
 
 </ul>
 
@@ -664,7 +669,7 @@ Tutorial Content is licensed under
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/208a7d443a0b2e963ebeec0d349f6d2f53732e33">208a7d4</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/4438a2c5294dacef50f42523abc91601872b3c35">4438a2c</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
