@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@a956345469ecdd0072af82f9f6424a7c20e0628f",
+		release: "galaxy-training-network@fa6df25a42ccfa8884d0c0dcc2480ee9b9584799",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Neoantigen 1b: Non-Reference-Database-Generation">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-11-07 17:53:37 +0000">
+<meta name="DC.date" content="2025-11-14 14:34:46 +0000">
 <meta name="DC.creator" content="Subina Mehta">
 <meta name="DC.creator" content="Katherine Do">
 <meta name="DC.creator" content="James Johnson"><meta name="description" content="Training material for proteomics workflows in Galaxy">
@@ -182,7 +182,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-11-07 17:53:37 +0000",
+  "dateModified": "2025-11-14 14:34:46 +0000",
   "datePublished": "2025-01-14 14:58:39 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -238,7 +238,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Neoantigen 1b: Non-Reference-Database-Generation",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/neoantigen-non-reference-database-generation/tutorial.html",
-  "version": 3,
+  "version": 4,
   "timeRequired": "PT3H",
   "teaches": "- Downloading databases related to 16SrRNA data\n- For better neoantigen identification results.",
   "keywords": [
@@ -1116,7 +1116,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 14, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 7, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 14, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1134,7 +1134,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
 
     </blockquote>
     </section>
@@ -1153,7 +1153,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>In this framework, Proteogenomics incorporates RNA-Seq data to generate tailored protein sequence databases, enabling the identification of protein sequence variants, including neoantigens, through mass spectrometry analysis (<span class="citation"><a href="#Chambers_2017">Chambers <i>et al.</i> 2017</a></span>).</p>
 
-<p><a href="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_1.PNG" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_1.PNG" alt="Non-Reference_Protein_Database overview workflow. " width="4000" height="2250" loading="lazy" /></a></p>
+<p><a href="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_1.PNG" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_1.PNG" alt="Non-Reference_Protein_Database overview workflow. " width="1280" height="720" loading="lazy" /></a></p>
 
 <p>In this workflow, (A) Generation of variant database, (B) Generation of assembled protein database, and (C) Merging all databases with known HUMAN protein sequences.</p>
 <blockquote class="agenda">
@@ -1554,6 +1554,7 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
     </li>
     <li>Rename as Indel-FASTA</li>
   </ol>
+
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -1596,6 +1597,7 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
     </li>
     <li>Rename as SNV-FASTA</li>
   </ol>
+
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -1638,6 +1640,7 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
     </li>
     <li>Rename as RPKM-FASTA</li>
   </ol>
+
 </blockquote>
 
 <blockquote class="question">
@@ -1672,12 +1675,13 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1" title="Tabular-to-FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular-to-FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited file”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">c['1']</code></li>
+        <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
         <li><em>“Sequence column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
       </ul>
     </li>
     <li>Rename as Indel-FASTA</li>
   </ol>
+
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -1687,12 +1691,13 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1" title="Tabular-to-FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular-to-FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited file”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">c['1']</code></li>
+        <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
         <li><em>“Sequence column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
       </ul>
     </li>
     <li>Rename as SNV-FASTA</li>
   </ol>
+
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -1702,12 +1707,13 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1" title="Tabular-to-FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular-to-FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited file”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">c['1']</code></li>
+        <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
         <li><em>“Sequence column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
       </ul>
     </li>
     <li>Rename as RPKM-FASTA</li>
   </ol>
+
 </blockquote>
 
 <blockquote class="question">
@@ -1776,6 +1782,7 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
     </li>
     <li>Rename as <code class="language-plaintext highlighter-rouge">non-reference_CustomProDB_FASTA</code></li>
   </ol>
+
 </blockquote>
 
 <blockquote class="question">
@@ -1799,7 +1806,7 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
 </blockquote>
 
 <h1 id="extracting-assembled-sequences-with-stringtie-and-gff-compare">Extracting Assembled sequences with Stringtie and GFF compare</h1>
-<p><a href="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_3.PNG" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_3.PNG" alt="Assembled sequence database generation. " width="4000" height="1477" loading="lazy" /></a></p>
+<p><a href="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_3.PNG" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_3.PNG" alt="Assembled sequence database generation. " width="1280" height="720" loading="lazy" /></a></p>
 
 <h2 id="assemble-with-stringtie">Assemble with StringTie</h2>
 
@@ -2060,6 +2067,7 @@ ORDER BY pro_name, cds_start, cds_end
       </ul>
     </li>
   </ol>
+
 </blockquote>
 
 <blockquote class="question">
@@ -2094,7 +2102,7 @@ ORDER BY pro_name, cds_start, cds_end
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/sqlite_to_tabular/sqlite_to_tabular/2.0.0" title="SQLite to tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>SQLite to tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.0)</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SQLite Database”</em> (sqlite): <code class="language-plaintext highlighter-rouge">variant_annotation.sqlite</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SQLite Database”</em> (sqlite): <code class="language-plaintext highlighter-rouge">variant_annotation.sqlite</code> (Variant SQLite from <strong>CustomProDB</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“SQL query”</em>:
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT var_pro_name,
        pro_name,
@@ -2106,6 +2114,7 @@ FROM variant_annotation
       </ul>
     </li>
   </ol>
+
 </blockquote>
 
 <blockquote class="question">
@@ -2287,6 +2296,7 @@ FROM variant_annotation
 
       <p>The tool will append each dataset sequentially in the order provided, producing a single merged output.</p>
     </li>
+    <li>Rename the output to “Genomic-Variant-Protein-BED”</li>
   </ol>
 
 </blockquote>
@@ -2902,7 +2912,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a956345469ecdd0072af82f9f6424a7c20e0628f">a956345</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/fa6df25a42ccfa8884d0c0dcc2480ee9b9584799">fa6df25</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
