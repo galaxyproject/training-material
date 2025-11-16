@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-
 title: Genome annotation (Funannotate), comparison (OrthoFinder) and visualization
   (JBrowse2 & Circos) [Galaxy Training Material]
 zenodo_link: https://zenodo.org/records/17612216
@@ -12,37 +11,35 @@ tags:
   - eukaryote
   - fungi
 questions:
-- How do we annotate an eukaryotic genom with Funannotate?
-- How do we perform functional annotation?
-- How do we evaluate and visualize annotated genomic features with JBrowse2?
-- How do we find orthologous genes across species and paralogous genes within a species with OrthoFinder?
-- How do we evaluate and visualize comparative genomics data with Circos?
+  - How do we annotate an eukaryotic genom with Funannotate?
+  - How do we perform functional annotation?
+  - How do we evaluate and visualize annotated genomic features with JBrowse2?
+  - How do we find orthologous genes across species and paralogous genes within a species with OrthoFinder?
+  - How do we evaluate and visualize comparative genomics data with Circos?
 objectives:
-- Load data into Galaxy
-- Annotate a genome with Funannotate
-- Perform funactional annotation using EggNOG-mapper and InterProScan
-- Merge structural and functional annotations with Funannotate
-- Evaluate annotation quality with BUSCO
-- View annotations with JBrowse2
-- Find orthologs and paralogs with OrthoFinder
-- View comparative genomics data with Circos
+  - Load data into Galaxy
+  - Annotate a genome with Funannotate
+  - Perform funactional annotation using EggNOG-mapper and InterProScan
+  - Merge structural and functional annotations with Funannotate
+  - Evaluate annotation quality with BUSCO
+  - View annotations with JBrowse2
+  - Find orthologs and paralogs with OrthoFinder
+  - View comparative genomics data with Circos
 time_estimation: 4H
 level: Intermediate
 key_points:
-- Funannotate allows performing structural annotations of eukaryotic genomes.
-- Functional annotation can be performed using EggNOG-mapper and InterProScan, and integrated to structural annotations with Funannotate.
-- BUSCO allows inspecting the quality of an annotation.
-- Orthologs and paralogs can be identified with OrthoFinder.
-- JBrowse2 and Circos are useful tools to visualize genomes.
-contributors:
+  - Funannotate allows performing structural annotations of eukaryotic genomes.
+  - Functional annotation can be performed using EggNOG-mapper and InterProScan, and integrated to structural annotations with Funannotate.
+  - BUSCO allows inspecting the quality of an annotation.
+  - Orthologs and paralogs can be identified with OrthoFinder.
+  - JBrowse2 and Circos are useful tools to visualize genomes.
+contributions:
   authorship:
     - soniacasillas
 answer_histories:
   - label: "UseGalaxy.eu"
     history: https://usegalaxy.eu/u/scasillas/h/genome-annotation-funannotate-comparison-orthofinder-and-visualization-jbrowse2-circos
-
 ---
-
 
 # Introduction
 
