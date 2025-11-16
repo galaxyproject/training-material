@@ -575,7 +575,7 @@ This visual inspection is crucial to validating genome annotation results.
 >
 {: .hands_on}
 
-![JBrowse2 genome browser navigation of the data.](../images/jbrowse2.png "JBrowse2 genome browser navigation of the data.")
+![JBrowse2 genome browser navigation of the data.](images/jbrowse2.png "JBrowse2 genome browser navigation of the data.")
 
 > <question-title>Inspecting your gene models</question-title>
 >
@@ -887,7 +887,7 @@ Finally, we are going to generate a Circos plot with the previously-generated da
 >
 {: .tip}
 
-![Circos representations of (A) all the scaffolds, and (B) the ten longest scaffolds.](../images/circos.png "Circos representations of (A) all the scaffolds, and (B) the ten longest scaffolds.")
+![Circos representations of (A) all the scaffolds, and (B) the ten longest scaffolds.](images/circos.png "Circos representations of (A) all the scaffolds, and (B) the ten longest scaffolds.")
 
 > <tip-title>Challenge Task: Visualize ortholog abundance as heatmaps</tip-title>
 >
