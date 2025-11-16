@@ -41,6 +41,7 @@ answer_histories:
     history: https://usegalaxy.eu/u/scasillas/h/genome-annotation-funannotate-comparison-orthofinder-and-visualization-jbrowse2-circos
 ---
 
+
 # Introduction
 
 This tutorial guides learners through a complete workflow for fungal genome annotation, evaluation, comparative genomics, and visualization. We will annotate the genome of *Mucor mucedo* using Funannotate, compare the predicted proteome with those of related *Mucor* species using OrthoFinder, and visualize results both in JBrowse2 and Circos. All data required for the exercises are available in the accompanying Zenodo dataset.
@@ -92,11 +93,12 @@ Before starting, read the following background:
 > <hands-on-title>Upload data from Zenodo</hands-on-title>
 >
 > 1. Create a new Galaxy history.
-> 2. Upload the datasets from **{{ page.zenodo_link }}** using either:
+> 2. Upload the datasets from **<{{ page.zenodo_link }}>** using either:
 >    - **Paste/Fetch data** (URLs from Zenodo), or
 >    - **Upload from your computer** after downloading the files.
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Ensure that the datatypes are correctly assigned.
@@ -121,7 +123,7 @@ Before starting, read the following background:
 >    > 2. Click **“Download one protein sequence per gene (FASTA)”**.
 >    > 3. Upload all FASTA files to Galaxy.
 >    > 4. Create a **collection** named `Proteomes`, including all the downloaded proteomes.
->    > {: .comment}
+>    {: .comment}
 >
 {: .hands_on}
 
@@ -769,7 +771,7 @@ To produce a scatter track, we must convert the BIGWIG output from the GC Skew t
 >
 {: .question}
 
-## Converting GFF3 to Circos Tiles**
+## Converting GFF3 to Circos Tiles
 
 Tile tracks in Circos are commonly used to visualize intervals, such as gene annotations or other genomic features.
 
