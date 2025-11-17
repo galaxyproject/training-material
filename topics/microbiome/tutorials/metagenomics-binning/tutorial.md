@@ -31,6 +31,8 @@ contributions:
   authorship:
   - npechl
   - fpsom
+  - vinisalazar
+  - paulzierep
 requirements:
   - type: internal
     topic: metagenomics
