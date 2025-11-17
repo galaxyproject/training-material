@@ -168,7 +168,7 @@ The model will process the input image and generate two outputs:
 > >
 > > 1. Because deep learning models are trained on specific image shapes and dimensions; mismatches will cause errors or wrong results.
 > > 2. The model will fail to run or produce invalid output.
-> > 3. **TIFF (.tif)** is a standard format for storing image data, commonly used in microscopy and bioimaging. It can be easily viewed and interpreted visually.
+> > 3. **TIFF (.tiff)** is a standard format for storing image data, commonly used in microscopy and bioimaging. It can be easily viewed and interpreted visually.
 > >    **NPY (.npy)** is a binary format used by NumPy to store arrays. In this case, it contains the raw prediction tensor produced by the model, which can be useful for further analysis or visualization with Python tools.
 > > 4. The model generates a **predicted image** that highlights or segments specific structures (e.g. nuclei, cells, mitochondria) based on what it learned during training. By comparing the output image to the input, users can see which regions were detected or classified, helping to extract biological meaning from the raw data.
 > >

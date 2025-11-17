@@ -52,8 +52,8 @@ This tutorial shows how to use Galaxy to perform basic image analysis tasks such
 
 # Getting Data
 
-The dataset required for this tutorial is available from [Zenodo](https://zenodo.org/record/3362976) and
-contains a screen of [DAPI](https://en.wikipedia.org/wiki/DAPI) stained [HeLa](https://en.wikipedia.org/wiki/HeLa) nuclei ([more information](https://zenodo.org/record/3362976)). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
+The dataset required for this tutorial is available from [Zenodo]({{ page.zenodo_link }}) and
+contains a screen of [DAPI](https://en.wikipedia.org/wiki/DAPI) stained [HeLa](https://en.wikipedia.org/wiki/HeLa) nuclei ([more information]({{ page.zenodo_link }})). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
 
 Our objective is to automatically count the number of cells contained in this image. In order to achieve this, we will enhance the quality of the image, automatically detect the nuclei and segment the nuclei and count them.
 
@@ -64,11 +64,11 @@ Our objective is to automatically count the number of cells contained in this im
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the following dataset from [Zenodo](https://zenodo.org/record/3362976) or from the data library (ask your instructor).
+> 2. Import the following dataset from [Zenodo]({{ page.zenodo_link }}) or from the data library (ask your instructor).
 >    - **Important:** Choose the type of data as `zip`.
 >
 >    ```
->    https://zenodo.org/record/3362976/files/B2.zip
+>    {{ page.zenodo_link }}/files/B2.zip
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -80,7 +80,7 @@ Our objective is to automatically count the number of cells contained in this im
 >    - *"Extract single file"*: `Single file`
 >    - *"Filepath"*: `B2--W00026--P00001--Z00000--T00000--dapi.tif`
 >
-> 4. Rename {% icon galaxy-pencil %} the dataset to `input.tif`
+> 4. Rename {% icon galaxy-pencil %} the dataset to `input.tiff`
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 {: .hands_on}
@@ -93,7 +93,7 @@ Now, we can extract metadata from an image.
 > <hands-on-title>Extract Image Metadata</hands-on-title>
 >
 > 1. {% tool [Show image info](toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1) %} with the following parameters to extract metadata from the image:
->    - {% icon param-file %} *"Input Image"*: `input.tif` file (output of the previous step)
+>    - {% icon param-file %} *"Input Image"*: `input.tiff` file (output of the previous step)
 > 2. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and search for image acquisition information
 >
 >    > <question-title></question-title>
@@ -141,7 +141,7 @@ Next we will normalize the histogram to improve the contrast. We do this using a
 > <hands-on-title>Normalize Histogram</hands-on-title>
 >
 > 1. {% tool [Perform histogram equalization](toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.18.1+galaxy0) %} with the following parameters to normalize the histogram of the image:
->    - {% icon param-file %} *"Input image"*: `input.tif` file
+>    - {% icon param-file %} *"Input image"*: `input.tiff` file
 >    - *"Histogram equalization algorithm"*: `CLAHE`
 > 2. Rename {% icon galaxy-pencil %} the generated file to `input_normalized`.
 > 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image using the **Tiff Viewer** visualization plugin.
@@ -162,7 +162,7 @@ Specific features of interest (e.g., edges, noise) can be enhanced or suppressed
 > 1. {% tool [Filter 2-D image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy1) %} with the following parameters to smooth the image:
 >    - *"Filter type"*: `Gaussian`
 >    - *"Sigma"*: `3`
->    - {% icon param-file %} *"Source file"*: `input.tif` file
+>    - {% icon param-file %} *"Source file"*: `input.tiff` file
 > 2. Rename {% icon galaxy-pencil %} the generated file to `input_smoothed`.
 > 3. {% tool [Perform histogram equalization](toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.18.1+galaxy0) %} with the following parameters to normalize the histogram of the image:
 >    - {% icon param-file %} *"Input image"*: `input_smoothed` file (output of {% tool [Filter 2-D image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy1) %})

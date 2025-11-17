@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Training Custom YOLO Models for Segmentation of Bioimages
-zenodo_link: https://zenodo.org/records/15674585
+zenodo_link: https://zenodo.org/records/16096782
 questions:
 - Why use YOLO for segmentation in bioimage analysis?
 - How can I train and use a custom YOLO model for segmentation tasks using Galaxy?
@@ -42,11 +42,11 @@ This tutorial shows an easy-to-use and efficient workflow of training YOLO model
 >
 > 1. Create a new history for this tutorial
 >   
-> 2. Import the following dataset from [Zenodo](https://zenodo.org/record/16096782) or from the data library.
+> 2. Import the following dataset from [Zenodo]({{ page.zenodo_link }}) or from the data library.
 >    - **Important:** Choose the type of data as `zip`.
 >
 >    ```
->    https://zenodo.org/records/16096782/files/example-input-images.zip
+>    {{ page.zenodo_link }}/files/example-input-images.zip
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -58,10 +58,10 @@ This tutorial shows an easy-to-use and efficient workflow of training YOLO model
 >    - *"Extract single file"*: `All files`
 >    - Click on **Edit** {% icon galaxy-pencil %} next to the collection name in your history to rename it to `input-images`
 >
-> 4. Import the class name file from [Zenodo](https://zenodo.org/record/16096782)
+> 4. Import the class name file from [Zenodo]({{ page.zenodo_link }})
 > 
 >    ```
->    https://zenodo.org/records/16096782/files/class_names.txt
+>    {{ page.zenodo_link }}/files/class_names.txt
 >    ```
 >    
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -154,8 +154,14 @@ In this tutorial, we annotate all 22 example images using the tool's `Auto label
 > ![al open dir](../../images/yolo-train/al_finish.png){: width="75%"}
 >
 >    - **Important:** The object label must match the content of `class_names.txt`.
->    - Repeat these steps for each image in the dataset to complete the interactive annotation process. 
+>    - Repeat these steps for each image in the dataset to complete the interactive annotation process.
 >
+> 3. Close the tool.
+> 
+> Once you have finished annotating all your images, you can safely close the interactive environment.  
+> Click on the small cross at the top-right corner of the AnyLabeling window.  
+> ![Closing AnyLabeling](../../images/yolo-train/al_close.png){: width="50%"}  
+> Wait a few moments for the interface to close completely and return to the Galaxy workspace.
 {: .hands_on}
 
 

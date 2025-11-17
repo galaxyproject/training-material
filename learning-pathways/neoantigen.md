@@ -9,8 +9,8 @@ title: Neoantigen discovery using the iPepGen pipeline
 description: |
   This learning path introduces a comprehensive immunopeptidogenomics (iPepGen) workflow for neoantigen discovery using label-free mass spectrometry data. The modules guide you through fusion and variant database generation, peptide identification with FragPipe, peptide validation using PepQuery2, and immunogenicity assessment through HLA binding predictions and IEDB screening.
 
-cover-image: shared/images/proteomics.png
-cover-image-alt: image of a 3D protein folding structure
+cover-image: shared/images/neoantigen_lp.png
+cover-image-alt: image of neoantigen mutation
 
 editorial_board:
 - subinamehta
@@ -65,6 +65,16 @@ pathway:
       - name: neoantigen-hla-binding-novel-peptides
         topic: proteomics
 
+
+
+
 ---
 
 New to immunopeptidogenomics or neoantigen prediction? Follow this learning path to discover how label-free mass spectrometry and proteogenomic integration can accelerate the identification of clinically relevant neoantigens and help in personalized immunotherapy.
+
+# Are you feeling adventurous? ✨
+
+## One-Click Neoantigen Workflow
+
+This new [One-Click Neoantigen Workflow](https://usegalaxy.eu/u/galaxyp/w/ipepgen-one-click-workflow) brings together all key modules of the neoantigen discovery process into a single, streamlined analysis within Galaxy. Instead of launching each tutorial separately, users can now execute the entire end-to-end pipeline—from database creation to HLA binding prediction—with just one click —without ever leaving Galaxy.
+

@@ -1,1 +1,606 @@
-{"a_galaxy_workflow": "true", "annotation": "", "creator": [{"class": "Person", "identifier": "0000-0002-5192-126X", "name": "Pavankumar Videm"}], "format-version": "0.1", "license": "CC-BY-4.0", "name": "scATAC-seq Count Matrix Filtering", "steps": {"0": {"annotation": "", "content_id": null, "errors": null, "id": 0, "input_connections": {}, "inputs": [{"description": "", "name": "scATAC-seq Anndata"}], "label": "scATAC-seq Anndata", "name": "Input dataset", "outputs": [], "position": {"left": 0, "top": 522}, "tool_id": null, "tool_state": "{\"optional\": false, \"tag\": null}", "tool_version": null, "type": "data_input", "uuid": "2e2b15be-c7c1-4ebb-bb2c-5b269c563ae4", "when": null, "workflow_outputs": []}, "1": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "errors": null, "id": 1, "input_connections": {"adata": {"id": 0, "output_name": "output"}}, "inputs": [], "label": null, "name": "scATAC-seq Preprocessing", "outputs": [{"name": "anndata_out", "type": "h5ad"}], "position": {"left": 280, "top": 506}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "tool_shed_repository": {"changeset_revision": "29f5f25b9935", "name": "episcanpy_preprocess", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_cells\", \"__current_case__\": 1, \"filter\": {\"filter\": \"min_features\", \"__current_case__\": 2, \"min_features\": \"100\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": null, "type": "tool", "uuid": "fc161d97-a1f1-4c4b-a233-f85fb12e7a4e", "when": null, "workflow_outputs": []}, "2": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "errors": null, "id": 2, "input_connections": {"adata": {"id": 1, "output_name": "anndata_out"}}, "inputs": [], "label": null, "name": "scATAC-seq Preprocessing", "outputs": [{"name": "anndata_out", "type": "h5ad"}], "position": {"left": 560, "top": 506}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "tool_shed_repository": {"changeset_revision": "29f5f25b9935", "name": "episcanpy_preprocess", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_features\", \"__current_case__\": 2, \"filter\": {\"filter\": \"min_cells\", \"__current_case__\": 2, \"min_cells\": \"1\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": null, "type": "tool", "uuid": "00145357-df99-4c98-adaf-ac78d70679e1", "when": null, "workflow_outputs": []}, "3": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "errors": null, "id": 3, "input_connections": {"adata": {"id": 2, "output_name": "anndata_out"}}, "inputs": [], "label": null, "name": "scATAC-seq Preprocessing", "outputs": [{"name": "anndata_out", "type": "h5ad"}], "position": {"left": 840, "top": 506}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "tool_shed_repository": {"changeset_revision": "29f5f25b9935", "name": "episcanpy_preprocess", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"nb_feat_log\", \"__current_case__\": 3}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": null, "type": "tool", "uuid": "b5349b7c-fd52-4772-af8e-685c1e910246", "when": null, "workflow_outputs": []}, "4": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1", "errors": null, "id": 4, "input_connections": {"adata": {"id": 3, "output_name": "anndata_out"}}, "inputs": [], "label": null, "name": "Plot", "outputs": [{"name": "out_png", "type": "png"}, {"name": "hidden_output", "type": "txt"}], "position": {"left": 1120, "top": 0}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1", "tool_shed_repository": {"changeset_revision": "aa0c474463c2", "name": "scanpy_plot", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": true}, \"format\": \"png\", \"method\": {\"method\": \"pl.violin\", \"__current_case__\": 3, \"key_variables\": {\"type\": \"custom\", \"__current_case__\": 2, \"keys\": \"nb_features, log_nb_features\"}, \"groupby\": \"\", \"log\": false, \"use_raw\": false, \"violin_plot\": {\"stripplot\": {\"stripplot\": \"True\", \"__current_case__\": 0, \"jitter\": {\"jitter\": \"True\", \"__current_case__\": 0, \"size\": \"1.0\"}}, \"multi_panel\": {\"multi_panel\": \"True\", \"__current_case__\": 0, \"width\": null, \"height\": null}, \"scale\": \"width\"}, \"xlabel\": \"\", \"rotation\": null, \"seaborn_violinplot\": {\"bw\": \"scott\", \"orient\": null, \"linewidth\": \"0.0\", \"color\": \"DarkCyan\", \"saturation\": \"0.75\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": null, "type": "tool", "uuid": "f34c8610-791a-446c-9e57-e680fc4d6682", "when": null, "workflow_outputs": []}, "5": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "errors": null, "id": 5, "input_connections": {"adata": {"id": 3, "output_name": "anndata_out"}}, "inputs": [], "label": null, "name": "scATAC-seq Preprocessing", "outputs": [{"name": "anndata_out", "type": "h5ad"}, {"name": "out_png", "type": "png"}], "position": {"left": 1120, "top": 164}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "tool_shed_repository": {"changeset_revision": "29f5f25b9935", "name": "episcanpy_preprocess", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.coverage_features\", \"__current_case__\": 5, \"binary\": true, \"log\": false, \"threshold\": \"5.0\", \"bins\": \"50\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": null, "type": "tool", "uuid": "2f0d26ca-3c6d-4e63-86a0-3e9c9bc761a6", "when": null, "workflow_outputs": []}, "6": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "errors": null, "id": 6, "input_connections": {"adata": {"id": 3, "output_name": "anndata_out"}}, "inputs": [], "label": null, "name": "scATAC-seq Preprocessing", "outputs": [{"name": "anndata_out", "type": "h5ad"}, {"name": "out_png", "type": "png"}], "position": {"left": 1120, "top": 348}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "tool_shed_repository": {"changeset_revision": "29f5f25b9935", "name": "episcanpy_preprocess", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.coverage_cells\", \"__current_case__\": 4, \"binary\": true, \"log\": true, \"threshold\": \"1000.0\", \"bins\": \"50\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": null, "type": "tool", "uuid": "3a956521-e1e3-4dbc-b906-74b43a7dba5b", "when": null, "workflow_outputs": []}, "7": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "errors": null, "id": 7, "input_connections": {"adata": {"id": 3, "output_name": "anndata_out"}}, "inputs": [], "label": null, "name": "scATAC-seq Preprocessing", "outputs": [{"name": "anndata_out", "type": "h5ad"}, {"name": "out_png", "type": "png"}], "position": {"left": 1120, "top": 532}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "tool_shed_repository": {"changeset_revision": "29f5f25b9935", "name": "episcanpy_preprocess", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.coverage_cells\", \"__current_case__\": 4, \"binary\": true, \"log\": false, \"threshold\": \"1000.0\", \"bins\": \"50\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": null, "type": "tool", "uuid": "e7a5471d-9613-4818-9b21-35a6e3e0befd", "when": null, "workflow_outputs": []}, "8": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "errors": null, "id": 8, "input_connections": {"adata": {"id": 3, "output_name": "anndata_out"}}, "inputs": [], "label": null, "name": "scATAC-seq Preprocessing", "outputs": [{"name": "anndata_out", "type": "h5ad"}, {"name": "out_png", "type": "png"}], "position": {"left": 1120, "top": 716}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "tool_shed_repository": {"changeset_revision": "29f5f25b9935", "name": "episcanpy_preprocess", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.coverage_features\", \"__current_case__\": 5, \"binary\": true, \"log\": true, \"threshold\": \"5.0\", \"bins\": \"50\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": null, "type": "tool", "uuid": "ebf47548-6703-4139-905e-7ace31288c72", "when": null, "workflow_outputs": []}, "9": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "errors": null, "id": 9, "input_connections": {"adata": {"id": 8, "output_name": "anndata_out"}}, "inputs": [], "label": null, "name": "scATAC-seq Preprocessing", "outputs": [{"name": "anndata_out", "type": "h5ad"}], "position": {"left": 1400, "top": 731}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "tool_shed_repository": {"changeset_revision": "29f5f25b9935", "name": "episcanpy_preprocess", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_cells\", \"__current_case__\": 1, \"filter\": {\"filter\": \"min_features\", \"__current_case__\": 2, \"min_features\": \"1000\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": null, "type": "tool", "uuid": "da67876a-fc2b-43b3-b373-4a6751b1534e", "when": null, "workflow_outputs": []}, "10": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "errors": null, "id": 10, "input_connections": {"adata": {"id": 9, "output_name": "anndata_out"}}, "inputs": [], "label": null, "name": "scATAC-seq Preprocessing", "outputs": [{"name": "anndata_out", "type": "h5ad"}], "position": {"left": 1680, "top": 731}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "tool_shed_repository": {"changeset_revision": "29f5f25b9935", "name": "episcanpy_preprocess", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_cells\", \"__current_case__\": 1, \"filter\": {\"filter\": \"max_features\", \"__current_case__\": 3, \"max_features\": \"12500\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": null, "type": "tool", "uuid": "0d2abe7d-6548-4d2c-b1f6-fe0109e7722a", "when": null, "workflow_outputs": []}, "11": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "errors": null, "id": 11, "input_connections": {"adata": {"id": 10, "output_name": "anndata_out"}}, "inputs": [], "label": null, "name": "scATAC-seq Preprocessing", "outputs": [{"name": "anndata_out", "type": "h5ad"}], "position": {"left": 1960, "top": 731}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1", "tool_shed_repository": {"changeset_revision": "29f5f25b9935", "name": "episcanpy_preprocess", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_features\", \"__current_case__\": 2, \"filter\": {\"filter\": \"min_cells\", \"__current_case__\": 2, \"min_cells\": \"5\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": null, "type": "tool", "uuid": "0996857c-1936-4d15-9bfa-0130fe5e4fc7", "when": null, "workflow_outputs": []}, "12": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1", "errors": null, "id": 12, "input_connections": {"adata": {"id": 11, "output_name": "anndata_out"}}, "inputs": [], "label": null, "name": "Plot", "outputs": [{"name": "out_png", "type": "png"}, {"name": "hidden_output", "type": "txt"}], "position": {"left": 2240, "top": 762}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1", "tool_shed_repository": {"changeset_revision": "aa0c474463c2", "name": "scanpy_plot", "owner": "iuc", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": true}, \"format\": \"png\", \"method\": {\"method\": \"pl.violin\", \"__current_case__\": 3, \"key_variables\": {\"type\": \"custom\", \"__current_case__\": 2, \"keys\": \"nb_features, log_nb_features\"}, \"groupby\": \"\", \"log\": false, \"use_raw\": false, \"violin_plot\": {\"stripplot\": {\"stripplot\": \"True\", \"__current_case__\": 0, \"jitter\": {\"jitter\": \"True\", \"__current_case__\": 0, \"size\": \"1.0\"}}, \"multi_panel\": {\"multi_panel\": \"True\", \"__current_case__\": 0, \"width\": null, \"height\": null}, \"scale\": \"width\"}, \"xlabel\": \"\", \"rotation\": null, \"seaborn_violinplot\": {\"bw\": \"scott\", \"orient\": null, \"linewidth\": \"0.0\", \"color\": \"DarkCyan\", \"saturation\": \"0.75\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": null, "type": "tool", "uuid": "248ab262-9668-40df-9e5a-39280a4a1cd8", "when": null, "workflow_outputs": []}}, "tags": [], "uuid": "3df8b3d2-fe00-47ba-a5e0-1b6706e5a5fa", "version": 18}
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Visualize and filter scATAC-seq anndata to produce a high quality count matrix  ",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0002-5192-126X",
+            "name": "Pavankumar Videm"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "scATAC-seq Count Matrix Filtering",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "scATAC Anndata with cells x peaks",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "scATAC Anndata with cells x peaks",
+                    "name": "scATAC-seq Anndata"
+                }
+            ],
+            "label": "scATAC-seq Anndata",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 522
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "481b6e82-9d08-4622-b676-ad0ac7269766",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "adata": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "scATAC-seq Preprocessing",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 280,
+                "top": 506
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "29f5f25b9935",
+                "name": "episcanpy_preprocess",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_cells\", \"__current_case__\": 1, \"filter\": {\"filter\": \"min_features\", \"__current_case__\": 2, \"min_features\": \"100\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.2+galaxy1",
+            "type": "tool",
+            "uuid": "cacf81d7-27ea-4866-922f-94e2d679f08c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "adata": {
+                    "id": 1,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "scATAC-seq Preprocessing",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 560,
+                "top": 506
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "29f5f25b9935",
+                "name": "episcanpy_preprocess",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_features\", \"__current_case__\": 2, \"filter\": {\"filter\": \"min_cells\", \"__current_case__\": 2, \"min_cells\": \"1\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.2+galaxy1",
+            "type": "tool",
+            "uuid": "d52155b4-62e9-4610-9f07-070343a14408",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "adata": {
+                    "id": 2,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "scATAC-seq Preprocessing",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 840,
+                "top": 506
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "29f5f25b9935",
+                "name": "episcanpy_preprocess",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"nb_feat_log\", \"__current_case__\": 3}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.2+galaxy1",
+            "type": "tool",
+            "uuid": "ccde2cf5-4757-49b4-922b-3c203d96d492",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.10.2+galaxy2",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "adata": {
+                    "id": 3,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy plot",
+            "outputs": [
+                {
+                    "name": "out_png",
+                    "type": "png"
+                },
+                {
+                    "name": "hidden_output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1120,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.10.2+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "5a5468c0d26f",
+                "name": "scanpy_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": true}, \"format\": \"png\", \"method\": {\"method\": \"pl.violin\", \"__current_case__\": 4, \"key_variables\": {\"type\": \"custom\", \"__current_case__\": 2, \"keys\": \"nb_features, log_nb_features\"}, \"groupby\": \"\", \"log\": false, \"use_raw\": false, \"violin_plot\": {\"stripplot\": {\"stripplot\": \"True\", \"__current_case__\": 0, \"jitter\": {\"jitter\": \"True\", \"__current_case__\": 0, \"size\": \"1.0\"}}, \"multi_panel\": {\"multi_panel\": \"True\", \"__current_case__\": 1}}, \"xlabel\": \"\", \"rotation\": null, \"seaborn_violinplot\": {\"bw_method\": \"scott\", \"bw_adjust\": \"1.0\", \"orient\": null, \"linewidth\": \"0.0\", \"color\": \"DarkCyan\", \"saturation\": \"0.75\"}, \"layer\": \"\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.10.2+galaxy2",
+            "type": "tool",
+            "uuid": "f0f0b753-13e8-4ed8-9ced-26a98684949b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "adata": {
+                    "id": 3,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "scATAC-seq Preprocessing",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                },
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1120,
+                "top": 164
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "29f5f25b9935",
+                "name": "episcanpy_preprocess",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.coverage_features\", \"__current_case__\": 5, \"binary\": true, \"log\": false, \"threshold\": \"5.0\", \"bins\": \"50\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.2+galaxy1",
+            "type": "tool",
+            "uuid": "cd77589f-f171-4a39-bfe2-4b30fb0b1e36",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "adata": {
+                    "id": 3,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "scATAC-seq Preprocessing",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                },
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1120,
+                "top": 348
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "29f5f25b9935",
+                "name": "episcanpy_preprocess",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.coverage_cells\", \"__current_case__\": 4, \"binary\": true, \"log\": true, \"threshold\": \"1000.0\", \"bins\": \"50\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.2+galaxy1",
+            "type": "tool",
+            "uuid": "22af07b2-641f-47f9-949d-82b6c1526afa",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "adata": {
+                    "id": 3,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "scATAC-seq Preprocessing",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                },
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1120,
+                "top": 532
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "29f5f25b9935",
+                "name": "episcanpy_preprocess",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.coverage_cells\", \"__current_case__\": 4, \"binary\": true, \"log\": false, \"threshold\": \"1000.0\", \"bins\": \"50\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.2+galaxy1",
+            "type": "tool",
+            "uuid": "00e2fe14-6e22-4d27-b5a0-4d113ce31015",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "adata": {
+                    "id": 3,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "scATAC-seq Preprocessing",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                },
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1120,
+                "top": 716
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "29f5f25b9935",
+                "name": "episcanpy_preprocess",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.coverage_features\", \"__current_case__\": 5, \"binary\": true, \"log\": true, \"threshold\": \"5.0\", \"bins\": \"50\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.2+galaxy1",
+            "type": "tool",
+            "uuid": "a7c7dbeb-1ec9-4963-ac73-4513c5f40609",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "adata": {
+                    "id": 8,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "scATAC-seq Preprocessing",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 1400,
+                "top": 731
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "29f5f25b9935",
+                "name": "episcanpy_preprocess",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_cells\", \"__current_case__\": 1, \"filter\": {\"filter\": \"min_features\", \"__current_case__\": 2, \"min_features\": \"1000\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.2+galaxy1",
+            "type": "tool",
+            "uuid": "d462068c-78a6-4ce1-a32f-a41009ca86fd",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "adata": {
+                    "id": 9,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "scATAC-seq Preprocessing",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 1680,
+                "top": 731
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "29f5f25b9935",
+                "name": "episcanpy_preprocess",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_cells\", \"__current_case__\": 1, \"filter\": {\"filter\": \"max_features\", \"__current_case__\": 3, \"max_features\": \"12500\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.2+galaxy1",
+            "type": "tool",
+            "uuid": "5ffff04c-ffde-4924-936a-569fb562ff7e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "adata": {
+                    "id": 10,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "scATAC-seq Preprocessing",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 1960,
+                "top": 731
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/episcanpy_preprocess/episcanpy_preprocess/0.3.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "29f5f25b9935",
+                "name": "episcanpy_preprocess",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"method\": {\"method\": \"pp.filter_features\", \"__current_case__\": 2, \"filter\": {\"filter\": \"min_cells\", \"__current_case__\": 2, \"min_cells\": \"5\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.2+galaxy1",
+            "type": "tool",
+            "uuid": "96079f7c-3d38-4f9c-8b16-78148d1dd5d2",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Filtered Anndata",
+                    "output_name": "anndata_out",
+                    "uuid": "019f2426-d144-4143-a7f2-60e51385623e"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input": {
+                    "id": 11,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Inspect AnnData",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Inspect AnnData",
+            "outputs": [
+                {
+                    "name": "general",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 2275.342974552771,
+                "top": 568.3314228134491
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "afe044e6bc93",
+                "name": "anndata_inspect",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"inspect\": {\"info\": \"general\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy1",
+            "type": "tool",
+            "uuid": "f3bf4aa4-b81d-4b95-8895-2120b25b7fda",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Anndata info",
+                    "output_name": "general",
+                    "uuid": "c16d5f08-eb75-4332-bfbe-701af27395b4"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.10.2+galaxy2",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "adata": {
+                    "id": 11,
+                    "output_name": "anndata_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scanpy plot",
+            "outputs": [
+                {
+                    "name": "out_png",
+                    "type": "png"
+                },
+                {
+                    "name": "hidden_output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 2240,
+                "top": 762
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.10.2+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "5a5468c0d26f",
+                "name": "scanpy_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": true}, \"format\": \"png\", \"method\": {\"method\": \"pl.violin\", \"__current_case__\": 4, \"key_variables\": {\"type\": \"custom\", \"__current_case__\": 2, \"keys\": \"nb_features, log_nb_features\"}, \"groupby\": \"\", \"log\": false, \"use_raw\": false, \"violin_plot\": {\"stripplot\": {\"stripplot\": \"True\", \"__current_case__\": 0, \"jitter\": {\"jitter\": \"True\", \"__current_case__\": 0, \"size\": \"1.0\"}}, \"multi_panel\": {\"multi_panel\": \"True\", \"__current_case__\": 1}}, \"xlabel\": \"\", \"rotation\": null, \"seaborn_violinplot\": {\"bw_method\": \"scott\", \"bw_adjust\": \"1.0\", \"orient\": null, \"linewidth\": \"0.0\", \"color\": \"DarkCyan\", \"saturation\": \"0.75\"}, \"layer\": \"\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.10.2+galaxy2",
+            "type": "tool",
+            "uuid": "26d17155-d440-4beb-8241-c4fc3012dfe0",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "out_png",
+                    "output_name": "out_png",
+                    "uuid": "fc369121-d4a3-4309-bf6a-7780767f52f6"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "name:single-cell"
+    ],
+    "uuid": "65a60f2c-e057-4696-96ad-ac7cefc4e7c0",
+    "version": 4
+}

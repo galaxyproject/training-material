@@ -9,7 +9,7 @@ questions:
   - "How can I count the number of detected spots automatically?"
 objectives:
   - Perform a 2D spots/blobs detection in an image fetched from IDR
-  - Count the detected spots and blo
+  - Count the detected spots and blobs
 key_points:
 - Fluorescent markers can be detected using Galaxy
 - Objects can be automatically counted and the intensity range can be plotted
@@ -75,7 +75,7 @@ and selected the 10th z-stack for analysis.
 > 1. If you are logged in, create a new history for this tutorial.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
-> 2. **IDR Download** {% icon tool %} with the following parameters:
+> 2. {% tool [IDR Download](toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.45) %} with the following parameters:
 >    - *"How would you like to specify the IDs of images to download?"*: `As text (comma-separated list of IDs or a valid IDR link)`
 >    -  *"Image IDs to download"*: `4496770`
 >    -  *"Which Images do you want to download": `Exported TIFF (single channel, single stack)`
@@ -85,7 +85,10 @@ and selected the 10th z-stack for analysis.
 >    -  *"Limit the download to a selected region of the image?"*: `No, download the entire image plane`
 >    -  *"Skip failed retrievals?"*: `No`
 >    -  *"Download images in a tarball?"*: `No`
-> 3. Rename {% icon galaxy-pencil %} the generated file to `RNA_input`.
+> 3. {% tool [Extract dataset](__EXTRACT_DATASET__) %} with the following parameters:
+>    - {% icon param-collection %} *"Input List"*: `Download IDR/OMERO` (output of IDR Download tool)
+>    - *"How should a dataset be selected?"*: `The first dataset`
+> 4. Rename {% icon galaxy-pencil %} the generated file to `RNA_input.tiff`.
 {: .hands_on}
 
 # Improve image contrast 
@@ -107,9 +110,9 @@ We do this using a [Contrast Limited Adaptive Histogram Equalization (CLAHE)](ht
 > <hands-on-title>Normalize Histogram</hands-on-title>
 >
 > 1. {% tool [Perform histogram equalization](toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.18.1+galaxy0) %} with the following parameters to normalize the histogram of the image:
->    - {% icon param-file %} *"Input image"*: `RNA_input.tif` file
+>    - {% icon param-file %} *"Input image"*: `RNA_input.tiff` file
 >    - *"Histogram equalization algorithm"*: `CLAHE`
-> 2. Rename {% icon galaxy-pencil %} the generated file to `RNA_input_normalized`.
+> 2. Rename {% icon galaxy-pencil %} the generated file to `RNA_input_normalized.tiff`.
 > 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image using the **Tiff Viewer** visualization plugin.
 {: .hands_on}
 
@@ -126,7 +129,7 @@ We can now try to detect blobs and measure their intensity... Let's run a specif
 > <hands-on-title>Perform 2-D spot detection</hands-on-title>
 >
 > 1. {% tool [Perform 2-D spot detection ](toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.1+galaxy0) %} with the following parameters to detect the 2D spots:
->    - {% icon param-file %} *"Intensity image or a stack of images"*: `RNA_input_normalized.tif` file
+>    - {% icon param-file %} *"Intensity image or a stack of images"*: `RNA_input_normalized.tiff` file
 >    - *"Starting time point (1 for the first frame of the stack) "*: `1`
 >    - *"Ending time point (0 for the last frame of the stack)"*: `0`
 >    - *"Detection filter"*: `Laplacian of Gaussian`
@@ -169,7 +172,7 @@ You can get these info by running the "Show image info" tool on the original ima
 >    - *"Tabular list of points has header"*: `Yes`
 >    - *"Swap X and Y coordinates"*: `No`
 >    - *"Produce binary image"*: `No`
-> 2. Rename {% icon galaxy-pencil %} the generated file to `RNA_labels`.
+> 2. Rename {% icon galaxy-pencil %} the generated file to `RNA_labels.tiff`.
 > 3. Click on the **visualise icon** {% icon galaxy-visualise %} of the file to visually inspect the image using the **Tiff Viewer** visualization plugin.
 {: .hands_on}
 
@@ -188,8 +191,8 @@ Results can be overlayed with the original image.
 >
 > 1. {% tool [Overlay images](toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy4) %} with the following parameters to convert the image to PNG:
 >    - *"Type of the overlay"*: `Segmentation contours over image`
->    - {% icon param-file %} *"Intensity image"*: `RNA_input_normalized.tif` file
->    - {% icon param-file %} *"Label map"*: `RNA_labels.tif` file (output of {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0) %})
+>    - {% icon param-file %} *"Intensity image"*: `RNA_input_normalized.tiff` file
+>    - {% icon param-file %} *"Label map"*: `RNA_labels.tiff` file (output of {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0) %})
 >    - *"Contour thickness"*: `1`
 >    - *"Contour color"*: `red`
 >    - *"Show labels"*: `No`

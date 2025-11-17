@@ -164,7 +164,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - a comm
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -31,3 +31,10 @@
+>    @@ -30,3 +30,10 @@
 >     # TPV Linting
 >     - name: usegalaxy_eu.tpv_auto_lint
 >       version: 0.4.3
@@ -294,7 +294,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -174,8 +174,11 @@ certbot_environment: staging
+>    @@ -176,8 +176,11 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - www-data
@@ -306,7 +306,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -225,6 +228,47 @@ slurm_config:
+>    @@ -227,6 +230,47 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     
@@ -777,7 +777,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -21,6 +21,16 @@ galaxy_job_config:
+>    @@ -23,6 +23,16 @@ galaxy_job_config:
 >         slurm:
 >           load: galaxy.jobs.runners.slurm:SlurmJobRunner
 >           drmaa_library_path: /usr/lib/slurm-drmaa/lib/libdrmaa.so.1

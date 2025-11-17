@@ -105,7 +105,7 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -20,3 +20,6 @@
+>    @@ -19,3 +19,6 @@
 >     # CVMFS Support
 >     - src: galaxyproject.cvmfs
 >       version: 0.3.1
@@ -202,7 +202,7 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -75,6 +75,9 @@ galaxy_config:
+>    @@ -77,6 +77,9 @@ galaxy_config:
 >         tus_upload_store: "{{ galaxy_tus_upload_store }}"
 >         # CVMFS
 >         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
@@ -212,7 +212,7 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -114,6 +117,12 @@ galaxy_config_files:
+>    @@ -116,6 +119,12 @@ galaxy_config_files:
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
 >     
@@ -279,7 +279,7 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -21,11 +21,24 @@ galaxy_job_config:
+>    @@ -23,11 +23,24 @@ galaxy_job_config:
 >       handling:
 >         assign: ['db-skip-locked']
 >       execution:

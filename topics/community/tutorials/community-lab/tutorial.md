@@ -30,7 +30,7 @@ The **Community lab**, a centralised webpage that enables communities to rapidly
   *For example, [the microgalaxy lab (Europe)](https://microbiology.usegalaxy.eu).*
 
 
-The aim is this tutorial is to create the files necessary to display the labs in each Galaxy instance.
+The aim of this tutorial is to create the files necessary to display the labs in each Galaxy instance.
 
 You can also use the [Galaxy Labs engine](https://labs.usegalaxy.org.au).
 
@@ -67,62 +67,40 @@ communities/<your community>/lab/sections_templates/
         5_support_and_help.yml
         6_community.yml
 
-{% include _includes/cyoa-choices.html option1="GitHub_Actions" option2="Command-line" default="GitHub_Actions"
-       text="The files can be created in two wyas, using GitHub actions (on the GitHub interface) or using the command line to launch a script." %}
-
-<div class="GitHub_Actions" markdown="1">
+The files are created and updated automatically using GitHub actions, you just need to add a bit of code to point to your community folder.
 
 > <hands-on-title>Generate the files using Github Actions</hands-on-title>
 >
 > 1. Go to the [Galaxy Codex repo](https://github.com/galaxyproject/galaxy_codex)
-> 2. Go to the file `.github/workflows/populate_labs.yaml`
-> 3. On the right, click on the pen to "dit this file"
-> 4. Duplicate section called "Populate biodiversity Lab"
+> 2. Go to the file `.github/workflows/fetch_filter_resources.yaml`
+> 3. On the right, click on the pen to "Edit this file"
+> 4. Scroll down
+> 5. Duplicate the section called "Populate <community-name> Lab"
 >
->    For example:
 >    ```
->    - name: Populate biodiversity Lab
->      run: | 
->        bash sources/bin/populate_labs.sh
->      env: 
->        COMMUNITY: biodiversity
+>      - name: Populate <community-name> Lab
+>        run: |
+>          bash sources/bin/populate_labs.sh
+>        env: 
+>          COMMUNITY: <community-name>
 >    ```
-> 5. Change the name and community name for your community
-> 6. Commit changes the changes to a new branch that you name "new lab for <Community-name>"
-> 7. On the top panel of the Galaxy codex repository, click on "Actions"
-> 8. On the left panel, click on "Populate labs"
-> 9. In the table, click on "Run workflow" and select the branch you just created "new lab for <Community-name>"
-> 10. Click on "Run workflow"
+> 6. Replace `<community-name>` by the name of your community
+> 7. Commit changes the changes to a new branch that you name "new lab for [Community-name]"
 >
-> This will create a Pull Request with the new files in the appropriate community folder. To find the Pull Request, on the top panel of the Galaxy codex repository, click on "Pull requests".
 {: .hands_on}
 
-</div>
-
-<div class="Command-line" markdown="1">
-
-> <hands-on-title>Generate the files using the command line</hands-on-title>
->
-> 1. Fork and clone the [Galaxy Codex repo](https://github.com/galaxyproject/galaxy_codex)
-> 2. Set the `COMMUNITY` variable : `export $COMMUNITY=<your community>`
-> 3. Lauch `sources/bin/populate_labs.sh`
->
-> This will create a bunch of the new files in the appropriate community folder (communities/<your community>/lab/).
-{: .hands_on}
-
-</div>
+After that, your commit will be reviewed (and approved) by admins.
+On the following Sunday (or upon request), this action will be launched and will create the new files in the appropriate community folder (`communities/<your community>/lab/`).
 
 # Modify the generated files to personalize your community lab
 
-Depending on how you generated the files (GitHub actions or command-line), you should be able to find your community specific lab files.
-If you generated the files using the GitHub Actions, this will be in the automatically generated pull request.
-If you generated the files using the command line, this will be in the local folder that were generated.
+Once the files are created, you should update them as some contain template text that are not community specific. 
 
 Files to update : 
-- "communities/<your community>/lab/CONTRIBUTORS" --> Add the handles of everyone who contributed in the lab
-- "communities/<your community>/lab/README.md" --> Change all >your-community> by your community name
-- "communities/<your community>/lab/base.yml" --> Change all >your-community> by your community name
-- "communities/<your community>/lab/intro.html" --> Include a description of your community.
+- `communities/<your community>/lab/CONTRIBUTORS` --> Add the handles of everyone who contributed in the lab
+- `communities/<your community>/lab/README.md` --> Change all `<your-community>` by your community name
+- `communities/<your community>/lab/base.yml` --> Change all `<your-community>` by your community name
+- `communities/<your community>/lab/intro.html` --> Include a description of your community.
 
 Files that do not require a manual update : 
 - "communities/<your community>/lab/conclusion.html" --> No change required.

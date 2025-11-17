@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 redirect_from:
   - /topics/proteomics/tutorials/neoantigen-7-hla-binding-novel-peptides/tutorial.html
 
-title: "Neoantigen 5b: IEDB binding PepQuery Validated Neopeptides"
+title: "Neoantigen 5b: IEDB binding Validated Neopeptides"
 zenodo_link: 'https://zenodo.org/records/14377365'
 questions:
 - What are neoantigens, and why are they significant in cancer immunotherapy?
@@ -13,13 +13,11 @@ questions:
 objectives:
 - Understand the process of neoantigen identification and the role of peptide binding predictions.
 - Learn how to use IEDB to predict the binding affinity of peptides to MHC molecules.
-- Gain practical experience using PepQuery to validate novel peptides from proteomics data.
 - Distinguish between strong and weak binders based on predicted binding affinity.
 time_estimation: 3H
 key_points:
 - Neoantigens are crucial targets for cancer immunotherapy, with their binding strength to MHC molecules playing a critical role in immune response.
 - IEDB allows for the prediction of peptide-MHC binding affinities, helping to identify candidate neoantigens.
-- PepQuery enables validation of these peptides in proteomics data, adding confidence to neoantigen identification.
 - Separating strong and weak binders allows for prioritization in therapeutic applications.
 contributions:
   authorship:
@@ -41,7 +39,7 @@ tags: [label-free]
 
 Neoantigens are peptides derived from tumor-specific mutations, which are recognized by the immune system as foreign and can stimulate an immune response against cancer cells. Identifying these neoantigens is a crucial step in the development of personalized cancer immunotherapies, as they serve as targets for T-cell mediated immune responses. However, predicting which peptides from the tumor genome will bind effectively to major histocompatibility complex (MHC) molecules—key proteins that present antigens to immune cells—remains a significant challenge.
 
-This tutorial outlines a comprehensive workflow for the identification, prediction, and validation of potential neoantigens. We begin by using the Immune Epitope Database (IEDB) to predict the binding affinity of peptide sequences to MHC molecules. IEDB provides powerful tools to model how peptides interact with different MHC alleles, helping to prioritize peptides that are most likely to be presented by the immune system. Next, we validate these peptides using PepQuery, a tool that allows for the comparison of predicted neoantigens with experimental proteomics data, providing an additional layer of confidence in their relevance. Finally, we categorize the peptides into strong and weak binders, based on their predicted affinity, which helps in identifying the most promising candidates for cancer immunotherapy.
+This tutorial outlines a comprehensive workflow for the identification, prediction, and validation of potential neoantigens. We begin by using the Immune Epitope Database (IEDB) to predict the binding affinity of peptide sequences to MHC molecules. IEDB provides powerful tools to model how peptides interact with different MHC alleles, helping to prioritize peptides that are most likely to be presented by the immune system. Finally, we categorize the peptides into strong and weak binders, based on their predicted affinity, which helps in identifying the most promising candidates for cancer immunotherapy.
 
 ![HLA-binding-peptides-overview]({% link topics/proteomics/images/neoantigen/Predict_MHC_Binding_for_Novel_Neoantigens.PNG %})
 
@@ -64,8 +62,7 @@ This workflow outlines a structured approach to predicting and analyzing peptide
 2. **Predicting MHC Binding with IEDB** In this step, the goal is to predict how peptide sequences will bind to MHC-I molecules, an essential part of identifying potential neoantigens. The IEDB tool is launched with parameters such as prediction method (netmhcpan_el), selecting relevant alleles, and uploading peptide sequences in FASTA format.
 3. **Filtering Results Based on Affinity** Once the MHC-I binding affinities are predicted, it's time to filter the results based on specific criteria to narrow down the most promising peptides.The peptides are categorized into strong and weak binders: an affinity value of less than 0.5 is a strong binder, while a value between 0.5 and 2 is a weak binder.
 4. **Refining Results Using Table Operations** To further refine the results, the data is aggregated, focusing on the highest-ranked peptides based on various parameters like affinity and percent rank. This tool is used to aggregate data and perform operations such as selecting the highest-ranking peptides based on specified criteria (e.g., using a pivot operation).
-5. **Novel peptide verification with PepQuery2** The PepQuery2 tool is used to validate the identified peptides by checking them against a reference protein database to determine whether they are novel or already known. In this step, peptides are compared to the gencode protein reference database, and their sequences are verified using MS/MS spectral data from previous steps. The tool helps ensure the authenticity of the identified peptides, which is critical for confirming their relevance in the biological context. By determining whether peptides are novel or known, this step increases confidence in the results, supporting the identification of unique biomarkers or therapeutic targets and contributing to the overall quality of the research.
-6. **Filtering confident PepQuery2 validated peptides and annotating their binding affinity to HLA.** In this step, the peptides that have been confidently validated by PepQuery2 are filtered to focus on those that exhibit strong evidence of binding affinity to Human Leukocyte Antigen (HLA) molecules. This process involves selecting peptides with high confidence in their validation and annotating them with their corresponding HLA binding affinity data. By filtering and annotating these peptides, the analysis narrows down the most promising candidates for further investigation, ensuring that only those with reliable peptide-HLA interactions are considered for potential clinical or research applications. This step is critical for identifying peptides with the potential to serve as targets for immunotherapy or vaccine development.
+5. **Filtering and annotating peptide binding affinity to HLA.** In this step, the peptides are filtered to focus on those that exhibit strong evidence of binding affinity to Human Leukocyte Antigen (HLA) molecules. This process involves filtering and annotating these peptides and narrows down the most promising candidates for further investigation, ensuring that only those with reliable peptide-HLA interactions are considered for potential clinical or research applications. This step is critical for identifying peptides with the potential to serve as targets for immunotherapy or vaccine development.
 
 ## Get data
 
@@ -206,7 +203,7 @@ Specifically:
 >                - *"Values"*: `percentile_rank`
 >                - *"Aggregator Function"*: `Maximum`
 >
->
+> 2. Rename file as "IEDB Binding Affinity - Weak Peptides".
 >
 {: .hands_on}
 
@@ -223,7 +220,7 @@ Specifically:
 >                - *"Values"*: `percentile_rank`
 >                - *"Aggregator Function"*: `Maximum`
 >
->
+> 2. Rename file as "IEDB Binding Affinity - Strong Peptides".
 >
 {: .hands_on}
 
@@ -242,38 +239,13 @@ Specifically:
 >
 {: .question}
 
-### Removing headers
-
-In this sub-step, the Remove Beginning tool is used to clean the data by removing unnecessary rows or headers from the start of the table. After performing the Pivot operation in the previous step, the dataset may include extra header rows or metadata that aren't needed for analysis. This tool helps streamline the data by removing these initial rows, ensuring that only relevant information remains for further processing.
-
-By applying the Remove Beginning tool, the user ensures that any unwanted starting rows—such as those containing column names, labels, or metadata that might have been carried over from previous operations—are removed, leaving the dataset clean and ready for the next analysis step.
-
-> <hands-on-title> Weak- Remove beginning </hands-on-title>
->
-> 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
->    - {% icon param-file %} *"from"*: `table` (output of **Table Compute** {% icon tool %})
->
->
->
-{: .hands_on}
-
-> <hands-on-title> Strong- Remove beginning </hands-on-title>
->
-> 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
->    - {% icon param-file %} *"from"*: `table` (output of **Table Compute** {% icon tool %})
->
->
->
-{: .hands_on}
-
-
 ## Extract Peptide column from the tabular
 
 > <hands-on-title>  Weak Peptide extraction </hands-on-title>
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1`
->    - {% icon param-file %} *"From"*: `out_file1` (output of **Remove beginning** {% icon tool %})
+>    - {% icon param-file %} *"From"*: `out_file1` (output of **Table Compute (Weak Peptides)** {% icon tool %})
 >
 >
 >
@@ -284,148 +256,37 @@ By applying the Remove Beginning tool, the user ensures that any unwanted starti
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1`
->    - {% icon param-file %} *"From"*: `out_file1` (output of **Remove beginning** {% icon tool %})
+>    - {% icon param-file %} *"From"*: `out_file1` (output of **Table Compute (Strong Peptides)** {% icon tool %})
 >
 >
 {: .hands_on}
 
+### Removing headers
 
-## Novel peptide verification with PepQuery2
+In this sub-step, the Remove Beginning tool is used to clean the data by removing unnecessary rows or headers from the start of the table. After performing the Pivot operation in the previous step, the dataset may include extra header rows or metadata that aren't needed for analysis. This tool helps streamline the data by removing these initial rows, ensuring that only relevant information remains for further processing.
 
-In this step, the PepQuery2 tool is used to validate the identified peptides by checking them against a protein reference database to verify whether they are novel or already known. This validation is a critical step in proteomics workflows, as it ensures the authenticity and novelty of the peptides identified in earlier steps. PepQuery2 is utilized to perform novel peptide/protein validation, which involves checking peptide sequences against a reference protein database to confirm if the peptide is novel (not previously identified in the database) or known (matches a protein sequence in the database). The PepQuery2 tool is used in the final step to validate whether the peptides identified in earlier stages are novel or known. This is an essential step to confirm the relevance and accuracy of the findings in a broader biological context. If a peptide is novel, it could represent a potential new target for further research. If it is already known, it helps contextualize the results within existing knowledge. By comparing the identified peptides to a comprehensive database of known human proteins, this step ensures that only relevant and novel peptides are prioritized for further study, enhancing the overall quality and focus of the research.
+By applying the Remove Beginning tool, the user ensures that any unwanted starting rows—such as those containing column names, labels, or metadata that might have been carried over from previous operations—are removed, leaving the dataset clean and ready for the next analysis step.
 
-> <hands-on-title> Weak Peptide verification - PepQuery 2 </hands-on-title>
+> <hands-on-title> Weak- Remove beginning </hands-on-title>
 >
-> 1. {% tool [PepQuery2](toolshed.g2.bx.psu.edu/repos/galaxyp/pepquery2/pepquery2/2.0.2+galaxy2) %} with the following parameters:
->    - *"Validation Task Type"*: `novel peptide/protein validation`
->    - In *"Input Data"*:
->        - *"Input Type"*: `peptide`
->            - *"Peptides?"*: `Peptide list from your history`
->                - {% icon param-file %} *"Peptide Sequences (.txt)"*: `out_file1` (output of **Cut** {% icon tool %})
->        - *"Protein Reference Database from"*: `download`
->            - *"Public protein sequence database"*: `gencode:human`
->        - *"MS/MS dataset to search"*: ` Spectrum Datasets from history`
->            - {% icon param-file %} *"Spectrum File"*: `output` (Input dataset)
->        - *"Report Spectrum Scan as"*: `spectrum title in MGF`
->
+> 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
+>    - {% icon param-file %} *"from"*: `table` (output of **Cut (Weak peptides)** {% icon tool %})
+> 
+> 2. Rename file as "IEDB Predicted Weak Binding Peptides".
 >
 >
 {: .hands_on}
 
-
-> <hands-on-title> Strong Peptide verification - PepQuery 2 </hands-on-title>
+> <hands-on-title> Strong- Remove beginning </hands-on-title>
 >
-> 1. {% tool [PepQuery2](toolshed.g2.bx.psu.edu/repos/galaxyp/pepquery2/pepquery2/2.0.2+galaxy2) %} with the following parameters:
->    - *"Validation Task Type"*: `novel peptide/protein validation`
->    - In *"Input Data"*:
->        - *"Input Type"*: `peptide`
->            - *"Peptides?"*: `Peptide list from your history`
->                - {% icon param-file %} *"Peptide Sequences (.txt)"*: `out_file1` (output of **Cut** {% icon tool %})
->        - *"Protein Reference Database from"*: `download`
->            - *"Public protein sequence database"*: `gencode:human`
->        - *"MS/MS dataset to search"*: ` Spectrum Datasets from history`
->            - {% icon param-file %} *"Spectrum File"*: `output` (Input dataset)
->        - *"Report Spectrum Scan as"*: `spectrum title in MGF`
+> 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
+>    - {% icon param-file %} *"from"*: `table` (output of **Cut (Strong peptides)** {% icon tool %})
 >
+> 2. Rename file as "IEDB Predicted Strong Binding Peptides".
 >
->
+> 
 {: .hands_on}
 
-
-## Filtering confident PepQuery2 validated peptides and annotating their binding affinity to HLA.
-
-The first step is to filter the peptides based on the confidence column. The confident peptides are then annotated with the corresponding HLA they bind to.
-
-### Filtering confident peptides
-> <hands-on-title> Filter weak confident peptides </hands-on-title>
->
-> 1. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `psm_rank_txt` (output of **PepQuery2** {% icon tool %})
->    - *"With following condition"*: `c20=='Yes'`
->
->
->
-{: .hands_on}
-
-
-> <hands-on-title> Filter strong confident peptides </hands-on-title>
->
-> 1. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `psm_rank_txt` (output of **PepQuery2** {% icon tool %})
->    - *"With following condition"*: `c20=='Yes'`
->
->
->
-{: .hands_on}
-
-
-### Annotating peptides based on their binding affinity
-
-The peptides, including both strong and weak binders, are annotated with their respective HLA types.
-
- > <hands-on-title> Annotating weak binder peptides </hands-on-title>
->
-> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
->    - In *"Database Table"*:
->        - {% icon param-repeat %} *"Insert Database Table"*
->            - {% icon param-file %} *"Tabular Dataset for Table"*: `table` (output of **Table Compute** {% icon tool %})
->            - In *"Table Options"*:
->                - *"Use first line as column names"*: `Yes`
->        - {% icon param-repeat %} *"Insert Database Table"*
->            - {% icon param-file %} *"Tabular Dataset for Table"*: `out_file1` (output of **Filter** {% icon tool %})
->    - *"SQL Query to generate tabular output"*:
->   ``` sql
->   SELECT * FROM t1
->   WHERE t1.icore IN (SELECT c1 FROM t2)
->   ```
->    - *"include query result column headers"*: `Yes`
->    - In *"Additional Queries"*:
->        - In *"SQL Query"*:
->            - {% icon param-repeat %} *"Insert SQL Query"*
->                - *"SQL Query to generate tabular output"*:
->              ``` sql
->              SELECT icore
->              FROM t1
->              WHERE t1.icore IN (SELECT c1 FROM t2)
->              ORDER BY icore
->              ```
->                - *"include query result column headers"*: `No`
->
->
-{: .hands_on}
-
-
-> <hands-on-title> Annotating strong binder peptides </hands-on-title>
->
-> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
->    - In *"Database Table"*:
->        - {% icon param-repeat %} *"Insert Database Table"*
->            - {% icon param-file %} *"Tabular Dataset for Table"*: `table` (output of **Table Compute** {% icon tool %})
->            - In *"Table Options"*:
->                - *"Use first line as column names"*: `Yes`
->        - {% icon param-repeat %} *"Insert Database Table"*
->            - {% icon param-file %} *"Tabular Dataset for Table"*: `out_file1` (output of **Filter** {% icon tool %})
->    - *"SQL Query to generate tabular output"*:
->   ``` sql
->   SELECT *
->   FROM t1
->   WHERE t1.icore IN (SELECT c1 FROM t2)
->   ```
->    - *"include query result column headers"*: `Yes`
->    - In *"Additional Queries"*:
->        - In *"SQL Query"*:
->            - {% icon param-repeat %} *"Insert SQL Query"*
->                - *"SQL Query to generate tabular output"*:
->              ``` sql
->              SELECT icore
->              FROM t1
->              WHERE t1.icore IN (SELECT c1 FROM t2)
->              ORDER BY icore
->              ```
->                - *"include query result column headers"*: `No`
->
->
-{: .hands_on}
 
 ## Annotation of Strong and Weak Binder Peptides
 
@@ -456,7 +317,7 @@ Here’s what the annotations mean:
 
 The ability to predict and validate neoantigens is a cornerstone of modern cancer immunotherapy, particularly in personalized immunotherapies such as cancer vaccines and adoptive T-cell therapies. The identification of high-affinity neoantigens, which can effectively stimulate the immune system, is key to developing therapeutic strategies that selectively target tumor cells while sparing healthy tissue.
 
-This workflow is particularly relevant in the neoantigen discovery process, as it combines computational prediction with experimental validation, ensuring that only the most promising peptides are considered for therapeutic development. By integrating IEDB’s predictive capabilities with PepQuery’s validation approach, this workflow bridges the gap between in silico predictions and in vitro experimental data, allowing for a more robust and reliable neoantigen identification pipeline. Separating peptides into strong and weak binders based on their predicted MHC affinity further refines the selection process, ensuring that high-priority candidates are prioritized for downstream therapeutic application.
+This workflow is particularly relevant in the neoantigen discovery process, as it combines computational prediction with experimental validation, ensuring that only the most promising peptides are considered for therapeutic development. By integrating IEDB’s predictive capabilities, this workflow bridges the gap between in silico predictions and in vitro experimental data, allowing for a more robust and reliable neoantigen identification pipeline. Separating peptides into strong and weak binders based on their predicted MHC affinity further refines the selection process, ensuring that high-priority candidates are prioritized for downstream therapeutic application.
 
 Given the increasing demand for personalized cancer treatments, this workflow represents a vital approach for accelerating the identification of clinically relevant neoantigens, thus advancing the field of cancer immunotherapy and personalized medicine.
 
@@ -482,7 +343,11 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 >
 {: .hands_on}
 
+# Are you feeling adventurous? ✨
 
+## One-Click Neoantigen Workflow
+
+This new [One-Click Neoantigen Workflow](https://usegalaxy.eu/u/galaxyp/w/ipepgen-one-click-workflow) brings together all key modules of the neoantigen discovery process into a single, streamlined analysis within Galaxy. Instead of launching each tutorial separately, users can now execute the entire end-to-end pipeline—from database creation to HLA binding prediction—with just one click —without ever leaving Galaxy.
 
 # Disclaimer
 

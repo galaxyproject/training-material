@@ -63,11 +63,10 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -14,3 +14,6 @@
+>    @@ -14,3 +14,5 @@
 >     # gxadmin (used in cleanup, and later monitoring.)
 >     - src: galaxyproject.gxadmin
->       version: 0.0.12
->    +# TUS (uploads)
+>       version: 0.0.14
 >    +- name: galaxyproject.tusd
 >    +  version: 0.0.1
 >    {% endraw %}
@@ -91,7 +90,7 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -70,6 +70,9 @@ galaxy_config:
+>    @@ -72,6 +72,9 @@ galaxy_config:
 >         # Tool security
 >         outputs_to_working_directory: true
 >         new_user_dataset_access_role_default_private: true # Make datasets private by default
@@ -101,7 +100,7 @@ To allow your user to upload via TUS, you will need to:
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -90,6 +93,10 @@ galaxy_config:
+>    @@ -92,6 +95,10 @@ galaxy_config:
 >         celery:
 >           concurrency: 2
 >           loglevel: DEBUG
@@ -112,7 +111,7 @@ To allow your user to upload via TUS, you will need to:
 >         handlers:
 >           handler:
 >             processes: 2
->    @@ -159,3 +166,7 @@ nginx_conf_http:
+>    @@ -161,3 +168,7 @@ nginx_conf_http:
 >     nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem

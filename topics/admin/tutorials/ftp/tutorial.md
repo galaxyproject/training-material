@@ -85,7 +85,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -57,3 +57,6 @@
+>    @@ -56,3 +56,6 @@
 >     # Sentry
 >     - name: mvdbeek.sentry_selfhosted
 >       src: https://github.com/mvdbeek/ansible-role-sentry/archive/main.tar.gz
@@ -111,7 +111,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -210,11 +210,13 @@ certbot_environment: staging
+>    @@ -212,11 +212,13 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - www-data
@@ -137,7 +137,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -122,6 +122,9 @@ galaxy_config:
+>    @@ -124,6 +124,9 @@ galaxy_config:
 >         sentry_dsn: "{{ vault_galaxy_sentry_dsn }}"
 >         sentry_traces_sample_rate: 0.5
 >         error_report_file: "{{ galaxy_config_dir }}/error_reports_file.yml"
@@ -159,7 +159,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -366,3 +366,24 @@ telegraf_plugins_extra:
+>    @@ -368,3 +368,24 @@ telegraf_plugins_extra:
 >     tiaas_dir: /srv/tiaas
 >     tiaas_admin_user: admin
 >     tiaas_admin_pass: changeme

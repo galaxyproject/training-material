@@ -325,6 +325,11 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 >
 {: .hands_on}
 
+# Are you feeling adventurous? ✨
+
+## One-Click Neoantigen Workflow
+
+This new [One-Click Neoantigen Workflow](https://usegalaxy.eu/u/galaxyp/w/ipepgen-one-click-workflow) brings together all key modules of the neoantigen discovery process into a single, streamlined analysis within Galaxy. Instead of launching each tutorial separately, users can now execute the entire end-to-end pipeline—from database creation to HLA binding prediction—with just one click —without ever leaving Galaxy.
 
 # Disclaimer
 

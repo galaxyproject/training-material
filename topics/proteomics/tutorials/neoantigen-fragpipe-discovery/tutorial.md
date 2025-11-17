@@ -162,9 +162,50 @@ In this workflow, FragPipe is used after FASTA database validation to ensure tha
 
 ![Fragpipe-discovery]({% link topics/proteomics/images/neoantigen/FragPipe_Discovery_3.PNG %})
 
+
+## Creating a FragPipe Manifest (Experimental Design) File
+
+The **FragPipe Manifest Generator** creates the experimental design file required by FragPipe, mapping each raw LC–MS/MS file to its experimental factors (e.g., experiment and bioreplicate). This manifest ensures consistent labeling of runs for downstream identification and quantification. In this workflow, we generate a simple design with a single experiment and a single bioreplicate, and we explicitly set the scan data type to **DDA** to match acquisition.
+
+> <hands-on-title> FragPipe Manifest Generator </hands-on-title>
+> 
+> 1. {% tool [FragPipe Manifest Generator](toolshed.g2.bx.psu.edu/repos/galaxyp/fragpipe/fragpipe_manifest_generator/23.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} “Proteomics spectrum files” (mzML, mzXML, or Thermo .raw): select the MS file for this run.
+>    - In *"Assign experiments"*: `Enter column values`
+>        - In *"Comma-separated experiment numbers"*: `1`
+>    - In *"Assign bioreplicates"*: `Enter column values`
+>        - In *"Comma-separated bioreplicate numbers"*: `1`
+>    - In *“Assign scan_data_types"*: `Assign to all scan files`
+>        - In *"Data Type”*: `DDA`
+>
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. What does the FragPipe manifest control in downstream analysis?  
+> 2. How should experiments vs. bioreplicates be assigned for multi-condition studies?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. The manifest defines how runs are grouped and compared (e.g., by experiment/condition and bioreplicate), ensuring FragPipe/Philosopher interpret files consistently for identification and quantification.  
+> > 2. Use distinct **experiment numbers** for biological conditions (e.g., 1,1,2,2 for Control vs. Treatment) and distinct **bioreplicate numbers** to label independent replicates within each condition (e.g., 1,2 within each experiment). This preserves replicate structure for proper statistics and reporting.  
+> >
+> {: .solution}
+>
+{: .question}
+
+
+> <tip-title>Mixed Data Types</tip-title>
+>
+> If your acquisition includes mixed data types (e.g., DIA or IMS-DDA), set the Data Type per file accordingly. Ensure raw file names are stable and meaningful—renaming files after manifest creation can break downstream steps.
+>
+> 
+{: .tip}
+
+
 > <hands-on-title> Fragpipe </hands-on-title>
 >
-> 1. {% tool [FragPipe -  Academic Research and Education User License (Non-Commercial)](toolshed.g2.bx.psu.edu/repos/galaxyp/fragpipe/fragpipe/20.0+galaxy2) %} with the following parameters:
+> 1. {% tool [FragPipe -  Academic Research and Education User License (Non-Commercial)](toolshed.g2.bx.psu.edu/repos/galaxyp/fragpipe/fragpipe/23.0+galaxy0) %} with the following parameters:
 >    - *"I understand that these tools, including MSFragger, IonQuant, Bruker, and Thermo Raw File Reader, are available freely for academic research and educational purposes only, and agree to the following terms."*: `Yes`
 >    - {% icon param-file %} *"Proteomics Spectrum files"*: `STS_26T_2_Eclipse_02102024.raw` (Input dataset)
 >    - {% icon param-file %} *"Manifest file"*: `Experimental-Design-Fragpipe.tabular` (Input dataset)
@@ -187,7 +228,7 @@ In this workflow, FragPipe is used after FASTA database validation to ensure tha
 >                - *"Precursor Charge Override"*: `Use default`
 >        - In *"Validation"*:
 >            - *"Run Validation"*: `Yes`
->                - *"PSM Validation"*: `Run Percolator`
+>                - *"PSM Validation"*: `Run MSBooster and Percolator`
 >                - *"Run Protein Prophet"*: `Yes`
 >                - *"Generate Philosopher Reports"*: `Yes`
 >        - In *"Quant (MS1)"*:
@@ -294,6 +335,11 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 >
 {: .hands_on}
 
+# Are you feeling adventurous? ✨
+
+## One-Click Neoantigen Workflow
+
+This new [One-Click Neoantigen Workflow](https://usegalaxy.eu/u/galaxyp/w/ipepgen-one-click-workflow) brings together all key modules of the neoantigen discovery process into a single, streamlined analysis within Galaxy. Instead of launching each tutorial separately, users can now execute the entire end-to-end pipeline—from database creation to HLA binding prediction—with just one click —without ever leaving Galaxy.
 
 # Disclaimer
 

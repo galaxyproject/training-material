@@ -292,6 +292,8 @@ In this workflow, Column Regex Find And Replace cleans and formats the data in a
 >            - *"Replacement"*: `generic|INDEL_\1`
 >
 > 2. Rename as Indel-FASTA
+>
+> 
 {: .hands_on}
 
 > <hands-on-title> SNV-Column Regex Find And Replace </hands-on-title>
@@ -314,6 +316,7 @@ In this workflow, Column Regex Find And Replace cleans and formats the data in a
 >            - *"Replacement"*: `generic|SNV_\1`
 >
 > 2. Rename as SNV-FASTA
+> 
 {: .hands_on}
 
 > <hands-on-title> RPKM -Column Regex Find And Replace </hands-on-title>
@@ -336,6 +339,7 @@ In this workflow, Column Regex Find And Replace cleans and formats the data in a
 >            - *"Replacement"*: `generic|RPKM_\1`
 >
 > 2. Rename as RPKM-FASTA
+> 
 {: .hands_on}
 
 > <question-title></question-title>
@@ -361,30 +365,36 @@ In this workflow, Tabular-to-FASTA converts the formatted tabular data back into
 >
 > 1. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Tab-delimited file"*: `out_file1` (output of **Column Regex Find And Replace** {% icon tool %})
->    - *"Title column(s)"*: `c['1']`
+>    - *"Title column(s)"*: `c1`
 >    - *"Sequence column"*: `c2`
 >
 > 2. Rename as Indel-FASTA
+>
+> 
 {: .hands_on}
 
 > <hands-on-title> SNV-Tabular-to-FASTA </hands-on-title>
 >
 > 1. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Tab-delimited file"*: `out_file1` (output of **Column Regex Find And Replace** {% icon tool %})
->    - *"Title column(s)"*: `c['1']`
+>    - *"Title column(s)"*: `c1`
 >    - *"Sequence column"*: `c2`
 >
 > 2. Rename as SNV-FASTA
+>
+> 
 {: .hands_on}
 
 > <hands-on-title> RPKM-Tabular-to-FASTA </hands-on-title>
 >
 > 1. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Tab-delimited file"*: `out_file1` (output of **Column Regex Find And Replace** {% icon tool %})
->    - *"Title column(s)"*: `c['1']`
+>    - *"Title column(s)"*: `c1`
 >    - *"Sequence column"*: `c2`
 >
 > 2. Rename as RPKM-FASTA
+>
+>    
 {: .hands_on}
 
 > <question-title></question-title>
@@ -420,7 +430,9 @@ In this workflow, FASTA Merge Files and Filter Unique Sequences consolidate all 
 >        - In *"Input FASTA File(s)"*:
 >            - {% icon param-repeat %} *"Insert Input FASTA File(s)"*
 >                - {% icon param-file %} *"FASTA File"*: `RPKM-FASTA` (output of **Tabular-to-FASTA** {% icon tool %})>
+> 
 > 2. Rename as `non-reference_CustomProDB_FASTA`
+>    
 {: .hands_on}
 
 > <question-title></question-title>
@@ -597,6 +609,205 @@ This tool is important for converting the genomic annotations (in BED format) th
 >
 {: .question}
 
+
+# Consolidating Chromosomal Coordinates for Somatic Mutations
+
+In this section, we combine genomic mapping results, variant annotations, and transcript-level BED information into a single unified table. This consolidated file provides the complete chromosomal locations and functional context for all somatic mutations identified in the workflow, ensuring that downstream analyses have access to harmonized and comprehensive coordinate information.
+
+## Extracting Genomic Coordinates Using Genomic_sqlite-to-tabular
+
+The **Genomic_sqlite-to-tabular** tool allows users to query a genomic mapping SQLite database and extract relevant information into a readable tabular format. In the context of neoantigen discovery, this step is critical for linking validated peptides back to their precise genomic coordinates. The mapping information enables downstream interpretation of variant location, coding sequence position, strand orientation, and the broader genomic context of each neopeptide.
+
+By executing an SQL query against the `genomic_mapping` table within the SQLite database, this tool retrieves protein names, chromosome identifiers, coding sequence coordinates, and strand information. These genomic annotations are essential for variant interpretation, peptide validation, and visualizing peptide-to-genome relationships in downstream analyses.
+
+> <hands-on-title> Genomic_sqlite-to-tabular </hands-on-title>
+>
+> 1. {% tool [SQLite to tabular](toolshed.g2.bx.psu.edu/repos/galaxyp/sqlite_to_tabular/sqlite_to_tabular/2.0.0) %} with the following parameters:
+>    - {% icon param-file %} *"SQLite Database"* (sqlite): `genomic_mapping.sqlite`  
+>    - *"SQL query"*:
+>      ```
+>      SELECT pro_name,
+>             chr_name,
+>             cds_chr_start - 1,
+>             cds_chr_end,
+>             strand,
+>             cds_start - 1,
+>             cds_end
+>      FROM genomic_mapping
+>      ORDER BY pro_name, cds_start, cds_end
+>      ```
+>
+> 
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. Why do we extract genomic coordinates for validated neopeptides?
+> 2. What is the significance of subtracting **1** from certain coordinate fields in the SQL query?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Extracting genomic coordinates enables precise mapping of neopeptides back to the genome, supporting annotation of variant locations, integration with proteogenomic pipelines, and verification against reference genomes. This information is important for understanding how genetic variants alter protein sequences and contribute to neoantigen formation.
+> > 2. Subtracting **1** adjusts the coordinates to **0-based indexing**, which is required by many downstream tools and genomic browsers. This ensures consistency when merging or comparing genomic ranges across tools that use different coordinate conventions.
+> >
+> {: .solution}
+>
+{: .question}
+
+## Extracting Variant Annotations Using Variant_sqlite-to-tabular
+
+The **Variant_sqlite-to-tabular** tool is used to query the variant annotation SQLite database and convert key information into a tabular format. This step is essential for linking validated neopeptides to the underlying genomic variants that generated them. The resulting table provides protein-level variant identifiers, reference protein names, CIGAR strings describing how the variant affects the coding sequence, and high-level functional annotations.
+
+These annotations help researchers interpret the biological relevance of each variant, determine whether a mutation alters coding sequence structure, and assess how genomic alterations translate into observed neoantigen peptides. This table also supports downstream reporting, visualization, and filtering of variant-driven neopeptides.
+
+> <hands-on-title> Variant_sqlite-to-tabular </hands-on-title>
+>
+> 1. {% tool [SQLite to tabular](toolshed.g2.bx.psu.edu/repos/galaxyp/sqlite_to_tabular/sqlite_to_tabular/2.0.0) %} with the following parameters:
+>    - {% icon param-file %} *"SQLite Database"* (sqlite): `variant_annotation.sqlite` (Variant SQLite from **CustomProDB** {% icon tool %})
+>    - *"SQL query"*:
+>      ```
+>      SELECT var_pro_name,
+>             pro_name,
+>             cigar,
+>             annotation
+>      FROM variant_annotation
+>      ```
+>
+> 
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. What information does the `variant_annotation` table provide for downstream neoantigen analysis?  
+> 2. How can CIGAR strings help interpret the effect of a variant on protein structure?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. The table provides variant-specific protein identifiers, reference protein IDs, functional annotations, and CIGAR strings showing how the variant alters the coding sequence. This information helps connect peptide-level findings to genomic alterations.  
+> >
+> > 2. CIGAR strings summarize how insertions, deletions, or mismatches occur relative to the reference sequence. Understanding these structural changes helps determine whether a mutation may create a novel peptide sequence that could function as a neoantigen.  
+> >
+> {: .solution}
+>
+{: .question}
+
+
+## Cleaning Genomic Annotation Fields Using Column Regex Find and Replace
+
+The **Column Regex Find and Replace** tool is used to normalize and clean genomic annotation fields extracted from the SQLite database. This step ensures that variant identifiers, amino acid changes, and Ensembl protein IDs follow a consistent formatting structure required for downstream integration and matching. Regular expressions (regex) are applied sequentially to correct formatting artifacts, extract relevant mutation information, and harmonize naming conventions.
+
+These transformations are particularly important when variant annotations come from diverse sources and contain mixed notation styles (e.g., Ensembl identifiers, nucleotide substitutions, or amino acid changes). Applying standardized regex cleaning ensures that variant identifiers can be matched correctly across tables, peptide lists, and annotation files later in the workflow.
+
+> <hands-on-title> Column Regex Find and Replace </hands-on-title>
+>
+> 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/bgruening/column_regex_find_replace/column_regex_find_and_replace/1.0.3) %} with the following parameters:
+>    - {% icon param-file %} *"Select cells from"*: `CustomProDB_Genomic_SQLlite` (Genomic SQLite from **CustomProDB** {% icon tool %})
+>    - *"using column"*: `c1`
+>    - In *"Check"*:
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
+>            - *"Replacement"*: `\1\2_\3`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `,([A-Y]\d+[A-Y]?)\s*`
+>            - *"Replacement"*: `.\1`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `^(ENS[^ |]*)\s*`
+>            - *"Replacement"*: `\1`
+>  
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. Why do we need to apply multiple regex rules to the genomic annotation column?  
+> 2. What types of inconsistencies do these regex transformations correct?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Genomic annotations often contain multiple layers of information—nucleotide substitutions, amino acid changes, and various Ensembl IDs—which may appear in inconsistent formats. Applying sequential regex rules ensures a standardized format for matching and downstream processing.  
+> >
+> > 2. These regex rules correct formatting issues such as removing trailing whitespace, converting nucleotide substitutions into a consistent notation, normalizing amino acid change strings, and ensuring Ensembl protein identifiers are properly extracted. This normalization supports accurate linking between variant, peptide, and genomic data.  
+> >
+> {: .solution}
+>
+{: .question}
+
+## Cleaning Variant Annotation Fields Using Column Regex Find and Replace
+
+The **Column Regex Find and Replace** tool is used here to standardize variant-level annotations extracted from the variant SQLite database. Variant identifiers often contain multiple components—such as Ensembl protein IDs, amino acid substitutions, and annotation tags—that may appear in inconsistent formats. This step uses a series of regex rules to normalize these fields, ensuring they can be accurately merged with neopeptide tables and downstream variant annotation outputs.
+
+By harmonizing mutation notation and cleaning extraneous characters or formatting artifacts, this step enables reliable matching across the variant annotation table, validated peptides, and genomic mapping results. Standardized variant IDs are essential for constructing unified annotations and ensuring consistency throughout the neoantigen identification pipeline.
+
+> <hands-on-title> Column Regex Find and Replace (Variant SQLite)</hands-on-title>
+>
+> 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/bgruening/column_regex_find_replace/column_regex_find_and_replace/1.0.3) %} with the following parameters:
+>    - {% icon param-file %} *"Select cells from"*: `CustomProDB_VARIANT_SQLite` (Variant SQLite from **CustomProDB** {% icon tool %})
+>    - *"using column"*: `c1`
+>    - In *"Check"*:
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
+>            - *"Replacement"*: `\1\2_\3`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `,([A-Y]\d+[A-Y]?)\s*`
+>            - *"Replacement"*: `.\1`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `^(ENS[^ |]*)\s*`
+>            - *"Replacement"*: `\1`
+> 
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. Why is it important to standardize variant identifiers before merging datasets?  
+> 2. What types of format inconsistencies do these regex rules help resolve?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Standardized variant identifiers ensure accurate joins between variant, peptide, and genomic annotation tables. Without consistent formatting, variant-driven peptides may fail to match their corresponding genomic entries, causing data loss in downstream steps.  
+> >
+> > 2. These regex rules correct issues such as inconsistent nucleotide substitution notation, varying amino acid change formats, stray commas or whitespace characters, and truncated or misformatted Ensembl IDs. Together, they create a unified structure suitable for downstream analysis and reporting.  
+> >
+> {: .solution}
+>
+{: .question}
+
+
+## Merging Genomic, Variant, and StringTie BED Annotations Using Concatenate Datasets
+
+The **Concatenate Datasets** tool combines multiple tabular or BED-formatted outputs into a single unified file by appending them tail-to-head. In this workflow, concatenation is used to merge three key annotation sources: genomic coordinates extracted from the genomic SQLite database, variant annotations from the variant SQLite database, and transcript-level BED annotations produced by StringTie. Integrating these datasets ensures that all relevant positional, variant, and transcript information is available in one comprehensive table for downstream analyses.
+
+This merged annotation file is especially important for neoantigen workflows because it consolidates structural (BED), variant (SQLite), and genome mapping information into a single resource. Doing so facilitates downstream matching, visualization, and filtering of peptides and variants, and eliminates the need to track these data across multiple separate outputs.
+
+> <hands-on-title> Concatenate Datasets </hands-on-title>
+>
+> 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/iuc/concatenate/concatenate/1.0.0) %} with the following parameters:
+>    - {% icon param-file %} *"Concatenate Dataset"* (input1): `genomic_annotation_table`
+>    - Add as additional inputs:
+>        - {% icon param-file %} `variant_annotation_table`
+>        - {% icon param-file %} `stringtie_bed_file`
+>
+>    The tool will append each dataset sequentially in the order provided, producing a single merged output.
+>    
+> 3. Rename the output to "Genomic-Variant-Protein-BED"
+>    
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. Why is it useful to combine genomic, variant, and transcript BED annotations into one table?  
+> 2. What should users be cautious about when concatenating datasets with different column structures?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Merging these annotation sources ensures that all structural, variant, and transcriptomic coordinates needed for neoantigen analysis reside in a single file. This simplifies downstream filtering, matching, visualization, and export for external tools.  
+> >
+> > 2. Concatenation does not automatically align column names or data structures. If the input files have different numbers of columns or mismatched formats, users must ensure column compatibility beforehand to avoid misaligned or ambiguous fields in the merged output.  
+> >
+> {: .solution}
+>
+{: .question}
+
+
+
 # Merging the non-reference databases with the known HUMAN protein sequence
 
 Merging non-reference databases with the known human protein sequence involves integrating data from various sources into a unified format for more efficient analysis. In bioinformatics, this process is often necessary when working with protein sequence data, especially when datasets include variations, unknown sequences, or newly identified proteins alongside well-established reference proteins from the human genome. In this case, we are merging a previously integrated variant database (which includes SNV, INDEL, and RPKM), assembled FASTA data generated from translating BED files to transcripts, the UniProt human reference, and a known contaminant database.
@@ -652,7 +863,11 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 >
 {: .hands_on}
 
+# Are you feeling adventurous? ✨
 
+## One-Click Neoantigen Workflow
+
+This new [One-Click Neoantigen Workflow](https://usegalaxy.eu/u/galaxyp/w/ipepgen-one-click-workflow) brings together all key modules of the neoantigen discovery process into a single, streamlined analysis within Galaxy. Instead of launching each tutorial separately, users can now execute the entire end-to-end pipeline—from database creation to HLA binding prediction—with just one click —without ever leaving Galaxy.
 
 # Disclaimer
 

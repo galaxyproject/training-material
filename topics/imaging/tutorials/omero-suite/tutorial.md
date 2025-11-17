@@ -90,12 +90,12 @@ To this end, we have prepared an integrative dataset with images, metadata and r
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the nuclei imaging data from [Zenodo](https://zenodo.org/records/14196675) or 
+> 2. Import the nuclei imaging data from [Zenodo]({{ page.zenodo_link }}) or 
 > from the shared data library:
 >    - **Important:** Choose the correct data type if prompted.
 >
 >    ```
->    https://zenodo.org/records/14205500
+>    {{ page.zenodo_link }}
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -128,7 +128,7 @@ This is done by using the **OMERO Image Import** and **OMERO Metadata Import** t
 >
 > 1. {% tool [OMERO Image Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_import/omero_import/5.18.0+galaxy3) %} with the following recommended parameters:
 >    - {% icon param-file %} *Images to import into OMERO*: You can select here different files to import into OMERO.
->    Select the datasets `image85-H-01-00.tif`, `image86-H-02-00.tif` and `image87-H-03-00.tif`
+>    Select the datasets `image85-H-01-00.tiff`, `image86-H-02-00.tiff` and `image87-H-03-00.tiff`
 >    - **OMERO host URL**: Input the URL of your OMERO instance.
 >    - **OMERO port**: Input the OMERO port (pre-defined value, *4064*)
 >    - {% icon param-file %} **Target Dataset Name**: Type "My_OMERO_Test"

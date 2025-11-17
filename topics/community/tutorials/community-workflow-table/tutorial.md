@@ -33,9 +33,9 @@ The pipeline creates a table with all the workflows associated to selected tags.
 
 The generated community-specific table can be used as it and/or embedded, e.g. into the respective Galaxy Hub page or Galaxy subdomain.
 
-The pipeline is **fully automated** and executes on a **weekly** basis. Any research community can apply the pipeline to create a table specific to their community.
+The pipeline is **fully automated** and executed on a **weekly** basis. Any research community can apply the pipeline to create a table specific to their community.
 
-The aim is this tutorial is to create a workflow table for a community.
+The aim of this tutorial is to create a workflow table for a community.
 
 > <agenda-title></agenda-title>
 >
@@ -78,14 +78,14 @@ You will then be able to remove workflows that are not relevant to your communit
 > 1. Go to your favorite public Galaxy instance.
 > 2. Go to the `Workflow` section
 > 3. Select `Public workflows` (for example: [Public workflows on the French instance](https://usegalaxy.fr/workflows/list_published))
-> 4. Browse for workflow that are releavnt to your community
+> 4. Browse for workflows that are relevant to your community
 > 5. Note the tags that are associated with workflows of interest
 {: .hands_on}
 
 > <hands-on-title>Select workflows tags from the Workflow Hub</hands-on-title>
 >
 > 1. Go to [Workflow Hub](https://workflowhub.eu/)
-> 2. Browse for workflow that are releavnt to your community
+> 2. Browse for workflows that are relevant to your community
 > 3. Note the tags that are associated with workflows of interest (in the `tag` section on the left of the workflow page)
 {: .hands_on}
 
@@ -93,7 +93,7 @@ You will then be able to remove workflows that are not relevant to your communit
 
 > <hands-on-title>Add the relevant tags to the workflow_tags file</hands-on-title>
 > 1. Open or create a file named `workflow_tags` in your comunity metadata folder (`communities/<your community>/metadata/workflow_tags`)
-> 2. Add the name of the tags relevant to your community in the `workflow_tags` file you started above. The file is split in two sections : `Public`, which should inidcate the tags used on public Galaxy instances; and `workflowhub`, which inidcates the tags to use to select workflow on [Workflow Hub](https://workflowhub.eu/).
+> 2. Add the name of the tags relevant to your community in the `workflow_tags` file you started above. The file is split in two sections : `Public`, which should inidcate the tags used on public Galaxy instances; and `workflowhub`, which indicates the tags to use to select workflow on [Workflow Hub](https://workflowhub.eu/).
 >
 >    For example:
 >    ```

@@ -68,7 +68,7 @@ This tutorial introduces the process of annotating neoantigens using the PepPoin
 
 - **A: Variant Annotation**
    1. **Get Data** The first step in the process is to gather the necessary data for analysis, which typically includes genomic data in VCF (Variant Call Format) or other formats containing information about somatic mutations. The data is then uploaded into the analysis environment. A well-organized dataset is crucial for smooth and efficient analysis, so it’s important to ensure proper file structure and metadata tagging before beginning.
-   2. ***Mutation to Peptide Mapping*** The next step is to map these mutations to peptide sequences. This involves creating a list of peptides that contain the mutated residue, representing potential neoantigens. Peptide prediction tools are used to generate the corresponding peptide sequences from the mutated positions.
+   2. **Mutation to Peptide Mapping** The next step is to map these mutations to peptide sequences. This involves creating a list of peptides that contain the mutated residue, representing potential neoantigens. Peptide prediction tools are used to generate the corresponding peptide sequences from the mutated positions.
    3. **Annotation and Filtering** At this stage, the predicted peptides are annotated with relevant biological and immunological information, such as their predicted MHC class, binding affinity, and potential for being recognized by T-cells. Filtering is performed to retain only the most promising candidates, based on binding affinity thresholds and relevance to the tumor type being studied.
    4. **Mapping Peptide sequences with PepPointer** PepPointer is used to map the peptide sequences to their corresponding genomic coordinates. This tool helps align peptide sequences (often derived from proteomic data) to the genomic context, providing useful insights into where these peptides are located in the genome. It allows researchers to determine which genomic regions are associated with the peptides of interest, facilitating the study of their potential functional roles.
    5. **Visualization and Interpretation** The final step involves visualizing the results of the annotation and filtering steps. Various bioinformatics tools can be used to present the data in a way that is easy to interpret, such as visualizing peptide binding affinity scores or generating summary plots that highlight the most immunogenic neoantigens. This step helps in drawing meaningful conclusions about the potential of the identified peptides for cancer immunotherapy.
@@ -117,7 +117,7 @@ This tutorial introduces the process of annotating neoantigens using the PepPoin
 ## Mutation to Peptide Mapping with Query Tabular
 
 In this step, we will use the Query Tabular tool to perform a SQL query on a tabular dataset. This tool allows you to filter and extract data from a dataset by applying SQL commands, making it ideal for working with structured data such as CSV or TSV files. You will use it to join tables, select relevant columns, and generate a new output based on the criteria specified in the query. This step helps in refining and organizing the data for further analysis.
-This step extracts information about novel peptides from Frapipe, which primarily includes protein details and the location of the peptide on the protein.
+This step extracts information about novel peptides from FragPipe, which primarily includes protein details and the location of the peptide on the protein.
 
 > <hands-on-title> Query Tabular </hands-on-title>
 >
@@ -128,8 +128,8 @@ This step extracts information about novel peptides from Frapipe, which primaril
 >        - {% icon param-repeat %} *"Insert Database Table"*
 >            - {% icon param-file %} *"Tabular Dataset for Table"*: `Fragpipe-Peptide-Report.tabular` (Input dataset)
 >    - *"SQL Query to generate tabular output"*:
-> ``` sql
-> SELECT t1.c1,t2.c13,t2.c5,t2.c6
+> ```
+> SELECT t1.c1,t2.c14,t2.c4,t2.c5
 > FROM t1
 > INNER JOIN t2
 > ON t1.c1 = t2.c1
@@ -142,14 +142,48 @@ This step extracts information about novel peptides from Frapipe, which primaril
 
 ## Annotation and Filtering
 
+Because the annotation structures differ between **assembly-derived peptides** and **SAV (single-amino-acid–variant) peptides**, we apply separate text-formatting procedures for each. We first format the assembly-derived peptide annotations, followed by the SAV annotations; the two are then merged to generate unified peptide annotations for downstream processing with **PepPointer**.
+
+### Extracting assembly-derived peptides
+The **Select lines that match an expression** tool is used to extract only the rows corresponding to StringTie-assembled transcripts from a mixed text file. StringTie typically labels transcript or gene identifiers with the prefix `STRG`. By filtering for lines containing `STRG`, we keep only the relevant transcript entries and discard header or unrelated lines. This cleaned file is then used for downstream integration with genomic and variant annotations.
+
+> <hands-on-title> Select StringTie transcript lines </hands-on-title>
+>
+> 1. {% tool [Select lines that match an expression](toolshed.g2.bx.psu.edu/repos/iuc/select/select/1.0.4) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"* (input): `Peptide_to_Protein_Annotation (Query Tabular output)`
+>    - *"that"*: `Matching`
+>    - *"the pattern"*:
+>      ```
+>      (STRG)
+>      ```
+>
+>    This will retain only lines that contain the `STRG` label.
+>    
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. Why do we filter for lines containing `STRG` in the StringTie output?  
+> 2. What types of lines are removed by this filtering step?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. The `STRG` prefix identifies StringTie-assembled genes/transcripts. Filtering for `STRG` ensures that only these biologically relevant entries are carried forward for coordinate merging and annotation.  
+> > 2. Header lines, comments, or any non-StringTie records that do not contain `STRG` are removed. This avoids clutter and prevents unrelated entries from interfering with downstream joins and comparisons.  
+> >
+> {: .solution}
+>
+{: .question}
+
 ### Converting delimiters
 In this step, we will use the Convert tool to modify characters in a dataset. Specifically, the tool will be used to convert all instances of pipe characters (|) to another format. The tool helps clean and standardize the data for subsequent processing or analysis. This is often a necessary step when preparing data for tools that require specific formats or when performing tasks such as parsing or file importation.
+
 
 > <hands-on-title> Convert </hands-on-title>
 >
 > 1. {% tool [Convert - delimiters to TAB](Convert characters1) %} with the following parameters:
 >    - *"Convert all"*: `Pipes`
->    - {% icon param-file %} *"in Dataset"*: `output` (output of **Query Tabular** {% icon tool %})
+>    - {% icon param-file %} *"in Dataset"*: `output` (output of **Select** {% icon tool %})
 >
 >
 {: .hands_on}
@@ -166,6 +200,18 @@ In this step, we will use the Convert tool to modify characters in a dataset. Sp
 > {: .solution}
 >
 {: .question}
+
+### Removing Colons and converting into a different tabular
+In this step, we will use the Convert tool to remove colons from the dataset. This conversion is useful when you need to standardize the data or prepare it for downstream processing, where colons may interfere with the analysis or formatting. By selecting the "Convert all" option for colons, all occurrences of colons in the dataset will be removed, creating a clean tabular format for further analysis.
+
+> <hands-on-title> Convert </hands-on-title>
+>
+> 1. {% tool [Convert - delimiters to TAB](Convert characters1) %} with the following parameters:
+>    - *"Convert all"*: `Colons`
+>    - {% icon param-file %} *"in Dataset"*: `out_file1` (output of **Convert** {% icon tool %})
+>
+>
+{: .hands_on}
 
 ### Editing certain "u" characters
 In this step, we will use the Column Regex Find And Replace tool to find and replace specific patterns in the data columns. Regular expressions (regex) allow for pattern matching, making it easier to identify and modify data based on specific patterns. In this case, the tool will search for occurrences of the pattern u_ and replace them with u: in column c3 of the dataset. This is commonly done to standardize data formatting or clean data for further analysis. In this step, any protein sequences with a "u_" will be replaced with "u".
@@ -184,18 +230,17 @@ In this step, we will use the Column Regex Find And Replace tool to find and rep
 >
 {: .hands_on}
 
-
 ### Removing Colons and converting into a different tabular
-In this step, we will use the Convert tool to remove colons from the dataset. This conversion is useful when you need to standardize the data or prepare it for downstream processing, where colons may interfere with the analysis or formatting. By selecting the "Convert all" option for colons, all occurrences of colons in the dataset will be removed, creating a clean tabular format for further analysis.
 
 > <hands-on-title> Convert </hands-on-title>
 >
 > 1. {% tool [Convert - delimiters to TAB](Convert characters1) %} with the following parameters:
 >    - *"Convert all"*: `Colons`
->    - {% icon param-file %} *"in Dataset"*: `out_file1` (output of **Column Regex Find And Replace** {% icon tool %})
+>    - {% icon param-file %} *"in Dataset"*: `out_file1` (output of **Column Regex and Replace** {% icon tool %})
 >
 >
 {: .hands_on}
+
 
 
 ### Extracting bed file information Query Tabular
@@ -215,9 +260,9 @@ In this step, we will use the Query Tabular tool to extract specific information
 >        - {% icon param-repeat %} *"Insert Database Table"*
 >            - {% icon param-file %} *"Tabular Dataset for Table"*: `out_file1` (output of **Convert** {% icon tool %})
 >        - {% icon param-repeat %} *"Insert Database Table"*
->            - {% icon param-file %} *"Tabular Dataset for Table"*: `Fragpipe-Peptide-Report.tabular` (Input dataset)
+>            - {% icon param-file %} *"Tabular Dataset for Table"*: `GffCompare_Annotated_GTF_to_BED.bed` (Input dataset)
 >    - *"SQL Query to generate tabular output"*:
-> ``` sql
+> ```
 > SELECT t1.c1,t1.c8,t1.c9,t1.c11,t1.c12,t2.c5,t2.c6,t1.c7
 > FROM t1
 > INNER JOIN t2
@@ -225,8 +270,185 @@ In this step, we will use the Query Tabular tool to extract specific information
 > ```
 >    - *"include query result column headers"*: `No`
 >
+> 2. Rename file to "assembly_formatted_table".
+> 
+{: .hands_on}
+
+
+### Extracting SAV-derived peptides
+The **Select lines that match an expression** tool is used to extract only the rows corresponding to SAV-assembled transcripts from a mixed text file.
+
+> <hands-on-title> Select SAV transcript lines </hands-on-title>
+>
+> 1. {% tool [Select lines that match an expression](toolshed.g2.bx.psu.edu/repos/iuc/select/select/1.0.4) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"* (input): `Peptide_to_Protein_Annotation (Query Tabular output)`
+>    - *"that"*: `NOT Matching`
+>    - *"the pattern"*:
+>      ```
+>      (STRG)
+>      ```
+>
+>    This will retain only lines that do not contain the `STRG` label.
+>    
+{: .hands_on}
+
+### Converting delimiters
+In this step, we will use the Convert tool to modify characters in a dataset. Specifically, the tool will be used to convert all instances of pipe characters (|) to another format. The tool helps clean and standardize the data for subsequent processing or analysis. This is often a necessary step when preparing data for tools that require specific formats or when performing tasks such as parsing or file importation.
+
+
+> <hands-on-title> Convert </hands-on-title>
+>
+> 1. {% tool [Convert - delimiters to TAB](Convert characters1) %} with the following parameters:
+>    - *"Convert all"*: `Pipes`
+>    - {% icon param-file %} *"in Dataset"*: `output` (output of **Select** {% icon tool %})
+>
 >
 {: .hands_on}
+
+## Extracting Relevant Columns for SAV Peptides
+
+The **Cut Columns** tool is used to extract only the fields required for downstream annotation of SAV-derived peptides. Since the structure of SAV output differs from assembly-derived peptide annotations, this step isolates the key identifiers and coordinate fields that will later be merged with assembly annotations during unified peptide mapping. By selecting only the columns necessary for variant-driven peptide interpretation, we ensure a clean and consistent table for integration with tools such as PeptidePointer.
+
+> <hands-on-title> Extracting Columns for SAV </hands-on-title>
+>
+> 1. {% tool [Cut columns from a table](toolshed.g2.bx.psu.edu/repos/iuc/cut/cut/1.0.2) %} with the following parameters:
+>    - *“Cut columns”*:  
+>      ```
+>      c1,c3,c9,c10
+>      ```
+>    - *“Delimited by”*: `Tab`
+>    - {% icon param-file %} *“From”*: (output of **Convert (SAV)** {% icon tool %})
+>
+> 2. Execute the tool to produce a reduced SAV-specific annotation table containing only the essential fields for downstream merging.
+>
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. Why do we extract only selected columns from the SAV output?  
+> 2. How will this SAV table be used later in the workflow?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Extracting only the required fields reduces unnecessary complexity, removes irrelevant columns, and ensures consistent formatting before merging with assembly-derived peptide information.  
+> >
+> > 2. The SAV table will later be merged with assembly annotations to generate a unified peptide annotation file for use in downstream tools such as PeptidePointer, enabling consistent mapping of peptides to genomic features.  
+> >
+> {: .solution}
+>
+{: .question}
+
+## Editing SAV Annotation Columns Using Column Regex Find and Replace
+
+The **Column Regex Find and Replace** tool is used in this step to clean and standardize SAV (Single Amino-acid Variant) annotation fields. SAV entries often begin with prefixes such as `SNV_` or `INDEL_`, which must be reformatted to a consistent delimiter-based structure (`SNV|`, `INDEL|`) to be compatible with downstream peptide-annotation tools such as PepPointer. This formatting step ensures that SAV annotations can later be merged accurately with assembly-derived peptides, despite their inherently different annotation structures.
+
+> <hands-on-title> Editing SAV Annotations </hands-on-title>
+>
+> 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/bgruening/column_regex_find_replace/column_regex_find_and_replace/1.0.3) %} with the following parameters:
+>    - {% icon param-file %} *“Select cells from”* (tabular): (output of **Cut (SAV)** {% icon tool %})
+>    - *“using column”*: `2`
+>
+>    **Regex Rule 1 — Convert INDEL notation**
+>    - *Find Regex*: ```INDEL_```
+>    - *Replacement*: ```INDEL|```
+>
+>    **Regex Rule 2 — Convert SNV notation**
+>    - *Find Regex*: ```SNV_```
+>    - *Replacement*:```SNV|```
+>
+{: .hands_on}
+
+
+> <hands-on-title> Convert </hands-on-title>
+>
+> 1. {% tool [Convert - delimiters to TAB](Convert characters1) %} with the following parameters:
+>    - *"Convert all"*: `Pipes`
+>    - {% icon param-file %} *"in Dataset"*: `output` (output of **Column Regex Find And Replace (SAV)** {% icon tool %})
+>
+>
+{: .hands_on}
+
+> <hands-on-title> Query Tabular </hands-on-title>
+>
+> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
+>    - In *"Database Table"*:
+>        - {% icon param-repeat %} *"Insert Database Table"*
+>            - {% icon param-file %} *"Tabular Dataset for Table"*: `Genomic-Variant-Protein-BED` (output of **Concatenate from Non-Reference workflow** {% icon tool %})
+>        - {% icon param-repeat %} *"Insert Database Table"*
+>            - {% icon param-file %} *"Tabular Dataset for Table"*: (output of **Convert - delimiters to TAB (SAV)** {% icon tool %})
+>    - *"SQL Query to generate tabular output"*:
+> ```
+> SELECT t1.*, t2.*
+> FROM t1
+> JOIN t2
+> ON t1.c1 = t2.c3
+> ```
+>    - *"include query result column headers"*: `No`
+>
+>
+{: .hands_on}
+
+> <hands-on-title> Extracting Columns for SAV BED </hands-on-title>
+>
+> 1. {% tool [Cut columns from a table](toolshed.g2.bx.psu.edu/repos/iuc/cut/cut/1.0.2) %} with the following parameters:
+>    - *“Cut columns”*:  
+>      ```
+>      c8,c3,c4,c11,c12,c9,c5,c2
+>      ```
+>    - *“Delimited by”*: `Tab`
+>    - {% icon param-file %} *“From”*: (output of **Query Tabular (SAV)** {% icon tool %})
+>
+> 2. Execute the tool to produce a reduced SAV-specific annotation table containing only the essential fields for downstream merging.
+> 
+{: .hands_on}
+
+> <hands-on-title> Editing SAV Annotations </hands-on-title>
+>
+> 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/bgruening/column_regex_find_replace/column_regex_find_and_replace/1.0.3) %} with the following parameters:
+>    - {% icon param-file %} *“Select cells from”* (tabular): (output of **Cut columns (SAV)** {% icon tool %})
+>    - *“using column”*: `6`
+>
+>    **Regex Rule 1 — Convert INDEL notation**
+>    - *Find Regex*: ```INDEL```
+>    - *Replacement*: ``` ```
+>
+>    **Regex Rule 2 — Convert SNV notation**
+>    - *Find Regex*: ```SNV```
+>    - *Replacement*:``` ```
+>
+> 2. Rename file to "sav_formatted_table".
+>
+> 
+{: .hands_on}
+
+Because the annotation formats differ between **assembly-derived peptides** and **SAV-derived peptides**, we process them separately before merging. We first perform text formatting on the assembly peptide annotations, followed by formatting of the SAV annotations, and finally merge both sets for unified peptide annotation using **PepPointer**.
+
+## Merging Assembly and SAV Annotation Tables
+
+The **Concatenate Datasets** tool merges the formatted assembly-derived peptide annotations with the processed SAV-derived annotations into a single unified table. This consolidated dataset allows all peptide sources—assembly, genomic, and SAV—to be passed into **PepPointer** for final peptide-level annotation. Concatenation ensures that variant-driven peptides and assembly-derived peptides are integrated into one harmonized file before downstream processing.
+
+> <hands-on-title> Concatenate Assembly and SAV tables </hands-on-title>
+>
+> 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/iuc/concatenate/concatenate/1.0.0) %} with:
+>    - {% icon param-file %} *“Concatenate Dataset (input1)”*: `assembly_formatted_table` (output of **Query Tabular (assembly)** {% icon tool %})
+>    - *“Select (input2)”*: `sav_formatted_table` (output of **Column Regex Find And Replace (SAV)** {% icon tool %})
+>   
+>
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. Why do we merge assembly and SAV annotations before running PepPointer?  
+> 2. What considerations should be taken into account when concatenating tables?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. PepPointer requires all peptide sources to be provided together so it can assign unified peptide-level annotations, including genomic, variant, and transcript context.  
+> > 2. Column order and formatting must match between tables to ensure correct alignment after concatenation.  
+> >
+> {: .solution}
+>
+{: .question}
 
 
 ### Performing calculations to convert proteomic coordinates to genomic coordinates.
@@ -238,9 +460,9 @@ To convert proteomic coordinates to genomic coordinates, it is essential to acco
 > 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
 >    - In *"Database Table"*:
 >        - {% icon param-repeat %} *"Insert Database Table"*
->            - {% icon param-file %} *"Tabular Dataset for Table"*: `output` (output of **Query Tabular** {% icon tool %})
+>            - {% icon param-file %} *"Tabular Dataset for Table"*: `output` (output of **Concatenate datasets** {% icon tool %})
 >    - *"SQL Query to generate tabular output"*:
-> ``` sql
+> ```
 > SELECT t1.*, (t1.c4 - 1) * 3 AS c2_multiplied, t1.c5 * 3 AS c3_multiplied FROM t1
 > ```
 >    - *"include query result column headers"*: `No`
@@ -249,7 +471,7 @@ To convert proteomic coordinates to genomic coordinates, it is essential to acco
 {: .hands_on}
 
 
-### Annotating the genomic coordinate
+### Annotating the genomic coordinates
 
 The Query Tabular step in this workflow is used to extract and calculate genomic coordinates based on the proteomic data. The SQL query within the tool defines two calculations for genomic coordinates, start and stop, based on the strand information of the data. For each row in the input dataset (t1), if the strand (t1.c7) is "-" (negative), the genomic coordinates are calculated by subtracting the position from the given end (t1.c3 - t1.c9 for start, and t1.c3 - t1.c10 for stop). If the strand is "+" (positive), the genomic coordinates are calculated by adding the respective positions (t1.c2 + t1.c9 for start, and t1.c2 + t1.c10 for stop). These calculated coordinates are then returned in the query results, where they will be included as new columns (start and stop). This step is essential for transforming the proteomic information into genomic positions for further analysis.
 
@@ -260,7 +482,7 @@ The Query Tabular step in this workflow is used to extract and calculate genomic
 >        - {% icon param-repeat %} *"Insert Database Table"*
 >            - {% icon param-file %} *"Tabular Dataset for Table"*: `output` (output of **Query Tabular** {% icon tool %})
 >    - *"SQL Query to generate tabular output"*:
-> ``` sql
+> ```
 > SELECT t1.*,
 > CASE
 > WHEN t1.c7 = '-' THEN t1.c3 - t1.c9
@@ -291,7 +513,7 @@ The Query Tabular step in this workflow is used to extract and calculate genomic
 >
 {: .question}
 
-### Generating BED file for Peppointer
+### Generating BED file for PepPointer
 This step is necessary to extract and reorganize relevant genomic information from the dataset. By querying specific columns such as chromosome (chromosome), start (chromStart), end (chromEnd), and strand (strand), we are preparing the data for further analysis. These values are essential for mapping proteomic or peptide data to the genomic coordinates, ensuring accurate alignment and interpretation of the sequence in the context of its genomic location. Additionally, renaming columns enhances clarity and standardizes the format, making it easier to work with the data in subsequent steps.
 
 > <hands-on-title> Query Tabular </hands-on-title>
@@ -301,7 +523,7 @@ This step is necessary to extract and reorganize relevant genomic information fr
 >        - {% icon param-repeat %} *"Insert Database Table"*
 >            - {% icon param-file %} *"Tabular Dataset for Table"*: `output` (output of **Query Tabular** {% icon tool %})
 >    - *"SQL Query to generate tabular output"*:
-> ``` sql
+> ```
 > SELECT
 > c8 AS `chromosome`,
 > c11  AS `chromStart`,
@@ -313,7 +535,8 @@ This step is necessary to extract and reorganize relevant genomic information fr
 > ```
 >    - *"include query result column headers"*: `No`
 >
->
+> 2. Change data type to ".bed".
+> 
 {: .hands_on}
 
 
@@ -371,7 +594,7 @@ In this step, we are using Query Tabular to extract and format relevant informat
 >        - {% icon param-repeat %} *"Insert Database Table"*
 >            - {% icon param-file %} *"Tabular Dataset for Table"*: `classified` (output of **PepPointer** {% icon tool %})
 >    - *"SQL Query to generate tabular output"*:
-> ``` sql
+> ```
 > SELECT
 > c4 AS Peptide,
 > c1 AS Chromosome,
@@ -408,13 +631,13 @@ In this step, we are using Query Tabular to extract and format relevant informat
 ![Variant-annotation-overview-workflow]({% link topics/proteomics/images/neoantigen/PepPointer_Characterization_3.PNG %})
 
 ## Generating FASTA for MHC binding tool
-This output is an input for the next workflow.
+This output is an input for the next workflow (HLA Binding Novel Peptides).
 
 > <hands-on-title> Tabular-to-FASTA </hands-on-title>
 >
 > 1. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Tab-delimited file"*: `output` (output of **Query Tabular** {% icon tool %})
->    - *"Title column(s)"*: `c['2']`
+>    - *"Title column(s)"*: `c2`
 >    - *"Sequence column"*: `c1`
 >
 >
@@ -446,6 +669,7 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"Genomic-Variant-BED-file"*: `Genomic-Variant-BED-file.tabular`
 >    - {% icon param-file %} *"Novel Peptides from PepQuery"*: `Novel_Peptides_from_PepQuery.tabular`
 >    - {% icon param-file %} *"Fragpipe Peptide Report"*: `Fragpipe-Peptide-Report.tabular`
 >    - {% icon param-file %} *"Annotated-GffCompared-GTFtoBED"*: `GffCompare_Annotated_GTF_to_BED.bed`
@@ -455,8 +679,12 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 >
 {: .hands_on}
 
+# Are you feeling adventurous? ✨
+
+## One-Click Neoantigen Workflow
+
+This new [One-Click Neoantigen Workflow](https://usegalaxy.eu/u/galaxyp/w/ipepgen-one-click-workflow) brings together all key modules of the neoantigen discovery process into a single, streamlined analysis within Galaxy. Instead of launching each tutorial separately, users can now execute the entire end-to-end pipeline—from database creation to HLA binding prediction—with just one click —without ever leaving Galaxy.
 
 # Disclaimer
 
 Please note that all the software tools used in this workflow are subject to version updates and changes. As a result, the parameters, functionalities, and outcomes may differ with each new version. We recommend that users verify the specific versions of software tools used to ensure the reproducibility and accuracy of results.
-
