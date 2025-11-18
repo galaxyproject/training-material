@@ -22,12 +22,15 @@ key_points:
   - ChIP-seq data requires multiple methods of quality assessment to ensure that the data is of high quality.
   - Multiple normalization methods exists depending on the availability of input data.
   - Heatmaps containing all genes of an organism can be easily plotted given a BED file and a coverage file.
-contributors:
+contributions:
+  authorship:
   - friedue
   - erxleben
   - bebatut
   - vivekbhr
   - fidelram
+  funding:
+  - deNBI
 ---
 
 
@@ -136,7 +139,7 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 
 In order to figure where the sequenced DNA fragments originated from in the genome, the short reads must be aligned to the reference genome. This is equivalent to solving a jigsaw puzzles, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way may, however, take a couple of weeks.
 
-### Running Bowtie2
+## Running Bowtie2
 
 Nowadays, there are many read alignment programs for shotgun sequenced DNA, Bowtie2 being one of them.
 

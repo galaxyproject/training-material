@@ -354,7 +354,7 @@ Now that you have the structure in place, you can then fill the tutorial per se.
 >    7. Add some question/solution boxes for assessment
 >    8. Add a conclusion
 >
-> 3. (Optional) Build the website locally and check that the tutorial is there by following the [Jekyll tutorial]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
+> 3. (Optional) Build the website locally and check that the tutorial is there by following the [Jekyll tutorial]({% link topics/contributing/tutorials/rendering_gtn/tutorial.md %})
 {: .hands_on}
 
 # Keep track of the changes
@@ -422,7 +422,7 @@ For the next times, you can make it quicker.
 > 8. Check it by serving the website locally
 >
 >    > <comment-title>Serving the website locally</comment-title>
->    > Want to learn how to see the change on the website locally? [Check out our dedicated tutorial]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
+>    > Want to learn how to see the change on the website locally? [Check out our dedicated tutorial]({% link topics/contributing/tutorials/rendering_gtn/tutorial.md %})
 >    {: .comment}
 >
 > 9. Submit it to GitHub

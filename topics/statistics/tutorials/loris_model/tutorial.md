@@ -8,23 +8,38 @@ questions:
 - Which tools can be used in Galaxy to obtain a logistic regression model?
 - How can the model be evaluated to confirm its performance?
 objectives:
-- Use a large dataset of immune checkpoint blockade (ICB)-treated and non-ICB-treated patients across 18 solid tumor types, encompassing a wide range of clinical, pathologic and genomic features to build a Machine Learning Model.
+- Use a large dataset of immune checkpoint blockade (ICB)-treated and non-ICB-treated
+  patients across 18 solid tumor types, encompassing a wide range of clinical, pathologic
+  and genomic features to build a Machine Learning Model.
 - Build a Machine Learning model using PyCaret in Galaxy.
-- Evaluate the model for robustness by comparing it with the original LORIS LLR6 model published by Chang et al., 2024.
-
+- Evaluate the model for robustness by comparing it with the original LORIS LLR6 model
+  published by Chang et al., 2024.
 time_estimation: 1H
 key_points:
-- Use Galaxy tools to build a model based on LORIS Score model published (Chang et al., 2024).
-- Confirm the robustness of the model by comparing its metrics with the model published by Chang et al., 2024.
+- Use Galaxy tools to build a model based on LORIS Score model published (Chang et
+  al., 2024).
+- Confirm the robustness of the model by comparing its metrics with the model published
+  by Chang et al., 2024.
 contributors:
-- paulocilasjr 
-- qchiujunhao 
+- paulocilasjr
+- qchiujunhao
 - jgoecks
 tags:
 - LORIS Score Model
 - Machine Learning
 - PyCaret
+recordings:
+- youtube_id: DKM19WIDNzk
+  length: 24M
+  galaxy_version: 24.2.4.dev0
+  date: '2025-05-07'
+  speakers:
+  - paulocilasjr
+  captioners:
+  - paulocilasjr
+  bot-timestamp: 1746588908
 ---
+
 
 > <comment-title>PyCaret Model Comparison Tool</comment-title>
 >

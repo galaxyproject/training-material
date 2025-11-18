@@ -22,7 +22,7 @@ requirements:
     type: "internal"
     topic_name: contributing
     tutorials:
-        - github-command-line-contribution
+        - github-contribution
   -
     type: "internal"
     topic_name: dev
@@ -72,7 +72,7 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >    > ```
 >    {: .code-in}
 >
->    Make sure your Python version is at least 3.7 (you can check your Python version with `python --version`). If your system uses an older version, you may specify an alternative Python interpreter using the `GALAXY_PYTHON` environment variable (`GALAXY_PYTHON=/path/to/alt/python bash scripts/common_startup.sh --dev-wheels`).
+>    {% icon warning %} Make sure you are using a [supported Python version](https://galaxyproject.org/admin/python/) (you can check your Python version with `python --version`). If your system uses an older version, you may specify an alternative Python interpreter using the `GALAXY_PYTHON` environment variable (`GALAXY_PYTHON=/path/to/alt/python bash scripts/common_startup.sh --dev-wheels`).
 >
 > 4. Activate your new virtual environment:
 >
@@ -111,9 +111,9 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >    Note: `my-feature` is just an example; you can call your new branch anything you like.
 >
 > 6. As one last step, you need to initialize your database. This only applies if you are working on
->    a clean clone and have not started Galaxy (starting Galaxy will initialize the database). 
+>    a clean clone and have not started Galaxy (starting Galaxy will initialize the database).
 >    Initializing the database is necessary because you will be making changes to the database
->    schema, which cannot be applied to a database that has not been initialized. 
+>    schema, which cannot be applied to a database that has not been initialized.
 >
 >    To initialize the database, you can start Galaxy by executing the following script (might take some time when executing
 >    for the first time):
@@ -209,7 +209,7 @@ Now modify `lib/galaxy/model/__init__.py` to add a model class called `UserFavor
 
 # Migrations
 
-There is one last database issue to consider before moving on to considering the API. Each successive release of Galaxy requires recipes for how to migrate old database schemas to updated ones. These recipes are called versions, or revisions, and are implemented using Alembic. 
+There is one last database issue to consider before moving on to considering the API. Each successive release of Galaxy requires recipes for how to migrate old database schemas to updated ones. These recipes are called versions, or revisions, and are implemented using Alembic.
 
 Galaxy's data model is split into the galaxy model and the install model. These models are persisted in one combined database or two separate databases and are represented by two migration branches: "gxy" (the galaxy branch) and "tsi" (the tool shed install branch). Schema changes for these branches are defined in these revision modules:
 - `lib/galaxy/model/migrations/alembic/versions_gxy` (galaxy model)
@@ -219,7 +219,7 @@ We encourage you to read [Galaxy's documentation on migrations](https://github.c
 
 For this tutorial, you'll need to do the following:
 1. Create a revision template.
-2. Edit the revision template, filling in the body of the upgrade and downgrade functions. 
+2. Edit the revision template, filling in the body of the upgrade and downgrade functions.
 3. Run the migration.
 
 > <question-title> about generating a revision template</question-title>
@@ -235,7 +235,7 @@ For this tutorial, you'll need to do the following:
 {: .question }
 
 To fill in the revision template, you need to populate the body of the `upgrade` and `downgrade`
-functions. The `upgrade` function is executed during a schema upgrade, so it should create your table. 
+functions. The `upgrade` function is executed during a schema upgrade, so it should create your table.
 The `downgrade` function is executed during a schema downgrade, so it should drop your table.
 
 Note that although the table creation command looks similar to the one we used to define the model,
@@ -247,7 +247,7 @@ do that here.
 
 > <question-title>about running the migration</question-title>
 >
-> What command should you run to upgrade your database to include the new table? 
+> What command should you run to upgrade your database to include the new table?
 >
 > > <solution-title></solution-title>
 > > ```bash

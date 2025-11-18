@@ -22,6 +22,8 @@ contributions:
     testing:
         - PaulineSGN
         - yvanlebras
+    editing:
+        - VerenaMoo
     funding:
         - pndb
 
@@ -95,18 +97,18 @@ Following steps take as input ab1 sequences files and produce filtered FastQ and
 
 ### Quality Control
 
-We are doing a first Quality control on the raw files using FastQC and MultiQC.
+We are doing a first Quality control on the raw files using [Falco](https://falco.readthedocs.io/en/latest/) and MultiQC. Falco is an efficiency optimized rewrite of [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
-> <hands-on-title> FastQC </hands-on-title>
-> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0) %} with the following parameters:
+> <hands-on-title> Falco </hands-on-title>
+> 1. {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Raw read data from your current history"*: `ab1.fastq` data collection created at the previous step
 >
 > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
 >    - In *"Results"*:
 >        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `FastQC`
+>            - *"Which tool was used generate logs?"*: `FastQC` (no matter whether FastQC or Falco was used)
 >    - In *"FastQC output"*:
->         - {% icon param-file %} *"RawData FastQC output"*: `FastQC on collection X:` data collection created at the previous step
+>         - {% icon param-file %} *"RawData FastQC output"*: `Falco on collection X:` data collection created at the previous step
 >
 > 3. *Check on the HTML files the general quality statistics of your sequences*
 >
@@ -155,18 +157,18 @@ Cutadapt enables the removal of adapters, polyA tails, and other artifacts from 
 {: .comment}
 
 
-## Quality Control with FastQC and MultiQC
+## Quality Control with Falco and MultiQC
 
-> <hands-on-title> FastQC </hands-on-title>
+> <hands-on-title> Falco </hands-on-title>
 >
-> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0) %} with the following parameters:
+> 1. {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Raw read data from your current history"*: output from {% icon tool%} **Cutadapt**
 >
 > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
 >    - In *"Results"*:
->        - *"Which tool was used generate logs?"*: `FastQC`
+>        - *"Which tool was used generate logs?"*: `FastQC` (no matter whether FastQC or Falco was used)
 >        - {% icon param-repeat %} *"Insert FastQC output"*
->          - {%  icon param-collection %} *"FastQC output"*: the `raw` output from {% icon tool %} **FastQC**
+>          - {%  icon param-collection %} *"FastQC output"*: the `raw` output from {% icon tool %} **Falco**
 >
 >    > <comment-title> Comment </comment-title>
 >    >
@@ -276,7 +278,7 @@ Cutadapt enables the removal of adapters, polyA tails, and other artifacts from 
 
 3. **Collection of FASTA files**: FASTQ files converted into FASTA format. Used for conducting BLAST alignments.
 
-4. **FastQC Quality Control Results** before and after cleaning: Both raw FastQC results and HTML reports are created
+4. **Falco Quality Control Results** before and after cleaning: Both raw Falco results and HTML reports are created
 
 5. **MultiQC Quality Control Results** before and after cleaning: Both raw MultiQC statistics and HTML report are created
 

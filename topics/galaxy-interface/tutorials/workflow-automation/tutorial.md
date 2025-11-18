@@ -24,9 +24,15 @@ requirements:
     -
         title: "Basic knowledge of the command line"
         type: none
-contributors:
-- simonbray
-- wm75
+contributions:
+  authorship:
+    - simonbray
+    - wm75
+  funding:
+    - elixir-europe
+    - deNBI
+    - uni-freiburg
+    - eurosciencegateway
 subtopic: workflows
 
 recordings:
@@ -106,7 +112,7 @@ Workflows and data for this tutorial are hosted on [GitHub](https://github.com/u
 The main tool we will use in this tutorial is [Planemo](https://planemo.readthedocs.io/en/latest/readme.html), a command-line tool with a very wide range of functionality. If you ever developed a Galaxy tool, you probably encountered the `planemo test`, `planemo serve` and `planemo lint` subcommands. In this tutorial we will be using a different subcommand: `planemo run`.
 
 > <comment-title>Note</comment-title>
-> Planemo provides a more detailed tutorial on the `planemo run` functionality [here](https://planemo.readthedocs.io/en/latest/running.html). The pages on '[Best Practices for Maintaining Galaxy Workflows](https://planemo.readthedocs.io/en/latest/best_practices_workflows.html)' and '[Test Format](https://planemo.readthedocs.io/en/latest/test_format.html)' also contain a lot of useful information.
+> Planemo provides a more detailed tutorial on the [`planemo run` functionality here](https://planemo.readthedocs.io/en/latest/running.html). The pages on '[Best Practices for Maintaining Galaxy Workflows](https://planemo.readthedocs.io/en/latest/best_practices_workflows.html)' and '[Test Format](https://planemo.readthedocs.io/en/latest/test_format.html)' also contain a lot of useful information.
 {:.comment}
 
 For the purposes of this tutorial, we assume you have a recent version of Planemo (0.74.4 or later) installed in a virtual environment. If you don't, please follow the [installation instructions](https://planemo.readthedocs.io/en/latest/installation.html#pip).

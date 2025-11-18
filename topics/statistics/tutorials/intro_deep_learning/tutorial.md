@@ -16,9 +16,15 @@ key_points:
 - Multiple tools to constitute a neural network architecture
 - Interpretation of predictions using visualisation tools
 time_estimation: 1H
-contributors:
-- anuprulez
-- khanteymoori
+contributions:
+  authorship:
+    - anuprulez
+    - khanteymoori
+  funding:
+    - elixir-europe
+    - deNBI
+    - uni-freiburg
+    - eurosciencegateway
 ---
 
 ## Introduction
@@ -87,7 +93,7 @@ The error between the computed and actual output is calculated using a loss func
 > > 1. Architecture of a neural network consists of multiple layers such as input, hidden, convolutional, output and their number of respective neurons, optimiser, loss and activation functions etc.
 > > 2. The learning happens by minimising the loss between the computed and actual output. The weights of all neuronal connections are adjusted (increased or decreased) to achieve the minimum loss. To ascertain the amount of change for weights, a technique known as backpropagation is used. Using this technique, the loss computed at the output layer is "propagated" back in the neural network (from output to input layer) and each neuronal connection is assigned a share of the total loss. In other words, how much each neuron is contributing to the total accumulated loss. For example, w1 is adjusted according to equation:
 > > ![data](../../images/partial_derivative.png "Weight w1 is updated by computing a partial derivative of loss L with respect to weight. The derivative is multiplied with learning rate n.")
-> > In the above equation, `L` is the total loss, `w1` is the weight of a connection between an input neuron and a hidden neuron. Similarly, all weights are adjusted and in the subsequent iteration, the updated weights are used to compute loss at the output layer. Parameter `n` is the learning rate which determines how small or big changes are needed in weights. It can either be a fixed quantity or a variable one. In case of a variable learning rate, it usually starts with a large number (say 1.0) and subsequently decays to a small number (say 0.001) as the training epochs proceed because initially a large learning rate helps to reach close to the minimum error quickly and then it is decayed to slow down the learning so that it stabilises at the minimum. More on backpropagation can be read [here](http://neuralnetworksanddeeplearning.com/chap2.html).
+> > In the above equation, `L` is the total loss, `w1` is the weight of a connection between an input neuron and a hidden neuron. Similarly, all weights are adjusted and in the subsequent iteration, the updated weights are used to compute loss at the output layer. Parameter `n` is the learning rate which determines how small or big changes are needed in weights. It can either be a fixed quantity or a variable one. In case of a variable learning rate, it usually starts with a large number (say 1.0) and subsequently decays to a small number (say 0.001) as the training epochs proceed because initially a large learning rate helps to reach close to the minimum error quickly and then it is decayed to slow down the learning so that it stabilises at the minimum. [More on backpropagation can be read here](http://neuralnetworksanddeeplearning.com/chap2.html).
 > >
 > {: .solution}
 >

@@ -27,6 +27,7 @@ contributions:
   - annefou
   editing:
   - hexylena
+  - teresa-m
 subtopic: analyse
 ---
 
@@ -47,7 +48,7 @@ We will introduce additional benefits of using JupyterLab as you cover the lesso
 
 # JupyterLab
 
-Opening up {% tool [JupyterLab](interactive_tool_jupyter_notebook) %} is quite easy:
+Opening up your {% tool [JupyterLab](interactive_tool_jupyter_notebook) %}:
 
 {% snippet faqs/galaxy/interactive_tools_jupyter_launch.md %}
 
@@ -56,7 +57,7 @@ You should now be looking at a page with the JupyterLab interface:
 ![Jupyterlab default session](../../images/jupyterlab_default_session.png)
 
 As shown on the figure above, JupyterLab interface is made of 3 main areas:
-- The menu barat the top
+- The menu bar at the top
 - The left side bar with in particular the **File Browser**
 - The main work area in the central panel
 
@@ -66,24 +67,27 @@ Now that we are ready to start exploring JupyterLab, we will want to keep a reco
 
 > <hands-on-title>Start a notebook</hands-on-title>
 >
-> 1. On the left side bar, in the **File Browser**, double-click on the file called **ipython_galaxy_notebook.ipynb**. This will open the
-> default notebook in the main work area.
-> 2. If **ipython_galaxy_notebook.ipynb** does not exist (for instance on *Try JupyterLab*) then click on **+** (top left) to start **The launcher** and then **Python** icon in the **Notebook** section to create a new blank notebook.
+> 1. On the left side bar, in the **File Browser**: 
+>    - Double-click on the file called **ipython_galaxy_notebook.ipynb**. 
+>    - Then select the default **This will open the **Python [conda env:base]** Kernel
+>    - This will open a default notebook in the main work area.
+> 2. If **ipython_galaxy_notebook.ipynb** does not exist (for instance on *Try JupyterLab*), click on **+** (top left) to start **The launcher**. Then click on the **Python** icon in the **Notebook** section to create a new blank notebook.
 {: .hands_on}
 
 A new notebook appears in the centre panel. Before we go any further, you should learn to save your script.
 
 > <hands-on-title>Save a Python notebook</hands-on-title>
 >
-> 1. Click the **File** menu and select **Save Notebook As...
->    Alternatively, you can also:
->    - Click the {% icon galaxy-save %} icon (**Save the notebook contents and create checkpoint**) in the bar above the first line in the script editor
->    - Click the **File** menu and select **Save Notebook**
->    - Type <kbd>CTRL</kbd>+<kbd>S</kbd> (<kbd>CMD</kbd>+<kbd>S</kbd> on OSX)
+> 1. There are several options to save your file:
+>    - Click the **File** menu and select **Save Notebook As...**.
+>    - Click the {% icon galaxy-save %} icon (**Save the notebook contents and create checkpoint**) in the bar above the file tab line in the script editor.
+>    - Click the **File** menu and select **Save Notebook**.
+>    - Type <kbd>CTRL</kbd>+<kbd>S</kbd> (<kbd>CMD</kbd>+<kbd>S</kbd> on OSX).
 >
-> 2. In the **Save Notebook As** window that opens, name your file `ipython_galaxy_notebok`
->    Alternatively, you can also rename your Jupyter Notbook:
->    - Right click on the name (`Untitled.ipynb`) in the bar above the first line in the script editor and select **Rename Notebook**
+> 2. There are several options on how to (re-)name your file:
+>    - After clicking on the option **Save Notebook As**, a window opens, where the file can be (re-)named.
+>    - Right click on the current file name (`ipython_galaxy_notebook.ipynb` or `Untitled.ipynb`) in the bar above the first line in the script editor and select **Rename Notebook** in the opened selection window.
+>    - Alternatively, right click on the file name you would like to change on the left side in the folder menu. A window will open where you can select **Rename**.
 {: .hands_on}
 
 The new script `ipython_galaxy_notebook.ipynb` should appear in the **File Browser*** in the left panel. By convention, Jupyter notebooks end with the file extension `.ipynb` independently of the programming language (R, Python, Octave, Julia, etc.).
@@ -107,7 +111,7 @@ By default, a **Python notebook** is started. Don't worry if you are not familia
 
 > <comment-title>Note: switching to another programming language</comment-title>
 >
-> Once you have created a Notebook, you can switch to another available programming language (**Switch kernel**).
+> Once you have created a Notebook, you can switch to another available programming language (**Switch Kernel**).
 > 1. On the top right of your running Notebook, click on **Python 3**. A new window pops up:
 > ![jupyterlab switch kernel](../../images/jupyterlab_switch_kernel.png)
 > 2. In this new window, click on **Python 3** to select an available programming language (R, octave, Julia, etc.).
@@ -117,6 +121,33 @@ By default, a **Python notebook** is started. Don't worry if you are not familia
 > 2. Click on icon of your choice in the **Notebook** section.
 > 3. A new notebook is created with the programming language of your choice.
 {: .comment}
+
+In the next step, we will create some visualizations. To visualize data, programming languages offer specific libraries. Before we use these libraries, we first need to ensure that these dependencies are installed.
+
+> <hands-on-title>Install dependencies using Conda</hands-on-title>
+>
+> 1. To open a console to install the dependencies, open the launcher window by clicking on the plus sign in the top-left corner. Within this window, click on `Python [conda env:python-kernel-3.12]` iin the Console section.
+> 2. After the console opens, you can enter the following lines into the cell at the bottom:
+>    ```python
+>    conda install -c conda-forge numpy matplotlib
+>    ```
+>
+> 3. <kbd>Shift+Return</kbd> to run the cell or click on the run cell button.
+>
+{: .hands_on}
+
+As the dependencies are installed within one Kernel the notebook needs to run on the same Kernel.
+
+> <hands-on-title>Select Dernel</hands-on-title>
+>
+> 1. First restart the Kernel, by clicking on **Kernel** in the upper menu and select **Restart Kernel...**
+> 2. Next switch back to the your ipython notebook (e.g. **ipython_galaxy_notebook.ipynb**). You can find it next to the console tab on top of the right window.
+>
+> 3. Below the taps you will find **Python env** button (e.g. `Python[conda env:base]`). If you click on this one you can select a Kernel. Please select the Kernel, which was update in the previous step (`Python [conda env:python-kernel-3.12]`).  
+>
+{: .hands_on}
+
+Now that the dependencies are installed and the Kernel is restarted, we can import the libraries. 
 
 > <hands-on-title>Import Python libraries</hands-on-title>
 >
@@ -185,8 +216,8 @@ This will create a new notebook `.pynb` file in your history every time you clic
 
 > <hands-on-title>Closing JupyterLab</hands-on-title>
 >
-> 1. Click **User**: **Active Interactive Tools**
+> 1. In the Galaxy interface click on  **Interactive Tools** button on the left side.
 >
-> 2. Tick {% icon galaxy-selector %} the box of your Jupyter Interactive Tool, and click **Stop**
+> 2. Tick {% icon galaxy-selector %} the box of your Jupyter Interactive Tool, and click **Stop**.
 >
 {: .hands_on}

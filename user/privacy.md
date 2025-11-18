@@ -12,7 +12,7 @@ continue receiving funding and provide a good experience for you, the user.
 ## Alternative Access
 
 If you do not like the privacy options available to you, the GTN can be
-[downloaded and hosted yourself, offline]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %}),
+[downloaded and hosted yourself, offline]({% link topics/contributing/tutorials/rendering_gtn/tutorial.md %}),
 for users needing completely anonymous access to the site and it's tutorials
 and slides.
 
@@ -34,7 +34,7 @@ We do not have information correlating visits across pages, we cannot identify
 if you visit one page, or many pages in a single visit.
 
 You can see the aggregate collected information in
-[Plausible](https://plausible.galaxyproject.eu/training.galaxyproject.org/). 
+[Plausible](https://plausible.galaxyproject.eu/training.galaxyproject.org/).
 
 **We do not have access to more granular data.**
 
@@ -45,7 +45,7 @@ However, if you wish you may opt out of these aggregate statistics.
 > > - Location (country granularity)
 > > - Page visited
 > {: .code-in}
-> 
+>
 > > <code-out-title>How we use it</code-out-title>
 > > - Helps us request Grant Funding
 > > - Helps us know who is using our tutorials

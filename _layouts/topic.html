@@ -123,6 +123,9 @@ layout: base
     <p>This material is reviewed by our Editorial Board:</p>
     {% assign editorial_board = topic.editorial_board | sorted %}
     {% include _includes/contributor-list.html contributors=editorial_board badge=true %}
+    {% unless topic.tag_based %}
+    <p>Are you on the editorial board or want to help out with this topic? View the <a href="{{site.baseurl}}/topics/{{topic.name}}/maintainer.html">topic maintainer page</a> for ways to improve this topic!</p>
+    {% endunless %}
     {% endif %}
 
 

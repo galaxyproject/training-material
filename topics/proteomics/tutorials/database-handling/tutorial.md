@@ -18,9 +18,14 @@ key_points:
   - "Search databases should always include possible contaminants."
   - "For analyzing cell culture or organic samples, search databases should include mycoplasma databases."
   - "Some peptide search engines depend on decoys to calculate the FDR."
-contributors:
+contributions:
+  authorship:
   - stortebecker
   - bgruening
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 subtopic: id-quant
 tags: [DDA]
 ---

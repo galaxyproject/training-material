@@ -9,7 +9,8 @@ tags:
   - RAD-seq
   - Genetic composition EBV class
   - EBV dataset
-  - EBV workflow
+  - EBV workflowz
+  - biodiversity
 questions:
   - "How to analyze RAD sequencing data for a genetic map study?"
 objectives:

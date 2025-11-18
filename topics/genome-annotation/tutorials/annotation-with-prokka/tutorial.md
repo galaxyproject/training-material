@@ -115,7 +115,7 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >
 >       This sequence will be the reference against which annotations are displayed
 >
->    - *"Produce Standalone Instance"*: `Yes`
+>    - *"Output JBrowse"*: `Minimal for viewing (Documentation removed)`
 >    - *"Genetic Code"*: `11: The Bacterial, Archaeal and Plant Plastid Code`
 >    - Click on `Insert Track Group`
 >

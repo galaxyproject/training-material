@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: Ocean Data View (ODV)
+subtopic: introduction
 questions:
 - How to process Argo's glider data ?
 - How to visualise the glider's stations
@@ -29,10 +30,6 @@ contributions:
     - fairease
     - eurosciencegateway
 ---
-
-
-# Introduction
-
 
 Through this tutorial you will learn here how to access, filter and import netCDF data through using ODV Galaxy interactive tool:
 

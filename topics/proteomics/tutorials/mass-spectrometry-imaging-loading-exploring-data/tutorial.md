@@ -18,9 +18,14 @@ key_points:
   - imzML (continuous or processed file type) and Analyze7.5 can be uploaded into Galaxy via the composite upload.
   - The MSI Qualitycontrol tool gives valuable information before starting the analysis.
   - The MSI data exporter can be used any time during the analysis when it is necessary to dig deeper into the data. Galaxy provides many text manipulation tools that can directly be applied on the exported tabular file to filter, sort, plot, ... the data.
-contributors:
+contributions:
+  authorship:
   - foellmelanie
   - bgruening
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 subtopic: special
 tags: [mouse, imaging]
 ---
@@ -172,7 +177,7 @@ Open the pdf by clicking on the eye icon (view data) and answer the following qu
 Each plot of the **MSI Qualitycontrol** {% icon tool %} is described in the help section at the bottom of the tool, this tutorial will discuss a few selected plots in more detail.
 
 
-#### Digestion efficiency
+## Digestion efficiency
 
 The complete digestion of proteins into peptides is a crucial step when performing mass spectrometry of peptides. In MSI the digestion is further hindered by the fact that digestion has to occur on the tissue. One way to control digestion efficiency was suggested by [Erich et al.](https://www.sciencedirect.com/science/article/pii/S1570963916301820?via%3Dihub). They spotted *cytochrome c* next to the tissue before and after digestion and compared the protein intensities in the two spots.
 
@@ -183,7 +188,7 @@ The fold change plots are on page 4 and 5 of the pdf report. The first plot show
 ![Fold Change](../../images/MSI1_foldchange.png "Avererage mass spectra and log2 fold change for Bombesin and its digested peptide")
 
 
-#### Distribution images for Calibrants
+## Distribution images for Calibrants
 
 Have a look at the calibrant plots from page 6 on, especially regarding the distribution patterns. The colour code shows the intensity of the m/z value that is closest to the input m/z and if the ppm range contains several m/z features their intensities are averaged. The input m/z value and its name are printed on top of the image, the m/z number in the box shows the closest m/z value (that is 1296.68, as the m/z axis consists of mass bins slight differences are expected). Low *angiotensin* intensities occur at the boarder of the *bombesin* spot and at the boarder of the kidney tissue and on some spots in the kidney. In general calibrant intensities are higher in the matrix background than on the tissue due to ion suppression effects. *Substance P* shows also ion suppression in the *bombesin* spot. The heatmap shows no spatial intensity gradient what indicates that spraying of calibrants and matrix was homogeneous and that the MS performed stable during data acquisition.
 
@@ -193,7 +198,7 @@ Have a look at the calibrant plots from page 6 on, especially regarding the dist
 > * The **MSI mz images** {% icon tool %} tool allows to generate heatmaps with futher options such as contrast enhancement and smoothing functions. The usage of the tool is explained in more detail in the tutorial [Mass spectrometry imaging: Examining the spatial distribution of analytes]({{ site.baseurl }}/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html).
 {: .comment}
 
-#### Number of peaks and total ion current images
+## Number of peaks and total ion current images
 
 On page 9 the number of peaks per spectrum is plotted and the shape of the kidney can be estimated due to slightly higher number of peaks. The number of peaks is defined as intensity > 0 what means that before peak picking also noise with intensity > 0 is counted in. It is quite common for raw MALDI datasets to have a noise baseline in each spectrum and therefore high amounts of 'peaks' before baseline removal is performed. For the mouse kidney dataset baseline removal was already done during acquisition but as also suggested by the median number of peaks per spectrum in the summary table, about half of every m/z value has an intensity > 0. This suggests to check the mass spectra for a baseline and if applicable remove the baseline during preprocessing of the data.
 
@@ -203,7 +208,7 @@ Both plots can also serve to check for spraying gradients or reduced machine per
 ![Npeaks and TIC heatmap](../../images/MSI1_npeaks_TIC.png "Number of peaks and TIC per spectrum")
 
 
-#### Most abundand m/z features
+## Most abundand m/z features
 
 The plot on page 13 shows for each spectrum the m/z with the highest intensity ('base peak'). This plot can already reveal some morphological features of the dataset. The plot for the mouse kidney dataset shows that the base peak is the same on the kidney tissue and the matrix background but a different one in the *bombesin* spot. According to the legend the base peak in most spectra is roughly at m/z 1350, the base peak in the *bombesin* spot is roughly at 1280 and in a few spectra at 1570. Later, we will export the spectra information, including the base peak of each spectrum, as a tabular file to find the correct m/z values of the most abundant features in the following spectra: x = 40 y = 50; x = 23, y = 70; x = 20, y = 73.
 
@@ -212,7 +217,7 @@ The plot on page 13 shows for each spectrum the m/z with the highest intensity (
 As the feature around m/z 1350 is the highest feature in most of the spectra it is no suprise to find this feature as highest peak in the average spectra plot on page 20. The second highest peak is around 1300 m/z. It is obvious that those features are the calibrants *substance P* and *angiotensin* as they occur as high intensity peaks on the tissue as well as on the background. At least the concentration of *substance P* but also the concentration of *angiotensin I* could be reduced in further experiments. The concentration of *fibrinopeptide B* is chosen well as the peak at m/z 1570 is visible in most of the spectra plots but does not dominate the spectra as the other two calibrants do.
 
 
-#### m/z accuracy
+## m/z accuracy
 
 A MSI dataset has not only deviations in the intensity dimension but also in the m/z dimension. Mass shifts can occur due to sample topography, small length changes in the flight tube or instable high voltage power supply. Mass accuracy is important for two reasons: First, the identification of m/z relies on accurate mass values and second, comparing m/z features across several spectra or even samples requires them to have similar values in order to be considered as the same molecule.
 

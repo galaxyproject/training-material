@@ -318,6 +318,7 @@ The model builder can be downloaded as a zip file.
 > - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.10.0) %}
 >    - *"Select a scheme"*: `Train and Validate`
 >    - *"Choose the dataset containing pipeline/estimator object"*: Select the *Keras Model Builder* from the previous step.
+>    - *"Metrics for evaluation - Select the primary metric (scoring)"*: `Classification -- 'f1'`
 >    - *"Select input type:"*: `tabular data`
 >        - *"Training samples dataset"*: Select `X_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`

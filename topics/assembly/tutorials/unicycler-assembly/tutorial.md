@@ -7,6 +7,7 @@ level: Introductory
 tags:
   - prokaryote
   - microgalaxy
+  - biodiversity
 edam_ontology:
   - topic_0196 # Sequence Assembly
   - topic_0622 # Genomics

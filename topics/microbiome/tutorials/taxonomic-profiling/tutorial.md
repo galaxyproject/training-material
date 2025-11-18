@@ -20,25 +20,29 @@ key_points:
 - The taxonomic classification tool to use depends on the data
 time_estimation: 2H
 contributions:
-   authorship:
-    - sophia120199
-    - bebatut
-    - paulzierep
-   funding:
-    - gallantries
+  authorship:
+  - sophia120199
+  - bebatut
+  - paulzierep
+  editing:
+  - Tarnima-Omara
+  funding:
+  - gallantries
+answer_histories:
+- label: GTA2025
+  history: https://usegalaxy.eu/u/tarnima/h/taxonomic-profiling-and-visualization-of-metagenomic-data-answer-key-history
 subtopic: metagenomics
 tags:
 - metagenomics
 - taxonomic profiling
 - microgalaxy
 redirect_from:
-- /topics/metagenomics/tutorials/taxonomic-profiling/tutorial
+- "/topics/metagenomics/tutorials/taxonomic-profiling/tutorial"
 edam_ontology:
-- topic_3174 # Metagenomics
-- topic_3697 # Microbial ecology
-- topic_0637 # Taxonomy
-- topic_0080 # Sequence analysis
-
+- topic_3174
+- topic_3697
+- topic_0637
+- topic_0080
 recordings:
 - youtube_id: jszMnBKm6ig
   speakers:
@@ -48,8 +52,19 @@ recordings:
   date: '2023-05-16'
   length: 1H15M
   galaxy_version: '23.01'
+- youtube_id: FdtdsCdqY5U
+  length: 2H4M
+  galaxy_version: 24.2.4.dev0
+  date: '2025-04-16'
+  speakers:
+  - Tarnima-Omara
+  captioners:
+  - Tarnima-Omara
+  bot-timestamp: 1744833733
+
 
 ---
+
 
 
 The term **"microbiome"** describes "a characteristic microbial community occupying a reasonably well-defined habitat which has distinct physio-chemical properties. The term thus not only refers to the microorganisms involved but also encompasses their theatre of activity" ({% cite whipps1988mycoparasitism %}).
@@ -188,7 +203,7 @@ For this tutorial, we will use the PlusPF database which contains the Standard (
 
 > <hands-on-title>Assign taxonomic labels with Kraken2</hands-on-title>
 >
-> 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) %} with the following parameters:
+> 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.3+galaxy1) %} with the following parameters:
 >    - *"Single or paired reads"*: `Paired Collection`
 >      - {% icon param-collection %} *"Collection of paired reads"*: Input paired collection
 >    - *"Confidence"*: `0.1`
@@ -224,7 +239,7 @@ For this tutorial, we will use the PlusPF database which contains the Standard (
 
    ```
    Column 1	Column 2	Column 3	Column 4	Column 5
-   U 	MISEQ-LAB244-W7:91:000000000-A5C7L:1:1101:13417:1998 	0 	151|190 	A:18 0:14 2055:5 0:1 2220095:5 0:74 |:| 0:3 A:54 2:1 0:32 204455:1 2823043:5 0:60
+   U 	MISEQ-LAB244-W7:91:000000000-A5C7L:1:1101:13417:1998 	0 	151|190 	A:17 0:15 2055:5 0:1 2220095:5 0:74 |:| 0:3 A:53 2:2 0:32 204455:1 2823043:5 0:60
    U 	MISEQ-LAB244-W7:91:000000000-A5C7L:1:1101:15782:2187 	0 	169|173 	0:101 37329:1 0:33 |:| 0:10 2751189:5 0:30 1883:2 0:39 2609255:5 0:48
    U 	MISEQ-LAB244-W7:91:000000000-A5C7L:1:1101:11745:2196 	0 	235|214 	0:173 2282523:5 2746321:2 0:21 |:| 0:65 2746321:2 2282523:5 0:108
    U 	MISEQ-LAB244-W7:91:000000000-A5C7L:1:1101:18358:2213 	0 	251|251 	0:35 281093:5 0:3 651822:5 0:145 106591:3 0:21 |:| 0:64 106591:3 0:145 651822:5
@@ -241,7 +256,7 @@ For this tutorial, we will use the PlusPF database which contains the Standard (
    > 3. What is the corresponding taxon?
    >
    > > <solution-title></solution-title>
-   > > 1. classified
+   > > 1. unclassified
    > > 2. 9606, for the line 7
    > > 3. 9606 corresponds to Homo sapiens when looking at NCBI.
    > {: .solution}
@@ -271,11 +286,11 @@ For this tutorial, we will use the PlusPF database which contains the Standard (
 
    ```
    Column 1	Column 2	Column 3	Column 4	Column 5	Column 6
-   76.86 	105399 	105399 	U 	0 	unclassified
-   23.14 	31740 	1197 	R 	1 	root
-   22.20 	30448 	312 	R1 	131567 	cellular organisms
-   12.58 	17254 	3767 	D 	2 	Bacteria
-   8.77 	12027 	2867 	P 	1224 	Proteobacteria
+   76.85 	105397 	105397 	U 	0 	unclassified
+   23.15 	31742 	1197 	R 	1 	root
+   22.20 	30450 	312 	R1 	131567 	cellular organisms
+   12.58 	17256 	3768 	D 	2 	Bacteria
+   8.77 	12028 	2868 	P 	1224 	Proteobacteria
    4.94 	6779 	3494 	C 	28211 	Alphaproteobacteria
    1.30 	1782 	1085 	O 	204455 	Rhodobacterales
    0.43 	593 	461 	F 	31989 	Rhodobacteraceae
@@ -291,10 +306,10 @@ For this tutorial, we will use the PlusPF database which contains the Standard (
    >
    > > <solution-title></solution-title>
    > >
-   > > 1. 78% for JC1A and 90% for JP4D
+   > > 1. 77% for JC1A and 90% for JP4D
    > > 2. Kindgoms:
-   > >    - JC1A: 13% Bacteria, 10% Eukaryota, 0.03% Virus
-   > >    - JP4D: 10% Bacteria, 0.7% Eukaryota
+   > >    - JC1A: 13% Bacteria, 9% Eukaryota, 0.03% Virus
+   > >    - JP4D: 9% Bacteria, 0.7% Eukaryota
    > > 3. It seems to be human contamination
    > > 4. JC1A seems to have a big diversity of classes and species of Proteobacteria. JP4D seems more dominated by Aphaproteobacteria.
    > {: .solution}
@@ -307,7 +322,7 @@ A "simple and worthwile addition to Kraken for better abundance estimates" ({% c
 
 > <hands-on-title>Estimate species abundance with Bracken</hands-on-title>
 >
-> 1. {% tool [Estimate Abundance at Taxonomic Level](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.7+galaxy1) %} with the following parameters:
+> 1. {% tool [Estimate Abundance at Taxonomic Level](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/3.1+galaxy0) %} with the following parameters:
 >     - {% icon param-collection %} *"Kraken report file"*: **Report** output of **Kraken**
 >     - *"Select a kmer distribution"*: `PlusPF`, same as for Kraken
 >
@@ -335,7 +350,7 @@ __Krakentools__ ({% cite Lu.2017 %}) is a suite of tools to work on Kraken outpu
 
 > <hands-on-title>Convert Kraken report file</hands-on-title>
 >
-> 1. {% tool [Krakentools: Convert kraken report file](toolshed.g2.bx.psu.edu/repos/iuc/krakentools_kreport2krona/krakentools_kreport2krona/1.2+galaxy0) %} with the following parameters:
+> 1. {% tool [Krakentools: Convert kraken report file](toolshed.g2.bx.psu.edu/repos/iuc/krakentools_kreport2krona/krakentools_kreport2krona/1.2+galaxy2) %} with the following parameters:
 >    - {% icon param-collection %} *"Kraken report file"*: **Report** collection of **Kraken**
 >
 > 2. Inspect the generated output for JC1A
@@ -345,8 +360,8 @@ __Krakentools__ ({% cite Lu.2017 %}) is a suite of tools to work on Kraken outpu
 > <question-title></question-title>
 >
 > ```
-> 3868 	k__Bacteria
-> 2867 	k__Bacteria 	p__Proteobacteria
+> 3869 	k__Bacteria
+> 2868 	k__Bacteria 	p__Proteobacteria
 > 3494 	k__Bacteria 	p__Proteobacteria 	c__Alphaproteobacteria
 > 1085 	k__Bacteria 	p__Proteobacteria 	c__Alphaproteobacteria 	o__Rhodobacterales
 > 461 	k__Bacteria 	p__Proteobacteria 	c__Alphaproteobacteria 	o__Rhodobacterales 	f__Rhodobacteraceae
@@ -363,7 +378,7 @@ __Krakentools__ ({% cite Lu.2017 %}) is a suite of tools to work on Kraken outpu
 > > <solution-title></solution-title>
 > >
 > > 1. Column 1 seems to correspond to the number of fragments covered by a taxon, the columns after represent the different taxonomic level (from kingdom to species)
-> > 2. A line is a taxon with its hierarchy and the number of reads assigned to is
+> > 2. A line is a taxon with its hierarchy and the number of reads assigned to it
 > {: .solution}
 >
 {: .question}
@@ -449,7 +464,7 @@ This page shows the summary of the classifications in the selected sample set:
 > >
 > > 1. JP4D has much more reads than JC1A
 > > 2. 10.2% for JP4D and 23.1% for JC1A
-> > 3. 12.6% for JC1A and 9.44% for JP4D. So similar magnitude orders
+> > 3. 12.6% for JC1A and 9.22% for JP4D. So similar magnitude orders
 > {: .solution}
 >
 {: .question}
@@ -709,7 +724,7 @@ The basic usage of MetaPhlAn consists in the identification of the clades (from 
 > 1. {% tool [Unzip collection](__UNZIP_COLLECTION__) %} with the following parameters:
 >    - {% icon param-collection %} *"Paired input to unzip"*: Input paired collection
 >
-> 2. {% tool [MetaPhlAn](toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.0.6+galaxy1) %} with the following parameters:
+> 2. {% tool [MetaPhlAn](toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/4.1.1+galaxy4) %} with the following parameters:
 >    - In *"Inputs"*
 >      - *"Input(s)"*: `Fasta/FastQ file(s) with microbiota reads`
 >        - *"Fasta/FastQ file(s) with microbiota reads"*: `Paired-end files`

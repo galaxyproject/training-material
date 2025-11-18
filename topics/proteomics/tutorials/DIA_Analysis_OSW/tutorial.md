@@ -42,7 +42,7 @@ Over the last decade another acquisition method has been developed addressing th
 
 Therefore, all peptides which are present in the same m/z window at the same time are fragmented simultaneously and a MS2 spectra containing fragments from multiple peptides is acquired. Using the same m/z windows for all measurements, results in more reproducible fragmentation and potential identification across multiple measurements.
 However, the resulting MS2 spectra contain fragments from multiple peptides and are often more complex and do not allow to directly link a specific (m/z) mass from the MS1 to a single MS2 fragment spectra.
-![DIA_vs_DDA](../../images/DIA_analysis_MS2.png "The MS2 scans in the DIA approach contain fragment ions from multiple precursers and are therefore more complex than the precursor-specific MS2 scans in DDA.")
+![DIA_vs_DDA](../../images/DIA_analysis_MS2.png "The MS2 scans in the DIA approach contain fragment ions from multiple precursors and are therefore more complex than the precursor-specific MS2 scans in DDA.")
 
 To allow for the identification of peptides in those ambiguous MS2 spectra, a spectral library can be used. The spectral library contains experimentally measured  MS2 spectra, which are specific for one precursor (from previous DDA measurements). In more recent approaches the MS2 spectra can be predicted based on theoretical peptide sequences (e.g. from a protein database).
 ![DIA_basics](../../images/DIA_analysis_basic.png "Spectral libraries are necesseary for the identification of peptides in DIA MS2 scans. In this example the spectral library is generated based on DDA data from the same samples.")
@@ -69,7 +69,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the fasta and raw files as well as the sample annotation and the iRT Transition file from [Zenodo](https://zenodo.org/record/4307762)
+> 2. Import the fasta and raw files as well as the sample annotation and the iRT Transition file from [Zenodo](https://zenodo.org/record/4307762) iRT Transition file contains information about the transitions of the Indexed Retention Time (iRT) standard peptides. These peptides are a set of synthetic peptides with well-defined and stable retention times across different liquid chromatography-mass spectrometry (LC-MS) systems.
 >    ```
 >    https://zenodo.org/record/4307762/files/HEK_Ecoli_lib.pqp
 >    https://zenodo.org/record/4307762/files/iRTassays.tsv
@@ -100,7 +100,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>Converting vendor specific raw to open mzML format</hands-on-title>
 >
-> 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1) %} with the following parameters:
+> 1. {% tool [msconvert Convert and/or filter mass spectrometry files](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.6) %}
 >    - {% icon param-collection %} *"Input unrefined MS data"*: `DIA_data`
 >    - *"Do you agree to the vendor licenses?"*: `Yes`
 >    - *"Output Type"*: `mzML`
@@ -126,7 +126,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>DIA analysis using OpenSwathWorkflow</hands-on-title>
 >
-> 1. {% tool [OpenSwathWorkflow](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathworkflow/OpenSwathWorkflow/2.6+galaxy0) %} with the following parameters:
+> 1. {% tool [OpenSwathWorkflow Complete workflow to run OpenSWATH](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathworkflow/OpenSwathWorkflow/3.1+galaxy0) %}
 >    - {% icon param-collection %} *"Input files separated by blank"*: `DIA_data` (output of **msconvert** {% icon tool %})
 >    - {% icon param-file %} *"transition file ('TraML','tsv','pqp')"*: `HEK_Ecoli_lib`
 >    - {% icon param-file %} *"transition file ('TraML')"*: `iRTassays`
@@ -150,7 +150,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 >    - *"Optional outputs"*: `out_osw`
 >
 >    > <comment-title>Mass tolerances and "Minimal number of bins required to be covered"</comment-title>
->    >Here we analyze data acquired on a QExactive Plus MS instrument which uses an Orbitrap and generates high resolution data. Therefore, we allow for 10 ppm mass tolerance for both the MS1 and the MS2 level. If larger mass deviation are expected the mass tolerances can be adjusted. Other instrumentation (such as TOF devices) might require larger mass tolerances for improved peptide identification. Furthermore, here we require at least 7 of the iRT peptides to be found in each of the DIA measurements. This number can be set to lower values if for some reasons fewer iRT peptides were found in some of the measurements. In case only a few iRT peptides are identified in the DIA measurements, the mass tolerance for the iRT extraction can be increased to 20 ppm. We than recommend to increase the extraction window for the MS2 level to 20 ppm. For more information see also [OpenSwathWorkflow](http://openswath.org/en/latest/docs/openswath.html).
+>    >Here we analyze data acquired on a QExactive Plus MS instrument which uses an Orbitrap and generates high resolution data. Therefore, we allow for 10 ppm mass tolerance for both the MS1 and the MS2 level. If larger mass deviation are expected the mass tolerances can be adjusted. Other instrumentation (such as TOF devices) might require larger mass tolerances for improved peptide identification. Furthermore, here we require at least 7 of the iRT peptides to be found in each of the DIA measurements. This number can be set to lower values if for some reasons fewer iRT peptides were found in some of the measurements. In case only a few iRT peptides are identified in the DIA measurements, the mass tolerance for the iRT extraction can be increased to 20 ppm. We then recommend to increase the extraction window for the MS2 level to 20 ppm. For more information see also [OpenSwathWorkflow](http://openswath.org/en/latest/docs/openswath.html).
 >    {: .comment}
 >
 {: .hands_on}
@@ -160,7 +160,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>Combining the individual osw results with pyprophet merge</hands-on-title>
 >
-> 1. {% tool [PyProphet merge](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_merge/pyprophet_merge/2.1.4.0) %} with the following parameters:
+> 1. {% tool [PyProphet merge Merge multiple osw files](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_merge/pyprophet_merge/2.1.4.0) %} 
 >    - {% icon param-collection %} *"Input file"*: `out_osw` (output of **OpenSwathWorkflow** {% icon tool %})
 >    - {% icon param-file %} *"Template osw file"*: `HEK_Ecoli_lib`
 >
@@ -171,12 +171,12 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>Semi-supervised learning and scoring of OpenSwathWorkflow results</hands-on-title>
 >
-> 1. {% tool [PyProphet score](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_score/pyprophet_score/2.1.4.2) %} with the following parameters:
+> 1. {% tool [PyProphet score Error-rate estimation for MS1, MS2 and transition-level data](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_score/pyprophet_score/2.1.4.2) %} 
 >    - {% icon param-file %} *"Input file"*: `merged.osw` (output of **PyProphet merge** {% icon tool %})
 >    - *"Either a 'LDA' or 'XGBoost' classifier is used for semi-supervised learning"*: `XGBoost`
 >
 >    > <comment-title>FDR scoring using pyprophet score</comment-title>
->    >During this step q-values corresponding to the FDR of peak identification is estimated with pyprophet. Typically this is the most time consuming step due to the involved maschine learning processes. To decrease the input size one can use **PyProphet subsample** to randomly select subsets of the identifications from each run in the merged.osw (**PyProphet merge** output). In this case, the FDR estimation needs to be applied on the full merged.osw afterwards using the scored subsample.osw in the *"Apply PyProphet score weights file (osw format) instead of semi-supervised learning."* section of **PyProphet score**. The generated report.pdf is helpful to identify potential errors as well as get first insights on the quality of the identifications.
+>    >During this step q-values corresponding to the FDR of peak identification is estimated with pyprophet. Typically this is the most time consuming step due to the involved machine learning processes. To decrease the input size one can use **PyProphet subsample** to randomly select subsets of the identifications from each run in the merged.osw (**PyProphet merge** output). In this case, the FDR estimation needs to be applied on the full merged.osw afterwards using the scored subsample.osw in the *"Apply PyProphet score weights file (osw format) instead of semi-supervised learning."* section of **PyProphet score**. The generated report.pdf is helpful to identify potential errors as well as get first insights on the quality of the identifications.
 >    {: .comment}
 >
 {: .hands_on}
@@ -198,7 +198,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Yes, we can see a clearly different distribution of the target identification and the decoys. Both, target and decoy distribution were highest around 0. However, the target distribution shows a second peak at positiv d-score values.
+> > 1. Yes, we can see a clearly different distribution of the target identification and the decoys. Both, target and decoy distribution were highest around 0. However, the target distribution shows a second peak at positive d-score values.
 > > 2. The decoy identifications show a Gaussian distribution around 0 which could be explained by the fact that the decoy sequences were randomly generated alterations from the target sequences in the spectral library (see [DIA library generation tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html)). Most target identifications show also d-scores around 0, thus reflect potential false positive identifications. Only the distribution of target identifications shows a second increase in higher d-score values, representing more confident identifications.
 > >
 > {: .solution}
@@ -210,11 +210,11 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>Conduct peptide inference in experiment-wide and global context</hands-on-title>
 >
-> 1. {% tool [PyProphet peptide](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0) %} with the following parameters:
+> 1. {% tool [PyProphet peptide Peptide error-rate estimation](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0) %} 
 >    - {% icon param-file %} *"Input file"*: `score.osw` (output of **PyProphet score** {% icon tool %})
 >    - *"Context to estimate protein-level FDR control"*: `experiment-wide`
 >
-> 2. {% tool [PyProphet peptide](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0) %} with the following parameters:
+> 2. {% tool [PyProphet peptide Peptide error-rate estimation](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0) %} 
 >    - {% icon param-file %} *"Input file"*: `peptide.osw` (output of **PyProphet peptide** {% icon tool %})
 >    - *"Context to estimate protein-level FDR control"*: `global`
 >
@@ -226,11 +226,11 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>Conduct protein inference in experiment-wide and global context</hands-on-title>
 >
-> 1. {% tool [PyProphet protein](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0) %} with the following parameters:
+> 1. {% tool [PyProphet protein Protein error-rate estimation](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0) %}
 >    - {% icon param-file %} *"Input file"*: `peptide.osw` (output of the second **PyProphet peptide** {% icon tool %})
 >    - *"Context to estimate protein-level FDR control"*: `experiment-wide`
 >
-> 2. {% tool [PyProphet protein](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0) %} with the following parameters:
+> 2. {% tool [PyProphet protein Protein error-rate estimation](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0) %} 
 >    - {% icon param-file %} *"Input file"*: `protein.osw` (output of **PyProphet protein** {% icon tool %})
 >    - *"Context to estimate protein-level FDR control"*: `global`
 >
@@ -255,7 +255,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>Exporting pyprophet scored OSW results</hands-on-title>
 >
-> 1. {% tool [PyProphet export](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_export/pyprophet_export/2.1.4.1) %} with the following parameters:
+> 1. {% tool [PyProphet export Export tabular files, optional swath2stats export](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_export/pyprophet_export/2.1.4.1) %} 
 >    - {% icon param-file %} *"Input file"*: `protein.osw` (output of the second **PyProphet protein** {% icon tool %})
 >    - *"Export format, either matrix, legacy_split, legacy_merged (mProphet/PyProphet) or score_plots format"*: `legacy_merged`
 >    - *"Use swath2stats to export file for statsics"*: `yes`
@@ -269,12 +269,12 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <question-title></question-title>
 >
-> 1. How many different peptides and proteins were identified and quatified?
+> 1. How many different peptides and proteins were identified and quantified?
 > 2. Could you already tell from the summary which Spike-in contained higher amounts of Ecoli peptides?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. In total, over 27,300 peptides and over 5,100 proteins were identified and quantified in the DIA measurements.
+> > 1. In total, over 28,041 peptides and over 5,056 proteins were identified and quantified in the DIA measurements.
 > > 2. No, the summary mainly provides an overview of the identifications in each individual DIA measurement as well as some descriptive statistics such as CVs and correlations.
 > >
 > {: .solution}
@@ -283,7 +283,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>Analysis of Ecoli Spike-in</hands-on-title>
 >
-> 1. {% tool [Select lines that match an expression ](Grep1) %} with the following parameters:
+> 1. {% tool [Select lines that match an expression ](Grep1) %} 
 >    - {% icon param-file %} *"Select lines from"*: `protein_signal.tabular` (output of **PyProphet export** {% icon tool %})
 >    - *"that"*: `Matching`
 >    - *"the pattern"*: `(ECOLI)|(Spike_in)`
@@ -295,7 +295,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 > 2. Can you guess which Spike-in contains higher amounts of Ecoli peptides?
 >
 > > <solution-title></solution-title>
-> > 1. Over 800 Ecoli proteins were identified and quantified in the six DIA measurements.
+> > 1. Over 817 Ecoli proteins were identified and quantified in the six DIA measurements.
 > > 2. It seems that the samples in Spike_in_2 contained higher amounts of Ecoli peptides than the samples in Spike_in_1.
 > {: .solution }
 {: .question}

@@ -19,6 +19,7 @@ tags:
   - EBV dataset
   - EBV workflow
   - Marine ecosystems
+  - biodiversity
 contributions:
   authorship:
   - Marie59

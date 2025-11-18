@@ -42,9 +42,12 @@ key_points:
 - The RO-Crate specification recommends which types and keys to use
 
 subtopic: ro-crate
-contributors:
+contributions:
+  authorship:
   - stain
   - ptsefton
+  funding:
+  - eurosciencegateway
 
 priority: 1
 

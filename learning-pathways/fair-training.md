@@ -17,6 +17,7 @@ editorial_board:
 
 funding:
   - elixir-uk-dash
+  - eurosciencegateway
 
 pathway:
   - section: "Module 1: FAIR Data Management"

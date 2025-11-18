@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab
+subtopic: advanced
 zenodo_link: 'https://doi.org/10.5281/zenodo.4108341'
 requirements:
   -

@@ -47,6 +47,8 @@ contributions:
     - bebatut
     - erxleben
     - wm75
+  funding:
+    - deNBI
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 

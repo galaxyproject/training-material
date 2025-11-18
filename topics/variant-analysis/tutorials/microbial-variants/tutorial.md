@@ -185,7 +185,7 @@ We could go through all of the variants like this and read them out of a text ta
 >
 >       This sequence will be the reference against which annotations are displayed
 >
->    - "Produce Standalone Instance" to `Yes`
+>    - *"Output JBrowse"*: `Minimal for viewing (Documentation removed)`
 >    - "Genetic Code" to `11: The Bacterial, Archaeal and Plant Plastid Code`
 >    - "JBrowse-in-Galaxy Action" to `New JBrowse Instance`
 >    - "Track Group"

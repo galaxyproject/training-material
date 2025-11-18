@@ -91,7 +91,7 @@ module Jekyll
             pusher(t, slides_by_author, false)
           end
 
-          pusher(t, events_by_author, false) if t['layout'] == 'event'
+          pusher(t, events_by_author, false) if t['layout'] == 'event' or t['layout'] == "event-external"
 
           pusher(t, faqs_by_author, false) if t['layout'] == 'faq'
 

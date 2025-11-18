@@ -2,12 +2,12 @@
 title: Making a minor correction to any training material
 box_type: tip
 layout: faq
-contributors: [philreeddata, nomadscientist]
+contributors: [PhilReedData, nomadscientist]
 area: contributors
 redirect_from: [faqs/gtn/contributors_github_interface]
 ---
 
-If you find a minor mistake in any GTN training material, we encourage you to propose a correction. For small changes such as typos, this can be done from the browser. If you can implement the corrections yourself, in the context of where they happen, this saves a lot of time for the editors.  When you submit your suggestion, it will be carefully checked by an expert, so do not worry about breaking anything! 
+If you find a minor mistake in any GTN training material, we encourage you to propose a correction. For small changes such as typos, this can be done from the browser. If you can implement the corrections yourself, in the context of where they happen, this saves a lot of time for the editors.  When you submit your suggestion, it will be carefully checked by an expert, so do not worry about breaking anything!
 
 Outline of the steps:
 
@@ -25,7 +25,7 @@ In this example, we will show how to correct a typo in the metadata of a learnin
 
 ![A training material page]({% link faqs/gtn/images/minor-fix-02.png %} "At the top a training material, click Settings then Propose a change or correction")
 
-1. From the [learning pathways page]({% link learning-pathways/ %}), you can see the tags below each pathway. Here, one of the pathways has a tag 'introcuction', which should be 'introduction'. 
+1. From the [learning pathways page]({% link learning-pathways/ %}), you can see the tags below each pathway. Here, one of the pathways has a tag 'introcuction', which should be 'introduction'.
 2. Click to open the page.
 3. At the top-right of the page, click **Settings** then **Propose a change or correction**. This will open the page in edit mode. The training material is stored in GitHub, an external site, but we will walk you through how to navigate it.
 
@@ -47,8 +47,8 @@ In this example, we will show how to correct a typo in the metadata of a learnin
 
 ![Commit changes]({% link faqs/gtn/images/minor-fix-07.png %} "Give a summary and 'commit' them")
 
-1. When you have finished making corrections, click the **Commit changes...** button. 
-2. You will be asked to provide a brief summary of the changes you have made. In the box labeled **Commit message**, type a summary. 
+1. When you have finished making corrections, click the **Commit changes...** button.
+2. You will be asked to provide a brief summary of the changes you have made. In the box labeled **Commit message**, type a summary.
 3. You do not need to give an extended description here.
 4. Click the **Propose changes** button.
 
@@ -62,7 +62,7 @@ In this example, we will show how to correct a typo in the metadata of a learnin
 2. Click the **Create pull request** button. This will open a pull request; this is a submission of your proposal that contains all the essential information for the editors and the platform to implement and apply the correction.
 3. The **title** will be the same as the commit message you typed earlier.
 4. Add a **description** which describes your changes. You can include links as required.
-5. Click the **Create pull request** button. Your change has now been submitted, or, in GitHub terms, you have now opened a pull request. 
-6. The pull request will need to be reviewed by a human. There are also some automated checks that will be run. After all this is completed, if your request is approved, it will be applied (or 'merged' in GitHub terms). 
+5. Click the **Create pull request** button. Your change has now been submitted, or, in GitHub terms, you have now opened a pull request.
+6. The pull request will need to be reviewed by a human. There are also some automated checks that will be run. After all this is completed, if your request is approved, it will be applied (or 'merged' in GitHub terms).
 
 {% icon congratulations %} Thank you for helping improve our training materials.

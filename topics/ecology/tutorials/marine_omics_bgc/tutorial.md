@@ -19,6 +19,7 @@ tags:
   - earth-system
   - ocean
   - marine omics
+  - biodiversity
 contributions:
   authorship:
     - Marie59

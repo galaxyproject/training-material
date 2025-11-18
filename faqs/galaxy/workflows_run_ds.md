@@ -3,7 +3,7 @@ title: Importing and Launching a Dockstore Workflow
 area: workflows
 box_type: hands_on
 layout: faq
-contributors: [hexylena]
+contributors: [hexylena,wm75]
 optional_parameters:
   dockstore_id: The Dockstore ID of the workflow you want to import, minus the "#workflow/" portion
   title: The title of the workflow you want to import, can be any text
@@ -40,9 +40,10 @@ examples:
 
 {% else %}
 
-1. Go to [Workflow → Import](https://my.galaxy.training/?path=/workflows/import) in your Galaxy
+1. Go to {% icon galaxy-workflows-activity %} [Workflows → Import](https://my.galaxy.training/?path=/workflows/import) in your Galaxy
 2. Switch tabs to TRS ID
-3. Ensure the TRS server is set to "dockstore.org"
-4. Provide your workflow hub ID
+3. Ensure the *"TRS server"* is set to "Dockstore"
+4. Provide your *"TRS ID"* (copied from your workflow's Dockstore page)
+5. Select the workflow version you want to import
 
 {% endif %}

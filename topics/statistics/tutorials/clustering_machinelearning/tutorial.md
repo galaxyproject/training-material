@@ -16,9 +16,14 @@ key_points:
 - Using clustering methods, clusters inside a dataset are drawn using hierarchical, k-means and DBSCAN
 - For each clustering algorithm, the number of clusters and their respective hyperparameters should be optimised based on the dataset
 time_estimation: 2H
-contributors:
-- khanteymoori
-- anuprulez
+contributions:
+  authorship:
+    - khanteymoori
+    - anuprulez
+  funding:
+    - elixir-europe
+    - deNBI
+    - uni-freiburg
 ---
 
 

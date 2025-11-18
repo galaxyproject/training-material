@@ -1,34 +1,38 @@
 ---
 layout: tutorial_hands_on
-
-title: "A short introduction to Galaxy"
-zenodo_link: "https://doi.org/10.5281/zenodo.582600"
+title: A short introduction to Galaxy
+zenodo_link: https://doi.org/10.5281/zenodo.582600
 level: Introductory
 tags:
-  - español
+- español
 questions:
-  - "How to get started in Galaxy"
+- How to get started in Galaxy
 objectives:
-  - "Learn how to upload a file"
-  - "Learn how to use a tool"
-  - "Learn how to view results"
-  - "Learn how to view histories"
-  - "Learn how to extract and run a workflow"
-  - "Learn how to share a history"
-time_estimation: "40m"
+- Learn how to upload a file
+- Learn how to use a tool
+- Learn how to view results
+- Learn how to view histories
+- Learn how to extract and run a workflow
+- Learn how to share a history
+time_estimation: 40m
 key_points:
-  - "The Galaxy interface has an activity bar on the left, a tool (or other activated) panel next to it (if expanded), viewing pane in the middle, and a history of your data analysis on the right."
-  - "You can create a new history for each analysis. All your histories are saved."
-  - "To get data into Galaxy, you can upload a file by pasting in a web address. There are other ways to get data into Galaxy (not covered in this tutorial): you can upload a file from your computer, and you can import an entire history."
-  - "Choose a tool and change any settings for your analysis."
-  - "Run the tool. The output files will be saved at the top of your history."
-  - "View the output files by clicking the eye icon."
-  - "View all your histories and move files between them. Switch to a different history."
-  - "Log out of your Galaxy server. When you log back in (to the same server), your histories will all be there."
+- The Galaxy interface has an activity bar on the left, a tool (or other activated)
+  panel next to it (if expanded), viewing pane in the middle, and a history of your
+  data analysis on the right.
+- You can create a new history for each analysis. All your histories are saved.
+- 'To get data into Galaxy, you can upload a file by pasting in a web address. There
+  are other ways to get data into Galaxy (not covered in this tutorial): you can upload
+  a file from your computer, and you can import an entire history.'
+- Choose a tool and change any settings for your analysis.
+- Run the tool. The output files will be saved at the top of your history.
+- View the output files by clicking the eye icon.
+- View all your histories and move files between them. Switch to a different history.
+- Log out of your Galaxy server. When you log back in (to the same server), your histories
+  will all be there.
 subtopic: first
 priority: 2
 translations:
-  - es
+- es
 contributions:
   authorship:
   - annasyme
@@ -36,12 +40,25 @@ contributions:
   editing:
   - bebatut
   - ahmedhamidawan
-  - philreeddata
+  - PhilReedData
   funding:
   - AustralianBioCommons
   - elixir-europe
   - uni-freiburg
+recordings:
+- youtube_id: 2IyYYmjcgLg
+  length: 27M
+  galaxy_version: 24.2.3.dev0
+  date: '2025-03-18'
+  speakers: 
+  - tflowers15
+  captioners: 
+  - tflowers15
+  bot-timestamp: 1742268776
+
+
 ---
+
 
 # Overview
 
@@ -94,7 +111,7 @@ The first time you use Galaxy, there will be no files in your history panel.
 
 ## Name your current history
 
-Your "History" is in the panel at the right. It is a record of the actions you have taken. 
+Your "History" is in the panel at the right. It is a record of the actions you have taken.
 
 > <hands-on-title>Name history</hands-on-title>
 > 1. Go to the **History** panel (on the right)

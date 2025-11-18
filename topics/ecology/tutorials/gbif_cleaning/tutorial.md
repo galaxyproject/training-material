@@ -19,6 +19,7 @@ tags:
   - gbif
   - data management
   - data cleaning
+  - biodiversity
 contributions:
   authorship:
   - yvanlebras

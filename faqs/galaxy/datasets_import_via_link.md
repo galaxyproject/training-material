@@ -34,7 +34,7 @@ examples:
 ---
 
 * Copy the link location
-* Click {% icon galaxy-upload %} **Upload Data** at the top of the tool panel
+* Click {% icon galaxy-upload %} **Upload** at the top of the activity panel
 {% if include.reset_form %}
 * Click **Reset** button at the bottom of the form. If the button is greyed out -> skip to the next step.
 {% endif %}

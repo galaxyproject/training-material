@@ -161,8 +161,10 @@ Depending on user’s rights, you can create a new workspace for your collaborat
 >    > This is an incredibly useful feature as it saves you from forgetting to destroy a VM. Especially for GPU nodes it can help you ensure that they disappear after your computation is complete.
 >    {:.tip}
 >
-> 7. In this form, you can also select how to name your workspace, add a description (if you want) and specify the hostname. Then, scroll down and submit the workspace creation.
->    ![almost there, some final details reads the heading. an expiration date is set and galaxy at surf is provided in the name. the hostname is set to galaxyatsurf and the description is blank](./images/13.png)
+> 7. In this form, you can also select how to name your workspace, add a description (if you want) and specify the hostname. Then, scroll down, customise your Galaxy name, add your storage name and submit the workspace creation. 
+>    ![almost there, some final details reads the heading. an expiration date is set and galaxy at surf is provided in the name. the hostname is set to galaxyatsurf and the description is blank](./images/17.png)
+>    Change `my_storage` to the storage you attached earlier. In this case, `galaxy-storage`. Bonus: You can also rename the Galaxy to your liking! 
+>    ![customise your Galaxy name and attach your storage. change the name of my_data to the storage you attached earlier, in this case, galaxy-storage](./images/18.png)
 {: .hands_on}
 
 With that, your workspace will start being created.

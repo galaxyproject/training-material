@@ -1,37 +1,51 @@
 ---
 layout: tutorial_hands_on
-
-title: "Exome sequencing data analysis for diagnosing a genetic disease"
+title: Exome sequencing data analysis for diagnosing a genetic disease
 subtopic: human-genetics-cancer
-zenodo_link: "https://doi.org/10.5281/zenodo.3054169"
+zenodo_link: https://doi.org/10.5281/zenodo.3054169
 questions:
-  - "How do you identify genetic variants in samples based on exome sequencing
-    data?"
-  - "How do you, among the set of detected variants, identify candidate
-    causative variants for a given phenotype/disease?"
+- How do you identify genetic variants in samples based on exome sequencing data?
+- How do you, among the set of detected variants, identify candidate causative variants
+  for a given phenotype/disease?
 objectives:
-  - "Jointly call variants and genotypes for a family trio from whole-exome
-    sequencing data"
-  - "Use variant annotation and the observed inheritance pattern of a
-    phenotype to identify candidate causative variants and to prioritize them"
-time_estimation: "5h"
+- Jointly call variants and genotypes for a family trio from whole-exome sequencing
+  data
+- Use variant annotation and the observed inheritance pattern of a phenotype to identify
+  candidate causative variants and to prioritize them
+time_estimation: 5h
 key_points:
-  - "Exome sequencing is an efficient way to identify disease-relevant genetic
-    variants."
-  - "Freebayes is a good variant and genotype caller for the joint analysis
-    of multiple samples. It is straightforward to use and requires only minimal
-    processing of mapped reads."
-  - "Variant annotation and being able to exploit genotype information across
-    family members is key to identifying candidate disease variants. SnpEff and
-    GEMINI, in particular, are powerful tools offered by Galaxy for that
-    purpose."
-contributors:
+- Exome sequencing is an efficient way to identify disease-relevant genetic variants.
+- Freebayes is a good variant and genotype caller for the joint analysis of multiple
+  samples. It is straightforward to use and requires only minimal processing of mapped
+  reads.
+- Variant annotation and being able to exploit genotype information across family
+  members is key to identifying candidate disease variants. SnpEff and GEMINI, in
+  particular, are powerful tools offered by Galaxy for that purpose.
+contributions:
+  authorship:
   - wm75
   - bebatut
   - torhou
   - erxleben
   - bgruening
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
+recordings:
+- youtube_id: V92GLbJxLls
+  length: 31M
+  galaxy_version: 24.2.4.dev0
+  date: '2025-05-08'
+  speakers:
+  - khaled196
+  captioners:
+  - khaled196
+  bot-timestamp: 1746703986
+
+
 ---
+
 
 
 Exome sequencing is a method that enables the selective sequencing of the

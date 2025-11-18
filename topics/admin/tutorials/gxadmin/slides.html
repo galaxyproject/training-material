@@ -13,7 +13,9 @@ objectives:
   - See some queries and learn how they help debug production issues
 key_points:
   - gxadmin is a tool to run common database queries useful for Galaxy admins
-  - new queries are welcome and easy to contribute
+  - new queries are welcome, easy to contribute and share
+  - explore queries at https://galaxyproject.github.io/gxadmin
+  - contribute queries at https://github.com/usegalaxy-eu/gxadmin
 contributors:
   - natefoo
   - bgruening
@@ -37,11 +39,12 @@ recordings:
 Sometimes it's the best way to get the exact data you need
 
 Can be very useful for:
+
 - Debugging
 - Reporting
 - Analytics
 
-But consider: [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing your SQL
+But consider using [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing your SQL
 
 ???
 
@@ -53,7 +56,7 @@ But consider: [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing y
 ---
 # Database Queries
 
-"Can you send me the number of jobs per day/state from Main in September and October?"
+"Can you send me the number of jobs per day/state from our Galaxy in September and October?"
 
 ```sql
 SELECT
@@ -109,20 +112,20 @@ ORDER BY month, j.state;
 # gxadmin
 
 - It's unpleasant to write queries every time you need them.
-- So the community collects SQL in `gxadmin`.
-- It's a giant bash script full of SQL and some magic ✨
-- [github.com/usegalaxy-eu/gxadmin](https://github.com/usegalaxy-eu/gxadmin)
+- So the community collects SQL in the `gxadmin` project.
+- It's a fancy bash script full of SQL and some magic ✨
+- [github.com/galaxyproject/gxadmin](https://github.com/galaxyproject/gxadmin)
 
 ???
 
 - We often re-run the same queries.
 - gxadmin makes it easier by storing the useful queries.
-- everyone is welcome to contribute to it.
+- Everyonede is welcome to contribute to it.
 
 ---
 # Database Queries
 
-"I need a list of current main toolshed users and a number of their repos"
+"I need a list of owners for all installed tools and the number of their repos"
 
 ```console
 $ gxadmin query ts-repos
@@ -300,7 +303,7 @@ $ gxadmin csvquery ...
 
 # Monitoring
 
-Telegraf can consume Influx formatted output, which `gxadmin` can produce:
+`gxadmin` can also produce Influx-formatted output, which Telegraf can consume:
 
 ```console
 $ gxadmin iquery queue

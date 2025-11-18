@@ -21,10 +21,14 @@ key_points:
   and predicted using the test set.
 - Using regression, real-valued targets are learned using the training set and predicted
   using the test set.
-contributors:
-- anuprulez
-- bebatut
-
+contributions:
+  authorship:
+    - anuprulez
+    - bebatut
+  funding:
+    - elixir-europe
+    - deNBI
+    - uni-freiburg
 ---
 
 

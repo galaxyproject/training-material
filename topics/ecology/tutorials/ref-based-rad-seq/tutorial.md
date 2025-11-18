@@ -11,6 +11,7 @@ tags:
   - Species population EBV class
   - EBV dataset
   - EBV workflow
+  - biodiversity
 questions:
   - "How to analyze RAD sequencing data using a reference genome for a population genomics study?"
 objectives:
@@ -19,8 +20,11 @@ objectives:
   - "Calculate population genomics statistics from RAD sequencing data"
 time_estimation: "8h"
 key_points:
-contributors:
+contributions:
+  authorship:
   - yvanlebras
+  editing:
+  - VerenaMoo
 
 subtopic: ecologyanalysis
 ---
@@ -179,11 +183,13 @@ We propose to continue the tutorial using the dataset collection containing the 
 
 ## Quality control
 
-For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis/tutorials/quality-control/tutorial.html): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
+For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis/tutorials/quality-control/tutorial.html): [Falco](https://falco.readthedocs.io/en/latest/)
+
+Falco is an efficiency-optimized rewrite of [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
 > <hands-on-title>Quality control</hands-on-title>
 >
-> 1. **FastQC** {% icon tool %} to check the quality of the reads:
+> 1. **Falco** {% icon tool %} to check the quality of the reads:
 >    - {% icon param-collection %} *"Short read data from your current history"*: the fastq files (collection)
 >
 >    > <question-title></question-title>
@@ -196,9 +202,9 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    {: .question}
 >
 > 2. **MultiQC** {% icon tool %} with the following parameters:
->    - *"Which tool was used generate logs?"*: `FastQC`
+>    - *"Which tool was used generate logs?"*: `FastQC` (no matter whether FastQC or Falco was used)
 >    - *"Type of FastQC output?"*: `raw data`
->    - {% icon param-collection %} *"FASTQC output"*: the `raw data` output of FastQC (collection)
+>    - {% icon param-collection %} *"FASTQC output"*: the `raw data` output of Falco (collection)
 {: .hands_on}
 
 ![MultiQC output](../../images/RAD4_Population_Genomics/multiqc.PNG)
@@ -250,7 +256,7 @@ Run `Stacks: Reference map` Galaxy tool. This program will run pstacks, cstacks,
 
 > <comment-title></comment-title>
 >
-> Information on ref_map.pl and its parameters can be found online: https://creskolab.uoregon.edu/stacks/comp/ref_map.php.
+> Information on ref_map.pl and its parameters can be found online: https://catchenlab.life.illinois.edu/stacks/comp/ref_map.php.
 {: .comment}
 
 > <hands-on-title>Stacks: Reference map</hands-on-title>

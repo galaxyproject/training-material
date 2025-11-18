@@ -17,14 +17,15 @@ key_points:
 - Clean data content to be used by an existing workflow
 - Evaluate the best number of cluster to cut a dataset
 tags:
-- ecology
-- taxonomic data
-- EBV workflow
-- modeling
-- gbif
-- ocean
-- earth-system
-- interactive-tools
+  - ecology
+  - taxonomic data
+  - EBV workflow
+  - modeling
+  - gbif
+  - ocean
+  - earth-system
+  - interactive-tools
+  - biodiversity
 contributions:
   authorship:
     - PaulineSGN

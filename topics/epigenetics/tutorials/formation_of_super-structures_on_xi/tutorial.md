@@ -31,6 +31,21 @@ contributors:
     - fidelram
     - LeilyR
     - pavanvidem
+contributions:
+    authorship:
+        - friedue
+        - erxleben
+        - bebatut
+        - vivekbhr
+        - fidelram
+        - LeilyR
+        - pavanvidem
+    editing:
+        - hexylena
+    funding:
+        - elixir-europe
+        - deNBI
+        - uni-freiburg
 ---
 
 

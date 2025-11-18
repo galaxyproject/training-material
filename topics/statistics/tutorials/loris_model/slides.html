@@ -1,0 +1,143 @@
+---
+layout: tutorial_slides
+logo: GTN
+title: "Building Reliable Machine Learning Models with PyCaret: A Case Study on the LORIS Model"
+zenodo_link: "https://zenodo.org/records/13885908"
+
+questions:
+  - "How can PyCaret be used in Galaxy to build and evaluate machine learning models?"
+  - "What are the key features of PyCaret that simplify machine learning workflows?"
+
+objectives:
+  - "Understand the capabilities of PyCaret for automating machine learning workflows."
+  - "Learn how to use PyCaret in Galaxy to build and compare machine learning models."
+  - "Apply PyCaret to the LORIS dataset to reproduce and evaluate the LORIS LLR6 model."
+
+contributors:
+  - paulocilasjr
+  - qchiujunhao
+  - jgoecks
+---
+
+# Introduction to PyCaret and Galaxy
+
+- **Galaxy**: A web-based platform for data-intensive biomedical research, enabling users to run tools and workflows without coding.
+- **PyCaret**: An open-source, low-code machine learning library in Python that automates machine learning workflows.
+- **Integration**: PyCaret is available as a tool in Galaxy, allowing users to perform machine learning tasks directly from the Galaxy interface.
+
+???
+
+PyCaret simplifies machine learning by automating tasks like data preprocessing, model training, and evaluation. In this tutorial, we will explore how PyCaret can be used within Galaxy to build reliable models, using the LORIS LLR6 model as a case study.
+
+---
+
+# Use Case: The LORIS LLR6 Model (Chang et al., 2024)
+
+- **LORIS LLR6**: A logistic regression model for predicting patient response to immune checkpoint blockade (ICB) therapy.
+- **Dataset**: LORIS PanCancer, containing clinical, pathologic, and genomic features from 18 solid tumor types.
+- **Objective**: Demonstrate how PyCaret can be used to reproduce and evaluate the LORIS LLR6 model, highlighting its automation and efficiency.
+
+![Schema of the process to train and test the LORIS model](./../../images/loris_tutorial/tutorial_schema.png)
+
+---
+
+# Dataset: LORIS PanCancer
+
+- **Description**: A large dataset of ICB-treated and non-ICB-treated patients across 10 cohorts.
+- **Focus**: Chowell_train for training, Chowell_test for testing.
+- **Key Features**:
+  - Tumor Mutation Burden (TMB)
+  - Systemic Therapy History
+  - Albumin
+  - Cancer Type
+  - Neutrophil-Lymphocyte Ratio (NLR)
+  - Age
+  - Response (target: 0 = no benefit, 1 = benefit)
+- **Galaxy's Role**: Facilitates easy data upload and management.
+
+---
+
+# Data Preparation for PyCaret
+
+- **Preprocessing**:
+  - Extract Chowell_train and Chowell_test from raw data.
+  - Select 7 features (TMB, Systemic Therapy History, Albumin, Cancer Type, NLR, Age, Response).
+  - Truncate TMB, NLR, Age.
+  - One-hot encode Cancer Type.
+- **Dockstore**:
+  - Handles preprocessing steps.
+  - [LORIS Preprocessing](https://colab.research.google.com/github/paulocilasjr/pycaret-use-case/blob/main/LORIS/preprocessing_data.ipynb)
+---
+
+# PyCaret in Galaxy
+
+- **PyCaret Model Comparison Tool**:
+  - Available on Galaxy: https://usegalaxy.org/
+  - Automates training and comparison of multiple machine learning models.
+  - Outputs the best model and a comprehensive performance report.
+- **Key Features of PyCaret**:
+  - Automates data preprocessing (e.g., scaling, encoding).
+  - Supports model selection and hyperparameter tuning.
+  - Provides detailed evaluation metrics and visualizations.
+
+---
+
+# Running PyCaret Model Comparison
+
+1. **Upload Data**:
+   - Chowell_train_Response.tsv and Chowell_test_Response.tsv from Zenodo.
+   - [Zenodo link to files](https://zenodo.org/records/13885908)
+2. **Run PyCaret Model Comparison**:
+   - Train Dataset (CSV or TSV): Training dataset (Chowell_train_Response.tsv)
+   - Test Dataset (CSV or TSV): Testing dataset (Chowell_test_Response.tsv)
+   - Select the target column: Response (C22)
+   - Task: Classification
+   - Only Select Classification Models if you don't want to compare all models: Logistic Regression
+3. **Evaluate Model**:
+   - Use PyCaret's report to assess performance.
+   - Compare with original LORIS LLR6 metrics from Chang et al., 2024.
+
+---
+
+# PyCaret Model Report
+
+- **Interactive HTML Report**:
+  - **Setup & Best Model**: Parameters, metrics (Accuracy, AUC, F1, MCC).
+  - **Best Model Plots**: ROC-AUC, Confusion Matrix, Precision-Recall.
+  - **Feature Importance**: SHAP values, Random Forest importance.
+  - **Explainer**: Permutation Importance, Partial Dependence Plots.
+- **PyCaret's Strength**: Provides comprehensive insights for model interpretation and validation.
+
+---
+
+# Model Evaluation Metrics
+
+- **PyCaret vs. Original (Chang et al., 2024)**:
+  - Accuracy: 0.80 (PyCaret) vs. 0.6803
+  - AUC: 0.7599 (PyCaret) vs. 0.7155
+  - F1 Score: 0.4246 (PyCaret) vs. 0.5289
+  - MCC: 0.3764 (PyCaret) vs. 0.4652
+- **Observation**: Slight differences due to hyperparameter variations, but overall comparable performance.
+
+---
+
+# Conclusion
+
+- **Key Takeaways**:
+  - PyCaret simplifies machine learning workflows, from data preparation to model deployment.
+  - Successfully built and evaluated the LORIS LLR6 model using PyCaret in Galaxy.
+  - Demonstrated PyCaret's ability to automate model selection, tuning, and evaluation.
+- **Why PyCaret?**
+  - Empowers both beginners and experienced data scientists.
+  - Accelerates experimentation and ensures robust, reliable models.
+
+---
+
+# Galaxy Training Resources
+
+- Galaxy Training Materials: [training.galaxyproject.org](https://training.galaxyproject.org)
+- Help Forum: [help.galaxyproject.org](https://help.galaxyproject.org)
+- Gitter Chat: [gitter.im/galaxyproject/Lobby](https://gitter.im/galaxyproject/Lobby)
+- Events: [galaxyproject.org/events](https://galaxyproject.org/events)
+
+![GTN stats]({{site.baseurl}}/topics/introduction/images/gtn_stats.png)

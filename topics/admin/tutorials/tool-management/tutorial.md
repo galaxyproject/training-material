@@ -257,7 +257,7 @@ For that, you can install from a YAML file:
 >
 > 5. Using the UI import the workflow file that you used, [mapping.ga]({% link topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga %}).
 >    1. Right-click or Ctrl-click on the link above and copy the link address
->    2. On your Galaxy instance click on `Workflow`, then `Import`.  Paste the URL into the `Import Archived URL` field.
+>    2. On your Galaxy instance click on `Workflows`, then `Import`.  Paste the URL into the `Import Archived URL` field.
 {: .hands_on}
 
 Occasionally the tool installation may fail due to network issues; if it does, just re-run the `shed-tools` installation process until it succeeds. This is a known issue the developers are working on.

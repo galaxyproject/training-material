@@ -20,6 +20,11 @@ contributions:
   - ElectronicBlueberry
   editing:
   - hexylena
+  funding:
+    - elixir-europe
+    - deNBI
+    - uni-freiburg
+    - eurosciencegateway
 level: Introductory
 subtopic: workflows
 requirements:

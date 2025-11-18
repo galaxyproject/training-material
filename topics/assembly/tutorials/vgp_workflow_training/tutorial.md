@@ -8,6 +8,11 @@ tags:
 - pacbio
 - eukaryote
 - VGP
+- biodiversity
+input_histories:
+- label: "usegalaxy.eu"
+  history: https://usegalaxy.eu/u/saim_12/h/input-datasets-vgp-assembly-tutorial
+  date: 2025-09-09
 questions:
 - What combination of tools can produce the highest quality assembly of vertebrate
   genomes?
@@ -58,7 +63,10 @@ recordings:
   captioners:
   - abueg
   bot-timestamp: 1726177737
-
+edam_ontology:
+  - topic_0196 #sequence assembly
+  - topic_3940 #chromosome conformation capture
+    
 
 ---
 

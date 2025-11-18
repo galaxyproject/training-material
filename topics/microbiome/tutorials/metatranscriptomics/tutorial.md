@@ -25,16 +25,19 @@ key_points:
   and also the functions realised by the community
 - Metatranscriptomics data analyses are complex and must be careful done, specially
   when they are done without combination to metagenomics data analyses
-contributors:
-- pratikdjagtap
-- subinamehta
-- jraysajulga
-- bebatut
-- emmaleith
-- pravs3683
-- shiltemann
-- paulzierep
-- EngyNasr
+contributions:
+  authorship:
+  - pratikdjagtap
+  - subinamehta
+  - jraysajulga
+  - bebatut
+  - emmaleith
+  - pravs3683
+  - shiltemann
+  editing:
+  - paulzierep
+  - EngyNasr
+  - ogerdfx
 redirect_from:
 - /topics/metagenomics/tutorials/metatranscriptomics/tutorial
 edam_ontology:

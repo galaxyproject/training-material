@@ -11,14 +11,14 @@ We are testing a new search experience. It does not do semantic ranking of resul
 </p>
 
 <div class="row" id="search-form">
-	<div class="col-md-5">
+	<div class="col-md-3">
 	<div class="form-group">
 	<label for="title">Search</label>
 	<input type="text" class="form-control" id="title" placeholder="Search Materials" oninput="onInputDebounced()">
 	</div>
 	</div>
 
-	<div class="col-md-3">
+	<div class="col-md-2">
 	<div class="form-group">
 	<label for="type">Type</label>
 	<select class="form-control" id="type">
@@ -31,8 +31,8 @@ We are testing a new search experience. It does not do semantic ranking of resul
 	</select>
 	</div>
 	</div>
-	
-	<div class="col-md-3">
+
+	<div class="col-md-2">
 	<div class="form-group">
 	<label for="level">Level</label>
 	<select class="form-control" id="level">
@@ -43,6 +43,29 @@ We are testing a new search experience. It does not do semantic ranking of resul
 	</select>
 	</div>
 	</div>
+
+	<div class="col-md-3">
+	<div class="form-group">
+	<label for="topic">Topic</label>
+	<select class="form-control" id="topic">
+		<!-- Manually add a few options -->
+		<option value="Any">Any</option>
+		<option value="GTN FAQ">GTN FAQ</option>
+		<option value="Galaxy FAQ">Galaxy FAQ</option>
+		<!-- Automatically add other topics -->
+		{% assign sorted_topics = site | list_topics_ids | sort %}
+		{% for topic_name in sorted_topics %}
+			{% assign topic = site.data[topic_name] %}
+			{% unless topic.tag_based %}
+				{% if topic.draft != true or jekyll.environment != "production" %}
+					<option value="{{ topic.title }}">{{ topic.title }}</option>
+				{% endif %}
+			{% endunless %}
+		{% endfor %}
+	</select>
+	</div>
+	</div>
+
 	<div class="col-md-1">
 		<button class="btn btn-primary" onclick="search()">Search</button>
 	</div>
@@ -119,15 +142,16 @@ function search(){
 	const textQuery = document.getElementById("title").value
 	const typeFilter = document.getElementById("type").value
 	const levelFilter = document.getElementById("level").value
+	const topicFilter = document.getElementById("topic").value
 
-	if (previousSearch == `${textQuery} ${typeFilter} ${levelFilter}`) {
+	if (previousSearch == `${textQuery} ${typeFilter} ${levelFilter} ${topicFilter}`) {
 		console.log("Skipping search for the same query")
 		return
 	}
 
 	// Include search term in page title
 	document.getElementsByTagName("title")[0].innerText = `${textQuery} | GTN Materials Search`
-	console.log(`Searching! ${textQuery} ${typeFilter} ${levelFilter}`)
+	console.log(`Searching! ${textQuery} ${typeFilter} ${levelFilter}  ${topicFilter}`)
 
 	// Which should be hidden
 
@@ -144,6 +168,9 @@ function search(){
 				return true;
 			}
 		}
+		if (topicFilter != "Any" && row.children[3].innerText != topicFilter) {
+			return true;
+		}
 		return false;
 	});
 
@@ -152,13 +179,13 @@ function search(){
 	// Hide the rest
 	to_hide.map(r => r.style.display = "none");
 
-	previousSearch = `${textQuery} ${typeFilter} ${levelFilter}`
+	previousSearch = `${textQuery} ${typeFilter} ${levelFilter} ${topicFilter}`
 
 	if(typeof plausible !== 'undefined'){
 		// Plausible may be undefined (script blocked)
 		// or it may be defined, but opted-out (select box/DNT),
 		// which means `plausible()` will work but not send data, *nor* execute the callback.
-		plausible('Search', {props: {query: textQuery, type: typeFilter, level: levelFilter}})
+		plausible('Search', {props: {query: textQuery, type: typeFilter, level: levelFilter, topic: topicFilter}})
 	}
 }
 

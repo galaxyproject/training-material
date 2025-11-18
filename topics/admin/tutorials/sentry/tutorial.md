@@ -67,7 +67,7 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -54,3 +54,6 @@
+>    @@ -53,3 +53,6 @@
 >     # Training Infrastructure as a Service
 >     - src: galaxyproject.tiaas2
 >       version: 2.1.5
@@ -255,7 +255,7 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -219,6 +219,7 @@ nginx_servers:
+>    @@ -221,6 +221,7 @@ nginx_servers:
 >       - redirect-ssl
 >     nginx_ssl_servers:
 >       - galaxy
@@ -300,7 +300,7 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -119,6 +119,8 @@ galaxy_config:
+>    @@ -121,6 +121,8 @@ galaxy_config:
 >         # Monitoring
 >         statsd_host: localhost
 >         statsd_influxdb: true
@@ -434,7 +434,7 @@ In addition to sending logging errors to Sentry you can also collect failing too
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -121,6 +121,7 @@ galaxy_config:
+>    @@ -123,6 +123,7 @@ galaxy_config:
 >         statsd_influxdb: true
 >         sentry_dsn: "{{ vault_galaxy_sentry_dsn }}"
 >         sentry_traces_sample_rate: 0.5
@@ -442,7 +442,7 @@ In addition to sending logging errors to Sentry you can also collect failing too
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -173,6 +174,8 @@ galaxy_config_files:
+>    @@ -175,6 +176,8 @@ galaxy_config_files:
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
 >       - src: files/galaxy/config/tpv_rules_local.yml
 >         dest: "{{ tpv_mutable_dir }}/tpv_rules_local.yml"
@@ -451,7 +451,7 @@ In addition to sending logging errors to Sentry you can also collect failing too
 >     
 >     galaxy_config_templates:
 >       - src: templates/galaxy/config/container_resolvers_conf.yml.j2
->    @@ -194,6 +197,7 @@ tpv_privsep: true
+>    @@ -196,6 +199,7 @@ tpv_privsep: true
 >     
 >     galaxy_local_tools:
 >     - testing.xml

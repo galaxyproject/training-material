@@ -39,7 +39,7 @@ Click to
 {% else %}
 
 1. Find the material you are interested in
-2. View it's workflows, which can be found in the metadata box at the top of the tutorial
+2. View its workflows, which can be found in the metadata box at the top of the tutorial
 3. Click the button on any workflow to run it.
 
 {% endif %}

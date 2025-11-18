@@ -19,7 +19,7 @@ objectives:
   - "Apply appropriate tools for analyzing the quality of metagenomic data"
   - "Construct and apply simple assembly pipelines on short read data"
   - "Apply appropriate tools for analyzing the quality of metagenomic assembly"
-  - "Evaluate the Quality of the Assembly with Quast, Bowtie2, and CoverM-Genome"
+  - "Evaluate the Quality of the Assembly with Quast, Bowtie2, and CoverM-Contig"
 time_estimation: "2H"
 key_points:
   - "Assembly groups reads into contigs and scafolds."
@@ -210,7 +210,7 @@ As mentioned in the introduction, several tools are available for metagenomic as
 Both tools are available in Galaxy. But currently, only MEGAHIT can be used in individual mode for several samples.
 
 > <hands-on-title>Individual assembly of short-reads with MEGAHIT</hands-on-title>
-> 1.  {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0) %} with parameters:
+> 1.  {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy2) %} with parameters:
 >     - *"Select your input option"*: `Paired-end collection`
 >       - *"Run in batch mode?"*: `Run individually`
 >
@@ -274,7 +274,7 @@ Contrary to **MetaSPAdes**, **MEGAHIT** does not output **scaffolds**, i.e. segm
 >
 > > <hands-on-title>Assembly with MetaSPAdes</hands-on-title>
 > >
-> > 1. {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+galaxy2) %} with following parameters
+> > 1. {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/4.2.0+galaxy0) %} with following parameters
 > >    - *"Pair-end reads input format"*: `Paired-end: list of dataset pairs`
 > >        - {% icon param-collection %} *"FASTQ file(s): collection"*: `Raw reads`
 > >     - *"Select k-mer detection option"*: `User specific`
@@ -350,8 +350,8 @@ On the top of each report is a table with in rows statistics for contigs larger 
       >
       > > <solution-title></solution-title>
       > >
-      > > 1. The genome fraction is 30.22% for ERR2231568 and 58.73% for ERR2231572
-      > > 2. The highest genome fraction was found for *Leuconostoc pseudomesenteroides* for ERR2231568 (84.4%) and for *Lactobacillus* for ERR2231572 (91%). The genomes of *Leuconostoc pseudomesenteroides* and *Lactobacillus* could be then almost completely recovered from the assemblies of ERR2231568 and ERR2231572 respectively.
+      > > 1. The genome fraction is 29.429% for ERR2231568 and 60.463% for ERR2231572
+      > > 2. The highest genome fraction was found for *Leuconostoc pseudomesenteroides* for ERR2231568 (84.2%) and for *Lactobacillus vaccinostercus* for ERR2231572 (92.2%). The genomes of *Leuconostoc pseudomesenteroides* and *Lactobacillus vaccinostercus* could be then almost completely recovered from the assemblies of ERR2231568 and ERR2231572 respectively.
       > >
       > {: .solution}
       >
@@ -368,8 +368,8 @@ On the top of each report is a table with in rows statistics for contigs larger 
       >
       > > <solution-title></solution-title>
       > >
-      > > 1. The duplication ratio is 1.068 for ERR2231568 and 1.1 for ERR2231572 (column ERR2231572 in ERR2231572 report)
-      > > 2. The highest duplication ratio was found for *Gluconobacter kondonii* for ERR2231568 (1.156) and for *Lactobacillus brevis KB290* for ERR2231572 (1.178).
+      > > 1. The duplication ratio is 1.062 for ERR2231568 and 1.112 for ERR2231572 (column ERR2231572 in ERR2231572 report)
+      > > 2. The highest duplication ratio was found for *Gluconobacter oxydans* for ERR2231568 (1.156) and for *Lactobacillus pseudomesenteroides* for ERR2231572 (1.204).
       > >
       > {: .solution}
       >
@@ -385,7 +385,7 @@ On the top of each report is a table with in rows statistics for contigs larger 
     > > <solution-title></solution-title>
     > >
     > > 1. 79.47% of ERR2231568 raw reads were mapped to ERR2231568 assembly and 86.98% of ERR2231572 raw reads to ERR2231572 assembly.
-    > > 2. 79.47% of reads were used to the assemblies for ERR2231568 and  86.97% for ERR2231572.
+    > > 2. 79.47% of reads were used to the assemblies for ERR2231568 and  86.98% for ERR2231572.
     > {: .solution}
     >
     {: .question}
@@ -397,19 +397,38 @@ On the top of each report is a table with in rows statistics for contigs larger 
     >
     >    > <hands-on-title>Calculate coverage using CoverM</hands-on-title>
     >    >
-    >    > 1. {% tool [CoverM-CONTIG](toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.2.1) %} with parameters:
-    >    >    - *"Read type"*: `Paired collection`
-    >    >      - {% icon param-collection %} *"One or more pairs of forward and reverse possibly gzipped FASTA/Q files for mapping in order"*: `Raw reads`
-    >    >    - {% icon param-collection %}  *"FASTA file(s) of contigs"*: output of MEGAGIT
+    >    > 1. {% tool [CoverM contig](toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.7.0+galaxy0) %} with parameters:
+    >    >    - *"Have the reads already been mapped to contigs?"*: `No`
+    >    >       - *"Assembly mode?"*: `Individual assembly (1 contig file per sample)`
+    >    >          - *"Read type"*: `Paired collection`
+    >    >             - {% icon param-collection %} *"Collection of paired-end FASTA/Q files(s) for mapping"*: `Raw reads`
+    >    >    - {% icon param-collection %} *"Contigs"*: output of MEGAGIT
     >    >
-    >    > 2. Inspect the HTML report for ERR2231568
+    >    > 2. Open the {% icon dataset-info %} "Dataset details" for ERR2231568
+    >    > 3. Expand the `Tool Standard Error`
     >    {: .hands_on}
+    >
+    >    > <question-title></question-title>
+    >    >
+    >    > 1. What is the overall alignment rate for ERR2231568
+    >    > 2. What is the percentage of reads used in assemblies for ERR2231568?
+    >    > 3. Are the results similar to the ones in QUAST report?
+    >    >
+    >    > > <solution-title></solution-title>
+    >    > >
+    >    > > 1. The overall alignment rate for ERR2231567 is 75.48%
+    >    > > 2. 75.48% of the reads were used in assemblies for ERR2231567 and 73.67% for ERR2231571.
+    >    > > 3. Slighlty lower results that the ones found by QUAST (79.47% for ERR2231568)
+    >    > >
+    >    > {: .solution}
+    >    >
+    >    {: .question}
     >
     > 2. Map the original reads onto contigs and extract the percentage of mapped reads:
     >
     >    > <hands-on-title>Computation of the % reads used in assemblies</hands-on-title>
     >    >
-    >    > 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0) %} with the following parameters:
+    >    > 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.3+galaxy1) %} with the following parameters:
     >    >    - *"Is this single or paired library"*: `Paired-end Dataset Collection`
     >    >      - {% icon param-collection %} *"FASTQ Paired Dataset"*: `Raw reads`
     >    >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from the history and build index`
@@ -420,13 +439,15 @@ On the top of each report is a table with in rows statistics for contigs larger 
     >
     >    > <question-title></question-title>
     >    >
-    >    > 1. What is the overall alignment rate for ERR2231567? and ERR2231571?
-    >    > 2. What is the percentage of reads used in assemblies for ERR2231567? and ERR2231571?
+    >    > 1. What is the overall alignment rate for ERR2231568? and ERR2231572?
+    >    > 2. What is the percentage of reads used in assemblies for ERR2231568? and ERR2231571?
+    >    > 3. Are the results similar to the ones in QUAST report?
     >    >
     >    > > <solution-title></solution-title>
     >    > >
-    >    > > 1. The overall alignment rate for ERR2231567 is 65.97% and 73.67% for ERR2231571
-    >    > > 2. 65.97% of the reads were used in assemblies for ERR2231567 and 73.67% for ERR2231571.
+    >    > > 1. The overall alignment rate for ERR2231568 is 65.67% and 78.42% for ERR2231572.
+    >    > > 2. 65.97% of the reads were used in assemblies for ERR2231568 and 78.42% for ERR2231572.
+    >    > > 3. Lower results that the ones found by QUAST (79.47% for ERR2231568, 86.98%  for ERR2231572)
     >    > >
     >    > {: .solution}
     >    >
@@ -452,8 +473,8 @@ On the top of each report is a table with in rows statistics for contigs larger 
         >
         > > <solution-title></solution-title>
         > >
-        > > 1. 78 for ERR2231568 and 151 for ERR2231572
-        > > 2. *Leuconostoc pseudomesenteroides* and *Tatumella morbirosei* for ERR2231568 and *Lactobacillus plantarum argentoratensis* for ERR2231572
+        > > 1. 83 for ERR2231568 and 159 for ERR2231572
+        > > 2. *Leuconostoc pseudomesenteroides* and *Tatumella morbirosei* for ERR2231568 and *Lactobacillus hordei* for ERR2231572
         > {: .solution}
         >
         {: .question}
@@ -469,10 +490,10 @@ On the top of each report is a table with in rows statistics for contigs larger 
         >
         > > <solution-title></solution-title>
         > >
-        > > 1. 25 for ERR2231568 and 55 for ERR2231572.
+        > > 1. 30 for ERR2231568 and 90 for ERR2231572.
         > > 2. *Leuconostoc pseudomesenteroides* for ERR2231568 and *Lactobacillus vaccinostercus* for ERR2231572.
         > > 3. Interspecies translocations are translocations where a contig has mapped on different reference genomes.
-        > > 4. 80 for ERR2231568 and 144 for ERR2231572.
+        > > 4. 114 for ERR2231568 and 85 for ERR2231572.
         > {: .solution}
         >
         {: .question}
@@ -486,8 +507,8 @@ On the top of each report is a table with in rows statistics for contigs larger 
         >
         > > <solution-title></solution-title>
         > >
-        > > 1. 4 for ERR2231568 and 6 for ERR2231572.
-        > > 2. *Tatumella morbirosei* for ERR2231568 and *Lactobacillus sp* for ERR2231572.
+        > > 1. 4 for ERR2231568 and 9 for ERR2231572.
+        > > 2. *Tatumella morbirosei* for ERR2231568 and *Lactobacillus plantarum* for ERR2231572.
         > {: .solution}
         >
         {: .question}
@@ -501,8 +522,8 @@ On the top of each report is a table with in rows statistics for contigs larger 
     >
     > > <solution-title></solution-title>
     > >
-    > > 1. 503,352 for ERR2231568 and 287,270 for ERR2231572.
-    > > 2. *Pantoea rwandensis* for ERR2231568 and *Leuconostoc brevis KB290* for ERR2231572.
+    > > 1. 469,292 for ERR2231568 and 279,694 for ERR2231572.
+    > > 2. *Pantoea rwandensis* for ERR2231568 and *Leuconostoc pseudomesenteroides* for ERR2231572.
     > {: .solution}
     >
     {: .question}
@@ -525,7 +546,7 @@ On the top of each report is a table with in rows statistics for contigs larger 
         > > 2. In the outputs of MEGAHIT, there are 228,719 contigs for ERR2231568 and 122,526 contigs.
         > > 3. The numbers are lower in the metaQUAST results because metaQUAST reports there only the contigs longer than 500bp.
         > > 4. The **# contigs (>= 0 bp)**
-        > > 5. Except the non aligned contigs, *Tatumella morbirosei* for ERR2231568 and *Leuconostoc brevis KB290* for ERR2231572.
+        > > 5. Except the non aligned contigs, *Tatumella morbirosei* for ERR2231568 and *Leuconostoc brevis* for ERR2231572.
         > {: .solution}
         >
         {: .question}
@@ -540,7 +561,7 @@ On the top of each report is a table with in rows statistics for contigs larger 
         > > <solution-title></solution-title>
         > >
         > > 1. 63,871 bp in ERR2231568 and 65,608 for ERR2231572.
-        > > 2. It is assigned to *Leuconostoc pseudomesenteroides KCTC 3652* in ERR2231568 and not assigned in ERR2231572.
+        > > 2. It is assigned to *Leuconostoc pseudomesenteroides KCTC 3652* in ERR2231568 and not assigned (`not_aligned`) in ERR2231572.
         > {: .solution}
         >
         {: .question}
@@ -647,7 +668,7 @@ When clicking on the genome name, the contigs are displayed according to their m
 > >
 > > 1. The contigs are displayed based on their mapping on the reference genome of *Leuconostoc pseudomesenteroides* KCTC 3652
 > > 2. The different colors represent the different status for the contig: correct contigs, correct contigs but with >50% of the contig unaligned, misassembled blocks. unchecked misassembled blocks, ambiguously mapped contigs, alternative blocks of misassembled contigs, etc.
-> > 3. The big red block on the right is contig k91_88833 with a misassembly on the left side, and overlap with 2 other contigs
+> > 3. The big red block on the right is contig k91_183138 with a misassembly on the left side, and overlap with 2 other contigs
 > > 4. The graph on the bottom represents the GC percentage and coverage by contigs along the reference genome
 > {: .solution}
 >

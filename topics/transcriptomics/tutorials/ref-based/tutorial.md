@@ -58,6 +58,8 @@ contributions:
   editing:
     - hexylena
     - clsiguret
+  funding:
+    - deNBI
 
 recordings:
 - youtube_id: AeiW3IItO_c
@@ -364,7 +366,7 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >    ```
 >
 >    1. Rename the dataset if necessary
->    2. Verify that the datatype is `gtf` and not `gff`, and that the database is `dm6`
+>    2. Verify that the datatype is `gtf` (or `gtf.gz`) and not `gff`, and that the database is `dm6`
 >
 >    > <comment-title>How to get annotation file?</comment-title>
 >    >
@@ -1172,7 +1174,7 @@ To be able to identify differential gene expression induced by PS depletion, all
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library:
+> 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (as Datasets):
 >
 >    - `GSM461176_untreat_single_featureCounts.counts`
 >    - `GSM461177_untreat_paired_featureCounts.counts`
@@ -1522,8 +1524,8 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >      - {% icon param-file %} *"File to process"*: output of **Extract element identifiers** {% icon tool %}
 >      - In *"Replacement"*:
 >         - In *"1: Replacement"*
->            - *"Find pattern"*: `(.*)_(.*)_(.*)`
->            - *"Replace with"*: `\1_\2_\3\tgroup:\2\tgroup:\3`
+>            - *"Find pattern"*: `(.*)_(.*)_(.*)_(.*)`
+>            - *"Replace with"*: `\1_\2_\3_\4\tgroup:\2\tgroup:\3`
 >
 >     This step creates 2 additional columns with the type of treatment and sequencing that can be used with the {% tool [Tag elements](__TAG_FROM_FILE__) %} tool
 >
@@ -1656,6 +1658,8 @@ We can now run **DESeq2**:
 {: .hands_on}
 </div>
 
+Comment wrt beta prior option: the default setting for DESeq2 changed from betaPrior=TRUE to FALSE in version 1.16 (https://bioconductor.org/packages/release/bioc/news/DESeq2/NEWS). In order to get the same result as before, we use betaPrior=TRUE (aka: "Yes") in this tutorial.
+
 **DESeq2** generated 3 outputs:
 
 - A table with the normalized counts for each gene (rows) in the samples (columns)
@@ -1778,7 +1782,7 @@ For more information about **DESeq2** and its outputs, you can have a look at th
 
 ## Annotation of the DESeq2 results
 
-The ID for each gene is something like FBgn0003360, which is an ID from the corresponding database, here Flybase ({% cite thurmond2018flybase %}). These IDs are unique but sometimes we prefer to have the gene names, even if they may not reference an unique gene (e.g. duplicated after re-annotation). But gene names may hint already to a function or they help you to search for desired candidates. We would also like to display the location of these genes within the genome. We can extract such information from the annotation file which we used for mapping and counting.
+The ID for each gene is something like FBgn0003360, which is an ID from the corresponding database, here Flybase ({% cite thurmond2018flybase %}). These IDs are unique but sometimes we prefer to have the gene symbols, even if they may not reference an unique gene (e.g. duplicated after re-annotation). But gene symbols may hint already to a function or they help you to search for desired candidates. We would also like to display the location of these genes within the genome. We can extract such information from the annotation file which we used for mapping and counting.
 
 > <hands-on-title>Annotation of the DESeq2 results</hands-on-title>
 >
@@ -1809,7 +1813,7 @@ The generated output is an extension of the previous file:
 10. End
 11. Strand
 12. Feature
-13. Gene name
+13. Gene symbol
 
 > <question-title></question-title>
 >
@@ -1832,7 +1836,7 @@ The annotated table contains no column names, which makes it difficult to read. 
 > 1. Create a new file (`header`) from the following (header line of the DESeq2 output)
 >
 >    ```text
->    GeneID	Base mean	log2(FC)	StdErr	Wald-Stats	P-value	P-adj	Chromosome	Start	End	Strand	Feature	Gene name
+>    GeneID	Base mean	log2(FC)	StdErr	Wald-Stats	P-value	P-adj	Chromosome	Start	End	Strand	Feature	Gene symbol
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_create_new_file.md name="header" format="tabular" %}
@@ -1898,7 +1902,7 @@ Now we would like to extract the most differentially expressed genes due to the 
 >
 {: .hands_on}
 
-We now have a table with 113 lines and a header corresponding to the most differentially expressed genes. For each gene, we have its ID, its mean normalized counts (averaged over all samples from both conditions), its $$log_{2} FC$$ and other information including gene name and position.
+We now have a table with 113 lines and a header corresponding to the most differentially expressed genes. For each gene, we have its ID, its mean normalized counts (averaged over all samples from both conditions), its $$log_{2} FC$$ and other information including gene symbol and position.
 
 ## Visualization of the expression of the differentially expressed genes
 
@@ -1944,6 +1948,8 @@ To extract the normalized counts for the interesting genes, we join the normaliz
 {: .hands_on}
 
 We now have a table with 114 lines (the 113 most differentially expressed genes and a header) and the normalized counts for these genes across the 7 samples.
+
+In the first column we have the gene identifiers. They are unique, but difficult to understand. If you want to work with the (more familiar) gene symbols, you can use "c21,c2-c8" for the column selection. However, be aware, gene symbols might not be unique and further down, when using the goseq tool, you need to switch to "Gene Symbol" as the "Gene ID format".
 
 > <hands-on-title>Plot the heatmap of the normalized counts of these genes for the samples</hands-on-title>
 >

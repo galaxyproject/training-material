@@ -367,3 +367,9 @@ Now we are ready to configure a Galaxy's user account to upload dataset from Dro
 >     ![remote files window](../../images/storage_dropbox_remote_files_window.png)
 >
 {: .hands_on}
+
+
+# Onedata
+
+To configure Onedata as an Object Store or a Remote File Source, follow the
+[dedicated tutorial]({% link topics/admin/tutorials/onedata-configuration/tutorial.html %}).

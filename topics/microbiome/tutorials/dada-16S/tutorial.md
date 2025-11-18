@@ -287,7 +287,7 @@ We start by visualizing the quality profiles of the forward reads:
 
 > <hands-on-title>Inspect read quality profiles</hands-on-title>
 >
-> 1. {% tool [dada2: plotQualityProfile](toolshed.g2.bx.psu.edu/repos/iuc/dada2_plotqualityprofile/dada2_plotQualityProfile/1.28+galaxy0) %} with the following parameters:
+> 1. {% tool [dada2: plotQualityProfile](toolshed.g2.bx.psu.edu/repos/iuc/dada2_plotqualityprofile/dada2_plotQualityProfile/1.34.0+galaxy0) %} with the following parameters:
 >    - *"Processing mode"*: `Joint`
 >        - *"Paired reads"*: `paired - in a data set pair`
 >            - {% icon param-collection %} *"Paired short read data"*: `Sorted Raw Reads`
@@ -342,7 +342,7 @@ Let's now trim and filter the reads:
 
 > <hands-on-title>Filter and trim</hands-on-title>
 >
-> 1. {% tool [dada2: filterAndTrim](toolshed.g2.bx.psu.edu/repos/iuc/dada2_filterandtrim/dada2_filterAndTrim/1.28+galaxy0) %} with the following parameters:
+> 1. {% tool [dada2: filterAndTrim](toolshed.g2.bx.psu.edu/repos/iuc/dada2_filterandtrim/dada2_filterAndTrim/1.34.0+galaxy0) %} with the following parameters:
 >    - *"Paired reads"*: `paired - in a data set pair`
 >        - {% icon param-collection %} *"Paired short read data"*: `Sorted Raw Reads`
 >    - In *"Trimming parameters"*:
@@ -399,7 +399,7 @@ To better see the impact of filtering and trimming, we can inspect the read qual
 
 > <hands-on-title>Inspect read quality profiles after Filter And Trim</hands-on-title>
 >
-> 1. {% tool [dada2: plotQualityProfile](toolshed.g2.bx.psu.edu/repos/iuc/dada2_plotqualityprofile/dada2_plotQualityProfile/1.28+galaxy0) %} with the following parameters:
+> 1. {% tool [dada2: plotQualityProfile](toolshed.g2.bx.psu.edu/repos/iuc/dada2_plotqualityprofile/dada2_plotQualityProfile/1.34.0+galaxy0) %} with the following parameters:
 >    - *"Processing mode"*: `Joint`
 >        - *"Paired reads"*: `paired - in a data set pair`
 >            - {% icon param-collection %} *"Paired short read data"*: `Paired reads` output of **dada2: filterAndTrim**
@@ -454,10 +454,10 @@ Let's now run **dada2: learnErrors** on both collections.
 
 > <hands-on-title> Learn the Error Rate </hands-on-title>
 >
-> 1. {% tool [dada2: learnErrors](toolshed.g2.bx.psu.edu/repos/iuc/dada2_learnerrors/dada2_learnErrors/1.28+galaxy0) %} with the following parameters:
+> 1. {% tool [dada2: learnErrors](toolshed.g2.bx.psu.edu/repos/iuc/dada2_learnerrors/dada2_learnErrors/1.34.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Short read data"*: `forward` output of **Unzip collection**
 >   
-> 3. {% tool [dada2: learnErrors](toolshed.g2.bx.psu.edu/repos/iuc/dada2_learnerrors/dada2_learnErrors/1.28+galaxy0) %} with the following parameters:
+> 3. {% tool [dada2: learnErrors](toolshed.g2.bx.psu.edu/repos/iuc/dada2_learnerrors/dada2_learnErrors/1.34.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Short read data"*: `reverse` output of **Unzip collection**
 >   
 {: .hands_on}
@@ -493,7 +493,7 @@ In this step, the core sample inference algorithm ({% cite Callahan_2016 %}) is 
 
 > <hands-on-title> Sample Inference </hands-on-title>
 >
-> 1. {% tool [dada2: dada](toolshed.g2.bx.psu.edu/repos/iuc/dada2_dada/dada2_dada/1.28+galaxy0) %} with the following parameters:
+> 1. {% tool [dada2: dada](toolshed.g2.bx.psu.edu/repos/iuc/dada2_dada/dada2_dada/1.34.0+galaxy0) %} with the following parameters:
 >    - *"Process samples in batches"*: `no`
 >
 >      > <comment-title>Process samples in batches or not</comment-title>
@@ -521,7 +521,7 @@ In this step, the core sample inference algorithm ({% cite Callahan_2016 %}) is 
 >
 >    - {% icon param-file %} *"Error rates"*: output of **dada2: learnErrors** with `#forward` tag
 >
-> 3. {% tool [dada2: dada](toolshed.g2.bx.psu.edu/repos/iuc/dada2_dada/dada2_dada/1.28+galaxy0) %} with the following parameters:
+> 3. {% tool [dada2: dada](toolshed.g2.bx.psu.edu/repos/iuc/dada2_dada/dada2_dada/1.34.0+galaxy0) %} with the following parameters:
 >    - *"Process samples in batches"*: `no`
 >        - {% icon param-file %} *"Reads"*: output of **Unzip collection** with `#reverse` tag
 >        - *"Pool samples"*: `process samples individually`
@@ -561,7 +561,7 @@ We now merge the forward and reverse reads together to obtain the full denoised 
 
 > <hands-on-title> Merge paired reads </hands-on-title>
 >
-> 1. {% tool [dada2: mergePairs](toolshed.g2.bx.psu.edu/repos/iuc/dada2_mergepairs/dada2_mergePairs/1.28+galaxy0) %} with the following parameters:
+> 1. {% tool [dada2: mergePairs](toolshed.g2.bx.psu.edu/repos/iuc/dada2_mergepairs/dada2_mergePairs/1.34.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Dada results for forward reads"*: output of **dada2: dada** with `#forward` tag
 >    - {% icon param-file %} *"Forward reads"*: output of **Unzip collection** with `#forward` tag
 >    - {% icon param-file %} *"Dada results for reverse reads"*:  output of **dada2: dada** with `#reverse` tag
@@ -620,7 +620,7 @@ In this step, we construct an amplicon sequence variant table (ASV) table, a hig
 
 > <hands-on-title> Make sequence table </hands-on-title>
 >
-> 1. {% tool [dada2: makeSequenceTable](toolshed.g2.bx.psu.edu/repos/iuc/dada2_makesequencetable/dada2_makeSequenceTable/1.28+galaxy0) %} with the following parameters:
+> 1. {% tool [dada2: makeSequenceTable](toolshed.g2.bx.psu.edu/repos/iuc/dada2_makesequencetable/dada2_makeSequenceTable/1.34.0+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"samples"*: output of **dada2: mergePairs**
 >    - *"Length filter method"*: `No filter`
 >
@@ -675,7 +675,7 @@ The core DADA method corrects substitution and indel errors, but chimeras remain
 
 > <hands-on-title> Remove chimeras </hands-on-title>
 >
-> 1. {% tool [dada2: removeBimeraDenovo](toolshed.g2.bx.psu.edu/repos/iuc/dada2_removebimeradenovo/dada2_removeBimeraDenovo/1.28+galaxy0) %} with the following parameters:
+> 1. {% tool [dada2: removeBimeraDenovo](toolshed.g2.bx.psu.edu/repos/iuc/dada2_removebimeradenovo/dada2_removeBimeraDenovo/1.34.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"sequence table"*: output of **dada2: makeSequenceTable**
 >
 {: .hands_on}
@@ -710,7 +710,7 @@ As a final check of our progress, we’ll look at the number of reads that made 
 
 > <hands-on-title> Track reads through the pipeline </hands-on-title>
 >
-> 1. {% tool [dada2: sequence counts](toolshed.g2.bx.psu.edu/repos/iuc/dada2_seqcounts/dada2_seqCounts/1.28+galaxy0) %} with the following parameters:
+> 1. {% tool [dada2: sequence counts](toolshed.g2.bx.psu.edu/repos/iuc/dada2_seqcounts/dada2_seqCounts/1.34.0+galaxy0) %} with the following parameters:
 >    - In *"data sets"*:
 >        - {% icon param-repeat %} *"Insert data sets"*
 >            - {% icon param-collection %} *"Dataset(s)"*: output of **dada2: filterAndTrim**
@@ -764,7 +764,7 @@ DADA2 maintains [formatted training fastas for the RDP training set, GreenGenes 
 
 > <hands-on-title> Assign taxonomy </hands-on-title>
 >
-> 1. {% tool [dada2: assignTaxonomy and addSpecies](toolshed.g2.bx.psu.edu/repos/iuc/dada2_assigntaxonomyaddspecies/dada2_assignTaxonomyAddspecies/1.28+galaxy0) %} with the following parameters:
+> 1. {% tool [dada2: assignTaxonomy and addSpecies](toolshed.g2.bx.psu.edu/repos/iuc/dada2_assigntaxonomyaddspecies/dada2_assignTaxonomyAddspecies/1.34.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"sequences to be assigned"*: output of **dada2: removeBimeraDenovo**
 >    - *"Select a reference dataset your history or use a built-in?"*: `Use a built-in reference`
 >        - *"Select reference data set"*: `Silva version 132`
@@ -851,7 +851,7 @@ We will construct a simple sample table from the information encoded in the file
 >
 >    We will now extract from the names the factors:
 >
-> 2. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %}
+> 2. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy2) %}
 >      - {% icon param-file %} *"File to process"*: output of **Extract element identifiers** {% icon tool %}
 >      - In *"Replacement"*:
 >         - In *"1: Replacement"*
@@ -865,12 +865,12 @@ We will construct a simple sample table from the information encoded in the file
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 5. {% tool [Select first lines from a dataset (head)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/9.3+galaxy1) %} to remove the last line
+> 5. {% tool [Select first lines from a dataset (head)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/9.5+galaxy2) %} to remove the last line
 >    - {% icon param-file %} *"File to select"*: output of **Replace Text**
 >    - *"Operation"*: `Remove last lines`
 >    - *"Number of lines"*: `1`
 >
-> 6. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0) %} on rows with the following parameters:
+> 6. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1) %} on rows with the following parameters:
 >    - {% icon param-file %} *"Input file"*: output of **Select first lines**
 >    - *"Input has a header line with column names?"*: `No`
 >    - In *"Expressions"*:
@@ -928,7 +928,7 @@ We now construct a phyloseq object directly with it and the DADA2 outputs and la
 
 > <hands-on-title> Create phyloseq object and launch phyloseq exploration </hands-on-title>
 >
-> 1. {% tool [Create phyloseq object from dada2](toolshed.g2.bx.psu.edu/repos/iuc/phyloseq_from_dada2/phyloseq_from_dada2/1.46.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Create phyloseq object from dada2](toolshed.g2.bx.psu.edu/repos/iuc/phyloseq_from_dada2/phyloseq_from_dada2/1.50.0+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Sequence table"*: output of **dada2: removeBimeraDenovo**
 >    - {% icon param-file %} *"Taxonomy table"*: output of **dada2: assignTaxonomy and addSpecies**
 >    - {% icon param-file %} *"Sample table"*: `Metadata table`

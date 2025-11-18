@@ -1,0 +1,32 @@
+---
+- doc: Test the workflow
+  job:
+      T1A_forward:
+        class: File
+        location: https://zenodo.org/record/4776250/files/T1A_forward.fastqsanger
+        filetype: fastqsanger
+      T1A_reverse:
+        class: File
+        location: https://zenodo.org/record/4776250/files/T1A_reverse.fastqsanger
+        filetype: fastqsanger
+  outputs:
+    combined_metaphlan_humann:
+      asserts:
+        has_text:
+          text: "Acetivibrio_thermocellus"
+        has_text:
+          text: "Coprothermobacter_proteolyticus"
+        has_text:
+          text: "UniRef90_A3DCI4"
+    cc_go:
+      asserts:
+        has_text:
+          text: "GO:0000015: [CC] phosphopyruvate hydratase complex"
+    bp_go:
+      asserts:
+        has_text:
+          text: "GO:0000027: [BP] ribosomal large subunit assembly"
+    sorted_mf_go:
+      asserts:
+        has_text:
+          text: "GO:0000030: [MF] mannosyltransferase activity"

@@ -26,7 +26,9 @@ contributions:
   - fpsom
   - tobyhodges
   editing:
-  - dadrasarmin 
+  - dadrasarmin
+  reviewing:
+  - Sch-Da 
   funding:
   - gallantries
 subtopic: analyse
@@ -37,7 +39,7 @@ This tutorial will introduce you to how to run RStudio in Galaxy
 
 {% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 
-[RStudio](https://www.rstudio.com/products/RStudio/) is an [Integrated Development Environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment). Like most IDEs, it provides a graphical interface to R, making it more user-friendly, and providing dozens of useful features. We will introduce additional benefits of using RStudio as you cover the lessons. In this case, we are specifically using [RStudio Server](https://www.rstudio.com/products/RStudio/#Server), a version of RStudio that can be accessed in your web browser. RStudio Server has the same features of the Desktop version of RStudio you could download as standalone software.
+[RStudio](https://www.rstudio.com/products/RStudio/) is an [Integrated Development Environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment). Like most IDEs, it provides a graphical interface to R, making it more user-friendly, and providing dozens of useful features. We will introduce additional benefits of using RStudio as you cover the lessons. In this case, we are specifically using [RStudio Server](https://www.rstudio.com/products/RStudio/#Server), a version of RStudio that can be accessed in your web browser. RStudio Server has the same features as the Desktop version of RStudio you could download as standalone software.
 
 > <agenda-title></agenda-title>
 >
@@ -106,7 +108,7 @@ Here are the major windows (or panels) of the RStudio environment:
 
     - **Files**: You can also use this tab to navigate and set the working directory
     - **Plots**: This tab will show the output of any plots generated
-    - **Package**: In this tab you will see what packages are actively loaded, or you can attach installed packages
+    - **Package**: In this tab, you will see what packages are actively loaded, or you can attach installed packages
     - **Help**: It will display help files for R functions and packages.
 
 
@@ -117,7 +119,7 @@ All of the panels in RStudio have configuration options. For example, you can mi
 >
 > For example, once you have written an RScript, you can run it at any Linux or Windows terminal without the need to start up RStudio. We don't want you to get confused - RStudio runs R, but R is not RStudio.
 >
-> For more on running an R Script at the terminal see the dedicated [Software Carpentry lesson](https://swcarpentry.github.io/r-novice-inflammation/05-cmdline/).
+> For more on running an R Script at the terminal see the dedicated [Software Carpentry lesson](https://swcarpentry.github.io/r-novice-inflammation/05-cmdline.html).
 {: .comment}
 
 ## How to call functions in R, without needing to master them?
@@ -201,7 +203,7 @@ You have hopefully noticed a pattern - an R function has three key properties:
 2. A pair of `()` after the name
 3. 0 or more arguments inside the parentheses
 
-   An argument may be a specific input for your function and/or may modify the function's behavior. For example the function `round()` will round a number with a decimal:
+   An argument may be a specific input for your function and/or may modify the function's behavior. For example, the function `round()` will round a number with a decimal:
 
    > <code-in-title></code-in-title>
    > ```R
@@ -349,7 +351,7 @@ Here is one last bonus we will mention about RStudio. It's difficult to remember
 >
 > 3. Select `lm` function using the arrows
 > 4. Hit <kbd>Enter</kbd>
-> 4. Hit <kbd>Tab</kbd> again inside the parantheses
+> 4. Hit <kbd>Tab</kbd> again inside the parentheses
 >
 >    RStudio shows the function's arguments and provide additional help for each of these arguments:
 >
@@ -386,7 +388,7 @@ table_name <- read.table(gx_get(7))
 
 ## Export Data from the RStudio
 
-You can export the RHistory and all objects from RStudio to Galaxy as follows (`analysis_17.01.2025` is an arbitrary name):
+You can export the R History and all objects from RStudio to Galaxy as follows (`analysis_17.01.2025` is an arbitrary name):
 
 ```
 gx_save(session_name = "analysis_17.01.2025")

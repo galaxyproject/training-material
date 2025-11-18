@@ -81,7 +81,7 @@ In this tutorial, you will learn how to create a workflow that downloads a selec
 > 1. If you are logged in, create a new history for this tutorial.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
-> 2. **IDR Download** {% icon tool %} with the following parameters:
+> 2. {% tool [IDR Download](toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.45) %} with the following parameters:
 >    - *"How would you like to specify the IDs of images to download?"*: `As text (comma-separated list of IDs or a valid IDR link)`
 >    -  *"Image IDs to download"*: `http://idr.openmicroscopy.org/webclient/?show=image-295900|image-295905|image-295910|image-295918|image-295928|image-295934`
 >    -  *"Name of the channel to download"*: `Cy3`
@@ -128,7 +128,7 @@ The tool **Starting Modules** {% icon tool %} comprises the first 4 modules of t
 
 > <hands-on-title>Specify metadata to CellProfiler</hands-on-title>
 >
-> 1. **Starting Modules** {% icon tool %} with the following parameters:
+> 1. {% tool [Starting Modules](toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy2) %} with the following parameters:
 >    - Images
 >       - *"Do you want to filter only the images? "*: `Select the images only`
 >    - Metadata
@@ -169,8 +169,8 @@ Since we are interested in segmenting the nucleoli, you may wonder why we need t
 In the first step, we will identify the nuclei that are complete, meaning that they are not touching the borders of the image.
 
 > <hands-on-title>Segment nuclei that are complete within the boundaries of the image</hands-on-title>
->
-> 1. **IdentifyPrimaryObjects** {% icon tool %} with the following parameters:
+> 
+> 1. {% tool [IdentifyPrimaryObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **Starting Modules** {% icon tool %})
 >    - *"Use advanced settings?"*: `Yes, use advanced settings`
 >        - *"Enter the name of the input image (from NamesAndTypes)"*: `DNA`
@@ -231,13 +231,13 @@ From the previous tool, we got a group of objects (nuclei). Now, we want to expo
 
 > <hands-on-title>Mask the nuclei detected</hands-on-title>
 >
-> 1. **ConvertObjectsToImage** {% icon tool %} with the following parameters:
+> 1. {% tool [ConvertObjectsToImage](toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **IdentifyPrimaryObjects** {% icon tool %})
 >    - *"Enter the name of the input objects you want to convert to an image"*: `Nuclei`
 >    - *"Enter the name of the resulting image"*: `MaskNuclei`
 >    - *"Select the color format"*: `Binary (black & white)`
 >
-> 2. **DisplayDataOnImage** {% icon tool %} with the following parameters:
+> 2. {% tool [DisplayDataOnImage](toolshed.g2.bx.psu.edu/repos/bgruening/cp_display_data_on_image/cp_display_data_on_image/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **ConvertObjectsToImage** {% icon tool %})
 >    - *"Display object or image measurements?"*: `Object`
 >        - *"Enter the name of the input objects"*: `Nuclei`
@@ -248,7 +248,7 @@ From the previous tool, we got a group of objects (nuclei). Now, we want to expo
 >        - *"Number of decimals"*: `0`
 >    - *"Name the output image that has the measurements displayed"*: `ImageDisplay`
 >
-> 3. **SaveImages** {% icon tool %} with the following parameters:
+> 3. {% tool [SaveImages](toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **DisplayDataOnImage** {% icon tool %})
 >    - *"Select the type of image to save"*: `Image`
 >        - *"Saved the format to save the image(s)"*: `tiff`
@@ -272,7 +272,7 @@ The nucleoli are lacking intensity in the DNA staining and therefore, we need to
 
 > <hands-on-title>Detect and mask dark holes</hands-on-title>
 >
-> 1. **EnhanceOrSuppressFeatures** {% icon tool %} with the following parameters:
+> 1. {% tool [EnhanceOrSuppressFeatures](toolshed.g2.bx.psu.edu/repos/bgruening/cp_enhance_or_suppress_features/cp_enhance_or_suppress_features/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **SaveImages** {% icon tool %})
 >    - *"Enter the name of the input image"*: `DNA`
 >    - *"Enter a name for the resulting image"*: `DNAdarkholes`
@@ -280,8 +280,7 @@ The nucleoli are lacking intensity in the DNA staining and therefore, we need to
 >        - *"Feature type"*: `Dark holes`
 >            - *"Maximum hole size"*: `15`
 >
->
-> 2. **MaskImage** {% icon tool %} with the following parameters:
+> 2. {% tool [MaskImage](toolshed.g2.bx.psu.edu/repos/bgruening/cp_mask_image/cp_mask_image/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **EnhanceOrSuppressFeatures** {% icon tool %})
 >    - *"Enter the name of the input image"*: `DNAdarkholes`
 >    - *"Enter the name of the resulting image"*: `MaskDNAdarkholes`
@@ -297,7 +296,7 @@ Now that we have all the holes in one mask, we can segment the nucleoli as indiv
 
 > <hands-on-title>Segment nucleoli as individual objects</hands-on-title>
 >
-> 1. **IdentifyPrimaryObjects** {% icon tool %} with the following parameters:
+> 1. {% tool [IdentifyPrimaryObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MaskImage** {% icon tool %})
 >    - *"Use advanced settings?"*: `Yes, use advanced settings`
 >        - *"Enter the name of the input image (from NamesAndTypes)"*: `MaskDNAdarkholes`
@@ -316,7 +315,7 @@ Now that we have all the holes in one mask, we can segment the nucleoli as indiv
 >        - *"Handling of objects if excessive number of objects identified"*: `Continue`
 >
 >
-> 2. **ConvertObjectsToImage** {% icon tool %} with the following parameters:
+> 2. {% tool [ConvertObjectsToImage](toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **IdentifyPrimaryObjects** {% icon tool %})
 >    - *"Enter the name of the input objects you want to convert to an image"*: `Nucleoli`
 >    - *"Enter the name of the resulting image"*: `MaskNucleoli`
@@ -335,7 +334,7 @@ We have now one segmentation mask per image with all the nuclei detected, `MaskN
 
 > <hands-on-title>Convert and save the nuclei and nucleoli masks</hands-on-title>
 >
-> 1. **GrayToColor** {% icon tool %} with the following parameters:
+> 1. {% tool [GrayToColor](toolshed.g2.bx.psu.edu/repos/bgruening/cp_gray_to_color/cp_gray_to_color/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **ConvertObjectsToImage** {% icon tool %})
 >    - *"Enter the name of the resulting image"*: `CombinedMask`
 >    - *"Select a color scheme"*: `RGB`
@@ -344,8 +343,7 @@ We have now one segmentation mask per image with all the nuclei detected, `MaskN
 >        - *"Enter the name of the image to be colored blue"*: `MaskNuclei`
 >        - *"Relative weight for the blue image"*: `0.5`
 >
->
-> 2. **SaveImages** {% icon tool %} with the following parameters:
+> 2. {% tool [SaveImages](toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **GrayToColor** {% icon tool %})
 >    - *"Select the type of image to save"*: `Image`
 >        - *"Saved the format to save the image(s)"*: `tiff`
@@ -377,7 +375,7 @@ To extract the background, we first need to get the foreground and subtract it f
 
 > <hands-on-title>Segment all nuclei</hands-on-title>
 >
-> 1. **IdentifyPrimaryObjects** {% icon tool %} with the following parameters:
+> 1. {% tool [IdentifyPrimaryObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **SaveImages** {% icon tool %})
 >    - *"Use advanced settings?"*: `Yes, use advanced settings`
 >        - *"Enter the name of the input image (from NamesAndTypes)"*: `DNA`
@@ -397,7 +395,7 @@ To extract the background, we first need to get the foreground and subtract it f
 >        - *"Handling of objects if excessive number of objects identified"*: `Continue`
 >
 >
-> 2. **ConvertObjectsToImage** {% icon tool %} with the following parameters:
+> 2. {% tool [ConvertObjectsToImage](toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **IdentifyPrimaryObjects** {% icon tool %})
 >    - *"Enter the name of the input objects you want to convert to an image"*: `NucleiIncludingTouchingBorders`
 >    - *"Enter the name of the resulting image"*: `Image_NucleiIncludingTouchingBorders`
@@ -412,7 +410,7 @@ To extract the background, we first need to get the foreground and subtract it f
 
 > <hands-on-title>Subtract the foreground from the original image</hands-on-title>
 >
-> **ImageMath** {% icon tool %} with the following parameters:
+> {% tool [ImageMath](toolshed.g2.bx.psu.edu/repos/bgruening/cp_image_math/cp_image_math/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **ConvertObjectsToImage** {% icon tool %})
 >    - *"Enter a name for the resulting image"*: `BG`
 >    - *"Operation"*: `Subtract`
@@ -451,14 +449,14 @@ A step that requires special attention is the relationship nucleolus-nucleus. Th
 
 > <hands-on-title>Measure the granularity, texture, intensity, size and shape</hands-on-title>
 >
-> 1. **MeasureGranularity** {% icon tool %} with the following parameters:
+> 1. {% tool [MeasureGranularity](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_granularity/cp_measure_granularity/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **ImageMath** {% icon tool %})
 >    - In *"new image"*:
 >        - {% icon param-repeat %} *"Insert new image"*
 >            - *"Enter the name of a greyscale image to measure"*: `DNA`
 >
 >
-> 2. **MeasureTexture** {% icon tool %} with the following parameters:
+> 2. {% tool [MeasureTexture](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_texture/cp_measure_texture/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureGranularity** {% icon tool %})
 >    - In *"new image"*:
 >        - {% icon param-repeat %} *"Insert new image"*
@@ -469,7 +467,7 @@ A step that requires special attention is the relationship nucleolus-nucleus. Th
 >                - *"Enter the names of the objects to measure"*: `Nuclei`
 >
 >
-> 3. **MeasureObjectIntensity** {% icon tool %} with the following parameters:
+> 3. {% tool [MeasureObjectIntensity](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureTexture** {% icon tool %})
 >    - In *"new image"*:
 >        - {% icon param-repeat %} *"Insert new image"*
@@ -479,7 +477,7 @@ A step that requires special attention is the relationship nucleolus-nucleus. Th
 >            - *"Enter the name of the objects to measure"*: `Nuclei`
 >
 >
-> 4. **MeasureObjectSizeShape** {% icon tool %} with the following parameters:
+> 4. {% tool [MeasureObjectSizeShape](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureObjectIntensity** {% icon tool %})
 >    - In *"new object"*:
 >        - {% icon param-repeat %} *"Insert new object"*
@@ -510,7 +508,7 @@ It might be relevant to compute some statistics on the number of nucleoli inside
 
 > <hands-on-title>Relate nucleoli to their parent nucleus</hands-on-title>
 >
-> 1. **RelateObjects** {% icon tool %} with the following parameters:
+> 1. {% tool [RelateObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_relate_objects/cp_relate_objects/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureObjectSizeShape** {% icon tool %})
 >    - *"Parent objects"*: `Nuclei`
 >    - *"Child objects"*: `Nucleoli`
@@ -527,7 +525,7 @@ In this section, we will measure the image quality, the area occupied by the nuc
 
 > <hands-on-title>Measure the image quality</hands-on-title>
 >
-> 1. **MeasureImageQuality** {% icon tool %} with the following parameters:
+> 1. {% tool [MeasureImageQuality](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_quality/cp_measure_image_quality/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **RelateObjects** {% icon tool %})
 >    - *"Calculate blur metrics?"*: `Yes`
 >    - *"Calculate thresholds?"*: `Yes`
@@ -538,7 +536,7 @@ In this section, we will measure the image quality, the area occupied by the nuc
 >                        - *"Two-class or three-class thresholding?"*: `Two classes`
 >
 >
-> 2. **MeasureImageAreaOccupied** {% icon tool %} with the following parameters:
+> 2. {% tool [MeasureImageAreaOccupied](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_area_occupied/cp_measure_image_area_occupied/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureImageQuality** {% icon tool %})
 >    - In *"new area"*:
 >        - {% icon param-repeat %} *"Insert new area"*
@@ -549,7 +547,7 @@ In this section, we will measure the image quality, the area occupied by the nuc
 >                - *"Enter the name of the objects to measure"*: `Nucleoli`
 >
 >
-> 3. **MeasureImageIntensity** {% icon tool %} with the following parameters:
+> 3. {% tool [MeasureImageIntensity](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_intensity/cp_measure_image_intensity/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureImageAreaOccupied** {% icon tool %})
 >    - In *"new image"*:
 >        - {% icon param-repeat %} *"Insert new image"*
@@ -585,7 +583,7 @@ All the parameters that we have measured related to the images and objects need 
 
 > <hands-on-title>Export features</hands-on-title>
 >
-> **ExportToSpreadsheet** {% icon tool %} with the following parameters:
+> {% tool [ExportToSpreadsheet](toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureImageIntensity** {% icon tool %})
 >    - *"Select the column delimiter"*: `Tab`
 >    - *"Add a prefix to file names?"*: `Do not add prefix to the file name`
@@ -604,7 +602,7 @@ All the steps in our workflow (except for the **IDR download** {% icon tool %}) 
 
 > <hands-on-title>Run CellProfiler pipeline</hands-on-title>
 >
-> **CellProfiler** {% icon tool %} with the following parameters:
+> {% tool [Run CellProfiler pipeline](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Pipeline file"*: `output_pipeline` (output of **ExportToSpreadsheet** {% icon tool %})
 >    - *"Are the input images packed into a tar archive?"*: `Yes`
 >        - {% icon param-file %} *"A tarball of images"*: `output_tar` (output of **IDR Download** {% icon tool %})

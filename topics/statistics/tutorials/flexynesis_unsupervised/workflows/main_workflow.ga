@@ -1,0 +1,695 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Unsupervised Classification of Bone marrow cells",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0003-1329-3044",
+            "name": "Amirhossein Naghsh Nilchi"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Final - Unsupervised Analysis of Bone Marrow Cells",
+    "readme": "This training is inspired from the original flexynesis analysis notebook: [unsupervised_analysis_single_cell.ipynb](https://github.com/BIMSBbioinfo/flexynesis/blob/main/examples/tutorials/unsupervised_analysis_single_cell.ipynb).\n",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "clinical training data",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "clinical training data",
+                    "name": "train clinincal data"
+                }
+            ],
+            "label": "train clinincal data",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.4843627949348388,
+                "top": 513.7363055908827
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "1235994c-0ecb-42e8-afa7-5fa35f94a2a3",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "clinical test data",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "clinical test data",
+                    "name": "test clinincal data"
+                }
+            ],
+            "label": "test clinincal data",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1.6951958788853858,
+                "top": 613.0246184748281
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "965727c3-f955-4468-a0e3-a9568400735d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "omics 1 training data",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "omics 1 training data",
+                    "name": "train omics 1"
+                }
+            ],
+            "label": "train omics 1",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1.2108330839506039,
+                "top": 709.4472905966443
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "e02bc449-c651-42a5-8b38-15ff552aba76",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "omics 1 test data",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "omics 1 test data",
+                    "name": "test omics 1"
+                }
+            ],
+            "label": "test omics 1",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2.421666167901151,
+                "top": 811.1572696484908
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a3b5be8f-8190-403b-835b-eb3da459dc72",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "omics 2 training data",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "omics 2 training data",
+                    "name": "train omics 2"
+                }
+            ],
+            "label": "train omics 2",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 915.2889148682384
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "af16e307-cf7c-4a84-bb6f-8ec5b31d19d2",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "omics 2 test data",
+            "content_id": null,
+            "errors": null,
+            "id": 5,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "omics 2 test data",
+                    "name": "test omics 2"
+                }
+            ],
+            "label": "test omics 2",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 1016.998893920085
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "80564d9e-fc0e-4194-acd7-801ef2fa25c8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "training_type|omics_0|test_omics": {
+                    "id": 5,
+                    "output_name": "output"
+                },
+                "training_type|omics_0|train_omics": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "training_type|test_clin": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "training_type|test_omics_main": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "training_type|train_clin": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "training_type|train_omics_main": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis",
+                    "name": "training_type"
+                }
+            ],
+            "label": null,
+            "name": "Flexynesis",
+            "outputs": [
+                {
+                    "name": "results",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 400.32163752059176,
+                "top": 614.4574203800461
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "9c91d13827ef",
+                "name": "flexynesis",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"training_type\": {\"model\": \"us_train\", \"__current_case__\": 1, \"train_clin\": {\"__class__\": \"ConnectedValue\"}, \"test_clin\": {\"__class__\": \"ConnectedValue\"}, \"train_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"test_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"assay_main\": \"RNA\", \"omics\": [{\"__index__\": 0, \"train_omics\": {\"__class__\": \"ConnectedValue\"}, \"test_omics\": {\"__class__\": \"ConnectedValue\"}, \"assay\": \"ADT\"}], \"model_class\": \"supervised_vae\", \"advanced\": {\"fusion_type\": \"intermediate\", \"finetuning_samples\": \"0\", \"variance_threshold\": \"1.0\", \"correlation_threshold\": \"0.8\", \"subsample\": \"0\", \"features_min\": \"500\", \"features_top_percentile\": \"20.0\", \"log_transform\": false, \"early_stop_patience\": \"5\", \"hpo_iter\": \"1\", \"val_size\": \"0.2\", \"hpo_patience\": \"10\", \"use_cv\": false, \"use_loss_weighting\": true, \"evaluate_baseline_performance\": false, \"feature_importance_method\": \"Both\"}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.20+galaxy3",
+            "type": "tool",
+            "uuid": "4f2b3b5a-dda5-4287-841a-645e2a892dc2",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "flexynesis output",
+                    "output_name": "results",
+                    "uuid": "5791b446-d5ab-4647-a04f-d96daa9f615b"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "results"
+                }
+            },
+            "inputs": [],
+            "label": "Extract test embeddings",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 699.8615225234203,
+                "top": 719.1339552682488
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"first\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "fb5627ab-32d4-45fc-90ec-adf6929cf3d2",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_utils/flexynesis_utils/0.2.20+galaxy3",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "utils_conditional|X": {
+                    "id": 7,
+                    "output_name": "output"
+                },
+                "utils_conditional|labels": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis utils",
+                    "name": "utils_conditional"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis utils",
+                    "name": "utils_conditional"
+                }
+            ],
+            "label": "Louvain clustering",
+            "name": "Flexynesis utils",
+            "outputs": [
+                {
+                    "name": "util_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 803.5491561972465,
+                "top": 220.04873738350648
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_utils/flexynesis_utils/0.2.20+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "f73ce81f7795",
+                "name": "flexynesis_utils",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"utils_conditional\": {\"util\": \"louvain_clustering\", \"__current_case__\": 0, \"X\": {\"__class__\": \"ConnectedValue\"}, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"threshold\": null, \"k\": \"15\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.20+galaxy3",
+            "type": "tool",
+            "uuid": "51ebf771-b65a-472e-a91d-ebbe290edc3a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "louvain clustering",
+                    "output_name": "util_out",
+                    "uuid": "344ac387-2dfa-4629-8c03-3d5b336420da"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "plot_conditional|embeddings": {
+                    "id": 7,
+                    "output_name": "output"
+                },
+                "plot_conditional|labels": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis plot",
+                    "name": "plot_conditional"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis plot",
+                    "name": "plot_conditional"
+                }
+            ],
+            "label": "Dimred true value",
+            "name": "Flexynesis plot",
+            "outputs": [
+                {
+                    "name": "plot_out",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 800.8991721220032,
+                "top": 401.52078339018635
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "07f595f34f29",
+                "name": "flexynesis_plot",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"plot_conditional\": {\"plot_type\": \"dimred\", \"__current_case__\": 0, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"embeddings\": {\"__class__\": \"ConnectedValue\"}, \"color\": \"10\", \"method\": \"umap\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.20+galaxy3",
+            "type": "tool",
+            "uuid": "7be071fe-e732-4d11-93e7-7333391950ba",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "umap - true_value",
+                    "output_name": "plot_out",
+                    "uuid": "9ba13d6c-2caf-4625-bde6-874da3516cf6"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_utils/flexynesis_utils/0.2.20+galaxy3",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "utils_conditional|X": {
+                    "id": 7,
+                    "output_name": "output"
+                },
+                "utils_conditional|labels": {
+                    "id": 8,
+                    "output_name": "util_out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis utils",
+                    "name": "utils_conditional"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis utils",
+                    "name": "utils_conditional"
+                }
+            ],
+            "label": "Get optimal clusters",
+            "name": "Flexynesis utils",
+            "outputs": [
+                {
+                    "name": "util_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1102.221341539512,
+                "top": 214.88250267636323
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_utils/flexynesis_utils/0.2.20+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "f73ce81f7795",
+                "name": "flexynesis_utils",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"utils_conditional\": {\"util\": \"get_optimal_clusters\", \"__current_case__\": 1, \"X\": {\"__class__\": \"ConnectedValue\"}, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"min_k\": \"10\", \"max_k\": \"20\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.20+galaxy3",
+            "type": "tool",
+            "uuid": "8c4ce397-7e3f-40ca-8137-f5f42b57debe",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "k-means clustering",
+                    "output_name": "util_out",
+                    "uuid": "e12faae2-19cd-478e-951d-541769ab0988"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "plot_conditional|labels": {
+                    "id": 10,
+                    "output_name": "util_out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis plot",
+                    "name": "plot_conditional"
+                }
+            ],
+            "label": "Label concordance true vs louvain",
+            "name": "Flexynesis plot",
+            "outputs": [
+                {
+                    "name": "plot_out",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1460.5068806418356,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "07f595f34f29",
+                "name": "flexynesis_plot",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"plot_conditional\": {\"plot_type\": \"concordance_heatmap\", \"__current_case__\": 2, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"true_label\": \"10\", \"predicted_label\": \"12\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.20+galaxy3",
+            "type": "tool",
+            "uuid": "af5f9774-c84c-4df8-8b6e-49a657b61ecf",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "concordance plot",
+                    "output_name": "plot_out",
+                    "uuid": "1cd385d5-ed0b-4344-9a5c-ffebaae59349"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_utils/flexynesis_utils/0.2.20+galaxy3",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "utils_conditional|labels": {
+                    "id": 10,
+                    "output_name": "util_out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis utils",
+                    "name": "utils_conditional"
+                }
+            ],
+            "label": "compute ami_ari true vs lovain",
+            "name": "Flexynesis utils",
+            "outputs": [
+                {
+                    "name": "util_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1460.2676214748321,
+                "top": 139.29045566428002
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_utils/flexynesis_utils/0.2.20+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "f73ce81f7795",
+                "name": "flexynesis_utils",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"utils_conditional\": {\"util\": \"compute_ami_ari\", \"__current_case__\": 3, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"true_label\": \"10\", \"predicted_label\": \"12\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.20+galaxy3",
+            "type": "tool",
+            "uuid": "1d830673-9099-4905-9bcf-7859bdc5eca7",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "amir_ari true vs louvain",
+                    "output_name": "util_out",
+                    "uuid": "727d1cde-f4a5-4ddf-8e17-3aa117f61b68"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_utils/flexynesis_utils/0.2.20+galaxy3",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "utils_conditional|labels": {
+                    "id": 10,
+                    "output_name": "util_out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis utils",
+                    "name": "utils_conditional"
+                }
+            ],
+            "label": "compute ami_ari true vs optimal_cluster",
+            "name": "Flexynesis utils",
+            "outputs": [
+                {
+                    "name": "util_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1459.5967984867525,
+                "top": 301.3397004219401
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_utils/flexynesis_utils/0.2.20+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "f73ce81f7795",
+                "name": "flexynesis_utils",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"utils_conditional\": {\"util\": \"compute_ami_ari\", \"__current_case__\": 3, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"true_label\": \"10\", \"predicted_label\": \"13\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.20+galaxy3",
+            "type": "tool",
+            "uuid": "ce778218-783e-4fcc-8ec5-58c96db57815",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "amir_ari true vs k-means",
+                    "output_name": "util_out",
+                    "uuid": "7b904d9a-e082-460e-bd2e-3f18b27dc3dc"
+                }
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "plot_conditional|embeddings": {
+                    "id": 7,
+                    "output_name": "output"
+                },
+                "plot_conditional|labels": {
+                    "id": 10,
+                    "output_name": "util_out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis plot",
+                    "name": "plot_conditional"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis plot",
+                    "name": "plot_conditional"
+                }
+            ],
+            "label": "Dimred louvain",
+            "name": "Flexynesis plot",
+            "outputs": [
+                {
+                    "name": "plot_out",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1460.8093818992897,
+                "top": 466.25274520497845
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "07f595f34f29",
+                "name": "flexynesis_plot",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"plot_conditional\": {\"plot_type\": \"dimred\", \"__current_case__\": 0, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"embeddings\": {\"__class__\": \"ConnectedValue\"}, \"color\": \"12\", \"method\": \"umap\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.20+galaxy3",
+            "type": "tool",
+            "uuid": "4dceab17-c8ed-46b1-b62a-e4c41e4a37bf",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "umap - louvain",
+                    "output_name": "plot_out",
+                    "uuid": "6346a63f-fd06-44ad-93b3-42b41675d1a5"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "flexynesis",
+        "machine_learning",
+        "deep_learning"
+    ],
+    "uuid": "03ca75ea-2c5b-452c-ac3d-765910392908",
+    "version": 7
+}

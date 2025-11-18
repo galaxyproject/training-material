@@ -8,6 +8,11 @@ contributions:
   - dannon
   infrastructure:
   - ElectronicBlueberry
+  funding:
+    - elixir-europe
+    - deNBI
+    - uni-freiburg
+    - eurosciencegateway
 tags:
   - gtn
   - new feature

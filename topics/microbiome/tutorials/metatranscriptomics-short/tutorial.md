@@ -23,16 +23,19 @@ key_points:
 - A lot of metatranscriptomics sequences are identified as rRNA sequences
 - With shotgun data, we can extract information about the studied community structure and also the functions realised by the community
 - Metatranscriptomics data analyses are complex and must be careful done, specially when they are done without combination to metagenomics data analyses
-contributors:
-- pratikdjagtap
-- subinamehta
-- jraysajulga
-- bebatut
-- emmaleith
-- pravs3683
-- shiltemann
-- paulzierep
-- EngyNasr
+contributions:
+  authorship:
+  - pratikdjagtap
+  - subinamehta
+  - jraysajulga
+  - bebatut
+  - emmaleith
+  - pravs3683
+  - shiltemann
+  - paulzierep
+  - EngyNasr
+  editing:
+  - ogerdfx
 redirect_from:
 - /topics/metagenomics/tutorials/metatranscriptomics-short/tutorial
 edam_ontology:

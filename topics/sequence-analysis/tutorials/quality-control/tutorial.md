@@ -161,9 +161,9 @@ It means that the fragment named `@M00970` corresponds to the DNA sequence `GTGC
 > >    - ASCII code for `/` is 47
 > >    - Quality score = 47-33=14
 > >    - Formula to find the probability of error: \\(P = 10^{-Q/10}\\)
-> >    - Probability of error = \\(10^{-14/10}\\) = 0.03981
-> >    - Therefore Accuracy = 100 - 0.03981 = 99.96%
-> > 4. The corresponding nucleotide `G` has an accuracy of almost 99.96%
+> >    - Probability of error = \\(10^{-14/10}\\) = 0.03981 = 3.981 %
+> >    - Therefore Accuracy = 100 - 3.981 = 96.019%
+> > 4. The corresponding nucleotide `G` has an accuracy of approximately 96%
 > >
 > {: .solution }
 {: .question}

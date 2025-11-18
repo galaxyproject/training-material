@@ -33,7 +33,7 @@ $("blockquote.solution>.box-title>button,blockquote.details>.box-title>button,bl
 
 // collapse some box types by default
 // LEGACY
- $(".solution>h3,.details>h3,.tip>h3").each(function() {
+ $(".solution>h3,.details>h3,.tip>h3:not(.nobox)").each(function() {
     $(">*:not(h3)", $(this.parent)).toggle("box-collapsed");
     $(this).append("<span role='button' class='fold-unfold fa fa-plus-square'></span>");
 });

@@ -30,8 +30,11 @@ key_points:
   of variants in a flexible way.
 - Prefer public, free annotation sources to foster reproducibility and information
   sharing.
-contributors:
-- wm75
+contributions:
+  authorship:
+  - wm75
+  editing:
+  - VerenaMoo
 
 ---
 
@@ -203,8 +206,10 @@ a read provide evidence for is, of course, a prerequisite for variant calling.
 
 ## Quality control
 
+To perform quality control, we will use [Falco](https://falco.readthedocs.io/en/latest/) an efficiency-optimized rewrite of [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
+
 > <hands-on-title>Quality control of the input datasets</hands-on-title>
-> 1. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} on each of your four fastq datasets
+> 1. Run {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0) %} on each of your four fastq datasets
 >       - {% icon param-files %} *"Short read data from your current history"*: all 4 FASTQ  datasets selected with **Multiple datasets**
 >
 >    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
@@ -213,13 +218,13 @@ a read provide evidence for is, of course, a prerequisite for variant calling.
 >    data, another one with an html report of the findings for each input
 >    dataset) will get added to your history.
 >
-> 2. Use {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %} to aggregate the raw **FastQC** data of all four input datasets into one report
+> 2. Use {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %} to aggregate the raw **Falco** data of all four input datasets into one report
 >      - In *"Results"*
->        - *"Which tool was used generate logs?"*: `FastQC`
+>        - *"Which tool was used generate logs?"*: `FastQC` (no matter whether FastQC or Falco was used)
 >        - In *"FastQC output"*
 >           - *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-files %} *"FastQC output"*: all four *RawData*
->             outputs of **FastQC** {% icon tool %})
+>             outputs of **Falco** {% icon tool %})
 >
 > 3. Inspect the *Webpage* output produced by the tool
 >
@@ -336,7 +341,7 @@ Running this job will generate four output datasets:
 {: .hands_on}
 
 > <hands-on-title>Exercise: Quality control of the polished datasets</hands-on-title>
-> Use {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} and {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %} like before,
+> Use {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0) %} and {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %} like before,
 > but using the four trimmed datasets produced by Trimmomatic as input.
 >
 >    > <question-title></question-title>

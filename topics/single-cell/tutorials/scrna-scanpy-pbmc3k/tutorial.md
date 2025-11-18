@@ -70,12 +70,18 @@ recordings:
   bot-timestamp: 1727373432
 
 answer_histories:
-  - label: "Scanpy_1.10.2_Anndata_0.10.9"
-    history: https://singlecell.usegalaxy.eu/u/videmp/h/clustering-of-3k-pbmcs-tutorial-from-workflow-october-2024
-    date: 2024-10-04
-  - label: "UseGalaxy.eu - Archived"
-    history: https://singlecell.usegalaxy.eu/u/wendi.bacon.training/h/clustering-of-3k-pbmcs-tutorial-from-workflow-october-2024
-    date: 2024-12-10
+  - label: "UseGalaxy.eu"
+    history: https://usegalaxy.eu/u/videmp/h/gtn-clustering-3k-pbmc-with-scanpy-april-2025
+    date: 2024-04-29
+  - label: "UseGalaxy.org"
+    history: https://usegalaxy.org/u/videmp/h/gtn-clustering-3k-pbmc-with-scanpy-april-2025
+    date: 2024-04-29
+  - label: "UseGalaxy.org.au"
+    history: https://usegalaxy.org.au/u/videmp/h/gtn-clustering-3k-pbmc-with-scanpy-april-2025
+    date: 2024-04-29
+  - label: "UseGalaxy.fr"
+    history: https://usegalaxy.fr/u/videmp/h/gtn-clustering-3k-pbmc-with-scanpy-april-2025
+    date: 2024-04-29
 ---
 
 

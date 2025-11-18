@@ -15,9 +15,14 @@ time_estimation: "30m"
 key_points:
   - "The cellular secretome contains more than the classically secreted proteins."
   - "Localization predictions by multiple different algorithms can improve sensitivity and/or specificity."
-contributors:
+contributions:
+  authorship:
   - stortebecker
   - bgruening
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 
 subtopic: post-process
 tags: [human]
@@ -56,8 +61,8 @@ The workflow needs three input files:
   2. The complete uniprot GO database for the organism of interest, available [via FTP](ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/). To download the human GOA file needed for the test input, paste the following link to the Galaxy upload tool: 'ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gaf.gz'
 
 		> <comment-title>Uniprot Gene Ontology Association (GOA) files</comment-title>
-		> - Information about different GOA file types can be found [here](https://www.ebi.ac.uk/GOA/downloads).
-		> - Information about the structure of the files can be found [here](ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/README).
+		> - [Information about different GOA file types can be found here](https://www.ebi.ac.uk/GOA/downloads).
+		> - [Information about the structure of the files can be found here](ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/README).
 	  {: .comment}
 
   3. The complete GO Open Biomedical Ontology (OBO), i.e. "GO term tree", accessible at http://purl.obolibrary.org/obo/go/go.obo

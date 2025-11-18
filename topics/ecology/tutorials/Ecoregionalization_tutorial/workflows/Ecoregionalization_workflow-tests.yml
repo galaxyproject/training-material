@@ -2,7 +2,7 @@
   job:
     ceamarc_env.tsv:
       class: File
-      path: test-data/ceamarc_env.tsv
+      location: https://data.indores.fr/api/access/datafile/9777
       filetype: tabular
     occurrence.txt:
       class: File
@@ -15,12 +15,12 @@
   outputs:
     occ_out:
       asserts:
-        has_size: 
+        has_size:
           value: 48864
           delta: 50
     occ_env_out:
       asserts:
-        has_size: 
+        has_size:
           value: 56421
           delta: 50
     info_out:
@@ -28,13 +28,13 @@
         has_n_columns:
           n: 3
     coll_pred:
-      element_tests: 
+      element_tests:
         1_brts_pred_ceamarc:
           asserts:
             has_n_columns:
               n: 4
     coll_val:
-      element_tests: 
+      element_tests:
         1_brts_validation_ceamarc:
           asserts:
             has_n_columns:
@@ -70,4 +70,4 @@
     eco_map:
           asserts:
             has_text:
-              text: PNG        
+              text: PNG

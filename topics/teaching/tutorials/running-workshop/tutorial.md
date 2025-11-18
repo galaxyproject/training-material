@@ -11,11 +11,16 @@ time_estimation: 3H
 key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
-contributors:
-- bebatut
-- bgruening
-- shiltemann
-- hexylena
+contributions:
+  authorship:
+  - bebatut
+  - bgruening
+  - shiltemann
+  - hexylena
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 ---
 
 In this tutorial you'll learn how to run a workshop as a Galaxy Instructor

@@ -6,7 +6,7 @@ zenodo_link: ""
 level: Introductory
 questions:
   - "What are benefits and drawbacks of different quantitation methods?"
-  - "How to choose which quantitation method bests suits my need?"
+  - "How to choose which quantitation method best suits my need?"
 objectives:
   - "Choose your quantitation method."
 time_estimation: "15m"
@@ -14,9 +14,14 @@ key_points:
   - "Label-free and labelled methods are not better or worse *per se*."
   - "Different scientific question call for different quantitation methods."
   - "Be wise in choosing the right method before starting your LC-MS/MS runs."
-contributors:
+contributions:
+  authorship:
   - stortebecker
   - bgruening
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 subtopic: id-quant
 tags: [DDA]
 ---
@@ -25,7 +30,7 @@ tags: [DDA]
 
 
 A basic question while planning any quantitative proteomic experiment is the choice between label-free versus labelled quantitation. Here, we would like to address and discuss benefits and drawbacks of each method.
-Finally, we will offer a guideline to arrive at a decision on which labeling method to use. We will not discuss various labelling methods here in detail, but focus on our basicquestion on the choice of quantitation method.
+Finally, we will offer a guideline to arrive at a decision on which labelling method to use. We will not discuss various labelling methods here in detail, but focus on our basic question on the choice of quantitation method.
 
 A basic overview of various quantitation techniques is shown below ([original artwork](https://www.ncbi.nlm.nih.gov/pubmed/24678044) by Marc Vaudel):
 

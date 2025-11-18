@@ -24,6 +24,8 @@ contributions:
   - shiltemann
   funding:
   - gallantries
+  - deNBI
+  - uni-freiburg
 abbreviations:
   API: Application Programming Interface
   JSON: JavaScript Object Notation
@@ -1265,7 +1267,7 @@ This can also be used inline: My favourite fruit is an <span class="Ananas-of-co
 > ```
 > {% raw %}
 > {% include _includes/cyoa-choices.html option1="Oui" option2="Non" default="Oui" text="Vos données ESTAMP sont prêtes ?" %}
-> {% include _includes/cyoa-choices.html option1="Yes" option2="No" text="Do the thing?" disambiguation="english" %}
+> {% include _includes/cyoa-choices.html option1="Yes" option2="No" default="Yes" text="Do the thing?" disambiguation="english" %}
 > {% endraw %}
 > ```
 {: .tip}
@@ -1277,7 +1279,7 @@ This can also be used inline: My favourite fruit is an <span class="Ananas-of-co
 >
 > ```
 > {% raw %}
-> {% include _includes/cyoa-choices.html option1="Yes, they don't pass QC" option2="No" text="Do you think your samples need to be filtered?" %}
+> {% include _includes/cyoa-choices.html option1="Yes, they don't pass QC" option2="No" default="Yes, they don't pass QC" text="Do you think your samples need to be filtered?" %}
 > 
 > <div class="Yes-they-dont-pass-QC" markdown="1">
 > Some content here!

@@ -20,6 +20,7 @@ contributions:
     - elichad
   funding:
     - by-covid
+    - eurosciencegateway
 license: Apache-2.0
 subtopic: ro-crate
 notebook:

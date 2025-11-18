@@ -18,6 +18,7 @@ tags:
   - EBV workflow
   - eDNA
   - Metabarcoding
+  - biodiversity
 contributions:
   authorship:
   - colineroyaux

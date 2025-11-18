@@ -7,7 +7,7 @@ contributors: [nomadscientist]
 redirect_from: [/faqs/gtn/using-answer-key-histories]
 ---
 
-If you get stuck, you can first check your history against an exemplar history, from your tutorial.
+If you get stuck, you can first check your history against an {% icon galaxy-history-answer %} Answer Key history found in the header of (some) tutorials.
 
 First, import the target history.
 

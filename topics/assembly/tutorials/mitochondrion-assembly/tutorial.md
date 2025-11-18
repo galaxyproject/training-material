@@ -13,6 +13,13 @@ key_points:
   a reference sequence.
 contributors:
 - delphine-l
+tags:
+  - biodiversity
+edam_ontology:
+- topic_0622 # Genomics
+- topic_0196 # Assembly
+- topic_3050 # Biodiversity
+- topic_0779 # Mitochrondria
 recordings:
 - youtube_id: 0ehAZ0DZsFU
   length: 11M
@@ -27,9 +34,6 @@ recordings:
 
 ---
 
-
-
-# Introduction
 
 This tutorial will show you how to assemble a mitochondrial genome from PacBio HiFi data using MitoHiFi {% cite uliano2023 %}. 
 Combined with the tutorials "Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C data" and "Decontamination of a genome assembly", this allows you to produce a reference assembly for both the nuclear and the mitochondrial DNA of a vertebrate species. 

@@ -171,6 +171,7 @@ module Gtn
 
       # Generic error handling:
       ## Check requirements
+      data.delete('extra') if data.key?('extra') ## let people stick anything under the 'extra' metadata key
       errs.push(*validate_requirements(data['requirements'])) if data.key?('requirements')
 
       ## Check follow ups
@@ -197,7 +198,7 @@ module Gtn
       data = lintable?(fn)
       return data if data.nil? || data.is_a?(Array)
 
-      if data.key?('cover') 
+      if data.key?('cover')
         if !data['cover'].start_with?('https://')
           if !File.exist?(data['cover'])
             errs.push("Cover image #{data['cover']} does not exist")

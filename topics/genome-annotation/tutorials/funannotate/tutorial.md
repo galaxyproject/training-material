@@ -7,6 +7,7 @@ tags:
   - gmod
   - eukaryote
   - jbrowse1
+  - biodiversity
 questions:
   - How to annotate an eukaryotic genome with Funannotate?
   - How to perform functional annotation?
@@ -38,6 +39,8 @@ contributions:
     - eurosciencegateway
     - elixir-europe
 
+edam_ontology:
+  - topic_0623 # Gene and protein families
 abbreviations:
   NMDS: Non-metric multidimensional scaling
 

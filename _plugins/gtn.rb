@@ -365,8 +365,17 @@ module Jekyll
 
           if m.key?('time')
             found['time'] = m['time']
+          else
+            found['time'] = nil
           end
           found
+         elsif m.key?('type') && m['type'] == 'faq'
+          {
+            'type' => 'faq',
+            'name' => m['name'],
+            'title' => m['name'],
+            'faq_url' => m['link'],
+          }
         elsif m.key?('external') && m['external']
           {
             'layout' => 'tutorial_hands_on',

@@ -15,9 +15,15 @@ objectives:
 time_estimation: "2h"
 key_points:
   - "Be careful, when you interact with the Galaxy database. And make sure you always have a backup!"
-contributors:
+contributions:
+  authorship:
   - hrhotz
   - bgruening
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
+  - eurosciencegateway
 ---
 
 
@@ -64,7 +70,7 @@ What’s not in the database is the data. Datasets are stored outside the databa
 
 ## Understanding the Database Schema
 
-#### ER diagrams and SchemaSpy
+### ER diagrams and SchemaSpy
 
 Entity-relationship diagrams are a way to understand tables and the relationships between them
 inside a relational database.  SchemaSpy (http://schemaspy.org) is a free (and remarkable tool) for
@@ -77,19 +83,19 @@ Each SchemaSpy table’s page shows the attributes in that table, as well as any
 
 Also see the “Run SchemaSpy in this container” section below for how to install and then run SchemaSpy yourself.
 
-#### Database conventions
+### Database conventions
 The Galaxy database uses a number of naming and design conventions.  Understanding these can make navigating the database much easier.
 
-#### id attributes
+### id attributes
 Every table has an id column that uniquely identifies each row.  (The id column is the primary key in database terminology.) Beyond uniquely identifying a row in the table, ID values have no meaning.  ID values are unique within a table, but not across the database.
 
-#### Relationships between tables, and `_id` columns
+### Relationships between tables, and `_id` columns
 Relationships between tables are implemented by exporting id columns from one table into another.  Imported ids are called foreign keys in database nomenclature, and are uniformly named
    table_the_id_came_from_id
 
 There are a few notable exceptions to this rule.  If the ID is from a table that is prefixed with galaxy_, for example, galaxy_user or galaxy_session, the  galaxy_ will be dropped from the column name.  For example, galaxy_user.id becomes user_id in the over 50 tables it is imported into
 
-#### Relationship tables
+### Relationship tables
 
 As mentioned previously, some tables, such as history_dataset_association represent relationships between things, rather than things themselves.  In this case history_dataset_association describes relationships between datasets and histories.
 
@@ -339,18 +345,18 @@ The following example is from the development server at the FMI
 
 ## Other Topics
 
-#### How to move from MySQL to PostgreSQL
+### How to move from MySQL to PostgreSQL
 
 Slides: https://docs.google.com/presentation/d/1N3BDNQT3s7eQEO3BO89TQbTYwKp92fxHDRWQwC-T1kA
 
 https://wiki.galaxyproject.org/Community/Log/2015/MySQL2PostgreSQL
 
-#### Is there ever a need to manually change the contents of a table
+### Is there ever a need to manually change the contents of a table
 
 Slides:
 https://docs.google.com/presentation/d/1l4DD0IaJjuvk1zAT1Sjv26bLyrSOg3VUm7rD-TQl_Zs
 
-#### Run SchemaSpy in this container
+### Run SchemaSpy in this container
 
 To run SchemaSpy in your container you’ll need to get it, and also install some required software packages.
 

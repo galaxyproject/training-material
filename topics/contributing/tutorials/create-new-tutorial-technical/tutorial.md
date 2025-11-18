@@ -20,11 +20,16 @@ key_points:
   - "Tools, data and workflows can be easily integrated in a Docker flavor to have a useful technical support for a tutorial"
   - "A Galaxy Docker flavor is a great support for training"
   - "A Galaxy Docker flavor can be deployed 'anywhere' and is scalable"
-contributors:
+contributions:
+  authorship:
   - bebatut
   - bgruening
   - shiltemann
   - hexylena
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 ---
 
 # Building a Galaxy instance specifically for your training

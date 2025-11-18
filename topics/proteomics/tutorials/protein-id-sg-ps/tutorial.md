@@ -16,9 +16,14 @@ key_points:
   - "LC-MS/MS raw files have to be locally converted to mgf/mzML prior to further analysis on most Galaxy servers."
   - "SearchGUI can be used for running several peptide search engines at once."
   - "PeptideShaker can be used to combine and evaluate the results, and to perform protein inference."
-contributors:
+contributions:
+  authorship:
   - stortebecker
   - bgruening
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 subtopic: id-quant
 tags: [DDA, HeLa]
 ---

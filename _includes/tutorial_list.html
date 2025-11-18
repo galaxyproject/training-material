@@ -78,6 +78,10 @@
             <a href="{{ site.baseurl }}/{{ default_resource_url }}">
                 {{ material.title }}
             </a>
+             {% else if material.type == 'faq' %}
+            <a href="{{ site.baseurl}}/{{material.faq_url}}">
+               {% icon help %}  {{ material.title }}
+            </a>
             {% else if material.hands_on == 'external' %}
             <a href="{{ material.hands_on_url }}">
                 {{ material.title }} {% icon external-link %}

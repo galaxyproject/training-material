@@ -28,7 +28,7 @@ Below are just a few examples of basic expressions:
 | `\s`               | any whitespace |
 | `\S`               | any non-whitespace character |
 | `.`                | *any* character |
-| `\.`
+| `\.`               | literal . (period) |
 | `{x,y}`            | between *x* and *y* repetitions |
 | `^`                | the beginning of the line |
 | `$`                | the end of the line |

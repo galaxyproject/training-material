@@ -35,11 +35,11 @@ abbreviations:
 
 Discovered over 40 years ago, {AS} formed a large part of the puzzle explaining how proteomic complexity can be achieved with a limited set of genes  ({% cite Alt1980 %}). The majority of eukaryote genes have multiple transcriptional isoforms, and recent data indicate that each transcript of protein-coding genes contain 11 exons and produce 5.4 mRNAs on average ({% cite Piovesan2016 %}). In humans,  approximately 95% of multi-exon genes show evidence of {AS} and approximately 60% of genes have at least one alternative transcription start site, some of which exert antagonistic functions ({% cite Carninci2006 %}, {% cite Miura2012 %}). Its regulation is essential for providing cells and tissues their specific features, and for their response to environmental changes ({% cite Wang2008 %}, {% cite Kalsotra2011 %}).
 
-Alterations in gene splicing has been demonstrated to have significant impact on cancer development, and multiple evidences indicate that its disruption can exhibit effects on virtually all aspect of tumor progression ({% cite Namba2021 %}, {% cite Bonnal2020 %}). For instance, the unannotated isoform of TNS3 was found to be a novel driver of breast cancer ({% cite Namba2021 %}). 
+Alterations in gene splicing has been demonstrated to have significant impact on cancer development, and multiple evidences indicate that its disruption can exhibit effects on virtually all aspect of tumor progression ({% cite Namba2021 %}, {% cite Bonnal2020 %}). For instance, the unannotated isoform of TNS3 was found to be a novel driver of breast cancer ({% cite Namba2021 %}).
 
 ![Figure 01. Examples of cancer splicing dysregulation on cancer hallmarks](../../images/differential_isoform/differential_cancer.png "Effect of alternative splicing dysregulation on cancer progression. The diagram depicts various cancer hallmarks and examples of genes whose splicing dysregulation has been demostrated to be implicated in the corresponding functional modification.")
 
-Disregulation in {AS} can lead to the activation of {OCGs} or the inactivation of {TSGs}, which can promote or suppress tumorigenesis, respectively ({% cite Bashyam2019 %}). However, the strict classification of cancer genes as either {OCGs} or {TSGs} may be an oversimplification, as some genes can exhibit a dual role in cancer development, often impacting the same facet of tumorigenesis ({% cite Bashyam2019 %}). One of the mechanism that has been proposed to partially explain this apparently contradictory effect is the differential usage of isoforms, often referred to as {IS}. This regulatory phenomenon has been demonstrated to have a substantial biological impact in a diverse range of biological contexts, caused by functional diversity potential of the different isoforms ({% cite VittingSeerup2017 %}). 
+Disregulation in {AS} can lead to the activation of {OCGs} or the inactivation of {TSGs}, which can promote or suppress tumorigenesis, respectively ({% cite Bashyam2019 %}). However, the strict classification of cancer genes as either {OCGs} or {TSGs} may be an oversimplification, as some genes can exhibit a dual role in cancer development, often impacting the same facet of tumorigenesis ({% cite Bashyam2019 %}). One of the mechanism that has been proposed to partially explain this apparently contradictory effect is the differential usage of isoforms, often referred to as {IS}. This regulatory phenomenon has been demonstrated to have a substantial biological impact in a diverse range of biological contexts, caused by functional diversity potential of the different isoforms ({% cite VittingSeerup2017 %}).
 
 In this tutorial, we aim to perform a genome-wide analysis of {IS} driven by an oncogene fusion gene EWS-FLI1, with the objective of identifying genes of potential clinical relevance and gene regulatory networks on genome-scale.
 
@@ -135,7 +135,7 @@ Next we will retrieve the remaining datasets.
 > <details-title>Dataset subsampling</details-title>
 >
 > As indicated above, for this tutorial the depth of the samples was reduced in order to speed up the time needed to carry out the analysis. This was done as follows, all reads mapping to chromosome 10 were kept and a random fraction of 0.003 were added.
-{: .details} 
+{: .details}
 -->
 
 # Quality assessment
@@ -217,7 +217,7 @@ In order to remove the adaptors we will make use of **fastp**, which is able to 
 
 # RNA-seq mapping and evaluation
 
-Mapping is crucial in genome-guided-based isoform analysis as it allows for the accurate identification and quantification of RNA isoforms present in a sample. That section makes use of two main tools: **RNA STAR**, considered a state-of-the-art mapping tool for RNA-seq data, and **RSeQC**, a critical tool in isoform analysis that provides comprehensive quality assessment metrics and analyses to evaluate the reliability and integrity of RNA-seq data. 
+Mapping is crucial in genome-guided-based isoform analysis as it allows for the accurate identification and quantification of RNA isoforms present in a sample. That section makes use of two main tools: **RNA STAR**, considered a state-of-the-art mapping tool for RNA-seq data, and **RSeQC**, a critical tool in isoform analysis that provides comprehensive quality assessment metrics and analyses to evaluate the reliability and integrity of RNA-seq data.
 
 > <comment-title>Transcriptome-reconstruction approaches</comment-title>
 >
@@ -373,7 +373,7 @@ The first **RNA STAR** run generates three collections: logs, alignments in BAM 
 > 5. {% tool [Unique lines](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_uniq_tool/9.3+galaxy1) %} assuming sorted input file with the following parameters:
 >   - {% icon param-file %} *"File to scan for unique values"*: output of **Sort** {% icon tool %}
 >   - *Only print unique lines*: No
-> 
+>
 > 6. Rename the output as `Splicing database` and change datatype to `interval` (this was the initial datatype but the `cut` tool changed it to `tabular`.)
 >
 >    > <question-title></question-title>
@@ -544,7 +544,7 @@ Other important metric for {AS} analysis is the one provided by the **Junction S
 
 > <comment-title>RSeQC junction saturation details</comment-title>
 >
-> This approach helps identify if the sequencing depth is sufficient for {AS} analysis. However, it relies on the reference gene model for junction comparison, which might not be complete or accurate for all organisms. In addition, it might not provide enough information for novel junction detection, as the sequencing depth might still be insufficient for detecting new splice junctions. 
+> This approach helps identify if the sequencing depth is sufficient for {AS} analysis. However, it relies on the reference gene model for junction comparison, which might not be complete or accurate for all organisms. In addition, it might not provide enough information for novel junction detection, as the sequencing depth might still be insufficient for detecting new splice junctions.
 >
 {: .comment}
 
@@ -554,7 +554,7 @@ Regarding the novel junctions (fig. 8.B), we can appreciate that the number of n
 
 After confirming that the saturation level is good enough, now we will check the output generated by the **RSeQC junction annotation** module; it allows to evaluate both splice junctions (multiple reads show the same splicing event) and splice events (single read level) (fig. 9).
 
-![Figure 09. RSeQC junction annotation plot](../../images/differential_isoform/rseqc_junction_annotation_junctions_plot.png "RSeQC junction annotation. The detected junctions and events are divided in three exclusive categories: known splicing junctions (blue), partial novel splicing junction (one of the splice site is novel) (grey) and new splicing junctions (green). Splice events refer to the number of times a RNA-read is spliced (A). Splice junctions correspond to multiple splicing events spanning the same intron.") 
+![Figure 09. RSeQC junction annotation plot](../../images/differential_isoform/rseqc_junction_annotation_junctions_plot.png "RSeQC junction annotation. The detected junctions and events are divided in three exclusive categories: known splicing junctions (blue), partial novel splicing junction (one of the splice site is novel) (grey) and new splicing junctions (green). Splice events refer to the number of times a RNA-read is spliced (A). Splice junctions correspond to multiple splicing events spanning the same intron.")
 
 According to the results, despite the relatively low (around 0.3%) proportion of reads supporting new (or partially new) splicing events (fig. 9.B), they represent a large proportion of junctions (fig. 9.A).
 
@@ -672,7 +672,7 @@ Now, we can perform the transcriptome quantification in a more accurate way by m
 
 The evaluation of assembled transcriptomes is crucial to assess the quality and accuracy of the transcript reconstruction process. It helps researchers ensure that the assembled transcripts represent the true expression patterns and capture the full diversity of transcripts present in the biological sample.
 
-Two commonly used tools for evaluating assembled transcriptomes are **rnaQUAST** and **GFFCompare**. **rnaAQUAST** is specifically designed for assessing the quality of RNA-seq assemblies by comparing them to a reference genome. On the other hand, **GFFCompare** is a tool used for comparing and annotating assembled transcripts against a reference annotation file. 
+Two commonly used tools for evaluating assembled transcriptomes are **rnaQUAST** and **GFFCompare**. **rnaAQUAST** is specifically designed for assessing the quality of RNA-seq assemblies by comparing them to a reference genome. On the other hand, **GFFCompare** is a tool used for comparing and annotating assembled transcripts against a reference annotation file.
 
 ### Annotation accuracy evaluation with **GFFCompare**
 
@@ -702,7 +702,7 @@ The output of GFFCompare includes several files, which can be used to analyze th
 >
 {: .details}
 
-In order to have an overview of the transcriptome, we can have a look at the **sensitivity** and **precision** metrics, which can be found in the **accuracy stats** file. Sensitivity is defined as the proportion of true positives (found in prediction and in reference) among the total features in reference, while precision is defined as the proportion of true positives among the total predicted features. 
+In order to have an overview of the transcriptome, we can have a look at the **sensitivity** and **precision** metrics, which can be found in the **accuracy stats** file. Sensitivity is defined as the proportion of true positives (found in prediction and in reference) among the total features in reference, while precision is defined as the proportion of true positives among the total predicted features.
 
 > <question-title>Sensitivity and precision</question-title>
 >
@@ -713,7 +713,7 @@ In order to have an overview of the transcriptome, we can have a look at the **s
 > >
 > > 1. At transcript level, precision is 77% and sensitivity 99.4%. The sensitivity is always very high as we provided to Stringtie merge the original GTF. The precision gives an indication on what is the proportion of new transcript compared to the original GTF.
 > > 2. According the stats file, 962 new exons (4.8%) have been identified.
-> > 
+> >
 > {: .solution}
 {: .question}
 
@@ -814,7 +814,7 @@ rnaQUAST generates several metrics to evaluate the quality of transcriptome asse
 >    - *"Disable infer transcripts"*: `Yes`
 >
 > > <warning-title>Significant computational resources and run time</warning-title>
-> > rnaQUAST can require around 2 hours to complete. Meanwhile we recommend you to continue and back to this part later.  
+> > rnaQUAST can require around 2 hours to complete. Meanwhile we recommend you to continue and back to this part later.
 > {: .warning}
 >
 {: .hands_on}
@@ -924,6 +924,12 @@ The first step of the IsoformSwitchAnalyzeR pipeline is to import the required d
 >        - {% icon param-file %} *"Genome annotation (GTF)"*: `gencode.hg19.chr10.gtf`
 >        - {% icon param-file %} *"Transcriptome"*: `Reference transcriptome sequences`
 >        - *"Remove non-conventional chromosomes"*: `Yes`
+>
+> > <warning-title>Choose the parameters carefully</warning-title>
+> > If you are using a RefSeq or Genbank reference, turn off *"Remove non-conventional chromosomes"* parameter.
+> > Generally, RefSeq chromosome IDs contain underscrores and dots (for eg. `NC_000001.11`). In this case, if this parameter is turned on, the tool ignores all the data and results in an error.
+> >
+> {: .warning}
 >
 {: .hands_on}
 
@@ -1158,7 +1164,7 @@ We can appreciate that IsoformSwitchAnalyzeR detects a significant isoform usage
 > > <solution-title></solution-title>
 > >
 > > This isoform uses an additional exon (before last).
-> > 
+> >
 > {: .solution}
 {: .question}
 
@@ -1211,7 +1217,7 @@ A genome-wide analysis is both useful for getting an overview of the extent of {
 >            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: `Pfam_domains.tab` (output of **PfamScan** {% icon tool %})
 >        - *"Include SignalP results"*: `Disabled`
 >        - *"Include prediction of intrinsically disordered Regions (IDR) information"*: `Disabled`
->     
+>
 >
 >   > <comment-title>Only significantly differential isoforms</comment-title>
 >   >
@@ -1318,13 +1324,13 @@ Here, we will evaluate the genome-wide changes in isoform usage. This type of an
 
 ![Figure 28. Genome-wide changes violing plot](../../images/differential_isoform/isoformSwitchAnalyzer_summary.png "Genome-wide changes violin plot. The dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.")
 
-As expected from the previous results, in that case there are not statistically significant genome-wide differences in splicing events. Finally, we can have a look at the remaining plots (fig. 29). 
+As expected from the previous results, in that case there are not statistically significant genome-wide differences in splicing events. Finally, we can have a look at the remaining plots (fig. 29).
 
 ![Figure 29. Genome-wide changes volcano and scatterplots](../../images/differential_isoform/isoformSwitchAnalyzer_volcano.png "Genome-wide isoform switching overview. The volcanoplot represent the -log(Q-value) vs dIF (change in isoform usage from condition) (A). The scaterplot represents the dIF vs gene log2 fold change (B).")
 
 Here we can see that changes in gene expression and isoform switches are not in any way mutually exclusive, as there are many genes which are both differentially expressed (large gene log2FC) and contain isoform switches (color).
 
-<!-- 
+<!--
 
 # Optional exercise: original data analysis
 

@@ -12,10 +12,15 @@ time_estimation: "15m"
 key_points:
   - "The Interactive Tours are a good training object for self-learning at its own speed"
   - "It is now easy to create an Interactive Tour and test it"
-contributors:
+contributions:
+  authorship:
   - bebatut
   - bgruening
   - shiltemann
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 ---
 
 

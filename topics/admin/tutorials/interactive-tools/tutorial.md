@@ -26,6 +26,8 @@ contributions:
     - hexylena
     - abretaud
     - kysrpex
+  funding:
+    - eurosciencegateway
 tags:
   - ansible
   - interactive-tools

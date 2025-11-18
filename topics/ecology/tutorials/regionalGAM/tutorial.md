@@ -19,6 +19,7 @@ tags:
    - Species traits EBV class
    - EBV dataset
    - EBV workflow
+   - biodiversity
 contributors:
     - claraurf
     - emichn

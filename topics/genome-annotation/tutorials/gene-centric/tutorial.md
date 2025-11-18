@@ -21,6 +21,7 @@ tags:
 - eukaryote
 - prokaryote
 - microgalaxy
+- biodiversity
 requirements:
   -
     type: "internal"
@@ -40,6 +41,7 @@ edam_ontology:
 - topic_0623 # Gene and protein families
 - topic_0080 # Sequence analysis
 - topic_0084 # Phylogeny
+- topic_0797 # Comparative genomics
 ---
 
 Despite the rapidly increasing number of fully assembled genomes few genomes are well annotated. This is especially true for large eukaryotic genomes with their complex gene structure and abundance of pseudogenes. And of course do not forget about the [Murthy's law](https://en.wikipedia.org/wiki/Murphy%27s_law): if you are interested in a particular gene the chances are that it will not be annotated in your genome of interest. In this tutorial we will demonstrate how to compare gene structures across a set of vertebrate genomes. So ...
@@ -315,7 +317,7 @@ Another workflow output will represent a single file summarizing genomic locatio
 
 ### Starting notebook
 
-{% include _includes/cyoa-choices.html option1="UseGalaxy.org" option2="Galaxy Europe, Australia, and Others" default="UseGalaxyorg"
+{% include _includes/cyoa-choices.html option1="UseGalaxy.org" option2="Galaxy Europe, Australia, and Others" default="UseGalaxy.org"
        text="If you are on a server with Interactive Tool support (e.g. Galaxy Europe, Australia, and many others), you can choose that option for a more integrated Jupyter Notebook experience." %}
 
 

@@ -11,8 +11,11 @@ objectives:
 time_estimation: 30m
 key_points:
 - A volcano plot can be used to quickly visualize significant genes in RNA-seq results
-contributors:
-- mblue9
+contributions:
+  authorship:
+  - mblue9
+  editing:
+    - dadrasarmin
 requirements:
 - type: internal
   topic_name: transcriptomics
@@ -42,7 +45,19 @@ recordings:
   - SaimMomin12
   bot-timestamp: 1725623696
 
-
+answer_histories:
+- label: "usegalaxy.org"
+  history: https://usegalaxy.org/u/dadrasarmin/h/visualization-of-rna-seq-results-with-volcano-plot
+  date: 2025-04-11
+- label: "usegalaxy.eu"
+  history: https://usegalaxy.eu/u/armin.dadras/h/visualization-of-rna-seq-results-with-volcano-plotunnamed-history
+  date: 2025-04-11
+- label: "usegalaxy.fr"
+  history: https://usegalaxy.fr/u/armin.dadras/h/visualization-of-rna-seq-results-with-volcano-plotunnamed-history
+  date: 2025-04-11
+- label: "usegalaxy.org.au"
+  history: https://usegalaxy.org.au/u/armin.dadras/h/visualization-of-rna-seq-results-with-volcano-plotunnamed-history
+  date: 2025-04-11
 ---
 
 
@@ -51,7 +66,7 @@ Volcano plots are commonly used to display the results of RNA-seq or other omics
 
 To generate a volcano plot of RNA-seq results, we need a file of differentially expressed results which is provided for you here. To generate this file yourself, see the [RNA-seq counts to genes]({% link topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.md %}) tutorial. The file used here was generated from limma-voom but you could use a file from any RNA-seq differential expression tool, such as edgeR or DESeq2, as long as it has the required columns (see below).
 
-The data for this tutorial comes from {% cite Fu2015 %}. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Here we will visualize the results of the luminal pregnant vs lactating comparison.
+The data for this tutorial comes from {% cite Fu2015 %}. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Here, we will visualize the results of the luminal pregnant vs lactating comparison.
 
 
 > <agenda-title></agenda-title>
@@ -80,7 +95,7 @@ We will use two files for this analysis:
 >
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
-> 2. Import the differentially results table.
+> 2. Import the result table of differential gene expression analysis, as well as a list of genes that will be annotated in the volcano plot later.
 >
 >    To import the file, there are two options:
 >    - Option 1: From a shared data library if available (ask your instructor)
@@ -97,40 +112,40 @@ We will use two files for this analysis:
 >      https://zenodo.org/record/2529117/files/volcano_genes
 >      ```
 >
->    - Select *"Type"*: `tabular`
+>    - Select *"Type (set all)"*: `tabular`
 >
 >    After the files import, check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 >
 {: .hands_on}
 
-Click on the {% icon galaxy-eye %} (eye) icon and take a look at the limma-voom file. It should look like below, with 8 columns.
+Click on the {% icon galaxy-eye %} (eye) icon and take a look at the `limma-voom_luminalpregnant-luminallactate` file. It should look like below, with 8 columns.
 
 ![luminal file](../../images/rna-seq-viz-with-volcanoplot/DE_results.png)
 
 ## Create volcano plot highlighting significant genes
 
-First we will create a volcano plot highlighting all significant genes. We will call genes significant here if they have FDR < 0.01 and a log fold change of 0.58 (equivalent to a fold-change of 1.5). These were the values used in the original paper for this dataset.
+First, we will create a volcano plot highlighting all significant genes. We will call genes significant, if they have FDR < 0.01 and a log fold change of 0.58 (equivalent to a fold-change of 1.5). These were the values used in the original paper for this dataset.
 
 > <hands-on-title>Create a Volcano plot</hands-on-title>
 >
-> 1. {% tool [Volcano Plot](toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5) %} to create a volcano plot
->    - {% icon param-file %} *"Specify an input file"*: limma-voom file
->    - {% icon param-select %} *"FDR (adjusted P value)"*: `Column 8`
->    - {% icon param-select %} *"P value (raw)"*: `Column 7`
->    - {% icon param-select %} *"Log Fold Change"*: `Column 4`
->    - {% icon param-select %} *"Labels"*: `Column 2`
->    - {% icon param-text %} *"Significance threshold"*: `0.01`
->    - {% icon param-text %} *"LogFC threshold to colour"*: `0.58`
->    - {% icon param-select %} *"Points to label"*: `None`
+> 1. {% tool [Volcano Plot](toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.7) %} to create a volcano plot:
+>    - *"Specify an input file"*: limma-voom file
+>    - *"FDR (adjusted P value)"*: `Column 8`
+>    - *"P value (raw)"*: `Column 7`
+>    - *"Log Fold Change"*: `Column 4`
+>    - *"Labels"*: `Column 2`
+>    - *"Significance threshold"*: `0.01`
+>    - *"LogFC threshold to colour"*: `0.58`
+>    - *"Points to label"*: `None`
 {: .hands_on}
 
 ![Volcano plot highlighting significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot.png){: width="60%"}
 
-In the plot above the genes are coloured if they pass the thresholds for FDR and Log Fold Change, red if they are upregulated and blue if they are downregulated. You can see in this plot that there are many (hundreds) of significant genes in this dataset.
+In the plot above the genes are coloured if they pass the thresholds for FDR and Log Fold Change. The red dots are upregulated genes and the blue dots are downregulated genes. You can see in this plot that there are many (hundreds) of significant genes in this dataset.
 
 > <question-title></question-title>
 >
@@ -145,12 +160,12 @@ In the plot above the genes are coloured if they pass the thresholds for FDR and
 
 ## Create volcano plot labelling top significant genes
 
-You can also choose to show the labels (e.g. Gene Symbols) for the significant genes with this volcano plot tool. You can select to label all significant or just the top genes. The top genes are those that pass the FDR and logFC thresholds that have the smallest P values. As there are hundreds of significant genes here, too many to sensibly label, let's label the top 10 genes.
+You can also choose to show the labels (e.g. Gene Symbols) for the significant genes with the volcano plot tool. You can select to label all significant or just the top genes. The top genes are those that pass the FDR and logFC thresholds that have the smallest P values. As there are hundreds of significant genes here, too many to sensibly label, let's label the top 10 significant genes.
 
-> <hands-on-title>Create a Volcano plot labelling top genes</hands-on-title>
-> 1. Use the **Rerun** {% icon galaxy-refresh %} button in the History to rerun **Volcano Plot** {% icon tool %} with the same parameters as before except:
->    - {% icon param-select %} *"Points to label"*: `Significant`
->        - {% icon param-text %} *"Only label top most significant"*: `10`
+> <hands-on-title>Create a Volcano plot labelling top 10 significant genes</hands-on-title>
+> 1. Use the **Run Job Again** {% icon galaxy-refresh %} button in the History to re-run {% tool [Volcano Plot](toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.7) %} with the same parameters as before except:
+>    - *"Points to label"*: `Significant`
+>        - *"Only label top most significant"*: `10`
 {: .hands_on}
 
 
@@ -176,11 +191,11 @@ We can also label one or more genes of interest in a volcano plot. This enables 
 ![Volcano genes](../../images/rna-seq-viz-with-volcanoplot/volcano_genes.png){: height="25%"}
 
 > <hands-on-title>Create a Volcano plot labelling genes of interest</hands-on-title>
-> 1. Use the **Rerun** {% icon galaxy-refresh %} button in the History to rerun **Volcano Plot** {% icon tool %} with the same parameters as before except:
->    - {% icon param-select %} *"Points to label"*: `Input from file`
->        - {% icon param-file %} *"File of labels"*: volcano genes file
+> 1. Use the **Run Job Again** {% icon galaxy-refresh %} button in the History to re-run {% tool [Volcano Plot](toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.7) %} with the same parameters as before except:
+>    - *"Points to label"*: `Input from file`
+>        - *"File of labels"*: `volcano_genes`
 >    - In *"Plot Options"*:
->     - {% icon param-check %} *"Label Boxes"*: `Yes`
+>     -   *"Label Boxes"*: `Yes`
 {: .hands_on}
 
 ![Volcano plot labelling genes of interest](../../images/rna-seq-viz-with-volcanoplot/volcanoplot_custom_genes.png){: width="60%"}
@@ -192,14 +207,14 @@ We can also label one or more genes of interest in a volcano plot. This enables 
 >
 >    > <solution-title></solution-title>
 >    >
->    > 1. 29/31 are significant, the genes not in the grey area. 
+>    > 1. 29/31 are significant, the genes that are not in the grey area. 
 >    > 2. The Egf gene is the most statistically significant as it is nearest the top of the plot.
 >    >
 >    {: .solution}
 {: .question}
 
 
-As in the previous plots, genes are coloured if they pass the thresholds for FDR and Log Fold Change. Here all the genes of interest are significant (red or blue) except for two genes, Mcl1 and Gmfg. Gmfg, has an FDR just very slightly outside the significance threshold we used of 0.01 (0.0105). Mcl1 is the authors' gene of interest and they showed that while it's expression did increase at the protein level, it did not increase at the transcription level, as we can see here, suggesting it is regulated post-transcriptionally. 
+As in the previous plots, genes are coloured if they pass the thresholds for FDR and Log Fold Change. Here, all the genes of interest are significant (red or blue) except for two genes, Mcl1 and Gmfg. Gmfg, has an FDR just very slightly outside the significance threshold we used of 0.01 (0.0105). Mcl1 is the authors' gene of interest and they showed that while it's expression did increase at the protein level, it did not increase at the transcription level, as we can see here, suggesting it is regulated post-transcriptionally. 
 
 > <tip-title>R code</tip-title>
 >

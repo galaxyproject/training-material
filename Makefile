@@ -274,6 +274,7 @@ clean: ## clean up junk files
 	@rm -rf vendor
 	@rm -rf node_modules
 	@rm -rf .jekyll-metadata
+	@rm -rf .jekyll-cache
 	@find . -name .DS_Store -exec rm {} \;
 	@find . -name '*~' -exec rm {} \;
 .PHONY: clean

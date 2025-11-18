@@ -34,6 +34,12 @@ contributions:
   - bgruening
   - hexylena
   - ahmedhamidawan
+  reviewing:
+  - Sch-Da
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 subtopic: histories
 recordings:
 - youtube_id: C3_HSgbbDWc
@@ -67,19 +73,19 @@ generates a dataset. These datasets (and the output datasets from later analysis
 # The history panel
 
 All users have one 'current' history, which can be thought of as **a workspace** or **a current working directory** in
-bioinformatics terms. Your current history is displayed in the right hand side of the main 'Analyze Data' Galaxy page in
+bioinformatics terms. Your current history is displayed on the right-hand side of the main 'Analyze Data' Galaxy page in
 what is called the history panel.
 
-![Screenshot of the Galaxy UI with the toolbox, center panel, and history visible](../../images/history.png "Galaxy History is simply the right panel of the interface. It lists all datasets uploaded or produced during an analysis. Galaxy was designed around history with the idea of <i>reproducibility</i> in mind!")
+![Screenshot of the Galaxy UI with the toolbox, center panel, and history visible](../../images/history.png "Galaxy History is simply the right pane of the interface. It lists all datasets uploaded or produced during an analysis. Galaxy was designed around history with the idea of <i>reproducibility</i> in mind!")
 
 The history panel displays output datasets in the order in which they were created, with the oldest/first shown at the
 bottom. As new analyses are done and new output datasets are generated, the newest datasets are added to the top of the
-the history panel. In this way, the history panel displays the history of your **analysis over time**.
+history panel. In this way, the history panel displays the history of your **analysis over time**.
 
 **Users that have registered an account and logged in can have many histories** and the history panel allows switching
 between them and creating new ones. This can be useful to organize different analyses.
 
-**Anonymous users** (if your Galaxy allows them) are users that have not registered an account. Anonymous users are
+**Anonymous users** (if your Galaxy instance allows them) are users that have not registered an account. Anonymous users are
 only allowed one history. Users are encouraged to register and log in with the benefit that they can work on many histories and switch between them.
 
 > <warning-title>Anonymous Users: Beware</warning-title>
@@ -130,27 +136,39 @@ All histories begin with the name 'Unnamed history'. Non-anonymous users can ren
 
 The lower part of the history header contains a number of buttons:
 
-![Buttons for figuring out history size, selecting storage location, and controlling views](../../../../shared/images/history_size_storage_views.png "Using these buttons one can obtain an information about history's disk footpring, change storage options, and control dataset views.")
+![Buttons for figuring out history size, selecting storage location, and controlling views](../../../../shared/images/history_size_storage_views.png "Using these buttons, one can obtain information about history's disk footprint, change storage options, and control dataset views.")
 
 > <warning-title>Some buttons are instance-specific</warning-title>
-> The list of buttons shown above may vary depending on which Galaxy instance you are using. For example, at the time of writing the **Preferred storage** {% icon galaxy-history-storage-choice %} button is only available on https://usegalaxy.org.
+> The list of buttons shown above may vary depending on which Galaxy instance you are using. For example, at the time of writing, the **Preferred storage** {% icon galaxy-history-storage-choice %} button is not available on all Galaxy instances.
 {: .warning}
 
 - {% icon galaxy-history-size %} **History size** - shows history storage overview in the central pane of the interface.
-- {% icon galaxy-history-storage-choice %} **Preferred storage location** - allows users to specify where history datasets will be stored. This button is only available on Galaxy instances with scratch storage such as usegalaxy.org. Scratch storage allows users to much larger storage allocation for a limited amount time.
+- {% icon galaxy-history-storage-choice %} **Preferred storage location** - allows users to specify where history datasets will be stored. It is an optional feature when you have multiple storage locations available. The button might therefore not be visible on all Galaxy instances.
 - {% icon galaxy-show-active %} **Show active** - shows active (non-deleted and non-hidden) datasets in the history.
-- {% icon galaxy-delete %} **Include deleted** - include deleted datasets into the history view. If you delete a dataset is does not disappear unless you explicitly purge it.
-- {% icon galaxy-show-hidden %} **Include hidden** - include hidden datasets into the history view. Any dataset in history can be hidden. For example, workflow executions frequently hide intermediate datasets so that they do now complicate history view. It is a way to hide non-importnat datasets from the view. 
+- {% icon galaxy-delete %} **Include deleted** - includes deleted datasets into the history view. If you delete a dataset, it does not disappear unless you explicitly purge it.
+- {% icon galaxy-show-hidden %} **Include hidden** - include hidden datasets into the history view. Any dataset in history can be hidden. For example, workflow executions frequently hide intermediate datasets so that they do not complicate the history view. It is a way to hide non-important datasets from view. 
 
 # History datasets
 
-So far we only discussed functions and controls affecting the *entrire* history. Yet history is a collection of datasets. Now it is time to discuss interfacse elements of individual datasets.  
+So far, we have only discussed functions and controls affecting the *entire* history. Yet history is a collection of datasets. Now it is time to discuss the interface elements of individual datasets.  
 
 ## Datasets can be individual or bundled into collections
 
 A history dataset can exist by itself, as an independent entity, or as a part of a **collection**. Collections make it possible to analyze datasets with hundreds of thousands of samples.
 
 {% snippet faqs/galaxy/histories_datasets_vs_collections.md box_type="none"%}
+
+### Creating a dataset collection
+
+
+{% snippet faqs/galaxy/collections_build_list.md box_type="none"%}
+
+### Creating a paired collection
+
+{% snippet faqs/galaxy/collections_build_list_paired.md box_type="none"%}
+
+
+
 
 ## United Colors of Galaxy: Dataset states
 
@@ -164,7 +182,7 @@ A history dataset can exist by itself, as an independent entity, or as a part of
 
 ### Hiding and unhiding datasets
 
-Datasets in Galaxy history can be hidden. This is useful for reducing complexity of history. For example, some intermediate datasets generating during an analysis of workflow execution are not important and there is no need to see them. 
+Datasets in a Galaxy history can be hidden. This is useful for reducing the complexity of a history. For example, some intermediate datasets generated during an analysis or workflow execution are not important, and there is no need to see them. 
 
 #### Hiding datasets
 
@@ -176,7 +194,7 @@ Datasets in Galaxy history can be hidden. This is useful for reducing complexity
 
 ### Deleting and undeleting datasets
 
-You can **delete** any dataset in your history. Unless you explicitly tell Galaxy to delete a dataset permanently (see below) this does not immediately remove the dataset from Galaxy" **it is reversible**. When you delete a dataset from the history, it will be removed from the panel but (just like hidden datasets).
+You can **delete** any dataset in your history. Unless you explicitly tell Galaxy to delete a dataset permanently (see below), this does not immediately remove the dataset from Galaxy **it is reversible**. When you delete a dataset from the history, it will be removed from the pane (just like hidden datasets).
 
 #### Deleting datasets
 
@@ -203,4 +221,3 @@ You can **delete** any dataset in your history. Unless you explicitly tell Galax
 
 <!-- Including search to deduplicate -->
 {% include topics/galaxy-interface/tutorials/search/search.md %}
-

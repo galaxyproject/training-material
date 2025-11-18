@@ -31,12 +31,15 @@ key_points:
   - Sophisticated analysis of ChIP-seq data is possible using tools hosted by Galaxy.
   - Genomic dataset analyses require multiple methods of quality assessment to ensure that the data are appropriate for answering the biology question of interest.
   - By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.
-contributors:
+contributions:
+  authorship:
   - malloryfreeberg
   - moheydarian
   - vivekbhr
   - joachimwolff
   - erxleben
+  funding:
+  - deNBI
 ---
 
 

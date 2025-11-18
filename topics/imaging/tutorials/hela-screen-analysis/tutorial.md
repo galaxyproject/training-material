@@ -46,7 +46,7 @@ tags:
 ---
 
 
-This tutorial shows how to segment and extract features from cell nuclei Galaxy for image analysis. As example use case, this tutorial shows you how to compare the phenotypes of PLK1 threated cells in comparison to a control. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/3362976).
+This tutorial shows how to segment and extract features from cell nuclei Galaxy for image analysis. As example use case, this tutorial shows you how to compare the phenotypes of PLK1 threated cells in comparison to a control. The data used in this tutorial is available at [Zenodo]({{ page.zenodo_link }}).
 
 RNA interference (RNAi) is used in the example use case for silencing genes by way of mRNA degradation. Gene knockdown by this method is achieved by introducing small double-stranded interfering RNAs (siRNA) into the cytoplasm. Small interfering RNAs can originate from inside the cell or can be exogenously introduced into the cell. Once introduced into the cell, exogenous siRNAs are processed by the RNA-induced silencing complex (RISC).The siRNA is complementary to the target mRNA to be silenced, and the RISC uses the siRNA as a template for locating the target mRNA. After the RISC localizes to the target mRNA, the RNA is cleaved by a ribonuclease. RNAi is widely used as a laboratory technique for genetic functional analysis. RNAi in organisms such as C. elegans and Drosophila melanogaster provides a quick and inexpensive means of investigating gene function. Insights gained from experimental RNAi use may be useful in identifying potential therapeutic targets, drug development, or other applications. RNA interference is a very useful research tool, allowing investigators to carry out large genetic screens in an effort to identify targets for further research related to a particular pathway, drug, or phenotype.
 
@@ -63,7 +63,7 @@ The example used in this tutorial deals with PLK1 knocked down cells. PLK1 is an
 
 # Getting data
 
-The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei ([more information](https://zenodo.org/record/3360236)). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
+The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei ([more information]({{ page.zenodo_link }})). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -71,11 +71,11 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import {% icon galaxy-upload %} the following dataset from [Zenodo]( https://zenodo.org/record/3362976) or from the data library (ask your instructor).
+> 2. Import {% icon galaxy-upload %} the following dataset from [Zenodo]({{ page.zenodo_link }}) or from the data library (ask your instructor).
 >    - **Important:** Choose the type of data as `zip`.
 >
 >    ```
->    https://zenodo.org/record/3362976/files/B2.zip
+>    {{ page.zenodo_link }}/files/B2.zip
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -87,7 +87,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    - *"Extract single file"*: `Single file`
 >    - *"Filepath"*: `B2--W00026--P00001--Z00000--T00000--dapi.tif`
 >
-> 4. Rename {% icon galaxy-pencil %} the dataset to `testinput.tif`
+> 4. Rename {% icon galaxy-pencil %} the dataset to `testinput.tiff`
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
@@ -99,10 +99,10 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >
 >    {% snippet faqs/galaxy/collections_rename.md %}
 >
-> 7. Import {% icon galaxy-upload %} the following dataset from [Zenodo]( https://zenodo.org/record/3362976) or from the data library (ask your instructor).
+> 7. Import {% icon galaxy-upload %} the following dataset from [Zenodo]({{ page.zenodo_link }}) or from the data library (ask your instructor).
 >    - **Important:** Choose the type of data as `zip`.
 >    ```
->    https://zenodo.org/record/3362976/files/B3.zip
+>    {{ page.zenodo_link }}/files/B3.zip
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -135,7 +135,7 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 > <hands-on-title>Create feature extraction workflow</hands-on-title>
 >
 > 1. {% tool [Filter 2-D image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy1) %} with the following parameters to smooth the image:
->    - {% icon param-file %} *"Input image"*: `testinput.tif` file
+>    - {% icon param-file %} *"Input image"*: `testinput.tiff` file
 >    - *"Filter type"*: `Gaussian`
 >    - *"Sigma"*: `3`
 > 2. {% tool [Threshold image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3) %} with the following parameters to segment the image:
@@ -161,7 +161,7 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 > 6. {% tool [Extract image features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0) %} with the following parameters to extract features the final readout from the segmented objects:
 >    - {% icon param-file %} *"Label map"*: output of {% tool [Filter label map by rules](toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1-4) %}
 >    - *"Use the intensity image to compute additional features"*: `Use intensity image`
->    - {% icon param-file %} *"Intensity image"*: `testinput.tif` file
+>    - {% icon param-file %} *"Intensity image"*: `testinput.tiff` file
 >    - *"Select features to compute"*: `Select features`
 >    - *"Available features"*:
 >      - {% icon param-check %} `Mean Intensity (requires original image)`

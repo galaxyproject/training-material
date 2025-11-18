@@ -17,12 +17,16 @@ key_points:
 - Simulating protein-ligand systems is more complex than simply simulating protein-only systems.
 - There are a range of Galaxy tools for MD simulation (using GROMACS) and analysis.
 - Galaxy makes assembling and scaling up workflows for high-throughput MD straightforward for users.
-contributors:
-- simonbray
-- tsenapathi
-- chrisbarnettster
-- bgruening
-
+contributions:
+  authorship:
+  - simonbray
+  - tsenapathi
+  - chrisbarnettster
+  - bgruening
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 
 recordings:
 - captioners:
