@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6d4fdbb1d02c8a7cdd1da83e131eaa3edde20952",
+		release: "galaxy-training-network@e822f5fe70007fb085e8f1382833c79ea02d14a1",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,14 +68,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Gearing towards production">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-04-08 10:30:29 +0000">
+<meta name="DC.date" content="2025-11-20 10:37:13 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Daniel Blankenberg">
 <meta name="DC.creator" content="Abdulrahman Azab">
-<meta name="DC.creator" content="Martin Čech"><meta name="description" content="# Production server  * Used by multiple people * Designed to be resilient, scalable * Designed to be easily managed  ???  - A production server is a server ready for any number of users. - It is designed to be scalable, easy to manage, and resilient in the face of many users. - Running a production server is not difficult, thanks to ansible.  ---  # Configuration Options  ???  - We will now cover many of the configuration options which are necessary for production.  --- class: reduce90  # Configuring uWSGI  Important options in the `uwsgi` section of `galaxy.yml`  option | description ---- | ---- `http` | port and IP on which to listen for HTTP requests, `:8080` for port `8080` on all network interfaces. **For a production server, you should use `socket:` and a proxy server**. `socket` | port and IP on which to listen for uWSGI protocol requests, `127.0.0.1:8000` for port `8000` on localhost. `processes` | number of uWSGI *web workers*. `threads` | number of threads for each web wor...">
+<meta name="DC.creator" content="Martin Čech"><meta name="description" content="# Production server  * Used by multiple people * Designed to be resilient, scalable * Designed to be easily managed  ???  - A production server is a server ready for any number of users. - It is designed to be scalable, easy to manage, and resilient in the face of many users. - Running a production server is not difficult, thanks to ansible.  ---  # Configuration Options  ???  - We will now cover many of the configuration options which are necessary for production.  --- class: reduce90  # Configuring gunicorn  Important options in the `gunicorn` section of `galaxy.yml`  option | description ---- | ----  `bind` | The socket to bind. `extra_args` | `--forwarded-allow-ips= * ` `preload`| Fork workers after loading the Galaxy Application to save memory. `workers`| Number of Galaxy application processes Gunicorn will spawn. Good starting value is the number of CPUs * 2 + 1 `memory_limit` | (in GB). If the service exceeds the limit, it will be killed.   ???  - Processes and threads can be...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Galaxy Server administration / Gearing towards production / Slides: Gearing towards production">
-        <meta property="og:description" content="# Production server  * Used by multiple people * Designed to be resilient, scalable * Designed to be easily managed  ???  - A production server is a server ready for any number of users. - It is designed to be scalable, easy to manage, and resilient in the face of many users. - Running a production server is not difficult, thanks to ansible.  ---  # Configuration Options  ???  - We will now cover many of the configuration options which are necessary for production.  --- class: reduce90  # Configuring uWSGI  Important options in the `uwsgi` section of `galaxy.yml`  option | description ---- | ---- `http` | port and IP on which to listen for HTTP requests, `:8080` for port `8080` on all network interfaces. **For a production server, you should use `socket:` and a proxy server**. `socket` | port and IP on which to listen for uWSGI protocol requests, `127.0.0.1:8000` for port `8000` on localhost. `processes` | number of uWSGI *web workers*. `threads` | number of threads for each web wor...">
+        <meta property="og:description" content="# Production server  * Used by multiple people * Designed to be resilient, scalable * Designed to be easily managed  ???  - A production server is a server ready for any number of users. - It is designed to be scalable, easy to manage, and resilient in the face of many users. - Running a production server is not difficult, thanks to ansible.  ---  # Configuration Options  ???  - We will now cover many of the configuration options which are necessary for production.  --- class: reduce90  # Configuring gunicorn  Important options in the `gunicorn` section of `galaxy.yml`  option | description ---- | ----  `bind` | The socket to bind. `extra_args` | `--forwarded-allow-ips= * ` `preload`| Fork workers after loading the Galaxy Application to save memory. `workers`| Number of Galaxy application processes Gunicorn will spawn. Good starting value is the number of CPUs * 2 + 1 `memory_limit` | (in GB). If the service exceeds the limit, it will be killed.   ???  - Processes and threads can be...">
         <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
         <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
         <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
@@ -265,7 +265,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		
 
 		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Jan 28, 2019 </div>
-		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Apr 8, 2025 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Nov 20, 2025 </div>
 
 	<hr />
 
@@ -299,45 +299,34 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <hr />
 <p>class: reduce90</p>
 
-<h1 id="configuring-uwsgi">Configuring uWSGI</h1>
+<h1 id="configuring-gunicorn">Configuring gunicorn</h1>
 
-<p>Important options in the <code class="language-plaintext highlighter-rouge">uwsgi</code> section of <code class="language-plaintext highlighter-rouge">galaxy.yml</code></p>
+<p>Important options in the <code class="language-plaintext highlighter-rouge">gunicorn</code> section of <code class="language-plaintext highlighter-rouge">galaxy.yml</code></p>
+
+<p>option | description
+—- | —-</p>
 
 <table>
-  <thead>
-    <tr>
-      <th>option</th>
-      <th>description</th>
-    </tr>
-  </thead>
   <tbody>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">http</code></td>
-      <td>port and IP on which to listen for HTTP requests, <code class="language-plaintext highlighter-rouge">:8080</code> for port <code class="language-plaintext highlighter-rouge">8080</code> on all network interfaces. <strong>For a production server, you should use <code class="language-plaintext highlighter-rouge">socket:</code> and a proxy server</strong>.</td>
+      <td><code class="language-plaintext highlighter-rouge">bind</code></td>
+      <td>The socket to bind.</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">socket</code></td>
-      <td>port and IP on which to listen for uWSGI protocol requests, <code class="language-plaintext highlighter-rouge">127.0.0.1:8000</code> for port <code class="language-plaintext highlighter-rouge">8000</code> on localhost.</td>
+      <td><code class="language-plaintext highlighter-rouge">extra_args</code></td>
+      <td><code class="language-plaintext highlighter-rouge">--forwarded-allow-ips="*"</code></td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">processes</code></td>
-      <td>number of uWSGI <em>web workers</em>.</td>
+      <td><code class="language-plaintext highlighter-rouge">preload</code></td>
+      <td>Fork workers after loading the Galaxy Application to save memory.</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">threads</code></td>
-      <td>number of threads for each web worker.</td>
+      <td><code class="language-plaintext highlighter-rouge">workers</code></td>
+      <td>Number of Galaxy application processes Gunicorn will spawn. Good starting value is the number of CPUs * 2 + 1</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">offload-threads</code></td>
-      <td>number of threads for internal routing requests, 1-2 is sufficient.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">master</code></td>
-      <td>use uWSGI master process manager, defaults to <code class="language-plaintext highlighter-rouge">false</code> for dev compatibility but should be <code class="language-plaintext highlighter-rouge">true</code> in production.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">mule-reload-mercy</code></td>
-      <td>time to gracefully wait for mule shutdown, set &gt; <code class="language-plaintext highlighter-rouge">monitor_thread_join_timeout</code> galaxy option.</td>
+      <td><code class="language-plaintext highlighter-rouge">memory_limit</code></td>
+      <td>(in GB). If the service exceeds the limit, it will be killed.</td>
     </tr>
   </tbody>
 </table>
@@ -345,8 +334,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <p><span>Speaker Notes</span></p>
 
 <ul>
-  <li>Production servers should use socket instead of http in the uwsgi listen section.</li>
-  <li>This is because socket means using the uwsgi protocol which is more efficient.</li>
   <li>Processes and threads can be set, but the defaults are usually good.</li>
 </ul>
 
@@ -392,16 +379,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <td>appends “/{brand}” to the “Galaxy” text in the masthead.</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">logo_url</code></td>
+      <td><code class="language-plaintext highlighter-rouge">logo_src</code></td>
       <td>URL linked by the “Galaxy/brand” text.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">helpsite_url</code></td>
-      <td>URL linked by the “Galaxy Help” link in the “Help” menu.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">wiki_url</code></td>
-      <td>URL linked by the “Wiki” link in the “Help” menu.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">support_url</code></td>
@@ -412,24 +391,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <td>URL linked by the “How to Cite Galaxy” link in the “Help” menu.</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">search_url</code></td>
-      <td>URL linked by the “Search” link in the “Help” menu.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">mailing_lists_url</code></td>
-      <td>URL linked by the “Mailing Lists” link in the “Help” menu.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">screencasts_url</code></td>
-      <td>URL linked by the “Videos” link in the “Help” menu.</td>
-    </tr>
-    <tr>
       <td><code class="language-plaintext highlighter-rouge">terms_url</code></td>
       <td>URL linked by the “Terms and Conditions” link on the registration form.</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">qa_url</code></td>
       <td>URL linked by the “Galaxy Q&amp;A” link in the “Help” menu.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">themes_config_file</code></td>
+      <td>file containing one or more themes for galaxy</td>
     </tr>
   </tbody>
 </table>
@@ -438,40 +409,20 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <ul>
   <li>Brand can be set to denote the identity of your server.</li>
-  <li>Many URLs which appear in the top menu can be modified.</li>
+  <li>Many URLs which appear in the top questionmark menu can be modified.</li>
+  <li>Themes can be added and modified, if more are present users can to pick from them.</li>
 </ul>
 
 <hr />
-<h1 id="adding-a-notice-banner">Adding a Notice Banner</h1>
+<h1 id="notifications-and-broadcasts">Notifications and Broadcasts</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>option</th>
-      <th>sample value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">message_box_visible</code></td>
-      <td><code class="language-plaintext highlighter-rouge">true</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">message_box_content</code></td>
-      <td><code class="language-plaintext highlighter-rouge">Downtime scheduled Sunday at Noon to one.</code></td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">message_box_class</code></td>
-      <td><code class="language-plaintext highlighter-rouge">warning</code> (also: <code class="language-plaintext highlighter-rouge">error</code>, <code class="language-plaintext highlighter-rouge">info</code>)</td>
-    </tr>
-  </tbody>
-</table>
+<p>As an admin, you can send individual notifications to users (groups or roles), or display broadcast notifications to all users (even anonymous users).</p>
 
 <p><span>Speaker Notes</span></p>
 
 <ul>
   <li>Sometimes you wish to broadcast a message to your users, for example when you plan downtime.</li>
-  <li>The message box allows doing this.</li>
+  <li>This admin features let’s you do this and more.</li>
 </ul>
 
 <hr />
@@ -681,9 +632,7 @@ users see. It is a good idea to extend it with things like:</p>
 <hr />
 <p>class: reduce90</p>
 
-<h1 id="configuring-smtp">Configuring SMTP</h1>
-
-<p>SMTP server</p>
+<h1 id="configuring-smtp--emailing">Configuring SMTP &amp; emailing</h1>
 
 <table>
   <thead>
@@ -712,8 +661,6 @@ users see. It is a good idea to extend it with things like:</p>
   </tbody>
 </table>
 
-<p>Addresses</p>
-
 <table>
   <thead>
     <tr>
@@ -734,6 +681,10 @@ users see. It is a good idea to extend it with things like:</p>
       <td><code class="language-plaintext highlighter-rouge">mailing_join_addr</code></td>
       <td>Mailing list to subscribe users to during registration.</td>
     </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">email_domain_blocklist_file</code></td>
+      <td>File containing blocked domains. See https://github.com/disposable-email-domains/disposable-email-domains</td>
+    </tr>
   </tbody>
 </table>
 
@@ -750,7 +701,7 @@ users see. It is a good idea to extend it with things like:</p>
 
 <p>a.k.a. Everything You Always Wanted to Know About <code class="language-plaintext highlighter-rouge">galaxy.yml</code></p>
 <ul>
-  <li><a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/config_schema.yml">config schema</a></li>
+  <li><a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/schemas/config_schema.yml">config schema</a></li>
   <li><a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/sample/galaxy.yml.sample">config sample</a></li>
   <li><a href="https://docs.galaxyproject.org/en/master/admin/config.html">config docs</a></li>
 </ul>
@@ -854,7 +805,7 @@ Tutorial Content is licensed under
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6d4fdbb1d02c8a7cdd1da83e131eaa3edde20952">6d4fdbb</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e822f5fe70007fb085e8f1382833c79ea02d14a1">e822f5f</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

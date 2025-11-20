@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6d4fdbb1d02c8a7cdd1da83e131eaa3edde20952",
+		release: "galaxy-training-network@e822f5fe70007fb085e8f1382833c79ea02d14a1",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Creating a new tutorial">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-03-14 13:13:52 +0000">
+<meta name="DC.date" content="2025-11-20 12:30:31 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Saskia Hiltemann">
@@ -183,7 +183,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-03-14 13:13:52 +0000",
+  "dateModified": "2025-11-20 12:30:31 +0000",
   "datePublished": "2018-06-20 10:15:12 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -239,7 +239,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Creating a new tutorial",
   "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html",
-  "version": 32,
+  "version": 33,
   "timeRequired": "PT15M",
   "teaches": "- Create a tutorial from scratch\n- Link a tutorial to a topic\n- Create hands-on\n- Add technical support for a tutorial",
   "keywords": [
@@ -1916,7 +1916,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 20, 2018 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 14, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 20, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1936,7 +1936,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 2 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 32 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 33 </div>
 
     </blockquote>
     </section>
@@ -1960,10 +1960,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li>it is scalable</li>
 </ul>
 
-<p>In 2016, the Galaxy Training Network decide to set up a new infrastructure for easily delivering Galaxy related training material. The idea was to develop something open, online, based on a community effort, and on top of the Galaxy platform.</p>
+<p>In 2016, the Galaxy Training Network decided to set up a new infrastructure for easily delivering Galaxy-related training material. The idea was to develop something open, online, based on a community effort, and on top of the Galaxy platform.</p>
 
 <p>We took inspiration from <a href="https://software-carpentry.org">Software Carpentry</a> and collected everything on a GitHub repository: <a href="https://github.com/galaxyproject/training-material">https://github.com/galaxyproject/training-material</a>.
-We decided on a structure focusing on tutorials with hands-on activities; fitting both for online self-training but also for workshops. Each tutorial follows the same structure and comes with a virtualised instance allowing you to run the training anywhere you have resources available.</p>
+We decided on a structure focusing on tutorials with hands-on activities; fitting both for online self-training but also for workshops. Each tutorial follows the same structure and comes with a virtualised instance, allowing you to run the training anywhere you have resources available.</p>
 
 <p>Here you will learn how to create a new tutorial by developing a small tutorial explaining how to retrieve climate data from Copernicus (using <strong>Copernicus Climate Data Store</strong> tool).</p>
 
@@ -2008,12 +2008,12 @@ It may require some knowledge that you may not have or do not have the time to l
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-    <p>There are a couple steps to reaching the answer:</p>
+    <p>There are a couple of steps to reaching the answer:</p>
     <ol>
       <li>Search for <code class="language-plaintext highlighter-rouge">Copernicus</code></li>
       <li>Press the <kbd>Enter</kbd> key to search</li>
       <li>Click on the result named <code class="language-plaintext highlighter-rouge">c3s</code></li>
-      <li>At the bottom of this page there is a box labelled “Categories”</li>
+      <li>At the bottom of this page, there is a box labelled “Categories”</li>
     </ol>
 
     <p>It is placed in one category: “Climate Analysis”</p>
@@ -2064,7 +2064,8 @@ It may require some knowledge that you may not have or do not have the time to l
   <li>a YAML file <code class="language-plaintext highlighter-rouge">data-library.yaml</code>  with the links to the input data needed for the tutorial</li>
 </ul>
 
-<p>The most important file is the <code class="language-plaintext highlighter-rouge">tutorial.md</code> where the content of the tutorial is. The other files are not mandatory. They are there to support the tutorial and make it robust and usable across many environments. But they can help a lot in the development of new tutorial.</p>
+<p>The most important file is the <code class="language-plaintext highlighter-rouge">tutorial.md</code>, where the content of the tutorial is. The other files are not mandatory. They are there to support the tutorial and make it robust and usable across many environments. But they can help a lot in the development of a new tutorial.
+The <code class="language-plaintext highlighter-rouge">data-library.yaml</code> is used by Galaxy servers to create a <em>Shared Data Library</em> containing your tutorial data, allowing you quicker access during training courses. If you have defined a <code class="language-plaintext highlighter-rouge">zenodo_link</code> in your tutorial metadata, then the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> file will be automatically added by one of the GTN GitHub Actions if it is missing, so there is no need to add it yourself.</p>
 
 <h1 id="create-the-workflow">Create the workflow</h1>
 
@@ -2072,11 +2073,11 @@ It may require some knowledge that you may not have or do not have the time to l
 
 <p>Most tutorials explain step-by-step a data analysis by running the tools. The steps taken in the tutorial can be represented as a workflow.</p>
 
-<p>Before writing the tutorial, it is a good practice to get a workflow with the different steps that will be run during the tutorial. The workflow does not have to be the final one but at least the major steps. It helps to get a direction for the tutorial but also to generate a skeleton of the tutorial as we will see later.</p>
+<p>Before writing the tutorial, it is a good practice to get a workflow with the different steps that will be run during the tutorial. The workflow does not have to be the final one, but at least the major steps should be included. It helps to get a direction for the tutorial, but also to generate a skeleton of the tutorial, as we will see later.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-use-tools-that-are-available-on-the-toolshed"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Use tools that are available on the ToolShed</div>
-  <p>We recommmend you to use in your workflows, specially for training, tools that are available on the Galaxy ToolShed.</p>
+  <p>We recommend using tools in your workflows, especially for training, that are available on the Galaxy ToolShed.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -2186,8 +2187,8 @@ It may require some knowledge that you may not have or do not have the time to l
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-no-possible-changes-in-the-files-after-publication"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: No possible changes in the files after publication</div>
-        <p>File addition, removal or modification are not allowed after you have published your upload.
-So be careful when you start your upload that all your needed files are ready.</p>
+        <p>File addition, removal or modification is not allowed after you have published your upload.
+So be careful when you start your upload that all the files you need are ready.</p>
 
         <p>The metadata can be changed after publication.</p>
       </blockquote>
@@ -2209,9 +2210,9 @@ So be careful when you start your upload that all your needed files are ready.</
 
 <p>Once we have the workflows and toy dataset (optionally already on Zenodo), we can generate the tutorial folder, including the <code class="language-plaintext highlighter-rouge">tutorial.md</code>.</p>
 
-<p>Writing the tutorial while adding the different tools and their parameters and following good formatting can be quite cumbersome. To help in that process, we developed a training development kit available with <a href="https://planemo.readthedocs.io/en/latest/index.html">Planemo</a>. The tool has several commands. But the main one can be used to create the skeleton of a tutorial (folder, well located, with good structure). It can also take a workflow as input, add it to the <code class="language-plaintext highlighter-rouge">workflows</code> folder. But more interestingly, the tool can extract from the workflow and add in the <code class="language-plaintext highlighter-rouge">tutorial.md</code> file the different steps with which tools to run and which parameters to select. If a Zenodo URL is provided, it also creates the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> file.</p>
+<p>Writing the tutorial while adding the different tools and their parameters, and following good formatting, can be quite cumbersome. To help in that process, we developed a training development kit available with <a href="https://planemo.readthedocs.io/en/latest/index.html">Planemo</a>. The tool has several commands. But the main one can be used to create the skeleton of a tutorial (folder, well-located, with good structure). It can also take a workflow as input and add it to the <code class="language-plaintext highlighter-rouge">workflows</code> folder. But more interestingly, the tool can extract from the workflow and add in the <code class="language-plaintext highlighter-rouge">tutorial.md</code> file the different steps with which tools to run and which parameters to select. If a Zenodo URL is provided, it also creates the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> file.</p>
 
-<p>This tool can be used via the command-line but also via a <a href="https://ptdk.apps.galaxyproject.eu/">webserver</a>. The webserver can take a public workflow that is avialable on <a href="https://usegalaxy.org">usegalaxy.org</a>, <a href="https://usegalaxy.eu">usegalaxy.eu</a> or <a href="https://usegalaxy.org.au">usegalaxy.org.au</a>.</p>
+<p>This tool can be used via the command-line but also via a <a href="https://ptdk.apps.galaxyproject.eu/">webserver</a>. The webserver can take a public workflow that is available on <a href="https://usegalaxy.org">usegalaxy.org</a>, <a href="https://usegalaxy.eu">usegalaxy.eu</a> or <a href="https://usegalaxy.org.au">usegalaxy.org.au</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-create-the-skeleton-of-a-tutorial-using-the-webserver"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Create the skeleton of a tutorial using the webserver</div>
@@ -2224,7 +2225,7 @@ So be careful when you start your upload that all your needed files are ready.</
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-make-a-workflow-public-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-make-a-workflow-public-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Make a workflow public</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span> <em>Workflows</em> in the Galaxy activity bar (on the left side of the screen, or in the top menu bar of older Galaxy instances). You will see a list of all your workflows</li>   <li>Click on the <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <em>Share</em> button of the workflow you would like to publish</li>   <li>Click on <strong>Make Workflow accessible</strong>. This makes the workflow <em>publicly accessible</em> but <em>unlisted</em>.</li>   <li>To also list the workflow for all users on the <em>Public workflows</em> tab of the <i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span> <em>Workflows</em> page, click <strong>Make Workflow publicly available in Published Workflows</strong></li> </ol> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li>Copy the workflow id that can be found in the URL of the current page (after <code class="language-plaintext highlighter-rouge">?id=</code>)</li>
+    <li>Copy the workflow ID that can be found in the URL of the current page (after <code class="language-plaintext highlighter-rouge">?id=</code>)</li>
     <li>Open the <a href="https://ptdk.apps.galaxyproject.eu/">PTDK webserver</a></li>
     <li>Fill in the information
       <ul>
@@ -2247,7 +2248,7 @@ So be careful when you start your upload that all your needed files are ready.</
     <li>
       <p>Download the generated archive</p>
 
-      <p>This archive contains the tutorial skeleton including:</p>
+      <p>This archive contains the tutorial skeleton, including:</p>
       <ul>
         <li>tutorial content, <code class="language-plaintext highlighter-rouge">tutorial.md</code> file, filled with all steps from the workflow and their parameters</li>
         <li>its workflow (<code class="language-plaintext highlighter-rouge">workflow</code> folder)</li>
@@ -2255,7 +2256,7 @@ So be careful when you start your upload that all your needed files are ready.</
       </ul>
     </li>
     <li>
-      <p>Add the new material to Galaxy Training Material by unzip the downloaded archive in the tutorials folder of the topic for the new tutorial</p>
+      <p>Add the new material to Galaxy Training Material by unzipping the downloaded archive in the tutorials folder of the topic for the new tutorial</p>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-using-the-github-interface"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Using the GitHub interface</div>
@@ -2272,7 +2273,7 @@ So be careful when you start your upload that all your needed files are ready.</
           <li>Go to <code class="language-plaintext highlighter-rouge">tutorials</code></li>
           <li>Click on <strong>Create new file</strong></li>
           <li>Type <code class="language-plaintext highlighter-rouge">name/tutorial.md</code>, replacing “name” by the name of your tutorial (not the title)</li>
-          <li>Copy the content of downloaded and edited <code class="language-plaintext highlighter-rouge">tutorial.md</code> file there</li>
+          <li>Copy the content of the downloaded and edited <code class="language-plaintext highlighter-rouge">tutorial.md</code> file there</li>
           <li>Fill the <strong>Commit new file</strong> form</li>
           <li>Create a new branch using the name of the tutorial</li>
           <li>Click on <strong>Propose new file</strong></li>
@@ -2285,16 +2286,16 @@ So be careful when you start your upload that all your needed files are ready.</
 
 </blockquote>
 
-<p>If the workflow is not available on one of the previously listed Galaxy servers, we recommend you to run the tool via the command line:</p>
+<p>If the workflow is not available on one of the previously listed Galaxy servers, we recommend that you run the tool via the command line:</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-create-the-skeleton-of-a-tutorial-via-the-command-line"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Create the skeleton of a tutorial via the command line</div>
 
   <ol>
     <li>
-      <p>Get the workflow id</p>
+      <p>Get the workflow ID</p>
 
-      <p>The id can be found on URL when running, editing or sharing the workflow (after <code class="language-plaintext highlighter-rouge">?id=</code>)</p>
+      <p>The ID can be found on the URL when running, editing or sharing the workflow (after <code class="language-plaintext highlighter-rouge">?id=</code>)</p>
     </li>
     <li>
       <p>Get your API key on the Galaxy instance</p>
@@ -2304,7 +2305,7 @@ So be careful when you start your upload that all your needed files are ready.</
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
-      <p>(If not done yet) Get the Galaxy Training Material repository locally and move in it</p>
+      <p>(If not done yet) Get the Galaxy Training Material repository locally and move into it</p>
 
       <ol>
         <li>(If not done yet) Clone the training material GitHub repository: <code class="language-plaintext highlighter-rouge">git clone https://github.com/galaxyproject/training-material.git</code></li>
@@ -2357,7 +2358,7 @@ So be careful when you start your upload that all your needed files are ready.</
 
 <h1 id="write-the-tutorial">Write the tutorial</h1>
 
-<p>Now that you have the structure in place, you can then fill the tutorial per se.</p>
+<p>Now that you have the structure in place, you can then fill the tutorial, per se.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-write-the-tutorial"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Write the tutorial</div>
@@ -2368,9 +2369,9 @@ So be careful when you start your upload that all your needed files are ready.</
       <p>Fill out the tutorial by following the <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">dedicated tutorial</a></p>
 
       <ol>
-        <li>Add metadata on the top of the tutorial</li>
+        <li>Add metadata at the top of the tutorial</li>
         <li>Add a proper introduction</li>
-        <li>Organize the tutorial in different sections</li>
+        <li>Organize the tutorial into different sections</li>
         <li>Introduce the different concepts and the different steps of the analysis</li>
         <li>Check the hands-on boxes</li>
         <li>Comment on the outputs of the different steps</li>
@@ -2386,7 +2387,7 @@ So be careful when you start your upload that all your needed files are ready.</
 
 <p>The material is stored in a <a href="https://github.com/galaxyproject/training-material">GitHub repository</a>, a code hosting platform for version control and collaboration. So to develop training material, we are following the <a href="https://guides.github.com/introduction/flow/">GitHub flow</a>, which is based on fork, branches, and pull requests.</p>
 
-<p>This can be done online via the GitHub interface or locally on your computer via command-line.</p>
+<p>This can be done online via the GitHub interface or locally on your computer via the command line.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-learning-how-to-contribute"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Learning how to contribute</div>
@@ -2425,7 +2426,7 @@ So be careful when you start your upload that all your needed files are ready.</
   <li>Submit as a Pull Request to GitHub</li>
 </ol>
 
-<p>For the next times, you can make it quicker.</p>
+<p>For the next time, you can make it quicker.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-generation-of-a-tutorial"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generation of a tutorial</div>
@@ -2972,7 +2973,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6d4fdbb1d02c8a7cdd1da83e131eaa3edde20952">6d4fdbb</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e822f5fe70007fb085e8f1382833c79ea02d14a1">e822f5f</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
