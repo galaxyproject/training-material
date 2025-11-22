@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@490d38083b2bfc03198641499eccf8c792e9007c",
+		release: "galaxy-training-network@78d7fcc8ef56bff593850f141f70ab3b39b3567d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,7 +58,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
         <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.91a7a89f.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.b4423456.js' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Customizing the look of Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-11-22 17:16:52 +0000">
+<meta name="DC.date" content="2025-11-22 17:41:53 +0000">
 <meta name="DC.creator" content="Laila Los"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Galaxy Server administration / Customizing the look of Galaxy / Hands-on: Customizing the look of Galaxy">
@@ -180,7 +180,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-11-22 17:16:52 +0000",
+  "dateModified": "2025-11-22 17:41:53 +0000",
   "datePublished": "2023-04-16 09:02:56 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -292,7 +292,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Customizing the look of Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/tutorial.html",
-  "version": 7,
+  "version": 8,
   "timeRequired": "PT45M",
   "teaches": "- Set a brand text for your Galaxy instance\n- Add a custom welcome page to Galaxy\n- Activate and customize themes",
   "keywords": [
@@ -1222,7 +1222,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 2 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 8 </div>
 
     </blockquote>
     </section>
@@ -1280,8 +1280,8 @@ It is an easy way to set your instance apart, and make it more identifiable.</p>
       <div data-commit="Add brand" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
 </span><span class="p">@@ -35,6 +35,9 @@</span> galaxy_job_config:
-    
- galaxy_config:
+<span class="err">
+</span> galaxy_config:
    galaxy:
 <span class="gi">+    # Branding
 +    brand: Mars 🚀
@@ -1357,15 +1357,15 @@ This page can be used to communicate what your instance is about, and share news
 </span><span class="p">@@ -99,6 +99,10 @@</span> galaxy_config:
            - job-handlers
            - workflow-schedulers
-    
-<span class="gi">+galaxy_config_files_public:
+<span class="err">
+</span><span class="gi">+galaxy_config_files_public:
 +  - src: files/galaxy/welcome.html
 +    dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
 +
 </span> galaxy_extra_dirs:
    - /data
-    
-   
+<span class="err">
+</span>   
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1406,8 +1406,8 @@ This will act as the heading for your start-page, which can help assistive techn
 </span><span class="gi">+		alias {{ galaxy_mutable_config_dir }}/welcome.html;
 </span> 		expires 24h;
  	}
-    
-   
+<span class="err">
+</span>   
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1467,15 +1467,15 @@ You can even offer several options, to allow users to switch to the default if t
 <span class="p">@@ -103,6 +104,10 @@</span> galaxy_config_files_public:
    - src: files/galaxy/welcome.html
      dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
-    
-<span class="gi">+galaxy_config_files:
+<span class="err">
+</span><span class="gi">+galaxy_config_files:
 +  - src: files/galaxy/themes.yml
 +    dest: "{{ galaxy_config.galaxy.themes_config_file }}"
 +
 </span> galaxy_extra_dirs:
    - /data
-    
-   
+<span class="err">
+</span>   
 </code></pre></div>      </div>
     </li>
     <li>
@@ -2013,7 +2013,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/490d38083b2bfc03198641499eccf8c792e9007c">490d380</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/78d7fcc8ef56bff593850f141f70ab3b39b3567d">78d7fcc</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
@@ -2037,7 +2037,7 @@ tools: []
 </footer>
 
 
-        <script  async defer src='/training-material/assets/js/bundle.main.91a7a89f.js'></script>
+        <script  async defer src='/training-material/assets/js/bundle.main.b4423456.js'></script>
 
 	
 	

@@ -389,7 +389,8 @@ if m2 and current and len(current) &gt; 0:
     new_diff = from_patch[1]
     chunks.append(prefix_text + &quot;{% raw %}&quot;)
     chunks.append(prefix_text + &quot;```diff&quot;)
-    chunks.extend([f&#39;{prefix}{amount * &quot; &quot;}{line}&#39; for line in new_diff])
+    # Strip trailing whitespace only from context lines (start with space and only contain whitespace)
+    chunks.extend([f&#39;{prefix}{amount * &quot; &quot;}{line}&#39;.rstrip() if line.startswith(&#39; &#39;) and line.strip() == &#39;&#39; else f&#39;{prefix}{amount * &quot; &quot;}{line}&#39; for line in new_diff])
     chunks.append(prefix_text + &quot;{% endraw %}&quot;)
     chunks.append(prefix_text + &quot;```&quot;)
     chunks.append(prefix_text + &#39;{: data-commit=&quot;%s&quot;%s}&#39; % (exp_msg, obs_extra))
