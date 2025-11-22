@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@4fed838ac7460195cb46191a79af67816dee7b2d",
+		release: "galaxy-training-network@e2d6ade06529925832e5ab2436266f813d4257c9",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Installation with Ansible">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-11-18 13:51:53 +0000">
+<meta name="DC.date" content="2025-11-22 17:16:52 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Simon Gladman"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
@@ -182,7 +182,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-11-18 13:51:53 +0000",
+  "dateModified": "2025-11-22 17:16:52 +0000",
   "datePublished": "2019-01-28 10:40:06 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -270,7 +270,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Galaxy Installation with Ansible",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
-  "version": 104,
+  "version": 105,
   "timeRequired": "PT2H30M",
   "teaches": "- Have an understanding of how Galaxy's Ansible roles are structured and interact with one another\n- Be able to use an Ansible playbook to install different flavors of Galaxy for different purposes",
   "keywords": [
@@ -2517,7 +2517,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 28, 2019 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 18, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 22, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -2537,7 +2537,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.1</a> (0 recent ratings, 35 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 104 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 105 </div>
 
     </blockquote>
     </section>
@@ -3588,11 +3588,12 @@ A: They are correlated (because generally new Galaxy versions could introduce e.
 
       <div data-commit="Configure miniconda and galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -0,0 +1,14 @@</span>
+</span><span class="p">@@ -0,0 +1,15 @@</span>
 <span class="gi">+# Galaxy
 +galaxy_create_user: true # False by default, as e.g. you might have a 'galaxy' user provided by LDAP or AD.
 +galaxy_separate_privileges: true # Best practices for security, configuration is owned by 'root' (or a different user) than the processes
 +galaxy_manage_paths: true # False by default as your administrator might e.g. have root_squash enabled on NFS. Here we can create the directories so it's fine.
++galaxy_manage_systemd: true
 +galaxy_layout: root-dir
 +galaxy_root: /srv/galaxy
 +galaxy_user: {name: "{{ galaxy_user_name }}", shell: /bin/bash}
@@ -3632,7 +3633,7 @@ A: They are correlated (because generally new Galaxy versions could introduce e.
 
       <div data-commit="Configure galaxy config" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -12,3 +12,17 @@</span> miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
+</span><span class="p">@@ -13,3 +13,17 @@</span> miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
  miniconda_version: 25.3
  miniconda_distribution: miniconda
  miniconda_channels: ['conda-forge']
@@ -3704,7 +3705,7 @@ So it is not always easy to tell what variables will be set, or what their final
 
       <div data-commit="Configure gravity" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -23,6 +23,32 @@</span> galaxy_config:
+</span><span class="p">@@ -24,6 +24,32 @@</span> galaxy_config:
      job_working_directory: /data/jobs
      object_store_store_by: uuid
      id_secret: "{{ vault_id_secret }}"
@@ -4549,7 +4550,7 @@ Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Consumed 3.381s CPU tim
 
       <div data-commit="Configure nginx, certbot" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -52,3 +52,55 @@</span> galaxy_config:
+</span><span class="p">@@ -53,3 +53,55 @@</span> galaxy_config:
     
  galaxy_extra_dirs:
    - /data
@@ -4968,7 +4969,7 @@ In a training setting there is no need to request certificates that will be trus
 
       <div data-commit="Add job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -13,6 +13,24 @@</span> miniconda_version: 25.3
+</span><span class="p">@@ -14,6 +14,24 @@</span> miniconda_version: 25.3
  miniconda_distribution: miniconda
  miniconda_channels: ['conda-forge']
     
@@ -4993,7 +4994,7 @@ In a training setting there is no need to request certificates that will be trus
 </span> galaxy_config:
    galaxy:
      # Main Configuration
-<span class="p">@@ -23,6 +41,7 @@</span> galaxy_config:
+<span class="p">@@ -24,6 +42,7 @@</span> galaxy_config:
      job_working_directory: /data/jobs
      object_store_store_by: uuid
      id_secret: "{{ vault_id_secret }}"
@@ -5053,7 +5054,7 @@ changed: [gat-0.eu.galaxy.training]
 
       <div data-commit="Add production facing vars" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -42,6 +42,28 @@</span> galaxy_config:
+</span><span class="p">@@ -43,6 +43,28 @@</span> galaxy_config:
      object_store_store_by: uuid
      id_secret: "{{ vault_id_secret }}"
      job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
@@ -5929,7 +5930,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/4fed838ac7460195cb46191a79af67816dee7b2d">4fed838</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e2d6ade06529925832e5ab2436266f813d4257c9">e2d6ade</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
