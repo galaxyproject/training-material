@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6e9a03d8bd795489632f0c8bd86b2b31158c2dad",
+		release: "galaxy-training-network@8f58aa92dc22309f73e43edbc04240d009721842",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Running Jobs on Remote Resources with Pulsar">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-11-22 17:41:53 +0000">
+<meta name="DC.date" content="2025-11-23 14:00:03 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Simon Gladman">
 <meta name="DC.creator" content="Marius van den Beek">
@@ -185,7 +185,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-11-22 17:41:53 +0000",
+  "dateModified": "2025-11-23 14:00:03 +0000",
   "datePublished": "2019-01-28 04:02:36 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -260,7 +260,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Running Jobs on Remote Resources with Pulsar",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/tutorial.html",
-  "version": 53,
+  "version": 54,
   "timeRequired": "PT60M",
   "teaches": "- Have an understanding of what Pulsar is and how it works\n- Install and configure a RabbitMQ message queueing server\n- Install and configure a Pulsar server on a remote linux machine\n- Be able to get Galaxy to send jobs to a remote Pulsar server",
   "keywords": [
@@ -2965,7 +2965,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 28, 2019 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 22, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 23, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -2985,7 +2985,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.0</a> (1 recent ratings, 8 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 53 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 54 </div>
 
     </blockquote>
     </section>
@@ -3299,8 +3299,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </span> certbot_domains:
   - "{{ inventory_hostname }}"
  certbot_agree_tos: --agree-tos
-<span class="p">@@ -228,6 +231,47 @@</span> slurm_config:
-   SelectType: select/cons_res
+<span class="p">@@ -229,6 +232,47 @@</span> slurm_config:
+   SelectType: select/cons_tres
    SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 <span class="err">
 </span><span class="gi">+#Install pip docker package for ansible
@@ -3889,7 +3889,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 </span><span class="p">@@ -54,3 +54,18 @@</span> destinations:
      max_mem: 8
      params:
-       native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00
+       native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --mem={round(mem*1024)} --time={entity.params['walltime']}:00:00
 <span class="gi">+
 +  pulsar:
 +    runner: pulsar_runner
@@ -4487,7 +4487,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6e9a03d8bd795489632f0c8bd86b2b31158c2dad">6e9a03d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8f58aa92dc22309f73e43edbc04240d009721842">8f58aa9</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

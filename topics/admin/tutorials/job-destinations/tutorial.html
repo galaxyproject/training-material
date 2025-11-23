@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6e9a03d8bd795489632f0c8bd86b2b31158c2dad",
+		release: "galaxy-training-network@8f58aa92dc22309f73e43edbc04240d009721842",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Mapping Jobs to Destinations using TPV">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-11-22 17:41:53 +0000">
+<meta name="DC.date" content="2025-11-23 14:00:03 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Nuwan Goonasekera">
@@ -183,7 +183,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-11-22 17:41:53 +0000",
+  "dateModified": "2025-11-23 14:00:03 +0000",
   "datePublished": "2021-01-17 11:37:17 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -239,7 +239,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Mapping Jobs to Destinations using TPV",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html",
-  "version": 40,
+  "version": 41,
   "timeRequired": "PT2H",
   "teaches": "- Know how to map tools to job destinations\n- Be able to use the dynamic job runner to make arbitrary destination mappings\n- Understand the job resource selector config and dynamic rule creation\n- The various ways in which tools can be mapped to destinations, both statically and dynamically\n- How to write a dynamic tool destination (DTD)\n- How to write a dynamic python function destination\n- How to use the job resource parameter selection feature",
   "keywords": [
@@ -2136,7 +2136,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 17, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 22, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 23, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -2156,7 +2156,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.6</a> (0 recent ratings, 11 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 40 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 41 </div>
 
     </blockquote>
     </section>
@@ -2506,7 +2506,7 @@ The file should contain the following content:</p>
 +    runner: slurm
 +    max_accepted_cores: 16
 +    params:
-+      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
++      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --mem={round(mem*1024)}
 +
 </span>   
 </code></pre></div>      </div>
@@ -2517,8 +2517,8 @@ This enables complex matching, including matching against specific versions of t
 
       <p>Destinations must also be defined in TPV itself. Importantly, note that any destinations defined in the job conf are ignored by TPV. Therefore, we have moved all destinations from the job conf to TPV. In addition, we have removed some
 redundancy by using the “inherits” clause in the <code class="language-plaintext highlighter-rouge">slurm</code> destination. This means that slurm will inherit all of the settings defined for singularity, but selectively override some settings. We have additionally
-defined the <code class="language-plaintext highlighter-rouge">native_specification</code> param for SLURM, which is what SLURM uses to allocate resources per job. Note the use of the <code class="language-plaintext highlighter-rouge">{cores}</code>
-parameter within the native specification, which TPV will replace at runtime with the value of cores assigned to the tool.</p>
+defined the <code class="language-plaintext highlighter-rouge">native_specification</code> param for SLURM, which is what SLURM uses to allocate resources per job. Note the use of the <code class="language-plaintext highlighter-rouge">{cores}</code> and <code class="language-plaintext highlighter-rouge">{mem}</code>
+parameter within the native specification, which TPV will replace at runtime with the value of cores and memory assigned to the tool.</p>
 
       <p>Finally, we have also defined a new property named <code class="language-plaintext highlighter-rouge">max_accepted_cores</code>, which is the maximum amount of cores this destination will accept. Since the testing tool requests 2 cores, but only the <code class="language-plaintext highlighter-rouge">slurm</code>
 destination is able to accept jobs greater than 1 core, TPV will automatically route the job to the best matching destination, in this case, slurm.</p>
@@ -2587,7 +2587,7 @@ destination is able to accept jobs greater than 1 core, TPV will automatically r
 <span class="p">@@ -27,4 +34,3 @@</span> destinations:
      max_accepted_cores: 16
      params:
-       native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
+       native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --mem={round(mem*1024)}
 <span class="gd">-
 </span>   
 </code></pre></div>      </div>
@@ -2658,7 +2658,7 @@ Nevertheless, you may still wish to execute these tools with memory adjusted to 
 +    max_cores: 2
 +    max_mem: 8
 </span>     params:
-       native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
+       native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --mem={round(mem*1024)}
    
 </code></pre></div>      </div>
 
@@ -2888,8 +2888,8 @@ This of course assumes that your users are well behaved enough not to choose the
      max_cores: 2
      max_mem: 8
      params:
-<span class="gd">-      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
-</span><span class="gi">+      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00
+<span class="gd">-      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --mem={round(mem*1024)}
+</span><span class="gi">+      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --mem={round(mem*1024)} --time={entity.params['walltime']}:00:00
 </span>   
 </code></pre></div>      </div>
 
@@ -3375,7 +3375,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6e9a03d8bd795489632f0c8bd86b2b31158c2dad">6e9a03d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8f58aa92dc22309f73e43edbc04240d009721842">8f58aa9</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
