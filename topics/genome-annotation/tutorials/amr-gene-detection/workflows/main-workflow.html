@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@8f58aa92dc22309f73e43edbc04240d009721842",
+		release: "galaxy-training-network@2eb2b0b1ea08489d2d8a6f042d4352bcb1126f1b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -343,9 +343,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Galaxy France</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Galaxy Main</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Galaxy Europe</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Galaxy Main</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Import to another server (≥23.0+ only!)</a>
@@ -365,21 +365,21 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   style 2 stroke:#2c3143,stroke-width:4px;
   3["staramr"];
   0 -->|output| 3;
-  f1c98a62-58de-41cc-b3f0-5b9cf9bd442f["Output\nstararm_detailed_summary"];
-  3 --> f1c98a62-58de-41cc-b3f0-5b9cf9bd442f;
-  style f1c98a62-58de-41cc-b3f0-5b9cf9bd442f stroke:#2c3143,stroke-width:4px;
+  7d08580b-83a1-4e60-b507-922c4a4079da["Output\nstararm_detailed_summary"];
+  3 --> 7d08580b-83a1-4e60-b507-922c4a4079da;
+  style 7d08580b-83a1-4e60-b507-922c4a4079da stroke:#2c3143,stroke-width:4px;
   4["Bakta"];
   0 -->|output| 4;
-  269c5b70-0aa7-4992-bf5c-e67389d07c95["Output\nbakta_annotation_summary"];
-  4 --> 269c5b70-0aa7-4992-bf5c-e67389d07c95;
-  style 269c5b70-0aa7-4992-bf5c-e67389d07c95 stroke:#2c3143,stroke-width:4px;
+  91991795-f30b-4aab-98fd-91c94fe53ed6["Output\nbakta_annotation_summary"];
+  4 --> 91991795-f30b-4aab-98fd-91c94fe53ed6;
+  style 91991795-f30b-4aab-98fd-91c94fe53ed6 stroke:#2c3143,stroke-width:4px;
   5["Bowtie2"];
   1 -->|output| 5;
   2 -->|output| 5;
   0 -->|output| 5;
-  6b0289fa-8e4e-4fb9-ad21-471400e5bc6f["Output\nbowtie_mapping_stats"];
-  5 --> 6b0289fa-8e4e-4fb9-ad21-471400e5bc6f;
-  style 6b0289fa-8e4e-4fb9-ad21-471400e5bc6f stroke:#2c3143,stroke-width:4px;
+  ed66454f-a796-4f7c-907b-4f5b1719ffbb["Output\nbowtie_mapping_stats"];
+  5 --> ed66454f-a796-4f7c-907b-4f5b1719ffbb;
+  style ed66454f-a796-4f7c-907b-4f5b1719ffbb stroke:#2c3143,stroke-width:4px;
   6["Select"];
   3 -->|detailed_summary| 6;
   7["Table to GFF3"];
@@ -388,9 +388,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   4 -->|annotation_gff3| 8;
   7 -->|output| 8;
   5 -->|output| 8;
-  824ddb9e-6ce3-495f-8127-60203feb9725["Output\njbrowse_output"];
-  8 --> 824ddb9e-6ce3-495f-8127-60203feb9725;
-  style 824ddb9e-6ce3-495f-8127-60203feb9725 stroke:#2c3143,stroke-width:4px;</pre>
+  7455c2b4-0ce7-4dad-89e5-4683dcb9ac5a["Output\njbrowse_output"];
+  8 --> 7455c2b4-0ce7-4dad-89e5-4683dcb9ac5a;
+  style 7455c2b4-0ce7-4dad-89e5-4683dcb9ac5a stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -668,7 +668,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8f58aa92dc22309f73e43edbc04240d009721842">8f58aa9</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2eb2b0b1ea08489d2d8a6f042d4352bcb1126f1b">2eb2b0b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
