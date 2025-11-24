@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@799cfcd9c742ca6c966b713aa085219b01cb3b93",
+		release: "galaxy-training-network@775f9485bd3ff95e679effb8409ccbe0b18c6467",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -236,20 +236,22 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Author(s)</b>
 			<br/>
 			
+			Maria Doyle
+			
 			
 			<br/>
 
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			4
+			5
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Oct 8, 2020
+			Nov 24, 2025
 
 			<br/>
 
@@ -258,8 +260,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			None Specified, defaults to
-			<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
+			<a href="https://spdx.org/licenses/MIT">MIT</a>
 			
 			<br/>
 
@@ -269,7 +270,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ddcc00; --color-darker: #c5b500; --color-dimmed: #d1c100;">transcriptomics</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #e6d400; --color-darker: #cdbd00; --color-dimmed: #dac800;">transcriptomics</div>
 			
 			</br>
 			
@@ -279,6 +280,10 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<ul>
 			
 			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
+			
+			
+				<li>Uses <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_comments.html">Galaxy Workflow Comments</a></li>
 			
 			
 			</ul>
@@ -336,11 +341,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-viz-with-heatmap2/versions/rna-seq-viz-with-heatmap2">Galaxy France</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-viz-with-heatmap2/versions/rna-seq-viz-with-heatmap2">Galaxy Main</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-viz-with-heatmap2/versions/rna-seq-viz-with-heatmap2">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-viz-with-heatmap2/versions/rna-seq-viz-with-heatmap2">Galaxy Europe</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-viz-with-heatmap2/versions/rna-seq-viz-with-heatmap2">Galaxy Australia</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-viz-with-heatmap2/versions/rna-seq-viz-with-heatmap2">Galaxy Main</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-viz-with-heatmap2/versions/rna-seq-viz-with-heatmap2">Import to another server (≥23.0+ only!)</a>
@@ -352,22 +357,66 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				Download
 			</a>
 			<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nheatmap_genes"];
+  0["ℹ️ Input Dataset\nDE results"];
   style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nnormalized_counts"];
+  1["ℹ️ Input Dataset\nnormalized counts"];
   style 1 stroke:#2c3143,stroke-width:4px;
-  2["Join two Datasets"];
-  1 -->|output| 2;
-  0 -->|output| 2;
-  3["Cut"];
-  2 -->|out_file1| 3;
-  4["Transpose"];
-  3 -->|out_file1| 4;
-  5["heatmap2"];
-  4 -->|out_file| 5;
-  aeb2a365-642e-4820-944c-fff8a4039cf9["Output\nheatmap_pdf"];
-  5 --> aeb2a365-642e-4820-944c-fff8a4039cf9;
-  style aeb2a365-642e-4820-944c-fff8a4039cf9 stroke:#2c3143,stroke-width:4px;</pre>
+  2["ℹ️ Input Dataset\nheatmap genes"];
+  style 2 stroke:#2c3143,stroke-width:4px;
+  3["Filter"];
+  0 -->|output| 3;
+  4["Join two Datasets"];
+  2 -->|output| 4;
+  1 -->|output| 4;
+  5["Filter"];
+  3 -->|out_file1| 5;
+  6["Cut"];
+  4 -->|out_file1| 6;
+  7["Sort"];
+  5 -->|out_file1| 7;
+  8["Sort"];
+  5 -->|out_file1| 8;
+  9["Transpose"];
+  6 -->|out_file1| 9;
+  10["Select first"];
+  7 -->|outfile| 10;
+  11["Select first"];
+  8 -->|outfile| 11;
+  12["Select last"];
+  8 -->|outfile| 12;
+  13["heatmap2"];
+  9 -->|out_file| 13;
+  3145c334-6741-4bc9-8376-fb7eff8b9045["Output\nheatmap custom genes"];
+  13 --> 3145c334-6741-4bc9-8376-fb7eff8b9045;
+  style 3145c334-6741-4bc9-8376-fb7eff8b9045 stroke:#2c3143,stroke-width:4px;
+  14["Join two Datasets"];
+  10 -->|out_file1| 14;
+  1 -->|output| 14;
+  15["Concatenate datasets"];
+  11 -->|out_file1| 15;
+  12 -->|out_file1| 15;
+  16["Sort"];
+  14 -->|out_file1| 16;
+  17["Cut"];
+  14 -->|out_file1| 17;
+  18["Join two Datasets"];
+  15 -->|out_file1| 18;
+  1 -->|output| 18;
+  19["Cut"];
+  16 -->|outfile| 19;
+  20["heatmap2"];
+  17 -->|out_file1| 20;
+  ac189295-2211-41b1-8f9c-d92d24ba1cac["Output\nheatmap top 20 genes"];
+  20 --> ac189295-2211-41b1-8f9c-d92d24ba1cac;
+  style ac189295-2211-41b1-8f9c-d92d24ba1cac stroke:#2c3143,stroke-width:4px;
+  21["heatmap2"];
+  17 -->|out_file1| 21;
+  22["Cut"];
+  18 -->|out_file1| 22;
+  23["heatmap2"];
+  19 -->|out_file1| 23;
+  24["heatmap2"];
+  22 -->|out_file1| 24;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -380,12 +429,17 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				
 				<tr>
 					<td>Input dataset</td>
-					<td>heatmap_genes</td>
+					<td>DE results</td>
 				</tr>
 				
 				<tr>
 					<td>Input dataset</td>
-					<td>normalized_counts</td>
+					<td>normalized counts</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>heatmap genes</td>
 				</tr>
 				
 				</tbody>
@@ -403,7 +457,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/2.2.1+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.2.0+galaxy1</td>
+					<td>heatmap2</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.2.0+galaxy1</td>
 					<td>heatmap2</td>
 					<td></td>
 				</tr>
@@ -430,6 +490,34 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=Filter1">Filter1</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=Show beginning1">Show beginning1</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=Show tail1">Show tail1</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=cat1">cat1</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
 				<td><a href="https://my.galaxy.training/?path=?tool_id=join1">join1</a></td>
 				<td>
 					
@@ -437,23 +525,25 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0">toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/datamash_transpose/22c2a1ac7ae3">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/2.2.1+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/2.2.1+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.2.0+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.2.0+galaxy1</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/ggplot2_heatmap2/4955e9bb96d1">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/ggplot2_heatmap2/48b42ee61bc5">
 						View in ToolShed
 					</a>
 					
@@ -483,6 +573,20 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>7</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/ab44ab5248b7d57bbfb8a9876e7b86f3dc47bc1a">ab44ab524</a></td>
+						<td>2025-11-20 13:40:10</td>
+						<td>lint</td>
+					</tr>
+					
+					<tr>
+						<td>6</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/4ec8ee14f56226dc92113e47cc3609df7aaa5cd6">4ec8ee14f</a></td>
+						<td>2025-11-20 13:32:23</td>
+						<td>update workflow and tests</td>
+					</tr>
 					
 					<tr>
 						<td>5</td>
@@ -600,7 +704,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/799cfcd9c742ca6c966b713aa085219b01cb3b93">799cfcd</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/775f9485bd3ff95e679effb8409ccbe0b18c6467">775f948</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
