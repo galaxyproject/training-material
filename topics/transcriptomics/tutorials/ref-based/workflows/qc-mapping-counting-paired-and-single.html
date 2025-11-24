@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@fb19c7326a3c4feb2dd50ab08544294a0e4b32a5",
+		release: "galaxy-training-network@8981075967955c2ec05537b4cefdf40e1829b0be",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -262,14 +262,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			6
+			7
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Feb 11, 2025
+			Nov 24, 2025
 
 			<br/>
 
@@ -298,7 +298,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<ul>
 			
 			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
 			
+			
+				<li>Uses <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_comments.html">Galaxy Workflow Comments</a></li>
+			
+			
+				<li>Uses <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_subworkflows.html">subworkflows</a></li>
 			
 			</ul>
 
@@ -355,13 +361,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single">Galaxy France</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single">Galaxy Australia</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single">Galaxy Europe</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single">Galaxy France</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single">Galaxy Main</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single">Galaxy Australia</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting-paired-and-single">Import to another server (≥23.0+ only!)</a>
@@ -385,153 +391,129 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   1 -->|output| 4;
   5["Cutadapt"];
   1 -->|output| 5;
-  6["Get gene length"];
+  6["STAR: map single reads"];
   2 -->|output| 6;
-  077640cc-edbb-4185-9eb1-d11b522774af["Output\nGene length"];
-  6 --> 077640cc-edbb-4185-9eb1-d11b522774af;
-  style 077640cc-edbb-4185-9eb1-d11b522774af stroke:#2c3143,stroke-width:4px;
-  7["convert gtf to bed12"];
-  2 -->|output| 7;
-  8["STAR: map single reads"];
-  2 -->|output| 8;
-  3 -->|out1| 8;
-  9["Merge fastqs for Falco"];
-  4 -->|output| 9;
-  0 -->|output| 9;
-  10["Merge Cutadapt reports"];
-  5 -->|report| 10;
-  3 -->|report| 10;
-  11["STAR: map paired reads"];
-  2 -->|output| 11;
-  5 -->|out_pairs| 11;
-  12["count reads per gene for SR"];
-  8 -->|mapped_reads| 12;
-  2 -->|output| 12;
-  13["Falco"];
-  9 -->|output| 13;
-  14["Combine cutadapt results"];
-  10 -->|output| 14;
+  3 -->|out1| 6;
+  7["Merge fastqs for Falco"];
+  4 -->|output| 7;
+  0 -->|output| 7;
+  8["Merge Cutadapt reports"];
+  5 -->|report| 8;
+  3 -->|report| 8;
+  9["STAR: map paired reads"];
+  2 -->|output| 9;
+  5 -->|out_pairs| 9;
+  10["count reads per gene for SR"];
+  6 -->|mapped_reads| 10;
+  2 -->|output| 10;
+  11["Falco"];
+  7 -->|output| 11;
+  12["Combine cutadapt results"];
+  8 -->|output| 12;
   cab760db-5c9d-4a3c-b768-998bfbac6b57["Output\nmultiqc_cutadapt_html"];
-  14 --> cab760db-5c9d-4a3c-b768-998bfbac6b57;
+  12 --> cab760db-5c9d-4a3c-b768-998bfbac6b57;
   style cab760db-5c9d-4a3c-b768-998bfbac6b57 stroke:#2c3143,stroke-width:4px;
-  15["Merge STAR logs"];
-  11 -->|output_log| 15;
-  8 -->|output_log| 15;
-  16["Merge STAR counts"];
-  8 -->|reads_per_gene| 16;
-  11 -->|reads_per_gene| 16;
-  17["count fragments per gene for PE"];
-  11 -->|mapped_reads| 17;
-  2 -->|output| 17;
-  1527b5d7-1681-4934-9d9e-3a5f86ae0fee["Output\nfeatureCounts_gene_length"];
-  17 --> 1527b5d7-1681-4934-9d9e-3a5f86ae0fee;
-  style 1527b5d7-1681-4934-9d9e-3a5f86ae0fee stroke:#2c3143,stroke-width:4px;
-  18["Merge STAR BAM"];
-  11 -->|mapped_reads| 18;
-  8 -->|mapped_reads| 18;
+  13["Merge STAR logs"];
+  9 -->|output_log| 13;
+  6 -->|output_log| 13;
+  14["Merge STAR counts"];
+  6 -->|reads_per_gene| 14;
+  9 -->|reads_per_gene| 14;
+  15["Merge STAR BAM"];
+  6 -->|mapped_reads| 15;
+  9 -->|mapped_reads| 15;
   802017f4-fb1a-4243-b50d-2ed46f746f11["Output\nSTAR_BAM"];
-  18 --> 802017f4-fb1a-4243-b50d-2ed46f746f11;
+  15 --> 802017f4-fb1a-4243-b50d-2ed46f746f11;
   style 802017f4-fb1a-4243-b50d-2ed46f746f11 stroke:#2c3143,stroke-width:4px;
-  19["merge coverage unique strand 1"];
-  8 -->|signal_unique_str1| 19;
-  11 -->|signal_unique_str1| 19;
-  20["merge coverage unique strand 2"];
-  8 -->|signal_unique_str2| 20;
-  11 -->|signal_unique_str2| 20;
-  21["Combine FastQC results"];
-  13 -->|text_file| 21;
+  16["merge coverage unique strand 1"];
+  6 -->|signal_unique_str1| 16;
+  9 -->|signal_unique_str1| 16;
+  17["merge coverage unique strand 2"];
+  6 -->|signal_unique_str2| 17;
+  9 -->|signal_unique_str2| 17;
+  18["count fragments per gene for PE"];
+  9 -->|mapped_reads| 18;
+  2 -->|output| 18;
+  1527b5d7-1681-4934-9d9e-3a5f86ae0fee["Output\nfeatureCounts_gene_length"];
+  18 --> 1527b5d7-1681-4934-9d9e-3a5f86ae0fee;
+  style 1527b5d7-1681-4934-9d9e-3a5f86ae0fee stroke:#2c3143,stroke-width:4px;
+  19["Combine FastQC results"];
+  11 -->|text_file| 19;
   791893e6-6e65-49fe-b71f-4a7b6482e0ce["Output\nmultiqc_falco_html"];
-  21 --> 791893e6-6e65-49fe-b71f-4a7b6482e0ce;
+  19 --> 791893e6-6e65-49fe-b71f-4a7b6482e0ce;
   style 791893e6-6e65-49fe-b71f-4a7b6482e0ce stroke:#2c3143,stroke-width:4px;
-  22["Combine STAR Results"];
-  15 -->|output| 22;
+  20["Combine STAR Results"];
+  13 -->|output| 20;
   204e3f6c-6f54-46f0-b07c-1f31113265e7["Output\nmultiqc_star_html"];
-  22 --> 204e3f6c-6f54-46f0-b07c-1f31113265e7;
+  20 --> 204e3f6c-6f54-46f0-b07c-1f31113265e7;
   style 204e3f6c-6f54-46f0-b07c-1f31113265e7 stroke:#2c3143,stroke-width:4px;
-  23["Remove statistics from STAR counts"];
-  16 -->|output| 23;
-  24["Determine library strandness with STAR"];
+  21["🛠️ Subworkflow\ncount STAR"];
+  style 21 fill:#edd,stroke:#900,stroke-width:4px;
+  2 -->|output| 21;
+  14 -->|output| 21;
+  7b7c698b-4808-4b45-adf1-686f8d273d18["Output\nGene length"];
+  21 --> 7b7c698b-4808-4b45-adf1-686f8d273d18;
+  style 7b7c698b-4808-4b45-adf1-686f8d273d18 stroke:#2c3143,stroke-width:4px;
+  5fee8aff-4023-43f1-a653-f5af5357d798["Output\ncounts_from_star"];
+  21 --> 5fee8aff-4023-43f1-a653-f5af5357d798;
+  style 5fee8aff-4023-43f1-a653-f5af5357d798 stroke:#2c3143,stroke-width:4px;
+  bd3388e6-5b45-4fdc-9780-3efd1c34ebf8["Output\ncounts_from_star_sorted"];
+  21 --> bd3388e6-5b45-4fdc-9780-3efd1c34ebf8;
+  style bd3388e6-5b45-4fdc-9780-3efd1c34ebf8 stroke:#2c3143,stroke-width:4px;
+  22["Run JBrowse2 to check BAM"];
+  15 -->|output| 22;
+  2 -->|output| 22;
+  23["🛠️ Subworkflow\nmore QC"];
+  style 23 fill:#edd,stroke:#900,stroke-width:4px;
+  2 -->|output| 23;
+  15 -->|output| 23;
+  3ea82568-5698-49a7-88fe-91381070aac2["Output\nmultiqc_dup_html"];
+  23 --> 3ea82568-5698-49a7-88fe-91381070aac2;
+  style 3ea82568-5698-49a7-88fe-91381070aac2 stroke:#2c3143,stroke-width:4px;
+  b306cb12-a275-4c6d-b609-47fdc208864b["Output\nmultiqc_reads_per_chrom_html"];
+  23 --> b306cb12-a275-4c6d-b609-47fdc208864b;
+  style b306cb12-a275-4c6d-b609-47fdc208864b stroke:#2c3143,stroke-width:4px;
+  3375d63c-cdc3-4fbb-8a55-6f504c934918["Output\nmultiqc_gene_body_cov_html"];
+  23 --> 3375d63c-cdc3-4fbb-8a55-6f504c934918;
+  style 3375d63c-cdc3-4fbb-8a55-6f504c934918 stroke:#2c3143,stroke-width:4px;
+  f2eed352-ca21-4d65-8810-f5a1d3c282b4["Output\nmultiqc_read_distrib_html"];
+  23 --> f2eed352-ca21-4d65-8810-f5a1d3c282b4;
+  style f2eed352-ca21-4d65-8810-f5a1d3c282b4 stroke:#2c3143,stroke-width:4px;
+  24["🛠️ Subworkflow\nDetermine strandness"];
+  style 24 fill:#edd,stroke:#900,stroke-width:4px;
+  15 -->|output| 24;
+  2 -->|output| 24;
   16 -->|output| 24;
-  fe7b84dd-4466-4fe7-94a8-408f4ac7ed1a["Output\nmultiqc_star_counts_html"];
-  24 --> fe7b84dd-4466-4fe7-94a8-408f4ac7ed1a;
-  style fe7b84dd-4466-4fe7-94a8-408f4ac7ed1a stroke:#2c3143,stroke-width:4px;
+  17 -->|output| 24;
+  14 -->|output| 24;
+  9727824a-3eb2-4430-92d1-b3c40c3041d1["Output\npgt"];
+  24 --> 9727824a-3eb2-4430-92d1-b3c40c3041d1;
+  style 9727824a-3eb2-4430-92d1-b3c40c3041d1 stroke:#2c3143,stroke-width:4px;
+  105313d8-e31a-405d-8fcd-cc5fd93275e2["Output\nmultiqc_star_counts_html"];
+  24 --> 105313d8-e31a-405d-8fcd-cc5fd93275e2;
+  style 105313d8-e31a-405d-8fcd-cc5fd93275e2 stroke:#2c3143,stroke-width:4px;
+  fb810859-f2d0-43f8-ac7c-5c714c5c6805["Output\ninferexperiment"];
+  24 --> fb810859-f2d0-43f8-ac7c-5c714c5c6805;
+  style fb810859-f2d0-43f8-ac7c-5c714c5c6805 stroke:#2c3143,stroke-width:4px;
   25["merge counts from featureCounts"];
-  12 -->|output_short| 25;
-  17 -->|output_short| 25;
+  10 -->|output_short| 25;
+  18 -->|output_short| 25;
   c82388f8-cb09-4fdf-8a0e-03cdad579f37["Output\nfeatureCounts"];
   25 --> c82388f8-cb09-4fdf-8a0e-03cdad579f37;
   style c82388f8-cb09-4fdf-8a0e-03cdad579f37 stroke:#2c3143,stroke-width:4px;
   26["merge featureCounts summary"];
-  12 -->|output_summary| 26;
-  17 -->|output_summary| 26;
-  27["Determine library strandness with Infer Experiment"];
-  18 -->|output| 27;
-  7 -->|bed_file| 27;
-  940ec3ec-dd2e-4d50-bbc4-756945eb16b2["Output\ninferexperiment"];
-  27 --> 940ec3ec-dd2e-4d50-bbc4-756945eb16b2;
-  style 940ec3ec-dd2e-4d50-bbc4-756945eb16b2 stroke:#2c3143,stroke-width:4px;
-  28["Read Distribution"];
-  18 -->|output| 28;
-  7 -->|bed_file| 28;
-  29["Compute read distribution statistics"];
-  18 -->|output| 29;
-  7 -->|bed_file| 29;
-  30["sample BAM"];
-  18 -->|output| 30;
-  31["Get reads number per chromosome"];
-  18 -->|output| 31;
-  32["Remove duplicates"];
-  18 -->|output| 32;
-  33["Determine library strandness with STAR coverage"];
-  19 -->|output| 33;
-  20 -->|output| 33;
-  2 -->|output| 33;
-  89e1b053-03c2-467a-95a0-d2dc404670ec["Output\npgt"];
-  33 --> 89e1b053-03c2-467a-95a0-d2dc404670ec;
-  style 89e1b053-03c2-467a-95a0-d2dc404670ec stroke:#2c3143,stroke-width:4px;
-  34["Select unstranded counts"];
-  23 -->|outfile| 34;
-  bce755be-ac3b-4346-9ac5-1128a287bf00["Output\ncounts_from_star"];
-  34 --> bce755be-ac3b-4346-9ac5-1128a287bf00;
-  style bce755be-ac3b-4346-9ac5-1128a287bf00 stroke:#2c3143,stroke-width:4px;
-  35["Sort counts to get gene with highest count on feature Counts"];
-  25 -->|output| 35;
+  10 -->|output_summary| 26;
+  18 -->|output_summary| 26;
+  27["Sort counts to get gene with highest count on feature Counts"];
+  25 -->|output| 27;
   6aeb4dd1-445f-4c66-b1ce-4bb8faac53db["Output\nfeatureCounts_sorted"];
-  35 --> 6aeb4dd1-445f-4c66-b1ce-4bb8faac53db;
+  27 --> 6aeb4dd1-445f-4c66-b1ce-4bb8faac53db;
   style 6aeb4dd1-445f-4c66-b1ce-4bb8faac53db stroke:#2c3143,stroke-width:4px;
-  36["Combine read asignments statistics"];
-  26 -->|output| 36;
+  28["Combine read asignments statistics"];
+  26 -->|output| 28;
   fc72242a-f23c-4ceb-9a8b-5280343ea5d6["Output\nmultiqc_featureCounts_html"];
-  36 --> fc72242a-f23c-4ceb-9a8b-5280343ea5d6;
-  style fc72242a-f23c-4ceb-9a8b-5280343ea5d6 stroke:#2c3143,stroke-width:4px;
-  37["Combine read distribution on known features"];
-  29 -->|output| 37;
-  07dca732-0ac7-432e-9e61-2b77f921a23b["Output\nmultiqc_read_distrib"];
-  37 --> 07dca732-0ac7-432e-9e61-2b77f921a23b;
-  style 07dca732-0ac7-432e-9e61-2b77f921a23b stroke:#2c3143,stroke-width:4px;
-  38["Get gene body coverage"];
-  30 -->|outputsam| 38;
-  7 -->|bed_file| 38;
-  39["Combine results on reads per chromosome"];
-  31 -->|output| 39;
-  7bfa8ae7-8ffd-46a1-a56e-815ed2c9f1cf["Output\nmultiqc_reads_per_chrom"];
-  39 --> 7bfa8ae7-8ffd-46a1-a56e-815ed2c9f1cf;
-  style 7bfa8ae7-8ffd-46a1-a56e-815ed2c9f1cf stroke:#2c3143,stroke-width:4px;
-  40["Combine results of duplicate reads"];
-  32 -->|metrics_file| 40;
-  66553d0f-e851-458b-82c2-f9b30e394bac["Output\nmultiqc_dup"];
-  40 --> 66553d0f-e851-458b-82c2-f9b30e394bac;
-  style 66553d0f-e851-458b-82c2-f9b30e394bac stroke:#2c3143,stroke-width:4px;
-  41["Sort counts to get gene with highest count on STAR"];
-  34 -->|out_file1| 41;
-  383df008-0ccb-4d67-98dd-33fa5e2db81e["Output\ncounts_from_star_sorted"];
-  41 --> 383df008-0ccb-4d67-98dd-33fa5e2db81e;
-  style 383df008-0ccb-4d67-98dd-33fa5e2db81e stroke:#2c3143,stroke-width:4px;
-  42["Combine gene body coverage"];
-  38 -->|outputtxt| 42;
-  8544ea5c-faf2-44c9-85d6-40658fc9b9eb["Output\nmultiqc_gene_body_cov"];
-  42 --> 8544ea5c-faf2-44c9-85d6-40658fc9b9eb;
-  style 8544ea5c-faf2-44c9-85d6-40658fc9b9eb stroke:#2c3143,stroke-width:4px;</pre>
+  28 --> fc72242a-f23c-4ceb-9a8b-5280343ea5d6;
+  style fc72242a-f23c-4ceb-9a8b-5280343ea5d6 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -572,27 +554,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/length_and_gc_content/length_and_gc_content/0.1.2</td>
-					<td>Gene length and GC content</td>
-					<td>Get gene length</td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357</td>
-					<td>Convert GTF to BED12</td>
-					<td>convert gtf to bed12</td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy4</td>
 					<td>MultiQC</td>
 					<td>Combine cutadapt results</td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy2</td>
-					<td>featureCounts</td>
-					<td>count fragments per gene for PE</td>
 				</tr>
 				
 				<tr>
@@ -602,21 +566,39 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.1.1+galaxy0</td>
+					<td>featureCounts</td>
+					<td>count fragments per gene for PE</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy4</td>
 					<td>MultiQC</td>
 					<td>Combine FastQC results</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy4</td>
 					<td>MultiQC</td>
 					<td>Combine STAR Results</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0</td>
-					<td>MultiQC</td>
-					<td>Determine library strandness with STAR</td>
+					<td></td>
+					<td>count STAR</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td>more QC</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td>Determine strandness</td>
+					<td></td>
 				</tr>
 				
 				<tr>
@@ -626,75 +608,15 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.3+galaxy0</td>
-					<td>Infer Experiment</td>
-					<td>Determine library strandness with Infer Experiment</td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.3+galaxy0</td>
-					<td>Read Distribution</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/3.1.1.0</td>
-					<td>MarkDuplicates</td>
-					<td>Remove duplicates</td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy2</td>
-					<td>pyGenomeTracks</td>
-					<td>Determine library strandness with STAR coverage</td>
-				</tr>
-				
-				<tr>
-					<td>Cut1</td>
-					<td>Cut</td>
-					<td>Select unstranded counts</td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.3+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2</td>
 					<td>Sort</td>
 					<td>Sort counts to get gene with highest count on feature Counts</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy4</td>
 					<td>MultiQC</td>
 					<td>Combine read asignments statistics</td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0</td>
-					<td>MultiQC</td>
-					<td>Combine read distribution on known features</td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0</td>
-					<td>MultiQC</td>
-					<td>Combine results on reads per chromosome</td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0</td>
-					<td>MultiQC</td>
-					<td>Combine results of duplicate reads</td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.3+galaxy1</td>
-					<td>Sort</td>
-					<td>Sort counts to get gene with highest count on STAR</td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0</td>
-					<td>MultiQC</td>
-					<td>Combine gene body coverage</td>
 				</tr>
 				
 				</tbody>
@@ -733,25 +655,15 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.3+galaxy1">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.3+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/86755160afbf">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.3+galaxy1">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.3+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.5+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.5+galaxy2</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/86755160afbf">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
@@ -769,13 +681,15 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.5">toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.5</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.7">toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.7</a></td>
 				<td>
 					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/samtools_idxstats/fa5d3e61e429">
-						View in ToolShed
-					</a>
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/fubar/jbrowse2/jbrowse2/3.6.5+galaxy1">toolshed.g2.bx.psu.edu/repos/fubar/jbrowse2/jbrowse2/3.6.5+galaxy1</a></td>
+				<td>
 					
 				</td>
 			</tr>
@@ -793,11 +707,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy2">toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy2</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.1.1+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.1.1+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/featurecounts/f9d49f5cb597">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/featurecounts/30f6985f0ac7">
 						View in ToolShed
 					</a>
 					
@@ -829,61 +743,29 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy4">toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy4</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/multiqc/f7e2f1eb3a16">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy2">toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy2</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.9+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.9+galaxy0</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/pygenometracks/36b848d5f3ec">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.11a+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.11a+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.11b+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.11b+galaxy0</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/rgrnastar/b0f2be869d6d">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy2">toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy2</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/5.2+galaxy0">toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/5.2+galaxy0</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/samtools_view/6be888be75f9">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.9+galaxy1">toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.9+galaxy1</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/lparsons/cutadapt/5eb7e84243f2">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
@@ -947,6 +829,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>12</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/de4b69f9e026b7afb15af7ca76da7631547d9d48">de4b69f9e</a></td>
+						<td>2025-11-14 16:23:38</td>
+						<td>also update the paired and single workflow</td>
+					</tr>
 					
 					<tr>
 						<td>11</td>
@@ -1106,7 +995,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/fb19c7326a3c4feb2dd50ab08544294a0e4b32a5">fb19c73</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8981075967955c2ec05537b4cefdf40e1829b0be">8981075</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

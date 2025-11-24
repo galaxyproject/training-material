@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@fb19c7326a3c4feb2dd50ab08544294a0e4b32a5",
+		release: "galaxy-training-network@8981075967955c2ec05537b4cefdf40e1829b0be",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -262,14 +262,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			11
+			12
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Feb 11, 2025
+			Nov 24, 2025
 
 			<br/>
 
@@ -297,6 +297,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Features</b>
 			<ul>
 			
+			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
 			
 			
 			
@@ -357,11 +359,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting">Galaxy Europe</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting">Galaxy Main</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting">Galaxy Australia</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting">Galaxy France</a></li>
 					
@@ -401,22 +403,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   11af5c57-91b4-496c-9b0c-b02904963f81["Output\nSTAR_BAM"];
   4 --> 11af5c57-91b4-496c-9b0c-b02904963f81;
   style 11af5c57-91b4-496c-9b0c-b02904963f81 stroke:#2c3143,stroke-width:4px;
-  5["🛠️ Subworkflow\nmore QC"];
-  style 5 fill:#edd,stroke:#900,stroke-width:4px;
-  1 -->|output| 5;
+  5["Run JBrowse2 to check BAM"];
   4 -->|STAR_BAM| 5;
-  f2eed352-ca21-4d65-8810-f5a1d3c282b4["Output\nmultiqc_read_distrib_html"];
-  5 --> f2eed352-ca21-4d65-8810-f5a1d3c282b4;
-  style f2eed352-ca21-4d65-8810-f5a1d3c282b4 stroke:#2c3143,stroke-width:4px;
-  b306cb12-a275-4c6d-b609-47fdc208864b["Output\nmultiqc_reads_per_chrom_html"];
-  5 --> b306cb12-a275-4c6d-b609-47fdc208864b;
-  style b306cb12-a275-4c6d-b609-47fdc208864b stroke:#2c3143,stroke-width:4px;
-  3375d63c-cdc3-4fbb-8a55-6f504c934918["Output\nmultiqc_gene_body_cov_html"];
-  5 --> 3375d63c-cdc3-4fbb-8a55-6f504c934918;
-  style 3375d63c-cdc3-4fbb-8a55-6f504c934918 stroke:#2c3143,stroke-width:4px;
-  3ea82568-5698-49a7-88fe-91381070aac2["Output\nmultiqc_dup_html"];
-  5 --> 3ea82568-5698-49a7-88fe-91381070aac2;
-  style 3ea82568-5698-49a7-88fe-91381070aac2 stroke:#2c3143,stroke-width:4px;
+  1 -->|output| 5;
   6["🛠️ Subworkflow\nDetermine strandness"];
   style 6 fill:#edd,stroke:#900,stroke-width:4px;
   4 -->|STAR_BAM| 6;
@@ -433,34 +422,50 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   105313d8-e31a-405d-8fcd-cc5fd93275e2["Output\nmultiqc_star_counts_html"];
   6 --> 105313d8-e31a-405d-8fcd-cc5fd93275e2;
   style 105313d8-e31a-405d-8fcd-cc5fd93275e2 stroke:#2c3143,stroke-width:4px;
-  7["🛠️ Subworkflow\ncount STAR"];
+  7["🛠️ Subworkflow\nmore QC"];
   style 7 fill:#edd,stroke:#900,stroke-width:4px;
   1 -->|output| 7;
-  4 -->|reads_per_gene| 7;
-  5fee8aff-4023-43f1-a653-f5af5357d798["Output\ncounts_from_star"];
-  7 --> 5fee8aff-4023-43f1-a653-f5af5357d798;
-  style 5fee8aff-4023-43f1-a653-f5af5357d798 stroke:#2c3143,stroke-width:4px;
-  bd3388e6-5b45-4fdc-9780-3efd1c34ebf8["Output\ncounts_from_star_sorted"];
-  7 --> bd3388e6-5b45-4fdc-9780-3efd1c34ebf8;
-  style bd3388e6-5b45-4fdc-9780-3efd1c34ebf8 stroke:#2c3143,stroke-width:4px;
-  7b7c698b-4808-4b45-adf1-686f8d273d18["Output\nGene length"];
-  7 --> 7b7c698b-4808-4b45-adf1-686f8d273d18;
-  style 7b7c698b-4808-4b45-adf1-686f8d273d18 stroke:#2c3143,stroke-width:4px;
-  8["🛠️ Subworkflow\ncount featureCount"];
+  4 -->|STAR_BAM| 7;
+  3ea82568-5698-49a7-88fe-91381070aac2["Output\nmultiqc_dup_html"];
+  7 --> 3ea82568-5698-49a7-88fe-91381070aac2;
+  style 3ea82568-5698-49a7-88fe-91381070aac2 stroke:#2c3143,stroke-width:4px;
+  b306cb12-a275-4c6d-b609-47fdc208864b["Output\nmultiqc_reads_per_chrom_html"];
+  7 --> b306cb12-a275-4c6d-b609-47fdc208864b;
+  style b306cb12-a275-4c6d-b609-47fdc208864b stroke:#2c3143,stroke-width:4px;
+  3375d63c-cdc3-4fbb-8a55-6f504c934918["Output\nmultiqc_gene_body_cov_html"];
+  7 --> 3375d63c-cdc3-4fbb-8a55-6f504c934918;
+  style 3375d63c-cdc3-4fbb-8a55-6f504c934918 stroke:#2c3143,stroke-width:4px;
+  f2eed352-ca21-4d65-8810-f5a1d3c282b4["Output\nmultiqc_read_distrib_html"];
+  7 --> f2eed352-ca21-4d65-8810-f5a1d3c282b4;
+  style f2eed352-ca21-4d65-8810-f5a1d3c282b4 stroke:#2c3143,stroke-width:4px;
+  8["🛠️ Subworkflow\ncount STAR"];
   style 8 fill:#edd,stroke:#900,stroke-width:4px;
   1 -->|output| 8;
-  4 -->|STAR_BAM| 8;
+  4 -->|reads_per_gene| 8;
+  bd3388e6-5b45-4fdc-9780-3efd1c34ebf8["Output\ncounts_from_star_sorted"];
+  8 --> bd3388e6-5b45-4fdc-9780-3efd1c34ebf8;
+  style bd3388e6-5b45-4fdc-9780-3efd1c34ebf8 stroke:#2c3143,stroke-width:4px;
+  7b7c698b-4808-4b45-adf1-686f8d273d18["Output\nGene length"];
+  8 --> 7b7c698b-4808-4b45-adf1-686f8d273d18;
+  style 7b7c698b-4808-4b45-adf1-686f8d273d18 stroke:#2c3143,stroke-width:4px;
+  5fee8aff-4023-43f1-a653-f5af5357d798["Output\ncounts_from_star"];
+  8 --> 5fee8aff-4023-43f1-a653-f5af5357d798;
+  style 5fee8aff-4023-43f1-a653-f5af5357d798 stroke:#2c3143,stroke-width:4px;
+  9["🛠️ Subworkflow\ncount featureCount"];
+  style 9 fill:#edd,stroke:#900,stroke-width:4px;
+  1 -->|output| 9;
+  4 -->|STAR_BAM| 9;
   f0de4714-4df8-4506-90d9-384537ad663e["Output\nfeatureCounts_sorted"];
-  8 --> f0de4714-4df8-4506-90d9-384537ad663e;
+  9 --> f0de4714-4df8-4506-90d9-384537ad663e;
   style f0de4714-4df8-4506-90d9-384537ad663e stroke:#2c3143,stroke-width:4px;
   8b9d6c76-6e82-4691-b8bc-9996d6ae1594["Output\nfeatureCounts_gene_length"];
-  8 --> 8b9d6c76-6e82-4691-b8bc-9996d6ae1594;
+  9 --> 8b9d6c76-6e82-4691-b8bc-9996d6ae1594;
   style 8b9d6c76-6e82-4691-b8bc-9996d6ae1594 stroke:#2c3143,stroke-width:4px;
   152ba01e-d4f2-4227-8812-87648a1c19ea["Output\nmultiqc_featureCounts_html"];
-  8 --> 152ba01e-d4f2-4227-8812-87648a1c19ea;
+  9 --> 152ba01e-d4f2-4227-8812-87648a1c19ea;
   style 152ba01e-d4f2-4227-8812-87648a1c19ea stroke:#2c3143,stroke-width:4px;
   46c7a2e8-7819-4715-a028-7ad1de9ed605["Output\nfeatureCounts"];
-  8 --> 46c7a2e8-7819-4715-a028-7ad1de9ed605;
+  9 --> 46c7a2e8-7819-4715-a028-7ad1de9ed605;
   style 46c7a2e8-7819-4715-a028-7ad1de9ed605 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
@@ -516,13 +521,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				
 				<tr>
 					<td></td>
-					<td>more QC</td>
+					<td>Determine strandness</td>
 					<td></td>
 				</tr>
 				
 				<tr>
 					<td></td>
-					<td>Determine strandness</td>
+					<td>more QC</td>
 					<td></td>
 				</tr>
 				
@@ -567,11 +572,25 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.5+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.5+galaxy2</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/3.1.1.0">toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/3.1.1.0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/d698c222f354">
+					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/picard/3f254c5ced1d">
 						View in ToolShed
 					</a>
 					
@@ -579,37 +598,15 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.7">toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.7</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/d698c222f354">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.4">toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.4</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/fubar/jbrowse2/jbrowse2/3.6.5+galaxy1">toolshed.g2.bx.psu.edu/repos/fubar/jbrowse2/jbrowse2/3.6.5+galaxy1</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/picard/f9242e01365a">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4">toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/samtools_idxstats/7def34e6cf4d">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
@@ -627,11 +624,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.1.1+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.1.1+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/featurecounts/6f66ae7c5f7a">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/featurecounts/30f6985f0ac7">
 						View in ToolShed
 					</a>
 					
@@ -663,11 +660,39 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy4">toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy4</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.9+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.9+galaxy0</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.11b+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.11b+galaxy0</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/5.2+galaxy0">toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/5.2+galaxy0</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.3+galaxy0">toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.3+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/multiqc/abfd8a6544d7">
+					<a href="https://toolshed.g2.bx.psu.edu/view/nilesh/rseqc/27e16a30667a">
 						View in ToolShed
 					</a>
 					
@@ -675,11 +700,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.24.1+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.3+galaxy0">toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.3+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/multiqc/f7e2f1eb3a16">
+					<a href="https://toolshed.g2.bx.psu.edu/view/nilesh/rseqc/27e16a30667a">
 						View in ToolShed
 					</a>
 					
@@ -687,71 +712,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.3+galaxy0">toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.3+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/pygenometracks/360df4999907">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3">toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/rgrnastar/3ea5a2a63fa2">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.9+galaxy1">toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.9+galaxy1</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/lparsons/cutadapt/5eb7e84243f2">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy2">toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy2</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/nilesh/rseqc/473382134e56">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy2">toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy2</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/nilesh/rseqc/473382134e56">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy2">toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy2</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/nilesh/rseqc/473382134e56">
+					<a href="https://toolshed.g2.bx.psu.edu/view/nilesh/rseqc/27e16a30667a">
 						View in ToolShed
 					</a>
 					
@@ -781,6 +746,20 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>23</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/41c1f544226157efa67ec4cdf05d28afe4758868">41c1f5442</a></td>
+						<td>2025-11-14 16:05:06</td>
+						<td>fix workflow (errors with update tools)</td>
+					</tr>
+					
+					<tr>
+						<td>22</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/82f8cc5699fa3c179475b59ec7a014ea874ac542">82f8cc569</a></td>
+						<td>2025-11-14 15:33:54</td>
+						<td>update all tools of the first part</td>
+					</tr>
 					
 					<tr>
 						<td>21</td>
@@ -1010,7 +989,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/fb19c7326a3c4feb2dd50ab08544294a0e4b32a5">fb19c73</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8981075967955c2ec05537b4cefdf40e1829b0be">8981075</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
