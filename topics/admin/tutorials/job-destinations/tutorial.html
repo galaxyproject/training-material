@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@2eb2b0b1ea08489d2d8a6f042d4352bcb1126f1b",
+		release: "galaxy-training-network@a5dfa686ef3fa45b5f78fe7683c9b0e32ed57867",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Mapping Jobs to Destinations using TPV">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-11-23 14:00:03 +0000">
+<meta name="DC.date" content="2025-11-24 08:11:57 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Nuwan Goonasekera">
@@ -183,7 +183,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-11-23 14:00:03 +0000",
+  "dateModified": "2025-11-24 08:11:57 +0000",
   "datePublished": "2021-01-17 11:37:17 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -239,7 +239,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Mapping Jobs to Destinations using TPV",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html",
-  "version": 41,
+  "version": 42,
   "timeRequired": "PT2H",
   "teaches": "- Know how to map tools to job destinations\n- Be able to use the dynamic job runner to make arbitrary destination mappings\n- Understand the job resource selector config and dynamic rule creation\n- The various ways in which tools can be mapped to destinations, both statically and dynamically\n- How to write a dynamic tool destination (DTD)\n- How to write a dynamic python function destination\n- How to use the job resource parameter selection feature",
   "keywords": [
@@ -2136,7 +2136,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 17, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 23, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 24, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -2156,7 +2156,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.6</a> (0 recent ratings, 11 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 41 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 42 </div>
 
     </blockquote>
     </section>
@@ -2409,7 +2409,7 @@ linter can work.</p>
 
       <div data-commit="Add TPV to job config" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -27,34 +27,18 @@</span> galaxy_job_config:
+</span><span class="p">@@ -27,34 +27,15 @@</span> galaxy_job_config:
    handling:
      assign: ['db-skip-locked']
    execution:
@@ -2443,16 +2443,13 @@ linter can work.</p>
 -        - name: APPTAINER_TMPDIR
 -          value: /tmp
 </span><span class="gi">+      tpv_dispatcher:
-+        runner: dynamic
-+        type: python
-+        function: map_tool_to_destination
-+        rules_module: tpv.rules
++        runner: dynamic_tpv
 +        tpv_config_files:
 +          - "{{ tpv_config_dir }}/tpv_rules_local.yml"
 </span>   tools:
      - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
        environment: local_env
-<span class="p">@@ -150,6 +134,8 @@</span> galaxy_config_files_public:
+<span class="p">@@ -150,6 +131,8 @@</span> galaxy_config_files_public:
  galaxy_config_files:
    - src: files/galaxy/themes.yml
      dest: "{{ galaxy_config.galaxy.themes_config_file }}"
@@ -2466,7 +2463,7 @@ linter can work.</p>
     </li>
   </ol>
 
-  <p>Note that we set the default execution environment to the tpv_dispatcher, added the tpv_dispatcher itself as a dynamic runner, and removed all other destinations.
+  <p>Note that we set the default execution environment to the tpv_dispatcher, added the tpv_dispatcher environment using the dynamic_tpv runner, and removed all other destinations.
  Adding TPV as a runner will cause Galaxy to automatically install the <code class="language-plaintext highlighter-rouge">total-perspective-vortex</code> package on startup as a conditional dependency.
  Finally, we added a new config file named <code class="language-plaintext highlighter-rouge">tpv_rules_local.yml</code>, which we will create next.</p>
 
@@ -2627,9 +2624,9 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 
       <div data-commit="Importing TPV shared database via job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -38,6 +38,7 @@</span> galaxy_job_config:
-         function: map_tool_to_destination
-         rules_module: tpv.rules
+</span><span class="p">@@ -35,6 +35,7 @@</span> galaxy_job_config:
+       tpv_dispatcher:
+         runner: dynamic_tpv
          tpv_config_files:
 <span class="gi">+          - https://gxy.io/tpv/db.yml
 </span>           - "{{ tpv_config_dir }}/tpv_rules_local.yml"
@@ -2785,7 +2782,7 @@ This of course assumes that your users are well behaved enough not to choose the
 
       <div data-commit="Configure resources in job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -40,9 +40,17 @@</span> galaxy_job_config:
+</span><span class="p">@@ -37,9 +37,17 @@</span> galaxy_job_config:
          tpv_config_files:
            - https://gxy.io/tpv/db.yml
            - "{{ tpv_config_dir }}/tpv_rules_local.yml"
@@ -2803,7 +2800,7 @@ This of course assumes that your users are well behaved enough not to choose the
 </span><span class="err">
 </span> galaxy_config:
    galaxy:
-<span class="p">@@ -62,6 +70,7 @@</span> galaxy_config:
+<span class="p">@@ -59,6 +67,7 @@</span> galaxy_config:
      object_store_store_by: uuid
      id_secret: "{{ vault_id_secret }}"
      job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
@@ -2811,7 +2808,7 @@ This of course assumes that your users are well behaved enough not to choose the
 </span>     # SQL Performance
      slow_query_log_threshold: 5
      enable_per_request_sql_debugging: true
-<span class="p">@@ -143,6 +152,8 @@</span> galaxy_config_templates:
+<span class="p">@@ -140,6 +149,8 @@</span> galaxy_config_templates:
      dest: "{{ galaxy_config.galaxy.container_resolvers_config_file }}"
    - src: templates/galaxy/config/dependency_resolvers_conf.xml
      dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
@@ -3375,7 +3372,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2eb2b0b1ea08489d2d8a6f042d4352bcb1126f1b">2eb2b0b</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a5dfa686ef3fa45b5f78fe7683c9b0e32ed57867">a5dfa68</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
