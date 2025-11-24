@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@12f82c979083cd6635f1251a341c9e1c70ac1ae2",
+		release: "galaxy-training-network@fb19c7326a3c4feb2dd50ab08544294a0e4b32a5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Connecting Galaxy to a compute cluster">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-11-23 14:00:03 +0000">
+<meta name="DC.date" content="2025-11-24 11:38:43 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Helena Rasche"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
@@ -182,7 +182,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-11-23 14:00:03 +0000",
+  "dateModified": "2025-11-24 11:38:43 +0000",
   "datePublished": "2018-01-07 13:46:01 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -294,7 +294,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Connecting Galaxy to a compute cluster",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html",
-  "version": 64,
+  "version": 65,
   "timeRequired": "PT1H",
   "teaches": "- Be familiar with the basics of installing, configuring, and using Slurm\n- Understand all components of the Galaxy job running stack\n- Understand how the job conf controls Galaxy's jobs subsystem\n- Have a strong understanding of Galaxy job destinations\n- Understand the purpose and function of Galaxy job metrics",
   "keywords": [
@@ -2328,7 +2328,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 7, 2018 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 23, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 24, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -2348,7 +2348,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">2.0</a> (1 recent ratings, 16 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 64 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 65 </div>
 
     </blockquote>
     </section>
@@ -2468,7 +2468,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
       <div data-commit="Add slurm configuration" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -197,6 +197,17 @@</span> nginx_ssl_role: usegalaxy_eu.certbot
+</span><span class="p">@@ -199,6 +199,17 @@</span> nginx_ssl_role: usegalaxy_eu.certbot
  nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
  nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 <span class="err">
@@ -2724,7 +2724,7 @@ sleep </span>30
 
       <div data-commit="Configure slurm destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -21,14 +21,27 @@</span> galaxy_job_config:
+</span><span class="p">@@ -21,14 +21,29 @@</span> galaxy_job_config:
      local_runner:
        load: galaxy.jobs.runners.local:LocalJobRunner
        workers: 4
@@ -2743,6 +2743,8 @@ sleep </span>30
 <span class="gi">+      slurm:
 +        runner: slurm
 +        singularity_enabled: true
++        # Enabling access to the reference data on CVMFS in the container
++        singularity_volumes: $defaults,/cvmfs/data.galaxyproject.org:ro
 +        env:
 +        - name: LC_ALL
 +          value: C
@@ -3654,7 +3656,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/12f82c979083cd6635f1251a341c9e1c70ac1ae2">12f82c9</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/fb19c7326a3c4feb2dd50ab08544294a0e4b32a5">fb19c73</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

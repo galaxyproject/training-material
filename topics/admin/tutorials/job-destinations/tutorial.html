@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@12f82c979083cd6635f1251a341c9e1c70ac1ae2",
+		release: "galaxy-training-network@fb19c7326a3c4feb2dd50ab08544294a0e4b32a5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Mapping Jobs to Destinations using TPV">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-11-24 08:11:57 +0000">
+<meta name="DC.date" content="2025-11-24 11:38:43 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Björn Grüning">
 <meta name="DC.creator" content="Nuwan Goonasekera">
@@ -183,7 +183,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-11-24 08:11:57 +0000",
+  "dateModified": "2025-11-24 11:38:43 +0000",
   "datePublished": "2021-01-17 11:37:17 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -239,7 +239,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Mapping Jobs to Destinations using TPV",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html",
-  "version": 42,
+  "version": 43,
   "timeRequired": "PT2H",
   "teaches": "- Know how to map tools to job destinations\n- Be able to use the dynamic job runner to make arbitrary destination mappings\n- Understand the job resource selector config and dynamic rule creation\n- The various ways in which tools can be mapped to destinations, both statically and dynamically\n- How to write a dynamic tool destination (DTD)\n- How to write a dynamic python function destination\n- How to use the job resource parameter selection feature",
   "keywords": [
@@ -2156,7 +2156,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.6</a> (0 recent ratings, 11 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 42 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 43 </div>
 
     </blockquote>
     </section>
@@ -2254,7 +2254,7 @@ separately.</p>
 
       <div data-commit="Deploy testing tool" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -158,6 +158,9 @@</span> galaxy_config_templates:
+</span><span class="p">@@ -162,6 +162,9 @@</span> galaxy_config_templates:
  galaxy_extra_dirs:
    - /data
 <span class="err">
@@ -2348,7 +2348,7 @@ And of course, Galaxy has an Ansible Role for that.</p>
 
       <div data-commit="Add TPV config dir" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -141,6 +141,8 @@</span> galaxy_config:
+</span><span class="p">@@ -145,6 +145,8 @@</span> galaxy_config:
            - job-handlers
            - workflow-schedulers
 <span class="err">
@@ -2357,7 +2357,7 @@ And of course, Galaxy has an Ansible Role for that.</p>
 </span> galaxy_config_files_public:
    - src: files/galaxy/welcome.html
      dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
-<span class="p">@@ -157,6 +159,11 @@</span> galaxy_config_templates:
+<span class="p">@@ -161,6 +163,11 @@</span> galaxy_config_templates:
 <span class="err">
 </span> galaxy_extra_dirs:
    - /data
@@ -2409,7 +2409,7 @@ linter can work.</p>
 
       <div data-commit="Add TPV to job config" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
-</span><span class="p">@@ -27,34 +27,15 @@</span> galaxy_job_config:
+</span><span class="p">@@ -27,38 +27,15 @@</span> galaxy_job_config:
    handling:
      assign: ['db-skip-locked']
    execution:
@@ -2422,6 +2422,8 @@ linter can work.</p>
 <span class="gd">-      slurm:
 -        runner: slurm
 -        singularity_enabled: true
+-        # Enabling access to the reference data on CVMFS in the container
+-        singularity_volumes: $defaults,/cvmfs/data.galaxyproject.org:ro
 -        env:
 -        - name: LC_ALL
 -          value: C
@@ -2432,6 +2434,8 @@ linter can work.</p>
 -      singularity:
 -        runner: local_runner
 -        singularity_enabled: true
+-        # Enabling access to the reference data on CVMFS in the container
+-        singularity_volumes: $defaults,/cvmfs/data.galaxyproject.org:ro
 -        env:
 -        # Ensuring a consistent collation environment is good for reproducibility.
 -        - name: LC_ALL
@@ -2449,7 +2453,7 @@ linter can work.</p>
 </span>   tools:
      - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
        environment: local_env
-<span class="p">@@ -150,6 +131,8 @@</span> galaxy_config_files_public:
+<span class="p">@@ -154,6 +131,8 @@</span> galaxy_config_files_public:
  galaxy_config_files:
    - src: files/galaxy/themes.yml
      dest: "{{ galaxy_config.galaxy.themes_config_file }}"
@@ -2474,7 +2478,7 @@ The file should contain the following content:</p>
 
       <div data-commit="Add TPV local rules" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/files/galaxy/config/tpv_rules_local.yml
-</span><span class="p">@@ -0,0 +1,30 @@</span>
+</span><span class="p">@@ -0,0 +1,32 @@</span>
 <span class="gi">+tools:
 +  .*testing.*:
 +    cores: 2
@@ -2491,6 +2495,8 @@ The file should contain the following content:</p>
 +    max_accepted_cores: 1
 +    params:
 +      singularity_enabled: true
++      # Enabling access to the reference data on CVMFS in the container
++      singularity_volumes: $defaults,/cvmfs/data.galaxyproject.org:ro
 +    env:
 +      # Ensuring a consistent collation environment is good for reproducibility.
 +      LC_ALL: C
@@ -2581,7 +2587,7 @@ destination is able to accept jobs greater than 1 core, TPV will automatically r
 </span>   .*testing.*:
      cores: 2
      mem: cores * 4
-<span class="p">@@ -27,4 +34,3 @@</span> destinations:
+<span class="p">@@ -29,4 +36,3 @@</span> destinations:
      max_accepted_cores: 16
      params:
        native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --mem={round(mem*1024)}
@@ -2645,7 +2651,7 @@ Nevertheless, you may still wish to execute these tools with memory adjusted to 
 
       <div data-commit="TPV clamp max cores and mem" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/files/galaxy/config/tpv_rules_local.yml
 </span><span class="gi">+++ b/files/galaxy/config/tpv_rules_local.yml
-</span><span class="p">@@ -31,6 +31,9 @@</span> destinations:
+</span><span class="p">@@ -33,6 +33,9 @@</span> destinations:
    slurm:
      inherits: singularity
      runner: slurm
@@ -2881,7 +2887,7 @@ This of course assumes that your users are well behaved enough not to choose the
 </span><span class="err">
 </span> destinations:
    local_env:
-<span class="p">@@ -45,4 +53,4 @@</span> destinations:
+<span class="p">@@ -47,4 +55,4 @@</span> destinations:
      max_cores: 2
      max_mem: 8
      params:
@@ -3372,7 +3378,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/12f82c979083cd6635f1251a341c9e1c70ac1ae2">12f82c9</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/fb19c7326a3c4feb2dd50ab08544294a0e4b32a5">fb19c73</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
