@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@989e31db54fa5d2821c1f901afe390eb9be57443",
+		release: "galaxy-training-network@910d97867418f84f37fcf700a065fd5a95bf2e6d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Interactive Tools">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-09-25 07:54:41 +0000">
+<meta name="DC.date" content="2025-11-27 08:02:12 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Estelle Ancelet">
 <meta name="DC.creator" content="Anthony Bretaudeau"><meta name="description" content="# History  ## 2015  @hexylena, @bgruening, and @jmchilton create Galaxy Interactive Environments (GIEs)  GIEs use Galaxy's *visualization framework* to run certain types of *interactive* visualizations (e.g. Jupyter Notebook)  GIEs run in a docker container on the Galaxy server or a single remote Docker server  ???  - Galaxy Interactive Environments were added to Galaxy in 2015. - They are a type of visualization in Galaxy. - Accessible through the “Visualize” menu or under the visualization button on a dataset with a specific datatype. - Back then, the docker container serving an interactive environment could not be run on a cluster. - More details within Galaxy Interactive Environment slides.  --- # History  ## 2016  Support for Docker Swarm is added, allowing running a cluster for GIEs  ???  - As of 2016, Docker includes swarm mode for natively managing a cluster of Docker Engines called a swarm. - This allowed to run Galaxy Interactive Environment on a cluster.  --- # History  #...">
@@ -231,10 +231,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		<h2>Objectives</h2>
 		<ul>
 		
-		<li><p>Learn the differences between Galaxy Interactive Environments and Galaxy Interactive Tools</p>
-</li>
-		
-		<li><p>Have an understanding of what Galaxy Interactive Tools are and how they work</p>
+		<li><p>Understand what Galaxy Interactive Tools are and how they work</p>
 </li>
 		
 		</ul>
@@ -243,7 +240,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		
 
 		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Mar 2, 2020 </div>
-		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Sep 25, 2024 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Nov 27, 2025 </div>
 
 	<hr />
 
@@ -334,16 +331,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <h1 id="mapping-clients-to-containers">Mapping clients to containers</h1>
 
 <ul>
-  <li>GIEs: Unique path, e.g. <code class="language-plaintext highlighter-rouge">https://galaxy.example.org/gie-proxy/jupyter/...</code>
+  <li>Path-based interactive tools: e.g. <code class="language-plaintext highlighter-rouge">https://galaxy.example.org/interactivetool/ep/&lt;unique-id&gt;/...</code>
     <ul>
       <li>Pros: Works with existing SSL certificate</li>
       <li>Cons: Requires Galaxy session cookie (no sharing), can only run one at a time, closing your browser loses your session</li>
     </ul>
   </li>
-  <li>GxITs: Unique hostname, e.g. <code class="language-plaintext highlighter-rouge">https://&lt;unique-id&gt;.ep.interactivetool.galaxy.example.org/</code>
+  <li>Subdomain-based interactive tools: Unique hostname, e.g. <code class="language-plaintext highlighter-rouge">https://&lt;unique-id&gt;.ep.interactivetool.galaxy.example.org/</code>
     <ul>
-      <li>Pros: Needs no special credentials (can be shared)</li>
-      <li>Cons: Requires <em>wildcard</em> DNS entry and <em>wildcard</em> SSL certificate (not possible at many sites)</li>
+      <li>Pros: Need no special credentials (can be shared)</li>
+      <li>Cons: Require <em>wildcard</em> DNS entry and <em>wildcard</em> SSL certificate (not possible at many sites)</li>
     </ul>
   </li>
 </ul>
@@ -398,9 +395,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <hr />
 <h1 id="proxy-configuration">Proxy configuration</h1>
 
-<p>Use the proxy configuration that ships with Galaxy</p>
-
-<p>Or the <a href="https://galaxy.ansible.com/usegalaxy_eu/gie_proxy">Node.js-based proxy</a></p>
+<p>Use the <a href="https://galaxy.ansible.com/usegalaxy_eu/gie_proxy">Node.js-based proxy</a></p>
 
 <p><span>Speaker Notes</span></p>
 
@@ -435,7 +430,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <ul>
   <li>Pros: Inputs in isolated dir so only that dir is mounted in the container: secure</li>
-  <li>Cons: Has to copy inputs on each Interactive Tool execution: slow</li>
+  <li>Cons: Has to copy inputs on each Interactive Tool execution (slow)</li>
 </ul>
 
 <p><span>Speaker Notes</span></p>
@@ -537,7 +532,7 @@ Tutorial Content is licensed under
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/989e31db54fa5d2821c1f901afe390eb9be57443">989e31d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/910d97867418f84f37fcf700a065fd5a95bf2e6d">910d978</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

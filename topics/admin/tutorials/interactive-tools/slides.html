@@ -21,7 +21,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@989e31db54fa5d2821c1f901afe390eb9be57443",
+		release: "galaxy-training-network@910d97867418f84f37fcf700a065fd5a95bf2e6d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Interactive Tools">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-09-25 07:54:41 +0000">
+<meta name="DC.date" content="2025-11-27 08:02:12 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Estelle Ancelet">
 <meta name="DC.creator" content="Anthony Bretaudeau">
@@ -191,7 +191,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-09-25 07:54:41 +0000",
+  "dateModified": "2025-11-27 08:02:12 +0000",
   "datePublished": "2020-03-02 18:20:57 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -247,12 +247,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "slides",
   "name": "Galaxy Interactive Tools",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/slides.html",
-  "version": 9,
-  "teaches": "- Learn the differences between Galaxy Interactive Environments and Galaxy Interactive Tools\n- Have an understanding of what Galaxy Interactive Tools are and how they work",
+  "version": 10,
+  "teaches": "- Understand what Galaxy Interactive Tools are and how they work",
   "keywords": [
     "Galaxy Server administration"
   ],
-  "description": "## Abstract\n\n# History\n\n\n## Learning Objectives\n\n- Learn the differences between Galaxy Interactive Environments and Galaxy Interactive Tools\n- Have an understanding of what Galaxy Interactive Tools are and how they work\n\n",
+  "description": "## Abstract\n\n# History\n\n\n## Learning Objectives\n\n- Understand what Galaxy Interactive Tools are and how they work\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -1179,9 +1179,7 @@ Useful when presenting.
 ### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
 
 
-- Learn the differences between Galaxy Interactive Environments and Galaxy Interactive Tools
-
-- Have an understanding of what Galaxy Interactive Tools are and how they work
+- Understand what Galaxy Interactive Tools are and how they work
 
 
 ---
@@ -1265,12 +1263,12 @@ You will sometimes see Interactive Tools referred to as Interactive Environments
 ---
 # Mapping clients to containers
 
-- GIEs: Unique path, e.g. `https://galaxy.example.org/gie-proxy/jupyter/...`
+- Path-based interactive tools: e.g. `https://galaxy.example.org/interactivetool/ep/&lt;unique-id&gt;/...`
   - Pros: Works with existing SSL certificate
   - Cons: Requires Galaxy session cookie (no sharing), can only run one at a time, closing your browser loses your session
-- GxITs: Unique hostname, e.g. `https://&lt;unique-id&gt;.ep.interactivetool.galaxy.example.org/`
-  - Pros: Needs no special credentials (can be shared)
-  - Cons: Requires *wildcard* DNS entry and *wildcard* SSL certificate (not possible at many sites)
+- Subdomain-based interactive tools: Unique hostname, e.g. `https://&lt;unique-id&gt;.ep.interactivetool.galaxy.example.org/`
+  - Pros: Need no special credentials (can be shared)
+  - Cons: Require *wildcard* DNS entry and *wildcard* SSL certificate (not possible at many sites)
 
 ???
 
@@ -1317,11 +1315,9 @@ interactivetools_map: /srv/galaxy/var/gie-proxy-sessions.sqlite
 ---
 # Proxy configuration
 
-Use the proxy configuration that ships with Galaxy
+Use the [Node.js-based proxy][galaxyproject-gx-it-proxy]
 
-Or the [Node.js-based proxy][usegalaxy_eu-gie_proxy]
-
-[usegalaxy_eu-gie_proxy]: https://galaxy.ansible.com/usegalaxy_eu/gie_proxy
+[galaxyproject-gx-it-proxy]: https://galaxy.ansible.com/usegalaxy_eu/gie_proxy
 
 ???
 
@@ -1353,7 +1349,7 @@ Solution: [Embedded Pulsar][job-conf-pulsar-embedded]
 Runs a [Pulsar][pulsar] server within the Galaxy application to &quot;stage&quot; (i.e. copy) inputs.
 
 - Pros: Inputs in isolated dir so only that dir is mounted in the container: secure
-- Cons: Has to copy inputs on each Interactive Tool execution: slow
+- Cons: Has to copy inputs on each Interactive Tool execution (slow)
 
 [pulsar]: https://github.com/galaxyproject/pulsar
 
