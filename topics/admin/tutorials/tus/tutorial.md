@@ -90,7 +90,7 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -72,6 +72,9 @@ galaxy_config:
+>    @@ -73,6 +73,9 @@ galaxy_config:
 >         # Tool security
 >         outputs_to_working_directory: true
 >         new_user_dataset_access_role_default_private: true # Make datasets private by default
@@ -100,7 +100,7 @@ To allow your user to upload via TUS, you will need to:
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -92,6 +95,10 @@ galaxy_config:
+>    @@ -93,6 +96,10 @@ galaxy_config:
 >         celery:
 >           concurrency: 2
 >           loglevel: DEBUG
@@ -111,7 +111,7 @@ To allow your user to upload via TUS, you will need to:
 >         handlers:
 >           handler:
 >             processes: 2
->    @@ -161,3 +168,7 @@ nginx_conf_http:
+>    @@ -162,3 +169,7 @@ nginx_conf_http:
 >     nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
@@ -132,7 +132,7 @@ To allow your user to upload via TUS, you will need to:
 >    @@ -28,6 +28,22 @@ server {
 >     		proxy_set_header Upgrade $http_upgrade;
 >     	}
->     
+>
 >    +	location /api/upload/resumable_upload {
 >    +		# Disable request and response buffering
 >    +		proxy_request_buffering     off;
@@ -195,17 +195,11 @@ Congratulations, you've set up TUS for Galaxy.
 >
 > 2. Check the active status of tusd by `systemctl status galaxy-tusd`.
 >
-> 3. Upload a small file! (Pasted text will not pass via TUS)
+> 3. Follow the tusd logs with `journalctl -fu galaxy-tusd`
 >
-> 4. Check the directory `/data/tus/` has been created and it's contents
+> 4. Upload a small file! (Pasted text will not pass via TUS)
 >
->    > <code-in-title>Bash</code-in-title>
->    > ```
->    > sudo tree /data/tus/
->    > ```
->    {: .code-in}
->
-> 5. You'll see files in that directory, a file that's been uploaded and an 'info' file which contains metadata about the upload.
+> 5. Make sure you see `event=UploadFinished` in the tusd logs
 >
 {: .hands_on}
 

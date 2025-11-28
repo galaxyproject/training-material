@@ -294,7 +294,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -176,8 +176,11 @@ certbot_environment: staging
+>    @@ -174,8 +174,11 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - www-data
@@ -306,10 +306,10 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -227,6 +230,47 @@ slurm_config:
->       SelectType: select/cons_res
+>    @@ -226,6 +229,47 @@ slurm_config:
+>       SelectType: select/cons_tres
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
->     
+>
 >    +#Install pip docker package for ansible
 >    +pip_install_packages:
 >    +  - name: docker
@@ -610,7 +610,7 @@ Some of the other options we will be using are:
 >    ```diff
 >    --- /dev/null
 >    +++ b/group_vars/pulsarservers.yml
->    @@ -0,0 +1,51 @@
+>    @@ -0,0 +1,50 @@
 >    +galaxy_server_hostname: "{{ groups['galaxyservers'][0] }}" # Important!!!
 >    +# Put your Galaxy server's fully qualified domain name (FQDN) (or the FQDN of the RabbitMQ server) above.
 >    +
@@ -632,11 +632,10 @@ Some of the other options we will be using are:
 >    +  - drmaa
 >    +  # kombu needed if using a message queue
 >    +  - kombu
->    +  # amqp 5.0.3 changes behaviour in an unexpected way, pin for now.
->    +  - 'amqp==5.0.2'
->    +  # psutil and pylockfile are optional dependencies but can make Pulsar
->    +  # more robust in small ways.
+>    +  # psutil allows pulsar's local job runner to kill processes effictively.
 >    +  - psutil
+>    +  # temporary patch until setuptools is eliminated
+>    +  - setuptools
 >    +
 >    +pulsar_yaml_config:
 >    +  staging_directory: "{{ pulsar_staging_dir }}"
@@ -777,7 +776,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -23,6 +23,16 @@ galaxy_job_config:
+>    @@ -24,6 +24,16 @@ galaxy_job_config:
 >         slurm:
 >           load: galaxy.jobs.runners.slurm:SlurmJobRunner
 >           drmaa_library_path: /usr/lib/slurm-drmaa/lib/libdrmaa.so.1
@@ -804,10 +803,10 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```diff
 >    --- a/files/galaxy/config/tpv_rules_local.yml
 >    +++ b/files/galaxy/config/tpv_rules_local.yml
->    @@ -54,3 +54,18 @@ destinations:
+>    @@ -56,3 +56,18 @@ destinations:
 >         max_mem: 8
 >         params:
->           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00
+>           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --mem={round(mem*1024)} --time={entity.params['walltime']}:00:00
 >    +
 >    +  pulsar:
 >    +    runner: pulsar_runner
@@ -855,7 +854,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    +    scheduling:
 >    +      require:
 >    +        - pulsar
->     
+>
 >     destinations:
 >       local_env:
 >    {% endraw %}
@@ -905,7 +904,7 @@ Now we will upload a small set of data to run bwa-mem with.
 >    As soon as you press *execute* Galaxy will send the job to the pulsar server. You can watch the log in Galaxy using:
 >
 >    ```
->    journalctl -fu galaxy
+>    journalctl -fu galaxy-*
 >    ```
 >
 >    You can watch the log in Pulsar by ssh'ing to it and tailing the log file with:

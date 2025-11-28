@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Quantification of single-molecule RNA fluorescence in situ hybridization (smFISH) in yeast cell lines"
 level: Introductory
+subtopic: analyses
 questions:
   - "How do I analyze fluorescence markers in a 2D image?"
   - "How do I create labels from the detected bright spots?"
@@ -29,9 +30,10 @@ contributions:
   reviewing:
     - kostrykin
 tags:
-  - RNA
-  - smFISH
-  - bioimaging
+  - IDR dataset
+  - Spot detection
+  - Rasterisation
+  - Overlay
 ---
 
 

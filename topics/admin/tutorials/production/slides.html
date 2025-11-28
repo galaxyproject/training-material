@@ -36,24 +36,21 @@ subtopic: maintenance
 ---
 class: reduce90
 
-# Configuring uWSGI
+# Configuring gunicorn
 
-Important options in the `uwsgi` section of `galaxy.yml`
+Important options in the `gunicorn` section of `galaxy.yml`
 
 option | description
 ---- | ----
-`http` | port and IP on which to listen for HTTP requests, `:8080` for port `8080` on all network interfaces. **For a production server, you should use `socket:` and a proxy server**.
-`socket` | port and IP on which to listen for uWSGI protocol requests, `127.0.0.1:8000` for port `8000` on localhost.
-`processes` | number of uWSGI *web workers*.
-`threads` | number of threads for each web worker.
-`offload-threads` | number of threads for internal routing requests, 1-2 is sufficient.
-`master` | use uWSGI master process manager, defaults to `false` for dev compatibility but should be `true` in production.
-`mule-reload-mercy` | time to gracefully wait for mule shutdown, set > `monitor_thread_join_timeout` galaxy option.
+
+`bind` | The socket to bind.
+`extra_args` | `--forwarded-allow-ips="*"`
+`preload`| Fork workers after loading the Galaxy Application to save memory.
+`workers`| Number of Galaxy application processes Gunicorn will spawn. Good starting value is the number of CPUs * 2 + 1
+`memory_limit` | (in GB). If the service exceeds the limit, it will be killed. 
 
 ???
 
-- Production servers should use socket instead of http in the uwsgi listen section.
-- This is because socket means using the uwsgi protocol which is more efficient.
 - Processes and threads can be set, but the defaults are usually good.
 
 ---
@@ -82,35 +79,28 @@ option | description
 option | description
 ---- | ----
 `brand` | appends "/{brand}" to the "Galaxy" text in the masthead.
-`logo_url` | URL linked by the "Galaxy/brand" text.
-`helpsite_url` | URL linked by the "Galaxy Help" link in the "Help" menu.
-`wiki_url` | URL linked by the "Wiki" link in the "Help" menu.
+`logo_src` | URL linked by the "Galaxy/brand" text.
 `support_url` | URL linked by the "Support" link in the "Help" menu.
 `citation_url` | URL linked by the "How to Cite Galaxy" link in the "Help" menu.
-`search_url` | URL linked by the "Search" link in the "Help" menu.
-`mailing_lists_url` | URL linked by the "Mailing Lists" link in the "Help" menu.
-`screencasts_url` | URL linked by the "Videos" link in the "Help" menu.
 `terms_url` | URL linked by the "Terms and Conditions" link on the registration form.
 `qa_url` | URL linked by the "Galaxy Q&A" link in the "Help" menu.
+`themes_config_file` | file containing one or more themes for galaxy
 
 ???
 
 - Brand can be set to denote the identity of your server.
-- Many URLs which appear in the top menu can be modified.
+- Many URLs which appear in the top questionmark menu can be modified.
+- Themes can be added and modified, if more are present users can to pick from them.
 
 ---
-# Adding a Notice Banner
+# Notifications and Broadcasts
 
-option | sample value
----- | ----
-`message_box_visible` | `true`
-`message_box_content` | `Downtime scheduled Sunday at Noon to one.`
-`message_box_class` | `warning` (also: `error`, `info`)
+As an admin, you can send individual notifications to users (groups or roles), or display broadcast notifications to all users (even anonymous users).
 
 ???
 
 - Sometimes you wish to broadcast a message to your users, for example when you plan downtime.
-- The message box allows doing this.
+- This admin features let's you do this and more.
 
 ---
 # Update the welcome page
@@ -212,9 +202,7 @@ option | description
 ---
 class: reduce90
 
-# Configuring SMTP
-
-SMTP server
+# Configuring SMTP & emailing
 
 option | description
 ---- | ----
@@ -223,14 +211,13 @@ option | description
 `smtp_password` | Password for SMTP server. STARTTLS recommended on SMTP server.
 `smtp_ssl` | If SMTP server requires SSL from connection start, set to true.
 
-Addresses
-
 option | description
 ---- | ----
 `error_email_to` | Address to send user error reports to.
 `email_from` | Return address used in automatic user notifications. (`<galaxy-no-reply@HOSTNAME>`)
 `mailing_join_addr` | Mailing list to subscribe users to during registration.
-
+`email_domain_blocklist_file` | File containing blocked domains. See https://github.com/disposable-email-domains/disposable-email-domains
+  
 ???
 
 - Setting up an SMTP server is useful.
@@ -241,7 +228,7 @@ option | description
 # galaxy.yml full options
 
 a.k.a. Everything You Always Wanted to Know About `galaxy.yml`
-* [config schema](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/config_schema.yml)
+* [config schema](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/schemas/config_schema.yml)
 * [config sample](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/sample/galaxy.yml.sample)
 * [config docs](https://docs.galaxyproject.org/en/master/admin/config.html)
 

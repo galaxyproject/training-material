@@ -43,10 +43,10 @@ Galaxy is a great solution to train bioinformatics concepts:
 - it trains to use technology, outlining available resources and efforts that have made them accessible to researchers
 - it is scalable
 
-In 2016, the Galaxy Training Network decide to set up a new infrastructure for easily delivering Galaxy related training material. The idea was to develop something open, online, based on a community effort, and on top of the Galaxy platform.
+In 2016, the Galaxy Training Network decided to set up a new infrastructure for easily delivering Galaxy-related training material. The idea was to develop something open, online, based on a community effort, and on top of the Galaxy platform.
 
 We took inspiration from [Software Carpentry](https://software-carpentry.org) and collected everything on a GitHub repository: [https://github.com/galaxyproject/training-material](https://github.com/galaxyproject/training-material).
-We decided on a structure focusing on tutorials with hands-on activities; fitting both for online self-training but also for workshops. Each tutorial follows the same structure and comes with a virtualised instance allowing you to run the training anywhere you have resources available.
+We decided on a structure focusing on tutorials with hands-on activities; fitting both for online self-training but also for workshops. Each tutorial follows the same structure and comes with a virtualised instance, allowing you to run the training anywhere you have resources available.
 
 Here you will learn how to create a new tutorial by developing a small tutorial explaining how to retrieve climate data from Copernicus (using **Copernicus Climate Data Store** tool).
 
@@ -76,11 +76,11 @@ We decided to use the categories from the [ToolShed](https://toolshed.g2.bx.psu.
 > 2. Check in which category it has been placed
 >
 > > <solution-title></solution-title>
-> > There are a couple steps to reaching the answer:
+> > There are a couple of steps to reaching the answer:
 > > 1. Search for `Copernicus`
 > > 2. Press the <kbd>Enter</kbd> key to search
 > > 3. Click on the result named `c3s`
-> > 4. At the bottom of this page there is a box labelled "Categories"
+> > 4. At the bottom of this page, there is a box labelled "Categories"
 > >
 > > It is placed in one category: "Climate Analysis"
 > {: .solution}
@@ -125,7 +125,8 @@ Once the topic has been chosen, we can create the tutorial. An ideal tutorial in
 - a directory `workflows` with workflows extracted from the tutorial
 - a YAML file `data-library.yaml`  with the links to the input data needed for the tutorial
 
-The most important file is the `tutorial.md` where the content of the tutorial is. The other files are not mandatory. They are there to support the tutorial and make it robust and usable across many environments. But they can help a lot in the development of new tutorial.
+The most important file is the `tutorial.md`, where the content of the tutorial is. The other files are not mandatory. They are there to support the tutorial and make it robust and usable across many environments. But they can help a lot in the development of a new tutorial.
+The `data-library.yaml` is used by Galaxy servers to create a *Shared Data Library* containing your tutorial data, allowing you quicker access during training courses. If you have defined a `zenodo_link` in your tutorial metadata, then the `data-library.yaml` file will be automatically added by one of the GTN GitHub Actions if it is missing, so there is no need to add it yourself. 
 
 # Create the workflow
 
@@ -133,10 +134,10 @@ Our tutorials try to follow the "learn by doing" approach; they combine both the
 
 Most tutorials explain step-by-step a data analysis by running the tools. The steps taken in the tutorial can be represented as a workflow.
 
-Before writing the tutorial, it is a good practice to get a workflow with the different steps that will be run during the tutorial. The workflow does not have to be the final one but at least the major steps. It helps to get a direction for the tutorial but also to generate a skeleton of the tutorial as we will see later.
+Before writing the tutorial, it is a good practice to get a workflow with the different steps that will be run during the tutorial. The workflow does not have to be the final one, but at least the major steps should be included. It helps to get a direction for the tutorial, but also to generate a skeleton of the tutorial, as we will see later.
 
 > <comment-title>Use tools that are available on the ToolShed</comment-title>
-> We recommmend you to use in your workflows, specially for training, tools that are available on the Galaxy ToolShed.
+> We recommend using tools in your workflows, especially for training, that are available on the Galaxy ToolShed.
 {: .comment}
 
 
@@ -208,8 +209,8 @@ We would then develop the tutorial and test it on this toy dataset. Once we were
 > 5. Upload the files corresponding to your datasets
 >
 >     > <comment-title>No possible changes in the files after publication</comment-title>
->     > File addition, removal or modification are not allowed after you have published your upload.
->     > So be careful when you start your upload that all your needed files are ready.
+>     > File addition, removal or modification is not allowed after you have published your upload.
+>     > So be careful when you start your upload that all the files you need are ready.
 >     >
 >     > The metadata can be changed after publication.
 >     {: .comment}
@@ -230,9 +231,9 @@ We would then develop the tutorial and test it on this toy dataset. Once we were
 
 Once we have the workflows and toy dataset (optionally already on Zenodo), we can generate the tutorial folder, including the `tutorial.md`.
 
-Writing the tutorial while adding the different tools and their parameters and following good formatting can be quite cumbersome. To help in that process, we developed a training development kit available with [Planemo](https://planemo.readthedocs.io/en/latest/index.html). The tool has several commands. But the main one can be used to create the skeleton of a tutorial (folder, well located, with good structure). It can also take a workflow as input, add it to the `workflows` folder. But more interestingly, the tool can extract from the workflow and add in the `tutorial.md` file the different steps with which tools to run and which parameters to select. If a Zenodo URL is provided, it also creates the `data-library.yaml` file.
+Writing the tutorial while adding the different tools and their parameters, and following good formatting, can be quite cumbersome. To help in that process, we developed a training development kit available with [Planemo](https://planemo.readthedocs.io/en/latest/index.html). The tool has several commands. But the main one can be used to create the skeleton of a tutorial (folder, well-located, with good structure). It can also take a workflow as input and add it to the `workflows` folder. But more interestingly, the tool can extract from the workflow and add in the `tutorial.md` file the different steps with which tools to run and which parameters to select. If a Zenodo URL is provided, it also creates the `data-library.yaml` file.
 
-This tool can be used via the command-line but also via a [webserver](https://ptdk.apps.galaxyproject.eu/). The webserver can take a public workflow that is avialable on [usegalaxy.org](https://usegalaxy.org), [usegalaxy.eu](https://usegalaxy.eu) or [usegalaxy.org.au](https://usegalaxy.org.au).
+This tool can be used via the command-line but also via a [webserver](https://ptdk.apps.galaxyproject.eu/). The webserver can take a public workflow that is available on [usegalaxy.org](https://usegalaxy.org), [usegalaxy.eu](https://usegalaxy.eu) or [usegalaxy.org.au](https://usegalaxy.org.au).
 
 > <hands-on-title>Create the skeleton of a tutorial using the webserver</hands-on-title>
 >
@@ -240,7 +241,7 @@ This tool can be used via the command-line but also via a [webserver](https://pt
 >
 >    {% snippet faqs/galaxy/workflows_publish.md %}
 >
-> 2. Copy the workflow id that can be found in the URL of the current page (after `?id=`)
+> 2. Copy the workflow ID that can be found in the URL of the current page (after `?id=`)
 > 3. Open the [PTDK webserver](https://ptdk.apps.galaxyproject.eu/)
 > 4. Fill in the information
 >    - Tutorial name (the name will be the name of the folder of the tutorial)
@@ -258,12 +259,12 @@ This tool can be used via the command-line but also via a [webserver](https://pt
 > 5. Click on **Submit**
 > 6. Download the generated archive
 >
->    This archive contains the tutorial skeleton including:
+>    This archive contains the tutorial skeleton, including:
 >    - tutorial content, `tutorial.md` file, filled with all steps from the workflow and their parameters
 >    - its workflow (`workflow` folder)
 >    - a `data_library.yaml` file if Zenodo link was provided
 >
-> 7. Add the new material to Galaxy Training Material by unzip the downloaded archive in the tutorials folder of the topic for the new tutorial
+> 7. Add the new material to Galaxy Training Material by unzipping the downloaded archive in the tutorials folder of the topic for the new tutorial
 >
 >    > <comment-title>Using the GitHub interface</comment-title>
 >    >
@@ -278,7 +279,7 @@ This tool can be used via the command-line but also via a [webserver](https://pt
 >    > 7. Go to `tutorials`
 >    > 8. Click on **Create new file**
 >    > 9. Type `name/tutorial.md`, replacing "name" by the name of your tutorial (not the title)
->    > 10. Copy the content of downloaded and edited `tutorial.md` file there
+>    > 10. Copy the content of the downloaded and edited `tutorial.md` file there
 >    > 11. Fill the **Commit new file** form
 >    > 12. Create a new branch using the name of the tutorial
 >    > 13. Click on **Propose new file**
@@ -288,19 +289,19 @@ This tool can be used via the command-line but also via a [webserver](https://pt
 >
 {: .hands_on}
 
-If the workflow is not available on one of the previously listed Galaxy servers, we recommend you to run the tool via the command line:
+If the workflow is not available on one of the previously listed Galaxy servers, we recommend that you run the tool via the command line:
 
 > <hands-on-title>Create the skeleton of a tutorial via the command line</hands-on-title>
 >
-> 1. Get the workflow id
+> 1. Get the workflow ID
 >
->    The id can be found on URL when running, editing or sharing the workflow (after `?id=`)
+>    The ID can be found on the URL when running, editing or sharing the workflow (after `?id=`)
 >
 > 2. Get your API key on the Galaxy instance
 >
 >    {% snippet faqs/galaxy/preferences_admin_api_key.md %}
 >
-> 3. (If not done yet) Get the Galaxy Training Material repository locally and move in it
+> 3. (If not done yet) Get the Galaxy Training Material repository locally and move into it
 >
 >     1. (If not done yet) Clone the training material GitHub repository: `git clone https://github.com/galaxyproject/training-material.git`
 >     2. Navigate to the `training-material/` folder with `cd`
@@ -338,16 +339,16 @@ If the workflow is not available on one of the previously listed Galaxy servers,
 
 # Write the tutorial
 
-Now that you have the structure in place, you can then fill the tutorial per se.
+Now that you have the structure in place, you can then fill the tutorial, per se.
 
 > <hands-on-title>Write the tutorial</hands-on-title>
 >
 > 1. Open the `tutorial.md` file with your favorite text editor
 > 2. Fill out the tutorial by following the [dedicated tutorial]({% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md %})
 >
->    1. Add metadata on the top of the tutorial
+>    1. Add metadata at the top of the tutorial
 >    2. Add a proper introduction
->    3. Organize the tutorial in different sections
+>    3. Organize the tutorial into different sections
 >    4. Introduce the different concepts and the different steps of the analysis
 >    5. Check the hands-on boxes
 >    6. Comment on the outputs of the different steps
@@ -361,7 +362,7 @@ Now that you have the structure in place, you can then fill the tutorial per se.
 
 The material is stored in a [GitHub repository]({{ site.github_repository }}), a code hosting platform for version control and collaboration. So to develop training material, we are following the [GitHub flow](https://guides.github.com/introduction/flow/), which is based on fork, branches, and pull requests.
 
-This can be done online via the GitHub interface or locally on your computer via command-line.
+This can be done online via the GitHub interface or locally on your computer via the command line.
 
 > <comment-title>Learning how to contribute</comment-title>
 > Want to learn how to contribute? Check our tutorials:
@@ -393,7 +394,7 @@ To develop a new tutorial:
 8. Add slides (optional)
 9. Submit as a Pull Request to GitHub
 
-For the next times, you can make it quicker.
+For the next time, you can make it quicker.
 
 > <hands-on-title>Generation of a tutorial</hands-on-title>
 >

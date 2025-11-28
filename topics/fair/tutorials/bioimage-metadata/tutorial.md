@@ -1,7 +1,8 @@
 ---
 layout: tutorial_hands_on
 title: FAIR Bioimage Metadata
-
+level: Introductory
+subtopic: fair-data
 zenodo_link: ''
 
 questions:
@@ -22,9 +23,9 @@ key_points:
 - All repositories require some metadata, so collecting the metadata alongside data acquisition will make this process easier.
 
 tags:
-- fair
-- data management
-- bioimaging
+- Data management
+- Metadata
+- Bioimaging
 
 priority: 4
 
@@ -37,7 +38,6 @@ contributions:
   funding:
     - elixir-uk-dash
     - elixir-europe
-subtopic: fair-data
 
 requirements:
   - type: "internal"

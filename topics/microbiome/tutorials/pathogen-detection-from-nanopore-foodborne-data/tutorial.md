@@ -160,7 +160,7 @@ In this tutorial, we can offer 2 versions:
 - A short version, running prebuilt workflows
 - A long version, going step-by-step
 
-{% include _includes/cyoa-choices.html option1="Short Version" option2="Long Version" default="Short-Version" %}
+{% include _includes/cyoa-choices.html option1="Short Version" option2="Long Version" default="Short Version" %}
 
 
 # Preprocessing

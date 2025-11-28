@@ -2,6 +2,8 @@
 layout: tutorial_hands_on
 
 title: Using BioImage.IO models for image analysis in Galaxy
+level: Intermediate
+subtopic: analyses
 zenodo_link: 'https://zenodo.org/record/6647674'
 questions:
 - How can I apply a pre-trained deep learning model to an image?
@@ -17,8 +19,9 @@ key_points:
 - Input image and model need to be compatible in size and axes
 - Galaxy returns both the predicted image and its tensor as output
 tags:
-- bioimaging
-- AI
+- Image segmentation
+- Image annotation
+- Deep learning
 contributions:
   authorship:
     - dianichj

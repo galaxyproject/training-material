@@ -4,6 +4,7 @@ layout: tutorial_hands_on
 title: "Introduction to Image Analysis using Galaxy"
 zenodo_link: https://zenodo.org/record/3362976
 level: Introductory
+subtopic: introduction
 questions:
   - "How do I use Galaxy with imaging data?"
   - "How do I convert images using Galaxy?"
@@ -32,7 +33,10 @@ contributions:
   funding:
     - elixir-europe
 tags:
-  - HeLa
+  - Image segmentation
+  - Conversion
+  - Object counting
+  - Overlay
 
 ---
 

@@ -55,12 +55,12 @@ recordings:
 ---
 
 
-Galaxy Interactive Tools (GxITs) are a method to run containerized tools that are interactive in nature. Interactive Tools typically run a persistent service accessed on a specific port and run until terminated by the user. One common example of such a tool is [Jupyter Notebook][jupyter]. Galaxy Interactive Tools are similar in purpose to [Galaxy Interactive Environments][gie-docs] (GIEs), but are implemented in a significantly different manner. Most notably, instead of directly invoking containers on the Galaxy server, dedicated Docker node, or as a Docker Swarm service (as is done for GIEs), Interactive Tools are submitted through Galaxy's job management system and thus are scheduled the same as any other Galaxy tool - on a Slurm cluster, for instance. Galaxy Interactive Tools were introduced in Galaxy Release 19.09.
+Galaxy Interactive Tools (GxITs) are a method to run containerized tools that are interactive in nature. Interactive Tools typically run a persistent service accessed on a specific port, until terminated by the user. One common example of such a tool is [Jupyter Notebook][jupyter]. Galaxy Interactive Tools are submitted through Galaxy's job management system and thus are scheduled the same as any other Galaxy tool - on a Slurm cluster, for instance. Galaxy Interactive Tools were introduced in Galaxy Release 19.09.
 
 > <comment-title>Evolving Topic</comment-title>
 > Galaxy Interactive Tools are a **relatively new and rapidly evolving feature** and there are some rough edges. Work to improve the experience of deploying and using them is ongoing. Please watch the [Galaxy Release Notes][galaxy-release-notes] for updates, changes, new documentation, and bug fixes.
 >
-> This tutorial has not been updated for Galaxy 23.0+ and Gravity. You may find extra information about Interactive Tools on the [Galaxy Documentation][galaxy-docs-interactivetools].
+> You may find extra information about Interactive Tools on the [Galaxy Documentation][galaxy-docs-interactivetools].
 {: .comment}
 
 [galaxy-release-notes]: https://docs.galaxyproject.org/en/master/releases/index.html
@@ -112,31 +112,9 @@ Galaxy Interactive Tools (GxITs) are a method to run containerized tools that ar
 {: .agenda}
 
 
-# Installing Ansible Roles
-
-We will use several Ansible roles for this tutorial. In order to avoid repetetively adding them to `requirements.yml` and installing them, we can simply install them all before getting started. Each role will be discussed in further detail later in the tutorial.
-
-> <hands-on-title>Installing New Ansible Roles</hands-on-title>
->
-> 1. In your working directory, add the docker role to your `requirements.yml`:
->
->    ```yaml
->    - src: geerlingguy.docker
->      version: 6.1.0
->    - src: usegalaxy_eu.gie_proxy
->      version: 0.1.0
->    ```
->
-> 2. Install the requirements with `ansible-galaxy`:
->
->    ```
->    ansible-galaxy role install -p roles -r requirements.yml
->    ```
-{: .hands_on}
-
 # Installing Docker
 
-Currently, Galaxy Interactive Tools must be run in Docker containers. It may be possible to run them in Singularity or other types of containers in the future. Thus, the first step is ensuring that the *nodes* where Galaxy will run have Docker installed. Both the Galaxy Project and Galaxy Project EU organizations have their own docker roles, but these are not published to Ansible Galaxy because they were mostly developed for internal purposes. For now, we will use the [docker role][geerlingguy-docker] by the prolific Ansible Galaxy publisher, [Jeff Geerling (geerlingguy)][geerlingguy]. Have a look at the geerlingguy.docker [README][geerlingguy-docker-readme] and [defaults/main.yml][geerlingguy-docker-defaults] to get an understanding of what variables are used to control the role.
+Galaxy Interactive Tools run in Docker containers. Thus, the first step is ensuring that the *nodes* that will run interactive tools have Docker installed. We will use the [Docker role][geerlingguy-docker] by the prolific Ansible Galaxy publisher, [Jeff Geerling (geerlingguy)][geerlingguy]. Have a look at the geerlingguy.docker [README][geerlingguy-docker-readme] and [defaults/main.yml][geerlingguy-docker-defaults] to get an understanding of what variables are used to control the role.
 
 [geerlingguy-docker]: https://galaxy.ansible.com/geerlingguy/docker
 [geerlingguy]: https://galaxy.ansible.com/geerlingguy
@@ -161,7 +139,20 @@ Currently, Galaxy Interactive Tools must be run in Docker containers. It may be 
 
 > <hands-on-title>Installing Docker with Ansible</hands-on-title>
 >
-> 1. Edit the group variables file, `group_vars/galaxyservers.yml`:
+> 1. In your working directory, add the Docker role to your `requirements.yml`:
+>
+>    ```yaml
+>    - src: geerlingguy.docker
+>      version: 7.8.0
+>    ```
+>
+> 2. Install the requirements with `ansible-galaxy`:
+>
+>    ```
+>    ansible-galaxy role install -p roles -r requirements.yml
+>    ```
+>
+> 3. Edit the group variables file, `group_vars/galaxyservers.yml`:
 >
 >    The relevant variables to set for this role are:
 >
@@ -194,7 +185,7 @@ Currently, Galaxy Interactive Tools must be run in Docker containers. It may be 
 >    >
 >    {: .question}
 >
-> 2. Add the new role to the list of roles under the `roles` key in your playbook, `galaxy.yml`:
+> 4. Add the new role to the list of roles under the `roles` key in your playbook, `galaxy.yml`:
 >
 >    ```yaml
 >    ---
@@ -205,7 +196,7 @@ Currently, Galaxy Interactive Tools must be run in Docker containers. It may be 
 >        - geerlingguy.docker
 >    ```
 >
-> 3. Run the playbook:
+> 5. Run the playbook:
 >
 >    ```
 >    ansible-playbook galaxy.yml
@@ -214,7 +205,7 @@ Currently, Galaxy Interactive Tools must be run in Docker containers. It may be 
 
 Congratulations, you've set up Docker. Verify the installation using the `docker info` command (but keep in mind: what users did we authorize to interact with Docker?).
 
-# Installing the Interactive Tools Proxy
+# Enabling the Interactive Tools Proxy
 
 When an Interactive Tool's Docker container starts, it will be assigned a random port. In order to connect clients to the Interactive Tool, Galaxy needs to determine this port (and the node on which the tool is running) and configure a *proxy* from Galaxy to the GxIT's host and port. Consider the following example of running the Jupyter Notebook Interactive Tool, shown in Figure 1 below:
 
@@ -230,61 +221,57 @@ When an Interactive Tool's Docker container starts, it will be assigned a random
 
 As you can see, the client only ever speaks to nginx on the Galaxy server running on the standard https port (443), never directly to the interactive tool (which may be running on a node that does not even have a public IP address). By default, the mapping of GxIT invocation and its corresponding host/port is kept in a SQLite database known as the *Interactive Tools Session Map*, and the path to this database is important, since both Galaxy and the proxy need access to it.
 
-The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. Thankfully there is an Ansible role, [usegalaxy_eu.gie_proxy][usegalaxy_eu-gie_proxy], that can install the proxy and its dependencies, and configure it for you. As usual, have a look through the [README][usegalaxy_eu-gie_proxy-readme] and [defaults][usegalaxy_eu-gie_proxy-defaults] to investigate which variables you might need to set before continuing.
+The GxIT Proxy is written in [Node.js][nodejs]. A straightforward method to set it up is to use Galaxy's process manager, [Gravity](https://gravity.readthedocs.io/), to install and configure it.
 
 [nodejs]: https://nodejs.org/
-[usegalaxy_eu-gie_proxy]: https://galaxy.ansible.com/usegalaxy_eu/gie_proxy
-[usegalaxy_eu-gie_proxy-readme]: https://github.com/usegalaxy-eu/ansible-gie-proxy/blob/master/README.md
-[usegalaxy_eu-gie_proxy-defaults]: https://github.com/usegalaxy-eu/ansible-gie-proxy/blob/master/defaults/main.yml
 
-> <hands-on-title>Installing the Proxy with Ansible</hands-on-title>
+> <hands-on-title>Installing and configuring the Proxy using Gravity</hands-on-title>
 >
-> 1. Edit the group variables file, `group_vars/galaxyservers.yml`:
+> 1. Edit the group variables file, `group_vars/galaxyservers.yml`; the GxIT Proxy configuration lives under the `gravity['galaxy_config']['gx_it_proxy']` section. The available settings are:
 >
->    The relevant variables to set for this role are:
 >
->    | Variable                       | Type          | Description                                                           |
->    | ----------                     | -------       | -------------                                                         |
->    | `gie_proxy_dir`                | path (string) | Path of directory into which the proxy application will be installed  |
->    | `gie_proxy_git_version`        | string        | Git reference to clone                                                |
->    | `gie_proxy_setup_nodejs`       | string        | Whether to install Node.js, options are `package` and `nodeenv`       |
->    | `gie_proxy_virtualenv_command` | string        | Command to create virtualenv when using `nodeenv` method              |
->    | `gie_proxy_nodejs_version`     | string        | Version of Node.js to install if using `nodeenv` method               |
->    | `gie_proxy_virtualenv`         | path (string) | Path of virtualenv into which nodeenv/Node.js/npm will be installed   |
->    | `gie_proxy_setup_service`      | string        | Whether to configure the proxy as a service, only option is `systemd` |
->    | `gie_proxy_sessions_path`      | path (string) | Path of Interactive Tools sessions map                                |
->    | `gie_proxy_path_prefix`        | path (string) | Requests accessing this cause the proxy to behave differently. It must be configured to `/interactivetool/ep` to make [Path-based Interactive Tools][path-based_interactive_tools] work.    |
+>    | Setting         | Type    | Description                                                                                                                                                                                                                                         |
+>    |-----------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+>    | `enable`        | bool    | Set to `true` to enable the GxIT Proxy. Defaults to `false`.                                                                                                                                                                                           |
+>    | `version`       | str     | Version specifier for the GxIT Proxy Node.js package. Defaults to `>=0.0.6`.                                                                                                                                                                         |
+>    | `ip`            | str     | Public-facing IP of the proxy. Defaults to `localhost`.                                                                                                                                                                                             |
+>    | `port`          | int     | Public-facing port of the proxy. Defaults to `4002`.                                                                                                                                                                                                |
+>    | `sessions`      | str     | Path to the Interactive Tools Session Map database. Defaults to `database/interactivetools_map.sqlite`.                                                                                                                                             |
+>    | `verbose`       | bool    | Include verbose messages in the GxIT Proxy. Defaults to `true`.                                                                                                                                                                                      |
+>    | `forward_ip`    | str     | Forward all requests to this IP. This is an advanced option that is only needed when proxying to remote interactive tool container that cannot be reached through the local network.                                                                |
+>    | `forward_port`  | int     | Forward all requests to this port. This is an advanced option that is only needed when proxying to remote interactive tool container that cannot be reached through the local network.                                                              |
+>    | `reverse_proxy` | str     | Rewrite location blocks with proxy port. This is an advanced option that is only needed when proxying to remote interactive tool container that cannot be reached through the local network. Defaults to `false`.                                   |
+>    | `umask`         | str     | Permissions mask under which service should be executed.                                                                                                                                                                                            |
+>    | `start_timeout` | int     | Value of supervisor startsecs, systemd TimeoutStartSec. Defaults to `10`.                                                                                                                                                                           |
+>    | `stop_timeout`  | int     | Value of supervisor stopwaitsecs, systemd TimeoutStopSec. Defaults to `10`.                                                                                                                                                                         |
+>    | `memory_limit`  | float   | Memory limit (in GB). If the service exceeds the limit, it will be killed. Default is no limit or the value of the ``memory_limit`` setting at the top level of the Gravity configuration, if set. Ignored if ``process_manager`` is ``supervisor``. |
+>    | `environment`   | mapping | Extra environment variables and their values to set when running the service. A dictionary where keys are the variable names.                                                                                                                       |
 >
->    Add the following lines to your `group_vars/galaxyservers.yml` file:
+>    Configure the settings in the `group_vars/galaxyservers.yml` file:
 >
 >    {% raw %}
 >    ```yaml
->    gie_proxy_dir: /srv/galaxy/gie-proxy/proxy
->    gie_proxy_git_version: main
->    gie_proxy_setup_nodejs: nodeenv
->    gie_proxy_virtualenv_command: "{{ pip_virtualenv_command }}"
->    gie_proxy_nodejs_version: "14.21.3"
->    gie_proxy_virtualenv: /srv/galaxy/gie-proxy/venv
->    gie_proxy_setup_service: systemd
->    gie_proxy_sessions_path: "{{ galaxy_mutable_data_dir }}/interactivetools_map.sqlite"
->    gie_proxy_path_prefix: /interactivetool/ep
+>    # ... other settings ... #
+>    galaxy_config:
+>      galaxy:
+>        # ... other settings ... #
+>        # Interactive Tools
+>        interactivetools_enable: "{{ galaxy_config.gravity.gx_it_proxy.enable }}"
+>        interactivetools_map: "{{ galaxy_config.gravity.gx_it_proxy.sessions }}"
+>        # ... other settings ... #
+>      gravity:
+>        # ... other settings ... #
+>        gx_it_proxy:
+>          enable: true
+>          port: 4002
+>          sessions: "{{ galaxy_mutable_data_dir }}/interactivetools_map.sqlite"
+>        # ... other settings ... #
+>      # ... other settings ... # 
+>    # ... other settings ... #
 >    ```
 >    {% endraw %}
 >
->    We have chosen to install Node.js using [nodeenv][] because the version in the training image's package manager is fairly old.
->
-> 2. Add the new role to `galaxy.yml`:
->
->    ```yaml
->    - hosts: galaxyservers
->      become: true
->      roles:
->        # ... existing roles ...
->        - geerlingguy.docker
->        - usegalaxy_eu.gie_proxy
->    ```
->
-> 3. Run the playbook:
+> 2. Run the playbook:
 >
 >    ```
 >    ansible-playbook galaxy.yml
@@ -295,30 +282,14 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 [nodeenv]: https://github.com/ekalinin/nodeenv
 [path-based_interactive_tools]: https://docs.galaxyproject.org/en/master/admin/special_topics/interactivetools.html#path-based-interactivetools
 
-> <question-title></question-title>
->
-> What did running the playbook change?
->
-> > <solution-title></solution-title>
-> >
-> > 1. A new Python venv was created at `/srv/galaxy/gie-proxy/venv`
-> > 2. Node.js version 14.21.3 was installed in to the venv
-> > 3. The proxy was cloned to `/srv/galaxy/gie-proxy/proxy`
-> > 4. The proxy's Node dependencies were installed to `/srv/galaxy/gie-proxy/proxy/node_modules` using the venv's `npm`
-> > 5. A systemd service unit was installed at `/etc/systemd/system/galaxy-gie-proxy.service`
-> > 6. The systemd daemon was reloaded to read this new service unit
-> > 7. The service was set to start on boot and started
-> >
-> {: .solution }
->
-{: .question}
-
-Because the proxy runs as a systemd service, you can inspect the log of the service using `journalctl`. The service name is `galaxy-gie-proxy`:
+Because the proxy runs as a systemd service, you can inspect the log of the service using `journalctl`. The service name is `galaxy-gx-it-proxy`:
 
 ```console
-$ sudo journalctl -eu galaxy-gie-proxy
-Feb 14 17:38:49 gcc-4 systemd[1]: Started Galaxy IE/IT Proxy.
+$ sudo journalctl -eu galaxy-gx-it-proxy
+Feb 14 17:38:49 gcc-4 systemd[1]: Started galaxy-gx-it-proxy.service - Galaxygx-it-proxy
+...
 Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools_map.sqlite
+Feb 14 17:38:49 gcc-4 node[3679]: Listening on localhost:4002
 ```
 
 > <comment-title>Note</comment-title>
@@ -331,7 +302,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 
 As explained in the previous section, we will proxy the Interactive Tools Proxy with nginx so that it can serve requests on the standard HTTPS port, 443. Because we've configured nginx with Ansible, this is relatively simple.
 
-> <hands-on-title>Installing the Proxy with Ansible</hands-on-title>
+> <hands-on-title>Configuring NGINX</hands-on-title>
 >
 > 1. Edit the group variables file, `group_vars/galaxyservers.yml` and add a new item to the **existing** `nginx_ssl_servers` so it matches:
 >
@@ -339,13 +310,13 @@ As explained in the previous section, we will proxy the Interactive Tools Proxy 
 >    ```yaml
 >    nginx_ssl_servers:
 >      - galaxy
->      - galaxy-gie-proxy
+>      - galaxy-gxit-proxy
 >    ```
 >    {% endraw %}
 >
->    The nginx configuration `galaxy-gie-proxy` doesn't exist yet, but we'll create it in a moment.
+>    The nginx configuration `galaxy-gxit-proxy` doesn't exist yet, but we'll create it in a moment.
 >
-> 2. Create `templates/nginx/galaxy-gie-proxy.j2` with the following contents:
+> 2. Create `templates/nginx/galaxy-gxit-proxy.j2` with the following contents:
 >
 >    {% raw %}
 >    ```nginx
@@ -359,7 +330,7 @@ As explained in the previous section, we will proxy the Interactive Tools Proxy 
 >        access_log  syslog:server=unix:/dev/log;
 >        error_log   syslog:server=unix:/dev/log;
 >
->        # Proxy all requests to the GIE Proxy application
+>        # Proxy all requests to the GxIT Proxy application
 >        location / {
 >            proxy_redirect off;
 >            proxy_http_version 1.1;
@@ -367,7 +338,7 @@ As explained in the previous section, we will proxy the Interactive Tools Proxy 
 >            proxy_set_header X-Real-IP $remote_addr;
 >            proxy_set_header Upgrade $http_upgrade;
 >            proxy_set_header Connection "upgrade";
->            proxy_pass http://localhost:{{ gie_proxy_port }};
+>            proxy_pass http://localhost:{{ galaxy_config.gravity.gx_it_proxy.port }};
 >        }
 >    }
 >    ```
@@ -388,7 +359,7 @@ As explained in the previous section, we will proxy the Interactive Tools Proxy 
 >            proxy_set_header X-Real-IP $remote_addr;
 >            proxy_set_header Upgrade $http_upgrade;
 >            proxy_set_header Connection "upgrade";
->            proxy_pass http://localhost:{{ gie_proxy_port }};
+>            proxy_pass http://localhost:{{ galaxy_config.gravity.gx_it_proxy.port }};
 >        }
 >
 >        # ... other existing settings ...
@@ -523,7 +494,6 @@ As we use Let's Encrypt in staging mode, the wildcard certificates generated wit
 >    +    - usegalaxy_eu.aws_cli
 >         - galaxyproject.nginx
 >         - geerlingguy.docker
->         - usegalaxy_eu.gie_proxy
 >    ```
 >
 >    {% snippet topics/admin/faqs/diffs.md %}
@@ -622,54 +592,58 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >    <toolbox monitor="true">
 >        <section id="interactivetools" name="Interactive Tools">
 >            <tool file="interactive/interactivetool_ethercalc.xml" />
+>            <tool file="interactive/interactivetool_jupyter_notebook_1.0.1.xml" />
 >        </section>
 >    </toolbox>
 >    ```
 >
-> 2. We need to modify `job_conf.xml` to instruct Galaxy on how to run Interactive Tools (and specifically, how to run them in Docker). We will begin with a basic job conf:
+> 2. We need to instruct Galaxy on how to run Interactive Tools (and specifically, how to run them in Docker). Let's begin with a basic job configuration:
 >
->    Create `templates/galaxy/config/job_conf.xml.j2` with the following contents:
->
->    ```xml
->    <job_conf>
->        <plugins workers="4">
->            <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
->        </plugins>
->        <destinations>
->            <destination id="local" runner="local"/>
->        </destinations>
->    </job_conf>
+>    ```yaml
+>    # ... other settings ... #
+>    # Galaxy Job Configuration
+>    galaxy_job_config:
+>      runners:
+>        local_runner:
+>          load: galaxy.jobs.runners.local:LocalJobRunner
+>          workers: 4
+>      execution:
+>        default: local_env
+>        environments:
+>          local_env:
+>            runner: local_runner
+>    # ... other settings ... #
 >    ```
 >
 >    > <comment-title>Note</comment-title>
->    > Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the `job_conf.xml.j2` file, as well as defined `galaxy_config_templates` and set the `job_config_file` option in `galaxy_config` (step 4). If this is the case, be sure to **merge the changes in this section with your existing playbook**.
+>    > Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already defined the `galaxy_job_config` mapping in your `group_vars/galaxyservers.yml` file, as well as `galaxy_config_templates`. If this is the case, be sure to **merge the changes in this section with your existing playbook**.
 >    {: .comment}
 >
-> 3. Next, we need to configure the interactive tools destination. First, we explicitly set the destination to the default `local` destination since there will now be two destinations defined. Then we add a destination for submitting jobs as docker containers using the [advanced sample job configuration][job-conf-docker] as a guide. Finally, use the [EtherCalc GxIT's][ethercalc-tool-wrapper] tool ID to route executions of the EtherCalc GxIT to the newly created destination:
+> 3. Next, we need to configure the interactive tools destination. Add a destination for submitting jobs as Docker containers using the [advanced sample job configuration][job-conf-docker] as a guide. Finally, use the [EtherCalc GxIT's][ethercalc-tool-wrapper] tool ID to route executions of the EtherCalc GxIT to the newly created destination:
 >
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->         <plugins workers="4">
->             <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
->         </plugins>
->    -    <destinations>
->    +    <destinations default="local">
->             <destination id="local" runner="local"/>
->    +        <destination id="interactive_local" runner="local">
->    +            <param id="docker_enabled">true</param>
->    +            <param id="docker_volumes">$defaults</param>
->    +            <param id="docker_sudo">false</param>
->    +            <param id="docker_net">bridge</param>
->    +            <param id="docker_auto_rm">true</param>
->    +            <param id="docker_set_user"></param>
->    +            <param id="require_container">true</param>
->    +        </destination>
->         </destinations>
->    +    <tools>
->    +        <tool destination="interactive_local" id="interactive_tool_ethercalc" />
->    +    </tools>
->     </job_conf>
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>         execution:
+>           default: local_env
+>           environments:
+>             local_env:
+>               runner: local_runner
+>    +        local_interactive_env:
+>    +          runner: local_runner
+>    +          params:
+>    +            docker_enabled: true
+>    +            docker_volumes: $defaults
+>    +            docker_sudo: false
+>    +            docker_net: bridge
+>    +            docker_auto_rm: true
+>    +            docker_set_user: ""
+>    +            require_container: true
+>    +    tools:
+>    +      - id: interactive_tool_ethercalc
+>    +        environment: local_interactive_env
+>    +      - id: interactive_tool_jupyter_notebook
+>    +        environment: local_interactive_env
 >    ```
 >
 >    Of considerable note is the `docker_volumes` param: the variable expansions are explained in the [advanced sample job configuration][job-conf-docker].  We'll use this volume configuration for now but it has some considerable data security problems. We'll discuss a better solution at the end of this tutorial.
@@ -684,20 +658,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >    ```
 >    {% endraw %}
 >
->    Next, inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside, that GxITs should be enabled, and where the GxIT map database can be found. Watch for other conflicting configurations from previous tutorials (e.g. `job_config: ...`):
->
->    {% raw %}
->    ```yaml
->    galaxy_config:
->      galaxy:
->        # ... existing configuration options in the `galaxy` section ...
->        job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
->        interactivetools_enable: true
->        interactivetools_map: "{{ gie_proxy_sessions_path }}"
->    ```
->    {% endraw %}
->
->    And then deploy the new config templates using the `galaxy_config_templates` var in your group vars:
+>    Next, deploy the new config template using the `galaxy_config_templates` var in your group vars:
 >
 >    {% raw %}
 >    ```yaml
@@ -705,22 +666,33 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >      # ... possible existing config file definitions
 >      - src: templates/galaxy/config/tool_conf_interactive.xml.j2
 >        dest: "{{ galaxy_config_dir }}/tool_conf_interactive.xml"
->      - src: templates/galaxy/config/job_conf.xml.j2
->        dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    ```
 >    {% endraw %}
 >
-> 5. Run the playbook:
+> 5. If you've configured container resolvers, make sure the explit docker container resolver is enabled, e.g in templates/galaxy/config/container_resolvers_conf.yml.j2
+>    {% raw %}
+>    ```diff
+>    --- a/templates/galaxy/config/container_resolvers_conf.yml.j2
+>    +++ b/templates/galaxy/config/container_resolvers_conf.yml.j2
+>    @@ -9,3 +9,4 @@
+>     - type: build_mulled_singularity
+>       auto_install: False
+>       cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/built/"
+>     +- type: explicit
+>    ```
+>    {% endraw %}
+>
+> 6. Run the playbook:
 >
 >    ```
 >    ansible-playbook galaxy.yml
 >    ```
 >
-> 6. Follow the Galaxy logs with `journalctl -f -u galaxy`
+> 7. Follow the Galaxy logs with `galaxyctl follow`.
 >
 {: .hands_on}
 
-[job-conf-docker]: https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L410
+[job-conf-docker]: https://github.com/galaxyproject/galaxy/blob/a2c847439528df0becf9e382c323f1dfe34d9633/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L495
 [ethercalc-tool-wrapper]: https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/tools/interactive/interactivetool_ethercalc.xml
 
 # Run an Interactive Tool
@@ -819,46 +791,57 @@ Because we want to maintain dataset privacy, Pulsar is the better choice here. A
 >    ```
 >    {% endraw %}
 >
-> 2. Modify the job configuration file, `templates/galaxy/config/job_conf.xml.j2`, to configure Interactive Tools to use the embedded Pulsar runner.
+> 2. Modify the job configuration in `group_vars/galaxyservers.yml` to configure Interactive Tools to use the embedded Pulsar runner.
 >
 >    <br/>
 >
->    **Add** the embedded Pulsar runner plugin to the `<plugins>` section of the config:
+>    **Add** the embedded Pulsar runner to the `galaxy_job_config` section of the file:
 >
->    ```xml
->    <plugin id="pulsar_embedded" type="runner" load="galaxy.jobs.runners.pulsar:PulsarEmbeddedJobRunner">
->        <param id="pulsar_config">/srv/galaxy/config/pulsar_app.yml</param>
->    </plugin>
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>         runners:
+>           local_runner:
+>             load: galaxy.jobs.runners.local:LocalJobRunner
+>             workers: 4
+>    +      pulsar_embedded:
+>    +        load: galaxy.jobs.runners.pulsar:PulsarEmbeddedJobRunner
+>    +        pulsar_config: "{{ galaxy_config_dir }}/pulsar_app.yml"
+>         execution:
 >    ```
->
->    > <tip-title>Ansible Best Practices</tip-title>
->    > We have used a bit of bad practice here: hardcoding the Pulsar config file path in to the job config file. At this point, we should convert the job config file to a template (in the same manner as the Pulsar config template). The reason we don't do it in this tutorial is to maintain compatibility with other tutorials, but you may do so by following the same pattern as is used for the Pulsar config template.
->    {: .tip}
+>    {% endraw %}
 >
 >    Next, **modify** the `interactive_local` destination to use the new runner and set the new parameter `container_monitor_result` to `callback` (explained in more detail in the next step):
 >
 >    > <warning-title>Untrusted SSL Certificates</warning-title>
->    > If you are completing this tutorial as part of a [Galaxy Admin Training][gat] course, you will also need the `<env>` setting shown below to prevent problems with the untrusted SSL certificates in use during the course. Galaxy servers with valid SSL certificates *do not need this option*.
+>    > If you are completing this tutorial as part of a [Galaxy Admin Training][gat] course, you will also need the `env` setting shown below to prevent problems with the untrusted SSL certificates in use during the course. Galaxy servers with valid SSL certificates *do not need this option*.
 >    {: .warning}
 >
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->         <destinations default="local">
->             <destination id="local" runner="local"/>
->    -        <destination id="interactive_local" runner="local">
->    +        <destination id="interactive_local" runner="pulsar_embedded">
->                 <param id="docker_enabled">true</param>
->                 <param id="docker_volumes">$defaults</param>
->                 <param id="docker_sudo">false</param>
->                 <param id="docker_net">bridge</param>
->                 <param id="docker_auto_rm">true</param>
->                 <param id="docker_set_user"></param>
->                 <param id="require_container">true</param>
->    +            <param id="container_monitor_result">callback</param>
->    +            <env id="REQUESTS_CA_BUNDLE">/etc/ssl/certs/ca-certificates.crt</env>
->             </destination>
->         </destinations>
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>         execution:
+>           default: local_env
+>           environments:
+>             local_env:
+>               runner: local_runner
+>             local_interactive_env:
+>    -          runner: local_runner
+>    +          runner: pulsar_embedded
+>               params:
+>                 docker_enabled: true
+>                 docker_volumes: $defaults
+>                 docker_sudo: false
+>                 docker_net: bridge
+>                 docker_auto_rm: true
+>                 docker_set_user: ""
+>                 require_container: true
+>    +            container_monitor_result: callback
+>    +          env:
+>    +            - name: REQUESTS_CA_BUNDLE
+>    +              value: /etc/ssl/certs/ca-certificates.crt
+>         tools:
 >    ```
 >
 > 3. Open your `galaxyservers` group variables file and instruct `galaxyproject.galaxy` to install the Pulsar configuration file:
@@ -933,7 +916,7 @@ Once the playbook run is complete and your Galaxy server has restarted, run the 
 
 In a _high availability_ setup, multiple redundant copies of Galaxy run simultaneously behind a load balancer to minimize downtime and service interruptions.
 
-As explained in [one of the previous sections](#installing-the-interactive-tools-proxy), the Galaxy Interactive Tools Proxy redirects requests to each Interactive Tool's host and port. By default, the mapping of GxIT invocations to their corresponding host/port is kept in a SQLite database known as the _Interactive Tools Session Map_.
+As explained in [one of the previous sections](#enabling-the-interactive-tools-proxy), the Galaxy Interactive Tools Proxy redirects requests to each Interactive Tool's host and port. By default, the mapping of GxIT invocations to their corresponding host/port is kept in a SQLite database known as the _Interactive Tools Session Map_.
 
 By design, [SQLite is the wrong choice for high availability setups][sqlite_situations_where_a_client_server_rdbms_may_work_better], the showstopper being that the SQLite database file would have to be shared over a network filesystem, which are usually associated with too high latencies for RDBMS use. For this reason, Galaxy and the Interactive Tools Proxy can also store the **Session Map in a PostgreSQL database**. 
 
@@ -1035,13 +1018,13 @@ The next step is configuring Galaxy and the Interactive Tool Proxy to use the ne
 >    galaxy_config:
 >      galaxy:
 >        # ... existing configuration options in the `galaxy` section ...
->        # interactivetools_map: "{{ gie_proxy_sessions_path }}"  # comment, remove or leave this line in place (it will be overridden by the option below)
->        interactivetoolsproxy_map: "{{ gie_proxy_sessions_path }}"
+>        # interactivetools_map: "{{  galaxy_config.gravity.gx_it_proxy.sessions }}"  # comment, remove or leave this line in place (it will be overridden by the option below)
+>        interactivetoolsproxy_map: "{{ gxit_proxy_sessions_path }}"
 >        # ... other existing configuration options in the `galaxy` section ...
 >
 >    # ... other existing configurations ... #
 >
->    gie_proxy_sessions_path: "postgresql:///gxitproxy?host=/var/run/postgresql"
+>    gxit_proxy_sessions_path: "postgresql:///gxitproxy?host=/var/run/postgresql"
 >    ```
 >    {% endraw %}
 >

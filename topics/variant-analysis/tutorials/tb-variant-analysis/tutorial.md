@@ -151,7 +151,7 @@ While one could examine the quality control report for each set of reads (forwar
 >    > >    We will run **fastp** {% icon tool %} on the
 >    > >    fastq datasets in the next step
 >    > >
->    > > 1. The GC% is 66%, which is close to the 65.6% that one expects from a _M. tuberculosis_ sample. 
+>    > > 1. The GC% is 66%, which is close to the 65.6% that one expects from a _M. tuberculosis_ sample.
 >    > >    Examining the GC% is a quick way to check that the sample you have sequenced contains reads
 >    > >    from the organism that you expect.
 >    > >
@@ -186,7 +186,7 @@ As these reads look like they need a bit of trimming, we can turn to the **fastp
 The next section, on looking for contamination in our data using Kraken2, takes a long time to run and can be skipped and perhaps
 run later if you prefer.
 
-{% include _includes/cyoa-choices.html option1="Skip Kraken2" option2="Run Kraken2" default="Skip-Kraken2" %}
+{% include _includes/cyoa-choices.html option1="Skip Kraken2" option2="Run Kraken2" default="Skip Kraken2" %}
 
 <div class="Skip-Kraken2" markdown="1" >
 </div>
@@ -347,7 +347,7 @@ Finally, TB Variant Report uses the COMBAT-TB [eXplorer](https://explorer.sanbi.
 >
 >       - *"File to process"*: `TB Variant Filter on data XX`
 >       - *"SED Program"*: `s/GENE_//g`
-> 
+>
 > 3. {% tool [TB Variant Report](toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/1.0.1+galaxy0) %} with the following parameters
 >   - *"Input SnpEff annotated M.tuberculosis VCF(s)"*: `Text transformation on data XX`
 >   - *"TBProfiler Drug Resistance Report (Optional)"*: `TB-Profiler Profile on data XX: Results.json`
@@ -435,9 +435,9 @@ What you should see is something like this:
 You can now click on the names of the tracks to add them in, try the vcf file and gff file. You can see where the variants are located and which genes they are in. If you click on the BAM file you can zoom right in to see the read alignments for each variant if you wish.
 
 > <question-title>Using JBrowse to examine a known variant</question-title>
-> 
+>
 > 1. Paste `Chromosome:761009..761310` into the JBrowse location bar and click **Go**. Ensure that the BAM and VCF tracks are set to visible. What is the meaning of the red column that shows up in the middle of the display of reads (the BAM track)?
-> 
+>
 > 2. What change happened at position 761155 in the genome, according to the read and variant data displayed?
 >
 > 3. How did this change impact the *rpoB* gene, the gene that is found on the forward strand overlapping this position?
@@ -448,7 +448,7 @@ You can now click on the names of the tracks to add them in, try the vcf file an
 > >
 > > 2. Examining the VCF track the variant is shown as a mutation from C to T.
 > >
-> > 3. The "frame" of the codons in this gene can be determined by navigating to where the *rpoB* gene, the second horizontal bar in the annotation track, starts (position 759807). This gene is in frame 0 on the forward strand, the top frame in the display. Navigating back to position 761155, the amino acid encoded in the reference genome is S, that is serine. The mutation from a C to a T changes the codon at this position to L, leucine, and is associated with resistance to the drug rifampicin. 
+> > 3. The "frame" of the codons in this gene can be determined by navigating to where the *rpoB* gene, the second horizontal bar in the annotation track, starts (position 759807). This gene is in frame 0 on the forward strand, the top frame in the display. Navigating back to position 761155, the amino acid encoded in the reference genome is S, that is serine. The mutation from a C to a T changes the codon at this position to L, leucine, and is associated with resistance to the drug rifampicin.
 > >
 > >  While the rifampicin resistance mutation being examined here is already reported by **TB-Profiler**, JBrowse allows us to examine the evidence underlying this mutation in more detail.
 > {: .solution}
@@ -556,7 +556,7 @@ There is something clearly wrong with sample SRR12416842, perhaps indicating sam
 # Processing many samples at once: Collections and Workflows (optional)
 
 In the tutorial thus far we have focused on processing single samples, where two read datasets (forward and reverse reads) are associated with a single sample. In practice, sequence analysis typically involves analysing batches of samples and we run the same
-analysis steps for each sample in the batch. Galaxy supports working with batches using collections and workflows. 
+analysis steps for each sample in the batch. Galaxy supports working with batches using collections and workflows.
 
 
 If you have followed all of the steps of this tutorial, you will have two useable samples, one named *004-2* and another *018-1*. Create a list of dataset pairs from these samples and call the collection `samples`.
@@ -569,7 +569,7 @@ The workflow that we are going to use is published on [WorkflowHub.eu](https://w
 
 If the text above doesn't show a text to run or if you are not on one of the public "usegalaxy.*" servers that integrate with WorkflowHub.eu:
 
-1. Copy the URL of [this link]({{ site.baseurl }}{{ page.dir }}workflows/tb-variant-analysis.ga) (e.g. via right click) or save it to your computer and 
+1. Copy the URL of [this link]({{ site.baseurl }}{{ page.dir }}workflows/tb-variant-analysis.ga) (e.g. via right click) or save it to your computer and
 2. Import the workflow into Galaxy
 3. Click the run icon (it is a small white right-pointing triangle on a blue background)
 

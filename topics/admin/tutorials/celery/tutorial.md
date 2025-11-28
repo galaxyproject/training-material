@@ -149,7 +149,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -284,3 +284,7 @@ rabbitmq_users:
+>        @@ -283,3 +283,7 @@ rabbitmq_users:
 >         # TUS
 >         galaxy_tusd_port: 1080
 >         galaxy_tus_upload_store: /data/tus
@@ -248,15 +248,15 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -271,6 +271,7 @@ rabbitmq_config:
->         
+>        @@ -270,6 +270,7 @@ rabbitmq_config:
+>
 >         rabbitmq_vhosts:
 >           - /pulsar/pulsar_au
 >        +  - galaxy_internal
->         
+>
 >         rabbitmq_users:
 >           - user: admin
->        @@ -280,6 +281,13 @@ rabbitmq_users:
+>        @@ -279,6 +280,13 @@ rabbitmq_users:
 >           - user: pulsar_au
 >             password: "{{ vault_rabbitmq_password_vhost }}"
 >             vhost: /pulsar/pulsar_au
@@ -267,7 +267,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        +    password: "{{ vault_rabbitmq_password_flower }}"
 >        +    tags: administrator
 >        +    vhost: galaxy_internal
->         
+>
 >         # TUS
 >         galaxy_tusd_port: 1080
 >        {% endraw %}
@@ -299,7 +299,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -296,3 +296,22 @@ galaxy_tus_upload_store: /data/tus
+>        @@ -295,3 +295,22 @@ galaxy_tus_upload_store: /data/tus
 >         #Redis
 >         galaxy_additional_venv_packages:
 >           - redis
@@ -373,7 +373,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -132,6 +132,11 @@ galaxy_config:
+>    @@ -130,6 +130,11 @@ galaxy_config:
 >           preload: true
 >         celery:
 >           concurrency: 2
@@ -394,7 +394,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -113,6 +113,11 @@ galaxy_config:
+>    @@ -111,6 +111,11 @@ galaxy_config:
 >         # Data Library Directories
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user

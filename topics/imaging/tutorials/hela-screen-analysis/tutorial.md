@@ -4,6 +4,7 @@ layout: tutorial_hands_on
 title: "Analyse HeLa fluorescence siRNA screen"
 zenodo_link: https://zenodo.org/record/3362976
 level: Intermediate
+subtopic: analyses
 questions:
   - "How do I analyze a HeLa fluorescence siRNA screen?"
   - "How do I segment cell nuclei?"
@@ -41,7 +42,11 @@ contributions:
   funding:
     - elixir-europe
 tags:
-  - HeLa
+  - Image segmentation
+  - Object feature extraction
+  - Image thresholding
+  - High-throughput screening
+  - Fluorescence microscopy
 
 ---
 

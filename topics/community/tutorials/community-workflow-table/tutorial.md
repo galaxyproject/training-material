@@ -108,6 +108,7 @@ You will then be able to remove workflows that are not relevant to your communit
 >
 {: .hands_on}
 
+It is currently mandatory to have tags under both sections (public and workflowhub) or the codex script will crash and you will not get the files mentionned below.
 Once you have a list of the tags that you wish to keep, you can submit this to Galaxy CoDex.
 
 > <hands-on-title>Submit the new list of tags to Galaxy Codex</hands-on-title>
