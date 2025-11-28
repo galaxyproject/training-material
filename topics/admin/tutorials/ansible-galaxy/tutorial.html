@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@88d225dda7b2c99d5c405851c3daa181d4ba51ea",
+		release: "galaxy-training-network@c4273445d815efbaa6e446dbb599d4202b8f2ad9",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Installation with Ansible">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-11-24 08:26:56 +0000">
+<meta name="DC.date" content="2025-11-28 08:51:15 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Simon Gladman"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
@@ -182,7 +182,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-11-24 08:26:56 +0000",
+  "dateModified": "2025-11-28 08:51:15 +0000",
   "datePublished": "2019-01-28 10:40:06 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -270,7 +270,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Galaxy Installation with Ansible",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
-  "version": 107,
+  "version": 108,
   "timeRequired": "PT2H30M",
   "teaches": "- Have an understanding of how Galaxy's Ansible roles are structured and interact with one another\n- Be able to use an Ansible playbook to install different flavors of Galaxy for different purposes",
   "keywords": [
@@ -2517,7 +2517,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 28, 2019 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 24, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -2537,7 +2537,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.1</a> (0 recent ratings, 35 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 107 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 108 </div>
 
     </blockquote>
     </section>
@@ -3566,8 +3566,8 @@ A: They are correlated (because generally new Galaxy versions could introduce e.
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">miniconda_distribution</code></td>
-            <td><code class="language-plaintext highlighter-rouge">miniconda</code></td>
-            <td>Install a specific distribution of miniconda, such as <code class="language-plaintext highlighter-rouge">miniforge</code> (default), <code class="language-plaintext highlighter-rouge">micromamba</code>, <code class="language-plaintext highlighter-rouge">miniconda</code> or <code class="language-plaintext highlighter-rouge">anaconda</code>. This determines the default value for the <code class="language-plaintext highlighter-rouge">miniconda_executable</code> (<code class="language-plaintext highlighter-rouge">mamba</code> for <code class="language-plaintext highlighter-rouge">miniforge</code>)</td>
+            <td><code class="language-plaintext highlighter-rouge">miniforge</code></td>
+            <td>Install a specific distribution of conda, see https://github.com/galaxyproject/ansible-miniconda for alternatives. This determines the default value for the <code class="language-plaintext highlighter-rouge">miniconda_executable</code> (<code class="language-plaintext highlighter-rouge">conda</code> for <code class="language-plaintext highlighter-rouge">miniforge</code>)</td>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">miniconda_channels</code>          `</td>
@@ -3586,7 +3586,7 @@ A: They are correlated (because generally new Galaxy versions could introduce e.
         <p>Please ensure you consult the <a href="https://docs.galaxyproject.org/en/master/releases/index.html">releases documentation</a></p>
       </blockquote>
 
-      <div data-commit="Configure miniconda and galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+      <div data-commit="Configure miniforge and galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
 </span><span class="p">@@ -0,0 +1,15 @@</span>
 <span class="gi">+# Galaxy
@@ -3602,7 +3602,7 @@ A: They are correlated (because generally new Galaxy versions could introduce e.
 +galaxy_force_checkout: true
 +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 +miniconda_version: 25.3
-+miniconda_distribution: miniconda
++miniconda_distribution: miniforge
 +miniconda_channels: ['conda-forge']
 </span>   
 </code></pre></div>      </div>
@@ -3635,7 +3635,7 @@ A: They are correlated (because generally new Galaxy versions could introduce e.
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
 </span><span class="p">@@ -13,3 +13,17 @@</span> miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
  miniconda_version: 25.3
- miniconda_distribution: miniconda
+ miniconda_distribution: miniforge
  miniconda_channels: ['conda-forge']
 <span class="gi">+
 +galaxy_config:
@@ -4970,7 +4970,7 @@ In a training setting there is no need to request certificates that will be trus
       <div data-commit="Add job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
 </span><span class="p">@@ -14,6 +14,24 @@</span> miniconda_version: 25.3
- miniconda_distribution: miniconda
+ miniconda_distribution: miniforge
  miniconda_channels: ['conda-forge']
 <span class="err">
 </span><span class="gi">+# Galaxy Job Configuration
@@ -5930,7 +5930,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/88d225dda7b2c99d5c405851c3daa181d4ba51ea">88d225d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c4273445d815efbaa6e446dbb599d4202b8f2ad9">c427344</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
