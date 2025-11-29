@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c4273445d815efbaa6e446dbb599d4202b8f2ad9",
+		release: "galaxy-training-network@77f02050bcf491e4d3d1a880bba2126ccfad697b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Neoantigen 4: Variant Annotation">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-11-14 14:34:46 +0000">
+<meta name="DC.date" content="2025-11-29 22:33:58 +0000">
 <meta name="DC.creator" content="Subina Mehta">
 <meta name="DC.creator" content="Katherine Do">
 <meta name="DC.creator" content="James Johnson"><meta name="description" content="Training material for proteomics workflows in Galaxy">
@@ -182,7 +182,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-11-14 14:34:46 +0000",
+  "dateModified": "2025-11-29 22:33:58 +0000",
   "datePublished": "2025-01-14 14:58:39 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -238,7 +238,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Neoantigen 4: Variant Annotation",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/neoantigen-variant-annotation/tutorial.html",
-  "version": 3,
+  "version": 4,
   "timeRequired": "PT3H",
   "teaches": "- Identify potential neoantigens from sequencing data.\n- Annotate somatic mutations and predict peptide sequences.\n- Predict MHC binding affinities for neoantigens.\n- Interpret data using bioinformatics tools for cancer immunotherapy applications.",
   "keywords": [
@@ -696,11 +696,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "mentions": [
     {
       "@type": "Thing",
-      "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/neoantigen-variant-annotation/workflows/",
-      "name": "Associated Workflows"
-    },
-    {
-      "@type": "Thing",
       "url": "https://bio.tools/tool/galaxy",
       "name": "Galaxy"
     },
@@ -1032,15 +1027,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
 
             
-                <li class="btn btn-default supporting_material">
-
-
-    <a class="btn btn-default topic-icon" href="/training-material/topics/proteomics/tutorials/neoantigen-variant-annotation/workflows/" title="Neoantigen 4: Variant Annotation workflows">
-        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
-    </a>
-
-</li>
-            
 
             
 
@@ -1088,7 +1074,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 14, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 14, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 29, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1106,7 +1092,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
 
     </blockquote>
     </section>
@@ -1140,11 +1126,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
       <li><a href="#mutation-to-peptide-mapping-with-query-tabular" id="markdown-toc-mutation-to-peptide-mapping-with-query-tabular">Mutation to Peptide Mapping with Query Tabular</a></li>
       <li><a href="#annotation-and-filtering" id="markdown-toc-annotation-and-filtering">Annotation and Filtering</a></li>
-      <li><a href="#extracting-relevant-columns-for-sav-peptides" id="markdown-toc-extracting-relevant-columns-for-sav-peptides">Extracting Relevant Columns for SAV Peptides</a></li>
-      <li><a href="#editing-sav-annotation-columns-using-column-regex-find-and-replace" id="markdown-toc-editing-sav-annotation-columns-using-column-regex-find-and-replace">Editing SAV Annotation Columns Using Column Regex Find and Replace</a></li>
-      <li><a href="#merging-assembly-and-sav-annotation-tables" id="markdown-toc-merging-assembly-and-sav-annotation-tables">Merging Assembly and SAV Annotation Tables</a></li>
-      <li><a href="#mapping-peptide-sequences-with-peppointer" id="markdown-toc-mapping-peptide-sequences-with-peppointer">Mapping Peptide sequences with PepPointer</a></li>
-      <li><a href="#visualization-and-interpretation" id="markdown-toc-visualization-and-interpretation">Visualization and Interpretation</a></li>
+      <li><a href="#mapping-assembly-derived-peptide-sequences-with-peppointer" id="markdown-toc-mapping-assembly-derived-peptide-sequences-with-peppointer">Mapping Assembly-derived Peptide sequences with PepPointer</a></li>
+      <li><a href="#visualization-and-interpretation-of-novel-assembly-derived-peptides-with-annotation" id="markdown-toc-visualization-and-interpretation-of-novel-assembly-derived-peptides-with-annotation">Visualization and Interpretation of Novel Assembly-derived peptides with annotation</a></li>
+      <li><a href="#extracting-sav-derived-peptides" id="markdown-toc-extracting-sav-derived-peptides">Extracting SAV-derived peptides</a></li>
+      <li><a href="#mapping-sav-derived-peptide-sequences-with-peppointer" id="markdown-toc-mapping-sav-derived-peptide-sequences-with-peppointer">Mapping SAV-derived Peptide sequences with PepPointer</a></li>
+      <li><a href="#visualization-and-interpretation-of-novel-sav-derived-peptides-with-annotation" id="markdown-toc-visualization-and-interpretation-of-novel-sav-derived-peptides-with-annotation">Visualization and Interpretation of Novel SAV-derived peptides with annotation</a></li>
     </ol>
   </li>
   <li><a href="#b-database-for-iedb" id="markdown-toc-b-database-for-iedb">B: Database for IEDB</a>    <ol>
@@ -1273,9 +1259,10 @@ ON t1.c1 = t2.c1
 
 <h2 id="annotation-and-filtering">Annotation and Filtering</h2>
 
-<p>Because the annotation structures differ between <strong>assembly-derived peptides</strong> and <strong>SAV (single-amino-acid–variant) peptides</strong>, we apply separate text-formatting procedures for each. We first format the assembly-derived peptide annotations, followed by the SAV annotations; the two are then merged to generate unified peptide annotations for downstream processing with <strong>PepPointer</strong>.</p>
+<p>Because the annotation structures differ between <strong>assembly-derived peptides</strong> and <strong>SAV (single-amino-acid–variant) peptides</strong>, we apply separate text-formatting procedures for each. We first format the assembly-derived peptide annotations, followed by the SAV annotations, and will be processed separately with <strong>PepPointer</strong>.</p>
 
 <h3 id="extracting-assembly-derived-peptides">Extracting assembly-derived peptides</h3>
+
 <p>The <strong>Select lines that match an expression</strong> tool is used to extract only the rows corresponding to StringTie-assembled transcripts from a mixed text file. StringTie typically labels transcript or gene identifiers with the prefix <code class="language-plaintext highlighter-rouge">STRG</code>. By filtering for lines containing <code class="language-plaintext highlighter-rouge">STRG</code>, we keep only the relevant transcript entries and discard header or unrelated lines. This cleaned file is then used for downstream integration with genomic and variant annotations.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1310,7 +1297,7 @@ ON t1.c1 = t2.c1
     <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>The <code class="language-plaintext highlighter-rouge">STRG</code> prefix identifies StringTie-assembled genes/transcripts. Filtering for <code class="language-plaintext highlighter-rouge">STRG</code> ensures that only these biologically relevant entries are carried forward for coordinate merging and annotation.</li>
+      <li>The <code class="language-plaintext highlighter-rouge">STRG</code> prefix identifies StringTie-assembled genes/transcripts. Filtering for <code class="language-plaintext highlighter-rouge">STRG</code> ensures that only these biologically relevant entries are carried forward for coordinate annotation.</li>
       <li>Header lines, comments, or any non-StringTie records that do not contain <code class="language-plaintext highlighter-rouge">STRG</code> are removed. This avoids clutter and prevents unrelated entries from interfering with downstream joins and comparisons.</li>
     </ol>
 
@@ -1318,7 +1305,7 @@ ON t1.c1 = t2.c1
 
 </blockquote>
 
-<h3 id="converting-delimiters">Converting delimiters</h3>
+<h3 id="converting-delimiters---assembly-derived-peptides">Converting delimiters - Assembly-derived peptides</h3>
 <p>In this step, we will use the Convert tool to modify characters in a dataset. Specifically, the tool will be used to convert all instances of pipe characters (|) to another format. The tool helps clean and standardize the data for subsequent processing or analysis. This is often a necessary step when preparing data for tools that require specific formats or when performing tasks such as parsing or file importation.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1380,7 +1367,7 @@ ON t1.c1 = t2.c1
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Convert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c3</code></li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
         <li>In <em>“Check”</em>:
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
@@ -1413,8 +1400,9 @@ ON t1.c1 = t2.c1
 
 </blockquote>
 
-<h3 id="extracting-bed-file-information-query-tabular">Extracting bed file information Query Tabular</h3>
-<p>In this step, we will use the Query Tabular tool to extract specific information from a dataset, such as a BED file containing genomic regions, and match it with novel peptides. This allows for identifying the relevant genomic and peptide information by querying data from two sources and combining them through an SQL query. By using an INNER JOIN operation, we can merge data from two tables based on shared columns, and retrieve the necessary information. This query extracts specific columns from both the BED file (such as genomic coordinates) and the novel peptide dataset (such as peptide sequences or identifiers), enabling the identification of peptides that correspond to specific genomic regions. These are the columns that will be extracted -</p>
+<h3 id="extracting-bed-file-information-using-query-tabular---assembly-derived-peptides">Extracting bed file information using Query Tabular - Assembly-derived peptides</h3>
+<p>In this step, we will use the Query Tabular tool to extract specific information from a dataset, such as a BED file containing genomic regions, and match it with novel peptides. This allows for identifying the relevant genomic and peptide information by querying data from two sources and combining them through an SQL query. By using an INNER JOIN operation, we can merge data from two tables based on shared columns, and retrieve the necessary information. This query extracts specific columns from both the BED file (such as genomic coordinates) and the novel peptide dataset (such as peptide sequences or identifiers), enabling the identification of peptides that correspond to specific genomic regions. These are the columns that will be extracted:</p>
+
 <ul>
   <li>Chrom: Chromosome name (e.g., chr1).</li>
   <li>Start: Starting position of the feature (zero-based index).</li>
@@ -1426,7 +1414,7 @@ ON t1.c1 = t2.c1
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-query-tabular-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Query Tabular</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-bed-file-for-assembly-derived-peptides"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Extract BED file for Assembly-derived peptides</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2)</span> with the following parameters:
@@ -1460,7 +1448,256 @@ ON t1.c3 = t2.c4
 
 </blockquote>
 
-<h3 id="extracting-sav-derived-peptides">Extracting SAV-derived peptides</h3>
+<h3 id="convert-proteomic-coordinates-to-genomic-coordinates---assembly-derived-peptides">Convert proteomic coordinates to genomic coordinates - Assembly-derived peptides</h3>
+<p>To convert proteomic coordinates to genomic coordinates, it is essential to account for the relationship between the protein sequence and its corresponding gene or genomic region. In this workflow, the proteomic coordinates have already been extracted at the amino acid level. Since each amino acid in the protein sequence corresponds to a triplet of nucleotides (a codon) in the mRNA, we need to multiply the proteomic coordinate by 3 to obtain the genomic coordinate. This conversion will give us the position of each amino acid within the genomic sequence. The resulting genomic coordinates are stored in a separate column for easy reference. Once this step is completed, we can extract and organize the information in the correct order for further analysis or mapping to the genomic reference.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-text-manipulation-for-assembly-derived-peptides"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Text manipulation for Assembly-derived peptides</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2)</span> with the following parameters:
+      <ul>
+        <li>In <em>“Database Table”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Database Table”</em>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">assembly_formatted_table</code> (output of <strong>Query Tabular - Assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“SQL Query to generate tabular output”</em>:
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT t1.*,
+(t1.c4 - 1) * 3 AS c2_multiplied,
+t1.c5 * 3 AS c3_multiplied
+FROM t1
+</code></pre></div>          </div>
+        </li>
+        <li><em>“include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="annotating-the-genomic-coordinates---assembly-derived-peptides">Annotating the genomic coordinates - Assembly-derived peptides</h3>
+
+<p>The Query Tabular step in this workflow is used to extract and calculate genomic coordinates based on the proteomic data. The SQL query within the tool defines two calculations for genomic coordinates, start and stop, based on the strand information of the data. For each row in the input dataset (t1), if the strand (t1.c7) is “-“ (negative), the genomic coordinates are calculated by subtracting the position from the given end (t1.c3 - t1.c9 for start, and t1.c3 - t1.c10 for stop). If the strand is “+” (positive), the genomic coordinates are calculated by adding the respective positions (t1.c2 + t1.c9 for start, and t1.c2 + t1.c10 for stop). These calculated coordinates are then returned in the query results, where they will be included as new columns (start and stop). This step is essential for transforming the proteomic information into genomic positions for further analysis.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-table-processing-for-assembly-derived-peptides"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Table processing for Assembly-derived peptides</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2)</span> with the following parameters:
+      <ul>
+        <li>In <em>“Database Table”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Database Table”</em>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Text manipulation - Assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“SQL Query to generate tabular output”</em>:
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT t1.*,
+CASE
+WHEN t1.c7 = '-' THEN t1.c3 - t1.c9
+WHEN t1.c7 = '+' THEN t1.c2 + t1.c9
+END AS start,
+CASE
+WHEN t1.c7 = '-' THEN t1.c3 - t1.c10
+WHEN t1.c7 = '+' THEN t1.c2 + t1.c10
+END AS stop FROM t1
+</code></pre></div>          </div>
+        </li>
+        <li><em>“include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Why do I need to differentiate between the positive and negative strands when calculating genomic coordinates?</li>
+    <li>What is the significance of the t1.c9 and t1.c10 columns in the SQL query?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The positive and negative strands represent the two directions in which DNA is read, and they affect how genomic coordinates are calculated. For the negative strand, the coordinates are subtracted, whereas for the positive strand, they are added. This ensures the correct mapping of the protein sequence to the genome.</li>
+      <li>The <code class="language-plaintext highlighter-rouge">t1.c9</code> and <code class="language-plaintext highlighter-rouge">t1.c10</code> columns represent specific offsets or lengths within the dataset, which are used to adjust the calculated genomic start and stop coordinates. These offsets could correspond to peptide lengths or specific features of the protein that need to be accounted for in the conversion to genomic coordinates.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h3 id="generating-bed-file-for-peppointer---assembly-derived-peptides">Generating BED file for PepPointer - Assembly-derived peptides</h3>
+<p>This step is necessary to extract and reorganize relevant genomic information from the dataset. By querying specific columns such as chromosome (chromosome), start (chromStart), end (chromEnd), and strand (strand), we are preparing the data for further analysis. These values are essential for mapping proteomic or peptide data to the genomic coordinates, ensuring accurate alignment and interpretation of the sequence in the context of its genomic location. Additionally, renaming columns enhances clarity and standardizes the format, making it easier to work with the data in subsequent steps.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-bed-file-for-assembly-derived-peptides"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  BED file for Assembly-derived peptides</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2)</span> with the following parameters:
+      <ul>
+        <li>In <em>“Database Table”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Database Table”</em>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Table processing - Assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“SQL Query to generate tabular output”</em>:
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT
+c8 AS `chromosome`,
+c11  AS `chromStart`,
+c12 AS `chromEnd`,
+c1 AS `name`,
+c6 AS `score`,
+c7 AS `strand`
+FROM t1
+</code></pre></div>          </div>
+        </li>
+        <li><em>“include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+    <li>Change data type to “.bed”.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What is the purpose of renaming columns like chromosome, chromStart, and chromEnd in the SQL query?</li>
+    <li>Why is the strand column important in this query, and how does it affect genomic coordinate interpretation?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Renaming the columns helps in providing more meaningful names for the data, making it easier to understand the genomic features such as the chromosome and start/end coordinates. These renamed columns align with common genomic nomenclature, improving readability and analysis.</li>
+      <li>The strand column indicates whether the sequence is on the positive or negative strand of the DNA. This is important for correctly interpreting the orientation of the sequence and calculating its genomic coordinates. A positive strand means the coordinates will be calculated from the start, while a negative strand requires reverse calculations to adjust the coordinates properly.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="mapping-assembly-derived-peptide-sequences-with-peppointer">Mapping Assembly-derived Peptide sequences with PepPointer</h2>
+
+<p>PepPointer is a tool designed to map peptide sequences to their respective genomic locations using data such as GTF and BED files. In this workflow, PepPointer takes the GTF file, which contains gene annotations and genomic coordinates, and combines it with a BED file, which provides chromosomal coordinates of the peptides. By doing this, PepPointer can identify the exact genomic locations of the peptides, linking them to genes and exons. This step is crucial for accurately correlating proteomic data to genomic sequences, enabling a better understanding of the genomic context in which the peptides are found.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-peppointer-for-assembly-derived-peptides"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  PepPointer for Assembly-derived peptides</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3+galaxy1" title="PepPointer tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PepPointer</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.3+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><em>“Choose the source of the GTF file”</em>: <code class="language-plaintext highlighter-rouge">From history</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF file with the genome of interest”</em>: <code class="language-plaintext highlighter-rouge">Homo_sapiens.GRCh38_canon.106.gtf</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BED file with chromosomal coordinates of peptide”</em>: <code class="language-plaintext highlighter-rouge">output</code> (from <strong>Query Tabular - BED file for Assembly</strong>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How does the GTF file help in identifying the genomic location of peptides?</li>
+    <li>What happens if the coordinates in the BED file don’t align with the genomic features in the GTF file?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The GTF file contains detailed annotations of the genome, including information about genes, exons, and other genomic features. By providing the chromosomal coordinates of these features, the GTF file allows PepPointer to match peptide sequences to the corresponding genes and exons. This ensures that the peptides are mapped accurately within the genome, linking them to the correct genomic context.</li>
+      <li>If the coordinates in the BED file don’t align with the genomic features in the GTF file, PepPointer may not be able to accurately map the peptides to their corresponding genes or exons. This misalignment could result in incorrect annotations or a failure to identify the proper genomic location of the peptides. It is important to ensure that both files are from the same genome assembly to avoid such discrepancies.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="visualization-and-interpretation-of-novel-assembly-derived-peptides-with-annotation">Visualization and Interpretation of Novel Assembly-derived peptides with annotation</h2>
+
+<p>In this step, we are using Query Tabular to extract and format relevant information from the results produced by PepPointer. The SQL query in this tool is designed to structure the data into a more readable format, providing key details such as the peptide ID, chromosome location, start and end positions, strand orientation, and any annotations. Additionally, it generates genome coordinates in a format suitable for viewing in genome browsers like IGV and UCSC Genome Browser. This formatting step helps to visualize and interpret the data more effectively by linking the peptides to their genomic context.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-query-tabular-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Query Tabular</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2)</span> with the following parameters:
+      <ul>
+        <li>In <em>“Database Table”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Database Table”</em>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">classified</code> (output of <strong>PepPointer - Assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“SQL Query to generate tabular output”</em>:
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT
+c4 AS Peptide,
+c1 AS Chromosome,
+c2 AS Start,
+c3 AS End,
+c6 AS Strand,
+c7 AS Annotation,
+c1||':'||c2||'-'||c3 AS IGV_Genome_Coordinate,
+'https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&amp;position='||c1||'%3A'||c2||'-'||c3 AS UCSC_Genome_Browser
+FROM  t1
+</code></pre></div>          </div>
+        </li>
+        <li><em>“include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Why is it important to include both the “IGV_Genome_Coordinate” and “UCSC_Genome_Browser” columns?</li>
+    <li>What is the significance of the “Annotation” column, and what type of data might it contain?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The IGV_Genome_Coordinate column provides a formatted coordinate that is directly usable in genome viewers like IGV, helping users visualize the peptide’s genomic location. The UCSC_Genome_Browser column provides a clickable URL to launch UCSC Genome Browser with the coordinates, offering another convenient method for visualizing the peptide’s location in a widely used genome browser. Including both makes it easier for users to explore the data in different genomic tools.</li>
+      <li>The Annotation column provides additional context about the genomic feature associated with the peptide, such as whether the peptide is part of a gene, exon, or other regulatory element. This column can help to interpret the biological relevance of the peptide in the genomic region and is important for understanding the functional role of the peptide within the genome. The data might include annotations like “gene”, “exon”, “intron”, or other functional genomic elements.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="extracting-sav-derived-peptides">Extracting SAV-derived peptides</h2>
+
 <p>The <strong>Select lines that match an expression</strong> tool is used to extract only the rows corresponding to SAV-assembled transcripts from a mixed text file.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1483,7 +1720,7 @@ ON t1.c3 = t2.c4
 
 </blockquote>
 
-<h3 id="converting-delimiters-1">Converting delimiters</h3>
+<h3 id="converting-delimiters">Converting delimiters</h3>
 <p>In this step, we will use the Convert tool to modify characters in a dataset. Specifically, the tool will be used to convert all instances of pipe characters (|) to another format. The tool helps clean and standardize the data for subsequent processing or analysis. This is often a necessary step when preparing data for tools that require specific formats or when performing tasks such as parsing or file importation.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1500,9 +1737,9 @@ ON t1.c3 = t2.c4
 
 </blockquote>
 
-<h2 id="extracting-relevant-columns-for-sav-peptides">Extracting Relevant Columns for SAV Peptides</h2>
+<h3 id="extracting-relevant-columns-for-sav-peptides">Extracting Relevant Columns for SAV Peptides</h3>
 
-<p>The <strong>Cut Columns</strong> tool is used to extract only the fields required for downstream annotation of SAV-derived peptides. Since the structure of SAV output differs from assembly-derived peptide annotations, this step isolates the key identifiers and coordinate fields that will later be merged with assembly annotations during unified peptide mapping. By selecting only the columns necessary for variant-driven peptide interpretation, we ensure a clean and consistent table for integration with tools such as PeptidePointer.</p>
+<p>The <strong>Cut Columns</strong> tool is used to extract only the fields required for downstream annotation of SAV-derived peptides. Since the structure of SAV output differs from assembly-derived peptide annotations, this step isolates the key identifiers and coordinate fields that will later be used for peptide mapping. By selecting only the columns necessary for variant-driven peptide interpretation, we ensure a clean and consistent table for integration with tools such as PeptidePointer.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-extracting-columns-for-sav"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Extracting Columns for SAV</div>
@@ -1518,13 +1755,13 @@ ON t1.c3 = t2.c4
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: (output of <strong>Convert (SAV)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
-    <li>Execute the tool to produce a reduced SAV-specific annotation table containing only the essential fields for downstream merging.</li>
+    <li>Execute the tool to produce a reduced SAV-specific annotation table containing only the essential fields for downstream processing.</li>
   </ol>
 
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Why do we extract only selected columns from the SAV output?</li>
@@ -1532,14 +1769,14 @@ ON t1.c3 = t2.c4
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
-        <p>Extracting only the required fields reduces unnecessary complexity, removes irrelevant columns, and ensures consistent formatting before merging with assembly-derived peptide information.</p>
+        <p>Extracting only the required fields reduces unnecessary complexity, removes irrelevant columns, and ensures consistent formatting.</p>
       </li>
       <li>
-        <p>The SAV table will later be merged with assembly annotations to generate a unified peptide annotation file for use in downstream tools such as PeptidePointer, enabling consistent mapping of peptides to genomic features.</p>
+        <p>The SAV table will later be used in downstream tools such as PeptidePointer, enabling consistent mapping of peptides to genomic features.</p>
       </li>
     </ol>
 
@@ -1547,9 +1784,9 @@ ON t1.c3 = t2.c4
 
 </blockquote>
 
-<h2 id="editing-sav-annotation-columns-using-column-regex-find-and-replace">Editing SAV Annotation Columns Using Column Regex Find and Replace</h2>
+<h3 id="editing-sav-annotation-columns-using-column-regex-find-and-replace">Editing SAV Annotation Columns Using Column Regex Find and Replace</h3>
 
-<p>The <strong>Column Regex Find and Replace</strong> tool is used in this step to clean and standardize SAV (Single Amino-acid Variant) annotation fields. SAV entries often begin with prefixes such as <code class="language-plaintext highlighter-rouge">SNV_</code> or <code class="language-plaintext highlighter-rouge">INDEL_</code>, which must be reformatted to a consistent delimiter-based structure (<code class="language-plaintext highlighter-rouge">SNV|</code>, <code class="language-plaintext highlighter-rouge">INDEL|</code>) to be compatible with downstream peptide-annotation tools such as PepPointer. This formatting step ensures that SAV annotations can later be merged accurately with assembly-derived peptides, despite their inherently different annotation structures.</p>
+<p>The <strong>Column Regex Find and Replace</strong> tool is used in this step to clean and standardize SAV (Single Amino-acid Variant) annotation fields. SAV entries often begin with prefixes such as <code class="language-plaintext highlighter-rouge">SAV_</code> or <code class="language-plaintext highlighter-rouge">INDEL_</code>, which must be reformatted to a consistent delimiter-based structure (<code class="language-plaintext highlighter-rouge">SAV|</code>, <code class="language-plaintext highlighter-rouge">INDEL|</code>) to be compatible with downstream peptide-annotation tools such as PepPointer.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-editing-sav-annotations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Editing SAV Annotations</div>
@@ -1639,7 +1876,7 @@ ON t1.c1 = t2.c3
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: (output of <strong>Query Tabular (SAV)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
-    <li>Execute the tool to produce a reduced SAV-specific annotation table containing only the essential fields for downstream merging.</li>
+    <li>Execute the tool to produce a reduced SAV-specific annotation table containing only the essential fields for downstream processing.</li>
   </ol>
 
 </blockquote>
@@ -1671,51 +1908,13 @@ ON t1.c1 = t2.c3
 
 </blockquote>
 
-<p>Because the annotation formats differ between <strong>assembly-derived peptides</strong> and <strong>SAV-derived peptides</strong>, we process them separately before merging. We first perform text formatting on the assembly peptide annotations, followed by formatting of the SAV annotations, and finally merge both sets for unified peptide annotation using <strong>PepPointer</strong>.</p>
+<p>Because the annotation formats differ between <strong>assembly-derived peptides</strong> and <strong>SAV-derived peptides</strong>, we must process them separately. We first perform text formatting on the assembly peptide annotations, followed by formatting of the SAV annotations, and finally process both sets for separate peptide annotation using <strong>PepPointer</strong>.</p>
 
-<h2 id="merging-assembly-and-sav-annotation-tables">Merging Assembly and SAV Annotation Tables</h2>
-
-<p>The <strong>Concatenate Datasets</strong> tool merges the formatted assembly-derived peptide annotations with the processed SAV-derived annotations into a single unified table. This consolidated dataset allows all peptide sources—assembly, genomic, and SAV—to be passed into <strong>PepPointer</strong> for final peptide-level annotation. Concatenation ensures that variant-driven peptides and assembly-derived peptides are integrated into one harmonized file before downstream processing.</p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-concatenate-assembly-and-sav-tables"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Concatenate Assembly and SAV tables</div>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/concatenate/concatenate/1.0.0" title="Concatenate datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span> with:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset (input1)”</em>: <code class="language-plaintext highlighter-rouge">assembly_formatted_table</code> (output of <strong>Query Tabular (assembly)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Select (input2)”</em>: <code class="language-plaintext highlighter-rouge">sav_formatted_table</code> (output of <strong>Column Regex Find And Replace (SAV)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-      </ul>
-    </li>
-  </ol>
-
-</blockquote>
-
-<blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
-
-  <ol>
-    <li>Why do we merge assembly and SAV annotations before running PepPointer?</li>
-    <li>What considerations should be taken into account when concatenating tables?</li>
-  </ol>
-
-  <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-
-    <ol>
-      <li>PepPointer requires all peptide sources to be provided together so it can assign unified peptide-level annotations, including genomic, variant, and transcript context.</li>
-      <li>Column order and formatting must match between tables to ensure correct alignment after concatenation.</li>
-    </ol>
-
-  </blockquote>
-
-</blockquote>
-
-<h3 id="performing-calculations-to-convert-proteomic-coordinates-to-genomic-coordinates">Performing calculations to convert proteomic coordinates to genomic coordinates.</h3>
+<h3 id="convert-proteomic-coordinates-to-genomic-coordinates---sav-derived-peptides">Convert proteomic coordinates to genomic coordinates - SAV-derived peptides</h3>
 <p>To convert proteomic coordinates to genomic coordinates, it is essential to account for the relationship between the protein sequence and its corresponding gene or genomic region. In this workflow, the proteomic coordinates have already been extracted at the amino acid level. Since each amino acid in the protein sequence corresponds to a triplet of nucleotides (a codon) in the mRNA, we need to multiply the proteomic coordinate by 3 to obtain the genomic coordinate. This conversion will give us the position of each amino acid within the genomic sequence. The resulting genomic coordinates are stored in a separate column for easy reference. Once this step is completed, we can extract and organize the information in the correct order for further analysis or mapping to the genomic reference.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-query-tabular-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Query Tabular</div>
+  <div class="box-title hands-on-title" id="hands-on-text-manipulation-sav-derived-peptides"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Text manipulation - SAV-derived peptides</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2)</span> with the following parameters:
@@ -1724,13 +1923,16 @@ ON t1.c1 = t2.c3
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Database Table”</em>
               <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">sav_formatted_table</code> (output of <strong>Column Regex Find And Replace - SAV</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
               </ul>
             </li>
           </ul>
         </li>
         <li><em>“SQL Query to generate tabular output”</em>:
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT t1.*, (t1.c4 - 1) * 3 AS c2_multiplied, t1.c5 * 3 AS c3_multiplied FROM t1
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT t1.*,
+(t1.c4 - 1) * 3 AS c2_multiplied,
+t1.c5 * 3 AS c3_multiplied
+FROM t1
 </code></pre></div>          </div>
         </li>
         <li><em>“include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1740,12 +1942,12 @@ ON t1.c1 = t2.c3
 
 </blockquote>
 
-<h3 id="annotating-the-genomic-coordinates">Annotating the genomic coordinates</h3>
+<h3 id="annotating-the-genomic-coordinates---sav-derived-peptides">Annotating the genomic coordinates - SAV-derived peptides</h3>
 
 <p>The Query Tabular step in this workflow is used to extract and calculate genomic coordinates based on the proteomic data. The SQL query within the tool defines two calculations for genomic coordinates, start and stop, based on the strand information of the data. For each row in the input dataset (t1), if the strand (t1.c7) is “-“ (negative), the genomic coordinates are calculated by subtracting the position from the given end (t1.c3 - t1.c9 for start, and t1.c3 - t1.c10 for stop). If the strand is “+” (positive), the genomic coordinates are calculated by adding the respective positions (t1.c2 + t1.c9 for start, and t1.c2 + t1.c10 for stop). These calculated coordinates are then returned in the query results, where they will be included as new columns (start and stop). This step is essential for transforming the proteomic information into genomic positions for further analysis.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-query-tabular-4"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Query Tabular</div>
+  <div class="box-title hands-on-title" id="hands-on-text-processing-sav"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Text processing - SAV</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2)</span> with the following parameters:
@@ -1754,7 +1956,7 @@ ON t1.c1 = t2.c3
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Database Table”</em>
               <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Query Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Text manipulation - SAV</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
               </ul>
             </li>
           </ul>
@@ -1778,31 +1980,11 @@ END AS stop FROM t1
 
 </blockquote>
 
-<blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
-
-  <ol>
-    <li>Why do I need to differentiate between the positive and negative strands when calculating genomic coordinates?</li>
-    <li>What is the significance of the t1.c9 and t1.c10 columns in the SQL query?</li>
-  </ol>
-
-  <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-
-    <ol>
-      <li>The positive and negative strands represent the two directions in which DNA is read, and they affect how genomic coordinates are calculated. For the negative strand, the coordinates are subtracted, whereas for the positive strand, they are added. This ensures the correct mapping of the protein sequence to the genome.</li>
-      <li>The <code class="language-plaintext highlighter-rouge">t1.c9</code> and <code class="language-plaintext highlighter-rouge">t1.c10</code> columns represent specific offsets or lengths within the dataset, which are used to adjust the calculated genomic start and stop coordinates. These offsets could correspond to peptide lengths or specific features of the protein that need to be accounted for in the conversion to genomic coordinates.</li>
-    </ol>
-
-  </blockquote>
-
-</blockquote>
-
-<h3 id="generating-bed-file-for-peppointer">Generating BED file for PepPointer</h3>
+<h3 id="generating-bed-file-for-peppointer---sav-derived-peptides">Generating BED file for PepPointer - SAV-derived peptides</h3>
 <p>This step is necessary to extract and reorganize relevant genomic information from the dataset. By querying specific columns such as chromosome (chromosome), start (chromStart), end (chromEnd), and strand (strand), we are preparing the data for further analysis. These values are essential for mapping proteomic or peptide data to the genomic coordinates, ensuring accurate alignment and interpretation of the sequence in the context of its genomic location. Additionally, renaming columns enhances clarity and standardizes the format, making it easier to work with the data in subsequent steps.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-query-tabular-5"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Query Tabular</div>
+  <div class="box-title hands-on-title" id="hands-on-bed-file-for-sav-derived-peptides"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  BED file for SAV-derived peptides</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2)</span> with the following parameters:
@@ -1811,7 +1993,7 @@ END AS stop FROM t1
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Database Table”</em>
               <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Query Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Text processing - SAV</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
               </ul>
             </li>
           </ul>
@@ -1835,32 +2017,12 @@ FROM t1
 
 </blockquote>
 
-<blockquote class="question">
-  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
-
-  <ol>
-    <li>What is the purpose of renaming columns like chromosome, chromStart, and chromEnd in the SQL query?</li>
-    <li>Why is the strand column important in this query, and how does it affect genomic coordinate interpretation?</li>
-  </ol>
-
-  <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-
-    <ol>
-      <li>Renaming the columns helps in providing more meaningful names for the data, making it easier to understand the genomic features such as the chromosome and start/end coordinates. These renamed columns align with common genomic nomenclature, improving readability and analysis.</li>
-      <li>The strand column indicates whether the sequence is on the positive or negative strand of the DNA. This is important for correctly interpreting the orientation of the sequence and calculating its genomic coordinates. A positive strand means the coordinates will be calculated from the start, while a negative strand requires reverse calculations to adjust the coordinates properly.</li>
-    </ol>
-
-  </blockquote>
-
-</blockquote>
-
-<h2 id="mapping-peptide-sequences-with-peppointer">Mapping Peptide sequences with PepPointer</h2>
+<h2 id="mapping-sav-derived-peptide-sequences-with-peppointer">Mapping SAV-derived Peptide sequences with PepPointer</h2>
 
 <p>PepPointer is a tool designed to map peptide sequences to their respective genomic locations using data such as GTF and BED files. In this workflow, PepPointer takes the GTF file, which contains gene annotations and genomic coordinates, and combines it with a BED file, which provides chromosomal coordinates of the peptides. By doing this, PepPointer can identify the exact genomic locations of the peptides, linking them to genes and exons. This step is crucial for accurately correlating proteomic data to genomic sequences, enabling a better understanding of the genomic context in which the peptides are found.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-peppointer"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  PepPointer</div>
+  <div class="box-title hands-on-title" id="hands-on-peppointer-for-sav-derived-peptides"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  PepPointer for SAV-derived peptides</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3+galaxy1" title="PepPointer tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PepPointer</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.3+galaxy1)</span> with the following parameters:
@@ -1870,39 +2032,19 @@ FROM t1
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF file with the genome of interest”</em>: <code class="language-plaintext highlighter-rouge">Homo_sapiens.GRCh38_canon.106.gtf</code> (Input dataset)</li>
           </ul>
         </li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BED file with chromosomal coordinates of peptide”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Query Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BED file with chromosomal coordinates of peptide”</em>: <code class="language-plaintext highlighter-rouge">output</code> (from <strong>Query Tabular - BED file for Assembly</strong>)</li>
       </ul>
     </li>
   </ol>
 
 </blockquote>
 
-<blockquote class="question">
-  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
-
-  <ol>
-    <li>How does the GTF file help in identifying the genomic location of peptides?</li>
-    <li>What happens if the coordinates in the BED file don’t align with the genomic features in the GTF file?</li>
-  </ol>
-
-  <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-
-    <ol>
-      <li>The GTF file contains detailed annotations of the genome, including information about genes, exons, and other genomic features. By providing the chromosomal coordinates of these features, the GTF file allows PepPointer to match peptide sequences to the corresponding genes and exons. This ensures that the peptides are mapped accurately within the genome, linking them to the correct genomic context.</li>
-      <li>If the coordinates in the BED file don’t align with the genomic features in the GTF file, PepPointer may not be able to accurately map the peptides to their corresponding genes or exons. This misalignment could result in incorrect annotations or a failure to identify the proper genomic location of the peptides. It is important to ensure that both files are from the same genome assembly to avoid such discrepancies.</li>
-    </ol>
-
-  </blockquote>
-
-</blockquote>
-
-<h2 id="visualization-and-interpretation">Visualization and Interpretation</h2>
+<h2 id="visualization-and-interpretation-of-novel-sav-derived-peptides-with-annotation">Visualization and Interpretation of Novel SAV-derived peptides with annotation</h2>
 
 <p>In this step, we are using Query Tabular to extract and format relevant information from the results produced by PepPointer. The SQL query in this tool is designed to structure the data into a more readable format, providing key details such as the peptide ID, chromosome location, start and end positions, strand orientation, and any annotations. Additionally, it generates genome coordinates in a format suitable for viewing in genome browsers like IGV and UCSC Genome Browser. This formatting step helps to visualize and interpret the data more effectively by linking the peptides to their genomic context.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-query-tabular-6"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Query Tabular</div>
+  <div class="box-title hands-on-title" id="hands-on-query-tabular-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Query Tabular</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2" title="Query Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Query Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2)</span> with the following parameters:
@@ -1911,7 +2053,7 @@ FROM t1
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Database Table”</em>
               <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">classified</code> (output of <strong>PepPointer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">classified</code> (output of <strong>PepPointer - SAV</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
               </ul>
             </li>
           </ul>
@@ -1936,26 +2078,6 @@ FROM  t1
 
 </blockquote>
 
-<blockquote class="question">
-  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
-
-  <ol>
-    <li>Why is it important to include both the “IGV_Genome_Coordinate” and “UCSC_Genome_Browser” columns?</li>
-    <li>What is the significance of the “Annotation” column, and what type of data might it contain?</li>
-  </ol>
-
-  <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-
-    <ol>
-      <li>The IGV_Genome_Coordinate column provides a formatted coordinate that is directly usable in genome viewers like IGV, helping users visualize the peptide’s genomic location. The UCSC_Genome_Browser column provides a clickable URL to launch UCSC Genome Browser with the coordinates, offering another convenient method for visualizing the peptide’s location in a widely used genome browser. Including both makes it easier for users to explore the data in different genomic tools.</li>
-      <li>The Annotation column provides additional context about the genomic feature associated with the peptide, such as whether the peptide is part of a gene, exon, or other regulatory element. This column can help to interpret the biological relevance of the peptide in the genomic region and is important for understanding the functional role of the peptide within the genome. The data might include annotations like “gene”, “exon”, “intron”, or other functional genomic elements.</li>
-    </ol>
-
-  </blockquote>
-
-</blockquote>
-
 <h1 id="b-database-for-iedb">B: Database for IEDB</h1>
 <p><a href="/training-material/topics/proteomics/images/neoantigen/PepPointer_Characterization_3.PNG" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/PepPointer_Characterization_3.PNG" alt="Variant-annotation-overview-workflow. " width="1280" height="720" loading="lazy" /></a></p>
 
@@ -1969,8 +2091,8 @@ FROM  t1
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1" title="Tabular-to-FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular-to-FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited file”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Query Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
-        <li><em>“Sequence column”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+        <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+        <li><em>“Sequence column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
   </ol>
@@ -1998,15 +2120,12 @@ FROM  t1
   <div class="box-title hands-on-title" id="hands-on-running-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Running the Workflow</div>
 
   <ol>
-    <li>
-      <p><strong>Import the workflow</strong> into Galaxy:</p>
-
-      <!--SNIPPET-->
-      <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-gtn-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands On: Importing and launching a GTN workflow</div>   <div class="show-when-galaxy-proxy-active"> <span class="workflow" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-neoantigen-variant-annotation/versions/main_workflow">   Launch <strong>peppointer Annotation</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </span> (<a href="https://github.com/galaxyproject/training-material/blob/main/topics/proteomics/tutorials/neoantigen-variant-annotation/workflows/main_workflow.ga">View on GitHub</a>, <a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/neoantigen-variant-annotation/workflows/main_workflow.ga">Download workflow</a>) workflow. </div>   <div class="hide-when-galaxy-proxy-active"> Click to  <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-neoantigen-variant-annotation/versions/main_workflow">     Launch <strong>peppointer Annotation</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a href="https://github.com/galaxyproject/training-material/blob/main/topics/proteomics/tutorials/neoantigen-variant-annotation/workflows/main_workflow.ga">View on GitHub</a>, <a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/neoantigen-variant-annotation/workflows/main_workflow.ga">Download workflow</a>) </div>   <!--SNIPPET-->   <blockquote class="tip">   <div class="box-title tip-title" id="tip-if-this-does-not-work"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-this-does-not-work" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: If this does not work</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span> <em>Workflows</em> in the Galaxy activity bar (on the left side of the screen, or in the top menu bar of older Galaxy instances). You will see a list of all your workflows</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Paste the following URL into the box labelled <em>“Archived Workflow URL”</em>: <code class="language-plaintext highlighter-rouge">https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/neoantigen-variant-annotation/workflows/main_workflow.ga</code></li>   <li>Click the <strong>Import workflow</strong> button</li> </ol>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/FXlkreylhww" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote>   <p><!--END_SNIPPET--></p> </blockquote>
-      <p><!--END_SNIPPET--></p>
+    <li><strong>Import the workflow</strong> into Galaxy:
+      <ul>
+        <li>(Neoantigen Variant Annotation)[https://tinyurl.com/ipepgen-pep-annot-wf]</li>
+      </ul>
     </li>
-    <li>
-      <p>Run <strong>Workflow</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:</p>
+    <li>Run <strong>Workflow</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genomic-Variant-BED-file”</em>: <code class="language-plaintext highlighter-rouge">Genomic-Variant-BED-file.tabular</code></li>
@@ -2017,10 +2136,16 @@ FROM  t1
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Running a workflow</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <strong>Workflows</strong> on the vertical panel on the left of the <strong>Galaxy action list</strong></li>   <li>At the top of the resulting page you will have the option to switch between the <em>My workflows</em>, <em>Workflows shared with me</em> and <em>Public workflows</em> tabs. Select the tab  you want to see all workflows in that category..</li>   <li>Search for  your desired workflow .</li> </ol>   <p><img src="/training-material/topics/climate/images/bgc_calib/bgc_workflow.png" alt="Select workflow" width="15%" /></p>   <ol>   <li>Click on the workflow name: a pop-up window opens with a preview of the workflow</li>   <li>     <p>To run it directly: click <strong>Run</strong> (top-right)</p>   </li>   <li><strong>Recommended</strong>: click <strong>Import</strong> (left of Run) to make your own local copy under <em>Workflows / My Workflows</em></li> </ol>   <p>You may have to refresh your history to see the queued jobs</p> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Running a workflow</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <strong>Workflows</strong> on the vertical panel on the left of the <strong>Galaxy action list</strong>.</li>   <li>At the top of the resulting page you will have the option to switch between the <em>My workflows</em>, <em>Workflows shared with me</em> and <em>Public workflows</em> tabs.</li>   <li>Select the tab you want to see all workflows in that category</li>   <li>Search for your desired workflow.</li> </ol>   <p><img src="/training-material/topics/climate/images/bgc_calib/bgc_workflow.png" alt="Select workflow" width="15%" /></p>   <ol>   <li>Click on the workflow name: a pop-up window opens with a preview of the workflow.</li>   <li>     <p>To run it directly: click <strong>Run</strong> (top-right).</p>   </li>   <li><strong>Recommended</strong>: click <strong>Import</strong> (left of Run) to make your own local copy under <em>Workflows / My Workflows</em>.</li> </ol>   <p>You may have to refresh your history to see the queued jobs</p> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
   </ol>
+
+  <div class="box-title comment-title" id="comment-disclaimer"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: DISCLAIMER</div>
+
+  <ul>
+    <li>If any step in this workflow fails, please ensure that the input files have been correctly generated and formatted by the preceding tools. Workflow failures often result from improperly called or incomplete input data rather than errors in the workflow itself. Users are responsible for verifying their input before troubleshooting workflow issues.</li>
+  </ul>
 
 </blockquote>
 
@@ -2464,7 +2589,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c4273445d815efbaa6e446dbb599d4202b8f2ad9">c427344</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/77f02050bcf491e4d3d1a880bba2126ccfad697b">77f0205</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
