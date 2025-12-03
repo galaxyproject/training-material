@@ -113,7 +113,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 > If any major functionality is broken or missing, and cannot be readily fixed, roll-back upgrade to last working state.
 > 
 > ### Communication plan
-> If the tests on the Test instance were successful and was peer reviewed, initiate communication plan.
+> If the tests on the Test instance were successful and were peer reviewed, initiate communication plan.
 > - [ ] notify users about the planned upgrade, schedule, and anticipated downtime (e.g. via a banner on the frontpage)
 > - [ ] Make a draft pull request for a news item, which includes emphasis on reporting unexpected behavior, and any new features or changes 
 >
@@ -340,60 +340,6 @@ Once you've made sure of these things, it's time to do it!
 You should see in the Ansible output that Galaxy had to rebuild the client, update the database, rebuild its virtual environment and restart. If you weren't using Ansible, these steps would all be manual and important not to get wrong. Ansible makes the entire process super simple for us.
 
 Congratulations, your Galaxy server should now be updated to the latest version. You can check this by going to the Admin UI page or by using the API as described above.
-
-> <hands-on-title>Upgrade checklist</hands-on-title>
-> If you are ready to perform your upgrade, the following checklist could inspire you into performing some important steps to ensure a successful Galaxy upgrade. It includes points important in a change management process.
->
-> ### Pre-upgrade
-> - [ ] Make sure all changes to the codebase are tracked by Git (make enough commits with clear commit messages) 
->   - [ ] Work in one pull request that reflect all changes made to infrastructure, documentation, frontpage, etc.
->   - [ ] Assign a technical and/or peer reviewer to verify your changes
->   - [ ] Include regression steps and verification
-> - [ ] Review release notes for new features, deprecations, and breaking changes 
-> - [ ] Assess the upgrade's impact on workflows, tools, data formats, and integrations
-> - [ ] Evaluate changes in resource requirements and dependencies (Python version, libraries/containers, Linux distribution, VM size and computational powers,...)
-> - [ ] Choose a maintenance window with minimal user impact
-> - [ ] Asses expected alerts from monitoring and notify colleagues where necessary
->
-> ### Back up strategy
-> - [ ] Initiate back up plan and asses if current back up system needs to be suspended
-> - [ ] Perform a full backup of the PostgreSQL database
-> - [ ] Verify that backups are complete and functional
->   - [ ] Reinstate backups in duplicate setup  
-> 
-> ### Test Upgrade
-> - [ ] Perform upgrade in a test instance that mirrors production
->   - [ ] Authentication method(s)
->   - [ ] Email notifications & activation link
->   - [ ] Uploading data 
->   - [ ] Running a tool 
->   - [ ] Running a workflow 
->   - [ ] Exporting data 
->   - [ ] Exporting workflow runs 
->   - [ ] Making a new history 
->   - [ ] Deleting and purging datasets 
->   - [ ] Deleting and purging histories
->   - [ ] Running a job via Pulsar (if configured)
->   - [ ] Bring Your Own Storage connection
-> 
-### Production Upgrade
-If the Tests on the test instance were successful, initiate production upgrade process.
-> - [ ] Notify users about the planned upgrade, schedule, and anticipated downtime (e.g. via a banner on the frontpage)
-> - [ ] Make a draft pull request for a news item, which includes emphasis on reporting unexpected behavior, and any new features or changes 
-> - [ ] See if the GDPR compliance / data policy page requires updating after the new changes
-> - [ ] Roll back if significant issues arise, following the regression steps
->
-> ### Post-upgrade
-> - [ ] Conduct post-upgrade testing (see test upgrade list from above) to ensure functionality in the production environment
-> - [ ] Merge PR on news item & reverse notice banner when change is complete   
-> - [ ] Make sure that any config, dependency or infrastructure changes have been documented
->
-> ### Continuous improvement
-> - [ ] Review lessons learned from the upgrade process
-> - [ ] Update the upgrade checklist and procedures accordingly
-> - [ ] Begin preparing for the next Galaxy release
-> - [ ] Monitor CVEs and patches from upstream and redeploy  
-{: .hands_on}
 
 # Ongoing maintenance
 
