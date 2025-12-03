@@ -20,6 +20,7 @@ key_points:
   - Re-run the playbook from time to time to keep your Galaxy server up to date with any minor changes and patches
 contributors:
   - slugger70
+  - B0r1sD
 subtopic: maintenance
 tags:
   - ansible
