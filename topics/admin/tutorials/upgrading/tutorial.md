@@ -56,18 +56,95 @@ We can upgrade our Galaxy version by modifying the Ansible var files and re-runn
 
 This tutorial will show you how and discuss some of the things you need to keep in mind whenever you are updating or upgrading your Galaxy server.
 
+> <hands-on-title>Upgrade checklist</hands-on-title>
+> If you are ready to perform your upgrade, the following checklist could inspire you into performing some important steps to ensure a successful Galaxy upgrade. It includes points important in a change management process.
+>
+> ## Pre-upgrade
+> - [ ] Review release notes for new features, deprecations, and breaking changes 
+> - [ ] Assess the upgrade's impact on workflows, tools, data formats, and integrations
+> - [ ] Evaluate changes in resource requirements and dependencies:
+>   - Python version 
+>   - libraries/containers
+>   - Linux distribution
+>   - VM size and computational powers
+>   - Others depending on set-up 
+> - [ ] Asses expected alerts from monitoring during the production upgrade
+> - [ ] Select a maintenance window for the production upgrade with minimal user impact
+>   - Preferably during business hours (manual implementation), at the start of the week to maximize time for a potential disaster recovery
+> - [ ] Asses if the data policy page requires updating after upgrading
+>
+> ### Backup and regression strategy
+> - [ ] Asses if current (automatic) backup system needs to be suspended or updated
+> - [ ] Perform a full backup of the relevant databases (PostgresDB, SQLite,...)
+> - [ ] Verify that backups are complete and functional
+>   - [ ] Reinstate backups in duplicate setup  
+> - [ ] Make a regression plan on how to roll back to the original, pre-upgrading state in the case the upgrade fails 
+>   - [ ] Verify, test and update this plan ahead of upgrading
+> 
+> ### Adjust Ansible playbooks
+> - [ ] Have all changes made under version control 
+>   - [ ] make enough commits with clear, conventional commit messages
+>   - [ ] Ideally, have one pull request that reflects all changes made to infrastructure, documentation, frontpage, etc. and add appropriate labels
+>   - [ ] If possible, assign at least one technical and/or peer reviewer to verify your changes
+>
+> ### Testing Upgrade
+> The following checklist should be performed after upgrading the Test instance and the production instance. 
+>  - [ ] All login and authentication methods 
+>  - [ ] Email notifications
+>  - [ ] 'Forgot password' option and check that activation link works
+>  - [ ] Error reporting
+>  - [ ] Uploading data 
+>  - [ ] Running a normal tool 
+>    - Ideally, running a list of top used tools (automated using Bioblend), leveraging IUC's tool tests, running all tool tests using Ephemeris,...
+>  - [ ] Running a data source tool 
+>  - [ ] Running a tool that makes use of special set user preferences
+>  - [ ] Running a workflow 
+>    - List of top used workflows
+>  - [ ] Exporting data 
+>  - [ ] Exporting workflow runs 
+>  - [ ] Making a new history 
+>  - [ ] Deleting and purging datasets 
+>  - [ ] Deleting and purging histories
+>  - [ ] If configured:
+>    - [ ] Running a job via Pulsar 
+>    - [ ] Test Bring Your Own Storage options
+>    - [ ] Test Bring Your Own Compute options
+> 
+> If any major functionality is broken or missing, and cannot be readily fixed, roll-back upgrade to last working state.
+> 
+> ### Communication plan
+> If the tests on the Test instance were successful and was peer reviewed, initiate communication plan.
+> - [ ] notify users about the planned upgrade, schedule, and anticipated downtime (e.g. via a banner on the frontpage)
+> - [ ] Make a draft pull request for a news item, which includes emphasis on reporting unexpected behavior, and any new features or changes 
+>
+> ## Production Upgrade
+> - [ ] Adapt and execute the Ansible playbook
+> ## Post-upgrade
+> - [ ] Roll back if significant issues arise, following the regression strategy
+> - [ ] Conduct post-upgrade testing to ensure functionality in the production environment
+>   - Use the same Test upgrade list from above
+> - [ ] Announce completion and share (link to) any new features or changes with user base
+>   - Merge news item pull request if applicable
+>   - Remove pre-upgrade announcement banner if applicable
+> - [ ] Make sure that any config, dependency or infrastructure changes have been documented and is under version control 
+>   - [ ] Add updates to the documentation, if applicable
+>
+> ### Continuous improvement
+> - [ ] Review lessons learned from the upgrade process
+> - [ ] Update the upgrade checklist and procedures accordingly
+> - [ ] Begin preparing for the next Galaxy release
+> - [ ] Monitor CVEs and patches from Galaxy upstream
+>   - redeploy playbook when necessary
+{: .hands_on}
+
+
 ## The Galaxy Release Process
 
-The latest updates on the Galaxy release proces can be found here: https://docs.galaxyproject.org/en/master/project/releases.html
+The latest updates on the Galaxy release process can be found here: https://docs.galaxyproject.org/en/master/project/releases.html. A short summary can be found below. 
 
-- Long Term Support (LTS) releases happen annually, in the first quarter.
-A LTS release is a major version update that receives significant and thorough end-to-end testing by a dedicated team, and will be supported and receive bugfixes until the next LTS. As such, this release is ideally targeted for production use by local Galaxy administrators.
-
-- Minor Releases: usually 2-3 times a year, generally in the early summer and fall.
-Throughout the year, Galaxy also ships several (usually 2-3) minor releases. These are version updates like 24.1, 24.2. These can also include significant updates, new features, etc. and follow the same release-testing protocol as with the LTS release. These are targeted for administrators who want to stay up to date with the latest features and improvements. Usegalaxy.org deploys new minor releases as a part of the release process.
-
-- Point Releases: As needed.
-Point releases (e.g. 24.1.1) are issued to address bug fixes and security updates. These are not scheduled and are released as needed. Following the Git release branch (i.e. release_24.1) is recommended to stay up to date with these.
+- Long Term Support (LTS) releases happen annually, in the first quarter (e.g. 25.0).
+- Minor Releases: usually 2-3 times a year, generally in the early summer and fall (e.g. 25.1).
+- Point Releases: as needed (e.g. 24.1.1)
 
 Please note that the release dates can vary based on the development process and testing results.
 
@@ -294,16 +371,14 @@ Congratulations, your Galaxy server should now be updated to the latest version.
 >   - [ ] Exporting data 
 >   - [ ] Exporting workflow runs 
 >   - [ ] Making a new history 
->   - [ ] Removing data 
->   - [ ] Removing histories
->   - [ ] Pulsar
+>   - [ ] Deleting and purging datasets 
+>   - [ ] Deleting and purging histories
+>   - [ ] Running a job via Pulsar (if configured)
 >   - [ ] Bring Your Own Storage connection
 > 
 ### Production Upgrade
-If the Tests on the test instance were successful, initiate poduction upgrade process.
-> - [ ] Notify users about the planned upgrade, schedule, and anticipated downtime 
->   - [ ] Make a pull request to add a notice banner via notices.yml in the relevant repository
->   - [ ] Merge notice banner at least one week in advance 
+If the Tests on the test instance were successful, initiate production upgrade process.
+> - [ ] Notify users about the planned upgrade, schedule, and anticipated downtime (e.g. via a banner on the frontpage)
 > - [ ] Make a draft pull request for a news item, which includes emphasis on reporting unexpected behavior, and any new features or changes 
 > - [ ] See if the GDPR compliance / data policy page requires updating after the new changes
 > - [ ] Roll back if significant issues arise, following the regression steps
