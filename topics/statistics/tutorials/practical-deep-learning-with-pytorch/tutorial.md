@@ -44,9 +44,16 @@ notebook:
   language: python
   pyolite: true
 ---
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
-
-# 1 Neural networks with PyTorch
+# Neural networks with PyTorch
 
 PyTorch is compiled in different versions for different systems. When working locally, check out the PyTorch [Get Started Guide](https://pytorch.org/get-started/locally/) to install PyTorch with the appropriate CUDA version for your system.
 
@@ -57,7 +64,7 @@ import torch
 _ = torch.manual_seed(42)
 ```
 
-## 1.1 Working with tensors
+## Working with tensors
 
 In their most basic form, tensors are just multi-dimensional arrays.
 
@@ -125,7 +132,12 @@ t.grad
 
 Indeed, calling `.backward()` on the `out` tensor computes the gradients of `out` with respect to `t`, and stores them in `t.grad`. The gradient (or derivatives) of the sum of squares with respect to each element is `2 * t[i]`, so for `t = [1.0, 2.0, 3.0]`, the gradients will be `[2.0, 4.0, 6.0]`.
 
-*Assignment 1: Create a tensor with `requires_grad=True` and perform a sequence of operations on it. Then, call backward() and check the gradient.*
+> <hands-on-title></hands-on-title>
+> 1. Create a tensor with `requires_grad=True`
+> 2. Perform a sequence of operations on it. 
+> 3. Call `backward()`
+> 4. Check the gradient.
+{: .hands-on}
 
 
 ```python
@@ -134,10 +146,10 @@ Indeed, calling `.backward()` on the `out` tensor computes the gradients of `out
 
 More information on tensors can be found in the [PyTorch documentation](https://docs.pytorch.org/docs/stable/tensors.html#initializing-and-basic-operations), including a full list of tensor operations. You can also check the [PyTorch tutorial on tensor basics](https://pytorch.org/tutorials/beginner/basics/tensorqs_tutorial.html) for more examples and explanations.
 
-## 1.2 Handling data sets in PyTorch
+## Handling data sets in PyTorch
 
 
-### 1.2.1 Exploring the breast cancer dataset
+### Exploring the breast cancer dataset
 
 The breast cancer dataset is a classic dataset for binary classification tasks. It contains features extracted from images of breast cancer tumors, along with labels indicating whether the tumor is malignant or benign. As the features have already been extracted and processed into a numerical format, the dataset is ideal for a simple neural network classification task.
 
@@ -200,7 +212,7 @@ sns.pairplot(
 
 We can see that these features show some separation between the two classes, but not all of them are equally useful. For example, "worst fractal dimension" is not as informative as "worst radius". The neural network will allow us to combine these features in a way that maximizes the separation between the two classes.
 
-### 1.2.2 Creating a data set object
+### Creating a data set object
 
 Data handling for deep learning is a bit different from regular machine learning. In deep learning, we often work with large datasets that are too big to fit into memory all at once. Instead, we load the data in batches, which allows us to train both save memory and speed up the training process. The latter is possible applying gradient descent per batch instead of for the entire dataset at once.
 
@@ -233,7 +245,13 @@ cancer_dataset = CancerDataset(features, targets)
 
 Now the dataset can be accessed by index, just like a list. Each item is a tuple containing the features and targets as tensors.
 
-*Assignment: Try to access the first 10 samples of the dataset. What do you see?*
+> <hands-on-title></hands-on-title>
+> Try to access the first 10 samples of the dataset.
+> 
+> > <question-title></question-title>
+> > What do you see?
+> {: .question}
+{: .hands-on}
 
 
 ```python
@@ -242,7 +260,7 @@ Now the dataset can be accessed by index, just like a list. Each item is a tuple
 
 Learn more about Datasets on the [PyTorch documentation](https://pytorch.org/docs/stable/data.html).
 
-### 1.2.3 Creating a data loader
+### Creating a data loader
 
 PyTorch provides a convenient way to load data in batches using the [`DataLoader`](https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader) class. It takes a `Dataset` object and provides an iterable over the dataset, allowing you to easily iterate over the data in batches. Training data can be immediately shuffled by the `DataLoader`, which is useful for training models. The `DataLoader` class also provides options for parallel data loading, which can speed up the training process if data parsing is computationally expensive.
 
@@ -265,9 +283,9 @@ Learn more about `DataLoader` on the [PyTorch documentation](https://pytorch.org
 
 *Question: Go to the documentation and look up the difference between an iterable and map-style dataset. When would you use one over the other? What are the advantages and disadvantages of each?*
 
-## 1.3 Building a simple linear classifier
+## Building a simple linear classifier
 
-### 1.3.1 Creating a Pytorch model object to define the model architecture
+### Creating a Pytorch model object to define the model architecture
 
 The [`nn.Module`](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module) class is the base class for all neural network modules in PyTorch. It provides a convenient way to define and manage the architecture and all parameters of your model, as well as to define the forward pass of your model.
 The `__init__` method is where you define the layers of your model. In this case, we are using a single linear layer with 30 input features and 2 output features. The `forward` method defines the forward pass of your model, which takes in the input data and passes it through the layers defined in the `__init__` method.
@@ -296,7 +314,7 @@ model = BreastCancerClassifier()
 model.forward(batch_x).shape
 ```
 
-### 1.3.2 The loss function
+### The loss function
 
 The loss function is simply a measure of how well the model is performing. PyTorch provides a variety of loss functions in the [`torch.nn`](https://pytorch.org/docs/stable/nn.html#loss-functions) module, including mean squared error (MSE), cross-entropy loss, and binary cross-entropy loss. The choice of loss function depends on the type of problem you are trying to solve. For example, if you are working on a regression problem, you would typically use MSE, while for a classification problem, you would use cross-entropy loss.
 
@@ -314,7 +332,7 @@ We can also calculate the ROC-AUC score on the entire validation set using the [
 from sklearn.metrics import roc_auc_score
 ```
 
-### 1.3.3 The optimizer
+### The optimizer
 
 The optimizer is the algorithm that adjusts the parameters of a model to minimize the loss function. It takes the gradients computed during the backward pass and
 determines how to use them to update the model parameters. The most important hyperparameter for the optimizer is the learning rate, which controls how much to adjust the parameters at each step. A smaller learning rate means smaller updates, while a larger learning rate means larger updates.
@@ -328,7 +346,7 @@ When setting up the optimizer, you need to pass in the parameters of your model 
 optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)
 ```
 
-### 1.3.4 The training loop
+### The training loop
 The training loop is the core of the training process. It goes through the following steps:
 
 1. Get a batch of data from the `DataLoader`.
@@ -356,7 +374,7 @@ print(f"{loss_value.item():.4f}")
 
 *Note: [`squeeze()`](https://pytorch.org/docs/stable/generated/torch.squeeze.html#torch-squeeze) is used to remove the extra dimension from the output of the model. The model outputs a tensor of shape `(batch_size, 1)`, but we want it to be of shape `(batch_size,)` for the loss function.*
 
-### 1.3.3 Training a model
+### Training a model
 
 Of course, we want to train the model for multiple *epochs*. An epoch is a complete pass through the training data. In each epoch, we will go through all the batches of data in the `DataLoader` and perform the training steps described above. Additionally, we want to see how the model is performing on the *validation set*. To do this, we will perform a single forward step with the current model on a validation dataset and compute the loss after each epoch.
 
@@ -434,19 +452,24 @@ pd.DataFrame({
 
 If everything is working correctly, you should see the train loss decreasing over time. The model should also be able to predict the labels of the validation set with a some accuracy.
 
-## 1.4 Building a linear deep neural network
+## Building a linear deep neural network
 
 So far, we have built a simple linear classifier. However, in practice, we often want to build more complex models that can learn more intricate patterns in the data. This means that we will add multiple layers to our model, making it a *deep neural network* (or in this case, rather a *shallow* neural network).
 
-### 1.4.1 Activation functions
+### Activation functions
 
 For the breast cancer dataset, we will build a model with three hidden layers, each with a decreasing number of neurons. In between each layer, we will add an activation function. The activation function is a non-linear function that is applied to the output of each neuron in the layer. It introduces non-linearity into the model, allowing it to learn more complex patterns in the data. The most common activation functions are **ReLU (Rectified Linear Unit)**, **sigmoid**, and **tanh**. ReLU is the most commonly used activation function in deep learning, as it is computationally efficient and helps to mitigate the vanishing gradient problem. The sigmoid function is often used in the output layer for binary classification problems, as it outputs a value between 0 and 1, which can be interpreted as a probability. The tanh function is similar to the sigmoid function, but it outputs values between -1 and 1.
 
 PyTorch provides activations functions as part of the [`torch.nn`](https://pytorch.org/docs/stable/nn.html#torch-nn) module. The most common activation functions are implemented as classes, and can be used as layers in the model. For example, to use the ReLU activation function, you can simply add [`nn.ReLU()`](https://pytorch.org/docs/stable/generated/torch.nn.ReLU.html#torch.nn.ReLU) to your model.
 
-### 1.4.2 Extending the model architecture
+### Extending the model architecture
 
-*Assignment: Modify the `BreastCancerClassifier` class to include three hidden layers, each with a decreasing number of neurons (30, 15, 1). Use the ReLU activation function between each layer. The final output layer should have 1 neuron and use the sigmoid activation function.*
+> <hands-on-title></hands-on-title>
+> 1. Modify the `BreastCancerClassifier` class to include three hidden layers, each with a decreasing number of neurons (30, 15, 1). 
+> 2. Use the ReLU activation function between each layer. 
+>
+> The final output layer should have 1 neuron and use the sigmoid activation function.
+{: .hands-on}
 
 
 ```python
@@ -468,9 +491,16 @@ class BreastCancerClassifier(nn.Module):
         return x
 ```
 
-### 1.4.3 Training the model
+### Training the model
 
-*Assignment: Now repeat the training process by reusing your code from 1.3.3. How does the model perform? Is it better than the previous model?*
+> <hands-on-title></hands-on-title>
+> Repeat the training process by reusing your code from 1.3.3. 
+>
+> > <question-title></question-title>
+> > 1. How does the model perform?
+> > 2. Is it better than the previous model?
+> {: .question}
+{: .hands-on}
 
 
 ```python
@@ -478,9 +508,9 @@ class BreastCancerClassifier(nn.Module):
 
 ```
 
-# 2 Working faster and cleaner with PyTorch Lightning
+# Working faster and cleaner with PyTorch Lightning
 
-## 2.1 Introduction
+## Introduction
 
 In the previous tutorial, we learned how to build a simple neural network using PyTorch. In this tutorial, we will learn how to use PyTorch Lightning to make our code cleaner and more efficient.
 
@@ -488,9 +518,9 @@ PyTorch Lightning is a lightweight wrapper around PyTorch that helps you organiz
 
 We will also briefly look at Weights & Biases (wandb), a tool for tracking experiments and visualizing results. It is not required to use PyTorch Lightning, but it is a great tool to have in your toolbox. We will use it to log our training and validation metrics, and to visualize our results.
 
-## 2.2 PyTorch Lightning
+## PyTorch Lightning
 
-### 2.2.1 Repeating the basics
+### Repeating the basics
 
 First, lets get some code from the previous tutorial. We will use the same dataset and model, but we will refactor the code to use PyTorch Lightning.
 
@@ -543,7 +573,7 @@ dataloader_train = DataLoader(data_train, batch_size=32, shuffle=True)
 dataloader_validation = DataLoader(data_validation, batch_size=32, shuffle=False)
 ```
 
-### 2.2.2 Setting up the Lightning module
+### Setting up the Lightning module
 
 Take a look again at the training loop code from the previous tutorial. It contained quite some boilerplate code that would be highly similar across different ML projects. We will now refactor this code to use PyTorch Lightning, which will help us to remove a lot of this boilerplate code.
 
@@ -595,7 +625,9 @@ Note that the resulting code is much cleaner and more organized than the trainin
 
 All configuration of the training process is done in the [`Trainer`](https://pytorch-lightning.readthedocs.io/en/stable/common/trainer.html#trainer) class. This class will take care of the training and validation loops, as well as logging and checkpointing. We will create an instance of this class and pass it our model and the training and validation data loaders.
 
-*Assignment: Browse through the documentation for the trainer class and try to understand the different arguments of the class. Pay special attention to the `accelerator` and `devices` arguments, which are some of the most useful features of PyTorch Lightning.*
+> <hands-on-title></hands-on-title>
+> Browse through the documentation for the trainer class and try to understand the different arguments of the class. Pay special attention to the `accelerator` and `devices` arguments, which are some of the most useful features of PyTorch Lightning.
+{: .hands-on}
 
 
 ```python
@@ -607,7 +639,7 @@ trainer = L.Trainer(
 
 Note that the trainer immediately tells us whether we are using a GPU or not. This is a great feature of PyTorch Lightning, as it allows us to write code that is agnostic to the hardware we are using. We can run the same code on a CPU, a single GPU, or multiple GPUs without changing anything in our code.
 
-### 2.2.4 Fitting the model
+### Fitting the model
 
 Now we can simply call the `fit` method of the trainer to start training our model. It takes the model, the training data loader, and the validation data loader as arguments.
 
@@ -622,7 +654,7 @@ trainer.fit(
 
 While we had to take care of logging the progress ourselves in the previous tutorial, PyTorch Lightning takes care of this for us.
 
-## 2.3 Logging with Weights & Biases
+## Logging with Weights & Biases
 
 Weights & Biases (wandb) allows us to log and visualize training and validation metrics across different training runs. It also has a feature for hyperparameter tuning, called Sweeps, which allows us to automatically search for the best hyperparameters for our model.
 
@@ -659,7 +691,7 @@ wandb.finish()  # Finish the wandb run
 
 Go to the run URL as logged by wandb and check out the results. You should see a new run with the same name as the one you used in the code. You can click on it to see the details of the run, including the training and validation metrics, the model checkpoints, and the hyperparameters used for the run.
 
-## 2.4 Performing a hyperparameter sweep
+## Performing a hyperparameter sweep
 
 Now that we have set up wandb, we can use it to perform a hyperparameter sweep. This will allow us to automatically search for the best hyperparameters for our model, such as number of layers, number of neurons per layer, learning rate, etc.
 
@@ -780,4 +812,9 @@ With the `wandb.agent` function, we can start the sweep. Note that the `count` a
 wandb.agent(sweep_id, function=sweep, count=20)
 ```
 
-*Assignment: Go to the wandb dashboard and check out the results of the sweep. You should see a new sweep with the same name as the one you used in the code. You can click on it to see the details of the sweep, including the training and validation metrics, the model checkpoints, and the hyperparameters used for each run.*
+> <hands-on-title></hands-on-title>
+>
+> Go to the wandb dashboard and check out the results of the sweep. 
+> 
+> You should see a new sweep with the same name as the one you used in the code. You can click on it to see the details of the sweep, including the training and validation metrics, the model checkpoints, and the hyperparameters used for each run.
+{: .hands-on}
