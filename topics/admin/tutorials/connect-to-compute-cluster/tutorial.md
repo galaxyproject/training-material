@@ -100,7 +100,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -23,3 +23,8 @@
+>    @@ -22,3 +22,8 @@
 >     # Singularity/Apptainer
 >     - src: usegalaxy_eu.apptainer
 >       version: 0.0.3
@@ -151,18 +151,19 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -194,6 +194,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
+>    @@ -199,6 +199,17 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
->     
+>
 >    +# Slurm
 >    +slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
 >    +slurm_nodes:
 >    +- name: localhost # Name of our host
 >    +  CPUs: 2         # Here you would need to figure out how many cores your machine has. For this training we will use 2 but in real life, look at `htop` or similar.
+>    +  RealMemory: 8192  # Adjust based on available memory. For this training 8192 is sufficient.
 >    +slurm_config:
 >    +  SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != 2
->    +  SelectType: select/cons_res
+>    +  SelectType: select/cons_tres
 >    +  SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >    +
 >     # TUS
@@ -389,7 +390,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -18,14 +18,27 @@ galaxy_job_config:
+>    @@ -21,14 +21,29 @@ galaxy_job_config:
 >         local_runner:
 >           load: galaxy.jobs.runners.local:LocalJobRunner
 >           workers: 4
@@ -408,6 +409,8 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    +      slurm:
 >    +        runner: slurm
 >    +        singularity_enabled: true
+>    +        # Enabling access to the reference data on CVMFS in the container
+>    +        singularity_volumes: $defaults,/cvmfs/data.galaxyproject.org:ro
 >    +        env:
 >    +        - name: LC_ALL
 >    +          value: C

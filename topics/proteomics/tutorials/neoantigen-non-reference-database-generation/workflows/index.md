@@ -1,0 +1,7 @@
+---
+layout: workflow-list
+
+redirect_from:
+  - /topics/proteomics/tutorials/neoantigen-2-non-reference-database-generation/workflows/
+  - /topics/proteomics/tutorials/neoantigen-non-reference-database-generation/workflows/main_workflow.html
+---

@@ -62,6 +62,20 @@ $tutorial-box-spacing: 1rem;
 	--feedback-color: #86D486;
 	--code-color: #86D486;
 	--code-out-color: #fb99d0;
+
+    // Rainbow buttons for stats and GTA
+    //--rainbow-red: #f2002b;
+    --rainbow-orangered: #f64021;
+    --rainbow-orange: #f98016;
+    --rainbow-orangeyellow: #fcc00b;
+    //--rainbow-yellow: #ffff00;
+    --rainbow-green: #00cc66;
+    --rainbow-blue: #6381dd;
+    --rainbow-purple: #a74ee1;
+    --rainbow-violet: #f04ac5;
+    --rainbow-pink: #e8aed6;
+
+
 }
 
 body[data-brightness="light"][data-light_theme="yellow"] {
@@ -82,6 +96,11 @@ body[data-brightness="dark"] {
 	--secondary-color: #222;
 	--secondary-color-text: var(--text-color);
 
+}
+
+// Add a white background to transparent gif as it was causing a visualization issue
+body[data-brightness="dark"] img[src$=".gif"] {
+	background-color: #fff;
 }
 
 body[data-brightness="dark"][data-dark_theme="night"] {
@@ -188,6 +207,17 @@ hr {
 .color-code { background: var(--code-color); }
 .color-code-out { background: var(--code-out-color); }
 
+//.color-rainbow-red { background: var(--rainbow-red); color: black; }
+.color-rainbow-orangered { background: var(--rainbow-orangered); color: black; }
+.color-rainbow-orange { background: var(--rainbow-orange); color: black; }
+.color-rainbow-orangeyellow { background: var(--rainbow-orangeyellow); color: black; }
+//.color-rainbow-yellow { background: var(--rainbow-yellow); color: black }
+.color-rainbow-green { background: var(--rainbow-green); color: black; }
+.color-rainbow-blue { background: var(--rainbow-blue); color: black; }
+.color-rainbow-purple { background: var(--rainbow-purple); color: black; }
+.color-rainbow-violet { background: var(--rainbow-violet); color: black; }
+.color-rainbow-pink { background: var(--rainbow-pink); color:black;}
+
 
 body {
 	font-family: "Atkinson Hyperlegible",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
@@ -214,7 +244,7 @@ body {
     box-shadow: 3px 3px $bg-color;
 
     // The new replacement
-    & > h3 ,
+    & > h3:not(.nobox),
     > .box-title {
         font-size: $font-size + 3;
         margin-inline-start: -$tutorial-box-spacing;
@@ -1705,6 +1735,7 @@ ul.text-list, ol.text-list {
 
 .gtn-card {
     border-radius: 10px;
+    margin-bottom: 1em;
 
     .card-title {
         font-size: 500%;

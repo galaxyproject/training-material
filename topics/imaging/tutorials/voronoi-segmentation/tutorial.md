@@ -2,6 +2,8 @@
 layout: tutorial_hands_on
 
 title: Voronoi segmentation
+level: Intermediate
+subtopic: analyses
 zenodo_link: https://zenodo.org/records/15172302
 questions:
   - How do I partition an image into regions based on which object they are nearest to (Voronoi segmentation)?
@@ -24,15 +26,22 @@ requirements:
     topic_name: imaging
     tutorials:
       - imaging-introduction
-contributors:
-- evenmm
-- rmassei
-- kostrykin
-- annefou
+
+contributions:
+  authorship:
+    - evenmm
+    - rmassei
+    - kostrykin
+    - annefou
+  funding:
+    - fiesta
+    - oscars
 tags:
-- imageanalysis
-- segmentation
-- voronoi
+- Tessellation
+- Image segmentation
+- Object counting
+- Overlay
+- Multi-channel image
 ---
 
 
@@ -75,6 +84,17 @@ In Earth observation, Voronoi segmentation is used to analyze spatial patterns a
 
 These images are from {% cite weinstein2022neontree %}.
 
+
+### Application to Astronomy
+
+In astronomy and large-scale sky surveys, a key objective is to identify individual celestial bodies—such as stars and galaxies—in sky images to enable detailed scientific analysis. Image segmentation is therefore a critical first step. In our case, Voronoi segmentation is used to divide the image into regions corresponding to individual objects or clusters. This method has the potential to separate overlapping or closely spaced sources, allowing for accurate analysis. Once segmented, these structures can be examined morphologically, and their luminosities can be measured with precision.
+
+![Sky image](../../images/voronoi-segmentation/sky_image_IMAGE.png "Sky image.")
+
+![Segmented sky image](../../images/voronoi-segmentation/sky_image_OVERLAY_VORONOI.png "Segmented sky image.")
+
+Thes original image is published by [Legacy Surveys / D. Lang (Perimeter Institute)](https://www.legacysurvey.org/acknowledgment/) and can be downloaded from the [official website](https://www.legacysurvey.org/viewer/jpeg-cutout?ra=53.16216667&dec=-27.79149167&layer=ls-dr10&pixscale=0.262&size=1200). The Legacy Surveys are described in {% cite legacy-survey-astronomy %}.
+
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -115,10 +135,11 @@ In principle, this tutorial can be followed with any type of data provided that 
 > 
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 > 
-> 2. Import {% icon galaxy-upload %} the following dataset from [Zenodo](https://zenodo.org/records/15172302). 
+> 2. Import {% icon galaxy-upload %} the following dataset from [Zenodo]({{ page.zenodo_link }}). 
 > 
 >    ```
 >    https://zenodo.org/records/15281843/files/images_and_seeds.zip
+>    https://zenodo.org/records/15424465/files/image_and_seed.zip
 >    ```
 > 
 >    - **Important:** Choose the type of data as `zip`.
@@ -133,6 +154,7 @@ In principle, this tutorial can be followed with any type of data provided that 
 >    - *"Filepath"*: Choose which data you want to use: 
 >        - Cells: `images_and_seeds/cell_image-B2--W00026--P00001--Z00000--T00000--dapi.tiff`
 >        - Trees: `images_and_seeds/tree_image_2019_DELA_5_423000_3601000.tiff`
+>        - Galaxies: `sky_image_IMAGE.png`
 >    
 > 4. Rename {% icon galaxy-pencil %} the resulting file as `image`.
 >
@@ -146,6 +168,7 @@ In principle, this tutorial can be followed with any type of data provided that 
 >    - *"Filepath"*: Choose the seed image corresponding to the image you chose in the last step. 
 >        - Cells: `images_and_seeds/cell_seeds-B2--W00026--P00001--Z00000--T00000--dapi.tiff`
 >        - Trees: `images_and_seeds/tree_seeds_2019_DELA_5_423000_3601000.tiff`
+>        - Galaxies: `sky_image_SEED.png`
 >
 > 7. Rename {% icon galaxy-pencil %} the resulting file as `seeds`.
 {: .hands_on}

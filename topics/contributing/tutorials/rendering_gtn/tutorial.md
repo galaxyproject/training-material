@@ -32,10 +32,12 @@ contributions:
   editing:
   - teresa-m
   - nomadscientist
+  - mittler-works
   funding:
   - elixir-europe
   - deNBI
   - uni-freiburg
+  - deKCD
 
 redirect_from:
   - "/topics/contributing/tutorials/running-codespaces/tutorial"
@@ -55,7 +57,7 @@ recordings:
 
 If you are working on training materials, you will likely want to preview your changes as you go! You have a few options on how to do this.
 
-{% include _includes/cyoa-choices.html option1="Codespaces" option2="Gitpod" option3="Command-line" default="Codespaces"
+{% include _includes/cyoa-choices.html option1="Codespaces" option2="Gitpod" option3="Command-line" option4="Container-based" default="Codespaces"
        text="We recommend using Codespaces. We used to use Gitpod, however it loads a bit slower and the interface changed as of spring 2025, so the tutorial may be out of date. **CodeSpaces and GitPod are both online methods**; only the command-line option requires you to install things on your machine." %}
 
 <div class="Codespaces" markdown="1">
@@ -677,5 +679,206 @@ Once you are done, you can stop the server and clean your repository.
 {: .hands_on}
 
 # Conclusion
+
+</div>
+
+<div class="container-based" markdown="1">
+
+Using the container-based method, you can edit and preview GTN Training Material locally on you computer.
+
+# Prerequisites
+
+You will need the GTN Training Material source code and a container platform. If you wish to contribute your changes, you will also need git. The exact installation steps vary a little depending on your operating system.
+
+For this tutorial, Docker will be used as container platform, as it is easy to use and available for all major operating systems.
+
+Other container platforms should work as well. Beware with rootless container platform installations, you have to pay special attention to the user namespace mode and thus to the UID and GID configuration in order to preserve correct file ownership information.
+
+## For Linux users
+
+#### Docker
+
+I recommend to install only Docker Engine (**not** Docker Desktop) for Linux users. Just follow the [official setup documentation](https://docs.docker.com/engine/install/) for your specific distribution.
+
+An common practise is to assign your current user to the `docker` group. **Please do not!** This implies inherent security concerns, as it basically gives your current user unrestricted root access. Learn more: [https://docs.docker.com/engine/security/#docker-daemon-attack-surface](https://docs.docker.com/engine/security/#docker-daemon-attack-surface).
+
+#### Git
+
+Use the package manager of your specific distribution in order to install git. All major linux distributions do have git in their official package sources. Please consult your distros documentation for help with package installation.
+
+###### Examples
+
+```bash
+# For Debian based distros, using apt:
+sudo apt install git
+
+# For Fedora based distros, using yum:
+sudo yum install git
+
+# For Fedora based distros, using dnf:
+sudo dnf install git
+
+# For Arch based distros, using pacman
+sudo pacman -S git
+```
+
+## For Windows users
+
+On windows you have multiple virtualization options in order to run linux containers. You should use the WSL2 method for various reasons. This tutorial is only tested for the WSL2 method only.
+
+Additionally, to work with source code located within WSL2, I recommend installing VS Code.
+
+#### WSL2
+
+Please follow the [official setup documentation](https://learn.microsoft.com/en-us/windows/wsl/install) for installing WSL2.
+
+###### TL;DR
+
+Open PowerShell by right-clicking on the windows logo in taskbar and run:
+
+```bash
+wsl --install
+```
+
+#### Docker
+
+Please follow the [official setup documentation](https://docs.docker.com/desktop/setup/install/windows-install/) for installing Docker Desktop on Windows.
+
+#### Git
+
+With the installation of Docker, an Ubuntu image has been installed on your system, which already includes git. No additional steps needed.
+
+#### VS Code
+
+Please follow the [official setup documentation](https://code.visualstudio.com/download) for installing VS Code. This is useful for windows users as it is one of the simplest methods to work with files located in the WSL2 (linux) file system.
+
+## For MacOS users
+
+#### Docker
+
+Please follow the [official setup documentation](https://docs.docker.com/desktop/setup/install/mac-install/) for installing Docker Desktop on MacOS.
+
+#### Git
+
+Run a terminal and type a git command, e.g. `git --version`. If git is not installed on your system yet, MacOS will automatically prompt you to install it through Xcode. Just follow the on-screen instructions.
+
+# Preparation
+
+## Command line utilities
+
+All following commands are meant to be entered in a shell. For Linux and MacOS, e.g. you can use a terminal application.
+
+Windows users **must not** use the PowerShell, but the Ubuntu app that was automatically installed alongside WSL2 and Docker. If you are running it the first time, create a username and a password. Beware that files created in the Ubuntu app are located on a separate file system. If you need to access them from windows, you may open the explorer and choose the "Linux" Bookmark in the left sidebar. However, usually you should not need to access any of these files through windows.
+
+## Git basics
+
+In order to be able to contribute, you will need to have a Github account and you will need to create a fork of the GTN Training Material Repository. This can be simply done via Browser on the [GTN Training Material Github page](https://github.com/galaxyproject/training-material).
+
+You will need to create a SSH key pair or provide other authentication vectors in order to push changes to your fork. Read more about this in the [official documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh).
+
+If this is your first time using git, please read the [Github contribution guide](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project).
+## Clone the GTN Training Material Repository
+
+For Linux and MacOS users, open your favorite terminal application. For Windows users, open the Ubuntu app which provides you with a terminal, as well. Run:
+
+```bash
+# You may want to replace the address with your forks address
+# You may want to use SSH based clone if you want to contribute
+git clone --depth 1 --branch main https://github.com/galaxyproject/training-material.git
+```
+
+## Configure environment
+
+Switch into the cloned repository:
+
+```bash
+# "training-material" is the default name. If you have changed your forks name or if you provided a directory to clone into, please edit accordingly.
+cd training-material
+```
+
+For Linux and MacOS users, you may open the directory in your favorite IDE.
+
+For Windows users, if you have installed VS Code prior, run following command to open the directory in VS Code:
+
+```bash
+# For windows users
+code .
+```
+
+Create a `.env` file. In this file, you may add several environment variables:
+
+| Key | Description | Default |
+| --- | --- | --- |
+| COMPOSE_PROJECT_NAME | The project name to be used for composition, should be unique | gtn-dev |
+| GTN_RUBY_TAG | The Ruby Tag to be used for the container | 3-bookworm |
+| GTN_UID | The effective UID to use within the container, should match your current UID | 1000 |
+| GTN_GID | The effective GID to use within the container, should match your current GID | 1000 |
+| GTN_PORT | The Port on which GTN will be accessible, should not be already bound | 4000 |
+| GTN_RELOAD_PORT | The Port on which the reload server will listen, should not be already bound | 4001 |
+
+If you don't know your current UID and GID you may run:
+
+```bash
+# To find out your UID
+id -u
+
+# To find out your GID
+id -g
+```
+
+Your `.env` should have a form like:
+
+```bash
+# KEY=VALUE
+# e.g.:
+COMPOSE_PROJECT_NAME=galaxytraining
+```
+
+# Using the composition
+
+I recommend using the command line, but you can also do lifecycle operations via docker desktop after you have run the composition the first time.
+
+Beware, the first time the composition is starting, it may take some time until everything is setup entirely.
+
+When the composition has started, you may access the GTN Training Material on the port you provided, per default this is 4000: [http://localhost:4000/training-material/](http://localhost:4000/training-material/).
+
+###### Starting
+
+If you are done configuring, you may start the composition
+
+```bash
+# To start it with attached terminal
+sudo docker compose up
+
+# To start it with detached terminal
+sudo docker compose up -d
+```
+
+If you have started the composition detached, you may retrieve the logs via
+
+```bash
+# -f will follow the logs, if you want to disconnect, press CTRL+C
+sudo docker compose logs -f
+```
+
+###### Stopping
+
+If you have started the composition with attached terminal, just press `CTRL+C`.
+
+If you have started the composition detached, you may run:
+
+```bash
+sudo docker compose stop
+```
+
+###### Removing
+
+If you want to remove associated containers and resources, you may run:
+
+```bash
+sudo docker compose down
+```
+
+If you have volumes involved, you may run this command with the `-v` flag in order to remove the volumes as well.
 
 </div>

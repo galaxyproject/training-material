@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: "Regulations/standards for AI using DOME"
 level: Intermediate
-draft: true
 questions:
 - How should data provenance be documented to ensure transparency in AI research?
 - What strategies can be employed to manage redundancy between training and test datasets in biological research?

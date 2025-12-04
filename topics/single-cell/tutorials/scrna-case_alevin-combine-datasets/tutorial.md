@@ -144,7 +144,7 @@ The sample data is a subset of the reads from each of the seven samples in a mou
 >
 {: .details}
 
-{% include _includes/cyoa-choices.html option1="Import History" option2="Zenodo" default="Import-History"
+{% include _includes/cyoa-choices.html option1="Import History" option2="Zenodo" default="Import History"
        text="If you're on the EU or ORG/USA server, then the quickest way to Get the Data for this tutorial is via importing a history. Otherwise, you can also import from Zenodo - it just might take a moment longer if you're in a live course and everyone is importing the same dataset at the same time!" %}
 <div class="Import-History" markdown="1">
 

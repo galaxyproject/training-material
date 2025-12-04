@@ -4,6 +4,27 @@
     "comments": [
         {
             "child_steps": [
+                13,
+                16,
+                19
+            ],
+            "color": "green",
+            "data": {
+                "title": "Hosts Sequences Identification and Removal (Kraken Technique)"
+            },
+            "id": 6,
+            "position": [
+                1407.3,
+                410.5
+            ],
+            "size": [
+                709.1,
+                300
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
                 11,
                 17,
                 25,
@@ -27,44 +48,82 @@
             "type": "frame"
         },
         {
+            "color": "lime",
+            "data": {
+                "text": "In this workflow, we recommend nanopore samples since we are using some tools that are specified for nanopore such as: Minimap2, Nanoplot porechp and fastp.\n\nIn order to switch to illumina please remove the nanoplot step, replace porechop and fastp with cutadapt or trimmomatic, and finally replace Minimap2 with  Bowtie2.\n\nThis workflow also take single-end reads to switch to paired-end, you have to check this option in most of the tools used. "
+            },
+            "id": 0,
+            "position": [
+                294.3,
+                145.60000000000002
+            ],
+            "size": [
+                460,
+                228
+            ],
+            "type": "markdown"
+        },
+        {
             "child_steps": [
-                13,
-                16,
-                19
+                2,
+                5
             ],
             "color": "green",
             "data": {
-                "title": "Hosts Sequences Identification and Removal (Kraken Technique)"
+                "title": "Trimming to retain samples reads quality"
             },
-            "id": 6,
+            "id": 1,
             "position": [
-                1407.3,
-                410.5
+                294,
+                474
             ],
             "size": [
-                709.1,
-                300
+                498,
+                346.8
             ],
             "type": "frame"
         },
         {
             "child_steps": [
-                8,
-                9,
-                26
+                18,
+                7,
+                10,
+                12,
+                20,
+                22,
+                21
             ],
             "color": "green",
             "data": {
-                "title": "Samples QC After Trimming"
+                "title": "Host Sequences Detection and Removal (Mapping Technique)"
             },
-            "id": 5,
+            "id": 2,
             "position": [
-                892.1,
-                911.2
+                886,
+                0
             ],
             "size": [
-                569.3,
-                815
+                1772,
+                293
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                1
+            ],
+            "color": "green",
+            "data": {
+                "title": "Input Samples Collection"
+            },
+            "id": 3,
+            "position": [
+                0,
+                941.4
+            ],
+            "size": [
+                240,
+                142.2
             ],
             "type": "frame"
         },
@@ -91,84 +150,24 @@
         },
         {
             "child_steps": [
-                1
+                8,
+                9,
+                26
             ],
             "color": "green",
             "data": {
-                "title": "Input Samples Collection"
+                "title": "Samples QC After Trimming"
             },
-            "id": 3,
+            "id": 5,
             "position": [
-                0,
-                941.4
+                892.1,
+                911.2
             ],
             "size": [
-                240,
-                142.2
+                569.3,
+                815
             ],
             "type": "frame"
-        },
-        {
-            "child_steps": [
-                7,
-                10,
-                12,
-                18,
-                20,
-                22,
-                15,
-                21
-            ],
-            "color": "green",
-            "data": {
-                "title": "Host Sequences Detection and Removal (Mapping Technique)"
-            },
-            "id": 2,
-            "position": [
-                886,
-                0
-            ],
-            "size": [
-                1772,
-                293
-            ],
-            "type": "frame"
-        },
-        {
-            "child_steps": [
-                2,
-                5
-            ],
-            "color": "green",
-            "data": {
-                "title": "Trimming to retain samples reads quality"
-            },
-            "id": 1,
-            "position": [
-                294,
-                474
-            ],
-            "size": [
-                498,
-                346.8
-            ],
-            "type": "frame"
-        },
-        {
-            "color": "lime",
-            "data": {
-                "text": "In this workflow, we recommend nanopore samples since we are using some tools that are specified for nanopore such as: Minimap2, Nanoplot porechp and fastp.\n\nIn order to switch to illumina please remove the nanoplot step, replace porechop and fastp with cutadapt or trimmomatic, and finally replace Minimap2 with  Bowtie2.\n\nThis workflow also take single-end reads to switch to paired-end, you have to check this option in most of the tools used. "
-            },
-            "id": 0,
-            "position": [
-                294.3,
-                145.60000000000002
-            ],
-            "size": [
-                460,
-                228
-            ],
-            "type": "markdown"
         }
     ],
     "creator": [
@@ -192,7 +191,6 @@
     ],
     "format-version": "0.1",
     "license": "MIT",
-    "release": "0.1",
     "name": "Nanopore Preprocessing",
     "report": {
         "markdown": "# Nanopore - Preprocessing Workflow Report\nBelow are the results of the Preprocessing  Workflow\n\nThis workflow was run on:\n\n```galaxy\ngenerate_time()\n```\n\nWith Galaxy version:\n\n```galaxy\ngenerate_galaxy_version()\n```\n\n## Workflow Inputs\nA collection of all sample reads (all in the same sequence file format, e.g.: Fastq, Fastq.gz, Fastqsanger, etc.)\n\n## Workflow Outputs\n\n### Multi QC Report of all samples before reads quality retaining\n\n```galaxy\nhistory_dataset_as_image(output=\"multiQC_html_report_before_preprocessing\")\n```\n### Multi QC Report of all samples after reads quality retaining\n\n```galaxy\nhistory_dataset_as_image(output=\"multiQC_html_report_after_preprocessing\")\n```\n\n### Percentages of removed host sequences in every sample\n\n```galaxy\nhistory_dataset_display(output=\"removed_hosts_percentage_tabular\")\n```\n"
@@ -218,7 +216,7 @@
                 "top": 19.602400000005026
             },
             "tool_id": null,
-            "tool_state": "{\"restrictOnConnections\": true, \"parameter_type\": \"text\", \"optional\": true}",
+            "tool_state": "{\"validators\": [], \"restrictOnConnections\": true, \"parameter_type\": \"text\", \"optional\": true}",
             "tool_version": null,
             "type": "parameter_input",
             "uuid": "1435b9fc-84c0-4a1a-af49-007da98f4d5f",
@@ -245,7 +243,7 @@
                 "top": 981.4
             },
             "tool_id": null,
-            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}",
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\", \"fields\": null}",
             "tool_version": null,
             "type": "data_collection_input",
             "uuid": "6a0dea4c-3d2c-4ab9-bb87-82cff75ac6d0",
@@ -388,11 +386,6 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "nanoplot_qc_on_reads_before_preprocessing_nanostats",
-                    "output_name": "nanostats",
-                    "uuid": "15ecf5b1-e0eb-405a-ac3a-359feb66d4cd"
-                },
-                {
                     "label": "nanoplot_on_reads_before_preprocessing_nanostats_post_filtering",
                     "output_name": "nanostats_post_filtering",
                     "uuid": "304110f9-60d0-4ba2-8b3b-fae0e2a49554"
@@ -401,6 +394,11 @@
                     "label": "nanoplot_qc_on_reads_before_preprocessing_html_report",
                     "output_name": "output_html",
                     "uuid": "f2bd0a1f-cd60-4a36-a7d0-8025cc19ea2e"
+                },
+                {
+                    "label": "nanoplot_qc_on_reads_before_preprocessing_nanostats",
+                    "output_name": "nanostats",
+                    "uuid": "15ecf5b1-e0eb-405a-ac3a-359feb66d4cd"
                 }
             ]
         },
@@ -482,14 +480,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "fastqc_quality_check_before_preprocessing_html_file",
-                    "output_name": "html_file",
-                    "uuid": "d0a64624-05d0-4068-835b-a025fc011760"
-                },
-                {
                     "label": "fastqc_quality_check_before_preprocessing_text_file",
                     "output_name": "text_file",
                     "uuid": "e61fef5d-1bc8-4c8e-be6a-f74e210e9920"
+                },
+                {
+                    "label": "fastqc_quality_check_before_preprocessing_html_file",
+                    "output_name": "html_file",
+                    "uuid": "d0a64624-05d0-4068-835b-a025fc011760"
                 }
             ]
         },
@@ -563,14 +561,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "nanopore_sequenced_reads_processed_with_fastp_after_host_removal",
-                    "output_name": "out1",
-                    "uuid": "a2219483-50b7-4aed-98dd-333ad2e12eb8"
-                },
-                {
                     "label": "nanopore_sequenced_reads_processed_with_fastp_after_host_removal_html_report",
                     "output_name": "report_html",
                     "uuid": "2a9a8b4d-458b-40e7-9a21-fb7108d5bbe4"
+                },
+                {
+                    "label": "nanopore_sequenced_reads_processed_with_fastp_after_host_removal",
+                    "output_name": "out1",
+                    "uuid": "a2219483-50b7-4aed-98dd-333ad2e12eb8"
                 }
             ]
         },
@@ -893,14 +891,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "fastqc_quality_check_after_preprocessing_text_file",
-                    "output_name": "text_file",
-                    "uuid": "09306471-afa0-4106-9cc7-259b93dfc862"
-                },
-                {
                     "label": "fastqc_quality_check_after_preprocessing_html_file",
                     "output_name": "html_file",
                     "uuid": "084f982f-20f1-457e-8012-91ebbb85633d"
+                },
+                {
+                    "label": "fastqc_quality_check_after_preprocessing_text_file",
+                    "output_name": "text_file",
+                    "uuid": "09306471-afa0-4106-9cc7-259b93dfc862"
                 }
             ]
         },
@@ -962,14 +960,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "non_host_sequences_bam",
-                    "output_name": "unmapped",
-                    "uuid": "14a53fe2-f296-43aa-86b7-243278c1050c"
-                },
-                {
                     "label": "host_sequences_bam",
                     "output_name": "mapped",
                     "uuid": "3b1e626f-6bc1-484c-be01-366534361b73"
+                },
+                {
+                    "label": "non_host_sequences_bam",
+                    "output_name": "unmapped",
+                    "uuid": "14a53fe2-f296-43aa-86b7-243278c1050c"
                 }
             ]
         },
@@ -1190,7 +1188,12 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter failed datasets",
+                    "name": "replacement"
+                }
+            ],
             "label": null,
             "name": "Filter failed datasets",
             "outputs": [
@@ -1205,7 +1208,7 @@
             },
             "post_job_actions": {},
             "tool_id": "__FILTER_FAILED_DATASETS__",
-            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"replacement\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.0",
             "type": "tool",
             "uuid": "18f79c89-cdcf-4ee7-a85f-b06e862f2e07",
@@ -1404,14 +1407,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "hosts_qc_text_file",
-                    "output_name": "text_file",
-                    "uuid": "b0ee6e31-0eb1-437d-8c04-fc3640b9a0b7"
-                },
-                {
                     "label": "hosts_qc_html",
                     "output_name": "html_file",
                     "uuid": "b72ff57b-0921-43bf-a817-6cd444c8f3cb"
+                },
+                {
+                    "label": "hosts_qc_text_file",
+                    "output_name": "text_file",
+                    "uuid": "b0ee6e31-0eb1-437d-8c04-fc3640b9a0b7"
                 }
             ]
         },
@@ -1853,6 +1856,6 @@
         "name:Nanopore",
         "name:IWC"
     ],
-    "uuid": "188d6f86-3bbf-4dfb-9451-74d8448592e1",
-    "version": 181
+    "uuid": "9af59a44-92ec-40b1-a6e5-573c4350e2c2",
+    "version": 1
 }

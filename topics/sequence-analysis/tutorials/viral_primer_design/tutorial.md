@@ -2,14 +2,14 @@
 layout: tutorial_hands_on
 
 title: Primer and primer scheme design for pan-specific detection and sequencing of viral pathogens across genotypes
-zenodo_link: "https://doi.org/10.5281/zenodo.14845697"
+zenodo_link: "https://zenodo.org/records/14845698"
 level: Introductory
 questions:
 - What are pan-specific primers and primer schemes and why are they important?
 - How to capture viral species diversity in the form of a multiple sequence alignment?
 - How to design primers that will be mostly unaffected by differences between viral genotypes?
 - How to avoid generating primers with off-target binding sites?
-    
+
 objectives:
 - Reproduce published qPCR primers and primer schemes for polio virus using MAFFT and varVAMP
 - Gain the knowledge and confidence to create your own primers and primer schemes
@@ -337,7 +337,7 @@ Next, build the BLAST database from the uploaded sequences and use it with varVA
 >    - *"Title for BLAST database"*: `Enterovirus genome db`
 >
 > 2. Rename the dataset
->      
+>
 >    {% snippet faqs/galaxy/datasets_rename.md name="Enterovirus genome db" %}
 > 3. {% tool [varVAMP](toolshed.g2.bx.psu.edu/repos/iuc/varvamp/varvamp/1.2.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Multiple alignment of viral sequences"*: `Polio 1 MSA`
@@ -362,7 +362,7 @@ A quick look at the *"Amplicon locations"* output shows that, again, varVAMP has
 You can also inspect the *"qPCR amplicon details"* output to get more information about the suggested amplicons.
 
 > <question-title></question-title>
-> 
+>
 > 1. Is there a difference between the primers/amplicons suggested in the first varVAMP run (without a database of enteroviral background sequences) and the new run?
 > 2. Does the output contain amplicons with predicted off-target effects?
 > 3. Why didn't varVAMP design primers without off-target binding sites?
@@ -398,7 +398,7 @@ Now let's experiment with a lower consensus nucleotide threshold to try and gene
 The newly designed primer schemes can be checked again with the files *"qPCR amplicon details"* and *"Primer details"*. We have prepared some questions for you to assess your understanding:
 
 > <question-title></question-title>
-> 
+>
 > 1. What is the difference with a lower threshold? Did you get a primer scheme with no predicted off-target amplification?
 > 2. Why doesn't the amplicon collection include the amplicons that we generated with the higher threshold?
 > 3. Consider other use cases for avoiding off-targets using a BLAST database.

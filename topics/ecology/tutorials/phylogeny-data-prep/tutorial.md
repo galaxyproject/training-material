@@ -28,6 +28,7 @@ tags:
   - phylogeny
   - data handling
   - functional annotation
+  - biodiversity
 contributors:
 - roncoronimiguel
 - brigidagallone

@@ -34,7 +34,8 @@ contributions:
   funding:
     - gallantries
     - eurosciencegateway
-
+edam_ontology:
+  - topic_0622 # Genomics
 requirements:
   - type: "internal"
     topic_name: galaxy-interface

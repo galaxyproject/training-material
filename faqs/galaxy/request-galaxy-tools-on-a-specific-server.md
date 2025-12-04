@@ -12,4 +12,4 @@ To request tools that already exist in the [Galaxy toolshed](https://toolshed.g2
 
 - *USA - usegalaxy.org* \| [https://github.com/galaxyproject/usegalaxy-tools](https://github.com/galaxyproject/usegalaxy-tools)
 
-- *Australia - usegalaxy.org.au* \| [https://github.com/usegalaxy-au/usegalaxy-au-tools/tree/master/usegalaxy.org.au](https://site.usegalaxy.org.au/request/tool)
+- *Australia - usegalaxy.org.au* \| [https://site.usegalaxy.org.au/request/tool](https://site.usegalaxy.org.au/request/tool)

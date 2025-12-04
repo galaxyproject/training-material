@@ -85,7 +85,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -57,3 +57,6 @@
+>    @@ -56,3 +56,6 @@
 >     # Sentry
 >     - name: mvdbeek.sentry_selfhosted
 >       src: https://github.com/mvdbeek/ansible-role-sentry/archive/main.tar.gz
@@ -159,7 +159,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -366,3 +366,24 @@ telegraf_plugins_extra:
+>    @@ -367,3 +367,24 @@ telegraf_plugins_extra:
 >     tiaas_dir: /srv/tiaas
 >     tiaas_admin_user: admin
 >     tiaas_admin_pass: changeme

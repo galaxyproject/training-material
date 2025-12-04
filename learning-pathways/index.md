@@ -10,6 +10,12 @@ description: Learning pathways are sets of tutorials curated for you by communit
 
 Learning pathways are sets of tutorials curated for you by community experts to form a coherent set of lessons around a topic, building up knowledge as you go. We always recommend to follow the tutorials in the order they are listed in the pathway.
 
+Explore all pathways below, or jump directly to a section:
+
+- [For Scientists](#for-scientists)
+- [For Teachers, Developers and System Administrators](#for-teachers-developers-and-system-administrators)
+
+
 ## For Scientists
 
 

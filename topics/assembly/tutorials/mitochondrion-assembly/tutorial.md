@@ -15,6 +15,11 @@ contributors:
 - delphine-l
 tags:
   - biodiversity
+edam_ontology:
+- topic_0622 # Genomics
+- topic_0196 # Assembly
+- topic_3050 # Biodiversity
+- topic_0779 # Mitochrondria
 recordings:
 - youtube_id: 0ehAZ0DZsFU
   length: 11M

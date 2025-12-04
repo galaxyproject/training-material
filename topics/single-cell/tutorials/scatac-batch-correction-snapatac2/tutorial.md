@@ -36,6 +36,8 @@ contributions:
   - timonschlegel
  editing:
   - dianichj
+ funding:
+  - deKCD
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
 

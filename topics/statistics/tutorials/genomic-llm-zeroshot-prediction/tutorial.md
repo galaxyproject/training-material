@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Predicting Mutation Impact with Zero-shot Learning using a pretrained DNA LLM
 level: Intermediate
-draft: true
 requirements:
 -
   type: "internal"
@@ -40,8 +39,8 @@ contributions:
   - raphaelmourad
   - bebatut
 tags:
-- ELIXIR
-- AI & ML
+- elixir
+- ai-ml
 - Large Language Model
 subtopic: gai-llm
 priority: 3

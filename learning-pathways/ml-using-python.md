@@ -6,7 +6,6 @@ cover-image-alt: ELIXIR logo
 
 editorial_board:
 - bebatut
-draft: true
 
 title: Artificial Intelligence and Machine Learning in Life Sciences using Python
 description: |

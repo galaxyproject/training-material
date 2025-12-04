@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Fine-tuning a LLM for DNA Sequence Classification
 level: Intermediate
-draft: true
 requirements:
 -
   type: "internal"
@@ -35,8 +34,8 @@ contributions:
   - raphaelmourad
   - bebatut
 tags:
-- ELIXIR
-- AI & ML
+- elixir
+- ai-ml
 - Large Language Model
 subtopic: gai-llm
 priority: 2

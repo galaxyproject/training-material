@@ -224,7 +224,7 @@ As an administrator who often forgot to run the upgrade, and would only notice i
 
 Galaxy is a modern web application that includes both a server (written in Python) and a client (written in Javascript). After the server is installed and its database prepared, the next step is to build the client application. This means fetching its dependencies, bundling components, creating minified copies of static content, etc. This process ensures that the smallest possible amount of data is transferred to the user when accessing Galaxy over the web, which is important for the performance of the website.
 
-This process can be lengthy and resource intensive. Future plans for Galaxy include pre-building the client so that the build process is not necessary as long as you run "release" versions of Galaxy.
+This process can be lengthy and resource intensive. If you want to speed up your deployment, set `galaxy_client_use_prebuilt: true` and Ansible will download a prebuilt client using [yarn](https://classic.yarnpkg.com/en/docs/getting-started).
 
 The client lives in the Galaxy code under the [client/](https://github.com/galaxyproject/galaxy/blob/dev/client/) directory, and the build process deploys it to the [static/](https://github.com/galaxyproject/galaxy/tree/dev/static/) directory, which we will configure a webserver to serve in this tutorial.
 
@@ -245,7 +245,7 @@ Installation of Galaxy with the playbook follows generally the steps you would e
 - Configuration files are installed
 - Any missing dependencies are installed
 - Any database updates are applied
-- The client application is built and deployed
+- The client application is built and deployed (to save time set `galaxy_client_use_prebuilt: true`)
 
 It would not be difficult to write a role that does this yourself, but by using
 the `galaxyproject.galaxy` role, you know that you're getting all of the Galaxy
@@ -312,7 +312,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    @@ -0,0 +1,13 @@
 >    +# Galaxy, Postgres, Nginx
 >    +- src: galaxyproject.galaxy
->    +  version: 0.10.14
+>    +  version: 0.12.1
 >    +- src: galaxyproject.nginx
 >    +  version: 0.7.1
 >    +- src: galaxyproject.postgresql
@@ -320,9 +320,9 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +- src: galaxyproject.postgresql_objects
 >    +  version: 1.2.0
 >    +- src: galaxyproject.miniconda
->    +  version: 0.3.1
+>    +  version: 0.3.4
 >    +- src: usegalaxy_eu.certbot
->    +  version: 0.1.11
+>    +  version: 0.1.13
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
@@ -931,11 +931,13 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_layout`                 | `root-dir`                                                                | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, tools, and mutable-data (like caches, location files, etc.) folders will live by default beneath `galaxy_root`. User data is stored under `file_path`, a variable we will set later.
 >    `galaxy_root`                   | `/srv/galaxy`                                                             | This is the root of the Galaxy deployment.
 >    `galaxy_user`                   | {% raw %}`{name: "{{ galaxy_user_name }}", shell: /bin/bash}`{% endraw %} | The user that Galaxy will run as.
->    `galaxy_commit_id`              | `release_23.0`                                                            | The git reference to check out, which in this case is the branch for Galaxy Release 23.0
+>    `galaxy_commit_id`              | `release_25.0`                                                            | The git reference to check out, which in this case is the branch for Galaxy Release 23.0
 >    `galaxy_force_checkout`         | `true`                                                                    | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
+>    `galaxy_client_use_prebuilt`         | `true`                                                              | We are going to use a prebuilt client to save some time during this tutorial, if you want you can set it to false later and see how galaxy starts building the client itself.
 >    `miniconda_prefix`              | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %}          | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can become deadlocked.
->    `miniconda_version`             | `23.9`                                                                    | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
->    `miniconda_channels`          ` | `['conda-forge', 'defaults']`                                             | Use the community-maintained conda-forge channel in addition to the standard defaults channel of Conda.
+>    `miniconda_version`             | `25.3`                                                                    | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
+>    `miniconda_distribution`             | `miniforge`                                                                    | Install a specific distribution of conda, see https://github.com/galaxyproject/ansible-miniconda for alternatives. This determines the default value for the `miniconda_executable` (`conda` for `miniforge`)
+>    `miniconda_channels`          ` | `['conda-forge']`                                             | Use the free and community-maintained `conda-forge` channel.
 >
 >    > <tip-title>Different Galaxy Releases!</tip-title>
 >    > In the time between this tutorial was last updated ({{ page.last_modified_at | date: "%Y-%m-%d" }}), and when you are now reading it, one or more new releases of Galaxy may have occured.
@@ -949,22 +951,25 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- /dev/null
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -0,0 +1,12 @@
+>    @@ -0,0 +1,15 @@
 >    +# Galaxy
 >    +galaxy_create_user: true # False by default, as e.g. you might have a 'galaxy' user provided by LDAP or AD.
 >    +galaxy_separate_privileges: true # Best practices for security, configuration is owned by 'root' (or a different user) than the processes
 >    +galaxy_manage_paths: true # False by default as your administrator might e.g. have root_squash enabled on NFS. Here we can create the directories so it's fine.
+>    +galaxy_manage_systemd: true
 >    +galaxy_layout: root-dir
 >    +galaxy_root: /srv/galaxy
 >    +galaxy_user: {name: "{{ galaxy_user_name }}", shell: /bin/bash}
->    +galaxy_commit_id: release_23.0
+>    +galaxy_commit_id: release_25.0
+>    +galaxy_client_use_prebuilt: true
 >    +galaxy_force_checkout: true
 >    +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->    +miniconda_version: 23.9
->    +miniconda_channels: ['conda-forge', 'defaults']
+>    +miniconda_version: 25.3
+>    +miniconda_distribution: miniforge
+>    +miniconda_channels: ['conda-forge']
 >    {% endraw %}
 >    ```
->    {: data-commit="Configure miniconda and galaxy"}
+>    {: data-commit="Configure miniforge and galaxy"}
 >
 >    > <tip-title>Following this training outside of a GAT course?</tip-title>
 >    > Consider updating the Galaxy Commit ID to the latest version of Galaxy available, this will probably give better results (given that dependencies are always updating) than using a potentially outdated version.
@@ -991,10 +996,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -10,3 +10,17 @@ galaxy_force_checkout: true
->     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->     miniconda_version: 23.9
->     miniconda_channels: ['conda-forge', 'defaults']
+>    @@ -13,3 +13,17 @@ miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
+>     miniconda_version: 25.3
+>     miniconda_distribution: miniforge
+>     miniconda_channels: ['conda-forge']
 >    +
 >    +galaxy_config:
 >    +  galaxy:
@@ -1058,7 +1063,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -21,6 +21,32 @@ galaxy_config:
+>    @@ -24,6 +24,32 @@ galaxy_config:
 >         job_working_directory: /data/jobs
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
@@ -1088,7 +1093,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +        pools:
 >    +          - job-handlers
 >    +          - workflow-schedulers
->     
+>
 >     galaxy_extra_dirs:
 >       - /data
 >    {% endraw %}
@@ -1122,7 +1127,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >     # Use the stdout_callback when running ad-hoc commands.
 >     bin_ansible_callbacks = True
 >    +vault_password_file = .vault-password.txt
->     
+>
 >     # Show diffs of changes
 >     [diff]
 >    {% endraw %}
@@ -1773,7 +1778,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 
 > <hands-on-title>Status Check</hands-on-title>
 >
-> 1. Log in and check the status with `sudo galaxyctl status`
+> 1. Log in and check the status with `sudo galaxyctl status` (You may need to run `sudo galaxyctl -c /srv/galaxy/config/galaxy.yml status` when running the first time.)
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
@@ -1890,8 +1895,8 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -50,3 +50,55 @@ galaxy_config:
->     
+>    @@ -53,3 +53,55 @@ galaxy_config:
+>
 >     galaxy_extra_dirs:
 >       - /data
 >    +
@@ -2098,7 +2103,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    +	# automatically copied around. The welcome page is one of them. In
 >    +	# production, this step is skipped, so we will manually alias that.
 >    +	location /static/welcome.html {
->    +		alias {{ galaxy_server_dir }}/static/welcome.html.sample;
+>    +		alias {{ galaxy_server_dir }}/static/welcome.sample.html;
 >    +		expires 24h;
 >    +	}
 >    +
@@ -2220,7 +2225,7 @@ In order to be the administrator user, you will need to register an account with
 
 ## Job Configuration
 
-One of the most important configuration files for a large Galaxy server is the job configuration. This tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or no job configuration has been specified inline in the `galaxy.yml` file, it will use a simple default configuration where all jobs are run on the Galaxy server and are handled by the web serving process, rather than the job handler(s). Galaxy's job running system is highly configurable, the full range of configuration can be found in the sample job configuration file, [`job_conf.sample.yml`](https://github.com/galaxyproject/galaxy/blob/release_23.0/lib/galaxy/config/sample/job_conf.sample.yml).
+One of the most important configuration files for a large Galaxy server is the job configuration. This tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or no job configuration has been specified inline in the `galaxy.yml` file, it will use a simple default configuration where all jobs are run on the Galaxy server and are handled by the web serving process, rather than the job handler(s). Galaxy's job running system is highly configurable, the full range of configuration can be found in the sample job configuration file, [`job_conf.sample.yml`](https://github.com/galaxyproject/galaxy/blob/release_25.0/lib/galaxy/config/sample/job_conf.sample.yml).
 
 The job configuration allows Galaxy to run jobs in multiple locations using a variety of different mechanisms. Some of these mechanisms include:
 
@@ -2243,18 +2248,18 @@ A basic job configuration looks like this:
 {% raw %}
 ```yml
 runners:
-  local_runner:
-    load: galaxy.jobs.runners.local:LocalJobRunner
-    workers: 4
-execution:
-  default: local_env
-  environments:
-    local_env:
-      runner: local_runner
-      tmp_dir: true
-tools:
-- id: bwa
-  environment: local_env
+    local_runner:
+      load: galaxy.jobs.runners.local:LocalJobRunner
+      workers: 4
+  execution:
+    default: local_env
+    environments:
+      local_env:
+        runner: local_runner
+        tmp_dir: true
+  tools:
+    - class: local
+      environment: local_env
 ```
 {% endraw %}
 
@@ -2262,7 +2267,7 @@ The above job configuration defines a *runner* and an *execution* to allow Galax
 
 Firstly, the `runners` section contains a plugin called `local_runner` which loads the python code module for supporting local jobs. Next, the `execution` section contains an environment named `local_env` using the runner `local_runner`. It is also set as the default. So now everytime a user clicks "Execute" on a tool form, Galaxy will run the corresponding job locally using the python code specified.
 
-Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` environment. This is more useful once you begin defining additional environments (especially those that run on clusters).
+Finally, we have explicitly mapped the `local` class of tools to run in the `local_env` environment. These special tools aren't parameterized for remote execution - expression tools, upload, etc.
 
 > <tip-title>Want to use something else?</tip-title>
 > There are a lot of other plugins available for Galaxy for using other resources such as docker containers, kubernetes clusters, Pulsar servers, and HPC clusters to name a few. See the Galaxy documentation on [job configuration](https://docs.galaxyproject.org/en/master/admin/jobs.html) for more details on these plugins and their configuration.
@@ -2276,10 +2281,10 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -11,6 +11,24 @@ miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->     miniconda_version: 23.9
->     miniconda_channels: ['conda-forge', 'defaults']
->     
+>    @@ -14,6 +14,24 @@ miniconda_version: 25.3
+>     miniconda_distribution: miniforge
+>     miniconda_channels: ['conda-forge']
+>
 >    +# Galaxy Job Configuration
 >    +galaxy_job_config:
 >    +  runners:
@@ -2301,7 +2306,7 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >     galaxy_config:
 >       galaxy:
 >         # Main Configuration
->    @@ -21,6 +39,7 @@ galaxy_config:
+>    @@ -24,6 +42,7 @@ galaxy_config:
 >         job_working_directory: /data/jobs
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
@@ -2356,7 +2361,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -40,6 +40,28 @@ galaxy_config:
+>    @@ -43,6 +43,28 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
@@ -2509,7 +2514,7 @@ The time required to maintain a production Galaxy instance depends on the number
 
 ## Keeping Galaxy Updated
 
-If you have set your `galaxy_commit_id` group variable to a branch name like `release_23.0`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
+If you have set your `galaxy_commit_id` group variable to a branch name like `release_25.0`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
 
 ## Upgrading Galaxy (Optional)
 

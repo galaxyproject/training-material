@@ -5,8 +5,7 @@ video: true
 
 title: "Galaxy Interactive Tools"
 objectives:
-  - Learn the differences between Galaxy Interactive Environments and Galaxy Interactive Tools
-  - Have an understanding of what Galaxy Interactive Tools are and how they work
+  - Understand what Galaxy Interactive Tools are and how they work
 contributors:
   - natefoo
   - eancelet
@@ -91,12 +90,12 @@ You will sometimes see Interactive Tools referred to as Interactive Environments
 ---
 # Mapping clients to containers
 
-- GIEs: Unique path, e.g. `https://galaxy.example.org/gie-proxy/jupyter/...`
+- Path-based interactive tools: e.g. `https://galaxy.example.org/interactivetool/ep/<unique-id>/...`
   - Pros: Works with existing SSL certificate
   - Cons: Requires Galaxy session cookie (no sharing), can only run one at a time, closing your browser loses your session
-- GxITs: Unique hostname, e.g. `https://<unique-id>.ep.interactivetool.galaxy.example.org/`
-  - Pros: Needs no special credentials (can be shared)
-  - Cons: Requires *wildcard* DNS entry and *wildcard* SSL certificate (not possible at many sites)
+- Subdomain-based interactive tools: Unique hostname, e.g. `https://<unique-id>.ep.interactivetool.galaxy.example.org/`
+  - Pros: Need no special credentials (can be shared)
+  - Cons: Require *wildcard* DNS entry and *wildcard* SSL certificate (not possible at many sites)
 
 ???
 
@@ -143,11 +142,9 @@ interactivetools_map: /srv/galaxy/var/gie-proxy-sessions.sqlite
 ---
 # Proxy configuration
 
-Use the proxy configuration that ships with Galaxy
+Use the [Node.js-based proxy][galaxyproject-gx-it-proxy]
 
-Or the [Node.js-based proxy][usegalaxy_eu-gie_proxy]
-
-[usegalaxy_eu-gie_proxy]: https://galaxy.ansible.com/usegalaxy_eu/gie_proxy
+[galaxyproject-gx-it-proxy]: https://galaxy.ansible.com/usegalaxy_eu/gie_proxy
 
 ???
 
@@ -179,7 +176,7 @@ Solution: [Embedded Pulsar][job-conf-pulsar-embedded]
 Runs a [Pulsar][pulsar] server within the Galaxy application to "stage" (i.e. copy) inputs.
 
 - Pros: Inputs in isolated dir so only that dir is mounted in the container: secure
-- Cons: Has to copy inputs on each Interactive Tool execution: slow
+- Cons: Has to copy inputs on each Interactive Tool execution (slow)
 
 [pulsar]: https://github.com/galaxyproject/pulsar
 

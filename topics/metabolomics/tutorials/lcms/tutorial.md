@@ -15,6 +15,13 @@ key_points:
 - To process untargeted LC-MS metabolomic data, you need a large variety of steps and tools.
 - Although main steps are standard, various ways to combined tools exist, depending on your data.
 - Resources are available in Galaxy, but do not forget that you need appropriate knowledge to perform a relevant analysis.
+answer_histories:
+- label: UseGalaxy.eu - Part 1
+  history: https://usegalaxy.eu/u/nilchia/h/mass-spectrometry-lc-ms-analysis-part-1
+  date: 2025-09-19
+- label: UseGalaxy.eu - Part 2
+  history: https://usegalaxy.eu/u/nilchia/h/mass-spectrometry-lc-ms-analysis-part-2-1
+  date: 2025-09-19
 
 contributions:
   authorship:
@@ -144,7 +151,7 @@ This first step is only meant to read your `mzXML` file and generate an object u
 
 > <hands-on-title>MSnbase readMSData</hands-on-title>
 >
-> 1. **MSnbase readMSData** {% icon tool %} with the following parameters:
+> 1. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy2) %} with the following parameters:
 >    - *"File(s) from your history containing your chromatograms"*: the `sacurine` dataset collection
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
@@ -201,7 +208,7 @@ Note that you can either:
 >
 > > <hands-on-title>xcms get a sampleMetadata file</hands-on-title>
 > >
-> > 1. **xcms get a sampleMetadata file** {% icon tool %} with the following parameters:
+> > 1. {% tool [xcms get a sampleMetadata file](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_export_samplemetadata/xcms_export_samplemetadata/3.12.0+galaxy1) %} with the following parameters:
 > >    - {% icon param-collection %} *"RData file"*: the `sacurine.raw.RData` collection output from **MSnbase readMSData** {% icon tool %}
 > >
 > {: .hands_on}
@@ -352,7 +359,7 @@ Note that you can also check the chromatograms at any moment during the workflow
 
 > <hands-on-title>xcms plot chromatogram</hands-on-title>
 >
-> 1. **xcms plot chromatogram** {% icon tool %} with the following parameters:
+> 1. {% tool [xcms plot chromatogram](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_plot_chromatogram/xcms_plot_chromatogram/3.12.0+galaxy1) %} with the following parameters:
 >    - *"RData file"*: `sacurine.raw.RData` (collection)
 >    - *"Sample metadata file"*: `sampleMetadata_completed.tsv` you uploaded previously
 >
@@ -403,7 +410,7 @@ Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSe
 
 > <hands-on-title>xcms findChromPeaks (xcmsSet)</hands-on-title>
 >
-> 1. **xcms findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters:
+> 1. {% tool [xcms findChromPeaks (xcmsSet)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy1) %} with the following parameters:
 >   - *"RData file"*: `sacurine.raw.RData` (collection)
 >   - *"Extraction method for peaks detection"*: `CentWave - chromatographic peak detection using the centWave method`
 >     - *"Max tolerated ppm m/z deviation in consecutive scans in ppm"*: `3`
@@ -447,7 +454,7 @@ the Merger tool.
 
 > <hands-on-title>xcms findChromPeaks Merger</hands-on-title>
 >
-> 1. **xcms findChromPeaks Merger** {% icon tool %} with the following parameters:
+> 1. {% tool [xcms findChromPeaks Merger](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy1) %} with the following parameters:
 >    - *"RData file"*: `sacurine.raw.xset.RData` (collection)
 >    - *"Sample metadata file"*: `Nothing selected`
 >
@@ -476,7 +483,7 @@ than a given number of samples. Either a percentage of the total number of sampl
 
 > <hands-on-title>xcms groupChromPeaks (group)</hands-on-title>
 >
-> 1. **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
+> 1. {% tool [xcms groupChromPeaks (group)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy1) %} with the following parameters:
 >   - *"RData file"*: `xset.merged.RData`
 >   - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >     - *"Bandwidth"*: `5.0`
@@ -539,7 +546,7 @@ The algorithm uses statistical smoothing methods. You can choose between linear 
 
 > <hands-on-title>xcms adjustRtime (retcor)</hands-on-title>
 >
-> 1. **xcms adjustRtime (retcor)** {% icon tool %} with the following parameters:
+> 1. {% tool [xcms adjustRtime (retcor)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.12.0+galaxy1) %} with the following parameters:
 >    - *"RData file"*: `xset.merged.groupChromPeaks.RData`
 >    - *"Method to use for retention time correction"*: `PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.`
 >        - *"Minimum required fraction of samples in which peaks for the peak group were identified"*: `0.8299`
@@ -567,7 +574,7 @@ It also allows you to check whether the well behaved peaks were distributed homo
 >
 > > <hands-on-title>xcms plot chromatogram</hands-on-title>
 > >
-> > 1. **xcms plot chromatogram** {% icon tool %} with the following parameters:
+> > 1. {% tool [xcms plot chromatogram](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_plot_chromatogram/xcms_plot_chromatogram/3.12.0+galaxy1) %} with the following parameters:
 > >    - *"RData file"*: `xset.merged.groupChromPeaks.adjustRtime.RData`
 > >
 > >    > <comment-title></comment-title>
@@ -591,7 +598,7 @@ lower a little the bandwidth parameter.
 
 > <hands-on-title>second 'xcms groupChromPeaks (group)'</hands-on-title>
 >
-> 1. **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
+> 1. {% tool [xcms groupChromPeaks (group)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy1) %} with the following parameters:
 >    - *"RData file"*: `xset.merged.groupChromPeaks.adjustRtime.RData`
 >    - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >        - *"Bandwidth"*: `5.0`
@@ -654,7 +661,7 @@ chromatographic peak for this ion was identified.
 
 > <hands-on-title>xcms fillChromPeaks (fillPeaks)</hands-on-title>
 >
-> 1. **xcms fillChromPeaks (fillPeaks)** {% icon tool %} with the following parameters:
+> 1. {% tool [xcms fillChromPeaks (fillPeaks)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy1) %} with the following parameters:
 >    - *"RData file"*: `xset.merged.groupChromPeaks.*.RData`
 >    - In *"Peak List"*:
 >        - *"Convert retention time (seconds) into minutes"*: `Yes`
@@ -700,7 +707,7 @@ for a first attempt to run this function. Nevertheless, a few parameters have to
 
 > <hands-on-title>CAMERA.annotate</hands-on-title>
 >
-> 1. **CAMERA.annotate** {% icon tool %} with the following parameters:
+> 1. {% tool [CAMERA.annotate](toolshed.g2.bx.psu.edu/repos/lecorguille/camera_annotate/abims_CAMERA_annotateDiffreport/2.2.7+camera1.48.0-galaxy1) %} with the following parameters:
 >    - *"RData file"*: `xset.merged.groupChromPeaks.*.fillChromPeaks.RData`
 >    - In *"Annotate Isotopes [findIsotopes]"*:
 >        - *"Max. ion charge"*: `2`
@@ -796,7 +803,7 @@ over useful information using the **Quality Metrics** {% icon tool %} tool.
 
 > <hands-on-title>Using <b>Quality Metrics</b> to get an overview of your data</hands-on-title>
 >
-> 1. **Quality Metrics** {% icon tool %} with the following parameters:
+> 1. {% tool [Quality Metrics](toolshed.g2.bx.psu.edu/repos/ethevenot/qualitymetrics/quality_metrics/2.2.8) %} with the following parameters:
 >    - *"Data matrix file"*: `dataMatrix.tsv`
 >    - *"Sample metadata file"*: `sampleMetadata_completed.tsv`
 >    - *"Variable metadata file"*: `variableMetadata.tsv`
@@ -859,7 +866,7 @@ to get rid of it.
 
 > <hands-on-title>Data normalisation</hands-on-title>
 >
-> 1. **Batch_correction** {% icon tool %} with the following parameters:
+> 1. {% tool [Batch_correction](toolshed.g2.bx.psu.edu/repos/melpetera/batchcorrection/Batch_correction/3.0.0) %} with the following parameters:
 >   - *"Data matrix file"*: `dataMatrix.tsv`
 >   - *"Sample metadata file"*: `sampleMetadata_completed.tsv`
 >   - *"Variable metadata file"*: `variableMetadata.tsv`
@@ -905,10 +912,10 @@ by biological variability. Thus, we can filter the ions that do not respect this
 
 > <hands-on-title>CV calculation</hands-on-title>
 >
-> 1. **Quality Metrics** {% icon tool %} with the following parameters:
->    - *"Data matrix file"*: `Batch_correction_linear_dataMatrix.tsv`
+> 1. {% tool [Quality Metrics](toolshed.g2.bx.psu.edu/repos/ethevenot/qualitymetrics/quality_metrics/2.2.8) %} with the following parameters:
+>    - *"Data matrix file"*: `BC_linear_dataMatrix.tsv `
 >    - *"Sample metadata file"*: `sampleMetadata_completed.tsv`
->    - *"Variable metadata file"*: `Batch_correction_linear_variableMatrix.tsv`
+>    - *"Variable metadata file"*: `BC_linear_variableMetadata.tsv`
 >
 >
 >    > <comment-title></comment-title>
@@ -925,10 +932,10 @@ your data using the **Generic_Filter** {% icon tool %} tool.
 
 > <hands-on-title>Data filtering</hands-on-title>
 >
-> 1. **Generic_Filter** {% icon tool %} with the following parameters:
->    - *"Data matrix file"*: `Batch_correction_linear_dataMatrix.tsv`
+> 1. {% tool [Generic_Filter](toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01) %} with the following parameters:
+>    - *"Data matrix file"*: `BC_linear_dataMatrix.tsv`
 >    - *"Sample metadata file"*: `sampleMetadata_completed.tsv` or `Quality Metrics_sampleMetadata_completed.tsv`
->    - *"Variable metadata file"*: `Quality Metrics_Batch_correction_linear_variableMetadata.tsv`
+>    - *"Variable metadata file"*: `Quality Metrics_BC_linear_variableMetadata.tsv`
 >    - *"Deleting samples and/or variables according to Numerical values"*: `yes`
 >        - {% icon param-repeat %} *"Identify the parameter to filter "*
 >            - *"On file"*: `Variable metadata`
@@ -971,7 +978,7 @@ your data using the **Generic_Filter** {% icon tool %} tool.
 > > 2. The *1.0* value corresponds to the maximum value kept in the dataset ('Interval of values to remove: *upper*') regarding the
 > >    *poolCV_over_sampleCV* column in your *Variable metadata* file. This means that any ion with a pool CV / sample CV ratio above 1
 > >    (*i.e.* a pool CV greater than the sample CV) is discarded from the dataset.
-> > 3. Filtering led to 2706 ions and 6 samples.
+> > 3. Filtering led to 2707 ions and 6 samples.
 > >
 > {: .solution}
 >
@@ -1003,10 +1010,10 @@ and the ions that we have in our dataset. For this calculation we can use the **
 
 > <hands-on-title>Statistical analysis</hands-on-title>
 >
-> 1. **Univariate** {% icon tool %} with the following parameters:
->    - *"Data matrix file"*: `Generic_Filter_Batch_correction_linear_dataMatrix.tsv`
+> 1. {% tool [Univariate](toolshed.g2.bx.psu.edu/repos/ethevenot/univariate/Univariate/2.2.4) %} with the following parameters:
+>    - *"Data matrix file"*: `Generic_Filter_BC_linear_dataMatrix.tsv`
 >    - *"Sample metadata file"*: `Generic_Filter_Quality Metrics_sampleMetadata_completed.tsv`
->    - *"Variable metadata file"*: `Generic_Filter_Quality Metrics_Batch_correction_linear_variableMetadata.tsv`
+>    - *"Variable metadata file"*: `Generic_Filter_Quality Metrics_BBC_linear_variableMetadata.tsv`
 >    - *"Factor of interest"*: `bmi`
 >    - *"Test"*: `Spearman correlation rank test (quantitative)`
 >    - *"Method for multiple testing correction"*: `none`
@@ -1055,10 +1062,10 @@ absolute value above 0.9.
 
 > <hands-on-title>Variable filtering</hands-on-title>
 >
-> 1. **Generic_Filter** {% icon tool %} with the following parameters:
->    - *"Data matrix file"*: `Generic_Filter_Batch_correction_linear_dataMatrix.tsv`
+> 1. {% tool [Generic_Filter](toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01) %} with the following parameters:
+>    - *"Data matrix file"*: `Generic_Filter_BC_linear_dataMatrix.tsv`
 >    - *"Sample metadata file"*: `Generic_Filter_Quality Metrics_sampleMetadata_completed.tsv`
->    - *"Variable metadata file"*: `Univariate_Generic_Filter_Quality Metrics_Batch_correction_linear_variableMetadata.tsv`
+>    - *"Variable metadata file"*: `Univariate_Generic_Filter_Quality Metrics_BC_linear_variableMetadata.tsv`
 >    - *"Deleting samples and/or variables according to Numerical values"*: `yes`
 >        - {% icon param-repeat %} *"Identify the parameter to filter "*
 >            - *"On file"*: `Variable metadata`
@@ -1112,9 +1119,9 @@ bank HMDB (The Human Metabolome Database). Let's try requesting directly into th
 
 > <hands-on-title>Annotating the data using the HMDB</hands-on-title>
 >
-> 1. **HMDB MS search** {% icon tool %} with the following parameters:
+> 1. {% tool [HMDB MS search](toolshed.g2.bx.psu.edu/repos/fgiacomoni/hmdb_ms_search/wsdl_hmdb/1.7.6) %} with the following parameters:
 >    - *"Would you use a file "*: `YES`
->        - *"File of masses (Variable Metadata) "*: `Generic_Filter_Univariate_Generic_Filter_Quality Metrics_Batch_correction_linear_variableMetadata.tsv`
+>        - *"File of masses (Variable Metadata) "*: `Generic_Filter_Univariate_Generic_Filter_Quality Metrics_BC_linear_variableMetadata.tsv`
 >        - *"Do you have a header "*: `YES`
 >        - *"Column of masses "*: `c3`
 >    - *"Mass-to-charge ratio "*: `0.005`

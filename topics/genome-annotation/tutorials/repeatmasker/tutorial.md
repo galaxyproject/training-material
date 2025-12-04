@@ -27,6 +27,9 @@ contributions:
   funding:
     - gallantries
     - eurosciencegateway
+edam_ontology:
+  - topic_0157 # Sequence composition, complexity and repeats
+  - topic_0622 # Genomics
 
 abbreviations:
   SINEs: Short Interspersed Nuclear Elements

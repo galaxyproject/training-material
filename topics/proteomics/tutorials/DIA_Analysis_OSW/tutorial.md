@@ -100,7 +100,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>Converting vendor specific raw to open mzML format</hands-on-title>
 >
-> 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1) %} with the following parameters:
+> 1. {% tool [msconvert Convert and/or filter mass spectrometry files](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.6) %}
 >    - {% icon param-collection %} *"Input unrefined MS data"*: `DIA_data`
 >    - *"Do you agree to the vendor licenses?"*: `Yes`
 >    - *"Output Type"*: `mzML`
@@ -126,7 +126,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>DIA analysis using OpenSwathWorkflow</hands-on-title>
 >
-> 1. {% tool [OpenSwathWorkflow](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathworkflow/OpenSwathWorkflow/2.6+galaxy0) %} with the following parameters:
+> 1. {% tool [OpenSwathWorkflow Complete workflow to run OpenSWATH](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathworkflow/OpenSwathWorkflow/3.1+galaxy0) %}
 >    - {% icon param-collection %} *"Input files separated by blank"*: `DIA_data` (output of **msconvert** {% icon tool %})
 >    - {% icon param-file %} *"transition file ('TraML','tsv','pqp')"*: `HEK_Ecoli_lib`
 >    - {% icon param-file %} *"transition file ('TraML')"*: `iRTassays`
@@ -160,7 +160,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>Combining the individual osw results with pyprophet merge</hands-on-title>
 >
-> 1. {% tool [PyProphet merge](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_merge/pyprophet_merge/2.1.4.0) %} with the following parameters:
+> 1. {% tool [PyProphet merge Merge multiple osw files](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_merge/pyprophet_merge/2.1.4.0) %} 
 >    - {% icon param-collection %} *"Input file"*: `out_osw` (output of **OpenSwathWorkflow** {% icon tool %})
 >    - {% icon param-file %} *"Template osw file"*: `HEK_Ecoli_lib`
 >
@@ -171,7 +171,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>Semi-supervised learning and scoring of OpenSwathWorkflow results</hands-on-title>
 >
-> 1. {% tool [PyProphet score](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_score/pyprophet_score/2.1.4.2) %} with the following parameters:
+> 1. {% tool [PyProphet score Error-rate estimation for MS1, MS2 and transition-level data](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_score/pyprophet_score/2.1.4.2) %} 
 >    - {% icon param-file %} *"Input file"*: `merged.osw` (output of **PyProphet merge** {% icon tool %})
 >    - *"Either a 'LDA' or 'XGBoost' classifier is used for semi-supervised learning"*: `XGBoost`
 >
@@ -210,11 +210,11 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>Conduct peptide inference in experiment-wide and global context</hands-on-title>
 >
-> 1. {% tool [PyProphet peptide](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0) %} with the following parameters:
+> 1. {% tool [PyProphet peptide Peptide error-rate estimation](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0) %} 
 >    - {% icon param-file %} *"Input file"*: `score.osw` (output of **PyProphet score** {% icon tool %})
 >    - *"Context to estimate protein-level FDR control"*: `experiment-wide`
 >
-> 2. {% tool [PyProphet peptide](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0) %} with the following parameters:
+> 2. {% tool [PyProphet peptide Peptide error-rate estimation](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0) %} 
 >    - {% icon param-file %} *"Input file"*: `peptide.osw` (output of **PyProphet peptide** {% icon tool %})
 >    - *"Context to estimate protein-level FDR control"*: `global`
 >
@@ -226,11 +226,11 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>Conduct protein inference in experiment-wide and global context</hands-on-title>
 >
-> 1. {% tool [PyProphet protein](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0) %} with the following parameters:
+> 1. {% tool [PyProphet protein Protein error-rate estimation](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0) %}
 >    - {% icon param-file %} *"Input file"*: `peptide.osw` (output of the second **PyProphet peptide** {% icon tool %})
 >    - *"Context to estimate protein-level FDR control"*: `experiment-wide`
 >
-> 2. {% tool [PyProphet protein](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0) %} with the following parameters:
+> 2. {% tool [PyProphet protein Protein error-rate estimation](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0) %} 
 >    - {% icon param-file %} *"Input file"*: `protein.osw` (output of **PyProphet protein** {% icon tool %})
 >    - *"Context to estimate protein-level FDR control"*: `global`
 >
@@ -255,7 +255,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>Exporting pyprophet scored OSW results</hands-on-title>
 >
-> 1. {% tool [PyProphet export](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_export/pyprophet_export/2.1.4.1) %} with the following parameters:
+> 1. {% tool [PyProphet export Export tabular files, optional swath2stats export](toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_export/pyprophet_export/2.1.4.1) %} 
 >    - {% icon param-file %} *"Input file"*: `protein.osw` (output of the second **PyProphet protein** {% icon tool %})
 >    - *"Export format, either matrix, legacy_split, legacy_merged (mProphet/PyProphet) or score_plots format"*: `legacy_merged`
 >    - *"Use swath2stats to export file for statsics"*: `yes`
@@ -283,7 +283,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 > <hands-on-title>Analysis of Ecoli Spike-in</hands-on-title>
 >
-> 1. {% tool [Select lines that match an expression ](Grep1) %} with the following parameters:
+> 1. {% tool [Select lines that match an expression ](Grep1) %} 
 >    - {% icon param-file %} *"Select lines from"*: `protein_signal.tabular` (output of **PyProphet export** {% icon tool %})
 >    - *"that"*: `Matching`
 >    - *"the pattern"*: `(ECOLI)|(Spike_in)`

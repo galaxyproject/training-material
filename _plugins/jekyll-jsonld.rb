@@ -14,24 +14,20 @@ module Jekyll
         '@type': 'Organization',
         'http://purl.org/dc/terms/conformsTo': {
           # Bioschemas profile
-          '@id': 'https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19',
-          '@type': 'Organization'
+          '@id': 'https://bioschemas.org/profiles/Organization/0.3-DRAFT',
+          '@type': 'CreativeWork'
         },
         id: 'https://training.galaxyproject.org',
         email: 'galaxytrainingnetwork@gmail.com',
         name: 'Galaxy Training Network',
+        description: 'An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community',
         legalName: 'Galaxy Training Network',
         alternateName: 'GTN',
         url: 'https://training.galaxyproject.org',
         logo: 'https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png',
-        fundingModel: "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. " \
-                      'There are no full time paid staff members of the GTN. Individuals are occasionally funded on ' \
-                      'GTN-adjacent projects.',
         keywords: %w[galaxy bioinformatics training fair accessible],
         status: 'active',
         foundingDate: Gtn::Git.discover['founding_date'].to_s,
-        socialMedia: 'https://mstdn.science/@gtn',
-        type: 'project',
       }.freeze
 
       A11Y = {
@@ -142,7 +138,7 @@ module Jekyll
         }
         if !contributor.nil? && contributor.key?('orcid') && contributor['orcid']
           person['identifier'] = "https://orcid.org/#{contributor['orcid']}"
-          person['orcid'] = "https://orcid.org/#{contributor['orcid']}"
+          person['@id'] = "https://orcid.org/#{contributor['orcid']}"
         end
 
         person

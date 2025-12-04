@@ -17,6 +17,8 @@ contributions:
   - bernt-matthias
   - hexylena
   - mira-miracoli
+  editing:
+  - lldelisle
   funding:
   - eurosciencegateway
 subtopic: jobs
@@ -105,10 +107,10 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -20,3 +20,6 @@
+>    @@ -19,3 +19,6 @@
 >     # CVMFS Support
 >     - src: galaxyproject.cvmfs
->       version: 0.3.1
+>       version: 0.3.3
 >    +# Singularity/Apptainer
 >    +- src: usegalaxy_eu.apptainer
 >    +  version: 0.0.3
@@ -202,7 +204,7 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -75,6 +75,9 @@ galaxy_config:
+>    @@ -78,6 +78,9 @@ galaxy_config:
 >         tus_upload_store: "{{ galaxy_tus_upload_store }}"
 >         # CVMFS
 >         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
@@ -212,10 +214,10 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -114,6 +117,12 @@ galaxy_config_files:
+>    @@ -117,6 +120,12 @@ galaxy_config_files:
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
->     
+>
 >    +galaxy_config_templates:
 >    +  - src: templates/galaxy/config/container_resolvers_conf.yml.j2
 >    +    dest: "{{ galaxy_config.galaxy.container_resolvers_config_file }}"
@@ -224,7 +226,7 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    +
 >     galaxy_extra_dirs:
 >       - /data
->     
+>
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the container and dependency resolvers"}
@@ -279,7 +281,7 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -21,11 +21,24 @@ galaxy_job_config:
+>    @@ -24,11 +24,26 @@ galaxy_job_config:
 >       handling:
 >         assign: ['db-skip-locked']
 >       execution:
@@ -292,6 +294,8 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    +      singularity:
 >    +        runner: local_runner
 >    +        singularity_enabled: true
+>    +        # Enabling access to the reference data on CVMFS in the container
+>    +        singularity_volumes: $defaults,/cvmfs/data.galaxyproject.org:ro
 >    +        env:
 >    +        # Ensuring a consistent collation environment is good for reproducibility.
 >    +        - name: LC_ALL

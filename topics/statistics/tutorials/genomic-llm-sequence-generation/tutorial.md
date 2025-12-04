@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Generating Artificial Yeast DNA Sequences using a DNA LLM
 level: Intermediate
-draft: true
 requirements:
 -
   type: "internal"
@@ -43,8 +42,8 @@ contributions:
   - raphaelmourad
   - bebatut
 tags:
-- ELIXIR
-- AI & ML
+- elixir
+- ai-ml
 - Large Language Model
 subtopic: gai-llm
 priority: 4

@@ -106,7 +106,9 @@ module Jekyll
                            # them with single spaces so e.g. newlines get collapsed into a space
                            # and don't merge words together that shouldn't be merged.
                            .gsub(/\R+/, ' ')
-                           .gsub('<h3', '<h3 data-toc-skip')
+                           .gsub('<h1', '<h1 data-toc-skip')
+                           .gsub('<h2', '<h2 data-toc-skip')
+                           .gsub('<h3', '<h3 class="nobox" data-toc-skip')
           "<!--SNIPPET-->#{final_box_text}<!--END_SNIPPET-->"
         end
       end

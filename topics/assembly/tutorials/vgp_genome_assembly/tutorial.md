@@ -54,7 +54,10 @@ recordings:
   youtube_id: 0EoBDiyd-84
   speakers:
   - delphine-l
-
+edam_ontology:
+- topic_0622 # Genomics
+- topic_0196 # Assembly
+- topic_3050 # Biodiversity
 
 ---
 

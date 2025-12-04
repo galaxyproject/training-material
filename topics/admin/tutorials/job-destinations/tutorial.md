@@ -118,10 +118,10 @@ To demonstrate a real-life scenario and {TPV}'s role in it, let's plan on settin
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -155,6 +155,9 @@ galaxy_config_templates:
+>    @@ -162,6 +162,9 @@ galaxy_config_templates:
 >     galaxy_extra_dirs:
 >       - /data
->     
+>
 >    +galaxy_local_tools:
 >    +- testing.xml
 >    +
@@ -182,7 +182,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -28,3 +28,6 @@
+>    @@ -27,3 +27,6 @@
 >       version: 0.0.3
 >     - src: galaxyproject.slurm
 >       version: 1.0.2
@@ -208,17 +208,17 @@ And of course, Galaxy has an Ansible Role for that.
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -138,6 +138,8 @@ galaxy_config:
+>    @@ -145,6 +145,8 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
->     
+>
 >    +galaxy_job_config_file: "{{ galaxy_config_dir }}/galaxy.yml"
 >    +
 >     galaxy_config_files_public:
 >       - src: files/galaxy/welcome.html
 >         dest: "{{ galaxy_mutable_config_dir }}/welcome.html"
->    @@ -154,6 +156,11 @@ galaxy_config_templates:
->     
+>    @@ -161,6 +163,11 @@ galaxy_config_templates:
+>
 >     galaxy_extra_dirs:
 >       - /data
 >    +  - "{{ galaxy_config_dir }}/{{ tpv_config_dir_name }}"
@@ -226,7 +226,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    +galaxy_extra_privsep_dirs:
 >    +  - "{{ tpv_mutable_dir }}"
 >    +tpv_privsep: true
->     
+>
 >     galaxy_local_tools:
 >     - testing.xml
 >    {% endraw %}
@@ -265,7 +265,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -24,34 +24,18 @@ galaxy_job_config:
+>    @@ -27,38 +27,15 @@ galaxy_job_config:
 >       handling:
 >         assign: ['db-skip-locked']
 >       execution:
@@ -278,6 +278,8 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    -      slurm:
 >    -        runner: slurm
 >    -        singularity_enabled: true
+>    -        # Enabling access to the reference data on CVMFS in the container
+>    -        singularity_volumes: $defaults,/cvmfs/data.galaxyproject.org:ro
 >    -        env:
 >    -        - name: LC_ALL
 >    -          value: C
@@ -288,6 +290,8 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    -      singularity:
 >    -        runner: local_runner
 >    -        singularity_enabled: true
+>    -        # Enabling access to the reference data on CVMFS in the container
+>    -        singularity_volumes: $defaults,/cvmfs/data.galaxyproject.org:ro
 >    -        env:
 >    -        # Ensuring a consistent collation environment is good for reproducibility.
 >    -        - name: LC_ALL
@@ -299,29 +303,26 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    -        - name: APPTAINER_TMPDIR
 >    -          value: /tmp
 >    +      tpv_dispatcher:
->    +        runner: dynamic
->    +        type: python
->    +        function: map_tool_to_destination
->    +        rules_module: tpv.rules
+>    +        runner: dynamic_tpv
 >    +        tpv_config_files:
 >    +          - "{{ tpv_config_dir }}/tpv_rules_local.yml"
 >       tools:
 >         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >           environment: local_env
->    @@ -147,6 +131,8 @@ galaxy_config_files_public:
+>    @@ -154,6 +131,8 @@ galaxy_config_files_public:
 >     galaxy_config_files:
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
 >    +  - src: files/galaxy/config/tpv_rules_local.yml
 >    +    dest: "{{ tpv_mutable_dir }}/tpv_rules_local.yml"
->     
+>
 >     galaxy_config_templates:
 >       - src: templates/galaxy/config/container_resolvers_conf.yml.j2
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TPV to job config"}
 >
->  Note that we set the default execution environment to the tpv_dispatcher, added the tpv_dispatcher itself as a dynamic runner, and removed all other destinations.
+>  Note that we set the default execution environment to the tpv_dispatcher, added the tpv_dispatcher environment using the dynamic_tpv runner, and removed all other destinations.
 >  Adding TPV as a runner will cause Galaxy to automatically install the `total-perspective-vortex` package on startup as a conditional dependency.
 >  Finally, we added a new config file named `tpv_rules_local.yml`, which we will create next.
 >
@@ -332,7 +333,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    ```diff
 >    --- /dev/null
 >    +++ b/files/galaxy/config/tpv_rules_local.yml
->    @@ -0,0 +1,30 @@
+>    @@ -0,0 +1,32 @@
 >    +tools:
 >    +  .*testing.*:
 >    +    cores: 2
@@ -349,6 +350,8 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    +    max_accepted_cores: 1
 >    +    params:
 >    +      singularity_enabled: true
+>    +      # Enabling access to the reference data on CVMFS in the container
+>    +      singularity_volumes: $defaults,/cvmfs/data.galaxyproject.org:ro
 >    +    env:
 >    +      # Ensuring a consistent collation environment is good for reproducibility.
 >    +      LC_ALL: C
@@ -361,7 +364,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    +    runner: slurm
 >    +    max_accepted_cores: 16
 >    +    params:
->    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
+>    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --mem={round(mem*1024)}
 >    +
 >    {% endraw %}
 >    ```
@@ -373,8 +376,8 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >
 >    Destinations must also be defined in TPV itself. Importantly, note that any destinations defined in the job conf are ignored by TPV. Therefore, we have moved all destinations from the job conf to TPV. In addition, we have removed some
 >    redundancy by using the "inherits" clause in the `slurm` destination. This means that slurm will inherit all of the settings defined for singularity, but selectively override some settings. We have additionally
->    defined the `native_specification` param for SLURM, which is what SLURM uses to allocate resources per job. Note the use of the `{cores}`
->    parameter within the native specification, which TPV will replace at runtime with the value of cores assigned to the tool.
+>    defined the `native_specification` param for SLURM, which is what SLURM uses to allocate resources per job. Note the use of the `{cores}` and `{mem}`
+>    parameter within the native specification, which TPV will replace at runtime with the value of cores and memory assigned to the tool.
 >
 >    Finally, we have also defined a new property named `max_accepted_cores`, which is the maximum amount of cores this destination will accept. Since the testing tool requests 2 cores, but only the `slurm`
 >    destination is able to accept jobs greater than 1 core, TPV will automatically route the job to the best matching destination, in this case, slurm.
@@ -438,10 +441,10 @@ Now that we've configured the resource requirements for a single tool, let's see
 >       .*testing.*:
 >         cores: 2
 >         mem: cores * 4
->    @@ -27,4 +34,3 @@ destinations:
+>    @@ -29,4 +36,3 @@ destinations:
 >         max_accepted_cores: 16
 >         params:
->           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
+>           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --mem={round(mem*1024)}
 >    -
 >    {% endraw %}
 >    ```
@@ -481,8 +484,8 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -35,6 +35,7 @@ galaxy_job_config:
->             function: map_tool_to_destination
->             rules_module: tpv.rules
+>           tpv_dispatcher:
+>             runner: dynamic_tpv
 >             tpv_config_files:
 >    +          - https://gxy.io/tpv/db.yml
 >               - "{{ tpv_config_dir }}/tpv_rules_local.yml"
@@ -503,7 +506,7 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    ```diff
 >    --- a/files/galaxy/config/tpv_rules_local.yml
 >    +++ b/files/galaxy/config/tpv_rules_local.yml
->    @@ -31,6 +31,9 @@ destinations:
+>    @@ -33,6 +33,9 @@ destinations:
 >       slurm:
 >         inherits: singularity
 >         runner: slurm
@@ -513,7 +516,7 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    +    max_cores: 2
 >    +    max_mem: 8
 >         params:
->           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
+>           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --mem={round(mem*1024)}
 >    {% endraw %}
 >    ```
 >    {: data-commit="TPV clamp max cores and mem"}
@@ -566,7 +569,7 @@ can be matched up so that only desired combinations are compatible with each oth
 >    +          not user or user.email not in admin_users
 >    +        fail: Unauthorized. Only admins can execute this tool.
 >    +
->     
+>
 >     destinations:
 >       local_env:
 >    {% endraw %}
@@ -647,7 +650,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    +    - id: testing
 >    +      environment: tpv_dispatcher
 >    +      resources: testing
->     
+>
 >     galaxy_config:
 >       galaxy:
 >    @@ -59,6 +67,7 @@ galaxy_config:
@@ -664,7 +667,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
->     
+>
 >     galaxy_extra_dirs:
 >       - /data
 >    {% endraw %}
@@ -721,15 +724,15 @@ Lastly, we need to write a rule in TPV that will read the value of the job resou
 >    +        cores: int(job.get_param_values(app)['__job_resource']['cores'])
 >    +        params:
 >    +           walltime: "{int(job.get_param_values(app)['__job_resource']['time'])}"
->     
+>
 >     destinations:
 >       local_env:
->    @@ -45,4 +53,4 @@ destinations:
+>    @@ -47,4 +55,4 @@ destinations:
 >         max_cores: 2
 >         max_mem: 8
 >         params:
->    -      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
->    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00
+>    -      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --mem={round(mem*1024)}
+>    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --mem={round(mem*1024)} --time={entity.params['walltime']}:00:00
 >    {% endraw %}
 >    ```
 >    {: data-commit="process resource params in TPV"}

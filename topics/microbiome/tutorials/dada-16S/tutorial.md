@@ -851,7 +851,7 @@ We will construct a simple sample table from the information encoded in the file
 >
 >    We will now extract from the names the factors:
 >
-> 2. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %}
+> 2. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy2) %}
 >      - {% icon param-file %} *"File to process"*: output of **Extract element identifiers** {% icon tool %}
 >      - In *"Replacement"*:
 >         - In *"1: Replacement"*
@@ -865,12 +865,12 @@ We will construct a simple sample table from the information encoded in the file
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 5. {% tool [Select first lines from a dataset (head)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/9.3+galaxy1) %} to remove the last line
+> 5. {% tool [Select first lines from a dataset (head)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/9.5+galaxy2) %} to remove the last line
 >    - {% icon param-file %} *"File to select"*: output of **Replace Text**
 >    - *"Operation"*: `Remove last lines`
 >    - *"Number of lines"*: `1`
 >
-> 6. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0) %} on rows with the following parameters:
+> 6. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1) %} on rows with the following parameters:
 >    - {% icon param-file %} *"Input file"*: output of **Select first lines**
 >    - *"Input has a header line with column names?"*: `No`
 >    - In *"Expressions"*:
@@ -928,7 +928,7 @@ We now construct a phyloseq object directly with it and the DADA2 outputs and la
 
 > <hands-on-title> Create phyloseq object and launch phyloseq exploration </hands-on-title>
 >
-> 1. {% tool [Create phyloseq object from dada2](toolshed.g2.bx.psu.edu/repos/iuc/phyloseq_from_dada2/phyloseq_from_dada2/1.46.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Create phyloseq object from dada2](toolshed.g2.bx.psu.edu/repos/iuc/phyloseq_from_dada2/phyloseq_from_dada2/1.50.0+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Sequence table"*: output of **dada2: removeBimeraDenovo**
 >    - {% icon param-file %} *"Taxonomy table"*: output of **dada2: assignTaxonomy and addSpecies**
 >    - {% icon param-file %} *"Sample table"*: `Metadata table`

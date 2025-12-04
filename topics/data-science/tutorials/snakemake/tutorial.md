@@ -763,7 +763,7 @@ In the above code sample you can see `bwa=0.7.17`, that's the version of the `bw
 
 ### Log Files
 
-Saving log files is key to making sure that you have a complete log of the execution of sotware. If you don't save the log files, and you're running a pipeline with 100 samples, it can be very easy to get confused about what went wrong and where. Unfortunately this is not a completely automatic process, and you'll need to manually configure it:
+Saving log files is key to making sure that you have a complete log of the execution of software. If you don't save the log files, and you're running a pipeline with 100 samples, it can be very easy to get confused about what went wrong and where. Unfortunately this is not a completely automatic process, and you'll need to manually configure it:
 
 > <code-in-title>`Snakefile`</code-in-title>
 > ```

@@ -35,6 +35,10 @@ follow_up_training:
    topic_name: genome-annotation
    tutorials:
      - repeatmasker
+edam_ontology:
+- topic_0622 # Genomics
+- topic_0196 # Assembly
+- topic_3050 # Biodiversity
 
 ---
 

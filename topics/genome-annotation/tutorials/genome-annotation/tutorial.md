@@ -5,7 +5,6 @@ title: "Genome Annotation"
 zenodo_link: "https://doi.org/10.5281/zenodo.1250793"
 tags:
   - prokaryote
-  - biodiversity
 questions:
 draft: true
 objectives:

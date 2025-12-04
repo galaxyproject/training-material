@@ -21,7 +21,6 @@ tags:
 - one-health
 - jbrowse1
 - microgalaxy
-- biodiversity
 subtopic: prokaryote
 edam_ontology:
 - topic_3673 # Whole genome sequencing

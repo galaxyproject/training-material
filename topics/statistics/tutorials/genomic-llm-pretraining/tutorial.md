@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Pretraining a Large Language Model (LLM) from Scratch on DNA Sequences
 level: Intermediate
-draft: true
 requirements:
 -
   type: "internal"
@@ -42,8 +41,8 @@ contributions:
   - raphaelmourad
   - bebatut
 tags:
-- ELIXIR
-- AI & ML
+- elixir
+- ai-ml
 - Large Language Model
 subtopic: gai-llm
 

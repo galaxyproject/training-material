@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Parameter tuning and optimization - Evaluating nuclei segmentation with Galaxy"
 level: Introductory
+subtopic: advanced
 questions:
   - What are the challenges of using the same settings for every biological image, and how does parameter tuning address these challenges?
   - How can we choose the best filters for preprocessing images for nuclei segmentation?
@@ -28,7 +29,8 @@ contributions:
     - nfdi4bioimage
     - dfg
 tags:
-  - bioimaging
+  - Parameter optimisation
+  - Validation
 ---
 
 

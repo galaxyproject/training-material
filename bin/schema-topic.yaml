@@ -105,6 +105,18 @@ mapping:
                         - "These tutorials take you from raw sequencing reads to pathway analysis"
                         - "Tutorials about analysis of single-cell RNA-seq data"
                         - "Tutorials using a single published single-cell RNA-seq dataset for a variety of analyses"
+
+                  crosstopic_tutorials:
+                      type: seq
+                      sequence:
+                        - type: map
+                          mapping:
+                              topic:
+                                type: str
+                              tutorial:
+                                type: str
+                              priority:
+                                type: int
                   enable:
                       type: bool
                       description: |
@@ -260,6 +272,12 @@ mapping:
               icon:
                 type: str
                 description: One of the icons from _config.yml
+              width:
+                type: int
+                description: Width of the CTA in the row (out of 12)
+              primary_color:
+                type: bool
+                description: Use the primary color for the button
 
     learning_path_cta:
         type: str

@@ -115,6 +115,9 @@ def doUpload(crate_path):
     #
     push = False
     if updated_policy:
+        # Prevents "access_type is too permissive" error if the policy already had public "download" permissions, 
+        #  but the GTN project permission required changes:
+        updated_policy['access'] = 'download'
         push = True
         permissions_update['data']['attributes']['policy'] = updated_policy
 

@@ -77,7 +77,7 @@ The best way to root a tree is by including an **outgroup**: a species or lineag
 
 Besides relatedness and direction, a third important piece of information contained in a phylogeny is the branch length. When a phylogeny has been estimated from DNA or protein sequences, branch lengths usually reflect the evolutionary distance between nodes in the tree. This information can be used to translate distance in terms of expected nucleotide changes into years, and thus to connect evolutionary change to historical events.
 
-![Phylogeny](./images/eldholm2016_tree.png "Phylogeny of the central Asian clade, including the Oslo outbreak. Modified Eldholm et al. 2016."){:width="200"}
+![Phylogeny](./images/eldholm2016_tree.png "Phylogeny of the central Asian clade, including the Oslo outbreak. Modified Eldholm et al. 2016."){:width="100"}
 
 As branch lengths reflect evolutionary distances, they can also be used to identify transmission clusters and outbreaks. Figure 2 shows a (rooted) tree of the Central Asian Clade (CAC), which is part of lineage 2 ({% cite Eldholm2016 %}). The orange color highlights the Afghan strain family within the CAC. At the bottom of the tree, note the clade with short branch lengths. This is how one would expect an outbreak to look in a phylogenetic tree: a set of strains clustering together and separated by extremely short branches, reflecting their almost identical genomes.
 
@@ -200,44 +200,19 @@ If you are not interested in that other tutorial, here are the instructions for 
 >
 {: .hands_on}
 
-## Estimate a phylogeny
+## Set up the coding environment
 
-There are numerous methods to infer phylogenetic trees, but the most frequently used with large-scale molecular data are based on maximum likelihood and Bayesian inference. The details of how these methods construct trees from an alignment are beyond the scope of this introductory course. To be able to read trees, it is not necessary to know the statistical and computational details of how the trees are estimated. The books listed in the [Resources](#resources) section provide in-depth introductions into the different principles of phylogenetic inference, in particular Baum & Smith 2013 and Yang 2014.
-
-In this tutorial, we will use the maximum likelihood method [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) to estimate a phylogenetic tree for the 20 strains.
-
-An aspect we ignore in this tutorial is the uncertainty involved in phylogenetic inference. While RAxML will deliver a single tree, not all aspects of this tree are equally well supported by the data. This uncertainty can be quantified through **bootstrapping**, a procedure where a large number of trees are estimated from random samples of the original data. If a certain split in the original tree is present in all the bootstrapped trees, then we can be confident about this split. Published phylogenies should always include a measure of uncertainty, while for this tutorial you will have to believe me that we are looking at a solid phylogeny...
-
-> <hands-on-title>Estimate a phylogeny for 20 MTBC strains</hands-on-title>
->
-> 1. {% tool [Phyogenetic reconstruction with RAxML](toolshed.g2.bx.psu.edu/repos/iuc/raxml/raxml/8.2.12+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Source file with aligned sequences"*: `output` (Input dataset)
->    - *"Model type"*: `Nucleotide`
->    - *"RAxML options to use"*: `Required options only`
->
-> 2. The RAxML output we are interested in is the *"Best-scoring ML tree"*.
->
->    Select it in you Galaxy history and take a look at it with the different {% icon galaxy-barchart %} visualization options offered by Galaxy.
->
->    ![Unrooted tree Galaxy visualization](./images/tree_unrooted_galaxy_vis.png "(Unrooted) RAxML tree in Galaxy's Phylogenetic Tree Visualization"){:width="300"}
->
-{: .hands_on}
-
-## Visualize and manipulate the tree
-
-Phylogenetic trees are great tools because they are at the same time quantitative (we can do calculations on branch lengths, estimate uncertainty of a tree topology etc.) and visually appealing, allowing to actually "see" biologically interesting patterns. Often this requires some tweaking of the tree, for example by coloring parts of the tree according to some background information we have about the samples.
-
-We will use R to plot and manipulate the phylogeny obtained from RAxML. We will provide you with the exact code to produce the figures we need, and, conveniently, you can run this code from an RStudio session that you can start as an interactive tool inside Galaxy.
+We will use R to estimate a tree from a nucleotide alignment and to plot and manipulate the tree. We will provide you with the exact code to produce the figures we need, and, conveniently, you can run this code from an RStudio session that you can start as an interactive tool inside Galaxy.
 
 > <details-title>Can I use my own coding environment?</details-title>
 >
-> If you have worked with R or RStudio previously, feel free to use any kind of coding environment for exploring and manipulating the RAxML tree we have produced - just download it from your history and import it into any R session you have access to.
+> If you have worked with R or RStudio previously, feel free to use any kind of coding environment for exploring and manipulating the tree - just download it from your history and import it into any R session you have access to.
 >
 {: .details}
 
 > <hands-on-title>Starting an RStudio session and setting things up</hands-on-title>
 >
-> 1. Note the dataset number (the number in front of and separated with a **:** from the dataset name) of the *"Best-scoring ML tree"* output of RAxML
+> 1. Note the dataset number (the number in front of and separated with a **:** from the dataset name) of the  file called *"SNP_alignment.fasta"* 
 >
 > 2. Run {% tool [RStudio](interactive_tool_rstudio) %}
 >
@@ -255,21 +230,22 @@ We will use R to plot and manipulate the phylogeny obtained from RAxML. We will 
 >       ```
 >
 >       You might get a warning about R versions, which you can ignore.
-> 4. Import the RAxML *"Best-scoring ML tree into the Rstudio session
+> 4. Import the SNP alignment into the Rstudio session
 >
 >    ```r
->    treefile <- gx_get(###)
+>    alignment_file <- gx_get(###)
 >    ```
 >
->    where you have to replace `###` with the dataset number of the RAxML output in your history.
+>    where you have to replace `###` with the dataset number of the alignment file in your history.
 >
 {: .hands_on}
 
-## Plot the RAxML output
 
-We have now set up our R session and are ready to start exploring the tree interactively.
+## Estimate the tree 
 
-As a first step we would like to parse the tree information from the imported dataset and plot the tree.
+We have now set up our R session and are ready to start. As a first step we would like to load the alignment into R and infer a tree from it. 
+
+In this tutorial, we'll use the [neighbor-joining algorithm](https://academic.oup.com/mbe/article/4/4/406/1029664) to estimate a phylogenetic tree for the 20 strains. The details of how these methods construct trees from an alignment are beyond the scope of this introductory course. To be able to read trees, it is not necessary to know the statistical and computational details of how the trees are estimated. The books listed in the [Resources](#resources) section provide in-depth introductions into the different principles of phylogenetic inference, in particular Baum & Smith 2013 and Yang 2014.
 
 > <comment-title></comment-title>
 >
@@ -277,18 +253,30 @@ As a first step we would like to parse the tree information from the imported da
 >
 {: .comment}
 
-> <hands-on-title>Parse the tree and plot it</hands-on-title>
+
+> <hands-on-title>Estimate a phylogeny and plot it</hands-on-title>
 >
 > ```r
-> # Parse the tree
-> tree <- read.tree(treefile)
-> # Plot it
+> # Load the alignment
+> aln <- read.dna(alignment_file, format="fasta") 
+>
+> # Remove the ugly file extensions from the sample names
+> rownames(aln) <- gsub('.fastq.vcf', '', rownames(aln))
+> rownames(aln) <- gsub('.fastq.gz.vcf', '', rownames(aln))
+>
+> # Estimate a distance matrix, showing how many nucleotide differences there are between any two samples
+> dmat <- dist.dna(aln, model='N')
+>
+> # Infer the tree from the matrix using neighbor-joining
+> tree <- nj(dmat)
+>
+> # Plot the tree
 > plot(tree)
 > ```
 >
 > > <question-title></question-title>
 > >
-> > 1. Take a look at the tree generated by RAxML. Is it rooted or unrooted? What is the strain far apart from all other strains?
+> > 1. Take a look at the tree. Is it rooted or unrooted? What is the strain far apart from all other strains?
 > >
 > > > <solution-title>1</solution-title>
 > > >
@@ -301,6 +289,8 @@ As a first step we would like to parse the tree information from the imported da
 {: .hands-on}
 
 ## Root the tree
+
+Phylogenetic trees are great tools because they are at the same time quantitative (we can do calculations on branch lengths, estimate uncertainty of a tree topology etc.) and visually appealing, allowing to actually "see" biologically interesting patterns. Often this requires some tweaking of the tree, for example by coloring parts of the tree according to some background information we have about the samples.
 
 To make the phylogeny more interpretable, we will now root the tree using the *M. canettii* strain as the outgroup, then exclude that strain, such that patterns *within* the MTBC become clearer.
 
@@ -496,85 +486,54 @@ For our 20 samples, a trait you previously identified (if you have been doing th
 >
 {: .question}
 
-## Date the phylogeny (advanced)
+## Bootstrapping 
 
-As a last exercise, we are going to put a timescale on our phylogeny, assuming that mutations accumulate in a regular, clock-wise manner. In the tree, phylogenetic distance = time*rate. As we know the phylogenetic distance, we can get an estimate of time by assuming a mutation rate. This sounds simple in theory, but will require some big assumptions:
+Before drawing big conclusions from our tree, let us get an idea of how robust it actually is. 
 
-- As noted above, the starting alignment only contains variable positions, phylogenetic distances in the trees are thus overestimated. To correct for this, we assume that all other sites in the genome are invariant, and rescale branch lengths according to ``rescaled branch lengths = (branch lengths * alignment length) / genome size``, as in {% cite Menardo2019 %}.
+Bootstrapping is a resampling approach that allows us to do that. The basic idea is that we draw sites randomly from our original alignment, and from this "artifical alignment" we estimate a tree. We repeat this procedure 100 times and then ask how many times the same nodes occur in the bootstrap trees. All these steps are conveniently implemented in ape's boot.phylo() function. 
 
-- We assume that all strains were sampled at time point 0, in the present.
-
-- We assume a mutation rate of 2.01e-10 mutations per site per generation ({% cite Ford2013 %})
-
-- To translate generations into years, we assume 200 generations per year.
-
-> <hands-on-title>Rescale branches</hands-on-title>
+> <hands-on-title>Get bootstrap support</hands-on-title>
 >
 > ```r
-> # Rescale branch lengths (here called edge lenghts)
-> genome_size = 4411532
-> alignment_length = 18077
-> invariant_sites = genome_size - alignment_length
->
-> tree_rescaled <- tree_rooted
-> tree_rescaled$edge.length <- ((tree_rescaled$edge.length * alignment_length) / genome_size )
-> tree_rescaled$root.edge <- ((tree_rescaled$root.edge * alignment_length) / genome_size )
->
-> par(mfrow = c(1, 2))
-> plot(tree_rooted,cex = 0.7, root.edge = T, main = "original")
-> axisPhylo()
-> plot(tree_rescaled,cex = 0.7,root.edge = T, main = "rescaled")
-> axisPhylo()
+> # Reset graphical device
 > dev.off()
+>
+> # Define nr of bootstrap replicates
+> n_replicates = 100
+>
+> # Remove the ougroup from the alignment 
+> root = 'ERR313115'
+> aln_rooted <- aln[-which(rownames(aln) == root),]
+>
+> # Pack the tree estimation into a single function  
+> f <- function(x) nj(dist.dna(x, model='N'))
+>
+> # Do the bootstrapping and add the values to the tree
+> tree_rooted$bootstrap  <- boot.phylo(tree_rooted, aln_rooted, FUN = f, B = n_replicates, jumble=TRUE)
+>
+> # Plot tree with bootstrap values
+> plot(tree_rooted, root.edge = T, cex=2)
+> add.scale.bar(x=0.5, y=0.5, lwd=2, cex=1.5)
+> nodelabels(tree_rooted$bootstrap, cex=2)
 > ```
 >
 {: .hands_on}
-
-Look at the scale bars of the two trees. Accounting for invariable sites has a huge effect on phylogenetic distances!
-
-![Rescaled phylogeny](./images/tree_rescaled.svg){:width="600"}
-
-> <hands-on-title>Remove outliers, perform dates estimation and plot with time-scale</hands-on-title>
->
-> ```r
-> # Let's also remove the two outlier strains, they would cause troubles and are anyway useless
-> tree_rescaled <- drop.tip(tree_rescaled, c("ERR1203059", "ERR5987300"))
->
-> # Estimate dates: translate phylogenetic distance into years by assuming a mutation rate and the number of generations per year
-> mutation_rate = 2.01e-10
-> generations_per_year = 200
->
-> ## Ape has a function, estimate.dates(), to date a tree by assuming a specific mutation rate
-> node.date <- estimate.dates(
->   tree_rescaled,
->   node.dates = rep(0, length(tree_rescaled$tip.label)), # set sampling dates to 0
->   mu = (mutation_rate * generations_per_year) # mutation rate per year
-> )
->
-> tree_rescaled$edge.length <- node.date[tree_rescaled$edge[, 2]] - node.date[tree_rescaled$edge[, 1]]
-> tree_rescaled$tip.label <- as.character(mtbc_lineages[tree_rescaled$tip.label])
->
-> plot(tree_rescaled, cex = 0.6, main = "Dated phylogeny (years)")
-> axisPhylo()
-> ```
->
-{: .hands_on}
-
-![Dated phylogeny](./images/tree_dated.svg){:width="600"}
 
 ## Final exercise
 
-> <question-title>Exercise 4 (advanced)</question-title>
+> <question-title>Exercise 4</question-title>
 >
-> 1. What could be the problem with the assumption that all sites in the reference genome which do not appear in our SNP alignment are invariable?
+> 1. Is our tree robust?  
 >
-> 2. Imagine that a recent breakthrough study has found that the mutation rate in MTB is 10 times higher than we assumed. How would this change the estimated dates?
+> 2. In what context would you expect phylogenetic trees with poor bootstrap support?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. About 5 % of the MTB reference genome consists of repetitive or otherwise complicated regions where mapping and SNP calling cannot be done reliably. Most SNP calling pipelines exclude such regions, also the one used in this course. Rather than to assume that these regions are invariant, we should ignore them in our calculations. By not doing this, genomes seem more similar than they are; we underestimate phylogenetic distances.
+> > ![Bootstrap support](./images/tree_bootstrap.svg){:width="600"}
 > >
-> > 2. A rate 10 times higher implies that there will be 10 times more mutations observed in the same time span, or, the other way around, that it will take a time span 10 times shorter to observe the same number of mutations. The timescale of the phylogeny would thus shift one order of magnitude, to hundreds rather than thousands of years. As this example shows, there are considerable uncertainties associated with molecular dating. This is also true for more sophisticated methods (see {% cite Menardo2019 %} for a recent discussion of molecular dating with MTB).
+> > 1. Yes, bootstrap values are generally high: a value of 99, for example, means that in 99 out of 100 bootstrap replicates the same split was observed. Only among the highly similar L2 strains there is some uncertainty. 
+> >
+> > 2. When analyzing a set of highly similar strains, for example in the context of a TB outbreak, bootstrap values can be low and patterns should be interpreted with care. Imagine, for example, that our dataset consisted of 20 L2 strains that differ from each other only by few or single SNPs. 
 > >
 > {: .solution}
 >

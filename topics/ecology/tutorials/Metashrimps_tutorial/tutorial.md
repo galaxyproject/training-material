@@ -24,6 +24,7 @@ tags:
   - EML
   - FAIR
   - Data Paper
+  - biodiversity
 contributions:
     authorship:
         - TanguyGen
@@ -34,7 +35,6 @@ contributions:
     funding:
         - fnso2019
         - pndb
-
 subtopic: ecologymetadatamgt
 ---
 

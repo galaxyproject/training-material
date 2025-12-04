@@ -33,7 +33,7 @@ $("blockquote.solution>.box-title>button,blockquote.details>.box-title>button,bl
 
 // collapse some box types by default
 // LEGACY
- $(".solution>h3,.details>h3,.tip>h3").each(function() {
+ $(".solution>h3,.details>h3,.tip>h3:not(.nobox)").each(function() {
     $(">*:not(h3)", $(this.parent)).toggle("box-collapsed");
     $(this).append("<span role='button' class='fold-unfold fa fa-plus-square'></span>");
 });
@@ -153,23 +153,6 @@ function cyoaDefault(defaultOption, cyoaId){
 
 })(window, document);
 
-
-function fixDiffPresentation(codeBlock){
-	codeBlock.childNodes.forEach(x => {
-		if(x.nodeName == '#text'){
-			x.textContent = x.textContent.split('\n').map(q => { return q.startsWith(" ") ? q.slice(1) : q }).join('\n')
-		} else {
-			if(!(x.nodeName.toLowerCase() === 'span' && x.classList[0] === 'notranslate')){
-				var fixed = $(x).text().split('\n').map(q => { return q.slice(1) }).join('\n');
-				$(x).text(fixed);
-			}
-		}
-	})
-}
-
-// For admin training
-document.querySelectorAll("article.topic-admin section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
-document.querySelectorAll("article.topic-data-science section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 
 // Redirects
 //if(window.location.hostname === "galaxyproject.github.io") {

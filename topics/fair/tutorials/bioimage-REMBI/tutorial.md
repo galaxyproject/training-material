@@ -1,8 +1,9 @@
 ---
 layout: tutorial_hands_on
 title: REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data
-
+level: Introductory
 zenodo_link: ''
+subtopic: fair-data
 
 questions:
 - What is REMBI and why should I use it?
@@ -20,9 +21,9 @@ key_points:
 - REMBI describes useful guidelines for bioimaging that can help unification and FARIfication of the data.
 
 tags:
-- fair
-- data management
-- bioimaging
+- Data management
+- Metadata
+- Bioimaging
 
 priority: 5
 
@@ -35,7 +36,6 @@ contributions:
   funding:
     - elixir-uk-dash
     - elixir-europe
-subtopic: fair-data
 
 requirements:
   - type: "internal"

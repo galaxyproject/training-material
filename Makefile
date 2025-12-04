@@ -15,6 +15,8 @@ MINICONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64
 SHELL=bash
 RUBY_VERSION=2.4.4
 CONDA_ENV=galaxy_training_material
+GATREPO=/tmp/git-gat
+TEST_VM=gat-8.eu.training.galaxyproject.eu
 
 ifeq ($(shell uname -s),Darwin)
 	CHROME=/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
@@ -282,3 +284,30 @@ clean: ## clean up junk files
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 .PHONY: help
+
+setup-gat: $(GATREPO)
+	@echo "Setting up temporary git-gat repo"
+.PHONY: setup-gat
+
+$(GATREPO):
+	bash bin/knit-automated.sh export
+	cd /tmp/git-gat &&	git init &&	git am -3 *.patch && rm *.patch
+
+clean-gat:
+	@echo "Cleaning temporary git-gat repo"
+	rm -rf $(GATREPO)
+.PHONY: clean-gat
+
+test-gat: gat-update-hosts
+	echo "password" > $(GATREPO)/.vault-password.txt
+	cd $(GATREPO) && ansible-galaxy install -p roles -r requirements.yml && ansible-galaxy collection install -p roles -r requirements.yml || ansible-playbook galaxy.yml
+.PHONY: test-gat
+
+gat-update-hosts:
+	sed -i 's/gat-0\.eu\.galaxy\.training/${TEST_VM}/g' $(GATREPO)/hosts
+	sed -i 's/ansible_connection=local//g' $(GATREPO)/hosts
+.PHONY: gat-update-hosts
+
+import-gat:
+	./bin/knit-automated.sh import
+.PHONY: import-gat
