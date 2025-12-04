@@ -15,7 +15,7 @@ requirements:
   tutorials:
   - intro-to-ml-with-python
   - neural-networks-with-python
-  - deep-learning-without-gai-with-python
+  - practical-deep-learning-with-pytorch
 questions:
 - How to load and configure a pre-trained language model for DNA sequence analysis?
 - What is the process for tokenizing DNA sequences to prepare them for model training?
@@ -54,11 +54,11 @@ notebook:
 
 **Generative Artificial Intelligence** (AI) represents a cutting-edge domain within machine learning, focused on creating new, synthetic yet realistic data. This includes generating text, images, music, and even biological sequences. At the heart of many generative AI applications are **Large Language Models** (LLMs), which have revolutionized natural language processing and beyond.
 
-LLMs are **sophisticated neural networks** trained on vast amounts of text data to understand, generate, and interact with human language. Their architecture, often based on **Transformers**, allows them to capture complex patterns and context within data, making them powerful tools for various applications, from chatbots to creative writing and scientific discovery. 
+LLMs are **sophisticated neural networks** trained on vast amounts of text data to understand, generate, and interact with human language. Their architecture, often based on **Transformers**, allows them to capture complex patterns and context within data, making them powerful tools for various applications, from chatbots to creative writing and scientific discovery.
 
 > <details-title> Transformers </details-title>
 > Transformers are a type of neural network model designed to handle sequential data, such as text, by using self-attention mechanisms to weigh the importance of input elements relative to each other, enabling the model to understand and generate coherent and contextually relevant outputs.
-> 
+>
 {: .details}
 
 In this tutorial, we will explore the intersection of generative AI and genomics by **pretraining an LLM from scratch on DNA sequences**. This process will equip the model with a foundational understanding of the "grammar" of DNA, enabling it to generate and analyze genetic data with remarkable accuracy.
@@ -73,7 +73,7 @@ These techniques collectively enhance the performance and efficiency of large la
 
 In this tutorial, we will use a simplified Mistral model architecture with fewer layers and hidden units to reduce computational requirements. The model will be trained to predict the next base in the sequence. For instance, for a sequence like `ATTTGTTGGT`, the model will be trained to predict the suffix `TTGGT` given the prefix `ATTTG`. This process is called **causal language modeling**.
 
-To pretrain the model, we will use a file containing 100,000 non-overlapping DNA sequences of 200 bases, corresponding to around 1% of the human genome (hg38 assembly). This involves training the model to predict the end of a DNA sequence. 
+To pretrain the model, we will use a file containing 100,000 non-overlapping DNA sequences of 200 bases, corresponding to around 1% of the human genome (hg38 assembly). This involves training the model to predict the end of a DNA sequence.
 
 By the end of this tutorial, we will obtain a Mistral-DNA model with an internal representation of DNA sequence grammar. This pretrained model can then be used for various applications, such as fine-tuning for classification tasks or predicting mutational effects.
 
@@ -110,13 +110,13 @@ The first step is to install the required dependencies:
 > > <solution-title></solution-title>
 > >
 > > - `accelerate`: A library by [Hugging Face](https://huggingface.co/) -- a platform that provides tools and resources for building, training, and deploying machine learning models -- designed to simplify the process of training and deploying machine learning models across different hardware environments. It provides tools to optimize performance on GPUs, TPUs, and other accelerators, making it easier to scale models efficiently.
-> > 
+> >
 > > - `datasets`: A library by Hugging Face for managing and processing datasets. It provides tools to load, manipulate, and share datasets in a standardized format, making it easier to work with machine learning data.
-> > 
+> >
 > > - `numpy`: A fundamental package for scientific computing in Python.
-> > 
+> >
 > > - `torch`: Also known as PyTorch, it is an open-source machine learning library developed by Facebook's AI Research lab. It provides a flexible platform for building and training neural networks, with a focus on tensor computations and automatic differentiation.
-> > 
+> >
 > > - `transformers`: A library by Hugging Face that provides implementations of state-of-the-art transformer models for natural language processing (NLP). It includes pre-trained models and tools for fine-tuning, making it easier to apply transformers to various NLP tasks.
 > >
 > > - `flash-attn`: Implementation of FlashAttention, a Fast and Memory-Efficient Exact Attention with IO-Awareness
@@ -151,7 +151,7 @@ from transformers import (
 > <details-title>Loaded functions and classes from datasets and transformers libraries</details-title>
 >
 > - `datasets`:
->   - `load_dataset`: function to load datasets from the Hugging Face Hub or local files. 
+>   - `load_dataset`: function to load datasets from the Hugging Face Hub or local files.
 > - `transformers`:
 >   - `AutoConfig`: Automatically loads the configuration for a pre-trained model. It defines the architecture and hyperparameters of the model.
 >   - `AutoModelForCausalLM`: Loads a pre-trained causal language model for tasks like text generation, where the model predicts the next token in a sequence.
@@ -160,9 +160,9 @@ from transformers import (
 >   - `EarlyStoppingCallback`: A callback used during training to stop the process early if the model's performance on the validation set stops > improving, saving time and resources.
 >   - `Trainer`: A high-level API for training and evaluating transformer > models. It simplifies the training loop and handles tasks like gradient accumulation and evaluation.
 >   - `TrainingArguments`: A class to define the training configuration, including hyperparameters like learning rate, batch size, and number > of epochs. It is used to configure the `Trainer`.
-> 
+>
 > These components work together to streamline the process of training and fine-tuning transformer models for various NLP tasks.
-> 
+>
 {: .details}
 
 > <comment-title>Versions</comment-title>
@@ -171,7 +171,7 @@ from transformers import (
 > - `accelerate` > 0.32.1
 > - `flash_attn` > 2.6.0.post1 and 2.7.0.post2
 > - `transformers` > 4.47.1
-> 
+>
 > You can check the versions with:
 >
 > ```python
@@ -193,14 +193,14 @@ Let's check the resources:
 !nvidia-smi
 ```
 
-The command `nvidia-smi` (NVIDIA System Management Interface) is used to monitor and manage NVIDIA GPU devices. It provides information about the GPU's utilization, memory usage, temperature, and running processes. This tool is essential for developers and researchers to track the performance and health of GPUs, especially when running computationally intensive tasks like machine learning training. 
+The command `nvidia-smi` (NVIDIA System Management Interface) is used to monitor and manage NVIDIA GPU devices. It provides information about the GPU's utilization, memory usage, temperature, and running processes. This tool is essential for developers and researchers to track the performance and health of GPUs, especially when running computationally intensive tasks like machine learning training.
 
 > <question-title></question-title>
 >
 > How do you interpret the following output?
 >
 > ```
-> Tue Mar 25 13:49:35 2025       
+> Tue Mar 25 13:49:35 2025
 > +-----------------------------------------------------------------------------> ------------+
 > | NVIDIA-SMI 550.54.15              Driver Version: 550.54.15      CUDA > Version: 12.4     |
 > |-----------------------------------------+------------------------> +----------------------+
@@ -212,7 +212,7 @@ The command `nvidia-smi` (NVIDIA System Management Interface) is used to monitor
 > | N/A   40C    P8              9W /   70W |       2MiB /  15360MiB |      > 0%      Default |
 > |                                         |                        |          >         N/A |
 > +-----------------------------------------+------------------------> +----------------------+
->                                                                               >            
+>                                                                               >
 > +-----------------------------------------------------------------------------> ------------+
 > | > Processes:                                                                    >           |
 > |  GPU   GI   CI        PID   Type   Process > name                              GPU Memory |
@@ -284,7 +284,7 @@ Let's configure PyTorch and the CUDA environment -- software and hardware ecosys
 
 # Prepare the model
 
-## Load the model 
+## Load the model
 
 Let's load now the model, `Mistral-DNA`. The Mixtral model ([Mixtral-8x7B-v0.1](https://huggingface.co/mistralai/Mixtral-8x7B-v0.1)) -- [a pretrained generative Sparse Mixture of Experts outperforming Llama 2 70B](https://mistral.ai/news/mixtral-of-experts) -- was modified to significantly reduce the number of parameters mostly by removing layers, such that it could be trained on a GPU such as an RTX3090.
 
@@ -308,7 +308,7 @@ os.chdir("Mistral-DNA/")
 
 ## Choose the LLM architecture
 
-Let's look at the original archicture of `Mixtral-8x7B-v0.1` which is stored in the `data/models/Mixtral-8x7B-v0.1` folder ([GitHub](https://github.com/raphaelmourad/Mistral-DNA/tree/main/data/models/Mixtral-8x7B-v0.1)). 
+Let's look at the original archicture of `Mixtral-8x7B-v0.1` which is stored in the `data/models/Mixtral-8x7B-v0.1` folder ([GitHub](https://github.com/raphaelmourad/Mistral-DNA/tree/main/data/models/Mixtral-8x7B-v0.1)).
 
 > <question-title></question-title>
 >
@@ -317,7 +317,7 @@ Let's look at the original archicture of `Mixtral-8x7B-v0.1` which is stored in 
 >
 > > <solution-title></solution-title>
 > >
-> > 1. The [`config.json` file](https://github.com/raphaelmourad/Mistral-DNA/blob/main/data/models/Mixtral-8x7B-v0.1/config.json) is essential for configuring the language model as a Mistral model. It specifies the architecture for causal language modeling (`MixtralForCausalLM`) and details the size of the neural network components. The original Mistral model has a larger hidden size, but it is reduced here to make pre-training feasible. 
+> > 1. The [`config.json` file](https://github.com/raphaelmourad/Mistral-DNA/blob/main/data/models/Mixtral-8x7B-v0.1/config.json) is essential for configuring the language model as a Mistral model. It specifies the architecture for causal language modeling (`MixtralForCausalLM`) and details the size of the neural network components. The original Mistral model has a larger hidden size, but it is reduced here to make pre-training feasible.
 > > 2. The key parameters are:
 > >    - **Intermediate Size** (`intermediate_size`): Size of the intermediate (or hidden) layers within the model. It determines the number of neurons in these layers, influencing the model's capacity to capture complex patterns in the data. A larger intermediate size can capture more nuanced details but also requires more computational resources. Set to 256, which is relatively small compared to the original model.
 > >    - **Number of Attention Heads** (`num_attention_heads`): Number of attention heads in the multi-head attention mechanism. Each head allows the model to focus on different parts of the input sequence simultaneously, capturing diverse aspects of the data. More attention heads can provide a richer representation but also increase computational complexity. Reduced to 8 for efficiency.
@@ -400,7 +400,7 @@ As expected, the model is a `MixtralForCausalLM` model with several key componen
 2. **Decoder Layers (`layers`)**: Consists of eight `MixtralDecoderLayer` modules, each containing several sub-components:
     - **Self-Attention Mechanism (`self_attn`)**
 
-      > <question-title></question-title> 
+      > <question-title></question-title>
       >
       > 1. What are the components?
       > 2. How is the purpose?
@@ -416,7 +416,7 @@ As expected, the model is a `MixtralForCausalLM` model with several key componen
 
     - **Sparse Mixture of Experts (`block_sparse_moe`)**:
 
-      > <question-title></question-title> 
+      > <question-title></question-title>
       >
       > 1. What are the components?
       > 2. How is the purpose?
@@ -445,12 +445,12 @@ This architecture ensures that the model can capture complex patterns in DNA seq
 >
 > > <solution-title></solution-title>
 > >
-> > 
+> >
 > > ```python
 > > pytorch_total_params = sum(p.numel() for p in model.parameters())
 > > print(f"Model size: {pytorch_total_params/1000**2:.1f}M parameters")
 > > ```
-> > 
+> >
 > > There are 105 millions parameters. It is a big model.
 > >
 > {: .solution}
@@ -502,7 +502,7 @@ The `PreTrainedTokenizerFast` is a fast and efficient tokenizer used to process 
 
 - `name_or_path='zhihan1996/DNABERT-2-117M'`: Specifies the name or path of the pre-trained tokenizer, indicating that it is associated with the `DNABERT-2-117M` model, which is designed for processing DNA sequences.
 
-- `vocab_size=4096`: Defines the size of the tokenizer's vocabulary. 
+- `vocab_size=4096`: Defines the size of the tokenizer's vocabulary.
 
     > <question-title></question-title>
     >
@@ -532,14 +532,14 @@ The `PreTrainedTokenizerFast` is a fast and efficient tokenizer used to process 
 > 3. `padding_side='right'`
 > 4. `truncation_side='right'`
 > 5. `clean_up_tokenization_spaces=False`
-> 6. `added_tokens_decoder` 
+> 6. `added_tokens_decoder`
 >
 > > <solution-title></solution-title>
 > >
-> > 1. `model_max_length=1000000000000000019884624838656`: Represents the maximum length of sequences that the model can handle. 
-> > 
+> > 1. `model_max_length=1000000000000000019884624838656`: Represents the maximum length of sequences that the model can handle.
+> >
 > >     This extremely large value suggests that the model is designed to process very long sequences, although in practice, the actual limit will be constrained by available computational resources.
-> > 
+> >
 > > 2. `is_fast=True`: Indicates that this tokenizer is optimized for speed, leveraging Rust-based implementations to accelerate tokenization processes.
 > > 3. `padding_side='right'`: Configures the tokenizer to pad sequences on the right side, ensuring that all sequences in a batch have the same length by adding padding tokens to the end of shorter sequences.
 > > 4. `truncation_side='right'`: Specifies that sequences will be truncated from the right side if they exceed the maximum length, preserving the beginning of the sequence.
@@ -568,7 +568,7 @@ encoding = tokenizer("ATT", padding="longest", return_tensors="pt")
 print(encoding)
 ```
 
-The code tokenizes the DNA sequence "ATT", pads it to the longest sequence in the batch (`padding="longest"`), and returns the result as PyTorch tensors (`return_tensors="pt"`). 
+The code tokenizes the DNA sequence "ATT", pads it to the longest sequence in the batch (`padding="longest"`), and returns the result as PyTorch tensors (`return_tensors="pt"`).
 
 ```
 {'input_ids': tensor([[   1, 2061,    2]]), 'token_type_ids': tensor([[0, 0, 0]]), 'attention_mask': tensor([[1, 1, 1]])}
@@ -612,7 +612,7 @@ This encoded format is ready for input into a transformer model, ensuring that t
 
 # Prepare data
 
-We will now prepare the data. 
+We will now prepare the data.
 
 ## Load data
 
@@ -639,11 +639,11 @@ dataset_text = load_dataset("csv", data_files="data/genome_sequences/hg38/sequen
 > >
 > > 1. `dataset_text` is a `DatasetDict` with a `train` `Dataset` containing 1 feature (`'text'`) of 99,999 rows (obtained with `dataset_text`)
 > > 2. To get the 5 train dataset in the data:
-> > 
+> >
 > >    ```python
 > >    dataset_text['train']['text'][0:5]
 > >    ```
-> >    
+> >
 > >    ```
 > >    ['TAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCCTAACCCTAACCCTAACCCTAACCCTAACCTAACCCTAACCCTAACCCTAA',
 > >    'CCCTAACCCTAACCCTAACCCTAACCCTAACCCCTAACCCTAACCCTAAACCCTAAACCCTAACCCTAACCCTAACCCTAACCCTAACCCCAACCCCAACCCCAACCCCAACCCCAACCCCAACCCTAACCCCTAACCCTAACCCTAACCCTACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCCTAACCCC',
@@ -652,7 +652,7 @@ dataset_text = load_dataset("csv", data_files="data/genome_sequences/hg38/sequen
 > >    'CACATGCTAGCGCGTCGGGGTGGAGGCGTGGCGCAGGCGCAGAGAGGCGCGCCGCGCCGGCGCAGGCGCAGAGACACATGCTACCGCGTCCAGGGGTGGAGGCGTGGCGCAGGCGCAGAGAGGCGCACCGCGCCGGCGCAGGCGCAGAGACACATGCTAGCGCGTCCAGGGGTGGAGGCGTGGCGCAGGCGCAGAGACGC']
 > >    ```
 > >
-> > 2. The sequences are 200 base pair long: 
+> > 2. The sequences are 200 base pair long:
 > >
 > >    ```python
 > >    len(dataset_text['train']['text'][0])
@@ -674,10 +674,10 @@ def tokenize_function(examples):
     return tokenizer(examples['text'], padding="longest", truncation=True, return_tensors="pt")
 ```
 
-> <question-title></question-title> 
+> <question-title></question-title>
 >
 > What do the following parameters?
-> 
+>
 > 1. `padding="longest"`
 > 2. `truncation=True`
 > 3. `return_tensors="pt"`
@@ -700,13 +700,13 @@ dataset = dataset_text.map(tokenize_function, batched=True)
 
 It is quite fast for the almsot 100,000 sequence of length 200 bp.
 
-> <question-title></question-title> 
+> <question-title></question-title>
 >
 > 1. How is `dataset` structured?
 > 2. What is in the first tokenized sequence of `train` `Dataset`?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > 1. `dataset` is
 > >    ```
 > >    DatasetDict({
@@ -716,7 +716,7 @@ It is quite fast for the almsot 100,000 sequence of length 200 bp.
 > >        })
 > >    })
 > >    ```
-> >    
+> >
 > >    `dataset` is a `DatasetDict` with 1 `train` `Dataset` made of 99,999 rows and 4 features:
 > >    - `text`: The original text data before tokenization.
 > >    - `input_ids`: The tokenized input data, represented as numerical IDs.
@@ -728,7 +728,7 @@ It is quite fast for the almsot 100,000 sequence of length 200 bp.
 > >    - `input_ids`: list of 49 numerical values, the token IDs.
 > >    - `token_type_ids`: list 49 `0`
 > >    - `attention_mask`: list of 7 `0` (padding) and 42 `1` (real tokens)
-> > 
+> >
 > {: .solution}
 >
 {: .question}
@@ -744,12 +744,12 @@ train_size = int(0.8 * len(dataset["train"]))
 val_size = len(dataset["train"]) - train_size
 ```
 
-> <question-title></question-title> 
+> <question-title></question-title>
 >
 > How big are training and validation sets?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > Training set has 79,999 sequences and the validation set 20,000.
 > >
 > {: .solution}
@@ -770,12 +770,12 @@ The `DataCollatorForLanguageModeling` is a utility class, designed to prepare an
 data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
 ```
 
-> <question-title></question-title> 
+> <question-title></question-title>
 >
 > What are the different parameters?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > - `tokenizer=tokenizer` specifies the tokenizer to be used for processing the input data. The tokenizer converts raw text into numerical tokens that the model can understand.
 > > - `mlm=False`: Indicates that the data collator is set up for causal language modeling (CLM) rather than masked language modeling (MLM).
 > >
@@ -831,7 +831,7 @@ training_args = TrainingArguments(
 - `gradient_accumulation_steps=50` accumulates gradients over 50 steps before performing a backward pass. This effectively increases the batch size without requiring additional memory, helping to stabilize training.
 - `report_to="none"` disables [Weights & Biases (WandB)](https://wandb.ai/), a popular platform used for experiment tracking, dataset versioning, and model management in machine learning
 
-  > <comment-title>Why Disable WandB?</comment-title> 
+  > <comment-title>Why Disable WandB?</comment-title>
   >
   > Disabling WandB is often done in specific scenarios:
   > - Avoiding Unwanted Logging: If we do not intend to use WandB for tracking our experiments or if we want to avoid potential conflicts with other logging mechanisms, we would disable it.
@@ -840,12 +840,12 @@ training_args = TrainingArguments(
   >
   {: .comment}
 
-> <question-title></question-title> 
+> <question-title></question-title>
 >
 > What is stored in `training_args`: the parameters to the model, the parameter of the LLM or the parameters of the trainer function?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > The parameters of the trainer function
 > >
 > {: .solution}
@@ -889,12 +889,12 @@ Here, the trainer is set to run for 50 epochs. After the initiation, we get an e
 
 With this small model and dataset, the estimated time to run 50 epochs is 20 hours -- this value changes depending on the infrastructure --.
 
-> <question-title></question-title> 
+> <question-title></question-title>
 >
 > Will the model be trained to 50 epochs?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > Setting the number of epochs to 50 doesn't mean the model will train for all 50 epochs. It's likely to stop earlier
 > >
 > {: .solution}
@@ -917,11 +917,11 @@ model = AutoModelForCausalLM.from_pretrained("RaphaelMourad/Mistral-DNA-v1-17M-h
 
 This is a mixed model that was pre-trained on the entire Human Genome. It contains approximately 17 million parameters and was trained using the Human Genome assembly GRCh38. Unlike models pre-trained on sequences of 200 bases, this model was pre-trained on sequences of 10,000 bases (10K). The advantage of this model is its ability to process larger DNA contexts or sequences. This capability allows it to capture more extensive patterns and dependencies within the genomic data.
 
-> <question-title></question-title> 
+> <question-title></question-title>
 >
 > By looking at the output of:
 >
-> 
+>
 > ```python
 > model
 > ```
@@ -930,7 +930,7 @@ This is a mixed model that was pre-trained on the entire Human Genome. It contai
 > 2. Is it similar to previous model?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > 1. 8 transformer layers
 > > 2. Yes
 > >
@@ -939,7 +939,7 @@ This is a mixed model that was pre-trained on the entire Human Genome. It contai
 {: .question}
 
 
-# Compute the embedding of a DNA sequence 
+# Compute the embedding of a DNA sequence
 
 With this kind of model something, we can convert the DNA sequence to a vector.
 
@@ -960,12 +960,12 @@ hidden_states = model_outputs[0]
 
 The generated hidden states are the internal representations of the input sequence at different layers of the model. Here we look at the hidden neurons of the last layer. They capture contextual information about the sequence and provide a richer representation of the sequence compared to the raw nucleotide string, capturing contextual information that can be used for tasks such as sequence similarity analysis, functional prediction, variant impact analysis, and more.
 
-> <question-title></question-title> 
+> <question-title></question-title>
 >
 > What is the shape of `hidden_states`?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > `[1, 17, 4096]`:
 > > - `1`: number of sequences, here 1 DNA sequence
 > > - `17`: number of words, here the DNA sequence has been converted to 17 words larger that 1
@@ -983,13 +983,13 @@ embedding_mean = torch.mean(hidden_states[0], dim=0)
 
 `dim=0` indicates that the mean is calculated across the sequence length dimension. This effectively averages the hidden states for each token position in the sequence, resulting in a single vector that represents the entire sequence.
 
-> <question-title></question-title> 
+> <question-title></question-title>
 >
 > 1. What is the shape of `embedding_mean`?
 > 2. Which type of data is in `embedding_mean`?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > 1. `4096`, the number of possible tokens.
 > > 2. `embedding_mean` is a vector of numerical values.
 > {: .solution}
@@ -998,12 +998,12 @@ embedding_mean = torch.mean(hidden_states[0], dim=0)
 
 `embedding_mean` is a numerical vector of size 4,096 that represents the average embedding of the DNA sequence. This fixed-size representation can be used for various downstream tasks, such as classification, clustering, or similarity comparisons.
 
-> <hands-on-title></hands-on-title> 
+> <hands-on-title></hands-on-title>
 >
 > Apply a max pooling instead of a mean pooling to summarize information along the DNA sequence.
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > ```python
 > > embedding_max = torch.max(hidden_states[0], dim=0)[0]
 > > ```
@@ -1014,18 +1014,18 @@ embedding_mean = torch.mean(hidden_states[0], dim=0)
 > <comment-title>Similar process to ChatGPT</comment-title>
 >
 > When you use a system like ChatGPT, the process involves converting your textual input, or "prompt," into a numerical vector. This conversion is similar to the process we just did. Here's how it works:
-> 
+>
 > - **Input Prompt**: You write a prompt, which is a textual query or statement.
 > - **Tokenization**: The prompt is tokenized, meaning it is broken down into smaller units, such as words or subwords, using a tokenizer.
 > - **Vector Representation**: These tokens are then converted into numerical vectors, or embeddings. These vectors capture the semantic meaning and context of the words in the prompt.
 > - **Model Processing**: The model processes these vectors to generate a response. The embeddings allow the model to understand the context and nuances of your input, enabling it to produce coherent and relevant responses.
-> 
+>
 > This process of converting text into numerical vectors is fundamental to how language models like ChatGPT operate, enabling them to interpret and generate human-like text based on the input they receive.
 >
 {: .comment}
 
 # Conclusion
 
-This tutorial provides a comprehensive guide to preparing, training, and utilizing a pre-trained language model for DNA sequence analysis. It begins by setting up the necessary resources, including installing dependencies, importing Python libraries, and configuring computational resources. The tutorial then walks through loading and choosing an appropriate model architecture for DNA sequences, followed by setting up a tokenizer to convert DNA sequences into numerical tokens. Data preparation involves loading, tokenizing, splitting, and collating DNA sequences to ensure efficient model training. The training process is detailed with parameter definitions and pretraining steps, culminating in the calculation of DNA sequence embeddings. 
+This tutorial provides a comprehensive guide to preparing, training, and utilizing a pre-trained language model for DNA sequence analysis. It begins by setting up the necessary resources, including installing dependencies, importing Python libraries, and configuring computational resources. The tutorial then walks through loading and choosing an appropriate model architecture for DNA sequences, followed by setting up a tokenizer to convert DNA sequences into numerical tokens. Data preparation involves loading, tokenizing, splitting, and collating DNA sequences to ensure efficient model training. The training process is detailed with parameter definitions and pretraining steps, culminating in the calculation of DNA sequence embeddings.
 
 We can now leverage the pre-trained model in various bioinformatics applications, such as sequence similarity analysis and functional prediction, offering a robust foundation for integrative biological research.

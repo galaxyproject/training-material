@@ -15,7 +15,7 @@ requirements:
   tutorials:
   - intro-to-ml-with-python
   - neural-networks-with-python
-  - deep-learning-without-gai-with-python
+  - practical-deep-learning-with-pytorch
   - genomic-llm-pretraining
   - genomic-llm-finetuning
 questions:
@@ -73,7 +73,7 @@ model_name="RaphaelMourad/Mistral-DNA-v1-17M-hg38"
 {: .agenda}
 
 
-# Prepare resources 
+# Prepare resources
 
 ## Install dependencies
 
@@ -112,7 +112,7 @@ from transformers import (
 >
 > This tutorial has been tested with following versions:
 > - `transformers` = 4.48.3
-> 
+>
 > You can check the versions with:
 >
 > ```python
@@ -164,7 +164,7 @@ tokenizer = transformers.AutoTokenizer.from_pretrained(
 > <question-title></question-title>
 >
 > What do the parameters?
-> 
+>
 > 1. `use_fast=True`?
 > 2. `trust_remote_code=True`?
 >
@@ -179,7 +179,7 @@ tokenizer = transformers.AutoTokenizer.from_pretrained(
 
 # Load and Configure the Pre-trained Model
 
-We will now load the pre-trained DNA large language model (LLM) and configure it for our specific task of predicting the impact of DNA mutations. 
+We will now load the pre-trained DNA large language model (LLM) and configure it for our specific task of predicting the impact of DNA mutations.
 
 ```python
 model=transformers.AutoModelForCausalLM.from_pretrained(
@@ -238,7 +238,7 @@ MixtralForCausalLM(
 > <question-title></question-title>
 >
 > What do the parameters?
-> 
+>
 > 1. How does the vocabulary size of 4,096 relate to k-mers in DNA sequences?
 > 2. What is the role of the embedding layer in `MixtralForCausalLM`?
 > 3. How many layers does the `MixtralForCausalLM` model have, and what is their purpose?
@@ -261,7 +261,7 @@ MixtralForCausalLM(
 >
 {: .question}
 
-> <question-title></question-title> 
+> <question-title></question-title>
 >
 > For a DNA sequence "ACGTAGCATCGGATCTATCTATCGACACTTGGTTATCGATCTACGAGCATCTCGTTAGC"
 >
@@ -273,44 +273,44 @@ MixtralForCausalLM(
 > > <solution-title></solution-title>
 > >
 > > Let's start by defining the DNA sequence:
-> > 
+> >
 > > ```python
 > > dna = "ACGTAGCATCGGATCTATCTATCGACACTTGGTTATCGATCTACGAGCATCTCGTTAGC"
 > > ```
-> > 
+> >
 > > 1. To get the hidden state:
 > >    1. Tokenize the DNA sequence using the tokenizer
-> >      
+> >
 > >        ```python
 > >        tokenized_dna = tokenizer(dna, return_tensors = "pt")
 > >        ```
 > >
 > >    2. Extract the tensor containing the token IDs from the tokenized output
-> >      
+> >
 > >        ```python
 > >        inputs = tokenized_dna["input_ids"]
 > >        ```
 > >
 > >    3. Pass the tokenized input through the model.
-> >      
+> >
 > >        ```python
 > >        model_outputs = model(inputs)
 > >        ```
 > >
 > >    4. Extract the hidden states from the model's output.
-> >      
+> >
 > >        ```python
 > >        hidden_states = model_outputs[0].detach()
 > >        ```
 > >
 > > 2. To compute mean of the hidden states accross the sequence length dimension:
-> >    
+> >
 > >    ```python
 > >    embedding_mean = torch.mean(hidden_states[0], dim=0)
 > >    ```
 > >
 > > 3. The shape is 4,096, the number of possible tokens
-> > 
+> >
 > > 4. It represents the average embedding of the DNA sequence. This fixed-size representation can be used for various downstream tasks, such as classification, clustering, or similarity comparisons.
 > {: .solution}
 >
@@ -369,7 +369,7 @@ To compare the effects of silent mutation and amino acid deletion, we will compu
 > \\(L2 = \sqrt{\sum_{i} (a_{i}-b_{i})^{2}\\)
 >
 {: .details}
-          
+
 ```python
 wt_mut_L2 = torch.norm(embedding_max[0] - embedding_max[1])
 print(wt_mut_L2)
@@ -455,8 +455,8 @@ intron_mut_seqs = downloadReadFastaFile(intron_mut_snp_fp)
 >
 > > <solution-title></solution-title>
 > >
-> > 1. ```python 
-> > len( exon_wt_seqs ) , len(exon_mut_seqs) , len(intron_wt_seqs) , len( intron_mut_seqs ) 
+> > 1. ```python
+> > len( exon_wt_seqs ) , len(exon_mut_seqs) , len(intron_wt_seqs) , len( intron_mut_seqs )
 > > ```
 > >  `(10000, 10000, 10000, 10000)`
 > > 2. the sequences are 201 nucleotides long.
@@ -486,7 +486,7 @@ intron_mut_seqs = intron_mut_seqs[0:kseq]
 > >     n_diff += exon_mut_seqs[0][i] == exon_wt_seqs[0][i]
 > > print(n_diff)
 > > ```
-> > 
+> >
 > {: .solution}
 >
 {: .question}
@@ -531,7 +531,7 @@ intron_SNP_distL2 = computeMutationEffect(intron_wt_seqs,intron_mut_seqs)
 > > <solution-title></solution-title>
 > >
 > > 10,000 each: one value per pair of wt/mutated sequence
-> > 
+> >
 > {: .solution}
 >
 {: .question}

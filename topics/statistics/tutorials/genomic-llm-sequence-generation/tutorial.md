@@ -15,7 +15,7 @@ requirements:
   tutorials:
   - intro-to-ml-with-python
   - neural-networks-with-python
-  - deep-learning-without-gai-with-python
+  - practical-deep-learning-with-pytorch
   - genomic-llm-pretraining
   - genomic-llm-finetuning
   - genomic-llm-zeroshot-prediction
@@ -71,7 +71,7 @@ model_name = "RaphaelMourad/Mistral-DNA-v1-138M-yeast"
 >
 {: .agenda}
 
-# Prepare resources 
+# Prepare resources
 
 
 ## Install dependencies
@@ -112,7 +112,7 @@ from typing import List, Tuple
 > This tutorial has been tested with following versions:
 > - `numpy` > 1.26.4
 > - `transformers` > 4.47.1
-> 
+>
 > You can check the versions with:
 >
 > ```python
@@ -195,7 +195,7 @@ Once the pipeline is set up, we can generate synthetic DNA sequences by calling 
 - Maximum length of the generated sequence in term of tokens (i.e. k-mers of 3 to 7 bases)
 
     ```python
-    max_length = 30 
+    max_length = 30
     ```
 
 - Number of sequences to generate
@@ -204,7 +204,7 @@ Once the pipeline is set up, we can generate synthetic DNA sequences by calling 
     num_sequences = 100
     ```
 
-- The temperature: 
+- The temperature:
 
     It controls the randomness of the generated sequences. A higher temperature results in more varied outputs, while a lower temperature produces more deterministic sequences.
 
@@ -274,10 +274,10 @@ for seq in synthetic_dna:
 >
 {: .question}
 
-> <details-title>Generate random sequences from a sequence seed</details-title> 
-> 
+> <details-title>Generate random sequences from a sequence seed</details-title>
+>
 > To generate artificial DNA sequence starting by a defined substring, e.g. "TATA", we replace `""` in `generator` function by the defined substring:
-> 
+>
 > ```python
 > synthetic_dna = generator(
 >     "TATA",
@@ -479,21 +479,21 @@ def plot_pca_projection(set1: np.ndarray, set2: np.ndarray, title: str = "PCA Pr
 
 plot_pca_projection(real_seq_kmer_counts, artificial_seq_kmer_counts)
 ```
-    
+
 ![Scatter plot titled 'PCA Projection of Set1 and Set2 (PCA built from Set1)' displaying the first two principal components. Blue dots represent 'Real sequences' and red dots represent 'Artificial sequences.' The x-axis is labeled 'Principal Component 1' and the y-axis is labeled 'Principal Component 2.' The plot shows a dense cluster of points near the origin with some outliers, indicating the distribution and overlap between real and artificial sequences in the PCA space.](./images/pca_k_4_t_0_1.png)
 
-> <hands-on-title></hands-on-title> 
+> <hands-on-title></hands-on-title>
 >
 > For different temperature values ($$0.001$$, $$0.01$$, $$0.1$$, $$0.5$$, $$1.0$$, $$1.5$$):
 > 1. Generate synthetic DNA sequences
 > 2. Observe the 5 first generated sequences
 > 3. Generate the PCA plots
-> 4. Compute the variance of k-mers counts between artificial sequences 
+> 4. Compute the variance of k-mers counts between artificial sequences
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > ```python
-> > 
+> >
 > > def generate_synthetic_dna(
 > >     model_name: str,
 > >     max_length: int,
@@ -504,7 +504,7 @@ plot_pca_projection(real_seq_kmer_counts, artificial_seq_kmer_counts)
 > > ) -> List[str]:
 > >     """
 > >     Generate synthetic DNA sequences using a pre-trained language model.
-> >     
+> >
 > >     Parameters:
 > >     - model_name (str): Name or path of the pre-trained model.
 > >     - max_length (int): Maximum length of each generated sequence.
@@ -512,7 +512,7 @@ plot_pca_projection(real_seq_kmer_counts, artificial_seq_kmer_counts)
 > >     - temp (float): Temperature value to control sequence variability.
 > >     - top_k (int): Number of highest probability vocabulary tokens to consider. Default is 50.
 > >     - repetition_penalty (float): Penalty for repeating the same token. Default is 1.2.
-> >     
+> >
 > >     Returns:
 > >     - List[str]: List of generated DNA sequences.
 > >     """
@@ -574,16 +574,16 @@ After generating synthetic DNA sequences, it's crucial to verify whether these s
 
 Let's start with a synthetic DNA sequence generated with a low temperature setting. Low temperature settings reduce variability, making the generated sequences more similar to real sequences. This step helps ensure that the sequence is biologically plausible and likely to have counterparts in existing databases.
 
-> <hands-on-title></hands-on-title> 
+> <hands-on-title></hands-on-title>
 >
 > 1. Generate the synthetic DNA sequences with a temperature value of $$0.01$$
 > 2. Get the first sequence
 > 3. Make a [Standard Nucleotide BLAST search](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome) of the first sequence
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > ```python
-> > 
+> >
 > > art_sequences = generate_synthetic_dna(model_name, max_length,  num_sequences, 0.01)
 > > art_sequences[0]
 > > ```
@@ -607,16 +607,16 @@ Let's start with a synthetic DNA sequence generated with a low temperature setti
 
 When generating sequences with low temperature, we observed limited variability among the sequences. This lack of variability can be useful for ensuring consistency but may limit the exploration of novel sequence spaces. To introduce more variability and potentially discover even more novel sequences, we can increase the temperature setting during sequence generation. Higher temperatures introduce greater randomness, leading to more diverse and potentially unique sequences.
 
-> <hands-on-title></hands-on-title> 
+> <hands-on-title></hands-on-title>
 >
 > 1. Generate the synthetic DNA sequences with a temperature value of $$1$$
 > 2. Get the first sequence
 > 3. Make a [Standard Nucleotide BLAST search](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome) of the first sequence
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > ```python
-> > 
+> >
 > > art_sequences = generate_synthetic_dna(model_name, max_length,  num_sequences, 1)
 > > art_sequences[0]
 > > ```
@@ -761,7 +761,7 @@ print(f"Translated Protein Sequence: {protein_seq}")
 After translating a synthetic DNA sequence into a protein sequence, the next crucial step is to analyze this sequence to uncover its potential biological function. This involves identifying known protein domains or motifs within the sequence that may indicate specific functions, such as binding sites or active regions. Verifying the biological plausibility of the translated sequence is essential, which can be achieved by comparing it to known protein sequences in databases like UniProt or GenBank using tools like Diamond and InterProScan. Additionally, examining the conservation of the sequence across different species can provide insights into its functional importance. If the sequence shows potential for biological function, it can serve as a starting point for further research, including structural modeling to predict its three-dimensional structure, functional assays to test its activity, and evolutionary studies to understand its origins and adaptations. This comprehensive analysis not only enhances our understanding of the generated sequences but also opens new avenues for scientific exploration and application in synthetic biology and genetic engineering.
 
 # Conclusion
-Throughout this tutorial, we have explored the process of generating synthetic DNA sequences using a DNA Language Model (LLM), focusing on creating sequences that mimic the complexity and functionality of natural yeast genomes. We began by building a sequence generator, leveraging pre-trained models to produce synthetic DNA sequences with controlled variability. 
+Throughout this tutorial, we have explored the process of generating synthetic DNA sequences using a DNA Language Model (LLM), focusing on creating sequences that mimic the complexity and functionality of natural yeast genomes. We began by building a sequence generator, leveraging pre-trained models to produce synthetic DNA sequences with controlled variability.
 
 We compared of these synthetic sequences to real yeast genomes, utilizing k-mer counts and Principal Component Analysis (PCA) to visualize and assess their similarities and differences. This comparative analysis provided valuable insights into how well our generated sequences aligned with natural counterparts, highlighting both the strengths and areas for improvement in our approach.
 

@@ -15,7 +15,7 @@ requirements:
   tutorials:
   - intro-to-ml-with-python
   - neural-networks-with-python
-  - deep-learning-without-gai-with-python
+  - practical-deep-learning-with-pytorch
   - genomic-llm-pretraining
 questions:
 - How to classify a DNA sequence depending on if it binds a protein or not (transcription factor)?
@@ -49,7 +49,7 @@ After preparing, training, and utilizing a language model for DNA sequences, we 
 > <comment-title>Transcription factors</comment-title>
 >
 > Transcription factors are proteins that play a crucial role in regulating gene expression by binding to specific DNA sequences, known as enhancers or promoters. These proteins act as molecular switches, turning genes on or off in response to various cellular signals and environmental cues. By binding to DNA, transcription factors either promote or inhibit the recruitment of RNA polymerase, the enzyme responsible for transcribing DNA into RNA, thereby influencing the rate of transcription.
-> 
+>
 > ![Diagram illustrating DNA binding with CTCF. The left panel, outlined in red, shows a DNA sequence 'CCACCAGGGGGCGC' labeled as 'DNA binding CTCF,' with an oval labeled 'CTCF' above it. The right panel, outlined in blue, shows a different DNA sequence 'GTGGCTAGTAGGTAG' labeled as 'DNA not binding CTCF,' indicating that this sequence does not interact with CTCF.](images/two_dna_sequences.png "Two types of DNA sequences. On the left, a DNA sequence that binds the transcription factor CTCF. On the right, a DNA sequence that does not bind CTCF.")
 >
 > Transcription factors are essential for numerous biological processes, including cell differentiation, development, and response to external stimuli. Their ability to recognize and bind specific DNA sequences allows them to orchestrate complex gene expression programs, ensuring that the right genes are expressed at the right time and in the right place within an organism. Understanding the function and regulation of transcription factors is vital for deciphering the molecular mechanisms underlying health and disease, and it opens avenues for developing targeted therapeutic interventions.
@@ -109,9 +109,9 @@ The first step is to install the required dependencies:
 > > 1. `accelerate` is a library by [Hugging Face](https://huggingface.co/) -- a platform that provides tools and resources for building, training, and deploying machine learning models -- designed to simplify the process of training and deploying machine learning models across different hardware environments. It provides tools to optimize performance on GPUs, TPUs, and other accelerators, making it easier to scale models efficiently.
 > >
 > > 2. The PEFT (Parameter-Efficient Fine-Tuning) Python library, developed by Hugging Face, is a tool designed to efficiently adapt large pretrained models to various downstream tasks without the need to fine-tune all of the model's parameters. By focusing on a small subset of parameters, PEFT significantly reduces computational and storage costs, making it feasible to fine-tune large language models (LLMs) on consumer-grade hardware. The library integrates seamlessly with the Hugging Face ecosystem, including Transformers, Diffusers, and Accelerate, enabling streamlined model training and inference. PEFT supports techniques like LoRA (Low-Rank Adaptation) and prompt tuning, and it can be combined with quantization to further optimize resource usage. Its open-source nature fosters collaboration and accessibility, allowing developers to customize models for specific applications quickly and efficiently.
-> > 
+> >
 > > 3. `torch`, also known as PyTorch, it is an open-source machine learning library developed by Facebook's AI Research lab. It provides a flexible platform for building and training neural networks, with a focus on tensor computations and automatic differentiation.
-> > 
+> >
 > > 4. `transformers` is a library by Hugging Face that provides implementations of state-of-the-art transformer models for natural language processing (NLP). It includes pre-trained models and tools for fine-tuning, making it easier to apply transformers to various NLP tasks.
 > >
 > {: .solution}
@@ -157,7 +157,7 @@ from transformers import (
 > This tutorial has been tested with following versions:
 > - `numpy` = 1.19 (and not 1.2)
 > - `transformers` > 4.47.1
-> 
+>
 > You can check the versions with:
 >
 > ```python
@@ -237,7 +237,7 @@ fsdp_plugin = FullyShardedDataParallelPlugin(
 > <question-title></question-title>
 >
 > What do the parameters?
-> 
+>
 > 1. `state_dict_config=FullStateDictConfig(offload_to_cpu=True, rank0_only=False)`?
 > 2. `optim_state_dict_config=FullOptimStateDictConfig(offload_to_cpu=True, rank0_only=False)`?
 >
@@ -287,7 +287,7 @@ peft_config = LoraConfig(
 > <question-title></question-title>
 >
 > What do the parameters?
-> 
+>
 > 1. `r=16`?
 > 2. `lora_alpha=16`?
 > 3. `lora_dropout=0.05`?
@@ -355,7 +355,7 @@ training_args = transformers.TrainingArguments(
 > 9. `bf16=True`
 > 10. `report_to="none"`
 > 11. `load_best_model_at_end=True`
-> 
+>
 > > <solution-title></solution-title>
 > >
 > > 1. `output_dir="./results"`: Specifies the directory where the model predictions and checkpoints will be saved.
@@ -366,7 +366,7 @@ training_args = transformers.TrainingArguments(
 > >
 > > 4. `learning_rate=1e-5`: Sets the initial learning rate for the optimizer. This rate determines how much the model's weights are updated during training.
 > >
-> > 5. `per_device_train_batch_size=16`: The number of samples per device (e.g., GPU) to load for training. 
+> > 5. `per_device_train_batch_size=16`: The number of samples per device (e.g., GPU) to load for training.
 > >
 > > 6. `per_device_eval_batch_size=16`: The number of samples per device to load for evaluation.
 > >
@@ -390,7 +390,7 @@ These settings provide a balanced configuration for training a model efficiently
 
 # Prepare the tokenizer
 
-We will now set up the tokenizer to convert DNA sequences into numerical tokens that the model can process. The tokenizer is a crucial component in preparing the data for model training and inference: it transforms raw text into a format that can be processed by machine learning models. 
+We will now set up the tokenizer to convert DNA sequences into numerical tokens that the model can process. The tokenizer is a crucial component in preparing the data for model training and inference: it transforms raw text into a format that can be processed by machine learning models.
 
 We use the `AutoTokenizer` class from the Hugging Face Transformers library to load a pre-trained tokenizer. We specify the pre-trained model from which to load the tokenizer. This should match the model you plan to use for training or inference. This tokenizer will be configured to handle DNA sequences efficiently.
 
@@ -412,11 +412,11 @@ tokenizer = transformers.AutoTokenizer.from_pretrained(
 > 2. `padding_side="right"`
 > 3. `use_fast=True`
 > 4. `trust_remote_code=True`
-> 
+>
 > > <solution-title></solution-title>
 > >
 > > 1. `model_max_length=200`: Sets the maximum length of the tokenized sequences. Sequences longer than this will be truncated, and shorter ones will be padded.
-> > 
+> >
 > > 2. `padding_side="right"`: Specifies that padding should be added to the right side of the sequences. This ensures that all sequences in a batch have the same length.
 > >
 > > 3. `use_fast=True`: Enables the use of the fast tokenizer implementation, which is optimized for speed and is suitable for most use cases.
@@ -467,7 +467,7 @@ Let's define experience and path to data variables
 
 ```python
 expe = "tf/0"
-data_path = f"data/GUE/{ expe }" 
+data_path = f"data/GUE/{ expe }"
 ```
 
 
@@ -487,13 +487,13 @@ We will use the files `data_path` folder we just defined:
 >
 > 1. `train.csv`
 > 2. `dev.csv`
-> 
+>
 > > <solution-title></solution-title>
 > >
 > > The 2 files are CSV files with 2 columns (`sequence` and `label`) and different number of rows:
-> > 1. `train.csv`: 32,379 rows. 
+> > 1. `train.csv`: 32,379 rows.
 > > 2. `dev.csv`: 1,000 rows
-> > 
+> >
 > > Values in `label` are:
 > > - `0`: The DNA sequence in `sequence` column does not bind to the 1st transcription factor.
 > > - `1`: The DNA sequence in `sequence` column binds to the transcription factor.
@@ -577,17 +577,17 @@ model=transformers.AutoModelForSequenceClassification.from_pretrained(
 > 3. `quantization_config=bnb_config`
 > 4. `device_map="auto"`
 > 5. `trust_remote_code=True`
-> 
+>
 > > <solution-title></solution-title>
 > >
 > > 1. `num_labels=2`: Sets the number of output labels to 2, corresponding to the binary classification task (binding or not binding to transcription factors).
 > >
 > > 2. `output_hidden_states=False`: Indicates that the model should not output hidden states. This is typically set to False unless you need access to the intermediate representations for further analysis.
-> > 
+> >
 > > 3. `quantization_config=bnb_config`: Applies predefined quantization configuration to the model, which helps reduce memory usage and enables efficient training on consumer-grade hardware.
-> > 
+> >
 > > 4. `device_map="auto"`: Automatically determines the best device placement for the model's layers, optimizing for available hardware (e.g., GPUs). If it finds a GPU, it will use a GPU. If there's no GPU, it will not use the GPU
-> > 
+> >
 > > 5. `trust_remote_code=True`: Allows the model to execute custom code from the model repository, which may be necessary for certain architectures or preprocessing steps.
 > >
 > {: .solution}
@@ -627,21 +627,21 @@ trainer = transformers.Trainer(
 > <question-title></question-title>
 >
 > What do the `callbacks = [EarlyStoppingCallback(early_stopping_patience=3)]` parameter?
-> 
+>
 > > <solution-title></solution-title>
 > >
 > > It adds an early stopping mechanism to the training process. This mechanism is designed to halt training when the model's performance on the validation set stops improving, helping to prevent overfitting and conserve computational resources.
-> > 
+> >
 > > How Early Stopping Works?
-> > 
+> >
 > > **Purpose**: The primary goal of early stopping is to capture the model parameters when the loss reaches its minimum value during training. This is crucial because, after a certain point, continued training may lead to overfitting, where the model starts to perform worse on unseen data.
-> > 
+> >
 > > **Patience Parameter**: The `early_stopping_patience=3` setting specifies that training should continue for three additional epochs after the model's performance on the validation set stops improving. This "patience" period helps mitigate the effects of noise in the training process. Noise can cause temporary fluctuations in the loss, making it seem like the model has reached a local minimum when further training might yield better results.
 > >
 > > **Process**: During training, the loss is monitored at each epoch. If the loss does not decrease for three consecutive epochs, training is stopped. However, if a better model with a lower loss is found within those three epochs, training continues. This approach ensures that the model has truly reached a robust local minimum, rather than being prematurely halted due to noise.
 > >
 > > By incorporating early stopping with a patience of three epochs, you balance the need to find an optimal model with the risk of overfitting, ultimately leading to more efficient and effective training outcomes.
-> > 
+> >
 > {: .solution}
 >
 {: .question}
@@ -699,50 +699,50 @@ The evaluation results are stored in the `results` variable, which contains the 
 > <question-title></question-title>
 >
 > What is stored in `results`? How do you interpret this information?
-> 
+>
 > > <solution-title></solution-title>
 > >
 > > `results` provides a comprehensive overview of the model's performance on the evaluation dataset with:
 > > 1. **eval_loss (0.424961)**: This metric represents the loss value calculated on the evaluation dataset. Lower values indicate better model performance.
 > >
 > >    A loss of 0.425 suggests that the model is reasonably well-fitted to the data, though the specific interpretation depends on the context and the loss function used (e.g., cross-entropy for classification tasks).
-> > 
+> >
 > > 2. **eval_accuracy (0.804000)**: Accuracy measures the proportion of correctly predicted instances out of the total instances.
-> > 
+> >
 > >    An accuracy of 80.4% indicates that the model correctly predicted the class for 80.4% of the samples in the evaluation dataset.
-> > 
+> >
 > > 4. **eval_f1 (0.800838)**: The F1 score is the harmonic mean of precision and recall, providing a single metric that balances both concerns.
-> >    
+> >
 > >    An F1 score of 0.801 suggests a good balance between precision and recall, indicating that the model performs well in both identifying positive cases and minimizing false positives and negatives.
-> > 
+> >
 > > 4. **eval_matthews_correlation (0.628276)**: The Matthews Correlation Coefficient (MCC) is a measure of the quality of binary classifications, taking into account true and false positives and negatives.
-> >    
+> >
 > >    An MCC of 0.628 indicates a moderate to strong correlation between the predicted and actual classes, suggesting the model is performing better than random guessing.
-> > 
+> >
 > > 6. **eval_precision (0.824614)**: Precision is the ratio of correctly predicted positive observations to the total predicted positives.
-> > 
+> >
 > >    A precision of 82.5% means that out of all the instances predicted as positive, 82.5% were actually positive.
-> > 
+> >
 > > 6. **eval_recall (0.804000)**: Recall (or sensitivity) is the ratio of correctly predicted positive observations to all observations in the actual class.
-> >    
+> >
 > >    A recall of 80.4% indicates that the model correctly identified 80.4% of all actual positive cases.
-> > 
+> >
 > > 8. **eval_runtime (6.548800)**: The total time taken to evaluate the model on the dataset.
-> >    
+> >
 > >    A runtime of 6.55 seconds provides insight into the computational efficiency of the evaluation process.
-> > 
+> >
 > > 8. **eval_samples_per_second (152.699000)**: The number of samples processed per second during evaluation.
-> > 
+> >
 > >    Processing 152.7 samples per second indicates the efficiency of the evaluation pipeline.
-> > 
+> >
 > > 9. **eval_steps_per_second (9.620000)**: The number of evaluation steps completed per second.
-> >     
+> >
 > >    Completing 9.62 steps per second reflects the speed of the evaluation process.
-> > 
+> >
 > > 11. **epoch (3.000000)**: The number of training epochs completed before this evaluation.
-> > 
+> >
 > >    The evaluation was conducted after 3 epochs of training, providing context for the model's learning progress.
-> > 
+> >
 > {: .solution}
 >
 {: .question}

@@ -16,7 +16,7 @@ requirements:
   tutorials:
   - intro-to-ml-with-python
   - neural-networks-with-python
-  - deep-learning-without-gai-with-python
+  - practical-deep-learning-with-pytorch
   - genomic-llm-pretraining
   - genomic-llm-finetuning
   - genomic-llm-zeroshot-prediction
@@ -46,7 +46,7 @@ notebook:
 ---
 
 
-# Prepare resources 
+# Prepare resources
 
 ## Install dependencies
 
@@ -81,8 +81,8 @@ notebook:
 
 
 ```python
-# 
-# During the class, 
+#
+# During the class,
 import os
 
 import sys
@@ -146,7 +146,7 @@ accelerate.__version__
 !nvidia-smi
 ```
 
-    Thu Feb  6 07:59:23 2025       
+    Thu Feb  6 07:59:23 2025
     +-----------------------------------------------------------------------------------------+
     | NVIDIA-SMI 550.54.15              Driver Version: 550.54.15      CUDA Version: 12.4     |
     |-----------------------------------------+------------------------+----------------------+
@@ -158,7 +158,7 @@ accelerate.__version__
     | N/A   36C    P8              9W /   70W |       0MiB /  15360MiB |      0%      Default |
     |                                         |                        |                  N/A |
     +-----------------------------------------+------------------------+----------------------+
-                                                                                             
+
     +-----------------------------------------------------------------------------------------+
     | Processes:                                                                              |
     |  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
@@ -173,7 +173,7 @@ accelerate.__version__
 !nvidia-smi
 ```
 
-    Thu Feb  6 16:49:41 2025       
+    Thu Feb  6 16:49:41 2025
     +-----------------------------------------------------------------------------------------+
     | NVIDIA-SMI 550.54.15              Driver Version: 550.54.15      CUDA Version: 12.4     |
     |-----------------------------------------+------------------------+----------------------+
@@ -185,7 +185,7 @@ accelerate.__version__
     | N/A   54C    P8             10W /   70W |       2MiB /  15360MiB |      0%      Default |
     |                                         |                        |                  N/A |
     +-----------------------------------------+------------------------+----------------------+
-                                                                                             
+
     +-----------------------------------------------------------------------------------------+
     | Processes:                                                                              |
     |  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
@@ -211,7 +211,7 @@ torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     device(type='cuda')
 
-# Get the model 
+# Get the model
 
 Mistral-DNA-v0.1 was derived from Mixtral-8x7B for the human genome. Mixtral-8x7B was simplified for DNA: the number of layers and the hidden size were reduced. The model was pretrained using the human genome hg38 with 200B DNA sequences.
 
