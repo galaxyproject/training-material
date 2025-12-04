@@ -69,13 +69,13 @@ This tutorial will show you how and discuss some of the things you need to keep 
 >   - Linux distribution
 >   - VM size and computational powers
 >   - Others depending on set-up 
-> - [ ] Asses expected alerts from monitoring during the production upgrade
+> - [ ] Assess expected alerts from monitoring during the production upgrade
 > - [ ] Select a maintenance window for the production upgrade with minimal user impact
 >   - Preferably during business hours (manual implementation), at the start of the week to maximize time for a potential disaster recovery
-> - [ ] Asses if the data policy page requires updating after upgrading
+> - [ ] Assess if the data policy page requires updating after upgrading
 >
 > ### Backup and regression strategy
-> - [ ] Asses if current (automatic) backup system needs to be suspended or updated
+> - [ ] Assess if current (automatic) backup system needs to be suspended or updated
 > - [ ] Perform a full backup of the relevant databases (PostgresDB, SQLite,...)
 > - [ ] Verify that backups are complete and functional
 >   - [ ] Reinstate backups in duplicate setup  
