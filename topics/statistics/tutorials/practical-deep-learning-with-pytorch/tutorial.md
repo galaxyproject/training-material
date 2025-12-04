@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: "Practical deep learning with PyTorch"
 level: Intermediate
-draft: true
 requirements:
 -
   type: "internal"
