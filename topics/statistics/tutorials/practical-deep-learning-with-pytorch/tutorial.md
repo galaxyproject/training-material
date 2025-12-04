@@ -26,6 +26,8 @@ objectives:
 - Learning the concepts of an activation function
 - Training a simple fully-connected neural network
 time_estimation: 1H
+redirect_from: 
+- /topics/statistics/tutorials/deep-learning-without-gai-with-python/tutorial.md
 key_points:
 - Tensors are like NumPy arrays but with GPU acceleration and automatic differentiation.
 - PyTorch provides a Dataset class to handle data and a DataLoader class to load data in batches.
