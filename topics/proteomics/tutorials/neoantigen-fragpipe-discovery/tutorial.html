@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@50593d1f280df70dab6620b2c11fce582baa4834",
+		release: "galaxy-training-network@2a17ea975bf6e513683581183345b155e71c86af",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Neoantigen 2: Database merge and FragPipe discovery">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-11-29 22:33:58 +0000">
+<meta name="DC.date" content="2025-12-03 23:53:59 +0000">
 <meta name="DC.creator" content="Subina Mehta">
 <meta name="DC.creator" content="Katherine Do">
 <meta name="DC.creator" content="James Johnson"><meta name="description" content="Training material for proteomics workflows in Galaxy">
@@ -182,7 +182,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-11-29 22:33:58 +0000",
+  "dateModified": "2025-12-03 23:53:59 +0000",
   "datePublished": "2025-01-14 14:58:39 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -238,7 +238,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Neoantigen 2: Database merge and FragPipe discovery",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/neoantigen-fragpipe-discovery/tutorial.html",
-  "version": 3,
+  "version": 4,
   "timeRequired": "PT3H",
   "teaches": "- Understand the process of merging neoantigen databases with human protein sequences.\n- Learn to use FragPipe for proteomics data analysis.\n- Gain hands-on experience with bioinformatics tools such as FASTA file processing, database validation, and peptide identification.",
   "keywords": [
@@ -1104,7 +1104,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 14, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 29, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 3, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1122,7 +1122,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
 
     </blockquote>
     </section>
@@ -1244,7 +1244,7 @@ https://zenodo.org/records/14374118/files/STS_26T_2_Eclipse_02102024.raw
 
 <h2 id="merging-fasta-files-and-filtering-for-unique-sequences">Merging FASTA Files and Filtering for Unique Sequences</h2>
 
-<p>Next, we will merge the FASTA files, ensuring that any redundant sequences are removed. This step ensures that we only work with unique sequences, improving the quality and accuracy of the subsequent analysis. In this step, we combine the fusion database generated from the Arriba Pipeline (first neoantigen workflow) with the non-normal database created from HISAT, Freebayes, CustomPRODB, and the Stringtie Pipeline (second neoantigen workflow). Once merging is done, we validate the database to ensure that the sequences are in the right format.</p>
+<p>Next, we will merge the FASTA files, ensuring that any redundant sequences are removed. This step ensures that we only work with unique sequences, improving the quality and accuracy of the subsequent analysis. In this step, we combine the fusion database generated from the Arriba Pipeline (first neoantigen workflow) with the non-reference database created from HISAT, Freebayes, CustomPRODB, and the Stringtie Pipeline (second neoantigen workflow). Once merging is done, we validate the database to ensure that the sequences are in the right format.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-fasta-merge-files-and-filter-unique-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  FASTA Merge Files and Filter Unique Sequences</div>
@@ -1568,13 +1568,13 @@ The FragPipe tool is executed with the MS data and a validated FASTA sequence da
   <ol>
     <li><strong>Import the workflow</strong> into Galaxy:
       <ul>
-        <li>(Neoantigen Database Search)[https://tinyurl.com/ipepgen-dbsearch-wf]</li>
+        <li><a href="https://tinyurl.com/ipepgen-dbsearch-wf">Neoantigen Database Search</a></li>
       </ul>
     </li>
     <li>Run <strong>Workflow</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Non-Normal protein database”</em>: <code class="language-plaintext highlighter-rouge">Human_cRAP_Non_normal_transcripts_dB.fasta</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Non-Reference protein database”</em>: <code class="language-plaintext highlighter-rouge">Human_cRAP_Non_reference_transcripts_dB.fasta</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fusion protein database”</em>: <code class="language-plaintext highlighter-rouge">Arriba-Fusion-Database.fasta</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input raw file”</em>: <code class="language-plaintext highlighter-rouge">STS_26T_2_Eclipse_02102024.raw</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Experimental design file for Fragpipe”</em>: <code class="language-plaintext highlighter-rouge">Experimental-Design-Fragpipe.tabular</code></li>
@@ -1634,7 +1634,7 @@ The FragPipe tool is executed with the MS data and a validated FASTA sequence da
                     <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
-                        <li><p>Merging of non-normal databases with known human protein sequences.</p>
+                        <li><p>Merging of non-reference databases with known human protein sequences.</p>
 </li>
                         
                         <li><p>Processing and validation of FASTA files for proteomics analysis.</p>
@@ -2034,7 +2034,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/50593d1f280df70dab6620b2c11fce582baa4834">50593d1</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2a17ea975bf6e513683581183345b155e71c86af">2a17ea9</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

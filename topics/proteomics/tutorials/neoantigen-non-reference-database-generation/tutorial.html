@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@50593d1f280df70dab6620b2c11fce582baa4834",
+		release: "galaxy-training-network@2a17ea975bf6e513683581183345b155e71c86af",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Neoantigen 1b: Non-Reference-Database-Generation">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-11-29 22:33:58 +0000">
+<meta name="DC.date" content="2025-12-03 23:53:59 +0000">
 <meta name="DC.creator" content="Subina Mehta">
 <meta name="DC.creator" content="Katherine Do">
 <meta name="DC.creator" content="James Johnson"><meta name="description" content="Training material for proteomics workflows in Galaxy">
@@ -182,7 +182,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-11-29 22:33:58 +0000",
+  "dateModified": "2025-12-03 23:53:59 +0000",
   "datePublished": "2025-01-14 14:58:39 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -238,7 +238,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Neoantigen 1b: Non-Reference-Database-Generation",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/neoantigen-non-reference-database-generation/tutorial.html",
-  "version": 5,
+  "version": 6,
   "timeRequired": "PT3H",
   "teaches": "- Downloading databases related to 16SrRNA data\n- For better neoantigen identification results.",
   "keywords": [
@@ -1102,7 +1102,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jan 14, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 29, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 3, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1120,7 +1120,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 5 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
 
     </blockquote>
     </section>
@@ -1445,12 +1445,12 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-snv-fasta-to-tabular"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  SNV - FASTA-to-Tabular</div>
+  <div class="box-title hands-on-title" id="hands-on-sav-fasta-to-tabular"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  SAV - FASTA-to-Tabular</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1" title="FASTA-to-Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FASTA-to-Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert these sequences”</em>: <code class="language-plaintext highlighter-rouge">output_snv</code> (output of <strong>CustomProDB</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert these sequences”</em>: <code class="language-plaintext highlighter-rouge">output_sav</code> (output of <strong>CustomProDB</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
   </ol>
@@ -1492,7 +1492,7 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
 
 <h2 id="manipulating-the-headers-with-column-regex-find-and-replace">Manipulating the headers with Column Regex Find And Replace</h2>
 
-<p>Column Regex Find And Replace is a tool that applies regular expression (regex) patterns to specified columns in a tabular dataset to find and replace text patterns. In this task, the tool is used on the output from the FASTA-to-Tabular step to standardize or format specific patterns in the data. By applying regex patterns to column c1, the tool identifies and modifies specific sequence identifiers or annotations, making them easier to interpret or use in further analyses.</p>
+<p>Column Regex Find And Replace is a tool that applies regular expression (regex) patterns to specified columns in a tabular dataset to find and replace text patterns. In this task, the tool is used on the output from the FASTA-to-Tabular step to standardize or format specific patterns in the data. By applying regex patterns to column 1, the tool identifies and modifies specific sequence identifiers or annotations, making them easier to interpret or use in further analyses.</p>
 
 <p>In this workflow, Column Regex Find And Replace cleans and formats the data in a way that makes identifiers or variant descriptions consistent. This is important for data compatibility, especially when the data needs to be used across different tools or integrated into larger datasets. It ensures that all sequence labels or variant annotations follow a uniform format, which reduces errors in downstream analyses.</p>
 
@@ -1507,7 +1507,7 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li>In <em>“Check”</em>:
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
@@ -1538,19 +1538,19 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
         </li>
       </ul>
     </li>
-    <li>Rename as Indel-FASTA</li>
+    <li>Rename as “Indel-FASTA”</li>
   </ol>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-snv-column-regex-find-and-replace"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  SNV-Column Regex Find And Replace</div>
+  <div class="box-title hands-on-title" id="hands-on-sav-column-regex-find-and-replace"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  SAV-Column Regex Find And Replace</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li>In <em>“Check”</em>:
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
@@ -1574,14 +1574,14 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
               <ul>
                 <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">^(.*)$</code></li>
-                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">generic|SNV_\1</code></li>
+                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">generic|SAV_\1</code></li>
               </ul>
             </li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Rename as SNV-FASTA</li>
+    <li>Rename as “SAV-FASTA”</li>
   </ol>
 
 </blockquote>
@@ -1593,7 +1593,7 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li>In <em>“Check”</em>:
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
@@ -1624,7 +1624,7 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
         </li>
       </ul>
     </li>
-    <li>Rename as RPKM-FASTA</li>
+    <li>Rename as “RPKM-FASTA”</li>
   </ol>
 
 </blockquote>
@@ -1650,9 +1650,9 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
 </blockquote>
 
 <h2 id="converting-the-manipulated-tabular-files-to-fasta-with-tabular-to-fasta">Converting the manipulated tabular files to FASTA with Tabular-to-FASTA</h2>
-<p>Tabular-to-FASTA is a tool that converts tabular data back into FASTA format, where each entry has a title and a sequence. In this step, the tool uses the processed output from the Column Regex Find And Replace step to create a FASTA file. Column c1 is set as the title (identifier) for each sequence, and column c2 contains the sequence data. This conversion is useful when the data needs to be returned to a standard sequence format for further bioinformatics analyses.</p>
+<p>Tabular-to-FASTA is a tool that converts tabular data back into FASTA format, where each entry has a title and a sequence. In this step, the tool uses the processed output from the Column Regex Find And Replace step to create a FASTA file. Column 1 is set as the title (identifier) for each sequence, and column 2 contains the sequence data. This conversion is useful when the data needs to be returned to a standard sequence format for further bioinformatics analyses.</p>
 
-<p>In this workflow, Tabular-to-FASTA converts the formatted tabular data back into a FASTA file, making it compatible with tools that require FASTA input for further analysis. This step enables the standardized, cleaned sequences from previous steps to be utilized in additional bioinformatics workflows or databases, maintaining the variant-specific information in a commonly used format. We do this for all the tabular files (SNV, INDEL, and RPKM).</p>
+<p>In this workflow, Tabular-to-FASTA converts the formatted tabular data back into a FASTA file, making it compatible with tools that require FASTA input for further analysis. This step enables the standardized, cleaned sequences from previous steps to be utilized in additional bioinformatics workflows or databases, maintaining the variant-specific information in a commonly used format. We do this for all the tabular files (SAV, INDEL, and RPKM).</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-indel-tabular-to-fasta"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  INDEL-Tabular-to-FASTA</div>
@@ -1661,27 +1661,27 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1" title="Tabular-to-FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular-to-FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited file”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
-        <li><em>“Sequence column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+        <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“Sequence column”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
       </ul>
     </li>
-    <li>Rename as Indel-FASTA</li>
+    <li>Rename as “Indel-FASTA”</li>
   </ol>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-snv-tabular-to-fasta"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  SNV-Tabular-to-FASTA</div>
+  <div class="box-title hands-on-title" id="hands-on-sav-tabular-to-fasta"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  SAV-Tabular-to-FASTA</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1" title="Tabular-to-FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular-to-FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited file”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
-        <li><em>“Sequence column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+        <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“Sequence column”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
       </ul>
     </li>
-    <li>Rename as SNV-FASTA</li>
+    <li>Rename as “SAV-FASTA”</li>
   </ol>
 
 </blockquote>
@@ -1693,11 +1693,11 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1" title="Tabular-to-FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular-to-FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited file”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
-        <li><em>“Sequence column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+        <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“Sequence column”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
       </ul>
     </li>
-    <li>Rename as RPKM-FASTA</li>
+    <li>Rename as “RPKM-FASTA”</li>
   </ol>
 
 </blockquote>
@@ -1725,7 +1725,7 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
 <h2 id="merging-single-amino-acid-variant-databases-with-fasta-merge-files-and-filter-unique-sequences">Merging Single amino acid variant databases with FASTA Merge Files and Filter Unique Sequences</h2>
 <p>FASTA Merge Files and Filter Unique Sequences is a tool that combines multiple FASTA files into a single file and removes any duplicate sequences, keeping unique entries. In this task, the tool takes the FASTA file generated from the Tabular-to-FASTA step and merges it with any other FASTA files in the input list. The tool then filters the sequences to ensure that unique sequences are retained in the final output, which is important for reducing redundancy in the dataset.</p>
 
-<p>In this workflow, FASTA Merge Files and Filter Unique Sequences consolidate all sequence data into a single, non-redundant FASTA file. This step is essential for removing duplicate sequences, which helps streamline the dataset for further analysis. A unique sequence file reduces computational load and minimizes potential biases in downstream applications that could be affected by redundant data. We are merging the indel, snv, and rpkm databases in this step.</p>
+<p>In this workflow, FASTA Merge Files and Filter Unique Sequences consolidate all sequence data into a single, non-redundant FASTA file. This step is essential for removing duplicate sequences, which helps streamline the dataset for further analysis. A unique sequence file reduces computational load and minimizes potential biases in downstream applications that could be affected by redundant data. We are merging the indel, sav, and rpkm databases in this step.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-fasta-merge-files-and-filter-unique-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  FASTA Merge Files and Filter Unique Sequences</div>
@@ -1739,7 +1739,7 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
               <ul>
                 <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Input FASTA File(s)”</em>
                   <ul>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA File”</em>: <code class="language-plaintext highlighter-rouge">SNV-FASTA</code> (output of <strong>Tabular-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA File”</em>: <code class="language-plaintext highlighter-rouge">SAV-FASTA</code> (output of <strong>Tabular-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                   </ul>
                 </li>
               </ul>
@@ -1908,7 +1908,12 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/gffcompare_to_bed/gffcompare_to_bed/0.2.1" title="Convert gffCompare annotated GTF to BED tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert gffCompare annotated GTF to BED</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF annotated by gffCompare”</em>: <code class="language-plaintext highlighter-rouge">transcripts_annotated</code> (output of <strong>GffCompare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“filter gffCompare class_codes to convert”</em>: <code class="language-plaintext highlighter-rouge">j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript</code> <code class="language-plaintext highlighter-rouge">e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible pre-mRNA fragment.</code> <code class="language-plaintext highlighter-rouge">i : A transfrag falling entirely within a reference intron</code> <code class="language-plaintext highlighter-rouge">p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)</code> <code class="language-plaintext highlighter-rouge">u : Unknown, intergenic transcript</code></li>
+        <li><em>“filter gffCompare class_codes to convert”</em>:<br />
+<code class="language-plaintext highlighter-rouge">j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript</code><br />
+<code class="language-plaintext highlighter-rouge">e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible pre-mRNA fragment.</code><br />
+<code class="language-plaintext highlighter-rouge">i : A transfrag falling entirely within a reference intron</code><br />
+<code class="language-plaintext highlighter-rouge">p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)</code><br />
+<code class="language-plaintext highlighter-rouge">u : Unknown, intergenic transcript</code></li>
       </ul>
     </li>
   </ol>
@@ -1941,7 +1946,7 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
 <p>In this workflow, translating BED files to FASTA sequences is essential for obtaining the actual nucleotide sequences of the annotated transcripts. This step enables the user to analyze the sequences further, for example, by identifying functional regions, and sequence motifs, or conducting downstream analysis like mutation detection or variant calling.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-translate-bed-transcripts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  **Translate BED transcripts**</div>
+  <div class="box-title hands-on-title" id="hands-on-translate-bed-transcripts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Translate BED transcripts</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/translate_bed/translate_bed/0.1.0" title="Translate BED transcripts tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Translate BED transcripts</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> with the following parameters:
@@ -2140,7 +2145,7 @@ FROM variant_annotation
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/column_regex_find_replace/column_regex_find_and_replace/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">CustomProDB_Genomic_SQLlite</code> (Genomic SQLite from <strong>CustomProDB</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li>In <em>“Check”</em>:
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
@@ -2206,7 +2211,7 @@ FROM variant_annotation
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/column_regex_find_replace/column_regex_find_and_replace/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">CustomProDB_VARIANT_SQLite</code> (Variant SQLite from <strong>CustomProDB</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li>In <em>“Check”</em>:
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
@@ -2313,7 +2318,7 @@ FROM variant_annotation
 
 <h1 id="merging-the-non-reference-databases-with-the-known-human-protein-sequence">Merging the non-reference databases with the known HUMAN protein sequence</h1>
 
-<p>Merging non-reference databases with the known human protein sequence involves integrating data from various sources into a unified format for more efficient analysis. In bioinformatics, this process is often necessary when working with protein sequence data, especially when datasets include variations, unknown sequences, or newly identified proteins alongside well-established reference proteins from the human genome. In this case, we are merging a previously integrated variant database (which includes SNV, INDEL, and RPKM), assembled FASTA data generated from translating BED files to transcripts, the UniProt human reference, and a known contaminant database.</p>
+<p>Merging non-reference databases with the known human protein sequence involves integrating data from various sources into a unified format for more efficient analysis. In bioinformatics, this process is often necessary when working with protein sequence data, especially when datasets include variations, unknown sequences, or newly identified proteins alongside well-established reference proteins from the human genome. In this case, we are merging a previously integrated variant database (which includes SAV, INDEL, and RPKM), assembled FASTA data generated from translating BED files to transcripts, the UniProt human reference, and a known contaminant database.</p>
 
 <p><a href="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_4.PNG" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_4.PNG" alt="Database Merging. " width="4000" height="1959" loading="lazy" /></a></p>
 
@@ -2358,6 +2363,7 @@ FROM variant_annotation
         </li>
       </ul>
     </li>
+    <li>Rename to <code class="language-plaintext highlighter-rouge">Human_cRAP_Non_reference_transcripts_dB</code> (final output will be a FASTA file)</li>
   </ol>
 
 </blockquote>
@@ -2378,7 +2384,7 @@ FROM variant_annotation
   <ol>
     <li><strong>Import the workflow</strong> into Galaxy:
       <ul>
-        <li>(Neoantigen Non-Reference Database Generation)[https://tinyurl.com/ipepgen-nonref-wf]</li>
+        <li><a href="https://tinyurl.com/ipepgen-nonref-wf">Neoantigen Non-Reference Database Generation</a></li>
       </ul>
     </li>
     <li>Run <strong>Workflow</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
@@ -2881,7 +2887,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/50593d1f280df70dab6620b2c11fce582baa4834">50593d1</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2a17ea975bf6e513683581183345b155e71c86af">2a17ea9</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
