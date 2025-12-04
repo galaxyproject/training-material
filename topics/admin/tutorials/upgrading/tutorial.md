@@ -66,7 +66,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 > - [ ] Evaluate changes in resource requirements and dependencies:
 >   - Python version 
 >   - libraries/containers
->   - Linux distribution
+>   - Database server's minimum version (PostgreSQL) 
 >   - VM size and computational powers
 >   - Others depending on set-up 
 > - [ ] Assess expected alerts from monitoring during the production upgrade
