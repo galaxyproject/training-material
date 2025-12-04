@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@4fdc57b85e4e5d3b1a45c3e67e9cbb5a4a95d6db",
+		release: "galaxy-training-network@e36387e4f47cc2b8758c2c1deec81318fd646229",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Protein-ligand docking">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-09 08:55:09 +0000">
+<meta name="DC.date" content="2025-12-04 15:25:13 +0000">
 <meta name="DC.creator" content="Simon Bray"><meta name="description" content="Modelling, simulation and analysis of biomolecular systems">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Computational chemistry / Protein-ligand docking / Hands-on: Protein-ligand docking">
@@ -182,7 +182,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2023-11-09 08:55:09 +0000",
+  "dateModified": "2025-12-04 15:25:13 +0000",
   "datePublished": "2019-10-19 00:16:01 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -238,7 +238,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Protein-ligand docking",
   "url": "https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html",
-  "version": 16,
+  "version": 17,
   "timeRequired": "PT3H",
   "teaches": "- Create a small compound library using the ChEMBL database\n- Dock a variety of ligands to the active site of the Hsp90 protein",
   "keywords": [
@@ -758,6 +758,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
+      "url": "https://bio.tools/tool/autodock_vina",
+      "name": "AutoDock Vina"
+    },
+    {
+      "@type": "Thing",
       "url": "https://bio.tools/tool/chembl",
       "name": "ChEMBL"
     },
@@ -1196,7 +1201,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Oct 19, 2019 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 9, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 4, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1216,7 +1221,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (1 recent ratings, 8 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 16 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 17 </div>
 
     </blockquote>
     </section>
@@ -1263,7 +1268,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </li>
   <li><a href="#prepare-files-for-docking" id="markdown-toc-prepare-files-for-docking">Prepare files for docking</a></li>
   <li><a href="#docking" id="markdown-toc-docking">Docking</a></li>
-  <li><a href="#optional-cheminformatics-tools-applied-to-the-compound-library" id="markdown-toc-optional-cheminformatics-tools-applied-to-the-compound-library">Optional: cheminformatics tools applied to the compound library</a></li>
+  <li><a href="#optional-cheminformatics-tools-applied-to-the-compound-library" id="markdown-toc-optional-cheminformatics-tools-applied-to-the-compound-library">Optional: cheminformatics tools applied to the compound library</a>    <ol>
+      <li><a href="#visualization" id="markdown-toc-visualization">Visualization</a></li>
+    </ol>
+  </li>
   <li><a href="#post-processing-and-plotting" id="markdown-toc-post-processing-and-plotting">Post-processing and plotting</a></li>
 </ol>
 
@@ -1312,7 +1320,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <div class="box-title hands-on-title" id="hands-on-separate-protein-and-ligand"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Separate protein and ligand</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles (grep) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles (grep)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy0" title="Search in textfiles (grep) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles (grep)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: Downloaded PDB file ‘Hsp90 structure’</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“that”</em>: <code class="language-plaintext highlighter-rouge">Don't match</code></li>
@@ -1323,7 +1331,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
       <p>The result is a file with all non-protein (<code class="language-plaintext highlighter-rouge">HETATM</code>) atoms removed.</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles (grep) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles (grep)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters. Here, we use grep again to produce a file with only non-protein atoms.
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy0" title="Search in textfiles (grep) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles (grep)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy0)</span> with the following parameters. Here, we use grep again to produce a file with only non-protein atoms.
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: Downloaded PDB file ‘Hsp90 structure’</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“that”</em>: <code class="language-plaintext highlighter-rouge">Match</code></li>
@@ -1334,7 +1342,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
       <p>This produces a file which only contains ligand atoms.</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0" title="Compound conversion tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compound conversion</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy1" title="Compound conversion tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compound conversion</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.1+galaxy1)</span> - interconvert between various chemistry and molecular modeling data files with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: Ligand PDB file created in step 2.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">MDL MOL format (sdf, mol)</code></li>
@@ -1370,7 +1378,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <div class="box-title hands-on-title" id="hands-on-generate-compound-library"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generate compound library</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0" title="Compound conversion tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compound conversion</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy1" title="Compound conversion tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compound conversion</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.1+galaxy1)</span> - interconvert between various chemistry and molecular modeling data files with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: ‘Ligand’ PDB file</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">SMILES format (SMI)</code></li>
@@ -1511,19 +1519,20 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina_prepare_receptor/prepare_receptor/1.5.7+galaxy0" title="Prepare receptor tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Prepare receptor</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.5.7+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a PDB file”</em>: ‘Protein’ PDB file.</li>
+        <li>Rename to ‘Prepared receptor’</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0" title="Compound conversion tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compound conversion</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy1" title="Compound conversion tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compound conversion</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.1+galaxy1)</span> - interconvert between various chemistry and molecular modeling data files with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: ‘Compound library’ file.</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">SDF</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">MDL MOL format (sdf,mol)</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Generate 3D coordinates”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Add hydrogens appropriate for pH”</em>: <code class="language-plaintext highlighter-rouge">7.4</code></li>
         <li>Leave all other options unchanged.</li>
         <li>Rename to ‘Prepared ligands’</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina_prepare_box/prepare_box/2021.03.4+galaxy0" title="Calculate the box parameters for an AutoDock Vina job tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Calculate the box parameters for an AutoDock Vina job</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2021.03.4+galaxy0)</span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina_prepare_box/prepare_box/2021.03.5+galaxy0" title="Calculate the box parameters using RDKit tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Calculate the box parameters using RDKit</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2021.03.5+galaxy0)</span> for an AutoDock Vina job from a ligand or pocket input file (confounding box) with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input ligand or pocket”</em>: <code class="language-plaintext highlighter-rouge">Ligand (MOL)</code> file.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“x-axis buffer”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
@@ -1581,9 +1590,9 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
   <div class="box-title hands-on-title" id="hands-on-perform-docking"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Perform docking</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina/docking/1.1.2+galaxy0" title="Docking tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Docking</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina/docking/1.2.3+galaxy0" title="VINA Docking tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>VINA Docking</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.3+galaxy0)</span> tool to perform protein-ligand docking with Autodock Vina with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Receptor”</em>: ‘Protein PDBQT’ file.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Receptor”</em>: ‘Protein receptor’ file.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Ligands”</em>: ‘Prepared ligands’ file.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify pH value for ligand protonation”</em>: <code class="language-plaintext highlighter-rouge">7.4</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify parameters”</em>: ‘Upload a config file to specify parameters’</li>
@@ -1602,7 +1611,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <p>(This section can also be completed while waiting for the docking, which can take some time to complete.)</p>
 
-<h3 id="visualization">Visualization</h3>
+<h2 id="visualization">Visualization</h2>
 
 <p>It can be useful to visualize the compounds generated. There is a tool available for this in Galaxy based on OpenBabel.</p>
 
@@ -1610,7 +1619,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
   <div class="box-title hands-on-title" id="hands-on-visualization-of-chemical-structures"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Visualization of chemical structures</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_svg_depiction/openbabel_svg_depiction/3.1.1+galaxy0" title="Visualisation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Visualisation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_svg_depiction/openbabel_svg_depiction/3.1.1+galaxy1" title="Visualisation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Visualisation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.1+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: Compound library</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Embed molecule as CML”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1638,21 +1647,21 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-calculate-molecular-fingerprints"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Calculate molecular fingerprints</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3" title="Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.3)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy0" title="Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Ligand SMILES</code>.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Find pattern”</em>: add the current label of the SMILES here. You can find it by clicking the ‘view’ button next to the <code class="language-plaintext highlighter-rouge">Ligand SMILES</code> dataset - it will look something like <code class="language-plaintext highlighter-rouge">/data/dnb02/galaxy_db/files/010/406/dataset_10406067.dat</code>.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">ligand</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1" title="Concatenate datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.1)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/1.0.0" title="Concatenate datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span> tail-to-head with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Datasets to concatenate”</em>: Output of the previous step.</li>
         <li>Click on <strong>Insert Dataset</strong> and in the new selection box which appears, select ‘Compound library’.</li>
         <li>Run the step and rename the output dataset ‘Labelled compound library’.</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_mol2fps/1.5" title="Molecule to fingerprint tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Molecule to fingerprint</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.5)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_mol2fps/1.5" title="Molecule to fingerprint tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Molecule to fingerprint</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.5)</span> conversion to several different fingerprint formats with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecule file”</em>: ‘Labelled compound library’ file.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Type of fingerprint”</em>: <code class="language-plaintext highlighter-rouge">Open Babel FP2 fingerprints</code></li>
@@ -1669,13 +1678,13 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-cluster-molecules-using-molecular-fingerprints"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Cluster molecules using molecular fingerprints</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_butina_clustering/1.5" title="Taylor-Butina clustering tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Taylor-Butina clustering</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.5)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_butina_clustering/1.5" title="Taylor-Butina clustering tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Taylor-Butina clustering</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.5)</span> of molecular fingerprints with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fingerprint dataset”</em>: ‘Fingerprints’ file.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“threshold”</em>: <code class="language-plaintext highlighter-rouge">0.8</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_nxn_clustering/1.5.1" title="NxN clustering tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NxN clustering</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.5.1)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_nxn_clustering/1.5.1" title="NxN clustering tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NxN clustering</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.5.1)</span> of molecular fingerprints with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fingerprint dataset”</em>: ‘Fingerprints’ file.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“threshold”</em>: <code class="language-plaintext highlighter-rouge">0.0</code></li>
@@ -1712,7 +1721,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
   <div class="box-title hands-on-title" id="hands-on-process-sd-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Process SD-files</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/sdf_to_tab/sdf_to_tab/2020.03.4+galaxy0" title="Extract values from an SD-file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract values from an SD-file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2020.03.4+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/sdf_to_tab/sdf_to_tab/2020.03.4+galaxy0" title="Extract values from an SD-file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract values from an SD-file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2020.03.4+galaxy0)</span>  into a tabular file using RDKit with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SD-file”</em>: Collection of SD-files generated by the docking step. (Remember to select the ‘collection’ icon!)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Include the property name as header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1721,18 +1730,18 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
         <li>Leave all other paramters unchanged.</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.2)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Collapse Collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Collapse Collection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.1.0)</span> into single dataset in order of the collection with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Collection of files to collapse into single dataset”</em>: Collection of tabular files generated by the previous step.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Keep one header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Append File name”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-selecting-a-dataset-collection-as-input"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-selecting-a-dataset-collection-as-input" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Selecting a dataset collection as input</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0" title="Compound conversion tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compound conversion</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.1+galaxy0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy1" title="Compound conversion tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compound conversion</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.1+galaxy1)</span> - interconvert between various chemistry and molecular modeling data files with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: choose one of the SD-files from the collection generated by the docking step.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">Protein Data Bank format (pdb)</code></li>
@@ -1971,12 +1980,17 @@ install_resolver_dependencies: true
 tools:
 - name: autodock_vina
   owner: bgruening
-  revisions: 7a871df65202
+  revisions: 90ea16534012
   tool_panel_section_label: ChemicalToolBox
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: autodock_vina_prepare_box
   owner: bgruening
   revisions: 668c60aa4799
+  tool_panel_section_label: ChemicalToolBox
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: autodock_vina_prepare_box
+  owner: bgruening
+  revisions: 8f766d9652a2
   tool_panel_section_label: ChemicalToolBox
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: autodock_vina_prepare_receptor
@@ -2036,12 +2050,12 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: openbabel_compound_convert
   owner: bgruening
-  revisions: e2c36f62e22f
+  revisions: 4242b4d68e9c
   tool_panel_section_label: ChemicalToolBox
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: openbabel_svg_depiction
   owner: bgruening
-  revisions: 7672039a0bb0
+  revisions: 75ee9c410951
   tool_panel_section_label: ChemicalToolBox
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: sdf_to_tab
@@ -2051,22 +2065,17 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: text_processing
   owner: bgruening
-  revisions: d698c222f354
+  revisions: 6073bb457ec0
   tool_panel_section_label: Text Manipulation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: text_processing
   owner: bgruening
-  revisions: f46f0e4f75c4
-  tool_panel_section_label: Text Manipulation
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: text_processing
-  owner: bgruening
-  revisions: d698c222f354
+  revisions: 6073bb457ec0
   tool_panel_section_label: Text Manipulation
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: collapse_collections
   owner: nml
-  revisions: 830961c48e42
+  revisions: 90981f86000f
   tool_panel_section_label: Collection Operations
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 </code></pre></div>
@@ -2248,7 +2257,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/4fdc57b85e4e5d3b1a45c3e67e9cbb5a4a95d6db">4fdc57b</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e36387e4f47cc2b8758c2c1deec81318fd646229">e36387e</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
