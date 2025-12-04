@@ -107,6 +107,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 >  - [ ] Deleting and purging datasets 
 >  - [ ] Deleting and purging histories
 >  - [ ] If configured:
+>    - [ ] Interactive tools
 >    - [ ] Running a job via Pulsar 
 >    - [ ] Test Bring Your Own Storage options
 >    - [ ] Test Bring Your Own Compute options
