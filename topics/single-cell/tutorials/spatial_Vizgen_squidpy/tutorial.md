@@ -17,18 +17,27 @@ input_histories:
 
 questions:
 - How can I assess my dataset quality?
-- How do I pick thresholds and parameters in my analysis?
-- How do I generate and annotate cell clusters?
+- How do I choose appropriate filtering thresholds and analysis parameters for MERFISH data?
+- How do I generate spatially informed cell clusters and annotate them using gene expression, spatial location, and tissue structure?
+- How do I build and evaluate a neighborhood graph to understand spatial relationships between cells?
+
 objectives:
-- Interpret quality control plots to inform parameter-decision making
-- Repeat analysis from matrix to clustering
-- Identify decision-making points
-- Appraise data outputs and make informed decisions
-- Explain why single cell analysis is an iterative (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly) process
+- Interpret spatial and non-spatial quality control plots (e.g., transcript counts, cell size, mitochondrial content, spatial density maps) to guide parameter selection and filtering decisions.
+
+- Repeat analysis steps—from matrix preprocessing to neighborhood graph construction and clustering—while adjusting parameters as needed.
+
+- Identify decision points where choices about filtering, normalization, spatial smoothing, neighborhood graph building, or clustering affect biological interpretation.
+
+- Evaluate clustering outputs, spatial embeddings, segmentations, and neighborhood-based statistics to make informed, data-driven decisions.
+
+- Explain why spatial single-cell analysis is iterative: early plots, spatial maps, and neighborhood graphs often reveal segmentation errors, background cells, or parameter issues that require revisiting and refining the analysis.
+
 time_estimation: 3H
+
 key_points:
-- Single-cell data is huge. To analyse single-cell data, you must reduce its many dimensions (cells x genes) via numerous methods
-- Analysis is more subjective than we think. We need both prior, biological knowledge of the samples as well as many iterations of analysis, in order to derive novel, real biological insights
+- Spatial transcriptomics data is extremely high-dimensional. To analyze MERFISH single-cell data, we must reduce its complexity—thousands of cells across hundreds of genes—using dimensionality-reduction, neighborhood graph construction, and clustering methods.
+
+- Analysis is more subjective than it appears. Extracting meaningful biological insight requires both prior knowledge of the tissue and iterative refinement of filtering thresholds, spatial parameters, and clustering decisions. Multiple rounds of exploration are essential to distinguish true biological structure from technical or spatial artifacts.
 
 requirements:
 -
@@ -44,19 +53,17 @@ tags:
 
 contributions:
   authorship:
-    - 
-    -
-    -
+    - Mohit Navandar
+    - Pavan Videm
+    - Amirhossein Naghsh Nilchi
+
   editing:
-    - 
-    - 
     - nomadscientist
   testing:
     - 
   infrastructure:
     - pavanvidem
     - Nilchia
-
 
 follow_up_training:
   -
@@ -172,7 +179,7 @@ You can also pull the data from publicly available [Single Cell Expression Atlas
 
 # Quality control
 
-You have generated an annotated AnnData object from your raw scRNA-seq fastq files. However, you have only completed a 'rough' filter of your dataset - there will still be a number of 'cells' that are actually just background from empty droplets or simply low-quality. There will also be genes that could be sequencing artifacts or that appear with such low frequency that statistical tools will fail to analyse them. This background garbage of both cells and genes not only makes it harder to distinguish real biological information from the noise, but also makes it computationally heavy to analyse. These spurious reads take a lot of computational power to analyse! First on our agenda is to filter this matrix to give us cleaner data to extract meaningful insight from, and to allow faster analysis.
+You have generated an annotated AnnData object from your raw Vizgen MERFISH data. However, the dataset has only undergone an initial, coarse filtering step—meaning it still contains a number of ‘cells’ that are actually background barcodes, debris, or poorly segmented objects. Similarly, some detected transcripts may represent imaging artifacts or genes expressed at such low abundance that downstream statistical analyses will not be reliable. This background noise—both false-positive cells and low-quality gene signals—not only makes it harder to resolve true biological structure, but also increases the computational load during analysis. Our first task is therefore to refine this matrix, removing spurious cells and genes so we can work with cleaner data, extract meaningful biological insight, and perform faster downstream analyses.
 
 ## Calculate QC Metrics
 
@@ -180,7 +187,7 @@ To filter the object, we need to calculate some metrics for each cell and gene.
 
 > <hands-on-title>Compute QC metrics</hands-on-title>
 >
-> 1. {% tool [Scanpy Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.10.2+galaxy2) %} with the following parameters:
+> 1. {% tool [Scanpy Inspect and manipulate](https://squidpy.readthedocs.io/en/stable/notebooks/tutorials/tutorial_vizgen.html#calculate-quality-control-metrics) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Batched_Object`
 >    - *"Method used for inspecting"*: `Calculate quality control metrics, using 'pp.calculate_qc_metrics'`
 >      - *"Name of kind of values in X"*: `counts`

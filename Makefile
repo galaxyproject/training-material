@@ -1,7 +1,7 @@
 # Settings
 UNAME := $(shell uname)
 JEKYLL=jekyll
-PORT?=4000
+PORT?=4001
 HOST?=0.0.0.0
 FLAGS?=""
 ENV?="development"
