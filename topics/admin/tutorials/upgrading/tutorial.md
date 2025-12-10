@@ -145,7 +145,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 
 ## The Galaxy Release Process
 
-The latest updates on the Galaxy release process can be found here: https://docs.galaxyproject.org/en/master/project/releases.html. A short summary can be found below. 
+The latest updates on the Galaxy release process can be found in the [Galaxy Release Process](https://docs.galaxyproject.org/en/master/project/releases.html) entry in the official documentation. A short summary can be found below. 
 
 - Long Term Support (LTS) releases happen annually, in the first quarter (e.g. 25.0).
 - Minor Releases: usually 2-3 times a year, generally in the early summer and fall (e.g. 25.1).
@@ -205,8 +205,8 @@ Once we know what our current version is, we can compare it with the latest avai
 >    > <code-out-title>Browser window</code-out-title>
 >    > ```JSON
 >    > {
->    >   "version_major": "20.09",
->    >   "extra": {}
+>    >   "version_major": "25.1",
+>    >   "version_minor":"rc1"
 >    > }
 >    > ```
 >    {: .code-out}
@@ -217,18 +217,16 @@ Once we know what our current version is, we can compare it with the latest avai
 
 # Finding the latest release version
 
-So, we have found out which version we are running on our server. But what is the current latest version of Galaxy that is available? There are quite a few ways of finding out.
+So, we have found out which version we are running on our server. But what is the current latest version of Galaxy that is available? There are quite a few ways of finding out. 
 
-* Galaxy is released 3 times per year. If the time of year is around January/February, April/May or September/October there may be a new release about to be announced.
 * You can check the Galaxy Project Newsletter and home page [https://galaxyproject.org](https://galaxyproject.org)
-
-Probably the easiest way of finding the version number of the latest release is via the extensive Galaxy Documentation Website located at: [https://docs.galaxyproject.org](https://docs.galaxyproject.org).
+* Probably the easiest way of finding the version number of the latest release is via the extensive Galaxy Documentation Website located at: [https://docs.galaxyproject.org](https://docs.galaxyproject.org).
 
 This site shows all of the release notes of all the available Galaxy versions and always has the latest release at the top of the list.
 
 ![Screenshot of the Galaxy documentation webpage showing the release versions](../../images/galaxy_doc_releases.png "Screenshot of the Galaxy documentation webpage (<a href="https://docs.galaxyproject.org">https://docs.galaxyproject.org</a>) showing the release versions. The latest version is at the top of the 'Releases' list.")
 
-We can see from this page that the latest release version of Galaxy is *21.01* (at the time of writing.)
+We can see from this page that the latest release version of Galaxy is *25.1* (at the time of writing.)
 
 > <question-title>What is the current latest version?</question-title>
 > As previously mentioned, the current latest release of Galaxy may not be *21.01*. What version is the latest that you can see?
