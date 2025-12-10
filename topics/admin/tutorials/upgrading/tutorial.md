@@ -58,7 +58,7 @@ We can upgrade our Galaxy version by modifying the Ansible var files and re-runn
 This tutorial will show you how and discuss some of the things you need to keep in mind whenever you are updating or upgrading your Galaxy server.
 
 > <hands-on-title>Upgrade checklist</hands-on-title>
-> Below a general checklist can be found that could serve as inspiration or guideline when upgrading a Galaxy instance. It's a list of best practices pooled from a set of different Galaxy administrators and is encouraged to follow as close as possible. 
+> The general checklist below can serve as inspiration or guideline when upgrading a Galaxy instance. It is a list of best practices pooled from various Galaxy administrators that can help you with planning an upgrade and avoid common pitfalls. 
 >
 > The list is divided into three main categories: before the upgrade, the upgrade itself, and after the upgrade. Ideally, upgrading your Galaxy instance is performed first in a test environment which has a near identical set-up to the production environment. 
 >
