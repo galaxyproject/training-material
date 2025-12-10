@@ -170,10 +170,10 @@ PepQuery2 is a tool used to validate novel peptides and proteins by searching ma
 >            - *"Precursor Unit"*: `ppm`
 >        - In *"PSM"*:
 >            - *"Fragmentation Method"*: `CID/HCD`
->            - *"Minimum Charge"*: `2`
+>            - *"Minimum Charge"*: `1`
 >            - *"Maximum Charge"*: `3`
->            - *"Minimum length of peptide"*: `8`
->            - *"Maximum length of peptide"*: `9`
+>            - *"Minimum length of peptide"*: `9`
+>            - *"Maximum length of peptide"*: `11`
 >    - *"Use fast mode for searching"*: `Yes`
 >
 >
@@ -241,8 +241,8 @@ Tabular-to-FASTA is a tool used to convert tabular data into the FASTA format, c
 >
 > 1. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Tab-delimited file"*: `output` (output of **Query Tabular** {% icon tool %})
->    - *"Title column(s)"*: `c['2']`
->    - *"Sequence column"*: `c1`
+>    - *"Title column(s)"*: `2`
+>    - *"Sequence column"*: `1`
 >
 >
 {: .hands_on}
@@ -378,19 +378,24 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 
 > <hands-on-title>Running the Workflow</hands-on-title>
 >
-> 1. **Import the workflow** into Galaxy:
->
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-peptide-verification/workflows/main_workflow.ga" title="PepQuery2 Verification" %}
->
->
-> 2. Run **Workflow** {% icon workflow %} using the following parameters:
->    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"Candidate_Neoantigens"*: `NeoAntigen-Candidates.tabular`
->    - {% icon param-file %} *"Human Uniprot (with isoforms) and CRAP Database"*: `HUMAN_CRAP.fasta`
->    - {% icon param-file %} *"Input raw file(s)"*: `STS_26T_2_Eclipse_02102024.raw`
->    - {% icon param-file %} *"Human Taxonomy ID"*: `Human-TaxID.txt`
+>  1. **Import the workflow** into Galaxy:
+>     - [Neoantigen Peptide Verification](https://tinyurl.com/ipepgen-pepquery-wf)
+> 
+> 3. Run **Workflow** {% icon workflow %} using the following parameters:
+>     - *"Send results to a new history"*: `No`
+>     - {% icon param-file %} *"Candidate_Neoantigens"*: `NeoAntigen-Candidates.tabular`
+>     - {% icon param-file %} *"Human Uniprot (with isoforms) and CRAP Database"*: `HUMAN_CRAP.fasta`
+>     - {% icon param-file %} *"Input raw file(s)"*: `STS_26T_2_Eclipse_02102024.raw`
+>     - {% icon param-file %} *"Human Taxonomy ID"*: `Human-TaxID.txt`
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
+>    
+> <comment-title>DISCLAIMER</comment-title>
+>
+> - If any step in this workflow fails, please ensure that the input files have been correctly generated and formatted by the preceding tools. Workflow failures often result from improperly called or incomplete input data rather than errors in the workflow itself. Users are responsible for verifying their input before troubleshooting workflow issues.
+>
+> {: .comment}
+>
 >
 {: .hands_on}
 

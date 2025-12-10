@@ -234,10 +234,10 @@ In this workflow, FASTA-to-Tabular enables the conversion of variant protein seq
 >
 {: .hands_on}
 
-> <hands-on-title> SNV - FASTA-to-Tabular </hands-on-title>
+> <hands-on-title> SAV - FASTA-to-Tabular </hands-on-title>
 >
 > 1. {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1) %} with the following parameters:
->    - {% icon param-file %} *"Convert these sequences"*: `output_snv` (output of **CustomProDB** {% icon tool %})
+>    - {% icon param-file %} *"Convert these sequences"*: `output_sav` (output of **CustomProDB** {% icon tool %})
 >
 >
 {: .hands_on}
@@ -266,7 +266,7 @@ In this workflow, FASTA-to-Tabular enables the conversion of variant protein seq
 
 ## Manipulating the headers with Column Regex Find And Replace
 
-Column Regex Find And Replace is a tool that applies regular expression (regex) patterns to specified columns in a tabular dataset to find and replace text patterns. In this task, the tool is used on the output from the FASTA-to-Tabular step to standardize or format specific patterns in the data. By applying regex patterns to column c1, the tool identifies and modifies specific sequence identifiers or annotations, making them easier to interpret or use in further analyses.
+Column Regex Find And Replace is a tool that applies regular expression (regex) patterns to specified columns in a tabular dataset to find and replace text patterns. In this task, the tool is used on the output from the FASTA-to-Tabular step to standardize or format specific patterns in the data. By applying regex patterns to column 1, the tool identifies and modifies specific sequence identifiers or annotations, making them easier to interpret or use in further analyses.
 
 In this workflow, Column Regex Find And Replace cleans and formats the data in a way that makes identifiers or variant descriptions consistent. This is important for data compatibility, especially when the data needs to be used across different tools or integrated into larger datasets. It ensures that all sequence labels or variant annotations follow a uniform format, which reduces errors in downstream analyses.
 
@@ -276,7 +276,7 @@ In this workflow, Column Regex Find And Replace cleans and formats the data in a
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `output` (output of **FASTA-to-Tabular** {% icon tool %})
->    - *"using column"*: `c1`
+>    - *"using column"*: `1`
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
@@ -291,16 +291,16 @@ In this workflow, Column Regex Find And Replace cleans and formats the data in a
 >            - *"Find Regex"*: `^(.*)$`
 >            - *"Replacement"*: `generic|INDEL_\1`
 >
-> 2. Rename as Indel-FASTA
+> 2. Rename as "Indel-FASTA"
 >
 > 
 {: .hands_on}
 
-> <hands-on-title> SNV-Column Regex Find And Replace </hands-on-title>
+> <hands-on-title> SAV-Column Regex Find And Replace </hands-on-title>
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `output` (output of **FASTA-to-Tabular** {% icon tool %})
->    - *"using column"*: `c1`
+>    - *"using column"*: `1`
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
@@ -313,9 +313,9 @@ In this workflow, Column Regex Find And Replace cleans and formats the data in a
 >            - *"Replacement"*: `\1`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `^(.*)$`
->            - *"Replacement"*: `generic|SNV_\1`
+>            - *"Replacement"*: `generic|SAV_\1`
 >
-> 2. Rename as SNV-FASTA
+> 2. Rename as "SAV-FASTA"
 > 
 {: .hands_on}
 
@@ -323,7 +323,7 @@ In this workflow, Column Regex Find And Replace cleans and formats the data in a
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `output` (output of **FASTA-to-Tabular** {% icon tool %})
->    - *"using column"*: `c1`
+>    - *"using column"*: `1`
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
@@ -338,7 +338,7 @@ In this workflow, Column Regex Find And Replace cleans and formats the data in a
 >            - *"Find Regex"*: `^(.*)$`
 >            - *"Replacement"*: `generic|RPKM_\1`
 >
-> 2. Rename as RPKM-FASTA
+> 2. Rename as "RPKM-FASTA"
 > 
 {: .hands_on}
 
@@ -357,30 +357,30 @@ In this workflow, Column Regex Find And Replace cleans and formats the data in a
 {: .question}
 
 ## Converting the manipulated tabular files to FASTA with Tabular-to-FASTA
-Tabular-to-FASTA is a tool that converts tabular data back into FASTA format, where each entry has a title and a sequence. In this step, the tool uses the processed output from the Column Regex Find And Replace step to create a FASTA file. Column c1 is set as the title (identifier) for each sequence, and column c2 contains the sequence data. This conversion is useful when the data needs to be returned to a standard sequence format for further bioinformatics analyses.
+Tabular-to-FASTA is a tool that converts tabular data back into FASTA format, where each entry has a title and a sequence. In this step, the tool uses the processed output from the Column Regex Find And Replace step to create a FASTA file. Column 1 is set as the title (identifier) for each sequence, and column 2 contains the sequence data. This conversion is useful when the data needs to be returned to a standard sequence format for further bioinformatics analyses.
 
-In this workflow, Tabular-to-FASTA converts the formatted tabular data back into a FASTA file, making it compatible with tools that require FASTA input for further analysis. This step enables the standardized, cleaned sequences from previous steps to be utilized in additional bioinformatics workflows or databases, maintaining the variant-specific information in a commonly used format. We do this for all the tabular files (SNV, INDEL, and RPKM).
+In this workflow, Tabular-to-FASTA converts the formatted tabular data back into a FASTA file, making it compatible with tools that require FASTA input for further analysis. This step enables the standardized, cleaned sequences from previous steps to be utilized in additional bioinformatics workflows or databases, maintaining the variant-specific information in a commonly used format. We do this for all the tabular files (SAV, INDEL, and RPKM).
 
 > <hands-on-title> INDEL-Tabular-to-FASTA </hands-on-title>
 >
 > 1. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Tab-delimited file"*: `out_file1` (output of **Column Regex Find And Replace** {% icon tool %})
->    - *"Title column(s)"*: `c1`
->    - *"Sequence column"*: `c2`
+>    - *"Title column(s)"*: `1`
+>    - *"Sequence column"*: `2`
 >
-> 2. Rename as Indel-FASTA
+> 2. Rename as "Indel-FASTA"
 >
 > 
 {: .hands_on}
 
-> <hands-on-title> SNV-Tabular-to-FASTA </hands-on-title>
+> <hands-on-title> SAV-Tabular-to-FASTA </hands-on-title>
 >
 > 1. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Tab-delimited file"*: `out_file1` (output of **Column Regex Find And Replace** {% icon tool %})
->    - *"Title column(s)"*: `c1`
->    - *"Sequence column"*: `c2`
+>    - *"Title column(s)"*: `1`
+>    - *"Sequence column"*: `2`
 >
-> 2. Rename as SNV-FASTA
+> 2. Rename as "SAV-FASTA"
 >
 > 
 {: .hands_on}
@@ -389,10 +389,10 @@ In this workflow, Tabular-to-FASTA converts the formatted tabular data back into
 >
 > 1. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Tab-delimited file"*: `out_file1` (output of **Column Regex Find And Replace** {% icon tool %})
->    - *"Title column(s)"*: `c1`
->    - *"Sequence column"*: `c2`
+>    - *"Title column(s)"*: `1`
+>    - *"Sequence column"*: `2`
 >
-> 2. Rename as RPKM-FASTA
+> 2. Rename as "RPKM-FASTA"
 >
 >    
 {: .hands_on}
@@ -414,7 +414,7 @@ In this workflow, Tabular-to-FASTA converts the formatted tabular data back into
 ## Merging Single amino acid variant databases with FASTA Merge Files and Filter Unique Sequences
 FASTA Merge Files and Filter Unique Sequences is a tool that combines multiple FASTA files into a single file and removes any duplicate sequences, keeping unique entries. In this task, the tool takes the FASTA file generated from the Tabular-to-FASTA step and merges it with any other FASTA files in the input list. The tool then filters the sequences to ensure that unique sequences are retained in the final output, which is important for reducing redundancy in the dataset.
 
-In this workflow, FASTA Merge Files and Filter Unique Sequences consolidate all sequence data into a single, non-redundant FASTA file. This step is essential for removing duplicate sequences, which helps streamline the dataset for further analysis. A unique sequence file reduces computational load and minimizes potential biases in downstream applications that could be affected by redundant data. We are merging the indel, snv, and rpkm databases in this step.
+In this workflow, FASTA Merge Files and Filter Unique Sequences consolidate all sequence data into a single, non-redundant FASTA file. This step is essential for removing duplicate sequences, which helps streamline the dataset for further analysis. A unique sequence file reduces computational load and minimizes potential biases in downstream applications that could be affected by redundant data. We are merging the indel, sav, and rpkm databases in this step.
 
 
 > <hands-on-title> FASTA Merge Files and Filter Unique Sequences </hands-on-title>
@@ -423,7 +423,7 @@ In this workflow, FASTA Merge Files and Filter Unique Sequences consolidate all 
 >    - *"Run in batch mode?"*: `Merge individual FASTAs (output collection if the input is a collection)`
 >        - In *"Input FASTA File(s)"*:
 >            - {% icon param-repeat %} *"Insert Input FASTA File(s)"*
->                - {% icon param-file %} *"FASTA File"*: `SNV-FASTA` (output of **Tabular-to-FASTA** {% icon tool %})
+>                - {% icon param-file %} *"FASTA File"*: `SAV-FASTA` (output of **Tabular-to-FASTA** {% icon tool %})
 >        - In *"Input FASTA File(s)"*:
 >            - {% icon param-repeat %} *"Insert Input FASTA File(s)"*
 >                - {% icon param-file %} *"FASTA File"*: `INDEL-FASTA` (output of **Tabular-to-FASTA** {% icon tool %})
@@ -530,7 +530,12 @@ In this workflow, converting GffCompare's annotated GTF output to BED format all
 >
 > 1. {% tool [Convert gffCompare annotated GTF to BED](toolshed.g2.bx.psu.edu/repos/galaxyp/gffcompare_to_bed/gffcompare_to_bed/0.2.1) %} with the following parameters:
 >    - {% icon param-file %} *"GTF annotated by gffCompare"*: `transcripts_annotated` (output of **GffCompare** {% icon tool %})
->    - *"filter gffCompare class_codes to convert"*: `j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript` `e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible pre-mRNA fragment.` `i : A transfrag falling entirely within a reference intron` `p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)` `u : Unknown, intergenic transcript`
+>    - *"filter gffCompare class_codes to convert"*:  
+`j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript`  
+`e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible pre-mRNA fragment.`  
+`i : A transfrag falling entirely within a reference intron`  
+`p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)`  
+`u : Unknown, intergenic transcript`  
 >
 >
 {: .hands_on}
@@ -556,7 +561,7 @@ Translate BED transcripts is a tool that translates BED files containing transcr
 
 In this workflow, translating BED files to FASTA sequences is essential for obtaining the actual nucleotide sequences of the annotated transcripts. This step enables the user to analyze the sequences further, for example, by identifying functional regions, and sequence motifs, or conducting downstream analysis like mutation detection or variant calling.
 
-> <hands-on-title> **Translate BED transcripts** </hands-on-title>
+> <hands-on-title> Translate BED transcripts </hands-on-title>
 >
 > 1. {% tool [Translate BED transcripts](toolshed.g2.bx.psu.edu/repos/galaxyp/translate_bed/translate_bed/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"A BED file with 12 columns"*: `output` (output of **Convert gffCompare annotated GTF to BED** {% icon tool %})
@@ -702,7 +707,7 @@ These transformations are particularly important when variant annotations come f
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/bgruening/column_regex_find_replace/column_regex_find_and_replace/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `CustomProDB_Genomic_SQLlite` (Genomic SQLite from **CustomProDB** {% icon tool %})
->    - *"using column"*: `c1`
+>    - *"using column"*: `1`
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
@@ -741,7 +746,7 @@ By harmonizing mutation notation and cleaning extraneous characters or formattin
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/bgruening/column_regex_find_replace/column_regex_find_and_replace/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `CustomProDB_VARIANT_SQLite` (Variant SQLite from **CustomProDB** {% icon tool %})
->    - *"using column"*: `c1`
+>    - *"using column"*: `1`
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
@@ -810,7 +815,7 @@ This merged annotation file is especially important for neoantigen workflows bec
 
 # Merging the non-reference databases with the known HUMAN protein sequence
 
-Merging non-reference databases with the known human protein sequence involves integrating data from various sources into a unified format for more efficient analysis. In bioinformatics, this process is often necessary when working with protein sequence data, especially when datasets include variations, unknown sequences, or newly identified proteins alongside well-established reference proteins from the human genome. In this case, we are merging a previously integrated variant database (which includes SNV, INDEL, and RPKM), assembled FASTA data generated from translating BED files to transcripts, the UniProt human reference, and a known contaminant database.
+Merging non-reference databases with the known human protein sequence involves integrating data from various sources into a unified format for more efficient analysis. In bioinformatics, this process is often necessary when working with protein sequence data, especially when datasets include variations, unknown sequences, or newly identified proteins alongside well-established reference proteins from the human genome. In this case, we are merging a previously integrated variant database (which includes SAV, INDEL, and RPKM), assembled FASTA data generated from translating BED files to transcripts, the UniProt human reference, and a known contaminant database.
 
 
 ![Database Merging]({% link topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_4.PNG %})
@@ -831,6 +836,8 @@ Merging non-reference databases with the known human protein sequence involves i
 >        - In *"Input FASTA File(s)"*:
 >            - {% icon param-repeat %} *"Insert Input FASTA File(s)"*
 >                - {% icon param-file %} *"FASTA File"*: `translation_fasta` (output of **Translate BED transcripts** {% icon tool %})
+>             
+> 2. Rename to `Human_cRAP_Non_reference_transcripts_dB` (final output will be a FASTA file)
 >
 >
 {: .hands_on}
@@ -847,19 +854,28 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 
 > <hands-on-title>Running the Workflow</hands-on-title>
 >
-> 1. **Import the workflow** into Galaxy:
+>  1. **Import the workflow** into Galaxy:
+>     - [Neoantigen Non-Reference Database Generation](https://tinyurl.com/ipepgen-nonref-wf)
+> 
+>  3. Run **Workflow** {% icon workflow %} using the following parameters:
+>     - *"Send results to a new history"*: `No`
+>     - {% icon param-file %} *"Human Reference Genome Annotation"*: `Homo_sapiens.GRCh38_canon.106.gtf`
+>     - {% icon param-file %} *"Human Uniprot (with isoforms) and cRAP Database"*: `HUMAN_CRAP.fasta`
+>     - {% icon param-file %} *"RNA-Seq_Reads_1 (forward strand)"*: `RNA-Seq_Reads_1.fastqsanger.gz`
+>     - {% icon param-file %} *"RNA-Seq_Reads_2 (reverse strand)"*: `RNA-Seq_Reads_2.fastqsanger.gz`
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-non-reference-database-generation/workflows/main_workflow.ga" title="Neoantigen non-reference Database Generation" %}
+> 
+> {% snippet faqs/galaxy/workflows_run.md %}
 >
+> 
+> 
+> 
+> 
+> <comment-title>DISCLAIMER</comment-title>
 >
-> 2. Run **Workflow** {% icon workflow %} using the following parameters:
->    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"Human Reference Genome Annotation"*: `Homo_sapiens.GRCh38_canon.106.gtf`
->    - {% icon param-file %} *"Human Uniprot (with isoforms) and cRAP Database"*: `HUMAN_CRAP.fasta`
->    - {% icon param-file %} *"RNA-Seq_Reads_1 (forward strand)"*: `RNA-Seq_Reads_1.fastqsanger.gz`
->    - {% icon param-file %} *"RNA-Seq_Reads_2 (reverse strand)"*: `RNA-Seq_Reads_2.fastqsanger.gz`
+> - If any step in this workflow fails, please ensure that the input files have been correctly generated and formatted by the preceding tools. Workflow failures often result from improperly called or incomplete input data rather than errors in the workflow itself. Users are responsible for verifying their input before troubleshooting workflow issues.
 >
->    {% snippet faqs/galaxy/workflows_run.md %}
+> {: .comment}
 >
 {: .hands_on}
 

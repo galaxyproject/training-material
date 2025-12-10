@@ -94,7 +94,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 >
-> 2. Download the files from [Scihub](https://scihub.copernicus.eu/dhus/#/home), [PEPS](https://peps.cnes.fr/rocket/#/search?maxRecords=50&page=1) or [Theia](https://catalogue.theia-land.fr) :
+> 2. Download the files from [Scihub](https://www.sentinel-hub.com/explore/copernicus-data-space-ecosystem/), [PEPS](https://peps.cnes.fr/rocket/#/search?maxRecords=50&page=1) or [Theia](https://catalogue.theia-land.fr) :
 >
 >    You will have to to create an account for either of these platform.
 >    Select Reflectance, Sentinel 2 and "Niveau 2A" (level 2A).

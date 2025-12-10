@@ -179,6 +179,13 @@ Arriba’s pipeline includes features for:
 
 The output includes a list of fusion candidates with key information like fusion partners, breakpoint locations, reading frames, and peptide sequences. Arriba’s results can provide insight into potential neoantigens, helping guide research into therapeutic targets or immune-based therapies for cancer.
 
+> <hands-on-title> Add filters to reduce false positives </hands-on-title>
+> 1. {% tool [Arriba Get Filters](toolshed.g2.bx.psu.edu/repos/iuc/arriba_get_filters/arriba_get_filters/2.4.0+galaxy1) %} with the following parameters:
+>    - *"Select reference"*: `GRCh38`
+>
+{: .hands_on}
+
+
 > <hands-on-title> Fusion detection </hands-on-title>
 >
 > 1. {% tool [Arriba](toolshed.g2.bx.psu.edu/repos/iuc/arriba/arriba/2.4.0+galaxy1) %} with the following parameters:
@@ -307,7 +314,7 @@ By leveraging **Query Tabular**, researchers can efficiently refine and structur
 >    - *"SQL Query to generate tabular output"*:
 > ``` sql
 > SELECT t1.c1 || '__' || t1.c2  || '__' || t1.c3, t1.c4
->FROM t1
+> FROM t1
 > ```
 >    - *"include query result column headers"*: `No`
 >
@@ -323,8 +330,8 @@ Tabular to FASTA conversion is a common task in bioinformatics that transforms d
 >
 > 1. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Tab-delimited file"*: `output` (output of **Query Tabular** {% icon tool %})
->    - *"Title column(s)"*: `c['1']`
->    - *"Sequence column"*: `c2`
+>    - *"Title column(s)"*: `1`
+>    - *"Sequence column"*: `2`
 >
 >
 {: .hands_on}
@@ -346,6 +353,7 @@ Using regex (regular expressions) for find and replace is a powerful technique f
 >    {% snippet faqs/galaxy/analysis_regular_expressions.md %}
 >
 > 2. Rename the output FASTA as `Arriba-Fusion-Database.fasta`
+> 
 {: .hands_on}
 
 
@@ -360,8 +368,7 @@ To rerun this entire analysis at once, you can use our workflow. Below, we show 
 > <hands-on-title>Running the Workflow</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy:
->
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-fusion-database-generation/workflows/main_workflow.ga" title="Neoantigen Fusion Database Generation" %}
+>    - [Neoantigen Fusion Database Generation](https://tinyurl.com/ipepgen-gene-fusion-wf)
 >
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
@@ -373,7 +380,18 @@ To rerun this entire analysis at once, you can use our workflow. Below, we show 
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
+> 
+> 
+> 
+> <comment-title>DISCLAIMER</comment-title>
+>
+> - If any step in this workflow fails, please ensure that the input files have been correctly generated and formatted by the preceding tools. Workflow failures often result from improperly called or incomplete input data rather than errors in the workflow itself. Users are responsible for verifying their input before troubleshooting workflow issues.
+>
+> {: .comment}
+>
+> 
 {: .hands_on}
+
 
 # Are you feeling adventurous? ✨
 

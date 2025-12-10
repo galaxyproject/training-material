@@ -30,6 +30,8 @@ cat /tmp/20*.txt | sort -u | \
 	grep -v '/topics/statistics/tutorials/gai-llm-with-python/slides.html' | \
 	grep -v '/topics/statistics/tutorials/gai-llm-with-python/slides-plain.html' | \
 	grep -v '/topics/statistics/tutorials/gai-llm-with-python/tutorial.html' | \
+	grep -v '/topics/imaging/tutorials/bioimage-REMBI/tutorial.html' | \
+	grep -v '/topics/imaging/tutorials/bioimage-metadata/tutorial.html' | \
 	sed 's|/$|/index.html|'  | grep '.html$' | sort -u | sed 's|https://training.galaxyproject.org|_site|' > /tmp/gtn-files.txt
 
 count=0
