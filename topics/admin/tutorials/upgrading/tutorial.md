@@ -145,7 +145,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 
 ## The Galaxy Release Process
 
-The latest updates on the Galaxy release process can be found in the [Galaxy Release Process](https://docs.galaxyproject.org/en/master/project/releases.html) entry in the official documentation. A short summary can be found below. 
+The latest updates on the Galaxy release process can be found in the [Galaxy Release Process](https://docs.galaxyproject.org/en/master/project/releases.html) entry in the official documentation. In short: 
 
 - Long Term Support (LTS) releases happen annually, in the first quarter (e.g. 25.0).
 - Minor Releases: usually 2-3 times a year, generally in the early summer and fall (e.g. 25.1).
