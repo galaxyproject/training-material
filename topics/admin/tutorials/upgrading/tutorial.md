@@ -131,7 +131,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 > - Send out communication after testing was successful
 >   - Remove any pre-upgrade announcement banner and announce completion
 >   - share any new features or changes with user base (link to release notes) via e.g. a news item, an email,... 
-> - Make sure that any config, dependency or infrastructure changes have been documented and is under version control 
+> - Make sure that configuration, dependency or infrastructure changes have been documented and are under version control 
 >   - Update (internal) documentation where needed
 >
 > ### Continuous improvement
