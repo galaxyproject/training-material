@@ -88,7 +88,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 > ### Communication plan
 > Start preparing the communication plan to the user, which ideally is send out in advance. 
 > - Draft notifications about the planned upgrade, schedule, and anticipated downtime (e.g. a banner on the frontpage, email,...)
-> - Draft communication to the users what changes and features the new upgrade brings (e.g. a news item, email), which includes emphasis on reporting unexpected behavior
+> - Draft communication about what changes and features the new upgrade brings to the users (e.g. a news item, email), with instructions on how to report unexpected behavior
 >
 > ## Upgrade
 > ### Performing upgrade
