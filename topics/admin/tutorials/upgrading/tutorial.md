@@ -58,85 +58,88 @@ We can upgrade our Galaxy version by modifying the Ansible var files and re-runn
 This tutorial will show you how and discuss some of the things you need to keep in mind whenever you are updating or upgrading your Galaxy server.
 
 > <hands-on-title>Upgrade checklist</hands-on-title>
-> If you are ready to perform your upgrade, the following checklist could inspire you into performing some important steps to ensure a successful Galaxy upgrade. It includes points important in a change management process.
+> Below a general checklist can be found that could serve as inspiration or guideline when upgrading a Galaxy instance. It's a list of best practices pooled from a set of different Galaxy administrators and is encouraged to follow as close as possible. 
+>
+> The list is divided into three main categories: before the upgrade, the upgrade itself, and after the upgrade. Ideally, upgrading your Galaxy instance is performed first in a test environment which has a near identical set-up to the production environment. 
 >
 > ## Pre-upgrade
-> - [ ] Review release notes for new features, deprecations, and breaking changes 
-> - [ ] Assess the upgrade's impact on workflows, tools, data formats, and integrations
-> - [ ] Evaluate changes in resource requirements and dependencies:
+> ### General preparations
+> From the moment an upgrade is released in the main Galaxy codebase, you can start preparing your upgrade.
+> - Review release notes for new features, deprecations, and breaking changes 
+> - Assess the upgrade's impact on workflows, tools, data formats, and integrations
+> - Evaluate changes in resource requirements and dependencies:
 >   - Python version 
 >   - libraries/containers
 >   - Database server's minimum version (PostgreSQL) 
 >   - VM size and computational powers
 >   - Others depending on set-up 
-> - [ ] Assess expected alerts from monitoring during the production upgrade
-> - [ ] Select a maintenance window for the production upgrade with minimal user impact
->   - Preferably during business hours (manual implementation), at the start of the week to maximize time for a potential disaster recovery
-> - [ ] Assess if the data policy page requires updating after upgrading
+> - Assess expected alerts from monitoring during the production upgrade
+> - Select a maintenance window for the production upgrade with minimal user impact and buffer time afterwards for unforeseen issues. 
+> - Assess if the data policy of your instance requires updating after upgrading
 >
 > ### Backup and regression strategy
-> - [ ] Assess if current (automatic) backup system needs to be suspended or updated
-> - [ ] Perform a full backup of the relevant databases (PostgresDB, SQLite,...)
-> - [ ] Verify that backups are complete and functional
->   - [ ] Reinstate backups in duplicate setup  
-> - [ ] Make a regression plan on how to roll back to the original, pre-upgrading state in the case the upgrade fails 
->   - [ ] Verify, test and update this plan ahead of upgrading
-> 
-> ### Adjust Ansible playbooks
-> - [ ] Have all changes made under version control 
->   - [ ] make enough commits with clear, conventional commit messages
->   - [ ] Ideally, have one pull request that reflects all changes made to infrastructure, documentation, frontpage, etc. and add appropriate labels
->   - [ ] If possible, assign at least one technical and/or peer reviewer to verify your changes
+> In case of unforeseen problems, this will help you go back to a working instance and give you time to debug and discuss the issue at hand. 
+> - Assess if current (automatic) backup system needs to be suspended or updated
+> - Perform a full backup of the relevant databases (PostgresDB, SQLite,...)
+> - Verify that backups are complete and functional by reinstating backups in a duplicate setup  
+> - Make a regression plan on how to roll back to the original, pre-upgrading state in case the upgrade fails 
+>   - Verify, test and update this plan ahead of upgrading
 >
-> ### Testing Upgrade
-> The following checklist should be performed after upgrading the Test instance and the production instance. 
->  - [ ] All login and authentication methods 
->  - [ ] Email notifications
->  - [ ] 'Forgot password' option and check that activation link works
->  - [ ] Error reporting
->  - [ ] Uploading data 
->  - [ ] Running a normal tool 
->    - Ideally, running a list of top used tools (automated using Bioblend), leveraging IUC's tool tests, running all tool tests using Ephemeris,...
->  - [ ] Running a data source tool 
->  - [ ] Running a tool that makes use of special set user preferences
->  - [ ] Running a workflow 
->    - List of top used workflows
->  - [ ] Exporting data 
->  - [ ] Exporting workflow runs 
->  - [ ] Making a new history 
->  - [ ] Deleting and purging datasets 
->  - [ ] Deleting and purging histories
->  - [ ] If configured:
->    - [ ] Interactive tools
->    - [ ] Running a job via Pulsar 
->    - [ ] Test Bring Your Own Storage options
->    - [ ] Test Bring Your Own Compute options
-> 
-> If any major functionality is broken or missing, and cannot be readily fixed, roll-back upgrade to last working state.
-> 
 > ### Communication plan
-> If the tests on the Test instance were successful and were peer reviewed, initiate communication plan.
-> - [ ] notify users about the planned upgrade, schedule, and anticipated downtime (e.g. via a banner on the frontpage)
-> - [ ] Make a draft pull request for a news item, which includes emphasis on reporting unexpected behavior, and any new features or changes 
+> Start preparing the communication plan to the user, which ideally is send out in advance. 
+> - Draft notifications about the planned upgrade, schedule, and anticipated downtime (e.g. a banner on the frontpage, email,...)
+> - Draft communication to the users what changes and features the new upgrade brings (e.g. a news item, email), which includes emphasis on reporting unexpected behavior
 >
-> ## Production Upgrade
-> - [ ] Adapt and execute the Ansible playbook
+> ## Upgrade
+> ### Performing upgrade
+> Perform the actual upgrade on a test instance before you upgrade the live production one. 
+> - Adapt the Ansible playbook and have all changes made under version control 
+>   - make enough commits with clear, conventional commit messages
+>   - Ideally, have one pull request that reflects all changes made to infrastructure, documentation, frontpage, etc. and add appropriate labels
+>   - If possible, assign at least one technical and/or peer reviewer to verify your changes
+> - Execute the playbook 
+> - Restart the instance (gracefully). 
+> 
+> ### Testing upgrade
+> The following checklist should be performed after upgrading the test instance and after upgrading the production instance. 
+> - Check status of Galaxy services (job handlers, gunicorn, celery,...)
+> - Verify all login and authentication methods 
+> - Test Email notifications
+>   - Test the 'Forgot password' option and check that activation link works
+> - Try submitting an error report
+> - Make a new history 
+> - Upload data 
+> - Run a regular tool 
+>   - Ideally, run a list of top used tools (e.g. automated using Bioblend), leverage IUC's tool tests, run tool wrapper's tests with Ephemeris,...
+> - Run a data source tool 
+> - Run a tool that makes use of extra user preferences
+> - Run an interactive tool
+> - Run a workflow (list of top used workflows)
+>   - Ideally, run a list of top used workflows
+> - test all data, history, workflow export options
+> - Deleting and purging datasets 
+> - Deleting and purging histories
+> - Run a job via Pulsar 
+> - Test Bring Your Own Storage options
+> - Test Bring Your Own Compute options
+> 
+> If any major functionality is broken or missing, and cannot be readily fixed, roll-back upgrade to last working state using the regression plan.
+>
 > ## Post-upgrade
-> - [ ] Roll back if significant issues arise, following the regression strategy
-> - [ ] Conduct post-upgrade testing to ensure functionality in the production environment
->   - Use the same Test upgrade list from above
-> - [ ] Announce completion and share (link to) any new features or changes with user base
->   - Merge news item pull request if applicable
->   - Remove pre-upgrade announcement banner if applicable
-> - [ ] Make sure that any config, dependency or infrastructure changes have been documented and is under version control 
->   - [ ] Add updates to the documentation, if applicable
+> ### Finish communication plan
+> Adapt pre-upgrade communications where necessary and let the users know what changed. 
+> - Send out communication after testing was successful
+>   - Remove any pre-upgrade announcement banner and announce completion
+>   - share any new features or changes with user base (link to release notes) via e.g. a news item, an email,... 
+> - Make sure that any config, dependency or infrastructure changes have been documented and is under version control 
+>   - Update (internal) documentation where needed
 >
 > ### Continuous improvement
-> - [ ] Review lessons learned from the upgrade process
-> - [ ] Update the upgrade checklist and procedures accordingly
-> - [ ] Begin preparing for the next Galaxy release
-> - [ ] Monitor CVEs and patches from Galaxy upstream
->   - redeploy playbook when necessary
+> After the upgrade cycle is completed, see what can be improved for the next upgrade. 
+> - Review lessons learned from the upgrade process
+> - Update the upgrade checklist and procedures accordingly
+> - Begin preparing for the next Galaxy release
+> - Monitor CVEs and patches from Galaxy upstream
 {: .hands_on}
 
 
