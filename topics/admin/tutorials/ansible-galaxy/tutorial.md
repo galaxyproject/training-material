@@ -935,7 +935,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_force_checkout`         | `true`                                                                    | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
 >    `galaxy_client_use_prebuilt`         | `true`                                                              | We are going to use a prebuilt client to save some time during this tutorial, if you want you can set it to false later and see how galaxy starts building the client itself.
 >    `miniconda_prefix`              | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %}          | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can become deadlocked.
->    `miniconda_version`             | `25.3`                                                                    | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
+>    `miniconda_version`             | `2.4.0`                                                                    | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
 >    `miniconda_distribution`             | `miniforge`                                                                    | Install a specific distribution of conda, see https://github.com/galaxyproject/ansible-miniconda for alternatives. This determines the default value for the `miniconda_executable` (`mamba` for `miniforge`)
 >    `miniconda_channels`          ` | `['conda-forge']`                                             | Use the free and community-maintained `conda-forge` channel.
 >
@@ -964,7 +964,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +galaxy_client_use_prebuilt: true
 >    +galaxy_force_checkout: true
 >    +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->    +miniconda_version: 25.3
+>    +miniconda_version: 2.4.0
 >    +miniconda_distribution: miniforge
 >    +miniconda_channels: ['conda-forge']
 >    {% endraw %}
@@ -997,7 +997,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -13,3 +13,17 @@ miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->     miniconda_version: 25.3
+>     miniconda_version: 2.4.0
 >     miniconda_distribution: miniforge
 >     miniconda_channels: ['conda-forge']
 >    +
@@ -2281,7 +2281,7 @@ Finally, we have explicitly mapped the `local` class of tools to run in the `loc
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -14,6 +14,24 @@ miniconda_version: 25.3
+>    @@ -14,6 +14,24 @@ miniconda_version: 2.4.0
 >     miniconda_distribution: miniforge
 >     miniconda_channels: ['conda-forge']
 >
