@@ -1,13 +1,19 @@
 - doc: Test outline for Checking-expected-species-and-contamination-in-bacterial-isolate
   job:
-    forward_reads:
-      class: File
-      path: https://zenodo.org/record/10572227/files/DRR187559_after_fastp_1.fastq.gz
-      filetype: fastqsanger.gz
-    reverse_reads:
-      class: File
-      path: https://zenodo.org/record/10572227/files/DRR187559_after_fastp_2.fastq.gz
-      filetype: fastqsanger.gz
+    Input Paired End Reads Collection:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: DRR187559_after_fastp
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/record/10572227/files/DRR187559_after_fastp_1.fastq.gz
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/record/10572227/files/DRR187559_after_fastp_2.fastq.gz
   outputs:
     recentrifuge_data_tabular:
       asserts:
@@ -18,14 +24,20 @@
         has_text:
           text: "Seqs. class."
     bracken_report_tsv:
-      asserts:
-        has_text:
-          text: "Staphylococcus aureus"
+      element_tests:
+        DRR187559_after_fastp:
+          asserts:
+            has_text:
+              text: "Staphylococcus aureus"
     kraken_report_tabular:
-      asserts:
-        has_text:
-          text: "Staphylococcus aureus"
+      element_tests:
+        DRR187559_after_fastp:
+          asserts:
+            has_text:
+              text: "Staphylococcus aureus"
     kraken_report_reads:
-      asserts:
-        has_text:
-          text: "DRR187559.1"
+      element_tests:
+        DRR187559_after_fastp:
+          asserts:
+            has_text:
+              text: "DRR187559.1"

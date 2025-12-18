@@ -3,27 +3,29 @@ layout: tutorial_hands_on
 redirect_from:
   - /topics/instructors/tutorials/running-workshop/tutorial
 
-title: Running a workshop as instructor
+title: Running a workshop as an instructor
 subtopic: prepare
 questions:
 objectives:
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Organising a workshop includes a range of different tasks
+- This tutorial (and adding to it) can help you to run a workshop more smoothly
 contributions:
   authorship:
   - bebatut
   - bgruening
   - shiltemann
   - hexylena
+  reviewing:
+  - Sch-Da
   funding:
   - elixir-europe
   - deNBI
   - uni-freiburg
 ---
 
-In this tutorial you'll learn how to run a workshop as a Galaxy Instructor
+In this tutorial, you'll learn how to run a workshop as a Galaxy Instructor
 
 
 > <agenda-title></agenda-title>
@@ -49,7 +51,7 @@ In this tutorial you'll learn how to run a workshop as a Galaxy Instructor
    - Step by step
 
       - Pro: everyone is on the same step, helpers can see similar errors at similar times that they can point out to the group at once
-      - Con: Some trainees will be faster, and some will be slower. If you wait for everyone it may cause you to go at a slower pace than expected, depending on their skill levels
+      - Con: Some trainees will be faster, and some will be slower. If you wait for everyone, it may cause you to go at a slower pace than expected, depending on their skill levels
 
    - At their own pace:
 
@@ -63,7 +65,7 @@ In this tutorial you'll learn how to run a workshop as a Galaxy Instructor
 ### Students asking extremely specific questions
 
 Occasionally students will either want to show off their knowledge on specific topics, or will just want special attention with their particular research question.
-If you can answer the question briefly then this can be good. Otherwise just ask them to bring it up with you during the next break.
+If you can answer the question briefly then this can be good. Otherwise, just ask them to bring it up with you during the next break.
 
 ### Interruptions
 
@@ -85,12 +87,12 @@ Not everyone is always outwardly enthusiastic about the course for any number of
 
 ## Before the workshop
 
-1. Read the [teaching recommendations](https://carpentries.github.io/instructor-training/24-practices/) of Software Carpentry
+1. Read the [teaching recommendations](https://carpentries.github.io/instructor-training/11-practice-teaching.html) of Software Carpentry
 2. Read the [organiser recommendations]({% link  topics/teaching/tutorials/organize-workshop/tutorial.md %}) and see if there is anything you can help with
 2. Decide on the order of the lessons and who will teach what with the organizers
 3. Assist the host in recruiting helpers (people to walk around the classroom and help people if they get stuck)
 4. Assist the host in ensuring the workshop location is accessible and everything is ready for the students
-5. Share emergency contact information with host in case of last minute changes
+5. Share emergency contact information with the host in case of last-minute changes
 6. Practice teaching the material
 7. Remind the host of any special equipment you might need (e.g. Mac connector)
 8. Confirm criteria for reimbursement (per diem or save receipts)
@@ -127,6 +129,7 @@ Not everyone is always outwardly enthusiastic about the course for any number of
 
     - Set up the computer and go to the back of the room. Is the font used in your slides big enough? Is the font for showing the training materials?
     - If your room has a mic, use it, and have a helper stand in the back of the room to confirm that you can be heard
+    - If the participants are new to the environment, consider hanging up guiding signs to help them find the room.
 
 ## During the workshop
 
@@ -134,7 +137,7 @@ Not everyone is always outwardly enthusiastic about the course for any number of
 2. Support host in collecting attendee names and emails
 3. Remind learners to use sticky notes to give feedback
 
-   Ask "Who is not yet finished?" and remind them to place the post-it notes so you can see quickly whether or not you can continue (assuming you have chosen step-by-step instructionm). If you are using the at-your-own-pace instruction, you can ask them to place postit notes if they have questions (better than their arms getting tired.)
+   Ask "Who is not yet finished?" and remind them to place the post-it notes so you can see quickly whether or not you can continue (assuming you have chosen step-by-step instructions). If you are using the at-your-own-pace instruction, you can ask them to place postit notes if they have questions (better than their arms getting tired.)
 
 4. Make regular breaks (every 1-2 hours for 15-30 minutes)
 5. Engage and interact with the participants
@@ -157,16 +160,18 @@ Not everyone is always outwardly enthusiastic about the course for any number of
 
    Explain and re-explain file formats and group them for their uses (e.g. SAM/BAM/CRAM are sequence alignment formats, fasta is for genomic sequences, FastQ variants all store sequencing reads)
 
-8. Draw the workflow, maybe interactively ask students to remind you of next steps
-9. Do recap at the end of each day about what happened during the day
-10. Do recap each morning about what happened yesterday
+8. Draw the workflow, maybe interactively ask students to remind you of the next steps
+9. Do a recap at the end of each day about what happened during the day
+10. Do a recap each morning about what happened yesterday
 11. Provide the students with a recap of the formats and workflows as a take-home
 
 ## After the workshop
 
 1. Submit receipts for reimbursement
-2. Report any training errors or suggest improvements on github, gitter or by email to the GTN
+2. Report any training errors or suggest improvements on GitHub, Matrix or by email to the GTN
 3. Update this document with anything that you did that wasn't listed.
 
 # Conclusion
+
+Workshop organization encompasses a range of different aspects to consider. This tutorial can help you keep track of the different tasks. Please add any missing points to continue improving this tutorial.
 

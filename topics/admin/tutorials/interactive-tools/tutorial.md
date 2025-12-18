@@ -256,18 +256,19 @@ The GxIT Proxy is written in [Node.js][nodejs]. A straightforward method to set 
 >      galaxy:
 >        # ... other settings ... #
 >        # Interactive Tools
->        interactivetools_enable: "{{ galaxy_config.gravity.gx_it_proxy.enable }}"
->        interactivetools_map: "{{ galaxy_config.gravity.gx_it_proxy.sessions }}"
+>        interactivetools_enable: true
+>        interactivetools_map: "{{ gxit_proxy_sessions_path }}"
 >        # ... other settings ... #
 >      gravity:
 >        # ... other settings ... #
 >        gx_it_proxy:
 >          enable: true
 >          port: 4002
->          sessions: "{{ galaxy_mutable_data_dir }}/interactivetools_map.sqlite"
+>          sessions: "{{ gxit_proxy_sessions_path }}"
 >        # ... other settings ... #
 >      # ... other settings ... # 
 >    # ... other settings ... #
+>    gxit_proxy_sessions_path: "{{ galaxy_mutable_data_dir }}/interactivetools_map.sqlite"
 >    ```
 >    {% endraw %}
 >
@@ -1018,7 +1019,7 @@ The next step is configuring Galaxy and the Interactive Tool Proxy to use the ne
 >    galaxy_config:
 >      galaxy:
 >        # ... existing configuration options in the `galaxy` section ...
->        # interactivetools_map: "{{  galaxy_config.gravity.gx_it_proxy.sessions }}"  # comment, remove or leave this line in place (it will be overridden by the option below)
+>        # interactivetools_map: "{{  gxit_proxy_sessions_path }}"  # comment, remove or leave this line in place (it will be overridden by the option below)
 >        interactivetoolsproxy_map: "{{ gxit_proxy_sessions_path }}"
 >        # ... other existing configuration options in the `galaxy` section ...
 >

@@ -26,8 +26,12 @@ contributions:
   - paulzierep
   editing:
   - Tarnima-Omara
+  - tflowers15
   funding:
   - gallantries
+  - unimelb
+  - melbournebioinformatics
+  - AustralianBioCommons
 answer_histories:
 - label: GTA2025
   history: https://usegalaxy.eu/u/tarnima/h/taxonomic-profiling-and-visualization-of-metagenomic-data-answer-key-history
@@ -204,7 +208,7 @@ For this tutorial, we will use the PlusPF database which contains the Standard (
 > <hands-on-title>Assign taxonomic labels with Kraken2</hands-on-title>
 >
 > 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.3+galaxy1) %} with the following parameters:
->    - *"Single or paired reads"*: `Paired Collection`
+>    - *"Single or paired reads"*: `Paired`
 >      - {% icon param-collection %} *"Collection of paired reads"*: Input paired collection
 >    - *"Confidence"*: `0.1`
 >
@@ -322,7 +326,7 @@ A "simple and worthwile addition to Kraken for better abundance estimates" ({% c
 
 > <hands-on-title>Estimate species abundance with Bracken</hands-on-title>
 >
-> 1. {% tool [Estimate Abundance at Taxonomic Level](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/3.1+galaxy0) %} with the following parameters:
+> 1. {% tool [Braken](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/3.1+galaxy0) %} with the following parameters:
 >     - {% icon param-collection %} *"Kraken report file"*: **Report** output of **Kraken**
 >     - *"Select a kmer distribution"*: `PlusPF`, same as for Kraken
 >

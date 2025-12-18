@@ -128,7 +128,30 @@ Next we will retrieve the remaining datasets.
 >       - Click `Add Definition` button and select `URL`: column `B`
 >    - Click `Apply` and press <kbd>Upload</kbd>
 >
->
+> > <warning-title>Inconsistancies between reference and annotations</warning-title>
+> > 1. Make sure that the chromosome IDs in the reference genome FASTA file and the GTF annotation file are consistent. If they are not, you may need to modify one of them to ensure they match. For example, if the FASTA file uses `chr1` and the GTF file uses `1`, you may need to edit the GTF file to add the `chr` prefix to the chromosome IDs or vice versa.
+> >
+> > 2. In later steps, **IsoformSwitchAnalyzeR** has strict checks on the transcript ids. Make sure that the transcript IDs in the GTF file do not contain any dots or underscores. If they do, you may need to edit the GTF file to remove these characters from the transcript IDs. 
+> >
+> > 3. **IsoformSwitchAnalyzeR** incorporates `transcript_version` and `gene_version` attributes from the GTF file into transcript and gene ids respectively. If you have a transcript with id `ENST00000335137` along with `transcript_version "2";` attribute, the **IsoformSwitchAnalyzeR** internally will create a transcript id `ENST00000335137.2`. It is recommended to remove these attributes from the GTF file to avoid tool errors.
+> >
+> > > <hands-on-title>Remove version attributes from GTF file</hands-on-title>
+> > > 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3) %} with the following parameters:
+> > >   - {% icon param-file %} *"Select lines from "*: `your.gtf`
+> > >   - In *"Check"*:
+> > >       - {% icon param-repeat %} *"Insert Check"*
+> > >           - *"Find Regex"*: `\.([0-9]+)(?=[\";\s])` (if your transcript IDs contain dots with version numbers after them)
+> > >           - *"Replacement"*: leave blank
+> > >       - {% icon param-repeat %} *"Insert Check"*
+> > >           - *"Find Regex"*: `\stranscript_version "[^"]*";`
+> > >           - *"Replacement"*: leave blank
+> > >       - {% icon param-repeat %} *"Insert Check"*
+> > >           - *"Find Regex"*: `\sgene_version "[^"]*";`
+> > >           - *"Replacement"*: leave blank
+> > >
+> > {: .hands_on}
+> >
+> {: .warning}
 {: .hands_on}
 
 <!--

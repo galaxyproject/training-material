@@ -29,12 +29,14 @@ key_points:
 - Install Libraries with pip or Conda
 - Use get() to import datasets from your history to the notebook
 - Use put() to export datasets from the notebook to your history
-- Save your notebook into your history
+- Save your notebook in your history
 contributions:
   authorship:
   - delphine-l
   editing:
   - teresa-m
+  reviewing:
+  - Sch-Da
   testing:
   - lisanna
   funding:
@@ -70,7 +72,7 @@ In this tutorial, we are going to explore the basics of using JupyterLab in Gala
 {: .agenda}
 
 
-# What is Jupyter ?
+# What is Jupyter?
 
 [Jupyter](http://jupyter.org/) is an interactive environment that mixes explanatory text, command line and output display for an interactive analysis environment. Its implementation in Galaxy facilitates the performance of additional analyses if there are no tools for it.
 
@@ -83,8 +85,8 @@ You can find the complete manual for Jupyter commands [on Read the Docs](http://
 # Use Jupyter notebook in Galaxy
 
 ## Import data
-To manipulate data, we first upload the [python-novice-gapminder-data.zip](https://swcarpentry.github.io/python-novice-gapminder/files/python-novice-gapminder-data.zip) folder into your Galaxy history. To add the files you can either upload them locally from your computer or use Zenodo.
-To add the files you can either uploade them locally from your computer or use Zenodo.
+To manipulate data, we first upload the [python-novice-gapminder-data.zip](https://swcarpentry.github.io/python-novice-gapminder/files/python-novice-gapminder-data.zip) folder into your Galaxy history. To add the files, you can either upload them locally from your computer or use Zenodo.
+To add the files, you can either upload them locally from your computer or use Zenodo.
 
 > <hands-on-title>Data upload using Zenodo</hands-on-title>
 >
@@ -124,7 +126,7 @@ You should now be looking at a page with the JupyterLab interface:
 
 ![Jupyterlab default session](../../images/jupyterlab_default_session.png)
 
-As shown on the figure above, JupyterLab interface is made of 3 main areas:
+As shown in the figure above, JupyterLab interface is made of 3 main areas:
 - The menu bar at the top
 - The left side bar with, in particular, the **File Browser**
 - The main work area in the central panel
@@ -138,11 +140,11 @@ Now that we are ready to start exploring JupyterLab, let's open a python Noteboo
 > 
 > 1. Open a new Jupyter notebook 
 > 
->    There is more than one option to open a jupyter notebook. One option is:   
+>    There is more than one option to open a Jupyter notebook. One option is:   
 >  
 >    - Click on **File** in the top menu bar
 >    - Select **New** -> **Notebook**
->    - Choose the kernel `Python 3 (ipykernel)]` from the dropdown menu and click **select**
+>    - Choose the kernel `Python 3 (ipykernel)` from the dropdown menu and click **select**
 >
 > 2. Change the kernel (only if you run `JupyterLab` with Galaxy Version 1.0.1)
 >
@@ -174,7 +176,7 @@ Some dependencies or programming libraries may not be available in the kernel yo
 >!conda install -y pandas
 >!conda install -y seaborn
 >    ```
->   - The `!` indicate you are typing a bash command line (alternatively you can add the line `%%bash` at the beginning of your cell. In that case the whole cell will be run as bash commands.)
+> - The `!` indicates you are typing a bash command line (alternatively, you can add the line `%%bash` at the beginning of your cell. In that case, the whole cell will be run as bash commands.)
 >   - The `-y` option allows the installation without asking for confirmation  (The confirmation is not managed well by notebooks)
 > 3. `shift`+`return` to run the cell or click on the run cell button.
 >
@@ -184,7 +186,7 @@ If you wish to follow the Software Carpentries training [Plotting and Programmin
 
 > <hands-on-title>Install Python libraries for a Python introduction</hands-on-title>
 >
-> 1.  Copy the following install commands and paste them into a empty cell of your Notebook
+> 1.  Copy the following install commands and paste them into an empty cell of your Notebook
 >    ```text
 >!conda install -y math
 >!conda install -y matplotlib
@@ -196,7 +198,7 @@ If you wish to follow the Software Carpentries training [Plotting and Programmin
 >
 {: .hands_on}
 
-Now you will be able to import this Python libraries and use them with your library code. 
+Now you will be able to import these Python libraries and use them with your library code. 
 
 > <hands-on-title>Import Python libraries</hands-on-title>
 >
@@ -249,7 +251,7 @@ If you wish to follow the python training later you should import all of the gap
 >gapminder_gdp_oceania_import = get("[file_number]")
 >    ```
 >    - The files are referenced in Jupyter by their number in the history.
->    - The variable `file_import` now stores the location where you file can be imported from
+>    - The variable `file_import` now stores the location where your file can be imported from
 >
 {: .hands_on}
 
@@ -257,7 +259,7 @@ If you wish to follow the python training later you should import all of the gap
 
 ## Graph Display in Jupyter
 
-In this tutorial we are going to plot a distribution graph of our data. For this, we will first need to load one of our tabular data files. You can use the `gapminder_all.csv` file.
+In this tutorial, we are going to plot a distribution graph of our data. For this, we will first need to load one of our tabular data files. You can use the `gapminder_all.csv` file.
 
 > <hands-on-title>Load a file from your history</hands-on-title>
 >
@@ -292,13 +294,13 @@ In this tutorial we are going to plot a distribution graph of our data. For this
 
 If you want to save a file you generated in your notebook, use the `put("file_name")` command. That is what we are going to do with our distribution plot.
 
-> <hands-on-title>Save an Jupyter-generated image into a Galaxy History</hands-on-title>
+> <hands-on-title>Save a Jupyter-generated image into a Galaxy History</hands-on-title>
 >
 > 1. Create an image file with the figure you just drew with the command
 >    ```python
 >fig.savefig('distplot.png')
 >    ```
-> 2. Export your image into your history with the command  
+> 2. Export your image to your history with the command  
 >    ```python
 >put('distplot.png')
 >    ``` 
@@ -308,13 +310,13 @@ If you want to save a file you generated in your notebook, use the `put("file_na
 
 ## Save the Notebook in your history
 
-Once you are done with your analysis or anytime during the editing process, you can save the notebook into your history using the `put("first_galaxy_notebook.ipynb")`. If you create additional notebooks with different names, make sure you save them all before you quit JupyterLab.
+Once you are done with your analysis or anytime during the editing process, you can save the notebook to your history using the `put("first_galaxy_notebook.ipynb")`. If you create additional notebooks with different names, make sure you save them all before you quit JupyterLab.
 
 This will create a new notebook `.ipynb` file in your history every time you click on this icon.
 
 > <hands-on-title>Closing JupyterLab</hands-on-title>
 >
-> 1. In the Galaxy interface click on  **Interactive Tools** button on the left side.
+> 1. In the Galaxy interface, click on  **Interactive Tools** button on the left side.
 >
 > 2. Tick {% icon galaxy-selector %} the box of your Jupyter Interactive Tool, and click **Stop**.
 >
@@ -326,6 +328,6 @@ If you want to reopen a Jupyter Notebook saved in your history, you can use the 
 # Conclusion
 
 
-{% icon trophy %} You have just performed your first analysis in Jupyter notebook integrated environment in Galaxy. You generated an distribution plot that you saved in your history along with the notebook to generate it.
-If you wish to follow the Software Carpentries training [Plotting and Programming in Python](https://swcarpentry.github.io/python-novice-gapminder/instructor/index.html) training now, you can open a Jupyter notebook install all needed dependencies and upload all file locations from the Gapminder dataset using the `get('file_number')` function (e.g. `gapminder_all_file = get(12)`). You can use this file location now throughout the tutorial once you need to specify the file path. Meaning, if the tutorial ask you to load a dataset like this `data_oceania = pd.read_csv('data/gapminder_gdp_oceania.csv')`you can replace the path `'data/gapminder_gdp_oceania.csv'`with our file_import variable: `data_oceania = pd.read_csv(gapminder_gdp_oceania_import)`.
+{% icon trophy %} You have just performed your first analysis in a Jupyter notebook integrated environment in Galaxy. You generated a distribution plot that you saved in your history along with the notebook to generate it.
+If you wish to follow the Software Carpentries training [Plotting and Programming in Python](https://swcarpentry.github.io/python-novice-gapminder/instructor/index.html) training now, you can open a Jupyter notebook install all needed dependencies and upload all file locations from the Gapminder dataset using the `get('file_number')` function (e.g. `gapminder_all_file = get(12)`). You can use this file location now throughout the tutorial once you need to specify the file path. Meaning, if the tutorial asks you to load a dataset like this `data_oceania = pd.read_csv('data/gapminder_gdp_oceania.csv')` you can replace the path `'data/gapminder_gdp_oceania.csv'` with our file_import variable: `data_oceania = pd.read_csv(gapminder_gdp_oceania_import)`.
 You can start directly from [**The-jupyterlab-interface**](https://swcarpentry.github.io/python-novice-gapminder/instructor/01-run-quit.html#the-jupyterlab-interface) section of the tutorial. 

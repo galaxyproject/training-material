@@ -23,14 +23,6 @@ key_points:
     - ChIP-seq data requires multiple methods of quality assessment to ensure that the data is of high quality.
     - Multiple normalization methods exists depending on the availability of input data.
     - Heatmaps containing all genes of an organism can be easily plotted given a BED file and a coverage file.
-contributors:
-    - friedue
-    - erxleben
-    - bebatut
-    - vivekbhr
-    - fidelram
-    - LeilyR
-    - pavanvidem
 contributions:
     authorship:
         - friedue
@@ -42,10 +34,14 @@ contributions:
         - pavanvidem
     editing:
         - hexylena
+        - tflowers15
     funding:
         - elixir-europe
         - deNBI
         - uni-freiburg
+        - unimelb
+        - melbournebioinformatics
+        - AustralianBioCommons
 ---
 
 
@@ -123,13 +119,15 @@ To save time, we will do it only on the data of one sample `wt_H3K4me3_rep1` whi
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
->    As default, Galaxy takes the link as name, so rename them.
+> 3. Add a tag called `#wt_H3K4me3_read1` to the read1 file and a tag called `#wt_H3K4me3_read2` to the read2 file.
 >
-> 4. Rename the files `wt_H3K4me3_read1` and `wt_H3K4me3_read2`
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
->    {% snippet faqs/galaxy/datasets_rename.md %}
+> 4. Inspect the first file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
 >
-> 3. Inspect the first file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
+> 5. Create a paired collection named `Paired Reads`
+>
+>    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
 {: .hands_on}
 
@@ -141,12 +139,15 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 > <hands-on-title>Quality control</hands-on-title>
 > 
-> 1. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->    - {% icon param-files %} *"Short read data from your current history"*: `wt_H3K4me3_read1` and `wt_H3K4me3_read2` (Input datasets selected with **Multiple datasets**)
+> 1. Run {% tool [Flatten collection](__FLATTEN__) %} with the following parameters:
+>    - *"Input collection"*: `Paired Reads`
+>   
+> 2. Rename the flatten collection: `Flat Collection`
+>   
+> 3. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1) %} with the following parameters:
+>    - {% icon param-collection %} *"Raw read data from your current history"*: `Flat Collection` (Flattened paired end read dataset collection)
 >
->    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
->
-> 2. Inspect the generated HTML files
+> 4. Inspect the generated HTML files
 >
 >    > <question-title></question-title>
 >    >
@@ -181,7 +182,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    > >
 >    > >        ![Adapter Content for read1](../../images/formation_of_super-structures_on_xi/read1_adapter_content.png "Adapter Content")
 >    > >
->    > > 2. The reads in `wt_H3K4me3_read2` are a bit worse:
+>    > > 2. The reads in `wt_H3K4me3_reverse` are a bit worse:
 >    > >
 >    > >     - The "Per base sequence quality" is decreasing more at the end of the sequences, but it stays correct
 >    > >
@@ -208,11 +209,8 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 > <hands-on-title>Trimming low quality bases</hands-on-title>
 >
 > 1. Run {% tool [Trim Galore!](toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.7+galaxy0) %} with the following parameters:
->    - *"Is this library paired- or single-end?"*: `Paired-end`
->       - {% icon param-file %} *"Reads in FASTQ format"*: `wt_H3K4me3_read1` (Input dataset)
->       - {% icon param-file %} *"Reads in FASTQ format"*: `wt_H3K4me3_read2` (Input dataset)
->
->       The order is important here!
+>    - *"Is this library paired- or single-end?"*: `Paired Collection`
+>       - {% icon param-collection %} *"Select a paired collection"*: `Paired Reads` (Input collection)
 >
 >       > <tip-title>Not selectable files?</tip-title>
 >       >
@@ -224,7 +222,9 @@ It is often necessary to trim sequenced read, for example, to get rid of bases t
 >       - *"Overlap with adapter sequence required to trim a sequence"*: `3`
 >       - *"Generate a report file"*: `Yes`
 >
-> 2. Inspect the generated txt file (`report file`)
+> 2. Rename the Trim Galore! output `reads` collection: `Trimmed Reads`
+>
+> 3. Inspect the generated txt file (`report file`)
 >
 >    > <question-title></question-title>
 >    >
@@ -255,10 +255,9 @@ With ChiP sequencing, we obtain sequences corresponding to a portion of DNA link
 
 > <hands-on-title>Mapping</hands-on-title>
 >
-> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.4+galaxy0) %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end`
->        - {% icon param-file %} *"FASTA/Q file #1"*: `trimmed reads pair 1` (output of **Trim Galore!** {% icon tool %})
->        - {% icon param-file %} *"FASTA/Q file #2"*: `trimmed reads pair 2` (output of **Trim Galore!** {% icon tool %})
+>        - {% icon param-collection %} *"FASTQ Paired Dataset"*: `Trimmed Reads`
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
 >        - *"Select reference genome"*: `Mouse (Mus musculus): mm10`
 >    - *"Save the bowtie2 mapping statistics to the history"*: `Yes`

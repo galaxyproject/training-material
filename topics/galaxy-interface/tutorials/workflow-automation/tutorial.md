@@ -284,6 +284,9 @@ Now we have a simple workflow, we can run it using `planemo run`. At this point 
 > 9. Select the desired outputs:
 >    - In **fastp**, tick **out1 (input)**
 >    - In **MultiQC**, tick **html_report (html)**
+> 10. Rename the desired outputs:
+>    - In **fastp**, right panel, scroll down -> Configure Output: 'out1' -> **Rename dataset**: `#{in1 | basename}_cleaned`
+>    - In **MultiQC**, right panel, scroll down -> Configure Output: 'html_report' -> **Rename dataset**: `multiqc_report`
 >
 > ![This image show a preview of our workflow with tools as box and noodle as connectors).](./images/Workflow-Fastq_cleaning_and_check.png "Preview of our workflow")
 {: .hands_on}

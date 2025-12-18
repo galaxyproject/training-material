@@ -3,7 +3,7 @@ title: Creating a paired collection
 area: collections
 box_type: tip
 layout: faq
-contributors: [shiltemann, hexylena,lldelisle, pavanvidem]
+contributors: [shiltemann, hexylena,lldelisle, pavanvidem, tflowers15]
 ---
 
 
@@ -13,7 +13,7 @@ contributors: [shiltemann, hexylena,lldelisle, pavanvidem]
 
   ![build paired collection menu item]({% link topics/galaxy-interface/images/buildList.png %}){:width="15%"}
 
-* You are in collection building wizard. Choose **Flat List** and click 'Next' button at the right bottom corner.
+* You are in the collection building wizard. Choose **List of Paired Datasets** and click 'Next' button at the right bottom corner.
 
   ![collection building wizard paired list]({% link topics/galaxy-interface/images/paired_list_selector.png %}){:width="15%"}
 
