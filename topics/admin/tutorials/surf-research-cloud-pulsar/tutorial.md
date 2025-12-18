@@ -65,26 +65,15 @@ Accessing a GPU from a local (in UMC/hospital Galaxy)
 :  If you do not have a GPU easily available within your institute, it may be attractive to send jobs securely to SRC, by launching a Pulsar node in SRC and attaching it to your institute's Galaxy instance.
 
 
+This tutorial is split into two parts. In the first part, we assume you do not have a running Galaxy on SRC, whereas in the second one, we walk you through how to connect Pulsar to an already existing Galaxy instance. In both usecases please follow "Launching Pulsar in SRC". No matter if you have a running Galaxy or not, you need to start by creating a Pulsar instance on SRC. 
+
 > <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
-
-# Prerequisites
-
-The instance provides secure authentication, where users must have a SURF Research account prior to this tutorial, have set the {SRAM} authentication method, and connect an SSH key to their accounts. In case you are not familiar with {SRC} and need help in setting up your accounts, please follow the instructions on the [SURF Knowledge Base](https://servicedesk.surf.nl/wiki/display/WIKI/SURF+Research+Cloud)
-
-Inside the SRC members should have access to all publicly available catalog items. If you are not able to create a catalog item, please [contact SURF servicedesk](mailto:servicedesk@surf.nl).
-
-This tutorial assumes you are member of a {CO} in {SRAM} that has access to {SRC} and a wallet with budget in SRC with enough sources to create Galaxy and Pulsar catalog items. (For more information please refer to the [SURF Knowledge Base](https://servicedesk.surf.nl/wiki/display/WIKI/Budgets%2C+wallets%2C+contracts).
-
-You should have previous experience working with data inside Galaxy.
-
-> <tip-title>SSH Access Required</tip-title>
-> SSH access is required to reconfigure your Galaxy instance. Please make sure you set an SSH key in your SRAM account if you are planning to use Galaxy in SRC for this tutorial.
-{: .tip}
+# Launching Pulsar in SRC
 
 > <hands-on-title>Log In to SRC</hands-on-title>
 > 1. Log in to [SURF Research Cloud](https://portal.live.surfresearchcloud.nl/)
@@ -92,8 +81,7 @@ You should have previous experience working with data inside Galaxy.
 >    ![screenshot of SRC login portal with a bright yellow login button](images/surf1.png)
 {: .hands_on}
 
-# Launching Pulsar in SRC
-
+Once in, you can proceed with launching a Pulsar instance.
 > <hands-on-title>Launching Pulsar</hands-on-title>
 > 1. In the **Workspaces Tab** on the bottom half of the screen, you'll find a **Plus Button** at right to add a new workspace
 >
@@ -116,8 +104,8 @@ You should have previous experience working with data inside Galaxy.
 > 6. Pick a name, it can be anything, it does not matter. Check the expiration date to ensure it is just enough time for your computation and no more.
 >
 >    > <tip-title>Expiration Date</tip-title>
->    > The standard life-time of the VM is 5 days. If you need it for longer, this option can be changed once the machine is running.
->    > Note, that once the machine is expired and deleted it cannot be restored! Plan accordingly and migrate your data in time to prevent data loss!
+>    > The standard lifetime of the VM is 5 days. If you need it for longer, this option can be by clicking on the calendar option. You can always extend the lifetime, even once the machine is running. 
+>    > Note that once the machine expires and is deleted, it cannot be restored! Plan accordingly and migrate your data in time to prevent data loss!
 >    >
 >    > This is an incredibly useful feature as it saves you from forgetting to destroy a VM. Especially for GPU nodes it can help you ensure that they disappear after your computation is complete.
 >    {:.tip}
@@ -130,9 +118,11 @@ You should have previous experience working with data inside Galaxy.
 
 Once done, the workspace will be created for you. You'll need to wait ~5 minutes usually. Go for a beverage ☕️
 
-![workspace list showing a workspace named pulsar being created.](images/surf7.png)
 
-## Using Pulsar on SRC
+# Interactively connecting Pulsar to a new Galaxy instance in SRC
+
+Now that the Pulsar instance has been created, you need to access it. 
+
 
 > <hands-on-title>Access the Information Page</hands-on-title>
 >
@@ -140,12 +130,66 @@ Once done, the workspace will be created for you. You'll need to wait ~5 minutes
 >
 >    ![A small plus button is hovered over which says Add. Below galaxy-test is shown running with a yellow Access button](images/surf3.png)
 >
-> 2. Click that will show you a Pulsar information page. This page is running on your pulsar node itself, and is restricted to ensure only authorised members can access the contents. It includes some configuration you will need to copy to your Galaxy node in order to make use of the Pulsar node.
+> 2. Click that will show you a Pulsar information page. This page is running on your pulsar node itself, and is restricted to ensure only authorised members can access the contents. It includes some configuration you will need to copy when you start creating your Galaxy workspace. 
 >
->    ![pulsar configuration information page showing an about with admins and metadata like workspace fqdn. Configuration for galaxy is shown below including XML changes](images/surf8.png)
+>    ![pulsar configuration information page showing an about with admins and metadata like workspace fqdn. Configuration for galaxy is provided as copy links](images/pulsar.png)
+> 
 {: .hands_on}
 
-This information page should have more than enough information to connect this Pulsar instance to your Galaxy server. You will need to reference information from this page in the following steps:
+Now that you have a running Pulsar, you can start by creating Galaxy. If you are unsure how to do that, you can follow the tutorial [Galaxy usage on SURF Research Cloud](https://training.galaxyproject.org/training-material/topics/admin/tutorials/surf-research-cloud-galaxy/tutorial.html).
+
+> <warning-title> Do not submit your Galaxy into creation yet! </warning-title>
+> At the final stage of the tutorial, you will see how to start the Galaxy.
+> Do not execute it just yet! We still need to add the Pulsar specifications! 
+{: .warning}
+
+## Connect Pulsar to a new Galaxy
+> <hands-on-title>Connect Pulsar to new Galaxy</hands-on-title>
+> 1. Go to the final step of creating a Galaxy instance
+>Similarly to the Pulsar creation, you will find at the very last step when creating a Galaxy instance the SRC wizard. At the very
+> top you will see the name and the hostname of the Galaxy.
+>    ![screenshot of the galaxy src wizard](images/wizard_src.png)
+>  When you scroll down, you will see the workspace parameters section. There, we have two Pulsar configuration sections.
+>    ![screenshot of the second part of the galaxy src wizard](images/wizard_2.png)
+> 2. Go back to the Pulsar machine. You will see two fields that can be copied. Go ahead, copy and paste them under "Connect
+> existing Pulsar" and "Send tools to Pulsar". 
+> 3. Add the specific tool names in the "Send tools to Pulsar" section.
+> Right now, you will automatically redirect 'bwa' to Pulsar. If you want to redirect another tool to Pulsar, you need to do that by replacing 'bwa' with your desired tool. 
+>  4. Go ahead and submit Galaxy.
+> 
+{: .hands_on}
+Creating Galaxy might take between 5 and 20 minutes. Wait until the machine is initialised. 
+
+## Check if Pulsar is successfully connected to Galaxy
+> <hands-on-title>Sanity check for connectivity</hands-on-title>
+> 1. Once Galaxy has started, access the workspace via the Access button. You will be redirected to a new page, where you will see  your Galaxy instance.
+>    ![login page of galaxy inside src](images/galaxy_src.png)
+>  2. Go ahead and upload a pseudo FASTA file. Then proceed with running BWA. Once the tool is finished, check the information by clicking on the "i" icon.  
+>    ![screenshot of the bwa with specifics showing it ran on the pulsar we connected to](images/galaxy_pulsar_src.png)
+>  At the bottom of the page, under "Destination Parameters", we can find information about the runner, and at the very end the URL of the runner. 
+{: .hands_on}
+
+Congratulations! You have interactively connected Pulsar to Galaxy in SRC! 🏄‍♀️
+
+# Connecting Pulsar to existing Galaxy
+
+## Prerequisites
+
+The instance provides secure authentication, where users must have a SURF Research account prior to this tutorial, have set the {SRAM} authentication method, and connect an SSH key to their accounts. In case you are not familiar with {SRC} and need help in setting up your accounts, please follow the instructions on the [SURF Knowledge Base](https://servicedesk.surf.nl/wiki/display/WIKI/SURF+Research+Cloud)
+
+Inside the SRC members should have access to all publicly available catalog items. If you are not able to create a catalog item, please [contact SURF servicedesk](mailto:servicedesk@surf.nl).
+
+This tutorial assumes you are member of a {CO} in {SRAM} that has access to {SRC} and a wallet with budget in SRC with enough sources to create Galaxy and Pulsar catalog items. (For more information please refer to the [SURF Knowledge Base](https://servicedesk.surf.nl/wiki/display/WIKI/Budgets%2C+wallets%2C+contracts)).
+
+You should have previous experience working with data inside Galaxy.
+
+> <tip-title>SSH Access Required</tip-title>
+> SSH access is required to reconfigure your Galaxy instance. Please make sure you set an SSH key in your SRAM account if you are planning to use Galaxy in SRC for this tutorial.
+{: .tip}
+
+
+## Configuring a running Galaxy
+When you start a Pulsar, as in the above example, you will land on a new page containing all sorts of Pulsar configuration information. Make sure you have a running Galaxy instance! You will need to reference information from this page in the following steps:
 
 > <hands-on-title>Configuring Galaxy to use SRC Pulsar</hands-on-title>
 > 1. Collect the requirements for accessing the Galaxy machine. You will need:
