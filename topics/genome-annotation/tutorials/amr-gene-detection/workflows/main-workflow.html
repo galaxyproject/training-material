@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@cf2ac62dfc5a892d587add9b01305a19ae3529c1",
+		release: "galaxy-training-network@927344844aa6cc7801e87dfd13a648af6cc4bbd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -238,7 +238,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			
 			Bazante Sanders, 
 			
-			Bérénice Batut
+			Bérénice Batut, 
+			
+			Tristan Reynolds
 			
 			
 			<br/>
@@ -246,14 +248,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			1
+			2
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Jan 23, 2024
+			Dec 18, 2025
 
 			<br/>
 
@@ -272,9 +274,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #9ac800; --color-darker: #89b300; --color-dimmed: #91bd00;">genome-annotation</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #a8da00; --color-darker: #95c200; --color-dimmed: #9ece00;">genome-annotation</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #c5bd00; --color-darker: #afa800; --color-dimmed: #bab300;">microgalaxy</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #d6ce00; --color-darker: #bfb700; --color-dimmed: #cbc300;">microgalaxy</div>
 			
 			</br>
 			
@@ -283,6 +285,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Features</b>
 			<ul>
 			
+			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
 			
 			
 			
@@ -339,11 +343,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Galaxy Europe</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Galaxy France</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Galaxy Australia</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Galaxy France</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-amr-gene-detection/versions/main-workflow">Galaxy Main</a></li>
 					
@@ -359,38 +363,36 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<pre class="mermaid">flowchart TD
   0["ℹ️ Input Dataset\ncontigs"];
   style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nforward_reads"];
+  1["ℹ️ Input Collection\nInput Paired End Reads Collection"];
   style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Dataset\nreverse_reads"];
-  style 2 stroke:#2c3143,stroke-width:4px;
-  3["staramr"];
+  2["staramr"];
+  0 -->|output| 2;
+  a84f1c10-0c72-423c-a85c-643c39e44dac["Output\nstararm_detailed_summary"];
+  2 --> a84f1c10-0c72-423c-a85c-643c39e44dac;
+  style a84f1c10-0c72-423c-a85c-643c39e44dac stroke:#2c3143,stroke-width:4px;
+  3["Bakta"];
   0 -->|output| 3;
-  042cc33a-5498-4758-a9d5-e0fbe9e24177["Output\nstararm_detailed_summary"];
-  3 --> 042cc33a-5498-4758-a9d5-e0fbe9e24177;
-  style 042cc33a-5498-4758-a9d5-e0fbe9e24177 stroke:#2c3143,stroke-width:4px;
-  4["Bakta"];
+  b9beba76-7b6e-42ae-a085-819f4b577100["Output\nbakta_annotation_summary"];
+  3 --> b9beba76-7b6e-42ae-a085-819f4b577100;
+  style b9beba76-7b6e-42ae-a085-819f4b577100 stroke:#2c3143,stroke-width:4px;
+  4["Bowtie2"];
+  1 -->|output| 4;
   0 -->|output| 4;
-  15a20ba1-1f60-4353-9eb4-428895ccd9b9["Output\nbakta_annotation_summary"];
-  4 --> 15a20ba1-1f60-4353-9eb4-428895ccd9b9;
-  style 15a20ba1-1f60-4353-9eb4-428895ccd9b9 stroke:#2c3143,stroke-width:4px;
-  5["Bowtie2"];
-  1 -->|output| 5;
-  2 -->|output| 5;
-  0 -->|output| 5;
-  74d2ffcb-4d49-4db9-ba09-dcd7ba70ea3f["Output\nbowtie_mapping_stats"];
-  5 --> 74d2ffcb-4d49-4db9-ba09-dcd7ba70ea3f;
-  style 74d2ffcb-4d49-4db9-ba09-dcd7ba70ea3f stroke:#2c3143,stroke-width:4px;
-  6["Select"];
-  3 -->|detailed_summary| 6;
-  7["Table to GFF3"];
-  6 -->|out_file1| 7;
-  8["JBrowse"];
-  4 -->|annotation_gff3| 8;
-  7 -->|output| 8;
-  5 -->|output| 8;
-  6efbf334-7c8c-463c-9919-43a3542ddc46["Output\njbrowse_output"];
-  8 --> 6efbf334-7c8c-463c-9919-43a3542ddc46;
-  style 6efbf334-7c8c-463c-9919-43a3542ddc46 stroke:#2c3143,stroke-width:4px;</pre>
+  b85fac67-e102-475e-95d9-35e0adecb0c9["Output\nmapping_stats"];
+  4 --> b85fac67-e102-475e-95d9-35e0adecb0c9;
+  style b85fac67-e102-475e-95d9-35e0adecb0c9 stroke:#2c3143,stroke-width:4px;
+  5["Select"];
+  2 -->|detailed_summary| 5;
+  6["Table to GFF3"];
+  5 -->|out_file1| 6;
+  7["JBrowse"];
+  0 -->|output| 7;
+  3 -->|annotation_gff3| 7;
+  6 -->|output| 7;
+  4 -->|output| 7;
+  c4e08c51-4520-483a-b48a-99adc9a5d09f["Output\njbrowse_output"];
+  7 --> c4e08c51-4520-483a-b48a-99adc9a5d09f;
+  style c4e08c51-4520-483a-b48a-99adc9a5d09f stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -402,18 +404,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
-					<td>contigs</td>
+					<td>Input dataset</td>
 					<td>contigs</td>
 				</tr>
 				
 				<tr>
-					<td>forward_reads</td>
-					<td>forward_reads</td>
-				</tr>
-				
-				<tr>
-					<td>reverse_reads</td>
-					<td>reverse_reads</td>
+					<td>Input dataset collection</td>
+					<td>Input Paired End Reads Collection</td>
 				</tr>
 				
 				</tbody>
@@ -443,7 +440,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0</td>
+					<td>toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.4+galaxy0</td>
 					<td>Bowtie2</td>
 					<td></td>
 				</tr>
@@ -476,13 +473,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0">toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.4+galaxy0">toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.4+galaxy0</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/bowtie2/03e9b2fbc005">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
@@ -558,6 +550,20 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>6</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/f52ead1fa4d239d06e53378776f7a78ee02dae8c">f52ead1fa</a></td>
+						<td>2025-12-11 23:55:30</td>
+						<td>Correct creator names</td>
+					</tr>
+					
+					<tr>
+						<td>5</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/8f5019e24f767aedb7863e58784f1f826feef711">8f5019e24</a></td>
+						<td>2025-12-10 00:31:50</td>
+						<td>Updated workflow and workflow tests</td>
+					</tr>
 					
 					<tr>
 						<td>4</td>
@@ -668,7 +674,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cf2ac62dfc5a892d587add9b01305a19ae3529c1">cf2ac62</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/927344844aa6cc7801e87dfd13a648af6cc4bbd0">9273448</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

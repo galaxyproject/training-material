@@ -2,30 +2,29 @@ digraph main {
   node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
   edge [fontname="Atkinson Hyperlegible"];
   0[color=lightblue,label="ℹ️ Input Dataset\ncontigs"]
-  1[color=lightblue,label="ℹ️ Input Dataset\nforward_reads"]
-  2[color=lightblue,label="ℹ️ Input Dataset\nreverse_reads"]
-  3[label="staramr"]
+  1[color=lightblue,label="ℹ️ Input Collection\nInput Paired End Reads Collection"]
+  2[label="staramr"]
+  0 -> 2 [label="output"]
+  ka84f1c100c72423ca85c643c39e44dac[color=lightseagreen,label="Output\nstararm_detailed_summary"]
+  2 -> ka84f1c100c72423ca85c643c39e44dac
+  3[label="Bakta"]
   0 -> 3 [label="output"]
-  k042cc33a54984758a9d5e0fbe9e24177[color=lightseagreen,label="Output\nstararm_detailed_summary"]
-  3 -> k042cc33a54984758a9d5e0fbe9e24177
-  4[label="Bakta"]
+  kb9beba767b6e42aea085819f4b577100[color=lightseagreen,label="Output\nbakta_annotation_summary"]
+  3 -> kb9beba767b6e42aea085819f4b577100
+  4[label="Bowtie2"]
+  1 -> 4 [label="output"]
   0 -> 4 [label="output"]
-  k15a20ba11f6043539eb4428895ccd9b9[color=lightseagreen,label="Output\nbakta_annotation_summary"]
-  4 -> k15a20ba11f6043539eb4428895ccd9b9
-  5[label="Bowtie2"]
-  1 -> 5 [label="output"]
-  2 -> 5 [label="output"]
-  0 -> 5 [label="output"]
-  k74d2ffcb4d494db9ba09dcd7ba70ea3f[color=lightseagreen,label="Output\nbowtie_mapping_stats"]
-  5 -> k74d2ffcb4d494db9ba09dcd7ba70ea3f
-  6[label="Select"]
-  3 -> 6 [label="detailed_summary"]
-  7[label="Table to GFF3"]
-  6 -> 7 [label="out_file1"]
-  8[label="JBrowse"]
-  4 -> 8 [label="annotation_gff3"]
-  7 -> 8 [label="output"]
-  5 -> 8 [label="output"]
-  k6efbf3347c8c463c991943a3542ddc46[color=lightseagreen,label="Output\njbrowse_output"]
-  8 -> k6efbf3347c8c463c991943a3542ddc46
+  kb85fac67e102475e95d935e0adecb0c9[color=lightseagreen,label="Output\nmapping_stats"]
+  4 -> kb85fac67e102475e95d935e0adecb0c9
+  5[label="Select"]
+  2 -> 5 [label="detailed_summary"]
+  6[label="Table to GFF3"]
+  5 -> 6 [label="out_file1"]
+  7[label="JBrowse"]
+  0 -> 7 [label="output"]
+  3 -> 7 [label="annotation_gff3"]
+  6 -> 7 [label="output"]
+  4 -> 7 [label="output"]
+  kc4e08c514520483ab48a99adc9a5d09f[color=lightseagreen,label="Output\njbrowse_output"]
+  7 -> kc4e08c514520483ab48a99adc9a5d09f
 }

@@ -1,0 +1,93 @@
+- doc: Test sample data for ChIP-seq:formation_of_super_structures_on_xi
+  job:
+    wt_input_rep1.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_input_rep1.bam
+      filetype: bam
+    wt_H3K4me3_rep1.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_H3K4me3_rep1.bam
+      filetype: bam
+    wt_CTCF_rep1.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_CTCF_rep1.bam
+      filetype: bam
+    wt_H3K27me3_rep1.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_H3K27me3_rep1.bam
+      filetype: bam
+    wt_input_rep2.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_input_rep2.bam
+      filetype: bam
+    wt_H3K4me3_rep2.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_H3K4me3_rep2.bam
+      filetype: bam
+    wt_CTCF_rep2.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_CTCF_rep2.bam
+      filetype: bam
+    wt_H3K27me3_rep2.bam:
+      class: File
+      location: https://zenodo.org/record/1324070/files/wt_H3K27me3_rep2.bam
+      filetype: bam
+    Input Paired End Reads Collection:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: wt_H3K4me3
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/record/1324070/files/wt_H3K4me3_read1.fastq.gz
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
+  outputs:
+    text_file:
+      element_tests:
+        wt_H3K4me3_forward:
+          asserts:
+            has_text:
+              text: 'https___zenodo_org_record_1324070_files_wt_H3K4me3_read1_fastq_gz'
+        wt_H3K4me3_reverse:
+          asserts:
+            has_text:
+              text: 'https___zenodo_org_record_1324070_files_wt_H3K4me3_read2_fastq_gz'
+    wt_H3K4me3_rep1_trim_galore:
+      element_tests:
+        wt_H3K4me3:
+          asserts:
+            has_text:
+              text: '1569 (3.14%)'
+    wt_H3K4me3_rep1_bowtie2:
+      asserts:
+        has_text:
+          text: '98.64% overall alignment rate'
+    wt_H3K4me3_rep1_idxstats:
+      asserts:
+        has_text:
+          text: '1204821'
+    wt_H3K4me3_rep1_bamcoverage:
+      asserts:
+        has_text:
+          text: '75.1271'
+    wt_H3K4me3_input_rep1_bamcompare:
+      asserts:
+        has_text:
+          text: '-0.710403'
+    wt_H3K4me3_input_rep1_macs2:
+      asserts:
+        has_text:
+          text: '6047717'
+    wt_H3K4me3_CTCF_rep1_mergebed:
+      asserts:
+        has_text:
+          text: '3810380'
+    wt_all_mergebed:
+      asserts:
+        has_text:
+          text: '3402493'

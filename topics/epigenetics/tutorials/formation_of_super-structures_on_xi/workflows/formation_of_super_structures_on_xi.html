@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@cf2ac62dfc5a892d587add9b01305a19ae3529c1",
+		release: "galaxy-training-network@927344844aa6cc7801e87dfd13a648af6cc4bbd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -248,7 +248,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			
 			Leily Rabbani, 
 			
-			Pavankumar Videm
+			Pavankumar Videm, 
+			
+			Tristan Reynolds
 			
 			
 			<br/>
@@ -256,14 +258,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			5
+			6
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Jul 17, 2023
+			Dec 18, 2025
 
 			<br/>
 
@@ -282,7 +284,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #89cb00; --color-darker: #7ab500; --color-dimmed: #82c000;">epigenetics</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #96de00; --color-darker: #85c500; --color-dimmed: #8dd100;">epigenetics</div>
 			
 			</br>
 			
@@ -291,6 +293,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Features</b>
 			<ul>
 			
+			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
 			
 			
 			
@@ -347,13 +351,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-formation_of_super-structures_on_xi/versions/formation-of-super-structures-on-xi">Galaxy Main</a></li>
-					
-					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-formation_of_super-structures_on_xi/versions/formation-of-super-structures-on-xi">Galaxy France</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-formation_of_super-structures_on_xi/versions/formation-of-super-structures-on-xi">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-formation_of_super-structures_on_xi/versions/formation-of-super-structures-on-xi">Galaxy Europe</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-formation_of_super-structures_on_xi/versions/formation-of-super-structures-on-xi">Galaxy France</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-formation_of_super-structures_on_xi/versions/formation-of-super-structures-on-xi">Galaxy Main</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-formation_of_super-structures_on_xi/versions/formation-of-super-structures-on-xi">Import to another server (≥23.0+ only!)</a>
@@ -365,166 +369,156 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				Download
 			</a>
 			<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nwt_H3K4me3_read2.fastq.gz"];
+  0["ℹ️ Input Collection\nInput Paired End Reads Collection"];
   style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nwt_H3K4me3_read1.fastq.gz"];
+  1["ℹ️ Input Dataset\nwt_input_rep1.bam"];
   style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Dataset\nwt_input_rep1.bam"];
+  2["ℹ️ Input Dataset\nwt_H3K4me3_rep1.bam"];
   style 2 stroke:#2c3143,stroke-width:4px;
-  3["ℹ️ Input Dataset\nwt_H3K4me3_rep1.bam"];
+  3["ℹ️ Input Dataset\nwt_CTCF_rep1.bam"];
   style 3 stroke:#2c3143,stroke-width:4px;
-  4["ℹ️ Input Dataset\nwt_CTCF_rep1.bam"];
+  4["ℹ️ Input Dataset\nwt_H3K27me3_rep1.bam"];
   style 4 stroke:#2c3143,stroke-width:4px;
-  5["ℹ️ Input Dataset\nwt_H3K27me3_rep1.bam"];
+  5["ℹ️ Input Dataset\nwt_input_rep2.bam"];
   style 5 stroke:#2c3143,stroke-width:4px;
-  6["ℹ️ Input Dataset\nwt_input_rep2.bam"];
+  6["ℹ️ Input Dataset\nwt_H3K4me3_rep2.bam"];
   style 6 stroke:#2c3143,stroke-width:4px;
-  7["ℹ️ Input Dataset\nwt_H3K4me3_rep2.bam"];
+  7["ℹ️ Input Dataset\nwt_CTCF_rep2.bam"];
   style 7 stroke:#2c3143,stroke-width:4px;
-  8["ℹ️ Input Dataset\nwt_CTCF_rep2.bam"];
+  8["ℹ️ Input Dataset\nwt_H3K27me3_rep2.bam"];
   style 8 stroke:#2c3143,stroke-width:4px;
-  9["ℹ️ Input Dataset\nwt_H3K27me3_rep2.bam"];
-  style 9 stroke:#2c3143,stroke-width:4px;
-  10["FastQC"];
-  0 -->|output| 10;
-  892e22b2-3194-4076-af80-357530c17186["Output\nwt_H3K4me3_rep1_read2_fastqc"];
-  10 --> 892e22b2-3194-4076-af80-357530c17186;
-  style 892e22b2-3194-4076-af80-357530c17186 stroke:#2c3143,stroke-width:4px;
-  11["Trim Galore!"];
-  1 -->|output| 11;
-  0 -->|output| 11;
+  9["Trim Galore!"];
+  0 -->|output| 9;
   a66a6432-690f-4e66-88c0-7eba0a014677["Output\nwt_H3K4me3_rep1_trim_galore"];
-  11 --> a66a6432-690f-4e66-88c0-7eba0a014677;
+  9 --> a66a6432-690f-4e66-88c0-7eba0a014677;
   style a66a6432-690f-4e66-88c0-7eba0a014677 stroke:#2c3143,stroke-width:4px;
-  12["FastQC"];
+  10["Flatten collection"];
+  0 -->|output| 10;
+  11["Samtools idxstats"];
+  1 -->|output| 11;
+  12["bamCoverage"];
   1 -->|output| 12;
-  da453096-fdd9-44ee-b83b-e4eca5c800f9["Output\nwt_H3K4me3_rep1_read1_fastqc"];
-  12 --> da453096-fdd9-44ee-b83b-e4eca5c800f9;
-  style da453096-fdd9-44ee-b83b-e4eca5c800f9 stroke:#2c3143,stroke-width:4px;
-  13["Samtools idxstats"];
+  13["bamCoverage"];
   2 -->|output| 13;
   14["bamCoverage"];
   2 -->|output| 14;
-  15["bamCoverage"];
-  3 -->|output| 15;
-  16["bamCoverage"];
-  3 -->|output| 16;
   73e2f018-d9e4-4f74-8110-598b9b43a940["Output\nwt_H3K4me3_rep1_bamcoverage"];
-  16 --> 73e2f018-d9e4-4f74-8110-598b9b43a940;
+  14 --> 73e2f018-d9e4-4f74-8110-598b9b43a940;
   style 73e2f018-d9e4-4f74-8110-598b9b43a940 stroke:#2c3143,stroke-width:4px;
-  17["Samtools idxstats"];
-  3 -->|output| 17;
+  15["Samtools idxstats"];
+  2 -->|output| 15;
   09449d6f-ce88-4448-9928-064c729c32d1["Output\nwt_H3K4me3_rep1_idxstats"];
-  17 --> 09449d6f-ce88-4448-9928-064c729c32d1;
+  15 --> 09449d6f-ce88-4448-9928-064c729c32d1;
   style 09449d6f-ce88-4448-9928-064c729c32d1 stroke:#2c3143,stroke-width:4px;
-  18["plotFingerprint"];
-  3 -->|output| 18;
+  16["plotFingerprint"];
+  2 -->|output| 16;
+  1 -->|output| 16;
+  17["bamCompare"];
+  2 -->|output| 17;
+  1 -->|output| 17;
+  18["MACS2 callpeak"];
+  1 -->|output| 18;
   2 -->|output| 18;
-  19["bamCompare"];
-  3 -->|output| 19;
-  2 -->|output| 19;
-  20["MACS2 callpeak"];
-  2 -->|output| 20;
-  3 -->|output| 20;
   a36b5a6c-d992-4a2d-8fd8-95e8eac74cbd["Output\nwt_H3K4me3_input_rep1_macs2"];
-  20 --> a36b5a6c-d992-4a2d-8fd8-95e8eac74cbd;
+  18 --> a36b5a6c-d992-4a2d-8fd8-95e8eac74cbd;
   style a36b5a6c-d992-4a2d-8fd8-95e8eac74cbd stroke:#2c3143,stroke-width:4px;
-  21["bamCompare"];
-  3 -->|output| 21;
-  2 -->|output| 21;
+  19["bamCompare"];
+  2 -->|output| 19;
+  1 -->|output| 19;
   5174d1aa-21f6-4187-8935-70ba8bd0f6e0["Output\nwt_H3K4me3_input_rep1_bamcompare"];
-  21 --> 5174d1aa-21f6-4187-8935-70ba8bd0f6e0;
+  19 --> 5174d1aa-21f6-4187-8935-70ba8bd0f6e0;
   style 5174d1aa-21f6-4187-8935-70ba8bd0f6e0 stroke:#2c3143,stroke-width:4px;
+  20["bamCompare"];
+  3 -->|output| 20;
+  1 -->|output| 20;
+  21["MACS2 callpeak"];
+  1 -->|output| 21;
+  3 -->|output| 21;
   22["bamCompare"];
-  4 -->|output| 22;
-  2 -->|output| 22;
-  23["MACS2 callpeak"];
-  2 -->|output| 23;
+  3 -->|output| 22;
+  1 -->|output| 22;
+  23["bamCompare"];
   4 -->|output| 23;
-  24["bamCompare"];
+  1 -->|output| 23;
+  24["MACS2 callpeak"];
+  1 -->|output| 24;
   4 -->|output| 24;
-  2 -->|output| 24;
   25["bamCompare"];
+  6 -->|output| 25;
   5 -->|output| 25;
-  2 -->|output| 25;
   26["MACS2 callpeak"];
-  2 -->|output| 26;
   5 -->|output| 26;
+  6 -->|output| 26;
   27["bamCompare"];
   7 -->|output| 27;
-  6 -->|output| 27;
+  5 -->|output| 27;
   28["MACS2 callpeak"];
-  6 -->|output| 28;
+  5 -->|output| 28;
   7 -->|output| 28;
-  29["bamCompare"];
-  8 -->|output| 29;
+  29["multiBamSummary"];
+  1 -->|output| 29;
+  2 -->|output| 29;
+  3 -->|output| 29;
+  4 -->|output| 29;
+  5 -->|output| 29;
   6 -->|output| 29;
-  30["MACS2 callpeak"];
-  6 -->|output| 30;
+  7 -->|output| 29;
+  8 -->|output| 29;
+  30["bamCompare"];
   8 -->|output| 30;
-  31["multiBamSummary"];
-  2 -->|output| 31;
-  3 -->|output| 31;
-  4 -->|output| 31;
+  5 -->|output| 30;
+  31["MACS2 callpeak"];
   5 -->|output| 31;
-  6 -->|output| 31;
-  7 -->|output| 31;
   8 -->|output| 31;
-  9 -->|output| 31;
-  32["bamCompare"];
-  9 -->|output| 32;
-  6 -->|output| 32;
-  33["MACS2 callpeak"];
-  6 -->|output| 33;
-  9 -->|output| 33;
-  34["Bowtie2"];
-  11 -->|trimmed_reads_pair1| 34;
-  11 -->|trimmed_reads_pair2| 34;
-  4c3ca5b1-2298-4bb4-8d2f-f62619f35158["Output\nwt_H3K4me3_rep1_bowtie2"];
-  34 --> 4c3ca5b1-2298-4bb4-8d2f-f62619f35158;
-  style 4c3ca5b1-2298-4bb4-8d2f-f62619f35158 stroke:#2c3143,stroke-width:4px;
-  35["Concatenate datasets"];
-  20 -->|output_narrowpeaks| 35;
-  23 -->|output_narrowpeaks| 35;
-  36["plotCorrelation"];
-  31 -->|outFile| 36;
-  37["Concatenate datasets"];
-  20 -->|output_narrowpeaks| 37;
-  23 -->|output_narrowpeaks| 37;
-  26 -->|output_narrowpeaks| 37;
-  28 -->|output_narrowpeaks| 37;
-  30 -->|output_narrowpeaks| 37;
-  33 -->|output_narrowpeaks| 37;
+  32["Bowtie2"];
+  9 -->|trimmed_reads_paired_collection| 32;
+  33["FastQC"];
+  10 -->|output| 33;
+  549b52d6-cce1-42d9-80b5-e9934913045b["Output\ntext_file"];
+  33 --> 549b52d6-cce1-42d9-80b5-e9934913045b;
+  style 549b52d6-cce1-42d9-80b5-e9934913045b stroke:#2c3143,stroke-width:4px;
+  34["Concatenate datasets"];
+  18 -->|output_narrowpeaks| 34;
+  21 -->|output_narrowpeaks| 34;
+  35["plotCorrelation"];
+  29 -->|outFile| 35;
+  36["Concatenate datasets"];
+  18 -->|output_narrowpeaks| 36;
+  21 -->|output_narrowpeaks| 36;
+  24 -->|output_narrowpeaks| 36;
+  26 -->|output_narrowpeaks| 36;
+  28 -->|output_narrowpeaks| 36;
+  31 -->|output_narrowpeaks| 36;
+  37["bedtools SortBED"];
+  34 -->|out_file1| 37;
   38["bedtools SortBED"];
-  35 -->|out_file1| 38;
-  39["bedtools SortBED"];
-  37 -->|out_file1| 39;
+  36 -->|out_file1| 38;
+  39["bedtools MergeBED"];
+  37 -->|output| 39;
+  931eb26a-0e5d-4556-b67f-1c37372aaf28["Output\nwt_H3K4me3_CTCF_rep1_mergebed"];
+  39 --> 931eb26a-0e5d-4556-b67f-1c37372aaf28;
+  style 931eb26a-0e5d-4556-b67f-1c37372aaf28 stroke:#2c3143,stroke-width:4px;
   40["bedtools MergeBED"];
   38 -->|output| 40;
-  931eb26a-0e5d-4556-b67f-1c37372aaf28["Output\nwt_H3K4me3_CTCF_rep1_mergebed"];
-  40 --> 931eb26a-0e5d-4556-b67f-1c37372aaf28;
-  style 931eb26a-0e5d-4556-b67f-1c37372aaf28 stroke:#2c3143,stroke-width:4px;
-  41["bedtools MergeBED"];
-  39 -->|output| 41;
   9c4c5a1f-f2c1-4e83-b1f9-ff32ee48baeb["Output\nwt_all_mergebed"];
-  41 --> 9c4c5a1f-f2c1-4e83-b1f9-ff32ee48baeb;
+  40 --> 9c4c5a1f-f2c1-4e83-b1f9-ff32ee48baeb;
   style 9c4c5a1f-f2c1-4e83-b1f9-ff32ee48baeb stroke:#2c3143,stroke-width:4px;
+  41["computeMatrix"];
+  17 -->|outFileName| 41;
+  20 -->|outFileName| 41;
+  39 -->|output| 41;
   42["computeMatrix"];
-  19 -->|outFileName| 42;
-  22 -->|outFileName| 42;
+  17 -->|outFileName| 42;
+  20 -->|outFileName| 42;
+  23 -->|outFileName| 42;
+  25 -->|outFileName| 42;
+  27 -->|outFileName| 42;
+  30 -->|outFileName| 42;
   40 -->|output| 42;
-  43["computeMatrix"];
-  19 -->|outFileName| 43;
-  22 -->|outFileName| 43;
-  25 -->|outFileName| 43;
-  27 -->|outFileName| 43;
-  29 -->|outFileName| 43;
-  32 -->|outFileName| 43;
-  41 -->|output| 43;
+  43["plotHeatmap"];
+  41 -->|outFileName| 43;
   44["plotHeatmap"];
-  42 -->|outFileName| 44;
-  45["plotHeatmap"];
-  43 -->|outFileName| 45;</pre>
+  42 -->|outFileName| 44;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -536,13 +530,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
-					<td>Input dataset</td>
-					<td>wt_H3K4me3_read2.fastq.gz</td>
-				</tr>
-				
-				<tr>
-					<td>Input dataset</td>
-					<td>wt_H3K4me3_read1.fastq.gz</td>
+					<td>Input dataset collection</td>
+					<td>Input Paired End Reads Collection</td>
 				</tr>
 				
 				<tr>
@@ -600,20 +589,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</td>
-					<td>FastQC</td>
-					<td></td>
-				</tr>
-				
-				<tr>
 					<td>toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.6.7+galaxy0</td>
 					<td>Trim Galore!</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</td>
-					<td>FastQC</td>
 					<td></td>
 				</tr>
 				
@@ -642,8 +619,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0</td>
-					<td>Bowtie2</td>
+					<td>toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1</td>
+					<td>FastQC</td>
 					<td></td>
 				</tr>
 				
@@ -672,6 +649,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=__FLATTEN__">__FLATTEN__</a></td>
+				<td>
+					
+				</td>
+			</tr>
 			
 			<tr>
 				<td><a href="https://my.galaxy.training/?path=?tool_id=cat1">cat1</a></td>
@@ -777,23 +761,18 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0">toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.4+galaxy0">toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.4+galaxy0</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/bowtie2/03e9b2fbc005">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0">toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1">toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/fastqc/3d0c7bdf12f5">
+					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/fastqc/2c64fded1286">
 						View in ToolShed
 					</a>
 					
@@ -871,6 +850,20 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>9</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/bec47c37a934d443c1865a5d2897615d2d32bdad">bec47c37a</a></td>
+						<td>2025-12-11 23:47:56</td>
+						<td>Correct creator names</td>
+					</tr>
+					
+					<tr>
+						<td>8</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/3c7c7588e197a418599fc8c599965bfd74f5c132">3c7c7588e</a></td>
+						<td>2025-12-11 02:12:29</td>
+						<td>Update workflow and workflow tests</td>
+					</tr>
 					
 					<tr>
 						<td>7</td>
@@ -1002,7 +995,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cf2ac62dfc5a892d587add9b01305a19ae3529c1">cf2ac62</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/927344844aa6cc7801e87dfd13a648af6cc4bbd0">9273448</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
