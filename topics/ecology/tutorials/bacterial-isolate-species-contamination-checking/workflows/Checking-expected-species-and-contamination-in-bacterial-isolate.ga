@@ -1,6 +1,7 @@
 {
     "a_galaxy_workflow": "true",
     "annotation": "Checking expected species and contamination in bacterial isolate",
+    "comments": [],
     "creator": [
         {
             "alternateName": "pimarin",
@@ -14,82 +15,64 @@
             "class": "Person",
             "identifier": "https://orcid.org/0000-0001-9852-1987",
             "name": "B\u00e9r\u00e9nice Batut"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0002-6606-5953",
+            "name": "Tristan Reynolds"
         }
     ],
     "format-version": "0.1",
     "license": "GPL-3.0-or-later",
     "name": "Checking expected species and contamination in bacterial isolate",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
     "steps": {
         "0": {
-            "annotation": "reverse_reads",
+            "annotation": "",
             "content_id": null,
             "errors": null,
             "id": 0,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "reverse_reads",
-                    "name": "reverse_reads"
+                    "description": "",
+                    "name": "Input Paired End Reads Collection"
                 }
             ],
-            "label": "reverse_reads",
-            "name": "Input dataset",
+            "label": "Input Paired End Reads Collection",
+            "name": "Input dataset collection",
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 56
+                "top": 77.19660790675707
             },
             "tool_id": null,
-            "tool_state": "{\"optional\": false, \"format\": [\"fastq\", \"fastq.gz\", \"fastqsanger\", \"fastqsanger.gz\"], \"tag\": \"\"}",
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list:paired\", \"fields\": null}",
             "tool_version": null,
-            "type": "data_input",
-            "uuid": "a39893cf-49cb-4c5c-9e71-0f8004a2a1ee",
+            "type": "data_collection_input",
+            "uuid": "a6b78808-bb96-4dda-9fe5-e984ee46de00",
             "when": null,
             "workflow_outputs": []
         },
         "1": {
-            "annotation": "forward_reads",
-            "content_id": null,
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.3+galaxy2",
             "errors": null,
             "id": 1,
-            "input_connections": {},
-            "inputs": [
-                {
-                    "description": "forward_reads",
-                    "name": "forward_reads"
-                }
-            ],
-            "label": "forward_reads",
-            "name": "Input dataset",
-            "outputs": [],
-            "position": {
-                "left": 0,
-                "top": 179
-            },
-            "tool_id": null,
-            "tool_state": "{\"optional\": false, \"format\": [\"fastq\", \"fastq.gz\", \"fastqsanger\", \"fastqsanger.gz\"], \"tag\": \"\"}",
-            "tool_version": null,
-            "type": "data_input",
-            "uuid": "ca539dfd-e173-42d6-998a-0fc4c5f3d5b8",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "2": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1",
-            "errors": null,
-            "id": 2,
             "input_connections": {
-                "single_paired|forward_input": {
-                    "id": 1,
-                    "output_name": "output"
-                },
-                "single_paired|reverse_input": {
+                "single_paired|input_pair": {
                     "id": 0,
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Kraken2",
+                    "name": "single_paired"
+                }
+            ],
             "label": null,
             "name": "Kraken2",
             "outputs": [
@@ -103,19 +86,19 @@
                 }
             ],
             "position": {
-                "left": 280,
-                "top": 0
+                "left": 322.6153124569796,
+                "top": 96.22518458429411
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.3+galaxy2",
             "tool_shed_repository": {
-                "changeset_revision": "e674066930b2",
+                "changeset_revision": "e150ae930235",
                 "name": "kraken2",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"confidence\": \"0.0\", \"kraken2_database\": \"2023-08-24T153645Z_standard_prebuilt_pluspf_16gb_2022-06-07\", \"min_base_quality\": \"10\", \"minimum_hit_groups\": \"2\", \"quick\": false, \"report\": {\"create_report\": true, \"use_mpa_style\": false, \"report_zero_counts\": false, \"report_minimizer_data\": false}, \"single_paired\": {\"single_paired_selector\": \"yes\", \"__current_case__\": 1, \"forward_input\": {\"__class__\": \"ConnectedValue\"}, \"reverse_input\": {\"__class__\": \"ConnectedValue\"}}, \"split_reads\": false, \"use_names\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.1.1+galaxy1",
+            "tool_state": "{\"confidence\": \"0.0\", \"kraken2_database\": \"k2_pluspf_20210517\", \"min_base_quality\": \"10\", \"minimum_hit_groups\": \"2\", \"quick\": false, \"report\": {\"create_report\": true, \"use_mpa_style\": false, \"report_zero_counts\": false, \"report_minimizer_data\": false}, \"single_paired\": {\"single_paired_selector\": \"collection\", \"__current_case__\": 0, \"input_pair\": {\"__class__\": \"ConnectedValue\"}}, \"split_reads\": false, \"use_names\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.3+galaxy2",
             "type": "tool",
             "uuid": "75b7f2b8-2b63-4f1a-a877-4babef16a08b",
             "when": null,
@@ -132,14 +115,14 @@
                 }
             ]
         },
-        "3": {
+        "2": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.9+galaxy0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/3.1+galaxy0",
             "errors": null,
-            "id": 3,
+            "id": 2,
             "input_connections": {
                 "input": {
-                    "id": 2,
+                    "id": 1,
                     "output_name": "report_output"
                 }
             },
@@ -157,8 +140,8 @@
                 }
             ],
             "position": {
-                "left": 560,
-                "top": 40
+                "left": 618.0787322325853,
+                "top": 0
             },
             "post_job_actions": {
                 "RenameDatasetActionkraken_report": {
@@ -176,15 +159,15 @@
                     "output_name": "report"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.9+galaxy0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/3.1+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "0357fb68688c419f",
+                "changeset_revision": "4d350ac5148e",
                 "name": "bracken",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"kmer_distr\": \"bf6177af-7f5b-4005-9bec-fc7c89c3cb1c\", \"level\": \"S\", \"logfile_output\": false, \"out_report\": true, \"threshold\": \"10\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.8+galaxy0",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"kmer_distr\": \"16S_SILVA138_k2db\", \"level\": \"S\", \"logfile_output\": false, \"out_report\": true, \"threshold\": \"10\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.1+galaxy0",
             "type": "tool",
             "uuid": "53b9c80b-f5f4-4fee-9778-fb4fd6b76165",
             "when": null,
@@ -201,14 +184,14 @@
                 }
             ]
         },
-        "4": {
+        "3": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/recentrifuge/recentrifuge/1.12.1+galaxy0",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/recentrifuge/recentrifuge/1.16.1+galaxy0",
             "errors": null,
-            "id": 4,
+            "id": 3,
             "input_connections": {
                 "input_file": {
-                    "id": 2,
+                    "id": 1,
                     "output_name": "output"
                 }
             },
@@ -234,8 +217,8 @@
                 }
             ],
             "position": {
-                "left": 560,
-                "top": 329
+                "left": 618.0753303964757,
+                "top": 289.00103504332145
             },
             "post_job_actions": {
                 "RenameDatasetActiondata_tsv": {
@@ -267,15 +250,15 @@
                     "output_name": "stat_tsv"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/recentrifuge/recentrifuge/1.12.1+galaxy0",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/recentrifuge/recentrifuge/1.16.1+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "b5407cc2bf51",
+                "changeset_revision": "613ee22af97c",
                 "name": "recentrifuge",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"advanced_option\": {\"controls\": \"0\", \"scoring\": null, \"minscore_value\": \"0\", \"mintaxa\": \"0\", \"exclude_taxa_name\": null, \"include_taxa_name\": null, \"avoidcross\": false}, \"database\": {\"database_name\": \"ncbi-2023-06-27\"}, \"file_type\": {\"filetype\": \"kraken\", \"__current_case__\": 3}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"more_advanced_option\": {\"ctrlminscore\": \"0\", \"ctrlmintaxa\": \"0\", \"summary\": \"ADD\", \"takeoutroot\": false, \"nokollapse\": false, \"strain\": true, \"sequential\": false}, \"output_option\": {\"extra\": \"TSV\", \"nohtml\": false, \"no_logfile\": false}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.12.1+galaxy0",
+            "tool_state": "{\"advanced_option\": {\"controls\": \"0\", \"scoring\": null, \"minscore_value\": \"0\", \"mintaxa\": \"0\", \"exclude_taxa_name\": null, \"include_taxa_name\": null, \"avoidcross\": false}, \"database\": {\"database_name\": \"2020-12-03\"}, \"file_type\": {\"filetype\": \"kraken\", \"__current_case__\": 3}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"more_advanced_option\": {\"ctrlminscore\": \"0\", \"ctrlmintaxa\": \"0\", \"summary\": \"ADD\", \"takeoutroot\": false, \"nokollapse\": false, \"strain\": true, \"sequential\": false}, \"output_option\": {\"extra\": \"TSV\", \"nohtml\": false, \"no_logfile\": false}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.16.1+galaxy0",
             "type": "tool",
             "uuid": "4b3b34ad-2352-4e93-abbc-69da3ab9ee3a",
             "when": null,
@@ -306,6 +289,6 @@
     "tags": [
         "ecology"
     ],
-    "uuid": "262cc80b-e4a4-4759-91d5-fab27f396a13",
-    "version": 8
+    "uuid": "816de845-2151-4476-9059-214afa4dd031",
+    "version": 2
 }

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@927344844aa6cc7801e87dfd13a648af6cc4bbd0",
+		release: "galaxy-training-network@68d15ae3ab2302b6f27e320f4cf97b060aa20772",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Building and Annotating Metagenome-Assembled Genomes (MAGs) from Metagenomics Reads">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-12-08 10:09:05 +0000"><meta name="description" content="This learning path will guide you through the process of constructing and analyzing **Metagenome-Assembled Genomes (MAGs)** using the Galaxy platform. You will explore the key steps involved in transforming raw metagenomic data into high-quality MAGs, from preprocessing to functional annotation.  By the end of this path, you will be able to: - **List and describe** the essential steps in MAGs construction, including quality control, assembly, binning, and refinement. - **Define** core concepts such as MAGs, binning, and functional annotation, and understand their significance in metagenomic analysis. - **Explain** the importance of preprocessing metagenomic reads, focusing on quality control and contamination removal. - **Compare** the quality of MAGs using metrics like completeness and contamination, and assess their suitability for downstream analysis. - **Evaluate** the reliability of taxonomic assignments and functional annotations by leveraging reference databases. - **Analyze*...">
+<meta name="DC.date" content="2025-12-18 14:09:28 +0000"><meta name="description" content="This learning path will guide you through the process of constructing and analyzing **Metagenome-Assembled Genomes (MAGs)** using the Galaxy platform. You will explore the key steps involved in transforming raw metagenomic data into high-quality MAGs, from preprocessing to functional annotation.  By the end of this path, you will be able to: - **List and describe** the essential steps in MAGs construction, including quality control, assembly, binning, and refinement. - **Define** core concepts such as MAGs, binning, and functional annotation, and understand their significance in metagenomic analysis. - **Explain** the importance of preprocessing metagenomic reads, focusing on quality control and contamination removal. - **Compare** the quality of MAGs using metrics like completeness and contamination, and assess their suitability for downstream analysis. - **Evaluate** the reliability of taxonomic assignments and functional annotations by leveraging reference databases. - **Analyze*...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Learning Pathway: Building and Annotating Metagenome-Assembled Genomes (MAGs) from Metagenomics Reads">
         <meta property="og:description" content="This learning path will guide you through the process of constructing and analyzing **Metagenome-Assembled Genomes (MAGs)** using the Galaxy platform. You will explore the key steps involved in transforming raw metagenomic data into high-quality MAGs, from preprocessing to functional annotation.  By the end of this path, you will be able to: - **List and describe** the essential steps in MAGs construction, including quality control, assembly, binning, and refinement. - **Define** core concepts such as MAGs, binning, and functional annotation, and understand their significance in metagenomic analysis. - **Explain** the importance of preprocessing metagenomic reads, focusing on quality control and contamination removal. - **Compare** the quality of MAGs using metrics like completeness and contamination, and assess their suitability for downstream analysis. - **Evaluate** the reliability of taxonomic assignments and functional annotations by leveraging reference databases. - **Analyze*...">
@@ -315,6 +315,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "Perform quality correction with Cutadapt (short reads)",
     "Summarise quality metrics MultiQC",
     "Process single-end and paired-end data",
+    "Identify reads originating from contaminants or host genomes.",
+    "Remove those reads to produce high-quality, clean metagenomic data suitable for downstream analyses.",
     "Describe what an assembly is.",
     "Explain the difference between co-assembly and individual assembly.",
     "Explain the difference between reads, contigs and scaffolds.",
@@ -331,7 +333,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "Visualize a draft bacterial genome and its annotations",
     "Run a series of tool to assess the presence of antimicrobial resistance genes (ARG)",
     "Get information about ARGs",
-    "Visualize the ARGs and plasmid genes in their genomic context"
+    "Visualize the ARGs and plasmid genes in their genomic context",
+    "List the key steps involved in MAGs building from raw data.",
+    "Define essential terms such as MAGs (Metagenome-Assembled Genomes), binning, and functional annotation.",
+    "Explain the importance of preprocessing metagenomic reads, including quality control and contamination removal.",
+    "Describe the purpose and process of assembling, binning, and refining MAGs.",
+    "Compare the quality of MAGs based on completeness, contamination, and other metrics.",
+    "Assess the quality of MAGs and determine whether they meet standards for downstream analysis.",
+    "Summarize how taxonomic assignment and functional annotation contribute to understanding microbial communities.",
+    "Evaluate the reliability of taxonomic assignments and functional annotations based on reference databases.",
+    "Analyze the relative abundance of microbial taxa in the samples and infer ecological dynamics.",
+    "Identify the types of genomic features annotated by Bakta (e.g., CDS, rRNA, tRNA).",
+    "Interpret the functional annotation results to identify metabolic pathways, virulence factors, and other biological roles."
   ],
   "availableLanguage": [
     "en"
@@ -556,6 +569,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Syllabus",
+      "name": "Module 2: Contamination and Host Reads Removal – Purifying Your Metagenomic Dataset",
+      "description": "Metagenomic datasets frequently contain **non-microbial sequences**, such as **host DNA** (e.g., from honey bees) or **external contaminants** (e.g., human DNA introduced during sample handling or sequencing). These sequences can distort downstream analyses, leading to **misassemblies, incorrect taxonomic assignments, and biased functional interpretations**.\n\nIn this module, you will:\n- Recognize the **sources and impacts** of contamination in metagenomic datasets.\n- Learn how to **identify and filter out host and contaminant sequences** using Galaxy tools.\n- Ensure your dataset is **enriched for microbial reads**, improving the accuracy of MAG reconstruction and enabling more reliable biological insights.\n\nBy the end of this module, you'll be able to confidently clean your metagenomic data, setting the stage for high-quality MAG assembly and analysis.\n"
+    },
+    {
+      "@type": "Syllabus",
       "name": "Module 3: Assembly – Reconstructing and Assessing Contigs from Metagenomic Reads",
       "description": "The foundation of MAG reconstruction lies in **assembly**—the computational process of piecing together fragmented metagenomic reads into longer genomic sequences called **contigs**. Think of it as solving a complex jigsaw puzzle: your goal is to identify reads that \"fit together\" by detecting overlapping sequences.\n\nIn this module, you will:\n- Understand the **principles and challenges** of metagenomic assembly.\n- Learn how to use Galaxy tools to **assemble high-quality contigs** from your preprocessed reads.\n- Explore strategies to **optimize assembly parameters** for improved accuracy and completeness.\n- **Assess the quality of your assembly** using metrics such as contig length distribution, N50, and coverage, ensuring your contigs are suitable for downstream analysis.\n\nBy the end of this module, you'll be equipped to transform your cleaned metagenomic data into contiguous sequences and evaluate their quality, setting the stage for successful MAG reconstruction.\n"
     },
@@ -568,9 +586,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "@type": "Syllabus",
       "name": "Module 6: Functional Annotation of MAGs – Applying Genomic Approaches to Metagenome-Assembled Genomes",
       "description": "Functional annotation is a **fundamental process** in genomic analysis, whether you're working with microbial isolates or Metagenome-Assembled Genomes (MAGs). By applying the same robust approaches used for isolates, you can **identify and characterize genes** in MAGs, revealing their roles in **metabolic pathways, environmental interactions, and ecological functions**.\n\nIn this module, you will:\n- Learn how **functional annotation tools** (such as Bakta) predict and classify genomic features, including coding sequences (CDS), rRNA, tRNA, and more.\n- Use Galaxy to **annotate your MAGs**, uncovering their biological potential and functional capabilities.\n- Explore **antimicrobial resistance (AMR) gene detection** as part of functional annotation, identifying genes associated with resistance mechanisms.\n- Interpret the **ecological and functional roles** of your MAGs, including genes linked to **pathogenicity, nutrient cycling, symbiosis, and AMR**.\n- Assess the **reliability of annotations** and understand the importance of reference databases in ensuring accurate predictions.\n\nBy the end of this module, you'll be able to analyze MAGs with the same confidence and precision as microbial isolates, gaining deeper insights into their ecological roles and functional potential—including their resistance profiles.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Recommended follow-up tutorial",
+      "description": "While this learning pathway goes into detail about all steps required for MAGs generation, a full end-to-end training was developed, which executes all workflows for MAGs generation and annotation instead of running individual steps. This tutorial can be used as a guide to execute the workflows on your own data. It explains how you can perform quality control, remove host contamination, and run the main MAGs workflow to obtain quality-controlled, taxonomically and functionally annotated MAGs. \n"
     }
   ],
-  "dateModified": "2025-12-08 10:09:05 +0000",
+  "dateModified": "2025-12-18 14:09:28 +0000",
   "datePublished": "2025-12-08 10:09:05 +0000",
   "isAccessibleForFree": true,
   "offers": [
@@ -740,7 +763,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=español" class="label label-default tutorial_tag" style="--color-primary: #00e1d6; --color-darker: #00c8be; --color-dimmed: #00d4ca;" title="Click to show all tutorials tagged español">español</a>
+              <a href="/training-material/search2.html?query=español" class="label label-default tutorial_tag" style="--color-primary: #00ede1; --color-darker: #00d3c9; --color-dimmed: #00e0d5;" title="Click to show all tutorials tagged español">español</a>
               
             
             </div>
@@ -2101,6 +2124,289 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
     
+        <h3 id="st-module-2-contamination-and-host-reads-removal-purifying-your-metagenomic-dataset">Module 2: Contamination and Host Reads Removal – Purifying Your Metagenomic Dataset</h3>
+        <p><p>Metagenomic datasets frequently contain <strong>non-microbial sequences</strong>, such as <strong>host DNA</strong> (e.g., from honey bees) or <strong>external contaminants</strong> (e.g., human DNA introduced during sample handling or sequencing). These sequences can distort downstream analyses, leading to <strong>misassemblies, incorrect taxonomic assignments, and biased functional interpretations</strong>.</p>
+
+<p>In this module, you will:</p>
+<ul>
+  <li>Recognize the <strong>sources and impacts</strong> of contamination in metagenomic datasets.</li>
+  <li>Learn how to <strong>identify and filter out host and contaminant sequences</strong> using Galaxy tools.</li>
+  <li>Ensure your dataset is <strong>enriched for microbial reads</strong>, improving the accuracy of MAG reconstruction and enabling more reliable biological insights.</li>
+</ul>
+
+<p>By the end of this module, you’ll be able to confidently clean your metagenomic data, setting the stage for high-quality MAG assembly and analysis.</p>
+</p>
+
+	
+        
+	<p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</p>
+	<details>
+		<summary>Learning Objectives</summary>
+		<ul>
+		
+		
+			
+			<li>Identify reads originating from contaminants or host genomes.</li>
+			
+			<li>Remove those reads to produce high-quality, clean metagenomic data suitable for downstream analyses.</li>
+			
+		
+		
+		</ul>
+	</details>
+	
+
+
+
+<table class="table table-responsive table-striped tutorials-list">
+  <thead>
+    <tr>
+      
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+      
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list">
+
+  
+  
+        <!-- MAT: microbiome/host-removal -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/microbiome/tutorials/host-removal/tutorial.html">
+                Remove contamination and host reads
+            </a>
+             
+
+
+            <div class="extra">
+            
+            
+            </div>
+
+            <div class="duplicate" style="display: none;">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/microbiome/tutorials/host-removal/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/microbiome/tutorials/host-removal/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/host-removal/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
+
+
+	
+    
         <h3 id="st-module-3-assembly-reconstructing-and-assessing-contigs-from-metagenomic-reads">Module 3: Assembly – Reconstructing and Assessing Contigs from Metagenomic Reads</h3>
         <p><p>The foundation of MAG reconstruction lies in <strong>assembly</strong>—the computational process of piecing together fragmented metagenomic reads into longer genomic sequences called <strong>contigs</strong>. Think of it as solving a complex jigsaw puzzle: your goal is to identify reads that “fit together” by detecting overlapping sequences.</p>
 
@@ -2196,11 +2502,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffb3dd; --color-darker: #ff8ed0; --color-dimmed: #ffa1d6;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search2.html?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffc3e3; --color-darker: #ff9fd5; --color-dimmed: #ffb1dc;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search2.html?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #e4c900; --color-darker: #cbb300; --color-dimmed: #d7be00;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
+              <a href="/training-material/search2.html?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #f0d500; --color-darker: #d6bd00; --color-dimmed: #e3c900;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
               
-              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #d6ce00; --color-darker: #bfb700; --color-dimmed: #cbc300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e2d900; --color-darker: #c9c100; --color-dimmed: #d6cd00;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -2573,11 +2879,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=binning" class="label label-default tutorial_tag" style="--color-primary: #ffb2e0; --color-darker: #ff8dd4; --color-dimmed: #ffa0da;" title="Click to show all tutorials tagged binning">binning</a>
+              <a href="/training-material/search2.html?query=binning" class="label label-default tutorial_tag" style="--color-primary: #ffc3e6; --color-darker: #ff9ed9; --color-dimmed: #ffb1df;" title="Click to show all tutorials tagged binning">binning</a>
               
-              <a href="/training-material/search2.html?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #e4c900; --color-darker: #cbb300; --color-dimmed: #d7be00;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
+              <a href="/training-material/search2.html?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #f0d500; --color-darker: #d6bd00; --color-dimmed: #e3c900;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
               
-              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #d6ce00; --color-darker: #bfb700; --color-dimmed: #cbc300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e2d900; --color-darker: #c9c100; --color-dimmed: #d6cd00;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -2956,15 +3262,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #fac100; --color-darker: #dfac00; --color-dimmed: #ecb600;" title="Click to show all tutorials tagged gmod">gmod</a>
+              <a href="/training-material/search2.html?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #ffcd64; --color-darker: #ebb500; --color-dimmed: #f9c000;" title="Click to show all tutorials tagged gmod">gmod</a>
               
-              <a href="/training-material/search2.html?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffbd57; --color-darker: #eba600; --color-dimmed: #f9b000;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search2.html?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffcb8b; --color-darker: #f8af00; --color-dimmed: #ffbc52;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search2.html?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #ffbe3a; --color-darker: #e7a800; --color-dimmed: #f5b300;" title="Click to show all tutorials tagged bacteria">bacteria</a>
+              <a href="/training-material/search2.html?query=bacteria" class="label label-default tutorial_tag" style="--color-primary: #ffcc80; --color-darker: #f3b100; --color-dimmed: #ffbd32;" title="Click to show all tutorials tagged bacteria">bacteria</a>
               
-              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #d6ce00; --color-darker: #bfb700; --color-dimmed: #cbc300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e2d900; --color-darker: #c9c100; --color-dimmed: #d6cd00;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
-              <a href="/training-material/search2.html?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #efb5ff; --color-darker: #ea91ff; --color-dimmed: #eca3ff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
+              <a href="/training-material/search2.html?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #f2c5ff; --color-darker: #eca1ff; --color-dimmed: #efb4ff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
               
             
             </div>
@@ -3251,17 +3557,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #fac100; --color-darker: #dfac00; --color-dimmed: #ecb600;" title="Click to show all tutorials tagged gmod">gmod</a>
+              <a href="/training-material/search2.html?query=gmod" class="label label-default tutorial_tag" style="--color-primary: #ffcd64; --color-darker: #ebb500; --color-dimmed: #f9c000;" title="Click to show all tutorials tagged gmod">gmod</a>
               
-              <a href="/training-material/search2.html?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffbd57; --color-darker: #eba600; --color-dimmed: #f9b000;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search2.html?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffcb8b; --color-darker: #f8af00; --color-dimmed: #ffbc52;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search2.html?query=amr" class="label label-default tutorial_tag" style="--color-primary: #b5c8ff; --color-darker: #91b2ff; --color-dimmed: #a3bdff;" title="Click to show all tutorials tagged amr">amr</a>
+              <a href="/training-material/search2.html?query=amr" class="label label-default tutorial_tag" style="--color-primary: #c5d4ff; --color-darker: #a1bcff; --color-dimmed: #b4c8ff;" title="Click to show all tutorials tagged amr">amr</a>
               
-              <a href="/training-material/search2.html?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #8fdf00; --color-darker: #7fc600; --color-dimmed: #87d200;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search2.html?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #97eb00; --color-darker: #86d100; --color-dimmed: #8ede00;" title="Click to show all tutorials tagged one-health">one-health</a>
               
-              <a href="/training-material/search2.html?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #efb5ff; --color-darker: #ea91ff; --color-dimmed: #eca3ff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
+              <a href="/training-material/search2.html?query=jbrowse1" class="label label-default tutorial_tag" style="--color-primary: #f2c5ff; --color-darker: #eca1ff; --color-dimmed: #efb4ff;" title="Click to show all tutorials tagged jbrowse1">jbrowse1</a>
               
-              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #d6ce00; --color-darker: #bfb700; --color-dimmed: #cbc300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e2d900; --color-darker: #c9c100; --color-dimmed: #d6cd00;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -3540,6 +3846,318 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
     
+        <h3 id="st-recommended-follow-up-tutorial">Recommended follow-up tutorial</h3>
+        <p><p>While this learning pathway goes into detail about all steps required for MAGs generation, a full end-to-end training was developed, which executes all workflows for MAGs generation and annotation instead of running individual steps. This tutorial can be used as a guide to execute the workflows on your own data. It explains how you can perform quality control, remove host contamination, and run the main MAGs workflow to obtain quality-controlled, taxonomically and functionally annotated MAGs.</p>
+</p>
+
+	
+        
+	<p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 6 hours</p>
+	<details>
+		<summary>Learning Objectives</summary>
+		<ul>
+		
+		
+			
+			<li>List the key steps involved in MAGs building from raw data.</li>
+			
+			<li>Define essential terms such as MAGs (Metagenome-Assembled Genomes), binning, and functional annotation.</li>
+			
+			<li>Explain the importance of preprocessing metagenomic reads, including quality control and contamination removal.</li>
+			
+			<li>Describe the purpose and process of assembling, binning, and refining MAGs.</li>
+			
+			<li>Compare the quality of MAGs based on completeness, contamination, and other metrics.</li>
+			
+			<li>Assess the quality of MAGs and determine whether they meet standards for downstream analysis.</li>
+			
+			<li>Summarize how taxonomic assignment and functional annotation contribute to understanding microbial communities.</li>
+			
+			<li>Evaluate the reliability of taxonomic assignments and functional annotations based on reference databases.</li>
+			
+			<li>Analyze the relative abundance of microbial taxa in the samples and infer ecological dynamics.</li>
+			
+			<li>Identify the types of genomic features annotated by Bakta (e.g., CDS, rRNA, tRNA).</li>
+			
+			<li>Interpret the functional annotation results to identify metabolic pathways, virulence factors, and other biological roles.</li>
+			
+		
+		
+		</ul>
+	</details>
+	
+
+
+
+<table class="table table-responsive table-striped tutorials-list">
+  <thead>
+    <tr>
+      
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+      
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list">
+
+  
+  
+        <!-- MAT: microbiome/mags-building -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/microbiome/tutorials/mags-building/tutorial.html">
+                Building and Annotating Metagenome-Assembled Genomes (MAGs) from Short Metagenomics Paired Reads
+            </a>
+             
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+              
+              <a href="/training-material/search2.html?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffc3e3; --color-darker: #ff9fd5; --color-dimmed: #ffb1dc;" title="Click to show all tutorials tagged assembly">assembly</a>
+              
+              <a href="/training-material/search2.html?query=binning" class="label label-default tutorial_tag" style="--color-primary: #ffc3e6; --color-darker: #ff9ed9; --color-dimmed: #ffb1df;" title="Click to show all tutorials tagged binning">binning</a>
+              
+              <a href="/training-material/search2.html?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #f0d500; --color-darker: #d6bd00; --color-dimmed: #e3c900;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
+              
+              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e2d900; --color-darker: #c9c100; --color-dimmed: #d6cd00;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              
+            
+            </div>
+
+            <div class="duplicate" style="display: none;">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/microbiome/tutorials/mags-building/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/microbiome/tutorials/mags-building/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/microbiome/tutorials/mags-building/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
+
+
+	
+    
 </section>
 
 <hr style="margin-top: 6em"/>
@@ -3671,7 +4289,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/927344844aa6cc7801e87dfd13a648af6cc4bbd0">9273448</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/68d15ae3ab2302b6f27e320f4cf97b060aa20772">68d15ae</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
