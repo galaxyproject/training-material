@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@059e03734387732da50114336afe08d9e13dc3ec",
+		release: "galaxy-training-network@b1a578f0d8df34f3240ebabf3f0a59f28df5851e",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Genome-wide alternative splicing analysis">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-03-28 14:46:33 +0000">
+<meta name="DC.date" content="2025-12-17 15:28:22 +0000">
 <meta name="DC.creator" content="Cristóbal Gallardo">
 <meta name="DC.creator" content="Lucille Delisle"><meta name="description" content="Training material for all kinds of transcriptomics analysis.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -181,7 +181,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-03-28 14:46:33 +0000",
+  "dateModified": "2025-12-17 15:28:22 +0000",
   "datePublished": "2023-05-17 16:20:54 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -237,7 +237,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Genome-wide alternative splicing analysis",
   "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html",
-  "version": 11,
+  "version": 12,
   "timeRequired": "PT3H",
   "teaches": "- Perform genome-wide isoform analysis in order to evaluate differences in expression profiles between two conditions\n- Evaluate the differential alternative splicing in specific genes",
   "keywords": [
@@ -1703,7 +1703,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> May 17, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 28, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 17, 2025 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1723,7 +1723,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.7</a> (0 recent ratings, 7 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 11 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 12 </div>
 
     </blockquote>
     </section>
@@ -1881,6 +1881,54 @@ Pfam-A.hmm.gz	https://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.0/Pfam-A.
     </li>
   </ol>
 
+  <blockquote class="warning">
+    <div class="box-title warning-title" id="warning-inconsistancies-between-reference-and-annotations"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Inconsistancies between reference and annotations</div>
+    <ol>
+      <li>
+        <p>Make sure that the chromosome IDs in the reference genome FASTA file and the GTF annotation file are consistent. If they are not, you may need to modify one of them to ensure they match. For example, if the FASTA file uses <code class="language-plaintext highlighter-rouge">chr1</code> and the GTF file uses <code class="language-plaintext highlighter-rouge">1</code>, you may need to edit the GTF file to add the <code class="language-plaintext highlighter-rouge">chr</code> prefix to the chromosome IDs or vice versa.</p>
+      </li>
+      <li>
+        <p>In later steps, <strong>IsoformSwitchAnalyzeR</strong> has strict checks on the transcript ids. Make sure that the transcript IDs in the GTF file do not contain any dots or underscores. If they do, you may need to edit the GTF file to remove these characters from the transcript IDs.</p>
+      </li>
+      <li>
+        <p><strong>IsoformSwitchAnalyzeR</strong> incorporates <code class="language-plaintext highlighter-rouge">transcript_version</code> and <code class="language-plaintext highlighter-rouge">gene_version</code> attributes from the GTF file into transcript and gene ids respectively. If you have a transcript with id <code class="language-plaintext highlighter-rouge">ENST00000335137</code> along with <code class="language-plaintext highlighter-rouge">transcript_version "2";</code> attribute, the <strong>IsoformSwitchAnalyzeR</strong> internally will create a transcript id <code class="language-plaintext highlighter-rouge">ENST00000335137.2</code>. It is recommended to remove these attributes from the GTF file to avoid tool errors.</p>
+      </li>
+    </ol>
+
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-remove-version-attributes-from-gtf-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Remove version attributes from GTF file</div>
+      <ol>
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3" title="Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from “</em>: <code class="language-plaintext highlighter-rouge">your.gtf</code></li>
+            <li>In <em>“Check”</em>:</li>
+          </ul>
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+              <ul>
+                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">\.([0-9]+)(?=[\";\s])</code> (if your transcript IDs contain dots with version numbers after them)</li>
+                <li><em>“Replacement”</em>: leave blank</li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+              <ul>
+                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">\stranscript_version "[^"]*";</code></li>
+                <li><em>“Replacement”</em>: leave blank</li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+              <ul>
+                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">\sgene_version "[^"]*";</code></li>
+                <li><em>“Replacement”</em>: leave blank</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
 </blockquote>
 
 <!--
@@ -4103,6 +4151,11 @@ tools:
   revisions: 3e436657dcd0
   tool_panel_section_label: Convert Formats
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: regex_find_replace
+  owner: galaxyp
+  revisions: 503bcd6ebe4b
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: collection_element_identifiers
   owner: iuc
   revisions: d3c07d270a50
@@ -4349,7 +4402,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/059e03734387732da50114336afe08d9e13dc3ec">059e037</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b1a578f0d8df34f3240ebabf3f0a59f28df5851e">b1a578f</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
