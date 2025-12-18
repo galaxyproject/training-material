@@ -136,7 +136,7 @@ Now that the Pulsar instance has been created, you need to access it.
 > 
 {: .hands_on}
 
-Now that you have a running Pulsar, you can start by creating Galaxy. If you are unsure how to do that, you can follow the tutorial [Galaxy usage on SURF Research Cloud](https://training.galaxyproject.org/training-material/topics/admin/tutorials/surf-research-cloud-galaxy/tutorial.html).
+Now that you have a running Pulsar, you can start by creating Galaxy. If you are unsure how to do that, you can follow the tutorial [Galaxy usage on SURF Research Cloud]({% link topics/admin/tutorials/surf-research-cloud-galaxy/tutorial.md %}).
 
 > <warning-title> Do not submit your Galaxy into creation yet! </warning-title>
 > At the final stage of the tutorial, you will see how to start the Galaxy.
