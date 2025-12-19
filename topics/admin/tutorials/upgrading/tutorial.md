@@ -58,9 +58,9 @@ We can upgrade our Galaxy version by modifying the Ansible var files and re-runn
 This tutorial will show you how and discuss some of the things you need to keep in mind whenever you are updating or upgrading your Galaxy server.
 
 > <hands-on-title>Upgrade checklist</hands-on-title>
-> Below a general checklist can be found that could serve as inspiration or guideline when upgrading a Galaxy instance. It's a list of best practices pooled from a set of different Galaxy administrators and is encouraged to follow as close as possible. 
+> The general checklist below can serve as inspiration or guideline when upgrading a Galaxy instance. It is a list of best practices pooled from various Galaxy administrators that can help you with planning an upgrade and avoid common pitfalls. 
 >
-> The list is divided into three main categories: before the upgrade, the upgrade itself, and after the upgrade. Ideally, upgrading your Galaxy instance is performed first in a test environment which has a near identical set-up to the production environment. 
+> The list is divided into three main categories: before the upgrade, the upgrade itself, and after the upgrade. Ideally, you would test your upgrade on a test Galaxy instance with near identical set-up to the production environment.
 >
 > ## Pre-upgrade
 > ### General preparations
@@ -88,7 +88,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 > ### Communication plan
 > Start preparing the communication plan to the user, which ideally is send out in advance. 
 > - Draft notifications about the planned upgrade, schedule, and anticipated downtime (e.g. a banner on the frontpage, email,...)
-> - Draft communication to the users what changes and features the new upgrade brings (e.g. a news item, email), which includes emphasis on reporting unexpected behavior
+> - Draft communication about what changes and features the new upgrade brings to the users (e.g. a news item, email), with instructions on how to report unexpected behavior
 >
 > ## Upgrade
 > ### Performing upgrade
@@ -132,7 +132,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 > - Send out communication after testing was successful
 >   - Remove any pre-upgrade announcement banner and announce completion
 >   - share any new features or changes with user base (link to release notes) via e.g. a news item, an email,... 
-> - Make sure that any config, dependency or infrastructure changes have been documented and is under version control 
+> - Make sure that configuration, dependency or infrastructure changes have been documented and are under version control 
 >   - Update (internal) documentation where needed
 >
 > ### Continuous improvement
@@ -157,7 +157,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 
 ## The Galaxy Release Process
 
-The latest updates on the Galaxy release process can be found in the [Galaxy Release Process](https://docs.galaxyproject.org/en/master/project/releases.html) entry in the official documentation. A short summary can be found below. 
+The latest updates on the Galaxy release process can be found in the [Galaxy Release Process](https://docs.galaxyproject.org/en/master/project/releases.html) entry in the official documentation. In short: 
 
 - Long Term Support (LTS) releases happen annually, in the first quarter (e.g. 25.0).
 - Minor Releases: usually 2-3 times a year, generally in the early summer and fall (e.g. 25.1).

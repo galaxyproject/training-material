@@ -311,10 +311,9 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 
 > <hands-on-title>Running the Workflow</hands-on-title>
 >
+>
 > 1. **Import the workflow** into Galaxy:
->
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/neoantigen-predicting-hla-binding/workflows/main_workflow.ga" title="HLA Binding Prediction of Verified Candidates" %}
->
+>    - [Neoantigen HLA Genotyping](https://tinyurl.com/ipepgen-hla-genotyping-wf)
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -322,6 +321,18 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 >    - {% icon param-file %} *"RNA-Seq_Reads_2 (reverse strand)"*: `RNA-Seq_Reads_2.fastqsanger.gz`
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
+>
+> 
+> 
+> 
+> 
+> <comment-title>DISCLAIMER</comment-title>
+>
+> - If any step in this workflow fails, please ensure that the input files have been correctly generated and formatted by the preceding tools. Workflow failures often result from improperly called or incomplete input data rather than errors in the workflow itself. Users are responsible for verifying their input before troubleshooting workflow issues.
+>
+> {: .comment}
+>
+>    
 >
 {: .hands_on}
 
