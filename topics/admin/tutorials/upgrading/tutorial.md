@@ -82,7 +82,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 > - Assess if current (automatic) backup system needs to be suspended or updated
 > - Perform a full backup of the relevant databases (PostgresDB, SQLite,...)
 > - Verify that backups are complete and functional by reinstating backups in a duplicate setup  
-> - Make a regression plan on how to roll back to the original, pre-upgrading state in case the upgrade fails 
+> - Make a regression plan on how to roll back to the original, pre-upgrading state in case the upgrade fails (e.g. making a snapshot of the VM)
 >   - Verify, test and update this plan ahead of upgrading
 >
 > ### Communication plan
@@ -98,6 +98,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 >   - Ideally, have one pull request that reflects all changes made to infrastructure, documentation, frontpage, etc. and add appropriate labels
 >   - If possible, assign at least one technical and/or peer reviewer to verify your changes
 > - Execute the playbook 
+> - If applicable, migrate the database to the new schema using the `manage_db.sh` script
 > - Restart the instance (gracefully). 
 > 
 > ### Testing upgrade
@@ -140,6 +141,17 @@ This tutorial will show you how and discuss some of the things you need to keep 
 > - Update the upgrade checklist and procedures accordingly
 > - Begin preparing for the next Galaxy release
 > - Monitor CVEs and patches from Galaxy upstream
+>
+> An example of such a regression plan, when using an Ansible playbook:
+> 
+> - Revert the `galaxy_commit_id` back to the previous version 
+> Note: if this is the final version also set `galaxy_build_client` to true
+> - Run the playbook again
+> - If applicable, regress the postgres DB back to the previous version as well
+> - If this is the final version, update and gracefully restart the galaxy service
+> - If this all fails, revert to last VM snapshot
+> 
+> Note: like upgrading, it's important to not skip any Galaxy versions while downgrading
 {: .hands_on}
 
 
@@ -229,7 +241,7 @@ This site shows all of the release notes of all the available Galaxy versions an
 We can see from this page that the latest release version of Galaxy is *25.1* (at the time of writing.)
 
 > <question-title>What is the current latest version?</question-title>
-> As previously mentioned, the current latest release of Galaxy may not be *21.01*. What version is the latest that you can see?
+> As previously mentioned, the current latest release of Galaxy may not be *25.1*. What version is the latest that you can see?
 {: .question}
 
 ## The importance of the release notes
