@@ -143,7 +143,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-12-27 00:08:08 +0000",
+          "modified": "2025-12-28 00:09:32 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput Text one\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput Text two\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Remove beginning\"];\n  0 -->|output| 2;\n  3[\"Remove beginning\"];\n  1 -->|output| 3;\n  4[\"Replace Text\"];\n  2 -->|out_file1| 4;\n  5[\"Replace\"];\n  2 -->|out_file1| 5;\n  6[\"Replace Text\"];\n  3 -->|out_file1| 6;\n  7[\"Replace\"];\n  3 -->|out_file1| 7;\n  8[\"Line/Word/Character count\"];\n  4 -->|outfile| 8;\n  9[\"Generate the first WordCloud\"];\n  4 -->|outfile| 9;\n  56f52608-c40a-468a-bfd2-e6718cc436db[\"Output\\nWordCloud01\"];\n  9 --> 56f52608-c40a-468a-bfd2-e6718cc436db;\n  style 56f52608-c40a-468a-bfd2-e6718cc436db stroke:#2c3143,stroke-width:4px;\n  10[\"Replace Text\"];\n  4 -->|outfile| 10;\n  11[\"Search in textfiles\"];\n  5 -->|outfile| 11;\n  0d463da6-de82-4130-a113-9cf527acdca1[\"Output\\noutput01\"];\n  11 --> 0d463da6-de82-4130-a113-9cf527acdca1;\n  style 0d463da6-de82-4130-a113-9cf527acdca1 stroke:#2c3143,stroke-width:4px;\n  12[\"Line/Word/Character count\"];\n  6 -->|outfile| 12;\n  13[\"Generate a second WordCloud\"];\n  6 -->|outfile| 13;\n  70815cdd-a460-4d5e-8923-e9842b618393[\"Output\\nWordCloud02\"];\n  13 --> 70815cdd-a460-4d5e-8923-e9842b618393;\n  style 70815cdd-a460-4d5e-8923-e9842b618393 stroke:#2c3143,stroke-width:4px;\n  14[\"Replace Text\"];\n  6 -->|outfile| 14;\n  15[\"Search in textfiles\"];\n  7 -->|outfile| 15;\n  8cad2dd7-d6b6-4320-860c-f9125cf77bef[\"Output\\noutput02\"];\n  15 --> 8cad2dd7-d6b6-4320-860c-f9125cf77bef;\n  style 8cad2dd7-d6b6-4320-860c-f9125cf77bef stroke:#2c3143,stroke-width:4px;\n  16[\"diff\"];\n  10 -->|outfile| 16;\n  14 -->|outfile| 16;\n  22682b82-6f29-43e3-a649-b411e42d5cd2[\"Output\\nhtml_file\"];\n  16 --> 22682b82-6f29-43e3-a649-b411e42d5cd2;\n  style 22682b82-6f29-43e3-a649-b411e42d5cd2 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput Text one\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput Text two\"]\n  2[label=\"Remove beginning\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Remove beginning\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"Replace Text\"]\n  2 -> 4 [label=\"out_file1\"]\n  5[label=\"Replace\"]\n  2 -> 5 [label=\"out_file1\"]\n  6[label=\"Replace Text\"]\n  3 -> 6 [label=\"out_file1\"]\n  7[label=\"Replace\"]\n  3 -> 7 [label=\"out_file1\"]\n  8[label=\"Line/Word/Character count\"]\n  4 -> 8 [label=\"outfile\"]\n  9[label=\"Generate the first WordCloud\"]\n  4 -> 9 [label=\"outfile\"]\n  k56f52608c40a468abfd2e6718cc436db[color=lightseagreen,label=\"Output\\nWordCloud01\"]\n  9 -> k56f52608c40a468abfd2e6718cc436db\n  10[label=\"Replace Text\"]\n  4 -> 10 [label=\"outfile\"]\n  11[label=\"Search in textfiles\"]\n  5 -> 11 [label=\"outfile\"]\n  k0d463da6de824130a1139cf527acdca1[color=lightseagreen,label=\"Output\\noutput01\"]\n  11 -> k0d463da6de824130a1139cf527acdca1\n  12[label=\"Line/Word/Character count\"]\n  6 -> 12 [label=\"outfile\"]\n  13[label=\"Generate a second WordCloud\"]\n  6 -> 13 [label=\"outfile\"]\n  k70815cdda4604d5e8923e9842b618393[color=lightseagreen,label=\"Output\\nWordCloud02\"]\n  13 -> k70815cdda4604d5e8923e9842b618393\n  14[label=\"Replace Text\"]\n  6 -> 14 [label=\"outfile\"]\n  15[label=\"Search in textfiles\"]\n  7 -> 15 [label=\"outfile\"]\n  k8cad2dd7d6b64320860cf9125cf77bef[color=lightseagreen,label=\"Output\\noutput02\"]\n  15 -> k8cad2dd7d6b64320860cf9125cf77bef\n  16[label=\"diff\"]\n  10 -> 16 [label=\"outfile\"]\n  14 -> 16 [label=\"outfile\"]\n  k22682b826f2943e3a649b411e42d5cd2[color=lightseagreen,label=\"Output\\nhtml_file\"]\n  16 -> k22682b826f2943e3a649b411e42d5cd2\n}",
           "workflow_tools": [
@@ -516,6 +516,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://corgat.cloud.ba.infn.it/galaxy",
+            "name": "CorGAT",
+            "usegalaxy": false
+          },
+          {
             "url": "http://cropgalaxy.excellenceinbreeding.org/",
             "name": "CropGalaxy",
             "usegalaxy": false
@@ -528,6 +533,11 @@
           {
             "url": "http://www.freebioinfo.org/",
             "name": "FreeBioinfo",
+            "usegalaxy": false
+          },
+          {
+            "url": "http://igg.cloud.ba.infn.it/galaxy",
+            "name": "GASLINI",
             "usegalaxy": false
           },
           {
@@ -667,6 +677,10 @@
               },
               {
                 "state": "local",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "local",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -676,6 +690,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "local",
@@ -793,6 +811,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -802,6 +824,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "missing",
@@ -882,8 +908,8 @@
                 "state": "inexact",
                 "versions": [
                   "3.6+galaxy1",
-                  "3.6+galaxy2",
-                  "3.7+galaxy0"
+                  "3.7+galaxy0",
+                  "3.6+galaxy2"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -929,6 +955,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -938,6 +968,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "inexact",
@@ -1074,6 +1108,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -1083,6 +1121,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "inexact",
@@ -1217,6 +1259,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -1226,6 +1272,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "inexact",
@@ -1314,8 +1364,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.1.2",
-                  "1.1.1",
-                  "1.1.0"
+                  "1.1.0",
+                  "1.1.1"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -1361,6 +1411,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -1370,6 +1424,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "missing",
@@ -1490,6 +1548,10 @@
               },
               {
                 "state": "local",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "local",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -1499,6 +1561,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "local",
@@ -1871,7 +1937,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-12-27 00:08:08 +0000",
+          "modified": "2025-12-28 00:09:32 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput censored text\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput uncensored text \"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Preprocessing of censored text\"];\n  0 -->|output| 2;\n  3[\"Preprocessing of uncensored text\"];\n  1 -->|output| 3;\n  4[\"Comparison with diff - user version\"];\n  2 -->|outfile| 4;\n  3 -->|outfile| 4;\n  5[\"Comparison with diff - computer version\"];\n  2 -->|outfile| 5;\n  3 -->|outfile| 5;\n  6[\"Extracting only censored passages\"];\n  5 -->|diff_file| 6;\n  7[\"Compute\"];\n  6 -->|out_file1| 7;\n  8[\"Cut\"];\n  7 -->|out_file1| 8;\n  9[\"Datamash\"];\n  7 -->|out_file1| 9;\n  10[\"Generate a word cloud\"];\n  8 -->|out_file1| 10;\n  0e468eb9-b68c-4840-b5e7-12cbf29e0c9c[\"Output\\noutput_graphic\"];\n  10 --> 0e468eb9-b68c-4840-b5e7-12cbf29e0c9c;\n  style 0e468eb9-b68c-4840-b5e7-12cbf29e0c9c stroke:#2c3143,stroke-width:4px;\n  11[\"Sort\"];\n  9 -->|out_file| 11;\n  9dfd8862-e7d7-46ae-bbe2-3e333a017764[\"Output\\noutput_csv\"];\n  11 --> 9dfd8862-e7d7-46ae-bbe2-3e333a017764;\n  style 9dfd8862-e7d7-46ae-bbe2-3e333a017764 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput censored text\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput uncensored text \"]\n  2[label=\"Preprocessing of censored text\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Preprocessing of uncensored text\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"Comparison with diff - user version\"]\n  2 -> 4 [label=\"outfile\"]\n  3 -> 4 [label=\"outfile\"]\n  5[label=\"Comparison with diff - computer version\"]\n  2 -> 5 [label=\"outfile\"]\n  3 -> 5 [label=\"outfile\"]\n  6[label=\"Extracting only censored passages\"]\n  5 -> 6 [label=\"diff_file\"]\n  7[label=\"Compute\"]\n  6 -> 7 [label=\"out_file1\"]\n  8[label=\"Cut\"]\n  7 -> 8 [label=\"out_file1\"]\n  9[label=\"Datamash\"]\n  7 -> 9 [label=\"out_file1\"]\n  10[label=\"Generate a word cloud\"]\n  8 -> 10 [label=\"out_file1\"]\n  k0e468eb9b68c4840b5e712cbf29e0c9c[color=lightseagreen,label=\"Output\\noutput_graphic\"]\n  10 -> k0e468eb9b68c4840b5e712cbf29e0c9c\n  11[label=\"Sort\"]\n  9 -> 11 [label=\"out_file\"]\n  k9dfd8862e7d746aebbe23e333a017764[color=lightseagreen,label=\"Output\\noutput_csv\"]\n  11 -> k9dfd8862e7d746aebbe23e333a017764\n}",
           "workflow_tools": [
@@ -2102,6 +2168,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://corgat.cloud.ba.infn.it/galaxy",
+            "name": "CorGAT",
+            "usegalaxy": false
+          },
+          {
             "url": "http://cropgalaxy.excellenceinbreeding.org/",
             "name": "CropGalaxy",
             "usegalaxy": false
@@ -2114,6 +2185,11 @@
           {
             "url": "http://www.freebioinfo.org/",
             "name": "FreeBioinfo",
+            "usegalaxy": false
+          },
+          {
+            "url": "http://igg.cloud.ba.infn.it/galaxy",
+            "name": "GASLINI",
             "usegalaxy": false
           },
           {
@@ -2253,6 +2329,10 @@
               },
               {
                 "state": "local",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "local",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -2262,6 +2342,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "local",
@@ -2379,6 +2463,10 @@
               },
               {
                 "state": "local",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "local",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -2388,6 +2476,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "local",
@@ -2505,6 +2597,10 @@
               },
               {
                 "state": "local",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "local",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -2514,6 +2610,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "local",
@@ -2631,6 +2731,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -2640,6 +2744,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "missing",
@@ -2720,8 +2828,8 @@
                 "state": "inexact",
                 "versions": [
                   "3.6+galaxy1",
-                  "3.6+galaxy2",
-                  "3.7+galaxy0"
+                  "3.7+galaxy0",
+                  "3.6+galaxy2"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -2767,6 +2875,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -2776,6 +2888,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "inexact",
@@ -2849,9 +2965,9 @@
                   "1.1.2",
                   "9.5+galaxy2",
                   "9.3+galaxy1",
+                  "1.1.0",
                   "1.1.1",
-                  "1.0.0",
-                  "1.1.0"
+                  "1.0.0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -2874,8 +2990,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.1.2",
-                  "1.1.1",
-                  "1.1.0"
+                  "1.1.0",
+                  "1.1.1"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -2921,6 +3037,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -2930,6 +3050,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "missing",
@@ -3052,6 +3176,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -3063,14 +3191,18 @@
                 "server": "http://www.freebioinfo.org/"
               },
               {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
                 "state": "inexact",
                 "versions": [
-                  "2.0",
                   "1.5",
                   "1.2.0",
                   "1.3.0",
+                  "1.4",
                   "1.6",
-                  "1.4"
+                  "2.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -3141,9 +3273,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0",
-                  "1.6",
                   "1.4",
+                  "1.6",
+                  "2.0",
                   "1.1.0"
                 ],
                 "server": "https://usegalaxy.cz/"
@@ -3161,11 +3293,11 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0",
                   "1.5",
                   "1.3.0",
-                  "1.6",
                   "1.4",
+                  "1.6",
+                  "2.0",
                   "1.3.1"
                 ],
                 "server": "https://usegalaxy.no/"
@@ -3212,6 +3344,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -3221,6 +3357,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "exact",
@@ -3235,8 +3375,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.9+galaxy0",
-                  "1.1.0"
+                  "1.1.0",
+                  "1.9+galaxy0"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -3288,8 +3428,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.9+galaxy0",
                   "1.1.0",
+                  "1.9+galaxy0",
                   "1.0.6"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -3314,8 +3454,8 @@
                 "versions": [
                   "1.1.0",
                   "1.0.6",
-                  "1.1.0+galaxy1",
-                  "1.1.0+galaxy2"
+                  "1.1.0+galaxy2",
+                  "1.1.0+galaxy1"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -3654,7 +3794,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2025-12-27 00:08:08 +0000",
+          "modified": "2025-12-28 00:09:32 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nstop_words_english\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Cut\"];\n  0 -->|output| 2;\n  3[\"Filter Tabular\"];\n  2 -->|out_file1| 3;\n  4[\"Column Regex Find And Replace\"];\n  3 -->|output| 4;\n  5[\"Sort\"];\n  4 -->|out_file1| 5;\n  6[\"Remove beginning\"];\n  5 -->|outfile| 6;\n  7[\"Datamash\"];\n  6 -->|out_file1| 7;\n  8[\"Sort\"];\n  7 -->|out_file| 8;\n  9[\"Bar chart\"];\n  8 -->|outfile| 9;\n  204d5ba9-e4d0-4bfd-a421-43b71f361bc9[\"Output\\nout_file1\"];\n  9 --> 204d5ba9-e4d0-4bfd-a421-43b71f361bc9;\n  style 204d5ba9-e4d0-4bfd-a421-43b71f361bc9 stroke:#2c3143,stroke-width:4px;\n  10[\"Sort\"];\n  8 -->|outfile| 10;\n  11[\"Select first\"];\n  10 -->|outfile| 11;\n  12[\"Cut\"];\n  11 -->|outfile| 12;\n  13[\"Parse parameter value\"];\n  12 -->|out_file1| 13;\n  14[\"Compose text parameter value\"];\n  13 -->|text_param| 14;\n  15[\"Search in textfiles\"];\n  0 -->|output| 15;\n  14 -->|out1| 15;\n  16[\"Cut\"];\n  15 -->|output| 16;\n  17[\"Generate a word cloud\"];\n  1 -->|output| 17;\n  16 -->|out_file1| 17;\n  db4e9713-11f9-4f7b-b2a6-f0661e1f46f8[\"Output\\noutput\"];\n  17 --> db4e9713-11f9-4f7b-b2a6-f0661e1f46f8;\n  style db4e9713-11f9-4f7b-b2a6-f0661e1f46f8 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nstop_words_english\"]\n  2[label=\"Cut\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Filter Tabular\"]\n  2 -> 3 [label=\"out_file1\"]\n  4[label=\"Column Regex Find And Replace\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Sort\"]\n  4 -> 5 [label=\"out_file1\"]\n  6[label=\"Remove beginning\"]\n  5 -> 6 [label=\"outfile\"]\n  7[label=\"Datamash\"]\n  6 -> 7 [label=\"out_file1\"]\n  8[label=\"Sort\"]\n  7 -> 8 [label=\"out_file\"]\n  9[label=\"Bar chart\"]\n  8 -> 9 [label=\"outfile\"]\n  k204d5ba9e4d04bfda42143b71f361bc9[color=lightseagreen,label=\"Output\\nout_file1\"]\n  9 -> k204d5ba9e4d04bfda42143b71f361bc9\n  10[label=\"Sort\"]\n  8 -> 10 [label=\"outfile\"]\n  11[label=\"Select first\"]\n  10 -> 11 [label=\"outfile\"]\n  12[label=\"Cut\"]\n  11 -> 12 [label=\"outfile\"]\n  13[label=\"Parse parameter value\"]\n  12 -> 13 [label=\"out_file1\"]\n  14[label=\"Compose text parameter value\"]\n  13 -> 14 [label=\"text_param\"]\n  15[label=\"Search in textfiles\"]\n  0 -> 15 [label=\"output\"]\n  14 -> 15 [label=\"out1\"]\n  16[label=\"Cut\"]\n  15 -> 16 [label=\"output\"]\n  17[label=\"Generate a word cloud\"]\n  1 -> 17 [label=\"output\"]\n  16 -> 17 [label=\"out_file1\"]\n  kdb4e971311f94f7bb2a6f0661e1f46f8[color=lightseagreen,label=\"Output\\noutput\"]\n  17 -> kdb4e971311f94f7bb2a6f0661e1f46f8\n}",
           "workflow_tools": [
@@ -3873,6 +4013,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://corgat.cloud.ba.infn.it/galaxy",
+            "name": "CorGAT",
+            "usegalaxy": false
+          },
+          {
             "url": "http://cropgalaxy.excellenceinbreeding.org/",
             "name": "CropGalaxy",
             "usegalaxy": false
@@ -3885,6 +4030,11 @@
           {
             "url": "http://www.freebioinfo.org/",
             "name": "FreeBioinfo",
+            "usegalaxy": false
+          },
+          {
+            "url": "http://igg.cloud.ba.infn.it/galaxy",
+            "name": "GASLINI",
             "usegalaxy": false
           },
           {
@@ -4024,6 +4174,10 @@
               },
               {
                 "state": "local",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "local",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -4033,6 +4187,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "local",
@@ -4150,6 +4308,10 @@
               },
               {
                 "state": "local",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "local",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -4159,6 +4321,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "local",
@@ -4275,6 +4441,10 @@
                 "server": "https://hyperbrowser.uio.no/coloc-stats"
               },
               {
+                "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
                 "state": "local",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
@@ -4285,6 +4455,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "local",
@@ -4402,6 +4576,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -4411,6 +4589,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "missing",
@@ -4527,6 +4709,10 @@
                 "server": "https://hyperbrowser.uio.no/coloc-stats"
               },
               {
+                "state": "local",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
                 "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
@@ -4537,6 +4723,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "local",
@@ -4654,6 +4844,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -4663,6 +4857,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "inexact",
@@ -4797,6 +4995,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -4806,6 +5008,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "inexact",
@@ -4939,6 +5145,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -4948,6 +5158,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "inexact",
@@ -5082,6 +5296,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -5091,6 +5309,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "missing",
@@ -5213,6 +5435,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -5222,6 +5448,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "missing",
@@ -5349,6 +5579,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -5358,6 +5592,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "missing",
@@ -5483,6 +5721,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -5492,6 +5734,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "exact",
@@ -5582,8 +5828,8 @@
                 "versions": [
                   "1.1.0",
                   "1.0.6",
-                  "1.1.0+galaxy1",
-                  "1.1.0+galaxy2"
+                  "1.1.0+galaxy2",
+                  "1.1.0+galaxy1"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -5629,6 +5875,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -5638,6 +5888,10 @@
               {
                 "state": "missing",
                 "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
                 "state": "missing",
