@@ -1,30 +1,25 @@
 digraph main {
   node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
   edge [fontname="Atkinson Hyperlegible"];
-  0[color=lightblue,label="ℹ️ Input Dataset\nDRR187559_2"]
-  1[color=lightblue,label="ℹ️ Input Dataset\nDRR187559_1"]
-  2[label="FastQC"]
+  0[color=lightblue,label="ℹ️ Input Collection\nInput Paired End Collection"]
+  1[label="fastp"]
+  0 -> 1 [label="output"]
+  k33eb25c09f2f4cbf8646db053deec7a4[color=lightseagreen,label="Output\nfastp_json"]
+  1 -> k33eb25c09f2f4cbf8646db053deec7a4
+  2[label="Falco"]
   0 -> 2 [label="output"]
-  3[label="fastp"]
-  1 -> 3 [label="output"]
-  0 -> 3 [label="output"]
-  kcf725812208944e9b8f08f2c710a44f7[color=lightseagreen,label="Output\nfastp_json"]
-  3 -> kcf725812208944e9b8f08f2c710a44f7
-  4[label="FastQC"]
-  1 -> 4 [label="output"]
-  5[label="Shovill"]
-  3 -> 5 [label="out1"]
-  3 -> 5 [label="out2"]
-  k888da6e37f0140b8a03dbaf45ba0b788[color=lightseagreen,label="Output\nshovill_log"]
-  5 -> k888da6e37f0140b8a03dbaf45ba0b788
-  6[label="Quast"]
-  5 -> 6 [label="contigs"]
-  k6d9987478012414ca04ffc0904373e4b[color=lightseagreen,label="Output\nquast_output"]
-  6 -> k6d9987478012414ca04ffc0904373e4b
-  7[label="Bandage Image"]
-  5 -> 7 [label="contigs_graph"]
-  8[label="Bandage Info"]
-  5 -> 8 [label="contigs_graph"]
-  k9989a28928d64338af5b75eb7704459b[color=lightseagreen,label="Output\nbandage_info_output"]
-  8 -> k9989a28928d64338af5b75eb7704459b
+  3[label="Shovill"]
+  1 -> 3 [label="output_paired_coll"]
+  k225015a77ccc4d68a8680e826069dfca[color=lightseagreen,label="Output\nshovill_log"]
+  3 -> k225015a77ccc4d68a8680e826069dfca
+  4[label="Quast"]
+  3 -> 4 [label="contigs"]
+  k2c7b1b247ac548429d14be65e433e787[color=lightseagreen,label="Output\nquast_output"]
+  4 -> k2c7b1b247ac548429d14be65e433e787
+  5[label="Bandage Image"]
+  3 -> 5 [label="contigs_graph"]
+  6[label="Bandage Info"]
+  3 -> 6 [label="contigs_graph"]
+  k99656c96011a4ce0bb5b8ee1e4541eb1[color=lightseagreen,label="Output\nbandage_info_output"]
+  6 -> k99656c96011a4ce0bb5b8ee1e4541eb1
 }

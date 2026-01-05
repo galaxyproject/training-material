@@ -1,0 +1,41 @@
+- doc: Test for Genome-Assembly-of-MRSA-using-Illumina-MiSeq-Data
+  job:
+    Input Paired End Collection:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: DRR187559
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/record/10669812/files/DRR187559_1.fastqsanger.bz2
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/record/10669812/files/DRR187559_2.fastqsanger.bz2
+  outputs:
+    fastp_json:
+      element_tests:
+        DRR187559:
+          asserts:
+            has_text:
+              text: "903564"
+    shovill_log:
+      element_tests:
+        DRR187559:
+          asserts:
+            has_text:
+              text: "Final assembly graph"
+    bandage_info_output:
+      element_tests:
+        DRR187559:
+          asserts:
+            has_n_lines:
+              n: 19
+    quast_output:
+      element_tests:
+        DRR187559:
+          asserts:
+            has_text:
+              text: "# contigs"
