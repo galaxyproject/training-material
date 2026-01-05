@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@0c51defd5ec20f0db3e509bf062df1d12295a25f",
+		release: "galaxy-training-network@2eb2299dc302cfa595cc77a169bf886050e4e57b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -238,7 +238,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			
 			Bazante Sanders, 
 			
-			Bérénice Batut
+			Bérénice Batut, 
+			
+			Tristan Reynolds
 			
 			
 			<br/>
@@ -246,14 +248,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			1
+			2
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Mar 4, 2024
+			Jan 5, 2026
 
 			<br/>
 
@@ -272,7 +274,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffa51d; --color-darker: #e59200; --color-dimmed: #f39b00;">Assembly</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffc390; --color-darker: #ffa40b; --color-dimmed: #ffb467;">Assembly</div>
 			
 			</br>
 			
@@ -281,6 +283,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Features</b>
 			<ul>
 			
+			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
 			
 			
 			
@@ -337,13 +341,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main-workflow">Galaxy Australia</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main-workflow">Galaxy Main</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main-workflow">Galaxy Europe</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main-workflow">Galaxy Main</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main-workflow">Galaxy France</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main-workflow">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-nanopore/versions/main-workflow">Import to another server (≥23.0+ only!)</a>
@@ -357,58 +361,64 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<pre class="mermaid">flowchart TD
   0["ℹ️ Input Dataset\nNanopore raw reads"];
   style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nIllumina forward raw reads"];
+  1["ℹ️ Input Collection\nInput Paired End Collection"];
   style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Dataset\nIllumina reverse raw reads"];
-  style 2 stroke:#2c3143,stroke-width:4px;
+  2["FastQC"];
+  0 -->|output| 2;
   3["Convert compressed file to uncompressed."];
   0 -->|output| 3;
-  4["FastQC"];
-  0 -->|output| 4;
-  5["fastp"];
-  1 -->|output| 5;
-  2 -->|output| 5;
-  6["NanoPlot"];
-  3 -->|output1| 6;
+  4["fastp"];
+  1 -->|output| 4;
+  f172ab83-f297-40b3-adc0-beb1dbec99ab["Output\nreport_json"];
+  4 --> f172ab83-f297-40b3-adc0-beb1dbec99ab;
+  style f172ab83-f297-40b3-adc0-beb1dbec99ab stroke:#2c3143,stroke-width:4px;
+  5["NanoPlot"];
+  3 -->|output1| 5;
   a97e6f33-8182-4a33-86dd-6cfbb83a842d["Output\nnanoplot_before_filtering"];
-  6 --> a97e6f33-8182-4a33-86dd-6cfbb83a842d;
+  5 --> a97e6f33-8182-4a33-86dd-6cfbb83a842d;
   style a97e6f33-8182-4a33-86dd-6cfbb83a842d stroke:#2c3143,stroke-width:4px;
-  7["filtlong"];
-  5 -->|out1| 7;
-  5 -->|out2| 7;
-  0 -->|output| 7;
-  8["Flye"];
-  7 -->|outfile| 8;
-  f12e718f-1bd5-490d-bd41-f0747aaa41a6["Output\nflye_assembly_info"];
-  8 --> f12e718f-1bd5-490d-bd41-f0747aaa41a6;
-  style f12e718f-1bd5-490d-bd41-f0747aaa41a6 stroke:#2c3143,stroke-width:4px;
-  9["NanoPlot"];
-  7 -->|outfile| 9;
+  6["Flatten collection"];
+  4 -->|output_paired_coll| 6;
+  7["Extract Forward Reads"];
+  6 -->|output| 7;
+  8["Extract Reverse Reads"];
+  6 -->|output| 8;
+  9["filtlong"];
+  7 -->|output| 9;
+  8 -->|output| 9;
+  0 -->|output| 9;
+  10["NanoPlot"];
+  9 -->|outfile| 10;
   89524090-f590-434d-89e2-66f0b1a23c7c["Output\nnanoplot_after_filtering"];
-  9 --> 89524090-f590-434d-89e2-66f0b1a23c7c;
+  10 --> 89524090-f590-434d-89e2-66f0b1a23c7c;
   style 89524090-f590-434d-89e2-66f0b1a23c7c stroke:#2c3143,stroke-width:4px;
-  10["Bandage Image"];
-  8 -->|assembly_gfa| 10;
-  11["BWA-MEM2"];
-  5 -->|out2| 11;
-  8 -->|consensus| 11;
-  12["Quast"];
-  8 -->|consensus| 12;
+  11["Flye"];
+  9 -->|outfile| 11;
+  f12e718f-1bd5-490d-bd41-f0747aaa41a6["Output\nflye_assembly_info"];
+  11 --> f12e718f-1bd5-490d-bd41-f0747aaa41a6;
+  style f12e718f-1bd5-490d-bd41-f0747aaa41a6 stroke:#2c3143,stroke-width:4px;
+  12["BWA-MEM2"];
+  7 -->|output| 12;
+  11 -->|consensus| 12;
+  13["Quast"];
+  11 -->|consensus| 13;
   dabfb8fd-8791-4959-a9dc-9b3c1e57a69c["Output\nquast_report_before_polishing"];
-  12 --> dabfb8fd-8791-4959-a9dc-9b3c1e57a69c;
+  13 --> dabfb8fd-8791-4959-a9dc-9b3c1e57a69c;
   style dabfb8fd-8791-4959-a9dc-9b3c1e57a69c stroke:#2c3143,stroke-width:4px;
-  13["BWA-MEM2"];
-  5 -->|out1| 13;
-  8 -->|consensus| 13;
-  14["Polypolish"];
-  8 -->|consensus| 14;
-  13 -->|bam_output| 14;
-  11 -->|bam_output| 14;
-  15["Quast"];
-  14 -->|polished_fasta| 15;
-  8 -->|consensus| 15;
+  14["Bandage Image"];
+  11 -->|assembly_gfa| 14;
+  15["BWA-MEM2"];
+  8 -->|output| 15;
+  11 -->|consensus| 15;
+  16["Polypolish"];
+  11 -->|consensus| 16;
+  12 -->|bam_output| 16;
+  15 -->|bam_output| 16;
+  17["Quast"];
+  11 -->|consensus| 17;
+  16 -->|polished_fasta| 17;
   4e465b51-68bf-4203-9a7c-897f46c70277["Output\nquast_report_after_polishing"];
-  15 --> 4e465b51-68bf-4203-9a7c-897f46c70277;
+  17 --> 4e465b51-68bf-4203-9a7c-897f46c70277;
   style 4e465b51-68bf-4203-9a7c-897f46c70277 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
@@ -426,13 +436,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				</tr>
 				
 				<tr>
-					<td>Input dataset</td>
-					<td>Illumina forward raw reads</td>
-				</tr>
-				
-				<tr>
-					<td>Input dataset</td>
-					<td>Illumina reverse raw reads</td>
+					<td>Input dataset collection</td>
+					<td>Input Paired End Collection</td>
 				</tr>
 				
 				</tbody>
@@ -450,6 +455,18 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/1.0.1+galaxy3</td>
+					<td>fastp</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0</td>
+					<td>NanoPlot</td>
+					<td></td>
+				</tr>
+				
+				<tr>
 					<td>toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0</td>
 					<td>NanoPlot</td>
 					<td></td>
@@ -458,12 +475,6 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tr>
 					<td>toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9.1+galaxy0</td>
 					<td>Flye</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0</td>
-					<td>NanoPlot</td>
 					<td></td>
 				</tr>
 				
@@ -495,6 +506,20 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			
 			<tr>
 				<td><a href="https://my.galaxy.training/?path=?tool_id=CONVERTER_bz2_to_uncompressed">CONVERTER_bz2_to_uncompressed</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=__EXTRACT_DATASET__">__EXTRACT_DATASET__</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=__FLATTEN__">__FLATTEN__</a></td>
 				<td>
 					
 				</td>
@@ -549,13 +574,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/1.0.1+galaxy3">toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/1.0.1+galaxy3</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/fastp/65b93b623c77">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
@@ -631,6 +651,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>2</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/de24119db10356969b4a079fb05ca176372ea330">de24119db</a></td>
+						<td>2025-12-19 02:21:59</td>
+						<td>Update workflow and workflow tests</td>
+					</tr>
 					
 					<tr>
 						<td>1</td>
@@ -720,7 +747,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0c51defd5ec20f0db3e509bf062df1d12295a25f">0c51def</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2eb2299dc302cfa595cc77a169bf886050e4e57b">2eb2299</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

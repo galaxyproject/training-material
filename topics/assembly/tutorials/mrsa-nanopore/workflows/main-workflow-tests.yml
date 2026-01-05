@@ -1,17 +1,23 @@
 - doc: Test outline for Genome-Assembly-of-MRSA-using-Oxford-Nanopore-MinION-(and-Illumina-data-if-available)
   job:
-    Illumina reverse raw reads:
-      class: File
-      location: https://zenodo.org/record/10669812/files/DRR187567.fastq.bz2
-      filetype: fastqsanger.bz2
-    Illumina forward raw reads:
-      class: File
-      location: https://zenodo.org/record/10669812/files/DRR187559_1.fastqsanger.bz2
-      filetype: fastqsanger.bz2
     Nanopore raw reads:
       class: File
       location: https://zenodo.org/record/10669812/files/DRR187559_2.fastqsanger.bz2
       filetype: fastqsanger.bz2
+    Input Paired End Collection:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: DRR187559
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/record/10669812/files/DRR187559_1.fastqsanger.bz2
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/record/10669812/files/DRR187559_2.fastqsanger.bz2
   outputs:
     nanoplot_before_filtering:
       asserts:
@@ -37,7 +43,6 @@
       asserts:
         has_text:
           text: "Flye"
-        
     quast_report_after_polishing:
       asserts:
         has_text:
