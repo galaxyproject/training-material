@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@a52a26db4681f7e7d243aa08379fb6b93cab06a6",
+		release: "galaxy-training-network@2a87943f0e791175c6492ed2d58a71aa3bd3a4e0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -236,7 +236,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Author(s)</b>
 			<br/>
 			
-			Peter van Heusden
+			Peter van Heusden, 
+			
+			Tristan Reynolds
 			
 			
 			<br/>
@@ -244,14 +246,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			7
+			8
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Jun 10, 2024
+			Jan 6, 2026
 
 			<br/>
 
@@ -270,9 +272,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #fff7c8; --color-darker: #f0dd00; --color-dimmed: #ffeb00;">pathogen</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #fff4b3; --color-darker: #edda00; --color-dimmed: #fce800;">pathogen</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #8fe7ff; --color-darker: #00d4f5; --color-dimmed: #4adfff;">tuberculosis</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #52e0ff; --color-darker: #00c9e9; --color-dimmed: #00d6f7;">tuberculosis</div>
 			
 			</br>
 			
@@ -297,6 +299,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</br>
 
 			
+			
+			<i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> <a href="index.html">Other workflows associated with this material</a>
 			
 
 
@@ -339,9 +343,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-tb-variant-analysis/versions/tb-variant-analysis">Galaxy Main</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-tb-variant-analysis/versions/tb-variant-analysis">Galaxy France</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-tb-variant-analysis/versions/tb-variant-analysis">Galaxy Main</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-tb-variant-analysis/versions/tb-variant-analysis">Galaxy Europe</a></li>
 					
@@ -361,9 +365,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   style 0 stroke:#2c3143,stroke-width:4px;
   1["ℹ️ Input Dataset\nReference Genome"];
   style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Parameter\nMinimum depth of coverage"];
+  2["ℹ️ Input Parameter\nMinimum variant allele frequency"];
   style 2 fill:#ded,stroke:#393,stroke-width:4px;
-  3["ℹ️ Input Parameter\nMinimum variant allele frequency"];
+  3["ℹ️ Input Parameter\nMinimum depth of coverage"];
   style 3 fill:#ded,stroke:#393,stroke-width:4px;
   4["ℹ️ Input Parameter\nAdditional BWA-MEM options"];
   style 4 fill:#ded,stroke:#393,stroke-width:4px;
@@ -371,65 +375,65 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   0 -->|output| 5;
   6["seqret"];
   1 -->|output| 6;
-  7["snippy"];
-  4 -->|output| 7;
-  2 -->|output| 7;
-  3 -->|output| 7;
+  7["Kraken2"];
   5 -->|output_paired_coll| 7;
-  1 -->|output| 7;
-  8["Kraken2"];
-  5 -->|output_paired_coll| 8;
-  c7abf2bf-ed4c-433e-a695-9eca61282bb5["Output\nreport_output"];
-  8 --> c7abf2bf-ed4c-433e-a695-9eca61282bb5;
-  style c7abf2bf-ed4c-433e-a695-9eca61282bb5 stroke:#2c3143,stroke-width:4px;
   083a0e51-7780-4c91-a071-dc0e4641d060["Output\noutput"];
-  8 --> 083a0e51-7780-4c91-a071-dc0e4641d060;
+  7 --> 083a0e51-7780-4c91-a071-dc0e4641d060;
   style 083a0e51-7780-4c91-a071-dc0e4641d060 stroke:#2c3143,stroke-width:4px;
-  9["QualiMap BamQC"];
-  7 -->|snpsbam| 9;
-  10["mosdepth"];
-  2 -->|output| 10;
-  7 -->|snpsbam| 10;
-  11["TB Variant Filter"];
-  7 -->|snpvcf| 11;
+  6f77efc7-d348-40c0-9de9-959ff1843e2d["Output\nreport_output"];
+  7 --> 6f77efc7-d348-40c0-9de9-959ff1843e2d;
+  style 6f77efc7-d348-40c0-9de9-959ff1843e2d stroke:#2c3143,stroke-width:4px;
+  8["snippy"];
+  4 -->|output| 8;
+  3 -->|output| 8;
+  2 -->|output| 8;
+  5 -->|output_paired_coll| 8;
+  1 -->|output| 8;
+  9["TB Variant Filter"];
+  8 -->|snpvcf| 9;
+  10["TB Variant Filter"];
+  8 -->|snpvcf| 10;
+  11["QualiMap BamQC"];
+  8 -->|snpsbam| 11;
   12["TB-Profiler Profile"];
-  7 -->|snpsbam| 12;
+  8 -->|snpsbam| 12;
   335635b4-a4de-4980-ad02-68f0035daeaa["Output\noutput_txt"];
   12 --> 335635b4-a4de-4980-ad02-68f0035daeaa;
   style 335635b4-a4de-4980-ad02-68f0035daeaa stroke:#2c3143,stroke-width:4px;
-  13["TB Variant Filter"];
-  7 -->|snpvcf| 13;
-  14["Flatten collection"];
-  9 -->|raw_data| 14;
-  15["Text reformatting"];
-  10 -->|output_quantized_bed| 15;
-  16["Text transformation"];
-  11 -->|output1| 16;
+  13["mosdepth"];
+  3 -->|output| 13;
+  8 -->|snpsbam| 13;
+  14["Text transformation"];
+  10 -->|output1| 14;
   007df8c2-bd13-495f-8904-abf31d4594d0["Output\nFinal annotated VCF"];
-  16 --> 007df8c2-bd13-495f-8904-abf31d4594d0;
+  14 --> 007df8c2-bd13-495f-8904-abf31d4594d0;
   style 007df8c2-bd13-495f-8904-abf31d4594d0 stroke:#2c3143,stroke-width:4px;
-  17["MultiQC"];
-  5 -->|report_json| 17;
+  15["Flatten collection"];
+  11 -->|raw_data| 15;
+  16["Text reformatting"];
+  13 -->|output_quantized_bed| 16;
+  17["TB Variant Report"];
   14 -->|output| 17;
-  59528235-7525-4ef9-8810-36f1ed0f01f6["Output\nhtml_report"];
-  17 --> 59528235-7525-4ef9-8810-36f1ed0f01f6;
-  style 59528235-7525-4ef9-8810-36f1ed0f01f6 stroke:#2c3143,stroke-width:4px;
-  18["bcftools consensus"];
-  13 -->|output1| 18;
-  6 -->|out_file1| 18;
-  15 -->|outfile| 18;
-  c71b135d-35f9-44d0-a20e-f25528e518af["Output\nconsensus_genome"];
-  18 --> c71b135d-35f9-44d0-a20e-f25528e518af;
-  style c71b135d-35f9-44d0-a20e-f25528e518af stroke:#2c3143,stroke-width:4px;
-  19["TB Variant Report"];
-  16 -->|output| 19;
-  12 -->|results_json| 19;
-  959528d2-f8f2-4440-99cf-44fddd6c5069["Output\ndrug_resistance_report_html"];
-  19 --> 959528d2-f8f2-4440-99cf-44fddd6c5069;
-  style 959528d2-f8f2-4440-99cf-44fddd6c5069 stroke:#2c3143,stroke-width:4px;
+  12 -->|results_json| 17;
   4d9636eb-075b-4fd2-a1e4-1a7c37a17fc0["Output\nvariants_report_html"];
-  19 --> 4d9636eb-075b-4fd2-a1e4-1a7c37a17fc0;
-  style 4d9636eb-075b-4fd2-a1e4-1a7c37a17fc0 stroke:#2c3143,stroke-width:4px;</pre>
+  17 --> 4d9636eb-075b-4fd2-a1e4-1a7c37a17fc0;
+  style 4d9636eb-075b-4fd2-a1e4-1a7c37a17fc0 stroke:#2c3143,stroke-width:4px;
+  959528d2-f8f2-4440-99cf-44fddd6c5069["Output\ndrug_resistance_report_html"];
+  17 --> 959528d2-f8f2-4440-99cf-44fddd6c5069;
+  style 959528d2-f8f2-4440-99cf-44fddd6c5069 stroke:#2c3143,stroke-width:4px;
+  18["MultiQC"];
+  5 -->|report_json| 18;
+  15 -->|output| 18;
+  59528235-7525-4ef9-8810-36f1ed0f01f6["Output\nhtml_report"];
+  18 --> 59528235-7525-4ef9-8810-36f1ed0f01f6;
+  style 59528235-7525-4ef9-8810-36f1ed0f01f6 stroke:#2c3143,stroke-width:4px;
+  19["bcftools consensus"];
+  9 -->|output1| 19;
+  6 -->|out_file1| 19;
+  16 -->|outfile| 19;
+  c71b135d-35f9-44d0-a20e-f25528e518af["Output\nconsensus_genome"];
+  19 --> c71b135d-35f9-44d0-a20e-f25528e518af;
+  style c71b135d-35f9-44d0-a20e-f25528e518af stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -452,12 +456,12 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				
 				<tr>
 					<td>Input parameter</td>
-					<td>Minimum depth of coverage</td>
+					<td>Minimum variant allele frequency</td>
 				</tr>
 				
 				<tr>
 					<td>Input parameter</td>
-					<td>Minimum variant allele frequency</td>
+					<td>Minimum depth of coverage</td>
 				</tr>
 				
 				<tr>
@@ -480,38 +484,38 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.17.1+galaxy0</td>
 					<td>Kraken2</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/6.2.1+galaxy0</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/6.6.4+galaxy0</td>
 					<td>TB-Profiler Profile</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.3+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.5+galaxy2</td>
 					<td>Text transformation</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/1.0.1+galaxy0</td>
+					<td>TB Variant Report</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy4</td>
 					<td>MultiQC</td>
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy3</td>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy4</td>
 					<td>bcftools consensus</td>
-					<td></td>
-				</tr>
-				
-				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/1.0.0+galaxy0</td>
-					<td>TB Variant Report</td>
 					<td></td>
 				</tr>
 				
@@ -537,25 +541,15 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy2</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/86755160afbf">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.3+galaxy1">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.3+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.5+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.5+galaxy2</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/86755160afbf">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
@@ -573,11 +567,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy3">toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy3</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy4">toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy4</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/bcftools_consensus/da0bf365652d">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/bcftools_consensus/8aa352093d73">
 						View in ToolShed
 					</a>
 					
@@ -585,59 +579,39 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/1.0.1+galaxy3">toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/1.0.1+galaxy3</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/fastp/c59d48774d03">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.17.1+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.17.1+galaxy0</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/kraken2/20e2f64aa1fe">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/mosdepth/mosdepth/0.3.8+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/mosdepth/mosdepth/0.3.8+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/mosdepth/mosdepth/0.3.12+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/mosdepth/mosdepth/0.3.12+galaxy0</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/mosdepth/5854d0da92b4">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy4">toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy4</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/multiqc/abfd8a6544d7">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2c+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2c+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.3+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.3+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/qualimap_bamqc/4a89c6f84425">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/qualimap_bamqc/30a201c9c310">
 						View in ToolShed
 					</a>
 					
@@ -669,23 +643,18 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/6.2.1+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/6.2.1+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/6.6.4+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/6.6.4+galaxy0</a></td>
 				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/tbprofiler/4839e590cb26">
-						View in ToolShed
-					</a>
 					
 				</td>
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/1.0.0+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/1.0.0+galaxy0</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/1.0.1+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/1.0.1+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/tbvcfreport/42818629ec4c">
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/tbvcfreport/9793bc5d741b">
 						View in ToolShed
 					</a>
 					
@@ -715,6 +684,20 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>16</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/a6dce331d2b78b5f4ee2f8db6f542f8772f789a0">a6dce331d</a></td>
+						<td>2025-12-23 02:31:29</td>
+						<td>Updated workflow tool versions</td>
+					</tr>
+					
+					<tr>
+						<td>15</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/15d376f888dfbed7dc440e212f6bd40c35cd9680">15d376f88</a></td>
+						<td>2025-12-23 01:50:43</td>
+						<td>Update and add new workflows and workflow tests</td>
+					</tr>
 					
 					<tr>
 						<td>14</td>
@@ -895,7 +878,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a52a26db4681f7e7d243aa08379fb6b93cab06a6">a52a26d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2a87943f0e791175c6492ed2d58a71aa3bd3a4e0">2a87943</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
