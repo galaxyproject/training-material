@@ -1353,6 +1353,11 @@ As expected from the previous results, in that case there are not statistically 
 
 Here we can see that changes in gene expression and isoform switches are not in any way mutually exclusive, as there are many genes which are both differentially expressed (large gene log2FC) and contain isoform switches (color).
 
+# Evaluate gene expression variance with SplicingFactory
+
+Previously we have investigated consistent alternative splicing between conditions by looking for changes on transcript ratios. However, experimental evidence started to accumulate on the biological significance of splicing variance ({% cite Wan2018 %}). Thus, results indicate that frequent splicing factor mutations in cancer seem to play an important role as amplifier of splicing variance instead of leading to coordinated splicing changes, leading to large fluctuations in gene regulatory networks ({% cite Chalancon2012 %}, {% cite Schuh2020 %}).
+
+
 <!--
 
 # Optional exercise: original data analysis
