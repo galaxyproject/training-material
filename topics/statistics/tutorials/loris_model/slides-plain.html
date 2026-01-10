@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: Building Reliable Machine Learning Models with PyCaret: A Case Study on the LORIS Model / Building the LORIS LLR6 PanCancer Model Using PyCaret / Statistics and machine learning</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: Galaxy Tabular Learner: Building a Model using Chowell clinical data / Galaxy Tabular Learner - Building a Model using Chowell clinical data / Statistics and machine learning</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@74d2842d4b14783f79ee8b9bd352f9523fc74cfa",
+		release: "galaxy-training-network@7de53b0be6486f1d1391f818bcff5585f16392c6",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -66,15 +66,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="Building Reliable Machine Learning Models with PyCaret: A Case Study on the LORIS Model">
+<meta name="DC.title" content="Galaxy Tabular Learner: Building a Model using Chowell clinical data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-05-05 09:32:11 +0000">
+<meta name="DC.date" content="2026-01-10 10:16:24 +0000">
 <meta name="DC.creator" content="Paulo Cilas Morais Lyra Junior">
 <meta name="DC.creator" content="Junhao Qiu">
-<meta name="DC.creator" content="Jeremy Goecks"><meta name="description" content="# Introduction to PyCaret and Galaxy  - **Galaxy**: A web-based platform for data-intensive biomedical research, enabling users to run tools and workflows without coding. - **PyCaret**: An open-source, low-code machine learning library in Python that automates machine learning workflows. - **Integration**: PyCaret is available as a tool in Galaxy, allowing users to perform machine learning tasks directly from the Galaxy interface.  ???  PyCaret simplifies machine learning by automating tasks like data preprocessing, model training, and evaluation. In this tutorial, we will explore how PyCaret can be used within Galaxy to build reliable models, using the LORIS LLR6 model as a case study.  ---  # Use Case: The LORIS LLR6 Model (Chang et al., 2024)  - **LORIS LLR6**: A logistic regression model for predicting patient response to immune checkpoint blockade (ICB) therapy. - **Dataset**: LORIS PanCancer, containing clinical, pathologic, and genomic features from 18 solid tumor types. - **...">
+<meta name="DC.creator" content="Jeremy Goecks"><meta name="description" content="# What you will do  - Upload preprocessed **Chowell_train** and **Chowell_test** tables (Zenodo). - Train a classification model with **Tabular Learner** in Galaxy. - Re-evaluate the selected model at a **chosen probability threshold**. - Use the HTML report to compare results to **LORIS LLR6 (Chang et al., 2024)**.  ???  This tutorial treats the published LORIS LLR6 model as a benchmark baseline. The main goal is to understand what changes (and what does not) when the model is rebuilt under a standardized Galaxy workflow.  ---  # Tool availability  - Tabular Learner is available on:   - **Cancer-Galaxy** (Galaxy-ML tools → Tabular Learner)   - **Galaxy US** (Statistics and Visualization → Machine Learning → Tabular Learner)  ---  # Use case: LORIS LLR6 (Chang et al., 2024)  - **Task**: Predict patient benefit from immune checkpoint blockade (ICB) therapy. - **Model**: Logistic regression (LLR6) trained on 6 predictors. - **Data**: LORIS PanCancer; this tutorial uses **Chowell_train...">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Statistics and machine learning / Building the LORIS LLR6 PanCancer Model Using PyCaret / Slides: Building Reliable Machine Learning Models with PyCaret: A Case Study on the LORIS Model">
-        <meta property="og:description" content="# Introduction to PyCaret and Galaxy  - **Galaxy**: A web-based platform for data-intensive biomedical research, enabling users to run tools and workflows without coding. - **PyCaret**: An open-source, low-code machine learning library in Python that automates machine learning workflows. - **Integration**: PyCaret is available as a tool in Galaxy, allowing users to perform machine learning tasks directly from the Galaxy interface.  ???  PyCaret simplifies machine learning by automating tasks like data preprocessing, model training, and evaluation. In this tutorial, we will explore how PyCaret can be used within Galaxy to build reliable models, using the LORIS LLR6 model as a case study.  ---  # Use Case: The LORIS LLR6 Model (Chang et al., 2024)  - **LORIS LLR6**: A logistic regression model for predicting patient response to immune checkpoint blockade (ICB) therapy. - **Dataset**: LORIS PanCancer, containing clinical, pathologic, and genomic features from 18 solid tumor types. - **...">
+	<meta property="og:title" content="Statistics and machine learning / Galaxy Tabular Learner - Building a Model using Chowell clinical data / Slides: Galaxy Tabular Learner: Building a Model using Chowell clinical data">
+        <meta property="og:description" content="# What you will do  - Upload preprocessed **Chowell_train** and **Chowell_test** tables (Zenodo). - Train a classification model with **Tabular Learner** in Galaxy. - Re-evaluate the selected model at a **chosen probability threshold**. - Use the HTML report to compare results to **LORIS LLR6 (Chang et al., 2024)**.  ???  This tutorial treats the published LORIS LLR6 model as a benchmark baseline. The main goal is to understand what changes (and what does not) when the model is rebuilt under a standardized Galaxy workflow.  ---  # Tool availability  - Tabular Learner is available on:   - **Cancer-Galaxy** (Galaxy-ML tools → Tabular Learner)   - **Galaxy US** (Statistics and Visualization → Machine Learning → Tabular Learner)  ---  # Use case: LORIS LLR6 (Chang et al., 2024)  - **Task**: Predict patient benefit from immune checkpoint blockade (ICB) therapy. - **Model**: Logistic regression (LLR6) trained on 6 predictors. - **Data**: LORIS PanCancer; this tutorial uses **Chowell_train...">
         <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
         <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
         <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
@@ -211,7 +211,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div class="container main-content" role="main">
         <section class="tutorial">
 	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/statistics/tutorials/loris_model/slides.html">View markdown source on GitHub</a>
-	<h1>Building Reliable Machine Learning Models with PyCaret: A Case Study on the LORIS Model</h1>
+	<h1>Galaxy Tabular Learner: Building a Model using Chowell clinical data</h1>
 		<h2>Contributors</h2>
 <div markdown="0">
 
@@ -229,10 +229,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		<h2>Questions</h2>
 		<ul>
 		
-		<li><p>How can PyCaret be used in Galaxy to build and evaluate machine learning models?</p>
+		<li><p>How can Tabular Learner in Galaxy be used to reconstruct a LORIS-style (LLR6) logistic regression model using the same dataset and predictor set?</p>
 </li>
 		
-		<li><p>What are the key features of PyCaret that simplify machine learning workflows?</p>
+		<li><p>How should the decision threshold be configured (default vs selected cutoff) to align predictions with the intended clinical operating point?</p>
+</li>
+		
+		<li><p>Which components of the Tabular Learner report best support a transparent comparison to the published LORIS baseline?</p>
 </li>
 		
 		</ul>
@@ -242,13 +245,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		<h2>Objectives</h2>
 		<ul>
 		
-		<li><p>Understand the capabilities of PyCaret for automating machine learning workflows.</p>
+		<li><p>Build an immunotherapy-response classifier in Galaxy using Tabular Learner.</p>
 </li>
 		
-		<li><p>Learn how to use PyCaret in Galaxy to build and compare machine learning models.</p>
+		<li><p>Train and compare candidate models, then re-evaluate with a selected probability threshold.</p>
 </li>
 		
-		<li><p>Apply PyCaret to the LORIS dataset to reproduce and evaluate the LORIS LLR6 model.</p>
+		<li><p>Benchmark discrimination, calibration, and threshold-dependent metrics against the published LORIS LLR6 model.</p>
 </li>
 		
 		</ul>
@@ -257,176 +260,250 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		
 
 		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> May 5, 2025 </div>
-		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> May 5, 2025 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Jan 10, 2026 </div>
 
 	<hr />
 
 
-	<h1 id="introduction-to-pycaret-and-galaxy">Introduction to PyCaret and Galaxy</h1>
+	<h1 id="what-you-will-do">What you will do</h1>
 
 <ul>
-  <li><strong>Galaxy</strong>: A web-based platform for data-intensive biomedical research, enabling users to run tools and workflows without coding.</li>
-  <li><strong>PyCaret</strong>: An open-source, low-code machine learning library in Python that automates machine learning workflows.</li>
-  <li><strong>Integration</strong>: PyCaret is available as a tool in Galaxy, allowing users to perform machine learning tasks directly from the Galaxy interface.</li>
+  <li>Upload preprocessed <strong>Chowell_train</strong> and <strong>Chowell_test</strong> tables (Zenodo).</li>
+  <li>Train a classification model with <strong>Tabular Learner</strong> in Galaxy.</li>
+  <li>Re-evaluate the selected model at a <strong>chosen probability threshold</strong>.</li>
+  <li>Use the HTML report to compare results to <strong>LORIS LLR6 (Chang et al., 2024)</strong>.</li>
 </ul>
 
 <p><span>Speaker Notes</span></p>
 
-<p>PyCaret simplifies machine learning by automating tasks like data preprocessing, model training, and evaluation. In this tutorial, we will explore how PyCaret can be used within Galaxy to build reliable models, using the LORIS LLR6 model as a case study.</p>
+<p>This tutorial treats the published LORIS LLR6 model as a benchmark baseline. The main goal is to understand what changes (and what does not) when the model is rebuilt under a standardized Galaxy workflow.</p>
 
 <hr />
 
-<h1 id="use-case-the-loris-llr6-model-chang-et-al-2024">Use Case: The LORIS LLR6 Model (Chang et al., 2024)</h1>
+<h1 id="tool-availability">Tool availability</h1>
 
 <ul>
-  <li><strong>LORIS LLR6</strong>: A logistic regression model for predicting patient response to immune checkpoint blockade (ICB) therapy.</li>
-  <li><strong>Dataset</strong>: LORIS PanCancer, containing clinical, pathologic, and genomic features from 18 solid tumor types.</li>
-  <li><strong>Objective</strong>: Demonstrate how PyCaret can be used to reproduce and evaluate the LORIS LLR6 model, highlighting its automation and efficiency.</li>
-</ul>
-
-<p><img src="./../../images/loris_tutorial/tutorial_schema.png" alt="Schema of the process to train and test the LORIS model" /></p>
-
-<hr />
-
-<h1 id="dataset-loris-pancancer">Dataset: LORIS PanCancer</h1>
-
-<ul>
-  <li><strong>Description</strong>: A large dataset of ICB-treated and non-ICB-treated patients across 10 cohorts.</li>
-  <li><strong>Focus</strong>: Chowell_train for training, Chowell_test for testing.</li>
-  <li><strong>Key Features</strong>:
+  <li>Tabular Learner is available on:
     <ul>
-      <li>Tumor Mutation Burden (TMB)</li>
-      <li>Systemic Therapy History</li>
-      <li>Albumin</li>
-      <li>Cancer Type</li>
-      <li>Neutrophil-Lymphocyte Ratio (NLR)</li>
-      <li>Age</li>
-      <li>Response (target: 0 = no benefit, 1 = benefit)</li>
-    </ul>
-  </li>
-  <li><strong>Galaxy’s Role</strong>: Facilitates easy data upload and management.</li>
-</ul>
-
-<hr />
-
-<h1 id="data-preparation-for-pycaret">Data Preparation for PyCaret</h1>
-
-<ul>
-  <li><strong>Preprocessing</strong>:
-    <ul>
-      <li>Extract Chowell_train and Chowell_test from raw data.</li>
-      <li>Select 7 features (TMB, Systemic Therapy History, Albumin, Cancer Type, NLR, Age, Response).</li>
-      <li>Truncate TMB, NLR, Age.</li>
-      <li>One-hot encode Cancer Type.</li>
-    </ul>
-  </li>
-  <li><strong>Dockstore</strong>:
-    <ul>
-      <li>Handles preprocessing steps.</li>
-      <li>
-        <h2 id="loris-preprocessing"><a href="https://colab.research.google.com/github/paulocilasjr/pycaret-use-case/blob/main/LORIS/preprocessing_data.ipynb">LORIS Preprocessing</a></h2>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h1 id="pycaret-in-galaxy">PyCaret in Galaxy</h1>
-
-<ul>
-  <li><strong>PyCaret Model Comparison Tool</strong>:
-    <ul>
-      <li>Available on Galaxy: https://usegalaxy.org/</li>
-      <li>Automates training and comparison of multiple machine learning models.</li>
-      <li>Outputs the best model and a comprehensive performance report.</li>
-    </ul>
-  </li>
-  <li><strong>Key Features of PyCaret</strong>:
-    <ul>
-      <li>Automates data preprocessing (e.g., scaling, encoding).</li>
-      <li>Supports model selection and hyperparameter tuning.</li>
-      <li>Provides detailed evaluation metrics and visualizations.</li>
+      <li><strong>Cancer-Galaxy</strong> (Galaxy-ML tools → Tabular Learner)</li>
+      <li><strong>Galaxy US</strong> (Statistics and Visualization → Machine Learning → Tabular Learner)</li>
     </ul>
   </li>
 </ul>
 
 <hr />
 
-<h1 id="running-pycaret-model-comparison">Running PyCaret Model Comparison</h1>
+<h1 id="use-case-loris-llr6-chang-et-al-2024">Use case: LORIS LLR6 (Chang et al., 2024)</h1>
 
+<ul>
+  <li><strong>Task</strong>: Predict patient benefit from immune checkpoint blockade (ICB) therapy.</li>
+  <li><strong>Model</strong>: Logistic regression (LLR6) trained on 6 predictors.</li>
+  <li><strong>Data</strong>: LORIS PanCancer; this tutorial uses <strong>Chowell_train</strong> (train) and <strong>Chowell_test</strong> (test).</li>
+</ul>
+
+<p><img src="../../images/loris_tutorial/tutorial_schema.png" alt="schema of the whole process of training model and test." title="Overview of the process steps to obtain the model from the Chowell dataset." style="width: 70%; display: block; margin-left: auto; margin-right: auto;" /></p>
+
+<hr />
+
+<h1 id="dataset-and-predictors">Dataset and predictors</h1>
+
+<p><strong>Predictors (LLR6):</strong></p>
+<ul>
+  <li>TMB (truncated at 50)</li>
+  <li>Systemic Therapy History (0/1)</li>
+  <li>Albumin</li>
+  <li>Cancer Type (one-hot encoded)</li>
+  <li>NLR (truncated at 25)</li>
+  <li>Age (truncated at 85)</li>
+</ul>
+
+<p><strong>Target:</strong></p>
+<ul>
+  <li>Response (0 = no benefit, 1 = benefit)</li>
+</ul>
+
+<hr />
+
+<h1 id="model-selection-idea">Model selection idea</h1>
+
+<p>Tabular Learner can:</p>
 <ol>
-  <li><strong>Upload Data</strong>:
-    <ul>
-      <li>Chowell_train_Response.tsv and Chowell_test_Response.tsv from Zenodo.</li>
-      <li><a href="https://zenodo.org/records/13885908">Zenodo link to files</a></li>
-    </ul>
-  </li>
-  <li><strong>Run PyCaret Model Comparison</strong>:
-    <ul>
-      <li>Train Dataset (CSV or TSV): Training dataset (Chowell_train_Response.tsv)</li>
-      <li>Test Dataset (CSV or TSV): Testing dataset (Chowell_test_Response.tsv)</li>
-      <li>Select the target column: Response (C22)</li>
-      <li>Task: Classification</li>
-      <li>Only Select Classification Models if you don’t want to compare all models: Logistic Regression</li>
-    </ul>
-  </li>
-  <li><strong>Evaluate Model</strong>:
-    <ul>
-      <li>Use PyCaret’s report to assess performance.</li>
-      <li>Compare with original LORIS LLR6 metrics from Chang et al., 2024.</li>
-    </ul>
-  </li>
+  <li>Compare multiple candidate classifiers and pick the best under its evaluation protocol.</li>
+  <li>Restrict candidates to a specific family (e.g., logistic regression only).</li>
 </ol>
 
+<p>In this tutorial, we <strong>train all candidate models</strong> and check whether logistic regression remains among the best performers.</p>
+
 <hr />
 
-<h1 id="pycaret-model-report">PyCaret Model Report</h1>
+<h1 id="data-upload">Data upload</h1>
+
+<p>Import the preprocessed TSV files from Zenodo:</p>
 
 <ul>
-  <li><strong>Interactive HTML Report</strong>:
-    <ul>
-      <li><strong>Setup &amp; Best Model</strong>: Parameters, metrics (Accuracy, AUC, F1, MCC).</li>
-      <li><strong>Best Model Plots</strong>: ROC-AUC, Confusion Matrix, Precision-Recall.</li>
-      <li><strong>Feature Importance</strong>: SHAP values, Random Forest importance.</li>
-      <li><strong>Explainer</strong>: Permutation Importance, Partial Dependence Plots.</li>
-    </ul>
-  </li>
-  <li><strong>PyCaret’s Strength</strong>: Provides comprehensive insights for model interpretation and validation.</li>
+  <li><code class="language-plaintext highlighter-rouge">Chowell_train_Response.tsv</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Chowell_test_Response.tsv</code></li>
+</ul>
+
+<p>Ensure the datatype is <strong>tabular</strong>, and optionally tag datasets for traceability.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>The tutorial focuses on the preprocessed tables; a separate notebook/script performs the truncation and encoding steps.</p>
+
+<hr />
+
+<h1 id="run-1-train-and-select-a-best-model">Run 1: Train and select a best model</h1>
+
+<p>Tabular Learner parameters:</p>
+
+<ul>
+  <li>Input Dataset: <code class="language-plaintext highlighter-rouge">Chowell_train_Response.tsv</code></li>
+  <li>Test Dataset: <code class="language-plaintext highlighter-rouge">Chowell_test_Response.tsv</code></li>
+  <li>Target column: <code class="language-plaintext highlighter-rouge">Response</code></li>
+  <li>Task: <code class="language-plaintext highlighter-rouge">Classification</code></li>
+</ul>
+
+<p>Run the tool to produce the <strong>Best Model</strong> and the <strong>HTML report</strong>.</p>
+
+<hr />
+
+<h1 id="run-2-re-evaluate-at-a-selected-threshold">Run 2: Re-evaluate at a selected threshold</h1>
+
+<p>Rerun Tabular Learner with:</p>
+
+<ul>
+  <li>Customize Default Settings?: <strong>Yes</strong></li>
+  <li>Classification Probability Threshold: <strong>0.25</strong></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Threshold-dependent metrics (accuracy, precision, recall, F1, MCC) change with the cutoff. This second run makes threshold choice explicit for comparisons.</p>
+
+<hr />
+
+<h1 id="outputs-to-inspect">Outputs to inspect</h1>
+
+<ul>
+  <li><strong>Tabular Learner Best Model</strong> (<code class="language-plaintext highlighter-rouge">.h5</code>): trained model + preprocessing.</li>
+  <li><strong>Tabular Learner Model Report</strong> (HTML): setup, validation, test metrics, plots.</li>
+  <li>(Optional) <strong>best_model.csv</strong> (hidden): selected hyperparameters.</li>
 </ul>
 
 <hr />
 
-<h1 id="model-evaluation-metrics">Model Evaluation Metrics</h1>
+<h1 id="report-structure">Report structure</h1>
+
+<p>The report has four tabs:</p>
 
 <ul>
-  <li><strong>PyCaret vs. Original (Chang et al., 2024)</strong>:
+  <li><strong>Model Config Summary</strong>: data split + run settings + chosen threshold + best model hyperparameters.</li>
+  <li><strong>Validation Summary</strong>: cross-validation table and diagnostic plots (e.g., calibration, threshold plot).</li>
+  <li><strong>Test Summary</strong>: holdout/test metrics and ROC/PR/confusion matrix plots.</li>
+  <li><strong>Feature Importance</strong>: coefficients/importance + SHAP/permutation/PDPs where available.</li>
+</ul>
+
+<p><img src="../../images/loris_tutorial/report_tabs.png" alt="report tabs" title="Tabs in the Tabular Learner Report" style="width: 85%; display: block; margin-left: auto; margin-right: auto;" /></p>
+
+<hr />
+
+<h1 id="benchmarking-approach">Benchmarking approach</h1>
+
+<p>Separate metrics into:</p>
+
+<ul>
+  <li><strong>Threshold-independent</strong>
     <ul>
-      <li>Accuracy: 0.80 (PyCaret) vs. 0.6803</li>
-      <li>AUC: 0.7599 (PyCaret) vs. 0.7155</li>
-      <li>F1 Score: 0.4246 (PyCaret) vs. 0.5289</li>
-      <li>MCC: 0.3764 (PyCaret) vs. 0.4652</li>
+      <li>ROC-AUC, PR-AUC (compare discrimination without choosing a cutoff)</li>
     </ul>
   </li>
-  <li><strong>Observation</strong>: Slight differences due to hyperparameter variations, but overall comparable performance.</li>
+  <li><strong>Threshold-dependent</strong>
+    <ul>
+      <li>Accuracy, F1 (report together with the selected cutoff)</li>
+    </ul>
+  </li>
 </ul>
+
+<p>Use the report to check:</p>
+<ul>
+  <li>split strategy and evaluation protocol</li>
+  <li>calibration and probability diagnostics</li>
+  <li>threshold plot (precision/recall/F1 vs cutoff)</li>
+</ul>
+
+<hr />
+
+<h1 id="key-numbers">Key numbers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Threshold</th>
+      <th>Accuracy</th>
+      <th>ROC-AUC</th>
+      <th>PR-AUC</th>
+      <th>F1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>LLR6 (reference)</td>
+      <td>0.30</td>
+      <td>0.68</td>
+      <td>0.72</td>
+      <td>0.53</td>
+      <td>0.53</td>
+    </tr>
+    <tr>
+      <td>Tabular Learner Run 1</td>
+      <td>0.50</td>
+      <td>0.80</td>
+      <td>0.76</td>
+      <td>0.55</td>
+      <td>0.42</td>
+    </tr>
+    <tr>
+      <td>Tabular Learner Run 2</td>
+      <td>0.25</td>
+      <td>0.67</td>
+      <td>0.76</td>
+      <td>0.55</td>
+      <td>0.52</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h1 id="interpreting-the-differences">Interpreting the differences</h1>
+
+<ul>
+  <li>Both Tabular Learner runs show higher <strong>ROC-AUC/PR-AUC</strong> than LLR6, suggesting similar-or-better discrimination.</li>
+  <li>Changing the <strong>threshold</strong> shifts the operating point:
+    <ul>
+      <li>Run 1 (0.50): higher accuracy, lower F1</li>
+      <li>Run 2 (0.25): lower accuracy, higher F1</li>
+    </ul>
+  </li>
+  <li>Check <strong>calibration</strong> to see whether probability scores are over/under-confident.</li>
+</ul>
+
+<p><img src="../../images/loris_tutorial/test_metrics_results.png" alt="Bar chart comparing LLR6 metrics vs. Tabular Learner (threshold = 0.25)" title="Comparison of LLR6 model metrics and Tabular Learner model metrics at a 0.25 threshold." style="width: 80%; display: block; margin-left: auto; margin-right: auto;" /></p>
 
 <hr />
 
 <h1 id="conclusion">Conclusion</h1>
 
 <ul>
-  <li><strong>Key Takeaways</strong>:
+  <li>Tabular Learner enables a reproducible workflow to:
     <ul>
-      <li>PyCaret simplifies machine learning workflows, from data preparation to model deployment.</li>
-      <li>Successfully built and evaluated the LORIS LLR6 model using PyCaret in Galaxy.</li>
-      <li>Demonstrated PyCaret’s ability to automate model selection, tuning, and evaluation.</li>
+      <li>train, compare, and select models on tabular clinical data</li>
+      <li>evaluate discrimination, calibration, and threshold effects via a single report</li>
     </ul>
   </li>
-  <li><strong>Why PyCaret?</strong>
-    <ul>
-      <li>Empowers both beginners and experienced data scientists.</li>
-      <li>Accelerates experimentation and ensures robust, reliable models.</li>
-    </ul>
-  </li>
+  <li>Threshold choice must be justified because it can change clinical tradeoffs (false positives vs false negatives).</li>
 </ul>
 
 <hr />
@@ -434,10 +511,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <h1 id="galaxy-training-resources">Galaxy Training Resources</h1>
 
 <ul>
-  <li>Galaxy Training Materials: <a href="https://training.galaxyproject.org">training.galaxyproject.org</a></li>
-  <li>Help Forum: <a href="https://help.galaxyproject.org">help.galaxyproject.org</a></li>
-  <li>Gitter Chat: <a href="https://gitter.im/galaxyproject/Lobby">gitter.im/galaxyproject/Lobby</a></li>
-  <li>Events: <a href="https://galaxyproject.org/events">galaxyproject.org/events</a></li>
+  <li>Galaxy Training Materials: training.galaxyproject.org</li>
+  <li>Help Forum: help.galaxyproject.org</li>
+  <li>Events: galaxyproject.org/events</li>
 </ul>
 
 <p><img src="/training-material/topics/introduction/images/gtn_stats.png" alt="GTN stats" /></p>
@@ -530,7 +606,7 @@ Tutorial Content is licensed under
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/74d2842d4b14783f79ee8b9bd352f9523fc74cfa">74d2842</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/7de53b0be6486f1d1391f818bcff5585f16392c6">7de53b0</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
