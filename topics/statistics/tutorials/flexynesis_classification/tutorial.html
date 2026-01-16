@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@4e08a2de7b1b556c1623aa5fd8908a4854f95bc4",
+		release: "galaxy-training-network@42cf592d4019619f63b558ee2c96b15d70b67e7f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,7 +58,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
         <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.b4423456.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Modeling Breast Cancer Subtypes with Flexynesis">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-09-02 14:22:01 +0000">
+<meta name="DC.date" content="2026-01-16 10:43:14 +0000">
 <meta name="DC.creator" content="Amirhossein Naghsh Nilchi">
 <meta name="DC.creator" content="Björn Grüning"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -181,7 +181,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-09-02 14:22:01 +0000",
+  "dateModified": "2026-01-16 10:43:14 +0000",
   "datePublished": "2025-08-13 10:24:48 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -237,7 +237,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Modeling Breast Cancer Subtypes with Flexynesis",
   "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/flexynesis_classification/tutorial.html",
-  "version": 3,
+  "version": 4,
   "timeRequired": "PT2H",
   "teaches": "- Apply Flexynesis to model and visualize BRCA subtypes\n- Interpret the learned representations from the DirectPred model\n- Use UMAP and clustering to explore learned features",
   "keywords": [
@@ -1174,7 +1174,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Aug 13, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 2, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 16, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1192,7 +1192,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
 
     </blockquote>
     </section>
@@ -1201,7 +1201,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
             <div class="col-sm-2 hide-when-printing">
-                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
                  
@@ -1860,20 +1860,17 @@ We will filter our data by gene variance and will use top 500 variable genes as 
 
   <p>First, let’s filter the cna data by variance.</p>
 
+  <p>Here we will:</p>
+  <ul>
+    <li>Calculate the variance of each gene in train matrix</li>
+    <li>Add the variance back to the matrix</li>
+    <li>Sort the matrix by variance in descending order</li>
+    <li>Filter the matrix by top 500 genes</li>
+    <li>Sort the matrix by gene name</li>
+  </ul>
+
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-prepare-cna-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Prepare CNA data</div>
-
-    <blockquote class="comment">
-      <div class="box-title comment-title" id="comment-short-explanation-of-steps"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
-      <p>Here we will:</p>
-      <ul>
-        <li>Calculate the variance of each gene in train matrix</li>
-        <li>Add the variance back to the matrix</li>
-        <li>Sort the matrix by variance in descending order</li>
-        <li>Filter the matrix by top 500 genes</li>
-        <li>Sort the matrix by gene name</li>
-      </ul>
-    </blockquote>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy2" title="Table Compute tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Table Compute</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.4+galaxy2)</span> with the following parameters:
@@ -1956,21 +1953,20 @@ We will filter our data by gene variance and will use top 500 variable genes as 
           </li>
         </ul>
       </li>
-      <li>Rename the output file to <code class="language-plaintext highlighter-rouge">train_cna_brca_500gene.tabular</code></li>
-    </ol>
+      <li>
+        <p>Rename the output file to <code class="language-plaintext highlighter-rouge">train_cna_brca_500gene.tabular</code></p>
 
-    <blockquote class="comment">
-      <div class="box-title comment-title" id="comment-short-explanation-of-steps-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
-      <p>Here we will:</p>
-      <ul>
-        <li>Extract the list of genes from the train matrix</li>
-        <li>Filter the test data by extracted genes</li>
-        <li>Sort the matrix by gene name</li>
-        <li>Transpose both train and test data</li>
-      </ul>
-    </blockquote>
-
-    <ol>
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-short-explanation-of-steps"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
+          <p>Here we will:</p>
+          <ul>
+            <li>Extract the list of genes from the train matrix</li>
+            <li>Filter the test data by extracted genes</li>
+            <li>Sort the matrix by gene name</li>
+            <li>Transpose both train and test data</li>
+          </ul>
+        </blockquote>
+      </li>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">train_cna_brca_500gene.tabular</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1999,14 +1995,13 @@ We will filter our data by gene variance and will use top 500 variable genes as 
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-          <li>In <em>“Column selections”</em>:
+          <li>In <em>“Column selections”</em>:</li>
+        </ul>
+        <ul>
+          <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Column selections”</em>
             <ul>
-              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Column selections”</em>
-                <ul>
-                  <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
-                  <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Alphabetical sort </code></li>
-                </ul>
-              </li>
+              <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+              <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Alphabetical sort </code></li>
             </ul>
           </li>
         </ul>
@@ -2027,31 +2022,29 @@ We will filter our data by gene variance and will use top 500 variable genes as 
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">test_cna_brca_500gene.tabular</code> (output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         </ul>
       </li>
-      <li>Rename the output file to <code class="language-plaintext highlighter-rouge">test_cna_brca_500gene_transposed.tabular</code></li>
-    </ol>
+      <li>
+        <p>Rename the output file to <code class="language-plaintext highlighter-rouge">test_cna_brca_500gene_transposed.tabular</code></p>
 
-    <blockquote class="comment">
-      <div class="box-title comment-title" id="comment-short-explanation-of-steps-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
-      <p>Here we will:</p>
-      <ul>
-        <li>Extract <code class="language-plaintext highlighter-rouge">sample_id</code> and <code class="language-plaintext highlighter-rouge">CLAUDIN_SUBTYPE</code> from the train and clinical data</li>
-        <li>Add the subtype to the train and test matrix</li>
-        <li>And finally remove the <code class="language-plaintext highlighter-rouge">sample_id</code> from the matrices.</li>
-      </ul>
-    </blockquote>
-
-    <ol>
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-short-explanation-of-steps-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
+          <p>Here we will:</p>
+          <ul>
+            <li>Extract <code class="language-plaintext highlighter-rouge">sample_id</code> and <code class="language-plaintext highlighter-rouge">CLAUDIN_SUBTYPE</code> from the train and clinical data</li>
+            <li>Add the subtype to the train and test matrix</li>
+            <li>And finally remove the <code class="language-plaintext highlighter-rouge">sample_id</code> from the matrices.</li>
+          </ul>
+        </blockquote>
+      </li>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">train_clin_brca.tabular</code> (Input dataset)</li>
           <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep</code></li>
-          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code></li>
+        </ul>
+        <ul>
+          <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
             <ul>
-              <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
-                <ul>
-                  <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code>, <code class="language-plaintext highlighter-rouge">Column: 16</code></li>
-                </ul>
-              </li>
+              <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code>, <code class="language-plaintext highlighter-rouge">Column: 16</code></li>
             </ul>
           </li>
         </ul>
@@ -2063,13 +2056,12 @@ We will filter our data by gene variance and will use top 500 variable genes as 
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">test_clin_brca.tabular</code> (Input dataset)</li>
           <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep</code></li>
-          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code></li>
+        </ul>
+        <ul>
+          <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
             <ul>
-              <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
-                <ul>
-                  <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code>, <code class="language-plaintext highlighter-rouge">Column: 16</code></li>
-                </ul>
-              </li>
+              <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code>, <code class="language-plaintext highlighter-rouge">Column: 16</code></li>
             </ul>
           </li>
         </ul>
@@ -2142,20 +2134,17 @@ We will filter our data by gene variance and will use top 500 variable genes as 
 
   <h2 id="gex-data">GEX data</h2>
 
+  <p>Here we will:</p>
+  <ul>
+    <li>Calculate the variance of each gene in train matrix</li>
+    <li>Add the variance back to the matrix</li>
+    <li>Sort the matrix by variance in descending order</li>
+    <li>Filter the matrix by top 500 genes</li>
+    <li>Sort the matrix by gene name</li>
+  </ul>
+
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-prepare-gex-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Prepare GEX data</div>
-
-    <blockquote class="comment">
-      <div class="box-title comment-title" id="comment-short-explanation-of-steps-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
-      <p>Here we will:</p>
-      <ul>
-        <li>Calculate the variance of each gene in train matrix</li>
-        <li>Add the variance back to the matrix</li>
-        <li>Sort the matrix by variance in descending order</li>
-        <li>Filter the matrix by top 500 genes</li>
-        <li>Sort the matrix by gene name</li>
-      </ul>
-    </blockquote>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy2" title="Table Compute tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Table Compute</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.2.4+galaxy2)</span> with the following parameters:
@@ -2238,21 +2227,20 @@ We will filter our data by gene variance and will use top 500 variable genes as 
           </li>
         </ul>
       </li>
-      <li>Rename the output file to <code class="language-plaintext highlighter-rouge">train_gex_brca_500gene.tabular</code></li>
-    </ol>
+      <li>
+        <p>Rename the output file to <code class="language-plaintext highlighter-rouge">train_gex_brca_500gene.tabular</code></p>
 
-    <blockquote class="comment">
-      <div class="box-title comment-title" id="comment-short-explanation-of-steps-4"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
-      <p>Here we will:</p>
-      <ul>
-        <li>Extract the list of genes from the train matrix</li>
-        <li>Filter the test data by extracted genes</li>
-        <li>Sort the matrix by gene name</li>
-        <li>Transpose both train and test data</li>
-      </ul>
-    </blockquote>
-
-    <ol>
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-short-explanation-of-steps-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
+          <p>Here we will:</p>
+          <ul>
+            <li>Extract the list of genes from the train matrix</li>
+            <li>Filter the test data by extracted genes</li>
+            <li>Sort the matrix by gene name</li>
+            <li>Transpose both train and test data</li>
+          </ul>
+        </blockquote>
+      </li>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">train_gex_brca_500gene.tabular</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -2285,8 +2273,11 @@ We will filter our data by gene variance and will use top 500 variable genes as 
             <ul>
               <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Column selections”</em>
                 <ul>
-                  <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
-                  <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Alphabetical sort </code></li>
+                  <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code>
+                    <ul>
+                      <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Alphabetical sort </code></li>
+                    </ul>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -2309,20 +2300,19 @@ We will filter our data by gene variance and will use top 500 variable genes as 
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">test_gex_brca_500gene.tabular</code> (output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         </ul>
       </li>
-      <li>Rename the output file to <code class="language-plaintext highlighter-rouge">test_gex_brca_500gene_transposed.tabular</code></li>
-    </ol>
+      <li>
+        <p>Rename the output file to <code class="language-plaintext highlighter-rouge">test_gex_brca_500gene_transposed.tabular</code></p>
 
-    <blockquote class="comment">
-      <div class="box-title comment-title" id="comment-short-explanation-of-steps-5"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
-      <p>Here we will:</p>
-      <ul>
-        <li>Extract <code class="language-plaintext highlighter-rouge">sample_id</code> and <code class="language-plaintext highlighter-rouge">CLAUDIN_SUBTYPE</code> from the train and clinical data</li>
-        <li>Add the subtype to the train and test matrix</li>
-        <li>And finally remove the <code class="language-plaintext highlighter-rouge">sample_id</code> from the matrices.</li>
-      </ul>
-    </blockquote>
-
-    <ol>
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-short-explanation-of-steps-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Short explanation of steps:</div>
+          <p>Here we will:</p>
+          <ul>
+            <li>Extract <code class="language-plaintext highlighter-rouge">sample_id</code> and <code class="language-plaintext highlighter-rouge">CLAUDIN_SUBTYPE</code> from the train and clinical data</li>
+            <li>Add the subtype to the train and test matrix</li>
+            <li>And finally remove the <code class="language-plaintext highlighter-rouge">sample_id</code> from the matrices.</li>
+          </ul>
+        </blockquote>
+      </li>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.5+galaxy2)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">train_clin_brca.tabular</code> (Input dataset)</li>
@@ -2387,13 +2377,12 @@ We will filter our data by gene variance and will use top 500 variable genes as 
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">Annotated train matrix</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Discard</code></li>
-          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+          <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code></li>
+        </ul>
+        <ul>
+          <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
             <ul>
-              <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
-                <ul>
-                  <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
-                </ul>
-              </li>
+              <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
             </ul>
           </li>
         </ul>
@@ -2837,6 +2826,26 @@ tools:
 <br/>
 <br/>
 
+<script>
+function ready(fn) {
+	if (document.readyState != 'loading'){
+		fn();
+	} else {
+		document.addEventListener('DOMContentLoaded', fn);
+	}
+}
+ready(function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
         </div>
         <footer>
 	<hr />
@@ -2898,7 +2907,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/4e08a2de7b1b556c1623aa5fd8908a4854f95bc4">4e08a2d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/42cf592d4019619f63b558ee2c96b15d70b67e7f">42cf592</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
@@ -2922,7 +2931,7 @@ tools:
 </footer>
 
 
-        <script  async defer src='/training-material/assets/js/bundle.main.b4423456.js'></script>
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
 
 	
 	
