@@ -28,6 +28,9 @@ contributions:
     - kysrpex
   funding:
     - eurosciencegateway
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 tags:
   - ansible
   - interactive-tools

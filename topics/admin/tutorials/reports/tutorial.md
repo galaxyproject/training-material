@@ -20,7 +20,10 @@ contributions:
   funding:
   - deNBI
   - uni-freiburg
-subtopic: monitoring
+  - unimelb
+  - melbournebioinformatics
+  - AustralianBioCommons
+subtopic: deprecated
 tags:
   - ansible
   - monitoring

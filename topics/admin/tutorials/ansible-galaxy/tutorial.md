@@ -34,6 +34,9 @@ contributions:
   funding:
   - eurosciencegateway
   - elixir-europe
+  - unimelb
+  - melbournebioinformatics
+  - AustralianBioCommons
 tags:
   - ansible
   - deploying

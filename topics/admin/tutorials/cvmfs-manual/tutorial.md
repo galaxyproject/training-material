@@ -10,9 +10,14 @@ objectives:
   - Configure your Galaxy to use these reference genomes and indices
 time_estimation: "1h"
 key_points:
-contributors:
-  - slugger70
-  - hexylena
+contributions:
+  authorship:
+    - slugger70
+    - hexylena
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 subtopic: data
 ---
 

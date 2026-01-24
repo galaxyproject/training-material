@@ -43,6 +43,8 @@ contributions:
   - PhilReedData
   funding:
   - AustralianBioCommons
+  - unimelb
+  - melbournebioinformatics
   - elixir-europe
   - uni-freiburg
 recordings:
