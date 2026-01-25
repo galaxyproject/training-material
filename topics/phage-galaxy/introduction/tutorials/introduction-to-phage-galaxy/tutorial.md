@@ -28,22 +28,22 @@ Last updated: Feb. 7 2024
 
 #  Registering a Galaxy account
 
-For the past ten years, the [Center for Phage Technology (CPT)](https://cpt.tamu.edu/) at Texas A&M University has developed and hosted its phage genomics tools on its own public-facing Galaxy instance. Starting in 2024, these tools will be hosted on the main European Galaxy instance at **[phage.usegalaxy.eu](https://phage.usegalaxy.eu)**. If you are a first-time user of the CPT Galaxy genomics platform, we  encourage you to begin by registering a free user account at **[phage.usegalaxy.eu](https://phage.usegalaxy.eu)**. We are continuing to migrate our tools and workflows to this platform through 2024. If you are already a user of the CPT's original Galaxy instance at [https://cpt.tamu.edu/galaxy-pub], this system will continue operating until its planned shutdown date of August 2024. After this time, we will only be supporting operations at phage.usegalaxy.eu.
+For the past ten years, the [Center for Phage Technology (CPT)](https://cpt.tamu.edu/) at Texas A&M University has developed and hosted its phage genomics tools on its own public-facing Galaxy instance. Starting in 2024, these tools are also hosted on the main European Galaxy instance at **[phage.usegalaxy.eu](https://phage.usegalaxy.eu)**. We encourage you to begin by registering a free user account at **[phage.usegalaxy.eu](https://phage.usegalaxy.eu)**.
 
 #  Galaxy tools from the Center for Phage Technology
 
-Galaxy is a platform for doing reproducible bioinformatics research. It provides a user-friendly interface for a vast number of complex command line tools, and it encourages consistent science by using identical software and interfaces across all Galaxy instances. Galaxy aims to make computational biology accessible to research scientists that may not have computer programming or system administration experience. The [Center for Phage Technology (CPT)](https://cpt.tamu.edu/) utilizes Galaxy for most computer-based analysis. Computationally intensive jobs can be launched and left; enabling scientists returns to lab work. Galaxy keeps track of the job progress and automatically saves the work done up until that point.
+Galaxy is a platform for doing reproducible bioinformatics research. It provides a user-friendly interface for a vast number of complex command line tools, and it encourages consistent science by using identical software and interfaces across all Galaxy instances. Galaxy aims to make computational biology accessible to research scientists that may not have computer programming or system administration experience. The [Center for Phage Technology (CPT)](https://cpt.tamu.edu/) utilizes Galaxy for most computer-based analysis. Computationally intensive jobs can be launched and left; enabling scientists to return to lab work. Galaxy keeps track of the job progress and automatically saves the work done up until that point.
 
 > ### {% icon tip %} Note that…
-> The screenshots displayed here may not precisely reflect what you see on your screen. As our systems are regularly updated, it is likely that the current version year/number or the exact window display is different. Look for the most recent workflows/tools.
+> The screenshots displayed here may not precisely reflect what you see on your screen. As Galaxy is regularly updated, it is possible that the current tool or workflow version is different. Look for the most recent workflows/tools.
 {: .tip}
 
-![](../../images/introduction-to-cpt-galaxy-screenshots/phage-usegalaxy-screenshot-jan2024.PNG)
+![](../../images/introduction-to-cpt-galaxy-screenshots/phage-usegalaxy-screenshot-jan2026.PNG)
 
-The Galaxy user interface consists of three panels; on the left is a column containing all available tools. In the center is where analysis will occur and results displayed. On the right is where the current history resides.
+The Galaxy user interface consists of four panels. On the left is a quick-access column for some common functions, and to the right of thatis the **Tools** menu that lists all available tools. The large panel in the center is where analysis will occur and results displayed. On the right is where the current history resides.
 
 > ### {% icon tip %} Note that…
-> If the user is lost within the browser interface, clicking the **Home icon** in the blue bar at the top will return the user to the Galaxy home page. Refreshing the page will also return to the home page without losing any work done up until that point. Galaxy automatically saves all progress.
+> If the user is lost within the browser interface, clicking the **Galaxy icon** in the blue bar at the top left will return the user to the Galaxy home page. Refreshing the page will also return to the home page without losing any work done up until that point. Galaxy automatically saves all progress.
 {: .tip}
 
 # Tools
@@ -60,7 +60,7 @@ The Galaxy user interface consists of three panels; on the left is a column cont
 
 Galaxy tools process input files and produce output files. To upload data from the user’s local device, click on the upload symbol in the top right-hand corner of the Tools column on the left side of the screen.
 
-![](../../images/introduction-to-cpt-galaxy-screenshots/2_upload_symbol.png)
+![](../../images/introduction-to-cpt-galaxy-screenshots/2_upload_symbol2026.png)
 
 This will bring up an upload menu that will allow the import of data into Galaxy. Files can be dragged and dropped into this box; alternatively, clicking on **Choose local file** in the bottom menu enables the browsing of files on the local device for upload.
 
@@ -104,8 +104,6 @@ When all of the files desired to be uploaded have been selected, click **Start**
 ## Choosing and Executing a Tool
 
 Now that there is data in Galaxy, it is ready to be processed by one of the many available tools! At the top of the tool panel is a search bar. Alternatively, clicking one of the bold, underlined selections will reveal multiple tools from which the user can choose. When selecting the tool, be sure to read the __*What it does*__ text at the bottom of the tool interface page that appears; it will give the user important information regarding running the tool and its output format.
-
-![](../../images/introduction-to-cpt-galaxy-screenshots/7_workflow_example.png)
 
 Review the options in the tool interface. Keep in mind that many options are set to default values. Uploaded files or other datasets in the current history can be used as inputs. When configuration of the tool is complete, click the **execute**, and it will appear as a set of output files in the history on the right.
 
@@ -260,17 +258,11 @@ Doing these tasks one by one would mean keeping track of *at least* 4 files. The
 
 ![](../../images/introduction-to-cpt-galaxy-screenshots/23_workflow_details.png)
 
-## Importing a Workflow
+## Accessing workflows
 
-Often times, a workflow will need to be imported for it to be used. Select the *Shared Data* drop-down menu at the top of the galaxy interface, and Select *Workflows.* This will bring up a page of all of the available workflows in the Galaxy instance.
+To access workflows, select the *Workflows* icon on the leftmost panel. This will bring up a page of all of the available workflows in the Galaxy instance. *My workflows* are those workflows that you have imorted to your account or made yourself. *Workflows shared with me* are those that have been shared with you privately by another user, and *Public workflows* arre available to anyone working on that Galaxy instance. The CPT's phage workflows are published and tagged with "CPT", so searching for "CPT" under *Public workflows* will display them.
 
-![](../../images/introduction-to-cpt-galaxy-screenshots/24_access_workflows.png)
-
-Find the workflow of interest, select the down arrow, and click *Import.* Each workflow has a short description of what it does on the right, as well as the owner and date of last update. It is advised to use the most recent version of the desired workflow.
-
-![](../../images/introduction-to-cpt-galaxy-screenshots/25_import_workflow.png)
-
-The imported workflow will then become available for use under the *Workflow* menu at the top of Galaxy (to the right of *Shared Data.*)
+Find the workflow of interest. Clicking *Import* will creeate a copy of the workflow under your *My workflows* tab, which will make it easier to find in the future and will also allow you to edit it. Alternatively, you can also just click the *Run* button to run it directly from the public version. 
 
 > ### {% icon comment %} Advanced Users…
 > Unable to find a specific workflow for the project/genome at hand? Read [this tutorial](https://galaxyproject.github.io/training-material/topics/galaxy-ui/tutorials/history-to-workflow/tutorial.html) for more information on building a new workflow.
@@ -278,16 +270,10 @@ The imported workflow will then become available for use under the *Workflow* me
 
 ## Running a Workflow
 
-In the collection of workflows, click on the blue play button to the right of the desired workflow.
-
-![](../../images/introduction-to-cpt-galaxy-screenshots/run_workflow.png.png)
-
-The workflow interface page will appear; this can feel a little overwhelming, especially as a beginner. For the most part, the parameters are pre-configured. Some inputs may need to be manually adjusted by the user. Ask the [CPT](https://cpt.tamu.edu) staff and IT management (cpt@tamu.edu) if there is confusion about the necessary inputs.
+After clicking the *Run* button, the workflow interface page will appear; this can feel a little overwhelming, especially as a beginner. As much as possible, the parameters are pre-configured. Some inputs may need to be manually adjusted by the user, and the expected inputs are described in the workflow run page. The workflow can only access datasets from the current history in the rightmost panel.
 
 > ### {% icon tip %} Note …
 > Larger workflows often take several minutes to populate the screen. Do not refresh your page during this time, or else it will return you to the home screen.
 {: .tip}
 
-![](../../images/introduction-to-cpt-galaxy-screenshots/27_workflow_parameters.png)
-
-When ready, click the *Run workflow* button at the top to launch the workflow.
+When ready, click the *Run workflow* button at the top right to launch the workflow.
