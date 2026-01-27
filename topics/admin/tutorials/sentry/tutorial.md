@@ -134,6 +134,30 @@ First we need to add our new Ansible role to `requirements.yml`:
 >
 >    {% raw %}
 >    ```diff
+>    --- a/group_vars/all.yml
+>    +++ b/group_vars/all.yml
+>    @@ -45,3 +45,6 @@ telegraf_plugins_default:
+>       - plugin: swap
+>       - plugin: net
+>       - plugin: netstat
+>    +
+>    +# Used in galaxyservers, nginx and sentry
+>    +sentry_domain: "sentry.{{ inventory_hostname }}"
+>    diff --git a/group_vars/galaxyservers.yml b/group_vars/galaxyservers.yml
+>    index 1bdac54..94b3fc3 100644
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -211,6 +211,7 @@ certbot_post_renewal: |
+>         docker restart rabbit_hole || true
+>     certbot_domains:
+>      - "{{ inventory_hostname }}"
+>    + - "{{ sentry_domain }}"
+>     certbot_agree_tos: --agree-tos
+>
+>     # NGINX
+>    diff --git a/group_vars/sentryservers.yml b/group_vars/sentryservers.yml
+>    new file mode 100644
+>    index 0000000..36298e3
 >    --- /dev/null
 >    +++ b/group_vars/sentryservers.yml
 >    @@ -0,0 +1,6 @@
@@ -143,6 +167,20 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    +sentry_superusers:
 >    +  - email:  admin@example.com
 >    +    password: "{{ vault_sentry_password }}"
+>    diff --git a/sentry.yml b/sentry.yml
+>    index 285910b..ab32a34 100644
+>    --- a/sentry.yml
+>    +++ b/sentry.yml
+>    @@ -1,7 +1,6 @@
+>     - hosts: sentryservers
+>    +  vars_files:
+>    +    - group_vars/secret.yml
+>       become: true
+>    -  pre_tasks:
+>    -    - pip:
+>    -        name: docker-compose
+>       roles:
+>         - mvdbeek.sentry_selfhosted
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure Sentry"}
@@ -255,7 +293,7 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -219,6 +219,7 @@ nginx_servers:
+>    @@ -220,6 +220,7 @@ nginx_servers:
 >       - redirect-ssl
 >     nginx_ssl_servers:
 >       - galaxy
@@ -288,7 +326,7 @@ First we need to add our new Ansible role to `requirements.yml`:
 >    {: .code-in}
 >
 >    ```yaml
->    vault_galaxy_sentry_dsn: 'https://b0022427ee5345a8ad4cb072c73e62f4@localhost:9000/2'
+>    vault_galaxy_sentry_dsn: 'http://b0022427ee5345a8ad4cb072c73e62f4@localhost:9000/2'
 >    ```
 >
 > 9. Edit `group_vars/galaxyservers.yml` to reference the new vault secret:

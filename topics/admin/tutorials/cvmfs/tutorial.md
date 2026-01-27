@@ -11,9 +11,14 @@ objectives:
   - Use an Ansible playbook for all of the above.
 time_estimation: "1h"
 key_points:
-contributors:
-  - slugger70
-  - hexylena
+contributions:
+  authorship:
+    - slugger70
+    - hexylena
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 requirements:
   - type: "internal"
     topic_name: admin

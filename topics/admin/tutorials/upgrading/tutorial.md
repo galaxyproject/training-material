@@ -18,8 +18,13 @@ key_points:
   - Using Ansible to keep your server up to date is the best practice method
   - Always backup the database before you do an upgrade in case anything goes wrong
   - Re-run the playbook from time to time to keep your Galaxy server up to date with any minor changes and patches
-contributors:
-  - slugger70
+contributions:
+  authorship:
+    - slugger70
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 subtopic: maintenance
 tags:
   - ansible

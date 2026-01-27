@@ -3,7 +3,7 @@ title: Force a tool to process collection jobs one by one instead of using the c
 area: collections
 box_type: tip
 layout: faq
-contributors: [paulzierep]
+contributors: [paulzierep, Smkingsize]
 ---
 
 ## To map over or not to map over
@@ -55,9 +55,8 @@ Adding another nesting level to create `list:list` requires a few changes:
    This creates a new Column B with the same list identifier as Column A.
 2. From **Rules** menu select `Add / Modify Column Definitions`
    - Click `Add Definition` button and select `List Identifier(s)`
-     - *"Paired-end Indicator"*: `A`
-   - Click `Add Definition` button and select `List Identifier(s)`
-     - *"List Identifier(s)"*: `B`
+     - *"Select a column"*: `A`
+     - *"... Assign Another Column"*: `B`
    - Click Apply
 3. Click **Save**
 4. Click **Run Tool**

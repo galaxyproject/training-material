@@ -36,8 +36,12 @@ contributions:
   - clsiguret
   editing:
   - VerenaMoo
+  - tflowers15
   funding:
   - abromics
+  - unimelb
+  - melbournebioinformatics
+  - AustralianBioCommons
 recordings:
 - youtube_id: Cx31r5emUJk
   length: 34M
@@ -57,7 +61,7 @@ Sequencing (determining of DNA/RNA nucleotide sequence) is used all over the wor
 
 Contemporary sequencing technologies are capable of generating an enormous volume of sequence reads in a single run. Nonetheless, each technology has its imperfections, leading to various types and frequencies of errors, such as miscalled nucleotides. These inaccuracies stem from the inherent technical constraints of each sequencing platform. When sequencing bacterial isolates, it is crucial to verify the quality of the data but also to check the expected species or strains are found in the data or if there is any contamination.
 
-To illustrate the process, we take raw data of a bacterial genome (KUN1163 sample) from sequencing data produced in "Complete Genome Sequences of Eight Methicillin-Resistant *Staphylococcus aureus* Strains Isolated from Patients in Japan" ({% cite Hikichi_2019 %}). 
+To illustrate the process, we take raw data of a bacterial genome (KUN1163 sample) from sequencing data produced in "Complete Genome Sequences of Eight Methicillin-Resistant *Staphylococcus aureus* Strains Isolated from Patients in Japan" ({% cite Hikichi_2019 %}).
 
 > Methicillin-resistant *Staphylococcus aureus* (MRSA) is a major pathogen
 > causing nosocomial infections, and the clinical manifestations of MRSA
@@ -110,11 +114,15 @@ Now, we need to import the data: 2 FASTQ files containing the reads from the seq
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name="DRR187559_1" %}
 >
-> 3. Tag both datasets `#unfiltered`
+> 3. Create a paired collection named `Paired Reads`
 >
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
-> 4. **View** {% icon galaxy-eye %} the renamed file
+> 4. Tag the collection `#unfiltered`
+>
+>    {% snippet faqs/galaxy/collections_add_tag.md %}
+>
+> 5. **View** {% icon galaxy-eye %} the renamed files in the collection
 >
 {: .hands_on}
 
@@ -154,15 +162,13 @@ We will run all these steps using a single workflow, then discuss each step and 
 > <hands-on-title>Pre-Processing</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Quality_and_contamination_control_in_bacterial_isolate_using_Illumina_MiSeq_Data.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Quality-and-contamination-control-in-bacterial-isolate-using-Illumina-MiSeq-Data.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
 >
 > 2. Run **Workflow : Quality and contamination control in bacterial isolate using Illumina MiSeq Data** {% icon workflow %} using the following parameters
->    - *"DRR187559_1"*: `DRR187559_1`, which is the forward read data.
->
->    - *"DRR187559_2"*: `DRR187559_2`, which is the reverse read data.
+>    - *"Input Paired Reads"*: `Paired Reads`, which is the paired end reads collection.
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
@@ -180,8 +186,7 @@ Assessing the quality by hand would be too much work. That's why tools like
 [NanoPlot](https://github.com/wdecoster/NanoPlot) or
 [Falco](https://falco.readthedocs.io/en/latest/) are made, as they  generate a summary and plots of the data statistics. NanoPlot is
 mainly used for long-read data, like ONT and PACBIO and Falco for short read,
-like Illumina and Sanger. Falco is an efficiency-optimized rewrite of [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/). You can read more in our dedicated [Quality Control
-Tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
+like Illumina and Sanger. Falco is an efficiency-optimized rewrite of [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/). You can read more in our dedicated [Quality Control Tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
 Before doing any analysis, the first questions we should ask about the input
 reads include:
@@ -197,9 +202,7 @@ reads include:
 > <hands-on-title>Quality Control</hands-on-title>
 >
 > 1. {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0) %} with the following parameters:
->    - {% icon param-files %} *"Short read data from your current history"*: both `DRR187559_1` and `DRR187559_2`
->
->    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %} 
+>    - {% icon param-collection %} *"Raw read data from your current history"*: `Paired Reads`
 >
 > 2. Inspect the webpage outputs
 >
@@ -215,15 +218,15 @@ reads include:
 
 </div>
 
-**Falco** combines quality statistics from all separate reads and combines them in plots. An important plot is the Per base sequence quality. 
+**Falco** combines quality statistics from all separate reads and combines them in plots. An important plot is the Per base sequence quality.
 
 DRR187559_1 | DRR187559_2
 ----------- | -----------
 ![Falco plot showing reads that stay in the green](../../../assembly/images/mrsa/falco-1.png) | ![Same as previous plot, but the beginning of the reads are slightly better quality](../../../assembly/images/mrsa/falco-2.png)
 
 Here you have the reads sequence length on the x-axes against the quality score (Phred-score) on the y-axis. The colour of the beams indicates three quality levels:
-- Green = good quality, 
-- Yellow = mediocre quality, and 
+- Green = good quality,
+- Yellow = mediocre quality, and
 - Red = bad quality.
 
 For each position, a boxplot is drawn with:
@@ -249,31 +252,30 @@ is needed. In this case we are going to trim the data using **fastp** ({% cite C
 
 - Trim the start and end of the reads if those fall below a quality score of 20
 
-  Different trimming tools have different algorithms for deciding when to cut but trimmomatic will cut based on the quality score of one base alone. Trimmomatic starts from each end, and as long as the base is below 20, it will be cut until it reaches one greater than 20. A sliding window trimming will be performed where if the average quality of 4 bases drops below 20, the read will be truncated there. 
-  
+  Different trimming tools have different algorithms for deciding when to cut but trimmomatic will cut based on the quality score of one base alone. Trimmomatic starts from each end, and as long as the base is below 20, it will be cut until it reaches one greater than 20. A sliding window trimming will be performed where if the average quality of 4 bases drops below 20, the read will be truncated there.
+
 - Filter for reads to keep only reads with at least 30 bases: Anything shorter will complicate the assembly
 
 
 <div class="Step-by-step" markdown="1">
 > <hands-on-title>Quality improvement</hands-on-title>
 >
-> 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0) %} with the following parameters:
->    - *"Single-end or paired reads"*: `Paired`
->        - {% icon param-file %} *"Input 1"*: `DRR187559_1`
->        - {% icon param-file %} *"Input 2"*: `DRR187559_2`
+> 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/1.0.1+galaxy3) %} with the following parameters:
+>    - *"Single-end or paired reads"*: `Paired Collection`
+>        - *"Select paired collection(s)"*: `Paired Reads`
 >    - In *"Filter Options"*:
 >        - In *"Length filtering Options"*:
 >            - *Length required*: `30`
 >    - In *"Read Modification Options"*:
 >        - In *"Per read cuitting by quality options"*:
 >            - *Cut by quality in front (5')*: `Yes`
->            - *Cut by quality in front (3')*: `Yes`
+>            - *Cut by quality in tail (3')*: `Yes`
 >            - *Cutting window size*: `4`
 >            - *Cutting mean quality*: `20`
 >    - In *"Output Options"*:
 >        - *"Output JSON report"*: `Yes`
 >
-> 2. Edit the tags of the **fastp** FASTQ outputs to 
+> 2. Edit the tags of the **fastp** FASTQ outputs to
 >    1. Remove the `#unfiltered` tag
 >    2. Add a new tag `#filtered`
 {: .hands_on}
@@ -317,10 +319,9 @@ For this tutorial, we will use the PlusPF database which contains the RefSeq Sta
 <div class="Step-by-step" markdown="1">
 > <hands-on-title> Assign taxonomic labels with Kraken2</hands-on-title>
 >
-> 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.3+galaxy1) %} with the following parameters:
+> 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.3+galaxy2) %} with the following parameters:
 >    - *"Single or paired reads"*: `Paired`
->        - {% icon param-file %} *"Forward strand"*: **fastp** `Read 1 output`
->        - {% icon param-file %} *"Reverse strand"*: **fastp** `Read 2 output`
+>        - *"Collection of paired reads"*: **fastp** `Paired-end output`
 >    - *"Minimum Base Quality"*: `10`
 >    - In *"Create Report"*:
 >        - *"Print a report with aggregrate counts/clade to file"*: `Yes`
@@ -337,15 +338,15 @@ For this tutorial, we will use the PlusPF database which contains the RefSeq Sta
    2. Sequence ID as in the input file
    3. NCBI taxonomy ID assigned to the sequence, or 0 if unclassified
    4. Length of sequence in bp (`read1|read2` for paired reads)
-   5. A space-delimited list indicating the lowest common ancestor (LCA) mapping of each k-mer in the sequence     
-      
+   5. A space-delimited list indicating the lowest common ancestor (LCA) mapping of each k-mer in the sequence
+
       For example, `562:13 561:4 A:31 0:1 562:3` would indicate that:
       1. The first 13 k-mers mapped to taxonomy ID #562
       2. The next 4 k-mers mapped to taxonomy ID #561
       3. The next 31 k-mers contained an ambiguous nucleotide
       4. The next k-mer was not in the database
-      5. The last 3 k-mers mapped to taxonomy ID #562     
-      
+      5. The last 3 k-mers mapped to taxonomy ID #562
+
       `|:|` indicates end of first read, start of second read for paired reads
 
    ```
@@ -355,7 +356,7 @@ For this tutorial, we will use the PlusPF database which contains the RefSeq Sta
    C	DRR187559.3	1279	106|73	0:4 1279:3 0:36 1279:4 0:10 1279:5 0:3 1279:5 0:2 |:| 0:39
    C	DRR187559.4	1279	121|189	1279:6 0:17 1279:4 0:28 1279:2 0:30 |:| 0:7 1279:5 0:19 1279:5 0:20 1279:1 0:8 1279:1 0:1 1279:6 0:25 1279:2 0:44 A:11
    C	DRR187559.5	1279	68|150	1279:2 0:20 1279:3 0:9 |:| 0:10 1279:3 0:24 1279:2 0:9 1279:5 0:21 1279:5 0:20 1279:5 0:9 1279:1 0:2
-   C	DRR187559.6	1280	137|246	0:2 1280:5 0:28 1279:1 0:28 1279:2 0:8 1279:2 0:23 1279:1 0:3 |:| 1279:1 0:2 1279:3 0:61 1279:2 0:14 1279:2 0:97 A:30 
+   C	DRR187559.6	1280	137|246	0:2 1280:5 0:28 1279:1 0:28 1279:2 0:8 1279:2 0:23 1279:1 0:3 |:| 1279:1 0:2 1279:3 0:61 1279:2 0:14 1279:2 0:97 A:30
    ```
 
    > <question-title></question-title>
@@ -404,7 +405,7 @@ For this tutorial, we will use the PlusPF database which contains the RefSeq Sta
    95.49 	431390 	4625 	C 	91061 	Bacilli
    94.38 	426383 	1436 	O 	1385 	Bacillales
    94.04 	424874 	2689 	F 	90964 	Staphylococcaceae
-   93.44 	422124 	234829 	G 	1279 	Staphylococcus 
+   93.44 	422124 	234829 	G 	1279 	Staphylococcus
    ```
 
    > <question-title></question-title>
@@ -424,7 +425,7 @@ For this tutorial, we will use the PlusPF database which contains the RefSeq Sta
 
 ## Species identification
 
-In Kraken output, there are quite a lot of identified taxa with different levels. To obtain a more accurate and detailed understanding at the species level, we will use __Bracken__. 
+In Kraken output, there are quite a lot of identified taxa with different levels. To obtain a more accurate and detailed understanding at the species level, we will use __Bracken__.
 
 __Bracken__ refines the Kraken results by re-estimating the abundances of species in metagenomic samples, providing a more precise and reliable identification of species, which is crucial for downstream analysis and interpretation.
 
@@ -433,7 +434,7 @@ __Bracken__ (Bayesian Reestimation of Abundance after Classification with Kraken
 <div class="Step-by-step" markdown="1">
 > <hands-on-title>Extract species with Bracken</hands-on-title>
 >
-> 1. {% tool [Bracken](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.9+galaxy0) %} with the following parameters:
+> 1. {% tool [Bracken](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/3.1+galaxy0) %} with the following parameters:
 >     - {% icon param-collection %} *"Kraken report file"*: **Report** output of **Kraken**
 >     - *"Select a kmer distribution"*: `PlusPF-16`, same as for Kraken
 >
@@ -477,7 +478,7 @@ __Bracken__ (Bayesian Reestimation of Abundance after Classification with Kraken
    99.06 	446152 	0 	O 	1385 	Bacillales
    99.06 	446152 	0 	F 	90964 	Staphylococcaceae
    99.04 	446101 	0 	G 	1279 	Staphylococcus
-   95.62 	430661 	430661 	S 	1280 	Staphylococcus aureus 
+   95.62 	430661 	430661 	S 	1280 	Staphylococcus aureus
    ```
 
    > <question-title></question-title>
@@ -510,7 +511,7 @@ __Bracken__ (Bayesian Reestimation of Abundance after Classification with Kraken
    Staphylococcus epidermidis 	1282 	S 	587 	13 	600 	0.00133
    Staphylococcus lugdunensis 	28035 	S 	511 	3 	514 	0.00114
    Staphylococcus schweitzeri 	1654388 	S 	409 	26 	435 	0.00097
-   Staphylococcus simiae 	308354 	S 	398 	2 	400 	0.00089 
+   Staphylococcus simiae 	308354 	S 	398 	2 	400 	0.00089
    ```
 
 > <question-title></question-title>
@@ -530,17 +531,17 @@ As expected *Staphylococcus aureus* represents most of the reads in the data.
 
 ## Contamination detection
 
-To explore **Kraken** report and specially to detect more reliably minority organisms or contamination, we will use **Recentrifuge** ({% cite marti2019recentrifuge %}). 
+To explore **Kraken** report and specially to detect more reliably minority organisms or contamination, we will use **Recentrifuge** ({% cite marti2019recentrifuge %}).
 
-**Recentrifuge** enhances analysis by reanalyzing metagenomic classifications with interactive charts that highlight confidence levels. It supports 48 taxonomic ranks of the [NCBI Taxonomy](https://www.ncbi.nlm.nih.gov/taxonomy), including strains, and generates plots for shared and exclusive taxa, facilitating robust comparative analysis. 
+**Recentrifuge** enhances analysis by reanalyzing metagenomic classifications with interactive charts that highlight confidence levels. It supports 48 taxonomic ranks of the [NCBI Taxonomy](https://www.ncbi.nlm.nih.gov/taxonomy), including strains, and generates plots for shared and exclusive taxa, facilitating robust comparative analysis.
 
 **Recentrifuge** includes a novel contamination removal algorithm, useful when negative control samples are available, ensuring data integrity with control-subtracted plots. It also excels in detecting minority organisms in complex datasets, crucial for sensitive applications such as clinical and environmental studies.
 
 <div class="Step-by-step" markdown="1">
 > <hands-on-title> Identify contamination </hands-on-title>
 >
-> 1. {% tool [Recentrifuge](toolshed.g2.bx.psu.edu/repos/iuc/recentrifuge/recentrifuge/1.12.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Select taxonomy file tabular formated"*: **Classification** output of **Krancken2** {% icon tool %}
+> 1. {% tool [Recentrifuge](toolshed.g2.bx.psu.edu/repos/iuc/recentrifuge/recentrifuge/1.16.1+galaxy0) %} with the following parameters:
+>    - {% icon param-collection %} *"Select taxonomy file tabular formated"*: **Classification** output of **Kraken2** {% icon tool %}
 >    - *"Type of input file (Centrifuge, CLARK, Generic, Kraken, LMAT)"*: `Kraken`
 >    - In *"Database type"*:
 >        - *"Cached database whith taxa ID"*: `NCBI-2023-06-27`

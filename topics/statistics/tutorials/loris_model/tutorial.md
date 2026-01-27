@@ -1,25 +1,23 @@
 ---
 layout: tutorial_hands_on
 level: Intermediate
-title: Building the LORIS LLR6 PanCancer Model Using PyCaret
+title: Galaxy Tabular Learner - Building a Model using Chowell clinical data
 zenodo_link: https://zenodo.org/records/13885908
 questions:
-- How can the LORIS LLR6 model published by Chang et al., 2024 be reproduced?
-- Which tools can be used in Galaxy to obtain a logistic regression model?
-- How can the model be evaluated to confirm its performance?
+- How can the Tabular Learner in Galaxy be used to reconstruct the LORIS LLR6 logistic regression model described by Chang et al. (2024) using the same dataset and predictor set?
+- How should the decision-threshold parameter be configured in Tabular Learner (default versus optimized, and the selection criterion) to align predictions with the intended clinical operating point?
+- Which components of the Tabular Learner report best support a transparent comparison between the Galaxy-built model and the performance reported in the LORIS paper?
 objectives:
 - Use a large dataset of immune checkpoint blockade (ICB)-treated and non-ICB-treated
   patients across 18 solid tumor types, encompassing a wide range of clinical, pathologic
   and genomic features to build a Machine Learning Model.
-- Build a Machine Learning model using PyCaret in Galaxy.
+- Build a Machine Learning model using Tabular Learner in Galaxy.
 - Evaluate the model for robustness by comparing it with the original LORIS LLR6 model
   published by Chang et al., 2024.
 time_estimation: 1H
 key_points:
-- Use Galaxy tools to build a model based on LORIS Score model published (Chang et
-  al., 2024).
-- Confirm the robustness of the model by comparing its metrics with the model published
-  by Chang et al., 2024.
+- Use the Galaxy Tabular Learner to reconstruct a LORIS-style model (LLR6) from the same cohort and predictor set described by Chang et al. (2024).
+- Validate model fidelity and robustness by comparing discrimination, calibration, and threshold-dependent performance from the Tabular Learner report against the metrics reported for LORIS LLR6 in Chang et al. (2024).
 contributors:
 - paulocilasjr
 - qchiujunhao
@@ -27,7 +25,7 @@ contributors:
 tags:
 - LORIS Score Model
 - Machine Learning
-- PyCaret
+- Tabular Learner
 recordings:
 - youtube_id: DKM19WIDNzk
   length: 24M
@@ -40,22 +38,13 @@ recordings:
   bot-timestamp: 1746588908
 ---
 
+In this tutorial, we will build a new immunotherapy-response classifier with Galaxy Tabular Learner using a comprehensive dataset of patients treated with immune checkpoint blockade (ICB) and non-ICB-treated patients across 18 solid tumor types. The goal is to accurately predict patient responses to the treatment.
 
-> <comment-title>PyCaret Model Comparison Tool</comment-title>
->
-> The PyCaret Model Comparison tool described in this tutorial is currently available only on: 
-> [Cancer-Galaxy](https://cancer.usegalaxy.org)
->
-> Galaxy-ML tools > PyCaret Model Comparison 
->
-> This tutorial will be updated as soon as the tool is incorporated into the main Galaxy project.
-{:  .comment}
+Rather than re-implementing the original LORIS pipeline, we treat the published LORIS LLR6 logistic regression model as a benchmark and use the Tabular Learner report to confirm model quality and to understand where and why results differ ({% cite Chang2024 %}).
 
-In this tutorial, we will use a comprehensive dataset of patients treated with immune checkpoint blockade (ICB) and non-ICB-treated patients across 18 solid tumor types to develop LORIS (Logistic Regression-based Immunotherapy-Response Score). The goal is to accurately predict patient responses to the treatment.
+We will follow three steps: (i) upload the preprocessed training and test tables to Galaxy, (ii) run Tabular Learner to train and select a best model, and (iii) compare discrimination, calibration, and threshold-dependent behavior against the LORIS LLR6 reference using the interactive report.
 
-To achieve this, we will follow three essential steps: (i) upload the patient data training file to Galaxy, (ii) set up and run the PyCaret Model Comparison Tool to train the best model, and (iii) evaluate the model’s predictive performance by comparing it to the published LORIS model ({% cite Chang2024 %}).
-
-![schema of the whole process of training model and test.](../../images/loris_tutorial/tutorial_schema.png "Overview of the process steps to obtain the model from the LORIS dataset.")
+![schema of the whole process of training model and test.](../../images/loris_tutorial/tutorial_schema.png "Overview of the process steps to obtain the model from the Chowell dataset."){: style="width: 60%; display: block; margin-left: auto; margin-right: auto;"}
 
 > <agenda-title></agenda-title>
 >
@@ -115,9 +104,11 @@ The Response feature is a categorical target variable indicating whether patient
 
 In the article ({% cite Chang2024 %}), the model was trained using different architectures, including Decision Tree, Random Forest, Logistic Regression, and XGBoost, using the scikit-learn framework (full code is available here: [Chang et al., github repo](https://github.com/rootchang/LORIS/tree/main/code). In the end, the best model architecture was a Logistic LASSO (Least Absolute Shrinkage and Selection Operator) Regression model, fitting the six features discussed above. This model was named LLR6.
 
-It is important to note that PyCaret has the capability of training different model architectures, just as was done by Chang et al., 2024, but automatically. At the end of the run, a tabular list ranked by decreasing model performance is output.
+It is important to note that Tabular Learner has the capability of training different model architectures, just as was done by Chang et al., 2024, but automatically.There are two options:
+1. **Tool-selected best model**: let Tabular Learner compare candidate classifiers and select the strongest performer under its evaluation protocol.
+2. **Model specific**: if you want a model family, restrict the candidate list to specific algorithms via the tool option: `Only Select Classification Models if you don't want to compare all models,`.
 
-When setting up the PyCaret Model Comparison tool, one option, `Only Select Classification Models if you don't want to compare all models,` can be used to select specific architectures to be tested during training. Since the purpose of this tutorial is to replicate what was done, this option won't be used, and therefore, all possible models will be trained. Thus, we expect to obtain the same results as Chang et al., where the Logistic Regression Model has the best performance among all other models.
+Since the purpose of this tutorial is not to replicate the exact model, we will not use the model specific option. Instead, we will train all candidate models. We therefore expect to obtain results similar to those reported by Chang et al., with logistic regression performing best among the models evaluated.
 
 # Prepare environment and get the data 
 > <comment-title>Preprocessing the raw data</comment-title>
@@ -166,69 +157,83 @@ When setting up the PyCaret Model Comparison tool, one option, `Only Select Clas
 >
 {: .hands_on}
 
-# Using PyCaret Model Comparison Tool
-> <hands-on-title> Task description </hands-on-title>
+# Using Tabular Learner Tool
+> <hands-on-title> Run 1: train a Tabular Learner model </hands-on-title>
 >
-> 1. {% tool [PyCaret Model Comparison](toolshed.g2.bx.psu.edu/repos/paulo_lyra_jr/pycaret_model_comparison/PyCaret_Model_Comparison/2024.3.3.2+0) %} with the following parameters:
+> 1. {% tool [Tabular Learner](toolshed.g2.bx.psu.edu/repos/goeckslab/tabular_learner/tabular_learner/0.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"Input Dataset (CSV or TSV)"*: `Chowell_train_Response.tsv`
 >    - {% icon param-file %} *"Test Dataset (CSV or TSV)"*: `Chowell_test_Response.tsv`
 >    - {% icon param-file %} *"Select the target column"*: `C22: Response`
 >    - {% icon param-file %} *"Task"*: `Classification`
-> Run the tool 
+>
+> 2. Run the tool 
 {: .hands_on}
+
+> <hands-on-title> Run 2: Re-evaluate at a selected decision threshold </hands-on-title>
+>
+> Threshold-dependent metrics (accuracy, precision, recall, F1, MCC) change when the probability cutoff changes. For a transparent comparison to LORIS LLR6, do the following: 
+>
+> 1. {% tool [Tabular Learner](toolshed.g2.bx.psu.edu/repos/goeckslab/tabular_learner/tabular_learner/0.1.3) %} with the following parameters:
+>    - {% icon param-file %} *"Input Dataset (CSV or TSV)"*: `Chowell_train_Response.tsv`
+>    - {% icon param-file %} *"Test Dataset (CSV or TSV)"*: `Chowell_test_Response.tsv`
+>    - {% icon param-file %} *"Select the target column"*: `C22: Response`
+>    - {% icon param-file %} *"Task"*: `Classification`
+>    - {% icon param-file %} *"Customize Default Settings?"*: `Yes`
+>    - {% icon param-file %} *"Classification Probability Threshold"*: `0.25`
+>
+> 2. Run the tool 
+{: .hands_on}
+
 
 # Tool output files
 After training and testing your model, you should see two new files in your history list:
 
-- PyCaret Model Comparison Best Model: The PyCaret model pickle file. This file allows the model to be reused without requiring retraining, ensuring consistent predictions.
+- Tabular Learner Best Model: An HDF5 file (`.h5`) that stores the serialized best model (and preprocessing) so it can be reused without retraining.
 
-- PyCaret Model Report: This file contains all the plots for the models trained, along with the best model selected.
+- Tabular Learner Model Report: An interactive HTML report with sortable tables and plots summarizing setup, validation, test results, and feature importance.
 
-For this tutorial, we will focus on the PyCaret Model Report.
+A hidden CSV with the best model's hyperparameters (`best_model.csv`) is also produced; show hidden datasets if you want to download it.
 
-# PyCaret Model Report 
-The PyCaret HTML report provides a comprehensive and interactive overview of the trained model’s performance in an accessible, browser-ready format. This report documents key aspects of the model’s training and evaluation process, offering insights into how well the model performed on both the training and test datasets. The report consists of four tabs: Setup & Best Model, Best Model Plots, Feature Importance, and Explainer.
-![report tabs](../../images/loris_tutorial/report_tabs.png "Tabs in the PyCaret Model Comparison Report")
+For this tutorial, we will focus on the Tabular Learner Model Report.
+
+# Tabular Learner Model Report 
+The Tabular Learner HTML report provides a comprehensive, browser-ready overview of the trained model and its evaluation, including performance on the training, validation, and test data. The report consists of four tabs: Model Config Summary, Validation Summary, Test Summary, and Feature Importance.
+![report tabs](../../images/loris_tutorial/report_tabs.png "Tabs in the Tabular Learner Report")
 
 Below is a brief explanation of the content in each tab of the report.
 
-> <tip-title>Setup & Best Model Tab</tip-title>
->- Setup Parameters: Documents the initial configurations used in the PyCaret Model Comparison Tool.
->- Best Model Class and Hyperparameters: Specifies the model selected as the best performer from the comparison, along with the model’s hyperparameters as determined through tuning.
->- Performance Metrics: Summarizes key evaluation metrics, including Accuracy, ROC-AUC, Recall, Precision, F1-Score, Cohen’s Kappa, Matthews Correlation Coefficient (MCC), and Training Time (in seconds).
+> <tip-title>Model Config Summary Tab</tip-title>
+>- Dataset Overview (classification only): Counts and percentages of each label in the train/validation/test splits.
+>- Performance Summary (classification only): Train/validation/test metrics computed for the best model, using the selected probability threshold when applicable.
+>- Setup Parameters: Records the key run settings (target column, train size, normalization, feature selection, cross validation, outlier/multicollinearity handling, polynomial features, class-imbalance handling, model list, and probability threshold).
+>- Best Model Hyperparameters: The final parameter values for the selected model.
 >
 {: .tip}
 
-> <tip-title>Best Model Plots Tab</tip-title>
->- Training and Test Evaluation Plots: Displays visualizations of the model’s performance, including an ROC-AUC curve for binary classification, Confusion Matrix, Precision-Recall (PR) curve, Error Analysis, and a Classification Report for detailed class-level performance.
->- Additional Model Insights: Includes diagnostic plots like the Learning Curve, Calibration Plot, Validation Curve (VC), and various dimensionality reduction plots (Manifold, RFE).
->- Feature Importance: Shows the contribution of each feature to the model, both individually and collectively (All Features), providing insight into the factors influencing model decisions.
+> <tip-title>Validation Summary Tab</tip-title>
+>- Train & Validation Summary: A sortable table comparing all candidate models on cross-validation metrics; includes a tuning summary when hyperparameter tuning is enabled.
+>- Diagnostic Plots (vary by task and model availability): Learning curve, validation curve, calibration curve (classification), threshold plot (classification), and dimensionality-reduction or feature-selection visuals (e.g., t-SNE, manifold, RFE).
+>
+{: .tip}
+
+> <tip-title>Test Summary Tab</tip-title>
+>- Test Metrics Table: Holdout/test performance for the selected model.
+>- Classification Plots: Confusion matrix, per-class report, ROC and PR curves (optionally annotated at the chosen threshold), lift curve, and cumulative precision.
+>- Regression Plots: Residuals plot and prediction error distribution, plus a preview of true vs. predicted values.
 >
 {: .tip}
 
 > <tip-title>Feature Importance Tab</tip-title>
->- Feature Importance Analysis from a Trained Random Forest: This analysis, while not directly linked to the LASSO logistic regression model, provides additional insights into feature significance within alternative models. These insights can help validate or contrast with results from the primary model, offering a broader perspective on feature influence. 
->-  SHAP Summary from a Trained LightGBM Model: SHAP (SHapley Additive exPlanations) values offer a unified measure of feature contributions, showing how each feature impacts predictions. This approach is particularly valuable for interpreting model decisions and understanding the feature contributions across predictions.
+>- Model-based Importance: Feature importance from the selected model (tree-based or coefficient-based when supported), with a SHAP summary plot to show global impact.
+>- SHAP and Permutation Importance: Mean absolute SHAP impact and permutation importance derived from the explainer.
+>- Partial Dependence Plots (PDPs): Per-feature effect plots to show how individual features influence predictions.
+>- Feature Scope Table: Reports how many transformed features are used in SHAP when feature caps are applied.
 >
 {: .tip}
 
-> <tip-title>Explainer Tab</tip-title>
->- Mean Absolute SHAP Value (Average Impact on Predicted Response): Displays each feature's overall contribution to predictions. Higher SHAP values indicate features with a more significant influence on the model's outcomes, helping identify the most impactful inputs.
->- Permutation Importance (Decrease in ROC AUC with Randomized Feature): Shows how essential each feature is for model performance by randomly shuffling each feature and observing the resulting decrease in ROC AUC. A significant drop suggests high feature importance.
->- Partial Dependence Plot (PDP): Displays the average effect of a feature on predictions, indicating whether it has a linear, nonlinear, or interactive effect on outcomes.
->- Percentage 1 vs. Predicted Probability: Compares the true proportion of positive cases (label=1) with predicted probabilities, helping evaluate the model’s calibration by showing how closely predictions align with observed outcomes.
->- Cumulative Percentage per Category (Top X%): Measures the cumulative impact of each category in the top percentages, useful for understanding feature value concentration and distribution.
->- Percentage Above and Below Cutoff: Analyzes model performance at a specified threshold, offering insight into sensitivity and specificity when predictions exceed or fall below the cutoff.
->- Confusion Matrix: A detailed matrix showing True Positives, False Positives, True Negatives, and False Negatives, allowing assessment of prediction accuracy, error distribution, and balance.
->- Lift Curve: Visualizes the model's improvement over random chance across prediction deciles, with lift values indicating the model's effectiveness in identifying positive instances.
->- ROC AUC Curve: Plots True Positive Rate vs. False Positive Rate across thresholds, with AUC as a measure of class distinction. A higher AUC reflects better performance in differentiating classes.
->- PR AUC Curve: Displays Precision vs. Recall, focusing on performance for the positive class. Especially useful in imbalanced datasets, where a higher AUC indicates effective identification of positive instances while maintaining precision.
->
-{: .tip}
+# Benchmarking Tabular Learner against the LORIS LLR6 model
 
-# LORIS PanCancer LLR6 Model Robustness:
-
-Understanding the objective of this analysis is essential. Since we aim to build a model comparable to the one published by {% cite Chang2024 %}, and we indeed obtained the same Logistic Regression model architecture, this allows us to use the metrics from that paper as a benchmark to assess the performance of the model we develop through Galaxy-PyCaret.
+The objective of this use case is to build a **new** model with Tabular Learner under a standardized Galaxy workflow and then use the published LORIS LLR6 model as a **benchmark baseline** ({% cite Chang2024 %}). Because both approaches use the same cohort split and predictor set, agreement in threshold-independent metrics (ROC-AUC, PR-AUC) supports model fidelity, while any differences in threshold-dependent metrics can often be explained by distinct probability cutoffs, calibration, or regularization choices recorded in the report.
 
 > <tip-title>Robustness definition </tip-title>
 >
@@ -240,15 +245,16 @@ Understanding the objective of this analysis is essential. Since we aim to build
 {: .tip}
 
 ## Classification Algorithms
-A key feature of PyCaret is its capability to train and compare multiple models with minimal code. By default, PyCaret evaluates a diverse range of algorithms, including linear models, tree-based models, and ensemble methods, ranking these models based on their performance. The primary metric used to determine the best-performing model is the accuracy. 
+A key feature of Tabular Learner is its capability to train and compare multiple models with minimal code. By default, Tabular Learner evaluates a diverse range of algorithms, including linear models, tree-based models, and ensemble methods, ranking these models based on their performance. The primary metric used to determine the best-performing model is the accuracy.
+
 ![Comparison results on the cross-validation set](../../images/loris_tutorial/model_comparison.png "Comparison of Model Performance Metrics Across Algorithms")
 
-In this case, the best-performing algorithm for this dataset matches the findings reported in the article: the Logistic Regression model.
+In many runs of this use case, logistic regression ranks among the top-performing models, consistent with the LORIS LLR6 baseline.
 
 ## Hyperparameters
 The model from {% cite Chang2024 %} for the Pan-Cancer LLR6 model has the following hyperparameters set: C = 0.1, Class Weight = Balanced, L1 ratio = 1, max iter = 100, Penalty = Elasticnet, Solver = Saga.
 
-The hyperparameter search performed by Galaxy-PyCaret resulted in slightly different settings for the model: C = 1.0, Class Weight = None, L1 ratio = None, max iter = 1000, Penalty = L2, Solver = LBFGS.
+The hyperparameter search performed by Galaxy-Tabular Learner resulted in slightly different settings for the model: C = 1.0, Class Weight = None, L1 ratio = None, max iter = 1000, Penalty = L2, Solver = LBFGS.
 
 ![Model hyperparameters table](../../images/loris_tutorial/hyperparameters.png "Table showing the hyperparameters set for the selected model")
 
@@ -271,32 +277,55 @@ The differences found in the hyperparameters guide the analysis towards testing 
 {:  .comment}
 
 ## Model Evaluation Metrics
-In this study, we compare the performance of machine learning models built using two different frameworks: PyCaret and Scikit-learn ({% cite Chang2024 %}). The comparison focuses on four model evaluation metrics—Accuracy, Area Under the Curve (AUC), F1 Score, and Matthews Correlation Coefficient (MCC)—to assess the relative strengths and performance of each model and draw conclusions about the robustness of the LORIS Score.
 
-![Model metrics table](../../images/loris_tutorial/test_metrics_results.png "Performance Metrics of the Model After Testing")
+When comparing Tabular Learner models to LORIS LLR6, separate metrics into two groups and compare both runs of Tabular Learner:
+
+1. **Threshold-independent (primary for benchmarking)**  
+   - **ROC-AUC** and **PR-AUC** summarize discrimination across all thresholds. In this use case, both Tabular Learner runs show stronger discrimination than LLR6 (AUC 0.76 vs 0.72; AUPRC 0.55 vs 0.53), and the two runs are identical on these metrics because the underlying model and data did not change.
+
+2. **Threshold-dependent (report with the chosen cutoff)**  
+   - **Accuracy and F1** shift when the probability cutoff changes. Moving from 0.50 (Run 1) to 0.25 (Run 2) lowers accuracy (0.79 → 0.67) but improves F1 (0.42 → 0.52).
+
+The table below summarizes the key numbers:
+
+| Model | Threshold | Accuracy | ROC-AUC | PR-AUC | F1 |
+| --- | --- | --- | --- | --- | --- |
+| LLR6 (reference) | 0.30 | 0.68 | 0.72 | 0.53 | 0.53 |
+| Tabular Learner Run 1 | 0.50 | 0.80 | 0.76 | 0.55 | 0.42 |
+| Tabular Learner Run 2 | 0.25 | 0.67 | 0.76 | 0.55 | 0.52 |
+
+Use the following report components to interpret differences:
+
+- **Model Config Summary**: confirm the split strategy, evaluation protocol, selected model, and tuned hyperparameters.
+- **ROC and PR curves**: compare discrimination against the published baseline without relying on a specific threshold.
+- **Calibration plot and probability diagnostics**: determine whether predicted probabilities are systematically over- or under-confident.
+- **Threshold plot (precision/recall/F1 vs cutoff)**: select and justify an operating point (for example, maximize F1, or prioritize recall for clinical sensitivity).
+- **Confusion matrix and classification report**: quantify how the chosen cutoff changes false positives and false negatives.
+
+![Bar chart comparing LLR6 metrics vs. Tabular Learner (threshold = 0.25)](../../images/loris_tutorial/test_metrics_results.png "Comparison of LLR6 model metrics and Tabular Learner model metrics at a 0.25 threshold.")
 
 - Accuracy
-Accuracy measures the proportion of correct predictions among all predictions. The PyCaret model outperformed the Scikit-learn model in terms of accuracy, achieving 0.80 compared to 0.6803 for the Scikit-learn model. This suggests that the PyCaret model was able to correctly classify a higher percentage of samples, indicating better overall predictive performance on the given dataset. Furthermore, the higher accuracy across multiple runs demonstrates a level of consistency in the performance of the LORIS Score, regardless of the specific model-building tool used.
+Accuracy measures the proportion of correct predictions among all predictions. In our experiments, Tabular Learner Run 1 achieved the highest accuracy (0.80), substantially higher than the published reference model LLR6 (0.68) and Run 2 (0.67). This indicates that, at its selected operating threshold, Run 1 produced more correct classifications overall. However, because accuracy depends on the chosen cutoff and can be influenced by class imbalance, it should be interpreted alongside threshold-dependent metrics (e.g., F1) and threshold-independent metrics (e.g., ROC-AUC, PR-AUC).
 
 - Area Under the Curve (AUC)
-AUC provides an aggregate measure of performance across all classification thresholds, with higher values indicating better model performance. The PyCaret model exhibited a moderate AUC of 0.7599, slightly outperforming the Scikit-learn model’s AUC of 0.7155. This suggests that the PyCaret model had better discrimination between positive and negative classes, demonstrating a more robust ability to distinguish between the two across various thresholds. Despite using different frameworks, both models achieved relatively high AUC values, which reinforces the LORIS Score's consistent discriminatory power and overall robustness.
+ROC-AUC summarizes discrimination across all possible thresholds. Both Tabular Learner runs show higher ROC-AUC (0.76) than the published LLR6 baseline (0.72), indicating improved ability to rank positives above negatives irrespective of where the cutoff is set. Despite Run 1 having much higher accuracy than Run 2, their identical ROC-AUC suggests that the key difference is likely where the decision threshold was placed, rather than a large difference in underlying separability.
 
-- F1 Score
-The F1 Score is the harmonic mean of precision and recall, offering a balanced measure of a model’s ability to correctly classify both positive and negative classes, particularly in the context of imbalanced datasets. The Scikit-learn model achieved a higher F1 score of 0.5289, compared to the PyCaret model’s F1 score of 0.4246. This suggests that, while the PyCaret model outperformed in terms of accuracy and AUC, the Scikit-learn model might have demonstrated a better balance between precision and recall, making it more effective at identifying positive instances.
+- Precision-Recall AUC (AUPRC)
+Precision-Recall AUC (AUPRC or PR-AUC) is often more informative than ROC-AUC when positives are relatively rare. Both Tabular Learner runs have PR-AUC = 0.55, slightly higher than the reference (0.53), suggesting a modest improvement in performance in the precision–recall tradeoff over the baseline, independent of a single threshold choice.
 
-- Matthews Correlation Coefficient (MCC)
-The MCC is a more balanced metric for binary classification, as it considers all four categories from the confusion matrix (True Positive, True Negative, False Positive, False Negative). The Scikit-learn model achieved a higher MCC of 0.4652, compared to the PyCaret model’s MCC of 0.3764. This suggests that, while both models showed moderate performance, the Scikit-learn model demonstrated a better balance between false positives and false negatives, making it more reliable in terms of overall classification accuracy, especially in the case of imbalanced datasets.
+- Threshold selection and F1 (Run 1 vs Run 2 vs reference)
+The threshold determines the balance between false positives and false negatives. Although Run 1 attains higher accuracy, it has a lower F1 (0.42) than Run 2 (0.52) and the reference LLR6 (0.53). This pattern is consistent with Run 1 using a more conservative cutoff (0.50), which typically increases true negatives (improving accuracy) but can reduce recall and harm F1 if positives are missed. In contrast, Run 2 uses a lower threshold (0.25), which generally increases sensitivity and can improve F1 by capturing more positives, even if it introduces more false positives and lowers overall accuracy.The comparison between the Tabular Learner and Scikit-learn models demonstrates consistent performance across multiple evaluation metrics, such as accuracy, AUC, and F1 score. The slight differences in the results reflect the inherent flexibility of the LORIS Score, showing that a model built using two different frameworks—Tabular Learner and Scikit-learn—can still yield comparable performance.
 
-The comparison between the PyCaret and Scikit-learn models demonstrates consistent performance across multiple evaluation metrics, such as accuracy, AUC, F1 score, and MCC. The slight differences in the results reflect the inherent flexibility of the LORIS Score, showing that a model built using two different frameworks—PyCaret and Scikit-learn—can still yield comparable performance. 
+Compared to the published model, our runs demonstrate that while discrimination (ROC-AUC/PR-AUC) is slightly improved, the choice of threshold materially changes the reported point metrics. Therefore, differences in accuracy and F1 across Run 1, Run 2, and LLR6 should be interpreted primarily as different operating points on similar underlying probability rankings, rather than as contradictions in model quality.
 
-The results suggest that small variations in the analytical approach do not significantly impact the model's ability to distinguish between classes, thereby providing confidence in the robustness of the LORIS Score for future applications.
+Overall, these results emphasize that (1) ROC-AUC and PR-AUC support comparability with, and slight improvement over, the published baseline, and (2) threshold selection must be explicitly justified because it can shift the balance between accuracy and clinically relevant sensitivity/precision, leading to substantially different conclusions from the same model outputs.
 
 # Conclusion
-In this tutorial, we demonstrated how to use the Galaxy-PyCaret Comparison Tool to build a machine learning model for ICB treatment patient selection using clinical data. We followed a structured approach consisting of:
+In this tutorial, we demonstrated how to use the Galaxy-Tabular Learner Tool to build a machine learning model for ICB treatment patient selection using clinical data. We followed a structured approach consisting of:
 - Uploading datasets (.tsv)
-- Running the PyCaret Comparison
+- Running the Tabular Learner
 - Evaluating the model's performance using the metrics published by {% cite Chang2024 %} as the gold standard.
 
-Throughout the process, we showcased how PyCaret simplifies the complexities of machine learning workflows, making them more accessible and efficient for users. Additionally, we explored the robustness of the LORIS Score by building a Logistic Regression model with different hyperparameters.
+Throughout the process, we showcased how Tabular Learner simplifies the complexities of machine learning workflows, making them more accessible and efficient for users. Additionally, we explored the robustness of the LORIS Score by building a Logistic Regression model with different hyperparameters.
 
 By the end of this tutorial, you should have a solid understanding of how to deploy a traditional machine learning model using tabular data and effectively interpret its results.

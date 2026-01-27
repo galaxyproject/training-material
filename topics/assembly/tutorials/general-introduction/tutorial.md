@@ -14,8 +14,13 @@ key_points:
   - "We assembled some Illumina fastq reads into contigs using a short read assembler called Velvet"
   - "We showed what effect one of the key assembly parameters, the k-mer size, has on the assembly"
   - "It looks as though there are some exploitable patterns in the metric data vs the k-mer size."
-contributors:
-  - slugger70
+contributions:
+  authorship:
+    - slugger70
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 ---
 
 # Genome assembly with Velvet: Background

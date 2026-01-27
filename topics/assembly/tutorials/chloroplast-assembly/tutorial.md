@@ -21,8 +21,13 @@ key_points:
 - We can map raw reads back to the assembly and investigate areas of high or low read
   coverage
 - We can view an assembly, its mapped reads, and its annotations in JBrowse
-contributors:
-- annasyme
+contributions:
+  authorship:
+    - annasyme
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 recordings:
 - captioners:
   - annasyme

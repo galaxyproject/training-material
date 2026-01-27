@@ -1142,10 +1142,9 @@ We will reformat the output of **STAR** to be similar to the output of **feature
 
 > <hands-on-title>Reformatting STAR output</hands-on-title>
 >
-> 1. {% tool [Select last](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.5+galaxy2) %} lines from a dataset (tail) to remove the first 4 lines with the following parameters:
+> 1. {% tool [Remove beginning](Remove beginning1) %} to remove the first 4 lines with the following parameters:
+>    - *"Remove first"*: `4` (lines)
 >    - {% icon param-collection %} *"Text file"*: `RNA STAR on collection N: reads per gene` (output of **RNA STAR** {% icon tool %})
->    - *"Operation"*: `Keep everything from this line on`
->    - *"Number of lines"*: `5`
 >
 > 2. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
 >    - *"Cut columns"*: `c1,c2`
@@ -1689,7 +1688,7 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >
 >    We will now split the collection by treatment. We need to find a pattern which will be present into only one of the 2 categories. We will use the word `untreat`:
 >
-> 3. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} (grep) with the following parameters:
+> 3. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy2) %} (grep) with the following parameters:
 >    - *"Select lines from"*: `Extract element identifiers on data XXX` (output of  **Extract element identifiers** {% icon tool %})
 >    - *"that"*: `Match`
 >    - *"Regular Expression"*: `untreat`
@@ -1703,7 +1702,7 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >
 > We will repeat the same process using `single`
 >
-> 6. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} (grep) with the following parameters:
+> 6. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy2) %} (grep) with the following parameters:
 >    - *"Select lines from"*: `Extract element identifiers on data XXX` (output of  **Extract element identifiers** {% icon tool %})
 >    - *"that"*: `Match`
 >    - *"Regular Expression"*: `single`

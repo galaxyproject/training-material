@@ -78,12 +78,11 @@ for this mock sample are contained in the file `HMP_MOCK.v35.fasta`
 
 > <comment-title>Dataset naming scheme</comment-title>
 > For this tutorial, you are given 20 pairs of files. For example, the following pair of files:<br />
->  `F3D0_S188_L001_R1_001.fastq`<br />
->  `F3D0_S188_L001_R2_001.fastq`
+>  `F3D0_R1.fastq`<br />
+>  `F3D0_R2.fastq`
 >
 > The first part of the file name indicates the sample; `F3D0` here signifies that this sample was obtained from Female 3 on Day 0.
-> The rest of the file name is identical, except for `_R1` and `_R2`, this is used to indicate the forward and reverse reads
-> respectively.
+> The `_R1` and `_R2` are used to indicate the forward and reverse reads respectively.
 {: .comment}
 
 <!-- note: mothur does not include day 4 in their SOP example data, therefore this description and results
@@ -185,39 +184,19 @@ convention, so that our tools will know which files belong together. We do this 
 
 > <hands-on-title>Organizing our data into a paired collection</hands-on-title>
 >
-> 1. Click on the **checkmark icon** {% icon param-check %} at top of your history.
+> 1. Create a paired collection named `Mouse samples`,
 >
-> 2. Select all the FASTQ files (40 in total)
->    - **Tip:** type `fastq` in the search bar at the top of your history to filter only the FASTQ files; you can now use the `All` button at the top instead of having to individually select all 40 input files.
->    - Click on **All 40 selected**
->    - Select **Build List of Dataset Pairs** from the dropdown menu
+>    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
->    In the next dialog window you can create the list of pairs. By default Galaxy will look for pairs
->    of files that differ only by a `_1` and `_2` part in their names. In our case however, these
->    should be `_R1` and `_R2`.
->
-> 3. Click on "Choose Filters" and select `Forward: _R1, Reverse: _R2` (note that you can also enter Filters manually in the text fields on the top)
->
->    You should now see a list of pairs suggested by Galaxy:
->    ![List of suggested paired datasets](../../images/create_collection.png)
->
-> 4. Click on **Auto-pair** to create the suggested pairs.
->   - Or click on "Pair these datasets" manually for every pair that looks correct.
->
-> 5. **Name the pairs**
->    - The middle segment is the name for each pair.
->    - These names will be used as sample names in the downstream analysis, so always make sure they are informative!
->    - Make sure that {% icon param-check %} `Remove file extensions` is checked
->    - **Check** that the pairs are named `F3D0`-`F3D9`, `F3D141`-`F3D150` and `Mock`.
->      - Note: The names should **not** have the .fastq extension
->      - If needed, the names can be edited manually by clicking on them
->
->    ![The result of pairing](../../images/create_collection2.png)
->
-> 6. **Name your collection** at the bottom right of the screen
->   - You can pick whatever name makes sense to you
-> 7. Click the **Create Collection** button.
->    - A new dataset collection item will now appear in your history
+> > <comment-title></comment-title>
+> >
+> > - Make sure that {% icon param-check %} `Remove file extensions` is checked
+> > - **Check** that the pairs are named `F3D0`-`F3D9`, `F3D141`-`F3D150` and `Mock`.
+> >   - Note: The names should **not** have the .fastq extension
+> >   - If needed, the names can be edited manually by clicking on them
+> >   
+> {: .comment}
+>    
 {: .hands_on}
 
 
@@ -638,7 +617,7 @@ the **Unique.seqs** tool:
 > >  How many duplicate sequences did our filter step produce?
 > >
 > > > <solution-title></solution-title>
-> > > 3: The number of unique sequences was reduced from 16298 to 16295
+> > > 3: The number of unique sequences was reduced from 16,298 to 16,295
 > > {: .solution }
 > {: .question}
 {: .hands_on}
@@ -661,7 +640,7 @@ our contigs are ~250 bp long, we will set the threshold to 2 mismatches.
 > >
 > >  How many unique sequences are we left with after this clustering of highly similar sequences?
 > > > <solution-title></solution-title>
-> > > 5720: This is the number of lines in the fasta output
+> > > 5,731: This is the number of lines in the fasta output
 > > {: .solution }
 > {: .question}
 {: .hands_on}
@@ -706,11 +685,11 @@ this chimera removal using the `VSEARCH` algorithm {% cite Rognes2016 %} that is
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. There were **3,439 representative sequences** flagged as chimeric. These represent a total of **10,564 total sequences**
+> > > 1. There were **3,467 representative sequences** flagged as chimeric. These represent a total of **10,827 total sequences**
 > > >
-> > >    This can be determined by looking at the number of sequences in the `vsearch.accnos` file (3439). To determine how many total sequences these represent, compare the Summary.seqs log output files before and after the chimera filtering step (128,655-118,091=10,564).
+> > >    This can be determined by looking at the number of sequences in the `vsearch.accnos` file (3,467). To determine how many total sequences these represent, compare the Summary.seqs log output files before and after the chimera filtering step (128,872-118,045=10,827).
 > > >
-> > > 2. There are 2,281 remaining sequences after filtering, clustering of highly similar sequences, and chimera removal.
+> > > 2. There are 2,264 remaining sequences after filtering, clustering of highly similar sequences, and chimera removal.
 > > >
 > > >    This can be determined by looking at the number of sequences in the fasta output of **Remove.seqs** {% icon tool %}
 > > {: .solution }
@@ -756,8 +735,8 @@ way of doing this is to use the abundant sequences as our reference.
 > >  How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)
 > >
 > > > <solution-title></solution-title>
-> > > Looking at the chimera.vsearch `accnos` output, we see that **3,439 representative sequences** were flagged as chimeric. If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
-> > > sequences down to 118,091 total sequences in this step, for a reduction of **10,564 total sequences**, or 8.2%. This is a reasonable number of
+> > > Looking at the chimera.vsearch `accnos` output, we see that **3,467 representative sequences** were flagged as chimeric. If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,872
+> > > sequences down to 118,045 total sequences in this step, for a reduction of **10,827 total sequences**, or 8.4%. This is a reasonable number of
 > > > sequences to be flagged as chimeric.
 > > {: .solution }
 > {: .question}
@@ -844,12 +823,12 @@ and want to remove them from our dataset.
 > >
 > > > <solution-title></solution-title>
 > > > 1. 20 representative sequences were removed.
-> > >    The fasta file output from Remove.seqs had 2281 sequences while the fasta output from Remove.lineages
-> > >    contained 2261 sequences.
+> > >    The fasta file output from Remove.seqs had 2,264 sequences while the fasta output from Remove.lineages
+> > >    contained 2,244 sequences.
 > > >
 > > > 2. 162 total sequences were removed.
-> > >    If you run summary.seqs with the count table, you will see that we now have 2261 unique sequences
-> > >    representing a total of 117,929 total sequences (down from 118,091 before). This means 162 of our
+> > >    If you run summary.seqs with the count table, you will see that we now have 2,244 unique sequences
+> > >    representing a total of 117,883 total sequences (down from 118,045 before). This means 162 of our
 > > >    sequences were in represented by these 20 representative sequences.
 > > {: .solution }
 > {: .question}
@@ -1045,24 +1024,24 @@ something like this:
 ```
 numsampled	0.03-	lci-	hci-
 1	1.0000	1.0000	1.0000
-100	18.0240	16.0000	20.0000
-200	19.2160	17.0000	22.0000
-300	19.8800	18.0000	22.0000
-400	20.3600	19.0000	22.0000
+100	18.1440	16.0000	20.0000
+200	19.2860	18.0000	22.0000
+300	19.9380	18.0000	22.0000
+400	20.4660	18.0000	23.0000
 
 [..]
 
-3000	30.4320	28.0000	33.0000
-3100	30.8800	28.0000	34.0000
-3200	31.3200	29.0000	34.0000
-3300	31.6320	29.0000	34.0000
-3400	31.9920	30.0000	34.0000
-3500	32.3440	30.0000	34.0000
-3600	32.6560	31.0000	34.0000
-3700	32.9920	31.0000	34.0000
-3800	33.2880	32.0000	34.0000
-3900	33.5920	32.0000	34.0000
-4000	33.8560	33.0000	34.0000
+3000	30.5160	27.0000	34.0000
+3100	30.8560	28.0000	34.0000
+3200	31.1840	28.0000	34.0000
+3300	31.5020	28.0000	34.0000
+3400	31.8500	29.0000	34.0000
+3500	32.1960	29.0000	34.0000
+3600	32.5520	30.0000	34.0000
+3700	32.9000	31.0000	34.0000
+3800	33.2300	32.0000	34.0000
+3900	33.5980	32.0000	34.0000
+4000	33.8680	33.0000	34.0000
 4046	34.0000	34.0000	34.0000
 
 ```
@@ -1177,16 +1156,16 @@ Opening the taxonomy output for level 0.03 (meaning 97% similarity, or *species*
 ```
 OTU       Size    Taxonomy
 ..
-Otu0008	5260	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Rikenellaceae"(100);Alistipes(100);
-Otu0009	3613	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);"Porphyromonadaceae"_unclassified(100);
-Otu0010	3058	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lactobacillaceae(100);Lactobacillus(100);
-Otu0011	2958	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);"Porphyromonadaceae"_unclassified(100);
-Otu0012	2134	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);"Porphyromonadaceae"_unclassified(100);
-Otu0013	1856	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lactobacillaceae(100);Lactobacillus(100);
+Otu008	5258	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Rikenellaceae"(100);Alistipes(100);
+Otu009	3607	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);"Porphyromonadaceae"_unclassified(100);
+Otu010	3057	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lactobacillaceae(100);Lactobacillus(100);
+Otu011	2936	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);"Porphyromonadaceae"_unclassified(100);
+Otu012	2076	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);"Porphyromonadaceae"_unclassified(100);
+Otu013	1850	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lactobacillaceae(100);Lactobacillus(100);
 ..
 ```
 
-The first line shown in the snippet above indicates that Otu008 occurred 5260 times, and that all of the
+The first line shown in the snippet above indicates that Otu008 occurred 5258 times, and that all of the
 sequences (100%) were binned in the genus *[Alistipes](https://en.wikipedia.org/wiki/Alistipes)*.
 
 
@@ -1223,20 +1202,20 @@ dataset by subsampling.
 >    > <question-title></question-title>
 >    > How many sequences did the smallest sample consist of?
 >    > > <solution-title></solution-title>
->    > > The smallest sample is `F3D143`, and consists of 2389 sequences. This is a reasonable number, so we will now subsample all the other samples down to this level.
+>    > > The smallest sample is `F3D143`, and consists of 2,400 sequences. This is a reasonable number, so we will now subsample all the other samples down to this level.
 >    > {: .solution}
 >    {: .question}
 >
 > 2. {% tool [Sub.sample](toolshed.g2.bx.psu.edu/repos/iuc/mothur_sub_sample/mothur_sub_sample/1.39.5.0) %} with the following parameters
 >   - *"Select type of data to subsample"*: `OTU Shared`
 >   - {% icon param-file %} *"shared"*: the `shared` file from **Make.shared** {% icon tool %}
->   - *"size"*: `2389`
+>   - *"size"*: `2400`
 >
 >    > <question-title></question-title>
 >    >
 >    >  What would you expect the result of `count.groups` on this new shared output collection to be? Check if you are correct.
 >    > > <solution-title></solution-title>
->    > > all groups (samples) should now have 2389 sequences. Run count.groups again on the shared output collection by the sub.sample
+>    > > all groups (samples) should now have 2,400 sequences. Run count.groups again on the shared (hidden) output collection (named 0.03) by the sub.sample
 >    > > tool to confirm that this is indeed what happened.
 >    > {: .solution }
 >    {: .question}
@@ -1347,11 +1326,12 @@ Examine the rarefaction curve output.
 ```
 numsampled    0.03-F3D0    lci-F3D0    hci-F3D0    0.03-F3D1   ...
 1              1.0000       1.0000      1.0000      1.0000
-100           41.6560      35.0000     48.0000     45.0560
-200           59.0330      51.0000     67.0000     61.5740
-300           70.5640      62.0000     79.0000     71.4700
-400           78.8320      71.0000     87.0000     78.4730
-500           85.3650      77.0000     94.0000     83.9990
+100           42.4160      36.0000     51.0000     45.0560
+200           60.6860      53.0000     69.0000     63.4760
+300           72.8120      64.0000     81.0000     74.7000
+400           82.2580      73.0000     91.0000     83.0780
+500           89.5840      81.0000     98.0000     89.8400
+
 ...
 ```
 
@@ -1386,15 +1366,15 @@ off so we are confident we cover a large part of our sample diversity:
 
 {% unless include.short %}
 
-Finally, let's use the **Summary.single** tool to generate a summary report.  The following step
-will randomly subsample down to 2389 sequences, repeat this process 1000 times, and report several metrics:
+Finally, let's use the **Summary.single** tool to generate a summary report. The following step
+will randomly subsample down to 2400 sequences, repeat this process 1000 times, and report several metrics:
 
 > <hands-on-title>Summary.single</hands-on-title>
 >
 > - {% tool [Summary.single](toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_single/mothur_summary_single/1.39.5.2) %} with the following parameters
 >   - {% icon param-file %} *"share"*: the `shared` file from **Make.shared** {% icon tool %}
 >   - *"calc"*: `nseqs,coverage,sobs,invsimpson`
->   - *"size"*: `2389`
+>   - *"size"*: `2400`
 {: .hands_on}
 
 {% endunless %}
@@ -1409,26 +1389,26 @@ View the `summary` output from **Summary.single** {% icon tool %}. This shows se
 
 
 ```
-label   group   sobs          coverage    invsimpson   invsimpson_lci   invsimpson_hci  nseqs
-0.03    F3D0    167.000000    0.994697    25.686387    24.648040        26.816067       6223.000000
-0.03    F3D1    145.000000    0.994030    34.598470    33.062155        36.284520       4690.000000
-0.03    F3D141  154.000000    0.991060    19.571632    18.839994        20.362390       4698.000000
-0.03    F3D142  141.000000    0.978367    17.029921    16.196090        17.954269       2450.000000
-0.03    F3D143  135.000000    0.980738    18.643635    17.593785        19.826728       2440.000000
-0.03    F3D144  161.000000    0.980841    15.296728    14.669208        15.980336       3497.000000
-0.03    F3D145  169.000000    0.991222    14.927279    14.494740        15.386427       5582.000000
-0.03    F3D146  161.000000    0.989167    22.266620    21.201364        23.444586       3877.000000
-0.03    F3D147  210.000000    0.995645    15.894802    15.535594        16.271013       12628.000000
-0.03    F3D148  176.000000    0.995725    17.788205    17.303206        18.301177       9590.000000
-0.03    F3D149  194.000000    0.994957    21.841083    21.280343        22.432174       10114.000000
-0.03    F3D150  164.000000    0.989446    23.553161    22.462533        24.755101       4169.000000
-0.03    F3D2    179.000000    0.998162    15.186238    14.703161        15.702137       15774.000000
-0.03    F3D3    127.000000    0.994167    14.730640    14.180453        15.325243       5315.000000
-0.03    F3D5    138.000000    0.990523    29.415378    28.004777        30.975621       3482.000000
-0.03    F3D6    155.000000    0.995339    17.732145    17.056822        18.463148       6437.000000
-0.03    F3D7    126.000000    0.991916    13.343631    12.831289        13.898588       4082.000000
-0.03    F3D8    158.000000    0.992536    23.063894    21.843396        24.428855       4287.000000
-0.03    F3D9    162.000000    0.994803    24.120541    23.105499        25.228865       5773.000000
+label	group	nseqs	coverage	sobs	invsimpson	invsimpson_lci	invsimpson_hci
+0.03	F3D0	6197.000000	0.993061	190.000000	25.780716	24.726937	26.928310
+0.03	F3D1	4648.000000	0.991824	168.000000	34.711652	33.126089	36.456629
+0.03	F3D141	4648.000000	0.988382	167.000000	19.558697	18.815652	20.362842
+0.03	F3D142	2419.000000	0.970649	161.000000	16.872557	16.035250	17.802126
+0.03	F3D143	2400.000000	0.979167	141.000000	18.464499	17.408751	19.656565
+0.03	F3D144	3437.000000	0.978761	171.000000	15.103557	14.476517	15.787376
+0.03	F3D145	5531.000000	0.987344	197.000000	14.945508	14.506216	15.412237
+0.03	F3D146	3832.000000	0.987735	181.000000	22.661571	21.549273	23.894943
+0.03	F3D147	12442.000000	0.994615	245.000000	15.648636	15.291153	16.023234
+0.03	F3D148	9445.000000	0.993542	211.000000	17.625224	17.138263	18.140667
+0.03	F3D149	10019.000000	0.994011	219.000000	21.883339	21.309836	22.488565
+0.03	F3D150	4124.000000	0.985936	187.000000	23.456385	22.350535	24.677360
+0.03	F3D2	15661.000000	0.997254	212.000000	15.126294	14.640773	15.645122
+0.03	F3D3	5197.000000	0.992303	139.000000	14.362371	13.823489	14.944971
+0.03	F3D5	3437.000000	0.987489	156.000000	29.303468	27.871165	30.890958
+0.03	F3D6	6394.000000	0.992962	177.000000	17.649332	16.970981	18.384171
+0.03	F3D7	4051.000000	0.990866	138.000000	13.224946	12.715180	13.777293
+0.03	F3D8	4236.000000	0.991737	172.000000	23.070887	21.832520	24.458184
+0.03	F3D9	5719.000000	0.991957	191.000000	24.369613	23.325088	25.512073
 ```
 
 There are a couple of things to note here:
@@ -1478,7 +1458,7 @@ We calculate this with the **Dist.shared** tool, which will rarefy our data.
 > 1. {% tool [Dist.shared](toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_shared/mothur_dist_shared/1.39.5.0) %} with the following parameters
 >   - {% icon param-file %} *"shared"*: to the `shared` file from **Make.shared** {% icon tool %}
 >   - *"calc"*: `thetayc,jclass`
->   - *"subsample"*: `2389`
+>   - *"subsample"*: `2400`
 >
 >    Let's visualize our data in a Heatmap:
 >
