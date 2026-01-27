@@ -31,15 +31,8 @@ pathway:
         name: intro-to-ml-with-python
         topic: statistics
 -
-    section: "Module 2: Neural networks"
-    description: Neural networks
-    tutorials:
-    -
-        name: neural-networks-with-python
-        topic: statistics
--
-    section: "Module 3: Deep Learning (without Generative Artificial Intelligence)"
-    description: Deep Learning (without Generative Artificial Intelligence)
+    section: "Module 2: Practical deep learning with PyTorch"
+    description: This tutorial provides a hands-on introduction to building and training neural networks using PyTorch. You'll learn fundamental PyTorch concepts through practical examples with the breast cancer classification dataset, progressing from tensors and data handling to building and training multi-layer neural networks.
     tutorials:
     -
         name: practical-deep-learning-with-pytorch

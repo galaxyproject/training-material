@@ -14,7 +14,6 @@ requirements:
   topic_name: statistics
   tutorials:
   - intro-to-ml-with-python
-  - neural-networks-with-python
   - practical-deep-learning-with-pytorch
 questions:
 - How to load and configure a pre-trained language model for DNA sequence analysis?

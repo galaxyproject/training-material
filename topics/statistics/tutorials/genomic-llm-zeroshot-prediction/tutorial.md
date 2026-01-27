@@ -14,7 +14,6 @@ requirements:
   topic_name: statistics
   tutorials:
   - intro-to-ml-with-python
-  - neural-networks-with-python
   - practical-deep-learning-with-pytorch
   - genomic-llm-pretraining
   - genomic-llm-finetuning

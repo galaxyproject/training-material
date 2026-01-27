@@ -12,7 +12,6 @@ requirements:
     topic_name: statistics
     tutorials:
       - intro-to-ml-with-python
-      - neural-networks-with-python
 questions:
   - What are tensors and how do they differ from NumPy arrays?
   - How do you handle datasets and create data loaders in PyTorch?
