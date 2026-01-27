@@ -38,7 +38,7 @@ pathway:
         name: practical-deep-learning-with-pytorch
         topic: statistics
 -
-    section: "Module 4: Generative Artificial Intelligence and Large Langage Model for Genomics using Python"
+    section: "Module 3: Generative Artificial Intelligence and Large Langage Model for Genomics using Python"
     description: This tutorial series provides a comprehensive guide to leveraging large language models for genomics, covering pretraining, fine-tuning, mutation impact prediction, sequence generation, and optimization.
     tutorials:
     -
@@ -57,7 +57,7 @@ pathway:
         name: genomic-llm-sequence-optimization
         topic: statistics
 -
-    section: "Module 5: Regulations/standards for AI using DOME"
+    section: "Module 4: Regulations/standards for AI using DOME"
     description: Regulations/standards for AI using DOME
     tutorials:
     -
