@@ -122,7 +122,9 @@ If you want additional sections, for example, the "Microbial isolates" and "Micr
 > 6. Open `communities/<your community>/lab/base.yml`
 > 7. Add the previously created file in the sections (see [microgalaxy base file](https://github.com/galaxyproject/galaxy_codex/blob/main/communities/biodiversity/lab/base.yml) for example)
 > 8. Save `communities/<your community>/lab/base.yml`
-> 9. Commit the changes, create the pull request (if not done previously)
+> 9. Pre-visualize the rendering of the community lab using the following path (make sure to change the variables indicated with <> in the path) : `https://labs.usegalaxy.org.au/?content_root=https://<your-repo>/galaxy_codex/blob/<your-branch>/communities/<community-name>/lab/base.yml`
+> 10. Update the files until you obtain the lab you want.
+> 11. Commit the changes, create the pull request (if not done previously)
 {: .hands_on}
 
 The Pull Request will be reviewed. Make sure to respond to any feedback.

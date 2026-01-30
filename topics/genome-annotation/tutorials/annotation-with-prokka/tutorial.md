@@ -20,10 +20,15 @@ level: Introductory
 key_points:
   - "Prokka is a useful tool to annotate a bacterial genome."
   - "JBrowse can be used to inspect the annotation of a genome."
-contributors:
-  - annasyme
-  - tseemann
-  - slugger70
+contributions:
+  authorship:
+    - annasyme
+    - tseemann
+    - slugger70
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 subtopic: prokaryote
 edam_ontology:
 - topic_0622 # Genomics

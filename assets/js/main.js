@@ -72,9 +72,22 @@ function cyoaChoice(text, cyoaId){
 
 		nonMatchingOptions.forEach(value => {
 			document.querySelectorAll(`.${value}`).forEach(el => el.classList.add("gtn-cyoa-hidden"));
+			document.querySelectorAll(`.${value} h1,.${value} h2,.${value}`).forEach(el => el.setAttribute("data-toc-skip",""));
+
 		})
 
 		document.querySelectorAll(`.${text}`).forEach(el => el.classList.remove("gtn-cyoa-hidden"));
+		document.querySelectorAll(`.${text} h1,.${text} h2,.${text}`).forEach(el => {
+			if (el.getAttributeNode("data-toc-skip")) {
+				el.removeAttributeNode(el.getAttributeNode("data-toc-skip"));
+			}
+		});
+
+		var $myNav = $("#toc");
+		$myNav.empty();
+		Toc.init({
+			$nav: $("#toc")
+		});
 
 		// Just in case we mark it as checked (e.g. if default/from URL)
 		var input_el = document.querySelector(`input[value="${text}"]`)
@@ -186,3 +199,5 @@ document.querySelectorAll("blockquote[cite],blockquote[author]").forEach(bq => {
 	let bq_author = bq.getAttribute("author") ? "— " + bq.getAttribute("author") + " " : "";
 	bq.insertAdjacentHTML("beforeend", `<footer>${bq_author}${bq_url}</footer>`)
 })
+
+

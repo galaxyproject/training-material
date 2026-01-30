@@ -408,7 +408,7 @@ Below we show how to do this:
 > <hands-on-title>Running the Workflow</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy:
->    - (Neoantigen IEDB Binding HLA Alleles)[https://tinyurl.com/ipepgen-iedb-pep-wf]
+>    - [Neoantigen IEDB Binding HLA Alleles](https://tinyurl.com/ipepgen-iedb-pep-wf)
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -417,6 +417,9 @@ Below we show how to do this:
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
+> 
+> 
+> 
 > <comment-title>DISCLAIMER</comment-title>
 >
 > - If any step in this workflow fails, please ensure that the input files have been correctly generated and formatted by the preceding tools. Workflow failures often result from improperly called or incomplete input data rather than errors in the workflow itself. Users are responsible for verifying their input before troubleshooting workflow issues.

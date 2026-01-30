@@ -34,9 +34,11 @@ contributions:
     - elixir-europe
 tags:
   - Image segmentation
+  - Image thresholding
   - Conversion
   - Object counting
   - Overlay
+  - Fluorescence microscopy
 
 ---
 

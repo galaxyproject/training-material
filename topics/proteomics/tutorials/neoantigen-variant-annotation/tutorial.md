@@ -770,7 +770,7 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 > <hands-on-title>Running the Workflow</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy:
->    - (Neoantigen Variant Annotation)[https://tinyurl.com/ipepgen-pep-annot-wf]
+>    - [Neoantigen Variant Annotation](https://tinyurl.com/ipepgen-pep-annot-wf)
 >
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
@@ -782,6 +782,10 @@ To rerun this entire analysis at once, you can use our workflow. Below we show h
 >    - {% icon param-file %} *"Human Reference Genome Annotation"*: `Homo_sapiens.GRCh38_canon.106.gtf`
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
+>
+> 
+> 
+> 
 >
 > <comment-title>DISCLAIMER</comment-title>
 >

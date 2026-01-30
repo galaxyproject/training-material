@@ -1642,6 +1642,21 @@ module Jekyll
         vids.map { |v| findDuration(v['length']) }.sum / 3600.0
       end
 
+      ##
+      # Obtain a flattened, unique list of editorial board members.
+      def list_editors_flat(site)
+        Gtn::TopicFilter.list_topics_h(site)
+          .values
+          .map{ |v| v['editorial_board'] || [] }
+          .uniq
+      end
+
+      ##
+      # Count all workflows in the GTN
+      def count_workflows(site)
+        Dir.glob('topics/**/*.ga').length
+      end
+
       def list_draft_materials(site)
         Gtn::TopicFilter.list_all_materials(site).select { |k, _v| k['draft'] }
       end

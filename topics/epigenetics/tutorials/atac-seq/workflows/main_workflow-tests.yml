@@ -1,0 +1,44 @@
+- doc: Test for ATAC-Seq data analysis
+  job:
+    ctcf peaks:
+      class: File
+      location: https://zenodo.org/record/3862793/files/ENCFF933NTR.bed.gz
+      filetype: encodepeak
+    bed file with genes:
+      class: File
+      path: test-data/chr22_genes.bed
+      filetype: bed
+    Input Paired End Collection:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: SRR891268_chr22_enriched
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R1.fastq.gz
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
+  outputs:
+    mapping_stats (Step 7):
+      asserts:
+        has_text:
+          text: "99.15% overall alignment rate"
+    output_summits (Step 16):
+      asserts:
+        has_text:
+          text: "634029"
+    output_narrowpeaks (Step 16):
+      asserts:
+        has_text:
+          text: "633890"
+    output (Step 10):
+      asserts:
+        has_text:
+          text: "41666690"
+    
+      
+    

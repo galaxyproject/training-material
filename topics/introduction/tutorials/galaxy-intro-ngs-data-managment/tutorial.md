@@ -67,7 +67,7 @@ answer_histories:
 
 <!--
 
-ALL IMAGES USED IN THIS TUTORIAL ARE AVIALABLE IN EDITABLE FORM HERE:
+ALL IMAGES USED IN THIS TUTORIAL ARE AVAILABLE IN EDITABLE FORM HERE:
 
 https://drive.google.com/drive/folders/0B7a9KfygumZFYWxIZlJqSkJwc2c?resourcekey=0-C7W_lazWNzjkKiplb9y01A&usp=sharing
 
@@ -79,11 +79,11 @@ In this tutorial, we will look at practical aspects of manipulation of next-gene
 
 To make this tutorial as realistic as possible we wanted to use an example from the real world. We will start with four sequencing datasets (fastq files) representing four individuals positive for malaria---a life-threatening disease caused by *Plasmodium* parasites---transmitted to humans through the bites of infected female *Anopheles* mosquitoes.
 
-Our goal is to understand whether the malaria parasite ([*Plasmodium falciparum*](https://brc-analytics.dev.clevercanary.com/data/organisms/5833)) infecting these individuals is resistant to [Pyrimethamine](https://en.wikipedia.org/wiki/Pyrimethamine)---an antimalarial drug. Resistance to Pyrimethamine is conferred by a mutation in `PF3D7_0417200` (*dhfr*) gene ({% cite Cowman1988 %}). Given sequencing data from four individuals we will determine which one of them in infected with a *Plasmodium falciparum* carrying mutations in this gene.
+Our goal is to understand whether the malaria parasite ([*Plasmodium falciparum*](https://brc-analytics.dev.clevercanary.com/data/organisms/5833)) infecting these individuals is resistant to [Pyrimethamine](https://en.wikipedia.org/wiki/Pyrimethamine)---an antimalarial drug. Resistance to Pyrimethamine is conferred by a mutation in `PF3D7_0417200` (*dhfr*) gene ({% cite Cowman1988 %}). Given sequencing data from four individuals we will determine which one of them is infected with a *Plasmodium falciparum* carrying mutations in this gene.
 
 An outline of our analysis looks like this:
 
-![analysis_outline](../../../galaxy-interface/images/collections/collection_lifecycle.svg "This analysis begins with a set of fastq files representing four individuals. The sequencing was performed using a paired-end protocol. This means that each sample is represented by two files: forward reads (red) and reverse reads (blue). Before analysis begins these files are combined into a <i>Collection</i>. This allows processing all of them at once. The data is mapped against a reference genome of <i>P. falciparum</i>. This produces a series of BAM files. The BAM files are further passed through a variant caller. This produces VCF files. VCF files are then converted to tabular format and concatenated to create one final dataset. This dataset contains the answer the our question: which of the individual carries drug resistant mutations.").
+![analysis_outline](../../../galaxy-interface/images/collections/collection_lifecycle.svg "This analysis begins with a set of fastq files representing four individuals. The sequencing was performed using a paired-end protocol. This means that each sample is represented by two files: forward reads (red) and reverse reads (blue). Before analysis begins these files are combined into a <i>Collection</i>. This allows processing all of them at once. The data is mapped against a reference genome of <i>P. falciparum</i>. This produces a series of BAM files. The BAM files are further passed through a variant caller. This produces VCF files. VCF files are then converted to tabular format and concatenated to create one final dataset. This dataset contains the answer to our question: which of the individual carries drug resistant mutations.").
 
 # From reads to variants
 
@@ -195,7 +195,7 @@ For this tutorial we down-sampled the data (made datasets smaller) to make sure 
 > HHHHHHHHHHHHGHHHHHHGHHHHHHHHHHHFHHHFHHHHHHHHHHH
 > ```
 >
-> In this tutorial paired-end data represented as two different files.
+> In this tutorial paired-end data is represented as two different files.
 >
 {: .details}
 
@@ -235,9 +235,11 @@ We are going to perform exactly the same analysis on all four samples. So it doe
 
 > <hands-on-title>Creating a paired-collection</hands-on-title>
 >
-> To create a paired collection follow the steps shown in the video below (the video is 52 seconds long 😁):
+> To create a paired collection follow the steps shown in the video below (the video is 2 minutes long 😁):
 >
-> <iframe width="560" height="315" src="https://www.youtube.com/embed/An4e7wr-FbU?si=iFN9BoNYy2p34LD9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+> <div style="text-align: center;">
+> <iframe width="560" height="315" src="https://www.youtube.com/embed/OW4n61BIHAc?si=namdcFYfUITktKRz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+> </div>
 >
 > Explore the collections by first **clicking** on the collection name in the history panel. This takes you inside the collection and shows you the datasets in it.  You can then navigate back to the outer level and, finally, full history.
 >
@@ -274,11 +276,11 @@ You can click on individual HTML reports to get an idea about the quality of the
 >
 > ![multiqc interface](../../images/multiqc.svg)
 >
-> `multiqc` will produce two outputs, but the one you care about has a work "Webpage" in it:
+> `multiqc` will produce two outputs, but the one you care about has a word "Webpage" in it:
 >
 > ![multiqc history item](../../images/multiqc_history.svg)
 >
-> Click on the {% icon galaxy-eye %} (eye) icon and you will the QC report.
+> Click on the {% icon galaxy-eye %} (eye) icon and you will see the QC report.
 >
 {: .hands_on}
 
@@ -304,7 +306,7 @@ Figure below shows one of the plots produced by `multiqc`---distribution of qual
 > ><br><br>
 > > To assign each base a unique score identifier (instead of numbers of varying character length), Phred scores are typically represented as ASCII characters. At http://ascii-code.com/ you can see which characters are assigned to what number.
 > ><br><br>
-> > For raw reads, the range of scores will depend on the sequencing technology and the base caller used (Illumina, for example, used a tool called Bustard, or, more recently, RTA). Unfortunately, Illumina has been anything but consistent in how they calculated and ASCII-encoded the Phred score (see below)! In addition, Illumina now allows Phred scores for base calls with as high as 45, while 41 used to be the maximum score until the HiSeq X. This may cause issues with downstream sapplications that expect an upper limit of 41.
+> > For raw reads, the range of scores will depend on the sequencing technology and the base caller used (Illumina, for example, used a tool called Bustard, or, more recently, RTA). Unfortunately, Illumina has been anything but consistent in how they calculated and ASCII-encoded the Phred score (see below)! In addition, Illumina now allows Phred scores for base calls with as high as 45, while 41 used to be the maximum score until the HiSeq X. This may cause issues with downstream applications that expect an upper limit of 41.
 > {: .comment}
 >
 > ![Illumina quality score](../../images/illumina_qs.png)
@@ -331,7 +333,7 @@ We can proceed with mapping reads. Galaxy has a number of mappers including **bo
 
 ### Upload reference genome
 
-The key question when mapping reads against a genome is whether the index for this genome---a datastructure **bwa-mem2** uses to quickly find matches---is already installed on Galaxy or not. Let's assume that it is **NOT** present in Galaxy. In this case you will need to upload the genome. In this case we will use reference genome of 3D7 strain *P. faciparum*.
+The key question when mapping reads against a genome is whether the index for this genome---a datastructure **bwa-mem2** uses to quickly find matches---is already installed on Galaxy or not. Let's assume that it is **NOT** present in Galaxy. In this case you will need to upload the genome. In this case we will use reference genome of 3D7 strain *P. falciparum*.
 
 > <hands-on-title>Uploading the genome for <i>P. falciparum</i></hands-on-title>
 >
@@ -340,7 +342,7 @@ The key question when mapping reads against a genome is whether the index for th
 > ```
 > https://zenodo.org/records/15354240/files/GCF_000002765.6.fa.gz
 > ```
-> The only difference is that here with example we've see above is that you need to set datatype (green box) to `fasta.gz`:
+> The only difference is that here with the example we've seen above is that you need to set datatype (green box) to `fasta.gz`:
 > ![Genome upload](../../images/upload_genome.svg)
 >
 {: .hands_on}
@@ -407,7 +409,7 @@ Now we can map the reads against the uploaded genome:
 >
 > **`FLAG` field**
 >
-> The FLAG field encodes various pieces of information about the individual read, which is particularly important for Paired-Enmd (PE) reads. It contains an integer that is generated from a sequence of bits (0, 1). This way, answers to multiple binary (Yes/No) questions can be compactly stored as a series of bits, where each of the single bits can be addressed and assigned separately.
+> The FLAG field encodes various pieces of information about the individual read, which is particularly important for Paired-End (PE) reads. It contains an integer that is generated from a sequence of bits (0, 1). This way, answers to multiple binary (Yes/No) questions can be compactly stored as a series of bits, where each of the single bits can be addressed and assigned separately.
 >
 > The following table gives an overview of the different properties that can be encoded in the FLAG field. The developers of the SAM format and samtools tend to use the hexadecimal encoding as a means to refer to the different bits in their documentation. The value of the FLAG field in a given SAM file, however, will always be the decimal representation of the sum of the underlying binary values (as shown in Table below, row 2).
 >
@@ -537,7 +539,7 @@ Removing duplicates is particularly important for identification of sequence var
 
 ## Calling variants
 
-Now we are ready to proceed with variant calling. For this purpose we will a tool called **lofreq**. One thing to keep in mind in our case is that the samples are from human blood. In humans *Plasmodium* parasites exist in **haploid** state (only zygote is diploid and this stage happens in mosquito). **lofreq** is specifically designed for calling variants in this scenario.
+Now we are ready to proceed with variant calling. For this purpose we will use a tool called **lofreq**. One thing to keep in mind in our case is that the samples are from human blood. In humans *Plasmodium* parasites exist in **haploid** state (only zygote is diploid and this stage happens in mosquito). **lofreq** is specifically designed for calling variants in this scenario.
 
 ### Realign reads
 
@@ -585,7 +587,7 @@ One of the key issues with accurate identification of sequence variants is norma
 >
 {: .hands_on}
 
-### Call Variants using lofreq **Call variants**
+### Call variants
 
 We are now ready to actually call variants:
 
@@ -602,7 +604,7 @@ We are now ready to actually call variants:
 >        - In *"Base-calling quality"*:
 >            - *"Minimum baseQ"*: `20` (<font color="orange">orange arrow</font>).
 >            - *"Minimum baseQ for alternate bases"*: `20`  (<font color="orange">orange arrow</font>).
->        - In *"Mapping "quality*":
+>        - In *"Mapping quality"*:
 >            - *"Minimum mapping quality"*: `20` (<font color="orange">orange arrow</font>).
 >
 > ![Call variants with lofreq](../../images/lofreq.svg)
@@ -758,7 +760,7 @@ you can see that this added the first column with dataset ID taken from collecti
 
 ## Anything interesting?
 
-These data are now ready for downstream analysis. ({% cite Cowman1988 %}) showed that *P.faciparum* strains that have an amino acid change at residue 108 of the *dhfr* gene have increased resistance to pyrimethamine. In *P. faciparum* 3D7 (we uploaded genome of this particular strain earlier in this tutorial) this gene is also called [PF3D7_0417200](https://www.ncbi.nlm.nih.gov/gene/9221804). So let's look for `PF3D7_0417200` in our results. For this we use a tool called {% tool Filter %}:
+These data are now ready for downstream analysis. ({% cite Cowman1988 %}) showed that *P. falciparum* strains that have an amino acid change at residue 108 of the *dhfr* gene have increased resistance to pyrimethamine. In *P. falciparum* 3D7 (we uploaded genome of this particular strain earlier in this tutorial) this gene is also called [PF3D7_0417200](https://www.ncbi.nlm.nih.gov/gene/9221804). So let's look for `PF3D7_0417200` in our results. For this we use a tool called {% tool Filter %}:
 
 > <hands-on-title>Filter SNPs with gene of interest</hands-on-title>
 >
@@ -786,7 +788,7 @@ The output will look like this:
 
 
 
-Here you can see that while three samples in out dataset contain mutations in *dhfr* (`PF3D7_0417200`) gene only two---ERR042228 and ERR636028---have amino acid replacements at position 108. They are highlighted in red. If you scroll all the way to the right you will that these are Serine to Asparagine changes. This these two individuals are likely resistant to pyrimethamine treatment.
+Here you can see that while three samples in our dataset contain mutations in *dhfr* (`PF3D7_0417200`) gene only two---ERR042228 and ERR636028---have amino acid replacements at position 108. They are highlighted in red. If you scroll all the way to the right you will see that these are Serine to Asparagine changes. This these two individuals are likely resistant to pyrimethamine treatment.
 
 # Conclusion
 

@@ -1,0 +1,49 @@
+- doc: Test outline for Quality-and-contamination-control-in-bacterial-isolate-using-Illumina-MiSeq-Data
+  job:
+    Input Paired Reads:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: DRR187559
+        elements:
+        - class: File
+          identifier: forward
+          path: https://zenodo.org/record/10669812/files/DRR187559_1.fastqsanger.bz2
+        - class: File
+          identifier: reverse
+          path: https://zenodo.org/record/10669812/files/DRR187559_2.fastqsanger.bz2
+  outputs:
+    fastp_json:
+      element_tests:
+        DRR187559:
+          asserts:
+            has_text:
+              text: "903564"
+    kraken_report_tabular:
+      element_tests:
+        DRR187559:
+          asserts:
+            has_text:
+              text: "Staphylococcus aureus"
+    kraken_report_reads:
+      element_tests:
+        DRR187559:
+          asserts:
+            has_text:
+              text: "DRR187559.1"
+    bracken_report_tsv:
+      element_tests:
+        DRR187559:
+          asserts:
+            has_text:
+              text: "Staphylococcus aureus"
+    recentrifuge_data_tabular:
+      asserts:
+        has_text:
+          text: "class"
+    recentrifuge_stats_tabular:
+      asserts:
+        has_text:
+          text: "Seqs. class."

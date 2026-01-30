@@ -41,9 +41,13 @@ contributions:
   - bazante1
   - shiltemann
   - miaomiaozhou88
+  - tflowers15
   funding:
   - avans-atgm
   - abromics
+  - unimelb
+  - melbournebioinformatics
+  - AustralianBioCommons
 
 follow_up_training:
 - type: "internal"
@@ -171,6 +175,10 @@ The dataset is a FASTQ file.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name="DRR187567" %}
 >
+> 3. Create a paired collection named `Paired Reads`
+>
+>    {% snippet faqs/galaxy/collections_build_list_paired.md %}
+>
 {: .hands_on}
 
 </div>
@@ -206,10 +214,9 @@ Here, we are going to trim the Illumina data using **fastp** ({% cite Chen2018 %
 
 > <hands-on-title>Quality improvement of the Illumina reads</hands-on-title>
 >
-> 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
->    - *"Single-end or paired reads"*: `Paired`
->        - {% icon param-file %} *"Input 1"*: `DRR187559_1`
->        - {% icon param-file %} *"Input 2"*: `DRR187559_2`
+> 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/1.0.1+galaxy3) %} with the following parameters:
+>    - *"Single-end or paired reads"*: `Paired Collection`
+>        - *"Select paired collection(s)"*: `Paired Reads`
 >    - In *"Filter Options"*:
 >        - In *"Length filtering Options"*:
 >            - *Length required*: `30`
@@ -221,7 +228,28 @@ Here, we are going to trim the Illumina data using **fastp** ({% cite Chen2018 %
 >            - *Cutting mean quality*: `20`
 >    - In *"Output Options"*:
 >        - *"Output JSON report"*: `Yes`
+>     
+> We next need to extract the **fastp** filtered forward and reverse reads from the paired collection as the next tool we are going to run, **filtlong**, requires the forward and reverse short reads to be provided as separate datasets.
 >
+> 2. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters:
+>    - *"Input Collection"*: **fastp** `Paired-end output`
+>      
+> 3. **Rename** {% icon galaxy-pencil %} the output to `Flattened fastp output`
+>      
+> 4. {% tool [Extract dataset](__EXTRACT_DATASET__) %} with the following parameters:
+>    - *"Input List"*: `Flattened fastp output`
+>    - *"How should a dataset be selected?"*: `Select by element identifier`
+>    - *"Element identifier"*: `DRR187559_forward` (filtered forward reads)
+> 
+> 5. **Rename** {% icon galaxy-pencil %} `DRR187559_forward` to `Trimmed DRR187559_forward`
+>   
+> 6. {% tool [Extract dataset](__EXTRACT_DATASET__) %} with the following parameters:
+>    - *"Input List"*: `Flattened fastp output`
+>    - *"How should a dataset be selected?"*: `Select by element identifier`
+>    - *"Element identifier"*: `DRR187559_reverse` (filtered forward reads)
+>   
+> 7. **Rename** {% icon galaxy-pencil %} `DRR187559_reverse` to `Trimmed DRR187559_reverse`
+> 
 {: .hands_on}
 
 </div>
@@ -242,8 +270,8 @@ When Illumina reads are available, we can use them **if they are good Illumina r
 >
 >    <div class="With-Illumina-MiSeq-data" markdown="1">
 >    - In *"External references"*:
->        - {% icon param-file %} *"Reference Illumina read"*: **fastp** `Read 1 output`
->        - {% icon param-file %} *"Reference Illumina read"*: **fastp** `Read 2 output` 
+>        - {% icon param-file %} *"Reference Illumina read"*: `Trimmed DRR187559_forward`
+>        - {% icon param-file %} *"Reference Illumina read"*: `Trimmed DRR187559_reverse`
 >    </div>
 >
 > 2. Rename the dataset to `DRR187567-filtered`
@@ -454,7 +482,7 @@ We need to set up **BWA-MEM** so it aligns each read to all possible locations, 
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `consensus` output of **Flye**
 >    - *"Single or Paired-end reads"*: `Single`
->        - {% icon param-files %} *"Select fastq dataset"*: both outputs of **fastp**
+>        - {% icon param-files %} *"Select fastq dataset"*: `DRR187559_forward`, `DRR187559_reverse`
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `5.Full list of options`
 >        - *"Set algorithmic options?"*: `Do not set`
@@ -473,8 +501,8 @@ We can now run **Polypolish**.
 >    - In *"Input sequences"*:
 >        - {% icon param-file %} *"Select a draft genome for polishing"*: `consensus` output of **Flye**
 >        - *"Select aligned data to polish"*: `Paired SAM/BAM files`
->            - {% icon param-file %} *"Select forward SAM/BAM file"*: output of **BWA-MEM2** on the `Read 1` output of **fastp**
->            - {% icon param-file %} *"Select reverse SAM/BAM file"*: output of **BWA-MEM2** on the `Read 2` output of **fastp**
+>            - {% icon param-file %} *"Select forward SAM/BAM file"*: output of **BWA-MEM2** on the `DRR187559_forward` output of **fastp**
+>            - {% icon param-file %} *"Select reverse SAM/BAM file"*: output of **BWA-MEM2** on the `DRR187559_reverse` output of **fastp**
 >
 {: .hands_on}
 

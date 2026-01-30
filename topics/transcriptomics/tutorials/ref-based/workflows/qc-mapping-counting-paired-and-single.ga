@@ -6,12 +6,12 @@
             "child_steps": [
                 15,
                 20,
-                16,
-                17,
                 9,
                 6,
                 13,
-                14
+                14,
+                16,
+                17
             ],
             "color": "blue",
             "data": {
@@ -25,30 +25,6 @@
             "size": [
                 853.9,
                 1177.4
-            ],
-            "type": "frame"
-        },
-        {
-            "child_steps": [
-                18,
-                25,
-                27,
-                28,
-                10,
-                26
-            ],
-            "color": "blue",
-            "data": {
-                "title": "Count featurecounts"
-            },
-            "id": 3,
-            "position": [
-                1372,
-                1406
-            ],
-            "size": [
-                836,
-                642
             ],
             "type": "frame"
         },
@@ -93,6 +69,30 @@
             "size": [
                 988,
                 411.7
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                18,
+                25,
+                27,
+                28,
+                10,
+                26
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Count featurecounts"
+            },
+            "id": 3,
+            "position": [
+                1372,
+                1406
+            ],
+            "size": [
+                836,
+                642
             ],
             "type": "frame"
         }
@@ -1201,6 +1201,9 @@
                 "format-version": "0.1",
                 "license": "MIT",
                 "name": "count STAR",
+                "report": {
+                    "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+                },
                 "steps": {
                     "0": {
                         "annotation": "Counts from STAR",
@@ -1258,40 +1261,39 @@
                     },
                     "2": {
                         "annotation": "",
-                        "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.5+galaxy2",
+                        "content_id": "Remove beginning1",
                         "errors": null,
                         "id": 2,
                         "input_connections": {
-                            "infile": {
+                            "input": {
                                 "id": 0,
                                 "output_name": "output"
                             }
                         },
-                        "inputs": [],
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool Remove beginning",
+                                "name": "input"
+                            }
+                        ],
                         "label": "Remove statistics from STAR counts",
-                        "name": "Select last",
+                        "name": "Remove beginning",
                         "outputs": [
                             {
-                                "name": "outfile",
+                                "name": "out_file1",
                                 "type": "input"
                             }
                         ],
                         "position": {
-                            "left": 244.8240650723336,
-                            "top": 12.376039797406065
+                            "left": 247.5,
+                            "top": 15.5
                         },
                         "post_job_actions": {},
-                        "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.5+galaxy2",
-                        "tool_shed_repository": {
-                            "changeset_revision": "c41d78ae5fee",
-                            "name": "text_processing",
-                            "owner": "bgruening",
-                            "tool_shed": "toolshed.g2.bx.psu.edu"
-                        },
-                        "tool_state": "{\"complement\": \"+\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"num_lines\": \"5\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-                        "tool_version": "9.5+galaxy2",
+                        "tool_id": "Remove beginning1",
+                        "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"num_lines\": \"4\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "1.0.0",
                         "type": "tool",
-                        "uuid": "6ccde820-2aae-46eb-82e9-f128c135745d",
+                        "uuid": "451be0c7-245b-4d78-bf9d-96fba46229e7",
                         "when": null,
                         "workflow_outputs": []
                     },
@@ -1353,7 +1355,7 @@
                         "input_connections": {
                             "input": {
                                 "id": 2,
-                                "output_name": "outfile"
+                                "output_name": "out_file1"
                             }
                         },
                         "inputs": [],
@@ -1439,7 +1441,7 @@
                     }
                 },
                 "tags": [],
-                "uuid": "11ebb7ff-23de-47a4-83e2-7e0434aef122"
+                "uuid": "1fa2d21c-9679-4ba1-9aa7-ff03a698d1c4"
             },
             "tool_id": null,
             "type": "subworkflow",
@@ -1447,9 +1449,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "Gene length",
-                    "output_name": "gene_length",
-                    "uuid": "7b7c698b-4808-4b45-adf1-686f8d273d18"
+                    "label": "counts_from_star_sorted",
+                    "output_name": "counts_from_star_sorted",
+                    "uuid": "bd3388e6-5b45-4fdc-9780-3efd1c34ebf8"
                 },
                 {
                     "label": "counts_from_star",
@@ -1457,9 +1459,9 @@
                     "uuid": "5fee8aff-4023-43f1-a653-f5af5357d798"
                 },
                 {
-                    "label": "counts_from_star_sorted",
-                    "output_name": "counts_from_star_sorted",
-                    "uuid": "bd3388e6-5b45-4fdc-9780-3efd1c34ebf8"
+                    "label": "Gene length",
+                    "output_name": "gene_length",
+                    "uuid": "7b7c698b-4808-4b45-adf1-686f8d273d18"
                 }
             ]
         },
@@ -2085,9 +2087,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "multiqc_dup_html",
-                    "output_name": "multiqc_dup_html",
-                    "uuid": "3ea82568-5698-49a7-88fe-91381070aac2"
+                    "label": "multiqc_gene_body_cov_html",
+                    "output_name": "multiqc_gene_body_cov_html",
+                    "uuid": "3375d63c-cdc3-4fbb-8a55-6f504c934918"
                 },
                 {
                     "label": "multiqc_reads_per_chrom_html",
@@ -2095,14 +2097,14 @@
                     "uuid": "b306cb12-a275-4c6d-b609-47fdc208864b"
                 },
                 {
-                    "label": "multiqc_gene_body_cov_html",
-                    "output_name": "multiqc_gene_body_cov_html",
-                    "uuid": "3375d63c-cdc3-4fbb-8a55-6f504c934918"
-                },
-                {
                     "label": "multiqc_read_distrib_html",
                     "output_name": "multiqc_read_distrib_html",
                     "uuid": "f2eed352-ca21-4d65-8810-f5a1d3c282b4"
+                },
+                {
+                    "label": "multiqc_dup_html",
+                    "output_name": "multiqc_dup_html",
+                    "uuid": "3ea82568-5698-49a7-88fe-91381070aac2"
                 }
             ]
         },
@@ -2547,9 +2549,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "pgt",
-                    "output_name": "pgt",
-                    "uuid": "9727824a-3eb2-4430-92d1-b3c40c3041d1"
+                    "label": "inferexperiment",
+                    "output_name": "inferexperiment",
+                    "uuid": "fb810859-f2d0-43f8-ac7c-5c714c5c6805"
                 },
                 {
                     "label": "multiqc_star_counts_html",
@@ -2557,9 +2559,9 @@
                     "uuid": "105313d8-e31a-405d-8fcd-cc5fd93275e2"
                 },
                 {
-                    "label": "inferexperiment",
-                    "output_name": "inferexperiment",
-                    "uuid": "fb810859-f2d0-43f8-ac7c-5c714c5c6805"
+                    "label": "pgt",
+                    "output_name": "pgt",
+                    "uuid": "9727824a-3eb2-4430-92d1-b3c40c3041d1"
                 }
             ]
         },
@@ -2746,6 +2748,6 @@
     "tags": [
         "transcriptomics"
     ],
-    "uuid": "ff0b881c-9742-40bd-b707-83ca4b724fed",
+    "uuid": "73e10de6-5117-4a5b-9b1e-8d2f40662548",
     "version": 1
 }

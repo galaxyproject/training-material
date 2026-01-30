@@ -38,9 +38,13 @@ contributions:
   - shiltemann
   - miaomiaozhou88
   - VerenaMoo
+  - tflowers15
   funding:
   - avans-atgm
   - abromics
+  - unimelb
+  - melbournebioinformatics
+  - AustralianBioCommons
 follow_up_training:
 - type: internal
   topic_name: genome-annotation
@@ -129,11 +133,15 @@ Now, we need to import the data: 2 FASTQ files containing the reads from the seq
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name="DRR187559_1" %}
 >
-> 3. Tag both datasets `#unfiltered`
+> 3. Create a paired collection named `Paired Reads`
 >
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
-> 4. **View** {% icon galaxy-eye %} the renamed file
+> 4. Tag the collection `#unfiltered`
+>
+>    {% snippet faqs/galaxy/collections_add_tag.md %}
+>
+> 5. **View** {% icon galaxy-eye %} the renamed files in the collection
 >
 {: .hands_on}
 
@@ -179,9 +187,7 @@ reads include:
 > <hands-on-title>Quality Control</hands-on-title>
 >
 > 1. {% tool [Falco](toolshed.g2.bx.psu.edu/repos/iuc/falco/falco/1.2.4+galaxy0) %} with the following parameters:
->    - {% icon param-files %} *"Short read data from your current history"*: both `DRR187559_1` and `DRR187559_2`
->
->    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
+>    - {% icon param-collection %} *"Raw read data from your current history"*: `Paired Reads`
 >
 > 2. Inspect the webpage outputs
 >
@@ -226,17 +232,16 @@ is needed. In this case we are going to trim the data using **fastp** ({% cite C
 
 > <hands-on-title>Quality improvement</hands-on-title>
 >
-> 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
->    - *"Single-end or paired reads"*: `Paired`
->        - {% icon param-file %} *"Input 1"*: `DRR187559_1`
->        - {% icon param-file %} *"Input 2"*: `DRR187559_2`
+> 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/1.0.1+galaxy3) %} with the following parameters:
+>    - *"Single-end or paired reads"*: `Paired Collection`
+>        - *"Select paired collection(s)"*: `Paired Reads`
 >    - In *"Filter Options"*:
 >        - In *"Length filtering Options"*:
 >            - *Length required*: `30`
 >    - In *"Read Modification Options"*:
 >        - In *"Per read cuitting by quality options"*:
 >            - *Cut by quality in front (5')*: `Yes`
->            - *Cut by quality in front (3')*: `Yes`
+>            - *Cut by quality in tail (3')*: `Yes`
 >            - *Cutting window size*: `4`
 >            - *Cutting mean quality*: `20`
 >    - In *"Output Options"*:
@@ -284,9 +289,8 @@ There are many tools that create assembly for short-read data, e.g. SPAdes ({% c
 > <hands-on-title>Assembly using Shovill</hands-on-title>
 >
 > 1. {% tool [Shovill](toolshed.g2.bx.psu.edu/repos/iuc/shovill/shovill/1.1.0+galaxy1) %} with the following parameters:
->    - *"Input reads type, collection or single library"*: `Paired End`
->        - {% icon param-file %} *"Forward reads (R1)"*: **fastp** `Read 1 output`
->        - {% icon param-file %} *"Reverse reads (R2)"*: **fastp** `Read 2 output`
+>    - *"Input reads type, collection or single library"*: `Paired Collection`
+>        - *"Paired collection"*: **fastp** `Paired-end output`
 >    - In *"Advanced options"*:
 >        - *"Estimated genome size"*: `2914567`
 ><!--        - *"Minimum contig length"*: `500`
@@ -324,6 +328,7 @@ Th assembly graph format takes some getting used to before you can make sense ou
 > <hands-on-title>Assembly inspection</hands-on-title>
 > 1. {% tool [Bandage Info](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/2022.09+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Graphical Fragment Assembly"*: **Shovill** `Contig Graph`
+>    - *"Produce jpg, png or svg file?"*: `.jpg`
 >
 {: .hands_on}
 
