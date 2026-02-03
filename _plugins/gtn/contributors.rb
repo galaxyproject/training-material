@@ -9,6 +9,17 @@ module Gtn
     @HAS_WARNED_ON = []
 
     ##
+    # Find a key in a hash case-insensitively
+    # Params:
+    # +hash+:: +Hash+ to search in
+    # +key+:: +String+ key to find (case-insensitive)
+    # Returns:
+    # +String+ the actual key if found, +nil+ if not found
+    def self._find_key_insensitive(hash, key)
+      hash.keys.find { |k| k.casecmp?(key) }
+    end
+
+    ##
     # Returns contributors, regardless of whether they are 'contributor' or 'contributions' style
     # Params:
     # +data+:: +Hash+ of the YAML frontmatter from a material
@@ -94,7 +105,7 @@ module Gtn
     # Returns:
     # +Array+ of contributor IDs
     def self.get_funders(site, data)
-      self.get_all_funding(site, data).reject{ |f| site.data['grants'].key?(f) }
+      self.get_all_funding(site, data).reject{ |f| _find_key_insensitive(site.data['grants'], f) != nil }
     end
 
     ##
@@ -105,7 +116,7 @@ module Gtn
     # Returns:
     # +Array+ of grant IDs
     def self.get_grants(site, data)
-      self.get_all_funding(site, data).select{ |f| site.data['grants'].key?(f) }
+      self.get_all_funding(site, data).select{ |f| _find_key_insensitive(site.data['grants'], f) != nil }
     end
 
     ##
@@ -144,18 +155,30 @@ module Gtn
     # +Hash+ of contributor information
     # +String+ type of contributor (e.g. 'contributor', 'organisation', 'grant')
     def self.fetch(site, c, warn: false)
-      if _load_file(site, 'contributors').key?(c)
-        return ['contributor', site.data['contributors'][c]]
-      elsif _load_file(site, 'organisations').key?(c)
-        return ['organisation', site.data['organisations'][c]]
-      elsif _load_file(site, 'grants').key?(c)
-        return ['grant', site.data['grants'][c]]
-      else
-        if ! warn
-          if ! @HAS_WARNED_ON.include?(c)
-            Jekyll.logger.warn "Contributor #{c} not found"
-            @HAS_WARNED_ON.push(c)
-          end
+      contributors_data = _load_file(site, 'contributors')
+      organisations_data = _load_file(site, 'organisations')
+      grants_data = _load_file(site, 'grants')
+
+      # Try case-insensitive lookup
+      c_key = _find_key_insensitive(contributors_data, c)
+      if c_key
+        return ['contributor', site.data['contributors'][c_key]]
+      end
+
+      c_key = _find_key_insensitive(organisations_data, c)
+      if c_key
+        return ['organisation', site.data['organisations'][c_key]]
+      end
+
+      c_key = _find_key_insensitive(grants_data, c)
+      if c_key
+        return ['grant', site.data['grants'][c_key]]
+      end
+
+      if ! warn
+        if ! @HAS_WARNED_ON.include?(c)
+          Jekyll.logger.warn "Contributor #{c} not found"
+          @HAS_WARNED_ON.push(c)
         end
       end
 
@@ -204,7 +227,7 @@ module Gtn
     # Returns:
     # +Boolean+ of whether the contributor is a contributor or not
     def self.person?(site, c)
-      site.data['contributors'].key?(c)
+      _find_key_insensitive(site.data['contributors'], c) != nil
     end
 
     ##
@@ -214,7 +237,7 @@ module Gtn
     # Returns:
     # +Boolean+ of whether the contributor is a grant or not
     def self.grant?(site, c)
-      site.data['grants'].key?(c)
+      _find_key_insensitive(site.data['grants'], c) != nil
     end
 
     ##

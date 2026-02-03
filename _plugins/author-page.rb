@@ -18,30 +18,75 @@ module Jekyll
       # +t+:: The tutorial, slide, or news item
       # +datastructure+:: The hash of contributors that the author information should be pushed onto
       # +flat+:: Whether the datastructure is a flat array or a nested array
+      # +site+:: The site object (for case-insensitive contributor lookup)
       #
       # Returns
       # +datastructure+:: The modified datastructure
-      def pusher(t, datastructure, flat)
+      def pusher(t, datastructure, flat, site = nil)
         if t.data.key?('contributors')
           if flat
-            t.data['contributors'].each { |c| datastructure[c].push(t) }
+            t.data['contributors'].each do |c|
+              # Normalize to actual key if site is available
+              actual_key = if site
+                             Gtn::Contributors._find_key_insensitive(site.data['contributors'], c) ||
+                             Gtn::Contributors._find_key_insensitive(site.data['organisations'], c) ||
+                             Gtn::Contributors._find_key_insensitive(site.data['grants'], c) ||
+                             c
+                           else
+                             c
+                           end
+              datastructure[actual_key].push(t)
+            end
           else
-            t.data['contributors'].each { |c| datastructure[c].push([t, nil]) }
+            t.data['contributors'].each do |c|
+              # Normalize to actual key if site is available
+              actual_key = if site
+                             Gtn::Contributors._find_key_insensitive(site.data['contributors'], c) ||
+                             Gtn::Contributors._find_key_insensitive(site.data['organisations'], c) ||
+                             Gtn::Contributors._find_key_insensitive(site.data['grants'], c) ||
+                             c
+                           else
+                             c
+                           end
+              datastructure[actual_key].push([t, nil])
+            end
           end
         elsif t.data.key?('contributions')
           t.data['contributions'].each do |contribution_type, contributor|
             contributor.each do |c|
+              # Normalize to actual key if site is available
+              actual_key = if site
+                             Gtn::Contributors._find_key_insensitive(site.data['contributors'], c) ||
+                             Gtn::Contributors._find_key_insensitive(site.data['organisations'], c) ||
+                             Gtn::Contributors._find_key_insensitive(site.data['grants'], c) ||
+                             c
+                           else
+                             c
+                           end
               if flat
-                datastructure[c].push(t)
+                datastructure[actual_key].push(t)
               else
-                datastructure[c].push([t, contribution_type])
+                datastructure[actual_key].push([t, contribution_type])
               end
             end
           end
         end
 
-        t.data['maintainers'].each { |c| datastructure[c].push([t, 'maintainer']) } if t.data.key?('maintainers')
-        t.data['funding'].each { |c| datastructure[c].push([t, 'funding']) } if t.data.key?('funding')
+        if site
+          t.data['maintainers'].each do |c|
+            actual_key = Gtn::Contributors._find_key_insensitive(site.data['contributors'], c) || c
+            datastructure[actual_key].push([t, 'maintainer'])
+          end if t.data.key?('maintainers')
+          t.data['funding'].each do |c|
+            actual_key = Gtn::Contributors._find_key_insensitive(site.data['grants'], c) ||
+                         Gtn::Contributors._find_key_insensitive(site.data['organisations'], c) ||
+                         c
+            datastructure[actual_key].push([t, 'funding'])
+          end if t.data.key?('funding')
+        else
+          t.data['maintainers'].each { |c| datastructure[c].push([t, 'maintainer']) } if t.data.key?('maintainers')
+          t.data['funding'].each { |c| datastructure[c].push([t, 'funding']) } if t.data.key?('funding')
+        end
 
         datastructure
       end
@@ -84,23 +129,23 @@ module Jekyll
           end
 
           # Tutorials
-          pusher(t, tutorials_by_author, false) if t['layout'] == 'tutorial_hands_on'
+          pusher(t, tutorials_by_author, false, site) if t['layout'] == 'tutorial_hands_on'
 
           # Slides
           if !%w[base_slides introduction_slides tutorial_slides].index(t['layout']).nil?
-            pusher(t, slides_by_author, false)
+            pusher(t, slides_by_author, false, site)
           end
 
-          pusher(t, events_by_author, false) if t['layout'] == 'event' or t['layout'] == "event-external"
+          pusher(t, events_by_author, false, site) if t['layout'] == 'event' or t['layout'] == "event-external"
 
-          pusher(t, faqs_by_author, false) if t['layout'] == 'faq'
+          pusher(t, faqs_by_author, false, site) if t['layout'] == 'faq'
 
           t.data.fetch('recordings', []).each do |r|
             r.fetch('captioners', []).each { |ent| videos_by_author[ent].push([t, 'captioner', r]) }
             r.fetch('speakers', []).each { |ent| videos_by_author[ent].push([t, 'speaker', r]) }
           end
 
-          pusher(t, learning_pathways_by_author, false) if t['layout'] == 'learning-pathway'
+          pusher(t, learning_pathways_by_author, false, site) if t['layout'] == 'learning-pathway'
 
           # Philosophies
           has_philosophy[t.data['username']] = true if t['layout'] == 'training_philosophy' && !t.data['username'].nil?
@@ -108,7 +153,7 @@ module Jekyll
 
         site.posts.docs.each do |t|
           # News
-          pusher(t, news_by_author, true) if t['layout'] == 'news'
+          pusher(t, news_by_author, true, site) if t['layout'] == 'news'
         end
 
         Gtn::Contributors.list(site).each_key do |contributor|

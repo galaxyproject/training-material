@@ -1,8 +1,9 @@
 {% if include.funders %}
 <div class="d-flex flex-wrap">
 {% for id in include.funders %}
+	{% assign normalized_id = id | normalize_contributor_id: site %}
 	{% assign name = site.data.contributors[id].name | default: id -%}
-	<a href="{{ site.baseurl }}/hall-of-fame/{{ id }}/" class="funder-badge">
+	<a href="{{ site.baseurl }}/hall-of-fame/{{ normalized_id }}/" class="funder-badge">
 		{% assign pfo = site.data.grants[id] | default: site.data.organisations[id] | default: site.data.contributors[id] | default: nil %}
 		<div class="avatar">
 			{% if pfo.avatar %}

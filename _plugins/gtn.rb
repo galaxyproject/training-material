@@ -252,6 +252,24 @@ module Jekyll
     end
 
     ##
+    # Normalize a contributor ID to its actual key (case-insensitive)
+    # Params:
+    # +site+:: The site data
+    # +id+:: The contributor id (may have different casing)
+    # Returns:
+    # +String+:: The normalized contributor ID
+    #
+    # Example:
+    #  {% assign normalized_id = page.contributors[0] | normalize_contributor_id: site -%}
+    def normalize_contributor_id(id, site)
+      normalized = Gtn::Contributors._find_key_insensitive(site.data['contributors'], id) ||
+                   Gtn::Contributors._find_key_insensitive(site.data['organisations'], id) ||
+                   Gtn::Contributors._find_key_insensitive(site.data['grants'], id) ||
+                   id
+      normalized
+    end
+
+    ##
     # Params:
     # +data+:: The contributor's data
     # Returns:
@@ -989,34 +1007,42 @@ Jekyll::Hooks.register :site, :post_read do |site|
   site.data['contributors'].each do |name, contributor|
     if contributor.key?('affiliations')
       contributor['affiliations'].each do |affiliation|
-        if site.data['organisations'].key?(affiliation)
-          if !site.data['organisations'][affiliation].key?('members')
-            site.data['organisations'][affiliation]['members'] = []
+        org_key = Gtn::Contributors._find_key_insensitive(site.data['organisations'], affiliation)
+        if org_key
+          if !site.data['organisations'][org_key].key?('members')
+            site.data['organisations'][org_key]['members'] = []
           end
 
-          site.data['organisations'][affiliation]['members'] << name
-        elsif site.data['grants'].key?(affiliation)
-          site.data['grants'][affiliation]['members'] = [] if !site.data['grants'][affiliation].key?('members')
+          site.data['organisations'][org_key]['members'] << name
+        end
 
-          site.data['grants'][affiliation]['members'] << name
+        grant_key = Gtn::Contributors._find_key_insensitive(site.data['grants'], affiliation)
+        if grant_key
+          site.data['grants'][grant_key]['members'] = [] if !site.data['grants'][grant_key].key?('members')
+
+          site.data['grants'][grant_key]['members'] << name
         end
       end
     end
 
     if contributor.key?('former_affiliations')
       contributor['former_affiliations'].each do |affiliation|
-        if site.data['organisations'].key?(affiliation)
-          if !site.data['organisations'][affiliation].key?('former_members')
-            site.data['organisations'][affiliation]['former_members'] = []
+        org_key = Gtn::Contributors._find_key_insensitive(site.data['organisations'], affiliation)
+        if org_key
+          if !site.data['organisations'][org_key].key?('former_members')
+            site.data['organisations'][org_key]['former_members'] = []
           end
 
-          site.data['organisations'][affiliation]['former_members'] << name
-        elsif site.data['grants'].key?(affiliation)
-          if !site.data['grants'][affiliation].key?('former_members')
-            site.data['grants'][affiliation]['former_members'] = []
+          site.data['organisations'][org_key]['former_members'] << name
+        end
+
+        grant_key = Gtn::Contributors._find_key_insensitive(site.data['grants'], affiliation)
+        if grant_key
+          if !site.data['grants'][grant_key].key?('former_members')
+            site.data['grants'][grant_key]['former_members'] = []
           end
 
-          site.data['grants'][affiliation]['former_members'] << name
+          site.data['grants'][grant_key]['former_members'] << name
         end
       end
     end
