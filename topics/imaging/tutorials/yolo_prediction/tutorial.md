@@ -37,9 +37,9 @@ contributions:
 
 follow_up_training:
   - type: "internal"
-    topic_name: machine-learning
+    topic_name: imaging
     tutorials:
-      - ml-advanced-image
+      - yolo-segmentation-training
 
 ---
 
