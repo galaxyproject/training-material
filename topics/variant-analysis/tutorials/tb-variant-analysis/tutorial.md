@@ -17,10 +17,17 @@ key_points:
   - it is not enough to just call variants, variant calling involves multiple quality control steps
   - the choice of reference genome and some quality control procedures are species-specific, and require knowledge of the organism in question
   - batches of samples can be processed using Galaxy dataset collections and workflows
-contributors:
-  - pvanheus
-  - slugger70
-  - thobalose
+contributions:
+  authorship:
+    - pvanheus
+    - slugger70
+    - thobalose
+  editing:
+    - tflowers15
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 tags:
   - prokaryote
   - one-health
@@ -84,6 +91,10 @@ The data for today is a sample of _M. tuberculosis_ [collected](https://www.ncbi
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
+> 2. Create a paired collection named `Paired Reads` containing the `004-2_1.fastq.gz` and `004-2_2.fastq.gz` datasets.
+>
+>    {% snippet faqs/galaxy/collections_build_list_paired.md %}
+> 
 {: .hands_on}
 
 # Quality control
@@ -103,14 +114,16 @@ tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quali
 
 > <hands-on-title>Quality control of the input datasets</hands-on-title>
 >
-> 1. Execute {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0) %} on both of your fastq datasets
->
->       - {% icon param-files %} *"Short read data from your current history"*: select both FASTQ datasets.
->
->    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
+> 1. Run {% tool [Flatten collection](__FLATTEN__) %} with the following parameters:
+>    - *"Input collection"*: `Paired Reads`
+>   
+> 2. Rename the flatten collection: `Flat Collection`
+>   
+> 3. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1) %} with the following parameters:
+>    - {% icon param-collection %} *"Raw read data from your current history"*: `Flat Collection` (Flattened paired end read dataset collection)
 >
 >    The **FastQC** {% icon tool %} input form looks like this. You only need to pay attention to the top part
->    where *Short read data from your current history* is selected. Leave all the other parameters at their default
+>    where *Raw read data from your current history* is selected. Leave all the other parameters at their default
 >    values and click *Execute*.
 >
 >    ![FastQC input and dependencies](../../images/mt_qc.png)
@@ -125,13 +138,12 @@ While one could examine the quality control report for each set of reads (forwar
 
 > <hands-on-title>Combining QC results</hands-on-title>
 >
-> 1. Use {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the raw **FastQC** data of all input datasets into one report
+> 1. Use {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.27+galaxy4) %} to aggregate the raw **FastQC** data of all input datasets into one report
 >      - In *"Results"*
 >        - *"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
 >           - *"Type of FastQC output?"*: `Raw data`
->           - {% icon param-files %} *"FastQC output"*: both *RawData*
->             outputs of **FastQC** {% icon tool %}
+>           - {% icon param-collection %} *"FastQC output"*: *RawData* collection output of **FastQC** {% icon tool %}
 >
 > 2. Using the {% icon galaxy-eye %} button, inspect the *Webpage* output produced by the tool
 >
@@ -140,7 +152,7 @@ While one could examine the quality control report for each set of reads (forwar
 >    > 1. Based on the report, do you think preprocessing of the reads
 >    >    (trimming and/or filtering) will be necessary before mapping?
 >    >
->    >  1. What is the average GC content of the data (known as GC%) in the `004-2_1` dataset?
+>    > 2. What is the average GC content of the data (known as GC%) in the `004-2_1` dataset?
 >    >
 >    > > <solution-title></solution-title>
 >    > >
@@ -151,7 +163,7 @@ While one could examine the quality control report for each set of reads (forwar
 >    > >    We will run **fastp** {% icon tool %} on the
 >    > >    fastq datasets in the next step
 >    > >
->    > > 1. The GC% is 66%, which is close to the 65.6% that one expects from a _M. tuberculosis_ sample. 
+>    > > 2. The GC% is 66%, which is close to the 65.6% that one expects from a _M. tuberculosis_ sample.
 >    > >    Examining the GC% is a quick way to check that the sample you have sequenced contains reads
 >    > >    from the organism that you expect.
 >    > >
@@ -163,11 +175,10 @@ While one could examine the quality control report for each set of reads (forwar
 As these reads look like they need a bit of trimming, we can turn to the **fastp** tool to clean up our data.
 
 > <hands-on-title>Quality trimming</hands-on-title>
-> 1. Use {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0) %} to clean up the reads and remove the poor quality sections.
->       - *"Single-end or paired-end reads?"*: `Paired`
->       - {% icon param-files %} *"Input 1"*: `004-2_1.fastq.gz`
->       - {% icon param-files %} *"Input 2"*: `004-2_2.fastq.gz`
->
+> 
+> 1. Use {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/1.0.1+galaxy3) %} to clean up the reads and remove the poor quality sections.
+>       - *"Single-end or paired-end reads?"*: `Paired Collection`
+>       - *"Select paired collection(s) "*: `Paired Reads`
 >
 > 2. Inspect the output produced by **fastp**
 >
@@ -186,7 +197,7 @@ As these reads look like they need a bit of trimming, we can turn to the **fastp
 The next section, on looking for contamination in our data using Kraken2, takes a long time to run and can be skipped and perhaps
 run later if you prefer.
 
-{% include _includes/cyoa-choices.html option1="Skip Kraken2" option2="Run Kraken2" default="Skip-Kraken2" %}
+{% include _includes/cyoa-choices.html option1="Skip Kraken2" option2="Run Kraken2" default="Skip Kraken2" %}
 
 <div class="Skip-Kraken2" markdown="1" >
 </div>
@@ -199,15 +210,13 @@ We should also look for contamination in our reads. Sometimes, other sources of 
 
 > <hands-on-title>Run Kraken2</hands-on-title>
 >
-> 1. Execute {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) %} with the following parameters
+> 1. Execute {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.17.1+galaxy0) %} with the following parameters
 >   - *"Single or paired reads"*: `Paired`
->       - *"Forward Strand"*: `fastp on X: Read 1 output`
->       - *"Reverse Strand"*: `fastp on X: Read 2 output`
+>       - *"Collection of paired reads"*: `fastp on X: Paired-end output`
 >
 >   - *"Print scientific names instead of just taxids"*: `Yes`
 >   - *"Enable quick operation"*: `Yes`
->   - Under *"Create report"*:
->       - *"Print a report with aggregrate counts/clade to file"*: `Yes`
+>   - *"Print a report with aggregrate counts/clade to file"*: `Yes`
 >   - *"Select a Kraken2 database"*: `Standard`
 >
 > 2. Inspect the report produced by Kraken
@@ -242,9 +251,8 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 > 1. {% tool [Snippy](toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0) %} with the following parameters
 >   - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >   - *"Use the following dataset as the reference sequence"*: `Mycobacterium_tuberculosis_ancestral_reference.gbk`
->   - *"Single or Paired-end reads"*: `Paired`
->       - *"Select first set of reads"*: `fastp on X: Read 1 output`
->       - *"Select second set of reads"*: `fastp on X: Read 2 output`
+>   - *"Input type"*: `Paired end reads in a collection`
+>       - *"Select a paired collection"*: `fastp on X: Paired-end output`
 >
 >   - Under *"Advanced parameters"*
 >       - *"Minimum proportion for variant evidence"*: `0.1` (This is so we can see possible rare variants in our sample)
@@ -289,7 +297,7 @@ We still cannot entirely trust the proposed variants. In particular, there are r
 
 > <hands-on-title>Run TB Variant Filter</hands-on-title>
 > 1. {% tool [TB Variant Filter](toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.4.0+galaxy0) %} with the following parameters
->   - *"VCF file to be filter"*: `snippy on data XX, data XX, and data XX mapped reads vcf file`
+>   - *"VCF file to be filter"*: `snippy on collection XX snps vcf file`
 >   - *"Filters to apply"*: Select `Filter variants by region` and `Filter sites by read alignment depth`.
 >
 > 2. Open the new VCF file.
@@ -334,25 +342,25 @@ Now that we have a collection of *high-quality variants* we can search them agai
 Finally, TB Variant Report uses the COMBAT-TB [eXplorer](https://explorer.sanbi.ac.za) [database](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700) of _M. tuberculosis_ genome annotation to annotate variants in Mtb. It also takes the output of *TB Profiler* and produces a neat report that is easy to browse and search.
 
 > <hands-on-title>Run TB Profiler and TB Variant Report</hands-on-title>
-> 1. {% tool [TB-Profiler profile](toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/6.2.1+galaxy0) %} with the following parameters
+> 1. {% tool [TB-Profiler profile](toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/6.6.4+galaxy0) %} with the following parameters
 >   - *"Input File Type"*: `BAM`
->       - *"Bam"*: `snippy on data XX, data XX, and data X mapped reads (bam)`
+>       - *"Bam"*: `snippy on collection XX mapped reads (bam)`
 >
 >
 >       **TB Profiler** produces 3 output files, it's own VCF file, a report about the sample including it's likely lineages and any AMR found. There is also a `.json` formatted results file.
 >
 > 2. When *snippy* is run with Genbank format input it prepends `GENE_` to gene names in the VCF annotation. This causes a problem for *TB Variant report*, so we need to edit the output with sed.
 >
->     {% tool [Text transformation with sed](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1) %} with the following parameters:
+>     {% tool [Text transformation with sed](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.5+galaxy2) %} with the following parameters:
 >
 >       - *"File to process"*: `TB Variant Filter on data XX`
 >       - *"SED Program"*: `s/GENE_//g`
-> 
+>
 > 3. {% tool [TB Variant Report](toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/1.0.1+galaxy0) %} with the following parameters
 >   - *"Input SnpEff annotated M.tuberculosis VCF(s)"*: `Text transformation on data XX`
 >   - *"TBProfiler Drug Resistance Report (Optional)"*: `TB-Profiler Profile on data XX: Results.json`
 >
-> 3. Open the drug resistance and variant report html files.
+> 4. Open the drug resistance and variant report html files.
 >
 >    > <question-title></question-title>
 >    >
@@ -405,7 +413,7 @@ We could go through all of the variants in the VCF files and read them out of a 
 >           - "Track Category" to `sequence reads`
 >           - Click on `Insert Annotation Track` and fill it with
 >               - "Track Type" to `BAM Pileups`
->               - "BAM Track Data" to `snippy on data XX, data XX, and data XX mapped reads (bam)`
+>               - "BAM Track Data" to `snippy on collection XX mapped reads (bam)`
 >               - "Autogenerate SNP Track" to `No`
 >               - "Track Visibility" to `On for new users`
 >       - **Track 2 - variants**: Click on `Insert Track Group` and fill it with
@@ -418,7 +426,7 @@ We could go through all of the variants in the VCF files and read them out of a 
 >           - "Track Category" to `annotated reference`
 >           - Click on `Insert Annotation Track` and fill it with
 >               - "Track Type" to `GFF/GFF3/BED Features`
->               - "GFF/GFF3/BED Track Data" to `https://zenodo.org/record/3531703/files/Mycobacterium_tuberculosis_h37rv.ASM19595v2.45.chromosome.Chromosome.gff3`
+>               - "GFF/GFF3/BED Track Data" to `Mycobacterium_tuberculosis_h37rv.ASM19595v2.45.chromosome.Chromosome.gff3`
 >               - "JBrowse Track Type [Advanced]" to `Canvas Features`
 >               - Click on "JBrowse Styling Options [Advanced]"
 >               - "JBrowse style.label" to `product`
@@ -435,9 +443,9 @@ What you should see is something like this:
 You can now click on the names of the tracks to add them in, try the vcf file and gff file. You can see where the variants are located and which genes they are in. If you click on the BAM file you can zoom right in to see the read alignments for each variant if you wish.
 
 > <question-title>Using JBrowse to examine a known variant</question-title>
-> 
+>
 > 1. Paste `Chromosome:761009..761310` into the JBrowse location bar and click **Go**. Ensure that the BAM and VCF tracks are set to visible. What is the meaning of the red column that shows up in the middle of the display of reads (the BAM track)?
-> 
+>
 > 2. What change happened at position 761155 in the genome, according to the read and variant data displayed?
 >
 > 3. How did this change impact the *rpoB* gene, the gene that is found on the forward strand overlapping this position?
@@ -448,7 +456,7 @@ You can now click on the names of the tracks to add them in, try the vcf file an
 > >
 > > 2. Examining the VCF track the variant is shown as a mutation from C to T.
 > >
-> > 3. The "frame" of the codons in this gene can be determined by navigating to where the *rpoB* gene, the second horizontal bar in the annotation track, starts (position 759807). This gene is in frame 0 on the forward strand, the top frame in the display. Navigating back to position 761155, the amino acid encoded in the reference genome is S, that is serine. The mutation from a C to a T changes the codon at this position to L, leucine, and is associated with resistance to the drug rifampicin. 
+> > 3. The "frame" of the codons in this gene can be determined by navigating to where the *rpoB* gene, the second horizontal bar in the annotation track, starts (position 759807). This gene is in frame 0 on the forward strand, the top frame in the display. Navigating back to position 761155, the amino acid encoded in the reference genome is S, that is serine. The mutation from a C to a T changes the codon at this position to L, leucine, and is associated with resistance to the drug rifampicin.
 > >
 > >  While the rifampicin resistance mutation being examined here is already reported by **TB-Profiler**, JBrowse allows us to examine the evidence underlying this mutation in more detail.
 > {: .solution}
@@ -474,9 +482,9 @@ far.
 >https://zenodo.org/record/3960260/files/018-1_2.fastq.gz
 >```
 >
-> 2. Examine the sequence quality with {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %}.
+> 2. Examine the sequence quality with {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1) %}.
 >
-> 3. Examine the sample composition with {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) %}.
+> 3. Examine the sample composition with {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.17.1+galaxy0) %}.
 >
 >    > <question-title></question-title>
 >    >
@@ -506,9 +514,9 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
 >```
 >
-> 2. Perform quality trimming with {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0) %} and examine it's *HTML* output to see quality before and after trimming.
+> 2. Perform quality trimming with {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/1.0.1+galaxy3) %} and examine it's *HTML* output to see quality before and after trimming.
 >
-> 4. Map the samples to the _M. tuberculosis_ reference genome with {% tool [Snippy](toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0) %}. Make sure to select the BAM output as one of the outputs.
+> 3. Map the samples to the _M. tuberculosis_ reference genome with {% tool [Snippy](toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0) %}. Make sure to select the BAM output as one of the outputs.
 >
 >    > <question-title></question-title>
 >    >
@@ -524,9 +532,9 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >    > {: .solution}
 >    {: .question}
 >
-> 5. Run {% tool [samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.5) %} on the *snippy on data XX, data XX, and data XX mapped reads (bam)* file. In the output, pay attention to the *sequences*, *reads mapped* and *reads unmapped* results.
+> 4. Run {% tool [samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.8) %} on the *snippy on collection XX mapped reads (bam)* file. In the output, pay attention to the *sequences*, *reads mapped* and *reads unmapped* results.
 >
-> 6. Run the {% tool [BAM Coverage Plotter](toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0) %} on the mapped reads BAM file that you got from **snippy** using the FASTA format reference you made with **seqret** as the reference.
+> 5. Run the {% tool [BAM Coverage Plotter](toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0) %} on the mapped reads BAM file that you got from **snippy** using the FASTA format reference you made with **seqret** as the reference.
 >
 >    > <question-title></question-title>
 >    >
@@ -556,7 +564,7 @@ There is something clearly wrong with sample SRR12416842, perhaps indicating sam
 # Processing many samples at once: Collections and Workflows (optional)
 
 In the tutorial thus far we have focused on processing single samples, where two read datasets (forward and reverse reads) are associated with a single sample. In practice, sequence analysis typically involves analysing batches of samples and we run the same
-analysis steps for each sample in the batch. Galaxy supports working with batches using collections and workflows. 
+analysis steps for each sample in the batch. Galaxy supports working with batches using collections and workflows.
 
 
 If you have followed all of the steps of this tutorial, you will have two useable samples, one named *004-2* and another *018-1*. Create a list of dataset pairs from these samples and call the collection `samples`.
@@ -569,7 +577,7 @@ The workflow that we are going to use is published on [WorkflowHub.eu](https://w
 
 If the text above doesn't show a text to run or if you are not on one of the public "usegalaxy.*" servers that integrate with WorkflowHub.eu:
 
-1. Copy the URL of [this link]({{ site.baseurl }}{{ page.dir }}workflows/tb-variant-analysis.ga) (e.g. via right click) or save it to your computer and 
+1. Copy the URL of [this link]({{ site.baseurl }}{{ page.dir }}workflows/tb-variant-analysis.ga) (e.g. via right click) or save it to your computer and
 2. Import the workflow into Galaxy
 3. Click the run icon (it is a small white right-pointing triangle on a blue background)
 

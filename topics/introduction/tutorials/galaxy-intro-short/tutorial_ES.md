@@ -24,10 +24,15 @@ key_points:
 lang: es
 translations:
   - en
-contributors:
-  - annasyme
-  - pclo
-  - ales-ibt
+contributions:
+  authorship:
+    - annasyme
+    - pclo
+    - ales-ibt
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 
 ---
 

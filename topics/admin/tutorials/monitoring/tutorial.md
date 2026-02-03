@@ -90,10 +90,10 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -43,3 +43,5 @@
+>    @@ -42,3 +42,5 @@
 >       version: 1.8.0
 >     - name: usegalaxy_eu.flower
->       version: 1.0.2
+>       version: 2.1.0
 >    +- src: usegalaxy_eu.influxdb
 >    +  version: v6.0.7
 >    {% endraw %}
@@ -296,8 +296,8 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -45,3 +45,7 @@
->       version: 1.0.2
+>    @@ -44,3 +44,7 @@
+>       version: 2.1.0
 >     - src: usegalaxy_eu.influxdb
 >       version: v6.0.7
 >    +# Monitoring
@@ -386,8 +386,8 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -330,3 +330,12 @@ flower_ui_users:
->     
+>    @@ -331,3 +331,12 @@ flower_ui_users:
+>
 >     flower_environment_variables:
 >       GALAXY_CONFIG_FILE: "{{ galaxy_config_file }}"
 >    +
@@ -458,7 +458,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -49,3 +49,5 @@
+>    @@ -48,3 +48,5 @@
 >     - name: dj-wasabi.telegraf
 >       src: https://github.com/dj-wasabi/ansible-telegraf
 >       version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
@@ -794,7 +794,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    +    privs: SELECT
 >    +    objs: ALL_IN_SCHEMA
 >    +
->     
+>
 >     # PostgreSQL Backups
 >     postgresql_backup_dir: /data/backups
 >    {% endraw %}
@@ -809,7 +809,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -342,3 +342,10 @@ telegraf_plugins_extra:
+>    @@ -343,3 +343,10 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000

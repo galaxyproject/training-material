@@ -47,7 +47,7 @@ The generated community-specific table can be used as is (e.g. downloadable tsv 
 
 The pipeline is **fully automated** and executes on a **weekly** basis. Any research community can apply the pipeline to create a table specific to their community.
 
-The aim is this tutorial is to create such table for a community.
+The aim of this tutorial is to create such table for a community.
 
 > <agenda-title></agenda-title>
 >
@@ -96,7 +96,7 @@ You will then be able to remove tools that are not relevant to your community or
 # Add the list relevant tags for your community in the categories file
 
 > <hands-on-title>Add the ToolShed catgories to the categories file</hands-on-title>
-> 1. Open or create the file named `categories` in your comunity metadata folder (`communities/<your community>/metadata/categories`)
+> 1. Open or create the file named `categories` in your community metadata folder (`communities/<your community>/metadata/categories`)
 > 2. Add the name of the categories relevant to your community in the `categories` file you started above, with 1 ToolShed category per row. For example, see [a list of valid ToolShed categories](https://toolshed.g2.bx.psu.edu/).
 >
 >    For example:

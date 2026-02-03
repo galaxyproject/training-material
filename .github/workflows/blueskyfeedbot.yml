@@ -10,6 +10,7 @@ concurrency:
   group: feedbot
 jobs:
   rss-to-bluesky:
+    if: (github.event_name == 'schedule' && github.repository == 'galaxyproject/training-material') || (github.event_name != 'schedule')
     runs-on: ubuntu-latest
     steps:
       - name: Generate cache key
@@ -19,7 +20,7 @@ jobs:
           script: |
             core.setOutput('cache-key', new Date().valueOf())
       - name: Retrieve cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ github.workspace }}/blueskyfeedbot
           key: feed-cache-${{ steps.generate-key.outputs.cache-key }}

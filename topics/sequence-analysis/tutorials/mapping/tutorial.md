@@ -33,10 +33,17 @@ follow_up_training:
 level: Introductory
 edam_ontology:
 - topic_0102
-contributors:
-- joachimwolff
-- bebatut
-- hexylena
+contributions:
+  authorship:
+    - joachimwolff
+    - bebatut
+    - hexylena
+  editing:
+    - tflowers15
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 recordings:
 - captioners:
   - shiltemann
@@ -114,6 +121,10 @@ In the following, we will process a dataset with the mapper **Bowtie2** and we w
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
+> 4. Create a paired collection named `Paired Reads`
+>
+>    {% snippet faqs/galaxy/collections_build_list_paired.md %}
+>
 {: .hands_on}
 
 We just imported in Galaxy FASTQ files corresponding to paired-end data as we could get directly from a sequencing facility.
@@ -135,10 +146,9 @@ We need a reference genome to map the reads on.
 Currently, there are over 60 different mappers, and their number is growing. In this tutorial, we will use [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/), a fast and memory-efficient open-source tool particularly good at aligning sequencing reads of about 50 up to 1,000s of bases to relatively long genomes.
 
 > <hands-on-title>Mapping with Bowtie2</hands-on-title>
-> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0) %} with the following parameters
+> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.4+galaxy0) %} with the following parameters
 >    - *"Is this single or paired library"*: `Paired-end`
->       - {% icon param-file %} *"FASTA/Q file #1"*: `reads_1`
->       - {% icon param-file %} *"FASTA/Q file #2"*: `reads_2`
+>       - {% icon param-collection %} *"FASTQ Paired Dataset"*: `Paired Reads`
 >       - *"Do you want to set paired-end options?"*: `No`
 >
 >           You should have a look at the parameters there, specially the mate orientation if you know it. They can improve the quality of the paired-end mapping.

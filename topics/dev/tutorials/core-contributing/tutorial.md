@@ -72,7 +72,7 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >    > ```
 >    {: .code-in}
 >
->    Make sure your Python version is at least 3.7 (you can check your Python version with `python --version`). If your system uses an older version, you may specify an alternative Python interpreter using the `GALAXY_PYTHON` environment variable (`GALAXY_PYTHON=/path/to/alt/python bash scripts/common_startup.sh --dev-wheels`).
+>    {% icon warning %} Make sure you are using a [supported Python version](https://galaxyproject.org/admin/python/) (you can check your Python version with `python --version`). If your system uses an older version, you may specify an alternative Python interpreter using the `GALAXY_PYTHON` environment variable (`GALAXY_PYTHON=/path/to/alt/python bash scripts/common_startup.sh --dev-wheels`).
 >
 > 4. Activate your new virtual environment:
 >

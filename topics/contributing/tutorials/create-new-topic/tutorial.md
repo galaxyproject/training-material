@@ -191,6 +191,10 @@ subtopics:
 - id: visualisation
   title: "Visualisation"
   description: "Tutorials covering data visualisation"
+  crosstopic_tutorials:  ## optional
+    - topic: microbiome
+      tutorial: beer-data-analysis
+      priority: 2  ## optional
 ```
 
 Each subtopic has:
@@ -198,7 +202,11 @@ Each subtopic has:
 - a short descriptive title
 - a longer description discussion what is contained in that subtopic
 
+Each subtopic **optionally** may define:
+- tutorials from other topics to show, via the `crosstopic_tutorials` metadata
+
 Tutorials can be assigned to subtopics by adding e.g. `subtopic: singlecell` to the tutorial metadata. An example of this subtopic division can be found in the [admin section]({{site.baseurl}}/topics/admin/ )
+
 
 # Creating a tag based topic
 

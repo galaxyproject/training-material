@@ -24,6 +24,10 @@ contributions:
     - RZ9082
   funding:
     - deKCD
+answer_histories:
+  - label: "UseGalaxy.eu"
+    history: https://usegalaxy.eu/u/schnda/h/introduction-to-dh-in-galaxy-answer-key-history
+    date: 2025-11-20
 ---
 
 Loosely building on {% cite Richardson2003 %}, this tutorial compares two editions of the poem "The Sorrows of Yamba".[^1]
@@ -32,9 +36,9 @@ The first couple of steps derive from [A short introduction to Galaxy]({% link t
 "The Sorrows of Yamba" was published in 1795 and was among the most popular antislavery poems. However, the version published by Hannah More in the Cheap Repository Tracts series was not the only version of the poem that circulated. Also, Moore's authorship on the topic is contested ({% cite Richardson2003 %}). But while we leave this debate to the experts, the different versions of the poem offer a great opportunity to delve into how digital tools can help us compare texts more quickly. We will do this in the following tutorial.
 
 While Richardson compared the poems by hand, we use his example to introduce how Galaxy can help you with your text analysis.
-This tutorial covers the Galaxy basics, from logging in and uploading the texts to using the first tools.
+This tutorial covers the basics of Galaxy, from logging in and uploading text to using the first tools.
 We will clean the two poem versions and check the texts from a distance by comparing their number of lines and characters, and visualizing both in a word cloud.
-Then, we take a closer look. For an easier comparison, we reformat both texts and compare them line by line and side by side. As the word cloud shows, "death" is a dominant theme in the first poem, so we extract all lines including "death" for further in-depth analysis. This helps us get a better idea of where those articles differ and is applicable to many other texts you might want to compare.
+Then, we take a closer look. For an easier comparison, we reformat both texts and compare them line by line and side by side. As the word cloud shows, "death" is a dominant theme in the first poem, so we extract all lines including "death" for further in-depth analysis. This helps us gain a better understanding of where those articles differ and is applicable to many other texts you may want to compare.
 
 > <agenda-title></agenda-title>
 >
@@ -111,7 +115,7 @@ Your "History" is on the panel on the right. It is a record of the actions you h
 
 ## Upload a file to Galaxy
 
-The "Activity Bar" can be seen on the left-most part of the interface.
+The "Activity Bar" is located on the leftmost part of the interface.
 
 > <hands-on-title>Upload a file</hands-on-title>
 > 1. At the top of the **Activity Bar**, click the {% icon galaxy-upload %} **Upload** activity
@@ -165,7 +169,7 @@ The contents of the file will be displayed in the central Galaxy panel. If the d
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 3. **Add a tag** to each database a corresponding to the file's origin.
+> 3. **Add a tag** to each dataset, corresponding to the file's origin.
 >    - One saying `#cheap` for the file from the cheap repository (SoY_Cheap_Repo_Source.txt)
 >    - The other one `#universal` for the second one (SoY_Univ_Mag_Source.txt)
 >    - Don't forget the hashtags
@@ -245,6 +249,7 @@ We also use this tool on the second file.
 > <hands-on-title> Delete Hyperlink in Text Two </hands-on-title>
 >
 > 1. Run {% icon workflow-run %} {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
+>    - *"Remove first"*: `1` (lines)
 >    - {% icon param-file %} *"from"*: `2: SoY_Univ_Mag_Source.txt`
 >
 >    {% snippet faqs/galaxy/tools_rerun.md %}
@@ -265,7 +270,7 @@ Depending on how detailed you want to compare your texts, we suggest further uni
 
 ## Remove punctuation
 
-Regular Expressions (RegEx) allow you to search for particular patterns in your text. They can be a massive help if you want to extract or remove them with minimal work. In our two poems, the punctuation is not unified, and therefore, we want to remove it from both using RegEx. If comparing the punctuation of texts is also relevant to you, you can skip this step. Make sure to select the text version from the Cheap Repository that we have earlier removed the hyperlink from.
+Regular Expressions (RegEx) allow you to search for particular patterns in your text. They can be a massive help if you want to extract or remove them with minimal work. In our two poems, the punctuation is not unified; therefore, we want to remove it from both using regular expressions (RegEx). If comparing the punctuation of texts is also relevant to you, you can skip this step. Make sure to select the text version from the Cheap Repository that we have earlier removed the hyperlink from.
 
 > <hands-on-title> Remove Punctuation in Poem One </hands-on-title>
 >
@@ -288,7 +293,7 @@ Regular Expressions (RegEx) allow you to search for particular patterns in your 
 
 And we repeat the same for the second text. Remember to use the redo button if you want to save some time.
 
-Also in text two, we search for the pattern `[[:punct:]]` and omit a replacement, meaning that all punctuation marks will be deleted. Make sure to select the text version from the Universal Magazine that we earlier removed the hyperlink from.
+Also in text two, we search for the pattern `[[:punct:]]` and omit a replacement, meaning that all punctuation marks will be deleted. Ensure that you select the text version from the Universal Magazine, from which we previously removed the hyperlink.
 
 > <hands-on-title> Remove Punctuation in Poem Two </hands-on-title>
 >
@@ -310,7 +315,7 @@ To get an idea of how the two cleaned texts compare, we check out their metadata
 
 ## Compare quantitatively
 
-The tool {% tool [Line/Word/Character count](wc_gnu) %} allows us to get a quick overview of a text. We want to see if the cleaned versions are different from each other.
+The tool {% tool [Line/Word/Character count](wc_gnu) %} allows us to get a quick overview of a text. We want to determine if the cleaned versions differ from one another.
 
 > <hands-on-title> Count the Characters of Poem One </hands-on-title>
 >
@@ -354,14 +359,14 @@ The differences between the two texts are quantifiable, but do these also affect
 
 ## Compare visually
 
-A picture says more than 1000 words! Accordingly, we want to get closer to the actual content of both texts. Particularly for larger corpora, a word cloud can be a nice way to get a first idea of what a text is about. Make sure not to use the latest outputs this time, as they contain only metadata and not the texts we want to compare. Select the cleaned poem versions for a more meaningful word cloud output.
+A picture says more than 1000 words! Accordingly, we aim to delve deeper into the actual content of both texts. Particularly for larger corpora, a word cloud can be a nice way to get a first idea of what a text is about. Please refrain from using the latest outputs this time, as they contain only metadata and not the texts we want to compare. Select the cleaned poem versions for a more meaningful word cloud output.
 
 > <hands-on-title> Visualize the Content of Poem One </hands-on-title>
 >
-> 1. Run {% icon workflow-run %} {% tool [Generate a word cloud](toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.4+galaxy2) %} with the following parameters:
+> 1. Run {% icon workflow-run %} {% tool [Generate a word cloud](toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.4+galaxy4) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `SoY_Cheap_Repo_cleaned.txt` (output of **Replace Text** {% icon tool %})
 >    - *"Do you want to select a special font?"*: `Use the default DroidSansMono font`
->    - *"Color option"*: `Color`
+>    - *"Color option"*: `Colormap`
 >    - *"Scaling of words by frequency (0 - 1)"*: `0.8`
 >
 >    > <comment-title> Adapting the Word Cloud </comment-title>
@@ -373,24 +378,24 @@ A picture says more than 1000 words! Accordingly, we want to get closer to the a
 
 We also rerun {%icon dataset-rerun %} the word cloud with the second poem.
 
-The word cloud for the second text is created in the same way. We suggest rerunning the tool with the second text, but with the same parameters you used for creating the first word cloud image, for better comparability. That makes both comparable.
+The word cloud for the second text is created in the same way. We suggest rerunning the tool with the second text, using the same parameters as those for creating the first word cloud image for better comparability. That makes both comparable.
 
 > <hands-on-title> Visualize the Content of Poem Two </hands-on-title>
 >
-> 1. Run {% icon workflow-run %} {% tool [Generate a word cloud](toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.4+galaxy2) %} with the following parameters:
+> 1. Run {% icon workflow-run %} {% tool [Generate a word cloud](toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.4+galaxy4) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `SoY_Univ_Mag_cleaned.txt` (output of **Replace Text** {% icon tool %})
 >    - *"Do you want to select a special font?"*: `Use the default DroidSansMono font`
->    - *"Color option"*: `Color`
+>    - *"Color option"*: `Colormap`
 >    - *"Scaling of words by frequency (0 - 1)"*: `0.8`
 >
 >    > <comment-title> Uniqueness of the Word Cloud </comment-title>
 >    >
->    > The word cloud from this tool looks a little different each time you run it. The layout may vary even when you are redoing it with the exact same texts and inputs.
+>    > The word cloud from this tool looks a little different each time you run it. The layout may vary even when you redo it with the exact same text and inputs.
 >    {: .comment}
 >
 {: .hands_on}
 
-Comparing items from your history is easiest when enabling the window manager and seeing both images side by side.
+Comparing items from your history is easiest when you enable the window manager and view both images side by side.
 
 {% snippet faqs/galaxy/features_scratchbook.md %}
 
@@ -429,7 +434,7 @@ Regular Expressions help again by changing all spaces with line breaks with just
 
 > <hands-on-title> Changing Layout of Poem One </hands-on-title>
 >
-> 1. Run {% icon workflow-run %} {% tool [Replace Text - in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy0) %} with the following parameters:
+> 1. Run {% icon workflow-run %} {% tool [Replace Text - in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `SoY_Cheap_Repo_cleaned.txt`
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
@@ -453,7 +458,7 @@ When you click on the eye {% icon galaxy-eye %} icon of the data set in the hist
 
 > <hands-on-title> Changing Layout of Poem Two </hands-on-title>
 >
-> 1. Run {% icon workflow-run %} {% tool [Replace Text - in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy0) %} with the following parameters:
+> 1. Run {% icon workflow-run %} {% tool [Replace Text - in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `SoY_Univ_Mag_cleaned.txt`
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*

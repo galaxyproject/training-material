@@ -75,7 +75,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -51,3 +51,6 @@
+>    @@ -50,3 +50,6 @@
 >       version: 6f6fdf7f5ead491560783d52528b79e9e088bd5b
 >     - src: cloudalchemy.grafana
 >       version: 0.14.2
@@ -103,7 +103,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -349,3 +349,8 @@ telegraf_plugins_extra:
+>    @@ -350,3 +350,8 @@ telegraf_plugins_extra:
 >           - timeout = "10s"
 >           - data_format = "influx"
 >           - interval = "15s"
@@ -155,7 +155,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +    objs: role_id_seq,galaxy_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
 >    +    type: sequence
 >    +    privs: USAGE,SELECT
->     
+>
 >     # PostgreSQL Backups
 >     postgresql_backup_dir: /data/backups
 >    {% endraw %}
@@ -325,7 +325,7 @@ In order to achieve this, we first need some way to sort the jobs of the trainin
 >    @@ -35,6 +35,15 @@ tools:
 >           require:
 >             - pulsar
->     
+>
 >    +roles:
 >    +  training.*:
 >    +    max_cores: 2
@@ -338,10 +338,10 @@ In order to achieve this, we first need some way to sort the jobs of the trainin
 >     destinations:
 >       local_env:
 >         runner: local_runner
->    @@ -62,6 +71,19 @@ destinations:
+>    @@ -64,6 +73,19 @@ destinations:
 >         max_mem: 8
 >         params:
->           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00
+>           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --mem={round(mem*1024)} --time={entity.params['walltime']}:00:00
 >    +  slurm-training:
 >    +    inherits: singularity
 >    +    runner: slurm
@@ -355,7 +355,7 @@ In order to achieve this, we first need some way to sort the jobs of the trainin
 >    +      require:
 >    +        - slurm
 >    +        - training
->     
+>
 >       pulsar:
 >         runner: pulsar_runner
 >    {% endraw %}

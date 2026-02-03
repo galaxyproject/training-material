@@ -2,6 +2,8 @@
 layout: tutorial_hands_on
 
 title: Voronoi segmentation
+level: Intermediate
+subtopic: analyses
 zenodo_link: https://zenodo.org/records/15172302
 questions:
   - How do I partition an image into regions based on which object they are nearest to (Voronoi segmentation)?
@@ -35,10 +37,11 @@ contributions:
     - fiesta
     - oscars
 tags:
-- imageanalysis
-- segmentation
-- voronoi
-
+- Tessellation
+- Image segmentation
+- Object counting
+- Overlay
+- Multi-channel image
 ---
 
 
@@ -132,7 +135,7 @@ In principle, this tutorial can be followed with any type of data provided that 
 > 
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 > 
-> 2. Import {% icon galaxy-upload %} the following dataset from [Zenodo](https://zenodo.org/records/15172302). 
+> 2. Import {% icon galaxy-upload %} the following dataset from [Zenodo]({{ page.zenodo_link }}). 
 > 
 >    ```
 >    https://zenodo.org/records/15281843/files/images_and_seeds.zip

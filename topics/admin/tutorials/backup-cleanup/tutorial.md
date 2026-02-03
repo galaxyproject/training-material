@@ -78,12 +78,12 @@ tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -11,3 +11,6 @@
->       version: 0.3.1
+>       version: 0.3.4
 >     - src: usegalaxy_eu.certbot
->       version: 0.1.11
+>       version: 0.1.13
 >    +# gxadmin (used in cleanup, and later monitoring.)
 >    +- src: galaxyproject.gxadmin
->    +  version: 0.0.12
+>    +  version: 0.0.14
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement"}
@@ -184,10 +184,10 @@ Before we begin backing up our Galaxy data, let's set up automated cleanups to e
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -2,6 +2,7 @@
->     galaxy_create_user: true # False by default, as e.g. you might have a 'galaxy' user provided by LDAP or AD.
+>    @@ -3,6 +3,7 @@ galaxy_create_user: true # False by default, as e.g. you might have a 'galaxy' u
 >     galaxy_separate_privileges: true # Best practices for security, configuration is owned by 'root' (or a different user) than the processes
 >     galaxy_manage_paths: true # False by default as your administrator might e.g. have root_squash enabled on NFS. Here we can create the directories so it's fine.
+>     galaxy_manage_systemd: true
 >    +galaxy_manage_cleanup: true
 >     galaxy_layout: root-dir
 >     galaxy_root: /srv/galaxy
@@ -239,7 +239,7 @@ We're setting a couple of variables to control the automatic backups, they'll be
 
 > <hands-on-title>Configuring PostgreSQL Backups</hands-on-title>
 >
-> 1. Edit `group_vars/galaxyservers.yml` and add some variables to configure PostgreSQL:
+> 1. Edit `group_vars/dbservers.yml` and add some variables to configure PostgreSQL:
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/dbservers.yml

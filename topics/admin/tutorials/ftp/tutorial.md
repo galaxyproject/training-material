@@ -85,7 +85,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -57,3 +57,6 @@
+>    @@ -56,3 +56,6 @@
 >     # Sentry
 >     - name: mvdbeek.sentry_selfhosted
 >       src: https://github.com/mvdbeek/ansible-role-sentry/archive/main.tar.gz
@@ -124,7 +124,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    +    systemctl restart proftpd || true
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
->     certbot_agree_tos: --agree-tos
+>      - "{{ sentry_domain }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add proftpd in certbot"}
@@ -159,7 +159,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -366,3 +366,24 @@ telegraf_plugins_extra:
+>    @@ -368,3 +368,24 @@ telegraf_plugins_extra:
 >     tiaas_dir: /srv/tiaas
 >     tiaas_admin_user: admin
 >     tiaas_admin_pass: changeme

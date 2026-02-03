@@ -1,2 +1,2 @@
-# Tutorial_Galaxy-Pycaret
-A Galaxy tutorial to create and run a logistic regression classifier with LORIS dataset (Chang et al., 2024)
+# Tutorial_GLEAM Tabular Learner
+Building a Model using Chowell clinical data

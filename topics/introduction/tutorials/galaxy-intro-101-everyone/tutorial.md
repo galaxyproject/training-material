@@ -98,13 +98,17 @@ Not everyone has the same background and that's ok!
 {: .hands_on}
 
 
-The Galaxy interface consists of three main parts:
+The Galaxy interface is divided into four sections (panels):
+* The Activity Bar on the left: _This is where you will navigate to the resources in Galaxy (Tools, Workflows, Histories etc.)_
+* Currently active "Activity Panel" on the left: _By default, the {% icon tool %} **Tools** activity will be active and its panel will be expanded_
+* Viewing panel in the middle: _The main area for context for your analysis_
+* History of analysis and files on the right: _Shows your "current" history; i.e.: Where any new files for your analysis will be stored_
 
-1. The available tools are listed on the left
-2. Your analysis history is recorded on the right
-3. The central panel will let you run analyses and view outputs
+![Screenshot of the Galaxy interface with aforementioned structure](../../images/galaxy_interface.png)
 
-![Galaxy interface screenshot showing history panel on the right, tools panel on the left, and main panel at the center]({% link shared/images/galaxy_interface.png %})
+The first time you use Galaxy, there will be no files in your history panel.
+
+
 
 
 # Create a history
@@ -122,7 +126,7 @@ In other words, using a workflow makes it possible to apply the same procedure t
 
 > <hands-on-title>Create history</hands-on-title>
 >
-> 1. Make sure you start from an empty analysis history.
+> 1. Make sure you start from an empty history.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
@@ -318,9 +322,9 @@ Like we mentioned before, there are often multiple ways to reach your answer in 
 >    - Tool: **Group** data by a column and perform aggregate operation on other columns {% icon tool %}
 >    - Input dataset: `iris clean` dataset to answer the same question.
 >
-> 2. Did you get the same answer as before?
+> 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris species group`
 >
-> 3. **Rename** {% icon galaxy-pencil %} the dataset to `iris species group`
+> 3. Did you get the same answer as before?
 >
 > > <solution-title></solution-title>
 > > 1. {% tool [Group](Grouping1) %}   with the following parameters:
@@ -554,7 +558,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 >    This will make the creation of the workflow easier.
 >
-> 2. Click on {% icon galaxy-gear %} (**History options**) at the top of your history panel and select **Extract workflow**.
+> 2. Click on {% icon galaxy-history-options %} (**History options**) at the top of your history panel and select **Extract workflow**.
 >
 >    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
 >
@@ -572,7 +576,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 >    ![`Where workflows go` list](../../images/101_foreveryone_workflow.png)
 >
-> 6. Click on **Workflow** in the top menu of Galaxy.
+> 6. Click on **Workflow** in the activity bar on the left side.
 >    - Here you have a list of all your workflows.
 >    - Your newly created workflow should be listed at the top:
 >
@@ -596,9 +600,9 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 > <hands-on-title>Editing our workflow</hands-on-title>
 >
 > 1. Open the **workflow editor**
->    - Click on the dropdown menu {% icon galaxy-dropdown %} (triangle icon) to the right of your workflow name.
+>    - Click on **Workflows** {% icon galaxy-workflows-activity %} at the interactive bar and locate your freshly created or imported workflow.
 >
-> 2. Select **Edit** to launch the workflow editor.
+> 2. Select {% icon galaxy-wf-edit %} **Edit** to launch the workflow editor.
 >    - You should see something like this:
 >
 >    ![Workflow editor](../../images/101_foreveryone_workflow_editor.png)
@@ -609,11 +613,12 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 > 3. **Hiding intermediate outputs**
 >    - We can tell Galaxy which outputs of a workflow are important and should be shown in our history when we run it, and which can be hidden.
 >    - By default, all outputs will be shown
->    - Click the **checkbox** next to the outputs to mark them as important:
+>    - Click the **checkbox** {% icon galaxy-selector %} next to the outputs to mark them as important:
 >        - `outfile` in  **Unique** {% icon tool %}
 >        - `out_file1` in **Group** {% icon tool%} step
 >            - This should be the Group tool where we performed the counting, you can check which one that is by clicking on it and looking at the parameter settings in the **Details** box on the right.
 >        - `png` in both **Scatterplot w ggplot2** {% icon tool %} steps
+>    - To hide all other datasets in your history you will need to unselect the **eye** icon {% icon galaxy-eye %} in each tool box where you did not select the **checkbox** {% icon galaxy-selector %}
 >    - Now, when we run the workflow, we will only see these final outputs
 >        - i.e. the two dataset with species, the dataset with number of samples by species and the two scatterplots.
 >
@@ -632,7 +637,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 > 5. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
 >
 >
-> 6. **Return** to the analysis view by clicking on the Home icon {% icon galaxy-home %} (or **Analyze Data** on older Galaxy versions) at the top menu bar.
+> 6. **Return** to the analysis view by clicking on **Galaxy** (or the Home icon {% icon galaxy-home %} or **Analyze Data** on older Galaxy versions) at the top menu bar.
 >
 {: .hands_on}
 
@@ -689,17 +694,18 @@ With this adjustment, we can reuse our workflow on the data, and analyze and vis
 >
 > To analyze the diamonds price/4 Cs dataset by reusing our workflow:
 >
-> 1. Open the **workflow menu** (top menu bar).
+> 1. Open the **workflow menu** (from activity bar, left side).
 >    - Find the workflow you made in the previous section,
->    - Select the option `Run`.
+>    - Select the option `Run` {% icon workflow-run %}.
 >    - The central panel will change to allow you to configure and launch the workflow.
+>    - Click on **Expanded workflow form**
 >
 > 2. Select the `diamonds` dataset as the input dataset.
 >
 > 3. Customize the first scatter plot:
 >
 >    This step is preconfigured to plot column 1 along the x and column 2 along the y axis, while grouping by column 5.
->    This is fine and will result in *price* getting plotted against *carat* with grouping by *cut*, but you would want to adjust the plot title and axis labels accordingly:
+>    This is fine and will result in *price* getting plotted against *carat* with grouping by *cut*, but you would want to adjust the plot title and axis labels accordingly. To change any parameter click on the pencil icon {% icon galaxy-wf-edit %}:
 >
 >    - Change *"Plot title"* to `Diamond price as a function of carat with cut as a factor`
 >    - Change *"Label for x axis"* to `Weight of the diamond (carat)`
@@ -766,7 +772,7 @@ One of the most important features of Galaxy comes at the end of an analysis. Wh
 
 > <hands-on-title>Share history</hands-on-title>
 > 1. Share your history with your neighbour.
-> 2. Find the history shared by your neighbour. Histories shared with specific users can be accessed by those users under their top masthead "User" menu under `Histories shared with me`.
+> 2. Find the history shared by your neighbour. Histories shared with specific users can be accessed by opening the history menu for the activity bar and selecting in the History menu the **Shared with Me** tab.
 {: .hands_on}
 
 # Conclusion

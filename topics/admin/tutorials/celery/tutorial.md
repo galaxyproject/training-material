@@ -109,7 +109,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -38,3 +38,8 @@
+>    @@ -37,3 +37,8 @@
 >       version: 1.4.4
 >     - src: galaxyproject.pulsar
 >       version: 1.0.10
@@ -117,7 +117,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    +- name: geerlingguy.redis
 >    +  version: 1.8.0
 >    +- name: usegalaxy_eu.flower
->    +  version: 1.0.2
+>    +  version: 2.1.0
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement" data-ref="add-req"}
@@ -149,7 +149,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -282,3 +282,7 @@ rabbitmq_users:
+>        @@ -283,3 +283,7 @@ rabbitmq_users:
 >         # TUS
 >         galaxy_tusd_port: 1080
 >         galaxy_tus_upload_store: /data/tus
@@ -248,15 +248,15 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -269,6 +269,7 @@ rabbitmq_config:
->         
+>        @@ -270,6 +270,7 @@ rabbitmq_config:
+>
 >         rabbitmq_vhosts:
 >           - /pulsar/pulsar_au
 >        +  - galaxy_internal
->         
+>
 >         rabbitmq_users:
 >           - user: admin
->        @@ -278,6 +279,13 @@ rabbitmq_users:
+>        @@ -279,6 +280,13 @@ rabbitmq_users:
 >           - user: pulsar_au
 >             password: "{{ vault_rabbitmq_password_vhost }}"
 >             vhost: /pulsar/pulsar_au
@@ -267,7 +267,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        +    password: "{{ vault_rabbitmq_password_flower }}"
 >        +    tags: administrator
 >        +    vhost: galaxy_internal
->         
+>
 >         # TUS
 >         galaxy_tusd_port: 1080
 >        {% endraw %}
@@ -299,7 +299,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -294,3 +294,22 @@ galaxy_tus_upload_store: /data/tus
+>        @@ -295,3 +295,22 @@ galaxy_tus_upload_store: /data/tus
 >         #Redis
 >         galaxy_additional_venv_packages:
 >           - redis
@@ -428,7 +428,7 @@ Now that everything is running, we want to test celery and watch it processing t
 We can simply do that by starting an upload to our Galaxy.
 
 > <hands-on-title>Test Celery and monitor tasks with Flower</hands-on-title>
-> 1. First, open a new tab and enter your machines hostname followed by `/flower/dashboard` then log in with `username: admin` and you password.
+> 1. First, open a new tab and enter your machines hostname followed by `/flower/dashboard` then log in with `username: admin` and your password.
 >    You should see an overview with active workers.  
 >    Keep that tab open
 > 2. In split view, open a second browser window and open your Galaxy page.

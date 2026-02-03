@@ -2,6 +2,8 @@
 layout: tutorial_hands_on
 
 title: Object tracking using CellProfiler
+level: Intermediate
+subtopic: analyses
 zenodo_link: https://doi.org/10.5281/zenodo.4567084
 requirements:
   -
@@ -23,6 +25,10 @@ contributions:
     - sunyi000
     - beatrizserrano
     - jkh1
+
+tags:
+  - Isolated object tracking
+  - Multi-channel image
 ---
 
 
@@ -81,7 +87,7 @@ The images are saved as a zip archive on Zenodo and need to be uploaded to the G
 >    - **Important:** If setting the type to 'Auto-detect', make sure that after upload, the datatype is set to zip.
 >
 >    ```
->    https://zenodo.org/records/4567084/files/drosophila_sample.zip
+>    {{ page.zenodo_link }}/files/drosophila_sample.zip
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}

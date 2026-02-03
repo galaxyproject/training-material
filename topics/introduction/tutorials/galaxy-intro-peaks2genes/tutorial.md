@@ -1,26 +1,26 @@
 ---
 layout: tutorial_hands_on
-
-title: "From peaks to genes"
-zenodo_link: "https://doi.org/10.5281/zenodo.1025586"
+title: From peaks to genes
+zenodo_link: https://doi.org/10.5281/zenodo.1025586
 level: Introductory
 questions:
-  - "How to use Galaxy?"
-  - "How to get from peak regions to a list of gene names?"
+- How to use Galaxy?
+- How to get from peak regions to a list of gene names?
 objectives:
-  - "Familiarize yourself with the basics of Galaxy"
-  - "Learn how to obtain data from external sources"
-  - "Learn how to run tools"
-  - "Learn how histories work"
-  - "Learn how to create a workflow"
-  - "Learn how to share your work"
-time_estimation: "3H"
+- Familiarize yourself with the basics of Galaxy
+- Learn how to obtain data from external sources
+- Learn how to run tools
+- Learn how histories work
+- Learn how to create a workflow
+- Learn how to share your work
+time_estimation: 3H
 key_points:
-  - "Galaxy provides an easy-to-use graphical user interface for often complex commandline tools"
-  - "Galaxy keeps a full record of your analysis in a history"
-  - "Workflows enable you to repeat your analysis on different data"
-  - "Galaxy can connect to external sources for data import and visualization purposes"
-  - "Galaxy provides ways to share your results and methods with others"
+- Galaxy provides an easy-to-use graphical user interface for often complex commandline
+  tools
+- Galaxy keeps a full record of your analysis in a history
+- Workflows enable you to repeat your analysis on different data
+- Galaxy can connect to external sources for data import and visualization purposes
+- Galaxy provides ways to share your results and methods with others
 subtopic: next-steps
 contributions:
   authorship:
@@ -39,15 +39,27 @@ contributions:
   - elixir-europe
   - deNBI
   - uni-freiburg
-
 answer_histories:
-- label: "usegalaxy.eu"
+- label: usegalaxy.eu
   history: https://usegalaxy.eu/u/teresa-m/h/gtn-peaks-to-genes-introduction-part-1
   date: 2025-08-19
-- label: "usegalaxy.eu"
+- label: usegalaxy.eu
   history: https://usegalaxy.eu/u/teresa-m/h/gtn-peaks-to-genes-introduction-part-2
   date: 2025-08-19
+recordings:
+- youtube_id: IeHu63FVlGY
+  length: 1H41M
+  galaxy_version: 25.0.4.dev0
+  date: '2025-11-03'
+  speakers:
+  - teresa-m
+  captioners:
+  - teresa-m
+  bot-timestamp: 1762179139
+
+
 ---
+
 
 We stumbled upon a paper ({% cite Li2012 %}) called *"The histone acetyltransferase MOF is a key regulator of the embryonic stem cell core transcriptional network"*. The paper contains the analysis of possible target genes of an interesting protein called Mof. The targets were obtained by ChIP-seq in mice and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
 However, the list of genes is neither in the supplement of the paper, nor part of the GEO submission.

@@ -31,10 +31,15 @@ key_points:
   - "We performed an hybrid assembly of a bacterial genome and its annotation"
   - "Unicycler is a pipeline bases on Spades and Pilon dedicated to hybrid assembly of Small genomes"
   - "Combination of short and long reads helped us produce an almost perfect assembly"
-contributors:
-  - nekrut
-  - delphine-l
-  - slugger70
+contributions:
+  authorship:
+    - nekrut
+    - delphine-l
+    - slugger70
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 ---
 
 # The goal: *E. coli* C-1 assembly

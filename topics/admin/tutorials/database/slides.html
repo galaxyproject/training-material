@@ -103,15 +103,16 @@ On first startup with an empty database, Galaxy creates its schema
 ---
 # Migrations
 
-Changes in the Galaxy DB model (when upgrading Galaxy) are captured incrementally in the form of [atomic scripts](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/model/migrate/versions).
-
+Changes in the Galaxy DB model (when upgrading Galaxy) are captured incrementally in the form of [atomic scripts](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/model/migrations/alembic/versions_gxy) that use [Alembic](https://alembic.sqlalchemy.org/).
+        
 Each script can both upgrade and downgrade a DB.
 
 ```console
-$ ./manage_db.sh upgrade
-$ ./manage_db.sh downgrade --version=132
+$ ./manage_db.sh upgrade release_25.0
+$ ./manage_db.sh downgrade release_24.1
 ```
-
+Please see the [Galaxy documentation](https://docs.galaxyproject.org/en/master/admin/db_migration.html) for more details.
+        
 ???
 
 - Whenever Galaxy is upgraded, there may be changes to the database schema.

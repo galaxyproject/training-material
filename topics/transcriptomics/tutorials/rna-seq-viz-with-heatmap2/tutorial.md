@@ -10,8 +10,22 @@ objectives:
 time_estimation: "1h"
 key_points:
   - "Heatmaps can be used to visualize the expression of genes in RNA-Seq samples"
-contributors:
-  - mblue9
+
+contributions:
+  authorship:
+    - mblue9
+  editing:
+    - lldelisle
+
+input_histories:
+  - label: "Usegalaxy.eu"
+    history: https://usegalaxy.eu/u/delislel/h/inputs-gtn-heatmap2-20251120
+    date: 2025-11-20
+
+answer_histories:
+  - label: "UseGalaxy.eu"
+    history: https://usegalaxy.eu/u/delislel/h/results-gtn-heatmap2-20251120
+    date: 2025-11-20
 ---
 
 
@@ -93,11 +107,11 @@ First we'll demonstrate how to create a heatmap of the top differentially expres
 
 > <hands-on-title>Extract the significant genes</hands-on-title>
 >
-> 1. **Filter data on any column using simple expressions** {% icon tool %} with the following parameters to extract genes with adj P < 0.01:
+> 1. {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters to extract genes with adj P < 0.01:
 >    - {% icon param-file %} *"Filter"*: `DE results`
 >    - {% icon param-text %} *"With following condition"*: `c8<0.01`
 >    - {% icon param-text %} *"Number of header lines to skip"*: `1`
-> 2. **Filter data on any column using simple expressions** {% icon tool %} with the following parameters to extract genes with absolute fold change > 1.5 (log2fc of 0.58):
+> 2. {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters to extract genes with absolute fold change > 1.5 (log2fc of 0.58):
 >    - {% icon param-file %} *"Filter"*: output of Filter {% icon tool %}
 >    - {% icon param-text %} *"With following condition"*: `abs(c4)>0.58`
 >    - {% icon param-text %} *"Number of header lines to skip"*: `1`
@@ -110,16 +124,16 @@ This gives us a file with all the significant genes, the genes that pass our thr
 
 > <hands-on-title>Extract the top significant genes by P value</hands-on-title>
 >
-> 1. **Sort data in ascending or descending order** {% icon tool %} with the following parameters to sort by P value:
->    - {% icon param-file %} *"Sort Query"*: output of 2nd Filter {% icon tool %}
+> 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} data in ascending or descending order, with the following settings to sort by P value:
+>    - {% icon param-file %} *"Sort Query"*: `Significant genes` (output of 2nd Filter {% icon tool %})
 >    - {% icon param-text %} *"Number of header lines to skip"*: `1`
->    - {% icon param-select %} *"on Column"*: `7`
+>    - {% icon param-select %} *"on Column"*: `Column: 7`
 >    - {% icon param-select %} *"in"*: `Ascending order`
 >    - {% icon param-select %} *"Flavor"*: `General numeric sort ( scientific notation -g)`
-> 2. **Select first lines from a dataset** {% icon tool %} with the following parameters to select top genes:
+> 2. {% tool [Select first](Show beginning1) %}  lines from a dataset with the following parameters to select top genes:
 >    - {% icon param-text %} *"Select first"*: `21` (20 genes plus header row)
 >    - {% icon param-file %} *"from"*: output of Sort {% icon tool %}
->    - Rename file as `top 20 by Pvalue`
+> 3. Rename file as `top 20 by Pvalue`
 {: .hands_on}
 
 ## Extract the normalized counts for top genes
@@ -131,7 +145,7 @@ First click on the {% icon galaxy-eye %} (eye) icon and take a look at the `norm
 ![Normalized counts](../../images/rna-seq-viz-with-heatmap2/normalized_counts.png "Normalized counts")
 
 > <hands-on-title>Extract the normalized counts for the top genes</hands-on-title>
-> 1. **Join two Datasets side by side on a specified field** {% icon tool %} with the following parameters to join on the ENTREZID column:
+> 1. {% tool [Join two Datasets side by side on a specified field](join1) %} with the following parameters to join on the ENTREZID column:
 >    - {% icon param-file %} *"Join"*: the `top 20 by Pvalue` file
 >    - {% icon param-select %} *"using column"*: `Column: 1`
 >    - {% icon param-file %} *"with"*: `normalized counts` file
@@ -140,7 +154,7 @@ First click on the {% icon galaxy-eye %} (eye) icon and take a look at the `norm
 >
 >    The generated file has more columns than we need for the heatmap. In addition to the columns with normalized counts (in log2), there is the $$log_{2} FC$$ and other information. We need to remove the extra columns.
 >
-> 2. **Cut columns from a table** {% icon tool %} to extract the columns with the gene symbols and normalized counts
+> 2. {% tool [Cut](Cut1) %} columns from a table to extract the columns with the gene symbols and normalized counts
 >    - {% icon param-text %} *"Cut columns"*: `c2,c12-c23`
 >    - {% icon param-select %} *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets** {% icon tool %})
@@ -156,13 +170,13 @@ Now that we have our file with just the normalized counts for the genes we want,
 
 > <hands-on-title>Plot the heatmap of top genes</hands-on-title>
 >
-> 1. **heatmap2** {% icon tool %} with the following parameters:
+> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.2.0+galaxy1) %} to plot the heatmap:
 >    - {% icon param-file %} *"Input should have column headers"*: output of **Cut** {% icon tool %}
 >    - {% icon param-select %} *"Data transformation"*: `Plot the data as it is`
->    - {% icon param-check %} *"Enable data clustering"*: `No`
+>    - {% icon param-select %} *"Compute z-scores prior to clustering"*: `Compute on rows` (scale genes)
+>    - {% icon param-select %} *"Enable data clustering"*: `No`
 >    - {% icon param-select %} *"Labeling columns and rows"*: `Label my columns and rows`
->    - {% icon param-select %} *"Coloring groups"*: `Blue to white to red`
->    - {% icon param-select %} *"Data scaling"*: `Scale my data by row` (scale genes)
+>    - {% icon param-select %} *"Type of colormap to use"*: `Gradient with 3 colors`
 {: .hands_on}
 
 You should see a heatmap like below. Note that here we are plotting the top genes differentially expressed in the luminal cells from the pregnant mice (`MCL1.LC` and `MCL1.LD`) versus the luminal cells from the lactating mice (`MCL1.LE` and `MCL1.LF`). This heatmap enables us to see the expression of these genes in all the samples from the different groups in the experiment (basal virgin, basal pregnant, basal lactating, luminal virgin, luminal pregnant, luminal lactating).
@@ -172,7 +186,7 @@ You should see a heatmap like below. Note that here we are plotting the top gene
 
 > <question-title></question-title>
 > 1. Why do we not use clustering here?
-> 2. Why do we scale the rows (genes)? Try rerunning heatmap2 changing the *"Data scaling"* parameter to `Do not scale my data`.
+> 2. Why do we compute z-scores on rows (genes)? Try rerunning heatmap2 changing the *"Compute z-scores prior to clustering"* parameter to `Do not compute z-scores`.
 > 3. The genes are ordered by P value. Can you make the heatmap with the genes ordered by fold change? Hint: Sort by the logFC column in ascending order to have the genes downregulated in the luminal pregnant vs lactating (negative fold change) at the top and the upregulated genes (positive fold change) at the bottom.
 > 4. How could we make a heatmap of the top 10 most upregulated and top 10 most downregulated significant genes?
 >
@@ -181,9 +195,9 @@ You should see a heatmap like below. Note that here we are plotting the top gene
 >    > 2. We scale the genes as otherwise large expression values from highly expressed genes would dominate the plot, see below.
 >    >     ![Heatmap with no scaling](../../images/rna-seq-viz-with-heatmap2/heatmap2_top20_noscale.png "Heatmap without scaling genes")
 >    >
->    > 3. To make the heatmap with these genes ordered by logFC, we could **Sort** the output of the **Join** step on the logFC column, then **Cut** the columns as before and remake the heatmap. It should look like below.
+>    > 3. To make the heatmap with these genes ordered by logFC, we could {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} the output of the **Join** {% icon tool %} step on the logFC column (Column 4), then {% tool [Cut](Cut1) %} the columns as before and remake the heatmap. It should look like below.
 >    >     ![Heatmap sorted by logFC](../../images/rna-seq-viz-with-heatmap2/heatmap2_top20_sorted_by_lfc.png "Heatmap sorted by logFC")
->    > 4. To make a heatmap of the most upregulated and downregulated significant genes, we could **Sort** on the logFC column (instead of P value above), then use the **Select first** and **Select last** tools to select the genes with the largest and smallest fold changes (10 genes for each) and the **Concatenate** tool to combine the outputs of the first and last Selects into one file. We would then repeat the **Join** and **Cut** steps as before to get the normalized counts and make the heatmap as below (Note that one gene name in the middle is missing as it is a gene that has NA for gene symbol)
+>    > 4. To make a heatmap of the most upregulated and downregulated significant genes, we could {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} the `Significant genes` on the logFC column (instead of P value above), then use the {% tool [Select first](Show beginning1) %} and {% tool [Select last](Show tail1) %} tools to select the genes with the largest and smallest fold changes (10 genes for each) and {% tool [Concatenate datasets](cat1) %} to combine the outputs of the first and last Selects into one file. We would then repeat the {% tool [Join two Datasets side by side on a specified field](join1) %} and {% tool [Cut](Cut1) %} steps as before to get the normalized counts and make the heatmap as below (Note that one gene name in the middle is missing as it is a gene that has NA for gene symbol)
 >    >     ![Heatmap for top logFC](../../images/rna-seq-viz-with-heatmap2/heatmap2_top_up_and_down.png "Heatmap of top 10 up and down")
 >    {: .solution}
 {: .question}
@@ -191,13 +205,13 @@ You should see a heatmap like below. Note that here we are plotting the top gene
 
 # Create heatmap of custom genes
 
-You can also create a heatmap for a custom set of genes. To demonstrate this, we will create a heatmap for the 31 genes in Figure 6b from the original paper using this dataset (see below). These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors identified as differentially expressed. We will recreate this heatmap here. To see how to visualize these genes in a volcano plot see the tutorial [here]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}).
+You can also create a heatmap for a custom set of genes. To demonstrate this, we will create a heatmap for the 31 genes in Figure 6b from the original paper using this dataset (see below). These 31 genes include the authors' main gene of interest in the paper, Mcl1, and a set of cytokines/growth factors identified as differentially expressed. We will recreate this heatmap here. To see how to visualize these genes in a volcano plot see [this tutorial]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}).
 
-![Fu heatmap](../../images/rna-seq-viz-with-heatmap2/fu_heatmap.png "Fu et al, Nat Cell Biol 2015"){: width="50%"}
+![Fu heatmap](../../images/rna-seq-viz-with-heatmap2/fu_heatmap.png "Fu et al, Nat Cell Biol 2015")
 
 These 31 genes are in the file we imported called `heatmap genes`, shown below.
 
-![Heatmap genes](../../images/rna-seq-viz-with-heatmap2/heatmap_genes.png "Heatmap genes"){: height="30%"}
+![Heatmap genes](../../images/rna-seq-viz-with-heatmap2/heatmap_genes.png "Heatmap genes")
 
 As in the previous example, we need to extract the normalized counts for just these 31 genes. To do that we will join the `heatmap genes` file with the `normalized counts` file, on the Gene Symbol columns this time (instead of ENTREZID), and then extract the columns we need.
 
@@ -205,20 +219,20 @@ As in the previous example, we need to extract the normalized counts for just th
 
 > <hands-on-title>Extract the normalized counts for the genes of interest</hands-on-title>
 >
-> 1. **Join two Datasets side by side on a specified field** {% icon tool %} with the following parameters:
+> 1. {% tool [Join two Datasets side by side on a specified field](join1) %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: the `heatmap genes` file
 >    - {% icon param-select %} *"using column"*: `Column: 1`
 >    - {% icon param-file %} *"with"*: `normalized counts` file
 >    - {% icon param-select %} *"and column"*: `Column: 2`
 >    - {% icon param-select %} *"Keep the header lines"*: `Yes`
-> 2. **Cut columns from a table** {% icon tool %} to extract the columns with the gene ids and normalized counts
+> 2. {% tool [Cut](Cut1) %} columns from a table to extract the columns with the gene ids and normalized counts:
 >    - {% icon param-text %} *"Cut columns"*: `c1,c5-c16`
 >    - {% icon param-select %} *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets** {% icon tool %})
 >
 >    The genes are in rows and the samples in columns, we could leave the genes in rows but we will transpose to have genes in columns and samples in rows as in the Figure in the paper.
 >
-> 3. **Transpose** {% icon tool %} to have samples in rows and genes in columns
+> 3. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} to have samples in rows and genes in columns:
 >    - *"Input tabular dataset"*:
 >        - {% icon param-file %} *"From"*: the `Cut` dataset (output of **Cut** {% icon tool %})
 {: .hands_on}
@@ -231,13 +245,13 @@ We now have a table with the 31 genes in columns and the normalized counts for t
 
 > <hands-on-title>Plot the heatmap of custom genes</hands-on-title>
 >
-> 1. **heatmap2** {% icon tool %} with the following parameters:
+> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.2.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input should have column headers"*: the generated table (output of **Transpose** {% icon tool %})
 >    - {% icon param-select %} *"Data transformation"*: `Plot the data as it is`
->    - {% icon param-check %} *"Enable data clustering"*: `No`
+>    - {% icon param-select %} *"Compute z-scores prior to clustering"*: `Compute on columns` (scale genes)
+>    - {% icon param-select %} *"Enable data clustering"*: `No`
 >    - {% icon param-select %} *"Labeling columns and rows"*: `Label my columns and rows`
->    - {% icon param-select %} *"Coloring groups"*: `Blue to white to red`
->    - {% icon param-select %} *"Data scaling"*: `Scale my data by column` (scale genes)
+>    - {% icon param-select %} *"Type of colormap to use"*: `Gradient with 3 colors`
 {: .hands_on}
 
 You should see a heatmap like below.

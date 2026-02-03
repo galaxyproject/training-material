@@ -61,7 +61,7 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    --- a/hosts
 >    +++ b/hosts
 >    @@ -9,3 +9,12 @@ gat-0.eu.galaxy.training ansible_connection=local ansible_user=ubuntu
->     
+>
 >     [sentryservers]
 >     gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
 >    +
@@ -92,7 +92,7 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -60,3 +60,8 @@
+>    @@ -59,3 +59,8 @@
 >     # Our FTP Server
 >     - src: galaxyproject.proftpd
 >       version: 0.3.1
@@ -331,9 +331,9 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
 >    @@ -117,4 +117,14 @@ server {
->     
+>
 >     	{{ tiaas_nginx_routes }}
->     
+>
 >    +	location /beacon {
 >    +		proxy_pass http://{{ groups['beacon_server'][0] }}:5050;
 >    +		proxy_http_version 1.1;

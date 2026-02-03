@@ -14,12 +14,13 @@ module Jekyll
         '@type': 'Organization',
         'http://purl.org/dc/terms/conformsTo': {
           # Bioschemas profile
-          '@id': 'https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19',
-          '@type': 'Organization'
+          '@id': 'https://bioschemas.org/profiles/Organization/0.3-DRAFT',
+          '@type': 'CreativeWork'
         },
         id: 'https://training.galaxyproject.org',
         email: 'galaxytrainingnetwork@gmail.com',
         name: 'Galaxy Training Network',
+        description: 'An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community',
         legalName: 'Galaxy Training Network',
         alternateName: 'GTN',
         url: 'https://training.galaxyproject.org',
@@ -137,6 +138,7 @@ module Jekyll
         }
         if !contributor.nil? && contributor.key?('orcid') && contributor['orcid']
           person['identifier'] = "https://orcid.org/#{contributor['orcid']}"
+          person['@id'] = "https://orcid.org/#{contributor['orcid']}"
         end
 
         person

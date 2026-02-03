@@ -415,16 +415,15 @@ Since TabPFN does not support data integration, we should try gene expression an
 
 First, let's filter the cna data by variance.
 
+Here we will:
+* Calculate the variance of each gene in train matrix
+* Add the variance back to the matrix
+* Sort the matrix by variance in descending order
+* Filter the matrix by top 500 genes
+* Sort the matrix by gene name
+
+
 > <hands-on-title> Prepare CNA data </hands-on-title>
->
-> > <comment-title> Short explanation of steps: </comment-title>
-> > Here we will:
-> > * Calculate the variance of each gene in train matrix
-> > * Add the variance back to the matrix
-> > * Sort the matrix by variance in descending order
-> > * Filter the matrix by top 500 genes
-> > * Sort the matrix by gene name
->    {: .comment}
 >
 > 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy2) %} with the following parameters:
 >    - *"Input Single or Multiple Tables"*: `Single Table`
@@ -472,29 +471,29 @@ First, let's filter the cna data by variance.
 >
 > 7. Rename the output file to `train_cna_brca_500gene.tabular`
 >
-> > <comment-title> Short explanation of steps: </comment-title>
-> > Here we will:
-> > * Extract the list of genes from the train matrix
-> > * Filter the test data by extracted genes
-> > * Sort the matrix by gene name
-> > * Transpose both train and test data
+>    > <comment-title> Short explanation of steps: </comment-title>
+>    > Here we will:
+>    > * Extract the list of genes from the train matrix
+>    > * Filter the test data by extracted genes
+>    > * Sort the matrix by gene name
+>    > * Transpose both train and test data
 >    {: .comment}
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+> 8. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `train_cna_brca_500gene.tabular` (output of **Advanced Cut** {% icon tool %})
 >    - *"Operation"*: `Keep`
 >    - *"Cut by"*: `fields`
 >        - *"Is there a header for the data's columns ?"*: `Yes`
 >            - *"List of Fields"*: `Column: 1`
 >
-> 2. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
+> 9. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"1st file"*: `table` (output of **Advanced Cut** {% icon tool %})
 >    - *"Column to use from 1st file"*: `Column: 1`
 >    - {% icon param-file %} *"2nd File"*: `test_cna_brca.tabular`
 >    - *"Column to use from 2nd file"*: `Column: 1`
 >    - *"First line is a header line"*: `Yes`
 >
-> 3. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} with the following parameters:
+> 10. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Sort Query"*: `output` (output of **Join** {% icon tool %})
 >    - *"Number of header lines"*: `1`
 >    - In *"Column selections"*:
@@ -502,94 +501,93 @@ First, let's filter the cna data by variance.
 >            - *"on column"*: `Column: 1`
 >            - *"Flavor"*: `Alphabetical sort `
 >
-> 4. Rename the output file to `test_cna_brca_500gene.tabular`
+> 11. Rename the output file to `test_cna_brca_500gene.tabular`
 >
-> 5. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
+> 12. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: `train_cna_brca_500gene.tabular` (output of **Sort** {% icon tool %})
 >
-> 4. Rename the output file to `train_cna_brca_500gene_transposed.tabular`
+> 13. Rename the output file to `train_cna_brca_500gene_transposed.tabular`
 >
-> 6. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
+> 14. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: `test_cna_brca_500gene.tabular` (output of **Sort** {% icon tool %})
 >
-> 4. Rename the output file to `test_cna_brca_500gene_transposed.tabular`
+> 15. Rename the output file to `test_cna_brca_500gene_transposed.tabular`
 >
-> > <comment-title> Short explanation of steps: </comment-title>
-> > Here we will:
-> > * Extract `sample_id` and `CLAUDIN_SUBTYPE` from the train and clinical data
-> > * Add the subtype to the train and test matrix
-> > * And finally remove the `sample_id` from the matrices.
->    {: .comment}
+>     > <comment-title> Short explanation of steps: </comment-title>
+>     > Here we will:
+>     > * Extract `sample_id` and `CLAUDIN_SUBTYPE` from the train and clinical data
+>     > * Add the subtype to the train and test matrix
+>     > * And finally remove the `sample_id` from the matrices.
+>     {: .comment}
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+> 16. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `train_clin_brca.tabular` (Input dataset)
 >    - *"Operation"*: `Keep`
 >    - *"Cut by"*: `fields`
 >        - *"Is there a header for the data's columns ?"*: `Yes`
 >            - *"List of Fields"*: `Column: 1`, `Column: 16`
 >
-> 2. Rename the output to `Train annotation`
+> 17. Rename the output to `Train annotation`
 >
-> 3. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+> 18. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `test_clin_brca.tabular` (Input dataset)
 >    - *"Operation"*: `Keep`
 >    - *"Cut by"*: `fields`
 >        - *"Is there a header for the data's columns ?"*: `Yes`
 >            - *"List of Fields"*: `Column: 1`, `Column: 16`
 >
-> 2. Rename the output to `Test annotation`
+> 19. Rename the output to `Test annotation`
 >
-> 3. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"1st file"*: `train_cna_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
->    - *"Column to use from 1st file"*: `Column: 1`
->    - {% icon param-file %} *"2nd File"*: `Train annotation` (output of **Advanced Cut** {% icon tool %})
->    - *"Column to use from 2nd file"*: `Column: 1`
->    - *"First line is a header line"*: `Yes`
+> 20. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"1st file"*: `train_cna_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
+>     - *"Column to use from 1st file"*: `Column: 1`
+>     - {% icon param-file %} *"2nd File"*: `Train annotation` (output of **Advanced Cut** {% icon tool %})
+>     - *"Column to use from 2nd file"*: `Column: 1`
+>     - *"First line is a header line"*: `Yes`
 >
-> 2. Rename the output to `Annotated train matrix cna`
+> 21. Rename the output to `Annotated train matrix cna`
 >
-> 3. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"1st file"*: `test_cna_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
->    - *"Column to use from 1st file"*: `Column: 1`
->    - {% icon param-file %} *"2nd File"*: `Test annotation` (output of **Advanced Cut** {% icon tool %})
->    - *"Column to use from 2nd file"*: `Column: 1`
->    - *"First line is a header line"*: `Yes`
+> 22. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"1st file"*: `test_cna_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
+>     - *"Column to use from 1st file"*: `Column: 1`
+>     - {% icon param-file %} *"2nd File"*: `Test annotation` (output of **Advanced Cut** {% icon tool %})
+>     - *"Column to use from 2nd file"*: `Column: 1`
+>     - *"First line is a header line"*: `Yes`
 >
-> 2. Rename the output to `Annotated test matrix`
+> 23. Rename the output to `Annotated test matrix`
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `Annotated train matrix` (output of **Join** {% icon tool %})
->    - *"Operation"*: `Discard`
->    - *"Cut by"*: `fields`
->        - *"Is there a header for the data's columns ?"*: `Yes`
->            - *"List of Fields"*: `Column: 1`
+> 24. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"File to cut"*: `Annotated train matrix` (output of **Join** {% icon tool %})
+>     - *"Operation"*: `Discard`
+>     - *"Cut by"*: `fields`
+>       - *"Is there a header for the data's columns ?"*: `Yes`
+>         - *"List of Fields"*: `Column: 1`
 >
-> 2. Rename the output to `TabPFN ready train data - CNA`
+> 25. Rename the output to `TabPFN ready train data - CNA`
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `Annotated test matrix` (output of **Join** {% icon tool %})
->    - *"Operation"*: `Discard`
->    - *"Cut by"*: `fields`
->        - *"Is there a header for the data's columns ?"*: `Yes`
->            - *"List of Fields"*: `Column: 1`
+> 26. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"File to cut"*: `Annotated test matrix` (output of **Join** {% icon tool %})
+>     - *"Operation"*: `Discard`
+>     - *"Cut by"*: `fields`
+>       - *"Is there a header for the data's columns ?"*: `Yes`
+>         - *"List of Fields"*: `Column: 1`
 >
-> 2. Rename the output to `TabPFN ready test data - CNA`
+> 27. Rename the output to `TabPFN ready test data - CNA`
 {: .hands_on}
 
 Now the CNA data is ready for TabPFN. Let's do the same for GEX!
 
 ## GEX data
 
+Here we will:
+* Calculate the variance of each gene in train matrix
+* Add the variance back to the matrix
+* Sort the matrix by variance in descending order
+* Filter the matrix by top 500 genes
+* Sort the matrix by gene name
+
+
 > <hands-on-title> Prepare GEX data </hands-on-title>
->
-> > <comment-title> Short explanation of steps: </comment-title>
-> > Here we will:
-> > * Calculate the variance of each gene in train matrix
-> > * Add the variance back to the matrix
-> > * Sort the matrix by variance in descending order
-> > * Filter the matrix by top 500 genes
-> > * Sort the matrix by gene name
->    {: .comment}
 >
 > 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy2) %} with the following parameters:
 >    - *"Input Single or Multiple Tables"*: `Single Table`
@@ -637,108 +635,108 @@ Now the CNA data is ready for TabPFN. Let's do the same for GEX!
 >
 > 7. Rename the output file to `train_gex_brca_500gene.tabular`
 >
-> > <comment-title> Short explanation of steps: </comment-title>
-> > Here we will:
-> > * Extract the list of genes from the train matrix
-> > * Filter the test data by extracted genes
-> > * Sort the matrix by gene name
-> > * Transpose both train and test data
+>    > <comment-title> Short explanation of steps: </comment-title>
+>    > Here we will:
+>    > * Extract the list of genes from the train matrix
+>    > * Filter the test data by extracted genes
+>    > * Sort the matrix by gene name
+>    > * Transpose both train and test data
 >    {: .comment}
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+> 8. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `train_gex_brca_500gene.tabular` (output of **Advanced Cut** {% icon tool %})
 >    - *"Operation"*: `Keep`
 >    - *"Cut by"*: `fields`
 >        - *"Is there a header for the data's columns ?"*: `Yes`
 >            - *"List of Fields"*: `Column: 1`
 >
-> 2. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
+> 9. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"1st file"*: `table` (output of **Advanced Cut** {% icon tool %})
 >    - *"Column to use from 1st file"*: `Column: 1`
 >    - {% icon param-file %} *"2nd File"*: `test_gex_brca.tabular`
 >    - *"Column to use from 2nd file"*: `Column: 1`
 >    - *"First line is a header line"*: `Yes`
 >
-> 3. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Sort Query"*: `output` (output of **Join** {% icon tool %})
->    - *"Number of header lines"*: `1`
->    - In *"Column selections"*:
->        - {% icon param-repeat %} *"Insert Column selections"*
->            - *"on column"*: `Column: 1`
->            - *"Flavor"*: `Alphabetical sort `
+> 10. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"Sort Query"*: `output` (output of **Join** {% icon tool %})
+>     - *"Number of header lines"*: `1`
+>     - In *"Column selections"*:
+>       - {% icon param-repeat %} *"Insert Column selections"*
+>         - *"on column"*: `Column: 1`
+>           - *"Flavor"*: `Alphabetical sort `
 >
-> 4. Rename the output file to `test_gex_brca_500gene.tabular`
+> 11. Rename the output file to `test_gex_brca_500gene.tabular`
 >
-> 5. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input tabular dataset"*: `train_gex_brca_500gene.tabular` (output of **Sort** {% icon tool %})
+> 12. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
+>     - {% icon param-file %} *"Input tabular dataset"*: `train_gex_brca_500gene.tabular` (output of **Sort** {% icon tool %})
 >
-> 4. Rename the output file to `train_gex_brca_500gene_transposed.tabular`
+> 13. Rename the output file to `train_gex_brca_500gene_transposed.tabular`
 >
-> 6. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
+> 14. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: `test_gex_brca_500gene.tabular` (output of **Sort** {% icon tool %})
 >
-> 4. Rename the output file to `test_gex_brca_500gene_transposed.tabular`
+> 15. Rename the output file to `test_gex_brca_500gene_transposed.tabular`
 >
-> > <comment-title> Short explanation of steps: </comment-title>
-> > Here we will:
-> > * Extract `sample_id` and `CLAUDIN_SUBTYPE` from the train and clinical data
-> > * Add the subtype to the train and test matrix
-> > * And finally remove the `sample_id` from the matrices.
->    {: .comment}
+>     > <comment-title> Short explanation of steps: </comment-title>
+>     > Here we will:
+>     > * Extract `sample_id` and `CLAUDIN_SUBTYPE` from the train and clinical data
+>     > * Add the subtype to the train and test matrix
+>     > * And finally remove the `sample_id` from the matrices.
+>     {: .comment}
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `train_clin_brca.tabular` (Input dataset)
->    - *"Operation"*: `Keep`
->    - *"Cut by"*: `fields`
->        - *"Is there a header for the data's columns ?"*: `Yes`
->            - *"List of Fields"*: `Column: 1`, `Column: 16`
+> 16. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"File to cut"*: `train_clin_brca.tabular` (Input dataset)
+>     - *"Operation"*: `Keep`
+>     - *"Cut by"*: `fields`
+>       - *"Is there a header for the data's columns ?"*: `Yes`
+>         - *"List of Fields"*: `Column: 1`, `Column: 16`
 >
-> 2. Rename the output to `Train annotation`
+> 17. Rename the output to `Train annotation`
 >
-> 3. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `test_clin_brca.tabular` (Input dataset)
->    - *"Operation"*: `Keep`
->    - *"Cut by"*: `fields`
->        - *"Is there a header for the data's columns ?"*: `Yes`
->            - *"List of Fields"*: `Column: 1`, `Column: 16`
+> 18. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"File to cut"*: `test_clin_brca.tabular` (Input dataset)
+>     - *"Operation"*: `Keep`
+>     - *"Cut by"*: `fields`
+>       - *"Is there a header for the data's columns ?"*: `Yes`
+>         - *"List of Fields"*: `Column: 1`, `Column: 16`
 >
-> 2. Rename the output to `Test annotation`
+> 19. Rename the output to `Test annotation`
 >
-> 3. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"1st file"*: `train_gex_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
->    - *"Column to use from 1st file"*: `Column: 1`
->    - {% icon param-file %} *"2nd File"*: `Train annotation` (output of **Advanced Cut** {% icon tool %})
->    - *"Column to use from 2nd file"*: `Column: 1`
->    - *"First line is a header line"*: `Yes`
+> 20. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"1st file"*: `train_gex_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
+>     - *"Column to use from 1st file"*: `Column: 1`
+>     - {% icon param-file %} *"2nd File"*: `Train annotation` (output of **Advanced Cut** {% icon tool %})
+>     - *"Column to use from 2nd file"*: `Column: 1`
+>     - *"First line is a header line"*: `Yes`
 >
-> 2. Rename the output to `Annotated train matrix - gex`
+> 21. Rename the output to `Annotated train matrix - gex`
 >
-> 3. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"1st file"*: `test_gex_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
->    - *"Column to use from 1st file"*: `Column: 1`
->    - {% icon param-file %} *"2nd File"*: `Test annotation` (output of **Advanced Cut** {% icon tool %})
->    - *"Column to use from 2nd file"*: `Column: 1`
->    - *"First line is a header line"*: `Yes`
+> 22. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"1st file"*: `test_gex_brca_500gene_transposed.tabular` (output of **Transpose** {% icon tool %})
+>     - *"Column to use from 1st file"*: `Column: 1`
+>     - {% icon param-file %} *"2nd File"*: `Test annotation` (output of **Advanced Cut** {% icon tool %})
+>     - *"Column to use from 2nd file"*: `Column: 1`
+>     - *"First line is a header line"*: `Yes`
 >
-> 2. Rename the output to `Annotated test matrix - gex`
+> 23. Rename the output to `Annotated test matrix - gex`
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+> 24. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `Annotated train matrix` (output of **Join** {% icon tool %})
 >    - *"Operation"*: `Discard`
 >    - *"Cut by"*: `fields`
->        - *"Is there a header for the data's columns ?"*: `Yes`
->            - *"List of Fields"*: `Column: 1`
+>      - *"Is there a header for the data's columns ?"*: `Yes`
+>        - *"List of Fields"*: `Column: 1`
 >
-> 2. Rename the output to `TabPFN ready train data - GEX`
+> 25. Rename the output to `TabPFN ready train data - GEX`
 >
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `Annotated test matrix` (output of **Join** {% icon tool %})
->    - *"Operation"*: `Discard`
->    - *"Cut by"*: `fields`
->        - *"Is there a header for the data's columns ?"*: `Yes`
->            - *"List of Fields"*: `Column: 1`
+> 26. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2) %} with the following parameters:
+>     - {% icon param-file %} *"File to cut"*: `Annotated test matrix` (output of **Join** {% icon tool %})
+>     - *"Operation"*: `Discard`
+>     - *"Cut by"*: `fields`
+>       - *"Is there a header for the data's columns ?"*: `Yes`
+>         - *"List of Fields"*: `Column: 1`
 >
-> 2. Rename the output to `TabPFN ready test data - GEX`
+> 27. Rename the output to `TabPFN ready test data - GEX`
 {: .hands_on}
 
 Now it is time to run TabPFN for CNA and GEX data.

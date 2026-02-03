@@ -40,10 +40,14 @@ contributions:
   - bazante1
   - shiltemann
   - miaomiaozhou88
+  - tflowers15
   funding:
   - avans-atgm
   - abromics
   - elixir-europe
+  - unimelb
+  - melbournebioinformatics
+  - AustralianBioCommons
 follow_up_training:
 - type: internal
   topic_name: visualisation
@@ -443,11 +447,14 @@ To get information about the coverage of the contigs and genes, we map the reads
 >    {{ page.zenodo_link }}/files/DRR187559_after_fastp_1.fastq.gz
 >    {{ page.zenodo_link }}/files/DRR187559_after_fastp_2.fastq.gz
 >    ```
+>    
+> 2. Create a paired collection named `Paired Reads`
 >
-> 2. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0) %} with the following parameters:
+>    {% snippet faqs/galaxy/collections_build_list_paired.md %}
+>
+> 3. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.4+galaxy0) %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end`
->        - {% icon param-file %} *"FASTA/Q file #1"*: `DRR187559_after_fastp_1.fastq.gz`
->        - {% icon param-file %} *"FASTA/Q file #2"*: `DRR187559_after_fastp_2.fastq.gz`
+>        - {% icon param-collection %} *"FASTQ Paired Dataset"*: `Paired Reads`
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from the history and build index`
 >        - {% icon param-file %} *"Select reference genome"*: Contig file
 >    - *"Save the bowtie2 mapping statistics to the history"*: `Yes`

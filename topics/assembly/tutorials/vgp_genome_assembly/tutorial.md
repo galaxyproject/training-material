@@ -18,16 +18,21 @@ time_estimation: '5h'
 key_points:
 - "The VGP pipeline allows users to generate error-free, near gapless reference-quality genome assemblies"
 - "The assembly can be divided into four main stages: genome profile analysis, HiFi long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C scaffolding"
-contributors:
-- delphine-l
-- astrovsky01
-- gallardoalba
-- annasyme
-- abueg
-- pickettbd
-- gf777
-- msozzoni
-- nekrut
+contributions:
+  authorship:
+    - delphine-l
+    - astrovsky01
+    - gallardoalba
+    - annasyme
+    - abueg
+    - pickettbd
+    - gf777
+    - msozzoni
+    - nekrut
+  funding:
+    - unimelb
+    - melbournebioinformatics
+    - AustralianBioCommons
 abbreviations:
   BUSCO: Benchmarking Universal Single-Copy Orthologs
   NGS: next generation sequencing

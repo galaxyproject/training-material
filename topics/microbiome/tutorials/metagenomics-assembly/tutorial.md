@@ -11,21 +11,18 @@ questions:
   - "How tools based on De Bruijn graph work?"
   - "How to assess the quality of metagenomic data assembly?"
 objectives:
-  - "Describe what an assembly is"
-  - "Describe what de-replication is"
-  - "Explain the difference between co-assembly and individual assembly"
-  - "Explain the difference between reads, contigs and scaffolds"
-  - "Explain how tools based on De Bruijn graph work"
-  - "Apply appropriate tools for analyzing the quality of metagenomic data"
-  - "Construct and apply simple assembly pipelines on short read data"
-  - "Apply appropriate tools for analyzing the quality of metagenomic assembly"
-  - "Evaluate the Quality of the Assembly with Quast, Bowtie2, and CoverM-Contig"
+  - "Describe what an assembly is."
+  - "Explain the difference between co-assembly and individual assembly."
+  - "Explain the difference between reads, contigs and scaffolds."
+  - "Explain how tools based on de Bruijn graph work."
+  - "Evaluate the quality of the Assembly with QUAST, Bowtie2, and CoverM-Contig."
+  - "Construct and apply simple assembly pipelines on short read data."
 time_estimation: "2H"
 key_points:
-  - "Assembly groups reads into contigs and scafolds."
-  - "De Brujin Graphs use k-mers to assembly reads"
-  - "MetaSPAdes and MEGAHIT are assemblers"
-  - "Quast is the tool to assess the assembly quality"
+  - "Assembly groups reads into contigs and scaffolds."
+  - "de Brujin Graphs use k-mers to assembly reads."
+  - "MetaSPAdes and MEGAHIT are short-read assemblers."
+  - "MetaQUAST is a tool to assess metagenomic assembly quality."
 edam_ontology:
   - topic_3174 # Metagenomics
   - topic_0196 # Sequence assembly
@@ -33,6 +30,8 @@ contributions:
   authorship:
     - plushz
     - bebatut
+    - vinisalazar
+    - paulzierep
   funding:
     - gallantries
 subtopic: metagenomics
@@ -55,7 +54,6 @@ recordings:
   - sophia120199
 
 ---
-
 
 Metagenomics involves the extraction, sequencing and analysis of combined genomic DNA from **entire microbiome** samples. It includes then DNA from **many different organisms**, with different taxonomic background.
 
@@ -82,7 +80,7 @@ Assembling seems intuitively similar to putting together a jigsaw puzzle. Essent
 > 2. Overlap Layout Consensus
 > 3. De Bruijn graphs. The following figure illustrates these strategies in brief.
 >
-> ![Image shows greedy extention, overlap layout consensus, and de Brujin graphs assembly algorithms](./images/assembly-algorithms.png "Assembly algorithms. Image from {% cite carpentries %}"){:width="70%"}
+> ![Image shows greedy extention, overlap layout consensus, and de Brujin graphs assembly algorithms.](./images/assembly-algorithms.png "Assembly algorithms. Image from {% cite carpentries %}."){:width="70%"}
 >
 > The nice paper {% cite miller2010 %} on assemblers based on these algorithms will help you to better understand how they work.
 {: .details}
@@ -124,7 +122,7 @@ In case of a not very large dataset it's more convenient to upload data directly
 
 > <hands-on-title>Upload data into Galaxy</hands-on-title>
 >
-> 2. Import the sequence read raw data (\*.fastqsanger.gz) from [Zenodo]({{ page.zenodo_link }}) or a data library:
+> 1. Import the sequence read raw data (\*.fastqsanger.gz) from [Zenodo]({{ page.zenodo_link }}) or a data library:
 >
 >    ```text
 >    {{ page.zenodo_link }}/files/ERR2231567_1.fastqsanger.gz
@@ -149,7 +147,7 @@ In case of a not very large dataset it's more convenient to upload data directly
 >    > In case of large dataset, we can use FTP server or the [Galaxy Rule-based Uploader]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}).
 >    {: .comment}
 >
-> 3. Create a paired collection named `Raw reads`, rename your pairs with the sample name
+> 2. Create a paired collection named `Raw reads`, rename your pairs with the sample name
 >
 >    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
@@ -159,11 +157,11 @@ In case of a not very large dataset it's more convenient to upload data directly
 
 As explained before, there are many challenges to metagenomics assembly, including:
 
-1. differences in coverage between samples, resulting from differences in abundance,
-2. the fact that different species often share conserved regions ({%cite kececioglu2001%}), and
-3. the presence of multiple strains of a single species ({%cite miller2010%}).
+1. Differences in coverage between samples, resulting from differences in abundance;
+2. The fact that different species often share conserved regions ({%cite kececioglu2001%}), and
+3. The presence of multiple strains of a single species ({%cite miller2010%}).
 
-To reduce the differences in coverage between samples, we can use a **co-assembly** approach, where reads from all samples are aligned together.:
+To reduce the differences in coverage between samples, we can use a **co-assembly** approach, where reads from all samples are aligned together:
 
 ![Image show one pile of sample1 reads and another pile of sample2 reads, then, green arrow leads to assembled reads from both piles](./images/co-assembly.png "Co-assembly"){:width="60%"}
 
@@ -185,19 +183,35 @@ In these cases, co-assembly is reasonable if:
 - Longitudinal sampling of the same site
 - Related samples
 
-If it is not the case, **individual assembly** should be prefered. In this case, an extra step of **de-replication** should be used:
+{% snippet faqs/galaxy/fastq_groupmerge.md %}
 
-![Image shows the process of individual assembly on two strains and five samples, after individual assembly of samples two samples are chosen for de-replication process. In parallel, co-assembly on all five samples is performed](./images/individual-assembly.png "Individual assembly followed by de-replication vs co-assembly. Source: dRep documentation"){:width="80%"}
+Examples where co-assembly would be reasonable:
+- Repeated sampling of the **same patient** along a particular amount of time.
+- Multiple samples taken from the **same site** and **similar environmental conditions**, eg. a patch of soil during the same sampling season.
 
-Co-assembly is more commonly used than individual assembly and then de-replication after binning. But in this tutorial, to show all steps, we will run an **individual assembly**.
+Examples where co-assembly would NOT be recommended:
+- Samples from different patients.
+If samples differ as described, **individual assembly** is preferred. In the case of individual assembly, **contigs should be binned** per sample and an extra step of **de-replication** should be used as binning:
+
+If samples differ as described, **individual assembly** is preferred. In the case of individual assembly, **contigs should be binned** per sample and an extra step of **de-replication** should be used after binning:
+
 
 > <comment-title></comment-title>
-> Sometimes it is important to run assembly tools both on individual samples and on all pooled samples, and use both outputs to get the better outputs for the certain dataset.
+> For more information on dereplication, check out the [metagenomic binning tutorial]({% link topics/microbiome/tutorials/metagenomics-binning/tutorial.md %}).
+{: .comment}
+
+In this tutorial, to show all steps, we will run an **individual assembly**.
+
+> <comment-title>Why not both?</comment-title>
+> It is also possible to run both individual assembly and co-assembly, and this approach can recover MAGs effectively. In this case: individual assembly can recover MAGs with a low amount of contamination, while co-assembly also allows for the recovery of low-abundance MAGs, with the downside of potentially more contamination. Although this approach can be effective, it also requires high computational resources and should be considered carefully.
+>
+> {% snippet faqs/galaxy/fastq_groupmerge.md %}
+>
 {: .comment}
 
 As mentioned in the introduction, several tools are available for metagenomic assembly. But 2 are the most used ones:
 
-- **MetaSPAdes** ({%cite nurk2017%}): an short-read assembler designed specifically for large and complex metagenomics datasets
+- **MetaSPAdes** ({%cite nurk2017%}): an short-read assembler designed specifically for large and complex metagenomics datasets.
 
   MetaSPAdes is part of the SPAdes toolkit, which has several assembly pipelines. Since SPAdes handles non-uniform coverage, it is useful for assembling simple communities, but metaSPAdes also handles other problems, allowing it to assemble complex communities' metagenomes.
 
@@ -205,9 +219,14 @@ As mentioned in the introduction, several tools are available for metagenomic as
 
 - **MEGAHIT** ({% cite li2015 %}): a single node assembler for large and complex metagenomics NGS reads, such as soil
 
-  It makes use of succinct de Bruijn graph (SdBG) to achieve low memory assembly.
+  It makes use of the Succinct de Bruijn Graph (SdBG) approach to achieve low memory assembly.
 
-Both tools are available in Galaxy. But currently, only MEGAHIT can be used in individual mode for several samples.
+Both tools are available in Galaxy. But currently, only **MEGAHIT** can be used in individual mode for several samples, as a option in the wrapper.
+**MetaSPAdes** performs co-assembly by default if multiple samples are supplied. However, individually assembly can be enforced:
+
+{% snippet faqs/galaxy/collections_force_mapping_over.md %}
+
+# Assembly with MEGAHIT
 
 > <hands-on-title>Individual assembly of short-reads with MEGAHIT</hands-on-title>
 > 1.  {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy2) %} with parameters:
@@ -227,9 +246,11 @@ Both tools are available in Galaxy. But currently, only MEGAHIT can be used in i
 >
 {: .hands_on}
 
-**MEGAHIT** produced a collection of output assemblies - one per sample - that can be proceeded further in binning step and then de-replication. The output contains **contigs**, contiguous lengths of genomic sequences in which bases are known to a high degree of certainty.
+**MEGAHIT** produced a collection of output assemblies - one per sample - that can be used for the subsequent step of **metagenomic binning**. The output contains **contigs**, contiguous lengths of genomic sequences in which bases are known to a high degree of certainty.
 
-Contrary to **MetaSPAdes**, **MEGAHIT** does not output **scaffolds**, i.e. segments of genome sequence reconstructed fron contigs and gaps. The gaps occur when reads from the two sequenced ends of at least one fragment overlap with other reads from two different contigs (as long as the arrangement is otherwise consistent with the contigs being adjacent). It is possible to estimate the number of bases between contigs based on fragment lengths.
+> <comment-title>Scaffolds</comment-title>
+> Contrary to **MetaSPAdes**, **MEGAHIT** does not output **scaffolds**. **Scaffolds** are segments of genome sequence reconstructed fron contigs and gaps. The gaps occur when reads from the two sequenced ends of at least one fragment overlap with other reads from two different contigs (as long as the arrangement is otherwise consistent with the contigs being adjacent). It is possible to estimate the number of bases between contigs based on fragment lengths.
+{: .comment}
 
 > <comment-title></comment-title>
 >
@@ -249,15 +270,15 @@ Contrary to **MetaSPAdes**, **MEGAHIT** does not output **scaffolds**, i.e. segm
 > >    ```
 > >
 > >
-> > 2. Create a collection named `MEGAHIT Contig`, rename your pairs with the sample name
+> > 2. Create a collection named `MEGAHIT Contigs`, rename your pairs with the sample name
 > >
 > {: .hands_on}
 {: .comment}
 
-> <question-title></question-title>
+> <question-title>Contig metrics</question-title>
 >
-> 1. How many contigs has been for ERR2231568 sample?
-> 2. And for ERR2231572?
+> 1. How many contigs have been assembled for sample ERR2231568 ?
+> 2. And how many have been assembled for ERR2231572?
 > 3. What is the minimum length of the contigs?
 >
 > > <solution-title></solution-title>
@@ -271,15 +292,20 @@ Contrary to **MetaSPAdes**, **MEGAHIT** does not output **scaffolds**, i.e. segm
 {: .question}
 
 > <details-title>Co-assembly with MetaSPAdes</details-title>
+> MetaSPAdes supports co-assembly by passing a list of paired-end read files.
 >
-> > <hands-on-title>Assembly with MetaSPAdes</hands-on-title>
-> >
-> > 1. {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/4.2.0+galaxy0) %} with following parameters
-> >    - *"Pair-end reads input format"*: `Paired-end: list of dataset pairs`
-> >        - {% icon param-collection %} *"FASTQ file(s): collection"*: `Raw reads`
-> >     - *"Select k-mer detection option"*: `User specific`
-> >        - *"K-mer size values"*: `21,33,55,77`
-> {: .hands_on}
+> <hands-on-title>Assembly with MetaSPAdes</hands-on-title>
+> 1. {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/4.2.0+galaxy0) %} with the following parameters:
+>     - *"Pair-end reads input format"*: `Paired-end: list of dataset pairs`
+>       - {% icon param-collection %} *"FASTQ file(s): collection"*: `Raw reads`
+>
+>       > <comment-title>Tip</comment-title>
+>       > To run **individual assembly** instead, follow the previous FAQ to create a **nested list of samples**.
+>       {: .comment}
+>
+>     - *"Select k-mer detection option"*: `User specific`
+>       - *"K-mer size values"*: `21,33,55,77`
+{: .hands_on}
 {: .details}
 
 # Quality control of assembly
@@ -288,46 +314,45 @@ Once assembly is done, it is important to check its quality.
 
 Assemblies can be evaluated with **metaQUAST** ({%cite mikheenko2016%}), the metagenomics mode of **QUAST** ({%cite gurevich2013%}).
 
-> <hands-on-title>Evaluation assembly quality with metaQUAST</hands-on-title>
+> <hands-on-title>Evaluation of assembly quality with metaQUAST</hands-on-title>
 >
-> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1) %} with parameters:
->    - *"Assembly mode?*": `Individual assembly (1 contig file per samples)`
->      - *"Use customized names for the input files?"*: `No, use dataset names`
->        - {% icon param-collection %} *"Contigs/scaffolds file"*: output **MEGAHIT**
->      - *"Reads options"*: `Illumina paired-end reads in paired collection`
+> 1. {% tool [QUAST](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1) %} with parameters:
+>     - *"Assembly mode?"*: `Individual assembly (1 contig file per samples)`
+>       - *"Use customized names for the input files?"*: `No, use dataset names`
+>         - {% icon param-collection %} *"Contigs/scaffolds file"*: output **MEGAHIT**
+>       - *"Reads options"*: `Illumina paired-end reads in paired collection`
 >
->          > <comment-title></comment-title>
->          > To make the job quicker, you can select `Disabled` here. The raw reads will then not been mapped to the assembly to compute metrics, like the coverage.
->          {: .comment}
+>       > <comment-title>Tip</comment-title>
+>       > To speed up the processing, you may choose `Disabled` here. In this case, raw reads will **not** be mapped back to the assembly to compute metrics such as read coverage.
+>       {: .comment}
 >
->      - {% icon param-collection %} *"FASTQ/FASTA files"*: `Raw reads`
->    - *"Type of assembly"*: `Metagenome`
->    - *"Output files"*: `HTML report`, `PDF report`, `Tabular reports`, `Log file`, `Key metric summary (metagenome mode)`, `Krona charts (metagenome mode without reference genomes)`
+>       - {% icon param-collection %} *"FASTQ/FASTA files"*: `Raw reads`
+>     - *"Type of assembly"*: `Metagenome`
+>     - *"Output files"*: `HTML report`, `PDF report`, `Tabular reports`, `Log file`, `Key metric summary (metagenome mode)`, `Krona charts (metagenome mode without reference genomes)`
 >
-> 2. Inspect the HTML reports
+> 2. Inspect the HTML reports:
+> ![Screenshot of QUAST HTML report](./images/quast_html_report.png)
 {: .hands_on}
 
-> <comment-title></comment-title>
+> <hands-on-title>Import MetaQUAST results</hands-on-title>
 >
-> Since the Quast process would take times we are just going to import the results:
+> 1. Since the QUAST process would take times we are just going to import the results from [Zenodo]({{ page.zenodo_link }}):
 >
-> > <hands-on-title>Import generated metaQuast results</hands-on-title>
-> >
-> > 1. Import the metaQuast report file from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library:
-> >
-> >    ```text
-> >    {{ page.zenodo_link }}/files/quast_ERR2231567.html
-> >    {{ page.zenodo_link }}/files/quast_ERR2231568.html
-> >    {{ page.zenodo_link }}/files/quast_ERR2231569.html
-> >    {{ page.zenodo_link }}/files/quast_ERR2231570.html
-> >    {{ page.zenodo_link }}/files/quast_ERR2231571.html
-> >    {{ page.zenodo_link }}/files/quast_ERR2231572.html
-> >    ```
-> >
-> {: .hands_on}
-{: .comment}
+>    ```text
+>    {{ page.zenodo_link }}/files/quast_ERR2231567.html
+>    {{ page.zenodo_link }}/files/quast_ERR2231568.html
+>    {{ page.zenodo_link }}/files/quast_ERR2231569.html
+>    {{ page.zenodo_link }}/files/quast_ERR2231570.html
+>    {{ page.zenodo_link }}/files/quast_ERR2231571.html
+>    {{ page.zenodo_link }}/files/quast_ERR2231572.html
+>    ```
+>
+> {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+{: .hands_on}
 
-Quast main output are HTML reports which aggregate different metrics.
+
+QUAST main output are HTML reports which aggregate different metrics.
 
 ## Assembly statistics
 
@@ -339,7 +364,11 @@ On the top of each report is a table with in rows statistics for contigs larger 
 
       A base in the reference genome is counted as aligned if at least one contig has at least one alignment to this base.
 
-      We did not provide any reference there, but metaQuast try to identify genome content of the metagenome by aligning contigs to [SILVA](https://www.arb-silva.de/) 16S rRNA database. For each assembly, 50 reference genomes with top scores are chosen. The full reference genomes of the identified organisms are afterwards downloaded from NCBI to map the assemblies on them and compute the genome fractions.
+      We did not provide any reference genome, but QUAST tries to identify the genome content of the metagenome by aligning contigs to [SILVA](https://www.arb-silva.de/) 16S rRNA database. For each assembly, 50 reference genomes with top scores are chosen. The full reference genomes of the identified organisms are downloaded from NCBI to map the assemblies on them and compute the genome fractions.
+
+      > <comment-title>Metagenome reference</comment-title>
+      > The alignment to automatically downloaded genomes for metagenomes is rather ambiguous and time-consuming. Most large-scale pipelines skip this step and set the **Maximum number of reference genomes (per each assembly) to download after searching in the SILVA database*** option to `0`.
+      {: .comment}
 
       For each identified genomes, the genome fraction is given when clicking on **Genome fraction (%)**
 
@@ -392,7 +421,7 @@ On the top of each report is a table with in rows statistics for contigs larger 
 
     > <details-title>Alternative ways to compute coverage</details-title>
     >
-    > 2 alternative ways to compute coverage are to
+    > There are 2 alternative ways to compute coverage:
     > 1. Use [CoverM](https://github.com/wwood/CoverM), which is available in Galaxy
     >
     >    > <hands-on-title>Calculate coverage using CoverM</hands-on-title>
@@ -456,7 +485,7 @@ On the top of each report is a table with in rows statistics for contigs larger 
 
 3. **Misassemblies**: joining sequences that should not be adjacent.
 
-    Quast identifies missassemblies by mapping the contigs to the reference genomes of the identified organisms. 3 types of misassemblies can be identified:
+    QUAST identifies missassemblies by mapping the contigs to the reference genomes of the identified organisms. 3 types of misassemblies can be identified:
 
     ![Image shows on the top a contig with a blue and a gren parts with white arrows (pointing on the right) on them and below a reference with 2 chromosomes. The 3 types of misassemblies are after schematized. Relocation: the blue and gren parts of the contig are on chr 1 but separated. Inversion: the blue and gren parts of the contig are on chr 1 but separated and with the arrows facing each other. Translocation: the blue part is on chr 1 and gren part on chr 2.](./images/quast_misassemblies.png "Source: <a href="https://quast.sourceforge.net/docs/manual.html#sec3.1.2">QUAST manual</a>"){:width="60%"}
 
@@ -626,7 +655,7 @@ This viewer draws contigs ordered from longest to shortest. Let's inspect this v
 >
 > Open the Contig size viewer for ERR2231568 and define start as `0` and end as `500000`
 >
-> ![Image shows on the Icarus Contig size viewer for ERR2231568, with a zoom between 0 500000. Below the menu, the contigs are drawn from the longest on the left to the shortest on the right. Each contig is filled with a different color: green for correct, red for misassembled, etc. Below the contigs is dispayed a bar to navigate through the contigs](./images/ERR2231568-contig-size-viewer.png)
+> ![Image shows on the Icarus Contig Size Viewer for ERR2231568, with a zoom between 0 500000. Below the menu, the contigs are drawn from the longest on the left to the shortest on the right. Each contig is filled with a different color: green for correct, red for misassembled, etc. Below the contigs is dispayed a bar to navigate through the contigs](./images/ERR2231568-contig-size-viewer.png)
 >
 > 1. What is the color of the first contig? Why?
 > 2. What is the red contig?
@@ -743,35 +772,6 @@ When clicking on the genome name, the contigs are displayed according to their m
 > >
 > {: .question}
 {: .details}
-<!--# De-replication
-
-De-replication is the process of identifying sets of genomes that are the "same" in a list of genomes, and removing all but the “best” genome from each redundant set. How similar genomes need to be to be considered “same”, how to determine which genome is “best”, and other important decisions are discussed in [Important Concepts](https://drep.readthedocs.io/en/latest/choosing_parameters.html).
-
-A common use for genome de-replication is the case of individual assembly of metagenomic data. If metagenomic samples are collected in a series, a common way to assemble the short reads is with a “co-assembly”. That is, combining the reads from all samples and assembling them together. The problem with this is assembling similar strains together can severely fragment assemblies, precluding recovery of a good genome bin. An alternative option is to assemble each sample separately, and then “de-replicate” the bins from each assembly to make a final genome set.
-
-![Image shows the process of individual assembly on two strains and five samples, after individual assembly of samples two samples are chosen for de-replication process. In parallel, co-assembly on all five samples is performed](./images/individual-assembly.png "Individual assembly followed by de-replication vs co-assembly"){:width="80%"}
-
-If we have different samples, then we do an individual assembly for each sample. In the figure above we see that after individual assembly we have results for every individual assembly represented with pie charts. Different colours on these charts show different strains (organisms). Every chart has a different percentage of every strain which means that the assemblies contain different strains in different proportions in each sample.
-
-Afterwards, we do the process of de-replication. We try to combine all the assemblies and try to identify which genomes are the most proper.
-
-Individual assembly is a good practice as well as co-assembly. They both have pros and cons and that are just different techniques.
-
-Co-assembly is a more common practice. But in case of co-assembly the genome might be more fragmented afterwards (like it is shown in the figure)  and sometimes it can be less proper. However, it should be decided in every single case which approach to use (co- or individual). More comprehensive information about de-replication you can learn from paper {%cite evans2020%} to get more intuition about how de-replication works.
-
-> <hands-on-title>General list of actions for de-replication</hands-on-title>
-> 1. Create new history
-> 2. Assemble each sample separately using your favorite assembler
-> 3. Perform a co-assembly to catch low-abundance microbes
-> 4. Bin each assembly separately using your favorite binner
-> 5. Bin co-assembly using your favorite binner
-> 6. Pull the bins from all assemblies together
-> 7. rRun **dRep** on them
-> 8. Perform downstream analysis on the de-replicated genome list
->
-{: .hands_on}
-
-We will perform steps from 1 to 3 in this tutorial a bit later while steps 4 - 8 will be considered in the following tutorial - Binning tutorial.-->
 
 # Conclusion
 
@@ -781,8 +781,8 @@ Metagenomic data can be assembled to, ideally, obtain the genomes of the species
 - **different tools** like MetaSPAdes and MEGAHIT
 
 Once the choices made, metagenomic assembly can start:
-1. Input data are assembled to obtain contigs and sometimes scaffolds
-2. Assembly quality is evaluated with various metrics
+1. Input data are assembled to obtain contigs and sometimes scaffolds.
+2. Assembly quality is evaluated with various metrics.
 3. The assembly graph can be visualized.
 
-Once all these steps done, we can move to the next phase to build Metagenomics Assembled Genomes (MAGs): binning
+Once all these steps done, we can move to the next phase to build Metagenomics Assembled Genomes (MAGs): [metagenomic binning]({% link topics/microbiome/tutorials/metagenomics-binning/tutorial.md %}).
