@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Execute a BiaPy workflow in Galaxy / Execute a BiaPy workflow in Galaxy / Imaging</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@cf14d238468c4846ef9ebeb0bd8d4241862cb9a8",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/biapy/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Execute a BiaPy workflow in Galaxy">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-02-11 09:11:29 +0000">
+<meta name="DC.creator" content="Riccardo Massei">
+<meta name="DC.creator" content="Daniel Franco-Barranco"><meta name="description" content="Image analysis using Galaxy">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Imaging / Execute a BiaPy workflow in Galaxy / Hands-on: Execute a BiaPy workflow in Galaxy">
+        <meta property="og:description" content="Image analysis using Galaxy">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/imaging/tutorials/biapy/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Execute a BiaPy workflow in Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-02-11 09:11:29 +0000",
+  "datePublished": "2026-02-11 09:11:29 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Imaging",
+    "description": "Image analysis using Galaxy",
+    "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+  },
+  "abstract": "The application of supervised and unsupervised **Deep Learning (DL)** methods in bioimage analysis have been constantly increasing in biomedical research in the last decades. ",
+  "learningResourceType": "e-learning",
+  "name": "Execute a BiaPy workflow in Galaxy",
+  "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/biapy/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT2H",
+  "teaches": "- Learn to configure and run a BiaPy workflow by editing a YAML file to define hardware settings, data paths, and model selection.\n- Execute an inference workflow in Galaxy using two different pre-trained models sourced from BioImage.IO.",
+  "keywords": [
+    "Imaging",
+    "Image segmentation",
+    "Image annotation",
+    "Deep learning",
+    "Conversion",
+    "Overlay",
+    "3D image",
+    "Volume rendering"
+  ],
+  "description": "## Abstract\n\nThe application of supervised and unsupervised **Deep Learning (DL)** methods in bioimage analysis have been constantly increasing in biomedical research in the last decades. \n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What is BiaPy and how does it streamline deep learning workflows for bioimage analysis?\n - How can we make Deep Learning (DL) models accessible to a broader audience?\n - How can I execute a BiaPy pipeline directly within the Galaxy platform?\n - How do I utilize pre-trained models from the BioImage.IO repository to perform inference on image data?\n\n\n## Learning Objectives\n\n- Learn to configure and run a BiaPy workflow by editing a YAML file to define hardware settings, data paths, and model selection.\n- Execute an inference workflow in Galaxy using two different pre-trained models sourced from BioImage.IO.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html",
+      "name": "FAIR Bioimage Metadata",
+      "description": "Hands-on for 'FAIR Bioimage Metadata' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html",
+      "name": "REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data",
+      "description": "Hands-on for 'REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/rmassei/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/rmassei/",
+      "name": "Riccardo Massei",
+      "image": "https://avatars.githubusercontent.com/rmassei",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4bioimage/",
+          "name": "NFDI4Bioimage",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4bioimage.de"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2104-9519",
+      "@id": "https://orcid.org/0000-0003-2104-9519"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/danifranco/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/danifranco/",
+      "name": "Daniel Franco-Barranco",
+      "image": "https://avatars.githubusercontent.com/danifranco",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "name": "Beatriz Serrano-Solano",
+      "image": "https://avatars.githubusercontent.com/beatrizserrano",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5862-6132",
+      "@id": "https://orcid.org/0000-0002-5862-6132"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/",
+      "name": "Leonid Kostrykin",
+      "image": "https://avatars.githubusercontent.com/kostrykin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1323-3762",
+      "@id": "https://orcid.org/0000-0003-1323-3762"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Imaging",
+      "description": "Image analysis using Galaxy",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3382",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3382",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3382"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/biapy/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy_image_analysis",
+      "name": "Galaxy Image Analysis"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy_image_analysis",
+      "name": "Galaxy Image Analysis"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/records/10973241",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/imaging" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Imaging
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/imaging/faqs/" title="Check our FAQs for the Imaging topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/biapy/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/imaging/tutorials/biapy/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-imaging">
+    <h1 data-toc-skip>Execute a BiaPy workflow in Galaxy</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/rmassei/" class="contributor-badge contributor-rmassei"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/rmassei?s=36" alt="Riccardo Massei avatar" width="36" class="avatar" />
+    Riccardo Massei</a><a href="/training-material/hall-of-fame/danifranco/" class="contributor-badge contributor-danifranco"><img src="https://avatars.githubusercontent.com/danifranco?s=36" alt="Daniel Franco-Barranco avatar" width="36" class="avatar" />
+    Daniel Franco-Barranco</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge contributor-badge-small contributor-beatrizserrano"><img src="https://avatars.githubusercontent.com/beatrizserrano?s=36" alt="Beatriz Serrano-Solano avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/kostrykin/" class="contributor-badge contributor-badge-small contributor-kostrykin"><img src="https://avatars.githubusercontent.com/kostrykin?s=36" alt="Leonid Kostrykin avatar" width="36" class="avatar" /></a></td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What is BiaPy and how does it streamline deep learning workflows for bioimage analysis?</p>
+</li>
+        
+        <li><p>How can we make Deep Learning (DL) models accessible to a broader audience?</p>
+</li>
+        
+        <li><p>How can I execute a BiaPy pipeline directly within the Galaxy platform?</p>
+</li>
+        
+        <li><p>How do I utilize pre-trained models from the BioImage.IO repository to perform inference on image data?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Learn to configure and run a BiaPy workflow by editing a YAML file to define hardware settings, data paths, and model selection.</p>
+</li>
+        
+        <li><p>Execute an inference workflow in Galaxy using two different pre-trained models sourced from BioImage.IO.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: FAIR Bioimage Metadata</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/10973241">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/imaging/tutorials/biapy/workflows/" title="Execute a BiaPy workflow in Galaxy workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/imaging/tutorials/biapy/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 11, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 11, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>The application of supervised and unsupervised <strong>Deep Learning (DL)</strong> methods in bioimage analysis have been constantly increasing in biomedical research in the last decades (<span class="citation"><a href="#esteva2021deep">Esteva <i>et al.</i> 2021</a></span>). 
+DL algorithms allow automatically classifying complex biological structures by learning complex patterns and features directly from large-scale imaging data, medical scans, or high-throughput biological datasets (<span class="citation"><a href="#franco2025biapy">Franco-Barranco <i>et al.</i> 2025</a></span>). Furthermore, trained models can be easily
+shared on online repositories (e.g., <a href="https://bioimage.io/#/models">BioImage.IO</a>) to be reused by other scientists and support open science.</p>
+
+<p>However, running DL models often requires high-level programming skills which can often be a barrier to general audience especially the 
+one without a proper computational background. Additionally, many DL models require GPU acceleration, which is not always accessible to all researchers. 
+Such obstacles might limit the practical and routine adoption of DL models in bioimaging.</p>
+
+<p>So, how to make DL models accessible to a larger audience? Well, <a href="https://biapyx.github.io/">BiaPy</a> is an open source framework that streamlines the use of common deep-learning workflows for a large variety of bioimage analysis tasks, including 2D and 3D semantic segmentation, instance segmentation, object detection, image denoising, single image super-resolution, self-supervised learning (for model pretraining), image classification and image-to-image translation.</p>
+
+<p>In this training, you will learn how to execute a BiaPy workflow directly in Galaxy by running <a href="https://en.wikipedia.org/wiki/Deep_learning">inference</a> on a set of images using two pre-trained models from BioImage.IO defined in a 
+BiaPy YAML configuration file.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/biapy/example-yaml.png" alt="example-yaml.png. " width="584" height="449" loading="lazy" /><a target="_blank" href="../../images/biapy/example-yaml.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Example of a BiaPy YAML file where the model with ID in BioImage.IO 'merry-water-buffalo' is defin (red box). A BiaPy YAML configuration file includes information about the hardware to be used, such as the number of CPUs or GPUs, the specific image analysis task, the model to be used, optional hyperparameters, the optimizer, and the paths for loading and storing data.</figcaption></figure>
+
+<p>You will perform a comparative analysis of the segmentation performance of two models from BioImage.IO, namely
+<a href="https://bioimage.io/#/artifacts/venomous-swan">venomous-swan</a> and <a href="https://bioimage.io/#/artifacts/merry-water-buffalo">merry-water-buffalo</a>.
+Both model can perform cyst segmentation for fluorescence microscopy images and have the same 3D <a href="https://en.wikipedia.org/wiki/U-Net">U-Net</a> + Residual Blocks base architecture. 
+However, venomous-swan enhances the 3D Residual U-Net with Squeeze-and-Excitation (SE) blocks.</p>
+
+<p>Our goal is to check if whether the inclusion of SE blocks in the venomous-swan model leads to improved segmentation accuracy 
+compared to the merry-water-buffalo model. This comparison will help us understand the impact of the SE blocks on the model’s ability to segment 
+cysts in fluorescence microscopy images.</p>
+
+<p>Finally, we will assess the models using various metrics as well as a qualitative assessments of the segmentation masks will be conducted to 
+visually inspect the differences in segmentation quality between the two models.</p>
+
+<p>Let’s start with BiaPy!</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#getting-test-data-and-the-biapy-yaml-configuration-file" id="markdown-toc-getting-test-data-and-the-biapy-yaml-configuration-file">Getting test data and the BiaPy YAML configuration file</a></li>
+  <li><a href="#run-inference-using-the-bioimageio-pre-trained-model" id="markdown-toc-run-inference-using-the-bioimageio-pre-trained-model">Run inference using the BioImage.IO pre-trained model</a></li>
+  <li><a href="#visualize-the-results" id="markdown-toc-visualize-the-results">Visualize the results</a></li>
+  <li><a href="#compare-different-pre-trained-models" id="markdown-toc-compare-different-pre-trained-models">Compare different pre-trained models</a></li>
+  <li><a href="#conclusions" id="markdown-toc-conclusions">Conclusions</a></li>
+  <li><a href="#optional-extract-complete-training-workflow-from-history" id="markdown-toc-optional-extract-complete-training-workflow-from-history">Optional: Extract complete training workflow from history</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="getting-test-data-and-the-biapy-yaml-configuration-file">Getting test data and the BiaPy YAML configuration file</h2>
+
+<p>The dataset required for this tutorial is available from <a href="https://zenodo.org/records/10973241">Zenodo</a>. The CartoCell dataset contains whole epithelial cysts acquired at low resolution with minimal human intervention (<a href="https://zenodo.org/records/10973241">more information</a>). The dataset is divided into <em>test</em>, <em>train</em> and <em>validation</em> data, each folder containing images and associated segmentation masks.</p>
+
+<p>In order to simplify the upload, we already prepared the test images and YAML files in the <strong>Data Library</strong> that you can access on the left panel in Galaxy.</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Libraries</strong> (left panel)</li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<p>After importing the data from the Data Library, you should have the following files in your history:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">01_raw_image.tiff</code></li>
+  <li><code class="language-plaintext highlighter-rouge">01_raw_mask.tiff</code></li>
+  <li><code class="language-plaintext highlighter-rouge">02_raw_image.tiff</code></li>
+  <li><code class="language-plaintext highlighter-rouge">02_raw_mask.tiff</code></li>
+  <li><code class="language-plaintext highlighter-rouge">conf_cartocell_swam.yaml</code></li>
+  <li><code class="language-plaintext highlighter-rouge">conf_cartocell_buffalo.yaml</code></li>
+</ul>
+
+<h2 id="run-inference-using-the-bioimageio-pre-trained-model">Run inference using the BioImage.IO pre-trained model</h2>
+
+<p>Now we can set up the BiaPy tool with the <a href="https://bioimage.io/#/artifacts/venomous-swan">‘venomous-swam’ model</a> which is defined in <code class="language-plaintext highlighter-rouge">conf_cartocell_swam.yaml</code></p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-configure-the-biapy-tool-with-venomous-swam"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Configure the BiaPy Tool with 'venomous-swam'</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/biapy/biapy/3.6.5+galaxy0" title="Build a workflow with BiaPy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Build a workflow with BiaPy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.6.5+galaxy0)</span> with the following parameters to extract metadata from the image:</li>
+  </ol>
+
+  <ul>
+    <li>
+      <p><em>Do you have a configuration file?</em> : <code class="language-plaintext highlighter-rouge">Yes, I have one and I want to run BiaPy directly</code></p>
+    </li>
+    <li>
+      <p><em>Select a configuration file</em>: <code class="language-plaintext highlighter-rouge">conf_cartocell_swam.yaml</code></p>
+    </li>
+    <li>
+      <p><em>Select the model checkpoint (if needed)</em> : Leave it blank. A checkpoint is a local file containing the trained model weights (e.g. .safetensors/.pth). In this tutorial we load a pre-trained model from the BioImage Model Zoo (BioImage.IO), so no local checkpoint file is required.</p>
+    </li>
+    <li>
+      <p>In the test data section, select the raw images to run predictions on and the ground truth/target images to evaluate those predictions. If no target data is provided, evaluation metrics will not be computed. <strong>Make sure the files are in the same order so each raw image is paired with its corresponding target image</strong>.</p>
+
+      <ul>
+        <li>
+          <p><em>Specify the test raw images</em>: <code class="language-plaintext highlighter-rouge">01_raw_image.tiff</code> and <code class="language-plaintext highlighter-rouge">02_raw_image.tiff</code></p>
+        </li>
+        <li>
+          <p><em>Specify the test ground truth/target images</em>: <code class="language-plaintext highlighter-rouge">01_raw_mask.tiff</code> and <code class="language-plaintext highlighter-rouge">02_raw_mask.tiff</code></p>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>On <em>Select output</em> check the boxes:</p>
+      <ul>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Test predictions (if exist)</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Post-processed test predictions (if exist)</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Evaluation metrics (if exist, on test data)</code></li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<p>Once the tool finishes running, you will have three different datasets in your history.</p>
+
+<p><strong>1. Test predictions</strong>: Full-size output images produced by the model on the test set. Because the model predicts small, overlapping patches, these patch outputs are merged back together to form one prediction per original image.</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/biapy/test-prediction.png" alt="test-prediction.png. " style="width:50%;" width="743" height="737" loading="lazy" /><a target="_blank" href="../../images/biapy/test-prediction.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Test predition on 22th z-stack of 02_raw_image.tiff</figcaption></figure>
+
+<p><strong>2. Post-Processed Test Prediction</strong>: Test predictions after automatic “clean-up” steps defined in the configuration. These steps can refine the raw output (for example, removing small spurious regions or separating touching objects). 
+In the YAML file definition, <a href="https://en.wikipedia.org/wiki/Voronoi_diagram">Voronoi tessellation</a> is automatically applied to ensure that all instances touch each other.</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/biapy/post-test-prediction.png" alt="post-test-prediction.png. " style="width:50%;" width="743" height="737" loading="lazy" /><a target="_blank" href="../../images/biapy/post-test-prediction.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Post test predition on 22th z-stack of 02_raw_image.tiff</figcaption></figure>
+
+<p><strong>3. Test metrics:</strong> Numerical scores that measure how well the predictions match the ground truth (if provided). 
+In instance segmentation, the report typically includes:</p>
+
+<ul>
+  <li>
+    <p>Intersection Over Union (IoU) per output channel (how well pixel regions overlap). This metric, also referred as the <a href="https://en.wikipedia.org/wiki/Jaccard_index">Jaccard index</a>, is essentially a method to quantify the percent of overlap between the target mask and the prediction output.</p>
+  </li>
+  <li>
+    <p>Matching metrics (how well individual predicted objects match true objects), shown for raw predictions and post-processed predictions.</p>
+  </li>
+</ul>
+
+<p>…but you can find more info on the test metrics in <a href="https://biapy.readthedocs.io/en/latest/">BiaPy documentation</a>!</p>
+
+<h2 id="visualize-the-results">Visualize the results</h2>
+
+<p>As first step, we can visualize one slice of the segmentation on the original image. We will work with <code class="language-plaintext highlighter-rouge">02_raw_image.tiff</code></p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-2d-results-from-the-biapy-output"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Extract 2D results from the BiaPy output</div>
+
+  <ol>
+    <li><span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract Dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract Dataset</strong></span> with the following parameters:
+      <ul>
+        <li>Input List: ‘“Build a workflow with BiaPy on dataset 2, 3, and others: Post-processed test predictions”’</li>
+        <li>How should a dataset be selected?:</li>
+      </ul>
+      <ul>
+        <li>Select by Index
+          <ul>
+            <li>Element index: <code class="language-plaintext highlighter-rouge">1</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">biapy_prediction_swam.tiff</code></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy3" title="Convert image format tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image format</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="language-plaintext highlighter-rouge">biapy_prediction_swam.tiff</code></li>
+        <li><em>“Extract series”</em>: <code class="language-plaintext highlighter-rouge">All series</code></li>
+        <li><em>“Extract timepoint”</em>: <code class="language-plaintext highlighter-rouge">All timepoints</code></li>
+        <li><em>“Extract channel”</em>: <code class="language-plaintext highlighter-rouge">All channels</code></li>
+        <li><em>“Extract z-slice”</em>: <code class="language-plaintext highlighter-rouge">Extract z-slice</code>
+          <ul>
+            <li><em>“Z-slice id”</em> <code class="language-plaintext highlighter-rouge">22</code></li>
+          </ul>
+        </li>
+        <li><em>“Extract range”</em>: <code class="language-plaintext highlighter-rouge">All images</code></li>
+        <li><em>“Extract crop”</em>: <code class="language-plaintext highlighter-rouge">Full image</code></li>
+        <li><em>“Tile image”</em>: <code class="language-plaintext highlighter-rouge">No tiling</code></li>
+        <li><em>“Pyramid image”</em>: <code class="language-plaintext highlighter-rouge">No Pyramid</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">stack_biapy_prediction_swam.tiff</code></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy3" title="Convert image format tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image format</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="language-plaintext highlighter-rouge">01_raw_image.tiff</code></li>
+        <li><em>“Extract series”</em>: <code class="language-plaintext highlighter-rouge">All series</code></li>
+        <li><em>“Extract timepoint”</em>: <code class="language-plaintext highlighter-rouge">All timepoints</code></li>
+        <li><em>“Extract channel”</em>: <code class="language-plaintext highlighter-rouge">All channels</code></li>
+        <li><em>“Extract z-slice”</em>: <code class="language-plaintext highlighter-rouge">Extract z-slice</code>
+          <ul>
+            <li><em>“Z-slice id”</em> <code class="language-plaintext highlighter-rouge">22</code></li>
+          </ul>
+        </li>
+        <li><em>“Extract range”</em>: <code class="language-plaintext highlighter-rouge">All images</code></li>
+        <li><em>“Extract crop”</em>: <code class="language-plaintext highlighter-rouge">Full image</code></li>
+        <li><em>“Tile image”</em>: <code class="language-plaintext highlighter-rouge">No tiling</code></li>
+        <li><em>“Pyramid image”</em>: <code class="language-plaintext highlighter-rouge">No Pyramid</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">stack_raw_image.tiff</code></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy4" title="Overlay images tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Overlay images</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.4+galaxy4)</span> with the following parameters to convert the image to PNG:
+      <ul>
+        <li><em>“Type of the overlay”</em>: <code class="language-plaintext highlighter-rouge">Segmentation contours over image</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Intensity image”</em>: <code class="language-plaintext highlighter-rouge">stack_raw_image.tiff</code> file</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Label map”</em>: <code class="language-plaintext highlighter-rouge">stack_biapy_prediction_swam.tiff</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0" title="Convert binary image to label map tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert binary image to label map</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.5+galaxy0)</span>)</li>
+        <li><em>“Contour thickness”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“Contour color”</em>: <code class="language-plaintext highlighter-rouge">green</code></li>
+        <li><em>“Show labels”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
+      </ul>
+    </li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">2D-overlay_biapy_swam.tiff</code></li>
+  </ol>
+</blockquote>
+
+<p>The segmentation results for the 22th z-stack are shown below:</p>
+
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/biapy/comparison_2D_swam.png" alt="comparison_2D_swam.png. " width="916" height="334" loading="lazy" /><a target="_blank" href="../../images/biapy/comparison_2D_swam.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Segmentation results obtained with the 'venomous-swan' model. From left to right: the raw input image, predicted segmentation labels, and an overlay of the labels on the raw image.</figcaption></figure>
+
+<p>We can also do better and visualize the full 3D segmentation using the <a href="https://github.com/kostrykin/LibCarna">LibCarna</a> tool in Galaxy!</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visual-3d"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Visual 3D</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/libcarna_render/libcarna_render/0.2.0+galaxy2" title="Render 3-D image data tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Render 3-D image data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.0+galaxy2)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input image (3-D)”</em>: <code class="language-plaintext highlighter-rouge">01_raw_image.tiff</code></li>
+        <li><em>“Unit of the intensity values”</em>: <code class="language-plaintext highlighter-rouge">No unit</code></li>
+        <li><em>“Coordinate system”</em>: <code class="language-plaintext highlighter-rouge">Point Y to the Top</code></li>
+        <li><em>“Rendering mode”</em>: <code class="language-plaintext highlighter-rouge">Maximum Intensity Projection (MIP)</code></li>
+        <li><em>“Color map”</em>: <code class="language-plaintext highlighter-rouge">gist_gray</code></li>
+        <li><em>“Camera parameters”</em>:
+          <ul>
+            <li><em>“Distance”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
+          </ul>
+        </li>
+        <li><em>“Render mask overlay”</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Mask overlay (3-D) “</em>: <code class="language-plaintext highlighter-rouge">biapy_prediction_swam.tiff</code></li>
+          </ul>
+        </li>
+        <li><em>“Video parameters”</em>:
+          <ul>
+            <li><em>“Frames”</em>: <code class="language-plaintext highlighter-rouge">400</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<video loop="true" autoplay="autoplay" muted="" width="75%">
+    <source src="../../images/biapy/carto_segm.mp4" type="video/mp4" />
+</video>
+
+<p>Pretty cool, eh?</p>
+
+<p>We can do the same for also for <code class="language-plaintext highlighter-rouge">02_raw_image.tiff</code>:</p>
+
+<video loop="true" autoplay="autoplay" muted="" width="75%">
+    <source src="../../images/biapy/carto_segm_2.mp4" type="video/mp4" />
+</video>
+
+<h2 id="compare-different-pre-trained-models">Compare different pre-trained models</h2>
+
+<p>Let’s now run the BiaPy tool again but this time with the <a href="https://bioimage.io/#/artifacts/merry-water-buffalo">‘merry-water-buffalo’</a> model:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-configure-the-biapy-tool-for-merry-water-buffalo"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Configure the BiaPy Tool for 'merry-water-buffalo'</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/biapy/biapy/3.6.5+galaxy0" title="Build a workflow with BiaPy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Build a workflow with BiaPy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.6.5+galaxy0)</span> with the following parameters to extract metadata from the image:</li>
+  </ol>
+
+  <ul>
+    <li>
+      <p><em>Do you have a configuration file?</em> : <code class="language-plaintext highlighter-rouge">Yes, I have one and I want to run BiaPy directly</code></p>
+    </li>
+    <li>
+      <p><em>Select a configuration file</em>: <code class="language-plaintext highlighter-rouge">conf_cartocell_buffalo.yaml</code></p>
+    </li>
+    <li>
+      <p><em>Select the model checkpoint (if needed)</em> : Leave it blank. We will load the pre-trained model directly from the BioImage.IO, so no checkpoint file is required.</p>
+    </li>
+    <li>
+      <p>In the test data section, select the raw images to run predictions on and the ground truth/target images to evaluate those predictions. If no target data is provided, evaluation metrics will not be computed. <strong>Make sure the files are in the same order so each raw image is paired with its corresponding target image</strong>.</p>
+
+      <ul>
+        <li>
+          <p><em>Specify the test raw images</em>: <code class="language-plaintext highlighter-rouge">01_raw_image.tiff</code> and <code class="language-plaintext highlighter-rouge">02_raw_image.tiff</code></p>
+        </li>
+        <li>
+          <p><em>Specify the test ground truth/target images</em>: <code class="language-plaintext highlighter-rouge">01_raw_mask.tiff</code> and <code class="language-plaintext highlighter-rouge">02_raw_mask.tiff</code></p>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>On <em>Select output</em> check the boxes:</p>
+      <ul>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Test predictions (if exist)</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Post-processed test predictions (if exist)</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Evaluation metrics (if exist, on test data)</code></li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<p>We can visualize again the results using the previous approach:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-the-results-from-the-biapy-output"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Extract the results from the BiaPy output</div>
+
+  <ol>
+    <li><span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract Dataset tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract Dataset</strong></span> with the following parameters:
+      <ul>
+        <li>Input List: ‘“Build a workflow with BiaPy on dataset 2, 3, and others: Post-processed test predictions”’</li>
+        <li>How should a dataset be selected?:</li>
+      </ul>
+      <ul>
+        <li>Select by Index
+          <ul>
+            <li>Element index: <code class="language-plaintext highlighter-rouge">1</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">biapy_prediction_buffalo.tiff</code></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy3" title="Convert image format tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image format</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="language-plaintext highlighter-rouge">biapy_prediction_buffalo.tiff</code></li>
+        <li><em>“Extract series”</em>: <code class="language-plaintext highlighter-rouge">All series</code></li>
+        <li><em>“Extract timepoint”</em>: <code class="language-plaintext highlighter-rouge">All timepoints</code></li>
+        <li><em>“Extract channel”</em>: <code class="language-plaintext highlighter-rouge">All channels</code></li>
+        <li><em>“Extract z-slice”</em>: <code class="language-plaintext highlighter-rouge">Extract z-slice</code>
+          <ul>
+            <li><em>“Z-slice id”</em> <code class="language-plaintext highlighter-rouge">22</code></li>
+          </ul>
+        </li>
+        <li><em>“Extract range”</em>: <code class="language-plaintext highlighter-rouge">All images</code></li>
+        <li><em>“Extract crop”</em>: <code class="language-plaintext highlighter-rouge">Full image</code></li>
+        <li><em>“Tile image”</em>: <code class="language-plaintext highlighter-rouge">No tiling</code></li>
+        <li><em>“Pyramid image”</em>: <code class="language-plaintext highlighter-rouge">No Pyramid</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">stack_biapy_prediction_buffalo.tiff</code></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy3" title="Convert image format tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image format</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="language-plaintext highlighter-rouge">01_raw_image.tiff</code></li>
+        <li><em>“Extract series”</em>: <code class="language-plaintext highlighter-rouge">All series</code></li>
+        <li><em>“Extract timepoint”</em>: <code class="language-plaintext highlighter-rouge">All timepoints</code></li>
+        <li><em>“Extract channel”</em>: <code class="language-plaintext highlighter-rouge">All channels</code></li>
+        <li><em>“Extract z-slice”</em>: <code class="language-plaintext highlighter-rouge">Extract z-slice</code>
+          <ul>
+            <li><em>“Z-slice id”</em> <code class="language-plaintext highlighter-rouge">22</code></li>
+          </ul>
+        </li>
+        <li><em>“Extract range”</em>: <code class="language-plaintext highlighter-rouge">All images</code></li>
+        <li><em>“Extract crop”</em>: <code class="language-plaintext highlighter-rouge">Full image</code></li>
+        <li><em>“Tile image”</em>: <code class="language-plaintext highlighter-rouge">No tiling</code></li>
+        <li><em>“Pyramid image”</em>: <code class="language-plaintext highlighter-rouge">No Pyramid</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">stack_raw_image.tiff</code></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy4" title="Overlay images tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Overlay images</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.4+galaxy4)</span> with the following parameters to convert the image to PNG:
+      <ul>
+        <li><em>“Type of the overlay”</em>: <code class="language-plaintext highlighter-rouge">Segmentation contours over image</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Intensity image”</em>: <code class="language-plaintext highlighter-rouge">stack_raw_image.tiff</code> file</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Label map”</em>: <code class="language-plaintext highlighter-rouge">stack_biapy_prediction_buffalo.tiff</code> file (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0" title="Convert binary image to label map tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert binary image to label map</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.5+galaxy0)</span>)</li>
+        <li><em>“Contour thickness”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“Contour color”</em>: <code class="language-plaintext highlighter-rouge">green</code></li>
+        <li><em>“Show labels”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
+      </ul>
+    </li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">2D-overlay_biapy_buffalo.tiff</code></li>
+  </ol>
+</blockquote>
+
+<p>Results will look like this:</p>
+
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/biapy/comparison_2D_buffalo.png" alt="comparison_2D_buffalo.png. " width="954" height="346" loading="lazy" /><a target="_blank" href="../../images/biapy/comparison_2D_buffalo.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Segmentation results with the 'merry-water-buffalo' model from BioImage.IO</figcaption></figure>
+
+<p>Just by visually inspecting the results, it seems that <strong>‘venomous-swan’</strong> model predict more sharp contours and cells, but <strong>‘merry-water-buffalo’</strong> seems to capture better the cells with less merges… however, the segmentation is a bit noiser.</p>
+
+<p>It is hard to say that a prediction is better than other by just looking at a slice when working in 3D!</p>
+
+<p>The <strong>Test metrics</strong> will give us a better overview on which model is performing better!</p>
+
+<p><strong>‘venomous-swam’</strong> struggles mainly with missing objects (low recall)</p>
+
+<p>Let’s evaluate segmentation at a IoU ≥ 0.5, a moderate and not-too-strict matching threshold:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Precision: 0.328
+Recall: 0.171
+F1: 0.222
+PQ: 0.157
+</code></pre></div></div>
+
+<p><strong>water-buffalo</strong> is clearly stronger at instance detection and segmentation</p>
+
+<p>At a commonly used matching threshold (IoU ≥ 0.5), averaged across the 2 test images:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Precision: 0.761
+Recall: 0.631
+F1: 0.689
+PQ: 0.473
+</code></pre></div></div>
+
+<p>So <strong>Water-buffalo</strong> is better both in:</p>
+
+<ul>
+  <li>finding objects (higher recall),</li>
+  <li>keeping predictions correct (higher precision).</li>
+</ul>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>In this tutorial, you executed BiaPy inference pipelines directly in Galaxy using YAML configuration files, and compared two pre-trained BioImage.IO models on the same 3D dataset.</p>
+
+<p>You learned how to:</p>
+
+<ul>
+  <li>Run BiaPy in <strong>“configuration-file driven”</strong> mode, which makes analyses easier to reproduce and share</li>
+  <li>Load <strong>pre-trained BioImage.IO models</strong> without providing a local checkpoint</li>
+  <li>Inspect results both as a <strong>2D slice overlay</strong> and as a <strong>3D rendering</strong></li>
+  <li>Use the <strong>evaluation metrics</strong> to compare models objectively rather than relying on visual inspection alone</li>
+</ul>
+
+<p>In our example, the two models showed different strengths: one produced cleaner contours in a slice view, while the other achieved stronger quantitative performance (higher object-level matching metrics at common IoU thresholds). This illustrates why combining <strong>qualitative visualization</strong> with <strong>quantitative scoring</strong> is important when selecting a model.</p>
+
+<h3 id="where-to-go-next">Where to go next</h3>
+
+<ul>
+  <li>Edit the YAML to test different post-processing settings (e.g., instance separation parameters)</li>
+  <li>Run inference on additional images or your own data (keeping image/mask pairing consistent)</li>
+  <li>Try other BioImage.IO models and compare them using the same workflow and plots</li>
+</ul>
+
+<h1 id="optional-extract-complete-training-workflow-from-history">Optional: Extract complete training workflow from history</h1>
+<p>As an optional step, you can extract a complete workflow from your Galaxy history. This allows you to save and reuse the entire training process as a reproducible and shareable workflow.</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-extracting-a-workflow-from-your-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-extracting-a-workflow-from-your-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Extracting a workflow from your history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>     <p><strong>Clean up</strong> your history: remove any failed (red) jobs from your history by clicking on the <i class="fas fa-trash" aria-hidden="true"></i><span class="visually-hidden">galaxy-delete</span> button.</p>     <p>This will make the creation of the workflow easier.</p>   </li>   <li>     <p>Click on <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> (<strong>History options</strong>) at the top of your history panel and select <strong>Extract workflow</strong>.</p>     <p><img src="/training-material/topics/introduction/images/history_menu_extract_workflow.png" alt="`Extract Workflow` entry in the history options menu" /></p>     <p>The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.</p>   </li>   <li>     <p>Replace the <strong>Workflow name</strong> to something more descriptive.</p>   </li>   <li>     <p><strong>Rename</strong> each workflow input in the boxes at the top of the second column.</p>   </li>   <li>     <p>If there are any steps that shouldn’t be included in the workflow, you can <strong>uncheck</strong> them in the first column of boxes.</p>   </li>   <li>     <p>Click on the <strong>Create Workflow</strong> button near the top.</p>     <p>You will get a message that the workflow was created.</p>   </li> </ol> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>BiaPy is an open-source tool designed to lower the technical barriers for using DL in bioimage analysis.</p>
+</li>
+                        
+                        <li><p>In Galaxy, BiaPy can run BioImage.IO pre-trained models and provides task-aware pre/post-processing (e.g. instance segmentation decoding) and summary statistics—beyond raw model predictions.</p>
+</li>
+                        
+                        <li><p>The BiaPy pipeline can be controlled via a YAML configuration file, which specifies the task type and model source.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/imaging/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/imaging#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="esteva2021deep">Esteva, A., K. Chou, S. Yeung, N. Naik, A. Madani <i>et al.</i>, 2021 <b>Deep learning-enabled medical computer vision</b>. NPJ digital medicine 4: 5. <a href="https://www.nature.com/articles/s41746-020-00376-2">https://www.nature.com/articles/s41746-020-00376-2</a></li>
+<li id="franco2025biapy">Franco-Barranco, D., J. A. Andrés-San Román, I. Hidalgo-Cenalmor, L. Backová, A. González-Marfil <i>et al.</i>, 2025 <b>BiaPy: Accessible deep learning on bioimages</b>. Nature Methods 1–3. <a href="https://www.nature.com/articles/s41592-025-02699-y">https://www.nature.com/articles/s41592-025-02699-y</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/biapy"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/biapy">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Riccardo Massei, Daniel Franco-Barranco,  <b>Execute a BiaPy workflow in Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/biapy/tutorial.html">https://training.galaxyproject.org/training-material/topics/imaging/tutorials/biapy/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{imaging-biapy,
+author = "Riccardo Massei and Daniel Franco-Barranco",
+	title = "Execute a BiaPy workflow in Galaxy (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/imaging/tutorials/biapy/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/biapy/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: bfconvert
+  owner: imgteam
+  revisions: fcadded98e61
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: binary2labelimage
+  owner: imgteam
+  revisions: 984358e43242
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: overlay_images
+  owner: imgteam
+  revisions: ca362a9bfa20
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+function ready(fn) {
+	if (document.readyState != 'loading'){
+		fn();
+	} else {
+		document.addEventListener('DOMContentLoaded', fn);
+	}
+}
+ready(function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/biapy/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/imaging/tutorials/biapy/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cf14d238468c4846ef9ebeb0bd8d4241862cb9a8">cf14d23</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+
+    </body>
+</html>
