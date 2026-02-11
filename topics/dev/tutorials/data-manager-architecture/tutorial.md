@@ -12,7 +12,7 @@ objectives:
 - Understand the idea behind and the concept of Galaxy data managers
 - Understand what components are needed to write your own data manager tool
 - Know how to test a data manager and be aware of the limitations of the current test framework with respect to data managers
-time_estimation: 1.5H
+time_estimation: 2H
 key_points:
 - Data managers are tools to be run by admins of a Galaxy instance.
 - They automate reference data collection and preparation and they write data table (.loc file) records.
