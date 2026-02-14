@@ -1,0 +1,2185 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Content Tracking and Verification in Galaxy Workflows with ISCC-SUM / Content Tracking and Verification in Galaxy Workflows with ISCC-SUM / Imaging</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@0e078d434baa8c4f17a94d606dd020c28bb53c41",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/iscc-suite/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Content Tracking and Verification in Galaxy Workflows with ISCC-SUM">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-02-14 09:34:57 +0000">
+<meta name="DC.creator" content="Maarten Paul">
+<meta name="DC.creator" content="Martin Etzrodt"><meta name="description" content="Image analysis using Galaxy">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Imaging / Content Tracking and Verification in Galaxy Workflows with ISCC-SUM / Hands-on: Content Tracking and Verification in Galaxy Workflows with ISCC-SUM">
+        <meta property="og:description" content="Image analysis using Galaxy">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/imaging/tutorials/iscc-suite/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Content Tracking and Verification in Galaxy Workflows with ISCC-SUM",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-02-14 09:34:57 +0000",
+  "datePublished": "2026-02-14 09:34:57 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Imaging",
+    "description": "Image analysis using Galaxy",
+    "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+  },
+  "abstract": "# File content and integrity validation with International Standard Content Code (ISCC)",
+  "learningResourceType": "e-learning",
+  "name": "Content Tracking and Verification in Galaxy Workflows with ISCC-SUM",
+  "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/iscc-suite/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT1H",
+  "teaches": "- Understand the purpose and structure of ISCC codes\n- Generate ISCC codes for files at different workflow stages\n- Verify file integrity using ISCC codes\n- Detect content similarity between files",
+  "keywords": [
+    "Imaging"
+  ],
+  "description": "## Abstract\n\n# File content and integrity validation with International Standard Content Code (ISCC)\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What is an ISCC code and why is it useful for data management?\n - How can I generate content hashes for microscopy data in Galaxy?\n - How can I verify file integrity in my workflows?\n - How can I detect similar content across different files?\n\n\n## Learning Objectives\n\n- Understand the purpose and structure of ISCC codes\n- Generate ISCC codes for files at different workflow stages\n- Verify file integrity using ISCC codes\n- Detect content similarity between files\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html",
+      "name": "FAIR Bioimage Metadata",
+      "description": "Hands-on for 'FAIR Bioimage Metadata' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html",
+      "name": "REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data",
+      "description": "Hands-on for 'REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/maartenpaul/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/maartenpaul/",
+      "name": "Maarten Paul",
+      "image": "https://avatars.githubusercontent.com/maartenpaul",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nlbioimaging/",
+          "name": "NL-BioImaging",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://eurobioimaging.nl"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7990-6010",
+      "@id": "https://orcid.org/0000-0002-7990-6010"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/etzm/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/etzm/",
+      "name": "Martin Etzrodt",
+      "image": "https://avatars.githubusercontent.com/etzm",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/iscc/",
+          "name": "ISCC Foundation",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://iscc.io"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1928-3904",
+      "@id": "https://orcid.org/0000-0003-1928-3904"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "name": "Beatriz Serrano-Solano",
+      "image": "https://avatars.githubusercontent.com/beatrizserrano",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5862-6132",
+      "@id": "https://orcid.org/0000-0002-5862-6132"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dianichj/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dianichj/",
+      "name": "Diana Chiang Jurado",
+      "image": "https://avatars.githubusercontent.com/dianichj",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/spoc/",
+          "name": "🖖🏾Single-cell & sPatial Omics Community of practice",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/community/sig/singlecell/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4bioimage/",
+          "name": "NFDI4Bioimage",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4bioimage.de"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5857-1477",
+      "@id": "https://orcid.org/0000-0002-5857-1477"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "name": "Pavankumar Videm",
+      "image": "https://avatars.githubusercontent.com/pavanvidem",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/spoc/",
+          "name": "🖖🏾Single-cell & sPatial Omics Community of practice",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/community/sig/singlecell/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5192-126X",
+      "@id": "https://orcid.org/0000-0002-5192-126X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/",
+      "name": "Leonid Kostrykin",
+      "image": "https://avatars.githubusercontent.com/kostrykin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1323-3762",
+      "@id": "https://orcid.org/0000-0003-1323-3762"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Imaging",
+      "description": "Image analysis using Galaxy",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3382",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3382",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3382"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/iscc-suite/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/records/18611428",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/imaging" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Imaging
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/imaging/faqs/" title="Check our FAQs for the Imaging topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/iscc-suite/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/imaging/tutorials/iscc-suite/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-imaging">
+    <h1 data-toc-skip>Content Tracking and Verification in Galaxy Workflows with ISCC-SUM</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/maartenpaul/" class="contributor-badge contributor-maartenpaul"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/maartenpaul?s=36" alt="Maarten Paul avatar" width="36" class="avatar" />
+    Maarten Paul</a><a href="/training-material/hall-of-fame/etzm/" class="contributor-badge contributor-etzm"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/etzm?s=36" alt="Martin Etzrodt avatar" width="36" class="avatar" />
+    Martin Etzrodt</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge contributor-badge-small contributor-beatrizserrano"><img src="https://avatars.githubusercontent.com/beatrizserrano?s=36" alt="Beatriz Serrano-Solano avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/dianichj/" class="contributor-badge contributor-badge-small contributor-dianichj"><img src="https://avatars.githubusercontent.com/dianichj?s=36" alt="Diana Chiang Jurado avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-badge-small contributor-pavanvidem"><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Pavankumar Videm avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/kostrykin/" class="contributor-badge contributor-badge-small contributor-kostrykin"><img src="https://avatars.githubusercontent.com/kostrykin?s=36" alt="Leonid Kostrykin avatar" width="36" class="avatar" /></a></td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What is an ISCC code and why is it useful for data management?</p>
+</li>
+        
+        <li><p>How can I generate content hashes for microscopy data in Galaxy?</p>
+</li>
+        
+        <li><p>How can I verify file integrity in my workflows?</p>
+</li>
+        
+        <li><p>How can I detect similar content across different files?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understand the purpose and structure of ISCC codes</p>
+</li>
+        
+        <li><p>Generate ISCC codes for files at different workflow stages</p>
+</li>
+        
+        <li><p>Verify file integrity using ISCC codes</p>
+</li>
+        
+        <li><p>Detect content similarity between files</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: FAIR Bioimage Metadata</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/18611428">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/imaging/tutorials/iscc-suite/workflows/" title="Content Tracking and Verification in Galaxy Workflows with ISCC-SUM workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Answer Histories">
+        <i class="fas fa-sign-out-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-answer</span>&nbsp;Answer Histories
+    </a>
+    <ul class="dropdown-menu">
+      
+        <li>
+            <a class="dropdown-item" href="https://usegalaxy.eu/u/maartenpaul/h/iscc-tutorial-1">
+              UseGalaxy.eu - ISCC workflow integration
+              
+              <br/><span class="text-muted">2026-01-23</span>
+              
+            </a>
+        </li>
+      
+        <li>
+            <a class="dropdown-item" href="https://usegalaxy.eu/u/maartenpaul/h/iscc-tutorial-part-2">
+              UseGalaxy.eu - ISCC similarity
+              
+              <br/><span class="text-muted">2026-01-23</span>
+              
+            </a>
+        </li>
+      
+      <li class="dropdown-divider"></li>
+      <li>
+        <a class="dropdown-item" href="/training-material/faqs/gtn/gtn_example_histories.html"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> How to Use This</a>
+      </li>
+    </ul>
+
+</li>
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 14, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 14, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <h1 id="file-content-and-integrity-validation-with-international-standard-content-code-iscc">File content and integrity validation with International Standard Content Code (ISCC)</h1>
+
+<p>In scientific workflows, ensuring data integrity and tracking modifications of the data content is crucial for reproducibility. Traditional checksums (like MD5 or SHA) can verify if files are identical, but they cannot detect similar content or survive format conversions.</p>
+
+<p>The <strong>International Standard Content Code (ISCC)</strong> is a content-derived identifier that provides both:</p>
+<ul>
+  <li><strong>Identity verification</strong>: Checksum functionality to verify exact file matches</li>
+  <li><strong>Similarity detection</strong>: Ability to detect similar content even across different file formats</li>
+</ul>
+
+<p>The <strong>Galaxy ISCC-suite</strong> allows you to integrate content tracking into any Galaxy workflow, providing quality control and provenance tracking for your data analysis pipelines.</p>
+
+<h2 id="iscc-code-structure">ISCC Code structure</h2>
+
+<p>An ISCC-SUM code is a 55-character identifier with two main components, which are combined into one code:</p>
+
+<ul>
+  <li><strong>Data-Code</strong>: Content-based hash that allows similarity comparison</li>
+  <li><strong>Instance-Code</strong>: A fast checksum or cryptographic hash</li>
+</ul>
+
+<p>The Instance-Code uses BLAKE3 hashing, truncated to 64 bits by default. For applications requiring cryptographic-strength verification, ISCC-SUM can output the full 256-bit hash.</p>
+
+<p>For example, the ISCC hash for this file <a href="https://zenodo.org/records/18611428/files/example_image.tiff"><code class="language-plaintext highlighter-rouge">example_image.tiff</code></a> is:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ISCC:K4AI45QGX6J3LYNEHONZMQT2GJ6YPJDS74EIC2YMSORF4S5H5SKHQQI
+</code></pre></div></div>
+<p>This ISCC-CODE is built from two individual components — a <strong>Data-Code</strong> and an <strong>Instance-Code</strong>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ISCC:GADY45QGX6J3LYNEHONZMQT2GJ6YPZ4BXJQ7ZHWZ7EHRLKANDCSACWI  (Data-Code)
+    ISCC:IAD2I4X7BCAWWDETUJPEXJ7MSR4EDZCTTBQS6LQQDWDHS6T4KDDPZ5A  (Instance-Code)
+</code></pre></div></div>
+<p>You might notice that the combined ISCC-CODE (<code class="language-plaintext highlighter-rouge">K4AI...</code>) looks completely different from these two components. That is expected: the ISCC algorithm takes shortened versions of both hashes, packs them together, and encodes the result as a new string. Think of it like combining two barcodes into a single, shorter barcode — the information is still there, just represented differently.</p>
+
+<p>Files with similar content will have similar Data-Code components, but their Instance-Code will be different. Hence the Instance-Code allows to verify file integrity.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#file-content-and-integrity-validation-with-international-standard-content-code-iscc" id="markdown-toc-file-content-and-integrity-validation-with-international-standard-content-code-iscc">File content and integrity validation with International Standard Content Code (ISCC)</a>    <ol>
+      <li><a href="#iscc-code-structure" id="markdown-toc-iscc-code-structure">ISCC Code structure</a></li>
+    </ol>
+  </li>
+  <li><a href="#prepare-your-data" id="markdown-toc-prepare-your-data">Prepare your data</a>    <ol>
+      <li><a href="#get-the-data" id="markdown-toc-get-the-data">Get the data</a></li>
+    </ol>
+  </li>
+  <li><a href="#generate-iscc-codes" id="markdown-toc-generate-iscc-codes">Generate ISCC codes</a></li>
+  <li><a href="#verify-file-integrity" id="markdown-toc-verify-file-integrity">Verify file integrity</a>    <ol>
+      <li><a href="#manual-verification" id="markdown-toc-manual-verification">Manual verification</a></li>
+      <li><a href="#workflow-integration" id="markdown-toc-workflow-integration">Workflow integration</a></li>
+      <li><a href="#image-analysis-workflow-integration" id="markdown-toc-image-analysis-workflow-integration">Image analysis workflow integration</a></li>
+    </ol>
+  </li>
+  <li><a href="#detect-similar-content" id="markdown-toc-detect-similar-content">Detect similar content</a>    <ol>
+      <li><a href="#compare-two-files" id="markdown-toc-compare-two-files">Compare two files</a></li>
+      <li><a href="#find-similar-files-in-collections" id="markdown-toc-find-similar-files-in-collections">Find similar files in collections</a></li>
+    </ol>
+  </li>
+  <li><a href="#practical-use-cases" id="markdown-toc-practical-use-cases">Practical use cases</a>    <ol>
+      <li><a href="#use-case-1-quality-control-in-image-analysis-pipelines" id="markdown-toc-use-case-1-quality-control-in-image-analysis-pipelines">Use case 1: Quality control in image analysis pipelines</a></li>
+      <li><a href="#use-case-2-data-deduplication-and-organization" id="markdown-toc-use-case-2-data-deduplication-and-organization">Use case 2: Data deduplication and organization</a></li>
+      <li><a href="#use-case-3-reproducibility-and-data-sharing" id="markdown-toc-use-case-3-reproducibility-and-data-sharing">Use case 3: Reproducibility and data sharing</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+  <li><a href="#references" id="markdown-toc-references">References</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="prepare-your-data">Prepare your data</h1>
+
+<p>For this tutorial, we’ll use a simple dataset with microscope images that demonstrate different use cases. However, the ISCC SUM tools can ben used for any type of digital content.</p>
+
+<h2 id="get-the-data">Get the data</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Data Upload</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial in Galaxy.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Download the following image and import it into your Galaxy history.</p>
+      <ul>
+        <li><a href="https://zenodo.org/records/18611428/files/example_image.tiff"><code class="language-plaintext highlighter-rouge">example_image.tiff</code></a></li>
+        <li><a href="https://zenodo.org/records/18611428/files/example_image2.tiff"><code class="language-plaintext highlighter-rouge">example_image2.tiff</code></a></li>
+        <li><a href="https://zenodo.org/records/18611428/files/example_image3.tiff"><code class="language-plaintext highlighter-rouge">example_image3.tiff</code></a></li>
+        <li><a href="https://zenodo.org/records/18611428/files/example_thresholded1.tiff"><code class="language-plaintext highlighter-rouge">example_thresholded1.tiff</code></a></li>
+      </ul>
+
+      <p>If you are importing the image via URL:</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="generate-iscc-codes">Generate ISCC codes</h1>
+
+<p>The first step is generating ISCC codes for your input files. This creates a content fingerprint that can be used for later content-based identification of the file (e.g., within your workflow or within a publication).</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-generate-iscc-codes-for-input-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generate ISCC codes for input files</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/iscc_sum/iscc_sum/0.1.0+galaxy1" title="Generate ISCC-CODE tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Generate ISCC-CODE</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input File”</em>: Select the first example image (<code class="language-plaintext highlighter-rouge">example_image.tiff</code>.)</li>
+      </ul>
+
+      <p>Run the tool. This will generate a 55-character ISCC code for the file.</p>
+    </li>
+    <li>
+      <p>Expand the history item for the output of the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/iscc_sum/iscc_sum/0.1.0+galaxy1" title="Generate ISCC-CODE tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Generate ISCC-CODE</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy1)</span> tool.</p>
+    </li>
+    <li>
+      <p>Click on the <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> icon.</p>
+    </li>
+    <li>Scroll down to the <strong>Job Outputs</strong> section. Select the Dataset. You should see a single line containing the ISCC code in the output. For the first example image the code is expected to be:
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>K4AI45QGX6J3LYNEHONZMQT2GJ6YPJDS74EIC2YMSORF4S5H5SKHQQI 
+</code></pre></div>      </div>
+    </li>
+    <li>Repeat for the other example images to generate another ISCC code for comparison.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Will the same file always generate the same ISCC code?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Yes! The same file will always generate the identical ISCC code, making it suitable for integrity verification.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="verify-file-integrity">Verify file integrity</h1>
+
+<p>During workflow execution, you may want to verify that intermediate files match expected content. The <strong>Verify ISCC hash</strong> tool allows you to check if a file matches a known ISCC code.</p>
+
+<h2 id="manual-verification">Manual verification</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-verify-a-file-against-its-iscc-code"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Verify a file against its ISCC code</div>
+
+  <ol>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/iscc_sum_verify/iscc_sum_verify/0.1.0+galaxy1" title="Verify ISCC-CODE tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Verify ISCC-CODE</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset to verify”</em>: Select the first example image</li>
+        <li><em>“Expected ISCC-CODE”</em>:
+          <ul>
+            <li><em>“Expected ISCC code”</em>: Paste the ISCC code you generated in the previous step</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Expand the history item for the output of the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/iscc_sum_verify/iscc_sum_verify/0.1.0+galaxy1" title="Verify ISCC-CODE tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Verify ISCC-CODE</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy1)</span> tool.</p>
+    </li>
+    <li>
+      <p>Click on the <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> icon.</p>
+    </li>
+    <li>Scroll down to the <strong>Job Output</strong> section. Select the output to expand it, this will show you verification report, that looks like this:
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OK - ISCC-CODEs match
+Expected:  K4AI45QGX6J3LYNEHONZMQT2GJ6YPJDS74EIC2YMSORF4S5H5SKHQQI
+Generated: K4AI45QGX6J3LYNEHONZMQT2GJ6YPJDS74EIC2YMSORF4S5H5SKHQQI
+</code></pre></div>      </div>
+      <p>The report shows:</p>
+      <ul>
+        <li>Status: OK (match) or FAILED (mismatch)</li>
+        <li>Expected ISCC code</li>
+        <li>Generated ISCC code</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="workflow-integration">Workflow integration</h2>
+
+<p>A powerful use case is integrating ISCC verification directly into your workflows. Here we’ll build a simple verification workflow step by step.</p>
+
+<h3 id="step-1---define-the-workflow-inputs">Step 1 - Define the workflow inputs</h3>
+
+<p>To make the workflow reusable, we need to define two inputs: the image to verify and a file containing the expected ISCC code.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-the-workflow-inputs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Create the workflow inputs</div>
+
+  <ol>
+    <li>
+      <p>Create a new workflow in the workflow editor.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new workflow</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click <strong>Workflow</strong> on the top bar</li>   <li>Click the new workflow <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-new</span> button</li>   <li>Give it a clear and memorable name</li>   <li>Clicking <strong>Save</strong> will take you directly into the workflow editor for that workflow</li>   <li>Need more help? Please see the <em>How to make a workflow subsection</em> <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">here</a></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>Select <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Input dataset</strong> from the list of tools:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <strong>1: Input Dataset</strong> appears in your workflow.
+Change the “Label” of this input to <em>Input image</em>.</li>
+      </ul>
+    </li>
+    <li>Add another <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Input dataset</strong>:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <strong>2: Input Dataset</strong> appears in your workflow.
+Change the “Label” of this input to <em>Expected ISCC code file</em>.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h3 id="step-2---parse-the-expected-iscc-code">Step 2 - Parse the expected ISCC code</h3>
+
+<p>The <em>Generate ISCC-CODE</em> tool outputs the ISCC code as a text file, but the <em>Verify ISCC-CODE</em> tool expects the code as a parameter input. We use <em>Parse parameter value</em> to bridge this gap.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-the-parameter-parsing-step"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Add the parameter parsing step</div>
+
+  <ol>
+    <li>While in the workflow editor, add <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Parse parameter value</strong> from the list of tools:
+      <ul>
+        <li>Connect the output of <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <strong>2: Expected ISCC code file</strong> to the “Input file containing parameter to parse” input of <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>3: Parse parameter value</strong>.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h3 id="step-3---add-the-verification-step">Step 3 - Add the verification step</h3>
+
+<p>Now we add the ISCC verification tool and connect all the inputs.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-the-iscc-verification-step"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Add the ISCC verification step</div>
+
+  <ol>
+    <li>Add <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/iscc_sum_verify/iscc_sum_verify/0.1.0+galaxy1" title="Verify ISCC-CODE tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Verify ISCC-CODE</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy1)</span> from the list of tools:
+      <ul>
+        <li>Connect the output of <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <strong>1: Input image</strong> to the “Dataset to verify” input of <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>4: Verify ISCC-CODE</strong>.</li>
+        <li>Connect the output of <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>3: Parse parameter value</strong> to the “File containing expected ISCC code” input of <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>4: Verify ISCC-CODE</strong>.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The completed workflow should look like this:</p>
+
+<p><a href="../../images/iscc-suite/verify_wf1.png" rel="noopener noreferrer"><img src="../../images/iscc-suite/verify_wf1.png" alt="Workflow diagram showing ISCC verification integrated into a simple workflow. " width="1407" height="661" loading="lazy" /></a></p>
+
+<h3 id="step-4---run-the-workflow">Step 4 - Run the workflow</h3>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-the-verification-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Run the verification workflow</div>
+
+  <ol>
+    <li>Run the workflow with the following inputs:
+      <ul>
+        <li><strong>Input image</strong>: Select the first example image (<code class="language-plaintext highlighter-rouge">example_image.tiff</code>)</li>
+        <li><strong>Expected ISCC code file</strong>: Select the ISCC code output generated in a previous step</li>
+      </ul>
+    </li>
+    <li>
+      <p>Wait for the workflow to complete. Subsequently , expand the history item for the output of the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/iscc_sum_verify/iscc_sum_verify/0.1.0+galaxy1" title="Verify ISCC-CODE tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Verify ISCC-CODE</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy1)</span> tool.</p>
+    </li>
+    <li>
+      <p>Click on the <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> icon.</p>
+    </li>
+    <li>Scroll down to the <strong>Job Output</strong> section and select the output dataset. You should see a verification report similar to the one described in the manual verification section above.</li>
+  </ol>
+
+</blockquote>
+
+<p>When placing this verification step in a full workflow, it can help validate that your processing didn’t unexpectedly alter the content.</p>
+
+<h2 id="image-analysis-workflow-integration">Image analysis workflow integration</h2>
+
+<p>This can be applied in an image analysis workflow to verify an image processing tool provides the expected reproducible output. In the example files we shared, a thresholded image <code class="language-plaintext highlighter-rouge">example_thresholded1.tiff</code> can be found. We will use it to verify whether the Otsu threshold result of this image can be reproduced.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-image-analysis-verification-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Image analysis verification workflow</div>
+
+  <ol>
+    <li>
+      <p>Import and run the ready-to-use workflow:</p>
+
+      <!--SNIPPET-->
+      <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-gtn-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands On: Importing and launching a GTN workflow</div>   <div class="show-when-galaxy-proxy-active"> <span class="workflow" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-iscc-suite/versions/iscc---image-analysis-workflow-example">   Launch <strong>ISCC Image Analysis Verification</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </span> (<a href="https://github.com/galaxyproject/training-material/blob/main/topics/imaging/tutorials/iscc-suite/workflows/ISCC---image-analysis-workflow-example.ga">View on GitHub</a>, <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/iscc-suite/workflows/ISCC---image-analysis-workflow-example.ga">Download workflow</a>) workflow. </div>   <div class="hide-when-galaxy-proxy-active"> Click to  <a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-iscc-suite/versions/iscc---image-analysis-workflow-example">     Launch <strong>ISCC Image Analysis Verification</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a href="https://github.com/galaxyproject/training-material/blob/main/topics/imaging/tutorials/iscc-suite/workflows/ISCC---image-analysis-workflow-example.ga">View on GitHub</a>, <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/iscc-suite/workflows/ISCC---image-analysis-workflow-example.ga">Download workflow</a>) </div>   <!--SNIPPET-->   <blockquote class="tip">   <div class="box-title tip-title" id="tip-if-this-does-not-work"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-this-does-not-work" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: If this does not work</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-workflows-activity</span> <em>Workflows</em> in the Galaxy activity bar (on the left side of the screen, or in the top menu bar of older Galaxy instances). You will see a list of all your workflows</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Paste the following URL into the box labelled <em>“Archived Workflow URL”</em>: <code class="language-plaintext highlighter-rouge">https://training.galaxyproject.org/training-material/topics/imaging/tutorials/iscc-suite/workflows/ISCC---image-analysis-workflow-example.ga</code></li>   <li>Click the <strong>Import workflow</strong> button</li> </ol>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/FXlkreylhww" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote>   <p><!--END_SNIPPET--></p> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>Provide the inputs:
+      <ul>
+        <li><strong>Original image</strong>: Select <code class="language-plaintext highlighter-rouge">example_image.tiff</code> - the image to be processed</li>
+        <li><strong>Segmented image</strong>: Select <code class="language-plaintext highlighter-rouge">example_thresholded1.tiff</code> - the reference segmentation to compare against</li>
+      </ul>
+    </li>
+    <li>
+      <p>Run the workflow.</p>
+    </li>
+    <li>
+      <p>Expand the history item for the output of the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/iscc_sum_verify/iscc_sum_verify/0.1.0+galaxy1" title="Verify ISCC-CODE tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Verify ISCC-CODE</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy1)</span> tool.</p>
+    </li>
+    <li>
+      <p>Click on the <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> icon.</p>
+    </li>
+    <li>Scroll down to the <strong>Job Information</strong> section to view the “Tool Standard Output” log. You should see a verification report similar to the one described in the manual verification section above.</li>
+  </ol>
+
+  <p>The workflow performs Otsu thresholding on the original image and verifies whether the result matches the expected segmentation using ISCC codes. This allows you to verify whether the thresholding method is working as expected and the algorithm has not been altered (e.g., in a new version).</p>
+
+  <p><a href="../../images/iscc-suite/verify_wf2.png" rel="noopener noreferrer"><img src="../../images/iscc-suite/verify_wf2.png" alt="Workflow diagram showing ISCC verification in an image analysis pipeline. " width="1340" height="505" loading="lazy" /></a></p>
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-when-to-use-verification"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: When to use verification</div>
+
+  <p>Verification is particularly useful:</p>
+  <ul>
+    <li>After file transfers or storage operations</li>
+    <li>To confirm correct input files in complex workflows</li>
+    <li>As quality control checkpoints in processing pipelines</li>
+    <li>To detect unintended data modifications</li>
+  </ul>
+</blockquote>
+
+<h1 id="detect-similar-content">Detect similar content</h1>
+
+<p>One of ISCC’s unique features is detecting similar content, even across different formats. This is useful for finding duplicates, tracking content transformations, or identifying related files.</p>
+
+<h2 id="compare-two-files">Compare two files</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-compare-two-files-for-similarity"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Compare two files for similarity</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/iscc_sum_similarity/iscc_sum_similarity/0.1.0+galaxy1" title="Find datasets with similar ISCC-CODEs tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Find datasets with similar ISCC-CODEs</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><em>“Input type”</em>: <code class="language-plaintext highlighter-rouge">Datasets to compare</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> Select multiple datasets (or a collection, see below)</li>
+          </ul>
+        </li>
+        <li><em>“Similarity threshold (Hamming distance)”</em>: <code class="language-plaintext highlighter-rouge">12</code> (default)</li>
+      </ul>
+    </li>
+    <li>The tool will create tabular output which indicates which datasets are similar.
+The table will list all the files that has been set as input. For the files which have a similar file, below the set threshold, the similar file is listed.</li>
+  </ol>
+</blockquote>
+
+<h2 id="find-similar-files-in-collections">Find similar files in collections</h2>
+
+<p>When working with a collection of files, you can identify all similar items. This is particularly useful when you have large datasets and want to find duplicates or track how processing affects content similarity.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-find-similar-files-in-a-collection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Find similar files in a collection</div>
+
+  <ol>
+    <li>
+      <p>Create a dataset collection with your test images</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a dataset collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Advanced Build List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>     <p>You are in collection building wizard. Choose <strong>Flat List</strong> and click ‘Next’ button at the right bottom corner.</p>     <p><img src="/training-material/topics/galaxy-interface/images/flat_list_selector.png" alt="collection building wizard flat list" width="15%" /></p>   </li>   <li>     <p>Double clcik on the file names to edit. For example, remove file extensions or common prefix/suffixes to cleanup the names.</p>     <p><img src="/training-material/topics/galaxy-interface/images/flat_list_edit.png" alt="edit and build a list collection" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Build</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <p>Include all images from the tutorial: <code class="language-plaintext highlighter-rouge">example_image.tiff</code>, <code class="language-plaintext highlighter-rouge">example_image2.tiff</code>, <code class="language-plaintext highlighter-rouge">example_image3.tiff</code> and <code class="language-plaintext highlighter-rouge">example_thresholded1.tiff</code></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/iscc_sum_similarity/iscc_sum_similarity/0.1.0+galaxy1" title="Find datasets with similar ISCC-CODEs tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Find datasets with similar ISCC-CODEs</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><em>“Input type”</em>: <code class="language-plaintext highlighter-rouge">Datasets to compare</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> Select your collection</li>
+          </ul>
+        </li>
+        <li><em>“Similarity threshold (Hamming distance)”</em>: <code class="language-plaintext highlighter-rouge">12</code> (default)</li>
+      </ul>
+    </li>
+    <li>Examine the output table. Each row represents a file from your collection. The columns show:
+      <ul>
+        <li>The filename</li>
+        <li>Its ISCC code</li>
+        <li>Any similar files found (with their similarity score)</li>
+      </ul>
+
+      <p>Files that share content (like <code class="language-plaintext highlighter-rouge">example_image.tiff</code> and <code class="language-plaintext highlighter-rouge">example_image3.tiff</code>, which is slightly modified ) will be grouped together, although their ISCC-SUM codes are different.</p>
+
+      <p><a href="../../images/iscc-suite/similarity_table.png" rel="noopener noreferrer"><img src="../../images/iscc-suite/similarity_table.png" alt="ISCC similarity table. " width="2082" height="295" loading="lazy" /></a></p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-understanding-the-hamming-distance-threshold"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-understanding-the-hamming-distance-threshold" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Understanding the Hamming distance threshold</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>The Hamming distance counts how many bits differ between two Data-Codes. For the default 64-bit Data-Code, this ranges from 0 (identical) to 64 (completely different). The tool uses a default threshold of 12, meaning files with a distance of 12 or less are considered similar.</p>
+
+  <p>This threshold is a practical starting point — adjust it based on your use case: lower values for stricter matching, higher values to catch more distant similarities. Keep in mind that Data-Code similarity reflects byte-level similarity, not semantic content. Whether a given distance is scientifically meaningful depends on your domain and data.</p>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>
+      <p>Looking at the similarity results table, why do <code class="language-plaintext highlighter-rouge">example_image.tiff</code> and <code class="language-plaintext highlighter-rouge">example_image3.tiff</code> show a match while <code class="language-plaintext highlighter-rouge">example_thresholded1.tiff</code> does not?</p>
+    </li>
+    <li>
+      <p>What does a distance value of -1 indicate?</p>
+    </li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>
+        <p><code class="language-plaintext highlighter-rouge">example_image.tiff</code> and <code class="language-plaintext highlighter-rouge">example_image3.tiff</code> contain similar visual content, resulting in a Hamming distance of 5, which is below the threshold of 12. The thresholded image has undergone significant processing (binarization), changing its content substantially so it no longer matches the original within the similarity threshold.</p>
+      </li>
+      <li>
+        <p>A distance of -1 indicates that no similar file was found within the specified threshold. The file is unique compared to all other files in the collection.</p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="practical-use-cases">Practical use cases</h1>
+
+<h2 id="use-case-1-quality-control-in-image-analysis-pipelines">Use case 1: Quality control in image analysis pipelines</h2>
+
+<p>When processing large microscopy datasets:</p>
+
+<ul>
+  <li>Generate ISCC codes for raw images upon acquisition</li>
+  <li>Detect if processing steps produce consistent outputs across batch runs</li>
+  <li>Identify accidentally duplicated samples before analysis</li>
+</ul>
+
+<h2 id="use-case-2-data-deduplication-and-organization">Use case 2: Data deduplication and organization</h2>
+
+<p>When managing growing image repositories:</p>
+
+<ul>
+  <li>Scan collections to find duplicate uploads that waste storage</li>
+  <li>Identify images that are near-duplicates (e.g., same sample, different export settings)</li>
+  <li>Group related experimental replicates automatically</li>
+</ul>
+
+<h2 id="use-case-3-reproducibility-and-data-sharing">Use case 3: Reproducibility and data sharing</h2>
+
+<p>When publishing or sharing datasets:</p>
+
+<ul>
+  <li>Include ISCC codes in data publications for recipient verification</li>
+  <li>Document the exact input files used in published analyses</li>
+  <li>Enable collaborators to confirm they have identical source data</li>
+</ul>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, you learned to use the Galaxy ISCC-suite for content tracking and verification:</p>
+
+<ul>
+  <li><strong>Generate ISCC-CODE</strong>: Creates content-based identifiers for any file</li>
+  <li><strong>Verify ISCC-CODE</strong>: Confirms files match expected content at workflow checkpoints</li>
+  <li><strong>Find datasets with similar ISCC-CODEs</strong>: Detects related or duplicate content in collections</li>
+</ul>
+
+<p>These tools help you maintain data integrity throughout your analysis workflows, from initial data import through to final results.</p>
+
+<h1 id="references">References</h1>
+
+<ul>
+  <li>ISCC - International Standard Content Code: https://iscc.codes/</li>
+  <li>ISCC-SUM Implementation: https://github.com/iscc/iscc-sum</li>
+  <li>ISCC-SUM Quick Start: https://sum.iscc.codes/quickstart/</li>
+</ul>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>ISCC codes provide content-based identifiers for any file type</p>
+</li>
+                        
+                        <li><p>Content hashing helps track data provenance and verify file integrity</p>
+</li>
+                        
+                        <li><p>Similarity detection can identify related or duplicate content</p>
+</li>
+                        
+                        <li><p>ISCC codes can be integrated into any Galaxy workflow for quality control</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                
+                  <li><a href="/training-material/topics/imaging/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/imaging#references">here</a>.</p>
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/iscc-suite"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/iscc-suite">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Maarten Paul, Martin Etzrodt,  <b>Content Tracking and Verification in Galaxy Workflows with ISCC-SUM (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/iscc-suite/tutorial.html">https://training.galaxyproject.org/training-material/topics/imaging/tutorials/iscc-suite/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{imaging-iscc-suite,
+author = "Maarten Paul and Martin Etzrodt",
+	title = "Content Tracking and Verification in Galaxy Workflows with ISCC-SUM (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/imaging/tutorials/iscc-suite/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/iscc-suite/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+function ready(fn) {
+	if (document.readyState != 'loading'){
+		fn();
+	} else {
+		document.addEventListener('DOMContentLoaded', fn);
+	}
+}
+ready(function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/iscc-suite/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/imaging/tutorials/iscc-suite/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0e078d434baa8c4f17a94d606dd020c28bb53c41">0e078d4</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+
+    </body>
+</html>
