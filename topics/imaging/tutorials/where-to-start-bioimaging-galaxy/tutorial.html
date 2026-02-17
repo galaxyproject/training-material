@@ -1,0 +1,2463 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Where to start with bioimage analysis in Galaxy / Where to start with bioimage analysis in Galaxy / Imaging</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@615d530980e64081ad14203e7a76dae4059e467f",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/where-to-start-bioimaging-galaxy/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Where to start with bioimage analysis in Galaxy">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-02-17 21:37:04 +0000">
+<meta name="DC.creator" content="Diana Chiang Jurado">
+<meta name="DC.creator" content="Beatriz Serrano-Solano">
+<meta name="DC.creator" content="Leonid Kostrykin"><meta name="description" content="Image analysis using Galaxy">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Imaging / Where to start with bioimage analysis in Galaxy / Hands-on: Where to start with bioimage analysis in Galaxy">
+        <meta property="og:description" content="Image analysis using Galaxy">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/imaging/tutorials/where-to-start-bioimaging-galaxy/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Where to start with bioimage analysis in Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-02-17 21:37:04 +0000",
+  "datePublished": "2026-02-17 21:37:04 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Imaging",
+    "description": "Image analysis using Galaxy",
+    "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+  },
+  "abstract": "Bioimage analysis is the process of extracting meaningful information, such as quantitative data, from images in the life sciences. In this field, images are typically acquired using microscopy. Whether examining stained tissue sections in histology or tracking fluorescently labeled proteins in live cells, the fundamental goal remains consistent: **turning pixels into numbers**.",
+  "learningResourceType": "e-learning",
+  "name": "Where to start with bioimage analysis in Galaxy",
+  "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/where-to-start-bioimaging-galaxy/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT2H",
+  "teaches": "- Classify your imaging data based on modality and dimensions (5D).\n- Identify the correct entry point in Galaxy (Upload vs. Bio-Formats vs. OMERO).\n- Apply pre-processing filters to improve data quality before analysis.\n- Navigate the GTN ecosystem to find specialized follow-up tutorials.",
+  "keywords": [
+    "Imaging",
+    "Microscopy",
+    "Bioimaging",
+    "Histology"
+  ],
+  "description": "## Abstract\n\nBioimage analysis is the process of extracting meaningful information, such as quantitative data, from images in the life sciences. In this field, images are typically acquired using microscopy. Whether examining stained tissue sections in histology or tracking fluorescently labeled proteins in live cells, the fundamental goal remains consistent: **turning pixels into numbers**.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - Can I process images from experimental data in Galaxy? Where do I begin?\n - How do I identify an image type and its metadata?\n - What are the basic steps of a bioimage analysis workflow?\n - Which workflows are best suited for my specific biological questions?\n - How do I choose between different segmentation strategies?\n\n\n## Learning Objectives\n\n- Classify your imaging data based on modality and dimensions (5D).\n- Identify the correct entry point in Galaxy (Upload vs. Bio-Formats vs. OMERO).\n- Apply pre-processing filters to improve data quality before analysis.\n- Navigate the GTN ecosystem to find specialized follow-up tutorials.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html",
+      "name": "FAIR Bioimage Metadata",
+      "description": "Hands-on for 'FAIR Bioimage Metadata' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html",
+      "name": "REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data",
+      "description": "Hands-on for 'REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dianichj/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dianichj/",
+      "name": "Diana Chiang Jurado",
+      "image": "https://avatars.githubusercontent.com/dianichj",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/spoc/",
+          "name": "🖖🏾Single-cell & sPatial Omics Community of practice",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/community/sig/singlecell/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4bioimage/",
+          "name": "NFDI4Bioimage",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4bioimage.de"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5857-1477",
+      "@id": "https://orcid.org/0000-0002-5857-1477"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/",
+      "name": "Beatriz Serrano-Solano",
+      "image": "https://avatars.githubusercontent.com/beatrizserrano",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5862-6132",
+      "@id": "https://orcid.org/0000-0002-5862-6132"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/",
+      "name": "Leonid Kostrykin",
+      "image": "https://avatars.githubusercontent.com/kostrykin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1323-3762",
+      "@id": "https://orcid.org/0000-0003-1323-3762"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/maartenpaul/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/maartenpaul/",
+      "name": "Maarten Paul",
+      "image": "https://avatars.githubusercontent.com/maartenpaul",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nlbioimaging/",
+          "name": "NL-BioImaging",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://eurobioimaging.nl"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7990-6010",
+      "@id": "https://orcid.org/0000-0002-7990-6010"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/rmassei/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/rmassei/",
+      "name": "Riccardo Massei",
+      "image": "https://avatars.githubusercontent.com/rmassei",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4bioimage/",
+          "name": "NFDI4Bioimage",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4bioimage.de"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ufz/",
+          "name": "UFZ - Helmholtz-Zentrum für Umweltforschung UFZ",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.ufz.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2104-9519",
+      "@id": "https://orcid.org/0000-0003-2104-9519"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/arrmunoz/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/arrmunoz/",
+      "name": "Maria Arrate Munoz Barrutia",
+      "image": "https://avatars.githubusercontent.com/arrmunoz",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Imaging",
+      "description": "Image analysis using Galaxy",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3382",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3382",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3382"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/pytorch",
+      "name": "PyTorch"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/CellProfiler",
+      "name": "CellProfiler"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/scikit-image",
+      "name": "scikit-image"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy_image_analysis",
+      "name": "Galaxy Image Analysis"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/imaging" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Imaging
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/imaging/faqs/" title="Check our FAQs for the Imaging topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/where-to-start-bioimaging-galaxy/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/imaging/tutorials/where-to-start-bioimaging-galaxy/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-imaging">
+    <h1 data-toc-skip>Where to start with bioimage analysis in Galaxy</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/dianichj/" class="contributor-badge contributor-dianichj"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/dianichj?s=36" alt="Diana Chiang Jurado avatar" width="36" class="avatar" />
+    Diana Chiang Jurado</a><a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge contributor-beatrizserrano"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/beatrizserrano?s=36" alt="Beatriz Serrano-Solano avatar" width="36" class="avatar" />
+    Beatriz Serrano-Solano</a><a href="/training-material/hall-of-fame/kostrykin/" class="contributor-badge contributor-kostrykin"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/kostrykin?s=36" alt="Leonid Kostrykin avatar" width="36" class="avatar" />
+    Leonid Kostrykin</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/maartenpaul/" class="contributor-badge contributor-maartenpaul"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/maartenpaul?s=36" alt="Maarten Paul avatar" width="36" class="avatar" />
+    Maarten Paul</a><a href="/training-material/hall-of-fame/rmassei/" class="contributor-badge contributor-rmassei"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/rmassei?s=36" alt="Riccardo Massei avatar" width="36" class="avatar" />
+    Riccardo Massei</a></td>
+	</tr>
+	
+
+	
+
+	
+	<tr class="reviewers">
+		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/maartenpaul/" class="contributor-badge contributor-badge-small contributor-maartenpaul"><img src="https://avatars.githubusercontent.com/maartenpaul?s=36" alt="Maarten Paul avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/rmassei/" class="contributor-badge contributor-badge-small contributor-rmassei"><img src="https://avatars.githubusercontent.com/rmassei?s=36" alt="Riccardo Massei avatar" width="36" class="avatar" /></a><a href="/training-material/hall-of-fame/arrmunoz/" class="contributor-badge contributor-badge-small contributor-arrmunoz"><img src="https://avatars.githubusercontent.com/arrmunoz?s=36" alt="Maria Arrate Munoz Barrutia avatar" width="36" class="avatar" /></a></td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Can I process images from experimental data in Galaxy? Where do I begin?</p>
+</li>
+        
+        <li><p>How do I identify an image type and its metadata?</p>
+</li>
+        
+        <li><p>What are the basic steps of a bioimage analysis workflow?</p>
+</li>
+        
+        <li><p>Which workflows are best suited for my specific biological questions?</p>
+</li>
+        
+        <li><p>How do I choose between different segmentation strategies?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Classify your imaging data based on modality and dimensions (5D).</p>
+</li>
+        
+        <li><p>Identify the correct entry point in Galaxy (Upload vs. Bio-Formats vs. OMERO).</p>
+</li>
+        
+        <li><p>Apply pre-processing filters to improve data quality before analysis.</p>
+</li>
+        
+        <li><p>Navigate the GTN ecosystem to find specialized follow-up tutorials.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: FAIR Bioimage Metadata</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/imaging/tutorials/where-to-start-bioimaging-galaxy/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 17, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 17, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Bioimage analysis is the process of extracting meaningful information, such as quantitative data, from images in the life sciences. In this field, images are typically acquired using microscopy. Whether examining stained tissue sections in histology or tracking fluorescently labeled proteins in live cells, the fundamental goal remains consistent: <strong>turning pixels into numbers</strong>.</p>
+
+<p>In Galaxy, we provide an ecosystem to make this process reproducible and scalable. We focus on making image analysis <strong>FAIR by design</strong> <em>(Findable, Accesible, Interoperable, Reusable)</em>, ensuring that your image formats, metadata, tools, and workflows remain reusable, transparent, and traceable from the very first upload to the final figure (<span class="citation"><a href="#GalaxyCommunity2024">The Galaxy Community 2024</a></span>).</p>
+
+<p>This tutorial serves as your <strong>compass</strong> for navigating the Galaxy imaging landscape, specifically for bioimage data preprocessing and analysis. You will learn how image data is structured, explore the tools available in Galaxy, and discover how to kickstart your image analysis journey. By the end, you’ll understand how to transform raw, complex image data into structured tables of measurements ready for downstream statistical analysis—and know where to find the tools and resources to continue your work.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="/training-material/topics/imaging/images/where-to-start-bioimaging-galaxy/imaging_summary_image.png" alt="Turning pixels into numbers!" width="750" height="375" loading="lazy" /><a target="_blank" href="/training-material/topics/imaging/images/where-to-start-bioimaging-galaxy/imaging_summary_image.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Workflow showing the transformation from raw microscopy images to quantitative measurements.</figcaption></figure>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+<ol id="markdown-toc">
+  <li><a href="#1-know-your-data-the-digital-anatomy-of-an-image" id="markdown-toc-1-know-your-data-the-digital-anatomy-of-an-image">1. Know your data (the “digital anatomy” of an image)</a>    <ol>
+      <li><a href="#pixels-and-voxels" id="markdown-toc-pixels-and-voxels">Pixels and voxels</a></li>
+      <li><a href="#the-5-dimensions-5d" id="markdown-toc-the-5-dimensions-5d">The 5 dimensions (5D)</a></li>
+      <li><a href="#bit-depth-the-range-and-precision-limits" id="markdown-toc-bit-depth-the-range-and-precision-limits">Bit depth (the range and precision limits)</a></li>
+      <li><a href="#spatial-calibration-the-size" id="markdown-toc-spatial-calibration-the-size">Spatial calibration (the size)</a></li>
+    </ol>
+  </li>
+  <li><a href="#2-how-to-get-your-images-into-galaxy" id="markdown-toc-2-how-to-get-your-images-into-galaxy">2. How to get your images into Galaxy</a>    <ol>
+      <li><a href="#why-use-the-bio-formats-tool-suite" id="markdown-toc-why-use-the-bio-formats-tool-suite">Why use the Bio-Formats tool suite?</a></li>
+    </ol>
+  </li>
+  <li><a href="#3-before-you-begin-diagnose-your-data-and-define-your-goals" id="markdown-toc-3-before-you-begin-diagnose-your-data-and-define-your-goals">3. Before you begin: diagnose your data and define your goals</a></li>
+  <li><a href="#4-the-lifecycle-of-an-analysis-pipeline" id="markdown-toc-4-the-lifecycle-of-an-analysis-pipeline">4. The lifecycle of an analysis pipeline</a>    <ol>
+      <li><a href="#stage-a-pre-processing-cleaning" id="markdown-toc-stage-a-pre-processing-cleaning">Stage A: Pre-processing (cleaning)</a></li>
+      <li><a href="#stage-b-segmentation-defining-objects" id="markdown-toc-stage-b-segmentation-defining-objects">Stage B: Segmentation (defining objects)</a></li>
+      <li><a href="#stage-c-post-processing-refining" id="markdown-toc-stage-c-post-processing-refining">Stage C: Post-processing (Refining)</a></li>
+      <li><a href="#stage-d-quantification-extracting-numbers" id="markdown-toc-stage-d-quantification-extracting-numbers">Stage D: Quantification (Extracting numbers)</a></li>
+      <li><a href="#stage-e-validation-the-sanity-check" id="markdown-toc-stage-e-validation-the-sanity-check">Stage E: Validation (The sanity check)</a></li>
+    </ol>
+  </li>
+  <li><a href="#5-finding-your-workflow-modality-and-tools" id="markdown-toc-5-finding-your-workflow-modality-and-tools">5. Finding your workflow: modality and tools</a>    <ol>
+      <li><a href="#the-decision-tree-your-logical-roadmap" id="markdown-toc-the-decision-tree-your-logical-roadmap">The decision tree: your logical roadmap</a></li>
+      <li><a href="#the-galaxy-imaging-toolbox" id="markdown-toc-the-galaxy-imaging-toolbox">The Galaxy imaging toolbox</a></li>
+      <li><a href="#identifying-your-modality" id="markdown-toc-identifying-your-modality">Identifying your modality</a></li>
+      <li><a href="#practice-applying-the-roadmap" id="markdown-toc-practice-applying-the-roadmap">Practice: applying the roadmap</a></li>
+    </ol>
+  </li>
+  <li><a href="#6-common-pitfalls-to-avoid" id="markdown-toc-6-common-pitfalls-to-avoid">6. Common pitfalls to avoid</a>    <ol>
+      <li><a href="#1-the-jpg-trap" id="markdown-toc-1-the-jpg-trap">1. The “JPG” trap</a></li>
+      <li><a href="#2-the-merged-image-mistake" id="markdown-toc-2-the-merged-image-mistake">2. The “merged image” mistake</a></li>
+      <li><a href="#3-ignoring-saturation" id="markdown-toc-3-ignoring-saturation">3. Ignoring saturation</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a>    <ol>
+      <li><a href="#further-reading" id="markdown-toc-further-reading">Further Reading</a></li>
+    </ol>
+  </li>
+  <li><a href="#glossary-of-bioimage-terms" id="markdown-toc-glossary-of-bioimage-terms">Glossary of bioimage terms</a></li>
+  <li><a href="#glossary-of-bioimage-terms-1" id="markdown-toc-glossary-of-bioimage-terms-1">Glossary of bioimage terms</a></li>
+  <li><a href="#next-steps-choose-your-tutorial" id="markdown-toc-next-steps-choose-your-tutorial">Next Steps: choose your tutorial</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="1-know-your-data-the-digital-anatomy-of-an-image">1. Know your data (the “digital anatomy” of an image)</h1>
+
+<p>As Pete Bankhead points out in <em><a href="https://bioimagebook.github.io/index.html">Introduction to Bioimage Analysis</a></em> (<span class="citation"><a href="#Bankhead2022">Bankhead 2022</a></span>), <em>“an image is not just a picture, it is a collection of measurements.”</em> Therefore, before starting any analysis, it is important that you understand the structure of your data.</p>
+
+<p>To the human eye, an image is a visual representation of a biological sample. However, to a computer, it is a <strong>numerical array</strong> (<span class="citation"><a href="#Sedgewick2010">Sedgewick and Wayne 2010</a></span>). The dimensionality of this array depends on your data:</p>
+
+<ul>
+  <li>A <strong>2D grayscale image</strong> is a <strong>2D array</strong> (matrix): rows × columns</li>
+  <li>A <strong>2D color image</strong> is a <strong>3D array</strong> (tensor): rows × columns × channels (RGB)</li>
+  <li>A <strong>3D grayscale image (volume)</strong> is a <strong>3D array</strong>: X × Y × Z</li>
+  <li>A <strong>3D color image (volume)</strong> is a <strong>4D array</strong>: X × Y × Z × C</li>
+  <li>A multi-dimensional hyperstack is a <strong>tensor</strong>: a multi-dimensional array (e.g., X × Y × Z × C × T)</li>
+</ul>
+
+<p>Every point in that array—the <strong>pixel</strong> (2D) or <strong>voxel</strong> (3D)—is a data point representing the number of photons or the signal intensity detected at that specific coordinate. Understanding “digital anatomy” of an image means knowing exactly how those numbers were recorded, how they are organized across dimensions, how they are spaced and oriented in 3D space, and what the limitations of the employed imaging technique are (e.g., due to over/undersaturation that leads to clipped intensities).</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="/training-material/topics/imaging/images/where-to-start-bioimaging-galaxy/pete_bank_imaging.png" alt="Example digital image and its pixel representation. " width="1280" height="439" loading="lazy" /><a target="_blank" href="/training-material/topics/imaging/images/where-to-start-bioimaging-galaxy/pete_bank_imaging.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> A digital image can be represented visually or numerically. <strong>(A–B)</strong> The image is visualized as a grid of small squares with different gray intensities, where each square corresponds to one pixel. This square pattern is only a display convention to help us interpret the image. <strong>(C)</strong> Internally, the image is stored as numerical values arranged in an array. Inspecting these raw numbers directly makes it difficult to recognize the image content. Figure from <span class="citation"><a href="#Bankhead2022">Bankhead 2022</a></span> (CC BY 4.0).</figcaption></figure>
+
+<p>If you don’t understand the numbers behind the colors, you risk performing “image processing” (simply making a pretty picture) rather than “image analysis” (extracting quantitative data and meaningful insights). Let’s unpack the data behind an image step by step.</p>
+
+<h2 id="pixels-and-voxels">Pixels and voxels</h2>
+
+<p>An image is a grid of <strong>pixels</strong> (2D images) or <strong>voxels</strong> (3D images). Think of an image as a vast mosaic where every tile is a “picture element.” In 2D, these tiles are flat, but in 3D imaging, they have depth and are called <strong>voxels</strong> (“volumetric elements”, e.g., <span class="citation"><a href="#Pawley2006">Pawley 2006</a></span>). Each one is like a small bucket that has captured a specific amount of signal (usually light), which the computer records as a single number.</p>
+
+<p>Image intensities represent measurements from the imaging system. To make these numbers meaningful for scientific analysis, we must define two key properties: their <strong>range</strong> (the possible values intensities can take) and their <strong>spatial extent</strong> (the physical size represented by each pixel or voxel, which determines the image resolution).</p>
+
+<h2 id="the-5-dimensions-5d">The 5 dimensions (5D)</h2>
+
+<p>In everyday photography, we usually deal with 2D color images. However, in the life sciences, we can capture <strong>hyperstacks</strong>: multi-dimensional data structures that represent a biological sample across space (<code class="language-plaintext highlighter-rouge">X</code>, <code class="language-plaintext highlighter-rouge">Y</code>, <code class="language-plaintext highlighter-rouge">Z</code> axes), spectrum (<code class="language-plaintext highlighter-rouge">C</code> axis), and time (<code class="language-plaintext highlighter-rouge">T</code> axis). Although many scientific images adopt the <code class="language-plaintext highlighter-rouge">XYZCT</code> (<span class="citation"><a href="#Goldberg2005">Goldberg and et al. 2005</a></span>) or <code class="language-plaintext highlighter-rouge">TCZYX</code> axes order (e.g., (<span class="citation"><a href="#Moore2021">Moore and et al. 2021</a></span>), making wrong assumptions about that order is a frequent source of error. It is thus important to make sure that the axes order is properly annotated in the image metadata.</p>
+
+<ul>
+  <li><strong>X, Y &amp; Z (Spatial):</strong> X and Y represent the width and height of your image (the 2D plane). Z represents multiple optical sections or “slices” taken at different focal planes to reconstruct a 3D volume. In confocal or light-sheet microscopy, Z captures different depths through the sample.</li>
+  <li><strong>C (Channel):</strong> Different wavelengths, fluorescent probes, or staining methods corresponding to specific biological structures or molecules. In fluorescence microscopy, examples include DAPI for nuclei, GFP for proteins, and Phalloidin for actin. In histology, different channels can represent various antibody stains (immunohistochemistry) or traditional stains like hematoxylin and eosin (H&amp;E).</li>
+  <li><strong>T (Time):</strong> Separate frames captured over a duration (time-lapse), allowing you to track movement, growth, or dynamic changes in cellular processes.</li>
+</ul>
+
+<p>However, it is important to note that while we describe them in <code class="language-plaintext highlighter-rouge">XYZCT</code> order, different microscope vendors, tools, and file formats store them in different orders (e.g., <code class="language-plaintext highlighter-rouge">TZCXY</code> or <code class="language-plaintext highlighter-rouge">XYCZT</code>). Ensuring that the dimensional order is properly annotated within the image metadata is essential so that Galaxy (and any image analysis software in general) doesn’t accidentally interpret a Z-slice as a time-point or a channel as a Z-position (e.g., <span class="citation"><a href="#Linkert2010">Linkert and et al. 2010</a></span>).</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-respect-the-channels"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-respect-the-channels" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  Respect the channels </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>While we often look at “merged” RGB images for presentations, you should <strong>always perform quantification on the raw, individual channels.</strong> Merging or converting to RGB often involves data compression, bit-depth reduction (typically down to 8-bit), or intensity scaling that distorts the underlying measurements and loses quantitative information (<span class="citation"><a href="#Cromey2010">Cromey 2010</a></span>). Each channel should be analyzed separately and then results can be compared or combined downstream.</p>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-identify-the-dimensions"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Identify the dimensions</div>
+
+  <p>If you have a time-lapse experiment where you recorded 3 different fluorescent markers across 10 focal planes (Z-slices) every minute for an hour, how many total 2D images (planes) are in your file?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>You would have: \(3 \text{ (Channels)} \times 10 \text{ (Z-slices)} \times 60 \text{ (Time points)} = 1,800 \text{ total 2D planes}\)</p>
+
+    <p>Each individual plane is an \(X \times Y\) image. Galaxy tools need to know the correct dimensional order (e.g., <code class="language-plaintext highlighter-rouge">XYZCT</code> vs <code class="language-plaintext highlighter-rouge">XYCZT</code> vs <code class="language-plaintext highlighter-rouge">TZCXY</code>) to ensure they correctly interpret which dimension is which—otherwise, you might accidentally measure intensity changes across Z-depth when you meant to measure changes over time!</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="bit-depth-the-range-and-precision-limits">Bit depth (the range and precision limits)</h2>
+
+<p>The bit depth corresponds to an <strong>upper limit of the precision</strong> when storing image intensities by determining the range of possible intensity values and the smallest distinguishable difference between them. The <strong>actual precision</strong> may also be lower and depends on many factors in your imaging system, like sensor noise, photon statistics, optical aberrations, and sample preparation quality (e.g., <span class="citation"><a href="#Pawley2006">Pawley 2006</a></span>).</p>
+
+<p>When it comes to the representation of the measurements of the imaging system as the image intensities, there generally are two main types of such representation:</p>
+
+<h3 id="integer-representations">Integer representations</h3>
+
+<p>These are the natural format for raw camera data, as imaging sensors essentially count photons:</p>
+
+<ul>
+  <li>
+    <p><strong>8-bit:</strong> 2<sup>8</sup> = 256 possible values (range: 0 to 255 for unsigned, or -128 to 127 for signed). While this looks fine to our eyes, it is often too “coarse” for thorough quantitative analysis.</p>
+  </li>
+  <li>
+    <p><strong>16-bit:</strong> 2<sup>16</sup> = 65,536 possible values (range: 0 to 65,535 for unsigned, or -32,768 to 32,767 for signed). This is the <strong>scientific gold standard for image acquisition and storage</strong>, because it allows you to detect even subtle differences in image intensities that would be lost (e.g., due to rounding) when using an 8-bit representation <span class="citation"><a href="#Haase2022">Haase and et al. 2022</a></span>.</p>
+  </li>
+  <li>
+    <p><strong>32-bit:</strong> 2<sup>32</sup> = 4,294,967,296 possible values. While less common in direct acquisition, 32-bit integer formats are sometimes used in intermediate processing steps or for label images where many distinct regions need to be encoded.</p>
+  </li>
+</ul>
+
+<h3 id="floating-point-representations">Floating-point representations</h3>
+
+<p>After image processing operations (e.g., background subtraction, normalization, deconvolution), intensity values often become non-integer (i.e., decimal, fractional) or fall outside the original acquisition range. Floating-point formats accommodate this by representing both positive and negative values with decimal precision:</p>
+
+<ul>
+  <li>
+    <p><strong>16-bit float (half precision):</strong> Can represent values approximately in the range of ±65,504 with limited decimal precision. This format is increasingly used in machine learning and GPU-accelerated image processing because it saves memory while providing sufficient precision for many applications.</p>
+  </li>
+  <li>
+    <p><strong>32-bit float (single precision):</strong> Can represent values approximately in the range of ±10<sup>38</sup> with about 7 significant decimal digits of precision. This is the <strong>most common format for image processing</strong> as it balances precision, range, and computational efficiency.</p>
+  </li>
+  <li>
+    <p><strong>64-bit float (double precision):</strong> Can represent values approximately in the range of ±10<sup>308</sup> with about 15-16 significant decimal digits of precision, useful for iterative algorithms or when accumulating many operations where small errors could compound.</p>
+  </li>
+</ul>
+
+<p>Unlike integer representations where the precision (smallest distinguishable difference) is constant across the entire range, floating-point precision varies: it is highest near zero and decreases as values approach the limits of the representable range.</p>
+
+<p>Many analysis tools automatically convert to floating-point internally to preserve accuracy during calculations.</p>
+
+<h3 id="bit-depth-why-it-matters-for-science">Bit depth: why it matters for science</h3>
+
+<p>A common misconception is that if two images look identical on a desktop monitor, they contain the same data. However, our eyes are used to computer screens that are usually limited to 8-bit, while your microscope sensor is far more sensitive.</p>
+
+<p>When you perform certain pre-processing tasks, such as subtracting the image background or contrast enhancement, you are essentially <strong>stretching the histogram</strong> of the image data.</p>
+
+<ul>
+  <li>In <strong>8-bit</strong>, with only 256 possible values, stretching creates more pronounced “gaps” in your histogram (quantization artifacts), potentially making your data distribution appear discontinuous.</li>
+  <li>In <strong>16-bit integer</strong>, with 65,536 possible values, the same stretching operation creates smaller relative gaps. While quantization artifacts still occur, they are far less severe and less likely to impact downstream quantitative analysis (<span class="citation"><a href="#Cromey2010">Cromey 2010</a></span>).</li>
+</ul>
+
+<p>The key difference is not whether artifacts appear, but their <strong>magnitude in relation to your data range</strong>. Think of it this way: spreading 256 values across a wider range creates larger “holes” between adjacent intensity levels than spreading 65,536 values across the same range.</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="/training-material/topics/imaging/images/where-to-start-bioimaging-galaxy/bit_depth.png" alt="Bit depth: why it matters in science. " width="940" height="788" loading="lazy" /><a target="_blank" href="/training-material/topics/imaging/images/where-to-start-bioimaging-galaxy/bit_depth.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Comparison showing how different bit depths affect the ability to detect subtle differences in image intensities during quantitative analysis.</figcaption></figure>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-precision"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-precision" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  Precision </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Always try to keep your data in <strong>16-bit integer</strong> or <strong>floating-point formats</strong> (16-bit, 32-bit, or 64-bit float) during analysis. Converting to 8-bit too early reduces your ability to detect subtle intensity differences and makes quantization artifacts more severe during processing. This lost precision can never be recovered (<span class="citation"><a href="#Haase2022">Haase and et al. 2022</a></span>).</p>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-why-use-floating-point-instead-of-16-bit-integer"><i class="far fa-question-circle" aria-hidden="true" ></i> Question:  Why use floating-point instead of 16-bit integer?</div>
+
+  <p>We already covered different floating-point formats in the bit depth section above. But why would we need to convert from 16-bit integer to floating-point during analysis?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>16-bit <strong>integer</strong> images can only store whole numbers (0–65,535). Many image processing operations produce non-integer results that would be lost through rounding:</p>
+
+    <ul>
+      <li>Dividing pixel intensity 5 by 2 gives 2.5 (must be rounded to 2 or 3 in integer format)</li>
+      <li>Background subtraction can produce negative values (impossible in unsigned integer format)</li>
+      <li>Averaging two pixels with values 100 and 101 gives 100.5 (precision lost in integer)</li>
+      <li>Normalizing intensities often produces fractional values</li>
+    </ul>
+
+    <p>Floating-point still suffer from rounding but are capable to preserve these exact values with a much higher precision, reducing cumulative rounding errors across multiple processing steps. Additionally, floating-point formats can represent values in a far larger range, which is useful when processing operations produce very small or very large values (e.g., summing image intensities across multiple images; e.g., <span class="citation"><a href="#Pawley2006">Pawley 2006</a></span>). Most image analysis software automatically converts images to 32-bit float internally for this reason.</p>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="spatial-calibration-the-size">Spatial calibration (the size)</h2>
+
+<p>Image pixels (or voxels) have no <em>intrinsic</em> physical size; they are just units of storage and representation. <strong>Spatial calibration</strong> is the metadata that links these digital units to physical reality (e.g., \(1 \text{ pixel} = 0.25 \mu m\)). Without this “secret sauce,” you can count objects, but you cannot accurately measure how big they are, how fast they move, or their concentration (e.g., <span class="citation"><a href="#Linkert2010">Linkert and et al. 2010</a></span>, <span class="citation"><a href="#Haase2022">Haase and et al. 2022</a></span>).</p>
+
+<p>Metadata like the calibration information is usually stored in the image header. If you lose this metadata during a file conversion (e.g., saving as a standard .jpg), your analysis will only be able to provide quantitative results in “pixels,” which may have no biological meaning.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-avoid-saturation"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-avoid-saturation" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  Avoid saturation </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>If you see an image intensity value of “0”, the sensor may have detected nothing, or it could represent true absence of signal—context matters. If you see the maximum value (e.g., \(255\) or \(65,535\)), your sensor was overwhelmed. These phenomena are called <strong>saturation</strong> (under- and oversaturation, respectively). Saturated pixels are often “clipped,” meaning the true biological signal was lower or higher than what the camera could record (e.g., <span class="citation"><a href="#Pawley2006">Pawley 2006</a></span>). This data is lost forever and cannot be accurately quantified.</p>
+
+</blockquote>
+
+<h1 id="2-how-to-get-your-images-into-galaxy">2. How to get your images into Galaxy</h1>
+
+<p>Galaxy is built to handle the complexity of biological data. However, microscopy images often come in “vendor-specific” or “proprietary” formats. Your entry point into Galaxy depends on how your data was saved:</p>
+
+<ul>
+  <li><strong>Standard Formats (.tiff, .png):</strong> Use the standard Galaxy <strong>Upload</strong> tool.</li>
+  <li><strong>Open Formats:</strong> OME-TIFF, which includes standardized metadata, and OME-Zarr, a cloud-friendly image format designed to efficiently store and access very large, multi-dimensional bioimaging datasets (such as spatial transcriptomics) along with their metadata.</li>
+  <li><strong>Proprietary Formats (.czi, .nd2, .lif):</strong> These formats “wrap” image data and metadata together. While you can often export TIFFs from your microscope software, using the <strong><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy3" title="Convert image format with Bioformats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image format with Bioformats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy3)</span></strong> tool allows Galaxy to “unlock” and standardize the metadata hidden inside these files (<span class="citation"><a href="#Moore2021">Moore and et al. 2021</a></span>). For more information on supported formats, see the <a href="https://bio-formats.readthedocs.io/en/v8.4.0/">Bio-Formats documentation</a>.</li>
+  <li><strong>OMERO Integration:</strong> If your institution uses an <strong>OMERO server</strong>, you can import images directly via the <strong>Remote Files</strong> section in the upload panel. You can access OMERO using Galaxy. Additionally, you can fetch images directly using the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.45" title="IDR Download by IDs tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IDR Download by IDs</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.45)</span> tool. See <a href="/training-material/topics/imaging/tutorials/omero-suite/tutorial.html">Overview of the Galaxy OMERO-suite</a> for more details.</li>
+</ul>
+
+<h2 id="why-use-the-bio-formats-tool-suite">Why use the Bio-Formats tool suite?</h2>
+
+<p>The <strong><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy3" title="Convert image format with Bio-formats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert image format with Bio-formats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.7.0+galaxy3)</span></strong> tool does more than just open a file;</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-inspecting-image-metadata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Inspecting Image Metadata</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1" title="Show image info tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Show image info</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.7.1+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input image”</em>: <code class="language-plaintext highlighter-rouge">Select your uploaded microscopy file</code></li>
+      </ul>
+    </li>
+    <li><strong>Review the output:</strong> Examine the resulting text file. Look for key metadata fields like “PhysicalSizeX” (pixel calibration) and “BitDepth”.</li>
+  </ol>
+
+  <p>Example output:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Checking file format [Tagged Image File Format]
+Initializing reader
+TiffDelegateReader initializing /data/dnb10/galaxy_db/files/2/3/0/dataset_23048ef7-e850-41f4-9fc0-da24b2b4c36b.dat
+Reading IFDs
+Populating metadata
+Checking comment style
+Populating OME metadata
+Initialization took 1.994s
+
+Reading core metadata
+filename = /data/dnb10/galaxy_db/files/2/3/0/dataset_23048ef7-e850-41f4-9fc0-da24b2b4c36b.dat
+Series count = 1
+Series #0 :
+	Image count = 1
+	RGB = true (3) 
+	Interleaved = false
+	Indexed = false (false color)
+	Width = 2752
+	Height = 2208
+	SizeZ = 1
+	SizeT = 1
+	SizeC = 3 (effectively 1)
+	Thumbnail size = 128 x 102
+	Endianness = intel (little)
+	Dimension order = XYCZT (certain)
+	Pixel type = uint8
+	Valid bits per pixel = 8
+	Metadata complete = true
+	Thumbnail series = false
+	-----
+	Plane #0 &lt;=&gt; Z 0, C 0, T 0
+
+
+Reading global metadata
+BIG_TIFF: false
+BitsPerSample: 8
+Compression: LZW
+DATE_TIME_DIGITIZED: 2023:07:31 16:51:32
+DATE_TIME_ORIGINAL: 2023:07:31 16:51:32
+ImageLength: 2208
+ImageWidth: 2752
+LITTLE_ENDIAN: true
+MetaDataPhotometricInterpretation: RGB
+MetaMorph: no
+NewSubfileType: 0
+NumberOfChannels: 3
+PhotometricInterpretation: RGB
+PlanarConfiguration: Chunky
+Predictor: No prediction scheme
+ResolutionUnit: Inch
+SUB_SEC_TIME_DIGITIZED: 00
+SUB_SEC_TIME_ORIGINAL: 00
+SamplesPerPixel: 3
+Software: ZEN 3.1 (blue edition)
+XResolution: 300.0
+YResolution: 300.0
+
+Reading metadata
+</code></pre></div>  </div>
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-why-check-this-first"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Why check this first?</div>
+    <p>Before starting a long analysis, this tool helps you verify if Galaxy correctly “unlocked” the metadata inside your proprietary file. If pixel sizes are missing here, your final results will be in pixels rather than biological units like micrometers (\(\mu m\)).</p>
+  </blockquote>
+
+</blockquote>
+
+<p>For modern, large-scale, or cloud-based datasets, you can use <strong><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bioformats2raw/bf2raw/0.7.0+galaxy3" title="Convert to OME-Zarr with Bio-formats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert to OME-Zarr with Bio-formats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.0+galaxy3)</span></strong>. This converts a wide range of formats into <strong>OME-Zarr</strong> following the OME-NGFF specification. OME-Zarr is specifically optimized for high-performance viewing and is a staple for massive datasets like those found in spatial transcriptomics.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-which-open-format-should-i-choose"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-which-open-format-should-i-choose" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  Which open format should I choose? </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>While there are many options, two open community-endorsed formats are increasingly dominant in bioimaging:</p>
+  <ul>
+    <li><strong>OME-TIFF:</strong> Best for “classic” microscopy (2D/3D stacks) and maximum compatibility with classical software like ImageJ/Fiji or QuPath.</li>
+    <li><strong>OME-Zarr:</strong> A cloud-optimized format for very large, multi-dimensional bioimaging datasets (including spatial transcriptomics), enabling scalable storage and efficient data access. <span class="citation"><a href="#Moore2021">Moore and et al. 2021</a></span></li>
+  </ul>
+
+  <p>Both are superior to proprietary formats because they make it possible to preserve your metadata attached to your pixel data throughout the entire Galaxy workflow.</p>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-metadata-testing"><i class="far fa-question-circle" aria-hidden="true" ></i> Question:  Metadata testing</div>
+
+  <p>Why we should avoid bioimages to be “Save as JPEG” from your microscope or computer?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li><strong>Data Integrity:</strong> JPEGs use “lossy” compression, which changes pixel values to save space. This approach literally modifies your scientific data.</li>
+      <li><strong>Metadata Retention:</strong> A standard JPEG or simple TIFF often “strips” the metadata. You would lose the information about the physical size a pixel represents, making it impossible to calculate the size of your objects later.</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="3-before-you-begin-diagnose-your-data-and-define-your-goals">3. Before you begin: diagnose your data and define your goals</h1>
+
+<p>The first step in any analysis is to characterize the data you have. Before clicking any tools, ask yourself these four questions:</p>
+
+<ul>
+  <li><strong>What was the imaging modality?</strong> (Fluorescence microscopy, brightfield histology, high-content screening?)</li>
+  <li><strong>What is the biological subject?</strong> (Individual cells, complex tissues, or subcellular structures?)</li>
+  <li><strong>What is the file format?</strong> (Standard formats like .tif and .png, or proprietary vendor formats like .czi, .nd2, or .lif?)</li>
+  <li><strong>Where is the data stored?</strong> (A local drive, an OMERO server, a public repository, or a remote URL?)</li>
+</ul>
+
+<p>Then, define your quantitative goals:</p>
+
+<ul>
+  <li><strong>What do you want to measure?</strong> (Cell count? Nuclear size? Protein intensity? Colocalization? Movement over time?)</li>
+  <li><strong>What level of detail do you need?</strong> (Measurements per object, summary statistics across many objects, or maps of where things are located?)</li>
+  <li><strong>What comparison will you make?</strong> (Differences between conditions, changes across time, or descriptive characterization?)</li>
+</ul>
+
+<p>Depending on your answers, your starting path in Galaxy will change.</p>
+
+<h1 id="4-the-lifecycle-of-an-analysis-pipeline">4. The lifecycle of an analysis pipeline</h1>
+
+<p>A typical project in Galaxy is not a single click, but a sequence of logical steps. Think of it as a factory assembly line: you start with raw materials (pixels) and move through various stations until you have a finished product (a table of measurements). Let’s examine these stages together.</p>
+
+<h2 id="stage-a-pre-processing-cleaning">Stage A: Pre-processing (cleaning)</h2>
+<p>Raw images are rarely perfect. They often contain electronic noise from the camera, uneven illumination from the microscope, or staining artifacts. Pre-processing prepares your digital image for analysis by enhancing the structures you want to identify and suppressing unwanted features like noise or artifacts (<span class="citation"><a href="#Bankhead2022">Bankhead 2022</a></span>).</p>
+
+<ul>
+  <li><strong>Background subtraction:</strong> Removes the “haze” or background fluorescence caused by out-of-focus light. This is crucial for accurate intensity measurements later on.</li>
+  <li><strong>Denoising:</strong> Applies linear or non-linear filters to reduce noise while preserving meaningful structures. A <strong>Gaussian filter</strong> is a linear method that performs spatially weighted averaging using a kernel whose coefficients decrease smoothly with distance from the center, following a Gaussian (bell-shaped) distribution. It is well suited for reducing noise that approximates <a href="https://en.wikipedia.org/wiki/Additive_white_Gaussian_noise">additive white Gaussian noise (AWGN)</a>. In contrast, a <strong>Median filter</strong> is a non-linear method that replaces each pixel value with the median of its local neighborhood. It is particularly effective for removing impulse noise such as <a href="https://en.wikipedia.org/wiki/Salt-and-pepper_noise">salt-and-pepper noise</a> and can also help mitigate impulse-like components of <a href="https://en.wikipedia.org/wiki/Shot_noise">Poisson (shot) noise</a>. It is also appropriate for smoothing binary or label images because it preserves original intensity values. Compared to Gaussian smoothing, median filtering better maintains sharp edges such as cell boundaries (e.g., <span class="citation"><a href="#Haase2022">Haase and et al. 2022</a></span>).</li>
+</ul>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-document-your-filters"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-document-your-filters" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  Document your filters </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Every filter you apply changes the pixel values. While this is necessary for segmentation, you must document these steps to ensure reproducibility. In Galaxy, this is done automatically by your history, which records every parameter used in your pre-processing steps.</p>
+</blockquote>
+
+<p>In Galaxy, you can start the pre-processing stage with tools like <strong><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.16.3+galaxy1" title="Apply standard image filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Apply standard image filter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.16.3+galaxy1)</span></strong>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-filtering-noise"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Filtering Noise</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.16.3+galaxy1" title="Apply standard image filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Apply standard image filter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.16.3+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of image data to process”</em>: <code class="language-plaintext highlighter-rouge">2-D image data (or series thereof)</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input image (2-D)”</em>: <code class="language-plaintext highlighter-rouge">your_uploaded_image.tif</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Filter type”</em>: <code class="language-plaintext highlighter-rouge">Median</code>
+              <ul>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Size”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-choosing-the-right-filter"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Choosing the right filter</div>
+    <p>Try running this tool twice: once with a <strong>Median</strong> filter (using a small <em>Size</em> like 3) and once with a <strong>Gaussian</strong> filter (adjusting <em>Sigma</em>). Zoom in on the edges of your objects. You will notice that the Median filter preserves boundaries much better, while the Gaussian filter blurs them.</p>
+  </blockquote>
+
+</blockquote>
+
+<h2 id="stage-b-segmentation-defining-objects">Stage B: Segmentation (defining objects)</h2>
+<p>This is the most critical step. Here, you tell the computer which pixels belong to an “object” (like a nucleus) and which belong to the “background.”</p>
+
+<ul>
+  <li><strong>Thresholding:</strong> A “cutoff” method where pixels above (or below) a certain intensity value are classified as object. This value can be set manually or determined automatically using algorithms like Otsu or Li. The result is typically a <strong>Binary Mask</strong>.</li>
+  <li><strong>Inference (Deep Learning):</strong> Advanced AI models like <strong>Cellpose</strong> use pre-trained neural networks to recognize complex shapes. These methods might be superior at specific segmentation tasks such as “untangling” cells that are touching or overlapping in high-density environments (<span class="citation"><a href="#Stringer2021">Stringer <i>et al.</i> 2021</a></span>, <span class="citation"><a href="#Schmidt2018">Schmidt <i>et al.</i> 2018</a></span>).</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-creating-a-segmentation-mask"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Creating a Segmentation Mask</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.2+galaxy0" title="Threshold image tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Threshold image</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.25.2+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input image”</em>: <code class="language-plaintext highlighter-rouge">your_filtered_image.tif</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Thresholding method”</em>: <code class="language-plaintext highlighter-rouge">Globally adaptive / Otsu</code>
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Offset”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+          </ul>
+        </li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Invert output labels”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+    <li><strong>Review the output:</strong> You should now have a binary image where your biological objects are represented as white pixels (255) on a black background (0).</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-masks-vs-label-images"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Masks vs. Label Images</div>
+  <p>It is important to distinguish between these two types of images in Galaxy:</p>
+
+  <ul>
+    <li><strong>Binary Mask:</strong> This is what you created with the <strong>Threshold</strong> tool. Every pixel is either “Background” (0) or “Foreground” (255). It tells the computer <em>where</em> the objects are, but it doesn’t know that one cell is different from the one next to it.</li>
+    <li><strong>Label Image:</strong> Tools like <strong>Label objects</strong> (Connected Component Analysis) take a mask and assign a unique integer to every separate “blob.” The first cell’s pixels all become <code class="language-plaintext highlighter-rouge">1</code>, the second cell <code class="language-plaintext highlighter-rouge">2</code>, and so on.</li>
+  </ul>
+
+</blockquote>
+
+<h3 id="stage-b1-the-region-of-interest-roi">Stage B.1: The Region of Interest (ROI)</h3>
+
+<p>Once you have segmented your image, you have created <strong>Regions of Interest (ROIs)</strong>. This is a central concept in bioimaging. An ROI is a spatial selection that tells the software: “Ignore the background; only calculate values for these specific coordinates.”</p>
+
+<p>In Galaxy, ROIs can take three forms depending on the tool you use:</p>
+<ul>
+  <li><strong>Bounding Boxes:</strong> Simple rectangles used to crop an image or define a search area. In Galaxy, this is only possible to perform this step using interactive tools like QuPath.</li>
+  <li><strong>Binary Masks:</strong> A “stencil” where the ROI is white and everything else is black.</li>
+  <li><strong>Label Images:</strong> A “smart map” where every individual ROI has its own unique integer ID (e.g., <span class="citation"><a href="#Tosi2021">Tosi 2021</a></span>).</li>
+</ul>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-rois-in-interactive-vs-automated-tools"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: ROIs in interactive vs. automated tools</div>
+  <p>Interactive tools like QuPath allows users to inspect images and create ROIs either manually (e.g. drawing with the mouse) or through built-in detection algorithms that generate ROIs automatically. In automated Galaxy workflows, algorithms like Cellpose generate thousands of ROIs programmatically in a fully reproducible pipeline without user interaction (<span class="citation"><a href="#Stringer2021">Stringer <i>et al.</i> 2021</a></span>).</p>
+</blockquote>
+
+<h2 id="stage-c-post-processing-refining">Stage C: Post-processing (Refining)</h2>
+<p>Computers are literal; they might detect tiny specs of dust as “cells.” Post-processing is your “cleanup crew” for the mask you created in Stage B.</p>
+<ul>
+  <li><strong>Size filtering:</strong> Automatically removing any detected objects that are too small (noise) or too large (clumps of cells) to be biologically relevant.</li>
+  <li><strong>Morphological operations:</strong> Using operations like “Fill Holes” to fix gaps inside a detected cell or “Erode/Dilate” to slightly adjust the boundaries.</li>
+</ul>
+
+<h2 id="stage-d-quantification-extracting-numbers">Stage D: Quantification (Extracting numbers)</h2>
+<p>Now that you have a clean mask, Galaxy “overlays” it back onto your original raw image. Since the computer knows exactly which pixels belong to which cell, it can now do the math:</p>
+<ul>
+  <li><strong>Intensity:</strong> “How much protein (fluorescence) is inside this specific mask?”</li>
+  <li><strong>Morphology:</strong> “How large, round, or elongated is this nucleus?”</li>
+  <li><strong>Spatial distribution:</strong> “How far is the nucleus from the cell membrane?”</li>
+</ul>
+
+<h2 id="stage-e-validation-the-sanity-check">Stage E: Validation (The sanity check)</h2>
+
+<p><strong>Never trust an algorithm blindly.</strong> The final step is a visual inspection to ensure your numerical outputs represent biological reality rather than processing artifacts (<span class="citation"><a href="#Bankhead2022">Bankhead 2022</a></span>).</p>
+
+<ul>
+  <li>
+    <p><strong><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9+galaxy1" title="Overlay outlines tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Overlay outlines</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.9+galaxy1)</span></strong>: This tool takes your <strong>original image</strong> and draws the boundaries of your <strong>detected objects</strong> (from your Label Image) on top of it as colored lines. It is the gold standard for visual validation, allowing you to confirm that the computer’s segmentation accurately followed the biological edges of your cells. For a detailed guide on visualizing results, see the “Visualizing Results” section in <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <a href="/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html">Object Tracking using CellProfiler</a>.</p>
+  </li>
+  <li>
+    <p><strong><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.5" title="Overlay images tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Overlay images</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.5)</span></strong>: A versatile tool for visualizing colocalization or blending two different channels to see where biological signals overlap.</p>
+  </li>
+  <li>
+    <p><strong><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/libcarna_render/libcarna_render/0.2.0+galaxy2" title="Render 3-D image data tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Render 3-D image data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.0+galaxy2)</span></strong>: For 3-D images, this tool provides similar visualization functionality, allowing you to render and inspect volumetric data.</p>
+  </li>
+</ul>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-garbage-in-garbage-out"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-garbage-in-garbage-out" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  Garbage In, Garbage Out </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>If your segmentation (Stage B) is poor, your quantification (Stage D) will be meaningless. Always spend the most time optimizing your segmentation and validating it visually before trusting the final spreadsheet of numbers (<span class="citation"><a href="#Haase2022">Haase and et al. 2022</a></span>).</p>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-mask-vs-image"><i class="far fa-question-circle" aria-hidden="true" ></i> Question:  Mask vs. Image</div>
+
+  <p>If you calculate the <strong>Mean Intensity</strong> of a cell, should you use the pixels from the <strong>Binary Mask</strong> or the <strong>Raw Image</strong>?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>You must use the <strong>Raw Image</strong>. The mask is just a “stencil” or a map that tells the computer <em>where</em> to look. The actual biological information (the intensity values) is only found in the original, unprocessed image.</p>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="5-finding-your-workflow-modality-and-tools">5. Finding your workflow: modality and tools</h1>
+
+<p>Bioimage analysis is not “one size fits all.” Galaxy provides a diverse suite of tools, from classical computer vision to state-of-the-art Deep Learning. Use the logical roadmap below to identify your specific path.</p>
+
+<h2 id="the-decision-tree-your-logical-roadmap">The decision tree: your logical roadmap</h2>
+
+<figure id="figure-4" style="max-width: 90%;"><img src="/training-material/topics/imaging/images/where-to-start-bioimaging-galaxy/Microscopy_Imaging_Workflow-2026.png" alt="Microscopy imaging workflow decision tree. " width="3063" height="5328" loading="lazy" /><a target="_blank" href="/training-material/topics/imaging/images/where-to-start-bioimaging-galaxy/Microscopy_Imaging_Workflow-2026.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Decision tree to guide you through choosing the right imaging analysis approach.</figcaption></figure>
+
+<h2 id="the-galaxy-imaging-toolbox">The Galaxy imaging toolbox</h2>
+
+<p>Once you have identified your path on the tree, use this guide to find the corresponding tools in Galaxy. We categorize these into <strong>Standard Tools</strong> (for automated batch processing) and <strong>Interactive Tools</strong> (for visual exploration).</p>
+
+<h3 id="a-standard-tools-single-images-high-performance--batch">A. Standard tools (single images, high-performance &amp; batch)</h3>
+
+<p>These tools are “wrapped” in Galaxy to build individual workflows and adapt your analysis to your biological question needs.</p>
+
+<p>These other set of “wrapped” tools allow you to run them on hundreds of images as part of a reproducible history.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tool Name</th>
+      <th>Primary Application</th>
+      <th>Key Benefit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong><span class="tool" data-tool="interactive_tool_cellpose" title="Cellpose tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cellpose</strong></span></strong></td>
+      <td>General cellular segmentation</td>
+      <td>Superior at “unsticking” crowded or overlapping cells using vector flow.</td>
+    </tr>
+    <tr>
+      <td><strong><span class="tool" data-tool="interactive_tool_cellprofiler" title="CellProfiler tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>CellProfiler</strong></span></strong></td>
+      <td>High-content screening &amp; automation</td>
+      <td>Allows you to build a complex multi-step “pipeline” and run it on thousands of images consistently.</td>
+    </tr>
+    <tr>
+      <td><strong><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy3" title="Process image using a BioImage.IO model tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Process image using a BioImage.IO model</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.4.1+galaxy3)</span></strong></td>
+      <td>Advanced AI model inference</td>
+      <td>Gateway to the <a href="https://bioimage.io/">BioImage Model Zoo</a>, run pre-trained models (like 3D U-Nets) on your data.</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-segmentation-with-cellpose"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On:  Segmentation with Cellpose</div>
+
+  <p>In Galaxy, you can choose between the standard Cellpose model or the newer Cellpose-SAM (Segment Anything Model) version.</p>
+
+  <p>Option 1: Standard Cellpose</p>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cellpose/cellpose/3.1.0+galaxy2" title="Run generalist cell and nucleus segmentation with Cellpose 3 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Run generalist cell and nucleus segmentation with Cellpose 3</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.1.0+galaxy2)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Choose the image file for segmentation”</em>: <code class="language-plaintext highlighter-rouge">your_preprocessed_image.tif</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose the pre-trained model type”</em>: <code class="language-plaintext highlighter-rouge">cyto2</code> (standard cells) or <code class="language-plaintext highlighter-rouge">nuclei</code> (just nuclei)</li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Whether to show segmentation?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (generates a PNG preview)</li>
+        <li>In <strong>Advanced Options</strong>:
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cell or nuclei diameter in pixels”</em>: <code class="language-plaintext highlighter-rouge">Enter approximate diameter</code> (or leave blank for automated estimation)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>Option 2: Cellpose-SAM (Next Gen)</p>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cp_sam/cellposesam/4.0.8+galaxy0" title="Run generalist cell and nucleus segmentation with Cellpose-SAM tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Run generalist cell and nucleus segmentation with Cellpose-SAM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.0.8+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Choose the image file for segmentation”</em>: <code class="language-plaintext highlighter-rouge">your_preprocessed_image.tif</code></li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Save masks as tiff?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (Required for quantification later)</li>
+        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Save RGB outline images”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (Useful for Stage E: Validation)</li>
+        <li>In <strong>Advanced Options</strong>:
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cell or nuclei diameter in pixels”</em>: <code class="language-plaintext highlighter-rouge">Enter approximate diameter</code></li>
+            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Whether to use transformer backbone”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (to utilize the Cellpose3 transformer model)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-multi-channel-images"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Multi-channel Images</div>
+    <p>Cellpose tools in Galaxy typically expect single-channel 2D images. If you have a multi-channel image, you must first use the <strong>Split image along axes</strong> tool to extract the specific channel (e.g., the DAPI channel for nuclei) that you wish to segment.</p>
+  </blockquote>
+</blockquote>
+
+<h3 id="b-interactive-tools-visual-exploration">B. Interactive tools (Visual exploration)</h3>
+
+<p>If you prefer a “hands-on” approach to see your results in real-time before scaling up, launch an <strong>Interactive Tool (IT)</strong> directly in your browser:</p>
+
+<ul>
+  <li><strong><span class="tool" data-tool="interactive_tool_qupath" title="QuPath IT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>QuPath IT</strong></span>:</strong> The gold standard for digital pathology. Use this for large tissue sections and to access <strong>StarDist</strong>, a deep learning-based plugin for instance segmentation of star-convex shapes (e.g., nuclei), available in Galaxy through QuPath.</li>
+  <li><strong><span class="tool" data-tool="interactive_tool_ilastik" title="Ilastik IT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Ilastik IT</strong></span>:</strong> Best for “training by example”—manually paint a few cells to teach the computer how to segment the rest based on texture.</li>
+  <li><strong><span class="tool" data-tool="interactive_tool_cellpose" title="Cellpose IT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cellpose IT</strong></span>:</strong> &amp; <strong><span class="tool" data-tool="interactive_tool_cellprofiler" title="Cellprofiler IT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cellprofiler IT</strong></span>:</strong> Useful for building and fine-tuning your parameters visually before running a massive batch job.</li>
+</ul>
+
+<h2 id="identifying-your-modality">Identifying your modality</h2>
+
+<p>To navigate the tree correctly, you must understand your image type:</p>
+
+<ul>
+  <li>
+    <p><strong>Fluorescence:</strong> Images where pixel intensity represents the amount of light emitted. While often visualized as multi-colored immunofluorescence, the computer treats each channel as an intensity map where higher values indicate more signal.</p>
+  </li>
+  <li>
+    <p><strong>Brightfield/Histology (Color):</strong> True-color images (RGB) where stains like H&amp;E overlap. You must use <strong>Color Deconvolution</strong> to separate these into individual channels (e.g., separating Hematoxylin from DAB) before measurement. In Galaxy, you may find this tool as: <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/color_deconvolution/ip_color_deconvolution/0.9+galaxy0" title="Perform color deconvolution or transformation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Perform color deconvolution or transformation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.9+galaxy0)</span></p>
+  </li>
+  <li>
+    <p><strong>High-density/Tissues:</strong> For packed cells, classical thresholding fails. This is where <strong>Inference</strong> tools like <strong>Cellpose</strong> or <strong>StarDist</strong> shine, as they use pre-trained models to predict boundaries even in crowded environments.
+[Image comparing simple thresholding versus AI-based instance segmentation in crowded tissues]</p>
+  </li>
+</ul>
+
+<h2 id="practice-applying-the-roadmap">Practice: applying the roadmap</h2>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-scenario-1-the-high-volume-screen"><i class="far fa-question-circle" aria-hidden="true" ></i> Question:  Scenario 1: The High-Volume Screen</div>
+
+  <p>You have 500 images of crowded mitochondria. Which path do you choose?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>You should look toward a <strong>Deep Learning</strong> approach (like <strong>Cellpose</strong>) within a <strong>CellProfiler</strong> workflow. Why?</p>
+
+    <ol>
+      <li><strong>Crowding:</strong> Cellpose handles overlapping structures better than simple thresholding.</li>
+      <li><strong>Volume:</strong> With 500 images, you need the batch-processing power of <strong>CellProfiler</strong> to stay efficient.</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-scenario-2-the-3d-volume"><i class="far fa-question-circle" aria-hidden="true" ></i> Question:  Scenario 2: The 3D Volume</div>
+
+  <p>You have a single 3D Z-stack of a zebrafish embryo with one fluorescent marker. What is your path?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li><strong>Microscopy?</strong> Yes.</li>
+      <li><strong>Color or B&amp;W?</strong> B&amp;W (Single-channel fluorescence).</li>
+      <li><strong>Dimensionality?</strong> 3D volume.
+<strong>Result:</strong> You are on the <strong>Segmentation</strong> path. Use <strong>Cellpose</strong> for automated results or <strong>QuPath</strong> interactively to test different StarDist models.</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="6-common-pitfalls-to-avoid">6. Common pitfalls to avoid</h1>
+
+<p>Even with the best tools, it is easy to accidentally “break” your data before you even start measuring. In bioimage analysis, these errors are often called <strong>artifacts</strong>.</p>
+
+<h2 id="1-the-jpg-trap">1. The “JPG” trap</h2>
+<p><strong>Never use JPEG for science.</strong> JPEGs use “lossy” compression, meaning the computer slightly changes pixel intensities to save space. This creates “blocky” artifacts that ruin your ability to measure protein concentration or fine textures.</p>
+
+<ul>
+  <li>
+    <p><strong>The fix:</strong> Always store quantitative microscopy data in <strong>TIFF</strong> or <strong>OME-TIFF</strong>. These formats preserve the original pixel values and metadata.</p>
+  </li>
+  <li>
+    <p><strong>When is PNG OK?</strong> PNG is lossless and suitable for small 2-D single-channel or RGB images where intensities are not used for quantitative measurements. For example: 2-D label images, segmentation masks, or visualization outputs. In these cases it can reduce file size by orders of magnitude compared to TIFF. However, it should not be used for raw or measurement-grade microscopy data.</p>
+  </li>
+</ul>
+
+<h2 id="2-the-merged-image-mistake">2. The “merged image” mistake</h2>
+
+<p>Analyzing a “Merge” (RGB) image is risky because the intensities of different channels (like DAPI and GFP) are mathematically blended into a single color value.</p>
+
+<ul>
+  <li><strong>The fix:</strong> Always <strong>Split Channels</strong> in Galaxy. For this purpose you may use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.3.5+galaxy0" title="Split image along axes with NumPy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Split image along axes with NumPy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.3.5+galaxy0)</span> tool. Measure your DAPI (nuclei) and GFP (protein) separately to ensure scientific accuracy.</li>
+</ul>
+
+<h2 id="3-ignoring-saturation">3. Ignoring saturation</h2>
+<p>If your image is too bright, you might hit the camera sensor’s limit (\(255\) for 8-bit or \(65,535\) for 16-bit). This is called <strong>Clipping</strong>.</p>
+<ul>
+  <li><strong>The fix:</strong> Check your histogram. If you see a giant “spike” at the very end of the graph, your data is saturated and you cannot accurately quantify the brightest parts of your sample.</li>
+</ul>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-the-artifact-detective"><i class="far fa-question-circle" aria-hidden="true" ></i> Question:  The artifact detective</div>
+
+  <p>You notice that in your time-lapse, the image gets slightly dimmer with every frame. Is this a biological change or an artifact?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution:  Solution </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>This is likely <strong>Photobleaching</strong>, a common artifact where fluorescent molecules physically break down and lose their ability to emit light after repeated exposure to the excitation laser.</p>
+
+    <p>The standard approach to fix this is <strong>Bleach Correction</strong>. While a dedicated tool for this is not currently in this Galaxy workflow, you can use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.18.1+galaxy0" title="Perform histogram equalization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Perform histogram equalization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.18.1+galaxy0)</span> with the <strong>CLAHE</strong> algorithm as a workaround.</p>
+
+    <p>This does not “fix” the physical loss of signal, but it enhances the local contrast of the dim frames. This makes it possible for the segmentation tools to still detect and outline your objects in the later, darker stages of the experiment.</p>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Congratulations! You have navigated the core principles of the Galaxy bioimaging landscape. By mastering these tools, you have moved beyond simply “looking” at images to performing rigorous, reproducible quantification.</p>
+
+<p>In this tutorial, you have learned that:</p>
+
+<ul>
+  <li><strong>Images are data:</strong> Every pixel is a mathematical value. Whether you are adjusting bit depth or calibrating scales, you are ensuring that these numbers represent physical reality.</li>
+  <li><strong>Context matters:</strong> Using <strong>Bio-Formats</strong> and managing metadata ensures that your analysis respects the original biological dimensions, time-points, and channels.</li>
+  <li><strong>Segmentation is a bridge:</strong> Creating masks and label images is the critical step that allows a computer to recognize individual biological entities, such as cells or nuclei, for separate measurement.</li>
+  <li><strong>Validation is essential:</strong> Tools like <strong>Overlay Outlines</strong> and artifacts like <strong>Photobleaching</strong> remind us that automated analysis requires human oversight to ensure the results are biologically sound.</li>
+</ul>
+
+<p>By building modular workflows in Galaxy, you have created a pipeline that is not only accurate but also shareable and reproducible, the <strong><em>gold standard</em></strong> of modern open science.</p>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<p>For more inspiration and a complementary perspective on designing bioimage analysis pipelines, we recommend <span class="citation"><a href="#Fazeli2025">Fazeli <i>et al.</i> 2025</a></span>, which provides a decision tree approach to bioimage analysis that complements the workflows covered in this tutorial.</p>
+
+<h1 id="glossary-of-bioimage-terms">Glossary of bioimage terms</h1>
+
+<h1 id="glossary-of-bioimage-terms-1">Glossary of bioimage terms</h1>
+
+<ul>
+  <li><strong>Binary image:</strong> A black-and-white image where pixels can only have two values: 0 (Background) and 1 (Object).</li>
+  <li><strong>Bit depth:</strong> The number of bits used to store each pixel value, determining the range and precision of intensity values an image can represent (e.g., 8-bit = 256 values, 16-bit = 65,536 values).</li>
+  <li><strong>Color deconvolution:</strong> The mathematical separation of overlapping color stains (like the purple Hematoxylin and pink Eosin in H&amp;E histology) into individual intensity channels for measurement.</li>
+  <li><strong>Hyperstack:</strong> A multi-dimensional image data structure that extends beyond 2D or 3D, incorporating additional dimensions such as channels (C) and time (T), typically represented as X × Y × Z × C × T.</li>
+  <li><strong>Label image:</strong> An image where each individual detected object is assigned a unique integer value (e.g., cell 1 = 1, cell 2 = 2), allowing the computer to distinguish and measure each object separately. Unlike a binary mask, a label image encodes object identity.</li>
+  <li><strong>Mask:</strong> A binary “stencil” or digital cutout that tells the computer exactly which pixels belong to an object of interest and which should be ignored.</li>
+  <li><strong>Metadata:</strong> Information stored alongside image data that describes how, when, and where the image was acquired (e.g., pixel size, bit depth, dimensional order, microscope settings).</li>
+  <li><strong>OME-TIFF:</strong> An open-source, standardized file format designed for microscopy that packages raw pixel data together with its essential metadata.</li>
+  <li><strong>Photobleaching:</strong> An artifact in fluorescence microscopy where fluorescent molecules permanently lose their ability to emit light after repeated exposure to the excitation laser, causing images to appear progressively dimmer over time.</li>
+  <li><strong>Pixel / Voxel:</strong> The smallest unit of a digital image. A pixel (2D) or voxel (3D) represents a single data point recording the signal intensity detected at a specific location in the image.</li>
+  <li><strong>ROI (Region of Interest):</strong> A spatial selection that defines the area of an image to be measured or analyzed, telling the software to ignore the background and focus only on specific coordinates.</li>
+  <li><strong>Saturation:</strong> A digital clipping artifact that occurs when light intensity exceeds the camera sensor’s maximum capacity, resulting in lost data and “flat” peaks where the brightest signals should be.</li>
+  <li><strong>Segmentation:</strong> The process of partitioning an image into meaningful regions by classifying pixels as belonging to either an object of interest or the background.</li>
+  <li><strong>Spatial calibration:</strong> Metadata that defines the physical size represented by each pixel or voxel (e.g., 1 pixel = 0.25 μm), linking digital units to real-world measurements and enabling biologically meaningful quantification.</li>
+  <li><strong>Thresholding:</strong> A segmentation method that classifies pixels as object or background based on whether their intensity value falls above or below a defined cutoff, producing a binary mask.</li>
+</ul>
+
+<h1 id="next-steps-choose-your-tutorial">Next Steps: choose your tutorial</h1>
+
+<p>Now that you have your “compass,” it is time to choose a specific path. Pick the tutorial that matches your research goal:</p>
+
+<ul>
+  <li>
+    <p><strong>The Basics:</strong> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <a href="/training-material/topics/imaging/tutorials/imaging-introduction/tutorial.html">Introduction to Image Analysis</a> – A deeper dive into the fundamental concepts of digital images.</p>
+  </li>
+  <li>
+    <p><strong>Fluorescence &amp; Screening:</strong> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <a href="/training-material/topics/imaging/tutorials/hela-screen-analysis/tutorial.html">HeLa Cell Screen Analysis</a> – Learn to process high-throughput screens using classical techniques.</p>
+  </li>
+  <li>
+    <p><strong>Time-Lapse &amp; Events:</strong> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <a href="/training-material/topics/imaging/tutorials/detection-of-mitoflashes/tutorial.html">Detection of MitoFlashes</a> – Track transient biological events over time.</p>
+  </li>
+  <li>
+    <p><strong>Classical Segmentation:</strong> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <a href="/training-material/topics/imaging/tutorials/voronoi-segmentation/tutorial.html">Voronoi-based Segmentation</a> – A powerful approach for partitioning cells when they are touching but have clear centers.</p>
+  </li>
+  <li>
+    <p><strong>Advanced AI:</strong> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <a href="/training-material/topics/imaging/tutorials/process-image-bioimageio/tutorial.html">Imaging using Bioimage Zoo Models</a> – Use pre-trained deep learning models for complex segmentation tasks.</p>
+  </li>
+  <li>
+    <p><strong>Automated Pipelines:</strong> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <a href="/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html">CellProfiler in Galaxy</a> – Master the use of CellProfiler modules to build end-to-end automated workflows.</p>
+  </li>
+  <li>
+    <p><strong>Tracking:</strong> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <a href="/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html">Object Tracking using CellProfiler</a> – Move from static images to following individual objects through time and space.</p>
+  </li>
+  <li>
+    <p><strong>Histology &amp; Pathology:</strong> <em>Coming Soon!</em> A dedicated tutorial on <strong>Histology Staining and Color Deconvolution</strong> is currently in development.</p>
+  </li>
+</ul>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Image analysis starts with understanding your metadata; pixels are just numbers with biological context.</p>
+</li>
+                        
+                        <li><p>Bioimage analysis is a multi-step pipeline, not a single tool step.</p>
+</li>
+                        
+                        <li><p>Reproducibility in Galaxy is achieved by saving every step and associated metadata in your history.</p>
+</li>
+                        
+                        <li><p>Always preserve your raw data; avoid lossy formats like JPG for analysis.</p>
+</li>
+                        
+                        <li><p>Validate your segmentation visually before trusting the numbers.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/imaging/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/imaging#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Goldberg2005">Goldberg, I. G., and et al., 2005 <b>The Open Microscopy Environment (OME) Data Model and XML file: open tools for informatics and quantitative analysis in biological imaging</b>. Genome Biology 6: R47. <a href="https://doi.org/10.1186/gb-2005-6-5-r47">10.1186/gb-2005-6-5-r47</a></li>
+<li id="Pawley2006">Pawley, J. B. (Ed.), 2006 <b>Handbook of Biological Confocal Microscopy</b>. <i>Springer New York, NY</i>. <a href="https://doi.org/10.1007/978-0-387-45524-2">10.1007/978-0-387-45524-2</a></li>
+<li id="Cromey2010">Cromey, D. W., 2010 <b>Avoiding twisted pixels: ethical guidelines for the appropriate use and manipulation of scientific digital images</b>. Science and Engineering Ethics 16: 639–667. <a href="https://doi.org/10.1007/s11948-010-9201-y">10.1007/s11948-010-9201-y</a></li>
+<li id="Linkert2010">Linkert, M., and et al., 2010 <b>Metadata matters: access to image data in the real world</b>. Journal of Cell Biology 189: 777–782. <a href="https://doi.org/10.1083/jcb.201004104">10.1083/jcb.201004104</a></li>
+<li id="Sedgewick2010">Sedgewick, R., and K. Wayne, 2010 <b>Algorithms</b>. <i>Addison-Wesley Professional</i>. <a href="https://algs4.cs.princeton.edu/home/">https://algs4.cs.princeton.edu/home/</a></li>
+<li id="Schmidt2018">Schmidt, U., M. Weigert, C. Broaddus, and G. Myers, 2018 <b>Cell Detection with Star-Convex Polygons</b>, <span style="font-style: normal">in</span> <i>Medical Image Computing and Computer Assisted Intervention – MICCAI 2018</i>, <i>Springer, Cham</i>. <a href="https://doi.org/10.1007/978-3-030-00934-2_30">10.1007/978-3-030-00934-2_30</a></li>
+<li id="Moore2021">Moore, J., and et al., 2021 <b>OME-NGFF: a next-generation file format for expanding bioimaging data-access strategies</b>. Nature Methods 18: 1496–1498. <a href="https://doi.org/10.1038/s41592-021-01326-w">10.1038/s41592-021-01326-w</a></li>
+<li id="Stringer2021">Stringer, C., T. Wang, M. Michaelos, and M. Pachitariu, 2021 <b>Cellpose: a generalist algorithm for cellular segmentation</b>. Nature Methods 18: 100–106. <a href="https://doi.org/10.1038/s41592-020-01018-x">10.1038/s41592-020-01018-x</a></li>
+<li id="Tosi2021">Tosi, S., 2021 <b>Bioimage Data Analysis Workflows</b>. <i>Wiley-VCH</i>. <a href="https://analyticalscience.wiley.com/do/10.1002/was.00050003/full/bioimagedataanalysis.pdf">https://analyticalscience.wiley.com/do/10.1002/was.00050003/full/bioimagedataanalysis.pdf</a></li>
+<li id="Bankhead2022">Bankhead, P., 2022 <b>Introduction to Bioimage Analysis</b>. <i>Online</i>. A comprehensive open-source guide to the principles of bioimage analysis.. <a href="https://bioimagebook.github.io/">https://bioimagebook.github.io/</a></li>
+<li id="Haase2022">Haase, R., and et al., 2022 <b>A Hitchhiker’s guide through the bio-image analysis software universe</b>. FEBS Letters. <a href="https://doi.org/10.1002/1873-3468.14451">10.1002/1873-3468.14451</a></li>
+<li id="GalaxyCommunity2024">The Galaxy Community, 2024 <b>The Galaxy platform for accessible, reproducible, and collaborative data analyses: 2024 update</b>. Nucleic Acids Research 52: W83–W94. <a href="https://doi.org/10.1093/nar/gkae410">10.1093/nar/gkae410</a></li>
+<li id="Fazeli2025">Fazeli, E., R. Haase, M. Doube, K. Miura, and D. Legland, 2025 <b>From cells to pixels: A decision tree for designing bioimage analysis pipelines</b>. Journal of Microscopy 300: 384–408. <a href="https://doi.org/10.1111/jmi.70021">10.1111/jmi.70021</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/where-to-start-bioimaging-galaxy"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/where-to-start-bioimaging-galaxy">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Diana Chiang Jurado, Beatriz Serrano-Solano, Leonid Kostrykin,  <b>Where to start with bioimage analysis in Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/where-to-start-bioimaging-galaxy/tutorial.html">https://training.galaxyproject.org/training-material/topics/imaging/tutorials/where-to-start-bioimaging-galaxy/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{imaging-where-to-start-bioimaging-galaxy,
+author = "Diana Chiang Jurado and Beatriz Serrano-Solano and Leonid Kostrykin",
+	title = "Where to start with bioimage analysis in Galaxy (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/imaging/tutorials/where-to-start-bioimaging-galaxy/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/where-to-start-bioimaging-galaxy/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: bioimage_inference
+  owner: bgruening
+  revisions: d5233b9d32bb
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: cp_overlay_outlines
+  owner: bgruening
+  revisions: b44b081bcf37
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: 2d_histogram_equalization
+  owner: imgteam
+  revisions: b1c2c210813c
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bfconvert
+  owner: imgteam
+  revisions: fcadded98e61
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bioformats2raw
+  owner: imgteam
+  revisions: 94fe1169328c
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: color_deconvolution
+  owner: imgteam
+  revisions: 5bd113d38acc
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: image_info
+  owner: imgteam
+  revisions: f8b4eada923c
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: idr_download_by_ids
+  owner: iuc
+  revisions: f92941d1a85e
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+function ready(fn) {
+	if (document.readyState != 'loading'){
+		fn();
+	} else {
+		document.addEventListener('DOMContentLoaded', fn);
+	}
+}
+ready(function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/where-to-start-bioimaging-galaxy/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/imaging/tutorials/where-to-start-bioimaging-galaxy/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/615d530980e64081ad14203e7a76dae4059e467f">615d530</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+	
+
+    </body>
+</html>
