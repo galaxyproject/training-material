@@ -118,7 +118,7 @@ These are the natural format for raw camera data, as imaging sensors essentially
 
 * **8-bit:** 2<sup>8</sup> = 256 possible values (range: 0 to 255 for unsigned, or -128 to 127 for signed). While this looks fine to our eyes, it is often too "coarse" for thorough quantitative analysis.
 
-* **16-bit:** 2<sup>16</sup> = 65,536 possible values (range: 0 to 65,535 for unsigned, or -32,768 to 32,767 for signed). This is the **scientific gold standard for image acquisition and storage**, because it allows you to detect even subtle differences in image intensities that would be lost (e.g., due to rounding) when using an 8-bit representation {% cite Haase2022 %}.
+* **16-bit:** 2<sup>16</sup> = 65,536 possible values (range: 0 to 65,535 for unsigned, or -32,768 to 32,767 for signed). This is the **scientific gold standard for image acquisition and storage**, because it allows you to detect even subtle differences in image intensities that would be lost (e.g., due to rounding) when using an 8-bit representation (e.g., {% cite Haase2022 %}).
 
 * **32-bit:** 2<sup>32</sup> = 4,294,967,296 possible values. While less common in direct acquisition, 32-bit integer formats are sometimes used in intermediate processing steps or for label images where many distinct regions need to be encoded.
 
