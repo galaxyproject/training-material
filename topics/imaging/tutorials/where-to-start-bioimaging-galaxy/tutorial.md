@@ -344,7 +344,7 @@ In Galaxy, you can start the pre-processing stage with tools like **{% tool [App
 ## Stage B: Segmentation (defining objects)
 This is the most critical step. Here, you tell the computer which pixels belong to an "object" (like a nucleus) and which belong to the "background." 
 
-* **Thresholding:** A "cutoff" method where pixels above (or below) a certain intensity value are classified as object. This value can be set manually or determined automatically using algorithms like Otsu or Li. The result is typically a **Binary Mask**.
+* **Thresholding:** A "cutoff" method where pixels above (or below) a certain intensity value are classified as object. This value can be set manually or determined automatically using algorithms like Otsu or Li. The result is typically a **binary mask** (also called a **binary image**).
 * **Inference (Deep Learning):** Advanced AI models like **Cellpose** use pre-trained neural networks to recognize complex shapes. These methods might be superior at specific segmentation tasks such as "untangling" cells that are touching or overlapping in high-density environments ({% cite Stringer2021 %}, {% cite Schmidt2018 %}).
 
 > <hands-on-title> Creating a Segmentation Mask </hands-on-title>
@@ -359,11 +359,11 @@ This is the most critical step. Here, you tell the computer which pixels belong 
 >
 {: .hands_on}
 
-> <comment-title>Masks vs. Label Images</comment-title>
+> <comment-title>Binary Masks vs. Label Images</comment-title>
 > It is important to distinguish between these two types of images in Galaxy:
 >
 > * **Binary Mask:** This is what you created with the **Threshold** tool. Every pixel is either "Background" (0) or "Foreground" (255). It tells the computer *where* the objects are, but it doesn't know that one cell is different from the one next to it.
-> * **Label Image:** Tools like **Label objects** (Connected Component Analysis) take a mask and assign a unique integer to every separate "blob." The first cell’s pixels all become `1`, the second cell `2`, and so on.
+> * **Label Image:** Tools like **Label objects** (Connected Component Analysis) take a binary mask and assign a unique integer to every separate "blob." The first cell’s pixels all become `1`, the second cell `2`, and so on. Label images are also called **label maps** or sometimes **label masks**.
 >
 {: .comment}
 
