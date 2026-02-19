@@ -178,5 +178,5 @@ You will be able to obtain a certificate by the end of the event. To ensure you 
 
 
 ## Do you want to join the GTA as a trainer?
-Please fill out our `link to come` to indicate in what capacity you would like to help.
+Please fill out our [Google Form](https://docs.google.com/forms/d/e/1FAIpQLSdyNhUhWtk2W6nxDwpxao4aRgV9921_PGGyQpGIaRbZynHnAQ/viewform?usp=header) to indicate in what capacity you would like to help.
 

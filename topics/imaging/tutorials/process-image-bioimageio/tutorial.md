@@ -28,6 +28,9 @@ contributions:
     - kostrykin
   editing:
     - kostrykin
+  funding:
+    - nfdi4bioimage
+    - deNBI
 ---
 
 Deep learning models are increasingly used in bioimage analysis to perform processing steps such as segmentation, classification, and restoration tasks (e.g., {% cite Moen2019 %}). The [BioImage Model Zoo, (BioImage.IO)](https://bioimage.io/#/)({% cite Wei2021 %}) is a repository that provides access to pre-trained AI models, sharing a common metadata model that allows their reuse in different tools and platforms.
