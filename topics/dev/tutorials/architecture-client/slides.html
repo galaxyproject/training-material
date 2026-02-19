@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Architecture 12 - Galaxy Client Architecture</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@05ce2d3c522f8a7b531dc84f9792f7e473939485",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture-client/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Architecture 12 - Galaxy Client Architecture">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-02-19 09:49:54 +0000">
+<meta name="DC.creator" content="John Chilton">
+
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Slide Deck: Architecture 12 - Galaxy Client Architecture">
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/dev/tutorials/architecture-client/slides.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Galaxy Administrators"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Architecture 12 - Galaxy Client Architecture",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-02-19 09:49:54 +0000",
+  "datePublished": "2026-02-19 09:49:54 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+  },
+  "abstract": "layout: introduction_slides",
+  "learningResourceType": "slides",
+  "name": "Architecture 12 - Galaxy Client Architecture",
+  "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture-client/slides.html",
+  "version": 1,
+  "timeRequired": "PT15M",
+  "teaches": "- Understand the client build process\n- Learn about Vue.js and Vuex\n- Navigate the client source code\n- Run client tests and development servers",
+  "keywords": [
+    "Development in Galaxy"
+  ],
+  "description": "## Abstract\n\nlayout: introduction_slides\n\n\n## Questions this  will address\n\n - How is the Galaxy UI built?\n - What frontend technologies does Galaxy use?\n - How do I develop and test the client?\n\n\n## Learning Objectives\n\n- Understand the client build process\n- Learn about Vue.js and Vuex\n- Navigate the client source code\n- Run client tests and development servers\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "name": "John Chilton",
+      "image": "https://avatars.githubusercontent.com/jmchilton",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6794-0756",
+      "@id": "https://orcid.org/0000-0002-6794-0756"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": []
+}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+
+
+    <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/dev" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/architecture-client/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+<br/>
+<br/>
+
+# Architecture 12 - Galaxy Client Architecture
+
+<br/>
+<br/>
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jmchilton?s=36" alt="John Chilton avatar" width="36" class="avatar" />
+    John Chilton</a>
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 5em;">
+
+
+<i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a> |
+
+
+
+
+
+
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- How is the Galaxy UI built?
+
+- What frontend technologies does Galaxy use?
+
+- How do I develop and test the client?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Understand the client build process
+
+- Learn about Vue.js and Vuex
+
+- Navigate the client source code
+
+- Run client tests and development servers
+
+
+---
+
+
+layout: introduction_slides
+topic_name: Galaxy Architecture
+
+# Architecture 12 - Galaxy Client Architecture
+
+*The architecture of Galaxy&apos;s web user interface.*
+
+---
+
+
+
+layout: true
+name: left-aligned
+class: left, middle
+---
+layout: true
+class: center, middle
+
+
+
+---
+
+
+### Client Architecture
+
+*The architecture of Galaxy&apos;s web user interface.*
+
+
+---
+
+
+### Client Directories
+
+- Source JavaScript for the client is in `client/src`.
+- Source stylesheets are in `client/src/style`.
+- &quot;Packed&quot; bundles served by Galaxy stored in `static/dist`
+  - `run.sh` uses `git diff` to try to determine if client needs to be built before starting Galaxy
+  - webpack builds these &quot;compiled&quot; artifacts
+
+Upshot - to develop against the client, modify files in `client/` and rebuild with `make client` before
+deployment.
+
+
+---
+
+
+class: normal
+
+### Building the Client - Makefile Targets
+
+```Makefile
+client: node-deps ## Rebuild all client-side artifacts (for local dev)
+  cd client &amp;&amp; yarn run build
+
+client-production-maps: node-deps ## Build optimized artifacts with sourcemaps.
+  cd client &amp;&amp; yarn run build-production-maps
+
+client-watch: node-deps ## Rebuild client on each change.
+  cd client &amp;&amp; yarn run watch
+
+client-format: node-deps ## Reformat client code
+  cd client &amp;&amp; yarn run prettier
+
+client-lint: client-eslint client-format-check ## ES lint and check format of client
+
+client-test: node-deps  ## Run JS unit tests
+  cd client &amp;&amp; yarn run test
+
+client-test-watch: client ## Watch and run all client unit tests on changes
+  cd client &amp;&amp; yarn run jest-watch
+
+node-deps: ## Install NodeJS and dependencies.
+```
+
+
+---
+
+
+### Automatically Reloading During Development
+
+The following command rebuilds the application on each change.
+
+```
+make client-watch
+```
+
+This is still a relatively slow process, an extra client development server can be started that proxies non-client requests
+to your Galaxy server and selectively reloads only what is needed during active development (hot module replacement or HMR).
+
+```
+make client-dev-server
+```
+
+Make sure to open Galaxy at http://localhost:8081 instead to point at the client proxy.
+
+
+---
+
+
+class: white
+
+![What is Webpack](../../images/what-is-webpack.svg)
+
+
+---
+
+
+class: enlarge150
+
+### webpack in Galaxy
+
+Packs and &quot;transpiles&quot; Galaxy ES6 code (.js), Galaxy Vue modules (.vue), libraries from npm, scss stylesheets (.scss) into browser native bundles.
+
+Hundreds of high-level well organized files into optimized single files that can be quickly downloaded.
+
+Lots of active development and complexity around Viz plugins and dependencies for instance, but the webpack configuration file in `config/webpack.config.js` is fairly straightforward.
+
+
+---
+
+
+class: white
+
+![Webpack in Action](../../images/jsload.png)
+
+
+---
+
+
+### Stylesheets
+
+- Galaxy shared stylesheets are generally defined using the SCSS syntax
+- SCSS is a high-level superset of CSS - https://sass-lang.com/documentation/syntax
+- `sass` is leveraged by webpack to convert these styles to native CSS at client build time
+- Rebuild style with `make style`
+- Galaxy&apos;s SCSS files can be found in `client/src/style/scss/`
+
+
+---
+
+
+### Package and Build Files
+
+![Client Build Files](../../images/core_files_client_build.mindmap.plantuml.svg)
+
+
+---
+
+
+### Source Files
+
+![Client Build Files](../../images/core_files_client_sources.mindmap.plantuml.svg)
+
+
+---
+
+
+### ES6
+
+The client is built from JavaScript source files. We use ES6 JavaScript.
+
+A tutorial to help learn JavaScript generally might be https://www.w3schools.com/js/.
+
+For someone familiar with JavaScript but that wants a primer on the new language features in ES6,
+https://www.w3schools.com/js/js_es6.asp may be more appropriate.
+
+
+---
+
+
+### Vue
+
+Vue.js is a reactive framework for building web client applications.
+
+We chose Vue.js over React initially because of its focus on allowing developers to incrementally or progressively replace pieces of complex existing applications.
+
+The idea behind Vue.js is fairly simple to pick up and there is a lot of great tutorials and videos available. https://vuejs.org/v2/guide/ is a really good jumping off point.
+
+
+---
+
+
+### Pinia
+
+&gt; Pinia is a state management library for Vue.js. It provides stores as the central source of truth, with a simpler, more intuitive API compared to earlier solutions. It supports Vue 2 and Vue 3 with Composition API.
+
+https://pinia.vuejs.org/
+
+Key features include devtools integration, hot module replacement, type-safe stores, and seamless TypeScript support.
+
+
+---
+
+
+### Client Unit Tests
+
+https://jestjs.io/
+
+Configured in `client/src/jest/jest.config.js`.
+
+Vue tests are placed beside components in `client/src`, more tests in `client/test/qunit/tests` and `client/test/jest/standalone/`.
+
+
+---
+
+
+### Vue Test Utils
+
+&gt; Vue Test Utils is the official unit testing utility library for Vue.js.
+
+https://vue-test-utils.vuejs.org/
+
+Really nice reference library documentation. A lot of helpers and concepts to unit test Vue components.
+
+
+---
+
+
+### Client Unit Test Design Tips
+
+https://github.com/galaxyproject/galaxy/tree/dev/client/docs/src/component-design/unit-testing
+
+- Clearly document the intent of your test
+- Implement logic in pure functions when possible
+- Wrap native browser resources in a function so they can be easily mocked
+
+
+---
+
+
+### Webhooks in Galaxy
+
+Webhooks is a system in Galaxy which can be used to write small JS and/or Python functions to change predefined locations in the Galaxy client.
+&lt;br&gt;&lt;br&gt;
+In short: A plugin infrastructure for the Galaxy UI
+
+
+.footnote[You can learn more about webhooks using our webhook [training](/training-material/topics/dev/tutorials/webhooks/slides.html).]
+
+
+---
+
+
+### Webhook masthead example
+
+![A person shaped icon in the Galaxy masthead is being hovered over and the popup reads &quot;Show Username&quot;, presumably a custom webhook from a tutorial.](../../images/webhook_masthead.png)
+
+At the header menu: Enabling the overlay search, link to communities ...
+
+.footnote[You can learn more about webhooks using our webhook [training](/training-material/topics/dev/tutorials/webhooks/slides.html).]
+
+
+---
+
+
+### Webhook tool/workflow example
+
+![Screenshot of Galaxy with the job completion screen shown and a PhD comic image shown below.](../../images/webhook_tool.png)
+
+Shown after tool or workflow execution. Comics, citations, support ...
+
+.footnote[You can learn more about webhooks using our webhook [training](/training-material/topics/dev/tutorials/webhooks/slides.html).]
+
+
+---
+
+
+### Webhook history-menu example
+
+![A section of the history menu is labelled Webhooks and shows a custom menu entry.](../../images/webhook_history.png)
+
+Adds an entry to the history menu - no functionality as of now
+
+
+---
+
+
+class: enlarge150
+
+### Galaxy Component Library
+
+Galaxy is replacing Bootstrap-Vue with custom components:
+
+- **Reduce dependency** - Prepare for framework upgrades
+- **Improve consistency** - Unified design language
+- **Enhance accessibility** - Built-in a11y
+- **Simplify maintenance** - Galaxy-specific needs
+
+
+
+---
+
+
+class: enlarge120
+
+### Deprecated BootstrapVue Components
+
+**Do not use these in new code:**
+
+| BootstrapVue | Use Instead |
+|--------------|-------------|
+| `BButton`, `b-button` | `GButton` |
+| `BLink`, `b-link` | `GLink` |
+| `BModal`, `b-modal` | `GModal` |
+| `BCard`, `b-card` | `GCard` |
+
+Existing usages should be migrated when touching related code.
+
+
+
+---
+
+
+class: enlarge150
+
+### Component Migration Effort
+
+**Migration strategy:**
+
+1. **New code** - Always use Galaxy components
+2. **Modified code** - Migrate when touching files
+3. **Batch migrations** - Periodic focused efforts
+
+Reference PRs:
+- [#19963](https://github.com/galaxyproject/galaxy/pull/19963) - Buttons
+- [#20063](https://github.com/galaxyproject/galaxy/pull/20063) - Links
+- [#20168](https://github.com/galaxyproject/galaxy/pull/20168) - Modal
+- [#19785](https://github.com/galaxyproject/galaxy/pull/19785) - Cards
+
+
+
+---
+
+
+class: enlarge150
+
+### Component Library Patterns
+
+- **Polymorphic** - Same API for button, anchor, router-link
+- **Integrated tooltips** - Built-in via `title` + `tooltip` props
+- **Semantic colors** - `blue`, `red`, `green` not Bootstrap variants
+- **Composable internals** - Shared logic in composables
+
+
+
+---
+
+
+class: enlarge150
+
+### Creating a Component Wrapper
+
+Follow established patterns:
+
+1. Use `ComponentColor` and `ComponentSize` types
+2. Integrate tooltips via `title`/`tooltip` props
+3. Use shared composables for common logic
+4. Apply CSS custom properties for theming
+5. Include ARIA attributes for accessibility
+
+See existing components in `client/src/components/BaseComponents/`
+
+
+
+---
+
+
+class: enlarge150
+
+### Future Component Work
+
+Likely next components based on Bootstrap-Vue usage:
+
+- **GAlert** - Notification banners
+- **GDropdown** - Dropdown menus
+- **GTable** - Data tables with sorting
+- **GTabs** - Tab navigation
+- **GCollapse** - Collapsible sections
+
+
+.footnote[Previous: [Galaxy Markdown Architecture](/training-material/topics/dev/tutorials/architecture-markdown/slides.html) | Next: [Galaxy Dependencies Management](/training-material/topics/dev/tutorials/architecture-dependencies/slides.html)]
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- Source in `client/src`, built bundles in `static/dist`
+
+- Webpack handles bundling and transpilation
+
+- Vue.js for reactive components
+
+- ES6 JavaScript
+
+- Jest for unit testing
+
+- Webhooks for UI plugins
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jmchilton?s=36" alt="John Chilton avatar" width="36" class="avatar" />
+    John Chilton</a>
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+</div>
+
+Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br/>
+
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+        
+    </body>
+</html>

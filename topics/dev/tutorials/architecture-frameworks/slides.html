@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Architecture 05 - Galaxy Web Frameworks</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@05ce2d3c522f8a7b531dc84f9792f7e473939485",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture-frameworks/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Architecture 05 - Galaxy Web Frameworks">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-02-19 09:49:54 +0000">
+<meta name="DC.creator" content="John Chilton">
+
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Slide Deck: Architecture 05 - Galaxy Web Frameworks">
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/dev/tutorials/architecture-frameworks/slides.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Galaxy Administrators"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Architecture 05 - Galaxy Web Frameworks",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-02-19 09:49:54 +0000",
+  "datePublished": "2026-02-19 09:49:54 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+  },
+  "abstract": "layout: introduction_slides",
+  "learningResourceType": "slides",
+  "name": "Architecture 05 - Galaxy Web Frameworks",
+  "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture-frameworks/slides.html",
+  "version": 1,
+  "timeRequired": "PT25M",
+  "teaches": "- Understand the request/response cycle\n- Learn about ASGI, Starlette, and FastAPI\n- Understand WSGI and legacy routing\n- Learn about middleware layers",
+  "keywords": [
+    "Development in Galaxy"
+  ],
+  "description": "## Abstract\n\nlayout: introduction_slides\n\n\n## Questions this  will address\n\n - How does Galaxy handle web requests?\n - What web frameworks does Galaxy use?\n - What is the difference between ASGI and WSGI?\n\n\n## Learning Objectives\n\n- Understand the request/response cycle\n- Learn about ASGI, Starlette, and FastAPI\n- Understand WSGI and legacy routing\n- Learn about middleware layers\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "name": "John Chilton",
+      "image": "https://avatars.githubusercontent.com/jmchilton",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6794-0756",
+      "@id": "https://orcid.org/0000-0002-6794-0756"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": []
+}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+
+
+    <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/dev" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/architecture-frameworks/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+<br/>
+<br/>
+
+# Architecture 05 - Galaxy Web Frameworks
+
+<br/>
+<br/>
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jmchilton?s=36" alt="John Chilton avatar" width="36" class="avatar" />
+    John Chilton</a>
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 5em;">
+
+
+<i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a> |
+
+
+
+
+
+
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- How does Galaxy handle web requests?
+
+- What web frameworks does Galaxy use?
+
+- What is the difference between ASGI and WSGI?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Understand the request/response cycle
+
+- Learn about ASGI, Starlette, and FastAPI
+
+- Understand WSGI and legacy routing
+
+- Learn about middleware layers
+
+
+---
+
+
+layout: introduction_slides
+topic_name: Galaxy Architecture
+
+# Architecture 05 - Galaxy Web Frameworks
+
+*The architecture of an interaction.*
+
+---
+
+
+
+layout: true
+name: left-aligned
+class: left, middle
+---
+layout: true
+class: center, middle
+
+
+
+---
+
+
+class: reduce70
+
+![Client-Server Communications](../../images/server_client_vuejs.plantuml.svg)
+
+Bits and pieces of older client technologies appear throughout - ranging from Python
+mako templates to generate HTML, lower-level jQuery, Axios interactions, and Backbone legacy MVC.
+
+
+---
+
+
+class: center
+
+![Processing requests on the server](../../images/asgi_app.plantuml.svg)
+
+Expanding the right side of that diagram. We will move through the components left to right.
+
+
+---
+
+
+class: enlarge120
+
+### ASGI - Application
+
+Spiritual successor to
+[WSGI](https://www.python.org/dev/peps/pep-0333/). An ASGI application
+is an async callable that takes in a `scope` (`dict` describing the
+connection), `send` (an async callable to respond to events via),
+and `receive` (an async callable to receive messages).
+
+```python
+async def application(scope, receive, send):
+    event = await receive()
+    ...
+    await send({&quot;type&quot;: &quot;http.response.body&quot;, ...})
+```
+
+Checkout [ASGI documentation](https://asgi.readthedocs.io/) for more details.
+
+
+---
+
+
+### ASGI &amp; Starlette Low-level Example
+
+We will talk a lot about Galaxy and FastAPI - but much of its
+plumbing is just aliases for starlette ASGI handling.
+
+```python
+from starlette.responses import PlainTextResponse
+
+async def app(scope, receive, send):
+    assert scope[&apos;type&apos;] == &quot;http&quot;
+    response = PlainTextResponse(&apos;Hello, world!&apos;)
+    await response(scope, receive, send)
+```
+
+If this is placed in a file called `example.py` with Starlette on
+the Python path, the application server uvicorn can then host this
+application with the following shell command:
+
+```
+$ uvicorn example:app
+INFO: Started server process [11509]
+INFO: Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+```
+
+Example from [starlette.io](https://www.starlette.io/).
+
+
+---
+
+
+### ASGI - Starlette High-level Example
+
+Building a higher-level `example.py` with Starlette.
+
+
+```python
+from starlette.applications import Starlette
+from starlette.responses import JSONResponse
+from starlette.routing import Route
+
+
+async def homepage(request):
+    return JSONResponse({&apos;hello&apos;: &apos;world&apos;})
+
+
+app = Starlette(debug=True, routes=[
+    Route(&apos;/&apos;, homepage),
+])
+```
+
+A small framework for building web applications.
+
+
+---
+
+
+### ASGI - FastAPI
+
+From https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py
+
+```python
+...
+from starlette.applications import Starlette
+...
+
+class FastAPI(Starlette):
+    ...
+```
+
+FastAPI (the library and the application base) extends starlette framework with features for building APIs. These include data
+validation, serialization, documentation generation.
+
+
+---
+
+
+class: center
+
+![Processing requests on the server](../../images/asgi_app.plantuml.svg)
+
+
+---
+
+
+### FastAPI `__call__`
+
+https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py
+
+```python
+async def __call__(self, scope: Scope, receive: Receive, send: Send) -&gt; None:
+    if self.root_path:
+        scope[&quot;root_path&quot;] = self.root_path
+    if AsyncExitStack:
+        async with AsyncExitStack() as stack:
+             scope[&quot;fastapi_astack&quot;] = stack
+             await super().__call__(scope, receive, send)
+    else:
+        await super().__call__(scope, receive, send)  # pragma: no cover
+```
+
+A light wrapper around Starlette&apos;s call entry point.
+
+
+---
+
+
+### Starlette `__call__`
+
+https://github.com/encode/starlette/blob/master/starlette/applications.py
+
+```python
+async def __call__(self, scope: Scope, receive: Receive, send: Send) -&gt; None:
+   scope[&quot;app&quot;] = self
+   await self.middleware_stack(scope, receive, send)
+```
+
+Walks through Starlette middleware.
+
+
+---
+
+
+### Starlette `build_middleware_stack`
+
+https://github.com/encode/starlette/blob/master/starlette/applications.py
+
+```python
+def build_middleware_stack(self) -&gt; ASGIApp:
+    ...
+
+    app = self.router
+    for cls, options in reversed(middleware):
+        app = cls(app=app, **options)
+    return app
+```
+
+Start with the router and surround it with each layer of configured middleware.
+
+
+---
+
+
+class: enlarge150
+
+### ASGI Middleware
+
+&gt; It is possible to have ASGI &quot;middleware&quot; - code that plays the role of both server and application, taking in a scope and the send/receive awaitable callables, potentially modifying them, and then calling an inner application.
+
+https://asgi.readthedocs.io/en/latest/specs/main.html#middleware
+
+
+---
+
+
+class: enlarge150
+
+### Starlette Middleware
+
+&gt; Starlette includes several middleware classes for adding behavior that is applied across your entire application. These are all implemented as standard ASGI middleware classes, and can be applied either to Starlette or to any other ASGI application.
+
+https://www.starlette.io/middleware/
+
+
+---
+
+
+### Starlette `build_middleware_stack`
+
+https://github.com/encode/starlette/blob/master/starlette/applications.py
+
+```python
+def build_middleware_stack(self) -&gt; ASGIApp:
+    ...
+
+    app = self.router
+    for cls, options in reversed(middleware):
+        app = cls(app=app, **options)
+    return app
+```
+
+Notice the inner most layer is the router.
+
+
+---
+
+
+### FastAPI Router Initialization
+
+https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py
+
+```python
+class FastAPI(Starlette):
+    def __init__(self, ...):
+        self.router: routing.APIRouter = routing.APIRouter(
+            routes=routes,
+        )
+```
+
+
+---
+
+
+### FastAPI Router
+
+```python
+from starlette import routing
+
+class APIRouter(routing.Router):
+   ...
+```
+
+
+---
+
+
+### Starlette Router
+
+https://github.com/encode/starlette/blob/master/starlette/routing.py
+
+```python
+async def __call__(self, scope: Scope, receive: Receive, send: Send) -&gt; None:
+   ...
+   for route in self.routes:
+       # Determine if any route matches the incoming scope,
+       # and hand over to the matching route if found.
+       match, child_scope = route.matches(scope)
+       if match == Match.FULL:
+           scope.update(child_scope)
+           await route.handle(scope, receive, send)
+           return
+       ...
+```
+
+https://www.starlette.io/routing/
+
+
+---
+
+
+class: center
+
+![Router Class Diagram](../../images/routers.plantuml.svg)
+
+- https://www.starlette.io/routing/
+- https://fastapi.tiangolo.com/tutorial/bigger-applications/#apirouter
+- https://fastapi-utils.davidmontague.xyz/user-guide/inferring-router/
+
+
+---
+
+
+class: enlarge200
+
+In order to understand how the routing classes are setup within Galaxy,
+lets step back and look really quickly at how Galaxy&apos;s FastAPI
+application (ASGI endpoint) is constructed.
+
+
+---
+
+
+### FastAPI Factory
+
+`lib/galaxy/webapps/galaxy/fast_factory.py`
+
+```python
+def factory():
+    props = WebappSetupProps(
+        app_name=&apos;galaxy&apos;,
+        default_section_name=DEFAULT_CONFIG_SECTION,
+        env_config_file=&apos;GALAXY_CONFIG_FILE&apos;,
+        env_config_section=&apos;GALAXY_CONFIG_SECTION&apos;,
+        check_galaxy_root=True
+    )
+    config_provider = WebappConfigResolver(props)
+    config = config_provider.resolve_config()
+    gx_webapp, gx_app = app_pair(
+        global_conf=config.global_conf,
+        load_app_kwds=config.load_app_kwds,
+        wsgi_preflight=config.wsgi_preflight
+    )
+    return initialize_fast_app(gx_webapp, gx_app)
+```
+
+
+---
+
+
+### FastAPI Application
+
+`lib/galaxy/webapps/galaxy/fast_app.py`
+
+```python
+def initialize_fast_app(gx_webapp, gx_app):
+    app = FastAPI(
+        title=&quot;Galaxy API&quot;,
+        docs_url=&quot;/api/docs&quot;,
+        openapi_tags=api_tags_metadata,
+    )
+    add_exception_handler(app)
+    add_galaxy_middleware(app, gx_app)
+    add_request_id_middleware(app)
+    include_all_package_routers(app, &apos;galaxy.webapps.galaxy.api&apos;)
+    wsgi_handler = WSGIMiddleware(gx_webapp)
+    app.mount(&apos;/&apos;, wsgi_handler)
+    return app
+```
+
+
+---
+
+
+### Finding API Routers
+
+Following this line:
+
+`include_all_package_routers(app, &apos;galaxy.webapps.galaxy.api&apos;)`
+
+to the file
+
+`lib/galaxy/webapps/base/api.py`
+
+```python
+def include_all_package_routers(app: FastAPI, package_name: str):
+    for _, module in walk_controller_modules(package_name):
+        router = getattr(module, &quot;router&quot;, None)
+        if router:
+            app.include_router(router)
+```
+
+
+---
+
+
+class: reduce70
+
+### Routing inside the Application
+
+```python
+router = Router(tags=[&apos;tags&apos;])
+
+
+@router.cbv
+class FastAPITags:
+    manager: TagsManager = depends(TagsManager)
+
+    @router.put(
+        &apos;/api/tags&apos;,
+        summary=&quot;Apply a new set of tags to an item.&quot;,
+        status_code=status.HTTP_204_NO_CONTENT,
+    )
+    def update(
+        self,
+        trans: ProvidesUserContext = DependsOnTrans,
+        payload: ItemTagsPayload = Body(
+            ...,  # Required
+            title=&quot;Payload&quot;,
+            description=&quot;Request body containing the item and the tags to be assigned.&quot;,
+        ),
+    ):
+        &quot;&quot;&quot;Replaces the tags associated with an item with the new ones specified in the payload.
+
+        - The previous tags will be __deleted__.
+        - If no tags are provided in the request body, the currently associated tags will also be __deleted__.
+        &quot;&quot;&quot;
+        self.manager.update(trans, payload)
+```
+
+
+---
+
+
+class: center
+
+![Router Class Diagram](../../images/routers.plantuml.svg)
+
+- https://www.starlette.io/routing/
+- https://fastapi.tiangolo.com/tutorial/bigger-applications/#apirouter
+- https://fastapi-utils.davidmontague.xyz/user-guide/inferring-router/
+
+
+---
+
+
+### WSGI Fallback
+
+Back to `initialize_fast_app`, two of the final lines were as follows:
+
+```python
+wsgi_handler = WSGIMiddleware(gx_webapp)
+app.mount(&apos;/&apos;, wsgi_handler)
+```
+
+This effectively provides a fallback to our legacy WSGI application.
+
+
+---
+
+
+### WSGI
+
+- Python interface for web servers defined by PEP 333 - https://www.python.org/dev/peps/pep-0333/.
+- Galaxy tends to favor uWSGI, but other options such as Gunicorn and Paste can be used to host the application.
+  - https://uwsgi-docs.readthedocs.io/ (a million bells and whistles, highly performant, a bit brittle)
+  - https://gunicorn.org/ (simpler, more standard Python 3 WSGI server)
+  - https://bitbucket.org/ianb/paste (more of legacy interest, but still heavily used in testing for instance)
+
+
+---
+
+
+![Processing requests on the server](../../images/wsgi_app.plantuml.svg)
+
+
+---
+
+
+### WSGI Middleware
+
+A WSGI function:
+
+`def app(environ, start_response):`
+
+- Middleware act as filters, modify the `environ` and then pass through to the next webapp
+- Galaxy uses several middleware components defined in the `wrap_in_middleware`
+  function of `galaxy.webapps.galaxy.buildapp`.
+
+
+---
+
+
+### Galaxy&apos;s WSGI Middleware
+
+Middleware configured in `galaxy.webapps.galaxy.buildapp#wrap_in_middleware`.
+
+- `paste.httpexceptions#make_middleware`
+- `galaxy.web.framework.middleware.remoteuser#RemoteUser` (if configured)
+- `paste.recursive#RecursiveMiddleware`
+- `galaxy.web.framework.middleware.sentry#Sentry` (if configured)
+- Various debugging middleware (linting, interactive exceptions, etc...)
+- `galaxy.web.framework.middleware.statsd#StatsdMiddleware` (if configured)
+- `galaxy.web.framework.middleware.xforwardedhost#XForwardedHostMiddleware`
+- `galaxy.web.framework.middleware.request_id#RequestIDMiddleware`
+
+
+---
+
+
+class: center
+
+![Processing requests on the server (WSGI)](../../images/wsgi_app.plantuml.svg)
+
+
+---
+
+
+class: center
+
+### Instances
+
+![webapp](../../images/webapp.plantuml.svg)
+
+
+---
+
+
+class: center
+
+### Classes
+
+![GalaxyWebApplication class diagram](../../images/webapp_classes.plantuml.svg)
+
+
+---
+
+
+### Routes
+
+Setup on `webapp` in `galaxy.webapps.galaxy.buildapp.py`.
+
+```python
+webapp.add_route(
+    &apos;/datasets/:dataset_id/display/{filename:.+?}&apos;,
+    controller=&apos;dataset&apos;, action=&apos;display&apos;,
+    dataset_id=None, filename=None
+)
+```
+
+URL `/datasets/278043/display` matches this route, so `handle_request` will
+
+- lookup the controller named &quot;dataset&quot;
+- look for a method named &quot;display&quot; that is exposed
+- call it, passing dataset_id and filename as keyword arg
+
+Uses popular Routes library (https://pypi.python.org/pypi/Routes).
+
+
+---
+
+
+class: reduce70
+
+Simplified `handle_request` from `lib/galaxy/web/framework/base.py`.
+
+```python
+def handle_request(self, environ, start_response):
+    path_info = environ.get( &apos;PATH_INFO&apos;, &apos;&apos; )
+    map = self.mapper.match( path_info, environ )
+    if path_info.startswith(&apos;/api&apos;):
+        controllers = self.api_controllers
+    else:
+        controllers = self.controllers
+
+    trans = self.transaction_factory( environ )
+
+    controller_name = map.pop( &apos;controller&apos;, None )
+    controller = controllers.get( controller_name, None )
+
+    # Resolve action method on controller
+    action = map.pop( &apos;action&apos;, &apos;index&apos; )
+    method = getattr( controller, action, None )
+
+    kwargs = trans.request.params.mixed()
+    # Read controller arguments from mapper match
+    kwargs.update( map )
+
+    body = method( trans, **kwargs )
+    # Body may be a file, string, etc... respond with it.
+```
+
+
+---
+
+
+class: enlarge150
+
+### Controllers
+
+Three varieties
+
+1. FastAPI ASGI API controllers
+2. WSGI API controllers
+3. Legacy WSGI web controllers.
+
+Ideally each of these are *thin*. Focused on &quot;web things&quot; - adapting parameters and responses and move
+&quot;business logic&quot; to components not bound to web functionality.
+
+
+---
+
+
+class: enlarge150
+
+### FastAPI Controllers
+
+- Found in `lib/galaxy/webapps/galaxy/controllers/api/`.
+- Consume and produce typed data using Python 3 type annotations, FastAPI helpers, and Pydantic models.
+- Router specifies HTTP verb (GET, POST, PUT, etc..) and how to parse path.
+
+
+---
+
+
+class: reduce70
+
+### FastAPI Controller Example
+
+`lib/galaxy/webapps/galaxy/controllers/api/roles.py`
+
+```python
+@router.cbv
+class FastAPIRoles:
+    role_manager: RoleManager = depends(RoleManager)
+
+    @router.get(&apos;/api/roles&apos;)
+    def index(self, trans: ProvidesUserContext = DependsOnTrans) -&gt; RoleListModel:
+        roles = self.role_manager.list_displayable_roles(trans)
+        return RoleListModel(__root__=[role_to_model(trans, r) for r in roles])
+
+    @router.get(&apos;/api/roles/{id}&apos;)
+    def show(self, id: EncodedDatabaseIdField, trans: ProvidesUserContext = DependsOnTrans) -&gt; RoleModel:
+        role_id = trans.app.security.decode_id(id)
+        role = self.role_manager.get(trans, role_id)
+        return role_to_model(trans, role)
+
+    @router.post(&quot;/api/roles&quot;, require_admin=True)
+    def create(self, trans: ProvidesUserContext = DependsOnTrans, role_definition_model: RoleDefinitionModel = Body(...)) -&gt; RoleModel:
+        role = self.role_manager.create_role(trans, role_definition_model)
+        return role_to_model(trans, role)
+```
+
+
+---
+
+
+class: reduce70
+
+### FastAPI and Pydantic
+
+```python
+RoleIdField = Field(title=&quot;ID&quot;, description=&quot;Encoded ID of the role&quot;)
+RoleNameField = Field(title=&quot;Name&quot;, description=&quot;Name of the role&quot;)
+RoleDescriptionField = Field(title=&quot;Description&quot;, description=&quot;Description of the role&quot;)
+
+
+class BasicRoleModel(BaseModel):
+    id: EncodedDatabaseIdField = RoleIdField
+    name: str = RoleNameField
+    type: str = Field(title=&quot;Type&quot;, description=&quot;Type or category of the role&quot;)
+
+
+class RoleModel(BasicRoleModel):
+    description: str = RoleDescriptionField
+    url: str = Field(title=&quot;URL&quot;, description=&quot;URL for the role&quot;)
+    model_class: str = Field(title=&quot;Model class&quot;, description=&quot;Database model class (Role)&quot;)
+
+
+class RoleDefinitionModel(BaseModel):
+    name: str = RoleNameField
+    description: str = RoleDescriptionField
+    user_ids: Optional[List[EncodedDatabaseIdField]] = Field(title=&quot;User IDs&quot;, default=[])
+    group_ids: Optional[List[EncodedDatabaseIdField]] = Field(title=&quot;Group IDs&quot;, default=[])
+```
+
+
+---
+
+
+### FastAPI and OpenAPI
+
+`FastAPI(title=&quot;Galaxy API&quot;, docs_url=&quot;/api/docs&quot;, ...)`
+
+![OpenAPI Docs from FastAPI at api/docs](../../images/core_api_docs.png)
+
+
+---
+
+
+![OpenAPI Docs from FastAPI at api/docs for roles](../../images/core_api_docs_roles.png)
+
+
+---
+
+
+class: enlarge150
+
+### WSGI API Controllers
+
+- Also in `lib/galaxy/webapps/galaxy/controllers/api/`
+- Mirroring FastAPI controllers until FastAPI required (likely 21.09)
+- Exposed method take `trans` and request parameters and return a JSON response (possibly including Pydantic objects)
+
+
+---
+
+
+class: reduce50
+
+### WSGI API Controller Example
+
+`lib/galaxy/webapps/galaxy/controllers/api/roles.py`
+
+```python
+class RoleAPIController(BaseGalaxyAPIController):
+    role_manager: RoleManager = depends(RoleManager)
+
+    @web.expose_api
+    def index(self, trans: ProvidesUserContext, **kwd):
+        &quot;&quot;&quot;
+        GET /api/roles
+        Displays a collection (list) of roles.
+        &quot;&quot;&quot;
+        roles = self.role_manager.list_displayable_roles(trans)
+        return RoleListModel(__root__=[role_to_model(trans, r) for r in roles])
+
+    @web.expose_api
+    def show(self, trans: ProvidesUserContext, id: str, **kwd):
+        &quot;&quot;&quot;
+        GET /api/roles/{encoded_role_id}
+        Displays information about a role.
+        &quot;&quot;&quot;
+        role_id = decode_id(self.app, id)
+        role = self.role_manager.get(trans, role_id)
+        return role_to_model(trans, role)
+
+    @web.expose_api
+    @web.require_admin
+    def create(self, trans: ProvidesUserContext, payload, **kwd):
+        &quot;&quot;&quot;
+        POST /api/roles
+        Creates a new role.
+        &quot;&quot;&quot;
+        expand_json_keys(payload, [&quot;user_ids&quot;, &quot;group_ids&quot;])
+        role_definition_model = RoleDefinitionModel(**payload)
+        role = self.role_manager.create_role(trans, role_definition_model)
+        return role_to_model(trans, role)
+```
+
+
+---
+
+
+class: enlarge150
+
+### Legacy WSGI Controllers
+
+- `lib/galaxy/webapps/galaxy/controllers/`
+- Return arbitrary content - JSON, HTML, etc...
+- Render HTML components using [mako](http://www.makotemplates.org/) templates (see `templates/`)
+- The usage of these should continue to decrease over time.
+
+.footnote[Previous: [Galaxy Files and Directory Structure](/training-material/topics/dev/tutorials/architecture-files/slides.html) | Next: [Dependency Injection in Galaxy](/training-material/topics/dev/tutorials/architecture-dependency-injection/slides.html)]
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- FastAPI (ASGI) for new API endpoints
+
+- WSGI for legacy endpoints
+
+- Middleware handles cross-cutting concerns
+
+- Routing maps URLs to controllers
+
+- Three types of controllers: FastAPI, WSGI API, legacy web
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jmchilton?s=36" alt="John Chilton avatar" width="36" class="avatar" />
+    John Chilton</a>
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+</div>
+
+Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br/>
+
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+        
+    </body>
+</html>

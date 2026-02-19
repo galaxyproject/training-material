@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Architecture 06 - Dependency Injection in Galaxy</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@05ce2d3c522f8a7b531dc84f9792f7e473939485",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture-dependency-injection/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Architecture 06 - Dependency Injection in Galaxy">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-02-19 09:49:54 +0000">
+<meta name="DC.creator" content="John Chilton">
+
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Slide Deck: Architecture 06 - Dependency Injection in Galaxy">
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/dev/tutorials/architecture-dependency-injection/slides.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Galaxy Administrators"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Architecture 06 - Dependency Injection in Galaxy",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-02-19 09:49:54 +0000",
+  "datePublished": "2026-02-19 09:49:54 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+  },
+  "abstract": "layout: introduction_slides",
+  "learningResourceType": "slides",
+  "name": "Architecture 06 - Dependency Injection in Galaxy",
+  "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture-dependency-injection/slides.html",
+  "version": 1,
+  "timeRequired": "PT15M",
+  "teaches": "- Understand the problems with the `app` god object\n- Learn about type-based dependency injection\n- Use DI in controllers and tasks\n- Understand the benefits of typing",
+  "keywords": [
+    "Development in Galaxy"
+  ],
+  "description": "## Abstract\n\nlayout: introduction_slides\n\n\n## Questions this  will address\n\n - What is dependency injection?\n - Why does Galaxy use dependency injection?\n - How do I use DI in controllers and tasks?\n\n\n## Learning Objectives\n\n- Understand the problems with the `app` god object\n- Learn about type-based dependency injection\n- Use DI in controllers and tasks\n- Understand the benefits of typing\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "name": "John Chilton",
+      "image": "https://avatars.githubusercontent.com/jmchilton",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6794-0756",
+      "@id": "https://orcid.org/0000-0002-6794-0756"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": []
+}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+
+
+    <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/dev" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/architecture-dependency-injection/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+<br/>
+<br/>
+
+# Architecture 06 - Dependency Injection in Galaxy
+
+<br/>
+<br/>
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jmchilton?s=36" alt="John Chilton avatar" width="36" class="avatar" />
+    John Chilton</a>
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 5em;">
+
+
+<i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a> |
+
+
+
+
+
+
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- What is dependency injection?
+
+- Why does Galaxy use dependency injection?
+
+- How do I use DI in controllers and tasks?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Understand the problems with the `app` god object
+
+- Learn about type-based dependency injection
+
+- Use DI in controllers and tasks
+
+- Understand the benefits of typing
+
+
+---
+
+
+layout: introduction_slides
+topic_name: Galaxy Architecture
+
+# Architecture 06 - Dependency Injection in Galaxy
+
+*The architecture of connecting Galaxy components..*
+
+---
+
+
+
+layout: true
+name: left-aligned
+class: left, middle
+---
+layout: true
+class: center, middle
+
+
+
+---
+
+
+class: center
+
+![Big Interconnected App Python 2](../../images/app_py2.plantuml.svg)
+
+
+
+---
+
+
+### A God object
+
+&gt; &quot;a God object is an object that knows too much or does too much. The God object is an example of an anti-pattern and a code smell.&quot;
+
+https://en.wikipedia.org/wiki/God_object
+
+Not only does `app` know and do too much, it is also used way too many places. Every interesting component, every controller, the web transaction, etc. has a reference to `app`.
+
+
+
+---
+
+
+### A Typical Usage
+
+```python
+class DatasetCollectionManager:
+
+     def __init__(self, app):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = app.model
+        self.security = app.security
+
+        self.hda_manager = hdas.HDAManager(app)
+        self.history_manager = histories.HistoryManager(app)
+        self.tag_handler = tags.GalaxyTagHandler(app.model.context)
+        self.ldda_manager = lddas.LDDAManager(app)
+```
+
+
+
+---
+
+
+class: center
+
+![Big Interconnected App Python 3 - no right](../../images/app_types_no_interface.plantuml.svg)
+
+
+
+---
+
+
+class: reduce70
+
+### Problematic Dependency Graph
+
+When managers depend directly on `UniverseApplication`:
+
+```python
+class DatasetCollectionManager:
+
+     def __init__(self, app: UniverseApplication):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = app.model
+        self.security = app.security
+
+        self.hda_manager = hdas.HDAManager(app)
+        self.history_manager = histories.HistoryManager(app)
+        self.tag_handler = tags.GalaxyTagHandler(app.model.context)
+        self.ldda_manager = lddas.LDDAManager(app)
+```
+
+`UniverseApplication` creates a `DatasetCollectionManager` for the application and `DatasetCollectionManager` imports and annotates the `UniverseApplication` as a requirement. This creates an unfortunate dependency loop.
+
+**Dependencies should form a DAG (directed acyclic graph)**.
+
+
+
+---
+
+
+### Why an Interface?
+
+By using `StructuredApp` interface instead of `UniverseApplication`:
+
+```python
+class DatasetCollectionManager:
+
+     def __init__(self, app: StructuredApp):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = app.model
+        self.security = app.security
+
+        self.hda_manager = hdas.HDAManager(app)
+        self.history_manager = histories.HistoryManager(app)
+        self.tag_handler = tags.GalaxyTagHandler(app.model.context)
+        self.ldda_manager = lddas.LDDAManager(app)
+```
+
+Dependencies now closer to a DAG - `DatasetCollectionManager` no longer annotated with the type `UniverseApplication`! Imports are cleaner.
+
+
+
+---
+
+
+class: center
+
+![Big Interconnected App with Python 3 Types](../../images/app_types.plantuml.svg)
+
+
+
+---
+
+
+### Benefits of Typing
+
+- **mypy** provides robust type checking
+- **IDE** can provide hints to make developing this class and usage of this class easier
+
+
+
+---
+
+
+### Design Problems with Handling Dependencies Directly
+
+Using app to construct a manager for dealing with dataset collections.
+
+- `DatasetCollectionManager` needs to know how to construct all the other managers it is using, not just their interface
+- `app` has an instance of this class and `app` is used to construct an instance of this class - this circular dependency chain results in brittleness and complexity in how to construct `app`
+- `app` is very big and we&apos;re depending on a lot of it but not a large percent of it. This makes typing less than ideal
+
+
+
+---
+
+
+### Testing Problems with Handling Dependencies Directly
+
+- Difficult to unit test properly
+  - What parts of app are being used?
+  - How do we construct a smaller app with just those pieces?
+  - How do we stub out classes cleanly when we&apos;re creating the dependent objects internally?
+
+
+
+---
+
+
+class: reduce70
+
+### Design Benefits of Injecting Dependencies
+
+```python
+class DatasetCollectionManager:
+    def __init__(
+        self,
+        model: GalaxyModelMapping,
+        security: IdEncodingHelper,
+        hda_manager: HDAManager,
+        history_manager: HistoryManager,
+        tag_handler: GalaxyTagHandler,
+        ldda_manager: LDDAManager,
+    ):
+        self.type_registry = DATASET_COLLECTION_TYPES_REGISTRY
+        self.collection_type_descriptions = COLLECTION_TYPE_DESCRIPTION_FACTORY
+        self.model = model
+        self.security = security
+
+        self.hda_manager = hda_manager
+        self.history_manager = history_manager
+        self.tag_handler = tag_handler
+        self.ldda_manager = ldda_manager
+```
+
+- We&apos;re no longer depending on `app`
+- The type signature very clearly delineates what dependencies are required
+- Unit testing can inject precise dependencies supplying only the behavior needed
+
+
+
+---
+
+
+### Constructing the Object Is Still Brittle
+
+```python
+DatasetCollectionManager(
+    self.model,
+    self.security,
+    HDAManager(self),
+    HistoryManager(self),
+    GalaxyTagHandler(self.model.context),
+    LDDAManager(self)
+)
+```
+
+- The complexity in ordering of construction of `app` is still challenging
+- The constructing code of this object still needs to know how to construct each dependency of the object
+- The constructing code of this object needs to explicitly import all the types
+
+
+
+---
+
+
+### What is Type-based Dependency Injection?
+
+A dependency injection **container** keeps tracks of singletons or recipes for how to construct each type. By default when it goes to construct an object, it can just ask the container for each dependency based on the type signature of the class being constructed.
+
+If an object declares it consumes a dependency of type `X` (e.g. `HDAManager`), just query the container recursively for an object of type `X`.
+
+
+
+---
+
+
+### Object Construction Simplification
+
+Once all the dependencies have been type annotated properly and the needed singletons have been configured.
+
+**Before:**
+```python
+dcm = DatasetCollectionManager(
+    self.model,
+    self.security,
+    HDAManager(self),
+    HistoryManager(self),
+    GalaxyTagHandler(self.model.context),
+    LDDAManager(self)
+)
+```
+
+**After:**
+```python
+dcm = container[DatasetCollectionManager]
+```
+
+
+
+---
+
+
+### Picking a Library
+
+Many of the existing DI libraries for Python predate widespread Python 3 and don&apos;t readily infer things based on types. The benefits of typing and DI are both enhanced by the other - so it was important to pick one that could do type-based injection.
+
+We went with **Lagom**, but we&apos;ve built abstractions that would make it very easy to switch.
+
+
+
+---
+
+
+class: center
+
+### Lagom
+
+![Lagom Website](../../images/lagom_ss.png)
+
+https://lagom-di.readthedocs.io/en/latest/
+
+
+
+---
+
+
+### Tips for Designing New Galaxy Backend Components
+
+- Consume only the related components you need to avoid `app` when possible
+- Annotate inputs to the component with Python types
+- Use interface types to shield consumers from implementation details
+- Rely on Galaxy&apos;s dependency injection to construct the component and provide it to consumers
+
+
+
+---
+
+
+### DI in FastAPI Controllers
+
+```python
+def get_tags_manager() -&gt; TagsManager:
+    return TagsManager()
+
+
+@cbv(router)
+class FastAPITags:
+    manager: TagsManager = Depends(get_tags_manager)
+    ...
+```
+
+Dependency injection allows for type checking but doesn&apos;t use type inference (requires factory functions, etc.)
+
+https://fastapi.tiangolo.com/tutorial/dependencies/
+
+
+
+---
+
+
+### DI and Controllers - FastAPI Limitations
+
+Also we have two different controller styles and only the new FastAPI allowed dependency injection.
+
+```python
+def get_tags_manager() -&gt; TagsManager:
+    return TagsManager()
+
+
+@cbv(router)
+class FastAPITags:
+    manager: TagsManager = Depends(get_tags_manager)
+    ...
+
+class TagsController(BaseAPIController):
+
+    def __init__(self, app):
+        super().__init__(app)
+        self.manager = TagsManager()
+```
+
+
+
+---
+
+
+class: reduce70
+
+### DI and Controllers - Unified Approach
+
+```diff
+-def get_tags_manager() -&gt; TagsManager:
+-    return TagsManager()
+-
+-
+ @cbv(router)
+ class FastAPITags:
+-    manager: TagsManager = Depends(get_tags_manager)
++    manager: TagsManager = depends(TagsManager)
+
+     @router.put(
+         &apos;/api/tags&apos;,
+@@ -58,11 +54,8 @@ def update(
+      self.manager.update(trans, payload)
+
+
+-class TagsController(BaseAPIController):
+-
+-    def __init__(self, app):
+-        super().__init__(app)
+-        self.manager = TagsManager()
++class TagsController(BaseGalaxyAPIController):
++    manager: TagsManager = depends(TagsManager)
+```
+
+Building dependency injection into our application and not relying on FastAPI allows for dependency injection that is *less verbose*, available uniformly across the application,
+*works for the legacy controllers identically*.
+
+
+
+---
+
+
+### DI in Celery Tasks
+
+From `lib/galaxy/celery/tasks.py`:
+
+```python
+from lagom import magic_bind_to_container
+...
+
+def galaxy_task(func):
+    CELERY_TASKS.append(func.__name__)
+    app = get_galaxy_app()
+    if app:
+        return magic_bind_to_container(app)(func)
+    return func
+```
+
+`magic_bind_to_container` binds function parameters to a specified Lagom DI container automatically.
+
+
+
+---
+
+
+class: reduce70
+
+### DI in Celery Tasks - Examples
+
+
+```python
+@celery_app.task(ignore_result=True)
+@galaxy_task
+def purge_hda(hda_manager: HDAManager, hda_id):
+    hda = hda_manager.by_id(hda_id)
+    hda_manager._purge(hda)
+```
+
+```python
+@celery_app.task
+@galaxy_task
+def set_metadata(
+    hda_manager: HDAManager,
+    ldda_manager: LDDAManager,
+    dataset_id,
+    model_class=&apos;HistoryDatasetAssociation&apos;
+):
+    if model_class == &apos;HistoryDatasetAssociation&apos;:
+        dataset = hda_manager.by_id(dataset_id)
+    elif model_class == &apos;LibraryDatasetDatasetAssociation&apos;:
+        dataset = ldda_manager.by_id(dataset_id)
+    dataset.datatype.set_meta(dataset)
+```
+
+Dependencies are automatically injected based on type annotations!
+
+
+
+---
+
+
+class: center
+
+![Decomposed App](../../images/app_decomposed.plantuml.svg)
+
+
+.footnote[Previous: [Galaxy Web Frameworks](/training-material/topics/dev/tutorials/architecture-frameworks/slides.html) | Next: [Galaxy Task Management with Celery](/training-material/topics/dev/tutorials/architecture-tasks/slides.html)]
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- `app` was a god object that knew/did too much
+
+- Interfaces break circular dependencies
+
+- Type-based DI with Lagom simplifies construction
+
+- DI works uniformly across FastAPI, WSGI controllers, and tasks
+
+- Dependencies should form a DAG
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jmchilton?s=36" alt="John Chilton avatar" width="36" class="avatar" />
+    John Chilton</a>
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+</div>
+
+Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br/>
+
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+        
+    </body>
+</html>

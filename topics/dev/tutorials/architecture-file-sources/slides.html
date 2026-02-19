@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Architecture 10 - Galaxy File Sources Architecture</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@05ce2d3c522f8a7b531dc84f9792f7e473939485",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture-file-sources/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Architecture 10 - Galaxy File Sources Architecture">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-02-19 09:49:54 +0000">
+<meta name="DC.creator" content="John Chilton">
+<meta name="DC.creator" content="David López">
+
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Slide Deck: Architecture 10 - Galaxy File Sources Architecture">
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/dev/tutorials/architecture-file-sources/slides.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Galaxy Administrators"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Architecture 10 - Galaxy File Sources Architecture",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-02-19 09:49:54 +0000",
+  "datePublished": "2026-02-19 09:49:54 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+  },
+  "abstract": "layout: introduction_slides",
+  "learningResourceType": "slides",
+  "name": "Architecture 10 - Galaxy File Sources Architecture",
+  "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture-file-sources/slides.html",
+  "version": 1,
+  "timeRequired": "PT20M",
+  "teaches": "- Understand the File Sources plugin architecture\n- Learn about user-defined file source templates\n- Understand fsspec and PyFilesystem2 base classes\n- Learn about OAuth integration for cloud services",
+  "keywords": [
+    "Development in Galaxy"
+  ],
+  "description": "## Abstract\n\nlayout: introduction_slides\n\n\n## Questions this  will address\n\n - What are File Sources in Galaxy?\n - How do user-defined file sources work?\n - What is the difference between File Sources and Object Stores?\n\n\n## Learning Objectives\n\n- Understand the File Sources plugin architecture\n- Learn about user-defined file source templates\n- Understand fsspec and PyFilesystem2 base classes\n- Learn about OAuth integration for cloud services\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "name": "John Chilton",
+      "image": "https://avatars.githubusercontent.com/jmchilton",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6794-0756",
+      "@id": "https://orcid.org/0000-0002-6794-0756"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/davelopez/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/davelopez/",
+      "name": "David López",
+      "image": "https://avatars.githubusercontent.com/davelopez",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/eurosciencegateway/",
+          "name": "EuroScienceGateway",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://galaxyproject.org/projects/esg/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": []
+}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+
+
+    <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/dev" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/architecture-file-sources/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+<br/>
+<br/>
+
+# Architecture 10 - Galaxy File Sources Architecture
+
+<br/>
+<br/>
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jmchilton?s=36" alt="John Chilton avatar" width="36" class="avatar" />
+    John Chilton</a><a href="/training-material/hall-of-fame/davelopez/" class="contributor-badge contributor-davelopez"><img src="https://avatars.githubusercontent.com/davelopez?s=36" alt="David López avatar" width="36" class="avatar" />
+    David López</a>
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 5em;">
+
+
+<i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a> |
+
+
+
+
+
+
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- What are File Sources in Galaxy?
+
+- How do user-defined file sources work?
+
+- What is the difference between File Sources and Object Stores?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Understand the File Sources plugin architecture
+
+- Learn about user-defined file source templates
+
+- Understand fsspec and PyFilesystem2 base classes
+
+- Learn about OAuth integration for cloud services
+
+
+---
+
+
+layout: introduction_slides
+topic_name: Galaxy Architecture
+
+# Architecture 10 - Galaxy File Sources Architecture
+
+*The architecture of pluggable file sources in Galaxy.*
+
+---
+
+
+
+layout: true
+name: left-aligned
+class: left, middle
+---
+layout: true
+class: center, middle
+
+
+
+---
+
+
+### The Problem &amp; Solution
+
+**Problem**
+- Galaxy needs to read and write files from diverse sources
+- Before file sources, each backend required core code changes and there was no extensibility for new storage types
+
+**Plugin Architecture**
+- `FilesSource` interface for all backends
+- `BaseFilesSource` reference implementation
+- `ConfiguredFileSources` orchestrates plugins (`lib/galaxy/files/__init__.py`)
+- `FileSourcePluginLoader` discovers plugins (`lib/galaxy/files/plugins.py`)
+
+**Applications**
+- Upload dialog, rule builder, collection creation, etc.
+- History &amp; workflow import/export.
+- Directory tools.
+
+
+
+---
+
+
+class: reduce70
+
+### Core Abstractions
+
+![FilesSource Interface Hierarchy](../../images/file_sources_interface_hierarchy.plantuml.svg)
+
+**Three interfaces:** `SingleFileSource`, `SupportsBrowsing`, `FilesSource`
+
+
+
+---
+
+
+class: reduce70
+
+### URI Routing &amp; Plugin Scoring
+
+![URI Resolution Scoring](../../images/file_sources_uri_resolution.plantuml.svg)
+
+
+
+---
+
+
+class: reduce70 left-aligned
+
+### URI Scoring Example: S3 FilesSource
+
+```python
+def score_url_match(self, url: str) -&gt; int:
+    if url.startswith(&quot;s3://&quot;):
+        bucket_name = self._get_config_bucket()
+        if bucket_name:
+            prefix = f&quot;s3://{bucket_name}/&quot;
+            if url.startswith(prefix):
+                return len(prefix)  # Exact bucket match
+            # Prevent s3://my-bucket-prod matching s3://my-bucket
+            elif url.startswith(f&quot;s3://{bucket_name}&quot;) and url[len(f&quot;s3://{bucket_name}&quot;)] != &quot;/&quot;:
+                return 0  # Boundary check failed
+        return 1  # Generic S3 match
+    return 0
+```
+
+**Scoring algorithm:** Returns 0 (unsupported) to URI length (exact match)
+
+
+
+---
+
+
+class: reduce70
+
+### User Context &amp; Access Control
+
+![Access Control Decision Flow](../../images/file_sources_access_control.plantuml.svg)
+
+
+
+---
+
+
+class: reduce90
+
+### Access Control Configuration
+
+```yaml
+# Role-based access control
+- type: s3fs
+  id: restricted_bucket
+  label: Restricted Project Data
+  bucket: sensitive-data
+  requires_roles: &quot;data_access&quot;
+  requires_groups: &quot;engineering OR research&quot;
+
+# Vault credential injection
+- type: posix
+  id: user_staging
+  root: /data/staging/${user.username}
+  writable: true
+```
+
+
+
+---
+
+
+class: reduce90 left-aligned
+
+### PyFilesystem2 Foundation
+
+**Older abstraction:** PyFilesystem2 (fs) library for FTP, WebDAV, cloud SDKs
+
+- **Server-side pagination** via `filterdir(page=(start, end))`
+- **Context manager** pattern (filesystems opened/closed per operation)
+- Use cases: FTP, WebDAV, SSH protocols
+
+```python
+class PyFilesystem2FilesSource(BaseFilesSource):
+    def _list(self, path=&quot;/&quot;, recursive=False, user_context=None, opts=None):
+        with self._open_fs(user_context) as fs:
+            limit = opts.limit if opts else None
+            offset = opts.offset if opts else 0
+
+            # Server-side pagination for large directories
+            if limit is not None:
+                page = (offset, offset + limit)
+                entries = list(fs.filterdir(path, page=page))
+            else:
+                entries = list(fs.scandir(path))
+
+            return self._serialize_entries(entries), len(entries)
+```
+
+
+
+---
+
+
+class: reduce70
+
+### fsspec
+
+![fsspec Plugin Hierarchy](../../images/file_sources_fsspec_hierarchy.plantuml.svg)
+
+
+
+---
+
+
+class: reduce70
+
+### fsspec Plugin Simplicity
+
+**Plugin authors implement only `_open_fs()`** - base class handles the rest
+
+```python
+class S3FsFilesSource(FsspecFilesSource):
+    &quot;&quot;&quot;S3-compatible storage via fsspec.&quot;&quot;&quot;
+    plugin_type = &quot;s3fs&quot;
+
+    def _open_fs(self, user_context=None):
+        config = self._get_config(user_context)
+        return fsspec.filesystem(
+            &quot;s3&quot;,
+            anon=config.anon,
+            key=config.access_key_id,
+            secret=config.secret_access_key,
+            client_kwargs={&quot;endpoint_url&quot;: config.endpoint_url},
+        )
+```
+
+Base class provides: `realize_to`, `write_from`, `list` (with pagination), `score_url_match`
+
+
+
+---
+
+
+class: enlarge120 left-aligned
+
+### PyFilesystem2 vs fsspec
+
+| Feature | PyFilesystem2 | fsspec |
+|---------|---------------|--------|
+| **External Backends** | ~20 | 40+ (Zarr, Git, HF, etc.) |
+| **Galaxy Plugins** | 12 (FTP, WebDAV, Dropbox, Drive, GCS...) | 6 (S3, Azure flat, HF) |
+| **Pagination** | Native server-side `filterdir(page=...)` | Client-side after full listing |
+| **Ecosystem** | 7M downloads/mo | 543M downloads/mo |
+
+fsspec born from [Dask](https://www.dask.org/), used by pandas, xarray, zarr, PyArrow, HF Datasets
+
+*Downloads: [pypistats.org](https://pypistats.org/), Dec 2025*
+
+
+
+---
+
+
+class: reduce70
+
+### Adding a Plugin: The Pattern
+
+![Add Plugin Checklist](../../images/file_sources_add_plugin.plantuml.svg)
+
+**Key insight:** `FsspecFilesSource` handles file operations—you implement only `_open_fs()`
+
+
+
+---
+
+
+class: left-aligned
+
+### Adding a Plugin: Steps
+
+**Create one file:** `lib/galaxy/files/sources/mycloud.py`
+
+1. Define Pydantic config models (template + resolved)
+2. Create plugin class with `plugin_type` (enables auto-discovery)
+3. Implement `_open_fs()` returning fsspec filesystem
+4. Register configs in `lib/galaxy/files/templates/models.py` type unions
+5. Add documentation to `doc/source/admin/data.md`
+
+
+
+---
+
+
+class: reduce70
+
+### Adding a Plugin: Example
+
+```python
+# Pydantic models: template allows Jinja2, resolved requires concrete values
+class MyCloudTemplateConfig(FsspecBaseFileSourceTemplateConfiguration):
+    token: Union[str, TemplateExpansion, None] = None
+    endpoint: Union[str, TemplateExpansion, None] = None
+
+class MyCloudConfig(FsspecBaseFileSourceConfiguration):
+    token: Optional[str] = None
+    endpoint: Optional[str] = None
+
+# Plugin class: only _open_fs() required
+class MyCloudFilesSource(FsspecFilesSource[MyCloudTemplateConfig, MyCloudConfig]):
+    plugin_type = &quot;mycloud&quot;              # Auto-discovery key
+    required_module = MyCloudFS          # Optional: lazy import check
+    required_package = &quot;mycloud-fsspec&quot;  # Optional: helpful error message
+
+    template_config_class = MyCloudTemplateConfig
+    resolved_config_class = MyCloudConfig
+
+    def _open_fs(self, context, cache_options):
+        config = context.config
+        return fsspec.filesystem(&quot;mycloud&quot;, token=config.token)
+```
+
+
+
+---
+
+
+class: reduce90
+
+### Stock Plugins: Built-in Sources
+
+![POSIX Deployment](../../images/file_sources_posix_deployment.plantuml.svg)
+
+Three sources in `lib/galaxy/files/sources/galaxy.py` extend `PosixFilesSource`:
+
+| Class | Scheme | Root Template |
+|-------|--------|---------------|
+| `UserFtpFilesSource` | `gxftp://` | `${user.ftp_dir}` |
+| `LibraryImportFilesSource` | `gximport://` | `${config.library_import_dir}` |
+| `UserLibraryImportFilesSource` | `gxuserimport://` | `${config.user_library_import_dir}/${user.email}` |
+
+
+
+---
+
+
+### POSIX Security &amp; Behaviors
+
+**Symlink Protection** (`lib/galaxy/files/sources/posix.py`)
+```python
+if config.enforce_symlink_security:
+    if not safe_contains(effective_root, source_native_path, allowlist=self._allowlist):
+        raise Exception(&quot;Operation not allowed.&quot;)
+```
+`safe_contains` in `util/path/__init__.py` validates against `symlink_allowlist`
+
+**Atomic Writes** (`lib/galaxy/files/sources/posix.py`)
+```python
+target_native_path_part = os.path.join(parent, f&quot;_{name}.part&quot;)
+shutil.copyfile(native_path, target_native_path_part)
+os.rename(target_native_path_part, target_native_path)
+```
+
+**Move vs Copy**: `delete_on_realize` config—FTP defaults to `ftp_upload_purge` (frees quota)
+
+
+
+---
+
+
+class: enlarge150
+
+### User-Driven Storage
+
+**Global Storage:** Admin configures all sources globally in `file_sources_conf.yml` for all users
+
+**Problem:** Doesn&apos;t scale—diverse user needs (buckets, projects, credentials)
+
+**Solution:** Template catalog + user instances
+- Admin provides templates
+- Users instantiate with their credentials
+- Allows multiple instances per template
+
+
+
+---
+
+
+class: reduce70 left-aligned
+
+### Template Catalog Structure
+
+```yaml
+# file_source_templates.yml (admin-configured)
+- id: s3_template
+  name: AWS S3 Bucket
+  description: Connect to your AWS S3 bucket
+  version: 1
+
+  variables:
+    bucket:
+      label: Bucket Name
+      type: string
+    region:
+      label: AWS Region
+      type: string
+      default: us-east-1
+
+  secrets:
+    access_key_id:
+      label: Access Key ID
+    secret_access_key:
+      label: Secret Access Key
+
+  configuration:
+    type: s3fs
+    bucket: &quot;&quot;
+    access_key_id: &quot;&quot;
+```
+
+
+
+---
+
+
+class: center
+
+### Template System: Pydantic Models
+
+![Two-Tier Configuration Models](../../images/file_sources_pydantic_models.plantuml.svg)
+
+
+
+---
+
+
+class: reduce90 left-aligned
+
+### Two-Tier Configuration
+
+```python
+# Template-stage: allows Jinja2 expressions
+class S3FsTemplateConfiguration(BaseModel):
+    type: Literal[&quot;s3fs&quot;]
+    bucket: Union[str, TemplateExpansion]  # &quot;&quot;
+    access_key_id: Union[str, TemplateExpansion]
+
+# Resolved-stage: concrete values only
+class S3FsFilesSourceConfiguration(BaseModel):
+    type: Literal[&quot;s3fs&quot;]
+    bucket: str  # Must be concrete string
+    access_key_id: str
+```
+
+**Three-stage validation:** Template syntax → User input → Resolved config
+
+
+
+---
+
+
+class: center
+
+### Template Expansion: Jinja2 Resolution
+
+![Template Expansion Data Flow](../../images/file_sources_template_expansion.plantuml.svg)
+
+
+
+---
+
+
+class: reduce90 left-aligned
+
+### Jinja2 Contexts
+
+Four available contexts for variable resolution:
+
+```python
+context = {
+    &quot;variables&quot;: variables,      # User form input
+    &quot;secrets&quot;: secrets,          # From Vault
+    &quot;user&quot;: user,                # Galaxy user (username, email, roles)
+    &quot;environ&quot;: os.environ,       # Environment vars
+}
+expanded = jinja_env.expand(template.model_dump(), context)
+```
+
+**Custom filters:** `ensure_path_component`, `asbool`
+
+
+
+---
+
+
+class: center
+
+### User Instance Lifecycle
+
+![Instance Creation Sequence](../../images/file_sources_instance_creation.plantuml.svg)
+
+
+
+---
+
+
+class: enlarge120
+
+### Instance CRUD Operations
+
+**Persistence:** `user_file_source` table + Vault
+
+**Validation workflow:**
+1. Payload schema validation against template
+2. Template variable/secret validation
+3. Connection testing (root-level listing)
+4. Persist to database + Vault
+
+**Security:** Ownership validation, user-bound isolation
+
+
+
+---
+
+
+class: reduce90 left-aligned
+
+### OAuth 2.0 Integration Pattern
+
+**Authorization flow:**
+1. User clicks &quot;Authorize&quot; → Galaxy generates auth URL + pre-generates UUID
+2. Redirect to provider (Dropbox, Google) → User grants permissions
+3. Provider callback with code → Galaxy exchanges for tokens
+4. Tokens stored in Vault → Instance created
+
+```yaml
+# Dropbox OAuth template
+- id: dropbox_oauth
+  name: Dropbox
+  secrets:
+    client_id: ...
+    client_secret: ...
+  configuration:
+    type: dropbox
+    access_token: &quot;&quot;
+    refresh_token: &quot;&quot;
+```
+
+
+
+---
+
+
+class: center
+
+### OAuth 2.0 Authorization Flow
+
+![OAuth Flow Sequence](../../images/file_sources_oauth_sequence.plantuml.svg)
+
+
+
+---
+
+
+class: enlarge120
+
+### URL Unification
+
+**Before PR #15497:** Separate code paths
+- HTTP/FTP: Custom URL handler
+- S3: Separate S3 handler
+- DRS: Separate DRS handler
+- File sources: `gxfiles://` only
+
+**After:** All URLs routed through file sources
+- Unified authentication
+- `url_regex` for site-specific handlers
+- `http_headers` for Bearer tokens, Basic Auth
+
+
+
+---
+
+
+class: reduce70
+
+### URL Routing with Credentials
+
+```yaml
+# Site-specific URL routing with auth
+- type: http
+  id: internal_api
+  label: Internal Data API
+  url_regex: &quot;^https://api\\.internal\\.org/&quot;
+  http_headers:
+    Authorization: &quot;Bearer ${secrets.api_token}&quot;
+
+- type: http
+  id: public_http
+  label: Public HTTP
+  url_regex: &quot;^https?://.*&quot;
+  # No auth - public access
+```
+
+URLs automatically route to correct handler based on scoring
+
+
+
+---
+
+
+class: center
+
+### API Integration
+
+![Remote Files API Flow](../../images/file_sources_api_flow.plantuml.svg)
+
+
+
+---
+
+
+class: enlarge120
+
+### API Endpoints
+
+**Remote Files API (browsing):**
+- `GET /api/remote_files` - Directory listing with pagination
+- `GET /api/remote_files/plugins` - Plugin enumeration
+- `POST /api/remote_files` - Entry creation (writable sources)
+
+**File Sources API (templates/instances):**
+- `GET /api/file_source_templates` - Template catalog
+- `POST /api/file_source_instances` - Create instance
+- `GET /api/file_source_instances` - List user instances
+- `PUT/DELETE /api/file_source_instances/{uuid}` - Update/delete
+
+
+
+---
+
+
+class: center
+
+### Evolution Timeline
+
+![File Sources Evolution](../../images/file_sources_evolution.mermaid.svg)
+
+
+.footnote[Previous: [Galaxy Plugin Architecture](/training-material/topics/dev/tutorials/architecture-plugins/slides.html) | Next: [Galaxy Markdown Architecture](/training-material/topics/dev/tutorials/architecture-markdown/slides.html)]
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- File Sources provide hierarchical file access for import/export
+
+- User-defined templates enable personal cloud storage connections
+
+- fsspec enables easy integration of 40+ storage backends
+
+- OAuth 2.0 supports seamless cloud service authentication
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jmchilton?s=36" alt="John Chilton avatar" width="36" class="avatar" />
+    John Chilton</a><a href="/training-material/hall-of-fame/davelopez/" class="contributor-badge contributor-davelopez"><img src="https://avatars.githubusercontent.com/davelopez?s=36" alt="David López avatar" width="36" class="avatar" />
+    David López</a>
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+</div>
+
+Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br/>
+
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+        
+    </body>
+</html>

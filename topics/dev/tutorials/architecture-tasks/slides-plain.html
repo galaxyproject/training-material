@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: Architecture 07 - Galaxy Task Management with Celery / Architecture 07 - Galaxy Task Management with Celery / Development in Galaxy</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@05ce2d3c522f8a7b531dc84f9792f7e473939485",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture-tasks/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Architecture 07 - Galaxy Task Management with Celery">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-02-19 09:49:54 +0000">
+<meta name="DC.creator" content="John Chilton"><meta name="description" content="layout: introduction_slides topic_name: Galaxy Architecture  # Architecture 07 - Galaxy Task Management with Celery  *The architecture surrounding Galaxy task management.*  ---    layout: true  left-aligned class: left, middle --- layout: true class: center, middle    ---   class: center  ![Processing requests on the server](../../images/asgi_app.plantuml.svg)   ---   class: enlarge120  ### Avoid Doing Work in Web Threads  Web servers are a terrible place to do work. Traditional Python WSGI servers are meant for processing requests that take less a minute - they are meant for long running tasks.  This request/response cycle is inappropriate for deleting all the files in a history, submitted 10,000 batch jobs for a collection, building a zip file for a library folder.   ---   class: center  ![Zoom in on Backend](../../images/core_backend_controllers.plantuml.svg)   ---   class: center  ![Infrastructure including Celery](../../images/core_backend_celery.plantuml.svg)  ???  Handling a ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Development in Galaxy / Architecture 07 - Galaxy Task Management with Celery / Slides: Architecture 07 - Galaxy Task Management with Celery">
+        <meta property="og:description" content="layout: introduction_slides topic_name: Galaxy Architecture  # Architecture 07 - Galaxy Task Management with Celery  *The architecture surrounding Galaxy task management.*  ---    layout: true  left-aligned class: left, middle --- layout: true class: center, middle    ---   class: center  ![Processing requests on the server](../../images/asgi_app.plantuml.svg)   ---   class: enlarge120  ### Avoid Doing Work in Web Threads  Web servers are a terrible place to do work. Traditional Python WSGI servers are meant for processing requests that take less a minute - they are meant for long running tasks.  This request/response cycle is inappropriate for deleting all the files in a history, submitted 10,000 batch jobs for a collection, building a zip file for a library folder.   ---   class: center  ![Zoom in on Backend](../../images/core_backend_controllers.plantuml.svg)   ---   class: center  ![Infrastructure including Celery](../../images/core_backend_celery.plantuml.svg)  ???  Handling a ...">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/dev/tutorials/architecture-tasks/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/architecture-tasks/slides-plain.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/dev/tutorials/architecture-tasks/slides.html">View markdown source on GitHub</a>
+	<h1>Architecture 07 - Galaxy Task Management with Celery</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jmchilton?s=36" alt="John Chilton avatar" width="36" class="avatar" />
+    John Chilton</a>
+	</div>
+
+</div>
+
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How does Galaxy handle long-running tasks?</p>
+</li>
+		
+		<li><p>When should I use Celery?</p>
+</li>
+		
+		<li><p>How do I create a new Galaxy task?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Understand when to use tasks vs web requests</p>
+</li>
+		
+		<li><p>Learn how to declare Celery tasks</p>
+</li>
+		
+		<li><p>Use Pydantic for task serialization</p>
+</li>
+		
+		<li><p>Understand best practices</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Feb 19, 2026 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Feb 19, 2026 </div>
+
+	<hr />
+
+
+	<p>layout: introduction_slides
+topic_name: Galaxy Architecture</p>
+
+<h1 id="architecture-07---galaxy-task-management-with-celery">Architecture 07 - Galaxy Task Management with Celery</h1>
+
+<p><em>The architecture surrounding Galaxy task management.</em></p>
+
+<hr />
+
+<p>layout: true
+<span id="left-aligned"><i class="fas fa-link" aria-hidden="true"></i> left-aligned</span>
+class: left, middle
+—
+layout: true
+class: center, middle</p>
+
+<hr />
+
+<p>class: center</p>
+
+<p><img src="../../images/asgi_app.plantuml.svg" alt="Processing requests on the server" /></p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="avoid-doing-work-in-web-threads">Avoid Doing Work in Web Threads</h3>
+
+<p>Web servers are a terrible place to do work. Traditional Python WSGI servers
+are meant for processing requests that take less a minute - they are meant
+for long running tasks.</p>
+
+<p>This request/response cycle is inappropriate for deleting all the files in a
+history, submitted 10,000 batch jobs for a collection, building a zip file for
+a library folder.</p>
+
+<hr />
+
+<p>class: center</p>
+
+<p><img src="../../images/core_backend_controllers.plantuml.svg" alt="Zoom in on Backend" /></p>
+
+<hr />
+
+<p>class: center</p>
+
+<p><img src="../../images/core_backend_celery.plantuml.svg" alt="Infrastructure including Celery" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Handling a task description off to Celery allows the web server to respond right
+away and avoid various hacks. Celery is meant for these long running tasks and has
+a set of operations for handling them properly.</p>
+
+<hr />
+
+<p>class: center</p>
+
+<p><img src="https://d33wubrfki0l68.cloudfront.net/f6a5a0c33eac1250034747d375da9a396e5488ce/0196f/media/async-task-python.png" alt="Celery Overview" /></p>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<h3 id="downsides-of-celery">Downsides of Celery</h3>
+
+<p>Adds more complexity to deploying Galaxy. Celery needs to be available to Galaxy
+at runtime, production Galaxy instances need a broker and a backend.</p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="gravity--celery">Gravity + Celery</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+$ galaxy
+Registered galaxy config: /home/nate/work/galaxy/config/galaxy.yml
+Creating or updating service gunicorn
+Creating or updating service celery
+Creating or updating service celery-beat
+celery: added process group
+2022-01-20 14:44:24,619 INFO spawned: 'celery' with pid 291651
+celery-beat: added process group
+2022-01-20 14:44:24,620 INFO spawned: 'celery-beat' with pid 291652
+gunicorn: added process group
+2022-01-20 14:44:24,622 INFO spawned: 'gunicorn' with pid 291653
+celery                           STARTING
+celery-beat                      STARTING
+gunicorn                         STARTING
+==&gt; /home/nate/work/galaxy/database/gravity/log/gunicorn.log &lt;==
+...log output follows...
+</code>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<p>Start Galaxy with Gravity starts not only the Python web server (gunicorn)
+running the Galaxy application but also celery and required services.</p>
+
+<hr />
+
+<p>class: center</p>
+
+<p><img src="../../images/celery_tasks_list.png" alt="Celery tasks being registered at startup" /></p>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<h3 id="declaring-a-task">Declaring a Task</h3>
+
+<ul>
+  <li>Placed in <code class="language-plaintext highlighter-rouge">galaxy.celery.tasks</code>.</li>
+  <li>We’ve placed a layer around Celery to mirror what we’re with API endpoints.
+    <ul>
+      <li>Typed functions with Pydantic inputs implicitly mapped.</li>
+      <li>Implicit type based dependency injection from Galaxy’s DI container (using Lagom)</li>
+      <li>Feels a lot like writing an API endpoint.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="a-simple-task">A Simple Task</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+@galaxy_task(
+    ignore_result=True,
+    action="setting up export history job"
+)
+def export_history(
+    model_store_manager: ModelStoreManager,
+    request: SetupHistoryExportJob,
+):
+    model_store_manager.setup_history_export_job(request)
+</code>]</p>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="the-galaxy_task-decorator">The <code class="language-plaintext highlighter-rouge">galaxy_task</code> Decorator</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">python
+@galaxy_task(
+    ignore_result=True,
+    action="setting up export history job"
+)
+def export_history(
+    model_store_manager: ModelStoreManager,
+    request: SetupHistoryExportJob,
+):
+    model_store_manager.setup_history_export_job(request)
+</code>]</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">galaxy_task</code> is a wrapper around Celery’s <code class="language-plaintext highlighter-rouge">task</code> decorator</li>
+  <li>Wrap a simple function to turn it into a task.</li>
+  <li>Ensure all inputs are JSON serializable or components in Galaxy’s dependency injection container</li>
+</ul>
+
+<hr />
+
+<h3 id="celery-and-pydantic">Celery and Pydantic</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">request</code> argument to <code class="language-plaintext highlighter-rouge">export_history</code> is a Pydantic model type named
+<code class="language-plaintext highlighter-rouge">SetupHistoryExportJob</code>. These are mostly defined in <code class="language-plaintext highlighter-rouge">galaxy.schema.tasks</code>.</p>
+
+<p>.code[```python
+from pydantic import BaseModel</p>
+
+<p>class SetupHistoryExportJob(BaseModel):
+    history_id: int
+    job_id: int
+    store_directory: str
+    include_files: bool
+    include_hidden: bool
+    include_deleted: bool
+```]</p>
+
+<hr />
+
+<p>class: enlarge200</p>
+
+<h3 id="celery-and-pydantic---implementation">Celery and Pydantic - Implementation</h3>
+
+<ul>
+  <li>Custom JSON encoding and decoding to adapt Celery to Pydantic.</li>
+  <li>Implemented in <code class="language-plaintext highlighter-rouge">galaxy.celery._serialization</code>.</li>
+  <li>Inject <code class="language-plaintext highlighter-rouge">__type__</code> and <code class="language-plaintext highlighter-rouge">__class__</code> attributes into JSON description.</li>
+  <li><code class="language-plaintext highlighter-rouge">@galaxy_task</code> decorator sets Celery <code class="language-plaintext highlighter-rouge">serializer</code> attribute.</li>
+</ul>
+
+<hr />
+
+<h3 id="celery-and-dependency-injection">Celery and Dependency Injection</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+@galaxy_task(
+    ignore_result=True,
+    action="setting up export history job"
+)
+def export_history(
+    model_store_manager: ModelStoreManager,
+    request: SetupHistoryExportJob,
+):
+    model_store_manager.setup_history_export_job(request)
+</code>]</p>
+
+<ul>
+  <li>The type declaration on <code class="language-plaintext highlighter-rouge">model_store_manager</code> of <code class="language-plaintext highlighter-rouge">ModelStoreManager</code> causes
+the Galaxy manager object of this class to be passed to the function when the
+task is running.</li>
+  <li>Client does not need to have any knowledge of this class.</li>
+</ul>
+
+<hr />
+
+<h3 id="executing-tasks-from-galaxy">Executing Tasks from Galaxy</h3>
+
+<p>See <code class="language-plaintext highlighter-rouge">lib/galaxy/tools/imp_exp/__init__.py</code>:</p>
+
+<p>.code[```python
+from galaxy.schema.tasks import SetupHistoryExportJob</p>
+
+<p>…</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>request = SetupHistoryExportJob(
+    history_id=history.id,
+    job_id=self.job_id,
+    store_directory=store_directory,
+    include_files=True,
+    include_hidden=include_hidden,
+    include_deleted=include_deleted,
+)
+export_history.delay(request=request)
+</code></pre></div></div>
+
+<p>```]</p>
+
+<p>The delay method is created implicitly from the <code class="language-plaintext highlighter-rouge">galaxy_task</code> decorator.</p>
+
+<hr />
+
+<p>class: enlarge200</p>
+
+<h3 id="best-practices">Best Practices</h3>
+
+<ul>
+  <li>Place tasks in <code class="language-plaintext highlighter-rouge">galaxy.celery.tasks</code>.</li>
+  <li>Keep the tasks as thin as possible (ideally simply delegate inputs
+to a manager or another Galaxy component independent of Celery).</li>
+  <li>Ensure required/injected Galaxy components as small and decomposed as
+possible.</li>
+  <li>Place new request definition argument types in <code class="language-plaintext highlighter-rouge">galaxy.schema.tasks</code>.</li>
+</ul>
+
+<hr />
+
+<h3 id="existing-tasks-success-stories">Existing Tasks Success Stories</h3>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<h3 id="pdf-export-problems">PDF Export Problems</h3>
+
+<ul>
+  <li>We added PDF export of Galaxy Markdown using weasyprint</li>
+  <li>Generation of PDF took too long, feature was quite unstable</li>
+</ul>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<h3 id="short-term-storage-sts">Short Term Storage (STS)</h3>
+
+<ul>
+  <li>A Galaxy component for managing user downloadable files that only
+need to exist for a little time.</li>
+  <li>Traditionally, these kind of files have required a lot of
+hacking to do well in Galaxy (tracking transient request-like stuff in data model, etc..)</li>
+  <li>Not just unoptimized by default, but unusable</li>
+  <li>Required customizing nginx routes, special web server plugins, etc…</li>
+</ul>
+
+<p>https://github.com/galaxyproject/galaxy/pull/13691</p>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+class GeneratePdfDownload(BaseModel):
+    short_term_storage_request_id: str
+    basic_markdown: str
+    document_type: PdfDocumentType
+</code>]</p>
+
+<hr />
+
+<h3 id="robust-pdf-export">Robust PDF Export</h3>
+
+<p>.code[```python
+from galaxy.managers.markdown_util import generate_branded_pdf</p>
+
+<p>@galaxy_task(
+    action=”preparing Galaxy Markdown PDF for download”
+)
+def prepare_pdf_download(
+    request: GeneratePdfDownload,
+    config: GalaxyAppConfiguration,
+    short_term_storage_monitor: ShortTermStorageMonitor,
+):
+    generate_branded_pdf(
+        request,
+        config,
+        short_term_storage_monitor,
+    )
+```]</p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="exporting-histories-invocations-libraries">Exporting Histories, Invocations, Libraries</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+@galaxy_task(
+    action="generate and stage a workflow invocation store for download"
+)
+def prepare_invocation_download(
+    model_store_manager: ModelStoreManager,
+    request: GenerateInvocationDownload,
+):
+    model_store_manager.prepare_invocation_download(
+        request
+    )
+</code>]</p>
+
+<p>https://github.com/galaxyproject/galaxy/pull/12533</p>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<h3 id="optimized-uploads">Optimized Uploads</h3>
+
+<ul>
+  <li>Decomposed job handling, precursor to migrating more job components to Celery</li>
+  <li>Converting uploads to tasks signficantly sped up running Galaxy tests
+    <ul>
+      <li>API tests went from 2.5 hours to 50 minutes</li>
+      <li>Amazing speed up for small jobs</li>
+    </ul>
+  </li>
+  <li>Exploring task composition</li>
+</ul>
+
+<p>https://github.com/galaxyproject/galaxy/pull/13655</p>
+
+<hr />
+
+<h3 id="uploads---task-composition">Uploads - Task Composition</h3>
+
+<p>See <code class="language-plaintext highlighter-rouge">lib/galaxy/tools/execute.py</code></p>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+async_result = (
+    setup_fetch_data.s(job_id, raw_tool_source=raw_tool_source)
+    | fetch_data.s(job_id=job_id).set(queue="galaxy.external")
+    | set_job_metadata.s(
+        extended_metadata_collection="extended" in tool.app.config.metadata_strategy,
+        job_id=job_id,
+    ).set(
+        queue="galaxy.external",
+        link_error=finish_job.si(job_id=job_id, raw_tool_source=raw_tool_source)
+    )
+    | finish_job.si(job_id=job_id, raw_tool_source=raw_tool_source)
+)()
+</code>]</p>
+
+<hr />
+
+<p>class: enlarge200</p>
+
+<h3 id="batch-operations">Batch Operations</h3>
+
+<p>Task-based operations enable the most expensive of the new history’s batch operations.</p>
+
+<ul>
+  <li>Changing datatypes</li>
+  <li>Purging datasets</li>
+</ul>
+
+<p>https://github.com/galaxyproject/galaxy/pull/14042</p>
+
+<hr />
+
+<p>class: enlarge200</p>
+
+<h3 id="future-work">Future Work</h3>
+
+<ul>
+  <li><em>Migrating tool submission to tasks</em></li>
+  <li>Workflow scheduling</li>
+  <li>Importing shared histories</li>
+</ul>
+
+<p>https://github.com/galaxyproject/galaxy/issues/11721</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>.footnote[Previous: <a href="/training-material/topics/dev/tutorials/architecture-dependency-injection/slides.html">Dependency Injection in Galaxy</a></td>
+      <td>Next: <a href="/training-material/topics/dev/tutorials/architecture-application-components/slides.html">Galaxy Application Components: Models, Managers, and Services</a>]</td>
+    </tr>
+  </tbody>
+</table>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Web servers are inappropriate for long-running work</li>
+
+<li>Celery handles async task execution</li>
+
+<li>Gravity manages Celery processes</li>
+
+<li>Tasks use typed functions with Pydantic</li>
+
+<li>DI works in tasks just like controllers</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/dev/tutorials/architecture-tasks/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/./topics/dev/tutorials/architecture-tasks/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/05ce2d3c522f8a7b531dc84f9792f7e473939485">05ce2d3</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+
+    </body>
+</html>

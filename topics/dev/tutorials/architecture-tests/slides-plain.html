@@ -1,0 +1,2102 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: Architecture 16 - Galaxy Testing / Architecture 16 - Galaxy Testing / Development in Galaxy</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@05ce2d3c522f8a7b531dc84f9792f7e473939485",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture-tests/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Architecture 16 - Galaxy Testing">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-02-19 09:49:54 +0000">
+<meta name="DC.creator" content="John Chilton"><meta name="description" content="layout: introduction_slides topic_name: Galaxy Architecture  # Architecture 16 - Galaxy Testing  *The architecture of Galaxy testing.*  ---    layout: true  left-aligned class: left, middle --- layout: true class: center, middle    ---   class: enlarge150  ### Writing Tests for Galaxy  Tests are essential for Galaxy development:  - **Prevent regressions** as code evolves - **Document behavior** through executable examples - **Enable refactoring** with confidence - **Run in CI** on every pull request    ---   class: enlarge150  ### Other Resources  - `./run_tests.sh --help` - Command-line options - [GTN Writing Tests Tutorial](https://training.galaxyproject.org/training-material/topics/dev/tutorials/writing_tests/tutorial.html) - Hands-on exercises - `client/README.md` - Client-side testing details - [Galaxy Architecture Slides](https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture/slides.html) - CI overview    ---   class: reduce90  ### Quick Referen...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Development in Galaxy / Architecture 16 - Galaxy Testing / Slides: Architecture 16 - Galaxy Testing">
+        <meta property="og:description" content="layout: introduction_slides topic_name: Galaxy Architecture  # Architecture 16 - Galaxy Testing  *The architecture of Galaxy testing.*  ---    layout: true  left-aligned class: left, middle --- layout: true class: center, middle    ---   class: enlarge150  ### Writing Tests for Galaxy  Tests are essential for Galaxy development:  - **Prevent regressions** as code evolves - **Document behavior** through executable examples - **Enable refactoring** with confidence - **Run in CI** on every pull request    ---   class: enlarge150  ### Other Resources  - `./run_tests.sh --help` - Command-line options - [GTN Writing Tests Tutorial](https://training.galaxyproject.org/training-material/topics/dev/tutorials/writing_tests/tutorial.html) - Hands-on exercises - `client/README.md` - Client-side testing details - [Galaxy Architecture Slides](https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture/slides.html) - CI overview    ---   class: reduce90  ### Quick Referen...">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/dev/tutorials/architecture-tests/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/architecture-tests/slides-plain.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/dev/tutorials/architecture-tests/slides.html">View markdown source on GitHub</a>
+	<h1>Architecture 16 - Galaxy Testing</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jmchilton?s=36" alt="John Chilton avatar" width="36" class="avatar" />
+    John Chilton</a>
+	</div>
+
+</div>
+
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>Where should I put a new test?</p>
+</li>
+		
+		<li><p>How do I write an API test?</p>
+</li>
+		
+		<li><p>When should I use an integration test vs an API test?</p>
+</li>
+		
+		<li><p>How do I test code that requires special Galaxy configuration?</p>
+</li>
+		
+		<li><p>How do I write Selenium/Playwright tests?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Use the decision tree to select appropriate test type</p>
+</li>
+		
+		<li><p>Write Python unit tests for isolated components</p>
+</li>
+		
+		<li><p>Write API tests using populators and assertions</p>
+</li>
+		
+		<li><p>Write integration tests with custom Galaxy configuration</p>
+</li>
+		
+		<li><p>Write Selenium tests using the smart component system</p>
+</li>
+		
+		<li><p>Understand CI workflows for each test type</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Feb 19, 2026 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Feb 19, 2026 </div>
+
+	<hr />
+
+
+	<p>layout: introduction_slides
+topic_name: Galaxy Architecture</p>
+
+<h1 id="architecture-16---galaxy-testing">Architecture 16 - Galaxy Testing</h1>
+
+<p><em>The architecture of Galaxy testing.</em></p>
+
+<hr />
+
+<p>layout: true
+<span id="left-aligned"><i class="fas fa-link" aria-hidden="true"></i> left-aligned</span>
+class: left, middle
+—
+layout: true
+class: center, middle</p>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<h3 id="writing-tests-for-galaxy">Writing Tests for Galaxy</h3>
+
+<p>Tests are essential for Galaxy development:</p>
+
+<ul>
+  <li><strong>Prevent regressions</strong> as code evolves</li>
+  <li><strong>Document behavior</strong> through executable examples</li>
+  <li><strong>Enable refactoring</strong> with confidence</li>
+  <li><strong>Run in CI</strong> on every pull request</li>
+</ul>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<h3 id="other-resources">Other Resources</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">./run_tests.sh --help</code> - Command-line options</li>
+  <li><a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/writing_tests/tutorial.html">GTN Writing Tests Tutorial</a> - Hands-on exercises</li>
+  <li><code class="language-plaintext highlighter-rouge">client/README.md</code> - Client-side testing details</li>
+  <li><a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture/slides.html">Galaxy Architecture Slides</a> - CI overview</li>
+</ul>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="quick-reference">Quick Reference</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Test Type</th>
+      <th>Location</th>
+      <th>Run Command</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Unit (Python)</td>
+      <td><code class="language-plaintext highlighter-rouge">test/unit/</code></td>
+      <td><code class="language-plaintext highlighter-rouge">./run_tests.sh -unit</code></td>
+    </tr>
+    <tr>
+      <td>Unit (Client)</td>
+      <td><code class="language-plaintext highlighter-rouge">client/src/</code></td>
+      <td><code class="language-plaintext highlighter-rouge">make client-test</code></td>
+    </tr>
+    <tr>
+      <td>API</td>
+      <td><code class="language-plaintext highlighter-rouge">lib/galaxy_test/api/</code></td>
+      <td><code class="language-plaintext highlighter-rouge">./run_tests.sh -api</code></td>
+    </tr>
+    <tr>
+      <td>Integration</td>
+      <td><code class="language-plaintext highlighter-rouge">test/integration/</code></td>
+      <td><code class="language-plaintext highlighter-rouge">./run_tests.sh -integration</code></td>
+    </tr>
+    <tr>
+      <td>Framework</td>
+      <td><code class="language-plaintext highlighter-rouge">test/functional/tools/</code></td>
+      <td><code class="language-plaintext highlighter-rouge">./run_tests.sh -framework</code></td>
+    </tr>
+    <tr>
+      <td>Workflow Framework</td>
+      <td><code class="language-plaintext highlighter-rouge">lib/galaxy_test/workflow/</code></td>
+      <td><code class="language-plaintext highlighter-rouge">./run_tests.sh -framework-workflows</code></td>
+    </tr>
+    <tr>
+      <td>Selenium</td>
+      <td><code class="language-plaintext highlighter-rouge">lib/galaxy_test/selenium/</code></td>
+      <td><code class="language-plaintext highlighter-rouge">./run_tests.sh -selenium</code></td>
+    </tr>
+    <tr>
+      <td>Playwright</td>
+      <td><code class="language-plaintext highlighter-rouge">lib/galaxy_test/selenium/</code></td>
+      <td><code class="language-plaintext highlighter-rouge">./run_tests.sh -playwright</code></td>
+    </tr>
+    <tr>
+      <td>Selenium Integration</td>
+      <td><code class="language-plaintext highlighter-rouge">test/integration_selenium/</code></td>
+      <td><code class="language-plaintext highlighter-rouge">./run_tests.sh -selenium</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>class: center</p>
+
+<h3 id="which-test-type">Which Test Type?</h3>
+
+<p><img src="../../images/tests-decision-tree.mermaid.svg" alt="Test Type Decision Tree" /></p>
+
+<hr />
+
+<p>class: enlarge120 left-aligned</p>
+
+<h3 id="decision-tree-walkthrough">Decision Tree Walkthrough</h3>
+
+<p><strong>No running server needed?</strong> → Unit test</p>
+<ul>
+  <li>Python backend → <code class="language-plaintext highlighter-rouge">test/unit/</code></li>
+  <li>ES6/Vue client → <code class="language-plaintext highlighter-rouge">client/src/</code></li>
+</ul>
+
+<p><strong>Server needed, no browser?</strong></p>
+<ul>
+  <li>Standard config → API test</li>
+  <li>Custom config → Integration test</li>
+  <li>Tool/workflow only → Framework test</li>
+</ul>
+
+<p><strong>Browser needed?</strong> → Selenium/Playwright</p>
+
+<hr />
+
+<p>class: enlarge150 left-aligned</p>
+
+<h3 id="python-unit-tests">Python Unit Tests</h3>
+
+<p><strong>Location:</strong> <code class="language-plaintext highlighter-rouge">test/unit/</code></p>
+
+<p><strong>When to use:</strong></p>
+<ul>
+  <li>Component can be tested in isolation</li>
+  <li>No database or web server needed</li>
+  <li>Complex logic worth testing independently</li>
+</ul>
+
+<p><strong>Run:</strong> <code class="language-plaintext highlighter-rouge">./run_tests.sh -unit</code></p>
+
+<hr />
+
+<p>class: enlarge150  left-aligned</p>
+
+<h3 id="doctests-guidance">Doctests Guidance</h3>
+
+<p><a href="https://docs.python.org/3/library/doctest.html">Doctests</a> are executable examples embedded in docstrings - Python runs them to verify documentation stays accurate.</p>
+
+<blockquote>
+  <p>Doctests are more brittle and more restrictive.</p>
+</blockquote>
+
+<p><strong>Use doctests when:</strong></p>
+<ul>
+  <li>Tests serve as documentation (definitely)</li>
+  <li>Tests are simple and isolated (maybe)</li>
+</ul>
+
+<p><strong>Use standalone tests when:</strong></p>
+<ul>
+  <li>Tests are complex</li>
+  <li>Tests need fixtures or mocking</li>
+  <li>Tests verify edge cases</li>
+</ul>
+
+<hr />
+
+<p>class: enlarge120 left-aligned</p>
+
+<h3 id="external-dependency-tests">External Dependency Tests</h3>
+
+<p>Tests in <code class="language-plaintext highlighter-rouge">test/unit/tool_util/</code> are “slow” tests that interact with external services:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">.util</span> <span class="kn">import</span> <span class="n">external_dependency_management</span>
+
+<span class="nd">@external_dependency_management</span>
+<span class="k">def</span> <span class="nf">test_conda_install</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">):</span>
+    <span class="c1"># ... test conda operations
+</span></code></pre></div></div>
+
+<p><strong>Run separately:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tox <span class="nt">-e</span> mulled
+<span class="c"># or:</span>
+pytest <span class="nt">-m</span> external_dependency_management <span class="nb">test</span>/unit/tool_util/
+</code></pre></div></div>
+
+<hr />
+
+<p>class: enlarge120 left-aligned</p>
+
+<h3 id="python-unit-test-ci">Python Unit Test CI</h3>
+
+<p><strong>CI Platform:</strong> GitHub Actions</p>
+
+<p><strong>Workflow:</strong> <code class="language-plaintext highlighter-rouge">.github/workflows/unit.yaml</code></p>
+
+<p><strong>Characteristics:</strong></p>
+<ul>
+  <li>Runs on every pull request</li>
+  <li>Tests multiple Python versions (3.9, 3.14)</li>
+  <li>Moderately prone to flaky failures</li>
+  <li>If tests fail unrelated to your PR, request a re-run</li>
+</ul>
+
+<hr />
+
+<p>class: enlarge150 left-aligned</p>
+
+<h3 id="frontend-unit-tests">Frontend Unit Tests</h3>
+
+<p>Galaxy’s client unit tests test the ES6/TypeScript/Vue frontend components.</p>
+
+<p>Technologies:</p>
+<ul>
+  <li><a href="https://vitest.dev/">Vitest</a> - Test framework</li>
+  <li><a href="https://vue-test-utils.vuejs.org/">Vue Test Utils</a> - Component testing</li>
+  <li><a href="https://mswjs.io/">MSW</a> - API mocking</li>
+</ul>
+
+<hr />
+
+<p>class: reduce90 left-aligned</p>
+
+<h3 id="test-file-structure">Test File Structure</h3>
+
+<p>Place tests adjacent to code with <code class="language-plaintext highlighter-rouge">.test.ts</code> extension (older tests may use .test.js):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>src/components/MyComponent/
+├── MyComponent.vue
+├── MyComponent.test.ts
+└── test-utils.ts        # optional shared utilities
+</code></pre></div></div>
+
+<p><strong>Standard imports:</strong></p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">createTestingPinia</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@pinia/testing</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">getLocalVue</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@tests/vitest/helpers</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">shallowMount</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@vue/test-utils</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useServerMock</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@/api/client/__mocks__</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">beforeEach</span><span class="p">,</span> <span class="nx">describe</span><span class="p">,</span> <span class="nx">expect</span><span class="p">,</span> <span class="nx">it</span><span class="p">,</span> <span class="nx">vi</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vitest</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90 left-aligned</p>
+
+<h3 id="galaxy-testing-infrastructure">Galaxy Testing Infrastructure</h3>
+
+<p><strong>LocalVue Setup</strong> - configures BootstrapVue, Pinia, localization:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">localVue</span> <span class="o">=</span> <span class="nf">getLocalVue</span><span class="p">();</span>
+<span class="c1">// or with localization testing:</span>
+<span class="kd">const</span> <span class="nx">localVue</span> <span class="o">=</span> <span class="nf">getLocalVue</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>Test Data Factories</strong> - consistent test data:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">getFakeRegisteredUser</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@tests/test-data</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="nf">getFakeRegisteredUser</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">custom-id</span><span class="dl">"</span><span class="p">,</span> <span class="na">is_admin</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="api-mocking-with-msw">API Mocking with MSW</h3>
+
+<p>Galaxy uses <a href="https://mswjs.io/">MSW</a> with <a href="https://github.com/christoph-fricke/openapi-msw">OpenAPI-MSW</a> for type-safe API mocking:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useServerMock</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@/api/client/__mocks__</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">server</span><span class="p">,</span> <span class="nx">http</span> <span class="p">}</span> <span class="o">=</span> <span class="nf">useServerMock</span><span class="p">();</span>
+
+<span class="nf">beforeEach</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">server</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span>
+        <span class="nx">http</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/api/histories/{history_id}</span><span class="dl">"</span><span class="p">,</span> <span class="p">({</span> <span class="nx">response</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nf">response</span><span class="p">(</span><span class="mi">200</span><span class="p">).</span><span class="nf">json</span><span class="p">({</span>
+                <span class="na">id</span><span class="p">:</span> <span class="dl">"</span><span class="s2">history-id</span><span class="dl">"</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Test History</span><span class="dl">"</span><span class="p">,</span>
+            <span class="p">});</span>
+        <span class="p">}),</span>
+    <span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="shallowmount-vs-mount">shallowMount vs mount</h3>
+
+<p><strong>Prefer <code class="language-plaintext highlighter-rouge">shallowMount</code></strong> for client unit tests.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><code class="language-plaintext highlighter-rouge">shallowMount</code> (preferred)</th>
+      <th><code class="language-plaintext highlighter-rouge">mount</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Stubs child components</td>
+      <td>Renders full tree</td>
+    </tr>
+    <tr>
+      <td>Tests component in isolation</td>
+      <td>Tests integration</td>
+    </tr>
+    <tr>
+      <td>Faster, fewer mocks needed</td>
+      <td>Slower, more setup</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Preferred: isolated unit test</span>
+<span class="kd">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nf">shallowMount</span><span class="p">(</span><span class="nx">MyComponent</span><span class="p">,</span> <span class="p">{</span> <span class="nx">localVue</span><span class="p">,</span> <span class="nx">pinia</span> <span class="p">});</span>
+</code></pre></div></div>
+
+<p>Integration testing → use Selenium/Playwright instead.</p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="mount-wrapper-factories">Mount Wrapper Factories</h3>
+
+<p>Create reusable mount functions for complex setup:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nf">mountMyComponent</span><span class="p">(</span><span class="nx">propsData</span> <span class="o">=</span> <span class="p">{},</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">pinia</span> <span class="o">=</span> <span class="nf">createTestingPinia</span><span class="p">({</span> <span class="na">createSpy</span><span class="p">:</span> <span class="nx">vi</span><span class="p">.</span><span class="nx">fn</span> <span class="p">});</span>
+
+    <span class="kd">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nf">shallowMount</span><span class="p">(</span><span class="nx">MyComponent</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">localVue</span><span class="p">,</span>
+        <span class="na">propsData</span><span class="p">:</span> <span class="p">{</span> <span class="na">defaultProp</span><span class="p">:</span> <span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="p">,</span> <span class="p">...</span><span class="nx">propsData</span> <span class="p">},</span>
+        <span class="nx">pinia</span><span class="p">,</span>
+        <span class="p">...</span><span class="nx">options</span><span class="p">,</span>
+    <span class="p">});</span>
+
+    <span class="k">await</span> <span class="nf">flushPromises</span><span class="p">();</span>
+    <span class="k">return</span> <span class="nx">wrapper</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="selector-constants--events">Selector Constants &amp; Events</h3>
+
+<p><strong>Define selectors as constants:</strong></p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">SELECTORS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">SUBMIT_BUTTON</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[data-description='submit button']</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">ERROR_MESSAGE</span><span class="p">:</span> <span class="dl">"</span><span class="s2">[data-description='error message']</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="nf">expect</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="nx">SELECTORS</span><span class="p">.</span><span class="nx">ERROR_MESSAGE</span><span class="p">).</span><span class="nf">exists</span><span class="p">()).</span><span class="nf">toBe</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>Testing emitted events:</strong></p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">await</span> <span class="nx">wrapper</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="dl">"</span><span class="s2">input</span><span class="dl">"</span><span class="p">).</span><span class="nf">setValue</span><span class="p">(</span><span class="dl">"</span><span class="s2">new value</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nf">expect</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">.</span><span class="nf">emitted</span><span class="p">()[</span><span class="dl">"</span><span class="s2">update:value</span><span class="dl">"</span><span class="p">]).</span><span class="nf">toBeTruthy</span><span class="p">();</span>
+<span class="nf">expect</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">.</span><span class="nf">emitted</span><span class="p">()[</span><span class="dl">"</span><span class="s2">update:value</span><span class="dl">"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]).</span><span class="nf">toBe</span><span class="p">(</span><span class="dl">"</span><span class="s2">new value</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="pinia-store-testing">Pinia Store Testing</h3>
+
+<p><strong>In component tests:</strong></p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">pinia</span> <span class="o">=</span> <span class="nf">createTestingPinia</span><span class="p">({</span> <span class="na">createSpy</span><span class="p">:</span> <span class="nx">vi</span><span class="p">.</span><span class="nx">fn</span><span class="p">,</span> <span class="na">stubActions</span><span class="p">:</span> <span class="kc">false</span> <span class="p">});</span>
+<span class="nf">setActivePinia</span><span class="p">(</span><span class="nx">pinia</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nf">shallowMount</span><span class="p">(</span><span class="nx">MyComponent</span><span class="p">,</span> <span class="p">{</span> <span class="nx">localVue</span><span class="p">,</span> <span class="nx">pinia</span> <span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">userStore</span> <span class="o">=</span> <span class="nf">useUserStore</span><span class="p">();</span>
+<span class="nx">userStore</span><span class="p">.</span><span class="nx">currentUser</span> <span class="o">=</span> <span class="nf">getFakeRegisteredUser</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p><strong>Isolated store tests:</strong></p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">beforeEach</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nf">setActivePinia</span><span class="p">(</span><span class="nf">createPinia</span><span class="p">()));</span>
+
+<span class="nf">it</span><span class="p">(</span><span class="dl">"</span><span class="s2">updates state correctly</span><span class="dl">"</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="nf">useMyStore</span><span class="p">();</span>
+    <span class="nx">store</span><span class="p">.</span><span class="nf">doAction</span><span class="p">();</span>
+    <span class="nf">expect</span><span class="p">(</span><span class="nx">store</span><span class="p">.</span><span class="nx">someState</span><span class="p">).</span><span class="nf">toBe</span><span class="p">(</span><span class="dl">"</span><span class="s2">expected</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="async-operations">Async Operations</h3>
+
+<p><strong>Use <code class="language-plaintext highlighter-rouge">flushPromises()</code> after API calls:</strong></p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nf">shallowMount</span><span class="p">(</span><span class="nx">MyComponent</span><span class="p">,</span> <span class="p">{</span> <span class="nx">localVue</span><span class="p">,</span> <span class="nx">pinia</span> <span class="p">});</span>
+<span class="k">await</span> <span class="nf">flushPromises</span><span class="p">();</span> <span class="c1">// Wait for mounted() API calls</span>
+</code></pre></div></div>
+
+<p><strong>Use <code class="language-plaintext highlighter-rouge">nextTick()</code> for Vue reactivity:</strong></p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">await</span> <span class="nx">wrapper</span><span class="p">.</span><span class="nf">setProps</span><span class="p">({</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">new</span><span class="dl">"</span> <span class="p">});</span>
+<span class="k">await</span> <span class="nf">nextTick</span><span class="p">();</span>
+<span class="nf">expect</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">.</span><span class="nf">text</span><span class="p">()).</span><span class="nf">toContain</span><span class="p">(</span><span class="dl">"</span><span class="s2">new</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: enlarge120 left-aligned</p>
+
+<h3 id="testing-best-practices">Testing Best Practices</h3>
+
+<ol>
+  <li><strong>Test behavior, not implementation</strong></li>
+  <li><strong>Avoid <code class="language-plaintext highlighter-rouge">wrapper.vm</code> directly</strong> - test through template</li>
+  <li><strong>One behavior per test</strong></li>
+  <li><strong>Descriptive names</strong>: <code class="language-plaintext highlighter-rouge">"displays error when API returns 500"</code></li>
+  <li><strong>Clean up in <code class="language-plaintext highlighter-rouge">beforeEach</code>/<code class="language-plaintext highlighter-rouge">afterEach</code></strong></li>
+  <li><strong>Mock external services, not component logic</strong></li>
+  <li><strong>Test edge cases</strong>: errors, empty data, boundaries</li>
+</ol>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="good-vs-bad-test-examples">Good vs Bad Test Examples</h3>
+
+<p><strong>GOOD: Test user-visible behavior</strong></p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">test</span><span class="p">(</span><span class="dl">'</span><span class="s1">displays error message when API fails</span><span class="dl">'</span><span class="p">,</span> <span class="k">async </span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">server</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">"</span><span class="s2">/api/data</span><span class="dl">"</span><span class="p">,</span> <span class="p">({</span> <span class="nx">response</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="nf">response</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nf">json</span><span class="p">({})));</span>
+    <span class="kd">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nf">shallowMount</span><span class="p">(</span><span class="nx">MyComponent</span><span class="p">,</span> <span class="p">{</span> <span class="nx">localVue</span><span class="p">,</span> <span class="nx">pinia</span> <span class="p">});</span>
+    <span class="k">await</span> <span class="nf">flushPromises</span><span class="p">();</span>
+    <span class="nf">expect</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">.</span><span class="nf">text</span><span class="p">()).</span><span class="nf">toContain</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error loading data</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p><strong>BAD: Test implementation details</strong></p>
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">test</span><span class="p">(</span><span class="dl">'</span><span class="s1">calls fetchData method</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">fetchDataSpy</span> <span class="o">=</span> <span class="nx">vi</span><span class="p">.</span><span class="nf">spyOn</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">.</span><span class="nx">vm</span><span class="p">,</span> <span class="dl">'</span><span class="s1">fetchData</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">wrapper</span><span class="p">.</span><span class="nx">vm</span><span class="p">.</span><span class="nf">loadData</span><span class="p">();</span>
+    <span class="nf">expect</span><span class="p">(</span><span class="nx">fetchDataSpy</span><span class="p">).</span><span class="nf">toHaveBeenCalled</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="running-client-tests">Running Client Tests</h3>
+
+<p><strong>Full test run (CI):</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make client-test
+</code></pre></div></div>
+
+<p><strong>Watch mode (development):</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn <span class="nb">test</span>:watch
+yarn <span class="nb">test</span>:watch MyModule      <span class="c"># Filter by name</span>
+yarn <span class="nb">test</span>:watch workflow/run  <span class="c"># Filter by path</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: enlarge150 left-aligned</p>
+
+<h3 id="client-test-ci">Client Test CI</h3>
+
+<p><strong>CI Platform:</strong> GitHub Actions</p>
+
+<p><strong>Workflow:</strong> <code class="language-plaintext highlighter-rouge">.github/workflows/client-unit.yaml</code></p>
+
+<p><strong>Linting:</strong> Run before submitting PRs:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make client-lint     <span class="c"># Check for issues</span>
+make client-format   <span class="c"># Auto-fix formatting</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: enlarge120 left-aligned</p>
+
+<h3 id="tool-framework-tests-overview">Tool Framework Tests Overview</h3>
+
+<p><strong>Location:</strong> <code class="language-plaintext highlighter-rouge">test/functional/tools/</code></p>
+
+<p><strong>What they test:</strong></p>
+<ul>
+  <li>Galaxy tool wrapper definitions (XML)</li>
+  <li>Complex tool internals via actual tool execution</li>
+  <li>Legacy behavior compatibility</li>
+</ul>
+
+<p><strong>When to use:</strong></p>
+<ul>
+  <li>Testing tool XML features</li>
+  <li>Verifying tool test assertions work correctly</li>
+  <li>No need to write Python - just XML</li>
+</ul>
+
+<hr />
+
+<p>class: reduce90 left-aligned</p>
+
+<h3 id="adding-a-tool-test">Adding a Tool Test</h3>
+
+<p><strong>Option 1:</strong> Add test block to existing tool</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- In test/functional/tools/some_tool.xml --&gt;</span>
+<span class="nt">&lt;tests&gt;</span>
+    <span class="nt">&lt;test&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"input1"</span> <span class="na">value=</span><span class="s">"test.txt"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">"out_file1"</span> <span class="na">file=</span><span class="s">"expected.txt"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/test&gt;</span>
+<span class="nt">&lt;/tests&gt;</span>
+</code></pre></div></div>
+
+<p><strong>Option 2:</strong> Add new tool to <code class="language-plaintext highlighter-rouge">sample_tool_conf.xml</code></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"my_new_tool.xml"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p><strong>Run:</strong> <code class="language-plaintext highlighter-rouge">./run_tests.sh -framework</code></p>
+
+<hr />
+
+<p>class: enlarge120 left-aligned</p>
+
+<h3 id="workflow-framework-tests">Workflow Framework Tests</h3>
+
+<p><strong>Location:</strong> <code class="language-plaintext highlighter-rouge">lib/galaxy_test/workflow/</code></p>
+
+<p><strong>What they test:</strong></p>
+<ul>
+  <li>Workflow evaluation engine</li>
+  <li>Input handling and connections</li>
+  <li>Output assertions</li>
+</ul>
+
+<p><strong>Structure:</strong> Each test has two files:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">*.gxwf.yml</code> - Workflow definition (Format2 YAML)</li>
+  <li><code class="language-plaintext highlighter-rouge">*.gxwf-tests.yml</code> - Test cases with assertions</li>
+</ul>
+
+<p><strong>Run:</strong> <code class="language-plaintext highlighter-rouge">./run_tests.sh -framework-workflows</code></p>
+
+<hr />
+
+<p>class: left-aligned reduce70</p>
+
+<h3 id="workflow-framework-example">Workflow Framework Example</h3>
+
+<p><strong>Workflow</strong> (<code class="language-plaintext highlighter-rouge">default_values.gxwf.yml</code>):</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">class</span><span class="pi">:</span> <span class="s">GalaxyWorkflow</span>
+<span class="na">inputs</span><span class="pi">:</span>
+  <span class="na">input_int</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">int</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="m">1</span>
+<span class="na">outputs</span><span class="pi">:</span>
+  <span class="na">out</span><span class="pi">:</span>
+    <span class="na">outputSource</span><span class="pi">:</span> <span class="s">my_tool/out_file1</span>
+<span class="na">steps</span><span class="pi">:</span>
+  <span class="na">my_tool</span><span class="pi">:</span>
+    <span class="na">tool_id</span><span class="pi">:</span> <span class="s">integer_default</span>
+    <span class="na">in</span><span class="pi">:</span>
+      <span class="na">input1</span><span class="pi">:</span> <span class="pi">{</span> <span class="nv">source</span><span class="pi">:</span> <span class="nv">input_int</span> <span class="pi">}</span>
+</code></pre></div></div>
+
+<p><strong>Tests</strong> (<code class="language-plaintext highlighter-rouge">default_values.gxwf-tests.yml</code>):</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">doc</span><span class="pi">:</span> <span class="s">Test default value works</span>
+  <span class="na">job</span><span class="pi">:</span> <span class="pi">{}</span>
+  <span class="na">outputs</span><span class="pi">:</span>
+    <span class="na">out</span><span class="pi">:</span>
+      <span class="na">asserts</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">that</span><span class="pi">:</span> <span class="s">has_text</span>
+        <span class="na">text</span><span class="pi">:</span> <span class="s2">"</span><span class="s">1"</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: enlarge120 left-aligned</p>
+
+<h3 id="framework-test-ci">Framework Test CI</h3>
+
+<p><strong>Tool Framework:</strong></p>
+<ul>
+  <li>Workflow: <code class="language-plaintext highlighter-rouge">.github/workflows/framework_tools.yaml</code></li>
+  <li>Stable, rarely flaky</li>
+</ul>
+
+<p><strong>Workflow Framework:</strong></p>
+<ul>
+  <li>Workflow: <code class="language-plaintext highlighter-rouge">.github/workflows/framework_workflows.yaml</code></li>
+  <li>Stable, rarely flaky</li>
+</ul>
+
+<p>Both run on every PR and are maintained in GitHub Actions.</p>
+
+<hr />
+
+<p>class: enlarge120 left-aligned</p>
+
+<h3 id="api-tests-overview">API Tests Overview</h3>
+
+<p><strong>Location:</strong> <code class="language-plaintext highlighter-rouge">lib/galaxy_test/api/</code></p>
+
+<p><strong>What they test:</strong></p>
+<ul>
+  <li>Galaxy backend via HTTP API</li>
+  <li>Standard Galaxy configuration</li>
+  <li>Most backend functionality</li>
+</ul>
+
+<p><strong>When to use:</strong></p>
+<ul>
+  <li>Testing API endpoints</li>
+  <li>Backend logic accessible via API</li>
+  <li>No custom Galaxy config needed</li>
+</ul>
+
+<p><strong>Run:</strong> <code class="language-plaintext highlighter-rouge">./run_tests.sh -api</code></p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="test-class-structure">Test Class Structure</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">galaxy_test.base.populators</span> <span class="kn">import</span> <span class="n">DatasetPopulator</span>
+<span class="kn">from</span> <span class="n">._framework</span> <span class="kn">import</span> <span class="n">ApiTestCase</span>
+
+<span class="k">class</span> <span class="nc">TestMyFeatureApi</span><span class="p">(</span><span class="n">ApiTestCase</span><span class="p">):</span>
+    <span class="n">dataset_populator</span><span class="p">:</span> <span class="n">DatasetPopulator</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">setUp</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span> <span class="o">=</span> <span class="nc">DatasetPopulator</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">galaxy_interactor</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_something</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">history_id</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">new_history</span><span class="p">()</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">histories/</span><span class="si">{</span><span class="n">history_id</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">_assert_status_code_is</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="http-methods">HTTP Methods</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># GET request
+</span><span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="sh">"</span><span class="s">histories</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># POST with data
+</span><span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_post</span><span class="p">(</span><span class="sh">"</span><span class="s">histories</span><span class="sh">"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">Test</span><span class="sh">"</span><span class="p">})</span>
+
+<span class="c1"># PUT, PATCH, DELETE
+</span><span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_put</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">histories/</span><span class="si">{</span><span class="n">history_id</span><span class="si">}</span><span class="sh">"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_patch</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">histories/</span><span class="si">{</span><span class="n">history_id</span><span class="si">}</span><span class="sh">"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">updates</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_delete</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">histories/</span><span class="si">{</span><span class="n">history_id</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Admin operations
+</span><span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="sh">"</span><span class="s">users</span><span class="sh">"</span><span class="p">,</span> <span class="n">admin</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Run as different user (requires admin)
+</span><span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_post</span><span class="p">(</span><span class="sh">"</span><span class="s">histories</span><span class="sh">"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+                      <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">run-as</span><span class="sh">"</span><span class="p">:</span> <span class="n">other_user_id</span><span class="p">},</span> <span class="n">admin</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: enlarge120 left-aligned</p>
+
+<h3 id="populators-concept">Populators Concept</h3>
+
+<p><strong>What:</strong> Abstractions over Galaxy API for test data creation</p>
+
+<p><strong>Why use them:</strong></p>
+<ul>
+  <li>Simpler than raw HTTP requests</li>
+  <li>Handle waiting for async operations</li>
+  <li>Encapsulate common patterns</li>
+  <li>Maintain consistency across tests</li>
+</ul>
+
+<p><strong>Three main populators:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">DatasetPopulator</code> - datasets, histories, tools</li>
+  <li><code class="language-plaintext highlighter-rouge">WorkflowPopulator</code> - workflows</li>
+  <li><code class="language-plaintext highlighter-rouge">DatasetCollectionPopulator</code> - collections</li>
+</ul>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="datasetpopulator">DatasetPopulator</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span> <span class="o">=</span> <span class="nc">DatasetPopulator</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">galaxy_interactor</span><span class="p">)</span>
+
+<span class="c1"># Create history and dataset
+</span><span class="n">history_id</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">new_history</span><span class="p">(</span><span class="sh">"</span><span class="s">Test History</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">hda</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">new_dataset</span><span class="p">(</span><span class="n">history_id</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="sh">"</span><span class="s">data</span><span class="sh">"</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Run a tool
+</span><span class="n">result</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">run_tool</span><span class="p">(</span>
+    <span class="n">tool_id</span><span class="o">=</span><span class="sh">"</span><span class="s">cat1</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">input1</span><span class="sh">"</span><span class="p">:</span> <span class="p">{</span><span class="sh">"</span><span class="s">src</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">hda</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">:</span> <span class="n">hda</span><span class="p">[</span><span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">]}},</span>
+    <span class="n">history_id</span><span class="o">=</span><span class="n">history_id</span>
+<span class="p">)</span>
+<span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">wait_for_tool_run</span><span class="p">(</span><span class="n">history_id</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">assert_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Get dataset content
+</span><span class="n">content</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">get_history_dataset_content</span><span class="p">(</span><span class="n">history_id</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="datasetpopulator-advanced">DatasetPopulator Advanced</h3>
+
+<p><strong>Getting content - multiple ways to specify dataset:</strong></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Most recent dataset in history
+</span><span class="n">content</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">get_history_dataset_content</span><span class="p">(</span><span class="n">history_id</span><span class="p">)</span>
+<span class="c1"># By position (hid)
+</span><span class="n">content</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">get_history_dataset_content</span><span class="p">(</span><span class="n">history_id</span><span class="p">,</span> <span class="n">hid</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="c1"># By dataset ID
+</span><span class="n">content</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">get_history_dataset_content</span><span class="p">(</span><span class="n">history_id</span><span class="p">,</span> <span class="n">dataset_id</span><span class="o">=</span><span class="n">hda</span><span class="p">[</span><span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p><strong>The <code class="language-plaintext highlighter-rouge">_raw</code> pattern</strong> - for testing error responses:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Convenience: returns parsed dict, asserts success
+</span><span class="n">result</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">run_tool</span><span class="p">(</span><span class="sh">"</span><span class="s">cat1</span><span class="sh">"</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">history_id</span><span class="p">)</span>
+
+<span class="c1"># Raw: returns Response for testing edge cases
+</span><span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">run_tool_raw</span><span class="p">(</span><span class="sh">"</span><span class="s">cat1</span><span class="sh">"</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">history_id</span><span class="p">)</span>
+<span class="nf">assert_status_code_is</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>  <span class="c1"># Test error handling
+</span></code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="workflowpopulator">WorkflowPopulator</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">self</span><span class="p">.</span><span class="n">workflow_populator</span> <span class="o">=</span> <span class="nc">WorkflowPopulator</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">galaxy_interactor</span><span class="p">)</span>
+
+<span class="c1"># Create a simple workflow
+</span><span class="n">workflow_id</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">workflow_populator</span><span class="p">.</span><span class="nf">simple_workflow</span><span class="p">(</span><span class="sh">"</span><span class="s">Test Workflow</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Upload workflow from YAML
+</span><span class="n">workflow_id</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">workflow_populator</span><span class="p">.</span><span class="nf">upload_yaml_workflow</span><span class="p">(</span><span class="sh">"""</span><span class="s">
+class: GalaxyWorkflow
+inputs:
+  input1: data
+steps:
+  step1:
+    tool_id: cat1
+    in:
+      input1: input1
+</span><span class="sh">"""</span><span class="p">)</span>
+
+<span class="c1"># Wait for invocation
+</span><span class="n">self</span><span class="p">.</span><span class="n">workflow_populator</span><span class="p">.</span><span class="nf">wait_for_invocation</span><span class="p">(</span><span class="n">workflow_id</span><span class="p">,</span> <span class="n">invocation_id</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="datasetcollectionpopulator">DatasetCollectionPopulator</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">self</span><span class="p">.</span><span class="n">dataset_collection_populator</span> <span class="o">=</span> <span class="nc">DatasetCollectionPopulator</span><span class="p">(</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">galaxy_interactor</span>
+<span class="p">)</span>
+
+<span class="c1"># Create a list collection
+</span><span class="n">hdca</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_collection_populator</span><span class="p">.</span><span class="nf">create_list_in_history</span><span class="p">(</span>
+    <span class="n">history_id</span><span class="p">,</span>
+    <span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">data1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">data2</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">data3</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">wait</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Create a paired collection
+</span><span class="n">pair</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_collection_populator</span><span class="p">.</span><span class="nf">create_pair_in_history</span><span class="p">(</span>
+    <span class="n">history_id</span><span class="p">,</span>
+    <span class="n">contents</span><span class="o">=</span><span class="p">[(</span><span class="sh">"</span><span class="s">forward</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">ACGT</span><span class="sh">"</span><span class="p">),</span> <span class="p">(</span><span class="sh">"</span><span class="s">reverse</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">TGCA</span><span class="sh">"</span><span class="p">)],</span>
+    <span class="n">wait</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Create nested collections (list:paired)
+</span><span class="n">identifiers</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_collection_populator</span><span class="p">.</span><span class="nf">nested_collection_identifiers</span><span class="p">(</span>
+    <span class="n">history_id</span><span class="p">,</span> <span class="sh">"</span><span class="s">list:paired</span><span class="sh">"</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="api-test-assertions">API Test Assertions</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">galaxy_test.base.api_asserts</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">assert_status_code_is</span><span class="p">,</span>
+    <span class="n">assert_status_code_is_ok</span><span class="p">,</span>
+    <span class="n">assert_has_keys</span><span class="p">,</span>
+    <span class="n">assert_error_code_is</span><span class="p">,</span>
+    <span class="n">assert_error_message_contains</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Check HTTP status codes
+</span><span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="sh">"</span><span class="s">histories</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">assert_status_code_is</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="nf">assert_status_code_is_ok</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>  <span class="c1"># Any 2XX
+</span>
+<span class="c1"># Check response structure
+</span><span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
+<span class="nf">assert_has_keys</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">name</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">state</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># Check Galaxy error codes
+</span><span class="nf">assert_error_code_is</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">error_codes</span><span class="p">.</span><span class="n">USER_REQUEST_INVALID_PARAMETER</span><span class="p">)</span>
+<span class="nf">assert_error_message_contains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="sh">"</span><span class="s">required field</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="test-decorators">Test Decorators</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">galaxy_test.base.decorators</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">requires_admin</span><span class="p">,</span>
+    <span class="n">requires_new_user</span><span class="p">,</span>
+    <span class="n">requires_new_history</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="n">galaxy_test.base.populators</span> <span class="kn">import</span> <span class="n">skip_without_tool</span>
+
+<span class="k">class</span> <span class="nc">TestMyApi</span><span class="p">(</span><span class="n">ApiTestCase</span><span class="p">):</span>
+    <span class="nd">@requires_admin</span>
+    <span class="k">def</span> <span class="nf">test_admin_only_endpoint</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># Test runs only with admin user
+</span>        <span class="bp">...</span>
+
+    <span class="nd">@requires_new_user</span>
+    <span class="k">def</span> <span class="nf">test_fresh_user</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># Creates new user for test isolation
+</span>        <span class="bp">...</span>
+
+    <span class="nd">@skip_without_tool</span><span class="p">(</span><span class="sh">"</span><span class="s">cat1</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_cat_tool</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># Skips if cat1 tool not installed
+</span>        <span class="bp">...</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="context-managers">Context Managers</h3>
+
+<p><strong>User switching:</strong></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_permissions</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+    <span class="c1"># Create resource as default user
+</span>    <span class="n">history_id</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">new_history</span><span class="p">()</span>
+
+    <span class="c1"># Test access as different user
+</span>    <span class="k">with</span> <span class="n">self</span><span class="p">.</span><span class="nf">_different_user</span><span class="p">(</span><span class="sh">"</span><span class="s">other@example.com</span><span class="sh">"</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">histories/</span><span class="si">{</span><span class="n">history_id</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">_assert_status_code_is</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="mi">403</span><span class="p">)</span>
+
+    <span class="c1"># Test anonymous access
+</span>    <span class="k">with</span> <span class="n">self</span><span class="p">.</span><span class="nf">_different_user</span><span class="p">(</span><span class="n">anon</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span><span class="sh">"</span><span class="s">histories</span><span class="sh">"</span><span class="p">)</span>
+        <span class="c1"># Verify anonymous behavior
+</span></code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="async--celery">Async &amp; Celery</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Wait for history jobs to complete
+</span><span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">wait_for_history</span><span class="p">(</span><span class="n">history_id</span><span class="p">,</span> <span class="n">assert_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Wait for specific job
+</span><span class="n">job_id</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="sh">"</span><span class="s">jobs</span><span class="sh">"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="sh">"</span><span class="s">id</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">wait_for_job</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="n">assert_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Wait for workflow invocation
+</span><span class="n">self</span><span class="p">.</span><span class="n">workflow_populator</span><span class="p">.</span><span class="nf">wait_for_invocation</span><span class="p">(</span><span class="n">workflow_id</span><span class="p">,</span> <span class="n">invocation_id</span><span class="p">)</span>
+
+<span class="c1"># Wait for async task (Celery)
+</span><span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">wait_on_task</span><span class="p">(</span><span class="n">async_response</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">ApiTestCase</code> includes <code class="language-plaintext highlighter-rouge">UsesCeleryTasks</code> - Celery is auto-configured.</p>
+
+<hr />
+
+<p>class: enlarge120 left-aligned</p>
+
+<h3 id="api-test-ci">API Test CI</h3>
+
+<p><strong>CI Platform:</strong> GitHub Actions</p>
+
+<p><strong>Workflow:</strong> <code class="language-plaintext highlighter-rouge">.github/workflows/api.yaml</code></p>
+
+<p><strong>Characteristics:</strong></p>
+<ul>
+  <li>Fairly stable, rarely flaky</li>
+  <li>Split into chunks for parallelization</li>
+  <li>Uses PostgreSQL (not SQLite)</li>
+  <li>Runs on every PR</li>
+</ul>
+
+<p>Failures usually indicate real issues with your changes.</p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="integration-tests-overview">Integration Tests Overview</h3>
+
+<p><strong>Location:</strong> <code class="language-plaintext highlighter-rouge">test/integration/</code></p>
+
+<p><strong>When to use instead of API tests:</strong></p>
+<ul>
+  <li>Need custom Galaxy configuration</li>
+  <li>Need direct database access</li>
+  <li>Need Galaxy app internals (<code class="language-plaintext highlighter-rouge">self._app</code>)</li>
+</ul>
+
+<p><strong>Trade-off:</strong> Each test class spins up its own Galaxy server (slower)</p>
+
+<p><strong>Run:</strong> <code class="language-plaintext highlighter-rouge">./run_tests.sh -integration</code></p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="example-test_quotapy">Example: test_quota.py</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">galaxy_test.base.populators</span> <span class="kn">import</span> <span class="n">DatasetPopulator</span>
+<span class="kn">from</span> <span class="n">galaxy_test.driver</span> <span class="kn">import</span> <span class="n">integration_util</span>
+
+<span class="k">class</span> <span class="nc">TestQuotaIntegration</span><span class="p">(</span><span class="n">integration_util</span><span class="p">.</span><span class="n">IntegrationTestCase</span><span class="p">):</span>
+    <span class="n">dataset_populator</span><span class="p">:</span> <span class="n">DatasetPopulator</span>
+    <span class="n">require_admin_user</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">handle_galaxy_config_kwds</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">handle_galaxy_config_kwds</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+        <span class="n">config</span><span class="p">[</span><span class="sh">"</span><span class="s">enable_quotas</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">setUp</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span> <span class="o">=</span> <span class="nc">DatasetPopulator</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">galaxy_interactor</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_create</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># ... test quota API
+</span></code></pre></div></div>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="class-attributes">Class Attributes</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestMyFeature</span><span class="p">(</span><span class="n">integration_util</span><span class="p">.</span><span class="n">IntegrationTestCase</span><span class="p">):</span>
+    <span class="c1"># Require the default API user to be an admin
+</span>    <span class="n">require_admin_user</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="c1"># Include Galaxy's sample tools and datatypes
+</span>    <span class="n">framework_tool_and_types</span> <span class="o">=</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Default</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">require_admin_user</code></td>
+      <td>False</td>
+      <td>API user must be admin</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">framework_tool_and_types</code></td>
+      <td>False</td>
+      <td>Include sample tools/datatypes</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="direct-config-options">Direct Config Options</h3>
+
+<p>The simplest pattern - set config values directly:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">handle_galaxy_config_kwds</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="nf">super</span><span class="p">().</span><span class="nf">handle_galaxy_config_kwds</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">config</span><span class="p">[</span><span class="sh">"</span><span class="s">enable_quotas</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">config</span><span class="p">[</span><span class="sh">"</span><span class="s">metadata_strategy</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">extended</span><span class="sh">"</span>
+    <span class="n">config</span><span class="p">[</span><span class="sh">"</span><span class="s">allow_path_paste</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">config</span><span class="p">[</span><span class="sh">"</span><span class="s">ftp_upload_dir</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="sh">"</span><span class="s">/tmp/ftp</span><span class="sh">"</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">config</code> dict corresponds to <code class="language-plaintext highlighter-rouge">galaxy.yml</code> options.</p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="external-config-files">External Config Files</h3>
+
+<p>For complex configs (job runners, object stores), use external files:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
+<span class="n">SCRIPT_DIRECTORY</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span>
+<span class="n">JOB_CONFIG_FILE</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">SCRIPT_DIRECTORY</span><span class="p">,</span> <span class="sh">"</span><span class="s">my_job_conf.yml</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">TestCustomRunner</span><span class="p">(</span><span class="n">integration_util</span><span class="p">.</span><span class="n">IntegrationTestCase</span><span class="p">):</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">handle_galaxy_config_kwds</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="nf">super</span><span class="p">().</span><span class="nf">handle_galaxy_config_kwds</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+        <span class="n">config</span><span class="p">[</span><span class="sh">"</span><span class="s">job_config_file</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">JOB_CONFIG_FILE</span>
+</code></pre></div></div>
+
+<p>Common: <code class="language-plaintext highlighter-rouge">job_config_file</code>, <code class="language-plaintext highlighter-rouge">object_store_config_file</code>, <code class="language-plaintext highlighter-rouge">file_sources_config_file</code></p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="dynamic-config-templates">Dynamic Config Templates</h3>
+
+<p>For configs needing runtime values (temp dirs, ports):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">string</span>
+
+<span class="n">OBJECT_STORE_TEMPLATE</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="nc">Template</span><span class="p">(</span><span class="sh">"""</span><span class="s">
+&lt;object_store type=</span><span class="sh">"</span><span class="s">disk</span><span class="sh">"</span><span class="s">&gt;
+    &lt;files_dir path=</span><span class="sh">"</span><span class="s">${temp_directory}/files</span><span class="sh">"</span><span class="s">/&gt;
+&lt;/object_store&gt;
+</span><span class="sh">"""</span><span class="p">)</span>
+
+<span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">handle_galaxy_config_kwds</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+    <span class="nf">super</span><span class="p">().</span><span class="nf">handle_galaxy_config_kwds</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">temp_dir</span> <span class="o">=</span> <span class="n">cls</span><span class="p">.</span><span class="n">_test_driver</span><span class="p">.</span><span class="nf">mkdtemp</span><span class="p">()</span>
+    <span class="n">config_content</span> <span class="o">=</span> <span class="n">OBJECT_STORE_TEMPLATE</span><span class="p">.</span><span class="nf">safe_substitute</span><span class="p">(</span>
+        <span class="n">temp_directory</span><span class="o">=</span><span class="n">temp_dir</span>
+    <span class="p">)</span>
+    <span class="n">config_path</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">temp_dir</span><span class="p">,</span> <span class="sh">"</span><span class="s">object_store_conf.xml</span><span class="sh">"</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="sh">"</span><span class="s">w</span><span class="sh">"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">config_content</span><span class="p">)</span>
+    <span class="n">config</span><span class="p">[</span><span class="sh">"</span><span class="s">object_store_config_file</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">config_path</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="configuration-mixins">Configuration Mixins</h3>
+
+<p>Mixin classes simplify common configuration patterns:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestWithObjectStore</span><span class="p">(</span>
+    <span class="n">integration_util</span><span class="p">.</span><span class="n">ConfiguresObjectStores</span><span class="p">,</span>
+    <span class="n">integration_util</span><span class="p">.</span><span class="n">IntegrationTestCase</span>
+<span class="p">):</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">handle_galaxy_config_kwds</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="n">cls</span><span class="p">.</span><span class="nf">_configure_object_store</span><span class="p">(</span><span class="n">STORE_TEMPLATE</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mixin</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ConfiguresObjectStores</code></td>
+      <td>Object store setup</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ConfiguresDatabaseVault</code></td>
+      <td>Encrypted secrets</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">PosixFileSourceSetup</code></td>
+      <td>File upload sources</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="accessing-galaxy-internals">Accessing Galaxy Internals</h3>
+
+<p>Integration tests can access Galaxy’s app object via <code class="language-plaintext highlighter-rouge">self._app</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">galaxy.model</span> <span class="kn">import</span> <span class="n">StoredWorkflow</span>
+<span class="kn">from</span> <span class="n">sqlalchemy</span> <span class="kn">import</span> <span class="n">select</span>
+
+<span class="k">def</span> <span class="nf">test_workflow_storage</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+    <span class="c1"># Query database directly
+</span>    <span class="n">stmt</span> <span class="o">=</span> <span class="nf">select</span><span class="p">(</span><span class="n">StoredWorkflow</span><span class="p">).</span><span class="nf">order_by</span><span class="p">(</span><span class="n">StoredWorkflow</span><span class="p">.</span><span class="nb">id</span><span class="p">.</span><span class="nf">desc</span><span class="p">())</span>
+    <span class="n">workflow</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">_app</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">session</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="n">stmt</span><span class="p">).</span><span class="nf">scalar_one</span><span class="p">()</span>
+
+    <span class="c1"># Access application services
+</span>    <span class="n">table</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">_app</span><span class="p">.</span><span class="n">tool_data_tables</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">"</span><span class="s">all_fasta</span><span class="sh">"</span><span class="p">)</span>
+
+    <span class="c1"># Get managed temp directory
+</span>    <span class="n">temp_dir</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">_test_driver</span><span class="p">.</span><span class="nf">mkdtemp</span><span class="p">()</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="skip-decorators--external-services">Skip Decorators &amp; External Services</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">galaxy_test.driver</span> <span class="kn">import</span> <span class="n">integration_util</span>
+
+<span class="nd">@integration_util.skip_unless_docker</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">test_docker_feature</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+    <span class="bp">...</span>
+
+<span class="nd">@integration_util.skip_unless_kubernetes</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">test_k8s_feature</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+    <span class="bp">...</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Decorator</th>
+      <th>Skips Unless</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">skip_unless_docker()</code></td>
+      <td>Docker available</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">skip_unless_kubernetes()</code></td>
+      <td>kubectl configured</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">skip_unless_postgres()</code></td>
+      <td>Using PostgreSQL</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">skip_unless_amqp()</code></td>
+      <td>AMQP URL configured</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="integration-test-ci">Integration Test CI</h3>
+
+<p><strong>CI Platform:</strong> GitHub Actions</p>
+
+<p><strong>Workflow:</strong> <code class="language-plaintext highlighter-rouge">.github/workflows/integration.yaml</code></p>
+
+<p><strong>CI provides:</strong></p>
+<ul>
+  <li>PostgreSQL database</li>
+  <li>RabbitMQ message queue</li>
+  <li>Minikube (Kubernetes)</li>
+  <li>Apptainer/Singularity</li>
+</ul>
+
+<p><strong>Stability:</strong> Moderately prone to flaky failures</p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="selenium-tests-overview">Selenium Tests Overview</h3>
+
+<p><strong>Location:</strong> <code class="language-plaintext highlighter-rouge">lib/galaxy_test/selenium/</code></p>
+
+<p><strong>What they test:</strong></p>
+<ul>
+  <li>Full-stack UI with real browsers</li>
+  <li>User workflows through the interface</li>
+  <li>Visual correctness and accessibility</li>
+</ul>
+
+<p><strong>Technologies:</strong></p>
+<ul>
+  <li>Selenium WebDriver (browser automation)</li>
+  <li>Smart component system (navigation.yml)</li>
+</ul>
+
+<p><strong>Run:</strong> <code class="language-plaintext highlighter-rouge">./run_tests.sh -selenium</code></p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="api-vs-ui-methods">API vs UI Methods</h3>
+
+<p><strong>Use API methods</strong> for setup (faster, more reliable):</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">self</span><span class="p">.</span><span class="n">dataset_populator</span><span class="p">.</span><span class="nf">new_dataset</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">history_id</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="sh">"</span><span class="s">data</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Use UI methods</strong> when testing the UI itself:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">self</span><span class="p">.</span><span class="nf">perform_upload</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">get_filename</span><span class="p">(</span><span class="sh">"</span><span class="s">1.sam</span><span class="sh">"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Scenario</th>
+      <th>Use</th>
+      <th>Method</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Need dataset for other test</td>
+      <td>API</td>
+      <td><code class="language-plaintext highlighter-rouge">dataset_populator.new_dataset()</code></td>
+    </tr>
+    <tr>
+      <td>Testing upload form</td>
+      <td>UI</td>
+      <td><code class="language-plaintext highlighter-rouge">perform_upload()</code></td>
+    </tr>
+    <tr>
+      <td>Need workflow for test</td>
+      <td>API</td>
+      <td><code class="language-plaintext highlighter-rouge">workflow_populator.run_workflow()</code></td>
+    </tr>
+    <tr>
+      <td>Testing workflow editor</td>
+      <td>UI</td>
+      <td><code class="language-plaintext highlighter-rouge">workflow_run_open_workflow()</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="test-class-structure-1">Test Class Structure</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">.framework</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">managed_history</span><span class="p">,</span>
+    <span class="n">selenium_test</span><span class="p">,</span>
+    <span class="n">SeleniumTestCase</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">TestMyFeature</span><span class="p">(</span><span class="n">SeleniumTestCase</span><span class="p">):</span>
+    <span class="n">ensure_registered</span> <span class="o">=</span> <span class="bp">True</span>  <span class="c1"># Auto-login before each test
+</span>
+    <span class="nd">@selenium_test</span>
+    <span class="nd">@managed_history</span>
+    <span class="k">def</span> <span class="nf">test_something</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">perform_upload</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">get_filename</span><span class="p">(</span><span class="sh">"</span><span class="s">1.sam</span><span class="sh">"</span><span class="p">))</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">history_panel_wait_for_hid_ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">ensure_registered</code></td>
+      <td>Auto-login before each test</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">run_as_admin</code></td>
+      <td>Login as admin user instead</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="test-decorators-1">Test Decorators</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@selenium_test</span>
+<span class="nd">@managed_history</span>
+<span class="k">def</span> <span class="nf">test_upload</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+    <span class="bp">...</span>
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Decorator</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">@selenium_test</code></td>
+      <td><strong>Required</strong> - handles retries, debug dumps, accessibility</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">@managed_history</code></td>
+      <td>Creates isolated history, auto-cleanup</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">@selenium_only(reason)</code></td>
+      <td>Skip if using Playwright backend</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">@playwright_only(reason)</code></td>
+      <td>Skip if using Selenium backend</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="smart-component-system">Smart Component System</h3>
+
+<p>Access UI elements via <code class="language-plaintext highlighter-rouge">self.components</code> (defined in <code class="language-plaintext highlighter-rouge">navigation.yml</code>):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Access nested components
+</span><span class="n">editor</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">components</span><span class="p">.</span><span class="n">workflow_editor</span>
+<span class="n">save_button</span> <span class="o">=</span> <span class="n">editor</span><span class="p">.</span><span class="n">save_button</span>
+
+<span class="c1"># SmartTarget methods wait and interact
+</span><span class="n">save_button</span><span class="p">.</span><span class="nf">wait_for_visible</span><span class="p">()</span>
+<span class="n">save_button</span><span class="p">.</span><span class="nf">wait_for_and_click</span><span class="p">()</span>
+<span class="n">save_button</span><span class="p">.</span><span class="nf">assert_disabled</span><span class="p">()</span>
+
+<span class="c1"># Parameterized selectors
+</span><span class="n">self</span><span class="p">.</span><span class="n">components</span><span class="p">.</span><span class="n">history_panel</span><span class="p">.</span><span class="nf">item</span><span class="p">(</span><span class="n">hid</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="nf">wait_for_visible</span><span class="p">()</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="smarttarget-methods">SmartTarget Methods</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">wait_for_visible()</code></td>
+      <td>Wait for visibility, return element</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">wait_for_and_click()</code></td>
+      <td>Wait then click</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">wait_for_text()</code></td>
+      <td>Wait, return <code class="language-plaintext highlighter-rouge">.text</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">wait_for_value()</code></td>
+      <td>Wait, return input value</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">wait_for_absent_or_hidden()</code></td>
+      <td>Wait for element to disappear</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">assert_absent_or_hidden()</code></td>
+      <td>Fail if element visible</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">assert_disabled()</code></td>
+      <td>Verify disabled state</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">all()</code></td>
+      <td>Return list of all matching elements</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="history--workflow-operations">History &amp; Workflow Operations</h3>
+
+<p><strong>File uploads:</strong></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">self</span><span class="p">.</span><span class="nf">perform_upload</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">get_filename</span><span class="p">(</span><span class="sh">"</span><span class="s">1.sam</span><span class="sh">"</span><span class="p">))</span>
+<span class="n">self</span><span class="p">.</span><span class="nf">perform_upload</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="nf">get_filename</span><span class="p">(</span><span class="sh">"</span><span class="s">1.sam</span><span class="sh">"</span><span class="p">),</span> <span class="n">ext</span><span class="o">=</span><span class="sh">"</span><span class="s">txt</span><span class="sh">"</span><span class="p">,</span> <span class="n">genome</span><span class="o">=</span><span class="sh">"</span><span class="s">hg18</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>History panel:</strong></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">self</span><span class="p">.</span><span class="nf">history_panel_wait_for_hid_ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">self</span><span class="p">.</span><span class="nf">history_panel_click_item_title</span><span class="p">(</span><span class="n">hid</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">self</span><span class="p">.</span><span class="nf">wait_for_history</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><strong>Workflows (via <code class="language-plaintext highlighter-rouge">RunsWorkflows</code> mixin):</strong></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">self</span><span class="p">.</span><span class="nf">workflow_run_open_workflow</span><span class="p">(</span><span class="n">WORKFLOW_YAML</span><span class="p">)</span>
+<span class="n">self</span><span class="p">.</span><span class="nf">workflow_run_submit</span><span class="p">()</span>
+<span class="n">self</span><span class="p">.</span><span class="nf">workflow_run_wait_for_ok</span><span class="p">(</span><span class="n">hid</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="accessibility-testing">Accessibility Testing</h3>
+
+<p><code class="language-plaintext highlighter-rouge">@selenium_test</code> automatically runs <a href="https://www.deque.com/axe/">axe-core</a> accessibility checks.</p>
+
+<p><strong>Component-level checks:</strong></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">login</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">components</span><span class="p">.</span><span class="n">login</span>
+<span class="n">login</span><span class="p">.</span><span class="n">form</span><span class="p">.</span><span class="nf">assert_no_axe_violations_with_impact_of_at_least</span><span class="p">(</span><span class="sh">"</span><span class="s">moderate</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="c1"># With known violations excluded
+</span><span class="n">EXCEPTIONS</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">heading-order</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">label</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">self</span><span class="p">.</span><span class="n">components</span><span class="p">.</span><span class="n">history_panel</span><span class="p">.</span><span class="n">_</span><span class="p">.</span><span class="nf">assert_no_axe_violations_with_impact_of_at_least</span><span class="p">(</span>
+    <span class="sh">"</span><span class="s">moderate</span><span class="sh">"</span><span class="p">,</span> <span class="n">EXCEPTIONS</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Impact levels:</strong> <code class="language-plaintext highlighter-rouge">"minor"</code>, <code class="language-plaintext highlighter-rouge">"moderate"</code>, <code class="language-plaintext highlighter-rouge">"serious"</code>, <code class="language-plaintext highlighter-rouge">"critical"</code></p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="shared-state-tests">Shared State Tests</h3>
+
+<p>For expensive one-time setup, use <code class="language-plaintext highlighter-rouge">SharedStateSeleniumTestCase</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestPublishedPages</span><span class="p">(</span><span class="n">SharedStateSeleniumTestCase</span><span class="p">):</span>
+    <span class="nd">@selenium_test</span>
+    <span class="k">def</span> <span class="nf">test_index</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">navigate_to_pages</span><span class="p">()</span>
+        <span class="c1"># ... test using shared state
+</span>
+    <span class="k">def</span> <span class="nf">setup_shared_state</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="c1"># Called once before first test in class
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">user1_email</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get_random_email</span><span class="p">(</span><span class="sh">"</span><span class="s">test1</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">register</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">user1_email</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">new_public_page</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">logout_if_needed</span><span class="p">()</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="selenium-test-ci">Selenium Test CI</h3>
+
+<p><strong>CI Platform:</strong> GitHub Actions</p>
+
+<p><strong>Workflow:</strong> <code class="language-plaintext highlighter-rouge">.github/workflows/selenium.yaml</code></p>
+
+<p><strong>Features:</strong></p>
+<ul>
+  <li>Split into 3 chunks for parallelization</li>
+  <li>Auto-retry on failure (<code class="language-plaintext highlighter-rouge">GALAXY_TEST_SELENIUM_RETRIES=1</code>)</li>
+  <li>Debug artifacts uploaded on failure</li>
+  <li>PostgreSQL backend</li>
+</ul>
+
+<p><strong>Stability:</strong> More prone to flaky failures than API tests</p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="playwright-tests">Playwright Tests</h3>
+
+<p><strong>Same test files</strong> as Selenium (<code class="language-plaintext highlighter-rouge">lib/galaxy_test/selenium/</code>)</p>
+
+<p><strong>Why Playwright?</strong></p>
+<ul>
+  <li>Faster execution</li>
+  <li>Better reliability</li>
+  <li>Modern browser automation</li>
+</ul>
+
+<p><strong>Run:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_tests.sh <span class="nt">-playwright</span>
+</code></pre></div></div>
+
+<p><strong>Install browser:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>playwright <span class="nb">install </span>chromium <span class="nt">--with-deps</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="playwright-ci">Playwright CI</h3>
+
+<p><strong>CI Platform:</strong> GitHub Actions</p>
+
+<p><strong>Workflow:</strong> <code class="language-plaintext highlighter-rouge">.github/workflows/playwright.yaml</code></p>
+
+<p><strong>Differences from Selenium CI:</strong></p>
+<ul>
+  <li>Installs Playwright via <code class="language-plaintext highlighter-rouge">playwright install chromium</code></li>
+  <li>Uses headless mode (<code class="language-plaintext highlighter-rouge">GALAXY_TEST_SELENIUM_HEADLESS=1</code>)</li>
+  <li>Same test splitting (3 chunks)</li>
+</ul>
+
+<p>Both Selenium and Playwright CI run on every PR.</p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="selenium-integration-tests">Selenium Integration Tests</h3>
+
+<p><strong>Location:</strong> <code class="language-plaintext highlighter-rouge">test/integration_selenium/</code></p>
+
+<p><strong>Combines:</strong></p>
+<ul>
+  <li>Selenium browser automation</li>
+  <li>Integration test config hooks (<code class="language-plaintext highlighter-rouge">handle_galaxy_config_kwds</code>)</li>
+</ul>
+
+<p><strong>When to use:</strong></p>
+<ul>
+  <li>UI testing that needs custom Galaxy configuration</li>
+  <li>Testing UI features behind config flags</li>
+</ul>
+
+<p><strong>Run:</strong> <code class="language-plaintext highlighter-rouge">./run_tests.sh -integration test/integration_selenium</code></p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="selenium-integration-ci">Selenium Integration CI</h3>
+
+<p><strong>Example:</strong> <code class="language-plaintext highlighter-rouge">test/integration_selenium/test_upload_ftp.py</code></p>
+<ul>
+  <li>Tests FTP upload UI</li>
+  <li>Requires <code class="language-plaintext highlighter-rouge">ftp_upload_dir</code> configuration</li>
+</ul>
+
+<p><strong>CI Platform:</strong> GitHub Actions</p>
+
+<p><strong>Workflow:</strong> <code class="language-plaintext highlighter-rouge">.github/workflows/integration_selenium.yaml</code></p>
+
+<p>Runs on every PR, similar stability to regular Selenium tests.</p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="handling-flaky-tests">Handling Flaky Tests</h3>
+
+<p>Some tests fail intermittently due to:</p>
+<ul>
+  <li>Race conditions</li>
+  <li>Timing issues</li>
+  <li>External dependencies</li>
+</ul>
+
+<p><strong>Galaxy’s approach:</strong></p>
+<ul>
+  <li>Track via GitHub issues with <code class="language-plaintext highlighter-rouge">transient-test-error</code> label</li>
+  <li>Mark tests with <code class="language-plaintext highlighter-rouge">@transient_failure</code> decorator</li>
+  <li>Modified error messages help reviewers identify non-blocking failures</li>
+</ul>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="transient_failure-decorator">@transient_failure Decorator</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">galaxy.util.unittest_utils</span> <span class="kn">import</span> <span class="n">transient_failure</span>
+
+<span class="nd">@transient_failure</span><span class="p">(</span><span class="n">issue</span><span class="o">=</span><span class="mi">21224</span><span class="p">)</span>
+<span class="nd">@selenium_test</span>
+<span class="k">def</span> <span class="nf">test_sharing_private_history</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+    <span class="c1"># Test that sometimes fails due to race condition
+</span>    <span class="bp">...</span>
+</code></pre></div></div>
+
+<p><strong>Parameters:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">issue</code> - GitHub issue number tracking this failure</li>
+  <li><code class="language-plaintext highlighter-rouge">potentially_fixed=True</code> - Indicates fix was implemented</li>
+</ul>
+
+<p>When test fails, error message includes issue link and tracking info.</p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="flaky-test-workflow">Flaky Test Workflow</h3>
+
+<ol>
+  <li><strong>Identify</strong> - Test fails intermittently in CI</li>
+  <li><strong>Track</strong> - Create GitHub issue with <code class="language-plaintext highlighter-rouge">transient-test-error</code> label</li>
+  <li><strong>Mark</strong> - Add <code class="language-plaintext highlighter-rouge">@transient_failure(issue=XXXXX)</code> decorator</li>
+  <li><strong>Fix</strong> - When implemented, set <code class="language-plaintext highlighter-rouge">potentially_fixed=True</code></li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@transient_failure</span><span class="p">(</span><span class="n">issue</span><span class="o">=</span><span class="mi">21242</span><span class="p">,</span> <span class="n">potentially_fixed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_delete_job_with_message</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">history_id</span><span class="p">):</span>
+    <span class="bp">...</span>
+</code></pre></div></div>
+
+<ol>
+  <li><strong>Close</strong> - If no failures for ~1 month, remove decorator and close issue</li>
+</ol>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="running-tests-reference">Running Tests Reference</h3>
+
+<p><strong>Quick reference:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_tests.sh <span class="nt">--help</span>          <span class="c"># Full documentation</span>
+
+<span class="c"># Common patterns</span>
+./run_tests.sh <span class="nt">-unit</span>           <span class="c"># Python unit tests</span>
+./run_tests.sh <span class="nt">-api</span>            <span class="c"># API tests</span>
+./run_tests.sh <span class="nt">-integration</span>    <span class="c"># Integration tests</span>
+./run_tests.sh <span class="nt">-selenium</span>       <span class="c"># Selenium tests</span>
+./run_tests.sh <span class="nt">-framework</span>      <span class="c"># Tool framework tests</span>
+</code></pre></div></div>
+
+<p><strong>Client tests:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make client-test               <span class="c"># All client tests</span>
+yarn <span class="nt">--cwd</span> client <span class="nb">test</span>:watch   <span class="c"># Watch mode</span>
+</code></pre></div></div>
+
+<p>.footnote[Previous: <a href="/training-material/topics/dev/tutorials/architecture-production/slides.html">Galaxy Production Deployment</a>]</p>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Unit tests for isolated components (no server needed)</li>
+
+<li>API tests for backend behavior via Galaxy API</li>
+
+<li>Integration tests for custom Galaxy configurations</li>
+
+<li>Framework tests for tool/workflow XML validation</li>
+
+<li>Selenium/Playwright tests for UI with browser automation</li>
+
+<li>Populators simplify test data creation</li>
+
+<li>Each test type has a dedicated CI workflow</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/dev/tutorials/architecture-tests/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/./topics/dev/tutorials/architecture-tests/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/05ce2d3c522f8a7b531dc84f9792f7e473939485">05ce2d3</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+
+    </body>
+</html>

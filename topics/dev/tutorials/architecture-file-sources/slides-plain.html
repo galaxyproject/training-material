@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: Architecture 10 - Galaxy File Sources Architecture / Architecture 10 - Galaxy File Sources Architecture / Development in Galaxy</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@05ce2d3c522f8a7b531dc84f9792f7e473939485",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture-file-sources/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Architecture 10 - Galaxy File Sources Architecture">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-02-19 09:49:54 +0000">
+<meta name="DC.creator" content="John Chilton">
+<meta name="DC.creator" content="David López"><meta name="description" content="layout: introduction_slides topic_name: Galaxy Architecture  # Architecture 10 - Galaxy File Sources Architecture  *The architecture of pluggable file sources in Galaxy.*  ---    layout: true  left-aligned class: left, middle --- layout: true class: center, middle    ---   ### The Problem & Solution  **Problem** - Galaxy needs to read and write files from diverse sources - Before file sources, each backend required core code changes and there was no extensibility for new storage types  **Plugin Architecture** - `FilesSource` interface for all backends - `BaseFilesSource` reference implementation - `ConfiguredFileSources` orchestrates plugins (`lib/galaxy/files/__init__.py`) - `FileSourcePluginLoader` discovers plugins (`lib/galaxy/files/plugins.py`)  **Applications** - Upload dialog, rule builder, collection creation, etc. - History & workflow import/export. - Directory tools.    ---   class: reduce70  ### Core Abstractions  ![FilesSource Interface Hierarchy](../../images/file_sourc...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Development in Galaxy / Architecture 10 - Galaxy File Sources Architecture / Slides: Architecture 10 - Galaxy File Sources Architecture">
+        <meta property="og:description" content="layout: introduction_slides topic_name: Galaxy Architecture  # Architecture 10 - Galaxy File Sources Architecture  *The architecture of pluggable file sources in Galaxy.*  ---    layout: true  left-aligned class: left, middle --- layout: true class: center, middle    ---   ### The Problem & Solution  **Problem** - Galaxy needs to read and write files from diverse sources - Before file sources, each backend required core code changes and there was no extensibility for new storage types  **Plugin Architecture** - `FilesSource` interface for all backends - `BaseFilesSource` reference implementation - `ConfiguredFileSources` orchestrates plugins (`lib/galaxy/files/__init__.py`) - `FileSourcePluginLoader` discovers plugins (`lib/galaxy/files/plugins.py`)  **Applications** - Upload dialog, rule builder, collection creation, etc. - History & workflow import/export. - Directory tools.    ---   class: reduce70  ### Core Abstractions  ![FilesSource Interface Hierarchy](../../images/file_sourc...">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/dev/tutorials/architecture-file-sources/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/architecture-file-sources/slides-plain.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/dev/tutorials/architecture-file-sources/slides.html">View markdown source on GitHub</a>
+	<h1>Architecture 10 - Galaxy File Sources Architecture</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jmchilton?s=36" alt="John Chilton avatar" width="36" class="avatar" />
+    John Chilton</a><a href="/training-material/hall-of-fame/davelopez/" class="contributor-badge contributor-davelopez"><img src="https://avatars.githubusercontent.com/davelopez?s=36" alt="David López avatar" width="36" class="avatar" />
+    David López</a>
+	</div>
+
+</div>
+
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What are File Sources in Galaxy?</p>
+</li>
+		
+		<li><p>How do user-defined file sources work?</p>
+</li>
+		
+		<li><p>What is the difference between File Sources and Object Stores?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Understand the File Sources plugin architecture</p>
+</li>
+		
+		<li><p>Learn about user-defined file source templates</p>
+</li>
+		
+		<li><p>Understand fsspec and PyFilesystem2 base classes</p>
+</li>
+		
+		<li><p>Learn about OAuth integration for cloud services</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Feb 19, 2026 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Feb 19, 2026 </div>
+
+	<hr />
+
+
+	<p>layout: introduction_slides
+topic_name: Galaxy Architecture</p>
+
+<h1 id="architecture-10---galaxy-file-sources-architecture">Architecture 10 - Galaxy File Sources Architecture</h1>
+
+<p><em>The architecture of pluggable file sources in Galaxy.</em></p>
+
+<hr />
+
+<p>layout: true
+<span id="left-aligned"><i class="fas fa-link" aria-hidden="true"></i> left-aligned</span>
+class: left, middle
+—
+layout: true
+class: center, middle</p>
+
+<hr />
+
+<h3 id="the-problem--solution">The Problem &amp; Solution</h3>
+
+<p><strong>Problem</strong></p>
+<ul>
+  <li>Galaxy needs to read and write files from diverse sources</li>
+  <li>Before file sources, each backend required core code changes and there was no extensibility for new storage types</li>
+</ul>
+
+<p><strong>Plugin Architecture</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">FilesSource</code> interface for all backends</li>
+  <li><code class="language-plaintext highlighter-rouge">BaseFilesSource</code> reference implementation</li>
+  <li><code class="language-plaintext highlighter-rouge">ConfiguredFileSources</code> orchestrates plugins (<code class="language-plaintext highlighter-rouge">lib/galaxy/files/__init__.py</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">FileSourcePluginLoader</code> discovers plugins (<code class="language-plaintext highlighter-rouge">lib/galaxy/files/plugins.py</code>)</li>
+</ul>
+
+<p><strong>Applications</strong></p>
+<ul>
+  <li>Upload dialog, rule builder, collection creation, etc.</li>
+  <li>History &amp; workflow import/export.</li>
+  <li>Directory tools.</li>
+</ul>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="core-abstractions">Core Abstractions</h3>
+
+<p><img src="../../images/file_sources_interface_hierarchy.plantuml.svg" alt="FilesSource Interface Hierarchy" /></p>
+
+<p><strong>Three interfaces:</strong> <code class="language-plaintext highlighter-rouge">SingleFileSource</code>, <code class="language-plaintext highlighter-rouge">SupportsBrowsing</code>, <code class="language-plaintext highlighter-rouge">FilesSource</code></p>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="uri-routing--plugin-scoring">URI Routing &amp; Plugin Scoring</h3>
+
+<p><img src="../../images/file_sources_uri_resolution.plantuml.svg" alt="URI Resolution Scoring" /></p>
+
+<hr />
+
+<p>class: reduce70 left-aligned</p>
+
+<h3 id="uri-scoring-example-s3-filessource">URI Scoring Example: S3 FilesSource</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">score_url_match</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">url</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">"</span><span class="s">s3://</span><span class="sh">"</span><span class="p">):</span>
+        <span class="n">bucket_name</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get_config_bucket</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">bucket_name</span><span class="p">:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="sa">f</span><span class="sh">"</span><span class="s">s3://</span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="s">/</span><span class="sh">"</span>
+            <span class="k">if</span> <span class="n">url</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="n">prefix</span><span class="p">):</span>
+                <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>  <span class="c1"># Exact bucket match
+</span>            <span class="c1"># Prevent s3://my-bucket-prod matching s3://my-bucket
+</span>            <span class="k">elif</span> <span class="n">url</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">s3://</span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span> <span class="ow">and</span> <span class="n">url</span><span class="p">[</span><span class="nf">len</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">s3://</span><span class="si">{</span><span class="n">bucket_name</span><span class="si">}</span><span class="sh">"</span><span class="p">)]</span> <span class="o">!=</span> <span class="sh">"</span><span class="s">/</span><span class="sh">"</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">0</span>  <span class="c1"># Boundary check failed
+</span>        <span class="k">return</span> <span class="mi">1</span>  <span class="c1"># Generic S3 match
+</span>    <span class="k">return</span> <span class="mi">0</span>
+</code></pre></div></div>
+
+<p><strong>Scoring algorithm:</strong> Returns 0 (unsupported) to URI length (exact match)</p>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="user-context--access-control">User Context &amp; Access Control</h3>
+
+<p><img src="../../images/file_sources_access_control.plantuml.svg" alt="Access Control Decision Flow" /></p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="access-control-configuration">Access Control Configuration</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Role-based access control</span>
+<span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">s3fs</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">restricted_bucket</span>
+  <span class="na">label</span><span class="pi">:</span> <span class="s">Restricted Project Data</span>
+  <span class="na">bucket</span><span class="pi">:</span> <span class="s">sensitive-data</span>
+  <span class="na">requires_roles</span><span class="pi">:</span> <span class="s2">"</span><span class="s">data_access"</span>
+  <span class="na">requires_groups</span><span class="pi">:</span> <span class="s2">"</span><span class="s">engineering</span><span class="nv"> </span><span class="s">OR</span><span class="nv"> </span><span class="s">research"</span>
+
+<span class="c1"># Vault credential injection</span>
+<span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">posix</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">user_staging</span>
+  <span class="na">root</span><span class="pi">:</span> <span class="s">/data/staging/${user.username}</span>
+  <span class="na">writable</span><span class="pi">:</span> <span class="kc">true</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90 left-aligned</p>
+
+<h3 id="pyfilesystem2-foundation">PyFilesystem2 Foundation</h3>
+
+<p><strong>Older abstraction:</strong> PyFilesystem2 (fs) library for FTP, WebDAV, cloud SDKs</p>
+
+<ul>
+  <li><strong>Server-side pagination</strong> via <code class="language-plaintext highlighter-rouge">filterdir(page=(start, end))</code></li>
+  <li><strong>Context manager</strong> pattern (filesystems opened/closed per operation)</li>
+  <li>Use cases: FTP, WebDAV, SSH protocols</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PyFilesystem2FilesSource</span><span class="p">(</span><span class="n">BaseFilesSource</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_list</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="sh">"</span><span class="s">/</span><span class="sh">"</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">user_context</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">opts</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">self</span><span class="p">.</span><span class="nf">_open_fs</span><span class="p">(</span><span class="n">user_context</span><span class="p">)</span> <span class="k">as</span> <span class="n">fs</span><span class="p">:</span>
+            <span class="n">limit</span> <span class="o">=</span> <span class="n">opts</span><span class="p">.</span><span class="n">limit</span> <span class="k">if</span> <span class="n">opts</span> <span class="k">else</span> <span class="bp">None</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="n">opts</span><span class="p">.</span><span class="n">offset</span> <span class="k">if</span> <span class="n">opts</span> <span class="k">else</span> <span class="mi">0</span>
+
+            <span class="c1"># Server-side pagination for large directories
+</span>            <span class="k">if</span> <span class="n">limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">page</span> <span class="o">=</span> <span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">limit</span><span class="p">)</span>
+                <span class="n">entries</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">fs</span><span class="p">.</span><span class="nf">filterdir</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">page</span><span class="o">=</span><span class="n">page</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">entries</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">fs</span><span class="p">.</span><span class="nf">scandir</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+
+            <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">_serialize_entries</span><span class="p">(</span><span class="n">entries</span><span class="p">),</span> <span class="nf">len</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="fsspec">fsspec</h3>
+
+<p><img src="../../images/file_sources_fsspec_hierarchy.plantuml.svg" alt="fsspec Plugin Hierarchy" /></p>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="fsspec-plugin-simplicity">fsspec Plugin Simplicity</h3>
+
+<p><strong>Plugin authors implement only <code class="language-plaintext highlighter-rouge">_open_fs()</code></strong> - base class handles the rest</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">S3FsFilesSource</span><span class="p">(</span><span class="n">FsspecFilesSource</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">S3-compatible storage via fsspec.</span><span class="sh">"""</span>
+    <span class="n">plugin_type</span> <span class="o">=</span> <span class="sh">"</span><span class="s">s3fs</span><span class="sh">"</span>
+
+    <span class="k">def</span> <span class="nf">_open_fs</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">user_context</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_get_config</span><span class="p">(</span><span class="n">user_context</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fsspec</span><span class="p">.</span><span class="nf">filesystem</span><span class="p">(</span>
+            <span class="sh">"</span><span class="s">s3</span><span class="sh">"</span><span class="p">,</span>
+            <span class="n">anon</span><span class="o">=</span><span class="n">config</span><span class="p">.</span><span class="n">anon</span><span class="p">,</span>
+            <span class="n">key</span><span class="o">=</span><span class="n">config</span><span class="p">.</span><span class="n">access_key_id</span><span class="p">,</span>
+            <span class="n">secret</span><span class="o">=</span><span class="n">config</span><span class="p">.</span><span class="n">secret_access_key</span><span class="p">,</span>
+            <span class="n">client_kwargs</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">endpoint_url</span><span class="sh">"</span><span class="p">:</span> <span class="n">config</span><span class="p">.</span><span class="n">endpoint_url</span><span class="p">},</span>
+        <span class="p">)</span>
+</code></pre></div></div>
+
+<p>Base class provides: <code class="language-plaintext highlighter-rouge">realize_to</code>, <code class="language-plaintext highlighter-rouge">write_from</code>, <code class="language-plaintext highlighter-rouge">list</code> (with pagination), <code class="language-plaintext highlighter-rouge">score_url_match</code></p>
+
+<hr />
+
+<p>class: enlarge120 left-aligned</p>
+
+<h3 id="pyfilesystem2-vs-fsspec">PyFilesystem2 vs fsspec</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>PyFilesystem2</th>
+      <th>fsspec</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>External Backends</strong></td>
+      <td>~20</td>
+      <td>40+ (Zarr, Git, HF, etc.)</td>
+    </tr>
+    <tr>
+      <td><strong>Galaxy Plugins</strong></td>
+      <td>12 (FTP, WebDAV, Dropbox, Drive, GCS…)</td>
+      <td>6 (S3, Azure flat, HF)</td>
+    </tr>
+    <tr>
+      <td><strong>Pagination</strong></td>
+      <td>Native server-side <code class="language-plaintext highlighter-rouge">filterdir(page=...)</code></td>
+      <td>Client-side after full listing</td>
+    </tr>
+    <tr>
+      <td><strong>Ecosystem</strong></td>
+      <td>7M downloads/mo</td>
+      <td>543M downloads/mo</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>fsspec born from <a href="https://www.dask.org/">Dask</a>, used by pandas, xarray, zarr, PyArrow, HF Datasets</p>
+
+<p><em>Downloads: <a href="https://pypistats.org/">pypistats.org</a>, Dec 2025</em></p>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="adding-a-plugin-the-pattern">Adding a Plugin: The Pattern</h3>
+
+<p><img src="../../images/file_sources_add_plugin.plantuml.svg" alt="Add Plugin Checklist" /></p>
+
+<p><strong>Key insight:</strong> <code class="language-plaintext highlighter-rouge">FsspecFilesSource</code> handles file operations—you implement only <code class="language-plaintext highlighter-rouge">_open_fs()</code></p>
+
+<hr />
+
+<p>class: left-aligned</p>
+
+<h3 id="adding-a-plugin-steps">Adding a Plugin: Steps</h3>
+
+<p><strong>Create one file:</strong> <code class="language-plaintext highlighter-rouge">lib/galaxy/files/sources/mycloud.py</code></p>
+
+<ol>
+  <li>Define Pydantic config models (template + resolved)</li>
+  <li>Create plugin class with <code class="language-plaintext highlighter-rouge">plugin_type</code> (enables auto-discovery)</li>
+  <li>Implement <code class="language-plaintext highlighter-rouge">_open_fs()</code> returning fsspec filesystem</li>
+  <li>Register configs in <code class="language-plaintext highlighter-rouge">lib/galaxy/files/templates/models.py</code> type unions</li>
+  <li>Add documentation to <code class="language-plaintext highlighter-rouge">doc/source/admin/data.md</code></li>
+</ol>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="adding-a-plugin-example">Adding a Plugin: Example</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Pydantic models: template allows Jinja2, resolved requires concrete values
+</span><span class="k">class</span> <span class="nc">MyCloudTemplateConfig</span><span class="p">(</span><span class="n">FsspecBaseFileSourceTemplateConfiguration</span><span class="p">):</span>
+    <span class="n">token</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TemplateExpansion</span><span class="p">,</span> <span class="bp">None</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">endpoint</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TemplateExpansion</span><span class="p">,</span> <span class="bp">None</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="k">class</span> <span class="nc">MyCloudConfig</span><span class="p">(</span><span class="n">FsspecBaseFileSourceConfiguration</span><span class="p">):</span>
+    <span class="n">token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">endpoint</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="c1"># Plugin class: only _open_fs() required
+</span><span class="k">class</span> <span class="nc">MyCloudFilesSource</span><span class="p">(</span><span class="n">FsspecFilesSource</span><span class="p">[</span><span class="n">MyCloudTemplateConfig</span><span class="p">,</span> <span class="n">MyCloudConfig</span><span class="p">]):</span>
+    <span class="n">plugin_type</span> <span class="o">=</span> <span class="sh">"</span><span class="s">mycloud</span><span class="sh">"</span>              <span class="c1"># Auto-discovery key
+</span>    <span class="n">required_module</span> <span class="o">=</span> <span class="n">MyCloudFS</span>          <span class="c1"># Optional: lazy import check
+</span>    <span class="n">required_package</span> <span class="o">=</span> <span class="sh">"</span><span class="s">mycloud-fsspec</span><span class="sh">"</span>  <span class="c1"># Optional: helpful error message
+</span>
+    <span class="n">template_config_class</span> <span class="o">=</span> <span class="n">MyCloudTemplateConfig</span>
+    <span class="n">resolved_config_class</span> <span class="o">=</span> <span class="n">MyCloudConfig</span>
+
+    <span class="k">def</span> <span class="nf">_open_fs</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">cache_options</span><span class="p">):</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">config</span>
+        <span class="k">return</span> <span class="n">fsspec</span><span class="p">.</span><span class="nf">filesystem</span><span class="p">(</span><span class="sh">"</span><span class="s">mycloud</span><span class="sh">"</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="n">config</span><span class="p">.</span><span class="n">token</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="stock-plugins-built-in-sources">Stock Plugins: Built-in Sources</h3>
+
+<p><img src="../../images/file_sources_posix_deployment.plantuml.svg" alt="POSIX Deployment" /></p>
+
+<p>Three sources in <code class="language-plaintext highlighter-rouge">lib/galaxy/files/sources/galaxy.py</code> extend <code class="language-plaintext highlighter-rouge">PosixFilesSource</code>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Class</th>
+      <th>Scheme</th>
+      <th>Root Template</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">UserFtpFilesSource</code></td>
+      <td><code class="language-plaintext highlighter-rouge">gxftp://</code></td>
+      <td><code class="language-plaintext highlighter-rouge">${user.ftp_dir}</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">LibraryImportFilesSource</code></td>
+      <td><code class="language-plaintext highlighter-rouge">gximport://</code></td>
+      <td><code class="language-plaintext highlighter-rouge">${config.library_import_dir}</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">UserLibraryImportFilesSource</code></td>
+      <td><code class="language-plaintext highlighter-rouge">gxuserimport://</code></td>
+      <td><code class="language-plaintext highlighter-rouge">${config.user_library_import_dir}/${user.email}</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="posix-security--behaviors">POSIX Security &amp; Behaviors</h3>
+
+<p><strong>Symlink Protection</strong> (<code class="language-plaintext highlighter-rouge">lib/galaxy/files/sources/posix.py</code>)</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">config</span><span class="p">.</span><span class="n">enforce_symlink_security</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nf">safe_contains</span><span class="p">(</span><span class="n">effective_root</span><span class="p">,</span> <span class="n">source_native_path</span><span class="p">,</span> <span class="n">allowlist</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">_allowlist</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="nc">Exception</span><span class="p">(</span><span class="sh">"</span><span class="s">Operation not allowed.</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">safe_contains</code> in <code class="language-plaintext highlighter-rouge">util/path/__init__.py</code> validates against <code class="language-plaintext highlighter-rouge">symlink_allowlist</code></p>
+
+<p><strong>Atomic Writes</strong> (<code class="language-plaintext highlighter-rouge">lib/galaxy/files/sources/posix.py</code>)</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">target_native_path_part</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="sa">f</span><span class="sh">"</span><span class="s">_</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">.part</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">shutil</span><span class="p">.</span><span class="nf">copyfile</span><span class="p">(</span><span class="n">native_path</span><span class="p">,</span> <span class="n">target_native_path_part</span><span class="p">)</span>
+<span class="n">os</span><span class="p">.</span><span class="nf">rename</span><span class="p">(</span><span class="n">target_native_path_part</span><span class="p">,</span> <span class="n">target_native_path</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Move vs Copy</strong>: <code class="language-plaintext highlighter-rouge">delete_on_realize</code> config—FTP defaults to <code class="language-plaintext highlighter-rouge">ftp_upload_purge</code> (frees quota)</p>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<h3 id="user-driven-storage">User-Driven Storage</h3>
+
+<p><strong>Global Storage:</strong> Admin configures all sources globally in <code class="language-plaintext highlighter-rouge">file_sources_conf.yml</code> for all users</p>
+
+<p><strong>Problem:</strong> Doesn’t scale—diverse user needs (buckets, projects, credentials)</p>
+
+<p><strong>Solution:</strong> Template catalog + user instances</p>
+<ul>
+  <li>Admin provides templates</li>
+  <li>Users instantiate with their credentials</li>
+  <li>Allows multiple instances per template</li>
+</ul>
+
+<hr />
+
+<p>class: reduce70 left-aligned</p>
+
+<h3 id="template-catalog-structure">Template Catalog Structure</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># file_source_templates.yml (admin-configured)</span>
+<span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">s3_template</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">AWS S3 Bucket</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s">Connect to your AWS S3 bucket</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="m">1</span>
+
+  <span class="na">variables</span><span class="pi">:</span>
+    <span class="na">bucket</span><span class="pi">:</span>
+      <span class="na">label</span><span class="pi">:</span> <span class="s">Bucket Name</span>
+      <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+    <span class="na">region</span><span class="pi">:</span>
+      <span class="na">label</span><span class="pi">:</span> <span class="s">AWS Region</span>
+      <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+      <span class="na">default</span><span class="pi">:</span> <span class="s">us-east-1</span>
+
+  <span class="na">secrets</span><span class="pi">:</span>
+    <span class="na">access_key_id</span><span class="pi">:</span>
+      <span class="na">label</span><span class="pi">:</span> <span class="s">Access Key ID</span>
+    <span class="na">secret_access_key</span><span class="pi">:</span>
+      <span class="na">label</span><span class="pi">:</span> <span class="s">Secret Access Key</span>
+
+  <span class="na">configuration</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">s3fs</span>
+    <span class="na">bucket</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+    <span class="na">access_key_id</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: center</p>
+
+<h3 id="template-system-pydantic-models">Template System: Pydantic Models</h3>
+
+<p><img src="../../images/file_sources_pydantic_models.plantuml.svg" alt="Two-Tier Configuration Models" /></p>
+
+<hr />
+
+<p>class: reduce90 left-aligned</p>
+
+<h3 id="two-tier-configuration">Two-Tier Configuration</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Template-stage: allows Jinja2 expressions
+</span><span class="k">class</span> <span class="nc">S3FsTemplateConfiguration</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="sh">"</span><span class="s">s3fs</span><span class="sh">"</span><span class="p">]</span>
+    <span class="n">bucket</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TemplateExpansion</span><span class="p">]</span>  <span class="c1"># ""
+</span>    <span class="n">access_key_id</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TemplateExpansion</span><span class="p">]</span>
+
+<span class="c1"># Resolved-stage: concrete values only
+</span><span class="k">class</span> <span class="nc">S3FsFilesSourceConfiguration</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="sh">"</span><span class="s">s3fs</span><span class="sh">"</span><span class="p">]</span>
+    <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># Must be concrete string
+</span>    <span class="n">access_key_id</span><span class="p">:</span> <span class="nb">str</span>
+</code></pre></div></div>
+
+<p><strong>Three-stage validation:</strong> Template syntax → User input → Resolved config</p>
+
+<hr />
+
+<p>class: center</p>
+
+<h3 id="template-expansion-jinja2-resolution">Template Expansion: Jinja2 Resolution</h3>
+
+<p><img src="../../images/file_sources_template_expansion.plantuml.svg" alt="Template Expansion Data Flow" /></p>
+
+<hr />
+
+<p>class: reduce90 left-aligned</p>
+
+<h3 id="jinja2-contexts">Jinja2 Contexts</h3>
+
+<p>Four available contexts for variable resolution:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="sh">"</span><span class="s">variables</span><span class="sh">"</span><span class="p">:</span> <span class="n">variables</span><span class="p">,</span>      <span class="c1"># User form input
+</span>    <span class="sh">"</span><span class="s">secrets</span><span class="sh">"</span><span class="p">:</span> <span class="n">secrets</span><span class="p">,</span>          <span class="c1"># From Vault
+</span>    <span class="sh">"</span><span class="s">user</span><span class="sh">"</span><span class="p">:</span> <span class="n">user</span><span class="p">,</span>                <span class="c1"># Galaxy user (username, email, roles)
+</span>    <span class="sh">"</span><span class="s">environ</span><span class="sh">"</span><span class="p">:</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">,</span>       <span class="c1"># Environment vars
+</span><span class="p">}</span>
+<span class="n">expanded</span> <span class="o">=</span> <span class="n">jinja_env</span><span class="p">.</span><span class="nf">expand</span><span class="p">(</span><span class="n">template</span><span class="p">.</span><span class="nf">model_dump</span><span class="p">(),</span> <span class="n">context</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Custom filters:</strong> <code class="language-plaintext highlighter-rouge">ensure_path_component</code>, <code class="language-plaintext highlighter-rouge">asbool</code></p>
+
+<hr />
+
+<p>class: center</p>
+
+<h3 id="user-instance-lifecycle">User Instance Lifecycle</h3>
+
+<p><img src="../../images/file_sources_instance_creation.plantuml.svg" alt="Instance Creation Sequence" /></p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="instance-crud-operations">Instance CRUD Operations</h3>
+
+<p><strong>Persistence:</strong> <code class="language-plaintext highlighter-rouge">user_file_source</code> table + Vault</p>
+
+<p><strong>Validation workflow:</strong></p>
+<ol>
+  <li>Payload schema validation against template</li>
+  <li>Template variable/secret validation</li>
+  <li>Connection testing (root-level listing)</li>
+  <li>Persist to database + Vault</li>
+</ol>
+
+<p><strong>Security:</strong> Ownership validation, user-bound isolation</p>
+
+<hr />
+
+<p>class: reduce90 left-aligned</p>
+
+<h3 id="oauth-20-integration-pattern">OAuth 2.0 Integration Pattern</h3>
+
+<p><strong>Authorization flow:</strong></p>
+<ol>
+  <li>User clicks “Authorize” → Galaxy generates auth URL + pre-generates UUID</li>
+  <li>Redirect to provider (Dropbox, Google) → User grants permissions</li>
+  <li>Provider callback with code → Galaxy exchanges for tokens</li>
+  <li>Tokens stored in Vault → Instance created</li>
+</ol>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Dropbox OAuth template</span>
+<span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">dropbox_oauth</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">Dropbox</span>
+  <span class="na">secrets</span><span class="pi">:</span>
+    <span class="na">client_id</span><span class="pi">:</span> <span class="s">...</span>
+    <span class="na">client_secret</span><span class="pi">:</span> <span class="s">...</span>
+  <span class="na">configuration</span><span class="pi">:</span>
+    <span class="na">type</span><span class="pi">:</span> <span class="s">dropbox</span>
+    <span class="na">access_token</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+    <span class="na">refresh_token</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>class: center</p>
+
+<h3 id="oauth-20-authorization-flow">OAuth 2.0 Authorization Flow</h3>
+
+<p><img src="../../images/file_sources_oauth_sequence.plantuml.svg" alt="OAuth Flow Sequence" /></p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="url-unification">URL Unification</h3>
+
+<p><strong>Before PR #15497:</strong> Separate code paths</p>
+<ul>
+  <li>HTTP/FTP: Custom URL handler</li>
+  <li>S3: Separate S3 handler</li>
+  <li>DRS: Separate DRS handler</li>
+  <li>File sources: <code class="language-plaintext highlighter-rouge">gxfiles://</code> only</li>
+</ul>
+
+<p><strong>After:</strong> All URLs routed through file sources</p>
+<ul>
+  <li>Unified authentication</li>
+  <li><code class="language-plaintext highlighter-rouge">url_regex</code> for site-specific handlers</li>
+  <li><code class="language-plaintext highlighter-rouge">http_headers</code> for Bearer tokens, Basic Auth</li>
+</ul>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="url-routing-with-credentials">URL Routing with Credentials</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Site-specific URL routing with auth</span>
+<span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">http</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">internal_api</span>
+  <span class="na">label</span><span class="pi">:</span> <span class="s">Internal Data API</span>
+  <span class="na">url_regex</span><span class="pi">:</span> <span class="s2">"</span><span class="s">^https://api</span><span class="se">\\</span><span class="s">.internal</span><span class="se">\\</span><span class="s">.org/"</span>
+  <span class="na">http_headers</span><span class="pi">:</span>
+    <span class="na">Authorization</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Bearer</span><span class="nv"> </span><span class="s">${secrets.api_token}"</span>
+
+<span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">http</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">public_http</span>
+  <span class="na">label</span><span class="pi">:</span> <span class="s">Public HTTP</span>
+  <span class="na">url_regex</span><span class="pi">:</span> <span class="s2">"</span><span class="s">^https?://.*"</span>
+  <span class="c1"># No auth - public access</span>
+</code></pre></div></div>
+
+<p>URLs automatically route to correct handler based on scoring</p>
+
+<hr />
+
+<p>class: center</p>
+
+<h3 id="api-integration">API Integration</h3>
+
+<p><img src="../../images/file_sources_api_flow.plantuml.svg" alt="Remote Files API Flow" /></p>
+
+<hr />
+
+<p>class: enlarge120</p>
+
+<h3 id="api-endpoints">API Endpoints</h3>
+
+<p><strong>Remote Files API (browsing):</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">GET /api/remote_files</code> - Directory listing with pagination</li>
+  <li><code class="language-plaintext highlighter-rouge">GET /api/remote_files/plugins</code> - Plugin enumeration</li>
+  <li><code class="language-plaintext highlighter-rouge">POST /api/remote_files</code> - Entry creation (writable sources)</li>
+</ul>
+
+<p><strong>File Sources API (templates/instances):</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">GET /api/file_source_templates</code> - Template catalog</li>
+  <li><code class="language-plaintext highlighter-rouge">POST /api/file_source_instances</code> - Create instance</li>
+  <li><code class="language-plaintext highlighter-rouge">GET /api/file_source_instances</code> - List user instances</li>
+  <li><code class="language-plaintext highlighter-rouge">PUT/DELETE /api/file_source_instances/{uuid}</code> - Update/delete</li>
+</ul>
+
+<hr />
+
+<p>class: center</p>
+
+<h3 id="evolution-timeline">Evolution Timeline</h3>
+
+<p><img src="../../images/file_sources_evolution.mermaid.svg" alt="File Sources Evolution" /></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>.footnote[Previous: <a href="/training-material/topics/dev/tutorials/architecture-plugins/slides.html">Galaxy Plugin Architecture</a></td>
+      <td>Next: <a href="/training-material/topics/dev/tutorials/architecture-markdown/slides.html">Galaxy Markdown Architecture</a>]</td>
+    </tr>
+  </tbody>
+</table>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>File Sources provide hierarchical file access for import/export</li>
+
+<li>User-defined templates enable personal cloud storage connections</li>
+
+<li>fsspec enables easy integration of 40+ storage backends</li>
+
+<li>OAuth 2.0 supports seamless cloud service authentication</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/dev/tutorials/architecture-file-sources/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/./topics/dev/tutorials/architecture-file-sources/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/05ce2d3c522f8a7b531dc84f9792f7e473939485">05ce2d3</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+
+    </body>
+</html>

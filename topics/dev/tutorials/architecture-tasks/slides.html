@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Architecture 07 - Galaxy Task Management with Celery</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@05ce2d3c522f8a7b531dc84f9792f7e473939485",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture-tasks/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Architecture 07 - Galaxy Task Management with Celery">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-02-19 09:49:54 +0000">
+<meta name="DC.creator" content="John Chilton">
+
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Slide Deck: Architecture 07 - Galaxy Task Management with Celery">
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/dev/tutorials/architecture-tasks/slides.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Galaxy Administrators"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Architecture 07 - Galaxy Task Management with Celery",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-02-19 09:49:54 +0000",
+  "datePublished": "2026-02-19 09:49:54 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+  },
+  "abstract": "layout: introduction_slides",
+  "learningResourceType": "slides",
+  "name": "Architecture 07 - Galaxy Task Management with Celery",
+  "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture-tasks/slides.html",
+  "version": 1,
+  "timeRequired": "PT15M",
+  "teaches": "- Understand when to use tasks vs web requests\n- Learn how to declare Celery tasks\n- Use Pydantic for task serialization\n- Understand best practices",
+  "keywords": [
+    "Development in Galaxy"
+  ],
+  "description": "## Abstract\n\nlayout: introduction_slides\n\n\n## Questions this  will address\n\n - How does Galaxy handle long-running tasks?\n - When should I use Celery?\n - How do I create a new Galaxy task?\n\n\n## Learning Objectives\n\n- Understand when to use tasks vs web requests\n- Learn how to declare Celery tasks\n- Use Pydantic for task serialization\n- Understand best practices\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/",
+      "name": "John Chilton",
+      "image": "https://avatars.githubusercontent.com/jmchilton",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6794-0756",
+      "@id": "https://orcid.org/0000-0002-6794-0756"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": []
+}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+
+
+    <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/dev" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/architecture-tasks/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+<br/>
+<br/>
+
+# Architecture 07 - Galaxy Task Management with Celery
+
+<br/>
+<br/>
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jmchilton?s=36" alt="John Chilton avatar" width="36" class="avatar" />
+    John Chilton</a>
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 5em;">
+
+
+<i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a> |
+
+
+
+
+
+
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- How does Galaxy handle long-running tasks?
+
+- When should I use Celery?
+
+- How do I create a new Galaxy task?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Understand when to use tasks vs web requests
+
+- Learn how to declare Celery tasks
+
+- Use Pydantic for task serialization
+
+- Understand best practices
+
+
+---
+
+
+layout: introduction_slides
+topic_name: Galaxy Architecture
+
+# Architecture 07 - Galaxy Task Management with Celery
+
+*The architecture surrounding Galaxy task management.*
+
+---
+
+
+
+layout: true
+name: left-aligned
+class: left, middle
+---
+layout: true
+class: center, middle
+
+
+
+---
+
+
+class: center
+
+![Processing requests on the server](../../images/asgi_app.plantuml.svg)
+
+
+---
+
+
+class: enlarge120
+
+### Avoid Doing Work in Web Threads
+
+Web servers are a terrible place to do work. Traditional Python WSGI servers
+are meant for processing requests that take less a minute - they are meant
+for long running tasks.
+
+This request/response cycle is inappropriate for deleting all the files in a
+history, submitted 10,000 batch jobs for a collection, building a zip file for
+a library folder.
+
+
+---
+
+
+class: center
+
+![Zoom in on Backend](../../images/core_backend_controllers.plantuml.svg)
+
+
+---
+
+
+class: center
+
+![Infrastructure including Celery](../../images/core_backend_celery.plantuml.svg)
+
+???
+
+Handling a task description off to Celery allows the web server to respond right
+away and avoid various hacks. Celery is meant for these long running tasks and has
+a set of operations for handling them properly.
+
+
+---
+
+
+class: center
+
+![Celery Overview](https://d33wubrfki0l68.cloudfront.net/f6a5a0c33eac1250034747d375da9a396e5488ce/0196f/media/async-task-python.png)
+
+
+---
+
+
+class: enlarge150
+
+### Downsides of Celery
+
+Adds more complexity to deploying Galaxy. Celery needs to be available to Galaxy
+at runtime, production Galaxy instances need a broker and a backend.
+
+
+---
+
+
+class: reduce90
+
+### Gravity + Celery
+
+.code[```
+$ galaxy
+Registered galaxy config: /home/nate/work/galaxy/config/galaxy.yml
+Creating or updating service gunicorn
+Creating or updating service celery
+Creating or updating service celery-beat
+celery: added process group
+2022-01-20 14:44:24,619 INFO spawned: &apos;celery&apos; with pid 291651
+celery-beat: added process group
+2022-01-20 14:44:24,620 INFO spawned: &apos;celery-beat&apos; with pid 291652
+gunicorn: added process group
+2022-01-20 14:44:24,622 INFO spawned: &apos;gunicorn&apos; with pid 291653
+celery                           STARTING
+celery-beat                      STARTING
+gunicorn                         STARTING
+==&gt; /home/nate/work/galaxy/database/gravity/log/gunicorn.log &lt;==
+...log output follows...
+```]
+
+???
+
+Start Galaxy with Gravity starts not only the Python web server (gunicorn)
+running the Galaxy application but also celery and required services.
+
+
+---
+
+
+class: center
+
+![Celery tasks being registered at startup](../../images/celery_tasks_list.png)
+
+
+---
+
+
+class: enlarge150
+
+### Declaring a Task
+
+- Placed in `galaxy.celery.tasks`.
+- We&apos;ve placed a layer around Celery to mirror what we&apos;re with API endpoints.
+  - Typed functions with Pydantic inputs implicitly mapped.
+  - Implicit type based dependency injection from Galaxy&apos;s DI container (using Lagom)
+  - Feels a lot like writing an API endpoint.
+
+
+---
+
+
+### A Simple Task
+
+.code[```
+@galaxy_task(
+    ignore_result=True,
+    action=&quot;setting up export history job&quot;
+)
+def export_history(
+    model_store_manager: ModelStoreManager,
+    request: SetupHistoryExportJob,
+):
+    model_store_manager.setup_history_export_job(request)
+```]
+
+
+---
+
+
+class: reduce70
+
+### The `galaxy_task` Decorator
+
+.code[```python
+@galaxy_task(
+    ignore_result=True,
+    action=&quot;setting up export history job&quot;
+)
+def export_history(
+    model_store_manager: ModelStoreManager,
+    request: SetupHistoryExportJob,
+):
+    model_store_manager.setup_history_export_job(request)
+```]
+
+- `galaxy_task` is a wrapper around Celery&apos;s `task` decorator
+- Wrap a simple function to turn it into a task.
+- Ensure all inputs are JSON serializable or components in Galaxy&apos;s dependency injection container
+
+
+---
+
+
+### Celery and Pydantic
+
+The `request` argument to `export_history` is a Pydantic model type named
+`SetupHistoryExportJob`. These are mostly defined in `galaxy.schema.tasks`.
+
+.code[```python
+from pydantic import BaseModel
+
+class SetupHistoryExportJob(BaseModel):
+    history_id: int
+    job_id: int
+    store_directory: str
+    include_files: bool
+    include_hidden: bool
+    include_deleted: bool
+```]
+
+
+---
+
+
+class: enlarge200
+
+### Celery and Pydantic - Implementation
+
+- Custom JSON encoding and decoding to adapt Celery to Pydantic.
+- Implemented in `galaxy.celery._serialization`.
+- Inject `__type__` and `__class__` attributes into JSON description.
+- `@galaxy_task` decorator sets Celery `serializer` attribute.
+
+
+---
+
+
+### Celery and Dependency Injection
+
+.code[```
+@galaxy_task(
+    ignore_result=True,
+    action=&quot;setting up export history job&quot;
+)
+def export_history(
+    model_store_manager: ModelStoreManager,
+    request: SetupHistoryExportJob,
+):
+    model_store_manager.setup_history_export_job(request)
+```]
+
+- The type declaration on `model_store_manager` of `ModelStoreManager` causes
+  the Galaxy manager object of this class to be passed to the function when the
+  task is running.
+- Client does not need to have any knowledge of this class.
+
+
+---
+
+
+### Executing Tasks from Galaxy
+
+See `lib/galaxy/tools/imp_exp/__init__.py`:
+
+.code[```python
+from galaxy.schema.tasks import SetupHistoryExportJob
+
+...
+
+    request = SetupHistoryExportJob(
+        history_id=history.id,
+        job_id=self.job_id,
+        store_directory=store_directory,
+        include_files=True,
+        include_hidden=include_hidden,
+        include_deleted=include_deleted,
+    )
+    export_history.delay(request=request)
+
+```]
+
+The delay method is created implicitly from the `galaxy_task` decorator.
+
+
+---
+
+
+class: enlarge200
+
+### Best Practices
+
+- Place tasks in `galaxy.celery.tasks`.
+- Keep the tasks as thin as possible (ideally simply delegate inputs
+  to a manager or another Galaxy component independent of Celery).
+- Ensure required/injected Galaxy components as small and decomposed as
+  possible.
+- Place new request definition argument types in `galaxy.schema.tasks`.
+
+
+---
+
+
+### Existing Tasks Success Stories
+
+
+
+
+---
+
+
+class: enlarge150
+
+### PDF Export Problems
+
+- We added PDF export of Galaxy Markdown using weasyprint
+- Generation of PDF took too long, feature was quite unstable
+
+
+---
+
+
+class: enlarge150
+
+### Short Term Storage (STS)
+
+- A Galaxy component for managing user downloadable files that only
+  need to exist for a little time.
+- Traditionally, these kind of files have required a lot of
+  hacking to do well in Galaxy (tracking transient request-like stuff in data model, etc..)
+- Not just unoptimized by default, but unusable
+- Required customizing nginx routes, special web server plugins, etc...
+
+https://github.com/galaxyproject/galaxy/pull/13691
+
+
+---
+
+
+class: enlarge150
+
+.code[```
+class GeneratePdfDownload(BaseModel):
+    short_term_storage_request_id: str
+    basic_markdown: str
+    document_type: PdfDocumentType
+```]
+
+
+---
+
+
+### Robust PDF Export
+
+.code[```python
+from galaxy.managers.markdown_util import generate_branded_pdf
+
+@galaxy_task(
+    action=&quot;preparing Galaxy Markdown PDF for download&quot;
+)
+def prepare_pdf_download(
+    request: GeneratePdfDownload,
+    config: GalaxyAppConfiguration,
+    short_term_storage_monitor: ShortTermStorageMonitor,
+):
+    generate_branded_pdf(
+        request,
+        config,
+        short_term_storage_monitor,
+    )
+```]
+
+
+---
+
+
+class: enlarge120
+
+### Exporting Histories, Invocations, Libraries
+
+.code[```
+@galaxy_task(
+    action=&quot;generate and stage a workflow invocation store for download&quot;
+)
+def prepare_invocation_download(
+    model_store_manager: ModelStoreManager,
+    request: GenerateInvocationDownload,
+):
+    model_store_manager.prepare_invocation_download(
+        request
+    )
+```]
+
+https://github.com/galaxyproject/galaxy/pull/12533
+
+
+---
+
+
+class: enlarge150
+
+### Optimized Uploads
+
+- Decomposed job handling, precursor to migrating more job components to Celery
+- Converting uploads to tasks signficantly sped up running Galaxy tests
+  - API tests went from 2.5 hours to 50 minutes
+  - Amazing speed up for small jobs
+- Exploring task composition
+
+https://github.com/galaxyproject/galaxy/pull/13655
+
+
+---
+
+
+### Uploads - Task Composition
+
+See `lib/galaxy/tools/execute.py`
+
+.code[```
+async_result = (
+    setup_fetch_data.s(job_id, raw_tool_source=raw_tool_source)
+    | fetch_data.s(job_id=job_id).set(queue=&quot;galaxy.external&quot;)
+    | set_job_metadata.s(
+        extended_metadata_collection=&quot;extended&quot; in tool.app.config.metadata_strategy,
+        job_id=job_id,
+    ).set(
+        queue=&quot;galaxy.external&quot;,
+        link_error=finish_job.si(job_id=job_id, raw_tool_source=raw_tool_source)
+    )
+    | finish_job.si(job_id=job_id, raw_tool_source=raw_tool_source)
+)()
+```]
+
+
+---
+
+
+class: enlarge200
+
+### Batch Operations
+
+Task-based operations enable the most expensive of the new history&apos;s batch operations.
+
+- Changing datatypes
+- Purging datasets
+
+https://github.com/galaxyproject/galaxy/pull/14042
+
+
+---
+
+
+class: enlarge200
+
+### Future Work
+
+- *Migrating tool submission to tasks*
+- Workflow scheduling
+- Importing shared histories
+
+https://github.com/galaxyproject/galaxy/issues/11721
+
+.footnote[Previous: [Dependency Injection in Galaxy](/training-material/topics/dev/tutorials/architecture-dependency-injection/slides.html) | Next: [Galaxy Application Components: Models, Managers, and Services](/training-material/topics/dev/tutorials/architecture-application-components/slides.html)]
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- Web servers are inappropriate for long-running work
+
+- Celery handles async task execution
+
+- Gravity manages Celery processes
+
+- Tasks use typed functions with Pydantic
+
+- DI works in tasks just like controllers
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jmchilton?s=36" alt="John Chilton avatar" width="36" class="avatar" />
+    John Chilton</a>
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+</div>
+
+Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br/>
+
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+        
+    </body>
+</html>

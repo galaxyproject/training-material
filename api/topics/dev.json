@@ -55,6 +55,11 @@
       "description": "These are the core, foundational topics for Galaxy development."
     },
     {
+      "id": "architecture",
+      "title": "Architecture",
+      "description": "These topics cover the architecture of Galaxy and how the different components interact with each other."
+    },
+    {
       "id": "api",
       "title": "API",
       "description": "Interacting with the Galaxy API"
@@ -81,6 +86,86 @@
     }
   ],
   "materials": [
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Architecture 08 - Galaxy Application Components: Models, Managers, and Services",
+      "questions": [
+        "How is business logic organized in Galaxy?",
+        "What are models, managers, and services?",
+        "How does the database layer work?"
+      ],
+      "objectives": [
+        "Understand the three-layer architecture",
+        "Learn about SQLAlchemy and the ORM",
+        "Understand database migrations with Alembic",
+        "Navigate the Galaxy data model"
+      ],
+      "time_estimation": "15m",
+      "key_points": [
+        "Services handle high-level API processing",
+        "Managers contain business logic",
+        "Models mediate database interactions",
+        "SQLAlchemy provides ORM",
+        "Alembic handles schema migrations"
+      ],
+      "subtopic": "architecture",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/dev/tutorials/architecture-application-components/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "architecture-application-components",
+      "dir": "topics/dev/tutorials/architecture-application-components",
+      "id": "dev/architecture-application-components",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-application-components/tutorial.json",
+      "tools": [],
+      "supported_servers": [],
+      "supported_servers_matrix": [],
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": []
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [],
+        "slides": [],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-application-components/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-application-components/slides.json"
+      }
+    },
     {
       "layout": "tutorial_slides",
       "logo": "GTN",
@@ -457,6 +542,85 @@
     {
       "layout": "tutorial_slides",
       "logo": "GTN",
+      "title": "Architecture 09 - Galaxy Plugin Architecture",
+      "questions": [
+        "How do I extend Galaxy?",
+        "What components can be plugged in?",
+        "How does the plugin system work?"
+      ],
+      "objectives": [
+        "Understand Galaxy's plugin architecture",
+        "Learn about major plugin types",
+        "Use `plugin_config.py` pattern",
+        "Create custom plugins"
+      ],
+      "time_estimation": "15m",
+      "key_points": [
+        "Nearly everything in Galaxy is a plugin",
+        "`plugin_config.py` provides standardized loading",
+        "Datatypes, tools, job runners, object stores are all pluggable",
+        "Visualization and workflow modules extend functionality"
+      ],
+      "subtopic": "architecture",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/dev/tutorials/architecture-plugins/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "architecture-plugins",
+      "dir": "topics/dev/tutorials/architecture-plugins",
+      "id": "dev/architecture-plugins",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-plugins/tutorial.json",
+      "tools": [],
+      "supported_servers": [],
+      "supported_servers_matrix": [],
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": []
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [],
+        "slides": [],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-plugins/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-plugins/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
       "title": "Prerequisites for building software/conda packages",
       "subtopic": "dependencies",
       "questions": [
@@ -549,6 +713,165 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/conda_sys/slides.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/conda_sys/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Architecture 05 - Galaxy Web Frameworks",
+      "questions": [
+        "How does Galaxy handle web requests?",
+        "What web frameworks does Galaxy use?",
+        "What is the difference between ASGI and WSGI?"
+      ],
+      "objectives": [
+        "Understand the request/response cycle",
+        "Learn about ASGI, Starlette, and FastAPI",
+        "Understand WSGI and legacy routing",
+        "Learn about middleware layers"
+      ],
+      "time_estimation": "25m",
+      "key_points": [
+        "FastAPI (ASGI) for new API endpoints",
+        "WSGI for legacy endpoints",
+        "Middleware handles cross-cutting concerns",
+        "Routing maps URLs to controllers",
+        "Three types of controllers: FastAPI, WSGI API, legacy web"
+      ],
+      "subtopic": "architecture",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/dev/tutorials/architecture-frameworks/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "architecture-frameworks",
+      "dir": "topics/dev/tutorials/architecture-frameworks",
+      "id": "dev/architecture-frameworks",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-frameworks/tutorial.json",
+      "tools": [],
+      "supported_servers": [],
+      "supported_servers_matrix": [],
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": []
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [],
+        "slides": [],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-frameworks/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-frameworks/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Architecture 14 - Galaxy Startup Process",
+      "questions": [
+        "What happens when Galaxy starts?",
+        "What is the startup sequence?",
+        "What gets loaded during startup?"
+      ],
+      "objectives": [
+        "Understand the Galaxy startup sequence",
+        "Learn about configuration initialization",
+        "Understand dependency installation",
+        "Learn about database migrations and plugin loading"
+      ],
+      "time_estimation": "15m",
+      "key_points": [
+        "Startup: clone, config copy, venv, dependencies, migrations",
+        "Datatypes, tools, and plugins loaded at startup",
+        "Database migrations run on first startup",
+        "Default setup 'just works' for development"
+      ],
+      "subtopic": "architecture",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/dev/tutorials/architecture-startup/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "architecture-startup",
+      "dir": "topics/dev/tutorials/architecture-startup",
+      "id": "dev/architecture-startup",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-startup/tutorial.json",
+      "tools": [],
+      "supported_servers": [],
+      "supported_servers_matrix": [],
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": []
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [],
+        "slides": [],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-startup/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-startup/slides.json"
       }
     },
     {
@@ -658,6 +981,92 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/visualization-generic/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/visualization-generic/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Architecture 16 - Galaxy Testing",
+      "questions": [
+        "Where should I put a new test?",
+        "How do I write an API test?",
+        "When should I use an integration test vs an API test?",
+        "How do I test code that requires special Galaxy configuration?",
+        "How do I write Selenium/Playwright tests?"
+      ],
+      "objectives": [
+        "Use the decision tree to select appropriate test type",
+        "Write Python unit tests for isolated components",
+        "Write API tests using populators and assertions",
+        "Write integration tests with custom Galaxy configuration",
+        "Write Selenium tests using the smart component system",
+        "Understand CI workflows for each test type"
+      ],
+      "time_estimation": "45m",
+      "key_points": [
+        "Unit tests for isolated components (no server needed)",
+        "API tests for backend behavior via Galaxy API",
+        "Integration tests for custom Galaxy configurations",
+        "Framework tests for tool/workflow XML validation",
+        "Selenium/Playwright tests for UI with browser automation",
+        "Populators simplify test data creation",
+        "Each test type has a dedicated CI workflow"
+      ],
+      "subtopic": "architecture",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/dev/tutorials/architecture-tests/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "architecture-tests",
+      "dir": "topics/dev/tutorials/architecture-tests",
+      "id": "dev/architecture-tests",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-tests/tutorial.json",
+      "tools": [],
+      "supported_servers": [],
+      "supported_servers_matrix": [],
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": []
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [],
+        "slides": [],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-tests/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-tests/slides.json"
       }
     },
     {
@@ -1758,6 +2167,163 @@
     {
       "layout": "tutorial_slides",
       "logo": "GTN",
+      "title": "Architecture 13 - Galaxy Dependencies Management",
+      "questions": [
+        "How does Galaxy manage dependencies?",
+        "What is the virtualenv used for?",
+        "Where do JavaScript dependencies come from?"
+      ],
+      "objectives": [
+        "Understand Python dependency management",
+        "Understand JavaScript dependency management",
+        "Learn about the wheels server"
+      ],
+      "time_estimation": "5m",
+      "key_points": [
+        "Python: virtualenv with pip and wheels from galaxyproject.org",
+        "JavaScript: npm/yarn with package.json",
+        "No compilation required by default",
+        "Binary wheels for fast installation"
+      ],
+      "subtopic": "architecture",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/dev/tutorials/architecture-dependencies/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "architecture-dependencies",
+      "dir": "topics/dev/tutorials/architecture-dependencies",
+      "id": "dev/architecture-dependencies",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-dependencies/tutorial.json",
+      "tools": [],
+      "supported_servers": [],
+      "supported_servers_matrix": [],
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": []
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [],
+        "slides": [],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-dependencies/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-dependencies/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Architecture 04 - Galaxy Files and Directory Structure",
+      "questions": [
+        "How is the Galaxy codebase organized?",
+        "Where do I find different components?",
+        "What is the difference between `lib` and `packages`?"
+      ],
+      "objectives": [
+        "Navigate the Galaxy repository structure",
+        "Understand the `lib` vs `packages` organization",
+        "Locate key files and directories"
+      ],
+      "time_estimation": "10m",
+      "key_points": [
+        "Project documentation in root (README, CONTRIBUTING, CODE_OF_CONDUCT)",
+        "Code in `lib` (monolithic) and `packages` (modular)",
+        "Tests in `test` and `lib/galaxy_test`",
+        "CI configuration in `.github`",
+        "Packages are published to PyPI"
+      ],
+      "subtopic": "architecture",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/dev/tutorials/architecture-files/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "architecture-files",
+      "dir": "topics/dev/tutorials/architecture-files",
+      "id": "dev/architecture-files",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-files/tutorial.json",
+      "tools": [],
+      "supported_servers": [],
+      "supported_servers_matrix": [],
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": []
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [],
+        "slides": [],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-files/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-files/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
       "title": "Tool Dependencies and Containers",
       "subtopic": "dependencies",
       "questions": [
@@ -2346,26 +2912,27 @@
     {
       "layout": "tutorial_slides",
       "logo": "GTN",
-      "title": "Galaxy Code Architecture",
+      "title": "Architecture 06 - Dependency Injection in Galaxy",
       "questions": [
-        "How is the Galaxy code structured?",
-        "What do the various other projects related to Galaxy do?",
-        "What happens when I start Galaxy?"
+        "What is dependency injection?",
+        "Why does Galaxy use dependency injection?",
+        "How do I use DI in controllers and tasks?"
       ],
       "objectives": [
-        "Explore various aspects of the Galaxy codebase.",
-        "Understand the various top-level files and modules in Galaxy.",
-        "Understand how dependencies work in Galaxy's frontend and backend."
+        "Understand the problems with the `app` god object",
+        "Learn about type-based dependency injection",
+        "Use DI in controllers and tasks",
+        "Understand the benefits of typing"
       ],
-      "time_estimation": "150m",
-      "requirements": null,
+      "time_estimation": "15m",
       "key_points": [
-        "Galaxy runs out of the box and fetches all needed dependencies.",
-        "Running Galaxy in production requires configuration.",
-        "The architecture is designed to be pluggable and extensible.",
-        "Learn more about different Galaxy aspects in our [development section](/topics/dev/)."
+        "`app` was a god object that knew/did too much",
+        "Interfaces break circular dependencies",
+        "Type-based DI with Lagom simplifies construction",
+        "DI works uniformly across FastAPI, WSGI controllers, and tasks",
+        "Dependencies should form a DAG"
       ],
-      "subtopic": "core",
+      "subtopic": "architecture",
       "contributors": [
         {
           "name": "John Chilton",
@@ -2377,56 +2944,25 @@
           "id": "jmchilton",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
-        },
-        {
-          "name": "Björn Grüning",
-          "email": "bjoern.gruening@gmail.com",
-          "twitter": "bjoerngruening",
-          "fediverse": "https://fosstodon.org/@bgruening",
-          "fediverse_flavor": "mastodon",
-          "matrix": "bgruening:matrix.org",
-          "orcid": "0000-0002-3079-6586",
-          "elixir_node": "de",
-          "linkedin": "bgruening",
-          "contact_for_training": true,
-          "joined": "2017-09",
-          "location": {
-            "country": "DE",
-            "lat": 47.997791,
-            "lon": 7.842609
-          },
-          "affiliations": [
-            "eurosciencegateway",
-            "eosc-life",
-            "by-covid",
-            "deNBI",
-            "sfb992",
-            "elixir-converge",
-            "uni-freiburg",
-            "elixir-europe"
-          ],
-          "id": "bgruening",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
         }
       ],
       "js_requirements": {
         "mathjax": null,
         "mermaid": false
       },
-      "short_id": "S00043",
+      "short_id": null,
       "symlink": null,
-      "url": "/topics/dev/tutorials/architecture/slides.html",
+      "url": "/topics/dev/tutorials/architecture-dependency-injection/slides.html",
       "topic_name": "dev",
-      "tutorial_name": "architecture",
-      "dir": "topics/dev/tutorials/architecture",
-      "id": "dev/architecture",
+      "tutorial_name": "architecture-dependency-injection",
+      "dir": "topics/dev/tutorials/architecture-dependency-injection",
+      "id": "dev/architecture-dependency-injection",
       "hands_on": false,
       "slides": true,
-      "mod_date": "2024-06-14 09:56:50 +0000",
-      "pub_date": "2017-06-20 21:12:27 +0000",
-      "version": 34,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture/tutorial.json",
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-dependency-injection/tutorial.json",
       "tools": [],
       "supported_servers": [],
       "supported_servers_matrix": [],
@@ -2449,8 +2985,169 @@
       "license": "CC-BY-4.0",
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture/slides.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture/slides.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-dependency-injection/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-dependency-injection/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Architecture 15 - Galaxy Production Deployment",
+      "questions": [
+        "How is Galaxy deployed in production?",
+        "What is the difference between development and production setups?",
+        "How does usegalaxy.org work?"
+      ],
+      "objectives": [
+        "Understand production deployment architecture",
+        "Learn about PostgreSQL, nginx, and uWSGI",
+        "Understand multi-process and multi-host setups",
+        "Learn about usegalaxy.org infrastructure"
+      ],
+      "time_estimation": "10m",
+      "key_points": [
+        "Production uses PostgreSQL instead of SQLite",
+        "nginx/Apache serve static content, uWSGI runs Galaxy",
+        "Multiple processes and hosts for scalability",
+        "usegalaxy.org runs across multiple servers and clusters"
+      ],
+      "subtopic": "architecture",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/dev/tutorials/architecture-production/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "architecture-production",
+      "dir": "topics/dev/tutorials/architecture-production",
+      "id": "dev/architecture-production",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-production/tutorial.json",
+      "tools": [],
+      "supported_servers": [],
+      "supported_servers_matrix": [],
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": []
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [],
+        "slides": [],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-production/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-production/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Architecture 11 - Galaxy Markdown Architecture",
+      "questions": [
+        "What is Galaxy Markdown and how does it differ from regular HTML?",
+        "How do contextual references get resolved to internal IDs?",
+        "What is the transformation pipeline for Galaxy Markdown?",
+        "How do frontend components render Galaxy directives?"
+      ],
+      "objectives": [
+        "Understand the contextual addressing system for Galaxy Markdown",
+        "Learn the backend parsing and transformation pipeline",
+        "Understand the handler pattern for export/rendering",
+        "Know how frontend components process Galaxy directives",
+        "Learn the editor architecture for pages and reports"
+      ],
+      "time_estimation": "30m",
+      "key_points": [
+        "Galaxy Markdown enables portable documentation via contextual addressing",
+        "Multiple context-specific formats converge to internal IDs at boundaries",
+        "Handler pattern enables lazy (frontend) vs eager (PDF) export",
+        "27+ directives for embedding Galaxy objects",
+        "Frontend uses store-centric data flow for caching"
+      ],
+      "subtopic": "architecture",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/dev/tutorials/architecture-markdown/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "architecture-markdown",
+      "dir": "topics/dev/tutorials/architecture-markdown",
+      "id": "dev/architecture-markdown",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-markdown/tutorial.json",
+      "tools": [],
+      "supported_servers": [],
+      "supported_servers_matrix": [],
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": []
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [],
+        "slides": [],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-markdown/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-markdown/slides.json"
       }
     },
     {
@@ -2573,6 +3270,357 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-tours/slides.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-tours/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Architecture 12 - Galaxy Client Architecture",
+      "questions": [
+        "How is the Galaxy UI built?",
+        "What frontend technologies does Galaxy use?",
+        "How do I develop and test the client?"
+      ],
+      "objectives": [
+        "Understand the client build process",
+        "Learn about Vue.js and Vuex",
+        "Navigate the client source code",
+        "Run client tests and development servers"
+      ],
+      "time_estimation": "15m",
+      "key_points": [
+        "Source in `client/src`, built bundles in `static/dist`",
+        "Webpack handles bundling and transpilation",
+        "Vue.js for reactive components",
+        "ES6 JavaScript",
+        "Jest for unit testing",
+        "Webhooks for UI plugins"
+      ],
+      "subtopic": "architecture",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/dev/tutorials/architecture-client/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "architecture-client",
+      "dir": "topics/dev/tutorials/architecture-client",
+      "id": "dev/architecture-client",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-client/tutorial.json",
+      "tools": [],
+      "supported_servers": [],
+      "supported_servers_matrix": [],
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": []
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [],
+        "slides": [],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-client/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-client/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Architecture 01 - Galaxy Ecosystem and Projects",
+      "questions": [
+        "What projects make up the Galaxy ecosystem?",
+        "How do different Galaxy projects interact?",
+        "What tools are available for developers vs administrators?"
+      ],
+      "objectives": [
+        "Identify the major projects in the Galaxy ecosystem",
+        "Understand the difference between user-facing and developer tools",
+        "Learn about Galaxy communication channels"
+      ],
+      "time_estimation": "25m",
+      "key_points": [
+        "Multiple user-facing applications (Galaxy, Training Material)",
+        "Developer libraries for plugin developers",
+        "Admin tools for deployment",
+        "Active community on Matrix (via Element client)"
+      ],
+      "subtopic": "architecture",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "fediverse": "https://fosstodon.org/@bgruening",
+          "fediverse_flavor": "mastodon",
+          "matrix": "bgruening:matrix.org",
+          "orcid": "0000-0002-3079-6586",
+          "elixir_node": "de",
+          "linkedin": "bgruening",
+          "contact_for_training": true,
+          "joined": "2017-09",
+          "location": {
+            "country": "DE",
+            "lat": 47.997791,
+            "lon": 7.842609
+          },
+          "affiliations": [
+            "eurosciencegateway",
+            "eosc-life",
+            "by-covid",
+            "deNBI",
+            "sfb992",
+            "elixir-converge",
+            "uni-freiburg",
+            "elixir-europe"
+          ],
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        }
+      ],
+      "redirect_from": [
+        "/topics/dev/tutorials/architecture/slides"
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/dev/tutorials/architecture-ecosystem/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "architecture-ecosystem",
+      "dir": "topics/dev/tutorials/architecture-ecosystem",
+      "id": "dev/architecture-ecosystem",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-ecosystem/tutorial.json",
+      "tools": [],
+      "supported_servers": [],
+      "supported_servers_matrix": [],
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": []
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [],
+        "slides": [],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-ecosystem/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-ecosystem/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Architecture 02 - Galaxy Project Management and Contribution",
+      "questions": [
+        "How do I contribute to Galaxy?",
+        "What is Galaxy's governance model?",
+        "How does the release process work?"
+      ],
+      "objectives": [
+        "Understand the contribution workflow",
+        "Learn about Galaxy's open governance model",
+        "Understand the CI/CD pipeline"
+      ],
+      "time_estimation": "20m",
+      "key_points": [
+        "Open governance through pull requests and voting",
+        "Working groups coordinate major efforts",
+        "Regular release cycle (~4 months)",
+        "Extensive CI/CD with linting and testing"
+      ],
+      "subtopic": "architecture",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/dev/tutorials/architecture-project-management/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "architecture-project-management",
+      "dir": "topics/dev/tutorials/architecture-project-management",
+      "id": "dev/architecture-project-management",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-project-management/tutorial.json",
+      "tools": [],
+      "supported_servers": [],
+      "supported_servers_matrix": [],
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": []
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [],
+        "slides": [],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-project-management/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-project-management/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Architecture 07 - Galaxy Task Management with Celery",
+      "questions": [
+        "How does Galaxy handle long-running tasks?",
+        "When should I use Celery?",
+        "How do I create a new Galaxy task?"
+      ],
+      "objectives": [
+        "Understand when to use tasks vs web requests",
+        "Learn how to declare Celery tasks",
+        "Use Pydantic for task serialization",
+        "Understand best practices"
+      ],
+      "time_estimation": "15m",
+      "key_points": [
+        "Web servers are inappropriate for long-running work",
+        "Celery handles async task execution",
+        "Gravity manages Celery processes",
+        "Tasks use typed functions with Pydantic",
+        "DI works in tasks just like controllers"
+      ],
+      "subtopic": "architecture",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/dev/tutorials/architecture-tasks/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "architecture-tasks",
+      "dir": "topics/dev/tutorials/architecture-tasks",
+      "id": "dev/architecture-tasks",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-tasks/tutorial.json",
+      "tools": [],
+      "supported_servers": [],
+      "supported_servers_matrix": [],
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": []
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [],
+        "slides": [],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-tasks/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-tasks/slides.json"
       }
     },
     {
@@ -3118,6 +4166,174 @@
       }
     },
     {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Architecture 10 - Galaxy File Sources Architecture",
+      "questions": [
+        "What are File Sources in Galaxy?",
+        "How do user-defined file sources work?",
+        "What is the difference between File Sources and Object Stores?"
+      ],
+      "objectives": [
+        "Understand the File Sources plugin architecture",
+        "Learn about user-defined file source templates",
+        "Understand fsspec and PyFilesystem2 base classes",
+        "Learn about OAuth integration for cloud services"
+      ],
+      "time_estimation": "20m",
+      "key_points": [
+        "File Sources provide hierarchical file access for import/export",
+        "User-defined templates enable personal cloud storage connections",
+        "fsspec enables easy integration of 40+ storage backends",
+        "OAuth 2.0 supports seamless cloud service authentication"
+      ],
+      "subtopic": "architecture",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        },
+        {
+          "name": "David López",
+          "joined": "2021-10",
+          "affiliations": [
+            "eurosciencegateway",
+            "uni-freiburg"
+          ],
+          "id": "davelopez",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/davelopez.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/davelopez/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/dev/tutorials/architecture-file-sources/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "architecture-file-sources",
+      "dir": "topics/dev/tutorials/architecture-file-sources",
+      "id": "dev/architecture-file-sources",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-file-sources/tutorial.json",
+      "tools": [],
+      "supported_servers": [],
+      "supported_servers_matrix": [],
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": []
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [],
+        "slides": [],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-file-sources/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-file-sources/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Architecture 03 - Galaxy Architecture Principles",
+      "questions": [
+        "What are the guiding principles of Galaxy architecture?",
+        "Why is the frontend opinionated but the backend plugin-driven?",
+        "Who are the target audiences for each component?"
+      ],
+      "objectives": [
+        "Understand the contrasting philosophies of frontend vs backend",
+        "Learn why Galaxy is designed for flexibility",
+        "Identify the target users for each layer"
+      ],
+      "time_estimation": "10m",
+      "key_points": [
+        "Frontend: opinionated, consistent, for bench scientists",
+        "Backend: plugin-driven, flexible, for administrators",
+        "Galaxy runs out of the box with minimal dependencies",
+        "Architecture balances simplicity and extensibility"
+      ],
+      "subtopic": "architecture",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/dev/tutorials/architecture-principles/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "architecture-principles",
+      "dir": "topics/dev/tutorials/architecture-principles",
+      "id": "dev/architecture-principles",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2026-02-19 09:49:54 +0000",
+      "pub_date": "2026-02-19 09:49:54 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-principles/tutorial.json",
+      "tools": [],
+      "supported_servers": [],
+      "supported_servers_matrix": [],
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": []
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [],
+        "slides": [],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-principles/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture-principles/slides.json"
+      }
+    },
+    {
       "layout": "tutorial_hands_on",
       "title": "Contributing to BioBlend as a developer",
       "questions": [
@@ -3271,13 +4487,6 @@
           "tutorials": [
             "github-contribution"
           ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "dev",
-          "tutorials": [
-            "architecture"
-          ]
         }
       ],
       "js_requirements": {
@@ -3293,9 +4502,9 @@
       "id": "dev/core-contributing",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2025-11-05 13:57:31 +0000",
+      "mod_date": "2026-02-19 09:49:54 +0000",
       "pub_date": "2021-06-08 09:41:28 +0000",
-      "version": 10,
+      "version": 11,
       "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/core-contributing/tutorial.json",
       "tools": [],
       "supported_servers": [],
@@ -4024,13 +5233,6 @@
         {
           "type": "none",
           "title": "Mac OS or Linux that can run Galaxy & your favorite IDE or editor"
-        },
-        {
-          "type": "internal",
-          "topic_name": "dev",
-          "tutorials": [
-            "architecture"
-          ]
         }
       ],
       "subtopic": "core",
@@ -4047,9 +5249,9 @@
       "id": "dev/debugging",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2025-11-05 13:57:31 +0000",
+      "mod_date": "2026-02-19 09:49:54 +0000",
       "pub_date": "2021-06-15 10:13:45 +0000",
-      "version": 15,
+      "version": 16,
       "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/debugging/tutorial.json",
       "tools": [],
       "supported_servers": [],
@@ -4664,13 +5866,6 @@
         {
           "type": "none",
           "title": "Mac OS or Linux that can run Galaxy & your favorite IDE or editor"
-        },
-        {
-          "type": "internal",
-          "topic_name": "dev",
-          "tutorials": [
-            "architecture"
-          ]
         }
       ],
       "subtopic": "core",
@@ -4687,9 +5882,9 @@
       "id": "dev/writing_tests",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2025-11-05 13:57:31 +0000",
+      "mod_date": "2026-02-19 09:49:54 +0000",
       "pub_date": "2022-07-15 10:22:17 +0000",
-      "version": 6,
+      "version": 7,
       "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/writing_tests/tutorial.json",
       "tools": [],
       "supported_servers": [],

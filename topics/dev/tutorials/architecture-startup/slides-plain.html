@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: Architecture 14 - Galaxy Startup Process / Architecture 14 - Galaxy Startup Process / Development in Galaxy</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@05ce2d3c522f8a7b531dc84f9792f7e473939485",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture-startup/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Architecture 14 - Galaxy Startup Process">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-02-19 09:49:54 +0000">
+<meta name="DC.creator" content="John Chilton"><meta name="description" content="layout: introduction_slides topic_name: Galaxy Architecture  # Architecture 14 - Galaxy Startup Process  *The architecture of Galaxy's initialization.*  ---    layout: true  left-aligned class: left, middle --- layout: true class: center, middle    ---   ### Cloning Galaxy  ```bash $ git clone https://github.com/galaxyproject/galaxy.git galaxy Cloning into 'galaxy'... remote: Counting objects: 173809, done. remote: Total 173809 (delta 0), reused 0 (delta 0), pack-reused 173809 Receiving objects: 100% (173809/173809), 55.18 MiB | 11.08 MiB/s, done. Resolving deltas: 100% (137885/137885), done. Checking connectivity... done. $ cd galaxy $ git checkout -b master origin/master Branch master set up to track remote branch master from origin. Switched to a new branch 'master' $ sh run.sh ```   ---   class: reduce90  ### Copying Configs  ```bash $ sh run.sh Initializing config/migrated_tools_conf.xml from migrated_tools_conf.xml.sample Initializing config/shed_tool_conf.xml from shed_tool_c...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Development in Galaxy / Architecture 14 - Galaxy Startup Process / Slides: Architecture 14 - Galaxy Startup Process">
+        <meta property="og:description" content="layout: introduction_slides topic_name: Galaxy Architecture  # Architecture 14 - Galaxy Startup Process  *The architecture of Galaxy's initialization.*  ---    layout: true  left-aligned class: left, middle --- layout: true class: center, middle    ---   ### Cloning Galaxy  ```bash $ git clone https://github.com/galaxyproject/galaxy.git galaxy Cloning into 'galaxy'... remote: Counting objects: 173809, done. remote: Total 173809 (delta 0), reused 0 (delta 0), pack-reused 173809 Receiving objects: 100% (173809/173809), 55.18 MiB | 11.08 MiB/s, done. Resolving deltas: 100% (137885/137885), done. Checking connectivity... done. $ cd galaxy $ git checkout -b master origin/master Branch master set up to track remote branch master from origin. Switched to a new branch 'master' $ sh run.sh ```   ---   class: reduce90  ### Copying Configs  ```bash $ sh run.sh Initializing config/migrated_tools_conf.xml from migrated_tools_conf.xml.sample Initializing config/shed_tool_conf.xml from shed_tool_c...">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/dev/tutorials/architecture-startup/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/architecture-startup/slides-plain.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/dev/tutorials/architecture-startup/slides.html">View markdown source on GitHub</a>
+	<h1>Architecture 14 - Galaxy Startup Process</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jmchilton?s=36" alt="John Chilton avatar" width="36" class="avatar" />
+    John Chilton</a>
+	</div>
+
+</div>
+
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What happens when Galaxy starts?</p>
+</li>
+		
+		<li><p>What is the startup sequence?</p>
+</li>
+		
+		<li><p>What gets loaded during startup?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Understand the Galaxy startup sequence</p>
+</li>
+		
+		<li><p>Learn about configuration initialization</p>
+</li>
+		
+		<li><p>Understand dependency installation</p>
+</li>
+		
+		<li><p>Learn about database migrations and plugin loading</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Feb 19, 2026 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Feb 19, 2026 </div>
+
+	<hr />
+
+
+	<p>layout: introduction_slides
+topic_name: Galaxy Architecture</p>
+
+<h1 id="architecture-14---galaxy-startup-process">Architecture 14 - Galaxy Startup Process</h1>
+
+<p><em>The architecture of Galaxy’s initialization.</em></p>
+
+<hr />
+
+<p>layout: true
+<span id="left-aligned"><i class="fas fa-link" aria-hidden="true"></i> left-aligned</span>
+class: left, middle
+—
+layout: true
+class: center, middle</p>
+
+<hr />
+
+<h3 id="cloning-galaxy">Cloning Galaxy</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/galaxyproject/galaxy.git galaxy
+Cloning into <span class="s1">'galaxy'</span>...
+remote: Counting objects: 173809, <span class="k">done</span><span class="nb">.</span>
+remote: Total 173809 <span class="o">(</span>delta 0<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>, pack-reused 173809
+Receiving objects: 100% <span class="o">(</span>173809/173809<span class="o">)</span>, 55.18 MiB | 11.08 MiB/s, <span class="k">done</span><span class="nb">.</span>
+Resolving deltas: 100% <span class="o">(</span>137885/137885<span class="o">)</span>, <span class="k">done</span><span class="nb">.</span>
+Checking connectivity... <span class="k">done</span><span class="nb">.</span>
+<span class="nv">$ </span><span class="nb">cd </span>galaxy
+<span class="nv">$ </span>git checkout <span class="nt">-b</span> master origin/master
+Branch master <span class="nb">set </span>up to track remote branch master from origin.
+Switched to a new branch <span class="s1">'master'</span>
+<span class="nv">$ </span>sh run.sh
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="copying-configs">Copying Configs</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>sh run.sh
+Initializing config/migrated_tools_conf.xml from migrated_tools_conf.xml.sample
+Initializing config/shed_tool_conf.xml from shed_tool_conf.xml.sample
+Initializing config/shed_tool_data_table_conf.xml from shed_tool_data_table_conf.xml.sample
+Initializing config/shed_data_manager_conf.xml from shed_data_manager_conf.xml.sample
+Initializing tool-data/shared/ucsc/builds.txt from builds.txt.sample
+Initializing tool-data/shared/ucsc/manual_builds.txt from manual_builds.txt.sample
+Initializing tool-data/shared/ucsc/ucsc_build_sites.txt from ucsc_build_sites.txt.sample
+Initializing tool-data/shared/igv/igv_build_sites.txt from igv_build_sites.txt.sample
+Initializing tool-data/shared/rviewer/rviewer_build_sites.txt from rviewer_build_sites.txt.sample
+Initializing static/welcome.html from welcome.html.sample
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="setting-up-venv-and-pip">Setting up <code class="language-plaintext highlighter-rouge">.venv</code> and <code class="language-plaintext highlighter-rouge">pip</code></h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using real prefix '/usr'
+New python executable in .venv/bin/python
+Installing setuptools, pip, wheel...done.
+Activating virtualenv at .venv
+Collecting pip&gt;=8.1
+  Using cached pip-8.1.2-py2.py3-none-any.whl
+Installing collected packages: pip
+  Found existing installation: pip 7.1.2
+    Uninstalling pip-7.1.2:
+      Successfully uninstalled pip-7.1.2
+Successfully installed pip-8.1.2
+</code></pre></div></div>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="installing-dependencies">Installing Dependencies</h3>
+
+<p>.code[```
+Collecting bx-python==0.7.3 (from -r requirements.txt (line 2))
+  Downloading https://wheels.galaxyproject.org/packages/bx_python-0.7.3-cp27-cp27mu-manylinux1_x86_64.whl (2.1MB)
+Collecting MarkupSafe==0.23 (from -r requirements.txt (line 3))
+  Downloading https://wheels.galaxyproject.org/packages/MarkupSafe-0.23-cp27-cp27mu-manylinux1_x86_64.whl
+Collecting PyYAML==3.11 (from -r requirements.txt (line 4))
+  Downloading https://wheels.galaxyproject.org/packages/PyYAML-3.11-cp27-cp27mu-manylinux1_x86_64.whl (367kB)
+Collecting SQLAlchemy==1.0.8 (from -r requirements.txt (line 5))
+  Downloading https://wheels.galaxyproject.org/packages/SQLAlchemy-1.0.8-cp27-cp27mu-manylinux1_x86_64.whl (1.0MB)
+Collecting mercurial==3.7.3 (from -r requirements.txt (line 6))
+  Downloading https://wheels.galaxyproject.org/packages/mercurial-3.7.3-cp27-cp27mu-manylinux1_x86_64.whl (1.5MB)
+…
+…
+Building wheels for collected packages: repoze.lru
+  Running setup.py bdist_wheel for repoze.lru: started
+  Running setup.py bdist_wheel for repoze.lru: finished with status ‘done’
+  Stored in directory: /home/john/.cache/pip/wheels/b2/cd/b3/7e24400bff83325a01d492940eff6e9579f553f33348323d79
+Successfully built repoze.lru
+Installing collected packages: bx-python, MarkupSafe, PyYAML, SQLAlchemy, mercurial, numpy, pycrypto, six, Paste, PasteDeploy, docutils, wchartype, repoze.lru, Routes, WebOb, WebHelpers, Mako, pytz, Babel, Beaker, dictobj, nose, Parsley, Whoosh, Markdown, Cheetah, requests, boto, requests-toolbelt, bioblend, anyjson, amqp, kombu, psutil, PasteScript, pulsar-galaxy-lib, sqlparse, pbr, decorator, Tempita, sqlalchemy-migrate, pyparsing, svgwrite, ecdsa, paramiko, Fabric, pysam
+Successfully installed Babel-2.0 Beaker-1.7.0 Cheetah-2.4.4 Fabric-1.10.2 Mako-1.0.2 Markdown-2.6.3 MarkupSafe-0.23 Parsley-1.3 Paste-2.0.2 PasteDeploy-1.5.2 PasteScript-2.0.2 PyYAML-3.11 Routes-2.2 SQLAlchemy-1.0.8 Tempita-0.5.3.dev0 WebHelpers-1.3 WebOb-1.4.1 Whoosh-2.7.4 amqp-1.4.8 anyjson-0.3.3 bioblend-0.7.0 boto-2.38.0 bx-python-0.7.3 decorator-4.0.2 dictobj-0.3.1 docutils-0.12 ecdsa-0.13 kombu-3.0.30 mercurial-3.7.3 nose-1.3.7 numpy-1.9.2 paramiko-1.15.2 pbr-1.8.0 psutil-4.1.0 pulsar-galaxy-lib-0.7.0.dev4 pycrypto-2.6.1 pyparsing-2.1.1 pysam-0.8.4+gx1 pytz-2015.4 repoze.lru-0.6 requests-2.8.1 requests-toolbelt-0.4.0 six-1.9.0 sqlalchemy-migrate-0.10.0 sqlparse-0.1.16 svgwrite-1.1.6 wchartype-0.1</p>
+<pre><code class="language-]">
+
+---
+
+
+class: reduce70
+
+### Initial Debugging as App Starts
+
+.code[```
+Activating virtualenv at .venv
+DEBUG:galaxy.app:python path is: /home/john/workspace/galaxy-clean/scripts,
+/home/john/workspace/galaxy-clean/lib, /home/john/workspace/galaxy-clean/.venv/lib/python2.7,/home/john/workspace/galaxy-clean/.venv/lib/python2.7/plat-x86_64-linux-gnu,
+/home/john/workspace/galaxy-clean/.venv/lib/python2.7/lib-tk, /home/john/workspace/galaxy-clean/.venv/lib/python2.7/lib-old, /home/john/workspace/galaxy-clean/.venv/lib/python2.7/lib-dynload,
+/usr/lib/python2.7, /usr/lib/python2.7/plat-x86_64-linux-gnu, /usr/lib/python2.7/lib-tk, /home/john/workspace/galaxy-clean/.venv/local/lib/python2.7/site-packages
+INFO:galaxy.config:Logging at '10' level to 'stdout'
+galaxy.queue_worker INFO 2016-06-23 19:11:51,925 Initializing main Galaxy Queue Worker on sqlalchemy+sqlite:///./database/control.sqlite?isolation_level=IMMEDIATE
+tool_shed.tool_shed_registry DEBUG 2016-06-23 19:11:51,951 Loading references to tool sheds from ./config/tool_sheds_conf.xml.sample
+tool_shed.tool_shed_registry DEBUG 2016-06-23 19:11:51,951 Loaded reference to tool shed: Galaxy Main Tool Shed
+galaxy.app DEBUG 2016-06-23 19:11:51,956 Using "galaxy.yml" config file:
+/home/john/workspace/galaxy-clean/config/galaxy.yml.sample
+```]
+
+
+---
+
+
+class: reduce70
+
+### Database Migrations (First Time Only)
+
+.code[```
+migrate.versioning.repository DEBUG 2016-06-23 19:11:51,993 Loading repository lib/galaxy/model/migrate...
+migrate.versioning.script.base DEBUG 2016-06-23 19:11:51,994 Loading script lib/galaxy/model/migrate/versions/0001_initial_tables.py...
+migrate.versioning.script.base DEBUG 2016-06-23 19:11:51,994 Script lib/galaxy/model/migrate/versions/0001_initial_tables.py loaded successfully
+migrate.versioning.script.base DEBUG 2016-06-23 19:11:51,994 Loading script lib/galaxy/model/migrate/versions/0002_metadata_file_table.py...
+migrate.versioning.script.base DEBUG 2016-06-23 19:11:52,009 Loading script lib/galaxy/model/migrate/versions/0131_subworkflow_and_input_parameter_modules.py...
+...
+galaxy.model.migrate.check INFO 2016-06-23 19:13:32,812 Migrating 128 -&gt; 129...
+galaxy.model.migrate.check INFO 2016-06-23 19:13:33,436
+galaxy.model.migrate.check INFO 2016-06-23 19:13:33,437 Migration script to allow invalidation of job external output metadata temp files
+galaxy.model.migrate.check INFO 2016-06-23 19:13:33,437
+galaxy.model.migrate.check INFO 2016-06-23 19:13:33,437
+galaxy.model.migrate.check INFO 2016-06-23 19:13:33,437 Migrating 129 -&gt; 130...
+galaxy.model.migrate.check INFO 2016-06-23 19:13:34,325
+galaxy.model.migrate.check INFO 2016-06-23 19:13:34,325 Migration script to change the value column of user_preference from varchar to text.
+galaxy.model.migrate.check INFO 2016-06-23 19:13:34,325
+galaxy.model.migrate.check INFO 2016-06-23 19:13:34,325
+galaxy.model.migrate.check INFO 2016-06-23 19:13:34,326 Migrating 130 -&gt; 131...
+galaxy.model.migrate.check INFO 2016-06-23 19:13:35,633
+galaxy.model.migrate.check INFO 2016-06-23 19:13:35,633 Migration script to support subworkflows and workflow request input parameters
+galaxy.model.migrate.check INFO 2016-06-23 19:13:35,633
+galaxy.model.migrate.check INFO 2016-06-23 19:13:35,633
+```]
+
+
+---
+
+
+Everything after here happens every time
+
+
+---
+
+
+class: reduce70
+
+### Loading Tool Shed Migrations
+
+.code[```
+migrate.versioning.repository DEBUG 2016-06-23 19:13:35,635 Loading repository lib/tool_shed/galaxy_install/migrate...
+migrate.versioning.script.base DEBUG 2016-06-23 19:13:35,635 Loading script lib/tool_shed/galaxy_install/migrate/versions/0001_tools.py...
+migrate.versioning.script.base DEBUG 2016-06-23 19:13:35,636 Script lib/tool_shed/galaxy_install/migrate/versions/0001_tools.py loaded successfully
+migrate.versioning.script.base DEBUG 2016-06-23 19:13:35,636 Loading script lib/tool_shed/galaxy_install/migrate/versions/0002_tools.py...
+migrate.versioning.script.base DEBUG 2016-06-23 19:13:35,636 Script lib/tool_shed/galaxy_install/migrate/versions/0002_tools.py loaded successfully
+migrate.versioning.script.base DEBUG 2016-06-23 19:13:35,636 Loading script lib/tool_shed/galaxy_install/migrate/versions/0003_tools.py...
+migrate.versioning.script.base DEBUG 2016-06-23 19:13:35,636 Script lib/tool_shed/galaxy_install/migrate/versions/0003_tools.py loaded successfully
+...
+migrate.versioning.repository DEBUG 2016-06-23 19:13:35,637 Repository lib/tool_shed/galaxy_install/migrate loaded successfully
+tool_shed.galaxy_install.migrate.check DEBUG 2016-06-23 19:13:35,660 The main Galaxy tool shed is not currently available, so skipped tool migration 1 until next server startup
+galaxy.config INFO 2016-06-23 19:13:35,679 Install database targetting Galaxy's database configuration.
+```]
+
+
+---
+
+
+class: reduce70
+
+### Loading Datatypes
+
+.code[```
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,748 Loading datatypes from ./config/datatypes_conf.xml.sample
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,749 Retrieved datatype module galaxy.datatypes.binary:Ab1 from the datatype registry.
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,750 Retrieved datatype module galaxy.datatypes.assembly:Amos from the datatype registry.
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,751 Retrieved datatype module galaxy.datatypes.text:Arff from the datatype registry.
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,751 Retrieved datatype module galaxy.datatypes.data:GenericAsn1 from the datatype registry.
+...
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,822 Retrieved datatype module galaxy.datatypes.mothur:SquareDistanceMatrix from the datatype registry.
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,822 Retrieved datatype module galaxy.datatypes.mothur:LowerTriangleDistanceMatrix from the datatype registry.
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Retrieved datatype module galaxy.datatypes.mothur:SffFlow from the datatype registry.
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Retrieved datatype module galaxy.datatypes.mothur:CountTable from the datatype registry.
+```]
+
+
+---
+
+
+class: reduce70
+
+### Loading Datatype Sniffers
+
+.code[```
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype 'galaxy.datatypes.mothur:Sabund'
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype 'galaxy.datatypes.mothur:Otu'
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype 'galaxy.datatypes.mothur:GroupAbund'
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype 'galaxy.datatypes.mothur:SecondaryStructureMap'
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype 'galaxy.datatypes.mothur:LowerTriangleDistanceMatrix'
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,824 Loaded sniffer for datatype 'galaxy.datatypes.mothur:SquareDistanceMatrix'
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,825 Loaded sniffer for datatype 'galaxy.datatypes.mothur:PairwiseDistanceMatrix'
+...
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,826 Loaded sniffer for datatype 'galaxy.datatypes.binary:TwoBit'
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,826 Loaded sniffer for datatype 'galaxy.datatypes.binary:GeminiSQLite'
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded sniffer for datatype 'galaxy.datatypes.binary:OxliGraphLabels'
+</code></pre>
+<p>]</p>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="loading-build-sites">Loading Build Sites</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,833 Loaded build site 'ucsc': tool-data/shared/ucsc/ucsc_build_sites.txt with display sites: main,test,archaea,ucla
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,834 Loaded build site 'gbrowse': tool-data/shared/gbrowse/gbrowse_build_sites.txt with display sites: modencode,sgd_yeast,tair,wormbase,wormbase_ws120,wormbase_ws140,wormbase_ws170,wormbase_ws180,wormbase_ws190,wormbase_ws200,wormbase_ws204,wormbase_ws210,wormbase_ws220,wormbase_ws225
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,834 Loaded build site 'ensembl': tool-data/shared/ensembl/ensembl_sites.txt
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,834 Loaded build site 'ensembl_data_url': tool-data/shared/ensembl/ensembl_sites_data_URL.txt
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,834 Loaded build site 'igv': tool-data/shared/igv/igv_build_sites.txt
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:35,834 Loaded build site 'rviewer': tool-data/shared/rviewer/rviewer_build_sites.txt
+</code>]</p>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="loading-tool-data-tables">Loading Tool Data Tables</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.tools.data INFO 2016-06-23 19:13:35,871 Could not find tool data tool-data/all_fasta.loc, reading sample
+galaxy.tools.data DEBUG 2016-06-23 19:13:35,871 Loaded tool data table 'all_fasta'
+galaxy.tools.data INFO 2016-06-23 19:13:35,871 Could not find tool data tool-data/bfast_indexes.loc, reading sample
+galaxy.tools.data DEBUG 2016-06-23 19:13:35,871 Loaded tool data table 'bfast_indexes'
+galaxy.tools.data WARNING 2016-06-23 19:13:35,871 Cannot find index file 'tool-data/blastdb_p.loc' for tool data table 'blastdb_p'
+...
+galaxy.tools.data DEBUG 2016-06-23 19:13:36,210 Loaded tool data table 'vcf_iobio'
+galaxy.tools.data INFO 2016-06-23 19:13:36,211 Could not find tool data tool-data/biom_simple_display.loc, reading sample
+galaxy.tools.data DEBUG 2016-06-23 19:13:36,211 Loaded tool data table 'biom_simple_display'
+</code>]</p>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="job-configuration-and-citation-cache">Job Configuration and Citation Cache</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.jobs DEBUG 2016-06-23 19:13:36,233 Loading job configuration from /home/john/workspace/galaxy-clean/config/galaxy.yml.sample
+galaxy.jobs DEBUG 2016-06-23 19:13:36,233 Done loading job configuration
+beaker.container DEBUG 2016-06-23 19:13:36,278 data file ./database/citations/data/container_file/4/48/48e563f148dc04d8b31c94878c138019862e580d.cache
+</code>]</p>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="loading-toolbox">Loading Toolbox</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.tools.toolbox.base INFO 2016-06-23 19:13:36,279 Parsing the tool configuration ./config/tool_conf.xml.sample
+galaxy.tools.toolbox.base DEBUG 2016-06-23 19:13:36,291 Loaded tool id: upload1, version: 1.1.4 into tool panel..
+galaxy.tools.toolbox.base DEBUG 2016-06-23 19:13:36,294 Loaded tool id: ucsc_table_direct1, version: 1.0.0 into tool panel..
+galaxy.tools.toolbox.base DEBUG 2016-06-23 19:13:36,296 Loaded tool id: ucsc_table_direct_test1, version: 1.0.0 into tool panel..
+galaxy.tools.toolbox.base DEBUG 2016-06-23 19:13:36,298 Loaded tool id: ucsc_table_direct_archaea1, version: 1.0.0 into tool panel..
+...
+galaxy.tools.toolbox.base DEBUG 2016-06-23 19:13:36,496 Loaded tool id: vcf_to_maf_customtrack1, version: 1.0.0 into tool panel..
+galaxy.tools.toolbox.base INFO 2016-06-23 19:13:36,497 Parsing the tool configuration ./config/shed_tool_conf.xml
+galaxy.tools.toolbox.base INFO 2016-06-23 19:13:36,497 Parsing the tool configuration ./config/migrated_tools_conf.xml
+</code>]</p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="tool-dependency-resolution-and-indexing">Tool Dependency Resolution and Indexing</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.tools.deps WARNING 2016-06-23 19:13:36,498 Path './database/dependencies' does not exist, ignoring
+galaxy.tools.deps WARNING 2016-06-23 19:13:36,498 Path './database/dependencies' is not directory, ignoring
+galaxy.tools.deps DEBUG 2016-06-23 19:13:36,503 Unable to find config file './dependency_resolvers_conf.xml'
+galaxy.tools.search DEBUG 2016-06-23 19:13:36,560 Starting to build toolbox index.
+galaxy.tools.search DEBUG 2016-06-23 19:13:37,789 Toolbox index finished. It took: 0:00:01.229406
+</code>]</p>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="loading-display-applications">Loading Display Applications</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:37,795 Loaded display application 'ucsc_bam' for datatype 'bam', inherit=False.
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:37,797 Loaded display application 'ensembl_bam' for datatype 'bam', inherit=False.
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:37,833 Loaded display application 'igv_bam' for datatype 'bam', inherit=False.
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:37,834 Loaded display application 'igb_bam' for datatype 'bam', inherit=False.
+...
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,003 Adding inherited display application 'ensembl_gff' to datatype 'gtf'
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,007 Adding inherited display application 'igv_interval_as_bed' to datatype 'bed6'
+</code>]</p>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="loading-datatype-converters">Loading Datatype Converters</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,010 Loaded converter: CONVERTER_Bam_Bai_0
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,011 Loaded converter: CONVERTER_bam_to_bigwig_0
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,012 Loaded converter: CONVERTER_bed_to_gff_0
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,012 Loaded converter: CONVERTER_bed_to_bgzip_0
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,013 Loaded converter: CONVERTER_bed_to_tabix_0
+...
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,099 Loaded converter: CONVERTER_ref_to_seq_taxomony
+</code>]</p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="loading-special-tools">Loading Special Tools</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.datatypes.registry DEBUG 2016-06-23 19:13:38,101 Loaded external metadata tool: __SET_METADATA__
+galaxy.tools.special_tools DEBUG 2016-06-23 19:13:38,107 Loaded history import tool: __IMPORT_HISTORY__
+galaxy.tools.special_tools DEBUG 2016-06-23 19:13:38,108 Loaded history export tool: __EXPORT_HISTORY__
+</code>]</p>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="loading-visualization-plugins">Loading Visualization Plugins</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.web.base.pluginframework INFO 2016-06-23 19:13:38,109 VisualizationsRegistry, loaded plugin: charts
+galaxy.visualization.plugins.config_parser INFO 2016-06-23 19:13:38,110 Visualizations plugin disabled: Circster. Skipping...
+galaxy.web.base.pluginframework INFO 2016-06-23 19:13:38,111 VisualizationsRegistry, loaded plugin: csg
+galaxy.web.base.pluginframework INFO 2016-06-23 19:13:38,112 VisualizationsRegistry, loaded plugin: graphviz
+galaxy.web.base.pluginframework INFO 2016-06-23 19:13:38,112 VisualizationsRegistry, loaded plugin: phyloviz
+galaxy.web.base.pluginframework INFO 2016-06-23 19:13:38,113 VisualizationsRegistry, loaded plugin: scatterplot
+galaxy.web.base.pluginframework INFO 2016-06-23 19:13:38,114 VisualizationsRegistry, loaded plugin: trackster
+</code>]</p>
+
+<hr />
+
+<h3 id="loading-tours">Loading Tours</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.tours INFO 2016-06-23 19:13:38,125 Loaded tour 'core.scratchbook'
+galaxy.tours INFO 2016-06-23 19:13:38,158 Loaded tour 'core.galaxy_ui'
+galaxy.tours INFO 2016-06-23 19:13:38,183 Loaded tour 'core.history'
+</code>]</p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="starting-job-handler-and-runners">Starting Job Handler and Runners</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.jobs.manager DEBUG 2016-06-23 19:13:38,196 Starting job handler
+galaxy.jobs INFO 2016-06-23 19:13:38,196 Handler 'main' will load all configured runner plugins
+galaxy.jobs.runners.state_handler_factory DEBUG 2016-06-23 19:13:38,198 Loaded 'failure' state handler from module galaxy.jobs.runners.state_handlers.resubmit
+galaxy.jobs.runners DEBUG 2016-06-23 19:13:38,198 Starting 5 LocalRunner workers
+galaxy.jobs DEBUG 2016-06-23 19:13:38,200 Loaded job runner 'galaxy.jobs.runners.local:LocalJobRunner' as 'local'
+galaxy.jobs.handler DEBUG 2016-06-23 19:13:38,200 Loaded job runners plugins: local
+galaxy.jobs.handler INFO 2016-06-23 19:13:38,200 job handler stop queue started
+galaxy.jobs.handler INFO 2016-06-23 19:13:38,222 job handler queue started
+</code>]</p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="starting-workflow-scheduler">Starting Workflow Scheduler</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.workflow.scheduling_manager DEBUG 2016-06-23 19:13:38,254 Starting workflow schedulers
+</code>]</p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="loading-controllers">Loading Controllers</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,347 Enabling 'external_service' controller, class: ExternalService
+galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,347 Enabling 'requests_common' controller, class: RequestsCommon
+galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,375 Enabling 'library_common' controller, class: LibraryCommon
+galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,390 Enabling 'visualization' controller, class: VisualizationController
+...
+galaxy.web.framework.base DEBUG 2016-06-23 19:13:38,728 Enabling 'workflow_tags' API controller, class: WorkflowTagsController
+</code>]</p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="enabling-middleware">Enabling Middleware</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,036 Enabling 'httpexceptions' middleware
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,037 Enabling 'recursive' middleware
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,042 Enabling 'error' middleware
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,043 Enabling 'trans logger' middleware
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,044 Enabling 'x-forwarded-host' middleware
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,044 Enabling 'Request ID' middleware
+</code>]</p>
+
+<hr />
+
+<p>class: reduce70</p>
+
+<h3 id="configuring-static-paths">Configuring Static Paths</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,048 added url, path to static middleware: /plugins/visualizations/charts/static, ./config/plugins/visualizations/charts/static
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,048 added url, path to static middleware: /plugins/visualizations/csg/static, ./config/plugins/visualizations/csg/static
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,049 added url, path to static middleware: /plugins/visualizations/graphviz/static, ./config/plugins/visualizations/graphviz/static
+galaxy.webapps.galaxy.buildapp DEBUG 2016-06-23 19:13:39,049 added url, path to static middleware: /plugins/visualizations/scatterplot/static, ./config/plugins/visualizations/scatterplot/static
+</code>]</p>
+
+<hr />
+
+<p>class: reduce90</p>
+
+<h3 id="galaxy-is-ready">Galaxy is Ready!</h3>
+
+<p>.code[<code class="language-plaintext highlighter-rouge">
+galaxy.queue_worker INFO 2016-06-23 19:13:39,049 Binding and starting galaxy control worker for main
+Starting server in PID 21102.
+serving on http://127.0.0.1:8080
+</code>]</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>.footnote[Previous: <a href="/training-material/topics/dev/tutorials/architecture-dependencies/slides.html">Galaxy Dependencies Management</a></td>
+      <td>Next: <a href="/training-material/topics/dev/tutorials/architecture-production/slides.html">Galaxy Production Deployment</a>]</td>
+    </tr>
+  </tbody>
+</table>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Startup: clone, config copy, venv, dependencies, migrations</li>
+
+<li>Datatypes, tools, and plugins loaded at startup</li>
+
+<li>Database migrations run on first startup</li>
+
+<li>Default setup 'just works' for development</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/dev/tutorials/architecture-startup/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/./topics/dev/tutorials/architecture-startup/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/05ce2d3c522f8a7b531dc84f9792f7e473939485">05ce2d3</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+
+    </body>
+</html>

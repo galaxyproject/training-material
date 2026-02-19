@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: Architecture 02 - Galaxy Project Management and Contribution / Architecture 02 - Galaxy Project Management and Contribution / Development in Galaxy</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@05ce2d3c522f8a7b531dc84f9792f7e473939485",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture-project-management/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Architecture 02 - Galaxy Project Management and Contribution">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-02-19 09:49:54 +0000">
+<meta name="DC.creator" content="John Chilton"><meta name="description" content="layout: introduction_slides topic_name: Galaxy Architecture  # Architecture 02 - Galaxy Project Management and Contribution  *The social architecture of the project.*  ---    layout: true  left-aligned class: left, middle --- layout: true class: center, middle    ---   class: enlarge200  ### Contributing Quick Start  Contribution guidelines: https://bit.ly/gx-CONTRIBUTING-md   ---   class: enlarge200  ### Pull Requests  Nearly all changes should come in through GitHub Pull Requests.  The exceptions include security patches, packaging and release process artifacts, and backporting fixes to older releases.   ---   class: enlarge150  ### Security (SECURITY_POLICY.md)  In brief, to responsibly report security issues e-mail  [`galaxy-committers@lists.galaxyproject.org`](mailto:galaxy-committers@lists.galaxyproject.org)  Check out the full policy in [SECURITY_POLICY.md](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md).   ---   ### Branches  ![Branches](../../images/cor...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Development in Galaxy / Architecture 02 - Galaxy Project Management and Contribution / Slides: Architecture 02 - Galaxy Project Management and Contribution">
+        <meta property="og:description" content="layout: introduction_slides topic_name: Galaxy Architecture  # Architecture 02 - Galaxy Project Management and Contribution  *The social architecture of the project.*  ---    layout: true  left-aligned class: left, middle --- layout: true class: center, middle    ---   class: enlarge200  ### Contributing Quick Start  Contribution guidelines: https://bit.ly/gx-CONTRIBUTING-md   ---   class: enlarge200  ### Pull Requests  Nearly all changes should come in through GitHub Pull Requests.  The exceptions include security patches, packaging and release process artifacts, and backporting fixes to older releases.   ---   class: enlarge150  ### Security (SECURITY_POLICY.md)  In brief, to responsibly report security issues e-mail  [`galaxy-committers@lists.galaxyproject.org`](mailto:galaxy-committers@lists.galaxyproject.org)  Check out the full policy in [SECURITY_POLICY.md](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md).   ---   ### Branches  ![Branches](../../images/cor...">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/dev/tutorials/architecture-project-management/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/architecture-project-management/slides-plain.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/dev/tutorials/architecture-project-management/slides.html">View markdown source on GitHub</a>
+	<h1>Architecture 02 - Galaxy Project Management and Contribution</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge contributor-jmchilton"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jmchilton?s=36" alt="John Chilton avatar" width="36" class="avatar" />
+    John Chilton</a>
+	</div>
+
+</div>
+
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How do I contribute to Galaxy?</p>
+</li>
+		
+		<li><p>What is Galaxy’s governance model?</p>
+</li>
+		
+		<li><p>How does the release process work?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Understand the contribution workflow</p>
+</li>
+		
+		<li><p>Learn about Galaxy’s open governance model</p>
+</li>
+		
+		<li><p>Understand the CI/CD pipeline</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Feb 19, 2026 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Feb 19, 2026 </div>
+
+	<hr />
+
+
+	<p>layout: introduction_slides
+topic_name: Galaxy Architecture</p>
+
+<h1 id="architecture-02---galaxy-project-management-and-contribution">Architecture 02 - Galaxy Project Management and Contribution</h1>
+
+<p><em>The social architecture of the project.</em></p>
+
+<hr />
+
+<p>layout: true
+<span id="left-aligned"><i class="fas fa-link" aria-hidden="true"></i> left-aligned</span>
+class: left, middle
+—
+layout: true
+class: center, middle</p>
+
+<hr />
+
+<p>class: enlarge200</p>
+
+<h3 id="contributing-quick-start">Contributing Quick Start</h3>
+
+<p>Contribution guidelines: https://bit.ly/gx-CONTRIBUTING-md</p>
+
+<hr />
+
+<p>class: enlarge200</p>
+
+<h3 id="pull-requests">Pull Requests</h3>
+
+<p>Nearly all changes should come in through GitHub Pull Requests.</p>
+
+<p>The exceptions include security patches, packaging and release process artifacts, and backporting fixes to older releases.</p>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<h3 id="security-security_policymd">Security (SECURITY_POLICY.md)</h3>
+
+<p>In brief, to responsibly report security issues e-mail</p>
+
+<p><a href="mailto:galaxy-committers@lists.galaxyproject.org"><code class="language-plaintext highlighter-rouge">galaxy-committers@lists.galaxyproject.org</code></a></p>
+
+<p>Check out the full policy in <a href="https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md">SECURITY_POLICY.md</a>.</p>
+
+<hr />
+
+<h3 id="branches">Branches</h3>
+
+<p><img src="../../images/core_branches.mindmap.plantuml.svg" alt="Branches" /></p>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<h3 id="committers--open-goverance">Committers &amp; Open Goverance</h3>
+
+<p>All repository goverance is done in the open on GitHub via Pull Requests and voting. Galaxy goes beyond open source to open goverance.</p>
+
+<blockquote>
+  <p>“The committers group is the group of trusted developers and advocates who manage the core Galaxy code base.”</p>
+</blockquote>
+
+<blockquote>
+  <p>“Galaxy Project committers are the only individuals who may commit to the core Galaxy code base.”</p>
+</blockquote>
+
+<blockquote>
+  <p>“Committers may participate in all formal votes, including votes to modify team membership, merge pull requests, and modify [policies].”</p>
+</blockquote>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<h3 id="working-groups">Working Groups</h3>
+
+<p>https://galaxyproject.org/community/wg/</p>
+
+<blockquote>
+  <p>“Galaxy has grown a lot over the years, going from a project at one university in 2005 to the global community it is today. Several parts of the Galaxy ecosystem have become avowedly and obviously community driven during that time, including tools, code, training, and several other international efforts. Galaxy Working Groups push this global model to other areas of Galaxy as well.”</p>
+</blockquote>
+
+<hr />
+
+<p>class: enlarge200</p>
+
+<h3 id="code-of-conduct-code_of_conductmd">Code of Conduct (CODE_OF_CONDUCT.md)</h3>
+
+<p>Describes expectations, encourages diversity, and describes how to report issues such as unacceptable behavior.</p>
+
+<p>Check out the full policy in <a href="https://github.com/galaxyproject/galaxy/blob/dev/CODE_OF_CONDUCT.md">CODE_OF_CONDUCT.md</a>.</p>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<h3 id="release-process">Release Process</h3>
+
+<p>New large releases are issued roughly every 4 months. The process is guided by an auto-created
+self documenting release issue.</p>
+
+<p>Check out the <a href="https://github.com/galaxyproject/galaxy/issues/20952">25.1 release issue</a> as an example.</p>
+
+<p>Working groups create roadmaps aligned with each release and coordinated with project leadership.</p>
+
+<hr />
+
+<p>class: enlarge150</p>
+
+<h3 id="organizing-issues-and-pull-requests">Organizing Issues and Pull Requests</h3>
+
+<p>Extensive use of Github tags are used to try to organize the numerous issues and
+pull requests of the Galaxy repository.</p>
+
+<p>The tags are described in detail in <a href="https://github.com/galaxyproject/galaxy/blob/dev/doc/source/project/issues.rst">issues.rst</a>.</p>
+
+<hr />
+
+<h3 id="continuous-integration-ci">Continuous Integration (CI)</h3>
+
+<p><img src="../../images/core_ci.png" alt="Galaxy CI" /></p>
+
+<p>If you get Red Xs - take a second to ponder whether they make sense and don’t be afraid to ask, it is a complex system with a lot of noise!</p>
+
+<hr />
+
+<h3 id="linting-and-code-formatting">Linting and Code Formatting</h3>
+
+<p>Part of the Galaxy CI process includes linting and checking the format of both the backend Python and frontend ES 6 code.
+This linting process captures many common problems as well as enforcing a common code style.</p>
+
+<p>The output reports from the CI process are relatively straightforward, but it is a good process
+to lint changes and formatting your code before opening pull requests for them.</p>
+
+<p>Execute the <code class="language-plaintext highlighter-rouge">format</code> make command to format the backend code and then use <code class="language-plaintext highlighter-rouge">tox</code>
+to lint the formatted code.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ make format
+$ tox -e lint
+</code></pre></div></div>
+
+<p>Execute the <code class="language-plaintext highlighter-rouge">client-format</code> make command to format the code and then the <code class="language-plaintext highlighter-rouge">client-lint</code> command
+to lint the formatted code.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ make client-format
+$ make client-lint
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="mypy-and-python-types">mypy and Python Types</h3>
+
+<p>Starting with release 21.01, portions of the Galaxy backend have
+Python 3 type annotations and static checking is performed as part of
+CI. Imported library types are not enforcing and
+<a href="https://mypy.readthedocs.io/en/stable/">mypy</a> does a fair job
+inferring types in most situations, so this process should be
+relatively transparent to contributors.</p>
+
+<p>If there are problems with typing, the CI produces explicit output
+about how to correct problems. These problems generally just require a
+single type annotation. Feel free to request help on a pull request
+for what that should look like.</p>
+
+<p>To run a subset of the python type checking locally, <code class="language-plaintext highlighter-rouge">tox</code> again can
+be used:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ tox -e mypy
+</code></pre></div></div>
+
+<p>A quick overview about why to add type annotations to Python code and how to use
+them can be found on this <a href="https://dev.to/dstarner/using-pythons-type-annotations-4cfe">blog post</a>.
+Additional useful resources include <a href="https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html">this cheat sheet from mypy</a>
+and the Python docs for the <a href="https://docs.python.org/3/library/typing.html">typing module</a>.</p>
+
+<hr />
+
+<p>class: enlarge200</p>
+
+<h3 id="development-environments">Development Environments</h3>
+
+<p>Galaxy developers use a wide range of IDEs and we don’t offer any formal recommendation of one over another.</p>
+
+<p>However, Marius has assembled some documentation on debugging the <a href="https://docs.galaxyproject.org/en/master/dev/debugging_galaxy.html">Galaxy server</a> and <a href="https://docs.galaxyproject.org/en/master/dev/debugging_tests.html">tests</a> using VS Code.</p>
+
+<hr />
+
+<h3 id="development-environment---gitpod">Development Environment - Gitpod</h3>
+
+<p>Galaxy does have a Gitpod configuration that is enabled to allow editing and testing PRs https://www.gitpod.io/.</p>
+
+<p>Video from Marius presenting Gitpod at the Galaxy Developer Roundtable (https://www.youtube.com/watch?v=3e71DFg3gsw#t=39m0s)</p>
+
+<hr />
+
+<p>class: center</p>
+
+<h3 id="docsgalaxyprojectorg">docs.galaxyproject.org</h3>
+
+<p><img src="../../images/core_docs.png" alt="docs.galaxyproject.org" /></p>
+
+<p>All these documents as well as versions code and deployment documentation and release notes
+can be found at <a href="https://docs.galaxyproject.org">docs.galaxyproject.org</a>.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>.footnote[Previous: <a href="/training-material/topics/dev/tutorials/architecture-ecosystem/slides.html">Galaxy Ecosystem and Projects</a></td>
+      <td>Next: <a href="/training-material/topics/dev/tutorials/architecture-principles/slides.html">Galaxy Architecture Principles</a>]</td>
+    </tr>
+  </tbody>
+</table>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>Open governance through pull requests and voting</li>
+
+<li>Working groups coordinate major efforts</li>
+
+<li>Regular release cycle (~4 months)</li>
+
+<li>Extensive CI/CD with linting and testing</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/dev/tutorials/architecture-project-management/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/./topics/dev/tutorials/architecture-project-management/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/05ce2d3c522f8a7b531dc84f9792f7e473939485">05ce2d3</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+
+    </body>
+</html>
