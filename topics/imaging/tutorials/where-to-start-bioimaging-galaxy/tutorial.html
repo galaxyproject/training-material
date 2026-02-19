@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@2fc27c8707eec0b31c2064dafb5d6d1b34c29890",
+		release: "galaxy-training-network@5dae36539295b9ce820bfd9660247f5bb471c755",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Where to start with bioimage analysis in Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-02-18 12:04:32 +0000">
+<meta name="DC.date" content="2026-02-19 10:44:53 +0000">
 <meta name="DC.creator" content="Diana Chiang Jurado">
 <meta name="DC.creator" content="Beatriz Serrano-Solano">
 <meta name="DC.creator" content="Leonid Kostrykin"><meta name="description" content="Image analysis using Galaxy">
@@ -184,7 +184,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2026-02-18 12:04:32 +0000",
+  "dateModified": "2026-02-19 10:44:53 +0000",
   "datePublished": "2026-02-17 21:37:04 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -284,7 +284,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Where to start with bioimage analysis in Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/where-to-start-bioimaging-galaxy/tutorial.html",
-  "version": 3,
+  "version": 4,
   "timeRequired": "PT2H",
   "teaches": "- Classify your imaging data based on modality and dimensions (5D).\n- Identify the correct entry point in Galaxy (Upload vs. Bio-Formats vs. OMERO).\n- Apply pre-processing filters to improve data quality before analysis.\n- Navigate the GTN ecosystem to find specialized follow-up tutorials.",
   "keywords": [
@@ -1282,7 +1282,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 17, 2026 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 18, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 19, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1300,7 +1300,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
 
     </blockquote>
     </section>
@@ -1722,7 +1722,7 @@ Reading metadata
 
 <ul>
   <li><strong>Thresholding:</strong> A “cutoff” method where pixels above (or below) a certain intensity value are classified as object. This value can be set manually or determined automatically using algorithms like Otsu or Li. The result is typically a <strong>Binary Mask</strong>.</li>
-  <li><strong>Inference (Deep Learning):</strong> Advanced AI models like <strong>Cellpose</strong> use pre-trained neural networks to recognize complex shapes. These methods might be superior at specific segmentation tasks such as “untangling” cells that are touching or overlapping in high-density environments (<span class="citation"><a href="#Stringer2021">Stringer <i>et al.</i> 2021</a></span>, <span class="citation"><a href="#Schmidt2018">Schmidt <i>et al.</i> 2018</a></span>).</li>
+  <li><strong>Inference (Deep Learning):</strong> Advanced AI models like <strong>Cellpose</strong> use pre-trained neural networks to recognize complex shapes. These methods might be superior at specific segmentation tasks such as “untangling” cells that are touching or overlapping in high-density environments (<span class="citation"><a href="#stringer2025cellpose3">Stringer and Pachitariu 2025</a></span>, <span class="citation"><a href="#Schmidt2018">Schmidt <i>et al.</i> 2018</a></span>, <span class="citation"><a href="#Pachitariu2025.04.28.651001">Pachitariu <i>et al.</i> 2025</a></span>).</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
@@ -1769,7 +1769,7 @@ Reading metadata
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-rois-in-interactive-vs-automated-tools"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: ROIs in interactive vs. automated tools</div>
-  <p>Interactive tools like QuPath allows users to inspect images and create ROIs either manually (e.g. drawing with the mouse) or through built-in detection algorithms that generate ROIs automatically. In automated Galaxy workflows, algorithms like Cellpose generate thousands of ROIs programmatically in a fully reproducible pipeline without user interaction (<span class="citation"><a href="#Stringer2021">Stringer <i>et al.</i> 2021</a></span>).</p>
+  <p>Interactive tools like QuPath allows users to inspect images and create ROIs either manually (e.g. drawing with the mouse) or through built-in detection algorithms that generate ROIs automatically. In automated Galaxy workflows, algorithms like Cellpose generate thousands of ROIs programmatically in a fully reproducible pipeline without user interaction (<span class="citation"><a href="#stringer2025cellpose3">Stringer and Pachitariu 2025</a></span>, <span class="citation"><a href="#Pachitariu2025.04.28.651001">Pachitariu <i>et al.</i> 2025</a></span>).</p>
 </blockquote>
 
 <h2 id="stage-c-post-processing-refining">Stage C: Post-processing (Refining)</h2>
@@ -2174,12 +2174,13 @@ Reading metadata
 <li id="Sedgewick2010">Sedgewick, R., and K. Wayne, 2010 <b>Algorithms</b>. <i>Addison-Wesley Professional</i>. <a href="https://algs4.cs.princeton.edu/home/">https://algs4.cs.princeton.edu/home/</a></li>
 <li id="Schmidt2018">Schmidt, U., M. Weigert, C. Broaddus, and G. Myers, 2018 <b>Cell Detection with Star-Convex Polygons</b>, <span style="font-style: normal">in</span> <i>Medical Image Computing and Computer Assisted Intervention – MICCAI 2018</i>, <i>Springer, Cham</i>. <a href="https://doi.org/10.1007/978-3-030-00934-2_30">10.1007/978-3-030-00934-2_30</a></li>
 <li id="Moore2021">Moore, J., and et al., 2021 <b>OME-NGFF: a next-generation file format for expanding bioimaging data-access strategies</b>. Nature Methods 18: 1496–1498. <a href="https://doi.org/10.1038/s41592-021-01326-w">10.1038/s41592-021-01326-w</a></li>
-<li id="Stringer2021">Stringer, C., T. Wang, M. Michaelos, and M. Pachitariu, 2021 <b>Cellpose: a generalist algorithm for cellular segmentation</b>. Nature Methods 18: 100–106. <a href="https://doi.org/10.1038/s41592-020-01018-x">10.1038/s41592-020-01018-x</a></li>
 <li id="Tosi2021">Tosi, S., 2021 <b>Bioimage Data Analysis Workflows</b>. <i>Wiley-VCH</i>. <a href="https://analyticalscience.wiley.com/do/10.1002/was.00050003/full/bioimagedataanalysis.pdf">https://analyticalscience.wiley.com/do/10.1002/was.00050003/full/bioimagedataanalysis.pdf</a></li>
 <li id="Bankhead2022">Bankhead, P., 2022 <b>Introduction to Bioimage Analysis</b>. <i>Online</i>. A comprehensive open-source guide to the principles of bioimage analysis.. <a href="https://bioimagebook.github.io/">https://bioimagebook.github.io/</a></li>
 <li id="Haase2022">Haase, R., and et al., 2022 <b>A Hitchhiker’s guide through the bio-image analysis software universe</b>. FEBS Letters. <a href="https://doi.org/10.1002/1873-3468.14451">10.1002/1873-3468.14451</a></li>
 <li id="GalaxyCommunity2024">The Galaxy Community, 2024 <b>The Galaxy platform for accessible, reproducible, and collaborative data analyses: 2024 update</b>. Nucleic Acids Research 52: W83–W94. <a href="https://doi.org/10.1093/nar/gkae410">10.1093/nar/gkae410</a></li>
-<li id="Fazeli2025">Fazeli, E., R. Haase, M. Doube, K. Miura, and D. Legland, 2025 <b>From cells to pixels: A decision tree for designing bioimage analysis pipelines</b>. Journal of Microscopy 300: 384–408. <a href="https://doi.org/10.1111/jmi.70021">10.1111/jmi.70021</a></li></ol>
+<li id="Fazeli2025">Fazeli, E., R. Haase, M. Doube, K. Miura, and D. Legland, 2025 <b>From cells to pixels: A decision tree for designing bioimage analysis pipelines</b>. Journal of Microscopy 300: 384–408. <a href="https://doi.org/10.1111/jmi.70021">10.1111/jmi.70021</a></li>
+<li id="Pachitariu2025.04.28.651001">Pachitariu, M., M. Rariden, and C. Stringer, 2025 <b>Cellpose-SAM: superhuman generalization for cellular segmentation</b>. bioRxiv. <a href="https://doi.org/10.1101/2025.04.28.651001">10.1101/2025.04.28.651001</a> <a href="https://www.biorxiv.org/content/early/2025/05/01/2025.04.28.651001">https://www.biorxiv.org/content/early/2025/05/01/2025.04.28.651001</a></li>
+<li id="stringer2025cellpose3">Stringer, C., and M. Pachitariu, 2025 <b>Cellpose3: one-click image restoration for improved cellular segmentation</b>. Nature methods 22: 592–599. <a href="https://www.nature.com/articles/s41592-025-02595-5">https://www.nature.com/articles/s41592-025-02595-5</a></li></ol>
                 
 
                 
@@ -2537,7 +2538,7 @@ ready(function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2fc27c8707eec0b31c2064dafb5d6d1b34c29890">2fc27c8</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/5dae36539295b9ce820bfd9660247f5bb471c755">5dae365</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
