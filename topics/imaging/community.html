@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@05b8d5eb91cf4e62fee88e1f98ad621042c49639",
+		release: "galaxy-training-network@ae82efbadb271a71064648d53c807a85ae2c03e0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -279,7 +279,7 @@ This is a new, experimental "Community Home" for a given topic. It is intended t
 			<div class="col-sm-3 col-md-6">
 				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-tutorials);">
 					
-					<div class="title">3</div>
+					<div class="title">4</div>
 					<div class="subtitle">
 					Tutorials
 					</div>
@@ -298,7 +298,7 @@ This is a new, experimental "Community Home" for a given topic. It is intended t
 			<div class="col-sm-3 col-md-6">
 				<div class="stat-box" style="--stat-box-color: var(--stat-box-color-workflows);">
 					
-					<div class="title">2</div>
+					<div class="title">3</div>
 					<div class="subtitle">
 					Workflows
 					</div>
@@ -342,6 +342,8 @@ This is a new, experimental "Community Home" for a given topic. It is intended t
 				<h3>Tutorials</h3>
 				<ul>
 				
+				<li><a href="/training-material/topics/imaging/tutorials/dicom-anatomical-3d/tutorial.html">Segmentation of Anatomical Structures in Medical 3-D Images</a></li>
+				
 				<li><a href="/training-material/topics/imaging/tutorials/where-to-start-bioimaging-galaxy/tutorial.html">Where to start with bioimage analysis in Galaxy</a></li>
 				
 				<li><a href="/training-material/topics/imaging/tutorials/iscc-suite/tutorial.html">Content Tracking and Verification in Galaxy Workflows with ISCC-SUM</a></li>
@@ -362,6 +364,8 @@ This is a new, experimental "Community Home" for a given topic. It is intended t
 
 				<h3>Workflows</h3>
 				<ul>
+				
+				<li><a href="/training-material">Segmentation of Anatomical Structures in Medical Images</a></li>
 				
 				<li><a href="/training-material">ISCC - image analysis workflow example</a></li>
 				
@@ -1721,11 +1725,11 @@ year,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026
 news,0,0,0,0,0,0,1,1,2,3,4,4
 events,
 learning-pathways,
-tutorials,0,0,0,1,3,4,5,5,6,8,14,17
+tutorials,0,0,0,1,3,4,5,5,6,8,14,18
 slides,0,0,0,0,0,1,1,1,1,1,1,1
 recordings,
 faqs,
-workflows,0,0,0,0,3,4,5,5,6,7,13,15
+workflows,0,0,0,0,3,4,5,5,6,7,13,16
 grants,0,0,0,0,0,0,0,0,1,2,3,3
 organisations,0,0,1,1,1,1,1,1,1,2,2,2
 contributors,0,0,6,8,10,13,14,17,21,23,29,31
@@ -1778,7 +1782,7 @@ figure {
 
 <script>
 const style = getComputedStyle(document.body);
-const totals = {"tutorials":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":1,"x":"2018-01-01"},{"y":3,"x":"2019-01-01"},{"y":4,"x":"2020-01-01"},{"y":5,"x":"2021-01-01"},{"y":5,"x":"2022-01-01"},{"y":6,"x":"2023-01-01"},{"y":8,"x":"2024-01-01"},{"y":14,"x":"2025-01-01"},{"y":17,"x":"2026-01-01"}],"workflows":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":3,"x":"2019-01-01"},{"y":4,"x":"2020-01-01"},{"y":5,"x":"2021-01-01"},{"y":5,"x":"2022-01-01"},{"y":6,"x":"2023-01-01"},{"y":7,"x":"2024-01-01"},{"y":13,"x":"2025-01-01"},{"y":15,"x":"2026-01-01"}],"contributors":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":6,"x":"2017-01-01"},{"y":8,"x":"2018-01-01"},{"y":10,"x":"2019-01-01"},{"y":13,"x":"2020-01-01"},{"y":14,"x":"2021-01-01"},{"y":17,"x":"2022-01-01"},{"y":21,"x":"2023-01-01"},{"y":23,"x":"2024-01-01"},{"y":29,"x":"2025-01-01"},{"y":31,"x":"2026-01-01"}],"news":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":1,"x":"2021-01-01"},{"y":1,"x":"2022-01-01"},{"y":2,"x":"2023-01-01"},{"y":3,"x":"2024-01-01"},{"y":4,"x":"2025-01-01"},{"y":4,"x":"2026-01-01"}],"grants":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":2,"x":"2024-01-01"},{"y":3,"x":"2025-01-01"},{"y":3,"x":"2026-01-01"}],"organisations":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":1,"x":"2017-01-01"},{"y":1,"x":"2018-01-01"},{"y":1,"x":"2019-01-01"},{"y":1,"x":"2020-01-01"},{"y":1,"x":"2021-01-01"},{"y":1,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":2,"x":"2024-01-01"},{"y":2,"x":"2025-01-01"},{"y":2,"x":"2026-01-01"}],"slides":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":1,"x":"2020-01-01"},{"y":1,"x":"2021-01-01"},{"y":1,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":1,"x":"2024-01-01"},{"y":1,"x":"2025-01-01"},{"y":1,"x":"2026-01-01"}]};
+const totals = {"workflows":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":3,"x":"2019-01-01"},{"y":4,"x":"2020-01-01"},{"y":5,"x":"2021-01-01"},{"y":5,"x":"2022-01-01"},{"y":6,"x":"2023-01-01"},{"y":7,"x":"2024-01-01"},{"y":13,"x":"2025-01-01"},{"y":16,"x":"2026-01-01"}],"tutorials":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":1,"x":"2018-01-01"},{"y":3,"x":"2019-01-01"},{"y":4,"x":"2020-01-01"},{"y":5,"x":"2021-01-01"},{"y":5,"x":"2022-01-01"},{"y":6,"x":"2023-01-01"},{"y":8,"x":"2024-01-01"},{"y":14,"x":"2025-01-01"},{"y":18,"x":"2026-01-01"}],"contributors":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":6,"x":"2017-01-01"},{"y":8,"x":"2018-01-01"},{"y":10,"x":"2019-01-01"},{"y":13,"x":"2020-01-01"},{"y":14,"x":"2021-01-01"},{"y":17,"x":"2022-01-01"},{"y":21,"x":"2023-01-01"},{"y":23,"x":"2024-01-01"},{"y":29,"x":"2025-01-01"},{"y":31,"x":"2026-01-01"}],"news":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":1,"x":"2021-01-01"},{"y":1,"x":"2022-01-01"},{"y":2,"x":"2023-01-01"},{"y":3,"x":"2024-01-01"},{"y":4,"x":"2025-01-01"},{"y":4,"x":"2026-01-01"}],"grants":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":0,"x":"2020-01-01"},{"y":0,"x":"2021-01-01"},{"y":0,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":2,"x":"2024-01-01"},{"y":3,"x":"2025-01-01"},{"y":3,"x":"2026-01-01"}],"organisations":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":1,"x":"2017-01-01"},{"y":1,"x":"2018-01-01"},{"y":1,"x":"2019-01-01"},{"y":1,"x":"2020-01-01"},{"y":1,"x":"2021-01-01"},{"y":1,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":2,"x":"2024-01-01"},{"y":2,"x":"2025-01-01"},{"y":2,"x":"2026-01-01"}],"slides":[{"y":0,"x":"2015-01-01"},{"y":0,"x":"2016-01-01"},{"y":0,"x":"2017-01-01"},{"y":0,"x":"2018-01-01"},{"y":0,"x":"2019-01-01"},{"y":1,"x":"2020-01-01"},{"y":1,"x":"2021-01-01"},{"y":1,"x":"2022-01-01"},{"y":1,"x":"2023-01-01"},{"y":1,"x":"2024-01-01"},{"y":1,"x":"2025-01-01"},{"y":1,"x":"2026-01-01"}]};
 
 const options = {
 	scales: {
@@ -1975,7 +1979,7 @@ new Chart('other-over-time', {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/05b8d5eb91cf4e62fee88e1f98ad621042c49639">05b8d5e</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ae82efbadb271a71064648d53c807a85ae2c03e0">ae82efb</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
