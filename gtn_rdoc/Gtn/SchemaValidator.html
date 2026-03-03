@@ -346,6 +346,11 @@
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">data</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
 
   <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">validate_document</span>(<span class="ruby-identifier">data</span>, <span class="ruby-ivar">@faq_validator</span>))
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span>(<span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributions&#39;</span>))
+    <span class="ruby-identifier">errs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;Document lacks EITHER contributors OR contributions key&#39;</span>)
+  <span class="ruby-keyword">end</span>
+
   <span class="ruby-identifier">errs</span>
 <span class="ruby-keyword">end</span></pre>
                           </div>
@@ -368,7 +373,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="lint_material-source">
-                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 149</span>
+                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 154</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lint_material</span>(<span class="ruby-identifier">fn</span>)
   <span class="ruby-comment"># Any error messages</span>
   <span class="ruby-identifier">errs</span> = []
@@ -435,7 +440,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="lint_news_file-source">
-                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 196</span>
+                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 201</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lint_news_file</span>(<span class="ruby-identifier">fn</span>)
   <span class="ruby-identifier">errs</span> = []
   <span class="ruby-identifier">data</span> = <span class="ruby-identifier">lintable?</span>(<span class="ruby-identifier">fn</span>)
@@ -472,7 +477,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="lint_quiz_file-source">
-                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 213</span>
+                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 218</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lint_quiz_file</span>(<span class="ruby-identifier">fn</span>)
   <span class="ruby-identifier">errs</span> = []
   <span class="ruby-identifier">data</span> = <span class="ruby-identifier">lintable?</span>(<span class="ruby-identifier">fn</span>)
@@ -521,7 +526,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="lint_topic-source">
-                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 140</span>
+                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 145</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">lint_topic</span>(<span class="ruby-identifier">fn</span>)
   <span class="ruby-comment"># Any error messages</span>
   <span class="ruby-identifier">errs</span> = []
@@ -590,7 +595,7 @@
  
                           <button class="toggle-source">toggle source</button>
                           <div class="method-source-code" id="run-source">
-                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 242</span>
+                            <pre><span class="ruby-comment"># File bin/validate-frontmatter.rb, line 247</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">run</span>
   <span class="ruby-identifier">errors</span> = []
   <span class="ruby-comment"># Topics</span>
