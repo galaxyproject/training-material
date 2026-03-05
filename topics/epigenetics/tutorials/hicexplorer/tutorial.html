@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@69c218939472b4ffa89d84d502376d0dd602a5f9",
+		release: "galaxy-training-network@756552a7d6bd521fe2d8ab348acbc74b66d5191f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -2345,7 +2345,7 @@ A quality report is created in e.g. <code class="language-plaintext highlighter-
 </blockquote>
 
 <p>The resulting plot of the 1 Mb contact matrix should look like:
-<a href="../../images/plotMatrix.png" rel="noopener noreferrer"><img src="../../images/plotMatrix.png" alt="TAD plot. " width="576" height="504" loading="lazy" /></a></p>
+<a href="../../images/plotMatrix.png" target="_blank" rel="noopener noreferrer"><img src="../../images/plotMatrix.png" alt="TAD plot. " width="576" height="504" loading="lazy" /></a></p>
 
 <h1 id="correcting-the-hi-c-matrix">Correcting the Hi-C matrix</h1>
 
@@ -2374,7 +2374,7 @@ A quality report is created in e.g. <code class="language-plaintext highlighter-
 
 <p>The output of the program prints a threshold suggestion that is usually accurate but is better to revise the histogram plot. The threshold is visualised in the plot as a blue vertical line.</p>
 
-<p><a href="../../images/hic_diagnostic_plot.png" rel="noopener noreferrer"><img src="../../images/hic_diagnostic_plot.png" alt="Diagnostic plot. " width="640" height="480" loading="lazy" /></a></p>
+<p><a href="../../images/hic_diagnostic_plot.png" target="_blank" rel="noopener noreferrer"><img src="../../images/hic_diagnostic_plot.png" alt="Diagnostic plot. " width="640" height="480" loading="lazy" /></a></p>
 
 <p>In our case the distribution describes the counts per bin of a genomic distance. To remove all bins with a z-score threshold less / more than X means to remove all bins which have less / more counts than X of mean of their specific distribution in units of the standard deviation. Looking at the distribution, we can select the value of -1.6 (lower end) and 1.8 (upper end) to remove. This is given by the –filterThreshold option in hicCorrectMatrix set to ‘correct matrix’ mode.</p>
 
@@ -2528,9 +2528,9 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 </blockquote>
 
-<p><a href="../../images/pearson_pc1.png" rel="noopener noreferrer"><img src="../../images/pearson_pc1.png" alt="Pearson PC1. " width="1200" height="1275" loading="lazy" /></a></p>
+<p><a href="../../images/pearson_pc1.png" target="_blank" rel="noopener noreferrer"><img src="../../images/pearson_pc1.png" alt="Pearson PC1. " width="1200" height="1275" loading="lazy" /></a></p>
 
-<p><a href="../../images/pearson_pc2.png" rel="noopener noreferrer"><img src="../../images/pearson_pc2.png" alt="Pearson PC2. " width="1200" height="1275" loading="lazy" /></a></p>
+<p><a href="../../images/pearson_pc2.png" target="_blank" rel="noopener noreferrer"><img src="../../images/pearson_pc2.png" alt="Pearson PC2. " width="1200" height="1275" loading="lazy" /></a></p>
 
 <p>The first principal component correlates with the chromosome arms, while the second component correlates with A/B compartments.</p>
 
@@ -2658,13 +2658,13 @@ https://zenodo.org/records/16416373/files/H4K16ac.bw
 </blockquote>
 
 <p>The resulting image should look like this one:
-<a href="../../images/plotTADs.png" rel="noopener noreferrer"><img src="../../images/plotTADs.png" alt="TAD plot. " width="1133" height="502" loading="lazy" /></a></p>
+<a href="../../images/plotTADs.png" target="_blank" rel="noopener noreferrer"><img src="../../images/plotTADs.png" alt="TAD plot. " width="1133" height="502" loading="lazy" /></a></p>
 
 <h1 id="loop-detection">Loop detection</h1>
 
 <p>In Hi-C data, the term <code class="language-plaintext highlighter-rouge">loop</code> refers to a 3D structure which represents enhancer-promoter, gene, architectural or polycomb-mediated interactions. These interactions have the characteristics to be enriched in a single region compared to the local background. These loops are also called long-range interactions with an expected maximum distance of 2 MB (see <span class="citation"><a href="#Rao2014">Rao <i>et al.</i> 2014</a></span>).</p>
 
-<p><a href="../../images/loops_bonev_cavalli.png" rel="noopener noreferrer"><img src="../../images/loops_bonev_cavalli.png" alt="Loops visualization. " width="1666" height="580" loading="lazy" /></a></p>
+<p><a href="../../images/loops_bonev_cavalli.png" target="_blank" rel="noopener noreferrer"><img src="../../images/loops_bonev_cavalli.png" alt="Loops visualization. " width="1666" height="580" loading="lazy" /></a></p>
 
 <p>To compute loops, we will use a published Hi-C sequencing dataset from the human cell line GM12878, mapped to hg19 and of 25 kb resolution (<span class="citation"><a href="#wolff2025">Wolff and Heidel 2025</a></span>). The original Hi-C data is from <span class="citation"><a href="#Rao2014">Rao <i>et al.</i> 2014</a></span> (GSE63525). We can import this dataset from Zenodo.</p>
 
@@ -2721,7 +2721,7 @@ https://zenodo.org/records/16416373/files/H4K16ac.bw
 
 <p>As an output we get a loop file containing the positions of both anchor points of the loop and the p-value of the used statistical test.</p>
 
-<p><a href="../../images/loops_25kb_res_result.png" rel="noopener noreferrer"><img src="../../images/loops_25kb_res_result.png" alt="Loops computed_file. " width="1834" height="1068" loading="lazy" /></a></p>
+<p><a href="../../images/loops_25kb_res_result.png" target="_blank" rel="noopener noreferrer"><img src="../../images/loops_25kb_res_result.png" alt="Loops computed_file. " width="1834" height="1068" loading="lazy" /></a></p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-plotting-detected-loops"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Plotting detected loops</div>
@@ -2745,7 +2745,7 @@ https://zenodo.org/records/16416373/files/H4K16ac.bw
 
 </blockquote>
 
-<p><a href="../../images/loops_25kb_res_plot.png" rel="noopener noreferrer"><img src="../../images/loops_25kb_res_plot.png" alt="Loops result_plot. " width="2400" height="2100" loading="lazy" /></a></p>
+<p><a href="../../images/loops_25kb_res_plot.png" target="_blank" rel="noopener noreferrer"><img src="../../images/loops_25kb_res_plot.png" alt="Loops result_plot. " width="2400" height="2100" loading="lazy" /></a></p>
 
 <h1 id="conclusion">Conclusion</h1>
 
@@ -3374,7 +3374,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/69c218939472b4ffa89d84d502376d0dd602a5f9">69c2189</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/756552a7d6bd521fe2d8ab348acbc74b66d5191f">756552a</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

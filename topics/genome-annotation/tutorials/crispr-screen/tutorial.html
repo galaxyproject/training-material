@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@69c218939472b4ffa89d84d502376d0dd602a5f9",
+		release: "galaxy-training-network@756552a7d6bd521fe2d8ab348acbc74b66d5191f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1736,7 +1736,7 @@ T8-Vehicle https://zenodo.org/records/5750854/files/T8-Vehicle.fastq.gz
         </li>
       </ul>
 
-      <p><a href="../../images/crispr-screen/crispr_rule_uploader.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/crispr_rule_uploader.png" alt="Rule-based Uploader. " width="1422" height="842" loading="lazy" /></a></p>
+      <p><a href="../../images/crispr-screen/crispr_rule_uploader.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/crispr_rule_uploader.png" alt="Rule-based Uploader. " width="1422" height="842" loading="lazy" /></a></p>
 
       <ul>
         <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
@@ -1758,7 +1758,7 @@ T8-Vehicle https://zenodo.org/records/5750854/files/T8-Vehicle.fastq.gz
         <li>In the Name: box type <code class="language-plaintext highlighter-rouge">fastqs</code> and press <kbd>Upload</kbd></li>
       </ul>
 
-      <p><a href="../../images/crispr-screen/crispr_rule_editor.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/crispr_rule_editor.png" alt="Rule-based Editor. " width="2270" height="976" loading="lazy" /></a></p>
+      <p><a href="../../images/crispr-screen/crispr_rule_editor.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/crispr_rule_editor.png" alt="Rule-based Editor. " width="2270" height="976" loading="lazy" /></a></p>
     </li>
   </ol>
 
@@ -1836,12 +1836,12 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
             <li>
               <p>The base quality is good for the 3 files, as can be seen in the plot below.</p>
 
-              <p><a href="../../images/crispr-screen/fastqc_per_base_sequence_quality_plot.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/fastqc_per_base_sequence_quality_plot.png" alt="Sequence quality. " width="1200" height="800" loading="lazy" /></a></p>
+              <p><a href="../../images/crispr-screen/fastqc_per_base_sequence_quality_plot.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/fastqc_per_base_sequence_quality_plot.png" alt="Sequence quality. " width="1200" height="800" loading="lazy" /></a></p>
             </li>
             <li>
               <p>Yes. In the Adapter Content plot (below) we can see the two CRISPR adapters have been detected. The adapter 5 prime of the sgRNA starts appearing at the beginning of the reads and has been detected in nearly 100% of reads. The adapter 3 prime of the sgRNA appears after base 40. There’s also a little Illumina Universal adapter detected towards the ends of some reads which indicate the presence of short fragments, possibly adapter dimers.</p>
 
-              <p><a href="../../images/crispr-screen/fastqc_adapter_content_plot.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/fastqc_adapter_content_plot.png" alt="Adapter content. " width="1200" height="800" loading="lazy" /></a></p>
+              <p><a href="../../images/crispr-screen/fastqc_adapter_content_plot.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/fastqc_adapter_content_plot.png" alt="Adapter content. " width="1200" height="800" loading="lazy" /></a></p>
             </li>
           </ol>
         </blockquote>
@@ -1942,7 +1942,7 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
 
 <p>MultiQC produces a 5’ trimmed sequences plot where we can check the results are as expected. Here we can see the length of sequence trimmed from the start of the read ranges from 22bp to 30bp with a dip at 27bp. This corresponds to the length of the adapter (22bp) plus stagger sequence (0,1,2,3,4,6,7,8bp) (<a href="https://media.addgene.org/cms/filer_public/61/16/611619f4-0926-4a07-b5c7-e286a8ecf7f5/broadgpp-sequencing-protocol.pdf">see sequencing protocol</a>). There is no 5bp stagger sequence so 27bp sequences are not expected to be trimmed. The trimmed sequence lengths are what we expect for this dataset and the plot looks similar for all our samples which is good.</p>
 
-<p><a href="../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png" alt="Plot showing lengths of sequences trimmed from 5' end of reads. " width="1200" height="800" loading="lazy" /></a></p>
+<p><a href="../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png" alt="Plot showing lengths of sequences trimmed from 5' end of reads. " width="1200" height="800" loading="lazy" /></a></p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-exercise-quality-control-of-the-polished-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Exercise: Quality control of the polished datasets</div>
@@ -1958,7 +1958,7 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
 
       <p>In the Adapter Content section we now don’t have any 5’ adapter detected. The first 20bp of the reads, what MAGeCK will use for our dataset, has no adapter detected.</p>
 
-      <p><a href="../../images/crispr-screen/fastqc_adapter_content_plot_trimmed.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/fastqc_adapter_content_plot_trimmed.png" alt="Plot of trimmed sequences showing no adapter detected in first 20 bases. " width="1200" height="800" loading="lazy" /></a></p>
+      <p><a href="../../images/crispr-screen/fastqc_adapter_content_plot_trimmed.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/fastqc_adapter_content_plot_trimmed.png" alt="Plot of trimmed sequences showing no adapter detected in first 20 bases. " width="1200" height="800" loading="lazy" /></a></p>
 
     </blockquote>
   </blockquote>
@@ -2107,16 +2107,16 @@ distribution of the remaining sgRNAs that haven’t been negatively selected. A 
       <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p>In the boxplots, we can see we have largely similiar distributions of counts for the 3 samples. The greater length of the box and between whiskers in the T8 samples compared to the control tells us we have a bit more variability of counts in those samples, more guides with low and high counts in T8 compared to the T0.
-<a href="../../images/crispr-screen/mageck_count_boxplots.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_count_boxplots.png" alt="MAGeCK count boxplots. " width="425" height="370" loading="lazy" /></a></p>
+<a href="../../images/crispr-screen/mageck_count_boxplots.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_count_boxplots.png" alt="MAGeCK count boxplots. " width="425" height="370" loading="lazy" /></a></p>
 
       <p>The Distribution of read counts plot shows us how many guides we have for each count (the frequency sums to the total no. of guides 77,441). Similar to the boxplots, the wider distribution for T8 compared to T0 shows us that those samples have more guides with low and high counts. The peak for T0 appears lower just because it has more points (bins) in the plot.
-<a href="../../images/crispr-screen/mageck_count_histogram.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_count_histogram.png" alt="MAGeCK count histograms. " width="427" height="410" loading="lazy" /></a></p>
+<a href="../../images/crispr-screen/mageck_count_histogram.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_count_histogram.png" alt="MAGeCK count histograms. " width="427" height="410" loading="lazy" /></a></p>
 
       <p>The PCA plot shows us the samples from the different conditions separate well. The T8 samples are a bit more similar to each other, to each other on PC1 axis than to T0. If we had more samples we could use this plot to check for clustering of replicates, batch effect or outliers.
-<a href="../../images/crispr-screen/mageck_count_pca.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_count_pca.png" alt="MAGeCK count PCA plot. " width="509" height="355" loading="lazy" /></a></p>
+<a href="../../images/crispr-screen/mageck_count_pca.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_count_pca.png" alt="MAGeCK count PCA plot. " width="509" height="355" loading="lazy" /></a></p>
 
       <p>The hierarchical clustering plot also shows us that the T8 samples are a bit more similar to each other than to T0.
-<a href="../../images/crispr-screen/mageck_count_clustering.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_count_clustering.png" alt="MAGeCK count hierarchical clustering plot. " width="439" height="439" loading="lazy" /></a></p>
+<a href="../../images/crispr-screen/mageck_count_clustering.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_count_clustering.png" alt="MAGeCK count hierarchical clustering plot. " width="439" height="439" loading="lazy" /></a></p>
     </blockquote>
 
   </blockquote>
@@ -2185,7 +2185,7 @@ For technical replicates, we could combine the fastqs for each sample/biological
 Figure M1 from <span class="citation"><a href="#Li2014">Li <i>et al.</i> 2014</a></span> shows a comparison of median (“median”) versus total (“total”) normalization for two CRISPR screen datasets.
 The distribution of the read counts of significant sgRNAs (FDR=1%) was compared with the mean read count distribution of all sgRNAs (“all”, black). The distribution of the significant sgRNAs should be similar to the distribution of all sgRNAs if the normalization method is unbiased. The difference is small for the leukemia dataset. However, in the melanoma dataset, where a few sgRNAs have very large read counts, the difference is larger, as “total” normalization will prefer sgRNAs with higher read-counts. In contrast, the distribution after “median” normalization is closer to the distribution of all sgRNAs.</p>
 
-  <p><a href="../../images/crispr-screen/median_vs_total.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/median_vs_total.png" alt="Median versus Total normalization. " width="1372" height="764" loading="lazy" /></a></p>
+  <p><a href="../../images/crispr-screen/median_vs_total.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/median_vs_total.png" alt="Median versus Total normalization. " width="1372" height="764" loading="lazy" /></a></p>
 
   <p>If many genes have zero counts, such as after treatment in a positive selection screen, the median may be zero and we may get a message in the MAGeCK log that we have to use total normalization.</p>
 
@@ -2353,7 +2353,7 @@ Genes are ranked by the p.neg field (by default). If you need a ranking by the p
 <p>The PDF shows plots of the top 10 negatively and positively selected genes.
 We can see the top genes ranked by RRA scores or p value. These values come from the gene summary file.</p>
 
-<p><a href="../../images/crispr-screen/mageck_test_rra_scores.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_test_rra_scores.png" alt="MAGeCK test RRA scores. " width="428" height="388" loading="lazy" /></a></p>
+<p><a href="../../images/crispr-screen/mageck_test_rra_scores.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_test_rra_scores.png" alt="MAGeCK test RRA scores. " width="428" height="388" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -2365,7 +2365,7 @@ We can see the top genes ranked by RRA scores or p value. These values come from
 
     <p>ESD, MTHFD1L and SHMT2, the same as by RRA score. RRA score is like p-value. Those genes are part of the glutathione pathway which was found to be altered in the published paper for this dataset.</p>
 
-    <p><a href="../../images/crispr-screen/mageck_test_pvalues.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_test_pvalues.png" alt="MAGeCK test pvalues. " width="431" height="389" loading="lazy" /></a></p>
+    <p><a href="../../images/crispr-screen/mageck_test_pvalues.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_test_pvalues.png" alt="MAGeCK test pvalues. " width="431" height="389" loading="lazy" /></a></p>
 
   </blockquote>
 
@@ -2373,7 +2373,7 @@ We can see the top genes ranked by RRA scores or p value. These values come from
 
 <p>The PDF also shows plots with the sgRNA counts for the top 10 genes. These values are the normalized counts for each sgRNA from the sgRNA summary file. With these plots we can see if the counts of all the sgRNAs for these top genes are changing similarly.</p>
 
-<p><a href="../../images/crispr-screen/esd_plot.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/esd_plot.png" alt="Plot showing guide counts for ESD gene. " width="640" height="642" loading="lazy" /></a></p>
+<p><a href="../../images/crispr-screen/esd_plot.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/esd_plot.png" alt="Plot showing guide counts for ESD gene. " width="640" height="642" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -2391,7 +2391,7 @@ We can see the top genes ranked by RRA scores or p value. These values come from
       <li>None. One reason for this is likely the large number of genes being tested (&gt;20,000). You could try to <a href="https://sourceforge.net/p/mageck/wiki/QA/#i-see-very-few-genes-that-are-below-the-certain-fdr-cutoff-like-010-why-it-is-that-and-what-should-i-do">increase sensitivity with the procedures described</a>.</li>
     </ol>
 
-    <p><a href="../../images/crispr-screen/fli1_plot.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/fli1_plot.png" alt="Plot showing guide counts for FLI1 gene. " width="632" height="626" loading="lazy" /></a></p>
+    <p><a href="../../images/crispr-screen/fli1_plot.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/fli1_plot.png" alt="Plot showing guide counts for FLI1 gene. " width="632" height="626" loading="lazy" /></a></p>
 
   </blockquote>
 
@@ -2462,7 +2462,7 @@ FLI1    9.0376e-05  0.454208  -0.08872
 
           <p>ATP5E as it is the gene nearest the top of the plot.</p>
 
-          <p><a href="../../images/crispr-screen/volcanoplot.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/volcanoplot.png" alt="Volcano plot for APR compared to vehicle. " width="483" height="482" loading="lazy" /></a></p>
+          <p><a href="../../images/crispr-screen/volcanoplot.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/volcanoplot.png" alt="Volcano plot for APR compared to vehicle. " width="483" height="482" loading="lazy" /></a></p>
 
         </blockquote>
 
@@ -2639,7 +2639,7 @@ T8-APR-246  1         0       1
     </li>
   </ol>
 
-  <p><a href="../../images/crispr-screen/mageck_mle_apr_volcano.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_mle_apr_volcano.png" alt="Volcano plot for APR compared to timepoint zero. " width="444" height="420" loading="lazy" /></a></p>
+  <p><a href="../../images/crispr-screen/mageck_mle_apr_volcano.png" target="_blank" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_mle_apr_volcano.png" alt="Volcano plot for APR compared to timepoint zero. " width="444" height="420" loading="lazy" /></a></p>
 
   <p>Similarly, you could create a plot for the vehicle vs T0 using the gene summary file columns <code class="language-plaintext highlighter-rouge">Gene</code> <code class="language-plaintext highlighter-rouge">Vehicle|beta</code> <code class="language-plaintext highlighter-rouge">Vehicle|wald-p-value</code>  <code class="language-plaintext highlighter-rouge">Vehicle|wald-fdr</code></p>
 
@@ -3083,7 +3083,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/69c218939472b4ffa89d84d502376d0dd602a5f9">69c2189</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/756552a7d6bd521fe2d8ab348acbc74b66d5191f">756552a</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

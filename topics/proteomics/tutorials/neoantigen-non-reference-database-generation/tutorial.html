@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@69c218939472b4ffa89d84d502376d0dd602a5f9",
+		release: "galaxy-training-network@756552a7d6bd521fe2d8ab348acbc74b66d5191f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1139,7 +1139,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>In this framework, Proteogenomics incorporates RNA-Seq data to generate tailored protein sequence databases, enabling the identification of protein sequence variants, including neoantigens, through mass spectrometry analysis (<span class="citation"><a href="#Chambers_2017">Chambers <i>et al.</i> 2017</a></span>).</p>
 
-<p><a href="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_1.PNG" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_1.PNG" alt="Non-Reference_Protein_Database overview workflow. " width="1280" height="720" loading="lazy" /></a></p>
+<p><a href="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_1.PNG" target="_blank" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_1.PNG" alt="Non-Reference_Protein_Database overview workflow. " width="1280" height="720" loading="lazy" /></a></p>
 
 <p>In this workflow, (A) Generation of variant database, (B) Generation of assembled protein database, and (C) Merging all databases with known HUMAN protein sequences.</p>
 <blockquote class="agenda">
@@ -1277,7 +1277,7 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
 </blockquote>
 
 <h1 id="extracting-single-amino-acid-variants-with-hisat-and-freebayes">Extracting Single amino acid variants with HISAT and Freebayes</h1>
-<p><a href="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_2.PNG" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_2.PNG" alt="A:Generating variant protein sequence database. " width="4000" height="1847" loading="lazy" /></a></p>
+<p><a href="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_2.PNG" target="_blank" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_2.PNG" alt="A:Generating variant protein sequence database. " width="4000" height="1847" loading="lazy" /></a></p>
 <h2 id="aligning-to-the-reference-genome-with-hisat2">Aligning to the reference genome with HISAT2</h2>
 <p>HISAT2 is a fast and efficient tool used in bioinformatics workflows to align sequence reads to a reference genome. In this task, HISAT2 is used to align paired-end reads against the human genome version GRCh38 (hg38). This alignment is essential for downstream analyses such as variant calling or transcript quantification. HISAT2 is configured to use default alignment and scoring options to ensure simplicity and speed, which is often suitable for general-purpose analyses.</p>
 
@@ -1792,7 +1792,7 @@ https://zenodo.org/records/14372521/files/RNA-Seq_Reads_2.fastqsanger.gz
 </blockquote>
 
 <h1 id="extracting-assembled-sequences-with-stringtie-and-gff-compare">Extracting Assembled sequences with Stringtie and GFF compare</h1>
-<p><a href="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_3.PNG" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_3.PNG" alt="Assembled sequence database generation. " width="1280" height="720" loading="lazy" /></a></p>
+<p><a href="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_3.PNG" target="_blank" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_3.PNG" alt="Assembled sequence database generation. " width="1280" height="720" loading="lazy" /></a></p>
 
 <h2 id="assemble-with-stringtie">Assemble with StringTie</h2>
 
@@ -2320,7 +2320,7 @@ FROM variant_annotation
 
 <p>Merging non-reference databases with the known human protein sequence involves integrating data from various sources into a unified format for more efficient analysis. In bioinformatics, this process is often necessary when working with protein sequence data, especially when datasets include variations, unknown sequences, or newly identified proteins alongside well-established reference proteins from the human genome. In this case, we are merging a previously integrated variant database (which includes SAV, INDEL, and RPKM), assembled FASTA data generated from translating BED files to transcripts, the UniProt human reference, and a known contaminant database.</p>
 
-<p><a href="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_4.PNG" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_4.PNG" alt="Database Merging. " width="4000" height="1959" loading="lazy" /></a></p>
+<p><a href="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_4.PNG" target="_blank" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_4.PNG" alt="Database Merging. " width="4000" height="1959" loading="lazy" /></a></p>
 
 <h2 id="merging-all-databases-using-fasta-merge-files-and-filter-unique-sequences">Merging all databases using FASTA Merge Files and Filter Unique Sequences</h2>
 
@@ -2900,7 +2900,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/69c218939472b4ffa89d84d502376d0dd602a5f9">69c2189</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/756552a7d6bd521fe2d8ab348acbc74b66d5191f">756552a</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@69c218939472b4ffa89d84d502376d0dd602a5f9",
+		release: "galaxy-training-network@756552a7d6bd521fe2d8ab348acbc74b66d5191f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1532,7 +1532,7 @@ profile</a>: if the buttons shown
 in the image below say “<strong>connected</strong>”, you’re ok; else, click on the
 appropriate “<strong>connect</strong> button and log into the WorkflowHub with the account
 you’d like LifeMonitor to use.
-<a href="./images/account_connections_whub-dev-disconnected.png" rel="noopener noreferrer"><img src="./images/account_connections_whub-dev-disconnected.png" alt="Connect WorkflowHub buttons. " width="1225" height="786" loading="lazy" /></a>
+<a href="./images/account_connections_whub-dev-disconnected.png" target="_blank" rel="noopener noreferrer"><img src="./images/account_connections_whub-dev-disconnected.png" alt="Connect WorkflowHub buttons. " width="1225" height="786" loading="lazy" /></a>
 The LifeMonitor documentation has <a href="https://www.lifemonitor.eu/faq#which-external-accounts-are-linked-with-my-lifemonitor-account">a more detailed explanation</a>.</p>
 
 <h3 id="enable-workflowhub-integration-for-your-account">Enable WorkflowHub Integration for your account</h3>
@@ -1547,7 +1547,7 @@ you may be taken to the WorkflowHub authentication page; in that case, log into
 the WorkflowHub with the same account credentials that you connected in the
 previous step.</p>
 
-<p><a href="./images/lm_config_registry_integration.png" rel="noopener noreferrer"><img src="./images/lm_config_registry_integration.png" alt="LM config registry integration. " width="1172" height="639" loading="lazy" /></a></p>
+<p><a href="./images/lm_config_registry_integration.png" target="_blank" rel="noopener noreferrer"><img src="./images/lm_config_registry_integration.png" alt="LM config registry integration. " width="1172" height="639" loading="lazy" /></a></p>
 
 <h2 id="lifemonitor-checks">LifeMonitor Checks</h2>
 
@@ -1560,7 +1560,7 @@ workflow repository.</p>
 <h3 id="ro-crate-metadata">RO-Crate metadata</h3>
 
 <p>LM might notice that we don’t have an RO-Crate:
-<a href="./images/missing_ro_crate_pr.png" rel="noopener noreferrer"><img src="./images/missing_ro_crate_pr.png" alt="Missing RO-Crate PR. " width="790" height="594" loading="lazy" /></a></p>
+<a href="./images/missing_ro_crate_pr.png" target="_blank" rel="noopener noreferrer"><img src="./images/missing_ro_crate_pr.png" alt="Missing RO-Crate PR. " width="790" height="594" loading="lazy" /></a></p>
 
 <p>The LM app <strong>automatically</strong> executes
 <a href="https://github.com/crs4/repo2rocrate">repo2crate</a> as recommended by <a href="/training-material/topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.html#best-practice-repositories-and-ro-crate">best
@@ -1569,7 +1569,7 @@ opens a pull request to propose the resulting RO-Crate for integration in our
 repository.  Review the RO-Crate and integrate additional metadata or correct
 it as necessary. Finally, merge the changes into your repository.  LifeMonitor with
 automatically delete the PR branch once merged, to keep your repository tidy.
-<a href="./images/merge_pr.png" rel="noopener noreferrer"><img src="./images/merge_pr.png" alt="Merge PR. " width="834" height="442" loading="lazy" /></a></p>
+<a href="./images/merge_pr.png" target="_blank" rel="noopener noreferrer"><img src="./images/merge_pr.png" alt="Merge PR. " width="834" height="442" loading="lazy" /></a></p>
 
 <h3 id="lifemonitor-configuration-file">LifeMonitor configuration file</h3>
 
@@ -1577,12 +1577,12 @@ automatically delete the PR branch once merged, to keep your repository tidy.
 file</a>
 to our repository.  Through this file in YAML format, we can customize some aspects of
 LifeMonitor’s behavior and provide it with additional metadata.
-<a href="./images/lm_config_pr.png" rel="noopener noreferrer"><img src="./images/lm_config_pr.png" alt="LM config PR. " width="1021" height="541" loading="lazy" /></a></p>
+<a href="./images/lm_config_pr.png" target="_blank" rel="noopener noreferrer"><img src="./images/lm_config_pr.png" alt="LM config PR. " width="1021" height="541" loading="lazy" /></a></p>
 
 <p>This time, we’re going to make some changes to the default configuration before
 accepting it.  The PR’s “Conversation” tab on GitHub tells us to push changes to
 a specific branch to make changes to the file:
-<a href="./images/lm_config_pr_branch.png" rel="noopener noreferrer"><img src="./images/lm_config_pr_branch.png" alt="LM config PR branch. " width="734" height="416" loading="lazy" /></a></p>
+<a href="./images/lm_config_pr_branch.png" target="_blank" rel="noopener noreferrer"><img src="./images/lm_config_pr_branch.png" alt="LM config PR branch. " width="734" height="416" loading="lazy" /></a></p>
 
 <p>So we’ll go to the local copy of our workflow repository, fetch the remote and
 checkout this branch:</p>
@@ -1638,7 +1638,7 @@ rewrite .lifemonitor.yaml (63%)
 </code></pre></div></div>
 
 <p>Now you can go back to the Pull Request and merge it.
-<a href="./images/lm_config_pr_merged.png" rel="noopener noreferrer"><img src="./images/lm_config_pr_merged.png" alt="LM config PR merged. " width="676" height="162" loading="lazy" /></a></p>
+<a href="./images/lm_config_pr_merged.png" target="_blank" rel="noopener noreferrer"><img src="./images/lm_config_pr_merged.png" alt="LM config PR merged. " width="676" height="162" loading="lazy" /></a></p>
 
 <h3 id="new-and-changing-checks">New and changing checks</h3>
 
@@ -1681,7 +1681,7 @@ you enabled and selected.</p>
 you that the registration happened and providing you with a direct link to the
 workflow on LifeMonitor (from which you’ll be able to access the corresponding
 WorkflowHub entry).
-<a href="./images/lm_new_registration.png" rel="noopener noreferrer"><img src="./images/lm_new_registration.png" alt="LM new registration. " width="1148" height="439" loading="lazy" /></a></p>
+<a href="./images/lm_new_registration.png" target="_blank" rel="noopener noreferrer"><img src="./images/lm_new_registration.png" alt="LM new registration. " width="1148" height="439" loading="lazy" /></a></p>
 </blockquote>
 
 <p>The workflow should also appear on your <a href="https://app.lifemonitor.eu/dashboard">LifeMonitor
@@ -1693,7 +1693,7 @@ then the system will report its passing or failing status.</p>
 <p>The workflow entry in LifeMonitor also has a link to the corresponding
 WorkflowHub entry.  Follow the link to reach a page with your workflow’s
 metadata:
-<a href="./images/lm_new_registration-workflowhub.png" rel="noopener noreferrer"><img src="./images/lm_new_registration-workflowhub.png" alt="LM new registration workflowhub. " width="1171" height="393" loading="lazy" /></a></p>
+<a href="./images/lm_new_registration-workflowhub.png" target="_blank" rel="noopener noreferrer"><img src="./images/lm_new_registration-workflowhub.png" alt="LM new registration workflowhub. " width="1171" height="393" loading="lazy" /></a></p>
 
 <h2 id="profit">Profit</h2>
 
@@ -2035,7 +2035,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/69c218939472b4ffa89d84d502376d0dd602a5f9">69c2189</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/756552a7d6bd521fe2d8ab348acbc74b66d5191f">756552a</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

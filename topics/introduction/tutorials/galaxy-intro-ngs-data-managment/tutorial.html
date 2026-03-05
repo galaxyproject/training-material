@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@69c218939472b4ffa89d84d502376d0dd602a5f9",
+		release: "galaxy-training-network@756552a7d6bd521fe2d8ab348acbc74b66d5191f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -2044,7 +2044,7 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
 
   <p>It is common to prepare pair-end and mate-pair sequencing libraries. This is highly beneficial for a number of applications discussed in subsequent topics. For now, let’s just briefly discuss what these are and how they manifest themselves in FASTQ form.</p>
 
-  <p><a href="../../images/pe_mp.png" rel="noopener noreferrer"><img src="../../images/pe_mp.png" alt="Paired-end and mate-pair reads. " width="746" height="366" loading="lazy" /></a>
+  <p><a href="../../images/pe_mp.png" target="_blank" rel="noopener noreferrer"><img src="../../images/pe_mp.png" alt="Paired-end and mate-pair reads. " width="746" height="366" loading="lazy" /></a>
 In paired end sequencing (left) the actual ends of rather short DNA molecules (less than 1kb) are determined, while for mate pair sequencing (right) the ends of long molecules are joined and prepared in special sequencing libraries. In these mate pair protocols, the ends of long, size-selected molecules are connected with an internal adapter sequence (i.e. linker, yellow) in a circularization reaction. The circular molecule is then processed using restriction enzymes or fragmentation. Fragments are enriched for the linker and outer library adapters are added around the two combined molecule ends. The internal adapter can then be used as a second priming site for an additional sequencing reaction in the same orientation or sequencing can be performed from the second adapter, from the reverse strand (From Ph.D. dissertation by <a href="https://ul.qucosa.de/api/qucosa%3A11231/attachment/ATT-0/">Martin Kircher</a></p>
 
   <p>Thus in both cases (paired-end and mate-pair) a single physical piece of DNA (or RNA in the case of RNA-seq) is sequenced from two ends and so generates two reads. These can be represented as separate files (two FASTQ files with first and second reads) or a single file were reads for each end are interleaved. Here are examples:</p>
@@ -2110,9 +2110,9 @@ HHHHHHHHHHHHGHHHHHHGHHHHHHHHHHHFHHHFHHHHHHHHHHH
   <ol>
     <li>Go to your Galaxy instance of choice such as one of the <a href="https://galaxyproject.org/usegalaxy/">UseGalaxy.* instances</a> or any other.</li>
     <li>Click <em>Upload Data</em> button:
-<a href="../../images/upload_button.png" rel="noopener noreferrer"><img src="../../images/upload_button.png" alt="Data upload button. " width="325" height="125" loading="lazy" /></a></li>
+<a href="../../images/upload_button.png" target="_blank" rel="noopener noreferrer"><img src="../../images/upload_button.png" alt="Data upload button. " width="325" height="125" loading="lazy" /></a></li>
     <li>In the dialog box that would appear click “<em>Paste/Fetch</em>” button
-<a href="../../images/paste.png" rel="noopener noreferrer"><img src="../../images/paste.png" alt="Choose local files button. " width="244" height="92" loading="lazy" /></a></li>
+<a href="../../images/paste.png" target="_blank" rel="noopener noreferrer"><img src="../../images/paste.png" alt="Choose local files button. " width="244" height="92" loading="lazy" /></a></li>
     <li>Paste the following accessions into the box (red box in the image below):
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/15354240/files/ERR042228_F.fq.gz
 https://zenodo.org/records/15354240/files/ERR042228_R.fq.gz
@@ -2125,11 +2125,11 @@ https://zenodo.org/records/15354240/files/ERR636434_R.fq.gz
 </code></pre></div>      </div>
     </li>
     <li>Change datatype to <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> (green box in the image below)
-<a href="../../images/upload_name_datatype.svg" rel="noopener noreferrer"><img src="../../images/upload_name_datatype.svg" alt="Name dataset and change datatype. " width="762" height="461" loading="lazy" /></a></li>
+<a href="../../images/upload_name_datatype.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/upload_name_datatype.svg" alt="Name dataset and change datatype. " width="762" height="461" loading="lazy" /></a></li>
     <li>Click <em>Start</em> button</li>
     <li>Close dialog by pressing <strong>Close</strong> button
 This will create eight datasets in your history on the right side of the interface:
-<a href="../../images/f_and_r.svg" rel="noopener noreferrer"><img src="../../images/f_and_r.svg" alt="Four samples and eight files. " width="898" height="360" loading="lazy" /></a>
+<a href="../../images/f_and_r.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/f_and_r.svg" alt="Four samples and eight files. " width="898" height="360" loading="lazy" /></a>
 There are eight datasets because each sample has <em>forward</em> and <em>reverse</em> read files associated with it, so 4 × 2 = 8</li>
   </ol>
 
@@ -2169,11 +2169,11 @@ There are eight datasets because each sample has <em>forward</em> and <em>revers
     <li>“<em>Select paired collection(s)</em>”: Collection we created in the previous step (<font color="red">red arrow</font>).</li>
   </ul>
 
-  <p><a href="../../images/fastp.svg" rel="noopener noreferrer"><img src="../../images/fastp.svg" alt="fastp interface. " width="929" height="302" loading="lazy" /></a></p>
+  <p><a href="../../images/fastp.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/fastp.svg" alt="fastp interface. " width="929" height="302" loading="lazy" /></a></p>
 
   <p>Fastp modifies files by removing standard Illumina adapters and applies a number of quality filters generating “Cleaned up data” shown above) as well as HTML and JSON reports as three collections:</p>
 
-  <p><a href="../../images/fastp_history.svg" rel="noopener noreferrer"><img src="../../images/fastp_history.svg" alt="fastp history items. " width="1346" height="338" loading="lazy" /></a></p>
+  <p><a href="../../images/fastp_history.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/fastp_history.svg" alt="fastp history items. " width="1346" height="338" loading="lazy" /></a></p>
 
 </blockquote>
 
@@ -2189,11 +2189,11 @@ There are eight datasets because each sample has <em>forward</em> and <em>revers
     <li>“<em>Output of fastp</em>”: JSON output generated by <strong>fastp</strong> at the previous step (<font color="red">red arrow</font>).</li>
   </ul>
 
-  <p><a href="../../images/multiqc.svg" rel="noopener noreferrer"><img src="../../images/multiqc.svg" alt="multiqc interface. " width="881" height="365" loading="lazy" /></a></p>
+  <p><a href="../../images/multiqc.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/multiqc.svg" alt="multiqc interface. " width="881" height="365" loading="lazy" /></a></p>
 
   <p><code class="language-plaintext highlighter-rouge">multiqc</code> will produce two outputs, but the one you care about has a word “Webpage” in it:</p>
 
-  <p><a href="../../images/multiqc_history.svg" rel="noopener noreferrer"><img src="../../images/multiqc_history.svg" alt="multiqc history item. " width="1028" height="100" loading="lazy" /></a></p>
+  <p><a href="../../images/multiqc_history.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/multiqc_history.svg" alt="multiqc history item. " width="1028" height="100" loading="lazy" /></a></p>
 
   <p>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon and you will see the QC report.</p>
 
@@ -2228,13 +2228,13 @@ To assign each base a unique score identifier (instead of numbers of varying cha
 For raw reads, the range of scores will depend on the sequencing technology and the base caller used (Illumina, for example, used a tool called Bustard, or, more recently, RTA). Unfortunately, Illumina has been anything but consistent in how they calculated and ASCII-encoded the Phred score (see below)! In addition, Illumina now allows Phred scores for base calls with as high as 45, while 41 used to be the maximum score until the HiSeq X. This may cause issues with downstream applications that expect an upper limit of 41.</p>
   </blockquote>
 
-  <p><a href="../../images/illumina_qs.png" rel="noopener noreferrer"><img src="../../images/illumina_qs.png" alt="Illumina quality score. " width="862" height="261" loading="lazy" /></a></p>
+  <p><a href="../../images/illumina_qs.png" target="_blank" rel="noopener noreferrer"><img src="../../images/illumina_qs.png" alt="Illumina quality score. " width="862" height="261" loading="lazy" /></a></p>
 
   <p>Base call quality scores are represented with the Phred range. Different Illumina (formerly Solexa) versions
 used different scores and ASCII offsets. Starting with Illumina format 1.8, the score now represents the standard
 Sanger/Phred format that is also used by other sequencing platforms and the sequencing archives.</p>
 
-  <p><a href="../../images/fastq_qs.png" rel="noopener noreferrer"><img src="../../images/fastq_qs.png" alt="FASTQ quality score. " width="1018" height="481" loading="lazy" /></a></p>
+  <p><a href="../../images/fastq_qs.png" target="_blank" rel="noopener noreferrer"><img src="../../images/fastq_qs.png" alt="FASTQ quality score. " width="1018" height="481" loading="lazy" /></a></p>
 
   <p>The ASCII interpretation and ranges of the different Phred score notations used by Illumina and the original Sanger interpretation. Although the Sanger format allows a theoretical score of 93, raw sequencing reads typically do not exceed a Phred score of 60. In fact, most Illumina-based sequencing will result in maximum scores of 41 to 45 (image from Wikipedia)</p>
 
@@ -2242,7 +2242,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
   <p>One of the first steps in the analysis of NGS data is seeing how good the data actually is. <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastqQC</a> is the most famous tool allowing you to assess the quality of FASTQ datasets (and deciding whether to blame or not to blame whoever has done sequencing for you). <a href="https://github.com/smithlabcode/falco">Falco</a> is an alternative tool for quality control. Falco is a improved implementation of FastQC for high throughput sequence quality control.</p>
 
-  <p><a href="../../images/qc_plot.svg" rel="noopener noreferrer"><img src="../../images/qc_plot.svg" alt="Good quality in FastQC. " width="1269" height="476" loading="lazy" /></a>
+  <p><a href="../../images/qc_plot.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/qc_plot.svg" alt="Good quality in FastQC. " width="1269" height="476" loading="lazy" /></a>
 Here, you can see <strong>FastQC</strong> base quality reports (the tools gives you many other types of data) for two datasets: <b>A</b> and <b>B</b>. The A dataset has long reads (250 bp) and very good quality profile with no qualities dropping below phred score of 30. The B dataset is significantly worse with ends of the reads dipping below phred score of 20. The B reads may need to be trimmed for further processing. <strong>Falco</strong> will generate almost the same reports about the quality of the reads.”)</p>
 </blockquote>
 
@@ -2262,7 +2262,7 @@ Here, you can see <strong>FastQC</strong> base quality reports (the tools gives 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/15354240/files/GCF_000002765.6.fa.gz
 </code></pre></div>  </div>
   <p>The only difference is that here with the example we’ve seen above is that you need to set datatype (green box) to <code class="language-plaintext highlighter-rouge">fasta.gz</code>:
-<a href="../../images/upload_genome.svg" rel="noopener noreferrer"><img src="../../images/upload_genome.svg" alt="Genome upload. " width="762" height="461" loading="lazy" /></a></p>
+<a href="../../images/upload_genome.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/upload_genome.svg" alt="Genome upload. " width="762" height="461" loading="lazy" /></a></p>
 
 </blockquote>
 
@@ -2282,7 +2282,7 @@ Here, you can see <strong>FastQC</strong> base quality reports (the tools gives 
     <li>“<em>Select a paired collection</em>”: Select the collection of fastq datasets produced by <strong>fastp</strong> (<font color="green">green arrow</font>).</li>
   </ul>
 
-  <p><a href="../../images/bwamem2.svg" rel="noopener noreferrer"><img src="../../images/bwamem2.svg" alt="BWA-MEM2 interface. " width="865" height="551" loading="lazy" /></a></p>
+  <p><a href="../../images/bwamem2.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/bwamem2.svg" alt="BWA-MEM2 interface. " width="865" height="551" loading="lazy" /></a></p>
 
 </blockquote>
 
@@ -2299,7 +2299,7 @@ Here, you can see <strong>FastQC</strong> base quality reports (the tools gives 
 
   <p>As shown below, SAM files typically contain a short header section and a very long alignment section where each row represents a single read alignment. The following sections will explain the SAM format in a bit more detail. For the most comprehensive and updated information go to <a href="https://github.com/samtools/hts-specs">SAM/BAM and related specifications GitHub repository.</a></p>
 
-  <p><a href="../../images/bam_structure.png" rel="noopener noreferrer"><img src="../../images/bam_structure.png" alt="BAM structure. " width="930" height="557" loading="lazy" /></a>
+  <p><a href="../../images/bam_structure.png" target="_blank" rel="noopener noreferrer"><img src="../../images/bam_structure.png" alt="BAM structure. " width="930" height="557" loading="lazy" /></a>
 Each line of the optional header section starts with <tt>@</tt>, followed by the appropriate abbreviation (e.g., SQ for sequence dictionary which lists all chromosomes names (SN) and their lengths (LN)). The vast majority of lines within a SAM file typically correspond to read alignments where each read is described by the 11 mandatory entries (black font) and a variable number of optional fields (grey font). From <a href="https://web.archive.org/web/20240422192254/https://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">a tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo.”</p>
 
   <p><strong>SAM Header</strong></p>
@@ -2325,7 +2325,7 @@ Each line of the optional header section starts with <tt>@</tt>, followed by the
 
   <p>The following table explains the format and content of each field. The <code class="language-plaintext highlighter-rouge">FLAG</code>, <code class="language-plaintext highlighter-rouge">CIGAR</code>, and the optional fields (marked with pale blue background) are explained in more detail below. The number of optional fields can vary widely between different SAM files and even between reads within in the same file. The field types marked in blue are explained in more detail in the text below.</p>
 
-  <p><a href="../../images/sam_fields.png" rel="noopener noreferrer"><img src="../../images/sam_fields.png" alt="SAM fields. " width="1084" height="970" loading="lazy" /></a></p>
+  <p><a href="../../images/sam_fields.png" target="_blank" rel="noopener noreferrer"><img src="../../images/sam_fields.png" alt="SAM fields. " width="1084" height="970" loading="lazy" /></a></p>
 
   <p><strong><code class="language-plaintext highlighter-rouge">FLAG</code> field</strong></p>
 
@@ -2333,7 +2333,7 @@ Each line of the optional header section starts with <tt>@</tt>, followed by the
 
   <p>The following table gives an overview of the different properties that can be encoded in the FLAG field. The developers of the SAM format and samtools tend to use the hexadecimal encoding as a means to refer to the different bits in their documentation. The value of the FLAG field in a given SAM file, however, will always be the decimal representation of the sum of the underlying binary values (as shown in Table below, row 2).</p>
 
-  <p><a href="../../images/sam_flag.png" rel="noopener noreferrer"><img src="../../images/sam_flag.png" alt="SAM flag. " width="1027" height="592" loading="lazy" /></a>
+  <p><a href="../../images/sam_flag.png" target="_blank" rel="noopener noreferrer"><img src="../../images/sam_flag.png" alt="SAM flag. " width="1027" height="592" loading="lazy" /></a>
 The <tt>FLAG</tt> field of SAM files stores information about the respective read alignment in one single decimal number. The decimal number is the sum of all the answers to the Yes/No questions associated with each binary bit. The hexadecimal representation is used to refer to the individual bits (questions). A bit is set if the corresponding state is true. For example, if a read is paired, <tt>0x1</tt> will be set, returning the decimal value of 1. Therefore, all <tt>FLAG</tt> values associated with paired reads must be uneven decimal numbers. Conversely, if the <tt>0x1</tt> bit is unset (= read is not paired), no assumptions can be made about <tt>0x2</tt>, <tt>0x8</tt>, <tt>0x20</tt>, <tt>0x40</tt> and <tt>0x80</tt> because they refer to paired reads. From <a href="https://web.archive.org/web/20240422192254/https://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">a tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo.”</p>
 
   <p>In a run with single reads, the flags you most commonly see are:</p>
@@ -2408,7 +2408,7 @@ contains a so-called CIGAR string indicating which operations were necessary to 
 
   <p>The sum of lengths of the <strong>M</strong>, <strong>I</strong>, <strong>S</strong>, <strong>=</strong>, <strong>X</strong> operations must equal the length of the read. Here are some examples:</p>
 
-  <p><a href="../../images/cigar.png" rel="noopener noreferrer"><img src="../../images/cigar.png" alt="CIGAR. " width="1259" height="241" loading="lazy" /></a>
+  <p><a href="../../images/cigar.png" target="_blank" rel="noopener noreferrer"><img src="../../images/cigar.png" alt="CIGAR. " width="1259" height="241" loading="lazy" /></a>
 From <a href="https://web.archive.org/web/20240422192254/https://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">a tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo.”)</p>
 
   <p><strong>Optional fields</strong></p>
@@ -2444,11 +2444,11 @@ pairs in the format of <code class="language-plaintext highlighter-rouge">&lt;TA
 
   <p>One of the best descriptions of BAM readgroups is on <a href="https://gatkforums.broadinstitute.org">GATK support site</a>:</p>
 
-  <p><a href="../../images/rg.png" rel="noopener noreferrer"><img src="../../images/rg.png" alt="Read groups. " width="855" height="504" loading="lazy" /></a></p>
+  <p><a href="../../images/rg.png" target="_blank" rel="noopener noreferrer"><img src="../../images/rg.png" alt="Read groups. " width="855" height="504" loading="lazy" /></a></p>
 
   <p>GATK forum also provides the following example:</p>
 
-  <p><a href="../../images/rg_example.png" rel="noopener noreferrer"><img src="../../images/rg_example.png" alt="Read group example. " width="856" height="327" loading="lazy" /></a></p>
+  <p><a href="../../images/rg_example.png" target="_blank" rel="noopener noreferrer"><img src="../../images/rg_example.png" alt="Read group example. " width="856" height="327" loading="lazy" /></a></p>
 
   <p><strong>Manipulating SAM/BAM datasets</strong></p>
 
@@ -2473,7 +2473,7 @@ pairs in the format of <code class="language-plaintext highlighter-rouge">&lt;TA
 
   <p>Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this example) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet, PCR has its biases, which are especially profound in cases of multitemplate PCR used for construction of sequencing libraries (<span class="citation"><a href="#Kanagawa2003">Kanagawa 2003</a></span>).</p>
 
-  <p><a href="../../images/pcr-duplicates.png" rel="noopener noreferrer"><img src="../../images/pcr-duplicates.png" alt="PCR duplicates. " width="1079" height="754" loading="lazy" /></a>
+  <p><a href="../../images/pcr-duplicates.png" target="_blank" rel="noopener noreferrer"><img src="../../images/pcr-duplicates.png" alt="PCR duplicates. " width="1079" height="754" loading="lazy" /></a>
 Analyzing molecules aligning with the same outer coordinates, a mapping quality of at least 30 and a length of at least 30 nucleotide, resulted in an average coverage of 12.9 per PCR duplicate and an empirical coverage distribution similar to an exponential/power law distribution (left upper panel). This indicates that many molecules are only observed for deeper sequencing while other molecules are available at higher frequencies. Analyzing length (left middle panel) and GC content (left lower panel) patterns as well as the combination (right panel) shows higher PCR duplicate counts for a GC content between 30% to 70% as well as for shorter molecules compared to longer molecules. This effect may be due to an amplification bias from the polymerase or the cluster generation process necessary for Illumina sequencing. (From Ph.D. dissertation by &lt;a href="https://ul.qucosa.de/api/qucosa%3A11231/attachment/ATT-0/"&gt;Martin Kircher&lt;/a&gt;).”</p>
 
   <p>Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate reads is the <code class="language-plaintext highlighter-rouge">MarkDuplicates</code> utility from <a href="https://broadinstitute.github.io/picard/command-line-overview.html">Picard</a> package, which we will use later in this tutorial.</p>
@@ -2482,7 +2482,7 @@ Analyzing molecules aligning with the same outer coordinates, a mapping quality 
 
   <p>However, one has to be careful when removing duplicates in cases when the sequencing targets are small (e.g., sequencing of bacterial, viral, or organellar genomes as well as amplicons). This is because when sequencing target is small reads will have the same coordinates by chance and not because of PCR amplification issues. The figure below illustrates the fine balance between estimates allele frequency, coverage, and variation in insert size (from (<span class="citation"><a href="#Zhou2014">Zhou <i>et al.</i> 2014</a></span>)):</p>
 
-  <p><a href="../../images/sampling-bias.png" rel="noopener noreferrer"><img src="../../images/sampling-bias.png" alt="Sampling bias. " width="1800" height="1418" loading="lazy" /></a>
+  <p><a href="../../images/sampling-bias.png" target="_blank" rel="noopener noreferrer"><img src="../../images/sampling-bias.png" alt="Sampling bias. " width="1800" height="1418" loading="lazy" /></a>
 The Variant Allele Frequency (VAF) bias determined by coverage and insert size variance. Reads are paired-end and read length is 76. The insert size distribution is modeled as a Gaussian distribution with mean at 200 and standard deviation shown on the X-axis. The true VAF is 0.05. The darkness at each position indicates the magnitude of the bias in the VAF (<span class="citation"><a href="#Zhou2014">Zhou <i>et al.</i> 2014</a></span>).”)</p>
 </blockquote>
 
@@ -2497,7 +2497,7 @@ The Variant Allele Frequency (VAF) bias determined by coverage and insert size v
     <li><em>“If true do not write duplicates to the output file instead of writing them with appropriate flags set”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> as shown with <font color="green">green arrow</font>.</li>
   </ul>
 
-  <p><a href="../../images/markdups.svg" rel="noopener noreferrer"><img src="../../images/markdups.svg" alt="Mark Duplicates. " width="845" height="469" loading="lazy" /></a></p>
+  <p><a href="../../images/markdups.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/markdups.svg" alt="Mark Duplicates. " width="845" height="469" loading="lazy" /></a></p>
 </blockquote>
 
 <h2 id="calling-variants">Calling variants</h2>
@@ -2550,7 +2550,7 @@ GGG--CACACAGGG            Alt: G
     </li>
   </ul>
 
-  <p><a href="../../images/realign_lofreq.svg" rel="noopener noreferrer"><img src="../../images/realign_lofreq.svg" alt="Realign reads. " width="788" height="404" loading="lazy" /></a></p>
+  <p><a href="../../images/realign_lofreq.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/realign_lofreq.svg" alt="Realign reads. " width="788" height="404" loading="lazy" /></a></p>
 
 </blockquote>
 
@@ -2592,7 +2592,7 @@ GGG--CACACAGGG            Alt: G
     </li>
   </ul>
 
-  <p><a href="../../images/lofreq.svg" rel="noopener noreferrer"><img src="../../images/lofreq.svg" alt="Call variants with lofreq. " width="956" height="1597" loading="lazy" /></a></p>
+  <p><a href="../../images/lofreq.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/lofreq.svg" alt="Call variants with lofreq. " width="956" height="1597" loading="lazy" /></a></p>
 </blockquote>
 
 <p>The output of this step is a collection of <a href="https://en.wikipedia.org/wiki/Variant_Call_Format">VCF</a> files containing information on all variants found between the reads and the reference genome.</p>
@@ -2612,7 +2612,7 @@ GGG--CACACAGGG            Alt: G
 </code></pre></div>  </div>
   <p>Set datatype (<font color="green">green</font> box) to <code class="language-plaintext highlighter-rouge">gtf.gz</code>:</p>
 
-  <p><a href="../../images/gtf_upload.svg" rel="noopener noreferrer"><img src="../../images/gtf_upload.svg" alt="Genome upload. " width="928" height="560" loading="lazy" /></a></p>
+  <p><a href="../../images/gtf_upload.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/gtf_upload.svg" alt="Genome upload. " width="928" height="560" loading="lazy" /></a></p>
 
 </blockquote>
 
@@ -2631,7 +2631,7 @@ GGG--CACACAGGG            Alt: G
     <li><em>“Genome in FASTA format”</em>: Choose reference genome uploaded earlier (<font color="orange">orange arrow</font>).</li>
   </ul>
 
-  <p><a href="../../images/snpeff_build.svg" rel="noopener noreferrer"><img src="../../images/snpeff_build.svg" alt="SnpEff Build. " width="957" height="809" loading="lazy" /></a></p>
+  <p><a href="../../images/snpeff_build.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/snpeff_build.svg" alt="SnpEff Build. " width="957" height="809" loading="lazy" /></a></p>
 
 </blockquote>
 
@@ -2652,7 +2652,7 @@ GGG--CACACAGGG            Alt: G
     </li>
   </ul>
 
-  <p><a href="../../images/snpeff.svg" rel="noopener noreferrer"><img src="../../images/snpeff.svg" alt="snpEff eff. " width="885" height="788" loading="lazy" /></a></p>
+  <p><a href="../../images/snpeff.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/snpeff.svg" alt="snpEff eff. " width="885" height="788" loading="lazy" /></a></p>
 
 </blockquote>
 
@@ -2676,7 +2676,7 @@ GGG--CACACAGGG            Alt: G
     <li><em>“One effect per line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (<font color="blue">blue arrow</font>)</li>
   </ul>
 
-  <p><a href="../../images/snpsift_extract_fields.svg" rel="noopener noreferrer"><img src="../../images/snpsift_extract_fields.svg" alt="snpsift extract fields. " width="941" height="426" loading="lazy" /></a></p>
+  <p><a href="../../images/snpsift_extract_fields.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/snpsift_extract_fields.svg" alt="snpsift extract fields. " width="941" height="426" loading="lazy" /></a></p>
 
 </blockquote>
 
@@ -2796,7 +2796,7 @@ GGG--CACACAGGG            Alt: G
     <li>“<em>Where to add dataset name</em>”: <code class="language-plaintext highlighter-rouge">Same line and each line in dataset</code> (<font color="orange">orange outline</font>)</li>
   </ul>
 
-  <p><a href="../../images/collapse_ui.svg" rel="noopener noreferrer"><img src="../../images/collapse_ui.svg" alt="Collapse tool UI. " width="924" height="521" loading="lazy" /></a></p>
+  <p><a href="../../images/collapse_ui.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/collapse_ui.svg" alt="Collapse tool UI. " width="924" height="521" loading="lazy" /></a></p>
 
 </blockquote>
 
@@ -2850,7 +2850,7 @@ ERR042232.fq NC_004318.2   671641   A    T     1300.0   43   0.906977   0   0,0,
     <li>“<em>Number of header lines to skip</em>”: <code class="language-plaintext highlighter-rouge">1</code> (<font color="blue">blue outline</font>).</li>
   </ul>
 
-  <p><a href="../../images/filter_gene_name.svg" rel="noopener noreferrer"><img src="../../images/filter_gene_name.svg" alt="Filter by gene name. " width="925" height="555" loading="lazy" /></a></p>
+  <p><a href="../../images/filter_gene_name.svg" target="_blank" rel="noopener noreferrer"><img src="../../images/filter_gene_name.svg" alt="Filter by gene name. " width="925" height="555" loading="lazy" /></a></p>
 
 </blockquote>
 
@@ -3590,7 +3590,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/69c218939472b4ffa89d84d502376d0dd602a5f9">69c2189</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/756552a7d6bd521fe2d8ab348acbc74b66d5191f">756552a</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

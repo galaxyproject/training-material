@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@69c218939472b4ffa89d84d502376d0dd602a5f9",
+		release: "galaxy-training-network@756552a7d6bd521fe2d8ab348acbc74b66d5191f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1455,7 +1455,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <li>Inspect the content of <code class="language-plaintext highlighter-rouge">class_names.txt</code>.
       <ul>
         <li>Click on the title of your file to see the row of small icons for saving, linking, etc.:
-<a href="../../images/imaging-introduction/LittleJobIcons.png" rel="noopener noreferrer"><img src="../../images/imaging-introduction/LittleJobIcons.png" alt="Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark." width="360" height="37" loading="lazy" /></a></li>
+<a href="../../images/imaging-introduction/LittleJobIcons.png" target="_blank" rel="noopener noreferrer"><img src="../../images/imaging-introduction/LittleJobIcons.png" alt="Screenshot of Galaxy icons. Seven small blue icons are shown on a green background. From left to right they are: floppy disk, link, information, redo, bar chart, flow chart and a question mark." width="360" height="37" loading="lazy" /></a></li>
         <li>Click on the <strong>visualise icon</strong> <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-visualise</span> and then select the <strong>Editor</strong> visualization plugin.</li>
       </ul>
     </li>
@@ -1548,7 +1548,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <ul>
         <li>
           <p>Navigate to <code class="language-plaintext highlighter-rouge">File</code> -&gt; <code class="language-plaintext highlighter-rouge">Change Output Dir</code> and set the output directory to <code class="language-plaintext highlighter-rouge">working/home/output</code>.
-<a href="../../images/yolo-train/al_chng_dir.png" rel="noopener noreferrer"><img src="../../images/yolo-train/al_chng_dir.png" alt="al change output dir. " width="1364" height="764" loading="lazy" /></a></p>
+<a href="../../images/yolo-train/al_chng_dir.png" target="_blank" rel="noopener noreferrer"><img src="../../images/yolo-train/al_chng_dir.png" alt="al change output dir. " width="1364" height="764" loading="lazy" /></a></p>
         </li>
         <li>
           <p>To open your input images, go to <code class="language-plaintext highlighter-rouge">File</code> -&gt; <code class="language-plaintext highlighter-rouge">Open Dir</code>, and choose <code class="language-plaintext highlighter-rouge">working/home/input_images</code> directory.</p>
@@ -1557,25 +1557,25 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     </li>
   </ol>
 
-  <p><a href="../../images/yolo-train/al_open_dir.png" rel="noopener noreferrer"><img src="../../images/yolo-train/al_open_dir.png" alt="al open dir. " width="1367" height="767" loading="lazy" /></a></p>
+  <p><a href="../../images/yolo-train/al_open_dir.png" target="_blank" rel="noopener noreferrer"><img src="../../images/yolo-train/al_open_dir.png" alt="al open dir. " width="1367" height="767" loading="lazy" /></a></p>
 
   <ul>
     <li>Click the <code class="language-plaintext highlighter-rouge">Auto Labeling</code> button, choose <code class="language-plaintext highlighter-rouge">Segment Anything 2 (Hiera-Tiny)</code> from the model dropdown, select <code class="language-plaintext highlighter-rouge">+Point</code>,then begin annotation by clicking on the object in the image. Wait for the inference to complete before continuing.</li>
   </ul>
 
-  <p><a href="../../images/yolo-train/al_label.png" rel="noopener noreferrer"><img src="../../images/yolo-train/al_label.png" alt="al open dir. " width="1819" height="1021" loading="lazy" /></a></p>
+  <p><a href="../../images/yolo-train/al_label.png" target="_blank" rel="noopener noreferrer"><img src="../../images/yolo-train/al_label.png" alt="al open dir. " width="1819" height="1021" loading="lazy" /></a></p>
 
   <p><strong>Note:</strong> If the selected auto labeling model falsely detects image background or objects that are not part of the object of interest, we can refine it by adding a <em>“negative point”</em> to indicate image background. Vice versa, if the model does not completely detect the boundaries of the objects, one can add a <em>“positive point”</em> to the area inside the object that was missed by the model.</p>
   <ul>
     <li>In the previous step, the results included some background, as shown in the picture. To refine them, click <code class="language-plaintext highlighter-rouge">-Point</code>, then click on the background area. The model will re-run the inference.</li>
   </ul>
 
-  <p><a href="../../images/yolo-train/al_label_1.png" rel="noopener noreferrer"><img src="../../images/yolo-train/al_label_1.png" alt="al open dir. " width="1586" height="889" loading="lazy" /></a></p>
+  <p><a href="../../images/yolo-train/al_label_1.png" target="_blank" rel="noopener noreferrer"><img src="../../images/yolo-train/al_label_1.png" alt="al open dir. " width="1586" height="889" loading="lazy" /></a></p>
   <ul>
     <li>After the inference is complete, click <code class="language-plaintext highlighter-rouge">Finish Object</code>. In the <code class="language-plaintext highlighter-rouge">Enter object label</code> box, type <code class="language-plaintext highlighter-rouge">tail</code> then click <code class="language-plaintext highlighter-rouge">OK</code>. This will automatically create a label file in JSON format that contains the coordinates of the polygon.</li>
   </ul>
 
-  <p><a href="../../images/yolo-train/al_finish.png" rel="noopener noreferrer"><img src="../../images/yolo-train/al_finish.png" alt="al open dir. " width="190" height="201" loading="lazy" /></a></p>
+  <p><a href="../../images/yolo-train/al_finish.png" target="_blank" rel="noopener noreferrer"><img src="../../images/yolo-train/al_finish.png" alt="al open dir. " width="190" height="201" loading="lazy" /></a></p>
 
   <ul>
     <li><strong>Important:</strong> The object label must match the content of <code class="language-plaintext highlighter-rouge">class_names.txt</code>.</li>
@@ -1588,7 +1588,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   <p>Once you have finished annotating all your images, you can safely close the interactive environment.<br />
 Click on the small cross at the top-right corner of the AnyLabeling window.<br />
-<a href="../../images/yolo-train/al_close.png" rel="noopener noreferrer"><img src="../../images/yolo-train/al_close.png" alt="Closing AnyLabeling. " width="341" height="213" loading="lazy" /></a><br />
+<a href="../../images/yolo-train/al_close.png" target="_blank" rel="noopener noreferrer"><img src="../../images/yolo-train/al_close.png" alt="Closing AnyLabeling. " width="341" height="213" loading="lazy" /></a><br />
 Wait a few moments for the interface to close completely and return to the Galaxy workspace.</p>
 </blockquote>
 
@@ -2031,7 +2031,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/69c218939472b4ffa89d84d502376d0dd602a5f9">69c2189</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/756552a7d6bd521fe2d8ab348acbc74b66d5191f">756552a</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@69c218939472b4ffa89d84d502376d0dd602a5f9",
+		release: "galaxy-training-network@756552a7d6bd521fe2d8ab348acbc74b66d5191f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1334,7 +1334,7 @@ sometimes represents a local (and possibly global) minimum for the sample’s
 the rest of its time in that position until it decays.</li>
 </ul>
 
-<p><a href="../../images/muon_spectroscopy_diagram.png" rel="noopener noreferrer"><img src="../../images/muon_spectroscopy_diagram.png" alt="Graphical illustration of muons being implanted in a sample, then decaying to a positron and being detected. " width="957" height="478" loading="lazy" /></a></p>
+<p><a href="../../images/muon_spectroscopy_diagram.png" target="_blank" rel="noopener noreferrer"><img src="../../images/muon_spectroscopy_diagram.png" alt="Graphical illustration of muons being implanted in a sample, then decaying to a positron and being detected. " width="957" height="478" loading="lazy" /></a></p>
 
 <p>Where these minima of the potential actually are isn’t always obvious and,
 although the our version of the <abbr title="Unperturbed Electrostatic Potential">UEP</abbr> method has proven to be quite efficient and useful,
@@ -1374,20 +1374,20 @@ as stated in the requirements at the beginning of this tutorial please, before s
 <p>As described in the lecture, the full workflow associated with finding
 potential muon stopping sites in crystalline copper is shown in the figure below:</p>
 
-<p><a href="../../images/Workflow_for_finding_mu+.png" rel="noopener noreferrer"><img src="../../images/Workflow_for_finding_mu+.png" alt="Graphical illustration of the steps in finding the muon stopping site for a Silicon crystal lattice. (1) Start with a pure host, (2) randomly populate with muons, (3) relax electrostatic forces, (4) cluster structures to give the stopping site in either (5) a conventional unit cell or (6) a supercell." width="720" height="405" loading="lazy" /></a></p>
+<p><a href="../../images/Workflow_for_finding_mu+.png" target="_blank" rel="noopener noreferrer"><img src="../../images/Workflow_for_finding_mu+.png" alt="Graphical illustration of the steps in finding the muon stopping site for a Silicon crystal lattice. (1) Start with a pure host, (2) randomly populate with muons, (3) relax electrostatic forces, (4) cluster structures to give the stopping site in either (5) a conventional unit cell or (6) a supercell." width="720" height="405" loading="lazy" /></a></p>
 
 <p>It comprises 6 steps that will be described in detail in the next sections.  Steps 1 and 6
 are performed outside of the Galaxy platform, usually in an external computer cluster that can
 run the necessary Density Functional Theory (DFT) simulations. Steps 2, 3, 4, and 5 of this workflow are are carried out
 in Galaxy using two Galaxy tools: <code class="language-plaintext highlighter-rouge">PyMuonSuite AIRSS UEP Optimise</code> and <code class="language-plaintext highlighter-rouge">PyMuonSuite AIRSS Cluster</code>.</p>
 
-<p><a href="../../images/2GalaxyTools.png" rel="noopener noreferrer"><img src="../../images/2GalaxyTools.png" alt="Screenshots of the Galaxy UI showing the two tools, PyMuonSuite AIRSS UEP Optimise and PyMuonSuite AIRSS Cluster, and which steps of the described process they correspond to (1,2,3 and 4,5,6 respectively)." width="720" height="405" loading="lazy" /></a></p>
+<p><a href="../../images/2GalaxyTools.png" target="_blank" rel="noopener noreferrer"><img src="../../images/2GalaxyTools.png" alt="Screenshots of the Galaxy UI showing the two tools, PyMuonSuite AIRSS UEP Optimise and PyMuonSuite AIRSS Cluster, and which steps of the described process they correspond to (1,2,3 and 4,5,6 respectively)." width="720" height="405" loading="lazy" /></a></p>
 
 <p>Hence, there is a difference between the full workflow and the specific Galaxy part of this workflow, which can be
 saved, shared and edited in the Galaxy platform. For the case of finding potential muon stopping sites in
 crystalline Cu, the components of Galaxy workflow are shown below:</p>
 
-<p><a href="../../images/GalaxyWorkflow.png" rel="noopener noreferrer"><img src="../../images/GalaxyWorkflow.png" alt="Screenshot of the Galaxy workflow editor showing the three input files (Copper-out.cell, Copper.den_fmt, Copper.castep) needed for the tool PyMuonSuite AIRSS UEP Optimise, and how that output connects to the PyMuonSuite AIRSS Cluster tool." width="985" height="406" loading="lazy" /></a></p>
+<p><a href="../../images/GalaxyWorkflow.png" target="_blank" rel="noopener noreferrer"><img src="../../images/GalaxyWorkflow.png" alt="Screenshot of the Galaxy workflow editor showing the three input files (Copper-out.cell, Copper.den_fmt, Copper.castep) needed for the tool PyMuonSuite AIRSS UEP Optimise, and how that output connects to the PyMuonSuite AIRSS Cluster tool." width="985" height="406" loading="lazy" /></a></p>
 
 <p>And this is the workflow that can be imported for this tutorial.</p>
 
@@ -1473,7 +1473,7 @@ https://zenodo.org/records/10219558/files/Cu.den_fmt
 host material’s interstitial spaces with muons that are
 randomly distributed in accordance with certain physical constraints.</p>
 
-<p><a href="../../images/Create-random-structures.png" rel="noopener noreferrer"><img src="../../images/Create-random-structures.png" alt="Graphical illustration of how the parameters Gaussian Width affects the potential of atoms, Van der Waals Scale increases the distance between atoms and muons, and Poisson Radius increases the starting distance between muons." width="720" height="405" loading="lazy" /></a></p>
+<p><a href="../../images/Create-random-structures.png" target="_blank" rel="noopener noreferrer"><img src="../../images/Create-random-structures.png" alt="Graphical illustration of how the parameters Gaussian Width affects the potential of atoms, Van der Waals Scale increases the distance between atoms and muons, and Poisson Radius increases the starting distance between muons." width="720" height="405" loading="lazy" /></a></p>
 
 <p>Essentially, the muons are randomly distributed while respecting
 a minimum distance between them and between the atoms
@@ -1497,7 +1497,7 @@ that minimizes the forces acting upon it. This is a self-consistent procedure, w
 forces on each muon are below the value specified in the <code class="language-plaintext highlighter-rouge">geometry optimisation tolerance</code> parameter, or until
 the maximum number of <code class="language-plaintext highlighter-rouge">geometry optimisation steps</code> is reached.</p>
 
-<p><a href="../../images/relax_electrostatic_forces_on_muons.png" rel="noopener noreferrer"><img src="../../images/relax_electrostatic_forces_on_muons.png" alt="Graphical illustration of how muon positions might move during geometry optimisation to concentrate in one or more areas in the structure, and the equation defining the electrostatics of this process." width="720" height="405" loading="lazy" /></a></p>
+<p><a href="../../images/relax_electrostatic_forces_on_muons.png" target="_blank" rel="noopener noreferrer"><img src="../../images/relax_electrostatic_forces_on_muons.png" alt="Graphical illustration of how muon positions might move during geometry optimisation to concentrate in one or more areas in the structure, and the equation defining the electrostatics of this process." width="720" height="405" loading="lazy" /></a></p>
 
 <p>This workflow’s step could be computationally expensive. The larger the
 the size of the host material’s unit cell, and the smaller the values of <code class="language-plaintext highlighter-rouge">Poisson radius</code> and
@@ -1550,7 +1550,7 @@ contains a <code class="language-plaintext highlighter-rouge">*.zip</code> file 
 the numbers of the processes, in the history panel, that were used for running the relaxation
 of the electrostatic forces on muons.</p>
 
-<p><a href="../../images/cluster_relaxed_structures_mu+_stopping_sites.png" rel="noopener noreferrer"><img src="../../images/cluster_relaxed_structures_mu+_stopping_sites.png" alt="Graphical illustration of muons clustered in two possible sites for a structure, how this is represented in the tool output report, and the original structure within that cluster which has minimal energy." width="720" height="405" loading="lazy" /></a></p>
+<p><a href="../../images/cluster_relaxed_structures_mu+_stopping_sites.png" target="_blank" rel="noopener noreferrer"><img src="../../images/cluster_relaxed_structures_mu+_stopping_sites.png" alt="Graphical illustration of muons clustered in two possible sites for a structure, how this is represented in the tool output report, and the original structure within that cluster which has minimal energy." width="720" height="405" loading="lazy" /></a></p>
 
 <p>The first step for running the clustering procedure is to select the <code class="language-plaintext highlighter-rouge">PyMuonSuite AIRSS Cluster</code> Galaxy tool on
 the left menu of the Galaxy web-page . This brings up the corresponding central panel of the Galaxy
@@ -1570,7 +1570,7 @@ the potential stopping sites.  The <code class="language-plaintext highlighter-r
 a CASTEP <abbr title="Density Functional Theory">DFT</abbr> simulation, which can be used to analyse things such as the distortions caused by the muon in the host
 material.</p>
 
-<p><a href="../../images/DFT_supercell_muonated_structures.png" rel="noopener noreferrer"><img src="../../images/DFT_supercell_muonated_structures.png" alt="Graphical illustration of how a muon within a conventional unit cell can be converted to a larger 3 by 3 by 3 supercell, still containing only one muon but with more of the original atoms of the lattice." width="720" height="405" loading="lazy" /></a></p>
+<p><a href="../../images/DFT_supercell_muonated_structures.png" target="_blank" rel="noopener noreferrer"><img src="../../images/DFT_supercell_muonated_structures.png" alt="Graphical illustration of how a muon within a conventional unit cell can be converted to a larger 3 by 3 by 3 supercell, still containing only one muon but with more of the original atoms of the lattice." width="720" height="405" loading="lazy" /></a></p>
 
 <p>Below, a hands-on example on how to run this workflow step.</p>
 
@@ -1690,7 +1690,7 @@ minima have similar values, but the capacity to “attract” a muon is greater 
 which makes it more likely to be a muon stopping site. The probability of a potential stopping site is
 given by the size of the cluster that forms around its associated minima.</p>
 
-<p><a href="../../images/theoretical_basis_of_our_variant_of_the_UEP_method.png" rel="noopener noreferrer"><img src="../../images/theoretical_basis_of_our_variant_of_the_UEP_method.png" alt="Graphical illustration of how muons may be clustered in two different potential minima that have similar energies with a simple 1D plot, and two real examples (CaF and YF3) showing the potential energy in a 3D structure." width="720" height="405" loading="lazy" /></a></p>
+<p><a href="../../images/theoretical_basis_of_our_variant_of_the_UEP_method.png" target="_blank" rel="noopener noreferrer"><img src="../../images/theoretical_basis_of_our_variant_of_the_UEP_method.png" alt="Graphical illustration of how muons may be clustered in two different potential minima that have similar energies with a simple 1D plot, and two real examples (CaF and YF3) showing the potential energy in a 3D structure." width="720" height="405" loading="lazy" /></a></p>
 
                 </section>
 
@@ -2059,7 +2059,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/69c218939472b4ffa89d84d502376d0dd602a5f9">69c2189</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/756552a7d6bd521fe2d8ab348acbc74b66d5191f">756552a</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

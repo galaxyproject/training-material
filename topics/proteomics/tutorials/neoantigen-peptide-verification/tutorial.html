@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@69c218939472b4ffa89d84d502376d0dd602a5f9",
+		release: "galaxy-training-network@756552a7d6bd521fe2d8ab348acbc74b66d5191f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1168,7 +1168,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>In this tutorial, we will guide you through a series of bioinformatics tools used to verify novel peptides and proteins predicted from mass spectrometry data. These tools help confirm the presence and specificity of the identified neoantigens by comparing them to protein databases, checking for validation against spectral data, and performing sequence analysis.</p>
 
-<p><a href="/training-material/topics/proteomics/images/neoantigen/PepQuery2_Verification_1.PNG" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/PepQuery2_Verification_1.PNG" alt="Validation Overview workflow. " width="4000" height="2250" loading="lazy" /></a></p>
+<p><a href="/training-material/topics/proteomics/images/neoantigen/PepQuery2_Verification_1.PNG" target="_blank" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/PepQuery2_Verification_1.PNG" alt="Validation Overview workflow. " width="4000" height="2250" loading="lazy" /></a></p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -1263,7 +1263,7 @@ https://zenodo.org/records/14375467/files/STS_26T_2_Eclipse_02102024.raw
 
 <h1 id="performing-validation-of-peptides-using-pepquery">Performing validation of peptides using PepQuery</h1>
 
-<p><a href="/training-material/topics/proteomics/images/neoantigen/PepQuery2_Verification_2.PNG" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/PepQuery2_Verification_2.PNG" alt="Validation-with-PepQuery. " width="4000" height="1955" loading="lazy" /></a></p>
+<p><a href="/training-material/topics/proteomics/images/neoantigen/PepQuery2_Verification_2.PNG" target="_blank" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/PepQuery2_Verification_2.PNG" alt="Validation-with-PepQuery. " width="4000" height="1955" loading="lazy" /></a></p>
 
 <h2 id="preprocessing-raw-ms-data-with-msconvert">Preprocessing Raw MS Data with msconvert</h2>
 <p>msconvert is a tool used to preprocess raw mass spectrometry (MS) data files by converting them into a compatible format for downstream analysis. In this workflow, msconvert is employed to convert the input unrefined MS data into Mascot Generic Format (MGF), a standardized format for storing peptide and protein data. Additionally, during this step, peak picking is applied to identify the most relevant peaks from the raw spectra, which improves the quality of the data. However, the charge state recalculation is disabled as it’s not necessary for the subsequent analysis. By converting the raw data into MGF format, msconvert prepares the dataset for further processing in tools like PepQuery2 and BLAST, ensuring that the data is in the right format for peptide identification and validation.</p>
@@ -1454,7 +1454,7 @@ https://zenodo.org/records/14375467/files/STS_26T_2_Eclipse_02102024.raw
 
 <h1 id="extracting-novel-neoantigen-peptides-after-blast-p">Extracting Novel Neoantigen Peptides after BLAST-P</h1>
 
-<p><a href="/training-material/topics/proteomics/images/neoantigen/PepQuery2_Verification_3.PNG" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/PepQuery2_Verification_3.PNG" alt="Novel-Peptides. " width="4000" height="1826" loading="lazy" /></a></p>
+<p><a href="/training-material/topics/proteomics/images/neoantigen/PepQuery2_Verification_3.PNG" target="_blank" rel="noopener noreferrer"><img src="/training-material/topics/proteomics/images/neoantigen/PepQuery2_Verification_3.PNG" alt="Novel-Peptides. " width="4000" height="1826" loading="lazy" /></a></p>
 
 <h2 id="converting-data-to-fasta-format-with-tabular-to-fasta">Converting Data to FASTA Format with <strong>Tabular-to-FASTA</strong></h2>
 <p>Tabular-to-FASTA is a tool used to convert tabular data into the FASTA format, commonly used for storing sequence data. In this step, the tool takes the output of the Query Tabular step, which contains the filtered peptide data, and converts it into a FASTA format. The parameters specify which columns in the tabular data correspond to the sequence (c1) and the title (c[‘2’]). The output will be a FASTA file where each peptide sequence is accompanied by its associated title or identifier. This conversion is crucial for further analysis, such as alignment or database searches, using sequence data in FASTA format. This database is being generated for BLAST-P searching.</p>
@@ -2161,7 +2161,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/69c218939472b4ffa89d84d502376d0dd602a5f9">69c2189</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/756552a7d6bd521fe2d8ab348acbc74b66d5191f">756552a</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
