@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@cee0f948e85687560c8d9f4ee49fe7b6bc590366",
+		release: "galaxy-training-network@27c5fadca87af2c537e79174a21d77dfd570c6d4",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1508,7 +1508,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <p>Circos (<span class="citation"><a href="#krzywinski2009circos">Krzywinski <i>et al.</i> 2009</a></span>) is a software package for visualizing data in a circular layout. This makes Circos ideal for exploring relationships between objects or positions. Circos plots have appeared in thousands of scientific publications. Although originally designed for visualizing genomic data, it can create figures from data in any field. In this tutorial we discuss the Galactic Circos (<span class="citation"><a href="#Rasche_2020">Rasche and Hiltemann 2020</a></span>) tool which enables you to access Circos via the convenient Galaxy interface, and even produce plots as part of your workflows!</p>
 
-<p><a href="../../images/circos-sample-panel.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos-sample-panel.png" alt="Panel of example Circos images. " width="950" height="234" loading="lazy" /></a></p>
+<p><img src="../../images/circos-sample-panel.png" alt="Panel of example Circos images. " width="950" height="234" loading="lazy" /></p>
 
 <p>In this tutorial you will learn how to create such publication-ready Circos plots within Galaxy, and hopefully you can draw inspiration from these for developing your own plots.</p>
 
@@ -1741,17 +1741,17 @@ of tutorials available from the <a href="http://circos.ca">Circos website</a></p
   <tbody>
     <tr>
       <td><a href="#example-cancer-genomics">Cancer Genomics</a></td>
-      <td style="text-align: center"><a href="../../images/circos/vcap.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/vcap.png" alt="VCaP cancer Circos plot. " width="3000" height="3000" loading="lazy" /></a></td>
+      <td style="text-align: center"><img src="../../images/circos/vcap.png" alt="VCaP cancer Circos plot. " width="3000" height="3000" loading="lazy" /></td>
       <td style="text-align: left">Create a plot using data from a cancer cell line. This tutorial will guide you through the iterative process of building your first Circos image, and covers some cancer background as well.</td>
     </tr>
     <tr>
       <td><a href="#example-presidential-debate">Presidential Debate</a></td>
-      <td style="text-align: center"><a href="../../images/circos/candidatenetworkdiagram.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/candidatenetworkdiagram.png" alt="Presidential Debate NYT Circos plot. " width="557" height="531" loading="lazy" /></a></td>
+      <td style="text-align: center"><img src="../../images/circos/candidatenetworkdiagram.png" alt="Presidential Debate NYT Circos plot. " width="557" height="531" loading="lazy" /></td>
       <td style="text-align: left">To show that Circos can be used for non-genomics data as well, this example recreates a plot that appeared in the New York times, visualizing data of the presidential debates.</td>
     </tr>
     <tr>
       <td><a href="#example-nature-cover-encode">ENCODE cover</a></td>
-      <td style="text-align: center"><a href="../../images/nature_cover_encode.png" target="_blank" rel="noopener noreferrer"><img src="../../images/nature_cover_encode.png" alt="Nature Cover ENCODE. " width="500" height="657" loading="lazy" /></a></td>
+      <td style="text-align: center"><img src="../../images/nature_cover_encode.png" alt="Nature Cover ENCODE. " width="500" height="657" loading="lazy" /></td>
       <td style="text-align: left">Recreate a Nature Cover!</td>
     </tr>
   </tbody>
@@ -1861,7 +1861,7 @@ https://zenodo.org/record/4494146/files/hg18_karyotype_withbands.txt
 
 <p>You should now have a plot that looks like this:</p>
 
-<p><a href="../../images/circos/cancer_ideogram.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/cancer_ideogram.png" alt="Circos output with only the ideogram. " width="3000" height="3000" loading="lazy" /></a></p>
+<p><img src="../../images/circos/cancer_ideogram.png" alt="Circos output with only the ideogram. " width="3000" height="3000" loading="lazy" /></p>
 
 <p>We will use this as the basis for our plot, and add data tracks one at a time.</p>
 
@@ -1923,7 +1923,7 @@ There are other parameters we can use to draw only a subset of the data (e.g. ju
           <p>These built-in definitions often include more than the canonical chromosomes (chr1-chr22, chrX, chrY), which we might not want to plot. For example, using
 The full definition of <code class="language-plaintext highlighter-rouge">hg18</code> built-in to Galaxy, we get the following ideogram:</p>
 
-          <p><a href="../../images/circos/cancer_ideogram_cached.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/cancer_ideogram_cached.png" alt="Example of ideogram generated using built-in genome definition. " width="3000" height="3000" loading="lazy" /></a></p>
+          <p><img src="../../images/circos/cancer_ideogram_cached.png" alt="Example of ideogram generated using built-in genome definition. " width="3000" height="3000" loading="lazy" /></p>
 
           <p>We could still use this karyotype, but we would have to limit the chromosomes to be drawn in the Circos settings (we will cover this later). In this example however, we supply our own karyotype file defining only the canonical chromosomes.</p>
         </li>
@@ -2147,8 +2147,8 @@ at a glance that there are more intrachromosomal SVs (black) than interchromosom
       <li>
         <p>Yes, plotting for example only chromosome 1 (left) and comparing this with the chromosome 5 plot (right), reveals that chr5 has abnormally high number of SVs compared to the other chromosomes</p>
 
-        <p><a href="../../images/circos/cancer_svs_chr1.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/cancer_svs_chr1.png" alt="Circos plot of chromosome 5 SVs. " width="3000" height="3000" loading="lazy" /></a>
-<a href="../../images/circos/cancer_svs_chr5.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/cancer_svs_chr5.png" alt="Circos plot of chromosome 1 SVs. " width="3000" height="3000" loading="lazy" /></a></p>
+        <p><img src="../../images/circos/cancer_svs_chr1.png" alt="Circos plot of chromosome 5 SVs. " width="3000" height="3000" loading="lazy" />
+<img src="../../images/circos/cancer_svs_chr5.png" alt="Circos plot of chromosome 1 SVs. " width="3000" height="3000" loading="lazy" /></p>
       </li>
       <li>
         <p>No, only part of chromosome 5 appears to be affected. It turns out that this region is exactly one arm of the chromosome.
@@ -2214,7 +2214,7 @@ are used to detect the presence or absence of the SNPs in the sample.</p>
   <p><br />
 Each SNP location is covered by 2 probes (one for the reference allele, and one for the variant allele). By comparing their combined intensity to the expected intensity (e.g. the sample average), a measure known as the <strong>Log R ratio</strong>, we can learn something about copy number. The resulting plots often look something like this:</p>
 
-  <p><a href="../../images/circos/cnv-plot.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/cnv-plot.png" alt="Example of a Log R ration plot. " width="548" height="245" loading="lazy" /></a></p>
+  <p><img src="../../images/circos/cnv-plot.png" alt="Example of a Log R ration plot. " width="548" height="245" loading="lazy" /></p>
 
   <p>With a value of 0 indicating the normalized copy number (2 in the case of a diploid genome), and significant diversions from this expected value
 point to copy number gains or losses (the figure above shows 1 region with a copy number loss).</p>
@@ -2322,7 +2322,7 @@ chr1	72017	72017	-0.1353417	0
               <p>We see the new track, but it overlaps with the SV track. This is because we used the same <code class="language-plaintext highlighter-rouge">radius</code> parameter.
 This parameter determines the position of the track within the plot.</p>
 
-              <p><a href="../../images/circos/cancer-overlap.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/cancer-overlap.png" alt="Circos plot of chromosome 5 SVs. " width="3000" height="3000" loading="lazy" /></a></p>
+              <p><img src="../../images/circos/cancer-overlap.png" alt="Circos plot of chromosome 5 SVs. " width="3000" height="3000" loading="lazy" /></p>
             </li>
             <li>
               <p>To fix this, we can rerun the Circos tool, and change the radius of the link track (SVs) to be inside the new copynumber track (&lt;<code class="language-plaintext highlighter-rouge">0.8</code>).
@@ -2353,7 +2353,7 @@ all at once, rather, you build it up step by step and frequently check the outpu
 
 <p>You should see a plot that looks like:</p>
 
-<p><a href="../../images/circos/cancer-cnv.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/cancer-cnv.png" alt="Circos plot with CNV track. " width="3000" height="3000" loading="lazy" /></a></p>
+<p><img src="../../images/circos/cancer-cnv.png" alt="Circos plot with CNV track. " width="3000" height="3000" loading="lazy" /></p>
 
 <p>Now that we are happy with the placement of our track, let’s tweak it a bit more. Let’s colour positions showing a significant copy number loss (&lt; <code class="language-plaintext highlighter-rouge">-0.15</code>) red, and positions with a copy number gain (&gt; <code class="language-plaintext highlighter-rouge">0.15</code>) green, leaving everything inbetween gray (expected copy number):</p>
 
@@ -2439,7 +2439,7 @@ all at once, rather, you build it up step by step and frequently check the outpu
 
 <p>You should now see a plot like this:</p>
 
-<p><a href="../../images/circos/cancer-cnv-full.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/cancer-cnv-full.png" alt="Circos plot with SNV track with rules defined. " width="3000" height="3000" loading="lazy" /></a></p>
+<p><img src="../../images/circos/cancer-cnv-full.png" alt="Circos plot with SNV track with rules defined. " width="3000" height="3000" loading="lazy" /></p>
 
 <p>Sometimes it can also be nice to see the axes of the plot, to more accurately judge the values of the different data points.
 We can do this as follows:</p>
@@ -2478,7 +2478,7 @@ We can do this as follows:</p>
 
 <p>You should now see a plot with axes:</p>
 
-<p><a href="../../images/circos/cancer-cnv-full-axes.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/cancer-cnv-full-axes.png" alt="Circos plot with SNV track with rules and axes defined. " width="3000" height="3000" loading="lazy" /></a></p>
+<p><img src="../../images/circos/cancer-cnv-full-axes.png" alt="Circos plot with SNV track with rules and axes defined. " width="3000" height="3000" loading="lazy" /></p>
 
 <!-- TODO: update image when axes are fixed (should be able to go to -1) -->
 
@@ -2619,7 +2619,7 @@ chr1	110905	110905	0.9918569
 
 <p>You should see a plot that looks like this:</p>
 
-<p><a href="../../images/circos/cancer-baf.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/cancer-baf.png" alt="Circos output with BAF track. " width="3000" height="3000" loading="lazy" /></a></p>
+<p><img src="../../images/circos/cancer-baf.png" alt="Circos output with BAF track. " width="3000" height="3000" loading="lazy" /></p>
 
 <p>Great! we can see our B-allele frequency plot track added.</p>
 
@@ -2634,7 +2634,7 @@ chr1	110905	110905	0.9918569
         <li><code class="language-plaintext highlighter-rouge">CN=3</code> (triploid)</li>
       </ol>
 
-      <p>Hint: <a href="../../images/circos/cnv-baf-intro.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/cnv-baf-intro.png" alt="Example CNV and BAF plots for different copy number states. " width="260" height="341" loading="lazy" /></a></p>
+      <p>Hint: <img src="../../images/circos/cnv-baf-intro.png" alt="Example CNV and BAF plots for different copy number states. " width="260" height="341" loading="lazy" /></p>
     </li>
     <li>Do you see anything other than these states?</li>
   </ol>
@@ -2685,7 +2685,7 @@ There is a parameter of the link track type called <em>Bezier</em>, which contro
 
 </blockquote>
 
-<p><a href="../../images/circos/cancer-all.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/cancer-all.png" alt="Final Circos image. " width="3000" height="3000" loading="lazy" /></a></p>
+<p><img src="../../images/circos/cancer-all.png" alt="Final Circos image. " width="3000" height="3000" loading="lazy" /></p>
 
 <p>Another thing you may have noticed, is that in the original image we showed at the start of this section, the red links (interchromosomal SVs) were displayed as a completely different track. To do this, instead of creating a single track with a rule to change the colour of a subset of the data, we can make 2 separate tracks, with rules to only plot a subset of the data.</p>
 
@@ -2849,7 +2849,7 @@ There is a parameter of the link track type called <em>Bezier</em>, which contro
 
 <p>Since we could not obtain the original datasets used to generate this image, we will re-create a similar plot using an artificial dataset:</p>
 
-<p><a href="../../images/circos/presidential_debate_plot.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/presidential_debate_plot.png" alt="Presidential plot we will create this tutorial. " width="3000" height="3000" loading="lazy" /></a></p>
+<p><img src="../../images/circos/presidential_debate_plot.png" alt="Presidential plot we will create this tutorial. " width="3000" height="3000" loading="lazy" /></p>
 
 <h2 id="get-data">Get Data</h2>
 
@@ -2949,7 +2949,7 @@ The last column indicates the party of each candidate (democratic or republican)
 
 <p>The resulting file should look something like this:</p>
 
-<p><a href="../../images/circos/debate_karyotype.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/debate_karyotype.png" alt="first step of the debate circos plot. " width="3000" height="3000" loading="lazy" /></a></p>
+<p><img src="../../images/circos/debate_karyotype.png" alt="first step of the debate circos plot. " width="3000" height="3000" loading="lazy" /></p>
 
 <p>That looks right, but we want to colour each candidate’s segment according to their party. We will do this using a <em>highlights</em> track.</p>
 
@@ -3033,7 +3033,7 @@ richardson  251  750    stroke_thickness=5,stroke_color=white
 
 </blockquote>
 
-<p><a href="../../images/circos/debate_highlights.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/debate_highlights.png" alt="The debate plot with highlights track. " width="3000" height="3000" loading="lazy" /></a></p>
+<p><img src="../../images/circos/debate_highlights.png" alt="The debate plot with highlights track. " width="3000" height="3000" loading="lazy" /></p>
 
 <p>Great! All that is left to do now is add a link track. One line will be drawn for each time a candidate mentioned another candidate’s name.</p>
 
@@ -3082,7 +3082,7 @@ huckabee	525	525	clinton	750	750
 
 </blockquote>
 
-<p><a href="../../images/circos/debate_links.png" target="_blank" rel="noopener noreferrer"><img src="../../images/circos/debate_links.png" alt="Debate plot with link track. " width="3000" height="3000" loading="lazy" /></a></p>
+<p><img src="../../images/circos/debate_links.png" alt="Debate plot with link track. " width="3000" height="3000" loading="lazy" /></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-exercise-focus-on-a-single"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Exercise: Focus on a single</div>
@@ -3993,7 +3993,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cee0f948e85687560c8d9f4ee49fe7b6bc590366">cee0f94</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/27c5fadca87af2c537e79174a21d77dfd570c6d4">27c5fad</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

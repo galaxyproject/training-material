@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@cee0f948e85687560c8d9f4ee49fe7b6bc590366",
+		release: "galaxy-training-network@27c5fadca87af2c537e79174a21d77dfd570c6d4",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1535,21 +1535,21 @@ Then, quit QGIS properly through the “Project” Menu tab top left and click o
 
         <p>You can expand the QGIS left panel (where there are 3 dots, vertically) to access the “clipboard” menu and paste the content you want to paste on a QGIS form. Then, click outside of this panel to collapse it, and you can click for example on the <code class="language-plaintext highlighter-rouge">url</code> field to paste the URL from your clipboard</p>
 
-        <p><a href="../../images/QGIS/qgistuto1.PNG" target="_blank" rel="noopener noreferrer"><img src="../../images/QGIS/qgistuto1.PNG" alt="Image of QGIS interface with on the left the clipboard panel in transparent where you can use the copy paste option." width="1787" height="924" loading="lazy" /></a></p>
+        <p><img src="../../images/QGIS/qgistuto1.PNG" alt="Image of QGIS interface with on the left the clipboard panel in transparent where you can use the copy paste option." width="1787" height="924" loading="lazy" /></p>
       </blockquote>
     </li>
     <li>Click OK, then you can create the connection with the “connect” button to see a list of available layers</li>
     <li>Find and select the <code class="language-plaintext highlighter-rouge">antarctica_country_border</code> (Antartica border) layer</li>
     <li>Find and select, holding the “CTRL” button, the <code class="language-plaintext highlighter-rouge">south_poles_wfs</code> (South border) layer</li>
     <li>Unselect “only request features overlapping the view extent” option then click “add”
-  <a href="../../images/QGIS/qgistuto3.PNG" target="_blank" rel="noopener noreferrer"><img src="../../images/QGIS/qgistuto3.PNG" alt="Image of QGIS interface to help you see which layers to select in the WFS / OGC API features. " width="874" height="551" loading="lazy" /></a></li>
+  <img src="../../images/QGIS/qgistuto3.PNG" alt="Image of QGIS interface to help you see which layers to select in the WFS / OGC API features. " width="874" height="551" loading="lazy" /></li>
     <li>You now have Antarctica border displayed with a symbol showing the south pole
-  <a href="../../images/QGIS/qgistuto4.PNG" target="_blank" rel="noopener noreferrer"><img src="../../images/QGIS/qgistuto4.PNG" alt="Image of QGIS interface showing the resulting map from the selection of your layers. " width="791" height="401" loading="lazy" /></a></li>
+  <img src="../../images/QGIS/qgistuto4.PNG" alt="Image of QGIS interface showing the resulting map from the selection of your layers. " width="791" height="401" loading="lazy" /></li>
     <li>You can double click each layer at the bottom left to modify symbology, notably color for “south_poles_wfs” modifying the symbol by selecting for example “effect drop shadow”  click on “Save Symbol…” and add a label <code class="language-plaintext highlighter-rouge">Geographic South Pole</code>
-  <a href="../../images/QGIS/qgistuto5.PNG" target="_blank" rel="noopener noreferrer"><img src="../../images/QGIS/qgistuto5.PNG" alt="Image of QGIS interface to show you to click on the button &quot;effect drop shadow&quot; to make the south pole more visible on your map." width="1271" height="653" loading="lazy" /></a>
-  <a href="../../images/QGIS/qgistuto6.PNG" target="_blank" rel="noopener noreferrer"><img src="../../images/QGIS/qgistuto6.PNG" alt="Image of QGIS interface to show you how to add a title and change the color of your south pole marker. " width="1174" height="673" loading="lazy" /></a></li>
+  <img src="../../images/QGIS/qgistuto5.PNG" alt="Image of QGIS interface to show you to click on the button &quot;effect drop shadow&quot; to make the south pole more visible on your map." width="1271" height="653" loading="lazy" />
+  <img src="../../images/QGIS/qgistuto6.PNG" alt="Image of QGIS interface to show you how to add a title and change the color of your south pole marker. " width="1174" height="673" loading="lazy" /></li>
     <li>And to “antarctica_country_border”.
-  <a href="../../images/QGIS/qgistuto7.PNG" target="_blank" rel="noopener noreferrer"><img src="../../images/QGIS/qgistuto7.PNG" alt="Image of QGIS interface showing how to change the background or color of the geographical zone here Antarctica. " width="1498" height="665" loading="lazy" /></a></li>
+  <img src="../../images/QGIS/qgistuto7.PNG" alt="Image of QGIS interface showing how to change the background or color of the geographical zone here Antarctica. " width="1498" height="665" loading="lazy" /></li>
   </ol>
 
 </blockquote>
@@ -1567,13 +1567,13 @@ Then, quit QGIS properly through the “Project” Menu tab top left and click o
     <li>Click on the 1st option “Data Source Manager”</li>
     <li>Select “WFS / OGC API - Features” then the already connected <code class="language-plaintext highlighter-rouge">nsidc</code> server</li>
     <li>Select the <code class="language-plaintext highlighter-rouge">countries (excluding Antarctica)</code> layer and click “Build query” button
-<a href="../../images/QGIS/qgistuto8.PNG" target="_blank" rel="noopener noreferrer"><img src="../../images/QGIS/qgistuto8.PNG" alt="Image of QGIS interface to help you see which layers to select in the WFS / OGC API features. " width="868" height="543" loading="lazy" /></a></li>
+<img src="../../images/QGIS/qgistuto8.PNG" alt="Image of QGIS interface to help you see which layers to select in the WFS / OGC API features. " width="868" height="543" loading="lazy" /></li>
     <li>On the new dialog box, you can copy/paste this query: <code class="language-plaintext highlighter-rouge">SELECT * FROM country_borders_excluding_antarctica WHERE "Countryeng" = 'South Africa'</code> using the clipboard functionality from the left QGIS panel to make a “bridge” between your local clipboard and the virtualized QGIS one.
-<a href="../../images/QGIS/qgistuto9.PNG" target="_blank" rel="noopener noreferrer"><img src="../../images/QGIS/qgistuto9.PNG" alt="Image of QGIS interface to help you see what to write in the &quot;SQL query composer&quot;. " width="661" height="590" loading="lazy" /></a></li>
+<img src="../../images/QGIS/qgistuto9.PNG" alt="Image of QGIS interface to help you see what to write in the &quot;SQL query composer&quot;. " width="661" height="590" loading="lazy" /></li>
     <li>Clicking OK, you can now see the SQL query on a dedicated column of the layers table.
-<a href="../../images/QGIS/qgistuto10.PNG" target="_blank" rel="noopener noreferrer"><img src="../../images/QGIS/qgistuto10.PNG" alt="Image of QGIS interface showing you the results of the SQL command on the selection of layers in the WFS / OGC API features. " width="1144" height="545" loading="lazy" /></a></li>
+<img src="../../images/QGIS/qgistuto10.PNG" alt="Image of QGIS interface showing you the results of the SQL command on the selection of layers in the WFS / OGC API features. " width="1144" height="545" loading="lazy" /></li>
     <li>Clicking the “Add” button, you now have the South Africa layer added and displayed on QGIS.
-<a href="../../images/QGIS/qgistuto11.PNG" target="_blank" rel="noopener noreferrer"><img src="../../images/QGIS/qgistuto11.PNG" alt="Image of QGIS interface showing the resulting map of all your changes since the beginning of the tutorial. " width="683" height="453" loading="lazy" /></a></li>
+<img src="../../images/QGIS/qgistuto11.PNG" alt="Image of QGIS interface showing the resulting map of all your changes since the beginning of the tutorial. " width="683" height="453" loading="lazy" /></li>
   </ol>
 </blockquote>
 
@@ -1986,7 +1986,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cee0f948e85687560c8d9f4ee49fe7b6bc590366">cee0f94</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/27c5fadca87af2c537e79174a21d77dfd570c6d4">27c5fad</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

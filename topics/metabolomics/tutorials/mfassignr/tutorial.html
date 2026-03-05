@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@cee0f948e85687560c8d9f4ee49fe7b6bc590366",
+		release: "galaxy-training-network@27c5fadca87af2c537e79174a21d77dfd570c6d4",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1158,7 +1158,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </ol>
 
 <p>We can illustrate the workflow also on the following scheme:
-<a href="images/mfassignr_scheme.png" target="_blank" rel="noopener noreferrer"><img src="images/mfassignr_scheme.png" alt="workflow_graphical. " width="1512" height="720" loading="lazy" /></a></p>
+<img src="images/mfassignr_scheme.png" alt="workflow_graphical. " width="1512" height="720" loading="lazy" /></p>
 
 <p>Let’s dive now into the individual steps and explain all the inputs, parameter settings, and outputs.</p>
 
@@ -1275,7 +1275,7 @@ repeating units (e.g. alkylation series), will always have the same KMD.</p>
 
 <p>When the KMD is calculated for all peaks in the mass spectrum, there will be a clear separation of more intense analyte peaks and low-intense noise peaks. To isolate the noise region, we can use the KMD limits of chemically feasible molecular formulas in conjunction with the calculation of the slope of a KMD plot using a linear equation \(y = 0.1132x + b\), where <em>y</em> is the KMD value, <em>0,1132</em> was an empirically derived integer, <em>x</em> the measured ion mass and <em>b</em> an y-intercept. To provide a more accurate assessment, two lines with different y-intercepts are selected (we will set this lower and upper y-limit below). Once the noise region is isolated, a noise level will be estimated as the average intensity of peaks within that region.</p>
 
-<p><a href="images/KMDplot_explained.png" target="_blank" rel="noopener noreferrer"><img src="images/KMDplot_explained.png" alt="KMD plot. " width="2208" height="2223" loading="lazy" /></a></p>
+<p><img src="images/KMDplot_explained.png" alt="KMD plot. " width="2208" height="2223" loading="lazy" /></p>
 
 <p>When running the function, we can stick with the default values: the upper limit for the y-intercept is set to 0.2, so that it does not interact with any potentially double-charged peaks, the lower limit of the y-intercept value is set to 0.05 to ensure no analyte peaks are incorporated into the noise estimation. Both upper and lower x-intercept limits are optional and will be set to minimum and maximum mass in the data if not specified.</p>
 
@@ -1343,7 +1343,7 @@ repeating units (e.g. alkylation series), will always have the same KMD.</p>
   </ol>
 </blockquote>
 
-<p><a href="images/SNplot.png" target="_blank" rel="noopener noreferrer"><img src="images/SNplot.png" alt="SNplot. " width="2099" height="2099" loading="lazy" /></a></p>
+<p><img src="images/SNplot.png" alt="SNplot. " width="2099" height="2099" loading="lazy" /></p>
 
 <p>Based on the SNplot, we can see that the noise - indicated in red - forms a uniform background and is effectively separated by the horizontal line (indicating the S/N threshold), meaning we can further use the multiplication of 346 and 6. If the noise was higher than the S/N threshold, it would mean we need to increase the value of the multiplier.</p>
 
@@ -1411,10 +1411,10 @@ repeating units (e.g. alkylation series), will always have the same KMD.</p>
 
 <p>On the output, we get several data frames: unambiguous assignments, ambiguous assignments, and a data frame containing unassigned masses. Additionally, several plots are available, such as MSAssign showing a mass spectrum highlighting assigned and unassigned masses, errorMZ showing the relationship between absolute error (in ppm) and ion mass, van Krevelen plot, and a mass spectrum colored by molecular group.</p>
 
-<p><a href="images/errorMZ.png" target="_blank" rel="noopener noreferrer"><img src="images/errorMZ.png" alt="errorMZ. " width="2100" height="2100" loading="lazy" /></a>
+<p><img src="images/errorMZ.png" alt="errorMZ. " width="2100" height="2100" loading="lazy" />
 This plot shows us the absolute error, which increases with the increasing mass as expected. Actually, it is good to see a trend here, meaning there is a systematic error that will be corrected during recalibration, a problem would be if there was a random error that we can’t correct.</p>
 
-<p><a href="images/vankrevelen.png" target="_blank" rel="noopener noreferrer"><img src="images/vankrevelen.png" alt="Van Krevelen plot. " width="2100" height="2100" loading="lazy" /></a></p>
+<p><img src="images/vankrevelen.png" alt="Van Krevelen plot. " width="2100" height="2100" loading="lazy" /></p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-van-krevelen-plot"><button class="gtn-boxify-button details" type="button" aria-controls="details-van-krevelen-plot" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Van Krevelen plot</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1428,10 +1428,10 @@ lower H/C ratios and carbohydrates usually have high O/C and moderate H/C ratios
 
 <p>Van Krevelen plot visualizes the chemical composition of complex chemical mixtures and it characterizes the data quality and how the data is distributed. Compounds with similar structures and functional groups will cluster together on the plot.</p>
 
-<p><a href="images/MSgroups.png" target="_blank" rel="noopener noreferrer"><img src="images/MSgroups.png" alt="MS groups. " width="2100" height="2100" loading="lazy" /></a>
+<p><img src="images/MSgroups.png" alt="MS groups. " width="2100" height="2100" loading="lazy" />
 The MSgroups plot shows the abundance distribution of unambiguous molecular formula assignments.</p>
 
-<p><a href="images/msassign.png" target="_blank" rel="noopener noreferrer"><img src="images/msassign.png" alt="msassign. " width="2100" height="2100" loading="lazy" /></a>
+<p><img src="images/msassign.png" alt="msassign. " width="2100" height="2100" loading="lazy" />
 Assignment mass spectrum then shows what was assigned: green are the assigned compounds, red are unassigned ones (eventually, if applicable, isotopes are in blue). It is useful to check whether there are any gaps around a particular m/z, which would mean there is a problem with the assignment.</p>
 
 <h1 id="recalibration">Recalibration</h1>
@@ -1567,7 +1567,7 @@ see there are 226 lines (1 being the column names), meaning 225 series which we 
 
 <p>In this tutorial, we showed how can we assign molecular formulas using the MFAssignR package. We learned  several key steps, including noise estimation, isotope filtering, recalibration, and finally the formula assignment. We described how parameters of individual functions are used and how they should be adjusted if needed.</p>
 
-<p><a href="images/workflow_overview.png" target="_blank" rel="noopener noreferrer"><img src="images/workflow_overview.png" alt="workflow overview. " width="1152" height="552" loading="lazy" /></a></p>
+<p><img src="images/workflow_overview.png" alt="workflow overview. " width="1152" height="552" loading="lazy" /></p>
 
                 </section>
 
@@ -1944,7 +1944,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cee0f948e85687560c8d9f4ee49fe7b6bc590366">cee0f94</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/27c5fadca87af2c537e79174a21d77dfd570c6d4">27c5fad</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

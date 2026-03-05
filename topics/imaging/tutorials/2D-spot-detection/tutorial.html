@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@cee0f948e85687560c8d9f4ee49fe7b6bc590366",
+		release: "galaxy-training-network@27c5fadca87af2c537e79174a21d77dfd570c6d4",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1604,7 +1604,7 @@ and selected the 10th z-stack for analysis.</p>
 
 <p>When inspecting the image visually, we get the impression that the image is entirely black:</p>
 
-<p><a href="../../images/2d_spot_detection/2025_pre_clahe.png" target="_blank" rel="noopener noreferrer"><img src="../../images/2d_spot_detection/2025_pre_clahe.png" alt="2025_pre_clahe.png. " width="1024" height="1024" loading="lazy" /></a></p>
+<p><img src="../../images/2d_spot_detection/2025_pre_clahe.png" alt="2025_pre_clahe.png. " width="1024" height="1024" loading="lazy" /></p>
 
 <p>It’s not the best quality for a first visual inspection!</p>
 
@@ -1633,7 +1633,7 @@ We do this using a <a href="https://en.wikipedia.org/wiki/Adaptive_histogram_equ
 
 <p>Your image should now look a bit brighter:</p>
 
-<p><a href="../../images/2d_spot_detection/2025_post_clahe.png" target="_blank" rel="noopener noreferrer"><img src="../../images/2d_spot_detection/2025_post_clahe.png" alt="2025_post_clahe.png. " width="1024" height="1024" loading="lazy" /></a></p>
+<p><img src="../../images/2d_spot_detection/2025_post_clahe.png" alt="2025_post_clahe.png. " width="1024" height="1024" loading="lazy" /></p>
 
 <p>We can now clearly make out the presence of many RNA spots!</p>
 
@@ -1675,7 +1675,7 @@ We do this using a <a href="https://en.wikipedia.org/wiki/Adaptive_histogram_equ
 
 <p>The TSV output will have 1649 lines, meaning 1649 spots detected!</p>
 
-<p><a href="../../images/2d_spot_detection/TSV_output.png" target="_blank" rel="noopener noreferrer"><img src="../../images/2d_spot_detection/TSV_output.png" alt="TSV_output.png. " width="1119" height="523" loading="lazy" /></a></p>
+<p><img src="../../images/2d_spot_detection/TSV_output.png" alt="TSV_output.png. " width="1119" height="523" loading="lazy" /></p>
 
 <h1 id="convert-spots-coordinates-to-labels">Convert spots coordinates to labels</h1>
 <p>Let’s try now to visualize our results! The first step is to create a label map from the TSV file…
@@ -1707,7 +1707,7 @@ You can get these info by running the “Show image info” tool on the original
 <p>A label image will be created… If you want to visualize the labels, you can run again the normalize histogram
 step:</p>
 
-<p><a href="../../images/2d_spot_detection/2025_visual_labels.png" target="_blank" rel="noopener noreferrer"><img src="../../images/2d_spot_detection/2025_visual_labels.png" alt="2025_visual_labels.png. " width="1024" height="1024" loading="lazy" /></a></p>
+<p><img src="../../images/2d_spot_detection/2025_visual_labels.png" alt="2025_visual_labels.png. " width="1024" height="1024" loading="lazy" /></p>
 
 <p>but this is not necessary for the next and final step: overlay the label to the original image!</p>
 
@@ -1735,7 +1735,7 @@ step:</p>
 
 <p>Final result should look like this:</p>
 
-<p><a href="../../images/2d_spot_detection/2025_overlay.png" target="_blank" rel="noopener noreferrer"><img src="../../images/2d_spot_detection/2025_overlay.png" alt="2025_overlay.png. " width="1024" height="1024" loading="lazy" /></a></p>
+<p><img src="../../images/2d_spot_detection/2025_overlay.png" alt="2025_overlay.png. " width="1024" height="1024" loading="lazy" /></p>
 
 <h1 id="create-2d-spot-detection-workflow">Create 2D spot detection workflow</h1>
 
@@ -1775,7 +1775,7 @@ setting of the IDR Download tool by downloading imaging in a tarball:</p>
 
 <p>The final workflow should look like this:</p>
 
-<p><a href="../../images/2d_spot_detection/2025_workflow.png" target="_blank" rel="noopener noreferrer"><img src="../../images/2d_spot_detection/2025_workflow.png" alt="2025_workflow.png. " width="1183" height="582" loading="lazy" /></a></p>
+<p><img src="../../images/2d_spot_detection/2025_workflow.png" alt="2025_workflow.png. " width="1183" height="582" loading="lazy" /></p>
 
 <h1 id="conclusion">Conclusion</h1>
 
@@ -2177,7 +2177,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cee0f948e85687560c8d9f4ee49fe7b6bc590366">cee0f94</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/27c5fadca87af2c537e79174a21d77dfd570c6d4">27c5fad</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

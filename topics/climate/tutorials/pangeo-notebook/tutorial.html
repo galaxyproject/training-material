@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@cee0f948e85687560c8d9f4ee49fe7b6bc590366",
+		release: "galaxy-training-network@27c5fadca87af2c537e79174a21d77dfd570c6d4",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1952,7 +1952,7 @@ Attributes:
 </code></pre></div></div>
 <p>We will get a figure like the one below:</p>
 
-<p><a href="../../images/PM2_5_default.png" target="_blank" rel="noopener noreferrer"><img src="../../images/PM2_5_default.png" alt="CAMS PM2.5 December, 24th 2021 at 12:00 UTC. " width="432" height="288" loading="lazy" /></a></p>
+<p><img src="../../images/PM2_5_default.png" alt="CAMS PM2.5 December, 24th 2021 at 12:00 UTC. " width="432" height="288" loading="lazy" /></p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-what-about-level"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What about `level`</div>
@@ -1992,7 +1992,7 @@ Attributes:
 
 <p>And you should get the following plot:</p>
 
-<p><a href="../../images/CAMS-PM2_5-fc-20211224.png" target="_blank" rel="noopener noreferrer"><img src="../../images/CAMS-PM2_5-fc-20211224.png" alt="Customized plot for CAMS PM2.5 December, 24th 2021 at 12:00 UTC. " width="1080" height="720" loading="lazy" /></a></p>
+<p><img src="../../images/CAMS-PM2_5-fc-20211224.png" alt="Customized plot for CAMS PM2.5 December, 24th 2021 at 12:00 UTC. " width="1080" height="720" loading="lazy" /></p>
 
 <h3 id="multi-plots">Multi-plots</h3>
 
@@ -2044,7 +2044,7 @@ Attributes:
   <li><code class="language-plaintext highlighter-rouge">set_title</code> to set a title for each subplot.</li>
 </ul>
 
-<p><a href="../../images/CAMS-PM2_5-fc-multi.png" target="_blank" rel="noopener noreferrer"><img src="../../images/CAMS-PM2_5-fc-multi.png" alt="Customized multi-plot. " width="1584" height="1296" loading="lazy" /></a></p>
+<p><img src="../../images/CAMS-PM2_5-fc-multi.png" alt="Customized multi-plot. " width="1584" height="1296" loading="lazy" /></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-pm2-5-over-italy-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: PM2.5 over Italy</div>
@@ -2085,7 +2085,7 @@ decreasing order for CAMS.</p>
 </code></pre></div>      </div>
     </blockquote>
 
-    <p><a href="../../images/CAMS-PM2_5-fc-multi-Italy.png" target="_blank" rel="noopener noreferrer"><img src="../../images/CAMS-PM2_5-fc-multi-Italy.png" alt="PM2.5 over Italy. " width="1584" height="1296" loading="lazy" /></a></p>
+    <p><img src="../../images/CAMS-PM2_5-fc-multi-Italy.png" alt="PM2.5 over Italy. " width="1584" height="1296" loading="lazy" /></p>
 
   </blockquote>
 </blockquote>
@@ -2129,7 +2129,7 @@ You may not see any changes when printing the dataset but if you look carefuly a
 </span><span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sh">"</span><span class="s">Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts</span><span class="se">\n</span><span class="s"> 24th December 2021 at 12:00 UTC</span><span class="se">\n</span><span class="s"> only values &gt; 25</span><span class="sh">"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">"</span><span class="s">CAMS-PM2_5-fc-20211224-25.png</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
-<p><a href="../../images/CAMS-PM2_5-fc-20211224-25.png" target="_blank" rel="noopener noreferrer"><img src="../../images/CAMS-PM2_5-fc-20211224-25.png" alt="PM2.5 over Italy with threshold at 25. " width="1080" height="720" loading="lazy" /></a></p>
+<p><img src="../../images/CAMS-PM2_5-fc-20211224-25.png" alt="PM2.5 over Italy with threshold at 25. " width="1080" height="720" loading="lazy" /></p>
 
 <p>We can then make the same multi-plot as earlier (over Italy) but with a <code class="language-plaintext highlighter-rouge">where</code> statement to mask values lower than 25 μm.m-3:</p>
 
@@ -2159,7 +2159,7 @@ You may not see any changes when printing the dataset but if you look carefuly a
 </span><span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">"</span><span class="s">CAMS-PM2_5-fc-multi-Italy-25.png</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><a href="../../images/CAMS-PM2_5-fc-multi-Italy-25.png" target="_blank" rel="noopener noreferrer"><img src="../../images/CAMS-PM2_5-fc-multi-Italy-25.png" alt="Multi-plot of PM2.5 over Italy with threshold at 25. " width="1584" height="1296" loading="lazy" /></a></p>
+<p><img src="../../images/CAMS-PM2_5-fc-multi-Italy-25.png" alt="Multi-plot of PM2.5 over Italy with threshold at 25. " width="1584" height="1296" loading="lazy" /></p>
 
 <h2 id="reduction-operations">Reduction operations</h2>
 <p>We often want to compute the mean of all our datasets, or along a dimension (for instance time). If you do not pass any argument to the operation then it is done over all dimensions.</p>
@@ -2326,7 +2326,7 @@ Data variables:
 </code></pre></div>      </div>
     </blockquote>
 
-    <p><a href="../../images/CAMS-PM2_5-fc-multi-Italy-mean-per-day.png" target="_blank" rel="noopener noreferrer"><img src="../../images/CAMS-PM2_5-fc-multi-Italy-mean-per-day.png" alt="Daily mean for PM2.5 over Italy. " width="1962" height="216" loading="lazy" /></a></p>
+    <p><img src="../../images/CAMS-PM2_5-fc-multi-Italy-mean-per-day.png" alt="Daily mean for PM2.5 over Italy. " width="1962" height="216" loading="lazy" /></p>
   </blockquote>
 </blockquote>
 
@@ -2688,7 +2688,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cee0f948e85687560c8d9f4ee49fe7b6bc590366">cee0f94</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/27c5fadca87af2c537e79174a21d77dfd570c6d4">27c5fad</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

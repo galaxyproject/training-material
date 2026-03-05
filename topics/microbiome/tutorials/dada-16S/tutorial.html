@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@cee0f948e85687560c8d9f4ee49fe7b6bc590366",
+		release: "galaxy-training-network@27c5fadca87af2c537e79174a21d77dfd570c6d4",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1950,7 +1950,7 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
   </ol>
 </blockquote>
 
-<p><a href="./images/plotQualityProfile_forward.png" target="_blank" rel="noopener noreferrer"><img src="./images/plotQualityProfile_forward.png" alt="Quality Profiles for the forward reads of all samples with read length on the X-axis and Quality score on the Y-axis. " width="2694" height="2008" loading="lazy" /></a></p>
+<p><img src="./images/plotQualityProfile_forward.png" alt="Quality Profiles for the forward reads of all samples with read length on the X-axis and Quality score on the Y-axis. " width="2694" height="2008" loading="lazy" /></p>
 
 <p>In gray-scale is a heatmap of the frequency of each quality score at each base position. The mean quality score at each position is shown by the green line, and the quartiles of the quality score distribution by the orange lines. The red line shows the scaled proportion of reads that extend to at least that position (this is more useful for other sequencing technologies, as Illumina reads are typically all the same length, hence the flat red line).</p>
 
@@ -1973,7 +1973,7 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
       <li>
         <p>The reverse reads are of significantly worse quality, especially at the end, which is common in Illumina sequencing. This isn’t too worrisome, as DADA2 incorporates quality information into its error model which makes the algorithm robust to lower quality sequence, but trimming as the average qualities crash will improve the algorithm’s sensitivity to rare sequence variants.</p>
 
-        <p><a href="./images/plotQualityProfile_reverse.png" target="_blank" rel="noopener noreferrer"><img src="./images/plotQualityProfile_reverse.png" alt="Quality Profiles for the reverse reads of all samples with read length on the X-axis and Quality score on the Y-axis. " width="2696" height="2024" loading="lazy" /></a></p>
+        <p><img src="./images/plotQualityProfile_reverse.png" alt="Quality Profiles for the reverse reads of all samples with read length on the X-axis and Quality score on the Y-axis. " width="2696" height="2024" loading="lazy" /></p>
       </li>
       <li>Based on the profiles, we will truncate the reverse reads at position 160 where the quality distribution crashes.</li>
     </ol>
@@ -2438,7 +2438,7 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
   <li>
     <p>An image with sequence length distribution</p>
 
-    <p><a href="./images/sequence_length_distribution.png" target="_blank" rel="noopener noreferrer"><img src="./images/sequence_length_distribution.png" alt="Histogram representing sequence length distribution. " width="2128" height="2138" loading="lazy" /></a></p>
+    <p><img src="./images/sequence_length_distribution.png" alt="Histogram representing sequence length distribution. " width="2128" height="2138" loading="lazy" /></p>
 
     <blockquote class="question">
       <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -2959,7 +2959,7 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
   </ol>
 </blockquote>
 
-<p><a href="./images/alpha_diversity.png" target="_blank" rel="noopener noreferrer"><img src="./images/alpha_diversity.png" alt="2 panels for 2 α diversity metrics (Shannon, Simpson) with α diversity value on Y axis and days on X axis. The points are colored given When. " width="1536" height="1536" loading="lazy" /></a></p>
+<p><img src="./images/alpha_diversity.png" alt="2 panels for 2 α diversity metrics (Shannon, Simpson) with α diversity value on Y axis and days on X axis. The points are colored given When. " width="1536" height="1536" loading="lazy" /></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -3023,7 +3023,7 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
   </ol>
 </blockquote>
 
-<p><a href="./images/ordination.png" target="_blank" rel="noopener noreferrer"><img src="./images/ordination.png" alt="Graph with NMDS1 on X axis and NMDS2 on Y axis. The points are colored in red for early and blue for late. " width="2400" height="2400" loading="lazy" /></a></p>
+<p><img src="./images/ordination.png" alt="Graph with NMDS1 on X axis and NMDS2 on Y axis. The points are colored in red for early and blue for late. " width="2400" height="2400" loading="lazy" /></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -3061,7 +3061,7 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
   </ol>
 </blockquote>
 
-<p><a href="./images/barplot1.png" target="_blank" rel="noopener noreferrer"><img src="./images/barplot1.png" alt="Stacked barplot with sample on X-axis and abundance on Y-axis. Each bar represent the different families (in different colors) for the sample. " width="2400" height="2400" loading="lazy" /></a></p>
+<p><img src="./images/barplot1.png" alt="Stacked barplot with sample on X-axis and abundance on Y-axis. Each bar represent the different families (in different colors) for the sample. " width="2400" height="2400" loading="lazy" /></p>
 
 <p>The barplot is hard to read here: many families are in white because the color palette is reduced and we can not distinguish them. We need to filter to data to display only the most abundant families. We will select only taxa with more than 500 counts.</p>
 
@@ -3088,7 +3088,7 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
   </ol>
 </blockquote>
 
-<p><a href="./images/barplot2.png" target="_blank" rel="noopener noreferrer"><img src="./images/barplot2.png" alt="Stacked barplot with sample on X-axis and abundance on Y-axis. Each bar represent the different families (in different colors) for the sample. " width="2400" height="2400" loading="lazy" /></a></p>
+<p><img src="./images/barplot2.png" alt="Stacked barplot with sample on X-axis and abundance on Y-axis. Each bar represent the different families (in different colors) for the sample. " width="2400" height="2400" loading="lazy" /></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -3576,7 +3576,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cee0f948e85687560c8d9f4ee49fe7b6bc590366">cee0f94</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/27c5fadca87af2c537e79174a21d77dfd570c6d4">27c5fad</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

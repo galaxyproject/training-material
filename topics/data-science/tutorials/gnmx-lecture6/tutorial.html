@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@cee0f948e85687560c8d9f4ee49fe7b6bc590366",
+		release: "galaxy-training-network@27c5fadca87af2c537e79174a21d77dfd570c6d4",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1423,7 +1423,7 @@ data in tidy format (though most do, at least in my experience), and you often h
 <p>Clearly, these data are not tidy. When we melt the data frame, the data within it, called <strong>values</strong>, become a single column. The headers, called <strong>variables</strong>, also become new columns.
 So, to melt it, we need to specify what we want to call the values and what we want to call the variable. <a href="https://pandas.pydata.org/docs/reference/api/pandas.melt.html#pandas.melt"><code class="language-plaintext highlighter-rouge">pd.melt()</code></a> does the rest!</p>
 
-<p><a href="https://pandas.pydata.org/docs/_images/07_melt.svg" target="_blank" rel="noopener noreferrer"><img src="https://pandas.pydata.org/docs/_images/07_melt.svg" alt="Dataframe melt. " loading="lazy" /></a></p>
+<p><img src="https://pandas.pydata.org/docs/_images/07_melt.svg" alt="Dataframe melt. " loading="lazy" /></p>
 
 <blockquote>
   <p>Image from <a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/07_reshape_table_layout.html#wide-to-long-format">Pandas Docs</a>.</p>
@@ -1451,7 +1451,7 @@ So, to melt it, we need to specify what we want to call the values and what we w
 
 <p>To get back from melted (narrow) format to wide format we can use <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pivot.html#pandas.DataFrame.pivot"><code class="language-plaintext highlighter-rouge">pivot()</code></a> function.</p>
 
-<p><a href="https://pandas.pydata.org/docs/_images/07_pivot.svg" target="_blank" rel="noopener noreferrer"><img src="https://pandas.pydata.org/docs/_images/07_pivot.svg" alt="Dataframe pivot. " loading="lazy" /></a></p>
+<p><img src="https://pandas.pydata.org/docs/_images/07_pivot.svg" alt="Dataframe pivot. " loading="lazy" /></p>
 
 <blockquote>
   <p>Image from <a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/07_reshape_table_layout.html#long-to-wide-table-format">Pandas Docs</a>.</p>
@@ -1464,7 +1464,7 @@ So, to melt it, we need to specify what we want to call the values and what we w
 
 <p>Working with multiple tables often involves joining them on a common key:</p>
 
-<p><a href="https://pandas.pydata.org/docs/_images/08_merge_left.svg" target="_blank" rel="noopener noreferrer"><img src="https://pandas.pydata.org/docs/_images/08_merge_left.svg" alt="Left join. " loading="lazy" /></a></p>
+<p><img src="https://pandas.pydata.org/docs/_images/08_merge_left.svg" alt="Left join. " loading="lazy" /></p>
 
 <p>In fact, this can be done in several different ways described below. But first, let’s define two simple dataframes:</p>
 
@@ -1487,7 +1487,7 @@ So, to melt it, we need to specify what we want to call the values and what we w
 
 <h2 id="inner-join">Inner join</h2>
 
-<p><a href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/SQL_Join_-_07_A_Inner_Join_B.svg/234px-SQL_Join_-_07_A_Inner_Join_B.svg.png?20170204165143" target="_blank" rel="noopener noreferrer"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/SQL_Join_-_07_A_Inner_Join_B.svg/234px-SQL_Join_-_07_A_Inner_Join_B.svg.png?20170204165143" alt="Inner join. " loading="lazy" /></a></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/SQL_Join_-_07_A_Inner_Join_B.svg/234px-SQL_Join_-_07_A_Inner_Join_B.svg.png?20170204165143" alt="Inner join. " loading="lazy" /></p>
 
 <blockquote>
   <p>Figure from Wikimedia Commons</p>
@@ -1505,7 +1505,7 @@ So, to melt it, we need to specify what we want to call the values and what we w
 
 <h2 id="left-join">Left join</h2>
 
-<p><a href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/SQL_Join_-_01b_A_Left_Join_B.svg/234px-SQL_Join_-_01b_A_Left_Join_B.svg.png?20170204144906" target="_blank" rel="noopener noreferrer"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/SQL_Join_-_01b_A_Left_Join_B.svg/234px-SQL_Join_-_01b_A_Left_Join_B.svg.png?20170204144906" alt="Left join again. " loading="lazy" /></a></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/SQL_Join_-_01b_A_Left_Join_B.svg/234px-SQL_Join_-_01b_A_Left_Join_B.svg.png?20170204144906" alt="Left join again. " loading="lazy" /></p>
 
 <blockquote>
   <p>Figure from Wikimedia Commons</p>
@@ -1526,7 +1526,7 @@ So, to melt it, we need to specify what we want to call the values and what we w
 
 <h2 id="right-join">Right join</h2>
 
-<p><a href="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/SQL_Join_-_03_A_Right_Join_B.svg/234px-SQL_Join_-_03_A_Right_Join_B.svg.png?20170130230641" target="_blank" rel="noopener noreferrer"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/SQL_Join_-_03_A_Right_Join_B.svg/234px-SQL_Join_-_03_A_Right_Join_B.svg.png?20170130230641" alt="Right join. " loading="lazy" /></a></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/SQL_Join_-_03_A_Right_Join_B.svg/234px-SQL_Join_-_03_A_Right_Join_B.svg.png?20170130230641" alt="Right join. " loading="lazy" /></p>
 
 <blockquote>
   <p>Figure from Wikimedia Commons</p>
@@ -1539,7 +1539,7 @@ So, to melt it, we need to specify what we want to call the values and what we w
 
 <h2 id="full-join">Full join</h2>
 
-<p><a href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/SQL_Join_-_05_A_Full_Join_B.svg/234px-SQL_Join_-_05_A_Full_Join_B.svg.png?20170130230643" target="_blank" rel="noopener noreferrer"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/SQL_Join_-_05_A_Full_Join_B.svg/234px-SQL_Join_-_05_A_Full_Join_B.svg.png?20170130230643" alt="Full join. " loading="lazy" /></a></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/SQL_Join_-_05_A_Full_Join_B.svg/234px-SQL_Join_-_05_A_Full_Join_B.svg.png?20170130230643" alt="Full join. " loading="lazy" /></p>
 
 <blockquote>
   <p>Figure from Wikimedia Commons</p>
@@ -1985,7 +1985,7 @@ So, to melt it, we need to specify what we want to call the values and what we w
 
 <p>This would give us a grid:</p>
 
-<p><a href="https://i.imgur.com/74itE5M.png" target="_blank" rel="noopener noreferrer"><img src="https://i.imgur.com/74itE5M.png" alt="Grid. " loading="lazy" /></a></p>
+<p><img src="https://i.imgur.com/74itE5M.png" alt="Grid. " loading="lazy" /></p>
 
 <p>Now, it would be nice to fill the rectangles with actual numbers:</p>
 
@@ -2008,14 +2008,14 @@ So, to melt it, we need to specify what we want to call the values and what we w
 
 <p>This would give us the text:</p>
 
-<p><a href="https://i.imgur.com/pKalDaC.png" target="_blank" rel="noopener noreferrer"><img src="https://i.imgur.com/pKalDaC.png" alt="Text for grid. " loading="lazy" /></a></p>
+<p><img src="https://i.imgur.com/pKalDaC.png" alt="Text for grid. " loading="lazy" /></p>
 
 <p>To superimpose these on top of each other we should simply do this:</p>
 
 <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">back</span> <span class="o">+</span> <span class="n">front</span>
 </code></pre></div></div>
 
-<p><a href="https://i.imgur.com/SzhM1QW.png" target="_blank" rel="noopener noreferrer"><img src="https://i.imgur.com/SzhM1QW.png" alt="Full graph. " loading="lazy" /></a></p>
+<p><img src="https://i.imgur.com/SzhM1QW.png" alt="Full graph. " loading="lazy" /></p>
 
 
                 </section>
@@ -2300,7 +2300,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cee0f948e85687560c8d9f4ee49fe7b6bc590366">cee0f94</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/27c5fadca87af2c537e79174a21d77dfd570c6d4">27c5fad</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
