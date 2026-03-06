@@ -230,7 +230,7 @@ The BAM file includes a lot of information about each read, particularly the qua
 > 5. How many reads have a mapping quality score below 20?
 >
 > > <solution-title></solution-title>
-> > 1. There are ~21,900 mismatches for ~4,753,900 bases mapped which on average produces ~0.005 mismatches per mapped bases.
+> > 1. There are 32,663 mismatches for 5,004,018 bases mapped which on average produces 0.00653 mismatches per mapped bases.
 > > 2. The error rate is the proportion of mismatches per mapped bases, so the ratio computed right before.
 > > 3. The average quality is the mean quality score of the mapping. It is a Phred score like the one used in the FASTQ file for each nucleotide. But here the score is not per nucleotide, but per read and it represents the probability of mapping quality.
 > > 4. The insert size is the distance between the two reads in the pairs.
