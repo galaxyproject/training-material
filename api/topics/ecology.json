@@ -216,7 +216,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nwolf_tutorial.zip?download=1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Illuminapairedend\"];\n  2[\"Unzip\"];\n  0 -->|output| 2;\n  3[\"FastQC\"];\n  1 -->|output| 3;\n  4[\"FASTQ Groomer\"];\n  1 -->|output| 4;\n  5[\"obigrep\"];\n  4 -->|output_file| 5;\n  6[\"Line/Word/Character count\"];\n  4 -->|output_file| 6;\n  7[\"Line/Word/Character count\"];\n  5 -->|output| 7;\n  8[\"NGSfilter\"];\n  5 -->|output| 8;\n  9[\"obiuniq\"];\n  8 -->|output| 9;\n  10[\"obiannotate\"];\n  9 -->|output| 10;\n  11[\"obistat\"];\n  10 -->|output| 11;\n  12[\"obigrep\"];\n  10 -->|output| 12;\n  13[\"obigrep\"];\n  12 -->|output| 13;\n  14[\"obiclean\"];\n  13 -->|output| 14;\n  15[\"NCBI BLAST+ blastn\"];\n  14 -->|output| 15;\n  16[\"Filter sequences by ID\"];\n  15 -->|output1| 16;\n  17[\"Filter sequences by ID\"];\n  15 -->|output1| 17;\n  14 -->|output| 17;\n  18[\"obitab\"];\n  16 -->|output_pos| 18;\n  19[\"obitab\"];\n  17 -->|output_pos| 19;\n  20[\"Join two Datasets\"];\n  19 -->|output| 20;\n  15 -->|output1| 20;\n  21[\"Join two Datasets\"];\n  20 -->|out_file1| 21;\n  18 -->|output| 21;\n  22[\"Cut\"];\n  21 -->|out_file1| 22;\n  23[\"Filter\"];\n  22 -->|out_file1| 23;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nwolf_tutorial.zip?download=1\"]\n  1[label=\"Illuminapairedend\"]\n  2[label=\"Unzip\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"FastQC\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"FASTQ Groomer\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"obigrep\"]\n  4 -> 5 [label=\"output_file\"]\n  6[label=\"Line/Word/Character count\"]\n  4 -> 6 [label=\"output_file\"]\n  7[label=\"Line/Word/Character count\"]\n  5 -> 7 [label=\"output\"]\n  8[label=\"NGSfilter\"]\n  5 -> 8 [label=\"output\"]\n  9[label=\"obiuniq\"]\n  8 -> 9 [label=\"output\"]\n  10[label=\"obiannotate\"]\n  9 -> 10 [label=\"output\"]\n  11[label=\"obistat\"]\n  10 -> 11 [label=\"output\"]\n  12[label=\"obigrep\"]\n  10 -> 12 [label=\"output\"]\n  13[label=\"obigrep\"]\n  12 -> 13 [label=\"output\"]\n  14[label=\"obiclean\"]\n  13 -> 14 [label=\"output\"]\n  15[label=\"NCBI BLAST+ blastn\"]\n  14 -> 15 [label=\"output\"]\n  16[label=\"Filter sequences by ID\"]\n  15 -> 16 [label=\"output1\"]\n  17[label=\"Filter sequences by ID\"]\n  15 -> 17 [label=\"output1\"]\n  14 -> 17 [label=\"output\"]\n  18[label=\"obitab\"]\n  16 -> 18 [label=\"output_pos\"]\n  19[label=\"obitab\"]\n  17 -> 19 [label=\"output_pos\"]\n  20[label=\"Join two Datasets\"]\n  19 -> 20 [label=\"output\"]\n  15 -> 20 [label=\"output1\"]\n  21[label=\"Join two Datasets\"]\n  20 -> 21 [label=\"out_file1\"]\n  18 -> 21 [label=\"output\"]\n  22[label=\"Cut\"]\n  21 -> 22 [label=\"out_file1\"]\n  23[label=\"Filter\"]\n  22 -> 23 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -325,6 +325,11 @@
           {
             "url": "http://apostl.moffitt.org/",
             "name": "APOSTL",
+            "usegalaxy": false
+          },
+          {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
             "usegalaxy": false
           },
           {
@@ -472,6 +477,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -588,6 +597,10 @@
               {
                 "state": "local",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -708,6 +721,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -824,6 +841,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -954,6 +975,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -1029,8 +1054,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.65",
                   "0.71"
                 ],
@@ -1068,10 +1093,10 @@
                   "0.65",
                   "0.69",
                   "0.52",
-                  "0.68",
                   "0.67",
-                  "0.63",
+                  "0.68",
                   "0.62",
+                  "0.63",
                   "0.64"
                 ],
                 "server": "https://usegalaxy.cz/"
@@ -1109,6 +1134,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -1213,19 +1242,19 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.14.1+galaxy2",
                   "2.10.1+galaxy2",
                   "2.16.0+galaxy0",
+                  "2.14.1+galaxy2",
                   "0.2.01",
                   "0.1.07",
-                  "0.1.06",
-                  "0.1.01",
-                  "0.0.14",
                   "0.2.00",
+                  "0.1.01",
+                  "0.0.20",
+                  "0.1.06",
+                  "0.0.22",
+                  "0.0.14",
                   "0.1.00",
                   "0.1.04",
-                  "0.0.20",
-                  "0.0.22",
                   "0.1.08",
                   "0.0.19"
                 ],
@@ -1239,13 +1268,13 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.14.1+galaxy2",
                   "2.10.1+galaxy2",
                   "2.16.0+galaxy0",
+                  "2.14.1+galaxy2",
                   "2.14.1+galaxy1",
-                  "0.3.3",
+                  "2.10.1+galaxy1",
                   "2.14.1+galaxy0",
-                  "2.10.1+galaxy1"
+                  "0.3.3"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -1272,6 +1301,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -1412,6 +1445,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -1533,6 +1570,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -1660,6 +1701,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -1781,6 +1826,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -1908,6 +1957,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -2029,6 +2082,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -2156,6 +2213,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -2280,6 +2341,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -2401,6 +2466,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -2531,6 +2600,10 @@
               {
                 "state": "local",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -3085,7 +3158,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nHP3_S9_L001_R1_001.fastq.gz\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nHP3_S9_L001_R2_001.fastq.gz\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"fastp\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  1 -->|output| 3;\n  4[\"FASTQ to FASTA\"];\n  2 -->|out1| 4;\n  5[\"FASTQ to FASTA\"];\n  3 -->|out1| 5;\n  6[\"NCBI BLAST+ blastn\"];\n  4 -->|output| 6;\n  7[\"NCBI BLAST+ blastn\"];\n  5 -->|output| 7;\n  8[\"Count\"];\n  6 -->|output1| 8;\n  9[\"Count\"];\n  7 -->|output1| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nHP3_S9_L001_R1_001.fastq.gz\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nHP3_S9_L001_R2_001.fastq.gz\"]\n  2[label=\"fastp\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"fastp\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"FASTQ to FASTA\"]\n  2 -> 4 [label=\"out1\"]\n  5[label=\"FASTQ to FASTA\"]\n  3 -> 5 [label=\"out1\"]\n  6[label=\"NCBI BLAST+ blastn\"]\n  4 -> 6 [label=\"output\"]\n  7[label=\"NCBI BLAST+ blastn\"]\n  5 -> 7 [label=\"output\"]\n  8[label=\"Count\"]\n  6 -> 8 [label=\"output1\"]\n  9[label=\"Count\"]\n  7 -> 9 [label=\"output1\"]\n}",
           "workflow_tools": [
@@ -3221,6 +3294,11 @@
           {
             "url": "http://apostl.moffitt.org/",
             "name": "APOSTL",
+            "usegalaxy": false
+          },
+          {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
             "usegalaxy": false
           },
           {
@@ -3368,6 +3446,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -3487,6 +3569,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -3513,8 +3599,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.0.2",
                   "1.0.0",
+                  "1.0.2",
                   "1.0.1"
                 ],
                 "server": "https://galaxytrakr.org/"
@@ -3618,6 +3704,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -3762,6 +3852,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -3779,11 +3873,11 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.19.5+galaxy1",
-                  "0.23.2+galaxy0",
-                  "0.20.1+galaxy0",
                   "1.0.1+galaxy3",
-                  "1.0.1+galaxy2"
+                  "0.20.1+galaxy0",
+                  "1.0.1+galaxy2",
+                  "0.19.5+galaxy1",
+                  "0.23.2+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -3881,9 +3975,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.20.1+galaxy0",
                   "0.19.5+galaxy1",
-                  "0.23.2+galaxy0",
-                  "0.20.1+galaxy0"
+                  "0.23.2+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -3895,8 +3989,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.23.2+galaxy0",
-                  "1.0.1+galaxy2"
+                  "1.0.1+galaxy2",
+                  "0.23.2+galaxy0"
                 ],
                 "server": "https://viralvariant.anses.fr/"
               }
@@ -4135,6 +4229,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -4279,6 +4378,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -4398,6 +4501,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -4415,8 +4522,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.0",
-                  "9.5+galaxy3"
+                  "9.5+galaxy3",
+                  "1.1.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -4427,8 +4534,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.0",
                   "9.5+galaxy3",
+                  "1.1.0",
                   "9.5+galaxy2"
                 ],
                 "server": "https://galaxytrakr.org/"
@@ -4498,8 +4605,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.0",
                   "9.5+galaxy3",
+                  "1.1.0",
                   "9.5+galaxy2",
                   "9.5+galaxy0"
                 ],
@@ -4540,6 +4647,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -4659,6 +4770,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -4784,6 +4899,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -4906,6 +5025,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -5023,6 +5146,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -5148,6 +5275,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -5264,6 +5395,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -5395,6 +5530,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -5521,6 +5660,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -5844,7 +5987,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"Copernicus Data Space Ecosystem\"];\n  1[\"Holoviz\"];\n  0 -->|output_collection| 1;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Copernicus Data Space Ecosystem\"]\n  1[label=\"Holoviz\"]\n  0 -> 1 [label=\"output_collection\"]\n}",
           "workflow_tools": [
@@ -5932,7 +6075,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"Copernicus Data Space Ecosystem\"];\n  1[\"Holoviz\"];\n  0 -->|output_collection| 1;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Copernicus Data Space Ecosystem\"]\n  1[label=\"Holoviz\"]\n  0 -> 1 [label=\"output_collection\"]\n}",
           "workflow_tools": [
@@ -5963,6 +6106,11 @@
           {
             "url": "http://apostl.moffitt.org/",
             "name": "APOSTL",
+            "usegalaxy": false
+          },
+          {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
             "usegalaxy": false
           },
           {
@@ -6111,6 +6259,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -6226,6 +6378,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -6580,6 +6736,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -6725,6 +6886,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -6841,6 +7006,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -6963,6 +7132,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -7079,6 +7252,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -7476,7 +7653,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Column Regex Find And Replace\"];\n  0 -->|output| 3;\n  4[\"Column Regex Find And Replace\"];\n  1 -->|output| 4;\n  5[\"Concatenate datasets\"];\n  2 -->|output| 5;\n  1 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Column Regex Find And Replace\"];\n  2 -->|output| 6;\n  7[\"Merge Columns\"];\n  3 -->|out_file1| 7;\n  8[\"Merge Columns\"];\n  4 -->|out_file1| 8;\n  9[\"Count\"];\n  5 -->|out_file1| 9;\n  10[\"Filter\"];\n  5 -->|out_file1| 10;\n  11[\"Merge Columns\"];\n  6 -->|out_file1| 11;\n  12[\"Regex Find And Replace\"];\n  7 -->|out_file1| 12;\n  13[\"Regex Find And Replace\"];\n  8 -->|out_file1| 13;\n  14[\"Column Regex Find And Replace\"];\n  10 -->|out_file1| 14;\n  15[\"Regex Find And Replace\"];\n  11 -->|out_file1| 15;\n  16[\"Calculate presence absence table\"];\n  12 -->|out_file1| 16;\n  17[\"Calculate presence absence table\"];\n  13 -->|out_file1| 17;\n  18[\"Merge Columns\"];\n  14 -->|out_file1| 18;\n  19[\"Calculate presence absence table\"];\n  15 -->|out_file1| 19;\n  20[\"Regex Find And Replace\"];\n  18 -->|out_file1| 20;\n  21[\"Calculate community metrics\"];\n  20 -->|out_file1| 21;\n  22[\"Column Regex Find And Replace\"];\n  20 -->|out_file1| 22;\n  23[\"Merge Columns\"];\n  22 -->|out_file1| 23;\n  24[\"Column Regex Find And Replace\"];\n  23 -->|out_file1| 24;\n  25[\"Advanced Cut\"];\n  24 -->|out_file1| 25;\n  26[\"Sort\"];\n  25 -->|output| 26;\n  27[\"Regex Find And Replace\"];\n  26 -->|outfile| 27;\n  28[\"Compute GLM on community data\"];\n  21 -->|output_community| 28;\n  27 -->|out_file1| 28;\n  29[\"Compute GLM on population data\"];\n  16 -->|output_presabs| 29;\n  27 -->|out_file1| 29;\n  30[\"Compute GLM on population data\"];\n  17 -->|output_presabs| 30;\n  27 -->|out_file1| 30;\n  31[\"Compute GLM on population data\"];\n  19 -->|output_presabs| 31;\n  27 -->|out_file1| 31;\n  32[\"Transpose\"];\n  28 -->|output_summary| 32;\n  33[\"Create a plot from GLM data\"];\n  21 -->|output_community| 33;\n  28 -->|output_summary| 33;\n  27 -->|out_file1| 33;\n  34[\"Transpose\"];\n  29 -->|output_summary| 34;\n  35[\"Create a plot from GLM data\"];\n  16 -->|output_presabs| 35;\n  29 -->|output_summary| 35;\n  27 -->|out_file1| 35;\n  36[\"Transpose\"];\n  30 -->|output_summary| 36;\n  37[\"Create a plot from GLM data\"];\n  17 -->|output_presabs| 37;\n  30 -->|output_summary| 37;\n  27 -->|out_file1| 37;\n  38[\"Transpose\"];\n  31 -->|output_summary| 38;\n  39[\"Create a plot from GLM data\"];\n  19 -->|output_presabs| 39;\n  31 -->|output_summary| 39;\n  27 -->|out_file1| 39;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  3[label=\"Column Regex Find And Replace\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Column Regex Find And Replace\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Concatenate datasets\"]\n  2 -> 5 [label=\"output\"]\n  1 -> 5 [label=\"output\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"Column Regex Find And Replace\"]\n  2 -> 6 [label=\"output\"]\n  7[label=\"Merge Columns\"]\n  3 -> 7 [label=\"out_file1\"]\n  8[label=\"Merge Columns\"]\n  4 -> 8 [label=\"out_file1\"]\n  9[label=\"Count\"]\n  5 -> 9 [label=\"out_file1\"]\n  10[label=\"Filter\"]\n  5 -> 10 [label=\"out_file1\"]\n  11[label=\"Merge Columns\"]\n  6 -> 11 [label=\"out_file1\"]\n  12[label=\"Regex Find And Replace\"]\n  7 -> 12 [label=\"out_file1\"]\n  13[label=\"Regex Find And Replace\"]\n  8 -> 13 [label=\"out_file1\"]\n  14[label=\"Column Regex Find And Replace\"]\n  10 -> 14 [label=\"out_file1\"]\n  15[label=\"Regex Find And Replace\"]\n  11 -> 15 [label=\"out_file1\"]\n  16[label=\"Calculate presence absence table\"]\n  12 -> 16 [label=\"out_file1\"]\n  17[label=\"Calculate presence absence table\"]\n  13 -> 17 [label=\"out_file1\"]\n  18[label=\"Merge Columns\"]\n  14 -> 18 [label=\"out_file1\"]\n  19[label=\"Calculate presence absence table\"]\n  15 -> 19 [label=\"out_file1\"]\n  20[label=\"Regex Find And Replace\"]\n  18 -> 20 [label=\"out_file1\"]\n  21[label=\"Calculate community metrics\"]\n  20 -> 21 [label=\"out_file1\"]\n  22[label=\"Column Regex Find And Replace\"]\n  20 -> 22 [label=\"out_file1\"]\n  23[label=\"Merge Columns\"]\n  22 -> 23 [label=\"out_file1\"]\n  24[label=\"Column Regex Find And Replace\"]\n  23 -> 24 [label=\"out_file1\"]\n  25[label=\"Advanced Cut\"]\n  24 -> 25 [label=\"out_file1\"]\n  26[label=\"Sort\"]\n  25 -> 26 [label=\"output\"]\n  27[label=\"Regex Find And Replace\"]\n  26 -> 27 [label=\"outfile\"]\n  28[label=\"Compute GLM on community data\"]\n  21 -> 28 [label=\"output_community\"]\n  27 -> 28 [label=\"out_file1\"]\n  29[label=\"Compute GLM on population data\"]\n  16 -> 29 [label=\"output_presabs\"]\n  27 -> 29 [label=\"out_file1\"]\n  30[label=\"Compute GLM on population data\"]\n  17 -> 30 [label=\"output_presabs\"]\n  27 -> 30 [label=\"out_file1\"]\n  31[label=\"Compute GLM on population data\"]\n  19 -> 31 [label=\"output_presabs\"]\n  27 -> 31 [label=\"out_file1\"]\n  32[label=\"Transpose\"]\n  28 -> 32 [label=\"output_summary\"]\n  33[label=\"Create a plot from GLM data\"]\n  21 -> 33 [label=\"output_community\"]\n  28 -> 33 [label=\"output_summary\"]\n  27 -> 33 [label=\"out_file1\"]\n  34[label=\"Transpose\"]\n  29 -> 34 [label=\"output_summary\"]\n  35[label=\"Create a plot from GLM data\"]\n  16 -> 35 [label=\"output_presabs\"]\n  29 -> 35 [label=\"output_summary\"]\n  27 -> 35 [label=\"out_file1\"]\n  36[label=\"Transpose\"]\n  30 -> 36 [label=\"output_summary\"]\n  37[label=\"Create a plot from GLM data\"]\n  17 -> 37 [label=\"output_presabs\"]\n  30 -> 37 [label=\"output_summary\"]\n  27 -> 37 [label=\"out_file1\"]\n  38[label=\"Transpose\"]\n  31 -> 38 [label=\"output_summary\"]\n  39[label=\"Create a plot from GLM data\"]\n  19 -> 39 [label=\"output_presabs\"]\n  31 -> 39 [label=\"output_summary\"]\n  27 -> 39 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -7632,6 +7809,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -7776,6 +7958,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -7894,6 +8080,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -8010,6 +8200,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -8143,6 +8337,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -8280,6 +8478,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -8410,6 +8612,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -8546,6 +8752,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -8668,6 +8878,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -8798,6 +9012,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -8921,6 +9139,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -9050,6 +9272,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -9170,6 +9396,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -9297,6 +9527,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -9447,6 +9681,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -9594,6 +9832,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -9727,6 +9969,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -10299,7 +10545,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"Get species occurrences data\"];\n  1[\"Filter\"];\n  0 -->|output| 1;\n  2[\"Count\"];\n  0 -->|output| 2;\n  3[\"Summary Statistics\"];\n  1 -->|out_file1| 3;\n  4[\"Summary Statistics\"];\n  1 -->|out_file1| 4;\n  5[\"Filter\"];\n  1 -->|out_file1| 5;\n  6[\"Filter\"];\n  5 -->|out_file1| 6;\n  7[\"Count\"];\n  6 -->|out_file1| 7;\n  8[\"Filter\"];\n  6 -->|out_file1| 8;\n  9[\"OGR2ogr\"];\n  8 -->|out_file1| 9;\n  10[\"OGR2ogr\"];\n  8 -->|out_file1| 10;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Get species occurrences data\"]\n  1[label=\"Filter\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Count\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Summary Statistics\"]\n  1 -> 3 [label=\"out_file1\"]\n  4[label=\"Summary Statistics\"]\n  1 -> 4 [label=\"out_file1\"]\n  5[label=\"Filter\"]\n  1 -> 5 [label=\"out_file1\"]\n  6[label=\"Filter\"]\n  5 -> 6 [label=\"out_file1\"]\n  7[label=\"Count\"]\n  6 -> 7 [label=\"out_file1\"]\n  8[label=\"Filter\"]\n  6 -> 8 [label=\"out_file1\"]\n  9[label=\"OGR2ogr\"]\n  8 -> 9 [label=\"out_file1\"]\n  10[label=\"OGR2ogr\"]\n  8 -> 10 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -10351,6 +10597,11 @@
           {
             "url": "http://apostl.moffitt.org/",
             "name": "APOSTL",
+            "usegalaxy": false
+          },
+          {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
             "usegalaxy": false
           },
           {
@@ -10498,6 +10749,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -10614,6 +10869,10 @@
               {
                 "state": "local",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -10734,6 +10993,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -10850,6 +11113,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -10973,6 +11240,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -11392,7 +11663,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nEBI SRA: SRR034310 File: ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nhttps://zenodo.org/record/1134547/files/Barcode_SRR034310.txt\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"FastQC\"];\n  5 -->|demultiplexed| 10;\n  11[\"Map with BWA\"];\n  5 -->|demultiplexed| 11;\n  3 -->|output| 11;\n  12[\"Select\"];\n  6 -->|output_log| 12;\n  13[\"Select\"];\n  6 -->|output_log| 13;\n  14[\"Replace Text\"];\n  7 -->|outfile| 14;\n  15[\"Replace Text\"];\n  8 -->|out_file1| 15;\n  16[\"Replace Text\"];\n  9 -->|out_file1| 16;\n  17[\"MultiQC\"];\n  10 -->|text_file| 17;\n  18[\"Replace Text\"];\n  12 -->|out_file1| 18;\n  19[\"Replace Text\"];\n  13 -->|out_file1| 19;\n  2[\"ℹ️ Input Dataset\\nhttps://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  20[\"Add column\"];\n  14 -->|outfile| 20;\n  21[\"Concatenate datasets\"];\n  19 -->|outfile| 21;\n  15 -->|outfile| 21;\n  16 -->|outfile| 21;\n  18 -->|outfile| 21;\n  22[\"Cut\"];\n  20 -->|out_file1| 22;\n  23[\"Convert\"];\n  21 -->|out_file1| 23;\n  24[\"Regex Replace\"];\n  22 -->|out_file1| 24;\n  25[\"Stacks: reference map\"];\n  11 -->|bam_output| 25;\n  24 -->|outfile| 25;\n  26[\"Stacks: populations\"];\n  25 -->|all_output| 26;\n  24 -->|outfile| 26;\n  27[\"Summary Statistics\"];\n  26 -->|out_fstats| 27;\n  28[\"Sort\"];\n  26 -->|out_fstats| 28;\n  29[\"Count\"];\n  26 -->|out_fstats| 29;\n  3[\"ℹ️ Input Dataset\\nhttps://zenodo.org/record/1134547/files/Reference_genome_11_chromosomes.fasta\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  30[\"Filter\"];\n  26 -->|out_fstats| 30;\n  4[\"Stacks: process radtags\"];\n  1 -->|output| 4;\n  0 -->|output| 4;\n  5[\"Stacks: process radtags\"];\n  1 -->|output| 5;\n  0 -->|output| 5;\n  6[\"Stacks: process radtags\"];\n  1 -->|output| 6;\n  0 -->|output| 6;\n  7[\"Replace Text\"];\n  2 -->|output| 7;\n  8[\"Select\"];\n  4 -->|output_log| 8;\n  9[\"Select\"];\n  5 -->|output_log| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nEBI SRA: SRR034310 File: ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR034/SRR034310/SRR034310.fastq.gz\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nhttps://zenodo.org/record/1134547/files/Barcode_SRR034310.txt\"]\n  10[label=\"FastQC\"]\n  5 -> 10 [label=\"demultiplexed\"]\n  11[label=\"Map with BWA\"]\n  5 -> 11 [label=\"demultiplexed\"]\n  3 -> 11 [label=\"output\"]\n  12[label=\"Select\"]\n  6 -> 12 [label=\"output_log\"]\n  13[label=\"Select\"]\n  6 -> 13 [label=\"output_log\"]\n  14[label=\"Replace Text\"]\n  7 -> 14 [label=\"outfile\"]\n  15[label=\"Replace Text\"]\n  8 -> 15 [label=\"out_file1\"]\n  16[label=\"Replace Text\"]\n  9 -> 16 [label=\"out_file1\"]\n  17[label=\"MultiQC\"]\n  10 -> 17 [label=\"text_file\"]\n  18[label=\"Replace Text\"]\n  12 -> 18 [label=\"out_file1\"]\n  19[label=\"Replace Text\"]\n  13 -> 19 [label=\"out_file1\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nhttps://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt\"]\n  20[label=\"Add column\"]\n  14 -> 20 [label=\"outfile\"]\n  21[label=\"Concatenate datasets\"]\n  19 -> 21 [label=\"outfile\"]\n  15 -> 21 [label=\"outfile\"]\n  16 -> 21 [label=\"outfile\"]\n  18 -> 21 [label=\"outfile\"]\n  22[label=\"Cut\"]\n  20 -> 22 [label=\"out_file1\"]\n  23[label=\"Convert\"]\n  21 -> 23 [label=\"out_file1\"]\n  24[label=\"Regex Replace\"]\n  22 -> 24 [label=\"out_file1\"]\n  25[label=\"Stacks: reference map\"]\n  11 -> 25 [label=\"bam_output\"]\n  24 -> 25 [label=\"outfile\"]\n  26[label=\"Stacks: populations\"]\n  25 -> 26 [label=\"all_output\"]\n  24 -> 26 [label=\"outfile\"]\n  27[label=\"Summary Statistics\"]\n  26 -> 27 [label=\"out_fstats\"]\n  28[label=\"Sort\"]\n  26 -> 28 [label=\"out_fstats\"]\n  29[label=\"Count\"]\n  26 -> 29 [label=\"out_fstats\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nhttps://zenodo.org/record/1134547/files/Reference_genome_11_chromosomes.fasta\"]\n  30[label=\"Filter\"]\n  26 -> 30 [label=\"out_fstats\"]\n  4[label=\"Stacks: process radtags\"]\n  1 -> 4 [label=\"output\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Stacks: process radtags\"]\n  1 -> 5 [label=\"output\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"Stacks: process radtags\"]\n  1 -> 6 [label=\"output\"]\n  0 -> 6 [label=\"output\"]\n  7[label=\"Replace Text\"]\n  2 -> 7 [label=\"output\"]\n  8[label=\"Select\"]\n  4 -> 8 [label=\"output_log\"]\n  9[label=\"Select\"]\n  5 -> 9 [label=\"output_log\"]\n}",
           "workflow_tools": [
@@ -11588,7 +11859,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nref_genome_chromFa.tar\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nPopulation_map.txt\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nBarcodes_SRR034310.tabular\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nSRR034310.fastq\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"Stacks: process radtags\"];\n  2 -->|output| 4;\n  3 -->|output| 4;\n  5[\"Stacks: process radtags\"];\n  2 -->|output| 5;\n  3 -->|output| 5;\n  6[\"Stacks: process radtags\"];\n  2 -->|output| 6;\n  3 -->|output| 6;\n  7[\"Map with BWA for Illumina\"];\n  0 -->|output| 7;\n  4 -->|demultiplexed| 7;\n  8[\"Stacks: reference map\"];\n  7 -->|output| 8;\n  1 -->|output| 8;\n  9[\"Stacks: populations\"];\n  8 -->|all_output| 9;\n  1 -->|output| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nref_genome_chromFa.tar\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nPopulation_map.txt\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nBarcodes_SRR034310.tabular\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nSRR034310.fastq\"]\n  4[label=\"Stacks: process radtags\"]\n  2 -> 4 [label=\"output\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Stacks: process radtags\"]\n  2 -> 5 [label=\"output\"]\n  3 -> 5 [label=\"output\"]\n  6[label=\"Stacks: process radtags\"]\n  2 -> 6 [label=\"output\"]\n  3 -> 6 [label=\"output\"]\n  7[label=\"Map with BWA for Illumina\"]\n  0 -> 7 [label=\"output\"]\n  4 -> 7 [label=\"demultiplexed\"]\n  8[label=\"Stacks: reference map\"]\n  7 -> 8 [label=\"output\"]\n  1 -> 8 [label=\"output\"]\n  9[label=\"Stacks: populations\"]\n  8 -> 9 [label=\"all_output\"]\n  1 -> 9 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -11739,6 +12010,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -11884,6 +12160,10 @@
               },
               {
                 "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "local",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -11999,6 +12279,10 @@
               {
                 "state": "local",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -12119,6 +12403,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -12235,6 +12523,10 @@
               {
                 "state": "local",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -12355,6 +12647,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -12471,6 +12767,10 @@
               {
                 "state": "local",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -12591,6 +12891,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -12709,6 +13013,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -12825,6 +13133,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -12981,6 +13293,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -13111,6 +13427,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -13248,6 +13568,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -13366,6 +13690,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -13383,9 +13711,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.72+galaxy1",
                   "0.72",
-                  "0.73+galaxy0",
-                  "0.72+galaxy1"
+                  "0.73+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -13479,10 +13807,10 @@
                   "0.65",
                   "0.69",
                   "0.52",
-                  "0.68",
                   "0.67",
-                  "0.63",
+                  "0.68",
                   "0.62",
+                  "0.63",
                   "0.64"
                 ],
                 "server": "https://usegalaxy.cz/"
@@ -13495,9 +13823,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.72+galaxy1",
                   "0.72",
                   "0.73+galaxy0",
-                  "0.72+galaxy1",
                   "0.74+galaxy0",
                   "0.74+galaxy1"
                 ],
@@ -13506,8 +13834,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.73+galaxy0",
-                  "0.72+galaxy1"
+                  "0.72+galaxy1",
+                  "0.73+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -13529,6 +13857,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -13558,9 +13890,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "1.7",
                   "1.27+galaxy4",
-                  "1.11+galaxy1",
-                  "1.7"
+                  "1.11+galaxy1"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -13626,15 +13958,15 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.33+galaxy0",
                   "1.27+galaxy3",
-                  "1.27+galaxy4",
-                  "1.11+galaxy1",
+                  "1.33+galaxy0",
                   "1.11+galaxy0",
+                  "1.27+galaxy4",
                   "1.24.1+galaxy0",
-                  "1.8+galaxy0",
+                  "1.11+galaxy1",
                   "1.9",
-                  "1.9+galaxy1"
+                  "1.9+galaxy1",
+                  "1.8+galaxy0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -13651,31 +13983,31 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.33+galaxy0",
                   "1.27+galaxy3",
-                  "1.27+galaxy4",
-                  "1.11+galaxy1",
-                  "1.24.1+galaxy0",
+                  "1.33+galaxy0",
                   "1.7",
-                  "1.8+galaxy0",
-                  "1.9",
+                  "1.27+galaxy4",
+                  "1.24.1+galaxy0",
+                  "1.11+galaxy1",
                   "1.27+galaxy0",
+                  "1.9",
+                  "1.8+galaxy1",
                   "1.9+galaxy1",
                   "1.27+galaxy1",
-                  "1.8+galaxy1"
+                  "1.8+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy0",
                   "1.7",
-                  "1.8+galaxy0",
-                  "1.9",
+                  "1.11+galaxy0",
                   "1.7.1",
-                  "1.9+galaxy1",
+                  "1.9",
                   "1.8+galaxy1",
+                  "1.9+galaxy1",
+                  "1.8+galaxy0",
                   "1.8+galaxy2"
                 ],
                 "server": "https://usegalaxy.no/"
@@ -13698,6 +14030,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -13779,8 +14115,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.46.3",
-                  "1.46.1",
-                  "1.46.2"
+                  "1.46.2",
+                  "1.46.1"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -13811,8 +14147,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.46.1",
-                  "1.46.2"
+                  "1.46.2",
+                  "1.46.1"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -13833,6 +14169,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -13960,6 +14300,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -14081,6 +14425,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -14618,6 +14966,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -14762,6 +15115,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -14878,6 +15235,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -14999,6 +15360,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -15114,6 +15479,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -15241,6 +15610,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -15364,6 +15737,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -15500,6 +15877,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -15622,6 +16003,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -15764,6 +16149,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -15883,6 +16272,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -16014,6 +16407,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -16142,6 +16539,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -16267,6 +16668,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -16373,13 +16778,13 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy0",
                   "1.7",
-                  "1.8+galaxy0",
-                  "1.9",
+                  "1.11+galaxy0",
                   "1.7.1",
-                  "1.9+galaxy1",
+                  "1.9",
                   "1.8+galaxy1",
+                  "1.9+galaxy1",
+                  "1.8+galaxy0",
                   "1.8+galaxy2"
                 ],
                 "server": "https://usegalaxy.no/"
@@ -16405,6 +16810,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -16422,11 +16831,11 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "5.0+galaxy0",
-                  "4.9+galaxy1",
-                  "5.1+galaxy0",
+                  "4.0+galaxy0",
                   "4.8+galaxy1",
-                  "4.0+galaxy0"
+                  "4.9+galaxy1",
+                  "5.0+galaxy0",
+                  "5.1+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -16507,16 +16916,16 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "4.0+galaxy0",
                   "5.0+galaxy0",
                   "5.1+galaxy0",
-                  "4.0+galaxy0",
                   "4.4+galaxy0",
-                  "1.16.5",
+                  "5.2+galaxy0",
+                  "1.16.8",
+                  "1.16.3",
                   "4.0+galaxy1",
                   "3.5+galaxy2",
-                  "1.16.3",
-                  "1.16.8",
-                  "5.2+galaxy0",
+                  "1.16.5",
                   "3.4+galaxy1",
                   "1.16.1",
                   "1.6"
@@ -16526,8 +16935,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "5.0+galaxy0",
                   "4.9+galaxy1",
+                  "5.0+galaxy0",
                   "5.1+galaxy0",
                   "4.4+galaxy0",
                   "5.2+galaxy0",
@@ -16923,7 +17332,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nair_temperature_at_2_metres.nc\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"NetCDF xarray Coordinate Info\"];\n  0 -->|output| 1;\n  2[\"NetCDF xarray Metadata Info\"];\n  0 -->|output| 2;\n  3[\"CDO Operations\"];\n  0 -->|output| 3;\n  4[\"CDO Operations\"];\n  3 -->|output_files| 4;\n  5[\"NetCDF xarray Metadata Info\"];\n  4 -->|output_files| 5;\n  6[\"NetCDF xarray map plotting\"];\n  4 -->|output_files| 6;\n  5 -->|output| 6;\n  7[\"NetCDF xarray map plotting\"];\n  4 -->|output_files| 7;\n  5 -->|output| 7;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nair_temperature_at_2_metres.nc\"]\n  1[label=\"NetCDF xarray Coordinate Info\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"NetCDF xarray Metadata Info\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"CDO Operations\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"CDO Operations\"]\n  3 -> 4 [label=\"output_files\"]\n  5[label=\"NetCDF xarray Metadata Info\"]\n  4 -> 5 [label=\"output_files\"]\n  6[label=\"NetCDF xarray map plotting\"]\n  4 -> 6 [label=\"output_files\"]\n  5 -> 6 [label=\"output\"]\n  7[label=\"NetCDF xarray map plotting\"]\n  4 -> 7 [label=\"output_files\"]\n  5 -> 7 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -17424,6 +17833,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -17569,6 +17983,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -17689,6 +18107,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -17813,131 +18235,7 @@
               },
               {
                 "state": "missing",
-                "server": "https://vm-chemflow-francegrille.eu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
-              },
-              {
-                "state": "missing",
-                "server": "https://hyperbrowser.uio.no/coloc-stats"
-              },
-              {
-                "state": "missing",
-                "server": "http://corgat.cloud.ba.infn.it/galaxy"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.mesocentre.uca.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.pasteur.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxytrakr.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://igg.cloud.ba.infn.it/galaxy"
-              },
-              {
-                "state": "missing",
-                "server": "http://hyperbrowser.uio.no/hb/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.hyphy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "https://www.immportgalaxy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.interactomix.com/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy-web.ipk-gatersleben.de"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.ul.edu.lb/"
-              },
-              {
-                "state": "missing",
-                "server": "https://neo.engr.uconn.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://mississippi.sorbonne-universite.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
-              },
-              {
-                "state": "missing",
-                "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org.au"
-              },
-              {
-                "state": "exact",
-                "version": "0.20.2+galaxy0",
-                "server": "https://usegalaxy.be/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "2022.3.0+galaxy0"
-                ],
-                "server": "https://usegalaxy.cz/"
-              },
-              {
-                "state": "exact",
-                "version": "0.20.2+galaxy0",
-                "server": "https://usegalaxy.eu"
-              },
-              {
-                "state": "exact",
-                "version": "0.20.2+galaxy0",
-                "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "0.18.2+galaxy0",
-                  "2022.3.0+galaxy0"
-                ],
-                "server": "https://usegalaxy.org"
-              },
-              {
-                "state": "missing",
-                "server": "https://viralvariant.anses.fr/"
-              }
-            ],
-            "version": "0.20.2+galaxy0"
-          },
-          {
-            "id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0",
-            "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -18061,11 +18359,147 @@
             "version": "0.20.2+galaxy0"
           },
           {
+            "id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "http://corgat.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "exact",
+                "version": "0.20.2+galaxy0",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "2022.3.0+galaxy0"
+                ],
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "exact",
+                "version": "0.20.2+galaxy0",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "exact",
+                "version": "0.20.2+galaxy0",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "0.18.2+galaxy0",
+                  "2022.3.0+galaxy0"
+                ],
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "0.20.2+galaxy0"
+          },
+          {
             "id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1",
             "servers": [
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -18336,6 +18770,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -18478,6 +18917,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -18919,7 +19362,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nchampbloc_ivr_val.csv\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nchampbloc_ivr.csv\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nficheterrain_val.csv\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nficheterrain.csv\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nchampbloc_qecb_val.csv\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nchampbloc_qecb.csv\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"IVR\"];\n  3 -->|output| 6;\n  2 -->|output| 6;\n  0 -->|output| 6;\n  1 -->|output| 6;\n  7[\"QECB\"];\n  3 -->|output| 7;\n  2 -->|output| 7;\n  4 -->|output| 7;\n  5 -->|output| 7;\n  8[\"Champs blocs indicators\"];\n  7 -->|output_rds| 8;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nchampbloc_ivr_val.csv\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nchampbloc_ivr.csv\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nficheterrain_val.csv\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nficheterrain.csv\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nchampbloc_qecb_val.csv\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nchampbloc_qecb.csv\"]\n  6[label=\"IVR\"]\n  3 -> 6 [label=\"output\"]\n  2 -> 6 [label=\"output\"]\n  0 -> 6 [label=\"output\"]\n  1 -> 6 [label=\"output\"]\n  7[label=\"QECB\"]\n  3 -> 7 [label=\"output\"]\n  2 -> 7 [label=\"output\"]\n  4 -> 7 [label=\"output\"]\n  5 -> 7 [label=\"output\"]\n  8[label=\"Champs blocs indicators\"]\n  7 -> 8 [label=\"output_rds\"]\n}",
           "workflow_tools": [
@@ -19659,6 +20102,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -19804,6 +20252,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -19919,6 +20371,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -20040,6 +20496,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -20155,6 +20615,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -20279,6 +20743,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -20397,6 +20865,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -20834,7 +21306,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nFasta nucelotide file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Prodigal Gene Predictor \"];\n  0 -->|output| 1;\n  351cf550-c05d-4bad-9394-fe9b45ef6298[\"Output\\nProtein fasta file\"];\n  1 --> 351cf550-c05d-4bad-9394-fe9b45ef6298;\n  style 351cf550-c05d-4bad-9394-fe9b45ef6298 stroke:#2c3143,stroke-width:4px;\n  2[\"Sanntis: Build Genbank \"];\n  0 -->|output| 2;\n  1 -->|output_faa| 2;\n  1b9f0275-191a-4e90-b4b4-7b10475f4602[\"Output\\nGenbank file\"];\n  2 --> 1b9f0275-191a-4e90-b4b4-7b10475f4602;\n  style 1b9f0275-191a-4e90-b4b4-7b10475f4602 stroke:#2c3143,stroke-width:4px;\n  3[\"Regex Find And Replace\"];\n  1 -->|output_faa| 3;\n  e41e8fb9-c5f6-425f-a351-f8fa92f7821d[\"Output\\nClean protein fasta file\"];\n  3 --> e41e8fb9-c5f6-425f-a351-f8fa92f7821d;\n  style e41e8fb9-c5f6-425f-a351-f8fa92f7821d stroke:#2c3143,stroke-width:4px;\n  4[\" InterProScan\"];\n  3 -->|out_file1| 4;\n  522b49db-7650-41e7-b888-01bb3cb1b451[\"Output\\nTabular file (.tsv)\"];\n  4 --> 522b49db-7650-41e7-b888-01bb3cb1b451;\n  style 522b49db-7650-41e7-b888-01bb3cb1b451 stroke:#2c3143,stroke-width:4px;\n  5[\"Sanntis: identify biosynthetic gene clusters\"];\n  2 -->|output_sanntis_gb| 5;\n  4 -->|outfile_tsv| 5;\n  c96c8c7e-0a50-4506-a144-9d941f50eb5e[\"Output\\n SMBGC Annotation\"];\n  5 --> c96c8c7e-0a50-4506-a144-9d941f50eb5e;\n  style c96c8c7e-0a50-4506-a144-9d941f50eb5e stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nFasta nucelotide file\"]\n  1[label=\"Prodigal Gene Predictor \"]\n  0 -> 1 [label=\"output\"]\n  k351cf550c05d4bad9394fe9b45ef6298[color=lightseagreen,label=\"Output\\nProtein fasta file\"]\n  1 -> k351cf550c05d4bad9394fe9b45ef6298\n  2[label=\"Sanntis: Build Genbank \"]\n  0 -> 2 [label=\"output\"]\n  1 -> 2 [label=\"output_faa\"]\n  k1b9f0275191a4e90b4b47b10475f4602[color=lightseagreen,label=\"Output\\nGenbank file\"]\n  2 -> k1b9f0275191a4e90b4b47b10475f4602\n  3[label=\"Regex Find And Replace\"]\n  1 -> 3 [label=\"output_faa\"]\n  ke41e8fb9c5f6425fa351f8fa92f7821d[color=lightseagreen,label=\"Output\\nClean protein fasta file\"]\n  3 -> ke41e8fb9c5f6425fa351f8fa92f7821d\n  4[label=\" InterProScan\"]\n  3 -> 4 [label=\"out_file1\"]\n  k522b49db765041e7b88801bb3cb1b451[color=lightseagreen,label=\"Output\\nTabular file (.tsv)\"]\n  4 -> k522b49db765041e7b88801bb3cb1b451\n  5[label=\"Sanntis: identify biosynthetic gene clusters\"]\n  2 -> 5 [label=\"output_sanntis_gb\"]\n  4 -> 5 [label=\"outfile_tsv\"]\n  kc96c8c7e0a504506a1449d941f50eb5e[color=lightseagreen,label=\"Output\\n SMBGC Annotation\"]\n  5 -> kc96c8c7e0a504506a1449d941f50eb5e\n}",
           "workflow_tools": [
@@ -21159,6 +21631,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -21304,6 +21781,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -21429,6 +21910,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -21544,6 +22029,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -21665,6 +22154,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -21793,6 +22286,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -22203,7 +22700,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nSENTINEL2A_20230214-105638-781_L2A_T31UET_D.zip\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Preprocess sentinel 2 data\"];\n  0 -->|output| 1;\n  2[\"Compute spectral indices\"];\n  1 -->|output_refl| 2;\n  3[\"Compute biodiversity indices\"];\n  1 -->|output_refl| 3;\n  4[\"Map diversity\"];\n  1 -->|output_refl| 4;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nSENTINEL2A_20230214-105638-781_L2A_T31UET_D.zip\"]\n  1[label=\"Preprocess sentinel 2 data\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Compute spectral indices\"]\n  1 -> 2 [label=\"output_refl\"]\n  3[label=\"Compute biodiversity indices\"]\n  1 -> 3 [label=\"output_refl\"]\n  4[label=\"Map diversity\"]\n  1 -> 4 [label=\"output_refl\"]\n}",
           "workflow_tools": [
@@ -22512,6 +23009,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -22657,6 +23159,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -22777,6 +23283,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -22903,6 +23413,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -23021,6 +23535,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -23147,6 +23665,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -23265,6 +23787,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -23747,9 +24273,9 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\noccurrence.txt\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\npivot_wider_jupytool_notebook.ipynb\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nceamarc_env.tsv\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Advanced Cut\"];\n  0 -->|output| 3;\n  4[\"Column Regex Find And Replace\"];\n  3 -->|output| 4;\n  5[\"Column Regex Find And Replace\"];\n  4 -->|out_file1| 5;\n  6[\"Column Regex Find And Replace\"];\n  5 -->|out_file1| 6;\n  7[\"Column Regex Find And Replace\"];\n  6 -->|out_file1| 7;\n  8[\"Filter Tabular\"];\n  7 -->|out_file1| 8;\n  9[\"Column Regex Find And Replace\"];\n  8 -->|output| 9;\n  10[\"Column Regex Find And Replace\"];\n  9 -->|out_file1| 10;\n  11[\"Column Regex Find And Replace\"];\n  10 -->|out_file1| 11;\n  12[\"Column Regex Find And Replace\"];\n  11 -->|out_file1| 12;\n  13[\"Column Regex Find And Replace\"];\n  12 -->|out_file1| 13;\n  14[\"Merge Columns\"];\n  13 -->|out_file1| 14;\n  15[\"Advanced Cut\"];\n  14 -->|out_file1| 15;\n  16[\"Interactive JupyTool and notebook\"];\n  1 -->|output| 16;\n  15 -->|output| 16;\n  5e3771f8-b2c3-4052-b5ea-5764b2583b04[\"Output\\nocc_out\"];\n  16 --> 5e3771f8-b2c3-4052-b5ea-5764b2583b04;\n  style 5e3771f8-b2c3-4052-b5ea-5764b2583b04 stroke:#2c3143,stroke-width:4px;\n  17[\"GeoNearestNeighbor\"];\n  2 -->|output| 17;\n  16 -->|output_dataset| 17;\n  b3149337-ee27-4d28-badf-3907605c1c4d[\"Output\\nocc_env_out\"];\n  17 --> b3149337-ee27-4d28-badf-3907605c1c4d;\n  style b3149337-ee27-4d28-badf-3907605c1c4d stroke:#2c3143,stroke-width:4px;\n  e10180f5-31cb-43c5-aad3-b84f3ae17fe6[\"Output\\ninfo_out\"];\n  17 --> e10180f5-31cb-43c5-aad3-b84f3ae17fe6;\n  style e10180f5-31cb-43c5-aad3-b84f3ae17fe6 stroke:#2c3143,stroke-width:4px;\n  18[\"BRT tool prediction\"];\n  2 -->|output| 18;\n  17 -->|occ_env_out| 18;\n  b370dcf4-69f9-4943-a7f6-9298292b2ef4[\"Output\\ncoll_pred\"];\n  18 --> b370dcf4-69f9-4943-a7f6-9298292b2ef4;\n  style b370dcf4-69f9-4943-a7f6-9298292b2ef4 stroke:#2c3143,stroke-width:4px;\n  a43960a3-5d91-4645-9d70-efa76c12c991[\"Output\\ncoll_val\"];\n  18 --> a43960a3-5d91-4645-9d70-efa76c12c991;\n  style a43960a3-5d91-4645-9d70-efa76c12c991 stroke:#2c3143,stroke-width:4px;\n  ebc029d7-1f43-4ae1-8af2-f88294818c7a[\"Output\\ncoll_distri\"];\n  18 --> ebc029d7-1f43-4ae1-8af2-f88294818c7a;\n  style ebc029d7-1f43-4ae1-8af2-f88294818c7a stroke:#2c3143,stroke-width:4px;\n  d95b0f3d-e409-4920-b0c8-e84c14675a69[\"Output\\ncoll_plots\"];\n  18 --> d95b0f3d-e409-4920-b0c8-e84c14675a69;\n  style d95b0f3d-e409-4920-b0c8-e84c14675a69 stroke:#2c3143,stroke-width:4px;\n  19[\"TaxaSeeker\"];\n  2 -->|output| 19;\n  17 -->|occ_env_out| 19;\n  18 -->|outputpred| 19;\n  3d84331b-7969-464e-b8db-9b886bb92d5b[\"Output\\nsummary\"];\n  19 --> 3d84331b-7969-464e-b8db-9b886bb92d5b;\n  style 3d84331b-7969-464e-b8db-9b886bb92d5b stroke:#2c3143,stroke-width:4px;\n  807361a4-bd23-460a-95ef-221d8215bea1[\"Output\\ntaxa\"];\n  19 --> 807361a4-bd23-460a-95ef-221d8215bea1;\n  style 807361a4-bd23-460a-95ef-221d8215bea1 stroke:#2c3143,stroke-width:4px;\n  c4a91760-5244-4642-b4bd-c2a08671001d[\"Output\\ntaxa_clean\"];\n  19 --> c4a91760-5244-4642-b4bd-c2a08671001d;\n  style c4a91760-5244-4642-b4bd-c2a08671001d stroke:#2c3143,stroke-width:4px;\n  20[\"ClusterEstimate\"];\n  2 -->|output| 20;\n  18 -->|outputpred| 20;\n  19 -->|output2| 20;\n  766b2fcf-8c9b-4615-a0f4-ee07103acda7[\"Output\\nSIH_index\"];\n  20 --> 766b2fcf-8c9b-4615-a0f4-ee07103acda7;\n  style 766b2fcf-8c9b-4615-a0f4-ee07103acda7 stroke:#2c3143,stroke-width:4px;\n  d93feffe-7080-4589-ba02-548281615a5a[\"Output\\ndata_to_clus\"];\n  20 --> d93feffe-7080-4589-ba02-548281615a5a;\n  style d93feffe-7080-4589-ba02-548281615a5a stroke:#2c3143,stroke-width:4px;\n  e69c87c9-3763-4a26-a916-ac3e83acf244[\"Output\\ndatabio_table\"];\n  20 --> e69c87c9-3763-4a26-a916-ac3e83acf244;\n  style e69c87c9-3763-4a26-a916-ac3e83acf244 stroke:#2c3143,stroke-width:4px;\n  21[\"ClaraClust\"];\n  2 -->|output| 21;\n  20 -->|output3| 21;\n  20 -->|output2| 21;\n  6fcb252b-130d-4d45-81ad-289d83fb1631[\"Output\\nSIH_plot\"];\n  21 --> 6fcb252b-130d-4d45-81ad-289d83fb1631;\n  style 6fcb252b-130d-4d45-81ad-289d83fb1631 stroke:#2c3143,stroke-width:4px;\n  7d3d4ecc-a216-4a7b-9d63-14ed1adb3bc0[\"Output\\ncluster_points\"];\n  21 --> 7d3d4ecc-a216-4a7b-9d63-14ed1adb3bc0;\n  style 7d3d4ecc-a216-4a7b-9d63-14ed1adb3bc0 stroke:#2c3143,stroke-width:4px;\n  cd436ac6-3800-4f7f-9616-c96a9f2abb3d[\"Output\\ncluster_info\"];\n  21 --> cd436ac6-3800-4f7f-9616-c96a9f2abb3d;\n  style cd436ac6-3800-4f7f-9616-c96a9f2abb3d stroke:#2c3143,stroke-width:4px;\n  22[\"EcoMap\"];\n  21 -->|output2| 22;\n  2213e60d-0f51-4a8f-9275-373c11e8a366[\"Output\\neco_map\"];\n  22 --> 2213e60d-0f51-4a8f-9275-373c11e8a366;\n  style 2213e60d-0f51-4a8f-9275-373c11e8a366 stroke:#2c3143,stroke-width:4px;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\noccurrence.txt\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\npivot_wider_jupytool_notebook.ipynb\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nceamarc_env.tsv\"]\n  3[label=\"Advanced Cut\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Column Regex Find And Replace\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Column Regex Find And Replace\"]\n  4 -> 5 [label=\"out_file1\"]\n  6[label=\"Column Regex Find And Replace\"]\n  5 -> 6 [label=\"out_file1\"]\n  7[label=\"Column Regex Find And Replace\"]\n  6 -> 7 [label=\"out_file1\"]\n  8[label=\"Filter Tabular\"]\n  7 -> 8 [label=\"out_file1\"]\n  9[label=\"Column Regex Find And Replace\"]\n  8 -> 9 [label=\"output\"]\n  10[label=\"Column Regex Find And Replace\"]\n  9 -> 10 [label=\"out_file1\"]\n  11[label=\"Column Regex Find And Replace\"]\n  10 -> 11 [label=\"out_file1\"]\n  12[label=\"Column Regex Find And Replace\"]\n  11 -> 12 [label=\"out_file1\"]\n  13[label=\"Column Regex Find And Replace\"]\n  12 -> 13 [label=\"out_file1\"]\n  14[label=\"Merge Columns\"]\n  13 -> 14 [label=\"out_file1\"]\n  15[label=\"Advanced Cut\"]\n  14 -> 15 [label=\"out_file1\"]\n  16[label=\"Interactive JupyTool and notebook\"]\n  1 -> 16 [label=\"output\"]\n  15 -> 16 [label=\"output\"]\n  k5e3771f8b2c34052b5ea5764b2583b04[color=lightseagreen,label=\"Output\\nocc_out\"]\n  16 -> k5e3771f8b2c34052b5ea5764b2583b04\n  17[label=\"GeoNearestNeighbor\"]\n  2 -> 17 [label=\"output\"]\n  16 -> 17 [label=\"output_dataset\"]\n  kb3149337ee274d28badf3907605c1c4d[color=lightseagreen,label=\"Output\\nocc_env_out\"]\n  17 -> kb3149337ee274d28badf3907605c1c4d\n  ke10180f531cb43c5aad3b84f3ae17fe6[color=lightseagreen,label=\"Output\\ninfo_out\"]\n  17 -> ke10180f531cb43c5aad3b84f3ae17fe6\n  18[label=\"BRT tool prediction\"]\n  2 -> 18 [label=\"output\"]\n  17 -> 18 [label=\"occ_env_out\"]\n  kb370dcf469f94943a7f69298292b2ef4[color=lightseagreen,label=\"Output\\ncoll_pred\"]\n  18 -> kb370dcf469f94943a7f69298292b2ef4\n  ka43960a35d9146459d70efa76c12c991[color=lightseagreen,label=\"Output\\ncoll_val\"]\n  18 -> ka43960a35d9146459d70efa76c12c991\n  kebc029d71f434ae18af2f88294818c7a[color=lightseagreen,label=\"Output\\ncoll_distri\"]\n  18 -> kebc029d71f434ae18af2f88294818c7a\n  kd95b0f3de4094920b0c8e84c14675a69[color=lightseagreen,label=\"Output\\ncoll_plots\"]\n  18 -> kd95b0f3de4094920b0c8e84c14675a69\n  19[label=\"TaxaSeeker\"]\n  2 -> 19 [label=\"output\"]\n  17 -> 19 [label=\"occ_env_out\"]\n  18 -> 19 [label=\"outputpred\"]\n  k3d84331b7969464eb8db9b886bb92d5b[color=lightseagreen,label=\"Output\\nsummary\"]\n  19 -> k3d84331b7969464eb8db9b886bb92d5b\n  k807361a4bd23460a95ef221d8215bea1[color=lightseagreen,label=\"Output\\ntaxa\"]\n  19 -> k807361a4bd23460a95ef221d8215bea1\n  kc4a9176052444642b4bdc2a08671001d[color=lightseagreen,label=\"Output\\ntaxa_clean\"]\n  19 -> kc4a9176052444642b4bdc2a08671001d\n  20[label=\"ClusterEstimate\"]\n  2 -> 20 [label=\"output\"]\n  18 -> 20 [label=\"outputpred\"]\n  19 -> 20 [label=\"output2\"]\n  k766b2fcf8c9b4615a0f4ee07103acda7[color=lightseagreen,label=\"Output\\nSIH_index\"]\n  20 -> k766b2fcf8c9b4615a0f4ee07103acda7\n  kd93feffe70804589ba02548281615a5a[color=lightseagreen,label=\"Output\\ndata_to_clus\"]\n  20 -> kd93feffe70804589ba02548281615a5a\n  ke69c87c937634a26a916ac3e83acf244[color=lightseagreen,label=\"Output\\ndatabio_table\"]\n  20 -> ke69c87c937634a26a916ac3e83acf244\n  21[label=\"ClaraClust\"]\n  2 -> 21 [label=\"output\"]\n  20 -> 21 [label=\"output3\"]\n  20 -> 21 [label=\"output2\"]\n  k6fcb252b130d4d4581ad289d83fb1631[color=lightseagreen,label=\"Output\\nSIH_plot\"]\n  21 -> k6fcb252b130d4d4581ad289d83fb1631\n  k7d3d4ecca2164a7b9d6314ed1adb3bc0[color=lightseagreen,label=\"Output\\ncluster_points\"]\n  21 -> k7d3d4ecca2164a7b9d6314ed1adb3bc0\n  kcd436ac638004f7f9616c96a9f2abb3d[color=lightseagreen,label=\"Output\\ncluster_info\"]\n  21 -> kcd436ac638004f7f9616c96a9f2abb3d\n  22[label=\"EcoMap\"]\n  21 -> 22 [label=\"output2\"]\n  k2213e60d0f514a8f9275373c11e8a366[color=lightseagreen,label=\"Output\\neco_map\"]\n  22 -> k2213e60d0f514a8f9275373c11e8a366\n}",
+          "modified": "2026-03-06 18:00:00 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\noccurrence.txt\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\npivot_wider_jupytool_notebook.ipynb\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nceamarc_env.tsv\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Advanced Cut\"];\n  0 -->|output| 3;\n  4[\"Column Regex Find And Replace\"];\n  3 -->|output| 4;\n  5[\"Column Regex Find And Replace\"];\n  4 -->|out_file1| 5;\n  6[\"Column Regex Find And Replace\"];\n  5 -->|out_file1| 6;\n  7[\"Column Regex Find And Replace\"];\n  6 -->|out_file1| 7;\n  8[\"Filter Tabular\"];\n  7 -->|out_file1| 8;\n  9[\"Column Regex Find And Replace\"];\n  8 -->|output| 9;\n  10[\"Column Regex Find And Replace\"];\n  9 -->|out_file1| 10;\n  11[\"Column Regex Find And Replace\"];\n  10 -->|out_file1| 11;\n  12[\"Column Regex Find And Replace\"];\n  11 -->|out_file1| 12;\n  13[\"Column Regex Find And Replace\"];\n  12 -->|out_file1| 13;\n  14[\"Merge Columns\"];\n  13 -->|out_file1| 14;\n  15[\"Advanced Cut\"];\n  14 -->|out_file1| 15;\n  16[\"Interactive JupyTool and notebook\"];\n  1 -->|output| 16;\n  15 -->|output| 16;\n  1ab2747f-21a4-484c-a085-11e931d97a6b[\"Output\\nocc_out\"];\n  16 --> 1ab2747f-21a4-484c-a085-11e931d97a6b;\n  style 1ab2747f-21a4-484c-a085-11e931d97a6b stroke:#2c3143,stroke-width:4px;\n  17[\"GeoNearestNeighbor\"];\n  2 -->|output| 17;\n  16 -->|output_dataset| 17;\n  c12a972b-c93b-4e46-ae73-e9f64aeb22ff[\"Output\\nocc_env_out\"];\n  17 --> c12a972b-c93b-4e46-ae73-e9f64aeb22ff;\n  style c12a972b-c93b-4e46-ae73-e9f64aeb22ff stroke:#2c3143,stroke-width:4px;\n  40e92de6-5120-4044-ab10-029a11017b74[\"Output\\ninfo_out\"];\n  17 --> 40e92de6-5120-4044-ab10-029a11017b74;\n  style 40e92de6-5120-4044-ab10-029a11017b74 stroke:#2c3143,stroke-width:4px;\n  18[\"BRT tool prediction\"];\n  2 -->|output| 18;\n  17 -->|occ_env_out| 18;\n  ce31b894-14f9-47d7-9db2-7039bac8bb28[\"Output\\ncoll_pred\"];\n  18 --> ce31b894-14f9-47d7-9db2-7039bac8bb28;\n  style ce31b894-14f9-47d7-9db2-7039bac8bb28 stroke:#2c3143,stroke-width:4px;\n  1a6e8274-8009-498e-8aa9-2753490a8533[\"Output\\ncoll_val\"];\n  18 --> 1a6e8274-8009-498e-8aa9-2753490a8533;\n  style 1a6e8274-8009-498e-8aa9-2753490a8533 stroke:#2c3143,stroke-width:4px;\n  624e8034-9595-455d-a4b4-4c4f3a0c35c8[\"Output\\ncoll_distri\"];\n  18 --> 624e8034-9595-455d-a4b4-4c4f3a0c35c8;\n  style 624e8034-9595-455d-a4b4-4c4f3a0c35c8 stroke:#2c3143,stroke-width:4px;\n  f9c97654-68a9-4892-82d9-e4e7a3620db5[\"Output\\ncoll_plots\"];\n  18 --> f9c97654-68a9-4892-82d9-e4e7a3620db5;\n  style f9c97654-68a9-4892-82d9-e4e7a3620db5 stroke:#2c3143,stroke-width:4px;\n  19[\"TaxaSeeker\"];\n  2 -->|output| 19;\n  17 -->|occ_env_out| 19;\n  18 -->|outputpred| 19;\n  dbdb149e-4e3e-47fd-ab47-460a3ac63d2f[\"Output\\nsummary\"];\n  19 --> dbdb149e-4e3e-47fd-ab47-460a3ac63d2f;\n  style dbdb149e-4e3e-47fd-ab47-460a3ac63d2f stroke:#2c3143,stroke-width:4px;\n  e5e22c05-1b24-49ea-b78c-298a85ddf6e4[\"Output\\ntaxa\"];\n  19 --> e5e22c05-1b24-49ea-b78c-298a85ddf6e4;\n  style e5e22c05-1b24-49ea-b78c-298a85ddf6e4 stroke:#2c3143,stroke-width:4px;\n  98827aa2-1573-4544-a043-bf00670fdabb[\"Output\\ntaxa_clean\"];\n  19 --> 98827aa2-1573-4544-a043-bf00670fdabb;\n  style 98827aa2-1573-4544-a043-bf00670fdabb stroke:#2c3143,stroke-width:4px;\n  20[\"ClusterEstimate\"];\n  2 -->|output| 20;\n  18 -->|outputpred| 20;\n  19 -->|output2| 20;\n  b494ea4d-06bc-4aaf-b9ca-78c5846c6130[\"Output\\nSIH_index\"];\n  20 --> b494ea4d-06bc-4aaf-b9ca-78c5846c6130;\n  style b494ea4d-06bc-4aaf-b9ca-78c5846c6130 stroke:#2c3143,stroke-width:4px;\n  7254e7c0-f1a4-4396-9d10-e3319a5c91af[\"Output\\ndata_to_clus\"];\n  20 --> 7254e7c0-f1a4-4396-9d10-e3319a5c91af;\n  style 7254e7c0-f1a4-4396-9d10-e3319a5c91af stroke:#2c3143,stroke-width:4px;\n  db64dbf7-457b-4bbe-bf12-95656f615d17[\"Output\\ndatabio_table\"];\n  20 --> db64dbf7-457b-4bbe-bf12-95656f615d17;\n  style db64dbf7-457b-4bbe-bf12-95656f615d17 stroke:#2c3143,stroke-width:4px;\n  21[\"ClaraClust\"];\n  2 -->|output| 21;\n  20 -->|output3| 21;\n  20 -->|output2| 21;\n  c860a428-c585-43c2-98e7-b1aceea98781[\"Output\\nSIH_plot\"];\n  21 --> c860a428-c585-43c2-98e7-b1aceea98781;\n  style c860a428-c585-43c2-98e7-b1aceea98781 stroke:#2c3143,stroke-width:4px;\n  506b6f04-8e39-487d-97b6-092c21bf2b52[\"Output\\ncluster_points\"];\n  21 --> 506b6f04-8e39-487d-97b6-092c21bf2b52;\n  style 506b6f04-8e39-487d-97b6-092c21bf2b52 stroke:#2c3143,stroke-width:4px;\n  6ebaf7be-07eb-4c65-a514-e425e9e8697f[\"Output\\ncluster_info\"];\n  21 --> 6ebaf7be-07eb-4c65-a514-e425e9e8697f;\n  style 6ebaf7be-07eb-4c65-a514-e425e9e8697f stroke:#2c3143,stroke-width:4px;\n  22[\"EcoMap\"];\n  21 -->|output2| 22;\n  c777b907-44fe-45b9-b61d-b813c8051ea0[\"Output\\neco_map\"];\n  22 --> c777b907-44fe-45b9-b61d-b813c8051ea0;\n  style c777b907-44fe-45b9-b61d-b813c8051ea0 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\noccurrence.txt\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\npivot_wider_jupytool_notebook.ipynb\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nceamarc_env.tsv\"]\n  3[label=\"Advanced Cut\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Column Regex Find And Replace\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Column Regex Find And Replace\"]\n  4 -> 5 [label=\"out_file1\"]\n  6[label=\"Column Regex Find And Replace\"]\n  5 -> 6 [label=\"out_file1\"]\n  7[label=\"Column Regex Find And Replace\"]\n  6 -> 7 [label=\"out_file1\"]\n  8[label=\"Filter Tabular\"]\n  7 -> 8 [label=\"out_file1\"]\n  9[label=\"Column Regex Find And Replace\"]\n  8 -> 9 [label=\"output\"]\n  10[label=\"Column Regex Find And Replace\"]\n  9 -> 10 [label=\"out_file1\"]\n  11[label=\"Column Regex Find And Replace\"]\n  10 -> 11 [label=\"out_file1\"]\n  12[label=\"Column Regex Find And Replace\"]\n  11 -> 12 [label=\"out_file1\"]\n  13[label=\"Column Regex Find And Replace\"]\n  12 -> 13 [label=\"out_file1\"]\n  14[label=\"Merge Columns\"]\n  13 -> 14 [label=\"out_file1\"]\n  15[label=\"Advanced Cut\"]\n  14 -> 15 [label=\"out_file1\"]\n  16[label=\"Interactive JupyTool and notebook\"]\n  1 -> 16 [label=\"output\"]\n  15 -> 16 [label=\"output\"]\n  k1ab2747f21a4484ca08511e931d97a6b[color=lightseagreen,label=\"Output\\nocc_out\"]\n  16 -> k1ab2747f21a4484ca08511e931d97a6b\n  17[label=\"GeoNearestNeighbor\"]\n  2 -> 17 [label=\"output\"]\n  16 -> 17 [label=\"output_dataset\"]\n  kc12a972bc93b4e46ae73e9f64aeb22ff[color=lightseagreen,label=\"Output\\nocc_env_out\"]\n  17 -> kc12a972bc93b4e46ae73e9f64aeb22ff\n  k40e92de651204044ab10029a11017b74[color=lightseagreen,label=\"Output\\ninfo_out\"]\n  17 -> k40e92de651204044ab10029a11017b74\n  18[label=\"BRT tool prediction\"]\n  2 -> 18 [label=\"output\"]\n  17 -> 18 [label=\"occ_env_out\"]\n  kce31b89414f947d79db27039bac8bb28[color=lightseagreen,label=\"Output\\ncoll_pred\"]\n  18 -> kce31b89414f947d79db27039bac8bb28\n  k1a6e82748009498e8aa92753490a8533[color=lightseagreen,label=\"Output\\ncoll_val\"]\n  18 -> k1a6e82748009498e8aa92753490a8533\n  k624e80349595455da4b44c4f3a0c35c8[color=lightseagreen,label=\"Output\\ncoll_distri\"]\n  18 -> k624e80349595455da4b44c4f3a0c35c8\n  kf9c9765468a9489282d9e4e7a3620db5[color=lightseagreen,label=\"Output\\ncoll_plots\"]\n  18 -> kf9c9765468a9489282d9e4e7a3620db5\n  19[label=\"TaxaSeeker\"]\n  2 -> 19 [label=\"output\"]\n  17 -> 19 [label=\"occ_env_out\"]\n  18 -> 19 [label=\"outputpred\"]\n  kdbdb149e4e3e47fdab47460a3ac63d2f[color=lightseagreen,label=\"Output\\nsummary\"]\n  19 -> kdbdb149e4e3e47fdab47460a3ac63d2f\n  ke5e22c051b2449eab78c298a85ddf6e4[color=lightseagreen,label=\"Output\\ntaxa\"]\n  19 -> ke5e22c051b2449eab78c298a85ddf6e4\n  k98827aa215734544a043bf00670fdabb[color=lightseagreen,label=\"Output\\ntaxa_clean\"]\n  19 -> k98827aa215734544a043bf00670fdabb\n  20[label=\"ClusterEstimate\"]\n  2 -> 20 [label=\"output\"]\n  18 -> 20 [label=\"outputpred\"]\n  19 -> 20 [label=\"output2\"]\n  kb494ea4d06bc4aafb9ca78c5846c6130[color=lightseagreen,label=\"Output\\nSIH_index\"]\n  20 -> kb494ea4d06bc4aafb9ca78c5846c6130\n  k7254e7c0f1a443969d10e3319a5c91af[color=lightseagreen,label=\"Output\\ndata_to_clus\"]\n  20 -> k7254e7c0f1a443969d10e3319a5c91af\n  kdb64dbf7457b4bbebf1295656f615d17[color=lightseagreen,label=\"Output\\ndatabio_table\"]\n  20 -> kdb64dbf7457b4bbebf1295656f615d17\n  21[label=\"ClaraClust\"]\n  2 -> 21 [label=\"output\"]\n  20 -> 21 [label=\"output3\"]\n  20 -> 21 [label=\"output2\"]\n  kc860a428c58543c298e7b1aceea98781[color=lightseagreen,label=\"Output\\nSIH_plot\"]\n  21 -> kc860a428c58543c298e7b1aceea98781\n  k506b6f048e39487d97b6092c21bf2b52[color=lightseagreen,label=\"Output\\ncluster_points\"]\n  21 -> k506b6f048e39487d97b6092c21bf2b52\n  k6ebaf7be07eb4c65a514e425e9e8697f[color=lightseagreen,label=\"Output\\ncluster_info\"]\n  21 -> k6ebaf7be07eb4c65a514e425e9e8697f\n  22[label=\"EcoMap\"]\n  21 -> 22 [label=\"output2\"]\n  kc777b90744fe45b9b61db813c8051ea0[color=lightseagreen,label=\"Output\\neco_map\"]\n  22 -> kc777b90744fe45b9b61db813c8051ea0\n}",
           "workflow_tools": [
             "interactive_tool_jupyter_notebook",
             "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1",
@@ -23907,7 +24433,7 @@
                 {
                   "output_name": "output_dataset",
                   "label": "occ_out",
-                  "uuid": "5e3771f8-b2c3-4052-b5ea-5764b2583b04"
+                  "uuid": "1ab2747f-21a4-484c-a085-11e931d97a6b"
                 }
               ]
             },
@@ -23969,12 +24495,12 @@
                 {
                   "output_name": "occ_env_out",
                   "label": "occ_env_out",
-                  "uuid": "b3149337-ee27-4d28-badf-3907605c1c4d"
+                  "uuid": "c12a972b-c93b-4e46-ae73-e9f64aeb22ff"
                 },
                 {
                   "output_name": "info_out",
                   "label": "info_out",
-                  "uuid": "e10180f5-31cb-43c5-aad3-b84f3ae17fe6"
+                  "uuid": "40e92de6-5120-4044-ab10-029a11017b74"
                 }
               ]
             },
@@ -24035,22 +24561,22 @@
                 {
                   "output_name": "outputpred",
                   "label": "coll_pred",
-                  "uuid": "b370dcf4-69f9-4943-a7f6-9298292b2ef4"
+                  "uuid": "ce31b894-14f9-47d7-9db2-7039bac8bb28"
                 },
                 {
                   "output_name": "outputval",
                   "label": "coll_val",
-                  "uuid": "a43960a3-5d91-4645-9d70-efa76c12c991"
+                  "uuid": "1a6e8274-8009-498e-8aa9-2753490a8533"
                 },
                 {
                   "output_name": "outputspdistri",
                   "label": "coll_distri",
-                  "uuid": "ebc029d7-1f43-4ae1-8af2-f88294818c7a"
+                  "uuid": "624e8034-9595-455d-a4b4-4c4f3a0c35c8"
                 },
                 {
                   "output_name": "outputplots",
                   "label": "coll_plots",
-                  "uuid": "d95b0f3d-e409-4920-b0c8-e84c14675a69"
+                  "uuid": "f9c97654-68a9-4892-82d9-e4e7a3620db5"
                 }
               ]
             },
@@ -24111,17 +24637,17 @@
                 {
                   "output_name": "output1",
                   "label": "summary",
-                  "uuid": "3d84331b-7969-464e-b8db-9b886bb92d5b"
+                  "uuid": "dbdb149e-4e3e-47fd-ab47-460a3ac63d2f"
                 },
                 {
                   "output_name": "output2",
                   "label": "taxa",
-                  "uuid": "807361a4-bd23-460a-95ef-221d8215bea1"
+                  "uuid": "e5e22c05-1b24-49ea-b78c-298a85ddf6e4"
                 },
                 {
                   "output_name": "output3",
                   "label": "taxa_clean",
-                  "uuid": "c4a91760-5244-4642-b4bd-c2a08671001d"
+                  "uuid": "98827aa2-1573-4544-a043-bf00670fdabb"
                 }
               ]
             },
@@ -24182,17 +24708,17 @@
                 {
                   "output_name": "output1",
                   "label": "SIH_index",
-                  "uuid": "766b2fcf-8c9b-4615-a0f4-ee07103acda7"
+                  "uuid": "b494ea4d-06bc-4aaf-b9ca-78c5846c6130"
                 },
                 {
                   "output_name": "output2",
                   "label": "data_to_clus",
-                  "uuid": "d93feffe-7080-4589-ba02-548281615a5a"
+                  "uuid": "7254e7c0-f1a4-4396-9d10-e3319a5c91af"
                 },
                 {
                   "output_name": "output3",
                   "label": "databio_table",
-                  "uuid": "e69c87c9-3763-4a26-a916-ac3e83acf244"
+                  "uuid": "db64dbf7-457b-4bbe-bf12-95656f615d17"
                 }
               ]
             },
@@ -24253,17 +24779,17 @@
                 {
                   "output_name": "output1",
                   "label": "SIH_plot",
-                  "uuid": "6fcb252b-130d-4d45-81ad-289d83fb1631"
+                  "uuid": "c860a428-c585-43c2-98e7-b1aceea98781"
                 },
                 {
                   "output_name": "output2",
                   "label": "cluster_points",
-                  "uuid": "7d3d4ecc-a216-4a7b-9d63-14ed1adb3bc0"
+                  "uuid": "506b6f04-8e39-487d-97b6-092c21bf2b52"
                 },
                 {
                   "output_name": "output3",
                   "label": "cluster_info",
-                  "uuid": "cd436ac6-3800-4f7f-9616-c96a9f2abb3d"
+                  "uuid": "6ebaf7be-07eb-4c65-a514-e425e9e8697f"
                 }
               ]
             },
@@ -24308,7 +24834,7 @@
                 {
                   "output_name": "output",
                   "label": "eco_map",
-                  "uuid": "2213e60d-0f51-4a8f-9275-373c11e8a366"
+                  "uuid": "c777b907-44fe-45b9-b61d-b813c8051ea0"
                 }
               ]
             }
@@ -24345,6 +24871,11 @@
           {
             "url": "http://apostl.moffitt.org/",
             "name": "APOSTL",
+            "usegalaxy": false
+          },
+          {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
             "usegalaxy": false
           },
           {
@@ -24493,6 +25024,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -24611,6 +25146,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -24628,8 +25167,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.0",
-                  "9.5+galaxy3"
+                  "9.5+galaxy3",
+                  "1.1.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -24640,8 +25179,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.0",
                   "9.5+galaxy3",
+                  "1.1.0",
                   "9.5+galaxy2"
                 ],
                 "server": "https://galaxytrakr.org/"
@@ -24711,8 +25250,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.0",
                   "9.5+galaxy3",
+                  "1.1.0",
                   "9.5+galaxy2",
                   "9.5+galaxy0"
                 ],
@@ -24753,6 +25292,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -24881,6 +25424,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -25000,6 +25547,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -25125,6 +25676,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -25244,6 +25799,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -25369,6 +25928,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -25486,6 +26049,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -25608,6 +26175,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -25739,6 +26310,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -25865,6 +26440,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -26408,7 +26987,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 9 stroke:#2c3143,stroke-width:4px;\n  10[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 10 stroke:#2c3143,stroke-width:4px;\n  11[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 11 stroke:#2c3143,stroke-width:4px;\n  12[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 12 stroke:#2c3143,stroke-width:4px;\n  13[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 13 stroke:#2c3143,stroke-width:4px;\n  14[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 14 stroke:#2c3143,stroke-width:4px;\n  15[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 15 stroke:#2c3143,stroke-width:4px;\n  16[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 16 stroke:#2c3143,stroke-width:4px;\n  17[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 17 stroke:#2c3143,stroke-width:4px;\n  18[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 18 stroke:#2c3143,stroke-width:4px;\n  19[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 19 stroke:#2c3143,stroke-width:4px;\n  20[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 20 stroke:#2c3143,stroke-width:4px;\n  21[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 21 stroke:#2c3143,stroke-width:4px;\n  22[\"Stacks: de novo map\"];\n  1 -->|output| 22;\n  0 -->|output| 22;\n  15 -->|output| 22;\n  14 -->|output| 22;\n  13 -->|output| 22;\n  12 -->|output| 22;\n  11 -->|output| 22;\n  10 -->|output| 22;\n  9 -->|output| 22;\n  8 -->|output| 22;\n  7 -->|output| 22;\n  6 -->|output| 22;\n  5 -->|output| 22;\n  4 -->|output| 22;\n  3 -->|output| 22;\n  2 -->|output| 22;\n  17 -->|output| 22;\n  18 -->|output| 22;\n  19 -->|output| 22;\n  20 -->|output| 22;\n  21 -->|output| 22;\n  16 -->|output| 22;\n  23[\"Stacks: genotypes\"];\n  22 -->|all_output| 23;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  9[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  10[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  11[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  12[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  13[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  14[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  15[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  16[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  17[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  18[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  19[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  20[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  21[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  22[label=\"Stacks: de novo map\"]\n  1 -> 22 [label=\"output\"]\n  0 -> 22 [label=\"output\"]\n  15 -> 22 [label=\"output\"]\n  14 -> 22 [label=\"output\"]\n  13 -> 22 [label=\"output\"]\n  12 -> 22 [label=\"output\"]\n  11 -> 22 [label=\"output\"]\n  10 -> 22 [label=\"output\"]\n  9 -> 22 [label=\"output\"]\n  8 -> 22 [label=\"output\"]\n  7 -> 22 [label=\"output\"]\n  6 -> 22 [label=\"output\"]\n  5 -> 22 [label=\"output\"]\n  4 -> 22 [label=\"output\"]\n  3 -> 22 [label=\"output\"]\n  2 -> 22 [label=\"output\"]\n  17 -> 22 [label=\"output\"]\n  18 -> 22 [label=\"output\"]\n  19 -> 22 [label=\"output\"]\n  20 -> 22 [label=\"output\"]\n  21 -> 22 [label=\"output\"]\n  16 -> 22 [label=\"output\"]\n  23[label=\"Stacks: genotypes\"]\n  22 -> 23 [label=\"all_output\"]\n}",
           "workflow_tools": [
@@ -27035,6 +27614,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -27180,6 +27764,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -27300,6 +27888,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -27619,7 +28211,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"Get species occurrences data\"];\n  1[\"Wallace\"];\n  2[\"Cut\"];\n  0 -->|output| 2;\n  3[\"Filter\"];\n  2 -->|output| 3;\n  4[\"Convert tabular to CSV\"];\n  3 -->|out_file1| 4;\n  5[\"Replace\"];\n  4 -->|csv| 5;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Get species occurrences data\"]\n  1[label=\"Wallace\"]\n  2[label=\"Cut\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Filter\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"Convert tabular to CSV\"]\n  3 -> 4 [label=\"out_file1\"]\n  5[label=\"Replace\"]\n  4 -> 5 [label=\"csv\"]\n}",
           "workflow_tools": [
@@ -27697,6 +28289,11 @@
           {
             "url": "http://apostl.moffitt.org/",
             "name": "APOSTL",
+            "usegalaxy": false
+          },
+          {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
             "usegalaxy": false
           },
           {
@@ -27844,6 +28441,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -27960,6 +28561,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -28080,6 +28685,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "local",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -28196,6 +28805,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -28333,6 +28946,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -28351,8 +28968,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.1.3",
-                  "9.5+galaxy3",
-                  "1.1.4"
+                  "1.1.4",
+                  "9.5+galaxy3"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -28427,8 +29044,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.1.3",
-                  "9.5+galaxy3",
                   "1.1.4",
+                  "9.5+galaxy3",
                   "9.5+galaxy2",
                   "9.3+galaxy1",
                   "9.5+galaxy0",
@@ -28446,8 +29063,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.1.3",
-                  "9.5+galaxy3",
                   "1.1.4",
+                  "9.5+galaxy3",
                   "9.5+galaxy2",
                   "9.5+galaxy0",
                   "1.1.0"
@@ -28491,6 +29108,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -28802,7 +29423,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput Paired End Reads Collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Kraken2\"];\n  0 -->|output| 1;\n  a408a644-58cd-4f5e-af25-15b5ea63aa76[\"Output\\nkraken_report_reads\"];\n  1 --> a408a644-58cd-4f5e-af25-15b5ea63aa76;\n  style a408a644-58cd-4f5e-af25-15b5ea63aa76 stroke:#2c3143,stroke-width:4px;\n  54b85a53-72ee-4b73-b186-7fd55e8aab9b[\"Output\\nkraken_report_tabular\"];\n  1 --> 54b85a53-72ee-4b73-b186-7fd55e8aab9b;\n  style 54b85a53-72ee-4b73-b186-7fd55e8aab9b stroke:#2c3143,stroke-width:4px;\n  2[\"Bracken\"];\n  1 -->|report_output| 2;\n  ae6c6464-f5f5-4e5b-b616-d38166fc0133[\"Output\\nbracken_report_tsv\"];\n  2 --> ae6c6464-f5f5-4e5b-b616-d38166fc0133;\n  style ae6c6464-f5f5-4e5b-b616-d38166fc0133 stroke:#2c3143,stroke-width:4px;\n  8ca52af9-f839-42b6-aa74-f1a6a1dfbbc8[\"Output\\nbracken_kraken_report\"];\n  2 --> 8ca52af9-f839-42b6-aa74-f1a6a1dfbbc8;\n  style 8ca52af9-f839-42b6-aa74-f1a6a1dfbbc8 stroke:#2c3143,stroke-width:4px;\n  3[\"Recentrifuge\"];\n  1 -->|output| 3;\n  b5694f2d-c8cd-4460-bfff-74fd0792ecb3[\"Output\\nrecentrifuge_stats_tabular\"];\n  3 --> b5694f2d-c8cd-4460-bfff-74fd0792ecb3;\n  style b5694f2d-c8cd-4460-bfff-74fd0792ecb3 stroke:#2c3143,stroke-width:4px;\n  bd947a1d-0443-465f-8658-5d76d9ce69f8[\"Output\\nrecentrifuge_report_html\"];\n  3 --> bd947a1d-0443-465f-8658-5d76d9ce69f8;\n  style bd947a1d-0443-465f-8658-5d76d9ce69f8 stroke:#2c3143,stroke-width:4px;\n  c7457acb-41bc-4191-b3fb-6716e15fbe57[\"Output\\nrecentrifuge_data_tabular\"];\n  3 --> c7457acb-41bc-4191-b3fb-6716e15fbe57;\n  style c7457acb-41bc-4191-b3fb-6716e15fbe57 stroke:#2c3143,stroke-width:4px;\n  94f6ff07-0e06-47ad-88f8-a058d0808537[\"Output\\nrecentrifuge_logfile\"];\n  3 --> 94f6ff07-0e06-47ad-88f8-a058d0808537;\n  style 94f6ff07-0e06-47ad-88f8-a058d0808537 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput Paired End Reads Collection\"]\n  1[label=\"Kraken2\"]\n  0 -> 1 [label=\"output\"]\n  ka408a64458cd4f5eaf2515b5ea63aa76[color=lightseagreen,label=\"Output\\nkraken_report_reads\"]\n  1 -> ka408a64458cd4f5eaf2515b5ea63aa76\n  k54b85a5372ee4b73b1867fd55e8aab9b[color=lightseagreen,label=\"Output\\nkraken_report_tabular\"]\n  1 -> k54b85a5372ee4b73b1867fd55e8aab9b\n  2[label=\"Bracken\"]\n  1 -> 2 [label=\"report_output\"]\n  kae6c6464f5f54e5bb616d38166fc0133[color=lightseagreen,label=\"Output\\nbracken_report_tsv\"]\n  2 -> kae6c6464f5f54e5bb616d38166fc0133\n  k8ca52af9f83942b6aa74f1a6a1dfbbc8[color=lightseagreen,label=\"Output\\nbracken_kraken_report\"]\n  2 -> k8ca52af9f83942b6aa74f1a6a1dfbbc8\n  3[label=\"Recentrifuge\"]\n  1 -> 3 [label=\"output\"]\n  kb5694f2dc8cd4460bfff74fd0792ecb3[color=lightseagreen,label=\"Output\\nrecentrifuge_stats_tabular\"]\n  3 -> kb5694f2dc8cd4460bfff74fd0792ecb3\n  kbd947a1d0443465f86585d76d9ce69f8[color=lightseagreen,label=\"Output\\nrecentrifuge_report_html\"]\n  3 -> kbd947a1d0443465f86585d76d9ce69f8\n  kc7457acb41bc4191b3fb6716e15fbe57[color=lightseagreen,label=\"Output\\nrecentrifuge_data_tabular\"]\n  3 -> kc7457acb41bc4191b3fb6716e15fbe57\n  k94f6ff070e0647ad88f8a058d0808537[color=lightseagreen,label=\"Output\\nrecentrifuge_logfile\"]\n  3 -> k94f6ff070e0647ad88f8a058d0808537\n}",
           "workflow_tools": [
@@ -29130,6 +29751,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -29275,6 +29901,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -29292,11 +29922,11 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1+galaxy0",
                   "3.0+galaxy0",
                   "2.6.1+galaxy0",
-                  "2.8+galaxy0",
-                  "2.7+galaxy1"
+                  "2.7+galaxy1",
+                  "3.1+galaxy0",
+                  "2.8+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -29416,6 +30046,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -29546,6 +30180,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -29683,6 +30321,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -29764,11 +30406,11 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.16.1+galaxy0",
                   "1.15.0+galaxy0",
+                  "1.16.1+galaxy0",
+                  "1.14.1+galaxy0",
                   "1.16.0+galaxy0",
-                  "1.15.1+galaxy0",
-                  "1.14.1+galaxy0"
+                  "1.15.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -29799,11 +30441,11 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.16.1+galaxy0",
                   "1.15.0+galaxy0",
+                  "1.16.1+galaxy0",
+                  "1.14.1+galaxy0",
                   "1.16.0+galaxy0",
                   "1.15.1+galaxy0",
-                  "1.14.1+galaxy0",
                   "1.14.0+galaxy0"
                 ],
                 "server": "https://usegalaxy.org"
@@ -29821,6 +30463,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -29947,6 +30593,10 @@
               {
                 "state": "local",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "local",
@@ -31090,7 +31740,7 @@
               "version": "0.1"
             }
           },
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"OBIS occurences\"];\n  1[\"Advanced Cut\"];\n  0 -->|output| 1;\n  2[\"Ocean biodiversity indicators\"];\n  1 -->|output| 2;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"OBIS occurences\"]\n  1[label=\"Advanced Cut\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Ocean biodiversity indicators\"]\n  1 -> 2 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -31131,6 +31781,11 @@
           {
             "url": "http://apostl.moffitt.org/",
             "name": "APOSTL",
+            "usegalaxy": false
+          },
+          {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
             "usegalaxy": false
           },
           {
@@ -31279,6 +31934,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -31413,6 +32072,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -31430,8 +32093,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.0",
-                  "9.5+galaxy3"
+                  "9.5+galaxy3",
+                  "1.1.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -31442,8 +32105,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.0",
                   "9.5+galaxy3",
+                  "1.1.0",
                   "9.5+galaxy2"
                 ],
                 "server": "https://galaxytrakr.org/"
@@ -31516,8 +32179,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.0",
                   "9.5+galaxy3",
+                  "1.1.0",
                   "9.5+galaxy2",
                   "9.5+galaxy0"
                 ],
@@ -31543,8 +32206,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.0",
                   "9.5+galaxy3",
+                  "1.1.0",
                   "9.5+galaxy2",
                   "9.3+galaxy2",
                   "9.3+galaxy1",
@@ -31566,6 +32229,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -31686,6 +32353,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -31817,6 +32488,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -32383,7 +33058,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPopulation_map.txt\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nBarcodes_SRR034310.tabular\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nSRR034310.fastq\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nref_genome_chromFa.tar\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"Stacks: process radtags\"];\n  1 -->|output| 4;\n  2 -->|output| 4;\n  5[\"Stacks: process radtags\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  6[\"Stacks: process radtags\"];\n  1 -->|output| 6;\n  2 -->|output| 6;\n  7[\"FastQC\"];\n  2 -->|output| 7;\n  8[\"Stacks: de novo map\"];\n  4 -->|demultiplexed| 8;\n  0 -->|output| 8;\n  9[\"Stacks: populations\"];\n  8 -->|all_output| 9;\n  0 -->|output| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nPopulation_map.txt\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nBarcodes_SRR034310.tabular\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nSRR034310.fastq\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nref_genome_chromFa.tar\"]\n  4[label=\"Stacks: process radtags\"]\n  1 -> 4 [label=\"output\"]\n  2 -> 4 [label=\"output\"]\n  5[label=\"Stacks: process radtags\"]\n  1 -> 5 [label=\"output\"]\n  2 -> 5 [label=\"output\"]\n  6[label=\"Stacks: process radtags\"]\n  1 -> 6 [label=\"output\"]\n  2 -> 6 [label=\"output\"]\n  7[label=\"FastQC\"]\n  2 -> 7 [label=\"output\"]\n  8[label=\"Stacks: de novo map\"]\n  4 -> 8 [label=\"demultiplexed\"]\n  0 -> 8 [label=\"output\"]\n  9[label=\"Stacks: populations\"]\n  8 -> 9 [label=\"all_output\"]\n  0 -> 9 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -32547,6 +33222,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -32692,6 +33372,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -32709,9 +33393,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.72+galaxy1",
                   "0.72",
-                  "0.73+galaxy0",
-                  "0.72+galaxy1"
+                  "0.73+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -32771,8 +33455,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.65",
                   "0.71"
                 ],
@@ -32815,9 +33499,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.72+galaxy1",
                   "0.72",
                   "0.73+galaxy0",
-                  "0.72+galaxy1",
                   "0.74+galaxy0",
                   "0.74+galaxy1"
                 ],
@@ -32826,8 +33510,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.73+galaxy0",
-                  "0.72+galaxy1"
+                  "0.72+galaxy1",
+                  "0.73+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -32849,6 +33533,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -32975,6 +33663,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -33053,8 +33745,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.46.3",
-                  "1.46.1",
-                  "1.46.2"
+                  "1.46.2",
+                  "1.46.1"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -33085,8 +33777,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.46.1",
-                  "1.46.2"
+                  "1.46.2",
+                  "1.46.1"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -33107,6 +33799,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -33634,7 +34330,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput genomes as collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Replace Text\"];\n  0 -->|output| 1;\n  6a2d3fcd-b557-4440-910d-b4c537feef20[\"Output\\nheaders_shortened\"];\n  1 --> 6a2d3fcd-b557-4440-910d-b4c537feef20;\n  style 6a2d3fcd-b557-4440-910d-b4c537feef20 stroke:#2c3143,stroke-width:4px;\n  2[\"RepeatMasker\"];\n  1 -->|outfile| 2;\n  1db6607a-343a-4a61-9a3b-43101eb8223b[\"Output\\nrepeat_masked\"];\n  2 --> 1db6607a-343a-4a61-9a3b-43101eb8223b;\n  style 1db6607a-343a-4a61-9a3b-43101eb8223b stroke:#2c3143,stroke-width:4px;\n  3[\"Funannotate predict annotation\"];\n  2 -->|output_masked_genome| 3;\n  642c1c09-82f4-4ef4-bd53-d14a583044e2[\"Output\\nfunannotate_predicted_proteins\"];\n  3 --> 642c1c09-82f4-4ef4-bd53-d14a583044e2;\n  style 642c1c09-82f4-4ef4-bd53-d14a583044e2 stroke:#2c3143,stroke-width:4px;\n  4[\"Extract ORF\"];\n  3 -->|annot_gbk| 4;\n  07fb8c04-990e-4bc7-b607-9c4161b4786d[\"Output\\nextracted_ORFs\"];\n  4 --> 07fb8c04-990e-4bc7-b607-9c4161b4786d;\n  style 07fb8c04-990e-4bc7-b607-9c4161b4786d stroke:#2c3143,stroke-width:4px;\n  5[\"Regex Find And Replace\"];\n  4 -->|aa_output| 5;\n  8dc378a8-d485-42df-8322-6cf8230257a0[\"Output\\nsample_names_to_headers\"];\n  5 --> 8dc378a8-d485-42df-8322-6cf8230257a0;\n  style 8dc378a8-d485-42df-8322-6cf8230257a0 stroke:#2c3143,stroke-width:4px;\n  6[\"Collapse Collection\"];\n  5 -->|out_file1| 6;\n  e9a55459-4a2c-4238-8494-e99ec67307ea[\"Output\\nproteomes_to_one_file\"];\n  6 --> e9a55459-4a2c-4238-8494-e99ec67307ea;\n  style e9a55459-4a2c-4238-8494-e99ec67307ea stroke:#2c3143,stroke-width:4px;\n  7[\"Proteinortho\"];\n  5 -->|out_file1| 7;\n  ee688b7a-2a9e-4480-a27a-db8cf795b635[\"Output\\nProteinortho on input dataset(s): orthology-groups\"];\n  7 --> ee688b7a-2a9e-4480-a27a-db8cf795b635;\n  style ee688b7a-2a9e-4480-a27a-db8cf795b635 stroke:#2c3143,stroke-width:4px;\n  8[\"Busco\"];\n  5 -->|out_file1| 8;\n  9[\"Filter\"];\n  7 -->|proteinortho| 9;\n  10[\"Proteinortho grab proteins\"];\n  6 -->|output| 10;\n  9 -->|out_file1| 10;\n  8625e8b1-e3af-4afa-bf85-1a3258cbbfb2[\"Output\\nProteinortho_extract_by_orthogroup\"];\n  10 --> 8625e8b1-e3af-4afa-bf85-1a3258cbbfb2;\n  style 8625e8b1-e3af-4afa-bf85-1a3258cbbfb2 stroke:#2c3143,stroke-width:4px;\n  11[\"Regex Find And Replace\"];\n  10 -->|listproteinorthograbproteins| 11;\n  b072d32e-f725-4833-af0b-74f4df526d9a[\"Output\\nfasta_header_cleaned\"];\n  11 --> b072d32e-f725-4833-af0b-74f4df526d9a;\n  style b072d32e-f725-4833-af0b-74f4df526d9a stroke:#2c3143,stroke-width:4px;\n  12[\"ClustalW\"];\n  11 -->|out_file1| 12;\n  f704b4b2-5214-4393-8a85-6274bda27c8c[\"Output\\nClustalW on input dataset(s): clustal\"];\n  12 --> f704b4b2-5214-4393-8a85-6274bda27c8c;\n  style f704b4b2-5214-4393-8a85-6274bda27c8c stroke:#2c3143,stroke-width:4px;\n  13[\"ClipKIT. Alignment trimming software for phylogenetics.\"];\n  12 -->|output| 13;\n  37092981-191a-4413-8f60-51802dd95f9c[\"Output\\nTrimmed alignment.\"];\n  13 --> 37092981-191a-4413-8f60-51802dd95f9c;\n  style 37092981-191a-4413-8f60-51802dd95f9c stroke:#2c3143,stroke-width:4px;\n  14[\"PhyKit - Alignment-based functions\"];\n  13 -->|trimmed_output| 14;\n  09ad25e3-cd68-4fb4-9c57-3e79212b8e01[\"Output\\nConcatenated fasta alignment file\"];\n  14 --> 09ad25e3-cd68-4fb4-9c57-3e79212b8e01;\n  style 09ad25e3-cd68-4fb4-9c57-3e79212b8e01 stroke:#2c3143,stroke-width:4px;\n  1d546e4c-7e3c-499d-870c-4846feb7a46d[\"Output\\nA partition file ready for input into RAxML or IQ-tree\"];\n  14 --> 1d546e4c-7e3c-499d-870c-4846feb7a46d;\n  style 1d546e4c-7e3c-499d-870c-4846feb7a46d stroke:#2c3143,stroke-width:4px;\n  26846814-d43a-4ce7-9f26-cfb70f184dce[\"Output\\nAn occupancy file that summarizes the taxon occupancy per sequence\"];\n  14 --> 26846814-d43a-4ce7-9f26-cfb70f184dce;\n  style 26846814-d43a-4ce7-9f26-cfb70f184dce stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput genomes as collection\"]\n  1[label=\"Replace Text\"]\n  0 -> 1 [label=\"output\"]\n  k6a2d3fcdb5574440910db4c537feef20[color=lightseagreen,label=\"Output\\nheaders_shortened\"]\n  1 -> k6a2d3fcdb5574440910db4c537feef20\n  2[label=\"RepeatMasker\"]\n  1 -> 2 [label=\"outfile\"]\n  k1db6607a343a4a619a3b43101eb8223b[color=lightseagreen,label=\"Output\\nrepeat_masked\"]\n  2 -> k1db6607a343a4a619a3b43101eb8223b\n  3[label=\"Funannotate predict annotation\"]\n  2 -> 3 [label=\"output_masked_genome\"]\n  k642c1c0982f44ef4bd53d14a583044e2[color=lightseagreen,label=\"Output\\nfunannotate_predicted_proteins\"]\n  3 -> k642c1c0982f44ef4bd53d14a583044e2\n  4[label=\"Extract ORF\"]\n  3 -> 4 [label=\"annot_gbk\"]\n  k07fb8c04990e4bc7b6079c4161b4786d[color=lightseagreen,label=\"Output\\nextracted_ORFs\"]\n  4 -> k07fb8c04990e4bc7b6079c4161b4786d\n  5[label=\"Regex Find And Replace\"]\n  4 -> 5 [label=\"aa_output\"]\n  k8dc378a8d48542df83226cf8230257a0[color=lightseagreen,label=\"Output\\nsample_names_to_headers\"]\n  5 -> k8dc378a8d48542df83226cf8230257a0\n  6[label=\"Collapse Collection\"]\n  5 -> 6 [label=\"out_file1\"]\n  ke9a554594a2c42388494e99ec67307ea[color=lightseagreen,label=\"Output\\nproteomes_to_one_file\"]\n  6 -> ke9a554594a2c42388494e99ec67307ea\n  7[label=\"Proteinortho\"]\n  5 -> 7 [label=\"out_file1\"]\n  kee688b7a2a9e4480a27adb8cf795b635[color=lightseagreen,label=\"Output\\nProteinortho on input dataset(s): orthology-groups\"]\n  7 -> kee688b7a2a9e4480a27adb8cf795b635\n  8[label=\"Busco\"]\n  5 -> 8 [label=\"out_file1\"]\n  9[label=\"Filter\"]\n  7 -> 9 [label=\"proteinortho\"]\n  10[label=\"Proteinortho grab proteins\"]\n  6 -> 10 [label=\"output\"]\n  9 -> 10 [label=\"out_file1\"]\n  k8625e8b1e3af4afabf851a3258cbbfb2[color=lightseagreen,label=\"Output\\nProteinortho_extract_by_orthogroup\"]\n  10 -> k8625e8b1e3af4afabf851a3258cbbfb2\n  11[label=\"Regex Find And Replace\"]\n  10 -> 11 [label=\"listproteinorthograbproteins\"]\n  kb072d32ef7254833af0b74f4df526d9a[color=lightseagreen,label=\"Output\\nfasta_header_cleaned\"]\n  11 -> kb072d32ef7254833af0b74f4df526d9a\n  12[label=\"ClustalW\"]\n  11 -> 12 [label=\"out_file1\"]\n  kf704b4b2521443938a856274bda27c8c[color=lightseagreen,label=\"Output\\nClustalW on input dataset(s): clustal\"]\n  12 -> kf704b4b2521443938a856274bda27c8c\n  13[label=\"ClipKIT. Alignment trimming software for phylogenetics.\"]\n  12 -> 13 [label=\"output\"]\n  k37092981191a44138f6051802dd95f9c[color=lightseagreen,label=\"Output\\nTrimmed alignment.\"]\n  13 -> k37092981191a44138f6051802dd95f9c\n  14[label=\"PhyKit - Alignment-based functions\"]\n  13 -> 14 [label=\"trimmed_output\"]\n  k09ad25e3cd684fb49c573e79212b8e01[color=lightseagreen,label=\"Output\\nConcatenated fasta alignment file\"]\n  14 -> k09ad25e3cd684fb49c573e79212b8e01\n  k1d546e4c7e3c499d870c4846feb7a46d[color=lightseagreen,label=\"Output\\nA partition file ready for input into RAxML or IQ-tree\"]\n  14 -> k1d546e4c7e3c499d870c4846feb7a46d\n  k26846814d43a4ce79f26cfb70f184dce[color=lightseagreen,label=\"Output\\nAn occupancy file that summarizes the taxon occupancy per sequence\"]\n  14 -> k26846814d43a4ce79f26cfb70f184dce\n}",
           "workflow_tools": [
@@ -34639,6 +35335,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -34783,6 +35484,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -34899,6 +35604,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -35021,6 +35730,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -35038,8 +35751,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.1.2",
-                  "4.1.5+galaxy0"
+                  "4.1.5+galaxy0",
+                  "0.1.2"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -35152,6 +35865,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -35288,6 +36005,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -35416,6 +36137,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -35555,6 +36280,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -35664,16 +36393,16 @@
                 "versions": [
                   "5.4.6+galaxy0",
                   "5.8.0+galaxy2",
-                  "5.8.0+galaxy0",
-                  "5.4.5+galaxy0",
-                  "5.8.0+galaxy1",
-                  "5.3.1+galaxy0",
-                  "5.7.1+galaxy0",
                   "5.4.4+galaxy0",
-                  "5.2.2+galaxy2",
+                  "5.2.2+galaxy0",
                   "5.3.2+galaxy0",
                   "5.5.0+galaxy0",
-                  "5.2.2+galaxy0",
+                  "5.8.0+galaxy0",
+                  "5.8.0+galaxy1",
+                  "5.4.5+galaxy0",
+                  "5.2.2+galaxy2",
+                  "5.3.1+galaxy0",
+                  "5.7.1+galaxy0",
                   "5.2.2+galaxy1"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -35701,6 +36430,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -35812,10 +36545,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.8.15+galaxy4",
-                  "1.8.15+galaxy5",
-                  "1.8.15+galaxy3",
                   "1.8.15+galaxy1",
+                  "1.8.15+galaxy5",
+                  "1.8.15+galaxy4",
+                  "1.8.15+galaxy3",
                   "1.8.17+galaxy0",
                   "1.8.15+galaxy0"
                 ],
@@ -35834,6 +36567,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -35923,10 +36660,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "6.3.6+galaxy0",
                   "6.3.4+galaxy0",
-                  "6.3.5+galaxy0",
-                  "6.2.3+galaxy1"
+                  "6.3.6+galaxy0",
+                  "6.2.3+galaxy1",
+                  "6.3.5+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -35938,8 +36675,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "6.3.6+galaxy0",
                   "6.3.4+galaxy0",
+                  "6.3.6+galaxy0",
                   "6.3.5+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -35966,6 +36703,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -36104,6 +36845,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -36214,8 +36959,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "5.1.0",
-                  "4.1"
+                  "4.1",
+                  "5.1.0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -36242,6 +36987,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -36362,6 +37111,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -36672,6 +37425,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -36814,6 +37572,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -37320,7 +38082,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nReel_life_survey_fish_modif.tabular\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Spatial coordinates anonymization\"];\n  0 -->|output| 1;\n  2[\"Homoscedasticity and normality\"];\n  0 -->|output| 2;\n  3[\"Variables exploration\"];\n  0 -->|output| 3;\n  4[\"Presence-absence and abundance\"];\n  0 -->|output| 4;\n  5[\"Statistics on presence-absence\"];\n  0 -->|output| 5;\n  6[\"Local Contributions to Beta Diversity LCBD\"];\n  0 -->|output| 6;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nReel_life_survey_fish_modif.tabular\"]\n  1[label=\"Spatial coordinates anonymization\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Homoscedasticity and normality\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Variables exploration\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Presence-absence and abundance\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Statistics on presence-absence\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"Local Contributions to Beta Diversity LCBD\"]\n  0 -> 6 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -37841,6 +38603,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -37985,6 +38752,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -38101,6 +38872,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -38238,6 +39013,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -38357,6 +39136,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -38482,6 +39265,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -38601,6 +39388,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -38726,6 +39517,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -38848,6 +39643,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -38967,6 +39766,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -39607,7 +40410,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAbundance index file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Filter\"];\n  0 -->|output| 1;\n  2[\"Filter\"];\n  0 -->|output| 2;\n  3[\"Filter\"];\n  0 -->|output| 3;\n  4[\"Filter\"];\n  0 -->|output| 4;\n  5[\"Filter\"];\n  0 -->|output| 5;\n  6[\"Paste\"];\n  1 -->|out_file1| 6;\n  2 -->|out_file1| 6;\n  7[\"Paste\"];\n  3 -->|out_file1| 7;\n  4 -->|out_file1| 7;\n  8[\"Paste\"];\n  6 -->|out_file1| 8;\n  7 -->|out_file1| 8;\n  9[\"Paste\"];\n  8 -->|out_file1| 9;\n  5 -->|out_file1| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nAbundance index file\"]\n  1[label=\"Filter\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Filter\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Filter\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Filter\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Filter\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"Paste\"]\n  1 -> 6 [label=\"out_file1\"]\n  2 -> 6 [label=\"out_file1\"]\n  7[label=\"Paste\"]\n  3 -> 7 [label=\"out_file1\"]\n  4 -> 7 [label=\"out_file1\"]\n  8[label=\"Paste\"]\n  6 -> 8 [label=\"out_file1\"]\n  7 -> 8 [label=\"out_file1\"]\n  9[label=\"Paste\"]\n  8 -> 9 [label=\"out_file1\"]\n  5 -> 9 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -39698,7 +40501,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nFlight curve dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Filter\"];\n  0 -->|output| 1;\n  2[\"Filter\"];\n  0 -->|output| 2;\n  3[\"Paste\"];\n  1 -->|out_file1| 3;\n  2 -->|out_file1| 3;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nFlight curve dataset\"]\n  1[label=\"Filter\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Filter\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Paste\"]\n  1 -> 3 [label=\"out_file1\"]\n  2 -> 3 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -39789,7 +40592,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"CSV to Tabular\"];\n  0 -->|output| 1;\n  10[\"Count\"];\n  8 -->|output| 10;\n  11[\"Column Regex Find And Replace\"];\n  8 -->|output| 11;\n  12[\"Count\"];\n  9 -->|output| 12;\n  13[\"Column Regex Find And Replace\"];\n  9 -->|output| 13;\n  14[\"Merge Columns\"];\n  11 -->|out_file1| 14;\n  15[\"Merge Columns\"];\n  13 -->|out_file1| 15;\n  16[\"Remove beginning\"];\n  14 -->|out_file1| 16;\n  17[\"Remove beginning\"];\n  15 -->|out_file1| 17;\n  18[\"Paste\"];\n  16 -->|out_file1| 18;\n  17 -->|out_file1| 18;\n  2[\"Column Regex Find And Replace\"];\n  1 -->|output| 2;\n  3[\"Count\"];\n  2 -->|out_file1| 3;\n  4[\"Filter\"];\n  2 -->|out_file1| 4;\n  5[\"Filter\"];\n  2 -->|out_file1| 5;\n  6[\"Tabular to CSV\"];\n  4 -->|out_file1| 6;\n  7[\"Tabular to CSV\"];\n  5 -->|out_file1| 7;\n  8[\"Flight curve\"];\n  6 -->|output| 8;\n  9[\"Flight curve\"];\n  7 -->|output| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[label=\"CSV to Tabular\"]\n  0 -> 1 [label=\"output\"]\n  10[label=\"Count\"]\n  8 -> 10 [label=\"output\"]\n  11[label=\"Column Regex Find And Replace\"]\n  8 -> 11 [label=\"output\"]\n  12[label=\"Count\"]\n  9 -> 12 [label=\"output\"]\n  13[label=\"Column Regex Find And Replace\"]\n  9 -> 13 [label=\"output\"]\n  14[label=\"Merge Columns\"]\n  11 -> 14 [label=\"out_file1\"]\n  15[label=\"Merge Columns\"]\n  13 -> 15 [label=\"out_file1\"]\n  16[label=\"Remove beginning\"]\n  14 -> 16 [label=\"out_file1\"]\n  17[label=\"Remove beginning\"]\n  15 -> 17 [label=\"out_file1\"]\n  18[label=\"Paste\"]\n  16 -> 18 [label=\"out_file1\"]\n  17 -> 18 [label=\"out_file1\"]\n  2[label=\"Column Regex Find And Replace\"]\n  1 -> 2 [label=\"output\"]\n  3[label=\"Count\"]\n  2 -> 3 [label=\"out_file1\"]\n  4[label=\"Filter\"]\n  2 -> 4 [label=\"out_file1\"]\n  5[label=\"Filter\"]\n  2 -> 5 [label=\"out_file1\"]\n  6[label=\"Tabular to CSV\"]\n  4 -> 6 [label=\"out_file1\"]\n  7[label=\"Tabular to CSV\"]\n  5 -> 7 [label=\"out_file1\"]\n  8[label=\"Flight curve\"]\n  6 -> 8 [label=\"output\"]\n  9[label=\"Flight curve\"]\n  7 -> 9 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -39899,7 +40702,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2026-03-06 13:52:08 +0000",
+          "modified": "2026-03-06 18:00:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nregionalGAM.csv\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Text reformatting\"];\n  0 -->|output| 1;\n  2[\"Count\"];\n  1 -->|outfile| 2;\n  3[\"Flight curve\"];\n  2 -->|out_file1| 3;\n  4[\"Abundance index\"];\n  2 -->|out_file1| 4;\n  3 -->|output| 4;\n  5[\"Scatterplot w ggplot2\"];\n  3 -->|output| 5;\n  6[\"Expected temporal trend\"];\n  4 -->|output| 6;\n  7[\"Model temporal trend\"];\n  4 -->|output| 7;\n  6 -->|output2| 7;\n  8[\"Autocorrelation test\"];\n  7 -->|output2| 8;\n  9[\"Plot abundance\"];\n  4 -->|output| 9;\n  7 -->|output2| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nregionalGAM.csv\"]\n  1[label=\"Text reformatting\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Count\"]\n  1 -> 2 [label=\"outfile\"]\n  3[label=\"Flight curve\"]\n  2 -> 3 [label=\"out_file1\"]\n  4[label=\"Abundance index\"]\n  2 -> 4 [label=\"out_file1\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Scatterplot w ggplot2\"]\n  3 -> 5 [label=\"output\"]\n  6[label=\"Expected temporal trend\"]\n  4 -> 6 [label=\"output\"]\n  7[label=\"Model temporal trend\"]\n  4 -> 7 [label=\"output\"]\n  6 -> 7 [label=\"output2\"]\n  8[label=\"Autocorrelation test\"]\n  7 -> 8 [label=\"output2\"]\n  9[label=\"Plot abundance\"]\n  4 -> 9 [label=\"output\"]\n  7 -> 9 [label=\"output2\"]\n}",
           "workflow_tools": [
@@ -40331,6 +41134,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -40475,6 +41283,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -40591,6 +41403,10 @@
               {
                 "state": "local",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -40711,6 +41527,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -40827,6 +41647,10 @@
               {
                 "state": "local",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -40947,6 +41771,10 @@
                 "server": "http://apostl.moffitt.org/"
               },
               {
+                "state": "local",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
                 "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
@@ -41063,6 +41891,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -41216,6 +42048,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -41336,6 +42172,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -41462,6 +42302,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -41582,6 +42426,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -41708,6 +42556,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -41831,6 +42683,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -41951,6 +42807,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -42101,6 +42961,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -42183,12 +43047,12 @@
                 "state": "inexact",
                 "versions": [
                   "3.4.0+galaxy1",
-                  "3.4.0+galaxy0",
-                  "3.3.5+galaxy0",
-                  "3.3.5+galaxy2",
-                  "3.5.1+galaxy2",
                   "2.2.1+galaxy2",
-                  "3.3.5+galaxy1"
+                  "3.5.1+galaxy2",
+                  "3.3.5+galaxy0",
+                  "3.3.5+galaxy1",
+                  "3.3.5+galaxy2",
+                  "3.4.0+galaxy0"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -42214,20 +43078,20 @@
                 "state": "inexact",
                 "versions": [
                   "3.4.0+galaxy1",
-                  "3.4.0+galaxy0",
-                  "3.3.5+galaxy0",
-                  "3.3.5+galaxy2",
-                  "3.5.1+galaxy2",
                   "2.2.1+galaxy2",
-                  "3.3.5+galaxy1"
+                  "3.5.1+galaxy2",
+                  "3.3.5+galaxy0",
+                  "3.3.5+galaxy1",
+                  "3.3.5+galaxy2",
+                  "3.4.0+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "3.3.5+galaxy0",
-                  "2.2.1+galaxy2"
+                  "2.2.1+galaxy2",
+                  "3.3.5+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -42249,6 +43113,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -42373,6 +43241,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -42490,6 +43362,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -42802,6 +43678,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -42944,6 +43825,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -43379,6 +44264,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -43521,6 +44411,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
@@ -44192,6 +45086,11 @@
             "usegalaxy": false
           },
           {
+            "url": "http://mbac.gmu.edu:8080/",
+            "name": "MBAC Metabiome Portal",
+            "usegalaxy": false
+          },
+          {
             "url": "https://vm-chemflow-francegrille.eu/",
             "name": "ChemFlow",
             "usegalaxy": false
@@ -44337,6 +45236,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
+              },
+              {
+                "state": "missing",
                 "server": "https://vm-chemflow-francegrille.eu/"
               },
               {
@@ -44452,6 +45355,10 @@
               {
                 "state": "missing",
                 "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mbac.gmu.edu:8080/"
               },
               {
                 "state": "missing",
