@@ -238,7 +238,7 @@ The BAM file includes a lot of information about each read, particularly the qua
 > >      1. {% tool [Filter BAM](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.2+galaxy2) %} with a filter to keep only the reads with a mapping quality >= 20
 > >      2. {% tool [Samtools Stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.5) %} on the output of **Filter**
 > >
-> >    Before filtering: 95,412 reads and after filtering: 89,664 reads.
+> >    Before filtering: 98,118 reads and after filtering: 92,152 reads.
 >  {: .solution }
 {: .question}
 
