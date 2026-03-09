@@ -1,0 +1,2666 @@
+<!DOCTYPE html>
+<html lang="de" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Mapping / Mapping / Sequence analysis</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@784be96b6f5987a69d090be56c3e35b8ea9d7329",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_DE.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Mapping">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-03-09 14:19:04 +0000">
+<meta name="DC.creator" content="Joachim Wolff">
+<meta name="DC.creator" content="Bérénice Batut">
+<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="Analyses of sequences">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Sequence analysis / Mapping / Hands-on: Mapping">
+        <meta property="og:description" content="Analyses of sequences">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/sequence-analysis/tutorials/mapping/tutorial_DE.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Mapping",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-03-09 14:19:04 +0000",
+  "datePublished": "2026-03-09 14:19:04 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/unimelb/",
+      "name": "The University of Melbourne",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.unimelb.edu.au"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/melbournebioinformatics/",
+      "name": "Melbourne Bioinformatics",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://mdhs.unimelb.edu.au/melbournebioinformatics"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/AustralianBioCommons/",
+      "name": "Australian BioCommons",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.biocommons.org.au/"
+    }
+  ],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "101100604",
+      "url": "https://cordis.europa.eu/project/id/101100604",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "BioNT",
+        "description": "Co-funded by the European Union\n",
+        "url": "https://biont-training.eu/",
+        "logo": "/training-material/assets/images/BioNT_Logo.png"
+      }
+    }
+  ],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Sequence analysis",
+    "description": "Analyses of sequences",
+    "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/"
+  },
+  "abstract": "Die Sequenzierung erzeugt eine Sammlung von Sequenzen ohne genomischen Kontext. Wir",
+  "description": "## Abstract\n\nDie Sequenzierung erzeugt eine Sammlung von Sequenzen ohne genomischen Kontext. Wir\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": null,
+    "alternateName": "de"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/",
+      "name": "Joachim Wolff",
+      "image": "https://avatars.githubusercontent.com/joachimwolff",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "@id": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusmc/",
+          "name": "Erasmus Medical Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusmc.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/by-covid/",
+          "name": "BeYond-COVID",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://by-covid.org/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-converge/",
+          "name": "ELIXIR-CONVERGE",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org/about-us/how-funded/eu-projects/converge"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "@id": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tflowers15/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tflowers15/",
+      "name": "Tristan Reynolds",
+      "image": "https://avatars.githubusercontent.com/tflowers15",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/AustralianBioCommons/",
+          "name": "Australian BioCommons",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.biocommons.org.au/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/unimelb/",
+          "name": "The University of Melbourne",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.unimelb.edu.au"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/melbournebioinformatics/",
+          "name": "Melbourne Bioinformatics",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mdhs.unimelb.edu.au/melbournebioinformatics"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6606-5953",
+      "@id": "https://orcid.org/0000-0002-6606-5953"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Tillsa/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Tillsa/",
+      "name": "Till Sauerwein",
+      "image": "https://avatars.githubusercontent.com/Tillsa",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biont/",
+          "name": "BioNT",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biont-training.eu/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/unode/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/unode/",
+      "name": "Renato Alves",
+      "image": "https://avatars.githubusercontent.com/unode",
+      "description": "Bioinformatics Community Manager at EMBL",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/embl/",
+          "name": "European Molecular Biology Laboratory",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.embl.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biont/",
+          "name": "BioNT",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biont-training.eu/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7212-0234",
+      "@id": "https://orcid.org/0000-0002-7212-0234"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Sequence analysis",
+      "description": "Analyses of sequences",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0080",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0080",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0080"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0102",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0102",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0102"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/bamtools",
+      "name": "BamTools"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/samtools",
+      "name": "SAMtools"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/samtools",
+      "name": "SAMtools"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/jbrowse",
+      "name": "JBrowse"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/jbrowse",
+      "name": "JBrowse"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://doi.org/10.5281/zenodo.1324070",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/sequence-analysis" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Sequence analysis
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/sequence-analysis/faqs/" title="Check our FAQs for the Sequence analysis topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/sequence-analysis/tutorials/mapping/tutorial_DE.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_DE.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-sequence-analysis">
+    <h1 data-toc-skip>Mapping</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Autoren</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/joachimwolff/" class="contributor-badge contributor-joachimwolff"><img src="https://avatars.githubusercontent.com/joachimwolff?s=36" alt="Joachim Wolff avatar" width="36" class="avatar" />
+    Joachim Wolff</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people did the translation and localisation of this text.">Übersetzer</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/Tillsa/" class="contributor-badge contributor-Tillsa"><img src="https://avatars.githubusercontent.com/Tillsa?s=36" alt="Till Sauerwein avatar" width="36" class="avatar" />
+    Till Sauerwein</a><a href="/training-material/hall-of-fame/unode/" class="contributor-badge contributor-unode"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/unode?s=36" alt="Renato Alves avatar" width="36" class="avatar" />
+    Renato Alves</a></td>
+	</tr>
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Lektoren</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/tflowers15/" class="contributor-badge contributor-tflowers15"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/tflowers15?s=36" alt="Tristan Reynolds avatar" width="36" class="avatar" />
+    Tristan Reynolds</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Überblick</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Fragen:</strong>
+        <ul>
+        
+        <li><p>Was ist Mapping?</p>
+</li>
+        
+        <li><p>Welche zwei Dinge sind entscheidend für ein korrektes Mapping?</p>
+</li>
+        
+        <li><p>Was ist eine BAM‑Datei?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Lernziele: </strong>
+        <ul>
+        
+        <li><p>Ein Tool ausführen, um Reads auf ein Referenzgenom zu mappen</p>
+</li>
+        
+        <li><p>Erklären, was eine BAM‑Datei ist und was sie enthält</p>
+</li>
+        
+        <li><p>Einen Genom‑Browser benutzen, um die Daten zu verstehen</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Voraussetzungen:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Quality Control</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Quality Control</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Geschätzte Bearbeitungszeit:</strong> 1 Stunde</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Einsteiger <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Unterstützende Materialien:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html" title="Slides for this tutorial">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Folien
+                </a></li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://doi.org/10.5281/zenodo.1324070">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datensätze
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/sequence-analysis/tutorials/mapping/workflows/" title="Mapping workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/sequence-analysis/tutorials/mapping/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+<li class="btn btn-default supporting_material">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>&nbsp;Recordings
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/index.html#tutorial-recording-7-september-2024" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (September 2024) - 24m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 20m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</li>
+  
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Verfügbar auf diesen Galaxy-Instanzen 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org (Main) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://galaxy.mesocentre.uca.fr" title="">
+			Galaxy@AuBi
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://galaxytrakr.org/" title="">
+			GalaxyTrakr
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
+			UseGalaxy.be
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.cz/" title="">
+			UseGalaxy.cz
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr/" title="">
+			UseGalaxy.fr
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.no/" title="">
+			UseGalaxy.no
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Veröffentlicht:</strong> Mar 9, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Letzte Änderung:</strong> Mar 9, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> Lizenz:</strong>
+		
+            Der Inhalt des Tutorials ist lizenziert unter der
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            Das GTN Framework ist lizenziert unter <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Überarbeitung:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Die Sequenzierung erzeugt eine Sammlung von Sequenzen ohne genomischen Kontext. Wir
+wissen nicht, zu welchem Teil des Genoms die Sequenzen gehören. Das Mapping der Reads
+eines Experiments auf ein Referenzgenom ist ein wichtiger Schritt in der modernen
+Genomdatenanalyse. Durch das Mapping werden die Reads einer bestimmten Stelle im Genom
+zugeordnet und es können Erkenntnisse wie das Expressionsniveau von Genen gewonnen
+werden.</p>
+
+<p>Die Reads sind nicht mit Positionsinformationen versehen, so dass wir nicht wissen, aus
+welchem Teil des Genoms sie stammen. Wir müssen die Sequenz des Reads selbst verwenden,
+um die entsprechende Region in der Referenzsequenz zu finden. Die Referenzsequenz kann
+jedoch recht lang sein (~3 Milliarden Basen beim Menschen), was die Suche nach einer
+passenden Region zu einer entmutigenden Aufgabe macht. Da unsere Reads kurz sind, kann
+es mehrere, gleich wahrscheinliche Stellen in der Referenzsequenz geben, von denen sie
+gelesen worden sein könnten. Dies gilt insbesondere für sich wiederholende Regionen.</p>
+
+<p>Im Prinzip könnten wir eine BLAST-Analyse durchführen, um herauszufinden, wo die
+sequenzierten Teile am besten in das bekannte Genom passen. Das müssten wir für jede der
+Millionen von Reads in unseren Sequenzierdaten tun. Das Alignment von Millionen kurzer
+Sequenzen auf diese Weise kann jedoch einige Wochen dauern. Und wir interessieren uns
+nicht für die genaue Übereinstimmung der Basen (Alignment). Was uns interessiert, ist,
+“woher diese Reads stammen”. Dieser Ansatz wird <strong>Mapping</strong> genannt.</p>
+
+<p>Im Folgenden werden wir einen Datensatz mit dem Mapper <strong>Bowtie2</strong> bearbeiten und die
+Daten mit dem Programm <strong>IGV</strong> visualisieren.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In diesem Tutorial werden wir uns mit folgenden Themen beschäftigen:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#vorbereiten-der-daten" id="markdown-toc-vorbereiten-der-daten">Vorbereiten der Daten</a></li>
+  <li><a href="#mapping-der-reads-auf-ein-referenzgenom" id="markdown-toc-mapping-der-reads-auf-ein-referenzgenom">Mapping der Reads auf ein Referenzgenom</a></li>
+  <li><a href="#inspektion-einer-bam-datei" id="markdown-toc-inspektion-einer-bam-datei">Inspektion einer BAM-Datei</a></li>
+  <li><a href="#visualisierung-mit-einem-genom-browser" id="markdown-toc-visualisierung-mit-einem-genom-browser">Visualisierung mit einem Genom-Browser</a>    <ol>
+      <li><a href="#igv" id="markdown-toc-igv">IGV</a></li>
+      <li><a href="#jbrowse" id="markdown-toc-jbrowse">JBrowse</a></li>
+    </ol>
+  </li>
+  <li><a href="#schlussfolgerung" id="markdown-toc-schlussfolgerung">Schlussfolgerung</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="vorbereiten-der-daten">Vorbereiten der Daten</h1>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-daten-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Daten-Upload</div>
+
+  <ol>
+    <li>
+      <p>Erstellen Sie einen neuen Verlauf für dieses Tutorial und geben Sie ihm einen
+passenden Namen</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-erstellen-eines-neuen-verlaufs"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-erstellen-eines-neuen-verlaufs" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tipp: Erstellen eines neuen Verlaufs</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Um einen neuen Verlauf zu erstellen, klicken Sie einfach auf das Symbol <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> am oberen Rand des Verlaufsfensters:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI zum Erstellen einer neuen Geschichte" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-umbenennen-eines-verlaufs"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-umbenennen-eines-verlaufs" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tipp: Umbenennen eines Verlaufs</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Klicken Sie auf <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Bearbeiten</strong>) neben dem Namen der Geschichte (der standardmäßig “Unbenannte Geschichte” lautet)</li>   <li>Geben Sie den neuen Namen ein</li>   <li>Klicken Sie auf <strong>Speichern</strong></li>   <li>Um die Umbenennung abzubrechen, klicken Sie auf die <i class="fas fa-undo" aria-hidden="true"></i><span class="visually-hidden">galaxy-undo</span> schaltfläche “Abbrechen”</li> </ol>   <p>Wenn Sie nicht das <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) neben dem Verlaufsnamen haben (was der Fall sein kann, wenn Sie eine ältere Version von Galaxy verwenden), gehen Sie wie folgt vor:</p>   <ol>   <li>Klicken Sie auf <strong>Unbenannter Verlauf</strong> (oder den aktuellen Namen des Verlaufs) (<strong>Klicken Sie zum Umbenennen des Verlaufs</strong>) oben in Ihrem Verlaufsfenster</li>   <li>Geben Sie den neuen Namen ein</li>   <li>Drücken Sie <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Importieren Sie <code class="language-plaintext highlighter-rouge">wt_H3K4me3_read1.fastq.gz</code> und <code class="language-plaintext highlighter-rouge">wt_H3K4me3_read2.fastq.gz</code> von
+<a href="https://zenodo.org/record/1324070">Zenodo</a> oder aus der Datenbibliothek (fragen
+Sie Ihren Dozenten)</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1324070/files/wt_H3K4me3_read1.fastq.gz
+https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importieren-über-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importieren-über-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tipp: Importieren über Links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Kopieren der Linkposition</li>   <li>     <p>Klicken Sie auf <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Daten hochladen</strong> am oberen Rand der Werkzeugleiste</p>   </li>   <li>Wählen Sie <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Daten einfügen/holen</strong></li>   <li>     <p>Fügen Sie den/die Link(s) in das Textfeld ein</p>   </li>   <li>     <p>Drücken Sie <strong>Start</strong></p>   </li>   <li><strong>Schließen</strong> Sie das Fenster</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importieren-von-daten-aus-einer-datenbibliothek"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importieren-von-daten-aus-einer-datenbibliothek" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tipp: Importieren von Daten aus einer Datenbibliothek</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Als Alternative zum Hochladen der Daten von einer URL oder Ihrem Computer können die Dateien auch von einer <em>Shared Data Library</em> zur Verfügung gestellt werden:</p>   <ol>   <li>Gehen Sie in <strong>Bibliotheken</strong> (linker Bereich)</li>   <li>Navigieren Sie zu  dem richtigen Ordner, wie von Ihrem Ausbilder angegeben.     <ul>       <li>Auf den meisten Galaxies werden die Tutoriumsdaten in einem Ordner mit dem Namen <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong> bereitgestellt.</li>     </ul>   </li>   <li>Wählen Sie die gewünschten Dateien aus</li>   <li>Klicken Sie auf <strong>Zur Historie hinzufügen</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> am oberen Rand und wählen Sie <strong>as Datasets</strong> aus dem Dropdown-Menü</li>   <li>     <p>Wählen Sie im Pop-up-Fenster</p>     <ul>       <li><em>“Historie auswählen “</em>: die Historie, in die Sie die Daten importieren möchten (oder erstellen Sie eine neue)</li>     </ul>   </li>   <li>Klicken Sie auf <strong>Importieren</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <p>Standardmäßig nimmt Galaxy den Link als Namen, also benennen Sie sie um.</p>
+    </li>
+    <li>
+      <p>Benennen Sie die Dateien in <code class="language-plaintext highlighter-rouge">reads_1</code> und <code class="language-plaintext highlighter-rouge">reads_2</code> um</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-umbenennen-eines-datensatzes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-umbenennen-eines-datensatzes" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tipp: Umbenennen eines Datensatzes</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Klicken Sie auf das <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>Bleistift-Symbol</strong> für den Datensatz, um seine Attribute zu bearbeiten</li>   <li>Ändern Sie im zentralen Bereich das Feld <strong>Name</strong></li>   <li>Klicken Sie auf die Schaltfläche <strong>Speichern</strong></li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Erstelle eine gepaarte Sammlung namens <code class="language-plaintext highlighter-rouge">Paired Reads</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-erstellen-einer-gepaarten-sammlung"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-erstellen-einer-gepaarten-sammlung" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tipp: Erstellen einer gepaarten Sammlung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>     <p>Klicken Sie auf <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Elemente auswählen</strong> am oberen Rand des Verlaufsfensters <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Schaltfläche Elemente auswählen" /></p>   </li>   <li>Überprüfen Sie alle Datensätze in Ihrem Verlauf, die Sie einschließen möchten</li>   <li>     <p>Klicken Sie auf <strong>n of N selected</strong> und wählen Sie <strong>Liste der Datensatzpaare erstellen</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="Menüpunkt 'Paare-Liste erstellen'" width="15%" /></p>   </li>   <li>     <p>Sie befinden sich im Assistenten zum Erstellen von Sammlungen. Wählen Sie <strong>Liste gepaarter Datensätze</strong> und klicken Sie auf die Schaltfläche ‘Weiter’ unten rechts.</p>     <p><img src="/training-material/topics/galaxy-interface/images/paired_list_selector.png" alt="Assistent zum Erstellen von Sammlungen – gepaarte Liste" width="15%" /></p>   </li>   <li>     <p>Überprüfen und konfigurieren Sie das automatische Paaren. Gewöhnlich haben Mate-Paare die Endungen <code class="language-plaintext highlighter-rouge">_1 </code> und <code class="language-plaintext highlighter-rouge">_2</code> oder <code class="language-plaintext highlighter-rouge">_R1</code> und <code class="language-plaintext highlighter-rouge">_R2</code>. Klicken Sie unten auf ‘Weiter’.</p>     <p><img src="/training-material/topics/galaxy-interface/images/paired_list_edit.png" alt="Bearbeiten und Erstellen einer Liste gepaarter Sammlungen" width="15%" /></p>   </li>   <li>Bearbeiten Sie den <strong>Listenbezeichner</strong> nach Bedarf.</li>   <li>Geben Sie einen Namen für Ihre Sammlung ein</li>   <li>Klicken Sie auf <strong>Erstellen</strong>, um Ihre Sammlung zu erstellen</li>   <li>Klicken Sie erneut auf das Häkchen-Symbol oben in Ihrem Verlauf</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Wir haben in Galaxy einfach FASTQ-Dateien importiert, die den Paired-End-Daten
+entsprechen, die wir direkt von einer Sequenziereinrichtung erhalten haben.</p>
+
+<p>Bei der Sequenzierung können Fehler auftreten, wie z. B. der Aufruf falscher Nukleotide.
+Sequenzierungsfehler können die Analyse verfälschen und zu einer Fehlinterpretation der
+Daten führen. Der erste Schritt bei jeder Art von Sequenzierungsdaten ist immer die
+Überprüfung ihrer Qualität.</p>
+
+<p>Es gibt ein spezielles Tutorial zur <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Qualitätskontrolle</a> von Sequenzierungsdaten. Wir werden die Schritte dort nicht wiederholen. Sie sollten das <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">tutorial</a> befolgen und es auf Ihre Daten anwenden, bevor Sie weitermachen.</p>
+
+<h1 id="mapping-der-reads-auf-ein-referenzgenom">Mapping der Reads auf ein Referenzgenom</h1>
+
+<p>Beim Read-Mapping werden die Reads an ein Referenzgenom angeglichen. Ein Mapper nimmt
+als Eingabe ein Referenzgenom und einen Satz von Reads. Sein Ziel ist es, jeden Read in
+der Menge der Reads am Referenzgenom auszurichten, wobei Mismatches, Indels und das
+Abschneiden einiger kurzer Fragmente an den beiden Enden der Reads berücksichtigt
+werden:</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/mapping/mapping.png" alt="Erläuterung des Mappings. " width="782" height="455" loading="lazy" /><a target="_blank" href="../../images/mapping/mapping.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Abbildung 1</strong>:</span> Illustration des Mapping-Prozesses. Die Eingabe besteht aus einer Reihe von Reads und einem Referenzgenom. In der Mitte sind die Ergebnisse des Mappings dargestellt: die Positionen der Reads auf dem Referenzgenom. Der erste Read wird an Position 100 ausgerichtet und das Alignment weist zwei Mismatches auf. Der zweite Read wird an der Position 114 ausgerichtet. Es handelt sich um ein lokales Alignment mit Ausschnitten auf der linken und rechten Seite. Der dritte Read wird an der Position 123 ausgerichtet. Er besteht aus einer 2-Basen-Insertion und einer 1-Base-Deletion.</figcaption></figure>
+
+<p>Wir benötigen ein Referenzgenom, auf das wir die Reads mappen können.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+  <ol>
+    <li>Was ist ein Referenzgenom?</li>
+    <li>Für jeden Modellorganismus können mehrere mögliche Referenzgenome zur Verfügung stehen (z.B. <code class="language-plaintext highlighter-rouge">hg19</code> und <code class="language-plaintext highlighter-rouge">hg38</code> für den Menschen). Welchem Genom entsprechen sie?</li>
+    <li>Welches Referenzgenom sollten wir verwenden?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Ein Referenzgenom (oder Referenzassembly) ist ein Satz von Nukleinsäuresequenzen, der als repräsentatives Beispiel für das genetische Material einer Art zusammengestellt wurde. Da sie oft aus der Sequenzierung verschiedener Individuen zusammengestellt werden, repräsentieren sie nicht genau den Gensatz eines einzelnen Organismus, sondern ein Mosaik verschiedener Nukleinsäuresequenzen von jedem Individuum.</li>
+      <li>Da die Kosten für die DNA-Sequenzierung sinken und neue Technologien zur Sequenzierung des gesamten Genoms aufkommen, werden immer mehr Genomsequenzen erzeugt. Anhand dieser neuen Sequenzen werden neue Alignments erstellt und die Referenzgenome verbessert (weniger Lücken, korrigierte Fehldarstellungen in der Sequenz usw.). Die verschiedenen Referenzgenome entsprechen den verschiedenen freigegebenen Versionen (den so genannten “Builds”).</li>
+      <li>Diese Daten stammen aus der ChIP-seq von Mäusen, daher werden wir mm10 (<em>Mus musculus</em>) verwenden.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<p>Derzeit gibt es über 60 verschiedene Mapper, und ihre Zahl wächst. In diesem Tutorial
+werden wir <a href="http://bowtie-bio.sourceforge.net/bowtie2/">Bowtie2</a> verwenden, ein
+schnelles und speichereffizientes Open-Source-Tool, das sich besonders gut für das
+Alignment von Sequenzierungs-Reads von etwa 50 bis zu 1.000 Basen zu relativ langen
+Genomen eignet.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-mapping-mit-bowtie2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Mapping mit Bowtie2</div>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0" title="Bowtie2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bowtie2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.4.2+galaxy0)</span> mit den folgenden Parametern
+      <ul>
+        <li><em>“Ist dies eine einzelne oder gepaarte Bibliothek “</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q-Datei #1”</em>: <code class="language-plaintext highlighter-rouge">reads_1</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q-Datei #2”</em>: <code class="language-plaintext highlighter-rouge">reads_2</code></li>
+            <li>
+              <p><em>“Möchten Sie Paired-End-Optionen festlegen? “</em>: <code class="language-plaintext highlighter-rouge">No</code></p>
+
+              <p>Sie sollten sich die Parameter dort ansehen, insbesondere die Paarungsorientierung, wenn Sie sie kennen. Sie können die Qualität des Paired-End-Mappings verbessern.</p>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Werden Sie ein Referenzgenom aus Ihrer Historie auswählen oder einen eingebauten Index verwenden? “</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome index</code>
+          <ul>
+            <li><em>“Referenzgenom auswählen “</em>: <code class="language-plaintext highlighter-rouge">Mouse (Mus musculus): mm10</code></li>
+          </ul>
+        </li>
+        <li>
+          <p><em>“Analysemodus auswählen “</em>: <code class="language-plaintext highlighter-rouge">Default setting only</code></p>
+
+          <p>Sie sollten einen Blick auf die nicht-standard Parameter werfen und versuchen, sie zu verstehen. Sie können einen Einfluss auf das Mapping haben und es verbessern.</p>
+        </li>
+        <li><em>“Speichern Sie die Bowtie2-Mapping-Statistiken in der Historie “</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>Untersuchen Sie die Datei <code class="language-plaintext highlighter-rouge">mapping stats</code>, indem Sie auf das Symbol <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (Auge) Symbol</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+  <ol>
+    <li>Welche Informationen werden hier bereitgestellt?</li>
+    <li>Wie viele Reads wurden genau 1 Mal gemappt?</li>
+    <li>Wie viele Reads wurden mehr als 1 Mal gemappt? Wie ist das möglich? Was sollten wir mit ihnen machen?</li>
+    <li>Wie viele Paare von Reads wurden nicht gemappt? Was sind die Ursachen dafür?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Die hier gegebene Information ist eine quantitative. Wir können sehen, wie viele Sequenzen aufeinander abgestimmt sind. Sie sagt nichts über die Qualität aus.</li>
+      <li>~90% der Reads wurden genau 1 Mal aligniert</li>
+      <li>~7 % der Reads wurden &gt;1 Mal übereinstimmend ausgerichtet. Diese werden als
+“multi-mapped reads” bezeichnet. Dies kann aufgrund von Wiederholungen im
+Referenzgenom geschehen (z. B. mehrere Kopien eines Gens), insbesondere wenn die
+Reads klein sind. Es ist schwierig zu entscheiden, woher diese Sequenzen stammen,
+und deshalb werden sie von den meisten Pipelines ignoriert. Überprüfen Sie immer
+die Statistiken, um sicherzustellen, dass nicht zu viele Informationen in
+nachfolgenden Analysen verworfen werden.</li>
+      <li>~3% der Reads wurden nicht gemappt, weil
+        <ul>
+          <li>beide Reads des Paares sind aligned, aber ihre Positionen stimmen nicht
+mit dem Paar von Reads überein (<code class="language-plaintext highlighter-rouge">aligned discordantly 1 time</code>)</li>
+          <li>Reads dieser Paare sind mehrfach gemappt (<code class="language-plaintext highlighter-rouge">aligned &gt;1 times</code> in <code class="language-plaintext highlighter-rouge">pairs aligned
+0 times concordantly or discordantly</code>)</li>
+          <li>ein Read dieser Paare wird gemappt, aber nicht der gepaarte Read (<code class="language-plaintext highlighter-rouge">aligned
+exactly 1 time</code> in <code class="language-plaintext highlighter-rouge">pairs aligned 0 times concordantly or discordantly</code>)</li>
+          <li>der Rest ist überhaupt nicht gemappt</li>
+        </ul>
+      </li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<p>Die Überprüfung der Mapping-Statistiken ist ein wichtiger Schritt, der vor der
+Fortsetzung der Analysen durchgeführt werden muss. Es gibt mehrere potenzielle
+Fehlerquellen beim Mapping, einschließlich (aber nicht beschränkt auf):</p>
+
+<ul>
+  <li><strong>Polymerase-Kettenreaktion (PCR)-Artefakte</strong>: Viele
+Hochdurchsatz-Sequenzierungsmethoden (HTS) beinhalten einen oder mehrere PCR-Schritte.
+PCR-Fehler zeigen sich als Mismatches im Alignment, und insbesondere Fehler in frühen
+PCR-Zyklen zeigen sich in mehreren Reads, was fälschlicherweise auf eine genetische
+Variation in der Probe schließen lässt. Ein ähnlicher Fehler sind PCR-Duplikate, bei
+denen dasselbe Lesepaar mehrfach vorkommt und die Berechnung der Abdeckung im
+Alignment verfälscht.</li>
+  <li><strong>Sequenzierungsfehler</strong>: Das Sequenziergerät kann entweder aus physikalischen Gründen
+(z. B. Öl auf einem Illumina-Objektträger) oder aufgrund von Eigenschaften der
+sequenzierten DNA (z. B. Homopolymere) einen fehlerhafte Aussage machen. Da
+Sequenzierfehler oft zufällig sind, können sie beim Variantenaufruf als Singleton
+Reads herausgefiltert werden.</li>
+  <li><strong>Mapping-Fehler</strong>: Der Mapping-Algorithmus kann einen Read an der falschen Stelle in
+der Referenz zuordnen. Dies geschieht häufig im Bereich von Wiederholungen oder
+anderen Regionen mit geringer Komplexität.</li>
+</ul>
+
+<p>Wenn also die Mapping-Statistiken nicht gut sind, sollten Sie die Ursache für diese
+Fehler untersuchen, bevor Sie mit Ihren Analysen fortfahren.</p>
+
+<p>Danach sollten Sie einen Blick auf die Reads werfen und die BAM-Datei inspizieren, in
+der die Read-Mappings gespeichert sind.</p>
+
+<h1 id="inspektion-einer-bam-datei">Inspektion einer BAM-Datei</h1>
+
+<p>Eine BAM-Datei (<a href="https://en.wikipedia.org/wiki/SAM_(file_format)">Binary Alignment Map</a>) ist eine komprimierte Binärdatei, in der die Lesesequenzen gespeichert sind und in der angegeben ist, ob sie an eine Referenzsequenz (z. B. ein Chromosom) angeglichen wurden, und wenn ja, an welcher Position auf der Referenzsequenz sie angeglichen wurden.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-inspektion-einer-bam-sam-datei"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Inspektion einer BAM/SAM-Datei</div>
+
+  <ol>
+    <li>Untersuchen Sie die <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> Ausgabe von <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+  </ol>
+
+</blockquote>
+
+<p>Eine BAM-Datei (oder eine SAM-Datei, die nicht komprimierte Version) besteht aus:</p>
+
+<ul>
+  <li>Ein Header-Abschnitt (die Zeilen, die mit <code class="language-plaintext highlighter-rouge">@</code> beginnen), der Metadaten enthält, insbesondere die Chromosomennamen und -längen (Zeilen, die mit dem Symbol <code class="language-plaintext highlighter-rouge">@SQ</code> beginnen)</li>
+  <li>
+    <p>Ein Alignment-Abschnitt, bestehend aus einer Tabelle mit 11 Pflichtfeldern sowie einer variablen Anzahl von optionalen Feldern:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Col</th>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Brief Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>QNAME</td>
+          <td>String</td>
+          <td>Query template NAME</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>FLAG</td>
+          <td>Integer</td>
+          <td>Bitwise FLAG</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>RNAME</td>
+          <td>String</td>
+          <td>References sequence NAME</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>POS</td>
+          <td>Integer</td>
+          <td>1- based leftmost mapping POSition</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>MAPQ</td>
+          <td>Integer</td>
+          <td>MAPping Quality</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>CIGAR</td>
+          <td>String</td>
+          <td>CIGAR String</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>RNEXT</td>
+          <td>String</td>
+          <td>Ref. name of the mate/next read</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>PNEXT</td>
+          <td>Integer</td>
+          <td>Position of the mate/next read</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>TLEN</td>
+          <td>Integer</td>
+          <td>Observed Template LENgth</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>SEQ</td>
+          <td>String</td>
+          <td>Segment SEQuence</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>QUAL</td>
+          <td>String</td>
+          <td>ASCII of Phred-scaled base QUALity+33</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+  <ol>
+    <li>Welche Informationen finden Sie in einer SAM/BAM-Datei?</li>
+    <li>Was sind die zusätzlichen Informationen im Vergleich zu einer FASTQ-Datei?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Sequenzen und Qualitätsinformationen, wie ein FASTQ</li>
+      <li>Mapping-Informationen, Position des Read auf dem Chromosom, Mapping-Qualität, etc</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<p>Die BAM-Datei enthält viele Informationen über jeden Read, insbesondere über die Qualität des Mappings.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-zusammenfassung-der-mapping-qualität"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Zusammenfassung der Mapping-Qualität</div>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2" title="Samtools Stats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools Stats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.2+galaxy2)</span> mit den folgenden Parametern
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM-Datei “</em>: <code class="language-plaintext highlighter-rouge">aligned reads</code> (Ausgabe von <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Referenzsequenz verwenden “</em>: <code class="language-plaintext highlighter-rouge">Locally cached/Use a built-in genome</code>
+          <ul>
+            <li><em>“Genom verwenden “</em>: <code class="language-plaintext highlighter-rouge">Mouse (Mus musculus): mm10 Full</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Untersuchen Sie die <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="language-plaintext highlighter-rouge">Stats</code>-Datei</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+  <ol>
+    <li>Wie hoch ist der Anteil der Mismatches in den gemappten Reads, wenn sie an das Referenzgenom angeglichen werden?</li>
+    <li>Was bedeutet die Fehlerrate?</li>
+    <li>Was ist die durchschnittliche Qualität? Wie wird sie dargestellt?</li>
+    <li>Was ist die durchschnittliche Insertgröße?</li>
+    <li>Wie viele Reads haben einen Mapping-Qualitätsscore unter 20?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Es gibt ~21.900 Mismatches für ~4.753.900 gemappted Basen, was im Durchschnitt
+~0,005 Mismatches pro gemappter Base ergibt.</li>
+      <li>Die Fehlerrate ist der Anteil der Fehlanpassungen pro gemappter Base, also das
+unmittelbar zuvor berechnete Verhältnis.</li>
+      <li>Die durchschnittliche Qualität ist der mittlere Qualitätswert der Kartierung. Es
+handelt sich um einen Phred-Score, wie er auch in der FASTQ-Datei für jedes
+Nukleotid verwendet wird. Hier ist der Score jedoch nicht pro Nukleotid, sondern
+pro Read und stellt die Wahrscheinlichkeit der Mapping-Qualität dar.</li>
+      <li>Die Insertgröße ist der Abstand zwischen den beiden Reads in den Paaren.</li>
+      <li>Um die Informationen zu erhalten:
+        <ol>
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.2+galaxy2" title="Filter BAM tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter BAM</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.5.2+galaxy2)</span> mit einem Filter, um nur die Reads mit einer Mappingqualität &gt;= 20 zu behalten</li>
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.5" title="Samtools Stats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools Stats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.5)</span> auf die Ausgabe von <strong>Filter</strong></li>
+        </ol>
+
+        <p>Vor der Filterung: 95.412 Reads und nach der Filterung: 89.664 Reads.</p>
+      </li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h1 id="visualisierung-mit-einem-genom-browser">Visualisierung mit einem Genom-Browser</h1>
+
+<h2 id="igv">IGV</h2>
+
+<p>Der Integrative Genomics Viewer (IGV) ist ein hochleistungsfähiges Visualisierungstool
+für die interaktive Erkundung großer, integrierter Genomdatensätze. Es unterstützt eine
+Vielzahl von Datentypen, einschließlich array-basierter und Next-Generation-Sequenzdaten
+sowie genomische Annotationen. Im Folgenden werden wir es verwenden, um die gemappten
+Reads zu visualisieren.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualisierung-der-reads-in-igv"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Visualisierung der Reads in IGV</div>
+
+  <p>Es gibt zwei Möglichkeiten, es auszuführen:</p>
+
+  <ol>
+    <li>Wenn Sie IGV installiert haben (oder es installieren wollen):
+      <ol>
+        <li>Installieren Sie <a href="https://software.broadinstitute.org/software/igv/download">IGV</a></li>
+        <li>Starten Sie IGV auf Ihrem Computer</li>
+        <li>Erweitern Sie die <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> Ausgabe von <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>Klicken Sie auf das <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV</code>, um die Reads in den IGV-Browser zu laden</li>
+      </ol>
+    </li>
+    <li>Wenn Sie nicht über IGV verfügen
+      <ol>
+        <li>Klicken Sie auf <code class="language-plaintext highlighter-rouge">Mouse mm10</code> (oder den richtigen Organismus) in <code class="language-plaintext highlighter-rouge">display with IGV</code>, um die Reads in den IGV-Browser zu laden</li>
+      </ol>
+    </li>
+    <li>Zoom auf die <code class="language-plaintext highlighter-rouge">chr2:98,666,236-98,667,473</code></li>
+  </ol>
+</blockquote>
+
+<p>Die Reads haben eine Richtung: Sie werden auf den Vorwärts- bzw. Rückwärtsstrang abgebildet. Wenn Sie den Mauszeiger über einen Read bewegen, werden zusätzliche Informationen angezeigt</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+  <ol>
+    <li>Was könnte es bedeuten, wenn ein Balken in der Abdeckungsansicht farbig ist?</li>
+    <li>Was könnte der Grund dafür sein, dass eine Anzeige weiß statt grau ist?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Wenn ein Nukleotid in mehr als 20% der qualitätsgewichteten Reads von der Referenzsequenz abweicht, färbt IGV den Balken im Verhältnis zur Anzahl der Reads jeder Base.</li>
+      <li>Sie haben eine Abbildungsqualität gleich Null. Die Interpretation dieser Mapping-Qualität hängt vom Mapping-Aligner ab, da einige häufig verwendete Aligner diese Konvention verwenden, um einen Read mit mehreren Alignments zu markieren. In einem solchen Fall wird der Read auch auf eine andere Stelle mit gleich guter Platzierung abgebildet. Es ist auch möglich, dass der Read nicht eindeutig platziert werden kann, aber die anderen Platzierungen nicht unbedingt gleichwertige Treffer ergeben.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-tipps-für-igv"><i class="far fa-comment-dots" aria-hidden="true" ></i> Kommentar: Tipps für IGV</div>
+  <ol>
+    <li>Da die Anzahl der Reads in einer Region recht groß sein kann, zeigt der IGV-Browser standardmäßig nur die Reads an, die in ein kleines Fenster fallen. Dieses Verhalten kann im IGV von <code class="language-plaintext highlighter-rouge">view &gt; Preferences &gt; Alignments</code> geändert werden.</li>
+    <li>
+      <p>Wenn das Genom, das Sie interessiert, dort nicht zu finden ist, überprüfen Sie, ob es über <strong>More…</strong> verfügbar ist. Wenn dies nicht der Fall ist, können Sie es manuell über das Menü <strong>Genome</strong> -&gt; <strong>Genom laden von…</strong> hinzufügen</p>
+
+      <p><img src="../../images/igv_select_genome.png" alt="Genom in IGV auswählen" title="Genom in IGV auswählen" /></p>
+    </li>
+  </ol>
+
+  <p>Eine allgemeine Beschreibung der Benutzeroberfläche des IGV-Browsers finden Sie hier: <a href="/training-material/topics/introduction/tutorials/igv-introduction/tutorial.html">IGV Browser Beschreibung</a></p>
+</blockquote>
+
+<h2 id="jbrowse">JBrowse</h2>
+
+<p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy0" title="JBrowse tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>JBrowse</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.16.11+galaxy0)</span>
+ist ein alternativer, webbasierter Genombrowser. Während IGV eine Software ist, die Sie
+herunterladen und ausführen müssen, sind JBrowse-Instanzen online gehostete Websites,
+die eine Schnittstelle zum Durchsuchen von Genomdaten bieten. Wir werden es verwenden,
+um die gemappten Reads zu visualisieren.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-visualisierung-der-reads-in-jbrowse"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Visualisierung der Reads in JBrowse</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1" title="JBrowse tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>JBrowse</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.16.11+galaxy1)</span> browser, mit den folgenden Parametern:
+      <ul>
+        <li><em>“Referenzgenom zur Anzeige “</em>: Verwenden Sie ein eingebautes Genom
+          <ul>
+            <li><em>“Wählen Sie ein Referenzgenom “</em>: <code class="language-plaintext highlighter-rouge">mm10</code></li>
+          </ul>
+        </li>
+        <li><em>“JBrowse-in-Galaxy Action “</em>: <code class="language-plaintext highlighter-rouge">New JBrowse Instance</code></li>
+        <li><em>“Insert Track Group “</em>:
+          <ul>
+            <li><em>“Insert Annotation Track “</em>:
+              <ul>
+                <li><em>“Track Type “</em>: BAM Pileups</li>
+                <li><em>“BAM Track Data “</em>: <code class="language-plaintext highlighter-rouge">aligned reads</code> (Ausgabe von <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><em>“Autogenerate SNP Track “</em>: Ja</li>
+                <li><em>“Track Visibility “</em>: Ein für neue Benutzer</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Visualisieren Sie den Datensatz <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span></li>
+    <li>Zoom auf die <code class="language-plaintext highlighter-rouge">chr2:98,666,236-98,667,473</code></li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-langsam"><i class="far fa-comment-dots" aria-hidden="true" ></i> Kommentar: Langsam</div>
+  <p>Die Ausführung kann je nach den Ressourcen Ihrer Trainingsinstanz ein bis zwei Minuten dauern. Der Server baut eine kleine Website für Sie auf und bereitet das Referenzgenom in einem effizienteren Format vor. Wenn Sie dies mit Ihren Kollegen teilen möchten, können Sie diesen Datensatz herunterladen und direkt auf Ihren Webserver stellen.</p>
+</blockquote>
+
+<p>Die Reads haben eine Richtung: Sie werden auf den Vorwärts- bzw. Rückwärtsstrang abgebildet. Wenn Sie auf einen Read klicken, werden zusätzliche Informationen angezeigt</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+  <ol>
+    <li>Was bedeuten die Tropfenform und die Linie in der automatisch generierten SNP-Spur?</li>
+    <li>Was bedeuten unterschiedlich gefärbte Reads?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Wenn genügend Reads einen anderen Wert haben, wird dieser mit einem Tränensymbol markiert. Der Coverage Plot wird in der Höhe mit dem Prozentsatz der Reads mit einem anderen Call an dieser Position markiert</li>
+      <li>
+        <p>Farbcodes:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Colour</th>
+              <th>Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><i style="background:#ec8b8b">     </i> Original red</td>
+              <td>Forward strand</td>
+            </tr>
+            <tr>
+              <td><i style="background:#8f8fd8">     </i> Original blue</td>
+              <td>Reverse strand</td>
+            </tr>
+            <tr>
+              <td><i style="background:#d11919">     </i> Hard red</td>
+              <td>Forward strand, missing mate</td>
+            </tr>
+            <tr>
+              <td><i style="background:#1919d1">     </i> Hard Blue</td>
+              <td>Reverse strand, missing mate</td>
+            </tr>
+            <tr>
+              <td><i style="background:#ecc8c8">     </i> Light red</td>
+              <td>Forward strand not proper</td>
+            </tr>
+            <tr>
+              <td><i style="background:#bebed8">     </i> Light blue</td>
+              <td>Reverse strand, not proper</td>
+            </tr>
+            <tr>
+              <td><i style="background:#000000">     </i> Black</td>
+              <td>Forward, diff chr</td>
+            </tr>
+            <tr>
+              <td><i style="background:#969696">     </i> Grey</td>
+              <td>Reverse, diff chr</td>
+            </tr>
+            <tr>
+              <td><i style="background:#999999">     </i> Grey</td>
+              <td>No strand</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h1 id="schlussfolgerung">Schlussfolgerung</h1>
+
+<p>Nach der Qualitätskontrolle ist das Mapping ein wichtiger Schritt bei den meisten
+Analysen von Sequenzierungsdaten (RNA-Seq, ChIP-Seq usw.), um festzustellen, wo im Genom
+unsere Reads herkommen, und diese Information für nachgeschaltete Analysen zu nutzen.</p>
+
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>Du hast das Tutorial abgeschlossen</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">Ich habe dieses Tutorial abgeschlossen 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Zusammenfassung</div>
+                    <ul>
+                        
+                        <li><p>Kenne deine Daten!</p>
+</li>
+                        
+                        <li><p>Mapping ist nicht trivial</p>
+</li>
+                        
+                        <li><p>Es gibt viele Mapping‑Algorithmen, abhängig von deinen Daten musst du den passenden wählen</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Häufig gestellte Fragen</h1>
+                 Fragen zu diesem Tutorial? Schau auf die verfügbaren FAQ-Seiten und Support-Kanäle
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/sequence-analysis/faqs/">Thema  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/sequence-analysis#references">here</a>.</p>
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Feedback Möglichkeit für Lehrende: <a href="https://github.com/galaxyproject/training-material/issues/1452">Wie lief dein Kurs</a>.
+                <br>Für Kursteilnehmer/-innen oder Studierende: Über Rückmeldung durch das untenstehende Formular würden wir uns freuen.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=sequence-analysis/mapping:de"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=sequence-analysis/mapping:de">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Dieses Tutorial zitieren</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Joachim Wolff, Bérénice Batut, Helena Rasche,  <b>Mapping (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_DE.html">https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_DE.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{sequence-analysis-mapping,
+author = "Joachim Wolff and Bérénice Batut and Helena Rasche",
+	title = "Mapping (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_DE.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Förderung</h2>
+		<p>Diese Personen oder Organisationen unterstützten die Entwicklung dieser Quelle finanziell.</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/unimelb/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/unimelb_Logo_RGB.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">The University of Melbourne</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/melbournebioinformatics/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/Melbourne-Bioinformatics-logo.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Melbourne Bioinformatics</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/AustralianBioCommons/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/Australian-Biocommons-Favicon-RGB.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Australian BioCommons</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+	<a href="/training-material/hall-of-fame/biont/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/assets/images/BioNT_Logo.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">BioNT</div>
+			<div class="description">
+			Co-funded by the European Union
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Herzlichen Glückwunsch zum erfolgreichen Abschluss dieses Tutorials!
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <div class="box-title">Möchtest Du dein Wissen erweitern?</div>
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Mach eines unserer empfohlenen Folgetrainings:</strong>
+                    <ul>
+                        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Reference-based RNA-Seq data analysis</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/epigenetics/tutorials/formation_of_super-structures_on_xi/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Formation of the Super-Structures on the Inactive X</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/epigenetics/tutorials/formation_of_super-structures_on_xi/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Formation of the Super-Structures on the Inactive X</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+                    </ul>
+                </blockquote>
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/mapping/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: trim_galore
+  owner: bgruening
+  revisions: 949f01671246
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bamtools_filter
+  owner: devteam
+  revisions: cb20f99fd45b
+  tool_panel_section_label: SAM/BAM
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bamtools_filter
+  owner: devteam
+  revisions: 993b19f20c76
+  tool_panel_section_label: SAM/BAM
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bowtie2
+  owner: devteam
+  revisions: f76cbb84d67f
+  tool_panel_section_label: Mapping
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: fastqc
+  owner: devteam
+  revisions: e7b2202befea
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: samtools_stats
+  owner: devteam
+  revisions: 24c5d43cb545
+  tool_panel_section_label: SAM/BAM
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: samtools_stats
+  owner: devteam
+  revisions: 541082d03bef
+  tool_panel_section_label: SAM/BAM
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: samtools_stats
+  owner: devteam
+  revisions: 57934e90e27c
+  tool_panel_section_label: SAM/BAM
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: jbrowse
+  owner: iuc
+  revisions: 4542035c1075
+  tool_panel_section_label: Graph/Display Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: jbrowse
+  owner: iuc
+  revisions: a6e57ff585c0
+  tool_panel_section_label: Graph/Display Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: multiqc
+  owner: iuc
+  revisions: c1a4b5f3b432
+  tool_panel_section_label: Quality Control
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>Es wurde noch kein Feedback für diese Training abgegeben. Seien der Erste und füllen  das Feedback-Formular aus. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/sequence-analysis/tutorials/mapping/tutorial_DE.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/sequence-analysis/tutorials/mapping/tutorial_DE.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/784be96b6f5987a69d090be56c3e35b8ea9d7329">784be96</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+
+    </body>
+</html>

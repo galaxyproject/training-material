@@ -1,0 +1,2249 @@
+<!DOCTYPE html>
+<html lang="de" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Lernen über ein Gen über biologische Ressourcen und Formate hinweg / Learning about one gene across biological resources and formats / Foundations of Data Science</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@784be96b6f5987a69d090be56c3e35b8ea9d7329",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/online-resources-gene/tutorial_DE.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Lernen über ein Gen über biologische Ressourcen und Formate hinweg">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-03-09 14:19:04 +0000">
+<meta name="DC.creator" content="Lisanna Paladin">
+<meta name="DC.creator" content="Bérénice Batut">
+<meta name="DC.creator" content="Teresa Müller"><meta name="description" content="These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Foundations of Data Science / Learning about one gene across biological resources and formats / Hands-on: Lernen über ein Gen über biologische Ressourcen und Formate hinweg">
+        <meta property="og:description" content="These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/data-science/tutorials/online-resources-gene/tutorial_DE.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Lernen über ein Gen über biologische Ressourcen und Formate hinweg",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Draft",
+  "dateModified": "2026-03-09 14:19:04 +0000",
+  "datePublished": "2026-03-09 14:19:04 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "101100604",
+      "url": "https://cordis.europa.eu/project/id/101100604",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "BioNT",
+        "description": "Co-funded by the European Union\n",
+        "url": "https://biont-training.eu/",
+        "logo": "/training-material/assets/images/BioNT_Logo.png"
+      }
+    }
+  ],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+  },
+  "abstract": "Wenn wir eine bioinformatische Analyse durchführen, z. B. RNA-seq, erhalten wir möglicherweise eine Liste von Gennamen. Dann müssen wir diese Gene untersuchen. Aber wie können wir das tun? Welche Ressourcen stehen dafür zur Verfügung? Und wie kann man durch sie navigieren?",
+  "description": "## Abstract\n\nWenn wir eine bioinformatische Analyse durchführen, z. B. RNA-seq, erhalten wir möglicherweise eine Liste von Gennamen. Dann müssen wir diese Gene untersuchen. Aber wie können wir das tun? Welche Ressourcen stehen dafür zur Verfügung? Und wie kann man durch sie navigieren?\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": null,
+    "alternateName": "de"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lisanna/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lisanna/",
+      "name": "Lisanna Paladin",
+      "image": "https://avatars.githubusercontent.com/lisanna",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/embl-ebi/",
+          "name": "European Bioinformatics Institute",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.ebi.ac.uk"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deKCD/",
+          "name": "German Competence Center Cloud Technologies for Data Management and Processing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://datenkompetenz.cloud"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biont/",
+          "name": "BioNT",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biont-training.eu/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0011-9397",
+      "@id": "https://orcid.org/0000-0003-0011-9397"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "@id": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/teresa-m/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/teresa-m/",
+      "name": "Teresa Müller",
+      "image": "https://avatars.githubusercontent.com/teresa-m",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biont/",
+          "name": "BioNT",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biont-training.eu/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1252-9684",
+      "@id": "https://orcid.org/0000-0003-1252-9684"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Tillsa/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Tillsa/",
+      "name": "Till Sauerwein",
+      "image": "https://avatars.githubusercontent.com/Tillsa",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biont/",
+          "name": "BioNT",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biont-training.eu/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/unode/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/unode/",
+      "name": "Renato Alves",
+      "image": "https://avatars.githubusercontent.com/unode",
+      "description": "Bioinformatics Community Manager at EMBL",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/embl/",
+          "name": "European Molecular Biology Laboratory",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.embl.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biont/",
+          "name": "BioNT",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biont-training.eu/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7212-0234",
+      "@id": "https://orcid.org/0000-0002-7212-0234"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3372",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3372",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3372"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/blast",
+      "name": "BLAST"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/8304465",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/online-resources-gene/tutorial_DE.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/online-resources-gene/tutorial_DE.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-data-science">
+    <h1 data-toc-skip>Lernen über ein Gen über biologische Ressourcen und Formate hinweg</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Autoren</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/lisanna/" class="contributor-badge contributor-lisanna"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/lisanna?s=36" alt="Lisanna Paladin avatar" width="36" class="avatar" />
+    Lisanna Paladin</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a><a href="/training-material/hall-of-fame/teresa-m/" class="contributor-badge contributor-teresa-m"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/teresa-m?s=36" alt="Teresa Müller avatar" width="36" class="avatar" />
+    Teresa Müller</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people did the translation and localisation of this text.">Übersetzer</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/Tillsa/" class="contributor-badge contributor-Tillsa"><img src="https://avatars.githubusercontent.com/Tillsa?s=36" alt="Till Sauerwein avatar" width="36" class="avatar" />
+    Till Sauerwein</a><a href="/training-material/hall-of-fame/unode/" class="contributor-badge contributor-unode"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/unode?s=36" alt="Renato Alves avatar" width="36" class="avatar" />
+    Renato Alves</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Überblick</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Fragen:</strong>
+        <ul>
+        
+        <li><p>Wie kann man bioinformatische Ressourcen nutzen, um eine bestimmte Proteinfamilie (Opsine) zu untersuchen?</p>
+</li>
+        
+        <li><p>Wie navigiert man im Genome Data Viewer, um Opsine im menschlichen Genom zu finden?</p>
+</li>
+        
+        <li><p>Wie identifiziert man Gene, die mit Opsinen assoziiert sind, und analysiert ihre Chromosomenlage?</p>
+</li>
+        
+        <li><p>Wie erkundet man Literatur und klinische Kontexte für das Gen OPN1LW?</p>
+</li>
+        
+        <li><p>Wie nutzt man Proteinsequenzdateien für Ähnlichkeitssuchen mittels BLAST?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Lernziele: </strong>
+        <ul>
+        
+        <li><p>Ausgehend von einer Textsuche mehrere Webressourcen anzusteuern, um verschiedene Arten von Informationen über ein Gen zu untersuchen, dargestellt in verschiedenen Dateiformaten.</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Geschätzte Bearbeitungszeit:</strong> 1 Stunde</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Einsteiger <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Unterstützende Materialien:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/data-science/tutorials/online-resources-gene/slides.html" title="Slides for this tutorial">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Folien
+                </a></li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/8304465">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datensätze
+</a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Verfügbar auf diesen Galaxy-Instanzen 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr/" title="">
+			UseGalaxy.fr <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org (Main) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+	<li>
+		<a class="dropdown-item" href="https://galaxy.mesocentre.uca.fr" title="">
+			Galaxy@AuBi <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
+			UseGalaxy.be <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.cz/" title="">
+			UseGalaxy.cz <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://galaxy.pasteur.fr/" title="">
+			Galaxy@Pasteur
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://galaxytrakr.org/" title="">
+			GalaxyTrakr
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://mississippi.sorbonne-universite.fr" title="">
+			MISSISSIPPI
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="http://pepsimili.e-nios.com:8080/" title="">
+			PepSimili
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.no/" title="">
+			UseGalaxy.no
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Veröffentlicht:</strong> Mar 9, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Letzte Änderung:</strong> Mar 9, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> Lizenz:</strong>
+		
+            Der Inhalt des Tutorials ist lizenziert unter der
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            Das GTN Framework ist lizenziert unter <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Überarbeitung:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Wenn wir eine bioinformatische Analyse durchführen, z. B. RNA-seq, erhalten wir möglicherweise eine Liste von Gennamen. Dann müssen wir diese Gene untersuchen. Aber wie können wir das tun? Welche Ressourcen stehen dafür zur Verfügung? Und wie kann man durch sie navigieren?</p>
+
+<p>Ziel dieses Tutoriums ist es, sich damit am Beispiel der menschlichen Opsine vertraut zu machen.</p>
+
+<p>Menschliche Opsine befinden sich in den Zellen der Netzhaut. Opsine fangen Licht ein und setzen die Signalfolge in Gang, die zum Sehen führt. Wir werden Fragen über Opsine und Opsin-Gene stellen und dann verschiedene bioinformatische Datenbanken und Ressourcen nutzen, um sie zu beantworten.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Kommentar</div>
+  <p>Dieses Tutorial ist ein wenig untypisch: Wir werden nicht in Galaxy arbeiten, sondern hauptsächlich außerhalb, indem wir Datenbanken und Tools über ihre eigenen Webschnittstellen navigieren. Das Ziel dieses Tutorials ist es, verschiedene Quellen für biologische Daten in unterschiedlichen Dateiformaten und mit unterschiedlichen Informationen zu veranschaulichen.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In diesem Tutorium werden wir uns mit:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#suche-nach-humanen-opsinen" id="markdown-toc-suche-nach-humanen-opsinen">Suche nach humanen Opsinen</a></li>
+  <li><a href="#suche-nach-weiteren-informationen-über-unser-gen" id="markdown-toc-suche-nach-weiteren-informationen-über-unser-gen">Suche nach weiteren Informationen über unser Gen</a>    <ol>
+      <li><a href="#literatur" id="markdown-toc-literatur">Literatur</a></li>
+      <li><a href="#klinisch" id="markdown-toc-klinisch">Klinisch</a></li>
+      <li><a href="#protein" id="markdown-toc-protein">Protein</a></li>
+    </ol>
+  </li>
+  <li><a href="#suche-nach-sequenz" id="markdown-toc-suche-nach-sequenz">Suche nach Sequenz</a></li>
+  <li><a href="#mehr-informationen-über-unser-protein" id="markdown-toc-mehr-informationen-über-unser-protein">Mehr Informationen über unser Protein</a></li>
+</ol>
+</blockquote>
+
+<h1 id="suche-nach-humanen-opsinen">Suche nach humanen Opsinen</h1>
+
+<p>Um nach menschlichen Opsinen zu suchen, beginnen wir mit dem <a href="https://www.ncbi.nlm.nih.gov/genome/gdv">NCBI Genome Data Viewer</a>. Der NCBI Genome Data Viewer (GDV) (<span class="citation"><a href="#rangwala2021accessing">Rangwala <i>et al.</i> 2021</a></span>) ist ein Genom-Browser, der die Erforschung und Analyse von annotierten eukaryotischen Genomassemblies unterstützt. Der GDV-Browser zeigt biologische Informationen an, die einem Genom zugeordnet sind, einschließlich Genannotation, Variationsdaten, BLAST-Alignments und experimentelle Studiendaten aus den Datenbanken NCBI GEO und dbGaP. In den GDV-Versionshinweisen werden neue Funktionen für diesen Browser beschrieben.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-öffnen-des-ncbi-genome-data-viewer"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Öffnen des NCBI Genome Data Viewer</div>
+
+  <ol>
+    <li>Öffnen Sie den NCBI Genome Data Viewer unter <a href="https://www.ncbi.nlm.nih.gov/genome/gdv/">www.ncbi.nlm.nih.gov/genome/gdv</a></li>
+  </ol>
+
+</blockquote>
+
+<p>Die Homepage enthält einen einfachen “Baum des Lebens”, in dem der menschliche Knoten hervorgehoben ist, weil er der Standardorganismus für die Suche ist. Wir können das im Feld <em>Organismen suchen</em> ändern, aber wir lassen das vorerst, da wir an menschlichen Opsinen interessiert sind.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="./images/GenomeDataViewerpage.png" alt="Bildschirmfoto der Startseite des Genome Data Viewer, das Wort &quot;opsin&quot; wird in das Suchfeld geschrieben und das Ergebnis wird in der Vorschau angezeigt. " width="2880" height="3366" loading="lazy" /><a target="_blank" href="./images/GenomeDataViewerpage.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Abbildung 1</strong>:</span> Genome Data Viewer Startseite</figcaption></figure>
+
+<p>Das Feld auf der rechten Seite zeigt mehrere Zusammenstellungen des Genoms von Interesse und eine Karte der Chromosomen in diesem Genom. Dort können wir nach Opsinen suchen.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-suche-nach-opsinsopen-ncbi-genome-data-viewer"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Suche nach OpsinsOpen NCBI Genome Data Viewer</div>
+
+  <ol>
+    <li>Geben Sie <code class="language-plaintext highlighter-rouge">opsin</code> in das Feld <em>Suche im Genom</em> ein</li>
+    <li>Klicken Sie auf das Lupensymbol oder drücken Sie <kbd>Eingabe<kbd></kbd></kbd></li>
+  </ol>
+
+</blockquote>
+
+<p>Unterhalb des Kastens wird nun eine Tabelle mit Genen, die mit Opsin verwandt sind, zusammen mit ihren Namen und ihrer Lage, d.h. der Chromosomennummer, sowie der Anfangs- und Endposition angezeigt</p>
+
+<p>In der Liste der Gene, die mit dem Suchbegriff Opsin in Verbindung stehen, befinden sich das Rhodopsin-Gen (RHO) und drei Zapfenpigmente, kurz-, mittel- und langwellensensitive Opsine (für die Erkennung von blauem, grünem und rotem Licht). Es gibt noch weitere Einheiten, z. B. eine -LCR (Locus Control Region), mutmaßliche Gene und Rezeptoren.</p>
+
+<p>Mehrere Treffer befinden sich auf dem X-Chromosom, einem der geschlechtsbestimmenden Chromosomen.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+  <ol>
+    <li>Wie viele Gene wurden auf dem Chromosom X gefunden?</li>
+    <li>Wie viele proteinkodierende Gene gibt es?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Die Treffer in ChrX sind:
+        <ul>
+          <li>OPSIN-LCR</li>
+          <li>OPN1LW</li>
+          <li>OP1MW</li>
+          <li>OPN1MW2</li>
+          <li>OPN1MW3</li>
+        </ul>
+      </li>
+      <li>Wenn wir mit dem Mauszeiger über jedes Gen fahren, öffnet sich ein Kasten, und wir können auf <em>Details</em> klicken, um mehr über jedes Gen zu erfahren. Dann erfahren wir, dass das erste (OPSIN-LCR) nicht proteincodierend ist, sondern eine Genregulationsregion darstellt und die anderen proteincodierende Gene sind. Es gibt also 4 proteinkodierende Gene für Opsine auf Chromosom X. Insbesondere enthält Chromosom X ein rotes Pigmentgen (OPN1LW) und drei grüne Pigmentgene (OPN1MW, OPN1MW2 und OPN1MW3 in der Referenzgenomeinheit).</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<p>Konzentrieren wir uns nun auf ein bestimmtes Opsin, das Gen OPN1LW.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-open-genome-browser-für-das-gen-opn1lw"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Open Genome Browser für das Gen OPN1LW</div>
+
+  <ol>
+    <li>Klicken Sie auf den blauen Pfeil, der in der Ergebnistabelle erscheint, wenn Sie mit der Maus über die Zeile OPN1LW fahren</li>
+  </ol>
+
+</blockquote>
+
+<p>Sie sollten auf <a href="https://www.ncbi.nlm.nih.gov/genome/gdv/browser/genome/?id=GCF_000001405.40">dieser Seite</a> gelandet sein, das ist die Genomansicht des Gens OPN1LW.</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="./images/GenomeDataViewerofgeneOPN1LW.png" alt="Genomdaten-Viewer des Gens OPN1LW, Screenshot der beiden Hauptfenster des Viewers, mit Chromosomen auf der linken Seite und dem Feature-Viewer auf der rechten Seite. " width="2840" height="1404" loading="lazy" /><a target="_blank" href="./images/GenomeDataViewerofgeneOPN1LW.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Abbildung 2</strong>:</span> Genomdaten-Viewer des Gens OPN1LW</figcaption></figure>
+
+<p>Es gibt viele Informationen auf dieser Seite, konzentrieren wir uns momentan auf einen Abschnitt.</p>
+
+<ol>
+  <li>Der Genomdaten-Viewer, oben, sagt uns, dass wir die Daten des Organismus <code class="language-plaintext highlighter-rouge">Homo sapiens</code>, der Assemblierung <code class="language-plaintext highlighter-rouge">GRCh38.p14</code> und insbesondere von <code class="language-plaintext highlighter-rouge">Chr X</code> (Chromosom X) betrachten. Jede dieser Informationen hat eine eindeutige ID.</li>
+  <li>Das gesamte Chromosom ist direkt darunter dargestellt, und die Positionen entlang der kurzen <code class="language-plaintext highlighter-rouge">p</code> und langen <code class="language-plaintext highlighter-rouge">q</code> Arme sind hochgestellt.</li>
+  <li>
+    <p>Ein blauer Kasten unterstreicht, dass wir uns jetzt auf die Region konzentrieren, die dem Gen <code class="language-plaintext highlighter-rouge">OPN1LW</code> entspricht.</p>
+
+    <p>Es gibt mehrere Möglichkeiten, mit dem Viewer unten zu interagieren. Versuchen Sie zum Beispiel, mit der Maus über die Punkte zu fahren, die Exons in der blauen Box darstellen.</p>
+  </li>
+  <li>
+    <p>In der nachstehenden Grafik ist die Gensequenz als grüne Linie dargestellt, die Exons (proteincodierende Fragmente) sind durch grüne Rechtecke gekennzeichnet.</p>
+
+    <p>Fahren Sie mit der Maus über die grüne Linie, die <code class="language-plaintext highlighter-rouge">NM_020061.6</code> (unser Gen von Interesse) entspricht, um genauere Informationen zu erhalten.</p>
+
+    <blockquote class="question">
+      <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+      <ol>
+        <li>An welcher Stelle befindet sich das OPN1LW-Segment?</li>
+        <li>Wie lang ist das OPN1LW-Segment?</li>
+        <li>Was sind Introns und Exons?</li>
+        <li>Wie viele Exons und Introns befinden sich im OPN1LW-Gen?</li>
+        <li>Wie lang ist der kodierende Bereich insgesamt?</li>
+        <li>Wie ist die Verteilung zwischen kodierenden und nicht kodierenden Regionen? Was bedeutet das in Bezug auf die Biologie?</li>
+        <li>Wie lang ist die Länge des Proteins in Anzahl der Aminosäuren?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <ol>
+          <li>Von 154.144.243 bis 154.159.032</li>
+          <li>1.4790 Nukleotide, gefunden bei <em>Span auf 14790 nt, Nukleotide)</em></li>
+          <li>Eukaryotische Gene sind oft durch nicht-kodierende Regionen unterbrochen, die als Intervallsequenzen oder Introns bezeichnet werden. Die kodierenden Bereiche werden Exons genannt.</li>
+          <li>Aus diesem Diagramm kann man erkennen, dass das OPN1LW-Gen aus 6 Exons und 5 Introns besteht und dass die Introns viel größer sind als die Exons.</li>
+          <li>Die CDS-Länge beträgt 1.095 Nukleotide.</li>
+          <li>Von den 14790 nt des Gens kodieren nur 1095 nt für ein Protein, was bedeutet, dass weniger als 8 % der Basenpaare den Code enthalten. Wenn dieses Gen in Zellen der menschlichen Netzhaut exprimiert wird, wird eine RNA-Kopie des gesamten Gens synthetisiert. Dann werden die Intron-Regionen herausgeschnitten und die Exon-Regionen zusammengefügt, um die reife mRNA zu erzeugen (ein Prozess, der als Spleißen bezeichnet wird), die dann von den Ribosomen bei der Herstellung des roten Opsin-Proteins übersetzt wird. In diesem Fall werden 92 % des ursprünglichen RNA-Transkripts herausgeschnitten, so dass der reine Proteincode übrig bleibt.</li>
+          <li>Die Länge des resultierenden Proteins beträgt 364 aa, Aminosäuren.</li>
+        </ol>
+      </blockquote>
+    </blockquote>
+  </li>
+</ol>
+
+<p>Aber wie lautet die Sequenz dieses Gens? Es gibt mehrere Möglichkeiten, diese Information zu erhalten, wir werden eine der intuitivsten durchgehen.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-open-genome-browser-für-das-gen-opn1lw-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Open Genome Browser für das Gen OPN1LW</div>
+
+  <ol>
+    <li>Klicken Sie auf den <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>Werkzeuge</em> oben rechts in der Box, die das Gen</li>
+    <li>Klicken Sie auf <em>Sequence Text View</em></li>
+  </ol>
+</blockquote>
+
+<p>Diese Tafel zeigt die DNA-Sequenz der Introns (in grün), sowie die der Exons (in rosa, einschließlich der übersetzten Proteinsequenz unten).</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="./images/SequenceTextView.png" alt="Screenshot der Sequenzansicht der NHI-Ressource, Text ist in verschiedenen Farben hervorgehoben. " width="2860" height="1416" loading="lazy" /><a target="_blank" href="./images/SequenceTextView.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Abbildung 3</strong>:</span> Sequence Text View</figcaption></figure>
+
+<p>Diese Sequenzbox zeigt im Moment nicht das gesamte Gen, sondern eine Teilsequenz davon. Mit den Pfeilen <em>Prev Page</em> und <em>Next Page</em> können Sie sich im genetischen Code stromaufwärts und stromabwärts bewegen oder mit der Schaltfläche <em>Go To Position</em> an einer bestimmten Stelle beginnen. Wir schlagen vor, mit dem Anfang des kodierenden Teils des Gens zu beginnen, der sich, wie wir bereits gelernt haben, an Position 154,144,243 befindet.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-zu-einer-bestimmten-position-in-der-sequenzansicht-gehen"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Zu einer bestimmten Position in der Sequenzansicht gehen</div>
+
+  <ol>
+    <li>Klicken Sie auf <em>Zur Position gehen</em></li>
+    <li>
+      <p>Tippen Sie auf <code class="language-plaintext highlighter-rouge">154144243</code></p>
+
+      <p>Wir müssen die Kommas entfernen, um den Wert zu validieren</p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Die hier lila hervorgehobene Sequenz signalisiert eine regulatorische Region.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+  <ol>
+    <li>Wie lautet die erste Aminosäure des entstehenden Proteinprodukts?</li>
+    <li>Welche ist die letzte?</li>
+    <li>Können Sie sich die ersten drei und die letzten drei AAs dieses Proteins merken?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Das entsprechende Protein beginnt mit Methionin, M (das tun sie alle).</li>
+      <li>Das letzte AA des letzten Exons (zu finden auf der 2. Seite) ist Alanin (A). Danach kommt das Stoppcodon TGA, das nicht in eine AA übersetzt wird.</li>
+      <li>Die ersten drei AAs sind: M,A,Q; die letzten drei: S,P,A.</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<p>Wir können jetzt die <em>Sequenzansicht</em> schließen.</p>
+
+<p>Von dieser Ressource können wir auch Dateien in verschiedenen Formaten erhalten, die das Gen beschreiben. Sie sind im Bereich <em>Download</em> verfügbar.</p>
+
+<ol>
+  <li><em>Download FASTA</em> ermöglicht es uns, das einfachste Dateiformat herunterzuladen, um die Nukleotidsequenz des gesamten sichtbaren Bereichs des Genoms darzustellen (länger als nur ein Gen).</li>
+  <li><em>Download GenBank flat file</em> ermöglicht uns den Zugriff auf die auf dieser Seite (und darüber hinaus) verfügbaren Anmerkungen in einem Plaintext-Format.</li>
+  <li><em>Download Track Data</em> ermöglicht es uns, zwei der in den Folien vorgestellten Dateiformate einzusehen: die Formate GFF (GFF3) und BED. Wenn Sie die Tracks ändern, kann es sein, dass die einzelnen Formate nicht mehr verfügbar sind.</li>
+</ol>
+
+<h1 id="suche-nach-weiteren-informationen-über-unser-gen">Suche nach weiteren Informationen über unser Gen</h1>
+
+<p>Verschaffen wir uns nun einen Überblick über die Informationen, die wir (in der Literatur) über unser Gen haben, indem wir die NCBI-Ressourcen nutzen</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-zu-einer-bestimmten-position-in-der-sequenzansicht-gehen-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Zu einer bestimmten Position in der Sequenzansicht gehen</div>
+
+  <ol>
+    <li>Öffnen Sie die NCBI-Suche unter <a href="https://www.ncbi.nlm.nih.gov/search/">www.ncbi.nlm.nih.gov/search</a></li>
+    <li>Geben Sie <code class="language-plaintext highlighter-rouge">OPN1LW</code> in das Suchfeld <em>Search NCBI</em> ein</li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-4" style="max-width: 90%;"><img src="./images/NIHresults.png" alt="Screenshot der NIH-Ergebnisseite, mit Karten namens Literatur, Gene, Proteine, Genome, Klinisch und PubChem. " width="2880" height="3228" loading="lazy" /><a target="_blank" href="./images/NIHresults.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Abbildung 4</strong>:</span> Ergebnisse der Suche nach `OPN1LW` im NCBI</figcaption></figure>
+<p>.</p>
+
+<h2 id="literatur">Literatur</h2>
+
+<p>Beginnen wir mit der Literatur und insbesondere den Ergebnissen von <em>PubMed</em> oder <em>PubMed Central</em></p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-was-ist-der-unterschied-zwischen-pubmed-und-pubmed-central"><button class="gtn-boxify-button details" type="button" aria-controls="details-was-ist-der-unterschied-zwischen-pubmed-und-pubmed-central" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Was ist der Unterschied zwischen PubMed und PubMed Central? </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>PubMed ist eine biomedizinische Literaturdatenbank, die die Zusammenfassungen der Veröffentlichungen in der Datenbank enthält.</p>
+
+  <p>PubMed Central ist ein Volltext-Repositorium, das den Volltext von Veröffentlichungen in der Datenbank enthält.</p>
+
+  <p>Auch wenn die genaue Anzahl der Treffer zeitlich von der obigen Abbildung abweichen kann, sollte jeder Genname in PubMed Central (durchsucht in den Volltexten der Veröffentlichungen) mehr Treffer aufweisen als in PubMed (durchsucht nur in den Abstracts).</p>
+
+</blockquote>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-öffne-pubmed"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Öffne PubMed</div>
+
+  <ol>
+    <li>Klicken Sie auf <em>PubMed</em> im Feld <em>Literature</em></li>
+  </ol>
+
+</blockquote>
+
+<p>Sie haben in PubMed, einer kostenlosen Datenbank für wissenschaftliche Literatur, die Ergebnisse einer vollständigen Suche nach Artikeln eingegeben, die direkt mit diesem Genlocus in Verbindung stehen.</p>
+
+<p>Wenn Sie auf den Titel eines Artikels klicken, können Sie die Kurzfassung des Artikels sehen. Wenn Sie sich auf einem Universitätscampus befinden, wo es einen Online-Zugang zu bestimmten Zeitschriften gibt, sehen Sie möglicherweise auch Links zu vollständigen Artikeln. PubMed ist Ihr Zugang zu einer großen Vielfalt an wissenschaftlicher Literatur im Bereich der Biowissenschaften. Auf der linken Seite jeder PubMed-Seite finden Sie Links zu einer Beschreibung der Datenbank, zur Hilfe und zu Anleitungen für die Suche.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+  <ol>
+    <li>Können Sie erraten, welche Art von Erkrankungen mit diesem Gen verbunden sind?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Wir werden diese Frage später beantworten</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-zurück-zur-ncbi-suchseite"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Zurück zur NCBI-Suchseite</div>
+
+  <ol>
+    <li>Zurück zur <a href="https://www.ncbi.nlm.nih.gov/search/all/?term=OPN1LW">NCBI-Suchseite</a></li>
+  </ol>
+</blockquote>
+
+<h2 id="klinisch">Klinisch</h2>
+
+<p>Konzentrieren wir uns nun auf das Feld <em>Klinisch</em>, und zwar speziell auf <em>OMIM</em>. OMIM, das Online Mendeliam Inheritance in Man (and woman!), ist ein Katalog menschlicher Gene und genetischer Störungen.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-open-omim"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Open OMIM</div>
+
+  <ol>
+    <li>Klicken Sie auf <em>OMIM</em> im Feld <em>Klinisch</em></li>
+  </ol>
+
+</blockquote>
+
+<p>Jeder OMIM-Eintrag steht für eine genetische Störung (hier vor allem Arten von Farbenblindheit), die mit Mutationen in diesem Gen verbunden ist.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-lesen-sie-so-viel-wie-es-ihr-interesse-erfordert"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Lesen Sie so viel, wie es Ihr Interesse erfordert</div>
+
+  <ol>
+    <li>Folgen Sie den Links, um weitere Informationen zu den einzelnen Einträgen zu erhalten</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-lesen-sie-so-viel-wie-es-ihr-interesse-erfordert"><i class="far fa-comment-dots" aria-hidden="true" ></i> Kommentar: Lesen Sie so viel, wie es Ihr Interesse erfordert</div>
+
+  <p>Für weitere Informationen über OMIM selbst klicken Sie bitte auf das OMIM-Logo oben auf der Seite. Über OMIM ist eine Fülle von Informationen zu unzähligen Genen im menschlichen Genom verfügbar, und alle Informationen sind durch Verweise auf die neuesten Forschungsartikel untermauert.</p>
+
+</blockquote>
+
+<p>Wie wirken sich Variationen des Gens auf das Proteinprodukt und seine Funktionen aus? Gehen wir zurück zur NIH-Seite und untersuchen wir die Liste der Einzelnukleotid-Polymorphismen (SNPs), die durch genetische Studien in diesem Gen entdeckt wurden.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-öffne-dbsnp"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Öffne dbSNP</div>
+
+  <ol>
+    <li>Zurück zur <a href="https://www.ncbi.nlm.nih.gov/search/all/?term=OPN1LW">NCBI-Suchseite</a></li>
+    <li>Klicken Sie auf <em>dbSNP</em> im Feld <em>Klinisch</em></li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-5" style="max-width: 90%;"><img src="./images/dbSNPs.png" alt="Screenshot der dbSNPs-Seite über das Gen OPN1LW. Drei Hauptfenster, das linke zum Filtern der Suche anhand von Tags, das mittlere zur Anzeige der Ergebnisse, das rechte für eine detailliertere und programmatische Suche. " width="2370" height="3236" loading="lazy" /><a target="_blank" href="./images/dbSNPs.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Abbildung 5</strong>:</span> dbSNP in OPN1LW</figcaption></figure>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+  <ol>
+    <li>Welche klinische Bedeutung haben die rs5986963 und rs5986964 (die ersten beiden Varianten, die zum Zeitpunkt der Erstellung dieses Tutorials aufgelistet waren)?</li>
+    <li>Was ist die funktionelle Folge von rs104894912?</li>
+    <li>Was ist die funktionelle Folge von rs104894913?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Die klinische Signifikanz ist <code class="language-plaintext highlighter-rouge">benign</code>, so dass es scheint, dass sie keinen Einfluss auf das endgültige Proteinprodukt haben</li>
+      <li>rs104894912-Mutation führt zu einer <code class="language-plaintext highlighter-rouge">stop_gained</code>-Variante, die das resultierende Protein zu früh abschneidet und daher <code class="language-plaintext highlighter-rouge">pathogenic</code> ist</li>
+      <li>rs104894913 Mutation führt zu einem <code class="language-plaintext highlighter-rouge">missense_variant</code>, auch <code class="language-plaintext highlighter-rouge">pathogenic</code>.</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<p>Lassen Sie uns mehr über die Variante rs104894913 herausfinden</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-erfahren-sie-mehr-über-eine-variante-dbsnp"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Erfahren Sie mehr über eine Variante dbSNP</div>
+
+  <ol>
+    <li>Klicken Sie auf <code class="language-plaintext highlighter-rouge">rs104894913</code>, um die dazugehörige Seite zu öffnen (https://www.ncbi.nlm.nih.gov/snp/rs104894913)</li>
+    <li>
+      <p>Klicken Sie auf <em>Clinical Significance</em></p>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+        <p>Welche Art von Erkrankung ist mit der Variante rs104894913 verbunden?</p>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <p>Der Name der damit verbundenen Krankheit ist “Protan-Defekt”. Eine schnelle Internetrecherche mit Ihrer Suchmaschine wird Ihnen zeigen, dass es sich um eine Art von Farbenblindheit handelt.</p>
+
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Klicken Sie auf die <em>Variantendetails</em></p>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+        <ol>
+          <li>Welche Substitution ist mit dieser Variante verbunden?</li>
+          <li>Welche Auswirkung hat diese Substitution auf das Codon und die Aminosäure?</li>
+          <li>An welcher Stelle des Proteins befindet sich diese Substitution?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <ol>
+            <li>Die Substitution <code class="language-plaintext highlighter-rouge">NC_000023.10:g.153424319G&gt;A</code> entspricht dem Wechsel von einem Guanin (G) zu einem Adenin (A)</li>
+            <li>Diese Substitution ändert das Codon <code class="language-plaintext highlighter-rouge">GGG</code>, ein Glycin, in <code class="language-plaintext highlighter-rouge">GAG</code>, ein Glutathion</li>
+            <li><code class="language-plaintext highlighter-rouge">p.Gly338Glu</code> bedeutet, dass sich die Substitution an Position 338 des Proteins befindet.</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Was bedeutet diese Substitution für das Protein? Schauen wir uns dieses Protein einmal genauer an.</p>
+
+<h2 id="protein">Protein</h2>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-protein-öffnen"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Protein öffnen</div>
+
+  <ol>
+    <li>Zurück zur <a href="https://www.ncbi.nlm.nih.gov/search/all/?term=OPN1LW">NCBI-Suchseite</a></li>
+    <li>Klicken Sie auf <em>Protein</em> im Feld <em>Proteine</em></li>
+    <li>Klicken Sie auf <code class="language-plaintext highlighter-rouge">OPN1LW – opsin 1, long wave sensitive</code> in der Box oben</li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-6" style="max-width: 90%;"><img src="./images/Opsin1NIH.png" alt="Screenshot der Opsin 1 NIH-Protein-Seite, zwei Hauptfenster. Die linke Seite enthält Informationen über das Gen, die rechte Seite ist ein Inhaltsverzeichnis und eine Reihe von Links zu anderen Ressourcen. " width="2818" height="1784" loading="lazy" /><a target="_blank" href="./images/Opsin1NIH.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Abbildung 6</strong>:</span> Opsin 1 NIH protein page</figcaption></figure>
+
+<p>Auf dieser Seite werden wieder einige Daten präsentiert, die wir kennen (z. B. die Verteilung der Exons entlang der Gensequenz).</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-download-der-proteinsequenzen"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Download der Proteinsequenzen</div>
+
+  <ol>
+    <li>Klicken Sie auf <em>Download Datasets</em></li>
+    <li>Wählen Sie
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">Gene Sequences (FASTA)</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Transcript sequences (FASTA)</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Protein sequences (FASTA)</code></li>
+      </ul>
+    </li>
+    <li>Klicken Sie auf die Schaltfläche <em>Download</em></li>
+    <li>Öffnen Sie die heruntergeladene ZIP-Datei</li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+  <ol>
+    <li>Was enthält der Ordner?</li>
+    <li>Glauben Sie, dass sie gute Datenpraktiken umgesetzt haben?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Der Ordner enthält
+        <ul>
+          <li>ein Ordner <code class="language-plaintext highlighter-rouge">ncbi_datasets</code> mit verschiedenen Unterordnern darin, die einige Datendateien (mehrere Formate) führen,</li>
+          <li>eine <code class="language-plaintext highlighter-rouge">README.md</code> (eine Markdown-Datei), die zusammen mit den Daten “reisen” soll und erklärt, wie die Daten gewonnen wurden, wie die Struktur des Unterordners, der die Daten enthält, aussieht und wo man eine ausführliche Dokumentation findet.</li>
+        </ul>
+      </li>
+      <li>Es ist auf jeden Fall eine gute Datenverwaltungspraxis, die Benutzer (nicht nur für Ihre Mitarbeiter, sondern auch für Sie selbst in nicht allzu ferner Zukunft, wenn Sie vergessen haben, woher die Datei in Ihrem Download-Ordner stammt) zur Datenquelle und zur Datenstruktur zu führen.</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="suche-nach-sequenz">Suche nach Sequenz</h1>
+
+<p>Was können wir mit den soeben heruntergeladenen Sequenzen tun? Nehmen wir an, dass wir gerade die Transkripte sequenziert haben, die wir durch ein Experiment isoliert haben - wir kennen also die Sequenz der Entität, die uns interessiert, aber wir wissen nicht, um welche es sich handelt. In diesem Fall müssen wir die gesamte Datenbank mit den der Wissenschaft bekannten Sequenzen durchsuchen und unsere unbekannte Entität mit einem Eintrag abgleichen, der eine Annotation enthält. Tun wir es.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-suche-die-proteinsequenz-gegen-alle-proteinsequenzen"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Suche die Proteinsequenz gegen alle Proteinsequenzen</div>
+
+  <ol>
+    <li>Öffnen Sie (mit dem einfachsten Texteditor, den Sie installiert haben) die soeben heruntergeladene Datei <code class="language-plaintext highlighter-rouge">protein.faa</code>.</li>
+    <li>Kopieren Sie den Inhalt</li>
+    <li>Öffnen Sie BLAST <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">blast.ncbi.nlm.nih.gov</a></li>
+    <li>
+      <p>Klicken Sie auf <code class="language-plaintext highlighter-rouge">Protein BLAST, protein &gt; protein</code></p>
+
+      <p>Wir werden in der Tat eine Proteinsequenz verwenden, um eine Datenbank mit Proteinen zu durchsuchen</p>
+    </li>
+    <li>Fügen Sie die Proteinsequenz in das große Textfeld ein</li>
+    <li>Überprüfen Sie die restlichen Parameter</li>
+    <li>Klicken Sie auf die blaue Schaltfläche <code class="language-plaintext highlighter-rouge">BLAST</code></li>
+  </ol>
+</blockquote>
+
+<p>Diese Phase wird einige Zeit in Anspruch nehmen, schließlich gibt es irgendwo einen Server, der die Gesamtheit der bekannten Sequenzen mit Ihrem Ziel vergleicht. Wenn die Suche abgeschlossen ist, sollte das Ergebnis etwa so aussehen wie unten:</p>
+
+<figure id="figure-7" style="max-width: 90%;"><img src="./images/BLASTresults.png" alt="Screenshot der BLAST-Ergebnisse, oben eine große Kopfzeile und unten die Ergebnisse in Tabellenform. " width="2550" height="1898" loading="lazy" /><a target="_blank" href="./images/BLASTresults.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Abbildung 7</strong>:</span> BLAST results</figcaption></figure>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-grafische-zusammenfassung-der-proteinsequenzen"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Grafische Zusammenfassung der Proteinsequenzen</div>
+
+  <ol>
+    <li>Klicken Sie auf die Registerkarte <em>Graphic Summary</em></li>
+  </ol>
+</blockquote>
+
+<p>Wir haben Zugriff auf einen Kasten mit vielen farbigen Linien. Jede Linie steht für einen Treffer aus Ihrer Blast-Suche. Wenn Sie auf eine rote Linie klicken, gibt der schmale Kasten direkt darüber eine kurze Beschreibung des Treffers.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-beschreibungen-der-proteinsequenzen"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Beschreibungen der Proteinsequenzen</div>
+
+  <ol>
+    <li>Klicken Sie auf die Registerkarte <em>Beschreibungen</em></li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+  <ol>
+    <li>Was ist der erste Treffer? Haben Sie ihn erwartet?</li>
+    <li>Was sind die anderen Treffer und für welche Organismen?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Der erste Treffer ist unser rotes Opsin. Das ist ermutigend, denn die beste Übereinstimmung sollte die Abfragesequenz selbst sein, und Sie haben diese Sequenz aus diesem Geneintrag erhalten.</li>
+      <li>Andere Treffer sind andere Opsine. Dazu gehören Einträge von anderen Primaten (z.B. <code class="language-plaintext highlighter-rouge">Pan troglogytes</code>).</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<p>Die Treffer sind für unser rotes Opsin beim Menschen, aber auch für andere Opsine bei anderen Primaten. Das könnte man sich wünschen, wenn man diese Daten zum Beispiel zur Erstellung eines phylogenetischen Baums verwenden will. Wenn wir aber ziemlich sicher sind, dass die Sequenz, die uns interessiert, vom Menschen stammt, können wir die Suche auch nur auf menschliche Sequenzen beschränken.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-filtern-einer-blast-suche"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Filtern einer BLAST-Suche</div>
+
+  <ol>
+    <li>Klicken Sie auf <em>Suche bearbeiten</em></li>
+    <li>Geben Sie <code class="language-plaintext highlighter-rouge">Homo sapiens</code> in das Feld <em>Organismus</em> ein</li>
+    <li>Klicken Sie auf die blaue Schaltfläche <code class="language-plaintext highlighter-rouge">BLAST</code></li>
+  </ol>
+</blockquote>
+
+<p>Mit dieser neuen Suche finden wir die anderen Opsine (grünes, blaues, Stäbchenpigment) in der Liste. Andere Treffer haben eine geringere Anzahl von übereinstimmenden Rückständen. Wenn Sie auf eine der farbigen Linien in der <em>Grafischen Zusammenfassung</em> klicken, erhalten Sie weitere Informationen über diesen Treffer und können sehen, wie ähnlich jeder einzelne dem roten Opsin, unserer ursprünglichen Suchsequenz, ist. Je weiter Sie in der Liste nach unten gehen, desto weniger hat jede nachfolgende Sequenz mit dem roten Opsin gemeinsam. Jede Sequenz wird im Vergleich zu rotem Opsin in einem so genannten paarweisen Sequenzabgleich dargestellt. Später werden Sie mehrere Sequenzalignments erstellen, aus denen Sie die Beziehungen zwischen den Genen erkennen können.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-mehr-details-zu-blast-ergebnissen"><button class="gtn-boxify-button details" type="button" aria-controls="details-mehr-details-zu-blast-ergebnissen" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Mehr Details zu BLAST-Ergebnissen</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>Die Anzeigen enthalten zwei prominente Maße für die Bedeutung des Treffers:</p>
+
+  <ol>
+    <li>
+      <p>der BLAST Score - lableled Score (bits)</p>
+
+      <p>Der BLAST-Score gibt die Qualität des besten Alignments zwischen der Abfragesequenz und der gefundenen Sequenz (Treffer) an. Je höher die Punktzahl, desto besser ist das Alignment. Die Punktzahl wird durch Nichtübereinstimmungen und Lücken im besten Alignment verringert. Die Berechnung des Scores ist komplex und beinhaltet eine Substitutionsmatrix, d. h. eine Tabelle, die jedem Paar von ausgerichteten Resten einen Score zuweist. Die am häufigsten verwendete Matrix für das Protein-Alignment ist BLOSUM62.</p>
+    </li>
+    <li>
+      <p>der Erwartungswert (mit Expect oder E bezeichnet)</p>
+
+      <p>Der Erwartungswert E eines Treffers sagt aus, ob der Treffer wahrscheinlich aus einer zufälligen Ähnlichkeit zwischen Treffer und Abfrage oder aus einer gemeinsamen Abstammung von Treffer und Abfrage resultiert. ()</p>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-filtern-einer-blast-suche"><i class="far fa-comment-dots" aria-hidden="true" ></i> Kommentar: Filtern einer BLAST-Suche</div>
+
+        <p>Wenn E kleiner als \(10\mathrm{e}{-100}\) ist, wird es manchmal als 0,0 angegeben.</p>
+      </blockquote>
+
+      <p>Der Erwartungswert ist die Anzahl der Treffer, die man rein zufällig erwarten würde, wenn man in einem zufälligen Genom von der Größe des menschlichen Genoms nach seiner Sequenz suchen würde.</p>
+
+      <p>\(E = 25\) bedeutet, dass man in einem Genom dieser Größe rein zufällig 25 Treffer erwarten könnte. Ein Treffer mit \(E = 25\) ist also wahrscheinlich ein Zufallstreffer und bedeutet nicht, dass die Treffersequenz eine gemeinsame Abstammung mit Ihrer Suchsequenz hat.</p>
+
+      <p>Erwartungswerte von etwa 0,1 können biologisch signifikant sein oder auch nicht (um dies zu entscheiden, sind weitere Tests erforderlich).</p>
+
+      <p>Aber sehr kleine Werte von E bedeuten, dass der Treffer biologisch signifikant ist. Die Übereinstimmung zwischen Ihrer Suchsequenz und diesem Treffer muss auf eine gemeinsame Abstammung der Sequenzen zurückzuführen sein, denn die Wahrscheinlichkeit ist einfach zu gering, dass die Übereinstimmung zufällig zustande kommt. Zum Beispiel bedeutet \(E = 10\mathrm{e}{-18}\) für einen Treffer im menschlichen Genom, dass man nur eine zufällige Übereinstimmung in einer Milliarde Milliarden verschiedener Genome von der gleichen Größe wie das menschliche Genom erwarten würde.</p>
+
+      <p>Der Grund, warum wir glauben, dass wir alle von gemeinsamen Vorfahren abstammen, ist, dass eine massive Sequenzähnlichkeit in allen Organismen einfach zu unwahrscheinlich ist, um ein zufälliges Ereignis zu sein. Jede Familie ähnlicher Sequenzen in vielen Organismen muss sich aus einer gemeinsamen Sequenz in einem entfernten Vorfahren entwickelt haben.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-entladen"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Entladen</div>
+
+  <ol>
+    <li>Klicken Sie auf die Registerkarte <em>Beschreibungen</em></li>
+    <li>Klicken Sie auf einen beliebigen Sequenztreffer</li>
+    <li>Klicken Sie auf <em>Download</em></li>
+    <li>Wählen Sie <code class="language-plaintext highlighter-rouge">FASTA (aligned sequences)</code></li>
+  </ol>
+</blockquote>
+
+<p>Es wird ein neuer, etwas anderer Dateityp heruntergeladen: eine ausgerichtete FASTA. Wenn Sie möchten, können Sie diese vor dem nächsten Abschnitt untersuchen.</p>
+
+<p>Während wir in den vorangegangenen Abschnitten dieses Tutorials ausgiebig die Webschnittstellen der Tools genutzt haben (Genomic Viewer, schnelles Scannen der Literatur, Lesen von Annotationen usw.), ist diese BLAST-Suche ein Beispiel für einen Schritt, den Sie mit Galaxy vollständig automatisieren könnten.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-ähnlichkeitssuche-mit-blast-in-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung:  Ähnlichkeitssuche mit BLAST in Galaxy</div>
+
+  <ol>
+    <li>
+      <p>Erstellen Sie einen neuen Verlauf für diese Analyse</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-erstellen-eines-neuen-verlaufs"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-erstellen-eines-neuen-verlaufs" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tipp: Erstellen eines neuen Verlaufs</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Um einen neuen Verlauf zu erstellen, klicken Sie einfach auf das Symbol <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> am oberen Rand des Verlaufsfensters:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI zum Erstellen einer neuen Geschichte" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Umbenennen der Historie</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-umbenennen-eines-verlaufs"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-umbenennen-eines-verlaufs" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tipp: Umbenennen eines Verlaufs</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Klicken Sie auf <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Bearbeiten</strong>) neben dem Namen der Geschichte (der standardmäßig “Unbenannte Geschichte” lautet)</li>   <li>Geben Sie den neuen Namen ein</li>   <li>Klicken Sie auf <strong>Speichern</strong></li>   <li>Um die Umbenennung abzubrechen, klicken Sie auf die <i class="fas fa-undo" aria-hidden="true"></i><span class="visually-hidden">galaxy-undo</span> schaltfläche “Abbrechen”</li> </ol>   <p>Wenn Sie nicht das <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) neben dem Verlaufsnamen haben (was der Fall sein kann, wenn Sie eine ältere Version von Galaxy verwenden), gehen Sie wie folgt vor:</p>   <ol>   <li>Klicken Sie auf <strong>Unbenannter Verlauf</strong> (oder den aktuellen Namen des Verlaufs) (<strong>Klicken Sie zum Umbenennen des Verlaufs</strong>) oben in Ihrem Verlaufsfenster</li>   <li>Geben Sie den neuen Namen ein</li>   <li>Drücken Sie <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Importieren Sie die Proteinsequenz über einen Link aus <a href="https://zenodo.org/record/8304465">Zenodo</a> oder aus gemeinsam genutzten Galaxy-Datenbibliotheken:</p>
+
+      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/8304465/files/protein.faa
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importieren-über-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importieren-über-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tipp: Importieren über Links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Kopieren der Linkposition</li>   <li>     <p>Klicken Sie auf <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Daten hochladen</strong> am oberen Rand der Werkzeugleiste</p>   </li>   <li>Wählen Sie <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Daten einfügen/holen</strong></li>   <li>     <p>Fügen Sie den/die Link(s) in das Textfeld ein</p>   </li>   <li>     <p>Drücken Sie <strong>Start</strong></p>   </li>   <li><strong>Schließen</strong> Sie das Fenster</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importieren-von-daten-aus-einer-datenbibliothek"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importieren-von-daten-aus-einer-datenbibliothek" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tipp: Importieren von Daten aus einer Datenbibliothek</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Als Alternative zum Hochladen der Daten von einer URL oder Ihrem Computer können die Dateien auch von einer <em>Shared Data Library</em> zur Verfügung gestellt werden:</p>   <ol>   <li>Gehen Sie in <strong>Bibliotheken</strong> (linker Bereich)</li>   <li>Navigieren Sie zu  dem richtigen Ordner, wie von Ihrem Ausbilder angegeben.     <ul>       <li>Auf den meisten Galaxies werden die Tutoriumsdaten in einem Ordner mit dem Namen <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong> bereitgestellt.</li>     </ul>   </li>   <li>Wählen Sie die gewünschten Dateien aus</li>   <li>Klicken Sie auf <strong>Zur Historie hinzufügen</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> am oberen Rand und wählen Sie <strong>as Datasets</strong> aus dem Dropdown-Menü</li>   <li>     <p>Wählen Sie im Pop-up-Fenster</p>     <ul>       <li><em>“Historie auswählen “</em>: die Historie, in die Sie die Daten importieren möchten (oder erstellen Sie eine neue)</li>     </ul>   </li>   <li>Klicken Sie auf <strong>Importieren</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2" title="NCBI BLAST+ blastp tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>NCBI BLAST+ blastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.10.1+galaxy2)</span> mit den folgenden Parametern:</p>
+      <ul>
+        <li><em>“Protein query sequence(s) “</em>: <code class="language-plaintext highlighter-rouge">protein.faa</code></li>
+        <li><em>“Fachdatenbank/Sequenzen “</em>: <code class="language-plaintext highlighter-rouge">Locally installed BLAST database</code></li>
+        <li>
+          <p><em>“Protein BLAST database “</em>: <code class="language-plaintext highlighter-rouge">SwissProt</code></p>
+
+          <p>Um nur nach annotierten Sequenzen in UniProt zu suchen, müssen wir die neueste Version von <code class="language-plaintext highlighter-rouge">SwissProt</code> auswählen</p>
+        </li>
+        <li><em>“Erwartungswertabschaltung einstellen “</em>: <code class="language-plaintext highlighter-rouge">0.001</code></li>
+        <li><em>“Ausgabeformat “</em>: <code class="language-plaintext highlighter-rouge">Tabular (extended 25 columns)</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Frage</div>
+
+  <p>Glauben Sie, dass wir genau die gleichen Ergebnisse wie bei unserer ursprünglichen Suche nach <code class="language-plaintext highlighter-rouge">opsin</code> in <a href="https://www.ncbi.nlm.nih.gov/genome/gdv/">www.ncbi.nlm.nih.gov/genome/gdv</a> sehen? Und warum?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Lösung</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Die Ergebnisse mögen ähnlich sein, aber es gibt durchaus einige Unterschiede. Eine Textsuche unterscheidet sich nicht nur methodisch von einer Sequenzsuche, sondern wir sind in dieser zweiten Runde auch von der Sequenz eines bestimmten Opsins ausgegangen, also von einem Zweig des gesamten Proteinstammbaums. Einige der Familienmitglieder sind sich untereinander sehr ähnlich, so dass diese Art der Suche die gesamte Familie aus einer ziemlich verzerrten Perspektive betrachtet.</p>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="mehr-informationen-über-unser-protein">Mehr Informationen über unser Protein</h1>
+
+<p>Bislang haben wir diese Informationen über Opsine erforscht:</p>
+<ul>
+  <li>Wie kann man wissen, welche Proteine eines bestimmten Typs in einem Genom existieren,</li>
+  <li>Wie kann man wissen, wo sie sich im Genom befinden?</li>
+  <li>Wie erhalte ich mehr Informationen über ein Gen von Interesse,</li>
+  <li>wie man ihre Sequenzen in verschiedenen Formaten herunterladen kann,</li>
+  <li>wie man diese Dateien für eine Ähnlichkeitssuche verwendet.</li>
+</ul>
+
+<p>Sie sind vielleicht neugierig, wie Sie mehr über die Proteine erfahren können, für die sie kodieren. Wir haben bereits einige Informationen gesammelt (z.B. Krankheiten, die damit verbunden sind), aber in den nächsten Schritten werden wir sie mit Daten über die Proteinstruktur, Lokalisierung, Interaktoren, Funktionen usw. kreuzen.</p>
+
+<p>Das Portal, das man besuchen muss, um alle Informationen über ein Protein zu erhalten, ist <a href="https://www.uniprot.org/">UniProt</a>. Wir können es über eine Textsuche oder über den Gen- oder Proteinnamen durchsuchen. Nehmen wir unser übliches Schlüsselwort <code class="language-plaintext highlighter-rouge">OPN1LW</code>.</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-suche-auf-uniprot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Suche auf UniProt</div>
+
+  <ol>
+    <li>Öffnen <a href="https://www.uniprot.org/">UniProt</a></li>
+    <li>Geben Sie <code class="language-plaintext highlighter-rouge">OPN1LW</code> in die Suchleiste ein</li>
+    <li>Wählen Sie die Kartenansicht</li>
+  </ol>
+</blockquote>
+
+<p>Der erste Treffer sollte <code class="language-plaintext highlighter-rouge">P04000 · OPSR_HUMAN</code> sein. Bevor Sie die Seite öffnen, sollten Sie zwei Dinge beachten:</p>
+
+<ol>
+  <li>Der Name des Proteins <code class="language-plaintext highlighter-rouge">OPSR_HUMAN</code>, sowie die IDs sind anders als der Genname.</li>
+  <li>Dieser Eintrag hat einen goldenen Stern, was bedeutet, dass er manuell kommentiert und kuratiert wurde.</li>
+</ol>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-öffne-ein-ergebnis-auf-uniprot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Praktische Übung: Öffne ein Ergebnis auf UniProt</div>
+
+  <ol>
+    <li>Klicken Sie auf <code class="language-plaintext highlighter-rouge">P04000 · OPSR_HUMAN</code></li>
+  </ol>
+</blockquote>
+
+<figure id="figure-8" style="max-width: 90%;"><img src="./images/UniProt.png" alt="Screenshot der Kopfzeile der UniProt-Eingangsseite. " width="2850" height="1330" loading="lazy" /><a target="_blank" href="./images/UniProt.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Abbildung 8</strong>:</span> UniProt-Seite</figcaption></figure>
+
+<p>Dies ist eine lange Seite mit vielen Informationen, wir haben ein <a href="/training-material/topics/data-science/tutorials/online-resources-protein/tutorial.html">ganzes Tutorial</a> entworfen, um sie durchzugehen.</p>
+
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>Du hast das Tutorial abgeschlossen</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">Ich habe dieses Tutorial abgeschlossen 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Zusammenfassung</div>
+                    <ul>
+                        
+                        <li><p>Sie können nach Genen und Proteinen mit bestimmten Textbegriffen im NCBI‑Genom suchen.</p>
+</li>
+                        
+                        <li><p>Sobald Sie ein relevantes Gen oder Protein gefunden haben, können Sie dessen Sequenz und Annotation in verschiedenen Formaten von NCBI erhalten.</p>
+</li>
+                        
+                        <li><p>Sie können auch mehr über die Chromosomenlage und die Exon‑Intron‑Zusammensetzung des interessierenden Gens erfahren.</p>
+</li>
+                        
+                        <li><p>NCBI bietet ein BLAST‑Tool, um Ähnlichkeitssuchen mit Sequenzen durchzuführen.</p>
+</li>
+                        
+                        <li><p>Sie können die in diesem Tutorial enthaltenen Ressourcen weiter erkunden, um mehr über genassoziierte Zustände und Varianten zu lernen.</p>
+</li>
+                        
+                        <li><p>Sie können eine FASTA‑Datei mit einer interessierenden Sequenz für BLAST‑Suchen eingeben.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Häufig gestellte Fragen</h1>
+                 Fragen zu diesem Tutorial? Schau auf die verfügbaren FAQ-Seiten und Support-Kanäle
+                <ul>
+                
+                
+                  <li><a href="/training-material/topics/data-science/faqs/">Thema  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+                <h1 id="bibliography">Förderung</h1>
+                <ol class="bibliography"><li id="rangwala2021accessing">Rangwala, S. H., A. Kuznetsov, V. Ananiev, A. Asztalos, E. Borodin <i>et al.</i>, 2021 <b>Accessing NCBI data using the NCBI sequence viewer and genome data viewer (GDV)</b>. Genome research 31: 159–169. <a href="https://doi.org/10.1101/gr.266932.120">10.1101/gr.266932.120</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Feedback Möglichkeit für Lehrende: <a href="https://github.com/galaxyproject/training-material/issues/1452">Wie lief dein Kurs</a>.
+                <br>Für Kursteilnehmer/-innen oder Studierende: Über Rückmeldung durch das untenstehende Formular würden wir uns freuen.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=data-science/online-resources-gene:de"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=data-science/online-resources-gene:de">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Dieses Tutorial zitieren</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Lisanna Paladin, Bérénice Batut, Teresa Müller,  <b>Lernen über ein Gen über biologische Ressourcen und Formate hinweg (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/online-resources-gene/tutorial_DE.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/online-resources-gene/tutorial_DE.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{data-science-online-resources-gene,
+author = "Lisanna Paladin and Bérénice Batut and Teresa Müller",
+	title = "Lernen über ein Gen über biologische Ressourcen und Formate hinweg (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/online-resources-gene/tutorial_DE.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Förderung</h2>
+		<p>Diese Personen oder Organisationen unterstützten die Entwicklung dieser Quelle finanziell.</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/biont/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/assets/images/BioNT_Logo.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">BioNT</div>
+			<div class="description">
+			Co-funded by the European Union
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Herzlichen Glückwunsch zum erfolgreichen Abschluss dieses Tutorials!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/data-science/tutorials/online-resources-gene/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: ncbi_blast_plus
+  owner: devteam
+  revisions: 0e3cf9594bb7
+  tool_panel_section_label: NCBI Blast
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>Es wurde noch kein Feedback für diese Training abgegeben. Seien der Erste und füllen  das Feedback-Formular aus. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/online-resources-gene/tutorial_DE.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/data-science/tutorials/online-resources-gene/tutorial_DE.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/784be96b6f5987a69d090be56c3e35b8ea9d7329">784be96</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+	
+
+    </body>
+</html>
