@@ -98,12 +98,12 @@ We will look at the quality of the nanopore reads.
 
 > <hands-on-title>Check read quality</hands-on-title>
 >
-> 1. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %}:
+> 1. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.46.2+galaxy0) %}:
 >    - *"Select multifile mode"*: `batch`
 >    - *"Type of file to work on"*: `fastq`
 >    - *"files"*: select the `nanopore FASTQ file`
 > 2. **View output**:
->    * There are five output files.
+>    * There are three output files: an `HTML report`, `NanoStats` and `NanoStats post filtering`.
 >    *  Look at the `HTML report` to learn about the read quality.
 {: .hands_on}
 
@@ -130,7 +130,7 @@ We will look at the quality of the nanopore reads.
 We will assemble the long nanopore reads.
 
 > <hands-on-title>Assemble reads</hands-on-title>
-> 1. {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6+galaxy0) %}:
+> 1. {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9.6+galaxy0) %}:
 >    - *"Input reads"*: `sweet-potato-chloroplast-nanopore-reduced.fastq`
 >    - *"Estimated genome size"*: `160000`
 >    - *Leave other settings as default*
@@ -148,10 +148,10 @@ We will assemble the long nanopore reads.
 
 
 > <hands-on-title>View the assembly</hands-on-title>
-> 1. {% tool [Bandage Info](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy1) %}
+> 1. {% tool [Bandage Info](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/2022.09+galaxy2) %}
 >    - *"Graphical Fragment Assembly"*: the Flye output file `Graphical Fragment Assembly` (not the "assembly_graph" file)
 >    - *Leave other settings as default*
-> 2. {% tool [Bandage Image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2) %}
+> 2. {% tool [Bandage Image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4) %}
 >    - *"Graphical Fragment Assembly"*: the Flye output file `Graphical Fragment Assembly` (not the "assembly_graph" file)
 >    - *"Node length labels"*: `Yes`
 >    - *Leave other settings as default*
@@ -183,7 +183,7 @@ Short illumina reads are more accurate the nanopore reads. We will use them to c
 First, we will map the short reads to the assembly and create an alignment file.
 
 > <hands-on-title>Map reads</hands-on-title>
-> 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %}:
+> 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.19) %}:
 >    - *"Will you select a reference genome from your history"*: `Use a genome from history`
 >    - *"Use the following dataset as the reference sequence"*: `flye-assembly.fasta`
 >    - *"Algorithm for constructing the BWT index"*: `Auto. Let BWA decide`
@@ -212,7 +212,7 @@ Next, we will compare the short reads to the assembly, and create a polished (co
 >
 >    {% snippet faqs/galaxy/datasets_rename.md name="polished-assembly.fasta" %}
 >
-> 3. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1) %}
+> 3. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0) %}
 >    - Find and run the tool called "Fasta statistics" on both the original flye assembly and the polished version.
 {: .hands_on}
 
@@ -235,7 +235,7 @@ We can now annotate our assembled genome with information about genomic features
 
 > <hands-on-title>Annotate with Prokka</hands-on-title>
 >
-> 1. {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0) %} with the following parameters (leave everything else unchanged)
+> 1. {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.6+galaxy1) %} with the following parameters (leave everything else unchanged)
 >    - {% icon param-file %} *"contigs to annotate"*: `polished-assembly.fasta`
 > 2. **View output**:
 >    * The GFF and GBK files contain all of the information about the features annotated (in different formats.)
