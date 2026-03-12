@@ -2,20 +2,21 @@
   job:
     Scaffolded assembly (fasta):
       class: File
-      location: https://zenodo.org/records/13327557/files/Scaffolded_assembly.fasta?download=1
+      location: https://zenodo.org/records/13367433/files/Contaminated_assembly.fasta
       filetype: fasta
-    Database for Kraken2: viral2019-03
+    Taxonomic Identifier: '8932'
+    Species Binomial Name: Taeniopygia guttata
+    Assembly Name: bTaeGut2
+    Haplotype: Haplotype 1
+    Maximum length of sequence to consider for mitochondrial scaffolds: 100000
+    Database for NCBI FCS GX: test-only
   outputs:
-    mito_scaff_names:
+    Mitochondrial Scaffolds:
       asserts:
-        has_text: 
+      - has_text:
           text: "scaffold_82"
-    final decontaminated assembly:
+    Final Decontaminated Assembly:
       decompress: true
       asserts:
-        not_has_text: 
-          text: "scaffold_200"
-    contaminants_table:
-      asserts:
-        has_text: 
-          text: "scaffold_200"
+      - not_has_text:
+          text: "scaffold_82"
