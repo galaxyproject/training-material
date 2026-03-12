@@ -123,8 +123,8 @@ The first stage of the pipeline is the generation of a *k*-mer profile of the ra
 
 The following steps use PacBio {HiFi} and Illumina {Hi-C} data from baker's yeast ([*Saccharomyces cerevisiae*](https://en.wikipedia.org/wiki/Saccharomyces_cerevisiae)). The tutorial represents trajectory **B** from Fig. 1 above. For this tutorial, the first step is to get the datasets from Zenodo. Specifically, we will be uploading two datasets:
 
-1. A set of PacBio {HiFi} reads in `fasta` format. Please note that your HiFi reads received from a sequencing center will usually be fastqsanger.gz format, but the dataset used in this tutorial has been converted to fasta for space..
-2. A set of Illumina {Hi-C} reads in `fastqsanger.gz` format.
+1. A set of PacBio {HiFi} reads in `fasta` format. Please note that your HiFi reads received from a sequencing center will usually be fastqsanger.gz format, but the dataset used in this tutorial has been converted to fasta for space.
+2. A set of Illumina {Hi-C} reads in `fastqsanger.gz` format (forward and reverse).
 
 ## Uploading `fasta` datasets from Zenodo
 
@@ -182,11 +182,11 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 >
 >    {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
 >
-> 3. Rename the datasets as follow: 
->    - Rename `SRR7126301_1.fastq.gz` as `Hi-C forward reads`
->    - Rename `SRR7126301_2.fastq.gz` as `Hi-C reverse reads`
+> 3. Build a **list of pairs** collection from the Hi-C reads:
 >
->    {% snippet faqs/galaxy/datasets_rename.md %}
+>    {% snippet faqs/galaxy/collections_build_list_paired.md datasets_description="the two Hi-C datasets (SRR7126301_1 and SRR7126301_2)" n="2" %}
+>
+>    Name the collection `Hi-C reads`.
 >
 {: .hands_on}
 
@@ -198,9 +198,7 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 
 ## Organizing the data
 
-If everything goes smoothly, your history will look like shown in Fig. 4 below. The three {HiFi} fasta files are better represented as a collection: {collection}. Also, importantly, the workflow we will be using for the analysis of our data takes a collection as an input (it does not access individual datasets). So let's create a collection using steps outlines in the Tip {% icon tip %} "Creating a dataset collection" that you can find below Fig. 4.
-
-![AfterUpload](../../images/vgp_assembly/making_list.svg "History after uploading HiFi and HiC data (left). Creation of a list (collection) combines all HiFi datasets into a single history item called 'HiFi data' (right). See below for instruction on how to make this collection.")
+If everything goes smoothly, your history will contain three {HiFi} fasta files and one {Hi-C} list:paired collection. The three {HiFi} fasta files are better represented as a list {collection}. Also, importantly, the workflow we will be using for the analysis of our data takes a collection as an input (it does not access individual datasets). So let's create a list collection using the steps outlined in the Tip {% icon tip %} "Creating a dataset collection" below.
 
 {% snippet faqs/galaxy/collections_build_list.md %}
 
@@ -215,7 +213,7 @@ Once we have imported the datasets, the next step is to import the workflows nec
 
 # Importing workflows
 
-All analyses described in this tutorial are performed using *workflows*--chains of tools--shown in [Fig. 1](#figure-1). Specifically, we will use four workflows corresponding to analysis trajectory **B**: 1, 4, 6, and 8. To use these four workflows you need to import them into your Galaxy account following the steps below. Note: these are not necessarily the latest versions of the actual workflows, but versions that have been tested for this tutorial. To see the latest versions, see the [Galaxy Project VGP workflows page](https://galaxyproject.org/projects/vgp/workflows/) and click on the Dockstore links to import workflows. **Alternatively, for each section of the tutorial, there will be a "Launch [workflow] (View on Dockstore)" link at the beginning, which you can use to launch the workflow.**
+All analyses described in this tutorial are performed using *workflows*--chains of tools--shown in [Fig. 1](#figure-1). Specifically, we will use three workflows corresponding to analysis trajectory **B**: 1, 4, and 8. To use these workflows you need to import them into your Galaxy account following the steps below. Note: these are not necessarily the latest versions of the actual workflows, but versions that have been tested for this tutorial. To see the latest versions, see the [Galaxy Project VGP workflows page](https://galaxyproject.org/projects/vgp/workflows/) and click on the Dockstore links to import workflows. **Alternatively, for each section of the tutorial, there will be a "Launch [workflow] (View on Dockstore)" link at the beginning, which you can use to launch the workflow.**
 
 # Performing the assembly
 
@@ -227,34 +225,36 @@ Before the assembly can be run, we need to collect metrics on the properties of 
 
 ### Launching the workflow
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="Genome profile analysis (WF1)" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" version="v0.1.7" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="Genome profile analysis (WF1)" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" version="v0.6" %}
 
 > <hands-on-title> Running <i>K</i>-mer profile analysis workflow </hands-on-title>
 >
 > 1. **Identify inputs**
 >
 >    The profiling workflow takes the following inputs:
->   
->    1. {HiFi} reads as a collection
->    2. *K*-mer length
->    3. Ploidy
+>
+>    1. Species name
+>    2. Assembly name
+>    3. {HiFi} reads as a collection
+>    4. *K*-mer length
+>    5. Ploidy
 >
 > 2. **Launch *k*-mer profiling workflow**
 >
 >    1. Click on the **Workflow** menu, located in the top bar
->    2. Click on the {% icon workflow-run %} **Run workflow** buttom corresponding to `kmer-profiling-hifi-VGP1`
+>    2. Click on the {% icon workflow-run %} **Run workflow** button corresponding to `kmer-profiling-hifi-VGP1`
 >    3. In the **Workflow: kmer-profiling-hifi-VGP1** menu:
+>        - "*Species Name*": `Saccharomyces cerevisiae`
+>        - "*Assembly Name*": `yeast_tutorial`
 >        - {% icon param-collection %} "*Collection of Pacbio Data*": `HiFi data` collection
 >        - "*K-mer length*": `31`
 >        - "*Ploidy*": `2`
 >    4. Click on the {% icon workflow-run %} **Run workflow** button
 >   
->    This should look like this:
->
->    ![Parameters of *k*-mer profiling workflow](../../images/vgp_assembly/wf1_launch_ui.png  "Workflow main menu. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.")
+>    <!-- TODO: add updated WF1 launch UI screenshot showing new Species Name and Assembly Name inputs -->
 >
 >    > <comment-title>K-mer length</comment-title>
->    > In this tutorial, we are using a *k*-mer length of 31. This can vary, but the VGP pipeline tends to use a *k*-mer length of 21, which tends to work well for most mammalian-size genomes. There is more discussion about *k*-mer length trade-offs in the extended VGP pipeline tutorial.
+>    > The workflow defaults to a *k*-mer length of 21, which tends to work well for most mammalian-size genomes. In this tutorial, we are using a *k*-mer length of 31, which is more appropriate for the smaller yeast genome. There is more discussion about *k*-mer length trade-offs in the extended VGP pipeline tutorial.
 >    {: .comment}
 >
 >
@@ -276,11 +276,11 @@ It is worth noting that the genome characteristics such as length, error percent
 
 ## Assembly (contiging) with `hifiasm` (WF4)
 
-To generate {contigs} we will use the [**hifiasm**](https://github.com/chhylp123/hifiasm) assembler. It is a part of the "Assembly with HiC (WF4)" workflow . This workflow uses **hifiasm** (HiC mode) to generate HiC-phased haplotypes (hap1 and hap2). This is in contrast to its default mode, which generates primary and alternate pseudohaplotype assemblies. This workflow includes three tools for evaluating assembly quality: [**gfastats**](https://github.com/vgl-hub/gfastats), [**BUSCO**](https://busco.ezlab.org/) and [**Merqury**](https://github.com/marbl/merqury).
+To generate {contigs} we will use the [**hifiasm**](https://github.com/chhylp123/hifiasm) assembler. It is a part of the "Assembly with HiC (WF4)" workflow. This workflow uses **hifiasm** (HiC mode) to generate HiC-phased haplotypes (hap1 and hap2). This is in contrast to its default mode, which generates primary and alternate pseudohaplotype assemblies. This workflow includes three tools for evaluating assembly quality: [**gfastats**](https://github.com/vgl-hub/gfastats), [**Compleasm**](https://github.com/huangnengCSU/compleasm) and [**Merqury**](https://github.com/marbl/merqury).
 
 ### Launching the workflow
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="Assembly HiFi-HiC phasing (WF4)" dockstore_id="github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main" version="v0.2.1" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="Assembly HiFi-HiC phasing (WF4)" dockstore_id="github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main" version="v0.5" %}
 
 > <hands-on-title> Launching assembly (contiging) workflow </hands-on-title>
 >
@@ -288,28 +288,30 @@ To generate {contigs} we will use the [**hifiasm**](https://github.com/chhylp123
 >
 >    The assembly workflow takes the following inputs:
 >
->    1. {HiFi} reads as a collection
->    2. Forward Hi-C reads
->    3. Reverse Hi-C reads
->    4. `Genomescope` Model Parameters generated by previous (*k*-mer profiling) workflow
+>    1. Species name
+>    2. Assembly name
+>    3. {HiFi} reads as a collection
+>    4. Hi-C reads as a list:paired collection
 >    5. `Genomescope` Summary generated by previous (*k*-mer profiling) workflow
 >    6. Meryl *k*-mer database generated by previous (*k*-mer profiling) workflow
->    7. Busco Database
->    8. Busco lineage
+>    7. `Genomescope` Model Parameters generated by previous (*k*-mer profiling) workflow
+>    8. Compleasm lineage database and lineage name
 >
 > 2. **Launch the workflow**
 >
 >    1. Click on the **Workflow** menu, located in the top bar
 >    2. Click on the {% icon workflow-run %} **Run workflow** button corresponding to `Assembly-Hifi-HiC-phasing-VGP4`
 >    3. In the **Workflow: Assembly-Hifi-HiC-phasing-VGP4** menu fill the following parameters:
->        - {% icon param-collection %} "*Pacbio Reads Collection*": `HiFi data` collection
->        - {% icon param-file %} "*HiC forward reads*": `Hi-C forward reads`
->        - {% icon param-file %} "*HiC reverse reads*": `Hi-C reverse reads`
->        - {% icon param-file %} "*GenomeScope Summary*": `GenomeScope on data X Summary` (contains tag "`GenomeScopeSummary`")
->        - {% icon param-file %} "*Meryl database*": `Meryl on data X: read-db.mertyldb`: the Meryl *k*-mer database (contains tag "`MerylDatabase`")
+>        - "*Species Name*": `Saccharomyces cerevisiae`
+>        - "*Assembly Name*": `yeast_tutorial`
+>        - {% icon param-collection %} "*Pacbio Reads*": `HiFi data` collection
+>        - "*Trim Hi-C reads?*": `No`
+>        - {% icon param-collection %} "*Hi-C reads*": `Hi-C reads` list:paired collection
+>        - {% icon param-file %} "*Genomescope Summary*": `GenomeScope on data X Summary` (contains tag "`GenomeScopeSummary`")
+>        - {% icon param-file %} "*Meryl Database*": `Meryl on data X: read-db.meryldb`: the Meryl *k*-mer database (contains tag "`MerylDatabase`")
 >        - "*Database for Busco Lineage*": `Busco v5 Lineage Datasets` (or the latest version available in the instance)
->        - "*Provide lineage for BUSCO (e.g., Vertebrata)*": `Ascomycota`
->        - {% icon param-file %} "*GenomeScope Model Parameters*": `GenomeScope on data X Model parameters` (contains tag "`GenomeScopeParameters`")
+>        - "*Lineage*": `Ascomycota`
+>        - {% icon param-file %} "*Genomescope Model Parameters*": `GenomeScope on data X Model parameters` (contains tag "`GenomeScopeParameters`")
 >    4. Click on the {% icon workflow-run %} **Run workflow** button
 > 
 {: .hands_on}
@@ -369,31 +371,27 @@ According to the report, both assemblies are quite similar; the hap1 assembly in
 >
 {: .question}
 
-Next, we are going to evaluate the outputs generated by **BUSCO**. This tool provides qualitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
+Next, we are going to evaluate the outputs generated by **Compleasm**. Compleasm uses miniprot for protein-to-genome alignment to assess gene completeness, providing a faster alternative to the previously used BUSCO tool while using the same lineage databases ({% cite Huang2023 %}). Like BUSCO, it evaluates the completeness of a genome assembly in terms of expected gene content.
 
-<br>
-
-![BUSCO assessment](../../images/vgp_assembly/busco_after_contiging.svg "A composite of BUSCO completeness summaries for hap1 (left) and hap2 (right)")
-
-<br>
+<!-- TODO: add new Compleasm screenshot for yeast hap1/hap2 -->
 
 As we can see in the report, the results are simplified into four categories: *complete and single-copy*, *complete and duplicated*, *fragmented* and *missing*.
 
 > <question-title></question-title>
 >
-> 1. How many complete BUSCO genes have been identified in the hap1 assembly?
-> 2. How many BUSCOs genes are absent in the hap1 assembly?
+> 1. How many complete genes have been identified in the hap1 assembly?
+> 2. How many genes are absent in the hap1 assembly?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. According to the report, our assembly contains the 1,436 complete BUSCO genes -- this includes ones that are single-copy and ones that are duplicated.
-> > 2. 208 BUSCO genes are missing.
+> > 1. According to the Compleasm report, our assembly contains the majority of expected complete genes -- this includes ones that are single-copy and ones that are duplicated.
+> > 2. Check the "Missing" category in the Compleasm output for genes that were not found in the assembly.
 > >
 > {: .solution}
 >
 {: .question}
 
-Despite **BUSCO** being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in [OrthoDB](https://www.orthodb.org/). `Merqury` provides a complementary approach for assessing assembly quality in a reference-free manner via *k*-mer copy number analysis. Specifically, it takes our hap1 as the first genome assembly, hap2 as the second genome assembly, and the merylDB generated previously from our sequencing reads for *k*-mer counts.
+While **Compleasm** provides a fast gene-completeness assessment, it can be less accurate when the newly assembled genome belongs to a taxonomic group that is not well represented in [OrthoDB](https://www.orthodb.org/). `Merqury` provides a complementary approach for assessing assembly quality in a reference-free manner via *k*-mer copy number analysis. Specifically, it takes our hap1 as the first genome assembly, hap2 as the second genome assembly, and the merylDB generated previously from our sequencing reads for *k*-mer counts.
 
 By default, `Merqury` generates three collections as output: stats (completeness stats), plots and {QV} stats. Let's first have a look at the copy number (CN) spectrum plot, known as the *spectra-cn* plot. The spectra-cn plot looks at both of your assemblies (here, your two haplotypes) taken *together* (fig. 6a). 
 
@@ -409,10 +407,10 @@ In this final stage, we will run the **Scaffolding HiC YAHS (WF8)** workflow, wh
 ### Launching Hi-C scaffolding workflow
 
 > <warning-title>The scaffolding workflow is run on <b>ONE</b> haplotype at a time.</warning-title>
-> Contiging (VGP4) works with both (hap1/hap2, primary/alternate) assemblies simultaneously. This is not the case for contiging -- it has to be run independently for each haplotype assembly. In this example (below) we run contiging on the hap1 assembly only. You can run the same analysis on the second haplotype by replacing hap1 with hap2. 
+> Contiging (VGP4) works with both (hap1/hap2, primary/alternate) assemblies simultaneously. This is not the case for scaffolding -- it has to be run independently for each haplotype assembly. In this example (below) we run scaffolding on the hap1 assembly only. You can run the same analysis on the second haplotype by replacing hap1 with hap2 and selecting `Haplotype 2` for the *Haplotype* parameter.
 {: .warning}
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="Scaffolding HiC (WF8)" dockstore_id="github.com/iwc-workflows/Scaffolding-HiC-VGP8/main" version="v0.2.7" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="Scaffolding HiC (WF8)" dockstore_id="github.com/iwc-workflows/Scaffolding-HiC-VGP8/main" version="v3.3" %}
 
 > <hands-on-title> Launching Hi-C scaffolding workflow </hands-on-title>
 >
@@ -420,25 +418,30 @@ In this final stage, we will run the **Scaffolding HiC YAHS (WF8)** workflow, wh
 >
 >    The scaffolding workflow takes the following inputs:
 >
->    1. An assembly graph
->    2. Forward Hi-C reads
->    3. Reverse Hi-C reads
->    4. Estimated genome size parsed from GenomeScope summary by the previous run of assembly workflow (VGP4).
->    5. Restriction enzymes used in Hi-C library preparation procedure
->    6. Busco Database
->    7. Busco lineage
+>    1. Species name
+>    2. Assembly name
+>    3. An assembly GFA
+>    4. Haplotype identifier
+>    5. Hi-C reads as a list:paired collection
+>    6. Estimated genome size parsed from GenomeScope summary by the previous run of assembly workflow (VGP4)
+>    7. Restriction enzymes used in Hi-C library preparation procedure
+>    8. Compleasm lineage database and lineage name
 >
 > 2. **Launch scaffolding workflow (WF8)**
 >
 >    1. Click on the **Workflow** menu, located in the top bar
 >    2. Click on the {% icon workflow-run %} **Run workflow** button corresponding to `Scaffolding-HiC-VGP8`
 >    3. In the **Workflow: Scaffolding-HiC-VGP8** menu:
->        - {% icon param-file %} "*input GFA*": `usable hap1 gfa` Output of the contiging workflow (VGP4) with a tag `hic_hap1_gfa` for hap1 assembly.
+>        - "*Species Name*": `Saccharomyces cerevisiae`
+>        - "*Assembly Name*": `yeast_tutorial`
+>        - {% icon param-file %} "*Assembly GFA*": `usable hap1 gfa` Output of the contiging workflow (VGP4) with a tag `hic_hap1_gfa` for hap1 assembly.
+>        - "*Haplotype*": `Haplotype 1`
+>        - {% icon param-collection %} "*Hi-C reads*": `Hi-C reads` list:paired collection
+>        - "*Trim Hi-C Data?*": `No`
+>        - "*Minimum Mapping Quality*": `10`
 >        - "*Database for Busco Lineage*": `Busco v5 Lineage Datasets` (or the latest version available in the instance)
->        - "*Provide lineage for BUSCO (e.g., Vertebrata)*": `Ascomycota`
->        - {% icon param-file %} "*HiC forward reads*": `Hi-C forward reads`
->        - {% icon param-file %} "*HiC reverse reads*": `Hi-C reverse reads`
->        - "*Restriction enzymes*": `Dovetail Omni-C: enzyme-free prep` For this tutorial, we'll use the Omni-C option as it is the equivalent of not specifying any restriction enzyme cutsites, but for your own data you would want to select the appropriate option. 
+>        - "*Lineage*": `Ascomycota`
+>        - "*Restriction enzymes*": `Dovetail Omni-C: enzyme-free prep` For this tutorial, we'll use the Omni-C option as it is the equivalent of not specifying any restriction enzyme cutsites, but for your own data you would want to select the appropriate option.
 >        - {% icon param-file %} "*Estimated genome size - Parameter File*": `Estimated genome size`: An output of the contiging workflow (VGP4) with a tag `estimated_genome_size`.
 >    4. Click on the {% icon workflow-run %} **Run workflow** button
 {: .hands_on}
