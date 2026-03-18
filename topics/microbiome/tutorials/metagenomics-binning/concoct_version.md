@@ -64,12 +64,6 @@ Finally, the clustering results are mapped back to the **original contigs, allow
 
 While **CONCOCT** generates a table mapping contigs to their respective bins, it does not automatically produce **FASTA files** for each bin. To obtain these sequences for further analysis, users must employ the **`CONCOCT: Extract a FASTA file`** utility. This tool combines the original contig FASTA file with CONCOCT’s clustering results, extracts contigs assigned to a specific bin, and outputs a **FASTA file representing a single metagenome-assembled genome (MAG)**. This step is crucial for enabling downstream genomic analyses.
 
-
-
-
-
-
-
 > <hands-on-title> Extract MAG FASTA files </hands-on-title>
 >
 > 1. {% tool [CONCOCT: Extract a fasta file](toolshed.g2.bx.psu.edu/repos/iuc/concoct_extract_fasta_bins/concoct_extract_fasta_bins/1.1.0+galaxy2) %} with the following parameters:
@@ -81,6 +75,7 @@ While **CONCOCT** generates a table mapping contigs to their respective bins, it
 >
 > 1. How many bins where produced by MaxBin2 for our sample?
 > 2. How many contigs are in the bin with most contigs? 
+>
 > > <solution-title></solution-title>
 > >
 > > 1. There are 10 bins for this sample.
