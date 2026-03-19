@@ -21527,10 +21527,19 @@ a {
   color: var(--hyperlink);
   border-bottom: 1px dotted var(--hyperlink);
 }
+a img {
+  border-bottom: 0px;
+}
+a:has(img) {
+  border-bottom: 0px;
+}
 a:hover, a:focus, a:focus-visible, a:active {
   color: var(--hyperlink-hover);
   border-bottom: 1px solid var(--hyperlink-hover);
   text-decoration: none;
+}
+a:hover:has(img), a:focus:has(img), a:focus-visible:has(img), a:active:has(img) {
+  border-bottom: 0px;
 }
 a.btn-info {
   color: black;
