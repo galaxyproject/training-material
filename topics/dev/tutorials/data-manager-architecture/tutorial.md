@@ -242,7 +242,7 @@ Lets look at these components one-by-one:
             <column name="name" />  <!-- columns that are going to be specified by the Data Manager Tool -->
             <column name="database_folder" output_ref="out_file" >
               <move type="directory" relativize_symlinks="True">
-                <src>${database_folder}</src>
+                <source>${database_folder}</source>
                 <target base="${GALAXY_DATA_MANAGER_DATA_PATH}">CAT/${database_folder}</target>
               </move>
               <value_translation>${GALAXY_DATA_MANAGER_DATA_PATH}/CAT/${database_folder}</value_translation>
@@ -250,7 +250,7 @@ Lets look at these components one-by-one:
             </column>
             <column name="taxonomy_folder" output_ref="out_file" >
               <move type="directory" relativize_symlinks="True">
-                <src>${taxonomy_folder}</src>
+                <source>${taxonomy_folder}</source>
                 <target base="${GALAXY_DATA_MANAGER_DATA_PATH}">CAT/${taxonomy_folder}</target>
               </move>
               <value_translation>${GALAXY_DATA_MANAGER_DATA_PATH}/CAT/${taxonomy_folder}</value_translation>
@@ -300,7 +300,7 @@ Lets look at these components one-by-one:
    ```
    <column name="database_folder" output_ref="out_file" >
        <move type="directory" relativize_symlinks="True">
-           <src>${database_folder}</src>
+           <source>${database_folder}</source>
            <target base="${GALAXY_DATA_MANAGER_DATA_PATH}">CAT/${database_folder}</target>
        </move>
        <value_translation>${GALAXY_DATA_MANAGER_DATA_PATH}/CAT/${database_folder}</value_translation>
@@ -308,7 +308,7 @@ Lets look at these components one-by-one:
    </column>
    <column name="taxonomy_folder" output_ref="out_file" >
        <move type="directory" relativize_symlinks="True">
-           <src>${taxonomy_folder}</src>
+           <source>${taxonomy_folder}</source>
            <target base="${GALAXY_DATA_MANAGER_DATA_PATH}">CAT/${taxonomy_folder}</target>
        </move>
        <value_translation>${GALAXY_DATA_MANAGER_DATA_PATH}/CAT/${taxonomy_folder}</value_translation>
@@ -318,7 +318,7 @@ Lets look at these components one-by-one:
 
    The definitions of the `database_folder` column hold two types of instructions for Galaxy:
 
-   1. The `<move>` element says that Galaxy should take (see the `<src>` element) the data that lives where the `${database_folder}` item of the `data_manager_json` output says it lives and move it to a destination `CAT/${database_folder}` under the base path indicated by `${GALAXY_DATA_MANAGER_DATA_PATH}` (which itself is the configured cached data storage path of the Galaxy instance).
+   1. The `<move>` element says that Galaxy should take (see the `<source>` element) the data that lives where the `${database_folder}` item of the `data_manager_json` output says it lives and move it to a destination `CAT/${database_folder}` under the base path indicated by `${GALAXY_DATA_MANAGER_DATA_PATH}` (which itself is the configured cached data storage path of the Galaxy instance).
 
    2. The first `<value_translation>` element says that Galaxy should not write the Data manager tool-provided value for `database_folder` directly, but instead first translate it to `${GALAXY_DATA_MANAGER_DATA_PATH}/CAT/${database_folder`. If you compare the resulting string with the `<move>` instructions, you will see that it will now be the same as the ultimate path to the folder after Galaxy has moved it.
 
