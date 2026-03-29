@@ -1,0 +1,39 @@
+- doc: Test outline for Chloroplast-genome-assembly-and-annotation
+  job:
+    Illumina_reads:
+      class: File
+      location: https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-illumina-reduced.fastq
+      filetype: fastqsanger
+    Nanopore_reads:
+      class: File
+      location: https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduced.fastq
+      filetype: fastqsanger
+    Tiny_set_illumina_read:
+      class: File
+      location: https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-illumina-tiny.fastq
+      filetype: fastqsanger
+    Tiny_set_nanopore_reads:
+      class: File
+      location: https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-tiny.fastq
+      filetype: fastqsanger
+  outputs:
+    assembly_info:
+      asserts:
+        has_text_matching:
+          expression: 'contig_1'
+    stats_output_fasta_flye:
+      asserts:
+        has_text_matching:
+          expression: 'Scaffold L50'
+    stats_output_fasta_pilon:
+      asserts:
+        has_text_matching:
+          expression: 'Scaffold L50'
+    nanostats:
+      asserts:
+        has_text_matching:
+          expression: '2000'
+    out_tsv:
+      asserts:
+        has_text_matching:
+          expression: '16S ribosomal RNA'
