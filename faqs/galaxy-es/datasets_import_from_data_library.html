@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@42c5e0f1b0f00cc060a04cc7e86df8c20192393b",
+		release: "galaxy-training-network@23c576cc7e0ec8545ee11fcd6972c053bd86d935",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,15 +70,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Importar datos de una biblioteca de datos">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-03-05 07:49:48 +0000">
+<meta name="DC.date" content="2026-03-30 10:09:15 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Saskia Hiltemann">
 <meta name="DC.creator" content="Nicola Soranzo">
 <meta name="DC.creator" content="Helena Rasche">
-<meta name="DC.creator" content="Wolfgang Maier"><meta name="description" content="Como alternativa a cargar los datos desde una URL o desde su ordenador, los archivos también pueden estar disponibles desde una *biblioteca de datos compartidos*:  1. Entra en **Libraries** (panel izquierdo) 2. Navega a {% if include.path %}: *{{ include.path }}* o {% endif %} la carpeta correcta indicada por su instructor. {% unless include.path %}- En la mayoría de los tutoriales de Galaxias los datos serán proporcionados en una carpeta llamada **GTN - Material --> Topic name -> Tutorial name**. {% endunless %} 3. Seleccione los archivos deseados 4. Haz clic en **Add to History** {% icon galaxy-dropdown %} cerca de la parte superior y selecciona **{ include.astype | default:  as Datasets  }}** en el menú desplegable 5. En la ventana emergente, elige {% if include.collection_type %}    * * Tipo de colección  *: **{{ include.collection_type }}** {% endif %}    * * Seleccionar historial  *: {% if include.tohistory %}{{ include.tohistory }}{% else %}el historial al que desea importar ...">
+<meta name="DC.creator" content="Wolfgang Maier"><meta name="description" content="Como alternativa a cargar los datos desde una URL o desde su ordenador, los archivos también pueden estar disponibles desde una *biblioteca de datos compartidos*:  1. Entra en **Libraries** (panel izquierdo) 2. Navega a {% if include.path %}: *{{ include.path }}* o {% endif %} la carpeta correcta indicada por su instructor. {% unless include.path %}- En la mayoría de los tutoriales de Galaxias los datos serán proporcionados en una carpeta llamada **GTN - Material --> Topic name -> Tutorial name**. {% endunless %} 3. Seleccione los archivos deseados 4. Haz clic en **Add to History** {% icon galaxy-dropdown %} cerca de la parte superior y selecciona **{{ include.astype | default:  as Datasets  }}** en el menú desplegable 5. En la ventana emergente, elige {% if include.collection_type %}    * * Tipo de colección  *: **{{ include.collection_type }}** {% endif %}    * * Seleccionar historial  *: {% if include.tohistory %}{{ include.tohistory }}{% else %}el historial al que desea importar...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="FAQ: Importar datos de una biblioteca de datos">
-        <meta property="og:description" content="Como alternativa a cargar los datos desde una URL o desde su ordenador, los archivos también pueden estar disponibles desde una *biblioteca de datos compartidos*:  1. Entra en **Libraries** (panel izquierdo) 2. Navega a {% if include.path %}: *{{ include.path }}* o {% endif %} la carpeta correcta indicada por su instructor. {% unless include.path %}- En la mayoría de los tutoriales de Galaxias los datos serán proporcionados en una carpeta llamada **GTN - Material --> Topic name -> Tutorial name**. {% endunless %} 3. Seleccione los archivos deseados 4. Haz clic en **Add to History** {% icon galaxy-dropdown %} cerca de la parte superior y selecciona **{ include.astype | default:  as Datasets  }}** en el menú desplegable 5. En la ventana emergente, elige {% if include.collection_type %}    * * Tipo de colección  *: **{{ include.collection_type }}** {% endif %}    * * Seleccionar historial  *: {% if include.tohistory %}{{ include.tohistory }}{% else %}el historial al que desea importar ...">
+        <meta property="og:description" content="Como alternativa a cargar los datos desde una URL o desde su ordenador, los archivos también pueden estar disponibles desde una *biblioteca de datos compartidos*:  1. Entra en **Libraries** (panel izquierdo) 2. Navega a {% if include.path %}: *{{ include.path }}* o {% endif %} la carpeta correcta indicada por su instructor. {% unless include.path %}- En la mayoría de los tutoriales de Galaxias los datos serán proporcionados en una carpeta llamada **GTN - Material --> Topic name -> Tutorial name**. {% endunless %} 3. Seleccione los archivos deseados 4. Haz clic en **Add to History** {% icon galaxy-dropdown %} cerca de la parte superior y selecciona **{{ include.astype | default:  as Datasets  }}** en el menú desplegable 5. En la ventana emergente, elige {% if include.collection_type %}    * * Tipo de colección  *: **{{ include.collection_type }}** {% endif %}    * * Seleccionar historial  *: {% if include.tohistory %}{{ include.tohistory }}{% else %}el historial al que desea importar...">
         <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/faqs/galaxy-es/datasets_import_from_data_library.png">
 	<!-- fontawesome -->
         <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
@@ -301,16 +301,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li>Entra en <strong>Libraries</strong> (panel izquierdo)</li>
   <li>Navega a  la carpeta correcta indicada por su instructor. - En la mayoría de los tutoriales de Galaxias los datos serán proporcionados en una carpeta llamada <strong>GTN - Material –&gt; Topic name -&gt; Tutorial name</strong>.</li>
   <li>Seleccione los archivos deseados</li>
-  <li>
-    <table>
-      <tbody>
-        <tr>
-          <td>Haz clic en <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> cerca de la parte superior y selecciona **{ include.astype</td>
-          <td>default: “as Datasets” }}** en el menú desplegable</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
+  <li>Haz clic en <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> cerca de la parte superior y selecciona <strong>as Datasets</strong> en el menú desplegable</li>
   <li>En la ventana emergente, elige
     <ul>
       <li><em>“Seleccionar historial “</em>: el historial al que desea importar los datos (o crear uno nuevo)</li>
@@ -471,7 +462,7 @@ add a button, include configuration options:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/42c5e0f1b0f00cc060a04cc7e86df8c20192393b">42c5e0f</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/23c576cc7e0ec8545ee11fcd6972c053bd86d935">23c576c</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
