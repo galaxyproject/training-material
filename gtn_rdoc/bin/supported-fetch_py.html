@@ -337,7 +337,10 @@ except json.decoder.JSONDecodeError:
 
 found_tools = set()
 for tool in response_json:
-    found_tools.add(tool[&#39;id&#39;])
+    try:
+        found_tools.add(tool[&#39;id&#39;])
+    except:
+        pass
 
 return server[&#39;name&#39;], {
     &#39;url&#39;: server[&#39;url&#39;],

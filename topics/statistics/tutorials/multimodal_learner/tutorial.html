@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Gleam Multimodal Learner - Head and Neck cancer Recurrence Prediction with HANCOCK / Gleam Multimodal Learner - Head and Neck cancer Recurrence Prediction with HANCOCK / Statistics and machine learning</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@df3cb9e8115c758fd94d1532fac2426a13846eba",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/multimodal_learner/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Gleam Multimodal Learner - Head and Neck cancer Recurrence Prediction with HANCOCK">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-03-25 09:45:47 +0000">
+<meta name="DC.creator" content="Paulo Cilas Morais Lyra Junior">
+<meta name="DC.creator" content="Khai Van Dang">
+<meta name="DC.creator" content="Alyssa Pybus">
+<meta name="DC.creator" content="Junhao Qiu">
+<meta name="DC.creator" content="Jeremy Goecks"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Statistics and machine learning / Gleam Multimodal Learner - Head and Neck cancer Recurrence Prediction with HANCOCK / Hands-on: Gleam Multimodal Learner - Head and Neck cancer Recurrence Prediction with HANCOCK">
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/statistics/tutorials/multimodal_learner/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Gleam Multimodal Learner - Head and Neck cancer Recurrence Prediction with HANCOCK",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "workTranslation": [],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2026-03-25 09:45:47 +0000",
+  "datePublished": "2026-03-25 09:45:47 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "funder": [],
+  "funding": [],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "abstract": "In this tutorial, we use the **HANCOCK** head-and-neck cancer cohort to build a **recurrence prediction** model with **GLEAM Multimodal Learner**.",
+  "learningResourceType": "e-learning",
+  "name": "Gleam Multimodal Learner - Head and Neck cancer Recurrence Prediction with HANCOCK",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/multimodal_learner/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT1H",
+  "teaches": "- Import the tutorial-focused HANCOCK metadata and JPEG CD3/CD8 image archive into Galaxy.\n- Train a multimodal model with tabular, text, and image backbones.\n- Evaluate test performance and interpret the effect of image quality on model metrics.",
+  "keywords": [
+    "Statistics and machine learning",
+    "Multimodal Learning",
+    "GLEAM",
+    "HANCOCK Dataset",
+    "Recurrence Prediction"
+  ],
+  "description": "## Abstract\n\nIn this tutorial, we use the **HANCOCK** head-and-neck cancer cohort to build a **recurrence prediction** model with **GLEAM Multimodal Learner**.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How does Multimodal Learner combine tabular, text, and image modalities in a single model?\n - How do we configure Multimodal Learner with different modalities?\n - How do we interpret the model results?\n\n\n## Learning Objectives\n\n- Import the tutorial-focused HANCOCK metadata and JPEG CD3/CD8 image archive into Galaxy.\n- Train a multimodal model with tabular, text, and image backbones.\n- Evaluate test performance and interpret the effect of image quality on model metrics.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/paulocilasjr/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/paulocilasjr/",
+      "name": "Paulo Cilas Morais Lyra Junior",
+      "image": "https://avatars.githubusercontent.com/paulocilasjr",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4403-6684",
+      "@id": "https://orcid.org/0000-0002-4403-6684"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/khaivandangusf2210/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/khaivandangusf2210/",
+      "name": "Khai Van Dang",
+      "image": "https://avatars.githubusercontent.com/khaivandangusf2210",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/afpybus/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/afpybus/",
+      "name": "Alyssa Pybus",
+      "image": "https://avatars.githubusercontent.com/afpybus",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9722-3977",
+      "@id": "https://orcid.org/0000-0002-9722-3977"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/qchiujunhao/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/qchiujunhao/",
+      "name": "Junhao Qiu",
+      "image": "https://avatars.githubusercontent.com/qchiujunhao",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0005-4322-3401",
+      "@id": "https://orcid.org/0009-0005-4322-3401"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jgoecks/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jgoecks/",
+      "name": "Jeremy Goecks",
+      "image": "https://avatars.githubusercontent.com/jgoecks",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4583-5226",
+      "@id": "https://orcid.org/0000-0002-4583-5226"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/multimodal_learner/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://bio.tools/tool/galaxy",
+      "name": "Galaxy"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/records/18807820",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Statistics and machine learning
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and machine learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/multimodal_learner/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/multimodal_learner/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-statistics">
+    <h1 data-toc-skip>Gleam Multimodal Learner - Head and Neck cancer Recurrence Prediction with HANCOCK</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/paulocilasjr/" class="contributor-badge contributor-paulocilasjr"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/paulocilasjr?s=36" alt="Paulo Cilas Morais Lyra Junior avatar" width="36" class="avatar" />
+    Paulo Cilas Morais Lyra Junior</a><a href="/training-material/hall-of-fame/khaivandangusf2210/" class="contributor-badge contributor-khaivandangusf2210"><img src="https://avatars.githubusercontent.com/khaivandangusf2210?s=36" alt="Khai Van Dang avatar" width="36" class="avatar" />
+    Khai Van Dang</a><a href="/training-material/hall-of-fame/afpybus/" class="contributor-badge contributor-afpybus"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/afpybus?s=36" alt="Alyssa Pybus avatar" width="36" class="avatar" />
+    Alyssa Pybus</a><a href="/training-material/hall-of-fame/qchiujunhao/" class="contributor-badge contributor-qchiujunhao"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/qchiujunhao?s=36" alt="Junhao Qiu avatar" width="36" class="avatar" />
+    Junhao Qiu</a><a href="/training-material/hall-of-fame/jgoecks/" class="contributor-badge contributor-jgoecks"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jgoecks?s=36" alt="Jeremy Goecks avatar" width="36" class="avatar" />
+    Jeremy Goecks</a>
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How does Multimodal Learner combine tabular, text, and image modalities in a single model?</p>
+</li>
+        
+        <li><p>How do we configure Multimodal Learner with different modalities?</p>
+</li>
+        
+        <li><p>How do we interpret the model results?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Import the tutorial-focused HANCOCK metadata and JPEG CD3/CD8 image archive into Galaxy.</p>
+</li>
+        
+        <li><p>Train a multimodal model with tabular, text, and image backbones.</p>
+</li>
+        
+        <li><p>Evaluate test performance and interpret the effect of image quality on model metrics.</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/statistics/tutorials/multimodal_learner/slides.html" title="Slides for this tutorial">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/18807820">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/statistics/tutorials/multimodal_learner/workflows/" title="Gleam Multimodal Learner - Head and Neck cancer Recurrence Prediction with HANCOCK workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/multimodal_learner/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org (Main) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 25, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 25, 2026 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>In this tutorial, we use the <strong>HANCOCK</strong> head-and-neck cancer cohort (<span class="citation"><a href="#Dorrich2025">Dörrich <i>et al.</i> 2025</a></span>) to build a <strong>recurrence prediction</strong> model with <strong>GLEAM Multimodal Learner</strong>.</p>
+
+<p>The primary run in this tutorial uses a <strong>tutorial-focused derivative</strong> of HANCOCK in which CD3/CD8 images were converted from PNG to JPEG (quality 67) to reduce upload size and setup time. This makes the workflow more accessible while preserving the multimodal structure.</p>
+
+<p>Multimodal Learner wraps AutoGluon Multimodal to train a <strong>late-fusion</strong> model. It automatically builds modality-specific encoders: tabular features with a tabular transformer, text fields with a pretrained language model, and images with a pretrained vision backbone. A fusion network then combines these modality embeddings into a single prediction.</p>
+
+<p>You provide a single CSV/TSV with one row per patient containing the target label and modality references (text columns and image-path columns). Image files are uploaded as one or more ZIP archives; the paths in the table must match filenames inside the ZIP. We use the <strong>published train/test split</strong> and interpret results with ROC/PR curves, confusion matrices, and threshold-dependent metrics.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#dataset-overview-and-composition" id="markdown-toc-dataset-overview-and-composition">Dataset Overview and Composition</a>    <ol>
+      <li><a href="#dataset-description" id="markdown-toc-dataset-description">Dataset Description</a></li>
+      <li><a href="#target-variable-3-year-recurrence" id="markdown-toc-target-variable-3-year-recurrence">Target Variable: 3-Year Recurrence</a></li>
+      <li><a href="#data-splits" id="markdown-toc-data-splits">Data Splits</a></li>
+      <li><a href="#expected-table-structure" id="markdown-toc-expected-table-structure">Expected table structure</a></li>
+    </ol>
+  </li>
+  <li><a href="#using-multimodal-learner-tool" id="markdown-toc-using-multimodal-learner-tool">Using Multimodal Learner Tool</a>    <ol>
+      <li><a href="#how-it-works" id="markdown-toc-how-it-works">How it works</a></li>
+      <li><a href="#prepare-environment-and-get-the-data" id="markdown-toc-prepare-environment-and-get-the-data">Prepare environment and get the data</a></li>
+      <li><a href="#tool-setup-and-run" id="markdown-toc-tool-setup-and-run">Tool setup and run</a></li>
+      <li><a href="#tool-output-files" id="markdown-toc-tool-output-files">Tool Output Files</a></li>
+      <li><a href="#interpreting-the-multimodal-learner-report" id="markdown-toc-interpreting-the-multimodal-learner-report">Interpreting the Multimodal Learner Report</a></li>
+    </ol>
+  </li>
+  <li><a href="#tutorial-results-jpeg-derivative-dataset" id="markdown-toc-tutorial-results-jpeg-derivative-dataset">Tutorial Results (JPEG Derivative Dataset)</a>    <ol>
+      <li><a href="#what-to-do-next-with-this-tutorial-run" id="markdown-toc-what-to-do-next-with-this-tutorial-run">What to do next with this tutorial run</a></li>
+      <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+    </ol>
+  </li>
+  <li><a href="#high-quality-image-run-reference-section-45-gb-zip" id="markdown-toc-high-quality-image-run-reference-section-45-gb-zip">High-Quality Image Run (Reference Section, ~45 GB ZIP)</a>    <ol>
+      <li><a href="#reference-results-with-full-quality-images" id="markdown-toc-reference-results-with-full-quality-images">Reference Results with Full-Quality Images</a></li>
+      <li><a href="#comparison-with-the-hancock-benchmark-paper" id="markdown-toc-comparison-with-the-hancock-benchmark-paper">Comparison with the HANCOCK Benchmark Paper</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="dataset-overview-and-composition">Dataset Overview and Composition</h1>
+
+<p>The HANCOCK dataset used in this tutorial is a multimodal precision oncology resource that integrates multiple data types to enable comprehensive cancer outcome prediction.</p>
+
+<h2 id="dataset-description">Dataset Description</h2>
+
+<p>The HANCOCK (Head and Neck Cancer Outcome Cohort) dataset was published by <span class="citation"><a href="#Dorrich2025">Dörrich <i>et al.</i> 2025</a></span> and represents one of the first large-scale multimodal datasets specifically designed for head and neck cancer outcome prediction.</p>
+
+<p>For this tutorial, we use a Zenodo derivative package built for practical training runs:</p>
+
+<ul>
+  <li><strong>Image archive</strong>: <code class="language-plaintext highlighter-rouge">CD3_CD8_images_3GB_jpeg.zip</code></li>
+  <li><strong>Metadata tables</strong>: <code class="language-plaintext highlighter-rouge">HANCOCK_train_split_3GB_jpeg.csv</code> and <code class="language-plaintext highlighter-rouge">HANCOCK_test_split_3GB_jpeg.csv</code></li>
+  <li><strong>Image conversion</strong>: PNG to JPEG with lossy compression (quality 67), while preserving original image dimensions</li>
+  <li><strong>Archive size</strong>: about 2.89 GB (3,037 images)</li>
+  <li><strong>Matched records</strong>: 653 samples, with an approximately 80/20 train/test split</li>
+</ul>
+
+<p>This modified dataset is intended for tutorial and tool demonstration use. It is <strong>not</strong> a replacement for the original full-quality HANCOCK dataset for research-grade analysis or final benchmarking.</p>
+
+<h3 id="patient-cohort">Patient Cohort</h3>
+<ul>
+  <li><strong>Original HANCOCK cohort</strong>: 763 head and neck cancer patients</li>
+  <li><strong>Tutorial derivative used here</strong>: 653 matched records with updated JPEG paths</li>
+  <li><strong>Cancer sites</strong>: Oral cavity, oropharynx, hypopharynx, larynx</li>
+  <li><strong>Follow-up</strong>: Comprehensive outcome tracking with recurrence and survival data</li>
+  <li><strong>Data collection</strong>: Multi-institutional cohort with standardized data collection protocols</li>
+</ul>
+
+<h3 id="data-modalities">Data Modalities</h3>
+
+<h4 id="1-tabular-data-clinical-and-pathological-features">1. Tabular Data (Clinical and Pathological Features)</h4>
+<ul>
+  <li><strong>Clinical features</strong>: Age, sex, smoking status, primary tumor site</li>
+  <li><strong>Pathological features</strong>: Tumor grade, stage, histological type</li>
+  <li><strong>Blood biomarkers</strong>: Complete blood count, liver function, kidney function</li>
+  <li><strong>TMA cell density</strong>: Quantitative cell counts from tissue microarray analysis</li>
+</ul>
+
+<h4 id="2-image-data-tissue-microarray-cores">2. Image Data (Tissue Microarray Cores)</h4>
+<ul>
+  <li><strong>Modality</strong>: CD3 and CD8 immunohistochemistry staining</li>
+  <li><strong>Resolution</strong>: Original image dimensions are preserved</li>
+  <li><strong>Content</strong>: Tumor microenvironment immune cell infiltration</li>
+  <li><strong>Format in this tutorial</strong>: JPEG images of individual TMA cores</li>
+</ul>
+
+<h4 id="3-text-data-icd-diagnostic-codes">3. Text Data (ICD Diagnostic Codes)</h4>
+<ul>
+  <li><strong>Source</strong>: International Classification of Diseases (ICD-10) codes</li>
+  <li><strong>Content</strong>: Diagnostic codes representing comorbidities and medical history</li>
+  <li><strong>Format</strong>: Free-text ICD code descriptions</li>
+</ul>
+
+<h2 id="target-variable-3-year-recurrence">Target Variable: 3-Year Recurrence</h2>
+
+<p>The primary prediction task is <strong>3-year recurrence</strong>, defined as:</p>
+<ul>
+  <li><strong>Positive (recurrence = 1)</strong>: Recurrence within 3 years (1,095 days) of diagnosis</li>
+  <li><strong>Negative (recurrence = 0)</strong>: No recurrence with adequate follow-up (&gt;3 years) or currently living without recurrence</li>
+</ul>
+
+<p>This binary classification task is clinically relevant as early recurrence (within 3 years) is associated with poor prognosis and may benefit from more aggressive treatment strategies.</p>
+
+<h2 id="data-splits">Data Splits</h2>
+
+<p>The tutorial derivative provides a predefined split:</p>
+
+<ul>
+  <li><strong>Training set</strong>: approximately 80% of samples</li>
+  <li><strong>Test set</strong>: approximately 20% of samples</li>
+</ul>
+
+<h2 id="expected-table-structure">Expected table structure</h2>
+
+<p>Because Multimodal Learner requires a specific input structure—a single sample-level table that contains the label and all modality references, plus, when using images, a ZIP archive containing the referenced image files—you must preprocess the dataset to match this format before running the tool. For a HANCOCK-like setup, the training and test tables typically include:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">target</code>: recurrence label (0 = no recurrence, 1 = recurrence/progression)</li>
+  <li><code class="language-plaintext highlighter-rouge">clinical covariates</code>: numeric and categorical clinical/pathological variables</li>
+  <li><code class="language-plaintext highlighter-rouge">icd_text</code>: free-text ICD descriptions</li>
+  <li><code class="language-plaintext highlighter-rouge">cd3_path</code> and <code class="language-plaintext highlighter-rouge">cd8_path</code>: image filenames (or relative paths) for CD3 and CD8 TMA images, which must match files inside the ZIP archive (<code class="language-plaintext highlighter-rouge">.jpg</code> paths in this tutorial dataset)</li>
+</ul>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-data-preparation-shaping-hancock-for-the-tool"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Data preparation: shaping HANCOCK for the tool</div>
+
+  <p>The raw data published by (<span class="citation"><a href="#Dorrich2025">Dörrich <i>et al.</i> 2025</a></span>) can be found here: 
+<a href="https://www.hancock.research.uni-erlangen.org/download">HANCOCK raw dataset</a></p>
+
+  <p>We preprocessed the raw data to create a tutorial-friendly derivative:</p>
+
+  <p>1) Normalize identifiers consistently (e.g., remove leading zeros; standardize missing values) before merging.</p>
+
+  <p>2) Join modality tables using a stable identifier (e.g., patient_id).</p>
+
+  <p>3) Construct recurrence label for each patient.</p>
+
+  <p>4) Keep ICD code text as free text for the text encoder.</p>
+
+  <p>5) Convert image files from PNG to JPEG (quality 67), keeping original dimensions.</p>
+
+  <p>6) Update metadata paths from <code class="language-plaintext highlighter-rouge">.png</code> to <code class="language-plaintext highlighter-rouge">.jpg</code> so table references match the ZIP archive.</p>
+
+  <p>7) Preserve a stable train/test partition and avoid leakage across patients.</p>
+
+  <p>8) Provide training and test tables in CSV format and all images in one <strong>ZIP</strong> archive.</p>
+
+  <p>A Python script for preprocessing can be found at: <a href="https://github.com/goeckslab/gleam_use_cases/tree/main/multimodal_learner">HANCOCK_preprocessing</a></p>
+
+</blockquote>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="./../../images/multimodal_learner/workflow.png" alt="Schema of the whole process of training model and test. " style="width: 60%; display: block; margin-left: auto; margin-right: auto;" width="791" height="887" loading="lazy" /><a target="_blank" href="./../../images/multimodal_learner/workflow.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Overview of the process steps to obtain the model from the HANCOCK dataset.</figcaption></figure>
+
+<h1 id="using-multimodal-learner-tool">Using Multimodal Learner Tool</h1>
+
+<h2 id="how-it-works">How it works</h2>
+
+<p>Multimodal Learner trains <strong>late-fusion prediction models</strong> using <strong>AutoGluon Multimodal</strong>.</p>
+
+<ul>
+  <li><strong>One row per sample:</strong> a single CSV/TSV contains the target label plus tabular features and (optionally) text and image references for the same sample (e.g., patient).</li>
+  <li><strong>Encoders per modality:</strong>
+    <ul>
+      <li>tabular features are encoded by a transformer-based tabular backbone (handled automatically),</li>
+      <li>text columns are encoded by a user-selected pretrained language model,</li>
+      <li>image columns are encoded by a user-selected pretrained vision backbone.</li>
+    </ul>
+  </li>
+  <li><strong>Fusion:</strong> modality embeddings are combined by a learned fusion network to produce the final prediction.</li>
+  <li><strong>Outputs:</strong> an interactive HTML report (ROC/PR curves, confusion matrix, calibration and threshold views), plus a YAML config record and JSON metrics.</li>
+</ul>
+
+<h2 id="prepare-environment-and-get-the-data">Prepare environment and get the data</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-environment-and-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Environment and Data Upload</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial. For example, name it <em>HANCOCK Multimodal Recurrence</em>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import the dataset files from Zenodo:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/18807820/files/HANCOCK_train_split_3GB_jpeg.csv
+https://zenodo.org/records/18807820/files/HANCOCK_test_split_3GB_jpeg.csv
+https://zenodo.org/records/18807820/files/CD3_CD8_images_3GB_jpeg.zip
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong> at the top of the activity panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Check that the data formats are assigned correctly. If not, follow the Changing the datatype tip:</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code> from “<em>New Type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="tool-setup-and-run">Tool setup and run</h2>
+
+<p>After the train and test tables are uploaded, configure Multimodal Learner with the following parameters.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-configure-multimodal-learner-for-hancock"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Configure Multimodal Learner for HANCOCK</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/goeckslab/multimodal_learner/multimodal_learner/0.1.0" title="Multimodal Learner tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Multimodal Learner</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Training dataset (CSV/TSV)</em>: <code class="language-plaintext highlighter-rouge">HANCOCK_train_split_3GB_jpeg.csv</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Target / Label column</em>: <code class="language-plaintext highlighter-rouge">target</code></li>
+        <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span> <em>Provide separate test dataset?</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Test dataset (CSV/TSV)</em>: <code class="language-plaintext highlighter-rouge">HANCOCK_test_split_3GB_jpeg.csv</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Text backbone</em>: <code class="language-plaintext highlighter-rouge">google/electra-base-discriminator</code></li>
+        <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span> <em>Use image modality?</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>+ Insert Image archive</em>: <code class="language-plaintext highlighter-rouge">click</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>ZIP file containing images</em>: <code class="language-plaintext highlighter-rouge">CD3_CD8_images_3GB_jpeg.zip</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Image backbone</em>: <code class="language-plaintext highlighter-rouge">caformer_b36.sail_in22k_ft_in1k</code></li>
+        <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span> <em>Drop rows with missing images?</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>Primary evaluation metric</em>: <code class="language-plaintext highlighter-rouge">ROC AUC</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Random seed</em>: <code class="language-plaintext highlighter-rouge">42</code></li>
+        <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">param-toggle</span> <em>Advanced: customize training settings?</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>Binary classification threshold</em>: <code class="language-plaintext highlighter-rouge">0.25</code></li>
+      </ul>
+    </li>
+    <li>Run the tool and review the HTML report.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-recommended-multimodal-learner-configuration-and-why"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-recommended-multimodal-learner-configuration-and-why" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Recommended Multimodal Learner configuration (and why)</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Rationale</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Text backbone</td>
+        <td>ELECTRA base performs well on clinical free text</td>
+      </tr>
+      <tr>
+        <td>Image backbone</td>
+        <td>CAFormer b36 is a strong baseline for CD3/CD8 pathology images</td>
+      </tr>
+      <tr>
+        <td>ROC AUC metric</td>
+        <td>Robust for imbalanced binary outcomes</td>
+      </tr>
+      <tr>
+        <td>5-fold CV</td>
+        <td>Estimates stability across folds</td>
+      </tr>
+      <tr>
+        <td>Threshold 0.25</td>
+        <td>Matches the recurrence decision rule used in the use case</td>
+      </tr>
+    </tbody>
+  </table>
+
+</blockquote>
+
+<h2 id="tool-output-files">Tool Output Files</h2>
+
+<p>After the run finishes, you should see these outputs in your history:</p>
+
+<ul>
+  <li><strong>Multimodal Learner analysis report (HTML)</strong>: Summary metrics, ROC/PR curves, and diagnostic plots</li>
+  <li><strong>Multimodal Learner metric results (JSON)</strong>: Machine-readable metrics for train/validation/test</li>
+  <li><strong>Multimodal Learner training config (YAML)</strong>: Full run settings for reproducibility</li>
+</ul>
+
+<h2 id="interpreting-the-multimodal-learner-report">Interpreting the Multimodal Learner Report</h2>
+
+<p>The HTML report is designed to help you answer two questions quickly: <strong>how well does the model discriminate outcomes</strong> and <strong>what kinds of errors it makes at a chosen operating point</strong>.</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="./../../images/multimodal_learner/report_tabs.png" alt="Report tabs containing configuration, metrics and plots of the model. " width="1046" height="86" loading="lazy" /><a target="_blank" href="./../../images/multimodal_learner/report_tabs.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Picture of the report tabs generated after running the multimodal learner tool.</figcaption></figure>
+
+<ul>
+  <li><strong>Performance summary (by split)</strong><br />
+Review ROC–AUC and PR–AUC alongside threshold-dependent metrics (precision, recall, F1). For recurrence prediction, PR–AUC is often especially informative because the positive class can be relatively rare, and false negatives directly reduce recall.</li>
+  <li><strong>Diagnostics (curves and confusion matrix)</strong><br />
+Use ROC/PR curves to understand ranking performance, then move to the confusion matrix and class-wise metrics to see <em>where</em> errors occur. In the HANCOCK recurrence use case, a common pattern is <strong>stronger performance for the negative class (no recurrence)</strong> than the positive class, so the main concern is typically <strong>missed recurrence cases (false negatives)</strong>.</li>
+  <li><strong>Calibration and threshold behavior</strong><br />
+Calibration plots help you decide whether predicted probabilities can be interpreted as risk. Threshold views show how changing the cutoff trades off false negatives versus false positives. The configuration used was <strong>0.25</strong> decision threshold to make this tradeoff explicit (rather than relying on the default 0.5).</li>
+  <li><strong>Configuration and reproducibility</strong><br />
+Confirm that the report matches your intended setup: which modalities were used, chosen text and image backbones, missing-image handling, split strategy, random seed, and time budget.</li>
+</ul>
+
+<h1 id="tutorial-results-jpeg-derivative-dataset">Tutorial Results (JPEG Derivative Dataset)</h1>
+
+<p>The following held-out test metrics are from the tutorial run using the JPEG-compressed image archive (<code class="language-plaintext highlighter-rouge">CD3_CD8_images_3GB_jpeg.zip</code>). The smaller archive greatly improves upload and execution practicality, with the expected tradeoff of reduced predictive performance compared with the full-resolution image setup.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th style="text-align: right">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Accuracy</td>
+      <td style="text-align: right">0.72</td>
+    </tr>
+    <tr>
+      <td>Precision</td>
+      <td style="text-align: right">0.36</td>
+    </tr>
+    <tr>
+      <td>Recall (Sensitivity/TPR)</td>
+      <td style="text-align: right">0.15</td>
+    </tr>
+    <tr>
+      <td>F1-Score</td>
+      <td style="text-align: right">0.21</td>
+    </tr>
+    <tr>
+      <td>Specificity (TNR)</td>
+      <td style="text-align: right">0.91</td>
+    </tr>
+    <tr>
+      <td>ROC-AUC</td>
+      <td style="text-align: right">0.63</td>
+    </tr>
+    <tr>
+      <td>PR-AUC</td>
+      <td style="text-align: right">0.33</td>
+    </tr>
+    <tr>
+      <td>LogLoss</td>
+      <td style="text-align: right">0.60</td>
+    </tr>
+    <tr>
+      <td>MCC</td>
+      <td style="text-align: right">0.09</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>How to read this run:</p>
+
+<ul>
+  <li><strong>The model still captures some recurrence signal</strong> (ROC-AUC above 0.5), but discrimination is moderate.</li>
+  <li><strong>Specificity remains high (0.91)</strong>, while <strong>recall is low (0.15)</strong>, indicating under-detection of recurrence cases at the selected threshold.</li>
+  <li><strong>PR-AUC and MCC are modest</strong>, which is consistent with a harder positive-class detection setting under image compression.</li>
+</ul>
+
+<h2 id="what-to-do-next-with-this-tutorial-run">What to do next with this tutorial run</h2>
+
+<ul>
+  <li>Use threshold plots in the report to test operating-point tradeoffs (higher recall usually lowers precision/specificity).</li>
+  <li>Keep this lightweight setup for learning the workflow and tool behavior.</li>
+  <li>Use the high-quality setup (below) when you need stronger performance analysis or paper-level comparison.</li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Using the HANCOCK recurrence task as an example, this tutorial demonstrates how Multimodal Learner integrates <strong>tabular clinical variables</strong>, <strong>free-text ICD descriptions</strong>, and <strong>CD3/CD8 images</strong> in a single late-fusion workflow. The tutorial-focused JPEG derivative provides a much smoother user experience for data upload and execution, but the resulting metrics are lower than the full-resolution setup. This contrast highlights a core practical lesson for multimodal learning in pathology workflows: <strong>data quality, especially image quality, has direct impact on downstream performance and benchmark comparability</strong>.</p>
+
+<h1 id="high-quality-image-run-reference-section-45-gb-zip">High-Quality Image Run (Reference Section, ~45 GB ZIP)</h1>
+
+<p>The results that were previously shown in the main tutorial are retained here as a separate reference run using the larger, higher-quality image archive (approximately 45 GB ZIP). This setup is closer to research-grade benchmarking but requires substantially more storage, upload time, and compute.</p>
+
+<p>Reference files for the higher-quality run:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">https://zenodo.org/records/17933596/files/HANCOCK_train_split.csv</code></li>
+  <li><code class="language-plaintext highlighter-rouge">https://zenodo.org/records/17933596/files/HANCOCK_test_split.csv</code></li>
+  <li><code class="language-plaintext highlighter-rouge">https://zenodo.org/records/17727354/files/tma_cores_cd3_cd8_images.zip</code></li>
+</ul>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-data-preparation-shaping-hancock-for-the-tool-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Data preparation: shaping HANCOCK for the tool</div>
+
+  <p>A Python script for preprocessing can be found at: <a href="https://github.com/goeckslab/gleam_use_cases/tree/main/multimodal_learner">HANCOCK_preprocessing</a></p>
+
+</blockquote>
+
+<h2 id="reference-results-with-full-quality-images">Reference Results with Full-Quality Images</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th style="text-align: right">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Accuracy</td>
+      <td style="text-align: right">0.81</td>
+    </tr>
+    <tr>
+      <td>Precision</td>
+      <td style="text-align: right">0.90</td>
+    </tr>
+    <tr>
+      <td>Recall (Sensitivity/TPR)</td>
+      <td style="text-align: right">0.27</td>
+    </tr>
+    <tr>
+      <td>F1-Score</td>
+      <td style="text-align: right">0.42</td>
+    </tr>
+    <tr>
+      <td>Specificity (TNR)</td>
+      <td style="text-align: right">0.99</td>
+    </tr>
+    <tr>
+      <td>ROC-AUC</td>
+      <td style="text-align: right">0.78</td>
+    </tr>
+    <tr>
+      <td>PR-AUC</td>
+      <td style="text-align: right">0.67</td>
+    </tr>
+  </tbody>
+</table>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="./../../images/multimodal_learner/test_roc_auc.png" alt="ROC-AUC curve generated by the test set. " width="1003" height="527" loading="lazy" /><a target="_blank" href="./../../images/multimodal_learner/test_roc_auc.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> ROC-AUC plot generated on the test set for the higher-quality image setup.</figcaption></figure>
+
+<h2 id="comparison-with-the-hancock-benchmark-paper">Comparison with the HANCOCK Benchmark Paper</h2>
+
+<p>The original HANCOCK study reported an ROC-AUC of <strong>0.79</strong> for recurrence prediction using engineered multimodal features (<span class="citation"><a href="#Dorrich2025">Dörrich <i>et al.</i> 2025</a></span>). With full-quality images and raw modalities in Multimodal Learner, the reference run reached ROC-AUC <strong>0.78</strong>, which is close to the published benchmark.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric</th>
+      <th style="text-align: right">HANCOCK paper (reference)</th>
+      <th style="text-align: right">Multimodal Learner (full-quality image run)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ROC-AUC</td>
+      <td style="text-align: right">0.79</td>
+      <td style="text-align: right">0.78</td>
+    </tr>
+  </tbody>
+</table>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Multimodal Learner trains a late-fusion model with modality-specific encoders and a learned fusion network.</p>
+</li>
+                        
+                        <li><p>The tutorial dataset is a JPEG-compressed derivative of HANCOCK that is easier to upload and run.</p>
+</li>
+                        
+                        <li><p>Data quality can materially affect multimodal prediction performance and benchmark comparability.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Have a look at the available FAQ pages and support channels
+                <ul>
+                
+                  <li><a href="faqs/">Tutorial FAQs</a></li>
+                
+                
+                  <li><a href="/training-material/topics/statistics/faqs/">Topic  FAQs</a></li>
+                
+                  <li><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a> </li>
+                  <li><a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Matrix Chat</a></li>
+                  <li><a href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+                </ul>
+
+		<!--
+                
+		-->
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Dorrich2025">Dörrich, M., M. Balk, T. Heusinger, and others, 2025 <b>A multimodal dataset for precision oncology in head and neck cancer</b>. Nature Communications 16: 7163. <a href="https://doi.org/10.1038/s41467-025-62386-6">10.1038/s41467-025-62386-6</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate feedback form" alt="Click here to load feedback form" />
+                </div>
+                <div id="feedback-form">
+                </div>
+
+                <script type="text/javascript">
+                (function (window, document) {
+                    function onDocumentReady(fn) {
+                        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                            fn();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', fn);
+                        }
+                    }
+
+                    onDocumentReady(function () {
+                        var feedbackButton = document.getElementById('feedback-button');
+                        var feedbackForm = document.getElementById('feedback-form');
+
+                        if (feedbackButton && feedbackForm) {
+                            feedbackButton.addEventListener('click', function() {
+                                feedbackButton.style.display = 'none';
+                                feedbackForm.innerHTML = '<iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/multimodal_learner"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/multimodal_learner">Loading feedback form...</a></iframe>';
+                            });
+                        }
+                    });
+                })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Paulo Cilas Morais Lyra Junior, Khai Van Dang, Alyssa Pybus, Junhao Qiu, Jeremy Goecks,  <b>Gleam Multimodal Learner - Head and Neck cancer Recurrence Prediction with HANCOCK (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/multimodal_learner/tutorial.html">https://training.galaxyproject.org/training-material/topics/statistics/tutorials/multimodal_learner/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{statistics-multimodal_learner,
+author = "Paulo Cilas Morais Lyra Junior and Khai Van Dang and Alyssa Pybus and Junhao Qiu and Jeremy Goecks",
+	title = "Gleam Multimodal Learner - Head and Neck cancer Recurrence Prediction with HANCOCK (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = "",
+	url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/multimodal_learner/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/multimodal_learner/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: multimodal_learner
+  owner: goeckslab
+  revisions: a92f200d296e
+  tool_panel_section_label: Machine Learning
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: multimodal_learner
+  owner: goeckslab
+  revisions: 3719606b94af
+  tool_panel_section_label: Machine Learning
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+<script>
+window.addEventListener('load', function() {
+	// add sidebar TOC
+	var $myNav = $("#toc");
+	$myNav.empty();
+	Toc.init({
+		$nav: $("#toc")
+	});
+});
+</script>
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/multimodal_learner/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/statistics/tutorials/multimodal_learner/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/df3cb9e8115c758fd94d1532fac2426a13846eba">df3cb9e</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+
+    </body>
+</html>
