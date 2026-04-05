@@ -1,50 +1,80 @@
 ---
 layout: tutorial_hands_on
-
-title: "Building and Annotating Metagenome-Assembled Genomes (MAGs) from Short Metagenomics Paired Reads"
-zenodo_link: ""
+title: Building and Annotating Metagenome-Assembled Genomes (MAGs) from Short Metagenomics
+  Paired Reads
+zenodo_link: ''
 answer_histories:
-  - label: "UseGalaxy.eu"
-    history: https://usegalaxy.eu/u/berenice/h/building-and-annotating-metagenome-assembled-genomes-mags-from-short-metagenomics-paired-reads
-    date: 2025-12-04
-  - label: "UseGalaxy.fr"
-    history: https://usegalaxy.fr/u/bebatut/h/building-and-annotating-metagenome-assembled-genomes-mags-from-short-metagenomics-paired-reads
-    date: 2025-12-04
-  - label: "UseGalaxy.org"
-    history: https://usegalaxy.org/u/bebatut/h/building-and-annotating-metagenome-assembled-genomes-mags-from-short-metagenomics-paired-reads
-    date: 2025-12-04
-  - label: "UseGalaxy.org.au"
-    history: https://usegalaxy.org.au/u/bebatut/h/building-and-annotating-metagenome-assembled-genomes-mags-from-short-metagenomics-paired-reads
-    date: 2025-12-04
+- label: UseGalaxy.eu
+  history: https://usegalaxy.eu/u/berenice/h/building-and-annotating-metagenome-assembled-genomes-mags-from-short-metagenomics-paired-reads
+  date: 2025-12-04
+- label: UseGalaxy.fr
+  history: https://usegalaxy.fr/u/bebatut/h/building-and-annotating-metagenome-assembled-genomes-mags-from-short-metagenomics-paired-reads
+  date: 2025-12-04
+- label: UseGalaxy.org
+  history: https://usegalaxy.org/u/bebatut/h/building-and-annotating-metagenome-assembled-genomes-mags-from-short-metagenomics-paired-reads
+  date: 2025-12-04
+- label: UseGalaxy.org.au
+  history: https://usegalaxy.org.au/u/bebatut/h/building-and-annotating-metagenome-assembled-genomes-mags-from-short-metagenomics-paired-reads
+  date: 2025-12-04
 level: Intermediate
 questions:
-  - Why is it important to perform quality control and remove contamination from raw metagenomic reads before assembly?
-  - What is the purpose of binning in metagenomic analysis? How does binning help in reconstructing metagenome-assembled genomes (MAGs) from complex microbial communities?
-  - What metrics are commonly used to assess the quality of MAGs? How do completeness and contamination levels affect the reliability of downstream analyses?
-  - How does taxonomic assignment contribute to the analysis of MAGs? What databases or tools can be used for assigning taxonomy, and why is it important to use up-to-date references?
-  - What is the significance of functional annotation in metagenomic studies? How can tools like Bakta help uncover the biological roles of microbial communities?
+- Why is it important to perform quality control and remove contamination from raw
+  metagenomic reads before assembly?
+- What is the purpose of binning in metagenomic analysis? How does binning help in
+  reconstructing metagenome-assembled genomes (MAGs) from complex microbial communities?
+- What metrics are commonly used to assess the quality of MAGs? How do completeness
+  and contamination levels affect the reliability of downstream analyses?
+- How does taxonomic assignment contribute to the analysis of MAGs? What databases
+  or tools can be used for assigning taxonomy, and why is it important to use up-to-date
+  references?
+- What is the significance of functional annotation in metagenomic studies? How can
+  tools like Bakta help uncover the biological roles of microbial communities?
 objectives:
-  - List the key steps involved in MAGs building from raw data.
-  - Define essential terms such as MAGs (Metagenome-Assembled Genomes), binning, and functional annotation.
-  - Explain the importance of preprocessing metagenomic reads, including quality control and contamination removal.
-  - Describe the purpose and process of assembling, binning, and refining MAGs.
-  - Compare the quality of MAGs based on completeness, contamination, and other metrics.
-  - Assess the quality of MAGs and determine whether they meet standards for downstream analysis.
-  - Summarize how taxonomic assignment and functional annotation contribute to understanding microbial communities.
-  - Evaluate the reliability of taxonomic assignments and functional annotations based on reference databases.
-  - Analyze the relative abundance of microbial taxa in the samples and infer ecological dynamics.
-  - Identify the types of genomic features annotated by Bakta (e.g., CDS, rRNA, tRNA).
-  - Interpret the functional annotation results to identify metabolic pathways, virulence factors, and other biological roles.
-time_estimation: "6H"
+- List the key steps involved in MAGs building from raw data.
+- Define essential terms such as MAGs (Metagenome-Assembled Genomes), binning, and
+  functional annotation.
+- Explain the importance of preprocessing metagenomic reads, including quality control
+  and contamination removal.
+- Describe the purpose and process of assembling, binning, and refining MAGs.
+- Compare the quality of MAGs based on completeness, contamination, and other metrics.
+- Assess the quality of MAGs and determine whether they meet standards for downstream
+  analysis.
+- Summarize how taxonomic assignment and functional annotation contribute to understanding
+  microbial communities.
+- Evaluate the reliability of taxonomic assignments and functional annotations based
+  on reference databases.
+- Analyze the relative abundance of microbial taxa in the samples and infer ecological
+  dynamics.
+- Identify the types of genomic features annotated by Bakta (e.g., CDS, rRNA, tRNA).
+- Interpret the functional annotation results to identify metabolic pathways, virulence
+  factors, and other biological roles.
+time_estimation: 6H
 key_points:
-  - Preprocessing the metagenomic reads, including quality control and contamination removal, is essential for ensuring the accuracy and reliability of downstream analyses. Skipping this step can introduce errors, artifacts, and biases that compromise the integrity of the results.
-  - Assembly and binning are the processes that transform raw reads into microbial genomes. Assembly reconstructs genomic sequences from metagenomic reads, while binning groups these sequences into putative microbial genomes, or MAGs. These steps are critical for resolving the taxonomic and functional diversity of complex microbial communities.
-  - High-quality MAGs are essential for accurate analysis. Completeness and contamination metrics are key indicators of MAG quality. High-quality MAGs ensure reliable taxonomic assignments and functional annotations, which are necessary for meaningful biological interpretations.
-  - Taxonomic and functional annotation reveal the biological roles of microbes. Taxonomic assignment connects your MAGs to known microbial lineages, facilitating comparisons with existing databases. Functional annotation uncovers the metabolic, ecological, and pathological potential of microbial communities, providing insights into their biological roles and interactions.
-  - Metagenomic analysis is an iterative process. It involves multiple interconnected steps, from preprocessing to functional annotation. Each step builds on the previous one, and revisiting and refining your analyses can lead to deeper insights and more accurate conclusions. As tools and databases evolve, staying updated ensures that your analyses remain cutting-edge and reliable.
+- Preprocessing the metagenomic reads, including quality control and contamination
+  removal, is essential for ensuring the accuracy and reliability of downstream analyses.
+  Skipping this step can introduce errors, artifacts, and biases that compromise the
+  integrity of the results.
+- Assembly and binning are the processes that transform raw reads into microbial genomes.
+  Assembly reconstructs genomic sequences from metagenomic reads, while binning groups
+  these sequences into putative microbial genomes, or MAGs. These steps are critical
+  for resolving the taxonomic and functional diversity of complex microbial communities.
+- High-quality MAGs are essential for accurate analysis. Completeness and contamination
+  metrics are key indicators of MAG quality. High-quality MAGs ensure reliable taxonomic
+  assignments and functional annotations, which are necessary for meaningful biological
+  interpretations.
+- Taxonomic and functional annotation reveal the biological roles of microbes. Taxonomic
+  assignment connects your MAGs to known microbial lineages, facilitating comparisons
+  with existing databases. Functional annotation uncovers the metabolic, ecological,
+  and pathological potential of microbial communities, providing insights into their
+  biological roles and interactions.
+- Metagenomic analysis is an iterative process. It involves multiple interconnected
+  steps, from preprocessing to functional annotation. Each step builds on the previous
+  one, and revisiting and refining your analyses can lead to deeper insights and more
+  accurate conclusions. As tools and databases evolve, staying updated ensures that
+  your analyses remain cutting-edge and reliable.
 edam_ontology:
-  - topic_3174 # Metagenomics
-  - topic_0196 # Sequence assembly
+- topic_3174
+- topic_0196
 contributions:
   authorship:
   - bebatut
@@ -55,11 +85,24 @@ contributions:
   - ifb
 subtopic: metagenomics
 tags:
-  - assembly
-  - binning
-  - metagenomics
-  - microgalaxy
+- assembly
+- binning
+- metagenomics
+- microgalaxy
+recordings:
+- youtube_id: TODO
+  length: 2h46M
+  galaxy_version: '25.1'
+  date: '2026-04-03'
+  speakers:
+  - bebatut
+  captioners:
+  - bebatut
+  bot-timestamp: 1775216187
+
+
 ---
+
 
 Metagenomics has revolutionized our understanding of microbial communities by enabling the study of genetic material directly from environmental samples. One of the most powerful applications of metagenomics is the reconstruction of **Metagenome-Assembled Genomes (MAGs)**, i.e. near-complete or complete genomes of individual microorganisms recovered from complex microbial communities. MAGs provide invaluable insights into microbial diversity, function, and ecology, without the need for laboratory cultivation.
 
