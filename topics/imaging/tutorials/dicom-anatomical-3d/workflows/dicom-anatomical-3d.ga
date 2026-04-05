@@ -1,0 +1,1394 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [
+        {
+            "color": "pink",
+            "data": {
+                "bold": true,
+                "size": 1,
+                "text": "Rules: Keep only the largest connected component"
+            },
+            "id": 7,
+            "position": [
+                2030,
+                1370
+            ],
+            "size": [
+                240,
+                60
+            ],
+            "type": "text"
+        },
+        {
+            "child_steps": [
+                3,
+                6,
+                7,
+                9,
+                10
+            ],
+            "color": "pink",
+            "data": {
+                "title": "Create Rule Templates"
+            },
+            "id": 1,
+            "position": [
+                600,
+                800
+            ],
+            "size": [
+                760,
+                320
+            ],
+            "type": "frame"
+        },
+        {
+            "child_comments": [
+                3
+            ],
+            "child_steps": [
+                27,
+                17,
+                15,
+                13
+            ],
+            "color": "yellow",
+            "data": {
+                "title": "Bone Segmentation"
+            },
+            "id": 2,
+            "position": [
+                1500,
+                0
+            ],
+            "size": [
+                1080,
+                800
+            ],
+            "type": "frame"
+        },
+        {
+            "child_comments": [
+                6
+            ],
+            "child_steps": [
+                28,
+                14,
+                16,
+                18,
+                20
+            ],
+            "color": "yellow",
+            "data": {
+                "title": "Segmentation of the Aortic Bifurcation"
+            },
+            "id": 5,
+            "position": [
+                1500,
+                900
+            ],
+            "size": [
+                1080,
+                550
+            ],
+            "type": "frame"
+        },
+        {
+            "child_comments": [
+                4
+            ],
+            "child_steps": [
+                25,
+                23,
+                21,
+                19,
+                4
+            ],
+            "color": "pink",
+            "data": {
+                "title": "Create Rules for Bone Segmentation"
+            },
+            "id": 3,
+            "position": [
+                1520,
+                220
+            ],
+            "size": [
+                760,
+                560
+            ],
+            "type": "frame"
+        },
+        {
+            "child_comments": [
+                7
+            ],
+            "child_steps": [
+                26,
+                22,
+                24
+            ],
+            "color": "pink",
+            "data": {
+                "title": "Create Rules for Segmentation of the Aortic Bifurcation"
+            },
+            "id": 6,
+            "position": [
+                1520,
+                1140
+            ],
+            "size": [
+                760,
+                290
+            ],
+            "type": "frame"
+        },
+        {
+            "color": "pink",
+            "data": {
+                "bold": true,
+                "size": 1,
+                "text": "Rules: Remove everything behind the largest connected component (subject to a tolerance margin)"
+            },
+            "id": 4,
+            "position": [
+                1550,
+                600
+            ],
+            "size": [
+                200,
+                110
+            ],
+            "type": "text"
+        },
+        {
+            "child_steps": [
+                12,
+                11,
+                8,
+                5
+            ],
+            "color": "turquoise",
+            "data": {
+                "title": "Pre-processing"
+            },
+            "id": 0,
+            "position": [
+                323.23772980255615,
+                530
+            ],
+            "size": [
+                1040,
+                200
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "name":"Leonid Kostrykin",
+            "identifier": "https://orcid.org/0000-0003-1323-3762",
+            "url":"https://github.com/kostrykin/"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Segmentation of Anatomical Structures in Medical Images",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Bones Threshold Value (HU)",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Bones Threshold Value (HU)",
+                    "name": "bones_threshold_huv"
+                }
+            ],
+            "label": "bones_threshold_huv",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 80
+            },
+            "tool_id": null,
+            "tool_state": "{\"default\": 100.0, \"validators\": [{\"min\": null, \"max\": null, \"negate\": false, \"type\": \"in_range\"}], \"parameter_type\": \"float\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "02e2054a-9afb-4ef5-9357-a2f3acab3b26",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Y-Tolerance for Bones Segmentation (pixel)",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Y-Tolerance for Bones Segmentation (pixel)",
+                    "name": "y_tol_bones_px"
+                }
+            ],
+            "label": "y_tol_bones_px",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 370
+            },
+            "tool_id": null,
+            "tool_state": "{\"default\": 6.0, \"validators\": [{\"min\": 0.0, \"max\": null, \"negate\": false, \"type\": \"in_range\"}], \"parameter_type\": \"float\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "959fb1ee-4bd2-4fd6-9f3e-9de0710c460c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "DICOM Series",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "DICOM Series",
+                    "name": "dicom_series"
+                }
+            ],
+            "label": "dicom_series",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 588.4118239462214
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\", \"fields\": null, \"column_definitions\": null}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "e24ba524-7288-4f1e-9aea-7a7c8e761273",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/9.5+galaxy2",
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [],
+            "label": "Create header",
+            "name": "Create text file",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 630,
+                "top": 850
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutfile": {
+                    "action_arguments": {
+                        "newtype": "txt"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"token_set\": [{\"__index__\": 0, \"line\": \"feature min max\", \"repeat_select\": {\"repeat_select_opts\": \"user\", \"__current_case__\": 0, \"times\": \"1\"}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "3afe759d-b200-4525-90e7-f1d0fc401664",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "components_1|param_type|component_value": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Compose text parameter value",
+            "outputs": [
+                {
+                    "name": "out1",
+                    "type": "expression.json"
+                }
+            ],
+            "position": {
+                "left": 1550,
+                "top": 350
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "e188c9826e0f",
+                "name": "compose_text_param",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"components\": [{\"__index__\": 0, \"param_type\": {\"select_param_type\": \"text\", \"__current_case__\": 0, \"component_value\": \"c1+\"}}, {\"__index__\": 1, \"param_type\": {\"select_param_type\": \"float\", \"__current_case__\": 2, \"component_value\": {\"__class__\": \"ConnectedValue\"}}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.1",
+            "type": "tool",
+            "uuid": "40be833d-3a62-4cef-ba6d-356ef118d815",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/highdicom_dicom2tiff/highdicom_dicom2tiff/0.27.0+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert DICOM to TIFF",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 374.23772980255615,
+                "top": 587
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/highdicom_dicom2tiff/highdicom_dicom2tiff/0.27.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5d840cf51a67",
+                "name": "highdicom_dicom2tiff",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"apply_voi_transform\": false, \"input\": {\"__class__\": \"ConnectedValue\"}, \"multiframe_axis\": \"T\", \"target\": {\"dtype\": \"\", \"__current_case__\": 0, \"normalize_label_maps\": true}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.27.0+galaxy0",
+            "type": "tool",
+            "uuid": "9855dabc-d01e-451f-b58b-bce526ec5e02",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "Add row",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "infile": {
+                    "id": 3,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Add \"centroid_y\" rule",
+            "name": "Add line to file",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 880,
+                "top": 850
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "8e251055b1a9",
+                "name": "add_line_to_file",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"options\": \"footer\", \"text_input\": \"centroid_y 0 __CENTROID_Y_MAX__\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "3c966822-c7c0-4e6f-924b-c0f13cd89bde",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "infile": {
+                    "id": 3,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Add \"label\" rule",
+            "name": "Add line to file",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 880,
+                "top": 980
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "8e251055b1a9",
+                "name": "add_line_to_file",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"options\": \"footer\", \"text_input\": \"label __LABEL__ __LABEL__\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "6a879b5c-9962-4467-beac-53375d72506d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/concat_channels/ip_concat_channels/0.5",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "inputs": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Concatenate images or channels",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 624.2377298025561,
+                "top": 587
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/concat_channels/ip_concat_channels/0.5",
+            "tool_shed_repository": {
+                "changeset_revision": "999c5941a6f0",
+                "name": "concat_channels",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"axis\": \"Z\", \"inputs\": {\"__class__\": \"ConnectedValue\"}, \"mode\": \"--preserve_values\", \"sort_by\": \"z_position\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.5",
+            "type": "tool",
+            "uuid": "45d63f0b-5af7-4b0d-85a4-80c353d32821",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "Convert characters1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1130,
+                "top": 850
+            },
+            "post_job_actions": {},
+            "tool_id": "Convert characters1",
+            "tool_state": "{\"condense\": true, \"convert_from\": \"s\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"strip\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "e7ead969-eef7-47a7-8ea8-2bffb3d023f4",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "Convert characters1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1130,
+                "top": 980
+            },
+            "post_job_actions": {},
+            "tool_id": "Convert characters1",
+            "tool_state": "{\"condense\": true, \"convert_from\": \"s\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"strip\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "15f31739-a708-4216-9b9d-84944a4c13f1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/scale_image/ip_scale_image/0.25.2+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scale image",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 874.2377298025561,
+                "top": 587
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/scale_image/ip_scale_image/0.25.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e85846f4a05f",
+                "name": "scale_image",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"interpolation\": {\"order\": \"1\", \"__current_case__\": 1, \"anti_alias\": true}, \"scale\": {\"mode\": \"isotropy\", \"__current_case__\": 2, \"sample\": \"down\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.25.2+galaxy0",
+            "type": "tool",
+            "uuid": "723363c6-0daf-4d7b-9cbb-34511a61fc1f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/clip_image/clip_image/0.7.3+galaxy0",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input": {
+                    "id": 11,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Clip image intensities",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 1124.237729802556,
+                "top": 587
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/clip_image/clip_image/0.7.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "53be9a7f94a6",
+                "name": "clip_image",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"lower_bound\": \"-1000.0\", \"upper_bound\": null, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.7.3+galaxy0",
+            "type": "tool",
+            "uuid": "7adb47bf-1843-4fdc-9cd3-478340acc7df",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.2+galaxy0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input": {
+                    "id": 12,
+                    "output_name": "output"
+                },
+                "th_method|threshold1": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Threshold image",
+                    "name": "th_method"
+                }
+            ],
+            "label": null,
+            "name": "Threshold image",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 1550,
+                "top": 50
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2ee04d2ebdcf",
+                "name": "2d_auto_threshold",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert_output\": false, \"th_method\": {\"method_id\": \"manual\", \"__current_case__\": 0, \"threshold1\": {\"__class__\": \"ConnectedValue\"}, \"threshold2\": null, \"offset\": \"0\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.25.2+galaxy0",
+            "type": "tool",
+            "uuid": "c4fafada-e614-4cd6-b309-91cc21dbea9f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/ridge_filter/ridge_filter_skimage/0.22.0+galaxy2",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input": {
+                    "id": 12,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Apply ridge filter",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 1550,
+                "top": 980
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/ridge_filter/ridge_filter_skimage/0.22.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "f37d2ad5f532",
+                "name": "ridge_filter",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"dtype\": \"float64\", \"filter\": {\"filter_type\": \"frangi\", \"__current_case__\": 0, \"black_ridges\": \"false\", \"sigma_min\": \"0.5\", \"sigma_max\": \"1.5\", \"num_sigma\": \"3\", \"alpha\": \"0.5\", \"beta\": \"0.5\", \"gamma\": \"5.0\"}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.22.0+galaxy2",
+            "type": "tool",
+            "uuid": "74b983a7-aed2-442b-ae0c-44af8a51c221",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.7.3+galaxy0",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "setup|input": {
+                    "id": 13,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Convert binary image to label map",
+                    "name": "setup"
+                }
+            ],
+            "label": null,
+            "name": "Convert binary image to label map",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 1800,
+                "top": 79.99904000000049
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.7.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "364e235bf378",
+                "name": "binary2labelimage",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"setup\": {\"method\": \"cca\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.7.3+galaxy0",
+            "type": "tool",
+            "uuid": "3e5935a5-a214-4060-9c27-620362447d41",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.2+galaxy0",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "input": {
+                    "id": 14,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Threshold image",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 1800,
+                "top": 980
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2ee04d2ebdcf",
+                "name": "2d_auto_threshold",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert_output\": false, \"th_method\": {\"method_id\": \"manual\", \"__current_case__\": 0, \"threshold1\": \"0.25\", \"threshold2\": \"0.3\", \"offset\": \"0\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.25.2+galaxy0",
+            "type": "tool",
+            "uuid": "295ba5bc-54d0-4a7e-a144-2e92f6c641bf",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.25.2+galaxy1",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "labels": {
+                    "id": 15,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Extract image features",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2050,
+                "top": 49.99904000000049
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.25.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "519fad2c552a",
+                "name": "2d_feature_extraction",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"labels\": {\"__class__\": \"ConnectedValue\"}, \"setup\": {\"mode\": \"without-intensities\", \"__current_case__\": 0, \"features\": [\"label\", \"area\", \"centroid\"]}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.25.2+galaxy1",
+            "type": "tool",
+            "uuid": "10a4fe77-a465-4b92-be2c-152d8ea69e00",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.7.3+galaxy0",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "setup|input": {
+                    "id": 16,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Convert binary image to label map",
+                    "name": "setup"
+                }
+            ],
+            "label": null,
+            "name": "Convert binary image to label map",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 2050,
+                "top": 980
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.7.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "364e235bf378",
+                "name": "binary2labelimage",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"setup\": {\"method\": \"cca\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.7.3+galaxy0",
+            "type": "tool",
+            "uuid": "c06b7ecd-6451-4e4f-94d8-44822617cf36",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "tables_0|table": {
+                    "id": 17,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Query Tabular",
+                    "name": "add_to_database"
+                }
+            ],
+            "label": null,
+            "name": "Query Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1800,
+                "top": 270
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2",
+            "tool_shed_repository": {
+                "changeset_revision": "cf4397560712",
+                "name": "query_tabular",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"add_to_database\": {\"withdb\": {\"__class__\": \"RuntimeValue\"}}, \"addqueries\": {\"queries\": []}, \"modify_database\": {\"sql_stmts\": []}, \"query_result\": {\"header\": \"no\", \"__current_case__\": 1}, \"save_db\": false, \"sqlquery\": \"SELECT t1.centroid_y FROM t1 WHERE t1.area = (SELECT MAX(t1.area) FROM t1);\", \"tables\": [{\"__index__\": 0, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": []}, \"tbl_opts\": {\"table_name\": \"\", \"column_names_from_first_line\": true, \"col_names\": \"\", \"load_named_columns\": false, \"pkey_autoincr\": \"\", \"indexes\": []}}], \"workdb\": \"workdb.sqlite\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "3.3.2",
+            "type": "tool",
+            "uuid": "1490e262-4d58-4bf6-9b6c-324e49521543",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.25.2+galaxy1",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "labels": {
+                    "id": 18,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Extract image features",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2300,
+                "top": 950
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.25.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "519fad2c552a",
+                "name": "2d_feature_extraction",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"labels\": {\"__class__\": \"ConnectedValue\"}, \"setup\": {\"mode\": \"without-intensities\", \"__current_case__\": 0, \"features\": [\"label\", \"area\"]}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.25.2+galaxy1",
+            "type": "tool",
+            "uuid": "8c817cfc-3652-47e2-9a9c-3d9c1ff18c16",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "21": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1",
+            "errors": null,
+            "id": 21,
+            "input_connections": {
+                "input": {
+                    "id": 19,
+                    "output_name": "output"
+                },
+                "ops|expressions_0|cond": {
+                    "id": 4,
+                    "output_name": "out1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2050,
+                "top": 340
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1",
+            "tool_shed_repository": {
+                "changeset_revision": "aff5135563c6",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"avoid_scientific_notation\": true, \"error_handling\": {\"auto_col_types\": true, \"fail_on_non_existent_columns\": true, \"non_computable\": {\"action\": \"--fail-on-non-computable\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"ops\": {\"header_lines_select\": \"no\", \"__current_case__\": 0, \"expressions\": [{\"__index__\": 0, \"cond\": {\"__class__\": \"ConnectedValue\"}, \"add_column\": {\"mode\": \"R\", \"__current_case__\": 2, \"pos\": \"1\"}}]}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2.1",
+            "type": "tool",
+            "uuid": "9b6bcce8-3667-4292-b563-407ef8544baf",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "22": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2",
+            "errors": null,
+            "id": 22,
+            "input_connections": {
+                "tables_0|table": {
+                    "id": 20,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Query Tabular",
+                    "name": "add_to_database"
+                }
+            ],
+            "label": null,
+            "name": "Query Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1550,
+                "top": 1230
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2",
+            "tool_shed_repository": {
+                "changeset_revision": "cf4397560712",
+                "name": "query_tabular",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"add_to_database\": {\"withdb\": {\"__class__\": \"RuntimeValue\"}}, \"addqueries\": {\"queries\": []}, \"modify_database\": {\"sql_stmts\": []}, \"query_result\": {\"header\": \"no\", \"__current_case__\": 1}, \"save_db\": false, \"sqlquery\": \"SELECT t1.label FROM t1 WHERE t1.area = (SELECT MAX(t1.area) FROM t1);\", \"tables\": [{\"__index__\": 0, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": []}, \"tbl_opts\": {\"table_name\": \"\", \"column_names_from_first_line\": true, \"col_names\": \"\", \"load_named_columns\": false, \"pkey_autoincr\": \"\", \"indexes\": []}}], \"workdb\": \"workdb.sqlite\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "3.3.2",
+            "type": "tool",
+            "uuid": "59c8df95-12aa-41df-8eec-e5c1c1af9786",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "23": {
+            "annotation": "",
+            "content_id": "param_value_from_file",
+            "errors": null,
+            "id": 23,
+            "input_connections": {
+                "input1": {
+                    "id": 21,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Parse parameter value",
+            "outputs": [
+                {
+                    "name": "text_param",
+                    "type": "expression.json"
+                }
+            ],
+            "position": {
+                "left": 1800,
+                "top": 490
+            },
+            "post_job_actions": {},
+            "tool_id": "param_value_from_file",
+            "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"param_type\": \"text\", \"remove_newlines\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "687a745d-1703-4a78-a876-b9fd7a0ce568",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "24": {
+            "annotation": "",
+            "content_id": "param_value_from_file",
+            "errors": null,
+            "id": 24,
+            "input_connections": {
+                "input1": {
+                    "id": 22,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Parse parameter value",
+            "outputs": [
+                {
+                    "name": "text_param",
+                    "type": "expression.json"
+                }
+            ],
+            "position": {
+                "left": 1800,
+                "top": 1250
+            },
+            "post_job_actions": {},
+            "tool_id": "param_value_from_file",
+            "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"param_type\": \"text\", \"remove_newlines\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "ede82e40-5bf0-4594-9c85-ffa9d3bb3f39",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "25": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy2",
+            "errors": null,
+            "id": 25,
+            "input_connections": {
+                "infile": {
+                    "id": 9,
+                    "output_name": "out_file1"
+                },
+                "replacements_0|replace_pattern": {
+                    "id": 23,
+                    "output_name": "text_param"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2050,
+                "top": 610
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutfile": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"find_pattern\": \"__CENTROID_Y_MAX__\", \"replace_pattern\": {\"__class__\": \"ConnectedValue\"}, \"sed_options\": null}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "d7498213-3618-4844-8603-793ce35463e7",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "26": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy2",
+            "errors": null,
+            "id": 26,
+            "input_connections": {
+                "infile": {
+                    "id": 10,
+                    "output_name": "out_file1"
+                },
+                "replacements_0|replace_pattern": {
+                    "id": 24,
+                    "output_name": "text_param"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2050,
+                "top": 1190
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutfile": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"find_pattern\": \"__LABEL__\", \"replace_pattern\": {\"__class__\": \"ConnectedValue\"}, \"sed_options\": null}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "0636d14b-91a6-4282-a9bf-3d0d75938c3a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "27": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.7.3+galaxy1",
+            "errors": null,
+            "id": 27,
+            "input_connections": {
+                "features": {
+                    "id": 17,
+                    "output_name": "output"
+                },
+                "labels": {
+                    "id": 15,
+                    "output_name": "output"
+                },
+                "rules": {
+                    "id": 25,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter label map by rules",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 2360,
+                "top": 109.99904000000049
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.7.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "ea6dae3f10a2",
+                "name": "2d_filter_segmentation_by_features",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"features\": {\"__class__\": \"ConnectedValue\"}, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"missing\": \"fail\", \"rules\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.7.3+galaxy1",
+            "type": "tool",
+            "uuid": "28a17d1b-ee0a-4bc4-8db9-6e576175fd85",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "segm_bones",
+                    "output_name": "output",
+                    "uuid": "8fa03bee-9e05-4f98-9816-20a6ab4d37cb"
+                }
+            ]
+        },
+        "28": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.7.3+galaxy1",
+            "errors": null,
+            "id": 28,
+            "input_connections": {
+                "features": {
+                    "id": 20,
+                    "output_name": "output"
+                },
+                "labels": {
+                    "id": 18,
+                    "output_name": "output"
+                },
+                "rules": {
+                    "id": 26,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter label map by rules",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 2360,
+                "top": 1190
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.7.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "ea6dae3f10a2",
+                "name": "2d_filter_segmentation_by_features",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"features\": {\"__class__\": \"ConnectedValue\"}, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"missing\": \"fail\", \"rules\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.7.3+galaxy1",
+            "type": "tool",
+            "uuid": "59e9962a-ed2e-4584-8d0f-8e81e8730ec0",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "segm_aorticbif",
+                    "output_name": "output",
+                    "uuid": "9d82b7c6-8f5c-4523-aac2-21ec66030e62"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "imaging"
+    ],
+    "uuid": "cd628e55-27c7-4a0a-b19b-d8a4a61bda46",
+    "version": 4
+}

@@ -33,6 +33,7 @@ We can now launch the proper binning with MaxBin2
 >
 > 1. How many bins where produced by MaxBin2 for our sample?
 > 2. How many contigs are in the bin with most contigs? 
+>
 > > <solution-title></solution-title>
 > >
 > > 1. There are two bin for this sample.

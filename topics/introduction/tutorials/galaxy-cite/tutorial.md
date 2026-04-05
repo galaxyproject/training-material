@@ -168,6 +168,10 @@ Two repository options that we recommend for publishing your Workflows are:
 - WorkflowHub ([https://workflowhub.eu/](https://workflowhub.eu/))
 - Dockstore ([https://dockstore.org/](https://dockstore.org/)) 
 
+## Citing Public Workflows
+
+If you used a workflow that was published on Galaxy, in Galaxy's workflow library, [the IWC](https://iwc.galaxyproject.org/)], or a repository such as WorkflowHub, then we recommend you cite the original workflow. You can cite a workflow as you would any other software. If the information is available, we recommend including the creator’s name, the date of creation, the name of the repository, and the workflow’s DOI or URL.
+
 ## Citing Public Data
 
 If you used a public data source in your work, we recommend you cite both the data source publication DOI and the dataset itself. Most citation styles will include options for citing datasets. You should include the repository name and accession code in your Methods section to make it easy to find.

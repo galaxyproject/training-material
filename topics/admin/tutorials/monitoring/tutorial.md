@@ -774,7 +774,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 
 > <hands-on-title>Configuring Telegraf</hands-on-title>
 >
-> 1. Edit the `group_vars/galaxyservers.yml`, we need to add some additional permissions to permit Telegraf to run `gxadmin`:
+> 1. Edit the `group_vars/dbservers.yml`, we need to add some additional permissions to permit Telegraf to run `gxadmin`:
 >
 >    {% raw %}
 >    ```diff
@@ -801,7 +801,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```
 >    {: data-commit="Configure database permissions for Telegraf"}
 >
-> 2. Again edit the `group_vars/galaxyservers.yml`, we need to configure Telegraf to run `gxadmin`
+> 2. Edit the `group_vars/galaxyservers.yml`, we need to configure Telegraf to run `gxadmin`
 >
 >    Under `telegraf_plugins_extra`, where we already have set a Galaxy StatsD listener, add a stanza to monitor the Galaxy queue
 >

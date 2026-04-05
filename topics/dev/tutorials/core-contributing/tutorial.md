@@ -23,11 +23,6 @@ requirements:
     topic_name: contributing
     tutorials:
         - github-contribution
-  -
-    type: "internal"
-    topic_name: dev
-    tutorials:
-        - architecture
 ---
 
 This tutorial walks you through developing an extension to Galaxy, and how to contribute back to the core project.

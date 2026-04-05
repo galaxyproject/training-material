@@ -134,6 +134,11 @@ module Gtn
       return data if data.nil? || data.is_a?(Array)
 
       errs.push(*validate_document(data, @faq_validator))
+
+      if !(data.key?('contributors') || data.key?('contributions'))
+        errs.push('Document lacks EITHER contributors OR contributions key')
+      end
+
       errs
     end
 

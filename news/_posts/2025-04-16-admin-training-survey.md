@@ -17,6 +17,8 @@ contributions:
     - uni-freiburg
     - deNBI
     - eurosciencegateway
+    - cesnet
+    - elixir-cz
 cover: ./assets/images/gat-small.png
 coveralt: GTN logo on a spiral galaxy background with text galaxy admin training
 ---

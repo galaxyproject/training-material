@@ -34,6 +34,10 @@ contributions:
   editing:
    - maartenpaul
    - rmassei
+  funding:
+    - nfdi4bioimage
+    - uni-freiburg
+    - dfg
   reviewing:
     - maartenpaul
     - rmassei
@@ -345,7 +349,7 @@ In Galaxy, you can start the pre-processing stage with tools like **{% tool [App
 This is the most critical step. Here, you tell the computer which pixels belong to an "object" (like a nucleus) and which belong to the "background." 
 
 * **Thresholding:** A "cutoff" method where pixels above (or below) a certain intensity value are classified as object. This value can be set manually or determined automatically using algorithms like Otsu or Li. The result is typically a **binary mask** (also called a **binary image**).
-* **Inference (Deep Learning):** Advanced AI models like **Cellpose** use pre-trained neural networks to recognize complex shapes. These methods might be superior at specific segmentation tasks such as "untangling" cells that are touching or overlapping in high-density environments ({% cite Stringer2021 %}, {% cite Schmidt2018 %}).
+* **Inference (Deep Learning):** Advanced AI models like **Cellpose** use pre-trained neural networks to recognize complex shapes. These methods might be superior at specific segmentation tasks such as "untangling" cells that are touching or overlapping in high-density environments ({% cite stringer2025cellpose3 %}, {% cite Schmidt2018 %}, {% cite Pachitariu2025.04.28.651001 %}).
 
 > <hands-on-title> Creating a Segmentation Mask </hands-on-title>
 >
@@ -377,7 +381,7 @@ In Galaxy, ROIs can take three forms depending on the tool you use:
 * **Label Images:** A "smart map" where every individual ROI has its own unique integer ID (e.g., {% cite Tosi2021 %}).
 
 > <comment-title>ROIs in interactive vs. automated tools</comment-title>
->Interactive tools like QuPath allows users to inspect images and create ROIs either manually (e.g. drawing with the mouse) or through built-in detection algorithms that generate ROIs automatically. In automated Galaxy workflows, algorithms like Cellpose generate thousands of ROIs programmatically in a fully reproducible pipeline without user interaction ({% cite Stringer2021 %}).
+>Interactive tools like QuPath allows users to inspect images and create ROIs either manually (e.g. drawing with the mouse) or through built-in detection algorithms that generate ROIs automatically. In automated Galaxy workflows, algorithms like Cellpose generate thousands of ROIs programmatically in a fully reproducible pipeline without user interaction ({% cite stringer2025cellpose3 %}, {% cite Pachitariu2025.04.28.651001 %}).
 {: .comment}
 
 ## Stage C: Post-processing (Refining)
@@ -570,8 +574,6 @@ By building modular workflows in Galaxy, you have created a pipeline that is not
 ## Further Reading
 
 For more inspiration and a complementary perspective on designing bioimage analysis pipelines, we recommend {% cite Fazeli2025 %}, which provides a decision tree approach to bioimage analysis that complements the workflows covered in this tutorial.
-
-# Glossary of bioimage terms
 
 # Glossary of bioimage terms
 

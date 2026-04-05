@@ -63,24 +63,41 @@ perform image analysis.
 {: .agenda}
 
 
-## Before Starting - Set up the OMERO credentials
+## Before Starting - Secure Your OMERO credentials with Galaxy's Credentials System
+
 Before starting you need to set up your OMERO credential. 
-This is necessary to connect to a target OMERO instance and needs to be performed just one time.
 
-The OMERO credentials have to be saved in your preferences 
-(*User → Preferences → Manage information*).
+**Galaxy 25.1** offers a comprehensive tool credentials system that makes it easy and secure for both users and tool developers to work with external services. All sensitive information (secrets like API keys, passwords, tokens) is now stored encrypted in Galaxy's vault system.
 
-![omero_credential.png](../../images/omero-suite/omero_credential.png)
+Setting up the credentials for a specific OMERO tool is easy and allows to save multiple OMERO instance within one tool!
 
-This feature is embedded in Galaxy and needs to be enabled by the admin 
-of the server you are using. You can now use it in [UseGalaxy.eu](https://usegalaxy.eu/) or ask your 
-admin to add it. For more info about the configuration on the admin side, 
-please take a look at the [README file of the tool](https://github.com/galaxyproject/tools-iuc/blob/main/tools/idr_download/README.md).
+When opening any OMERO tool, you will see the following orange windows above the tool parameters. This means that no credentials are set up at the moment. 
 
-**Please Notice**: The configuration file, which contains your OMERO password and username, will be stored in the job working directory.
-    This directory only exists during the runtime of the job and should only be accessible by the system user that runs the job.
-    However, please be aware that your username and password **may be exposed** to users with administrative rights.
-    We are working on increasing the security of the OMERO suite
+Click on **"Provide Credentials"**
+
+![credential_1.png](../../images/omero-suite/credential_1.png)
+
+A pop-up window will open. Click on **OMERO Credentials** and then on **+ Create new group**
+
+![credential_2.png](../../images/omero-suite/credential_2.png)
+
+Add now a **Group Name** and input your OMERO username and password. Optionally, you can use the **OMERO UUID Session Key** for [increased security](https://omero.readthedocs.io/en/stable/users/cli/sessions.html). Click now **Create Group**.
+
+![credential_3.png](../../images/omero-suite/credential_3.png)
+
+Your group is now created! Click on **Use this group** to select these credentials and then **Save Group Selection**.
+
+![credential_4.png](../../images/omero-suite/credential_4.png)
+
+The window above the tool parameters will now turn green! This mean that the tool is ready to use.
+
+![credential_5.png](../../images/omero-suite/credential_5.png)
+
+**Really important:** each tool needs its own credentials... but do not worry, greating a new group needs to be done just once per tool!
+
+You can find [at this link](https://artifact.galaxyproject.org/news/2026-01-12-tool-credentials-system/) more detailed information on the Galaxy credential system.
+
+**Please note**: the OMERO password and username will be stored in the job working directory. This directory only exists during the runtime of the job and should only be accessible by the system user who runs the job. However, please be aware that your username and password **may be exposed** to users with administrative rights.
 
 # Prepare your data
 
@@ -132,7 +149,7 @@ This is done by using the **OMERO Image Import** and **OMERO Metadata Import** t
 
 > <hands-on-title>Upload images into OMERO</hands-on-title>
 >
-> 1. {% tool [OMERO Image Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_import/omero_import/5.18.0+galaxy3) %} with the following recommended parameters:
+> 1. {% tool [OMERO Image Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_import/omero_import/5.18.0+galaxy6) %} with the following recommended parameters:
 >    - {% icon param-file %} *Images to import into OMERO*: You can select here different files to import into OMERO.
 >    Select the datasets `image85-H-01-00.tiff`, `image86-H-02-00.tiff` and `image87-H-03-00.tiff`
 >    - **OMERO host URL**: Input the URL of your OMERO instance.
@@ -161,7 +178,7 @@ We will learn now how to upload **Key-Value pairs** using the **OMERO Metadata I
 
 > <hands-on-title>Upload Key-Value Pairs into OMERO</hands-on-title>
 >
-> 1. {% tool [OMERO Metadata Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_metadata_import/omero_metadata_import/5.18.0+galaxy3) %} with the following recommended parameters:
+> 1. {% tool [OMERO Metadata Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_metadata_import/omero_metadata_import/5.18.0+galaxy7) %} with the following recommended parameters:
 >    - {% icon param-file %} *Annotation file*: `metadata_file.tsv`
 >    - **OMERO host URL**: Input the URL of your OMERO instance.
 >    - **OMERO port**: Input the OMERO port (pre-defined value, *4064*)
@@ -190,7 +207,7 @@ Check the `roi_file.tsv` to have an example. Everything is explained in the tool
 
 > <hands-on-title>Upload images into OMERO</hands-on-title>
 >
-> 1. {% tool [OMERO ROI Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_roi_import/omero_roi_import/5.18.0+galaxy4) %} with the following recommended parameters:
+> 1. {% tool [OMERO ROI Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_roi_import/omero_roi_import/5.18.0+galaxy5) %} with the following recommended parameters:
 >    - {% icon param-file %} **Tab File with ROIs**: `roi_file.tsv`
 >    - **OMERO host URL**: Input the URL of your OMERO instance.
 >    - **OMERO port**: Input the OMERO port (pre-defined value, *4064*)
@@ -215,7 +232,7 @@ First of all, let's try to get all the image IDs present in all Datasets!
 
 > <hands-on-title>Upload images into OMERO</hands-on-title>
 >
-> 1. {% tool [OMERO get IDs](toolshed.g2.bx.psu.edu/repos/ufz/omero_get_id/omero_get_id/5.18.0+galaxy0) %} with the following recommended parameters:
+> 1. {% tool [OMERO get IDs](toolshed.g2.bx.psu.edu/repos/ufz/omero_get_id/omero_get_id/5.18.0+galaxy1) %} with the following recommended parameters:
 >    - **OMERO host URL**: Input the URL of your OMERO instance.
 >    - **OMERO port**: Input the OMERO port (pre-defined value, *4064*)
 >    - **Type of object to fetch ID:**: Select *"Dataset IDs"*
@@ -236,7 +253,7 @@ Now, let's try to get an annotation file...
 
 > <hands-on-title>Get an annotation file from OMERO</hands-on-title>
 >
-> 1. {% tool [OMERO get Object](toolshed.g2.bx.psu.edu/repos/ufz/omero_get_value/omero_get_value/5.18.0+galaxy0) %} with the following recommended parameters:
+> 1. {% tool [OMERO get Object](toolshed.g2.bx.psu.edu/repos/ufz/omero_get_value/omero_get_value/5.18.0+galaxy3) %} with the following recommended parameters:
 >    - **OMERO host URL**: The target OMERO host URL
 >    - **OMERO port**: The OMERO port, pre-defined to *4064*
 >    - **Type of object to fetch:**: Select *"Annotation"*
@@ -256,7 +273,7 @@ This can be done by using the **OMERO IDs** Tool
 
 > <hands-on-title>Upload images into OMERO</hands-on-title>
 >
-> 1. {% tool [OMERO IDs](toolshed.g2.bx.psu.edu/repos/ufz/omero_filter/omero_filter/5.18.0+galaxy0) %} with the following recommended parameters:
+> 1. {% tool [OMERO IDs](toolshed.g2.bx.psu.edu/repos/ufz/omero_filter/omero_filter/5.18.0+galaxy3) %} with the following recommended parameters:
 >    - **OMERO host URL**: The target OMERO host URL
 >    - **OMERO port**: The OMERO port, pre-defined to *4064*
 >    - **Filename to search among the image IDs**: Type `image85-H-01-00_tif.tiff`
@@ -308,7 +325,7 @@ We now add the step for the image import
 
 > <hands-on-title>Add the image upload step to the workflow</hands-on-title>
 >
->1. While in the workflow editor add {% tool [OMERO Image Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_import/omero_import/5.18.0+galaxy3) %}  from the list of tools:
+>1. While in the workflow editor add {% tool [OMERO Image Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_import/omero_import/5.18.0+galaxy6) %}  from the list of tools:
 >   - Connect the output of {% icon param-file %} **1: Input image Datasets** to the "Images to Import in OMERO" 
 >   input of {% icon tool %} **7: OMERO Image Import**.
 >   - Connect the output of {% icon param-file %} **4: Target Dataset Name** to the "Target Dataset Name" 
@@ -341,7 +358,7 @@ The last section is to upload metadata and ROIs
 
 > <hands-on-title> Add tools to upload metadata and ROIs </hands-on-title>
 >
->1. Add {% tool [OMERO Metadata Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_metadata_import/omero_metadata_import/5.18.0+galaxy3) %}  from the list of tools:
+>1. Add {% tool [OMERO Metadata Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_metadata_import/omero_metadata_import/5.18.0+galaxy7) %}  from the list of tools:
 >   - Connect the output of {% icon param-file %} **5: OMERO instance address** to the "OMERO host url"
 >   input of {% icon tool %} **12: OMERO Metadata Import**.
 >   - Connect the output of {% icon param-file %} **11: Parse parameter value** to the "Object ID"
@@ -350,7 +367,7 @@ The last section is to upload metadata and ROIs
 >   input of {% icon tool %} **12: OMERO Metadata Import**.
 >   - Connect the output of {% icon param-file %} **3: Input Metadata File** to the "Annotation file"
 >   input of {% icon tool %} **12: OMERO Metadata Import**.
->2. Add {% tool [OMERO ROI Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_roi_import/omero_roi_import/5.18.0+galaxy4) %}  from the list of tools:
+>2. Add {% tool [OMERO ROI Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_roi_import/omero_roi_import/5.18.0+galaxy5) %}  from the list of tools:
 >   - Connect the output of {% icon param-file %} **5: OMERO instance address** to the "OMERO host url"
 >   input of {% icon tool %} **13: OMERO ROI Import**.
 >   - Connect the output of {% icon param-file %} **2: Input Tabular ROIs** to the "Tab File with ROIs"

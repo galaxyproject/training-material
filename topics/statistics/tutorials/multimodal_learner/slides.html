@@ -1,0 +1,97 @@
+---
+layout: tutorial_slides
+logo: GTN
+title: "Gleam Multimodal Learner - HNSCC Recurrence Prediction with HANCOCK"
+zenodo_link: "https://zenodo.org/records/17933596"
+
+questions:
+  - "How do we combine clinical, text, and image modalities to predict HNSCC recurrence?"
+  - "How do we configure Multimodal Learner to respect a predefined train/test split?"
+  - "How do we interpret ROC AUC and class-wise performance for recurrence prediction?"
+
+objectives:
+  - "Load HANCOCK metadata and CD3/CD8 image archives into Galaxy."
+  - "Train a multimodal model with tabular, text, and image backbones."
+  - "Evaluate test performance and compare to the HANCOCK benchmark."
+
+contributors:
+  - paulocilasjr
+  - qchiujunhao
+  - khaivandangusf2210
+  - jgoecks
+---
+
+# Introduction to GLEAM Multimodal Learner
+
+- **Galaxy**: A web-based platform for data-intensive biomedical research
+- **GLEAM Multimodal Learner**: No-code tool for joint modeling of tabular, text, and image data
+- **Goal**: Predict head and neck cancer recurrence from the HANCOCK cohort
+
+---
+
+# Use Case: HANCOCK HNSCC Recurrence
+
+- **Dataset**: HANCOCK multimodal cohort (763 patients)
+- **Task**: Binary classification (recurrence vs no recurrence)
+- **Modalities**: Clinical tabular variables, ICD text, CD3/CD8 TMA images
+
+---
+
+# Data Assets
+
+- **Training table**: `HANCOCK_train_split.csv`
+- **Test table**: `HANCOCK_test_split.csv`
+- **Images archive**: `tma_cores_cd3_cd8_images.zip`
+- **Main record**: https://zenodo.org/records/17933596
+
+---
+
+# Multimodal Modeling Strategy
+
+| Modality | Source | Encoder |
+|---|---|---|
+| Tabular | Clinical + pathology + labs | FT-Transformer |
+| Text | ICD codes (free text) | ELECTRA base |
+| Image | CD3/CD8 TMA cores | CAFormer b36 |
+
+- Late-fusion network combines modality embeddings
+- Pretrained backbones reduce data requirements
+
+---
+
+# Tool Configuration
+
+- **Training dataset**: filtered `dataset == training`
+- **Test dataset**: filtered `dataset == test`
+- **Text backbone**: `google/electra-base-discriminator`
+- **Image backbone**: `caformer_b36.sail_in22k_ft_in1k`
+- **Metric**: ROC AUC
+- **CV**: 5-fold cross-validation
+- **Threshold**: 0.25
+
+---
+
+# Outputs
+
+- **HTML report**: metrics, ROC curves, confusion matrix
+- **Metrics JSON**: per-split metrics and summary stats
+- **Config YAML**: full run settings for reproducibility
+
+---
+
+# Results Summary
+
+| Metric | HANCOCK (reference) | Multimodal Learner |
+|---|---:|---:|
+| ROC AUC | 0.79 | 0.74 |
+
+- Performance is close to the published benchmark
+- Class-wise metrics highlight stronger performance on the negative class
+
+---
+
+# Takeaways
+
+- Multimodal Learner combines clinical, text, and imaging data in one run
+- Predefined train/test split preserves benchmark comparability
+- GLEAM provides reproducible configuration and transparent reports

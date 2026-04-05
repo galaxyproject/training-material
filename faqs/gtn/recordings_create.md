@@ -74,6 +74,8 @@ Both the GTN tutorial and Galaxy itself change significantly over time, and havi
 3. Need to edit your video after recording?
   - For example to merge multiple videos together?
   - Software like [KDEnlive](https://kdenlive.org/en/) can help here.
+  - Command line option to merge videos (ubuntu) `for f in *.mp4 ; do echo file \'$f\' >> list.txt; done && ffmpeg -f concat -safe 0 -i list.txt -c copy stitched-video.mp4 && rm list.txt`
+  - Great way to simply remove background noise and clicks `ffmpeg -i stitched-video.mp4 -af "adeclick" output.mp4`
   - Feel free to ask us for help if you need!
 
 

@@ -32,10 +32,6 @@ requirements:
     title: "Basic knowledge of Python and JavaScript"
   - type: none
     title: "Mac OS or Linux that can run Galaxy & your favorite IDE or editor"
-  - type: "internal"
-    topic_name: dev
-    tutorials:
-      - architecture
 subtopic: core
 
 ---
