@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>BioNT Brings Galaxy Training to German, Spanish, and Italian Learners</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@98444b8da79e448cfa4af26e1728b4c8766ece30",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/news/2026/04/01/biont.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.08d42ce6.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="BioNT Brings Galaxy Training to German, Spanish, and Italian Learners">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2026-04-07 15:41:02 +0000">
+<meta name="DC.creator" content="Helena Vela">
+<meta name="DC.creator" content="Lisanna Paladin">
+<meta name="DC.creator" content="Alan O'Cais">
+<meta name="DC.creator" content="Daniela Schneider">
+<meta name="DC.creator" content="Saskia Hiltemann">
+<meta name="DC.creator" content="Silvia Di Giorgio">
+<meta name="DC.creator" content="Teresa Müller">
+<meta name="DC.creator" content="Till Sauerwein">
+<meta name="DC.creator" content="Renato Alves"><meta name="description" content="We are thrilled to announce that the BioNT project (Bio Network for Training) has contributed a significant set of human-curated translated Galaxy training materials to the GTN, now live and available to learners worldwide! ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="BioNT Brings Galaxy Training to German, Spanish, and Italian Learners">
+        <meta property="og:description" content="We are thrilled to announce that the BioNT project (Bio Network for Training) has contributed a significant set of human-curated translated Galaxy training materials to the GTN, now live and available to learners worldwide! ">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/BioNT_Logo.png"><!-- fontawesome -->
+        <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/brands.css" rel="stylesheet" />
+        <link href="/training-material/assets/fontawesome/css/solid.css" rel="stylesheet" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2026-04-01-biont.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/news/2026/04/01/biont.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true" style="margin-right:1em"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section>
+  
+  <h1>BioNT Brings Galaxy Training to German, Spanish, and Italian Learners</h1>
+  
+
+  <article>
+
+
+<div class="newsitem">
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hvelab/" class="contributor-badge contributor-hvelab"><img src="https://avatars.githubusercontent.com/hvelab?s=36" alt="Helena Vela avatar" width="36" class="avatar" />
+    Helena Vela</a><a href="/training-material/hall-of-fame/lisanna/" class="contributor-badge contributor-lisanna"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/lisanna?s=36" alt="Lisanna Paladin avatar" width="36" class="avatar" />
+    Lisanna Paladin</a><a href="/training-material/hall-of-fame/ocaisa/" class="contributor-badge contributor-ocaisa"><img src="https://avatars.githubusercontent.com/ocaisa?s=36" alt="Alan O'Cais avatar" width="36" class="avatar" />
+    Alan O'Cais</a><a href="/training-material/hall-of-fame/Sch-Da/" class="contributor-badge contributor-Sch-Da"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Sch-Da?s=36" alt="Daniela Schneider avatar" width="36" class="avatar" />
+    Daniela Schneider</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a><a href="/training-material/hall-of-fame/silviadg87/" class="contributor-badge contributor-silviadg87"><img src="https://avatars.githubusercontent.com/silviadg87?s=36" alt="Silvia Di Giorgio avatar" width="36" class="avatar" />
+    Silvia Di Giorgio</a><a href="/training-material/hall-of-fame/teresa-m/" class="contributor-badge contributor-teresa-m"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/teresa-m?s=36" alt="Teresa Müller avatar" width="36" class="avatar" />
+    Teresa Müller</a><a href="/training-material/hall-of-fame/Tillsa/" class="contributor-badge contributor-Tillsa"><img src="https://avatars.githubusercontent.com/Tillsa?s=36" alt="Till Sauerwein avatar" width="36" class="avatar" />
+    Till Sauerwein</a><a href="/training-material/hall-of-fame/unode/" class="contributor-badge contributor-unode"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/unode?s=36" alt="Renato Alves avatar" width="36" class="avatar" />
+    Renato Alves</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+
+
+<span class="label label-default tutorial_tag" id="new tutorial" style="--color-primary: #ffb55e; --color-darker: #ef9d00; --color-dimmed: #fda700;">new tutorial</span>
+
+
+
+<span class="label label-default tutorial_tag" id="translation" style="--color-primary: #00ddb0; --color-darker: #00c59d; --color-dimmed: #00d1a7;">translation</span>
+
+
+
+<span class="label label-default tutorial_tag" id="community" style="--color-primary: #ffaccb; --color-darker: #ff88b9; --color-dimmed: #ff9ac2;">community</span>
+
+
+
+<span class="label label-default tutorial_tag" id="contributing" style="--color-primary: #00dad6; --color-darker: #00c2be; --color-dimmed: #00ceca;">contributing</span>
+
+
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-8">
+    <p class="text-muted" style="display: inline-flex; width: 100%; justify-content: space-between;">
+      <span>Posted on: 1 April 2026</span>
+      <span>
+        
+      </span>
+    </p>
+
+    <p>We are thrilled to announce that the <a href="https://biont-training.eu/">BioNT project</a> (Bio Network for Training)
+has contributed a significant set of human-curated translated Galaxy training materials to the GTN,
+now live and available to learners worldwide!</p>
+
+<h2 id="what-is-biont">What is BioNT?</h2>
+
+<p>BioNT is an international consortium of academic institutions and SMEs, co-funded by the EU Digital Europe
+programme (grant agreement 101100604), running from January 2023 to June 2026. Its mission is to build a high-quality
+training programme in digital skills for the biotechnology and biomedical sectors, particularly for
+learners with limited prior experience in biological data handling and computational tools.</p>
+
+<p>The University of Freiburg’s Freiburg Galaxy Team is an active BioNT partner, contributing expertise in
+bioinformatics training and the Galaxy Training Network.</p>
+
+<h2 id="human-curated-translated-tutorials-now-available">Human-curated translated Tutorials Now Available</h2>
+
+<p>One of BioNT’s core goals is to make training materials accessible to non-English-speaking communities.
+To that end, the BioNT team has produced careful, human-quality translations of key GTN tutorials into
+<strong>German (DE)</strong>, <strong>Spanish (ES)</strong>, and <strong>Italian (IT)</strong>.</p>
+
+<p>The following tutorials are now available in four languages:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>English</th>
+      <th>German</th>
+      <th>Spanish</th>
+      <th>Italian</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">Galaxy Intro: From Peaks to Genes</a></td>
+      <td><a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial_DE.html">Von Peaks zu Genen</a></td>
+      <td><a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial_ES.html">De picos a genes</a></td>
+      <td><a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial_IT.html">Dai picchi ai geni</a></td>
+    </tr>
+    <tr>
+      <td><a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control</a></td>
+      <td>[Qualitätskontrolle]/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial_DE.htmll)</td>
+      <td>[Control de calidad]/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial_ES.htmll)</td>
+      <td><a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial_IT.html">Controllo qualità</a></td>
+    </tr>
+    <tr>
+      <td><a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html">Mapping</a></td>
+      <td><a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_DE.html">Mapping</a></td>
+      <td><a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_ES.html">Mapeo</a></td>
+      <td><a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_IT.html">Mappatura</a></td>
+    </tr>
+    <tr>
+      <td><a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">Reference-based RNA-Seq</a></td>
+      <td><a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial_DE.html">Referenzbasierte RNA-Seq-Datenanalyse</a></td>
+      <td>[Análisis de datos RNA-Seq basados en referencias]/training-material/topics/transcriptomics/tutorials/ref-based/tutorial_ES.htmll)</td>
+      <td><a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial_IT.html">Analisi dei dati RNA-Seq basata su riferimenti</a></td>
+    </tr>
+    <tr>
+      <td><a href="/training-material/topics/data-science/tutorials/online-resources-gene/tutorial.html">Learning about one gene across biological resources and formats</a></td>
+      <td>[Lernen über ein Gen]/training-material/topics/data-science/tutorials/online-resources-gene/tutorial_DE.htmll)</td>
+      <td>[Aprendizaje sobre un gen]/training-material/topics/data-science/tutorials/online-resources-gene/tutorial_ES.htmll)</td>
+      <td><a href="/training-material/topics/data-science/tutorials/online-resources-gene/tutorial_IT.html">Imparare a conoscere un gene</a></td>
+    </tr>
+    <tr>
+      <td><a href="/training-material/topics/data-science/tutorials/online-resources-protein/tutorial.html">One protein along UniProt</a></td>
+      <td><a href="/training-material/topics/data-science/tutorials/online-resources-protein/tutorial_DE.html">Ein Protein entlang der UniProt-Seite</a></td>
+      <td><a href="/training-material/topics/data-science/tutorials/online-resources-protein/tutorial_ES.html">Una proteína a lo largo de la página UniProt</a></td>
+      <td><a href="/training-material/topics/data-science/tutorials/online-resources-protein/tutorial_IT.html">Una proteina lungo la pagina UniProt</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In addition to the tutorials, the BioNT team has translated a comprehensive set of <strong>Galaxy FAQs</strong> into
+all three languages, covering common actions such as importing data, creating collections, renaming
+datasets, using tutorial mode, and more. These translated FAQs are now embedded throughout the
+corresponding tutorials, giving learners a fully localised experience from start to finish.</p>
+
+<h2 id="why-this-matters">Why This Matters</h2>
+
+<p>Machine translation can provide a rough guide, but learners, especially those new to bioinformatics,
+benefit enormously from materials that read naturally in their own language. The BioNT team’s
+human-translated content ensures that terminology is accurate, explanations are clear, and the learning
+experience is as smooth as possible for German, Spanish, and Italian-speaking communities across Europe
+and beyond.</p>
+
+<p>This work is a wonderful example of the GTN community’s commitment to open, FAIR, and inclusive
+training for everyone.</p>
+
+<h2 id="thank-you">Thank You!</h2>
+
+<p>A huge thank you to all the BioNT contributors who made this possible — translators, reviewers, and
+everyone involved in getting these materials across the finish line:</p>
+
+<p><a href="/training-material/hall-of-fame/hvelab/"><a href="/training-material/hall-of-fame/hvelab/" class="contributor-badge-inline contributor-hvelab">
+  <img src="https://avatars.githubusercontent.com/hvelab?s=36" alt="Helena Vela avatar" width="36" class="avatar" />
+  Helena Vela</a>
+</a>,
+<a href="/training-material/hall-of-fame/lisanna/"><a href="/training-material/hall-of-fame/lisanna/" class="contributor-badge-inline contributor-lisanna">
+  <img src="https://avatars.githubusercontent.com/lisanna?s=36" alt="Lisanna Paladin avatar" width="36" class="avatar" />
+  Lisanna Paladin</a>
+</a>,
+<a href="/training-material/hall-of-fame/ocaisa/"><a href="/training-material/hall-of-fame/ocaisa/" class="contributor-badge-inline contributor-ocaisa">
+  <img src="https://avatars.githubusercontent.com/ocaisa?s=36" alt="Alan O'Cais avatar" width="36" class="avatar" />
+  Alan O’Cais</a>
+</a>
+<a href="/training-material/hall-of-fame/Sch-Da/"><a href="/training-material/hall-of-fame/Sch-Da/" class="contributor-badge-inline contributor-Sch-Da">
+  <img src="https://avatars.githubusercontent.com/Sch-Da?s=36" alt="Daniela Schneider avatar" width="36" class="avatar" />
+  Daniela Schneider</a>
+</a>,
+<a href="/training-material/hall-of-fame/shiltemann/"><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge-inline contributor-shiltemann">
+  <img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+  Saskia Hiltemann</a>
+</a>.
+<a href="/training-material/hall-of-fame/silviadg87/"><a href="/training-material/hall-of-fame/silviadg87/" class="contributor-badge-inline contributor-silviadg87">
+  <img src="https://avatars.githubusercontent.com/silviadg87?s=36" alt="Silvia Di Giorgio avatar" width="36" class="avatar" />
+  Silvia Di Giorgio</a>
+</a>.
+<a href="/training-material/hall-of-fame/teresa-m/"><a href="/training-material/hall-of-fame/teresa-m/" class="contributor-badge-inline contributor-teresa-m">
+  <img src="https://avatars.githubusercontent.com/teresa-m?s=36" alt="Teresa Müller avatar" width="36" class="avatar" />
+  Teresa Müller</a>
+</a>,
+<a href="/training-material/hall-of-fame/Tillsa/"><a href="/training-material/hall-of-fame/Tillsa/" class="contributor-badge-inline contributor-Tillsa">
+  <img src="https://avatars.githubusercontent.com/Tillsa?s=36" alt="Till Sauerwein avatar" width="36" class="avatar" />
+  Till Sauerwein</a>
+</a>,
+<a href="/training-material/hall-of-fame/unode/"><a href="/training-material/hall-of-fame/unode/" class="contributor-badge-inline contributor-unode">
+  <img src="https://avatars.githubusercontent.com/unode?s=36" alt="Renato Alves avatar" width="36" class="avatar" />
+  Renato Alves</a>
+</a>,</p>
+
+<p>We also thank the BioNT consortium partners — including EMBL, ZB MED, EPFL, University of Barcelona,
+University of Freiburg, University of Oslo, biobyte solutions, RIcapacity, and HPCNow! — for making
+this international effort possible.</p>
+
+<p>The BioNT project is co-funded by the EU Digital Europe programme, grant agreement number 101100604.</p>
+
+
+    
+
+    
+
+    
+
+    
+    
+	<h2 id="funding">Funding</h2>
+	<p>These organisations or grants provided funding support for the development of this resource</p>
+    
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/biont/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/assets/images/BioNT_Logo.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">BioNT</div>
+			<div class="description">
+			Co-funded by the European Union
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+    
+    
+  </div>
+
+  <div class="col-md-4">
+    <a href="/training-material/assets/images/BioNT_Logo.png">
+      <img alt="BioNT project logo" src="/training-material/assets/images/BioNT_Logo.png" width="300"/>
+    </a>
+  </div>
+</div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "url": "https://training.galaxyproject.org/training-material/news/2026/04/01/biont.html",
+  "name": "BioNT Brings Galaxy Training to German, Spanish, and Italian Learners",
+  "headline": "<p>We are thrilled to announce that the <a href=\"https://biont-training.eu/\">BioNT project</a> (Bio N",
+  "keywords": [
+    "new tutorial",
+    "translation",
+    "community",
+    "contributing"
+  ],
+  "description": "<p>We are thrilled to announce that the <a href=\"https://biont-training.eu/\">BioNT project</a> (Bio N",
+  "articleBody": "<p>We are thrilled to announce that the <a href=\"https://biont-training.eu/\">BioNT project</a> (Bio Network for Training)\nhas contributed a significant set of human-curated translated Galaxy training materials to the GTN,\nnow live and available to learners worldwide!</p>\n\n<h2 id=\"what-is-biont\">What is BioNT?</h2>\n\n<p>BioNT is an international consortium of academic institutions and SMEs, co-funded by the EU Digital Europe\nprogramme (grant agreement 101100604), running from January 2023 to June 2026. Its mission is to build a high-quality\ntraining programme in digital skills for the biotechnology and biomedical sectors, particularly for\nlearners with limited prior experience in biological data handling and computational tools.</p>\n\n<p>The University of Freiburg’s Freiburg Galaxy Team is an active BioNT partner, contributing expertise in\nbioinformatics training and the Galaxy Training Network.</p>\n\n<h2 id=\"human-curated-translated-tutorials-now-available\">Human-curated translated Tutorials Now Available</h2>\n\n<p>One of BioNT’s core goals is to make training materials accessible to non-English-speaking communities.\nTo that end, the BioNT team has produced careful, human-quality translations of key GTN tutorials into\n<strong>German (DE)</strong>, <strong>Spanish (ES)</strong>, and <strong>Italian (IT)</strong>.</p>\n\n<p>The following tutorials are now available in four languages:</p>\n\n<table>\n  <thead>\n    <tr>\n      <th>English</th>\n      <th>German</th>\n      <th>Spanish</th>\n      <th>Italian</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><a href=\"/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html\">Galaxy Intro: From Peaks to Genes</a></td>\n      <td><a href=\"/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial_DE.html\">Von Peaks zu Genen</a></td>\n      <td><a href=\"/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial_ES.html\">De picos a genes</a></td>\n      <td><a href=\"/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial_IT.html\">Dai picchi ai geni</a></td>\n    </tr>\n    <tr>\n      <td><a href=\"/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html\">Quality Control</a></td>\n      <td>[Qualitätskontrolle]/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial_DE.htmll)</td>\n      <td>[Control de calidad]/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial_ES.htmll)</td>\n      <td><a href=\"/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial_IT.html\">Controllo qualità</a></td>\n    </tr>\n    <tr>\n      <td><a href=\"/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html\">Mapping</a></td>\n      <td><a href=\"/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_DE.html\">Mapping</a></td>\n      <td><a href=\"/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_ES.html\">Mapeo</a></td>\n      <td><a href=\"/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_IT.html\">Mappatura</a></td>\n    </tr>\n    <tr>\n      <td><a href=\"/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html\">Reference-based RNA-Seq</a></td>\n      <td><a href=\"/training-material/topics/transcriptomics/tutorials/ref-based/tutorial_DE.html\">Referenzbasierte RNA-Seq-Datenanalyse</a></td>\n      <td>[Análisis de datos RNA-Seq basados en referencias]/training-material/topics/transcriptomics/tutorials/ref-based/tutorial_ES.htmll)</td>\n      <td><a href=\"/training-material/topics/transcriptomics/tutorials/ref-based/tutorial_IT.html\">Analisi dei dati RNA-Seq basata su riferimenti</a></td>\n    </tr>\n    <tr>\n      <td><a href=\"/training-material/topics/data-science/tutorials/online-resources-gene/tutorial.html\">Learning about one gene across biological resources and formats</a></td>\n      <td>[Lernen über ein Gen]/training-material/topics/data-science/tutorials/online-resources-gene/tutorial_DE.htmll)</td>\n      <td>[Aprendizaje sobre un gen]/training-material/topics/data-science/tutorials/online-resources-gene/tutorial_ES.htmll)</td>\n      <td><a href=\"/training-material/topics/data-science/tutorials/online-resources-gene/tutorial_IT.html\">Imparare a conoscere un gene</a></td>\n    </tr>\n    <tr>\n      <td><a href=\"/training-material/topics/data-science/tutorials/online-resources-protein/tutorial.html\">One protein along UniProt</a></td>\n      <td><a href=\"/training-material/topics/data-science/tutorials/online-resources-protein/tutorial_DE.html\">Ein Protein entlang der UniProt-Seite</a></td>\n      <td><a href=\"/training-material/topics/data-science/tutorials/online-resources-protein/tutorial_ES.html\">Una proteína a lo largo de la página UniProt</a></td>\n      <td><a href=\"/training-material/topics/data-science/tutorials/online-resources-protein/tutorial_IT.html\">Una proteina lungo la pagina UniProt</a></td>\n    </tr>\n  </tbody>\n</table>\n\n<p>In addition to the tutorials, the BioNT team has translated a comprehensive set of <strong>Galaxy FAQs</strong> into\nall three languages, covering common actions such as importing data, creating collections, renaming\ndatasets, using tutorial mode, and more. These translated FAQs are now embedded throughout the\ncorresponding tutorials, giving learners a fully localised experience from start to finish.</p>\n\n<h2 id=\"why-this-matters\">Why This Matters</h2>\n\n<p>Machine translation can provide a rough guide, but learners, especially those new to bioinformatics,\nbenefit enormously from materials that read naturally in their own language. The BioNT team’s\nhuman-translated content ensures that terminology is accurate, explanations are clear, and the learning\nexperience is as smooth as possible for German, Spanish, and Italian-speaking communities across Europe\nand beyond.</p>\n\n<p>This work is a wonderful example of the GTN community’s commitment to open, FAIR, and inclusive\ntraining for everyone.</p>\n\n<h2 id=\"thank-you\">Thank You!</h2>\n\n<p>A huge thank you to all the BioNT contributors who made this possible — translators, reviewers, and\neveryone involved in getting these materials across the finish line:</p>\n\n<p><a href=\"/training-material/hall-of-fame/hvelab/\"><a href=\"/training-material/hall-of-fame/hvelab/\" class=\"contributor-badge-inline contributor-hvelab\">\n  <img src=\"https://avatars.githubusercontent.com/hvelab?s=36\" alt=\"Helena Vela avatar\" width=\"36\" class=\"avatar\" />\n  Helena Vela</a>\n</a>,\n<a href=\"/training-material/hall-of-fame/lisanna/\"><a href=\"/training-material/hall-of-fame/lisanna/\" class=\"contributor-badge-inline contributor-lisanna\">\n  <img src=\"https://avatars.githubusercontent.com/lisanna?s=36\" alt=\"Lisanna Paladin avatar\" width=\"36\" class=\"avatar\" />\n  Lisanna Paladin</a>\n</a>,\n<a href=\"/training-material/hall-of-fame/ocaisa/\"><a href=\"/training-material/hall-of-fame/ocaisa/\" class=\"contributor-badge-inline contributor-ocaisa\">\n  <img src=\"https://avatars.githubusercontent.com/ocaisa?s=36\" alt=\"Alan O'Cais avatar\" width=\"36\" class=\"avatar\" />\n  Alan O’Cais</a>\n</a>\n<a href=\"/training-material/hall-of-fame/Sch-Da/\"><a href=\"/training-material/hall-of-fame/Sch-Da/\" class=\"contributor-badge-inline contributor-Sch-Da\">\n  <img src=\"https://avatars.githubusercontent.com/Sch-Da?s=36\" alt=\"Daniela Schneider avatar\" width=\"36\" class=\"avatar\" />\n  Daniela Schneider</a>\n</a>,\n<a href=\"/training-material/hall-of-fame/shiltemann/\"><a href=\"/training-material/hall-of-fame/shiltemann/\" class=\"contributor-badge-inline contributor-shiltemann\">\n  <img src=\"https://avatars.githubusercontent.com/shiltemann?s=36\" alt=\"Saskia Hiltemann avatar\" width=\"36\" class=\"avatar\" />\n  Saskia Hiltemann</a>\n</a>.\n<a href=\"/training-material/hall-of-fame/silviadg87/\"><a href=\"/training-material/hall-of-fame/silviadg87/\" class=\"contributor-badge-inline contributor-silviadg87\">\n  <img src=\"https://avatars.githubusercontent.com/silviadg87?s=36\" alt=\"Silvia Di Giorgio avatar\" width=\"36\" class=\"avatar\" />\n  Silvia Di Giorgio</a>\n</a>.\n<a href=\"/training-material/hall-of-fame/teresa-m/\"><a href=\"/training-material/hall-of-fame/teresa-m/\" class=\"contributor-badge-inline contributor-teresa-m\">\n  <img src=\"https://avatars.githubusercontent.com/teresa-m?s=36\" alt=\"Teresa Müller avatar\" width=\"36\" class=\"avatar\" />\n  Teresa Müller</a>\n</a>,\n<a href=\"/training-material/hall-of-fame/Tillsa/\"><a href=\"/training-material/hall-of-fame/Tillsa/\" class=\"contributor-badge-inline contributor-Tillsa\">\n  <img src=\"https://avatars.githubusercontent.com/Tillsa?s=36\" alt=\"Till Sauerwein avatar\" width=\"36\" class=\"avatar\" />\n  Till Sauerwein</a>\n</a>,\n<a href=\"/training-material/hall-of-fame/unode/\"><a href=\"/training-material/hall-of-fame/unode/\" class=\"contributor-badge-inline contributor-unode\">\n  <img src=\"https://avatars.githubusercontent.com/unode?s=36\" alt=\"Renato Alves avatar\" width=\"36\" class=\"avatar\" />\n  Renato Alves</a>\n</a>,</p>\n\n<p>We also thank the BioNT consortium partners — including EMBL, ZB MED, EPFL, University of Barcelona,\nUniversity of Freiburg, University of Oslo, biobyte solutions, RIcapacity, and HPCNow! — for making\nthis international effort possible.</p>\n\n<p>The BioNT project is co-funded by the EU Digital Europe programme, grant agreement number 101100604.</p>\n",
+  "datePublished": "2026-04-01 00:00:00 +0000",
+  "dateModified": "2026-04-07 15:41:02 +0000",
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hvelab/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hvelab/",
+      "name": "Helena Vela",
+      "image": "https://avatars.githubusercontent.com/hvelab",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biont/",
+          "name": "BioNT",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biont-training.eu/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lisanna/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lisanna/",
+      "name": "Lisanna Paladin",
+      "image": "https://avatars.githubusercontent.com/lisanna",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/embl-ebi/",
+          "name": "European Bioinformatics Institute",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.ebi.ac.uk"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deKCD/",
+          "name": "German Competence Center Cloud Technologies for Data Management and Processing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://datenkompetenz.cloud"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biont/",
+          "name": "BioNT",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biont-training.eu/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0011-9397",
+      "@id": "https://orcid.org/0000-0003-0011-9397"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ocaisa/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ocaisa/",
+      "name": "Alan O'Cais",
+      "image": "https://avatars.githubusercontent.com/ocaisa",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Sch-Da/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Sch-Da/",
+      "name": "Daniela Schneider",
+      "image": "https://avatars.githubusercontent.com/Sch-Da",
+      "description": "Researcher at Galaxy Europe",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deKCD/",
+          "name": "German Competence Center Cloud Technologies for Data Management and Processing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://datenkompetenz.cloud"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4culture/",
+          "name": "NFDI4Culture – Consortium for Research Data on Material and Immaterial Cultural Heritage",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4culture.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biont/",
+          "name": "BioNT",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biont-training.eu/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9536-5587",
+      "@id": "https://orcid.org/0000-0001-9536-5587"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "@id": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/silviadg87/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/silviadg87/",
+      "name": "Silvia Di Giorgio",
+      "image": "https://avatars.githubusercontent.com/silviadg87",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biont/",
+          "name": "BioNT",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biont-training.eu/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/teresa-m/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/teresa-m/",
+      "name": "Teresa Müller",
+      "image": "https://avatars.githubusercontent.com/teresa-m",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "German Network for Bioinformatics Infrastructure Service, Training, Cooperations & Cloud Computing",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/mwk/",
+          "name": "Ministry of Science, Research and Arts",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://mwk.baden-wuerttemberg.de/en"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biont/",
+          "name": "BioNT",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biont-training.eu/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1252-9684",
+      "@id": "https://orcid.org/0000-0003-1252-9684"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Tillsa/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Tillsa/",
+      "name": "Till Sauerwein",
+      "image": "https://avatars.githubusercontent.com/Tillsa",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biont/",
+          "name": "BioNT",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biont-training.eu/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/unode/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/unode/",
+      "name": "Renato Alves",
+      "image": "https://avatars.githubusercontent.com/unode",
+      "description": "Bioinformatics Community Manager at EMBL",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/embl/",
+          "name": "European Molecular Biology Laboratory",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.embl.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/biont/",
+          "name": "BioNT",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://biont-training.eu/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7212-0234",
+      "@id": "https://orcid.org/0000-0002-7212-0234"
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+      "@type": "CreativeWork"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "description": "An organization providing a collection of tutorials developed and maintained by the worldwide Galaxy community",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://training.galaxyproject.org/news/2026/04/01/biont.html"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "width": 60,
+    "height": 60,
+    "url": "/training-material/assets/images/GTN-60px.png"
+  },
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users."
+}
+</script>
+</article>
+
+<hr/>
+<h2>Recent News</h2>
+<a href="/training-material/news.html">See all news</a>
+
+<div>
+
+
+
+	<article>
+	<h3>
+		<a href="https://galaxyproject.org/news/2026-02-19-misconception-paper/">New Paper! Ten common misconceptions about Galaxy (and why they are wrong!)</a>
+	</h3>
+	<p>
+	23 February 2026 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #edbe00; --color-darker: #d3a900; --color-dimmed: #e0b400;">paper</span>
+	
+	</p>
+	<p class="card-text">
+		
+		This is an external post, please follow the link to read it.
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2025/11/13/gta-date-2026.html">Save the date: The Galaxy Training Academy 2026 will happen from May 18th to May 22th</a>
+	</h3>
+	<p>
+	13 November 2025 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff1a4; --color-darker: #ecd700; --color-dimmed: #fbe500;">gtn</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00d9df; --color-darker: #00c1c7; --color-dimmed: #00cdd3;">event</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #add200; --color-darker: #9abb00; --color-dimmed: #a3c600;">teaching</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #f2bc00; --color-darker: #d7a800; --color-dimmed: #e4b200;">learning</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffaccb; --color-darker: #ff88b9; --color-dimmed: #ff9ac2;">community</span>
+	
+	</p>
+	<p class="card-text">
+		
+		🎉 We are excited to share that the Galaxy Training Academy (GTA) 2026 will take place next year, starting on 18 May 2026! 🎉
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2025/10/08/joined-teachV.html">GTN joined the TEACH V to talk about education across Communities at Helmholtz</a>
+	</h3>
+	<p>
+	8 October 2025 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffa9e1; --color-darker: #ff83d8; --color-dimmed: #ff96dd;">GTN</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffafac; --color-darker: #ff8e89; --color-dimmed: #ff9f9b;">Conference</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #4ad2ff; --color-darker: #00bdea; --color-dimmed: #00c9f8;">Communities</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The Galaxy Training Network (GTN) had the pleasure of joining the “Talking about Education Across Communities at Helmholtz” (TEACH V) community conference, which took place in Berlin from September 29 to October 1.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2025/09/12/gta-orga-2026.html">We want you to help us organize the Galaxy Training Academy 2026</a>
+	</h3>
+	<p>
+	12 September 2025 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff1a4; --color-darker: #ecd700; --color-dimmed: #fbe500;">gtn</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #00d9df; --color-darker: #00c1c7; --color-dimmed: #00cdd3;">event</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #add200; --color-darker: #9abb00; --color-dimmed: #a3c600;">teaching</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #f2bc00; --color-darker: #d7a800; --color-dimmed: #e4b200;">learning</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffaccb; --color-darker: #ff88b9; --color-dimmed: #ff9ac2;">community</span>
+	
+	</p>
+	<p class="card-text">
+		
+		🎉 We are excited to announce that we have started planning the Galaxy Training Academy (GTA) 2026! 🎉
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2025/09/02/gtn-workflowhub.html">GTN is now integrated with WorkflowHub</a>
+	</h3>
+	<p>
+	2 September 2025 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff1a4; --color-darker: #ecd700; --color-dimmed: #fbe500;">gtn</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffaeb8; --color-darker: #ff8c9c; --color-dimmed: #ff9daa;">workflowhub</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffb375; --color-darker: #f89800; --color-dimmed: #ffa443;">workflows</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #b1d100; --color-darker: #9eba00; --color-dimmed: #a7c500;">fair</span>
+	
+	</p>
+	<p class="card-text">
+		
+		Thanks to a collaborative effort between the teams at Galaxy Training Network (GTN), WorkflowHub, and Australian BioCommons, GTN workflows are now registered automatically with WorkflowHub. The existing set of workflows can be viewed here: GTN on WorkflowHub. For every new tutorial that is added to the GTN, any workflows that it contains will now also be pushed to WorkflowHub.
+
+		
+	</p>
+</article>
+
+
+</div>
+
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2026-04-01-biont.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/news/_posts/2026-04-01-biont.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/98444b8da79e448cfa4af26e1728b4c8766ece30">98444b8</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.08d42ce6.js'></script>
+
+	
+	
+
+    </body>
+</html>
