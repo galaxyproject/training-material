@@ -1,0 +1,27 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nVideo or Audio File"]
+  1[label="Speech to Text with Diarization"]
+  0 -> 1 [label="output"]
+  2[label="Allocate Moderator"]
+  1 -> 2 [label="output_txt"]
+  3[label="Allocate Kennedy"]
+  2 -> 3 [label="outfile"]
+  4[label="Allocate Nixon"]
+  3 -> 4 [label="outfile"]
+  5[label="Allocate Journalist"]
+  4 -> 5 [label="outfile"]
+  6[label="Extract Passages spoken by Nixon"]
+  5 -> 6 [label="outfile"]
+  7[label="Extract Passages spoken by Kennedy"]
+  5 -> 7 [label="outfile"]
+  8[label="Delete Speaker Name for Nixon"]
+  6 -> 8 [label="output"]
+  k7c0ead7ca7044bc8babfb3213bbb3273[color=lightseagreen,label="Output\nNixon-transcribed-cleaned"]
+  8 -> k7c0ead7ca7044bc8babfb3213bbb3273
+  9[label="Delete Speaker Name for Kennedy"]
+  7 -> 9 [label="output"]
+  k5f9b4108c0844099967ac00e6ccfbf5c[color=lightseagreen,label="Output\nKennedy-transcribed-cleaned"]
+  9 -> k5f9b4108c0844099967ac00e6ccfbf5c
+}
