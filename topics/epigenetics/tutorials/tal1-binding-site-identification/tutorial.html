@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@62109de25ee1319f220dccf62f761692b4076281",
+		release: "galaxy-training-network@af7f101aebd9b96a49abe6a699dae7d4bac255e0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -3129,9 +3129,19 @@ install_tool_dependencies: true
 install_repository_dependencies: true
 install_resolver_dependencies: true
 tools:
+- name: deeptools_bam_compare
+  owner: bgruening
+  revisions: e821645ef8fc
+  tool_panel_section_label: deepTools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: deeptools_compute_gc_bias
   owner: bgruening
   revisions: 2bc10a9ca58b
+  tool_panel_section_label: deepTools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: deeptools_compute_matrix
+  owner: bgruening
+  revisions: 514fa53b5efb
   tool_panel_section_label: deepTools
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: deeptools_correct_gc_bias
@@ -3152,6 +3162,11 @@ tools:
 - name: deeptools_plot_fingerprint
   owner: bgruening
   revisions: 2da482e408b8
+  tool_panel_section_label: deepTools
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: deeptools_plot_heatmap
+  owner: bgruening
+  revisions: a4dfb122e52b
   tool_panel_section_label: deepTools
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: bwa
@@ -3332,7 +3347,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/62109de25ee1319f220dccf62f761692b4076281">62109de</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/af7f101aebd9b96a49abe6a699dae7d4bac255e0">af7f101</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
