@@ -135,7 +135,9 @@ To address this limitation, mathematicians developed parametric entropy families
 - **Tsallis entropy** (1988): Alternative generalization with parameter q
 - **Hill numbers** (2010): Modern ecological reinterpretation unifying all approaches
 
-**Remarkable fact**: Despite appearing different mathematically, Rényi and Tsallis entropies can be unified through generalized logarithmic and exponential functions—both answer the fundamental question: **What organizational scales matter?**
+#### Remarkable fact
+
+Despite appearing different mathematically, Rényi and Tsallis entropies can be unified through generalized logarithmic and exponential functions—both answer the fundamental question: **What organizational scales matter?**
 
 ## Mathematical Definition of Tsallis Entropy
 
@@ -145,7 +147,7 @@ $$S_q(p) = \frac{1 - \sum_{i=1}^{n} p_i^q}{q - 1}$$
 
 ### Properties and Special Cases
 
-**The q parameter acts as a sensitivity dial:**
+#### The q parameter acts as a sensitivity dial
 
 - **Limit as q → 1**: Recovers Shannon entropy (balanced sensitivity)
 - **q = 0**: Richness (number of distinct isoforms present)
@@ -299,17 +301,17 @@ Where:
 
 ### Pattern Classification
 
-**Rare-driven complexity change**:
+#### Rare-driven complexity change
 - D(q=0.5) >> D(q=2.0)
 - Divergence concentrated at low q
 - Interpretation: Condition differences driven by rare transcripts
 
-**Abundant-driven complexity change**:
+#### Abundant-driven complexity change
 - D(q=0.5) << D(q=2.0)
 - Divergence concentrated at high q
 - Interpretation: Condition differences in dominant isoforms
 
-**Balanced complexity change**:
+#### Balanced complexity change
 - D(q=0.5) ≈ D(q=2.0)
 - Divergence consistent across scales
 - Interpretation: All isoforms reorganize proportionally
@@ -326,7 +328,7 @@ Statistical testing in transcriptomics faces a fundamental trade-off:
 
 ### Scheirer-Ray-Hare (SRH) Rank-Based Test
 
-**Advantages for entropy analysis**:
+#### Advantages for entropy analysis
 
 1. **Robustness to distribution violations**: Operates on ranks (uniformly distributed), valid for ANY continuous distribution
    - Non-normality: No effect on rank ordering
