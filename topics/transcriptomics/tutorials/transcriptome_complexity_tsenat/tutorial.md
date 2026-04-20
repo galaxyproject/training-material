@@ -2,8 +2,6 @@
 layout: tutorial_hands_on
 
 title: "Transcriptome Complexity Analysis with TSENAT"
-subtopic: information-theory
-priority: 10
 
 tags:
     - rna-seq
