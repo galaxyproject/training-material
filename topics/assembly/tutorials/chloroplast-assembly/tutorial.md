@@ -5,7 +5,7 @@ zenodo_link: https://doi.org/10.5281/zenodo.3567224
 tags:
 - plants
 - nanopore
-- jbrowse1
+- jbrowse2
 - biodiversity
 questions:
 - How can we assemble a chloroplast genome?
@@ -20,10 +20,12 @@ key_points:
 - The assembly graph is useful to look at and think about genomic structure
 - We can map raw reads back to the assembly and investigate areas of high or low read
   coverage
-- We can view an assembly, its mapped reads, and its annotations in JBrowse
+- We can view an assembly, its mapped reads, and its annotations in JBrowse2
 contributions:
   authorship:
     - annasyme
+  editing:
+    - tflowers15
   funding:
     - unimelb
     - melbournebioinformatics
@@ -257,31 +259,33 @@ Alternatively, you might want to use a web-based tool designed for chloroplast g
 > * In Galaxy, import the annotation `GFF3` file.
 {: .hands_on}
 
-Now make a JBrowse file to view the annotations (the GFF3 file - produced from either Prokka or GeSeq) under the assembly (the polished-assembly.fasta file).
+Now make a JBrowse2 file to view the annotations (the GFF3 file - produced from either Prokka or GeSeq) under the assembly (the polished-assembly.fasta file).
 
 > <hands-on-title>View annotations</hands-on-title>
-> 1. {% tool [JBrowse genome browser](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3) %}:
->    - *"Reference genome to display"*: `Use a genome from history`
->        - *"Select a reference genome"*: `polished-assembly.fasta`
->    - *"Output JBrowse"*: `Minimal for viewing (Documentation removed)`
->    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
->    - *"JBrowse-in-Galaxy Action"*: `New JBrowse instance`
->    - *"Insert Track Group"*
->        - *"Insert Annotation Track"*
->            - *"Track Type"*: `GFF/GFF3/BED Features`
->            - *"GFF/GFF3/BED Track Data"*: the `GFF3` file
+> 1. {% tool [JBrowse2 genome browser](toolshed.g2.bx.psu.edu/repos/fubar/jbrowse2/jbrowse2/2.13.0+galaxy0) %}:
+>    - *"1: Genome for a set of tracks"*:
+>        - *"Reference genome source"*: `Use a genome fasta file from the current history`
+>            - *"Select a reference genome"*: `polished-assembly.fasta`
+>    - *"+ Insert Track Group"*
+>        - *"+ Insert Annotation Track"*
+>            - *"Track Type"*: `GFF/GFF3 track`
+>            - *"Define track data as a history file or an internet URI"*: `Track data from a history file`
+>                - *"GFF/GFF3 Track Data"*: the `GFF3` file
 >            - *Leave the other track features as default*
 > 2. **Re-name output file**:
->    - JBrowse may take a few minutes to run. There is one output file: re-name it `view-annotations`
+>    - JBrowse2 may take a few minutes to run. There is one output file: re-name it `view-annotations`
 > 3. **View output**:
->    * Click on the eye icon to view the annotations file.
->    * Select the right contig to view, in the drop down box.
->    * Zoom out (with the minus button) until annotations are visible.
+>    * Click on the eye icon to view. (For more room, collapse the Galaxy Tools panel by clicking on `Tools` on the ribbon on the left side of the window).
+>    * The annotation track should be visible by default. Track visibility can be toggled on/off using the `Open track selector` menu icon to the left of the arrow buttons used for navigating along the genome.
+>    * Show annotation track labels by toggling the annotation track off and then back on again.
+>    * Toggle on the reference genome assembly track. Tracks can be reordered in the JBrowse2 viewer by toggling all tracks off and then toggling tracks on in the order that you want to add them to the viewer (e.g. first toggle on the reference genome track followed by annotation track to display the reference genome at the top of the viewer with the annotations displayed below the reference genome).
+>    * Choose a contig in the drop down menu. Zoom in and out with magnifying glass `+` and `-` buttons.
 {: .hands_on}
 
-Here is an embedded snippet showing JBrowse and the annotations:
+The JBrowse2 output is interactive so you can explore the genome (e.g. zoom in on specific regions and navigate along the genome). Here is an image of the JBrowse2 output showing the annotations:
 
-{% snippet topics/visualisation/faqs/visualizations_jbrowse.html datadir="data2" %}
+![jbrowse2_assembly_annotations](../../images/jbrowse2_assembly_annotations.png "Screenshot of JBrowse2 output showing the genome assembly and genome feature annotations.")
+
 
 # View reads
 
@@ -306,34 +310,33 @@ We will look at the original sequencing reads mapped to the genome assembly. In 
 {: .hands_on}
 
 > <hands-on-title>Visualise mapped reads</hands-on-title>
-> 1. {% tool [JBrowse genome browser](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3) %}:
->    - *"Reference genome to display"*: `Use a genome from history`
->        - *"Select a reference genome"*: `polished-assembly.fasta`
->    - *"Output JBrowse"*: `Minimal for viewing (Documentation removed)`
->    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
->    - *"JBrowse-in-Galaxy Action"*: `New JBrowse instance`
->    - *"Insert Track Group"*
->        - *"Insert Annotation Track"*
->            - *"Track Type"*: `BAM pileups`
->            - *"BAM track data"*: `nanopore-tiny.bam`
->            - *"Autogenerate SNP track"*: `No`
+> 1. {% tool [JBrowse2 genome browser](toolshed.g2.bx.psu.edu/repos/fubar/jbrowse2/jbrowse2/2.13.0+galaxy0) %}:
+>    - *"1: Genome for a set of tracks"*:
+>        - *"Reference genome source"*: `Use a genome fasta file from the current history`
+>            - *"Select a reference genome"*: `polished-assembly.fasta`
+>    - *"+ Insert Track Group"*
+>        - *"+ Insert Annotation Track"*
+>            - *"Track Type"*: `BAM track. Recommend converting to BED/bigWig unless mapping annotations needed`
+>            - *"Define track data as a history file or an internet URI"*: `Track data from a history file`
+>                - *"BAM Track Data"*: `illumina-tiny.bam`
 >            - *Leave the other track features as default*
->        - *"Insert Annotation Track"*.
->            - *"Track Type"*: `BAM pileups`
->            - *"BAM track data"*: `illumina-tiny.bam`
->            - *"Autogenerate SNP track"*: `No`
+>    - *"+ Insert Track Group"*
+>        - *"+ Insert Annotation Track"*
+>            - *"Track Type"*: `BAM track. Recommend converting to BED/bigWig unless mapping annotations needed`
+>            - *"Define track data as a history file or an internet URI"*: `Track data from a history file`
+>                - *"BAM Track Data"*: `nanopore-tiny.bam`
 >            - *Leave the other track features as default*
 > 2. **Re-name output file**:
->    - JBrowse may take a few minutes to run. There is one output file: re-name it `assembly-and-reads`
+>    - JBrowse2 may take a few minutes to run. There is one output file: re-name it `assembly-and-reads`
 > 3. **View output**:
->    * Click on the eye icon to view. (For more room, collapse Galaxy side menus with corner < > signs).
->    *  Make sure the bam files are ticked in the left hand panel.
->    * Choose a contig in the drop down menu. Zoom in and out with + and - buttons.
+>    * Click on the eye icon to view. (For more room, collapse the Galaxy Tools panel by clicking on `Tools` on the ribbon on the left side of the window).
+>    * The BAM tracks should be visible by default. Track visibility can be toggled on/off using the `Open track selector` menu icon to the left of the arrow buttons used for navigating along the genome.
+>    * Choose a contig in the drop down menu. Zoom in and out with magnifying glass `+` and `-` buttons.
 {: .hands_on}
 
-Here is an embedded snippet showing JBrowse and the mapped reads:
+Here is an image of the JBrowse2 output showing the mapped reads:
 
-{% snippet topics/visualisation/faqs/visualizations_jbrowse.html datadir="data" %}
+![jbrowse2_assembly_reads](../../images/jbrowse2_assembly_reads.png "Screenshot of JBrowse2 output showing the genome assembly and mapped reads.")
 
 
 > <question-title></question-title>
@@ -346,8 +349,6 @@ Here is an embedded snippet showing JBrowse and the mapped reads:
 > > 2. There may be lots of reasons for varying read coverage. Some possibilities: In areas of high read coverage: this region may be a collapsed repeat. In areas of low or no coverage: this region may be difficult to sequence; or, this region may be a misassembly.
 > {: .solution}
 {: .question}
-
-* To learn more about JBrowse and its features, see the [Genomic Data Visualisation with JBrowse tutorial]({{site.baseurl}}/topics/visualisation/tutorials/jbrowse/tutorial.html)
 
 
 # Repeat with new data
@@ -362,7 +363,7 @@ We can assemble another chloroplast genome using sequence data from a different 
 > * Assemble: Use Flye to assemble the nanopore reads, then get Fasta statistics *Note: this may take several hours.*
 > * Polish assembly: Use Pilon to polish the assembly with short Illumina reads. *Note: Don't forget to map these Illumina reads to the assembly first using bwa-mem, then use the resulting `bam` file as input to Pilon.*
 > * Annotate: Use the GeSeq tool at [Chlorobox](https://chlorobox.mpimp-golm.mpg.de/geseq.html) or the Prokka tool within Galaxy.
-> * View annotations:Use JBrowse to view the assembled, annotated genome.
+> * View annotations: Use JBrowse2 to view the assembled, annotated genome.
 {: .hands_on}
 
 # Conclusion
