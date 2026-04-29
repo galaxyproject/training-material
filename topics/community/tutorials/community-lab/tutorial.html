@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@542ba4daa72b9ee586647584bf9bdb580823d4d5",
+		release: "galaxy-training-network@789e9257798dfcf6e730037db65b5ae3e5db84ff",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Creation of the labs in the different Galaxy instances for your community">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-01-28 15:26:51 +0000">
+<meta name="DC.date" content="2026-04-29 11:59:14 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Paul Zierep">
 <meta name="DC.creator" content="Solenne Correard">
@@ -183,7 +183,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2026-01-28 15:26:51 +0000",
+  "dateModified": "2026-04-29 11:59:14 +0000",
   "datePublished": "2025-10-04 17:50:22 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -239,7 +239,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Creation of the labs in the different Galaxy instances for your community",
   "url": "https://training.galaxyproject.org/training-material/topics/community/tutorials/community-lab/tutorial.html",
-  "version": 4,
+  "version": 5,
   "timeRequired": "PT1H",
   "teaches": "- Create labs for Galaxy communities",
   "keywords": [
@@ -1307,7 +1307,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Oct 4, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 28, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 29, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1325,7 +1325,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 5 </div>
 
     </blockquote>
     </section>
@@ -1365,31 +1365,33 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <h1 id="create-the-lab-specific-files-automatic">Create the lab specific files (automatic)</h1>
 
 <p>The labs are composed of various files, some that are specific to your community and some that are common between all the labs.
-To automatically create the necessary files from a set of templates, a script was generated (“<code class="language-plaintext highlighter-rouge">sources/bin/populate_labs.sh</code>)</p>
+To automatically create the necessary files from a set of templates, a script is provided (<code class="language-plaintext highlighter-rouge">sources/bin/populate_labs.sh</code>).</p>
 
-<p>This script will create the following structure and files:
-communities/<your community="">/lab/
-    CONTRIBUTORS
-    README.md
-    base.yml
-    conclusion.html
-    intro.html
-    usegalaxy.eu.yml
-    usegalaxy.fr.yml
-    usegalaxy.org.yml</your></p>
-
-<p>communities/<your community="">/lab/sections_templates/
-        1_data_import_and_preparation.yml
-        2_tools.yml
-        3_workflows.yml
-        4_tutorials.yml
-        5_support_and_help.yml
-        6_community.yml</your></p>
+<p>This script will create the following structure and files:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>communities/
+└── &lt;your community&gt;/
+    └── lab/
+        ├── CONTRIBUTORS
+        ├── README.md
+        ├── base.yml
+        ├── conclusion.html
+        ├── intro.html
+        ├── usegalaxy.eu.yml
+        ├── usegalaxy.fr.yml
+        ├── usegalaxy.org.yml
+        └── sections_templates/
+            ├── 1_data_import_and_preparation.yml
+            ├── 2_tools.yml
+            ├── 3_workflows.yml
+            ├── 4_tutorials.yml
+            ├── 5_support_and_help.yml
+            └── 6_community.yml
+</code></pre></div></div>
 
 <p>The files are created and updated automatically using GitHub actions, you just need to add a bit of code to point to your community folder.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-the-files-using-github-actions"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generate the files using Github Actions</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-the-files-using-github-actions"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Generate the files using GitHub Actions</div>
 
   <ol>
     <li>Go to the <a href="https://github.com/galaxyproject/galaxy_codex">Galaxy Codex repo</a></li>
@@ -1420,18 +1422,54 @@ On the following Sunday (or upon request), this action will be launched and will
 <p>Once the files are created, you should update them as some contain template text that are not community specific.</p>
 
 <p>Files to update :</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/CONTRIBUTORS</code> –&gt; Add the handles of everyone who contributed in the lab</li>
-  <li><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/README.md</code> –&gt; Change all <code class="language-plaintext highlighter-rouge">&lt;your-community&gt;</code> by your community name</li>
-  <li><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/base.yml</code> –&gt; Change all <code class="language-plaintext highlighter-rouge">&lt;your-community&gt;</code> by your community name</li>
-  <li><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/intro.html</code> –&gt; Include a description of your community.</li>
-</ul>
 
-<p>Files that do not require a manual update :</p>
-<ul>
-  <li>“communities/<your community="">/lab/conclusion.html" --&gt; No change required.</your></li>
-  <li>“communities/<your community="">/lab/sections/*" --&gt; No change required.</your></li>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/CONTRIBUTORS</code></td>
+      <td>Add the handles of all contributors</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/README.md</code></td>
+      <td>Replace all <code class="language-plaintext highlighter-rouge">&lt;your-community&gt;</code> with your community name</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/base.yml</code></td>
+      <td>Replace all <code class="language-plaintext highlighter-rouge">&lt;your-community&gt;</code> with your community name</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/intro.html</code></td>
+      <td>Add a description of your community</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The following files require no changes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/conclusion.html</code></td>
+      <td>Pre-filled, no edit needed</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/sections_templates/*</code></td>
+      <td>Pre-filled, no edit needed</td>
+    </tr>
+  </tbody>
+</table>
 
 <p>The files in the section folders contain the code for each table visible in the lab.
 You can check different labs for inspiration, such as the <a href="https://microbiology.usegalaxy.eu">microgalaxy lab</a>.</p>
@@ -1449,7 +1487,7 @@ You can check different labs for inspiration, such as the <a href="https://micro
     <li>Update the code to display what you want.</li>
     <li>Save the file.</li>
     <li>Open <code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/base.yml</code></li>
-    <li>Add the previously created file in the sections (see <a href="https://github.com/galaxyproject/galaxy_codex/blob/main/communities/biodiversity/lab/base.yml">microgalaxy base file</a> for example)</li>
+    <li>Add the previously created file to the sections (see <a href="https://github.com/galaxyproject/galaxy_codex/blob/main/communities/biodiversity/lab/base.yml">microgalaxy base file</a> for example)</li>
     <li>Save <code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/lab/base.yml</code></li>
     <li>Pre-visualize the rendering of the community lab using the following path (make sure to change the variables indicated with &lt;&gt; in the path) : <code class="language-plaintext highlighter-rouge">https://labs.usegalaxy.org.au/?content_root=https://&lt;your-repo&gt;/galaxy_codex/blob/&lt;your-branch&gt;/communities/&lt;community-name&gt;/lab/base.yml</code></li>
     <li>Update the files until you obtain the lab you want.</li>
@@ -1464,16 +1502,16 @@ You can check different labs for inspiration, such as the <a href="https://micro
 <p>For the lab to be accessible from the different instances, you need to add files in each instance independently.</p>
 
 <p>For the French instance (https://usegalaxy.fr), all the steps are described in <a href="https://gitlab.com/ifb-elixirfr/usegalaxy-fr/infrastructure/-/issues/297">Issue 297</a>.
-You can use the <a href="https://gitlab.com/ifb-elixirfr/usegalaxy-fr/infrastructure/-/merge_requests/1302">merge request done for the biodiversity lab</a> as a reference.</p>
+You can use the <a href="https://gitlab.com/ifb-elixirfr/usegalaxy-fr/infrastructure/-/merge_requests/1302">merge request made for the biodiversity lab</a> as a reference.</p>
 
 <p>For the European instance (https://usegalaxy.eu), this tutorial will be updated later.
-You can use the <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/pull/1629">pull request done for the biodiversity lab</a> as a reference.</p>
+You can use the <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/pull/1629">pull request made for the biodiversity lab</a> as a reference.</p>
 
 <p>For the American instance (https://usegalaxy.org), this tutorial will be updated later.
-You can use the <a href="https://github.com/galaxyproject/usegalaxy-playbook/pull/427">pull request done for the biodiversity lab</a> as a reference.</p>
+You can use the <a href="https://github.com/galaxyproject/usegalaxy-playbook/pull/427">pull request made for the biodiversity lab</a> as a reference.</p>
 
 <p>For the Australian instance (https://usegalaxy.org.au), this tutorial will be updated later.
-You can use the <a href="https://github.com/usegalaxy-au/infrastructure/issues/2786#issuecomment-3330995427">pull request done for the biodiversity lab</a> as a reference.</p>
+You can use the <a href="https://github.com/usegalaxy-au/infrastructure/issues/2786#issuecomment-3330995427">pull request made for the biodiversity lab</a> as a reference.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
@@ -1761,7 +1799,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/542ba4daa72b9ee586647584bf9bdb580823d4d5">542ba4d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/789e9257798dfcf6e730037db65b5ae3e5db84ff">789e925</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
