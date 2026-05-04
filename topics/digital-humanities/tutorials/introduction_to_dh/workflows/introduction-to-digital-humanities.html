@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c7a2b2836caf8bf9adf8a1a8bfb5ae5f6d64b480",
+		release: "galaxy-training-network@12aeb3dfa39a890544ba5ef5fd72a9e05ae7f33d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -244,14 +244,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			2
+			3
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Nov 24, 2025
+			May 4, 2026
 
 			<br/>
 
@@ -270,13 +270,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #53eaff; --color-darker: #00d3e8; --color-dimmed: #00e0f6;">Introduction</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #00e1f7; --color-darker: #00c8dc; --color-dimmed: #00d4e9;">Introduction</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffc8dd; --color-darker: #ffa4ca; --color-dimmed: #ffb7d3;">DH</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffb8d4; --color-darker: #ff94c2; --color-dimmed: #ffa7cb;">DH</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #c1e600; --color-darker: #abcd00; --color-dimmed: #b6da00;">DigitalHumanities</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #b7da00; --color-darker: #a2c200; --color-dimmed: #acce00;">DigitalHumanities</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffc5f6; --color-darker: #ff9ef1; --color-dimmed: #ffb2f4;">textcleaning</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffb4f4; --color-darker: #ff8cf0; --color-dimmed: #ffa1f2;">textcleaning</div>
 			
 			</br>
 			
@@ -343,13 +343,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/digital-humanities-introduction_to_dh/versions/introduction-to-digital-humanities">Galaxy Europe</a></li>
-					
-					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/digital-humanities-introduction_to_dh/versions/introduction-to-digital-humanities">Galaxy Australia</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/digital-humanities-introduction_to_dh/versions/introduction-to-digital-humanities">Galaxy Main</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/digital-humanities-introduction_to_dh/versions/introduction-to-digital-humanities">Galaxy France</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/digital-humanities-introduction_to_dh/versions/introduction-to-digital-humanities">Galaxy Main</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/digital-humanities-introduction_to_dh/versions/introduction-to-digital-humanities">Galaxy Australia</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/digital-humanities-introduction_to_dh/versions/introduction-to-digital-humanities">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/digital-humanities-introduction_to_dh/versions/introduction-to-digital-humanities">Import to another server (≥23.0+ only!)</a>
@@ -365,51 +365,47 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   style 0 stroke:#2c3143,stroke-width:4px;
   1["ℹ️ Input Dataset\nInput Text two"];
   style 1 stroke:#2c3143,stroke-width:4px;
-  2["Remove beginning"];
+  2["Remove Hyperlink Poem One"];
   0 -->|output| 2;
-  3["Remove beginning"];
+  3["Remove Hyperlink Poem Two"];
   1 -->|output| 3;
-  4["Replace Text"];
+  4["Remove Punctuation Poem One"];
   2 -->|out_file1| 4;
-  5["Replace"];
+  5["Break Poem One into sentences"];
   2 -->|out_file1| 5;
-  6["Replace Text"];
+  6["Remove Punctuation Poem Two"];
   3 -->|out_file1| 6;
-  7["Replace"];
+  7["Break Poem Two into sentences"];
   3 -->|out_file1| 7;
-  8["Line/Word/Character count"];
+  8["Generate the first WordCloud"];
   4 -->|outfile| 8;
-  9["Generate the first WordCloud"];
-  4 -->|outfile| 9;
   56f52608-c40a-468a-bfd2-e6718cc436db["Output\nWordCloud01"];
-  9 --> 56f52608-c40a-468a-bfd2-e6718cc436db;
+  8 --> 56f52608-c40a-468a-bfd2-e6718cc436db;
   style 56f52608-c40a-468a-bfd2-e6718cc436db stroke:#2c3143,stroke-width:4px;
-  10["Replace Text"];
-  4 -->|outfile| 10;
-  11["Search in textfiles"];
-  5 -->|outfile| 11;
+  9["Replace Space with linebreak Poem One"];
+  4 -->|outfile| 9;
+  10["Extract Specific Sentences from Poem One"];
+  5 -->|outfile| 10;
   0d463da6-de82-4130-a113-9cf527acdca1["Output\noutput01"];
-  11 --> 0d463da6-de82-4130-a113-9cf527acdca1;
+  10 --> 0d463da6-de82-4130-a113-9cf527acdca1;
   style 0d463da6-de82-4130-a113-9cf527acdca1 stroke:#2c3143,stroke-width:4px;
-  12["Line/Word/Character count"];
+  11["Replace Space with linebreak Poem Two"];
+  6 -->|outfile| 11;
+  12["Generate a second WordCloud"];
   6 -->|outfile| 12;
-  13["Generate a second WordCloud"];
-  6 -->|outfile| 13;
   70815cdd-a460-4d5e-8923-e9842b618393["Output\nWordCloud02"];
-  13 --> 70815cdd-a460-4d5e-8923-e9842b618393;
+  12 --> 70815cdd-a460-4d5e-8923-e9842b618393;
   style 70815cdd-a460-4d5e-8923-e9842b618393 stroke:#2c3143,stroke-width:4px;
-  14["Replace Text"];
-  6 -->|outfile| 14;
-  15["Search in textfiles"];
-  7 -->|outfile| 15;
+  13["Extract Specific Sentences from Poem Two"];
+  7 -->|outfile| 13;
   8cad2dd7-d6b6-4320-860c-f9125cf77bef["Output\noutput02"];
-  15 --> 8cad2dd7-d6b6-4320-860c-f9125cf77bef;
+  13 --> 8cad2dd7-d6b6-4320-860c-f9125cf77bef;
   style 8cad2dd7-d6b6-4320-860c-f9125cf77bef stroke:#2c3143,stroke-width:4px;
-  16["diff"];
-  10 -->|outfile| 16;
-  14 -->|outfile| 16;
+  14["Compare the texts"];
+  9 -->|outfile| 14;
+  11 -->|outfile| 14;
   22682b82-6f29-43e3-a649-b411e42d5cd2["Output\nhtml_file"];
-  16 --> 22682b82-6f29-43e3-a649-b411e42d5cd2;
+  14 --> 22682b82-6f29-43e3-a649-b411e42d5cd2;
   style 22682b82-6f29-43e3-a649-b411e42d5cd2 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
@@ -446,33 +442,33 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.4+galaxy4</td>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.6+galaxy0</td>
 					<td>Generate a word cloud</td>
 					<td>Generate the first WordCloud</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy2</td>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy3</td>
 					<td>Search in textfiles</td>
-					<td></td>
+					<td>Extract Specific Sentences from Poem One</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.4+galaxy4</td>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.6+galaxy0</td>
 					<td>Generate a word cloud</td>
 					<td>Generate a second WordCloud</td>
 				</tr>
 				
 				<tr>
-					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy2</td>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy3</td>
 					<td>Search in textfiles</td>
-					<td></td>
+					<td>Extract Specific Sentences from Poem Two</td>
 				</tr>
 				
 				<tr>
 					<td>toolshed.g2.bx.psu.edu/repos/bgruening/diff/diff/3.10+galaxy1</td>
 					<td>diff</td>
-					<td></td>
+					<td>Compare the texts</td>
 				</tr>
 				
 				</tbody>
@@ -509,11 +505,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy3">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy3</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/c41d78ae5fee">
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/ab83aa685821">
 						View in ToolShed
 					</a>
 					
@@ -521,11 +517,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy2</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy3">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy3</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/c41d78ae5fee">
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/ab83aa685821">
 						View in ToolShed
 					</a>
 					
@@ -533,11 +529,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy2</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.5+galaxy3</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/c41d78ae5fee">
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/ab83aa685821">
 						View in ToolShed
 					</a>
 					
@@ -545,20 +541,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.4+galaxy4">toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.4+galaxy4</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.6+galaxy0">toolshed.g2.bx.psu.edu/repos/bgruening/wordcloud/wordcloud/1.9.6+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/wordcloud/6055ffae8903">
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/wordcloud/45c4cc885ddb">
 						View in ToolShed
 					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=wc_gnu">wc_gnu</a></td>
-				<td>
 					
 				</td>
 			</tr>
@@ -586,6 +575,27 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>5</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/ae13dd9bb466cb26b0fb26f532ae2960cc5d3438">ae13dd9bb</a></td>
+						<td>2026-05-04 07:28:02</td>
+						<td>Updated WF to show proper output labels</td>
+					</tr>
+					
+					<tr>
+						<td>4</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/28e46ee007866fa8ecbbe9ef575e7a691fa59356">28e46ee00</a></td>
+						<td>2026-04-30 11:35:08</td>
+						<td>Updated WF file and Tutorial answer history corresspondingly</td>
+					</tr>
+					
+					<tr>
+						<td>3</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/b9f9a43db0bb13761bcfc9b019848ef0fc41757a">b9f9a43db</a></td>
+						<td>2026-04-30 10:51:59</td>
+						<td>Added updated WF</td>
+					</tr>
 					
 					<tr>
 						<td>2</td>
@@ -682,7 +692,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c7a2b2836caf8bf9adf8a1a8bfb5ae5f6d64b480">c7a2b28</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/12aeb3dfa39a890544ba5ef5fd72a9e05ae7f33d">12aeb3d</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
