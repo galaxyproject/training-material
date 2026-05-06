@@ -1,0 +1,131 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Workflow used for the Ecology tutorial devoted to use yolo model on SEANOE marine data",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-8504-068X",
+            "name": "Yvan Le Bras"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Test tuto yolo DeepSeaSpy",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Image file with Buccinidae"
+                }
+            ],
+            "label": "Image file with Buccinidae",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.0,
+                "top": 0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "709e5032-3457-417d-8ac1-40cb73e81d4b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Buccinidae model file"
+                }
+            ],
+            "label": "Buccinidae model file",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 11.5,
+                "top": 211
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "69d126d5-973e-48f5-8ce2-9f2c7781ea9f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/yolo_predict/yolo_predict/8.3.0+galaxy5",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input_images": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "model": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Perform YOLO image labeling",
+            "outputs": [
+                {
+                    "name": "txt_results",
+                    "type": "input"
+                },
+                {
+                    "name": "overlay_results",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 383.99936000000037,
+                "top": 50
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/yolo_predict/yolo_predict/8.3.0+galaxy5",
+            "tool_shed_repository": {
+                "changeset_revision": "24dfd7800749",
+                "name": "yolo_predict",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"confidence\": \"0.25\", \"image_size\": \"1000\", \"input_images\": {\"__class__\": \"ConnectedValue\"}, \"iou\": \"0.45\", \"max_det\": \"300\", \"mode\": \"detect\", \"model\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "8.3.0+galaxy5",
+            "type": "tool",
+            "uuid": "6379396f-1486-4ba5-b277-778a0a3bc855",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "MarineBiodiversity",
+        "Imaging",
+        "Yolo",
+        "AI",
+        "Ecology"
+    ],
+    "uuid": "c1698551-50e2-460f-a570-2700c736db7c",
+    "version": 6
+}
