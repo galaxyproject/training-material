@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@e7dd1c5aae834a4c5783f06ae5a003af5072a435",
+		release: "galaxy-training-network@3f56f1dfccd1cc22c28e5b4e418fae16f4bf3b46",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Phylodiversity analysis quick tutorial">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2025-06-06 14:40:49 +0000">
+<meta name="DC.date" content="2026-05-07 06:57:51 +0000">
 <meta name="DC.creator" content="Elouan Le Mestric">
 <meta name="DC.creator" content="Yvan Le Bras"><meta name="description" content="Learn to access, manage and analyse Ecological data through Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -181,7 +181,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2025-06-06 14:40:49 +0000",
+  "dateModified": "2026-05-07 06:57:51 +0000",
   "datePublished": "2025-06-06 14:40:49 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -207,7 +207,20 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "status": "active",
     "foundingDate": "2015-06-29"
   },
-  "funder": [],
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/pndb/",
+      "name": "Pôle National de Données de Biodiversité",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://www.pndb.fr/"
+    }
+  ],
   "funding": [],
   "identifier": "https://gxy.io/GTN:T00538",
   "accessMode": [
@@ -237,13 +250,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Phylodiversity analysis quick tutorial",
   "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/phylodiversity_workflow/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT2H",
   "teaches": "- Learning how to use the phylodiversity workflow.\n- Compute endemism index\n- Create a phyloregion map",
   "keywords": [
     "Ecology",
     "ecology",
-    "taxonomic data"
+    "taxonomic data",
+    "phylodiversity",
+    "biodiversity"
   ],
   "description": "## Abstract\n\nThis tutorial is designed to guide you through the Phylodiversity Galaxy workflow, demonstrating how to easily compute phylodiversity and create phyloregions from phylogeny, occupency and spatial files.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to use the phylodiversity workflow?\n - How to construct phyloregions from occurrences species data, phylogenic data and geograpics data?\n\n\n## Learning Objectives\n\n- Learning how to use the phylodiversity workflow.\n- Compute endemism index\n- Create a phyloregion map\n\n",
   "inLanguage": {
@@ -691,6 +706,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "inDefinedTermSet": "http://edamontology.org",
       "termCode": "topic_0610",
       "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0610"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3050",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3050",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3050"
     }
   ],
   "educationalLevel": "Beginner",
@@ -1076,7 +1098,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 6, 2025 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 6, 2025 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 7, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1094,7 +1116,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -1535,6 +1557,34 @@ author = "Elouan Le Mestric and Yvan Le Bras",
                 </blockquote>
 
         
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/pndb/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/PNDB_sub.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">PNDB</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
 
 
 <script>
@@ -1704,7 +1754,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e7dd1c5aae834a4c5783f06ae5a003af5072a435">e7dd1c5</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/3f56f1dfccd1cc22c28e5b4e418fae16f4bf3b46">3f56f1d</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
