@@ -206,59 +206,46 @@ For the suggested batch of early Omicron data we suggest downloading it via URLs
 > - Option 1: Import from the ENA
 >
 >   ```
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/002/SRR17054502/SRR17054502_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/002/SRR17054502/SRR17054502_2.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/003/SRR17054503/SRR17054503_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/003/SRR17054503/SRR17054503_2.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/004/SRR17054504/SRR17054504_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/004/SRR17054504/SRR17054504_2.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/005/SRR17054505/SRR17054505_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/005/SRR17054505/SRR17054505_2.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/006/SRR17054506/SRR17054506_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/006/SRR17054506/SRR17054506_2.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/007/SRR17054507/SRR17054507_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/007/SRR17054507/SRR17054507_2.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/008/SRR17054508/SRR17054508_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/008/SRR17054508/SRR17054508_2.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/009/SRR17054509/SRR17054509_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/009/SRR17054509/SRR17054509_2.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/010/SRR17054510/SRR17054510_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/010/SRR17054510/SRR17054510_2.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/033/SRR17051933/SRR17051933_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/033/SRR17051933/SRR17051933_2.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/034/SRR17051934/SRR17051934_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/034/SRR17051934/SRR17051934_2.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/035/SRR17051935/SRR17051935_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/035/SRR17051935/SRR17051935_2.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/036/SRR17051936/SRR17051936_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/036/SRR17051936/SRR17051936_2.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/037/SRR17051937/SRR17051937_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/037/SRR17051937/SRR17051937_2.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/038/SRR17051938/SRR17051938_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/038/SRR17051938/SRR17051938_2.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/039/SRR17051939/SRR17051939_1.fastq.gz
->   ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/039/SRR17051939/SRR17051939_2.fastq.gz
+>   SRR17054502
+>   SRR17054502
+>   SRR17054503
+>   SRR17054503
+>   SRR17054504
+>   SRR17054504
+>   SRR17054505
+>   SRR17054505
+>   SRR17054506
+>   SRR17054506
+>   SRR17054507
+>   SRR17054507
+>   SRR17054508
+>   SRR17054508
+>   SRR17054509
+>   SRR17054509
+>   SRR17054510
+>   SRR17054510
+>   SRR17051933
+>   SRR17051933
+>   SRR17051934
+>   SRR17051934
+>   SRR17051935
+>   SRR17051935
+>   SRR17051936
+>   SRR17051936
+>   SRR17051937
+>   SRR17051937
+>   SRR17051938
+>   SRR17051938
+>   SRR17051939
+>   SRR17051939
 >   ```
 >
->   1. Copy the links above
->   2. Open the {% tool [Upload](upload1) %} Manager
->   3. In the top row of tabs select **Collection**
->   4. Configure the drop-down select boxes on that tab like this:
->      - *"Collection Type"*: `List of Pairs`
->      - *"File Type"*: `fastqsanger.gz`
->   5. Click on **Paste/Fetch data** and paste the links you copied into the empty text box
->   6. Press **Start**
->   7. Wait for the **Build** button to become enabled, then click it
->   8. In the lower half of the next dialogue, Galaxy already suggests a mostly reasonable pairing of the inputs.
+>   1. Copy the list of SRA accessions above
+>   2. In the Get Data section of the Tools panel, select {% tool [fastq-dl](toolshed.g2.bx.psu.edu/repos/iuc/fastq_dl/fastq_dl/3.0.1+galaxy2) %} Manager
+>   3. Paste the list of accessions into the "Accession IDs" field
+>   4. Click **Run Tool**
 >
->      As you can see, however, this auto-pairing would retain a *.fastq* suffix attached to each pair of forward and reverse reads. To correct this
->      1. Click **Unpair all** above the suggested pairings to undo all of them.
->      2. Change the following default values in the upper half of the window:
->         - *"unpaired forward"*: `_1.fastq.gz` (instead of *_1*)
->         - *"unpaired reverse"*: `_2.fastq.gz` (instead of *_2*)
->      3. Click **Auto-pair**
->   9. At, the bottom of the window, enter a suitable **Name**, like `Sequencing data`, for the new collection
->   10. Click on **Create collection**
+> After the fetching is complete, there will be three datasets: an empty set of single-end data, a collection of metadata from the download, and a collection of 16 sets of paired end reads.
 >
 > - Option 2: Import from a shared data library
 >
@@ -331,7 +318,7 @@ Besides the sequenced reads data, we need at least two additional datasets for c
 >    ```
 >
 >    Two remarks on this content:
->    - Since the feature mapping dataset is expected to be in tabular format, but the above display uses spaces to separate columns, please make sure, you have **Convert spaces to tabs** checked when creating the dataset from the copied content!
+>    - Since the feature mapping dataset is expected to be in tabular format, but the above display uses spaces to separate columns, please make sure you have **Convert spaces to tabs** checked when creating the dataset from the copied content!
 >    - If you prefer other names for certain translation products than the ones defined above (*e.g.* you might be used to call the first peptide *nsp1* instead of *leader*), you are, of course, free to change those names in the pasted content before uploading it to Galaxy. What needs to be kept is only the Refseq identifiers in the first column as these are fixed by the SnpEff tool.
 >
 >    {% snippet faqs/galaxy/datasets_create_new_file.md name="SARS-CoV-2 feature mapping" format="tabular" convertspaces="true" %}
