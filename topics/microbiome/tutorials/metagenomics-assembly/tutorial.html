@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d9ff6d7ad240248d9df7c8b7cf3d12b3da63f93a",
+		release: "galaxy-training-network@77fc7038822d682eb913de774add892d8825b140",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Assembly of metagenomic sequencing data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-04-23 12:38:44 +0000">
+<meta name="DC.date" content="2026-05-11 13:15:11 +0000">
 <meta name="DC.creator" content="Polina Polunina">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Vini Salazar">
@@ -185,7 +185,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2026-04-23 12:38:44 +0000",
+  "dateModified": "2026-05-11 13:15:11 +0000",
   "datePublished": "2022-12-05 10:09:59 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -262,7 +262,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Assembly of metagenomic sequencing data",
   "url": "https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/metagenomics-assembly/tutorial.html",
-  "version": 10,
+  "version": 11,
   "timeRequired": "PT2H",
   "teaches": "- Describe what an assembly is.\n- Explain the difference between co-assembly and individual assembly.\n- Explain the difference between reads, contigs and scaffolds.\n- Explain how tools based on de Bruijn graph work.\n- Evaluate the quality of the Assembly with QUAST, Bowtie2, and CoverM-Contig.\n- Construct and apply simple assembly pipelines on short read data.",
   "keywords": [
@@ -1720,6 +1720,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</li>
     
 	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu
+		</a>
+	</li>
+    
+	<li>
 		<a class="dropdown-item" href="https://usegalaxy.org" title="">
 			UseGalaxy.org (Main)
 		</a>
@@ -1735,7 +1741,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Dec 5, 2022 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 23, 2026 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 11, 2026 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1755,7 +1761,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.7</a> (0 recent ratings, 3 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 10 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 11 </div>
 
     </blockquote>
     </section>
@@ -2114,32 +2120,31 @@ https://zenodo.org/record/7818827/files/contigs_ERR2231572.fasta
 
 </blockquote>
 
-<blockquote class="hands_on details">
+<blockquote class="details">
   <div class="box-title details-title" id="details-co-assembly-with-metaspades"><button class="gtn-boxify-button details" type="button" aria-controls="details-co-assembly-with-metaspades" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Co-assembly with MetaSPAdes</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>MetaSPAdes supports co-assembly by passing a list of paired-end read files.</p>
 
-  <div class="box-title hands-on-title" id="hands-on-assembly-with-metaspades"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Assembly with MetaSPAdes</div>
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/4.2.0+galaxy0" title="MetaSPAdes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MetaSPAdes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.2.0+galaxy0)</span> with the following parameters:
-      <ul>
-        <li><em>“Pair-end reads input format”</em>: <code class="language-plaintext highlighter-rouge">Paired-end: list of dataset pairs</code>
-          <ul>
-            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ file(s): collection”</em>: <code class="language-plaintext highlighter-rouge">Raw reads</code></li>
-          </ul>
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-assembly-with-metaspades"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands On: Assembly with MetaSPAdes</div>
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/4.2.0+galaxy0" title="MetaSPAdes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MetaSPAdes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.2.0+galaxy0)</span> with the following parameters:
+        <ul>
+          <li><em>“Pair-end reads input format”</em>: <code class="language-plaintext highlighter-rouge">Paired-end: list of dataset pairs</code></li>
+          <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ file(s): collection”</em>: <code class="language-plaintext highlighter-rouge">Raw reads</code></li>
+        </ul>
 
-          <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-tip"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Tip</div>
-            <p>To run <strong>individual assembly</strong> instead, follow the previous FAQ to create a <strong>nested list of samples</strong>.</p>
-          </blockquote>
-        </li>
-        <li><em>“Select k-mer detection option”</em>: <code class="language-plaintext highlighter-rouge">User specific</code>
-          <ul>
-            <li><em>“K-mer size values”</em>: <code class="language-plaintext highlighter-rouge">21,33,55,77</code></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ol>
+        <blockquote class="comment">
+          <div class="box-title comment-title" id="comment-tip"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Tip</div>
+          <p>To run <strong>individual assembly</strong> instead, follow the previous FAQ to create a <strong>nested list of samples</strong>.</p>
+        </blockquote>
+      </li>
+    </ol>
+
+    <ul>
+      <li><em>“Select k-mer detection option”</em>: <code class="language-plaintext highlighter-rouge">User specific</code></li>
+      <li><em>“K-mer size values”</em>: <code class="language-plaintext highlighter-rouge">21,33,55,77</code></li>
+    </ul>
+  </blockquote>
 </blockquote>
 
 <h1 id="quality-control-of-assembly">Quality control of assembly</h1>
@@ -3323,7 +3328,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d9ff6d7ad240248d9df7c8b7cf3d12b3da63f93a">d9ff6d7</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/77fc7038822d682eb913de774add892d8825b140">77fc703</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
