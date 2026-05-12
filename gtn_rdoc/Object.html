@@ -2516,8 +2516,8 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_metadata</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">parts</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)
   <span class="ruby-identifier">topic_id</span> = <span class="ruby-identifier">parts</span>[<span class="ruby-value">1</span>]
-  <span class="ruby-identifier">topic_metadata</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;metadata&#39;</span>, <span class="ruby-node">&quot;#{topic_id}.yaml&quot;</span>))
-  <span class="ruby-identifier">tutorial_metadata</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">topic_metadata</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;metadata&#39;</span>, <span class="ruby-node">&quot;#{topic_id}.yaml&quot;</span>), <span class="ruby-value">permitted_classes:</span> [<span class="ruby-constant">Date</span>])
+  <span class="ruby-identifier">tutorial_metadata</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value">permitted_classes:</span> [<span class="ruby-constant">Date</span>])
   <span class="ruby-identifier">topic</span> = { <span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">topic_metadata</span>[<span class="ruby-string">&#39;title&#39;</span>], <span class="ruby-string">&#39;description&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">topic_metadata</span>[<span class="ruby-string">&#39;summary&#39;</span>] }
   <span class="ruby-identifier">tutorial</span> = { <span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">tutorial_metadata</span>[<span class="ruby-string">&#39;title&#39;</span>] }
   [<span class="ruby-identifier">topic</span>, <span class="ruby-identifier">tutorial</span>]
@@ -2544,9 +2544,9 @@
                           <div class="method-source-code" id="parse_tutorial_for_zenodo_link-source">
                             <pre><span class="ruby-comment"># File bin/update-data-library, line 143</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_tutorial_for_zenodo_link</span>(<span class="ruby-identifier">path</span>)
-  <span class="ruby-identifier">parse_zenodo_id_formats</span>(<span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">path</span>)[<span class="ruby-string">&#39;zenodo_link&#39;</span>])
-<span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span>
-  <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">parse_zenodo_id_formats</span>(<span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value">permitted_classes:</span> [<span class="ruby-constant">Date</span>])[<span class="ruby-string">&#39;zenodo_link&#39;</span>])
+<span class="ruby-keyword">rescue</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">exception</span>
+  <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;error: #{exception}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
                           </div>
                       </div>
@@ -3250,7 +3250,7 @@
     <span class="ruby-identifier">official_extension</span> = <span class="ruby-identifier">f</span>[<span class="ruby-string">&#39;type&#39;</span>]
 
     <span class="ruby-identifier">link</span> = <span class="ruby-identifier">f</span>[<span class="ruby-string">&#39;links&#39;</span>][<span class="ruby-string">&#39;self&#39;</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">%r{/content$}</span>, <span class="ruby-string">&#39;&#39;</span>)
-    <span class="ruby-identifier">unofficial_extension</span> = <span class="ruby-identifier">link</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;.&#39;</span>)[<span class="ruby-value">-2</span><span class="ruby-operator">..</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;.&#39;</span>)
+    <span class="ruby-identifier">unofficial_extension</span> = <span class="ruby-identifier">link</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;.&#39;</span>)[<span class="ruby-value">-1</span>]
     <span class="ruby-identifier">ext</span> = <span class="ruby-ivar">@SHARED_DATATYPES</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">unofficial_extension</span>, <span class="ruby-keyword">nil</span>) <span class="ruby-operator">||</span> <span class="ruby-ivar">@SHARED_DATATYPES</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">official_extension</span>, <span class="ruby-keyword">nil</span>)
 
     <span class="ruby-comment"># Example:</span>
