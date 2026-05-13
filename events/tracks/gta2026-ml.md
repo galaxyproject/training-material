@@ -41,5 +41,13 @@ program:
         topic: statistics
       - name: loris_model
         topic: statistics
+  - section: "Optional (not required for certificate)"
+    description: |
+      If you encounter any issue please ask us in the above Slack channel.
+    tutorials:
+      - name: image_learner
+        topic: statistics
+      - name: multimodal_learner
+        topic: statistics
 
 ---
