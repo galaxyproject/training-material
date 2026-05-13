@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b3484f3b00acabedb99bc79b61b0232ccccb520f",
+		release: "galaxy-training-network@daa370b01d18cec32b370503bd04b154f335f7e9",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Mycobacterium tuberculosis complex NGS made easy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-12-19 14:39:45 +0000"><meta name="description" content="These series of webinars and tutorials aim at improving basic and applied knowledge associated with next-generation sequencing (NGS) technologies and their applications in the field of Tuberculosis (TB). ">
+<meta name="DC.date" content="2026-05-13 08:28:33 +0000"><meta name="description" content="These series of webinars and tutorials aim at improving basic and applied knowledge associated with next-generation sequencing (NGS) technologies and their applications in the field of Tuberculosis (TB). ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Mycobacterium tuberculosis complex NGS made easy">
         <meta property="og:description" content="These series of webinars and tutorials aim at improving basic and applied knowledge associated with next-generation sequencing (NGS) technologies and their applications in the field of Tuberculosis (TB). ">
@@ -866,6 +866,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Syllabus",
+      "name": "Q&A",
+      "description": null
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Optional",
+      "description": "Optional webinars: These are produced outside this training by [tbnet](https://www.tbnet.eu/) and [Stop TB Partnership](https://www.stoptb.org/) and [FIND](https://www.finddx.org/), but might be of interest to you.\n\n[Targeted next generation sequencing for the detection of drug resistant TB: intended use, challenges and research priorities](https://www.tbnet.eu/webinars)\n\n[Implementing tNGS for detection of drug-resistant TB in high burden countries](https://www.stoptb.org/meetings-events/implementing-tngs-detection-of-drug-resistant-tb-high-burden-countries)\n"
+    },
+    {
+      "@type": "Syllabus",
       "name": "Day 2: Mapping and variant calling",
       "description": "The 20 strains isolated in your country have been sequenced with\nIllumina technology to obtain whole-genome sequences. In this part\nof the workshop you will learn how to analyse those sequences.\n\nIn a typical bioinformatic pipeline you would store your sequences\nin a computer server where all necessary software would be\ninstalled. This would be a server running the operating system\nLINUX, which is the most efficient way to run bioinformatics\npipelines (more on this on Day 4). You will be running your\nanalysis in a LINUX server from Galaxy, but instead of writing\ndirectly commands to execute operations in the server, you will be\nexecuting operations through a Galaxy graphical interface. This\nallows you to have access to a LINUX server and to run workflows\nwithout knowing LINUX. Importantly, for training purposes it also\nallows you to dedicate more attention in trying to understand what\nis being done in each of the steps without having to understand the\nprograming behind. This being said, working directly on a LINUX\ncluster provides you always more flexibility, but if you don’t have\naccess to one, Galaxy is a very good alternative for data analysis.\n"
     },
@@ -881,12 +891,52 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Syllabus",
+      "name": "Q&A",
+      "description": null
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Variant Analysis",
+      "description": null
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Q&A",
+      "description": null
+    },
+    {
+      "@type": "Syllabus",
       "name": "Day 3: Evolutionary epidemiology: using phylogenetics to understand DR emergence and Mtb transmission",
       "description": "We are ready to analyse drug resistant patterns, draw phylogenetic relationships or\nidentify recent transmission among the isolates we have sampled in our population. Before\ndelving into the analysis of the genomes we would like to share with you some notions\nimportant to the inference of direct transmission and to the interpretation of drug\nresistant patterns.\n"
     },
     {
       "@type": "Syllabus",
       "name": "Evolutionary epidemiology: using phylogenetics to understand DR emergence and Mtb transmission",
+      "description": null
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Evolution",
+      "description": null
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Q&A",
+      "description": null
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Phylogeny",
+      "description": null
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Assessment",
+      "description": null
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Q&A",
       "description": null
     },
     {
@@ -901,8 +951,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Syllabus",
+      "name": "Q&A",
+      "description": null
+    },
+    {
+      "@type": "Syllabus",
       "name": "Session 2: Be a bioinformatician in the jungle (optional)",
       "description": "On Day 2 and 3 you have learned how you could use galaxy for analysing your own data.\nEstablishing your own workflows in galaxy would allow you combining different tools and\nbuild your own pipeline without having to know how to program. If you are not so\ninterested in having your own pipeline, webtools for WGS analysis can be very useful, as\nwe have shown in the previous session.\n\nHowever, in the last part of the training we would like to convey to you what it would\ntake if would want to run Linux via the command line.  The Linux operating system will be\nintroduced, how to perform basic tasks using the Unix shell and how to install and run\npipelines on the command line. You will learn the power of the Unix shell in performing\ncomplex and powerful tasks, often with just a few keystrokes or lines of code. In fact,\nUnix shell helps users automate repetitive tasks and easily combine smaller tasks into\nlarger, more powerful workflows (i.e. pipelines). Use of the shell is fundamental to a\nwide range of advanced computing tasks, including high-performance computing. These\nwebinars will introduce you to this powerful tool. Which approach to choose, Galaxy\nworkflows, Webtools or native Linux depends on your needs, your interests and what\ncomputer resources you have available.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Q&A",
+      "description": null
     },
     {
       "@type": "Syllabus",
@@ -910,7 +970,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "description": "Today all experts will  be available to answer your questions and discuss any\nof the tutorials, webinars, or questions related to your own data. Meet with us at the\nzoom link!\n"
     }
   ],
-  "dateModified": "2024-12-19 14:39:45 +0000",
+  "dateModified": "2026-05-13 08:28:33 +0000",
   "datePublished": "2024-06-03 09:32:41 +0000",
   "isAccessibleForFree": true,
   "hasCourseInstance": [
@@ -1793,10 +1853,13 @@ such as:</p>
   <thead>
     <tr>
       
+      <th scope="col">Time</th>
       
-      <th scope="col">Title</th>
-      <th scope="col" title="Description of the session">Description</th>
-
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
       
 
       
@@ -1814,6 +1877,41 @@ such as:</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Icebreaker**</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
            <!-- e.g. for events -->
@@ -1839,65 +1937,6 @@ such as:</p>
          </tr>
        
     
-  </tbody>
-</table>
-
-
-<style>
-@media (max-width:767px) {
-    table.table.table-responsive.tutorials-list  {
-        display: inline-table;
-    }
-    .tutorials-list tr th:not(:first-child) {
-        display: none;
-    }
-    .tutorials-list tr td:not(:first-child) {
-        display: none;
-    }
-    .tutorials-list .duplicate {
-        display: unset !important;
-    }
-}
-</style>
-
-
-	  
-
-    
-      
-      <p>
-</p>
-
-      
-
-	  
-        
-        
-	    
-
-
-
-<table class="table table-responsive table-striped tutorials-list">
-  <thead>
-    <tr>
-      
-      <th scope="col">Time</th>
-      
-      
-      <th scope="col">Title</th>
-      <th scope="col" title="Description of the session">Description</th>
-
-      
-
-      
-
-      
-    </tr>
-  </thead>
-  <tbody class="list">
-
-  
-  
         <!-- MAT:  -->
       
       <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
@@ -2244,6 +2283,8 @@ Join us on <a href="https://swisstph.zoom.us/j/88614333103?pwd=OVVjeG04a2lVMXB0T
 
     
       
+        <h4 id="q-a">Q&A</h4>
+      
       <p>
 </p>
 
@@ -2263,9 +2304,10 @@ Join us on <a href="https://swisstph.zoom.us/j/88614333103?pwd=OVVjeG04a2lVMXB0T
       <th scope="col">Time</th>
       
       
-      <th scope="col">Title</th>
-      <th scope="col" title="Description of the session">Description</th>
-
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
       
 
       
@@ -2395,6 +2437,8 @@ questions in the shared notes (link below);</p>
 
     
       
+        <h3 id="optional">Optional</h3>
+      
       <p><p>Optional webinars: These are produced outside this training by <a href="https://www.tbnet.eu/">tbnet</a> and <a href="https://www.stoptb.org/">Stop TB Partnership</a> and <a href="https://www.finddx.org/">FIND</a>, but might be of interest to you.</p>
 
 <p><a href="https://www.tbnet.eu/webinars">Targeted next generation sequencing for the detection of drug resistant TB: intended use, challenges and research priorities</a></p>
@@ -2444,10 +2488,13 @@ access to one, Galaxy is a very good alternative for data analysis.</p>
   <thead>
     <tr>
       
+      <th scope="col">Time</th>
       
-      <th scope="col">Title</th>
-      <th scope="col" title="Description of the session">Description</th>
-
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
       
 
       
@@ -2465,6 +2512,41 @@ access to one, Galaxy is a very good alternative for data analysis.</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Icebreaker**</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
            <!-- e.g. for events -->
@@ -2546,6 +2628,8 @@ analysis with your own data.</p>
   <thead>
     <tr>
       
+      <th scope="col">Time</th>
+      
       
       <th scope="col">Lesson</th>
       <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
@@ -2568,6 +2652,265 @@ analysis with your own data.</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>A short introduction to Galaxy</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
+           
+		   <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="es" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides_ES.html" title="es">
+                Español
+            </a>
+			</li>
+           
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+
+	<li class="dropdown-item">
+		<a class="btn btn-default topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides-plain.html" aria-label="more accessible, plain text slides">
+			<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+<div class="btn-group">
+  <!-- add video button -->
+  <a class="btn btn-default topic-icon" href="/training-material/videos/watch.html?v=introduction/tutorials/galaxy-intro-short/slides" title="Video Slides (text-to-speech)">
+    <i class="far fa-play-circle" aria-hidden="true"></i>
+  </a>
+
+  
+  <!-- add dropdown with links to different languages for the video-->
+  <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </a>
+  <ul class="dropdown-menu">
+
+    <div class="dropdown-item"><strong>Video Languages</strong></div>
+      
+      <a class="dropdown-item" href="/training-material/videos/watch.html?v=introduction/tutorials/galaxy-intro-short/slides_ES" title="es">
+         
+      </a>
+      
+  </ul>
+  
+
+</div>
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
+           
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="es" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial_ES.html" title="es">
+                Español
+            </a>
+            </li>
+        
+
+          <hr/>
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/recordings/index.html#tutorial-recording-18-march-2025" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (March 2025) - 27m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
           
@@ -2594,7 +2937,7 @@ analysis with your own data.</p>
             
             
               
-              <a href="/training-material/search2.html?query=español" class="label label-default tutorial_tag" style="--color-primary: #00d1c7; --color-darker: #00bab1; --color-dimmed: #00c6bc;" title="Click to show all tutorials tagged español">español</a>
+              <a href="/training-material/search2.html?query=español" class="label label-default tutorial_tag" style="--color-primary: #00f3e8; --color-darker: #00d8ce; --color-dimmed: #00e6db;" title="Click to show all tutorials tagged español">español</a>
               
             
             </div>
@@ -3112,6 +3455,151 @@ analysis with your own data.</p>
         <tr>
           
           
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>Galaxy Basics for genomics</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-101/recordings/index.html#tutorial-recording-16-september-2024" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (September 2024) - 18m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-101/recordings/index.html#tutorial-recording-21-july-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (July 2021) - 13m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-101/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
+          
 
           
           <td class="tutorial_title">
@@ -3462,10 +3950,13 @@ analysis with your own data.</p>
   <thead>
     <tr>
       
+      <th scope="col">Time</th>
       
-      <th scope="col">Title</th>
-      <th scope="col" title="Description of the session">Description</th>
-
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
       
 
       
@@ -3483,6 +3974,41 @@ analysis with your own data.</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Video:** Illumina sequencing</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
            <!-- e.g. for events -->
@@ -3506,6 +4032,41 @@ analysis with your own data.</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Webinar**: Mapping and Variant calling</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
            <!-- e.g. for events -->
@@ -3561,6 +4122,8 @@ analysis with your own data.</p>
 
     
       
+        <h4 id="q-a">Q&A</h4>
+      
       <p>
 </p>
 
@@ -3580,9 +4143,10 @@ analysis with your own data.</p>
       <th scope="col">Time</th>
       
       
-      <th scope="col">Title</th>
-      <th scope="col" title="Description of the session">Description</th>
-
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
       
 
       
@@ -3678,6 +4242,8 @@ analysis with your own data.</p>
 
     
       
+        <h4 id="variant-analysis">Variant Analysis</h4>
+      
       <p>
 </p>
 
@@ -3693,6 +4259,8 @@ analysis with your own data.</p>
 <table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
+      
+      <th scope="col">Time</th>
       
       
       <th scope="col">Lesson</th>
@@ -3716,6 +4284,151 @@ analysis with your own data.</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>M. tuberculosis Variant Analysis</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/recordings/index.html#tutorial-recording-11-june-2024" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (June 2024) - 1h17m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 40m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
           
@@ -3742,13 +4455,13 @@ analysis with your own data.</p>
             
             
               
-              <a href="/training-material/search2.html?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #beb2ff; --color-darker: #aa99ff; --color-dimmed: #b4a5ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              <a href="/training-material/search2.html?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #dbd5ff; --color-darker: #c4b9ff; --color-dimmed: #cfc7ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
               
-              <a href="/training-material/search2.html?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #85d000; --color-darker: #76b900; --color-dimmed: #7dc400;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search2.html?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #9bf100; --color-darker: #89d600; --color-dimmed: #92e400;" title="Click to show all tutorials tagged one-health">one-health</a>
               
-              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c8c000; --color-darker: #b2ab00; --color-dimmed: #bdb500;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e8df00; --color-darker: #cfc600; --color-dimmed: #dcd300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
-              <a href="/training-material/search2.html?query=tuberculosis" class="label label-default tutorial_tag" style="--color-primary: #00cded; --color-darker: #00b7d4; --color-dimmed: #00c2e1;" title="Click to show all tutorials tagged tuberculosis">tuberculosis</a>
+              <a href="/training-material/search2.html?query=tuberculosis" class="label label-default tutorial_tag" style="--color-primary: #8fe7ff; --color-darker: #00d4f5; --color-dimmed: #4adfff;" title="Click to show all tutorials tagged tuberculosis">tuberculosis</a>
               
             
             </div>
@@ -4057,6 +4770,8 @@ analysis with your own data.</p>
 
     
       
+        <h4 id="q-a">Q&A</h4>
+      
       <p>
 </p>
 
@@ -4076,9 +4791,10 @@ analysis with your own data.</p>
       <th scope="col">Time</th>
       
       
-      <th scope="col">Title</th>
-      <th scope="col" title="Description of the session">Description</th>
-
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
       
 
       
@@ -4208,10 +4924,13 @@ resistant patterns.</p>
   <thead>
     <tr>
       
+      <th scope="col">Time</th>
       
-      <th scope="col">Title</th>
-      <th scope="col" title="Description of the session">Description</th>
-
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
       
 
       
@@ -4229,6 +4948,41 @@ resistant patterns.</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Icebreaker**</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
            <!-- e.g. for events -->
@@ -4269,6 +5023,41 @@ Today’s icebreaker question:</p>
         <tr>
           
           
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Webinar**: Drug resistance prediction</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
+          
 
            <!-- e.g. for events -->
             <td>
@@ -4303,6 +5092,41 @@ Today’s icebreaker question:</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Webinar**: "Phylogenetic" mutations</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
            <!-- e.g. for events -->
@@ -4341,6 +5165,41 @@ drug resistance patterns</p>
         <tr>
           
           
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Webinar:** The concept of clustering</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
+          
 
            <!-- e.g. for events -->
             <td>
@@ -4367,6 +5226,41 @@ drug resistance patterns</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Webinar**: Genetic distance thresholds</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
            <!-- e.g. for events -->
@@ -4422,6 +5316,8 @@ drug resistance patterns</p>
 
     
       
+        <h4 id="evolution">Evolution</h4>
+      
       <p>
 </p>
 
@@ -4437,6 +5333,8 @@ drug resistance patterns</p>
 <table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
+      
+      <th scope="col">Time</th>
       
       
       <th scope="col">Lesson</th>
@@ -4460,6 +5358,109 @@ drug resistance patterns</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>Identifying tuberculosis transmission links: from SNPs to transmission clusters</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
           
@@ -4486,11 +5487,11 @@ drug resistance patterns</p>
             
             
               
-              <a href="/training-material/search2.html?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #beb2ff; --color-darker: #aa99ff; --color-dimmed: #b4a5ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              <a href="/training-material/search2.html?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #dbd5ff; --color-darker: #c4b9ff; --color-dimmed: #cfc7ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
               
-              <a href="/training-material/search2.html?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #85d000; --color-darker: #76b900; --color-dimmed: #7dc400;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search2.html?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #9bf100; --color-darker: #89d600; --color-dimmed: #92e400;" title="Click to show all tutorials tagged one-health">one-health</a>
               
-              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c8c000; --color-darker: #b2ab00; --color-dimmed: #bdb500;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e8df00; --color-darker: #cfc600; --color-dimmed: #dcd300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -4715,6 +5716,8 @@ drug resistance patterns</p>
 
     
       
+        <h3 id="q-a">Q&A</h3>
+      
       <p>
 </p>
 
@@ -4734,9 +5737,10 @@ drug resistance patterns</p>
       <th scope="col">Time</th>
       
       
-      <th scope="col">Title</th>
-      <th scope="col" title="Description of the session">Description</th>
-
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
       
 
       
@@ -4890,6 +5894,8 @@ drug resistance patterns</p>
 
     
       
+        <h3 id="phylogeny">Phylogeny</h3>
+      
       <p>
 </p>
 
@@ -4905,6 +5911,8 @@ drug resistance patterns</p>
 <table class="table table-responsive table-striped tutorials-list">
   <thead>
     <tr>
+      
+      <th scope="col">Time</th>
       
       
       <th scope="col">Lesson</th>
@@ -4928,6 +5936,109 @@ drug resistance patterns</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>Tree thinking for tuberculosis evolution and epidemiology</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/evolution/tutorials/mtb_phylogeny/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
           
@@ -4954,13 +6065,13 @@ drug resistance patterns</p>
             
             
               
-              <a href="/training-material/search2.html?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #beb2ff; --color-darker: #aa99ff; --color-dimmed: #b4a5ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              <a href="/training-material/search2.html?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #dbd5ff; --color-darker: #c4b9ff; --color-dimmed: #cfc7ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
               
-              <a href="/training-material/search2.html?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #85d000; --color-darker: #76b900; --color-dimmed: #7dc400;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search2.html?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #9bf100; --color-darker: #89d600; --color-dimmed: #92e400;" title="Click to show all tutorials tagged one-health">one-health</a>
               
-              <a href="/training-material/search2.html?query=phylogenetics" class="label label-default tutorial_tag" style="--color-primary: #00d855; --color-darker: #00c14b; --color-dimmed: #00cd50;" title="Click to show all tutorials tagged phylogenetics">phylogenetics</a>
+              <a href="/training-material/search2.html?query=phylogenetics" class="label label-default tutorial_tag" style="--color-primary: #00fb65; --color-darker: #00df59; --color-dimmed: #00ed5f;" title="Click to show all tutorials tagged phylogenetics">phylogenetics</a>
               
-              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #c8c000; --color-darker: #b2ab00; --color-dimmed: #bdb500;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
+              <a href="/training-material/search2.html?query=microgalaxy" class="label label-default tutorial_tag" style="--color-primary: #e8df00; --color-darker: #cfc600; --color-dimmed: #dcd300;" title="Click to show all tutorials tagged microgalaxy">microgalaxy</a>
               
             
             </div>
@@ -5185,6 +6296,8 @@ drug resistance patterns</p>
 
     
       
+        <h3 id="assessment">Assessment</h3>
+      
       <p>
 </p>
 
@@ -5201,10 +6314,13 @@ drug resistance patterns</p>
   <thead>
     <tr>
       
+      <th scope="col">Time</th>
       
-      <th scope="col">Title</th>
-      <th scope="col" title="Description of the session">Description</th>
-
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
       
 
       
@@ -5222,6 +6338,41 @@ drug resistance patterns</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>Check what you have learnt!</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
            <!-- e.g. for events -->
@@ -5273,6 +6424,8 @@ drug resistance patterns</p>
 
     
       
+        <h3 id="q-a">Q&A</h3>
+      
       <p>
 </p>
 
@@ -5292,9 +6445,10 @@ drug resistance patterns</p>
       <th scope="col">Time</th>
       
       
-      <th scope="col">Title</th>
-      <th scope="col" title="Description of the session">Description</th>
-
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
       
 
       
@@ -5425,10 +6579,13 @@ interpret the results.</p>
   <thead>
     <tr>
       
+      <th scope="col">Time</th>
       
-      <th scope="col">Title</th>
-      <th scope="col" title="Description of the session">Description</th>
-
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
       
 
       
@@ -5446,6 +6603,41 @@ interpret the results.</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Icebreaker**</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
            <!-- e.g. for events -->
@@ -5488,6 +6680,41 @@ Today’s icebreaker question:</p>
         <tr>
           
           
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Webinar**: Use of web-tools & software for MTBC sequence analysis</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
+          
 
            <!-- e.g. for events -->
             <td>
@@ -5518,6 +6745,41 @@ Today’s icebreaker question:</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Webinar:** Brief overview of MTBseq and MAGMA pipelines</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
            <!-- e.g. for events -->
@@ -5567,6 +6829,8 @@ This webinar presents the most important features between them.</p>
 
     
       
+        <h4 id="q-a">Q&A</h4>
+      
       <p>
 </p>
 
@@ -5586,9 +6850,10 @@ This webinar presents the most important features between them.</p>
       <th scope="col">Time</th>
       
       
-      <th scope="col">Title</th>
-      <th scope="col" title="Description of the session">Description</th>
-
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
       
 
       
@@ -5718,10 +6983,13 @@ computer resources you have available.</p>
   <thead>
     <tr>
       
+      <th scope="col">Time</th>
       
-      <th scope="col">Title</th>
-      <th scope="col" title="Description of the session">Description</th>
-
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
       
 
       
@@ -5739,6 +7007,41 @@ computer resources you have available.</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Webinar**: Introduction to Linux</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
            <!-- e.g. for events -->
@@ -5767,6 +7070,41 @@ computer resources you have available.</p>
         <tr>
           
           
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Webinar**: How to run programs (Python, Docker, Nextflow)</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
+          
 
            <!-- e.g. for events -->
             <td>
@@ -5794,6 +7132,41 @@ computer resources you have available.</p>
         <tr>
           
           
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Webinar**: Demo on how to run the Linux command line</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
+          
 
            <!-- e.g. for events -->
             <td>
@@ -5820,6 +7193,41 @@ computer resources you have available.</p>
 
         <tr>
           
+          
+          <td>
+
+
+              <div class="duplicate" style="display: none;">
+              <b>**Hands-on**: The Unix Shell</b>
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+
+          </td>
           
 
            <!-- e.g. for events -->
@@ -5867,6 +7275,8 @@ computer resources you have available.</p>
 
     
       
+        <h4 id="q-a">Q&A</h4>
+      
       <p>
 </p>
 
@@ -5886,9 +7296,10 @@ computer resources you have available.</p>
       <th scope="col">Time</th>
       
       
-      <th scope="col">Title</th>
-      <th scope="col" title="Description of the session">Description</th>
-
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
       
 
       
@@ -6326,22 +7737,14 @@ technologies and their applications in the field of Tuberculosis (TB).
 **Agenda**:
 - Start the Course
 - Day 1: Overview of NGS technologies & TB specific NGS solutions
-- 
-- 
-- 
+- Optional
 - Day 2: Mapping and variant calling
-- 
-- 
-- 
 - Day 3: Evolutionary epidemiology: using phylogenetics to understand DR emergence and Mtb transmission
-- 
-- 
-- 
-- 
-- 
+- Q&A
+- Phylogeny
+- Assessment
+- Q&A
 - Day 4: Webtools dedicated to MTBC bioinformatics & Be a bioinformatician in the jungle (optional)
-- 
-- 
 - Day 5: Live Discussion
 
 📅 June 10 – 14, 2024
@@ -6690,7 +8093,7 @@ technologies and their applications in the field of Tuberculosis (TB).
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b3484f3b00acabedb99bc79b61b0232ccccb520f">b3484f3</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/daa370b01d18cec32b370503bd04b154f335f7e9">daa370b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
