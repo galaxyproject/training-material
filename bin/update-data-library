@@ -59,6 +59,13 @@ def update_data_library(path, topic, tutorial, zenodo_record)
 
     link = f['links']['self'].sub(%r{/content$}, '')
     unofficial_extension = link.split('.')[-1]
+    if unofficial_extension == "bz2"
+      unofficial_extension = link.split('.')[-2..].join('.')
+    end
+    if unofficial_extension.include? "/"
+      # this catches the cases where the filename ended in period
+      unofficial_extension = ""
+    end
     ext = @SHARED_DATATYPES.fetch(unofficial_extension, nil) || @SHARED_DATATYPES.fetch(official_extension, nil)
 
     # Example:
@@ -69,7 +76,7 @@ def update_data_library(path, topic, tutorial, zenodo_record)
     # puts "Processing file: #{f['type']} #{f['links']['self']} => #{ext}"
     # puts "#{unofficial_extension} => #{@SHARED_DATATYPES.fetch(unofficial_extension, nil)}"
     # puts "#{official_extension} => #{@SHARED_DATATYPES.fetch(official_extension, nil)}"
-    warn "Unknown file type: #{f['type']}. Consider adding this to shared/datatypes.yaml" if ext.nil?
+    warn "Unknown file type: #{f['type']} #{unofficial_extension}. Consider adding this to shared/datatypes.yaml" if ext.nil?
 
     {
       'url' => real_link,
@@ -121,7 +128,7 @@ def write_data_library(path, topic, tutorial, tutorial_zenodo_id, force)
 
   # If the ID has changed we should update the tutorial as well:
   if new_zenodo_id == tutorial_zenodo_id && !force
-    warn 'Tutorial is up to date'
+    warn 'Tutorial is up to date with Zenodo'
   else
     warn "Zenodo ID has changed from #{tutorial_zenodo_id} to #{new_zenodo_id}, updating the tutorial"
     update_tutorial(path, new_zenodo_id)
@@ -129,7 +136,7 @@ def write_data_library(path, topic, tutorial, tutorial_zenodo_id, force)
 
   # If the new ID doesn't match the data library, then we should update it.
   if new_zenodo_id == datalibrary_zenodo_id && !force
-    warn 'Data library is up to date'
+    warn 'Data library is up to date with Zenodo'
   else
     warn "Zenodo ID has changed from #{datalibrary_zenodo_id} to #{new_zenodo_id}, updating the data library"
     update_data_library(path, topic, tutorial, zenodo_record)
@@ -141,7 +148,16 @@ def data_library_for_tutorial(path)
 end
 
 def parse_tutorial_for_zenodo_link(path)
-  parse_zenodo_id_formats(YAML.load_file(path, permitted_classes: [Date])['zenodo_link'])
+  tut = YAML.load_file(path, permitted_classes: [Date])
+
+  #warn "tut #{tut}"
+  zenodo_id = tut['zenodo_link']
+  #warn "zenodo id #{zenodo_id}"
+  if zenodo_id.nil? || zenodo_id.empty?
+    warn "empty zenodo string given"
+  else
+    parse_zenodo_id_formats(zenodo_id)
+  end
 rescue => exception
   warn "error: #{exception}"
 end
@@ -163,6 +179,8 @@ command :update do |c|
   c.option '--fragile', 'Exit quickly if the data library already exists'
   c.action do |args, options|
     path = Pathname.new(args.first).cleanpath
+
+    puts "\n--> Processing tutorial: #{path}"
     zenodo_id = parse_tutorial_for_zenodo_link(path).to_s
     if zenodo_id.nil? || zenodo_id.empty?
       warn "Could not parse zenodo ID from #{path}"
@@ -177,6 +195,7 @@ command :update do |c|
     (topic, tutorial) = parse_metadata(path)
     puts options[:force]
     write_data_library(path, topic, tutorial, zenodo_id, options.force)
+
   end
 end
 
