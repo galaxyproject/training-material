@@ -9,7 +9,7 @@ description: |
 date_start: 2026-02-09
 date_end: 2026-02-13
 
-mode: mixed (online and in person)
+mode: hybrid
 tags:
   - introduction to Galaxy
 
