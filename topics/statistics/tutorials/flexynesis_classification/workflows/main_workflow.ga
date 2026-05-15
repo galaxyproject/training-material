@@ -25,8 +25,8 @@
                 0
             ],
             "size": [
-                996,
-                999
+                1050,
+                1150
             ],
             "type": "frame"
         }
@@ -68,7 +68,7 @@
             "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "574bfad4-1764-4559-a16a-5647dcd3d187",
+            "uuid": "aabf2a0c-c1ef-46f0-869e-b310cdc0c061",
             "when": null,
             "workflow_outputs": []
         },
@@ -88,14 +88,14 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 0.0,
+                "left": 0,
                 "top": 130.43795926547023
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "ee7f194e-e0ed-468c-9071-3b983431ca7a",
+            "uuid": "73b27264-5ab5-480b-b519-dc0d05d40101",
             "when": null,
             "workflow_outputs": []
         },
@@ -122,7 +122,7 @@
             "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "ed11982e-8901-47aa-be57-47a27df714d5",
+            "uuid": "e22d2b59-a98b-4aba-b426-941f88fd3fce",
             "when": null,
             "workflow_outputs": []
         },
@@ -149,7 +149,7 @@
             "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "c5c12983-268c-42e9-9e15-f26ba95ea2b3",
+            "uuid": "59f724ed-c6f8-4372-94c7-7409a5cffc94",
             "when": null,
             "workflow_outputs": []
         },
@@ -176,7 +176,7 @@
             "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "116b7045-64c6-444e-bf37-795e231a8ff9",
+            "uuid": "ec312c4e-e179-488b-842d-9225c82ab74b",
             "when": null,
             "workflow_outputs": []
         },
@@ -203,13 +203,13 @@
             "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "49cee9f0-17f6-4676-ad21-35abfcdeec5f",
+            "uuid": "72ea31f7-fef2-403e-8c55-eaa1a683d082",
             "when": null,
             "workflow_outputs": []
         },
         "6": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0",
             "errors": null,
             "id": 6,
             "input_connections": {
@@ -266,6 +266,18 @@
                 {
                     "name": "plots",
                     "type": "input"
+                },
+                {
+                    "name": "model",
+                    "type": "safetensors"
+                },
+                {
+                    "name": "artifacts",
+                    "type": "json"
+                },
+                {
+                    "name": "config",
+                    "type": "json"
                 }
             ],
             "position": {
@@ -302,35 +314,30 @@
                     "output_name": "results"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "9c91d13827ef",
+                "changeset_revision": "d1dc88960179",
                 "name": "flexynesis",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"non_commercial_use\": true, \"training_type\": {\"model\": \"s_train\", \"__current_case__\": 0, \"train_clin\": {\"__class__\": \"ConnectedValue\"}, \"test_clin\": {\"__class__\": \"ConnectedValue\"}, \"train_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"test_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"assay_main\": \"gex\", \"omics\": [{\"__index__\": 0, \"train_omics\": {\"__class__\": \"ConnectedValue\"}, \"test_omics\": {\"__class__\": \"ConnectedValue\"}, \"assay\": \"cna\"}], \"model_class\": {\"model_class\": \"DirectPred\", \"__current_case__\": 0}, \"target_variables\": [\"16\"], \"surv_event_var\": null, \"surv_time_var\": null, \"advanced\": {\"fusion_type\": \"intermediate\", \"finetuning_samples\": \"0\", \"variance_threshold\": \"0.8\", \"correlation_threshold\": \"0.8\", \"subsample\": \"0\", \"features_min\": \"100\", \"features_top_percentile\": \"10.0\", \"log_transform\": false, \"early_stop_patience\": \"10\", \"hpo_iter\": \"1\", \"val_size\": \"0.2\", \"hpo_patience\": \"10\", \"use_cv\": false, \"use_loss_weighting\": true, \"evaluate_baseline_performance\": false, \"feature_importance_method\": \"Both\"}, \"plot\": {\"plot_embeddings_conditional\": {\"plot_embeddings\": \"yes\", \"__current_case__\": 1, \"method\": \"pca\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_km_conditional\": {\"plot_km\": \"no\", \"__current_case__\": 0}, \"plot_cox_conditional\": {\"plot_cox\": \"no\", \"__current_case__\": 0}, \"plot_scatter_conditional\": {\"plot_scatter\": \"no\", \"__current_case__\": 0}, \"plot_concordance_conditional\": {\"plot_concordance\": \"no\", \"__current_case__\": 0}, \"plot_pr_curves_conditional\": {\"plot_pr_curves\": \"yes\", \"__current_case__\": 1, \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_roc_curves_conditional\": {\"plot_roc_curves\": \"no\", \"__current_case__\": 0}, \"plot_boxplot_conditional\": {\"plot_boxplot\": \"no\", \"__current_case__\": 0}}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"non_commercial_use\": true, \"training_type\": {\"model\": \"s_train\", \"__current_case__\": 0, \"train_clin\": {\"__class__\": \"ConnectedValue\"}, \"train_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"test_clin\": {\"__class__\": \"ConnectedValue\"}, \"test_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"assay_main\": \"gex\", \"omics\": [{\"__index__\": 0, \"train_omics\": {\"__class__\": \"ConnectedValue\"}, \"test_omics\": {\"__class__\": \"ConnectedValue\"}, \"assay\": \"cna\"}], \"model_class\": {\"model_class\": \"DirectPred\", \"__current_case__\": 0, \"target_variables\": [\"16\"], \"surv_event_var\": null, \"surv_time_var\": null, \"advanced\": {\"fusion_type\": \"intermediate\", \"finetuning_samples\": \"0\", \"variance_threshold\": \"80.0\", \"correlation_threshold\": \"0.8\", \"subsample\": \"0\", \"features_min\": \"100\", \"features_top_percentile\": \"10.0\", \"log_transform\": false, \"early_stop_patience\": \"10\", \"hpo_iter\": \"1\", \"val_size\": \"0.2\", \"hpo_patience\": \"10\", \"use_cv\": false, \"use_loss_weighting\": true, \"evaluate_baseline_performance\": false, \"feature_importance_method\": \"Both\"}, \"plot\": {\"plot_parent_condi\": {\"plot_boolean\": \"yes\", \"__current_case__\": 1, \"plot_embeddings_conditional\": {\"plot_embeddings\": \"yes\", \"__current_case__\": 1, \"method\": \"pca\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_km_conditional\": {\"plot_km\": \"no\", \"__current_case__\": 0}, \"plot_cox_conditional\": {\"plot_cox\": \"no\", \"__current_case__\": 0}, \"plot_scatter_conditional\": {\"plot_scatter\": \"no\", \"__current_case__\": 0}, \"plot_concordance_conditional\": {\"plot_concordance\": \"no\", \"__current_case__\": 0}, \"plot_pr_curves_conditional\": {\"plot_pr_curves\": \"yes\", \"__current_case__\": 1, \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_roc_curves_conditional\": {\"plot_roc_curves\": \"no\", \"__current_case__\": 0}, \"plot_boxplot_conditional\": {\"plot_boxplot\": \"no\", \"__current_case__\": 0}}}, \"safetensors_out_bool\": true}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
-            "tool_version": "0.2.20+galaxy3",
+            "tool_version": "1.1.10+galaxy0",
             "type": "tool",
-            "uuid": "3ebe33cb-1d11-435a-8219-a33560007725",
+            "uuid": "4b9fb445-ce31-4eb9-832b-85dcccbf0ba5",
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "niter1 pca embedding plots + pr-curve",
-                    "output_name": "plots",
-                    "uuid": "2012ecdc-b056-48d8-a732-65b196939d04"
-                },
-                {
                     "label": "niter1 flexynesis output",
                     "output_name": "results",
-                    "uuid": "a3d336d0-14da-4688-8f20-9fbe4a3745a5"
+                    "uuid": "954bdd9d-cd0b-4ff0-8ed2-4a9ad0612a89"
                 }
             ]
         },
         "7": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0",
             "errors": null,
             "id": 7,
             "input_connections": {
@@ -387,16 +394,28 @@
                 {
                     "name": "plots",
                     "type": "input"
+                },
+                {
+                    "name": "model",
+                    "type": "safetensors"
+                },
+                {
+                    "name": "artifacts",
+                    "type": "json"
+                },
+                {
+                    "name": "config",
+                    "type": "json"
                 }
             ],
             "position": {
-                "left": 426.9374972169362,
-                "top": 523.3449807446567
+                "left": 430,
+                "top": 590
             },
             "post_job_actions": {
                 "RenameDatasetActionplots": {
                     "action_arguments": {
-                        "newname": "niter5 pca embedding plots + pr-curve"
+                        "newname": "niter1 pca embedding plots + pr-curve"
                     },
                     "action_type": "RenameDatasetAction",
                     "output_name": "plots"
@@ -410,42 +429,37 @@
                 },
                 "TagDatasetActionplots": {
                     "action_arguments": {
-                        "tags": "name:5iter"
+                        "tags": "name:5_iter"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "plots"
                 },
                 "TagDatasetActionresults": {
                     "action_arguments": {
-                        "tags": "name:5iter"
+                        "tags": "#5_iter"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "results"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "9c91d13827ef",
+                "changeset_revision": "d1dc88960179",
                 "name": "flexynesis",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"non_commercial_use\": true, \"training_type\": {\"model\": \"s_train\", \"__current_case__\": 0, \"train_clin\": {\"__class__\": \"ConnectedValue\"}, \"test_clin\": {\"__class__\": \"ConnectedValue\"}, \"train_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"test_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"assay_main\": \"gex\", \"omics\": [{\"__index__\": 0, \"train_omics\": {\"__class__\": \"ConnectedValue\"}, \"test_omics\": {\"__class__\": \"ConnectedValue\"}, \"assay\": \"cna\"}], \"model_class\": {\"model_class\": \"DirectPred\", \"__current_case__\": 0}, \"target_variables\": [\"16\"], \"surv_event_var\": null, \"surv_time_var\": null, \"advanced\": {\"fusion_type\": \"intermediate\", \"finetuning_samples\": \"0\", \"variance_threshold\": \"0.8\", \"correlation_threshold\": \"0.8\", \"subsample\": \"0\", \"features_min\": \"100\", \"features_top_percentile\": \"10.0\", \"log_transform\": false, \"early_stop_patience\": \"10\", \"hpo_iter\": \"5\", \"val_size\": \"0.2\", \"hpo_patience\": \"10\", \"use_cv\": false, \"use_loss_weighting\": true, \"evaluate_baseline_performance\": false, \"feature_importance_method\": \"Both\"}, \"plot\": {\"plot_embeddings_conditional\": {\"plot_embeddings\": \"yes\", \"__current_case__\": 1, \"method\": \"pca\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_km_conditional\": {\"plot_km\": \"no\", \"__current_case__\": 0}, \"plot_cox_conditional\": {\"plot_cox\": \"no\", \"__current_case__\": 0}, \"plot_scatter_conditional\": {\"plot_scatter\": \"no\", \"__current_case__\": 0}, \"plot_concordance_conditional\": {\"plot_concordance\": \"no\", \"__current_case__\": 0}, \"plot_pr_curves_conditional\": {\"plot_pr_curves\": \"yes\", \"__current_case__\": 1, \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_roc_curves_conditional\": {\"plot_roc_curves\": \"no\", \"__current_case__\": 0}, \"plot_boxplot_conditional\": {\"plot_boxplot\": \"no\", \"__current_case__\": 0}}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"non_commercial_use\": true, \"training_type\": {\"model\": \"s_train\", \"__current_case__\": 0, \"train_clin\": {\"__class__\": \"ConnectedValue\"}, \"train_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"test_clin\": {\"__class__\": \"ConnectedValue\"}, \"test_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"assay_main\": \"gex\", \"omics\": [{\"__index__\": 0, \"train_omics\": {\"__class__\": \"ConnectedValue\"}, \"test_omics\": {\"__class__\": \"ConnectedValue\"}, \"assay\": \"cna\"}], \"model_class\": {\"model_class\": \"DirectPred\", \"__current_case__\": 0, \"target_variables\": [\"16\"], \"surv_event_var\": null, \"surv_time_var\": null, \"advanced\": {\"fusion_type\": \"intermediate\", \"finetuning_samples\": \"0\", \"variance_threshold\": \"80.0\", \"correlation_threshold\": \"0.8\", \"subsample\": \"0\", \"features_min\": \"100\", \"features_top_percentile\": \"10.0\", \"log_transform\": false, \"early_stop_patience\": \"10\", \"hpo_iter\": \"5\", \"val_size\": \"0.2\", \"hpo_patience\": \"10\", \"use_cv\": false, \"use_loss_weighting\": true, \"evaluate_baseline_performance\": false, \"feature_importance_method\": \"Both\"}, \"plot\": {\"plot_parent_condi\": {\"plot_boolean\": \"yes\", \"__current_case__\": 1, \"plot_embeddings_conditional\": {\"plot_embeddings\": \"yes\", \"__current_case__\": 1, \"method\": \"pca\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_km_conditional\": {\"plot_km\": \"no\", \"__current_case__\": 0}, \"plot_cox_conditional\": {\"plot_cox\": \"no\", \"__current_case__\": 0}, \"plot_scatter_conditional\": {\"plot_scatter\": \"no\", \"__current_case__\": 0}, \"plot_concordance_conditional\": {\"plot_concordance\": \"no\", \"__current_case__\": 0}, \"plot_pr_curves_conditional\": {\"plot_pr_curves\": \"yes\", \"__current_case__\": 1, \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_roc_curves_conditional\": {\"plot_roc_curves\": \"no\", \"__current_case__\": 0}, \"plot_boxplot_conditional\": {\"plot_boxplot\": \"no\", \"__current_case__\": 0}}}, \"safetensors_out_bool\": true}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
-            "tool_version": "0.2.20+galaxy3",
+            "tool_version": "1.1.10+galaxy0",
             "type": "tool",
-            "uuid": "5386a20b-96b3-49f7-8691-74debc90f740",
+            "uuid": "227d4a26-55fe-4c37-adc8-ebe6a3905af7",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "niter5 flexynesis output",
                     "output_name": "results",
-                    "uuid": "49542b0b-89e0-4372-8c30-6a2ec5a22967"
-                },
-                {
-                    "label": "niter5 pca embedding plots + pr-curve",
-                    "output_name": "plots",
-                    "uuid": "1b27b3d1-d704-4c69-8514-0cb2139c2349"
+                    "uuid": "e4c9501f-c5a4-4b8c-882b-4c107f39cdb5"
                 }
             ]
         },
@@ -501,7 +515,7 @@
             "tool_uuid": null,
             "tool_version": "1.0.2",
             "type": "tool",
-            "uuid": "18060b70-1af2-47ef-b82e-781240d11490",
+            "uuid": "44a82418-4e1e-4b01-87fd-01c4fb9c12ff",
             "when": null,
             "workflow_outputs": []
         },
@@ -557,7 +571,7 @@
             "tool_uuid": null,
             "tool_version": "1.0.2",
             "type": "tool",
-            "uuid": "00ac5bbb-4b02-440f-a73e-b7fe1f5b53e1",
+            "uuid": "ecc6343d-840b-4828-ad4c-f7ba2d568ca1",
             "when": null,
             "workflow_outputs": []
         },
@@ -613,7 +627,7 @@
             "tool_uuid": null,
             "tool_version": "1.0.2",
             "type": "tool",
-            "uuid": "3c20d49f-b2dc-44d0-87f0-bf160c615c4e",
+            "uuid": "f4d001ba-58a7-470e-9811-a453e1bd4dbe",
             "when": null,
             "workflow_outputs": []
         },
@@ -669,13 +683,13 @@
             "tool_uuid": null,
             "tool_version": "1.0.2",
             "type": "tool",
-            "uuid": "acb24c8f-75c9-44b2-8621-be260c3e9f41",
+            "uuid": "84d14850-a14d-436a-8fbd-ccbe75642927",
             "when": null,
             "workflow_outputs": []
         },
         "12": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3",
             "errors": null,
             "id": 12,
             "input_connections": {
@@ -713,24 +727,24 @@
                     "output_name": "outfile"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3",
             "tool_shed_repository": {
-                "changeset_revision": "c41d78ae5fee",
+                "changeset_revision": "ab83aa685821",
                 "name": "text_processing",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"header\": \"1\", \"ignore_case\": false, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"sortkeys\": [{\"__index__\": 0, \"column\": \"1\", \"order\": \"\", \"style\": \"\"}], \"unique\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"header\": \"1\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"sortkeys\": [{\"__index__\": 0, \"column\": \"1\", \"start_charpos\": null, \"end_charpos\": null, \"order\": \"\", \"style\": \"\", \"ignore_case\": false, \"ignore_leading_blanks\": false}], \"unique\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
-            "tool_version": "9.5+galaxy2",
+            "tool_version": "9.5+galaxy3",
             "type": "tool",
-            "uuid": "319604d5-813b-49bc-9e5e-1dc787b9cfba",
+            "uuid": "5a5403bb-9df3-4674-baad-37aea1a4f869",
             "when": null,
             "workflow_outputs": []
         },
         "13": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3",
             "errors": null,
             "id": 13,
             "input_connections": {
@@ -768,24 +782,24 @@
                     "output_name": "outfile"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3",
             "tool_shed_repository": {
-                "changeset_revision": "c41d78ae5fee",
+                "changeset_revision": "ab83aa685821",
                 "name": "text_processing",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"header\": \"1\", \"ignore_case\": false, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"sortkeys\": [{\"__index__\": 0, \"column\": \"1\", \"order\": \"\", \"style\": \"\"}], \"unique\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"header\": \"1\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"sortkeys\": [{\"__index__\": 0, \"column\": \"1\", \"start_charpos\": null, \"end_charpos\": null, \"order\": \"\", \"style\": \"\", \"ignore_case\": false, \"ignore_leading_blanks\": false}], \"unique\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
-            "tool_version": "9.5+galaxy2",
+            "tool_version": "9.5+galaxy3",
             "type": "tool",
-            "uuid": "60a0b2e6-776b-467c-966a-766084110545",
+            "uuid": "d891e8ed-a568-45c5-806b-ba4f622d1dfc",
             "when": null,
             "workflow_outputs": []
         },
         "14": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0",
             "errors": null,
             "id": 14,
             "input_connections": {
@@ -836,30 +850,30 @@
                     "output_name": "plot_out"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "07f595f34f29",
+                "changeset_revision": "5f69690716cb",
                 "name": "flexynesis_plot",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"plot_conditional\": {\"plot_type\": \"dimred\", \"__current_case__\": 0, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"embeddings\": {\"__class__\": \"ConnectedValue\"}, \"color\": \"5\", \"method\": \"umap\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"non_commercial_use\": true, \"plot_conditional\": {\"plot_type\": \"dimred\", \"__current_case__\": 0, \"labels\": {\"__class__\": \"RuntimeValue\"}, \"embeddings\": {\"__class__\": \"RuntimeValue\"}, \"color\": \"5\", \"method\": \"umap\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
-            "tool_version": "0.2.20+galaxy3",
+            "tool_version": "1.1.10+galaxy0",
             "type": "tool",
-            "uuid": "463b72a8-4624-4c1e-8d20-55a8ef1990ab",
+            "uuid": "3f53a0ac-3f44-43a9-8b5a-fa21f46fb6c7",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "embedding plot umap - niter1",
                     "output_name": "plot_out",
-                    "uuid": "a132b519-38f8-4d0a-af84-4343a24a1f7a"
+                    "uuid": "dd06b76d-5979-4fba-be6d-913dae8d057f"
                 }
             ]
         },
         "15": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0",
             "errors": null,
             "id": 15,
             "input_connections": {
@@ -910,24 +924,24 @@
                     "output_name": "plot_out"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "07f595f34f29",
+                "changeset_revision": "5f69690716cb",
                 "name": "flexynesis_plot",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"plot_conditional\": {\"plot_type\": \"dimred\", \"__current_case__\": 0, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"embeddings\": {\"__class__\": \"ConnectedValue\"}, \"color\": \"5\", \"method\": \"umap\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"non_commercial_use\": true, \"plot_conditional\": {\"plot_type\": \"dimred\", \"__current_case__\": 0, \"labels\": {\"__class__\": \"RuntimeValue\"}, \"embeddings\": {\"__class__\": \"RuntimeValue\"}, \"color\": \"5\", \"method\": \"umap\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
-            "tool_version": "0.2.20+galaxy3",
+            "tool_version": "1.1.10+galaxy0",
             "type": "tool",
-            "uuid": "3c0ca874-f897-4d55-b4e7-65efadc36248",
+            "uuid": "ee711742-6db0-4c02-bb8f-d9842e284db3",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "embedding plot umap - niter5",
                     "output_name": "plot_out",
-                    "uuid": "bd28d5e9-97ed-419e-b4e6-0e31eef2db18"
+                    "uuid": "1cc34eeb-d78c-46dd-ba28-a451fb510db1"
                 }
             ]
         }
@@ -937,6 +951,6 @@
         "machine_learning",
         "TABPFN"
     ],
-    "uuid": "fd78142b-127a-40d5-a34f-43cf9b1d3572",
-    "version": 2
+    "uuid": "0107c81e-f8dd-4d66-b794-b854729a0db1",
+    "version": 1
 }
