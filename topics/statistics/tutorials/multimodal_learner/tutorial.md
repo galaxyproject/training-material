@@ -1,21 +1,27 @@
 ---
 layout: tutorial_hands_on
 level: Intermediate
-title: Gleam Multimodal Learner - Head and Neck cancer Recurrence Prediction with HANCOCK
+title: Gleam Multimodal Learner - Head and Neck cancer Recurrence Prediction with
+  HANCOCK
 zenodo_link: https://zenodo.org/records/18807820
 questions:
-  - "How does Multimodal Learner combine tabular, text, and image modalities in a single model?"
-  - "How do we configure Multimodal Learner with different modalities?"
-  - "How do we interpret the model results?"
+- How does Multimodal Learner combine tabular, text, and image modalities in a single
+  model?
+- How do we configure Multimodal Learner with different modalities?
+- How do we interpret the model results?
 objectives:
-  - "Import the tutorial-focused HANCOCK metadata and JPEG CD3/CD8 image archive into Galaxy."
-  - "Train a multimodal model with tabular, text, and image backbones."
-  - "Evaluate test performance and interpret the effect of image quality on model metrics."
-time_estimation: "1h"
+- Import the tutorial-focused HANCOCK metadata and JPEG CD3/CD8 image archive into
+  Galaxy.
+- Train a multimodal model with tabular, text, and image backbones.
+- Evaluate test performance and interpret the effect of image quality on model metrics.
+time_estimation: 1h
 key_points:
-- Multimodal Learner trains a late-fusion model with modality-specific encoders and a learned fusion network.
-- The tutorial dataset is a JPEG-compressed derivative of HANCOCK that is easier to upload and run.
-- Data quality can materially affect multimodal prediction performance and benchmark comparability.
+- Multimodal Learner trains a late-fusion model with modality-specific encoders and
+  a learned fusion network.
+- The tutorial dataset is a JPEG-compressed derivative of HANCOCK that is easier to
+  upload and run.
+- Data quality can materially affect multimodal prediction performance and benchmark
+  comparability.
 contributors:
 - paulocilasjr
 - khaivandangusf2210
@@ -27,7 +33,20 @@ tags:
 - GLEAM
 - HANCOCK Dataset
 - Recurrence Prediction
+recordings:
+- youtube_id: TODO
+  length: 22M
+  galaxy_version: 26.0.1.dev1
+  date: '2026-05-13'
+  speakers:
+  - paulocilasjr
+  captioners:
+  - paulocilasjr
+  bot-timestamp: 1778716166
+
+
 ---
+
 
 In this tutorial, we use the **HANCOCK** head-and-neck cancer cohort ({% cite Dorrich2025 %}) to build a **recurrence prediction** model with **GLEAM Multimodal Learner**.
 
