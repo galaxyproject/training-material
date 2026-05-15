@@ -25,8 +25,8 @@
                 0
             ],
             "size": [
-                996,
-                999
+                1050,
+                1150
             ],
             "type": "frame"
         }
@@ -88,7 +88,7 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 0.0,
+                "left": 0,
                 "top": 130.43795926547023
             },
             "tool_id": null,
@@ -209,7 +209,7 @@
         },
         "6": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0",
             "errors": null,
             "id": 6,
             "input_connections": {
@@ -266,6 +266,18 @@
                 {
                     "name": "plots",
                     "type": "input"
+                },
+                {
+                    "name": "model",
+                    "type": "safetensors"
+                },
+                {
+                    "name": "artifacts",
+                    "type": "json"
+                },
+                {
+                    "name": "config",
+                    "type": "json"
                 }
             ],
             "position": {
@@ -302,25 +314,20 @@
                     "output_name": "results"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "9c91d13827ef",
+                "changeset_revision": "d1dc88960179",
                 "name": "flexynesis",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"non_commercial_use\": true, \"training_type\": {\"model\": \"s_train\", \"__current_case__\": 0, \"train_clin\": {\"__class__\": \"ConnectedValue\"}, \"test_clin\": {\"__class__\": \"ConnectedValue\"}, \"train_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"test_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"assay_main\": \"gex\", \"omics\": [{\"__index__\": 0, \"train_omics\": {\"__class__\": \"ConnectedValue\"}, \"test_omics\": {\"__class__\": \"ConnectedValue\"}, \"assay\": \"cna\"}], \"model_class\": {\"model_class\": \"DirectPred\", \"__current_case__\": 0}, \"target_variables\": [\"16\"], \"surv_event_var\": null, \"surv_time_var\": null, \"advanced\": {\"fusion_type\": \"intermediate\", \"finetuning_samples\": \"0\", \"variance_threshold\": \"0.8\", \"correlation_threshold\": \"0.8\", \"subsample\": \"0\", \"features_min\": \"100\", \"features_top_percentile\": \"10.0\", \"log_transform\": false, \"early_stop_patience\": \"10\", \"hpo_iter\": \"1\", \"val_size\": \"0.2\", \"hpo_patience\": \"10\", \"use_cv\": false, \"use_loss_weighting\": true, \"evaluate_baseline_performance\": false, \"feature_importance_method\": \"Both\"}, \"plot\": {\"plot_embeddings_conditional\": {\"plot_embeddings\": \"yes\", \"__current_case__\": 1, \"method\": \"pca\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_km_conditional\": {\"plot_km\": \"no\", \"__current_case__\": 0}, \"plot_cox_conditional\": {\"plot_cox\": \"no\", \"__current_case__\": 0}, \"plot_scatter_conditional\": {\"plot_scatter\": \"no\", \"__current_case__\": 0}, \"plot_concordance_conditional\": {\"plot_concordance\": \"no\", \"__current_case__\": 0}, \"plot_pr_curves_conditional\": {\"plot_pr_curves\": \"yes\", \"__current_case__\": 1, \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_roc_curves_conditional\": {\"plot_roc_curves\": \"no\", \"__current_case__\": 0}, \"plot_boxplot_conditional\": {\"plot_boxplot\": \"no\", \"__current_case__\": 0}}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"non_commercial_use\": true, \"training_type\": {\"model\": \"s_train\", \"__current_case__\": 0, \"train_clin\": {\"__class__\": \"ConnectedValue\"}, \"train_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"test_clin\": {\"__class__\": \"ConnectedValue\"}, \"test_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"assay_main\": \"gex\", \"omics\": [{\"__index__\": 0, \"train_omics\": {\"__class__\": \"ConnectedValue\"}, \"test_omics\": {\"__class__\": \"ConnectedValue\"}, \"assay\": \"cna\"}], \"model_class\": {\"model_class\": \"DirectPred\", \"__current_case__\": 0, \"target_variables\": [\"16\"], \"surv_event_var\": null, \"surv_time_var\": null, \"advanced\": {\"fusion_type\": \"intermediate\", \"finetuning_samples\": \"0\", \"variance_threshold\": \"80.0\", \"correlation_threshold\": \"0.8\", \"subsample\": \"0\", \"features_min\": \"100\", \"features_top_percentile\": \"10.0\", \"log_transform\": false, \"early_stop_patience\": \"10\", \"hpo_iter\": \"1\", \"val_size\": \"0.2\", \"hpo_patience\": \"10\", \"use_cv\": false, \"use_loss_weighting\": true, \"evaluate_baseline_performance\": false, \"feature_importance_method\": \"Both\"}, \"plot\": {\"plot_parent_condi\": {\"plot_boolean\": \"yes\", \"__current_case__\": 1, \"plot_embeddings_conditional\": {\"plot_embeddings\": \"yes\", \"__current_case__\": 1, \"method\": \"pca\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_km_conditional\": {\"plot_km\": \"no\", \"__current_case__\": 0}, \"plot_cox_conditional\": {\"plot_cox\": \"no\", \"__current_case__\": 0}, \"plot_scatter_conditional\": {\"plot_scatter\": \"no\", \"__current_case__\": 0}, \"plot_concordance_conditional\": {\"plot_concordance\": \"no\", \"__current_case__\": 0}, \"plot_pr_curves_conditional\": {\"plot_pr_curves\": \"yes\", \"__current_case__\": 1, \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_roc_curves_conditional\": {\"plot_roc_curves\": \"no\", \"__current_case__\": 0}, \"plot_boxplot_conditional\": {\"plot_boxplot\": \"no\", \"__current_case__\": 0}}}, \"safetensors_out_bool\": true}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
-            "tool_version": "0.2.20+galaxy3",
+            "tool_version": "1.1.10+galaxy0",
             "type": "tool",
             "uuid": "3ebe33cb-1d11-435a-8219-a33560007725",
             "when": null,
             "workflow_outputs": [
-                {
-                    "label": "niter1 pca embedding plots + pr-curve",
-                    "output_name": "plots",
-                    "uuid": "2012ecdc-b056-48d8-a732-65b196939d04"
-                },
                 {
                     "label": "niter1 flexynesis output",
                     "output_name": "results",
@@ -330,7 +337,7 @@
         },
         "7": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0",
             "errors": null,
             "id": 7,
             "input_connections": {
@@ -387,16 +394,28 @@
                 {
                     "name": "plots",
                     "type": "input"
+                },
+                {
+                    "name": "model",
+                    "type": "safetensors"
+                },
+                {
+                    "name": "artifacts",
+                    "type": "json"
+                },
+                {
+                    "name": "config",
+                    "type": "json"
                 }
             ],
             "position": {
-                "left": 426.9374972169362,
-                "top": 523.3449807446567
+                "left": 430,
+                "top": 590
             },
             "post_job_actions": {
                 "RenameDatasetActionplots": {
                     "action_arguments": {
-                        "newname": "niter5 pca embedding plots + pr-curve"
+                        "newname": "niter1 pca embedding plots + pr-curve"
                     },
                     "action_type": "RenameDatasetAction",
                     "output_name": "plots"
@@ -410,42 +429,37 @@
                 },
                 "TagDatasetActionplots": {
                     "action_arguments": {
-                        "tags": "name:5iter"
+                        "tags": "name:5_iter"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "plots"
                 },
                 "TagDatasetActionresults": {
                     "action_arguments": {
-                        "tags": "name:5iter"
+                        "tags": "#5_iter"
                     },
                     "action_type": "TagDatasetAction",
                     "output_name": "results"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/0.2.20+galaxy3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis/flexynesis/1.1.10+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "9c91d13827ef",
+                "changeset_revision": "d1dc88960179",
                 "name": "flexynesis",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"non_commercial_use\": true, \"training_type\": {\"model\": \"s_train\", \"__current_case__\": 0, \"train_clin\": {\"__class__\": \"ConnectedValue\"}, \"test_clin\": {\"__class__\": \"ConnectedValue\"}, \"train_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"test_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"assay_main\": \"gex\", \"omics\": [{\"__index__\": 0, \"train_omics\": {\"__class__\": \"ConnectedValue\"}, \"test_omics\": {\"__class__\": \"ConnectedValue\"}, \"assay\": \"cna\"}], \"model_class\": {\"model_class\": \"DirectPred\", \"__current_case__\": 0}, \"target_variables\": [\"16\"], \"surv_event_var\": null, \"surv_time_var\": null, \"advanced\": {\"fusion_type\": \"intermediate\", \"finetuning_samples\": \"0\", \"variance_threshold\": \"0.8\", \"correlation_threshold\": \"0.8\", \"subsample\": \"0\", \"features_min\": \"100\", \"features_top_percentile\": \"10.0\", \"log_transform\": false, \"early_stop_patience\": \"10\", \"hpo_iter\": \"5\", \"val_size\": \"0.2\", \"hpo_patience\": \"10\", \"use_cv\": false, \"use_loss_weighting\": true, \"evaluate_baseline_performance\": false, \"feature_importance_method\": \"Both\"}, \"plot\": {\"plot_embeddings_conditional\": {\"plot_embeddings\": \"yes\", \"__current_case__\": 1, \"method\": \"pca\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_km_conditional\": {\"plot_km\": \"no\", \"__current_case__\": 0}, \"plot_cox_conditional\": {\"plot_cox\": \"no\", \"__current_case__\": 0}, \"plot_scatter_conditional\": {\"plot_scatter\": \"no\", \"__current_case__\": 0}, \"plot_concordance_conditional\": {\"plot_concordance\": \"no\", \"__current_case__\": 0}, \"plot_pr_curves_conditional\": {\"plot_pr_curves\": \"yes\", \"__current_case__\": 1, \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_roc_curves_conditional\": {\"plot_roc_curves\": \"no\", \"__current_case__\": 0}, \"plot_boxplot_conditional\": {\"plot_boxplot\": \"no\", \"__current_case__\": 0}}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"non_commercial_use\": true, \"training_type\": {\"model\": \"s_train\", \"__current_case__\": 0, \"train_clin\": {\"__class__\": \"ConnectedValue\"}, \"train_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"test_clin\": {\"__class__\": \"ConnectedValue\"}, \"test_omics_main\": {\"__class__\": \"ConnectedValue\"}, \"assay_main\": \"gex\", \"omics\": [{\"__index__\": 0, \"train_omics\": {\"__class__\": \"ConnectedValue\"}, \"test_omics\": {\"__class__\": \"ConnectedValue\"}, \"assay\": \"cna\"}], \"model_class\": {\"model_class\": \"DirectPred\", \"__current_case__\": 0, \"target_variables\": [\"16\"], \"surv_event_var\": null, \"surv_time_var\": null, \"advanced\": {\"fusion_type\": \"intermediate\", \"finetuning_samples\": \"0\", \"variance_threshold\": \"80.0\", \"correlation_threshold\": \"0.8\", \"subsample\": \"0\", \"features_min\": \"100\", \"features_top_percentile\": \"10.0\", \"log_transform\": false, \"early_stop_patience\": \"10\", \"hpo_iter\": \"5\", \"val_size\": \"0.2\", \"hpo_patience\": \"10\", \"use_cv\": false, \"use_loss_weighting\": true, \"evaluate_baseline_performance\": false, \"feature_importance_method\": \"Both\"}, \"plot\": {\"plot_parent_condi\": {\"plot_boolean\": \"yes\", \"__current_case__\": 1, \"plot_embeddings_conditional\": {\"plot_embeddings\": \"yes\", \"__current_case__\": 1, \"method\": \"pca\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_km_conditional\": {\"plot_km\": \"no\", \"__current_case__\": 0}, \"plot_cox_conditional\": {\"plot_cox\": \"no\", \"__current_case__\": 0}, \"plot_scatter_conditional\": {\"plot_scatter\": \"no\", \"__current_case__\": 0}, \"plot_concordance_conditional\": {\"plot_concordance\": \"no\", \"__current_case__\": 0}, \"plot_pr_curves_conditional\": {\"plot_pr_curves\": \"yes\", \"__current_case__\": 1, \"format\": \"jpg\", \"dpi\": \"300\"}, \"plot_roc_curves_conditional\": {\"plot_roc_curves\": \"no\", \"__current_case__\": 0}, \"plot_boxplot_conditional\": {\"plot_boxplot\": \"no\", \"__current_case__\": 0}}}, \"safetensors_out_bool\": true}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
-            "tool_version": "0.2.20+galaxy3",
+            "tool_version": "1.1.10+galaxy0",
             "type": "tool",
-            "uuid": "5386a20b-96b3-49f7-8691-74debc90f740",
+            "uuid": "fc8e1fc1-32da-4fd1-8c41-ce457722d886",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "niter5 flexynesis output",
                     "output_name": "results",
-                    "uuid": "49542b0b-89e0-4372-8c30-6a2ec5a22967"
-                },
-                {
-                    "label": "niter5 pca embedding plots + pr-curve",
-                    "output_name": "plots",
-                    "uuid": "1b27b3d1-d704-4c69-8514-0cb2139c2349"
+                    "uuid": "d3447b34-1233-4c77-a348-387e5e021782"
                 }
             ]
         },
@@ -675,7 +689,7 @@
         },
         "12": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3",
             "errors": null,
             "id": 12,
             "input_connections": {
@@ -713,16 +727,16 @@
                     "output_name": "outfile"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3",
             "tool_shed_repository": {
-                "changeset_revision": "c41d78ae5fee",
+                "changeset_revision": "ab83aa685821",
                 "name": "text_processing",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"header\": \"1\", \"ignore_case\": false, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"sortkeys\": [{\"__index__\": 0, \"column\": \"1\", \"order\": \"\", \"style\": \"\"}], \"unique\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"header\": \"1\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"sortkeys\": [{\"__index__\": 0, \"column\": \"1\", \"start_charpos\": null, \"end_charpos\": null, \"order\": \"\", \"style\": \"\", \"ignore_case\": false, \"ignore_leading_blanks\": false}], \"unique\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
-            "tool_version": "9.5+galaxy2",
+            "tool_version": "9.5+galaxy3",
             "type": "tool",
             "uuid": "319604d5-813b-49bc-9e5e-1dc787b9cfba",
             "when": null,
@@ -730,7 +744,7 @@
         },
         "13": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3",
             "errors": null,
             "id": 13,
             "input_connections": {
@@ -768,16 +782,16 @@
                     "output_name": "outfile"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy3",
             "tool_shed_repository": {
-                "changeset_revision": "c41d78ae5fee",
+                "changeset_revision": "ab83aa685821",
                 "name": "text_processing",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"header\": \"1\", \"ignore_case\": false, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"sortkeys\": [{\"__index__\": 0, \"column\": \"1\", \"order\": \"\", \"style\": \"\"}], \"unique\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"header\": \"1\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"sortkeys\": [{\"__index__\": 0, \"column\": \"1\", \"start_charpos\": null, \"end_charpos\": null, \"order\": \"\", \"style\": \"\", \"ignore_case\": false, \"ignore_leading_blanks\": false}], \"unique\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
-            "tool_version": "9.5+galaxy2",
+            "tool_version": "9.5+galaxy3",
             "type": "tool",
             "uuid": "60a0b2e6-776b-467c-966a-766084110545",
             "when": null,
@@ -785,7 +799,7 @@
         },
         "14": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0",
             "errors": null,
             "id": 14,
             "input_connections": {
@@ -836,16 +850,16 @@
                     "output_name": "plot_out"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "07f595f34f29",
+                "changeset_revision": "5f69690716cb",
                 "name": "flexynesis_plot",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"plot_conditional\": {\"plot_type\": \"dimred\", \"__current_case__\": 0, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"embeddings\": {\"__class__\": \"ConnectedValue\"}, \"color\": \"5\", \"method\": \"umap\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"non_commercial_use\": true, \"plot_conditional\": {\"plot_type\": \"dimred\", \"__current_case__\": 0, \"labels\": {\"__class__\": \"RuntimeValue\"}, \"embeddings\": {\"__class__\": \"RuntimeValue\"}, \"color\": \"5\", \"method\": \"umap\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
-            "tool_version": "0.2.20+galaxy3",
+            "tool_version": "1.1.10+galaxy0",
             "type": "tool",
             "uuid": "463b72a8-4624-4c1e-8d20-55a8ef1990ab",
             "when": null,
@@ -859,7 +873,7 @@
         },
         "15": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0",
             "errors": null,
             "id": 15,
             "input_connections": {
@@ -910,16 +924,16 @@
                     "output_name": "plot_out"
                 }
             },
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/0.2.20+galaxy3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_plot/flexynesis_plot/1.1.10+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "07f595f34f29",
+                "changeset_revision": "5f69690716cb",
                 "name": "flexynesis_plot",
                 "owner": "bgruening",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"plot_conditional\": {\"plot_type\": \"dimred\", \"__current_case__\": 0, \"labels\": {\"__class__\": \"ConnectedValue\"}, \"embeddings\": {\"__class__\": \"ConnectedValue\"}, \"color\": \"5\", \"method\": \"umap\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"non_commercial_use\": true, \"plot_conditional\": {\"plot_type\": \"dimred\", \"__current_case__\": 0, \"labels\": {\"__class__\": \"RuntimeValue\"}, \"embeddings\": {\"__class__\": \"RuntimeValue\"}, \"color\": \"5\", \"method\": \"umap\", \"format\": \"jpg\", \"dpi\": \"300\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
             "tool_uuid": null,
-            "tool_version": "0.2.20+galaxy3",
+            "tool_version": "1.1.10+galaxy0",
             "type": "tool",
             "uuid": "3c0ca874-f897-4d55-b4e7-65efadc36248",
             "when": null,
@@ -937,6 +951,6 @@
         "machine_learning",
         "TABPFN"
     ],
-    "uuid": "fd78142b-127a-40d5-a34f-43cf9b1d3572",
-    "version": 2
+    "uuid": "4e77449e-a99a-460a-ac09-17f6adc32107",
+    "version": 7
 }
