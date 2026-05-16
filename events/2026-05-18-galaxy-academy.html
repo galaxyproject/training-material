@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@5c24dbd131668e8e4afeb30cb75714a77cb97f8f",
+		release: "galaxy-training-network@6c8dff3bd38be9272c574f11693347be5e544a2a",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,10 +68,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Training Academy 2026">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-05-12 10:01:49 +0000"><meta name="description" content="The Galaxy Training Academy is a self-paced online training event for beginners and advanced learners who want to improve their data analysis skills in Galaxy and/or in popular fields in bioinformatics. Over the course of one week, we offer a diverse selection of learning tracks for you. ">
+<meta name="DC.date" content="2026-05-16 17:56:38 +0000"><meta name="description" content="The Galaxy Training Academy is a self-paced online training event for beginners and advanced learners who want to improve their data analysis skills in Galaxy and/or in popular fields in bioinformatics. Over the course of one week, we offer a diverse selection of learning tracks for you. Start the Course! ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Galaxy Training Academy 2026">
-        <meta property="og:description" content="The Galaxy Training Academy is a self-paced online training event for beginners and advanced learners who want to improve their data analysis skills in Galaxy and/or in popular fields in bioinformatics. Over the course of one week, we offer a diverse selection of learning tracks for you. ">
+        <meta property="og:description" content="The Galaxy Training Academy is a self-paced online training event for beginners and advanced learners who want to improve their data analysis skills in Galaxy and/or in popular fields in bioinformatics. Over the course of one week, we offer a diverse selection of learning tracks for you. Start the Course! ">
         <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/events/2026-05-18-galaxy-academy.png">
 	<!-- fontawesome -->
         <link href="/training-material/assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
@@ -228,8 +228,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "climate",
     "humanities"
   ],
-  "description": "The Galaxy Training Academy is a self-paced online training event for beginners and advanced learners who want to improve their data analysis skills in Galaxy and/or in popular fields in bioinformatics.\nOver the course of one week, we offer a diverse selection of learning tracks for you.\n",
-  "about": [],
+  "description": "The Galaxy Training Academy is a self-paced online training event for beginners and advanced learners who want to improve their data analysis skills in Galaxy and/or in popular fields in bioinformatics.\nOver the course of one week, we offer a diverse selection of learning tracks for you.\n<button id=\"program-button\" class=\"btn btn-info\" onclick=\"$('#program-tab').tab('show');\">Start the Course!</button>\n",
+  "about": [
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0102",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0102"
+    }
+  ],
   "audience": "Everyone who would like to get to know Galaxy and learn bioinformatics data analysis, whether you want to master a specific analysis or learn a new skill.",
   "courseMode": "online",
   "startDate": "2026-05-18",
@@ -613,7 +620,43 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "location": {
     "name": "online"
   },
-  "teaches": [],
+  "teaches": [
+    "Familiarize yourself with the basics of Galaxy",
+    "Learn how to obtain data from external sources",
+    "Learn how to run tools",
+    "Learn how histories work",
+    "Learn how to create a workflow",
+    "Learn how to share your work",
+    "Familiarize yourself with the basics of Galaxy",
+    "Learn how to obtain data from external sources",
+    "Learn how to tag datasets",
+    "Learn how to run tools",
+    "Learn how histories work",
+    "Learn how to create a workflow",
+    "Learn how to share your work",
+    "Learn how to upload a file",
+    "Learn how to use a tool",
+    "Learn how to view results",
+    "Learn how to view histories",
+    "Learn how to extract and run a workflow",
+    "Learn how to share a history",
+    "Gain understanding on navigating and manipulating histories",
+    "Understand and master dataset collections",
+    "Familiarize yourself with data manipulation tools in Galaxy",
+    "Perform basic text manipulation tasks in Galaxy",
+    "Become comfortable converting text-based files in a variety of ways.",
+    "Reason about the expected outcome of tools",
+    "Understand most common types of NGS-related datatypes",
+    "Learn about how Galaxy handles NGS data using Illumina data derived from patients infected with Plasmodium",
+    "Assess short reads FASTQ quality using FASTQE 🧬😎 and FastQC",
+    "Assess long reads FASTQ quality using Nanoplot and PycoQC",
+    "Perform quality correction with Cutadapt (short reads)",
+    "Summarise quality metrics MultiQC",
+    "Process single-end and paired-end data",
+    "Run a tool to map reads to a reference genome",
+    "Explain what is a BAM file and what it contains",
+    "Use genome browser to understand your data"
+  ],
   "availableLanguage": [
     "en"
   ],
@@ -673,21 +716,56 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "syllabusSections": [
     {
       "@type": "Syllabus",
-      "name": "Monday: Introduction",
+      "name": "Welcome!",
       "description": "When you are ready to start, just work your way through the program below by watching videos and/or following the text-based tutorials. There are no live sessions, so you can determine your own schedule. A large team of instructors is available on Slack to answer your questions 24/7! Enjoy!"
     },
     {
       "@type": "Syllabus",
-      "name": "Tuesday to Thursday: Pick a track",
+      "name": "Start Here: Course Introduction",
+      "description": null
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Daily Meet the Experts",
+      "description": "Each day, we will release a new video in this special series. Read more about the speakers in our [news post](/training-material/news/2026/05/11/gta-meet-experts.html)"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Monday: Galaxy introduction",
+      "description": "Kick off the week with a hands-on introduction to Galaxy, covering everything from basic navigation and data manipulation to reproducing published analyses, quality control, and mapping sequences to a reference genome. Whether you're new to Galaxy or looking to strengthen your skills, today's sessions will equip you with the foundational knowledge needed for more advanced topics.\n\nIn the morning you can take part in the Icebreaker by joining us in the [Slack #social channel](https://gtnsmrgsbord.slack.com/channels/social)\n\n**Need help with these tutorials?** Ask your questions via the Slack [#gta_introduction](https://gtnsmrgsbord.slack.com/channels/gta_introduction) channel.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "New to Galaxy? First introduction to Galaxy",
+      "description": "Pick **one** of the following two tutorials (depending on your interest) if you are new to Galaxy."
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Used Galaxy Before? Quick refresh of Galaxy",
+      "description": "Have you used Galaxy before but like a little refresher course? We suggest this shorter introduction tutorial."
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Go a bit further with Galaxy",
+      "description": "Dive into advanced features of Galaxy such as histories, collections, data manipulation and data logistics."
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Fundamentals of Sequence analysis",
+      "description": "If you are planning to follow any genomics themed modules this week (such as assembly, transcriptomics, microbiome, single cell, variant analysis), we suggest you follow these introductory tutorials today."
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Tuesday to Thursday: Pick your track(s)",
       "description": "Over the course of these three days, you can choose your preferred track and learn how to use Galaxy for data analysis in this research field. If you find multiple topics interesting, feel free to explore more than one track. Each track will guide you through the process, from basic to more advanced analyses, to accommodate learners of all levels.\n\nFor assistance, you can access support through the Slack channel associated with each track module. Please note that while we strive to accommodate all time zones, responses to specific questions may take a bit longer depending on the availability of experts in your time zone.\n"
     },
     {
       "@type": "Syllabus",
       "name": "Friday: Grab bag",
-      "description": "Can't get enough? You can explore the rest of the Galaxy Training Network material. The trainers will still be present on Slack for you if you have a problem and answer questions. However, they may not be experts in the topic you selected.\n\n**Need help with these tutorials?** Ask your questions via the Slack Channel (TBD).\n"
+      "description": "Can't get enough? You can explore the rest of the [Galaxy Training Network material](/training-material/) and follow any tutorial that interests you!\n\nThe trainers will still be present on Slack for you if you have a problem and answer questions. However, they may not be experts in the topic you selected.\n\n**Need more time to finish your module?** Of course you can continue with that as well today!\n\n**Need help with these tutorials?** Ask your questions via Slack!\n"
     }
   ],
-  "dateModified": "2026-05-12 10:01:49 +0000",
+  "dateModified": "2026-05-16 17:56:38 +0000",
   "datePublished": "2026-01-21 17:14:51 +0000",
   "isAccessibleForFree": true,
   "hasCourseInstance": [
@@ -765,7 +843,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     
 
     <p><p>The Galaxy Training Academy is a self-paced online training event for beginners and advanced learners who want to improve their data analysis skills in Galaxy and/or in popular fields in bioinformatics.
-Over the course of one week, we offer a diverse selection of learning tracks for you.</p>
+Over the course of one week, we offer a diverse selection of learning tracks for you.
+<button id="program-button" class="btn btn-info" onclick="$('#program-tab').tab('show');">Start the Course!</button></p>
 </p>
     <p><h1 id="welcome-to-the-galaxy-training-academy-2026">Welcome to the Galaxy Training Academy 2026</h1>
 <p>Do you want to learn how to use Galaxy, an open source data analysis platform? Then you are at the right place. We offer here a <strong>5-day Global Online and Asynchronous learning event</strong>.</p>
@@ -883,7 +962,7 @@ You only need a browser and an account on one of the Galaxy instances registered
 
     
       
-        <h3 id="monday-introduction">Monday: Introduction</h3>
+        <h3 id="welcome">Welcome!</h3>
       
       <p><p>When you are ready to start, just work your way through the program below by watching videos and/or following the text-based tutorials. There are no live sessions, so you can determine your own schedule. A large team of instructors is available on Slack to answer your questions 24/7! Enjoy!</p>
 </p>
@@ -894,7 +973,3990 @@ You only need a browser and an account on one of the Galaxy instances registered
 
     
       
-        <h4 id="tuesday-to-thursday-pick-a-track">Tuesday to Thursday: Pick a track</h4>
+        <h3 id="start-here-course-introduction">Start Here: Course Introduction</h3>
+      
+      <p>
+</p>
+
+      
+
+	  
+        
+        
+	    
+
+
+
+<table class="table table-responsive table-striped tutorials-list">
+  <thead>
+    <tr>
+      
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+      
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list">
+
+  
+  
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+           <!-- e.g. for events -->
+            <td>
+              <p>Welcome &amp; Course logistics</p>
+
+              <div class="duplicate" style="display: none;">
+                <p><a href="https://youtu.be/rOCR6Rm5i20"><i class="fas fa-video" aria-hidden="true"></i> Video: Welcome to the course!</a></p>
+
+              </div>
+            </td>
+            <td colspan="3"> <p><a href="https://youtu.be/rOCR6Rm5i20"><i class="fas fa-video" aria-hidden="true"></i> Video: Welcome to the course!</a></p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+           <!-- e.g. for events -->
+            <td>
+              <p>Daily Icebreaker</p>
+
+              <div class="duplicate" style="display: none;">
+                <p>Whenever you start each day, start by answering the daily ice breaker! Post your answers in the Slack  <a href="https://gtnsmrgsbord.slack.com/channels/social">#social</a> channel. (<strong>Mandatory for a certificate</strong>)</p>
+
+<p><strong>Monday:</strong> Introduce yourself and let us know what you are hoping to learn this week!</p>
+
+<p><strong>Tuesday:</strong> Let us know what track are following today and one thing you are excited to learn.</p>
+
+<p><strong>Wednesday:</strong> Midweek check-in! What’s one thing you’ve learned so far?</p>
+
+<p><strong>Thursday:</strong> What’s one question you still have about Galaxy or your track?</p>
+
+<p><strong>Friday:</strong> What’s your GTA2026 win of the week? Big or small, we want to celebrate it!</p>
+
+<p>Post your answers to Slack <a href="https://gtnsmrgsbord.slack.com/channels/social">#social</a> channel. <em>(See the setup tab for instructions for joining Slack)</em>.</p>
+
+              </div>
+            </td>
+            <td colspan="3"> <p>Whenever you start each day, start by answering the daily ice breaker! Post your answers in the Slack  <a href="https://gtnsmrgsbord.slack.com/channels/social">#social</a> channel. (<strong>Mandatory for a certificate</strong>)</p>
+
+<p><strong>Monday:</strong> Introduce yourself and let us know what you are hoping to learn this week!</p>
+
+<p><strong>Tuesday:</strong> Let us know what track are following today and one thing you are excited to learn.</p>
+
+<p><strong>Wednesday:</strong> Midweek check-in! What’s one thing you’ve learned so far?</p>
+
+<p><strong>Thursday:</strong> What’s one question you still have about Galaxy or your track?</p>
+
+<p><strong>Friday:</strong> What’s your GTA2026 win of the week? Big or small, we want to celebrate it!</p>
+
+<p>Post your answers to Slack <a href="https://gtnsmrgsbord.slack.com/channels/social">#social</a> channel. <em>(See the setup tab for instructions for joining Slack)</em>.</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
+
+
+	  
+
+    
+      
+        <h4 id="daily-meet-the-experts">Daily Meet the Experts</h4>
+      
+      <p><p>Each day, we will release a new video in this special series. Read more about the speakers in our <a href="/training-material/news/2026/05/11/gta-meet-experts.html">news post</a></p>
+</p>
+
+      
+
+	  
+        
+        
+	    
+
+
+
+<table class="table table-responsive table-striped tutorials-list">
+  <thead>
+    <tr>
+      
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+      
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list">
+
+  
+  
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+           <!-- e.g. for events -->
+            <td>
+              <p><strong>Monday:</strong> Delphine Larivière</p>
+
+              <div class="duplicate" style="display: none;">
+                <p>Watch the <a href="https://youtu.be/90tlBmTTFFY">video</a>!</p>
+
+              </div>
+            </td>
+            <td colspan="3"> <p>Watch the <a href="https://youtu.be/90tlBmTTFFY">video</a>!</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+           <!-- e.g. for events -->
+            <td>
+              <p><strong>Tuesday:</strong> Aaron Quinlan</p>
+
+              <div class="duplicate" style="display: none;">
+                <p>Video will be released on the day</p>
+
+              </div>
+            </td>
+            <td colspan="3"> <p>Video will be released on the day</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+           <!-- e.g. for events -->
+            <td>
+              <p><strong>Wednesday:</strong> Stephanie Hicks</p>
+
+              <div class="duplicate" style="display: none;">
+                <p>Video will be released on the day</p>
+
+              </div>
+            </td>
+            <td colspan="3"> <p>Video will be released on the day</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+           <!-- e.g. for events -->
+            <td>
+              <p><strong>Thursday:</strong> Timothy Griffin</p>
+
+              <div class="duplicate" style="display: none;">
+                <p>Video will be released on the day</p>
+
+              </div>
+            </td>
+            <td colspan="3"> <p>Video will be released on the day</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT:  -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+           <!-- e.g. for events -->
+            <td>
+              <p><strong>Friday:</strong> Gareth Price</p>
+
+              <div class="duplicate" style="display: none;">
+                <p>Video will be released on the day</p>
+
+              </div>
+            </td>
+            <td colspan="3"> <p>Video will be released on the day</p>
+</td>
+           <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
+
+
+	  
+
+    
+      
+        <h3 id="monday-galaxy-introduction">Monday: Galaxy introduction</h3>
+      
+      <p><p>Kick off the week with a hands-on introduction to Galaxy, covering everything from basic navigation and data manipulation to reproducing published analyses, quality control, and mapping sequences to a reference genome. Whether you’re new to Galaxy or looking to strengthen your skills, today’s sessions will equip you with the foundational knowledge needed for more advanced topics.</p>
+
+<p>In the morning you can take part in the Icebreaker by joining us in the <a href="https://gtnsmrgsbord.slack.com/channels/social">Slack #social channel</a></p>
+
+<p><strong>Need help with these tutorials?</strong> Ask your questions via the Slack <a href="https://gtnsmrgsbord.slack.com/channels/gta_introduction">#gta_introduction</a> channel.</p>
+</p>
+
+      
+
+	  
+
+    
+      
+        <h4 id="new-to-galaxy-first-introduction-to-galaxy">New to Galaxy? First introduction to Galaxy</h4>
+      
+      <p><p>Pick <strong>one</strong> of the following two tutorials (depending on your interest) if you are new to Galaxy.</p>
+</p>
+
+      
+
+	  
+        
+        
+	    
+
+
+
+<table class="table table-responsive table-striped tutorials-list">
+  <thead>
+    <tr>
+      
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+      
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list">
+
+  
+  
+        <!-- MAT: introduction/galaxy-intro-101 -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">
+                Galaxy Basics for genomics
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+            </div>
+
+            <div class="duplicate" style="display: none;">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-101/recordings/index.html#tutorial-recording-16-september-2024" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (September 2024) - 18m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-101/recordings/index.html#tutorial-recording-21-july-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (July 2021) - 13m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-101/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-101/recordings/index.html#tutorial-recording-16-september-2024" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (September 2024) - 18m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-101/recordings/index.html#tutorial-recording-21-july-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (July 2021) - 13m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-101/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT: introduction/galaxy-intro-101-everyone -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
+                Galaxy Basics for everyone
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+            </div>
+
+            <div class="duplicate" style="display: none;">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/recordings/index.html#tutorial-recording-1-may-2023" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (May 2023) - 20m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 1h15m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/recordings/index.html#tutorial-recording-1-may-2023" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (May 2023) - 20m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 1h15m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
+
+
+	  
+
+    
+      
+        <h4 id="used-galaxy-before-quick-refresh-of-galaxy">Used Galaxy Before? Quick refresh of Galaxy</h4>
+      
+      <p><p>Have you used Galaxy before but like a little refresher course? We suggest this shorter introduction tutorial.</p>
+</p>
+
+      
+
+	  
+        
+        
+	    
+
+
+
+<table class="table table-responsive table-striped tutorials-list">
+  <thead>
+    <tr>
+      
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+      
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list">
+
+  
+  
+        <!-- MAT: introduction/galaxy-intro-short -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html">
+                A short introduction to Galaxy
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+              
+              <a href="/training-material/search2.html?query=español" class="label label-default tutorial_tag" style="--color-primary: #00f0e4; --color-darker: #00d6cb; --color-dimmed: #00e3d8;" title="Click to show all tutorials tagged español">español</a>
+              
+            
+            </div>
+
+            <div class="duplicate" style="display: none;">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
+           
+		   <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="es" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides_ES.html" title="es">
+                Español
+            </a>
+			</li>
+           
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+
+	<li class="dropdown-item">
+		<a class="btn btn-default topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides-plain.html" aria-label="more accessible, plain text slides">
+			<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+<div class="btn-group">
+  <!-- add video button -->
+  <a class="btn btn-default topic-icon" href="/training-material/videos/watch.html?v=introduction/tutorials/galaxy-intro-short/slides" title="Video Slides (text-to-speech)">
+    <i class="far fa-play-circle" aria-hidden="true"></i>
+  </a>
+
+  
+  <!-- add dropdown with links to different languages for the video-->
+  <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </a>
+  <ul class="dropdown-menu">
+
+    <div class="dropdown-item"><strong>Video Languages</strong></div>
+      
+      <a class="dropdown-item" href="/training-material/videos/watch.html?v=introduction/tutorials/galaxy-intro-short/slides_ES" title="es">
+         
+      </a>
+      
+  </ul>
+  
+
+</div>
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
+           
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="es" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial_ES.html" title="es">
+                Español
+            </a>
+            </li>
+        
+
+          <hr/>
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/recordings/index.html#tutorial-recording-18-march-2025" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (March 2025) - 27m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
+           
+		   <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="es" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides_ES.html" title="es">
+                Español
+            </a>
+			</li>
+           
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+
+	<li class="dropdown-item">
+		<a class="btn btn-default topic-icon" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/slides-plain.html" aria-label="more accessible, plain text slides">
+			<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+<div class="btn-group">
+  <!-- add video button -->
+  <a class="btn btn-default topic-icon" href="/training-material/videos/watch.html?v=introduction/tutorials/galaxy-intro-short/slides" title="Video Slides (text-to-speech)">
+    <i class="far fa-play-circle" aria-hidden="true"></i>
+  </a>
+
+  
+  <!-- add dropdown with links to different languages for the video-->
+  <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </a>
+  <ul class="dropdown-menu">
+
+    <div class="dropdown-item"><strong>Video Languages</strong></div>
+      
+      <a class="dropdown-item" href="/training-material/videos/watch.html?v=introduction/tutorials/galaxy-intro-short/slides_ES" title="es">
+         
+      </a>
+      
+  </ul>
+  
+
+</div>
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
+           
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="es" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial_ES.html" title="es">
+                Español
+            </a>
+            </li>
+        
+
+          <hr/>
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/introduction/tutorials/galaxy-intro-short/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/recordings/index.html#tutorial-recording-18-march-2025" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (March 2025) - 27m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-short/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
+
+
+	  
+
+    
+      
+        <h4 id="go-a-bit-further-with-galaxy">Go a bit further with Galaxy</h4>
+      
+      <p><p>Dive into advanced features of Galaxy such as histories, collections, data manipulation and data logistics.</p>
+</p>
+
+      
+
+	  
+        
+        
+	    
+
+
+
+<table class="table table-responsive table-striped tutorials-list">
+  <thead>
+    <tr>
+      
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+      
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list">
+
+  
+  
+        <!-- MAT: galaxy-interface/history -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/galaxy-interface/tutorials/history/tutorial.html">
+                Understanding Galaxy history system
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+            </div>
+
+            <div class="duplicate" style="display: none;">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/galaxy-interface/tutorials/history/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/galaxy-interface/tutorials/history/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/galaxy-interface/tutorials/history/recordings/index.html#tutorial-recording-7-september-2024" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (September 2024) - 23m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/galaxy-interface/tutorials/history/recordings/index.html#tutorial-recording-19-may-2023" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (May 2023) - 18m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/galaxy-interface/tutorials/history/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/galaxy-interface/tutorials/history/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/history/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/galaxy-interface/tutorials/history/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/galaxy-interface/tutorials/history/recordings/index.html#tutorial-recording-7-september-2024" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (September 2024) - 23m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/galaxy-interface/tutorials/history/recordings/index.html#tutorial-recording-19-may-2023" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (May 2023) - 18m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/galaxy-interface/tutorials/history/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT: galaxy-interface/collections -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">
+                Using dataset collections
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+              
+              <a href="/training-material/search2.html?query=collections" class="label label-default tutorial_tag" style="--color-primary: #ffcacf; --color-darker: #ffa7b1; --color-dimmed: #ffb9c0;" title="Click to show all tutorials tagged collections">collections</a>
+              
+            
+            </div>
+
+            <div class="duplicate" style="display: none;">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/galaxy-interface/tutorials/collections/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/galaxy-interface/tutorials/collections/recordings/index.html#tutorial-recording-9-may-2023" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (May 2023) - 13m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/galaxy-interface/tutorials/collections/recordings/index.html#tutorial-recording-9-august-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (August 2021) - 11m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/galaxy-interface/tutorials/collections/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/galaxy-interface/tutorials/collections/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/galaxy-interface/tutorials/collections/recordings/index.html#tutorial-recording-9-may-2023" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (May 2023) - 13m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/galaxy-interface/tutorials/collections/recordings/index.html#tutorial-recording-9-august-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (August 2021) - 11m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/galaxy-interface/tutorials/collections/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT: introduction/data-manipulation-olympics -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+                Data Manipulation Olympics
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+              
+              <a href="/training-material/search2.html?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #ffc6ef; --color-darker: #ffa0e7; --color-dimmed: #ffb4eb;" title="Click to show all tutorials tagged cyoa">cyoa</a>
+              
+            
+            </div>
+
+            <div class="duplicate" style="display: none;">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT: introduction/galaxy-intro-ngs-data-managment -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html">
+                NGS data logistics
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+            </div>
+
+            <div class="duplicate" style="display: none;">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/recordings/index.html#tutorial-recording-10-may-2025" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (May 2025) - 24m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 15m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/recordings/index.html#tutorial-recording-10-may-2025" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (May 2025) - 24m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 15m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
+
+
+	  
+
+    
+      
+        <h4 id="fundamentals-of-sequence-analysis">Fundamentals of Sequence analysis</h4>
+      
+      <p><p>If you are planning to follow any genomics themed modules this week (such as assembly, transcriptomics, microbiome, single cell, variant analysis), we suggest you follow these introductory tutorials today.</p>
+</p>
+
+      
+
+	  
+        
+        
+	    
+
+
+
+<table class="table table-responsive table-striped tutorials-list">
+  <thead>
+    <tr>
+      
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+      
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list">
+
+  
+  
+        <!-- MAT: sequence-analysis/quality-control -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">
+                Quality Control
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+              
+              <a href="/training-material/search2.html?query=deutsch" class="label label-default tutorial_tag" style="--color-primary: #00efef; --color-darker: #00d5d4; --color-dimmed: #00e2e2;" title="Click to show all tutorials tagged deutsch">deutsch</a>
+              
+              <a href="/training-material/search2.html?query=español" class="label label-default tutorial_tag" style="--color-primary: #00f0e4; --color-darker: #00d6cb; --color-dimmed: #00e3d8;" title="Click to show all tutorials tagged español">español</a>
+              
+              <a href="/training-material/search2.html?query=italiano" class="label label-default tutorial_tag" style="--color-primary: #00f5a9; --color-darker: #00da95; --color-dimmed: #00e79f;" title="Click to show all tutorials tagged italiano">italiano</a>
+              
+            
+            </div>
+
+            <div class="duplicate" style="display: none;">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+
+	<li class="dropdown-item">
+		<a class="btn btn-default topic-icon" href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides-plain.html" aria-label="more accessible, plain text slides">
+			<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
+           
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="de" href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial_DE.html" title="de">
+                Deutsch
+            </a>
+            </li>
+        
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="es" href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial_ES.html" title="es">
+                Español
+            </a>
+            </li>
+        
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="it" href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial_IT.html" title="it">
+                Italiano
+            </a>
+            </li>
+        
+
+          <hr/>
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/quality-control/recordings/index.html#lecture-recording-15-february-2021" title="View recording for this lecture">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Lecture (February 2021) - 40m</a>
+    </li>
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/quality-control/recordings/index.html#tutorial-recording-30-september-2024" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (September 2024) - 51m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/quality-control/recordings/index.html#tutorial-recording-19-may-2023" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (May 2023) - 50m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/quality-control/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 1h10m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/quality-control/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+
+	<li class="dropdown-item">
+		<a class="btn btn-default topic-icon" href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides-plain.html" aria-label="more accessible, plain text slides">
+			<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
+           
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="de" href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial_DE.html" title="de">
+                Deutsch
+            </a>
+            </li>
+        
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="es" href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial_ES.html" title="es">
+                Español
+            </a>
+            </li>
+        
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="it" href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial_IT.html" title="it">
+                Italiano
+            </a>
+            </li>
+        
+
+          <hr/>
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/quality-control/recordings/index.html#lecture-recording-15-february-2021" title="View recording for this lecture">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Lecture (February 2021) - 40m</a>
+    </li>
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/quality-control/recordings/index.html#tutorial-recording-30-september-2024" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (September 2024) - 51m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/quality-control/recordings/index.html#tutorial-recording-19-may-2023" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (May 2023) - 50m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/quality-control/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 1h10m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/quality-control/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT: sequence-analysis/mapping -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html">
+                Mapping
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+              
+              <a href="/training-material/search2.html?query=deutsch" class="label label-default tutorial_tag" style="--color-primary: #00efef; --color-darker: #00d5d4; --color-dimmed: #00e2e2;" title="Click to show all tutorials tagged deutsch">deutsch</a>
+              
+              <a href="/training-material/search2.html?query=español" class="label label-default tutorial_tag" style="--color-primary: #00f0e4; --color-darker: #00d6cb; --color-dimmed: #00e3d8;" title="Click to show all tutorials tagged español">español</a>
+              
+              <a href="/training-material/search2.html?query=italiano" class="label label-default tutorial_tag" style="--color-primary: #00f5a9; --color-darker: #00da95; --color-dimmed: #00e79f;" title="Click to show all tutorials tagged italiano">italiano</a>
+              
+            
+            </div>
+
+            <div class="duplicate" style="display: none;">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/sequence-analysis/tutorials/mapping/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+
+	<li class="dropdown-item">
+		<a class="btn btn-default topic-icon" href="/training-material/topics/sequence-analysis/tutorials/mapping/slides-plain.html" aria-label="more accessible, plain text slides">
+			<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
+           
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="de" href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_DE.html" title="de">
+                Deutsch
+            </a>
+            </li>
+        
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="es" href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_ES.html" title="es">
+                Español
+            </a>
+            </li>
+        
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="it" href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_IT.html" title="it">
+                Italiano
+            </a>
+            </li>
+        
+
+          <hr/>
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/index.html#lecture-recording-15-february-2021" title="View recording for this lecture">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Lecture (February 2021) - 10m</a>
+    </li>
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/index.html#tutorial-recording-18-march-2025" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (March 2025) - 37m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/index.html#tutorial-recording-7-september-2024" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (September 2024) - 24m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 20m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/sequence-analysis/tutorials/mapping/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+
+	<li class="dropdown-item">
+		<a class="btn btn-default topic-icon" href="/training-material/topics/sequence-analysis/tutorials/mapping/slides-plain.html" aria-label="more accessible, plain text slides">
+			<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+          <li class="dropdown-item"><strong>Curated translations</strong></li>
+           
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="de" href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_DE.html" title="de">
+                Deutsch
+            </a>
+            </li>
+        
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="es" href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_ES.html" title="es">
+                Español
+            </a>
+            </li>
+        
+            <li class="dropdown-item">
+            <a class="dropdown-item" hreflang="it" href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial_IT.html" title="it">
+                Italiano
+            </a>
+            </li>
+        
+
+          <hr/>
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="it" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Italiano
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/index.html#lecture-recording-15-february-2021" title="View recording for this lecture">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Lecture (February 2021) - 10m</a>
+    </li>
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/index.html#tutorial-recording-18-march-2025" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (March 2025) - 37m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/index.html#tutorial-recording-7-september-2024" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (September 2024) - 24m</a>
+    </li>
+      
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 20m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/sequence-analysis/tutorials/mapping/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
+
+
+	  
+
+    
+      
+        <h3 id="tuesday-to-thursday-pick-your-track-s">Tuesday to Thursday: Pick your track(s)</h3>
       
       <p><p>Over the course of these three days, you can choose your preferred track and learn how to use Galaxy for data analysis in this research field. If you find multiple topics interesting, feel free to explore more than one track. Each track will guide you through the process, from basic to more advanced analyses, to accommodate learners of all levels.</p>
 
@@ -907,12 +4969,12 @@ You only need a browser and an account on one of the Galaxy instances registered
           
           
 
-          <a class="btn btn-square-large" style="display: inline-flex; align-items: center; background-color: crimson; color: white" href="#" ><span style="width: 100%">Assembly</span></a>
+          <a class="btn btn-square-large" style="display: inline-flex; align-items: center; background-color: crimson; color: white" href="/training-material/events/tracks/gta2026-assembly.html" ><span style="width: 100%">Assembly</span></a>
         
           
           
 
-          <a class="btn btn-square-large" style="display: inline-flex; align-items: center; background-color:  orangered; color: white" href="#" ><span style="width: 100%">Climate</span></a>
+          <a class="btn btn-square-large" style="display: inline-flex; align-items: center; background-color:  orangered; color: white" href="/training-material/events/tracks/gta2026-climate.html" ><span style="width: 100%">Climate</span></a>
         
           
           
@@ -922,7 +4984,7 @@ You only need a browser and an account on one of the Galaxy instances registered
           
           
 
-          <a class="btn btn-square-large" style="display: inline-flex; align-items: center; background-color:  green; color: white" href="#" ><span style="width: 100%">From Zero to Hero with Python</span></a>
+          <a class="btn btn-square-large" style="display: inline-flex; align-items: center; background-color:  green; color: white" href="/training-material/events/tracks/gta2026-bioNT.html" ><span style="width: 100%">From Zero to Hero with Python</span></a>
         
           
           
@@ -937,7 +4999,7 @@ You only need a browser and an account on one of the Galaxy instances registered
           
           
 
-          <a class="btn btn-square-large" style="display: inline-flex; align-items: center; background-color: crimson; color: white" href="#" ><span style="width: 100%">Proteomics</span></a>
+          <a class="btn btn-square-large" style="display: inline-flex; align-items: center; background-color: crimson; color: white" href="/training-material/events/tracks/gta2026-proteomics.html" ><span style="width: 100%">Proteomics</span></a>
         
           
           
@@ -947,12 +5009,12 @@ You only need a browser and an account on one of the Galaxy instances registered
           
           
 
-          <a class="btn btn-square-large" style="display: inline-flex; align-items: center; background-color:  darkorange; color: white" href="#" ><span style="width: 100%">Transcriptomics</span></a>
+          <a class="btn btn-square-large" style="display: inline-flex; align-items: center; background-color:  darkorange; color: white" href="/training-material/events/tracks/gta2026-transcriptomics.html" ><span style="width: 100%">Transcriptomics</span></a>
         
           
           
 
-          <a class="btn btn-square-large" style="display: inline-flex; align-items: center; background-color:  green; color: white" href="#" ><span style="width: 100%">Variant Analysis</span></a>
+          <a class="btn btn-square-large" style="display: inline-flex; align-items: center; background-color:  green; color: white" href="/training-material/events/tracks/gta2026-variant-analysis.html" ><span style="width: 100%">Variant Analysis</span></a>
         
       
 
@@ -962,9 +5024,13 @@ You only need a browser and an account on one of the Galaxy instances registered
       
         <h3 id="friday-grab-bag">Friday: Grab bag</h3>
       
-      <p><p>Can’t get enough? You can explore the rest of the Galaxy Training Network material. The trainers will still be present on Slack for you if you have a problem and answer questions. However, they may not be experts in the topic you selected.</p>
+      <p><p>Can’t get enough? You can explore the rest of the <a href="/training-material/">Galaxy Training Network material</a> and follow any tutorial that interests you!</p>
 
-<p><strong>Need help with these tutorials?</strong> Ask your questions via the Slack Channel (TBD).</p>
+<p>The trainers will still be present on Slack for you if you have a problem and answer questions. However, they may not be experts in the topic you selected.</p>
+
+<p><strong>Need more time to finish your module?</strong> Of course you can continue with that as well today!</p>
+
+<p><strong>Need help with these tutorials?</strong> Ask your questions via Slack!</p>
 </p>
 
       
@@ -1131,7 +5197,7 @@ You only need a browser and an account on one of the Galaxy instances registered
 			<a href="https://usegalaxy.eu/tiaas/new/?name=Delphine%20Lariviere
 &email=delphine.lariviere@galaxy.org
 &title=Galaxy%20Training%20Academy%202026
-&description=The%20Galaxy%20Training%20Academy%20is%20a%20self-paced%20online%20training%20event%20for%20beginners%20and%20advanced%20learners%20who%20want%20to%20improve%20their%20data%20analysis%20skills%20in%20Galaxy%20and/or%20in%20popular%20fields%20in%20bioinformatics.%0AOver%20the%20course%20of%20one%20week,%20we%20offer%20a%20diverse%20selection%20of%20learning%20tracks%20for%20you.%0A
+&description=The%20Galaxy%20Training%20Academy%20is%20a%20self-paced%20online%20training%20event%20for%20beginners%20and%20advanced%20learners%20who%20want%20to%20improve%20their%20data%20analysis%20skills%20in%20Galaxy%20and/or%20in%20popular%20fields%20in%20bioinformatics.%0AOver%20the%20course%20of%20one%20week,%20we%20offer%20a%20diverse%20selection%20of%20learning%20tracks%20for%20you.%0A%3Cbutton%20id=%22program-button%22%20class=%22btn%20btn-info%22%20onclick=%22$('#program-tab').tab('show');%22%3EStart%20the%20Course!%3C/button%3E%0A
 &start=2026-05-18
 &end=2026-05-22
 &website=https://training.galaxyproject.org/training-material/events/2026-05-18-galaxy-academy.html
@@ -1142,7 +5208,7 @@ You only need a browser and an account on one of the Galaxy instances registered
 			<a href="https://usegalaxy.org/tiaas/new/?name=Delphine%20Lariviere
 &email=delphine.lariviere@galaxy.org
 &title=Galaxy%20Training%20Academy%202026
-&description=The%20Galaxy%20Training%20Academy%20is%20a%20self-paced%20online%20training%20event%20for%20beginners%20and%20advanced%20learners%20who%20want%20to%20improve%20their%20data%20analysis%20skills%20in%20Galaxy%20and/or%20in%20popular%20fields%20in%20bioinformatics.%0AOver%20the%20course%20of%20one%20week,%20we%20offer%20a%20diverse%20selection%20of%20learning%20tracks%20for%20you.%0A
+&description=The%20Galaxy%20Training%20Academy%20is%20a%20self-paced%20online%20training%20event%20for%20beginners%20and%20advanced%20learners%20who%20want%20to%20improve%20their%20data%20analysis%20skills%20in%20Galaxy%20and/or%20in%20popular%20fields%20in%20bioinformatics.%0AOver%20the%20course%20of%20one%20week,%20we%20offer%20a%20diverse%20selection%20of%20learning%20tracks%20for%20you.%0A%3Cbutton%20id=%22program-button%22%20class=%22btn%20btn-info%22%20onclick=%22$('#program-tab').tab('show');%22%3EStart%20the%20Course!%3C/button%3E%0A
 &start=2026-05-18
 &end=2026-05-22
 &website=https://training.galaxyproject.org/training-material/events/2026-05-18-galaxy-academy.html
@@ -1153,7 +5219,7 @@ You only need a browser and an account on one of the Galaxy instances registered
 			<a href="https://usegalaxy.org.au//tiaas/new/?name=Delphine%20Lariviere
 &email=delphine.lariviere@galaxy.org
 &title=Galaxy%20Training%20Academy%202026
-&description=The%20Galaxy%20Training%20Academy%20is%20a%20self-paced%20online%20training%20event%20for%20beginners%20and%20advanced%20learners%20who%20want%20to%20improve%20their%20data%20analysis%20skills%20in%20Galaxy%20and/or%20in%20popular%20fields%20in%20bioinformatics.%0AOver%20the%20course%20of%20one%20week,%20we%20offer%20a%20diverse%20selection%20of%20learning%20tracks%20for%20you.%0A
+&description=The%20Galaxy%20Training%20Academy%20is%20a%20self-paced%20online%20training%20event%20for%20beginners%20and%20advanced%20learners%20who%20want%20to%20improve%20their%20data%20analysis%20skills%20in%20Galaxy%20and/or%20in%20popular%20fields%20in%20bioinformatics.%0AOver%20the%20course%20of%20one%20week,%20we%20offer%20a%20diverse%20selection%20of%20learning%20tracks%20for%20you.%0A%3Cbutton%20id=%22program-button%22%20class=%22btn%20btn-info%22%20onclick=%22$('#program-tab').tab('show');%22%3EStart%20the%20Course!%3C/button%3E%0A
 &start=2026-05-18
 &end=2026-05-22
 &website=https://training.galaxyproject.org/training-material/events/2026-05-18-galaxy-academy.html
@@ -1164,7 +5230,7 @@ You only need a browser and an account on one of the Galaxy instances registered
 			<a href="https://usegalaxy.fr/tiaas/new/?name=Delphine%20Lariviere
 &email=delphine.lariviere@galaxy.org
 &title=Galaxy%20Training%20Academy%202026
-&description=The%20Galaxy%20Training%20Academy%20is%20a%20self-paced%20online%20training%20event%20for%20beginners%20and%20advanced%20learners%20who%20want%20to%20improve%20their%20data%20analysis%20skills%20in%20Galaxy%20and/or%20in%20popular%20fields%20in%20bioinformatics.%0AOver%20the%20course%20of%20one%20week,%20we%20offer%20a%20diverse%20selection%20of%20learning%20tracks%20for%20you.%0A
+&description=The%20Galaxy%20Training%20Academy%20is%20a%20self-paced%20online%20training%20event%20for%20beginners%20and%20advanced%20learners%20who%20want%20to%20improve%20their%20data%20analysis%20skills%20in%20Galaxy%20and/or%20in%20popular%20fields%20in%20bioinformatics.%0AOver%20the%20course%20of%20one%20week,%20we%20offer%20a%20diverse%20selection%20of%20learning%20tracks%20for%20you.%0A%3Cbutton%20id=%22program-button%22%20class=%22btn%20btn-info%22%20onclick=%22$('#program-tab').tab('show');%22%3EStart%20the%20Course!%3C/button%3E%0A
 &start=2026-05-18
 &end=2026-05-22
 &website=https://training.galaxyproject.org/training-material/events/2026-05-18-galaxy-academy.html
@@ -1188,6 +5254,7 @@ date: '2026-05-18'
 days: 5
 tease: The Galaxy Training Academy is a self-paced online training event for beginners and advanced learners who want to improve their data analysis skills in Galaxy and/or in popular fields in bioinformatics.
 Over the course of one week, we offer a diverse selection of learning tracks for you.
+<button id="program-button" class="btn btn-info" onclick="$('#program-tab').tab('show');">Start the Course!</button>
 
 #continent: EU
 location: "online"
@@ -1207,6 +5274,7 @@ Galaxy Training Academy 2026! 📢
 
 The Galaxy Training Academy is a self-paced online training event for beginners and advanced learners who want to improve their data analysis skills in Galaxy and/or in popular fields in bioinformatics.
 Over the course of one week, we offer a diverse selection of learning tracks for you.
+<button id="program-button" class="btn btn-info" onclick="$('#program-tab').tab('show');">Start the Course!</button>
 
 
 📅 May 18 – 22, 2026
@@ -1221,6 +5289,7 @@ Galaxy Training Academy 2026! 📢
 
 The Galaxy Training Academy is a self-paced online training event for beginners and advanced learners who want to improve their data analysis skills in Galaxy and/or in popular fields in bioinformatics.
 Over the course of one week, we offer a diverse selection of learning tracks for you.
+<button id="program-button" class="btn btn-info" onclick="$('#program-tab').tab('show');">Start the Course!</button>
 
 
 :calendar: May 18 – 22, 2026
@@ -1235,10 +5304,14 @@ Galaxy Training Academy 2026! 📢
 
 The Galaxy Training Academy is a self-paced online training event for beginners and advanced learners who want to improve their data analysis skills in Galaxy and/or in popular fields in bioinformatics.
 Over the course of one week, we offer a diverse selection of learning tracks for you.
+<button id="program-button" class="btn btn-info" onclick="$('#program-tab').tab('show');">Start the Course!</button>
 
 
 **Agenda**:
-- Monday: Introduction
+- Welcome!
+- Start Here: Course Introduction
+- Monday: Galaxy introduction
+- Tuesday to Thursday: Pick your track(s)
 - Friday: Grab bag
 
 📅 May 18 – 22, 2026
@@ -1480,7 +5553,7 @@ Over the course of one week, we offer a diverse selection of learning tracks for
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/5c24dbd131668e8e4afeb30cb75714a77cb97f8f">5c24dbd</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6c8dff3bd38be9272c574f11693347be5e544a2a">6c8dff3</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
