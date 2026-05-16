@@ -7,6 +7,7 @@ title: Galaxy Training Academy 2026
 description: |
   The Galaxy Training Academy is a self-paced online training event for beginners and advanced learners who want to improve their data analysis skills in Galaxy and/or in popular fields in bioinformatics.
   Over the course of one week, we offer a diverse selection of learning tracks for you.
+
   <button id="program-button" class="btn btn-info" onclick="$('#program-tab').tab('show');">Start the Course!</button>
 
 
