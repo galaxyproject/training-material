@@ -127,9 +127,13 @@ The saved workflow has three CountESS nodes:
 2. `Calculate RCS`: calculate the log-ratio score.
 3. `Save CHEK2 RCS scores`: write the output CSV.
 
+This workflow is intentionally small so that the score calculation is easy to inspect.
+CountESS workflows created in the GUI can be more complex, and the Galaxy tool can run
+those saved workflows too.
+
 > <hands-on-title>Calculate CHEK2 RCS scores with CountESS</hands-on-title>
 >
-> 1. Run {% tool [CountESS](countess) %} with the following parameters:
+> 1. Run {% tool [CountESS](toolshed.g2.bx.psu.edu/repos/iuc/countess/countess/0.1.19+galaxy0) %} with the following parameters:
 >
 >    - {% icon param-file %} *"CountESS configuration file"*: `chek2_rcs_countess.ini`
 >
