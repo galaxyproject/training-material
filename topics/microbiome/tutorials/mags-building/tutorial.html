@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c81616912ef7ec9a4d68b50555dea1d51e6ce53e",
+		release: "galaxy-training-network@172ac9d08a9dc78c9989438d3a19a6a65cd0cf62",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Building and Annotating Metagenome-Assembled Genomes (MAGs) from Short Metagenomics Paired Reads">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2026-05-18 07:05:02 +0000">
+<meta name="DC.date" content="2026-05-18 07:31:33 +0000">
 <meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Microbiome / Building and Annotating Metagenome-Assembled Genomes (MAGs) from Short Metagenomics Paired Reads / Hands-on: Building and Annotating Metagenome-Assembled Genomes (MAGs) from Short Metagenomics Paired Reads">
@@ -182,7 +182,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "workTranslation": [],
   "creativeWorkStatus": "Active",
-  "dateModified": "2026-05-18 07:05:02 +0000",
+  "dateModified": "2026-05-18 07:31:33 +0000",
   "datePublished": "2025-12-18 12:43:50 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -263,7 +263,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Building and Annotating Metagenome-Assembled Genomes (MAGs) from Short Metagenomics Paired Reads",
   "url": "https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/mags-building/tutorial.html",
-  "version": 5,
+  "version": 6,
   "timeRequired": "PT6H",
   "teaches": "- List the key steps involved in MAGs building from raw data.\n- Define essential terms such as MAGs (Metagenome-Assembled Genomes), binning, and functional annotation.\n- Explain the importance of preprocessing metagenomic reads, including quality control and contamination removal.\n- Describe the purpose and process of assembling, binning, and refining MAGs.\n- Compare the quality of MAGs based on completeness, contamination, and other metrics.\n- Assess the quality of MAGs and determine whether they meet standards for downstream analysis.\n- Summarize how taxonomic assignment and functional annotation contribute to understanding microbial communities.\n- Evaluate the reliability of taxonomic assignments and functional annotations based on reference databases.\n- Analyze the relative abundance of microbial taxa in the samples and infer ecological dynamics.\n- Identify the types of genomic features annotated by Bakta (e.g., CDS, rRNA, tRNA).\n- Interpret the functional annotation results to identify metabolic pathways, virulence factors, and other biological roles.",
   "keywords": [
@@ -1247,7 +1247,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 5 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
 
     </blockquote>
     </section>
@@ -3483,8 +3483,8 @@ We will group the contigs by their bin IDs and count the number of contigs in ea
 <p>Taxonomic assignment using <strong>GTDB-Tk</strong> provides a <strong>robust and standardized</strong> approach to classifying MAGs, enabling researchers to <strong>explore microbial diversity, compare communities, and interpret ecological roles</strong>. By leveraging the <strong>Genome Taxonomy Database</strong>, GTDB-Tk ensures that taxonomic classifications are <strong>accurate, reproducible, and up-to-date</strong>, making it an indispensable tool in metagenomic analysis.
 Accurate taxonomic classification of MAGs is essential for understanding the microbial diversity and functional potential within your metagenomic samples. By assigning taxonomic labels to your MAGs, we can explore their evolutionary relationships, ecological roles, and potential functions.</p>
 
-<blockquote class="detail">
-  <div class="box-title details-title" id="details-optional-taxonomic-assignment-with-kmetashot"><button class="gtn-boxify-button details" type="button" aria-controls="details-optional-taxonomic-assignment-with-kmetashot" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Optional: Taxonomic assignment with ***kMetaShot***</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+<blockquote class="details">
+  <div class="box-title details-title" id="details-optional-taxonomic-assignment-with-kmetashot"><button class="gtn-boxify-button details" type="button" aria-controls="details-optional-taxonomic-assignment-with-kmetashot" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Optional: Taxonomic assignment with kMetaShot</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Taxonomic assignment of MAGs can also be performed by using other tools such as <strong>kMetaShot</strong> (<span class="citation"><a href="#defazio2025">Defazio <i>et al.</i> 2025</a></span>). This is an alignment-free, k-mer/minimizer-based tool relying on NCBI taxonomy. Comparison of results from different tools can improve the reliability of MAGs taxonomic assignment</p>
 
@@ -3493,9 +3493,9 @@ Accurate taxonomic classification of MAGs is essential for understanding the mic
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/kmetashot/kmetashot/2.0+galaxy2" title="kMetaShot tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>kMetaShot</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0+galaxy2)</span> with following parameters:
         <ul>
-          <li><em>“Input type”</em>: select <code class="language-plaintext highlighter-rouge">bin(s)/MAG(s)</code></li>
+          <li><em>“Input type”</em>: <code class="language-plaintext highlighter-rouge">bin(s)/MAG(s)</code></li>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Bin(s)/MAG(s) FASTA file(s)”</em>: collection of .fasta or .fasta.gz files</li>
-          <li><em>“Select a reference database”</em>: it is suggested to select the latest</li>
+          <li><em>“Select a reference database”</em>: the latest</li>
           <li><em>“Set ass2ref parameter”</em>: float from 0 to 1</li>
         </ul>
       </li>
@@ -4180,7 +4180,7 @@ window.addEventListener('load', function() {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c81616912ef7ec9a4d68b50555dea1d51e6ce53e">c816169</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/172ac9d08a9dc78c9989438d3a19a6a65cd0cf62">172ac9d</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
