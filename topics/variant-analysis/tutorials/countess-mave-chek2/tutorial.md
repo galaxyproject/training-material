@@ -8,24 +8,27 @@ questions:
 - What is a multiplexed assay of variant effect?
 - How can variant frequencies before and after selection be transformed into functional scores?
 - How can a saved CountESS workflow be run in Galaxy?
+- How can calculated variant effect scores be visualized?
 objectives:
 - Explain how deep mutational scanning and MAVE experiments connect variant frequencies to functional effects.
 - Use CountESS in Galaxy to calculate RAD53 Complementation Scores for CHEK2 variants.
 - Compare calculated log-ratio scores with scores deposited in MaveDB.
+- Visualize the distribution of calculated CHEK2 RCS values.
 time_estimation: 45M
 key_points:
 - MAVE experiments can measure functional effects for thousands of variants in parallel.
 - Variant frequencies before and after selection can be transformed into functional scores using log-ratio calculations.
-- CountESS workflows saved from the CountESS GUI can be reused in Galaxy for reproducible table processing.
+- CountESS workflows saved from the CountESS GUI can be reused in Galaxy for reproducible analysis.
 tags:
 - MAVE
 - DMS
+- variant effect
 - functional genomics
 - clinical genomics
-- CountESS
 contributions:
   authorship:
   - plushz
+  - tflowers15
 ---
 
 Multiplexed assays of variant effect (MAVEs), including deep mutational scanning (DMS)
@@ -37,12 +40,23 @@ in frequency during the assay.
 In this tutorial, we will use a CHEK2 variant effect dataset from MaveDB
 (`urn:mavedb:00001203-a-2`) to calculate a functional score with CountESS. The original
 study tested coding single nucleotide variants (SNVs) in the human *CHEK2* open reading
-frame for their ability to complement a *Saccharomyces cerevisiae* strain lacking the yeast
-ortholog *RAD53* {% cite McCarthyLeo2023 %}. The resulting RAD53 Complementation Score
+frame. Loss-of-function mutations in *CHEK2*, which encodes the checkpoint kinase CHK2,
+are associated with increased risk of breast and other cancers. Many *CHEK2* variants
+observed in clinical testing are variants of uncertain significance, so functional assays
+can provide evidence for interpreting their possible impact. In this study, variants were
+tested for their ability to complement a *Saccharomyces cerevisiae* strain lacking the yeast
+ortholog *RAD53* {% cite McCarthyLeo2024 %}. The resulting RAD53 Complementation Score
 (RCS) describes whether a CHEK2 variant was depleted or retained after selection.
 
 The training data for this tutorial starts from a preprocessed variant frequency summary,
-not raw sequencing reads. The two frequency columns used here are:
+not raw sequencing reads. In the published analysis, reads were quality filtered and mapped
+to the *CHEK2* amplicon, variants were detected, and each variant frequency was calculated
+as the number of reads containing that variant divided by the sequencing coverage at that
+nucleotide position. Those frequencies were averaged across the two pre-selection library
+aliquots and across the four post-selection screens. The frequency values were multiplied
+by 1000 to make small variant frequencies easier to read and compare. More details are
+available in the original publication {% cite McCarthyLeo2024 %}. The two frequency columns
+used here are:
 
 - `Ave_LibAandB_x1000`: average variant frequency before selection, from the two input library aliquots.
 - `Ave_S1toS4_x1000`: average variant frequency after selection, from four complementation screens.
@@ -97,7 +111,7 @@ The CountESS workflow and input data are available from Zenodo.
 >
 {: .hands_on}
 
-# Inspect the input table
+# Inspect the input files
 
 The input CSV contains one row per CHEK2 variant and includes variant identifiers,
 HGVS-style variant descriptions, and frequency summaries from before and after selection.
@@ -114,12 +128,9 @@ HGVS-style variant descriptions, and frequency summaries from before and after s
 >
 {: .question}
 
-# Run the CountESS workflow
-
-CountESS is a workflow-like table processing tool. In this tutorial, we use a CountESS
-configuration file that was already created in the CountESS GUI and saved as an `.ini` file.
-Galaxy will run this saved CountESS workflow and connect Galaxy datasets to the input and
-output nodes.
+The second input file, `chek2_rcs_countess.ini`, is a CountESS configuration file. It is a
+saved CountESS workflow: each section in the `.ini` file describes one workflow node, and
+the `_parent` lines describe how nodes are connected.
 
 The saved workflow has three CountESS nodes:
 
@@ -130,6 +141,43 @@ The saved workflow has three CountESS nodes:
 This workflow is intentionally small so that the score calculation is easy to inspect.
 CountESS workflows created in the GUI can be more complex, and the Galaxy tool can run
 those saved workflows too.
+
+> <details-title>How was the CountESS configuration file created?</details-title>
+>
+> The provided `.ini` file was created in the CountESS GUI. CountESS GUI is external
+> software: to create or edit this configuration yourself, CountESS needs to be installed
+> and the GUI needs to be run outside Galaxy first. You do not need to recreate the `.ini`
+> file to complete this tutorial, but the workflow is intentionally simple:
+>
+> 1. Add a **CSV Load** node, rename it to `Load CHEK2 frequencies`, and load
+>    `chek2_frequency_summary.csv`.
+>
+>    ![CountESS GUI showing the CSV Load node named Load CHEK2 frequencies, configured to read chek2_frequency_summary.csv with accession, hgvs_nt, hgvs_pro, Ave_LibAandB_x1000, and Ave_S1toS4_x1000 columns.](../../images/countess-mave-chek2/countess-load-node.png "CSV Load node in the CountESS GUI.")
+>
+> 2. Add an **Expression** node connected to the CSV Load node and rename it to
+>    `Calculate RCS`.
+>
+> 3. In the Expression node, enter:
+>
+>    ```python
+>    RCS_this_SNV = log2(Ave_S1toS4_x1000 / Ave_LibAandB_x1000)
+>    ```
+>
+>    ![CountESS GUI showing the Expression node named Calculate RCS, with an expression calculating RCS_this_SNV as log2(Ave_S1toS4_x1000 divided by Ave_LibAandB_x1000), and a preview table containing calculated scores.](../../images/countess-mave-chek2/countess-expression-node.png "Expression node calculating RCS in the CountESS GUI.")
+>
+> 4. Add a **CSV Save** node connected to the Expression node, rename it to
+>    `Save CHEK2 RCS scores`, and set the output filename to `chek2_rcs_scores.csv`.
+>
+>    ![CountESS GUI showing the CSV Save node named Save CHEK2 RCS scores, configured to write chek2_rcs_scores.csv.](../../images/countess-mave-chek2/countess-save-node.png "CSV Save node in the CountESS GUI.")
+>
+> 5. Save the CountESS configuration as `chek2_rcs_countess.ini`.
+>
+{: .details}
+
+# Run the CountESS workflow
+
+CountESS is a workflow-like table processing tool. Galaxy will run this saved CountESS
+workflow and connect Galaxy datasets to the input and output nodes.
 
 > <hands-on-title>Calculate CHEK2 RCS scores with CountESS</hands-on-title>
 >
@@ -184,6 +232,49 @@ therefore more likely to impair CHEK2 function in this assay.
 >
 {: .question}
 
+# Visualize the score distribution
+
+A simple next step is to plot the distribution of calculated RCS values. This gives a
+quick overview of the range of functional effects in the assay and helps identify whether
+most variants are close to neutral, depleted, or enriched after selection.
+
+> <hands-on-title>Plot the distribution of calculated RCS values</hands-on-title>
+>
+> 1. Run {% tool [Cut columns from a table](Cut1) %} with the following parameters:
+>
+>    - *"Cut columns"*: `c6`
+>    - *"Delimited by"*: `,`
+>    - {% icon param-file %} *"From"*: `chek2_rcs_scores.csv` from the CountESS output collection
+>
+> 2. Run {% tool [Histogram with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_histogram/ggplot2_histogram/3.4.0+galaxy0) %} with the following parameters:
+>
+>    - {% icon param-file %} *"Input should have column headers - these will be the columns that are plotted"*: output of **Cut columns from a table** {% icon tool %}
+>    - *"Label for x axis"*: `RAD53 Complementation Score`
+>    - *"Label for y axis"*: `Number of variants`
+>    - *"Bin width for plotting"*: `0.5`
+>    - In *"Advanced Options"*:
+>      - *"Plot counts or density"*: `Plot counts on the y-axis`
+>      - *"Legend options"*: `Hide legend`
+>
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. What does this histogram show that is not obvious from inspecting individual rows?
+>
+> > <solution-title></solution-title>
+> >
+> > The histogram summarizes the whole score distribution. Most variants have scores near zero,
+> > with a left tail of depleted variants and fewer variants with positive scores. 
+> > This is useful for getting a first overview of the assay before selecting variants or
+> > score ranges for closer inspection.
+> >
+> > ![Histogram of CHEK2 RAD53 Complementation Scores.](../../images/countess-mave-chek2/dms_scores_histogram.png "Distribution of calculated CHEK2 RAD53 Complementation Scores.")
+> >
+> {: .solution}
+>
+{: .question}
+
 # Compare with MaveDB
 
 The MaveDB score set used for this tutorial is:
@@ -204,22 +295,18 @@ direct log-ratio calculated in this tutorial. It is derived downstream from the 
 using a logistic regression model. In this tutorial, we focus on reproducing the transparent
 log-ratio component of the analysis.
 
-> <details-title>How was the CountESS configuration file created?</details-title>
->
-> The provided `.ini` file was created in the CountESS GUI. CountESS GUI is external
-> software: to create or edit this configuration yourself, CountESS needs to be installed
-> and the GUI needs to be run outside Galaxy first. You do not need to recreate the `.ini`
-> file to complete this tutorial, but the workflow is intentionally simple:
->
-> 1. Add a **CSV Load** node and load `chek2_frequency_summary.csv`.
-> 2. Add an **Expression** node connected to the CSV Load node.
-> 3. In the Expression node, enter:
->
->    ```python
->    RCS_this_SNV = log2(Ave_S1toS4_x1000 / Ave_LibAandB_x1000)
->    ```
->
-> 4. Add a **CSV Save** node connected to the Expression node.
-> 5. Save the CountESS configuration as `chek2_rcs_countess.ini`.
->
-{: .details}
+# Conclusion
+
+In this tutorial, you used Galaxy to run a saved CountESS workflow and calculate CHEK2
+RAD53 Complementation Scores from preprocessed DMS/MAVE frequency data. You then visualized
+the distribution of the calculated log-ratio scores.
+
+The CountESS output can be used as input for several downstream analyses. In the original
+CHEK2 analysis, the RCS values were used as input to a logistic regression model to
+estimate the probability that variants are functionally damaging. Researchers can
+use these scores to compare the effects of synonymous, missense, and nonsense variants, and
+to identify variants or score ranges that may need closer inspection. The scores can also
+be combined with clinical annotations, mapped onto protein domains, or used to prioritize
+variants of uncertain significance for follow-up. Functional scores can be calibrated for
+clinical evidence using approaches such as ExCALIBR, which can help translate assay results
+into evidence for classifying variants as more likely benign or pathogenic. 
