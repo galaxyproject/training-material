@@ -14,7 +14,7 @@ objectives:
 - Use CountESS in Galaxy to calculate RAD53 Complementation Scores for CHEK2 variants.
 - Compare calculated log-ratio scores with scores deposited in MaveDB.
 - Visualize the distribution of calculated CHEK2 RCS values.
-time_estimation: 45M
+time_estimation: 60M
 key_points:
 - MAVE experiments can measure functional effects for thousands of variants in parallel.
 - Variant frequencies before and after selection can be transformed into functional scores using log-ratio calculations.
@@ -29,6 +29,8 @@ contributions:
   authorship:
   - plushz
   - tflowers15
+  - nickzoic
+  - afrubin
 ---
 
 Multiplexed assays of variant effect (MAVEs), including deep mutational scanning (DMS)
@@ -177,30 +179,25 @@ those saved workflows too.
 # Run the CountESS workflow
 
 CountESS is a workflow-like table processing tool. Galaxy will run this saved CountESS
-workflow and connect Galaxy datasets to the input and output nodes.
+workflow, connect Galaxy datasets to the input nodes, and collect files written by
+CountESS save nodes into an output collection.
 
 > <hands-on-title>Calculate CHEK2 RCS scores with CountESS</hands-on-title>
 >
-> 1. Run {% tool [CountESS](toolshed.g2.bx.psu.edu/repos/iuc/countess/countess/0.1.19+galaxy0) %} with the following parameters:
+> 1. Run {% tool [CountESS](toolshed.g2.bx.psu.edu/repos/iuc/countess/countess/0.1.21+galaxy0) %} with the following parameters:
 >
 >    - {% icon param-file %} *"CountESS configuration file"*: `chek2_rcs_countess.ini`
 >
 >    - In *"Input file mapping"*:
 >      - *"CountESS input node name"*: `Load CHEK2 frequencies`
->      - *"CountESS filename parameter"*: `files.0.filename`
 >      - {% icon param-file %} *"Galaxy input dataset"*: `chek2_frequency_summary.csv`
->      - *"Staged filename"*: `chek2_frequency_summary.csv`
->
->    - In *"Output file mapping"*:
->      - *"CountESS save node name"*: `Save CHEK2 RCS scores`
->      - *"CountESS output filename parameter"*: `filename`
->      - *"Output filename"*: `chek2_rcs_scores.csv`
 >
 >    - *"Log level"*: `INFO`
 >
 {: .hands_on}
 
-CountESS produces a collection of output files. Open the output collection and inspect
+CountESS produces a collection of output files from the save-node
+filenames stored in the `.ini` file. Open the output collection and inspect
 `chek2_rcs_scores.csv`.
 
 # Interpret the output
@@ -243,10 +240,10 @@ most variants are close to neutral, depleted, or enriched after selection.
 > 1. Run {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >
 >    - *"Cut columns"*: `c6`
->    - *"Delimited by"*: `,`
+>    - *"Delimited by"*: `Comma`
 >    - {% icon param-file %} *"From"*: `chek2_rcs_scores.csv` from the CountESS output collection
 >
-> 2. Run {% tool [Histogram with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_histogram/ggplot2_histogram/3.4.0+galaxy0) %} with the following parameters:
+> 2. Run {% tool [Histogram with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_histogram/ggplot2_histogram/3.5.1+galaxy1) %} with the following parameters:
 >
 >    - {% icon param-file %} *"Input should have column headers - these will be the columns that are plotted"*: output of **Cut columns from a table** {% icon tool %}
 >    - *"Label for x axis"*: `RAD53 Complementation Score`
@@ -280,15 +277,96 @@ most variants are close to neutral, depleted, or enriched after selection.
 The MaveDB score set used for this tutorial is:
 
 ```text
-urn:mavedb:00001203-a-2
+https://mavedb.org/score-sets/urn:mavedb:00001203-a-2
 ```
 
 The calculated `RCS_this_SNV` values from CountESS should match the `RCS_this_SNV` column
-available from MaveDB for this score set:
+available from MaveDB for this score set. To check this directly, we can import the MaveDB
+score table, join it to the CountESS output by accession, and plot the two RCS columns against
+each other. If the CountESS workflow reproduced the deposited log-ratio values, the points
+should fall on a 1:1 diagonal.
 
-```text
-https://api.mavedb.org/api/v1/score-sets/urn:mavedb:00001203-a-2/scores
-```
+> <hands-on-title>Compare CountESS scores with the MaveDB score table</hands-on-title>
+>
+> 1. Import the MaveDB score table into Galaxy using this link:
+>
+>    ```
+>    https://api.mavedb.org/api/v1/score-sets/urn:mavedb:00001203-a-2/scores
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 2. Set the datatype of the imported MaveDB score table to `csv` if Galaxy does not detect it automatically.
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="csv" %}
+>
+> 3. Convert the imported MaveDB score table from CSV to tabular format.
+>
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="tabular (using csv-to-tabular)" %}
+>
+> 4. Rename the converted dataset to `MaveDB CHEK2 scores tabular`.
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
+> 5. Convert `chek2_rcs_scores.csv` from the CountESS output collection from CSV to tabular format.
+>
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="tabular (using csv-to-tabular)" %}
+>
+> 6. Rename the converted dataset to `CountESS CHEK2 RCS scores tabular`.
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
+> 7. Run {% tool [Join two Datasets side by side on a specified field](join1) %} with the following parameters:
+>
+>    - {% icon param-file %} *"Join"*: `MaveDB CHEK2 scores tabular`
+>    - *"using column"*: `Column: 1`
+>    - {% icon param-file %} *"with"*: `CountESS CHEK2 RCS scores tabular`
+>    - *"and column"*: `Column: 1`
+>    - *"Keep lines of first input that do not join with second input"*: `No`
+>    - *"Keep lines of first input that are incomplete"*: `No`
+>    - *"Keep the header lines"*: `Yes`
+>
+> 8. Rename the joined dataset to `MaveDB and CountESS RCS comparison`.
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
+> 9. Run {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.5.1+galaxy2) %} with the following parameters:
+>
+>    - {% icon param-file %} *"Input tabular dataset"*: `MaveDB and CountESS RCS comparison`
+>    - *"Column to plot on x-axis"*: `c8: RCS_this_SNV`
+>    - *"Column to plot on y-axis"*: `c30: RCS_this_SNV`
+>    - *"Plot title"*: `MaveDB and CountESS CHEK2 RCS values`
+>    - *"Label for x axis"*: `MaveDB RCS_this_SNV`
+>    - *"Label for y axis"*: `CountESS RCS_this_SNV`
+>    - In *"Advanced Options"*:
+>      - *"Data point options"*: `User defined point options`
+>        - *"relative size of points"*: `1.0`
+>
+{: .hands_on}
+
+In the joined table, column 8 is the `RCS_this_SNV` value from MaveDB. Column 30 is the
+`RCS_this_SNV` value from the CountESS output, because the six CountESS output columns are
+added after the 24 MaveDB score-table columns.
+
+> <question-title></question-title>
+>
+> 1. What does the scatterplot show about the relationship between the MaveDB and CountESS
+>    RCS values?
+>
+> > <solution-title></solution-title>
+> >
+> > The points should lie on a 1:1 diagonal, showing that the `RCS_this_SNV` values
+> > calculated by the CountESS workflow match the `RCS_this_SNV` values deposited in
+> > MaveDB for the same accessions. The plot shows this expected pattern: the
+> > CountESS score on the y-axis is essentially the same as the MaveDB score on the
+> > x-axis for each variant. This confirms that the Galaxy CountESS workflow reproduced
+> > the deposited log-ratio values.
+> >
+> > ![Scatterplot comparing MaveDB and CountESS CHEK2 RCS values. The points fall on a diagonal, showing that the CountESS-calculated RCS values match the MaveDB RCS values.](../../images/countess-mave-chek2/scatterplot_mavedb_vs_countess_rcs_values.png "MaveDB and CountESS CHEK2 RCS values.")
+> >
+> {: .solution}
+>
+{: .question}
 
 MaveDB also contains a final `score` column for this record. That final score is not the
 direct log-ratio calculated in this tutorial. It is derived downstream from the RCS values
